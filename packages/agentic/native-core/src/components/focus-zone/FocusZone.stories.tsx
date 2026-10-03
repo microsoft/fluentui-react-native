@@ -63,6 +63,84 @@ function Example(props: FocusZoneProps) {
     </View>
   );
 }
+
+function TargetLifetimesExample() {
+  const commands = React.useRef<FocusZoneCommands>(null);
+  const detachedCommands = React.useRef<FocusZoneCommands>(null);
+  const unfocusable = useNativeViewTarget();
+  const outside = useNativeViewTarget();
+  const [mounted, setMounted] = React.useState(true);
+  const [status, setStatus] = React.useState('Idle');
+  const request = async (destination: 'unfocusable' | 'outside' | 'cancelled' | 'detached') => {
+    const handle = destination === 'detached' ? detachedCommands.current : commands.current;
+    if (!handle) throw new Error('FocusZone command handle is unavailable.');
+    const controller = new AbortController();
+    if (destination === 'cancelled') controller.abort();
+    const outcome = await handle.requestFocus(
+      destination === 'unfocusable' ? unfocusable.target : destination === 'outside' ? outside.target : 'first',
+      { signal: controller.signal },
+    );
+    setStatus(outcome.status);
+  };
+  return (
+    <View style={styles.story}>
+      <View accessible accessibilityRole="text" accessibilityLabel={status} testID="modern-focus-status">
+        <Text accessible={false}>{status}</Text>
+      </View>
+      <View style={styles.requests}>
+        {(mounted ? (['unfocusable', 'outside', 'cancelled'] as const) : (['detached'] as const)).map((destination) => (
+          <Pressable
+            key={destination}
+            accessibilityRole="button"
+            testID={`modern-focus-request-${destination}`}
+            style={styles.button}
+            onPress={() => {
+              void request(destination);
+            }}
+          >
+            <Text>{destination}</Text>
+          </Pressable>
+        ))}
+        {mounted && (
+          <Pressable
+            accessibilityRole="button"
+            testID="modern-focus-unmount"
+            style={styles.button}
+            onPress={() => {
+              if (!commands.current) throw new Error('FocusZone commands are not attached.');
+              detachedCommands.current = commands.current;
+              setMounted(false);
+            }}
+          >
+            <Text>Unmount</Text>
+          </Pressable>
+        )}
+      </View>
+      {mounted && (
+        <FocusZone commandsRef={commands} testID="modern-focus-zone">
+          <View
+            ref={unfocusable.ref}
+            collapsable={false}
+            focusable={false}
+            accessible
+            accessibilityRole="text"
+            accessibilityLabel="Unfocusable target"
+            testID="modern-focus-unfocusable"
+          >
+            <Text accessible={false}>Unfocusable target</Text>
+          </View>
+          <Pressable focusable accessibilityRole="button" testID="modern-focus-item-1" style={styles.button}>
+            <Text>Focusable target</Text>
+          </Pressable>
+        </FocusZone>
+      )}
+      <Pressable ref={outside.ref} focusable accessibilityRole="button" testID="modern-focus-outside" style={styles.button}>
+        <Text>Outside target</Text>
+      </Pressable>
+    </View>
+  );
+}
+
 const meta: Meta<typeof FocusZone> = {
   title: 'Native/Modern FocusZone',
   component: FocusZone,
@@ -79,10 +157,12 @@ export const Default: Story = {
         return;
       }
       for (const [strategy, item] of [
+        ['default', 2],
         ['first', 1],
         ['last', 3],
         ['default', 2],
         ['target', 2],
+        ['first', 1],
       ] as const) {
         await (await browser.$(`~modern-focus-request-${strategy}`)).click();
         await expect(await browser.$('~modern-focus-status')).toHaveText('confirmed');
@@ -107,8 +187,38 @@ export const Disabled: Story = {
     },
   },
 };
+export const TargetLifetimes: Story = {
+  render: () => <TargetLifetimesExample />,
+  wdio: {
+    'rejects unfocusable and outside live targets': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Physical input unavailable.');
+        return;
+      }
+      await (await browser.$('~modern-focus-request-unfocusable')).click();
+      await expect(await browser.$('~modern-focus-status')).toHaveText('not-focusable');
+      await (await browser.$('~modern-focus-request-outside')).click();
+      await expect(await browser.$('~modern-focus-status')).toHaveText('not-mounted');
+      expect(await (await browser.$('~modern-focus-outside')).getProperty('focused')).toBe(false);
+    },
+    'cancels pre-aborted requests and invalidates detached commands': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Physical input unavailable.');
+        return;
+      }
+      await (await browser.$('~modern-focus-request-cancelled')).click();
+      await expect(await browser.$('~modern-focus-status')).toHaveText('cancelled');
+      expect(await (await browser.$('~modern-focus-item-1')).getProperty('focused')).toBe(false);
+      await (await browser.$('~modern-focus-unmount')).click();
+      await expect(await browser.$('~modern-focus-zone')).not.toExist();
+      await (await browser.$('~modern-focus-request-detached')).click();
+      await expect(await browser.$('~modern-focus-status')).toHaveText('not-mounted');
+    },
+  },
+};
 const styles = StyleSheet.create({
   story: { padding: 24, gap: 16 },
   row: { flexDirection: 'row', gap: 12 },
+  requests: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   button: { padding: 12, borderWidth: 1, borderColor: '#808080' },
 });

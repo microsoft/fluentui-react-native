@@ -15,7 +15,8 @@ Navigation remains platform-native by default; it is not modal containment.
 
 `requestFocus` supports default/first/last or a live scoped descendant.
 Confirmation comes from native responder/focused-component identity, not a
-void focus return. Requests are generation-fenced, cancellable, bounded by
+void focus return. Entry preferences must not override an explicit command
+destination. Requests are generation-fenced, cancellable, bounded by
 an explicit timeout, and invalidated on component/target replacement.
 Missing mounts are not queued; inactive windows are not reactivated.
 Cancellation cannot reverse a mutation already executed natively.

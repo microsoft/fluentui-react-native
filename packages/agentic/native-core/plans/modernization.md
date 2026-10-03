@@ -58,8 +58,14 @@ Do not raise legacy React/RN peer floors implicitly.
 - [x] Shared Swift eligibility/field-editor normalization and placement,
       Paper/Fabric boundary wiring, owned observer teardown and recycled-popup
       reparenting. Initial Fabric native qualification passes.
-- [ ] Windows generation/native build/runtime qualification.
-- [ ] Win32 legacy regression qualification; no new managed transport.
+- [x] Windows generation/native build and initial FocusZone command, refusal,
+      lifetime, and legacy navigation qualification.
+- [x] Win32 legacy FocusZone regression and Callout story rendering; no new
+      managed transport.
+- [ ] Remaining Windows FocusZone protocol/inactive-window cases and Callout
+      runtime/geometry qualification.
+- [ ] Win32 legacy Callout popup-operation qualification; its macOS-only
+      executable case is skipped on Win32.
 - [ ] Publishing, peer-floor, root-admission decisions.
 
 This checklist is updated only with completed work and executed evidence.
@@ -98,6 +104,60 @@ Compilation, authored tests, and skipped tests are not native qualification.
   legacy views until actual reattachment as well as for modern views until
   deliberate rearm. Recycled popup windows are reparented before showing.
 
+### Executed evidence on Windows
+
+Executed 2026-10-02 local / 2026-10-03 UTC with Node 24.15.0, React 19.1.4,
+React Native 0.81.6, RNW 0.81.35, react-native-win32 0.81.9, and REX 0.81.1.
+The Windows x64 Debug build uses MSBuild 18.10.1. The updated FocusZone object
+and consolidated `FRNNativeCore.dll` were rebuilt after the source fix;
+`FRNNativeCore.winmd` is present in the app output.
+
+- `yarn workspace @fluentui-react-native/native-core format --check`,
+  `lint`, `build`, `test:stories`, and `test` pass: 17 Node contracts,
+  28 Jest/type tests, and one snapshot.
+- `yarn workspace @fluentui-react-native/native-core codegen:windows --check`
+  passes without generated-source changes.
+- `yarn workspace @fluentui-react-native/callout test` and
+  `yarn workspace @fluentui-react-native/focus-zone test` pass, two tests each.
+- From `apps/storybook`, `yarn storybook prep --windows` and
+  `yarn storybook build --windows` pass with both components autolinked.
+- `$env:STORYBOOK_SMOKE_STORY = 'native-*'; yarn storybook smoke --windows --mode stories-and-tests`
+  passes: 161 stories rendered, nine cases passed, zero failed/skipped.
+  Four modern FocusZone cases cover actual default/first/last/specific focus,
+  disabled refusal, native unfocusable/outside-target rejection, pre-aborted
+  cancellation, and use of a retained command handle after native unmount.
+  Five legacy FocusZone cases cover directional/spatial navigation and
+  forward/backward Tab exit. Disabled/pre-aborted/detached results include
+  wrapper guards; they are not evidence of native generation-mismatch,
+  pending-request cancellation, or late-result fencing.
+- The first native command run returned `refused`: `GettingFocus` redirected
+  an explicit destination to the entry preference. It now respects the
+  existing explicit-command/Tab-trap guard. The command case enters the
+  default target before requesting the edges and later re-enters the first
+  target, verifying actual focused identity rather than only an outcome label.
+- From `apps/storybook`, `yarn storybook bundle --win32` and
+  `$env:STORYBOOK_SMOKE_STORY = 'native-*'; yarn storybook smoke --win32 --mode stories-and-tests`
+  pass: 152 stories rendered, five legacy FocusZone cases passed, zero
+  failures, one macOS-only Callout case skipped. Callout rendering is not
+  popup-operation qualification. Modern previews remain absent on Win32.
+- All desktop production bundles pass, including
+  `yarn storybook bundle --macos`. New target-lifetime cases have not been
+  executed on macOS in this Windows session.
+- Storybook format/lint, native-core checks, desktop-runtime format/lint/build
+  and 14 tests, `yarn lint-lockfile`, `yarn build`,
+  `yarn check-publishing`, and `yarn change:check` pass.
+- Initial bundling stopped on duplicate Storybook theming/ui-common copies
+  after independent upstream dependency bumps. The targeted
+  `yarn dedupe @storybook/react-native-theming @storybook/react-native-ui-common`
+  consolidates their compatible ranges to the already-locked 10.6.0 copies;
+  no new packages, blanket resolution, or duplicate-checker exemption was
+  added.
+- Both owned native smoke lifecycles shut down their app/services; their
+  channel, Metro, and driver ports have no remaining listeners.
+
+The Windows Callout story exclusion is unchanged. Native C++ compilation
+does not qualify its popup operations, geometry, or resource lifecycle.
+
 ### How to exercise the new API
 
 ```tsx
@@ -123,9 +183,13 @@ Menu/Popover roadmap. Family transactions, safe restore/owner-relative Tab,
 text layout providers, modal isolation, actual Menu/Popover integration,
 disabled discoverability, and a real module remain.
 
-Windows helpers/handlers and local rect/point placement are implemented but
-uncompiled on macOS. Validate the actual projected SDK, native ownership,
-focus result identity and unmount resources. Windows ancestor transform/scroll
+Windows helpers/handlers and local rect/point placement now compile on RNW
+0.81.35. Initial FocusZone focus-result identity, scoped target rejection,
+detached handles, and legacy navigation have native evidence. Native
+generation mismatch/stale result, pending abort/unmount races, target
+replacement, inactive-window refusal, and broader resource checks remain.
+Windows Callout runtime behavior remains excluded and unqualified.
+Windows ancestor transform/scroll
 tracking still needs full geometry qualification and follow-up; do not infer
 it from the current frame-summation positioning path.
 
@@ -169,7 +233,7 @@ claim qualification. Inspect the fresh native library/provider and first
 actionable failure. Record exact commands, versions, pass/fail/skip counts,
 and whether a case actually exercises the new protocol.
 
-Windows currently includes the two modern FocusZone stories, not modern
+Windows currently includes the three modern FocusZone stories, not modern
 Callout. Win32 includes only legacy native-core stories; modern previews are
 not imported and no new managed fields/commands are dispatched there.
 
