@@ -9938,12 +9938,12 @@ __metadata:
   linkType: hard
 
 "@storybook/addon-ondevice-controls@npm:^10.4.7":
-  version: 10.5.4
-  resolution: "@storybook/addon-ondevice-controls@npm:10.5.4"
+  version: 10.6.0
+  resolution: "@storybook/addon-ondevice-controls@npm:10.6.0"
   dependencies:
     "@gorhom/portal": "npm:^1.0.14"
-    "@storybook/react-native-theming": "npm:^10.5.4"
-    "@storybook/react-native-ui-common": "npm:^10.5.4"
+    "@storybook/react-native-theming": "npm:^10.6.0"
+    "@storybook/react-native-ui-common": "npm:^10.6.0"
     polished: "npm:^4.3.1"
     react-native-modal-datetime-picker: "npm:^18.0.0"
     tinycolor2: "npm:^1.6.0"
@@ -9957,7 +9957,7 @@ __metadata:
   peerDependenciesMeta:
     "@gorhom/bottom-sheet":
       optional: true
-  checksum: 10c0/762a77ce6e8e2d9eec1b54aadab99102834ff63b07dbced21ec90041578ab5aaaf8af8acc54e90d45be460794cd42e5934a847861d15e6ef8c97a2cd7a4772e6
+  checksum: 10c0/f6221c8a014574f271162fda4c7c0a60c30d1f057ca20064f87e59e085376f0f7e59dc2099bc9d2cc352839db231816b0be742ca26e0e923faace0f053484d50
   languageName: node
   linkType: hard
 
