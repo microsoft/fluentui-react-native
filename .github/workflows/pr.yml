@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           node-version: 22
 
@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           node-version: 22
 
@@ -115,7 +115,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: android
           node-version: 22
@@ -145,7 +145,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: macos
           node-version: 22
@@ -200,7 +200,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: macos
           node-version: 22
@@ -304,7 +304,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: ios
           node-version: 22
@@ -351,7 +351,7 @@ jobs:
           fetch-depth: 5
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: windows
           node-version: 22
@@ -418,7 +418,7 @@ jobs:
           fetch-depth: 5
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: windows
           node-version: 22
@@ -482,7 +482,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: windows
           node-version: 22
@@ -530,7 +530,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           platform: windows
           node-version: 22
@@ -604,7 +604,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           node-version: 22
 
@@ -643,7 +643,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up toolchain
-        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@35825d75adec302cf11ab1b7cf8a169c2499ea3d # 5.4.12
         with:
           node-version: 22
 
