@@ -14,6 +14,7 @@
 #import <React/RCTView.h>
 
 #import "FRNNativeCore-Swift.h"
+#import "../../../shared/FRNNativeCoreComponentLookup.h"
 
 using namespace facebook::react;
 
@@ -55,23 +56,6 @@ static void RCTApplyCalloutAppearance(
   [calloutView setNeedsDisplay:YES];
 }
 
-static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, NSInteger tag)
-{
-  if ([rootView conformsToProtocol:@protocol(RCTComponentViewProtocol)] &&
-      [((id<RCTComponentViewProtocol>)rootView).reactTag integerValue] == tag) {
-    return rootView;
-  }
-
-  for (RCTPlatformView *subview in rootView.subviews) {
-    RCTPlatformView *match = RCTFindComponentViewWithTag(subview, tag);
-    if (match) {
-      return match;
-    }
-  }
-
-  return nil;
-}
-
 @interface RCTCalloutComponentView () <RCTCalloutViewProtocol>
 @end
 
@@ -105,6 +89,9 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
     _calloutView.onDismiss = ^(__unused NSDictionary *event) {
       [weakSelf emitOnDismiss];
     };
+    _calloutView.onReady = ^(NSDictionary *event) { [weakSelf emitReady:event]; };
+    _calloutView.onClosed = ^(NSDictionary *event) { [weakSelf emitClosed:event]; };
+    _calloutView.onOperationResult = ^(NSDictionary *event) { [weakSelf emitResult:event]; };
 
     _touchHandler = [RCTSurfaceTouchHandler new];
     [_touchHandler attachToView:_calloutView.contentProxyView];
@@ -128,6 +115,10 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 {
   const auto &newProps = *std::static_pointer_cast<const CalloutProps>(props);
 
+  _calloutView.commandGeneration = newProps.commandGeneration;
+  _calloutView.anchorMode = [NSString stringWithUTF8String:toString(newProps.anchorMode).c_str()];
+  _calloutView.placementHint = [NSString stringWithUTF8String:toString(newProps.directionalHint).c_str()];
+  _calloutView.gapSpace = newProps.gapSpace;
   _calloutView.directionalHint = RCTNSRectEdgeFromDirectionalHint(newProps.directionalHint);
   _calloutView.setInitialFocus = newProps.setInitialFocus;
 
@@ -164,6 +155,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
 - (void)prepareForRecycle
 {
+  [_calloutView invalidatePresentation];
   [super prepareForRecycle];
   _targetTag = 0;
   [_calloutView setAnchorView:nil];
@@ -184,10 +176,40 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   [_calloutView blurWindow];
 }
 
+- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag
+{
+  [_calloutView requestFocus:generation requestId:requestId
+                     target:FRNNativeCoreFindView(_calloutView.contentProxyView, targetTag)];
+}
+- (void)close:(NSInteger)generation requestId:(NSInteger)requestId
+{
+  [_calloutView close:generation requestId:requestId];
+}
+- (void)reposition:(NSInteger)generation requestId:(NSInteger)requestId
+{
+  [_calloutView reposition:generation requestId:requestId];
+}
+- (void)emitReady:(NSDictionary *)event
+{
+  if (_eventEmitter) std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onReady(
+      {.generation = [event[@"generation"] intValue]});
+}
+- (void)emitClosed:(NSDictionary *)event
+{
+  if (_eventEmitter) std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onClosed(
+      {.generation = [event[@"generation"] intValue], .reason = std::string([event[@"reason"] UTF8String])});
+}
+- (void)emitResult:(NSDictionary *)event
+{
+  if (_eventEmitter) std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onOperationResult(
+      {.generation = [event[@"generation"] intValue], .requestId = [event[@"requestId"] intValue],
+       .status = std::string([event[@"status"] UTF8String])});
+}
+
 - (void)updateAnchorView
 {
   RCTPlatformView *rootView = self.window.contentView;
-  [_calloutView setAnchorView:_targetTag > 0 && rootView ? RCTFindComponentViewWithTag(rootView, _targetTag) : nil];
+  [_calloutView setAnchorView:_targetTag > 0 && rootView ? FRNNativeCoreFindView(rootView, _targetTag) : nil];
 }
 
 - (void)emitOnShow

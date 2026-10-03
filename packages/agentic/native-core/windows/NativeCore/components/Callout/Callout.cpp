@@ -3,6 +3,7 @@
 #include "pch.h"
 
 #include "Callout.h"
+#include "../../shared/FocusRequest.h"
 
 #include <winrt/Microsoft.UI.Content.h>
 #include <winrt/Microsoft.UI.Input.h>
@@ -68,6 +69,7 @@ struct CalloutComponentView
                                winrt::Windows::Foundation::IInspectable>,
       Codegen::BaseCallout<CalloutComponentView> {
   ~CalloutComponentView() {
+    if (m_lightDismiss && m_lightDismissToken.value) m_lightDismiss.Dismissed(m_lightDismissToken);
     if (m_popup && !m_popup.IsClosed()) {
       /*
       // Unregister closing event handler
@@ -98,6 +100,11 @@ struct CalloutComponentView
                    const winrt::com_ptr<Codegen::CalloutProps> &newProps,
                    const winrt::com_ptr<Codegen::CalloutProps>
                        &oldProps) noexcept override {
+    const auto generation = newProps->commandGeneration.value_or(0);
+    if (!oldProps || generation != oldProps->commandGeneration.value_or(0)) {
+      m_closed = false;
+      m_ready = false;
+    }
     if (!oldProps || newProps->directionalHint != oldProps->directionalHint) {
       m_directionalHint =
           newProps->directionalHint
@@ -113,12 +120,16 @@ struct CalloutComponentView
     }
 
     __super::UpdateProps(view, newProps, oldProps);
+    if (auto portal = m_portal.get(); portal && portal.ContentRoot().Children().Size()) {
+      AdjustWindowSize(portal.ContentRoot().Children().GetAt(0).LayoutMetrics());
+    }
   }
 
   void InitializePortalViewComponent(
       const winrt::Microsoft::ReactNative::Composition::PortalComponentView
           &portalComponentView) noexcept {
     m_reactContext = portalComponentView.ReactContext();
+    m_portal = portalComponentView;
 
     portalComponentView.Mounted([](const auto & /*sender*/, const auto &view) {
       view.UserData().as<CalloutComponentView>()->OnMounted(view);
@@ -137,6 +148,39 @@ struct CalloutComponentView
   // "blurWindow" command
   void HandleBlurWindowCommand() noexcept override {
     // nyi
+  }
+
+  void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag) noexcept override {
+    auto status = OperationStatus(generation);
+    if (status.empty()) {
+      auto portal = m_portal.get();
+      auto root = portal.ContentRoot();
+      auto target = ::FRNNativeCore::FindDescendant(root, targetTag);
+      if (!target) status = "not-mounted";
+      else if (!::FRNNativeCore::Eligible(target)) status = "not-focusable";
+      else {
+        auto foreground = ::GetForegroundWindow();
+        auto popupHwnd = winrt::Microsoft::UI::GetWindowFromWindowId(m_rnWindow.AppWindow().Id());
+        if (foreground != ::GetAncestor(m_parentHwnd, GA_ROOT) && foreground != popupHwnd) status = "inactive-window";
+        else if (!winrt::Microsoft::UI::Input::InputFocusController::GetForIsland(m_rnWindow.ReactNativeIsland().Island()).TrySetFocus()) status = "refused";
+        else status = ::FRNNativeCore::FocusWithin(root, targetTag, "target", 0, m_parentHwnd);
+      }
+    }
+    EmitResult(generation, requestId, status);
+  }
+  void HandleCloseCommand(int32_t generation, int32_t requestId) noexcept override {
+    auto status = OperationStatus(generation);
+    if (!status.empty()) { EmitResult(generation, requestId, status); return; }
+    ClosePresentation("programmatic", requestId);
+  }
+  void HandleRepositionCommand(int32_t generation, int32_t requestId) noexcept override {
+    auto status = OperationStatus(generation);
+    if (status.empty()) {
+      auto portal = m_portal.get();
+      if (portal.ContentRoot().Children().Size()) AdjustWindowSize(portal.ContentRoot().Children().GetAt(0).LayoutMetrics());
+      status = m_positioned ? "confirmed" : "not-ready";
+    }
+    EmitResult(generation, requestId, status);
   }
 
   void MountChildComponentView(
@@ -173,21 +217,43 @@ struct CalloutComponentView
   }
 
 private:
+  bool Modern() const noexcept { return Props() && Props()->commandGeneration.value_or(0) > 0; }
+  std::string OperationStatus(int32_t generation) const noexcept {
+    if (!Props() || generation <= 0 || Props()->commandGeneration.value_or(0) != generation) return "stale";
+    if (!m_mounted || !m_ready || m_closed) return "not-ready";
+    return {};
+  }
+  void EmitResult(int32_t generation, int32_t requestId, const std::string &status) noexcept {
+    if (auto emitter = EventEmitter()) emitter->onOperationResult({generation, requestId, status});
+  }
+  void ClosePresentation(const std::string &reason, int32_t requestId = 0) noexcept {
+    if (m_closed) return;
+    m_closed = true;
+    m_ready = false;
+    if (m_popup && m_popup.IsVisible()) m_popup.Hide();
+    if (requestId) EmitResult(Props()->commandGeneration.value_or(0), requestId, "confirmed");
+    if (auto emitter = EventEmitter()) {
+      if (Modern()) emitter->onClosed({Props()->commandGeneration.value_or(0), reason});
+      emitter->onDismiss({});
+    }
+  }
+
   void
   OnMounted(const winrt::Microsoft::ReactNative::ComponentView &view) noexcept {
     assert(!m_mounted);
     m_mounted = true;
+    const auto lifetime = ++m_lifetime;
 
     CreatePopup(view);
 
     m_showQueued = true;
 
     m_reactContext.UIDispatcher().Post(
-        [wkThis = get_weak(), wkView = winrt::weak_ref(view)]() {
+        [wkThis = get_weak(), wkView = winrt::weak_ref(view), lifetime]() {
           if (auto strongThis = wkThis.get()) {
             strongThis->m_showQueued = false;
 
-            if (!strongThis->m_mounted) {
+            if (!strongThis->m_mounted || strongThis->m_lifetime != lifetime) {
               return;
             }
             if (auto v = wkView.get()) {
@@ -200,7 +266,18 @@ private:
   void OnUnmounted(
       const winrt::Microsoft::ReactNative::ComponentView & /*view*/) noexcept {
     assert(m_mounted);
+    if (Modern()) ClosePresentation("host-detached");
     m_mounted = false;
+    ++m_lifetime;
+    if (m_lightDismiss && m_lightDismissToken.value) m_lightDismiss.Dismissed(m_lightDismissToken);
+    m_lightDismissToken = {};
+    m_lightDismiss = nullptr;
+    if (Modern()) {
+      if (m_rnWindow) m_rnWindow.Close();
+      if (m_popup && !m_popup.IsClosed()) m_popup.Close();
+      m_rnWindow = nullptr;
+      m_popup = nullptr;
+    }
   }
 
   void OnLightDismissDismissed(
@@ -210,6 +287,7 @@ private:
   }
 
   void HidePopup() {
+    if (Modern()) { ClosePresentation("native-light-dismiss"); return; }
     if (!m_popup)
       return;
     m_popup.Hide();
@@ -224,6 +302,7 @@ private:
 
     auto portal = view.as<
         winrt::Microsoft::ReactNative::Composition::PortalComponentView>();
+    m_parentHwnd = view.as<::Microsoft::ReactNative::Composition::Experimental::IComponentViewInterop>()->GetHwndForParenting();
     m_popup = winrt::Microsoft::UI::Content::DesktopPopupSiteBridge::Create(
         portal.Parent()
             .as<winrt::Microsoft::ReactNative::Composition::ComponentView>()
@@ -240,10 +319,10 @@ private:
     m_rnWindow.ResizePolicy(
         winrt::Microsoft::ReactNative::ContentSizePolicy::None);
 
-    auto inputLightDismissAction =
+    m_lightDismiss =
         winrt::Microsoft::UI::Input::InputLightDismissAction::GetForWindowId(
             m_rnWindow.AppWindow().Id());
-    inputLightDismissAction.Dismissed(
+    m_lightDismissToken = m_lightDismiss.Dismissed(
         {get_weak(), &CalloutComponentView::OnLightDismissDismissed});
 
     if (portal.ContentRoot().Children().Size()) {
@@ -255,23 +334,31 @@ private:
   void RegisterLightDismissAction() noexcept {}
 
   void Show() noexcept {
+    if (Modern() && (m_closed || !m_positioned)) return;
     m_popup.Show();
 
-    winrt::Microsoft::UI::Input::InputFocusController::GetForIsland(
+    if (!Modern()) {
+      winrt::Microsoft::UI::Input::InputFocusController::GetForIsland(
         m_rnWindow.ReactNativeIsland().Island())
         .TrySetFocus();
-    m_rnWindow.ReactNativeIsland().NavigateFocus(
+      m_rnWindow.ReactNativeIsland().NavigateFocus(
         winrt::Microsoft::ReactNative::FocusNavigationRequest::
             FocusNavigationRequest(
                 winrt::Microsoft::ReactNative::FocusNavigationReason::First));
+    }
 
     if (auto eventEmitter = EventEmitter()) {
       eventEmitter->onShow({});
+      if (Modern() && !m_ready) {
+        m_ready = true;
+        eventEmitter->onReady({Props()->commandGeneration.value_or(0)});
+      }
     }
   }
 
   void AdjustWindowSize(const winrt::Microsoft::ReactNative::LayoutMetrics
                             &layoutMetrics) noexcept {
+    m_positioned = false;
     if (!m_rnWindow) {
       return;
     }
@@ -296,6 +383,10 @@ private:
       auto targetView = winrt::Microsoft::ReactNative::Composition::
           CompositionUIService::ComponentFromReactTag(
               m_reactContext.Handle(), Props()->target.AsInt64());
+      if (!targetView) {
+        if (Modern() && m_ready) ClosePresentation("anchor-lost");
+        return;
+      }
       auto targetPos = ViewToScreenOffset(targetView);
       auto targetScaleFactor =
           targetView.LayoutMetrics().PointScaleFactor;
@@ -303,6 +394,15 @@ private:
           targetView.LayoutMetrics().Frame.Width * targetScaleFactor);
       auto targetHeightPx = static_cast<int32_t>(
           targetView.LayoutMetrics().Frame.Height * targetScaleFactor);
+      const auto anchorMode = Props()->anchorMode.value_or("legacy");
+      if (anchorMode == "rect" || anchorMode == "point") {
+        if (!Props()->anchorRect) { ClosePresentation("anchor-lost"); return; }
+        const auto &rect = Props()->anchorRect.value();
+        targetPos.X += static_cast<int32_t>(rect.screenX * targetScaleFactor);
+        targetPos.Y += static_cast<int32_t>(rect.screenY * targetScaleFactor);
+        targetWidthPx = static_cast<int32_t>(rect.width * targetScaleFactor);
+        targetHeightPx = static_cast<int32_t>(rect.height * targetScaleFactor);
+      }
       auto targetRight = targetPos.X + targetWidthPx;
       auto targetBottom = targetPos.Y + targetHeightPx;
       auto targetCenterX = targetPos.X + targetWidthPx / 2;
@@ -360,15 +460,21 @@ private:
       }
 
       flags |= TPM_WORKAREA;
+      const auto gap = static_cast<int32_t>(Props()->gapSpace.value_or(0) * targetScaleFactor);
+      if (m_directionalHint == DirectionalHint::LeftTopEdge || m_directionalHint == DirectionalHint::LeftCenter || m_directionalHint == DirectionalHint::LeftBottomEdge) anchorPoint.x -= gap;
+      else if (m_directionalHint == DirectionalHint::RightTopEdge || m_directionalHint == DirectionalHint::RightCenter || m_directionalHint == DirectionalHint::RightBottomEdge) anchorPoint.x += gap;
+      else if (m_directionalHint == DirectionalHint::TopLeftEdge || m_directionalHint == DirectionalHint::TopAutoEdge || m_directionalHint == DirectionalHint::TopCenter || m_directionalHint == DirectionalHint::TopRightEdge) anchorPoint.y -= gap;
+      else anchorPoint.y += gap;
 
       RECT finalPos;
 
-      CalculatePopupWindowPosition(&anchorPoint, &windowSize, flags,
-                                   &excludeRect, &finalPos);
+      if (!CalculatePopupWindowPosition(&anchorPoint, &windowSize, flags, &excludeRect, &finalPos)) return;
 
       m_rnWindow.AppWindow().Move({finalPos.left, finalPos.top});
+      m_positioned = true;
+      if (Modern() && m_mounted && !m_showQueued && !m_closed && !m_popup.IsVisible()) Show();
     } else {
-      // TODO target named anchors
+      if (Modern()) return;
       m_rnWindow.AppWindow().Move({0, 0});
     }
   };
@@ -394,6 +500,14 @@ private:
   DirectionalHint m_directionalHint{DirectionalHint::LeftTopEdge};
   bool m_showQueued{false};
   bool m_mounted{false};
+  bool m_positioned{false};
+  bool m_ready{false};
+  bool m_closed{false};
+  uint64_t m_lifetime{0};
+  HWND m_parentHwnd{nullptr};
+  winrt::weak_ref<winrt::Microsoft::ReactNative::Composition::PortalComponentView> m_portal;
+  winrt::Microsoft::UI::Input::InputLightDismissAction m_lightDismiss{nullptr};
+  winrt::event_token m_lightDismissToken;
   winrt::event_token m_childLayoutMetricsToken;
   winrt::Microsoft::UI::Content::DesktopPopupSiteBridge m_popup{nullptr};
   winrt::Microsoft::ReactNative::ReactNativeWindow m_rnWindow{nullptr};

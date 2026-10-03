@@ -5,6 +5,7 @@
 #ifdef RNW_NEW_ARCH
 
 #include "codegen/react/components/FRNNativeCoreSpec/FocusZone.g.h"
+#include "../../shared/FocusRequest.h"
 
 namespace winrt::FRNFocusZone {
 
@@ -31,6 +32,7 @@ struct FocusZoneComponentView
     : winrt::implements<FocusZoneComponentView, winrt::Windows::Foundation::IInspectable>,
       FRNNativeCoreCodegen::BaseFocusZone<FocusZoneComponentView> {
   void Initialize(const winrtRN::ComponentView &view) noexcept override {
+    m_view = view;
     m_containerTag = view.Tag();
 
     view.KeyDown(
@@ -65,6 +67,22 @@ struct FocusZoneComponentView
             }
           }
         });
+  }
+
+  void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag, std::string strategy) noexcept override {
+    std::string status;
+    auto view = m_view.get();
+    auto props = Props();
+    if (!view) status = "not-mounted";
+    else if (!props || generation <= 0 || props->commandGeneration.value_or(0) != generation) status = "stale";
+    else if (Disabled()) status = "not-focusable";
+    else {
+      const bool previousTrap = m_inTabTrap;
+      m_inTabTrap = true;
+      status = ::FRNNativeCore::FocusWithin(view, targetTag, strategy, DefaultTabbableTag());
+      m_inTabTrap = previousTrap;
+    }
+    if (auto emitter = EventEmitter()) emitter->onOperationResult({generation, requestId, status});
   }
 
  private:
@@ -577,6 +595,7 @@ struct FocusZoneComponentView
   }
 
   int64_t m_containerTag{0};
+  winrt::weak_ref<winrtRN::ComponentView> m_view;
   int64_t m_lastFocusedTag{0};
   bool m_inTabTrap{false};
 };

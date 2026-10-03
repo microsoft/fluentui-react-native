@@ -10,6 +10,7 @@
 #import <React/RCTComponentViewProtocol.h>
 
 #import "../shared/RCTFocusZone.h"
+#import "../../../shared/FRNNativeCoreComponentLookup.h"
 
 using namespace facebook::react;
 
@@ -51,23 +52,6 @@ static NSString *RCTTabKeyNavigationFromProp(FocusZoneTabKeyNavigation tabKeyNav
     case FocusZoneTabKeyNavigation::Normal:
       return @"Normal";
   }
-}
-
-static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, NSInteger tag)
-{
-  if ([rootView conformsToProtocol:@protocol(RCTComponentViewProtocol)] &&
-      [((id<RCTComponentViewProtocol>)rootView).reactTag integerValue] == tag) {
-    return rootView;
-  }
-
-  for (RCTPlatformView *subview in rootView.subviews) {
-    RCTPlatformView *match = RCTFindComponentViewWithTag(subview, tag);
-    if (match) {
-      return match;
-    }
-  }
-
-  return nil;
 }
 
 static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootView, NSString *nativeID)
@@ -136,6 +120,7 @@ static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootVi
   const auto &newProps = *std::static_pointer_cast<const FocusZoneProps>(props);
 
   _focusZone.disabled = newProps.disabled;
+  _focusZone.commandGeneration = newProps.commandGeneration;
   _focusZone.focusZoneDirection = RCTFocusZoneDirectionFromProp(newProps.focusZoneDirection);
   _focusZone.navigateAtEnd = RCTNavigateAtEndFromProp(newProps.navigateAtEnd);
   _focusZone.navigationOrderInRenderOrder = newProps.navigationOrderInRenderOrder;
@@ -166,6 +151,22 @@ static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootVi
   _defaultResponderNativeID = nil;
   _defaultResponderTag = 0;
   _focusZone.defaultResponder = nil;
+  _focusZone.commandGeneration = 0;
+}
+
+- (void)handleCommand:(const NSString *)commandName args:(const NSArray *)args
+{
+  RCTFocusZoneHandleCommand(self, commandName, args);
+}
+
+- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag strategy:(NSString *)strategy
+{
+  NSView *target = FRNNativeCoreFindView(_focusZone, targetTag);
+  NSString *status = [_focusZone requestFocusTarget:target strategy:strategy generation:generation];
+  if (_eventEmitter) {
+    std::static_pointer_cast<const FocusZoneEventEmitter>(_eventEmitter)->onOperationResult(
+        {.generation = (int)generation, .requestId = (int)requestId, .status = std::string(status.UTF8String)});
+  }
 }
 
 - (BOOL)acceptsFirstResponder
@@ -188,7 +189,7 @@ static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootVi
 {
   RCTPlatformView *rootView = self.window.contentView;
   if (_defaultResponderTag > 0 && rootView) {
-    _focusZone.defaultResponder = RCTFindComponentViewWithTag(rootView, _defaultResponderTag);
+    _focusZone.defaultResponder = FRNNativeCoreFindView(rootView, _defaultResponderTag);
   } else if (_defaultResponderNativeID && rootView) {
     _focusZone.defaultResponder = RCTFindComponentViewWithNativeID(rootView, _defaultResponderNativeID);
   } else {

@@ -6,7 +6,7 @@
     "noEmit": true,
     "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
   },
-  "include": ["src/legacy/callout/Callout.stories.tsx"],
+  "include": ["src/legacy/callout/Callout.stories.tsx", "src/components/**/*.stories.tsx"],
   "exclude": [],
   "references": [
     {
