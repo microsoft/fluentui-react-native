@@ -39,6 +39,7 @@ export type CreateDesktopStorybookDriverManifestOptions = {
   instance: DesktopStorybookInstance;
   nativeDriver: NativeDriverArtifact;
   platform: Platforms;
+  renderer?: DesktopStorybookDriverManifest['renderer'];
   storyManifest: DesktopStoryManifest;
 };
 
@@ -48,6 +49,7 @@ export function createDesktopStorybookDriverManifest({
   instance,
   nativeDriver,
   platform,
+  renderer = platform === 'win32' ? 'paper' : 'fabric',
   storyManifest,
 }: CreateDesktopStorybookDriverManifestOptions): DesktopStorybookDriverManifest {
   const nativeOptions = config.getNativeDriverOptions(platform);
@@ -72,7 +74,7 @@ export function createDesktopStorybookDriverManifest({
     nativeDriver,
     platformManifestDigest: storyManifest.platformManifestDigest,
     portablePlanDigest: storyManifest.portablePlanDigest,
-    renderer: platform === 'win32' ? 'paper' : 'fabric',
+    renderer,
     schemaVersion: 2,
     storyManifest,
     storybookPort: instance.storybookPort,

@@ -82,6 +82,8 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
   repository root because subprocess dependency resolution must start in this workspace.
 - Run `yarn storybook bundle --macos` for the JavaScript bundle, `yarn storybook build --macos` for a non-launching
   native build, and `yarn storybook smoke --macos` for the complete owned lifecycle.
+- macOS defaults to Fabric. Add `--paper` to `prep`, `build`, `run`, or `smoke` for Paper; regenerate with `prep`
+  whenever switching renderers because both modes share the generated project and Pods. Keep the endpoint `macos`.
 - Preserve the shared smoke instance context: its canonical-root hash coordinates the macOS bundle identifier,
   Storybook port, Metro port, generated runtime polyfill, and exact app shutdown. Do not replace those values with
   process-name matching or fixed smoke ports.

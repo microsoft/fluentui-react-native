@@ -9989,24 +9989,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-dom-shim@npm:10.5.6":
-  version: 10.5.6
-  resolution: "@storybook/react-dom-shim@npm:10.5.6"
-  peerDependencies:
-    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    "@types/react-dom": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.5.6
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
-      optional: true
-  checksum: 10c0/d6393cf9532fb7f2dddedeeac6bef35d9abcf3bfa48c1d8bf5a1be4d2167746d252f638e15feb6a24f1a4b21d51d4df1870e70acfb1e1d663aedada0cf9f1c4d
-  languageName: node
-  linkType: hard
-
 "@storybook/react-dom-shim@npm:10.6.0":
   version: 10.6.0
   resolution: "@storybook/react-dom-shim@npm:10.6.0"
@@ -10025,19 +10007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-theming@npm:^10.4.7, @storybook/react-native-theming@npm:^10.5.4":
-  version: 10.5.4
-  resolution: "@storybook/react-native-theming@npm:10.5.4"
-  dependencies:
-    polished: "npm:^4.3.1"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.57.0"
-  checksum: 10c0/da1d153288315406885a647d6397fb02166e2cb621f059aabed37b8dd439d6a6ec5bf9ba3aa4779e9b5fa03c209aff64d6af6bcc4771a21278a2aeaeac0c2f04
-  languageName: node
-  linkType: hard
-
-"@storybook/react-native-theming@npm:^10.6.0":
+"@storybook/react-native-theming@npm:^10.4.7, @storybook/react-native-theming@npm:^10.5.4, @storybook/react-native-theming@npm:^10.6.0":
   version: 10.6.0
   resolution: "@storybook/react-native-theming@npm:10.6.0"
   dependencies:
@@ -10049,25 +10019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-ui-common@npm:^10.4.7, @storybook/react-native-ui-common@npm:^10.5.4":
-  version: 10.5.4
-  resolution: "@storybook/react-native-ui-common@npm:10.5.4"
-  dependencies:
-    "@nozbe/microfuzz": "npm:^1.0.0"
-    "@storybook/react": "npm:^10.5.4"
-    "@storybook/react-native-theming": "npm:^10.5.4"
-    es-toolkit: "npm:^1.49.0"
-    memoizerific: "npm:^1.11.3"
-    ts-dedent: "npm:^2.3.0"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.57.0"
-    storybook: ^10.5.4
-  checksum: 10c0/ba33fee75b282eeded4116651e88ac0d59ee0f49207f2d6f4a7a994b9a2023d6ea41303b6708c37a48cd9a13e1064eb08b8b182817f0cbc9b6ed0a71367ca8dc
-  languageName: node
-  linkType: hard
-
-"@storybook/react-native-ui-common@npm:^10.6.0":
+"@storybook/react-native-ui-common@npm:^10.4.7, @storybook/react-native-ui-common@npm:^10.5.4, @storybook/react-native-ui-common@npm:^10.6.0":
   version: 10.6.0
   resolution: "@storybook/react-native-ui-common@npm:10.6.0"
   dependencies:
@@ -10170,33 +10122,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:^10.5.4":
-  version: 10.5.6
-  resolution: "@storybook/react@npm:10.5.6"
-  dependencies:
-    "@storybook/global": "npm:^5.0.0"
-    "@storybook/react-dom-shim": "npm:10.5.6"
-    react-docgen: "npm:^8.0.2"
-    react-docgen-typescript: "npm:^2.2.2"
-  peerDependencies:
-    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    "@types/react-dom": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.5.6
-    typescript: ">= 4.9.x"
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
-      optional: true
-    typescript:
-      optional: true
-  checksum: 10c0/74eff8c1b3a52235a62a43d0e1646ef8f9f557d31745d9a313d735da98d1800950a76d16544b54d6756c237df573f0e4303af2197efc0c141f29e1b4e67399f3
-  languageName: node
-  linkType: hard
-
-"@storybook/react@npm:^10.6.0":
+"@storybook/react@npm:^10.5.4, @storybook/react@npm:^10.6.0":
   version: 10.6.0
   resolution: "@storybook/react@npm:10.6.0"
   dependencies:

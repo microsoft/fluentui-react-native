@@ -95,6 +95,29 @@ yarn storybook run --macos
 
 Requires Xcode + CocoaPods.
 
+Fabric is the default macOS renderer. Add `--paper` to use Paper with the same
+macOS story catalog and native Desktop Driver:
+
+```sh
+yarn storybook prep --macos --paper
+yarn storybook build --macos --paper
+yarn storybook smoke --macos --paper --mode stories-and-tests
+```
+
+For interactive development, use `yarn storybook driver --macos --paper` and
+`yarn storybook run --macos --paper` in separate terminals. `--paper` is supported
+only on macOS; it sets `RCT_NEW_ARCH_ENABLED=0` for child commands. Omitting it
+selects Fabric explicitly, even if the parent environment disables the New Architecture.
+Run `prep` again whenever switching renderers: the generated Xcode project and
+Pods are shared, so Paper and Fabric cannot run concurrently from one enlistment.
+To return to Fabric, run `yarn storybook prep --macos` before building or launching.
+The **macOS Paper Storybook PR** job runs the full catalog traversal and authored
+tests separately from the existing Fabric job.
+CompoundItemLayout's demos use centered alignment in macOS Paper because the
+current native text-baseline callback can return NaN and terminate Yoga
+([upstream issue](https://github.com/microsoft/react-native-macos/issues/3121)).
+Fabric and other platforms retain the baseline demonstration. The primitive itself is unchanged.
+
 Run `yarn storybook smoke --macos` for the complete server, Metro, build/launch, all-story traversal, and
 ownership-safe shutdown lifecycle. The shared CLI hashes this enlistment's canonical project root,
 uses that suffix in the native bundle identifier, and selects dedicated Storybook and Metro ports.
@@ -165,6 +188,11 @@ them. Win32 continues to exercise Callout through its Paper endpoint.
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
+After upgrading Storybook UI or addon packages, run
+`yarn dedupe '@storybook/*' storybook --strategy highest` from the repository
+root to align compatible locked React, theming, and shared UI dependencies.
+Keep these runtime packages covered by Metro's duplicate checks rather than
+adding exclusions for mismatched versions.
 
 ## Running on Win32
 
