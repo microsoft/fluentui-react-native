@@ -10025,19 +10025,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-theming@npm:^10.4.7, @storybook/react-native-theming@npm:^10.5.4":
-  version: 10.5.4
-  resolution: "@storybook/react-native-theming@npm:10.5.4"
-  dependencies:
-    polished: "npm:^4.3.1"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.57.0"
-  checksum: 10c0/da1d153288315406885a647d6397fb02166e2cb621f059aabed37b8dd439d6a6ec5bf9ba3aa4779e9b5fa03c209aff64d6af6bcc4771a21278a2aeaeac0c2f04
-  languageName: node
-  linkType: hard
-
-"@storybook/react-native-theming@npm:^10.6.0":
+"@storybook/react-native-theming@npm:^10.4.7, @storybook/react-native-theming@npm:^10.5.4, @storybook/react-native-theming@npm:^10.6.0":
   version: 10.6.0
   resolution: "@storybook/react-native-theming@npm:10.6.0"
   dependencies:
@@ -10049,25 +10037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-ui-common@npm:^10.4.7, @storybook/react-native-ui-common@npm:^10.5.4":
-  version: 10.5.4
-  resolution: "@storybook/react-native-ui-common@npm:10.5.4"
-  dependencies:
-    "@nozbe/microfuzz": "npm:^1.0.0"
-    "@storybook/react": "npm:^10.5.4"
-    "@storybook/react-native-theming": "npm:^10.5.4"
-    es-toolkit: "npm:^1.49.0"
-    memoizerific: "npm:^1.11.3"
-    ts-dedent: "npm:^2.3.0"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.57.0"
-    storybook: ^10.5.4
-  checksum: 10c0/ba33fee75b282eeded4116651e88ac0d59ee0f49207f2d6f4a7a994b9a2023d6ea41303b6708c37a48cd9a13e1064eb08b8b182817f0cbc9b6ed0a71367ca8dc
-  languageName: node
-  linkType: hard
-
-"@storybook/react-native-ui-common@npm:^10.6.0":
+"@storybook/react-native-ui-common@npm:^10.4.7, @storybook/react-native-ui-common@npm:^10.5.4, @storybook/react-native-ui-common@npm:^10.6.0":
   version: 10.6.0
   resolution: "@storybook/react-native-ui-common@npm:10.6.0"
   dependencies:

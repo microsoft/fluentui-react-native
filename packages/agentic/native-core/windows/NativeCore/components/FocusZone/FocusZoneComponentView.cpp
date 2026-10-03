@@ -505,7 +505,7 @@ struct FocusZoneComponentView
   void HandleGettingFocus(
       const winrtRN::ComponentView &container,
       const winrtRN::GettingFocusEventArgs &args) noexcept {
-    if (Disabled()) {
+    if (Disabled() || m_inTabTrap) {
       return;
     }
 

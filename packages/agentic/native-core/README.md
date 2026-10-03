@@ -277,7 +277,11 @@ registrations. macOS shares Swift focus eligibility/actual-responder and
 placement behavior between the renderer adapters; the existing navigation
 algorithm is not rewritten merely to change language.
 
-Windows source/codegen is wired but requires native build/runtime qualification.
+Windows source/codegen and the native library build are qualified on RNW 0.81.35.
+Initial modern FocusZone command/target-lifetime and legacy navigation cases
+pass; Windows Callout runtime and the remaining protocol/geometry cases are
+still unqualified. Win32 legacy FocusZone cases pass, while its Callout
+popup-operation automation remains unqualified.
 Root/Win32 admission, older-peer builds, popup-family transactions,
 restoration/Tab policy, text fragments, modal containment, and a real module
 remain explicit gates. See the repository's `plans/modernization.md` for the
