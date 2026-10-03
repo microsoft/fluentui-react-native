@@ -7,4 +7,4 @@ Add a macOS-only `--paper` option to prepare, build, launch, and smoke test Stor
 
 Use centered alignment in macOS Paper CompoundItemLayout stories to avoid the native Yoga baseline crash without changing the primitive or Fabric demonstrations.
 
-Constrain LayoutStableText's visible label to the reserved width so native Paper text measurement cannot overflow its layout reservation.
+Measure LayoutStableText's hidden reserve Text directly in native alignment stories, avoiding Paper Text-versus-View pixel-rounding mismatches without relaxing the geometry assertions.

@@ -51,29 +51,32 @@ describe('LayoutStableText', () => {
     const visible = component.getByTestId('visible');
 
     expect(visible.props.numberOfLines).toBe(2);
-    expect(StyleSheet.flatten(visible.props.style)).toEqual({ flexShrink: 1, fontSize: 12, lineHeight: 16, maxWidth: '100%' });
+    expect(StyleSheet.flatten(visible.props.style)).toEqual({ flexShrink: 1, fontSize: 12, lineHeight: 16 });
     expect(StyleSheet.flatten(visible.parent?.props.style)).toMatchObject({ left: 0, right: 0, justifyContent: 'center' });
     expect(StyleSheet.flatten(component.getByTestId('stable-text').props.style)).toMatchObject({ width: 80 });
   });
 
-  it('bounds visible text by the reserved width even when its native measurement or consumer width is larger', async () => {
+  it('preserves native layout measurements for both the hidden reserve and visible text', async () => {
+    const onReserveLayout = jest.fn();
+    const onVisibleLayout = jest.fn();
     const component = await render(
       <LayoutStableText
-        reserve={<Text style={{ fontSize: 20 }}>Stable label</Text>}
-        style={{ width: 102 }}
-        testID="stable-text"
+        reserve={<Text onLayout={onReserveLayout}>Reserve</Text>}
         visible={
-          <Text style={{ fontSize: 12, maxWidth: 200, width: 104 }} testID="visible">
-            Stable label
+          <Text onLayout={onVisibleLayout} testID="visible">
+            Visible
           </Text>
         }
       />,
     );
-    const visible = component.getByTestId('visible');
+    const reserveLayout = { nativeEvent: { layout: { x: 0, y: 0, width: 103, height: 24 } } };
+    const visibleLayout = { nativeEvent: { layout: { x: 0, y: 4, width: 104, height: 16 } } };
 
-    expect(StyleSheet.flatten(visible.props.style)).toMatchObject({ flexShrink: 1, maxWidth: '100%', width: 104 });
-    expect(StyleSheet.flatten(visible.parent?.props.style)).toMatchObject({ left: 0, right: 0 });
-    expect(StyleSheet.flatten(component.getByTestId('stable-text').props.style)).toMatchObject({ width: 102 });
+    await fireEvent(component.getByText('Reserve', { includeHiddenElements: true }), 'layout', reserveLayout);
+    await fireEvent(component.getByTestId('visible'), 'layout', visibleLayout);
+
+    expect(onReserveLayout).toHaveBeenCalledWith(reserveLayout);
+    expect(onVisibleLayout).toHaveBeenCalledWith(visibleLayout);
   });
 
   it('preserves visible text semantics and interaction through the overlay', async () => {
