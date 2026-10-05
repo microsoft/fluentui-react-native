@@ -24572,13 +24572,13 @@ __metadata:
   linkType: hard
 
 "use-subscription@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "use-subscription@npm:1.11.0"
+  version: 1.13.0
+  resolution: "use-subscription@npm:1.13.0"
   dependencies:
-    use-sync-external-store: "npm:^1.5.0"
+    use-sync-external-store: "npm:^1.7.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/6aa31e134d56e90a37f0f8232ece5ab5b74f35224e52bfd5b9a9e1af668423bba37715ee0f932f9e40dd9f8825d2efb90a1d254a7014b55a470b033acfadf4a3
+  checksum: 10c0/f2f605fff266712d04d125f48b0950854bdd53cd916fd853a6e28c1abd5d501180832f8c139828a346075f1e1a9707ad8cc6fcd9386619a50476e43ebbe29132
   languageName: node
   linkType: hard
 
@@ -24588,6 +24588,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10c0/1b8663515c0be34fa653feb724fdcce3984037c78dd4a18f68b2c8be55cc1a1084c578d5b75f158d41b5ddffc2bf5600766d1af3c19c8e329bb20af2ec6f52f4
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "use-sync-external-store@npm:1.7.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/6bae7cb778ce611131ec830c4e469fbc2872acefc25d2e4cf1c28b8628690689770742a9f2f0642c95134f9c77041fee60f0352f81ca43f96643b0ed01774726
   languageName: node
   linkType: hard
 
