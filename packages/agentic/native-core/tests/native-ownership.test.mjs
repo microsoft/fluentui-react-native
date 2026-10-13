@@ -53,10 +53,18 @@ test('macOS Swift interoperability uses the consolidated pod module name', async
   assert.equal(moduleName, 'FRNNativeCore');
   await readFile(new URL(`macos/shared/${moduleName}.h`, packageRoot), 'utf8');
 
-  for (const adapter of ['fabric/RCTCalloutComponentView.mm', 'paper/FRNCalloutManager.m']) {
-    const source = await readFile(new URL(`macos/components/Callout/${adapter}`, packageRoot), 'utf8');
-    assert.ok(source.includes(`#import "${moduleName}-Swift.h"`));
-    assert.doesNotMatch(source, /FRNCallout-Swift\.h/);
+  const fabric = await readFile(new URL('macos/components/Callout/fabric/RCTCalloutComponentView.mm', packageRoot), 'utf8');
+  assert.ok(fabric.includes(`#import "${moduleName}-Swift.h"`));
+  assert.doesNotMatch(fabric, /FRNCallout-Swift\.h/);
+
+  // Bridging-header builds also declare internal Swift classes in the generated header, duplicating the Paper
+  // manager's RCT_EXTERN_MODULE interface, so Paper commands are implemented in Swift instead.
+  const paper = await readFile(new URL('macos/components/Callout/paper/FRNCalloutManager.m', packageRoot), 'utf8');
+  const manager = await readFile(new URL('macos/components/Callout/paper/CalloutManager.swift', packageRoot), 'utf8');
+  assert.doesNotMatch(paper, /-Swift\.h/);
+  for (const command of ['focusWindow', 'blurWindow']) {
+    assert.match(paper, new RegExp(`RCT_EXTERN_METHOD\\(${command} : \\(nonnull NSNumber \\*\\)viewTag\\)`));
+    assert.match(manager, new RegExp(`@objc func ${command}\\(_ viewTag: NSNumber\\)`));
   }
 });
 
