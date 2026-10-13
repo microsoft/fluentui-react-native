@@ -1,7 +1,7 @@
 #import "KeyCodes.h"
 #import <React/RCTBaseTextInputView.h>
 #import "RCTFocusZone.h"
-#import "RCTi18nUtil.h"
+#import <React/RCTI18nUtil.h>
 
 typedef enum {
 	FocusZoneActionNone,
