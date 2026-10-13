@@ -43,6 +43,9 @@ The JavaScript component and its public types are exported only from
 deprecated aliases for the public types in the legacy entrypoint.
 
 Existing `Callout`/`RCTCallout` native registration names remain unchanged.
+On macOS Paper, `FRNCallout` remains available as an alias of `RCTCallout` for
+older JavaScript bundles, with the same view properties, events, and commands.
+Fabric registration is unchanged.
 Native applications must directly depend on `@fluentui-react-native/native-core`
 so native tooling discovers the shared pod and Windows project.
 
