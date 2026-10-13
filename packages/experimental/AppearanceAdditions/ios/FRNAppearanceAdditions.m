@@ -1,5 +1,5 @@
 #import "FRNAppearanceAdditions.h"
-#import "RCTUIManager.h"
+#import <React/RCTUIManager.h>
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTConstants.h>
