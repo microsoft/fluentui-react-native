@@ -70,4 +70,4 @@ yarn rnx-align-deps --set-version
 This command will ensure that all relevant packages are bumped correctly.
 
 You can read more about this tool here:
-[`@rnx-kit/align-deps` design document](https://github.com/microsoft/rnx-kit/blob/main/docsite/docs/architecture/dependency-management.md)
+[`@rnx-kit/align-deps` design document](https://github.com/microsoft/rnx-kit/blob/main/docsite/src/content/docs/docs/architecture/dependency-management.md)
