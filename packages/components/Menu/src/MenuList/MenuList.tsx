@@ -16,7 +16,7 @@ import { useMenuListContextValue } from './useMenuListContextValue';
 import { MenuListProvider } from '../context/menuListContext';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
-const shouldHaveFocusZone = ['macos', 'win32'].includes(Platform.OS as string);
+const shouldHaveFocusZone = ['macos', 'win32', 'windows'].includes(Platform.OS as string);
 const focusLandsOnContainer = Platform.OS === 'macos';
 const hasCircularNavigation = Platform.OS === ('win32' as any);
 
