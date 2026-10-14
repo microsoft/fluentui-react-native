@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     width: 360,
   },
   textBaseline: {
-    alignItems: 'baseline',
+    // macOS Paper baseline crash: https://github.com/microsoft/react-native-macos/issues/3121
+    alignItems: Platform.OS === 'macos' && Reflect.get(globalThis, 'nativeFabricUIManager') == null ? 'center' : 'baseline',
   },
   leading: {
     alignItems: 'center',
