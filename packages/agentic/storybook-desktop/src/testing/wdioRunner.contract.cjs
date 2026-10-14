@@ -10,7 +10,7 @@ async function main() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-inline-wdio-'));
   const [
     { createDesktopStoryManifest },
-    { runWdioStoryTests, WdioStoryTestRunError },
+    { runWdioStoryTests, WdioStoryCoverageUnavailableError, WdioStoryTestRunError },
     { createDesktopDriverStoryHarness, createFakeStoryWindows },
     { makeDesktopStorybookConfig },
   ] = await Promise.all([
@@ -179,7 +179,25 @@ async function main() {
       namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
     }
     const passed = await run('pass');
-    const skipped = await run('skip');
+    let skipped;
+    try {
+      await run('skip');
+      throw new Error('Expected an all-skipped run to be rejected as incomplete.');
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !(error instanceof WdioStoryCoverageUnavailableError) ||
+        !error.message.includes('Explicit capability reason') ||
+        !('results' in error) ||
+        !Array.isArray(error.results)
+      )
+        throw error;
+      skipped = error.results;
+    }
+    const skippedReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/wdio/run.json'), 'utf8'));
+    if (skippedReport.status !== 'incomplete' || skippedReport.counts.skipped !== 1 || skippedReport.counts.passed !== 0) {
+      throw new Error(`All-skipped run was not persisted as incomplete: ${JSON.stringify(skippedReport)}`);
+    }
     const failures = [];
     for (const story of ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale', 'navigation-failure']) {
       let rejected = false;

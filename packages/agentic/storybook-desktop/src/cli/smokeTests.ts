@@ -11,7 +11,14 @@ import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
 import { resolveWdioOptions } from '../config/wdio.js';
-import { runWdioStoryTests, selectWdioStories, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
+import {
+  countWdioStoryTests,
+  runWdioStoryTests,
+  selectWdioStories,
+  WdioStoryCoverageUnavailableError,
+  WdioStoryTestRunError,
+  type WdioStoryTestResult,
+} from '../testing/runWdioTests.js';
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import type { DesktopCommandRunner } from './commandRunner.js';
 
@@ -95,6 +102,11 @@ export async function runDesktopStorybookSmokeTests(
             )),
           );
         } catch (error) {
+          // A story whose callbacks all skipped is not a failure on its own; coverage is judged across the whole smoke run.
+          if (error instanceof WdioStoryCoverageUnavailableError) {
+            wdio.push(...error.results);
+            continue;
+          }
           writeDesktopStorybookFailure(`smoke story "${storyId}"`, error, options.errorOutput);
           if (error instanceof WdioStoryTestRunError && error.results.length) {
             wdio.push(...error.results);
@@ -126,6 +138,8 @@ export async function runDesktopStorybookSmokeTests(
     }
     failures.push(new Error('Executable smoke tests reported failures.'));
   }
+  const counts = countWdioStoryTests([...tests, ...wdio]);
+  const incomplete = failures.length === 0 && counts.passed === 0;
   const result: DesktopStorybookSmokeTestResult = {
     endpoint: platform,
     finishedAt: new Date().toISOString(),
@@ -142,11 +156,16 @@ export async function runDesktopStorybookSmokeTests(
   try {
     artifacts.writeMetadata('run', {
       ...result,
+      ...(incomplete ? { status: 'incomplete' } : {}),
+      counts,
       ...(failures.length ? { errors: failures.map(errorMessage) } : {}),
     });
   } catch (error) {
     failures.push(error);
     writeDesktopStorybookFailure('writing the smoke report', error, options.errorOutput);
+  }
+  if (incomplete && failures.length === 0) {
+    failures.push(new Error(`All ${counts.selected} selected desktop story tests were skipped; the smoke run provides no coverage.`));
   }
   if (failures.length === 1) {
     throw failures[0];

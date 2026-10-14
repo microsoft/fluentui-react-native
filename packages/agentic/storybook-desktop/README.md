@@ -212,9 +212,11 @@ it is not `process.platform`. Win32 stays distinct even though its WebDriver
 `platformName` is `windows`. Native feature flags are typed under
 `browser.capabilities['furn:features']`.
 `signal` allows cooperative cancellation; `skip(reason)` records an explicit
-skip (return from the callback after calling it). Native selectors and
-supported WebDriver operations apply; there is no DOM or JavaScript execution
-inside the app.
+skip (return from the callback after calling it). A run in which every selected
+test skipped is reported as `incomplete` in `run.json` and fails the command,
+since it provides no coverage; runs with at least one pass are unaffected.
+Native selectors and supported WebDriver operations apply; there is no DOM or
+JavaScript execution inside the app.
 
 The original `wdio: async (context) => { ... }` form remains supported. It is
 one test, called `default` for filtering. Named collections must be non-empty,
