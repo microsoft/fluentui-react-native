@@ -1,6 +1,8 @@
 import FluentUI
 import Foundation
+#if canImport(React)
 import React
+#endif
 
 class DatePickerDelegate: DateTimePickerDelegate {
     weak var manager: DatePickerManager?
