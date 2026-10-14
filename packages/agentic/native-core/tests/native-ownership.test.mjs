@@ -68,6 +68,16 @@ test('macOS Swift interoperability uses the consolidated pod module name', async
   }
 });
 
+test('macOS Paper registers the legacy FRNCallout alias through the current manager', async () => {
+  const swift = await readFile(new URL('macos/components/Callout/paper/CalloutManager.swift', packageRoot), 'utf8');
+  assert.match(swift, /@objc\(RCTCalloutManager\)\s*class CalloutManager: RCTViewManager/);
+  assert.match(swift, /@objc\(FRNCalloutManager\)\s*class LegacyCalloutManager: CalloutManager\s*\{\s*\}/);
+
+  const objc = await readFile(new URL('macos/components/Callout/paper/FRNCalloutManager.m', packageRoot), 'utf8');
+  assert.match(objc, /RCT_EXTERN_MODULE\(RCTCalloutManager, RCTViewManager\)/);
+  assert.match(objc, /@interface RCT_EXTERN_MODULE\(FRNCalloutManager, RCTCalloutManager\)\s*@end/);
+});
+
 for (const shim of ['callout', 'focus-zone']) {
   test(`${shim} is a JS-only compatibility shim with no duplicate native ownership`, async () => {
     const root = new URL(`../../shim/${shim}/`, packageRoot);

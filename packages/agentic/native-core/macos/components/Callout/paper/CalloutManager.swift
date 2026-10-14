@@ -29,3 +29,7 @@ class CalloutManager: RCTViewManager {
 		}
 	}
 }
+
+// Keep the Paper component name used by older Callout JS bundles.
+@objc(FRNCalloutManager)
+class LegacyCalloutManager: CalloutManager {}

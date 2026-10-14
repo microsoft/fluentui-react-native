@@ -54,3 +54,6 @@ RCT_EXPORT_VIEW_PROPERTY(onShow, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTDirectEventBlock)
 
 @end
+
+@interface RCT_EXTERN_MODULE(FRNCalloutManager, RCTCalloutManager)
+@end
