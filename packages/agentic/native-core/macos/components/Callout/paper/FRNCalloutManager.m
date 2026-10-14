@@ -1,7 +1,5 @@
 #import "FRNCalloutManager.h"
 
-#import "FRNNativeCore-Swift.h"
-
 @implementation RCTConvert (FRNCalloutAdditions)
 
 // RCTConvert does not properly convert a JS screenRect into a native CGRect/NSRect,
@@ -39,27 +37,9 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 
 @interface RCT_EXTERN_MODULE(RCTCalloutManager, RCTViewManager)
 
-RCT_EXPORT_METHOD(focusWindow : (nonnull NSNumber *)viewTag)
-{
-	dispatch_async(dispatch_get_main_queue(), ^{
-		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
+RCT_EXTERN_METHOD(focusWindow : (nonnull NSNumber *)viewTag)
 
-		if ([view isKindOfClass:[FRNCalloutView class]]) {
-			[(FRNCalloutView *)view focusWindow];
-		}
-	});
-}
-
-RCT_EXPORT_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
-{
-	dispatch_async(dispatch_get_main_queue(), ^{
-		NSView *view = [self.bridge.uiManager viewForReactTag:viewTag];
-
-		if ([view isKindOfClass:[FRNCalloutView class]]) {
-			[(FRNCalloutView *)view blurWindow];
-		}
-	});
-}
+RCT_EXTERN_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 

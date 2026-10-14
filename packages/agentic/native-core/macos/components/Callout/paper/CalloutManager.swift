@@ -13,4 +13,19 @@ class CalloutManager: RCTViewManager {
 	override class func requiresMainQueueSetup() -> Bool {
 		return true
 	}
+
+	// React Native calls these on the module's method queue; views can only be looked up on the main queue.
+	@objc func focusWindow(_ viewTag: NSNumber) {
+		nonisolated(unsafe) let manager = self
+		DispatchQueue.main.async {
+			(manager.bridge?.uiManager?.view(forReactTag: viewTag) as? CalloutView)?.focusWindow()
+		}
+	}
+
+	@objc func blurWindow(_ viewTag: NSNumber) {
+		nonisolated(unsafe) let manager = self
+		DispatchQueue.main.async {
+			(manager.bridge?.uiManager?.view(forReactTag: viewTag) as? CalloutView)?.blurWindow()
+		}
+	}
 }

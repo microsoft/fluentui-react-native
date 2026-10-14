@@ -1,6 +1,8 @@
 import Foundation
 import FluentUI
+#if canImport(React)
 import React
+#endif
 import UIKit
 
 @objc(FRNAvatarViewManager)

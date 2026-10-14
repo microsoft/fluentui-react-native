@@ -40,7 +40,11 @@ to use its host-provided `RCTCallout` and `RCTFocusZone`.
 
 The macOS module-named header at `macos/shared/FRNNativeCore.h` is required by
 the generated `FRNNativeCore-Swift.h`; keep it aligned with the pod's
-`module_name` when changing native ownership.
+`module_name` when changing native ownership. Only Fabric adapters import the
+generated header. Hosts that compile the Swift sources with an Objective-C
+bridging header also get internal Swift classes declared there, duplicating
+Paper `RCT_EXTERN_MODULE` interfaces, so implement Paper manager methods in
+Swift and declare them with `RCT_EXTERN_METHOD`.
 
 ## Public entrypoints
 
