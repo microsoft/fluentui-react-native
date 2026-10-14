@@ -560,7 +560,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	AppendFocusableViewsWithin(self, focusableViews);
 
 	NSView *firstResponder = GetFirstResponder([self window]);
-	NSUInteger currentIndex = [focusableViews indexOfObjectPassingTest:^BOOL(NSView *candidateView, NSUInteger index, BOOL *stop) {
+	NSUInteger currentIndex = [focusableViews indexOfObjectPassingTest:^BOOL(NSView *candidateView, __unused NSUInteger index, __unused BOOL *stop) {
 		return candidateView == firstResponder
 			|| [candidateView isDescendantOf:firstResponder]
 			|| [firstResponder isDescendantOf:candidateView];
