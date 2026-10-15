@@ -27,7 +27,7 @@ These apply to every task.
   using `gh api`, Pod, process, loopback `curl`, or capture operations, or changing the policy.
 - **Validation:** run the owning workspace's declared scripts (R-VALID-001). Report each check as passed, failed,
   skipped, not run, or unsupported; JavaScript tests and bundles are not native qualification (R-VALID-002). Finish
-  code or configuration changes with one `yarn lage buildci --no-cache` run (R-VALID-003).
+  code or configuration changes with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
 - **Code:** no barrel exports (R-REPO-001); keep React Native fork imports in platform files (R-REPO-002); add a
   changeset for published packages (R-REPO-003); never copy private source bodies into this public repository
   (R-REPO-004).
@@ -77,8 +77,8 @@ validation, TypeScript, release, design tokens, focus, and native guidance.
 - Yarn 4 in pnpm mode; TypeScript 7.0.2 compiled as one `tsc -b` project-references graph; Lage task orchestration.
   New packages must be added to the root `tsconfig.json` `references`.
 - `yarn build` builds the repository; `yarn lage test` and `yarn lage lint` test and lint packages; `yarn format` formats.
-  `yarn lage buildci` runs the CI aggregate, including `yarn check-agent-instructions`; use `--no-cache` once for final
-  validation.
+  `yarn lage buildci` runs the CI aggregate, including `yarn check-agent-instructions`. `yarn clean-lage-cache` clears
+  the Lage cache before final validation.
 - Details: [commands and validation](references/agents/repository/development.md),
   [architecture](references/agents/repository/architecture.md), [TypeScript](references/agents/repository/typescript.md),
   and [release](references/agents/repository/release.md).

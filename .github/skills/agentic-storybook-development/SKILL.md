@@ -25,7 +25,7 @@ Work on the native Storybook application in `apps/storybook`.
    spec without refreshing ReactCodegen's source list. If the clean build then reports a missing generated spec header,
    run `pods:macos` once more before changing native configuration.
 6. Validate the JavaScript bundle and the affected native build. Run Storybook format/lint and the root build when
-   manifests or shared package references changed. Finish with one `yarn lage buildci --no-cache` (R-VALID-003).
+   manifests or shared package references changed. Finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
 
 Keep component API, slot, token, and rendering work in the `agentic-component-authoring` skill; use this skill for the
 Storybook application and its native toolchains.

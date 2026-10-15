@@ -23,6 +23,7 @@
     "bundle:repo": "lage bundle",
     "clean": "tsc -b --clean && lage clean",
     "clean-all": "node ./scripts/src/preinstall/clean-all.ts",
+    "clean-lage-cache": "lage cache --clear",
     "change": "node .github/scripts/change.mts",
     "changeset:version": "node .github/scripts/changeset-version-with-postbump.mts",
     "change:check": "node .github/scripts/change.mts --check",

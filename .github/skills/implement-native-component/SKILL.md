@@ -44,7 +44,7 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
    R-APPLE-007. Run Pod operations only as the
    [permissions reference](../../../references/agents/repository/permissions.md) allows.
 6. Report each platform and renderer as passed, failed, skipped, not run, or unsupported, with reasons (R-NATIVE-003).
-7. Finish with one `yarn lage buildci --no-cache` run (R-VALID-003).
+7. Finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
 
 Storybook application or toolchain failures that are not caused by the native change belong to the
 [Storybook skill](../agentic-storybook-development/SKILL.md).

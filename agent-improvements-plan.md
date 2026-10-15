@@ -108,22 +108,6 @@ were no repeated trials, so the percentages are not statistically reliable.
 | 2. Run three or more trials per case before the PR                                | Stronger evidence; costs about 50 more probe sessions per model.                    |
 | 3. Add another client, such as Claude Code                                        | Covers clients beyond Copilot CLI, the main client under D05.                       |
 
-### R07: Final validation after an aborted uncached run
-
-**Status:** Open
-**Answer:**
-
-The first uncached `yarn lage buildci --no-cache` failed on formatting and stopped with 81 tasks unexecuted. After the
-fix, a plain cached `yarn lage buildci` passed, but it skipped 164 tasks as cache hits. Those included the 81 tasks the
-uncached pass never ran, served from earlier cache entries. Repeating the uncached run executed and passed all 171 tasks.
-R-VALID-003 currently says a later plain run re-checks anything that has not passed, which holds only for tasks the
-uncached pass actually executed.
-
-| Option                                                                                                           | Effect                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| 1. Amend R-VALID-003: if the uncached run stops early, fix the failure and repeat the uncached run (recommended) | Guarantees every task ran uncached at the end; costs about one minute per repeat on this machine. |
-| 2. Keep the current wording                                                                                      | A cached follow-up may reuse stale results for tasks the aborted uncached run never reached.      |
-
 ## Follow-ups outside this branch
 
 - **`native-lib2`:** after this PR merges and that branch rebases without commit `246d33668`, add a route from
@@ -143,7 +127,8 @@ uncached pass actually executed.
 - **Checker:** `yarn check-agent-instructions` (15 tests) also enforces acyclic, at most three-deep prerequisites,
   terminal compatibility redirects, one skill per routing row with consistent routing across routers, and root routing
   for every skill.
-- **Final validation:** `yarn lage buildci --no-cache` passed all 171 tasks with none skipped. `yarn change:check` and
+- **Final validation:** a new root `yarn clean-lage-cache` script (`lage cache --clear`) followed by
+  `yarn lage buildci` ran and passed all 171 tasks with none skipped. `yarn change:check` and
   `yarn lage test-links` also passed.
 
 Pilot results, one run per case, read-only Copilot CLI 1.0.98 probes, baseline `a1fd5c65d`:
