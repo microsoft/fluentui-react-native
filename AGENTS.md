@@ -43,16 +43,16 @@ These apply to every task.
 
 Classify the change with the [classification guide](references/agents/components/classification.md), then use:
 
-| Task                                                                           | Skill                                                                                                |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| New component, or change or plan a change to an agentic component or primitive | [agentic-component-authoring](.github/skills/agentic-component-authoring/SKILL.md)                   |
-| Agentic contract-only or contract-feasibility work                             | [agentic-component-contract-authoring](.github/skills/agentic-component-contract-authoring/SKILL.md) |
-| Fix or maintain an existing v0 or v1 component                                 | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                         |
-| Review a component change of any generation                                    | [review-component](.github/skills/review-component/SKILL.md)                                         |
-| Native component, TurboModule, service, or codegen                             | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
-| Cross-component agentic extraction or dependency direction                     | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
-| Storybook app, Metro, CocoaPods, or desktop native toolchain                   | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
-| Dependency vulnerability remediation                                           | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                                   |
+| Task                                                                                | Skill                                                                                                |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| New component, or change or plan a change to an agentic component or primitive      | [agentic-component-authoring](.github/skills/agentic-component-authoring/SKILL.md)                   |
+| Agentic contract-only or contract-feasibility work                                  | [agentic-component-contract-authoring](.github/skills/agentic-component-contract-authoring/SKILL.md) |
+| Fix or maintain an existing v0 or v1 component                                      | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                         |
+| Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                         |
+| Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
+| Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
+| Storybook app, Metro, CocoaPods, or desktop native toolchain                        | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
+| Dependency vulnerability remediation                                                | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                                   |
 
 Other repository work starts from the [reference index](references/agents/README.md): architecture, commands and
 validation, TypeScript, release, design tokens, focus, and native guidance.
