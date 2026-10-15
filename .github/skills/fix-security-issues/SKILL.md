@@ -157,6 +157,7 @@ Use declared workspace scripts and validate in increasing scope:
 6. Run the root build and repository test graph when shared manifests,
    catalogs, resolutions, or the lockfile change broadly.
 7. Add a normal or empty changeset as required by repository policy.
+8. Finish with one `yarn lage buildci --no-cache` run (R-VALID-003).
 
 Finish by confirming:
 

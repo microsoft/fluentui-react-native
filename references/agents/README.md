@@ -53,6 +53,7 @@ documents a task needs; links are navigation, not instructions to load everythin
 | `focus.windows-win32`                                    | [Windows and Win32 focus](focus/windows-win32.md)                               | Focus work on React Native Windows or Win32                                     |
 | `focus.macos`                                            | [macOS focus](focus/macos.md)                                                   | Focus work on macOS                                                             |
 | `native.components-and-modules`                          | [Native components and modules](native/components-and-modules.md)               | Any native component, module, service, or native-backed wrapper                 |
+| `native.apple-office`                                    | [Apple native authoring and Office integration](native/apple-office.md)         | Any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change  |
 | `native.windows-fabric`                                  | [Windows Fabric native components](native/windows-fabric.md)                    | React Native Windows Fabric views, codegen, registration, or UIA                |
 
 ## Placement and extension

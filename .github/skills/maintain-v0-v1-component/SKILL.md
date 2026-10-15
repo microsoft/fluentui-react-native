@@ -30,7 +30,7 @@ v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new comp
    `componentRef`, token contracts, and native registration names (R-V0-002, R-V0-003, R-V1-002, R-V1-003).
 6. Validate with the owning package's declared scripts (R-VALID-001): build, test, and lint, plus the framework
    packages named in the recipe when framework semantics change. Review snapshot diffs before accepting them. Report
-   each check's outcome (R-VALID-002).
+   each check's outcome (R-VALID-002), and finish with one `yarn lage buildci --no-cache` (R-VALID-003).
 7. Add a changeset for published packages (R-REPO-003).
 
 Stop and confirm scope before migrating between frameworks, creating a component, or changing a public API. Those

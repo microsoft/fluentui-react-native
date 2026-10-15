@@ -26,7 +26,8 @@ These apply to every task.
   authorization (R-PERM-007). Read the [permissions reference](references/agents/repository/permissions.md) before
   using `gh api`, Pod, process, loopback `curl`, or capture operations, or changing the policy.
 - **Validation:** run the owning workspace's declared scripts (R-VALID-001). Report each check as passed, failed,
-  skipped, not run, or unsupported; JavaScript tests and bundles are not native qualification (R-VALID-002).
+  skipped, not run, or unsupported; JavaScript tests and bundles are not native qualification (R-VALID-002). Finish
+  code or configuration changes with one `yarn lage buildci --no-cache` run (R-VALID-003).
 - **Code:** no barrel exports (R-REPO-001); keep React Native fork imports in platform files (R-REPO-002); add a
   changeset for published packages (R-REPO-003); never copy private source bodies into this public repository
   (R-REPO-004).
@@ -34,7 +35,9 @@ These apply to every task.
   R-V1-001). Classify code by imports and structure, not by path (R-CLASSIFY-001).
 - **Native boundary:** before changing Swift, Objective-C, C++, headers, podspecs, Windows projects, codegen specs,
   native registration, or a native-backed platform wrapper, use the
-  [native component skill](.github/skills/implement-native-component/SKILL.md), directly or as an overlay.
+  [native component skill](.github/skills/implement-native-component/SKILL.md), directly or as an overlay. iOS and
+  macOS changes must keep both CocoaPods-module and Office bridging-header builds working; follow the
+  [Apple and Office rules](references/agents/native/apple-office.md).
 
 ## Route the task
 
@@ -74,7 +77,8 @@ validation, TypeScript, release, design tokens, focus, and native guidance.
 - Yarn 4 in pnpm mode; TypeScript 7.0.2 compiled as one `tsc -b` project-references graph; Lage task orchestration.
   New packages must be added to the root `tsconfig.json` `references`.
 - `yarn build` builds the repository; `yarn lage test` and `yarn lage lint` test and lint packages; `yarn format` formats.
-  `yarn lage buildci` runs the CI aggregate, including `yarn check-agent-instructions`.
+  `yarn lage buildci` runs the CI aggregate, including `yarn check-agent-instructions`; use `--no-cache` once for final
+  validation.
 - Details: [commands and validation](references/agents/repository/development.md),
   [architecture](references/agents/repository/architecture.md), [TypeScript](references/agents/repository/typescript.md),
   and [release](references/agents/repository/release.md).

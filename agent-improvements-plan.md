@@ -605,7 +605,8 @@ below; the efficiency pilot is reporting-only under D08.
 | Root router (D05, D06)      | Root `AGENTS.md` shrank from 27,423 to about 7,400 bytes. It keeps always-on safeguards (permissions, validation truthfulness, code rules, generation policy, native trigger), a task routing table, and a scoped-instruction table. `CLAUDE.md` and `.github/copilot-instructions.md` are unchanged.                                                                                                 |
 | Scoped entrypoints          | v0 and v1 package `AGENTS.md` files are short maintainer routes to the shared recipes. Agentic package and primitive files define `R-AGENTIC-*` and `R-PRIMITIVE-*` rules. The Storybook diagnostics table moved to `apps/storybook/AGENTS.md#native-diagnostics`.                                                                                                                                    |
 | Integrity checker (D09)     | `yarn check-agent-instructions` runs from the root and in `yarn lage buildci` and `repo-checks`. It validates frontmatter, index completeness, case-sensitive links and anchors, inbound anchors into instruction files, code-span paths, skill metadata, rule definitions and citations, compatibility redirects, and evaluation fixtures. It has 11 node tests in `@fluentui-react-native/scripts`. |
-| Evaluation groundwork (D11) | Eleven sanitized JSON cases in [`references/agents/evals/cases`](references/agents/evals/README.md): seven development and four holdout. The documented local result-record shape covers commit, instruction hashes, client and model, reads, assertions, usage, and confounders. No framework was chosen.                                                                                            |
+| Final validation            | `R-VALID-003` requires one `yarn lage buildci --no-cache` before declaring a change complete, so stale Lage cache entries cannot hide failures. Root, the development reference, and the implementation skills state it.                                                                                                                                                                              |
+| Evaluation groundwork (D11) | Thirteen sanitized JSON cases in [`references/agents/evals/cases`](references/agents/evals/README.md): eight development and five holdout, including Apple implementation, review, and iOS holdout cases. The documented local result-record shape covers commit, instruction hashes, client and model, reads, assertions, usage, and confounders. No framework was chosen.                           |
 
 ### Observed discovery behavior
 
@@ -661,14 +662,18 @@ Caveats:
 
 ### Deviations and follow-ups
 
-- **Apple/Office extraction:** the Apple native authoring section and `packages/agentic/native-core/AGENTS.md` exist
-  only on the unmerged `user/jasonvmo/native-lib2` branch. When it merges:
-  - Root `AGENTS.md` will conflict.
-  - Move the section into a new `references/agents/native/apple-office.md` with `R-APPLE-*` IDs and a parity review.
-  - Keep a short root heading `Apple native authoring and Office integration` as the anchor and safeguard route, since
-    three links target it.
-  - Route native-core's `AGENTS.md` to the new reference.
-  - Add the reference to the index.
+- **Apple/Office extraction (follow-up, resolved):** the Apple native authoring section from commit `246d33668` on
+  `user/jasonvmo/native-lib2` now lives in
+  [`references/agents/native/apple-office.md`](references/agents/native/apple-office.md) as `R-APPLE-001` to
+  `R-APPLE-007`, with examples from this branch.
+  - A sentence-level comparison preserved all 28 source sentences: 23 matched automatically, and 5 were confirmed
+    manually.
+  - The root safeguards, `implement-native-component` (workflow and native overlay checklist), `review-component`
+    (native row), and the native components reference all route to it.
+  - Routing probes confirmed that the implementation, review, and unseen iOS holdout cases each loaded the reference
+    and applied the expected rules.
+  - The owner is removing that commit from `native-lib2`, so no compatibility anchor is kept. Its native-core
+    `AGENTS.md`, which this branch does not have, should link to the new reference if it is retained.
 - **Corrected stale root claims:** `yarn build --clean` (now `build:clean`); ESLint and Prettier (now oxlint and oxfmt);
   `depcheck`; FluentTester paths (now `apps/tester-core`); per-platform `testPages`; `validate-changesets.mts` (now
   `change.mts`); and framework-base as a devDependency (it is a runtime dependency). `yarn docs` was not carried
@@ -691,3 +696,4 @@ Caveats:
 | `yarn workspace @fluentui-react-native/components check:spec-contracts` | Passed (20 contracts)                                                                                |
 | `yarn change:check`                                                     | Passed after committing the empty changeset                                                          |
 | `yarn lage buildci --grouped`                                           | Passed: 156 tasks succeeded and 0 failed, including `check-agent-instructions` and the scripts tests |
+| `yarn lage buildci --no-cache --grouped` (final, R-VALID-003)           | Passed: 171 tasks succeeded, 0 skipped (no cache), 0 failed                                          |

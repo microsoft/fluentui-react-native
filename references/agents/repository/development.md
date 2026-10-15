@@ -21,6 +21,10 @@ the declared scripts in the root [package.json](../../../package.json) and [lage
 - **R-VALID-002:** Report each validation as passed, failed, skipped, not run, or unsupported, with the reason. Never
   report an unrun, all-skipped, or unsupported check as passed. JavaScript tests, bundles, and source builds are not
   evidence of native runtime behavior, physical input, UIA/AX action dispatch, or Office qualification.
+- **R-VALID-003:** Before declaring a code, configuration, or instruction change complete, run
+  `yarn lage buildci --no-cache` once as final validation. It bypasses and resets the Lage cache, so incorrect cache
+  invalidation cannot hide a failure. After that run, a plain `yarn lage buildci` re-checks any package that has not
+  passed. Read-only reviews and plans do not need it.
 - **R-REPO-001:** Do not use barrel exports (`export * from '...'`). Use explicit named re-exports such as
   `export { Foo, Bar } from './module'` and `export type { Baz } from './module'` so bundlers can tree-shake.
 - **R-REPO-004:** Do not copy or mechanically transform private source bodies into this public repository. Record
@@ -49,9 +53,9 @@ Set up a clone with `yarn` to install dependencies, then `yarn build`.
 | `yarn lage buildci`             | CI aggregate: repository lint, publishing check, agent-instruction check, build, test, and lint       |
 | `yarn change` / `change:check`  | Create or validate changesets; see [release](release.md)                                              |
 
-Lage caches task outputs; add `--no-cache` to bypass the cache and `--verbose` for detail. After a major rework, such
-as moving packages or renaming exports, run `yarn lage test --no-cache` once so every test re-runs; later incremental
-runs then work normally. Before committing moved or renamed files, run `yarn lage test-links` and update stale links.
+Lage caches task outputs; add `--no-cache` to bypass the cache and `--verbose` for detail. Iterate with cached runs,
+then finish with one `yarn lage buildci --no-cache` (R-VALID-003). Before committing moved or renamed files, run
+`yarn lage test-links` and update stale links.
 
 ## Package commands
 
@@ -72,7 +76,7 @@ not isolate one file; use `--testNamePattern` to focus a run.
 
 - During iteration, run the smallest relevant test, and run package lint or build early after type-heavy edits.
 - For final validation, run format, lint, the package build, and package tests, then the root build when public types,
-  manifests, or project references change.
+  manifests, or project references change. Finish with one `yarn lage buildci --no-cache` (R-VALID-003).
 - After fixing a failed step, rerun that step and its downstream checks before rerunning the whole chain.
 - Prefer committed `*.types.test.ts` coverage for compile-time contracts. Keep exploratory probes outside package
   source, or remove them before package validation.

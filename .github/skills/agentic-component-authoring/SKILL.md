@@ -65,7 +65,7 @@ the affected reference and its immediate neighbors.
    Upstream changes require explicit re-review and never overwrite the local contract.
 9. Run the smallest declared validation command while iterating. Finish with package format, lint, build, and tests;
    run the Storybook bundle for story changes and the root build when public types, manifests, or project references
-   change. Report results truthfully (R-VALID-002).
+   change. Finish with one `yarn lage buildci --no-cache` (R-VALID-003) and report results truthfully (R-VALID-002).
 
 Do not divide one component implementation into separate sub-agent or sub-skill phases. Its types, state, styling, and
 rendering form one contract and should remain in one implementation context.

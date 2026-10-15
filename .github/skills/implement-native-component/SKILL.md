@@ -24,7 +24,9 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
    [native-core README](../../../packages/agentic/native-core/README.md).
 3. Load only the platform references the work needs:
    - React Native Windows Fabric views: [Windows Fabric](../../../references/agents/native/windows-fabric.md);
-   - Apple: native-core's native layout and Swift/Objective-C interoperability notes;
+   - any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change:
+     [Apple native authoring and Office integration](../../../references/agents/native/apple-office.md)
+     (R-APPLE-001 through R-APPLE-007), plus native-core's macOS layout notes;
    - focus targets or native focus visuals: [common focus authoring](../../../references/agents/focus/common.md) and its
      platform file;
    - accessibility actions:
@@ -38,9 +40,11 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
    `codegen:windows` when Windows specs change; native builds through the owning app, such as
    `yarn storybook build --macos` or `--windows` from `apps/storybook`; and runtime evidence through Storybook smoke or
    `wdio` story tests. macOS Storybook commands default to Fabric: add `--paper` to `prep`, `build`, `run`, or `smoke`
-   for Paper, and rerun `prep` when switching renderers. Run Pod operations only as the
+   for Paper, and rerun `prep` when switching renderers. Apple changes also need the module and bridging-header checks in
+   R-APPLE-007. Run Pod operations only as the
    [permissions reference](../../../references/agents/repository/permissions.md) allows.
 6. Report each platform and renderer as passed, failed, skipped, not run, or unsupported, with reasons (R-NATIVE-003).
+7. Finish with one `yarn lage buildci --no-cache` run (R-VALID-003).
 
 Storybook application or toolchain failures that are not caused by the native change belong to the
 [Storybook skill](../agentic-storybook-development/SKILL.md).
@@ -54,6 +58,10 @@ Use this checklist for implementation and review:
 - Registration names, autolinking, and entrypoints are unchanged unless requested; consuming apps depend directly on
   native-core.
 - Native view lookup and UI mutation run on the platform's UI thread.
+- iOS and macOS changes follow the [Apple and Office rules](../../../references/agents/native/apple-office.md):
+  qualified `<React/...>` headers, guarded Swift `import React`, no generated Swift header in an `RCT_EXTERN_MODULE`
+  file, generated-type-free Paper bridges, main-queue dispatch, and strict warnings (R-APPLE-001 through R-APPLE-006).
+  Module and bridging-header validation ran, or the unrun mode is reported (R-APPLE-007).
 - Native resources, observers, and pending work are released on unmount, cancellation, or failure.
 - Each export works on every host its entrypoint promises; platform-only APIs use the narrowest entrypoint.
 - Podspecs, Windows projects, and package `files` include every new native source.
