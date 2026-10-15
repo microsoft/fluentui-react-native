@@ -21,40 +21,44 @@ documents a task needs; links are navigation, not instructions to load everythin
 | [`components/agentic/`](components/agentic)                                   | Agentic component recipes                                                   |
 | [`components/agentic/contract-sources/`](components/agentic/contract-sources) | Source adapters for agentic component contracts                             |
 | [`focus/`](focus)                                                             | Desktop focus behavior across component generations                         |
+| [`accessibility/`](accessibility)                                             | Version-bound accessibility action evidence                                 |
 | [`native/`](native)                                                           | Native components, modules, and platform guidance                           |
 | [`evals/`](evals/README.md)                                                   | Portable evaluation case fixtures; not instructions                         |
 
 ## Document index
 
-| ID                                                       | Document                                                                        | Read when                                                                       |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `repository.architecture`                                | [Architecture](repository/architecture.md)                                      | Orienting in the monorepo or choosing where code belongs                        |
-| `repository.development`                                 | [Commands and validation](repository/development.md)                            | Building, testing, linting, validating, or adding a package                     |
-| `repository.typescript`                                  | [TypeScript](repository/typescript.md)                                          | Changing compiler settings, platform types, or the JSX runtime                  |
-| `repository.permissions`                                 | [Agent permissions](repository/permissions.md)                                  | Using `gh api`, Pod, process, loopback, or capture operations; changing policy  |
-| `repository.release`                                     | [Changesets and release](repository/release.md)                                 | Changing a published package or release tooling                                 |
-| `design.tokens-and-theming`                              | [Tokens and theming](design/tokens-and-theming.md)                              | Mapping tokens, theme-dependent styles, or color utilities                      |
-| `components.classification`                              | [Classification and routing](components/classification.md)                      | Starting any component task                                                     |
-| `components.v0`                                          | [v0 maintenance](components/v0.md)                                              | Changing or reviewing `foundation-compose` components                           |
-| `components.v1`                                          | [v1 maintenance](components/v1.md)                                              | Changing or reviewing `compose` or `compressible` components                    |
-| `components.legacy-test-apps`                            | [FluentTester and E2E](components/legacy-test-apps.md)                          | Changing v0 or v1 test pages or E2E specs                                       |
-| `components.agentic.types-and-slots`                     | [Types and slots](components/agentic/types-and-slots.md)                        | Agentic public props, slots, resolved state, native props, or exports           |
-| `components.agentic.state-and-accessibility`             | [State and accessibility](components/agentic/state-and-accessibility.md)        | Agentic state hooks, defaults, interaction, or accessibility                    |
-| `components.agentic.styles-and-tokens`                   | [Styles and tokens](components/agentic/styles-and-tokens.md)                    | Agentic styles, token mapping, theme caching, or state precedence               |
-| `components.agentic.rendering`                           | [Rendering and assembly](components/agentic/rendering.md)                       | Agentic render functions, assembly, or display names                            |
-| `components.agentic.tests-and-stories`                   | [Tests and stories](components/agentic/tests-and-stories.md)                    | Agentic tests, stories, `wdio` story tests, or validation                       |
-| `components.agentic.contract-sources.flex-x3`            | [Flex and X3](components/agentic/contract-sources/flex-x3.md)                   | Contract evidence from the pinned Flex catalog                                  |
-| `components.agentic.contract-sources.fluent-v9`          | [Fluent v9](components/agentic/contract-sources/fluent-v9.md)                   | Contract evidence from Fluent UI v9 source or specifications                    |
-| `components.agentic.contract-sources.html-css`           | [HTML and CSS](components/agentic/contract-sources/html-css.md)                 | Contract evidence from HTML, CSS, or browser output                             |
-| `components.agentic.contract-sources.visual-reference`   | [Visual reference](components/agentic/contract-sources/visual-reference.md)     | Contract evidence from images, screenshots, or renders                          |
-| `components.agentic.contract-sources.local-foundation`   | [Local foundation](components/agentic/contract-sources/local-foundation.md)     | Foundational components without a Flex catalog entry                            |
-| `components.agentic.contract-sources.composite-evidence` | [Composite evidence](components/agentic/contract-sources/composite-evidence.md) | Contracts combining more than one source set                                    |
-| `focus.common`                                           | [Common focus authoring](focus/common.md)                                       | Any focusable component, collection, popup, focus hook, or native focus adapter |
-| `focus.windows-win32`                                    | [Windows and Win32 focus](focus/windows-win32.md)                               | Focus work on React Native Windows or Win32                                     |
-| `focus.macos`                                            | [macOS focus](focus/macos.md)                                                   | Focus work on macOS                                                             |
-| `native.components-and-modules`                          | [Native components and modules](native/components-and-modules.md)               | Any native component, module, service, or native-backed wrapper                 |
-| `native.apple-office`                                    | [Apple native authoring and Office integration](native/apple-office.md)         | Any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change  |
-| `native.windows-fabric`                                  | [Windows Fabric native components](native/windows-fabric.md)                    | React Native Windows Fabric views, codegen, registration, or UIA                |
+| ID                                                       | Document                                                                              | Read when                                                                       |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `repository.architecture`                                | [Architecture](repository/architecture.md)                                            | Orienting in the monorepo or choosing where code belongs                        |
+| `repository.development`                                 | [Commands and validation](repository/development.md)                                  | Building, testing, linting, validating, or adding a package                     |
+| `repository.typescript`                                  | [TypeScript](repository/typescript.md)                                                | Changing compiler settings, platform types, or the JSX runtime                  |
+| `repository.permissions`                                 | [Agent permissions](repository/permissions.md)                                        | Using `gh api`, Pod, process, loopback, or capture operations; changing policy  |
+| `repository.release`                                     | [Changesets and release](repository/release.md)                                       | Changing a published package or release tooling                                 |
+| `repository.dependency-security`                         | [Dependency security procedures](repository/dependency-security.md)                   | Remediating dependency advisories with the `fix-security-issues` skill          |
+| `design.tokens-and-theming`                              | [Tokens and theming](design/tokens-and-theming.md)                                    | Mapping tokens, theme-dependent styles, or color utilities                      |
+| `components.classification`                              | [Classification and routing](components/classification.md)                            | Starting any component task                                                     |
+| `components.v0`                                          | [v0 maintenance](components/v0.md)                                                    | Changing or reviewing `foundation-compose` components                           |
+| `components.v1`                                          | [v1 maintenance](components/v1.md)                                                    | Changing or reviewing `compose` or `compressible` components                    |
+| `components.legacy-test-apps`                            | [FluentTester and E2E](components/legacy-test-apps.md)                                | Changing v0 or v1 test pages or E2E specs                                       |
+| `components.agentic.types-and-slots`                     | [Types and slots](components/agentic/types-and-slots.md)                              | Agentic public props, slots, resolved state, native props, or exports           |
+| `components.agentic.state-and-accessibility`             | [State and accessibility](components/agentic/state-and-accessibility.md)              | Agentic state hooks, defaults, interaction, or accessibility                    |
+| `components.agentic.styles-and-tokens`                   | [Styles and tokens](components/agentic/styles-and-tokens.md)                          | Agentic styles, token mapping, theme caching, or state precedence               |
+| `components.agentic.rendering`                           | [Rendering and assembly](components/agentic/rendering.md)                             | Agentic render functions, assembly, or display names                            |
+| `components.agentic.tests-and-stories`                   | [Tests and stories](components/agentic/tests-and-stories.md)                          | Agentic tests, stories, `wdio` story tests, or validation                       |
+| `components.agentic.contract-sources.flex-x3`            | [Flex and X3](components/agentic/contract-sources/flex-x3.md)                         | Contract evidence from the pinned Flex catalog                                  |
+| `components.agentic.contract-sources.fluent-v9`          | [Fluent v9](components/agentic/contract-sources/fluent-v9.md)                         | Contract evidence from Fluent UI v9 source or specifications                    |
+| `components.agentic.contract-sources.html-css`           | [HTML and CSS](components/agentic/contract-sources/html-css.md)                       | Contract evidence from HTML, CSS, or browser output                             |
+| `components.agentic.contract-sources.visual-reference`   | [Visual reference](components/agentic/contract-sources/visual-reference.md)           | Contract evidence from images, screenshots, or renders                          |
+| `components.agentic.contract-sources.local-foundation`   | [Local foundation](components/agentic/contract-sources/local-foundation.md)           | Foundational components without a Flex catalog entry                            |
+| `components.agentic.contract-sources.composite-evidence` | [Composite evidence](components/agentic/contract-sources/composite-evidence.md)       | Contracts combining more than one source set                                    |
+| `focus.common`                                           | [Common focus authoring](focus/common.md)                                             | Any focusable component, collection, popup, focus hook, or native focus adapter |
+| `focus.windows-win32`                                    | [Windows and Win32 focus](focus/windows-win32.md)                                     | Focus work on React Native Windows or Win32                                     |
+| `focus.macos`                                            | [macOS focus](focus/macos.md)                                                         | Focus work on macOS                                                             |
+| `focus.platform-evidence`                                | [Desktop focus platform evidence](focus/platform-evidence.md)                         | Checking or updating a version-bound focus observation (`C-FOCUS-*`)            |
+| `accessibility.action-transport-evidence`                | [Accessibility action transport evidence](accessibility/action-transport-evidence.md) | Checking or updating toggle/select transport observations (`C-A11Y-*`)          |
+| `native.components-and-modules`                          | [Native components and modules](native/components-and-modules.md)                     | Any native component, module, service, or native-backed wrapper                 |
+| `native.apple-office`                                    | [Apple native authoring and Office integration](native/apple-office.md)               | Any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change  |
+| `native.windows-fabric`                                  | [Windows Fabric native components](native/windows-fabric.md)                          | React Native Windows Fabric views, codegen, registration, or UIA                |
 
 ## Placement and extension
 
@@ -65,8 +69,9 @@ documents a task needs; links are navigation, not instructions to load everythin
   with their packages.
 - Place a new document in the narrowest existing area. Create a new area only for a distinct domain, and add it to the
   taxonomy table. Add every new document to the document index with a concrete "Read when" condition.
-- When moving a document, keep its `id`, update inbound links, and leave a `compatibility-reference` at the old path
-  that links directly to the new location.
+- When moving a document, keep its `id` and update every inbound link in the same change. Leave a
+  `compatibility-reference` at the old path only when known external links depend on it, and link it directly to the
+  new location.
 
 ## Frontmatter standard
 

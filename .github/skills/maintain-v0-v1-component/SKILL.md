@@ -14,7 +14,9 @@ v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new comp
 
 1. Classify every surface the change touches with the
    [classification guide](../../../references/agents/components/classification.md). Confirm the generation from
-   imports and structure, not directory names (R-CLASSIFY-001); Button contains both generations.
+   imports and structure, not directory names (R-CLASSIFY-001); Button contains both generations. A legacy public
+   entrypoint is not evidence of v0 or v1: native-core's `/legacy` wrappers use framework-base patterns and belong to
+   the [native component skill](../implement-native-component/SKILL.md).
 2. Load only the matching recipe: [v0](../../../references/agents/components/v0.md) or
    [v1](../../../references/agents/components/v1.md). Load both only when the change touches both generations.
 3. Add overlays only when the change triggers them:

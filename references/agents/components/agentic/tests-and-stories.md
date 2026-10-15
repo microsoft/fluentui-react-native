@@ -225,8 +225,9 @@ a physical click does not exercise UIA/AX action dispatch.
 Report passed, failed, and skipped counts together. A zero-exit smoke traversal
 with platform-skipped focus cases is not cross-platform focus qualification.
 
-The pinned RNmacOS 0.81.9 Fabric View does not project
-`accessibilityState.disabled`/`selected` to AXEnabled/AXSelected. Those native
+The macOS Fabric View does not project disabled or selected accessibility state
+to AXEnabled/AXSelected (C-A11Y-005 in the
+[action transport evidence](../../accessibility/action-transport-evidence.md)). Those native
 announcement assertions are isolated in explicitly skipped cases; shared
 focus, activation, and selection-callback cases still run. Do not substitute
 rendered state for an AX result or describe these skips as intended macOS

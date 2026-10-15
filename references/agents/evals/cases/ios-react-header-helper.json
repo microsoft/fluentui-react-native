@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "case_id": "ios-react-header-helper",
-  "split": "holdout",
+  "split": "development",
   "task_mode": "plan",
   "prompt": "Add an Objective-C helper to packages/experimental/AppearanceAdditions that reads the React Native RTL setting from RCTI18nUtil, and call it from Swift. Plan the change.",
   "expected": {

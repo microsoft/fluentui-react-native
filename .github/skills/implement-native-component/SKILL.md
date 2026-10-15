@@ -20,13 +20,14 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
      [classification guide](../../../references/agents/components/classification.md);
    - native registration names and entrypoints that must not change.
 2. Choose ownership. New modern native code belongs in native-core (R-NATIVE-001); maintain existing native wrappers,
-   such as experimental packages, where they live. Read the relevant sections of the
-   [native-core README](../../../packages/agentic/native-core/README.md).
+   such as experimental packages, where they live. For native-core work, read the relevant sections of the
+   [native-core README](../../../packages/agentic/native-core/README.md); for a wrapper in another package, read that
+   package's sources and documentation instead.
 3. Load only the platform references the work needs:
    - React Native Windows Fabric views: [Windows Fabric](../../../references/agents/native/windows-fabric.md);
    - any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change:
      [Apple native authoring and Office integration](../../../references/agents/native/apple-office.md)
-     (R-APPLE-001 through R-APPLE-007), plus native-core's macOS layout notes;
+     (R-APPLE-001 through R-APPLE-007), plus native-core's macOS layout notes for native-core work;
    - focus targets or native focus visuals: [common focus authoring](../../../references/agents/focus/common.md) and its
      platform file;
    - accessibility actions:
@@ -40,7 +41,8 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
    `codegen:windows` when Windows specs change; native builds through the owning app, such as
    `yarn storybook build --macos` or `--windows` from `apps/storybook`; and runtime evidence through Storybook smoke or
    `wdio` story tests. macOS Storybook commands default to Fabric: add `--paper` to `prep`, `build`, `run`, or `smoke`
-   for Paper, and rerun `prep` when switching renderers. Apple changes also need the module and bridging-header checks in
+   for Paper, and rerun `prep` when switching renderers. Desktop Storybook does not build iOS: validate iOS-only changes
+   through the owning iOS host, such as FluentTester's iOS app in `apps/fluent-tester`. Apple changes also need the module and bridging-header checks in
    R-APPLE-007. Run Pod operations only as the
    [permissions reference](../../../references/agents/repository/permissions.md) allows.
 6. Report each platform and renderer as passed, failed, skipped, not run, or unsupported, with reasons (R-NATIVE-003).

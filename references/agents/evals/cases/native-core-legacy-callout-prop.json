@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "case_id": "native-core-legacy-callout-prop",
-  "split": "holdout",
+  "split": "development",
   "task_mode": "plan",
   "prompt": "Add a new optional prop to the legacy Callout exported from @fluentui-react-native/native-core/legacy. Plan the change.",
   "expected": {

@@ -14,14 +14,14 @@ implementations separate.
 
 ## Identify the endpoint
 
-| Endpoint  | Reviewed local implementation                                                  | Native owner                                                        |
-| --------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| `win32`   | `@office-iss/react-native-win32` 0.81.8, Paper; prebuilt REX host in Storybook | Office Win32 host/view implementation                               |
-| `windows` | `react-native-windows` 0.81.35, Fabric                                         | Windows App SDK Composition component views and React Native island |
+| Endpoint  | Platform package and renderer                                           | Native owner                                                        |
+| --------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `win32`   | `@office-iss/react-native-win32`, Paper; prebuilt REX host in Storybook | Office Win32 host/view implementation                               |
+| `windows` | `react-native-windows`, Fabric                                          | Windows App SDK Composition component views and React Native island |
 
-These are observed dependency versions on September 14, 2026, not minimum-version
-guarantees for every feature. Recheck the lockfile, platform resolution, and host
-before implementation. Office Win32 Paper is **not** RNW's old UWP XAML renderer,
+Reviewed versions and other version-bound observations are in the
+[platform evidence](platform-evidence.md), C-FOCUS-008 to C-FOCUS-015. Recheck the
+lockfile, platform resolution, and host before implementation. Office Win32 Paper is **not** RNW's old UWP XAML renderer,
 even though both are described as old-architecture/Paper in some contexts.
 
 ## Carry V1 behavior across, not its plumbing
@@ -42,11 +42,7 @@ its observed behavior to a shared scenario contract, run V1 on Win32 as the
 reference, then verify the new implementation independently on both renderers.
 Do not require matching native element classes or identical ring pixels.
 
-Sources:
-`packages\utils\interactive-hooks\src\useOnPressWithFocus.ts:14-29`;
-`packages\components\Button\src\useButton.ts:15-17,40-66,99-113`;
-`packages\components\TabList\src\Tab\useTab.win32.ts:64-110`;
-`packages\components\Menu\src\MenuItem\useMenuItem.ts:68-120`.
+Evidence: C-FOCUS-009.
 
 ## Focus requests and native identity
 
@@ -59,38 +55,28 @@ Native adapters operate on the correct mounted `ComponentView` in its owning
 surface/island. They must not reuse Paper UIManager/view-manager identifiers or
 assume a React ref can be serialized into a TurboModule argument.
 
-The existing Fabric FocusZone uses `TryFocus(FocusState::Keyboard)` and checks
-the root's focused component after the request
-(`packages\agentic\native-core\windows\NativeCore\components\FocusZone\FocusZoneComponentView.cpp:175-224`).
-Reuse this request-versus-observation pattern. Do not report success merely
+The existing Fabric FocusZone requests focus and then confirms the root's focused
+component (C-FOCUS-010). Reuse this request-versus-observation pattern. Do not report success merely
 because JavaScript called an optional `.focus()` method.
 
-RNW's reviewed root stores a native focus state and resolves programmatic focus
-using its own policy. A request for the already-focused component returns early.
-This matters for modality-only changes: native focus reasons and the design
+RNW's root resolves programmatic focus with its own policy and ignores a request
+for the already-focused component (C-FOCUS-011). This matters for modality-only changes: native focus reasons and the design
 root's modality are related, but are not automatically the same source.
 Do not synthesize a blur/refocus cycle simply to redraw a ring.
-
-Installed evidence:
-`Microsoft.ReactNative\Fabric\Composition\RootComponentView.cpp:79-118`.
-This native implementation detail is not a promised public JavaScript API.
 
 ## Keyboard delivery and exactly-once activation
 
 - Inspect the actual installed Pressable and native view handlers. Do not add
   key-up activation on top of an existing native press action.
-- Use `useFocusablePressable` rather than per-control key activation. Native
-  qualification found Office Win32 events with `code="Unidentified"` and a
-  valid `key`. The helper supplies one paired key-up fallback only when Win32's
+- Use `useFocusablePressable` rather than per-control key activation. Office
+  Win32 can deliver key events whose `code` is `Unidentified` (C-FOCUS-012). The helper supplies one paired key-up fallback only when Win32's
   code-based Pressability cannot activate that key; recognized codes stay native.
   Pairing is cancelled on blur, disable, and target-generation changes.
 - Preserve required native accessibility actions. Checkbox and Switch supply `Toggle`;
-  Tab supplies `Select`. The Win32 UIA toggle/selection patterns were unavailable
-  without those action declarations even though JavaScript state was correct.
-- V1 `useKeyProps` prefers key-up on Windows/Win32. It supplies Win32
-  handled-key descriptors, but its Windows branch deliberately omits descriptors
-  because of the historical `key` versus `code` mismatch. Translate and test the
-  pinned Fabric representation instead of copying either branch blindly.
+  Tab supplies `Select`. Win32 UIA patterns depend on those declarations
+  (C-FOCUS-012).
+- V1 `useKeyProps` handles Windows and Win32 key descriptors differently
+  (C-FOCUS-013). Translate and test the pinned Fabric representation instead of copying either branch blindly.
 - Treat native `Handled`/capture registration and JavaScript
   `preventDefault`/`stopPropagation` as separate mechanisms. Establish which
   cancellation reaches native navigation at each phase.
@@ -101,14 +87,13 @@ This native implementation detail is not a promised public JavaScript API.
   and accessibility actions. Global root capture observes input; it must not
   consume every key.
 
-Sources: `packages\utils\interactive-hooks\src\useKeyProps.ts:8-95,114-126`;
-`packages\agentic\native-core\windows\NativeCore\components\FocusZone\FocusZoneComponentView.cpp:71-133`.
+Evidence: C-FOCUS-013.
 
 ## Native and custom focus visuals
 
 Current new-component defaults remain native on Fabric and custom on Win32.
-V1 uses native Win32 rings and appearance-specific focused borders, so this is
-a choice to qualify, not evidence that Win32 native rings are unavailable.
+V1's native Win32 rings (C-FOCUS-014) make this a choice to qualify, not evidence
+that Win32 native rings are unavailable.
 
 - Request native rings only on the actual focus owner. Menu hover focus and
   disabled-focusable cases may require a different visibility policy from a
@@ -123,9 +108,7 @@ a choice to qualify, not evidence that Win32 native rings are unavailable.
   lifecycle. React layout units and Composition physical pixels differ; apply
   the validated point-scale conversion. Test clipping/hosting and recycling.
 
-RNW 0.81.35 has explicit focus hosting and native theme handling in installed
-`Microsoft.ReactNative\Fabric\Composition\CompositionViewComponentView.cpp`
-and `Theme.cpp`. See [Windows Fabric native components](../native/windows-fabric.md)
+RNW provides explicit focus hosting and native theme handling (C-FOCUS-014). See [Windows Fabric native components](../native/windows-fabric.md)
 for codegen, UI-thread, registration, native visual, and UIA requirements.
 
 ## Collections, popups, and platform services
@@ -158,14 +141,13 @@ Gate on actual focused element and action/announcement count, not just selected
 React state or a mocked ref call. A skipped input test is not qualification.
 Use owned app/Metro lifecycle commands and preserve unrelated sessions.
 
-The catalog now uses named WDIO callbacks. The complete Windows and Win32 smoke
-lanes each cover 18 cases with native assertions; component-focused cases use
-the `desktop-focus` tag. Check aggregate result counts for zero skips before
-claiming qualification. A disconnected input desktop can leave semantic cases
-passing while all physical-input cases skip.
+The catalog uses named WDIO callbacks, and component focus cases use the
+`desktop-focus` tag (C-FOCUS-015). Check aggregate result counts for zero skips
+before claiming qualification; a disconnected input desktop can leave semantic
+cases passing while physical-input cases skip.
 
 For delegated modifier chords, assert parent delivery and unchanged collection
 selection, not immovable native focus: the host is allowed to handle the chord.
 For native editors, distinguish noneditable/nonfocusable from UIA `IsEnabled`;
-Win32's observed enabled-state announcement gap is documented in Input's
-interaction companion and does not replace native focus assertions.
+Win32's enabled-state announcement gap (C-FOCUS-015) does not replace native
+focus assertions.

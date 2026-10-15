@@ -12,11 +12,10 @@ Read [common focus authoring](common.md) first. Match shared accessibility goals
 but do not transplant Windows click-focus, modifier, or key-up policies into
 AppKit.
 
-**Reviewed implementation:** local `react-native-macos` 0.81.9, including Fabric
-View, repository FocusZone, and Callout implementations, September 14, 2026.
-Verify the renderer branch and resolved component before use. A `.macos.tsx`
-file can be a stub: V1 Checkbox's macOS entrypoint warns and renders null, so it
-is not a valid macOS focus reference.
+Version-bound observations behind these rules are in the
+[platform evidence](platform-evidence.md), C-FOCUS-001 to C-FOCUS-007. Verify the
+renderer branch and resolved component before use. A `.macos.tsx` file can be a
+stub that is not a valid macOS focus reference (C-FOCUS-001).
 
 ## First responder, key window, and actual target
 
@@ -38,18 +37,13 @@ focus visual should be presented as active.
   detach/recycle and use common React 19 ref composition, not legacy componentRef
   exposure or global numeric-tag lookup.
 
-Local references:
-`packages\agentic\native-core\macos\components\FocusZone\shared\RCTFocusZone.m:24-35,122-129`;
-`packages\agentic\native-core\macos\components\FocusZone\fabric\RCTFocusZoneComponentView.mm:118-179`.
-Installed RNmacOS `React\Fabric\Mounting\ComponentViews\View\RCTViewComponentView.mm:1719-1804`
-implements focus/blur commands and responder event emission.
+Evidence: C-FOCUS-002.
 
 ## Pointer focus and click-through
 
-Do not force Windows-style focus-before-press on ordinary macOS controls.
-V1 `useOnPressWithFocus` recognizes macOS as focus-capable but only requests
-click focus on Windows/Win32. The installed Fabric View also overrides
-`needsPanelToBecomeKey` with a comment preserving mouse-versus-keyboard focus.
+Do not force Windows-style focus-before-press on ordinary macOS controls. V1
+requests click focus only on Windows/Win32, and the Fabric View preserves
+mouse-versus-keyboard focus (C-FOCUS-003).
 
 `acceptsFirstMouse` controls click-through in an inactive window; it is not an
 alias for `focusable`, first-responder acceptance, or keyboard ring visibility.
@@ -57,16 +51,13 @@ Test first click to activate a window separately from an actual control action.
 Menus can intentionally focus on hover, so document that owner-specific
 exception rather than forcing all click/hover paths into one rule.
 
-Evidence: `packages\utils\interactive-hooks\src\useOnPressWithFocus.ts:14-29`;
-installed RNmacOS `RCTViewComponentView.mm:1769-1779`;
-`packages\components\Menu\src\MenuItem\useMenuItem.ts:68-120`.
+Evidence: C-FOCUS-003.
 
 ## Keyboard navigation, shortcuts, and editing
 
-- V1 key helpers prefer key-down on macOS, versus key-up on Windows/Win32.
-  The macOS branches use `validKeysDown`/`validKeysUp`; current RNmacOS native
-  handling also has `keyDownEvents`/`keyUpEvents`. Resolve and validate the
-  compatibility path instead of configuring both indiscriminately.
+- V1 and RNmacOS expose both key-down and key-up handling paths, and V1 prefers
+  key-down on macOS (C-FOCUS-004). Resolve and validate the compatibility path
+  instead of configuring both indiscriminately.
 - Matching native handled-key entries suppress AppKit's `super` handling.
   Register only keys owned by the control/scope so key equivalents, native
   navigation, and text editing are not swallowed.
@@ -75,8 +66,8 @@ installed RNmacOS `RCTViewComponentView.mm:1769-1779`;
   activation. Do not copy Win32's modifier allowance or TabList Ctrl+Tab behavior.
 - Confirm exactly-once keyboard/accessibility activation; an AX action is not
   equivalent evidence to a physical key sequence.
-- RNmacOS Pressability activates Return/Space on keydown; keyup supplies
-  `onPressOut`. Keep native press cleanup separate from Windows keyup-activation
+- RNmacOS Pressability activates on key-down and releases on key-up
+  (C-FOCUS-004). Keep native press cleanup separate from Windows keyup-activation
   pairing. Intervening keys, caller cancellation, blur, disable, and target
   replacement must not strand pressed feedback or duplicate release callbacks.
   Retain a pooled event only with `persist()` and release that reference when
@@ -98,38 +89,34 @@ installed RNmacOS `RCTViewComponentView.mm:1769-1779`;
 - Do not equate VoiceOver navigation focus with the application's keyboard first
   responder. Validate role/name/value and native action behavior in both modes.
 
-Evidence: `packages\utils\interactive-hooks\src\useKeyProps.ts:8-95,114-126`;
-installed RNmacOS `RCTViewComponentView.mm:1807-1861`.
+Evidence: C-FOCUS-004.
 
 ## FocusZone and Fabric wrapper lifetime
 
-The local macOS FocusZone translates key events, recalculates the key-view loop,
-and falls back to mounted descendant order when AppKit collapses a Fabric-backed
-zone to one key-loop entry. The Fabric wrapper deliberately does not participate
-as another first-responder stop; it forwards focus to its content view.
+The macOS FocusZone owns key translation and key-view-loop recalculation, and its
+Fabric wrapper forwards focus rather than becoming another first-responder stop
+(C-FOCUS-005).
 
 Preserve that single-owner behavior. Do not add a second JS roving loop to the
 same keys. Recompute eligibility when children mount/unmount and when props
 change, and clear the default responder on recycle. Retain direction, wrap/stop,
 RTL, nested zones, scrolling, and editable-child semantics.
 
-Evidence: `packages\agentic\native-core\macos\components\FocusZone\shared\RCTFocusZone.m:584-675`;
-`packages\agentic\native-core\macos\components\FocusZone\fabric\RCTFocusZoneComponentView.mm:118-195`.
+Evidence: C-FOCUS-005.
 
 ## Popup windows and lifecycle
 
-Callout's AppKit window can become key but not main. Its `setInitialFocus` and
-`focusWindow` make the popup window key; that alone does not establish a particular
-child as first responder. Its separate Fabric touch attachment also demonstrates
-why React ancestry is not sufficient evidence for popup input capture.
+Making a popup window key does not establish a particular child as first
+responder, and React ancestry is not sufficient evidence for popup input capture
+(C-FOCUS-006).
 
 Define and test initial child focus after content attachment, Escape, nested
 popup dismissal, outside click, window/application deactivation, and guarded
 return to the parent control. Do not reactivate the application or steal the
 outside-click target's focus as an unconditional cleanup action.
 
-The legacy ContextualMenu uses a macOS timer after a layout effect. Treat it as
-evidence of a native readiness problem, not a reusable delay constant. Prefer a
+Treat the legacy ContextualMenu's post-layout timer (C-FOCUS-006) as evidence of
+a native readiness problem, not a reusable delay constant. Prefer a
 mount/window-ready handshake with cancellation and focus confirmation. Keep a
 bounded, documented workaround only if the supported renderer has no such path.
 
@@ -138,18 +125,13 @@ the owning popup/window, remove exactly once, and capture weak native owners.
 Do not install OS-global keyboard hooks or require desktop-driver permissions
 for ordinary production focus behavior.
 
-Evidence:
-`packages\agentic\native-core\macos\components\Callout\shared\CalloutWindow.swift:9-38`;
-`packages\agentic\native-core\macos\components\Callout\shared\CalloutView.swift:33-45,142-216`;
-`packages\agentic\native-core\macos\components\Callout\fabric\RCTCalloutComponentView.mm:96-132`;
-`packages\agentic\native-core\macos\components\Callout\shared\GuardedEventMonitor.swift:1-29`;
-`packages\components\ContextualMenu\src\ContextualMenu.tsx:39-55`.
+Evidence: C-FOCUS-006.
 
 ## Native versus custom ring drawing
 
 Keep native macOS rings enabled by default unless the reviewed control requires
-a custom path. The installed Fabric View draws a rounded AppKit focus mask only
-when `enableFocusRing` is true. A focusable view or an enum property by itself is
+a custom path. The Fabric View draws its focus mask only when `enableFocusRing`
+is true (C-FOCUS-007). A focusable view or an enum property by itself is
 not proof that the ring mask/drawing is implemented correctly.
 
 When drawing a custom ring, disable the competing native path and preserve the
@@ -158,8 +140,7 @@ changes, key-window transitions, clipping, appearance, Increase Contrast, and
 backing-scale changes. Use AppKit points and conversions; do not copy Windows
 Composition physical-pixel calculations into NSView layout.
 
-Evidence: installed RNmacOS `RCTViewComponentView.mm:1729-1753` and Apple's
-focus-mask documentation below. Ring colors remain a native/theme concern;
+Evidence: C-FOCUS-007 and Apple's focus-mask documentation below. Ring colors remain a native/theme concern;
 do not resolve opaque system colors through a guessed web-color fallback.
 
 ## Native service candidates and qualification
@@ -174,8 +155,7 @@ use AppKit/Swift/C++ behind that boundary without introducing UIKit assumptions.
 Run physical keyboard/pointer scenarios, VoiceOver, active/inactive windows,
 first-click behavior, keyboard-navigation settings, editable field editors, and
 native/custom rings. Include Paper only where it remains supported and Fabric
-as an independently qualified endpoint. This Windows-based documentation
-investigation did not execute a macOS native run.
+as an independently qualified endpoint.
 
 ## Public references
 

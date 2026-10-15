@@ -54,7 +54,7 @@ Most components should use the compose framework as it offers the comprehensive 
 1. Update your `package.json` file. This defines the name, fields, and dependencies of the npm package that will be published for this component.
 1. As a pattern, we prefix `experimental` components with the word "experimental". For example, we have `@fluentui-react-native/experimental-button`.
 
-**Additionally, we require integrating your new component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/fluent-tester/src/E2E. This is to create a sophisticated, in-depth testing infrastructure that ensures that we don't regress our component library in the future; giving our partners and customers the best experience possible. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/E2E#authoring-e2e-test).**
+**Additionally, we require integrating your new component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/E2E/src. This is to create a sophisticated, in-depth testing infrastructure that ensures that we don't regress our component library in the future; giving our partners and customers the best experience possible. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/E2E#authoring-e2e-test).**
 
 Reach out to Samuel Freiberg with any questions related to E2E testing.
 
@@ -63,14 +63,14 @@ Reach out to Samuel Freiberg with any questions related to E2E testing.
 1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
-   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxImportSource @fluentui-react-native/framework-base */` as the first line of this file. This opts the file into the custom JSX runtime that handles slot rendering; an explanation can be found in `packages/framework-base/src/component-patterns/README.md`. Packages using this pragma must include `@fluentui-react-native/framework-base` in their `devDependencies`.
+   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxImportSource @fluentui-react-native/framework-base */` as the first line of this file. This opts the file into the custom JSX runtime that handles slot rendering; an explanation can be found in `packages/framework-base/src/component-patterns/README.md`. Packages using this pragma must include `@fluentui-react-native/framework-base` in their `dependencies`, because compiled output imports the runtime.
    1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
 
 ### Adding a new test for your component to the test app
 
-1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `fluentui-react-native/apps/fluent-tester/src/TestComponents`.
-1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `testPages.tsx` and `testPages.<platform>.tsx`
+1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `apps/tester-core/src/TestComponents`.
+1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `apps/tester-core/src/testPages.ts`, whose `platforms` array lists the platforms where it appears
 1. Create your tests in this new subdirectory. Pattern matching off an existing control's tests will greatly help.
 1. If your component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
 1. Add your new module as a dependency in `apps/fluent-tester/package.json` and run `yarn && yarn build` from the root folder.
