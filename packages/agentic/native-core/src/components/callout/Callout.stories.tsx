@@ -17,6 +17,8 @@ function Example({ anchorKind, exerciseCommands = false }: ExampleProps) {
   const [key, setKey] = React.useState(0);
   const [status, setStatus] = React.useState('Opening');
   const [focus, setFocus] = React.useState('No focus');
+  // Dismissal is reported separately because renderers may deliver it before or after an operation settles.
+  const [dismissal, setDismissal] = React.useState('Open');
   const value: CalloutAnchor =
     anchorKind === 'view'
       ? { kind: 'view', target: anchor.target }
@@ -52,6 +54,9 @@ function Example({ anchorKind, exerciseCommands = false }: ExampleProps) {
       <View accessible accessibilityRole="text" accessibilityLabel={focus} testID="modern-callout-focus-status">
         <Text accessible={false}>{focus}</Text>
       </View>
+      <View accessible accessibilityRole="text" accessibilityLabel={dismissal} testID="modern-callout-dismissal">
+        <Text accessible={false}>{dismissal}</Text>
+      </View>
       <View style={styles.row}>
         <Pressable
           accessibilityRole="button"
@@ -61,6 +66,7 @@ function Example({ anchorKind, exerciseCommands = false }: ExampleProps) {
             setKey((value) => value + 1);
             setOpen(true);
             setStatus('Opening');
+            setDismissal('Open');
           }}
         >
           <Text>Reopen</Text>
@@ -79,7 +85,7 @@ function Example({ anchorKind, exerciseCommands = false }: ExampleProps) {
           setStatus('Ready');
           if (exerciseCommands && key > 0) void exercise();
         }}
-        onDismissed={({ reason }: CalloutDismissedEvent) => setStatus(`Dismissed: ${reason}`)}
+        onDismissed={({ reason }: CalloutDismissedEvent) => setDismissal(`Dismissed: ${reason}`)}
         content={{ style: styles.content, testID: 'modern-callout-content' }}
       >
         <Text>Native popup content</Text>
@@ -129,9 +135,11 @@ export const NativeOperations: Story = {
       await (await browser.$('~modern-callout-reopen')).click();
       await expect(await browser.$('~modern-callout-status')).toHaveText('confirmed/confirmed/confirmed');
       await expect(await browser.$('~modern-callout-focus-status')).toHaveText('Child focused');
+      await expect(await browser.$('~modern-callout-dismissal')).toHaveText('Dismissed: programmatic');
       await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, { timeout: 5000 });
       await (await browser.$('~modern-callout-reopen')).click();
       await expect(await browser.$('~modern-callout-status')).toHaveText('confirmed/confirmed/confirmed');
+      await expect(await browser.$('~modern-callout-dismissal')).toHaveText('Dismissed: programmatic');
       await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, { timeout: 5000 });
     },
   },

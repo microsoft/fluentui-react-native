@@ -168,16 +168,25 @@ Executed:
   legacy FocusZone navigation/Tab cases, modern Callout readiness/focus/close/
   rearm, and four modern FocusZone command, disabled, live-target, and
   detached-handle cases.
-- Paper (`--paper`) renders 175 stories, and every executed case (legacy
-  Callout, both legacy FocusZone default cases, modern Callout operations)
-  fails at its first story-control click: the macOS automation provider
-  "does not report an enabled state" for Paper views. This is the known
-  Desktop Driver Paper gap, so Paper runtime remains unqualified.
+- Paper first failed every executed case because the Desktop Driver required
+  `AXEnabled`, which Paper views publish only when disabled. With the driver
+  treating an absent `AXEnabled` as enabled, `yarn storybook smoke --macos
+--paper --mode stories-and-tests` renders 175 stories and runs 35 cases
+  (33 passed; the 2 skips are Fabric accessibility-projection gaps whose
+  skip conditions do not distinguish the renderer). This qualifies the Paper
+  runtime lane for the 11 native cases.
+- Full Paper runs exposed a cross-story Framework Base bug, not a native-core
+  defect: a View focused through `focusTarget.requestFocus()` stayed recorded
+  in React Native macOS `TextInputState` after unmounting (TabList), and the
+  legacy Callout story's ScrollView tap then dispatched `blur` to the removed
+  tag, which Paper raised as a RedBox sheet. Focus targets now clear that record
+  without dispatching on blur and genuine detach.
+- The same Fabric command renders 175 stories and passes the same 35-case set
+  after the driver and Framework Base changes.
 - macOS, Windows, and Win32 production bundles pass.
 
 Windows must re-run its build and the modern/legacy FocusZone cases for the
-dedicated command flag and revoker. Paper runtime cases need Desktop Driver
-enabled-state support for Paper views before they can execute.
+dedicated command flag and revoker.
 
 ### Executed evidence on Windows
 
@@ -269,8 +278,8 @@ tracking still needs full geometry qualification and follow-up; do not infer
 it from the current frame-summation positioning path.
 
 Mac local rect/point stories render, but the full one-logical-unit geometry
-matrix, 100-cycle leak test, VoiceOver/field-editor cases, and Paper runtime
-lane remain unqualified. The ObjC FocusZone navigation algorithm is retained;
+matrix, 100-cycle leak test, and VoiceOver/field-editor cases remain
+unqualified; the Paper runtime lane passes the authored native cases. The ObjC FocusZone navigation algorithm is retained;
 a full Swift port is a separate parity-preserving follow-up.
 
 ## Windows-machine validation
@@ -322,8 +331,8 @@ Passive observation must not activate a popup to inspect it.
 
 ## Remaining gates
 
-- Paper runtime/input qualification; the current automation lane targets
-  Fabric. Paper compilation alone is insufficient.
+- Paper geometry, leak, and assistive-technology qualification beyond the
+  authored runtime cases.
 - Win32 capability evidence for modern operations; do not infer either
   support or impossibility from missing observation infrastructure.
 - Older React/RN codegen and native build compatibility before changing peer
