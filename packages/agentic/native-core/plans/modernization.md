@@ -158,15 +158,26 @@ Executed:
   Objective-C sources pass. `-strict-concurrency=complete` leaves only the
   pre-existing Paper `view()` warning.
 - Fabric and Paper smoke render all 175 stories, including 17 legacy/modern
-  native stories. Every executable case, including non-native Button, failed
-  before execution at Desktop Driver session creation with "Accessibility
-  returned an incomplete or internally inconsistent window enumeration";
-  driver permission preflights pass. No runtime command case is claimed.
+  native stories. While the machine was locked, every executable case,
+  including non-native Button, failed at Desktop Driver session creation with
+  "Accessibility returned an incomplete or internally inconsistent window
+  enumeration".
+- After unlocking, `STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke
+--macos --mode stories-and-tests` (Fabric) renders 175 stories and passes all
+  11 native cases with zero skips: legacy Callout open/dismiss/recreate, five
+  legacy FocusZone navigation/Tab cases, modern Callout readiness/focus/close/
+  rearm, and four modern FocusZone command, disabled, live-target, and
+  detached-handle cases.
+- Paper (`--paper`) renders 175 stories, and every executed case (legacy
+  Callout, both legacy FocusZone default cases, modern Callout operations)
+  fails at its first story-control click: the macOS automation provider
+  "does not report an enabled state" for Paper views. This is the known
+  Desktop Driver Paper gap, so Paper runtime remains unqualified.
 - macOS, Windows, and Win32 production bundles pass.
 
 Windows must re-run its build and the modern/legacy FocusZone cases for the
-dedicated command flag and revoker; macOS must re-run the native cases once
-Desktop Driver window enumeration is healthy.
+dedicated command flag and revoker. Paper runtime cases need Desktop Driver
+enabled-state support for Paper views before they can execute.
 
 ### Executed evidence on Windows
 
