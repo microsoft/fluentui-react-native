@@ -36,6 +36,12 @@ focus visual should be presented as active.
 - Keep native view identity scoped to the mounted window/surface. Clear it on
   detach/recycle and use common React 19 ref composition, not legacy componentRef
   exposure or global numeric-tag lookup.
+- React Native macOS routes every host `focus()` through `TextInputState`, which
+  then records a View as the focused text input until a TextInput clears it. A
+  focused View that unmounts stays recorded, and the next ScrollView touch
+  dispatches `blur` to its removed tag, which Paper raises as a RedBox. Focus
+  targets clear the record without dispatching on blur and genuine detach
+  (`framework-base` `hostFocusRecord.native.ts`); route host focus through them.
 
 Evidence: C-FOCUS-002.
 
