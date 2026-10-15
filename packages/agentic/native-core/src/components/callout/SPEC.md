@@ -32,6 +32,15 @@ unmount, invalid generation and timeout produce explicit outcomes. Timeout is
 unconfirmed; cancellation cannot undo an already-executed native mutation.
 Focus remains scoped to eligible content and active owned windows.
 
-Request-only veto, precise light-dismiss classification, automatic restoration,
-popup-family transactions, modal containment and text fragments are deferred;
-no success-shaped substitutes are provided.
+Pointer input outside the popup family, Escape in focused content, and losing
+the host report `native-light-dismiss` or `host-detached`. Input in a nested
+popup does not dismiss the popups that own it. Closing a presentation that
+holds keyboard focus returns input to the owner window's retained focused
+component; outside input that already moved focus is not overridden. On
+Windows, outside input is observed for the owner island and other application
+windows; application deactivation dismisses only presentations that hold
+focus. A Menu still restores its trigger explicitly after an item closes it.
+
+Request-only veto, precise light-dismiss classification, policy-driven
+restoration, popup-family transactions, modal containment and text fragments
+are deferred; no success-shaped substitutes are provided.

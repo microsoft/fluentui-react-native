@@ -249,17 +249,22 @@ The package prebuild regenerates Windows bindings from the shared spec.
 Native
 verification must cover registration, events/commands, refs, unmount cleanup,
 error propagation, and architecture/platform parity, not only JS mocks.
-Callout's executable macOS Fabric story verifies native popup creation, `onShow` and
-`onDismiss`, outside-click dismissal, and reopening. Run it together
-with FocusZone's keyboard cases from `apps/storybook` using the owned lifecycle:
+Callout's executable stories verify native popup creation, `onShow` and
+`onDismiss`, outside-click and Escape dismissal, and reopening on macOS,
+Windows, and Win32; the modern stories add readiness, descendant focus,
+explicit close/rearm, a flat Menu composition (FocusZone entry, arrow
+navigation, and trigger restoration), and Windows anchor geometry. Run them
+together with FocusZone's keyboard cases from `apps/storybook` using the owned
+lifecycle:
 
 ```sh
 STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and-tests
 ```
 
-This traverses the full catalog before running the selected native tests.
-The macOS Desktop Driver currently targets Fabric; a successful Paper build
-does not establish Paper runtime or input parity.
+Use `--windows` or `--win32` for the Windows endpoints. This traverses the
+full catalog before running the selected native tests.
+Add `--paper` to run the macOS Paper lane; a successful Paper build alone does
+not establish Paper runtime or input parity.
 
 ## Modern component previews
 
@@ -292,10 +297,13 @@ placement behavior between the renderer adapters; the existing navigation
 algorithm is not rewritten merely to change language.
 
 Windows source/codegen and the native library build are qualified on RNW 0.81.35.
-Initial modern FocusZone command/target-lifetime and legacy navigation cases
-pass; Windows Callout runtime and the remaining protocol/geometry cases are
-still unqualified. Win32 legacy FocusZone cases pass, while its Callout
-popup-operation automation remains unqualified.
+Modern FocusZone command/target-lifetime, legacy navigation, legacy and
+modern Callout readiness, explicit operations, outside-input and Escape
+dismissal, rearm, owner focus return, flat Menu composition, and 100% scale
+anchor geometry pass on Windows. Win32 legacy FocusZone and legacy Callout
+outside-click/recreate and Escape cases pass. Remaining Windows protocol
+races, DPI/RTL/scroll geometry, and macOS execution of the new authored
+Callout cases are tracked in the plan.
 Root/Win32 admission, older-peer builds, popup-family transactions,
 restoration/Tab policy, text fragments, modal containment, and a real module
 remain explicit gates. See the repository's `plans/modernization.md` for the

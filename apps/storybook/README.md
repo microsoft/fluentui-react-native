@@ -181,9 +181,10 @@ exact app process launched by the smoke lifecycle. After traversal, the Windows
 Fabric lifecycle restarts only that owned app and rewrites its lease before
 running authored tests against the warm Metro bundle. Logs are written
 beneath `artifacts/windows/smoke-logs`.
-The Accordion and Callout stories remain excluded from the Windows catalog
-because the current RNW 0.81 Fabric host still fail-fasts while traversing
-them. Win32 continues to exercise Callout through its Paper endpoint.
+The Accordion stories remain excluded from the Windows catalog because the
+current RNW 0.81 Fabric host still fail-fasts while traversing them. Native-core
+Callout and FocusZone stories, legacy and modern, run on Windows; Win32 also
+exercises the legacy Callout through its Paper endpoint.
 
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;

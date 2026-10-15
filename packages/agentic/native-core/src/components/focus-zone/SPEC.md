@@ -26,6 +26,9 @@ void focus return. Entry preferences must not override an explicit command
 destination. Requests are generation-fenced, cancellable, bounded by
 an explicit timeout, and invalidated on component/target replacement.
 Missing mounts are not queued; inactive windows are not reactivated.
+A zone inside an owned popup, such as Callout content, is active while the
+popup's owner chain includes the active window, so a Menu can enter and move
+within its list on both hosts.
 Cancellation cannot reverse a mutation already executed natively.
 
 Disabled discoverability, remembered focus, natural cross-popup Tab

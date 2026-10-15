@@ -65,10 +65,16 @@ Do not raise legacy React/RN peer floors implicitly.
       lifetime, and legacy navigation qualification.
 - [x] Win32 legacy FocusZone regression and Callout story rendering; no new
       managed transport.
-- [ ] Remaining Windows FocusZone protocol/inactive-window cases and Callout
-      runtime/geometry qualification.
-- [ ] Win32 legacy Callout popup-operation qualification; its macOS-only
-      executable case is skipped on Win32.
+- [x] Windows Callout runtime (2026-10-15): popup-creation crash fix,
+      per-mount popup/subscription ownership, outside-input and Escape
+      dismissal, owner keyboard return, FocusZone requests inside owned
+      popups, a flat Menu composition, and 100% scale view/rect/point
+      geometry. Rework FocusZone cases pass on the rebuilt library.
+- [ ] Remaining Windows FocusZone native generation/stale-result,
+      pending-race, and inactive-window cases; Callout DPI/RTL/negative-origin,
+      collision/flip, scroll/transform, and repeated-cycle resource checks.
+- [x] Win32 legacy Callout outside-click/recreate and Escape popup operations
+      (2026-10-15); modern operations remain unadmitted on Win32.
 - [ ] Publishing, peer-floor, root-admission decisions.
 
 This checklist is updated only with completed work and executed evidence.
@@ -186,7 +192,94 @@ Executed:
 - macOS, Windows, and Win32 production bundles pass.
 
 Windows must re-run its build and the modern/legacy FocusZone cases for the
-dedicated command flag and revoker.
+dedicated command flag and revoker. (Windows did so on 2026-10-15; the
+revoker crashed RNW and was replaced. See below.)
+
+### 2026-10-15 Windows Callout and Menu prerequisites
+
+Executed on Windows 11 x64 at 100% scale (96 DPI) with Node 24.15.0, RNW
+0.81.35, react-native-win32 0.81.9, and the rebuilt Debug x64
+`FRNNativeCore.dll` (zero warnings/errors).
+
+Root cause and changes:
+
+- Every Windows Callout mount crashed the RNW host with an access violation in
+  `FRNNativeCore.dll` (`weak_ref<IInputLightDismissAction>::from_com_ref`):
+  `InputLightDismissAction` does not support weak references, so the macOS
+  session's `auto_revoke` subscription faulted at popup creation. The fault
+  surfaced as the next story failing to render. Subscriptions now use
+  explicit tokens.
+- Each mount owns its popup, window, and subscriptions; unmount hides and
+  reports a shown presentation once (`host-detached`) and releases them for
+  both facades. Legacy views no longer leave a visible popup after unmount.
+  Visibility, readiness, and closure share one dismissal transition.
+- `InputLightDismissAction` reports outside input only while the popup island
+  has focus. Windows now mirrors the macOS local mouse monitor: while shown, a
+  Callout observes the owner island's `InputPointerSource` and a UI-thread
+  message hook for other application windows (including the owner's
+  non-client area). Input in a nested popup does not dismiss its owners.
+- Escape in focused popup content dismisses as `native-light-dismiss`, like
+  AppKit `cancelOperation`. Legacy `dismissBehaviors` are honored.
+- Closing a presentation that holds keyboard focus returns input to the owner
+  island, whose retained focused component regains focus, matching AppKit's
+  owner-window key restoration.
+- FocusZone and Callout focus requests treat an owned popup as active while
+  its root owner is the foreground window (macOS already walks parent
+  windows), so a FocusZone inside Callout content can enter and navigate.
+- Work-area flips keep the requested gap; local rect/point offsets round to
+  physical pixels.
+- The Windows Desktop Driver retries a UI Automation subtree read when a
+  descendant (a closing popup island) disappears while the window root
+  remains available.
+- Windows now includes every native-core story; the story override was
+  removed. New/updated authored cases: legacy outside-click/recreate and
+  Escape (all hosts), modern light-dismiss/rearm, Escape, separated
+  lifecycle/operation status labels, Menu composition, and Windows-only
+  view/rect/point geometry (owned popup content is exposed in the owner
+  window's accessibility tree only on Windows).
+
+Executed:
+
+- `yarn workspace @fluentui-react-native/native-core test` (build, stories,
+  Node contracts, 30 Jest/type tests, one snapshot), `test:stories`, `lint`,
+  and `format --check` pass.
+- From `apps/storybook`: `yarn storybook prep --windows`, `build --windows`,
+  `bundle --windows`, and `build-driver --windows` pass.
+- Before the fixes, five Windows Event Log `Application Error` records showed
+  `0xc0000005` at the same `FRNNativeCore.dll` offset; offline
+  `llvm-symbolizer` mapped it to the revoker's weak reference. None recur.
+- `$env:STORYBOOK_SMOKE_STORY = 'native-*'; yarn storybook smoke --windows --mode stories-and-tests`
+  renders 170 stories (all native-core stories) and passes 18 cases with zero
+  failures/skips: five legacy FocusZone cases from the components catalog
+  (directional/spatial, Tab/Shift+Tab exits), four modern FocusZone cases,
+  two legacy Callout cases, and seven modern Callout cases (light-dismiss/
+  rearm, Escape, focus/reposition/close/rearm, Menu composition, and three
+  geometry cases within one logical unit). No owned listener remained.
+- A manual owned-host probe confirmed no leaked popup windows after Callout
+  teardown, title-bar and owner client clicks dismiss, and a click inside the
+  popup does not.
+- `$env:STORYBOOK_SMOKE_STORY = 'native-*'; yarn storybook smoke --win32 --mode stories-and-tests`
+  renders 152 stories and passes seven cases with zero failures/skips: the
+  five legacy FocusZone cases plus the host-provided legacy Callout's
+  outside-click/recreate and Escape cases. No owned listener remained.
+- `yarn workspace @fluentui-react-native/native-core codegen:windows --check`
+  passes without generated-source changes.
+- `yarn workspace @fluentui-react-native/desktop-driver test` passes 58 tests
+  (three native-gated skips); with `FURN_NATIVE_DRIVER_TEST=1` and
+  `--runInBand`, the Windows native contract passes 59 tests (two
+  platform-gated skips).
+- `yarn clean-lage-cache` then `yarn lage buildci`: every task passes except
+  root `lint-repo`, whose knip step reports unused dependencies only in
+  untouched packages and fails identically on clean `HEAD` on this Windows
+  machine. One `storybook-desktop` test failed once under the parallel run;
+  the package's 175 tests pass in isolation and the task passes on a
+  `--continue` rerun. `yarn change:check` passes.
+
+Not established: macOS execution of the new/changed authored cases (they are
+platform-neutral apart from Windows-only geometry), DPI other than 100%, RTL,
+negative monitor origins, collision/flip geometry, scrolled or transformed
+anchors (the frame-summing position ignores scroll offsets), app deactivation
+for presentations without focus, and repeated-cycle resource measurements.
 
 ### Executed evidence on Windows
 
@@ -239,8 +332,9 @@ and consolidated `FRNNativeCore.dll` were rebuilt after the source fix;
 - Both owned native smoke lifecycles shut down their app/services; their
   channel, Metro, and driver ports have no remaining listeners.
 
-The Windows Callout story exclusion is unchanged. Native C++ compilation
-does not qualify its popup operations, geometry, or resource lifecycle.
+The Windows Callout story exclusion was unchanged on 2026-10-02; it was
+removed on 2026-10-15 after the crash fix and native Callout qualification
+above.
 
 ### How to exercise the new API
 
@@ -256,26 +350,39 @@ Callout `onReady` supplies an opaque presentation; its handle exposes
 `requestFocus(presentation, target)`, `reposition(presentation)`, and
 `close(presentation)`. Results are not inferred from void commands.
 
-The initial close operation does not perform automatic restoration or family
-closure. These policies remain for the Menu/Popover stage. Do not treat a
-timeout as evidence that no native mutation occurred.
+The initial close operation does not perform policy-driven restoration or
+family closure. Closing a focused presentation returns keyboard input to the
+owner window's retained focus on both hosts; a Menu still restores its
+trigger explicitly after an item closes it. Do not treat a timeout as evidence
+that no native mutation occurred.
+
+A flat nonmodal Menu or Popover composes these primitives: controlled
+`open`/`presentationKey`, a view anchor on the trigger, `onReady` followed by
+`commandsRef.requestFocus('first' | 'last')` on a FocusZone inside `content`,
+FocusZone arrow navigation, `onDismissed` reasons for outside input/Escape/
+host loss, and `close(presentation)` after item invocation. The
+`MenuComposition` story is the executable reference on Windows. Win32 Menu
+and Popover use the `/legacy` Callout and FocusZone (`setInitialFocus`,
+`dismissBehaviors`, `onDismiss`, and the FocusZone `focus()` ref).
 
 ### Known remaining implementation/qualification
 
 The first foundation/primitive milestone is implemented, not the entire
 Menu/Popover roadmap. Family transactions, safe restore/owner-relative Tab,
-text layout providers, modal isolation, actual Menu/Popover integration,
+text layout providers, modal isolation, actual Menu/Popover components,
 disabled discoverability, and a real module remain.
 
-Windows helpers/handlers and local rect/point placement now compile on RNW
-0.81.35. Initial FocusZone focus-result identity, scoped target rejection,
-detached handles, and legacy navigation have native evidence. Native
-generation mismatch/stale result, pending abort/unmount races, target
-replacement, inactive-window refusal, and broader resource checks remain.
-Windows Callout runtime behavior remains excluded and unqualified.
-Windows ancestor transform/scroll
-tracking still needs full geometry qualification and follow-up; do not infer
-it from the current frame-summation positioning path.
+Windows FocusZone focus-result identity, scoped target rejection, detached
+handles, legacy navigation, and FocusZone entry inside an owned popup have
+native evidence. Native generation mismatch/stale result, pending
+abort/unmount races, target replacement, and inactive-window refusal remain.
+Windows Callout readiness, explicit operations, outside-input/Escape
+dismissal, rearm, owner focus return, teardown without leaked popups, and
+100% scale view/rect/point geometry are qualified. Windows ancestor
+transform/scroll tracking still needs follow-up; do not infer it from the
+current frame-summation positioning path. DPI, RTL, negative monitor origins,
+collision/flip, app deactivation without popup focus, and repeated-cycle
+resource checks remain.
 
 Mac local rect/point stories render, but the full one-logical-unit geometry
 matrix, 100-cycle leak test, and VoiceOver/field-editor cases remain
@@ -307,19 +414,20 @@ yarn storybook prep --windows
 yarn storybook build --windows
 yarn storybook bundle --windows
 yarn storybook smoke --windows --mode stories
-STORYBOOK_SMOKE_STORY='native-modern-focuszone--*' yarn storybook smoke --windows --mode stories-and-tests
+STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --windows --mode stories-and-tests
 yarn storybook bundle --win32
-yarn storybook smoke --win32 --mode stories
+STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --win32 --mode stories-and-tests
 ```
 
-The existing Windows Callout story exclusion must not be removed merely to
-claim qualification. Inspect the fresh native library/provider and first
-actionable failure. Record exact commands, versions, pass/fail/skip counts,
-and whether a case actually exercises the new protocol.
+Inspect the fresh native library/provider and first actionable failure. A
+Windows host crash can surface as the next story failing to render; check
+whether the owned host exited before treating it as a render timeout. Record
+exact commands, versions, pass/fail/skip counts, and whether a case actually
+exercises the new protocol.
 
-Windows currently includes the three modern FocusZone stories, not modern
-Callout. Win32 includes only legacy native-core stories; modern previews are
-not imported and no new managed fields/commands are dispatched there.
+Windows includes every native-core story, legacy and modern. Win32 includes
+only legacy native-core stories; modern previews are not imported and no new
+managed fields/commands are dispatched there.
 
 Required scenarios: command-generation mismatch, stale result, abort/unmount,
 default/first/last/specific descendant focus, disabled/unfocusable/outside
@@ -328,6 +436,20 @@ navigation/refs. For Callout: actual readiness, close/reopen without an
 automatic reopen loop, target replacement, local rect/point placement,
 alignment/gap/collision, DPI/RTL/negative monitor origins, and teardown.
 Passive observation must not activate a popup to inspect it.
+
+### macOS rerun required
+
+The 2026-10-15 Windows session changed authored stories that also run on
+macOS: the legacy Callout outside-click case now runs on every host, legacy
+`WindowCommands` adds Escape, and modern Callout adds light-dismiss, Escape,
+and Menu composition cases. After reconciliation with the macOS Paper work,
+modern Callout reports lifecycle (`modern-callout-status`), operation results
+(`modern-callout-operations`), and dismissal (`modern-callout-dismissal`)
+separately; readiness resets the dismissal label so an automatic reopen of a
+latched presentation is observable. Run
+`STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and-tests`
+with and without `--paper`, and record whether Menu composition restores the
+trigger through AppKit's owner-window key restoration.
 
 ## Remaining gates
 

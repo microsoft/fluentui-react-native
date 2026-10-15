@@ -130,6 +130,10 @@ Error data may include bounded operation names, native diagnostic codes, and
 artifact IDs. It must not expose unrestricted environment values, native
 handles, or arbitrary physical paths.
 
+On Windows, a lookup or tree read whose root remains live retries briefly when
+a descendant disappears mid-read, such as a closing owned popup; only a
+detached root reports `stale element reference`.
+
 ## Storybook readiness
 
 When a target provides a `StoryOrchestrator`, the consumer validates:

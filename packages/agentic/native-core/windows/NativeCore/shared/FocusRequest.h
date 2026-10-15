@@ -20,16 +20,20 @@ inline bool Eligible(const rn::ComponentView &view) noexcept {
   return eligible && eligible.Tag() == view.Tag();
 }
 
+// A window is active when it, or the root owner of an owned popup such as a Callout, is the foreground window.
+inline bool WindowActive(HWND hwnd) noexcept {
+  const auto foreground = ::GetForegroundWindow();
+  return foreground && hwnd && (::GetAncestor(hwnd, GA_ROOT) == foreground || ::GetAncestor(hwnd, GA_ROOTOWNER) == foreground);
+}
+
 inline std::string FocusWithin(
     const rn::ComponentView &container, int64_t tag,
-    const std::string &strategy, int64_t defaultTag = 0, HWND allowedOwner = nullptr) noexcept {
+    const std::string &strategy, int64_t defaultTag = 0) noexcept {
   if (!container) return "not-mounted";
   auto root = container.as<comp::ComponentView>().Root();
   if (!root) return "not-ready";
   auto hwnd = container.as<::Microsoft::ReactNative::Composition::Experimental::IComponentViewInterop>()->GetHwndForParenting();
-  auto foreground = ::GetForegroundWindow();
-  if (!foreground || (::GetAncestor(hwnd, GA_ROOT) != foreground &&
-                      (!allowedOwner || ::GetAncestor(allowedOwner, GA_ROOT) != foreground))) return "inactive-window";
+  if (!WindowActive(hwnd)) return "inactive-window";
 
   rn::ComponentView target{nullptr};
   if (strategy == "target") target = FindDescendant(container, tag);

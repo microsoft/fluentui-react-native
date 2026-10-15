@@ -653,8 +653,20 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   };
 
   winrt::com_ptr<IUIAutomationElement> cachedRoot;
-  const HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
-                                                 cachedRoot.put());
+  HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
+                                           cachedRoot.put());
+  // A descendant can disappear while its subtree is cached, for example when an owned popup island closes. Retry
+  // while the root itself remains available; only an unavailable root is a stale element.
+  for (int attempt = 0; result == UIA_E_ELEMENTNOTAVAILABLE && attempt < 5; attempt += 1) {
+    winrt::com_ptr<IUIAutomationElement> probe;
+    if (FAILED(root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, controlViewOnly).get(), probe.put())) ||
+        !probe) {
+      break;
+    }
+    token.Wait(20);
+    cachedRoot = nullptr;
+    result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(), cachedRoot.put());
+  }
   if (result == UIA_E_ELEMENTNOTAVAILABLE) {
     Fail(kErrorStaleElement, "The native element is no longer available.");
   }
