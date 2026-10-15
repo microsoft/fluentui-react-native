@@ -86,6 +86,8 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
   /win32/        - Win32-specific test app
   /component-generator/ - Tool to generate new components
 /packages/       - Core library packages
+  /agentic/components/ - Modern agentic component implementation package
+  /agentic/design/ - Common design ancestor package
   /agentic/native-core/ - Shared modern native components and TurboModules
   /components/   - UI component implementations (Button, Checkbox, Avatar, etc.)
   /shim/         - Compatibility entrypoints (Callout, FocusZone, theming, etc.)
@@ -94,6 +96,7 @@ This is the **FluentUI React Native** repository, a monorepo containing React Na
     /theme/      - Theme system
     /use-tokens/ - Token-based styling hooks
     /use-slots/  - Slot-based component composition
+  /framework-base/ - Base package used by all component packages
   /theming/      - Theme definitions for different platforms
     /android-theme/
     /apple-theme/

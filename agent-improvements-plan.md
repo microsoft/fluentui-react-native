@@ -439,8 +439,8 @@ Use `Answered` or `Deferred`; a deferral should name its reconsideration event.
 
 ### D01: Shared home
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** `references/agents`
 
 Choose `references/agents/` (recommended), root `references/`, or
 `.github/references/`. The first preserves a root reference namespace for
@@ -449,8 +449,8 @@ every option.
 
 ### D02: Workflow granularity
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** the recommended hybrid model
 
 Choose the hybrid above (recommended), separate v0/v1 implementation skills
 with one review router, or all eight `implement-*`/`review-*` skills. Separate
@@ -458,8 +458,8 @@ generation recipes and native-overlay composition are required in all cases.
 
 ### D03: Names and discoverable compatibility
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** keep existing names where applicable. Use `implement-native-component`
 
 Keep existing names initially (recommended), or adopt `implement-*` consistently,
 including renaming agentic authoring. Choose whether the native name should be
@@ -468,8 +468,8 @@ aliases; define any supported transition period explicitly.
 
 ### D04: v1 admission policy
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** maintenance-only
 
 Are new v1 components supported, maintenance-only, or allowed only for specific
 compatibility requirements? The reviewers did not establish a current
@@ -477,8 +477,8 @@ maintenance-only v1 prohibition. Do not invent one during reorganization.
 
 ### D05: Required clients and adapter behavior
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** GitHub Copilot CLI is the main entrypoint, use AGENTS.md files where appropriate, keep the repository root CLAUDE.md with the AGENTS.md import
 
 Name required clients/versions: Copilot CLI, Claude Code, VS Code, cloud coding
 agent, code review, Agency, or others. Claude/GPT models inside Copilot are not
@@ -487,8 +487,8 @@ matrix verifies imports, nested scopes, skill discovery, and duplication.
 
 ### D06: Safety material
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** Approve deferred extraction with parity review
 
 Approve deferred extraction with parity review (recommended), retain full
 safety guidance always-on permanently, or specify another boundary. Short
@@ -497,8 +497,8 @@ no actual policy change is included.
 
 ### D07: Metadata convention
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** Use the recommended approach for frontmatter but make it standardized
 
 Choose minimal frontmatter plus selective IDs (recommended), a single minimal
 catalog instead, or plain Markdown initially. Do not duplicate routing and
@@ -507,8 +507,8 @@ and computed hashes, not manually maintained per-file versions.
 
 ### D08: Pilot resource budget and thresholds
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** make efficiency reporting only
 
 Approve/adjust the six development and four holdout cases, configurations,
 run/retry ceiling, and evidence method before runs. Choose whether efficiency
@@ -517,8 +517,8 @@ The first pilot does not promise a 30% reduction or an 8 KB root.
 
 ### D09: Checker and CI scope
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** use a small deterministic integrity checker, it should be executable from the repo root and run when 'yarn lage buildci' is executed (which will make it happen in CI)
 
 Approve a small deterministic integrity checker and later CI wiring
 (recommended), or manual checks initially. Decide whether it is invoked by
@@ -527,8 +527,8 @@ instruction integrity, not model behavior.
 
 ### D10: Shared recipes and compatibility retirement
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** Err on the side of centralized recipes with an clear taxonomy for organization and extension for things which are likely to be used by multiple skills, reviewers, evals, or should be part of the general knowledge base. Keep things skill-local if they are really skill specific.
 
 Approve consumer-driven recipe moves (recommended), centralize all agent
 recipes, or retain skill-local recipes. Keep contract source adapters local
@@ -537,8 +537,8 @@ paths; preserve product-linked anchors irrespective of routine cleanup.
 
 ### D11: Evidence storage
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** use the recommended approach
 
 Choose checked-in sanitized case fixtures with local execution evidence
 (recommended), entirely local cases, or a separately approved external store.
@@ -547,8 +547,8 @@ selection can remain deferred.
 
 ### D12: Improvement loop
 
-**Status:** Unanswered  
-**Answer:**
+**Status:** Answered
+**Answer:** defer the assess-agent-efficiency skill
 
 Defer `assess-agent-efficacy` until the pilot establishes useful measurements
 (recommended), add a proposal-only skill earlier, or omit it. Define reviewer
