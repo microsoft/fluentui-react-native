@@ -86,6 +86,7 @@ describe('agent instruction helpers', () => {
   it('creates GitHub-style anchors', () => {
     assert.equal(slugify('4. Native obligations'), '4-native-obligations');
     assert.equal(slugify('`includesGeneratedCode` is not Windows-scoped'), 'includesgeneratedcode-is-not-windows-scoped');
+    assert.equal(slugify('Use <code>x</code> and <<b>b>bold</b>'), 'use-x-and-bold');
     assert.deepEqual([...collectAnchors('# A\n## A\n```\n# ignored\n```\n<a id="custom"></a>\n')], ['a', 'a-1', 'custom']);
   });
 

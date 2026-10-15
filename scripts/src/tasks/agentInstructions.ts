@@ -107,11 +107,25 @@ function isGitIgnored(root: string, rel: string): boolean {
   }
 }
 
+/** Removes inline HTML tags from heading text by scanning, so nested or malformed markup cannot survive. */
+function removeTags(text: string): string {
+  let result = '';
+  let depth = 0;
+  for (const character of text) {
+    if (character === '<') {
+      depth++;
+    } else if (character === '>' && depth > 0) {
+      depth--;
+    } else if (depth === 0) {
+      result += character;
+    }
+  }
+  return result;
+}
+
 /** GitHub-style heading anchor. */
 export function slugify(heading: string): string {
-  return heading
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/<[^>]+>/g, '')
+  return removeTags(heading.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1'))
     .trim()
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s_-]/gu, '')
