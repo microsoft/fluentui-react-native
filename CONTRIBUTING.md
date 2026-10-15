@@ -13,11 +13,18 @@ This guide assumes you:
 
 There are some specific quirks to this repository that one should be familiar with.
 
-### Old framework vs new framework (Compose V2)
+### Component generations
 
-There's [documentation](./packages/components/README.md) for how to author a control, specifically with the two frameworks [foundation-compose](./packages/deprecated/foundation-compose/README.md) and [foundation-composable](./packages/deprecated/foundation-composable/README.md). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
+The repository contains three generations of components. Identify the generation from a component's imports and
+structure before changing it; the [classification guide](./references/agents/components/classification.md) describes
+how.
 
-There are two directories where components exist, the normal `packages/components` and `packages/experimental`. In general, the `experimental` directory is where components and frameworks we are iterating on get placed.
+- **v0:** components built on [foundation-compose](./packages/deprecated/foundation-compose/README.md). These are
+  maintenance-only.
+- **v1:** components built on `@fluentui-react-native/framework` `compose` or `compressible`, usually exported with a
+  `V1` suffix from `packages/components` and `packages/experimental`. These are maintenance-only.
+- **Agentic:** components in [`packages/agentic/components`](./packages/agentic/components), built from reviewed
+  contracts with framework-base patterns and design tokens. **All new components use this package.**
 
 ## Understanding the framework
 
@@ -42,42 +49,64 @@ Tokens help us achieve simpler customization for complex higher order components
 
 ## Creating a new component
 
-This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
+New components go in [`packages/agentic/components`](./packages/agentic/components): a styled higher-order component in
+`src/components/<name>`, or an unstyled building block in `src/primitives/<name>`. Do not create new v0 or v1 component
+packages under `packages/components` or `packages/experimental`; those generations accept maintenance only. Read the
+package's [contributor instructions](./packages/agentic/components/AGENTS.md) and use
+[Button](./packages/agentic/components/src/components/button) and
+[Icon](./packages/agentic/components/src/primitives/icon) as the canonical examples.
 
-Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework-base/src/component-patterns/phased.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+### Define the contract
 
-1. Create a new directory in of these two locations, depending on your component:
-   - `fluentui-react-native/packages/components/<new-component>`
-   - `fluentui-react-native/packages/experimental/<new-component>`
+1. A higher-order component starts with a reviewed contract: `SPEC.md` plus `spec/source.json`, `spec/tokens.yaml`,
+   `spec/accessibility.md`, `spec/interaction.md`, and `spec/usage.md`. Follow
+   [SPEC-SOURCE.md](./packages/agentic/components/SPEC-SOURCE.md) for provenance, review state, and source adapters.
+1. A primitive instead keeps a colocated `CONTRACT.md` that describes its public API and renderer branches.
+1. Run `yarn workspace @fluentui-react-native/components check:spec-contracts` to validate the contract.
 
-1. Copy the files from the top level of another component (A good example of this is the Shimmer). Make sure to empty the changelog file, and modify the name of the component where appropriate.
-1. Update your `package.json` file. This defines the name, fields, and dependencies of the npm package that will be published for this component.
-1. As a pattern, we prefix `experimental` components with the word "experimental". For example, we have `@fluentui-react-native/experimental-button`.
+### Add the source code
 
-**Additionally, we require integrating your new component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/E2E/src. This is to create a sophisticated, in-depth testing infrastructure that ensures that we don't regress our component library in the future; giving our partners and customers the best experience possible. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/E2E#authoring-e2e-test).**
+A higher-order component uses these files, in dependency order:
 
-Reach out to Samuel Freiberg with any questions related to E2E testing.
+1. `<component>.types.ts`: public props, slots, and resolved state.
+1. `use<Component>.ts`: defaults, derived state, interaction, accessibility, and slot construction.
+1. `<component>.styles.ts` and `use<Component>Styles.ts`: token-based styles and slot style application.
+1. `render<Component>.tsx`: pure slot rendering. Put `/** @jsxImportSource @fluentui-react-native/framework-base */` on
+   the first line of files that render slots; see `packages/framework-base/src/component-patterns/README.md`.
+1. `<component>.ts`: assembly and `displayName`.
 
-### Adding the JS source code to your component
+Expose the native root ref through the React 19 `ref` prop rather than `forwardRef`. Export the component and its public
+types explicitly from `src/index.ts`, or from `src/primitives/index.ts` for a primitive; do not use `export *`.
 
-1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
-   1. `index.ts`
-      - This is the file listed as `main` inside your package.json and simply exports other files.
-   1. `<new-component>.tsx` - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens. - Note that we need the comment `/** @jsxImportSource @fluentui-react-native/framework-base */` as the first line of this file. This opts the file into the custom JSX runtime that handles slot rendering; an explanation can be found in `packages/framework-base/src/component-patterns/README.md`. Packages using this pragma must include `@fluentui-react-native/framework-base` in their `dependencies`, because compiled output imports the runtime.
-   1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
-      - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
+### Test your component
 
-### Adding a new test for your component to the test app
+1. Colocate runtime tests, type tests, and snapshots with the implementation.
+1. Add Storybook stories next to the component. Desktop behavior tests are `wdio` functions in the stories and run on
+   macOS, Windows, and Win32 through the [agentic Storybook app](./apps/storybook/README.md).
+1. Run the package's declared scripts, such as `yarn workspace @fluentui-react-native/components test`, plus `build`,
+   `lint`, and `format`.
+1. Before opening a pull request, run `yarn clean-lage-cache` and then `yarn lage buildci` from the repository root.
 
-1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `apps/tester-core/src/TestComponents`.
-1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `apps/tester-core/src/testPages.ts`, whose `platforms` array lists the platforms where it appears
-1. Create your tests in this new subdirectory. Pattern matching off an existing control's tests will greatly help.
-1. If your component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
-1. Add your new module as a dependency in `apps/fluent-tester/package.json` and run `yarn && yarn build` from the root folder.
-   1. If your component has native apple code, run `pod install` from the corresponding macOS or iOS test app folders (`apps/fluent-tester/macos` or `apps/fluent-tester/ios` respectively).
-1. Run the test app and you should see your new test!
+### Maintaining v0 and v1 components
+
+Fixes to existing v0 and v1 components keep their current framework, public API, and tests:
+
+1. FluentTester test pages are located under `apps/tester-core/src/TestComponents`. Register a page in
+   `apps/tester-core/src/testPages.ts`, whose `platforms` array lists the platforms where it appears.
+1. End-to-end tests live in `apps/E2E/src/<Component>`. See
+   [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/E2E#authoring-e2e-test),
+   and reach out to Samuel Freiberg with questions about E2E testing.
+1. If a component contains a native module, add its `podspec` path to the FluentTester Podfile. The React Native
+   community CLI does not support
+   [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347). Then run
+   `yarn && yarn build` from the root, and run `pod install` from `apps/fluent-tester/macos` or `apps/fluent-tester/ios`
+   for native Apple code.
 
 ## Adding native code to your new component
+
+New modern native components and TurboModules belong in
+[`@fluentui-react-native/native-core`](./packages/agentic/native-core/README.md) rather than a new standalone package.
+The sections below describe the native wrappers used by existing v0 and v1 packages.
 
 Through the power of [Native Modules](https://reactnative.dev/docs/turbo-native-modules-introduction), we are able to create components that are comprised of native platform code, rather than JS. This is particularly useful if you want platform specific behavior, or if you want a component that feels much more aligned to it's specific platform. The downside is you must implement the Native module for every platform you wish to support. It's worth investigating whether you truly need a native module, or if a more cross platform JS implementation is the better approach.
 
