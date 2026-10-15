@@ -7,7 +7,7 @@ import type { ReactTestRenderer } from 'react-test-renderer';
 import { useSlot } from '../component-patterns/useSlot';
 import type { PropsWithRefOf } from '../types/props.types';
 import { useFocusablePressable } from './useFocusablePressable';
-import type { FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable';
+import type { FocusablePressableOptions, FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable';
 import type { FocusTargetBinding } from './useFocusTarget';
 
 function keyboardEvent(key: string, extras: Partial<FocusKeyboardEvent['nativeEvent']> = {}) {
@@ -34,12 +34,17 @@ describe('focusable pressable', () => {
     jest.restoreAllMocks();
   });
 
-  function render(props: FocusablePressableProps = {}, userRef?: React.Ref<React.ComponentRef<typeof View>>, inlineFocusRef = false) {
+  function render(
+    props: FocusablePressableProps = {},
+    userRef?: React.Ref<React.ComponentRef<typeof View>>,
+    inlineFocusRef = false,
+    options?: FocusablePressableOptions,
+  ) {
     const instance = { focus: jest.fn() };
     const bindings: FocusTargetBinding[] = [];
     let pressed = false;
     function Probe({ input }: { input: FocusablePressableProps }) {
-      const [native, state, binding] = useFocusablePressable(input);
+      const [native, state, binding] = useFocusablePressable(input, options);
       pressed = state.pressed;
       bindings.push(binding);
       const rootProps: PropsWithRefOf<typeof View> = { ...native, children: null, style: undefined, ref: userRef };
@@ -76,6 +81,22 @@ describe('focusable pressable', () => {
     });
     act(() => subject.props().onPress({ target: 2, currentTarget: 1, nativeEvent: { target: 2 } }));
     expect(calls).toEqual(platform === 'macos' ? ['press'] : ['focus', 'press']);
+  });
+
+  it.each<[string, FocusablePressableOptions['pointerFocus'], boolean]>([
+    ['macos', 'always', true],
+    ['windows', 'never', false],
+    ['win32', 'never', false],
+    ['macos', 'never', false],
+  ])('on %s applies the explicit %s pointer-focus mode', (platform, pointerFocus, focuses) => {
+    jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    const subject = render({ onPress: jest.fn() }, undefined, false, { pointerFocus });
+    const requestFocus = jest.spyOn(subject.bindings[0].focusTarget, 'requestFocus');
+    act(() => subject.props().onPress({ target: 1, currentTarget: 1, nativeEvent: { target: 1 } }));
+    expect(requestFocus.mock.calls).toEqual(focuses ? [['pointer']] : []);
+    requestFocus.mockClear();
+    act(() => subject.props().onPress(keyboardEvent('Enter')));
+    expect(requestFocus).not.toHaveBeenCalled();
   });
 
   it('preserves callback refs and ignores descendant focus while forwarding handlers', () => {
