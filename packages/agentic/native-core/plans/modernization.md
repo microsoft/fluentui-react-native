@@ -48,8 +48,11 @@ Do not raise legacy React/RN peer floors implicitly.
 - [x] Native-sharing instructions and initial modern contracts.
 - [x] Passive live attachments, callback cleanup, generation fencing and
       bounded abort/timeout/native-result correlation.
-- [x] Private CalloutHost/FocusZoneHost boundary shared by legacy and modern
-      facades; existing compatibility tests and both shim tests pass.
+- [x] Hook-free private CalloutHost shared by legacy and modern Callout;
+      FocusZone facades share the native registration. Existing compatibility
+      tests and both shim tests pass.
+- [x] Phased modern facades: hooks and slots in the first phase, a hook-free
+      render phase, and documented first-phase slot props.
 - [x] Modern FocusZone native ref, commandsRef, enum/default-target translation,
       scoped default/first/last/specific native requests, and result events.
 - [x] Modern Callout presentation handles, physical-close latch/rearm,
@@ -79,8 +82,8 @@ Compilation, authored tests, and skipped tests are not native qualification.
 - Both shim tests pass (two tests each); root `yarn build` passes.
 - Uncached repository `yarn lage test --no-cache --concurrency 4` passes all
   82 tasks. A downstream ContextualMenu snapshot caught style-array
-  normalization through slot ref composition; the shared host now preserves
-  the legacy style representation without changing that consumer's snapshot.
+  normalization through slot ref composition; legacy Callout now renders the
+  hook-free shared host directly, preserving the legacy style representation.
 - All three final desktop JavaScript bundles pass; Storybook format/lint,
   package publishing and changeset checks pass.
 - `codegen:windows --check` passes; new generated command interfaces match
@@ -95,14 +98,75 @@ Compilation, authored tests, and skipped tests are not native qualification.
 - Command stories require explicit owner activation. They do not bypass
   inactive-window guards or activate a popup merely to inspect it.
 - Independent lifecycle review found render-time slot props bypassing hooks
-  and RNW entry redirection overriding explicit requests. The facades now
-  merge into stable hook-owning implementation components (with a committed
-  slot regression); explicit RNW commands suppress entry redirection while
-  retaining actual focused-identity confirmation.
+  and RNW entry redirection overriding explicit requests. The 2026-10-15
+  rework supersedes its inner hook-owning components (see below); explicit
+  RNW commands suppress entry redirection while retaining actual
+  focused-identity confirmation.
 - Native regression also caught a legacy presentation re-opening on a late
   layout update after dismissal. Closed generations now remain latched for
   legacy views until actual reattachment as well as for modern views until
   deliberate rearm. Recycled popup windows are reparented before showing.
+
+### 2026-10-15 rework on macOS
+
+Owner-requested review against the reorganized component, native, and Apple
+authoring guidance. Changes:
+
+- Modern Callout and FocusZone are real phased components. Their first phase
+  owns hooks, the operation channel, live targets, imperative handles, and
+  slots; the hook-free `directComponent` render phase merges render-time
+  pass-through props. The previous inner hook-owning components (an empty
+  first phase plus an extra React boundary) are removed. Hook-bound props
+  (`ref`/`open`/`presentationKey`/`anchor` for Callout, `commandsRef`/
+  `defaultTarget` for FocusZone) are consumed by the first phase and must be
+  supplied through slot props; render-time values are ignored, matching the
+  legacy facades. FocusZone composes slot, render-time, and internal root refs
+  through framework-base slot composition. Disabled requests settle through
+  the native result instead of a duplicate JavaScript check.
+- Legacy FocusZone is restored to its `main` implementation. Legacy Callout
+  keeps its phased hooks and renders the shared hook-free `CalloutHost`; the
+  stacked-slot `cloneElement` style workaround is removed.
+- The Paper Callout extern registration no longer implements methods in
+  Objective-C or names `FRNCalloutView` (R-APPLE-003/004); its new commands
+  are Swift with `RCT_EXTERN_METHOD`, the anchor bridge uses the narrow
+  `FRNCalloutPropertyManager` protocol, and `directionalHint` remaps to the
+  shared view's `placementHint`. Shared Swift derives the preferred edge from
+  the hint, so neither adapter maintains a second edge mapping.
+- Main-actor isolation is explicit for the Swift focus service, lifecycle
+  delegate, local mouse monitor, and Paper anchor bridge. Notification
+  observers have one owner with idempotent cleanup instead of a nonisolated
+  `deinit` reaching main-actor state.
+- Windows: explicit FocusZone commands use a dedicated flag rather than the
+  Tab-trap flag, restoring main's Tab-exit and remembered-focus behavior; the
+  Callout light-dismiss subscription uses an `auto_revoke` revoker and is
+  revoked only with a modern popup, fixing a branch regression where a legacy
+  Callout lost light dismissal after an unmount/remount of the same view.
+  These Windows edits were not compiled or run on this Mac.
+
+Executed:
+
+- `yarn workspace @fluentui-react-native/native-core test`: build, story
+  types, 18 Node contracts, 30 Jest/type tests, and one snapshot pass; lint,
+  format, and `codegen:windows --check` pass.
+- From `apps/storybook`: Fabric and Paper `prep`/`build` pass with every
+  changed native-core object recompiled; default Fabric is restored.
+- Office bridging-header probe: no `React` module, strict Swift 5 compile
+  (RegionBasedIsolation, InferSendableFromCaptures, GlobalConcurrency,
+  warnings as errors), emitted manager/view/focus-service declarations, and
+  `-Werror=nonportable-include-path -Werror=unused-parameter` syntax checks of
+  the extern registration (without the generated header) and both FocusZone
+  Objective-C sources pass. `-strict-concurrency=complete` leaves only the
+  pre-existing Paper `view()` warning.
+- Fabric and Paper smoke render all 175 stories, including 17 legacy/modern
+  native stories. Every executable case, including non-native Button, failed
+  before execution at Desktop Driver session creation with "Accessibility
+  returned an incomplete or internally inconsistent window enumeration";
+  driver permission preflights pass. No runtime command case is claimed.
+- macOS, Windows, and Win32 production bundles pass.
+
+Windows must re-run its build and the modern/legacy FocusZone cases for the
+dedicated command flag and revoker; macOS must re-run the native cases once
+Desktop Driver window enumeration is healthy.
 
 ### Executed evidence on Windows
 
@@ -131,8 +195,8 @@ and consolidated `FRNNativeCore.dll` were rebuilt after the source fix;
   wrapper guards; they are not evidence of native generation-mismatch,
   pending-request cancellation, or late-result fencing.
 - The first native command run returned `refused`: `GettingFocus` redirected
-  an explicit destination to the entry preference. It now respects the
-  existing explicit-command/Tab-trap guard. The command case enters the
+  an explicit destination to the entry preference. It now respects an
+  explicit-command guard (a dedicated flag since the 2026-10-15 rework). The command case enters the
   default target before requesting the edges and later re-enters the first
   target, verifying actual focused identity rather than only an outcome label.
 - From `apps/storybook`, `yarn storybook bundle --win32` and

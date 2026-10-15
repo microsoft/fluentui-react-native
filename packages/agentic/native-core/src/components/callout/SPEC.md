@@ -9,6 +9,12 @@ not the hidden native marker. `content` forwards appearance, accessibility,
 events and an actual View ref to one materialized attachment host; arbitrary
 host replacement/collapse is not allowed.
 
+Callout is a phased component. `ref`, `open`, `presentationKey`, and `anchor`
+drive hooks in its first phase; when Callout is used as a slot, supply them
+through the slot props, because render-time values for them are ignored.
+Render-time `placement`, `onReady`, `onDismissed`, and children are merged, and
+render-time `content` props compose with the slot's content props and refs.
+
 `open` is externally requested presence. Native closure reports onDismissed
 and latches that generation closed. Retaining open=true does not reopen.
 False->true or a changed presentationKey rearms. onReady means attached content

@@ -77,10 +77,10 @@ struct FocusZoneComponentView
     else if (!props || generation <= 0 || props->commandGeneration.value_or(0) != generation) status = "stale";
     else if (Disabled()) status = "not-focusable";
     else {
-      const bool previousTrap = m_inTabTrap;
-      m_inTabTrap = true;
+      // An explicit command destination must not be redirected to the remembered or default entry element.
+      m_explicitFocusRequest = true;
       status = ::FRNNativeCore::FocusWithin(view, targetTag, strategy, DefaultTabbableTag());
-      m_inTabTrap = previousTrap;
+      m_explicitFocusRequest = false;
     }
     if (auto emitter = EventEmitter()) emitter->onOperationResult({generation, requestId, status});
   }
@@ -505,7 +505,7 @@ struct FocusZoneComponentView
   void HandleGettingFocus(
       const winrtRN::ComponentView &container,
       const winrtRN::GettingFocusEventArgs &args) noexcept {
-    if (Disabled() || m_inTabTrap) {
+    if (Disabled() || m_explicitFocusRequest) {
       return;
     }
 
@@ -598,6 +598,7 @@ struct FocusZoneComponentView
   winrt::weak_ref<winrtRN::ComponentView> m_view;
   int64_t m_lastFocusedTag{0};
   bool m_inTabTrap{false};
+  bool m_explicitFocusRequest{false};
 };
 
 } // namespace winrt::FRNFocusZone

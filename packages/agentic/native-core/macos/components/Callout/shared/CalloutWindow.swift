@@ -1,6 +1,7 @@
 import Foundation
 import AppKit
 
+@MainActor
 protocol CalloutWindowLifeCycleDelegate: AnyObject {
 	/// Notify the delegate that the Callout is about to dismiss
 	func calloutWillDismiss(window: CalloutWindow)

@@ -15,7 +15,6 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     @objc public var placementHint = "" { didSet { updatePresentation() } }
     @objc public var gapSpace: CGFloat = 0 { didSet { updatePresentation() } }
     @objc public var anchorRect: NSRect = .null { didSet { updatePresentation() } }
-    @objc public var directionalHint: NSRectEdge = .maxY { didSet { updatePresentation() } }
     @objc public var setInitialFocus = false
     @objc public var onShow: RCTDirectEventBlock?
     @objc public var onDismiss: RCTDirectEventBlock?
@@ -26,7 +25,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
     private weak var anchorView: NSView?
     private var popupWindow: CalloutWindow?
-    private var observers: [NSObjectProtocol] = []
+    private let observers = NotificationObservers()
     private var mouseEventMonitor = GuardedEventMonitor()
     private var shown = false
     private var readyGeneration = 0
@@ -46,8 +45,6 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         self.init(frame: .zero)
         self.bridge = bridge
     }
-
-    deinit { removeObservers() }
 
     public override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
@@ -172,13 +169,17 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             if setInitialFocus { popup.makeKey() }
             installObservers()
             mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown) { [weak self] event in
-                guard let self = self else { return event }
-                func contains(_ window: NSWindow, _ clicked: NSWindow) -> Bool {
-                    window === clicked || (window.childWindows ?? []).contains { contains($0, clicked) }
+                // AppKit invokes local event monitors on the main thread.
+                MainActor.assumeIsolated {
+                    guard let self = self else { return }
+                    @MainActor func contains(_ window: NSWindow, _ clicked: NSWindow) -> Bool {
+                        if window === clicked { return true }
+                        return (window.childWindows ?? []).contains { contains($0, clicked) }
+                    }
+                    var root: NSWindow = popup
+                    while let parent = root.parent as? CalloutWindow { root = parent }
+                    if let clicked = event.window, !contains(root, clicked) { self.dismissCallout() }
                 }
-                var root: NSWindow = popup
-                while let parent = root.parent as? CalloutWindow { root = parent }
-                if let clicked = event.window, !contains(root, clicked) { self.dismissCallout() }
                 return event
             }
             onShow?([:])
@@ -219,22 +220,19 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
               proxyView.frame.width > 0, proxyView.frame.height > 0,
               let area = (anchorView?.window ?? window)?.screen?.visibleFrame else { return false }
         let frame = CalloutPlacement.frame(anchor: anchor, size: proxyView.frame.size,
-            workArea: area, edge: directionalHint, hint: placementHint, gap: gapSpace,
+            workArea: area, hint: placementHint, gap: gapSpace,
             rtl: NSApp.userInterfaceLayoutDirection == .rightToLeft || RCTI18nUtil.sharedInstance().isRTL())
         proxyView.frame.origin = .zero
         calloutWindow.setFrame(frame, display: false)
         return true
     }
 
-    private func observe(_ name: Notification.Name, object: Any?, action: @escaping (CalloutView) -> Void) {
-        observers.append(NotificationCenter.default.addObserver(forName: name, object: object, queue: .main) {
-            [weak self] _ in if let self = self { action(self) }
+    private func observe(_ name: Notification.Name, object: Any?, action: @escaping @MainActor @Sendable (CalloutView) -> Void) {
+        observers.add(NotificationCenter.default.addObserver(forName: name, object: object, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { if let self = self { action(self) } }
         })
     }
-    private func removeObservers() {
-        observers.forEach(NotificationCenter.default.removeObserver)
-        observers.removeAll()
-    }
+    private func removeObservers() { observers.removeAll() }
     private func installObservers() {
         removeObservers()
         observe(NSApplication.didResignActiveNotification, object: nil) { $0.dismissCallout() }
@@ -279,4 +277,18 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         popupWindow = popup
         return popup
     }
+}
+
+/// Owns notification registrations and removes any that remain when the owning view is released.
+private final class NotificationObservers {
+    private var tokens: [NSObjectProtocol] = []
+
+    func add(_ token: NSObjectProtocol) { tokens.append(token) }
+
+    func removeAll() {
+        tokens.forEach(NotificationCenter.default.removeObserver)
+        tokens.removeAll()
+    }
+
+    deinit { removeAll() }
 }

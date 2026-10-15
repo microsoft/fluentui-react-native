@@ -18,31 +18,6 @@
 
 using namespace facebook::react;
 
-static NSRectEdge RCTNSRectEdgeFromDirectionalHint(CalloutDirectionalHint hint)
-{
-  // CalloutView uses MinY for placement above the anchor and MaxY for placement below it.
-  switch (hint) {
-    case CalloutDirectionalHint::LeftTopEdge:
-    case CalloutDirectionalHint::LeftCenter:
-    case CalloutDirectionalHint::LeftBottomEdge:
-      return NSRectEdgeMinX;
-    case CalloutDirectionalHint::TopLeftEdge:
-    case CalloutDirectionalHint::TopAutoEdge:
-    case CalloutDirectionalHint::TopCenter:
-    case CalloutDirectionalHint::TopRightEdge:
-      return NSRectEdgeMinY;
-    case CalloutDirectionalHint::RightTopEdge:
-    case CalloutDirectionalHint::RightCenter:
-    case CalloutDirectionalHint::RightBottomEdge:
-      return NSRectEdgeMaxX;
-    case CalloutDirectionalHint::BottomLeftEdge:
-    case CalloutDirectionalHint::BottomAutoEdge:
-    case CalloutDirectionalHint::BottomCenter:
-    case CalloutDirectionalHint::BottomRightEdge:
-      return NSRectEdgeMaxY;
-  }
-}
-
 static void RCTApplyCalloutAppearance(
     FRNCalloutView *calloutView,
     const CalloutProps &props,
@@ -89,9 +64,15 @@ static void RCTApplyCalloutAppearance(
     _calloutView.onDismiss = ^(__unused NSDictionary *event) {
       [weakSelf emitOnDismiss];
     };
-    _calloutView.onReady = ^(NSDictionary *event) { [weakSelf emitReady:event]; };
-    _calloutView.onClosed = ^(NSDictionary *event) { [weakSelf emitClosed:event]; };
-    _calloutView.onOperationResult = ^(NSDictionary *event) { [weakSelf emitResult:event]; };
+    _calloutView.onReady = ^(NSDictionary *event) {
+      [weakSelf emitReady:event];
+    };
+    _calloutView.onClosed = ^(NSDictionary *event) {
+      [weakSelf emitClosed:event];
+    };
+    _calloutView.onOperationResult = ^(NSDictionary *event) {
+      [weakSelf emitResult:event];
+    };
 
     _touchHandler = [RCTSurfaceTouchHandler new];
     [_touchHandler attachToView:_calloutView.contentProxyView];
@@ -119,7 +100,6 @@ static void RCTApplyCalloutAppearance(
   _calloutView.anchorMode = [NSString stringWithUTF8String:toString(newProps.anchorMode).c_str()];
   _calloutView.placementHint = [NSString stringWithUTF8String:toString(newProps.directionalHint).c_str()];
   _calloutView.gapSpace = newProps.gapSpace;
-  _calloutView.directionalHint = RCTNSRectEdgeFromDirectionalHint(newProps.directionalHint);
   _calloutView.setInitialFocus = newProps.setInitialFocus;
 
   const auto &rect = newProps.anchorRect;
@@ -178,32 +158,45 @@ static void RCTApplyCalloutAppearance(
 
 - (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag
 {
-  [_calloutView requestFocus:generation requestId:requestId
-                     target:FRNNativeCoreFindView(_calloutView.contentProxyView, targetTag)];
+  // Resolve the target within this popup's content so a focus request cannot escape the presentation.
+  NSView *target = FRNNativeCoreFindView(_calloutView.contentProxyView, targetTag);
+  [_calloutView requestFocus:generation requestId:requestId target:target];
 }
+
 - (void)close:(NSInteger)generation requestId:(NSInteger)requestId
 {
   [_calloutView close:generation requestId:requestId];
 }
+
 - (void)reposition:(NSInteger)generation requestId:(NSInteger)requestId
 {
   [_calloutView reposition:generation requestId:requestId];
 }
+
 - (void)emitReady:(NSDictionary *)event
 {
-  if (_eventEmitter) std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onReady(
-      {.generation = [event[@"generation"] intValue]});
+  if (_eventEmitter) {
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onReady({.generation = [event[@"generation"] intValue]});
+  }
 }
+
 - (void)emitClosed:(NSDictionary *)event
 {
-  if (_eventEmitter) std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onClosed(
-      {.generation = [event[@"generation"] intValue], .reason = std::string([event[@"reason"] UTF8String])});
+  if (_eventEmitter) {
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)
+        ->onClosed({.generation = [event[@"generation"] intValue], .reason = std::string([event[@"reason"] UTF8String])});
+  }
 }
+
 - (void)emitResult:(NSDictionary *)event
 {
-  if (_eventEmitter) std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onOperationResult(
-      {.generation = [event[@"generation"] intValue], .requestId = [event[@"requestId"] intValue],
-       .status = std::string([event[@"status"] UTF8String])});
+  if (_eventEmitter) {
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)
+        ->onOperationResult(
+            {.generation = [event[@"generation"] intValue],
+             .requestId = [event[@"requestId"] intValue],
+             .status = std::string([event[@"status"] UTF8String])});
+  }
 }
 
 - (void)updateAnchorView

@@ -9,9 +9,16 @@ the React 19 `ref` prop. `commandsRef` publishes a separate mounted command
 surface; it is null after unmount. Both native and caller refs compose through
 framework-base slots, including callback cleanup.
 
+FocusZone is a phased component. `commandsRef` and `defaultTarget` drive hooks
+in its first phase; when FocusZone is used as a slot, supply them through the
+slot props, because render-time values for them are ignored. Render-time
+navigation, `disabled`, and view props are merged, and a render-time `ref`
+composes with the slot's `ref`.
+
 Direction, spatial opt-in, arrow wrap, Tab mode, disabled, and a live
 defaultTarget translate to the existing per-host navigation engine.
 Navigation remains platform-native by default; it is not modal containment.
+A disabled zone reports `not-focusable` through the native command result.
 
 `requestFocus` supports default/first/last or a live scoped descendant.
 Confirmation comes from native responder/focused-component identity, not a

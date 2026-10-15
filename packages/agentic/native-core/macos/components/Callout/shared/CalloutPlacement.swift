@@ -1,8 +1,17 @@
 import AppKit
 
 struct CalloutPlacement {
+    /// Preferred anchor edge for a directional hint name; MinY places the popup above the anchor in screen space.
+    static func edge(for hint: String) -> NSRectEdge {
+        if hint.hasPrefix("left") { return .minX }
+        if hint.hasPrefix("right") { return .maxX }
+        if hint.hasPrefix("top") { return .minY }
+        return .maxY
+    }
+
     static func frame(anchor: NSRect, size: NSSize, workArea: NSRect,
-                      edge: NSRectEdge, hint: String, gap: CGFloat, rtl: Bool) -> NSRect {
+                      hint: String, gap: CGFloat, rtl: Bool) -> NSRect {
+        let preferred = Self.edge(for: hint)
         func origin(_ edge: NSRectEdge) -> NSPoint {
             let horizontal = edge == .minY || edge == .maxY
             let centered = hint.hasSuffix("Center")
@@ -20,8 +29,8 @@ struct CalloutPlacement {
             @unknown default: preconditionFailure("Unknown Callout edge")
             }
         }
-        var frame = NSRect(origin: origin(edge), size: size)
-        let opposite: NSRectEdge = edge == .minX ? .maxX : edge == .maxX ? .minX : edge == .minY ? .maxY : .minY
+        var frame = NSRect(origin: origin(preferred), size: size)
+        let opposite: NSRectEdge = preferred == .minX ? .maxX : preferred == .maxX ? .minX : preferred == .minY ? .maxY : .minY
         let alternate = NSRect(origin: origin(opposite), size: size)
         let area = frame.intersection(workArea)
         let alternateArea = alternate.intersection(workArea)

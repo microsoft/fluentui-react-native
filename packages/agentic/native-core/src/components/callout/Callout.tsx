@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { I18nManager, View } from 'react-native';
-import { directComponent, phasedComponent, useSlot, mergeProps } from '@fluentui-react-native/framework-base';
+import { directComponent, mergeProps, phasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 
 import { CalloutHost } from '../../internal/CalloutHost';
 import { assertModernHost } from '../../internal/modernHost';
@@ -15,18 +15,23 @@ import { presentationBrand } from './Callout.types';
 
 class Presentation implements CalloutPresentation {
   readonly [presentationBrand] = true as const;
-  private readonly generation: number;
+  readonly generation: number;
   constructor(generation: number) {
     this.generation = generation;
   }
-  matches(generation: number) {
-    return this.generation === generation;
-  }
 }
 
-function hint(props: CalloutProps): DirectionalHint {
-  const side = props.placement?.side ?? 'bottom';
-  const align = props.placement?.align ?? 'start';
+interface Lifetime {
+  open: boolean;
+  key: string | undefined;
+  presentation: Presentation;
+  closed: boolean;
+  anchored: boolean;
+}
+
+function hint(placement: CalloutProps['placement']): DirectionalHint {
+  const side = placement?.side ?? 'bottom';
+  const align = placement?.align ?? 'start';
   const rtl = I18nManager.isRTL;
   const physical = side === 'start' ? (rtl ? 'right' : 'left') : side === 'end' ? (rtl ? 'left' : 'right') : side;
   if (physical === 'left' || physical === 'right') {
@@ -34,6 +39,12 @@ function hint(props: CalloutProps): DirectionalHint {
   }
   const edge = align === 'center' ? 'Center' : (align === 'start') !== rtl ? 'LeftEdge' : 'RightEdge';
   return `${physical}${edge}`;
+}
+
+function gapSpace(placement: CalloutProps['placement']): number {
+  const gap = placement?.gap ?? 0;
+  if (!Number.isInteger(gap) || gap < 0) throw new RangeError('Callout gap must be a nonnegative integer in logical units.');
+  return gap;
 }
 
 function rectangle(anchor: CalloutAnchor) {
@@ -50,144 +61,121 @@ function isReason(value: string): value is CalloutDismissReason {
   return reasons.includes(value);
 }
 
-function CalloutImplementation(props: CalloutProps) {
+/**
+ * Unstyled native popup. The first phase owns the presentation lifetime, anchor subscription, command channel, and
+ * presentation handle; when Callout is used as a slot, supply `ref`, `open`, `presentationKey`, and `anchor` through the
+ * slot props. The render phase merges render-time placement, callbacks, content props, and children.
+ */
+export const Callout = phasedComponent<CalloutProps>((props) => {
   assertModernHost('Callout');
-  const target = props.anchor.kind === 'view' ? props.anchor.target : props.anchor.relativeTo;
-  const tag = useTargetTag(target);
+  const { ref, open, presentationKey, anchor, content } = props;
+  const tag = useTargetTag(anchor.kind === 'view' ? anchor.target : anchor.relativeTo);
+  const anchorRect = rectangle(anchor);
   const nativeRef = React.useRef<React.ComponentRef<typeof NativeCallout>>(null);
-  const channel = React.useMemo(createOperationChannel, []);
-  const [lifetime, setLifetime] = React.useState(() => ({
-    open: props.open,
-    key: props.presentationKey,
-    generation: allocateGeneration(),
+  const [channel] = React.useState(createOperationChannel);
+  const [lifetime, setLifetime] = React.useState<Lifetime>(() => ({
+    open,
+    key: presentationKey,
+    presentation: new Presentation(allocateGeneration()),
     closed: false,
     anchored: false,
   }));
-  if (lifetime.open !== props.open || lifetime.key !== props.presentationKey) {
-    const rearm = (!lifetime.open && props.open) || lifetime.key !== props.presentationKey;
+  // Derive the presentation lifetime during render so a rearm and its new generation commit together.
+  if (lifetime.open !== open || lifetime.key !== presentationKey) {
+    const rearm = (!lifetime.open && open) || lifetime.key !== presentationKey;
     setLifetime({
-      open: props.open,
-      key: props.presentationKey,
-      generation: rearm ? allocateGeneration() : lifetime.generation,
+      open,
+      key: presentationKey,
+      presentation: rearm ? new Presentation(allocateGeneration()) : lifetime.presentation,
       closed: rearm ? false : lifetime.closed,
       anchored: rearm ? tag !== undefined : lifetime.anchored,
     });
-  } else if (props.open && !lifetime.closed) {
+  } else if (open && !lifetime.closed) {
     if (tag !== undefined && !lifetime.anchored) setLifetime({ ...lifetime, anchored: true });
     else if (tag === undefined && lifetime.anchored) setLifetime({ ...lifetime, closed: true });
   }
-  const { generation, closed } = lifetime;
-  const presentation = React.useMemo(() => new Presentation(generation), [generation]);
+  const { presentation, closed } = lifetime;
+  const { generation } = presentation;
+  const presented = open && !closed && tag !== undefined;
   const committedGeneration = React.useRef(generation);
   const ready = React.useRef<CalloutPresentation | null>(null);
-  const Content = useSlot(View, { collapsable: false });
+  const Content = useSlot(View, content);
 
   React.useLayoutEffect(() => {
-    if (committedGeneration.current !== generation || !props.open || closed || tag === undefined) ready.current = null;
+    if (committedGeneration.current !== generation || !presented) ready.current = null;
     committedGeneration.current = generation;
-    if (props.open && !closed && tag !== undefined) channel.activate(generation);
+    if (presented) channel.activate(generation);
     else channel.cancel();
     return channel.cancel;
-  }, [channel, generation, props.open, closed, tag]);
+  }, [channel, generation, presented]);
 
-  React.useImperativeHandle(
-    props.ref,
-    (): CalloutHandle => {
-      const request = (
-        expected: CalloutPresentation,
-        dispatch: (scope: number, id: number) => void,
-        options?: Parameters<CalloutHandle['close']>[1],
-        current?: () => boolean,
-      ) => {
-        if (!nativeRef.current) return Promise.resolve({ status: 'not-mounted' as const });
-        if (expected !== ready.current) return Promise.resolve({ status: ready.current ? ('stale' as const) : ('not-ready' as const) });
-        return channel.request(dispatch, options, current);
-      };
-      return {
-        getPresentation: () => ready.current,
-        requestFocus(expected, target, options) {
-          const resolved = resolveTarget(target);
-          if (resolved.tag == null) return Promise.resolve({ status: 'not-mounted' });
-          return request(
-            expected,
-            (scope, id) => {
-              if (!nativeRef.current) throw new Error('Callout detached before focus dispatch.');
-              Commands.requestFocus(nativeRef.current, scope, id, resolved.tag);
-            },
-            options,
-            resolved.isCurrent,
-          );
+  React.useImperativeHandle(ref, (): CalloutHandle => {
+    const request = (
+      expected: CalloutPresentation,
+      dispatch: (view: React.ComponentRef<typeof NativeCallout>, scope: number, id: number) => void,
+      options?: Parameters<CalloutHandle['close']>[1],
+      current?: () => boolean,
+    ) => {
+      if (!nativeRef.current) return Promise.resolve({ status: 'not-mounted' as const });
+      if (expected !== ready.current) return Promise.resolve({ status: ready.current ? ('stale' as const) : ('not-ready' as const) });
+      return channel.request(
+        (scope, id) => {
+          const view = nativeRef.current;
+          if (!view) throw new Error('Callout detached before command dispatch.');
+          dispatch(view, scope, id);
         },
-        close: (expected, options) =>
-          request(
-            expected,
-            (scope, id) => {
-              if (!nativeRef.current) throw new Error('Callout detached before close dispatch.');
-              Commands.close(nativeRef.current, scope, id);
-            },
-            options,
-          ),
-        reposition: (expected, options) =>
-          request(
-            expected,
-            (scope, id) => {
-              if (!nativeRef.current) throw new Error('Callout detached before reposition dispatch.');
-              Commands.reposition(nativeRef.current, scope, id);
-            },
-            options,
-          ),
-      };
-    },
-    [channel],
-  );
+        options,
+        current,
+      );
+    };
+    return {
+      getPresentation: () => ready.current,
+      requestFocus(expected, target, options) {
+        const resolved = resolveTarget(target);
+        if (resolved.tag == null) return Promise.resolve({ status: 'not-mounted' });
+        return request(expected, (view, scope, id) => Commands.requestFocus(view, scope, id, resolved.tag), options, resolved.isCurrent);
+      },
+      close: (expected, options) => request(expected, (view, scope, id) => Commands.close(view, scope, id), options),
+      reposition: (expected, options) => request(expected, (view, scope, id) => Commands.reposition(view, scope, id), options),
+    };
+  }, [channel]);
 
-  const gap = props.placement?.gap ?? 0;
-  if (!Number.isInteger(gap) || gap < 0) throw new RangeError('Callout gap must be a nonnegative integer in logical units.');
-  const rect = rectangle(props.anchor);
+  return directComponent<CalloutProps>((renderProps) => {
+    if (!presented) return null;
+    const { placement, onReady, onDismissed, children } = mergeProps(props, renderProps);
+    const isCurrent = (eventGeneration: number) => eventGeneration === generation && eventGeneration === committedGeneration.current;
 
-  {
-    const renderProps = props;
-    if (!renderProps.open || closed || tag === undefined) return null;
     return (
       <CalloutHost
         key={generation}
-        nativeRef={nativeRef}
-        nativeTarget={tag}
+        ref={nativeRef}
+        target={tag}
         commandGeneration={generation}
-        anchorMode={renderProps.anchor.kind}
-        anchorRect={rect}
-        directionalHint={hint(renderProps)}
-        gapSpace={gap}
+        anchorMode={anchor.kind}
+        anchorRect={anchorRect}
+        directionalHint={hint(placement)}
+        gapSpace={gapSpace(placement)}
         onReady={(event) => {
-          if (
-            event.nativeEvent.generation !== committedGeneration.current ||
-            !presentation.matches(event.nativeEvent.generation) ||
-            ready.current
-          )
-            return;
+          if (!isCurrent(event.nativeEvent.generation) || ready.current) return;
           ready.current = presentation;
-          renderProps.onReady?.({ presentation });
+          onReady?.({ presentation });
         }}
         onClosed={(event) => {
-          if (event.nativeEvent.generation !== committedGeneration.current || !presentation.matches(event.nativeEvent.generation)) return;
+          if (!isCurrent(event.nativeEvent.generation)) return;
           if (!isReason(event.nativeEvent.reason)) throw new Error('Callout received an invalid native dismissal reason.');
           ready.current = null;
           channel.cancel();
-          setLifetime((current) => (current.generation === event.nativeEvent.generation ? { ...current, closed: true } : current));
-          renderProps.onDismissed?.({ presentation, reason: event.nativeEvent.reason });
+          setLifetime((current) => (current.presentation === presentation ? { ...current, closed: true } : current));
+          onDismissed?.({ presentation, reason: event.nativeEvent.reason });
         }}
         onOperationResult={(event) => channel.receive(event.nativeEvent)}
       >
         <Content {...renderProps.content} collapsable={false}>
-          {renderProps.children}
+          {children}
         </Content>
       </CalloutHost>
     );
-  }
-}
-
-export const Callout = phasedComponent<CalloutProps>((baseProps) =>
-  directComponent<CalloutProps>((props) => <CalloutImplementation {...mergeProps(baseProps, props)} />),
-);
+  });
+});
 
 Callout.displayName = 'Callout';

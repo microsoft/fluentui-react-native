@@ -2,7 +2,7 @@ import AppKit
 
 @objc(FRNNativeCoreFocusService)
 public final class NativeFocusService: NSObject {
-    @objc(focusWithin:target:strategy:)
+    @MainActor @objc(focusWithin:target:strategy:)
     public static func focus(within root: NSView, target: NSView?, strategy: String) -> String {
         precondition(Thread.isMainThread, "Native focus must execute on the main thread")
         guard let window = root.window, window.isVisible, !window.isMiniaturized else {
@@ -46,7 +46,7 @@ public final class NativeFocusService: NSObject {
         return "refused"
     }
 
-    private static func eligible(_ view: NSView) -> Bool {
+    @MainActor private static func eligible(_ view: NSView) -> Bool {
         guard view.acceptsFirstResponder, !view.isHiddenOrHasHiddenAncestor,
               !view.visibleRect.isEmpty else { return false }
         var current: NSView? = view
@@ -58,7 +58,7 @@ public final class NativeFocusService: NSObject {
         return true
     }
 
-    private static func candidates(in root: NSView) -> [NSView] {
+    @MainActor private static func candidates(in root: NSView) -> [NSView] {
         var result: [NSView] = []
         for child in root.subviews {
             if eligible(child) { result.append(child) }

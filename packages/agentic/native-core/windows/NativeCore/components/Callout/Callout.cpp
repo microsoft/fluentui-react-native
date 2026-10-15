@@ -69,7 +69,6 @@ struct CalloutComponentView
                                winrt::Windows::Foundation::IInspectable>,
       Codegen::BaseCallout<CalloutComponentView> {
   ~CalloutComponentView() {
-    if (m_lightDismiss && m_lightDismissToken.value) m_lightDismiss.Dismissed(m_lightDismissToken);
     if (m_popup && !m_popup.IsClosed()) {
       /*
       // Unregister closing event handler
@@ -269,10 +268,9 @@ private:
     if (Modern()) ClosePresentation("host-detached");
     m_mounted = false;
     ++m_lifetime;
-    if (m_lightDismiss && m_lightDismissToken.value) m_lightDismiss.Dismissed(m_lightDismissToken);
-    m_lightDismissToken = {};
-    m_lightDismiss = nullptr;
     if (Modern()) {
+      // Modern presentations own their popup per mount; legacy views keep the popup and its subscription.
+      m_lightDismissRevoker.revoke();
       if (m_rnWindow) m_rnWindow.Close();
       if (m_popup && !m_popup.IsClosed()) m_popup.Close();
       m_rnWindow = nullptr;
@@ -319,11 +317,11 @@ private:
     m_rnWindow.ResizePolicy(
         winrt::Microsoft::ReactNative::ContentSizePolicy::None);
 
-    m_lightDismiss =
+    m_lightDismissRevoker =
         winrt::Microsoft::UI::Input::InputLightDismissAction::GetForWindowId(
-            m_rnWindow.AppWindow().Id());
-    m_lightDismissToken = m_lightDismiss.Dismissed(
-        {get_weak(), &CalloutComponentView::OnLightDismissDismissed});
+            m_rnWindow.AppWindow().Id())
+            .Dismissed(winrt::auto_revoke,
+                       {get_weak(), &CalloutComponentView::OnLightDismissDismissed});
 
     if (portal.ContentRoot().Children().Size()) {
       AdjustWindowSize(
@@ -506,8 +504,7 @@ private:
   uint64_t m_lifetime{0};
   HWND m_parentHwnd{nullptr};
   winrt::weak_ref<winrt::Microsoft::ReactNative::Composition::PortalComponentView> m_portal;
-  winrt::Microsoft::UI::Input::InputLightDismissAction m_lightDismiss{nullptr};
-  winrt::event_token m_lightDismissToken;
+  winrt::Microsoft::UI::Input::InputLightDismissAction::Dismissed_revoker m_lightDismissRevoker;
   winrt::event_token m_childLayoutMetricsToken;
   winrt::Microsoft::UI::Content::DesktopPopupSiteBridge m_popup{nullptr};
   winrt::Microsoft::ReactNative::ReactNativeWindow m_rnWindow{nullptr};

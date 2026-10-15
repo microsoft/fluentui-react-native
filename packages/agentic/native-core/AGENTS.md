@@ -1,5 +1,8 @@
 # Native-core authoring
 
+- Follow the [Apple and Office rules](../../../references/agents/native/apple-office.md)
+  for shared services and renderer adapters. Paper `RCT_EXTERN_MODULE` files
+  never import the generated Swift header or name generated Swift classes.
 - Prefer Swift for new macOS AppKit/domain behavior. Keep ObjC/ObjC++ for
   generated protocols, C++ conversion, registration, and renderer integration.
 - Paper and Fabric adapters supply resolved views and event sinks to shared
@@ -23,6 +26,9 @@
   pre-mount focus requests.
 - New wrappers use React 19 ref props. FocusZone preserves its native root;
   Callout's deliberate presentation handle is documented in its contract.
+- Use `phasedComponent` for hook-bearing wrappers: run hooks and create slots
+  in the first phase and return a hook-free `directComponent`. Do not wrap an
+  inner hook component; hook-driven props are consumed by the first phase.
 - Keep legacy aliases/registrations and Win32 host ownership. Never send a new
   managed protocol to a baked host without capability evidence.
 - Root exports require equivalent mandatory behavior on every supported

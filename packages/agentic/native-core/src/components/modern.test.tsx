@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Platform, View, Text } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
-import { useSlot } from '@fluentui-react-native/framework-base';
+import { isPhasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Callout } from './callout/Callout';
 import type { CalloutHandle, CalloutPresentation } from './callout/Callout.types';
@@ -27,6 +27,11 @@ function calloutRoot(component: Awaited<ReturnType<typeof render>>) {
 describe('modern native facades', () => {
   beforeEach(() => jest.replaceProperty(Platform, 'OS', 'macos'));
   afterEach(() => jest.restoreAllMocks());
+
+  it('uses phased rendering for both facades', () => {
+    expect(isPhasedComponent(FocusZone)).toBe(true);
+    expect(isPhasedComponent(Callout)).toBe(true);
+  });
 
   it('preserves the native FocusZone ref and confirms the separate command from a result event', async () => {
     const nativeRef = React.createRef<FocusZoneHandle>();
@@ -158,35 +163,73 @@ describe('modern native facades', () => {
     await component.unmount();
   });
 
-  it('honors refs, live defaults, and lifecycle props supplied at slot render time', async () => {
+  it('drives first-phase behavior from slot props and merges render-time props and refs', async () => {
     const commands = React.createRef<FocusZoneCommands>();
-    const native = React.createRef<FocusZoneHandle>();
+    const slotNative = React.createRef<FocusZoneHandle>();
+    const renderNative = React.createRef<FocusZoneHandle>();
     const presentation = React.createRef<CalloutHandle>();
+    const contentRef = React.createRef<View>();
+    const ready = jest.fn();
     function Fixture({ open }: { open: boolean }) {
       const target = useNativeViewTarget();
-      const Zone = useSlot(FocusZone, {});
-      const Popup = useSlot(Callout, {});
+      const Zone = useSlot(FocusZone, { ref: slotNative, commandsRef: commands, defaultTarget: target.target });
+      const Popup = useSlot(Callout, {
+        ref: presentation,
+        open,
+        anchor: { kind: 'view', target: target.target },
+        content: { ref: contentRef, testID: 'content' },
+      });
       return (
         <>
-          <Zone ref={native} commandsRef={commands} defaultTarget={target.target} testID="zone">
+          <Zone ref={renderNative} direction="vertical" testID="zone">
             <View ref={target.ref} />
           </Zone>
-          <Popup ref={presentation} open={open} anchor={{ kind: 'view', target: target.target }} content={{ testID: 'content' }}>
+          <Popup content={{ accessibilityLabel: 'render-time content' }} placement={{ side: 'top', gap: 4 }} onReady={ready}>
             <View />
           </Popup>
         </>
       );
     }
     const component = await render(<Fixture open />);
-    expect(native.current).not.toBeNull();
+    expect(slotNative.current).not.toBeNull();
+    expect(renderNative.current).toBe(slotNative.current);
     expect(commands.current).not.toBeNull();
     expect(presentation.current).not.toBeNull();
-    expect(component.getByTestId('zone').props.defaultTabbableElement).toBe(42);
-    const first = calloutRoot(component).props.commandGeneration;
+    const zone = component.getByTestId('zone');
+    expect(zone.props).toMatchObject({ defaultTabbableElement: 42, focusZoneDirection: 'vertical' });
+    expect(zone.props.direction).toBeUndefined();
+    expect(zone.props.commandsRef).toBeUndefined();
+    const content = component.getByTestId('content');
+    expect(content.props.accessibilityLabel).toBe('render-time content');
+    expect(contentRef.current).not.toBeNull();
+    const root = calloutRoot(component);
+    expect(root.props).toMatchObject({ directionalHint: 'topLeftEdge', gapSpace: 4 });
+    await fireEvent(root, 'ready', { nativeEvent: { generation: root.props.commandGeneration } });
+    expect(ready).toHaveBeenCalledTimes(1);
+    const first = root.props.commandGeneration;
     await component.rerender(<Fixture open={false} />);
     expect(component.queryByTestId('content')).toBeNull();
     await component.rerender(<Fixture open />);
     expect(calloutRoot(component).props.commandGeneration).not.toBe(first);
+    await component.unmount();
+    expect(slotNative.current).toBeNull();
+    expect(renderNative.current).toBeNull();
+    expect(commands.current).toBeNull();
+  });
+
+  it('settles disabled-zone requests through the native result', async () => {
+    const commandsRef = React.createRef<FocusZoneCommands>();
+    const dispatch = jest.spyOn(FocusCommands, 'requestFocus').mockImplementation(() => undefined);
+    const component = await render(<FocusZone commandsRef={commandsRef} disabled testID="zone" />);
+    const root = component.getByTestId('zone');
+    expect(root.props.disabled).toBe(true);
+    let result: ReturnType<FocusZoneCommands['requestFocus']>;
+    await act(async () => {
+      result = commandsRef.current.requestFocus('first');
+    });
+    const [, generation, requestId] = dispatch.mock.calls[0];
+    await fireEvent(root, 'operationResult', { nativeEvent: { generation, requestId, status: 'not-focusable' } });
+    expect(await result).toEqual({ status: 'not-focusable' });
     await component.unmount();
   });
 });

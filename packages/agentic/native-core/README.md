@@ -42,11 +42,16 @@ to use its host-provided `RCTCallout` and `RCTFocusZone`.
 
 The macOS module-named header at `macos/shared/FRNNativeCore.h` is required by
 the generated `FRNNativeCore-Swift.h`; keep it aligned with the pod's
-`module_name` when changing native ownership. Only Fabric adapters import the
-generated header. Hosts that compile the Swift sources with an Objective-C
-bridging header also get internal Swift classes declared there, duplicating
-Paper `RCT_EXTERN_MODULE` interfaces, so implement Paper manager methods in
-Swift and declare them with `RCT_EXTERN_METHOD`.
+`module_name` when changing native ownership. Fabric adapters and shared
+Objective-C behavior, such as FocusZone's use of the Swift focus service, may
+import the generated header. Paper `RCT_EXTERN_MODULE` registration files and
+the headers they import must not: hosts that compile the Swift sources with an
+Objective-C bridging header also get internal Swift classes declared there,
+duplicating the extern interfaces. Implement Paper manager methods in Swift
+and declare them with `RCT_EXTERN_METHOD`; custom property bridges use React or
+AppKit types and the narrow manager protocol in `FRNCalloutManager.h`. Follow
+the repository's [Apple and Office authoring rules](../../../references/agents/native/apple-office.md)
+for every macOS change.
 
 ## Public entrypoints
 
@@ -276,8 +281,13 @@ preserves its actual native root `ref` and publishes confirmed requests through
 `commandsRef`. Neither ref assignment nor a void native focus return is
 confirmation. Requests support abort and timeout, and reject stale lifetimes.
 
-Modern and legacy facades use the same private host components and native
-registrations. macOS shares Swift focus eligibility/actual-responder and
+Modern and legacy facades share the native registrations; Callout's facades
+also share a hook-free private host that applies native-safe positioning and
+appearance values. Both modern facades are phased components: the first phase
+owns hooks and the presentation/command lifetime, and the hook-free render
+phase merges render-time pass-through props. When a modern facade is used as
+a slot, supply its first-phase props (listed in each `SPEC.md`) through the
+slot props. macOS shares Swift focus eligibility/actual-responder and
 placement behavior between the renderer adapters; the existing navigation
 algorithm is not rewritten merely to change language.
 
