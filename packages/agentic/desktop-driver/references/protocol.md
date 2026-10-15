@@ -55,7 +55,17 @@ Implemented `furn` extensions:
 - `GET|POST /session/{id}/furn/story`;
 - `POST /session/{id}/furn/story/reset`;
 - `POST /session/{id}/furn/story/args`;
-- `GET /session/{id}/furn/tree`.
+- `GET /session/{id}/furn/tree`;
+- `GET /session/{id}/furn/window-events`, when the `windowEvents` feature is
+  advertised in `furn:features`.
+
+`furn/window-events` returns the helper's bounded diagnostic timeline for the
+session's application: recent window notifications (created, destroyed, focus,
+main-window, minimize, activation) and recent helper commands on the same
+monotonic clock, each with an `ageMs`. Live window events carry a descriptor
+with role, subrole, title, frame, and the matching WindowServer window so
+transient popups and sheets remain identifiable after they close. The log is
+evidence for diagnosis only; window and element queries remain authoritative.
 
 Navigation, history, cookies, frames, shadow roots, prompts, printing,
 arbitrary JavaScript execution, browser CSS values, and new-window creation
@@ -112,6 +122,9 @@ CSS and XPath are not redefined for non-DOM trees.
 | Capture backend fails                             | `unable to capture screen`  |
 | Deadline expires                                  | `timeout`                   |
 | Capability, property, or operation is unavailable | `unsupported operation`     |
+
+An intercepted click names the occluding element's role, name, and ID; an
+external occluder names its owning application and process ID.
 
 Error data may include bounded operation names, native diagnostic codes, and
 artifact IDs. It must not expose unrestricted environment values, native

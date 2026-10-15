@@ -24,6 +24,7 @@ Accessibility.
 | `InputLock.swift`                      | Per-user cross-process physical-input lock and abandoned-owner recovery     |
 | `Capture.swift`                        | ScreenCaptureKit window capture, element crop, scale, and PNG encoding      |
 | `Permissions.swift`                    | TCC preflight/prompt diagnostics and Security.framework signing evidence    |
+| `Session.swift`                        | Login-session lock and console diagnostics                                  |
 | `Support.swift`                        | Errors, cancellation, JSON helpers, deadlines, and AX utilities             |
 | `SelfTest.swift`                       | Provider-local framing, identity, AX, input, capture, and permission checks |
 
@@ -177,7 +178,38 @@ An AX result must be a real `AXWindow` or `AXSheet`. The provider rejects an
 `AXApplication` placeholder even if `AXIsProcessTrusted()` is true. It checks
 the windows, main-window, and focused-window attributes, refreshes replaced
 window identities, and uses CoreGraphics only as a uniquely correlated geometry
-fallback.
+fallback. Listing windows requires a readable `AXWindows` result and
+role-verified candidates; a focused or main window missing from `AXWindows`, as
+happens briefly while key status settles after a popup closes, is listed as a
+candidate instead of failing. Attaching by title still requires every fallback
+window to appear in `AXWindows` so uniqueness can be proven. Transient
+enumeration failures are retried for up to one second, or up to three seconds
+while window notifications are still arriving, before they are reported. A
+tracked window that Accessibility reports destroyed is no longer listed.
+
+## Window events and command journal
+
+Each observed application has an `AXObserver` on a dedicated run-loop thread,
+so notifications arrive while the worker thread executes commands. The monitor
+records window created, destroyed, focused-window, main-window, minimize, and
+application activation notifications in a 512-entry ring. Live window events
+carry a descriptor read when the notification arrives: role, subrole, role
+description, identifier, title, frame, parent, child count, and the matching
+WindowServer window's number, layer, alpha, on-screen state, and name.
+Activation events record which application owns system-wide keyboard focus.
+Destroyed notifications for tracked windows close them and publish the FDR1
+`window-closed` event.
+
+A 128-entry command journal records each helper command's start, duration,
+outcome, and window or element identifiers on the same monotonic clock. It
+never records text, values, or native handles. Activation annotates its entry
+with the method used, elapsed time, and the previously focused application.
+The `windowEvents` command returns both logs with `ageMs` values for
+`furn/window-events` and failure evidence. Both are diagnostics only.
+
+Descriptor reads set a messaging timeout on the notification's own element.
+Never set one on the system-wide element: `AXUIElementSetMessagingTimeout`
+applies a system-wide timeout to every Accessibility request in the process.
 
 ## Accessibility and input
 
@@ -189,11 +221,37 @@ The AX provider supports:
 - active element, focus, hit testing, clear, and accessibility activation;
 - primary and secondary application windows.
 
+AppKit omits `AXEnabled` from elements that have no disabled state, and React
+Native macOS Paper views publish it only when `accessibilityState.disabled` is
+set. The provider therefore reports `enabled: true` when an element's attribute
+list does not contain `AXEnabled`, matching how assistive technologies treat
+it. An element that lists `AXEnabled` without a readable value still reports
+an unsupported enabled state. Fabric views always publish the attribute.
+
 Quartz Event Services supplies physical pointer, keyboard, text, and wheel
 input. Physical input requires Accessibility/PostEvent authority for the
 responsible process and an unlocked interactive Aqua session. Missing authority
 returns `input-unavailable`; the provider never substitutes unrelated
 accessibility activation and reports physical success.
+
+A locked screen or a login session that is not the active console prevents
+applications from publishing complete accessibility windows and from receiving
+physical input. Launch, attach, window discovery, and new pointer, keyboard,
+text, or wheel input check the login session and fail immediately with
+`input-unavailable` and a `session` diagnostic instead of retrying into a
+window-enumeration error. Key and button releases remain allowed so recovery
+can complete while the session is locked.
+
+Activation sets the application's `AXFrontmost` attribute, which a trusted
+client applies immediately, and falls back to `NSRunningApplication.activate`
+only if that fails. Cooperative workspace activation was observed to wait about
+a second for the active application to yield. Activation completes when the
+application reports `AXFrontmost` and the primary window reports `AXMain`;
+a timeout names the application that kept keyboard focus.
+
+A physical click first hit-tests its target. When another element owns the
+point, `element click intercepted` names the occluding element, or the external
+application and process that own it.
 
 React Native macOS does not move keyboard focus on ordinary mouse-down. Portable
 tests should assert the platform's actual activation behavior rather than
@@ -243,6 +301,8 @@ The versioned JSON reports:
 - Screen Recording preflight state;
 - cdhash, signer, team identifier, and designated requirement when
   Security.framework exposes them;
+- the login session: whether it is on the console, finished logging in, and
+  locked, read from `CGSessionCopyCurrentDictionary`;
 - whether each value is available and whether this mode can prompt for it.
 
 Values that cannot be read are marked unavailable rather than inferred.
@@ -317,7 +377,7 @@ FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="<identity>" \
 
 The Swift self-test covers framing, JSON, input ledger and lock recovery,
 capture scaling, snapshot normalization, AX diagnostics, CoreGraphics fallback
-classification, permission diagnostics, and hello identity. The Node native
+classification, permission and login-session diagnostics, and hello identity. The Node native
 contract additionally builds, verifies, reuses, and directly resolves the app;
 starts the actual long-lived process; and exercises malformed-frame recovery.
 
@@ -358,10 +418,13 @@ remain in [PLAN.md](../../PLAN.md).
 | Signature or designated-requirement mismatch  | Select the intended identity, rebuild, and do not mutate cached output                                   |
 | Accessibility true but no real AX window      | Preserve diagnostics, restart/retry the app and helper, and do not accept an `AXApplication` placeholder |
 | Physical input unavailable                    | Grant the actual responsible process Accessibility/PostEvent access and use a logged-in Aqua session     |
+| Screen locked or session not on console       | Unlock or switch to the session, confirm `session` in `doctor --permissions`, and retry                  |
 | Screen capture unavailable                    | Grant Screen & System Audio Recording, restart the helper, and rerun noninteractive doctor               |
 | Ambiguous application or window               | Correct the registered identity or owner lease; never choose the first match                             |
 | Input lock reports an abandoned owner         | Ensure the prior process is gone, use the verified helper's release mode, then retry                     |
 | Element becomes stale after a Storybook reset | Resolve it again in the new preview generation                                                           |
+| Unexpected extra window after a popup closes  | Read `failure-window-events.json` and `failure.png`; a focused `AXSheet` can be an app error overlay     |
+| Activation is slow or fails                   | Check the `activate` journal entry's `method`, `elapsedMs`, and focused application                      |
 
 See [Native helpers](../../references/native-helpers.md) for cache and
 resolution policy, [CI integration](../../references/ci-integration.md) for
