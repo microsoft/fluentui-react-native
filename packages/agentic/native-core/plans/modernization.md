@@ -281,6 +281,42 @@ negative monitor origins, collision/flip geometry, scrolled or transformed
 anchors (the frame-summing position ignores scroll offsets), app deactivation
 for presentations without focus, and repeated-cycle resource measurements.
 
+#### Reconciliation with the macOS Paper/driver work
+
+The Windows commit was rebased onto `0ffb15fa3` (macOS Desktop Driver Paper
+fixes, Framework Base host focus record, Paper qualification). Only the
+modern Callout story, this plan, and one README sentence needed merging;
+native, driver, and changeset content is unchanged. The story now reports
+lifecycle, operation results, and dismissal on separate labels.
+
+Upstream's Windows/Win32-reachable changes were checked at source:
+`releaseHostFocusRecord` only acts when `TextInput.State.onTextInputBlur`
+exists, which RNW 0.81.35 and react-native-win32 0.81.9 do not expose; window
+event diagnostics are requested only when a helper advertises `windowEvents`,
+which the Windows helper does not; the helper's source digest is unchanged.
+
+Executed on the reconciled commit: `yarn build`; native-core (18 Node, 30
+Jest), framework-base (184), desktop-driver (61, 3 native-gated skips), and
+storybook-desktop (175) tests; Windows `build-driver`/`prep`/`build` (zero
+warnings/errors); `native-*` smoke on Windows (170 stories, 18/18 passed, 0
+skipped) and Win32 (152 stories, 7/7 passed, 0 skipped). `yarn clean-lage-cache`
+then `yarn lage buildci --continue` passes 170 tasks; only root knip fails,
+with the same 11 untouched-package findings as clean `HEAD`.
+
+Full authored catalogs (no story filter) were also run, because upstream
+changed shared Framework Base focus targets and WDIO wait defaults. Every
+Windows/Win32 `*--focus-*` story that first clicks an agentic `Input`
+(`focus-probe-entry`, `focus-request-entry`, `focus-switch-entry`) fails
+because the entry never reports UIA focus. Button focus-management fails
+identically on the pre-upstream base `5705e14f1` on both Windows and Win32,
+matching a 2026-09-10 Win32 observation, so this is pre-existing and not
+caused by either line of work. Separately, some physical clicks
+intermittently land at the idle cursor position (two Button stories
+navigated to the same sidebar item) or report "Windows did not move the
+pointer"; the same cases pass in other runs of the identical commit, and the
+base runs show the same error. These catalog gaps remain open and are
+outside the native-core lanes.
+
 ### Executed evidence on Windows
 
 Executed 2026-10-02 local / 2026-10-03 UTC with Node 24.15.0, React 19.1.4,
