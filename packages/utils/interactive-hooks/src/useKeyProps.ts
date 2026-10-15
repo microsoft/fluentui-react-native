@@ -41,58 +41,55 @@ function keyPressCallback(userCallback?: KeyCallback, ...keys: string[]) {
   return onKeyEvent;
 }
 
-function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
-  const keyboardProps = Platform.select({
-    ios: undefined,
-    android: undefined,
-    macos: {
-      onKeyUp: keyPressCallback(userCallback, ...keys),
-      validKeysUp: keys,
-    },
-    windows: {
-      /**
-       * https://github.com/microsoft/react-native-windows/issues/11049
-       * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
-       * While this discrepancy is present, let's not specify `keyUpEvents`.
-       */
-      onKeyUp: keyPressCallback(userCallback, ...keys),
-    },
-    // win32
-    default: {
-      onKeyUp: keyPressCallback(userCallback, ...keys),
-      keyUpEvents: keys.map((keyCode) => {
-        return { key: keyCode };
-      }),
-    },
-  });
-  return keyboardProps;
+/**
+ * react-native-macos 0.78 removed native support for `validKeysDown` and `validKeysUp`. From that version,
+ * react-native-macos uses `keyDownEvents` and `keyUpEvents`, the same props as win32.
+ */
+function usesLegacyMacOSKeyProps(): boolean {
+  return Platform.OS === 'macos' && Platform.constants.reactNativeVersion.minor < 78;
 }
 
-function getKeyDownPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
-  const keyboardProps = Platform.select({
-    ios: undefined,
-    android: undefined,
-    macos: {
-      onKeyDown: keyPressCallback(userCallback, ...keys),
-      validKeysDown: keys,
-    },
-    windows: {
-      /**
-       * https://github.com/microsoft/react-native-windows/issues/11049
-       * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
-       * While this discrepancy is present, let's not specify `keyDownEvents`.
-       */
-      onKeyDown: keyPressCallback(userCallback, ...keys),
-    },
-    // win32
-    default: {
-      onKeyDown: keyPressCallback(userCallback, ...keys),
-      keyDownEvents: keys.map((keyCode) => {
-        return { key: keyCode };
-      }),
-    },
-  });
-  return keyboardProps;
+type KeyEventDirection = 'down' | 'up';
+
+/**
+ * Gets the platform-specific props that call `userCallback` when one of `keys` goes down or up.
+ * The key down and key up hooks share this worker, so both directions use the same platform rules.
+ * Returns `undefined` on iOS and Android.
+ */
+function getKeyPropsWorker(direction: KeyEventDirection, userCallback: KeyCallback, keys: string[]): KeyPressProps | undefined {
+  if (Platform.OS === 'ios' || Platform.OS === 'android') {
+    return undefined;
+  }
+
+  const onKeyEvent = keyPressCallback(userCallback, ...keys);
+  const isKeyDown = direction === 'down';
+
+  if (Platform.OS === 'windows') {
+    /**
+     * https://github.com/microsoft/react-native-windows/issues/11049
+     * Windows doesn't filter on `key` but on `code`, which is quite different ('A' vs 'KeyA' or 'GamepadA').
+     * While this discrepancy is present, let's not specify `keyDownEvents` or `keyUpEvents`.
+     */
+    return isKeyDown ? { onKeyDown: onKeyEvent } : { onKeyUp: onKeyEvent };
+  }
+
+  if (usesLegacyMacOSKeyProps()) {
+    // react-native-macos 0.73 and 0.74 send JS only the key events that `validKeysDown` and `validKeysUp` list.
+    // Delete this branch when FURN drops support for react-native-macos < 0.78.
+    return isKeyDown ? { onKeyDown: onKeyEvent, validKeysDown: keys } : { onKeyUp: onKeyEvent, validKeysUp: keys };
+  }
+
+  // win32 and react-native-macos 0.78+
+  const keyEvents = keys.map((key) => ({ key }));
+  return isKeyDown ? { onKeyDown: onKeyEvent, keyDownEvents: keyEvents } : { onKeyUp: onKeyEvent, keyUpEvents: keyEvents };
+}
+
+function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps | undefined {
+  return getKeyPropsWorker('up', userCallback, keys);
+}
+
+function getKeyDownPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps | undefined {
+  return getKeyPropsWorker('down', userCallback, keys);
 }
 
 /**
