@@ -100,8 +100,19 @@ Do not add other keys. Load conditions belong in this index and in routers, not 
   an ID; retire it by removing its definition and every citation.
 - These IDs cannot collide with component requirement IDs such as `BTN-006`, which belong to component contracts.
 
+## Routing conventions
+
+- State a prerequisite explicitly: "Read [common focus authoring](focus/common.md) first", a sentence such as "Focus
+  work starts with" followed by the linked document, or a `Read first` section. Prerequisites must not form cycles, and
+  a chain may be at most three reads deep.
+- Compatibility references are terminal. Link to the replacement document, never to a compatibility path.
+- Routing tables, meaning tables with a `Skill` or `Workflow` column, route each task to exactly one skill. A task
+  routed in more than one table must route to the same skill everywhere. Overlays belong in the workflow, not the
+  routing table.
+- Route every project skill from the root `AGENTS.md` routing table.
+
 ## Validation
 
 `yarn check-agent-instructions` validates frontmatter, links and fragments in instruction files, inbound fragments to
-instruction files, skill metadata, rule definitions and citations, this index, and the evaluation fixtures. It also
-runs in `yarn lage buildci`.
+instruction files, skill metadata, rule definitions and citations, this index, the routing conventions above, and the
+evaluation fixtures. It also runs in `yarn lage buildci`.

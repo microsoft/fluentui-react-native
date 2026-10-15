@@ -25,6 +25,10 @@ const ID_PATTERN = /^[a-z0-9][a-z0-9-]*(\.[a-z0-9][a-z0-9-]*)*$/;
 const RULE_DEFINITION = /^\s*[-*]\s+\*\*([RC]-[A-Z0-9]+-\d{3}):\*\*/;
 const RULE_CITATION = /\b[RC]-[A-Z0-9]+-\d{3}\b/g;
 const MAX_SKILL_DESCRIPTION_WORDS = 60;
+const MAX_PREREQUISITE_DEPTH = 3;
+const PREREQUISITE_SENTENCE = /\b(?:read|load)\b[^.]*\bfirst\b|\bstarts? with\b/i;
+const ROUTING_COLUMNS = new Set(['skill', 'workflow']);
+const SKILL_LINK = /(?:^|\/)\.github\/skills\/([^/]+)\/SKILL\.md$/;
 const SKIP_DIRS = new Set(['node_modules', 'lib', 'lib-commonjs', 'dist', '.git', 'Pods', 'build', 'DerivedData']);
 const REPO_PATH_PREFIXES = ['.github/', 'apps/', 'packages/', 'references/', 'scripts/', 'docs/'];
 
@@ -187,6 +191,96 @@ export function extractCodePaths(markdown: string): Link[] {
     }
   });
   return paths;
+}
+
+/**
+ * Extracts explicit prerequisites: the first link in a sentence such as "Read [X](x.md) first" or
+ * "Focus work starts with [X](x.md)", and every link in a "Read first" section.
+ */
+export function extractPrerequisites(markdown: string): Link[] {
+  const prerequisites: Link[] = [];
+  let fenced = false;
+  let readFirstSection = false;
+  let paragraph: { text: string; line: number } | undefined;
+  const flush = () => {
+    if (!paragraph) {
+      return;
+    }
+    for (const sentence of paragraph.text.split(/(?<=[.!?])\s+(?=[A-Z[`*])/)) {
+      if (PREREQUISITE_SENTENCE.test(sentence.replace(/\[[^\]]*\]\([^)]*\)/g, 'LINK'))) {
+        const [first] = extractLinks(sentence);
+        if (first) {
+          prerequisites.push({ target: first.target, line: paragraph.line });
+        }
+      }
+    }
+    paragraph = undefined;
+  };
+  markdown.split('\n').forEach((line, index) => {
+    if (/^\s*(```|~~~)/.test(line)) {
+      flush();
+      fenced = !fenced;
+      return;
+    }
+    if (fenced) {
+      return;
+    }
+    const heading = /^#{1,6}\s+(.*)$/.exec(line);
+    if (heading) {
+      flush();
+      readFirstSection = /^read first$/i.test(heading[1].trim());
+      return;
+    }
+    if (readFirstSection) {
+      for (const link of extractLinks(line)) {
+        prerequisites.push({ target: link.target, line: index + 1 });
+      }
+    }
+    if (line.trim() === '' || line.trimStart().startsWith('|')) {
+      flush();
+      return;
+    }
+    if (/^\s*(?:[-*]|\d+\.)\s+/.test(line)) {
+      flush();
+    }
+    paragraph = paragraph ? { text: `${paragraph.text} ${line.trim()}`, line: paragraph.line } : { text: line.trim(), line: index + 1 };
+  });
+  flush();
+  return prerequisites;
+}
+
+type RoutingRow = { line: number; task: string; skills: string[] };
+
+/** Extracts rows of Markdown tables whose header has a Skill or Workflow column. */
+export function extractRoutingRows(markdown: string, fromFile: string): RoutingRow[] {
+  const rows: RoutingRow[] = [];
+  const lines = markdown.split('\n');
+  const cells = (line: string) =>
+    line
+      .trim()
+      .replace(/^\|/, '')
+      .replace(/\|$/, '')
+      .split('|')
+      .map((cell) => cell.trim());
+  for (let index = 0; index < lines.length; index++) {
+    if (!lines[index].trimStart().startsWith('|') || !/^\s*\|[\s:|-]+\|\s*$/.test(lines[index + 1] ?? '')) {
+      continue;
+    }
+    const header = cells(lines[index]).map((cell) => cell.toLowerCase());
+    const column = header.findIndex((cell) => ROUTING_COLUMNS.has(cell));
+    if (column <= 0) {
+      continue;
+    }
+    for (let row = index + 2; row < lines.length && lines[row].trimStart().startsWith('|'); row++) {
+      const values = cells(lines[row]);
+      const skills = extractLinks(values[column] ?? '')
+        .map((link) => resolveLink(fromFile, link.target)?.file ?? '')
+        .map((file) => SKILL_LINK.exec(file)?.[1])
+        .filter((skill): skill is string => Boolean(skill));
+      rows.push({ line: row + 1, task: values[0].toLowerCase().replace(/\s+/g, ' '), skills });
+    }
+  }
+  return rows;
 }
 
 /** Parses the standardized reference frontmatter. Returns an error message for any deviation. */
@@ -405,6 +499,94 @@ export function checkAgentInstructions(root: string): CheckResult {
       const resolved = resolveLink(file, link.target);
       if (resolved?.fragment && surfaceSet.has(resolved.file) && !anchorsOf(resolved.file).has(resolved.fragment)) {
         issues.push({ file, line: link.line, message: `missing anchor in instruction file: ${link.target}` });
+      }
+    }
+  }
+
+  // Compatibility references are terminal: nothing links to them except the redirects themselves.
+  const compatibility = new Set([...frontmatter].filter(([, meta]) => meta.kind === 'compatibility-reference').map(([file]) => file));
+  for (const file of files) {
+    if (!file.endsWith('.md') || compatibility.has(file) || path.posix.basename(file) === 'CHANGELOG.md') {
+      continue;
+    }
+    for (const link of extractLinks(read(file))) {
+      const target = resolveLink(file, link.target)?.file;
+      if (target && compatibility.has(target)) {
+        issues.push({ file, line: link.line, message: `links to compatibility reference ${target}; link to its replacement instead` });
+      }
+    }
+  }
+
+  // Explicit prerequisites must be acyclic and shallow.
+  const prerequisites = new Map<string, string[]>();
+  for (const file of surfaces) {
+    const targets: string[] = [];
+    for (const link of extractPrerequisites(read(file))) {
+      const target = resolveLink(file, link.target)?.file;
+      if (target && target.endsWith('.md') && existsExact(root, target)) {
+        if (target === file) {
+          issues.push({ file, line: link.line, message: 'document lists itself as a prerequisite' });
+        } else {
+          targets.push(target);
+        }
+      }
+    }
+    prerequisites.set(file, [...new Set(targets)]);
+  }
+  const depthMemo = new Map<string, number>();
+  const reportedCycles = new Set<string>();
+  const depth = (file: string, stack: string[]): number => {
+    const loop = stack.indexOf(file);
+    if (loop >= 0) {
+      const cycle = [...stack.slice(loop), file];
+      const key = cycle.slice(0, -1).sort().join('|');
+      if (!reportedCycles.has(key)) {
+        reportedCycles.add(key);
+        issues.push({ file, message: `prerequisite cycle: ${cycle.join(' -> ')}` });
+      }
+      return 0;
+    }
+    const cached = depthMemo.get(file);
+    if (cached !== undefined) {
+      return cached;
+    }
+    const next = prerequisites.get(file) ?? [];
+    const result = next.length === 0 ? 0 : 1 + Math.max(...next.map((target) => depth(target, [...stack, file])));
+    depthMemo.set(file, result);
+    return result;
+  };
+  for (const file of surfaces) {
+    const chain = depth(file, []);
+    if (chain > MAX_PREREQUISITE_DEPTH) {
+      issues.push({ file, message: `prerequisite chain is ${chain} reads deep; the limit is ${MAX_PREREQUISITE_DEPTH}` });
+    }
+  }
+
+  // Routing tables send each task to exactly one skill, agree across routers, and cover every skill from the root.
+  const routedTasks = new Map<string, { skills: string; file: string }>();
+  for (const file of surfaces) {
+    for (const row of extractRoutingRows(read(file), file)) {
+      if (row.skills.length !== 1) {
+        issues.push({ file, line: row.line, message: `routing row "${row.task}" must link exactly one skill; found ${row.skills.length}` });
+        continue;
+      }
+      const previous = routedTasks.get(row.task);
+      if (previous && previous.skills !== row.skills[0]) {
+        issues.push({
+          file,
+          line: row.line,
+          message: `task "${row.task}" routes to ${row.skills[0]} here but to ${previous.skills} in ${previous.file}`,
+        });
+      } else if (!previous) {
+        routedTasks.set(row.task, { skills: row.skills[0], file });
+      }
+    }
+  }
+  if (files.includes('AGENTS.md')) {
+    const rootRouted = new Set(extractRoutingRows(read('AGENTS.md'), 'AGENTS.md').flatMap((row) => row.skills));
+    for (const [skill, file] of skillNames) {
+      if (!rootRouted.has(skill)) {
+        issues.push({ file, message: `skill "${skill}" is not routed from the root AGENTS.md routing table` });
       }
     }
   }

@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, it } from 'node:test';
 
-import { checkAgentInstructions, collectAnchors, parseFrontmatter, slugify } from './agentInstructions.ts';
+import { checkAgentInstructions, collectAnchors, extractPrerequisites, parseFrontmatter, slugify } from './agentInstructions.ts';
 
 const roots: string[] = [];
 
@@ -12,11 +12,14 @@ function reference(id: string, kind: string, body: string, owner = 'packages/dem
   return `---\nid: ${id}\nkind: ${kind}\nowner_paths:\n  - ${owner}\n---\n\n${body}`;
 }
 
+const ROOT =
+  '# Root\n\nRead the [index](references/agents/README.md) and follow R-DEMO-001.\n\n| Task | Skill |\n| --- | --- |\n| Demo work | [demo-skill](.github/skills/demo-skill/SKILL.md) |\n';
+
 const VALID: Record<string, string> = {
   'packages/demo/index.ts': 'export {};\n',
   'packages/demo/SPEC.md': '# Demo\n\nSee [policy](AGENTS.md#focus-policy).\n',
   'packages/demo/AGENTS.md': '# Demo\n\n## Focus policy\n\n- **R-DEMO-001:** Keep focus visible.\n',
-  'AGENTS.md': '# Root\n\nRead the [index](references/agents/README.md) and follow R-DEMO-001.\n',
+  'AGENTS.md': ROOT,
   'references/agents/README.md': reference(
     'index',
     'index',
@@ -97,6 +100,15 @@ describe('agent instruction helpers', () => {
     assert.match(String(parseFrontmatter('---\nid: a\nkind: index\nowner_paths:\n  - x\ntitle: extra\n---\n')), /no other keys/);
     assert.match(String(parseFrontmatter('---\nkind: index\nid: a\nowner_paths:\n  - x\n---\n')), /in that order/);
   });
+
+  it('detects explicit prerequisites', () => {
+    const text =
+      '# A\n\nRead [common](common.md) first. Then see [other](other.md).\n\n- Work starts with [x](x.md), then [y](y.md).\n\n## Read first\n\n1. [Package](pkg.md)\n';
+    assert.deepEqual(
+      extractPrerequisites(text).map((link) => link.target),
+      ['common.md', 'x.md', 'pkg.md'],
+    );
+  });
 });
 
 describe('checkAgentInstructions', () => {
@@ -120,10 +132,10 @@ describe('checkAgentInstructions', () => {
   });
 
   it('rejects broken links, case mismatches, missing anchors, and missing code paths', () => {
-    assertIssue({ 'AGENTS.md': '# Root\n\n[Missing](missing.md)\n' }, /broken link: missing\.md/);
-    assertIssue({ 'AGENTS.md': '# Root\n\n[Case](references/agents/README.MD)\n' }, /broken link/);
-    assertIssue({ 'AGENTS.md': '# Root\n\n[Anchor](packages/demo/AGENTS.md#absent)\n' }, /missing anchor/);
-    assertIssue({ 'AGENTS.md': '# Root\n\nRun `packages/demo/missing.ts`.\n' }, /code span does not exist/);
+    assertIssue({ 'AGENTS.md': `${ROOT}\n[Missing](missing.md)\n` }, /broken link: missing\.md/);
+    assertIssue({ 'AGENTS.md': `${ROOT}\n[Case](references/agents/README.MD)\n` }, /broken link/);
+    assertIssue({ 'AGENTS.md': `${ROOT}\n[Anchor](packages/demo/AGENTS.md#absent)\n` }, /missing anchor/);
+    assertIssue({ 'AGENTS.md': `${ROOT}\nRun \`packages/demo/missing.ts\`.\n` }, /code span does not exist/);
   });
 
   it('protects inbound anchors into instruction files', () => {
@@ -134,8 +146,8 @@ describe('checkAgentInstructions', () => {
   });
 
   it('requires rule IDs to be defined exactly once', () => {
-    assertIssue({ 'AGENTS.md': '# Root\n\nFollow R-DEMO-002.\n' }, /undefined rule ID R-DEMO-002/);
-    assertIssue({ 'AGENTS.md': '# Root\n\n- **R-DEMO-001:** Duplicate.\n' }, /already defined/);
+    assertIssue({ 'AGENTS.md': `${ROOT}\nFollow R-DEMO-002.\n` }, /undefined rule ID R-DEMO-002/);
+    assertIssue({ 'AGENTS.md': `${ROOT}\n- **R-DEMO-001:** Duplicate.\n` }, /already defined/);
   });
 
   it('rejects compatibility redirects without a live target', () => {
@@ -154,6 +166,60 @@ describe('checkAgentInstructions', () => {
   it('validates skill metadata', () => {
     assertIssue({ '.github/skills/demo-skill/SKILL.md': '---\nname: other\ndescription: Text.\n---\n' }, /must match its directory/);
     assertIssue({ '.github/skills/demo-skill/SKILL.md': `---\nname: demo-skill\ndescription: ${'word '.repeat(61)}\n---\n` }, /61 words/);
+  });
+
+  it('rejects prerequisite cycles and deep chains', () => {
+    const doc = (id: string, body: string) => reference(id, 'instruction-reference', body);
+    const index = reference(
+      'index',
+      'index',
+      '# Index\n\n| ID | Document |\n| --- | --- |\n| `demo.guide` | [Guide](demo/guide.md) |\n| `demo.a` | [A](demo/a.md) |\n| `demo.b` | [B](demo/b.md) |\n| `demo.c` | [C](demo/c.md) |\n| `demo.d` | [D](demo/d.md) |\n',
+      'references/agents',
+    );
+    assertIssue(
+      {
+        'references/agents/README.md': index,
+        'references/agents/demo/a.md': doc('demo.a', '# A\n\nRead [B](b.md) first.\n'),
+        'references/agents/demo/b.md': doc('demo.b', '# B\n\nRead [A](a.md) first.\n'),
+        'references/agents/demo/c.md': doc('demo.c', '# C\n'),
+        'references/agents/demo/d.md': doc('demo.d', '# D\n'),
+      },
+      /prerequisite cycle: .*a\.md -> .*b\.md -> .*a\.md|prerequisite cycle: .*b\.md -> .*a\.md -> .*b\.md/,
+    );
+    assertIssue(
+      {
+        'references/agents/README.md': index,
+        'references/agents/demo/a.md': doc('demo.a', '# A\n\nRead [B](b.md) first.\n'),
+        'references/agents/demo/b.md': doc('demo.b', '# B\n\nRead [C](c.md) first.\n'),
+        'references/agents/demo/c.md': doc('demo.c', '# C\n\nRead [D](d.md) first.\n'),
+        'references/agents/demo/d.md': doc('demo.d', '# D\n\nRead [guide](guide.md) first.\n'),
+      },
+      /prerequisite chain is 4 reads deep/,
+    );
+  });
+
+  it('keeps compatibility references terminal', () => {
+    assertIssue(
+      { 'packages/demo/README.md': '# Demo\n\n[Old](../../.github/skills/demo-skill/references/old.md)\n' },
+      /links to compatibility reference/,
+    );
+  });
+
+  it('requires single, consistent, complete skill routing', () => {
+    assertIssue(
+      { 'AGENTS.md': '# Root\n\n| Task | Skill |\n| --- | --- |\n| Demo work | none |\n' },
+      /must link exactly one skill; found 0/,
+    );
+    assertIssue({ 'AGENTS.md': '# Root\n' }, /not routed from the root AGENTS\.md routing table/);
+    assertIssue(
+      {
+        '.github/skills/other-skill/SKILL.md': '---\nname: other-skill\ndescription: Another skill.\n---\n',
+        'AGENTS.md': `${ROOT}| Other work | [other-skill](.github/skills/other-skill/SKILL.md) |\n`,
+        'packages/demo/AGENTS.md':
+          '# Demo\n\n## Focus policy\n\n- **R-DEMO-001:** Keep focus visible.\n\n| Task | Workflow |\n| --- | --- |\n| Demo work | [other](../../.github/skills/other-skill/SKILL.md) |\n',
+      },
+      /task "demo work" routes to/,
+    );
   });
 
   it('validates evaluation cases', () => {
