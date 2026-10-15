@@ -34,7 +34,8 @@ reviewer's assertion and remains empty after a source identity changes.
 ## Adapt to React Native
 
 Classify source guidance as adopted, adapted, intentionally divergent, not
-applicable, or deferred. Consult the Flex token map and the closest Win32,
+applicable, or deferred. Consult the
+[Flex token map](../../../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml) and the closest Win32,
 macOS, or Windows FURN implementation for compatibility; do not use iOS as the
 cross-platform canonical reference unless the work targets iOS.
 

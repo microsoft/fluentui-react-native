@@ -22,17 +22,17 @@ more than one generation; Button ships both v0 and v1 implementations.
 
 ## 1. Task mode
 
-| Task                                                             | Workflow                                                                                                      |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Create a new component                                           | [agentic-component-authoring](../../../.github/skills/agentic-component-authoring/SKILL.md)                   |
-| Change an existing agentic component or primitive                | [agentic-component-authoring](../../../.github/skills/agentic-component-authoring/SKILL.md)                   |
-| Contract-only, feasibility, or plan-only agentic contract work   | [agentic-component-contract-authoring](../../../.github/skills/agentic-component-contract-authoring/SKILL.md) |
-| Fix or maintain an existing v0 or v1 component                   | [maintain-v0-v1-component](../../../.github/skills/maintain-v0-v1-component/SKILL.md)                         |
-| Review a component change of any generation                      | [review-component](../../../.github/skills/review-component/SKILL.md)                                         |
-| Native component, TurboModule, native service, or codegen change | [implement-native-component](../../../.github/skills/implement-native-component/SKILL.md)                     |
-| Cross-component agentic extraction or dependency direction       | [agentic-component-optimization](../../../.github/skills/agentic-component-optimization/SKILL.md)             |
-| Storybook app, Metro, CocoaPods, or desktop native toolchain     | [agentic-storybook-development](../../../.github/skills/agentic-storybook-development/SKILL.md)               |
-| Dependency vulnerability remediation                             | [fix-security-issues](../../../.github/skills/fix-security-issues/SKILL.md)                                   |
+| Task                                                                    | Workflow                                                                                                      |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Create a new component                                                  | [agentic-component-authoring](../../../.github/skills/agentic-component-authoring/SKILL.md)                   |
+| Change, or plan a change to, an existing agentic component or primitive | [agentic-component-authoring](../../../.github/skills/agentic-component-authoring/SKILL.md)                   |
+| Agentic contract-only or contract-feasibility work                      | [agentic-component-contract-authoring](../../../.github/skills/agentic-component-contract-authoring/SKILL.md) |
+| Fix or maintain an existing v0 or v1 component                          | [maintain-v0-v1-component](../../../.github/skills/maintain-v0-v1-component/SKILL.md)                         |
+| Review a component change of any generation                             | [review-component](../../../.github/skills/review-component/SKILL.md)                                         |
+| Native component, TurboModule, native service, or codegen change        | [implement-native-component](../../../.github/skills/implement-native-component/SKILL.md)                     |
+| Cross-component agentic extraction or dependency direction              | [agentic-component-optimization](../../../.github/skills/agentic-component-optimization/SKILL.md)             |
+| Storybook app, Metro, CocoaPods, or desktop native toolchain            | [agentic-storybook-development](../../../.github/skills/agentic-storybook-development/SKILL.md)               |
+| Dependency vulnerability remediation                                    | [fix-security-issues](../../../.github/skills/fix-security-issues/SKILL.md)                                   |
 
 v0 and v1 are maintenance-only (R-V0-001, R-V1-001). A request for a new component uses the agentic workflow even
 when a v0 or v1 component with a similar name exists.

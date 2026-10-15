@@ -1,6 +1,6 @@
 ---
 name: agentic-component-contract-authoring
-description: Create or revise reviewed React Native component contracts in packages/agentic/components from Flex/X3, Fluent v9, HTML/CSS, images, local platform foundations, or composite evidence. Use for contract-only, feasibility, or plan-only work and before implementing an unreviewed contract.
+description: Create or revise reviewed React Native component contracts in packages/agentic/components from Flex/X3, Fluent v9, HTML/CSS, images, local platform foundations, or composite evidence. Use for contract-only or contract-feasibility work, and as the contract gate before implementing or planning a component change.
 license: MIT
 ---
 
@@ -11,14 +11,15 @@ contract. This skill owns source interpretation, authority, provenance,
 uncertainty, React Native adaptation, divergences, and requirement planning. It
 does not own component implementation.
 
-Use this skill directly for contract-only, feasibility, or implementation-plan
-requests. The [component authoring skill](../agentic-component-authoring/SKILL.md)
+Use this skill directly for contract-only or contract-feasibility requests. A
+plan to change a component's implementation or public API starts in the
+[component authoring skill](../agentic-component-authoring/SKILL.md), which
 invokes this workflow before code when a contract is missing, stale, still a
 draft, or accompanied by new source evidence.
 
 ## Choose the request mode
 
-- **Feasibility or plan only:** inspect the evidence, identify blockers and
+- **Feasibility or contract plan:** inspect the evidence, identify blockers and
   unknowns, and describe the contract work without changing implementation.
   Commit contract files only when the user requested a contract.
 - **Contract only:** create or revise the local contract and stop after its
@@ -58,7 +59,9 @@ Load every adapter represented by the supplied evidence, but no others.
 5. Draft the original React Native contract:
    - public API, slots, defaults, state ownership, and requirement IDs in
      `SPEC.md`;
-   - FURN token bindings and gaps in `spec/tokens.yaml`;
+   - FURN token bindings and gaps in `spec/tokens.yaml`, mapped through the
+     [Flex token map](../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml).
+     Name each proposed binding or list it as unresolved;
    - native accessibility in `spec/accessibility.md`;
    - keyboard, pointer, focus, and motion behavior in
      `spec/interaction.md`;

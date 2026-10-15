@@ -1,6 +1,6 @@
 ---
 name: agentic-component-authoring
-description: Implement or change components and primitives in packages/agentic/components, including every new component. Covers public APIs, slots, state, token styling, rendering, tests, and stories. Not for contract-only work, read-only reviews, v0/v1 maintenance, or the Storybook app toolchain.
+description: Implement, change, or plan changes to components and primitives in packages/agentic/components, including every new component. Covers public APIs, slots, state, token styling, rendering, tests, and stories. Not for contract-only work, read-only reviews, v0/v1 maintenance, or the Storybook app toolchain.
 license: MIT
 ---
 
@@ -44,6 +44,9 @@ guidance when it is focusable. Load the Windows Fabric reference only for native
 the affected reference and its immediate neighbors.
 
 ## Workflow
+
+For a plan-only request, follow steps 1 to 4 without editing, then return the planned contract revision, the
+references used, the implementation order, and the validation plan.
 
 1. Read the package instructions and the component's contract: `SPEC.md`, `spec/source.json`, and every React Native
    companion it references for a higher-order component, or `CONTRACT.md` for a primitive.
