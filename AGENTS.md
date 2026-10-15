@@ -47,7 +47,7 @@ Classify the change with the [classification guide](references/agents/components
 | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | New component, or change or plan a change to an agentic component or primitive      | [agentic-component-authoring](.github/skills/agentic-component-authoring/SKILL.md)                   |
 | Agentic contract-only or contract-feasibility work                                  | [agentic-component-contract-authoring](.github/skills/agentic-component-contract-authoring/SKILL.md) |
-| Fix or maintain an existing v0 or v1 component                                      | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                         |
+| Fix or maintain an existing v0 or v1 component (not native-core `/legacy`)          | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                         |
 | Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                         |
 | Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
 | Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
