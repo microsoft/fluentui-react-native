@@ -275,8 +275,7 @@ Executed:
   the package's 175 tests pass in isolation and the task passes on a
   `--continue` rerun. `yarn change:check` passes.
 
-Not established: macOS execution of the new/changed authored cases (they are
-platform-neutral apart from Windows-only geometry), DPI other than 100%, RTL,
+Not established on Windows: DPI other than 100%, RTL,
 negative monitor origins, collision/flip geometry, scrolled or transformed
 anchors (the frame-summing position ignores scroll offsets), app deactivation
 for presentations without focus, and repeated-cycle resource measurements.
@@ -473,19 +472,47 @@ automatic reopen loop, target replacement, local rect/point placement,
 alignment/gap/collision, DPI/RTL/negative monitor origins, and teardown.
 Passive observation must not activate a popup to inspect it.
 
-### macOS rerun required
+### macOS rerun after the Windows Callout and Menu work
 
-The 2026-10-15 Windows session changed authored stories that also run on
-macOS: the legacy Callout outside-click case now runs on every host, legacy
-`WindowCommands` adds Escape, and modern Callout adds light-dismiss, Escape,
-and Menu composition cases. After reconciliation with the macOS Paper work,
-modern Callout reports lifecycle (`modern-callout-status`), operation results
-(`modern-callout-operations`), and dismissal (`modern-callout-dismissal`)
-separately; readiness resets the dismissal label so an automatic reopen of a
-latched presentation is observable. Run
-`STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and-tests`
-with and without `--paper`, and record whether Menu composition restores the
-trigger through AppKit's owner-window key restoration.
+The Windows session's new and changed cases (legacy outside-click and Escape,
+modern light dismiss, Escape, and Menu composition) were run on macOS. Menu
+composition exposed two Fabric FocusZone defects, both now fixed:
+
+- Fabric hosts the Paper `RCTFocusZone` without a React tag, and `RCTView`
+  builds its focus and keyboard events from that tag. When a new Callout popup
+  selected the zone as its first key view, the zone's focus forwarding resigned
+  it and `RCTView` threw building the blur event, aborting the app on the first
+  menu open. Every key that bubbled through the zone also threw, and AppKit
+  dropped it, so Escape never reached the popup's `cancelOperation:`. A tagless
+  zone now sends resign and key messages past `RCTView`.
+- The Fabric wrapper returned keys that bubbled out of the zone to the zone
+  again; with the zone forwarding them, that recursed. The wrapper now
+  continues bubbled keys up the responder chain.
+
+AppKit restores the owner window's retained first responder when a focused
+popup closes. A pointer press does not make a Pressable first responder on
+macOS, so a pointer-opened menu returns focus to whatever held it before, not
+the trigger. At the owner's direction this is configurable: Framework Base's
+`useFocusablePressable` takes `pointerFocus: 'platform' | 'always' | 'never'`.
+The default follows the platform (Windows and Win32 focus a pressed target;
+macOS follows AppKit). The Menu composition story's trigger uses the mode; its
+default case asserts the platform convention and `MenuCompositionFocusingTrigger`
+asserts trigger restoration with `always` on every platform. Windows must rerun
+both Menu cases: its trigger now requests focus on press through the hook.
+
+Full macOS rerun also showed the legacy FocusZone stories calling host
+`focus()` directly, leaving a dead View in React Native's focused-input record;
+the next ScrollView tap raised a Paper RedBox. They now use `pointerFocus:
+'always'` and a focus target.
+
+Evidence: `yarn storybook test --story 'native-*'` passes 19 cases (16 passed,
+3 Windows-geometry skips) on Fabric and Paper. `yarn storybook smoke --macos
+[--paper] --mode stories-and-tests` renders 178 stories and runs 43 cases
+(38 passed, 5 skipped) on both renderers. The Office strict probe passes. One
+earlier full Paper run failed two Button focus-management cases intermittently:
+the window-event descriptor identified macOS AutoFill's
+`SafariPlatformSupportAutoCompleteWindow` over the story's TextInput; the cases
+passed four isolated repeats and the final full runs.
 
 ## Remaining gates
 

@@ -2,6 +2,7 @@
 #import <React/RCTBaseTextInputView.h>
 #import "RCTFocusZone.h"
 #import <React/RCTI18nUtil.h>
+#import <React/UIView+React.h>
 #import "FRNNativeCore-Swift.h"
 
 typedef enum {
@@ -246,6 +247,21 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 {
 	NSView *keyView = _defaultResponder ?: GetFirstFocusableViewWithin(self);
 	return !_disabled && [[self window] makeFirstResponder:keyView];
+}
+
+/// Fabric hosts this Paper view inside a component view without a react tag. RCTView builds its focus and keyboard
+/// events from that tag and throws when it is nil, so a tagless zone sends responder messages past RCTView; the
+/// component view reports focus and keys to JavaScript itself.
+- (BOOL)isHostedWithoutReactTag
+{
+	return [self reactTag] == nil;
+}
+
+- (BOOL)resignFirstResponder
+{
+	// becomeFirstResponder resigns this zone while AppKit is still making it first responder, for example when a new
+	// popup window selects its first key view.
+	return [self isHostedWithoutReactTag] || [super resignFirstResponder];
 }
 
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
@@ -679,8 +695,19 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	{
 		// Only call super if we explicitly want to passthrough the event
 		// I.E: FocusZone don't handle this specific key
-		[super keyDown:event];
+		if ([self isHostedWithoutReactTag])
+			[[self nextResponder] keyDown:event];
+		else
+			[super keyDown:event];
 	}
+}
+
+- (void)keyUp:(NSEvent *)event
+{
+	if ([self isHostedWithoutReactTag])
+		[[self nextResponder] keyUp:event];
+	else
+		[super keyUp:event];
 }
 
 @end

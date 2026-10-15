@@ -36,7 +36,11 @@ Pointer input outside the popup family, Escape in focused content, and losing
 the host report `native-light-dismiss` or `host-detached`. Input in a nested
 popup does not dismiss the popups that own it. Closing a presentation that
 holds keyboard focus returns input to the owner window's retained focused
-component; outside input that already moved focus is not overridden. On
+component; outside input that already moved focus is not overridden. Whether
+a pointer-opened trigger is that component follows its pointer-focus mode:
+Windows and Win32 focus a pressed trigger by default, macOS follows AppKit and
+keeps the previous first responder, and `pointerFocus: 'always'` focuses the
+trigger on every platform. On
 Windows, outside input is observed for the owner island and other application
 windows; application deactivation dismisses only presentations that hold
 focus. A Menu still restores its trigger explicitly after an item closes it.

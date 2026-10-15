@@ -78,6 +78,7 @@ static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootVi
   NSString *_defaultResponderNativeID;
   NSInteger _defaultResponderTag;
   RCTFocusZone *_focusZone;
+  BOOL _forwardingKeyDown;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -182,7 +183,21 @@ static RCTPlatformView *RCTFindComponentViewWithNativeID(RCTPlatformView *rootVi
 
 - (void)keyDown:(NSEvent *)event
 {
-  [_focusZone keyDown:event];
+  // RCTFocusZone handles keys from focused content first and passes unhandled ones to its next responder, this
+  // wrapper. Continue those up the responder chain, so window commands such as Escape's cancelOperation: run, instead
+  // of returning them to the zone. Only keys sent directly to the wrapper are forwarded to the zone.
+  NSResponder *firstResponder = self.window.firstResponder;
+  BOOL fromZone = [firstResponder isKindOfClass:[NSView class]] && [(NSView *)firstResponder isDescendantOf:_focusZone];
+  if (_forwardingKeyDown || fromZone) {
+    [super keyDown:event];
+    return;
+  }
+  _forwardingKeyDown = YES;
+  @try {
+    [_focusZone keyDown:event];
+  } @finally {
+    _forwardingKeyDown = NO;
+  }
 }
 
 - (void)updateDefaultResponder

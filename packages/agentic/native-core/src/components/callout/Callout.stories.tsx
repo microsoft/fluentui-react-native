@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { useFocusablePressable } from '@fluentui-react-native/framework-base';
+import type { PointerFocusMode } from '@fluentui-react-native/framework-base';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Callout } from './Callout';
@@ -10,7 +12,7 @@ import { FocusZone } from '../focus-zone/FocusZone';
 import type { FocusZoneCommands } from '../focus-zone/FocusZone.types';
 import { useNativeViewTarget } from '../nativeTarget';
 
-type ExampleProps = { anchorKind: CalloutAnchor['kind']; exercise?: 'commands' | 'focus' };
+type ExampleProps = { anchorKind: CalloutAnchor['kind']; exercise?: 'commands' | 'focus'; pointerFocus?: PointerFocusMode };
 function Example({ anchorKind, exercise }: ExampleProps) {
   const anchor = useNativeViewTarget();
   const child = useNativeViewTarget();
@@ -136,14 +138,37 @@ function Example({ anchorKind, exercise }: ExampleProps) {
 const menuItems = ['Cut', 'Copy', 'Paste'] as const;
 
 /** A flat nonmodal menu composed from the primitives: Callout presence, FocusZone entry and arrow navigation. */
-function MenuCompositionExample() {
-  const trigger = React.useRef<React.ComponentRef<typeof View>>(null);
+function MenuCompositionExample({ pointerFocus }: Pick<ExampleProps, 'pointerFocus'>) {
   const anchor = useNativeViewTarget();
   const commands = React.useRef<FocusZoneCommands>(null);
   const [open, setOpen] = React.useState(false);
   const [key, setKey] = React.useState(0);
   const [status, setStatus] = React.useState('Closed');
   const [focused, setFocused] = React.useState('None');
+  // The pointer-focus mode decides whether pressing the trigger focuses it, and so where closing the menu returns
+  // keyboard focus: the owner window regains the focus it retained while the menu was open.
+  const [triggerProps, , { focusTarget, focusTargetRef }] = useFocusablePressable(
+    {
+      onPress: () => {
+        setKey((value) => value + 1);
+        setOpen(true);
+        setStatus('Opening');
+        setFocused('None');
+      },
+    },
+    { pointerFocus },
+  );
+  const triggerRef = React.useCallback(
+    (instance: React.ComponentRef<typeof View> | null) => {
+      const detachFocus = focusTargetRef(instance);
+      const detachAnchor = anchor.ref(instance);
+      return () => {
+        if (typeof detachFocus === 'function') detachFocus();
+        if (typeof detachAnchor === 'function') detachAnchor();
+      };
+    },
+    [anchor, focusTargetRef],
+  );
   return (
     <View style={styles.story}>
       <View accessible accessibilityRole="text" accessibilityLabel={status} testID="modern-menu-status">
@@ -152,26 +177,7 @@ function MenuCompositionExample() {
       <View accessible accessibilityRole="text" accessibilityLabel={focused} testID="modern-menu-focus">
         <Text accessible={false}>{focused}</Text>
       </View>
-      <Pressable
-        ref={(instance) => {
-          trigger.current = instance;
-          const detach = anchor.ref(instance);
-          return () => {
-            trigger.current = null;
-            if (typeof detach === 'function') detach();
-          };
-        }}
-        focusable
-        accessibilityRole="button"
-        style={styles.button}
-        testID="modern-menu-trigger"
-        onPress={() => {
-          setKey((value) => value + 1);
-          setOpen(true);
-          setStatus('Opening');
-          setFocused('None');
-        }}
-      >
+      <Pressable {...triggerProps} ref={triggerRef} accessibilityRole="button" style={styles.button} testID="modern-menu-trigger">
         <Text>Edit</Text>
       </Pressable>
       <Callout
@@ -186,8 +192,8 @@ function MenuCompositionExample() {
         onDismissed={({ reason }: CalloutDismissedEvent) => {
           setOpen(false);
           setStatus(`Dismissed: ${reason}`);
-          // A menu returns focus to its trigger; the native close already restored keyboard input to the owner.
-          if (reason !== 'native-light-dismiss') trigger.current?.focus();
+          // A programmatic close returns focus to the trigger; a native dismissal already restored the owner's focus.
+          if (reason !== 'native-light-dismiss') focusTarget.requestFocus('restore');
         }}
         content={{ style: styles.menu, testID: 'modern-menu-content' }}
       >
@@ -326,34 +332,33 @@ export const LocalPoint: Story = {
   },
 };
 export const MenuComposition: Story = {
-  render: () => <MenuCompositionExample />,
+  render: ({ pointerFocus }) => <MenuCompositionExample pointerFocus={pointerFocus} />,
+  args: { pointerFocus: 'platform' },
+  argTypes: { pointerFocus: { control: 'select', options: ['platform', 'always', 'never'] } },
   tags: ['desktop-e2e'],
   wdio: {
-    'enters a FocusZone, navigates by arrow, and restores the trigger on Escape': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick || !features.keyboard) {
-        skip('Menu composition requires physical owner and keyboard input.');
-        return;
-      }
-      const trigger = await browser.$('~modern-menu-trigger');
-      const status = await browser.$('~modern-menu-status');
-      const focused = await browser.$('~modern-menu-focus');
-      for (let attempt = 0; attempt < 2; attempt++) {
-        await trigger.click();
-        await expect(status).toHaveText('Ready: confirmed');
-        await expect(focused).toHaveText('Cut');
-        await browser.keys('\uE015');
-        await expect(focused).toHaveText('Copy');
-        await browser.keys('\uE013');
-        await browser.keys('\uE013');
-        await expect(focused).toHaveText('Paste');
-        await browser.keys('\uE00C');
-        await expect(status).toHaveText('Dismissed: native-light-dismiss');
-        await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
-          timeout: 5000,
-          timeoutMsg: 'Expected keyboard focus to return to the menu trigger.',
-        });
-      }
+    'enters a FocusZone, navigates by arrow, and follows the platform focus convention on Escape': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      const { exerciseMenuComposition } = await import('./menuComposition.wdio.ts');
+      // Windows and Win32 focus a pressed trigger, so closing the menu restores it. AppKit leaves keyboard focus where
+      // it was on click, so macOS restores the owner window's previous first responder instead.
+      await exerciseMenuComposition({ browser, expect, skip }, { restoresTrigger: platform !== 'macos' });
+    },
+  },
+};
+export const MenuCompositionFocusingTrigger: Story = {
+  render: ({ pointerFocus }) => <MenuCompositionExample pointerFocus={pointerFocus} />,
+  args: { pointerFocus: 'always' },
+  argTypes: MenuComposition.argTypes,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'restores keyboard focus to a trigger focused on press': async ({ browser, expect, skip }) => {
+      const { exerciseMenuComposition } = await import('./menuComposition.wdio.ts');
+      await exerciseMenuComposition({ browser, expect, skip }, { restoresTrigger: true });
     },
   },
 };

@@ -7,6 +7,8 @@
   generated protocols, C++ conversion, registration, and renderer integration.
 - Paper and Fabric adapters supply resolved views and event sinks to shared
   behavior. Shared behavior must not traverse renderer registries.
+- A Paper `RCTView` subclass hosted by a Fabric component view has no React tag;
+  keep `RCTView` from building focus, blur, or key events for it.
 - Modern and legacy facades share private host implementations. Legacy must
   not depend on React-19-only public wrappers.
 - Components and genuine modules are peer consumers of services. Do not route
