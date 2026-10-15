@@ -1,385 +1,84 @@
 # AGENTS.md
 
-This file provides guidance to coding agents (Claude Code and others) when working with code in this repository.
-
-## Agent permissions
-
-The shared Copilot CLI defaults are implemented by
-[the repository hook](.github/hooks/agent-permissions.json), not by prose instructions alone.
-After trusting this repository, start a new CLI session to load the hook. Node.js must be on `PATH`;
-no dependency installation is needed for the hook itself.
-
-- Read and write files inside this repository.
-- Run all Yarn commands, including `yarn` and `yarn install`.
-- Inspect Git state, stage changes, create new local commits, list branches, and fetch from `origin`.
-  Do not amend commits, discard other people's changes, or rewrite history without explicit authorization.
-- Read GitHub issues, pull requests, workflow definitions, and pipeline runs using `gh`.
-  REST `gh api` calls to user, repository, and search endpoints are approved only for GET requests,
-  without request-body/field flags. GraphQL and API mutations require separate approval.
-- Inspect the active account with `gh auth status` and `gh api user --jq .login`, and use
-  `gh auth switch` to select an existing authenticated account when needed. Never print authentication tokens.
-- Run `pod install` (including `--repo-update` and `--clean-install`) or named `pod update <Pod>...` operations,
-  optionally through `bundle exec`, from the owning app or its `ios`/`macos` directory. A project-directory
-  argument must resolve to that app's native directory and existing Podfile. Root-level Pod invocations,
-  updates of every pod, global cache cleanup, and `pod deintegrate` require separate approval.
-- Inspect processes/listeners with constrained `ps` and `lsof` commands in Bash. Probe loopback `/status` and
-  `/index.json` using `curl -q` (disable user curl configuration), GET/HEAD, and the instance's reported port.
-  Uploads, redirects, output files, arbitrary endpoints, and process termination are not pre-approved.
-
-The hook accepts simple Bash/PowerShell commands and `&&` sequences when **every** command is approved.
-`cd ./<workspace> && ...` is allowed only within the repository (use `./` to avoid Bash `CDPATH`).
-In Bash, native-driver variables listed in the hook may prefix Yarn commands, directly for unquoted values
-or through `env`, for example `FURN_NATIVE_DRIVER_TEST=1 yarn test` or
-`env "FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY=FURN Development" yarn storybook build-driver --macos`.
-Arbitrary environment overrides, pipelines, redirections, shell expansions, unrecognized
-options, remote writes, and destructive Git operations fall through to the CLI's normal permission handling;
-they are not blanket-denied. Run commands separately when practical. File approvals resolve symlinks and
-are limited to this repository. These defaults are **not a sandbox**: Yarn scripts and Git hooks can execute
-arbitrary code, and explicit approvals intentionally trust them.
-
-### Native Storybook diagnostics
-
-The existing Yarn approval covers the supported macOS, Windows, and Win32 workflows; extra blanket approvals
-for Xcode, Swift, PowerShell scripts, Metro, or screen capture are unnecessary. From `apps/storybook`:
-
-| Need                                                    | Preferred command                                                                                                                                        |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project generation and Pod installation                 | `yarn storybook prep --macos`                                                                                                                            |
-| Bundle failures                                         | `yarn storybook --verbose bundle --<platform>`                                                                                                           |
-| Native build failures                                   | `yarn storybook --verbose build --<platform>` (not Win32)                                                                                                |
-| Driver identity, signing, and macOS privacy diagnostics | `yarn desktop-driver doctor --platform macos --permissions`                                                                                              |
-| Actual listener ports and target identity               | `yarn storybook instance --<platform>`                                                                                                                   |
-| Target-scoped screenshots                               | `yarn desktop-driver agent screenshot --platform <platform-name> --url <driver-url> --target <target-id> --artifacts artifacts/<platform> --name <name>` |
-| Runtime trees and crash reproduction                    | `yarn desktop-driver agent describe ...` and `yarn storybook --verbose smoke --<platform>`                                                               |
-
-For `agent` commands, use `--platform macos` on macOS and `--platform windows` for both Windows and Win32.
-Inspect retained command logs under `artifacts/storybook-commands` and platform artifacts rather than redirecting
-output to arbitrary locations. Screenshots require a running driver/app and the operating system's own screen
-recording permission; CLI approval does not grant Accessibility or Screen Recording access.
-Keep evidence scoped to the registered target and ignored artifact directories. Unrestricted `screencapture`,
-`osascript`, debugger attachment, external crash-report directories, certificate trust changes, and TCC resets
-remain separately authorized. Do not grant these broadly to work around a failed native capability check.
-
-Contributors can add permissions through the CLI's "don't ask again in this repo" prompt, which saves
-repo-scoped approvals in their local `~/.copilot/permissions-config.json`, or through `--allow-tool` flags.
-Additional personal hooks can be defined in the gitignored `.github/copilot/settings.local.json`.
-To opt out of hooks locally, set `disableAllHooks: true` there (this disables all non-policy hooks).
-Do not commit personal permission files, account names, or credentials. Hook approvals precede normal
-tool permission checks; disable the hook if you need CLI deny rules to govern these approved operations.
-
-See the [Copilot hooks reference](https://docs.github.com/en/copilot/reference/hooks-reference) and
-[saved permissions schema](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference#permissions-configjson).
-Run `yarn test:agent-permissions` after changing the policy.
-
-## Project Overview
-
-This is the **FluentUI React Native** repository, a monorepo containing React Native components that implement Microsoft's Fluent Design System. The repository supports multiple platforms including iOS, Android, macOS, Windows, and Win32.
-
-## Repository Architecture
-
-### High-Level Structure
-
-```
-/apps/           - Demo and test applications
-  /fluent-tester/ - Main test app for component development
-  /E2E/          - End-to-end testing setup using Appium/WebDriverIO
-  /win32/        - Win32-specific test app
-  /component-generator/ - Tool to generate new components
-/packages/       - Core library packages
-  /agentic/native-core/ - Shared modern native components and TurboModules
-  /components/   - UI component implementations (Button, Checkbox, Avatar, etc.)
-  /shim/         - Compatibility entrypoints (Callout, FocusZone, theming, etc.)
-  /framework/    - Core theming and composition framework
-    /composition/ - Component composition factory (current approach)
-    /theme/      - Theme system
-    /use-tokens/ - Token-based styling hooks
-    /use-slots/  - Slot-based component composition
-  /theming/      - Theme definitions for different platforms
-    /android-theme/
-    /apple-theme/
-    /default-theme/
-    /win32-theme/
-  /experimental/ - Components under active development
-  /deprecated/   - Old framework code (foundation-compose, foundation-composable)
-  /utils/        - Shared utilities and tools
-/scripts/        - Build and development scripts (fluentui-scripts CLI)
-/docs/           - Component and theming documentation
-```
-
-### Key Framework Concepts
-
-**Composition Framework**: The repository uses `@fluentui-react-native/composition` (located at `packages/framework/composition/`) for building components. This is the current approach and is simpler than the older foundation-compose/foundation-composable frameworks in `/deprecated/`.
-
-**Slots**: The slot pattern is used to compose higher-order components. A slot represents an inner component (actual entry in the render tree). For example, a Button might have slots for `root`, `icon`, and `content`. This allows advanced customization scenarios. Components wrapping a single native component typically have one slot.
-
-**Tokens**: Design tokens handle styling and customization. Tokens are design-time values set via theme or component customization (e.g., "brandColor"). Tokens can also be props (specified via "TokensThatAreAlsoProps"). This system enables simpler customization and better memoization. For Flex token authoring, use `packages/agentic/design/src/tokens/mappings/flex-token-map.yaml` as the canonical mapping from generic CSS and Fluent token sources to grouped React Native Flex token paths. When mapping an agentic component to an existing V1 component, use the Win32, macOS, or Windows implementation as the canonical compatibility reference; do not use iOS as the cross-platform canonical value unless the work explicitly targets iOS.
-
-**Color utilities**: Runtime-safe parsing, conversion, compositing, contrast, and interaction generation live behind the opt-in `@fluentui-react-native/design/color-lib` subpath. Keep its public exports intentionally narrow and add APIs only for demonstrated production needs. Color validation policy, semantic pairings, audit helpers, and conformance fixtures belong under `packages/agentic/design/src/testing/` and are exported, when generally useful to tests, from `@fluentui-react-native/design/testing`. Production code must not depend on the testing subpath, and testing-only validation does not need bundle-size scenarios.
-
-**Theme-specific styles**: Cache `StyleSheet.create` results that depend only on `ThemeState` with a module-scoped getter created by `themedStyleSheetFactory`. Treat them as immutable, and apply props, interaction state, and user styles separately so the cached sheet is safe to share between component instances.
-
-**Platform-Specific Files**: Components use platform-specific files with extensions like `.ios.ts`, `.android.ts`, `.win32.ts`, `.macos.ts` for platform-specific implementations.
-
-**Legacy vs V1**: Many components have both legacy and V1 implementations (e.g., `Button` and `ButtonV1`). The V1 versions use the newer composition framework and are preferred.
-
-## Build System & Commands
-
-The repository builds as a **single unified TypeScript project-references graph** compiled by **tsc** (`typescript`). The root `tsconfig.json` lists every package's `tsconfig.json` under `references`, and `yarn build` runs `tsc -b` over that graph, building each package in dependency order. **Lage** orchestrates the non-build tasks (bundle, test, lint, clean), and **Yarn 4 (Berry)** in **pnpm mode** manages dependencies (configured in `.yarnrc.yml`).
-
-### Primary Commands (from the repo root)
-
-```bash
-yarn build         # Unified TypeScript build of all packages (tsc -b); emits each package's lib/
-yarn build --clean # Remove build outputs (tsc -b --clean); follow with `yarn build` for a full rebuild
-yarn lage test     # Build + run tests across packages
-yarn lage lint     # Lint across packages
-yarn lint-fix      # Lint with autofix (cross-env FURN_FIX_MODE=true lage lint)
-yarn bundle:repo   # Bundle all packages (lage bundle)
-yarn lage buildci  # CI aggregate graph: lint-repo, check-publishing, build, test, lint
-yarn clean         # Clean build artifacts (lage clean)
-yarn format        # Format code with oxfmt
-yarn format:check  # Check formatting without writing
-```
-
-### Repo-Level Checks & Housekeeping
-
-```bash
-yarn lint-repo        # Repo-wide structural lint (scripts/src/tasks/lintRepo.ts)
-yarn lint-lockfile    # Validate the Yarn lockfile
-yarn lage test-links # Validate links in repository Markdown files
-yarn check-publishing # Validate package publishing configuration
-yarn change           # Create a change file for the current branch
-yarn change:check     # Verify required change files exist
-yarn docs             # Start the documentation site
-```
-
-### Lage Configuration
-
-The task pipeline is defined in `lage.config.mjs`:
-
-- Tasks declare dependency ordering (e.g. `test` dependsOn `build`)
-- `buildci` is the aggregate CI alias (lint-repo, check-publishing, build, test, lint)
-- Lage caches task outputs; add `--no-cache` to bypass caching and `--verbose` for detailed output
-- After a major rework (e.g. moving packages, large refactors, or renaming exports), run `yarn lage test --no-cache` from the root once to force every test to re-run without relying on stale cached results. This also resets the Lage cache, so subsequent plain `yarn lage test` runs will work incrementally again.
-- Before checking in moved or renamed files, run `yarn lage test-links` and update any repository links that still reference the old paths.
-
-### Package-Level Commands
-
-Each package's own `build` script is `tsc -b` (it builds that package together with its referenced dependencies). Other per-package tasks run through the `fluentui-scripts` CLI (in `/scripts/`):
-
-- `yarn build` - tsc project-references build (emits to `lib/`)
-- `yarn lint` - ESLint (`fluentui-scripts lint`)
-- `yarn test` - Jest tests where present (`fluentui-scripts jest`)
-- `yarn depcheck` - Unused-dependency check (`fluentui-scripts depcheck`)
-- `yarn format` / `yarn format:fix` - Check / fix formatting
-
-`fluentui-scripts` also retains a `build` command that can emit dual ESM (`lib/`) and CommonJS (`lib-commonjs/`) output driven by per-package build config, but packages on this branch build with `tsc -b` directly.
-
-### Agent validation and investigation discipline
-
-- Run commands through the owning workspace's declared scripts. Inspect its `package.json` before invoking an underlying
-  runner directly; do not assume scripts such as `jest` or `check` exist, and do not bypass project references with
-  ad-hoc `tsc` file arguments.
-- Run working-directory-sensitive native tools from the owning app workspace. Flags such as CocoaPods'
-  `--project-directory` select project files but do not necessarily change subprocess resolution roots.
-- During iteration, use the smallest relevant test and run package lint/build early after type-heavy edits. For final
-  validation, run format, lint, package build, package tests, then the root build when public types, manifests, or project
-  references changed.
-- After fixing a failed validation step, rerun that step and its downstream checks. Avoid repeatedly running the entire
-  validation chain before the immediate failure is resolved.
-- Prefer committed `*.types.test.ts` coverage for compile-time contracts. Keep exploratory probes outside package source,
-  or remove them before running package validation.
-- Review small, localized diffs directly. Use an independent review agent only after focused validation passes and only
-  when the change still has a genuinely ambiguous or cross-cutting contract.
-- Keep sessions scoped to one reviewable outcome. After capturing a durable result, start unrelated work in a fresh
-  session so stale context and generated output do not dominate later investigation.
-
-## TypeScript Configuration
-
-The repo uses **TypeScript 7.0.2** via **tsc**, which is automatically added as a dev dependency to every package that has a `tsconfig.json` through dynamic package extensions (`scripts/dynamic.extensions.mts`).
-
-The whole repo compiles as one **composite project-references graph**: the root `tsconfig.json` lists every package under `references`, `tsc -b` builds them in dependency order, and each package caches incremental state in `.cache/tsconfig.tsbuildinfo`.
-
-### Key TypeScript Settings
-
-- Base config: `scripts/configs/tsconfig/tsconfig.json` → extends `tsconfig.strict.json` → `@rnx-kit/tsconfig/tsconfig.nodenext.json`
-- `target` / `lib`: `esnext`
-- `module`: `esnext`, `moduleResolution`: `bundler` (ESM)
-- `jsx`: `react-jsx`
-- `rewriteRelativeImportExtensions: true` (ESM relative-import extension rewriting)
-- `composite: true` (required for project references), `outDir: lib`
-- Strict mode, relaxed for legacy compatibility (`strictNullChecks`, `noImplicitAny`, and `strictBindCallApply` are disabled in the base config)
-
-### Compatibility Notes
-
-- `suppressImplicitAnyIndexErrors` was removed in TS 5.8+
-- `Platform.OS` doesn't include `'win32'` in the React Native types even though react-native-windows supports it at runtime — use `Platform.OS === ('win32' as any)`
-- The platform React Native forks (`react-native`, `react-native-windows`, `react-native-macos`, `@office-iss/react-native-win32`) have overlapping but divergent type definitions. Do **not** import more than one fork into a single program's type graph (it produces order-dependent type confusion under the unified build). Keep fork imports in `.win32.ts` / `.windows.ts` / `.macos.ts` files, or redeclare the needed shapes platform-neutrally.
-
-### Framework Type System
-
-The composition framework uses precise types for better type safety:
-
-- **`SlotFn<TProps>`**: Slot functions return `React.ReactElement | null` (not `ReactNode`)
-  - This reflects the actual behavior: slots always return elements via staged render or `React.createElement`
-  - Provides better type inference when accessing slot props (e.g., `Slots.root({}).props`)
-- **`FinalRender<TProps>`**: Final render functions in staged components return `JSX.Element | null`
-  - Used in composition framework's `useRender` functions
-  - Ensures type compatibility between staged components and the composition system
-
-## Development Workflow
-
-### Setting Up Development Environment
-
-1. Clone repository
-2. Run `yarn` to install dependencies
-3. Run `yarn build` to build all packages
-4. Launch FluentUI Tester app for component testing (see `/apps/fluent-tester/README.md`)
-
-### Component Development
-
-**Component Location**: Stable JavaScript components are in `/packages/components/`, components under development are in
-`/packages/experimental/`, and compatibility packages are in `/packages/shim/`. Modern native components and modules share
-`/packages/agentic/native-core/`; follow its [organization plan](packages/agentic/native-core/README.md).
-
-**Component Structure**: Each component typically has:
-
-- `package.json` - Package definition with workspace dependencies
-- `src/index.ts` - Main export file
-- `src/<Component>.tsx` - Component implementation (requires `/** @jsxImportSource @fluentui-react-native/framework-base */` pragma)
-- `src/<Component>.types.ts` - TypeScript type definitions
-- `src/<Component>.styling.ts` - Styling and token definitions
-- `src/<Component>.<platform>.ts` - Platform-specific implementations
-- `SPEC.md` - Component specification and usage documentation
-- `MIGRATION.md` - Migration guide (for V1 components)
-- `tsconfig.json`, `babel.config.js`, `jest.config.js`, `eslint.config.js`
-
-**Using Composition Framework**: Use `@fluentui-react-native/composition` for new components. For simpler components without slots/tokens, use the `stagedComponent` pattern from `@fluentui-react-native/framework-base`.
-
-**JSX Runtime**: All components use the modern automatic JSX runtime:
-
-- Add `/** @jsxImportSource @fluentui-react-native/framework-base */` at the top of `.tsx` files
-- The custom jsx-runtime intercepts JSX calls to optimize slot rendering
-- No need to import `withSlots` - it's handled automatically by the runtime
-- Components using React Fragments (`<>...</>`) work automatically (Fragment is re-exported from the jsx-runtime)
-- Packages using the jsx-runtime need `@fluentui-react-native/framework-base` in `devDependencies`
-
-**TypeScript Patterns**:
-
-- Slot functions automatically return `React.ReactElement`, so you can access `.props` directly without type assertions
-- When checking for win32 platform: `Platform.OS === ('win32' as any)` - TypeScript doesn't recognize 'win32' but react-native-windows supports it
-- Final render functions should return `FinalRender<TProps>` with children as rest parameters: `(props: TProps, ...children: React.ReactNode[])`
-
-**Module Exports**:
-
-- **Do not use barrel exports (`export * from '...'`)** - wildcard re-exports break tree-shaking because bundlers cannot statically determine which symbols are used, so unused code is retained in consumers' bundles. Always use explicit named re-exports instead, e.g. `export { Foo, Bar } from './module'` and `export type { Baz } from './module'`.
-
-**Native Modules**: Callout and FocusZone implementations live in `@fluentui-react-native/native-core`; their former packages
-are JS-only compatibility shims under `/packages/shim/`. Their JavaScript wrappers live in `src/legacy` and are exported
-only from `@fluentui-react-native/native-core/legacy`, not native-core's root entrypoint. Components with native code:
-
-- Typically have one root slot wrapping the native component
-- Use `codegenNativeComponent` for new architecture compatibility
-- May use `constantsToExport` for default values from native side
-- iOS/macOS: Include `.podspec` files
-- Native applications must directly depend on native-core for native project discovery and autolinking
-
-For new modern native components and modules, use `@fluentui-react-native/native-core` rather than creating another standalone
-package. Its Windows components are Fabric-only; macOS components support Paper and Fabric initially. Export shared APIs
-from the root and scope platform APIs to `macos`, `windows` (React Native Windows), `win` (Windows/Win32), or `win32`.
-Callout and FocusZone retain their existing public APIs and native registration names after migration.
-
-### Creating a New Component
-
-1. Create the package under `/packages/components/<ComponentName>` or `/packages/experimental/<ComponentName>` while it is
-   under development. Add modern native components/modules to the existing `/packages/agentic/native-core/` package instead.
-2. Copy structure from existing component (e.g., Shimmer, Button)
-3. Update `package.json` with correct name and dependencies (use `workspace:*` for internal packages)
-4. Add the new package's `tsconfig.json` to the root `tsconfig.json` `references` so it joins the unified build
-5. Create source files in `src/`
-6. Add test page to FluentTester at `/apps/fluent-tester/src/TestComponents/<ComponentName>/`
-7. Register test page in `testPages.tsx` and platform-specific `testPages.<platform>.tsx`
-8. Add E2E tests (see E2E Testing section)
-9. Run `yarn` and `yarn build` from root
-10. For Apple platforms: run `pod install` in test app directories
-
-### Theming
-
-Platform-specific themes are in `/packages/theming/`:
-
-- `android-theme/` - Android theming
-- `apple-theme/` - iOS and macOS theming
-- `win32-theme/` - Win32 theming
-- `default-theme/` - Cross-platform defaults
-- `theme-tokens/` - Token definitions
-- `theme-types/` - TypeScript types for themes
-
-Components require `ThemeProvider` from `@fluentui-react-native/design/theming` to work properly.
-
-### Testing
-
-**Manual Testing**: Use FluentUI Tester app (`/apps/fluent-tester/`) for interactive component testing. Test pages are in `/apps/fluent-tester/src/TestComponents/`.
-
-**E2E Testing**: Required for all new components. Uses Appium + WebDriverIO.
-
-- E2E tests live in `/apps/E2E/src/<ComponentName>/`
-- Each component needs:
-  - Page Object (`<Component>PageObject.<platform>.ts`) - Interface to interact with test page
-  - Spec Document (`<Component>Spec.<platform>.ts`) - Jasmine test cases
-  - Constants file in test component (`/apps/fluent-tester/src/TestComponents/<Component>/consts.ts`)
-- Test pages must include:
-  - `testID` on first section matching page object's `_pageName`
-  - Optional `e2eSections` prop for dedicated E2E test elements
-- Run E2E tests: `yarn e2etest:<platform>` from `/apps/E2E/`
-
-**Unit Tests**: Component-specific Jest tests where present, typically in `src/` directories. Run them with `yarn test` in a package or `yarn lage test` from the root. After a major rework, run `yarn lage test --no-cache` once at the root to ensure all tests re-run and pass without stale cache hits; this resets the Lage cache so a normal incremental `yarn lage test` works afterward.
-
-### Platform-Specific Development
-
-**iOS/macOS**:
-
-- May wrap native controls from FluentUI Apple
-- Requires `.podspec` files for native modules
-- Run `pod install` after adding dependencies
-
-**Android**:
-
-- Platform-specific styling and tokens
-- Uses `accessibilityLabel` for E2E selectors (other platforms use `testID`)
-
-**Win32**:
-
-- Separate test app at `/apps/win32/`
-- Uses WinAppDriver for E2E testing
-
-**Windows (UWP)**:
-
-- Separate test app configuration
-- Legacy support
-
-## Version Management
-
-**Changesets**: Used for change logs and versioning.
-
-- Run `yarn change` to create a change file when modifying packages
-- Change files are required before merging PRs (validated in CI via `yarn change:check`)
-- Changesets config in `.changeset/config.json`
-- Major versions are disallowed (validated in CI via `.github/scripts/validate-changesets.mts`)
-- Version bump PRs are created automatically by GitHub Actions; `yarn changeset:version` applies version bumps
-- Publishing happens in Azure Pipelines using `.ado/azure-pipelines.publish.yml`
-
-## Important Notes
-
-- This is an **alpha-stage** library under active development
-- **Requires TypeScript 7.0.2** (`typescript`, compiled via `tsc`); the unified build runs `tsc -b` over the root project-references graph
-- **Uses Yarn 4 in pnpm mode** for dependency management (configured in `.yarnrc.yml`)
-- **Uses modern automatic JSX runtime** - all components should use `@jsxImportSource @fluentui-react-native/framework-base`
-- **Dynamic package extensions**: Common dev dependencies (TypeScript, Jest, ESLint, Prettier) are automatically added via `scripts/dynamic.extensions.mts`
-- New packages must be added to the root `tsconfig.json` `references` to join the unified build
-- Follow existing component patterns for consistency
-- Test components using FluentUI Tester app before submitting PRs
-- Platform differences should be documented in component `SPEC.md` files
-- Use the newer composition framework (`@fluentui-react-native/composition`) for new components, not the deprecated foundation frameworks
-- When importing V1 components, consider aliasing: `import { ButtonV1 as Button }`
-- Slot functions return `React.ReactElement` - you can safely access `.props` without type assertions
-- Avoid barrel exports (`export * from '...'`); use explicit named re-exports to preserve tree-shaking
+Guidance for coding agents working in the FluentUI React Native monorepo, which implements Microsoft's Fluent Design
+System for iOS, Android, macOS, Windows, and Win32. This file is always loaded. It holds repository safeguards and
+routes each task to the workflow and references it needs; load only what the task requires.
+
+## How guidance is organized
+
+- **`AGENTS.md` files** hold safeguards and local invariants. Copilot CLI loads this file plus the `AGENTS.md` in the
+  working directory and each ancestor. From the repository root, read the scoped files below when a task touches them.
+- **Skills** in [`.github/skills`](.github/skills) define task workflows.
+- **[Shared references](references/agents/README.md)** in `references/agents/` hold reusable recipes and repository
+  knowledge, indexed by task.
+- **Product contracts** (`SPEC.md`, `spec/`, `CONTRACT.md`), protocols, and package documentation stay with their
+  packages and govern component behavior.
+
+## Safeguards
+
+These apply to every task.
+
+- **Permissions:** [the repository hook](.github/hooks/agent-permissions.json) approves specific operations; it is not a
+  sandbox, and other operations use normal permission handling (R-PERM-001). Do not amend commits, discard other
+  people's changes, or rewrite history without explicit authorization (R-PERM-002). Never print authentication tokens
+  or commit personal permission files, account names, or credentials (R-PERM-003). Unrestricted screen capture,
+  `osascript`, debugger attachment, crash-report access, certificate-trust changes, and TCC resets need separate
+  authorization (R-PERM-007). Read the [permissions reference](references/agents/repository/permissions.md) before
+  using `gh api`, Pod, process, loopback `curl`, or capture operations, or changing the policy.
+- **Validation:** run the owning workspace's declared scripts (R-VALID-001). Report each check as passed, failed,
+  skipped, not run, or unsupported; JavaScript tests and bundles are not native qualification (R-VALID-002). Finish
+  code or configuration changes with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
+- **Code:** no barrel exports (R-REPO-001); keep React Native fork imports in platform files (R-REPO-002); add a
+  changeset for published packages (R-REPO-003); never copy private source bodies into this public repository
+  (R-REPO-004).
+- **Component generations:** v0 and v1 are maintenance-only; new components use the agentic workflow (R-V0-001,
+  R-V1-001). Classify code by imports and structure, not by path (R-CLASSIFY-001).
+- **Native boundary:** before changing Swift, Objective-C, C++, headers, podspecs, Windows projects, codegen specs,
+  native registration, or a native-backed platform wrapper, use the
+  [native component skill](.github/skills/implement-native-component/SKILL.md), directly or as an overlay. iOS and
+  macOS changes must keep both CocoaPods-module and Office bridging-header builds working; follow the
+  [Apple and Office rules](references/agents/native/apple-office.md).
+
+## Route the task
+
+Classify the change with the [classification guide](references/agents/components/classification.md), then use:
+
+| Task                                                                                | Skill                                                                                                |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| New component, or change or plan a change to an agentic component or primitive      | [agentic-component-authoring](.github/skills/agentic-component-authoring/SKILL.md)                   |
+| Agentic contract-only or contract-feasibility work                                  | [agentic-component-contract-authoring](.github/skills/agentic-component-contract-authoring/SKILL.md) |
+| Fix or maintain an existing v0 or v1 component (not native-core `/legacy`)          | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                         |
+| Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                         |
+| Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
+| Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
+| Storybook app, Metro, CocoaPods, or desktop native toolchain                        | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
+| Dependency vulnerability remediation                                                | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                                   |
+
+Other repository work starts from the [reference index](references/agents/README.md): architecture, commands and
+validation, TypeScript, release, design tokens, focus, and native guidance.
+
+## Scoped instructions
+
+| Path                                                                                             | Scope                                                  |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| [packages/agentic/components](packages/agentic/components/AGENTS.md)                             | Agentic package invariants, contracts, and story tests |
+| [packages/agentic/components/src](packages/agentic/components/src/AGENTS.md)                     | Source boundaries and extraction                       |
+| [.../src/components](packages/agentic/components/src/components/AGENTS.md)                       | Higher-order components and the focus visual policy    |
+| [.../src/primitives](packages/agentic/components/src/primitives/AGENTS.md)                       | Public primitives                                      |
+| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                     | Desktop WebDriver driver                               |
+| [packages/framework-base](packages/framework-base/AGENTS.md)                                     | Shared component patterns                              |
+| [packages/framework-base/src/accessibility](packages/framework-base/src/accessibility/AGENTS.md) | Accessibility helpers and native action qualification  |
+| [packages/framework/framework](packages/framework/framework/AGENTS.md)                           | v1 framework package                                   |
+| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)       | v0 framework package                                   |
+| [apps/storybook](apps/storybook/AGENTS.md)                                                       | Storybook app, native workflows, and diagnostics       |
+
+## Quick facts
+
+- Yarn 4 in pnpm mode; TypeScript 7.0.2 compiled as one `tsc -b` project-references graph; Lage task orchestration.
+  New packages must be added to the root `tsconfig.json` `references`.
+- `yarn build` builds the repository; `yarn lage test` and `yarn lage lint` test and lint packages; `yarn format` formats.
+  `yarn lage buildci` runs the CI aggregate, including `yarn check-agent-instructions`. `yarn clean-lage-cache` clears
+  the Lage cache before final validation.
+- Details: [commands and validation](references/agents/repository/development.md),
+  [architecture](references/agents/repository/architecture.md), [TypeScript](references/agents/repository/typescript.md),
+  and [release](references/agents/repository/release.md).

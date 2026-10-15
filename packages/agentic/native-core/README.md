@@ -167,7 +167,7 @@ hosts become Fabric-only, without changing the public JS API.
 
 The Windows component project must require the New Architecture and fail
 clearly for a Paper build. Use the repository's
-[Windows Fabric native component reference](../../../.github/skills/agentic-component-authoring/references/windows-fabric-native-components.md)
+[Windows Fabric native component reference](../../../references/agents/native/windows-fabric.md)
 and verify APIs against the installed RNW version.
 Win32 integration is separate from React Native Windows Paper support; adding
 a Win32 export does not authorize a second RNW view-manager implementation.

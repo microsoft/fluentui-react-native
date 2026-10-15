@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "native-core-legacy-callout-prop",
+  "split": "development",
+  "task_mode": "plan",
+  "prompt": "Add a new optional prop to the legacy Callout exported from @fluentui-react-native/native-core/legacy. Plan the change.",
+  "expected": {
+    "skills": ["implement-native-component"],
+    "classification": {
+      "implementation_model": "framework-base",
+      "public_compatibility": ["legacy-entrypoint", "componentRef", "native-registration"],
+      "native_platforms": ["macos", "windows", "win32"]
+    },
+    "required_reads": ["references/agents/native/components-and-modules.md", "packages/agentic/native-core/README.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "legacy-api-modern-implementation",
+      "description": "Distinguishes the legacy public API from the modern framework-base implementation.",
+      "rule_ids": ["R-CLASSIFY-002"],
+      "source_refs": ["packages/agentic/native-core/src/legacy/callout/Callout.tsx"]
+    },
+    {
+      "id": "keeps-registration",
+      "description": "Keeps the public API compatible and the native registration names unchanged across hosts.",
+      "rule_ids": ["R-NATIVE-002"],
+      "source_refs": ["packages/agentic/native-core/README.md"]
+    },
+    {
+      "id": "per-host-evidence",
+      "description": "Plans per-host native validation for macOS, Windows, and Win32.",
+      "rule_ids": ["R-NATIVE-003"],
+      "source_refs": []
+    }
+  ]
+}

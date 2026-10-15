@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "case_id": "v1-text-compressible-review",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "A contributor proposes converting packages/components/Text/src/Text.tsx to framework-base phasedComponent because it already returns a directComponent continuation. Review that proposal.",
+  "expected": {
+    "skills": ["review-component"],
+    "classification": {
+      "implementation_model": "v1-compressible",
+      "public_compatibility": ["v1-export", "componentRef"],
+      "native_platforms": []
+    },
+    "required_reads": ["references/agents/components/classification.md", "references/agents/components/v1.md"],
+    "forbidden_actions": ["edit-files", "migrate-framework"]
+  },
+  "assertions": [
+    {
+      "id": "helper-does-not-reclassify",
+      "description": "Treats the directComponent continuation as part of a v1 compressible component.",
+      "rule_ids": ["R-CLASSIFY-001"],
+      "source_refs": ["packages/components/Text/src/Text.tsx"]
+    },
+    {
+      "id": "rejects-incidental-migration",
+      "description": "Flags the phasedComponent conversion as a framework migration outside maintenance scope.",
+      "rule_ids": ["R-V1-002"],
+      "source_refs": []
+    }
+  ]
+}

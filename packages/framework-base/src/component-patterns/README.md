@@ -30,7 +30,7 @@ from the first phase. Preserve their `focusTargetRef` separately from the
 consumer ref, then compose it through the native slot in the render phase.
 The public `FocusTarget` reports requested versus confirmed focus and cancels
 requests on detach/disable; do not infer focus from calling a native method.
-See the [desktop focus authoring guide](../../../../.github/skills/agentic-component-authoring/references/focus.md)
+See the [desktop focus authoring guide](../../../../references/agents/focus/common.md)
 for target lifetime, platform activation, and renderer boundaries.
 
 | Need                                              | Pattern                                        |

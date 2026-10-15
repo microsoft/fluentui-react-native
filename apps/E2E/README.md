@@ -143,7 +143,7 @@ Please follow this structure for the new component.
 ## Create New Constants
 
 The way we our automation framework interacts with our test app is by selecting UI components based on a string value. For this, we have a **consts.ts** file for each component that defines these values.
-You'll want to make one for your component under **apps/fluent-tester/src/TestComponents/_your-component_/consts.ts**.
+You'll want to make one for your component under **apps/E2E/src/_your-component_/consts.ts** and export it from `apps/E2E/src/index.consts.ts`; test pages import the constants from `@fluentui-react-native/e2e-testing`.
 
 **You can simply copy/paste a _consts.ts_ file from another component, and just change the name of the component in the const names and the values.**
 
@@ -254,7 +254,7 @@ export const CheckboxTest = () => {
 The spec document is where the tests will be written. We use [Jasmine](https://jasmine.github.io/), an open-sourced testing framework for JavaScript.
 The spec document imports a page object and uses it to manipulate the UI and uses 'expect' and other Jasmine statements to ensure proper functionality.
 
-Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTested_ /specs/.
+Spec documents should be put in apps/E2E/src/_ComponentToBeTested_/specs/.
 
 ```
 describe('Click on each test page and check if it renders', function() {
