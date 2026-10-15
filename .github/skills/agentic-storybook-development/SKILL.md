@@ -12,7 +12,7 @@ Work on the native Storybook application in `apps/storybook`.
 
 1. Read the repository `AGENTS.md`, then the compact
    [agent map](../../../apps/storybook/agent-map.yaml). Read the
-   [Storybook instructions](../../../apps/storybook/AGENTS.md) and
+   [Storybook instructions](../../../apps/storybook/AGENTS.md), including its native diagnostics commands, and
    [README](../../../apps/storybook/README.md) only as needed for the task.
 2. Inspect the Storybook `package.json` and run its declared workspace scripts; do not invent direct runner commands.
 3. Use `storybook-agent` to query runtime story IDs, select stories, and sweep renderability. Reproduce the first

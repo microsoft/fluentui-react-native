@@ -67,9 +67,9 @@ audit.
 
 ## Focus visual policy
 
-Read [common focus authoring](../../../../../.github/skills/agentic-component-authoring/references/focus.md),
-then [Windows/Win32](../../../../../.github/skills/agentic-component-authoring/references/focus-windows.md) or
-[macOS](../../../../../.github/skills/agentic-component-authoring/references/focus-macos.md).
+Read [common focus authoring](../../../../../references/agents/focus/common.md),
+then [Windows/Win32](../../../../../references/agents/focus/windows-win32.md) or
+[macOS](../../../../../references/agents/focus/macos.md).
 The common file owns ref, state, activation, scope, and styling invariants; platform files own detailed
 native adaptation. V1 Win32 models observable behavior for both Office Win32 and Windows Fabric.
 
@@ -90,8 +90,8 @@ identities by following a proposal before its component contract is reviewed. Th
 ## Focused references
 
 - [Contract and source adaptation](../../../../../.github/skills/agentic-component-contract-authoring/SKILL.md)
-- [Types and slots](../../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
-- [State and accessibility](../../../../../.github/skills/agentic-component-authoring/references/state-and-accessibility.md)
-- [Styles and tokens](../../../../../.github/skills/agentic-component-authoring/references/styles-and-tokens.md)
-- [Rendering and assembly](../../../../../.github/skills/agentic-component-authoring/references/rendering.md)
-- [Tests and stories](../../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)
+- [Types and slots](../../../../../references/agents/components/agentic/types-and-slots.md)
+- [State and accessibility](../../../../../references/agents/components/agentic/state-and-accessibility.md)
+- [Styles and tokens](../../../../../references/agents/components/agentic/styles-and-tokens.md)
+- [Rendering and assembly](../../../../../references/agents/components/agentic/rendering.md)
+- [Tests and stories](../../../../../references/agents/components/agentic/tests-and-stories.md)

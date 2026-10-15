@@ -26,6 +26,7 @@
     "change": "node .github/scripts/change.mts",
     "changeset:version": "node .github/scripts/changeset-version-with-postbump.mts",
     "change:check": "node .github/scripts/change.mts --check",
+    "check-agent-instructions": "node ./scripts/src/cli.ts check-agent-instructions",
     "check-publishing": "node ./scripts/src/cli.ts check-publishing",
     "lint-fix": "cross-env FURN_FIX_MODE=true lage lint",
     "root-build": "tsc -b",

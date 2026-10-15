@@ -1,22 +1,12 @@
-# Local foundation source adapter
+---
+id: compat.agentic-component-contract-authoring.local-foundation
+kind: compatibility-reference
+owner_paths:
+  - packages/agentic/components
+---
 
-Use `local-foundation` only for a theme-aware foundational component that has
-no entry in the locked Flex component catalog. This is not a bypass for missing
-Flex access or an alternative way to author a catalog component.
+# Moved: Local foundation source adapter
 
-The source entry is the contract's sole source and uses
-`authority: normative`. Its sorted references identify the public native
-platform contract and repository precedents used during review. Give each
-reference its own authority, such as `platform-contract`,
-`compatibility-reference`, or `token-reference`.
+This reference now lives at [references/agents/components/agentic/contract-sources/local-foundation.md](../../../../../references/agents/components/agentic/contract-sources/local-foundation.md).
 
-Inspect the current React Native API for the package's supported version,
-relevant native behavior, existing FURN components, and token mappings. Define
-the smallest theme-aware primitive contract needed by other components. Keep
-web inheritance or browser behavior out of the contract unless React Native
-provides an equivalent.
-
-Local-foundation contracts still require lifecycle, review, divergence,
-requirement, implementation, test, story, and platform evidence. Flex release
-and candidate drift are `not-applicable`. The checker rejects this source kind
-if the locked Flex catalog contains the component.
+This compatibility path remains so existing links continue to resolve. Do not add new links to it.

@@ -33,6 +33,26 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - `app.json` owns the custom `storybook.testIDPrefix`. Do not create another
   app identity file or duplicate the prefix in runtime source.
 
+## Native diagnostics
+
+The repository Yarn approval covers these workflows; see the
+[agent permissions reference](../../references/agents/repository/permissions.md#native-diagnostics-and-capture) for
+capture limits. From this directory:
+
+| Need                                                    | Preferred command                                                                                                                                        |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project generation and Pod installation                 | `yarn storybook prep --macos`                                                                                                                            |
+| Bundle failures                                         | `yarn storybook --verbose bundle --<platform>`                                                                                                           |
+| Native build failures                                   | `yarn storybook --verbose build --<platform>` (not Win32)                                                                                                |
+| Driver identity, signing, and macOS privacy diagnostics | `yarn desktop-driver doctor --platform macos --permissions`                                                                                              |
+| Actual listener ports and target identity               | `yarn storybook instance --<platform>`                                                                                                                   |
+| Target-scoped screenshots                               | `yarn desktop-driver agent screenshot --platform <platform-name> --url <driver-url> --target <target-id> --artifacts artifacts/<platform> --name <name>` |
+| Runtime trees and crash reproduction                    | `yarn desktop-driver agent describe ...` and `yarn storybook --verbose smoke --<platform>`                                                               |
+
+For `agent` commands, use `--platform macos` on macOS and `--platform windows` for both Windows and Win32. Inspect
+retained command logs under `artifacts/storybook-commands` and platform artifacts rather than redirecting output to
+arbitrary locations.
+
 ## Desktop Driver workflow
 
 - Use `yarn storybook manifest --<platform>` to validate static story-plan

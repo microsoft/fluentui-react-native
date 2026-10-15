@@ -37,6 +37,9 @@ const config = {
       // tsc project level build has its own caching
       cache: false,
     },
+    'check-agent-instructions': {
+      cache: false,
+    },
     'check-publishing': {
       cache: false,
     },
@@ -65,8 +68,8 @@ const config = {
     },
 
     // ── Pipeline aliases ───────────────────────────────────────────────────
-    'repo-checks': ['lint-repo', 'check-publishing'],
-    buildci: ['lint-repo', 'check-publishing', '@fluentui-react-native/root#root-build', 'test', 'lint'],
+    'repo-checks': ['lint-repo', 'check-publishing', 'check-agent-instructions'],
+    buildci: ['lint-repo', 'check-publishing', 'check-agent-instructions', '@fluentui-react-native/root#root-build', 'test', 'lint'],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
     'test-links': {

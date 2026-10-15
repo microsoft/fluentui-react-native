@@ -1,6 +1,6 @@
 ---
 name: agentic-component-contract-authoring
-description: Create or revise reviewed React Native component contracts in packages/agentic/components from Flex/X3, Fluent v9, HTML/CSS, images, local platform foundations, or composite evidence.
+description: Create or revise reviewed React Native component contracts in packages/agentic/components from Flex/X3, Fluent v9, HTML/CSS, images, local platform foundations, or composite evidence. Use for contract-only, feasibility, or plan-only work and before implementing an unreviewed contract.
 license: MIT
 ---
 
@@ -31,14 +31,14 @@ draft, or accompanied by new source evidence.
 
 Load every adapter represented by the supplied evidence, but no others.
 
-| Evidence                                      | Adapter                                                        |
-| --------------------------------------------- | -------------------------------------------------------------- |
-| Pinned Flex component skill and X3 lineage    | [Flex and X3](references/sources/flex-x3.md)                   |
-| Fluent UI v9 source or specification          | [Fluent v9](references/sources/fluent-v9.md)                   |
-| HTML, CSS, computed styles, or browser output | [HTML and CSS](references/sources/html-css.md)                 |
-| Images, screenshots, or design renders        | [Visual reference](references/sources/visual-reference.md)     |
-| Public native API plus repository precedent   | [Local foundation](references/sources/local-foundation.md)     |
-| More than one of the preceding source sets    | [Composite evidence](references/sources/composite-evidence.md) |
+| Evidence                                      | Adapter                                                                                                    |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Pinned Flex component skill and X3 lineage    | [Flex and X3](../../../references/agents/components/agentic/contract-sources/flex-x3.md)                   |
+| Fluent UI v9 source or specification          | [Fluent v9](../../../references/agents/components/agentic/contract-sources/fluent-v9.md)                   |
+| HTML, CSS, computed styles, or browser output | [HTML and CSS](../../../references/agents/components/agentic/contract-sources/html-css.md)                 |
+| Images, screenshots, or design renders        | [Visual reference](../../../references/agents/components/agentic/contract-sources/visual-reference.md)     |
+| Public native API plus repository precedent   | [Local foundation](../../../references/agents/components/agentic/contract-sources/local-foundation.md)     |
+| More than one of the preceding source sets    | [Composite evidence](../../../references/agents/components/agentic/contract-sources/composite-evidence.md) |
 
 ## Workflow
 

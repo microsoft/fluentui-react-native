@@ -59,7 +59,7 @@ Calculate the exact cutoff from the session time. Verify publication timestamps
 for proposed versions and, after lockfile generation, every newly selected npm
 version in the lockfile diff.
 
-- Do not disable or reduce the age gate to obtain a security fix.
+- **R-SEC-001:** Do not disable or reduce the age gate to obtain a security fix.
 - Do not assume `latest` is eligible.
 - Check preapproved-package exceptions explicitly; an exception does not prove
   that a newly selected release meets the requested age policy.
@@ -85,8 +85,7 @@ Use this order:
    focused regression check, and document that version-based scanners may
    still report the patched version.
 
-Do not add a broad catch, audit exclusion, or warning suppression in place of a
-runtime fix.
+- **R-SEC-002:** Do not add a broad catch, audit exclusion, or warning suppression in place of a runtime fix.
 
 ## Safely use the ignore plugin
 

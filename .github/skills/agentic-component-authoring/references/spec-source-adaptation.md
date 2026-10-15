@@ -1,9 +1,15 @@
-# Flex source adaptation
+---
+id: compat.agentic-component-authoring.spec-source-adaptation
+kind: compatibility-reference
+owner_paths:
+  - packages/agentic/components
+---
 
-Contract creation now belongs to the
+# Moved: Flex source adaptation
+
+Contract creation belongs to the
 [agentic component contract authoring skill](../../agentic-component-contract-authoring/SKILL.md).
-For pinned Flex component skills and X3 lineage, use its
-[Flex and X3 source adapter](../../agentic-component-contract-authoring/references/sources/flex-x3.md).
+Its Flex and X3 adapter now lives at
+[references/agents/components/agentic/contract-sources/flex-x3.md](../../../../references/agents/components/agentic/contract-sources/flex-x3.md).
 
-This compatibility reference remains so existing links continue to resolve.
-Implementation guidance stays in the agentic component authoring skill.
+This compatibility path remains so existing links continue to resolve. Do not add new links to it.

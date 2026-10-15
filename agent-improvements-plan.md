@@ -1,7 +1,8 @@
 # Agent instruction and skill improvements plan
 
-**Status:** Proposed; awaiting user decisions. This document authorizes no
-instruction migration, skill changes, policy changes, or evaluation runs.
+**Status:** Implemented on 2026-10-14 through P4 using the answered decisions in section 11; P5 (the
+efficacy skill) is deferred under D12. See [section 13](#13-implementation-record) for what changed, parity
+evidence, pilot results, deviations, and follow-ups.
 
 **Basis:** Repository inspection at `246d336682c628e6ff65d11c6f5997d9135be5b6`
 on 2026-10-14, independent plans from Claude Opus 5.5 and GPT 6 Astra, and
@@ -587,3 +588,106 @@ instruction-file contents, quantitative efficacy, and unavailable native
 qualification remain open until the relevant phase. No component code,
 instruction files, skills, contracts, or permission hooks were changed to
 produce this plan.
+
+## 13. Implementation record
+
+Implemented on branch `user/jasonvmo/instruction-rework` from `a1fd5c65d`. The final validation results are listed
+below; the efficiency pilot is reporting-only under D08.
+
+### What changed
+
+| Area                        | Result                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Shared home (D01)           | [`references/agents/`](references/agents/README.md) with a taxonomy, document index, placement rules, standardized frontmatter (`id`, `kind`, `owner_paths` only), and `R-`/`C-` ID conventions (D07).                                                                                                                                                                                                |
+| Centralized recipes (D10)   | Agentic types, state, styles, rendering, and tests recipes; all three focus references; Windows Fabric guidance; and all six contract-source adapters moved under `references/agents`. New shared references cover classification, v0, v1, legacy test apps, repository architecture, commands and validation, TypeScript, permissions, release, design tokens, and native components.                |
+| Compatibility               | Each of the 15 old reference paths, plus the existing `spec-source-adaptation.md` redirect, is a `compatibility-reference` linking directly to its new home. The `#focus-visual-policy` anchor and all inbound links are preserved. No alias skills were added.                                                                                                                                       |
+| Skills (D02, D03, D04)      | Added `maintain-v0-v1-component`, `review-component`, and `implement-native-component`. Existing names are retained; descriptions now state positive scope and exclusions, and the authoring skill loads references conditionally, with a primitive `CONTRACT.md` branch. v0 and v1 are maintenance-only (`R-V0-001`, `R-V1-001`).                                                                    |
+| Root router (D05, D06)      | Root `AGENTS.md` shrank from 27,423 to about 7,400 bytes. It keeps always-on safeguards (permissions, validation truthfulness, code rules, generation policy, native trigger), a task routing table, and a scoped-instruction table. `CLAUDE.md` and `.github/copilot-instructions.md` are unchanged.                                                                                                 |
+| Scoped entrypoints          | v0 and v1 package `AGENTS.md` files are short maintainer routes to the shared recipes. Agentic package and primitive files define `R-AGENTIC-*` and `R-PRIMITIVE-*` rules. The Storybook diagnostics table moved to `apps/storybook/AGENTS.md#native-diagnostics`.                                                                                                                                    |
+| Integrity checker (D09)     | `yarn check-agent-instructions` runs from the root and in `yarn lage buildci` and `repo-checks`. It validates frontmatter, index completeness, case-sensitive links and anchors, inbound anchors into instruction files, code-span paths, skill metadata, rule definitions and citations, compatibility redirects, and evaluation fixtures. It has 11 node tests in `@fluentui-react-native/scripts`. |
+| Evaluation groundwork (D11) | Eleven sanitized JSON cases in [`references/agents/evals/cases`](references/agents/evals/README.md): seven development and four holdout. The documented local result-record shape covers commit, instruction hashes, client and model, reads, assertions, usage, and confounders. No framework was chosen.                                                                                            |
+
+### Observed discovery behavior
+
+`copilot instruction list` (Copilot CLI 1.0.98) shows that a root session loads `.github/copilot-instructions.md`,
+`AGENTS.md`, and `CLAUDE.md`. Because `CLAUDE.md` imports `AGENTS.md`, root content loads twice, so every byte removed
+from the root saves double. A nested working directory additionally loads its own `AGENTS.md` and every ancestor
+`AGENTS.md` up to the root. `copilot skill list` shows all eight project skills.
+
+### Safety parity (D06)
+
+The 68-line root permissions section moved to
+[`references/agents/repository/permissions.md`](references/agents/repository/permissions.md) with rule IDs
+`R-PERM-001` to `R-PERM-008`.
+
+A sentence-level comparison mapped all 39 source sentences into the permissions reference, the Storybook diagnostics
+section, or the root safeguards. 33 matched automatically, and the remaining 6 were confirmed manually as wording
+changes. The root keeps the prohibitions always-on: no history rewriting, no token printing, and separate authorization
+for capture. Hook behavior is unchanged, and `yarn test:agent-permissions` passes.
+
+### Routing pilot (D08, reporting only)
+
+Paired, read-only routing probes ran on Copilot CLI 1.0.98 with `claude-sonnet-5.5`, medium reasoning, and only the
+view, glob, grep, and skill tools. The baseline was a worktree at `a1fd5c65d`; the candidate was the migrated tree.
+Assertions were scored by the coordinator from each probe's plan.
+
+| Measure                                    | Baseline  | Candidate      |
+| ------------------------------------------ | --------- | -------------- |
+| Expected workflow skill reached (10 cases) | 4         | 10             |
+| Assertions met: 6 development cases        | 10/14     | 14/14          |
+| Assertions met: 4 holdout cases            | 7/8       | 8/8            |
+| Total input tokens                         | 1,183,543 | 801,045 (−32%) |
+| Median input tokens per case               | 98,648    | 78,123 (−21%)  |
+| Final-call input tokens, summed            | 408,491   | 300,469 (−26%) |
+| AI usage units, summed                     | 124.4     | 96.8 (−22%)    |
+| Model requests                             | 35        | 37             |
+| On-demand instruction bytes viewed         | 169,297   | 362,936        |
+
+Baseline v0 and v1 probes loaded no instruction files and missed `componentRef`, settings-layer, evidence, and
+native-qualification obligations. Candidates load more references on demand, but the smaller always-on root dominates
+the total cost.
+
+Both configurations treated `yarn storybook build --macos` as a Paper build. The native skill now states that macOS
+defaults to Fabric and Paper requires `--paper`. A recheck then planned `prep --paper` and `build --macos --paper`.
+Under the holdout rule, that case was relabeled as development and a new unseen holdout,
+`windows-fabric-callout-prop`, was added.
+
+Caveats:
+
+- There was one run per case, with one model.
+- The personal global instruction was present in both configurations.
+- Baseline skill-tool loads are not counted in viewed bytes.
+- Holdouts were written by the same author as the instructions.
+
+### Deviations and follow-ups
+
+- **Apple/Office extraction:** the Apple native authoring section and `packages/agentic/native-core/AGENTS.md` exist
+  only on the unmerged `user/jasonvmo/native-lib2` branch. When it merges:
+  - Root `AGENTS.md` will conflict.
+  - Move the section into a new `references/agents/native/apple-office.md` with `R-APPLE-*` IDs and a parity review.
+  - Keep a short root heading `Apple native authoring and Office integration` as the anchor and safeguard route, since
+    three links target it.
+  - Route native-core's `AGENTS.md` to the new reference.
+  - Add the reference to the index.
+- **Corrected stale root claims:** `yarn build --clean` (now `build:clean`); ESLint and Prettier (now oxlint and oxfmt);
+  `depcheck`; FluentTester paths (now `apps/tester-core`); per-platform `testPages`; `validate-changesets.mts` (now
+  `change.mts`); and framework-base as a devDependency (it is a runtime dependency). `yarn docs` was not carried
+  forward because its `fluent-rn-website` workspace does not exist.
+- **Not changed (human documentation):** stale FluentTester paths in `CONTRIBUTING.md` and `apps/E2E/README.md` remain
+  as follow-ups.
+- **Deferred:** the `assess-agent-efficacy` skill (D12). Repeat the pilot with more runs, a second model, and the new
+  holdout before relying on these percentages.
+
+### Validation
+
+| Check                                                                   | Result                                                                                               |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `yarn check-agent-instructions`                                         | Passed                                                                                               |
+| `yarn workspace @fluentui-react-native/scripts test`                    | Passed (11 tests)                                                                                    |
+| `yarn workspace @fluentui-react-native/scripts build` and `lint`        | Passed                                                                                               |
+| `yarn lint-repo` (constraints, align-deps, Knip, lockfile, oxfmt)       | Passed                                                                                               |
+| `yarn lage test-links --grouped`                                        | Passed for every workspace                                                                           |
+| `yarn test:agent-permissions`                                           | Passed (10 tests)                                                                                    |
+| `yarn workspace @fluentui-react-native/components check:spec-contracts` | Passed (20 contracts)                                                                                |
+| `yarn change:check`                                                     | Passed after committing the empty changeset                                                          |
+| `yarn lage buildci --grouped`                                           | Passed: 156 tasks succeeded and 0 failed, including `check-agent-instructions` and the scripts tests |
