@@ -95,6 +95,15 @@ Physical input requires an unlocked interactive desktop and compatible user
 session/integrity. The helper advertises capability unavailability instead of
 fabricating a pass.
 
+Another absolute pointing device on the same desktop, such as a remote-desktop
+or virtual-machine viewer, can move the cursor back to its own position shortly
+after an injected move. Element clicks therefore confirm that the pointer
+reached the target (retrying that placement, which presses nothing), then
+inject the press and release as one `SendInput` batch whose events each carry
+the target coordinate. The batch is never interleaved with other input, so the
+press cannot land under a cursor that another source moved. Explicit pointer
+actions also carry their coordinate on every press and release.
+
 Windows and Win32 share implementation but retain distinct endpoint and
 renderer capabilities. Minimized-window capture remains unsupported rather
 than changing app state through an implicit restore.

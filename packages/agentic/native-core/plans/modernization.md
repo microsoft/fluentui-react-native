@@ -304,17 +304,28 @@ with the same 11 untouched-package findings as clean `HEAD`.
 
 Full authored catalogs (no story filter) were also run, because upstream
 changed shared Framework Base focus targets and WDIO wait defaults. Every
-Windows/Win32 `*--focus-*` story that first clicks an agentic `Input`
-(`focus-probe-entry`, `focus-request-entry`, `focus-switch-entry`) fails
-because the entry never reports UIA focus. Button focus-management fails
-identically on the pre-upstream base `5705e14f1` on both Windows and Win32,
-matching a 2026-09-10 Win32 observation, so this is pre-existing and not
-caused by either line of work. Separately, some physical clicks
-intermittently land at the idle cursor position (two Button stories
-navigated to the same sidebar item) or report "Windows did not move the
-pointer"; the same cases pass in other runs of the identical commit, and the
-base runs show the same error. These catalog gaps remain open and are
-outside the native-core lanes.
+Windows/Win32 `*--focus-*` story that first clicks an agentic `Input` failed
+because the entry never reported UIA focus, identically on the pre-upstream
+base `5705e14f1`, and some clicks landed on one fixed sidebar item.
+
+Root cause, found afterward: Input focus itself works. An absolute pointing
+device on this console (a remote or virtual-machine viewer) moves the cursor
+back to its own position about 15-35 ms after each injected move. The Windows
+Desktop Driver verified its move, waited 50 ms, then injected press and release
+without coordinates, so the press landed under the restored cursor: on this
+terminal (activating it, so the TextInput never focused) or on the sidebar. A
+cursor/foreground sampler recorded the snap-backs, and a simulated snap-back
+reproduces the original failure signature. The helper now confirms the pointer
+reached its target (retrying placement, which presses nothing), injects each
+click as one coordinate-carrying `SendInput` batch, and carries coordinates on
+explicit pointer actions. With real and simulated interference active, the
+focus stories pass 11/11 on Windows; full catalogs pass 43/43 on Windows (170
+stories) and Win32 passes every authored case except Button's
+"releases pressed feedback after an intervening key": `onPressOut` is not
+reported after Space with an intervening key on Win32. That keyboard gap was
+previously masked by the focus failure and remains open. The Windows helper
+self-test passes 148/148, its native contract passes, and `yarn lage buildci`
+passes 170 tasks with only the unchanged root knip baseline failing.
 
 ### Executed evidence on Windows
 
