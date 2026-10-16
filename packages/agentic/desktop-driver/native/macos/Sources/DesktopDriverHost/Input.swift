@@ -74,7 +74,7 @@ final class InputController {
   }
 
   func movePointer(to target: CGPoint, durationMilliseconds: Int, token: CancellationToken) throws {
-    try requirePhysicalInput()
+    try requireInteractiveInput()
     if !pointerInitialized {
       syncPointer()
     }
@@ -104,7 +104,7 @@ final class InputController {
   }
 
   func pointerDown(_ button: Int, token: CancellationToken) throws {
-    try requirePhysicalInput()
+    try requireInteractiveInput()
     try token.throwIfCancelled()
     _ = try mouseButton(button)
     if pressedButtons.contains(button) {
@@ -141,7 +141,7 @@ final class InputController {
   }
 
   func wheel(deltaX: Double, deltaY: Double, token: CancellationToken) throws {
-    try requirePhysicalInput()
+    try requireInteractiveInput()
     try token.throwIfCancelled()
     guard let event = CGEvent(
       scrollWheelEvent2Source: source,
@@ -157,7 +157,7 @@ final class InputController {
   }
 
   func keyDown(_ value: String, token: CancellationToken) throws {
-    try requirePhysicalInput()
+    try requireInteractiveInput()
     try token.throwIfCancelled()
     guard isSingleWebDriverKey(value) else {
       try fail(ErrorCode.invalidParams, "A keyDown value must contain exactly one Unicode code point.")
@@ -187,7 +187,7 @@ final class InputController {
   }
 
   func typeText(_ text: String, token: CancellationToken) throws {
-    try requirePhysicalInput()
+    try requireInteractiveInput()
     for scalar in text.unicodeScalars {
       try token.throwIfCancelled()
       let value = String(scalar)
@@ -253,7 +253,7 @@ final class InputController {
   }
 
   private func chord(_ strokes: [KeyStroke], token: CancellationToken) throws {
-    try requirePhysicalInput()
+    try requireInteractiveInput()
     let base = pressedKeys.count
     for (index, stroke) in strokes.enumerated() {
       try token.throwIfCancelled()
@@ -274,6 +274,12 @@ final class InputController {
         "Physical input requires Accessibility permission. Enable Furn Desktop Driver Host in System Settings > Privacy & Security > Accessibility, then restart the helper."
       )
     }
+  }
+
+  // Starting new interaction also needs an unlocked console session; releases must remain possible while locked.
+  private func requireInteractiveInput() throws {
+    try requirePhysicalInput()
+    try failIfSessionUnavailable("Physical input")
   }
 
   private func postKey(_ stroke: KeyStroke, down: Bool) throws {

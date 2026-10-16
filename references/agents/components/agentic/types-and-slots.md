@@ -1,0 +1,114 @@
+---
+id: components.agentic.types-and-slots
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/components
+---
+
+# Types and slots
+
+Use this reference when defining or changing a component's public API, slots, resolved state, native prop exposure, or
+package exports. The canonical higher-order example is
+[`button.types.ts`](../../../../packages/agentic/components/src/components/button/button.types.ts).
+
+## Separate the public contract from render-only structure
+
+Define public slots in `<component>.types.ts`:
+
+- Use `Slot<typeof NativeComponent>` for the required root.
+- Use `OptionalSlot<typeof Component>` for content, icons, indicators, or other optional elements.
+- Document what causes an optional slot to render and whether shorthand children are accepted.
+- Keep the slot surface small. A slot is public customization API, not merely an element in the render tree.
+
+Button exposes `root`, `content`, `icon`, and `selectedIcon`. Its `contentContainer` and `contentHidden` slots support the
+selected-label layout but remain in the private `ButtonStateSlots` type. Follow that split whenever measuring, overlay,
+ghost, or structural slots are implementation details.
+
+## Model variants explicitly
+
+Use named string unions for finite axes:
+
+```ts
+export type ComponentAppearance = 'primary' | 'secondary';
+export type ComponentSize = 'small' | 'medium' | 'large';
+```
+
+Collect state-bearing public props in `<Component>StateProps`. Optional public values become required in resolved state
+after the state hook applies defaults. Preserve a meaningful distinction between omitted and false values when omission
+enables behavior; Button uses `selected !== undefined` to distinguish an ordinary button from a toggle button.
+
+## Expose native props deliberately
+
+Do not blindly inherit every root prop when the component owns part of the native contract.
+
+1. Start with `PropsWithRefOf<typeof Root>` so the native root's ref is part of the public contract.
+2. Omit props the component controls, such as `children` or token-derived `style`.
+3. Reintroduce a narrowed form only when consumers need it.
+
+Button uses `OwnedRootProps<PropsWithRefOf<typeof Pressable>>`. This prevents native children from bypassing slot order,
+preserves the native style type, and retains `ref`.
+
+Compose the final public props with:
+
+```ts
+export type MyComponentProps = MyComponentStateProps & ComponentProps<MyComponentSlots, ExposedRootProps>;
+```
+
+This package targets React 19.1.4 or newer, where function components receive `ref` as a prop. Let the state hook carry
+that prop to the declared root slot; do not wrap the component in `forwardRef`. A top-level component ref always targets
+the declared root. Consumers that need an inner public slot use that slot's own `ref`.
+
+When a component needs an internal root ref as well, keep both refs and pass one through the resolved slot and the other
+when rendering the slot so Framework Base composes them. Never overwrite the consumer ref. If a primitive can render
+unrelated native instance types, omit a top-level ref unless it can define one sound, stable imperative contract.
+
+For focus targets, attachment generations, callback cleanup, and view-command
+boundaries, follow [common focus authoring](../../focus/common.md#modern-refs-and-slot-composition).
+Modern ref props do not imply that a structural root is the keyboard focus target
+or that a native focus command has completed.
+
+## Make resolved state complete
+
+Build state from:
+
+- `ComponentState<PublicAndPrivateSlots>`
+- `Required<ComponentStateProps>` for defaulted axes
+- theme state when the component reads tokens
+- interaction state when the root is interactive
+- derived booleans or values needed by styles and rendering
+- preserved user values that must be applied at a later stage
+
+Button state includes `ThemeState`, `PressableState`, `iconOnly`, `isToggleButton`, and `userStyle`. Avoid carrying raw
+props that no later stage uses.
+
+## Primitive contracts
+
+Primitives should define the smallest slot-compatible acceptance contract. For mutually exclusive sources, use a union
+with `never` on incompatible fields, as
+[`IconProps`](../../../../packages/agentic/components/src/primitives/icon/icon.types.ts) does for image, font, and SVG
+sources. Verify the primitive remains assignable to `SlotProp<typeof Primitive>` with a committed type test.
+
+## Exports
+
+Export each component and its composition pipeline explicitly from
+[`src/index.ts`](../../../../packages/agentic/components/src/index.ts):
+
+- the component and its public props, slots, variants, and resolved state type
+- the state hook as `use<Component>_unstable`
+- the style-application hook as `use<Component>Styles_unstable`
+- the render helper as `render<Component>_unstable`
+
+Name the source file `use<Component>Styles.ts` and the implementation `use<Component>Styles_unstable` so the local and
+public composition APIs match without aliases. Never use wildcard exports. Do not export private state-only slots or
+internal style definitions.
+
+## Review checklist
+
+- Every public slot is intentional and documented.
+- Render-only slots are private to resolved state.
+- Variant unions match the spec exactly.
+- Omitted and false values retain distinct semantics where required.
+- Root native props cannot bypass owned children or style ordering.
+- Stable native roots expose a correctly typed `ref`, and the state/render pipeline does not replace it.
+- Resolved state contains every defaulted and derived value needed downstream.
+- Public component, state, style-application, render, and resolved-state exports are explicit and tree-shakeable.

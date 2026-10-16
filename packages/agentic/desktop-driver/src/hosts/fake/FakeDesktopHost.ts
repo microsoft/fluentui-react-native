@@ -8,6 +8,7 @@ import type {
   DesktopHostInfo,
   DesktopTarget,
   DesktopWindow,
+  DesktopWindowEventLog,
   NativeElementSnapshot,
   NativeImage,
   NativeActionSequence,
@@ -74,6 +75,7 @@ export class FakeDesktopHost implements DesktopHost {
   private readonly elements = new Map<string, NativeElementSnapshot>();
   private readonly initialElements = new Map<string, NativeElementSnapshot>();
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
+  private readonly windowEventLog: { at: number; notification: string; sequence: number; windowId: string }[] = [];
 
   constructor(options: FakeDesktopHostOptions = {}) {
     this.endpoint = options.endpoint ?? 'windows';
@@ -180,9 +182,29 @@ export class FakeDesktopHost implements DesktopHost {
         this.elements.delete(id);
       }
     }
+    this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
     for (const listener of this.listeners) {
       listener({ type: 'window-closed', windowId });
     }
+  }
+
+  async windowEvents(_lease: ApplicationLease): Promise<DesktopWindowEventLog> {
+    if (!this.features.windowEvents) {
+      throw new HostUnsupportedError('The fake host is not configured to record window events.');
+    }
+    const now = Date.now();
+    return {
+      events: this.windowEventLog.map(({ at, notification, sequence, windowId }) => ({
+        ageMs: now - at,
+        element: `fake:${windowId}`,
+        notification,
+        sequence,
+        windowId,
+      })),
+      eventsTruncated: false,
+      observing: true,
+      source: 'fake',
+    };
   }
 
   async activate(windowId: string): Promise<void> {

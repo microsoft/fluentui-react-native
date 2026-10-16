@@ -286,6 +286,58 @@ describe('DesktopStorybookCli', () => {
       args: ['run', '--platform', 'windows', '--solution', 'windows/AgenticStorybook.sln'],
     });
     await expect(cli.build('win32')).rejects.toThrow('build is not configured for win32');
+    expect(runner.foreground[0].env).not.toHaveProperty('RCT_NEW_ARCH_ENABLED');
+  });
+
+  test.each([true, false])('applies the macOS renderer to every command with paper=%s', async (paper) => {
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, paper, runner });
+
+    await cli.prep('macos', { driver: false });
+    await cli.bundle('macos');
+    await cli.build('macos');
+    await cli.run('macos');
+
+    expect(runner.foreground.map(({ command }) => command)).toEqual(['pod', 'sb-rn-get-stories', 'rnx-cli', 'rnx-cli', 'rnx-cli']);
+    expect(runner.foreground.every(({ env }) => env.RCT_NEW_ARCH_ENABLED === (paper ? '0' : '1'))).toBe(true);
+  });
+
+  test('switches back to Fabric explicitly after Paper preparation', async () => {
+    const runner = new RecordingRunner();
+    const paper = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, paper: true, runner });
+    const fabric = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });
+
+    await paper.prep('macos', { driver: false });
+    await fabric.prep('macos', { driver: false });
+
+    expect(runner.foreground.map(({ env }) => env.RCT_NEW_ARCH_ENABLED)).toEqual(['0', '1']);
+  });
+
+  test('rotates the authenticated bridge nonce when switching macOS renderers', async () => {
+    const options = {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async () => true,
+      output: { write: () => true },
+      runner: new RecordingRunner(),
+    };
+    const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json');
+
+    try {
+      await new DesktopStorybookCli(makeConfig(), options).driver('macos');
+      const fabricManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      await new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos');
+      const paperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      await new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos');
+      const repeatedPaperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+
+      expect(fabricManifest.renderer).toBe('fabric');
+      expect(paperManifest.renderer).toBe('paper');
+      expect(paperManifest.bridgeNonce).not.toBe(fabricManifest.bridgeNonce);
+      expect(repeatedPaperManifest.bridgeNonce).toBe(paperManifest.bridgeNonce);
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+    }
   });
 
   test('runs the standalone macOS app with the enlistment-specific identity', async () => {
@@ -655,6 +707,87 @@ describe('DesktopStorybookCli', () => {
 });
 
 describe('createDesktopStorybookCommand', () => {
+  test.each(['prep', 'bundle', 'build', 'run'] as const)('forwards --paper to macOS %s', async (action) => {
+    const runner = new RecordingRunner();
+    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), runner });
+
+    await program.parseAsync(['node', 'storybook', action, '--macos', '--paper', ...(action === 'prep' ? ['--no-driver'] : [])]);
+
+    expect(runner.foreground.length).toBeGreaterThan(0);
+    expect(runner.foreground.every(({ env }) => env.RCT_NEW_ARCH_ENABLED === '0' && env[FURN_STORYBOOK_PLATFORM] === 'macos')).toBe(true);
+  });
+
+  test('keeps the Paper smoke endpoint and propagates the renderer through launch and cleanup', async () => {
+    const runner = new RecordingRunner();
+    const runSmokeTests = jest.fn(async () => ({
+      endpoint: 'macos' as const,
+      finishedAt: '2026-10-02T08:00:01.000Z',
+      manifest: { platform: 'macos-digest', portable: 'portable-digest' },
+      platformName: 'macos' as const,
+      runId: 'paper-smoke',
+      schemaVersion: 1 as const,
+      startedAt: '2026-10-02T08:00:00.000Z',
+      status: 'passed' as const,
+      targetId: 'agenticstorybook-macos',
+      tests: [],
+    }));
+    const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
+      config: makeConfig({ macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' } } } }),
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response(JSON.stringify({ entries: { story: { id: 'first--story', type: 'story' } } })),
+      isPortAvailable: async () => true,
+      output: { write: () => true },
+      runner,
+      runSmokeTests,
+    });
+
+    await program.parseAsync(['node', 'storybook', 'smoke', '--macos', '--paper', '--mode', 'stories-and-tests']);
+
+    expect(runner.foreground.map(({ command }) => command)).toEqual(['launch-storybook', 'stop-storybook']);
+    expect([...runner.foreground, ...runner.background].every(({ env }) => env.RCT_NEW_ARCH_ENABLED === '0')).toBe(true);
+    expect(runSmokeTests).toHaveBeenCalledWith(expect.objectContaining({ platform: 'macos', targetId: 'agenticstorybook-macos' }));
+    expect(
+      JSON.parse(fs.readFileSync(path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'), 'utf8')),
+    ).toMatchObject({
+      endpoint: 'macos',
+      renderer: 'paper',
+    });
+    expect(runner.stopped).toBe(2);
+  });
+
+  test.each(['windows', 'win32'])('rejects --paper with explicit --%s', async (platform) => {
+    const runner = new RecordingRunner();
+    const program = createDesktopStorybookCommand({ config: makeConfig(), runner });
+    program.commands.forEach((command) => {
+      command.exitOverride();
+      command.configureOutput({ writeErr: () => {} });
+    });
+
+    await expect(program.parseAsync(['node', 'storybook', 'build', `--${platform}`, '--paper'])).rejects.toThrow(
+      'cannot be used with option',
+    );
+    expect(runner.foreground).toEqual([]);
+  });
+
+  test.each(['windows', 'win32'])('rejects --paper with the implicit %s endpoint', async (platform) => {
+    const previousPlatform = process.env[FURN_STORYBOOK_PLATFORM];
+    process.env[FURN_STORYBOOK_PLATFORM] = platform;
+    const runner = new RecordingRunner();
+    const program = createDesktopStorybookCommand({ config: makeConfig(), runner });
+
+    try {
+      await expect(program.parseAsync(['node', 'storybook', 'build', '--paper'])).rejects.toThrow('--paper is only supported on macOS');
+      expect(runner.foreground).toEqual([]);
+    } finally {
+      if (previousPlatform === undefined) {
+        delete process.env[FURN_STORYBOOK_PLATFORM];
+      } else {
+        process.env[FURN_STORYBOOK_PLATFORM] = previousPlatform;
+      }
+    }
+  });
+
   test('forwards verbose logging through nested lifecycle commands', async () => {
     const runner = new RecordingRunner();
     const command = createDesktopStorybookCommand({ config: makeConfig(), runner });

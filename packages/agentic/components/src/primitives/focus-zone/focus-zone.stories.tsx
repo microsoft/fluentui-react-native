@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
+import { useFocusablePressable, useFocusTarget } from '@fluentui-react-native/framework-base';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import { FocusZone } from '@fluentui-react-native/native-core/legacy';
 import type { FocusZoneDirection, FocusZoneProps, FocusZoneTabNavigation } from '@fluentui-react-native/native-core/legacy';
@@ -69,27 +70,29 @@ type FocusZoneStoryButtonProps = {
   testID: string;
 };
 
-const FocusZoneStoryButton = ({ content, focused, nativeID, onFocus, style, testID }: FocusZoneStoryButtonProps) => {
-  const localRef = React.useRef<View>(null);
+/** AppKit keeps keyboard focus where it was on click, but these examples navigate from the clicked item. */
+const ClickFocusedStoryButton = ({ content, focused, nativeID, onFocus, style, testID }: FocusZoneStoryButtonProps) => {
+  const [pressableProps, , { focusTargetRef }] = useFocusablePressable({ onFocus: () => onFocus() }, { pointerFocus: 'always' });
+  return (
+    <Pressable
+      {...pressableProps}
+      accessibilityLabel={content}
+      accessibilityRole="button"
+      nativeID={nativeID}
+      ref={focusTargetRef}
+      style={({ pressed }) => [style, focused && styles.focused, pressed && styles.pressed]}
+      testID={testID}
+    >
+      <Text style={styles.itemText}>{content}</Text>
+    </Pressable>
+  );
+};
 
+const FocusZoneStoryButton = (props: FocusZoneStoryButtonProps) => {
   if (Platform.OS === 'macos') {
-    return (
-      <Pressable
-        accessibilityLabel={content}
-        accessibilityRole="button"
-        focusable
-        nativeID={nativeID}
-        onFocus={onFocus}
-        onPress={() => localRef.current?.focus()}
-        ref={localRef}
-        style={({ pressed }) => [style, focused && styles.focused, pressed && styles.pressed]}
-        testID={testID}
-      >
-        <Text style={styles.itemText}>{content}</Text>
-      </Pressable>
-    );
+    return <ClickFocusedStoryButton {...props} />;
   }
-
+  const { content, nativeID, onFocus, style, testID } = props;
   return <Button accessibilityLabel={content} content={content} nativeID={nativeID} onFocus={onFocus} style={style} testID={testID} />;
 };
 
@@ -101,6 +104,12 @@ type FocusZoneExampleProps = FocusZoneProps & {
 
 const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9, ...props }: FocusZoneExampleProps) => {
   const focusZoneRef = React.useRef<View>(null);
+  // Request zone focus through a focus target so React Native's focused-input record is released when the zone unmounts.
+  const { focusTarget: zoneTarget, focusTargetRef: zoneTargetRef } = useFocusTarget();
+  React.useLayoutEffect(() => {
+    const cleanup = zoneTargetRef(focusZoneRef.current);
+    return typeof cleanup === 'function' ? cleanup : () => zoneTargetRef(null);
+  }, [zoneTargetRef]);
   const [focusedItem, setFocusedItem] = React.useState('Outside before');
   const items = Array.from({ length: itemCount }, (_, index) => index + 1);
   const centerIndex = Math.floor(itemCount / 2);
@@ -152,7 +161,7 @@ const FocusZoneExample = ({ columns = 3, defaultToCenter = false, itemCount = 9,
         style={styles.outsideButton}
         testID="focus-zone-after"
       />
-      <Button content="Focus the zone" onPress={() => focusZoneRef.current?.focus()} style={styles.focusButton} />
+      <Button content="Focus the zone" onPress={() => zoneTarget.requestFocus()} style={styles.focusButton} />
       <Text accessibilityLiveRegion="polite" style={styles.status} testID="focus-zone-status">
         Focused: {focusedItem}
       </Text>
