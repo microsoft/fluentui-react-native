@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
+## 0.22.15
+
+### Patch Changes
+
+- f550cfb: Import `React` in iOS Swift sources only when the module is available, so hosts can provide React Native headers through an Objective-C bridging header.
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/framework@0.17.9
+
 ## 0.22.14
 
 ### Patch Changes

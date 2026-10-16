@@ -1,5 +1,19 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.3
+
+### Patch Changes
+
+- Updated dependencies [f550cfb]
+- Updated dependencies [f550cfb]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [f550cfb]
+- Updated dependencies [27dc8eb]
+  - @fluentui-react-native/native-core@0.2.0
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/default-theme@0.27.15
+
 ## 0.3.2
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/callout
 
+## 0.29.8
+
+### Patch Changes
+
+- Updated dependencies [f550cfb]
+- Updated dependencies [f550cfb]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [f550cfb]
+- Updated dependencies [27dc8eb]
+  - @fluentui-react-native/native-core@0.2.0
+
 ## 0.29.7
 
 ### Patch Changes

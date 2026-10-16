@@ -1,5 +1,32 @@
 # @fluentui-react-native/components
 
+## 0.6.3
+
+### Patch Changes
+
+- e2092f9: Use Framework Base's `pointerFocus` mode for Tab. FocusZone stories request
+  focus through focus targets so React Native macOS does not keep an unmounted
+  item as its focused input.
+- e2092f9: Cover native focus from a physical pointer click on Input.
+- fcc3b7f: Add a macOS-only `--paper` option to prepare, build, launch, and smoke test Storybook with Paper while preserving Fabric as the default renderer.
+  
+  Use centered alignment in macOS Paper CompoundItemLayout stories to avoid the native Yoga baseline crash without changing the primitive or Fabric demonstrations.
+  
+  Measure LayoutStableText's hidden reserve Text directly in native alignment stories, avoiding Paper Text-versus-View pixel-rounding mismatches without relaxing the geometry assertions.
+  
+  Deduplicate compatible Storybook React, theming, and shared UI dependencies in the lockfile after desktop UI updates, keeping strict Metro duplicate checks enabled.
+- Updated dependencies [f550cfb]
+- Updated dependencies [f550cfb]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [f550cfb]
+- Updated dependencies [27dc8eb]
+  - @fluentui-react-native/native-core@0.2.0
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/design@0.5.2
+
 ## 0.6.2
 
 ### Patch Changes

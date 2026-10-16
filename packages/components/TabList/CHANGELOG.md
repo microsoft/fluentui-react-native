@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/tablist
 
+## 0.8.17
+
+### Patch Changes
+
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/focus-zone@0.23.8
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/icon@0.22.16
+  - @fluentui-react-native/text@0.25.16
+  - @fluentui-react-native/framework@0.17.9
+  - @fluentui-react-native/use-styling@0.16.6
+  - @fluentui-react-native/interactive-hooks@0.28.12
+
 ## 0.8.16
 
 ### Patch Changes

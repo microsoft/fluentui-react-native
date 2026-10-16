@@ -1,5 +1,32 @@
 # @fluentui-react-native/desktop-driver
 
+## 0.3.1
+
+### Patch Changes
+
+- e2092f9: Make Windows physical clicks robust to another absolute pointing device, such as a remote-desktop or virtual-machine
+  viewer, that moves the cursor back after injection. Pointer placement now confirms the cursor reached the target and
+  retries before pressing, element clicks inject the press and release as one coordinate-carrying batch, and pointer
+  actions carry their coordinate on every press and release. Previously such a device could redirect the press to its
+  own cursor position, activating another window and leaving text inputs unfocused.
+- e2092f9: Report macOS elements that do not publish `AXEnabled`, such as React Native
+  Paper views without an explicit disabled state, as enabled so they can be
+  clicked and queried. Diagnose a locked or switched-out macOS login session:
+  launch, attach, window discovery, and new physical input fail immediately with
+  an explicit session diagnosis, and `doctor --permissions` reports the session.
+  
+  Record macOS window notifications and recent helper commands in a bounded
+  diagnostic timeline exposed through `furn/window-events`, publish
+  `window-closed` events, and describe transient windows by role, frame, and
+  WindowServer identity. Activate macOS targets through Accessibility instead of
+  waiting about a second for cooperative workspace activation, and name the
+  occluder of an intercepted click. Add `captureDesktopFailureEvidence`, which
+  captures window events first and then the current and other open windows.
+  Attached WebdriverIO sessions now use explicit wait defaults so `waitUntil`
+  polls until its timeout instead of stopping after the first poll.
+- e2092f9: Retry a Windows accessibility subtree read when a descendant disappears mid-read, such as an owned popup island
+  closing, while its root remains available. Only an unavailable root reports a stale element.
+
 ## 0.3.0
 
 ### Minor Changes

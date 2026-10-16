@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
+## 0.12.8
+
+### Patch Changes
+
+- f550cfb: Import `React` in iOS Swift sources only when the module is available, so hosts can provide React Native headers through an Objective-C bridging header.
+- f550cfb: Import React Native headers in iOS Objective-C sources with the canonical `<React/...>` form instead of by bare header name.
+
 ## 0.12.7
 
 ### Patch Changes

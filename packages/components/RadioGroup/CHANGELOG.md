@@ -1,5 +1,23 @@
 # Change Log - @fluentui-react-native/radio-group
 
+## 0.22.17
+
+### Patch Changes
+
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/focus-zone@0.23.8
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/text@0.25.16
+  - @uifabricshared/foundation-composable@0.15.6
+  - @uifabricshared/foundation-compose@1.16.15
+  - @uifabricshared/foundation-settings@0.16.12
+  - @fluentui-react-native/framework@0.17.9
+  - @fluentui-react-native/use-styling@0.16.6
+  - @fluentui-react-native/interactive-hooks@0.28.12
+  - @fluentui-react-native/pressable@0.13.12
+
 ## 0.22.16
 
 ### Patch Changes
