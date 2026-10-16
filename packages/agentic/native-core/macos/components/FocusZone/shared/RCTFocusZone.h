@@ -18,5 +18,9 @@ typedef NS_ENUM(NSInteger, FocusZoneDirection) {
 @property(nonatomic) NSString *navigateAtEnd;
 @property(nonatomic) NSString *tabKeyNavigation;
 @property(nonatomic) NSView *defaultResponder;
+@property(nonatomic) NSInteger commandGeneration;
+@property(nonatomic, copy) RCTDirectEventBlock onOperationResult;
+
+- (NSString *)requestFocusTarget:(NSView *)target strategy:(NSString *)strategy generation:(NSInteger)generation;
 
 @end

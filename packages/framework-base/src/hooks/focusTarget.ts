@@ -1,3 +1,5 @@
+import { releaseHostFocusRecord } from './hostFocusRecord';
+
 export type FocusIntent = 'keyboard' | 'pointer' | 'programmatic' | 'restore' | 'accessibility';
 export type FocusRequestStatus = 'requested' | 'confirmed' | 'cancelled' | 'not-mounted' | 'not-focusable' | 'unsupported';
 
@@ -91,6 +93,7 @@ export function createFocusTarget(): FocusTargetController {
             if (detached === handoff) {
               detached = undefined;
               ++generation;
+              releaseHostFocusRecord(instance);
               publish(false, undefined, true);
             }
           });
@@ -118,6 +121,9 @@ export function createFocusTarget(): FocusTargetController {
     },
     onBlur: () => {
       cancelPending();
+      if (current) {
+        releaseHostFocusRecord(current);
+      }
       publish(false);
     },
     requestFocus: (intent = 'programmatic') => {

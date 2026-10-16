@@ -65,6 +65,11 @@ native:
     disabled_input_env: FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES
     ci_policy: explicit-build-then-prebuilt-only
   macos:
+    renderer:
+      default: fabric
+      paper_flag: --paper
+      switching: rerun-prep-before-build-or-launch
+      concurrency: one-renderer-per-enlistment
     process: ReactTestApp
     app_bundle: macos/DerivedData/Build/Products/Debug/ReactTestApp.app
     coordinate_notes:

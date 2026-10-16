@@ -1,7 +1,7 @@
 import type { DesktopEndpoint, DesktopPlatformName } from '../protocol/types.js';
 
 export type DesktopArtifact = {
-  kind: 'screenshot' | 'source' | 'tree';
+  kind: 'screenshot' | 'source' | 'tree' | 'window-events';
   name: string;
   path: string;
 };

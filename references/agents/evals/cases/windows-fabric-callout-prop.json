@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "windows-fabric-callout-prop",
+  "split": "holdout",
+  "task_mode": "plan",
+  "prompt": "Add a new property to native-core's React Native Windows Fabric Callout view. Plan the change.",
+  "expected": {
+    "skills": ["implement-native-component"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": ["native-registration"],
+      "native_platforms": ["windows"]
+    },
+    "required_reads": ["references/agents/native/components-and-modules.md", "references/agents/native/windows-fabric.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "regenerates-codegen",
+      "description": "Updates the TypeScript specification and regenerates Windows codegen with the declared command instead of editing generated files.",
+      "rule_ids": [],
+      "source_refs": ["references/agents/native/windows-fabric.md", "packages/agentic/native-core/package.json"]
+    },
+    {
+      "id": "keeps-registration",
+      "description": "Keeps the Callout registration name and public API unchanged.",
+      "rule_ids": ["R-NATIVE-002"],
+      "source_refs": []
+    },
+    {
+      "id": "windows-evidence",
+      "description": "Plans a Windows native build and runtime evidence and reports Win32 and macOS as not affected or not run.",
+      "rule_ids": ["R-NATIVE-003"],
+      "source_refs": []
+    }
+  ]
+}

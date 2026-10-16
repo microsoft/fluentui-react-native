@@ -105,15 +105,13 @@ function AlignmentMeasurement() {
   const [visible, setVisible] = useState<LayoutRectangle>();
   return (
     <View>
-      <View
-        accessible
-        role="group"
-        style={styles.stableText}
-        testID="layout-stable-text-large-reserve"
-        onLayout={(event) => setReserve(event.nativeEvent.layout)}
-      >
+      <View accessible role="group" style={styles.stableText} testID="layout-stable-text-large-reserve">
         <LayoutStableText
-          reserve={<Text style={styles.large}>Stable label</Text>}
+          reserve={
+            <Text style={styles.large} onLayout={(event) => setReserve(event.nativeEvent.layout)}>
+              Stable label
+            </Text>
+          }
           visible={
             <Text
               accessible
@@ -164,7 +162,7 @@ export const Overview: Story = {
     'centers the intrinsic smaller line inside its larger reserve': async ({ browser, expect, platform }) => {
       const assert: typeof import('node:assert') = (await import('node:assert')).default;
       if (platform === 'macos') {
-        // Fabric paragraphs do not expose their testID to AX; use their native onLayout measurements.
+        // Measure both Text line boxes; Paper rounds Text and wrapper View frames differently.
         const status = await browser.$('~layout-stable-text-native-metrics');
         await browser.waitUntil(async () => (await status.getText()).startsWith('{'));
         const metrics: { reserve: LayoutRectangle; visible: LayoutRectangle } = JSON.parse(await status.getText());
@@ -178,7 +176,7 @@ export const Overview: Story = {
         );
         assert(
           Math.abs(metrics.visible.x) <= 1 && metrics.visible.width <= metrics.reserve.width + 1,
-          'Visible text must retain leading alignment and fit the reserved width.',
+          `Visible text must retain leading alignment and fit the reserved width: ${JSON.stringify(metrics)}.`,
         );
         return;
       }

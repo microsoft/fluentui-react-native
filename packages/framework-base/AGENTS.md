@@ -51,7 +51,7 @@ entrypoint's React-only import safety.
 
 ## Focus and native refs
 
-Use the [common focus instructions](../../.github/skills/agentic-component-authoring/references/focus.md)
+Use the [common focus instructions](../../references/agents/focus/common.md)
 and their platform breakouts when adding focus-target or interaction abstractions.
 Reuse slot ref composition and cleanup; preserve this package's older React
 compatibility while agentic components use React 19 ref props. Keep proposed

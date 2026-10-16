@@ -60,12 +60,30 @@ test('macOS Swift interoperability uses the consolidated pod module name', async
   // Bridging-header builds also declare internal Swift classes in the generated header, duplicating the Paper
   // manager's RCT_EXTERN_MODULE interface, so Paper commands are implemented in Swift instead.
   const paper = await readFile(new URL('macos/components/Callout/paper/FRNCalloutManager.m', packageRoot), 'utf8');
+  const paperHeader = await readFile(new URL('macos/components/Callout/paper/FRNCalloutManager.h', packageRoot), 'utf8');
   const manager = await readFile(new URL('macos/components/Callout/paper/CalloutManager.swift', packageRoot), 'utf8');
   assert.doesNotMatch(paper, /-Swift\.h/);
+  assert.doesNotMatch(paperHeader, /-Swift\.h/);
+  // The extern registration must not name generated Swift types or implement methods in Objective-C.
+  assert.doesNotMatch(paper, /\bFRNCalloutView\b/);
+  assert.doesNotMatch(paper, /RCT_EXPORT_METHOD\(/);
   for (const command of ['focusWindow', 'blurWindow']) {
     assert.match(paper, new RegExp(`RCT_EXTERN_METHOD\\(${command} : \\(nonnull NSNumber \\*\\)viewTag\\)`));
     assert.match(manager, new RegExp(`@objc func ${command}\\(_ viewTag: NSNumber\\)`));
   }
+  for (const command of ['requestFocus', 'close', 'reposition']) {
+    assert.match(
+      paper,
+      new RegExp(`RCT_EXTERN_METHOD\\(${command} : \\(nonnull NSNumber \\*\\)viewTag generation : \\(NSInteger\\)generation requestId`),
+    );
+    assert.match(manager, new RegExp(`@objc func ${command}\\(_ viewTag: NSNumber, generation: Int, requestId: Int`));
+  }
+  // Custom property bridges use React/AppKit types and a narrow manager protocol implemented in Swift.
+  assert.match(paper, /RCT_CUSTOM_VIEW_PROPERTY\(target, NSNumber, RCTView\)/);
+  assert.match(paper, /RCT_REMAP_VIEW_PROPERTY\(directionalHint, placementHint, NSString\)/);
+  assert.match(paperHeader, /@protocol FRNCalloutPropertyManager/);
+  assert.match(manager, /class CalloutManager: RCTViewManager, FRNCalloutPropertyManager/);
+  assert.match(manager, /@objc\(setAnchor:forView:\)\s*func setAnchor\(_ anchor: NSView\?, for view: NSView\)/);
 });
 
 test('macOS Paper registers the legacy FRNCallout alias through the current manager', async () => {
