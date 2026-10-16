@@ -323,7 +323,8 @@ focus stories pass 11/11 on Windows; full catalogs pass 43/43 on Windows (170
 stories) and Win32 passes every authored case except Button's
 "releases pressed feedback after an intervening key": `onPressOut` is not
 reported after Space with an intervening key on Win32. That keyboard gap was
-previously masked by the focus failure and remains open. The Windows helper
+previously masked by the focus failure and remains open as #4373 (part of the
+components workstream, #4274). The Windows helper
 self-test passes 148/148, its native contract passes, and `yarn lage buildci`
 passes 170 tasks with only the unchanged root knip baseline failing.
 
@@ -524,6 +525,25 @@ earlier full Paper run failed two Button focus-management cases intermittently:
 the window-event descriptor identified macOS AutoFill's
 `SafariPlatformSupportAutoCompleteWindow` over the story's TextInput; the cases
 passed four isolated repeats and the final full runs.
+
+### Windows and Win32 rerun after the pointer-focus and Fabric FocusZone fixes
+
+The atomic-click Desktop Driver commit was rebased onto `cb973cfd3` without
+conflicts. Upstream's Windows/Win32-reachable changes were checked at source:
+the default `pointerFocus: 'platform'` resolves to focusing a pressed target on
+Windows and Win32, exactly the previous `focusOnPress` behavior; a tab list's
+tabs map the former `focusOnPress: false` to `'never'`; the FocusZone native
+fixes are macOS-only; and the Windows helper advertises the `focus` feature the
+shared Menu exercise now requires. The helper's source digest is unchanged.
+
+Executed: `yarn build`; Windows `build-driver` (cache hit), `prep`, and `build`.
+`native-*` smoke renders 171 stories on Windows and runs 19/19 passed, including
+both Menu cases: the platform-default case restores keyboard focus to the
+pressed trigger after Escape, and `MenuCompositionFocusingTrigger` does so with
+`always`. Win32 renders 152 stories and runs 7/7 legacy cases passed. Full
+authored catalogs: Windows 44/44 passed; Win32 fails only #4373's Button case
+(`focus-probe-release-count` "0", expected "1"), and with that story excluded
+runs 25/25 passed.
 
 ## Remaining gates
 
