@@ -36,6 +36,12 @@ focus visual should be presented as active.
 - Keep native view identity scoped to the mounted window/surface. Clear it on
   detach/recycle and use common React 19 ref composition, not legacy componentRef
   exposure or global numeric-tag lookup.
+- React Native macOS routes every host `focus()` through `TextInputState`, which
+  then records a View as the focused text input until a TextInput clears it. A
+  focused View that unmounts stays recorded, and the next ScrollView touch
+  dispatches `blur` to its removed tag, which Paper raises as a RedBox. Focus
+  targets clear the record without dispatching on blur and genuine detach
+  (`framework-base` `hostFocusRecord.native.ts`); route host focus through them.
 
 Evidence: C-FOCUS-002.
 
@@ -43,7 +49,12 @@ Evidence: C-FOCUS-002.
 
 Do not force Windows-style focus-before-press on ordinary macOS controls. V1
 requests click focus only on Windows/Win32, and the Fabric View preserves
-mouse-versus-keyboard focus (C-FOCUS-003).
+mouse-versus-keyboard focus (C-FOCUS-003). Framework Base expresses this as
+`useFocusablePressable`'s `pointerFocus` mode: `platform` (default), `always`,
+or `never`. Use an explicit mode only when an owner needs the same result on
+every platform, such as a menu trigger that popup dismissal must return to:
+AppKit restores the owner window's retained first responder, which a pointer
+press does not change.
 
 `acceptsFirstMouse` controls click-through in an inactive window; it is not an
 alias for `focusable`, first-responder acceptance, or keyboard ring visibility.
@@ -96,6 +107,12 @@ Evidence: C-FOCUS-004.
 The macOS FocusZone owns key translation and key-view-loop recalculation, and its
 Fabric wrapper forwards focus rather than becoming another first-responder stop
 (C-FOCUS-005).
+
+Fabric hosts the Paper `RCTFocusZone` without a React tag, and `RCTView` throws
+building focus or keyboard events without one. The tagless zone sends resign and
+unhandled key messages past `RCTView`, and the wrapper continues keys that
+bubbled out of the zone up the responder chain rather than back into it, so
+Escape reaches a popup's `cancelOperation:`.
 
 Preserve that single-owner behavior. Do not add a second JS roving loop to the
 same keys. Recompute eligibility when children mount/unmount and when props

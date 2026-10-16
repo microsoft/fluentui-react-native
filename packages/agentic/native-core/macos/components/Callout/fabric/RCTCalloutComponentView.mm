@@ -14,33 +14,9 @@
 #import <React/RCTView.h>
 
 #import "FRNNativeCore-Swift.h"
+#import "../../../shared/FRNNativeCoreComponentLookup.h"
 
 using namespace facebook::react;
-
-static NSRectEdge RCTNSRectEdgeFromDirectionalHint(CalloutDirectionalHint hint)
-{
-  // CalloutView uses MinY for placement above the anchor and MaxY for placement below it.
-  switch (hint) {
-    case CalloutDirectionalHint::LeftTopEdge:
-    case CalloutDirectionalHint::LeftCenter:
-    case CalloutDirectionalHint::LeftBottomEdge:
-      return NSRectEdgeMinX;
-    case CalloutDirectionalHint::TopLeftEdge:
-    case CalloutDirectionalHint::TopAutoEdge:
-    case CalloutDirectionalHint::TopCenter:
-    case CalloutDirectionalHint::TopRightEdge:
-      return NSRectEdgeMinY;
-    case CalloutDirectionalHint::RightTopEdge:
-    case CalloutDirectionalHint::RightCenter:
-    case CalloutDirectionalHint::RightBottomEdge:
-      return NSRectEdgeMaxX;
-    case CalloutDirectionalHint::BottomLeftEdge:
-    case CalloutDirectionalHint::BottomAutoEdge:
-    case CalloutDirectionalHint::BottomCenter:
-    case CalloutDirectionalHint::BottomRightEdge:
-      return NSRectEdgeMaxY;
-  }
-}
 
 static void RCTApplyCalloutAppearance(
     FRNCalloutView *calloutView,
@@ -53,23 +29,6 @@ static void RCTApplyCalloutAppearance(
   calloutView.borderWidth = borderMetrics.borderWidths.left;
   calloutView.borderRadius = borderMetrics.borderRadii.topLeft.horizontal;
   [calloutView setNeedsDisplay:YES];
-}
-
-static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, NSInteger tag)
-{
-  if ([rootView conformsToProtocol:@protocol(RCTComponentViewProtocol)] &&
-      [((id<RCTComponentViewProtocol>)rootView).reactTag integerValue] == tag) {
-    return rootView;
-  }
-
-  for (RCTPlatformView *subview in rootView.subviews) {
-    RCTPlatformView *match = RCTFindComponentViewWithTag(subview, tag);
-    if (match) {
-      return match;
-    }
-  }
-
-  return nil;
 }
 
 @interface RCTCalloutComponentView () <RCTCalloutViewProtocol>
@@ -105,6 +64,15 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
     _calloutView.onDismiss = ^(__unused NSDictionary *event) {
       [weakSelf emitOnDismiss];
     };
+    _calloutView.onReady = ^(NSDictionary *event) {
+      [weakSelf emitReady:event];
+    };
+    _calloutView.onClosed = ^(NSDictionary *event) {
+      [weakSelf emitClosed:event];
+    };
+    _calloutView.onOperationResult = ^(NSDictionary *event) {
+      [weakSelf emitResult:event];
+    };
 
     _touchHandler = [RCTSurfaceTouchHandler new];
     [_touchHandler attachToView:_calloutView.contentProxyView];
@@ -128,7 +96,10 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 {
   const auto &newProps = *std::static_pointer_cast<const CalloutProps>(props);
 
-  _calloutView.directionalHint = RCTNSRectEdgeFromDirectionalHint(newProps.directionalHint);
+  _calloutView.commandGeneration = newProps.commandGeneration;
+  _calloutView.anchorMode = [NSString stringWithUTF8String:toString(newProps.anchorMode).c_str()];
+  _calloutView.placementHint = [NSString stringWithUTF8String:toString(newProps.directionalHint).c_str()];
+  _calloutView.gapSpace = newProps.gapSpace;
   _calloutView.setInitialFocus = newProps.setInitialFocus;
 
   const auto &rect = newProps.anchorRect;
@@ -164,6 +135,7 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
 
 - (void)prepareForRecycle
 {
+  [_calloutView invalidatePresentation];
   [super prepareForRecycle];
   _targetTag = 0;
   [_calloutView setAnchorView:nil];
@@ -184,10 +156,53 @@ static RCTPlatformView *RCTFindComponentViewWithTag(RCTPlatformView *rootView, N
   [_calloutView blurWindow];
 }
 
+- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag
+{
+  // Resolve the target within this popup's content so a focus request cannot escape the presentation.
+  NSView *target = FRNNativeCoreFindView(_calloutView.contentProxyView, targetTag);
+  [_calloutView requestFocus:generation requestId:requestId target:target];
+}
+
+- (void)close:(NSInteger)generation requestId:(NSInteger)requestId
+{
+  [_calloutView close:generation requestId:requestId];
+}
+
+- (void)reposition:(NSInteger)generation requestId:(NSInteger)requestId
+{
+  [_calloutView reposition:generation requestId:requestId];
+}
+
+- (void)emitReady:(NSDictionary *)event
+{
+  if (_eventEmitter) {
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)->onReady({.generation = [event[@"generation"] intValue]});
+  }
+}
+
+- (void)emitClosed:(NSDictionary *)event
+{
+  if (_eventEmitter) {
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)
+        ->onClosed({.generation = [event[@"generation"] intValue], .reason = std::string([event[@"reason"] UTF8String])});
+  }
+}
+
+- (void)emitResult:(NSDictionary *)event
+{
+  if (_eventEmitter) {
+    std::static_pointer_cast<const CalloutEventEmitter>(_eventEmitter)
+        ->onOperationResult(
+            {.generation = [event[@"generation"] intValue],
+             .requestId = [event[@"requestId"] intValue],
+             .status = std::string([event[@"status"] UTF8String])});
+  }
+}
+
 - (void)updateAnchorView
 {
   RCTPlatformView *rootView = self.window.contentView;
-  [_calloutView setAnchorView:_targetTag > 0 && rootView ? RCTFindComponentViewWithTag(rootView, _targetTag) : nil];
+  [_calloutView setAnchorView:_targetTag > 0 && rootView ? FRNNativeCoreFindView(rootView, _targetTag) : nil];
 }
 
 - (void)emitOnShow

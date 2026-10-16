@@ -13,8 +13,10 @@ The existing unstyled `Callout` and `FocusZone` JavaScript wrappers, public
 types, tests, stories, and specifications live under `src/legacy` and are
 exported only from `@fluentui-react-native/native-core/legacy`. They are not
 exported by the root entrypoint, which is reserved for modern cross-platform
-APIs. The `macos`, `windows`, `win`, and `win32` entrypoints are reserved for
-future host-specific APIs and remain empty.
+APIs. The `macos` and `windows` now expose React 19 modern Callout/FocusZone previews,
+live native targets, and typed operation outcomes. The root, `win`, and
+`win32` remain unadmitted for modern components. Legacy Win32 uses its existing
+host registrations without new managed commands.
 
 `@fluentui-react-native/callout` and `@fluentui-react-native/focus-zone` are
 JS-only compatibility shims under `packages/shim`. Deprecated type aliases and
@@ -40,11 +42,16 @@ to use its host-provided `RCTCallout` and `RCTFocusZone`.
 
 The macOS module-named header at `macos/shared/FRNNativeCore.h` is required by
 the generated `FRNNativeCore-Swift.h`; keep it aligned with the pod's
-`module_name` when changing native ownership. Only Fabric adapters import the
-generated header. Hosts that compile the Swift sources with an Objective-C
-bridging header also get internal Swift classes declared there, duplicating
-Paper `RCT_EXTERN_MODULE` interfaces, so implement Paper manager methods in
-Swift and declare them with `RCT_EXTERN_METHOD`.
+`module_name` when changing native ownership. Fabric adapters and shared
+Objective-C behavior, such as FocusZone's use of the Swift focus service, may
+import the generated header. Paper `RCT_EXTERN_MODULE` registration files and
+the headers they import must not: hosts that compile the Swift sources with an
+Objective-C bridging header also get internal Swift classes declared there,
+duplicating the extern interfaces. Implement Paper manager methods in Swift
+and declare them with `RCT_EXTERN_METHOD`; custom property bridges use React or
+AppKit types and the narrow manager protocol in `FRNCalloutManager.h`. Follow
+the repository's [Apple and Office authoring rules](../../../references/agents/native/apple-office.md)
+for every macOS change.
 
 ## Public entrypoints
 
@@ -52,8 +59,8 @@ Swift and declare them with `RCT_EXTERN_METHOD`.
 | -------------------------------------------- | ------------------------------------------- | ---------------------- |
 | `@fluentui-react-native/native-core`         | Cross-platform APIs                         | `src/index.ts`         |
 | `@fluentui-react-native/native-core/legacy`  | Legacy Callout/FocusZone wrappers and types | `src/legacy/index.ts`  |
-| `@fluentui-react-native/native-core/macos`   | macOS-specific APIs                         | `src/macos/index.ts`   |
-| `@fluentui-react-native/native-core/windows` | React Native Windows-specific APIs          | `src/windows/index.ts` |
+| `@fluentui-react-native/native-core/macos`   | Modern macOS component previews             | `src/macos/index.ts`   |
+| `@fluentui-react-native/native-core/windows` | Modern Windows component previews           | `src/windows/index.ts` |
 | `@fluentui-react-native/native-core/win`     | APIs shared by Windows and Win32            | `src/win/index.ts`     |
 | `@fluentui-react-native/native-core/win32`   | Office React Native Win32-specific APIs     | `src/win32/index.ts`   |
 
@@ -242,14 +249,83 @@ The package prebuild regenerates Windows bindings from the shared spec.
 Native
 verification must cover registration, events/commands, refs, unmount cleanup,
 error propagation, and architecture/platform parity, not only JS mocks.
-Callout's executable macOS Fabric story verifies native popup creation, `onShow` and
-`onDismiss`, outside-click dismissal, and reopening. Run it together
-with FocusZone's keyboard cases from `apps/storybook` using the owned lifecycle:
+Callout's executable stories verify native popup creation, `onShow` and
+`onDismiss`, outside-click and Escape dismissal, and reopening on macOS,
+Windows, and Win32; the modern stories add readiness, descendant focus,
+explicit close/rearm, a flat Menu composition (FocusZone entry, arrow
+navigation, and trigger restoration), and Windows anchor geometry. Run them
+together with FocusZone's keyboard cases from `apps/storybook` using the owned
+lifecycle:
 
 ```sh
 STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and-tests
 ```
 
-This traverses the full catalog before running the selected native tests.
-The macOS Desktop Driver currently targets Fabric; a successful Paper build
-does not establish Paper runtime or input parity.
+Use `--windows` or `--win32` for the Windows endpoints. This traverses the
+full catalog before running the selected native tests.
+Add `--paper` to run the macOS Paper lane; a successful Paper build alone does
+not establish Paper runtime or input parity.
+
+## Modern component previews
+
+```tsx
+import { Callout, FocusZone, useNativeViewTarget } from '@fluentui-react-native/native-core/macos';
+// Windows uses the equivalent /windows entrypoint.
+```
+
+These previews require React 19 and the current native-core registration.
+`useNativeViewTarget` supplies a passive live callback binding; attach its
+`ref` to a materialized native View. Rect/point anchors use local logical
+coordinates relative to such a live owner, not global screen coordinates.
+
+Callout's ref is an opaque-presentation command handle; `content.ref` is the
+actual View ref. Controlled `open` is requested presence, and physical native
+closure latches the generation until false-to-true or a changed
+`presentationKey`. `onReady` is separate from legacy `onShow`. FocusZone
+preserves its actual native root `ref` and publishes confirmed requests through
+`commandsRef`. Neither ref assignment nor a void native focus return is
+confirmation. Requests support abort and timeout, and reject stale lifetimes.
+
+Modern and legacy facades share the native registrations; Callout's facades
+also share a hook-free private host that applies native-safe positioning and
+appearance values. Both modern facades are phased components: the first phase
+owns hooks and the presentation/command lifetime, and the hook-free render
+phase merges render-time pass-through props. When a modern facade is used as
+a slot, supply its first-phase props (listed in each `SPEC.md`) through the
+slot props. macOS shares Swift focus eligibility/actual-responder and
+placement behavior between the renderer adapters; the existing navigation
+algorithm is not rewritten merely to change language.
+
+Windows source/codegen and the native library build are qualified on RNW 0.81.35.
+Modern FocusZone command/target-lifetime, legacy navigation, legacy and
+modern Callout readiness, explicit operations, outside-input and Escape
+dismissal, rearm, owner focus return, flat Menu composition, and 100% scale
+anchor geometry pass on Windows. Win32 legacy FocusZone and legacy Callout
+outside-click/recreate and Escape cases pass. Remaining Windows protocol
+races are tracked in [#4374](https://github.com/microsoft/fluentui-react-native/issues/4374);
+the DPI/RTL/scroll geometry, repeated-cycle resource, and assistive-technology
+matrix is tracked in [#4375](https://github.com/microsoft/fluentui-react-native/issues/4375).
+macOS Fabric and Paper pass the updated authored Callout and Menu composition
+cases; this does not qualify the remaining geometry and accessibility matrix.
+
+Root/Win32 admission, older-peer builds, popup-family transactions,
+restoration/Tab policy, text fragments, modal containment, and a real module
+remain explicit gates. Remaining work is tracked under the
+[Components](https://github.com/microsoft/fluentui-react-native/issues/4274)
+and [Infrastructure](https://github.com/microsoft/fluentui-react-native/issues/4275)
+workstreams rather than a cross-machine plan:
+
+| Gate                                                                                                        | Issue                                                                                                                                                                                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Native FocusZone request races, inactive windows, field editors, and parity-preserving navigation follow-up | [#4374](https://github.com/microsoft/fluentui-react-native/issues/4374)                                                                                                                                                                                                                            |
+| Callout geometry, lifecycle/resource, and assistive-technology qualification                                | [#4375](https://github.com/microsoft/fluentui-react-native/issues/4375)                                                                                                                                                                                                                            |
+| Win32 capabilities, old peer floors, packed consumers, publishing, and root admission                       | [#4376](https://github.com/microsoft/fluentui-react-native/issues/4376)                                                                                                                                                                                                                            |
+| Popup families, owner-relative Tab/restoration, and disabled MenuItem discoverability                       | [#4377](https://github.com/microsoft/fluentui-react-native/issues/4377)                                                                                                                                                                                                                            |
+| Renderer-owned text fragments and layout generations                                                        | [#4378](https://github.com/microsoft/fluentui-react-native/issues/4378)                                                                                                                                                                                                                            |
+| Modal focus scope and background accessibility isolation                                                    | [#4379](https://github.com/microsoft/fluentui-react-native/issues/4379)                                                                                                                                                                                                                            |
+| Representative TurboModule, deferred until a real consumer exists                                           | [#4380](https://github.com/microsoft/fluentui-react-native/issues/4380)                                                                                                                                                                                                                            |
+| Actual Menu, Popover, Dialog, and Drawer components                                                         | [#4232](https://github.com/microsoft/fluentui-react-native/issues/4232), [#4236](https://github.com/microsoft/fluentui-react-native/issues/4236), [#4222](https://github.com/microsoft/fluentui-react-native/issues/4222), [#4223](https://github.com/microsoft/fluentui-react-native/issues/4223) |
+
+Each issue retains the applicable baseline, native qualification limits, and
+acceptance criteria. Record exact executed commands and results in the owning
+issue or pull request; compilation and skipped cases are not native qualification.

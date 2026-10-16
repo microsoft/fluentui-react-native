@@ -115,6 +115,16 @@ export const FocusManagement: Story = {
       await expectNativeState(browser, 'focus-input-after', 'focused', true);
       await expectNativeState(browser, 'focus-input-disabled', 'focused', false);
     },
+    'takes native focus from a physical pointer click': async (context) => {
+      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser } = context;
+      await (await browser.$('~focus-input-after')).click();
+      await expectWindowsPointerFocus(context, 'focus-input-after');
+      await (await browser.$('~focus-input')).click();
+      await expectWindowsPointerFocus(context, 'focus-input');
+      await expectNativeState(browser, 'focus-input-after', 'focused', false);
+    },
   },
 };
 

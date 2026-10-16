@@ -570,11 +570,7 @@ final class AccessibilityEngine {
     } else {
       text = nil
     }
-    let enabled = try supportedBool(
-      element,
-      attribute: kAXEnabledAttribute,
-      reason: "The provider does not report an enabled state."
-    )
+    let enabled = try enabledState(element)
     let focused = try supportedBool(
       element,
       attribute: kAXFocusedAttribute,
@@ -613,6 +609,24 @@ final class AccessibilityEngine {
       visible: visible,
       windowID: record.windowID
     )
+  }
+
+  // AppKit omits AXEnabled from elements that have no disabled state, and React Native macOS Paper views publish it
+  // only when accessibilityState.disabled is set. Assistive technologies treat such elements as enabled. An element
+  // that advertises AXEnabled without a readable value remains unsupported.
+  private func enabledState(_ element: AXUIElement) throws -> SupportedBool {
+    if let enabled = try optionalBool(element, attribute: kAXEnabledAttribute) {
+      return .supported(enabled)
+    }
+    var names: CFArray?
+    if AXUIElementCopyAttributeNames(element, &names) == .success,
+      let names = names as? [String],
+      !names.isEmpty,
+      !names.contains(kAXEnabledAttribute)
+    {
+      return .supported(true)
+    }
+    return .unsupported("The provider does not report an enabled state.")
   }
 
   private func supportedBool(
@@ -854,6 +868,15 @@ final class AccessibilityEngine {
   ) -> ElementSnapshot {
     let screenRect = (try? axFrame(hit)) ?? .zero
     let windowFrame = (try? window.currentFrame()) ?? .zero
+    var ownerID: pid_t = 0
+    var name = "External desktop window"
+    if AXUIElementGetPid(hit, &ownerID) == .success {
+      let owner = processIdentity(ownerID)
+      let ownerName = owner["name"] as? String ?? "unknown application"
+      name = ownerID == window.processID
+        ? "Another window of the target application"
+        : "External desktop window of \(ownerName) (pid \(ownerID))"
+    }
     return ElementSnapshot(
       id: IdentifierGenerator.shared.next("external-window"),
       automationID: nil,
@@ -861,7 +884,7 @@ final class AccessibilityEngine {
       enabled: .supported(true),
       expanded: .unsupported("An external desktop window does not expose expanded state."),
       focused: .supported(false),
-      name: "External desktop window",
+      name: name,
       parentID: nil,
       rect: CGRect(
         x: screenRect.minX - windowFrame.minX,

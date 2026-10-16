@@ -149,6 +149,7 @@ func createPermissionDiagnostic(prompt: Bool) -> JSONObject {
     ],
     "promptRequested": prompt,
     "schemaVersion": 1,
+    "session": LoginSessionState.current().json,
     "signing": signingEvidence(),
     "type": "permissions",
   ]
