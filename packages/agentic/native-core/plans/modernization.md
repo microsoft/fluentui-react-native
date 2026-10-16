@@ -543,7 +543,10 @@ pressed trigger after Escape, and `MenuCompositionFocusingTrigger` does so with
 `always`. Win32 renders 152 stories and runs 7/7 legacy cases passed. Full
 authored catalogs: Windows 44/44 passed; Win32 fails only #4373's Button case
 (`focus-probe-release-count` "0", expected "1"), and with that story excluded
-runs 25/25 passed.
+runs 25/25 passed. `yarn clean-lage-cache` then `yarn lage buildci --continue`
+passes 169 of 171 tasks: storybook-desktop's tests failed one case under
+parallel load and pass 175/175 in isolation and on the warm rerun, and root
+knip fails with the unchanged 11-finding baseline. `yarn change:check` passes.
 
 ## Remaining gates
 
