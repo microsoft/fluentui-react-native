@@ -128,13 +128,17 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
   return bindDesktopCommands(browser, options.url);
 }
 
+// WebdriverIO applies these defaults in remote() but not attach(). Without an interval, waitUntil and the waitFor*
+// commands stop after their first unsatisfied poll instead of honoring their timeout.
+const attachedWaitDefaults = { waitforInterval: 100, waitforTimeout: 5_000 } as const;
+
 /** The caller retains ownership of the existing session and must delete it after the worker exits. */
 export async function attachDesktopWebdriver(options: DesktopWebdriverAttachment): Promise<DesktopWebdriverSession> {
   const browser = await attach({
     ...connectionOptions(options.url),
     capabilities: options.capabilities,
     sessionId: options.sessionId,
-    options: { logLevel: 'silent' },
+    options: { logLevel: 'silent', ...attachedWaitDefaults },
   });
   return bindDesktopCommands(browser, options.url);
 }

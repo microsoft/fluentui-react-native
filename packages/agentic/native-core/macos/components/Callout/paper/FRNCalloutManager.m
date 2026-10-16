@@ -14,25 +14,6 @@
 	return NSMakeRect(x, y, width, height);
 }
 
-// Collapse the directional hint options to the 4 NSRectEdge options.
-// CalloutView uses MinY for placement above the anchor and MaxY for placement below it.
-RCT_ENUM_CONVERTER(NSRectEdge, (@{
-	@"leftTopEdge": @(NSRectEdgeMinX),
-	@"leftCenter": @(NSRectEdgeMinX),
-	@"leftBottomEdge": @(NSRectEdgeMinX),
-	@"topLeftEdge": @(NSRectEdgeMinY),
-	@"topAutoEdge": @(NSRectEdgeMinY),
-	@"topCenter": @(NSRectEdgeMinY),
-	@"topRightEdge": @(NSRectEdgeMinY),
-	@"rightTopEdge": @(NSRectEdgeMaxX),
-	@"rightCenter": @(NSRectEdgeMaxX),
-	@"rightBottomEdge": @(NSRectEdgeMaxX),
-	@"bottomLeftEdge": @(NSRectEdgeMaxY),
-	@"bottomAutoEdge": @(NSRectEdgeMaxY),
-	@"bottomCenter": @(NSRectEdgeMaxY),
-	@"bottomRightEdge": @(NSRectEdgeMaxY),
-}), NSRectEdgeMaxY, integerValue);
-
 @end
 
 @interface RCT_EXTERN_MODULE(RCTCalloutManager, RCTViewManager)
@@ -41,11 +22,38 @@ RCT_EXTERN_METHOD(focusWindow : (nonnull NSNumber *)viewTag)
 
 RCT_EXTERN_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 
-RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
+RCT_EXTERN_METHOD(requestFocus : (nonnull NSNumber *)viewTag generation : (NSInteger)generation requestId : (NSInteger)requestId targetTag : (NSInteger)targetTag)
+
+RCT_EXTERN_METHOD(close : (nonnull NSNumber *)viewTag generation : (NSInteger)generation requestId : (NSInteger)requestId)
+
+RCT_EXTERN_METHOD(reposition : (nonnull NSNumber *)viewTag generation : (NSInteger)generation requestId : (NSInteger)requestId)
+
+RCT_CUSTOM_VIEW_PROPERTY(target, NSNumber, RCTView)
+{
+  NSNumber *tag = [RCTConvert NSNumber:json];
+  NSView *anchor = tag ? [self.bridge.uiManager viewForReactTag:tag] : nil;
+  if (tag && !anchor) {
+    RCTLogError(@"Callout target %@ is not mounted in its bridge.", tag);
+  }
+  [(id<FRNCalloutPropertyManager>)self setAnchor:anchor forView:view];
+}
+
+RCT_EXPORT_VIEW_PROPERTY(commandGeneration, NSInteger)
+
+RCT_EXPORT_VIEW_PROPERTY(anchorMode, NSString)
+
+RCT_EXPORT_VIEW_PROPERTY(gapSpace, CGFloat)
+
+RCT_EXPORT_VIEW_PROPERTY(onReady, RCTDirectEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onClosed, RCTDirectEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onOperationResult, RCTDirectEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
 
-RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
+// The shared view derives its preferred edge and alignment from the hint name.
+RCT_REMAP_VIEW_PROPERTY(directionalHint, placementHint, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(setInitialFocus, BOOL)
 

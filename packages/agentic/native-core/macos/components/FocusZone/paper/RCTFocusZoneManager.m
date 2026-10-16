@@ -8,6 +8,23 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(commandGeneration, NSInteger)
+RCT_EXPORT_VIEW_PROPERTY(onOperationResult, RCTDirectEventBlock)
+
+RCT_EXPORT_METHOD(requestFocus:(nonnull NSNumber *)viewTag
+                  generation:(NSInteger)generation
+                  requestId:(NSInteger)requestId
+                  targetTag:(NSInteger)targetTag
+                  strategy:(NSString *)strategy)
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    RCTFocusZone *view = (RCTFocusZone *)[self.bridge.uiManager viewForReactTag:viewTag];
+    if (![view isKindOfClass:[RCTFocusZone class]]) return;
+    NSView *target = targetTag > 0 ? [self.bridge.uiManager viewForReactTag:@(targetTag)] : nil;
+    NSString *status = [view requestFocusTarget:target strategy:strategy generation:generation];
+    if (view.onOperationResult) view.onOperationResult(@{@"generation": @(generation), @"requestId": @(requestId), @"status": status});
+  });
+}
 
 RCT_CUSTOM_VIEW_PROPERTY(navigationOrderInRenderOrder, BOOL, RCTFocusZone)
 {

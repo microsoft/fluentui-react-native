@@ -41,6 +41,8 @@ describe('sanctioned WebdriverIO API', () => {
     try {
       const response = await runContract(harness.server.url, harness.target.id, artifactsRoot);
       expect(response).toMatchObject({
+        attachedWaitOptions: { waitforInterval: 100, waitforTimeout: 5000 },
+        attachedWaitPolls: 3,
         manifestEntries: 1,
         result: {
           status: 'passed',

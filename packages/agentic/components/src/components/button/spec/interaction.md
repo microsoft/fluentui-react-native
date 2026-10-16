@@ -65,3 +65,8 @@ Tab. macOS activates Return/Space on keydown, while Windows/Win32 activate on
 keyup. Releasing a key or cancelling a started press clears pressed feedback
 without another activation, including after an intervening key or self-blur.
 The macOS all-controls Tab lane requires Keyboard navigation enabled.
+
+The intervening-key release case is temporarily skipped on Win32 pending
+[#4373](https://github.com/microsoft/fluentui-react-native/issues/4373):
+pressed feedback clears without a stale activation, but `onPressOut` is not
+forwarded. Windows Fabric and macOS retain the full assertion.

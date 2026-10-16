@@ -30,8 +30,21 @@ func createHello() -> JSONObject {
       "source",
       "tree",
       "wheel",
+      "windowEvents",
     ],
   ]
+}
+
+private final class EventSequence: @unchecked Sendable {
+  private let lock = NSLock()
+  private var value = 0
+
+  func next() -> Int {
+    lock.lock()
+    defer { lock.unlock() }
+    value += 1
+    return value
+  }
 }
 
 private struct PendingRequest {
@@ -53,6 +66,19 @@ final class Host {
   func run() -> Int32 {
     let writer = FrameWriter(.standardOutput)
     self.writer = writer
+    let eventSequence = EventSequence()
+    driver.setWindowClosedPublisher { windowID in
+      do {
+        try writer.writeJSON([
+          "event": "window-closed",
+          "payload": ["windowId": windowID],
+          "sequence": eventSequence.next(),
+          "type": "event",
+        ])
+      } catch {
+        writeDiagnostic("furn-desktop-driver-host: publishing a window event failed: \(error)")
+      }
+    }
     let reader = FrameReader(.standardInput)
     do {
       try writer.writeJSON(createHello())

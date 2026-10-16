@@ -244,6 +244,57 @@ jobs:
             apps/storybook/artifacts/storybook-commands
             ${{ steps.desktop-driver.outputs.doctor-path }}
 
+  macos-paper-storybook:
+    name: macOS Paper Storybook PR
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up toolchain
+        uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@c75754b0fedce160a4dcf7193fae1a6ece76efe2 # 5.4.11
+        with:
+          platform: macos
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
+        run: yarn build
+
+      - name: Set up macOS Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: macos
+          disabled-input-features: physicalClick
+
+      - name: Bundle macOS Paper
+        run: yarn storybook bundle --macos --paper
+        working-directory: apps/storybook
+
+      - name: Pod install (Paper)
+        run: yarn storybook prep --macos --paper
+        working-directory: apps/storybook
+
+      - name: Run through Paper storybook smoke tests
+        run: yarn storybook smoke --macos --paper --mode stories-and-tests
+        working-directory: apps/storybook
+        env:
+          CCACHE_DISABLE: 1
+
+      - name: Upload macOS Paper Storybook artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Storybook_macos_Paper_Dump
+          path: |
+            apps/storybook/artifacts/macos
+            apps/storybook/artifacts/storybook-commands
+            ${{ steps.desktop-driver.outputs.doctor-path }}
+
   ios:
     name: iOS PR
     runs-on: macos-26

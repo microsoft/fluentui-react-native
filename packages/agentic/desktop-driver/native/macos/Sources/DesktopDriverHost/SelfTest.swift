@@ -28,6 +28,9 @@ private final class SelfTestRunner {
     testCoreGraphicsWindowSelection()
     testReactNativeAccessibilityFallbacks()
     testPermissionDiagnostic()
+    testLoginSessionState()
+    testWindowEventMonitor()
+    testCommandJournal()
     testHello()
   }
 
@@ -408,6 +411,21 @@ private final class SelfTestRunner {
       "fallback windows absent from AXWindows make discovery incomplete"
     )
     check(
+      !unreliableAXWindowEnumeration(queries: [authoritativeWindows, inconsistentFallback], roleQueries: []),
+      "a role-verified fallback window absent from AXWindows does not invalidate window listing"
+    )
+    check(
+      unreliableAXWindowEnumeration(queries: [query(.cannotComplete)], roleQueries: []),
+      "an unreadable AXWindows result invalidates window listing"
+    )
+    check(
+      unreliableAXWindowEnumeration(
+        queries: [authoritativeWindows],
+        roleQueries: [AXWindowRoleDiagnostic(error: .invalidUIElement, role: nil, valueValid: false)]
+      ),
+      "an unverifiable window candidate invalidates window listing"
+    )
+    check(
       !incompleteAXMultiProcessDiscovery(
         queriesByCandidate: [
           [authoritativeWindows],
@@ -541,6 +559,93 @@ private final class SelfTestRunner {
     check(
       signing?["designatedRequirement"] is JSONObject,
       "permission diagnostics explicitly report designated-requirement availability"
+    )
+    let session = diagnostic["session"] as? JSONObject
+    check(session?["source"] as? String == LoginSessionState.source, "permission diagnostics report login-session state")
+  }
+
+  private func testWindowEventMonitor() {
+    let monitor = WindowEventMonitor()
+    let element = AXUIElementCreateApplication(getpid())
+    var published: [String] = []
+    monitor.publishWindowClosed = { published.append($0) }
+    check(monitor.diagnostic(processID: getpid())["observing"] as? Bool == false, "an unobserved process reports no window observer")
+    monitor.track(element, windowID: "window-test", processID: getpid())
+    monitor.record(element: element, notification: kAXFocusedWindowChangedNotification)
+    check(monitor.isSettling(processID: getpid()), "a recent focus change marks window publication as settling")
+    check(!monitor.isClosed(windowID: "window-test"), "focus changes do not close a tracked window")
+    monitor.record(element: element, notification: kAXUIElementDestroyedNotification)
+    monitor.record(element: element, notification: kAXUIElementDestroyedNotification)
+    check(monitor.isClosed(windowID: "window-test"), "a destroyed notification closes the tracked window")
+    check(published == ["window-test"], "a tracked window close is published exactly once")
+    let events = monitor.diagnostic(processID: getpid())["events"] as? [JSONObject] ?? []
+    check(
+      events.count == 3 && events.last?["windowId"] as? String == "window-test"
+        && events.last?["notification"] as? String == kAXUIElementDestroyedNotification,
+      "the window event timeline records notifications with resolved window identities"
+    )
+    check(
+      events.first?["descriptor"] is JSONObject && events.last?["descriptor"] == nil,
+      "live window events carry an element descriptor while destroyed events do not"
+    )
+    monitor.forget(windowID: "window-test")
+    check(!monitor.isClosed(windowID: "window-test"), "forgetting a window clears its closed state")
+    for _ in 0..<(WindowEventMonitor.maximumEvents + 10) {
+      monitor.record(element: element, notification: kAXApplicationActivatedNotification)
+    }
+    check(
+      monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)["eventsTruncated"] as? Bool == false
+        && (monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)["events"] as? [JSONObject])?.count
+          == WindowEventMonitor.maximumEvents,
+      "the window event timeline stays bounded"
+    )
+  }
+
+  private func testCommandJournal() {
+    let journal = CommandJournal()
+    let first = journal.begin("windows", detail: [:])
+    journal.finish(first, outcome: "ok", detail: ["windowIds": ["window-a"]])
+    let second = journal.begin("click", detail: ["elementId": "element-a"])
+    journal.annotate(second, detail: ["method": "accessibility"])
+    journal.finish(second, outcome: ErrorCode.notInteractable)
+    let entries = journal.diagnostic()
+    check(
+      entries.count == 2 && entries[0]["outcome"] as? String == "ok" && entries[0]["durationMs"] is Int
+        && entries[1]["outcome"] as? String == ErrorCode.notInteractable,
+      "the command journal records outcomes and durations"
+    )
+    check(
+      ((entries[0]["detail"] as? JSONObject)?["windowIds"] as? [String]) == ["window-a"],
+      "the command journal records listed window identities"
+    )
+    check(
+      (entries[1]["detail"] as? JSONObject)?["method"] as? String == "accessibility"
+        && (entries[1]["detail"] as? JSONObject)?["elementId"] as? String == "element-a",
+      "command annotations merge with request details"
+    )
+    for _ in 0..<(CommandJournal.maximumEntries + 5) {
+      journal.finish(journal.begin("find", detail: [:]), outcome: "ok")
+    }
+    check(journal.diagnostic(limit: 1000).count == CommandJournal.maximumEntries, "the command journal stays bounded")
+  }
+
+  private func testLoginSessionState() {
+    let unlocked = LoginSessionState(values: ["kCGSSessionOnConsoleKey": 1, "kCGSessionLoginDoneKey": 1])
+    check(unlocked.screenLocked == false && unlocked.unavailableReason == nil, "an unlocked console session is available")
+    let locked = LoginSessionState(values: [
+      "CGSSessionScreenIsLocked": 1,
+      "kCGSSessionOnConsoleKey": 1,
+      "kCGSessionLoginDoneKey": 1,
+    ])
+    check(locked.unavailableReason?.contains("screen is locked") == true, "a locked screen explains unavailable automation")
+    let lockedJSON = locked.json["screenLocked"] as? JSONObject
+    check(lockedJSON?["value"] as? Bool == true, "the session diagnostic reports the observed lock")
+    let switched = LoginSessionState(values: ["kCGSSessionOnConsoleKey": 0, "kCGSessionLoginDoneKey": 1])
+    check(switched.unavailableReason?.contains("console session") == true, "an off-console session explains unavailable automation")
+    let missing = LoginSessionState(values: nil)
+    check(
+      missing.unavailableReason == nil && missing.json["status"] as? String == "unavailable",
+      "an unreadable session dictionary is reported as unavailable rather than locked"
     )
   }
 

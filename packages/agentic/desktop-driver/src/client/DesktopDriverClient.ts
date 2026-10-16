@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
-import type { DesktopTreeNode } from '../host/types.js';
+import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
 import type {
   NewSessionCapabilities,
   WebDriverActionSequence,
@@ -128,6 +128,16 @@ export class DesktopSessionClient {
 
   getTree(): Promise<DesktopTreeNode[]> {
     return this.command('GET', '/furn/tree');
+  }
+
+  getWindowEvents(): Promise<DesktopWindowEventLog> {
+    return this.command('GET', '/furn/window-events');
+  }
+
+  /** True when the target advertises a native window-event timeline for diagnostics. */
+  recordsWindowEvents(): boolean {
+    const features = this.capabilities['furn:features'];
+    return typeof features === 'object' && features !== null && (features as { windowEvents?: unknown }).windowEvents === true;
   }
 
   getStoryManifest(): Promise<DesktopStoryManifest> {

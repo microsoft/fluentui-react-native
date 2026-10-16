@@ -52,6 +52,8 @@ export type DesktopStorybookPrepOptions = {
 };
 
 export type DesktopStorybookCliOptions = {
+  /** Use the macOS Paper renderer instead of the default Fabric renderer. */
+  paper?: boolean;
   buildNativeDriver?: typeof buildNativeDesktopDriver;
   createStoryManifest?: typeof createDesktopStoryManifest;
   runner?: DesktopCommandRunner;
@@ -79,6 +81,7 @@ export type DesktopStorybookTestOptions = DesktopStorybookWdioOptions & {
 export class DesktopStorybookCli {
   readonly config: DesktopStorybookConfig;
   readonly instance: DesktopStorybookInstance;
+  readonly paper: boolean;
 
   private readonly runner: DesktopCommandRunner;
   private readonly buildNativeDriver: typeof buildNativeDesktopDriver;
@@ -94,6 +97,7 @@ export class DesktopStorybookCli {
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
+    this.paper = options.paper ?? false;
     this.instance = createDesktopStorybookInstance({
       projectRoot: config.projectRoot,
       bundleIdentifierPrefix: config.macosBundleIdentifier,
@@ -256,6 +260,8 @@ export class DesktopStorybookCli {
       manifest.endpoint !== platform ||
       !('instanceId' in manifest) ||
       manifest.instanceId !== this.instance.id ||
+      !('renderer' in manifest) ||
+      manifest.renderer !== this.renderer(platform) ||
       !('driverPort' in manifest) ||
       typeof manifest.driverPort !== 'number' ||
       !Number.isInteger(manifest.driverPort) ||
@@ -275,6 +281,7 @@ export class DesktopStorybookCli {
         {
           ...this.instance,
           endpoint: platform,
+          renderer: this.renderer(platform),
           targetId: `${this.config.appName}-${platform}`.toLowerCase(),
           testIDPrefix: this.config.testIDPrefix,
         },
@@ -489,16 +496,22 @@ export class DesktopStorybookCli {
   ): Promise<string> {
     const storyManifest = await this.createStoryManifest(this.config, platform);
     const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+    const renderer = this.renderer(platform);
     const driverManifest = createDesktopStorybookDriverManifest({
-      bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest),
+      bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest, renderer),
       config: this.config,
       instance,
       nativeDriver,
       platform,
+      renderer,
       storyManifest,
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
     return outputPath;
+  }
+
+  private renderer(platform: Platforms): 'fabric' | 'paper' {
+    return platform === 'win32' || (platform === 'macos' && this.paper) ? 'paper' : 'fabric';
   }
 
   private async resolveDriver(platform: Platforms): Promise<NativeDriverArtifact> {
@@ -655,6 +668,7 @@ export class DesktopStorybookCli {
       env: {
         ...command.env,
         [FURN_STORYBOOK_PLATFORM]: platform,
+        ...(platform === 'macos' ? { RCT_NEW_ARCH_ENABLED: this.paper ? '0' : '1' } : {}),
         [STORYBOOK_VERBOSE]: this.verbose ? '1' : '0',
         ...(instance
           ? {
@@ -676,6 +690,7 @@ function readReusableBridgeNonce(
   manifestPath: string,
   instance: DesktopStorybookInstance,
   platformManifestDigest: string,
+  renderer: 'fabric' | 'paper',
 ): string | undefined {
   if (!fs.existsSync(manifestPath)) {
     return undefined;
@@ -685,6 +700,7 @@ function readReusableBridgeNonce(
     return current.instanceId === instance.id &&
       current.storybookPort === instance.storybookPort &&
       current.driverPort === instance.driverPort &&
+      current.renderer === renderer &&
       current.platformManifestDigest === platformManifestDigest &&
       typeof current.bridgeNonce === 'string'
       ? current.bridgeNonce

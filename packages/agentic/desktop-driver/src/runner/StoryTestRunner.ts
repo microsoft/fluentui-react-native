@@ -15,6 +15,7 @@ import type {
   DesktopStoryTest,
 } from '../authoring/storyTests.js';
 import type { ArtifactManager } from '../artifacts/ArtifactManager.js';
+import { captureDesktopFailureEvidence } from '../artifacts/failureEvidence.js';
 import type { DesktopElementClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
@@ -198,10 +199,10 @@ async function runTest({
   }
 
   if (status !== 'passed' && artifacts) {
-    const captured = await captureFailureArtifacts(session, artifacts, `${item.entry.id}-${item.test.id}`);
+    const captured = await captureDesktopFailureEvidence(session, artifacts, `${item.entry.id}-${item.test.id}`);
     testArtifacts.push(...captured.artifacts);
-    if (captured.error) {
-      errorMessage = `${errorMessage ?? 'Test failed.'} Evidence capture failed: ${captured.error}`;
+    if (captured.errors.length > 0) {
+      errorMessage = `${errorMessage ?? 'Test failed.'} Evidence capture failed: ${captured.errors.join('; ')}`;
     }
   }
 
@@ -452,31 +453,6 @@ function classifyError(error: unknown): DesktopTestStatus {
     }
   }
   return error instanceof DesktopAssertionError ? 'failed' : 'failed';
-}
-
-async function captureFailureArtifacts(
-  session: DesktopSessionClient,
-  artifacts: ArtifactManager,
-  testDirectory: string,
-): Promise<{ artifacts: DesktopArtifact[]; error?: string }> {
-  const captured: DesktopArtifact[] = [];
-  const errors: string[] = [];
-  try {
-    captured.push(artifacts.writeScreenshot(testDirectory, 'failure', await session.takeScreenshot()));
-  } catch (error) {
-    errors.push(error instanceof Error ? error.message : String(error));
-  }
-  try {
-    captured.push(artifacts.writeSource(testDirectory, 'failure-source', await session.getPageSource()));
-  } catch (error) {
-    errors.push(error instanceof Error ? error.message : String(error));
-  }
-  try {
-    captured.push(artifacts.writeTree(testDirectory, 'failure-tree', await session.getTree()));
-  } catch (error) {
-    errors.push(error instanceof Error ? error.message : String(error));
-  }
-  return { artifacts: captured, ...(errors.length > 0 ? { error: errors.join('; ') } : {}) };
 }
 
 function missingCapabilities(
