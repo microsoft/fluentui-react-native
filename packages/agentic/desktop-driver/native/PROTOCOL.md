@@ -156,6 +156,14 @@ events:
 Queries remain authoritative. Events can invalidate state or wake waits but do
 not replace a liveness or state query.
 
+Helpers that advertise the `windowEvents` feature also accept a `windowEvents`
+command with the target `lease` and return a bounded diagnostic log of recent
+window notifications and helper commands, and publish a `window-closed` event
+with `{ "windowId": "..." }` when the platform reports a tracked window
+destroyed. Helpers without the feature reject the command as
+`unsupported-operation`; Node never requests the log unless the feature is
+negotiated.
+
 ### `cancel` and `cancelled`
 
 When a command's `AbortSignal` fires, Node sends:

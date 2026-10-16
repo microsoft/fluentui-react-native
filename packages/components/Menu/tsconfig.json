@@ -15,13 +15,13 @@
       "path": "../Button/tsconfig.json"
     },
     {
-      "path": "../../native/Callout/tsconfig.json"
+      "path": "../../shim/callout/tsconfig.json"
     },
     {
       "path": "../../agentic/design/tsconfig.json"
     },
     {
-      "path": "../FocusZone/tsconfig.json"
+      "path": "../../shim/focus-zone/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"

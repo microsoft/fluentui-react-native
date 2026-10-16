@@ -1,10 +1,11 @@
 # Agentic Components Storybook
 
 On-device [Storybook](https://storybook.js.org/) test app (Storybook for React Native v10) for
-`@fluentui-react-native/components` and linked standalone native packages. It loads every
-`*.stories.(ts|tsx)` file from the agentic components package plus the standalone Callout
-package. FocusZone stories are agentic primitive stories, while its standalone native package
-remains linked so they run in the Fabric and Paper hosts.
+`@fluentui-react-native/components` and `@fluentui-react-native/native-core`. It loads every
+`*.stories.(ts|tsx)` file from the agentic components package plus native-core's Callout
+stories. FocusZone stories remain agentic primitive stories and use native-core's
+`legacy` entrypoint, as does the Win32 Callout portal.
+Native-core owns the shared macOS pod and Windows Fabric library for both components.
 
 The reusable desktop CLI and configuration live in
 `packages/agentic/storybook-desktop`, with peer-dependent React Native
@@ -94,6 +95,29 @@ yarn storybook run --macos
 
 Requires Xcode + CocoaPods.
 
+Fabric is the default macOS renderer. Add `--paper` to use Paper with the same
+macOS story catalog and native Desktop Driver:
+
+```sh
+yarn storybook prep --macos --paper
+yarn storybook build --macos --paper
+yarn storybook smoke --macos --paper --mode stories-and-tests
+```
+
+For interactive development, use `yarn storybook driver --macos --paper` and
+`yarn storybook run --macos --paper` in separate terminals. `--paper` is supported
+only on macOS; it sets `RCT_NEW_ARCH_ENABLED=0` for child commands. Omitting it
+selects Fabric explicitly, even if the parent environment disables the New Architecture.
+Run `prep` again whenever switching renderers: the generated Xcode project and
+Pods are shared, so Paper and Fabric cannot run concurrently from one enlistment.
+To return to Fabric, run `yarn storybook prep --macos` before building or launching.
+The **macOS Paper Storybook PR** job runs the full catalog traversal and authored
+tests separately from the existing Fabric job.
+CompoundItemLayout's demos use centered alignment in macOS Paper because the
+current native text-baseline callback can return NaN and terminate Yoga
+([upstream issue](https://github.com/microsoft/react-native-macos/issues/3121)).
+Fabric and other platforms retain the baseline demonstration. The primitive itself is unchanged.
+
 Run `yarn storybook smoke --macos` for the complete server, Metro, build/launch, all-story traversal, and
 ownership-safe shutdown lifecycle. The shared CLI hashes this enlistment's canonical project root,
 uses that suffix in the native bundle identifier, and selects dedicated Storybook and Metro ports.
@@ -129,9 +153,9 @@ by smoke so its bundle identity does not fall back to the generated app default.
 ## Running on Windows
 
 The Windows app also uses `react-native-test-app`. Its generated Win32 project uses React Native
-Windows 0.81's New Architecture and Fabric renderer. The Callout and FocusZone packages are
-autolinked as Windows Fabric native libraries; their Paper implementations remain available on
-their supported legacy endpoints.
+Windows 0.81's New Architecture and Fabric renderer. Native-core is autolinked as one Windows
+Fabric native library that registers Callout and FocusZone. macOS retains both Paper and Fabric
+adapters; Win32 continues using its host-provided native implementations.
 
 ```powershell
 # from this directory
@@ -157,13 +181,19 @@ exact app process launched by the smoke lifecycle. After traversal, the Windows
 Fabric lifecycle restarts only that owned app and rewrites its lease before
 running authored tests against the warm Metro bundle. Logs are written
 beneath `artifacts/windows/smoke-logs`.
-The Accordion and Callout stories remain excluded from the Windows catalog
-because the current RNW 0.81 Fabric host still fail-fasts while traversing
-them. Win32 continues to exercise Callout through its Paper endpoint.
+The Accordion stories remain excluded from the Windows catalog because the
+current RNW 0.81 Fabric host still fail-fasts while traversing them. Native-core
+Callout and FocusZone stories, legacy and modern, run on Windows; Win32 also
+exercises the legacy Callout through its Paper endpoint.
 
 Storybook's development bundle intentionally contains separate `pretty-format` and `react-is`
 versions used by its internal tooling. They are excluded from the duplicate-module enforcement;
 React, React Native, and application dependencies remain checked.
+After upgrading Storybook UI or addon packages, run
+`yarn dedupe '@storybook/*' storybook --strategy highest` from the repository
+root to align compatible locked React, theming, and shared UI dependencies.
+Keep these runtime packages covered by Metro's duplicate checks rather than
+adding exclusions for mismatched versions.
 
 ## Running on Win32
 

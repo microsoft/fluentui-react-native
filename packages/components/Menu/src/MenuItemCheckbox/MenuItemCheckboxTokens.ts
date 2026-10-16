@@ -1,41 +1,33 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
-import { cornerRadius40, fontSize300, fontWeightRegular, size40, size60, sizeNone } from '@fluentui-react-native/design/tokens/global';
+import { cornerRadiusNone, fontSize200, fontWeightRegular, size20, size40, size80 } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemCheckboxTokens } from './MenuItemCheckbox.types';
 
 export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens, Theme> = (t: Theme): MenuItemCheckboxTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  borderRadius: cornerRadius40,
-  checkmarkPadding: sizeNone,
+  borderRadius: cornerRadiusNone,
+  checkmarkPadding: size20,
   checkmarkSize: 16,
   checkmarkVisibility: 0,
-  color: t.colors.neutralForeground2,
+  color: t.colors.neutralForeground1,
   fontFamily: t.typography.families.primary,
-  fontSize: fontSize300,
+  fontSize: fontSize200,
   fontWeight: fontWeightRegular as FontWeightValue,
   gap: size40,
-  iconColor: t.colors.neutralForeground2,
+  iconColor: t.colors.neutralForeground1,
   iconSize: 16,
-  minHeight: 32,
+  minHeight: 24,
   minWidth: 160,
   maxWidth: 300,
-  padding: size60,
-  hovered: {
-    backgroundColor: t.colors.neutralBackground1Hover,
-    color: t.colors.neutralForeground2Hover,
-    iconColor: t.colors.neutralForeground2Hover,
-    checked: {
-      checkmarkColor: t.colors.neutralForeground2Hover,
-      checkmarkVisibility: 1,
-    },
-  },
+  padding: size40,
+  paddingHorizontal: size80,
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
-    color: t.colors.neutralForeground2Pressed,
-    iconColor: t.colors.neutralForeground2Pressed,
+    color: t.colors.neutralForeground1Pressed,
+    iconColor: t.colors.neutralForeground1Pressed,
     checked: {
-      checkmarkColor: t.colors.neutralForeground2Pressed,
+      checkmarkColor: t.colors.neutralForeground1Pressed,
       checkmarkVisibility: 1,
     },
   },
@@ -48,8 +40,17 @@ export const defaultMenuItemCheckboxTokens: TokenSettings<MenuItemCheckboxTokens
       checkmarkVisibility: 1,
     },
   },
+  focused: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    color: t.colors.neutralForeground1Hover,
+    iconColor: t.colors.neutralForeground1Hover,
+    checked: {
+      checkmarkColor: t.colors.neutralForeground1Hover,
+      checkmarkVisibility: 1,
+    },
+  },
   checked: {
-    checkmarkColor: t.colors.neutralForeground2,
+    checkmarkColor: t.colors.neutralForeground1,
     checkmarkVisibility: 1,
   },
 });

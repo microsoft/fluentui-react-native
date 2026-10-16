@@ -15,7 +15,7 @@ sources:
     policy: generated-do-not-edit
   story_packages:
     - '@fluentui-react-native/components'
-    - '@fluentui-react-native/callout'
+    - '@fluentui-react-native/native-core'
 
 services:
   supervisor:
@@ -65,6 +65,11 @@ native:
     disabled_input_env: FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES
     ci_policy: explicit-build-then-prebuilt-only
   macos:
+    renderer:
+      default: fabric
+      paper_flag: --paper
+      switching: rerun-prep-before-build-or-launch
+      concurrency: one-renderer-per-enlistment
     process: ReactTestApp
     app_bundle: macos/DerivedData/Build/Products/Debug/ReactTestApp.app
     coordinate_notes:

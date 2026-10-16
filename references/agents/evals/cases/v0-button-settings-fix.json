@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "v0-button-settings-fix",
+  "split": "development",
+  "task_mode": "maintain",
+  "prompt": "The deprecated (v0) Button in packages/components/Button/src/deprecated/Button.tsx does not apply its pressed-state border color override from settings. Plan the fix.",
+  "expected": {
+    "skills": ["maintain-v0-v1-component"],
+    "classification": {
+      "implementation_model": "v0",
+      "public_compatibility": ["legacy-export", "componentRef"],
+      "native_platforms": []
+    },
+    "required_reads": ["references/agents/components/classification.md", "references/agents/components/v0.md"],
+    "forbidden_actions": ["migrate-framework", "create-component"]
+  },
+  "assertions": [
+    {
+      "id": "classifies-v0-by-imports",
+      "description": "Identifies v0 from foundation-compose imports, not the deprecated directory alone.",
+      "rule_ids": ["R-CLASSIFY-001"],
+      "source_refs": ["packages/components/Button/src/deprecated/Button.tsx"]
+    },
+    {
+      "id": "fixes-through-settings-layers",
+      "description": "Fixes the pressed override through settings layering and _overrides without bypassing mergeSettings.",
+      "rule_ids": ["R-V0-002"],
+      "source_refs": ["packages/components/Button/src/deprecated/Button.settings.ts"]
+    },
+    {
+      "id": "no-framework-migration",
+      "description": "Keeps the fix in v0 rather than migrating to v1 or framework-base.",
+      "rule_ids": ["R-V0-001"],
+      "source_refs": []
+    }
+  ]
+}

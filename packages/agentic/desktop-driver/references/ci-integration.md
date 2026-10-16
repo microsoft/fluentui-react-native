@@ -120,7 +120,9 @@ and verifies AppKit's all-controls Tab preference before launching the app.
 Keep this enabled on interactive development and CI Macs. It is not an input
 permission, a screen-unlock operation, or the similarly named Accessibility
 Full Keyboard Access feature. A locked/noninteractive session or missing TCC
-authority still prevents physical input, and the hosted `physicalClick` policy
+authority still prevents physical input; the macOS helper reports a locked or
+switched-out session as `input-unavailable` with a `session` diagnostic, also
+shown by `doctor --permissions`. The hosted `physicalClick` policy
 still causes tests requiring physical clicks to skip explicitly. Keyboard-only
 CI coverage does not establish physical-click or complete focus qualification.
 

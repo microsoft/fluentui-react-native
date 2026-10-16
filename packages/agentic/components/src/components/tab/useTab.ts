@@ -98,7 +98,7 @@ export function useTab_unstable(props: TabProps): TabState {
         onPress?.(event);
       },
     },
-    { focusOnPress: !tabList },
+    { pointerFocus: tabList ? 'never' : 'platform' },
   );
 
   const { focusTarget } = focusBinding;

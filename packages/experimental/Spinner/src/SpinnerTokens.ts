@@ -1,35 +1,41 @@
-import type { Theme } from '@fluentui-react-native/framework';
+import type { Theme, Variant } from '@fluentui-react-native/framework';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
-import type { SpinnerTokens } from './Spinner.types';
+import type { SpinnerSize, SpinnerTokens } from './Spinner.types';
+import { diameterSizeMap, lineThicknessSizeMap } from './SpinnerSizeMaps';
 
-/* Mobile sizes */
-export const diameterSizeMap: { [key: string]: number } = {
-  'xx-small': 12,
-  'x-small': 16,
-  medium: 24,
-  large: 32,
-  'x-large': 40,
+export { diameterSizeMap, lineThicknessSizeMap };
+
+export const textStyleMap: { [key: string]: Variant } = {
+  tiny: 'body1',
+  'x-small': 'body1',
+  small: 'body1',
+  medium: 'subtitle2',
+  large: 'subtitle2',
+  'x-large': 'subtitle2',
+  huge: 'subtitle1',
 };
-export const lineThicknessSizeMap: { [key: string]: number } = {
-  'xx-small': 1,
-  'x-small': 1,
-  medium: 2,
-  large: 3,
-  'x-large': 4,
+
+export const getDefaultSize = (): SpinnerSize => {
+  return 'medium';
 };
 
 export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = (t: Theme) =>
   ({
-    xxSmall: {
-      size: 'xx-small',
-      width: diameterSizeMap['xx-small'],
-      height: diameterSizeMap['xx-small'],
+    tiny: {
+      size: 'tiny',
+      width: diameterSizeMap['tiny'],
+      height: diameterSizeMap['tiny'],
     },
-    small: {
+    'x-small': {
       size: 'x-small',
       width: diameterSizeMap['x-small'],
       height: diameterSizeMap['x-small'],
+    },
+    small: {
+      size: 'small',
+      width: diameterSizeMap['small'],
+      height: diameterSizeMap['small'],
     },
     medium: {
       size: 'medium',
@@ -41,10 +47,20 @@ export const defaultSpinnerTokens: TokenSettings<SpinnerTokens, Theme> = (t: The
       width: diameterSizeMap['large'],
       height: diameterSizeMap['large'],
     },
-    xlarge: {
+    'x-large': {
       size: 'x-large',
       width: diameterSizeMap['x-large'],
       height: diameterSizeMap['x-large'],
     },
+    huge: {
+      size: 'huge',
+      width: diameterSizeMap['huge'],
+      height: diameterSizeMap['huge'],
+    },
+    tailColor: t.colors.brandStroke1,
     trackColor: t.colors.brandStroke2,
+    inverted: {
+      tailColor: t.colors.neutralStroke2,
+      trackColor: t.colors.neutralBackgroundInverted,
+    },
   }) as SpinnerTokens;

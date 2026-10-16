@@ -27,6 +27,10 @@ export class ArtifactManager {
     return this.write(testDirectory, name, 'json', `${JSON.stringify(tree, null, 2)}\n`, 'tree');
   }
 
+  writeWindowEvents(testDirectory: string, name: string, log: unknown): DesktopArtifact {
+    return this.write(testDirectory, name, 'json', `${JSON.stringify(log, null, 2)}\n`, 'window-events');
+  }
+
   writeRunResult(result: DesktopStoryRunResult): string {
     const outputPath = this.resolvePath('run.json');
     writeAtomic(outputPath, `${JSON.stringify(result, null, 2)}\n`);

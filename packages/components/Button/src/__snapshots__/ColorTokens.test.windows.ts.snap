@@ -1,0 +1,479 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button color tokens pins v0 Button color tokens 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "#E6E6E6",
+        "borderColor": "#D2D2D2",
+        "color": "#B1B1B1",
+      },
+    },
+    "focused": {
+      "tokens": {
+        "backgroundColor": "#FFF7F0",
+        "borderColor": "#FBDFD0",
+        "color": "#262626",
+        "wrapperBorderColor": "#FBDFD0",
+      },
+    },
+    "hovered": {
+      "tokens": {
+        "backgroundColor": "#FFF7F0",
+        "borderColor": "buttonBorderHovered",
+        "color": "#262626",
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "backgroundColor": "#FBDFD0",
+        "borderColor": "buttonPressedBorder",
+        "color": "#262626",
+      },
+    },
+  },
+  "tokens": {
+    "backgroundColor": "#E6E6E6",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "wrapperBorderColor": "transparent",
+  },
+}
+`;
+
+exports[`Button color tokens pins v0 PrimaryButton color tokens 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "#E6E6E6",
+        "borderColor": "#E6E6E6",
+        "color": "#B1B1B1",
+      },
+    },
+    "focused": {
+      "tokens": {
+        "backgroundColor": "#F29F71",
+        "borderColor": "#A22C01",
+        "color": "#FFFFFF",
+      },
+    },
+    "hovered": {
+      "tokens": {
+        "backgroundColor": "#F29F71",
+        "borderColor": "primaryButtonBorderHovered",
+        "color": "#FFFFFF",
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "backgroundColor": "#A22C01",
+        "borderColor": "primaryButtonBorderPressed",
+        "color": "#FFFFFF",
+      },
+    },
+  },
+  "endIcon": {
+    "color": "#ffffff",
+  },
+  "startIcon": {
+    "color": "#ffffff",
+  },
+  "tokens": {
+    "backgroundColor": "#D83B01",
+    "borderColor": "#A22C01",
+    "color": "#FFFFFF",
+  },
+}
+`;
+
+exports[`Button color tokens pins v0 StealthButton color tokens 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "antiquewhite",
+        "borderColor": "antiquewhite",
+        "color": "#B1B1B1",
+      },
+    },
+    "focused": {
+      "tokens": {
+        "backgroundColor": "#D2D2D2",
+        "borderColor": "#969696",
+        "color": "#262626",
+      },
+    },
+    "hovered": {
+      "tokens": {
+        "backgroundColor": "#D2D2D2",
+        "borderColor": "#D2D2D2",
+        "color": "#262626",
+      },
+    },
+    "pressed": {
+      "tokens": {
+        "backgroundColor": "#B1B1B1",
+        "borderColor": "#B1B1B1",
+      },
+    },
+  },
+  "tokens": {
+    "backgroundColor": "antiquewhite",
+    "borderColor": "antiquewhite",
+    "color": "#262626",
+  },
+}
+`;
+
+exports[`Button color tokens pins v1 Button color tokens 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "borderColor": "#969696",
+  "color": "#262626",
+  "disabled": {
+    "backgroundColor": "#E6E6E6",
+    "borderColor": "#D2D2D2",
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D2D2D2",
+    "borderColor": "#00000000",
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "hovered": {
+    "backgroundColor": "#D2D2D2",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "iconColor": "#262626",
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "primary": {
+    "backgroundColor": "#D83B01",
+    "borderColor": "#D83B01",
+    "color": "#FFFFFF",
+    "disabled": {
+      "backgroundColor": "#E6E6E6",
+      "borderColor": "#D2D2D2",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#F29F71",
+      "borderColor": "#969696",
+      "borderInnerColor": "#ffffff",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "hovered": {
+      "backgroundColor": "#F29F71",
+      "borderColor": "#F29F71",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "iconColor": "#FFFFFF",
+    "pressed": {
+      "backgroundColor": "#A22C01",
+      "borderColor": "#A22C01",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+  },
+  "subtle": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+    "color": "#262626",
+    "disabled": {
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#f5f5f5",
+      "borderColor": "#00000000",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "hovered": {
+      "backgroundColor": "#f5f5f5",
+      "borderColor": "#f5f5f5",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "iconColor": "#262626",
+    "pressed": {
+      "backgroundColor": "#e0e0e0",
+      "borderColor": "#e0e0e0",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+  },
+}
+`;
+
+exports[`Button color tokens pins v1 CompoundButton color tokens 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "borderColor": "#969696",
+  "color": "#262626",
+  "disabled": {
+    "backgroundColor": "#E6E6E6",
+    "borderColor": "#D2D2D2",
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+    "secondaryContentColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D2D2D2",
+    "borderColor": "#00000000",
+    "color": "#262626",
+    "iconColor": "#262626",
+    "secondaryContentColor": "#505050",
+  },
+  "hovered": {
+    "backgroundColor": "#D2D2D2",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "iconColor": "#262626",
+    "secondaryContentColor": "#505050",
+  },
+  "iconColor": "#262626",
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "iconColor": "#262626",
+    "secondaryContentColor": "#666666",
+  },
+  "primary": {
+    "backgroundColor": "#D83B01",
+    "borderColor": "#D83B01",
+    "color": "#FFFFFF",
+    "disabled": {
+      "backgroundColor": "#E6E6E6",
+      "borderColor": "#D2D2D2",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#F29F71",
+      "borderColor": "#969696",
+      "borderInnerColor": "#ffffff",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+      "secondaryContentColor": "#FFFFFF",
+    },
+    "hovered": {
+      "backgroundColor": "#F29F71",
+      "borderColor": "#F29F71",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+      "secondaryContentColor": "#FFFFFF",
+    },
+    "iconColor": "#FFFFFF",
+    "pressed": {
+      "backgroundColor": "#A22C01",
+      "borderColor": "#A22C01",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+      "secondaryContentColor": "#FFFFFF",
+    },
+    "secondaryContentColor": "#FFFFFF",
+  },
+  "secondaryContentColor": "#666666",
+  "subtle": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+    "color": "#262626",
+    "disabled": {
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#f5f5f5",
+      "borderColor": "#00000000",
+      "color": "#262626",
+      "iconColor": "#262626",
+      "secondaryContentColor": "#505050",
+    },
+    "hovered": {
+      "backgroundColor": "#f5f5f5",
+      "borderColor": "#f5f5f5",
+      "color": "#262626",
+      "iconColor": "#262626",
+      "secondaryContentColor": "#505050",
+    },
+    "iconColor": "#262626",
+    "pressed": {
+      "backgroundColor": "#e0e0e0",
+      "borderColor": "#e0e0e0",
+      "color": "#262626",
+      "iconColor": "#262626",
+      "secondaryContentColor": "#666666",
+    },
+    "secondaryContentColor": "#666666",
+  },
+}
+`;
+
+exports[`Button color tokens pins v1 FAB color tokens 1`] = `
+{
+  "backgroundColor": "#D83B01",
+  "disabled": {
+    "backgroundColor": "#ebebeb",
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D83B01",
+    "borderColor": "#969696",
+    "borderInnerColor": "#ffffff",
+  },
+  "pressed": {
+    "backgroundColor": "#A22C01",
+  },
+  "rippleColor": "#D4D4D4",
+  "subtle": {
+    "backgroundColor": "#ebebeb",
+    "color": "#aec6eb",
+    "disabled": {
+      "backgroundColor": "#E6E6E6",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#969696",
+      "borderInnerColor": "#ffffff",
+      "color": "#aec6eb",
+      "iconColor": "#aec6eb",
+    },
+    "iconColor": "#aec6eb",
+    "pressed": {
+      "backgroundColor": "#B1B1B1",
+    },
+    "rippleColor": "#D4D4D4",
+  },
+}
+`;
+
+exports[`Button color tokens pins v1 ToggleButton color tokens 1`] = `
+{
+  "backgroundColor": "antiquewhite",
+  "borderColor": "#969696",
+  "checked": {
+    "backgroundColor": "#C6C6C6",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "primary": {
+      "backgroundColor": "#13458f",
+      "borderColor": "#13458f",
+      "color": "#ffffff",
+    },
+    "subtle": {
+      "backgroundColor": "#ebebeb",
+      "borderColor": "#ebebeb",
+      "color": "#262626",
+    },
+  },
+  "color": "#262626",
+  "disabled": {
+    "backgroundColor": "#E6E6E6",
+    "borderColor": "#D2D2D2",
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+  },
+  "focused": {
+    "backgroundColor": "#D2D2D2",
+    "borderColor": "#00000000",
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "hovered": {
+    "backgroundColor": "#D2D2D2",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "iconColor": "#262626",
+  "pressed": {
+    "backgroundColor": "#B1B1B1",
+    "borderColor": "#969696",
+    "color": "#262626",
+    "iconColor": "#262626",
+  },
+  "primary": {
+    "backgroundColor": "#D83B01",
+    "borderColor": "#D83B01",
+    "color": "#FFFFFF",
+    "disabled": {
+      "backgroundColor": "#E6E6E6",
+      "borderColor": "#D2D2D2",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#F29F71",
+      "borderColor": "#969696",
+      "borderInnerColor": "#ffffff",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "hovered": {
+      "backgroundColor": "#F29F71",
+      "borderColor": "#F29F71",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+    "iconColor": "#FFFFFF",
+    "pressed": {
+      "backgroundColor": "#A22C01",
+      "borderColor": "#A22C01",
+      "color": "#FFFFFF",
+      "iconColor": "#FFFFFF",
+    },
+  },
+  "subtle": {
+    "backgroundColor": "#00000000",
+    "borderColor": "#00000000",
+    "color": "#262626",
+    "disabled": {
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+    },
+    "focused": {
+      "backgroundColor": "#f5f5f5",
+      "borderColor": "#00000000",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "hovered": {
+      "backgroundColor": "#f5f5f5",
+      "borderColor": "#f5f5f5",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+    "iconColor": "#262626",
+    "pressed": {
+      "backgroundColor": "#e0e0e0",
+      "borderColor": "#e0e0e0",
+      "color": "#262626",
+      "iconColor": "#262626",
+    },
+  },
+}
+`;

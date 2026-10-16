@@ -140,6 +140,7 @@ private func windowElementDiagnostic(_ element: AXUIElement) -> JSONObject {
     "attributeNames": boundedNames,
     "attributeNamesError": axErrorJSON(namesError),
     "attributeNamesTruncated": allNames.count > boundedNames.count,
+    "element": "ax:\(CFHash(element))",
     "roleError": axErrorJSON(roleError),
     "titleError": axErrorJSON(titleError),
   ]
@@ -225,11 +226,15 @@ func classifyAXWindowQuery(
   return "matched"
 }
 
-func incompleteAXCandidateDiscovery(
+/// Window listing needs a readable AXWindows result and role-verified candidates. A focused or main window that is
+/// missing from AXWindows, as happens while key status settles after a popup closes, is still a verified candidate.
+func unreliableAXWindowEnumeration(
   queries: [AXWindowAttributeDiagnostic],
-  roleQueries: [AXWindowRoleDiagnostic],
-  titleErrorCount: Int
+  roleQueries: [AXWindowRoleDiagnostic]
 ) -> Bool {
+  guard queries.contains(where: { $0.attribute == kAXWindowsAttribute }) else {
+    return true
+  }
   let windowQueryIncomplete = queries.contains {
     $0.attribute == kAXWindowsAttribute && ($0.error != .success || !$0.valueValid)
   }
@@ -238,7 +243,16 @@ func incompleteAXCandidateDiscovery(
       || !$0.valueValid
       || ($0.role != kAXWindowRole && $0.role != kAXSheetRole)
   }
-  if titleErrorCount > 0 || windowQueryIncomplete || roleQueryIncomplete {
+  return windowQueryIncomplete || roleQueryIncomplete
+}
+
+/// Proving that a title is unique additionally requires AXWindows to contain every fallback window.
+func incompleteAXCandidateDiscovery(
+  queries: [AXWindowAttributeDiagnostic],
+  roleQueries: [AXWindowRoleDiagnostic],
+  titleErrorCount: Int
+) -> Bool {
+  if titleErrorCount > 0 || unreliableAXWindowEnumeration(queries: queries, roleQueries: roleQueries) {
     return true
   }
   guard let authoritative = queries.first(where: { $0.attribute == kAXWindowsAttribute }) else {
@@ -287,9 +301,12 @@ final class ApplicationManager {
   private var leaseOrder: [String] = []
   private var windows: [String: WindowRecord] = [:]
   private var windowIDsByHash: [CFHashCode: [String]] = [:]
+  let windowEvents = WindowEventMonitor()
+  let commands = CommandJournal()
 
   func launch(_ params: JSONObject, token: CancellationToken) throws -> ApplicationLeaseRecord {
     let application = try requireObject(params["application"], "The launch request is missing its application descriptor.")
+    try failIfSessionUnavailable("Launching the application")
     let bundleIdentifier = optionalString(application, "bundleIdentifier")
     let executablePath = optionalString(application, "executablePath")
     let windowTitle = optionalString(application, "windowTitle")
@@ -371,6 +388,7 @@ final class ApplicationManager {
 
   func attach(_ params: JSONObject, token: CancellationToken) throws -> ApplicationLeaseRecord {
     let application = try requireObject(params["application"], "The attach request is missing its application descriptor.")
+    try failIfSessionUnavailable("Attaching to the application")
     let endpoint = optionalString(params, "endpoint") ?? "macos"
     let configuredBundleIdentifier = optionalString(application, "bundleIdentifier")
     let configuredExecutablePath = optionalString(application, "executablePath")
@@ -657,13 +675,30 @@ final class ApplicationManager {
       try fail(ErrorCode.noSuchLease, "The leased application process has exited or changed identity.")
     }
     let geometryDeadline = DispatchTime.now() + .seconds(1)
+    // Window notifications can extend enumeration retries while publication is still changing, within a hard bound.
+    let settleDeadline = DispatchTime.now() + .seconds(3)
     var results: [WindowRecord] = []
     var candidateCount = 0
     var zeroGeometryCount = 0
     var geometryDiagnostics: [JSONObject] = []
     while results.isEmpty {
-      let trackedElements = windows.values.filter { $0.leaseID == leaseID }.map(\.element)
-      let elements = uniqueAXElements(trackedElements + (try accessibilityWindows(processID: lease.processID)))
+      // A destroyed notification proves a tracked window closed; other tracked windows remain candidates.
+      let trackedElements = windows.values
+        .filter { $0.leaseID == leaseID && !windowEvents.isClosed(windowID: $0.id) }
+        .map(\.element)
+      let discovered: [AXUIElement]
+      do {
+        discovered = try accessibilityWindows(processID: lease.processID)
+      } catch let error as HelperError
+        where error.code == ErrorCode.automationFailed
+          && (DispatchTime.now() < geometryDeadline
+            || (windowEvents.isSettling(processID: lease.processID) && DispatchTime.now() < settleDeadline))
+      {
+        // A closing popup can briefly leave AX window publication inconsistent; retry while it settles.
+        try token.wait(milliseconds: 50)
+        continue
+      }
+      let elements = uniqueAXElements(trackedElements + discovered)
       candidateCount = elements.count
       zeroGeometryCount = 0
       for element in elements {
@@ -706,9 +741,10 @@ final class ApplicationManager {
       try token.wait(milliseconds: 50)
     }
     if results.isEmpty, candidateCount > 0 {
-      try fail(
+      try failWindowDiscovery(
         ErrorCode.automationFailed,
         "The application exposes \(candidateCount) live accessibility window candidate(s), but \(zeroGeometryCount) have empty geometry.",
+        processID: lease.processID,
         data: [
           "candidateCount": candidateCount,
           "coreGraphicsQueries": geometryDiagnostics,
@@ -763,6 +799,7 @@ final class ApplicationManager {
   }
 
   func forgetWindow(_ windowID: String) {
+    windowEvents.forget(windowID: windowID)
     guard let record = windows.removeValue(forKey: windowID) else {
       return
     }
@@ -810,6 +847,7 @@ final class ApplicationManager {
     )
     leases[lease.id] = lease
     leaseOrder.append(lease.id)
+    windowEvents.observe(processID: running.processIdentifier)
     let primary = try uniqueWindow(
       processID: running.processIdentifier,
       exactTitle: windowTitle,
@@ -840,6 +878,7 @@ final class ApplicationManager {
         if existing.primary {
           lease.primaryWindowID = id
         }
+        windowEvents.track(element, windowID: id, processID: lease.processID)
         return existing
       }
     }
@@ -853,6 +892,7 @@ final class ApplicationManager {
     )
     windows[record.id] = record
     windowIDsByHash[hash, default: []].append(record.id)
+    windowEvents.track(element, windowID: record.id, processID: lease.processID)
     if primary {
       lease.primaryWindowID = record.id
     }
@@ -867,14 +907,42 @@ final class ApplicationManager {
     }
     record.element = element
     windowIDsByHash[CFHash(element), default: []].append(record.id)
+    windowEvents.track(element, windowID: record.id, processID: record.processID)
   }
 
   private func removeLease(_ leaseID: String) {
     for id in windowIDs(for: leaseID) {
       forgetWindow(id)
     }
-    leases.removeValue(forKey: leaseID)
+    let processID = leases.removeValue(forKey: leaseID)?.processID
     leaseOrder.removeAll { $0 == leaseID }
+    if let processID, !leases.values.contains(where: { $0.processID == processID }) {
+      windowEvents.stop(processID: processID)
+    }
+  }
+
+  /// Recent window notifications and the current AX publication for a lease's application.
+  func windowEventLog(_ leaseID: String) throws -> JSONObject {
+    guard let lease = leases[leaseID] else {
+      try fail(ErrorCode.noSuchLease, "The requested application lease is not held by this helper.")
+    }
+    var log = windowEvents.diagnostic(processID: lease.processID, limit: WindowEventMonitor.maximumEvents)
+    log["commands"] = commands.diagnostic()
+    let outcome = queryAccessibilityWindows(processID: lease.processID)
+    log["publication"] = outcome.diagnostic(reason: "observation")
+    log["trackedWindows"] = windows.values
+      .filter { $0.leaseID == leaseID }
+      .sorted { $0.id < $1.id }
+      .map { record -> JSONObject in
+        [
+          "closed": windowEvents.isClosed(windowID: record.id),
+          "element": "ax:\(CFHash(record.element))",
+          "id": record.id,
+          "primary": record.primary,
+          "title": bounded(record.title, bytes: 512),
+        ]
+      }
+    return log
   }
 
   private func readLease(path: String, token: CancellationToken) throws -> JSONObject {
@@ -1035,7 +1103,7 @@ final class ApplicationManager {
     missingCode: String
   ) throws -> AXUIElement {
     let outcome = queryAccessibilityWindows(processID: processID)
-    try throwCriticalWindowQueryFailure(outcome, code: missingCode)
+    try throwCriticalWindowQueryFailure(outcome, code: missingCode, proveUniqueness: true)
     var matches: [AXUIElement] = []
     var titleErrorCount = 0
     var titleErrors: [JSONObject] = []
@@ -1115,9 +1183,10 @@ final class ApplicationManager {
       data["titleErrorCount"] = titleErrorCount
       data["titleErrors"] = titleErrors
       data["titleErrorsTruncated"] = titleErrorCount > titleErrors.count
-      try fail(
+      try failWindowDiscovery(
         missingCode,
         message,
+        processID: processID,
         data: data
       )
     }
@@ -1164,7 +1233,11 @@ final class ApplicationManager {
     )
   }
 
-  private func throwCriticalWindowQueryFailure(_ outcome: AXWindowQueryOutcome, code: String) throws {
+  private func throwCriticalWindowQueryFailure(
+    _ outcome: AXWindowQueryOutcome,
+    code: String,
+    proveUniqueness: Bool = false
+  ) throws {
     let reason = classifyAXWindowQuery(
       queries: outcome.queries,
       realWindowCount: outcome.realWindows.count,
@@ -1181,37 +1254,53 @@ final class ApplicationManager {
       )
     }
     if reason == "target-non-response" {
-      try fail(
+      try failWindowDiscovery(
         code,
         "The target application did not complete one or more accessibility window queries.",
+        processID: outcome.processID,
         data: outcome.diagnostic(reason: reason)
       )
     }
     if reason == "invalid-element" {
-      try fail(
+      try failWindowDiscovery(
         code,
         "The target application's accessibility object became invalid during window discovery.",
+        processID: outcome.processID,
         data: outcome.diagnostic(reason: reason)
       )
     }
-    if incompleteAXCandidateDiscovery(
-      queries: outcome.queries,
-      roleQueries: outcome.roleQueries,
-      titleErrorCount: 0
-    ) {
-      try fail(
+    let incomplete = proveUniqueness
+      ? incompleteAXCandidateDiscovery(queries: outcome.queries, roleQueries: outcome.roleQueries, titleErrorCount: 0)
+      : unreliableAXWindowEnumeration(queries: outcome.queries, roleQueries: outcome.roleQueries)
+    if incomplete {
+      try failWindowDiscovery(
         code,
         "Accessibility returned an incomplete or internally inconsistent window enumeration.",
+        processID: outcome.processID,
         data: outcome.diagnostic(reason: "incomplete-window-enumeration")
       )
     }
     if reason == "window-query-failed" {
-      try fail(
+      try failWindowDiscovery(
         code,
         "Accessibility window discovery failed before the target returned a usable window.",
+        processID: outcome.processID,
         data: outcome.diagnostic(reason: reason)
       )
     }
+  }
+
+  // Locked or switched-out sessions make AX window publication incomplete; report that cause instead of a symptom.
+  private func failWindowDiscovery(
+    _ code: String,
+    _ message: String,
+    processID: pid_t,
+    data: JSONObject
+  ) throws -> Never {
+    var diagnostic = data
+    diagnostic["windowEvents"] = windowEvents.diagnostic(processID: processID)
+    try failIfSessionUnavailable("Accessibility window discovery", data: diagnostic)
+    try fail(code, message, data: diagnostic)
   }
 
   private func queryWindowAttribute(

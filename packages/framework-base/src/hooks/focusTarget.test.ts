@@ -1,4 +1,13 @@
 import { createFocusTarget, isSelfTargetEvent } from './focusTarget';
+import { releaseHostFocusRecord } from './hostFocusRecord';
+
+jest.mock('./hostFocusRecord', () => ({ releaseHostFocusRecord: jest.fn() }));
+
+const releaseRecord = jest.mocked(releaseHostFocusRecord);
+
+beforeEach(() => {
+  releaseRecord.mockClear();
+});
 
 describe('focus target controller', () => {
   it('distinguishes requests from observed native focus', () => {
@@ -70,6 +79,27 @@ describe('focus target controller', () => {
     target.setFocusable(false);
     target.setFocusable(true);
     expect(target.getSnapshot().focused).toBe(false);
+  });
+
+  it('releases the renderer focus record on blur and genuine detach but not during a handoff', async () => {
+    const target = createFocusTarget();
+    const instance = { focus: jest.fn() };
+    const detach = target.attach(instance);
+    target.onFocus();
+    target.onBlur();
+    expect(releaseRecord).toHaveBeenCalledWith(instance);
+
+    releaseRecord.mockClear();
+    detach();
+    const handoffDetach = target.attach(instance);
+    await Promise.resolve();
+    expect(releaseRecord).not.toHaveBeenCalled();
+
+    handoffDetach();
+    expect(releaseRecord).not.toHaveBeenCalled();
+    await Promise.resolve();
+    expect(releaseRecord).toHaveBeenCalledTimes(1);
+    expect(releaseRecord).toHaveBeenCalledWith(instance);
   });
 
   it('preserves native focus during a same-commit callback-ref handoff', async () => {

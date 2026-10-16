@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "agentic-button-appearance-plan",
+  "split": "development",
+  "task_mode": "plan",
+  "prompt": "Plan adding a new 'tinted' appearance to the agentic Button in packages/agentic/components/src/components/button. Plan only.",
+  "expected": {
+    "skills": ["agentic-component-authoring"],
+    "classification": {
+      "implementation_model": "agentic-higher-order",
+      "public_compatibility": ["ref-prop"],
+      "native_platforms": []
+    },
+    "required_reads": [
+      "packages/agentic/components/AGENTS.md",
+      "packages/agentic/components/src/components/AGENTS.md",
+      "packages/agentic/components/src/components/button/SPEC.md",
+      "references/agents/components/agentic/types-and-slots.md",
+      "references/agents/components/agentic/styles-and-tokens.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "contract-before-code",
+      "description": "Plans a contract revision and review before implementation because the public appearance set changes.",
+      "rule_ids": ["R-AGENTIC-001"],
+      "source_refs": ["packages/agentic/components/src/components/button/SPEC.md"]
+    },
+    {
+      "id": "token-source",
+      "description": "Maps the new appearance to Flex tokens and documents any token gap.",
+      "rule_ids": ["R-DESIGN-001"],
+      "source_refs": ["packages/agentic/design/src/tokens/mappings/flex-token-map.yaml"]
+    }
+  ]
+}

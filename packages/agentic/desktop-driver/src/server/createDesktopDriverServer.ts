@@ -233,6 +233,13 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       );
       return buildDesktopTree(snapshots);
     }
+    if (method === 'GET' && command[1] === 'window-events' && command.length === 2) {
+      const windowEvents = session.target.host.windowEvents?.bind(session.target.host);
+      if (!windowEvents) {
+        throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not record native window events.`);
+      }
+      return hostCommand(session, 'Reading native window events', (signal) => windowEvents(session.lease, signal));
+    }
     return handleStorybookCommand(method, command.slice(1), body, session, sessions);
   }
 
@@ -548,7 +555,10 @@ async function handleElementCommand(
           session.target.host.hitTest(snapshot.windowId, point.x, point.y, signal),
         );
         if (hit && !(await isElementOrDescendant(session, snapshot.id, hit))) {
-          throw new WebDriverError('element click intercepted', `Element "${record.id}" is obscured by another native element.`);
+          throw new WebDriverError(
+            'element click intercepted',
+            `Element "${record.id}" is obscured by another native element: ${hit.role} "${hit.name ?? ''}" (${hit.id}).`,
+          );
         }
       }
       await hostCommand(session, `Clicking element "${record.id}"`, (signal) =>

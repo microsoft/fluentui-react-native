@@ -15,7 +15,7 @@
       "path": "../../agentic/design/tsconfig.json"
     },
     {
-      "path": "../FocusZone/tsconfig.json"
+      "path": "../../shim/focus-zone/tsconfig.json"
     },
     {
       "path": "../../framework-base/tsconfig.json"

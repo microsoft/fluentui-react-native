@@ -33,6 +33,26 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - `app.json` owns the custom `storybook.testIDPrefix`. Do not create another
   app identity file or duplicate the prefix in runtime source.
 
+## Native diagnostics
+
+The repository Yarn approval covers these workflows; see the
+[agent permissions reference](../../references/agents/repository/permissions.md#native-diagnostics-and-capture) for
+capture limits. From this directory:
+
+| Need                                                    | Preferred command                                                                                                                                        |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project generation and Pod installation                 | `yarn storybook prep --macos`                                                                                                                            |
+| Bundle failures                                         | `yarn storybook --verbose bundle --<platform>`                                                                                                           |
+| Native build failures                                   | `yarn storybook --verbose build --<platform>` (not Win32)                                                                                                |
+| Driver identity, signing, and macOS privacy diagnostics | `yarn desktop-driver doctor --platform macos --permissions`                                                                                              |
+| Actual listener ports and target identity               | `yarn storybook instance --<platform>`                                                                                                                   |
+| Target-scoped screenshots                               | `yarn desktop-driver agent screenshot --platform <platform-name> --url <driver-url> --target <target-id> --artifacts artifacts/<platform> --name <name>` |
+| Runtime trees and crash reproduction                    | `yarn desktop-driver agent describe ...` and `yarn storybook --verbose smoke --<platform>`                                                               |
+
+For `agent` commands, use `--platform macos` on macOS and `--platform windows` for both Windows and Win32. Inspect
+retained command logs under `artifacts/storybook-commands` and platform artifacts rather than redirecting output to
+arbitrary locations.
+
 ## Desktop Driver workflow
 
 - Use `yarn storybook manifest --<platform>` to validate static story-plan
@@ -82,6 +102,8 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
   repository root because subprocess dependency resolution must start in this workspace.
 - Run `yarn storybook bundle --macos` for the JavaScript bundle, `yarn storybook build --macos` for a non-launching
   native build, and `yarn storybook smoke --macos` for the complete owned lifecycle.
+- macOS defaults to Fabric. Add `--paper` to `prep`, `build`, `run`, or `smoke` for Paper; regenerate with `prep`
+  whenever switching renderers because both modes share the generated project and Pods. Keep the endpoint `macos`.
 - Preserve the shared smoke instance context: its canonical-root hash coordinates the macOS bundle identifier,
   Storybook port, Metro port, generated runtime polyfill, and exact app shutdown. Do not replace those values with
   process-name matching or fixed smoke ports.
@@ -107,8 +129,8 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
   `--mode stories-and-tests` to run the component-authored desktop-e2e plans after the complete traversal.
 - Keep the Windows story-pattern overrides in `storybook.config.mts`; the
-  current Accordion and Callout Fabric stories still fail-fast the RNW 0.81
-  host during traversal.
+  current Accordion Fabric stories still fail-fast the RNW 0.81 host during
+  traversal. Native-core Callout and FocusZone stories run on Windows.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
   through the Storybook control channel, use the agent host's desktop screenshot tool when visual evidence is required.
 - Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored

@@ -12,7 +12,7 @@ Work on the native Storybook application in `apps/storybook`.
 
 1. Read the repository `AGENTS.md`, then the compact
    [agent map](../../../apps/storybook/agent-map.yaml). Read the
-   [Storybook instructions](../../../apps/storybook/AGENTS.md) and
+   [Storybook instructions](../../../apps/storybook/AGENTS.md), including its native diagnostics commands, and
    [README](../../../apps/storybook/README.md) only as needed for the task.
 2. Inspect the Storybook `package.json` and run its declared workspace scripts; do not invent direct runner commands.
 3. Use `storybook-agent` to query runtime story IDs, select stories, and sweep renderability. Reproduce the first
@@ -25,7 +25,7 @@ Work on the native Storybook application in `apps/storybook`.
    spec without refreshing ReactCodegen's source list. If the clean build then reports a missing generated spec header,
    run `pods:macos` once more before changing native configuration.
 6. Validate the JavaScript bundle and the affected native build. Run Storybook format/lint and the root build when
-   manifests or shared package references changed.
+   manifests or shared package references changed. Finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
 
 Keep component API, slot, token, and rendering work in the `agentic-component-authoring` skill; use this skill for the
 Storybook application and its native toolchains.

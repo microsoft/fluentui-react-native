@@ -38,6 +38,13 @@ Win32 is never selected implicitly because a Windows machine may contain both
 the Windows Fabric app and a Win32 Paper host. Use `--win32` for one command or
 set `FURN_STORYBOOK_PLATFORM=win32` for a multi-process workflow.
 
+macOS uses Fabric unless `--paper` is present. Use
+`yarn storybook prep --macos --paper`, then pass `--paper` to `build`, `run`,
+or `smoke` to exercise Paper. Regenerate with `prep` whenever switching modes;
+the Xcode project and Pods are shared, not parallel renderer-specific outputs.
+Both modes retain the `macos` endpoint and story catalog. `--paper` is rejected
+for Windows and Win32.
+
 Prefer an explicit option for isolated commands:
 
 ```sh
@@ -155,6 +162,15 @@ session, and cleanup. Consumer configuration should provide any platform-specifi
 app stop command. For Windows Fabric and the prebuilt REX Win32 host, configure the package-owned commands returned by
 `createWindowsSmokeOptions`, `createWin32RunCommand`, and
 `createWin32SmokeCommand`; do not copy lifecycle scripts into the consumer.
+
+The reusable lifecycle waits up to two minutes for its services, then up to
+five minutes for the first story after native launch. Metro's status endpoint
+can be ready before a cold development bundle finishes, and a successful
+release bundle does not prewarm the Debug app's development bundle. First
+render therefore has a separate budget. Set `platformOptions.macos.smoke.initialRenderTimeoutMs`
+to override it; an explicitly configured `startupTimeoutMs` remains its
+fallback. Later stories retain their 15-second navigation deadline. A timeout
+reports the story, elapsed budget, and underlying request failure.
 
 For a broader E2E suite, let the test coordinator own the service processes:
 

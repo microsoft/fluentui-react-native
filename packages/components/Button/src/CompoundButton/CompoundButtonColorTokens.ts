@@ -1,41 +1,69 @@
+import { PlatformColor } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { CompoundButtonTokens } from './CompoundButton.types';
 
-export const defaultCompoundButtonColorTokens: TokenSettings<CompoundButtonTokens, Theme> = (t: Theme): CompoundButtonTokens => ({
-  secondaryContentColor: t.colors.defaultSecondaryContent,
+export const defaultCompoundButtonColorTokens: TokenSettings<CompoundButtonTokens, Theme> = (t: Theme): CompoundButtonTokens => {
+  if (isHighContrast(t)) {
+    return highContrastColors;
+  }
+
+  return {
+    secondaryContentColor: t.colors.neutralForeground2,
+    disabled: {
+      secondaryContentColor: t.colors.neutralForegroundDisabled,
+    },
+    hovered: {
+      secondaryContentColor: t.colors.neutralForeground2Hover,
+    },
+    focused: {
+      secondaryContentColor: t.colors.neutralForeground2Hover,
+    },
+    pressed: {
+      secondaryContentColor: t.colors.neutralForeground2Pressed,
+    },
+    primary: {
+      secondaryContentColor: t.colors.neutralForegroundOnBrand,
+      hovered: {
+        secondaryContentColor: t.colors.neutralForegroundOnBrandHover,
+      },
+      focused: {
+        secondaryContentColor: t.colors.neutralForegroundOnBrandHover,
+      },
+      pressed: {
+        secondaryContentColor: t.colors.neutralForegroundOnBrandPressed,
+      },
+    },
+    subtle: {
+      secondaryContentColor: t.colors.neutralForeground2,
+      hovered: {
+        secondaryContentColor: t.colors.neutralForeground2Hover,
+      },
+      focused: {
+        secondaryContentColor: t.colors.neutralForeground2Hover,
+      },
+      pressed: {
+        secondaryContentColor: t.colors.neutralForeground2Pressed,
+      },
+    },
+  };
+};
+
+const highContrastColors = {
+  secondaryContentColor: PlatformColor('ButtonText'),
+  disabled: {
+    secondaryContentColor: PlatformColor('GrayText'),
+  },
   hovered: {
-    secondaryContentColor: t.colors.defaultHoveredSecondaryContent,
+    secondaryContentColor: PlatformColor('HighlightText'),
   },
   focused: {
-    secondaryContentColor: t.colors.defaultFocusedSecondaryContent,
+    secondaryContentColor: PlatformColor('HighlightText'),
   },
   pressed: {
-    secondaryContentColor: t.colors.defaultPressedSecondaryContent,
+    secondaryContentColor: PlatformColor('HighlightText'),
   },
-  primary: {
-    secondaryContentColor: t.colors.brandedSecondaryContent,
-    hovered: {
-      secondaryContentColor: t.colors.brandedHoveredSecondaryContent,
-    },
-    focused: {
-      secondaryContentColor: t.colors.brandedFocusedSecondaryContent,
-    },
-    pressed: {
-      secondaryContentColor: t.colors.brandedPressedSecondaryContent,
-    },
-  },
-  subtle: {
-    secondaryContentColor: t.colors.ghostSecondaryContent,
-    hovered: {
-      secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
-    },
-    focused: {
-      secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
-    },
-    pressed: {
-      secondaryContentColor: t.colors.ghostPressedSecondaryContent,
-    },
-  },
-});
+};

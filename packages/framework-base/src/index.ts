@@ -56,7 +56,9 @@ export type { FocusTargetBinding, UseFocusTargetResult } from './hooks/useFocusT
 export type { FocusTarget, FocusTargetSnapshot, FocusRequest, FocusRequestStatus, FocusIntent } from './hooks/focusTarget';
 export { isSelfTargetEvent } from './hooks/focusTarget';
 export { useFocusablePressable } from './hooks/useFocusablePressable';
-export type { FocusablePressableProps, FocusKeyboardEvent } from './hooks/useFocusablePressable';
+export type { FocusablePressableOptions, FocusablePressableProps, FocusKeyboardEvent } from './hooks/useFocusablePressable';
+export { requestsFocusOnPointerPress } from './hooks/pointerFocus';
+export type { PointerFocusMode } from './hooks/pointerFocus';
 export { useFocusVisible } from './hooks/useFocusVisible';
 export type { FocusVisibleKeyEvent, FocusVisiblePressableProps, UseFocusVisibleResult } from './hooks/useFocusVisible';
 export { useReducedMotion } from './hooks/useReducedMotion';

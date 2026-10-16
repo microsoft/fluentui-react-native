@@ -1,5 +1,24 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.17
+
+### Patch Changes
+
+- Updated dependencies [c547395]
+- Updated dependencies [c547395]
+  - @fluentui-react-native/callout@0.29.7
+  - @fluentui-react-native/focus-zone@0.23.7
+
+## 0.25.16
+
+### Patch Changes
+
+- 726912f: Pin Win32 and macOS component color token values in platform-specific snapshots.
+- Updated dependencies [726912f]
+- Updated dependencies [efd9477]
+  - @fluentui-react-native/text@0.25.15
+  - @fluentui-react-native/icon@0.22.15
+
 ## 0.25.15
 
 ### Patch Changes

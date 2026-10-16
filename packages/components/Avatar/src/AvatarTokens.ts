@@ -22,7 +22,7 @@ import { getNamedColorSet, type NamedColorSet } from './Avatar.colors';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
-    badgeSize: 'small',
+    badgeSize: 'tiny',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground6,
     avatarOpacity: 1,
@@ -191,10 +191,11 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
  * @returns object of props - backgroundColor, color and ringColor
  */
 function getColorProps(color: NamedColorSet, theme: Theme) {
+  const themeAppearance = theme.name;
   const colorSet = getNamedColorSet(color);
-  const themeAppearance = theme.host.appearance;
   switch (themeAppearance) {
-    case 'light':
+    case 'White':
+    case 'Colorful':
     default:
       return {
         backgroundColor: colorSet.tint40,
@@ -202,14 +203,15 @@ function getColorProps(color: NamedColorSet, theme: Theme) {
         iconColor: colorSet.shade30,
         ringColor: colorSet.primary,
       };
-    case 'dark':
+    case 'DarkGray':
+    case 'Black':
       return {
         backgroundColor: colorSet.shade30,
         color: colorSet.tint40,
         iconColor: colorSet.tint40,
         ringColor: colorSet.tint30,
       };
-    case 'highContrast':
+    case 'HighContrast':
       return {
         backgroundColor: theme.colors.neutralBackground6,
         color: theme.colors.neutralForeground3,

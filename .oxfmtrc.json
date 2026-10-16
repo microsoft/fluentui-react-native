@@ -10,7 +10,7 @@
     "**/*.generated.*",
     "**/lib-commonjs/**",
     "**/dist/**",
-    "packages/native/Callout/windows/Callout/codegen/**",
+    "packages/agentic/native-core/windows/NativeCore/codegen/**",
     "**/CHANGELOG.*",
     "**/CODE_OF_CONDUCT.md",
     "**/SECURITY.md",

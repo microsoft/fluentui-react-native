@@ -27,27 +27,20 @@ agree, and duplicate declarations can produce duplicate native callbacks.
 
 The current transport contract is:
 
-| Platform        | Toggle   | Select   | Evidence and limits                                                                                                                                                                                                                         |
-| --------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Windows Fabric  | `toggle` | `select` | RNW 0.81.35 `CompositionDynamicAutomationProvider.cpp` dispatches lowercase names. `UiaHelpers.cpp::DispatchAccessibilityAction` compares case-sensitively and emits once for every matching declaration.                                   |
-| Office Win32    | `Toggle` | `Select` | `@office-iss/react-native-win32` 0.81.8 `ViewAccessibility.d.ts` declares these UIA action names; existing FURN V1 Checkbox and Switch use `Toggle`. Native UIA invocation still needs target-platform verification.                        |
-| macOS           | `Toggle` | `Select` | RNmacOS 0.81.9 Fabric `RCTViewComponentView.mm::accessibilityCustomActions` exposes the declared names verbatim; `didActivateAccessibilityCustomAction` emits that exact name. These are custom actions, not an inferred `AXPress` mapping. |
-| Other platforms | `Toggle` | `Select` | Retains existing custom declarations; this is not native pattern or gesture qualification. Verify a renderer before claiming support.                                                                                                       |
+| Platform        | Toggle   | Select   | Evidence                                                                   |
+| --------------- | -------- | -------- | -------------------------------------------------------------------------- |
+| Windows Fabric  | `toggle` | `select` | C-A11Y-001                                                                 |
+| Office Win32    | `Toggle` | `Select` | C-A11Y-002; native UIA invocation still needs target-platform verification |
+| macOS           | `Toggle` | `Select` | C-A11Y-003; custom actions, not an inferred `AXPress` mapping              |
+| Other platforms | `Toggle` | `Select` | Existing custom declarations; not native pattern or gesture qualification  |
 
-These source paths are relative to the installed platform package:
+The version-bound source evidence, including installed-package paths, is in the
+[action transport evidence](../../../../references/agents/accessibility/action-transport-evidence.md). Verify a
+renderer before claiming support on another platform.
 
-- RNW: `Microsoft.ReactNative/Fabric/Composition/`.
-- Win32: `Libraries/Components/View/ViewAccessibility.d.ts`.
-- RNmacOS Fabric: `React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm`.
-- RNmacOS Paper: `React/Views/RCTView.m`.
-
-RNmacOS Fabric constructs custom actions from `name`, ignoring `label`; keep
-caller labels in JS rather than replacing them with guessed localized text.
-Paper instead maps a custom action's label back to its declared name and
-implements `accessibilityPerformPress` using `activate` or `onAccessibilityTap`.
-Fabric's `accessibilityActivate` only forwards `onAccessibilityTap`, and is not
-that AppKit press implementation. Do not map toggle/select to `activate`,
-synthesize `onPress`, or add an AXPress fallback based on Paper evidence.
+Keep caller labels in JavaScript rather than replacing them with guessed localized text, because macOS Fabric ignores
+labels when constructing custom actions (C-A11Y-003). Do not map toggle/select to `activate`, synthesize `onPress`, or
+add an AXPress fallback based on Paper behavior (C-A11Y-004).
 
 The resolver normalizes only the owned semantic action's two known spellings.
 It deduplicates exact resulting names, preserves caller order and the first

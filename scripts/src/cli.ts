@@ -6,6 +6,7 @@ import { FormatCommand } from './tasks/format.ts';
 import { LintCommand } from './tasks/lint.ts';
 import { JestCommand } from './tasks/jest.ts';
 import { CheckPublishingCommand } from './tasks/checkPublishingTask.ts';
+import { CheckAgentInstructionsCommand } from './tasks/checkAgentInstructionsTask.ts';
 
 const cli = new Cli({
   binaryLabel: 'fluentui-scripts CLI',
@@ -18,6 +19,7 @@ cli.register(FormatCommand);
 cli.register(LintCommand);
 cli.register(JestCommand);
 cli.register(CheckPublishingCommand);
+cli.register(CheckAgentInstructionsCommand);
 
 cli.register(Builtins.DefinitionsCommand);
 cli.register(Builtins.HelpCommand);

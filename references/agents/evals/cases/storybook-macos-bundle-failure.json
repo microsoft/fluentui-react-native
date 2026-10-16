@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "case_id": "storybook-macos-bundle-failure",
+  "split": "holdout",
+  "task_mode": "toolchain",
+  "prompt": "The agentic Storybook macOS JavaScript bundle started failing after a dependency bump. Plan the diagnosis.",
+  "expected": {
+    "skills": ["agentic-storybook-development"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": ["apps/storybook/agent-map.yaml", "apps/storybook/AGENTS.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "declared-scripts",
+      "description": "Diagnoses with the app-declared Storybook bundle command rather than invoking Metro directly.",
+      "rule_ids": ["R-VALID-001"],
+      "source_refs": ["apps/storybook/package.json"]
+    }
+  ]
+}

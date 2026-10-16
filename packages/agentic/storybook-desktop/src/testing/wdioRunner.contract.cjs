@@ -161,7 +161,8 @@ async function main() {
       throw new Error('Named test failure prevented independent cases from running.');
     }
     const evidencePaths = namedFailureResults.flatMap(({ artifacts }) => (artifacts ?? []).map(({ path }) => path));
-    if (evidencePaths.length !== 4 || new Set(evidencePaths).size !== 4) {
+    // Each failure captures a screenshot, page source, and tree.
+    if (evidencePaths.length !== 6 || new Set(evidencePaths).size !== 6) {
       throw new Error('Named failure evidence collided.');
     }
     const filtered = await run('named', { test: '*fresh' });

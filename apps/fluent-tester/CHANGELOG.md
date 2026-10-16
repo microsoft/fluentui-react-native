@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.57
+
+### Patch Changes
+
+- c547395: Move Callout and FocusZone implementations into native-core and retain the existing packages as JS-only compatibility shims under packages/shim. Native applications must directly depend on native-core and regenerate native autolinking/Pods; macOS now uses the shared FRNNativeCore pod and Windows uses one Fabric library for both components. Public APIs and native registration names are unchanged.
+- Updated dependencies [c547395]
+- Updated dependencies [c547395]
+- Updated dependencies [c547395]
+  - @fluentui-react-native/native-core@0.1.0
+
 ## 0.170.56
 
 ### Patch Changes

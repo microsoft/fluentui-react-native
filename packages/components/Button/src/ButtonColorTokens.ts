@@ -1,88 +1,133 @@
+import { PlatformColor } from 'react-native';
+
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { ButtonTokens } from './Button.types';
 
-export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
-  ({
-    backgroundColor: t.colors.buttonBackground,
-    color: t.colors.buttonText,
-    borderColor: t.colors.buttonBorder,
-    iconColor: t.colors.buttonIcon,
+export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) => {
+  if (isHighContrast(t)) {
+    return highContrastColors;
+  }
+
+  return {
+    backgroundColor: t.colors.neutralBackground1,
+    color: t.colors.neutralForeground1,
+    borderColor: t.colors.neutralStroke1,
+    iconColor: t.colors.neutralForeground1,
     disabled: {
-      backgroundColor: t.colors.defaultDisabledBackground,
-      color: t.colors.defaultDisabledContent,
-      borderColor: t.colors.defaultDisabledBorder,
-      iconColor: t.colors.defaultDisabledIcon,
+      backgroundColor: t.colors.neutralBackgroundDisabled,
+      color: t.colors.neutralForegroundDisabled,
+      borderColor: t.colors.neutralStrokeDisabled,
+      iconColor: t.colors.neutralForegroundDisabled,
     },
     hovered: {
-      backgroundColor: t.colors.defaultHoveredBackground,
-      color: t.colors.defaultHoveredContent,
-      borderColor: t.colors.defaultHoveredBorder,
-      iconColor: t.colors.defaultHoveredIcon,
+      backgroundColor: t.colors.neutralBackground1Hover,
+      color: t.colors.neutralForeground1Hover,
+      borderColor: t.colors.neutralStroke1,
+      iconColor: t.colors.neutralForeground1Hover,
     },
     pressed: {
-      backgroundColor: t.colors.defaultPressedBackground,
-      color: t.colors.defaultPressedContent,
-      borderColor: t.colors.defaultPressedBorder,
-      iconColor: t.colors.defaultPressedIcon,
+      backgroundColor: t.colors.neutralBackground1Pressed,
+      color: t.colors.neutralForeground1Pressed,
+      borderColor: t.colors.neutralStroke1,
+      iconColor: t.colors.neutralForeground1Pressed,
     },
     focused: {
-      backgroundColor: t.colors.defaultFocusedBackground,
-      color: t.colors.defaultFocusedContent,
-      borderColor: t.colors.defaultFocusedBorder,
-      icon: t.colors.defaultFocusedIcon,
+      backgroundColor: t.colors.neutralBackground1Hover,
+      color: t.colors.neutralForeground1Hover,
+      borderColor: t.colors.transparentStroke,
+      iconColor: t.colors.neutralForeground1Hover,
     },
     primary: {
       backgroundColor: t.colors.brandBackground,
-      color: t.colors.neutralForegroundOnColor,
+      color: t.colors.neutralForegroundOnBrand,
       borderColor: t.colors.brandStroke1,
-      iconColor: t.colors.neutralForegroundOnColor,
+      iconColor: t.colors.neutralForegroundOnBrand,
       disabled: {
-        backgroundColor: t.colors.brandBackgroundDisabled,
-        color: t.colors.neutralForegroundDisabled1,
-        iconColor: t.colors.neutralForegroundDisabled1,
+        backgroundColor: t.colors.neutralBackgroundDisabled,
+        color: t.colors.neutralForegroundDisabled,
+        borderColor: t.colors.neutralStrokeDisabled,
+        iconColor: t.colors.neutralForegroundDisabled,
+      },
+      hovered: {
+        backgroundColor: t.colors.brandBackgroundHover,
+        color: t.colors.neutralForegroundOnBrandHover,
+        borderColor: t.colors.brandBackgroundHover,
+        iconColor: t.colors.neutralForegroundOnBrandHover,
       },
       pressed: {
         backgroundColor: t.colors.brandBackgroundPressed,
-        color: t.colors.neutralForegroundOnColor,
-        iconColor: t.colors.neutralForegroundOnColor,
+        color: t.colors.neutralForegroundOnBrandPressed,
+        borderColor: t.colors.brandBackgroundPressed,
+        iconColor: t.colors.neutralForegroundOnBrandPressed,
       },
       focused: {
-        backgroundColor: t.colors.brandBackground,
-        color: t.colors.neutralForegroundOnColor,
+        backgroundColor: t.colors.brandBackgroundHover,
+        color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.strokeFocus2,
-        iconColor: t.colors.neutralForegroundOnColor,
+        borderInnerColor: t.colors.strokeFocus1,
+        iconColor: t.colors.neutralForegroundOnBrandHover,
       },
     },
     subtle: {
-      backgroundColor: t.colors.ghostBackground,
-      color: t.colors.ghostContent,
-      borderColor: t.colors.ghostBorder,
-      iconColor: t.colors.ghostIcon,
+      backgroundColor: t.colors.subtleBackground,
+      color: t.colors.neutralForeground1,
+      borderColor: t.colors.transparentStroke,
+      iconColor: t.colors.neutralForeground1,
       disabled: {
-        color: t.colors.ghostDisabledContent,
-        borderColor: t.colors.ghostDisabledBorder,
-        backgroundColor: t.colors.ghostDisabledBackground,
-        iconColor: t.colors.ghostDisabledIcon,
+        backgroundColor: t.colors.subtleBackground,
+        color: t.colors.neutralForegroundDisabled,
+        borderColor: t.colors.transparentStroke,
+        iconColor: t.colors.neutralForegroundDisabled,
       },
       hovered: {
-        backgroundColor: t.colors.ghostHoveredBackground,
-        color: t.colors.ghostHoveredContent,
-        borderColor: t.colors.ghostHoveredBorder,
-        iconColor: t.colors.ghostHoveredIcon,
+        backgroundColor: t.colors.subtleBackgroundHover,
+        color: t.colors.neutralForeground1Hover,
+        borderColor: t.colors.subtleBackgroundHover,
+        iconColor: t.colors.neutralForeground1Hover,
       },
       pressed: {
-        backgroundColor: t.colors.ghostPressedBackground,
-        borderColor: t.colors.ghostPressedBorder,
-        color: t.colors.ghostPressedContent,
-        icon: t.colors.ghostPressedIcon,
+        backgroundColor: t.colors.subtleBackgroundPressed,
+        color: t.colors.neutralForeground1Pressed,
+        borderColor: t.colors.subtleBackgroundPressed,
+        iconColor: t.colors.neutralForeground1Pressed,
       },
       focused: {
-        borderColor: t.colors.ghostFocusedBorder,
-        backgroundColor: t.colors.ghostFocusedBackground,
-        color: t.colors.ghostFocusedContent,
-        icon: t.colors.ghostFocusedIcon,
+        backgroundColor: t.colors.subtleBackgroundHover,
+        color: t.colors.neutralForeground1Hover,
+        borderColor: t.colors.transparentStroke,
+        iconColor: t.colors.neutralForeground1Hover,
       },
     },
-  }) as ButtonTokens;
+  } as ButtonTokens;
+};
+
+const highContrastColors = {
+  backgroundColor: PlatformColor('ButtonFace'),
+  borderColor: PlatformColor('ButtonText'),
+  color: PlatformColor('ButtonText'),
+  iconColor: PlatformColor('ButtonText'),
+  disabled: {
+    backgroundColor: PlatformColor('ButtonFace'),
+    borderColor: PlatformColor('GrayText'),
+    color: PlatformColor('GrayText'),
+    iconColor: PlatformColor('GrayText'),
+  },
+  hovered: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+  pressed: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+  focused: {
+    backgroundColor: PlatformColor('Highlight'),
+    color: PlatformColor('HighlightText'),
+    iconColor: PlatformColor('HighlightText'),
+  },
+};

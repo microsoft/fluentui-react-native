@@ -8,6 +8,7 @@ import type {
   DesktopHostInfo,
   DesktopTarget,
   DesktopWindow,
+  DesktopWindowEventLog,
   NativeActionSequence,
   NativeElementSnapshot,
   NativeImage,
@@ -208,6 +209,10 @@ export class NativeDesktopHost implements DesktopHost {
 
   tree(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot[]> {
     return this.request('tree', { windowId }, signal);
+  }
+
+  windowEvents(lease: ApplicationLease, signal?: AbortSignal): Promise<DesktopWindowEventLog> {
+    return this.request('windowEvents', { lease }, signal);
   }
 
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {

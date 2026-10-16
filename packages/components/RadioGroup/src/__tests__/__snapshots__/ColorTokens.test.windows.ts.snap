@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioGroup color tokens pins Radio v1 colors: Radio v1 1`] = `
+{
+  "borderColor": "#00000000",
+  "color": "#262626",
+  "disabled": {
+    "color": "#B1B1B1",
+    "radioOuterCircleBackground": "#E6E6E6",
+  },
+  "focused": {
+    "borderColor": "#969696",
+  },
+  "hovered": {
+    "color": "#262626",
+    "radioOuterCircleBackground": "antiquewhite",
+    "selected": {
+      "color": "#262626",
+      "radioFill": "#FFFFFF",
+      "radioOuterCircleBackground": "#F29F71",
+    },
+  },
+  "pressed": {
+    "color": "#262626",
+    "radioOuterCircleBackground": "antiquewhite",
+    "selected": {
+      "color": "#262626",
+      "radioFill": "#FFFFFF",
+      "radioOuterCircleBackground": "#A22C01",
+    },
+  },
+  "radioOuterCircleBackground": "antiquewhite",
+  "selected": {
+    "color": "#262626",
+    "disabled": {
+      "radioFill": "#B1B1B1",
+    },
+    "radioFill": "#FFFFFF",
+    "radioOuterCircleBackground": "#D83B01",
+  },
+}
+`;
+
+exports[`RadioGroup color tokens pins RadioButton v0 colors: RadioButton v0 1`] = `
+{
+  "_overrides": {
+    "disabled": {
+      "tokens": {
+        "backgroundColor": "antiquewhite",
+        "borderColor": "#D2D2D2",
+        "color": "#B1B1B1",
+      },
+    },
+    "focused": {
+      "tokens": {
+        "textBorderColor": "#969696",
+      },
+    },
+  },
+  "button": {
+    "style": {
+      "backgroundColor": "transparent",
+    },
+  },
+  "tokens": {
+    "backgroundColor": "#262626",
+    "borderColor": "#262626",
+    "color": "#262626",
+    "textBorderColor": "transparent",
+  },
+}
+`;
+
+exports[`RadioGroup color tokens pins RadioGroup v0 colors: RadioGroup v0 1`] = `
+{
+  "tokens": {
+    "color": "#262626",
+  },
+}
+`;
+
+exports[`RadioGroup color tokens pins RadioGroup v1 colors: RadioGroup v1 1`] = `
+{
+  "color": "#262626",
+  "disabled": {
+    "color": "#B1B1B1",
+  },
+}
+`;

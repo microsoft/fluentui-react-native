@@ -20,6 +20,30 @@ export type DesktopHostFeatures = {
   screenshot: boolean;
   setWindowRect: boolean;
   wheel: boolean;
+  /** The host records a native window-event timeline for diagnostics. */
+  windowEvents?: boolean;
+};
+
+/** One recorded native window notification; `ageMs` is relative to when the log was read. */
+export type DesktopWindowEvent = {
+  ageMs: number;
+  element: string;
+  notification: string;
+  sequence: number;
+  windowId?: string;
+};
+
+/** A bounded, advisory window-event timeline and the current native window publication. */
+export type DesktopWindowEventLog = {
+  /** Recent helper commands on the same clock as `events`, when the host journals them. */
+  commands?: { ageMs: number; command: string; detail?: Record<string, unknown>; durationMs?: number; outcome: string; sequence: number }[];
+  events: DesktopWindowEvent[];
+  eventsTruncated: boolean;
+  observing: boolean;
+  publication?: Record<string, unknown>;
+  registrationFailures?: string[];
+  source: string;
+  trackedWindows?: { closed: boolean; element: string; id: string; primary: boolean; title: string }[];
 };
 
 export type DesktopHostInfo = {
@@ -152,6 +176,7 @@ export interface DesktopHost {
   captureElement(elementId: string, signal?: AbortSignal): Promise<NativeImage>;
   source(windowId: string, signal?: AbortSignal): Promise<string>;
   tree(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot[]>;
+  windowEvents?(lease: ApplicationLease, signal?: AbortSignal): Promise<DesktopWindowEventLog>;
 
   subscribe?(listener: (event: DesktopHostEvent) => void): () => void;
   dispose(signal?: AbortSignal): Promise<void>;

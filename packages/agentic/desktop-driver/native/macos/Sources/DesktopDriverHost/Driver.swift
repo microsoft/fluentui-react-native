@@ -16,8 +16,53 @@ final class Driver {
   private let capture = CaptureEngine()
   private let inputLock = PhysicalInputLock.shared
   private var persistentInputLock = false
+  // Commands execute serially on the worker thread, so one current journal entry is sufficient.
+  private var journalEntry: Int?
+
+  /// Publishes advisory `window-closed` events for tracked windows that Accessibility reports destroyed.
+  func setWindowClosedPublisher(_ publish: @escaping (String) -> Void) {
+    applications.windowEvents.publishWindowClosed = publish
+  }
 
   func execute(command: String, params: JSONObject, token: CancellationToken) throws -> CommandResult {
+    let entry = applications.commands.begin(command, detail: journalDetail(params))
+    journalEntry = entry
+    defer { journalEntry = nil }
+    do {
+      let result = try executeCommand(command: command, params: params, token: token)
+      applications.commands.finish(entry, outcome: "ok", detail: journalResult(command, result.result))
+      return result
+    } catch let error as HelperError {
+      applications.commands.finish(entry, outcome: error.code)
+      throw error
+    } catch is CancelledError {
+      applications.commands.finish(entry, outcome: "cancelled")
+      throw CancelledError()
+    } catch {
+      applications.commands.finish(entry, outcome: "internal-error")
+      throw error
+    }
+  }
+
+  // Journal only identifiers needed to correlate commands with window events, never text or native handles.
+  private func journalDetail(_ params: JSONObject) -> JSONObject {
+    var detail: JSONObject = [:]
+    for key in ["elementId", "windowId", "mode"] {
+      if let value = params[key] as? String {
+        detail[key] = bounded(value, bytes: 128)
+      }
+    }
+    return detail
+  }
+
+  private func journalResult(_ command: String, _ result: Any) -> JSONObject {
+    guard command == "windows", let windows = result as? [JSONObject] else {
+      return [:]
+    }
+    return ["windowIds": windows.compactMap { $0["id"] as? String }]
+  }
+
+  private func executeCommand(command: String, params: JSONObject, token: CancellationToken) throws -> CommandResult {
     try token.throwIfCancelled()
     switch command {
     case "probe":
@@ -38,6 +83,9 @@ final class Driver {
       let lease = try requireObject(params["lease"], "The windows request is missing its lease.")
       let records = try applications.listWindows(try requireString(lease, "id"), token: token)
       return CommandResult(result: try records.map(windowJSON))
+    case "windowEvents":
+      let lease = try requireObject(params["lease"], "The windowEvents request is missing its lease.")
+      return CommandResult(result: try applications.windowEventLog(try requireString(lease, "id")))
     case "closeWindow":
       let windowID = try requireString(params, "windowId")
       let window = try applications.requireWindow(windowID)
@@ -191,6 +239,7 @@ final class Driver {
         "screenshot": screenshot,
         "setWindowRect": trusted,
         "wheel": trusted,
+        "windowEvents": trusted,
       ],
       "platformName": "macos",
       "protocolVersion": 1,
@@ -233,25 +282,65 @@ final class Driver {
     guard let application = NSRunningApplication(processIdentifier: window.processID) else {
       try fail(ErrorCode.noSuchWindow, "The requested window's application is no longer running.")
     }
-    _ = application.activate(options: [])
+    let started = DispatchTime.now()
+    let applicationElement = AXUIElementCreateApplication(window.processID)
+    var diagnostics: JSONObject = [:]
+    if let focused = focusedApplicationIdentity() {
+      diagnostics["focusedApplicationBefore"] = focused
+    }
+    func isFrontmost() -> Bool {
+      axNumber(try? copyOptionalAXAttribute(applicationElement, kAXFrontmostAttribute))?.boolValue == true
+    }
+    if !isFrontmost() {
+      // Trusted Accessibility clients activate immediately. NSRunningApplication activation is cooperative on current
+      // macOS releases and was observed to wait about a second for the active application to yield.
+      let frontmostError = AXUIElementSetAttributeValue(applicationElement, kAXFrontmostAttribute as CFString, kCFBooleanTrue)
+      diagnostics["method"] = frontmostError == .success ? "accessibility" : "workspace"
+      if frontmostError != .success {
+        diagnostics["accessibilityError"] = axErrorName(frontmostError)
+        _ = application.activate(options: [])
+      }
+    } else {
+      diagnostics["method"] = "already-frontmost"
+    }
     _ = AXUIElementSetAttributeValue(window.element, kAXMainAttribute as CFString, kCFBooleanTrue)
     let raised = AXUIElementPerformAction(window.element, kAXRaiseAction as CFString)
     if raised != .success && raised != .actionUnsupported {
       try fail(ErrorCode.windowActivation, "Raising the application window failed because \(describeAXError(raised)).")
     }
     let deadline = DispatchTime.now() + .seconds(2)
+    var main = false
+    var frontmost = false
     while DispatchTime.now() < deadline {
       try token.throwIfCancelled()
-      let main = axNumber(try copyAXAttribute(window.element, kAXMainAttribute))?.boolValue == true
-      if NSWorkspace.shared.frontmostApplication?.processIdentifier == window.processID && (main || !window.primary) {
+      main = axNumber(try copyAXAttribute(window.element, kAXMainAttribute))?.boolValue == true
+      frontmost = isFrontmost()
+      if frontmost && (main || !window.primary) {
+        diagnostics["elapsedMs"] = Int((DispatchTime.now().uptimeNanoseconds - started.uptimeNanoseconds) / 1_000_000)
+        annotateJournal(diagnostics)
         return
       }
       try token.wait(milliseconds: 50)
     }
+    diagnostics["frontmost"] = frontmost
+    diagnostics["main"] = main
+    if let focused = focusedApplicationIdentity() {
+      diagnostics["focusedApplication"] = focused
+    }
+    annotateJournal(diagnostics)
+    let owner = (diagnostics["focusedApplication"] as? JSONObject)?["name"] as? String
     try fail(
       ErrorCode.windowActivation,
-      "The target window did not become the active foreground application window."
+      "The target window did not become the active foreground application window"
+        + (owner.map { " (\($0) kept keyboard focus)." } ?? "."),
+      data: diagnostics
     )
+  }
+
+  private func annotateJournal(_ detail: JSONObject) {
+    if let journalEntry {
+      applications.commands.annotate(journalEntry, detail: detail)
+    }
   }
 
   private func setWindowRect(

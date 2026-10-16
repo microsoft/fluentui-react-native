@@ -50,6 +50,8 @@ export type {
   DesktopTarget,
   DesktopTreeNode,
   DesktopWindow,
+  DesktopWindowEvent,
+  DesktopWindowEventLog,
   NativeElementScope,
   NativeElementSnapshot,
   NativeImage,

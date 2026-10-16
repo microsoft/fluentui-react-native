@@ -29,11 +29,11 @@ export default makeDesktopStorybookConfig({
       },
     ],
     [
-      '@fluentui-react-native/callout',
+      '@fluentui-react-native/native-core',
       {
         platformSettings: {
-          windows: {
-            storyPatterns: [],
+          win32: {
+            storyPatterns: ['src/legacy/**/*.stories.?(ts|tsx)'],
           },
         },
       },

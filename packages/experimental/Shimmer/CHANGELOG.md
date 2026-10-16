@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
+## 0.15.9
+
+### Patch Changes
+
+- 726912f: Pin Win32 and macOS component color token values in platform-specific snapshots.
+- efd9477: Use Win32 styling and token values as the shared default for Windows and Win32.
+
 ## 0.15.8
 
 ### Patch Changes

@@ -33,6 +33,8 @@ selecting. No accessibility action synthesizes `onPress`, and `activate` is
 not an additional selection path.
 
 The [shared action foundation](../../../../../../framework-base/src/accessibility/AGENTS.md)
+defines the action contract, and its
+[transport evidence](../../../../../../../references/agents/accessibility/action-transport-evidence.md)
 records RNW 0.81.35, Win32 0.81.8, and RNmacOS 0.81.9 source evidence.
 macOS Fabric custom actions emit the exact declared names and ignore display
 labels; default AXPress support is not established by that path. Native

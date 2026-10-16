@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "case_id": "native-checkbox-macos-review",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "Review the macOS experimental Checkbox (packages/experimental/Checkbox/src/Checkbox.macos.tsx) and its native backing. What validation evidence would be required to approve a change to it?",
+  "expected": {
+    "skills": ["review-component", "implement-native-component"],
+    "classification": {
+      "implementation_model": "v1-compose",
+      "public_compatibility": ["native-registration"],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": [
+      "references/agents/components/classification.md",
+      "references/agents/components/v1.md",
+      "references/agents/native/components-and-modules.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "separates-native-obligations",
+      "description": "Records the v1 wrapper and its macOS native obligations separately.",
+      "rule_ids": ["R-CLASSIFY-002"],
+      "source_refs": ["packages/experimental/Checkbox/src/Checkbox.macos.tsx"]
+    },
+    {
+      "id": "native-evidence",
+      "description": "Requires a macOS native build and runtime evidence, and does not treat JavaScript tests as native qualification.",
+      "rule_ids": ["R-NATIVE-003", "R-VALID-002"],
+      "source_refs": []
+    }
+  ]
+}

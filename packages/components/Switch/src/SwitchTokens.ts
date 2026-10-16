@@ -1,4 +1,5 @@
 import type { Theme } from '@fluentui-react-native/framework';
+import { isHighContrast } from '@fluentui-react-native/design/theming';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { SwitchTokens } from './Switch.types';
@@ -48,43 +49,43 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
 
   toggleOn: {
     trackColor: t.colors.compoundBrandBackground1,
-    thumbColor: t.colors.neutralForegroundInverted,
+    thumbColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHover : t.colors.neutralForegroundInverted,
     borderColor: t.colors.compoundBrandBackground1,
     justifyContent: 'flex-end',
     hovered: {
-      trackColor: t.colors.compoundBrandBackground1Hover,
-      thumbColor: t.colors.neutralForegroundInvertedLink,
+      trackColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHover : t.colors.compoundBrandBackground1Hover,
+      thumbColor: isHighContrast(t) ? t.colors.compoundBrandBackground1Hover : t.colors.neutralForegroundInvertedLink,
       borderColor: t.colors.compoundBrandBackground1Hover,
     },
     pressed: {
       trackColor: t.colors.compoundBrandBackground1Pressed,
-      thumbColor: t.colors.neutralForegroundInvertedLink,
+      thumbColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHover : t.colors.neutralForegroundInvertedLink,
       borderColor: t.colors.compoundBrandBackground1Pressed,
     },
     disabled: {
-      trackColor: t.colors.neutralBackgroundDisabled,
-      thumbColor: t.colors.neutralStrokeDisabled,
+      trackColor: isHighContrast(t) ? t.colors.neutralForegroundDisabled : t.colors.neutralBackgroundDisabled,
+      thumbColor: isHighContrast(t) ? t.colors.brandBackground : t.colors.neutralStrokeDisabled,
       borderColor: t.colors.neutralForegroundDisabled,
     },
   },
 
   toggleOff: {
-    trackColor: t.colors.neutralForegroundInvertedLink,
-    thumbColor: t.colors.neutralStrokeAccessible,
-    borderColor: t.colors.neutralStrokeAccessible,
+    trackColor: isHighContrast(t) ? t.colors.brandBackground : t.colors.neutralForegroundInvertedLink,
+    thumbColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrand : t.colors.neutralStrokeAccessible,
+    borderColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrand : t.colors.neutralStrokeAccessible,
     justifyContent: 'flex-start',
     hovered: {
-      trackColor: t.colors.neutralForegroundInvertedLinkHover,
-      thumbColor: t.colors.neutralStrokeAccessibleHover,
-      borderColor: t.colors.neutralStrokeAccessibleHover,
+      trackColor: isHighContrast(t) ? t.colors.brandBackgroundHover : t.colors.neutralForegroundInvertedLinkHover,
+      thumbColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHover : t.colors.neutralStrokeAccessibleHover,
+      borderColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHover : t.colors.neutralStrokeAccessibleHover,
     },
     pressed: {
-      trackColor: t.colors.neutralForegroundInvertedLinkPressed,
+      trackColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandPressed : t.colors.neutralForegroundInvertedLinkPressed,
       thumbColor: t.colors.neutralStrokeAccessiblePressed,
       borderColor: t.colors.neutralStrokeAccessiblePressed,
     },
     disabled: {
-      trackColor: t.colors.neutralBackgroundDisabled,
+      trackColor: isHighContrast(t) ? t.colors.brandBackground : t.colors.neutralBackgroundDisabled,
       thumbColor: t.colors.neutralStrokeDisabled,
       borderColor: t.colors.neutralStrokeDisabled,
     },

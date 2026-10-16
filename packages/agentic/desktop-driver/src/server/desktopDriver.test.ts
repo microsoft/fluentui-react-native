@@ -299,6 +299,34 @@ describe('Desktop Driver W3C remote end', () => {
     }
   });
 
+  test('serves the native window-event timeline only for targets that record it', async () => {
+    const harness = await createDesktopDriverTestHarness({ endpoint: 'macos', platformName: 'macos', features: { windowEvents: true } });
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({ alwaysMatch: { platformName: 'macos', 'furn:target': harness.target.id } });
+      expect(session.recordsWindowEvents()).toBe(true);
+      const [windowId] = await session.getWindowHandles();
+      await harness.host.closeWindow(windowId);
+      const log = await session.getWindowEvents();
+      expect(log).toMatchObject({ observing: true, source: 'fake' });
+      expect(log.events).toEqual([expect.objectContaining({ notification: 'window-closed', sequence: 1, windowId })]);
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+
+    const unsupported = await createDesktopDriverTestHarness({ endpoint: 'macos', platformName: 'macos' });
+    try {
+      const client = createDesktopDriverClient({ url: unsupported.server.url });
+      const session = await client.newSession({ alwaysMatch: { platformName: 'macos', 'furn:target': unsupported.target.id } });
+      expect(session.recordsWindowEvents()).toBe(false);
+      await expect(session.getWindowEvents()).rejects.toMatchObject({ code: 'unsupported operation' });
+      await session.delete();
+    } finally {
+      await unsupported.close();
+    }
+  });
+
   test('routes Storybook commands and invalidates only preview element references', async () => {
     const manifest: DesktopStoryManifest = {
       endpoint: 'windows',

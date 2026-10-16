@@ -1,43 +1,44 @@
 import type { FontWeightValue, Theme } from '@fluentui-react-native/framework';
-import { cornerRadius40, fontSize300, fontWeightRegular, size40, size60, sizeNone } from '@fluentui-react-native/design/tokens/global';
+import { cornerRadiusNone, fontSize200, fontWeightRegular, size20, size40, size80 } from '@fluentui-react-native/design/tokens/global';
 import type { TokenSettings } from '@fluentui-react-native/use-styling';
 
 import type { MenuItemTokens } from './MenuItem.types';
 
 export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  borderRadius: cornerRadius40,
+  borderRadius: cornerRadiusNone,
   checkmarkSize: 16,
-  color: t.colors.neutralForeground2,
+  color: t.colors.neutralForeground1,
   fontFamily: t.typography.families.primary,
-  fontSize: fontSize300,
+  fontSize: fontSize200,
   fontWeight: fontWeightRegular as FontWeightValue,
   gap: size40,
-  iconColor: t.colors.neutralForeground2,
+  iconColor: t.colors.neutralForeground1,
   iconSize: 16,
-  minHeight: 32,
+  minHeight: 24,
   minWidth: 128,
   maxWidth: 300,
-  padding: size60,
-  submenuIndicatorColor: t.colors.neutralForeground2,
-  submenuIndicatorPadding: sizeNone,
+  padding: size40,
+  paddingHorizontal: size80,
+  submenuIndicatorColor: t.colors.neutralForeground1,
+  submenuIndicatorPadding: size20,
   submenuIndicatorSize: 16,
-  hovered: {
-    backgroundColor: t.colors.neutralBackground1Hover,
-    color: t.colors.neutralForeground2Hover,
-    iconColor: t.colors.neutralForeground2Hover,
-    submenuIndicatorColor: t.colors.neutralForeground2Hover,
-  },
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
-    color: t.colors.neutralForeground2Pressed,
-    iconColor: t.colors.neutralForeground2Pressed,
-    submenuIndicatorColor: t.colors.neutralForeground2Pressed,
+    color: t.colors.neutralForeground1Pressed,
+    iconColor: t.colors.neutralForeground1Pressed,
+    submenuIndicatorColor: t.colors.neutralForeground1Pressed,
   },
   disabled: {
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForegroundDisabled,
     iconColor: t.colors.neutralForegroundDisabled,
     submenuIndicatorColor: t.colors.neutralForegroundDisabled,
+  },
+  focused: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    color: t.colors.neutralForeground1Hover,
+    iconColor: t.colors.neutralForeground1Hover,
+    submenuIndicatorColor: t.colors.neutralForeground1Hover,
   },
 });

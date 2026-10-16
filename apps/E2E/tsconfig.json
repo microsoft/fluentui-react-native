@@ -10,7 +10,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../packages/components/FocusZone/tsconfig.json"
+      "path": "../../packages/shim/focus-zone/tsconfig.json"
     },
     {
       "path": "../../scripts/tsconfig.json"

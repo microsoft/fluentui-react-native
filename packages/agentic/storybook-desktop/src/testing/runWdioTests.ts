@@ -5,9 +5,8 @@ import { pathToFileURL } from 'node:url';
 
 import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
 import type { DesktopArtifact } from '@fluentui-react-native/desktop-driver/authoring';
-import { ArtifactManager } from '@fluentui-react-native/desktop-driver/artifacts';
+import { ArtifactManager, captureDesktopFailureEvidence } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
-import type { DesktopWebdriverSession } from '@fluentui-react-native/desktop-driver/wdio';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
@@ -178,7 +177,7 @@ export async function runWdioStoryTests(
         failure = error;
         result.error = formatDesktopStorybookError(error);
         writeDesktopStorybookFailure(`wdio "${displayName}" during ${phase}`, error, options.errorOutput);
-        const evidence = await captureFailure(desktop, artifacts, artifactId);
+        const evidence = await captureDesktopFailureEvidence(desktop.session, artifacts, artifactId);
         result.artifacts = evidence.artifacts;
         result.evidenceErrors = evidence.errors;
         for (const evidenceError of result.evidenceErrors) {
@@ -253,26 +252,6 @@ function isWorkerResult(value: unknown): value is WorkerResult {
 
 export function matchesWdioTest(name: string, pattern?: string): boolean {
   return pattern === undefined || path.matchesGlob(name, pattern);
-}
-
-async function captureFailure(
-  desktop: DesktopWebdriverSession,
-  artifacts: ArtifactManager,
-  storyId: string,
-): Promise<{ artifacts: DesktopArtifact[]; errors: string[] }> {
-  const errors: string[] = [];
-  const captured: DesktopArtifact[] = [];
-  for (const capture of [
-    async () => artifacts.writeSource(storyId, 'failure-source', await desktop.session.getPageSource()),
-    async () => artifacts.writeTree(storyId, 'failure-tree', await desktop.session.getTree()),
-  ]) {
-    try {
-      captured.push(await capture());
-    } catch (error) {
-      errors.push(errorMessage(error));
-    }
-  }
-  return { artifacts: captured, errors };
 }
 
 function errorMessage(error: unknown): string {

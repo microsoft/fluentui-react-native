@@ -10,6 +10,7 @@ import {
   sizeNone,
 } from '@fluentui-react-native/design/tokens/global';
 import { isHighContrast } from '@fluentui-react-native/design/theming';
+import { getBadgeColor } from './PresenceBadge.helpers';
 
 import type { PresenceBadgeTokens } from './PresenceBadge.types';
 
@@ -21,8 +22,8 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     right: -1,
     paddingHorizontal: sizeNone,
     backgroundColor: t.colors.neutralBackground1,
-    ...getBadgeColor(colorLightGreenPrimary, t),
     position: 'relative',
+    ...getBadgeColor(colorLightGreenPrimary, t),
     tiny: {
       width: 6,
       height: 6,
@@ -40,16 +41,16 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       height: 16,
     },
     large: {
-      borderWidth: 2,
       width: 20,
       height: 20,
+      borderWidth: 2,
       bottom: -size20,
       right: -size20,
     },
     extraLarge: {
-      borderWidth: 2,
       width: 28,
       height: 28,
+      borderWidth: 2,
       bottom: -size20,
       right: -size20,
     },
@@ -58,18 +59,9 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     busy: getBadgeColor(colorRedPrimary, t),
     blocked: getBadgeColor(colorRedPrimary, t),
     unknown: getBadgeColor(colorRedPrimary, t),
+    doNotDisturb: getBadgeColor(colorRedPrimary, t),
     offline: {
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : colorGrey38,
     },
     outOfOffice: getBadgeColor(colorBerryPrimary, t),
   }) as PresenceBadgeTokens;
-
-function getBadgeColor(nonHcColor: string, t: Theme, oofColor?: string): PresenceBadgeTokens {
-  oofColor ??= nonHcColor;
-  return {
-    iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : nonHcColor,
-    outOfOffice: {
-      iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : oofColor,
-    },
-  };
-}

@@ -176,6 +176,9 @@ void TestInputLedger() {
   Check(recordedInputs.size() == 3, "ledger injected three down events");
   Check(recordedInputs[0].ki.wVk == VK_SHIFT, "special keys map to virtual keys");
   Check((recordedInputs[1].ki.dwFlags & KEYEVENTF_UNICODE) != 0, "printable keys inject unicode");
+  constexpr DWORD kPositionedPress = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN;
+  Check(recordedInputs[2].type == INPUT_MOUSE && (recordedInputs[2].mi.dwFlags & kPositionedPress) == kPositionedPress,
+        "pointer presses carry their coordinate");
 
   recordedInputs.clear();
   input.ReleaseAll();
@@ -192,6 +195,20 @@ void TestInputLedger() {
   input.KeyDown(L"b", token);
   input.KeyUp(L"b", token);
   Check(!input.HasDepressedInput(), "explicit key release clears the ledger");
+
+  input.PointerDown(0, token);
+  recordedInputs.clear();
+  input.PointerUp(0, token);
+  constexpr DWORD kPositionedRelease = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP;
+  Check(recordedInputs.size() == 1 && (recordedInputs[0].mi.dwFlags & kPositionedRelease) == kPositionedRelease,
+        "pointer releases carry their coordinate");
+  Check(!input.HasDepressedInput(), "explicit pointer release clears the ledger");
+
+  const std::vector<INPUT> click = MakeClickInputs(POINT{10, 20}, 0);
+  Check(click.size() == 2 && (click[0].mi.dwFlags & kPositionedPress) == kPositionedPress &&
+            (click[1].mi.dwFlags & kPositionedRelease) == kPositionedRelease && click[0].mi.dx == click[1].mi.dx &&
+            click[0].mi.dy == click[1].mi.dy,
+        "clicks press and release at one coordinate in one batch");
 
   recordedInputs.clear();
   input.PressChord({VK_CONTROL, 'A'}, token);

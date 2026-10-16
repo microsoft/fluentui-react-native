@@ -1,5 +1,16 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.2
+
+### Patch Changes
+
+- c547395: Move Callout and FocusZone implementations into native-core and retain the existing packages as JS-only compatibility shims under packages/shim. Native applications must directly depend on native-core and regenerate native autolinking/Pods; macOS now uses the shared FRNNativeCore pod and Windows uses one Fabric library for both components. Public APIs and native registration names are unchanged.
+- c547395: Isolate the existing Callout and FocusZone JavaScript wrappers under native-core/legacy instead of the package root. Compatibility shims retain their exports through this submodule; native implementations and codegen specifications are unchanged.
+- Updated dependencies [c547395]
+- Updated dependencies [c547395]
+- Updated dependencies [c547395]
+  - @fluentui-react-native/native-core@0.1.0
+
 ## 0.3.1
 
 ### Patch Changes

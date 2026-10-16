@@ -60,7 +60,10 @@ An external supervisor can share an existing session with an isolated Node
 worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
 This registers the same custom commands without creating a second session.
 The supervisor retains ownership and must call `delete()` after the worker
-exits, including on assertion failures, timeouts, or crashes.
+exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
+`attach()` does not apply the defaults `remote()` uses, so the attached browser
+sets `waitforInterval` (100 ms) and `waitforTimeout` (5 s) explicitly; without
+an interval, `waitUntil` and `waitFor*` stop after their first unsatisfied poll.
 
 Storybook's preferred top-level `wdio` functions and named function collections
 use this pattern with Node's built-in test runner. Each function receives the
@@ -179,10 +182,22 @@ artifactsRoot/
   tests/
     <story>-<test>/
       <named screenshots and source>
+      failure-window-events.json
       failure.png
       failure-source.xml
       failure-tree.json
+      failure-window-<n>.png
+      failure-window-<n>-source.xml
 ```
+
+`captureDesktopFailureEvidence` from `./artifacts` produces the `failure-*`
+files for both story plans and Storybook `wdio` callbacks. It reads the window
+event log first, when the `windowEvents` feature is available, because tree
+traversal is slow enough for transient popups and sheets to change state. It
+then captures the current window's screenshot (when `screenshot` is available),
+source, and tree, followed by the screenshot and source of up to four other open
+windows, and restores the current window. Windows that close during capture are
+recorded as evidence errors.
 
 Names are sanitized and confined. Failure evidence is best effort and never
 replaces the original test error. Trees and screenshots may contain sensitive

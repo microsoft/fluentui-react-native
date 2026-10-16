@@ -34,7 +34,16 @@ exports[`Button default 1`] = `
     }
   }
 >
-  <View>
+  <View
+    style={
+      {
+        "borderColor": "transparent",
+        "borderWidth": 1,
+        "display": "flex",
+        "flexGrow": 1,
+      }
+    }
+  >
     <View
       style={
         {

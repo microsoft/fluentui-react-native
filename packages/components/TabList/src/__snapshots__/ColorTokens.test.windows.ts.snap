@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabList color tokens pins Tab colors 1`] = `
+{
+  "borderColor": "#00000000",
+  "color": "#666666",
+  "disabled": {
+    "color": "#B1B1B1",
+    "iconColor": "#B1B1B1",
+    "selected": {
+      "color": "#B1B1B1",
+      "iconColor": "#B1B1B1",
+      "indicatorColor": "#B1B1B1",
+    },
+  },
+  "focused": {
+    "borderColor": "#262626",
+  },
+  "hovered": {
+    "color": "#505050",
+    "disabled": {
+      "indicatorColor": "#00000000",
+    },
+    "iconColor": "#505050",
+    "indicatorColor": "#969696",
+    "selected": {
+      "color": "#262626",
+      "iconColor": "#EA6115",
+      "indicatorColor": "#EA6115",
+      "subtle": {
+        "indicatorColor": "#EA6115",
+      },
+    },
+    "subtle": {
+      "backgroundColor": "#f5f5f5",
+      "indicatorColor": "#969696",
+    },
+    "transparent": {
+      "backgroundColor": "#00000000",
+    },
+  },
+  "iconColor": "#666666",
+  "indicatorColor": "#00000000",
+  "pressed": {
+    "color": "#666666",
+    "iconColor": "#666666",
+    "indicatorColor": "#00000000",
+    "subtle": {
+      "backgroundColor": "#e0e0e0",
+    },
+    "transparent": {
+      "backgroundColor": "#00000000",
+    },
+  },
+  "selected": {
+    "color": "#262626",
+    "iconColor": "#D83B01",
+    "indicatorColor": "#D83B01",
+    "pressed": {
+      "color": "#262626",
+      "iconColor": "#A22C01",
+      "indicatorColor": "#A22C01",
+    },
+  },
+  "subtle": {
+    "backgroundColor": "#00000000",
+  },
+  "transparent": {
+    "backgroundColor": "#00000000",
+  },
+}
+`;

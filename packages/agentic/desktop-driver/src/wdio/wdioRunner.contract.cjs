@@ -16,6 +16,15 @@ async function main() {
       sessionId: desktop.browser.sessionId,
       capabilities: desktop.browser.capabilities,
     });
+    let attachedWaitPolls = 0;
+    await worker.browser.waitUntil(async () => ++attachedWaitPolls >= 3, {
+      timeout: 2000,
+      timeoutMsg: 'Attached waitUntil stopped polling.',
+    });
+    const attachedWaitOptions = {
+      waitforInterval: worker.browser.options.waitforInterval,
+      waitforTimeout: worker.browser.options.waitforTimeout,
+    };
     const manifest = await worker.browser.desktopListStories();
     await desktop.browser.desktopExpect({
       state: 'enabled',
@@ -23,7 +32,7 @@ async function main() {
       value: true,
     });
     const result = await desktop.browser.desktopRunStoryTests({ artifactsRoot });
-    process.stdout.write(JSON.stringify({ manifestEntries: manifest.entries.length, result }));
+    process.stdout.write(JSON.stringify({ attachedWaitOptions, attachedWaitPolls, manifestEntries: manifest.entries.length, result }));
   } finally {
     await desktop.delete();
   }

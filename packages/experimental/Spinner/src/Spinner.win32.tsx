@@ -18,7 +18,7 @@ import type { SvgProps } from 'react-native-svg';
 import { stylingSettings } from './Spinner.styling.win32';
 import { spinnerName } from './Spinner.types';
 import type { SpinnerProps, SpinnerType, SpinnerSvgProps } from './Spinner.types.win32';
-import { diameterSizeMap, lineThicknessSizeMap, getDefaultSize } from './SpinnerTokens.win32';
+import { diameterSizeMap, lineThicknessSizeMap, getDefaultSize } from './SpinnerTokens';
 import { useSpinner } from './useSpinner';
 import RCTNativeAnimatedContainer from './Win32NativeAnimatedContainerNativeComponent';
 

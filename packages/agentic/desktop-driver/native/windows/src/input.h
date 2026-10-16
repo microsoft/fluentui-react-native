@@ -98,6 +98,8 @@ class InputController {
 
 bool TryMapWebDriverKey(std::wstring_view value, WORD& virtualKey, bool& extended);
 INPUT MakeAbsoluteMouseInput(POINT screenPoint, DWORD flags, DWORD mouseData);
+// A positioned press and release injected as one batch for an atomic click.
+std::vector<INPUT> MakeClickInputs(POINT screenPoint, int button);
 POINT NormalizeToVirtualDesktop(POINT screenPoint, RECT virtualDesktop);
 
 }  // namespace furn

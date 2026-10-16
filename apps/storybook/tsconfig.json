@@ -16,16 +16,13 @@
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {
-      "path": "../../packages/agentic/storybook-desktop/tsconfig.json"
-    },
-    {
-      "path": "../../packages/native/Callout/tsconfig.json"
-    },
-    {
       "path": "../../packages/agentic/components/tsconfig.json"
     },
     {
-      "path": "../../packages/components/FocusZone/tsconfig.json"
+      "path": "../../packages/agentic/desktop-driver/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/native-core/tsconfig.json"
     },
     {
       "path": "../../scripts/tsconfig.json"
@@ -34,7 +31,7 @@
       "path": "../../packages/agentic/storybook-desktop-runtime/tsconfig.json"
     },
     {
-      "path": "../../packages/agentic/desktop-driver/tsconfig.json"
+      "path": "../../packages/agentic/storybook-desktop/tsconfig.json"
     }
   ]
 }

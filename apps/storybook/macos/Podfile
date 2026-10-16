@@ -32,7 +32,7 @@ end
 # react-native-test-app runs codegen before autolinking, so seed its clean-install input first.
 write_storybook_autolinking_config!(File.expand_path('..', __dir__))
 
-use_test_app!(:fabric_enabled => true, :bridgeless_enabled => false) do |target|
+use_test_app!(:fabric_enabled => ENV.fetch('RCT_NEW_ARCH_ENABLED', '1') != '0', :bridgeless_enabled => false) do |target|
   target.app do
     platform :osx, '14'
   end

@@ -12,7 +12,7 @@ import type { SvgProps } from 'react-native-svg';
 import { stylingSettings } from './Spinner.styling';
 import type { SpinnerProps, SpinnerType } from './Spinner.types';
 import { spinnerName } from './Spinner.types';
-import { diameterSizeMap, lineThicknessSizeMap } from './SpinnerTokens.win32';
+import { diameterSizeMap, lineThicknessSizeMap } from './SpinnerSizeMaps';
 import { useSpinner } from './useSpinner';
 
 const getSpinnerPath = (diameter: number, width: number, color: ColorValue) => {

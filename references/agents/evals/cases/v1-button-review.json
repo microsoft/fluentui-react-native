@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "v1-button-review",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "Review the v1 Button in packages/components/Button/src/Button.tsx for correct ref handling and token state layering. This is a review; report findings.",
+  "expected": {
+    "skills": ["review-component"],
+    "classification": {
+      "implementation_model": "v1-compose",
+      "public_compatibility": ["v1-export", "componentRef"],
+      "native_platforms": []
+    },
+    "required_reads": ["references/agents/components/classification.md", "references/agents/components/v1.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "review-is-read-only",
+      "description": "Produces findings without editing files or updating snapshots.",
+      "rule_ids": ["R-REVIEW-001"],
+      "source_refs": []
+    },
+    {
+      "id": "checks-componentref",
+      "description": "Checks that componentRef is converted to the native root ref and no forwardRef or public ref was introduced.",
+      "rule_ids": ["R-V1-003"],
+      "source_refs": ["packages/components/Button/src/Button.tsx", "packages/components/Button/src/useButton.ts"]
+    },
+    {
+      "id": "cites-evidence",
+      "description": "Each finding cites path and line plus a rule or requirement ID, labeled verified or inferred.",
+      "rule_ids": ["R-REVIEW-002"],
+      "source_refs": []
+    }
+  ]
+}

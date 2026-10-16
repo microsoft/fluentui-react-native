@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "case_id": "transitive-advisory-remediation",
+  "split": "holdout",
+  "task_mode": "security",
+  "prompt": "Dependabot reports a high-severity advisory in a transitive npm dependency. Plan the remediation.",
+  "expected": {
+    "skills": ["fix-security-issues"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": [".github/skills/fix-security-issues/SKILL.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "keeps-age-gate",
+      "description": "Keeps the package age gate and selects only eligible fixed versions.",
+      "rule_ids": ["R-SEC-001"],
+      "source_refs": [".yarnrc.yml"]
+    },
+    {
+      "id": "no-suppression",
+      "description": "Does not substitute an audit exclusion or warning suppression for a fix.",
+      "rule_ids": ["R-SEC-002"],
+      "source_refs": []
+    }
+  ]
+}

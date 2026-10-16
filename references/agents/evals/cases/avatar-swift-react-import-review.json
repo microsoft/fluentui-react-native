@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "avatar-swift-react-import-review",
+  "split": "holdout",
+  "task_mode": "review",
+  "prompt": "Review a proposed change that replaces the guarded React import at the top of packages/experimental/Avatar/ios/AvatarViewManager.swift with a plain `import React`.",
+  "expected": {
+    "skills": ["review-component", "implement-native-component"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": ["native-registration"],
+      "native_platforms": ["ios"]
+    },
+    "required_reads": ["references/agents/native/apple-office.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "flags-unguarded-import",
+      "description": "Flags the unguarded Swift React import and keeps the #if canImport(React) guard required for iOS bridging-header builds.",
+      "rule_ids": ["R-APPLE-002"],
+      "source_refs": ["packages/experimental/Avatar/ios/AvatarViewManager.swift"]
+    },
+    {
+      "id": "ios-host-validation",
+      "description": "Plans validation through an iOS host in both module and bridging-header modes rather than desktop Storybook, reporting unrun Office checks.",
+      "rule_ids": ["R-APPLE-007"],
+      "source_refs": []
+    },
+    {
+      "id": "review-is-read-only",
+      "description": "Reports findings without editing files.",
+      "rule_ids": ["R-REVIEW-001"],
+      "source_refs": []
+    }
+  ]
+}

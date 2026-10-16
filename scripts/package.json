@@ -29,7 +29,8 @@
     "build": "tsc -b",
     "bundlesize": "bundlesize --debug",
     "format": "node ./src/cli.ts format",
-    "lint": "node ./src/cli.ts lint"
+    "lint": "node ./src/cli.ts lint",
+    "test": "node --test src/tasks/agentInstructions.test.ts"
   },
   "dependencies": {
     "@babel/core": "catalog:",

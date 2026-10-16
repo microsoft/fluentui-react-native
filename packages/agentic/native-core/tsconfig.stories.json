@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "allowImportingTsExtensions": true,
+    "noImplicitAny": true,
+    "noEmit": true,
+    "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
+  },
+  "include": ["src/legacy/callout/Callout.stories.tsx", "src/components/**/*.stories.tsx", "src/**/*.wdio.ts"],
+  "exclude": [],
+  "references": [
+    {
+      "path": "./tsconfig.json"
+    },
+    {
+      "path": "../storybook-desktop/tsconfig.json"
+    }
+  ]
+}

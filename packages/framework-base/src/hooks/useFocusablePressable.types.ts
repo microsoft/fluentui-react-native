@@ -1,6 +1,7 @@
 import type { PressableProps } from 'react-native';
 
 import type { FocusTargetEvent } from './focusTarget';
+import type { PointerFocusMode } from './pointerFocus';
 
 export interface FocusKeyboardEvent extends FocusTargetEvent {
   readonly nativeEvent: {
@@ -15,6 +16,11 @@ export interface FocusKeyboardEvent extends FocusTargetEvent {
   readonly defaultPrevented?: boolean;
   preventDefault?(): void;
   stopPropagation?(): void;
+}
+
+export interface FocusablePressableOptions {
+  /** How a pointer press moves keyboard focus to the target. Defaults to the platform convention. */
+  pointerFocus?: PointerFocusMode;
 }
 
 export type FocusablePressableProps = Omit<PressableProps, 'onKeyDown' | 'onKeyUp'> & {

@@ -8,15 +8,16 @@ the canonical implementation.
 - Primitives are public only from `@fluentui-react-native/components/primitives`; do not re-export them from the package root.
 - Give primitive components stable public names. Suffix public composition helpers whose contracts may evolve with
   `_unstable`, matching higher-order component pipeline helpers.
-- Maintain a colocated `CONTRACT.md` for every public primitive. Derive its test obligations from that contract, its public
-  types, and each renderer branch rather than creating an upstream-backed `SPEC.md`.
+- **R-PRIMITIVE-001:** Maintain a colocated `CONTRACT.md` for every public primitive and keep primitives unstyled. Derive
+  test obligations from that contract, its public types, and each renderer branch rather than creating an
+  upstream-backed `SPEC.md`.
 - Primitives are unstyled building blocks. Do not read themes, apply design tokens, or choose product appearance
   defaults.
 - Define the smallest acceptance contract needed for `SlotProp` consumption.
 - Prefer a hook-free `directComponent` when the primitive only selects an inner component or transforms props.
-- For a primitive with one stable native root type, include `PropsWithRefOf<typeof Root>` in its public props and pass
-  the React 19.1.4 `ref` prop to that root without `forwardRef`. A primitive whose renderer does not have one stable
-  imperative instance type must omit `ref` and document that exception in its `CONTRACT.md`.
+- **R-PRIMITIVE-002:** For a primitive with one stable native root type, include `PropsWithRefOf<typeof Root>` in its
+  public props and pass the React 19.1.4 `ref` prop to that root without `forwardRef`. A primitive whose renderer does
+  not have one stable imperative instance type must omit `ref` and document that exception in its `CONTRACT.md`.
 - Forward accessibility and test props without replacing consumer values.
 - Keep alternative source or renderer props mutually exclusive.
 - Add compile-time `SlotProp` coverage and runtime coverage for every renderer branch.
@@ -28,6 +29,6 @@ the canonical implementation.
 
 ## Focused references
 
-- [Types and slots](../../../../../.github/skills/agentic-component-authoring/references/types-and-slots.md)
-- [Rendering and assembly](../../../../../.github/skills/agentic-component-authoring/references/rendering.md)
-- [Tests and stories](../../../../../.github/skills/agentic-component-authoring/references/tests-and-stories.md)
+- [Types and slots](../../../../../references/agents/components/agentic/types-and-slots.md)
+- [Rendering and assembly](../../../../../references/agents/components/agentic/rendering.md)
+- [Tests and stories](../../../../../references/agents/components/agentic/tests-and-stories.md)
