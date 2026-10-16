@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
+## 0.8.12
+
+### Patch Changes
+
+- f550cfb: Import React Native headers in iOS Objective-C sources with the canonical `<React/...>` form instead of by bare header name.
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/framework-base@0.9.0
+
 ## 0.8.11
 
 ### Patch Changes

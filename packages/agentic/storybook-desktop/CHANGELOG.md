@@ -1,5 +1,27 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.0
+
+### Minor Changes
+
+- fcc3b7f: Add a macOS-only `--paper` option to prepare, build, launch, and smoke test Storybook with Paper while preserving Fabric as the default renderer.
+  
+  Use centered alignment in macOS Paper CompoundItemLayout stories to avoid the native Yoga baseline crash without changing the primitive or Fabric demonstrations.
+  
+  Measure LayoutStableText's hidden reserve Text directly in native alignment stories, avoiding Paper Text-versus-View pixel-rounding mismatches without relaxing the geometry assertions.
+  
+  Deduplicate compatible Storybook React, theming, and shared UI dependencies in the lockfile after desktop UI updates, keeping strict Metro duplicate checks enabled.
+
+### Patch Changes
+
+- e2092f9: Capture the Desktop Driver's shared failure evidence for Storybook `wdio`
+  callbacks, including the window-event timeline, a failure screenshot, and the
+  screenshot and source of other open windows.
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/desktop-driver@0.3.1
+
 ## 0.3.1
 
 ### Patch Changes

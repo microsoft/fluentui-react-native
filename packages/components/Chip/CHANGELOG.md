@@ -1,5 +1,18 @@
 # Change Log - @fluentui-react-native/chip
 
+## 0.5.16
+
+### Patch Changes
+
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/icon@0.22.16
+  - @fluentui-react-native/text@0.25.16
+  - @fluentui-react-native/framework@0.17.9
+  - @fluentui-react-native/interactive-hooks@0.28.12
+
 ## 0.5.15
 
 ### Patch Changes

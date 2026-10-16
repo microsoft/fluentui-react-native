@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/win32-theme
 
+## 0.39.15
+
+### Patch Changes
+
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/default-theme@0.27.15
+
 ## 0.39.14
 
 ### Patch Changes

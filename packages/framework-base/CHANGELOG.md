@@ -1,5 +1,23 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.9.0
+
+### Minor Changes
+
+- e2092f9: Replace `useFocusablePressable`'s `focusOnPress` boolean with a `pointerFocus`
+  mode. `platform` (the default) keeps the existing behavior: Windows and Win32
+  focus a pressed target, and macOS follows AppKit by leaving keyboard focus in
+  place. `always` and `never` select an explicit behavior on every platform.
+  Export `PointerFocusMode`, `FocusablePressableOptions`, and
+  `requestsFocusOnPointerPress`.
+
+### Patch Changes
+
+- e2092f9: Clear React Native macOS's focused-input record when a focus target blurs or
+  detaches. A View focused through `requestFocus()` previously stayed recorded
+  after unmounting, so a later ScrollView touch dispatched `blur` to the removed
+  view and raised a Paper exception.
+
 ## 0.8.1
 
 ### Patch Changes
