@@ -48,6 +48,29 @@ export class WdioStoryTestRunError extends Error {
   }
 }
 
+/**
+ * Every selected wdio test was skipped, so the run provides no coverage. This is distinct from a test failure: nothing
+ * asserted against the product, but the run must not count as passing either.
+ */
+export class WdioStoryCoverageUnavailableError extends Error {
+  readonly results: readonly WdioStoryTestResult[];
+
+  constructor(results: readonly WdioStoryTestResult[]) {
+    const reasons = [...new Set(results.map(({ skipReason }) => skipReason ?? 'No reason given.'))];
+    super(`All ${results.length} selected executable wdio tests were skipped: ${reasons.join('; ')}`);
+    this.name = 'WdioStoryCoverageUnavailableError';
+    this.results = [...results];
+  }
+}
+
+export type WdioStoryTestCounts = { selected: number; passed: number; skipped: number; failed: number };
+
+export function countWdioStoryTests(results: readonly { status: string }[]): WdioStoryTestCounts {
+  const passed = results.filter(({ status }) => status === 'passed').length;
+  const skipped = results.filter(({ status }) => status === 'skipped').length;
+  return { selected: results.length, passed, skipped, failed: results.length - passed - skipped };
+}
+
 export function selectWdioStories(
   manifest: DesktopStoryManifest,
   options: DesktopStorybookWdioOptions,
@@ -217,11 +240,14 @@ export async function runWdioStoryTests(
       ),
     );
   }
+  const counts = countWdioStoryTests(results);
+  const incomplete = failures.length === 0 && counts.passed === 0;
   try {
     artifacts.writeMetadata('run', {
       endpoint: options.platform,
       platformManifestDigest: options.manifest.platformManifestDigest,
-      status: failures.length ? 'failed' : 'passed',
+      status: failures.length ? 'failed' : incomplete ? 'incomplete' : 'passed',
+      counts,
       ...(infrastructureFailure === undefined ? {} : { error: errorMessage(infrastructureFailure) }),
       tests: results,
     });
@@ -236,6 +262,7 @@ export async function runWdioStoryTests(
     writeDesktopStorybookFailure('cleaning generated wdio files', error, options.errorOutput);
   }
   if (failures.length) throw new WdioStoryTestRunError(results, failures);
+  if (incomplete) throw new WdioStoryCoverageUnavailableError(results);
   return results;
 }
 

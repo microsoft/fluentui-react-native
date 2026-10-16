@@ -7,7 +7,7 @@ import type { DesktopStoryRunResult } from '@fluentui-react-native/desktop-drive
 
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { runWdioStoryTests } from '../testing/runWdioTests.js';
-import { WdioStoryTestRunError } from '../testing/runWdioTests.js';
+import { WdioStoryCoverageUnavailableError, WdioStoryTestRunError } from '../testing/runWdioTests.js';
 import {
   formatDesktopStorybookSmokeTestSummary,
   runDesktopStorybookSmokeTests,
@@ -199,13 +199,50 @@ describe('runDesktopStorybookSmokeTests', () => {
     options.config = makeDesktopStorybookConfig({ projectRoot: root, wdio: { story: inputId } });
     const connect = jest.fn();
     const runWdio: jest.MockedFunction<typeof runWdioStoryTests> = jest.fn(async ({ story }) => [
-      { storyId: story!, status: 'skipped' as const, durationMs: 0, skipReason: 'Capability unavailable' },
+      { storyId: story!, status: 'passed' as const, durationMs: 0 },
     ]);
     const result = await runDesktopStorybookSmokeTests(options, connect, runWdio);
     expect(connect).not.toHaveBeenCalled();
     expect(runWdio).toHaveBeenCalledTimes(1);
-    expect(result.wdio).toMatchObject([{ storyId: inputId, status: 'skipped' }]);
-    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 1 desktop story tests (0 passed, 1 skipped).');
+    expect(result.wdio).toMatchObject([{ storyId: inputId, status: 'passed' }]);
+    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 1 desktop story tests (1 passed, 0 skipped).');
+  });
+
+  test('reports an all-skipped run as incomplete instead of passed', async () => {
+    options.manifest = { ...manifest, entries: [{ ...story(inputId, true), tests: undefined }] };
+    const runWdio: jest.MockedFunction<typeof runWdioStoryTests> = jest.fn(async ({ story }) => {
+      throw new WdioStoryCoverageUnavailableError([
+        { storyId: story!, status: 'skipped', durationMs: 0, skipReason: 'This test requires physical pointer input.' },
+      ]);
+    });
+    await expect(runDesktopStorybookSmokeTests(options, jest.fn(), runWdio)).rejects.toThrow(
+      'All 1 selected desktop story tests were skipped',
+    );
+    expect(errorOutput.write).not.toHaveBeenCalled();
+    expect(JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'))).toMatchObject({
+      status: 'incomplete',
+      counts: { selected: 1, passed: 0, skipped: 1, failed: 0 },
+      wdio: [{ storyId: inputId, status: 'skipped', skipReason: 'This test requires physical pointer input.' }],
+    });
+  });
+
+  test('passes a mixed run when a story has only skipped callbacks', async () => {
+    options.manifest = { ...manifest, entries: [story(buttonId), { ...story(inputId, true), tests: undefined }] };
+    const connect: DesktopStorybookSmokeConnector = async () => ({
+      delete: async () => undefined,
+      listStories: async () => options.manifest,
+      runStoryTests: async () => planResult(),
+    });
+    const runWdio: jest.MockedFunction<typeof runWdioStoryTests> = jest.fn(async ({ story }) => {
+      throw new WdioStoryCoverageUnavailableError([{ storyId: story!, status: 'skipped', durationMs: 0, skipReason: 'Unavailable' }]);
+    });
+    const result = await runDesktopStorybookSmokeTests(options, connect, runWdio);
+    expect(result.status).toBe('passed');
+    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 2 desktop story tests (1 passed, 1 skipped).');
+    expect(JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'))).toMatchObject({
+      status: 'passed',
+      counts: { selected: 2, passed: 1, skipped: 1, failed: 0 },
+    });
   });
 
   test('fails after persisting failed plan results and closing the session', async () => {
