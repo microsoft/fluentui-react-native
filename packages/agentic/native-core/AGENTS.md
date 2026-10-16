@@ -38,5 +38,8 @@
   root admission.
 - Keep generated code generated and verify packed native ownership. Preserve
   the module-named macOS Swift interoperability header.
-- Update [the implementation handoff](plans/modernization.md) with exact
-  executed validation and remaining work before switching machines.
+- Record exact executed validation and remaining work in the owning
+  [Components](https://github.com/microsoft/fluentui-react-native/issues/4274)
+  or [Infrastructure](https://github.com/microsoft/fluentui-react-native/issues/4275)
+  workstream issue before switching machines. Keep the README and component
+  contracts aligned with qualified behavior.

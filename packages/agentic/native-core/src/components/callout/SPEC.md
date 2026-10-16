@@ -1,8 +1,10 @@
 # Modern Callout
 
 Owner-authorized initial contract, 2026-10-02. `/macos` and `/windows` preview
-only; not all-host root admission. See `plans/modernization.md` for executed
-evidence and deferred Menu/Popover, Paper, Win32, and peer-floor gates.
+only; not all-host root admission. See the
+[package qualification gates](../../../README.md#modern-component-previews)
+for remaining geometry, lifecycle/accessibility, Menu/Popover, Win32, and
+peer-floor work and the owning workstream issues.
 
 Callout is unstyled. Its React 19 ref is a presentation handle, deliberately
 not the hidden native marker. `content` forwards appearance, accessibility,

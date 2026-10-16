@@ -1,8 +1,11 @@
 # Modern FocusZone
 
 Owner-authorized initial contract, 2026-10-02. Native-core `/macos` and
-`/windows` preview only; runtime qualification and old peer floors remain
-tracked in `plans/modernization.md`. This is not root/Win32 admission.
+`/windows` preview only; remaining runtime qualification is tracked in
+[#4374](https://github.com/microsoft/fluentui-react-native/issues/4374), and
+old peer floors and all-host admission in
+[#4376](https://github.com/microsoft/fluentui-react-native/issues/4376).
+This is not root/Win32 admission.
 
 The component is unstyled and preserves the actual native-zone instance in
 the React 19 `ref` prop. `commandsRef` publishes a separate mounted command

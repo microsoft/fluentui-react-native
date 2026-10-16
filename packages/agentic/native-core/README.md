@@ -302,9 +302,30 @@ modern Callout readiness, explicit operations, outside-input and Escape
 dismissal, rearm, owner focus return, flat Menu composition, and 100% scale
 anchor geometry pass on Windows. Win32 legacy FocusZone and legacy Callout
 outside-click/recreate and Escape cases pass. Remaining Windows protocol
-races, DPI/RTL/scroll geometry, and macOS execution of the new authored
-Callout cases are tracked in the plan.
+races are tracked in [#4374](https://github.com/microsoft/fluentui-react-native/issues/4374);
+the DPI/RTL/scroll geometry, repeated-cycle resource, and assistive-technology
+matrix is tracked in [#4375](https://github.com/microsoft/fluentui-react-native/issues/4375).
+macOS Fabric and Paper pass the updated authored Callout and Menu composition
+cases; this does not qualify the remaining geometry and accessibility matrix.
+
 Root/Win32 admission, older-peer builds, popup-family transactions,
 restoration/Tab policy, text fragments, modal containment, and a real module
-remain explicit gates. See the repository's `plans/modernization.md` for the
-cross-machine progress and exact validation handoff.
+remain explicit gates. Remaining work is tracked under the
+[Components](https://github.com/microsoft/fluentui-react-native/issues/4274)
+and [Infrastructure](https://github.com/microsoft/fluentui-react-native/issues/4275)
+workstreams rather than a cross-machine plan:
+
+| Gate                                                                                                        | Issue                                                                                                                                                                                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Native FocusZone request races, inactive windows, field editors, and parity-preserving navigation follow-up | [#4374](https://github.com/microsoft/fluentui-react-native/issues/4374)                                                                                                                                                                                                                            |
+| Callout geometry, lifecycle/resource, and assistive-technology qualification                                | [#4375](https://github.com/microsoft/fluentui-react-native/issues/4375)                                                                                                                                                                                                                            |
+| Win32 capabilities, old peer floors, packed consumers, publishing, and root admission                       | [#4376](https://github.com/microsoft/fluentui-react-native/issues/4376)                                                                                                                                                                                                                            |
+| Popup families, owner-relative Tab/restoration, and disabled MenuItem discoverability                       | [#4377](https://github.com/microsoft/fluentui-react-native/issues/4377)                                                                                                                                                                                                                            |
+| Renderer-owned text fragments and layout generations                                                        | [#4378](https://github.com/microsoft/fluentui-react-native/issues/4378)                                                                                                                                                                                                                            |
+| Modal focus scope and background accessibility isolation                                                    | [#4379](https://github.com/microsoft/fluentui-react-native/issues/4379)                                                                                                                                                                                                                            |
+| Representative TurboModule, deferred until a real consumer exists                                           | [#4380](https://github.com/microsoft/fluentui-react-native/issues/4380)                                                                                                                                                                                                                            |
+| Actual Menu, Popover, Dialog, and Drawer components                                                         | [#4232](https://github.com/microsoft/fluentui-react-native/issues/4232), [#4236](https://github.com/microsoft/fluentui-react-native/issues/4236), [#4222](https://github.com/microsoft/fluentui-react-native/issues/4222), [#4223](https://github.com/microsoft/fluentui-react-native/issues/4223) |
+
+Each issue retains the applicable baseline, native qualification limits, and
+acceptance criteria. Record exact executed commands and results in the owning
+issue or pull request; compilation and skipped cases are not native qualification.
