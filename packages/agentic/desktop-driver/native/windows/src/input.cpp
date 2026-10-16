@@ -167,6 +167,15 @@ INPUT MakeAbsoluteMouseInput(POINT screenPoint, DWORD flags, DWORD mouseData) {
   return input;
 }
 
+std::vector<INPUT> MakeClickInputs(POINT screenPoint, int button) {
+  DWORD downFlag = 0;
+  DWORD upFlag = 0;
+  DWORD mouseData = 0;
+  ButtonFlags(button, downFlag, upFlag, mouseData);
+  return {MakeAbsoluteMouseInput(screenPoint, MOUSEEVENTF_MOVE | downFlag, mouseData),
+          MakeAbsoluteMouseInput(screenPoint, MOUSEEVENTF_MOVE | upFlag, mouseData)};
+}
+
 bool TryMapWebDriverKey(std::wstring_view value, WORD& virtualKey, bool& extended) {
   if (value.size() != 1) {
     return false;
@@ -250,11 +259,19 @@ void InputController::MovePointer(POINT target, unsigned int durationMs, const C
     }
   }
   pointer_ = target;
-  token.Wait(16);
-  POINT observed{};
-  if (GetCursorPos(&observed) == FALSE || std::abs(observed.x - target.x) > 2 || std::abs(observed.y - target.y) > 2) {
-    Fail(kErrorInputFailed,
-         "Windows did not move the pointer to the requested native element coordinate.");
+  // Another absolute pointing device, such as a remote-desktop or virtual-machine viewer, can move the cursor back
+  // shortly after injection. Confirm that the cursor reached the target rather than that it remains there later.
+  const Deadline deadline(100);
+  for (;;) {
+    POINT observed{};
+    if (GetCursorPos(&observed) != FALSE && std::abs(observed.x - target.x) <= 2 && std::abs(observed.y - target.y) <= 2) {
+      return;
+    }
+    if (deadline.Expired()) {
+      Fail(kErrorInputFailed, "Windows did not move the pointer to the requested native element coordinate.");
+    }
+    token.ThrowIfCancelled();
+    Sleep(0);
   }
 }
 
@@ -268,7 +285,9 @@ void InputController::PointerDown(int button, const CancellationToken& token) {
   if (std::find(pressedButtons_.begin(), pressedButtons_.end(), button) != pressedButtons_.end()) {
     return;
   }
-  std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, downFlag, mouseData)};
+  // Carry the coordinate so the press lands where the pointer was placed even if
+  // another input source has since moved the cursor.
+  std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_MOVE | downFlag, mouseData)};
   Send(inputs);
   pressedButtons_.push_back(button);
 }
@@ -283,7 +302,7 @@ void InputController::PointerUp(int button, const CancellationToken& token) {
   DWORD upFlag = 0;
   DWORD mouseData = 0;
   ButtonFlags(button, downFlag, upFlag, mouseData);
-  std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, upFlag, mouseData)};
+  std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_MOVE | upFlag, mouseData)};
   Send(inputs);
   pressedButtons_.erase(position);
 }
@@ -305,11 +324,29 @@ void InputController::PointerCancel() {
 }
 
 void InputController::ClickAt(POINT target, const CancellationToken& token) {
-  MovePointer(target, 0, token);
+  // An absolute pointing device, such as a remote-desktop or virtual-machine viewer, can return the cursor to its own
+  // position between separately injected events. Placing the pointer precedes any press, so it can be repeated.
+  for (int attempt = 1;; attempt += 1) {
+    try {
+      MovePointer(target, 0, token);
+      break;
+    } catch (const HelperError& error) {
+      if (attempt == 3 || error.code() != kErrorInputFailed) {
+        throw;
+      }
+      token.Wait(50);
+    }
+  }
   token.Wait(50);
-  PointerDown(0, token);
-  token.Wait(50);
-  PointerUp(0, token);
+  RequirePhysicalInput();
+  token.ThrowIfCancelled();
+  // One batch is never interleaved with other input, and every event carries the target coordinate, so the press and
+  // release reach the element even if the cursor is moved again before or after them.
+  std::vector<INPUT> inputs = MakeClickInputs(target, 0);
+  pressedButtons_.push_back(0);
+  Send(inputs);
+  pressedButtons_.erase(std::find(pressedButtons_.begin(), pressedButtons_.end(), 0));
+  pointer_ = target;
 }
 
 void InputController::Wheel(double deltaX, double deltaY, const CancellationToken& token) {

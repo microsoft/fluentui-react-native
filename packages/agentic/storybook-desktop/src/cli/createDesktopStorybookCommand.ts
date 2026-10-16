@@ -15,6 +15,7 @@ import { loadDesktopStorybookConfig } from './loadConfig.js';
 
 type PlatformFlags = {
   macos?: boolean;
+  paper?: boolean;
   win32?: boolean;
   windows?: boolean;
 };
@@ -24,6 +25,7 @@ type ManifestFlags = PlatformFlags & { out?: string };
 type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode };
 type BuildDriverFlags = PlatformFlags & DesktopStorybookBuildDriverOptions;
 type PrepFlags = PlatformFlags & { driver: DesktopStorybookPrepOptions['driver'] };
+type GetApi = (flags: PlatformFlags) => Promise<DesktopStorybookCli>;
 
 export type CreateDesktopStorybookCommandOptions = DesktopStorybookCliOptions & {
   config?: DesktopStorybookConfig;
@@ -38,7 +40,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
     .option('-v, --verbose', 'replay full captured output for successful commands as well as failures');
   let apiPromise: Promise<DesktopStorybookCli> | undefined;
 
-  const getApi = () =>
+  const getApi = (flags: PlatformFlags) =>
     (apiPromise ??= Promise.resolve(
       options.config ?? loadDesktopStorybookConfig(program.opts<{ config?: string }>().config, options.cwd),
     ).then(
@@ -50,10 +52,12 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           fetch: options.fetch,
           output: options.output,
           errorOutput: options.errorOutput,
+          paper: flags.paper ?? options.paper,
           verbose: program.opts<{ verbose?: boolean }>().verbose ?? options.verbose,
           isPortAvailable: options.isPortAvailable,
           runSmokeTests: options.runSmokeTests,
           resolveNativeDriver: options.resolveNativeDriver,
+          writeMacOSApplicationLease: options.writeMacOSApplicationLease,
         }),
     ));
 
@@ -72,7 +76,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   return program;
 }
 
-function addTestCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addTestCommand(program: Command, getApi: GetApi): void {
   const command = program
     .command('test')
     .description('Run executable wdio story callbacks against the running Storybook app.')
@@ -87,7 +91,7 @@ function addTestCommand(program: Command, getApi: () => Promise<DesktopStorybook
     .addOption(new Option('--click-mode <mode>', 'native click semantics').choices(['auto', 'physical', 'accessibility']));
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags & DesktopStorybookTestOptions) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.test(resolvePlatform(flags, api), {
       clickMode: flags.clickMode,
       list: flags.list,
@@ -102,29 +106,29 @@ function addTestCommand(program: Command, getApi: () => Promise<DesktopStorybook
   });
 }
 
-function addPrepCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addPrepCommand(program: Command, getApi: GetApi): void {
   const command = program
     .command('prep')
     .description('Prepare the native helper, dependencies, and generated projects.')
     .option('--no-driver', 'prepare only the native app project');
   addPlatformOptions(command);
   command.action(async (flags: PrepFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.prep(resolvePlatform(flags, api), { driver: flags.driver });
   });
 }
 
-function addBuildDriverCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addBuildDriverCommand(program: Command, getApi: GetApi): void {
   const command = program.command('build-driver').description('Build the native Desktop Driver helper without preparing the app.');
   command.option('--force', 'publish a new immutable helper selection');
   addPlatformOptions(command);
   command.action(async (flags: BuildDriverFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.buildDriver(resolvePlatform(flags, api), { force: flags.force });
   });
 }
 
-function addDriverCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addDriverCommand(program: Command, getApi: GetApi): void {
   const command = program
     .command('driver')
     .description('Start the Storybook channel, MCP, and embedded Desktop Driver servers.')
@@ -132,25 +136,25 @@ function addDriverCommand(program: Command, getApi: () => Promise<DesktopStorybo
     .option('--port <port>', 'Storybook channel port; defaults to the enlistment-specific port', parsePort);
   addPlatformOptions(command);
   command.action(async (flags: ServerFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.driver(resolvePlatform(flags, api), { host: flags.host, port: flags.port });
   });
 }
 
-function addManifestCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addManifestCommand(program: Command, getApi: GetApi): void {
   const command = program.command('manifest').description('Generate the platform Story Manifest.').option('--out <path>', 'output path');
   addPlatformOptions(command);
   command.action(async (flags: ManifestFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.manifest(resolvePlatform(flags, api), flags.out);
   });
 }
 
-function addInstanceCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addInstanceCommand(program: Command, getApi: GetApi): void {
   const command = program.command('instance').description('Print the platform instance identity as JSON.');
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     api.printInstance(resolvePlatform(flags, api));
   });
 }
@@ -159,22 +163,17 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
   await createDesktopStorybookCommand().parseAsync([...argv]);
 }
 
-function addActionCommand(
-  program: Command,
-  action: 'bundle' | 'run' | 'build',
-  description: string,
-  getApi: () => Promise<DesktopStorybookCli>,
-): void {
+function addActionCommand(program: Command, action: 'bundle' | 'run' | 'build', description: string, getApi: GetApi): void {
   const command = program.command(action).description(description);
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     const platform = resolvePlatform(flags, api);
     await api[action](platform);
   });
 }
 
-function addSmokeCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addSmokeCommand(program: Command, getApi: GetApi): void {
   const command = program
     .command('smoke')
     .description('Launch the app, traverse every story, optionally run authored tests, and shut the app down.')
@@ -185,12 +184,12 @@ function addSmokeCommand(program: Command, getApi: () => Promise<DesktopStoryboo
     );
   addPlatformOptions(command);
   command.action(async (flags: SmokeFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.smoke(resolvePlatform(flags, api), { mode: flags.mode });
   });
 }
 
-function addServerCommand(program: Command, getApi: () => Promise<DesktopStorybookCli>): void {
+function addServerCommand(program: Command, getApi: GetApi): void {
   const command = program
     .command('server')
     .description('Start the Storybook channel and MCP server.')
@@ -198,7 +197,7 @@ function addServerCommand(program: Command, getApi: () => Promise<DesktopStorybo
     .option('--port <port>', 'server port; defaults to STORYBOOK_WS_PORT or 7007', parsePort);
   addPlatformOptions(command);
   command.action(async (flags: ServerFlags) => {
-    const api = await getApi();
+    const api = await getApi(flags);
     await api.server(resolvePlatform(flags, api), {
       host: flags.host,
       port: flags.port,
@@ -208,9 +207,10 @@ function addServerCommand(program: Command, getApi: () => Promise<DesktopStorybo
 
 function addPlatformOptions(command: Command): void {
   command
-    .addOption(new Option('--windows', 'target React Native Windows').conflicts(['macos', 'win32']))
+    .addOption(new Option('--windows', 'target React Native Windows').conflicts(['macos', 'win32', 'paper']))
     .addOption(new Option('--macos', 'target React Native macOS').conflicts(['windows', 'win32']))
-    .addOption(new Option('--win32', 'target React Native Win32').conflicts(['windows', 'macos']));
+    .addOption(new Option('--win32', 'target React Native Win32').conflicts(['windows', 'macos', 'paper']))
+    .addOption(new Option('--paper', 'use the macOS Paper renderer instead of Fabric').conflicts(['windows', 'win32']));
 }
 
 function selectedPlatform(flags: PlatformFlags): Platforms | undefined {
@@ -230,6 +230,9 @@ function resolvePlatform(flags: PlatformFlags, api: DesktopStorybookCli): Platfo
   const platform = selectedPlatform(flags) ?? api.config.platform;
   if (!platform) {
     throw new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.');
+  }
+  if (api.paper && platform !== 'macos') {
+    throw new Error('--paper is only supported on macOS. Select --macos --paper.');
   }
   return platform;
 }

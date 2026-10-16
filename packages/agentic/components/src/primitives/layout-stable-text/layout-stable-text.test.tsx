@@ -56,6 +56,29 @@ describe('LayoutStableText', () => {
     expect(StyleSheet.flatten(component.getByTestId('stable-text').props.style)).toMatchObject({ width: 80 });
   });
 
+  it('preserves native layout measurements for both the hidden reserve and visible text', async () => {
+    const onReserveLayout = jest.fn();
+    const onVisibleLayout = jest.fn();
+    const component = await render(
+      <LayoutStableText
+        reserve={<Text onLayout={onReserveLayout}>Reserve</Text>}
+        visible={
+          <Text onLayout={onVisibleLayout} testID="visible">
+            Visible
+          </Text>
+        }
+      />,
+    );
+    const reserveLayout = { nativeEvent: { layout: { x: 0, y: 0, width: 103, height: 24 } } };
+    const visibleLayout = { nativeEvent: { layout: { x: 0, y: 4, width: 104, height: 16 } } };
+
+    await fireEvent(component.getByText('Reserve', { includeHiddenElements: true }), 'layout', reserveLayout);
+    await fireEvent(component.getByTestId('visible'), 'layout', visibleLayout);
+
+    expect(onReserveLayout).toHaveBeenCalledWith(reserveLayout);
+    expect(onVisibleLayout).toHaveBeenCalledWith(visibleLayout);
+  });
+
   it('preserves visible text semantics and interaction through the overlay', async () => {
     const onPress = jest.fn();
     const component = await render(

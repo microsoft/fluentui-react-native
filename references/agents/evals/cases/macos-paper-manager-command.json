@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "case_id": "macos-paper-manager-command",
+  "split": "development",
+  "task_mode": "plan",
+  "prompt": "Add a new imperative command to the macOS Paper Callout view manager in packages/agentic/native-core. Plan the change.",
+  "expected": {
+    "skills": ["implement-native-component"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": ["native-registration"],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": [
+      "references/agents/native/components-and-modules.md",
+      "references/agents/native/apple-office.md",
+      "packages/agentic/native-core/README.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "swift-manager-command",
+      "description": "Implements the Paper manager method in Swift and declares it with RCT_EXTERN_METHOD rather than importing the generated Swift header into the registration file.",
+      "rule_ids": ["R-APPLE-003"],
+      "source_refs": [
+        "packages/agentic/native-core/macos/components/Callout/paper/CalloutManager.swift",
+        "packages/agentic/native-core/macos/components/Callout/paper/FRNCalloutManager.m"
+      ]
+    },
+    {
+      "id": "paper-and-fabric-evidence",
+      "description": "Plans macOS Paper validation with the --paper Storybook flag, because macOS commands default to Fabric, and reports untested renderers explicitly.",
+      "rule_ids": ["R-NATIVE-003", "R-APPLE-007"],
+      "source_refs": ["apps/storybook/AGENTS.md"]
+    }
+  ]
+}

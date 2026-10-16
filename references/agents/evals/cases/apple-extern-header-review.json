@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "case_id": "apple-extern-header-review",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "Review a proposed change that adds #import \"FRNNativeCore-Swift.h\" to packages/agentic/native-core/macos/components/Callout/paper/FRNCalloutManager.m so a new Paper property bridge can use the Swift CalloutView type.",
+  "expected": {
+    "skills": ["review-component", "implement-native-component"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": ["native-registration"],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": ["references/agents/native/apple-office.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "flags-generated-header",
+      "description": "Flags importing the generated Swift header into an RCT_EXTERN_MODULE registration file.",
+      "rule_ids": ["R-APPLE-003"],
+      "source_refs": ["packages/agentic/native-core/macos/components/Callout/paper/FRNCalloutManager.m"]
+    },
+    {
+      "id": "bridge-without-swift-types",
+      "description": "Recommends a Paper property bridge using React or AppKit base types or a Swift-implemented setter instead of generated Swift types.",
+      "rule_ids": ["R-APPLE-004"],
+      "source_refs": []
+    },
+    {
+      "id": "both-integration-modes",
+      "description": "Requires module and bridging-header validation, reporting any unrun Office check.",
+      "rule_ids": ["R-APPLE-007"],
+      "source_refs": []
+    },
+    {
+      "id": "review-is-read-only",
+      "description": "Reports findings without editing files.",
+      "rule_ids": ["R-REVIEW-001"],
+      "source_refs": []
+    }
+  ]
+}

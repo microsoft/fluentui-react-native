@@ -3,13 +3,14 @@ import { Platform } from 'react-native';
 import type { PressableProps } from 'react-native';
 
 import { isSelfTargetEvent } from './focusTarget';
+import { requestsFocusOnPointerPress } from './pointerFocus';
 import { useFocusTarget } from './useFocusTarget';
 import type { FocusTargetBinding } from './useFocusTarget';
 import { usePressableState } from './usePressableState';
 import type { PressableState } from '../types/interactive.types';
-import type { FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable.types';
+import type { FocusablePressableOptions, FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable.types';
 
-export type { FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable.types';
+export type { FocusablePressableOptions, FocusablePressableProps, FocusKeyboardEvent } from './useFocusablePressable.types';
 
 const interactionKeys = ['pressed', 'hovered'] as const;
 type PressEvent = Parameters<NonNullable<PressableProps['onPressIn']>>[0];
@@ -34,9 +35,10 @@ function activationKey(event: FocusKeyboardEvent): string | undefined {
  */
 export function useFocusablePressable(
   props: FocusablePressableProps,
-  { focusOnPress = true }: { focusOnPress?: boolean } = {},
+  { pointerFocus = 'platform' }: FocusablePressableOptions = {},
 ): [FocusablePressableProps, PressableState, FocusTargetBinding] {
   const platform: string = Platform.OS;
+  const focusOnPointerPress = requestsFocusOnPointerPress(platform, pointerFocus);
   const { disabled = false, focusable = true, onFocus, onBlur, onPress, onKeyDown, onKeyUp } = props;
   const target = useFocusTarget(!disabled && focusable);
   const { focusTarget, focusTargetRef } = target;
@@ -70,7 +72,7 @@ export function useFocusablePressable(
     }
     const native = event.nativeEvent;
     const keyboard = native != null && ('key' in native || 'code' in native);
-    if (focusOnPress && focusable && !keyboard && (platform === 'windows' || platform === 'win32')) {
+    if (focusOnPointerPress && focusable && !keyboard) {
       const request = focusTarget.requestFocus('pointer');
       if (request.status !== 'requested' && request.status !== 'confirmed') {
         console.warn(`Cannot focus the pressable target: ${request.status}.`);

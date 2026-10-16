@@ -186,25 +186,25 @@ export const Default: Story = {
   tags: ['desktop-e2e'],
   render: (args) => <CalloutExample {...args} defaultVisible />,
   wdio: {
-    'macOS opens, dismisses, and recreates a native popup window': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'macos') {
-        skip('This case verifies the AppKit popup-window lifecycle.');
-        return;
-      }
+    'opens, light-dismisses, and recreates a native popup': async ({ browser, expect, platform, skip }) => {
       const features = browser.capabilities['furn:features'];
       if (!features?.physicalClick) {
         skip('Popup lifecycle qualification requires physical pointer input.');
         return;
       }
+      const status = await browser.$('~agentic-storybook-callout-status');
       for (let attempt = 0; attempt < 2; attempt++) {
-        await expect(await browser.$('~agentic-storybook-callout-status')).toHaveText('Native window: Shown');
-        expect(await browser.getWindowHandles()).toHaveLength(2);
-        await (await browser.$('~agentic-storybook-callout-status')).click();
-        await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
-          timeout: 5000,
-          timeoutMsg: 'Expected dismissal to remove the native Callout window.',
-        });
-        await expect(await browser.$('~agentic-storybook-callout-status')).toHaveText('Native window: Dismissed');
+        await expect(status).toHaveText('Native window: Shown');
+        // Only the AppKit provider enumerates the popup as a top-level window.
+        if (platform === 'macos') expect(await browser.getWindowHandles()).toHaveLength(2);
+        await status.click();
+        if (platform === 'macos') {
+          await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
+            timeout: 5000,
+            timeoutMsg: 'Expected dismissal to remove the native Callout window.',
+          });
+        }
+        await expect(status).toHaveText('Native window: Dismissed');
         if (attempt === 0) {
           await (await browser.$('~agentic-storybook-callout-trigger')).click();
         }
@@ -229,6 +229,20 @@ export const WindowCommands: Story = {
     setInitialFocus: true,
   },
   render: (args) => <CalloutExample {...args} defaultVisible showWindowCommands />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'dismisses initially focused content on Escape': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features?.physicalClick || !features.keyboard) {
+        skip('Escape dismissal requires an interactive desktop with keyboard input.');
+        return;
+      }
+      const status = await browser.$('~agentic-storybook-callout-status');
+      await expect(status).toHaveText('Native window: Shown');
+      await browser.keys('\uE00C');
+      await expect(status).toHaveText('Native window: Dismissed');
+    },
+  },
   parameters: {
     docs: {
       description: {

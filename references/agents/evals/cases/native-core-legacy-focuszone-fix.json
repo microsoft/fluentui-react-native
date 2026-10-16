@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "case_id": "native-core-legacy-focuszone-fix",
+  "split": "holdout",
+  "task_mode": "plan",
+  "prompt": "The legacy FocusZone exported from @fluentui-react-native/native-core/legacy does not restore focus to its default tabbable element on macOS. Plan the fix.",
+  "expected": {
+    "skills": ["implement-native-component"],
+    "classification": {
+      "implementation_model": "framework-base",
+      "public_compatibility": ["legacy-entrypoint", "componentRef", "native-registration"],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": [
+      "references/agents/native/components-and-modules.md",
+      "references/agents/focus/common.md",
+      "references/agents/focus/macos.md"
+    ],
+    "forbidden_actions": ["edit-files", "migrate-framework"]
+  },
+  "assertions": [
+    {
+      "id": "routes-to-native-work",
+      "description": "Treats the legacy entrypoint as a framework-base wrapper over native code rather than v0 or v1 maintenance.",
+      "rule_ids": ["R-CLASSIFY-002"],
+      "source_refs": ["packages/agentic/native-core/src/legacy/focus-zone/FocusZone.tsx"]
+    },
+    {
+      "id": "keeps-public-api",
+      "description": "Keeps the legacy public API, componentRef behavior, and native registration unchanged.",
+      "rule_ids": ["R-NATIVE-002"],
+      "source_refs": []
+    },
+    {
+      "id": "macos-renderer-evidence",
+      "description": "Plans macOS Fabric and Paper evidence, using the --paper Storybook flag for Paper, and confirms actual native focus rather than a request result.",
+      "rule_ids": ["R-NATIVE-003"],
+      "source_refs": ["packages/agentic/native-core/macos/components/FocusZone/shared/RCTFocusZone.m"]
+    }
+  ]
+}

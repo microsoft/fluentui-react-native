@@ -12,21 +12,20 @@ primitive or helper should exist at all.
 
 ## Read first
 
-1. Read `packages/agentic/components/AGENTS.md` and `packages/agentic/components/src/AGENTS.md`.
-2. Read the relevant component or primitive `AGENTS.md` file and the colocated `SPEC.md` files for the affected area.
+1. Read the [package instructions](../../../packages/agentic/components/AGENTS.md) and the
+   [source instructions](../../../packages/agentic/components/src/AGENTS.md).
+2. Read the relevant component or primitive `AGENTS.md` file and the colocated `SPEC.md` or `CONTRACT.md` files for the
+   affected area.
 3. Inspect the canonical implementations:
-   - `packages/agentic/components/src/components/button`
-   - `packages/agentic/components/src/primitives/icon`
+   [`components/button`](../../../packages/agentic/components/src/components/button) and
+   [`primitives/icon`](../../../packages/agentic/components/src/primitives/icon).
 
 ## Audit checklist
 
 ### 1. Dependency direction
 
-- Production source may depend only on React / React Native native components, `@fluentui-react-native/design`, and
-  `@fluentui-react-native/framework-base`.
-- Generalizable non-styling hooks belong in `framework-base/src/hooks`.
-- Styling helpers belong in `agentic/design/src/styling`.
-- Component-library-specific non-public types, constants, and helpers belong in `packages/agentic/components/src/common`.
+Apply the [source boundaries](../../../packages/agentic/components/src/AGENTS.md#source-boundaries): production
+dependencies, where generalizable hooks and styling helpers belong, and what stays in `src/common`.
 
 ### 2. Repetition and ownership
 

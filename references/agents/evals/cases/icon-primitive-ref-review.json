@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "icon-primitive-ref-review",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "Review the Icon primitive in packages/agentic/components/src/primitives/icon. Should it expose a public ref prop like the higher-order components do?",
+  "expected": {
+    "skills": ["review-component"],
+    "classification": {
+      "implementation_model": "agentic-primitive",
+      "public_compatibility": ["primitives-entrypoint"],
+      "native_platforms": []
+    },
+    "required_reads": [
+      "packages/agentic/components/src/primitives/AGENTS.md",
+      "packages/agentic/components/src/primitives/icon/CONTRACT.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "ref-exception",
+      "description": "Concludes Icon omits ref because its renderers lack one stable imperative instance type, as its contract documents.",
+      "rule_ids": ["R-PRIMITIVE-002"],
+      "source_refs": [
+        "packages/agentic/components/src/primitives/icon/icon.tsx",
+        "packages/agentic/components/src/primitives/icon/CONTRACT.md"
+      ]
+    },
+    {
+      "id": "review-is-read-only",
+      "description": "Does not edit the primitive during review.",
+      "rule_ids": ["R-REVIEW-001"],
+      "source_refs": []
+    }
+  ]
+}

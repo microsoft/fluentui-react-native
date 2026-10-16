@@ -275,6 +275,10 @@ export const FocusManagement: Story = {
       }
     },
     'releases pressed feedback after an intervening key without a stale activation': async (context) => {
+      if (context.platform === 'win32') {
+        context.skip('Quarantined until #4373 is fixed: Win32 does not forward onPressOut after Space with an intervening key.');
+        return;
+      }
       const { requireDesktopFocus, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
       const { browser, expect, platform } = context;

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "case_id": "ios-react-header-helper",
+  "split": "development",
+  "task_mode": "plan",
+  "prompt": "Add an Objective-C helper to packages/experimental/AppearanceAdditions that reads the React Native RTL setting from RCTI18nUtil, and call it from Swift. Plan the change.",
+  "expected": {
+    "skills": ["implement-native-component"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": ["ios"]
+    },
+    "required_reads": ["references/agents/native/apple-office.md"],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "qualified-header",
+      "description": "Imports <React/RCTI18nUtil.h> with exact case and quotes only local headers.",
+      "rule_ids": ["R-APPLE-001"],
+      "source_refs": ["packages/experimental/AppearanceAdditions/ios/FRNAppearanceAdditions.m"]
+    },
+    {
+      "id": "guarded-swift-import",
+      "description": "Guards any Swift React import with #if canImport(React) for iOS.",
+      "rule_ids": ["R-APPLE-002"],
+      "source_refs": []
+    },
+    {
+      "id": "both-integration-modes",
+      "description": "Plans module and bridging-header validation and reports unrun Office checks.",
+      "rule_ids": ["R-APPLE-007"],
+      "source_refs": []
+    }
+  ]
+}
