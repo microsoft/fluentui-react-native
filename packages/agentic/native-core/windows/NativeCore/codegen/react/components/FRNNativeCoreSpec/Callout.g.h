@@ -314,7 +314,7 @@ struct BaseCallout {
   virtual void HandleBlurWindowCommand() noexcept = 0;
 
   // You must provide an implementation of this method to handle the "requestFocus" command
-  virtual void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag) noexcept = 0;
+  virtual void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag, std::string strategy) noexcept = 0;
 
   // You must provide an implementation of this method to handle the "close" command
   virtual void HandleCloseCommand(int32_t generation, int32_t requestId) noexcept = 0;
@@ -341,8 +341,9 @@ struct BaseCallout {
       int32_t generation;
 int32_t requestId;
 int32_t targetTag;
-      winrt::Microsoft::ReactNative::ReadArgs(args.CommandArgs(), generation, requestId, targetTag);
-      userData->HandleRequestFocusCommand(generation, requestId, targetTag);
+std::string strategy;
+      winrt::Microsoft::ReactNative::ReadArgs(args.CommandArgs(), generation, requestId, targetTag, strategy);
+      userData->HandleRequestFocusCommand(generation, requestId, targetTag, strategy);
       return;
     }
 

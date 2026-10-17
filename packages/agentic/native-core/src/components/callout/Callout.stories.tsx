@@ -7,7 +7,7 @@ import type { PointerFocusMode } from '@fluentui-react-native/framework-base';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Callout } from './Callout';
-import type { CalloutAnchor, CalloutHandle, CalloutDismissedEvent } from './Callout.types';
+import type { CalloutAnchor, CalloutHandle, CalloutDismissedEvent, CalloutReadyEvent } from './Callout.types';
 import { FocusZone } from '../focus-zone/FocusZone';
 import type { FocusZoneCommands } from '../focus-zone/FocusZone.types';
 import { useNativeViewTarget } from '../nativeTarget';
@@ -137,6 +137,66 @@ function Example({ anchorKind, exercise }: ExampleProps) {
 
 const menuItems = ['Cut', 'Copy', 'Paste'] as const;
 
+function EntryFocusExample({ strategy, empty = false }: { strategy: 'first' | 'last'; empty?: boolean }) {
+  const anchor = useNativeViewTarget();
+  const handle = React.useRef<CalloutHandle>(null);
+  const [open, setOpen] = React.useState(false);
+  const [status, setStatus] = React.useState('Closed');
+  const [focused, setFocused] = React.useState('None');
+  const enter = async ({ presentation }: CalloutReadyEvent) => {
+    const api = handle.current;
+    if (!api) throw new Error('Missing mounted Callout handle at readiness.');
+    const outcome = await api.requestFocus(presentation, strategy);
+    if (api.getPresentation() === presentation) setStatus(outcome.status);
+  };
+  return (
+    <View style={styles.story}>
+      <View accessible accessibilityRole="text" accessibilityLabel={status} testID="entry-callout-status">
+        <Text accessible={false}>{status}</Text>
+      </View>
+      <View accessible accessibilityRole="text" accessibilityLabel={focused} testID="entry-callout-focused">
+        <Text accessible={false}>{focused}</Text>
+      </View>
+      <Pressable
+        ref={anchor.ref}
+        accessibilityRole="button"
+        style={styles.button}
+        testID="entry-callout-open"
+        onPress={() => setOpen(true)}
+      >
+        <Text>Open entry-focus probe</Text>
+      </Pressable>
+      <Callout
+        ref={handle}
+        open={open}
+        anchor={{ kind: 'view', target: anchor.target }}
+        content={{ style: styles.content, testID: 'entry-callout-content' }}
+        onReady={(event: CalloutReadyEvent) => {
+          void enter(event);
+        }}
+        onDismissed={() => setOpen(false)}
+      >
+        <Text>Only eligible descendants can receive entry focus.</Text>
+        {!empty && (
+          <>
+            <Pressable disabled focusable={false} accessibilityRole="button">
+              <Text>Disabled</Text>
+            </Pressable>
+            <Pressable focusable accessibilityRole="button" onFocus={() => setFocused('First')} testID="entry-callout-first">
+              <Text>First</Text>
+            </Pressable>
+            <View>
+              <Pressable focusable accessibilityRole="button" onFocus={() => setFocused('Last')} testID="entry-callout-last">
+                <Text>Last</Text>
+              </Pressable>
+            </View>
+          </>
+        )}
+      </Callout>
+    </View>
+  );
+}
+
 /** A flat nonmodal menu composed from the primitives: Callout presence, FocusZone entry and arrow navigation. */
 function MenuCompositionExample({ pointerFocus }: Pick<ExampleProps, 'pointerFocus'>) {
   const anchor = useNativeViewTarget();
@@ -193,7 +253,7 @@ function MenuCompositionExample({ pointerFocus }: Pick<ExampleProps, 'pointerFoc
           setOpen(false);
           setStatus(`Dismissed: ${reason}`);
           // A programmatic close returns focus to the trigger; a native dismissal already restored the owner's focus.
-          if (reason !== 'native-light-dismiss') focusTarget.requestFocus('restore');
+          if (reason === 'programmatic') focusTarget.requestFocus('restore');
         }}
         content={{ style: styles.menu, testID: 'modern-menu-content' }}
       >
@@ -222,21 +282,23 @@ type Story = WdioStory<StoryObj<ExampleProps>>;
 export const Default: Story = {
   tags: ['desktop-e2e'],
   wdio: {
-    'light-dismisses on an outside owner click and explicitly rearms': async ({ browser, expect, skip }) => {
+    'light-dismisses on an outside owner click and explicitly rearms': async ({ browser, expect, platform, skip }) => {
       if (!browser.capabilities['furn:features']?.physicalClick) {
         skip('Light dismissal requires physical owner input.');
         return;
       }
       const status = await browser.$('~modern-callout-status');
       const dismissal = await browser.$('~modern-callout-dismissal');
+      // The App SDK notification itself has no cause; its unclassified path can win the outside-pointer race.
+      const expected = platform === 'windows' ? /^Dismissed: (outside-pointer|native-light-dismiss)$/ : 'Dismissed: outside-pointer';
       for (let attempt = 0; attempt < 2; attempt++) {
         await expect(status).toHaveText('Ready');
         await expect(dismissal).toHaveText('Open');
         await status.click();
-        await expect(dismissal).toHaveText('Dismissed: native-light-dismiss');
+        await expect(dismissal).toHaveText(expected);
         // A latched presentation must not reopen merely because open remains true; readiness would reset the label.
         await browser.pause(500);
-        await expect(dismissal).toHaveText('Dismissed: native-light-dismiss');
+        await expect(dismissal).toHaveText(expected);
         await (await browser.$('~modern-callout-reopen')).click();
       }
       await expect(status).toHaveText('Ready');
@@ -295,7 +357,52 @@ export const KeyboardDismissal: Story = {
       const dismissal = await browser.$('~modern-callout-dismissal');
       await expect(dismissal).toHaveText('Open');
       await browser.keys('\uE00C');
-      await expect(dismissal).toHaveText('Dismissed: native-light-dismiss');
+      await expect(dismissal).toHaveText('Dismissed: escape');
+    },
+  },
+};
+export const FirstFocusable: Story = {
+  render: () => <EntryFocusExample strategy="first" />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'confirms the first eligible content without a FocusZone': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Entry focus requires physical owner activation.');
+        return;
+      }
+      await (await browser.$('~entry-callout-open')).click();
+      await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
+      await expect(await browser.$('~entry-callout-focused')).toHaveText('First');
+    },
+  },
+};
+export const LastFocusable: Story = {
+  render: () => <EntryFocusExample strategy="last" />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'confirms the last eligible nested content without a FocusZone': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Entry focus requires physical owner activation.');
+        return;
+      }
+      await (await browser.$('~entry-callout-open')).click();
+      await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
+      await expect(await browser.$('~entry-callout-focused')).toHaveText('Last');
+    },
+  },
+};
+export const EmptyFocus: Story = {
+  render: () => <EntryFocusExample strategy="first" empty />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'reports missing eligible content instead of manufacturing focus confirmation': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Entry focus requires physical owner activation.');
+        return;
+      }
+      await (await browser.$('~entry-callout-open')).click();
+      await expect(await browser.$('~entry-callout-status')).toHaveText('not-mounted');
+      await expect(await browser.$('~entry-callout-focused')).toHaveText('None');
     },
   },
 };

@@ -94,6 +94,29 @@ describe('MenuItem', () => {
     expect(component.queryByText('Group')).toBeNull();
   });
 
+  it('preserves disabled semantics and opt-in focusability through the macOS Pressable', async () => {
+    const onPress = jest.fn();
+    const component = await renderMenuItem({
+      content: 'Unavailable',
+      disabled: true,
+      disabledFocusable: true,
+      accessibilityState: { busy: true },
+      onPress,
+    });
+    const root = getRoot(component);
+    expect(root.props.focusable).toBe(true);
+    expect(root.props.accessibilityState).toMatchObject({ disabled: true, busy: true });
+    await fireEvent.press(root);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
+  it('keeps disabled rows nonfocusable by default and never opts headers into focus', async () => {
+    const disabled = await renderMenuItem({ content: 'Unavailable', disabled: true });
+    expect(getRoot(disabled).props.focusable).toBe(false);
+    const header = await renderMenuItem({ content: 'Group', menuStyle: 'section-header', disabledFocusable: true });
+    expect(getRoot(header, 'none').props.focusable).toBe(false);
+  });
+
   it('forwards user styles last and preserves handlers', async () => {
     const onPress = jest.fn();
     const component = await renderMenuItem({

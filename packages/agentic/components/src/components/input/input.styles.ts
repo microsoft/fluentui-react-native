@@ -170,7 +170,7 @@ function createContentsStrokeDefinition(tokens: FlexTokens): StyleDefinition<Vie
   const outlineStates = {
     disabled: { borderColor: color.strokeNeutralDisabled },
     error: { borderColor: color.strokeDangerLoud },
-    focused: { borderColor: color.strokeNeutralHeavy },
+    focused: { borderColor: color.strokeNeutralSubtle },
     hovered: { borderColor: color.hover.strokeNeutralLoud },
     pressed: { borderColor: color.pressed.strokeNeutralLoud },
     readOnly: { borderColor: color.strokeNeutralDisabled },
@@ -179,7 +179,7 @@ function createContentsStrokeDefinition(tokens: FlexTokens): StyleDefinition<Vie
   const underlineStates = {
     disabled: { borderBottomColor: color.strokeNeutralDisabled },
     error: { borderBottomColor: color.strokeDangerLoud },
-    focused: { borderBottomColor: color.strokeNeutralHeavy },
+    focused: { borderBottomColor: color.strokeFocusOuter },
     hovered: { borderBottomColor: color.hover.strokeNeutralLoud },
     pressed: { borderBottomColor: color.pressed.strokeNeutralLoud },
     readOnly: { borderBottomColor: color.strokeNeutralDisabled },
@@ -305,6 +305,17 @@ function createUnderlineDefinition(tokens: FlexTokens): StyleDefinition<ViewStyl
   };
 }
 
+function createUnderlineFocusDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, VisualStateLevels> {
+  return {
+    bottom: toNumber(tokens.strokeWidth.thin),
+    left: 0,
+    right: 0,
+    position: 'absolute',
+    borderBottomWidth: toNumber(tokens.strokeWidth.thin),
+    borderBottomColor: tokens.color.strokeFocusOuter,
+  };
+}
+
 const getThemedRootStyle = getThemedStateStyleFactory('Input.root', createRootStyleDefinition, rootStateLevels);
 const getThemedContentsLayoutStyle = getThemedStateStyleFactory('Input.contentsLayout', createContentsLayoutDefinition, contentStateLevels);
 const getThemedContentsStrokeStyle = getThemedStateStyleFactory('Input.contentsStroke', createContentsStrokeDefinition, contentStateLevels);
@@ -312,6 +323,7 @@ const getThemedIconTextStackStyle = getThemedStateStyleFactory('Input.iconTextSt
 const getThemedIconEndStyle = getThemedStateStyleFactory('Input.iconEnd', createIconEndDefinition, textStateLevels);
 const getThemedTextInputStyle = getThemedStateStyleFactory('Input.textInput', createTextInputDefinition, textStateLevels);
 const getThemedUnderlineStyle = getThemedStateStyleFactory('Input.underline', createUnderlineDefinition, visualStateLevels);
+const getThemedUnderlineFocusStyle = getThemedStateStyleFactory('Input.underlineFocus', createUnderlineFocusDefinition, visualStateLevels);
 
 export type InputResolvedStyles = {
   root: ViewStyle;
@@ -319,6 +331,7 @@ export type InputResolvedStyles = {
   iconTextStack: ViewStyle;
   iconEnd: ViewStyle;
   underline: ViewStyle;
+  underlineFocus: ViewStyle;
   textInput: TextStyle;
   iconSize: number;
   iconColor: ColorValue;
@@ -326,14 +339,16 @@ export type InputResolvedStyles = {
 };
 
 export function getInputResolvedStyles(
-  state: ThemeState & { tokens: FlexTokens; size: InputSize; variant: InputVariant; visualState: InputVisualState },
+  state: ThemeState & { tokens: FlexTokens; size: InputSize; variant: InputVariant; visualState: InputVisualState; focusVisible?: boolean },
 ): InputResolvedStyles {
+  const focusVisible = state.visualState !== 'disabled' && (state.focusVisible ?? state.visualState === 'focused');
+  const strokeState = state.visualState === 'focused' && !focusVisible ? 'rest' : state.visualState;
   const metrics = getMetrics(state.tokens, state.size);
   const root = getThemedRootStyle(state, [state.variant, state.size]);
   const contents = {
     ...inputStyles.contents,
     ...getThemedContentsLayoutStyle(state, [state.variant, state.size]),
-    ...getThemedContentsStrokeStyle(state, [state.variant, state.size, state.visualState]),
+    ...getThemedContentsStrokeStyle(state, [state.variant, state.size, strokeState]),
   };
   const iconTextStack = {
     ...inputStyles.iconTextStack,
@@ -346,7 +361,11 @@ export function getInputResolvedStyles(
   const underline = {
     ...inputStyles.underline,
     ...getThemedUnderlineStyle(state, [state.visualState]),
-    ...getThemedContentsStrokeStyle(state, ['underline', state.size, state.visualState]),
+    ...getThemedContentsStrokeStyle(state, ['underline', state.size, strokeState]),
+  };
+  const underlineFocus = {
+    ...getThemedUnderlineFocusStyle(state, []),
+    opacity: focusVisible ? 1 : 0,
   };
   const textInput = {
     ...inputStyles.textInput,
@@ -370,5 +389,6 @@ export function getInputResolvedStyles(
     root,
     textInput,
     underline,
+    underlineFocus,
   };
 }

@@ -27,7 +27,7 @@ export async function exerciseMenuComposition(
     await browser.keys('\uE013');
     await expect(focused).toHaveText('Paste');
     await browser.keys('\uE00C');
-    await expect(status).toHaveText('Dismissed: native-light-dismiss');
+    await expect(status).toHaveText('Dismissed: escape');
     if (restoresTrigger) {
       await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
         timeout: 5000,

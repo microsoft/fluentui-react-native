@@ -20,6 +20,8 @@ export type MenuItemSecondaryContentPosition = ItemSecondaryContentPosition;
 
 export type MenuItemStateProps = {
   disabled?: boolean;
+  /** Keep a disabled list row focusable without allowing activation. Headers remain nonfocusable. */
+  disabledFocusable?: boolean;
   loading?: boolean;
   hasMultiselect?: boolean;
   hasCheckmark?: boolean;

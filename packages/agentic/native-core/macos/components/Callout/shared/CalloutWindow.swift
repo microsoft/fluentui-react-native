@@ -4,7 +4,7 @@ import AppKit
 @MainActor
 protocol CalloutWindowLifeCycleDelegate: AnyObject {
 	/// Notify the delegate that the Callout is about to dismiss
-	func calloutWillDismiss(window: CalloutWindow)
+	func calloutWillDismiss(window: CalloutWindow, reason: String?)
 	func calloutDidDismiss(window: CalloutWindow)
 }
 
@@ -31,11 +31,15 @@ class CalloutWindow: NSWindow {
 
 	// Required to close the window on escape key press
 	override func cancelOperation(_ sender: Any?) {
-		dismissCallout()
+		dismissCallout(reason: "escape")
 	}
 
 	@objc public func dismissCallout() {
-		lifeCycleDelegate?.calloutWillDismiss(window: self)
+		dismissCallout(reason: nil)
+	}
+
+	func dismissCallout(reason: String?) {
+		lifeCycleDelegate?.calloutWillDismiss(window: self, reason: reason)
 		orderOut(self)
 		lifeCycleDelegate?.calloutDidDismiss(window: self)
 	}

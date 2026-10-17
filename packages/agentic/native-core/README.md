@@ -286,6 +286,23 @@ preserves its actual native root `ref` and publishes confirmed requests through
 `commandsRef`. Neither ref assignment nor a void native focus return is
 confirmation. Requests support abort and timeout, and reject stale lifetimes.
 
+The October 16, 2026 popup prerequisites extend modern Callout's
+`requestFocus(presentation, target, options)` with `first` and `last` strategies.
+They use the same native eligibility and actual-focus confirmation as
+FocusZone; an empty search reports `not-mounted` so a consumer can explicitly
+request its own focusable fallback. Native dismissal distinguishes `escape`,
+`outside-pointer`, and `application-deactivated` where the observing branch can
+identify them, while retaining `native-light-dismiss` for unclassified events.
+Duplicate closure and late readiness cannot revive a dismissed presentation.
+Rebuild native hosts for the extended command schema; `/legacy` is unchanged.
+
+The Windows library builds with these additions, but physical-input cases
+skipped in this session and macOS/Office integration has not run. The earlier
+qualification below is the pre-amendment baseline, not proof of these new
+behaviors. See [the implementation handoff](../../../menu-popover-plan.md#12-implementation-handoff)
+and the [Win32 host follow-up](https://github.com/microsoft/fluentui-react-native/issues/4384)
+for remaining gates.
+
 Modern and legacy facades share the native registrations; Callout's facades
 also share a hook-free private host that applies native-safe positioning and
 appearance values. Both modern facades are phased components: the first phase

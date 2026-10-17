@@ -34,8 +34,37 @@ unmount, invalid generation and timeout produce explicit outcomes. Timeout is
 unconfirmed; cancellation cannot undo an already-executed native mutation.
 Focus remains scoped to eligible content and active owned windows.
 
+## Popup consumer amendments
+
+Pre-code contract review, October 16, 2026, against the existing macOS
+`NativeFocusService`, Windows `FocusWithin`, and the confirmed D03/D05 decisions
+in the repository's menu/popover plan:
+
+- `requestFocus(presentation, target, options)` also accepts `first` and `last`.
+  These strategies search eligible descendants of the current presentation in
+  native order; they never include the hidden native marker. As in FocusZone,
+  a focusable enclosing stop takes precedence over its descendants. An empty
+  search reports `not-mounted`, not confirmation. The consumer may then request
+  its explicitly focusable content container by its live target.
+- A strategy request retains the same readiness, cancellation, generation,
+  active-window, and actual-focus checks as an explicit-target request.
+- Native dismissal reports `escape`, `outside-pointer`, or
+  `application-deactivated` only at a branch that observes that cause.
+  `native-light-dismiss` remains valid for unclassified native notifications,
+  including the Windows App SDK light-dismiss event. No cause is inferred from
+  focus state. `programmatic`, `anchor-lost`, and `host-detached` are unchanged.
+- These changes apply only to the experimental modern protocol. Legacy
+  registrations and the legacy JavaScript API remain unchanged; no new command
+  is sent to a prebuilt Win32 host.
+
+Wrapper and type regressions belong in `modern.test.tsx` and
+`modern.types.test.ts`; native entry-strategy and dismissal cases belong in
+`Callout.stories.tsx`. CocoaPods module/Office bridging-header builds and both
+macOS renderer runs remain mandatory qualification, not consequences of a
+passing JavaScript test.
+
 Pointer input outside the popup family, Escape in focused content, and losing
-the host report `native-light-dismiss` or `host-detached`. Input in a nested
+the host report their observed cause or `host-detached`. Input in a nested
 popup does not dismiss the popups that own it. Closing a presentation that
 holds keyboard focus returns input to the owner window's retained focused
 component; outside input that already moved focus is not overridden. Whether
@@ -47,6 +76,6 @@ Windows, outside input is observed for the owner island and other application
 windows; application deactivation dismisses only presentations that hold
 focus. A Menu still restores its trigger explicitly after an item closes it.
 
-Request-only veto, precise light-dismiss classification, policy-driven
+Request-only veto, complete light-dismiss classification, policy-driven
 restoration, popup-family transactions, modal containment and text fragments
 are deferred; no success-shaped substitutes are provided.

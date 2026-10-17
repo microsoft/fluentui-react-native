@@ -29,12 +29,13 @@ class CalloutManager: RCTViewManager, FRNCalloutPropertyManager {
 		}
 	}
 
-	@objc func requestFocus(_ viewTag: NSNumber, generation: Int, requestId: Int, targetTag: Int) {
+	@objc func requestFocus(_ viewTag: NSNumber, generation: Int, requestId: Int, targetTag: Int, strategy: String) {
 		nonisolated(unsafe) let manager = self
 		DispatchQueue.main.async {
 			guard let uiManager = manager.bridge?.uiManager,
 				let view = uiManager.view(forReactTag: viewTag) as? CalloutView else { return }
-			view.requestFocus(generation, requestId: requestId, target: uiManager.view(forReactTag: NSNumber(value: targetTag)))
+			view.requestFocus(generation, requestId: requestId,
+				target: uiManager.view(forReactTag: NSNumber(value: targetTag)), strategy: strategy)
 		}
 	}
 

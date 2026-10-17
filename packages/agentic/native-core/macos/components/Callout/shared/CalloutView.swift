@@ -102,9 +102,9 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         updatePresentation()
     }
 
-    @objc public func requestFocus(_ generation: Int, requestId: Int, target: NSView?) {
+    @objc public func requestFocus(_ generation: Int, requestId: Int, target: NSView?, strategy: String) {
         emitResult(generation, requestId, operationStatus(generation) ??
-            NativeFocusService.focus(within: proxyView, target: target, strategy: "target"))
+            NativeFocusService.focus(within: proxyView, target: target, strategy: strategy))
     }
     @objc public func close(_ generation: Int, requestId: Int) {
         if let blocked = operationStatus(generation) { emitResult(generation, requestId, blocked); return }
@@ -130,7 +130,8 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         onOperationResult?(["generation": generation, "requestId": requestId, "status": status])
     }
 
-    func calloutWillDismiss(window: CalloutWindow) {
+    func calloutWillDismiss(window: CalloutWindow, reason: String?) {
+        if let reason = reason { dismissReason = reason }
         for child in window.childWindows ?? [] {
             if let popup = child as? CalloutWindow { popup.dismissCallout() }
         }
@@ -178,7 +179,10 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
                     }
                     var root: NSWindow = popup
                     while let parent = root.parent as? CalloutWindow { root = parent }
-                    if let clicked = event.window, !contains(root, clicked) { self.dismissCallout() }
+                    if let clicked = event.window, !contains(root, clicked) {
+                        self.dismissReason = "outside-pointer"
+                        self.dismissCallout()
+                    }
                 }
                 return event
             }
@@ -235,7 +239,10 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     private func removeObservers() { observers.removeAll() }
     private func installObservers() {
         removeObservers()
-        observe(NSApplication.didResignActiveNotification, object: nil) { $0.dismissCallout() }
+        observe(NSApplication.didResignActiveNotification, object: nil) {
+            $0.dismissReason = "application-deactivated"
+            $0.dismissCallout()
+        }
         observe(NSMenu.didBeginTrackingNotification, object: nil) { $0.dismissCallout() }
         var current = anchorView
         while let view = current {

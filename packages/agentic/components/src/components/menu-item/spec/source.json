@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "component": "menu-item",
-  "lifecycle": "implemented",
+  "lifecycle": "contract-reviewed",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-14",
+  "reviewedAt": "2026-10-16",
   "sources": [
     {
       "id": "flex-component",
@@ -81,6 +81,10 @@
     {
       "id": "menu-item-multiselect-precedence",
       "status": "accepted"
+    },
+    {
+      "id": "menu-item-disabled-focusable",
+      "status": "accepted"
     }
   ],
   "requirements": [
@@ -103,6 +107,10 @@
     {
       "id": "MNI-005",
       "evidence": ["useMenuItem.ts", "useMenuItemStyles.ts", "menu-item.styles.ts", "menu-item.test.tsx"]
+    },
+    {
+      "id": "MNI-006",
+      "plannedEvidence": ["menu-item.types.ts", "useMenuItem.ts", "menu-item.test.tsx", "menu-item.types.test.ts"]
     }
   ]
 }

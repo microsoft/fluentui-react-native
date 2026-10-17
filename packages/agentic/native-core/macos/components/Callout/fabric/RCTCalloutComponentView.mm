@@ -156,11 +156,11 @@ static void RCTApplyCalloutAppearance(
   [_calloutView blurWindow];
 }
 
-- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag
+- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag strategy:(NSString *)strategy
 {
   // Resolve the target within this popup's content so a focus request cannot escape the presentation.
   NSView *target = FRNNativeCoreFindView(_calloutView.contentProxyView, targetTag);
-  [_calloutView requestFocus:generation requestId:requestId target:target];
+  [_calloutView requestFocus:generation requestId:requestId target:target strategy:strategy];
 }
 
 - (void)close:(NSInteger)generation requestId:(NSInteger)requestId

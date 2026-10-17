@@ -2,10 +2,11 @@ import * as React from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 import type { TextInputProps } from 'react-native';
 
-import { useThemeState } from '@fluentui-react-native/design';
+import { useRootInputModality, useThemeState } from '@fluentui-react-native/design';
 import { useControllableValue, useFocusTarget, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
+import { useFocusVisuals } from '../../common/useFocusVisuals';
 
 import { getInputResolvedStyles } from './input.styles';
 import type { InputAccessibilityState, InputProps, InputState, InputVisualState } from './input.types';
@@ -86,6 +87,9 @@ export function useInput_unstable(props: InputProps): InputState {
   const resolvedFocusable = !disabled && (slotFocusable ?? focusable ?? true);
   const focus = useFocusTarget(resolvedFocusable);
   const { focused, focusTarget } = focus;
+  const modality = useRootInputModality(focused && !disabled);
+  const focusVisible = focused && !disabled && modality === 'keyboard';
+  const { FocusRing } = useFocusVisuals({ focused: focusVisible, useSystemFocusRing: false, alwaysVisible: true });
   const blurFocusTarget = focus.onBlur;
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);
@@ -107,7 +111,7 @@ export function useInput_unstable(props: InputProps): InputState {
   }, [iconEnd1Prop, iconEnd2Prop]);
 
   const visualState = getVisualState({ disabled, error, focused, hovered, pressed, readOnly });
-  const resolvedStyles = getInputResolvedStyles({ ...themeState, size, variant, visualState });
+  const resolvedStyles = getInputResolvedStyles({ ...themeState, size, variant, visualState, focusVisible });
 
   const handleChangeText = React.useCallback(
     (text: string) => {
@@ -154,6 +158,7 @@ export function useInput_unstable(props: InputProps): InputState {
   const iconTextStack = useSlot(View, {});
   const iconEnd = useOptionalSlot(View, iconEnd1Prop || iconEnd2Prop ? {} : null);
   const underline = useOptionalSlot(View, variant === 'underline' ? {} : null);
+  const underlineFocus = useOptionalSlot(View, variant === 'underline' ? {} : null);
   const iconStart = useOptionalSlot(Icon, iconStartProp);
   const iconEnd1 = useOptionalSlot(Icon, iconEnd1Prop);
   const iconEnd2 = useOptionalSlot(Icon, iconEnd2Prop);
@@ -173,6 +178,7 @@ export function useInput_unstable(props: InputProps): InputState {
       accessible: slotProps.accessible ?? accessible ?? true,
       editable: disabled || readOnly ? false : (slotProps.editable ?? true),
       focusable: resolvedFocusable,
+      enableFocusRing: false,
       ref: focus.focusTargetRef,
       onBlur: mergeHandlers(slotProps.onBlur, onBlur, handleBlur),
       onChangeText: mergeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),
@@ -191,6 +197,7 @@ export function useInput_unstable(props: InputProps): InputState {
 
   return {
     ...themeState,
+    FocusRing: variant === 'outline' ? FocusRing : undefined,
     focusTarget: focus.focusTarget,
     focusTargetRef: focus.focusTargetRef,
     contents,
@@ -198,6 +205,7 @@ export function useInput_unstable(props: InputProps): InputState {
     disabled,
     error,
     focused,
+    focusVisible,
     hovered,
     iconColor: resolvedStyles.iconColor,
     iconEnd,
@@ -217,6 +225,8 @@ export function useInput_unstable(props: InputProps): InputState {
     textInputStyle: resolvedStyles.textInput,
     underline,
     underlineStyle: resolvedStyles.underline,
+    underlineFocus,
+    underlineFocusStyle: resolvedStyles.underlineFocus,
     userStyle,
     value: currentValue,
     variant,

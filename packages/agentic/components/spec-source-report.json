@@ -145,7 +145,7 @@
       "tag",
       "text"
     ],
-    "adaptedDrafts": [],
+    "adaptedDrafts": ["input", "menu-item"],
     "implemented": [
       "accordion",
       "avatar",
@@ -154,10 +154,8 @@
       "card",
       "checkbox",
       "divider",
-      "input",
       "list-item",
       "listbox-item",
-      "menu-item",
       "progress-bar",
       "radio",
       "skeleton",
@@ -178,12 +176,14 @@
       "dropdown",
       "field",
       "info-label",
+      "input",
       "interaction-tag",
       "label",
       "link",
       "list",
       "menu",
       "menu-button",
+      "menu-item",
       "message-bar",
       "nav",
       "nav-item",
@@ -555,7 +555,7 @@
     },
     {
       "component": "input",
-      "lifecycle": "implemented",
+      "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
       "releaseDifferences": [
         {
@@ -613,7 +613,7 @@
     },
     {
       "component": "menu-item",
-      "lifecycle": "implemented",
+      "lifecycle": "contract-reviewed",
       "conformance": "reviewed",
       "releaseDifferences": [],
       "marketplaceDrift": {

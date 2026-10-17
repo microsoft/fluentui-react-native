@@ -56,9 +56,17 @@ function rectangle(anchor: CalloutAnchor) {
   return { screenX: rect.x, screenY: rect.y, width: rect.width, height: rect.height };
 }
 
-const reasons: readonly string[] = ['native-light-dismiss', 'programmatic', 'anchor-lost', 'host-detached'];
+const reasons: readonly CalloutDismissReason[] = [
+  'native-light-dismiss',
+  'escape',
+  'outside-pointer',
+  'application-deactivated',
+  'programmatic',
+  'anchor-lost',
+  'host-detached',
+];
 function isReason(value: string): value is CalloutDismissReason {
-  return reasons.includes(value);
+  return reasons.some((reason) => reason === value);
 }
 
 /**
@@ -99,6 +107,7 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
   const presented = open && !closed && tag !== undefined;
   const committedGeneration = React.useRef(generation);
   const ready = React.useRef<CalloutPresentation | null>(null);
+  const dismissed = React.useRef<CalloutPresentation | null>(null);
   const Content = useSlot(View, content);
 
   React.useLayoutEffect(() => {
@@ -131,9 +140,15 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
     return {
       getPresentation: () => ready.current,
       requestFocus(expected, target, options) {
-        const resolved = resolveTarget(target);
-        if (resolved.tag == null) return Promise.resolve({ status: 'not-mounted' });
-        return request(expected, (view, scope, id) => Commands.requestFocus(view, scope, id, resolved.tag), options, resolved.isCurrent);
+        const resolved = typeof target === 'string' ? undefined : resolveTarget(target);
+        if (resolved && resolved.tag == null) return Promise.resolve({ status: 'not-mounted' });
+        const strategy = typeof target === 'string' ? target : 'target';
+        return request(
+          expected,
+          (view, scope, id) => Commands.requestFocus(view, scope, id, resolved?.tag ?? 0, strategy),
+          options,
+          resolved?.isCurrent,
+        );
       },
       close: (expected, options) => request(expected, (view, scope, id) => Commands.close(view, scope, id), options),
       reposition: (expected, options) => request(expected, (view, scope, id) => Commands.reposition(view, scope, id), options),
@@ -156,13 +171,15 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
         directionalHint={hint(placement)}
         gapSpace={gapSpace(placement)}
         onReady={(event) => {
-          if (!isCurrent(event.nativeEvent.generation) || ready.current) return;
+          if (!isCurrent(event.nativeEvent.generation) || ready.current || dismissed.current === presentation) return;
           ready.current = presentation;
           onReady?.({ presentation });
         }}
         onClosed={(event) => {
           if (!isCurrent(event.nativeEvent.generation)) return;
+          if (dismissed.current === presentation) return;
           if (!isReason(event.nativeEvent.reason)) throw new Error('Callout received an invalid native dismissal reason.');
+          dismissed.current = presentation;
           ready.current = null;
           channel.cancel();
           setLifetime((current) => (current.presentation === presentation ? { ...current, closed: true } : current));

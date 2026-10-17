@@ -25,6 +25,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     secondaryContent,
     secondaryContentPosition = 'right',
     disabled = false,
+    disabledFocusable = false,
     hasCheckmark = false,
     hasChevron = false,
     hasMultiselect = false,
@@ -54,24 +55,27 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     console.warn('MenuItem: checkmark and multiselect are mutually exclusive.');
   }
 
-  const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
-    ...rest,
-    accessible: rest.accessible ?? true,
-    accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
-    accessibilityLabel: accessibilityLabel ?? contentText,
-    accessibilityRole: isListItem ? (hasMultiselect ? 'menuitemcheckbox' : hasCheckmark ? 'menuitemradio' : 'menuitem') : 'none',
-    accessibilityState: {
-      ...props.accessibilityState,
-      disabled: disabled && isInteractive,
-      ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(
+    {
+      ...rest,
+      accessible: rest.accessible ?? true,
+      accessibilityHint: accessibilityHint ?? (hasChevron ? 'Has submenu' : undefined),
+      accessibilityLabel: accessibilityLabel ?? contentText,
+      accessibilityRole: isListItem ? (hasMultiselect ? 'menuitemcheckbox' : hasCheckmark ? 'menuitemradio' : 'menuitem') : 'none',
+      accessibilityState: {
+        ...props.accessibilityState,
+        disabled: disabled && isInteractive,
+        ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
+      },
+      disabled: !isInteractive || disabled,
+      focusable: isInteractive && (!disabled || disabledFocusable),
+      onPress: isInteractive ? rest.onPress : undefined,
     },
-    disabled: !isInteractive || disabled,
-    focusable: isInteractive && !disabled,
-    onPress: isInteractive ? rest.onPress : undefined,
-  });
+    { disabledFocusable: isInteractive && disabledFocusable },
+  );
 
   const { FocusRing, ...nativeFocusProps } = useFocusVisuals({
-    focused: pressableState.focused && !disabled && isInteractive,
+    focused: pressableState.focused && (!disabled || disabledFocusable) && isInteractive,
     useSystemFocusRing: isInteractive ? undefined : false,
   });
 
@@ -90,6 +94,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
     ...focusBinding,
     contentText,
     disabled,
+    disabledFocusable,
     hasCheckmark,
     hasChevron,
     hasMultiselect,

@@ -1,11 +1,13 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
+import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
 import { inputStyles } from './input.styles';
 import type { InputState } from './input.types';
 
 export function useInputStyles_unstable(state: InputState) {
+  applyFocusRingStyles(state.FocusRing, state, state.rootStyle.borderRadius);
   const rootStyle: StyleProp<ViewStyle> = [inputStyles.root, state.rootStyle, state.userStyle];
   const contentsStyle: StyleProp<ViewStyle> = [inputStyles.contents, state.contentsStyle];
   const iconTextStackStyle: StyleProp<ViewStyle> = [inputStyles.iconTextStack, state.iconTextStackStyle];
@@ -43,6 +45,15 @@ export function useInputStyles_unstable(state: InputState) {
       accessible: false,
       style: underlineStyle,
       testID: 'input-underline',
+    });
+  }
+  if (state.underlineFocus) {
+    attachSlotProps(state.underlineFocus, {
+      accessible: false,
+      focusable: false,
+      pointerEvents: 'none',
+      style: state.underlineFocusStyle,
+      testID: 'input-underline-focus',
     });
   }
   if (state.iconStart) {

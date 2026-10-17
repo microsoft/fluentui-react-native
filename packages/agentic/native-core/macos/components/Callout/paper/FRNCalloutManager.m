@@ -22,7 +22,7 @@ RCT_EXTERN_METHOD(focusWindow : (nonnull NSNumber *)viewTag)
 
 RCT_EXTERN_METHOD(blurWindow : (nonnull NSNumber *)viewTag)
 
-RCT_EXTERN_METHOD(requestFocus : (nonnull NSNumber *)viewTag generation : (NSInteger)generation requestId : (NSInteger)requestId targetTag : (NSInteger)targetTag)
+RCT_EXTERN_METHOD(requestFocus : (nonnull NSNumber *)viewTag generation : (NSInteger)generation requestId : (NSInteger)requestId targetTag : (NSInteger)targetTag strategy : (NSString *)strategy)
 
 RCT_EXTERN_METHOD(close : (nonnull NSNumber *)viewTag generation : (NSInteger)generation requestId : (NSInteger)requestId)
 

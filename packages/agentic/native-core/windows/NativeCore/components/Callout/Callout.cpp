@@ -207,7 +207,7 @@ struct CalloutComponentView
           if (auto strongThis = wkThis.get()) {
             if (!strongThis->m_shown || strongThis->PreventsDismiss("preventDismissOnKeyDown")) return;
             args.Handled(true);
-            strongThis->DismissPresentation("native-light-dismiss");
+            strongThis->DismissPresentation("escape");
           }
         });
   }
@@ -222,13 +222,14 @@ struct CalloutComponentView
     // nyi
   }
 
-  void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag) noexcept override {
+  void HandleRequestFocusCommand(
+      int32_t generation, int32_t requestId, int32_t targetTag, std::string strategy) noexcept override {
     auto status = OperationStatus(generation);
     auto portal = m_portal.get();
     if (status.empty() && !portal) status = "not-mounted";
     if (status.empty()) {
       // Focusing a component also moves keyboard focus into the popup island.
-      status = ::FRNNativeCore::FocusWithin(portal.ContentRoot(), targetTag, "target");
+      status = ::FRNNativeCore::FocusWithin(portal.ContentRoot(), targetTag, strategy);
     }
     EmitResult(generation, requestId, status);
   }
@@ -452,7 +453,7 @@ private:
       dispatcher.Post([wkThis, presentation]() {
         if (auto strongThis = wkThis.get(); strongThis && strongThis->m_presentation == presentation) {
           if (!strongThis->PreventsDismiss("preventDismissOnClickOutside")) {
-            strongThis->DismissPresentation("native-light-dismiss");
+            strongThis->DismissPresentation("outside-pointer");
           }
         }
       });

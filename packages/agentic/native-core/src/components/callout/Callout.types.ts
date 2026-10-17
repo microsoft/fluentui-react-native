@@ -16,14 +16,21 @@ export interface CalloutHandle {
   getPresentation(): CalloutPresentation | null;
   requestFocus(
     presentation: CalloutPresentation,
-    target: NativeViewTarget,
+    target: NativeViewTarget | 'first' | 'last',
     options?: NativeOperationOptions,
   ): Promise<NativeOperationOutcome>;
   close(presentation: CalloutPresentation, options?: NativeOperationOptions): Promise<NativeOperationOutcome>;
   reposition(presentation: CalloutPresentation, options?: NativeOperationOptions): Promise<NativeOperationOutcome>;
 }
 
-export type CalloutDismissReason = 'native-light-dismiss' | 'programmatic' | 'anchor-lost' | 'host-detached';
+export type CalloutDismissReason =
+  | 'native-light-dismiss'
+  | 'escape'
+  | 'outside-pointer'
+  | 'application-deactivated'
+  | 'programmatic'
+  | 'anchor-lost'
+  | 'host-detached';
 export interface CalloutReadyEvent {
   presentation: CalloutPresentation;
 }

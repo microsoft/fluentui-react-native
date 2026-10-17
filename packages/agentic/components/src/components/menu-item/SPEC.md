@@ -1,7 +1,7 @@
 ---
 name: menu-item
 platform: react-native (Windows, macOS)
-status: implemented
+status: contract-reviewed
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -21,7 +21,7 @@ and menu dismissal.
 ## Public contract
 
 `menuStyle` defaults to `list-item`; `secondaryContentPosition` defaults to
-`right`; `disabled`, `loading`, `hasCheckmark`, `hasChevron`,
+`right`; `disabled`, `disabledFocusable`, `loading`, `hasCheckmark`, `hasChevron`,
 `hasMultiselect`, and `selected` default to `false`. Missing `content`
 renders `"Menu item"` and omitted `secondaryContent` renders `"Secondary"`;
 `null` or an empty secondary string hides it. `loading` applies only to a
@@ -55,6 +55,15 @@ Multiselect takes visual precedence over selected fill and semibold text.
 - **MNI-005:** Apply token-derived interaction, accessibility, and optional
   custom focus structure without overriding caller handlers; the root's focus
   feedback follows the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+- **MNI-006:** Opting into `disabledFocusable` preserves a disabled list row's
+  focus target and focus visual without enabling pointer, keyboard, long-press,
+  or accessibility activation. Section headers stay nonfocusable. Standalone
+  rows retain the existing disabled behavior by default.
+
+The MNI-006 pre-code amendment was reviewed on October 16, 2026 against the
+unchanged pinned source and owner decision D06. It is a native adaptation for
+disabled-command discoverability, not a new selection owner. Renderer and
+screen-reader qualification remains open in the menu/popover plan.
 
 ## Focus visuals
 
@@ -62,7 +71,8 @@ The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
 Windows and macOS request the system ring by default, without a custom subtree.
 Win32 and other platforms use the custom ring, visible only while focused and
 the scene's current input modality is keyboard. Programmatic focus follows the
-last root modality. Disabled and noninteractive targets never show custom feedback.
+last root modality. Disabled targets show feedback only when `disabledFocusable`
+is opted into; noninteractive targets never show custom feedback.
 
 The composition hook supports an explicit `useSystemFocusRing` override.
 `alwaysVisible` selects the custom path and bypasses modality while focused;
@@ -83,6 +93,11 @@ The native Pressable drives pointer hover, press, focus, and keyboard
 activation for interactive rows. Section headers gain no focus feedback. The component does
 not navigate between menu items, open a submenu, restore focus, or dismiss a menu.
 
+On macOS, a disabled-focusable row omits Pressable's native `disabled` prop
+because that prop removes focusability. It still exposes
+`accessibilityState.disabled: true`, and Framework Base refuses activation.
+Windows and Win32 retain native `disabled` independently of `focusable`.
+
 ## Divergences from Flex
 
 - `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
@@ -93,13 +108,17 @@ not navigate between menu items, open a submenu, restore focus, or dismiss a men
 - `menu-item-multiselect-precedence` (**accepted**): Supplying both selection
   indicators logs a development warning and resolves to the multiselect role
   and visual path instead of rejecting the prop combination.
+- `menu-item-disabled-focusable` (**accepted**): An opt-in disabled-command
+  focus stop retains disabled semantics and refuses activation. The owning Menu
+  will choose the per-platform default; standalone MenuItem defaults to false.
 
 ## Conformance
 
-| Requirement | Evidence                                                                              |
-| ----------- | ------------------------------------------------------------------------------------- |
-| MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`                     |
-| MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                          |
-| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`                         |
-| MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                          |
-| MNI-005     | `useMenuItem.ts`, `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx` |
+| Requirement | Evidence                                                                                |
+| ----------- | --------------------------------------------------------------------------------------- |
+| MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`                       |
+| MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                            |
+| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`                           |
+| MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                            |
+| MNI-005     | `useMenuItem.ts`, `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`   |
+| MNI-006     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.test.tsx`, `menu-item.types.test.ts` |

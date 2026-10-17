@@ -4,8 +4,12 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
+import { FocusZone } from '@fluentui-react-native/native-core/legacy';
 
 import { MenuItem } from './menu-item';
+import { Input } from '../input/input';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -47,7 +51,7 @@ const meta: Meta<typeof MenuItem> = {
 
 export default meta;
 
-type Story = StoryObj<typeof MenuItem>;
+type Story = WdioStory<StoryObj<typeof MenuItem>>;
 
 export const Default: Story = {};
 
@@ -139,6 +143,59 @@ export const Loading: Story = {
     content: 'Loading group',
     loading: true,
     menuStyle: 'section-header',
+  },
+};
+
+function DisabledFocusableScene() {
+  const [count, setCount] = useState(0);
+  return (
+    <View style={styles.story}>
+      <Input accessibilityLabel="Menu focus entry" testID="disabled-menu-entry" />
+      <FocusZone focusZoneDirection="vertical" isCircularNavigation>
+        <MenuItem content="Before disabled command" secondaryContent={null} testID="disabled-menu-before" />
+        <MenuItem
+          content="Unavailable command"
+          secondaryContent={null}
+          disabled
+          disabledFocusable
+          testID="disabled-menu-command"
+          onPress={() => setCount((value) => value + 1)}
+        />
+        <MenuItem content="After disabled command" secondaryContent={null} testID="disabled-menu-after" />
+      </FocusZone>
+      <StoryStatus testID="disabled-menu-count">{String(count)}</StoryStatus>
+    </View>
+  );
+}
+
+export const DisabledFocusable: Story = {
+  render: () => <DisabledFocusableScene />,
+  tags: ['desktop-focus'],
+  parameters: {
+    docs: { description: { story: 'An opted-in disabled row remains a focus stop, announces disabled, and cannot activate.' } },
+  },
+  wdio: {
+    'exposes disabled native menu-item semantics': async ({ browser, expect }) => {
+      const row = await browser.$('~disabled-menu-command');
+      expect(await row.getTagName()).toBe('menuitem');
+      await expect(row).toBeDisabled();
+      await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
+    },
+    'navigates onto a disabled row without activating it': async (context) => {
+      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, expect } = context;
+      await focusByTab(browser, 'disabled-menu-entry', 'disabled-menu-before');
+      await browser.keys('\uE015');
+      await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
+      await expect(await browser.$('~disabled-menu-command')).toBeDisabled();
+      await browser.keys('\uE007');
+      await browser.keys('\uE00D');
+      await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
+      await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
+      await browser.keys('\uE015');
+      await expectNativeState(browser, 'disabled-menu-after', 'focused', true);
+    },
   },
 };
 
