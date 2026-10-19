@@ -13,6 +13,7 @@
     "src/components/checkbox/checkbox.stories.tsx",
     "src/components/input/input.stories.tsx",
     "src/components/menu-item/menu-item.stories.tsx",
+    "src/components/popover/popover.stories.tsx",
     "src/components/skeleton/skeleton.stories.tsx",
     "src/components/spinner/spinner.stories.tsx",
     "src/components/switch/switch.stories.tsx",

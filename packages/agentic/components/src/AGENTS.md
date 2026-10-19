@@ -14,8 +14,11 @@ the change crosses component boundaries.
 
 ## Source boundaries
 
-- Production source may depend only on React / React Native native components, `@fluentui-react-native/design`, and
-  `@fluentui-react-native/framework-base`.
+- Production source may depend only on React / React Native native components, `@fluentui-react-native/design`,
+  `@fluentui-react-native/framework-base`, and native-core's public modern platform entrypoints.
+- Import native-core only from platform-resolved files (for example `popoverNative.macos.ts` importing
+  `@fluentui-react-native/native-core/macos`). Never import its root, `/legacy`, or internals, and give hosts without a
+  modern route a default file that fails descriptively on use.
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.

@@ -79,3 +79,44 @@ focus. A Menu still restores its trigger explicitly after an item closes it.
 Request-only veto, complete light-dismiss classification, policy-driven
 restoration, popup-family transactions, modal containment and text fragments
 are deferred; no success-shaped substitutes are provided.
+
+## Popover surface amendments
+
+Pre-code contract review, October 19, 2026, for the Popover consumer contract
+(`packages/agentic/components/src/components/popover/SPEC.md`). These apply only
+to the experimental modern protocol; legacy presentations keep their current
+backdrop, window, and dismissal behavior.
+
+- **Unstyled popup window:** a modern presentation draws no native backdrop
+  material. Its popup window is transparent, so the content View defines the
+  visible fill, stroke, and rounded silhouette. macOS previously drew the
+  `.menu` vibrancy material behind modern content; that material remains only
+  for legacy presentations.
+- **Native elevation:** a modern popup window has the platform window shadow,
+  derived from the content's opaque silhouette and refreshed when the content
+  changes size or remounts. Transparent content casts no shadow. A JavaScript
+  View shadow is not used because the window is sized to its content.
+- **Anchor input:** pointer input that lands on a live view anchor does not
+  light-dismiss the presentation. The anchor's owner decides what that input
+  means; a trigger toggles its popup instead of having it closed and
+  immediately reopened. Rect and point anchors keep ordinary outside-input
+  dismissal.
+
+macOS implementation qualification added two guarantees that Popover relies on:
+
+- **Popup Tab order:** Tab and Shift+Tab move through focusable content within
+  the modern popup and wrap there; the owner's Tab order is not continued
+  (#4377). macOS derives the popup's key-view loop when it presents and
+  recalculates it as content changes.
+- **Command ordering:** a `requestFocus`, `close`, or `reposition` command
+  observes every content update React committed before the command was
+  issued, so a consumer can make content focusable and target it from the next
+  effect. macOS Paper queues these commands behind pending view updates, as
+  Fabric already does; the legacy `focusWindow` and `blurWindow` commands are
+  unchanged.
+
+macOS implements these in the shared Swift view for Paper and Fabric, with
+command ordering in the Paper view manager.
+Windows still needs qualification of its popup island silhouette and shadow,
+and its owner-island pointer handling does not yet exclude the anchor; a
+consumer must not reopen a popup that was open when a trigger press began.

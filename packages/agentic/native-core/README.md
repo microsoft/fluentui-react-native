@@ -309,6 +309,18 @@ runtime qualification. See [the implementation handoff](../../../menu-popover-pl
 and the [Win32 host follow-up](https://github.com/microsoft/fluentui-react-native/issues/4384)
 for remaining gates.
 
+The October 19, 2026 Popover amendments (see the Callout `SPEC.md`) change only
+modern presentations on macOS. The popup window is transparent with no `.menu`
+vibrancy backdrop, so the content View draws the visible surface. The window
+shadow follows that content and is refreshed after content changes. Pointer input
+on a live view anchor no longer light-dismisses, and the popup derives its own
+Tab key-view loop. Paper also orders `requestFocus`, `close`, and `reposition`
+after previously committed view updates. Legacy presentations and the
+`focusWindow`/`blurWindow` commands are unchanged. macOS Fabric and Paper pass
+14 modern Callout cases, 2 legacy Callout cases, and 19 shared-focus cases. The
+window shadow was not captured visually because driver capture excludes shadows.
+Windows has none of these amendments yet.
+
 After building macOS Storybook, run the reproducible Apple boundary probe:
 
 ```sh

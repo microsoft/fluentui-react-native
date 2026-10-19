@@ -1115,3 +1115,60 @@ Tab continuation, submenu intent, and remaining semantic/geometry cases under
 Only after the normal source-backed pre-code reviews should the four higher-order
 component pipelines proceed. Flat composition and this native prerequisite
 qualification do not authorize a macOS-only release or close any of those issues.
+
+## 14. Popover implementation, October 19, 2026
+
+This increment implements Popover from its reviewed contract
+(`packages/agentic/components/src/components/popover/SPEC.md`, approved before code on October 19) and makes the
+native-core modern Callout changes it needs. Popover is not exported from the package root (D01); Office Win32
+throws on use and its stories are excluded from Win32 Storybook until #4384. Menu, MenuButton, and Dropdown are
+not started.
+
+### Implemented and observed
+
+- **Popover pipeline:** a Button trigger slot, a token-styled surface View in the modern Callout, controlled and
+  uncontrolled requested presence with a native-presence latch, `trigger`/`dismiss` reasons, entry focus on the
+  first eligible content or a fallback surface focus stop, and focus return to the trigger for Escape and
+  caller-driven close. Native bindings resolve per platform (`popoverNative*.ts`); the components source boundary
+  now allows native-core's public platform entrypoints from platform-resolved files only (D02).
+- **Modern Callout surface (macOS):** the popup window is transparent with no `.menu` vibrancy backdrop, and the
+  content View draws the surface. The window shadow follows the content and is invalidated after content
+  changes. Pointer input on a live view anchor no longer light-dismisses, so a trigger press closes without
+  reopening. The popup derives its key-view loop when it presents, so Tab and Shift+Tab move within the popup
+  and wrap there. The macOS vibrancy wrapper was not needed and was not added. Legacy presentations are
+  unchanged.
+- **Paper command ordering:** Paper ran modern `requestFocus`, `close`, and `reposition` on the main queue
+  ahead of pending view updates. The fallback surface therefore became focusable after its focus request and
+  was refused. These commands now run as UI-manager blocks after earlier view updates, matching Fabric. Legacy
+  `focusWindow`/`blurWindow` dispatch is unchanged. A new `DeferredContainerFocus` Callout case covers the
+  ordering.
+- **Contracts:** Callout `SPEC.md` records the reviewed surface amendments and the two qualification-added
+  guarantees (popup Tab order and command ordering). Popover requirements POP-001 to POP-008 now name realized
+  evidence; POP-009 stays planned until Windows Fabric and Win32 qualify, and the lifecycle stays
+  `contract-reviewed`.
+
+### Executed evidence
+
+The environment matches section 13. All app commands use
+`yarn workspace @fluentui-react-native/agentic-components-storybook` with `STORYBOOK_SMOKE_TAG=story`.
+
+| Check                                                                                                              | Result                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fabric `storybook prep --macos`, `storybook build --macos`, then `smoke --mode stories-and-tests`                  | **Passed, zero skips:** 189 stories rendered; `components-popover--*` 5/5, `native-modern-callout--*` 14/14, `native-callout--*` (legacy) 2/2, `components-*--*focus*` 19/19.                           |
+| Paper `prep --macos --paper`, `build --macos --paper`, then the same smoke selectors with `--paper`                | **Passed, zero skips:** Popover 5/5 and modern Callout 14/14 on the final binary. Legacy Callout 2/2 and shared focus 19/19 also passed after the ordering change, before a type-only Swift annotation. |
+| First Paper run before the ordering fix                                                                            | **Failed as diagnosed:** StaticContent reported focus `None` because the fallback focus request ran before `focusable` applied.                                                                         |
+| `yarn workspace @fluentui-react-native/native-core test:apple-integration`                                         | **Passed 3/3** after marking the Paper command closure `@Sendable` (the first run reported a Swift 6 sending diagnostic).                                                                               |
+| Driver capture of the open StaticContent popup (Fabric)                                                            | **Observed:** rounded corners show the owner background, with a white fill and stroke and no vibrancy. The window shadow is **not visually verified** because the driver capture excludes shadows.      |
+| `components` and `native-core` `test`, `lint`, `check:spec-contracts`, `format`; app `lint`                        | **Passed:** components 503 tests and 21 contracts; native-core 18 ownership and 37 Jest tests.                                                                                                          |
+| `yarn build`, `storybook bundle --macos`, `yarn check-agent-instructions`, `yarn change:check`, `git diff --check` | **Passed.**                                                                                                                                                                                             |
+| `yarn clean-lage-cache` then `yarn lage buildci`                                                                   | **Passed: 171 tasks, zero skipped/pending/aborted/failed.**                                                                                                                                             |
+| Windows Fabric, Office Win32, VoiceOver/Narrator                                                                   | **Not run:** no Windows host on this Mac; no screen-reader qualification.                                                                                                                               |
+
+### Remaining Popover work
+
+Windows Fabric needs a transparent popup island, a content-following shadow, anchor-input exclusion, and
+in-popup Tab order before it can qualify POP-002 to POP-007. The JavaScript press-in snapshot already prevents a
+trigger close-then-reopen there. The Win32 route (#4384), VoiceOver and Narrator qualification, the deferred
+divergences (arrow, motion, owner-relative Tab continuation under #4377, edge margin under #4375), and the root
+export remain gates. A controlled caller that vetoes a trigger close keeps a stale close cause until the next
+open; this is recorded but not observed natively.

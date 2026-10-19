@@ -135,6 +135,7 @@
       "list-item",
       "listbox-item",
       "menu-item",
+      "popover",
       "progress-bar",
       "radio",
       "skeleton",
@@ -145,7 +146,7 @@
       "tag",
       "text"
     ],
-    "adaptedDrafts": ["input", "menu-item"],
+    "adaptedDrafts": ["input", "menu-item", "popover"],
     "implemented": [
       "accordion",
       "avatar",
@@ -219,7 +220,6 @@
       "message-bar",
       "nav",
       "nav-item",
-      "popover",
       "radio-group",
       "scrollbar",
       "search-box",
@@ -627,6 +627,15 @@
         "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "popover",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": null,
+      "originDrift": null,
+      "candidateStatus": "unchecked"
     },
     {
       "component": "progress-bar",

@@ -7,7 +7,7 @@ import type { PointerFocusMode } from '@fluentui-react-native/framework-base';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Callout } from './Callout';
-import type { CalloutAnchor, CalloutHandle, CalloutDismissedEvent, CalloutReadyEvent } from './Callout.types';
+import type { CalloutAnchor, CalloutHandle, CalloutDismissedEvent, CalloutPresentation, CalloutReadyEvent } from './Callout.types';
 import { FocusZone } from '../focus-zone/FocusZone';
 import type { FocusZoneCommands } from '../focus-zone/FocusZone.types';
 import { useNativeViewTarget } from '../nativeTarget';
@@ -152,7 +152,8 @@ function EntryFocusExample({
 }: {
   strategy: 'first' | 'last';
   empty?: boolean;
-  container?: boolean;
+  /** `deferred` makes the container focusable only after readiness and targets it from the next effect. */
+  container?: boolean | 'deferred';
 }) {
   const anchor = useNativeViewTarget();
   const content = useNativeViewTarget();
@@ -160,12 +161,24 @@ function EntryFocusExample({
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = React.useState('Closed');
   const [focused, setFocused] = React.useState('None');
+  const [armed, setArmed] = React.useState<CalloutPresentation | null>(null);
   const enter = async ({ presentation }: CalloutReadyEvent) => {
     const api = handle.current;
     if (!api) throw new Error('Missing mounted Callout handle at readiness.');
+    if (container === 'deferred') {
+      setArmed(presentation);
+      return;
+    }
     const outcome = await api.requestFocus(presentation, container ? content.target : strategy);
     if (api.getPresentation() === presentation) setStatus(outcome.status);
   };
+  React.useEffect(() => {
+    const api = handle.current;
+    if (!armed || !api || api.getPresentation() !== armed) return;
+    void api.requestFocus(armed, content.target).then((outcome) => {
+      if (api.getPresentation() === armed) setStatus(outcome.status);
+    });
+  }, [armed, content.target]);
   return (
     <View style={styles.story}>
       <View accessible accessibilityRole="text" accessibilityLabel={status} testID="entry-callout-status">
@@ -189,7 +202,7 @@ function EntryFocusExample({
         anchor={{ kind: 'view', target: anchor.target }}
         content={{
           ref: content.ref,
-          focusable: container,
+          focusable: container === true || armed !== null,
           onFocus: container ? () => setFocused('Container') : undefined,
           style: styles.content,
           testID: 'entry-callout-content',
@@ -197,7 +210,10 @@ function EntryFocusExample({
         onReady={(event: CalloutReadyEvent) => {
           void enter(event);
         }}
-        onDismissed={() => setOpen(false)}
+        onDismissed={() => {
+          setOpen(false);
+          setArmed(null);
+        }}
       >
         <Text>Only eligible descendants can receive entry focus.</Text>
         {!empty && (
@@ -334,6 +350,24 @@ export const Default: Story = {
       await expect(status).toHaveText('Ready');
       await expect(dismissal).toHaveText('Open');
     },
+    'keeps the presentation open for pointer input on its view anchor': async ({ browser, expect, platform, skip }) => {
+      if (platform !== 'macos') {
+        skip('Windows owner-island pointer handling does not yet exclude the anchor (#4375).');
+        return;
+      }
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Anchor input requires physical owner input.');
+        return;
+      }
+      await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
+      const dismissal = await browser.$('~modern-callout-dismissal');
+      await expect(dismissal).toHaveText('Open');
+      await (await browser.$('~modern-callout-anchor')).click();
+      await browser.pause(500);
+      await expect(dismissal).toHaveText('Open');
+      await (await browser.$('~modern-callout-status')).click();
+      await expect(dismissal).toHaveText('Dismissed: outside-pointer');
+    },
     'places content below the view anchor with the requested gap': async (context) => {
       const { expectCalloutPlacement } = await import('./placement.wdio.ts');
       await expectCalloutPlacement(context);
@@ -434,6 +468,21 @@ export const ContainerFocus: Story = {
   tags: ['desktop-e2e'],
   wdio: {
     'confirms an explicitly focusable empty content container': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Container focus requires physical owner activation.');
+        return;
+      }
+      await (await browser.$('~entry-callout-open')).click();
+      await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
+      await expect(await browser.$('~entry-callout-focused')).toHaveText('Container');
+    },
+  },
+};
+export const DeferredContainerFocus: Story = {
+  render: () => <EntryFocusExample strategy="first" empty container="deferred" />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'orders a focus request after the content update committed before it': async ({ browser, expect, skip }) => {
       if (!browser.capabilities['furn:features']?.physicalClick) {
         skip('Container focus requires physical owner activation.');
         return;
