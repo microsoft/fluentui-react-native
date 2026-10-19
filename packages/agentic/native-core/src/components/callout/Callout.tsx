@@ -61,6 +61,8 @@ const reasons: readonly CalloutDismissReason[] = [
   'escape',
   'outside-pointer',
   'application-deactivated',
+  'tab-forward',
+  'tab-backward',
   'programmatic',
   'anchor-lost',
   'host-detached',
@@ -157,7 +159,7 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
 
   return directComponent<CalloutProps>((renderProps) => {
     if (!presented) return null;
-    const { placement, onReady, onDismissed, children } = mergeProps(props, renderProps);
+    const { placement, tabNavigation, onReady, onDismissed, children } = mergeProps(props, renderProps);
     const isCurrent = (eventGeneration: number) => eventGeneration === generation && eventGeneration === committedGeneration.current;
 
     return (
@@ -167,6 +169,7 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
         target={tag}
         commandGeneration={generation}
         anchorMode={anchor.kind}
+        tabNavigation={tabNavigation}
         anchorRect={anchorRect}
         directionalHint={hint(placement)}
         gapSpace={gapSpace(placement)}

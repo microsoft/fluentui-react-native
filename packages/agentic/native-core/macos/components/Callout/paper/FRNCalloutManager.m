@@ -42,6 +42,8 @@ RCT_EXPORT_VIEW_PROPERTY(commandGeneration, NSInteger)
 
 RCT_EXPORT_VIEW_PROPERTY(anchorMode, NSString)
 
+RCT_EXPORT_VIEW_PROPERTY(tabNavigation, NSString)
+
 RCT_EXPORT_VIEW_PROPERTY(gapSpace, CGFloat)
 
 RCT_EXPORT_VIEW_PROPERTY(onReady, RCTDirectEventBlock)

@@ -25,7 +25,7 @@ export default makeDesktopStorybookConfig({
           win32: {
             storyPatterns: [
               'src/primitives/**/*.stories.?(ts|tsx)',
-              'src/components/!(accordion|list-item|popover)/**/*.stories.?(ts|tsx)',
+              'src/components/!(accordion|list-item|menu|menu-button|popover)/**/*.stories.?(ts|tsx)',
             ],
           },
         },

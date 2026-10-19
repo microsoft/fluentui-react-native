@@ -117,6 +117,32 @@ macOS implementation qualification added two guarantees that Popover relies on:
 
 macOS implements these in the shared Swift view for Paper and Fabric, with
 command ordering in the Paper view manager.
+
+## Menu family amendments
+
+Pre-code contract review, October 19, 2026, for the Menu and MenuButton
+consumer contracts (`packages/agentic/components/src/components/menu/SPEC.md`
+and `menu-button/SPEC.md`). These apply only to the experimental modern
+protocol.
+
+- **Tab exit:** a modern presentation accepts
+  `tabNavigation: 'cycle' | 'dismiss' | 'continue'`, defaulting to `cycle`,
+  which keeps the popup Tab order above. With `dismiss` or `continue`, Tab and
+  Shift+Tab in the popup, or in a modern popup it owns, dismiss the outermost
+  such presentation in that ownership chain with the reason `tab-forward` or
+  `tab-backward`, before any view in the popup handles the key. `dismiss`
+  then leaves the owner window's retained focus in place. `continue` instead
+  focuses the next valid key view after the presentation's view anchor for
+  Tab, and the anchor itself for Shift+Tab, falling back to retained focus
+  when that view is not eligible.
+- **Nested presentations:** a presentation whose view anchor lies in another
+  modern popup is owned by that popup's window. Input in it does not dismiss
+  its owners (unchanged), and when an owner closes, its owned popups leave the
+  screen with it. Each nested presentation still reports its own dismissal.
+
+macOS implements both in the shared Swift view for Paper and Fabric. Windows
+accepts `tabNavigation` but keeps `cycle` behavior and never reports the Tab
+reasons until its implementation is qualified.
 Windows still needs qualification of its popup island silhouette and shadow,
 and its owner-island pointer handling does not yet exclude the anchor; a
 consumer must not reopen a popup that was open when a trigger press began.

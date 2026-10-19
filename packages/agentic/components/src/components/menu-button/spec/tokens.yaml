@@ -1,0 +1,36 @@
+schemaVersion: 1
+component: menu-button
+implementation: menu-button.styles.ts
+
+statePrecedence: [disabled, expanded, pressed, hovered]
+
+bindings:
+  root:
+    component: Button
+    notes: >-
+      Button's reviewed appearance, size, background, foreground, stroke, and typography bindings apply. Every
+      label and icon combination uses Button's rounded content-layout padding, gap, and radius; the icon-only
+      circular branch is not used. While the menu is presented, the pressed state's background and foreground apply.
+
+  chevron:
+    color: root foreground
+    size:
+      small: size160
+      medium: size200
+      large: size200
+    open-behavior: static
+
+  menu:
+    component: Menu
+    placement:
+      side: bottom
+      align: start
+    notes: Menu's reviewed surface and row bindings apply unchanged.
+
+tokenGaps:
+  - binding: chevron.icon
+    detail: >-
+      The Fluent ChevronDown asset is unavailable; the package's shared down-chevron glyph is used
+      (menu-button-chevron-glyph).
+  - binding: motion
+    detail: Flex motion is pending; presentation and trigger color changes are instant (menu-button-motion).

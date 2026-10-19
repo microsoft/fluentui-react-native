@@ -128,6 +128,23 @@ describe('modern native facades', () => {
     await component.unmount();
   });
 
+  it('forwards the Tab exit mode to the native presentation', async () => {
+    function Fixture({ tabNavigation }: { tabNavigation?: 'dismiss' | 'continue' }) {
+      const anchor = useNativeViewTarget();
+      return (
+        <>
+          <View ref={anchor.ref} />
+          <Callout open tabNavigation={tabNavigation} content={{ testID: 'content' }} anchor={{ kind: 'view', target: anchor.target }} />
+        </>
+      );
+    }
+    const component = await render(<Fixture />);
+    expect(calloutRoot(component).props.tabNavigation).toBeUndefined();
+    await component.rerender(<Fixture tabNavigation="continue" />);
+    expect(calloutRoot(component).props.tabNavigation).toBe('continue');
+    await component.unmount();
+  });
+
   it('settles a close result before invalidating the presentation and forwards local point geometry', async () => {
     const ref = React.createRef<CalloutHandle>();
     const dispatch = jest.spyOn(CalloutCommands, 'close').mockImplementation(() => undefined);
@@ -201,45 +218,49 @@ describe('modern native facades', () => {
     await component.unmount();
   });
 
-  it.each<CalloutDismissReason>(['escape', 'outside-pointer', 'application-deactivated', 'native-light-dismiss'])(
-    'forwards %s once and ignores duplicate or late readiness for the closed presentation',
-    async (reason) => {
-      const ref = React.createRef<CalloutHandle>();
-      const dismissed = jest.fn();
-      const ready = jest.fn();
-      function Fixture() {
-        const anchor = useNativeViewTarget();
-        return (
-          <>
-            <View ref={anchor.ref} />
-            <Callout
-              ref={ref}
-              open
-              anchor={{ kind: 'view', target: anchor.target }}
-              content={{ testID: 'content' }}
-              onReady={ready}
-              onDismissed={dismissed}
-            />
-          </>
-        );
-      }
-      const component = await render(<Fixture />);
-      const root = calloutRoot(component);
-      const onClosed = root.props.onClosed;
-      const onReady = root.props.onReady;
-      const generation = root.props.commandGeneration;
-      await act(async () => onClosed({ nativeEvent: { generation, reason } }));
-      await act(async () => {
-        onClosed({ nativeEvent: { generation, reason } });
-        onReady({ nativeEvent: { generation } });
-      });
-      expect(dismissed).toHaveBeenCalledTimes(1);
-      expect(dismissed).toHaveBeenCalledWith(expect.objectContaining({ reason }));
-      expect(ready).not.toHaveBeenCalled();
-      expect(ref.current.getPresentation()).toBeNull();
-      await component.unmount();
-    },
-  );
+  it.each<CalloutDismissReason>([
+    'escape',
+    'outside-pointer',
+    'application-deactivated',
+    'tab-forward',
+    'tab-backward',
+    'native-light-dismiss',
+  ])('forwards %s once and ignores duplicate or late readiness for the closed presentation', async (reason) => {
+    const ref = React.createRef<CalloutHandle>();
+    const dismissed = jest.fn();
+    const ready = jest.fn();
+    function Fixture() {
+      const anchor = useNativeViewTarget();
+      return (
+        <>
+          <View ref={anchor.ref} />
+          <Callout
+            ref={ref}
+            open
+            anchor={{ kind: 'view', target: anchor.target }}
+            content={{ testID: 'content' }}
+            onReady={ready}
+            onDismissed={dismissed}
+          />
+        </>
+      );
+    }
+    const component = await render(<Fixture />);
+    const root = calloutRoot(component);
+    const onClosed = root.props.onClosed;
+    const onReady = root.props.onReady;
+    const generation = root.props.commandGeneration;
+    await act(async () => onClosed({ nativeEvent: { generation, reason } }));
+    await act(async () => {
+      onClosed({ nativeEvent: { generation, reason } });
+      onReady({ nativeEvent: { generation } });
+    });
+    expect(dismissed).toHaveBeenCalledTimes(1);
+    expect(dismissed).toHaveBeenCalledWith(expect.objectContaining({ reason }));
+    expect(ready).not.toHaveBeenCalled();
+    expect(ref.current.getPresentation()).toBeNull();
+    await component.unmount();
+  });
 
   it('drives first-phase behavior from slot props and merges render-time props and refs', async () => {
     const commands = React.createRef<FocusZoneCommands>();

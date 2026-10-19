@@ -134,6 +134,8 @@
       "input",
       "list-item",
       "listbox-item",
+      "menu",
+      "menu-button",
       "menu-item",
       "popover",
       "progress-bar",
@@ -146,7 +148,7 @@
       "tag",
       "text"
     ],
-    "adaptedDrafts": ["input", "menu-item", "popover"],
+    "adaptedDrafts": ["input", "menu", "menu-button", "menu-item", "popover"],
     "implemented": [
       "accordion",
       "avatar",
@@ -215,8 +217,6 @@
       "label",
       "link",
       "list",
-      "menu",
-      "menu-button",
       "message-bar",
       "nav",
       "nav-item",
@@ -610,6 +610,24 @@
         "modified": ["web/accessibility.md", "web/interaction.md"]
       },
       "candidateStatus": "review-required"
+    },
+    {
+      "component": "menu",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": null,
+      "originDrift": null,
+      "candidateStatus": "unchecked"
+    },
+    {
+      "component": "menu-button",
+      "lifecycle": "contract-reviewed",
+      "conformance": "reviewed",
+      "releaseDifferences": [],
+      "marketplaceDrift": null,
+      "originDrift": null,
+      "candidateStatus": "unchecked"
     },
     {
       "component": "menu-item",

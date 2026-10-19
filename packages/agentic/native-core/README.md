@@ -321,6 +321,13 @@ after previously committed view updates. Legacy presentations and the
 window shadow was not captured visually because driver capture excludes shadows.
 Windows has none of these amendments yet.
 
+The October 19 Menu family amendments add the modern `tabNavigation` prop. `cycle`, the default, keeps the popup
+Tab order. `dismiss` and `continue` close the outermost Tab-exiting presentation in a popup ownership chain with
+`tab-forward` or `tab-backward`, before any view handles the key. `continue` then focuses the key view after the view
+anchor, or the anchor itself for Shift+Tab. Nested presentations anchored inside another modern popup are owned by
+its window and close with it. macOS Fabric and Paper pass 16 modern Callout cases, including both Tab modes; Windows
+accepts the prop but keeps `cycle` until its implementation qualifies.
+
 After building macOS Storybook, run the reproducible Apple boundary probe:
 
 ```sh

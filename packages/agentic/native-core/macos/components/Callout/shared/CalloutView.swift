@@ -12,6 +12,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
     }
     @objc public var anchorMode = "legacy" { didSet { updatePresentation() } }
+    @objc public var tabNavigation = "cycle"
     @objc public var placementHint = "" { didSet { updatePresentation() } }
     @objc public var gapSpace: CGFloat = 0 { didSet { updatePresentation() } }
     @objc public var anchorRect: NSRect = .null { didSet { updatePresentation() } }
@@ -138,6 +139,36 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         if let reason = reason { dismissReason = reason }
         for child in window.childWindows ?? [] {
             if let popup = child as? CalloutWindow { popup.dismissCallout() }
+        }
+    }
+
+    func calloutHandlesTab(window: CalloutWindow, backward: Bool) -> Bool {
+        guard exitsByTab else { return false }
+        // The outermost presentation in this popup ownership chain that exits by Tab owns the exit and its focus.
+        var exit: CalloutView = self
+        var owner = window.parent as? CalloutWindow
+        while let popup = owner, let view = popup.lifeCycleDelegate as? CalloutView, view.exitsByTab {
+            exit = view
+            owner = popup.parent as? CalloutWindow
+        }
+        exit.exitByTab(backward: backward)
+        return true
+    }
+
+    private var exitsByTab: Bool { shown && commandGeneration > 0 && tabNavigation != "cycle" }
+
+    private func exitByTab(backward: Bool) {
+        let continues = tabNavigation == "continue"
+        let anchor = anchorMode == "view" ? anchorView : nil
+        dismissReason = backward ? "tab-backward" : "tab-forward"
+        dismissCallout()
+        // Continuation treats the popup as inserted after its anchor in the owner's key-view order.
+        guard continues, let anchor = anchor, let owner = anchor.window, owner.isVisible, NSApp.isActive else { return }
+        owner.makeKey()
+        if backward {
+            if anchor.acceptsFirstResponder && !anchor.isHiddenOrHasHiddenAncestor { owner.makeFirstResponder(anchor) }
+        } else {
+            owner.selectKeyView(following: anchor)
         }
     }
     func calloutDidDismiss(window: CalloutWindow) {

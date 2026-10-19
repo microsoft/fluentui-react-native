@@ -42,6 +42,7 @@ struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNat
        auto cloneFromProps = cloneFrom.as<CalloutProps>();
        commandGeneration = cloneFromProps->commandGeneration;
        anchorMode = cloneFromProps->anchorMode;
+       tabNavigation = cloneFromProps->tabNavigation;
        accessibilityLabel = cloneFromProps->accessibilityLabel;
        accessibilityOnShowAnnouncement = cloneFromProps->accessibilityOnShowAnnouncement;
        anchorRect = cloneFromProps->anchorRect;
@@ -77,6 +78,9 @@ struct CalloutProps : winrt::implements<CalloutProps, winrt::Microsoft::ReactNat
 
   REACT_FIELD(anchorMode)
   std::optional<std::string> anchorMode;
+
+  REACT_FIELD(tabNavigation)
+  std::optional<std::string> tabNavigation;
 
   REACT_FIELD(accessibilityLabel)
   std::optional<std::string> accessibilityLabel;

@@ -1172,3 +1172,59 @@ trigger close-then-reopen there. The Win32 route (#4384), VoiceOver and Narrator
 divergences (arrow, motion, owner-relative Tab continuation under #4377, edge margin under #4375), and the root
 export remain gates. A controlled caller that vetoes a trigger close keeps a stale close cause until the next
 open; this is recorded but not observed natively.
+
+## 15. Menu and MenuButton implementation, October 19, 2026
+
+This increment implements Menu (#4232) and MenuButton (#4231) on macOS from contracts that the owner approved before
+code on October 19. The owner scoped it to Menu and MenuButton with full two-level submenus, hover-open, and native
+Tab continuation; Dropdown (#4224) is not started. Neither component is exported from the package root (D01); Office
+Win32 throws on use and their stories are excluded from Win32 Storybook until #4384.
+
+### Implemented and observed
+
+- **Contracts:** Menu (MNU-001 to MNU-012, ten divergences) and MenuButton (MNB-001 to MNB-007, four divergences)
+  were authored from the pinned Flex payloads (all ten E15 digests reverified) and reviewed with the MenuItem
+  MNI-007 amendment and the Callout "Menu family amendments". Submenus are declared through MenuItem's `submenu`
+  prop; pointer opens focus the menu surface without a highlighted row (D03); macOS hover uses 100/300 ms delays
+  without pointer-travel intent (`menu-submenu-intent`, deferred).
+- **Shared popup family:** Menu and MenuButton share a private controller (presence latch, press snapshot, entry
+  focus, family close, focus return) and a popup level that owns its FocusZone, row registry, Home/End, type-ahead,
+  submenu arrows, hover timers, and child submenu. MenuItem consumes a context interface supplied by Menu and never
+  imports Menu or native-core. The component source rule now states that shared files may use `import type` from
+  native-core's `/macos` entrypoint.
+- **Native-core:** the modern Callout gained `tabNavigation` and the `tab-forward`/`tab-backward` reasons. The macOS
+  popup window intercepts Tab before its views, so FocusZone does not consume it; `continue` selects the owner key
+  view after the anchor. Windows codegen was regenerated; Windows accepts the prop and keeps `cycle`.
+- **Findings resolved during qualification:**
+  - Yoga's default errata let `flexGrow` rows fill a fit-content popup to the window width. A row-direction wrapper
+    with `overflow: 'scroll'` measures the zone at max-content, and a zero-height, wide absolute host keeps a submenu
+    from being clamped to its parent menu's width.
+  - Callout's popup-wide `first`/`last` search stops at the focusable FocusZone, which then redirects to its first
+    row; entry focus therefore uses the FocusZone's own commands.
+  - Restoring an opener row must wait for its child popup's confirmed close, so the owner popup can become key.
+  - A WebDriver `switchToWindow` moves key status, so story cases read popup semantics only after keyboard steps.
+    The macOS driver resolves `viewport` pointer coordinates against the owner window; hover uses element origins.
+  - The down chevron uses U+2228, which renders centered; U+2304 sat on the baseline.
+
+### Executed evidence
+
+The environment matches section 13. All app commands use
+`yarn workspace @fluentui-react-native/agentic-components-storybook` with `STORYBOOK_SMOKE_TAG=story`.
+
+| Check                                                                                                              | Result                                                                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fabric `storybook prep --macos`, `storybook build --macos`, then `smoke --mode stories-and-tests`                  | **Passed, zero skips:** `components-menu--*` 8/8, `components-menubutton--*` 4/4, `native-modern-callout--*` 16/16, `native-callout--*` 2/2, `components-popover--*` 5/5, `components-*--*focus*` 20/20. |
+| Paper `prep --macos --paper`, `build --macos --paper`, then the same six selectors with `--paper`                  | **Passed, zero skips:** the same counts; 195 stories rendered.                                                                                                                                           |
+| `yarn workspace @fluentui-react-native/native-core test:apple-integration` after each renderer build               | **Passed 3/3** in both prepared configurations.                                                                                                                                                          |
+| Driver captures of the open menu, a submenu, and every MenuButton appearance and size                              | **Observed:** content-sized surfaces, aligned trailing chevrons, submenu anchored at the row's inline end, centered trigger chevron. Window shadows are not capturable by the driver.                    |
+| `components` and `native-core` `test`, `lint`, `format`, `check:spec-contracts`; app `lint`                        | **Passed:** components 527 tests and 23 contracts; native-core 18 ownership and 40 Jest tests.                                                                                                           |
+| `yarn build`, `storybook bundle --macos`, `yarn check-agent-instructions`, `yarn change:check`, `git diff --check` | **Passed.**                                                                                                                                                                                              |
+| `yarn clean-lage-cache` then `yarn lage buildci`                                                                   | **Passed: 171 tasks, zero skipped/pending/aborted/failed.**                                                                                                                                              |
+| Windows Fabric, Office Win32, VoiceOver/Narrator                                                                   | **Not run:** no Windows host on this Mac; no screen-reader qualification.                                                                                                                                |
+
+### Remaining Menu work
+
+Windows Fabric needs the Tab exit modes, the Popover surface amendments, the system menu show delay, and its own
+qualification of every MNU and MNB requirement. The Win32 route (#4384), VoiceOver and Narrator, the native
+submenu-intent signal, motion, edge margins, and the root exports remain gates. Dropdown (#4224) still needs its
+contract review and the ListboxItem option adapter.

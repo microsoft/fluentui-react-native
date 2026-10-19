@@ -111,6 +111,10 @@
     {
       "id": "MNI-006",
       "plannedEvidence": ["menu-item.types.ts", "useMenuItem.ts", "menu-item.test.tsx", "menu-item.types.test.ts"]
+    },
+    {
+      "id": "MNI-007",
+      "evidence": ["menu-item.types.ts", "useMenuItem.ts", "menuItemContext.ts", "menu-item.tsx", "menu-item.test.tsx"]
     }
   ]
 }

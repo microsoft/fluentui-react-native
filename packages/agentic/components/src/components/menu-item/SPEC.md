@@ -65,6 +65,20 @@ unchanged pinned source and owner decision D06. It is a native adaptation for
 disabled-command discoverability, not a new selection owner. Renderer and
 screen-reader qualification remains open in the menu/popover plan.
 
+- **MNI-007:** Inside a Menu, a list row registers its identity, label text,
+  and focus target with the Menu; omitting `disabledFocusable` inherits the
+  Menu's platform default; and the row reports focus, hover, key, and
+  activation input to the Menu after the caller's handlers. A row with
+  `submenu` (View props with `ref` for the submenu surface, plus MenuItem and
+  Divider `children`) always shows its chevron, exposes `expanded` from its
+  submenu's actual presence, and opens the submenu instead of ending the menu.
+  Outside a Menu, `submenu` warns in development and renders no popup, and
+  every other standalone behavior is unchanged.
+
+MNI-007 was reviewed before code on October 19, 2026 with the Menu contract
+(`../menu/SPEC.md`). Menu supplies the context and the submenu rendering,
+so MenuItem never imports Menu or native-core.
+
 ## Focus visuals
 
 The state hook uses `useFocusVisuals` to create a private optional `FocusRing`.
@@ -110,15 +124,16 @@ Windows and Win32 retain native `disabled` independently of `focusable`.
   and visual path instead of rejecting the prop combination.
 - `menu-item-disabled-focusable` (**accepted**): An opt-in disabled-command
   focus stop retains disabled semantics and refuses activation. The owning Menu
-  will choose the per-platform default; standalone MenuItem defaults to false.
+  chooses the per-platform default (MNI-007); standalone MenuItem defaults to false.
 
 ## Conformance
 
-| Requirement | Evidence                                                                                |
-| ----------- | --------------------------------------------------------------------------------------- |
-| MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`                       |
-| MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                            |
-| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`                           |
-| MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                            |
-| MNI-005     | `useMenuItem.ts`, `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`   |
-| MNI-006     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.test.tsx`, `menu-item.types.test.ts` |
+| Requirement | Evidence                                                                                            |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`                                   |
+| MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                                        |
+| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`                                       |
+| MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                                        |
+| MNI-005     | `useMenuItem.ts`, `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`               |
+| MNI-006     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.test.tsx`, `menu-item.types.test.ts`             |
+| MNI-007     | `menu-item.types.ts`, `useMenuItem.ts`, `menuItemContext.ts`, `menu-item.tsx`, `menu-item.test.tsx` |

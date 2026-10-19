@@ -12,7 +12,12 @@ import { FocusZone } from '../focus-zone/FocusZone';
 import type { FocusZoneCommands } from '../focus-zone/FocusZone.types';
 import { useNativeViewTarget } from '../nativeTarget';
 
-type ExampleProps = { anchorKind: CalloutAnchor['kind']; exercise?: 'commands' | 'focus'; pointerFocus?: PointerFocusMode };
+type ExampleProps = {
+  anchorKind: CalloutAnchor['kind'];
+  exercise?: 'commands' | 'focus';
+  pointerFocus?: PointerFocusMode;
+  tabNavigation?: 'dismiss' | 'continue';
+};
 function Example({ anchorKind, exercise }: ExampleProps) {
   const anchor = useNativeViewTarget();
   const child = useNativeViewTarget();
@@ -237,7 +242,7 @@ function EntryFocusExample({
 }
 
 /** A flat nonmodal menu composed from the primitives: Callout presence, FocusZone entry and arrow navigation. */
-function MenuCompositionExample({ pointerFocus }: Pick<ExampleProps, 'pointerFocus'>) {
+function MenuCompositionExample({ pointerFocus, tabNavigation }: Pick<ExampleProps, 'pointerFocus' | 'tabNavigation'>) {
   const anchor = useNativeViewTarget();
   const commands = React.useRef<FocusZoneCommands>(null);
   const [open, setOpen] = React.useState(false);
@@ -286,9 +291,21 @@ function MenuCompositionExample({ pointerFocus }: Pick<ExampleProps, 'pointerFoc
       >
         <Text>Edit</Text>
       </Pressable>
+      {tabNavigation && (
+        <Pressable
+          focusable
+          accessibilityRole="button"
+          style={styles.button}
+          testID="modern-menu-after"
+          onFocus={() => setFocused('After')}
+        >
+          <Text>After</Text>
+        </Pressable>
+      )}
       <Callout
         open={open}
         presentationKey={String(key)}
+        tabNavigation={tabNavigation}
         anchor={{ kind: 'view', target: anchor.target }}
         placement={{ side: 'bottom', align: 'start', gap: 4 }}
         onReady={() => {
@@ -527,6 +544,69 @@ export const MenuComposition: Story = {
       // Windows and Win32 focus a pressed trigger, so closing the menu restores it. AppKit leaves keyboard focus where
       // it was on click, so macOS restores the owner window's previous first responder instead.
       await exerciseMenuComposition({ browser, expect, skip }, { restoresTrigger: platform !== 'macos' });
+    },
+  },
+};
+export const TabContinuation: Story = {
+  render: () => <MenuCompositionExample pointerFocus="always" tabNavigation="continue" />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'closes on Tab and continues past the anchor, and on Shift+Tab returns to it': async ({ browser, expect, platform, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (platform !== 'macos') {
+        skip('Only macOS implements Tab exit; Windows keeps the cycle behavior (#4377).');
+        return;
+      }
+      if (!features?.physicalClick || !features.keyboard || !features.focus) {
+        skip('Tab exit requires physical owner input, keyboard input, and focus observation.');
+        return;
+      }
+      const trigger = await browser.$('~modern-menu-trigger');
+      const status = await browser.$('~modern-menu-status');
+      await trigger.click();
+      await expect(status).toHaveText('Ready: confirmed');
+      await browser.keys('\uE004');
+      await expect(status).toHaveText('Dismissed: tab-forward');
+      await browser.waitUntil(async () => (await (await browser.$('~modern-menu-after')).getProperty('focused')) === true, {
+        timeout: 5000,
+        timeoutMsg: 'Expected Tab to continue to the view after the anchor.',
+      });
+      await trigger.click();
+      await expect(status).toHaveText('Ready: confirmed');
+      await browser.keys(['\uE008', '\uE004']);
+      await expect(status).toHaveText('Dismissed: tab-backward');
+      await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
+        timeout: 5000,
+        timeoutMsg: 'Expected Shift+Tab to focus the anchor.',
+      });
+    },
+  },
+};
+export const TabDismissal: Story = {
+  render: () => <MenuCompositionExample pointerFocus="always" tabNavigation="dismiss" />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'closes on Tab and leaves the owner window its retained focus': async ({ browser, expect, platform, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (platform !== 'macos') {
+        skip('Only macOS implements Tab exit; Windows keeps the cycle behavior (#4377).');
+        return;
+      }
+      if (!features?.physicalClick || !features.keyboard || !features.focus) {
+        skip('Tab exit requires physical owner input, keyboard input, and focus observation.');
+        return;
+      }
+      const trigger = await browser.$('~modern-menu-trigger');
+      const status = await browser.$('~modern-menu-status');
+      await trigger.click();
+      await expect(status).toHaveText('Ready: confirmed');
+      await browser.keys('\uE004');
+      await expect(status).toHaveText('Dismissed: tab-forward');
+      await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
+        timeout: 5000,
+        timeoutMsg: 'Expected the owner window to keep the focused trigger.',
+      });
+      expect(await (await browser.$('~modern-menu-after')).getProperty('focused')).toBe(false);
     },
   },
 };

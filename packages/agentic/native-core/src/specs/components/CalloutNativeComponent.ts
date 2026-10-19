@@ -17,6 +17,7 @@ interface AnchorRect {
 export interface NativeProps extends ViewProps {
   commandGeneration?: Int32;
   anchorMode?: WithDefault<'legacy' | 'view' | 'rect' | 'point', 'legacy'>;
+  tabNavigation?: WithDefault<'cycle' | 'dismiss' | 'continue', 'cycle'>;
   onReady?: DirectEventHandler<{ generation: Int32 }>;
   onClosed?: DirectEventHandler<{ generation: Int32; reason: string }>;
   onOperationResult?: DirectEventHandler<{ generation: Int32; requestId: Int32; status: string }>;

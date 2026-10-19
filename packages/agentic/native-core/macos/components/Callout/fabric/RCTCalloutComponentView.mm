@@ -98,6 +98,7 @@ static void RCTApplyCalloutAppearance(
 
   _calloutView.commandGeneration = newProps.commandGeneration;
   _calloutView.anchorMode = [NSString stringWithUTF8String:toString(newProps.anchorMode).c_str()];
+  _calloutView.tabNavigation = [NSString stringWithUTF8String:toString(newProps.tabNavigation).c_str()];
   _calloutView.placementHint = [NSString stringWithUTF8String:toString(newProps.directionalHint).c_str()];
   _calloutView.gapSpace = newProps.gapSpace;
   _calloutView.setInitialFocus = newProps.setInitialFocus;

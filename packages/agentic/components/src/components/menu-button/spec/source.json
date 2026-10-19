@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 2,
+  "component": "menu-button",
+  "lifecycle": "contract-reviewed",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-10-19",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:menu-button",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu-button/SKILL.md",
+          "marketplaceBlobSha": "37ecd4d7dccf3c4a3091065dc67b36c3a475ac90",
+          "marketplaceSha256": "af46dc78a0cc2deaa57f117dc75651197741a4c516a758764b0a286afd947278",
+          "originPath": "plugins/components/skills/menu-button/SKILL.md",
+          "originBlobSha": "37ecd4d7dccf3c4a3091065dc67b36c3a475ac90",
+          "originSha256": "af46dc78a0cc2deaa57f117dc75651197741a4c516a758764b0a286afd947278",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu-button/usage.md",
+          "marketplaceBlobSha": "3c36905f4534a2206e3a73a730a52f6e57ffa68c",
+          "marketplaceSha256": "64d305bb28680e70af9509f87d98c199f667fc4c08e6ea24400466835b6c7516",
+          "originPath": "plugins/components/skills/menu-button/usage.md",
+          "originBlobSha": "3c36905f4534a2206e3a73a730a52f6e57ffa68c",
+          "originSha256": "64d305bb28680e70af9509f87d98c199f667fc4c08e6ea24400466835b6c7516",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu-button/web/accessibility.md",
+          "marketplaceBlobSha": "5f9abb6be7a6b323a6d5774c8d7d7c08ac10ec4c",
+          "marketplaceSha256": "bc74d18cc63083d9efb02397d5f34b4bee2e12da4c9fa34150a237643fbcc290",
+          "originPath": "plugins/components/skills/menu-button/web/accessibility.md",
+          "originBlobSha": "5f9abb6be7a6b323a6d5774c8d7d7c08ac10ec4c",
+          "originSha256": "bc74d18cc63083d9efb02397d5f34b4bee2e12da4c9fa34150a237643fbcc290",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu-button/web/interaction.md",
+          "marketplaceBlobSha": "bccec06c187f840dee5dbd6e6ccee88ec84e735f",
+          "marketplaceSha256": "4a0b9b4858c985d809f8b6205e3a6fb1f0d51d9280b69034788ecb3f196a1850",
+          "originPath": "plugins/components/skills/menu-button/web/interaction.md",
+          "originBlobSha": "bccec06c187f840dee5dbd6e6ccee88ec84e735f",
+          "originSha256": "4a0b9b4858c985d809f8b6205e3a6fb1f0d51d9280b69034788ecb3f196a1850",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/menu-button/web/tokens.yaml",
+          "marketplaceBlobSha": "78080dbc7453b3467e03a8d29cfd22a3ff2e52d6",
+          "marketplaceSha256": "77055087f07a0a436c8745f629b938de9f96d3d6923132d8f44bca1c23672324",
+          "originPath": "plugins/components/skills/menu-button/web/tokens.yaml",
+          "originBlobSha": "78080dbc7453b3467e03a8d29cfd22a3ff2e52d6",
+          "originSha256": "77055087f07a0a436c8745f629b938de9f96d3d6923132d8f44bca1c23672324",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "menu-button-haspopup",
+      "status": "accepted"
+    },
+    {
+      "id": "menu-button-pointer-entry",
+      "status": "accepted"
+    },
+    {
+      "id": "menu-button-chevron-glyph",
+      "status": "accepted"
+    },
+    {
+      "id": "menu-button-motion",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "MNB-001",
+      "evidence": ["menu-button.types.ts", "useMenuButton.ts", "menu-button.test.tsx", "menu-button.types.test.ts"]
+    },
+    {
+      "id": "MNB-002",
+      "evidence": ["useMenuButtonStyles.ts", "menu-button.styles.ts", "renderMenuButton.tsx", "menu-button.test.tsx"]
+    },
+    {
+      "id": "MNB-003",
+      "evidence": ["useMenuButton.ts", "renderMenuButton.tsx", "menu-button.test.tsx", "menu-button.stories.tsx"]
+    },
+    {
+      "id": "MNB-004",
+      "evidence": ["useMenuButton.ts", "menu-button.test.tsx", "menu-button.stories.tsx"]
+    },
+    {
+      "id": "MNB-005",
+      "evidence": ["useMenuButton.ts", "menu-button.test.tsx", "menu-button.stories.tsx"]
+    },
+    {
+      "id": "MNB-006",
+      "evidence": ["useMenuButton.ts", "menu-button.test.tsx", "menu-button.stories.tsx"]
+    },
+    {
+      "id": "MNB-007",
+      "plannedEvidence": ["useMenuButton.ts", "menu-button.test.tsx"]
+    }
+  ]
+}

@@ -105,6 +105,7 @@ export type {
   MenuItemSlots,
   MenuItemState,
   MenuItemStyle,
+  MenuItemSubmenuProps,
 } from './components/menu-item/menu-item.types';
 export { renderMenuItem_unstable } from './components/menu-item/renderMenuItem';
 export { useMenuItemStyles_unstable } from './components/menu-item/useMenuItemStyles';

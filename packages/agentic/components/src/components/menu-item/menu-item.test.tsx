@@ -7,6 +7,8 @@ import type { RenderResult } from '@testing-library/react-native';
 
 import { MenuItem } from './menu-item';
 import type { MenuItemProps } from './menu-item.types';
+import { MenuItemMenuContext } from './menuItemContext';
+import type { MenuItemMenuBinding, MenuItemMenuRow } from './menuItemContext';
 
 function renderMenuItem(props: MenuItemProps): Promise<RenderResult> {
   return render(<MenuItem {...props} />);
@@ -162,5 +164,77 @@ describe('MenuItem', () => {
 
     expect(component.getByTestId('avatar')).toBeOnTheScreen();
     expect(component.getByTestId('chevron')).toBeOnTheScreen();
+  });
+});
+
+describe('MenuItem inside a Menu (MNI-007)', () => {
+  function binding(overrides: Partial<MenuItemMenuBinding> = {}): MenuItemMenuBinding & { rows: MenuItemMenuRow[] } {
+    const rows: MenuItemMenuRow[] = [];
+    return {
+      rows,
+      disabledFocusable: true,
+      register: jest.fn((row: MenuItemMenuRow) => {
+        rows.push(row);
+        return () => undefined;
+      }),
+      isSubmenuOpen: () => true,
+      onRowPress: jest.fn(),
+      onRowFocus: jest.fn(),
+      onRowBlur: jest.fn(),
+      onRowHoverIn: jest.fn(),
+      onRowHoverOut: jest.fn(),
+      onRowKeyDown: jest.fn(),
+      SubmenuRow: (props: MenuItemProps) => <View testID={`submenu-row-${props.content}`} />,
+      ...overrides,
+    };
+  }
+
+  it('registers its label, inherits the disabled-focusable default, and reports input after caller handlers', async () => {
+    const menu = binding();
+    const calls: string[] = [];
+    (menu.onRowPress as jest.Mock).mockImplementation(() => calls.push('menu'));
+    const component = await render(
+      <MenuItemMenuContext.Provider value={menu}>
+        <MenuItem content="Paste" testID="paste" disabled />
+        <MenuItem content="Copy" testID="copy" onPress={() => calls.push('caller')} />
+      </MenuItemMenuContext.Provider>,
+    );
+    expect(menu.rows.map((row) => [row.text, row.focusable, row.hasSubmenu])).toEqual([
+      ['Paste', true, false],
+      ['Copy', true, false],
+    ]);
+    expect(component.getByTestId('paste').props.focusable).toBe(true);
+    await fireEvent(component.getByTestId('copy'), 'press', { nativeEvent: { key: 'Enter' } });
+    expect(calls).toEqual(['caller', 'menu']);
+    expect(menu.onRowPress).toHaveBeenCalledWith(menu.rows[1].id, true);
+    await fireEvent(component.getByTestId('paste'), 'press', { nativeEvent: {} });
+    expect(menu.onRowPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('hands a submenu row to the Menu', async () => {
+    const component = await render(
+      <MenuItemMenuContext.Provider value={binding()}>
+        <MenuItem content="Share" submenu={{ children: null }} />
+      </MenuItemMenuContext.Provider>,
+    );
+    expect(component.getByTestId('submenu-row-Share')).toBeOnTheScreen();
+  });
+
+  it('warns for a submenu outside a Menu and renders the chevron without a popup', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+    try {
+      const component = await renderMenuItem({
+        content: 'Share',
+        submenu: { children: null },
+        chevron: { testID: 'chevron' },
+        testID: 'share',
+      });
+      expect(warn).toHaveBeenCalledWith('MenuItem: a submenu opens only from a list row inside a Menu.');
+      expect(component.getByTestId('chevron')).toBeOnTheScreen();
+      expect(component.getByTestId('share').props.accessibilityHint).toBe('Has submenu');
+      expect(component.getByTestId('share').props.accessibilityState.expanded).toBeUndefined();
+    } finally {
+      warn.mockRestore();
+    }
   });
 });

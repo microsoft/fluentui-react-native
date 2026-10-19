@@ -28,6 +28,8 @@ export type CalloutDismissReason =
   | 'escape'
   | 'outside-pointer'
   | 'application-deactivated'
+  | 'tab-forward'
+  | 'tab-backward'
   | 'programmatic'
   | 'anchor-lost'
   | 'host-detached';
@@ -48,6 +50,11 @@ export interface CalloutProps {
     align?: 'start' | 'center' | 'end';
     gap?: number;
   };
+  /**
+   * What Tab and Shift+Tab do in the popup: `cycle` moves within it; `dismiss` closes the outermost such presentation
+   * in its popup ownership chain; `continue` also moves focus past the view anchor (Tab) or to it (Shift+Tab).
+   */
+  tabNavigation?: 'cycle' | 'dismiss' | 'continue';
   children?: React.ReactNode;
   content?: Omit<ViewProps, 'children' | 'ref' | 'collapsable'> & { ref?: React.Ref<React.ComponentRef<typeof View>> };
   onReady?: (event: CalloutReadyEvent) => void;
