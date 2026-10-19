@@ -253,7 +253,8 @@ Callout's executable stories verify native popup creation, `onShow` and
 `onDismiss`, outside-click and Escape dismissal, and reopening on macOS,
 Windows, and Win32; the modern stories add readiness, descendant focus,
 explicit close/rearm, a flat Menu composition (FocusZone entry, arrow
-navigation, and trigger restoration), and Windows anchor geometry. Run them
+navigation, and trigger restoration), explicit empty-container focus, and
+macOS/Windows view/rect/point anchor geometry. Run them
 together with FocusZone's keyboard cases from `apps/storybook` using the owned
 lifecycle:
 
@@ -296,12 +297,49 @@ identify them, while retaining `native-light-dismiss` for unclassified events.
 Duplicate closure and late readiness cannot revive a dismissed presentation.
 Rebuild native hosts for the extended command schema; `/legacy` is unchanged.
 
-The Windows library builds with these additions, but physical-input cases
-skipped in this session and macOS/Office integration has not run. The earlier
-qualification below is the pre-amendment baseline, not proof of these new
-behaviors. See [the implementation handoff](../../../menu-popover-plan.md#12-implementation-handoff)
+The Windows library builds with these additions, but its October 16 physical-input
+cases skipped. On October 17, macOS Fabric and Paper qualified all 12 modern Callout
+cases, including first/last search, empty refusal, explicit container focus,
+view/rect/point geometry, dismissal/rearm, and flat Menu focus restoration.
+Both renderers also pass 19 shared-focus cases without skips, including disabled
+MenuItem activation refusal, read-only Input focus/edit refusal, Button disabled
+state, and TabList selected-state updates. The strict Apple integration probe passes both React-module and
+no-React-module bridging-header configurations. This is not an Office host
+runtime qualification. See [the implementation handoff](../../../menu-popover-plan.md#12-implementation-handoff)
 and the [Win32 host follow-up](https://github.com/microsoft/fluentui-react-native/issues/4384)
 for remaining gates.
+
+After building macOS Storybook, run the reproducible Apple boundary probe:
+
+```sh
+yarn workspace @fluentui-react-native/native-core test:apple-integration
+```
+
+It compiles the build's Swift source list with complete concurrency checking and
+warnings as errors, verifies that the bridging mode cannot import `React`,
+syntax-checks its emitted Swift header, and checks both Paper extern registrations
+with strict unused-parameter and case-sensitive include diagnostics. Only the
+Swift importer's two known RNmacOS 0.81.9 header diagnostics (nullability
+completeness and property atomicity) are excluded; package Swift warnings and
+registration diagnostics are not suppressed.
+
+### Repository-local RNmacOS prerequisite patch
+
+The root resolution pins RNmacOS 0.81.9 with
+`.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch`. It reuses Paper's
+native AX role converter for Fabric, projects disabled/selected/expanded state
+onto the actual accessible element, removes the structural Fabric TextInput's
+extra Tab stop, and separates read-only single-line editing from disabled state
+on both renderers. Read-only editors remain selectable/focusable; disabled editors
+remain disabled. It also maps their `textbox` role through the existing converter.
+
+These fixes belong in RNmacOS, not in a MenuItem-specific native host or a
+JavaScript accessibility-value workaround. The patch is used by this repository's
+native hosts; publishing native-core or components does **not** install it in a
+consumer. Upstream or equivalent consuming-renderer integration remains a release
+gate. Remove the patch only after the same native cases pass against the upstream
+replacement. Checked-state actions, AX relationships, and VoiceOver speech are
+separate, still-unqualified semantics.
 
 Modern and legacy facades share the native registrations; Callout's facades
 also share a hook-free private host that applies native-safe positioning and

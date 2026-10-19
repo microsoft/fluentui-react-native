@@ -84,7 +84,15 @@ function Example({ anchorKind, exercise }: ExampleProps) {
           <Text>Reopen</Text>
         </Pressable>
       </View>
-      <View ref={anchor.ref} collapsable={false} style={styles.anchor} testID="modern-callout-anchor">
+      <View
+        ref={anchor.ref}
+        accessible
+        accessibilityRole="text"
+        accessibilityLabel="Anchor owner"
+        collapsable={false}
+        style={styles.anchor}
+        testID="modern-callout-anchor"
+      >
         <Text>Anchor owner</Text>
       </View>
       <Callout
@@ -137,8 +145,17 @@ function Example({ anchorKind, exercise }: ExampleProps) {
 
 const menuItems = ['Cut', 'Copy', 'Paste'] as const;
 
-function EntryFocusExample({ strategy, empty = false }: { strategy: 'first' | 'last'; empty?: boolean }) {
+function EntryFocusExample({
+  strategy,
+  empty = false,
+  container = false,
+}: {
+  strategy: 'first' | 'last';
+  empty?: boolean;
+  container?: boolean;
+}) {
   const anchor = useNativeViewTarget();
+  const content = useNativeViewTarget();
   const handle = React.useRef<CalloutHandle>(null);
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = React.useState('Closed');
@@ -146,7 +163,7 @@ function EntryFocusExample({ strategy, empty = false }: { strategy: 'first' | 'l
   const enter = async ({ presentation }: CalloutReadyEvent) => {
     const api = handle.current;
     if (!api) throw new Error('Missing mounted Callout handle at readiness.');
-    const outcome = await api.requestFocus(presentation, strategy);
+    const outcome = await api.requestFocus(presentation, container ? content.target : strategy);
     if (api.getPresentation() === presentation) setStatus(outcome.status);
   };
   return (
@@ -170,7 +187,13 @@ function EntryFocusExample({ strategy, empty = false }: { strategy: 'first' | 'l
         ref={handle}
         open={open}
         anchor={{ kind: 'view', target: anchor.target }}
-        content={{ style: styles.content, testID: 'entry-callout-content' }}
+        content={{
+          ref: content.ref,
+          focusable: container,
+          onFocus: container ? () => setFocused('Container') : undefined,
+          style: styles.content,
+          testID: 'entry-callout-content',
+        }}
         onReady={(event: CalloutReadyEvent) => {
           void enter(event);
         }}
@@ -237,7 +260,14 @@ function MenuCompositionExample({ pointerFocus }: Pick<ExampleProps, 'pointerFoc
       <View accessible accessibilityRole="text" accessibilityLabel={focused} testID="modern-menu-focus">
         <Text accessible={false}>{focused}</Text>
       </View>
-      <Pressable {...triggerProps} ref={triggerRef} accessibilityRole="button" style={styles.button} testID="modern-menu-trigger">
+      <Pressable
+        {...triggerProps}
+        ref={triggerRef}
+        accessibilityRole="button"
+        accessibilityState={{ expanded: open }}
+        style={styles.button}
+        testID="modern-menu-trigger"
+      >
         <Text>Edit</Text>
       </Pressable>
       <Callout
@@ -304,16 +334,9 @@ export const Default: Story = {
       await expect(status).toHaveText('Ready');
       await expect(dismissal).toHaveText('Open');
     },
-    'places content below the view anchor with the requested gap': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'windows') {
-        skip('Only the Windows provider exposes owned popup content in the owner window accessibility tree.');
-        return;
-      }
-      await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
-      const anchor = await browser.getElementRect(await (await browser.$('~modern-callout-anchor')).elementId);
-      const content = await browser.getElementRect(await (await browser.$('~modern-callout-content')).elementId);
-      expect(Math.abs(content.x - anchor.x)).toBeLessThanOrEqual(1);
-      expect(Math.abs(content.y - (anchor.y + anchor.height + 8))).toBeLessThanOrEqual(1);
+    'places content below the view anchor with the requested gap': async (context) => {
+      const { expectCalloutPlacement } = await import('./placement.wdio.ts');
+      await expectCalloutPlacement(context);
     },
   },
 };
@@ -406,35 +429,36 @@ export const EmptyFocus: Story = {
     },
   },
 };
+export const ContainerFocus: Story = {
+  render: () => <EntryFocusExample strategy="first" empty container />,
+  tags: ['desktop-e2e'],
+  wdio: {
+    'confirms an explicitly focusable empty content container': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Container focus requires physical owner activation.');
+        return;
+      }
+      await (await browser.$('~entry-callout-open')).click();
+      await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
+      await expect(await browser.$('~entry-callout-focused')).toHaveText('Container');
+    },
+  },
+};
 export const LocalRectangle: Story = {
   args: { anchorKind: 'rect' },
   wdio: {
-    'places content below the local rectangle with the requested gap': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'windows') {
-        skip('Only the Windows provider exposes owned popup content in the owner window accessibility tree.');
-        return;
-      }
-      await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
-      const anchor = await browser.getElementRect(await (await browser.$('~modern-callout-anchor')).elementId);
-      const content = await browser.getElementRect(await (await browser.$('~modern-callout-content')).elementId);
-      expect(Math.abs(content.x - (anchor.x + 40))).toBeLessThanOrEqual(1);
-      expect(Math.abs(content.y - (anchor.y + 30 + 30 + 8))).toBeLessThanOrEqual(1);
+    'places content below the local rectangle with the requested gap': async (context) => {
+      const { expectCalloutPlacement } = await import('./placement.wdio.ts');
+      await expectCalloutPlacement(context, { x: 40, y: 30, height: 30 });
     },
   },
 };
 export const LocalPoint: Story = {
   args: { anchorKind: 'point' },
   wdio: {
-    'places content below the local point with the requested gap': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'windows') {
-        skip('Only the Windows provider exposes owned popup content in the owner window accessibility tree.');
-        return;
-      }
-      await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
-      const anchor = await browser.getElementRect(await (await browser.$('~modern-callout-anchor')).elementId);
-      const content = await browser.getElementRect(await (await browser.$('~modern-callout-content')).elementId);
-      expect(Math.abs(content.x - (anchor.x + 40))).toBeLessThanOrEqual(1);
-      expect(Math.abs(content.y - (anchor.y + 60 + 8))).toBeLessThanOrEqual(1);
+    'places content below the local point with the requested gap': async (context) => {
+      const { expectCalloutPlacement } = await import('./placement.wdio.ts');
+      await expectCalloutPlacement(context, { x: 40, y: 60, height: 0 });
     },
   },
 };

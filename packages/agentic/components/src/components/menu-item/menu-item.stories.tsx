@@ -9,6 +9,7 @@ import { FocusZone } from '@fluentui-react-native/native-core/legacy';
 
 import { MenuItem } from './menu-item';
 import { Input } from '../input/input';
+import { Button } from '../button/button';
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
@@ -148,6 +149,7 @@ export const Loading: Story = {
 
 function DisabledFocusableScene() {
   const [count, setCount] = useState(0);
+  const [disabled, setDisabled] = useState(true);
   return (
     <View style={styles.story}>
       <Input accessibilityLabel="Menu focus entry" testID="disabled-menu-entry" />
@@ -156,13 +158,14 @@ function DisabledFocusableScene() {
         <MenuItem
           content="Unavailable command"
           secondaryContent={null}
-          disabled
+          disabled={disabled}
           disabledFocusable
           testID="disabled-menu-command"
           onPress={() => setCount((value) => value + 1)}
         />
         <MenuItem content="After disabled command" secondaryContent={null} testID="disabled-menu-after" />
       </FocusZone>
+      <Button content="Toggle command availability" testID="disabled-menu-toggle" onPress={() => setDisabled((value) => !value)} />
       <StoryStatus testID="disabled-menu-count">{String(count)}</StoryStatus>
     </View>
   );
@@ -182,7 +185,7 @@ export const DisabledFocusable: Story = {
       await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
     },
     'navigates onto a disabled row without activating it': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+      const { requireDesktopFocus, expectNativeState, focusByTab, clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
       const { browser, expect } = context;
       await focusByTab(browser, 'disabled-menu-entry', 'disabled-menu-before');
@@ -191,10 +194,29 @@ export const DisabledFocusable: Story = {
       await expect(await browser.$('~disabled-menu-command')).toBeDisabled();
       await browser.keys('\uE007');
       await browser.keys('\uE00D');
+      await clickPhysical(browser, 'disabled-menu-command');
       await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
       await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
       await browser.keys('\uE015');
       await expectNativeState(browser, 'disabled-menu-after', 'focused', true);
+    },
+    'updates native disabled state without replacing the command': async ({ browser, expect, skip }) => {
+      if (!browser.capabilities['furn:features']?.physicalClick) {
+        skip('Changing availability requires physical pointer input.');
+        return;
+      }
+      const row = await browser.$('~disabled-menu-command');
+      const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
+      await expect(row).toBeDisabled();
+      await (await browser.$('~disabled-menu-toggle')).click();
+      await expect(row).toBeEnabled();
+      expect(await row.getTagName()).toBe('menuitem');
+      await clickPhysical(browser, 'disabled-menu-command');
+      await expect(await browser.$('~disabled-menu-count')).toHaveText('1');
+      await (await browser.$('~disabled-menu-toggle')).click();
+      await expect(row).toBeDisabled();
+      await clickPhysical(browser, 'disabled-menu-command');
+      await expect(await browser.$('~disabled-menu-count')).toHaveText('1');
     },
   },
 };

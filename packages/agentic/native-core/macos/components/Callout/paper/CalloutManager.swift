@@ -7,7 +7,10 @@ import React
 @objc(RCTCalloutManager)
 class CalloutManager: RCTViewManager, FRNCalloutPropertyManager {
 	override func view()->NSView! {
-		return CalloutView(bridge: bridge)
+		nonisolated(unsafe) let manager = self
+		return MainActor.assumeIsolated {
+			CalloutView(bridge: manager.bridge)
+		}
 	}
 
 	override class func requiresMainQueueSetup() -> Bool {

@@ -1,6 +1,8 @@
 # Popover, Menu, MenuButton, and Dropdown implementation plan
 
-**Status:** blocked handoff after independent prerequisites, October 16, 2026. Section 12 records delivered code,
+**Status:** macOS prerequisite continuation, October 17, 2026. Section 13 records the renderer fixes and passing
+Fabric/Paper native prerequisites; family/continuation, assistive-technology, and component-contract gates remain.
+Section 12 preserves the October 16 Windows handoff and its delivered code,
 unqualified native-input/macOS gates, repository-check failures, and per-platform next steps. The owner's D01-D14
 and reviewed R1-R3 answers are confirmed; R1 approves
 the Win32 close-and-return Tab interim, tracked with the other host follow-ups in #4384. This plan is not an approved
@@ -1029,3 +1031,87 @@ ownership, family behavior, and UIA projection. Implement the approved
 close-and-return Tab interim without pretending it continues past the trigger.
 Record failed B items, the A1 owner/release vehicle, and optional C capabilities
 in #4384. Keep `/legacy` signatures and registration names unchanged.
+
+## 13. macOS prerequisite continuation, October 17, 2026
+
+This increment qualifies and repairs the independent prerequisites from section 12.
+It does not implement or export Popover, Menu, MenuButton, or Dropdown, approve their
+contracts, or complete macOS P0/P2. D01's all-endpoint release gate is unchanged.
+
+### Implemented and observed
+
+- A root Yarn resolution applies a reproducible patch to the already-resolved
+  RNmacOS 0.81.9, without changing workspace dependency ranges. Fabric now uses
+  the existing Paper AX role converter and projects disabled/selected/expanded
+  state onto the actual accessible element. Native tests observe a disabled
+  `menuitem`, enabled/disabled changes on the same row, selected-state changes,
+  and expanded-state changes across popup open/close.
+- Fabric's structural TextInput wrapper is no longer a second AppKit Tab stop.
+  The single-line native editor keeps `editable=false` separate from disabled
+  state on both renderers, remains selectable and focusable when read-only,
+  refuses typing, and retains textbox semantics. Explicitly disabled editors
+  remain disabled and are skipped. Input keeps its reviewed API and styling.
+- Paper Callout view creation now asserts the UI-thread context through
+  `MainActor.assumeIsolated`, using the existing narrowly scoped manager handoff.
+  Complete concurrency checking exposed the original unisolated initializer
+  call; the repaired source compiles in both React-module and no-React-module
+  bridging configurations.
+- Callout has a native explicit-empty-container focus probe. Its three geometry
+  cases now execute on macOS, using the owned popup window and converting the
+  driver's owner-relative element bounds to screen coordinates. No driver API,
+  privacy setting, synthetic focus confirmation, or geometry tolerance was weakened.
+- Disabled-row tests use physical pointer actions for refusal checks rather
+  than asking WebDriver's element-click command to activate a disabled element.
+  They also exercise Enter/Space refusal and native navigation away afterward.
+
+**Renderer integration boundary:** the RNmacOS fixes are a repository-local
+dependency patch, not a published native-core/components implementation of
+missing renderer semantics. Upstream or equivalent consuming-renderer integration
+is required before release; an Office Swift compile probe does not apply that
+patch to an Office host. No Office runtime, VoiceOver, checked-action, or
+cross-window relationship qualification is implied.
+
+### Executed evidence
+
+Environment: macOS 27.0.1 (26A434), arm64, RNmacOS 0.81.9 with the checked-in
+patch, Xcode 26.4.1 (17E202), Swift 6.3.1. The desktop was unlocked and on-console;
+Accessibility, event-posting and screen-capture preflights were available.
+`AppleKeyboardUIMode=3` (Keyboard navigation enabled). No privacy, keyboard,
+certificate, or VoiceOver setting was changed.
+
+All app commands below use
+`yarn workspace @fluentui-react-native/agentic-components-storybook`.
+Both smoke selections use `STORYBOOK_SMOKE_TAG=story`; their exact
+`STORYBOOK_SMOKE_STORY` values are shown.
+
+| Check                                                                                                                                                                       | Result                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `storybook prep --macos`, clean generated DerivedData, then `storybook build --macos`                                                                                       | **Passed.** The build used the persisted RNmacOS patch, not a modified installed/generated source.                                                                                                                                                                                                                                                                                                                                          |
+| `storybook smoke --macos --mode stories-and-tests`, `native-modern-callout--*`                                                                                              | **Passed: 12/12, zero skips.** First/last/empty/container focus, operations, Escape/outside dismissal and rearm, view/rect/point geometry, Menu composition, trigger restoration and expanded-state changes.                                                                                                                                                                                                                                |
+| Same Fabric command, `components-*--*focus*`                                                                                                                                | **Passed: 19/19, zero skips.** Includes Input editor focus, read-only edit refusal, no focus-induced size change, disabled MenuItem physical/keyboard refusal and availability changes, Button disabled state, and TabList selected-state updates.                                                                                                                                                                                          |
+| `storybook prep --macos --paper`, then `storybook build --macos --paper`                                                                                                    | **Passed.** Re-generated architecture-specific native projects and Pods before switching renderers.                                                                                                                                                                                                                                                                                                                                         |
+| `storybook smoke --macos --paper --mode stories-and-tests`, same two selectors                                                                                              | **Passed: 12/12 Callout and 19/19 shared-focus, zero skips.** Each smoke rendered 184 stories before the selected cases.                                                                                                                                                                                                                                                                                                                    |
+| `yarn workspace @fluentui-react-native/native-core test:apple-integration`                                                                                                  | **Passed in both prepared renderer configurations.** Complete Swift concurrency/warnings-as-errors, explicit React import, verified no-React-module bridge, emitted Swift header, both Paper registrations, strict unused-parameter/case diagnostics. The importer excludes only two existing RNmacOS umbrella-header diagnostics; FURN Swift/extern warnings remain errors. This is a source integration probe, not an Office runtime run. |
+| `yarn workspace @fluentui-react-native/native-core test` and `lint`                                                                                                         | **Passed:** 18 ownership/entrypoint tests, 37 Jest tests, strict stories, package build and lint.                                                                                                                                                                                                                                                                                                                                           |
+| `yarn workspace @fluentui-react-native/components test` and `lint`                                                                                                          | **Passed:** 484 tests, 8 snapshots, 20 reviewed contracts, strict stories and lint.                                                                                                                                                                                                                                                                                                                                                         |
+| `yarn build`, app `lint`, `storybook bundle --macos`, package `format`, `yarn check-agent-instructions`, `git diff --check`                                                 | **Passed.**                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `yarn clean-lage-cache` then `yarn lage buildci`                                                                                                                            | **Passed: 171 tasks, zero skipped/pending/aborted/failed.** Repository lint (including Knip), formatting, publishing/instruction/contract checks, build, tests and package lints all executed. The Windows handoff's Knip/deadline failures did not reproduce in this macOS aggregate; no unrelated dependency or timeout change was made.                                                                                                  |
+| Windows Fabric/Office Win32 execution in this continuation                                                                                                                  | **Not run:** no Windows host on this Mac; October 16 evidence and outstanding gates remain in section 12.                                                                                                                                                                                                                                                                                                                                   |
+| AX action invocation/VoiceOver, native-menu hover timing/intent, application-deactivation input, visual/theme/high-contrast/scaling matrix and Keyboard navigation disabled | **Not run / unqualified.** Native state reads and passing focus geometry are not substitutes.                                                                                                                                                                                                                                                                                                                                               |
+
+Ignored evidence is retained under
+`apps/storybook/artifacts/macos/menu-popover-fabric-20261017/wdio` and
+`menu-popover-paper-20261017/wdio`; command logs remain under
+`apps/storybook/artifacts/storybook-commands`. The owned channel, Metro and driver
+listeners on 26497/33589/40580 were absent after cleanup. The last prepared
+renderer is Paper; rerun `prep --macos` before returning to Fabric.
+
+### Remaining macOS work
+
+Complete the named P0 manual/native-menu/assistive-technology probes, then the
+generation-scoped popup-family transactions, guarded restoration, owner-relative
+Tab continuation, submenu intent, and remaining semantic/geometry cases under
+#4377/#4375. Carry the renderer fixes upstream or into each actual consuming host.
+Only after the normal source-backed pre-code reviews should the four higher-order
+component pipelines proceed. Flat composition and this native prerequisite
+qualification do not authorize a macOS-only release or close any of those issues.

@@ -303,11 +303,7 @@ export const FocusManagement: Story = {
         await browser.releaseActions();
       }
     },
-    'exposes the native disabled accessibility state': async ({ browser, expect, platform, skip }) => {
-      if (platform === 'macos') {
-        skip('RNmacOS 0.81.9 Fabric does not project accessibilityState.disabled to AXEnabled; native Tab exclusion is tested separately.');
-        return;
-      }
+    'exposes the native disabled accessibility state': async ({ browser, expect }) => {
       await expect(await browser.$('~focus-probe-disabled')).not.toBeEnabled();
     },
     'releases repeated modifiers before the next Tab': async (context) => {

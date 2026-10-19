@@ -188,6 +188,13 @@ export const FocusTreatment: Story = {
           await browser.keys('\uE004');
           await expectNativeState(browser, id, 'focused', true);
           await expect(await browser.$(`~${id}-indicator`)).toHaveText('true');
+          if (suffix === '-readonly') {
+            expect(await field.getTagName()).toBe('textbox');
+            await expect(field).toBeEnabled();
+            await browser.keys('x');
+            await expect(field).toHaveValue('Read only');
+            await expectNativeState(browser, id, 'focused', true);
+          }
           const after = await browser.getElementRect(await field.elementId);
           expect({ width: after.width, height: after.height }).toEqual({ width: before.width, height: before.height });
         }
