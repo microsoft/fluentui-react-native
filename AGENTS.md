@@ -13,6 +13,9 @@ routes each task to the workflow and references it needs; load only what the tas
   knowledge, indexed by task.
 - **Product contracts** (`SPEC.md`, `spec/`, `CONTRACT.md`), protocols, and package documentation stay with their
   packages and govern component behavior.
+- **Agency plugins and X3 sources:** switch to the Microsoft EMU GitHub identity before resolving Agency plugins or
+  reading `x3-design` repositories. Follow the [plugin loading guidance](references/agents/repository/agency-plugins.md)
+  and restore the public GitHub identity before operations on this public repository.
 
 ## Safeguards
 

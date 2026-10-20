@@ -32,6 +32,10 @@ draft, or accompanied by new source evidence.
 
 Load every adapter represented by the supplied evidence, but no others.
 
+For supplemental Flex spec-review or design-documentation guidance, follow the scoped
+[Agency plugin instructions](../../../references/agents/repository/agency-plugins.md) and select `flex-processes`.
+Its upstream schemas do not replace this skill's React Native contract format or review gate.
+
 | Evidence                                      | Adapter                                                                                                    |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | Pinned Flex component skill and X3 lineage    | [Flex and X3](../../../references/agents/components/agentic/contract-sources/flex-x3.md)                   |

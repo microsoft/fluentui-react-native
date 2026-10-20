@@ -13,7 +13,9 @@ source, and the reviewed local contract defines FURN behavior.
 
 ## Resolve the source
 
-Start Agency with the repository's `flex-authoring` profile and invoke
+Select the Microsoft EMU identity using the
+[Agency plugin guidance](../../../repository/agency-plugins.md#authenticate-before-resolving-sources)
+before resolving the private catalog or X3 repository. Start Agency with the repository's `flex-authoring` profile and invoke
 `flex-components:<name>`. Confirm that the profile and
 `packages/agentic/components/spec-source-lock.json` identify the same release.
 Read shared and usage material plus the relevant platform companions. Do not

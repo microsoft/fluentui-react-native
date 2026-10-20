@@ -1,0 +1,687 @@
+# Swatch color layers derived from the Flex web component specifications; schema: swatchLayers.ts.
+# Source: flex-components 1.5.0, marketplace commit 206c4996, plugin tree b08bdc0d, pinned in
+# packages/agentic/components/spec-source-lock.json. Mobile specs and existing FURN mappings are excluded.
+#
+# Conventions:
+# - layers contains bg.*, fg.*, and stroke.* names. The prefix follows the token category, not its use:
+#   a progress-bar fill can reference fg.brandPrimary, and a switch stroke can reference fg.neutralSecondary.
+# - OKLCH(token) records computed hover/pressed colors. type is standard or inverted according to the
+#   Flex interaction formula; it is omitted when indeterminate. Hover and pressed remain within ColorLayer.
+# - Other keys are slot colors: icon, placeholder, required, secondary, shimmer, track, and underlay.
+#   Only consumed slots apply; extra non-conflicting colors do not introduce new component slots or states.
+# - Disabled presentations use dedicated, static ColorLayers, including unchanged transparent colors.
+#   Disabled slot colors are explicit; disabled layers have no hover, pressed, type, or enabled-slot colors.
+#   Compatible disabled layers are shared with each other, never merged into enabled layers.
+#   Thus read-only and disabled strokes remain separate layers even when their rest tokens match.
+# - presentations deduplicates exact bg/fg/stroke combinations. Names use the bg layer first, then fg,
+#   then stroke, without the category prefix; numeric suffixes distinguish conflicting combinations.
+# - components maps component[.part][.variant] to base and alternate state presentations. YAML aliases
+#   resolve to ComponentPresentation objects, not strings. Every state is a complete presentation.
+#   checkedDisabled, indeterminateDisabled, and selectedDisabled preserve independent status axes.
+#   Disabled replaces mutually exclusive error/readOnly/visited states; those use the component's disabled.
+#   Focused colors use alternate presentations; focus-ring geometry is outside this color reference.
+# - Empty base presentations mean no painted part at rest (validation messages and nav indicators).
+#   Loading belongs to the menu/listbox Section Header variant, not the interactive item variant.
+# - Layer merges allow extra non-conflicting keys. Numbered names distinguish conflicting layers.
+#   All mapping keys are alphabetical; the three top-level sections follow the TypeScript schema order.
+#
+# Delegated colors: breadcrumb items, menu buttons, split buttons, unselected toggle buttons, and
+# InfoLabel triggers use Button; combo/dropdown/select/search fields use Input; Menu and TeachingPopover
+# containers use Popover; InfoLabel text and RadioGroup legends use Label.
+
+layers:
+  bg.brandHeavy:
+    hover: OKLCH(--gnrc-color-background-brand-heavy)
+    pressed: OKLCH(--gnrc-color-background-brand-heavy)
+    rest: --gnrc-color-background-brand-heavy
+    type: inverted
+  bg.brandSoft:
+    rest: --gnrc-color-background-brand-soft
+  bg.dangerLoud:
+    hover: OKLCH(--gnrc-color-background-danger-loud)
+    pressed: OKLCH(--gnrc-color-background-danger-loud)
+    rest: --gnrc-color-background-danger-loud
+    type: inverted
+  bg.dangerSoft:
+    rest: --gnrc-color-background-danger-soft
+  bg.dangerSubtle:
+    rest: --gnrc-color-background-danger-subtle
+    underlay: --gnrc-color-surface-neutral-nearer
+  bg.neutralHeavy:
+    hover: OKLCH(--gnrc-color-background-neutral-heavy)
+    pressed: OKLCH(--gnrc-color-background-neutral-heavy)
+    rest: --gnrc-color-background-neutral-heavy
+    type: inverted
+  bg.neutralHeavyDisabled:
+    rest: --gnrc-color-background-neutral-heavy-disabled
+  bg.neutralSoft:
+    hover: OKLCH(--gnrc-color-background-neutral-soft)
+    pressed: OKLCH(--gnrc-color-background-neutral-soft)
+    rest: --gnrc-color-background-neutral-soft
+    type: standard
+  bg.neutralSubtle:
+    hover: OKLCH(--gnrc-color-background-neutral-subtle)
+    pressed: OKLCH(--gnrc-color-background-neutral-subtle)
+    rest: --gnrc-color-background-neutral-subtle
+    shimmer: --gnrc-color-background-neutral-soft
+    type: standard
+    underlay: --gnrc-color-surface-neutral-nearer
+  bg.neutralSubtleDisabled:
+    rest: --gnrc-color-background-neutral-subtle-disabled
+  bg.neutralTranslucent:
+    rest: --gnrc-color-background-neutral-translucent
+  bg.neutralTransparent:
+    hover: OKLCH(--gnrc-color-background-neutral-transparent)
+    pressed: OKLCH(--gnrc-color-background-neutral-transparent)
+    rest: --gnrc-color-background-neutral-transparent
+    type: standard
+  bg.neutralTransparent2:
+    hover: --gnrc-color-background-neutral-transparent
+    pressed: --gnrc-color-background-neutral-transparent
+    rest: --gnrc-color-background-neutral-transparent
+  bg.neutralTransparent3:
+    hover: OKLCH(--gnrc-color-background-danger-subtle)
+    pressed: OKLCH(--gnrc-color-background-danger-subtle)
+    rest: --gnrc-color-background-neutral-transparent
+    type: standard
+  bg.neutralTransparentDisabled:
+    rest: --gnrc-color-background-neutral-transparent
+  bg.overlayNeutralTranslucent:
+    rest: --gnrc-color-overlay-neutral-translucent
+  bg.successSoft:
+    rest: --gnrc-color-background-success-soft
+  bg.successSubtle:
+    rest: --gnrc-color-background-success-subtle
+    underlay: --gnrc-color-surface-neutral-nearer
+  bg.surfaceNeutralNear:
+    rest: --gnrc-color-surface-neutral-near
+  bg.surfaceNeutralNearer:
+    rest: --gnrc-color-surface-neutral-nearer
+  bg.surfaceNeutralTranslucent:
+    hover: OKLCH(--gnrc-color-surface-neutral-translucent)
+    pressed: OKLCH(--gnrc-color-surface-neutral-translucent)
+    rest: --gnrc-color-surface-neutral-translucent
+    type: standard
+  bg.warningSoft:
+    rest: --gnrc-color-background-warning-soft
+  bg.warningSubtle:
+    rest: --gnrc-color-background-warning-subtle
+    underlay: --gnrc-color-surface-neutral-nearer
+  fg.brandOnloud:
+    hover: OKLCH(--gnrc-color-foreground-brand-onloud)
+    pressed: OKLCH(--gnrc-color-foreground-brand-onloud)
+    rest: --gnrc-color-foreground-brand-onloud
+    type: inverted
+  fg.brandPrimary:
+    hover: OKLCH(--gnrc-color-foreground-brand-primary)
+    pressed: OKLCH(--gnrc-color-foreground-brand-primary)
+    rest: --gnrc-color-foreground-brand-primary
+    type: standard
+  fg.dangerOnloud:
+    hover: OKLCH(--gnrc-color-foreground-danger-onloud)
+    pressed: OKLCH(--gnrc-color-foreground-danger-onloud)
+    rest: --gnrc-color-foreground-danger-onloud
+    type: inverted
+  fg.dangerPrimary:
+    hover: OKLCH(--gnrc-color-foreground-danger-primary)
+    pressed: OKLCH(--gnrc-color-foreground-danger-primary)
+    rest: --gnrc-color-foreground-danger-primary
+    type: standard
+  fg.neutralDisabled:
+    icon: --gnrc-color-foreground-neutral-disabled
+    placeholder: --gnrc-color-foreground-neutral-disabled
+    required: --gnrc-color-foreground-neutral-disabled
+    rest: --gnrc-color-foreground-neutral-disabled
+    secondary: --gnrc-color-foreground-neutral-disabled
+  fg.neutralOnloud:
+    hover: OKLCH(--gnrc-color-foreground-neutral-onloud)
+    pressed: OKLCH(--gnrc-color-foreground-neutral-onloud)
+    rest: --gnrc-color-foreground-neutral-onloud
+    type: inverted
+  fg.neutralPrimary:
+    hover: OKLCH(--gnrc-color-foreground-neutral-primary)
+    icon: --gnrc-color-foreground-neutral-secondary
+    placeholder: --gnrc-color-foreground-neutral-tertiary
+    pressed: OKLCH(--gnrc-color-foreground-neutral-primary)
+    required: --gnrc-color-foreground-danger-primary
+    rest: --gnrc-color-foreground-neutral-primary
+    secondary: --gnrc-color-foreground-neutral-primary
+    type: standard
+  fg.neutralPrimary2:
+    hover: OKLCH(--gnrc-color-foreground-neutral-primary)
+    icon: --gnrc-color-foreground-brand-primary
+    pressed: OKLCH(--gnrc-color-foreground-neutral-primary)
+    rest: --gnrc-color-foreground-neutral-primary
+    secondary: --gnrc-color-foreground-neutral-secondary
+    type: standard
+  fg.neutralPrimary3:
+    icon: --gnrc-color-foreground-danger-primary
+    rest: --gnrc-color-foreground-neutral-primary
+    secondary: --gnrc-color-foreground-neutral-secondary
+  fg.neutralPrimary4:
+    icon: --gnrc-color-foreground-success-primary
+    rest: --gnrc-color-foreground-neutral-primary
+    secondary: --gnrc-color-foreground-neutral-secondary
+  fg.neutralPrimary5:
+    icon: --gnrc-color-foreground-neutral-primary
+    rest: --gnrc-color-foreground-neutral-primary
+  fg.neutralPrimary6:
+    icon: --gnrc-color-foreground-warning-primary
+    rest: --gnrc-color-foreground-neutral-primary
+  fg.neutralSecondary:
+    hover: OKLCH(--gnrc-color-foreground-neutral-secondary)
+    icon: --gnrc-color-foreground-neutral-secondary
+    pressed: OKLCH(--gnrc-color-foreground-neutral-secondary)
+    rest: --gnrc-color-foreground-neutral-secondary
+    secondary: --gnrc-color-foreground-neutral-secondary
+    type: standard
+  fg.neutralSecondaryDisabled:
+    rest: --gnrc-color-foreground-neutral-secondary
+  fg.neutralTertiary:
+    rest: --gnrc-color-foreground-neutral-tertiary
+  fg.successPrimary:
+    rest: --gnrc-color-foreground-success-primary
+  fg.warningPrimary:
+    rest: --gnrc-color-foreground-warning-primary
+  stroke.brandLoud:
+    hover: OKLCH(--gnrc-color-stroke-brand-loud)
+    pressed: OKLCH(--gnrc-color-stroke-brand-loud)
+    rest: --gnrc-color-stroke-brand-loud
+    type: inverted
+  stroke.dangerLoud:
+    rest: --gnrc-color-stroke-danger-loud
+  stroke.dangerSubtle:
+    rest: --gnrc-color-stroke-danger-subtle
+  stroke.focusOuter:
+    rest: --gnrc-color-stroke-focus-outer
+  stroke.neutralDisabled:
+    rest: --gnrc-color-stroke-neutral-disabled
+  stroke.neutralDisabled2:
+    rest: --gnrc-color-stroke-neutral-disabled
+  stroke.neutralHeavy:
+    hover: OKLCH(--gnrc-color-stroke-neutral-heavy)
+    pressed: OKLCH(--gnrc-color-stroke-neutral-heavy)
+    rest: --gnrc-color-stroke-neutral-heavy
+    type: inverted
+  stroke.neutralLoud:
+    hover: OKLCH(--gnrc-color-stroke-neutral-loud)
+    pressed: OKLCH(--gnrc-color-stroke-neutral-loud)
+    rest: --gnrc-color-stroke-neutral-loud
+    track: --gnrc-color-stroke-neutral-subtle
+    type: inverted
+  stroke.neutralOnloud:
+    rest: --gnrc-color-stroke-neutral-onloud
+  stroke.neutralSoft:
+    rest: --gnrc-color-stroke-neutral-soft
+  stroke.neutralSubtle:
+    rest: --gnrc-color-stroke-neutral-subtle
+  stroke.neutralTransparent:
+    rest: --gnrc-color-stroke-neutral-transparent
+  stroke.successLoud:
+    rest: --gnrc-color-stroke-success-loud
+  stroke.successSubtle:
+    rest: --gnrc-color-stroke-success-subtle
+  stroke.transparent:
+    rest: transparent
+  stroke.transparentDisabled:
+    rest: transparent
+  stroke.warningLoud:
+    rest: --gnrc-color-stroke-warning-loud
+  stroke.warningSubtle:
+    rest: --gnrc-color-stroke-warning-subtle
+
+presentations:
+  brandHeavy: &brandHeavy { bg: bg.brandHeavy, fg: fg.brandOnloud, stroke: stroke.transparent }
+  brandHeavy2: &brandHeavy2 { bg: bg.brandHeavy, fg: fg.neutralOnloud }
+  brandLoud: &brandLoud { stroke: stroke.brandLoud }
+  brandPrimary: &brandPrimary { bg: fg.brandPrimary }
+  brandSoft: &brandSoft { bg: bg.brandSoft, fg: fg.brandPrimary }
+  dangerLoud: &dangerLoud { bg: bg.dangerLoud, fg: fg.dangerOnloud, stroke: stroke.transparent }
+  dangerPrimary: &dangerPrimary { bg: fg.dangerPrimary }
+  dangerPrimary2: &dangerPrimary2 { fg: fg.dangerPrimary }
+  dangerSoft: &dangerSoft { bg: bg.dangerSoft, fg: fg.dangerPrimary }
+  dangerSubtle: &dangerSubtle { bg: bg.dangerSubtle, fg: fg.neutralPrimary3, stroke: stroke.dangerSubtle }
+  neutralDisabled: &neutralDisabled { fg: fg.neutralDisabled }
+  neutralDisabled2: &neutralDisabled2 { stroke: stroke.neutralDisabled }
+  neutralHeavy: &neutralHeavy { bg: bg.neutralHeavy, fg: fg.neutralOnloud, stroke: stroke.neutralHeavy }
+  neutralHeavy2: &neutralHeavy2 { bg: bg.neutralHeavy, fg: fg.neutralOnloud, stroke: stroke.transparent }
+  neutralHeavy3: &neutralHeavy3 { bg: bg.neutralHeavy, fg: fg.neutralOnloud }
+  neutralHeavyDisabled: &neutralHeavyDisabled { bg: bg.neutralHeavyDisabled, fg: fg.neutralDisabled, stroke: stroke.transparentDisabled }
+  neutralHeavyDisabled2: &neutralHeavyDisabled2 { bg: bg.neutralHeavyDisabled, fg: fg.neutralDisabled }
+  neutralHeavyDisabled3: &neutralHeavyDisabled3 { bg: bg.neutralHeavyDisabled, fg: fg.neutralDisabled, stroke: stroke.neutralDisabled }
+  neutralLoud: &neutralLoud { stroke: stroke.neutralLoud }
+  neutralOnloud: &neutralOnloud { stroke: fg.neutralOnloud }
+  neutralOnloud2: &neutralOnloud2 { stroke: stroke.neutralOnloud }
+  neutralPrimary: &neutralPrimary { fg: fg.neutralPrimary }
+  neutralPrimary2: &neutralPrimary2 { fg: fg.neutralPrimary2 }
+  neutralSecondary: &neutralSecondary { fg: fg.neutralSecondary }
+  neutralSecondary2: &neutralSecondary2 { fg: fg.neutralSecondary, stroke: stroke.neutralSubtle }
+  neutralSecondaryDisabled: &neutralSecondaryDisabled { fg: fg.neutralSecondaryDisabled }
+  neutralSoft: &neutralSoft { bg: bg.neutralSoft, fg: fg.neutralPrimary }
+  neutralSoft2: &neutralSoft2 { bg: bg.neutralSoft, fg: fg.neutralPrimary2 }
+  neutralSoft3: &neutralSoft3 { bg: bg.neutralSoft, fg: fg.neutralPrimary2, stroke: stroke.transparent }
+  neutralSoft4: &neutralSoft4 { bg: bg.neutralSoft, fg: fg.neutralPrimary3 }
+  neutralSoft5: &neutralSoft5 { bg: bg.neutralSoft, fg: fg.neutralPrimary4 }
+  neutralSoft6: &neutralSoft6 { bg: bg.neutralSoft, stroke: stroke.neutralSoft }
+  neutralSubtle: &neutralSubtle { bg: bg.neutralSubtle, fg: fg.neutralPrimary2, stroke: stroke.transparent }
+  neutralSubtle2: &neutralSubtle2 { stroke: stroke.neutralSubtle }
+  neutralSubtle3: &neutralSubtle3 { bg: bg.neutralSubtle }
+  neutralSubtle4: &neutralSubtle4 { bg: bg.neutralSubtle, fg: fg.neutralPrimary }
+  neutralSubtle5: &neutralSubtle5 { bg: bg.neutralSubtle, fg: fg.neutralPrimary2 }
+  neutralSubtle6: &neutralSubtle6 { bg: bg.neutralSubtle, fg: fg.neutralPrimary5, stroke: stroke.neutralSubtle }
+  neutralSubtleDisabled: &neutralSubtleDisabled { bg: bg.neutralSubtleDisabled, fg: fg.neutralDisabled }
+  neutralSubtleDisabled2:
+    &neutralSubtleDisabled2 { bg: bg.neutralSubtleDisabled, fg: fg.neutralDisabled, stroke: stroke.transparentDisabled }
+  neutralSubtleDisabled3: &neutralSubtleDisabled3 { bg: bg.neutralSubtleDisabled, stroke: stroke.neutralDisabled }
+  neutralTertiary: &neutralTertiary { fg: fg.neutralTertiary }
+  neutralTranslucent: &neutralTranslucent { bg: bg.neutralTranslucent }
+  neutralTransparent: &neutralTransparent { bg: bg.neutralTransparent2, fg: fg.neutralPrimary, stroke: stroke.dangerLoud }
+  neutralTransparent10: &neutralTransparent10 { bg: bg.neutralTransparent2, fg: fg.neutralPrimary }
+  neutralTransparent11: &neutralTransparent11 { bg: bg.neutralTransparent2, fg: fg.neutralPrimary2 }
+  neutralTransparent12: &neutralTransparent12 { bg: bg.neutralTransparent, fg: fg.neutralSecondary, stroke: fg.neutralSecondary }
+  neutralTransparent13: &neutralTransparent13 { bg: bg.neutralTransparent, stroke: stroke.neutralHeavy }
+  neutralTransparent14: &neutralTransparent14 { bg: bg.neutralTransparent2, fg: fg.dangerPrimary, stroke: stroke.dangerLoud }
+  neutralTransparent15: &neutralTransparent15 { bg: bg.neutralTransparent2, fg: fg.successPrimary, stroke: stroke.successLoud }
+  neutralTransparent16: &neutralTransparent16 { bg: bg.neutralTransparent2, fg: fg.warningPrimary, stroke: stroke.warningLoud }
+  neutralTransparent17: &neutralTransparent17 { bg: bg.neutralTransparent2, stroke: stroke.neutralHeavy }
+  neutralTransparent18: &neutralTransparent18 { bg: bg.neutralTransparent2 }
+  neutralTransparent19: &neutralTransparent19 { bg: bg.neutralTransparent3, fg: fg.dangerPrimary, stroke: stroke.transparent }
+  neutralTransparent2: &neutralTransparent2 { bg: bg.neutralTransparent2, fg: fg.neutralPrimary, stroke: stroke.neutralLoud }
+  neutralTransparent3: &neutralTransparent3 { bg: bg.neutralTransparent, fg: fg.neutralPrimary2 }
+  neutralTransparent4: &neutralTransparent4 { bg: bg.neutralTransparent2, fg: fg.neutralPrimary, stroke: stroke.neutralSubtle }
+  neutralTransparent5: &neutralTransparent5 { bg: bg.neutralTransparent, fg: fg.neutralPrimary2, stroke: stroke.transparent }
+  neutralTransparent6: &neutralTransparent6 { bg: bg.neutralTransparent2, fg: fg.neutralPrimary, stroke: stroke.focusOuter }
+  neutralTransparent7: &neutralTransparent7 { bg: bg.neutralTransparent, fg: fg.neutralPrimary2, stroke: stroke.neutralSubtle }
+  neutralTransparent8: &neutralTransparent8 { bg: bg.neutralTransparent2, fg: fg.neutralPrimary, stroke: stroke.neutralDisabled2 }
+  neutralTransparent9: &neutralTransparent9 { bg: bg.neutralTransparent2, fg: fg.brandPrimary, stroke: stroke.brandLoud }
+  neutralTransparentDisabled:
+    &neutralTransparentDisabled { bg: bg.neutralTransparentDisabled, fg: fg.neutralDisabled, stroke: stroke.neutralDisabled }
+  neutralTransparentDisabled2: &neutralTransparentDisabled2 { bg: bg.neutralTransparentDisabled, fg: fg.neutralDisabled }
+  neutralTransparentDisabled3:
+    &neutralTransparentDisabled3 { bg: bg.neutralTransparentDisabled, fg: fg.neutralDisabled, stroke: stroke.transparentDisabled }
+  neutralTransparentDisabled4: &neutralTransparentDisabled4 { bg: bg.neutralTransparentDisabled, stroke: stroke.neutralDisabled }
+  none: &none {}
+  overlayNeutralTranslucent: &overlayNeutralTranslucent { bg: bg.overlayNeutralTranslucent }
+  successPrimary: &successPrimary { bg: fg.successPrimary }
+  successPrimary2: &successPrimary2 { fg: fg.successPrimary }
+  successSoft: &successSoft { bg: bg.successSoft, fg: fg.successPrimary }
+  successSubtle: &successSubtle { bg: bg.successSubtle, fg: fg.neutralPrimary4, stroke: stroke.successSubtle }
+  surfaceNeutralNear: &surfaceNeutralNear { bg: bg.surfaceNeutralNear }
+  surfaceNeutralNearer: &surfaceNeutralNearer { bg: bg.surfaceNeutralNearer, stroke: stroke.neutralSubtle }
+  surfaceNeutralNearer2: &surfaceNeutralNearer2 { bg: bg.surfaceNeutralNearer, fg: fg.neutralPrimary, stroke: stroke.neutralSubtle }
+  surfaceNeutralNearer3: &surfaceNeutralNearer3 { bg: bg.surfaceNeutralNearer, fg: fg.neutralPrimary, stroke: stroke.neutralTransparent }
+  surfaceNeutralNearer4: &surfaceNeutralNearer4 { bg: bg.surfaceNeutralNearer, fg: fg.neutralPrimary }
+  surfaceNeutralNearer5: &surfaceNeutralNearer5 { bg: bg.surfaceNeutralNearer, fg: fg.neutralPrimary2, stroke: stroke.neutralSubtle }
+  surfaceNeutralTranslucent: &surfaceNeutralTranslucent { bg: bg.surfaceNeutralTranslucent, stroke: stroke.neutralSubtle }
+  warningPrimary: &warningPrimary { fg: fg.warningPrimary }
+  warningSoft: &warningSoft { bg: bg.warningSoft, fg: fg.warningPrimary }
+  warningSubtle: &warningSubtle { bg: bg.warningSubtle, fg: fg.neutralPrimary6, stroke: stroke.warningSubtle }
+
+components:
+  accordion:
+    base: *neutralTransparent3
+  avatar.activityRing:
+    base: *brandLoud
+  avatar.icon:
+    base: *neutralSoft
+  avatar.initials:
+    base: *neutralSoft
+  avatarGroup.overflow:
+    base: *surfaceNeutralNearer2
+  badge.outline.brand:
+    base: *neutralTransparent9
+  badge.outline.danger:
+    base: *neutralTransparent14
+  badge.outline.informative:
+    base: *neutralTransparent2
+  badge.outline.success:
+    base: *neutralTransparent15
+  badge.outline.warning:
+    base: *neutralTransparent16
+  badge.tint.brand:
+    base: *brandSoft
+  badge.tint.danger:
+    base: *dangerSoft
+  badge.tint.informative:
+    base: *neutralSoft
+  badge.tint.success:
+    base: *successSoft
+  badge.tint.warning:
+    base: *warningSoft
+  breadcrumb.item:
+    base: *neutralTransparent5
+    current: *neutralPrimary
+    disabled: *neutralTransparentDisabled3
+  breadcrumb.separator:
+    base: *neutralTertiary
+  button.outline:
+    base: *neutralTransparent7
+    disabled: *neutralTransparentDisabled
+  button.primary:
+    base: *brandHeavy
+    disabled: *neutralHeavyDisabled
+  button.secondary:
+    base: *neutralSubtle
+    disabled: *neutralSubtleDisabled2
+  button.subtle:
+    base: *neutralTransparent5
+    disabled: *neutralTransparentDisabled3
+  card:
+    base: *surfaceNeutralTranslucent
+    disabled: *neutralSubtleDisabled3
+    selected: *neutralSoft6
+    selectedDisabled: *neutralSubtleDisabled3
+  card.nestedContent:
+    base: *neutralTranslucent
+  checkbox:
+    base: *neutralSecondary
+    checked: *neutralPrimary2
+    checkedDisabled: *neutralDisabled
+    disabled: *neutralDisabled
+    indeterminate: *neutralPrimary2
+    indeterminateDisabled: *neutralDisabled
+  checkbox.indicator:
+    base: *neutralTransparent13
+    checked: *brandHeavy
+    checkedDisabled: *neutralHeavyDisabled
+    disabled: *neutralTransparentDisabled4
+    indeterminate: *brandHeavy
+    indeterminateDisabled: *neutralHeavyDisabled
+  combobox.chevron:
+    base: *neutralSecondary
+    disabled: *neutralDisabled
+    error: *neutralPrimary
+    focused: *neutralPrimary
+  combobox.clearButton:
+    base: *neutralSecondary
+    disabled: *neutralDisabled
+    focused: *neutralPrimary
+  combobox.outline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent4
+  combobox.underline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent6
+  destructiveButton.primary:
+    base: *dangerLoud
+    disabled: *neutralHeavyDisabled
+  destructiveButton.subtle:
+    base: *neutralTransparent19
+    disabled: *neutralTransparentDisabled3
+  dialog:
+    base: *surfaceNeutralNearer3
+  dialog.scrim:
+    base: *overlayNeutralTranslucent
+  divider:
+    base: *neutralSecondary2
+  drawer:
+    base: *surfaceNeutralNearer2
+  drawer.scrim:
+    base: *overlayNeutralTranslucent
+  dropdown.chevron:
+    base: *neutralSecondary
+    disabled: *neutralDisabled
+    error: *neutralPrimary
+    focused: *neutralPrimary
+  dropdown.outline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent4
+  dropdown.underline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent6
+  field:
+    base: *neutralSecondary
+    disabled: *neutralSecondaryDisabled
+  field.validation:
+    base: *none
+    error: *dangerPrimary2
+    success: *successPrimary2
+    warning: *warningPrimary
+  infoLabel.label:
+    base: *neutralPrimary
+    disabled: *neutralDisabled
+  infoLabel.trigger:
+    base: *neutralTransparent5
+    disabled: *neutralTransparentDisabled3
+  input.outline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent4
+    readOnly: *neutralTransparent8
+  input.underline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent6
+    readOnly: *neutralTransparent8
+    readOnlyFocused: *neutralTransparent8
+  interactionTag.divider.primary:
+    base: *neutralOnloud
+  interactionTag.divider.secondary:
+    base: *neutralSubtle2
+  interactionTag.primary:
+    base: *brandHeavy2
+    disabled: *neutralHeavyDisabled2
+  interactionTag.secondary:
+    base: *neutralSubtle4
+    disabled: *neutralSubtleDisabled
+  label:
+    base: *neutralPrimary
+    disabled: *neutralDisabled
+  link.content:
+    base: *neutralPrimary2
+    disabled: *neutralDisabled
+    visited: *neutralPrimary
+  link.functional:
+    base: *neutralPrimary2
+    disabled: *neutralDisabled
+    visited: *neutralPrimary
+  list:
+    base: *neutralTransparent18
+  listboxItem:
+    base: *neutralTransparent3
+    disabled: *neutralTransparentDisabled2
+    selected: *neutralSoft
+    selectedDisabled: *neutralSubtleDisabled
+  listboxItem.sectionHeader:
+    base: *neutralTransparent11
+    disabled: *neutralTransparentDisabled2
+    loading: *neutralSubtle3
+  listItem:
+    base: *neutralTransparent3
+    disabled: *neutralTransparentDisabled2
+    selected: *neutralSoft
+    selectedDisabled: *neutralSubtleDisabled
+  menu:
+    base: *surfaceNeutralNearer
+  menuButton.outline:
+    base: *neutralTransparent7
+    disabled: *neutralTransparentDisabled
+  menuButton.primary:
+    base: *brandHeavy
+    disabled: *neutralHeavyDisabled
+  menuButton.secondary:
+    base: *neutralSubtle
+    disabled: *neutralSubtleDisabled2
+  menuButton.subtle:
+    base: *neutralTransparent5
+    disabled: *neutralTransparentDisabled3
+  menuItem:
+    base: *neutralTransparent3
+    disabled: *neutralTransparentDisabled2
+    selected: *neutralSoft
+    selectedDisabled: *neutralSubtleDisabled
+  menuItem.sectionHeader:
+    base: *neutralTransparent11
+    disabled: *neutralTransparentDisabled2
+    loading: *neutralSubtle3
+  messageBar.action:
+    base: *neutralTransparent10
+  messageBar.dismiss:
+    base: *neutralTransparent10
+  messageBar.error:
+    base: *dangerSubtle
+  messageBar.information:
+    base: *neutralSubtle6
+  messageBar.success:
+    base: *successSubtle
+  messageBar.warning:
+    base: *warningSubtle
+  nav:
+    base: *surfaceNeutralNearer
+  nav.sectionHeader:
+    base: *neutralPrimary
+  navItem:
+    base: *neutralTransparent3
+    disabled: *neutralTransparentDisabled2
+    selected: *neutralSoft2
+    selectedDisabled: *neutralSubtleDisabled
+  navItem.indicator:
+    base: *none
+    selected: *brandLoud
+  popover:
+    base: *surfaceNeutralNearer
+  progressBar:
+    base: *neutralSoft2
+    error: *neutralSoft4
+    success: *neutralSoft5
+  progressBar.indicator:
+    base: *brandPrimary
+    error: *dangerPrimary
+    success: *successPrimary
+  radio:
+    base: *neutralSecondary
+    disabled: *neutralDisabled
+    selected: *neutralPrimary2
+    selectedDisabled: *neutralDisabled
+  radio.indicator:
+    base: *neutralTransparent17
+    disabled: *neutralTransparentDisabled4
+    selected: *neutralTransparent9
+    selectedDisabled: *neutralTransparentDisabled
+  radioGroup.legend:
+    base: *neutralPrimary
+    disabled: *neutralDisabled
+  scrollbar:
+    base: *neutralTertiary
+  searchBox.clearButton:
+    base: *neutralSubtle5
+    disabled: *neutralSubtleDisabled
+  searchBox.outline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    focused: *neutralTransparent4
+  searchBox.underline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    focused: *neutralTransparent6
+  select.chevron:
+    base: *neutralSecondary
+    disabled: *neutralDisabled
+    error: *neutralPrimary
+    focused: *neutralPrimary
+  select.outline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent4
+  select.underline:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    errorFocused: *neutralTransparent
+    focused: *neutralTransparent6
+  simpleNav:
+    base: *surfaceNeutralNearer
+  simpleNav.scrim:
+    base: *overlayNeutralTranslucent
+  simpleNav.sectionHeader:
+    base: *neutralPrimary
+  skeleton:
+    base: *neutralSubtle3
+  spinner:
+    base: *neutralLoud
+  splitButton.divider.outline:
+    base: *neutralSubtle2
+    disabled: *neutralDisabled2
+  splitButton.divider.primary:
+    base: *neutralOnloud2
+    disabled: *neutralDisabled2
+  splitButton.divider.secondary:
+    base: *neutralSubtle2
+    disabled: *neutralDisabled2
+  splitButton.outline:
+    base: *neutralTransparent7
+    disabled: *neutralTransparentDisabled
+  splitButton.primary:
+    base: *brandHeavy
+    disabled: *neutralHeavyDisabled
+  splitButton.secondary:
+    base: *neutralSubtle
+    disabled: *neutralSubtleDisabled2
+  switch:
+    base: *neutralTransparent12
+    checked: *neutralHeavy
+    checkedDisabled: *neutralHeavyDisabled3
+    disabled: *neutralTransparentDisabled
+  tab:
+    base: *neutralTransparent3
+    disabled: *neutralTransparentDisabled2
+    selected: *neutralHeavy3
+    selectedDisabled: *neutralHeavyDisabled2
+  tag.primary:
+    base: *brandHeavy2
+    disabled: *neutralHeavyDisabled2
+  tag.secondary:
+    base: *neutralSubtle4
+    disabled: *neutralSubtleDisabled
+  teachingPopover:
+    base: *surfaceNeutralNearer5
+  teachingPopover.image:
+    base: *surfaceNeutralNear
+  textarea:
+    base: *neutralTransparent2
+    disabled: *neutralTransparentDisabled
+    error: *neutralTransparent
+    focused: *neutralTransparent4
+    readOnly: *neutralTransparent8
+  toggleButton.outline:
+    base: *neutralTransparent7
+    disabled: *neutralTransparentDisabled
+    selected: *neutralHeavy
+    selectedDisabled: *neutralHeavyDisabled3
+  toggleButton.primary:
+    base: *brandHeavy
+    disabled: *neutralHeavyDisabled
+    selected: *brandHeavy
+    selectedDisabled: *neutralHeavyDisabled
+  toggleButton.secondary:
+    base: *neutralSubtle
+    disabled: *neutralSubtleDisabled2
+    selected: *neutralHeavy2
+    selectedDisabled: *neutralHeavyDisabled
+  toggleButton.subtle:
+    base: *neutralTransparent5
+    disabled: *neutralTransparentDisabled3
+    selected: *neutralSoft3
+    selectedDisabled: *neutralSubtleDisabled2
+  toolbar.divider:
+    base: *neutralSubtle2
+  tooltip:
+    base: *surfaceNeutralNearer4

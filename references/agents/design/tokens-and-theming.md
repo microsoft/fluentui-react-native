@@ -16,6 +16,10 @@ owner_paths:
 
 ## Tokens
 
+For upstream Flex token or foundation evidence, use the scoped
+[Agency plugin loading guidance](../repository/agency-plugins.md). Keep its authenticated, pinned reference data
+separate from FURN runtime token APIs.
+
 Tokens are design-time values set through the theme or component customization, for example a brand color. v1 tokens
 can also be props through `tokensThatAreAlsoProps`; see the [v1 recipe](../components/v1.md). Agentic token use is
 covered by [styles and tokens](../components/agentic/styles-and-tokens.md).

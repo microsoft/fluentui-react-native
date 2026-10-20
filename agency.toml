@@ -11,3 +11,39 @@ cache_policy = "no-refresh"
 [[profiles.flex-authoring.plugins.default]]
 plugin = "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
 cache_policy = "no-refresh"
+
+[profiles.flex-motion]
+
+[[profiles.flex-motion.plugins.default]]
+plugin = "market:flex-components@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-motion.plugins.default]]
+plugin = "market:flex-system@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-motion.plugins.default]]
+plugin = "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-motion.plugins.default]]
+plugin = "market:flex-motion@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[profiles.flex-processes]
+
+[[profiles.flex-processes.plugins.default]]
+plugin = "market:flex-components@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-processes.plugins.default]]
+plugin = "market:flex-system@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-processes.plugins.default]]
+plugin = "market:flex-tokens@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
+
+[[profiles.flex-processes.plugins.default]]
+plugin = "market:flex-processes@curated#206c4996205b027f4d806ac4ac7366f1f0ab0d5a"
+cache_policy = "no-refresh"
