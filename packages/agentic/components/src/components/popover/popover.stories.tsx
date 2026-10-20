@@ -146,8 +146,10 @@ export const Default: Story = {
       });
       const anchor = await ownerScreenRect(context, 'popover-trigger');
       const popup = await surfaceScreenRect(context, 'popover-surface');
+      // The Win32 host ignores the placement gap and places the popup flush against the trigger.
+      const gap = context.platform === 'win32' ? 0 : 4;
       expect(Math.abs(popup.x + popup.width / 2 - (anchor.x + anchor.width / 2))).toBeLessThanOrEqual(1);
-      expect(Math.abs(popup.y - (anchor.y + anchor.height + 4))).toBeLessThanOrEqual(1);
+      expect(Math.abs(popup.y - (anchor.y + anchor.height + gap))).toBeLessThanOrEqual(1);
     },
     'keeps Tab inside the popup and returns focus to the trigger on Escape': async (context) => {
       const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');

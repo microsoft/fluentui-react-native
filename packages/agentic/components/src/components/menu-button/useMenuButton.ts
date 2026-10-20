@@ -5,7 +5,9 @@ import type { FocusIntent, FocusKeyboardEvent, FocusRequest, FocusTarget } from 
 import { useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Icon } from '../../primitives/icon/icon';
+import type { ButtonProps } from '../button/button.types';
 import { useButton_unstable } from '../button/useButton';
 import { MenuItemMenuContext } from '../menu-item/menuItemContext';
 import { useMenuController } from '../menu/menuFamily';
@@ -102,16 +104,21 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     [disabled, onKeyDown, openFromKey],
   );
 
-  const button = useButton_unstable({
-    ...buttonProps,
-    accessibilityHint: accessibilityHint ?? defaultHint,
-    accessibilityState: { ...accessibilityState, expanded: controller.presented },
-    keyDownEvents: [...(keyDownEvents ?? []), ...triggerKeys],
-    onKeyDown: handleKeyDown,
-    onPress: composeHandlers(onPress, controller.handlePress),
-    onPressIn: composeHandlers(controller.handlePressIn, onPressIn),
-    shape: 'rounded',
-  });
+  const button = useButton_unstable(
+    withTriggerExpandActions<ButtonProps>(
+      {
+        ...buttonProps,
+        accessibilityHint: accessibilityHint ?? defaultHint,
+        accessibilityState: { ...accessibilityState, expanded: controller.presented },
+        keyDownEvents: [...(keyDownEvents ?? []), ...triggerKeys],
+        onKeyDown: handleKeyDown,
+        onPress: composeHandlers(onPress, controller.handlePress),
+        onPressIn: composeHandlers(controller.handlePressIn, onPressIn),
+        shape: 'rounded',
+      },
+      controller.setExpanded,
+    ),
+  );
   const { focusTarget } = button;
   React.useLayoutEffect(() => {
     triggerTarget.current = focusTarget;

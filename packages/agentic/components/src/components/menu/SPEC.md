@@ -119,8 +119,9 @@ popups are private.
   bindings with Menu padding and no row gap, size it to the widest row, apply
   native elevation, and apply caller surface styles last.
 - **MNU-012:** Present through native-core's modern Callout and FocusZone on
-  macOS (Paper and Fabric) and Windows Fabric. Other hosts throw a descriptive
-  error on use. Do not export Menu publicly until it qualifies on all four
+  macOS (Paper and Fabric) and Windows Fabric, and through its Win32 Callout
+  and FocusZone adapters on Office Win32. Other hosts throw a descriptive error
+  on use. Do not export Menu publicly until it qualifies on all four
   desktop endpoints.
 
 ## Platform behavior
@@ -137,10 +138,15 @@ through the rows' key events; the native FocusZone handles Up and Down.
 Windows handles Home and End natively. Pointer opens on macOS follow AppKit
 menus by focusing the menu surface without a highlighted row.
 
-Office Win32 has no modern Callout route yet, so Menu throws there and its
-stories are excluded from Win32 Storybook until #4384. iOS and Android are
-unsupported. Menu is not exported from the package root until all four
-endpoints qualify.
+Office Win32 presents each popup through native-core's Win32 Callout adapter
+without initial focus, so Menu focuses the entry row itself. The host's
+FocusZone handles Up and Down; Menu handles Home and End by focusing the first
+or last focusable row. Tab or Shift+Tab in any popup closes the family and
+focuses the trigger. The Win32 host reports a pointer leave together with its
+enter, so a pending submenu open or switch there survives the leave and is
+replaced only by hovering another row, as in native Windows menus. iOS and
+Android are unsupported. Menu is not exported from the package root until all
+four endpoints qualify.
 
 ## Divergences from Flex
 
@@ -159,20 +165,20 @@ endpoints qualify.
 
 ## Conformance
 
-The listed files exist for every requirement. macOS Fabric and Paper qualify the native behavior; Windows Fabric and
-the Win32 route (#4384) must still qualify, so MNU-012 evidence stays planned in `spec/source.json`.
+The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapters qualify the
+native behavior in the Menu stories.
 
-| Requirement | Evidence                                                                              |
-| ----------- | ------------------------------------------------------------------------------------- |
-| MNU-001     | `menu.types.ts`, `useMenu.ts`, `menu.test.tsx`, `menu.types.test.ts`                  |
-| MNU-002     | `menuFamily.ts`, `menu.test.tsx`, `menu.stories.tsx`                                  |
-| MNU-003     | `useMenu.ts`, `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx` |
-| MNU-004     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                 |
-| MNU-005     | `menuNavigation.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`             |
-| MNU-006     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                 |
-| MNU-007     | `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`               |
-| MNU-008     | `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                  |
-| MNU-009     | `menuDefaults.ts`, `menuDefaults.macos.ts`, `menu.test.tsx`, `menu.stories.tsx`       |
-| MNU-010     | `useMenu.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                    |
-| MNU-011     | `menu.styles.ts`, `useMenuStyles.ts`, `menuPopup.tsx`, `menu.test.tsx`                |
-| MNU-012     | `menuNative.ts`, `menuNative.macos.ts`, `menuNative.windows.ts`, `menu.test.tsx`      |
+| Requirement | Evidence                                                                                                                    |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------- |
+| MNU-001     | `menu.types.ts`, `useMenu.ts`, `menu.test.tsx`, `menu.types.test.ts`                                                        |
+| MNU-002     | `menuFamily.ts`, `menu.test.tsx`, `menu.stories.tsx`                                                                        |
+| MNU-003     | `useMenu.ts`, `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                       |
+| MNU-004     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                       |
+| MNU-005     | `menuNavigation.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                   |
+| MNU-006     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                       |
+| MNU-007     | `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                     |
+| MNU-008     | `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                                        |
+| MNU-009     | `menuDefaults.ts`, `menuDefaults.macos.ts`, `menu.test.tsx`, `menu.stories.tsx`                                             |
+| MNU-010     | `useMenu.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                          |
+| MNU-011     | `menu.styles.ts`, `useMenuStyles.ts`, `menuPopup.tsx`, `menu.test.tsx`                                                      |
+| MNU-012     | `menuNative.ts`, `menuNative.macos.ts`, `menuNative.windows.ts`, `menuNative.win32.ts`, `menu.test.tsx`, `menu.stories.tsx` |

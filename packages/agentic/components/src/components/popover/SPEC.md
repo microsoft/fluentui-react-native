@@ -86,9 +86,9 @@ are private. Content refs inside `children` attach only while presented.
 - **POP-008:** Warn in development when a Popover renders inside another
   Popover's surface.
 - **POP-009:** Present through native-core's modern Callout on macOS (Paper and
-  Fabric) and Windows Fabric. Other hosts throw a descriptive error on use.
-  Do not export Popover publicly until it qualifies on all four desktop
-  endpoints.
+  Fabric) and Windows Fabric, and through its Win32 Callout adapter on Office
+  Win32. Other hosts throw a descriptive error on use. Do not export Popover
+  publicly until it qualifies on all four desktop endpoints.
 
 ## Platform behavior
 
@@ -107,14 +107,25 @@ returns focus to the trigger for Escape and caller-driven close.
 
 The popup window has no native backdrop material: the surface View draws the
 Flex fill, stroke, and rounded silhouette, and the native window shadow follows
-that silhouette. Windows popup silhouette, shadow, and anchor-press ordering
-require their own qualification.
+that silhouette.
 
-Office Win32 uses host-provided legacy views and has no modern adapter yet, so
-Popover throws there and its stories are excluded from Win32 Storybook until
-the native-core Win32 route (#4384) exists. iOS and Android are unsupported.
-Because all desktop endpoints ship together, Popover is not exported from the
-package root until that route is qualified.
+Office Win32 presents the surface through native-core's Win32 Callout adapter
+over the host's legacy popup. Popover behaves as on the other desktops, with
+these host differences:
+
+- The popup sits flush against the trigger, because the host ignores the gap.
+- The host window draws the surface fill and rounded corners, because it has
+  no per-pixel transparency.
+- The host gives the popup initial focus when it presents.
+- Unclassified host dismissals close the popup 250 ms after the press. A
+  trigger press in that window closes the popup through the trigger instead.
+
+The trigger also declares `Expand` and `Collapse` accessibility actions there,
+because Win32 UI Automation exposes ExpandCollapse state only for an element
+that declares them; the actions set the requested presence.
+
+iOS and Android are unsupported. Because all desktop endpoints ship together,
+Popover is not exported from the package root until every route is qualified.
 
 ## Divergences from Flex
 
@@ -126,21 +137,22 @@ package root until that route is qualified.
 | `popover-tab-containment`  | Deferred    | Tab and Shift+Tab move within the popup and wrap; Escape is the keyboard exit. Flex permits closing at the boundary with natural continuation.                                      | Adopt when owner-relative continuation lands (#4377).        |
 | `popover-native-elevation` | Accepted    | The native popup window shadow provides elevation instead of drawing `shadow.low`, which a window sized to its content would clip.                                                  | Revisit if native-core supports inset shadow geometry.       |
 | `popover-edge-margin`      | Deferred    | Native clamping aligns the popup with the work-area edge without the small margin Flex suggests.                                                                                    | Add a native margin under #4375.                             |
+| `popover-win32-gap`        | Accepted    | On Win32 the popup sits flush against the trigger; the Office host's popup ignores the requested gap.                                                                               | Pass the gap through when the host honors it.                |
 | `popover-trigger-slot`     | Accepted    | The trigger is a component-owned Button slot instead of a wrapped arbitrary child, so refs and handlers compose without cloning children.                                           | Composite components add an external-trigger binding.        |
 
 ## Conformance
 
-The listed files exist for every requirement. macOS Fabric and Paper qualify the native behavior; Windows Fabric and
-the Win32 route (#4384) must still qualify, so POP-009 evidence stays planned in `spec/source.json`.
+The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapter qualify the
+native behavior in the Popover stories.
 
-| Requirement | Evidence                                                                                     |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| POP-001     | `popover.types.ts`, `usePopover.ts`, `popover.test.tsx`, `popover.types.test.ts`             |
-| POP-002     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                   |
-| POP-003     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                   |
-| POP-004     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                   |
-| POP-005     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                   |
-| POP-006     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                   |
-| POP-007     | `popover.styles.ts`, `usePopoverStyles.ts`, `popover.test.tsx`                               |
-| POP-008     | `usePopover.ts`, `popover.test.tsx`                                                          |
-| POP-009     | `popoverNative.ts`, `popoverNative.macos.ts`, `popoverNative.windows.ts`, `popover.test.tsx` |
+| Requirement | Evidence                                                                                                                                                       |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| POP-001     | `popover.types.ts`, `usePopover.ts`, `popover.test.tsx`, `popover.types.test.ts`                                                                               |
+| POP-002     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
+| POP-003     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
+| POP-004     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
+| POP-005     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
+| POP-006     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
+| POP-007     | `popover.styles.ts`, `usePopoverStyles.ts`, `popover.test.tsx`                                                                                                 |
+| POP-008     | `usePopover.ts`, `popover.test.tsx`                                                                                                                            |
+| POP-009     | `popoverNative.ts`, `popoverNative.macos.ts`, `popoverNative.windows.ts`, `popoverNative.win32.ts`, `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx` |

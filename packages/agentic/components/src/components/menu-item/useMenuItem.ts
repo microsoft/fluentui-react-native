@@ -3,10 +3,11 @@ import { Pressable, View } from 'react-native';
 import type { GestureResponderEvent, MouseEvent, NativeSyntheticEvent, TargetedEvent } from 'react-native';
 
 import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
-import type { FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
+import type { FocusablePressableProps, FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { semanticIconSources } from '../../common/iconSources';
+import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
@@ -111,24 +112,31 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
       }
     : undefined;
 
-  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(
-    {
-      ...rest,
-      accessible: rest.accessible ?? true,
-      ...menuHandlers,
-      accessibilityHint: accessibilityHint ?? (showChevron ? 'Has submenu' : undefined),
-      accessibilityLabel: accessibilityLabel ?? contentText,
-      accessibilityRole: isListItem ? (hasMultiselect ? 'menuitemcheckbox' : hasCheckmark ? 'menuitemradio' : 'menuitem') : 'none',
-      accessibilityState: {
-        ...props.accessibilityState,
-        disabled: disabled && isInteractive,
-        ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
-        ...(inMenu && hasSubmenu && { expanded: submenuOpen }),
-      },
-      disabled: !isInteractive || disabled,
-      focusable: rowFocusable,
-      onPress: isInteractive ? (menuHandlers?.onPress ?? rest.onPress) : undefined,
+  const rowProps: FocusablePressableProps = {
+    ...rest,
+    accessible: rest.accessible ?? true,
+    ...menuHandlers,
+    accessibilityHint: accessibilityHint ?? (showChevron ? 'Has submenu' : undefined),
+    accessibilityLabel: accessibilityLabel ?? contentText,
+    accessibilityRole: isListItem ? (hasMultiselect ? 'menuitemcheckbox' : hasCheckmark ? 'menuitemradio' : 'menuitem') : 'none',
+    accessibilityState: {
+      ...props.accessibilityState,
+      disabled: disabled && isInteractive,
+      ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
+      ...(inMenu && hasSubmenu && { expanded: submenuOpen }),
     },
+    disabled: !isInteractive || disabled,
+    focusable: rowFocusable,
+    onPress: isInteractive ? (menuHandlers?.onPress ?? rest.onPress) : undefined,
+  };
+  const [pressableProps, pressableState, focusBinding] = useFocusablePressable(
+    inMenu && hasSubmenu
+      ? withTriggerExpandActions(rowProps, (expanded) => {
+          if (expanded !== submenuOpen) {
+            menu.onRowPress(menuRowId, true);
+          }
+        })
+      : rowProps,
     { disabledFocusable: isInteractive && disabledFocusable },
   );
 

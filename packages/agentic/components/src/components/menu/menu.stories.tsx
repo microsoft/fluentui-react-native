@@ -129,10 +129,19 @@ export const Default: Story = {
       expect(await (await browser.$('~menu-trigger')).getProperty('expanded')).toBe(true);
       await browser.keys('\uE015');
       await expect(await browser.$('~menu-focus')).toHaveText('Copy');
-      // The disabled Paste row is not a focus stop on macOS by default.
+      // The disabled Paste row is a focus stop by default on Windows and Win32, but not on macOS.
+      const pasteStops = context.platform !== 'macos';
+      if (pasteStops) {
+        await browser.keys('\uE015');
+        await expect(await browser.$('~menu-focus')).toHaveText('Paste');
+      }
       await browser.keys('\uE015');
       await expect(await browser.$('~menu-focus')).toHaveText('Share');
       await browser.keys('\uE013');
+      if (pasteStops) {
+        await expect(await browser.$('~menu-focus')).toHaveText('Paste');
+        await browser.keys('\uE013');
+      }
       await expect(await browser.$('~menu-focus')).toHaveText('Copy');
       await browser.keys('\uE007');
       await expect(await browser.$('~menu-action')).toHaveText('Copy');

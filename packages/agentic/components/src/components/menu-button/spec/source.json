@@ -114,7 +114,7 @@
     },
     {
       "id": "MNB-007",
-      "plannedEvidence": ["useMenuButton.ts", "menu-button.test.tsx"]
+      "evidence": ["useMenuButton.ts", "menu-button.test.tsx", "menu-button.stories.tsx"]
     }
   ]
 }

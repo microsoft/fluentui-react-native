@@ -14,9 +14,10 @@ types, tests, stories, and specifications live under `src/legacy` and are
 exported only from `@fluentui-react-native/native-core/legacy`. They are not
 exported by the root entrypoint, which is reserved for modern cross-platform
 APIs. The `macos` and `windows` now expose React 19 modern Callout/FocusZone previews,
-live native targets, and typed operation outcomes. The root, `win`, and
-`win32` remain unadmitted for modern components. Legacy Win32 uses its existing
-host registrations without new managed commands.
+live native targets, and typed operation outcomes. `win32` exposes constrained
+modern `Callout` and `FocusZone` adapters over the host's legacy registrations
+(see each `SPEC.md`); the root and `win` remain unadmitted for modern components.
+Legacy Win32 uses its existing host registrations without new managed commands.
 
 `@fluentui-react-native/callout` and `@fluentui-react-native/focus-zone` are
 JS-only compatibility shims under `packages/shim`. Deprecated type aliases and
@@ -319,14 +320,37 @@ after previously committed view updates. Legacy presentations and the
 `focusWindow`/`blurWindow` commands are unchanged. macOS Fabric and Paper pass
 14 modern Callout cases, 2 legacy Callout cases, and 19 shared-focus cases. The
 window shadow was not captured visually because driver capture excludes shadows.
-Windows has none of these amendments yet.
+
+On Windows Fabric, a modern popup window gets a DWM rounded corner and the
+platform popup shadow, with no DWM border. A light dismissal from a press over
+the live view anchor waits up to 250 ms for the anchor to receive that press,
+so a trigger toggles its popup instead of reopening it. The owner-island pointer
+handler ignores presses over the anchor. Windows passes all modern Callout
+cases, including the anchor-press case, and all Popover stories.
+
+The `win32` `Callout` is a JavaScript adapter over the Office host's legacy
+`RCTCallout` registration; it sends no new command to the prebuilt host. It
+supports view anchors only. Its popup sits flush against the anchor, because
+the host ignores `gapSpace`. The host draws the surface fill and corner radius,
+because its layered window has no per-pixel transparency. By default the host
+sets initial focus; `initialFocus: 'none'` leaves focus in place. `'last'`,
+`close`, and `reposition` report `unsupported`. Unclassified host dismissals are
+held for 250 ms so a trigger toggle can supersede them. Content events stop at
+the popup boundary, because Win32 bubbles them through the React tree. A Tab exit
+dismisses the outermost Tab-exiting presentation, and `continue` returns focus to
+the view anchor, because the host cannot continue Tab past it. The `win32`
+`FocusZone` adapter maps the modern props onto the host's `RCTFocusZone` and
+confirms target and default focus from focus events; `'first'` and `'last'`
+report `unsupported`. All Popover, Menu, MenuButton, and MenuItem stories pass on
+Win32.
 
 The October 19 Menu family amendments add the modern `tabNavigation` prop. `cycle`, the default, keeps the popup
 Tab order. `dismiss` and `continue` close the outermost Tab-exiting presentation in a popup ownership chain with
 `tab-forward` or `tab-backward`, before any view handles the key. `continue` then focuses the key view after the view
 anchor, or the anchor itself for Shift+Tab. Nested presentations anchored inside another modern popup are owned by
-its window and close with it. macOS Fabric and Paper pass 16 modern Callout cases, including both Tab modes; Windows
-accepts the prop but keeps `cycle` until its implementation qualifies.
+its window and close with it. macOS Fabric and Paper pass 16 modern Callout cases, including both Tab modes. Windows
+routes Tab from a focused popup through a thread keyboard hook to the outermost Tab-exiting presentation and closes
+nested popups with their owner; all Menu, MenuButton, MenuItem, Popover, and Callout stories pass on Windows.
 
 After building macOS Storybook, run the reproducible Apple boundary probe:
 

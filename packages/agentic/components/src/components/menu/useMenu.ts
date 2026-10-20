@@ -4,6 +4,7 @@ import { Pressable, Text, View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useFocusTarget, useSlot } from '@fluentui-react-native/framework-base';
 
+import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Button } from '../button/button';
 import type { ButtonProps } from '../button/button.types';
 import { useMenuController } from './menuFamily';
@@ -89,16 +90,20 @@ export function useMenu_unstable(props: MenuProps): MenuState {
 
   const root = useSlot(View, rootProps);
   const trigger = useSlot(Button, triggerProp, {
-    transform: (slotProps: ButtonProps) => ({
-      ...slotProps,
-      accessibilityHint: slotProps.accessibilityHint ?? defaultTriggerHint,
-      accessibilityState: { ...slotProps.accessibilityState, expanded: controller.presented },
-      onBlur: composeHandlers(slotProps.onBlur, triggerFocus.onBlur),
-      onFocus: composeHandlers(slotProps.onFocus, triggerFocus.onFocus),
-      onPress: composeHandlers(slotProps.onPress, controller.handlePress),
-      onPressIn: composeHandlers(controller.handlePressIn, slotProps.onPressIn),
-      ref: triggerFocus.focusTargetRef,
-    }),
+    transform: (slotProps: ButtonProps) =>
+      withTriggerExpandActions(
+        {
+          ...slotProps,
+          accessibilityHint: slotProps.accessibilityHint ?? defaultTriggerHint,
+          accessibilityState: { ...slotProps.accessibilityState, expanded: controller.presented },
+          onBlur: composeHandlers(slotProps.onBlur, triggerFocus.onBlur),
+          onFocus: composeHandlers(slotProps.onFocus, triggerFocus.onFocus),
+          onPress: composeHandlers(slotProps.onPress, controller.handlePress),
+          onPressIn: composeHandlers(controller.handlePressIn, slotProps.onPressIn),
+          ref: triggerFocus.focusTargetRef,
+        },
+        controller.setExpanded,
+      ),
   });
 
   return {

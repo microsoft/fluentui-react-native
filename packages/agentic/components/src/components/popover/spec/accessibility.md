@@ -8,6 +8,12 @@ reflects whether the popup is actually presented rather than the requested
 `open` value, so a natively dismissed popup reads as collapsed. Caller
 accessibility state merges with it.
 
+Win32 UI Automation projects the ExpandCollapse pattern, which carries the
+expanded state, only for an element that declares `Expand` and `Collapse`
+accessibility actions. On Win32 the trigger therefore prepends those actions
+to any caller actions. Invoking them sets the requested presence. The caller's
+`onAccessibilityAction` still receives every action.
+
 React Native has no typed has-popup or controls property on Windows or macOS.
 Popover therefore supplies the default hint `Opens a popover` when the caller
 gives the trigger no `accessibilityHint`. A hint describes the behavior; it is
@@ -36,4 +42,4 @@ for that presentation so keyboard and screen-reader focus can enter it.
 Native state reads are necessary but not sufficient. Each renderer must
 qualify the trigger's expanded state, the surface group and name, entry focus,
 and focus return with VoiceOver and Narrator before release, and the Windows
-ExpandCollapse projection must be invoked rather than inferred.
+and Win32 ExpandCollapse projections must be invoked rather than inferred.

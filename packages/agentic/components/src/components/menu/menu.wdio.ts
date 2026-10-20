@@ -39,6 +39,8 @@ export async function inWindowWith<T>({ browser, platform }: Context, testId: st
 export async function hover(context: Context, testId: string): Promise<void> {
   const { browser } = context;
   await inWindowWith(context, testId, async () => {
+    // Windows exposes popup content in the owner tree shortly after the reported open.
+    await (await browser.$(`~${testId}`)).waitForExist({ timeout: 5000, timeoutMsg: `Expected "${testId}" to exist.` });
     const elementId = await (await browser.$(`~${testId}`)).elementId;
     // An element origin resolves screen coordinates in any window; viewport coordinates use the owner window.
     const origin = { 'element-6066-11e4-a52e-4f735466cecf': elementId } as unknown as 'pointer';

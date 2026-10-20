@@ -238,7 +238,7 @@ describe('Popover', () => {
     jest.isolateModules(() => {
       jest.doMock('./popoverNative', () => ({ popoverNativeHost: undefined }));
       const { usePopover_unstable } = require('./usePopover') as typeof import('./usePopover');
-      expect(() => usePopover_unstable({ trigger: {}, children: null })).toThrow(/#4384/);
+      expect(() => usePopover_unstable({ trigger: {}, children: null })).toThrow(/macOS, Windows, and Win32/);
     });
   });
 

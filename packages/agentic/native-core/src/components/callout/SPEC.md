@@ -1,7 +1,8 @@
 # Modern Callout
 
 Owner-authorized initial contract, 2026-10-02. `/macos` and `/windows` preview
-only; not all-host root admission. See the
+only, with a constrained [`/win32` adapter](#win32-adapter); not all-host root
+admission. See the
 [package qualification gates](../../../README.md#modern-component-previews)
 for remaining geometry, lifecycle/accessibility, Menu/Popover, Win32, and
 peer-floor work and the owning workstream issues.
@@ -141,8 +142,61 @@ protocol.
   screen with it. Each nested presentation still reports its own dismissal.
 
 macOS implements both in the shared Swift view for Paper and Fabric. Windows
-accepts `tabNavigation` but keeps `cycle` behavior and never reports the Tab
-reasons until its implementation is qualified.
-Windows still needs qualification of its popup island silhouette and shadow,
-and its owner-island pointer handling does not yet exclude the anchor; a
-consumer must not reopen a popup that was open when a trigger press began.
+implements both in its Callout view: a keyboard hook on the focused popup's
+thread routes Tab to the outermost Tab-exiting presentation, and an owner's
+dismissal also dismisses the popups it owns.
+
+Windows Fabric asks DWM to round a modern popup window and give it the
+platform popup shadow, with no DWM border, so the content View draws the
+visible stroke. Light dismissal from a press over the live view anchor waits
+up to 250 ms for the anchor to receive that press. If it does, the anchor's
+owner handles the press. If it does not, the popup closes as
+`native-light-dismiss`. The owner-island pointer handler ignores presses over
+the anchor.
+
+## Win32 adapter
+
+`@fluentui-react-native/native-core/win32` exports `Callout` as a JavaScript
+adapter over the Office Win32 host's prebuilt legacy `RCTCallout` registration.
+The adapter sends no modern prop or command to that host, so it implements the
+modern props and presentation handle in JavaScript. It requires a host whose
+view manager is registered. These divergences are host limits:
+
+- **Anchors:** only view anchors are supported; rect and point anchors throw.
+  The host positions against the view's native tag and has no screen-measure
+  API from which to derive a rect.
+- **Placement:** side and alignment map to the host's directional hint. The
+  host ignores `gapSpace`, so the popup sits flush against its anchor.
+- **Surface:** the host's layered popup window has no per-pixel transparency.
+  The adapter therefore lifts the content's `backgroundColor` and
+  `borderRadius` to the host, which draws the fill, the rounded corners, and a
+  window shadow. A one-pixel shadow artifact can appear at a bottom corner.
+- **Readiness and focus:** each presentation remounts the host, and the host's
+  show event reports readiness. By default the host gives the popup initial
+  focus, which it does before readiness. `requestFocus(…, 'first')` confirms
+  only if that focus reached the content; otherwise it reports `not-mounted`.
+  The adapter-only `initialFocus: 'none'` prop shows the popup without taking
+  focus, and `'first'` then reports `unsupported`. An explicit target is
+  focused through `focusWindow` and confirmed by its focus event. `'last'`,
+  `close`, and `reposition` report `unsupported`; a caller closes the popup by
+  setting `open` to false.
+- **Event boundary:** Win32 bubbles content focus, blur, and key events
+  through the React tree, past the popup to its owners. The content stops them
+  after its handlers run, as a separate native window would.
+- **Tab exit:** the host cycles Tab within the popup whatever the props say.
+  With `dismiss` or `continue`, the adapter declares Tab and Shift+Tab on the
+  content and dismisses the outermost Tab-exiting presentation in the React
+  ownership chain when content receives either key. The host cannot continue
+  Tab in the owner window, so `continue` focuses the view anchor for both
+  directions.
+- **Dismissal:** the adapter disables the host's own Escape handling and
+  reports Escape in focused content as `escape`. All other host dismissals
+  arrive unclassified. They fire at pointer-down, before the anchor's press,
+  so the adapter holds them for 250 ms. A caller close in that window, such as
+  a trigger toggle, supersedes the hold. Otherwise the adapter reports
+  `native-light-dismiss`.
+- **Restoration:** the host does not move focus when the popup closes. The
+  consumer restores focus after Escape and after a caller-driven close.
+
+Adapter regressions belong in `Win32Callout.test.tsx`; host behavior is
+qualified by the Win32 Popover, Menu, and MenuButton stories.

@@ -1,25 +1,17 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { I18nManager, View } from 'react-native';
+import { View } from 'react-native';
 import { directComponent, mergeProps, phasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 
 import { CalloutHost } from '../../internal/CalloutHost';
 import { assertModernHost } from '../../internal/modernHost';
 import { Commands } from '../../specs/components/CalloutNativeComponent';
 import type NativeCallout from '../../specs/components/CalloutNativeComponent';
-import type { DirectionalHint } from '../../legacy/callout/Callout.types';
 import { allocateGeneration, createOperationChannel } from '../nativeOperation';
 import { resolveTarget, useTargetTag } from '../nativeTarget';
+import { directionalHint, gapSpace } from './calloutPlacement';
 import type { CalloutAnchor, CalloutHandle, CalloutPresentation, CalloutProps, CalloutDismissReason } from './Callout.types';
-import { presentationBrand } from './Callout.types';
-
-class Presentation implements CalloutPresentation {
-  readonly [presentationBrand] = true as const;
-  readonly generation: number;
-  constructor(generation: number) {
-    this.generation = generation;
-  }
-}
+import { Presentation } from './presentation';
 
 interface Lifetime {
   open: boolean;
@@ -27,24 +19,6 @@ interface Lifetime {
   presentation: Presentation;
   closed: boolean;
   anchored: boolean;
-}
-
-function hint(placement: CalloutProps['placement']): DirectionalHint {
-  const side = placement?.side ?? 'bottom';
-  const align = placement?.align ?? 'start';
-  const rtl = I18nManager.isRTL;
-  const physical = side === 'start' ? (rtl ? 'right' : 'left') : side === 'end' ? (rtl ? 'left' : 'right') : side;
-  if (physical === 'left' || physical === 'right') {
-    return `${physical}${align === 'center' ? 'Center' : align === 'end' ? 'BottomEdge' : 'TopEdge'}`;
-  }
-  const edge = align === 'center' ? 'Center' : (align === 'start') !== rtl ? 'LeftEdge' : 'RightEdge';
-  return `${physical}${edge}`;
-}
-
-function gapSpace(placement: CalloutProps['placement']): number {
-  const gap = placement?.gap ?? 0;
-  if (!Number.isInteger(gap) || gap < 0) throw new RangeError('Callout gap must be a nonnegative integer in logical units.');
-  return gap;
 }
 
 function rectangle(anchor: CalloutAnchor) {
@@ -171,7 +145,7 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
         anchorMode={anchor.kind}
         tabNavigation={tabNavigation}
         anchorRect={anchorRect}
-        directionalHint={hint(placement)}
+        directionalHint={directionalHint(placement)}
         gapSpace={gapSpace(placement)}
         onReady={(event) => {
           if (!isCurrent(event.nativeEvent.generation) || ready.current || dismissed.current === presentation) return;

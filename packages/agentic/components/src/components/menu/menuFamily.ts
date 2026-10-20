@@ -41,6 +41,8 @@ export interface MenuController {
   handlePress(event: GestureResponderEvent): void;
   /** Opens the menu from a trigger key with the given entry focus. */
   openFromKey(entry: MenuEntry): void;
+  /** Applies an accessibility expand or collapse action on the trigger. */
+  setExpanded(expanded: boolean): void;
   popupProps: MenuPopupProps;
 }
 
@@ -53,9 +55,7 @@ export function isKeyboardPress(event: GestureResponderEvent | undefined): boole
 /** Resolves the native host or throws the documented error for hosts without a modern popup route. */
 export function useMenuHost(componentName: string): MenuNativeHost {
   if (!menuNativeHost) {
-    throw new Error(
-      `${componentName} requires native-core's modern Callout and FocusZone, available on macOS and Windows. Office Win32 support is tracked in #4384.`,
-    );
+    throw new Error(`${componentName} requires native-core's Callout and FocusZone, available on macOS, Windows, and Office Win32.`);
   }
   return menuNativeHost;
 }
@@ -224,6 +224,21 @@ export function useMenuController(options: MenuControllerOptions): MenuControlle
     },
     [open],
   );
+  const setExpanded = React.useCallback(
+    (expanded: boolean) => {
+      if (expanded) {
+        openFromKey('first');
+      } else if (latest.current.presented) {
+        closeCause.current = 'trigger';
+        // An assistive collapse can come while focus is in the menu, which then returns to the trigger.
+        if (heldFocus.current) {
+          setRestore((value) => value + 1);
+        }
+        requestOpen(false, 'trigger');
+      }
+    },
+    [openFromKey, requestOpen],
+  );
 
   const family = React.useMemo<MenuFamilyOptions>(
     () => ({
@@ -246,6 +261,7 @@ export function useMenuController(options: MenuControllerOptions): MenuControlle
     handlePressIn,
     handlePress,
     openFromKey,
+    setExpanded,
     popupProps: {
       level: 0,
       open: requested && !triggerDisabled,

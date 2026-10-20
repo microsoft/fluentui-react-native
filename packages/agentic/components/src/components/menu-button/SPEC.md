@@ -84,24 +84,23 @@ The chevron is private and cannot be replaced or hidden.
 - **MNB-006:** Expose the button role, the expanded state from actual
   presence, and the `Opens a menu` hint without toggle or selected semantics.
 - **MNB-007:** Present through native-core's modern Callout and FocusZone on
-  macOS (Paper and Fabric) and Windows Fabric. Other hosts throw a descriptive
-  error on use. Do not export MenuButton publicly until it qualifies on all
+  macOS (Paper and Fabric) and Windows Fabric, and through its Win32 Callout
+  and FocusZone adapters on Office Win32. Other hosts throw a descriptive error
+  on use. Do not export MenuButton publicly until it qualifies on all
   four desktop endpoints.
 
 ## Platform behavior
 
 MenuButton's menu uses Callout `tabNavigation: 'continue'`: Tab from any popup
 in the family closes it and focuses the view that follows the trigger in the
-owner window's key-view order, and Shift+Tab focuses the trigger. macOS
-implements this continuation natively; Windows Fabric continuation is pending.
-Office Win32's approved interim (R1) returns Tab to the trigger once its route
-exists (#4384).
+owner window's key-view order, and Shift+Tab focuses the trigger. macOS and
+Windows Fabric implement this continuation natively. The Win32 host cannot
+continue focus past the popup's owner, so Office Win32 uses the approved interim
+(R1): Tab closes the menu and returns focus to the trigger.
 
 The chevron uses the package's shared icon sources, as MenuItem's submenu
-chevron does. Office Win32 has no modern Callout route yet, so MenuButton
-throws there and its stories are excluded from Win32 Storybook until #4384.
-MenuButton is not exported from the package root until all four endpoints
-qualify.
+chevron does. MenuButton is not exported from the package root until all four
+endpoints qualify.
 
 ## Divergences from Flex
 
@@ -114,8 +113,8 @@ qualify.
 
 ## Conformance
 
-The listed files exist for every requirement. macOS Fabric and Paper qualify the native behavior; Windows Fabric and
-the Win32 route (#4384) must still qualify, so MNB-007 evidence stays planned in `spec/source.json`.
+The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapters qualify the
+native behavior in the MenuButton stories.
 
 | Requirement | Evidence                                                                                          |
 | ----------- | ------------------------------------------------------------------------------------------------- |
@@ -125,4 +124,4 @@ the Win32 route (#4384) must still qualify, so MNB-007 evidence stays planned in
 | MNB-004     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
 | MNB-005     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
 | MNB-006     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |
-| MNB-007     | `useMenuButton.ts`, `menu-button.test.tsx`                                                        |
+| MNB-007     | `useMenuButton.ts`, `menu-button.test.tsx`, `menu-button.stories.tsx`                             |

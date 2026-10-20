@@ -1120,9 +1120,9 @@ qualification do not authorize a macOS-only release or close any of those issues
 
 This increment implements Popover from its reviewed contract
 (`packages/agentic/components/src/components/popover/SPEC.md`, approved before code on October 19) and makes the
-native-core modern Callout changes it needs. Popover is not exported from the package root (D01); Office Win32
-throws on use and its stories are excluded from Win32 Storybook until #4384. Menu, MenuButton, and Dropdown are
-not started.
+native-core's modern Callout changes it needs. Popover is not exported from the package root (D01); Office Win32
+throws on use and its stories are excluded from Win32 Storybook until #4384 (superseded by section 16). Menu,
+MenuButton, and Dropdown are not started.
 
 ### Implemented and observed
 
@@ -1227,4 +1227,129 @@ The environment matches section 13. All app commands use
 Windows Fabric needs the Tab exit modes, the Popover surface amendments, the system menu show delay, and its own
 qualification of every MNU and MNB requirement. The Win32 route (#4384), VoiceOver and Narrator, the native
 submenu-intent signal, motion, edge margins, and the root exports remain gates. Dropdown (#4224) still needs its
+contract review and the ListboxItem option adapter.
+
+## 16. Popover on Windows Fabric and Office Win32, October 19, 2026
+
+This increment completes the Popover presentation routes that section 14 left open. Popover is still not exported
+from the package root, and its lifecycle stays `contract-reviewed`. POP-009 now names realized evidence.
+
+### Implemented and observed
+
+- **Windows Fabric Callout (native-core):** DWM rounds a modern popup window and gives it the platform popup
+  shadow, with no DWM border. A light dismissal from a press over the live view anchor waits up to 250 ms for the
+  anchor to receive that press; the owner-island pointer handler ignores presses over the anchor. The anchor-press
+  Callout case is enabled on Windows.
+- **Desktop driver (Windows):** window activation accepts a foreground window owned by the target, so the driver
+  no longer light-dismisses a popup by reactivating its owner. A subtree walk retries on a closing popup's
+  transient UI Automation timeout or unspecified failure.
+- **Win32 adapter (native-core `/win32`):** `Callout` adapts the modern props and presentation handle to the
+  host's legacy `RCTCallout` registration without new commands. The host probes showed:
+  - initial focus reaches the content before `onShow`;
+  - Escape reaches the content when `preventDismissOnKeyDown` is set;
+  - Tab stays in the popup window;
+  - light dismissal fires at pointer-down, before the anchor's press;
+  - `gapSpace` is ignored;
+  - `target` overrides `anchorRect`, which is read in screen coordinates that JavaScript cannot measure;
+  - the layered popup window renders transparent areas black.
+
+  The adapter therefore:
+  - supports view anchors only;
+  - lifts the surface fill and radius to the host;
+  - holds unclassified dismissals for 250 ms so a trigger toggle supersedes them;
+  - confirms `first` focus from the host's initial focus;
+  - reports `last`, `close`, and `reposition` as `unsupported`.
+
+- **Win32 Popover (components):** `popoverNative.win32.ts` binds the adapter. UIA ExpandCollapse appears only for
+  elements that declare `Expand` and `Collapse` actions, so `triggerExpandActions.win32.ts` adds them to the
+  trigger and routes them to the requested presence. The Win32 Storybook exclusion is removed. On Win32 the
+  placement story expects a flush popup (`popover-win32-gap`).
+- **Shared refactor:** placement mapping and the presentation counter moved to `calloutPlacement.ts` and
+  `presentation.ts`. `resolveTarget` also returns the live instance for the Win32 focus path.
+
+### Executed evidence
+
+| Check                                                                                                     | Result                                                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Windows `storybook smoke --windows --mode stories-and-tests`, `components-popover--*`                     | **Passed:** 5/5.                                                                                                                                                                                                                                 |
+| Windows `native-modern-callout--*` and `native-callout--*`                                                | **Passed:** 14/14 and 2/2, including the anchor-press case.                                                                                                                                                                                      |
+| Win32 `storybook smoke --win32 --mode stories-and-tests`, `components-popover--*` and `native-callout--*` | **Passed:** 5/5 and 2/2.                                                                                                                                                                                                                         |
+| Windows `components-input--focus-treatment`                                                               | **Failed, pre-existing:** observed before this increment; unrelated to popups.                                                                                                                                                                   |
+| `native-core` and `components` `lint`, `test`; `check:spec-contracts`; desktop-driver `lint`, `test`      | **Passed:** native-core 18 ownership and 43 Jest tests; components 505 tests and 21 contracts; driver 61.                                                                                                                                        |
+| `yarn check-agent-instructions`, `yarn change:check`, `git diff --check`                                  | **Passed.**                                                                                                                                                                                                                                      |
+| `yarn clean-lage-cache` then `yarn lage buildci`                                                          | **Knip failed, pre-existing on Windows:** `knip.config.ts` builds workspace keys with backslashes, so imported dependencies in unchanged packages read as unused. The rest of `lint-repo` and every other target passed: 170 tasks, zero failed. |
+| macOS, VoiceOver/Narrator                                                                                 | **Not run:** no Mac in this environment; no screen-reader qualification.                                                                                                                                                                         |
+
+### Remaining Popover work
+
+VoiceOver and Narrator qualification, the deferred divergences, and the root export remain gates. The Win32 host
+could later honor `gapSpace`, provide per-pixel transparency, and classify its dismissals; the adapter passes the
+gap through for that case. A one-pixel shadow artifact can appear at a bottom corner of the Win32 popup.
+
+## 17. Menu and MenuButton on Windows Fabric and Office Win32, October 19, 2026
+
+This increment carries section 15's Menu and MenuButton to Windows Fabric and Office Win32, using section 16's
+Popover routes. Neither component is exported from the package root. MNU-012 and MNB-007 now name realized evidence.
+
+### Implemented and observed
+
+- **Windows Fabric Callout (native-core):** `tabNavigation` is implemented. While a Callout is shown, a UI-thread
+  message hook offers Tab key-downs to shown popups before the focused island handles them, because a FocusZone in
+  the popup consumes Tab. Tab belongs to the outermost presentation in the owner chain that exits by Tab:
+  - `dismiss` closes the family, and Menu returns focus;
+  - `continue` focuses the view after the anchor in the owner island's preorder, using `FocusTree.h`, which FocusZone
+    now shares.
+
+  Closing a Callout first closes the presentations nested in its popup. A press in a nested popup, or focus moving
+  into one, no longer light-dismisses its owners. A focus request treats its window as active when the foreground
+  window shares its root owner, so focus can return into an owning popup.
+
+- **Desktop driver (Windows):** a character that one unmodified key of the foreground layout types is injected as
+  that virtual key, so type-ahead receives its key. Other characters still use Unicode packets.
+- **Win32 adapters (native-core `/win32`):** probes of the host's `RCTCallout` and `RCTFocusZone` showed the
+  following:
+  - `setInitialFocus={false}` shows the popup without taking focus, and a row's `focus()` moves real focus into it;
+  - the host FocusZone handles Up and Down, but not Home and End, and its `focus()` focuses its default or first element;
+  - JavaScript receives Tab's key-down before the host cycles focus;
+  - focus and key events bubble through the React tree across popups;
+  - closing a nested popup returns focus to its owner row, but closing the root does not restore the trigger;
+  - the host reports a pointer leave with the same target, position, and timestamp as each enter.
+
+  The `Callout` adapter therefore:
+  - adds `initialFocus` (`first` or `none`);
+  - stops content focus and key events at the popup boundary;
+  - dismisses with `escape` on Escape;
+  - on Tab, closes the outermost popup that exits by Tab; for `continue`, it then focuses the anchor (R1).
+
+  A new `FocusZone` adapter maps the modern navigation props to the host's props. It confirms `requestFocus` from
+  the bubbled focus event, and reports `first` and `last` as `unsupported`.
+
+- **Menu and MenuButton (components):**
+  - `menuNative.win32.ts` binds the adapters with `initialFocus: 'none'`, so Menu focuses its entry row itself.
+  - Home and End fall back to the first or last focusable row when FocusZone reports them as unsupported.
+  - A `reportsPointerLeave` host capability keeps a pending submenu change on Win32 until another row is hovered,
+    as in native Windows menus. A repeated enter no longer restarts the pending timer on any host.
+  - Menu triggers and submenu rows reuse Popover's Win32 Expand and Collapse actions, now shared as
+    `common/triggerExpandActions`.
+  - MenuButton's Win32 Tab case expects the trigger (R1). Its entry Input has a fixed width, because an empty Win32
+    text input has no intrinsic width.
+  - The Win32 Storybook exclusion is removed for Menu, MenuButton, and MenuItem.
+
+### Executed evidence
+
+| Check                                                                                                                                              | Result                                                                                                                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows `storybook smoke --windows --mode stories-and-tests`, Menu, MenuButton, MenuItem, Popover, and native-core Callout and FocusZone selectors | **Passed:** `components-menu--*` 8/8, `components-menubutton--*` 4/4, `components-menuitem--*` 3/3, `components-popover--*` 5/5, `native-callout--*` 2/2, `native-modern-callout--*` 16/16, `native-modern-focuszone--*` 4/4; 188 stories rendered. |
+| Win32 `storybook smoke --win32 --mode stories-and-tests`, `components-menu*`, `components-popover--*`, and `native-callout--*`                     | **Passed:** Menu 8/8, MenuButton 4/4, MenuItem 3/3, Popover 5/5, Callout 2/2; 162 stories rendered.                                                                                                                                                 |
+| `components`, `native-core`, and desktop-driver `lint` and `test`, including `check:spec-contracts`                                                | **Passed:** components 531 tests and 23 contracts; native-core 18 ownership and 56 Jest tests; driver 61, with 3 skipped.                                                                                                                           |
+| `yarn check-agent-instructions`, `yarn change:check`, `git diff --check`                                                                           | **Passed.**                                                                                                                                                                                                                                         |
+| `yarn clean-lage-cache` then `yarn lage buildci --continue`                                                                                        | **Failed, outside this change:** 84 tasks passed. Root `lint-repo` (knip) fails on Windows before this change. Unchanged storybook-desktop's deadline-sensitive `wdioRunner` contract failed once under load, then passed 175/175 when rerun alone. |
+| macOS, VoiceOver/Narrator                                                                                                                          | **Not run:** no Mac in this environment; no screen-reader qualification.                                                                                                                                                                            |
+
+### Remaining Menu work
+
+macOS needs a rerun after the shared hover and trigger-action changes. VoiceOver and Narrator qualification, the
+native submenu-intent signal, motion, edge margins, and the root exports remain gates. The Win32 host could later
+handle Home and End in FocusZone, restore focus to the trigger on close, continue Tab past the owner, and report one
+pointer enter without a leave; each would let the adapters drop a workaround. Dropdown (#4224) still needs its
 contract review and the ListboxItem option adapter.

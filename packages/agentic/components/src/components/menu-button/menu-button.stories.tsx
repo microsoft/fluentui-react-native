@@ -32,7 +32,7 @@ function NewScene({ appearance, size, disabled }: SceneProps) {
   return (
     <View style={styles.story}>
       <View style={styles.toolbar}>
-        <Input accessibilityLabel="Menu button entry" testID="menu-button-entry" onFocus={() => setFocus('Entry')} />
+        <Input accessibilityLabel="Menu button entry" testID="menu-button-entry" style={styles.entry} onFocus={() => setFocus('Entry')} />
         <MenuButton
           appearance={appearance}
           size={size}
@@ -138,7 +138,8 @@ export const Default: Story = {
       await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
       await browser.keys('\uE004');
       await expect(await browser.$('~menu-button-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'menu-button-after', 'focused', true);
+      // The Win32 host cannot continue Tab past its owner, so focus returns to the trigger there.
+      await expectNativeState(browser, context.platform === 'win32' ? 'menu-button-trigger' : 'menu-button-after', 'focused', true);
       await expectMenuClosed(context, 'menu-button-trigger');
     },
     'closes on Shift+Tab and returns focus to the trigger': async (context) => {
@@ -179,6 +180,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     gap: 16,
     padding: 24,
+  },
+  // An empty text input has no intrinsic width on Win32.
+  entry: {
+    width: 160,
   },
   toolbar: {
     alignItems: 'center',

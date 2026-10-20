@@ -2,4 +2,10 @@ import { Callout, FocusZone, useNativeViewTarget } from '@fluentui-react-native/
 
 import type { MenuNativeHost } from './menuNative.types';
 
-export const menuNativeHost: MenuNativeHost | undefined = { Callout, FocusZone, useNativeViewTarget };
+export const menuNativeHost: MenuNativeHost | undefined = {
+  Callout,
+  FocusZone,
+  useNativeViewTarget,
+  restoresOwnerFocus: true,
+  reportsPointerLeave: true,
+};

@@ -179,7 +179,25 @@ export function MenuPopup(props: MenuPopupProps) {
     [],
   );
 
+  // Zones that cannot search their own rows, such as Win32's, report the request unsupported; this popup then focuses
+  // the edge row itself, and the row's focus reports the held focus.
+  const focusEdgeRow = React.useCallback(
+    (edge: 'first' | 'last') =>
+      zone.current?.requestFocus(edge).then((outcome) => {
+        if (outcome.status === 'unsupported') {
+          const focusable = sortedRows().filter((row) => row.focusable);
+          (edge === 'first' ? focusable[0] : focusable[focusable.length - 1])?.focus();
+        }
+        return outcome;
+      }),
+    [sortedRows],
+  );
+
   const restoreRow = React.useCallback((id: string) => {
+    // The host already returned focus to this retained row; a request could land after newer arrow-key navigation.
+    if (focusedRow.current === id && latest.current.family.host.restoresOwnerFocus) {
+      return;
+    }
     // A native request also makes this popup key again after its child popup closes.
     const target = rowTargets.current.get(id);
     const current = presentation.current;
@@ -212,14 +230,14 @@ export function MenuPopup(props: MenuPopupProps) {
         return;
       }
       // The FocusZone searches its own rows; a popup-wide search would stop at the zone, which is itself focusable.
-      const request = mode === 'surface' ? api.requestFocus(current, surfaceTarget.target) : zone.current?.requestFocus(mode);
+      const request = mode === 'surface' ? api.requestFocus(current, surfaceTarget.target) : focusEdgeRow(mode);
       void request?.then(({ status }) => {
         if (status === 'confirmed') {
           latest.current.props.onFocusHeld?.();
         }
       });
     },
-    [surfaceTarget],
+    [focusEdgeRow, surfaceTarget],
   );
 
   const appliedEntryKey = React.useRef(entryKey);
@@ -261,7 +279,7 @@ export function MenuPopup(props: MenuPopupProps) {
         return false;
       }
       if (native.key === 'Home' || native.key === 'End') {
-        void zone.current?.requestFocus(native.key === 'Home' ? 'first' : 'last');
+        void focusEdgeRow(native.key === 'Home' ? 'first' : 'last');
         return true;
       }
       const character = getTypeAheadCharacter(native);
@@ -271,7 +289,7 @@ export function MenuPopup(props: MenuPopupProps) {
       }
       return false;
     },
-    [sortedRows],
+    [focusEdgeRow, sortedRows],
   );
 
   const binding = React.useMemo<MenuItemMenuBinding>(
@@ -330,6 +348,8 @@ export function MenuPopup(props: MenuPopupProps) {
         const current = latest.current.openChild;
         if (current?.id === id) {
           clearHover();
+        } else if (hoverTimer.current?.id === id) {
+          // A repeated enter keeps the change this row already scheduled.
         } else if (current) {
           schedule(id, hover.closeDelay, () => (row.hasSubmenu ? openSubmenu(id, 'none') : setOpenChild(null)));
         } else if (row.hasSubmenu) {
@@ -337,7 +357,7 @@ export function MenuPopup(props: MenuPopupProps) {
         }
       },
       onRowHoverOut: (id) => {
-        if (hoverTimer.current?.id === id) {
+        if (hoverTimer.current?.id === id && latest.current.family.host.reportsPointerLeave) {
           clearHover();
         }
       },
@@ -427,7 +447,7 @@ export function MenuPopup(props: MenuPopupProps) {
       }
       const key = event.nativeEvent.key;
       if (key === 'ArrowDown' || key === 'ArrowUp') {
-        void zone.current?.requestFocus(key === 'ArrowDown' ? 'first' : 'last');
+        void focusEdgeRow(key === 'ArrowDown' ? 'first' : 'last');
       } else {
         handleNavigationKey(null, event);
       }

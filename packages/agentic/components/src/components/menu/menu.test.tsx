@@ -10,6 +10,7 @@ import { MenuItem } from '../menu-item/menu-item';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
 import { Menu } from './menu';
 import { findTypeAheadRow, getInlineArrows, getTypeAheadCharacter } from './menuNavigation';
+import * as menuNative from './menuNative';
 import type { MenuProps } from './menu.types';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
@@ -180,6 +181,38 @@ describe('Menu', () => {
       });
       expect(screen.getByTestId('share-surface')).toBeTruthy();
     } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each([
+    [true, null],
+    [false, 'share-surface'],
+  ])('with reportsPointerLeave %s, a hover-out cancels a pending submenu only when it is reported', async (reports, opened) => {
+    jest.useFakeTimers();
+    const host = menuNative.menuNativeHost;
+    if (!host) throw new Error('Missing the Menu host');
+    const replaced = jest.replaceProperty(menuNative, 'menuNativeHost', { ...host, reportsPointerLeave: reports });
+    try {
+      await render(<Scene submenuOpenDelay={50} />);
+      await fireEvent(screen.getByTestId('trigger'), 'press', pointerPress);
+      await fireEvent(screen.getByTestId('share'), 'hoverIn', {});
+      await act(async () => {
+        jest.advanceTimersByTime(30);
+      });
+      // A repeated enter keeps the scheduled time rather than restarting it.
+      await fireEvent(screen.getByTestId('share'), 'hoverIn', {});
+      await fireEvent(screen.getByTestId('share'), 'hoverOut', {});
+      await act(async () => {
+        jest.advanceTimersByTime(20);
+      });
+      if (opened) {
+        expect(screen.getByTestId(opened)).toBeTruthy();
+      } else {
+        expect(screen.queryByTestId('share-surface')).toBeNull();
+      }
+    } finally {
+      replaced.restore();
       jest.useRealTimers();
     }
   });

@@ -368,10 +368,6 @@ export const Default: Story = {
       await expect(dismissal).toHaveText('Open');
     },
     'keeps the presentation open for pointer input on its view anchor': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'macos') {
-        skip('Windows owner-island pointer handling does not yet exclude the anchor (#4375).');
-        return;
-      }
       if (!browser.capabilities['furn:features']?.physicalClick) {
         skip('Anchor input requires physical owner input.');
         return;
@@ -383,7 +379,9 @@ export const Default: Story = {
       await browser.pause(500);
       await expect(dismissal).toHaveText('Open');
       await (await browser.$('~modern-callout-status')).click();
-      await expect(dismissal).toHaveText('Dismissed: outside-pointer');
+      await expect(dismissal).toHaveText(
+        platform === 'windows' ? /^Dismissed: (outside-pointer|native-light-dismiss)$/ : 'Dismissed: outside-pointer',
+      );
     },
     'places content below the view anchor with the requested gap': async (context) => {
       const { expectCalloutPlacement } = await import('./placement.wdio.ts');
@@ -553,8 +551,8 @@ export const TabContinuation: Story = {
   wdio: {
     'closes on Tab and continues past the anchor, and on Shift+Tab returns to it': async ({ browser, expect, platform, skip }) => {
       const features = browser.capabilities['furn:features'];
-      if (platform !== 'macos') {
-        skip('Only macOS implements Tab exit; Windows keeps the cycle behavior (#4377).');
+      if (platform === 'win32') {
+        skip('Win32 hosts keep the cycle behavior (#4377).');
         return;
       }
       if (!features?.physicalClick || !features.keyboard || !features.focus) {
@@ -588,8 +586,8 @@ export const TabDismissal: Story = {
   wdio: {
     'closes on Tab and leaves the owner window its retained focus': async ({ browser, expect, platform, skip }) => {
       const features = browser.capabilities['furn:features'];
-      if (platform !== 'macos') {
-        skip('Only macOS implements Tab exit; Windows keeps the cycle behavior (#4377).');
+      if (platform === 'win32') {
+        skip('Win32 hosts keep the cycle behavior (#4377).');
         return;
       }
       if (!features?.physicalClick || !features.keyboard || !features.focus) {

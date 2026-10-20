@@ -43,6 +43,7 @@ the rest of the window.
 
 ## Availability
 
-Popover runs on macOS and Windows through native-core's modern Callout. It is
-not yet exported from the package root: Office Win32 has no modern popup route,
-and all desktop endpoints ship together.
+Popover runs on macOS and Windows through native-core's modern Callout, and on
+Office Win32 through native-core's Win32 Callout adapter. On Win32 the popup
+sits flush against the trigger. It is not yet exported from the package root;
+all desktop endpoints ship together.

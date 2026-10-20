@@ -158,7 +158,14 @@
     },
     {
       "id": "MNU-012",
-      "plannedEvidence": ["menuNative.ts", "menuNative.macos.ts", "menuNative.windows.ts", "menu.test.tsx"]
+      "evidence": [
+        "menuNative.ts",
+        "menuNative.macos.ts",
+        "menuNative.windows.ts",
+        "menuNative.win32.ts",
+        "menu.test.tsx",
+        "menu.stories.tsx"
+      ]
     }
   ]
 }

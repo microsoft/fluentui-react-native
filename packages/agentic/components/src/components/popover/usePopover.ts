@@ -10,6 +10,7 @@ import type {
   CalloutReadyEvent,
 } from '@fluentui-react-native/native-core/macos';
 
+import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Button } from '../button/button';
 import type { ButtonProps } from '../button/button.types';
 import { PopoverSurfaceContext } from './popoverContext';
@@ -40,9 +41,7 @@ interface PresenceLifetime {
 export function usePopover_unstable(props: PopoverProps): PopoverState {
   const host = popoverNativeHost;
   if (!host) {
-    throw new Error(
-      "Popover requires native-core's modern Callout, available on macOS and Windows. Office Win32 support is tracked in #4384.",
-    );
+    throw new Error("Popover requires native-core's Callout, available on macOS, Windows, and Win32.");
   }
   const {
     align = 'center',
@@ -188,6 +187,22 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     return () => request.cancel();
   }, [restore, triggerFocus.focusTarget]);
 
+  const setExpanded = React.useCallback(
+    (next: boolean) => {
+      if (next === latest.current.presented) {
+        return;
+      }
+      if (!next) {
+        closeCause.current = 'trigger';
+      } else if (latest.current.requested) {
+        // The request is still open but natively dismissed; an explicit expansion rearms it.
+        setRearm((value) => value + 1);
+      }
+      requestOpen(next, 'trigger');
+    },
+    [requestOpen],
+  );
+
   const handlePressIn = React.useCallback(() => {
     pressStartedOpen.current = latest.current.presented;
   }, []);
@@ -196,10 +211,7 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     const wasOpen = pressStartedOpen.current ?? latest.current.presented;
     pressStartedOpen.current = undefined;
     if (wasOpen) {
-      if (latest.current.presented) {
-        closeCause.current = 'trigger';
-        requestOpen(false, 'trigger');
-      }
+      setExpanded(false);
       return;
     }
     if (latest.current.requested) {
@@ -207,20 +219,24 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
       setRearm((value) => value + 1);
     }
     requestOpen(true, 'trigger');
-  }, [requestOpen]);
+  }, [requestOpen, setExpanded]);
 
   const root = useSlot(View, rootProps);
   const trigger = useSlot(Button, triggerProp, {
-    transform: (slotProps: ButtonProps) => ({
-      ...slotProps,
-      accessibilityHint: slotProps.accessibilityHint ?? defaultTriggerHint,
-      accessibilityState: { ...slotProps.accessibilityState, expanded: presented },
-      onBlur: composeHandlers(slotProps.onBlur, triggerFocus.onBlur),
-      onFocus: composeHandlers(slotProps.onFocus, triggerFocus.onFocus),
-      onPress: composeHandlers(slotProps.onPress, handlePress),
-      onPressIn: composeHandlers(handlePressIn, slotProps.onPressIn),
-      ref: triggerFocus.focusTargetRef,
-    }),
+    transform: (slotProps: ButtonProps) =>
+      withTriggerExpandActions(
+        {
+          ...slotProps,
+          accessibilityHint: slotProps.accessibilityHint ?? defaultTriggerHint,
+          accessibilityState: { ...slotProps.accessibilityState, expanded: presented },
+          onBlur: composeHandlers(slotProps.onBlur, triggerFocus.onBlur),
+          onFocus: composeHandlers(slotProps.onFocus, triggerFocus.onFocus),
+          onPress: composeHandlers(slotProps.onPress, handlePress),
+          onPressIn: composeHandlers(handlePressIn, slotProps.onPressIn),
+          ref: triggerFocus.focusTargetRef,
+        },
+        setExpanded,
+      ),
   });
   const callout = useSlot(host.Callout, {
     ref: calloutHandle,

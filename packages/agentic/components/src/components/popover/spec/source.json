@@ -95,6 +95,10 @@
       "status": "deferred"
     },
     {
+      "id": "popover-win32-gap",
+      "status": "accepted"
+    },
+    {
       "id": "popover-trigger-slot",
       "status": "accepted"
     }
@@ -134,7 +138,15 @@
     },
     {
       "id": "POP-009",
-      "plannedEvidence": ["popoverNative.ts", "popoverNative.macos.ts", "popoverNative.windows.ts", "popover.test.tsx"]
+      "evidence": [
+        "popoverNative.ts",
+        "popoverNative.macos.ts",
+        "popoverNative.windows.ts",
+        "popoverNative.win32.ts",
+        "usePopover.ts",
+        "popover.test.tsx",
+        "popover.stories.tsx"
+      ]
     }
   ]
 }
