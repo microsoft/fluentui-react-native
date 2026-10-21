@@ -128,6 +128,22 @@ describe('Dropdown', () => {
     expect(focusStrategies()).toEqual(['target']);
   });
 
+  it('requests a vertical scroller only while the options overflow the viewport, and never a horizontal one', async () => {
+    await render(<Scene defaultOpen />);
+    const scroll = () => hostOf('apple', 'onContentSizeChange');
+    const layout = (height: number) => ({ nativeEvent: { layout: { x: 0, y: 0, width: 200, height } } });
+    expect(scroll().props.showsHorizontalScrollIndicator).toBe(false);
+    expect(scroll().props.showsVerticalScrollIndicator).toBe(false);
+    await act(async () => {
+      scroll().props.onLayout(layout(240));
+      scroll().props.onContentSizeChange(200, 400);
+    });
+    expect(scroll().props.showsVerticalScrollIndicator).toBe(true);
+    await act(async () => scroll().props.onContentSizeChange(200, 240));
+    expect(scroll().props.showsVerticalScrollIndicator).toBe(false);
+    expect(scroll().props.showsHorizontalScrollIndicator).toBe(false);
+  });
+
   it('opens from Down and Up and from the expand action', async () => {
     const onOpenChange = jest.fn();
     await render(<Scene onOpenChange={onOpenChange} />);

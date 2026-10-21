@@ -327,9 +327,18 @@ export function DropdownPopup(props: DropdownPopupProps) {
   const onScroll = React.useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
     scrollOffset.current = event.nativeEvent.contentOffset.y;
   }, []);
+  // macOS Paper insets the scroll content by the width and height of any legacy scrollers, even while they are hidden,
+  // so the list requests no horizontal scroller and a vertical one only while its options overflow the viewport.
+  const [extent, setExtent] = React.useState({ content: 0, viewport: 0 });
   const onScrollLayout = React.useCallback((event: LayoutChangeEvent) => {
-    viewportHeight.current = event.nativeEvent.layout.height;
+    const viewport = event.nativeEvent.layout.height;
+    viewportHeight.current = viewport;
+    setExtent((current) => (current.viewport === viewport ? current : { ...current, viewport }));
   }, []);
+  const onContentSizeChange = React.useCallback((_width: number, content: number) => {
+    setExtent((current) => (current.content === content ? current : { ...current, content }));
+  }, []);
+  const overflows = extent.viewport > 0 && extent.content > extent.viewport + 0.5;
 
   const { Callout, FocusZone } = host;
   return (
@@ -348,7 +357,16 @@ export function DropdownPopup(props: DropdownPopupProps) {
         >
           {floorWidth !== undefined && <View pointerEvents="none" style={{ height: 0, width: floorWidth }} />}
           <RootInputBoundary style={styles.fit}>
-            <ScrollView ref={scroll} style={styles.scroll} onLayout={onScrollLayout} onScroll={onScroll} scrollEventThrottle={16}>
+            <ScrollView
+              ref={scroll}
+              style={styles.scroll}
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={overflows}
+              onContentSizeChange={onContentSizeChange}
+              onLayout={onScrollLayout}
+              onScroll={onScroll}
+              scrollEventThrottle={16}
+            >
               <View ref={scrollContent}>
                 <FocusZone direction="vertical">{children}</FocusZone>
               </View>

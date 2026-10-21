@@ -202,9 +202,11 @@ brings Popover's host differences:
 - The trigger declares the expand and collapse actions, because Win32 UI
   Automation exposes ExpandCollapse only for an element that declares them.
 
-The macOS route exists, but its qualification is pending. iOS and Android are
-unsupported. Dropdown is not exported from the package root until all four
-desktop endpoints qualify.
+On macOS the list never requests a horizontal scroller and requests a vertical
+scroller only while its options overflow, because Paper reserves the space of
+legacy scrollers even while they are hidden. iOS and Android are unsupported.
+Dropdown is not exported from the package root until all four desktop
+endpoints qualify.
 
 ## Divergences from Flex
 
@@ -224,9 +226,9 @@ desktop endpoints qualify.
 
 ## Conformance
 
-Each requirement lists its planned evidence. Windows Fabric and the Win32
-adapters qualify the native behavior in the Dropdown stories; macOS
-qualification is pending.
+The listed files exist for every requirement. macOS Fabric and Paper, Windows
+Fabric, and the Win32 adapters qualify the native behavior in the Dropdown
+stories.
 
 | Requirement | Evidence                                                                                                                                            |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |

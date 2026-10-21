@@ -6,6 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { Button } from '../button/button';
 import { Input } from '../input/input';
 import { ListboxItem } from '../listbox-item/listbox-item';
 import { Dropdown } from './dropdown';
@@ -82,6 +83,7 @@ function FruitScene({ multiselect, ...props }: SceneProps) {
           />
         ))}
       </Dropdown>
+      <Button content="After" testID="dropdown-after" />
       <StoryStatus testID="dropdown-reason">{reason}</StoryStatus>
       <StoryStatus testID="dropdown-selection">{selection}</StoryStatus>
       <StoryStatus testID="dropdown-focus">{focus}</StoryStatus>
@@ -177,8 +179,31 @@ export const Default: Story = {
         expect(await (await browser.$('~dropdown-cherry')).getProperty('enabled')).toBe(false);
         expect(await (await browser.$('~dropdown-apple')).getProperty('name')).toBe('Apple');
       });
-      await browser.keys('\uE00C');
+      // A macOS window switch makes the owner window key, so close with the trigger rather than a key.
+      await (await browser.$('~dropdown-trigger')).click();
+      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: trigger');
       await expectMenuClosed(context, 'dropdown-trigger');
+    },
+    'closes on Tab and moves focus past the trigger': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { expectMenuClosed } = await import('../menu/menu.wdio.ts');
+      const { browser, expect } = context;
+      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+      await browser.keys('\uE004');
+      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
+      // The Win32 host cannot continue Tab past its owner, so focus returns to the trigger there.
+      await expectNativeState(browser, context.platform === 'win32' ? 'dropdown-trigger' : 'dropdown-after', 'focused', true);
+      await expectMenuClosed(context, 'dropdown-trigger');
+    },
+    'closes on Shift+Tab and returns focus to the trigger': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, expect } = context;
+      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+      await browser.keys(['\uE008', '\uE004']);
+      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
+      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
     },
     'opens from the pointer on the first option and selects with a click': async (context) => {
       const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
@@ -292,8 +317,9 @@ export const LongList: Story = {
         // The focused last option is scrolled within the list's visible bounds.
         expect(option.y).toBeGreaterThanOrEqual(list.y - 1);
         expect(option.y + option.height).toBeLessThanOrEqual(list.y + list.height + 1);
+        // A macOS window switch makes the owner window key, so commit with the pointer rather than a key.
+        await (await browser.$('~dropdown-tokyo')).click();
       });
-      await browser.keys('\uE007');
       await expect(await browser.$('~dropdown-selection')).toHaveText('Tokyo');
       await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
     },
