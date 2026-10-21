@@ -38,8 +38,9 @@ Focus remains scoped to eligible content and active owned windows.
 ## Popup consumer amendments
 
 Pre-code contract review, October 16, 2026, against the existing macOS
-`NativeFocusService`, Windows `FocusWithin`, and the confirmed D03/D05 decisions
-in the repository's menu/popover plan:
+`NativeFocusService`, Windows `FocusWithin`, and the owner's popup decisions that
+native presence is authoritative (with a latch and rearm) and that every open
+requests entry focus through a `first` strategy:
 
 - `requestFocus(presentation, target, options)` also accepts `first` and `last`.
   These strategies search eligible descendants of the current presentation in

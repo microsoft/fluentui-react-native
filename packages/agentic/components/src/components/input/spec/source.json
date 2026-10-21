@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "component": "input",
-  "lifecycle": "contract-reviewed",
+  "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-10-16",
   "sources": [
@@ -121,7 +121,7 @@
     },
     {
       "id": "INP-007",
-      "plannedEvidence": ["useInput.ts", "input.styles.ts", "useInputStyles.ts", "renderInput.tsx", "input.test.tsx", "input.stories.tsx"]
+      "evidence": ["useInput.ts", "input.styles.ts", "useInputStyles.ts", "renderInput.tsx", "input.test.tsx", "input.stories.tsx"]
     }
   ]
 }

@@ -1,7 +1,7 @@
 ---
 name: menu-item
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -62,8 +62,9 @@ Multiselect takes visual precedence over selected fill and semibold text.
 
 The MNI-006 pre-code amendment was reviewed on October 16, 2026 against the
 unchanged pinned source and owner decision D06. It is a native adaptation for
-disabled-command discoverability, not a new selection owner. Renderer and
-screen-reader qualification remains open in the menu/popover plan.
+disabled-command discoverability, not a new selection owner. Native story cases
+qualify it on every desktop endpoint; screen-reader qualification has not been
+recorded.
 
 - **MNI-007:** Inside a Menu, a list row registers its identity, label text,
   and focus target with the Menu; omitting `disabledFocusable` inherits the

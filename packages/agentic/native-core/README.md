@@ -306,8 +306,7 @@ Both renderers also pass 19 shared-focus cases without skips, including disabled
 MenuItem activation refusal, read-only Input focus/edit refusal, Button disabled
 state, and TabList selected-state updates. The strict Apple integration probe passes both React-module and
 no-React-module bridging-header configurations. This is not an Office host
-runtime qualification. See [the implementation handoff](../../../menu-popover-plan.md#12-implementation-handoff)
-and the [Win32 host follow-up](https://github.com/microsoft/fluentui-react-native/issues/4384)
+runtime qualification. See the [Win32 host follow-up](https://github.com/microsoft/fluentui-react-native/issues/4384)
 for remaining gates.
 
 The October 19, 2026 Popover amendments (see the Callout `SPEC.md`) change only

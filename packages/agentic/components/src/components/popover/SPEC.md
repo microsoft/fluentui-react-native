@@ -1,7 +1,7 @@
 ---
 name: popover
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -124,8 +124,7 @@ The trigger also declares `Expand` and `Collapse` accessibility actions there,
 because Win32 UI Automation exposes ExpandCollapse state only for an element
 that declares them; the actions set the requested presence.
 
-iOS and Android are unsupported. Because all desktop endpoints ship together,
-Popover is not exported from the package root until every route is qualified.
+iOS and Android are unsupported.
 
 ## Divergences from Flex
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "component": "menu-item",
-  "lifecycle": "contract-reviewed",
+  "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-10-16",
   "sources": [
@@ -110,7 +110,7 @@
     },
     {
       "id": "MNI-006",
-      "plannedEvidence": ["menu-item.types.ts", "useMenuItem.ts", "menu-item.test.tsx", "menu-item.types.test.ts"]
+      "evidence": ["menu-item.types.ts", "useMenuItem.ts", "menu-item.test.tsx", "menu-item.types.test.ts"]
     },
     {
       "id": "MNI-007",

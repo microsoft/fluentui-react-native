@@ -1,7 +1,7 @@
 ---
 name: menu
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -145,8 +145,7 @@ or last focusable row. Tab or Shift+Tab in any popup closes the family and
 focuses the trigger. The Win32 host reports a pointer leave together with its
 enter, so a pending submenu open or switch there survives the leave and is
 replaced only by hovering another row, as in native Windows menus. iOS and
-Android are unsupported. Menu is not exported from the package root until all
-four endpoints qualify.
+Android are unsupported.
 
 ## Divergences from Flex
 

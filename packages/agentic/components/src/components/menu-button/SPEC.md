@@ -1,7 +1,7 @@
 ---
 name: menu-button
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -99,8 +99,7 @@ continue focus past the popup's owner, so Office Win32 uses the approved interim
 (R1): Tab closes the menu and returns focus to the trigger.
 
 The chevron uses the package's shared icon sources, as MenuItem's submenu
-chevron does. MenuButton is not exported from the package root until all four
-endpoints qualify.
+chevron does.
 
 ## Divergences from Flex
 

@@ -1,7 +1,7 @@
 ---
 name: dropdown
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -205,8 +205,6 @@ brings Popover's host differences:
 On macOS the list never requests a horizontal scroller and requests a vertical
 scroller only while its options overflow, because Paper reserves the space of
 legacy scrollers even while they are hidden. iOS and Android are unsupported.
-Dropdown is not exported from the package root until all four desktop
-endpoints qualify.
 
 ## Divergences from Flex
 

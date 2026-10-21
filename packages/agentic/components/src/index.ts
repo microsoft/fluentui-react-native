@@ -67,6 +67,26 @@ export { renderDivider_unstable } from './components/divider/renderDivider';
 export { useDividerStyles_unstable } from './components/divider/useDividerStyles';
 export { useDivider_unstable } from './components/divider/useDivider';
 
+export { Dropdown } from './components/dropdown/dropdown';
+export type {
+  DropdownExposedRootProps,
+  DropdownLiftedProps,
+  DropdownListboxProps,
+  DropdownOpenChangeData,
+  DropdownOpenChangeReason,
+  DropdownProps,
+  DropdownSelectionChangeData,
+  DropdownSize,
+  DropdownSlots,
+  DropdownState,
+  DropdownStateProps,
+  DropdownTriggerProps,
+  DropdownVariant,
+} from './components/dropdown/dropdown.types';
+export { renderDropdown_unstable } from './components/dropdown/renderDropdown';
+export { useDropdownStyles_unstable } from './components/dropdown/useDropdownStyles';
+export { useDropdown_unstable } from './components/dropdown/useDropdown';
+
 export { Input } from './components/input/input';
 export type { InputProps, InputSize, InputSlots, InputState, InputVariant } from './components/input/input.types';
 export { renderInput_unstable } from './components/input/renderInput';
@@ -98,6 +118,31 @@ export { renderListboxItem_unstable } from './components/listbox-item/renderList
 export { useListboxItemStyles_unstable } from './components/listbox-item/useListboxItemStyles';
 export { useListboxItem_unstable } from './components/listbox-item/useListboxItem';
 
+export { Menu } from './components/menu/menu';
+export type {
+  MenuAlign,
+  MenuExposedViewProps,
+  MenuOpenChangeData,
+  MenuOpenChangeReason,
+  MenuPlacement,
+  MenuPlacementProps,
+  MenuPopupState,
+  MenuProps,
+  MenuSlots,
+  MenuState,
+  MenuStateProps,
+  MenuSurfaceProps,
+} from './components/menu/menu.types';
+export { renderMenu_unstable } from './components/menu/renderMenu';
+export { useMenuStyles_unstable } from './components/menu/useMenuStyles';
+export { useMenu_unstable } from './components/menu/useMenu';
+
+export { MenuButton } from './components/menu-button/menu-button';
+export type { MenuButtonProps, MenuButtonSlots, MenuButtonState } from './components/menu-button/menu-button.types';
+export { renderMenuButton_unstable } from './components/menu-button/renderMenuButton';
+export { useMenuButtonStyles_unstable } from './components/menu-button/useMenuButtonStyles';
+export { useMenuButton_unstable } from './components/menu-button/useMenuButton';
+
 export { MenuItem } from './components/menu-item/menu-item';
 export type {
   MenuItemProps,
@@ -110,6 +155,23 @@ export type {
 export { renderMenuItem_unstable } from './components/menu-item/renderMenuItem';
 export { useMenuItemStyles_unstable } from './components/menu-item/useMenuItemStyles';
 export { useMenuItem_unstable } from './components/menu-item/useMenuItem';
+
+export { Popover } from './components/popover/popover';
+export type {
+  PopoverAlign,
+  PopoverExposedViewProps,
+  PopoverOpenChangeData,
+  PopoverOpenChangeReason,
+  PopoverPlacement,
+  PopoverProps,
+  PopoverSlots,
+  PopoverState,
+  PopoverStateProps,
+  PopoverSurfaceProps,
+} from './components/popover/popover.types';
+export { renderPopover_unstable } from './components/popover/renderPopover';
+export { usePopoverStyles_unstable } from './components/popover/usePopoverStyles';
+export { usePopover_unstable } from './components/popover/usePopover';
 
 export { ProgressBar } from './components/progress-bar/progress-bar';
 export type {

@@ -1,7 +1,7 @@
 ---
 name: input
 platform: react-native (Windows, macOS)
-status: contract-reviewed
+status: implemented
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -96,8 +96,8 @@ all five unchanged pinned Input payloads and reconciling D11. Outline uses
 adds one `strokeWidth.thin` focus-color inset above the existing thin edge,
 giving base focus a thicker edge while preserving the danger/read-only edge.
 This resolves the interaction/token wording through an additive native View,
-not a CSS shadow or a new native outline. Platform visual qualification remains
-open in the menu/popover plan.
+not a CSS shadow or a new native outline. High-contrast, scaling, and theme
+visual qualification has not been recorded.
 
 ## Platform behavior
 

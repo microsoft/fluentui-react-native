@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "component": "popover",
-  "lifecycle": "contract-reviewed",
+  "lifecycle": "implemented",
   "conformance": "reviewed",
   "reviewedAt": "2026-10-19",
   "sources": [
