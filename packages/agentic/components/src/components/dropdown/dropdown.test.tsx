@@ -9,6 +9,7 @@ import { ListboxItem } from '../listbox-item/listbox-item';
 import { Dropdown } from './dropdown';
 import * as dropdownNative from './dropdownNative';
 import { collectDropdownOptions, getDisplayedOptions } from './dropdownOptions';
+import { dropdownListMaxHeight } from './dropdownPopup';
 import type { DropdownProps } from './dropdown.types';
 
 type ReactTestInstance = ReturnType<typeof screen.getByTestId>;
@@ -140,6 +141,12 @@ describe('Dropdown', () => {
     });
     expect(scroll().props.showsVerticalScrollIndicator).toBe(true);
     await act(async () => scroll().props.onContentSizeChange(200, 240));
+    expect(scroll().props.showsVerticalScrollIndicator).toBe(false);
+    // The viewport, not the list's height cap, decides overflow: 245pt of options overflow a 240pt viewport.
+    expect(dropdownListMaxHeight).toBeGreaterThan(245);
+    await act(async () => scroll().props.onContentSizeChange(200, 245));
+    expect(scroll().props.showsVerticalScrollIndicator).toBe(true);
+    await act(async () => scroll().props.onLayout(layout(250)));
     expect(scroll().props.showsVerticalScrollIndicator).toBe(false);
     expect(scroll().props.showsHorizontalScrollIndicator).toBe(false);
   });
