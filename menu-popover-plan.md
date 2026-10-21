@@ -1353,3 +1353,29 @@ native submenu-intent signal, motion, edge margins, and the root exports remain 
 handle Home and End in FocusZone, restore focus to the trigger on close, continue Tab past the owner, and report one
 pointer enter without a leave; each would let the adapters drop a workaround. Dropdown (#4224) still needs its
 contract review and the ListboxItem option adapter.
+
+## 18. Dropdown on Windows Fabric and Office Win32, October 21, 2026
+
+This increment implements Dropdown (#4224) under its owner-approved contract (DRP-001 to DRP-012) and binds
+ListboxItem to it (LBI-006). Dropdown reuses section 17's Menu routes on Windows Fabric and Win32 and is not
+exported from the package root (DRP-012). Both contracts stay `contract-reviewed` until macOS qualification.
+
+### Implemented and observed
+
+- **Dropdown (components):** a `combobox` trigger opens a `list` of ListboxItem options in a Callout. Single mode
+  commits and closes; multiple mode toggles and stays open, and its value shows the labels or a count summary when
+  they do not fit. Entry focus goes to the selection, otherwise to the first or last enabled option; disabled options
+  are never focus stops. Escape closes with `dismiss` and returns focus to the trigger.
+- **ListboxItem (components):** a `value` prop and `ListboxItemOptionContext` register options with the list, which
+  owns selection, activation, and the selection accessibility actions.
+- **Windows Fabric list width:** RNW's `AbiPortalShadowNode` lays the portal child out as a layout root, which
+  replaces the root's own min and max dimensions with the portal constraints. The trigger-width floor is therefore a
+  zero-height child inside the surface's padding and border, not `minWidth` on the content root.
+
+### Validation
+
+- Components Jest: 66 suites and 560 tests pass, including 22 Dropdown tests and 6 ListboxItem LBI-006 tests.
+- Desktop smoke with `desktop-focus` on Menu, MenuButton, MenuItem, Popover, ListboxItem, and Dropdown stories:
+  26 of 26 pass on Windows Fabric and 26 of 26 on Office Win32.
+- The Windows node test controller twice exited with 0xC0000409 after the Dropdown Default story while the app stayed
+  responsive; reruns passed. macOS qualification is not run.

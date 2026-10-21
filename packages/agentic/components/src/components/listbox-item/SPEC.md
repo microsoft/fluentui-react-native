@@ -1,7 +1,7 @@
 ---
 name: listbox-item
 platform: react-native (Windows, macOS)
-status: implemented
+status: contract-reviewed
 source: ./spec/source.json
 tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
@@ -40,6 +40,9 @@ does not change it. `multiselect` suppresses the row selected fill and
 semibold label reservation, while its internal indicator reflects `selected`.
 `checkmark` renders only when both it and `selected` are true.
 
+`value` is an optional string that identifies a list item as an option of an
+owning list (LBI-006). A standalone list item ignores it.
+
 ### Requirements
 
 - **LBI-001:** Resolve option and header defaults, exposed slots, and owned
@@ -52,6 +55,26 @@ semibold label reservation, while its internal indicator reflects `selected`.
   user root style last, following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
 - **LBI-005:** Expose the native accessibility role and state appropriate to
   the resolved variant.
+- **LBI-006:** Inside a Dropdown list, a list item with a string `value` is a
+  bound option. It registers its value and focus target with the list and
+  exposes the `listitem` role with `selected` and `disabled` state, its
+  one-based position, and the option count, instead of the `button` role and
+  `pressed` state. It declares the select, add-to-selection, and
+  remove-from-selection actions, lowercase on Windows Fabric and title case
+  elsewhere; the list applies an action before the caller's
+  `onAccessibilityAction` receives the event once. The list owns the option's
+  selection: it supplies `selected`, shows the checkmark in single mode and the
+  checkbox indicator in multiple mode, and ignores caller values for
+  `selected`, `checkmark`, and `multiselect`. Without `content`, a bound option
+  shows its `accessibilityLabel` or else its value, and it renders the icon,
+  selected icon, and secondary content only when they are supplied. It reports
+  focus, hover, key, and press input to the list after the caller's handlers
+  and declares the keys the list handles in `keyDownEvents`. Outside a list,
+  or without a `value`, the item is unchanged.
+
+LBI-006 was reviewed before code on October 19, 2026 with the Dropdown contract
+(`../dropdown/SPEC.md`). Dropdown supplies the binding context, so ListboxItem
+never imports Dropdown or native-core.
 
 ## Focus visuals
 
@@ -73,13 +96,16 @@ These hook options do not add new component props. Scenes require `ThemedRoot`.
 On Windows and macOS, a list item is an accessible React Native `Pressable`
 with the `button` role. Its accessibility state combines the caller's state
 with `disabled` and `pressed: selected`, and it is focusable unless disabled.
+A bound option uses the `listitem` role and `selected` state instead, which
+Windows exposes through UI Automation's SelectionItem pattern (LBI-006).
 A section header is exposed through a nonfocusable React Native `View` with
 the `header` role. The internal leading and trailing visuals are inaccessible.
 
 Pointer hover, press, and focus events flow through `usePressableState`.
-Section
-headers gain no ring or focus stop. No code here moves between options, processes
-collection keys, opens submenus, or closes an owning popup.
+Section headers gain no ring or focus stop. A standalone list item never moves
+between options, processes collection keys, opens submenus, or closes an
+owning popup. A bound option forwards its input to its list, which owns
+navigation, selection, dismissal, and focus return.
 
 ## Divergences from Flex
 
@@ -87,10 +113,11 @@ collection keys, opens submenus, or closes an owning popup.
 
 - `listbox-item-native-pressed-state` (**accepted**): The selected option is
   surfaced to native accessibility through `accessibilityState.pressed`
-  instead of a web accessibility attribute.
+  instead of a web accessibility attribute. A bound option uses `selected`
+  (LBI-006).
 - `listbox-item-default-icon` (**accepted**): FURN creates the normal and
   selected icon slots by default; the pinned Flex reference requires an
-  explicit icon opt-in.
+  explicit icon opt-in. A bound option requires the opt-in (LBI-006).
 - `listbox-item-native-focus-model` (**accepted**): FURN gives each option a
   directly focusable Pressable root and local platform focus treatment instead
   of retaining focus at a parent selection controller.
@@ -100,10 +127,11 @@ collection keys, opens submenus, or closes an owning popup.
 
 ## Conformance
 
-| Requirement | Evidence                                                                                          |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| LBI-001     | `listbox-item.types.ts`, `useListboxItem.ts`, `listbox-item.types.test.ts`                        |
-| LBI-002     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                             |
-| LBI-003     | `useListboxItem.ts`, `listbox-item.styles.ts`, `listbox-item.test.tsx`                            |
-| LBI-004     | `useListboxItem.ts`, `listbox-item.styles.ts`, `useListboxItemStyles.ts`, `listbox-item.test.tsx` |
-| LBI-005     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                             |
+| Requirement | Evidence                                                                                             |
+| ----------- | ---------------------------------------------------------------------------------------------------- |
+| LBI-001     | `listbox-item.types.ts`, `useListboxItem.ts`, `listbox-item.types.test.ts`                           |
+| LBI-002     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                                |
+| LBI-003     | `useListboxItem.ts`, `listbox-item.styles.ts`, `listbox-item.test.tsx`                               |
+| LBI-004     | `useListboxItem.ts`, `listbox-item.styles.ts`, `useListboxItemStyles.ts`, `listbox-item.test.tsx`    |
+| LBI-005     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                                |
+| LBI-006     | `listbox-item.types.ts`, `listboxItemOptionContext.ts`, `useListboxItem.ts`, `listbox-item.test.tsx` |

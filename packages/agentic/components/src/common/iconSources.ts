@@ -4,6 +4,7 @@ export const semanticIconSources = {
   checkmark: { codepoint: 0x2713 },
   chevron: { codepoint: 0x203a },
   chevronDown: { codepoint: 0x2228 },
+  chevronUp: { codepoint: 0x2227 },
   dismiss: { codepoint: 0x2715 },
   error: { codepoint: 0x2716 },
   indeterminate: { codepoint: 0x2212 },

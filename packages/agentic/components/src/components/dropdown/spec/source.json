@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "component": "dropdown",
+  "lifecycle": "contract-reviewed",
+  "conformance": "reviewed",
+  "reviewedAt": "2026-10-19",
+  "sources": [
+    {
+      "id": "flex-component",
+      "kind": "flex-skill",
+      "authority": "normative",
+      "skill": "flex-components:dropdown",
+      "sourceLock": "flex-1.5.0-206c4996",
+      "sourceLockFingerprint": "a69997212ec1b89510c94176801bf5a146ed7e7d8c80cc7db40ac8f60cf9f119",
+      "availableSurfaces": ["shared", "web"],
+      "surfacesConsulted": ["shared", "web"],
+      "sourceFiles": [
+        {
+          "role": "skill",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/SKILL.md",
+          "marketplaceBlobSha": "3be39f4ccb3b599a78d1e595209402ac118c1f74",
+          "marketplaceSha256": "90e1eeb0225d4898b3ee9d5790bf161e9700a1aebf81f0813f37361aee80d3e3",
+          "originPath": "plugins/components/skills/dropdown/SKILL.md",
+          "originBlobSha": "3be39f4ccb3b599a78d1e595209402ac118c1f74",
+          "originSha256": "90e1eeb0225d4898b3ee9d5790bf161e9700a1aebf81f0813f37361aee80d3e3",
+          "contentDiffers": false
+        },
+        {
+          "role": "usage",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/usage.md",
+          "marketplaceBlobSha": "da605850f4e889744402311b23e1b16073c5cbda",
+          "marketplaceSha256": "ab7b9d721133baa0b2f4334c3d7c08a9d0b96c37297d8487cd8355cd34bfd825",
+          "originPath": "plugins/components/skills/dropdown/usage.md",
+          "originBlobSha": "da605850f4e889744402311b23e1b16073c5cbda",
+          "originSha256": "ab7b9d721133baa0b2f4334c3d7c08a9d0b96c37297d8487cd8355cd34bfd825",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:accessibility",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/web/accessibility.md",
+          "marketplaceBlobSha": "f93db6f9b5c8269ae9904bd761a3b3d8363ccf32",
+          "marketplaceSha256": "989cbd718c3eb9e3ea9bed1906621cc86ea2ed3499242839bf0859357c04b1e3",
+          "originPath": "plugins/components/skills/dropdown/web/accessibility.md",
+          "originBlobSha": "f93db6f9b5c8269ae9904bd761a3b3d8363ccf32",
+          "originSha256": "989cbd718c3eb9e3ea9bed1906621cc86ea2ed3499242839bf0859357c04b1e3",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:interaction",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/web/interaction.md",
+          "marketplaceBlobSha": "f603daeba563886b4d7b795961683adbfb531b2e",
+          "marketplaceSha256": "0d6dbb8a3f3eef1daffc5d40d10ec3e1eca274e02a2d54bb00a0e92e21a0262c",
+          "originPath": "plugins/components/skills/dropdown/web/interaction.md",
+          "originBlobSha": "f603daeba563886b4d7b795961683adbfb531b2e",
+          "originSha256": "0d6dbb8a3f3eef1daffc5d40d10ec3e1eca274e02a2d54bb00a0e92e21a0262c",
+          "contentDiffers": false
+        },
+        {
+          "role": "web:tokens",
+          "marketplacePath": "catalogs/flex/plugins/components/skills/dropdown/web/tokens.yaml",
+          "marketplaceBlobSha": "002e918b795b3a0773c943a135bb55804bf30dfd",
+          "marketplaceSha256": "91bc29fe8de636a028ed58673967fa79842d9991e13f62dbd4cd189d492b5983",
+          "originPath": "plugins/components/skills/dropdown/web/tokens.yaml",
+          "originBlobSha": "002e918b795b3a0773c943a135bb55804bf30dfd",
+          "originSha256": "91bc29fe8de636a028ed58673967fa79842d9991e13f62dbd4cd189d492b5983",
+          "contentDiffers": false
+        }
+      ],
+      "releaseDifferences": []
+    }
+  ],
+  "divergences": [
+    {
+      "id": "dropdown-real-option-focus",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-combobox-relationships",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-list-roles",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-invalid-state",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-tab-exit",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-trigger-width",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-chevron-glyph",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-native-elevation",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-win32-gap",
+      "status": "accepted"
+    },
+    {
+      "id": "dropdown-token-strip",
+      "status": "deferred"
+    },
+    {
+      "id": "dropdown-motion",
+      "status": "deferred"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "DRP-001",
+      "evidence": ["dropdown.types.ts", "useDropdown.ts", "dropdown.test.tsx", "dropdown.types.test.ts"]
+    },
+    {
+      "id": "DRP-002",
+      "evidence": ["dropdown.styles.ts", "useDropdownStyles.ts", "renderDropdown.tsx", "dropdown.test.tsx"]
+    },
+    {
+      "id": "DRP-003",
+      "evidence": ["useDropdown.ts", "dropdown.styles.ts", "renderDropdown.tsx", "dropdown.test.tsx"]
+    },
+    {
+      "id": "DRP-004",
+      "evidence": ["dropdownOptions.ts", "renderDropdown.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-005",
+      "evidence": ["dropdownOptions.ts", "dropdownController.ts", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-006",
+      "evidence": ["dropdownController.ts", "dropdownPopup.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-007",
+      "evidence": ["dropdownController.ts", "dropdownPopup.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-008",
+      "evidence": ["dropdownPopup.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-009",
+      "evidence": ["dropdownController.ts", "dropdownPopup.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-010",
+      "evidence": ["dropdown.styles.ts", "dropdownPopup.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-011",
+      "evidence": ["useDropdown.ts", "dropdownPopup.tsx", "dropdown.test.tsx", "dropdown.stories.tsx"]
+    },
+    {
+      "id": "DRP-012",
+      "evidence": [
+        "dropdownNative.ts",
+        "dropdownNative.macos.ts",
+        "dropdownNative.windows.ts",
+        "dropdownNative.win32.ts",
+        "dropdown.test.tsx",
+        "dropdown.stories.tsx"
+      ]
+    }
+  ]
+}

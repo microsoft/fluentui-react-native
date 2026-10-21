@@ -4,7 +4,8 @@ The list-item root uses React Native Pressable events. Its caller receives
 `onPress`, hover, focus, and press handlers through the framework state hook.
 Disabled options do not activate or receive focus. Selection stays external:
 pressing an option does not update `selected`; an owning list or popup must
-provide a new prop value.
+provide a new prop value. A bound option's list supplies `selected` and
+ignores the caller's value (LBI-006).
 
 The component renders hover and press feedback from its resolved native state.
 
@@ -22,8 +23,12 @@ noninteractive targets show no custom ring. The visual is decorative and cannot
 intercept input; native ring appearance remains renderer-owned.
 
 Windows and macOS provide platform keyboard activation for the focusable
-Pressable. Arrow navigation, Home/End, type-ahead, submenu control, dismissal,
-and focus return are outside this component. No timed animation is implemented.
+Pressable. For a standalone list item, arrow navigation, Home/End, type-ahead,
+submenu control, dismissal, and focus return are outside this component. A
+bound option reports focus, hover, key, and press input to its Dropdown list
+after the caller's handlers and declares the keys the list handles in
+`keyDownEvents`; the list owns navigation, selection, dismissal, and focus
+return. No timed animation is implemented.
 
 ## Focus target lifetime
 
