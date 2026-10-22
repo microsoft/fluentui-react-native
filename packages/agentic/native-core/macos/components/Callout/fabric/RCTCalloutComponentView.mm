@@ -98,6 +98,7 @@ static void RCTApplyCalloutAppearance(
 
   _calloutView.commandGeneration = newProps.commandGeneration;
   _calloutView.anchorMode = [NSString stringWithUTF8String:toString(newProps.anchorMode).c_str()];
+  _calloutView.tabNavigation = [NSString stringWithUTF8String:toString(newProps.tabNavigation).c_str()];
   _calloutView.placementHint = [NSString stringWithUTF8String:toString(newProps.directionalHint).c_str()];
   _calloutView.gapSpace = newProps.gapSpace;
   _calloutView.setInitialFocus = newProps.setInitialFocus;
@@ -156,11 +157,11 @@ static void RCTApplyCalloutAppearance(
   [_calloutView blurWindow];
 }
 
-- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag
+- (void)requestFocus:(NSInteger)generation requestId:(NSInteger)requestId targetTag:(NSInteger)targetTag strategy:(NSString *)strategy
 {
   // Resolve the target within this popup's content so a focus request cannot escape the presentation.
   NSView *target = FRNNativeCoreFindView(_calloutView.contentProxyView, targetTag);
-  [_calloutView requestFocus:generation requestId:requestId target:target];
+  [_calloutView requestFocus:generation requestId:requestId target:target strategy:strategy];
 }
 
 - (void)close:(NSInteger)generation requestId:(NSInteger)requestId

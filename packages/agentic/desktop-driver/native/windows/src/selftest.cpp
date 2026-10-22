@@ -170,12 +170,13 @@ void TestInputLedger() {
   CancellationToken token;
 
   input.KeyDown(L"\uE008", token);
-  input.KeyDown(L"a", token);
+  input.KeyDown(L"\u4e2d", token);
   input.PointerDown(0, token);
   Check(input.DepressedKeyCount() == 2 && input.DepressedButtonCount() == 1, "ledger records depressed input");
   Check(recordedInputs.size() == 3, "ledger injected three down events");
   Check(recordedInputs[0].ki.wVk == VK_SHIFT, "special keys map to virtual keys");
-  Check((recordedInputs[1].ki.dwFlags & KEYEVENTF_UNICODE) != 0, "printable keys inject unicode");
+  Check((recordedInputs[1].ki.dwFlags & KEYEVENTF_UNICODE) != 0 && recordedInputs[1].ki.wScan == 0x4e2d,
+        "characters without an unmodified layout key inject unicode");
   constexpr DWORD kPositionedPress = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN;
   Check(recordedInputs[2].type == INPUT_MOUSE && (recordedInputs[2].mi.dwFlags & kPositionedPress) == kPositionedPress,
         "pointer presses carry their coordinate");
@@ -195,6 +196,13 @@ void TestInputLedger() {
   input.KeyDown(L"b", token);
   input.KeyUp(L"b", token);
   Check(!input.HasDepressedInput(), "explicit key release clears the ledger");
+  const WORD layoutKey = UnmodifiedLayoutKey(L'b');
+  Check(recordedInputs.size() == 2 &&
+            (layoutKey != 0 ? recordedInputs[0].ki.wVk == layoutKey &&
+                                  (recordedInputs[0].ki.dwFlags & KEYEVENTF_UNICODE) == 0
+                            : (recordedInputs[0].ki.dwFlags & KEYEVENTF_UNICODE) != 0) &&
+            recordedInputs[1].ki.wVk == recordedInputs[0].ki.wVk && recordedInputs[1].ki.wScan == recordedInputs[0].ki.wScan,
+        "characters with an unmodified layout key inject and release that key");
 
   input.PointerDown(0, token);
   recordedInputs.clear();
@@ -403,11 +411,11 @@ void TestReleaseLedger() {
   recordedInputs.clear();
   InputController input;
   input.UseTestSender(&RecordInput);
-  const ReleaseCounts released = input.ReleaseExact(parse(R"({"keys":["\uE008","a"],"buttons":[0,1,2]})"));
+  const ReleaseCounts released = input.ReleaseExact(parse(R"({"keys":["\uE008","\u4e2d"],"buttons":[0,1,2]})"));
   Check(released.keys == 2 && released.buttons == 3, "ledger release reports its counts");
   Check(recordedInputs.size() == 5, "ledger release emits one event per entry");
   Check(recordedInputs[0].type == INPUT_KEYBOARD && (recordedInputs[0].ki.dwFlags & KEYEVENTF_UNICODE) != 0 &&
-            recordedInputs[0].ki.wScan == L'a' && (recordedInputs[0].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
+            recordedInputs[0].ki.wScan == 0x4e2d && (recordedInputs[0].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
         "ledger releases keys in reverse order");
   Check(recordedInputs[1].ki.wVk == VK_SHIFT && (recordedInputs[1].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
         "ledger releases special keys with their virtual key");

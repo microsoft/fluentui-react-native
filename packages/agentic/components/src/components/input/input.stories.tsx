@@ -11,6 +11,11 @@ import type { IconElementProps } from '../../primitives/icon/icon.types';
 import { Input } from './input';
 import { Button } from '../button/button';
 import type { InputSize, InputVariant } from './input.types';
+import type { InputProps } from './input.types';
+import { useInput_unstable } from './useInput';
+import { useInputStyles_unstable } from './useInputStyles';
+import { renderInput_unstable } from './renderInput';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -124,6 +129,79 @@ export const FocusManagement: Story = {
       await (await browser.$('~focus-input')).click();
       await expectWindowsPointerFocus(context, 'focus-input');
       await expectNativeState(browser, 'focus-input-after', 'focused', false);
+    },
+  },
+};
+
+function FocusTreatmentProbe(props: InputProps) {
+  const state = useInput_unstable(props);
+  useInputStyles_unstable(state);
+  return (
+    <View>
+      {renderInput_unstable(state)}
+      <StoryStatus testID={`${props.testID}-indicator`}>{String(state.focusVisible)}</StoryStatus>
+    </View>
+  );
+}
+
+export const FocusTreatment: Story = {
+  tags: ['desktop-focus'],
+  render: () => (
+    <View style={styles.story}>
+      <Input accessibilityLabel="Focus treatment entry" testID="focus-field-entry" />
+      {(['outline', 'underline'] as const).map((variant) => (
+        <View key={variant} style={styles.row}>
+          <FocusTreatmentProbe variant={variant} accessibilityLabel={variant} testID={`focus-field-${variant}`} />
+          <FocusTreatmentProbe variant={variant} error accessibilityLabel={`${variant} error`} testID={`focus-field-${variant}-error`} />
+          <FocusTreatmentProbe
+            variant={variant}
+            readOnly
+            value="Read only"
+            accessibilityLabel={`${variant} read only`}
+            testID={`focus-field-${variant}-readonly`}
+          />
+        </View>
+      ))}
+      <Input disabled accessibilityLabel="Disabled field" testID="focus-field-disabled" />
+      <Button content="After fields" testID="focus-field-after" />
+    </View>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Keyboard focus uses one outline ring or an additive underline; error and read-only boundaries remain visible.',
+      },
+    },
+  },
+  wdio: {
+    'retains native editor focus and geometry through every focus-treatment variant': async (context) => {
+      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, expect } = context;
+      await (await browser.$('~focus-field-entry')).click();
+      await expectNativeState(browser, 'focus-field-entry', 'focused', true);
+      for (const variant of ['outline', 'underline']) {
+        for (const suffix of ['', '-error', '-readonly']) {
+          const id = `focus-field-${variant}${suffix}`;
+          const field = await browser.$(`~${id}`);
+          const before = await browser.getElementRect(await field.elementId);
+          await browser.keys('\uE004');
+          await expectNativeState(browser, id, 'focused', true);
+          await expect(await browser.$(`~${id}-indicator`)).toHaveText('true');
+          if (suffix === '-readonly') {
+            expect(await field.getTagName()).toBe('textbox');
+            await expect(field).toBeEnabled();
+            await browser.keys('x');
+            await expect(field).toHaveValue('Read only');
+            await expectNativeState(browser, id, 'focused', true);
+          }
+          const after = await browser.getElementRect(await field.elementId);
+          expect({ width: after.width, height: after.height }).toEqual({ width: before.width, height: before.height });
+        }
+      }
+      await browser.keys('\uE004');
+      await expectNativeState(browser, 'focus-field-after', 'focused', true);
+      await expectNativeState(browser, 'focus-field-disabled', 'focused', false);
     },
   },
 };

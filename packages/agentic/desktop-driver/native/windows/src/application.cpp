@@ -500,6 +500,18 @@ class ForegroundInputAttachment {
   DWORD otherThread_{0};
 };
 
+// Like application activation on macOS, a foreground popup that the window owns keeps the window's activation
+// context. Re-activating the owner would dismiss that popup with input no user produced; a physical press on the owner
+// activates it as the user's own press would.
+bool IsInActivationContext(HWND window, HWND foreground) noexcept {
+  for (HWND current = foreground; current != nullptr; current = GetWindow(current, GW_OWNER)) {
+    if (current == window || GetAncestor(current, GA_ROOT) == window) {
+      return true;
+    }
+  }
+  return false;
+}
+
 ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& token) {
   if (window == nullptr || IsWindow(window) == FALSE) {
     Fail(kErrorNoSuchWindow, "The requested window is no longer available.");
@@ -516,7 +528,7 @@ ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& t
     token.ThrowIfCancelled();
     const HWND foreground = GetForegroundWindow();
     outcome.sawForeground = outcome.sawForeground || foreground != nullptr;
-    if (foreground == window || (foreground != nullptr && GetAncestor(foreground, GA_ROOT) == window)) {
+    if (IsInActivationContext(window, foreground)) {
       outcome.activated = true;
       break;
     }

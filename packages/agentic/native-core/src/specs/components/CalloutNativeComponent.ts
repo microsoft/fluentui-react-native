@@ -17,6 +17,7 @@ interface AnchorRect {
 export interface NativeProps extends ViewProps {
   commandGeneration?: Int32;
   anchorMode?: WithDefault<'legacy' | 'view' | 'rect' | 'point', 'legacy'>;
+  tabNavigation?: WithDefault<'cycle' | 'dismiss' | 'continue', 'cycle'>;
   onReady?: DirectEventHandler<{ generation: Int32 }>;
   onClosed?: DirectEventHandler<{ generation: Int32; reason: string }>;
   onOperationResult?: DirectEventHandler<{ generation: Int32; requestId: Int32; status: string }>;
@@ -68,7 +69,13 @@ export type CalloutComponentType = HostComponent<NativeProps>;
 interface NativeCalloutCommands {
   focusWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
   blurWindow: (viewRef: React.ElementRef<CalloutComponentType>) => void;
-  requestFocus: (viewRef: React.ElementRef<CalloutComponentType>, generation: Int32, requestId: Int32, targetTag: Int32) => void;
+  requestFocus: (
+    viewRef: React.ElementRef<CalloutComponentType>,
+    generation: Int32,
+    requestId: Int32,
+    targetTag: Int32,
+    strategy: string,
+  ) => void;
   close: (viewRef: React.ElementRef<CalloutComponentType>, generation: Int32, requestId: Int32) => void;
   reposition: (viewRef: React.ElementRef<CalloutComponentType>, generation: Int32, requestId: Int32) => void;
 }

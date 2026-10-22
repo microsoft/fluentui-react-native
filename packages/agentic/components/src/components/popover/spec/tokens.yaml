@@ -1,0 +1,36 @@
+schemaVersion: 1
+component: popover
+implementation: popover.styles.ts
+
+statePrecedence: []
+
+bindings:
+  root:
+    layout:
+      alignSelf: flex-start
+
+  trigger:
+    component: Button
+    notes: Button's reviewed bindings apply unchanged; Popover adds no trigger tokens.
+
+  surface:
+    backgroundColor: color.surfaceNeutralNearer
+    borderColor: color.strokeNeutralSubtle
+    borderStyle: solid
+    borderWidth: strokeWidth.thin
+    borderRadius: borderRadius.base400
+    padding: spacing.componentBase400
+    elevation: native popup window shadow
+
+  placement:
+    gap: spacing.componentBase100
+
+tokenGaps:
+  - binding: surface.elevation
+    detail: >-
+      shadow.low is not drawn. The native popup window is sized to the surface, so a View shadow would be clipped;
+      the platform window shadow follows the surface silhouette instead (popover-native-elevation).
+  - binding: arrow
+    detail: The Flex arrow fill and beak stroke are unused because no arrow is rendered (popover-arrow).
+  - binding: motion
+    detail: Flex motion is pending and native presentation is instant (popover-motion).

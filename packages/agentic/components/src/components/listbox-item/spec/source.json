@@ -3,7 +3,7 @@
   "component": "listbox-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-14",
+  "reviewedAt": "2026-10-19",
   "sources": [
     {
       "id": "flex-component",
@@ -111,6 +111,10 @@
     {
       "id": "LBI-005",
       "evidence": ["useListboxItem.ts", "renderListboxItem.tsx", "listbox-item.test.tsx"]
+    },
+    {
+      "id": "LBI-006",
+      "evidence": ["listbox-item.types.ts", "listboxItemOptionContext.ts", "useListboxItem.ts", "listbox-item.test.tsx"]
     }
   ]
 }

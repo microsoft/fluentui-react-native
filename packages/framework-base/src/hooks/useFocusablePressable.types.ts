@@ -21,6 +21,8 @@ export interface FocusKeyboardEvent extends FocusTargetEvent {
 export interface FocusablePressableOptions {
   /** How a pointer press moves keyboard focus to the target. Defaults to the platform convention. */
   pointerFocus?: PointerFocusMode;
+  /** Retain a disabled target for focus navigation without enabling activation. Defaults to false. */
+  disabledFocusable?: boolean;
 }
 
 export type FocusablePressableProps = Omit<PressableProps, 'onKeyDown' | 'onKeyUp'> & {

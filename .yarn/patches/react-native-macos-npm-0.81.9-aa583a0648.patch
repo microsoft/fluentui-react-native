@@ -1,0 +1,144 @@
+diff --git a/Libraries/Text/TextInput/Singleline/RCTUITextField.mm b/Libraries/Text/TextInput/Singleline/RCTUITextField.mm
+index 137d0ee9f51616ea27c397a8bf595fe2c0ff5e91..c4afef20fcdffb743f976df3b26a353f0bc69b3a 100644
+--- a/Libraries/Text/TextInput/Singleline/RCTUITextField.mm
++++ b/Libraries/Text/TextInput/Singleline/RCTUITextField.mm
+@@ -391,18 +391,36 @@
+ 
+ - (BOOL)isEditable
+ {
++#if TARGET_OS_OSX // [macOS
++  return [super isEditable];
++#else
+   return self.isEnabled;
++#endif
+ }
+ 
+ - (void)setEditable:(BOOL)editable
+ {
+ #if TARGET_OS_OSX // [macOS
+-  // on macos the super must be called otherwise its NSTextFieldCell editable property doesn't get set.
+   [super setEditable:editable];
+-#endif // macOS]
++  self.selectable = YES;
++#else
+   self.enabled = editable;
++#endif // macOS]
++}
++
++#if TARGET_OS_OSX // [macOS
++- (BOOL)acceptsFirstResponder
++{
++  return self.isEnabled && self.isSelectable;
+ }
+ 
++- (void)setAccessibilityState:(NSDictionary<NSString *, id> *)accessibilityState
++{
++  [super setAccessibilityState:accessibilityState];
++  self.enabled = ![accessibilityState[@"disabled"] boolValue];
++}
++#endif // macOS]
++
+ #if !TARGET_OS_OSX // [macOS]
+ - (void)setSecureTextEntry:(BOOL)secureTextEntry
+ {
+diff --git a/React/Base/RCTConvert.mm b/React/Base/RCTConvert.mm
+index 09822246f92767208a7d2ad561d4b2954c0fef33..6e5fce575e507ed0c3e3f6794115dd767c62c2d5 100644
+--- a/React/Base/RCTConvert.mm
++++ b/React/Base/RCTConvert.mm
+@@ -1664,6 +1664,7 @@ RCT_ENUM_CONVERTER(
+       @"tab": NSAccessibilityButtonRole, // no exact match on macOS
+       @"tablist": NSAccessibilityTabGroupRole,
+       @"text": NSAccessibilityStaticTextRole, // also a legacy iOS accessibilityTraits
++      @"textbox": NSAccessibilityTextFieldRole,
+       @"timer": NSAccessibilityStaticTextRole, // no exact match on macOS
+       @"toolbar": NSAccessibilityToolbarRole,
+       // Roles/traits that are macOS specific and are used by some of the core components (Lists):
+diff --git a/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm b/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm
+index e7254907271b70783e886d378c7824df46e04e93..fbe1d5d7e834afb4553adb03253e34f6b9ce69d7 100644
+--- a/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm
++++ b/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm
+@@ -255,6 +255,14 @@ static NSSet<NSNumber *> *returnKeyTypesSet;
+ 
+ #pragma mark - RCTViewComponentView overrides
+ 
++#if TARGET_OS_OSX // [macOS
++- (BOOL)canBecomeKeyView
++{
++  // The backed editor, not its structural Fabric wrapper, owns the Tab stop.
++  return NO;
++}
++#endif // macOS]
++
+ - (NSObject *)accessibilityElement
+ {
+   return _backedTextInputView;
+@@ -305,6 +313,13 @@ static NSSet<NSNumber *> *returnKeyTypesSet;
+     _backedTextInputView.editable = newTextInputProps.traits.editable;
+   }
+ 
++#if TARGET_OS_OSX // [macOS
++  if ([_backedTextInputView isKindOfClass:[RCTUITextField class]]) {
++    const auto state = newTextInputProps.accessibilityState.value_or(AccessibilityState{});
++    ((RCTUITextField *)_backedTextInputView).enabled = !state.disabled;
++  }
++#endif // macOS]
++
+ #if !TARGET_OS_OSX // [macOS]
+   if (newTextInputProps.multiline &&
+       newTextInputProps.traits.dataDetectorTypes != oldTextInputProps.traits.dataDetectorTypes) {
+diff --git a/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm b/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
+index 6e20d03f64385e3729a7517c6fb8b31f6177d52d..6710864c9e9252556f7fad00caf1bbea2e80192b 100644
+--- a/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
++++ b/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
+@@ -35,6 +35,7 @@
+ #endif
+ 
+ #if TARGET_OS_OSX // [macOS
++#import <React/RCTConvert.h>
+ #import <React/RCTCursor.h>
+ #import <React/RCTViewKeyboardEvent.h>
+ #import <React/RCTUtils.h>
+@@ -489,14 +490,39 @@ const CGFloat BACKGROUND_COLOR_ZPOSITION = -1024.0f;
+     self.accessibilityElement.accessibilityTraits =
+         RCTUIAccessibilityTraitsFromAccessibilityTraits(newViewProps.accessibilityTraits);
+ #else // [macOS
+-    // On macOS, accessibilityElement returns self (NSView*) which doesn't have accessibilityTraits.
+-    // Set role directly on self based on traits.
+     RCTUIAccessibilityTraits traits = RCTUIAccessibilityTraitsFromAccessibilityTraits(newViewProps.accessibilityTraits);
+-    self.accessibilityRole = RCTAccessibilityRoleFromTraits(traits);
+-    self.accessibilityEnabled = (traits & RCTUIAccessibilityTraitNotEnabled) == 0;
++    self.accessibilityElement.accessibilityRole = RCTAccessibilityRoleFromTraits(traits);
+ #endif // macOS]
+   }
+ 
++#if TARGET_OS_OSX // [macOS
++  if (oldViewProps.role != newViewProps.role ||
++      oldViewProps.accessibilityRole != newViewProps.accessibilityRole ||
++      oldViewProps.accessibilityTraits != newViewProps.accessibilityTraits) {
++    if (newViewProps.role != Role::None || !newViewProps.accessibilityRole.empty()) {
++      const bool useAriaMappings = newViewProps.role != Role::None;
++      NSString *role = RCTNSStringFromString(
++          useAriaMappings ? toString(newViewProps.role) : newViewProps.accessibilityRole);
++      self.accessibilityElement.accessibilityRole =
++          [RCTConvert accessibilityRoleFromTraits:role useAriaMappings:useAriaMappings];
++    } else {
++      self.accessibilityElement.accessibilityRole = RCTAccessibilityRoleFromTraits(
++          RCTUIAccessibilityTraitsFromAccessibilityTraits(newViewProps.accessibilityTraits));
++    }
++  }
++
++  if (oldViewProps.accessibilityState != newViewProps.accessibilityState ||
++      oldViewProps.accessibilityTraits != newViewProps.accessibilityTraits) {
++    const auto state = newViewProps.accessibilityState.value_or(AccessibilityState{});
++    const auto traits = RCTUIAccessibilityTraitsFromAccessibilityTraits(newViewProps.accessibilityTraits);
++    self.accessibilityElement.accessibilityEnabled =
++        !state.disabled && (traits & RCTUIAccessibilityTraitNotEnabled) == 0;
++    self.accessibilityElement.accessibilitySelected =
++        state.selected || (traits & RCTUIAccessibilityTraitSelected) != 0;
++    self.accessibilityElement.accessibilityExpanded = state.expanded.value_or(false);
++  }
++#endif // macOS]
++
+ #if !TARGET_OS_OSX // [macOS]
+   // `accessibilityState`
+   if (oldViewProps.accessibilityState != newViewProps.accessibilityState) {

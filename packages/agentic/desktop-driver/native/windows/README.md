@@ -113,9 +113,26 @@ the target coordinate. The batch is never interleaved with other input, so the
 press cannot land under a cursor that another source moved. Explicit pointer
 actions also carry their coordinate on every press and release.
 
+Keyboard actions inject a character that the foreground keyboard layout types
+with one unmodified key, such as `s` on a US layout, as that virtual key, as a
+user's press would. Applications then observe its key and code, so key-based
+handlers such as type-ahead match it. Other characters, dead-key characters,
+and letters while Caps Lock is on are injected as Unicode packets. Element
+`sendKeys` text always uses Unicode packets.
+
 Windows and Win32 share implementation but retain distinct endpoint and
 renderer capabilities. Minimized-window capture remains unsupported rather
 than changing app state through an implicit restore.
+
+Window activation treats a foreground window owned by the target window as
+already active, as macOS does for application activation. Reactivating the
+owner would light-dismiss an open popup with input that no user produced. A
+physical press on the owner still activates it.
+
+A subtree walk retries while its root remains available if a descendant
+becomes unavailable, or if a closing popup island's provider reports a UI
+Automation timeout or an unspecified failure. Only an unavailable root is a
+stale element.
 
 ## Verification and tests
 

@@ -4,6 +4,7 @@
 
 #include "Callout.h"
 #include "../../shared/FocusRequest.h"
+#include "../../shared/FocusTree.h"
 
 #include <winrt/Microsoft.UI.Content.h>
 #include <winrt/Microsoft.UI.Input.h>
@@ -11,21 +12,60 @@
 #include <winrt/Microsoft.UI.interop.h>
 #include <winrt/Windows.System.h>
 
+#include <dwmapi.h>
+
+#include <algorithm>
 #include <functional>
 #include <string_view>
+#include <unordered_map>
 #include <utility>
+#include <vector>
 
 namespace winrt::FluentUI::Callout {
 
-// Reports pointer-down input outside a shown popup's owner family, like the macOS local mouse monitor.
-// InputLightDismissAction only reports outside input while the popup island has focus. A UI-thread message hook
-// exists only while a Callout on that thread is shown, and each Callout registers only while it is shown.
-class OutsidePointerMonitor {
+// How long a light dismissal over the live view anchor waits for the owner to route that press to the anchor.
+constexpr UINT kAnchorPressRoutingMs = 250;
+
+// Runs a callback on the UI thread after a delay, without a window to own the timer.
+class ThreadTimer {
  public:
-  static uint64_t Add(HWND popup, std::function<void()> onOutside) noexcept {
+  static void Run(UINT delayMs, std::function<void()> callback) noexcept {
+    const auto id = ::SetTimer(nullptr, 0, delayMs, &TimerProc);
+    if (!id) {
+      callback();
+      return;
+    }
+    Callbacks().emplace(id, std::move(callback));
+  }
+
+ private:
+  static std::unordered_map<UINT_PTR, std::function<void()>> &Callbacks() noexcept {
+    thread_local std::unordered_map<UINT_PTR, std::function<void()>> callbacks;
+    return callbacks;
+  }
+
+  static void CALLBACK TimerProc(HWND, UINT, UINT_PTR id, DWORD) noexcept {
+    ::KillTimer(nullptr, id);
+    auto &callbacks = Callbacks();
+    const auto found = callbacks.find(id);
+    if (found == callbacks.end()) return;
+    auto callback = std::move(found->second);
+    callbacks.erase(found);
+    callback();
+  }
+};
+
+// Observes thread input for shown popups, like the macOS local mouse monitor and CalloutWindow.sendEvent. It reports
+// pointer-down input outside a popup's owner family, since InputLightDismissAction only reports outside input while
+// the popup island has focus. It also offers Tab key-downs to the popups before the focused island handles them, since
+// a FocusZone in the popup can consume Tab. A UI-thread message hook exists only while a Callout on that thread is
+// shown, and each Callout registers only while it is shown.
+class PopupInputMonitor {
+ public:
+  static uint64_t Add(HWND popup, std::function<void()> onOutside, std::function<bool(bool backward)> onTab) noexcept {
     auto &state = State();
     const auto id = ++state.nextId;
-    state.entries.push_back({id, popup, std::move(onOutside)});
+    state.entries.push_back({id, popup, std::move(onOutside), std::move(onTab)});
     if (!state.hook) state.hook = ::SetWindowsHookExW(WH_GETMESSAGE, &HookProc, nullptr, ::GetCurrentThreadId());
     return id;
   }
@@ -47,6 +87,7 @@ class OutsidePointerMonitor {
     uint64_t id;
     HWND popup;
     std::function<void()> onOutside;
+    std::function<bool(bool backward)> onTab;
   };
   struct ThreadState {
     HHOOK hook{nullptr};
@@ -91,15 +132,29 @@ class OutsidePointerMonitor {
     return false;
   }
 
+  static bool IsKeyDown(int key) noexcept { return (::GetKeyState(key) & 0x8000) != 0; }
+
   static LRESULT CALLBACK HookProc(int code, WPARAM wParam, LPARAM lParam) noexcept {
     if (code == HC_ACTION && wParam == PM_REMOVE) {
-      const auto &message = *reinterpret_cast<const MSG *>(lParam);
+      auto &message = *reinterpret_cast<MSG *>(lParam);
       if (message.hwnd && IsPointerDown(message.message)) {
         std::vector<std::function<void()>> outside;
         for (const auto &entry : State().entries) {
           if (!InFamily(entry.popup, message.hwnd)) outside.push_back(entry.onOutside);
         }
         for (const auto &onOutside : outside) onOutside();
+      } else if (message.message == WM_KEYDOWN && message.wParam == VK_TAB && !IsKeyDown(VK_CONTROL) &&
+                 !IsKeyDown(VK_MENU)) {
+        std::vector<std::function<bool(bool)>> handlers;
+        for (const auto &entry : State().entries) handlers.push_back(entry.onTab);
+        const bool backward = IsKeyDown(VK_SHIFT);
+        for (const auto &onTab : handlers) {
+          // A handled Tab never reaches the island, and no character message is translated from it.
+          if (onTab && onTab(backward)) {
+            message.message = WM_NULL;
+            break;
+          }
+        }
       }
     }
     return ::CallNextHookEx(nullptr, code, wParam, lParam);
@@ -207,7 +262,7 @@ struct CalloutComponentView
           if (auto strongThis = wkThis.get()) {
             if (!strongThis->m_shown || strongThis->PreventsDismiss("preventDismissOnKeyDown")) return;
             args.Handled(true);
-            strongThis->DismissPresentation("native-light-dismiss");
+            strongThis->DismissPresentation("escape");
           }
         });
   }
@@ -222,13 +277,14 @@ struct CalloutComponentView
     // nyi
   }
 
-  void HandleRequestFocusCommand(int32_t generation, int32_t requestId, int32_t targetTag) noexcept override {
+  void HandleRequestFocusCommand(
+      int32_t generation, int32_t requestId, int32_t targetTag, std::string strategy) noexcept override {
     auto status = OperationStatus(generation);
     auto portal = m_portal.get();
     if (status.empty() && !portal) status = "not-mounted";
     if (status.empty()) {
       // Focusing a component also moves keyboard focus into the popup island.
-      status = ::FRNNativeCore::FocusWithin(portal.ContentRoot(), targetTag, "target");
+      status = ::FRNNativeCore::FocusWithin(portal.ContentRoot(), targetTag, strategy);
     }
     EmitResult(generation, requestId, status);
   }
@@ -294,10 +350,12 @@ private:
   // Hides a shown presentation and reports that transition once. Modern views also latch their generation closed.
   void DismissPresentation(const std::string &reason, int32_t requestId = 0) noexcept {
     if (!m_shown) return;
+    const bool hadFocus = FamilyHasFocus();
     m_shown = false;
+    Unregister();
     StopWatchingOutsidePointer();
-    const bool hadFocus = m_rnWindow &&
-        winrt::Microsoft::UI::Input::InputFocusController::GetForIsland(m_rnWindow.ReactNativeIsland().Island()).HasFocus();
+    // Like AppKit child windows, presentations nested in this popup close first and keep their own reason.
+    DismissNestedPresentations();
     if (m_popup && m_popup.IsVisible()) m_popup.Hide();
     // Like AppKit's owner-window key restoration, return keyboard focus to the owner island so its retained focused
     // component regains input. Input that already moved elsewhere is not overridden.
@@ -355,8 +413,157 @@ private:
   void OnLightDismissDismissed(
       const winrt::Microsoft::UI::Input::InputLightDismissAction &,
       const winrt::Microsoft::UI::Input::InputLightDismissEventArgs &) {
-    if (PreventsDismiss("preventDismissOnClickOutside")) return;
-    DismissPresentation("native-light-dismiss");
+    if (!m_shown || PreventsDismiss("preventDismissOnClickOutside")) return;
+    if (HasShownDescendant()) {
+      // A press in a nested popup, or focus moving into one, also reports light dismissal for its owners. Decide once
+      // the input is routed: the family stays open while one of its islands has focus or the press landed in it.
+      const bool pressInNested = IsCursorOnDescendant();
+      const auto presentation = m_presentation;
+      m_reactContext.UIDispatcher().Post([wkThis = get_weak(), presentation, pressInNested]() {
+        auto strongThis = wkThis.get();
+        if (!strongThis || !strongThis->m_shown || strongThis->m_presentation != presentation) return;
+        if (strongThis->FamilyHasFocus() ||
+            (pressInNested && ::FRNNativeCore::WindowActive(strongThis->PopupHwnd()))) {
+          return;
+        }
+        if (!strongThis->PreventsDismiss("preventDismissOnClickOutside")) {
+          strongThis->DismissPresentation("native-light-dismiss");
+        }
+      });
+      return;
+    }
+    if (!IsCursorOnViewAnchor()) {
+      DismissPresentation("native-light-dismiss");
+      return;
+    }
+    // Light dismissal reports a press on the owner before the owner routes it. A press on the live view anchor belongs
+    // to the anchor's owner, so a trigger toggles its popup instead of having the popup closed and then reopened by
+    // the same press. The popup still closes if the anchor never receives a press.
+    const auto presentation = m_presentation;
+    m_anchorPressed = false;
+    ThreadTimer::Run(kAnchorPressRoutingMs, [wkThis = get_weak(), presentation]() {
+      auto strongThis = wkThis.get();
+      if (!strongThis || strongThis->m_presentation != presentation || strongThis->m_anchorPressed) return;
+      if (!strongThis->PreventsDismiss("preventDismissOnClickOutside")) {
+        strongThis->DismissPresentation("native-light-dismiss");
+      }
+    });
+  }
+
+  // Shown presentations on this UI thread. A presentation registers while shown, and its destructor releases it.
+  static std::vector<CalloutComponentView *> &ShownCallouts() noexcept {
+    thread_local std::vector<CalloutComponentView *> shown;
+    return shown;
+  }
+  void Register() noexcept {
+    auto &shown = ShownCallouts();
+    if (std::find(shown.begin(), shown.end(), this) == shown.end()) shown.push_back(this);
+  }
+  void Unregister() noexcept {
+    auto &shown = ShownCallouts();
+    shown.erase(std::remove(shown.begin(), shown.end(), this), shown.end());
+  }
+
+  winrt::Microsoft::UI::Content::ContentIsland Island() const noexcept {
+    return m_rnWindow ? m_rnWindow.ReactNativeIsland().Island() : nullptr;
+  }
+  HWND PopupHwnd() const noexcept {
+    return m_popup ? winrt::Microsoft::UI::GetWindowFromWindowId(m_popup.WindowId()) : nullptr;
+  }
+  static bool IslandHasFocus(const winrt::Microsoft::UI::Content::ContentIsland &island) noexcept {
+    return island && winrt::Microsoft::UI::Input::InputFocusController::GetForIsland(island).HasFocus();
+  }
+
+  // The shown presentation whose popup content hosts this presentation's anchor, as for a submenu.
+  CalloutComponentView *OwnerPresentation() const noexcept {
+    if (!m_ownerIsland) return nullptr;
+    for (auto *view : ShownCallouts()) {
+      if (view != this && view->Island() == m_ownerIsland) return view;
+    }
+    return nullptr;
+  }
+  bool IsNestedIn(const CalloutComponentView *ancestor) const noexcept {
+    auto remaining = ShownCallouts().size();
+    for (auto *owner = OwnerPresentation(); owner && remaining; owner = owner->OwnerPresentation(), --remaining) {
+      if (owner == ancestor) return true;
+    }
+    return false;
+  }
+  std::vector<CalloutComponentView *> ShownDescendants() const noexcept {
+    std::vector<CalloutComponentView *> descendants;
+    for (auto *view : ShownCallouts()) {
+      if (view != this && view->IsNestedIn(this)) descendants.push_back(view);
+    }
+    return descendants;
+  }
+  bool HasShownDescendant() const noexcept { return !ShownDescendants().empty(); }
+  bool FamilyHasFocus() const noexcept {
+    if (IslandHasFocus(Island())) return true;
+    for (auto *view : ShownDescendants()) {
+      if (IslandHasFocus(view->Island())) return true;
+    }
+    return false;
+  }
+  bool IsCursorOnDescendant() const noexcept {
+    POINT cursor{};
+    if (!::GetCursorPos(&cursor)) return false;
+    for (auto *view : ShownDescendants()) {
+      RECT bounds{};
+      if (const auto hwnd = view->PopupHwnd(); hwnd && ::GetWindowRect(hwnd, &bounds) && ::PtInRect(&bounds, cursor)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  void DismissNestedPresentations() noexcept {
+    const auto island = Island();
+    if (!island) return;
+    std::vector<winrt::com_ptr<CalloutComponentView>> nested;
+    for (auto *view : ShownCallouts()) {
+      if (view != this && view->m_ownerIsland == island) nested.push_back(view->get_strong());
+    }
+    for (const auto &view : nested) view->DismissPresentation("native-light-dismiss");
+  }
+
+  bool ExitsByTab() const noexcept {
+    return m_shown && Modern() && Props()->tabNavigation.value_or("cycle") != "cycle";
+  }
+
+  // Tab in the focused popup of a presentation that exits by Tab belongs to the outermost presentation in its owner
+  // chain that also exits by Tab, like macOS calloutHandlesTab. The exit runs after the key message returns.
+  bool HandleTab(bool backward) noexcept {
+    if (!ExitsByTab() || !IslandHasFocus(Island())) return false;
+    CalloutComponentView *exit = this;
+    auto remaining = ShownCallouts().size();
+    for (auto *owner = OwnerPresentation(); owner && owner->ExitsByTab() && remaining;
+         owner = owner->OwnerPresentation(), --remaining) {
+      exit = owner;
+    }
+    const auto presentation = exit->m_presentation;
+    m_reactContext.UIDispatcher().Post([wkExit = exit->get_weak(), presentation, backward]() {
+      if (auto strongExit = wkExit.get(); strongExit && strongExit->m_shown && strongExit->m_presentation == presentation) {
+        strongExit->ExitByTab(backward);
+      }
+    });
+    return true;
+  }
+
+  // Continuation treats the popup as inserted after its view anchor in the owner's Tab order.
+  void ExitByTab(bool backward) noexcept {
+    const bool continues = Props()->tabNavigation.value_or("cycle") == "continue";
+    const auto anchor = continues ? ViewAnchor() : nullptr;
+    DismissPresentation(backward ? "tab-backward" : "tab-forward");
+    if (!anchor) return;
+    if (backward) {
+      if (::FRNNativeCore::Eligible(anchor)) anchor.TryFocus(winrt::Microsoft::ReactNative::FocusState::Keyboard);
+      return;
+    }
+    if (::FRNNativeCore::FocusOutside(anchor, true)) return;
+    if (auto root = anchor.as<winrt::Microsoft::ReactNative::Composition::ComponentView>().Root()) {
+      if (auto first = winrt::Microsoft::ReactNative::Composition::FocusManager::FindFirstFocusableElement(root)) {
+        first.TryFocus(winrt::Microsoft::ReactNative::FocusState::Keyboard);
+      }
+    }
   }
 
   bool PreventsDismiss(std::string_view behavior) const noexcept {
@@ -388,6 +595,7 @@ private:
                 portal));
     m_rnWindow.ResizePolicy(
         winrt::Microsoft::ReactNative::ContentSizePolicy::None);
+    if (Modern()) ApplyModernWindowAppearance();
 
     // InputLightDismissAction does not support weak references, so it cannot use an auto_revoke revoker.
     m_lightDismiss = winrt::Microsoft::UI::Input::InputLightDismissAction::GetForWindowId(m_rnWindow.AppWindow().Id());
@@ -399,7 +607,19 @@ private:
     }
   }
 
+  // Modern presentations draw no window backdrop: the popup bridge composes the content island over a transparent
+  // window. DWM rounds the window and gives it the platform popup shadow.
+  void ApplyModernWindowAppearance() noexcept {
+    const auto hwnd = winrt::Microsoft::UI::GetWindowFromWindowId(m_popup.WindowId());
+    const DWM_WINDOW_CORNER_PREFERENCE corner = DWMWCP_ROUND;
+    ::DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &corner, sizeof(corner));
+    // The content View draws the visible stroke; DWM keeps only the shadow.
+    const COLORREF border = DWMWA_COLOR_NONE;
+    ::DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, &border, sizeof(border));
+  }
+
   void ReleasePopup() noexcept {
+    Unregister();
     StopWatchingOutsidePointer();
     if (m_lightDismiss) {
       m_lightDismiss.Dismissed(m_lightDismissToken);
@@ -423,6 +643,8 @@ private:
     if (Modern() && (m_closed || !m_positioned)) return;
     m_popup.Show();
     m_shown = true;
+    Register();
+    m_anchorPressed = false;
     WatchOutsidePointer(++m_presentation);
 
     if (!Modern()) {
@@ -452,20 +674,60 @@ private:
       dispatcher.Post([wkThis, presentation]() {
         if (auto strongThis = wkThis.get(); strongThis && strongThis->m_presentation == presentation) {
           if (!strongThis->PreventsDismiss("preventDismissOnClickOutside")) {
-            strongThis->DismissPresentation("native-light-dismiss");
+            strongThis->DismissPresentation("outside-pointer");
           }
         }
       });
     };
-    m_outsidePointer = OutsidePointerMonitor::Add(winrt::Microsoft::UI::GetWindowFromWindowId(m_popup.WindowId()), dismiss);
+    auto onTab = [wkThis = get_weak()](bool backward) {
+      auto strongThis = wkThis.get();
+      return strongThis && strongThis->HandleTab(backward);
+    };
+    m_outsidePointer = PopupInputMonitor::Add(PopupHwnd(), dismiss, onTab);
     if (m_ownerIsland) {
       m_ownerPointerSource = winrt::Microsoft::UI::Input::InputPointerSource::GetForIsland(m_ownerIsland);
-      m_ownerPointerToken = m_ownerPointerSource.PointerPressed([dismiss](const auto &, const auto &) { dismiss(); });
+      m_ownerPointerToken = m_ownerPointerSource.PointerPressed([wkThis = get_weak(), dismiss](const auto &, const auto &) {
+        if (auto strongThis = wkThis.get(); strongThis && strongThis->IsCursorOnViewAnchor()) return;
+        dismiss();
+      });
+    }
+    // RNW routes a press to the anchor from any of its descendants.
+    if (auto anchor = ViewAnchor()) {
+      m_anchorPointerPressed = anchor.PointerPressed(winrt::auto_revoke, [wkThis = get_weak(), presentation](const auto &, const auto &) {
+        if (auto strongThis = wkThis.get(); strongThis && strongThis->m_presentation == presentation) {
+          strongThis->m_anchorPressed = true;
+        }
+      });
     }
   }
 
+  winrt::Microsoft::ReactNative::ComponentView ViewAnchor() const noexcept {
+    if (!Modern() || Props()->anchorMode.value_or("legacy") != "view" ||
+        Props()->target.Type() != winrt::Microsoft::ReactNative::JSValueType::Int64) {
+      return nullptr;
+    }
+    return winrt::Microsoft::ReactNative::Composition::CompositionUIService::ComponentFromReactTag(
+        m_reactContext.Handle(), Props()->target.AsInt64());
+  }
+
+  // Whether the pointer is over a modern presentation's live view anchor, tested where the anchor is now.
+  bool IsCursorOnViewAnchor() const noexcept {
+    const auto anchor = ViewAnchor();
+    POINT cursor{};
+    if (!anchor || !::GetCursorPos(&cursor)) return false;
+    const auto origin = ViewToScreenOffset(anchor);
+    const auto metrics = anchor.LayoutMetrics();
+    const RECT bounds{
+        origin.X,
+        origin.Y,
+        origin.X + static_cast<LONG>(std::lround(metrics.Frame.Width * metrics.PointScaleFactor)),
+        origin.Y + static_cast<LONG>(std::lround(metrics.Frame.Height * metrics.PointScaleFactor))};
+    return ::PtInRect(&bounds, cursor) != FALSE;
+  }
+
   void StopWatchingOutsidePointer() noexcept {
-    OutsidePointerMonitor::Remove(std::exchange(m_outsidePointer, 0));
+    PopupInputMonitor::Remove(std::exchange(m_outsidePointer, 0));
+    m_anchorPointerPressed.revoke();
     if (m_ownerPointerSource) {
       m_ownerPointerSource.PointerPressed(m_ownerPointerToken);
       m_ownerPointerSource = nullptr;
@@ -605,7 +867,7 @@ private:
   };
 
   winrt::Windows::Graphics::PointInt32
-  ViewToScreenOffset(const winrt::Microsoft::ReactNative::ComponentView &view) {
+  ViewToScreenOffset(const winrt::Microsoft::ReactNative::ComponentView &view) const {
     winrt::Windows::Foundation::Point pt{
         (view.LayoutMetrics().Frame.X) * view.LayoutMetrics().PointScaleFactor,
         (view.LayoutMetrics().Frame.Y) * view.LayoutMetrics().PointScaleFactor};
@@ -628,6 +890,8 @@ private:
   bool m_positioned{false};
   bool m_shown{false};
   uint64_t m_presentation{0};
+  bool m_anchorPressed{false};
+  winrt::Microsoft::ReactNative::ComponentView::PointerPressed_revoker m_anchorPointerPressed;
   uint64_t m_outsidePointer{0};
   winrt::Microsoft::UI::Input::InputPointerSource m_ownerPointerSource{nullptr};
   winrt::event_token m_ownerPointerToken;

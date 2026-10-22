@@ -52,6 +52,11 @@ export type ListboxItemStateProps = {
    * owns the value, and the component reports interactions through `onPress` rather than changing it.
    */
   selected?: boolean;
+  /**
+   * Identifies the item as an option of an owning list, such as a Dropdown, which then owns its selection and option
+   * semantics. A standalone item ignores it.
+   */
+  value?: string;
 };
 
 export type ListboxItemRootProps = OwnedRootProps<PropsWithRefOf<typeof Pressable>>;
@@ -60,7 +65,7 @@ export type ListboxItemProps = ListboxItemStateProps & ComponentProps<ListboxIte
 
 export type ListboxItemState = ComponentState<ListboxItemStateSlots & FocusVisualsSlots> &
   FocusTargetBinding &
-  Required<ListboxItemStateProps> &
+  Required<Omit<ListboxItemStateProps, 'value'>> &
   ThemeState &
   PressableState & {
     userStyle?: StyleProp<ViewStyle>;

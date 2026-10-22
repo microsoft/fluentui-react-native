@@ -4,3 +4,5 @@
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
 *.pbxproj -text
+# Unified diffs contain significant single-space context lines.
+.yarn/patches/*.patch whitespace=-blank-at-eol
