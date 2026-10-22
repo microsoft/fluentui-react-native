@@ -126,7 +126,6 @@ toolchains, first builds, and diagnostic commands.
 | [Security model](references/security.md)            | Loopback boundary, registered targets, helper trust, process ownership, and sensitive evidence |
 | [WebDriver contract](references/protocol.md)        | Supported W3C routes, capabilities, elements, errors, and Storybook extensions                 |
 | [Native wire protocol](native/PROTOCOL.md)          | Private framed stdio protocol between Node and the native helper                               |
-| [Remaining work](PLAN.md)                           | Qualification and release work that is not complete                                            |
 | [Changelog](CHANGELOG.md)                           | Versioned package changes                                                                      |
 
 Contributors and coding agents start with [AGENTS.md](AGENTS.md).

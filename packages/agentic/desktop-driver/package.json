@@ -13,7 +13,6 @@
   "files": [
     "AGENTS.md",
     "CHANGELOG.md",
-    "PLAN.md",
     "README.md",
     "config/",
     "jest.config.cjs",

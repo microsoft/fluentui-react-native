@@ -88,7 +88,6 @@ contract retained for compatibility. New Storybook test authoring uses named
 - `references/` holds long-form user and contributor guidance.
 - `native/<provider>/README.md` documents provider implementation and
   operations next to its source.
-- [PLAN.md](../PLAN.md) contains only unfinished or deferred work.
 - [references/protocol.md](protocol.md) is the public wire/behavior contract.
 - [native/PROTOCOL.md](../native/PROTOCOL.md) is the private helper protocol.
 

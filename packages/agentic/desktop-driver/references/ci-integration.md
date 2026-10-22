@@ -202,5 +202,3 @@ Before making a real-platform job required:
 - artifact collection runs even after failure;
 - no helper or app processes leak;
 - no input remains depressed after cancellation, crash, or timeout;
-- the platform's remaining qualification items in [PLAN.md](../PLAN.md) are
-  complete.

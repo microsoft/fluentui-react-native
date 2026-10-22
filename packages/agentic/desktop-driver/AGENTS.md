@@ -6,9 +6,7 @@ This is the instruction root for this package and every descendant.
 
 Read [README.md](README.md) and select the closest topic in the
 [reference index](references/README.md). Native changes also require the
-matching provider README and [native protocol](native/PROTOCOL.md). Read
-[PLAN.md](PLAN.md) only for qualification, release readiness, or deferred
-scope; it contains no current architecture. Inspect source and tests before
+matching provider README and [native protocol](native/PROTOCOL.md). Inspect source and tests before
 editing.
 
 ## Non-negotiable invariants
