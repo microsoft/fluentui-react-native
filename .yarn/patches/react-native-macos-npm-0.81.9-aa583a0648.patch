@@ -53,6 +53,26 @@ index 09822246f92767208a7d2ad561d4b2954c0fef33..6e5fce575e507ed0c3e3f6794115dd76
        @"timer": NSAccessibilityStaticTextRole, // no exact match on macOS
        @"toolbar": NSAccessibilityToolbarRole,
        // Roles/traits that are macOS specific and are used by some of the core components (Lists):
+diff --git a/React/Fabric/Mounting/ComponentViews/Text/RCTParagraphComponentView.mm b/React/Fabric/Mounting/ComponentViews/Text/RCTParagraphComponentView.mm
+index 804eec8079a01f7580d0d6e7b4c2ede4a4a61c7f..a6d967119c4847be709c5a73b518862f781f7634 100644
+--- a/React/Fabric/Mounting/ComponentViews/Text/RCTParagraphComponentView.mm
++++ b/React/Fabric/Mounting/ComponentViews/Text/RCTParagraphComponentView.mm
+@@ -344,10 +344,15 @@ static void RCTCancelTouchesForView(RCTPlatformView *view)
+ 
+ - (BOOL)isAccessibilityElement
+ {
++#if TARGET_OS_OSX // [macOS
++  // macOS has no `accessibilityElements` provider, so an accessible paragraph exposes itself as static text.
++  return static_cast<const ParagraphProps &>(*_props).accessible;
++#else // macOS]
+   // All accessibility functionality of the component is implemented in `accessibilityElements` method below.
+   // Hence to avoid calling all other methods from `UIAccessibilityContainer` protocol (most of them have default
+   // implementations), we return here `NO`.
+   return NO;
++#endif // [macOS]
+ }
+ 
+ #if !TARGET_OS_OSX // [macOS]
 diff --git a/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm b/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm
 index e7254907271b70783e886d378c7824df46e04e93..fbe1d5d7e834afb4553adb03253e34f6b9ce69d7 100644
 --- a/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm

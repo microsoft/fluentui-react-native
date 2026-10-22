@@ -89,7 +89,8 @@ export abstract class BasePage {
       const pageButton = await this._pageButton;
       // sendKeys will move focus to the button, so we dont have to worry about the button being offscreen in the scrollable area.
       await this.sendKeys(pageButton, [Keys.ENTER]);
-    } else {
+    } else if (!isNativeDesktop() || (await this._pageButton.isEnabled())) {
+      // The tester disables the selected page's button; specs that share a page (e.g. IconLegacy and IconV1) find it already open.
       await this._pageButton.click();
     }
 

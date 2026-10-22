@@ -44,6 +44,17 @@ export type CreateDesktopStorybookDriverManifestOptions = {
   storyManifest: DesktopStoryManifest;
 };
 
+/** Returns the WebDriver target ID the embedded Storybook driver registers for an endpoint and renderer. */
+export function desktopStorybookTargetId(
+  config: Pick<DesktopStorybookConfig, 'appName' | 'getDesktopTarget'>,
+  platform: Platforms,
+  renderer: DesktopStorybookDriverManifest['renderer'],
+): string {
+  const configuredTarget = config.getDesktopTarget?.(platform);
+  const target = configuredTarget && platform === 'macos' ? selectDesktopRenderer(configuredTarget, renderer) : configuredTarget;
+  return target?.id ?? `${config.appName}-${platform}`.toLowerCase();
+}
+
 export function createDesktopStorybookDriverManifest({
   bridgeNonce = randomBytes(24).toString('base64url'),
   config,
@@ -58,8 +69,6 @@ export function createDesktopStorybookDriverManifest({
     throw new Error(`Native Desktop Driver is disabled for ${platform}.`);
   }
   const leasePath = path.join(config.projectRoot, 'storybook-desktop.generated', `application-lease.${platform}.json`);
-  const configuredTarget = config.getDesktopTarget?.(platform);
-  const target = configuredTarget && platform === 'macos' ? selectDesktopRenderer(configuredTarget, renderer) : configuredTarget;
   return Object.freeze({
     application: Object.freeze({
       ...nativeOptions.application,
@@ -81,7 +90,7 @@ export function createDesktopStorybookDriverManifest({
     schemaVersion: 2,
     storyManifest,
     storybookPort: instance.storybookPort,
-    targetId: target?.id ?? `${config.appName}-${platform}`.toLowerCase(),
+    targetId: desktopStorybookTargetId(config, platform, renderer),
     testIDPrefix: config.testIDPrefix,
     wdio: config.wdio,
   });

@@ -34,6 +34,7 @@ import {
   writeDesktopStorybookDriverManifest,
   writeDesktopStoryManifest,
 } from '../driver/index.js';
+import { desktopStorybookTargetId } from '../driver/driverManifest.js';
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
@@ -290,7 +291,7 @@ export class DesktopStorybookCli {
       manifest.driverPort < 1 ||
       manifest.driverPort > 65535 ||
       !('targetId' in manifest) ||
-      manifest.targetId !== `${this.config.appName}-${platform}`.toLowerCase()
+      manifest.targetId !== this.targetId(platform)
     ) {
       throw new Error(`Invalid Storybook driver instance at ${manifestPath}; restart storybook driver --${platform}.`);
     }
@@ -304,7 +305,7 @@ export class DesktopStorybookCli {
           ...this.instance,
           endpoint: platform,
           renderer: this.renderer(platform),
-          targetId: `${this.config.appName}-${platform}`.toLowerCase(),
+          targetId: this.targetId(platform),
           testIDPrefix: this.config.testIDPrefix,
         },
         null,
@@ -446,7 +447,7 @@ export class DesktopStorybookCli {
             driverUrl: loopbackUrl(instance.driverPort),
             manifest: await this.createStoryManifest(this.config, platform),
             platform,
-            targetId: `${this.config.appName}-${platform}`.toLowerCase(),
+            targetId: this.targetId(platform),
             report: this.reporter,
             signal: this.services.controller.signal,
           }),
@@ -532,6 +533,10 @@ export class DesktopStorybookCli {
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
     return outputPath;
+  }
+
+  private targetId(platform: Platforms): string {
+    return desktopStorybookTargetId(this.config, platform, this.renderer(platform));
   }
 
   private renderer(platform: Platforms): 'fabric' | 'paper' {

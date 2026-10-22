@@ -3,9 +3,11 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
+import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 
 import { STORYBOOK_SMOKE_MODE } from '../config/commands';
-import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
+import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
@@ -762,6 +764,56 @@ describe('createDesktopStorybookCommand', () => {
       renderer: 'paper',
     });
     expect(runner.stopped).toBe(2);
+  });
+
+  test.each([[[]], [['--paper']]])('requests the canonical target registered by the driver manifest (%j)', async (flags) => {
+    const runner = new RecordingRunner();
+    const runSmokeTests = jest.fn(async ({ targetId }: { targetId: string }) => ({
+      endpoint: 'macos' as const,
+      finishedAt: '2026-10-02T08:00:01.000Z',
+      manifest: { platform: 'macos-digest', portable: 'portable-digest' },
+      platformName: 'macos' as const,
+      runId: 'canonical-smoke',
+      schemaVersion: 1 as const,
+      startedAt: '2026-10-02T08:00:00.000Z',
+      status: 'passed' as const,
+      targetId,
+      tests: [],
+    }));
+    const target = {
+      configPath: path.join(storybookRoot, 'desktop.config.mts'),
+      endpoint: 'macos',
+      host: { kind: 'react-native-test-app', renderer: 'fabric' },
+      id: 'macos-configured',
+      instanceId: 'configured',
+      projectRoot: storybookRoot,
+    } as unknown as ResolvedDesktopTarget;
+    const config = new DesktopStorybookConfig(
+      {
+        projectRoot: storybookRoot,
+        storyPackages: [],
+        platformOptions: { macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' } } } },
+      },
+      { targets: { macos: target } } as unknown as ResolvedDesktopConfig,
+    );
+    const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
+      config,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response(JSON.stringify({ entries: { story: { id: 'first--story', type: 'story' } } })),
+      isPortAvailable: async () => true,
+      output: { write: () => true },
+      runner,
+      runSmokeTests,
+    });
+
+    await program.parseAsync(['node', 'storybook', 'smoke', '--macos', ...flags, '--mode', 'stories-and-tests']);
+
+    const manifest = JSON.parse(
+      fs.readFileSync(path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'), 'utf8'),
+    );
+    expect(manifest.targetId).toBe(selectDesktopRenderer(target, flags.length ? 'paper' : 'fabric').id);
+    expect(runSmokeTests).toHaveBeenCalledWith(expect.objectContaining({ platform: 'macos', targetId: manifest.targetId }));
   });
 
   test.each(['windows', 'win32'])('rejects --paper with explicit --%s', async (platform) => {

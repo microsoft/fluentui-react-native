@@ -34,6 +34,24 @@ and popup opening. This probe is not the complete legacy baseline or an
 old/new comparative run. It does not enable restricted input or waive
 unsupported assertions.
 
+On macOS, bundle before `prep`, because CocoaPods embeds only resources that exist
+during `pod install`. Add `--paper` to `prep` and `test` for Paper:
+
+```sh
+yarn workspace @fluentui-react-native/tester desktop-test --target macos build-driver
+yarn workspace @fluentui-react-native/tester desktop-test --target macos bundle
+yarn workspace @fluentui-react-native/tester desktop-test --target macos prep
+yarn workspace @fluentui-react-native/tester desktop-test --target macos build
+yarn workspace @fluentui-react-native/e2e-testing desktop-test --target macos test --suite legacy
+```
+
+On October 22, 2026 (UTC), the macOS pilot and all 62 `legacy` tests pass on
+both Fabric and Paper, with no skips or retries. Fabric depends on the
+repository's RNmacOS Text accessibility patch, described in the
+[native-core README](../../packages/agentic/native-core/README.md#repository-local-rnmacos-prerequisite-patch).
+Selected tester buttons are scrolled until their center is inside the list
+before clicking, because the native click targets that point.
+
 Jasmine globals, hooks, matchers, retries, and grouped specs remain WDIO-owned.
 The shared page adapter maps only established native attributes, uses checked
 state for toggles, explicit key actions for chords, and native wheel input for

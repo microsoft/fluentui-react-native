@@ -31,7 +31,8 @@ async function main() {
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
   const { DesktopServiceScope } = await import(lib('services.js'));
   const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs } = await import(lib('config.js'));
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-harness-contract-'));
+  // Config resolution canonicalizes paths; macOS temporary directories are symlinked (/var -> /private/var).
+  const root = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-harness-contract-')));
   const out = capture();
   const err = capture();
   const reporter = (options = {}) =>
@@ -78,21 +79,83 @@ async function main() {
         () => resolveDesktopSpecs({ kind: 'wdio', framework: 'jasmine', specs: ['missing.*'] }, 'windows', root),
         /refusing reduced coverage/,
       );
+    } else if (mode === 'adapters') {
+      const { resolveDesktopApplication } = await import(lib('adapters.js'));
+      const project = path.join(root, 'app');
+      const products = path.join(project, 'macos', 'DerivedData', 'Build', 'Products', 'Debug');
+      const contents = path.join(products, 'ReactTestApp.app', 'Contents');
+      const embedded = path.join(contents, 'Resources', 'index.macos.jsbundle');
+      fs.mkdirSync(project);
+      fs.writeFileSync(
+        path.join(project, 'app.json'),
+        JSON.stringify({
+          name: 'Fixture',
+          components: [{ appKey: 'fixture', displayName: 'Fixture Window' }],
+          resources: { macos: ['dist/assets', 'dist/index.macos.jsbundle'] },
+        }),
+      );
+      const target = (renderer, application) => ({
+        endpoint: 'macos',
+        projectRoot: project,
+        host: { kind: 'react-native-test-app', renderer, application },
+      });
+      const leasePath = path.join(root, 'lease.json');
+      assert.deepEqual(
+        { ...(await resolveDesktopApplication(target('paper', { leasePath }))) },
+        { bundleIdentifier: 'com.microsoft.ReactTestApp', windowTitle: 'Fixture Window', leasePath },
+        'configured identity must not require local build products',
+      );
+      if (process.platform === 'darwin') {
+        const writeInfo = ({ identifier = 'com.microsoft.ReactTestApp', newArch = 'false' } = {}) =>
+          fs.writeFileSync(
+            path.join(contents, 'Info.plist'),
+            `<?xml version="1.0" encoding="UTF-8"?><plist version="1.0"><dict><key>CFBundleIdentifier</key><string>${identifier}</string>` +
+              `<key>CFBundleExecutable</key><string>ReactTestApp</string>${newArch ? `<key>RCTNewArchEnabled</key><${newArch}/>` : ''}</dict></plist>`,
+          );
+        await assert.rejects(resolveDesktopApplication(target('paper')), /Built macOS application missing/);
+        fs.mkdirSync(path.join(contents, 'MacOS'), { recursive: true });
+        fs.mkdirSync(path.join(contents, 'Resources'));
+        fs.writeFileSync(path.join(contents, 'MacOS', 'ReactTestApp'), '');
+        fs.writeFileSync(embedded, '');
+        writeInfo();
+        assert.deepEqual(
+          { ...(await resolveDesktopApplication(target('paper'))) },
+          { executablePath: path.join(contents, 'MacOS', 'ReactTestApp'), windowTitle: 'Fixture Window' },
+          'unconfigured identity must launch the exact built product, not a Launch Services bundle-identifier match',
+        );
+        await assert.rejects(resolveDesktopApplication(target('fabric')), /renderer fabric does not match built paper/);
+        writeInfo({ newArch: 'true' });
+        assert.equal((await resolveDesktopApplication(target('fabric'))).executablePath, path.join(contents, 'MacOS', 'ReactTestApp'));
+        writeInfo({ newArch: '' });
+        await assert.rejects(resolveDesktopApplication(target('paper')), /does not declare RCTNewArchEnabled/);
+        writeInfo({ identifier: 'com.example.Other' });
+        await assert.rejects(resolveDesktopApplication(target('paper')), /expected bundle identifier com\.microsoft\.ReactTestApp/);
+        writeInfo();
+        fs.rmSync(embedded);
+        await assert.rejects(resolveDesktopApplication(target('paper')), /does not embed index\.macos\.jsbundle.*bundle, then prep/);
+        fs.writeFileSync(embedded, '');
+        fs.mkdirSync(path.join(products, 'Stale.app'));
+        await assert.rejects(resolveDesktopApplication(target('paper')), /Expected one built macOS application/);
+      }
     } else if (mode === 'reporting') {
       const run = reporter({ secrets: ['secret-value'], console: 'github-actions' });
       run.emit({ kind: 'output', payload: { stream: 'stderr', text: '::error::untrusted secret-value\n' } });
       const error = run.failure(new Error('original secret-value', { cause: new Error('root cause') }), 'test');
       const title = 'retries \u{1f680} <&\u0001';
+      run.emit({ kind: 'test-start', payload: { testId: 'retry', title, attempt: 0 } });
       run.emit({
         kind: 'test-result',
         payload: { testId: 'retry', title, attempt: 0, status: 'failed', durationMs: 2, failure: error },
       });
-      run.emit({ kind: 'test-result', payload: { testId: 'retry', title, attempt: 1, status: 'passed', durationMs: 3 } });
+      run.emit({ kind: 'test-start', payload: { testId: 'retry', title, attempt: 1_000_000 } });
+      run.emit({ kind: 'test-result', payload: { testId: 'retry', title, attempt: 1_000_000, status: 'passed', durationMs: 3 } });
       const result = await run.finish();
       assert.equal(result.status, 'passed');
       assert.equal(result.counts.flaky, 1);
       assert.equal(result.counts.selected, 1);
       assert.equal(result.counts.retries, 1);
+      assert(out.text().includes('(attempt 2)'), 'sparse attempt keys are labeled by ordinal');
+      assert(!out.text().includes('(attempt 1000001)'));
       const journal = fs.readFileSync(path.join(run.root, 'events.jsonl'), 'utf8');
       assert(!journal.includes('secret-value'));
       assert(journal.includes('root cause'));

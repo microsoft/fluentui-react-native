@@ -33,19 +33,31 @@ export async function sendNativeDesktopKeys(element: ChainablePromiseElement, ke
   if (failure !== undefined) throw failure;
 }
 
+async function isCenterWithinScroller(element: ChainablePromiseElement, scroller: ChainablePromiseElement): Promise<boolean> {
+  if (!(await element.isDisplayed())) return false;
+  const target = await browser.getElementRect(await element.elementId);
+  const viewport = await browser.getElementRect(await scroller.elementId);
+  const x = target.x + target.width / 2;
+  const y = target.y + target.height / 2;
+  return x > viewport.x && y > viewport.y && x < viewport.x + viewport.width && y < viewport.y + viewport.height;
+}
+
 export async function scrollNativeDesktopElement(element: ChainablePromiseElement, scroller: ChainablePromiseElement): Promise<void> {
-  if (await element.isDisplayed()) return;
+  // A partly clipped control still reports displayed, but the driver clicks its center point, which may be covered.
+  if (await isCenterWithinScroller(element, scroller)) return;
   if (!browser.capabilities['furn:features']?.wheel)
     throw new Error('This desktop does not support native wheel input; navigation cannot be qualified.');
+  // Native wheel input goes to the topmost window under the pointer, so the tester window must be in front first.
+  await browser.switchToWindow(await browser.getWindowHandle());
   const origin = { 'element-6066-11e4-a52e-4f735466cecf': await scroller.elementId };
   await browser.waitUntil(
     async () => {
       await browser.performActions([
         { type: 'wheel', id: 'tester-scroll', actions: [{ type: 'scroll', origin, x: 0, y: 0, deltaX: 0, deltaY: 300, duration: 100 }] },
       ]);
-      return element.isDisplayed();
+      return isCenterWithinScroller(element, scroller);
     },
-    { timeout: 30_000, timeoutMsg: 'The native scroll container did not expose the selected tester control.' },
+    { timeout: 30_000, timeoutMsg: 'The native scroll container did not bring the selected tester control into view.' },
   );
 }
 

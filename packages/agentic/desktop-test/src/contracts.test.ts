@@ -4,6 +4,7 @@ import path from 'node:path';
 describe('neutral desktop harness contracts', () => {
   test.each([
     'config',
+    'adapters',
     'reporting',
     'commands',
     'transport',

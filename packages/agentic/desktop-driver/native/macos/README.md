@@ -173,8 +173,9 @@ Launch honors an explicitly configured `launchTimeoutMs`, or uses the native
 90-second default within the server's 120-second default deadline. If LaunchServices
 completes after timeout or cancellation, the late completion closes only a
 new application causally owned by that request, never a preexisting app.
-This changed timeout path still needs matching-macOS build and runtime
-qualification; Windows tests do not validate it.
+On October 22, 2026 (UTC), the helper built, handshook, and self-tested on
+macOS, and real FluentTester launches with a configured 180-second timeout
+succeeded. The late-completion branch remains covered only by code review.
 
 Leases record whether the app was launched or attached. Session deletion
 preserves attached apps and closes only an exact process owned by the helper.

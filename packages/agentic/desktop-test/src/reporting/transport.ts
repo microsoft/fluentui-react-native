@@ -97,7 +97,8 @@ export async function startReportTransport(reporter: DesktopRunReporter, onFatal
                 clearTimeout(timer);
                 if (!socket.destroyed && !socket.writableEnded) socket.end(JSON.stringify({ controlled: children.length }) + '\n');
               });
-              for (const [child] of children) child.write('{"stop":true}\n');
+              // A producer that already half-closed after its terminal handshake only needs to be awaited.
+              for (const [child] of children) if (!child.readableEnded && !child.writableEnded) child.write('{"stop":true}\n');
               return;
             }
             if (!isHello(frame) || frame.runId !== context.runId || !sameSecret(frame.nonce, nonce))

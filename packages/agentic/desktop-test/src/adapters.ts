@@ -48,7 +48,11 @@ export async function resolveDesktopApplication(
     const windowTitle = component?.displayName ?? app.displayName ?? app.name;
     if (!windowTitle) throw new Error('RN Test App manifest does not define its display identity.');
     if (target.endpoint === 'macos') {
-      application = { bundleIdentifier: app.macos?.bundleIdentifier ?? 'com.microsoft.ReactTestApp', windowTitle, ...configured };
+      const bundleIdentifier = app.macos?.bundleIdentifier ?? 'com.microsoft.ReactTestApp';
+      application =
+        configured.bundleIdentifier || configured.executablePath || configured.leasePath
+          ? { bundleIdentifier, windowTitle, ...configured }
+          : { executablePath: await resolveBuiltMacosApplication(target, app, bundleIdentifier, signal), windowTitle, ...configured };
     } else {
       const propertiesPath = path.join(target.projectRoot, 'windows', 'ExperimentalFeatures.props');
       const properties = fs.readFileSync(propertiesPath, 'utf8');
@@ -143,7 +147,58 @@ type AppManifest = {
   displayName?: string;
   components?: { appKey?: string; displayName?: string }[];
   macos?: { bundleIdentifier?: string };
+  resources?: string[] | { macos?: string[] };
 };
+
+// Every RN Test App copy shares one bundle identifier, so Launch Services may pick a stale build from
+// another checkout. Resolve this project's built product and launch that exact executable instead.
+async function resolveBuiltMacosApplication(
+  target: ResolvedDesktopTarget,
+  app: AppManifest,
+  bundleIdentifier: string,
+  signal?: AbortSignal,
+): Promise<string> {
+  const products = path.join(target.projectRoot, 'macos', 'DerivedData', 'Build', 'Products', 'Debug');
+  const bundles = fs.existsSync(products) ? fs.readdirSync(products).filter((name) => name.endsWith('.app')) : [];
+  if (bundles.length !== 1) {
+    throw new Error(
+      bundles.length === 0
+        ? `Built macOS application missing in ${products}; run the build stage or configure a verified application identity.`
+        : `Expected one built macOS application in ${products} but found ${bundles.join(', ')}; remove stale products and rebuild.`,
+    );
+  }
+  const bundlePath = path.join(products, bundles[0]);
+  const infoPath = path.join(bundlePath, 'Contents', 'Info.plist');
+  const { stdout } = await promisify(execFile)('plutil', ['-convert', 'json', '-o', '-', infoPath], {
+    timeout: 10_000,
+    signal,
+    maxBuffer: 1024 * 1024,
+  });
+  const info = JSON.parse(stdout) as Record<string, unknown>;
+  if (info.CFBundleIdentifier !== bundleIdentifier)
+    throw new Error(`Built macOS application ${bundlePath} does not have the expected bundle identifier ${bundleIdentifier}.`);
+  if (typeof info.RCTNewArchEnabled !== 'boolean')
+    throw new Error(`Built macOS application ${bundlePath} does not declare RCTNewArchEnabled; run prep and build again.`);
+  const actualRenderer = info.RCTNewArchEnabled ? 'fabric' : 'paper';
+  if (!target.host.renderer || target.host.renderer !== actualRenderer) {
+    throw new Error(
+      `Configured macOS renderer ${target.host.renderer ?? '(not specified)'} does not match built ${actualRenderer}; run prep and build for the configured renderer.`,
+    );
+  }
+  const resources = Array.isArray(app.resources) ? app.resources : (app.resources?.macos ?? []);
+  for (const resource of resources.filter((name) => name.endsWith('.jsbundle'))) {
+    if (!fs.existsSync(path.join(bundlePath, 'Contents', 'Resources', path.basename(resource)))) {
+      throw new Error(
+        `Built macOS application does not embed ${path.basename(resource)}. CocoaPods only includes resources that exist during pod install: run bundle, then prep, then build.`,
+      );
+    }
+  }
+  const executable = info.CFBundleExecutable;
+  if (typeof executable !== 'string' || !/^[^/\\]+$/.test(executable))
+    throw new Error(`Built macOS application ${bundlePath} has an invalid CFBundleExecutable.`);
+  return path.join(bundlePath, 'Contents', 'MacOS', executable);
+}
+
 function readAppManifest(target: ResolvedDesktopTarget): AppManifest {
   const filename = target.host.appConfigPath ?? path.join(target.projectRoot, 'app.json');
   const value: unknown = JSON.parse(fs.readFileSync(filename, 'utf8'));

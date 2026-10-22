@@ -54,6 +54,32 @@ pass does not attribute the availability change to the adapter fixes; no
 input policy was relaxed. These are implementation and limited app evidence,
 not complete behavioral parity.
 
+**macOS:** after merging `origin/main` (`60121de61`), the native helper builds,
+handshakes, self-tests, and reports ready permissions. The opt-in driver tests
+pass 68 with two skipped. Five macOS-only defects were fixed:
+
+- the reporting root is canonicalized (`/var` resolves to `/private/var`);
+- stop frames are no longer written to producers whose Unix sockets have half-closed;
+- the Storybook CLI requests the renderer-scoped target ID its embedded driver registers;
+- the RN Test App adapter launches the exact built product, not any Launch Services copy;
+- that product fails closed on a bundle identifier, renderer, or embedded-bundle mismatch.
+
+Two app-side fixes followed:
+
+- The E2E page adapter scrolls tester buttons until their click point is unobscured.
+- The repository RNmacOS patch exposes accessible Fabric `<Text>` paragraphs, whose
+  `testID`s were otherwise invisible.
+
+Results:
+
+| Lane                             | Fabric                                                           | Paper                                             |
+| -------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------- |
+| Storybook lifecycle              | 280/280 (`812ed972-9b9f-4862-ac54-4ae7f2a4d837`, with the patch) | 280/280 (`a8a511be-e082-4700-8546-e52694a5e941`)  |
+| FluentTester pilot               | 2/2 (`1780e120-5560-44c2-80b9-c01aae342589`)                     | 2/2                                               |
+| FluentTester `legacy` (62 tests) | all pass (`2673c35b-a00d-44d9-8fb6-2015655439fa`)                | all pass (`202e7daf-a7c9-45cc-8bfe-07f4a812a9fe`) |
+
+None of these runs has skips or retries. Storybook reports are under `apps/storybook/artifacts/desktop/`; FluentTester reports are under `apps/E2E/artifacts/desktop/`.
+
 **Repository validation:** package checks, publishing, changesets, and all
 changed Markdown links pass. After `yarn clean-lage-cache`, the final aggregate
 passes with `yarn lage buildci --concurrency 4`. Initial runs exposed missing
@@ -65,9 +91,10 @@ remains undiagnosed. The separate opt-in Windows driver run passes 68 tests
 with two macOS-only tests skipped. The aggregate Markdown-link task remains
 blocked by Windows zx shell quoting; direct checks of all changed files pass.
 
-**Still open:** per-test assertion mapping and equivalent-build old/new comparisons; actual
-FluentTester Windows and macOS renderer/runtime qualification; macOS native
-compilation; all Storybook platform/renderer regressions; and real Actions
+**Still open:** per-test assertion mapping and equivalent-build old/new comparisons;
+actual FluentTester Windows renderer/runtime qualification; the remaining
+Storybook platform/renderer regressions; an upstream or consumer-integrated
+replacement for the RNmacOS Text accessibility patch; and real Actions
 grouping/summary/upload verification. The 100-run/14-day reliability gate and
 desktop Appium retirement cannot be completed by this implementation session.
 No lane is retired and no capability skip is counted as a native pass.

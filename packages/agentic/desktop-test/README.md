@@ -43,11 +43,11 @@ names must supply `endpoint`. Renderer is optional for ordinary native apps.
 the default permits owned launch only. Windows identity requires an exact title
 and an executable, AUMID, or verified owner lease, never a title alone.
 
-| Host adapter            | Behavior                                                                                                                                                                   |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `installed`             | Use the trusted application descriptor; build/prep/bundle/run stages require explicit commands.                                                                            |
-| `react-native-test-app` | Derive native commands and identity from `app.json`. Windows verifies the generated renderer and registered package identity.                                              |
-| `rex`                   | Win32 prebuilt host with declared `component` and `windowTitle`; use the existing bundle, executable, working directory, and fixed arguments. Native build is unsupported. |
+| Host adapter            | Behavior                                                                                                                                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `installed`             | Use the trusted application descriptor; build/prep/bundle/run stages require explicit commands.                                                                                                                                            |
+| `react-native-test-app` | Derive native commands and identity from `app.json`. Windows verifies the generated renderer and registered package identity; macOS launches the exact built product after verifying its bundle identifier, renderer, and embedded bundle. |
+| `rex`                   | Win32 prebuilt host with declared `component` and `windowTitle`; use the existing bundle, executable, working directory, and fixed arguments. Native build is unsupported.                                                                 |
 
 `commands` overrides individual `prep`, `bundle`, `build`, or `run` stages.
 Each value is `{ command, args?, cwd?, env? }`, an ordered array of commands, or
@@ -117,7 +117,13 @@ URL/target, and waits for an owned stop; clients create sessions explicitly.
 `--json` keeps stdout machine-readable and diagnostics on stderr.
 `prep`, `bundle`, `build`, and `run` expose supported adapter stages.
 macOS RN Test App targets accept `--paper`; regenerate with `prep` after changing
-renderer. Native tests use verified prebuilt helpers only: run `build-driver`
+renderer. Run `bundle` before `prep` there: CocoaPods embeds only `app.json`
+resources that exist during `pod install`. Without explicit `application`
+identity, macOS sessions launch the single app in
+`macos/DerivedData/Build/Products/Debug` rather than any Launch Services copy
+sharing its bundle identifier, and fail closed when its `CFBundleIdentifier`,
+`RCTNewArchEnabled` renderer, or declared `.jsbundle` resource does not match.
+Native tests use verified prebuilt helpers only: run `build-driver`
 explicitly first, or provision a compatible helper/cache through
 [`nativeDriver` settings](../desktop-driver/references/native-helpers.md).
 

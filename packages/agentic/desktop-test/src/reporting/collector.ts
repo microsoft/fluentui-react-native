@@ -75,8 +75,10 @@ export class DesktopRunReporter {
 
   constructor(options: DesktopRunReporterOptions) {
     this.options = options;
-    this.root = path.join(path.resolve(options.artifactsRoot), this.runId);
-    fs.mkdirSync(this.root, { recursive: true, mode: 0o700 });
+    const root = path.join(path.resolve(options.artifactsRoot), this.runId);
+    fs.mkdirSync(root, { recursive: true, mode: 0o700 });
+    // Producers report paths relative to canonical artifact roots (macOS temp directories are /var -> /private/var).
+    this.root = fs.realpathSync.native(root);
     this.actions =
       !options.structured &&
       (options.console === 'github-actions' || ((!options.console || options.console === 'auto') && process.env.GITHUB_ACTIONS === 'true'));
@@ -297,9 +299,12 @@ export class DesktopRunReporter {
       case 'service-failed':
         if (firstFailure) this.logger.error(`${prefix} FAILED ${event.payload.failure.error.message}`);
         break;
-      case 'test-start':
-        this.logger.log(`${prefix} TEST ${event.payload.title} (attempt ${event.payload.attempt + 1})`);
+      case 'test-start': {
+        // Producers may encode attempts sparsely (WDIO combines spec-file and test retries), so label the observed ordinal.
+        const ordinal = this.tests.get(event.payload.testId)!.attempts.findIndex(({ attempt }) => attempt === event.payload.attempt) + 1;
+        this.logger.log(`${prefix} TEST ${event.payload.title} (attempt ${ordinal})`);
         break;
+      }
       case 'test-result':
         this.logger.log(
           `${prefix} ${event.payload.status.toUpperCase()} ${event.payload.title}${event.payload.reason ? `: ${event.payload.reason}` : ''}`,
