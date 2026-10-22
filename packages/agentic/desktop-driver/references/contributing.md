@@ -92,8 +92,8 @@ contract retained for compatibility. New Storybook test authoring uses named
 - [native/PROTOCOL.md](../native/PROTOCOL.md) is the private helper protocol.
 
 When completing planned work, document the resulting behavior first, then
-remove the completed task from PLAN.md. Do not preserve implementation history
-as active instructions.
+update its tracking issue. Do not preserve implementation history as active
+instructions.
 
 ## Validation order
 

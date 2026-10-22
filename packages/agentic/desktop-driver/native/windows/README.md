@@ -162,5 +162,6 @@ an actionable cache failure.
 
 See [Native helpers](../../references/native-helpers.md) for cache and
 verification policy, [CI integration](../../references/ci-integration.md) for
-runner requirements, and [PLAN.md](../../PLAN.md) for unfinished Windows
-qualification.
+runner requirements, and
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345)
+for unfinished Windows qualification.

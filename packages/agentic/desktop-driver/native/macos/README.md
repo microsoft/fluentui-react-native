@@ -122,8 +122,8 @@ Ad hoc signing is not a distribution model. The current source does not
 implement a Developer ID distribution or notarization pipeline. If an
 organization-distributed helper is added, its external release infrastructure
 must apply Developer ID Application signing, Hardened Runtime, a secure
-timestamp, notarization, and stapling. That optional work remains in
-[PLAN.md](../../PLAN.md).
+timestamp, notarization, and stapling. That optional work is tracked in
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345).
 
 ## Helper lifecycle
 
@@ -416,7 +416,8 @@ authoritative proof of first-run or durable TCC authorization. The checked-in
 package does not implement Developer ID/notarization release infrastructure or
 managed PPPC deployment. Those items, clean-machine
 install/upgrade/rollback, and explicit permission-revocation qualification
-remain in [PLAN.md](../../PLAN.md).
+are tracked in
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345).
 
 ## Troubleshooting
 
