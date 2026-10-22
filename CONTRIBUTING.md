@@ -89,7 +89,8 @@ types explicitly from `src/index.ts`, or from `src/primitives/index.ts` for a pr
 1. Add Storybook stories next to the component. Desktop behavior tests are `wdio` functions in the stories and run on
    macOS, Windows, and Win32 through the [agentic Storybook app](./apps/storybook/README.md).
 1. Run the package's declared scripts, such as `yarn workspace @fluentui-react-native/components test`, plus `build`,
-   `lint`, and `format`.
+   `lint`, and `format`. While iterating, run only your component's tests from its package, for example
+   `yarn test button`.
 1. Before opening a pull request, run `yarn clean-lage-cache` and then `yarn lage buildci` from the repository root.
 
 ### Maintaining v0 and v1 components

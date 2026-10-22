@@ -33,8 +33,9 @@ license: MIT
 
 4. Check repository-wide rules: explicit exports (R-REPO-001), platform fork imports (R-REPO-002), changesets
    (R-REPO-003), and no copied private source (R-REPO-004).
-5. Inspect validation claims. Run non-mutating checks only when they add evidence; never run snapshot-update or fix
-   modes. Record each check as passed, failed, skipped, not run, or unsupported (R-VALID-002).
+5. Inspect validation claims. Run non-mutating checks only when they add evidence, preferring focused tests over the
+   whole suite (R-VALID-004); never run snapshot-update or fix modes. Record each check as passed, failed, skipped, not
+   run, or unsupported (R-VALID-002).
 
 ## Output
 

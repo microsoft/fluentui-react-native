@@ -262,8 +262,21 @@ yarn workspace @fluentui-react-native/agentic-components-storybook storybook bun
 yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --windows
 ```
 
-Run the smallest affected package test while iterating. Run the full package sequence before completion. Run the root
-`yarn build` when public types, manifests, or project references change.
+While iterating, run only the affected component's tests from `packages/agentic/components` (R-VALID-004; see
+[Focused test runs](../../repository/development.md#focused-test-runs) for the selector rules):
+
+```sh
+yarn test popover                                           # one component's runtime and type-level test files
+yarn test popover -t "opens on press"                       # one test by name
+yarn build                                                  # type-checks *.types.test.ts, which Jest cannot
+yarn test --findRelatedTests src/common/useFocusVisuals.ts  # every test that imports a shared helper or primitive
+yarn update-snapshots popover                               # refresh only one component's snapshots
+```
+
+`menu` also selects the `menu-item` and `menu-button` tests; use `src/components/menu/` for one directory. A selector
+that matches no test fails the run. Run the full package sequence above before completion, and the root `yarn build`
+when public types, manifests, or project references change. Then run `yarn clean-lage-cache` and `yarn lage buildci`
+once as final acceptance (R-VALID-003) rather than after each edit.
 
 Run repository/package tests before the owned native Storybook lifecycle, not
 concurrently with it: some CLI fixtures still write into the app's generated

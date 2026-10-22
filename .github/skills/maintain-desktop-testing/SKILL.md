@@ -33,9 +33,9 @@ Read the matching contributing reference from the package index.
    bridging-header steps do not apply to these standalone helpers.
 3. Update owning references and affected README/AGENTS files in the same
    change. Keep `PLAN.md` to unfinished or deferred work.
-4. Run package format, lint, build, and test. Native changes also need the
-   matching-OS helper contract and affected consumer lane; JS tests do not
-   qualify native behavior.
+4. Iterate with `yarn test <name>` for the files you change (R-VALID-004), then run package format, lint, build, and
+   test. Native changes also need the matching-OS helper contract and affected
+   consumer lane; JS tests do not qualify native behavior.
 5. Add a patch changeset for each changed published package. Finish with
    `yarn clean-lage-cache` then `yarn lage buildci`.
 
