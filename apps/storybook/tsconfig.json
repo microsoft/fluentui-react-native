@@ -12,7 +12,7 @@
     "composite": true,
     "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
   },
-  "include": ["index.js", "src", "app.json", "storybook.config.mts"],
+  "include": ["index.js", "src", "app.json", "desktop.config.mts"],
   "exclude": ["node_modules", "dist", ".cache"],
   "references": [
     {
@@ -20,6 +20,9 @@
     },
     {
       "path": "../../packages/agentic/desktop-driver/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/desktop-test/tsconfig.json"
     },
     {
       "path": "../../packages/agentic/native-core/tsconfig.json"

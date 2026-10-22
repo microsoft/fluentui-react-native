@@ -100,6 +100,11 @@ Build the helper explicitly, run `doctor` against that cache, then set
 `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before application preparation or
 smoke so later phases cannot compile implicitly.
 
+Source resolution is anchored in the driver's own package, not the caller's
+working directory or direct dependencies. Windows staging paths use a short
+unique directory name to stay within MSBuild's path-length limits; immutable
+artifact identities and the shared cache layout are unchanged.
+
 Hosted runners that cannot provide authoritative global input may set
 `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel`.
 The Node host masks those capabilities and rejects direct use while leaving

@@ -169,6 +169,13 @@ timestamps allow only the bounded precision required by
 `NSRunningApplication.launchDate`. Zero or ambiguous application/window matches
 fail.
 
+Launch honors an explicitly configured `launchTimeoutMs`, or uses the native
+90-second default within the server's 120-second default deadline. If LaunchServices
+completes after timeout or cancellation, the late completion closes only a
+new application causally owned by that request, never a preexisting app.
+This changed timeout path still needs matching-macOS build and runtime
+qualification; Windows tests do not validate it.
+
 Leases record whether the app was launched or attached. Session deletion
 preserves attached apps and closes only an exact process owned by the helper.
 Opaque helper IDs represent windows and AX elements; native references never

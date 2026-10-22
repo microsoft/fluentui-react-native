@@ -65,10 +65,12 @@ the syntax appropriate for that environment. A `--config <path>` option may be
 placed before the subcommand when the configuration does not use a standard
 root filename.
 
-Use `--verbose` before the subcommand to replay complete output from
-successful commands. By default, command output is captured continuously in
-`artifacts/storybook-commands`; failures replay the ordered stdout/stderr log,
-and successful commands emit short summaries. Navigation and test failures
+Use `--verbose` before the subcommand to also stream informational output and
+replay successful commands. Stderr and test progress are live by default.
+Command output is captured continuously in `artifacts/desktop/<run-id>/commands`;
+failures replay source-attributed logs in collector arrival order.
+The same run directory holds the event journal, JSON result, and JUnit report.
+Navigation and test failures
 also emit labeled stderr diagnostics with story/test IDs and underlying
 causes. See [pipeline logging](../../README.md#command-logs-and-pipeline-failures).
 
@@ -130,7 +132,7 @@ Metro process is required.
 ## End-to-end tests
 
 Use `yarn storybook test --macos --story 'components-button--*'` for executable
-story callbacks. It uses the app's `wdio` settings in `storybook.config.mts`
+story callbacks. It uses the Storybook integration's `wdio` settings in `desktop.config.mts`
 and Node's built-in test runner, not a separate WDIO configuration. Start
 `storybook driver` and launch the app first; `--list` needs neither.
 For multiple cases, use a named function collection under the story's `wdio`

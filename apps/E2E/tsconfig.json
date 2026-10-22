@@ -10,6 +10,12 @@
   "include": ["src"],
   "references": [
     {
+      "path": "../../packages/agentic/desktop-test/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/desktop-driver/tsconfig.json"
+    },
+    {
       "path": "../../packages/shim/focus-zone/tsconfig.json"
     },
     {

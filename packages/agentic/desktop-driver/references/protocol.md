@@ -19,6 +19,8 @@ V1 platform names are `macos` and `windows`. Endpoint names are `macos`,
 - A target records whether the application was launched or attached.
 - Deleting an attached session preserves the application.
 - Cleanup uses exact process identity, never process-name matching.
+- Renderer is optional for non-React-Native targets.
+- A registered target may restrict `launchModes`; clients cannot override that policy.
 
 Supported extension capabilities:
 
@@ -77,6 +79,13 @@ Standard implicit, page-load, and script timeout values are accepted by the
 session contract. Native and Storybook operations use driver-owned bounded
 deadlines rather than repurposing page-load semantics.
 
+`DesktopTarget.launchTimeoutMs` is a positive bounded integer. The server's
+deadline defaults to 120 seconds; an explicitly configured value is also
+forwarded to the native launch request. Otherwise both native providers retain
+their 90-second launch default within that server deadline.
+Clients cannot override it through capabilities. A timed-out launch must
+cancel and dispose causally owned processes before the target can be reused.
+
 Every host operation receives an `AbortSignal`. On timeout, the server aborts
 and drains native work before input release, teardown, or a later command. A
 provider may never apply late input after timeout cleanup.
@@ -106,6 +115,12 @@ Portable lookup strategies:
 | `-furn:text`        | Normalized visible/value text                      |
 
 CSS and XPath are not redefined for non-DOM trees.
+
+The `required` property and expectation report required-form state. Windows
+and Win32 read UI Automation's `IsRequiredForForm` Boolean without provider
+defaults. A provider that does not expose this state, including the current
+macOS provider, returns `unsupported operation`, not `false`. Tree output
+includes `states.required` only when the provider supplies a value.
 
 ## Errors
 

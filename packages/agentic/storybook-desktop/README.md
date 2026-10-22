@@ -18,50 +18,65 @@ workspace locator, so `storybook-desktop` and `storybook-server` binaries work
 with Yarn's pnpm linker instead of resolving through an unmaterialized virtual
 workspace path.
 
-Consuming apps own their native identity in `app.json`, story globs, generated `storybook.requires` file, component
-dependencies, and exceptional platform automation. A root `storybook.config.ts` declares which packages supply stories
-and overrides only platform behavior that cannot use the shared defaults:
+Application-neutral targets, service ownership, and reporting belong to
+[`desktop-test`](../desktop-test/README.md). This package adds explicit Storybook
+discovery, authenticated readiness, traversal, and isolated CSF callbacks.
+Consuming apps own their native identity in `app.json`, story globs, generated
+`storybook.requires` file, and component dependencies. A root `desktop.config.mts`
+imports the optional integration and overrides only exceptional platform behavior:
 
 ```ts
 import {
   createWindowsSmokeOptions,
   createWin32RunCommand,
   createWin32SmokeCommand,
-  makeDesktopStorybookConfig,
+  storybook,
 } from '@fluentui-react-native/storybook-desktop/config';
+import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
 
 const win32Host = {
   component: 'MyStorybook',
   windowTitle: 'My Storybook (Win32)',
 } as const;
 
-export default makeDesktopStorybookConfig({
+export default defineDesktopConfig({
+  schemaVersion: 1,
   projectRoot: new URL('.', import.meta.url),
-  storyPackages: [
-    '@scope/components',
-    [
-      '@scope/native-component',
-      {
-        platforms: ['macos', 'windows'],
-      },
-    ],
-  ],
-  platformOptions: {
-    windows: {
-      smoke: createWindowsSmokeOptions({
-        windowTitle: 'My Storybook',
-      }),
-    },
+  targets: {
+    macos: { host: { kind: 'react-native-test-app', renderer: 'fabric' } },
+    windows: { host: { kind: 'react-native-test-app', renderer: 'fabric' } },
     win32: {
-      run: createWin32RunCommand(win32Host),
-      smoke: {
-        command: createWin32SmokeCommand({
-          ...win32Host,
-          testIDPrefix: 'my-storybook',
-        }),
-      },
+      host: { kind: 'rex', renderer: 'paper', ...win32Host },
+      commands: { run: createWin32RunCommand(win32Host) },
     },
   },
+  suites: { stories: { kind: 'csf-wdio' } },
+  integration: storybook({
+    storyPackages: [
+      '@scope/components',
+      [
+        '@scope/native-component',
+        {
+          platforms: ['macos', 'windows'],
+        },
+      ],
+    ],
+    platformOptions: {
+      windows: {
+        smoke: createWindowsSmokeOptions({
+          windowTitle: 'My Storybook',
+        }),
+      },
+      win32: {
+        smoke: {
+          command: createWin32SmokeCommand({
+            ...win32Host,
+            testIDPrefix: 'my-storybook',
+          }),
+        },
+      },
+    },
+  }),
 });
 ```
 
@@ -83,12 +98,12 @@ The corresponding React Native Test App manifest supplies native identity:
 The app's `src/main.ts` becomes a small adapter:
 
 ```ts
-import config from '../storybook.config.ts';
+import config from '../desktop.config.mts';
 
-export default config.getStorybookConfig();
+export default config.integration.configure(config.projectRoot).getStorybookConfig();
 ```
 
-The returned `DesktopStorybookConfig` resolves package roots lazily and exposes app identity, display name, the custom
+The integration's `configure()` returns a `DesktopStorybookConfig` that resolves package roots lazily and exposes app identity, display name, the custom
 `storybook.testIDPrefix` field, package metadata, resolved story packages, and generated story globs for CLI and test
 orchestration. A config-level `testIDPrefix` remains available as an explicit override for consumers that do not store
 Storybook identity in `app.json`.
@@ -109,7 +124,10 @@ smoke runs configured WDIO cases across all matching stories and legacy
 tests fails instead of reporting a false pass. This retains normal native
 lease/readiness and process cleanup; it does not change input capability policy.
 
-The `storybook-desktop` binary loads `storybook.config.ts`, `.mts`, `.js`, `.mjs`, or `.cjs` from the current package.
+The `storybook-desktop` binary first loads `desktop.config.mts`, `.ts`, `.mjs`,
+`.js`, or `.cjs` from the current package and requires its explicit Storybook
+integration. Legacy `storybook.config.*` files and `makeDesktopStorybookConfig()`
+remain supported for compatibility.
 Use `.mts` when the consuming package otherwise defaults JavaScript files to CommonJS. Select a target with a short
 platform option, or omit it to use `FURN_STORYBOOK_PLATFORM` and then the host default:
 
@@ -262,7 +280,7 @@ yarn storybook test --macos --story 'components-button--*'
 yarn storybook test --macos --story 'components-button--*' --test '*activation*'
 ```
 
-Defaults come from `storybook.config.mts`; no Mocha, Jest, or WDIO config file
+Defaults come from the Storybook integration in `desktop.config.mts`; no Mocha, Jest, or WDIO config file
 is needed:
 
 ```ts
@@ -299,8 +317,10 @@ per case, not to the entire suite. Assertion failures and timeouts do not
 prevent other independent cases in that story from running; connection or
 session-cleanup failures stop execution. Do not share element handles or
 assume state survives between cases.
-Reports and best-effort failure source/tree evidence live in
-`artifacts/<platform>/wdio`. Generated executable files are removed after the
+CLI reports and best-effort failure source/tree evidence live in
+`artifacts/desktop/<run-id>/evidence/<platform>/wdio`. Direct API calls without
+the shared reporter retain the `artifacts/<platform>/wdio` fallback.
+Generated executable files are removed after the
 run. Named results include `testName`, and failure evidence uses distinct
 paths for each case. Callback digests participate in manifest freshness checks: restart the
 driver and reload the app after editing tests.
@@ -315,8 +335,11 @@ story ID, runs that story's remaining legacy `desktop-e2e` plans and selected `w
 then advances to the next story. Non-default stories are included. Every test
 gets a fresh preview; the currently selected sidebar page is not a prerequisite.
 The aggregate smoke report contains static results in `tests` and executable
-results in `wdio`. Per-story executable reports are under
-`artifacts/<platform>/desktop-driver/wdio`.
+results in `wdio`. With the shared CLI reporter, per-story executable reports
+are under
+`artifacts/desktop/<run-id>/evidence/<platform>/static/wdio/story-<encoded-story-id>`.
+Direct API calls without it retain the
+`artifacts/<platform>/desktop-driver/wdio` fallback.
 
 For legacy JSON plans only, use the consuming app's Desktop Driver CLI:
 
@@ -352,7 +375,9 @@ before creating the attached WebDriver session.
 Consumers provide only native identity, title, test-ID prefix, and optional required story IDs.
 The Windows helper also records React Native Test App's Debug Metro port (`8081` by default), while Storybook and
 Desktop Driver ports remain enlistment-specific.
-Artifacts are written beneath the consuming app's `artifacts/windows` or `artifacts/win32` directory.
+The CLI writes canonical reports beneath the consuming app's
+`artifacts/desktop/<run-id>` directory. Native lifecycle diagnostics also remain
+under `artifacts/windows` or `artifacts/win32`.
 
 The Windows Fabric lifecycle restarts only its exact owned app after the full
 catalog traversal, then rewrites the nonce-bound application lease and runs
@@ -382,12 +407,21 @@ The same operations are available without Commander:
 
 ```ts
 import { DesktopStorybookCli } from '@fluentui-react-native/storybook-desktop/cli';
-import config from './storybook.config.ts';
+import { getStorybookIntegration } from '@fluentui-react-native/storybook-desktop/config';
+import { loadDesktopConfig } from '@fluentui-react-native/desktop-test/config';
 
-const storybook = new DesktopStorybookCli(config);
-await storybook.bundle('macos');
-await storybook.smoke('macos', { mode: 'stories-and-tests' });
+const desktop = await loadDesktopConfig();
+const config = getStorybookIntegration(desktop.config).configure(desktop.projectRoot, desktop);
+const api = new DesktopStorybookCli(config);
+await api.bundle('macos');
+await api.smoke('macos', { mode: 'stories-and-tests' });
 ```
+
+Higher-level coordinators should inject their shared `reporter`, `runner`, and
+`services` so API calls join the same owned lifecycle. The generic
+`desktop-test --target <endpoint> test --suite stories` command runs the complete
+owned Storybook smoke/test lifecycle; `storybook test` remains the callback-only
+command against an already running app.
 
 Command runners are injectable through the constructor for higher-level automation and tests. `DesktopCommand`,
 `DesktopPlatformOptions`, `createDesktopStorybookInstance()`, and the related configuration types are exported from the
@@ -396,26 +430,31 @@ dedicated task rather than await it before another operation.
 
 ### Command logs and pipeline failures
 
-The shared command runner writes stdout and stderr continuously to a single
-log file per command under `artifacts/storybook-commands` in that command's
-working directory. Both streams share one descriptor, preserving their write
-order without holding an entire build log in memory.
+The neutral harness owns one collector for the complete run, including nested
+CLIs, the channel server, PowerShell-launched services, and isolated callbacks.
+It writes `events.jsonl`, `run.json`, `junit.xml`, and attributed command logs
+under `artifacts/desktop/<run-id>`. Both output streams are drained continuously;
+their merged log preserves collector arrival order, not an ordering guarantee
+between independent producer streams.
 
-Normal output contains a start record with the log path and a short completion
-summary. A failed command replays its complete combined log between labeled
+Normal output contains live labeled stderr and test progress, a start record
+with the log path, and a short completion summary. Required-service failures
+abort dependent work even if an outer wrapper remains alive.
+A failed command replays its complete combined log between labeled
 `BEGIN`/`END` records, then reports failure on stderr. Replay groups are
 serialized so concurrently completing commands do not mix their output.
 Owned background services also replay their logs when smoke fails.
 
-Use the global `--verbose` option to replay successful-command logs as well:
+Use the global `--verbose` option to stream informational output and replay
+successful-command logs as well:
 
 ```sh
 yarn storybook --verbose test --macos --story 'components-button--*'
 yarn storybook --verbose smoke --macos --mode stories-and-tests
 ```
 
-Console replay is grouped at command completion; the files update while
-commands are running, so ongoing logs are available without shell redirection.
+Console replay is grouped at command completion; stderr is already visible
+while commands run, without shell redirection.
 The verbose setting is inherited by package-owned Windows and Win32 lifecycle
 subprocesses.
 
@@ -427,7 +466,12 @@ including with `dot`; CLI boundaries preserve nested causes and aggregate
 errors. A failed test cannot be hidden by a successful worker exit or by a
 secondary evidence/cleanup failure.
 
-Archive the command logs alongside the per-platform test artifacts in CI.
+GitHub Actions groups, annotations, summaries, JSON, and JUnit derive from the
+same collector. Retry history and original failures are retained; missing
+producer handshakes and unfinished work cannot pass. Required all-skipped
+cohorts fail as incomplete, while explicitly optional cohorts retain skipped
+status. Archive the whole canonical run directory alongside the per-platform
+test artifacts with `if: always()` in CI.
 Logs can contain application output and test data; apply the same access and
 retention policy as other test evidence. Programmatic callers can inject
 `output` and `errorOutput` streams and set `verbose` on `DesktopStorybookCli`

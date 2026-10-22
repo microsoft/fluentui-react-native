@@ -3,7 +3,7 @@
 These instructions apply to `apps/storybook` and its descendants.
 
 Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, lookup, and interaction map. Read this file,
-`README.md`, `package.json`, and `storybook.config.mts` before changing the Storybook application or its native projects.
+`README.md`, `package.json`, and `desktop.config.mts` before changing the Storybook application or its native projects.
 
 ## Agent-efficient discovery and interaction
 
@@ -12,7 +12,7 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Query and run stories through `yarn desktop-driver` against the listener started by
   `yarn storybook driver --<platform>`.
 - Use screenshots only for visual evidence. Use WebSocket events and accessibility bounds for lookup and interaction.
-- Treat `src/storybook.requires.ts` as generated output; use `storybook.config.mts` for story package discovery and
+- Treat `src/storybook.requires.ts` as generated output; use `desktop.config.mts` for story package discovery and
   `src/main.ts` only as the shared config adapter.
 - Keep `agent-map.yaml` synchronized when stable paths, scripts, services, or interaction contracts change. Do not list
   individual stories there; the runtime index is authoritative.
@@ -26,7 +26,7 @@ Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, look
 - Run `yarn` from the repository root only after dependency manifests change or when a declared command fails because a
   dependency is missing.
 - Preserve unrelated manifest and lockfile edits already present in the worktree.
-- Keep only native command exceptions and ownership-specific smoke settings in `storybook.config.mts`. Standard macOS
+- Keep only native command exceptions and ownership-specific smoke settings in `desktop.config.mts`. Standard macOS
   and Windows prep, bundle, build, and run commands come from the shared config, derive identity from `app.json`, and
   route through `rnx-cli`. Use `yarn storybook <command> --<platform>`; do not add platform aliases or app-local
   lifecycle scripts.
@@ -50,7 +50,7 @@ capture limits. From this directory:
 | Runtime trees and crash reproduction                    | `yarn desktop-driver agent describe ...` and `yarn storybook --verbose smoke --<platform>`                                                               |
 
 For `agent` commands, use `--platform macos` on macOS and `--platform windows` for both Windows and Win32. Inspect
-retained command logs under `artifacts/storybook-commands` and platform artifacts rather than redirecting output to
+retained command logs under `artifacts/desktop/<run-id>/commands` and platform artifacts rather than redirecting output to
 arbitrary locations.
 
 ## Desktop Driver workflow
@@ -72,15 +72,16 @@ arbitrary locations.
 - Run executable tests with `yarn storybook test --<platform>` and optionally
   `--test <name-glob>`. Callbacks receive the target endpoint as `platform`;
   each named case gets an isolated worker/session and fresh preview. Defaults belong in
-  `storybook.config.mts` under `wdio`; the shared Babel config removes
+  `desktop.config.mts` under the Storybook integration's `wdio`; the shared Babel config removes
   callbacks from native bundles. `stories-and-tests` smoke mode runs configured
   callbacks together with static plans, grouped by story. Always navigate to
   the requested story and await correlated readiness before executing tests.
 - Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
   manifests ignored. Never patch generated runtime identity or story manifests.
-- Shared command logs merge stdout/stderr in write order under
-  `artifacts/storybook-commands`. Failed commands replay the complete log;
-  `--verbose` also replays successful commands. Preserve labeled stderr
+- Shared command logs retain stdout/stderr attribution in collector arrival order under
+  `artifacts/desktop/<run-id>/commands`; cross-stream producer write order is not guaranteed.
+  Stderr and test progress are live; failed commands replay the complete log.
+  `--verbose` also streams informational output. Preserve labeled stderr
   diagnostics and nested failure causes rather than replacing them with
   exit-code-only summaries.
 - Treat the exact-platform and portable-plan digests as contracts. A dynamic or
@@ -128,7 +129,7 @@ arbitrary locations.
   stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
   build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
   `--mode stories-and-tests` to run the component-authored desktop-e2e plans after the complete traversal.
-- Keep the Windows story-pattern overrides in `storybook.config.mts`; the
+- Keep the Windows story-pattern overrides in `desktop.config.mts`; the
   current Accordion Fabric stories still fail-fast the RNW 0.81 host during
   traversal. Native-core Callout and FocusZone stories run on Windows.
 - WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
@@ -151,7 +152,7 @@ arbitrary locations.
 - Run `yarn storybook bundle --win32` before `yarn storybook run --win32`. The bundle is the native dependency source
   for the prebuilt REX host.
 - Keep package discovery and platform-specific story inclusion in
-  `storybook.config.mts`; keep `src/main.ts` as the shared config adapter.
+  `desktop.config.mts`; keep `src/main.ts` as the shared config adapter.
 - Keep shared Storybook source platform-neutral. Win32-specific source belongs
   in `.win32.ts` or `.win32.tsx` files, and Metro platform resolution belongs in
   `metro.config.js`.
@@ -173,7 +174,7 @@ arbitrary locations.
 - Keep macOS and Windows on upstream LiteUI. Replacing it with the reduced
   Win32 chrome would regress addon controls and responsive behavior while
   increasing local maintenance.
-- Keep the Win32 story-pattern override in `storybook.config.mts`. It intentionally excludes ListItem and Accordion
+- Keep the Win32 story-pattern override in `desktop.config.mts`. It intentionally excludes ListItem and Accordion
   because their Paper implementations fail-fast crash REX 0.81.1.
 - Keep the Win32 window title distinct from the Windows Fabric title so
   automation never attaches to the wrong endpoint.

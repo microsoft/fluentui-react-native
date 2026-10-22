@@ -27,7 +27,6 @@
     "./babel": "./config/babel.cjs",
     "./config": {
       "types": "./lib/config/index.d.ts",
-      "import": "./lib/config/index.js",
       "default": "./src/config/index.ts"
     },
     "./driver": {
@@ -59,6 +58,7 @@
     "@babel/core": "catalog:",
     "@babel/plugin-transform-typescript": "catalog:",
     "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@fluentui-react-native/desktop-test": "workspace:*",
     "@rnx-kit/tools-react-native": "catalog:",
     "@wdio/logger": "catalog:",
     "commander": "^14.0.2",

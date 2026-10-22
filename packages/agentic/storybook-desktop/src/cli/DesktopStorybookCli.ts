@@ -2,6 +2,8 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
+import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
+import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import {
@@ -65,6 +67,8 @@ export type DesktopStorybookCliOptions = {
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
   writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
+  reporter?: DesktopReportWriter;
+  services?: DesktopServiceScope;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -94,10 +98,13 @@ export class DesktopStorybookCli {
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
   private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
+  private readonly reporter?: DesktopReportWriter;
+  private readonly services: DesktopServiceScope;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
-    this.paper = options.paper ?? false;
+    this.reporter = options.reporter;
+    this.paper = options.paper ?? config.getDesktopTarget?.('macos')?.host.renderer === 'paper';
     this.instance = createDesktopStorybookInstance({
       projectRoot: config.projectRoot,
       bundleIdentifierPrefix: config.macosBundleIdentifier,
@@ -105,15 +112,17 @@ export class DesktopStorybookCli {
     this.runner =
       options.runner ??
       new NodeDesktopCommandRunner({
+        reporter: options.reporter,
         output: options.output,
         errorOutput: options.errorOutput,
         verbose: options.verbose,
       });
+    this.services = options.services ?? new DesktopServiceScope(this.runner, this.reporter);
     this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
-    this.output = options.output ?? process.stdout;
-    this.errorOutput = options.errorOutput ?? process.stderr;
+    this.output = options.output ?? reportOutput(this.reporter, 'info', process.stdout);
+    this.errorOutput = options.errorOutput ?? reportOutput(this.reporter, 'warning', process.stderr);
     this.verbose = options.verbose ?? process.env[STORYBOOK_VERBOSE] === '1';
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
@@ -159,25 +168,29 @@ export class DesktopStorybookCli {
     };
     resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
     this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
-    const metro = this.runner.start(this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
+    this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     const failures: unknown[] = [];
     try {
-      await this.executePlan(
-        {
-          ...command,
-          env: {
-            ...command.env,
-            ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+      this.services.start(
+        'storybook-channel',
+        this.prepareCommand(
+          {
+            ...command,
+            env: {
+              ...command.env,
+              ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+            },
           },
-        },
-        platform,
-        resolvedInstance,
+          platform,
+          resolvedInstance,
+        ),
       );
+      await this.services.guard(new Promise<never>(() => undefined));
     } catch (error) {
       failures.push(error);
     }
     try {
-      await metro.stop({ failed: failures.length > 0 });
+      await this.services.close();
     } catch (error) {
       failures.push(error);
     }
@@ -232,7 +245,16 @@ export class DesktopStorybookCli {
       );
     }
     const results = await runWdioStoryTests(
-      { ...settings, ...connection, config: this.config, manifest, platform, errorOutput: this.errorOutput },
+      {
+        ...settings,
+        ...connection,
+        config: this.config,
+        manifest,
+        platform,
+        errorOutput: this.errorOutput,
+        report: this.reporter,
+        signal: this.services.controller.signal,
+      },
       this.runner,
     );
     this.output.write(
@@ -366,7 +388,6 @@ export class DesktopStorybookCli {
     instance: ResolvedDesktopStorybookInstance,
     mode: DesktopSmokeMode,
   ): Promise<void> {
-    const backgroundCommands: RunningDesktopCommand[] = [];
     const failures: unknown[] = [];
     let primaryFailure: unknown;
     const serverUrl = smoke.serverUrl ?? loopbackUrl(instance.storybookPort);
@@ -379,7 +400,8 @@ export class DesktopStorybookCli {
       const readiness: Promise<void>[] = [];
 
       if (server) {
-        const runningServer = this.runner.start(
+        const runningServer = this.services.start(
+          'storybook-channel',
           this.prepareCommand(
             {
               ...server,
@@ -392,7 +414,6 @@ export class DesktopStorybookCli {
             instance,
           ),
         );
-        backgroundCommands.push(runningServer);
         readiness.push(this.waitForUrl(new URL('/index.json', serverUrl).href, runningServer, smoke.startupTimeoutMs));
         if (mode === 'stories-and-tests') {
           readiness.push(this.waitForUrl(loopbackUrl(instance.driverPort, '/status'), runningServer, smoke.startupTimeoutMs));
@@ -401,12 +422,11 @@ export class DesktopStorybookCli {
         throw new Error('The stories-and-tests smoke mode requires the Storybook server and embedded Desktop Driver.');
       }
       if (metro) {
-        const runningMetro = this.runner.start(this.prepareCommand(metro, platform, instance));
-        backgroundCommands.push(runningMetro);
+        const runningMetro = this.services.start('metro', this.prepareCommand(metro, platform, instance));
         readiness.push(this.waitForUrl(metroUrl, runningMetro, smoke.startupTimeoutMs));
       }
 
-      await Promise.all(readiness);
+      await this.services.guard(Promise.all(readiness));
       await this.executeAction('run', platform, instance);
       if (mode === 'stories-and-tests' && platform === 'macos') {
         if (!instance.driverManifestPath) {
@@ -414,33 +434,37 @@ export class DesktopStorybookCli {
         }
         await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
       }
-      await this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs);
+      await this.services.guard(
+        this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs),
+      );
       if (mode === 'stories-and-tests') {
-        const result = await this.runSmokeTests({
-          config: this.config,
-          commandRunner: this.runner,
-          errorOutput: this.errorOutput,
-          driverUrl: loopbackUrl(instance.driverPort),
-          manifest: await this.createStoryManifest(this.config, platform),
-          platform,
-          targetId: `${this.config.appName}-${platform}`.toLowerCase(),
-        });
+        const result = await this.services.guard(
+          this.runSmokeTests({
+            config: this.config,
+            commandRunner: this.runner,
+            errorOutput: this.errorOutput,
+            driverUrl: loopbackUrl(instance.driverPort),
+            manifest: await this.createStoryManifest(this.config, platform),
+            platform,
+            targetId: `${this.config.appName}-${platform}`.toLowerCase(),
+            report: this.reporter,
+            signal: this.services.controller.signal,
+          }),
+        );
         this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
       }
     } catch (error) {
       primaryFailure = error;
     } finally {
       try {
-        await this.executePlan(smoke.stop!, platform, instance);
+        await this.executePlan(smoke.stop!, platform, instance, true);
       } catch (error) {
         failures.push(error);
       }
-      for (const backgroundCommand of backgroundCommands.reverse()) {
-        try {
-          await backgroundCommand.stop({ failed: primaryFailure !== undefined });
-        } catch (error) {
-          failures.push(error);
-        }
+      try {
+        await this.services.close();
+      } catch (error) {
+        failures.push(error);
       }
     }
 
@@ -555,8 +579,15 @@ export class DesktopStorybookCli {
     }
 
     const failures: Error[] = [];
+    for (const { id } of entries)
+      this.reporter?.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Render ${id}` } });
     let consecutiveFailures = 0;
     for (const [entryIndex, { id }] of entries.entries()) {
+      this.services.controller.signal.throwIfAborted();
+      const started = Date.now();
+      const testId = `navigation:${id}`;
+      this.reporter?.emit({ kind: 'scope-start', payload: { label: `Render ${id}`, category: 'worker' } }, testId, { story: id }, testId);
+      this.reporter?.emit({ kind: 'test-start', payload: { testId, title: `Render ${id}`, attempt: 0 } }, testId, { story: id });
       try {
         await this.selectStory(serverUrl, id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
         consecutiveFailures = 0;
@@ -564,7 +595,32 @@ export class DesktopStorybookCli {
           await delay(settleMs);
         }
         this.output.write(`rendered ${id}\n`);
+        this.reporter?.emit(
+          {
+            kind: 'test-result',
+            payload: { testId, title: `Render ${id}`, attempt: 0, status: 'passed', durationMs: Date.now() - started },
+          },
+          testId,
+          { story: id },
+        );
+        this.reporter?.emit({ kind: 'scope-end', payload: { status: 'passed' } }, testId);
       } catch (error) {
+        this.reporter?.emit(
+          {
+            kind: 'test-result',
+            payload: {
+              testId,
+              title: `Render ${id}`,
+              attempt: 0,
+              status: 'failed',
+              durationMs: Date.now() - started,
+              failure: this.reporter.failure(error, 'test'),
+            },
+          },
+          testId,
+          { story: id },
+        );
+        this.reporter?.emit({ kind: 'scope-end', payload: { status: 'failed' } }, testId);
         writeDesktopStorybookFailure(`navigation "${id}"`, error, this.errorOutput);
         failures.push(new Error(`Story "${id}" failed to render: ${errorMessage(error)}`, { cause: error }));
         consecutiveFailures += 1;
@@ -584,6 +640,7 @@ export class DesktopStorybookCli {
     const deadline = Date.now() + timeoutMs;
     let lastError: unknown;
     do {
+      this.services.controller.signal.throwIfAborted();
       try {
         await this.getJson(
           new URL(`/select-story-sync/${encodeURIComponent(storyId)}`, serverUrl),
@@ -644,15 +701,22 @@ export class DesktopStorybookCli {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      return await this.fetch(input, { ...init, signal: controller.signal });
+      return await this.fetch(input, { ...init, signal: AbortSignal.any([controller.signal, this.services.controller.signal]) });
     } finally {
       clearTimeout(timeout);
     }
   }
 
-  private async executePlan(plan: DesktopCommandPlan, platform: Platforms, instance?: ResolvedDesktopStorybookInstance): Promise<void> {
+  private async executePlan(
+    plan: DesktopCommandPlan,
+    platform: Platforms,
+    instance?: ResolvedDesktopStorybookInstance,
+    cleanup = false,
+  ): Promise<void> {
     for (const command of Array.isArray(plan) ? plan : [plan]) {
-      await this.runner.run(this.prepareCommand(command, platform, instance));
+      const work = this.runner.run(this.prepareCommand(command, platform, instance));
+      if (cleanup) await work;
+      else await this.services.guard(work);
     }
   }
 
@@ -684,6 +748,21 @@ export class DesktopStorybookCli {
       },
     };
   }
+}
+
+function reportOutput(
+  reporter: DesktopReportWriter | undefined,
+  level: 'info' | 'warning',
+  fallback: Pick<NodeJS.WriteStream, 'write'>,
+): Pick<NodeJS.WriteStream, 'write'> {
+  if (!reporter) return fallback;
+  return {
+    write(chunk: string | Uint8Array) {
+      const message = String(chunk).trim();
+      if (message) reporter.emit({ kind: 'diagnostic', payload: { level, message } }, 'storybook');
+      return true;
+    },
+  };
 }
 
 function readReusableBridgeNonce(
@@ -940,7 +1019,7 @@ function loopbackUrl(port: number, pathname = ''): string {
 
 function unsupportedAction(action: DesktopStorybookAction, platform: Platforms): Error {
   return new Error(
-    `Desktop Storybook ${action} is not configured for ${platform}. Set platformOptions.${platform}.${action} in storybook.config.ts.`,
+    `Desktop Storybook ${action} is not configured for ${platform}. Set platformOptions.${platform}.${action} in your Storybook integration options.`,
   );
 }
 

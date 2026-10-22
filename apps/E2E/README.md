@@ -1,5 +1,59 @@
 # E2E Testing Overview
 
+## Native desktop migration
+
+`desktop.config.mts` adds the application-neutral
+[`desktop-test`](../../packages/agentic/desktop-test/README.md) harness alongside
+the existing Appium runners. It references canonical app targets in
+`apps/fluent-tester` and `apps/win32`; applications do not import E2E suites or
+install Storybook.
+
+From the repository root, after the normal repository build:
+
+```sh
+yarn workspace @fluentui-react-native/tester-win32 desktop-test --target win32 build-driver
+yarn workspace @fluentui-react-native/tester-win32 desktop-test --target win32 bundle
+yarn workspace @fluentui-react-native/e2e-testing desktop-test --target win32 test --suite pilot --list
+yarn workspace @fluentui-react-native/e2e-testing desktop-test --target win32 test --suite pilot
+```
+
+The pilot deliberately starts small: Pressable navigation on Windows/Win32 and
+TextLegacy on macOS. It is not the behavioral parity gate. `legacy` retains the
+exact grouped selection shared with the old configs in `desktop-specs.mts`:
+31 macOS files, 40 Win32 files, and the existing Windows allowlist. That allowlist
+matches ten files and still contains two unmatched patterns
+(`TabsLegacy/specs/*.windows.ts` and `Tokens/specs/*.win.ts`). Native discovery
+fails on those patterns rather than silently omitting them.
+
+`--suite behavioral-pilot` selects the unchanged Win32 Button, Checkbox,
+Switch, directional FocusZone, and Callout specs in one group. An interactive
+Win32 run on October 22, 2026 (UTC) passes all 37 original assertions with no
+skips, retries, or infrastructure failures, including keyboard callbacks,
+checked/required state, focus navigation, scrolling-dependent page navigation,
+and popup opening. This probe is not the complete legacy baseline or an
+old/new comparative run. It does not enable restricted input or waive
+unsupported assertions.
+
+Jasmine globals, hooks, matchers, retries, and grouped specs remain WDIO-owned.
+The shared page adapter maps only established native attributes, uses checked
+state for toggles, explicit key actions for chords, and native wheel input for
+desktop scrolling. Required state maps to UI Automation's authoritative
+`IsRequiredForForm` property; providers without it fail explicitly. `HelpText`
+and toggle-pattern availability remain unmapped. Native setup retains initial
+window bounds: it does **not** emulate the old maximize hook. Popup lookup
+remains scoped to the selected window.
+
+Reports, original failures, and target-scoped evidence live under
+`artifacts/desktop/<run-id>`. Native helpers must be built/provisioned explicitly.
+Windows additionally requires a built, registered RN Test App with a verified
+generated renderer; macOS requires its own built application and permissions.
+
+Keep all legacy desktop and mobile lanes until per-test assertion mapping,
+equivalent-build comparisons, and at least 100 representative runs per endpoint
+over 14 days demonstrate at least 99% infrastructure success and zero process
+or input leaks. Hosted input-disabled checks do not qualify physical input.
+The remaining sections describe the retained Appium workflow.
+
 **There is currently an Appium issue with NPM v8.19.2. Please use an older version of NPM**
 
 ## Win32/UWP Prerequisites

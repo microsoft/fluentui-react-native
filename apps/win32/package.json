@@ -22,6 +22,7 @@
     "bundle": "rnx-cli bundle --dev false",
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",
+    "desktop-test": "desktop-test",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
+    "@fluentui-react-native/desktop-test": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.81.1",
     "@react-native-community/cli": "^20.0.0",

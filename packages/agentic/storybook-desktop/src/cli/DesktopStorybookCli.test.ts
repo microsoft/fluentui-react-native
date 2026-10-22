@@ -105,6 +105,7 @@ class RecordingRunner implements DesktopCommandRunner {
   readonly background: PreparedDesktopCommand[] = [];
   stopped = 0;
   failCommand?: string;
+  exitService?: string;
 
   async run(command: PreparedDesktopCommand): Promise<void> {
     this.foreground.push(command);
@@ -116,7 +117,7 @@ class RecordingRunner implements DesktopCommandRunner {
   start(command: PreparedDesktopCommand): RunningDesktopCommand {
     this.background.push(command);
     return {
-      completed: new Promise<number>(() => {}),
+      completed: command.context?.service === this.exitService && this.exitService ? Promise.resolve(7) : new Promise<number>(() => {}),
       stop: async () => {
         this.stopped += 1;
       },
@@ -321,14 +322,19 @@ describe('DesktopStorybookCli', () => {
       output: { write: () => true },
       runner: new RecordingRunner(),
     };
+    options.runner.exitService = 'storybook-channel';
     const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json');
 
     try {
-      await new DesktopStorybookCli(makeConfig(), options).driver('macos');
+      await expect(new DesktopStorybookCli(makeConfig(), options).driver('macos')).rejects.toThrow('exited unexpectedly');
       const fabricManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      await new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos');
+      await expect(new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos')).rejects.toThrow(
+        'exited unexpectedly',
+      );
       const paperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      await new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos');
+      await expect(new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos')).rejects.toThrow(
+        'exited unexpectedly',
+      );
       const repeatedPaperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
       expect(fabricManifest.renderer).toBe('fabric');
@@ -685,6 +691,8 @@ describe('DesktopStorybookCli', () => {
       driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
       manifest: await createEmptyStoryManifest(cli.config, 'macos'),
       platform: 'macos',
+      report: undefined,
+      signal: expect.any(AbortSignal),
       targetId: 'agenticstorybook-macos',
     });
     expect(fetch.mock.calls.map(([input]) => input.toString())).toContain(
@@ -857,6 +865,7 @@ describe('createDesktopStorybookCommand', () => {
 
   test('starts the channel and embedded driver from one server command', async () => {
     const runner = new RecordingRunner();
+    runner.exitService = 'storybook-channel';
     const program = createDesktopStorybookCommand({
       ...nativeDriverTestOptions,
       config: makeConfig(),
@@ -867,9 +876,11 @@ describe('createDesktopStorybookCommand', () => {
     const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.win32.json');
 
     try {
-      await program.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']);
+      await expect(program.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102'])).rejects.toThrow(
+        'exited unexpectedly',
+      );
 
-      expect(runner.foreground[0]).toMatchObject({
+      expect(runner.background[1]).toMatchObject({
         args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
         env: {
           [FURN_STORYBOOK_PLATFORM]: 'win32',
@@ -892,6 +903,7 @@ describe('createDesktopStorybookCommand', () => {
       });
 
       const secondRunner = new RecordingRunner();
+      secondRunner.exitService = 'storybook-channel';
       const secondProgram = createDesktopStorybookCommand({
         ...nativeDriverTestOptions,
         config: makeConfig(),
@@ -899,7 +911,9 @@ describe('createDesktopStorybookCommand', () => {
         isPortAvailable: async () => true,
         runner: secondRunner,
       });
-      await secondProgram.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']);
+      await expect(
+        secondProgram.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']),
+      ).rejects.toThrow('exited unexpectedly');
       const secondManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
       expect(secondManifest.bridgeNonce).toBe(firstManifest.bridgeNonce);
     } finally {

@@ -23,7 +23,7 @@ class CalloutPageObject extends BasePage {
 
   async closeCallout(): Promise<void> {
     // all we have to do is click outside the callout
-    this._testPage.click();
+    await this._testPage.click();
   }
 
   /*****************************************/

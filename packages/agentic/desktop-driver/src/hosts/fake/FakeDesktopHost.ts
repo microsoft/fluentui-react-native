@@ -19,11 +19,15 @@ import type {
 import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
 import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName } from '../../protocol/types.js';
 
-export type FakeDesktopElement = Omit<NativeElementSnapshot, 'checked' | 'enabled' | 'expanded' | 'focused' | 'selected' | 'visible'> & {
+export type FakeDesktopElement = Omit<
+  NativeElementSnapshot,
+  'checked' | 'enabled' | 'expanded' | 'focused' | 'required' | 'selected' | 'visible'
+> & {
   checked?: boolean | 'mixed';
   enabled?: boolean;
   expanded?: boolean;
   focused?: boolean;
+  required?: boolean;
   selected?: boolean;
   visible?: boolean;
 };
@@ -108,7 +112,7 @@ export class FakeDesktopHost implements DesktopHost {
 
   setElementStateUnsupported(
     elementId: string,
-    state: 'checked' | 'enabled' | 'expanded' | 'focused' | 'selected' | 'visible',
+    state: 'checked' | 'enabled' | 'expanded' | 'focused' | 'required' | 'selected' | 'visible',
     reason: string,
   ): void {
     const update = (element: NativeElementSnapshot) => {
@@ -124,6 +128,9 @@ export class FakeDesktopHost implements DesktopHost {
           break;
         case 'focused':
           element.focused = { supported: false, reason };
+          break;
+        case 'required':
+          element.required = { supported: false, reason };
           break;
         case 'selected':
           element.selected = { supported: false, reason };
@@ -482,6 +489,7 @@ function toSnapshot(element: FakeDesktopElement): NativeElementSnapshot {
     enabled: { supported: true, value: element.enabled ?? true },
     expanded: { supported: true, value: element.expanded ?? false },
     focused: { supported: true, value: element.focused ?? false },
+    required: element.required === undefined ? undefined : { supported: true, value: element.required },
     selected: { supported: true, value: element.selected ?? false },
     visible: { supported: true, value: element.visible ?? true },
   };
@@ -495,6 +503,7 @@ function cloneElement(element: NativeElementSnapshot): NativeElementSnapshot {
     enabled: { ...element.enabled },
     expanded: { ...element.expanded },
     focused: { ...element.focused },
+    required: element.required ? { ...element.required } : undefined,
     selected: { ...element.selected },
     visible: { ...element.visible },
   };

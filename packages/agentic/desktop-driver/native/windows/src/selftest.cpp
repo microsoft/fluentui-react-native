@@ -263,6 +263,15 @@ void TestSnapshotShape() {
         "mixed checked state serializes as a string");
   Check(serialized.find(R"("selected":{"supported":false,"reason":"no selection pattern"})") != std::string::npos,
         "unsupported state keeps its reason");
+  Check(serialized.find(R"("required":{"supported":false,"reason":)") != std::string::npos,
+        "unknown required-form state is unsupported, not false");
+  for (const bool required : {false, true}) {
+    snapshot.required = SupportedBool{true, required, {}};
+    const std::string state = required ? R"("required":{"supported":true,"value":true})"
+                                       : R"("required":{"supported":true,"value":false})";
+    Check(SerializeSnapshot(snapshot).Serialize().find(state) != std::string::npos,
+          required ? "required-form true is retained" : "required-form false is retained");
+  }
   Check(serialized.find(R"("text")") == std::string::npos, "absent optional text is omitted");
   Check(serialized.find(R"("rect":{"height":40,"width":120,"x":10,"y":20})") != std::string::npos,
         "rect serializes logical geometry");
@@ -321,6 +330,27 @@ void TestLeaseIdentity() {
   Check(TryParseIso8601("2026-08-31T23:59:59.0000000+02:00", offset), "offset timestamps parse");
   Check(FileTimeTicks(offset) == FileTimeTicks(parsed) - 1234567, "offset timestamps normalize to UTC");
   Check(!TryParseIso8601("not-a-timestamp", parsed), "invalid timestamps are rejected");
+
+  ApplicationManager applications;
+  CancellationToken token;
+  for (const double timeout : {0.0, -1.0, 0.5, 2147483648.0}) {
+    json::Value request = json::Value::Parse(R"({"application":{"executablePath":"unused.exe","windowTitle":"self-test"}})");
+    request.Set("launchTimeoutMs", json::Value::Number(timeout));
+    bool rejected = false;
+    try {
+      applications.Launch(request, token);
+    } catch (const HelperError& error) {
+      rejected = std::string(error.code()) == kErrorInvalidParams;
+    }
+    Check(rejected, "invalid launch deadlines are rejected before application side effects");
+  }
+  bool titleOnlyRejected = false;
+  try {
+    applications.Attach(json::Value::Parse(R"({"application":{"windowTitle":"self-test"}})"), token);
+  } catch (const HelperError& error) {
+    titleOnlyRejected = std::string(error.code()) == kErrorInvalidParams;
+  }
+  Check(titleOnlyRejected, "unleased title-only attach is rejected");
 }
 
 void TestHello() {

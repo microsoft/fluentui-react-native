@@ -272,6 +272,7 @@ json::Value SerializeSnapshot(const ElementSnapshot& snapshot) {
   value.Set("enabled", SerializeSupported(snapshot.enabled));
   value.Set("expanded", SerializeSupported(snapshot.expanded));
   value.Set("focused", SerializeSupported(snapshot.focused));
+  value.Set("required", SerializeSupported(snapshot.required));
   if (!snapshot.name.empty()) {
     value.Set("name", json::Value::String(snapshot.name));
   }
@@ -353,6 +354,7 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_ControlTypePropertyId,
       UIA_BoundingRectanglePropertyId,
       UIA_IsEnabledPropertyId,
+      UIA_IsRequiredForFormPropertyId,
       UIA_HasKeyboardFocusPropertyId,
       UIA_IsKeyboardFocusablePropertyId,
       UIA_IsOffscreenPropertyId,
@@ -523,6 +525,7 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
 
   snapshot.enabled = readBool(UIA_IsEnabledPropertyId, "The provider does not report an enabled state.");
   snapshot.focused = readBool(UIA_HasKeyboardFocusPropertyId, "The provider does not report keyboard focus.");
+  snapshot.required = readBool(UIA_IsRequiredForFormPropertyId, "The provider does not report required-form state.");
   const SupportedBool focusable =
       readBool(UIA_IsKeyboardFocusablePropertyId, "The provider does not report keyboard focusability.");
   snapshot.keyboardFocusable = focusable.supported && focusable.value;

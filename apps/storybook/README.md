@@ -7,7 +7,8 @@ stories. FocusZone stories remain agentic primitive stories and use native-core'
 `legacy` entrypoint, as does the Win32 Callout portal.
 Native-core owns the shared macOS pod and Windows Fabric library for both components.
 
-The reusable desktop CLI and configuration live in
+The application-neutral lifecycle and reporting live in
+`packages/agentic/desktop-test`. The optional Storybook CLI and configuration live in
 `packages/agentic/storybook-desktop`, with peer-dependent React Native
 implementation in `packages/agentic/storybook-desktop-runtime`. The runtime
 runs Storybook in **liteMode**, which mocks out the heavy default on-device UI
@@ -38,13 +39,14 @@ discover the case names, or use `--test <name-glob>` to filter them. With
 `yarn storybook test --macos --story 'components-button--*'`.
 The shared runner extracts the callbacks for Node, injects WebdriverIO and
 native assertions, and leaves test dependencies out of Metro. Optional runner
-defaults belong under `wdio` in `storybook.config.mts`; no separate test config
+defaults belong under the Storybook integration's `wdio` in `desktop.config.mts`; no separate test config
 is needed. See the [authoring contract](../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
 `stories-and-tests` smoke mode also runs these callbacks, grouped with each
 story's static plans. Both paths select the correct page before executing tests.
 
-Commands retain merged stdout/stderr logs under `artifacts/storybook-commands`.
-Successful commands emit short summaries; failures replay their complete log
+Commands retain source-attributed stdout/stderr logs under `artifacts/desktop/<run-id>/commands`,
+alongside the canonical event journal, JSON result, and JUnit report.
+Stderr and test progress are live; failures replay their complete log
 and print contextual story/test diagnostics. Use
 `yarn storybook --verbose smoke --macos --mode stories-and-tests` to include
 successful-command output as well. No shell redirection is required.
@@ -54,7 +56,7 @@ successful-command output as well. No shell redirection is required.
 ```
 storybook/
   src/                 Storybook adapters, generated requires, and shared-runtime integration
-  storybook.config.mts App-owned package discovery, platform patterns, and native CLI settings
+  desktop.config.mts   Canonical targets and optional Storybook package discovery/platform settings
   index.js             AppRegistry entry
   app.json             react-native-test-app manifest
   metro.config.js      rnx-kit metro config wrapped with withStorybook (liteMode)
@@ -357,7 +359,7 @@ Run it alongside `yarn start` and `yarn storybook run --macos|--windows`. The on
 ## Writing stories
 
 Follow the package-level story authoring instructions in `../../packages/agentic/components/AGENTS.md`. Add a
-`*.stories.tsx` file next to its component; package discovery belongs in `storybook.config.mts`, adapted by `src/main.ts`.
+`*.stories.tsx` file next to its component; package discovery belongs in `desktop.config.mts`, adapted by `src/main.ts`.
 See `../../packages/agentic/components/src/components/button/button.stories.tsx` for the canonical higher-order component example.
 Prefer named `wdio` functions with stable `testID` selectors and injected
 `platform` context, as demonstrated by Button. All catalog tests, including

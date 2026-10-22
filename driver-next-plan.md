@@ -16,10 +16,61 @@ each child process manages independently.
 
 ## Scope and evidence
 
-This is the accepted architecture and delivery plan, not an implementation or a
-native qualification report. New configuration examples, interfaces, and commands
-below describe intended APIs; they do not exist yet. Outstanding implementation
-gates do not reopen the selected package architecture.
+This is the accepted architecture and delivery plan. The implementation update
+below supersedes the original planning-time statements about missing APIs;
+the remaining sections retain their research-time evidence and proposed
+contracts. Current API usage belongs in the
+[desktop-test guide](packages/agentic/desktop-test/README.md).
+Outstanding qualification gates do not reopen the selected architecture.
+
+### Implementation update (October 22, 2026, UTC)
+
+**Implemented:** the neutral harness, structural same-schema target references,
+native adapters, owned services/workers, authenticated reporting collector,
+normal WDIO/Jasmine integration, native visibility/focus waits, and optional
+Storybook integration. FluentTester, REX, Storybook, and E2E now have canonical
+configs. Existing desktop grouped spec selections, Storybook exclusions, and
+mobile lanes are preserved. The Windows baseline still fails closed on its two
+unmatched patterns rather than claiming reduced coverage.
+
+**Observed:** all 15 harness contracts, all 175 Storybook package tests, and
+the Windows native build/handshake/self-test contracts pass. The real Win32
+Pressable navigation pilot passes both existing tests. The behavioral cohort
+now passes all 37 unchanged Button, Checkbox, Switch, directional FocusZone,
+and Callout tests, including keyboard callbacks, checked/required state,
+scrolling-dependent navigation, and popup opening. Its canonical report is
+`apps/E2E/artifacts/desktop/6d08d3d3-84b8-4621-af17-5ddaf04a4875/run.json`.
+The Win32 Storybook lifecycle also passes through the neutral CLI, including
+its owned PowerShell path and inherited reporting: 152 story navigations and
+both native Button callbacks pass. Its canonical report is
+`apps/storybook/artifacts/desktop/35036f1a-94c4-49f7-ac62-52a0cbb195c3/run.json`.
+Both runs have zero skipped tests, retries, infrastructure, reporting, or
+cleanup failures. The verified Windows helper artifact is
+`aa1852e48380e8bc9a6327debeba2e94305eae780c9b365d5b6261702ddd8185`.
+
+An earlier Storybook run explicitly skipped its pointer/screenshot/focus
+callback when those capabilities were unavailable. The later interactive
+pass does not attribute the availability change to the adapter fixes; no
+input policy was relaxed. These are implementation and limited app evidence,
+not complete behavioral parity.
+
+**Repository validation:** package checks, publishing, changesets, and all
+changed Markdown links pass. After `yarn clean-lage-cache`, the final aggregate
+passes with `yarn lage buildci --concurrency 4`. Initial runs exposed missing
+app project references, the owner-approved Windows Knip workspace-path fix,
+and a 30-second CLI-contract timeout at default aggregate concurrency. The
+bounded rerun preserves all assertions and deadlines. Validation used a short
+task-local temporary directory; the earlier default-TEMP inline-worker exit
+remains undiagnosed. The separate opt-in Windows driver run passes 68 tests
+with two macOS-only tests skipped. The aggregate Markdown-link task remains
+blocked by Windows zx shell quoting; direct checks of all changed files pass.
+
+**Still open:** per-test assertion mapping and equivalent-build old/new comparisons; actual
+FluentTester Windows and macOS renderer/runtime qualification; macOS native
+compilation; all Storybook platform/renderer regressions; and real Actions
+grouping/summary/upload verification. The 100-run/14-day reliability gate and
+desktop Appium retirement cannot be completed by this implementation session.
+No lane is retired and no capability skip is counted as a native pass.
 
 The review covers the checkout at `e2092f9df3fd4fafc141c696ca0e49e690d69cd1`.
 The legacy package is actually `apps/E2E`, with uppercase `E2E`.
@@ -129,9 +180,9 @@ still applies; it is not an application-side Storybook handshake.
 
 ### There are two different test contracts
 
-| Existing consumer | Execution contract | Preserve during migration |
-| --- | --- | --- |
-| `apps/E2E` | WDIO local runner, Jasmine, globals/hooks/retries, grouped spec arrays, page navigation | Normal WDIO spec execution and grouping |
+| Existing consumer   | Execution contract                                                                                                                           | Preserve during migration                                 |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `apps/E2E`          | WDIO local runner, Jasmine, globals/hooks/retries, grouped spec arrays, page navigation                                                      | Normal WDIO spec execution and grouping                   |
 | Storybook callbacks | Extracted inline callbacks, source-digest validation, supervisor-created session, correlated navigation/remount, isolated `node:test` worker | Existing per-case isolation and explicit callback context |
 
 Sources:
@@ -146,11 +197,11 @@ emulating its globals inside `node:test`, or rewriting all tests as stories.
 
 ## 2. Architecture decision
 
-| Approach considered | Package structure | Primary advantage | Primary cost | Decision |
-| --- | --- | --- | --- | --- |
-| **1. Neutral harness + Storybook integration** | Driver + new generic harness + existing Storybook tooling + optional Storybook runtime | Real dependency/release boundaries; supports interactive and test clients | One additional package and a small integration contract | **Accepted; implement this** |
-| **2. Generalized all-in-one harness** | Driver + renamed/generalized tooling package with lazy Storybook subpaths + optional runtime | Fewest release units and easiest initial extraction | Storybook-only tooling dependencies and releases remain shared | Not selected |
-| **3. WDIO-launcher-centric** | Driver + WDIO desktop service/harness + Storybook adapter + optional runtime | Standard runner ecosystem becomes the organizing model | Story callback semantics and interactive lifecycle need adaptation | Not selected |
+| Approach considered                            | Package structure                                                                            | Primary advantage                                                         | Primary cost                                                       | Decision                     |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------- |
+| **1. Neutral harness + Storybook integration** | Driver + new generic harness + existing Storybook tooling + optional Storybook runtime       | Real dependency/release boundaries; supports interactive and test clients | One additional package and a small integration contract            | **Accepted; implement this** |
+| **2. Generalized all-in-one harness**          | Driver + renamed/generalized tooling package with lazy Storybook subpaths + optional runtime | Fewest release units and easiest initial extraction                       | Storybook-only tooling dependencies and releases remain shared     | Not selected                 |
+| **3. WDIO-launcher-centric**                   | Driver + WDIO desktop service/harness + Storybook adapter + optional runtime                 | Standard runner ecosystem becomes the organizing model                    | Story callback semantics and interactive lifecycle need adaptation | Not selected                 |
 
 The accepted design uses the single config format, native-only application
 support, and explicit platform/ownership contracts below. The other approaches
@@ -216,12 +267,12 @@ authored config format.
 
 ## 3. Package responsibilities
 
-| Package | Owns | Must not own |
-| --- | --- | --- |
-| `desktop-driver` | W3C remote end; target registration contracts; native helpers; `DesktopHost`; capabilities; clients; native assertions/artifacts; low-level WDIO command compatibility | App build commands, Metro, Storybook dependencies, Jasmine configuration |
-| **New `desktop-test`** | Canonical config/loading; target and instance resolution; app/host adapters; helpers/listener lifecycle; launch/attach leases; readiness coordination; cancellation; WDIO launcher/worker service; cleanup; reporting protocol/collector, journals, result normalization, and console/Actions/JSON/JUnit renderers | Story discovery, CSF extraction, preview navigation, Storybook UI |
-| `storybook-desktop` | Story config extension; discovery and digests; callback extraction/stripping; channel adapter/orchestrator; traversal; story executor; Storybook-specific diagnostic/result adapters into the harness | Another helper/server/app supervisor or independent top-level reporter |
-| `storybook-desktop-runtime` | Storybook shell/theme/chrome; preview bridge; Storybook-specific Metro/Babel integration | Mandatory runtime for generic apps or ownership of host processes |
+| Package                     | Owns                                                                                                                                                                                                                                                                                                               | Must not own                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `desktop-driver`            | W3C remote end; target registration contracts; native helpers; `DesktopHost`; capabilities; clients; native assertions/artifacts; low-level WDIO command compatibility                                                                                                                                             | App build commands, Metro, Storybook dependencies, Jasmine configuration |
+| **New `desktop-test`**      | Canonical config/loading; target and instance resolution; app/host adapters; helpers/listener lifecycle; launch/attach leases; readiness coordination; cancellation; WDIO launcher/worker service; cleanup; reporting protocol/collector, journals, result normalization, and console/Actions/JSON/JUnit renderers | Story discovery, CSF extraction, preview navigation, Storybook UI        |
+| `storybook-desktop`         | Story config extension; discovery and digests; callback extraction/stripping; channel adapter/orchestrator; traversal; story executor; Storybook-specific diagnostic/result adapters into the harness                                                                                                              | Another helper/server/app supervisor or independent top-level reporter   |
+| `storybook-desktop-runtime` | Storybook shell/theme/chrome; preview bridge; Storybook-specific Metro/Babel integration                                                                                                                                                                                                                           | Mandatory runtime for generic apps or ownership of host processes        |
 
 Keep low-level WDIO native-command adaptation in `desktop-driver/wdio`; put WDIO
 launcher/framework/lifecycle integration in `desktop-test`. This avoids pulling
@@ -276,15 +327,15 @@ Reject reference cycles and ambiguous target overrides.
 
 Keep these axes separate:
 
-| Axis | Examples | Rule |
-| --- | --- | --- |
-| Endpoint | `macos`, `windows`, `win32` | Test-facing identity; Win32 is not an alias for the Windows Fabric endpoint |
-| Host OS | macOS, Windows | Both Windows endpoints use the Windows helper |
-| Host adapter | Native installed/executable, RN Test App, REX, external attach | Determines supported lifecycle stages, not test framework |
-| Renderer | Fabric/Paper, when applicable | Optional for non-RN apps; actual generated/running mode must match |
-| Application integration | None, Storybook | Optional; not inferred from test runner |
-| Test source | WDIO specs, CSF callbacks, existing static story plans | Determines execution/navigation contract |
-| Readiness | Verified native window/marker, optional authenticated integration | `/status` alone does not prove the app is ready |
+| Axis                    | Examples                                                          | Rule                                                                        |
+| ----------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Endpoint                | `macos`, `windows`, `win32`                                       | Test-facing identity; Win32 is not an alias for the Windows Fabric endpoint |
+| Host OS                 | macOS, Windows                                                    | Both Windows endpoints use the Windows helper                               |
+| Host adapter            | Native installed/executable, RN Test App, REX, external attach    | Determines supported lifecycle stages, not test framework                   |
+| Renderer                | Fabric/Paper, when applicable                                     | Optional for non-RN apps; actual generated/running mode must match          |
+| Application integration | None, Storybook                                                   | Optional; not inferred from test runner                                     |
+| Test source             | WDIO specs, CSF callbacks, existing static story plans            | Determines execution/navigation contract                                    |
+| Readiness               | Verified native window/marker, optional authenticated integration | `/status` alone does not prove the app is ready                             |
 
 ### Illustrative configs
 
@@ -304,10 +355,7 @@ export default defineDesktopConfig({
     win32: { host: { kind: 'rex' } },
   },
   integration: storybook({
-    storyPackages: [
-      '@fluentui-react-native/components',
-      '@fluentui-react-native/native-core',
-    ],
+    storyPackages: ['@fluentui-react-native/components', '@fluentui-react-native/native-core'],
     // Carry over current per-endpoint patterns, exclusions, and smoke checks.
   }),
   suites: {
@@ -459,15 +507,15 @@ delegated commands inherit the invocation's reporting context.
 
 ### Exactly one owner per resource
 
-| Resource | Owner |
-| --- | --- |
-| Helper resolution, verified artifact, W3C listener, target registry | Generic supervisor |
-| Optional Metro/channel/build processes | Generic supervisor, from selected adapter/integration descriptors |
-| Normal WDIO browser session | WDIO worker; supervisor tracks association and removes orphans |
-| Story callback session | Supervisor session scope; callback worker attaches to that session |
-| Supervisor-launched app | Supervisor lease; driver sessions attach |
-| Session-launched app | Driver session; session deletion closes it |
-| External attached app | External owner; ordinary cleanup preserves it |
+| Resource                                                            | Owner                                                              |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Helper resolution, verified artifact, W3C listener, target registry | Generic supervisor                                                 |
+| Optional Metro/channel/build processes                              | Generic supervisor, from selected adapter/integration descriptors  |
+| Normal WDIO browser session                                         | WDIO worker; supervisor tracks association and removes orphans     |
+| Story callback session                                              | Supervisor session scope; callback worker attaches to that session |
+| Supervisor-launched app                                             | Supervisor lease; driver sessions attach                           |
+| Session-launched app                                                | Driver session; session deletion closes it                         |
+| External attached app                                               | External owner; ordinary cleanup preserves it                      |
 
 **Initial application-lifetime policy:** retain the
 existing supervisor-owned app and attached-session model for Storybook. Use
@@ -543,14 +591,14 @@ The owner's reported symptom is consistent with the following source-inspected
 gaps. This research did not reproduce a specific lost-output incident or prove
 that every hidden diagnostic originates from the same path.
 
-| Observed path | Current behavior | Consequence |
-| --- | --- | --- |
-| `NodeDesktopCommandRunner` | Sends child stdout/stderr to one retained file; replays on failure or in verbose mode when reporting/stopping the command | A live service can write useful output that never reaches the terminal until shutdown. Verbose is replay, not live forwarding. |
-| Combined Storybook server | Forwards native stderr to its own stderr; channel and WebDriver startup messages use its stdout | Forwarding one process hop is insufficient when the outer runner captures that stream. |
-| `driver()` lifecycle | Starts Metro separately, then awaits the server command; Metro completion is not raced against the server for ongoing supervision | A delegated service's failure report and the parent's actual lifetime are not one coherent health/result contract. |
-| Windows/Win32 smoke wrappers | `Start-Process` redirects delegated commands to separate `.out.log`/`.err.log` files | The generic command runner cannot automatically surface those grandchildren's diagnostic files; file retention alone is not console forwarding. |
-| Existing grouping | Per-runner `reportQueue` serializes textual `BEGIN`/`END` replay | Good local ordering, but neither Actions `group` commands nor a hierarchy shared across nested processes/runners. |
-| Test workers and aggregate reports | Worker result files carry pass/skip/failure; console reporter output is a separate captured subprocess stream; aggregate status is based on presence of failures | Rendering, structured outcomes, and lifecycle are separate flows. All-skipped work can still yield a top-level `passed` label. |
+| Observed path                      | Current behavior                                                                                                                                                 | Consequence                                                                                                                                     |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NodeDesktopCommandRunner`         | Sends child stdout/stderr to one retained file; replays on failure or in verbose mode when reporting/stopping the command                                        | A live service can write useful output that never reaches the terminal until shutdown. Verbose is replay, not live forwarding.                  |
+| Combined Storybook server          | Forwards native stderr to its own stderr; channel and WebDriver startup messages use its stdout                                                                  | Forwarding one process hop is insufficient when the outer runner captures that stream.                                                          |
+| `driver()` lifecycle               | Starts Metro separately, then awaits the server command; Metro completion is not raced against the server for ongoing supervision                                | A delegated service's failure report and the parent's actual lifetime are not one coherent health/result contract.                              |
+| Windows/Win32 smoke wrappers       | `Start-Process` redirects delegated commands to separate `.out.log`/`.err.log` files                                                                             | The generic command runner cannot automatically surface those grandchildren's diagnostic files; file retention alone is not console forwarding. |
+| Existing grouping                  | Per-runner `reportQueue` serializes textual `BEGIN`/`END` replay                                                                                                 | Good local ordering, but neither Actions `group` commands nor a hierarchy shared across nested processes/runners.                               |
+| Test workers and aggregate reports | Worker result files carry pass/skip/failure; console reporter output is a separate captured subprocess stream; aggregate status is based on presence of failures | Rendering, structured outcomes, and lifecycle are separate flows. All-skipped work can still yield a top-level `passed` label.                  |
 
 Source anchors:
 
@@ -741,18 +789,18 @@ package is required.
 
 Use deterministic fake services/workers before native qualification:
 
-| Fixture | Required result |
-| --- | --- |
-| Long-running service writes a diagnostic after readiness | Source-attributed diagnostic becomes visible before stop, without verbose |
-| Metro/helper/channel fails while outer server remains alive | Parent fails the correct phase, aborts dependent work, and reports the original cause |
+| Fixture                                                                              | Required result                                                                                                            |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| Long-running service writes a diagnostic after readiness                             | Source-attributed diagnostic becomes visible before stop, without verbose                                                  |
+| Metro/helper/channel fails while outer server remains alive                          | Parent fails the correct phase, aborts dependent work, and reports the original cause                                      |
 | Direct child and grandchild interleave stdout/stderr, partial UTF-8, and late output | Durable captures are complete; source/stream metadata is preserved; only collector arrival order is claimed across streams |
-| Two producers finish together | Each Actions group is contiguous/balanced; unrelated service output is not attributed to a test |
-| Child prints workflow-command-shaped text | No unauthorized annotation/group/runner command is executed |
-| Worker fails, times out, crashes, or omits a result; setup hook fails | Same non-passing outcome/cause appears in console, JSON, JUnit, and summary |
-| All tests skip, capability is unsupported, or selection is empty | No success-shaped `passed` aggregate; required/optional policy is explicit |
-| Retry passes after failure | Both attempts and flaky status survive; totals do not double-count final tests |
-| Slow sink, write failure, cancellation, or abrupt service exit | Bounded completion, explicit reporting failure/incomplete state, retained evidence, no leaked owned resources |
-| Structured CLI mode under Actions | Machine stdout remains parseable and free of progress, ANSI, or group commands |
+| Two producers finish together                                                        | Each Actions group is contiguous/balanced; unrelated service output is not attributed to a test                            |
+| Child prints workflow-command-shaped text                                            | No unauthorized annotation/group/runner command is executed                                                                |
+| Worker fails, times out, crashes, or omits a result; setup hook fails                | Same non-passing outcome/cause appears in console, JSON, JUnit, and summary                                                |
+| All tests skip, capability is unsupported, or selection is empty                     | No success-shaped `passed` aggregate; required/optional policy is explicit                                                 |
+| Retry passes after failure                                                           | Both attempts and flaky status survive; totals do not double-count final tests                                             |
+| Slow sink, write failure, cancellation, or abrupt service exit                       | Bounded completion, explicit reporting failure/incomplete state, retained evidence, no leaked owned resources              |
+| Structured CLI mode under Actions                                                    | Machine stdout remains parseable and free of progress, ANSI, or group commands                                             |
 
 Then exercise the same adapters on macOS, Windows, and Win32, including the
 transitional PowerShell path. Test the emitted Actions command stream locally
@@ -775,13 +823,13 @@ Research checked October 21, 2026:
 
 ## 7. Platform/application boundaries
 
-| Endpoint | Existing legacy app | Required treatment |
-| --- | --- | --- |
-| macOS | `apps/fluent-tester`, RN Test App | Verify actual renderer/build identity; do not infer runtime mode from a Pod entry |
-| Windows | `apps/fluent-tester`, RN Test App | Verify generated Fabric setting and packaged identity; do not presume UWP from old docs |
-| Win32 | `apps/win32`, prebuilt REX/Paper | Windows helper with `win32` endpoint; preserve cwd/args/title and bundle-driven launch; native app build remains unsupported |
-| Storybook macOS | `apps/storybook` | Preserve Fabric and Paper lanes and prep-on-renderer-switch |
-| Storybook Windows/Win32 | `apps/storybook` | Preserve distinct identities, platform exclusions, host-specific chrome and launch behavior |
+| Endpoint                | Existing legacy app               | Required treatment                                                                                                           |
+| ----------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| macOS                   | `apps/fluent-tester`, RN Test App | Verify actual renderer/build identity; do not infer runtime mode from a Pod entry                                            |
+| Windows                 | `apps/fluent-tester`, RN Test App | Verify generated Fabric setting and packaged identity; do not presume UWP from old docs                                      |
+| Win32                   | `apps/win32`, prebuilt REX/Paper  | Windows helper with `win32` endpoint; preserve cwd/args/title and bundle-driven launch; native app build remains unsupported |
+| Storybook macOS         | `apps/storybook`                  | Preserve Fabric and Paper lanes and prep-on-renderer-switch                                                                  |
+| Storybook Windows/Win32 | `apps/storybook`                  | Preserve distinct identities, platform exclusions, host-specific chrome and launch behavior                                  |
 
 **Important reciprocal-review correction:** omitting `--use-fabric` does not
 establish that FluentTester Windows is UWP/Paper. The pinned RN Test App 5.3.3
@@ -814,18 +862,18 @@ Sources:
 The WebDriver wire protocol is not an Appium semantic compatibility guarantee.
 Inventory actual selected tests and their command paths before changing them.
 
-| Area | Observed mismatch | Recommended handling |
-| --- | --- | --- |
+| Area                      | Observed mismatch                                                                                                                                                                                                               | Recommended handling                                                                                                                                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **WDIO visibility/focus** | With WDIO 9.24 and current desktop capabilities, `isDisplayed` takes the browser JavaScript path; `isFocused` also executes JavaScript. The server rejects `execute`. `waitForDisplayed` is used during initial page readiness. | Central native-command compatibility installation for `remote`, `attach`, and WDIO-managed workers. Route visibility/focus to supported native queries. Test waits and assertion consumers. Do not spoof Appium identity or enable arbitrary execution. |
-| Selectors | macOS hooks use XCUI XPath; driver supports accessibility ID, role/tag, accessible name/link, and text, not XPath | Replace accidental platform-specific hooks with supported selectors/window behavior. Implement a new selector only when required by real test intent. |
-| Attributes/state | Legacy names such as `Name`, `ControlType`, `HasKeyboardFocus`, and `Toggle.ToggleState` differ from normalized properties and types; unknown attributes return `null` | Migrate a shared page-object adapter with explicit mappings. Add missing justified native state contracts; preserve provider-specific accessibility assertions rather than normalizing them away. |
-| Checked vs selected | Legacy mode switch uses `isSelected`; UIA toggle checkedness is distinct from SelectionItem state | Change toggle assertions to `checked`. Do not globally redefine `selected` as checkedness. |
-| Keyboard | `keys.join()` introduces commas; typed units press/release modifiers rather than preserving a chord; disabled-element send-keys may fail focus validation | Replace chords with explicit W3C key actions and releases; test cancellation/repetition/Unicode. Decide and document element-send-keys modifier semantics separately. |
-| Window sizing | Legacy setup calls `maximizeWindow`; driver routes currently support handles/switch/close/rect, not maximize | Implement and qualify maximize only if needed, or explicitly change setup intent. Setting a rectangle is not automatically maximize. |
-| Popups/focus | Search is current-window scoped; legacy page objects often assume root-wide lookup or treat extra windows as assertion failures | Preserve explicit window scope; update tests to identify popup ownership and restore focus. Measure before adding optional app-wide lookup. |
-| Desktop scrolling | Windows navigation can reach a helper whose default branch emits Android UiScrollable selectors | Separate desktop navigation/scrolling from mobile helpers. Keep mobile paths and dependencies. |
-| Runner grouping | Legacy hooks, globals, retries, Jasmine matchers, and suite state differ from story callbacks | Preserve WDIO/Jasmine and grouped arrays; change transport and semantics incrementally. |
-| REX startup | Legacy config supplies working directory; native application descriptor lacks it | Add trusted adapter/server-owned cwd or supervisor launch with an exact attach lease; qualify actual argument/cwd requirements. |
+| Selectors                 | macOS hooks use XCUI XPath; driver supports accessibility ID, role/tag, accessible name/link, and text, not XPath                                                                                                               | Replace accidental platform-specific hooks with supported selectors/window behavior. Implement a new selector only when required by real test intent.                                                                                                   |
+| Attributes/state          | Legacy names such as `Name`, `ControlType`, `HasKeyboardFocus`, and `Toggle.ToggleState` differ from normalized properties and types; unknown attributes return `null`                                                          | Migrate a shared page-object adapter with explicit mappings. Add missing justified native state contracts; preserve provider-specific accessibility assertions rather than normalizing them away.                                                       |
+| Checked vs selected       | Legacy mode switch uses `isSelected`; UIA toggle checkedness is distinct from SelectionItem state                                                                                                                               | Change toggle assertions to `checked`. Do not globally redefine `selected` as checkedness.                                                                                                                                                              |
+| Keyboard                  | `keys.join()` introduces commas; typed units press/release modifiers rather than preserving a chord; disabled-element send-keys may fail focus validation                                                                       | Replace chords with explicit W3C key actions and releases; test cancellation/repetition/Unicode. Decide and document element-send-keys modifier semantics separately.                                                                                   |
+| Window sizing             | Legacy setup calls `maximizeWindow`; driver routes currently support handles/switch/close/rect, not maximize                                                                                                                    | Implement and qualify maximize only if needed, or explicitly change setup intent. Setting a rectangle is not automatically maximize.                                                                                                                    |
+| Popups/focus              | Search is current-window scoped; legacy page objects often assume root-wide lookup or treat extra windows as assertion failures                                                                                                 | Preserve explicit window scope; update tests to identify popup ownership and restore focus. Measure before adding optional app-wide lookup.                                                                                                             |
+| Desktop scrolling         | Windows navigation can reach a helper whose default branch emits Android UiScrollable selectors                                                                                                                                 | Separate desktop navigation/scrolling from mobile helpers. Keep mobile paths and dependencies.                                                                                                                                                          |
+| Runner grouping           | Legacy hooks, globals, retries, Jasmine matchers, and suite state differ from story callbacks                                                                                                                                   | Preserve WDIO/Jasmine and grouped arrays; change transport and semantics incrementally.                                                                                                                                                                 |
+| REX startup               | Legacy config supplies working directory; native application descriptor lacks it                                                                                                                                                | Add trusted adapter/server-owned cwd or supervisor launch with an exact attach lease; qualify actual argument/cwd requirements.                                                                                                                         |
 
 Key source anchors:
 
@@ -860,14 +908,14 @@ values or broad compatibility shims.
 
 ## 9. Phased delivery and gates
 
-| Phase | Owning surface | Deliverable | Exit gate |
-| --- | --- | --- | --- |
-| **0. Baseline and probes** | E2E + native driver + current supervisor | Inventory exact selected cases, commands, state assertions, grouping, existing failures, renderer, host identity, input policy, and every delegated output path | Recorded baseline and blocker list per endpoint; confirm Windows generated renderer and capture a reporting-gap fixture |
-| **1. Generic boundary and reporting spine** | `desktop-test` + driver | Canonical schema/resolver, controlled native target composition, adapters, ownership/readiness, real `serve`, event collector/journal, live diagnostics, one renderer and flush contract | Plain app works without Storybook; fake-service tests prove child/grandchild forwarding, required-service failure, bounded shutdown, and isolated Actions commands/groups |
-| **2. WDIO compatibility/pilot** | Driver `/wdio` + harness + E2E | WDIO/Jasmine launcher and reporter adapter, visibility fixes, shared page-object adaptation, representative specs, canonical JSON/JUnit/summary | Pilot passes with required capabilities; grouped output/result parity and retry/skip/hook/crash contracts pass; no blocked sessions/input/app leaks |
-| **3. Storybook as consumer** | Storybook tooling/runtime/app | Same schema; optional integration; one supervisor and collector; existing traversal/CSF lifecycle and normalized results | macOS Fabric/Paper, Windows, Win32 behavior and live diagnostics preserved, including nested PowerShell paths; no weakened readiness or exclusions |
-| **4. Comparative migration** | E2E apps + CI | Old/new lanes on equivalent app builds, explicit test mapping, semantic comparisons, Actions summaries and always-uploaded artifacts | Each endpoint meets parity/reliability gates; real Actions grouping, annotations, summary, and artifact references verified |
-| **5. Retirement** | E2E + CI + docs | Remove obsolete desktop transport configs/scripts/dependencies | No remaining desktop consumer depends on old transport; mobile still works |
+| Phase                                       | Owning surface                           | Deliverable                                                                                                                                                                              | Exit gate                                                                                                                                                                 |
+| ------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **0. Baseline and probes**                  | E2E + native driver + current supervisor | Inventory exact selected cases, commands, state assertions, grouping, existing failures, renderer, host identity, input policy, and every delegated output path                          | Recorded baseline and blocker list per endpoint; confirm Windows generated renderer and capture a reporting-gap fixture                                                   |
+| **1. Generic boundary and reporting spine** | `desktop-test` + driver                  | Canonical schema/resolver, controlled native target composition, adapters, ownership/readiness, real `serve`, event collector/journal, live diagnostics, one renderer and flush contract | Plain app works without Storybook; fake-service tests prove child/grandchild forwarding, required-service failure, bounded shutdown, and isolated Actions commands/groups |
+| **2. WDIO compatibility/pilot**             | Driver `/wdio` + harness + E2E           | WDIO/Jasmine launcher and reporter adapter, visibility fixes, shared page-object adaptation, representative specs, canonical JSON/JUnit/summary                                          | Pilot passes with required capabilities; grouped output/result parity and retry/skip/hook/crash contracts pass; no blocked sessions/input/app leaks                       |
+| **3. Storybook as consumer**                | Storybook tooling/runtime/app            | Same schema; optional integration; one supervisor and collector; existing traversal/CSF lifecycle and normalized results                                                                 | macOS Fabric/Paper, Windows, Win32 behavior and live diagnostics preserved, including nested PowerShell paths; no weakened readiness or exclusions                        |
+| **4. Comparative migration**                | E2E apps + CI                            | Old/new lanes on equivalent app builds, explicit test mapping, semantic comparisons, Actions summaries and always-uploaded artifacts                                                     | Each endpoint meets parity/reliability gates; real Actions grouping, annotations, summary, and artifact references verified                                               |
+| **5. Retirement**                           | E2E + CI + docs                          | Remove obsolete desktop transport configs/scripts/dependencies                                                                                                                           | No remaining desktop consumer depends on old transport; mobile still works                                                                                                |
 
 Recommended pilot: Win32 Button plus Checkbox/Switch state, a keyboard/focus case,
 a scrolling case, and a popup/window case. Then establish macOS and Windows parity
@@ -888,16 +936,16 @@ Source: `packages/agentic/desktop-driver/PLAN.md:112-115`.
 
 ### Validation and CI ownership
 
-| Layer | Required evidence |
-| --- | --- |
-| Driver | W3C/fake-host contracts; native WDIO visibility/focus/waits; unsupported state; stale elements; target reservation and cancellation |
-| Native helpers | Matching-OS builds/handshakes; verified artifacts; launch/attach identity; input/state/capture; crash and orphan recovery |
-| Generic harness | No-Storybook consumer installation/import test; same-schema references; config-relative paths; optional stages; session/worker cleanup; external-app preservation |
-| WDIO integration | Real Jasmine/global/hook/group/retry behavior; no duplicate sessions; worker crash/timeout/interrupt; reporters and artifact failure paths |
-| Storybook integration/runtime | Existing extraction/digests/static plans; authenticated readiness and stale-message rejection; navigation/remount; worker failure/timeout contracts; renderer switching |
-| Reporting | Section 6 fixtures; cross-process attribution; live service diagnostics; required-service health; complete drain/flush; result parity across sinks; balanced Actions groups; safe raw replay; incomplete/all-skipped handling |
-| App lanes | Existing FluentTester macOS/Windows and REX Win32 builds plus selected legacy assertions; separate Storybook platform/renderer regressions |
-| Interactive qualification | Physical input, focus, popup windows, wheel/DPI, capture/occlusion, cross-supervisor contention, repeated reliability and zero leaks |
+| Layer                         | Required evidence                                                                                                                                                                                                             |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Driver                        | W3C/fake-host contracts; native WDIO visibility/focus/waits; unsupported state; stale elements; target reservation and cancellation                                                                                           |
+| Native helpers                | Matching-OS builds/handshakes; verified artifacts; launch/attach identity; input/state/capture; crash and orphan recovery                                                                                                     |
+| Generic harness               | No-Storybook consumer installation/import test; same-schema references; config-relative paths; optional stages; session/worker cleanup; external-app preservation                                                             |
+| WDIO integration              | Real Jasmine/global/hook/group/retry behavior; no duplicate sessions; worker crash/timeout/interrupt; reporters and artifact failure paths                                                                                    |
+| Storybook integration/runtime | Existing extraction/digests/static plans; authenticated readiness and stale-message rejection; navigation/remount; worker failure/timeout contracts; renderer switching                                                       |
+| Reporting                     | Section 6 fixtures; cross-process attribution; live service diagnostics; required-service health; complete drain/flush; result parity across sinks; balanced Actions groups; safe raw replay; incomplete/all-skipped handling |
+| App lanes                     | Existing FluentTester macOS/Windows and REX Win32 builds plus selected legacy assertions; separate Storybook platform/renderer regressions                                                                                    |
+| Interactive qualification     | Physical input, focus, popup windows, wheel/DPI, capture/occlusion, cross-supervisor contention, repeated reliability and zero leaks                                                                                          |
 
 Reuse `.github/actions/setup-desktop-driver`; its workspace input is already
 general enough for non-Storybook consumers. Keep explicit helper build/doctor and
@@ -944,36 +992,36 @@ need to combine a wholesale directory relocation with the architectural split.
 
 ## 10. Remaining implementation decisions and risks
 
-| Decision/risk | Plan/default | Evidence needed to change it |
-| --- | --- | --- |
-| Package architecture | **Settled: Option 1**, neutral harness plus separate Storybook integration | A new explicit owner decision; not an implicit implementation simplification |
-| App lifetime across story sessions | Existing supervisor lease + attach | A separately designed driver keepalive contract with crash/relaunch/teardown coverage |
-| Element-send-keys modifiers | Migrate chords to actions now; specify sticky-modifier support or explicit rejection separately | W3C/native conformance cases; no silent press/release mismatch |
-| Popup lookup | Explicit identified-window switching | Measured need for opt-in app-wide scope without ambiguous lookup or stale references |
-| Unknown attributes/provider state | Keep protocol behavior explicit; migrate supported semantic mappings and report unsupported state | A justified namespaced provider-state or new normalized-property contract |
-| FluentTester Windows renderer | Verify freshly generated `UseFabric`; do not assume UWP | Generated project plus actual launched runtime/build evidence |
-| Windows attach identity | Exact verified lease or strong executable/AUMID identity | Duplicate-title, PID-reuse, package-collision, and external-app preservation tests |
-| Generic runtime | None initially | A real second instrumented consumer needing authenticated JS/render milestones |
-| Physical input on hosted CI | Do not count disabled-input lanes as qualification | Owner-approved policy plus repeatable native input evidence |
-| Reporting | One collector/renderer in the harness, typed producer adapters, durable results and Actions groups | Implementation fixtures close transport/flush details; logging-library choice must preserve the reporting contract |
+| Decision/risk                      | Plan/default                                                                                       | Evidence needed to change it                                                                                       |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Package architecture               | **Settled: Option 1**, neutral harness plus separate Storybook integration                         | A new explicit owner decision; not an implicit implementation simplification                                       |
+| App lifetime across story sessions | Existing supervisor lease + attach                                                                 | A separately designed driver keepalive contract with crash/relaunch/teardown coverage                              |
+| Element-send-keys modifiers        | Migrate chords to actions now; specify sticky-modifier support or explicit rejection separately    | W3C/native conformance cases; no silent press/release mismatch                                                     |
+| Popup lookup                       | Explicit identified-window switching                                                               | Measured need for opt-in app-wide scope without ambiguous lookup or stale references                               |
+| Unknown attributes/provider state  | Keep protocol behavior explicit; migrate supported semantic mappings and report unsupported state  | A justified namespaced provider-state or new normalized-property contract                                          |
+| FluentTester Windows renderer      | Verify freshly generated `UseFabric`; do not assume UWP                                            | Generated project plus actual launched runtime/build evidence                                                      |
+| Windows attach identity            | Exact verified lease or strong executable/AUMID identity                                           | Duplicate-title, PID-reuse, package-collision, and external-app preservation tests                                 |
+| Generic runtime                    | None initially                                                                                     | A real second instrumented consumer needing authenticated JS/render milestones                                     |
+| Physical input on hosted CI        | Do not count disabled-input lanes as qualification                                                 | Owner-approved policy plus repeatable native input evidence                                                        |
+| Reporting                          | One collector/renderer in the harness, typed producer adapters, durable results and Actions groups | Implementation fixtures close transport/flush details; logging-library choice must preserve the reporting contract |
 
 The architecture decision is closed. The remaining rows are implementation
 contracts or qualification gates, not competing package plans.
 
 ## 11. Research provenance and reciprocal-review reconciliation
 
-| Topic | Initial disagreement or omission | Reconciled plan |
-| --- | --- | --- |
-| Packaging | Opus preferred three packages; Astra preferred four | Both now prefer four because lazy subpaths do not isolate installed dependencies/releases |
-| WDIO native behavior | Astra initially missed visibility/focus JavaScript execution | Both verified it; command compatibility is an early migration blocker |
-| Windows renderer | Opus inferred UWP from omitted flag; Astra initially treated it as unknown | Both checked the pinned generator and retracted the UWP inference; verify fresh generated/running mode |
-| Config ownership | Astra's initial app configs imported E2E suite definitions | Test-to-app dependency direction; same-format app targets referenced by the suite config |
-| Runtime extraction | Astra floated a generic runtime entry point | Defer it; ordinary native apps need no runtime |
-| Selected vs checked | Opus proposed a driver fallback | Withdrawn; adapt toggle tests to checked semantics |
-| Windows scrolling | Opus initially considered mobile branches unreachable on desktop | Corrected: Windows can enter Android-specific scrolling; separate the paths |
-| WDIO-centric alternative | Opus's initial alternative assumed two authored config formats | Strengthened Option 3 preserves the single canonical format with generated WDIO config |
-| App keepalive | Driver-retained service lifetime vs supervisor ownership | Preserve current leases initially; no incidental driver lifetime redesign |
-| Qualification | One initial proposal suggested a smaller run window | Existing 100-run/14-day gate remains authoritative |
+| Topic                    | Initial disagreement or omission                                           | Reconciled plan                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Packaging                | Opus preferred three packages; Astra preferred four                        | Both now prefer four because lazy subpaths do not isolate installed dependencies/releases              |
+| WDIO native behavior     | Astra initially missed visibility/focus JavaScript execution               | Both verified it; command compatibility is an early migration blocker                                  |
+| Windows renderer         | Opus inferred UWP from omitted flag; Astra initially treated it as unknown | Both checked the pinned generator and retracted the UWP inference; verify fresh generated/running mode |
+| Config ownership         | Astra's initial app configs imported E2E suite definitions                 | Test-to-app dependency direction; same-format app targets referenced by the suite config               |
+| Runtime extraction       | Astra floated a generic runtime entry point                                | Defer it; ordinary native apps need no runtime                                                         |
+| Selected vs checked      | Opus proposed a driver fallback                                            | Withdrawn; adapt toggle tests to checked semantics                                                     |
+| Windows scrolling        | Opus initially considered mobile branches unreachable on desktop           | Corrected: Windows can enter Android-specific scrolling; separate the paths                            |
+| WDIO-centric alternative | Opus's initial alternative assumed two authored config formats             | Strengthened Option 3 preserves the single canonical format with generated WDIO config                 |
+| App keepalive            | Driver-retained service lifetime vs supervisor ownership                   | Preserve current leases initially; no incidental driver lifetime redesign                              |
+| Qualification            | One initial proposal suggested a smaller run window                        | Existing 100-run/14-day gate remains authoritative                                                     |
 
 **Provenance:** local artifacts `opus-driver-initial.md`,
 `astra-driver-initial.md`, `opus-driver-cross-review.md`, and
@@ -984,7 +1032,7 @@ reviews, not just their displayed summaries.
 formal reporting research. Section 6 is follow-up source/documentation research,
 not a claim that both original models re-reviewed the new reporting design.
 
-**Validation status:** repository source, relevant installed dependency
+**Planning-time validation status:** repository source, relevant installed dependency
 implementations, tests, CI definitions, and upstream reporting documentation
 were inspected. Application launches, builds, native tests, reporting fixtures,
 and parity/reliability runs were **not run**; no implementation,

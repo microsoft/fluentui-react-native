@@ -4,6 +4,11 @@ The Desktop Driver service is an embeddable, loopback-only W3C remote end.
 Integrators register controlled targets before listening; clients can select
 only those targets.
 
+For application lifecycle commands and normal WDIO suites, prefer the
+[`desktop-test` harness](../../desktop-test/README.md). Its real `serve`
+composition supports applications without Storybook. The low-level APIs below
+remain available for other controlled supervisors.
+
 ## Embed a native target
 
 ```ts
@@ -62,15 +67,17 @@ releases input, disposes hosts, and reports cleanup failures.
 
 Each `DesktopTarget` declares:
 
-| Field               | Meaning                                                 |
-| ------------------- | ------------------------------------------------------- |
-| `id`                | Stable service-local identity selected by `furn:target` |
-| `platformName`      | `macos` or `windows`                                    |
-| `endpoint`          | `macos`, `windows`, or `win32`                          |
-| `renderer`          | `fabric` or `paper`                                     |
-| `host`              | A fake or native `DesktopHost` implementation           |
-| `storyOrchestrator` | Optional Storybook selection/reset adapter              |
-| `storyRootTestId`   | Optional native marker verified after story readiness   |
+| Field               | Meaning                                                                    |
+| ------------------- | -------------------------------------------------------------------------- |
+| `id`                | Stable service-local identity selected by `furn:target`                    |
+| `platformName`      | `macos` or `windows`                                                       |
+| `endpoint`          | `macos`, `windows`, or `win32`                                             |
+| `renderer`          | Optional `fabric` or `paper`; omit for non-RN apps                         |
+| `launchModes`       | Allowed client launch modes; an external app can restrict this to `attach` |
+| `launchTimeoutMs`   | Server-owned, positive bounded launch/attach deadline                      |
+| `host`              | A fake or native `DesktopHost` implementation                              |
+| `storyOrchestrator` | Optional Storybook selection/reset adapter                                 |
+| `storyRootTestId`   | Optional native marker verified after story readiness                      |
 
 Do not derive a target from incoming capabilities. Executable paths, app
 arguments, environment variables, helper paths, lease paths, and artifact roots
@@ -87,13 +94,14 @@ are server-owned configuration.
 | `aumid`                      | Windows packaged-app launch identity                            |
 | `executablePath`             | Controlled unpackaged launch path                               |
 | `arguments`                  | Fixed server-owned launch arguments                             |
+| `workingDirectory`           | Fixed unpackaged Windows process working directory              |
 | `windowTitle`                | Exact expected window title, required by the Windows helper     |
 | `leasePath` and `leaseNonce` | Exact owner-generated attach lease; do not accept from a client |
 
 Windows launch needs either `aumid` or `executablePath` plus an exact
-`windowTitle`. Attach without an owner-generated lease also requires a title
-that resolves to exactly one live window. Ambiguity fails instead of selecting
-the first result.
+`windowTitle`. Attach without an owner-generated lease requires the title
+**and** matching executable or AUMID, resolving to exactly one live window.
+Title-only attach and ambiguity fail instead of selecting the first result.
 
 For macOS descriptor and launch behavior, see
 [the macOS native provider](../native/macos/README.md). Storybook supplies a
@@ -109,7 +117,8 @@ Clients request one of two modes:
 - `attach` resolves an already running application from the controlled
   descriptor or owner-generated lease and records it as external.
 
-The default is `launch`. Deleting an attached session preserves the app.
+The default is `launch`; a target may restrict the allowed modes.
+Deleting an attached session preserves the app.
 Deleting a launched session may close the exact owned process. Cleanup never
 kills by process name.
 
@@ -136,15 +145,19 @@ try {
 ```
 
 The returned browser supports standard WebdriverIO APIs backed by the
-implemented W3C subset plus these commands when a Storybook orchestrator is
+implemented W3C subset. Visibility and focus use native queries, including
+re-querying initially absent elements during waits; they never execute DOM
+JavaScript. `installDesktopWebdriverCommands(browser, url)` installs the same
+binding on a WDIO-managed browser without opening another session.
+The following story commands are registered only when a Storybook orchestrator is
 registered:
 
 - `desktopListStories()`;
 - `desktopOpenStory(storyId, runId?)`;
 - `desktopResetStory(storyId, runId?)`;
-- `desktopExpect(expectation)`;
 - `desktopRunStoryTests(options?)`.
 
+`desktopExpect(expectation)` is available for all native targets.
 `clickMode` can be `physical`, `accessibility`, or `auto`. The server returns
 the negotiated features; it never claims an unsupported input mode.
 

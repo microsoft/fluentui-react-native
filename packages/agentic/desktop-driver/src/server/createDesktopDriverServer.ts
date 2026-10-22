@@ -260,6 +260,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
         ...(snapshot.enabled.supported ? { enabled: snapshot.enabled.value } : {}),
         ...(snapshot.expanded.supported ? { expanded: snapshot.expanded.value } : {}),
         ...(snapshot.focused.supported ? { focused: snapshot.focused.value } : {}),
+        ...(snapshot.required?.supported ? { required: snapshot.required.value } : {}),
         ...(snapshot.selected.supported ? { selected: snapshot.selected.value } : {}),
         ...(snapshot.visible.supported ? { visible: snapshot.visible.value } : {}),
       },
@@ -697,6 +698,11 @@ function getElementValue(snapshot: NativeElementSnapshot, name: string): unknown
       return requireSupported(snapshot.checked, 'checked');
     case 'expanded':
       return requireSupported(snapshot.expanded, 'expanded');
+    case 'required':
+      return requireSupported(
+        snapshot.required ?? { supported: false, reason: 'The provider does not expose required-form state.' },
+        'required',
+      );
     case 'selected':
       return requireSupported(snapshot.selected, 'selected');
     default:

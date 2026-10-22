@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import type { DesktopStoryManifest, NativeDesktopApplicationDescriptor, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { DesktopStorybookInstance } from '../config/instance.js';
@@ -57,6 +58,8 @@ export function createDesktopStorybookDriverManifest({
     throw new Error(`Native Desktop Driver is disabled for ${platform}.`);
   }
   const leasePath = path.join(config.projectRoot, 'storybook-desktop.generated', `application-lease.${platform}.json`);
+  const configuredTarget = config.getDesktopTarget?.(platform);
+  const target = configuredTarget && platform === 'macos' ? selectDesktopRenderer(configuredTarget, renderer) : configuredTarget;
   return Object.freeze({
     application: Object.freeze({
       ...nativeOptions.application,
@@ -78,7 +81,7 @@ export function createDesktopStorybookDriverManifest({
     schemaVersion: 2,
     storyManifest,
     storybookPort: instance.storybookPort,
-    targetId: `${config.appName}-${platform}`.toLowerCase(),
+    targetId: target?.id ?? `${config.appName}-${platform}`.toLowerCase(),
     testIDPrefix: config.testIDPrefix,
     wdio: config.wdio,
   });

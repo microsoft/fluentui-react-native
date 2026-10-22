@@ -13,11 +13,13 @@ async function main() {
     { runWdioStoryTests, WdioStoryTestRunError },
     { createDesktopDriverStoryHarness, createFakeStoryWindows },
     { makeDesktopStorybookConfig },
+    { DesktopRunReporter },
   ] = await Promise.all([
     import(pathToFileURL(path.join(packageRoot, 'lib/driver/storyManifest.js')).href),
     import(pathToFileURL(path.join(packageRoot, 'lib/testing/runWdioTests.js')).href),
     import('@fluentui-react-native/desktop-driver/testing'),
     import(pathToFileURL(path.join(packageRoot, 'lib/config/index.js')).href),
+    import('@fluentui-react-native/desktop-test/reporting'),
   ]);
   fs.writeFileSync(
     path.join(root, 'fixture.stories.ts'),
@@ -180,7 +182,27 @@ async function main() {
       namedTimeout = error.results.map(({ testName, status }) => ({ testName, status }));
     }
     const passed = await run('pass');
-    const skipped = await run('skip');
+    let skipped;
+    try {
+      await run('skip');
+      throw new Error('An all-skipped required cohort must not pass.');
+    } catch (error) {
+      if (
+        !(error instanceof Error) ||
+        !(error instanceof WdioStoryTestRunError) ||
+        !('results' in error) ||
+        !Array.isArray(error.results) ||
+        error.results[0]?.status !== 'skipped'
+      )
+        throw error;
+      skipped = error.results;
+    }
+    const skipReport = new DesktopRunReporter({ artifactsRoot: path.join(root, 'reports'), optional: true, summary: false });
+    await run('skip', { optional: true, report: skipReport });
+    const skipResult = await skipReport.finish();
+    if (skipResult.status !== 'skipped' || skipResult.work.some(({ status }) => status !== 'skipped')) {
+      throw new Error('A skipped callback was reported as passed selected work.');
+    }
     const failures = [];
     for (const story of ['fail', 'timeout', 'spin', 'crash', 'exit-zero', 'stale', 'navigation-failure']) {
       let rejected = false;
@@ -232,7 +254,9 @@ async function main() {
     selections.length = 0;
     const control = await runSmokeControl(packageRoot, root, smokeManifestPath);
     if (control.code !== 0) throw new Error(control.stderr || control.stdout || `Smoke control exited with ${control.code}.`);
-    const smokeReport = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'));
+    const reportRoot = path.join(root, 'artifacts', 'desktop');
+    const runDirectory = fs.readdirSync(reportRoot)[0];
+    const smokeReport = JSON.parse(fs.readFileSync(path.join(reportRoot, runDirectory, 'evidence/windows/static/run.json'), 'utf8'));
     const smoke = {
       plans: smokeReport.tests.map(({ storyId }) => storyId),
       callbacks: smokeReport.wdio.map(({ storyId }) => storyId),

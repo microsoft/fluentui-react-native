@@ -1,6 +1,22 @@
 import { validateDesktopStoryTests } from './storyTests.js';
 
 describe('validateDesktopStoryTests', () => {
+  test('requires boolean values for required-form assertions', () => {
+    for (const value of [true, false]) {
+      const plan = {
+        version: 1,
+        tests: [{ id: 'required', steps: [{ expect: { state: 'required', target: { testId: 'field' }, value } }] }],
+      };
+      expect(validateDesktopStoryTests(plan)).toBe(plan);
+    }
+    expect(() =>
+      validateDesktopStoryTests({
+        version: 1,
+        tests: [{ id: 'required', steps: [{ expect: { state: 'required', target: { testId: 'field' }, value: 'false' } }] }],
+      }),
+    ).toThrow('must be a boolean');
+  });
+
   test('accepts a serializable versioned plan', () => {
     const plan = {
       version: 1,

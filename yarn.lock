@@ -2567,6 +2567,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@fluentui-react-native/components": "workspace:*"
     "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-test": "workspace:*"
     "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
@@ -3500,6 +3501,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@fluentui-react-native/desktop-test@workspace:*, @fluentui-react-native/desktop-test@workspace:packages/agentic/desktop-test":
+  version: 0.0.0-use.local
+  resolution: "@fluentui-react-native/desktop-test@workspace:packages/agentic/desktop-test"
+  dependencies:
+    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/scripts": "workspace:*"
+    "@rnx-kit/reporter": "catalog:"
+    "@wdio/cli": "catalog:"
+    "@wdio/jasmine-framework": "catalog:"
+    "@wdio/local-runner": "catalog:"
+    "@wdio/reporter": "npm:9.24.0"
+    "@wdio/runner": "catalog:"
+    commander: "npm:^14.0.2"
+    expect-webdriverio: "catalog:"
+    import-meta-resolve: "npm:4.2.0"
+    webdriverio: "catalog:"
+  bin:
+    desktop-test: ./config/cli.cjs
+  languageName: unknown
+  linkType: soft
+
 "@fluentui-react-native/divider@workspace:*, @fluentui-react-native/divider@workspace:packages/components/Divider":
   version: 0.0.0-use.local
   resolution: "@fluentui-react-native/divider@workspace:packages/components/Divider"
@@ -3643,6 +3665,8 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
+    "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-test": "workspace:*"
     "@fluentui-react-native/focus-zone": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
@@ -5144,6 +5168,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@babel/plugin-transform-typescript": "catalog:"
     "@fluentui-react-native/desktop-driver": "workspace:*"
+    "@fluentui-react-native/desktop-test": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@react-native/babel-preset": "npm:^0.81.0"
     "@rnx-kit/tools-react-native": "catalog:"
@@ -5475,6 +5500,7 @@ __metadata:
   dependencies:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
+    "@fluentui-react-native/desktop-test": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/tester-core": "workspace:*"
     "@office-iss/react-native-win32": "npm:^0.81.0"
@@ -5511,6 +5537,7 @@ __metadata:
     "@babel/core": "catalog:"
     "@babel/runtime": "catalog:"
     "@fluentui-react-native/callout": "workspace:*"
+    "@fluentui-react-native/desktop-test": "workspace:*"
     "@fluentui-react-native/experimental-appearance-additions": "workspace:*"
     "@fluentui-react-native/experimental-avatar": "workspace:*"
     "@fluentui-react-native/experimental-checkbox": "workspace:*"
@@ -16953,7 +16980,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"import-meta-resolve@npm:^4.0.0, import-meta-resolve@npm:^4.1.0, import-meta-resolve@npm:^4.2.0":
+"import-meta-resolve@npm:4.2.0, import-meta-resolve@npm:^4.0.0, import-meta-resolve@npm:^4.1.0, import-meta-resolve@npm:^4.2.0":
   version: 4.2.0
   resolution: "import-meta-resolve@npm:4.2.0"
   checksum: 10c0/3ee8aeecb61d19b49d2703987f977e9d1c7d4ba47db615a570eaa02fe414f40dfa63f7b953e842cbe8470d26df6371332bfcf21b2fd92b0112f9fea80dde2c4c
