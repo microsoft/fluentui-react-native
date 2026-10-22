@@ -81,6 +81,7 @@
     "lint": "fluentui-scripts lint",
     "prebuild": "yarn codegen:windows",
     "test": "yarn build && yarn test:stories && node --test tests/entrypoints.test.mjs tests/native-ownership.test.mjs && fluentui-scripts jest",
+    "test:apple-integration": "node --test tests/apple-integration.test.mjs",
     "test:stories": "tsc -p tsconfig.stories.json",
     "update-snapshots": "fluentui-scripts jest -u"
   },

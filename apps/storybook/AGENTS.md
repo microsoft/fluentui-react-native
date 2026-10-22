@@ -174,7 +174,8 @@ arbitrary locations.
   Win32 chrome would regress addon controls and responsive behavior while
   increasing local maintenance.
 - Keep the Win32 story-pattern override in `storybook.config.mts`. It intentionally excludes ListItem and Accordion
-  because their Paper implementations fail-fast crash REX 0.81.1.
+  because their Paper implementations fail-fast crash REX 0.81.1. Remove those exclusions when they no longer crash;
+  all desktop endpoints must ship together.
 - Keep the Win32 window title distinct from the Windows Fabric title so
   automation never attaches to the wrong endpoint.
 - Use `yarn storybook smoke --win32 --mode stories` for the package-owned bundle, launch, native desktop-chrome checks,

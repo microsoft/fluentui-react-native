@@ -15,6 +15,15 @@ macOS through AX.
 Consumers own the containing collection's name, position, selection
 rules, and any focus restoration policy.
 
+A bound option inside a Dropdown list (LBI-006) takes those from its list
+instead. It has the `listitem` role with `selected` and `disabled` state, its
+one-based position, and the option count, which Windows exposes as a ListItem
+with the SelectionItem pattern. It declares the select, add-to-selection, and
+remove-from-selection actions, lowercase on Windows Fabric and title case
+elsewhere. The list applies each action, or refuses it for a disabled option,
+and then forwards the original event to the caller's `onAccessibilityAction`
+exactly once. Its checkmark and checkbox indicator stay inaccessible.
+
 The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
 to a private `FocusRing` slot. Its configured ring Views remain mounted on the

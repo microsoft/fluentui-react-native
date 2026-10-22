@@ -12,6 +12,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
     }
     @objc public var anchorMode = "legacy" { didSet { updatePresentation() } }
+    @objc public var tabNavigation = "cycle"
     @objc public var placementHint = "" { didSet { updatePresentation() } }
     @objc public var gapSpace: CGFloat = 0 { didSet { updatePresentation() } }
     @objc public var anchorRect: NSRect = .null { didSet { updatePresentation() } }
@@ -79,6 +80,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         if index >= proxyView.subviews.count { proxyView.addSubview(subview) }
         else { proxyView.addSubview(subview, positioned: .below, relativeTo: proxyView.subviews[index]) }
         updatePresentation()
+        invalidateShadow()
     }
 
     @objc public func unmountContentSubview(_ subview: NSView) {
@@ -88,6 +90,7 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     @objc public func updateContentSize(_ size: NSSize) {
         proxyView.frame = NSRect(origin: .zero, size: size)
         updatePresentation()
+        invalidateShadow()
     }
 
     public override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
@@ -96,15 +99,17 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     public override func didUpdateReactSubviews() {
         proxyView.didUpdateReactSubviews()
         updatePresentation()
+        invalidateShadow()
     }
     public override func reactSetFrame(_ frame: CGRect) {
         proxyView.reactSetFrame(frame)
         updatePresentation()
+        invalidateShadow()
     }
 
-    @objc public func requestFocus(_ generation: Int, requestId: Int, target: NSView?) {
+    @objc public func requestFocus(_ generation: Int, requestId: Int, target: NSView?, strategy: String) {
         emitResult(generation, requestId, operationStatus(generation) ??
-            NativeFocusService.focus(within: proxyView, target: target, strategy: "target"))
+            NativeFocusService.focus(within: proxyView, target: target, strategy: strategy))
     }
     @objc public func close(_ generation: Int, requestId: Int) {
         if let blocked = operationStatus(generation) { emitResult(generation, requestId, blocked); return }
@@ -130,9 +135,40 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         onOperationResult?(["generation": generation, "requestId": requestId, "status": status])
     }
 
-    func calloutWillDismiss(window: CalloutWindow) {
+    func calloutWillDismiss(window: CalloutWindow, reason: String?) {
+        if let reason = reason { dismissReason = reason }
         for child in window.childWindows ?? [] {
             if let popup = child as? CalloutWindow { popup.dismissCallout() }
+        }
+    }
+
+    func calloutHandlesTab(window: CalloutWindow, backward: Bool) -> Bool {
+        guard exitsByTab else { return false }
+        // The outermost presentation in this popup ownership chain that exits by Tab owns the exit and its focus.
+        var exit: CalloutView = self
+        var owner = window.parent as? CalloutWindow
+        while let popup = owner, let view = popup.lifeCycleDelegate as? CalloutView, view.exitsByTab {
+            exit = view
+            owner = popup.parent as? CalloutWindow
+        }
+        exit.exitByTab(backward: backward)
+        return true
+    }
+
+    private var exitsByTab: Bool { shown && commandGeneration > 0 && tabNavigation != "cycle" }
+
+    private func exitByTab(backward: Bool) {
+        let continues = tabNavigation == "continue"
+        let anchor = anchorMode == "view" ? anchorView : nil
+        dismissReason = backward ? "tab-backward" : "tab-forward"
+        dismissCallout()
+        // Continuation treats the popup as inserted after its anchor in the owner's key-view order.
+        guard continues, let anchor = anchor, let owner = anchor.window, owner.isVisible, NSApp.isActive else { return }
+        owner.makeKey()
+        if backward {
+            if anchor.acceptsFirstResponder && !anchor.isHiddenOrHasHiddenAncestor { owner.makeFirstResponder(anchor) }
+        } else {
+            owner.selectKeyView(following: anchor)
         }
     }
     func calloutDidDismiss(window: CalloutWindow) {
@@ -163,6 +199,15 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
                 popup.parent?.removeChildWindow(popup)
                 owner.addChildWindow(popup, ordered: .above)
             }
+            // Modern presentations are unstyled: content draws the silhouette and the window shadow follows it.
+            let modern = commandGeneration > 0
+            backdropView.isHidden = modern
+            popup.isOpaque = !modern
+            popup.hasShadow = modern
+            // Let AppKit derive Tab order within the popup. Content mounted before this point does not mark the loop
+            // dirty, so derive it once now; later content changes recalculate it automatically.
+            popup.autorecalculatesKeyViewLoop = modern
+            if modern { popup.recalculateKeyViewLoop() }
             shown = true
             dismissReason = "native-light-dismiss"
             popup.orderFront(self)
@@ -178,11 +223,15 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
                     }
                     var root: NSWindow = popup
                     while let parent = root.parent as? CalloutWindow { root = parent }
-                    if let clicked = event.window, !contains(root, clicked) { self.dismissCallout() }
+                    if let clicked = event.window, !contains(root, clicked), !self.isAnchorInput(event) {
+                        self.dismissReason = "outside-pointer"
+                        self.dismissCallout()
+                    }
                 }
                 return event
             }
             onShow?([:])
+            invalidateShadow()
         }
         if commandGeneration > 0 && positioned && !proxyView.subviews.isEmpty &&
             readyGeneration != commandGeneration {
@@ -194,6 +243,25 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     private func dismissCallout() {
         guard shown else { return }
         popupWindow?.dismissCallout()
+    }
+
+    /// Pointer input on a live modern view anchor belongs to the anchor's owner, such as a trigger that toggles.
+    private func isAnchorInput(_ event: NSEvent) -> Bool {
+        guard commandGeneration > 0, anchorMode == "view", let anchor = anchorView,
+              event.window === anchor.window, !anchor.isHiddenOrHasHiddenAncestor else { return false }
+        return anchor.bounds.contains(anchor.convert(event.locationInWindow, from: nil))
+    }
+
+    /// The window server derives a modern popup's shadow from its content silhouette; recompute it after the
+    /// content's layer changes have been committed.
+    private func invalidateShadow() {
+        guard shown, commandGeneration > 0 else { return }
+        DispatchQueue.main.async { [weak self] in
+            MainActor.assumeIsolated {
+                guard let self = self, self.shown, let popup = self.popupWindow, popup.hasShadow else { return }
+                popup.invalidateShadow()
+            }
+        }
     }
 
     private func anchorInScreen() -> NSRect? {
@@ -235,7 +303,10 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     private func removeObservers() { observers.removeAll() }
     private func installObservers() {
         removeObservers()
-        observe(NSApplication.didResignActiveNotification, object: nil) { $0.dismissCallout() }
+        observe(NSApplication.didResignActiveNotification, object: nil) {
+            $0.dismissReason = "application-deactivated"
+            $0.dismissCallout()
+        }
         observe(NSMenu.didBeginTrackingNotification, object: nil) { $0.dismissCallout() }
         var current = anchorView
         while let view = current {
@@ -254,10 +325,8 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     }
 
     private lazy var proxyView: NSView = {
-        let view = FlippedVisualEffectView()
+        let view = FlippedContentView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.material = .menu
-        view.state = .active
         view.wantsLayer = true
         if let bridge = bridge {
             guard let handler = RCTTouchHandler(bridge: bridge) else {
@@ -267,11 +336,22 @@ open class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
         return view
     }()
+    /// Legacy presentations keep the menu material behind content; modern presentations hide it.
+    private lazy var backdropView: NSView = {
+        let view = FlippedVisualEffectView()
+        view.material = .menu
+        view.state = .active
+        view.wantsLayer = true
+        view.autoresizingMask = [.width, .height]
+        return view
+    }()
     private var calloutWindow: CalloutWindow {
         if let popup = popupWindow { return popup }
         let popup = CalloutWindow()
         popup.lifeCycleDelegate = self
         guard let content = popup.contentView else { preconditionFailure("Callout window has no content view") }
+        backdropView.frame = content.bounds
+        content.addSubview(backdropView)
         content.addSubview(proxyView)
         (anchorView?.window ?? window)?.addChildWindow(popup, ordered: .above)
         popupWindow = popup

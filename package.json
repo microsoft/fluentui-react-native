@@ -96,6 +96,7 @@
     "morgan@npm:1.11.0": "1.12.1",
     "path-to-regexp@npm:8.3.0": "^8.4.2",
     "proxy-addr@npm:^2.0.7": "2.0.8",
+    "react-native-macos": "patch:react-native-macos@npm%3A0.81.9#~/.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch",
     "react-native-windows": "0.81.35",
     "sharp@npm:0.35.3": "0.35.5",
     "shell-quote": "1.11.0",

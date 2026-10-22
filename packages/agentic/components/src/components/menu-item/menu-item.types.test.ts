@@ -10,6 +10,7 @@ const IconSlot: SlotProp<typeof Icon> = { fontSource: { codepoint: 0x25cf, fontF
 const AvatarSlot: SlotProp<typeof View> = { testID: 'avatar' };
 
 const validProps: MenuItemProps = {
+  disabledFocusable: true,
   content: 'Menu item',
   icon: IconSlot,
   avatar: AvatarSlot,

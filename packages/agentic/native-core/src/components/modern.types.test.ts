@@ -19,6 +19,19 @@ function contracts(target: NativeViewTarget, calloutRef: React.Ref<CalloutHandle
 }
 void contracts;
 
+function focusStrategies(
+  handle: CalloutHandle,
+  presentation: NonNullable<ReturnType<CalloutHandle['getPresentation']>>,
+  target: NativeViewTarget,
+) {
+  void handle.requestFocus(presentation, 'first');
+  void handle.requestFocus(presentation, 'last');
+  void handle.requestFocus(presentation, target);
+  // @ts-expect-error A Callout has no FocusZone default target.
+  void handle.requestFocus(presentation, 'default');
+}
+void focusStrategies;
+
 it('checks modern refs, slots and legacy-field exclusion', () => {
   expect(true).toBe(true);
 });

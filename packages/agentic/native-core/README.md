@@ -14,9 +14,10 @@ types, tests, stories, and specifications live under `src/legacy` and are
 exported only from `@fluentui-react-native/native-core/legacy`. They are not
 exported by the root entrypoint, which is reserved for modern cross-platform
 APIs. The `macos` and `windows` now expose React 19 modern Callout/FocusZone previews,
-live native targets, and typed operation outcomes. The root, `win`, and
-`win32` remain unadmitted for modern components. Legacy Win32 uses its existing
-host registrations without new managed commands.
+live native targets, and typed operation outcomes. `win32` exposes constrained
+modern `Callout` and `FocusZone` adapters over the host's legacy registrations
+(see each `SPEC.md`); the root and `win` remain unadmitted for modern components.
+Legacy Win32 uses its existing host registrations without new managed commands.
 
 `@fluentui-react-native/callout` and `@fluentui-react-native/focus-zone` are
 JS-only compatibility shims under `packages/shim`. Deprecated type aliases and
@@ -253,7 +254,8 @@ Callout's executable stories verify native popup creation, `onShow` and
 `onDismiss`, outside-click and Escape dismissal, and reopening on macOS,
 Windows, and Win32; the modern stories add readiness, descendant focus,
 explicit close/rearm, a flat Menu composition (FocusZone entry, arrow
-navigation, and trigger restoration), and Windows anchor geometry. Run them
+navigation, and trigger restoration), explicit empty-container focus, and
+macOS/Windows view/rect/point anchor geometry. Run them
 together with FocusZone's keyboard cases from `apps/storybook` using the owned
 lifecycle:
 
@@ -285,6 +287,101 @@ closure latches the generation until false-to-true or a changed
 preserves its actual native root `ref` and publishes confirmed requests through
 `commandsRef`. Neither ref assignment nor a void native focus return is
 confirmation. Requests support abort and timeout, and reject stale lifetimes.
+
+The October 16, 2026 popup prerequisites extend modern Callout's
+`requestFocus(presentation, target, options)` with `first` and `last` strategies.
+They use the same native eligibility and actual-focus confirmation as
+FocusZone; an empty search reports `not-mounted` so a consumer can explicitly
+request its own focusable fallback. Native dismissal distinguishes `escape`,
+`outside-pointer`, and `application-deactivated` where the observing branch can
+identify them, while retaining `native-light-dismiss` for unclassified events.
+Duplicate closure and late readiness cannot revive a dismissed presentation.
+Rebuild native hosts for the extended command schema; `/legacy` is unchanged.
+
+The Windows library builds with these additions, but its October 16 physical-input
+cases skipped. On October 17, macOS Fabric and Paper qualified all 12 modern Callout
+cases, including first/last search, empty refusal, explicit container focus,
+view/rect/point geometry, dismissal/rearm, and flat Menu focus restoration.
+Both renderers also pass 19 shared-focus cases without skips, including disabled
+MenuItem activation refusal, read-only Input focus/edit refusal, Button disabled
+state, and TabList selected-state updates. The strict Apple integration probe passes both React-module and
+no-React-module bridging-header configurations. This is not an Office host
+runtime qualification. See the [Win32 host follow-up](https://github.com/microsoft/fluentui-react-native/issues/4384)
+for remaining gates.
+
+The October 19, 2026 Popover amendments (see the Callout `SPEC.md`) change only
+modern presentations on macOS. The popup window is transparent with no `.menu`
+vibrancy backdrop, so the content View draws the visible surface. The window
+shadow follows that content and is refreshed after content changes. Pointer input
+on a live view anchor no longer light-dismisses, and the popup derives its own
+Tab key-view loop. Paper also orders `requestFocus`, `close`, and `reposition`
+after previously committed view updates. Legacy presentations and the
+`focusWindow`/`blurWindow` commands are unchanged. macOS Fabric and Paper pass
+14 modern Callout cases, 2 legacy Callout cases, and 19 shared-focus cases. The
+window shadow was not captured visually because driver capture excludes shadows.
+
+On Windows Fabric, a modern popup window gets a DWM rounded corner and the
+platform popup shadow, with no DWM border. A light dismissal from a press over
+the live view anchor waits up to 250 ms for the anchor to receive that press,
+so a trigger toggles its popup instead of reopening it. The owner-island pointer
+handler ignores presses over the anchor. Windows passes all modern Callout
+cases, including the anchor-press case, and all Popover stories.
+
+The `win32` `Callout` is a JavaScript adapter over the Office host's legacy
+`RCTCallout` registration; it sends no new command to the prebuilt host. It
+supports view anchors only. Its popup sits flush against the anchor, because
+the host ignores `gapSpace`. The host draws the surface fill and corner radius,
+because its layered window has no per-pixel transparency. By default the host
+sets initial focus; `initialFocus: 'none'` leaves focus in place. `'last'`,
+`close`, and `reposition` report `unsupported`. Unclassified host dismissals are
+held for 250 ms so a trigger toggle can supersede them. Content events stop at
+the popup boundary, because Win32 bubbles them through the React tree. A Tab exit
+dismisses the outermost Tab-exiting presentation, and `continue` returns focus to
+the view anchor, because the host cannot continue Tab past it. The `win32`
+`FocusZone` adapter maps the modern props onto the host's `RCTFocusZone` and
+confirms target and default focus from focus events; `'first'` and `'last'`
+report `unsupported`. All Popover, Menu, MenuButton, and MenuItem stories pass on
+Win32.
+
+The October 19 Menu family amendments add the modern `tabNavigation` prop. `cycle`, the default, keeps the popup
+Tab order. `dismiss` and `continue` close the outermost Tab-exiting presentation in a popup ownership chain with
+`tab-forward` or `tab-backward`, before any view handles the key. `continue` then focuses the key view after the view
+anchor, or the anchor itself for Shift+Tab. Nested presentations anchored inside another modern popup are owned by
+its window and close with it. macOS Fabric and Paper pass 16 modern Callout cases, including both Tab modes. Windows
+routes Tab from a focused popup through a thread keyboard hook to the outermost Tab-exiting presentation and closes
+nested popups with their owner; all Menu, MenuButton, MenuItem, Popover, and Callout stories pass on Windows.
+
+After building macOS Storybook, run the reproducible Apple boundary probe:
+
+```sh
+yarn workspace @fluentui-react-native/native-core test:apple-integration
+```
+
+It compiles the build's Swift source list with complete concurrency checking and
+warnings as errors, verifies that the bridging mode cannot import `React`,
+syntax-checks its emitted Swift header, and checks both Paper extern registrations
+with strict unused-parameter and case-sensitive include diagnostics. Only the
+Swift importer's two known RNmacOS 0.81.9 header diagnostics (nullability
+completeness and property atomicity) are excluded; package Swift warnings and
+registration diagnostics are not suppressed.
+
+### Repository-local RNmacOS prerequisite patch
+
+The root resolution pins RNmacOS 0.81.9 with
+`.yarn/patches/react-native-macos-npm-0.81.9-aa583a0648.patch`. It reuses Paper's
+native AX role converter for Fabric, projects disabled/selected/expanded state
+onto the actual accessible element, removes the structural Fabric TextInput's
+extra Tab stop, and separates read-only single-line editing from disabled state
+on both renderers. Read-only editors remain selectable/focusable; disabled editors
+remain disabled. It also maps their `textbox` role through the existing converter.
+
+These fixes belong in RNmacOS, not in a MenuItem-specific native host or a
+JavaScript accessibility-value workaround. The patch is used by this repository's
+native hosts; publishing native-core or components does **not** install it in a
+consumer. Upstream or equivalent consuming-renderer integration remains a release
+gate. Remove the patch only after the same native cases pass against the upstream
+replacement. Checked-state actions, AX relationships, and VoiceOver speech are
+separate, still-unqualified semantics.
 
 Modern and legacy facades share the native registrations; Callout's facades
 also share a hook-free private host that applies native-safe positioning and

@@ -13,6 +13,11 @@ multiselect precedence and only warns in development. `hasChevron` supplies an
 indicator and hint; the surrounding menu must open the submenu. Use `under`
 secondary content for a description and `right` for compact metadata.
 
+Use `disabled disabledFocusable` when a disabled command must remain a keyboard
+focus stop. It is still unavailable and cannot activate. Do not set it on a
+section header; headers never become focus stops. The default is false for
+standalone rows.
+
 ## Scene root
 
 Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.
