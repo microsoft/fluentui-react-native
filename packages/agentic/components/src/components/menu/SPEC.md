@@ -167,17 +167,17 @@ Android are unsupported.
 The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapters qualify the
 native behavior in the Menu stories.
 
-| Requirement | Evidence                                                                                                                    |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------- |
-| MNU-001     | `menu.types.ts`, `useMenu.ts`, `menu.test.tsx`, `menu.types.test.ts`                                                        |
-| MNU-002     | `menuFamily.ts`, `menu.test.tsx`, `menu.stories.tsx`                                                                        |
-| MNU-003     | `useMenu.ts`, `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                       |
-| MNU-004     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                       |
-| MNU-005     | `menuNavigation.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                   |
-| MNU-006     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                       |
-| MNU-007     | `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                     |
-| MNU-008     | `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                                        |
-| MNU-009     | `menuDefaults.ts`, `menuDefaults.macos.ts`, `menu.test.tsx`, `menu.stories.tsx`                                             |
-| MNU-010     | `useMenu.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                                          |
-| MNU-011     | `menu.styles.ts`, `useMenuStyles.ts`, `menuPopup.tsx`, `menu.test.tsx`                                                      |
-| MNU-012     | `menuNative.ts`, `menuNative.macos.ts`, `menuNative.windows.ts`, `menuNative.win32.ts`, `menu.test.tsx`, `menu.stories.tsx` |
+| Requirement | Evidence                                                                              |
+| ----------- | ------------------------------------------------------------------------------------- |
+| MNU-001     | `menu.types.ts`, `useMenu.ts`, `menu.test.tsx`, `menu.types.test.ts`                  |
+| MNU-002     | `menuFamily.ts`, `menu.test.tsx`, `menu.stories.tsx`                                  |
+| MNU-003     | `useMenu.ts`, `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx` |
+| MNU-004     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                 |
+| MNU-005     | `menuNavigation.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`             |
+| MNU-006     | `menuFamily.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                 |
+| MNU-007     | `menuSubmenu.tsx`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`               |
+| MNU-008     | `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                                  |
+| MNU-009     | `menuDefaults.ts`, `menuDefaults.macos.ts`, `menu.test.tsx`, `menu.stories.tsx`       |
+| MNU-010     | `useMenu.ts`, `menuPopup.tsx`, `menu.test.tsx`, `menu.stories.tsx`                    |
+| MNU-011     | `menu.styles.ts`, `useMenuStyles.ts`, `menuPopup.tsx`, `menu.test.tsx`                |
+| MNU-012     | `menuFamily.ts`, `menu.test.tsx`, `menu.stories.tsx`                                  |

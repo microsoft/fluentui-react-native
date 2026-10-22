@@ -4,6 +4,7 @@ import { Pressable, Text, View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useFocusTarget, useSlot } from '@fluentui-react-native/framework-base';
 
+import { composeHandlers } from '../../common/eventHandlers';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Button } from '../button/button';
 import type { ButtonProps } from '../button/button.types';
@@ -12,14 +13,6 @@ import type { MenuProps, MenuState } from './menu.types';
 
 const defaultTriggerHint = 'Opens a menu';
 const hostPrimitives = new Set<unknown>([Pressable, Text, View]);
-
-export function composeHandlers<TArgs extends unknown[]>(...handlers: (((...args: TArgs) => void) | undefined)[]) {
-  return (...args: TArgs) => {
-    for (const handler of handlers) {
-      handler?.(...args);
-    }
-  };
-}
 
 /** Warns in development for menu children that cannot be rows: text and host primitives. */
 export function useMenuChildrenWarning(componentName: string, children: React.ReactNode) {

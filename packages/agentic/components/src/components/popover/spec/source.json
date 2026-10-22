@@ -138,15 +138,7 @@
     },
     {
       "id": "POP-009",
-      "evidence": [
-        "popoverNative.ts",
-        "popoverNative.macos.ts",
-        "popoverNative.windows.ts",
-        "popoverNative.win32.ts",
-        "usePopover.ts",
-        "popover.test.tsx",
-        "popover.stories.tsx"
-      ]
+      "evidence": ["usePopover.ts", "popover.test.tsx", "popover.stories.tsx"]
     }
   ]
 }

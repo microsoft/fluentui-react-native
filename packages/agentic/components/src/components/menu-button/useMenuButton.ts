@@ -4,6 +4,7 @@ import type { View } from 'react-native';
 import type { FocusIntent, FocusKeyboardEvent, FocusRequest, FocusTarget } from '@fluentui-react-native/framework-base';
 import { useSlot } from '@fluentui-react-native/framework-base';
 
+import { composeHandlers } from '../../common/eventHandlers';
 import { semanticIconSources } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { Icon } from '../../primitives/icon/icon';
@@ -11,7 +12,7 @@ import type { ButtonProps } from '../button/button.types';
 import { useButton_unstable } from '../button/useButton';
 import { MenuItemMenuContext } from '../menu-item/menuItemContext';
 import { useMenuController } from '../menu/menuFamily';
-import { composeHandlers, useMenuChildrenWarning } from '../menu/useMenu';
+import { useMenuChildrenWarning } from '../menu/useMenu';
 import type { MenuButtonProps, MenuButtonState } from './menu-button.types';
 
 const defaultHint = 'Opens a menu';

@@ -236,7 +236,7 @@ describe('Popover', () => {
 
   it('fails descriptively on hosts without a modern native route', () => {
     jest.isolateModules(() => {
-      jest.doMock('./popoverNative', () => ({ popoverNativeHost: undefined }));
+      jest.doMock('../../common/popupHost', () => ({ popupHost: undefined }));
       const { usePopover_unstable } = require('./usePopover') as typeof import('./usePopover');
       expect(() => usePopover_unstable({ trigger: {}, children: null })).toThrow(/macOS, Windows, and Win32/);
     });

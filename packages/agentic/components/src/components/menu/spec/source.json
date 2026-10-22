@@ -158,14 +158,7 @@
     },
     {
       "id": "MNU-012",
-      "evidence": [
-        "menuNative.ts",
-        "menuNative.macos.ts",
-        "menuNative.windows.ts",
-        "menuNative.win32.ts",
-        "menu.test.tsx",
-        "menu.stories.tsx"
-      ]
+      "evidence": ["menuFamily.ts", "menu.test.tsx", "menu.stories.tsx"]
     }
   ]
 }

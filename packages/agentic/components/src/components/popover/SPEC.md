@@ -144,14 +144,14 @@ iOS and Android are unsupported.
 The listed files exist for every requirement. macOS Fabric and Paper, Windows Fabric, and the Win32 adapter qualify the
 native behavior in the Popover stories.
 
-| Requirement | Evidence                                                                                                                                                       |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| POP-001     | `popover.types.ts`, `usePopover.ts`, `popover.test.tsx`, `popover.types.test.ts`                                                                               |
-| POP-002     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
-| POP-003     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
-| POP-004     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
-| POP-005     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
-| POP-006     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                                                                                                     |
-| POP-007     | `popover.styles.ts`, `usePopoverStyles.ts`, `popover.test.tsx`                                                                                                 |
-| POP-008     | `usePopover.ts`, `popover.test.tsx`                                                                                                                            |
-| POP-009     | `popoverNative.ts`, `popoverNative.macos.ts`, `popoverNative.windows.ts`, `popoverNative.win32.ts`, `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx` |
+| Requirement | Evidence                                                                         |
+| ----------- | -------------------------------------------------------------------------------- |
+| POP-001     | `popover.types.ts`, `usePopover.ts`, `popover.test.tsx`, `popover.types.test.ts` |
+| POP-002     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                       |
+| POP-003     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                       |
+| POP-004     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                       |
+| POP-005     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                       |
+| POP-006     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                       |
+| POP-007     | `popover.styles.ts`, `usePopoverStyles.ts`, `popover.test.tsx`                   |
+| POP-008     | `usePopover.ts`, `popover.test.tsx`                                              |
+| POP-009     | `usePopover.ts`, `popover.test.tsx`, `popover.stories.tsx`                       |

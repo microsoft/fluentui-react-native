@@ -3,8 +3,8 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import type { CalloutDismissReason, NativeViewTarget } from '@fluentui-react-native/native-core/macos';
 
+import type { PopupHost } from '../../common/popupHost.types';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
-import type { MenuNativeHost } from './menuNative.types';
 
 /** Submenus nest at most this many levels below the root menu. */
 export const maxSubmenuLevel = 2;
@@ -17,7 +17,7 @@ export type MenuEntry = 'first' | 'last' | 'surface' | 'none';
 
 /** Options and services every popup in one menu family shares. */
 export interface MenuFamily {
-  host: MenuNativeHost;
+  host: PopupHost;
   /** Closes the whole family because a row without a submenu ran. */
   closeFamily(): void;
   disabledFocusable: boolean;

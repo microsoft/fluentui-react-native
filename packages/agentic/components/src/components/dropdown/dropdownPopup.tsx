@@ -7,6 +7,8 @@ import { RootInputBoundary } from '@fluentui-react-native/design';
 import type { FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
 import type { CalloutDismissReason, CalloutHandle, CalloutPresentation, NativeViewTarget } from '@fluentui-react-native/native-core/macos';
 
+import { composeRefs } from '../../common/composeRefs';
+import { popupLayoutStyles } from '../../common/popupLayout';
 import type {
   ListboxItemOptionAction,
   ListboxItemOptionBinding,
@@ -17,31 +19,10 @@ import type { DropdownPresence } from './dropdownController';
 import type { DropdownOptions } from './dropdownOptions';
 import type { DropdownListboxProps } from './dropdown.types';
 
-// Room for native focus rings, which draw outside an option's bounds.
-const focusRingOutset = 4;
-
-// The widest layout the popup may take, so the list is not capped at the width of the Dropdown's container.
-const popupLayoutWidth = 4096;
-
 // The option area's height cap, about eight medium options.
 export const dropdownListMaxHeight = 320;
 
 const styles = StyleSheet.create({
-  host: {
-    height: 0,
-    left: 0,
-    position: 'absolute',
-    top: 0,
-    width: popupLayoutWidth,
-  },
-  // Yoga measures a scrolling row's children at their max-content width, so the list takes its widest option's natural
-  // width instead of filling the window; options then stretch to that width.
-  fit: {
-    flexDirection: 'row',
-    margin: -focusRingOutset,
-    overflow: 'scroll',
-    padding: focusRingOutset,
-  },
   scroll: {
     flexGrow: 1,
     maxHeight: dropdownListMaxHeight,
@@ -83,32 +64,6 @@ export interface DropdownPopupProps extends DropdownPresence {
   surfaceStyle?: StyleProp<ViewStyle>;
   gap?: number;
   children: React.ReactNode;
-}
-
-function composeRefs<T>(...refs: (React.Ref<T> | undefined)[]): React.RefCallback<T> {
-  return (instance: T | null) => {
-    const cleanups = refs.map((ref) => {
-      if (typeof ref === 'function') {
-        return ref(instance);
-      }
-      if (ref) {
-        (ref as React.RefObject<T | null>).current = instance;
-      }
-      return undefined;
-    });
-    return () => {
-      cleanups.forEach((cleanup, index) => {
-        const ref = refs[index];
-        if (typeof cleanup === 'function') {
-          cleanup();
-        } else if (typeof ref === 'function') {
-          ref(null);
-        } else if (ref) {
-          (ref as React.RefObject<T | null>).current = null;
-        }
-      });
-    };
-  };
 }
 
 type Measurable = { measureLayout(relativeTo: object, onSuccess: (x: number, y: number, width: number, height: number) => void): void };
@@ -340,10 +295,11 @@ export function DropdownPopup(props: DropdownPopupProps) {
   }, []);
   const overflows = extent.viewport > 0 && extent.content > extent.viewport + 0.5;
 
-  const { Callout, FocusZone } = host;
+  // Dropdown focuses its entry option itself.
+  const { ExplicitFocusCallout: Callout, FocusZone } = host;
   return (
     <ListboxItemOptionContext.Provider value={binding}>
-      <View pointerEvents="box-none" style={styles.host}>
+      <View pointerEvents="box-none" style={popupLayoutStyles.host}>
         <Callout
           ref={callout}
           open={open}
@@ -356,7 +312,7 @@ export function DropdownPopup(props: DropdownPopupProps) {
           onDismissed={onDismissed}
         >
           {floorWidth !== undefined && <View pointerEvents="none" style={{ height: 0, width: floorWidth }} />}
-          <RootInputBoundary style={styles.fit}>
+          <RootInputBoundary style={popupLayoutStyles.fit}>
             <ScrollView
               ref={scroll}
               style={styles.scroll}

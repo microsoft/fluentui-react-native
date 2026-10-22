@@ -12,12 +12,12 @@ import type {
   FocusTarget,
 } from '@fluentui-react-native/framework-base';
 
+import { composeHandlers } from '../../common/eventHandlers';
 import { semanticIconSources } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
-import { getInputResolvedStyles } from '../input/input.styles';
-import type { InputVisualState } from '../input/input.types';
+import { getInputResolvedStyles, getInputVisualState } from '../input/input.styles';
 import type { ListboxItemOptionAction } from '../listbox-item/listboxItemOptionContext';
 import { useDropdownController } from './dropdownController';
 import { collectDropdownOptions, getDisplayedOptions } from './dropdownOptions';
@@ -31,39 +31,6 @@ const unmounted: FocusRequest = { status: 'not-mounted', cancel: () => undefined
 const noSelection: readonly string[] = [];
 
 type TriggerInstance = React.ComponentRef<typeof View>;
-
-function composeHandlers<TArgs extends unknown[]>(...handlers: (((...args: TArgs) => void) | undefined)[]) {
-  return (...args: TArgs) => {
-    for (const handler of handlers) {
-      handler?.(...args);
-    }
-  };
-}
-
-function getVisualState(state: {
-  disabled: boolean;
-  error: boolean;
-  focused: boolean;
-  pressed: boolean;
-  hovered: boolean;
-}): InputVisualState {
-  if (state.disabled) {
-    return 'disabled';
-  }
-  if (state.error) {
-    return 'error';
-  }
-  if (state.focused) {
-    return 'focused';
-  }
-  if (state.pressed) {
-    return 'pressed';
-  }
-  if (state.hovered) {
-    return 'hovered';
-  }
-  return 'rest';
-}
 
 function sameSelection(a: readonly string[], b: readonly string[]): boolean {
   return a.length === b.length && a.every((value, index) => value === b[index]);
@@ -313,7 +280,14 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
   const modality = useRootInputModality(focused && !disabled);
   const focusVisible = focused && !disabled && modality === 'keyboard';
   const { FocusRing } = useFocusVisuals({ focused: focusVisible, useSystemFocusRing: false, alwaysVisible: true });
-  const visualState = getVisualState({ disabled, error, focused, pressed: pressableState.pressed, hovered: pressableState.hovered });
+  const visualState = getInputVisualState({
+    disabled,
+    error,
+    readOnly: false,
+    focused,
+    pressed: pressableState.pressed,
+    hovered: pressableState.hovered,
+  });
   const resolved = getInputResolvedStyles({ ...themeState, size, variant, visualState, focusVisible });
 
   const root = useSlot(View, rootProps);

@@ -2,6 +2,7 @@
 import * as React from 'react';
 import type { View } from 'react-native';
 
+import { composeRefs } from '../../common/composeRefs';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
 import { renderMenuItem_unstable } from '../menu-item/renderMenuItem';
 import { useMenuItem_unstable } from '../menu-item/useMenuItem';
@@ -23,29 +24,7 @@ export function MenuSubmenuRow(props: MenuItemProps) {
   }
   const anchor = family.host.useNativeViewTarget();
   const { ref: callerRef } = props;
-  const rowRef = React.useCallback(
-    (instance: RowInstance | null) => {
-      const detach = anchor.ref(instance);
-      if (typeof callerRef === 'function') {
-        const cleanup = callerRef(instance);
-        return () => {
-          if (typeof detach === 'function') detach();
-          if (typeof cleanup === 'function') cleanup();
-          else callerRef(null);
-        };
-      }
-      if (callerRef) {
-        (callerRef as React.RefObject<RowInstance | null>).current = instance;
-      }
-      return () => {
-        if (typeof detach === 'function') detach();
-        if (callerRef && typeof callerRef !== 'function') {
-          (callerRef as React.RefObject<RowInstance | null>).current = null;
-        }
-      };
-    },
-    [anchor, callerRef],
-  );
+  const rowRef = React.useMemo(() => composeRefs<RowInstance>(anchor.ref, callerRef), [anchor, callerRef]);
 
   const state = useMenuItem_unstable({ ...props, ref: rowRef });
   useMenuItemStyles_unstable(state);

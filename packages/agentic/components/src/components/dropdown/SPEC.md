@@ -228,17 +228,17 @@ The listed files exist for every requirement. macOS Fabric and Paper, Windows
 Fabric, and the Win32 adapters qualify the native behavior in the Dropdown
 stories.
 
-| Requirement | Evidence                                                                                                                                            |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DRP-001     | `dropdown.types.ts`, `useDropdown.ts`, `dropdown.test.tsx`, `dropdown.types.test.ts`                                                                |
-| DRP-002     | `dropdown.styles.ts`, `useDropdownStyles.ts`, `renderDropdown.tsx`, `dropdown.test.tsx`                                                             |
-| DRP-003     | `useDropdown.ts`, `dropdown.styles.ts`, `renderDropdown.tsx`, `dropdown.test.tsx`                                                                   |
-| DRP-004     | `dropdownOptions.ts`, `renderDropdown.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                             |
-| DRP-005     | `dropdownOptions.ts`, `dropdownController.ts`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                          |
-| DRP-006     | `dropdownController.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                           |
-| DRP-007     | `dropdownController.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                           |
-| DRP-008     | `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                                                    |
-| DRP-009     | `dropdownController.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                           |
-| DRP-010     | `dropdown.styles.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                              |
-| DRP-011     | `useDropdown.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                                                                  |
-| DRP-012     | `dropdownNative.ts`, `dropdownNative.macos.ts`, `dropdownNative.windows.ts`, `dropdownNative.win32.ts`, `dropdown.test.tsx`, `dropdown.stories.tsx` |
+| Requirement | Evidence                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------ |
+| DRP-001     | `dropdown.types.ts`, `useDropdown.ts`, `dropdown.test.tsx`, `dropdown.types.test.ts`       |
+| DRP-002     | `dropdown.styles.ts`, `useDropdownStyles.ts`, `renderDropdown.tsx`, `dropdown.test.tsx`    |
+| DRP-003     | `useDropdown.ts`, `dropdown.styles.ts`, `renderDropdown.tsx`, `dropdown.test.tsx`          |
+| DRP-004     | `dropdownOptions.ts`, `renderDropdown.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`    |
+| DRP-005     | `dropdownOptions.ts`, `dropdownController.ts`, `dropdown.test.tsx`, `dropdown.stories.tsx` |
+| DRP-006     | `dropdownController.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`  |
+| DRP-007     | `dropdownController.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`  |
+| DRP-008     | `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`                           |
+| DRP-009     | `dropdownController.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`  |
+| DRP-010     | `dropdown.styles.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`     |
+| DRP-011     | `useDropdown.ts`, `dropdownPopup.tsx`, `dropdown.test.tsx`, `dropdown.stories.tsx`         |
+| DRP-012     | `dropdownController.ts`, `dropdown.test.tsx`, `dropdown.stories.tsx`                       |

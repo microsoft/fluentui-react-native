@@ -162,14 +162,7 @@
     },
     {
       "id": "DRP-012",
-      "evidence": [
-        "dropdownNative.ts",
-        "dropdownNative.macos.ts",
-        "dropdownNative.windows.ts",
-        "dropdownNative.win32.ts",
-        "dropdown.test.tsx",
-        "dropdown.stories.tsx"
-      ]
+      "evidence": ["dropdownController.ts", "dropdown.test.tsx", "dropdown.stories.tsx"]
     }
   ]
 }

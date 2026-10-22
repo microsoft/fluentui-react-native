@@ -338,6 +338,36 @@ export type InputResolvedStyles = {
   placeholderTextColor: ColorValue;
 };
 
+/** Resolves Input's visual state from its interaction state, in the precedence its style levels apply. */
+export function getInputVisualState(state: {
+  disabled: boolean;
+  error: boolean;
+  readOnly: boolean;
+  focused: boolean;
+  pressed: boolean;
+  hovered: boolean;
+}): InputVisualState {
+  if (state.disabled) {
+    return 'disabled';
+  }
+  if (state.error) {
+    return 'error';
+  }
+  if (state.readOnly) {
+    return 'readOnly';
+  }
+  if (state.focused) {
+    return 'focused';
+  }
+  if (state.pressed) {
+    return 'pressed';
+  }
+  if (state.hovered) {
+    return 'hovered';
+  }
+  return 'rest';
+}
+
 export function getInputResolvedStyles(
   state: ThemeState & { tokens: FlexTokens; size: InputSize; variant: InputVariant; visualState: InputVisualState; focusVisible?: boolean },
 ): InputResolvedStyles {

@@ -14,6 +14,7 @@ import { resolveAccessibilityAction, useFocusablePressable, useOptionalSlot, use
 import type { FocusablePressableProps, FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { composeRefs } from '../../common/composeRefs';
 import { semanticIconSources } from '../../common/iconSources';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
@@ -173,17 +174,8 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const { focusTarget, focusTargetRef } = focusBinding;
   const nativeTargetRef = nativeTarget?.ref;
   const hostInstance = React.useRef<object | null>(null);
-  const targetRef = React.useCallback(
-    (instance: object | null) => {
-      hostInstance.current = instance;
-      const detachFocus = focusTargetRef(instance);
-      const detachNative = nativeTargetRef?.(instance);
-      return () => {
-        hostInstance.current = null;
-        if (typeof detachFocus === 'function') detachFocus();
-        if (typeof detachNative === 'function') detachNative();
-      };
-    },
+  const targetRef = React.useMemo(
+    () => composeRefs<object>(hostInstance, focusTargetRef, nativeTargetRef),
     [focusTargetRef, nativeTargetRef],
   );
 

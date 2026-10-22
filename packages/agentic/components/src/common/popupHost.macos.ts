@@ -1,9 +1,10 @@
 import { Callout, FocusZone, useNativeViewTarget } from '@fluentui-react-native/native-core/macos';
 
-import type { MenuNativeHost } from './menuNative.types';
+import type { PopupHost } from './popupHost.types';
 
-export const menuNativeHost: MenuNativeHost | undefined = {
+export const popupHost: PopupHost | undefined = {
   Callout,
+  ExplicitFocusCallout: Callout,
   FocusZone,
   useNativeViewTarget,
   restoresOwnerFocus: false,

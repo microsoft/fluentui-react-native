@@ -7,7 +7,7 @@ import { act, fireEvent, screen } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import { ListboxItem } from '../listbox-item/listbox-item';
 import { Dropdown } from './dropdown';
-import * as dropdownNative from './dropdownNative';
+import * as popupHostModule from '../../common/popupHost';
 import { collectDropdownOptions, getDisplayedOptions } from './dropdownOptions';
 import { dropdownListMaxHeight } from './dropdownPopup';
 import type { DropdownProps } from './dropdown.types';
@@ -372,7 +372,7 @@ describe('Dropdown', () => {
   });
 
   it('throws a descriptive error on hosts without a popup route', async () => {
-    const replaced = jest.replaceProperty(dropdownNative, 'dropdownNativeHost', undefined);
+    const replaced = jest.replaceProperty(popupHostModule, 'popupHost', undefined);
     const error = jest.spyOn(console, 'error').mockImplementation(() => undefined);
     try {
       await expect(render(<Scene />)).rejects.toThrow("Dropdown requires native-core's Callout and FocusZone");

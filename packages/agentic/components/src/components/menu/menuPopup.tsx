@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { I18nManager, StyleSheet, View } from 'react-native';
+import { I18nManager, View } from 'react-native';
 import type { NativeSyntheticEvent, StyleProp, TargetedEvent, ViewStyle } from 'react-native';
 
 import { RootInputBoundary } from '@fluentui-react-native/design';
@@ -13,6 +13,8 @@ import type {
   NativeViewTarget,
 } from '@fluentui-react-native/native-core/macos';
 
+import { composeRefs } from '../../common/composeRefs';
+import { popupLayoutStyles } from '../../common/popupLayout';
 import type { MenuItemMenuBinding, MenuItemMenuRow } from '../menu-item/menuItemContext';
 import { MenuItemMenuContext } from '../menu-item/menuItemContext';
 import type { MenuEntry, MenuFamily, MenuLevel, MenuOpenChild } from './menuContext';
@@ -22,31 +24,6 @@ import type { MenuSurfaceProps } from './menu.types';
 
 // The surface handles these while it holds focus after a pointer open; declaring them stops native handling.
 const surfaceKeys = [{ key: 'ArrowDown' }, { key: 'ArrowUp' }, { key: 'Home' }, { key: 'End' }];
-
-// Room for native focus rings, which draw outside a row's bounds.
-const focusRingOutset = 4;
-
-// The widest layout a popup may take. A submenu's Callout lies inside its parent menu's layout, which would otherwise
-// cap the submenu at the parent's width.
-const popupLayoutWidth = 4096;
-
-const styles = StyleSheet.create({
-  host: {
-    height: 0,
-    left: 0,
-    position: 'absolute',
-    top: 0,
-    width: popupLayoutWidth,
-  },
-  // Yoga measures a scrolling row's children at their max-content width, so the zone takes its widest row's natural
-  // width instead of filling the window; rows then stretch to that width so trailing visuals align.
-  fit: {
-    flexDirection: 'row',
-    margin: -focusRingOutset,
-    overflow: 'scroll',
-    padding: focusRingOutset,
-  },
-});
 
 /** The family options a root popup creates; submenu popups inherit them. */
 export type MenuFamilyOptions = Omit<MenuFamily, 'rtl' | 'surfaceStyle' | 'gap'>;
@@ -75,32 +52,6 @@ export interface MenuPopupProps {
   surfaceStyle?: StyleProp<ViewStyle>;
   gap?: number;
   children: React.ReactNode;
-}
-
-function composeRefs<T>(...refs: (React.Ref<T> | undefined)[]): React.RefCallback<T> {
-  return (instance: T | null) => {
-    const cleanups = refs.map((ref) => {
-      if (typeof ref === 'function') {
-        return ref(instance);
-      }
-      if (ref) {
-        (ref as React.RefObject<T | null>).current = instance;
-      }
-      return undefined;
-    });
-    return () => {
-      cleanups.forEach((cleanup, index) => {
-        const ref = refs[index];
-        if (typeof cleanup === 'function') {
-          cleanup();
-        } else if (typeof ref === 'function') {
-          ref(null);
-        } else if (ref) {
-          (ref as React.RefObject<T | null>).current = null;
-        }
-      });
-    };
-  };
 }
 
 /**
@@ -454,12 +405,13 @@ export function MenuPopup(props: MenuPopupProps) {
     },
   };
 
-  const { Callout, FocusZone } = host;
+  // Menu requests every entry focus itself, so a submenu that hover opens leaves focus in its owner popup.
+  const { ExplicitFocusCallout: Callout, FocusZone } = host;
   return (
     <MenuFamilyContext.Provider value={family}>
       <MenuLevelContext.Provider value={levelApi}>
         <MenuItemMenuContext.Provider value={binding}>
-          <View pointerEvents="box-none" style={styles.host}>
+          <View pointerEvents="box-none" style={popupLayoutStyles.host}>
             <Callout
               ref={callout}
               open={open}
@@ -471,7 +423,7 @@ export function MenuPopup(props: MenuPopupProps) {
               onReady={onReady}
               onDismissed={onDismissed}
             >
-              <RootInputBoundary style={styles.fit}>
+              <RootInputBoundary style={popupLayoutStyles.fit}>
                 <FocusZone commandsRef={zone} direction="vertical" arrowBoundary="wrap">
                   {children}
                 </FocusZone>

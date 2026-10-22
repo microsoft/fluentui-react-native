@@ -5,11 +5,12 @@ import type { TextInputProps } from 'react-native';
 import { useRootInputModality, useThemeState } from '@fluentui-react-native/design';
 import { useControllableValue, useFocusTarget, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
-import { Icon } from '../../primitives/icon/icon';
+import { composeHandlers } from '../../common/eventHandlers';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
+import { Icon } from '../../primitives/icon/icon';
 
-import { getInputResolvedStyles } from './input.styles';
-import type { InputAccessibilityState, InputProps, InputState, InputVisualState } from './input.types';
+import { getInputResolvedStyles, getInputVisualState } from './input.styles';
+import type { InputAccessibilityState, InputProps, InputState } from './input.types';
 
 type InteractiveTextInputProps = TextInputProps & {
   onHoverIn?: (...args: any[]) => void;
@@ -17,38 +18,6 @@ type InteractiveTextInputProps = TextInputProps & {
   onPressIn?: (...args: any[]) => void;
   onPressOut?: (...args: any[]) => void;
 };
-
-function mergeHandlers<TArgs extends unknown[]>(...handlers: (((...args: TArgs) => void) | undefined)[]) {
-  return (...args: TArgs) => {
-    for (const handler of handlers) {
-      handler?.(...args);
-    }
-  };
-}
-
-function getVisualState(
-  props: Pick<InputState, 'disabled' | 'error' | 'readOnly'> & { focused: boolean; hovered: boolean; pressed: boolean },
-): InputVisualState {
-  if (props.disabled) {
-    return 'disabled';
-  }
-  if (props.error) {
-    return 'error';
-  }
-  if (props.readOnly) {
-    return 'readOnly';
-  }
-  if (props.focused) {
-    return 'focused';
-  }
-  if (props.pressed) {
-    return 'pressed';
-  }
-  if (props.hovered) {
-    return 'hovered';
-  }
-  return 'rest';
-}
 
 export function useInput_unstable(props: InputProps): InputState {
   const {
@@ -110,7 +79,7 @@ export function useInput_unstable(props: InputProps): InputState {
     }
   }, [iconEnd1Prop, iconEnd2Prop]);
 
-  const visualState = getVisualState({ disabled, error, focused, hovered, pressed, readOnly });
+  const visualState = getInputVisualState({ disabled, error, focused, hovered, pressed, readOnly });
   const resolvedStyles = getInputResolvedStyles({ ...themeState, size, variant, visualState, focusVisible });
 
   const handleChangeText = React.useCallback(
@@ -180,13 +149,13 @@ export function useInput_unstable(props: InputProps): InputState {
       focusable: resolvedFocusable,
       enableFocusRing: false,
       ref: focus.focusTargetRef,
-      onBlur: mergeHandlers(slotProps.onBlur, onBlur, handleBlur),
-      onChangeText: mergeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),
-      onFocus: mergeHandlers(slotProps.onFocus, onFocus, focus.onFocus),
-      onHoverIn: mergeHandlers(slotProps.onHoverIn, onHoverIn, handleHoverIn),
-      onHoverOut: mergeHandlers(slotProps.onHoverOut, onHoverOut, handleHoverOut),
-      onPressIn: mergeHandlers(slotProps.onPressIn, onPressIn, handlePressIn),
-      onPressOut: mergeHandlers(slotProps.onPressOut, onPressOut, handlePressOut),
+      onBlur: composeHandlers(slotProps.onBlur, onBlur, handleBlur),
+      onChangeText: composeHandlers(slotProps.onChangeText, onChangeText, handleChangeText),
+      onFocus: composeHandlers(slotProps.onFocus, onFocus, focus.onFocus),
+      onHoverIn: composeHandlers(slotProps.onHoverIn, onHoverIn, handleHoverIn),
+      onHoverOut: composeHandlers(slotProps.onHoverOut, onHoverOut, handleHoverOut),
+      onPressIn: composeHandlers(slotProps.onPressIn, onPressIn, handlePressIn),
+      onPressOut: composeHandlers(slotProps.onPressOut, onPressOut, handlePressOut),
       placeholder: placeholder ?? slotProps.placeholder,
       placeholderTextColor: resolvedStyles.placeholderTextColor,
       style: [resolvedStyles.textInput, slotProps.style],

@@ -6,7 +6,7 @@ import type { RootInputBoundary } from '@fluentui-react-native/design';
 import type { ComponentProps, ComponentState, OwnedRootProps, PropsWithRefOf, Slot } from '@fluentui-react-native/framework-base';
 
 import type { Button } from '../button/button';
-import type { PopoverNativeHost } from './popoverNative.types';
+import type { PopupHost } from '../../common/popupHost.types';
 
 /** The preferred side of the trigger. `start` and `end` follow layout direction. */
 export type PopoverPlacement = 'top' | 'bottom' | 'start' | 'end';
@@ -37,7 +37,7 @@ export type PopoverSlots = {
  */
 export type PopoverSurfaceProps = Omit<PropsWithRefOf<typeof View>, 'children' | 'collapsable'>;
 
-type PopoverCallout = PopoverNativeHost['Callout'];
+type PopoverCallout = PopupHost['Callout'];
 type PopoverCalloutProps = React.ComponentProps<PopoverCallout>;
 
 type PopoverStateSlots = PopoverSlots & {

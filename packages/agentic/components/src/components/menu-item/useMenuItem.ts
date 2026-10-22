@@ -6,6 +6,7 @@ import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react
 import type { FocusablePressableProps, FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
+import { isKeyboardPress } from '../../common/eventHandlers';
 import { semanticIconSources } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
@@ -21,11 +22,6 @@ const defaultCheckmark = { fontSource: semanticIconSources.checkmark };
 
 // Keys a Menu handles for its rows; declaring them stops the native view from also handling them.
 const menuRowKeys = [{ key: 'ArrowLeft' }, { key: 'ArrowRight' }, { key: 'Home' }, { key: 'End' }];
-
-function isKeyboardPress(event: GestureResponderEvent): boolean {
-  const native: object | undefined = event?.nativeEvent;
-  return native != null && ('key' in native || 'code' in native);
-}
 
 export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   const {

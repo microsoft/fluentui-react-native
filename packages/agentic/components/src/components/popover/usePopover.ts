@@ -10,36 +10,23 @@ import type {
   CalloutReadyEvent,
 } from '@fluentui-react-native/native-core/macos';
 
+import { composeHandlers } from '../../common/eventHandlers';
+import { popupHost } from '../../common/popupHost';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
+import { usePopupPresence } from '../../common/usePopupPresence';
 import { Button } from '../button/button';
 import type { ButtonProps } from '../button/button.types';
 import { PopoverSurfaceContext } from './popoverContext';
-import { popoverNativeHost } from './popoverNative';
 import type { PopoverOpenChangeReason, PopoverProps, PopoverState } from './popover.types';
 
 const defaultTriggerHint = 'Opens a popover';
-
-function composeHandlers<TArgs extends unknown[]>(...handlers: (((...args: TArgs) => void) | undefined)[]) {
-  return (...args: TArgs) => {
-    for (const handler of handlers) {
-      handler?.(...args);
-    }
-  };
-}
-
-/** Requested presence and whether native dismissal latched the current request closed. */
-interface PresenceLifetime {
-  requested: boolean;
-  rearm: number;
-  latched: boolean;
-}
 
 /**
  * Resolves Popover state: requested and actual presence, the trigger, the native popup, entry focus, and focus return.
  * Native presence is authoritative; a native dismissal latches a controlled request closed until it is rearmed.
  */
 export function usePopover_unstable(props: PopoverProps): PopoverState {
-  const host = popoverNativeHost;
+  const host = popupHost;
   if (!host) {
     throw new Error("Popover requires native-core's Callout, available on macOS, Windows, and Win32.");
   }
@@ -73,29 +60,11 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     warning: 'Popover: name the surface with an accessibilityLabel.',
   });
 
-  const controlled = openProp !== undefined;
-  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
-  const requested = controlled ? openProp : uncontrolledOpen;
-  const [rearm, setRearm] = React.useState(0);
-  const [lifetime, setLifetime] = React.useState<PresenceLifetime>(() => ({ requested, rearm, latched: false }));
-  // A new request or an explicit rearm clears the latch in the same render that presents it.
-  const latched = lifetime.requested === requested && lifetime.rearm === rearm && lifetime.latched;
-  if (lifetime.requested !== requested || lifetime.rearm !== rearm) {
-    setLifetime({ requested, rearm, latched: false });
-  }
-  const presented = requested && !latched;
-
-  const latest = React.useRef({ controlled, onOpenChange, presented, requested });
-  React.useLayoutEffect(() => {
-    latest.current = { controlled, onOpenChange, presented, requested };
+  const { latchDismissed, latest, presentationKey, presented, rearm, requestOpen, requested } = usePopupPresence({
+    open: openProp,
+    defaultOpen,
+    onOpenChange,
   });
-
-  const requestOpen = React.useCallback((next: boolean, reason: PopoverOpenChangeReason) => {
-    if (!latest.current.controlled) {
-      setUncontrolledOpen(next);
-    }
-    latest.current.onOpenChange?.(next, { reason });
-  }, []);
 
   const anchor = host.useNativeViewTarget();
   const surfaceTarget = host.useNativeViewTarget();
@@ -149,16 +118,14 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
         return;
       }
       closeCause.current = 'dismiss';
-      if (latest.current.controlled) {
-        setLifetime((current) => ({ ...current, latched: current.requested }));
-      }
+      latchDismissed();
       // Escape reaches only a focused popup, so the trigger regains focus. Other causes leave focus where it is.
       if (reason === 'escape') {
         setRestore((value) => value + 1);
       }
       requestOpen(false, 'dismiss');
     },
-    [requestOpen],
+    [latchDismissed, latest, requestOpen],
   );
 
   // A caller-driven close of a presentation that held focus returns focus to the trigger.
@@ -196,16 +163,16 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
         closeCause.current = 'trigger';
       } else if (latest.current.requested) {
         // The request is still open but natively dismissed; an explicit expansion rearms it.
-        setRearm((value) => value + 1);
+        rearm();
       }
       requestOpen(next, 'trigger');
     },
-    [requestOpen],
+    [latest, rearm, requestOpen],
   );
 
   const handlePressIn = React.useCallback(() => {
     pressStartedOpen.current = latest.current.presented;
-  }, []);
+  }, [latest]);
   const handlePress = React.useCallback(() => {
     // Light dismissal can close the popup between press-in and press; a press that began open never reopens it.
     const wasOpen = pressStartedOpen.current ?? latest.current.presented;
@@ -216,10 +183,10 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
     }
     if (latest.current.requested) {
       // The request is still open but natively dismissed; an explicit trigger press rearms it.
-      setRearm((value) => value + 1);
+      rearm();
     }
     requestOpen(true, 'trigger');
-  }, [requestOpen, setExpanded]);
+  }, [latest, rearm, requestOpen, setExpanded]);
 
   const root = useSlot(View, rootProps);
   const trigger = useSlot(Button, triggerProp, {
@@ -241,7 +208,7 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
   const callout = useSlot(host.Callout, {
     ref: calloutHandle,
     open: requested,
-    presentationKey: String(rearm),
+    presentationKey,
     anchor: { kind: 'view', target: anchor.target },
     onReady: handleReady,
     onDismissed: handleDismissed,
