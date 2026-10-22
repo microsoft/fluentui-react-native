@@ -13,6 +13,18 @@
     "storybook-desktop": "./config/cli.cjs",
     "storybook-server": "./config/server-cli.cjs"
   },
+  "files": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "README.md",
+    "config/",
+    "jest.config.cjs",
+    "lib/",
+    "package.json",
+    "references/",
+    "src/",
+    "tsconfig.json"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",

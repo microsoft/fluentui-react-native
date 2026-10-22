@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "case_id": "desktop-package-review-readonly",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "Review a proposed change to the desktop-test lifecycle without editing files. Report findings and which validation was not run.",
+  "expected": {
+    "skills": ["maintain-desktop-testing"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": ["packages/agentic/desktop-test/AGENTS.md", "packages/agentic/desktop-test/references/contributing.md"],
+    "forbidden_actions": ["edit-files", "run-mutating-commands"]
+  },
+  "assertions": [
+    {
+      "id": "read-only-review",
+      "description": "Reviews the code and tests without implementing, formatting in write mode, building, launching, or creating a changeset.",
+      "rule_ids": [],
+      "source_refs": [".github/skills/maintain-desktop-testing/SKILL.md"]
+    },
+    {
+      "id": "validation-status",
+      "description": "Reports checks that were not run instead of claiming validation.",
+      "rule_ids": ["R-VALID-002"],
+      "source_refs": ["references/agents/repository/development.md"]
+    }
+  ]
+}

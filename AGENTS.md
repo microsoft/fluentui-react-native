@@ -6,8 +6,9 @@ routes each task to the workflow and references it needs; load only what the tas
 
 ## How guidance is organized
 
-- **`AGENTS.md` files** hold safeguards and local invariants. Copilot CLI loads this file plus the `AGENTS.md` in the
-  working directory and each ancestor. From the repository root, read the scoped files below when a task touches them.
+- **`AGENTS.md` files** hold safeguards and local invariants. Copilot CLI loads applicable files from the repository,
+  working directory, ancestors, and directories in the path of files being worked on. Read the scoped entries below
+  when a task touches them.
 - **Skills** in [`.github/skills`](.github/skills) define task workflows.
 - **[Shared references](references/agents/README.md)** in `references/agents/` hold reusable recipes and repository
   knowledge, indexed by task.
@@ -51,26 +52,33 @@ Classify the change with the [classification guide](references/agents/components
 | Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                         |
 | Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
 | Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
-| Storybook app, Metro, CocoaPods, or desktop native toolchain                        | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
+| Desktop test configuration, execution, reporting, helpers, or CI                    | [desktop-testing](.github/skills/desktop-testing/SKILL.md)                                           |
+| Change or review the desktop testing package source                                 | [maintain-desktop-testing](.github/skills/maintain-desktop-testing/SKILL.md)                         |
+| Storybook app catalog, Metro, CocoaPods, or native builds                           | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
 | Dependency vulnerability remediation                                                | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                                   |
 
 Other repository work starts from the [reference index](references/agents/README.md): architecture, commands and
 validation, TypeScript, release, design tokens, focus, and native guidance.
+For package-owned knowledge, follow the
+[package guidance standard](references/agents/repository/package-guidance.md).
 
 ## Scoped instructions
 
-| Path                                                                                             | Scope                                                  |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| [packages/agentic/components](packages/agentic/components/AGENTS.md)                             | Agentic package invariants, contracts, and story tests |
-| [packages/agentic/components/src](packages/agentic/components/src/AGENTS.md)                     | Source boundaries and extraction                       |
-| [.../src/components](packages/agentic/components/src/components/AGENTS.md)                       | Higher-order components and the focus visual policy    |
-| [.../src/primitives](packages/agentic/components/src/primitives/AGENTS.md)                       | Public primitives                                      |
-| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                     | Desktop WebDriver driver                               |
-| [packages/framework-base](packages/framework-base/AGENTS.md)                                     | Shared component patterns                              |
-| [packages/framework-base/src/accessibility](packages/framework-base/src/accessibility/AGENTS.md) | Accessibility helpers and native action qualification  |
-| [packages/framework/framework](packages/framework/framework/AGENTS.md)                           | v1 framework package                                   |
-| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)       | v0 framework package                                   |
-| [apps/storybook](apps/storybook/AGENTS.md)                                                       | Storybook app, native workflows, and diagnostics       |
+| Path                                                                                               | Scope                                                  |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [packages/agentic/components](packages/agentic/components/AGENTS.md)                               | Agentic package invariants, contracts, and story tests |
+| [packages/agentic/components/src](packages/agentic/components/src/AGENTS.md)                       | Source boundaries and extraction                       |
+| [.../src/components](packages/agentic/components/src/components/AGENTS.md)                         | Higher-order components and the focus visual policy    |
+| [.../src/primitives](packages/agentic/components/src/primitives/AGENTS.md)                         | Public primitives                                      |
+| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                       | Desktop WebDriver driver                               |
+| [packages/agentic/desktop-test](packages/agentic/desktop-test/AGENTS.md)                           | Application-neutral desktop test harness               |
+| [packages/agentic/storybook-desktop](packages/agentic/storybook-desktop/AGENTS.md)                 | Storybook desktop integration                          |
+| [packages/agentic/storybook-desktop-runtime](packages/agentic/storybook-desktop-runtime/AGENTS.md) | On-device Storybook runtime                            |
+| [packages/framework-base](packages/framework-base/AGENTS.md)                                       | Shared component patterns                              |
+| [packages/framework-base/src/accessibility](packages/framework-base/src/accessibility/AGENTS.md)   | Accessibility helpers and native action qualification  |
+| [packages/framework/framework](packages/framework/framework/AGENTS.md)                             | v1 framework package                                   |
+| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)         | v0 framework package                                   |
+| [apps/storybook](apps/storybook/AGENTS.md)                                                         | Storybook app, native workflows, and diagnostics       |
 
 ## Quick facts
 

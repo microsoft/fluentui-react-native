@@ -1,3 +1,10 @@
+---
+id: desktop-driver.security
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Security model
 
 Desktop Driver controls a real interactive desktop. Its V1 security boundary is

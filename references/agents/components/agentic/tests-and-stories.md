@@ -59,9 +59,12 @@ Primitive runtime tests should cover every renderer or source branch and verify 
 accessibility, and test props.
 
 Native motion stories compare repeated element screenshots and honor the runtime reduced-motion preference.
-Use `browser.isElementDisplayed(elementId)` and `browser.takeElementScreenshot(elementId)` for native protocol operations;
-WebdriverIO's DOM-oriented `element.isDisplayed()` tries unsupported JavaScript execution. Skip pixel checks explicitly
-when the driver does not provide element screenshots.
+With the desktop driver's installed WebdriverIO binding, use native
+`element.isDisplayed()` and `element.isFocused()` commands. An unbound WDIO
+client may still try unsupported DOM JavaScript. Use
+`browser.takeElementScreenshot(elementId)` for native capture and skip pixel
+checks explicitly when the target does not provide element screenshots. See
+`packages/agentic/desktop-driver/references/test-integration.md`.
 
 ## Visual snapshots
 
@@ -163,7 +166,7 @@ The single-function `wdio` form remains supported. Run with
 `yarn storybook test --<platform>` and optionally `--test <name-glob>`.
 `--list` discovers names without executing code. The `stories-and-tests`
 smoke mode runs these functions alongside remaining legacy plans, grouped by
-story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
+story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/references/story-tests.md).
 
 The components package's `test:stories` project checks every test-bearing story
 without emitting it into the component library. Add new test-bearing files to

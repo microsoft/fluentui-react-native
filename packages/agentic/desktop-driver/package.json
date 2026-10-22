@@ -10,6 +10,20 @@
     "directory": "packages/agentic/desktop-driver"
   },
   "bin": "./config/cli.cjs",
+  "files": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "PLAN.md",
+    "README.md",
+    "config/",
+    "jest.config.cjs",
+    "lib/",
+    "native/",
+    "package.json",
+    "references/",
+    "src/",
+    "tsconfig.json"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",

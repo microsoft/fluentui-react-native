@@ -1,3 +1,10 @@
+---
+id: desktop-driver.ci-integration
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # CI integration
 
 CI should separate portable package checks, target-OS native contracts, and

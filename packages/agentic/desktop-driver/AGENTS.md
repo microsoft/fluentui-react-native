@@ -1,24 +1,15 @@
 # Desktop Driver agent instructions
 
-This is the instruction root for
-`packages/agentic/desktop-driver` and every descendant.
+This is the instruction root for this package and every descendant.
 
 ## Start every task
 
-1. Read [README.md](README.md) and the narrowest relevant reference:
-   [architecture](references/architecture.md),
-   [service integration](references/service.md),
-   [native helpers](references/native-helpers.md),
-   [test integration](references/test-integration.md), or
-   [security](references/security.md).
-2. For macOS native work, also read
-   [native/macos/README.md](native/macos/README.md). For Windows or Win32 native
-   work, read [native/windows/README.md](native/windows/README.md).
-3. Read [PLAN.md](PLAN.md) only when the task changes qualification, release
-   readiness, or deferred scope. It contains remaining work, not the current
-   architecture.
-4. Inspect the owning source and tests before editing. Use package scripts from
-   this directory or the corresponding root workspace command.
+Read [README.md](README.md) and select the closest topic in the
+[reference index](references/README.md). Native changes also require the
+matching provider README and [native protocol](native/PROTOCOL.md). Read
+[PLAN.md](PLAN.md) only for qualification, release readiness, or deferred
+scope; it contains no current architecture. Inspect source and tests before
+editing.
 
 ## Non-negotiable invariants
 
@@ -51,18 +42,9 @@ This is the instruction root for
   when evidence capture also fails, and never expose native handles or
   unrestricted commands through agent APIs.
 
-## Detailed development guidance
-
-Use [Contributor reference](references/contributing.md) for module ownership,
-change placement, generated files, test expectations, and validation order.
-Protocol behavior is authoritative in
-[references/protocol.md](references/protocol.md); private native transport is
-authoritative in [native/PROTOCOL.md](native/PROTOCOL.md).
-
-When changing user-visible behavior, update the relevant reference and keep
-[README.md](README.md) as a concise entry point. When work is completed, move
-its durable behavior into documentation and remove it from [PLAN.md](PLAN.md);
-the plan must describe only unfinished or explicitly deferred work.
+Use [contributing](references/contributing.md) for module ownership, tests, and
+validation. Update the owning reference when user-visible behavior changes;
+keep README concise and PLAN limited to unfinished or deferred work.
 
 ## Validation
 

@@ -13,6 +13,11 @@ This guide assumes you:
 
 There are some specific quirks to this repository that one should be familiar with.
 
+When configuring or maintaining a package, start with its `AGENTS.md` and
+`README.md`; package-owned recipes and shared agent guidance live in its
+indexed `references/` directory. Follow the
+[package-owned guidance standard](./references/agents/repository/package-guidance.md).
+
 ### Component generations
 
 The repository contains three generations of components. Identify the generation from a component's imports and

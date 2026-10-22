@@ -1,3 +1,10 @@
+---
+id: desktop-driver.contributing
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Contributor reference
 
 This page expands the repository instructions in [AGENTS.md](../AGENTS.md).
@@ -59,7 +66,11 @@ package.
 
 Never patch generated SwiftPM, Xcode, MSBuild output, or cached artifacts.
 
-## Authored plans
+## Legacy static plans
+
+The following rules describe the serializable `parameters.desktopDriver`
+contract retained for compatibility. New Storybook test authoring uses named
+`wdio` callbacks owned by `@fluentui-react-native/storybook-desktop`.
 
 - Keep plans inline and statically extractable under
   `parameters.desktopDriver`.

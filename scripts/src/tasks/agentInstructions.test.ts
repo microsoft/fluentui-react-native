@@ -76,6 +76,38 @@ function assertIssue(overrides: Record<string, string | undefined>, pattern: Reg
   );
 }
 
+const GUIDED_PACKAGE: Record<string, string> = {
+  'references/agents/README.md': reference(
+    'index',
+    'index',
+    '# Index\n\n| ID | Document |\n| --- | --- |\n| `demo.repo-guide` | [Guide](demo/guide.md) |\n',
+    'references/agents',
+  ),
+  'references/agents/demo/guide.md': reference('demo.repo-guide', 'instruction-reference', '# Guide\n'),
+  'references/agents/repository/package-guidance-packages.json': JSON.stringify({
+    schema_version: 1,
+    packages: ['packages/demo'],
+  }),
+  'packages/demo/package.json': JSON.stringify({ name: '@scope/demo' }),
+  'packages/demo/AGENTS.md':
+    '# Demo package\n\n## Focus policy\n\nSee [index](references/README.md).\n\n- **R-DEMO-001:** Keep its guidance local.\n',
+  'packages/demo/README.md': '# Demo package\n\nSee [agents](AGENTS.md) and [index](references/README.md).\n',
+  'packages/demo/references/README.md': reference(
+    'demo.index',
+    'index',
+    '# References\n\n| ID | Document | Read when |\n| --- | --- | --- |\n| `demo.guide` | [Guide](guide.md) | Configuring it |\n',
+    'packages/demo/references',
+  ),
+  'packages/demo/references/guide.md': reference(
+    'demo.guide',
+    'instruction-reference',
+    '# Guide\n\nSee `references/guide.md` and follow R-DEMO-001.\n',
+    'packages/demo',
+  ),
+  '.github/skills/demo-skill/SKILL.md':
+    '---\nname: demo-skill\ndescription: Demonstrates a skill.\nlicense: MIT\n---\n\nRead [the package guide](../../../packages/demo/references/guide.md).\n',
+};
+
 afterEach(() => {
   for (const root of roots.splice(0)) {
     rmSync(root, { recursive: true, force: true });
@@ -130,6 +162,7 @@ describe('checkAgentInstructions', () => {
 
   it('requires indexed references', () => {
     assertIssue({ 'references/agents/demo/new.md': reference('demo.new', 'instruction-reference', '# New\n') }, /not linked from/);
+    assertIssue({ 'references/agents/README.md': undefined }, /references\/agents\/README\.md: missing reference index/);
   });
 
   it('rejects broken links, case mismatches, missing anchors, and missing code paths', () => {
@@ -167,6 +200,110 @@ describe('checkAgentInstructions', () => {
   it('validates skill metadata', () => {
     assertIssue({ '.github/skills/demo-skill/SKILL.md': '---\nname: other\ndescription: Text.\n---\n' }, /must match its directory/);
     assertIssue({ '.github/skills/demo-skill/SKILL.md': `---\nname: demo-skill\ndescription: ${'word '.repeat(61)}\n---\n` }, /61 words/);
+  });
+
+  it('validates guided package entry points, indexes, package-relative paths, and skill targets', () => {
+    const root = fixture(GUIDED_PACKAGE);
+    assert.deepEqual(
+      checkAgentInstructions(root).issues.map((issue) => `${issue.file}: ${issue.message}`),
+      [],
+    );
+  });
+
+  it('rejects package guidance links that escape the package, including sibling dependencies', () => {
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        'packages/demo/references/guide.md': reference(
+          'demo.guide',
+          'instruction-reference',
+          '# Guide\n\n[Other](../../other/README.md)\n',
+          'packages/demo',
+        ),
+      },
+      /package guidance link escapes its package/,
+    );
+  });
+
+  it('requires package references to have package-prefixed IDs and be listed in their index', () => {
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        'packages/demo/references/guide.md': reference('other.guide', 'instruction-reference', '# Guide\n', 'packages/demo'),
+      },
+      /ID must start with "demo\."/,
+    );
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        'packages/demo/references/README.md': reference('demo.index', 'index', '# References\n', 'packages/demo/references'),
+      },
+      /not linked from packages\/demo\/references\/README\.md/,
+    );
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        'packages/demo/references/guide.md': reference(
+          'demo.guide',
+          'instruction-reference',
+          '# Guide\n\nSee `references/agents/README.md`.\n',
+          'packages/demo',
+        ),
+      },
+      /path in code span does not exist: references\/agents\/README\.md/,
+    );
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        'packages/demo/references/guide.md': reference(
+          'demo.guide',
+          'instruction-reference',
+          '# Guide\n\nSee `@scope/demo/references/missing.md`.\n',
+          'packages/demo',
+        ),
+      },
+      /package guide path does not exist: @scope\/demo\/references\/missing\.md/,
+    );
+  });
+
+  it('requires package README and AGENTS entry points to link to each other and the index', () => {
+    assertIssue({ ...GUIDED_PACKAGE, 'packages/demo/README.md': '# Demo\n' }, /must link to packages\/demo\/AGENTS\.md/);
+    assertIssue({ ...GUIDED_PACKAGE, 'packages/demo/AGENTS.md': '# Demo\n' }, /must link to packages\/demo\/references\/README\.md/);
+  });
+
+  it('allows skills to link only to package entry points or indexed guidance', () => {
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        '.github/skills/demo-skill/SKILL.md':
+          '---\nname: demo-skill\ndescription: Demonstrates a skill.\n---\n\n[Source](../../../packages/demo/src/index.ts)\n',
+      },
+      /skill links to non-guidance package file/,
+    );
+    assertIssue(
+      {
+        ...GUIDED_PACKAGE,
+        '.github/skills/demo-skill/SKILL.md': '---\nname: demo-skill\ndescription: a: b\n---\n',
+      },
+      /colon-space must be quoted/,
+    );
+  });
+
+  it('validates only source paths in app agent maps', () => {
+    const valid = {
+      'apps/demo/config.ts': '',
+      'apps/demo/generated.ts': '',
+      'apps/demo/agent-map.yaml':
+        'sources:\n  config: config.ts\n  generated:\n    path: generated.ts\nservices:\n  driver:\n    command: yarn storybook driver --macos\n',
+    };
+    assert.deepEqual(messages(valid), []);
+    assertIssue(
+      {
+        ...valid,
+        'apps/demo/agent-map.yaml': 'sources:\n  config: missing.ts\nservices:\n  driver:\n    command: yarn storybook driver --macos\n',
+      },
+      /source path does not exist: missing\.ts/,
+    );
   });
 
   it('rejects prerequisite cycles and deep chains', () => {

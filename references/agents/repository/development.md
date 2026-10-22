@@ -94,6 +94,7 @@ not isolate one file; use `--testNamePattern` to focus a run.
 
 - Use `workspace:*` for internal dependencies.
 - Add the package's `tsconfig.json` to the root `tsconfig.json` `references` so it joins the unified build.
+- Follow the [package-owned guidance standard](package-guidance.md) for guided packages and register them in the package guidance list.
 - [Dynamic package extensions](../../../scripts/dynamic.extensions.mts) add TypeScript, Jest, oxlint, and oxfmt
   development dependencies when the package has the matching configuration or scripts.
 - New components belong in the agentic package and new modern native code in native-core; see the

@@ -1,15 +1,14 @@
 # Native desktop test harness
 
-`@fluentui-react-native/desktop-test` owns application-neutral configuration,
-native service composition, process lifetimes, and reporting. It depends on
-[`desktop-driver`](../desktop-driver/README.md), not Storybook, React, or React
-Native. Storybook is an explicitly imported
-[integration](../storybook-desktop/README.md); ordinary applications do not
-install it.
+`@fluentui-react-native/desktop-test` provides application-neutral configuration,
+native service composition, process lifetimes, standalone WDIO/Jasmine suites,
+and reporting for macOS, Windows, and Win32. It uses
+`@fluentui-react-native/desktop-driver`; Storybook support is an optional
+integration in `@fluentui-react-native/storybook-desktop`.
 
-## Application configuration
+## Quick start
 
-Put a `desktop.config.mts` in the application workspace:
+Add a `desktop.config.mts` in the app workspace:
 
 ```ts
 import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
@@ -21,158 +20,46 @@ export default defineDesktopConfig({
     windows: {
       host: {
         kind: 'installed',
-        application: {
-          executablePath: 'C:\\apps\\Sample.exe',
-          windowTitle: 'Sample',
-        },
+        application: { executablePath: 'C:\\apps\\Sample.exe', windowTitle: 'Sample' },
       },
-      launchTimeoutMs: 180_000,
       readiness: { kind: 'native', testId: 'application-ready' },
     },
   },
 });
 ```
 
-The source-loadable `/config` entry works before the repository build. `.ts`,
-`.mjs`, `.js`, and `.cjs` configs are also supported. Validation is structural,
-rejects unknown fields, and does not require a class instance.
+Expose the CLI in the workspace script and run a declared stage:
 
-Target names default to their endpoint (`macos`, `windows`, or `win32`); custom
-names must supply `endpoint`. Renderer is optional for ordinary native apps.
-`host.ownership: 'external'` restricts sessions to attach and preserves the app;
-the default permits owned launch only. Windows identity requires an exact title
-and an executable, AUMID, or verified owner lease, never a title alone.
-
-| Host adapter            | Behavior                                                                                                                                                                                                                                   |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `installed`             | Use the trusted application descriptor; build/prep/bundle/run stages require explicit commands.                                                                                                                                            |
-| `react-native-test-app` | Derive native commands and identity from `app.json`. Windows verifies the generated renderer and registered package identity; macOS launches the exact built product after verifying its bundle identifier, renderer, and embedded bundle. |
-| `rex`                   | Win32 prebuilt host with declared `component` and `windowTitle`; use the existing bundle, executable, working directory, and fixed arguments. Native build is unsupported.                                                                 |
-
-`commands` overrides individual `prep`, `bundle`, `build`, or `run` stages.
-Each value is `{ command, args?, cwd?, env? }`, an ordered array of commands, or
-`false` to reject the stage. No command string is parsed as an argument list.
-Required `services` declare an `id`, command, and optional loopback `readyUrl`.
-Service exits are failures even after successful readiness.
-
-The default project root is the config's directory. Application paths,
-command working directories, helper paths, and artifacts resolve against their
-owning project root. Target references and hook files resolve against their
-declaring config's directory; spec globs resolve against the suite's project.
-
-## Standalone WDIO suites
-
-The suite workspace references the application's same-schema target instead
-of duplicating its launch settings:
-
-```ts
-import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
-
-export default defineDesktopConfig({
-  schemaVersion: 1,
-  targets: {
-    windows: { use: { config: '../sample/desktop.config.mts', target: 'windows' } },
-  },
-  suites: {
-    regression: {
-      kind: 'wdio',
-      framework: 'jasmine',
-      specs: [['specs/startup.spec.ts', 'specs/controls.spec.ts']],
-      hooks: './hooks.ts',
-      specFileRetries: 1,
-      maxInstances: 1,
-    },
-  },
-});
+```json
+{ "scripts": { "desktop-test": "desktop-test" } }
 ```
-
-References preserve the app's canonical target identity and paths; overrides
-and reference cycles are rejected. Nested spec arrays remain one WDIO worker.
-Every glob must match: an empty pattern is an error, not reduced coverage.
-Specs can also be an endpoint-keyed map.
-
-Install `@wdio/cli`, `@wdio/local-runner`, and the selected
-`@wdio/<framework>-framework` in the suite workspace. The harness does not install
-frameworks into applications. Jasmine, Mocha, and Cucumber are accepted framework
-names; deterministic integration coverage currently exercises Jasmine.
-WDIO owns the session, globals, hooks, TypeScript loader, grouped execution,
-retries, and framework assertions. Hooks export a WDIO hook object. The native
-command binding uses that existing browser; it never creates a second session.
-The generated config uses `.mts` so WDIO enables its TypeScript loader before
-loading hooks. Frameworks retain their normal names: an absolute Jasmine
-module path causes WDIO to replace Jasmine's assertion API.
-
-Expose `"desktop-test": "desktop-test"` in workspace scripts, then run:
 
 ```sh
 yarn desktop-test --target windows build-driver
 yarn desktop-test --target windows test --suite regression --list
 yarn desktop-test --target windows test --suite regression
-yarn desktop-test --target windows serve --json
 ```
 
-`--list` resolves the exact groups without launching anything. `serve` starts
-the real native WebDriver service and required services, reports its actual
-URL/target, and waits for an owned stop; clients create sessions explicitly.
-`--json` keeps stdout machine-readable and diagnostics on stderr.
-`prep`, `bundle`, `build`, and `run` expose supported adapter stages.
-macOS RN Test App targets accept `--paper`; regenerate with `prep` after changing
-renderer. Run `bundle` before `prep` there: CocoaPods embeds only `app.json`
-resources that exist during `pod install`. Without explicit `application`
-identity, macOS sessions launch the single app in
-`macos/DerivedData/Build/Products/Debug` rather than any Launch Services copy
-sharing its bundle identifier, and fail closed when its `CFBundleIdentifier`,
-`RCTNewArchEnabled` renderer, or declared `.jsbundle` resource does not match.
-Native tests use verified prebuilt helpers only: run `build-driver`
-explicitly first, or provision a compatible helper/cache through
-[`nativeDriver` settings](../desktop-driver/references/native-helpers.md).
+Read the [configuration guide](references/configuration.md) to define app
+targets or suites, then use the [command guide](references/commands.md) to run
+them. See the [reference index](references/README.md) for all topics, and
+[AGENTS.md](AGENTS.md) when working on the package.
 
-## Ownership and reporting
+## Supported responsibilities
 
-One supervisor owns services, workers, the WebDriver listener, and its app
-sessions. Nested CLIs and the PowerShell service bridge inherit an authenticated
-reporting connection; they do not create competing collectors or consoles.
-Required-service failure aborts dependent work. Cleanup drains producers and
-stdio, closes sessions, releases input, stops exact owned process trees in
-reverse service order, and preserves external apps.
+- App targets and suites share one structural configuration schema.
+- WDIO owns suite sessions, globals, hooks, grouped execution, retries, and
+  framework assertions.
+- The harness supervises services, workers, the driver, and app lifetimes.
+- Every run records structured results, command output, and evidence in its
+  artifact directory.
+- Native helpers are explicitly built or provisioned; normal test runs use
+  verified prebuilt helpers only.
 
-Interactive runs acquire a per-user claim at
-`<temporary-directory>/furn-desktop-workload-<user-hash>/interactive.lock`.
-Concurrent workloads fail closed. After a crash, inspect the recorded PID/run
-and verify that the owner and its resources have stopped before manually
-removing that exact stale claim. There is no automatic stale-lock recovery.
+macOS RN Test App users must bundle before `prep`, then build: CocoaPods embeds
+only resources that exist during `pod install`. Renderer changes require a new
+`prep`. See `references/platforms.md`.
 
-Each root run writes `artifacts/desktop/<run-id>/` by default:
-
-| Artifact       | Contents                                                                                 |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| `events.jsonl` | Versioned, source-attributed journal with producer sequence and collector arrival order. |
-| `run.json`     | Canonical tests, attempts, selected groups, failures, evidence paths, and final status.  |
-| `junit.xml`    | The same outcomes, including infrastructure errors and incomplete work.                  |
-| `commands/`    | Bounded, redacted stdout/stderr logs with stream attribution.                            |
-
-Stderr and test progress are live without `--verbose`; verbose also streams
-informational output. Failed commands replay contiguous logs. GitHub Actions
-adds balanced groups, deduplicated failure annotations, and an optional step
-summary; raw child output cannot issue workflow commands. Artifact references
-are filesystem paths, not uploaded URLs. Archive the entire run directory with
-an `always()` upload step.
-
-Original errors, causes, retry attempts, flaky status, skips, unsupported
-capabilities, and unfinished selected groups remain in the result. A zero
-worker exit cannot override failed assertions or incomplete work. Empty or
-all-skipped required cohorts do not pass; `optional: true` permits a fully
-skipped cohort to exit successfully without labeling it passed.
-
-## Qualification
-
-Package contracts and a passing Win32 behavioral pilot are not complete native
-qualification. See the [E2E migration boundary](../../../apps/E2E/README.md#native-desktop-migration)
-for preserved baseline groups and unsupported semantics. Legacy desktop Appium
-lanes remain until equivalent-build semantic parity and the driver's
-100-execution/14-day reliability gates pass on each endpoint. Mobile lanes are
-outside this migration.
-
-Use the package's `format`, `lint`, `build`, and `test` scripts for deterministic
-checks. Matching-OS native builds and real application/input evidence are
-separate requirements.
+The E2E application retains its legacy Appium lanes; native desktop coverage
+is not a replacement for full parity. Consult the consumer's E2E migration
+documentation for its current lane selection.

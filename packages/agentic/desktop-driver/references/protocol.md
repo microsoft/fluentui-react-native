@@ -1,3 +1,10 @@
+---
+id: desktop-driver.protocol
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # WebDriver contract
 
 Desktop Driver is a W3C WebDriver Classic-compatible native desktop remote end.
@@ -165,7 +172,7 @@ test receives a new run ID and keyed preview remount.
 
 ## Results and capabilities
 
-Run status is `passed` or `failed`. Individual tests distinguish:
+Run status is `passed`, `failed`, or `incomplete`. Individual tests distinguish:
 
 - `passed`;
 - `failed`;

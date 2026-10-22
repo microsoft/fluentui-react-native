@@ -1,3 +1,10 @@
+---
+id: desktop-driver.architecture
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Architecture
 
 Desktop Driver separates portable WebDriver behavior from operating-system

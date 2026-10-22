@@ -104,9 +104,9 @@ a fake target for protocol and integration tests; it is not a native service
 shortcut.
 
 For a production native listener, application lifecycle, and standalone WDIO
-suites, use the optional
-[`desktop-test` harness](../desktop-test/README.md). It composes this driver
-without requiring Storybook or React Native in ordinary applications.
+suites, use `@fluentui-react-native/desktop-test` and its `README.md`. It
+composes this driver without requiring Storybook or React Native in ordinary
+applications.
 
 See [Getting started](references/getting-started.md) for installation,
 toolchains, first builds, and diagnostic commands.
@@ -130,6 +130,7 @@ toolchains, first builds, and diagnostic commands.
 | [Changelog](CHANGELOG.md)                           | Versioned package changes                                                                      |
 
 Contributors and coding agents start with [AGENTS.md](AGENTS.md).
+The [reference index](references/README.md) describes each package-owned guide.
 
 ## Public entry points
 

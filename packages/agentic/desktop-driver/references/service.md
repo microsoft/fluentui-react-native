@@ -1,13 +1,20 @@
+---
+id: desktop-driver.service
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Service integration
 
 The Desktop Driver service is an embeddable, loopback-only W3C remote end.
 Integrators register controlled targets before listening; clients can select
 only those targets.
 
-For application lifecycle commands and normal WDIO suites, prefer the
-[`desktop-test` harness](../../desktop-test/README.md). Its real `serve`
-composition supports applications without Storybook. The low-level APIs below
-remain available for other controlled supervisors.
+For application lifecycle commands and normal WDIO suites, prefer
+`@fluentui-react-native/desktop-test`. Its real `serve` composition supports
+applications without Storybook. The low-level APIs below remain available for
+other controlled supervisors.
 
 ## Embed a native target
 

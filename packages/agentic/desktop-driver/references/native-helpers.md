@@ -1,4 +1,13 @@
+---
+id: desktop-driver.native-helpers
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Native helpers
+
+- **R-DRIVER-001:** Build or provision native helpers explicitly on the target operating system. Installation never compiles or downloads a helper; CI builds it, runs `doctor`, then pins prebuilt-only resolution before app preparation or tests.
 
 The package ships checked-in native source and builds one small helper on the
 target operating system. Native binaries are not published in npm, compiled

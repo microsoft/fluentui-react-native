@@ -32,7 +32,9 @@ components use Storybook stories and `wdio` story tests instead; see
 - Run them with the E2E workspace's declared scripts, such as `yarn e2etest:<platform>` from `apps/E2E`, after the
   matching `e2eprep:<platform>` setup.
 - Android selectors use `accessibilityLabel`; other platforms use `testID`.
-- Win32 automation uses WinAppDriver.
+- The retained Win32 Appium lane uses WinAppDriver. The new native desktop
+  lane uses `desktop-test` and the registered desktop driver. Consult
+  `apps/E2E/README.md` before changing E2E lane ownership.
 
 When a maintenance change alters observable behavior, update the existing page and spec rather than creating a
 parallel test app. Report E2E runs that were not executed, and why, rather than implying coverage (R-VALID-002).
