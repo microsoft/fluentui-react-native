@@ -27,6 +27,8 @@ Read the matching contributing reference from the package index.
 1. Change the lowest package that owns the behavior; update dependent
    references when needed. Preserve exact identity, fail-closed behavior,
    cancellation, ownership-safe cleanup, and explicit unsupported/skip status.
+   Contract fixtures that spawn Node or generate specs pass values through
+   arguments, not spliced source (R-SCAN-002).
 2. For standalone Swift/C++ helpers, read the provider README and
    `native/PROTOCOL.md`; keep protocol schema and docs in sync. Apply
    `implement-native-component` as a native overlay. React-module and Office

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -302,7 +303,29 @@ describe('checkAgentInstructions', () => {
         ...valid,
         'apps/demo/agent-map.yaml': 'sources:\n  config: missing.ts\nservices:\n  driver:\n    command: yarn storybook driver --macos\n',
       },
-      /source path does not exist: missing\.ts/,
+      /source path does not exist or is ignored by Git: missing\.ts/,
+    );
+  });
+
+  it('exempts declared generated sources but not their directories', () => {
+    const map = (directory: string) =>
+      `sources:\n  config: config.ts\n  requires:\n    path: ${directory}/requires.ts\n    policy: generated-do-not-edit\n`;
+    const app = { 'apps/demo/config.ts': '', 'apps/demo/src/app.ts': '' };
+    assert.deepEqual(messages({ ...app, 'apps/demo/agent-map.yaml': map('src') }), []);
+    assertIssue({ ...app, 'apps/demo/agent-map.yaml': map('missing') }, /generated source directory does not exist: missing/);
+  });
+
+  it('checks agent map sources against Git rather than ignored local output', () => {
+    const root = fixture({
+      'apps/demo/.gitignore': 'built.ts\n',
+      'apps/demo/built.ts': '',
+      'apps/demo/agent-map.yaml': 'sources:\n  built: built.ts\n',
+    });
+    execFileSync('git', ['init', '-q'], { cwd: root });
+    const found = checkAgentInstructions(root).issues.map((issue) => `${issue.file}: ${issue.message}`);
+    assert.ok(
+      found.some((message) => /source path does not exist or is ignored by Git: built\.ts/.test(message)),
+      found.join('\n'),
     );
   });
 

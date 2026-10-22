@@ -562,8 +562,13 @@ export function checkAgentInstructions(root: string): CheckResult {
     issues.push({ file, message: 'project skills must be located under the root .github/skills directory' });
   }
 
-  // Agent maps describe app-local source paths; other values are policy or commands.
+  // Agent maps describe app-local source paths; other values are policy or commands. Paths are checked against the
+  // Git-aware file list, not the file system, so ignored build output cannot pass locally and fail in a clean checkout.
+  // A nested entry whose `policy` starts with `generated` names build output, which only its directory must contain.
+  const inRepository = (target: string) => files.includes(target) || files.some((candidate) => candidate.startsWith(`${target}/`));
   for (const file of files.filter((candidate) => /^apps\/[^/]+\/agent-map\.yaml$/.test(candidate))) {
+    const sources: { line: number; value: string; generated: boolean }[] = [];
+    let block: { line: number; value: string; generated: boolean } | undefined;
     let inSources = false;
     for (const [index, line] of read(file).split('\n').entries()) {
       if (/^sources:\s*$/.test(line)) {
@@ -572,13 +577,28 @@ export function checkAgentInstructions(root: string): CheckResult {
       }
       if (inSources && /^\S/.test(line)) inSources = false;
       if (!inSources) continue;
-      const entry = /^(\s+)([\w-]+):\s+(.+?)\s*$/.exec(line);
-      if (!entry || (entry[1].length !== 2 && entry[2] !== 'path')) continue;
-      const value = entry[3].replace(/^['"]|['"]$/g, '');
-      if (value === '|' || value === '>' || value.startsWith('[') || value.startsWith('{')) continue;
+      const entry = /^(\s+)([\w-]+):(.*)$/.exec(line);
+      if (!entry) continue;
+      const [, indent, key, raw] = entry;
+      const value = raw.trim().replace(/^['"]|['"]$/g, '');
+      if (indent.length === 2) {
+        block = { line: index + 1, value, generated: false };
+        sources.push(block);
+      } else if (block && key === 'path') {
+        block.line = index + 1;
+        block.value = value;
+      } else if (block && key === 'policy') {
+        block.generated = value.startsWith('generated');
+      }
+    }
+    for (const { line, value, generated } of sources) {
+      if (value === '' || value === '|' || value === '>' || value.startsWith('[') || value.startsWith('{')) continue;
       const target = path.posix.normalize(path.posix.join(path.posix.dirname(file), value));
-      if (!existsExact(root, target)) {
-        issues.push({ file, line: index + 1, message: `source path does not exist: ${value}` });
+      if (generated ? !inRepository(path.posix.dirname(target)) : !inRepository(target)) {
+        const message = generated
+          ? `generated source directory does not exist: ${path.posix.dirname(value)}`
+          : `source path does not exist or is ignored by Git: ${value}`;
+        issues.push({ file, line, message });
       }
     }
   }

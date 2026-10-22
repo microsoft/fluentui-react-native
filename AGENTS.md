@@ -32,7 +32,8 @@ These apply to every task.
   `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003, R-VALID-004).
 - **Code:** no barrel exports (R-REPO-001); keep React Native fork imports in platform files (R-REPO-002); add a
   changeset for published packages (R-REPO-003); never copy private source bodies into this public repository
-  (R-REPO-004).
+  (R-REPO-004). Keep regular expressions linear-time and never splice values into code that runs, tests included
+  (R-SCAN-001, R-SCAN-002; see [code scanning](references/agents/repository/code-scanning.md)).
 - **Component generations:** v0 and v1 are maintenance-only; new components use the agentic workflow (R-V0-001,
   R-V1-001). Classify code by imports and structure, not by path (R-CLASSIFY-001).
 - **Native boundary:** before changing Swift, Objective-C, C++, headers, podspecs, Windows projects, codegen specs,

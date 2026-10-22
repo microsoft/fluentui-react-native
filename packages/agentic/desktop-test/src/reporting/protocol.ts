@@ -207,6 +207,17 @@ export function serializeReportError(error: unknown, seen = new Set<unknown>()):
   };
 }
 
+// Each optional token begins with a character its neighbors cannot match, so matching stays linear on long input
+// such as `password` followed by many spaces (R-SCAN-001).
+const SECRET_ASSIGNMENT = /((?:leaseNonce|bridgeNonce|authorization|password|access[_-]?token)\s*(?:["']\s*)?[:=]\s*["']?)[^\s"',;]+/gi;
+
+/** Replace each known secret, longest first, and the value of each `key: value` or `key=value` secret assignment. */
+export function redactDesktopSecrets(text: string, secrets: Iterable<string>): string {
+  let result = text;
+  for (const secret of [...secrets].sort((a, b) => b.length - a.length)) result = result.replaceAll(secret, '[REDACTED]');
+  return result.replace(SECRET_ASSIGNMENT, '$1[REDACTED]');
+}
+
 export function sanitizeDesktopReport<T>(value: T, redact: (text: string) => string): T {
   return JSON.parse(
     JSON.stringify(value, (key, item: unknown) => {

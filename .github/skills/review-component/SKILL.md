@@ -32,7 +32,8 @@ license: MIT
    | Framework-base pattern | [Framework-base instructions](../../../packages/framework-base/AGENTS.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 4. Check repository-wide rules: explicit exports (R-REPO-001), platform fork imports (R-REPO-002), changesets
-   (R-REPO-003), and no copied private source (R-REPO-004).
+   (R-REPO-003), no copied private source (R-REPO-004), and the code-scanning patterns: linear-time regular expressions
+   and no values spliced into executed code (R-SCAN-001, R-SCAN-002).
 5. Inspect validation claims. Run non-mutating checks only when they add evidence, preferring focused tests over the
    whole suite (R-VALID-004); never run snapshot-update or fix modes. Record each check as passed, failed, skipped, not
    run, or unsupported (R-VALID-002).

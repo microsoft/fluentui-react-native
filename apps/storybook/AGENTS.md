@@ -12,7 +12,9 @@ configuration, driver, and runtime behavior belongs to package-owned guidance:
 
 - Read `agent-map.yaml` for stable paths, declared scripts, and runtime
   discovery commands. Keep it compact; the runtime story catalog is
-  authoritative.
+  authoritative. Give a generated source a nested `path` and
+  `policy: generated-…`: `check-agent-instructions` validates other sources
+  against Git, so ignored local build output cannot satisfy it.
 - `desktop.config.mts` owns app name, package discovery, platform story
   exclusions, and native command exceptions. Do not duplicate this
   configuration in runtime source.

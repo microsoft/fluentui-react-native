@@ -4,7 +4,14 @@ import { randomUUID } from 'node:crypto';
 import { Writable } from 'node:stream';
 import { createReporter } from '@rnx-kit/reporter';
 
-import { createEventEmitter, DesktopReportedError, sanitizeDesktopReport, serializeReportError, validateDesktopEvent } from './protocol.js';
+import {
+  createEventEmitter,
+  DesktopReportedError,
+  redactDesktopSecrets,
+  sanitizeDesktopReport,
+  serializeReportError,
+  validateDesktopEvent,
+} from './protocol.js';
 import type {
   CollectedDesktopEvent,
   DesktopEvent,
@@ -112,12 +119,7 @@ export class DesktopRunReporter {
   }
 
   redact(text: string): string {
-    let result = text;
-    for (const secret of [...this.secrets].sort((a, b) => b.length - a.length)) result = result.replaceAll(secret, '[REDACTED]');
-    return result.replace(
-      /((?:leaseNonce|bridgeNonce|authorization|password|access[_-]?token)\s*["']?\s*[:=]\s*["']?)[^\s"',;]+/gi,
-      '$1[REDACTED]',
-    );
+    return redactDesktopSecrets(text, this.secrets);
   }
 
   failure(error: unknown, kind: FailureKind = 'infrastructure'): ReportFailure {

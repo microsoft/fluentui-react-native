@@ -38,6 +38,9 @@ async function main() {
   const reporter = (options = {}) =>
     new DesktopRunReporter({ artifactsRoot: root, output: out, errorOutput: err, summary: false, ...options });
   const command = (source, label = 'fixture') => ({ command: process.execPath, args: ['-e', source], cwd: root, env: {}, label });
+  // Fixture code stays constant; values reach it through process.argv.slice(1) rather than being spliced into the
+  // source, which CodeQL reports as improper code sanitization (R-SCAN-002).
+  const script = (source, values, label = 'fixture') => ({ ...command(source, label), args: ['-e', source, ...values] });
   try {
     if (mode === 'config') {
       const source = await import(pathToFileURL(path.join(packageRoot, 'src', 'config.ts')).href);
@@ -325,11 +328,32 @@ async function main() {
       const run = reporter({ kind: 'lifecycle' });
       const transport = await startReportTransport(run);
       const runner = new NodeDesktopCommandRunner({ reporter: run, environment: transport.environment });
-      const producer = (id) =>
-        `const {connectReportProducer}=await import(${JSON.stringify(lib('reporting/transport.js'))}); const p=await connectReportProducer(${JSON.stringify(id)}); p.emit({kind:'diagnostic',payload:{level:'warning',message:'hello ${id}'}}); await p.finish();`;
-      const child = `const {spawn}=require('node:child_process'); (async()=>{ ${producer('parent')} const child=spawn(process.execPath,['--input-type=module','-e',${JSON.stringify(producer('grandchild'))}],{stdio:'inherit'}); child.on('close',code=>process.exitCode=code); })().catch(error=>{console.error(error);process.exitCode=1;});`;
+      // One constant producer module receives the transport module URL and its producer ID as arguments, then starts
+      // its own grandchild producer.
+      const producerScript = path.join(root, 'producer.mjs');
+      fs.writeFileSync(
+        producerScript,
+        [
+          "import { spawn } from 'node:child_process';",
+          'const [moduleUrl, id] = process.argv.slice(2);',
+          'const { connectReportProducer } = await import(moduleUrl);',
+          'const producer = await connectReportProducer(id);',
+          "producer.emit({ kind: 'diagnostic', payload: { level: 'warning', message: 'hello ' + id } });",
+          'await producer.finish();',
+          "if (id === 'parent') {",
+          "  const child = spawn(process.execPath, [process.argv[1], moduleUrl, 'grandchild'], { stdio: 'inherit' });",
+          "  child.on('close', (code) => (process.exitCode = code));",
+          '}',
+        ].join('\n'),
+      );
       try {
-        await runner.run(command(child));
+        await runner.run({
+          command: process.execPath,
+          args: [producerScript, lib('reporting/transport.js'), 'parent'],
+          cwd: root,
+          env: {},
+          label: 'fixture',
+        });
       } finally {
         await transport.close();
       }
@@ -345,7 +369,7 @@ async function main() {
       fs.writeFileSync(
         filename,
         `
-        import {createDesktopReportSession} from ${JSON.stringify(lib('reporting/session.js'))};
+        const {createDesktopReportSession} = await import(process.argv[2]);
         const report = await createDesktopReportSession({artifactsRoot:'.',kind:'lifecycle'});
         report.reporter.addSecret('child-only-secret');
         const nested = report.reporter.source('nested');
@@ -360,7 +384,7 @@ async function main() {
         await report.close();`,
       );
       try {
-        await delegatedRunner.run({ command: process.execPath, args: [filename], cwd: root, env: {} });
+        await delegatedRunner.run({ command: process.execPath, args: [filename, lib('reporting/session.js')], cwd: root, env: {} });
       } finally {
         await delegatedTransport.close();
       }
@@ -454,10 +478,7 @@ async function main() {
         JSON.stringify({
           command: {
             command: process.execPath,
-            args: [
-              '-e',
-              `require('node:fs').writeFileSync(${JSON.stringify(marker)},JSON.stringify(process.pid));setInterval(()=>{},1000);`,
-            ],
+            args: ['-e', "require('node:fs').writeFileSync(process.argv[1],JSON.stringify(process.pid));setInterval(()=>{},1000);", marker],
             cwd: root,
           },
           stopPath: path.join(root, 'orphan-service.stop'),
@@ -465,9 +486,13 @@ async function main() {
         }),
       );
       const parent = abandonedRunner.start(
-        command(`
-        require('node:child_process').spawn(process.execPath, [${JSON.stringify(path.join(packageRoot, 'config', 'service.cjs'))}, ${JSON.stringify(orphanDescriptor)}], {stdio:'ignore',detached:true,windowsHide:true});
-        setInterval(() => { if(require('node:fs').existsSync(${JSON.stringify(marker)})) process.exit(9); }, 50);`),
+        script(
+          `
+        const [service, descriptor, marker] = process.argv.slice(1);
+        require('node:child_process').spawn(process.execPath, [service, descriptor], {stdio:'ignore',detached:true,windowsHide:true});
+        setInterval(() => { if(require('node:fs').existsSync(marker)) process.exit(9); }, 50);`,
+          [path.join(packageRoot, 'config', 'service.cjs'), orphanDescriptor, marker],
+        ),
       );
       try {
         assert.equal(await parent.completed, 9);
@@ -501,7 +526,6 @@ async function main() {
       const run = reporter({ context: { endpoint: 'win32', renderer: 'paper' } });
       const fixture = path.join(root, mode === 'typescript' ? 'spec.ts' : 'spec.mjs');
       const second = path.join(root, 'second.mjs');
-      const marker = path.join(root, 'attempt');
       let source;
       if (mode === 'typescript') {
         fs.writeFileSync(path.join(root, 'helper.ts'), 'export const marker: string = "typescript";');
@@ -512,7 +536,9 @@ async function main() {
         source =
           "import { marker } from './helper'; describe('TypeScript fixture',()=>{it('preserves source imports in hooks and specs',()=>{const expected: string = marker;expect(globalThis.hookMarker).toBe(expected);});});";
       } else if (mode === 'retry') {
-        source = `import fs from 'node:fs'; describe('retry fixture',()=>{it('retains failed attempt',()=>{if(!fs.existsSync(${JSON.stringify(marker)})){fs.writeFileSync(${JSON.stringify(marker)},'attempt');throw new Error('first attempt');}});});`;
+        // The spec finds its sibling marker through import.meta.url rather than an embedded path.
+        source =
+          "import fs from 'node:fs'; const marker = new URL('./attempt', import.meta.url); describe('retry fixture',()=>{it('retains failed attempt',()=>{if(!fs.existsSync(marker)){fs.writeFileSync(marker,'attempt');throw new Error('first attempt');}});});";
       } else if (mode === 'hook-failure') {
         source =
           "describe('hook fixture',()=>{beforeAll(()=>{throw new Error('original setup failure');});it('does not execute',()=>{throw new Error('body must not run');});});";

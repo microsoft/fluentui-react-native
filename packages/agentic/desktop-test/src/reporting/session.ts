@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { DesktopRunReporter, desktopArtifactPath } from './collector.js';
 import type { DesktopReportWriter, DesktopRunReporterOptions } from './collector.js';
-import { DesktopReportedError, sanitizeDesktopReport, serializeReportError } from './protocol.js';
+import { DesktopReportedError, redactDesktopSecrets, sanitizeDesktopReport, serializeReportError } from './protocol.js';
 import type { EventEmitter, FailureKind, ReportFailure } from './protocol.js';
 import { assertReportedWork, connectReportProducer, DESKTOP_REPORT_CONTEXT, startReportTransport } from './transport.js';
 import { desktopRunExitCode } from './results.js';
@@ -52,13 +52,7 @@ export async function createDesktopReportSession(
   const context = JSON.parse(encoded) as { runId: string; artifactsRoot: string; nonce: string };
   const secrets = new Set([context.nonce]);
   const failures = new WeakMap<object, ReportFailure>();
-  const redact = (text: string) => {
-    for (const secret of [...secrets].sort((a, b) => b.length - a.length)) text = text.replaceAll(secret, '[REDACTED]');
-    return text.replace(
-      /((?:leaseNonce|bridgeNonce|authorization|password|access[_-]?token)\s*["']?\s*[:=]\s*["']?)[^\s"',;]+/gi,
-      '$1[REDACTED]',
-    );
-  };
+  const redact = (text: string) => redactDesktopSecrets(text, secrets);
   const protect =
     (emit: EventEmitter): EventEmitter =>
     (event, scope, context, parent) =>
