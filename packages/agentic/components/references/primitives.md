@@ -1,7 +1,30 @@
+---
+id: components.primitives
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/components/src/primitives
+---
+
 # Primitive component authoring
 
-These instructions apply to `packages/agentic/components/src/primitives` and its descendants. Use `primitives/icon` as
-the canonical implementation.
+Use this reference for every public primitive under `src/primitives`. Use `src/primitives/icon` as the canonical
+implementation.
+
+## Catalog
+
+Import these unstyled building blocks from `@fluentui-react-native/components/primitives`. They are not exported from the
+package root.
+
+| Primitive            | Contract                                                                   |
+| -------------------- | -------------------------------------------------------------------------- |
+| `CheckboxIndicator`  | [Checkbox indicator](../src/primitives/checkbox-indicator/CONTRACT.md)     |
+| `CompoundItemLayout` | [Compound item layout](../src/primitives/compound-item-layout/CONTRACT.md) |
+| `FocusVisual`        | [Focus visual](../src/primitives/focus-visual/CONTRACT.md)                 |
+| `Icon`               | [Icon](../src/primitives/icon/CONTRACT.md)                                 |
+| `LayoutStableText`   | [Layout-stable text](../src/primitives/layout-stable-text/CONTRACT.md)     |
+
+Each primitive is extracted for a reusable behavioral or structural contract. Package-specific private helpers belong in
+`src/common` instead.
 
 ## Non-negotiable invariants
 
@@ -29,6 +52,6 @@ the canonical implementation.
 
 ## Focused references
 
-- [Types and slots](../../../../../references/agents/components/agentic/types-and-slots.md)
-- [Rendering and assembly](../../../../../references/agents/components/agentic/rendering.md)
-- [Tests and stories](../../../../../references/agents/components/agentic/tests-and-stories.md)
+- [Types and slots](types-and-slots.md)
+- [Rendering and assembly](rendering.md)
+- [Tests and stories](tests-and-stories.md)

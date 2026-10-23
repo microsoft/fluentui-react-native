@@ -67,21 +67,19 @@ For package-owned knowledge, follow the
 
 ## Scoped instructions
 
-| Path                                                                                               | Scope                                                  |
-| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [packages/agentic/components](packages/agentic/components/AGENTS.md)                               | Agentic package invariants, contracts, and story tests |
-| [packages/agentic/components/src](packages/agentic/components/src/AGENTS.md)                       | Source boundaries and extraction                       |
-| [.../src/components](packages/agentic/components/src/components/AGENTS.md)                         | Higher-order components and the focus visual policy    |
-| [.../src/primitives](packages/agentic/components/src/primitives/AGENTS.md)                         | Public primitives                                      |
-| [packages/agentic/design](packages/agentic/design/AGENTS.md)                                       | Tokens, theming, styling, and color utilities          |
-| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                       | Desktop WebDriver driver                               |
-| [packages/agentic/desktop-test](packages/agentic/desktop-test/AGENTS.md)                           | Application-neutral desktop test harness               |
-| [packages/agentic/storybook-desktop](packages/agentic/storybook-desktop/AGENTS.md)                 | Storybook desktop integration                          |
-| [packages/agentic/storybook-desktop-runtime](packages/agentic/storybook-desktop-runtime/AGENTS.md) | On-device Storybook runtime                            |
-| [packages/framework-base](packages/framework-base/AGENTS.md)                                       | Component patterns, hooks, and accessibility helpers   |
-| [packages/framework/framework](packages/framework/framework/AGENTS.md)                             | v1 framework package                                   |
-| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)         | v0 framework package                                   |
-| [apps/storybook](apps/storybook/AGENTS.md)                                                         | Storybook app, native workflows, and diagnostics       |
+| Path                                                                                               | Scope                                                |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [packages/agentic/components](packages/agentic/components/AGENTS.md)                               | Agentic components, primitives, and contracts        |
+| [packages/agentic/design](packages/agentic/design/AGENTS.md)                                       | Tokens, theming, styling, and color utilities        |
+| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                       | Desktop WebDriver driver                             |
+| [packages/agentic/desktop-test](packages/agentic/desktop-test/AGENTS.md)                           | Application-neutral desktop test harness             |
+| [packages/agentic/native-core](packages/agentic/native-core/AGENTS.md)                             | Native components and modules                        |
+| [packages/agentic/storybook-desktop](packages/agentic/storybook-desktop/AGENTS.md)                 | Storybook desktop integration                        |
+| [packages/agentic/storybook-desktop-runtime](packages/agentic/storybook-desktop-runtime/AGENTS.md) | On-device Storybook runtime                          |
+| [packages/framework-base](packages/framework-base/AGENTS.md)                                       | Component patterns, hooks, and accessibility helpers |
+| [packages/framework/framework](packages/framework/framework/AGENTS.md)                             | v1 framework package                                 |
+| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)         | v0 framework package                                 |
+| [apps/storybook](apps/storybook/AGENTS.md)                                                         | Storybook app, native workflows, and diagnostics     |
 
 ## Quick facts
 

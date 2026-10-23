@@ -242,7 +242,7 @@
         "reevaluation": "Define or provide the overlay and menu stack.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "drawer",
@@ -253,7 +253,7 @@
         "reevaluation": "Define a supported native focus-management path.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "dropdown",
@@ -264,7 +264,7 @@
         "reevaluation": "Reuse ListboxItem and decide the remaining overlay dependency.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "info-label",
@@ -275,7 +275,7 @@
         "reevaluation": "Unblock the shared overlay contract.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "interaction-tag",
@@ -286,7 +286,7 @@
         "reevaluation": "Reuse Avatar and Tag, then decide export scope.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "label",
@@ -297,7 +297,7 @@
         "reevaluation": "Choose a native association contract or a visual-only contract.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "link",
@@ -308,7 +308,7 @@
         "reevaluation": "Accept a native text-link approximation or retarget the contract.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "list",
@@ -319,7 +319,7 @@
         "reevaluation": "Reuse ListItem and define collection focus and accessibility.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "menu",
@@ -330,7 +330,7 @@
         "reevaluation": "Reuse MenuItem and Divider, then define overlay and focus behavior.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "menu-button",
@@ -341,7 +341,7 @@
         "reevaluation": "Land the remaining menu and overlay dependencies.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "message-bar",
@@ -352,7 +352,7 @@
         "reevaluation": "Provide canonical status-icon assets.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "popover",
@@ -363,7 +363,7 @@
         "reevaluation": "Establish reusable native overlay infrastructure.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "radio-group",
@@ -374,7 +374,7 @@
         "reevaluation": "Reuse Radio and decide group labeling and navigation.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "scrollbar",
@@ -385,7 +385,7 @@
         "reevaluation": "Define a scroll-source API and platform scrollbar bridge.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "tablist",
@@ -396,7 +396,7 @@
         "reevaluation": "Reuse Tab and define roving focus and selection ownership.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "textarea",
@@ -407,7 +407,7 @@
         "reevaluation": "Choose a native approximation without resize parity or a web-specific component.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "toolbar",
@@ -418,7 +418,7 @@
         "reevaluation": "Reuse Divider and define the child focus contract.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       },
       {
         "component": "tooltip",
@@ -429,7 +429,7 @@
         "reevaluation": "Establish overlay infrastructure or retarget the contract.",
         "lastEvaluated": "2026-08-28",
         "outcome": "source-copy-removed",
-        "record": "SPEC-MIGRATION.md"
+        "record": "references/contracts.md#legacy-staged-specs"
       }
     ]
   },

@@ -7,9 +7,10 @@ owner_paths:
 
 # Native components and modules
 
-Native code can accompany a v0, v1, or agentic component, or stand alone as a module or service. The
-[native-core README](../../../packages/agentic/native-core/README.md) is authoritative for native-core's entrypoints,
-JavaScript and specification layout, native architecture, codegen, registration, and delivery plan.
+Native code can accompany a v0, v1, or agentic component, or stand alone as a module or service. Native-core's
+[package references](../../../packages/agentic/native-core/references/README.md) are authoritative for its
+[entry points](../../../packages/agentic/native-core/references/entry-points.md), [architecture](../../../packages/agentic/native-core/references/architecture.md),
+[codegen and publishing](../../../packages/agentic/native-core/references/codegen-and-publishing.md), and [validation](../../../packages/agentic/native-core/references/contributing.md).
 
 - **R-NATIVE-001:** Put new modern native components, TurboModules, and native services in
   `@fluentui-react-native/native-core` rather than creating another standalone package. Maintain existing native
@@ -22,13 +23,10 @@ JavaScript and specification layout, native architecture, codegen, registration,
 
 ## Native-core boundaries
 
-- Callout and FocusZone implementations live in native-core. Their former packages are JavaScript-only compatibility
-  shims under `packages/shim/`. Their JavaScript wrappers live in `src/legacy` and are exported only from
-  `@fluentui-react-native/native-core/legacy`, not the root entrypoint.
-- Export shared APIs from the root only when equivalent implementations exist on every supported desktop host. Scope
-  platform APIs to `macos`, `windows` (React Native Windows), `win` (Windows and Win32), or `win32`.
-- Windows components are Fabric-only. macOS components support Paper and Fabric.
-- Native applications must depend on native-core directly for native project discovery and autolinking.
+Native-core's entry-point, legacy-wrapper, shim, host, and autolinking rules are owned by its
+[entry points](../../../packages/agentic/native-core/references/entry-points.md) and [architecture](../../../packages/agentic/native-core/references/architecture.md) references. In brief, root exports need
+equivalent implementations on every supported desktop host, Windows components are Fabric-only, and macOS components
+support Paper and Fabric.
 
 ## Component shape
 
@@ -46,7 +44,7 @@ Run `pod install` from the owning app or its `ios`/`macos` directory after depen
 
 - React Native Windows Fabric views: [Windows Fabric native components](windows-fabric.md).
 - Apple native code: follow [Apple native authoring and Office integration](apple-office.md) (R-APPLE-001 through
-  R-APPLE-007) for every iOS or macOS change, plus the macOS layout notes in the native-core README.
+  R-APPLE-007) for every iOS or macOS change, plus native-core's [macOS Swift interoperability](../../../packages/agentic/native-core/references/architecture.md#macos-swift-interoperability) notes.
 - Focus targets and native focus visuals: [common focus authoring](../focus/common.md) and its platform files.
 - Accessibility actions: the [framework-base accessibility reference](../../../packages/framework-base/references/accessibility.md)
   define the transport contract and its native qualification requirements.

@@ -50,7 +50,7 @@ rather than explicitly hiding the indicator and text children.
 - **RAD-004:** Apply selection, disabled, hovered, pressed, and user-style
   precedence to the documented token bindings.
 - **RAD-005:** Expose radio semantics, accessible naming, disabled behavior,
-  descendant grouping, and root focus feedback under the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+  descendant grouping, and root focus feedback under the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy).
 
 ## Focus visuals
 
@@ -82,7 +82,7 @@ implemented by the component that renders the radios.
 
 ## Divergences from Flex
 
-- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `radio-native-composition` (**accepted**): FURN renders the label and
   indicator directly with React Native Text and View primitives instead of

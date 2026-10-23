@@ -54,7 +54,7 @@ Multiselect takes visual precedence over selected fill and semibold text.
   to that variant.
 - **MNI-005:** Apply token-derived interaction, accessibility, and optional
   custom focus structure without overriding caller handlers; the root's focus
-  feedback follows the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+  feedback follows the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy).
 - **MNI-006:** Opting into `disabledFocusable` preserves a disabled list row's
   focus target and focus visual without enabling pointer, keyboard, long-press,
   or accessibility activation. Section headers stay nonfocusable. Standalone
@@ -115,7 +115,7 @@ Windows and Win32 retain native `disabled` independently of `focusable`.
 
 ## Divergences from Flex
 
-- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `menu-item-native-header-root` (**accepted**): A FURN section header uses a
   disabled Pressable with the `none` role rather than a platform-specific

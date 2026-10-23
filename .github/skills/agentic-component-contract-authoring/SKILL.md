@@ -32,19 +32,19 @@ draft, or accompanied by new source evidence.
 
 Load every adapter represented by the supplied evidence, but no others.
 
-| Evidence                                      | Adapter                                                                                                    |
-| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Pinned Flex component skill and X3 lineage    | [Flex and X3](../../../references/agents/components/agentic/contract-sources/flex-x3.md)                   |
-| Fluent UI v9 source or specification          | [Fluent v9](../../../references/agents/components/agentic/contract-sources/fluent-v9.md)                   |
-| HTML, CSS, computed styles, or browser output | [HTML and CSS](../../../references/agents/components/agentic/contract-sources/html-css.md)                 |
-| Images, screenshots, or design renders        | [Visual reference](../../../references/agents/components/agentic/contract-sources/visual-reference.md)     |
-| Public native API plus repository precedent   | [Local foundation](../../../references/agents/components/agentic/contract-sources/local-foundation.md)     |
-| More than one of the preceding source sets    | [Composite evidence](../../../references/agents/components/agentic/contract-sources/composite-evidence.md) |
+| Evidence                                      | Adapter                                                                                                      |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Pinned Flex component skill and X3 lineage    | [Flex and X3](../../../packages/agentic/components/references/contract-sources/flex-x3.md)                   |
+| Fluent UI v9 source or specification          | [Fluent v9](../../../packages/agentic/components/references/contract-sources/fluent-v9.md)                   |
+| HTML, CSS, computed styles, or browser output | [HTML and CSS](../../../packages/agentic/components/references/contract-sources/html-css.md)                 |
+| Images, screenshots, or design renders        | [Visual reference](../../../packages/agentic/components/references/contract-sources/visual-reference.md)     |
+| Public native API plus repository precedent   | [Local foundation](../../../packages/agentic/components/references/contract-sources/local-foundation.md)     |
+| More than one of the preceding source sets    | [Composite evidence](../../../packages/agentic/components/references/contract-sources/composite-evidence.md) |
 
 ## Workflow
 
-1. Read the package instructions, the existing `SPEC.md`, all companions under
-   `spec/`, and `SPEC-SOURCE.md`. Preserve a reviewed contract unless new
+1. Read the [package instructions](../../../packages/agentic/components/AGENTS.md), the existing `SPEC.md`, all
+   companions under `spec/`, and the [contracts reference](../../../packages/agentic/components/references/contracts.md). Preserve a reviewed contract unless new
    evidence or an explicit requested behavior change requires re-review.
 2. Inventory the source sets. Give each source a stable kebab-case ID, classify
    its authority, pin immutable identities where possible, and record only

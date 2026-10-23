@@ -20,9 +20,10 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
      [classification guide](../../../references/agents/components/classification.md);
    - native registration names and entrypoints that must not change.
 2. Choose ownership. New modern native code belongs in native-core (R-NATIVE-001); maintain existing native wrappers,
-   such as experimental packages, where they live. For native-core work, read the relevant sections of the
-   [native-core README](../../../packages/agentic/native-core/README.md); for a wrapper in another package, read that
-   package's sources and documentation instead.
+   such as experimental packages, where they live. For native-core work, start from its
+   [package instructions](../../../packages/agentic/native-core/AGENTS.md) and read the relevant
+   [native-core references](../../../packages/agentic/native-core/references/README.md); for a wrapper in another
+   package, read that package's sources and documentation instead.
 3. Load only the platform references the work needs:
    - React Native Windows Fabric views: [Windows Fabric](../../../references/agents/native/windows-fabric.md);
    - any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change:

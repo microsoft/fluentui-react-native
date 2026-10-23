@@ -9,7 +9,7 @@ owner_paths:
 
 Use this reference when defining or changing a component's public API, slots, resolved state, native prop exposure, or
 package exports. The canonical higher-order example is
-[`button.types.ts`](../../../../packages/agentic/components/src/components/button/button.types.ts).
+[`button.types.ts`](../src/components/button/button.types.ts).
 
 ## Separate the public contract from render-only structure
 
@@ -63,7 +63,7 @@ when rendering the slot so Framework Base composes them. Never overwrite the con
 unrelated native instance types, omit a top-level ref unless it can define one sound, stable imperative contract.
 
 For focus targets, attachment generations, callback cleanup, and view-command
-boundaries, follow [common focus authoring](../../focus/common.md#modern-refs-and-slot-composition).
+boundaries, follow common focus authoring (`focus.common`).
 Modern ref props do not imply that a structural root is the keyboard focus target
 or that a native focus command has completed.
 
@@ -85,13 +85,13 @@ props that no later stage uses.
 
 Primitives should define the smallest slot-compatible acceptance contract. For mutually exclusive sources, use a union
 with `never` on incompatible fields, as
-[`IconProps`](../../../../packages/agentic/components/src/primitives/icon/icon.types.ts) does for image, font, and SVG
+[`IconProps`](../src/primitives/icon/icon.types.ts) does for image, font, and SVG
 sources. Verify the primitive remains assignable to `SlotProp<typeof Primitive>` with a committed type test.
 
 ## Exports
 
 Export each component and its composition pipeline explicitly from
-[`src/index.ts`](../../../../packages/agentic/components/src/index.ts):
+[`src/index.ts`](../src/index.ts):
 
 - the component and its public props, slots, variants, and resolved state type
 - the state hook as `use<Component>_unstable`

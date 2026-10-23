@@ -1,16 +1,21 @@
-# Agentic Components source guidance
+---
+id: components.source-boundaries
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/components/src
+---
 
-These instructions apply to `packages/agentic/components/src` and its descendants. Use them with the package root
-[`AGENTS.md`](../AGENTS.md), the relevant component or primitive instructions, and the package-wide optimization skill when
-the change crosses component boundaries.
+# Source boundaries and extraction
+
+Use this reference with the package [`AGENTS.md`](../AGENTS.md) and the relevant [higher-order component](higher-order-components.md)
+or [primitive](primitives.md) reference when a change crosses component boundaries or adds shared code.
 
 ## Routing
 
-- Higher-order components live in `src/components`; read `src/components/AGENTS.md`.
-- Primitive components live in `src/primitives`; read `src/primitives/AGENTS.md`.
+- Higher-order components live in `src/components`; read [higher-order components](higher-order-components.md).
+- Primitive components live in `src/primitives`; read [primitives](primitives.md).
 - Shared package-private helpers live in `src/common`.
-- Package-wide dependency and extraction reviews use
-  [agentic-component-optimization](../../../../.github/skills/agentic-component-optimization/SKILL.md).
+- Package-wide dependency and extraction reviews use the `agentic-component-optimization` skill.
 
 ## Source boundaries
 
@@ -31,7 +36,7 @@ the change crosses component boundaries.
 
 - Align native text with View layout, not synthetic text heights or baseline offsets. A font's em size, line box, and
   visible glyph are different measurements. Use `Icon` for font icons and `LayoutStableText` for reserved labels; follow
-  the [native alignment rules](../../../../references/agents/components/agentic/styles-and-tokens.md#native-text-and-vertical-alignment)
+  the [native alignment rules](styles-and-tokens.md#native-text-and-vertical-alignment)
   for editors, mixed-size text rows, and regression coverage.
 
 - Audit dependency direction before introducing shared code.

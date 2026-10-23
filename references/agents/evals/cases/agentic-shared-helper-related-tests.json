@@ -13,7 +13,7 @@
     },
     "required_reads": [
       "packages/agentic/components/AGENTS.md",
-      "references/agents/components/agentic/tests-and-stories.md",
+      "packages/agentic/components/references/tests-and-stories.md",
       "references/agents/repository/development.md"
     ],
     "forbidden_actions": []

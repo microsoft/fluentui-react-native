@@ -13,18 +13,18 @@ primitive or helper should exist at all.
 ## Read first
 
 1. Read the [package instructions](../../../packages/agentic/components/AGENTS.md) and the
-   [source instructions](../../../packages/agentic/components/src/AGENTS.md).
-2. Read the relevant component or primitive `AGENTS.md` file and the colocated `SPEC.md` or `CONTRACT.md` files for the
-   affected area.
+   [source boundaries reference](../../../packages/agentic/components/references/source-boundaries.md).
+2. Read the [higher-order component](../../../packages/agentic/components/references/higher-order-components.md) or
+   [primitive](../../../packages/agentic/components/references/primitives.md) reference and the colocated `SPEC.md` or
+   `CONTRACT.md` files for the affected area.
 3. Inspect the canonical implementations:
-   [`components/button`](../../../packages/agentic/components/src/components/button) and
-   [`primitives/icon`](../../../packages/agentic/components/src/primitives/icon).
+   `packages/agentic/components/src/components/button` and `packages/agentic/components/src/primitives/icon`.
 
 ## Audit checklist
 
 ### 1. Dependency direction
 
-Apply the [source boundaries](../../../packages/agentic/components/src/AGENTS.md#source-boundaries): production
+Apply the [source boundaries](../../../packages/agentic/components/references/source-boundaries.md#source-boundaries): production
 dependencies, where generalizable hooks and styling helpers belong, and what stays in `src/common`.
 
 ### 2. Repetition and ownership

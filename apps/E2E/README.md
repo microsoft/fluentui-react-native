@@ -48,7 +48,7 @@ yarn workspace @fluentui-react-native/e2e-testing desktop-test --target macos te
 On October 22, 2026 (UTC), the macOS pilot and all 62 `legacy` tests pass on
 both Fabric and Paper, with no skips or retries. Fabric depends on the
 repository's RNmacOS Text accessibility patch, described in the
-[native-core README](../../packages/agentic/native-core/README.md#repository-local-rnmacos-prerequisite-patch).
+[native-core RNmacOS patch reference](../../packages/agentic/native-core/references/rnmacos-patch.md).
 Selected tester buttons are scrolled until their center is inside the list
 before clicking, because the native click targets that point.
 

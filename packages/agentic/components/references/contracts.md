@@ -1,4 +1,12 @@
-# React Native component contract sources
+---
+id: components.contracts
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/components/scripts/spec-contracts
+  - packages/agentic/components/spec-source-lock.json
+---
+
+# React Native component contracts
 
 Each higher-order component owns an original React Native contract in
 `src/components/<name>/SPEC.md` and companion files under `spec/`. Source
@@ -6,8 +14,7 @@ material is evidence for authoring that contract; it is never promoted
 mechanically into this public package.
 
 Use the
-[agentic component contract authoring skill](../../../.github/skills/agentic-component-contract-authoring/SKILL.md)
-to interpret Flex/X3, Fluent v9, HTML/CSS, visual, local-foundation, or
+`agentic-component-contract-authoring` skill to interpret Flex/X3, Fluent v9, HTML/CSS, visual, local-foundation, or
 composite evidence. Use the component authoring skill after the contract has
 passed its pre-code review.
 
@@ -208,6 +215,34 @@ artifacts only when redistribution is allowed. Write original documentation
 for the public React Native API and behavior. Do not copy or lightly rewrite
 private skill prose, rationale, tables, token files, or source bodies without
 an explicit redistribution decision.
+
+## Legacy staged specs
+
+The former `specs/` files were source copies or adaptations used to stage
+component work. They were removed under
+[#4252](https://github.com/microsoft/fluentui-react-native/issues/4252): they
+are not local React Native contracts and must not be maintained as a parallel
+component catalog. The checker requires the legacy staging path to stay empty.
+
+`spec-source-lock.json` keeps one `legacyStagedSpecs` record per removed
+component, with its status, recorded feasibility, reason, re-evaluation
+decision, and last-evaluated date. `legacySpecEvidence` pins the repository
+commit and path template that contain the complete original blocker analysis.
+The recorded outcomes are staging-time evidence, not a claim that a named
+dependency is still absent; re-evaluate them against the current package before
+drafting a contract. Components that still lack a local contract are listed in
+[remaining work](remaining-work.md#components-without-a-local-contract).
+
+Issue #4252 originally required commands that copied an upstream skill into
+`specs/<name>` and later promoted that folder. Those criteria are intentionally
+superseded: copying private source bodies into a public staging tree conflicts
+with the public content boundary, and a mechanical web-to-native transform
+reproduces the platform assumptions that created the recorded blockers. The
+replacement is a pinned `flex-authoring` session plus a directly authored local
+contract, which preserves reproducibility through immutable paths and digests
+and reviewability through the contract lifecycle and requirement evidence.
+Marketplace or X3 HEAD changes remain proposals. Primitives are governed by
+their local `CONTRACT.md` files and are outside this migration.
 
 ## Validation and drift
 

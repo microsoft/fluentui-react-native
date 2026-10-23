@@ -12,7 +12,7 @@ owner_paths:
 
 v0 and v1 components are exercised manually in FluentTester and automatically with Appium and WebdriverIO. Agentic
 components use Storybook stories and `wdio` story tests instead; see
-[tests and stories](agentic/tests-and-stories.md).
+[tests and stories](../../../packages/agentic/components/references/tests-and-stories.md).
 
 ## FluentTester
 

@@ -1,9 +1,11 @@
 {
   "schema_version": 1,
   "packages": [
+    "packages/agentic/components",
+    "packages/agentic/design",
     "packages/agentic/desktop-driver",
     "packages/agentic/desktop-test",
-    "packages/agentic/design",
+    "packages/agentic/native-core",
     "packages/agentic/storybook-desktop",
     "packages/agentic/storybook-desktop-runtime",
     "packages/framework-base"

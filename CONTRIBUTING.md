@@ -65,7 +65,7 @@ package's [contributor instructions](./packages/agentic/components/AGENTS.md) an
 
 1. A higher-order component starts with a reviewed contract: `SPEC.md` plus `spec/source.json`, `spec/tokens.yaml`,
    `spec/accessibility.md`, `spec/interaction.md`, and `spec/usage.md`. Follow
-   [SPEC-SOURCE.md](./packages/agentic/components/SPEC-SOURCE.md) for provenance, review state, and source adapters.
+   [the contracts reference](packages/agentic/components/references/contracts.md) for provenance, review state, and source adapters.
 1. A primitive instead keeps a colocated `CONTRACT.md` that describes its public API and renderer branches.
 1. Run `yarn workspace @fluentui-react-native/components check:spec-contracts` to validate the contract.
 

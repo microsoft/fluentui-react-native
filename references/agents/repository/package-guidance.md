@@ -70,6 +70,7 @@ reference, not in the remaining-work file.
 `yarn check-agent-instructions` validates registered package entry points,
 reference metadata, indexes, internal links, skill routing, rule definitions,
 and evaluation cases, and rejects plan files outside a package's `references/`. `yarn check-package-contents` uses Yarn's real
-`pack --dry-run --json` inventory to verify published file inclusion. Run the
+`pack --dry-run --json` inventory to verify published file inclusion; files a package deliberately excludes with a
+negated `files` pattern, such as tests, are not required. Run the
 package's `format`, `lint`, `build`, and `test` scripts for source changes.
 Before a release, run `yarn check-publishing` and inspect the package inventory.

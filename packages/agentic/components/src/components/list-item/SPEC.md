@@ -49,7 +49,7 @@ semibold content width and show the selected fill.
 - **LIT-003:** Selection remains caller-owned, and each selection mode renders
   its documented presentational indicator and selected visual treatment.
 - **LIT-004:** Disabled, hover, press, focus, accessibility, and user-style
-  behavior remain coherent on the root, following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+  behavior remain coherent on the root, following the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy).
 - **LIT-005:** Size and secondary-content-position mappings preserve the
   documented React Native layout behavior.
 
@@ -82,7 +82,7 @@ those behaviors through its own React Native composition.
 
 ## Divergences from Flex
 
-- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `list-item-native-selection-indicators` (**accepted**): FURN renders the
   single- and multi-select indicators as inaccessible text glyphs rather than

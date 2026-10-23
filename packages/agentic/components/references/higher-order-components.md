@@ -1,6 +1,13 @@
+---
+id: components.higher-order-components
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/components/src/components
+---
+
 # Higher-order component authoring
 
-These instructions apply to `packages/agentic/components/src/components` and its descendants.
+Use this reference for every component under `src/components`.
 
 Higher-order components own design-token styling, interaction state, layout, and component-level accessibility. Use
 `components/button` as the canonical implementation. Theme-aware foundational
@@ -8,17 +15,16 @@ components without a Flex catalog entry remain in this directory and use the
 validator-backed `local-foundation` contract source.
 
 Draft and review a source-backed React Native contract through the
-[agentic component contract authoring skill](../../../../../.github/skills/agentic-component-contract-authoring/SKILL.md)
-before implementation. Select only the adapters represented by the evidence,
+`agentic-component-contract-authoring` skill before implementation (R-AGENTIC-001); [contracts](contracts.md)
+defines the provenance it records. Select only the adapters represented by the evidence,
 resolve authority per requirement, and use the pinned
 `flex-components:<name>` reference only when a `flex-skill` source applies.
 Ratify the local contract after types, tests, stories, and platform evidence
 agree; never mechanically promote a web-authored spec.
 
 For package-wide dependency or extraction reviews, also read
-[`packages/agentic/components/src/AGENTS.md`](../AGENTS.md) and the
-[agentic-component-optimization](../../../../../.github/skills/agentic-component-optimization/SKILL.md) skill. A focused
-component edit should stay within this file and the relevant `SPEC.md`; do not turn every small change into a whole-package
+[source boundaries](source-boundaries.md) and use the `agentic-component-optimization` skill. A focused
+component edit should stay within this reference and the relevant `SPEC.md`; do not turn every small change into a whole-package
 audit.
 
 ## Required structure
@@ -67,9 +73,9 @@ audit.
 
 ## Focus visual policy
 
-Read [common focus authoring](../../../../../references/agents/focus/common.md),
-then [Windows/Win32](../../../../../references/agents/focus/windows-win32.md) or
-[macOS](../../../../../references/agents/focus/macos.md).
+Read common focus authoring (`focus.common`),
+then Windows/Win32 (`focus.windows-win32`) or
+macOS (`focus.macos`).
 The common file owns ref, state, activation, scope, and styling invariants; platform files own detailed
 native adaptation. V1 Win32 models observable behavior for both Office Win32 and Windows Fabric.
 
@@ -82,16 +88,15 @@ and native setting only on the actual focus target. Scenes require `ThemedRoot`;
 subscribe through `useRootInputModality`, while `useRootSettings` remains stable and non-subscribing.
 The native Windows path requires RNW 0.81.35 or newer.
 
-The [desktop improvement plan](../../WIN32-FOCUS-PLAN.md) describes future target/intent/notification
-abstractions and native-service gates and records which are implemented. Do not change behavior or pinned source
-identities by following a proposal before its component contract is reviewed. The accepted
+Open desktop focus qualification gates are listed in [remaining work](remaining-work.md#desktop-focus-qualification).
+Do not change behavior or pinned source identities to close a gate before the component contract is reviewed. The accepted
 `native-system-focus-visuals` divergence continues to refer through this stable anchor.
 
 ## Focused references
 
-- [Contract and source adaptation](../../../../../.github/skills/agentic-component-contract-authoring/SKILL.md)
-- [Types and slots](../../../../../references/agents/components/agentic/types-and-slots.md)
-- [State and accessibility](../../../../../references/agents/components/agentic/state-and-accessibility.md)
-- [Styles and tokens](../../../../../references/agents/components/agentic/styles-and-tokens.md)
-- [Rendering and assembly](../../../../../references/agents/components/agentic/rendering.md)
-- [Tests and stories](../../../../../references/agents/components/agentic/tests-and-stories.md)
+- [Contracts](contracts.md) and the [contract source adapters](contract-sources/flex-x3.md) in `contract-sources/`
+- [Types and slots](types-and-slots.md)
+- [State and accessibility](state-and-accessibility.md)
+- [Styles and tokens](styles-and-tokens.md)
+- [Rendering and assembly](rendering.md)
+- [Tests and stories](tests-and-stories.md)
