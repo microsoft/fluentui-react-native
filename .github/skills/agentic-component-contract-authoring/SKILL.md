@@ -44,8 +44,8 @@ Load every adapter represented by the supplied evidence, but no others.
 ## Workflow
 
 1. Read the [package instructions](../../../packages/agentic/components/AGENTS.md), the existing `SPEC.md`, all
-   companions under `spec/`, and the [contracts reference](../../../packages/agentic/components/references/contracts.md). Preserve a reviewed contract unless new
-   evidence or an explicit requested behavior change requires re-review.
+   companions under `spec/`, and the [contracts reference](../../../packages/agentic/components/references/contracts.md).
+   Preserve a reviewed contract unless new evidence or an explicit requested behavior change requires re-review.
 2. Inventory the source sets. Give each source a stable kebab-case ID, classify
    its authority, pin immutable identities where possible, and record only
    public or redistributable evidence.
@@ -75,27 +75,18 @@ Load every adapter represented by the supplied evidence, but no others.
    `review-required`, and a null review date until the source interpretation,
    native adaptation, authority decisions, and planned evidence are coherent.
    Move to `contract-reviewed` only after that explicit review.
-8. Run the package contract checker. Source refresh tools may update provenance
-   but never approve a contract or populate reviewed surfaces automatically.
+8. Run the package contract checker described in
+   [validation and drift](../../../packages/agentic/components/references/contracts.md#validation-and-drift). Source
+   refresh tools may update provenance but never approve a contract or populate reviewed surfaces automatically.
 
 ## Contract rules
 
-- `spec/source.json` uses schema version 2 and a sorted, non-empty `sources[]`.
-  Source IDs are unique. Keep this generated, digest-heavy metadata in JSON;
-  `spec/tokens.yaml` remains YAML because token mappings are human-authored.
-- Supported source kinds are `flex-skill`, `git-files`, `html-css`,
-  `visual-reference`, and `local-foundation`.
-- A source's `authority` describes how it may govern requirements. Requirement
-  `sources` identify the actual source set used for that decision.
-- `git-files` records a repository, full commit SHA, and sorted file paths with
-  SHA-256 digests. `html-css` and `visual-reference` record immutable artifact
-  digests; repository-relative artifacts are verified locally.
-- A `local-foundation` source is valid only when no Flex catalog component
-  exists and must be the contract's sole source.
-- Only `flex-skill` has automated release and candidate drift reporting.
-  Other immutable sources report Flex drift as `not-applicable`; refresh their
-  identities through an explicit source review.
-- A reviewed local contract is normative for FURN. New upstream evidence is a
-  change proposal, not an automatic rewrite.
-- Do not copy or lightly transform private source bodies into this public
-  repository. Record identities and write original React Native documentation.
+The [contracts reference](../../../packages/agentic/components/references/contracts.md) owns the `spec/source.json`
+schema, source kinds and authorities, lifecycle and review state, the public content boundary, and the validation and
+drift commands. Apply it rather than restating it here. In particular:
+
+- A reviewed local contract is normative for FURN. New upstream evidence is a change proposal, not an automatic
+  rewrite.
+- A `local-foundation` source is valid only when no Flex catalog component exists, and it must be the sole source.
+- Record identities and write original React Native documentation; never copy or lightly transform private source
+  bodies into this public repository (R-REPO-004).
