@@ -17,19 +17,45 @@ function getBinPath(command: string): string | undefined {
   return wdRoot.openModule(cmdModule).getBinPath(command);
 }
 
-export async function runScript(command: string, args: string[], options?: SpawnOptions): Promise<number> {
+function resolveScript(command: string, args: string[], options?: SpawnOptions): [string, string[], SpawnOptions] {
   const binPath = getBinPath(command);
   const verb = binPath ? process.execPath : yarnVerb;
   const spawnArgs = binPath ? [binPath, ...args] : ['exec', command, ...args];
+  const spawnOptions: SpawnOptions = {
+    cwd: process.cwd(),
+    stdio: 'inherit',
+    shell: verb.endsWith('.cmd') || verb.endsWith('.bat') ? true : undefined,
+    ...options,
+  };
+  return [verb, spawnArgs, spawnOptions];
+}
+
+export async function runScript(command: string, args: string[], options?: SpawnOptions): Promise<number> {
+  const [verb, spawnArgs, spawnOptions] = resolveScript(command, args, options);
 
   return new Promise((resolve) => {
-    spawn(verb, spawnArgs, {
-      cwd: process.cwd(),
-      stdio: 'inherit',
-      shell: verb.endsWith('.cmd') || verb.endsWith('.bat') ? true : undefined,
-      ...options,
-    }).on('close', (code) => {
+    spawn(verb, spawnArgs, spawnOptions).on('close', (code) => {
       resolve(code ?? -1);
+    });
+  });
+}
+
+/**
+ * Run a script like {@link runScript}, but capture its standard output instead of inheriting it.
+ * Standard error still streams to this process so failures remain visible.
+ */
+export async function captureScript(command: string, args: string[], options?: SpawnOptions): Promise<{ code: number; stdout: string }> {
+  const [verb, spawnArgs, spawnOptions] = resolveScript(command, args, options);
+
+  return new Promise((resolve, reject) => {
+    const child = spawn(verb, spawnArgs, { ...spawnOptions, stdio: ['ignore', 'pipe', 'inherit'] });
+    let stdout = '';
+    child.stdout?.setEncoding('utf8').on('data', (chunk: string) => {
+      stdout += chunk;
+    });
+    child.on('error', reject);
+    child.on('close', (code) => {
+      resolve({ code: code ?? -1, stdout });
     });
   });
 }

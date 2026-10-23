@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { legacyDesktopSpecs } = require('./desktop-specs.mts');
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 60000;
@@ -6,7 +7,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: [['src/**/specs/*.macos.ts']],
+  specs: legacyDesktopSpecs.macos,
   exclude: [/* 'path/to/excluded/files' */],
 
   maxInstances: 30,

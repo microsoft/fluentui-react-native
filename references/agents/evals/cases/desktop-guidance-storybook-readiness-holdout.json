@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "case_id": "desktop-guidance-storybook-readiness-holdout",
+  "split": "holdout",
+  "task_mode": "toolchain",
+  "prompt": "A macOS Storybook smoke run was switched from Fabric to Paper and now times out after the runtime hello, before the requested story becomes ready. Diagnose the renderer and readiness boundaries using the app's declared workflow. Do not patch generated identity, manifests, Pods, or other generated output.",
+  "expected": {
+    "skills": ["desktop-testing"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": [
+      ".github/skills/desktop-testing/SKILL.md",
+      "apps/storybook/AGENTS.md",
+      "apps/storybook/agent-map.yaml",
+      "packages/agentic/storybook-desktop/references/commands.md",
+      "packages/agentic/storybook-desktop/references/platforms/macos.md",
+      "packages/agentic/storybook-desktop/references/readiness.md",
+      "packages/agentic/storybook-desktop/references/troubleshooting.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "renderer-switch-regenerates",
+      "description": "Selects Paper explicitly for the macOS endpoint and requires a fresh prep after switching renderers because Fabric and Paper share the generated project and Pods.",
+      "rule_ids": [],
+      "source_refs": [
+        "packages/agentic/storybook-desktop/references/commands.md",
+        "packages/agentic/storybook-desktop/references/platforms/macos.md"
+      ]
+    },
+    {
+      "id": "smoke-owned-lifecycle",
+      "description": "Uses the declared Storybook smoke lifecycle for end-to-end diagnosis and inspects reported instance details and owned command logs rather than bypassing the app's scripts or patching generated output.",
+      "rule_ids": [],
+      "source_refs": [
+        "apps/storybook/AGENTS.md",
+        "apps/storybook/agent-map.yaml",
+        "packages/agentic/storybook-desktop/references/commands.md",
+        "packages/agentic/storybook-desktop/references/troubleshooting.md"
+      ]
+    },
+    {
+      "id": "authenticated-story-readiness",
+      "description": "Does not treat runtime hello alone as readiness: requires authenticated hello and initial storyRendered on the same connection, then request-correlated readiness and native story-root verification for the requested story.",
+      "rule_ids": [],
+      "source_refs": [
+        "packages/agentic/storybook-desktop/references/readiness.md",
+        "packages/agentic/storybook-desktop/references/troubleshooting.md"
+      ]
+    }
+  ]
+}

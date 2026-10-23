@@ -7,6 +7,8 @@ import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-
 import type { DesktopArtifact } from '@fluentui-react-native/desktop-driver/authoring';
 import { ArtifactManager, captureDesktopFailureEvidence } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
+import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import { DesktopReportedError } from '@fluentui-react-native/desktop-test/reporting';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
@@ -35,6 +37,9 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   url: string;
   artifactsRoot?: string;
   errorOutput?: DesktopStorybookErrorOutput;
+  report?: DesktopReportWriter;
+  signal?: AbortSignal;
+  optional?: boolean;
 };
 
 export class WdioStoryTestRunError extends Error {
@@ -42,7 +47,7 @@ export class WdioStoryTestRunError extends Error {
 
   constructor(results: readonly WdioStoryTestResult[], failures: readonly unknown[]) {
     const cause = failures.length === 1 ? failures[0] : new AggregateError(failures, 'Executable wdio tests and evidence/cleanup failed.');
-    super(errorMessage(cause), { cause });
+    super(`Executable wdio stories failed: ${errorMessage(cause)}`, { cause });
     this.name = 'WdioStoryTestRunError';
     this.results = [...results];
   }
@@ -61,7 +66,7 @@ export function selectWdioStories(
 
 export async function runWdioStoryTests(
   options: RunWdioStoryTestsOptions,
-  runner: DesktopCommandRunner = new NodeDesktopCommandRunner(),
+  runner?: DesktopCommandRunner,
 ): Promise<readonly WdioStoryTestResult[]> {
   const settings = resolveWdioOptions(options);
   const stories = selectWdioStories(options.manifest, settings);
@@ -80,22 +85,35 @@ export async function runWdioStoryTests(
   });
   if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
   const artifacts = new ArtifactManager(
-    options.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', options.platform, 'wdio'),
+    options.artifactsRoot ??
+      (options.report
+        ? options.report.artifactPath(path.join('evidence', options.platform, 'wdio'))
+        : path.join(options.config.projectRoot, 'artifacts', options.platform, 'wdio')),
   );
   const generatedRoot = path.join(options.config.projectRoot, 'storybook-desktop.generated', 'wdio');
-  fs.mkdirSync(generatedRoot, { recursive: true });
-  const directory = fs.mkdtempSync(path.join(generatedRoot, 'run-'));
   const workerUrl = pathToFileURL(
     path.join(options.config.resolvePackage('@fluentui-react-native/storybook-desktop').root, 'lib', 'testing', 'worker.js'),
   ).href;
   const results: WdioStoryTestResult[] = [];
+  const executionFailures: unknown[] = [];
+  for (const { entry, testName } of cases)
+    options.report?.emit({
+      kind: 'work-selected',
+      payload: { workId: csfTestId(entry.id, testName), label: `${entry.id} / ${testName ?? 'default'}` },
+    });
+  const ownedRunner = runner ? undefined : new NodeDesktopCommandRunner({ reporter: options.report });
+  const commands = runner ?? ownedRunner!;
+  let directory: string | undefined;
   let infrastructureFailure: unknown;
   let activeStory: string | undefined;
   let phase = 'setup';
   let activeResult: WdioStoryTestResult | undefined;
   let activeStarted = 0;
   try {
+    fs.mkdirSync(generatedRoot, { recursive: true });
+    directory = fs.mkdtempSync(path.join(generatedRoot, 'run-'));
     for (const [index, { entry, code, testName }] of cases.entries()) {
+      options.signal?.throwIfAborted();
       const displayName = testName === undefined ? entry.id : `${entry.id} / ${testName}`;
       const artifactId =
         testName === undefined ? entry.id : `${entry.id}-${createHash('sha256').update(testName).digest('hex').slice(0, 16)}`;
@@ -110,6 +128,10 @@ export async function runWdioStoryTests(
         durationMs: 0,
       };
       activeResult = result;
+      const testId = csfTestId(entry.id, testName);
+      const context = { story: entry.id, test: testName ?? 'default', endpoint: options.platform };
+      options.report?.emit({ kind: 'scope-start', payload: { label: displayName, category: 'worker' } }, testId, context, testId);
+      options.report?.emit({ kind: 'test-start', payload: { testId, title: displayName, attempt: 0 } }, testId, context);
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
       const desktop = await connectDesktopWebdriver({
         clickMode: settings.clickMode,
@@ -149,7 +171,7 @@ export async function runWdioStoryTests(
         );
         phase = 'execution';
         const outcome = await runWorker(
-          runner,
+          commands,
           {
             command: process.execPath,
             label: `wdio "${displayName}"`,
@@ -164,10 +186,13 @@ export async function runWdioStoryTests(
             ],
             cwd: options.config.projectRoot,
             env: {},
+            category: 'worker',
+            context,
           },
           Math.min(settings.timeoutMs + 5000, 2_147_483_647),
           resultPath,
           displayName,
+          options.signal,
         );
         result.status = outcome.status;
         if (outcome.status === 'skipped') {
@@ -175,12 +200,25 @@ export async function runWdioStoryTests(
         }
       } catch (error) {
         failure = error;
+        executionFailures.push(error);
         result.error = formatDesktopStorybookError(error);
         writeDesktopStorybookFailure(`wdio "${displayName}" during ${phase}`, error, options.errorOutput);
         const evidence = await captureDesktopFailureEvidence(desktop.session, artifacts, artifactId);
         result.artifacts = evidence.artifacts;
         result.evidenceErrors = evidence.errors;
+        for (const artifact of result.artifacts)
+          options.report?.emit(
+            {
+              kind: 'artifact',
+              payload: {
+                path: path.relative(options.report.root, path.join(artifacts.root, artifact.path)),
+                description: `${displayName}: ${artifact.kind}`,
+              },
+            },
+            testId,
+          );
         for (const evidenceError of result.evidenceErrors) {
+          options.report?.fail(new Error(evidenceError), 'evidence', testId);
           writeDesktopStorybookFailure(`evidence for "${displayName}"`, evidenceError, options.errorOutput);
         }
       }
@@ -188,6 +226,7 @@ export async function runWdioStoryTests(
       try {
         await desktop.delete();
       } catch (cleanupError) {
+        options.report?.fail(cleanupError, 'cleanup', testId);
         throw new AggregateError(
           failure === undefined ? [cleanupError] : [failure, cleanupError],
           `Could not release the wdio session for ${displayName}; stopping before another test starts.`,
@@ -195,45 +234,93 @@ export async function runWdioStoryTests(
       }
       result.durationMs = Date.now() - started;
       results.push(result);
+      options.report?.emit(
+        {
+          kind: 'test-result',
+          payload: {
+            testId,
+            title: displayName,
+            attempt: 0,
+            status: result.status,
+            durationMs: result.durationMs,
+            ...(result.status === 'skipped' ? { reason: result.skipReason } : {}),
+            ...(failure !== undefined ? { failure: options.report.failure(failure, 'test') } : {}),
+          },
+        },
+        testId,
+        context,
+      );
+      options.report?.emit({ kind: 'scope-end', payload: { status: result.status } }, testId);
     }
   } catch (error) {
     infrastructureFailure = error;
+    options.report?.fail(error);
     if (activeResult && !results.includes(activeResult)) {
       activeResult.status = 'failed';
       activeResult.error = formatDesktopStorybookError(error);
       activeResult.durationMs = Date.now() - activeStarted;
       results.push(activeResult);
+      const testId = csfTestId(activeResult.storyId, activeResult.testName);
+      options.report?.emit(
+        {
+          kind: 'test-result',
+          payload: {
+            testId,
+            title: activeStory!,
+            attempt: 0,
+            status: 'failed',
+            durationMs: activeResult.durationMs,
+            failure: options.report.failure(error),
+          },
+        },
+        testId,
+        { endpoint: options.platform, story: activeResult.storyId, test: activeResult.testName ?? 'default' },
+      );
+      options.report?.emit({ kind: 'scope-end', payload: { status: 'failed' } }, testId);
     }
     writeDesktopStorybookFailure(`wdio "${activeStory ?? 'run'}" during ${phase}`, error, options.errorOutput);
   }
   const failures: unknown[] = infrastructureFailure === undefined ? [] : [infrastructureFailure];
-  if (results.some(({ status }) => status === 'failed')) {
-    failures.push(
-      new Error(
-        `Executable wdio stories failed: ${results
-          .filter(({ status }) => status === 'failed')
-          .map(({ storyId, testName }) => (testName === undefined ? storyId : `${storyId} / ${testName}`))
-          .join(', ')}. ` + `See ${path.join(artifacts.root, 'run.json')}.`,
-      ),
-    );
-  }
+  failures.push(...executionFailures);
+  const allSkipped = results.every(({ status }) => status === 'skipped');
+  const incomplete = results.length !== cases.length || (allSkipped && !options.optional);
+  if (incomplete && failures.length === 0)
+    failures.push(new Error('Required executable story cohort did not execute any tests or left selected work unfinished.'));
   try {
-    artifacts.writeMetadata('run', {
+    const reportPath = artifacts.writeMetadata('run', {
       endpoint: options.platform,
       platformManifestDigest: options.manifest.platformManifestDigest,
-      status: failures.length ? 'failed' : 'passed',
+      status: failures.length
+        ? incomplete && executionFailures.length === 0 && infrastructureFailure === undefined
+          ? 'incomplete'
+          : 'failed'
+        : allSkipped
+          ? 'skipped'
+          : 'passed',
       ...(infrastructureFailure === undefined ? {} : { error: errorMessage(infrastructureFailure) }),
       tests: results,
+    });
+    options.report?.emit({
+      kind: 'artifact',
+      payload: { path: path.relative(options.report.root, reportPath), description: 'Executable story results' },
     });
   } catch (error) {
     failures.push(error);
     writeDesktopStorybookFailure('writing the wdio report', error, options.errorOutput);
   }
   try {
-    fs.rmSync(directory, { recursive: true, force: true });
+    if (directory) fs.rmSync(directory, { recursive: true, force: true });
   } catch (error) {
     failures.push(error);
     writeDesktopStorybookFailure('cleaning generated wdio files', error, options.errorOutput);
+  }
+  if (ownedRunner) {
+    if (failures.length) ownedRunner.reporter?.fail(new AggregateError(failures, 'Executable story failures.'));
+    try {
+      await ownedRunner.close();
+    } catch (error) {
+      failures.push(error);
+    }
   }
   if (failures.length) throw new WdioStoryTestRunError(results, failures);
   return results;
@@ -254,6 +341,12 @@ export function matchesWdioTest(name: string, pattern?: string): boolean {
   return pattern === undefined || path.matchesGlob(name, pattern);
 }
 
+function csfTestId(storyId: string, testName?: string): string {
+  return `csf-${createHash('sha256')
+    .update(JSON.stringify([storyId, testName ?? 'default']))
+    .digest('hex')}`;
+}
+
 function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
@@ -264,14 +357,25 @@ async function runWorker(
   timeoutMs: number,
   resultPath: string,
   storyId: string,
+  signal?: AbortSignal,
 ): Promise<WorkerResult> {
   const worker = runner.start(command);
   let timer: ReturnType<typeof setTimeout> | undefined;
   let failure: unknown;
   let result: WorkerResult | undefined;
+  let abort: (() => void) | undefined;
   try {
     const exitCode = await Promise.race([
       worker.completed,
+      ...(signal
+        ? [
+            new Promise<never>((_resolve, reject) => {
+              abort = () => reject(signal.reason);
+              if (signal.aborted) abort();
+              else signal.addEventListener('abort', abort, { once: true });
+            }),
+          ]
+        : []),
       new Promise<never>((_resolve, reject) => {
         timer = setTimeout(() => reject(new Error(`Executable wdio worker exceeded its ${timeoutMs}ms process deadline.`)), timeoutMs);
       }),
@@ -285,8 +389,10 @@ async function runWorker(
       'error' in outcome &&
       typeof outcome.error === 'string'
     ) {
+      if ('failure' in outcome && outcome.failure !== undefined) throw new DesktopReportedError(outcome.failure);
       throw new Error(`Executable wdio callback "${storyId}" failed:\n${outcome.error}`);
     }
+
     if (exitCode !== 0) {
       throw new Error(`Executable wdio worker for "${storyId}" exited with code ${exitCode}.`);
     }
@@ -298,6 +404,7 @@ async function runWorker(
     failure = error;
   } finally {
     clearTimeout(timer);
+    if (abort) signal?.removeEventListener('abort', abort);
   }
   try {
     await worker.stop({ failed: failure !== undefined });

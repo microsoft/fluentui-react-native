@@ -78,6 +78,7 @@ export type NativeElementSnapshot = {
   name?: string;
   parentId?: string;
   rect: Rect;
+  required?: SupportedValue<boolean>;
   role: string;
   scope: NativeElementScope;
   selected: SupportedValue<boolean>;
@@ -123,6 +124,7 @@ export type DesktopTreeNode = {
     enabled?: boolean;
     expanded?: boolean;
     focused?: boolean;
+    required?: boolean;
     selected?: boolean;
     visible?: boolean;
   };
@@ -136,7 +138,9 @@ export type DesktopTarget = {
   host: DesktopHost;
   id: string;
   platformName: DesktopPlatformName;
-  renderer: DesktopRenderer;
+  renderer?: DesktopRenderer;
+  launchModes?: readonly ('attach' | 'launch')[];
+  launchTimeoutMs?: number;
   storyRootTestId?: string;
   storyOrchestrator?: StoryOrchestrator;
 };

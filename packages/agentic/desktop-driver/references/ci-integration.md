@@ -1,3 +1,10 @@
+---
+id: desktop-driver.ci-integration
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # CI integration
 
 CI should separate portable package checks, target-OS native contracts, and
@@ -195,5 +202,3 @@ Before making a real-platform job required:
 - artifact collection runs even after failure;
 - no helper or app processes leak;
 - no input remains depressed after cancellation, crash, or timeout;
-- the platform's remaining qualification items in [PLAN.md](../PLAN.md) are
-  complete.

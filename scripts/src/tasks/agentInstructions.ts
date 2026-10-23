@@ -17,6 +17,7 @@ export type CheckResult = {
 const REFERENCES_DIR = 'references/agents';
 const EVAL_CASES_DIR = `${REFERENCES_DIR}/evals/cases`;
 const SKILLS_DIR = '.github/skills';
+const PACKAGE_GUIDANCE = `${REFERENCES_DIR}/repository/package-guidance-packages.json`;
 const ALWAYS_ON = ['AGENTS.md', 'CLAUDE.md', '.github/copilot-instructions.md'];
 
 const KINDS = new Set(['index', 'instruction-reference', 'evidence-reference', 'compatibility-reference']);
@@ -70,6 +71,22 @@ export function listFiles(root: string): string[] {
     walk('');
     return files;
   }
+}
+
+function extractPackageSpecifiers(markdown: string): { packageName: string; packagePath?: string; line: number }[] {
+  const paths: { packageName: string; packagePath?: string; line: number }[] = [];
+  let fenced = false;
+  markdown.split('\n').forEach((line, index) => {
+    if (/^\s*(```|~~~)/.test(line)) {
+      fenced = !fenced;
+      return;
+    }
+    if (fenced) return;
+    for (const match of line.matchAll(/`(@[^/`\s]+\/[^/`\s]+)(?:\/([^`\s]+))?`/g)) {
+      paths.push({ packageName: match[1], packagePath: match[2], line: index + 1 });
+    }
+  });
+  return paths;
 }
 
 /** Returns true when a repository-relative path exists with exactly this letter case. */
@@ -207,6 +224,24 @@ export function extractCodePaths(markdown: string): Link[] {
   return paths;
 }
 
+function extractPackageCodePaths(markdown: string): Link[] {
+  const paths: Link[] = [];
+  let fenced = false;
+  markdown.split('\n').forEach((line, index) => {
+    if (/^\s*(```|~~~)/.test(line)) {
+      fenced = !fenced;
+      return;
+    }
+    if (fenced) return;
+    for (const match of line.matchAll(/`((?:config|lib|native|references|src)\/[^`\s]+)`/g)) {
+      if (!/[<>*{}|$]|\.\.\./.test(match[1])) {
+        paths.push({ target: match[1].replace(/[#:].*$/, ''), line: index + 1 });
+      }
+    }
+  });
+  return paths;
+}
+
 /**
  * Extracts explicit prerequisites: the first link in a sentence such as "Read [X](x.md) first" or
  * "Focus work starts with [X](x.md)", and every link in a "Read first" section.
@@ -338,20 +373,29 @@ function parseSkillFrontmatter(markdown: string): Record<string, string> | undef
   return fields;
 }
 
-function isInstructionSurface(file: string): boolean {
+type GuidedPackage = { path: string; name: string; npmName: string };
+
+function packageForFile(file: string, packages: GuidedPackage[]): GuidedPackage | undefined {
+  return packages.find(({ path: packagePath }) => file.startsWith(`${packagePath}/`));
+}
+
+function isInstructionSurface(file: string, packages: GuidedPackage[]): boolean {
   return (
     path.posix.basename(file) === 'AGENTS.md' ||
     file === 'CLAUDE.md' ||
     file === '.github/copilot-instructions.md' ||
     (file.startsWith(`${SKILLS_DIR}/`) && file.endsWith('.md')) ||
-    (file.startsWith(`${REFERENCES_DIR}/`) && file.endsWith('.md'))
+    (file.startsWith(`${REFERENCES_DIR}/`) && file.endsWith('.md')) ||
+    packages.some(({ path: packagePath }) => file.startsWith(`${packagePath}/references/`) && file.endsWith('.md'))
   );
 }
 
-function requiresFrontmatter(file: string): boolean {
+function requiresFrontmatter(file: string, packages: GuidedPackage[]): boolean {
   return (
     file.endsWith('.md') &&
-    (file.startsWith(`${REFERENCES_DIR}/`) || new RegExp(`^${SKILLS_DIR.replace('.', '\\.')}/[^/]+/references/`).test(file))
+    (file.startsWith(`${REFERENCES_DIR}/`) ||
+      new RegExp(`^${SKILLS_DIR.replace('.', '\\.')}/[^/]+/references/`).test(file) ||
+      packages.some(({ path: packagePath }) => file.startsWith(`${packagePath}/references/`)))
   );
 }
 
@@ -379,7 +423,42 @@ export function checkAgentInstructions(root: string): CheckResult {
   const issues: Issue[] = [];
   const files = listFiles(root);
   const read = (file: string) => readFileSync(path.join(root, file), 'utf8');
-  const surfaces = files.filter(isInstructionSurface).sort();
+  let packages: GuidedPackage[] = [];
+  if (files.includes(PACKAGE_GUIDANCE)) {
+    try {
+      const registry = JSON.parse(read(PACKAGE_GUIDANCE)) as { schema_version?: number; packages?: unknown };
+      if (
+        registry.schema_version !== 1 ||
+        !Array.isArray(registry.packages) ||
+        registry.packages.some((entry) => typeof entry !== 'string')
+      ) {
+        issues.push({ file: PACKAGE_GUIDANCE, message: 'expected schema_version 1 and a packages array of workspace paths' });
+      } else {
+        packages = registry.packages.map((packagePath) => {
+          const manifestPath = `${packagePath}/package.json`;
+          if (!files.includes(manifestPath)) {
+            issues.push({ file: PACKAGE_GUIDANCE, message: `guided package manifest does not exist: ${manifestPath}` });
+            return { path: packagePath, name: '', npmName: '' };
+          }
+          const manifest = JSON.parse(read(manifestPath)) as { name?: unknown };
+          if (typeof manifest.name !== 'string') {
+            issues.push({ file: manifestPath, message: 'package name must be a string' });
+            return { path: packagePath, name: '', npmName: '' };
+          }
+          return { path: packagePath, name: manifest.name.replace(/^@[^/]+\//, ''), npmName: manifest.name };
+        });
+        const paths = packages.map(({ path: packagePath }) => packagePath);
+        if (new Set(paths).size !== paths.length) {
+          issues.push({ file: PACKAGE_GUIDANCE, message: 'guided package paths must be unique' });
+        }
+      }
+    } catch (error) {
+      issues.push({ file: PACKAGE_GUIDANCE, message: `could not read package registry: ${String(error)}` });
+    }
+  }
+  const surfaces = files.filter((file) => isInstructionSurface(file, packages)).sort();
+  const packageReadmes = packages.map(({ path: packagePath }) => `${packagePath}/README.md`).filter((file) => files.includes(file));
+  const linkSurfaces = [...new Set([...surfaces, ...packageReadmes])].sort();
   const anchorCache = new Map<string, Set<string>>();
   const anchorsOf = (file: string) => {
     let anchors = anchorCache.get(file);
@@ -393,7 +472,7 @@ export function checkAgentInstructions(root: string): CheckResult {
   // Frontmatter, IDs, and kinds.
   const frontmatter = new Map<string, Frontmatter>();
   const ids = new Map<string, string>();
-  for (const file of surfaces.filter(requiresFrontmatter)) {
+  for (const file of surfaces.filter((surface) => requiresFrontmatter(surface, packages))) {
     const parsed = parseFrontmatter(read(file));
     if (typeof parsed === 'string') {
       issues.push({ file, line: 1, message: parsed });
@@ -402,6 +481,10 @@ export function checkAgentInstructions(root: string): CheckResult {
     frontmatter.set(file, parsed);
     if (!ID_PATTERN.test(parsed.id)) {
       issues.push({ file, line: 2, message: `invalid id "${parsed.id}"` });
+    }
+    const ownerPackage = packageForFile(file, packages);
+    if (ownerPackage && file.startsWith(`${ownerPackage.path}/references/`) && !parsed.id.startsWith(`${ownerPackage.name}.`)) {
+      issues.push({ file, line: 2, message: `package reference ID must start with "${ownerPackage.name}."` });
     }
     const previous = ids.get(parsed.id);
     if (previous) {
@@ -419,16 +502,32 @@ export function checkAgentInstructions(root: string): CheckResult {
   }
 
   // Index completeness.
-  const indexFile = `${REFERENCES_DIR}/README.md`;
-  if (files.includes(indexFile)) {
+  const indexFiles = [
+    `${REFERENCES_DIR}/README.md`,
+    ...packages.map(({ path: packagePath }) => `${packagePath}/references/README.md`).filter((file) => files.includes(file)),
+  ];
+  for (const indexFile of indexFiles) {
+    if (!files.includes(indexFile)) {
+      continue;
+    }
     const index = read(indexFile);
+    if (packageForFile(indexFile, packages) && !/^\|\s*ID\s*\|\s*Document\s*\|\s*Read when\s*\|$/m.test(index)) {
+      issues.push({ file: indexFile, message: 'package reference index must have ID, Document, and Read when columns' });
+    }
+    if (packageForFile(indexFile, packages) && frontmatter.get(indexFile)?.kind !== 'index') {
+      issues.push({ file: indexFile, message: 'package reference index must use kind: index' });
+    }
     const indexed = new Set(
       extractLinks(index)
         .map((link) => resolveLink(indexFile, link.target)?.file)
         .filter(Boolean),
     );
     for (const [file, meta] of frontmatter) {
-      if (file.startsWith(`${REFERENCES_DIR}/`) && INDEXED_KINDS.has(meta.kind)) {
+      const packageRoot = packageForFile(file, packages)?.path;
+      const belongsToIndex =
+        (indexFile === `${REFERENCES_DIR}/README.md` && file.startsWith(`${REFERENCES_DIR}/`)) ||
+        (packageRoot !== undefined && indexFile === `${packageRoot}/references/README.md`);
+      if (belongsToIndex && file !== indexFile && INDEXED_KINDS.has(meta.kind)) {
         if (!indexed.has(file)) {
           issues.push({ file, message: `not linked from ${indexFile}` });
         }
@@ -437,8 +536,71 @@ export function checkAgentInstructions(root: string): CheckResult {
         }
       }
     }
-  } else if (frontmatter.size > 0) {
-    issues.push({ file: indexFile, message: 'missing reference index' });
+  }
+  if (!files.includes(`${REFERENCES_DIR}/README.md`) && [...frontmatter.keys()].some((file) => file.startsWith(`${REFERENCES_DIR}/`))) {
+    issues.push({ file: `${REFERENCES_DIR}/README.md`, message: 'missing reference index' });
+  }
+  for (const { path: packagePath } of packages) {
+    const readme = `${packagePath}/README.md`;
+    const agents = `${packagePath}/AGENTS.md`;
+    const index = `${packagePath}/references/README.md`;
+    for (const required of [readme, agents, index]) {
+      if (!files.includes(required)) issues.push({ file: required, message: 'guided package entry point or reference index is missing' });
+    }
+    for (const [source, target] of [
+      [readme, agents],
+      [agents, index],
+    ] as const) {
+      if (!files.includes(source) || !files.includes(target)) continue;
+      const linked = extractLinks(read(source)).some((link) => resolveLink(source, link.target)?.file === target);
+      if (!linked) issues.push({ file: source, message: `must link to ${target}` });
+    }
+  }
+  for (const file of files.filter(
+    (candidate) => (candidate === 'SKILL.md' || candidate.endsWith('/SKILL.md')) && !candidate.startsWith(`${SKILLS_DIR}/`),
+  )) {
+    issues.push({ file, message: 'project skills must be located under the root .github/skills directory' });
+  }
+
+  // Agent maps describe app-local source paths; other values are policy or commands. Paths are checked against the
+  // Git-aware file list, not the file system, so ignored build output cannot pass locally and fail in a clean checkout.
+  // A nested entry whose `policy` starts with `generated` names build output, which only its directory must contain.
+  const inRepository = (target: string) => files.includes(target) || files.some((candidate) => candidate.startsWith(`${target}/`));
+  for (const file of files.filter((candidate) => /^apps\/[^/]+\/agent-map\.yaml$/.test(candidate))) {
+    const sources: { line: number; value: string; generated: boolean }[] = [];
+    let block: { line: number; value: string; generated: boolean } | undefined;
+    let inSources = false;
+    for (const [index, line] of read(file).split('\n').entries()) {
+      if (/^sources:\s*$/.test(line)) {
+        inSources = true;
+        continue;
+      }
+      if (inSources && /^\S/.test(line)) inSources = false;
+      if (!inSources) continue;
+      const entry = /^(\s+)([\w-]+):(.*)$/.exec(line);
+      if (!entry) continue;
+      const [, indent, key, raw] = entry;
+      const value = raw.trim().replace(/^['"]|['"]$/g, '');
+      if (indent.length === 2) {
+        block = { line: index + 1, value, generated: false };
+        sources.push(block);
+      } else if (block && key === 'path') {
+        block.line = index + 1;
+        block.value = value;
+      } else if (block && key === 'policy') {
+        block.generated = value.startsWith('generated');
+      }
+    }
+    for (const { line, value, generated } of sources) {
+      if (value === '' || value === '|' || value === '>' || value.startsWith('[') || value.startsWith('{')) continue;
+      const target = path.posix.normalize(path.posix.join(path.posix.dirname(file), value));
+      if (generated ? !inRepository(path.posix.dirname(target)) : !inRepository(target)) {
+        const message = generated
+          ? `generated source directory does not exist: ${path.posix.dirname(value)}`
+          : `source path does not exist or is ignored by Git: ${value}`;
+        issues.push({ file, line, message });
+      }
+    }
   }
 
   // Compatibility references must point directly at a live document.
@@ -468,6 +630,13 @@ export function checkAgentInstructions(root: string): CheckResult {
     if (fields.name !== dir) {
       issues.push({ file, line: 2, message: `skill name "${fields.name}" must match its directory "${dir}"` });
     }
+    const yamlHeader = /^---\n([\s\S]*?)\n---\n/.exec(read(file))?.[1] ?? '';
+    for (const line of yamlHeader.split('\n')) {
+      const scalar = /^(?:name|description):\s*(.*)$/.exec(line)?.[1];
+      if (scalar && !/^["']/.test(scalar) && /:\s/.test(scalar)) {
+        issues.push({ file, message: 'skill name and description values containing colon-space must be quoted YAML scalars' });
+      }
+    }
     if (skillNames.has(fields.name)) {
       issues.push({ file, message: `duplicate skill name "${fields.name}"` });
     }
@@ -480,12 +649,33 @@ export function checkAgentInstructions(root: string): CheckResult {
     }
   }
 
+  // Skills may link only to package entry points or indexed package guidance.
+  for (const file of surfaces.filter((surface) => surface.startsWith(`${SKILLS_DIR}/`) && surface.endsWith('/SKILL.md'))) {
+    for (const link of extractLinks(read(file))) {
+      const target = resolveLink(file, link.target)?.file;
+      const owner = target && packageForFile(target, packages);
+      if (!owner) continue;
+      const allowed =
+        target === `${owner.path}/AGENTS.md` ||
+        target === `${owner.path}/README.md` ||
+        (target.startsWith(`${owner.path}/references/`) &&
+          target.endsWith('.md') &&
+          ['index', 'instruction-reference'].includes(frontmatter.get(target)?.kind ?? ''));
+      if (!allowed) issues.push({ file, line: link.line, message: `skill links to non-guidance package file ${target}` });
+    }
+  }
+
   // Outbound links and code paths from instruction surfaces.
-  for (const file of surfaces) {
+  for (const file of linkSurfaces) {
     const text = read(file);
+    const packageRoot = packageForFile(file, packages)?.path;
     for (const link of extractLinks(text)) {
       const resolved = resolveLink(file, link.target);
       if (!resolved) {
+        continue;
+      }
+      if (packageRoot && !resolved.file.startsWith(`${packageRoot}/`)) {
+        issues.push({ file, line: link.line, message: `package guidance link escapes its package: ${link.target}` });
         continue;
       }
       if (!existsExact(root, resolved.file)) {
@@ -496,9 +686,27 @@ export function checkAgentInstructions(root: string): CheckResult {
         issues.push({ file, line: link.line, message: `missing anchor: ${link.target}` });
       }
     }
-    for (const codePath of extractCodePaths(text)) {
-      if (!existsExact(root, codePath.target) && !isGitIgnored(root, codePath.target)) {
+    const codePaths = [...extractCodePaths(text), ...(packageRoot ? extractPackageCodePaths(text) : [])];
+    for (const codePath of codePaths) {
+      const packageRelative = packageRoot && /^(?:config|lib|native|references|src)\//.test(codePath.target);
+      const resolvedPath = packageRelative ? `${packageRoot}/${codePath.target}` : codePath.target;
+      if (!existsExact(root, resolvedPath) && !isGitIgnored(root, resolvedPath)) {
         issues.push({ file, line: codePath.line, message: `path in code span does not exist: ${codePath.target}` });
+      }
+    }
+    for (const specifier of extractPackageSpecifiers(text)) {
+      const targetPackage = packages.find(({ npmName }) => npmName === specifier.packageName);
+      if (
+        targetPackage &&
+        specifier.packagePath &&
+        (specifier.packagePath.startsWith('references/') || ['AGENTS.md', 'README.md'].includes(specifier.packagePath)) &&
+        !existsExact(root, `${targetPackage.path}/${specifier.packagePath}`)
+      ) {
+        issues.push({
+          file,
+          line: specifier.line,
+          message: `package guide path does not exist: ${specifier.packageName}/${specifier.packagePath}`,
+        });
       }
     }
   }
@@ -640,7 +848,7 @@ export function checkAgentInstructions(root: string): CheckResult {
     issues.push(...checkEvalCase(root, file, read(file), { caseIds, rules, skills: skillNames }));
   }
 
-  const report = [...ALWAYS_ON, ...skillNames.values()]
+  const report = [...ALWAYS_ON, ...skillNames.values(), ...packages.map(({ path: packagePath }) => `${packagePath}/AGENTS.md`)]
     .filter((file) => files.includes(file))
     .map((file) => ({ file, bytes: statSync(path.join(root, file)).size }));
   return { issues, report };

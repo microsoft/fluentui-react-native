@@ -1,5 +1,9 @@
 # Running the FluentUI Tester on Win32
 
+For the native desktop test harness, see
+`@fluentui-react-native/desktop-test` and
+`packages/agentic/desktop-test/references/platforms.md`.
+
 `FluentUI Tester` is the test app that we use to test our FluentUI components during development.
 
 ## Launch `FluentUI Tester` app on Win32

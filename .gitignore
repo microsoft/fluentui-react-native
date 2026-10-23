@@ -8,6 +8,7 @@ yarn-error.log*
 **/errorShots/
 **/allure-results/
 **/allure-report/
+**/artifacts/desktop/
 
 # Runtime data
 pids

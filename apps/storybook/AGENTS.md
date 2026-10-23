@@ -1,190 +1,56 @@
-# Agentic Components Storybook development
+# Agentic Components Storybook
 
-These instructions apply to `apps/storybook` and its descendants.
+These instructions apply to the `apps/storybook` consumer. Shared CLI, app
+configuration, driver, and runtime behavior belongs to package-owned guidance:
 
-Read [`agent-map.yaml`](agent-map.yaml) first for the compact architecture, lookup, and interaction map. Read this file,
-`README.md`, `package.json`, and `storybook.config.mts` before changing the Storybook application or its native projects.
+- `packages/agentic/storybook-desktop/references/README.md`
+- `packages/agentic/desktop-test/references/README.md`
+- `packages/agentic/desktop-driver/references/README.md`
+- `packages/agentic/storybook-desktop-runtime/references/README.md`
 
-## Agent-efficient discovery and interaction
+## App-owned configuration
 
-- Generate the platform manifest with `yarn storybook manifest --<platform>` instead of guessing IDs or searching the
-  sidebar.
-- Query and run stories through `yarn desktop-driver` against the listener started by
-  `yarn storybook driver --<platform>`.
-- Use screenshots only for visual evidence. Use WebSocket events and accessibility bounds for lookup and interaction.
-- Treat `src/storybook.requires.ts` as generated output; use `storybook.config.mts` for story package discovery and
-  `src/main.ts` only as the shared config adapter.
-- Keep `agent-map.yaml` synchronized when stable paths, scripts, services, or interaction contracts change. Do not list
-  individual stories there; the runtime index is authoritative.
+- Read `agent-map.yaml` for stable paths, declared scripts, and runtime
+  discovery commands. Keep it compact; the runtime story catalog is
+  authoritative. Give a generated source a nested `path` and
+  `policy: generated-…`: `check-agent-instructions` validates other sources
+  against Git, so ignored local build output cannot satisfy it.
+- `desktop.config.mts` owns app name, package discovery, platform story
+  exclusions, and native command exceptions. Do not duplicate this
+  configuration in runtime source.
+- `app.json` owns native identity and `storybook.testIDPrefix`.
+- Keep `src/storybook.requires.ts` generated. Change app config and regenerate.
+- Use `yarn storybook <command> --<platform>` or the app's `desktop-driver`
+  script. Run package scripts rather than guessed Metro, CocoaPods, Xcode,
+  Jest, or TypeScript commands.
 
-## Command and dependency discipline
+## Native app workflows
 
-- From the repository root, invoke scripts with
-  `yarn workspace @fluentui-react-native/agentic-components-storybook <script>`. From this directory, use
-  `yarn <script>`.
-- Use declared scripts rather than invoking Metro, CocoaPods, Xcode, Jest, or TypeScript through guessed commands.
-- Run `yarn` from the repository root only after dependency manifests change or when a declared command fails because a
-  dependency is missing.
-- Preserve unrelated manifest and lockfile edits already present in the worktree.
-- Keep only native command exceptions and ownership-specific smoke settings in `storybook.config.mts`. Standard macOS
-  and Windows prep, bundle, build, and run commands come from the shared config, derive identity from `app.json`, and
-  route through `rnx-cli`. Use `yarn storybook <command> --<platform>`; do not add platform aliases or app-local
-  lifecycle scripts.
-- `app.json` owns the custom `storybook.testIDPrefix`. Do not create another
-  app identity file or duplicate the prefix in runtime source.
+- macOS defaults to Fabric. Use `--paper` only when qualifying Paper and rerun
+  `prep` when switching renderer. Bundle before prep if Pods must embed the
+  JavaScript bundle. Only `macos/Podfile` is hand-authored; Pods, lockfiles,
+  workspaces, build products, and DerivedData are generated.
+- Windows project files and registrations are generated. Preserve the app's
+  declared helper and identity setup.
+- Win32 uses the prebuilt REX Paper host. Bundle before run; native build is
+  unsupported. Keep app-owned story exclusions in `desktop.config.mts`.
+- The app excludes Windows Accordion and Win32 Accordion/ListItem due to
+  current native-host failures. Remove exclusions only after the owning
+  component is verified on that endpoint.
 
-## Native diagnostics
+## Diagnostics and validation
 
-The repository Yarn approval covers these workflows; see the
-[agent permissions reference](../../references/agents/repository/permissions.md#native-diagnostics-and-capture) for
-capture limits. From this directory:
+Use `yarn storybook manifest --<platform>` to validate static extraction,
+`yarn storybook instance --<platform>` for actual ports and target identity,
+and `yarn storybook --verbose smoke --<platform>` for owned runtime
+diagnostics. Use the platform agent map for additional commands. Prefer
+target-scoped capture through `desktop-driver`; screenshots do not replace
+accessibility lookup.
 
-| Need                                                    | Preferred command                                                                                                                                        |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project generation and Pod installation                 | `yarn storybook prep --macos`                                                                                                                            |
-| Bundle failures                                         | `yarn storybook --verbose bundle --<platform>`                                                                                                           |
-| Native build failures                                   | `yarn storybook --verbose build --<platform>` (not Win32)                                                                                                |
-| Driver identity, signing, and macOS privacy diagnostics | `yarn desktop-driver doctor --platform macos --permissions`                                                                                              |
-| Actual listener ports and target identity               | `yarn storybook instance --<platform>`                                                                                                                   |
-| Target-scoped screenshots                               | `yarn desktop-driver agent screenshot --platform <platform-name> --url <driver-url> --target <target-id> --artifacts artifacts/<platform> --name <name>` |
-| Runtime trees and crash reproduction                    | `yarn desktop-driver agent describe ...` and `yarn storybook --verbose smoke --<platform>`                                                               |
-
-For `agent` commands, use `--platform macos` on macOS and `--platform windows` for both Windows and Win32. Inspect
-retained command logs under `artifacts/storybook-commands` and platform artifacts rather than redirecting output to
-arbitrary locations.
-
-## Desktop Driver workflow
-
-- Use `yarn storybook manifest --<platform>` to validate static story-plan
-  extraction.
-- Use `yarn storybook build-driver --<platform>` for an isolated native helper
-  build. `prep` ensures the same verified helper before app preparation.
-- Use `yarn storybook driver --<platform>` to start Metro, the Storybook
-  channel/MCP listener, and the WebDriver listener under one owned supervisor.
-- Use the app's `yarn desktop-driver` script for JSON story-run and agent
-  commands against that listener.
-- macOS, Windows, and Win32 use their source-built native helpers. Keep the
-  deterministic fake provider limited to package contract tests.
-- Author new tests as component story `wdio` functions or named function
-  collections, not app-local test scripts. All catalog tests use WDIO; legacy
-  `parameters.desktopDriver` support is retained for runner compatibility.
-  The app owns identity, package discovery, platform exclusions, and manifests.
-- Run executable tests with `yarn storybook test --<platform>` and optionally
-  `--test <name-glob>`. Callbacks receive the target endpoint as `platform`;
-  each named case gets an isolated worker/session and fresh preview. Defaults belong in
-  `storybook.config.mts` under `wdio`; the shared Babel config removes
-  callbacks from native bundles. `stories-and-tests` smoke mode runs configured
-  callbacks together with static plans, grouped by story. Always navigate to
-  the requested story and await correlated readiness before executing tests.
-- Keep `storybook-desktop.generated`, reports, trees, screenshots, and run
-  manifests ignored. Never patch generated runtime identity or story manifests.
-- Shared command logs merge stdout/stderr in write order under
-  `artifacts/storybook-commands`. Failed commands replay the complete log;
-  `--verbose` also replays successful commands. Preserve labeled stderr
-  diagnostics and nested failure causes rather than replacing them with
-  exit-code-only summaries.
-- Treat the exact-platform and portable-plan digests as contracts. A dynamic or
-  invalid plan must fail generation rather than disappear from the manifest.
-- Preserve nonce-authenticated runtime hello/readiness/error messages and
-  native story-root verification; do not fall back to uncorrelated channel
-  events.
-
-## macOS native workflow
-
-- In CI, use `.github/actions/setup-desktop-driver` to create the job-local
-  cache, build and diagnose the helper, and pin later resolution to the
-  verified artifact. GitHub-hosted runners use an ad hoc signature because
-  changing certificate trust requires interactive authorization, and disable
-  physical clicks because the hosted desktop is not the input qualification
-  environment. Managed self-hosted runners pass a pre-provisioned stable
-  signing identity and leave physical input enabled.
-- Run `yarn storybook prep --macos` for project generation and Pod installation. Do not run CocoaPods from the
-  repository root because subprocess dependency resolution must start in this workspace.
-- Run `yarn storybook bundle --macos` for the JavaScript bundle, `yarn storybook build --macos` for a non-launching
-  native build, and `yarn storybook smoke --macos` for the complete owned lifecycle.
-- macOS defaults to Fabric. Add `--paper` to `prep`, `build`, `run`, or `smoke` for Paper; regenerate with `prep`
-  whenever switching renderers because both modes share the generated project and Pods. Keep the endpoint `macos`.
-- Preserve the shared smoke instance context: its canonical-root hash coordinates the macOS bundle identifier,
-  Storybook port, Metro port, generated runtime polyfill, and exact app shutdown. Do not replace those values with
-  process-name matching or fixed smoke ports.
-- Only `macos/Podfile` is hand-authored. The workspace, Pods, Podfile.lock, build directory, and DerivedData are generated
-  and ignored; `storybook-desktop.generated` and `macos/.storybook-desktop` are generated instance state. Never patch or
-  commit these outputs.
-- Diagnose the first actionable CocoaPods or compiler error before editing configuration. If autolinking claims a listed
-  dependency is missing, verify resolution from this app directory before adding another dependency.
-- Avoid patching generated pod source. If a temporary source patch is unavoidable, document its exact version boundary.
-  When removing it, reinstall the affected pod and perform a clean build so stale generated source cannot mask the result.
-
-## Windows native workflow
-
-- In CI, use `.github/actions/setup-desktop-driver` to run the shared Windows
-  native contract, build and diagnose the helper in a job-local cache, and pin
-  later resolution to the verified artifact before `prep` or `smoke`.
-- GitHub-hosted Windows is not the physical-input qualification environment.
-  Disable keyboard, physical-click, and wheel through
-  `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES`; leave them enabled on the
-  interactive self-hosted runner.
-- Use `yarn storybook prep --windows`, `bundle --windows`, `build --windows`, and `run --windows` for individual
-  stages. Use `yarn storybook smoke --windows --mode stories` for the package-owned generation, channel server, native
-  build and registration, Metro launch, full indexed-story traversal, and ownership-safe cleanup. Use
-  `--mode stories-and-tests` to run the component-authored desktop-e2e plans after the complete traversal.
-- Keep the Windows story-pattern overrides in `storybook.config.mts`; the
-  current Accordion Fabric stories still fail-fast the RNW 0.81 host during
-  traversal. Native-core Callout and FocusZone stories run on Windows.
-- WinAppDriver screenshots are not a reliable capture path for WinAppSDK Composition content. After selecting a story
-  through the Storybook control channel, use the agent host's desktop screenshot tool when visual evidence is required.
-- Build logs, automation evidence, visual trees, screenshots, and session manifests belong under ignored
-  `artifacts/windows`.
-- Stable native automation selectors use explicit `testID` props. Do not select by visible text, layout order, or
-  generated native class name.
-- Keep generated solutions, packages, registrations, and build outputs uncommitted.
-
-## Win32 native workflow
-
-- In CI, use `.github/actions/setup-desktop-driver` to build and diagnose the
-  `win32` endpoint in a job-local cache and pin later resolution before smoke.
-  The separate Windows Storybook job owns the shared provider's opt-in native
-  contract.
-- Win32 is the `@office-iss/react-native-win32` Paper endpoint hosted by
-  `@office-iss/rex-win32`; do not treat it as the React Native Windows Fabric
-  endpoint or generate a `react-native-test-app` project for it.
-- Run `yarn storybook bundle --win32` before `yarn storybook run --win32`. The bundle is the native dependency source
-  for the prebuilt REX host.
-- Keep package discovery and platform-specific story inclusion in
-  `storybook.config.mts`; keep `src/main.ts` as the shared config adapter.
-- Keep shared Storybook source platform-neutral. Win32-specific source belongs
-  in `.win32.ts` or `.win32.tsx` files, and Metro platform resolution belongs in
-  `metro.config.js`.
-- REX 0.81.1's V8 cannot parse the Unicode-property regular expressions
-  bundled by the current Storybook release. Keep the shared desktop package's compatibility transform
-  scoped to Win32; remove it when the REX engine supports Unicode property
-  escapes.
-- Win32 uses desktop-only chrome in
-  `../../packages/agentic/storybook-desktop-runtime/src/StorybookUI.win32.tsx` because
-  react-native-win32 omits window dimensions and Storybook's mobile LiteUI
-  drawer crashes the Paper host. Keep its default layout conceptually aligned
-  with desktop LiteUI: persistent resizable Sidebar, story preview, and
-  resizable bottom addon panel. Use `Win32CalloutPortal` only for optional
-  pop-outs: native Paper Callout owns the separate window while public
-  Storybook exports supply sidebar and addon content. Do not reintroduce
-  `@gorhom/portal`, window dimension hooks, or animated mobile drawers. Keep
-  the pop-out toolbar contextual: it is mounted only while the inline Sidebar
-  is hidden.
-- Keep macOS and Windows on upstream LiteUI. Replacing it with the reduced
-  Win32 chrome would regress addon controls and responsive behavior while
-  increasing local maintenance.
-- Keep the Win32 story-pattern override in `storybook.config.mts`. It intentionally excludes ListItem and Accordion
-  because their Paper implementations fail-fast crash REX 0.81.1. Remove those exclusions when they no longer crash;
-  all desktop endpoints must ship together.
-- Keep the Win32 window title distinct from the Windows Fabric title so
-  automation never attaches to the wrong endpoint.
-- Use `yarn storybook smoke --win32 --mode stories` for the package-owned bundle, launch, native desktop-chrome checks,
-  full story traversal, and cleanup. Use `--mode stories-and-tests` to run the component-authored desktop-e2e plans
-  afterward. Logs belong under ignored `artifacts/win32`. Keep `build --win32` unsupported because the endpoint uses a
-  prebuilt host rather than an app-owned native project.
-
-## Validation
-
-Run the smallest command that reproduces the issue first. For native or dependency changes, finish with the relevant
-bundle and native build, Storybook format/lint, and the root `yarn build` when manifests changed. Review generated output
-only to diagnose problems; validate persistence from the hand-authored files and declared scripts.
+Use the package references for the native helper, authenticated readiness,
+reporting, and smoke contracts. Respect the
+[repository permission rules](../../references/agents/repository/permissions.md),
+including separate authorization for privacy changes and unrestricted capture.
+After dependency or workaround changes, regenerate native dependency sources
+and clean-build. Finish code/configuration changes with
+`yarn clean-lage-cache` then `yarn lage buildci` (R-VALID-003).

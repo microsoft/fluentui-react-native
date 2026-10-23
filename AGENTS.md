@@ -6,8 +6,9 @@ routes each task to the workflow and references it needs; load only what the tas
 
 ## How guidance is organized
 
-- **`AGENTS.md` files** hold safeguards and local invariants. Copilot CLI loads this file plus the `AGENTS.md` in the
-  working directory and each ancestor. From the repository root, read the scoped files below when a task touches them.
+- **`AGENTS.md` files** hold safeguards and local invariants. Copilot CLI loads applicable files from the repository,
+  working directory, ancestors, and directories in the path of files being worked on. Read the scoped entries below
+  when a task touches them.
 - **Skills** in [`.github/skills`](.github/skills) define task workflows.
 - **[Shared references](references/agents/README.md)** in `references/agents/` hold reusable recipes and repository
   knowledge, indexed by task.
@@ -26,11 +27,13 @@ These apply to every task.
   authorization (R-PERM-007). Read the [permissions reference](references/agents/repository/permissions.md) before
   using `gh api`, Pod, process, loopback `curl`, or capture operations, or changing the policy.
 - **Validation:** run the owning workspace's declared scripts (R-VALID-001). Report each check as passed, failed,
-  skipped, not run, or unsupported; JavaScript tests and bundles are not native qualification (R-VALID-002). Finish
-  code or configuration changes with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
+  skipped, not run, or unsupported; JavaScript tests and bundles are not native qualification (R-VALID-002). Iterate
+  with focused tests, such as `yarn test <name>` in the package, and finish code or configuration changes with one
+  `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003, R-VALID-004).
 - **Code:** no barrel exports (R-REPO-001); keep React Native fork imports in platform files (R-REPO-002); add a
   changeset for published packages (R-REPO-003); never copy private source bodies into this public repository
-  (R-REPO-004).
+  (R-REPO-004). Keep regular expressions linear-time and never splice values into code that runs, tests included
+  (R-SCAN-001, R-SCAN-002; see [code scanning](references/agents/repository/code-scanning.md)).
 - **Component generations:** v0 and v1 are maintenance-only; new components use the agentic workflow (R-V0-001,
   R-V1-001). Classify code by imports and structure, not by path (R-CLASSIFY-001).
 - **Native boundary:** before changing Swift, Objective-C, C++, headers, podspecs, Windows projects, codegen specs,
@@ -51,32 +54,40 @@ Classify the change with the [classification guide](references/agents/components
 | Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                         |
 | Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
 | Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
-| Storybook app, Metro, CocoaPods, or desktop native toolchain                        | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
+| Desktop test configuration, execution, reporting, helpers, or CI                    | [desktop-testing](.github/skills/desktop-testing/SKILL.md)                                           |
+| Change or review the desktop testing package source                                 | [maintain-desktop-testing](.github/skills/maintain-desktop-testing/SKILL.md)                         |
+| Storybook app catalog, Metro, CocoaPods, or native builds                           | [agentic-storybook-development](.github/skills/agentic-storybook-development/SKILL.md)               |
 | Dependency vulnerability remediation                                                | [fix-security-issues](.github/skills/fix-security-issues/SKILL.md)                                   |
 
 Other repository work starts from the [reference index](references/agents/README.md): architecture, commands and
 validation, TypeScript, release, design tokens, focus, and native guidance.
+For package-owned knowledge, follow the
+[package guidance standard](references/agents/repository/package-guidance.md).
 
 ## Scoped instructions
 
-| Path                                                                                             | Scope                                                  |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| [packages/agentic/components](packages/agentic/components/AGENTS.md)                             | Agentic package invariants, contracts, and story tests |
-| [packages/agentic/components/src](packages/agentic/components/src/AGENTS.md)                     | Source boundaries and extraction                       |
-| [.../src/components](packages/agentic/components/src/components/AGENTS.md)                       | Higher-order components and the focus visual policy    |
-| [.../src/primitives](packages/agentic/components/src/primitives/AGENTS.md)                       | Public primitives                                      |
-| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                     | Desktop WebDriver driver                               |
-| [packages/framework-base](packages/framework-base/AGENTS.md)                                     | Shared component patterns                              |
-| [packages/framework-base/src/accessibility](packages/framework-base/src/accessibility/AGENTS.md) | Accessibility helpers and native action qualification  |
-| [packages/framework/framework](packages/framework/framework/AGENTS.md)                           | v1 framework package                                   |
-| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)       | v0 framework package                                   |
-| [apps/storybook](apps/storybook/AGENTS.md)                                                       | Storybook app, native workflows, and diagnostics       |
+| Path                                                                                               | Scope                                                  |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [packages/agentic/components](packages/agentic/components/AGENTS.md)                               | Agentic package invariants, contracts, and story tests |
+| [packages/agentic/components/src](packages/agentic/components/src/AGENTS.md)                       | Source boundaries and extraction                       |
+| [.../src/components](packages/agentic/components/src/components/AGENTS.md)                         | Higher-order components and the focus visual policy    |
+| [.../src/primitives](packages/agentic/components/src/primitives/AGENTS.md)                         | Public primitives                                      |
+| [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                       | Desktop WebDriver driver                               |
+| [packages/agentic/desktop-test](packages/agentic/desktop-test/AGENTS.md)                           | Application-neutral desktop test harness               |
+| [packages/agentic/storybook-desktop](packages/agentic/storybook-desktop/AGENTS.md)                 | Storybook desktop integration                          |
+| [packages/agentic/storybook-desktop-runtime](packages/agentic/storybook-desktop-runtime/AGENTS.md) | On-device Storybook runtime                            |
+| [packages/framework-base](packages/framework-base/AGENTS.md)                                       | Shared component patterns                              |
+| [packages/framework-base/src/accessibility](packages/framework-base/src/accessibility/AGENTS.md)   | Accessibility helpers and native action qualification  |
+| [packages/framework/framework](packages/framework/framework/AGENTS.md)                             | v1 framework package                                   |
+| [packages/deprecated/foundation-compose](packages/deprecated/foundation-compose/AGENTS.md)         | v0 framework package                                   |
+| [apps/storybook](apps/storybook/AGENTS.md)                                                         | Storybook app, native workflows, and diagnostics       |
 
 ## Quick facts
 
 - Yarn 4 in pnpm mode; TypeScript 7.0.2 compiled as one `tsc -b` project-references graph; Lage task orchestration.
   New packages must be added to the root `tsconfig.json` `references`.
-- `yarn build` builds the repository; `yarn lage test` and `yarn lage lint` test and lint packages; `yarn format` formats.
+- `yarn build` builds the repository; `yarn lage test` and `yarn lage lint` test and lint packages, and `yarn test <name>`
+  in a package runs only the matching test files; `yarn format` formats.
   `yarn lage buildci` runs the CI aggregate, including `yarn check-agent-instructions`. `yarn clean-lage-cache` clears
   the Lage cache before final validation.
 - Details: [commands and validation](references/agents/repository/development.md),

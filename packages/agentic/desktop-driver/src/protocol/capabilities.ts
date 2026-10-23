@@ -101,7 +101,8 @@ export function createReturnedCapabilities(
     'furn:clickMode': matched.clickMode,
     'furn:endpoint': matched.target.endpoint,
     'furn:features': host.features,
-    'furn:renderer': matched.target.renderer,
+    ...(matched.target.renderer ? { 'furn:renderer': matched.target.renderer } : {}),
+    'furn:storybook': Boolean(matched.target.storyOrchestrator),
     'furn:target': matched.target.id,
   };
 }

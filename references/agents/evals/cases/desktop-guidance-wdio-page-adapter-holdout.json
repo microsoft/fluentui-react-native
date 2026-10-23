@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "case_id": "desktop-guidance-wdio-page-adapter-holdout",
+  "split": "holdout",
+  "task_mode": "toolchain",
+  "prompt": "A Windows application-level WDIO/Jasmine suite has a native page adapter whose isDisplayed() call fails while trying to execute DOM JavaScript. Diagnose the likely integration issue and describe the correct binding and ownership model without editing files.",
+  "expected": {
+    "skills": ["desktop-testing"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": ["windows"]
+    },
+    "required_reads": [
+      ".github/skills/desktop-testing/SKILL.md",
+      "packages/agentic/desktop-test/AGENTS.md",
+      "packages/agentic/desktop-test/references/wdio-suites.md",
+      "packages/agentic/desktop-driver/references/test-integration.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "bind-existing-wdio-browser",
+      "description": "Diagnoses the raw or unbound browser as the adapter failure and recommends binding the existing WDIO-managed browser with the registered desktop WebDriver commands rather than creating another session.",
+      "rule_ids": [],
+      "source_refs": [
+        "packages/agentic/desktop-test/references/wdio-suites.md",
+        "packages/agentic/desktop-driver/references/test-integration.md"
+      ]
+    },
+    {
+      "id": "native-page-semantics",
+      "description": "Uses the native driver's isDisplayed() and isFocused() semantics and does not rely on browser DOM or JavaScript execution for native state.",
+      "rule_ids": [],
+      "source_refs": [
+        "packages/agentic/desktop-test/references/wdio-suites.md",
+        "packages/agentic/desktop-driver/references/test-integration.md"
+      ]
+    },
+    {
+      "id": "wdio-retains-session-ownership",
+      "description": "Keeps browser session, hooks, matchers, grouped specs, and retries owned by WDIO and avoids a competing session created from suite hooks.",
+      "rule_ids": [],
+      "source_refs": ["packages/agentic/desktop-test/references/wdio-suites.md"]
+    }
+  ]
+}

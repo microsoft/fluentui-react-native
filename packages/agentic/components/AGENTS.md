@@ -58,7 +58,8 @@ the [agentic component authoring skill](../../../.github/skills/agentic-componen
   runner contract rejects legacy catalog plans and missing story type coverage.
 - Node-only shared test helpers use `*.wdio.ts`, are excluded from production
   emit, and are imported dynamically inside the stripped callbacks.
-- Use package scripts for format, lint, build, tests, and snapshots.
+- Use package scripts for format, lint, build, tests, and snapshots. While iterating, run only the component's tests with
+  `yarn test <component>`, and run the whole suite and `yarn lage buildci` once at the end (R-VALID-004).
 - Do not copy web-only APIs, CSS behavior, or DOM assumptions into React Native.
 - Do not copy or mechanically transform private source bodies into this public
   package (R-REPO-004). Record source identifiers and digests, then author the local React

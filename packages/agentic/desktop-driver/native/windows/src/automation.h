@@ -52,6 +52,7 @@ struct ElementSnapshot {
   RECT physicalRect{};
   SupportedBool enabled;
   SupportedBool focused;
+  SupportedBool required{false, false, "The provider does not report required-form state."};
   SupportedBool visible;
   SupportedBool expanded;
   SupportedBool selected;

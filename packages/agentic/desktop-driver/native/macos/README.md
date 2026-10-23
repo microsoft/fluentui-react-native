@@ -122,8 +122,8 @@ Ad hoc signing is not a distribution model. The current source does not
 implement a Developer ID distribution or notarization pipeline. If an
 organization-distributed helper is added, its external release infrastructure
 must apply Developer ID Application signing, Hardened Runtime, a secure
-timestamp, notarization, and stapling. That optional work remains in
-[PLAN.md](../../PLAN.md).
+timestamp, notarization, and stapling. That optional work is tracked in
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345).
 
 ## Helper lifecycle
 
@@ -168,6 +168,14 @@ Attach validates every supplied field against the live application. Lease
 timestamps allow only the bounded precision required by
 `NSRunningApplication.launchDate`. Zero or ambiguous application/window matches
 fail.
+
+Launch honors an explicitly configured `launchTimeoutMs`, or uses the native
+90-second default within the server's 120-second default deadline. If LaunchServices
+completes after timeout or cancellation, the late completion closes only a
+new application causally owned by that request, never a preexisting app.
+On October 22, 2026 (UTC), the helper built, handshook, and self-tested on
+macOS, and real FluentTester launches with a configured 180-second timeout
+succeeded. The late-completion branch remains covered only by code review.
 
 Leases record whether the app was launched or attached. Session deletion
 preserves attached apps and closes only an exact process owned by the helper.
@@ -408,7 +416,8 @@ authoritative proof of first-run or durable TCC authorization. The checked-in
 package does not implement Developer ID/notarization release infrastructure or
 managed PPPC deployment. Those items, clean-machine
 install/upgrade/rollback, and explicit permission-revocation qualification
-remain in [PLAN.md](../../PLAN.md).
+are tracked in
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345).
 
 ## Troubleshooting
 

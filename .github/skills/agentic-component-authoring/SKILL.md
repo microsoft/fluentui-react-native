@@ -66,9 +66,11 @@ references used, the implementation order, and the validation plan.
 7. Add focused tests and stories that exercise the public API and the resolved native output.
 8. Reconcile and ratify the local contract against the realized public types, tests, stories, and platform evidence.
    Upstream changes require explicit re-review and never overwrite the local contract.
-9. Run the smallest declared validation command while iterating. Finish with package format, lint, build, and tests;
-   run the Storybook bundle for story changes and the root build when public types, manifests, or project references
-   change. Finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003) and report results truthfully (R-VALID-002).
+9. Iterate with focused validation (R-VALID-004): `yarn test <component>` from the package, `yarn build` after type
+   changes, and `yarn test --findRelatedTests <files>` after editing shared code. Before handover, run the package
+   format, lint, build, and whole test suite, the Storybook bundle for story changes, and the root build when public
+   types, manifests, or project references change. Then run `yarn clean-lage-cache` and `yarn lage buildci` once as
+   final acceptance (R-VALID-003) and report results truthfully (R-VALID-002).
 
 Do not divide one component implementation into separate sub-agent or sub-skill phases. Its types, state, styling, and
 rendering form one contract and should remain in one implementation context.

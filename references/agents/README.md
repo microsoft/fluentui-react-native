@@ -35,6 +35,8 @@ documents a task needs; links are navigation, not instructions to load everythin
 | `repository.permissions`                                 | [Agent permissions](repository/permissions.md)                                        | Using `gh api`, Pod, process, loopback, or capture operations; changing policy  |
 | `repository.release`                                     | [Changesets and release](repository/release.md)                                       | Changing a published package or release tooling                                 |
 | `repository.dependency-security`                         | [Dependency security procedures](repository/dependency-security.md)                   | Remediating dependency advisories with the `fix-security-issues` skill          |
+| `repository.code-scanning`                               | [Code scanning](repository/code-scanning.md)                                          | Writing regular expressions or generated code; fixing CodeQL alerts             |
+| `repository.package-guidance`                            | [Package-owned guidance standard](repository/package-guidance.md)                     | Adding package instructions, references, skills, or documentation               |
 | `design.tokens-and-theming`                              | [Tokens and theming](design/tokens-and-theming.md)                                    | Mapping tokens, theme-dependent styles, or color utilities                      |
 | `components.classification`                              | [Classification and routing](components/classification.md)                            | Starting any component task                                                     |
 | `components.v0`                                          | [v0 maintenance](components/v0.md)                                                    | Changing or reviewing `foundation-compose` components                           |
@@ -67,6 +69,8 @@ documents a task needs; links are navigation, not instructions to load everythin
 - Keep product contracts (`SPEC.md`, `spec/`, `CONTRACT.md`), protocols, token maps, and package documentation with
   their packages, and link to them. Owner-local instruction trees, such as the desktop driver's `references/`, stay
   with their packages.
+- Follow the [package-owned guidance standard](repository/package-guidance.md) when adding or extending a governed
+  package's agent entry point, user README, package references, or skill routing.
 - Place a new document in the narrowest existing area. Create a new area only for a distinct domain, and add it to the
   taxonomy table. Add every new document to the document index with a concrete "Read when" condition.
 - When moving a document, keep its `id` and update every inbound link in the same change. Leave a

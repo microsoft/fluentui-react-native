@@ -103,6 +103,11 @@ lifecycle. The standalone `desktop-driver serve` command intentionally exposes
 a fake target for protocol and integration tests; it is not a native service
 shortcut.
 
+For a production native listener, application lifecycle, and standalone WDIO
+suites, use `@fluentui-react-native/desktop-test` and its `README.md`. It
+composes this driver without requiring Storybook or React Native in ordinary
+applications.
+
 See [Getting started](references/getting-started.md) for installation,
 toolchains, first builds, and diagnostic commands.
 
@@ -121,10 +126,10 @@ toolchains, first builds, and diagnostic commands.
 | [Security model](references/security.md)            | Loopback boundary, registered targets, helper trust, process ownership, and sensitive evidence |
 | [WebDriver contract](references/protocol.md)        | Supported W3C routes, capabilities, elements, errors, and Storybook extensions                 |
 | [Native wire protocol](native/PROTOCOL.md)          | Private framed stdio protocol between Node and the native helper                               |
-| [Remaining work](PLAN.md)                           | Qualification and release work that is not complete                                            |
 | [Changelog](CHANGELOG.md)                           | Versioned package changes                                                                      |
 
 Contributors and coding agents start with [AGENTS.md](AGENTS.md).
+The [reference index](references/README.md) describes each package-owned guide.
 
 ## Public entry points
 

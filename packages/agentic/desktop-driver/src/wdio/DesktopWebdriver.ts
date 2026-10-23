@@ -18,6 +18,7 @@ declare global {
       'furn:endpoint'?: 'macos' | 'win32' | 'windows';
       'furn:features'?: Readonly<DesktopHostFeatures>;
       'furn:launchMode'?: 'attach' | 'launch';
+      'furn:storybook'?: boolean;
       'furn:target'?: string;
     }
 
@@ -125,7 +126,7 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
     capabilities,
     logLevel: options.logLevel ?? 'silent',
   });
-  return bindDesktopCommands(browser, options.url);
+  return installDesktopWebdriverCommands(browser, options.url);
 }
 
 // WebdriverIO applies these defaults in remote() but not attach(). Without an interval, waitUntil and the waitFor*
@@ -140,7 +141,7 @@ export async function attachDesktopWebdriver(options: DesktopWebdriverAttachment
     sessionId: options.sessionId,
     options: { logLevel: 'silent', ...attachedWaitDefaults },
   });
-  return bindDesktopCommands(browser, options.url);
+  return installDesktopWebdriverCommands(browser, options.url);
 }
 
 function connectionOptions(address: string) {
@@ -156,16 +157,58 @@ function connectionOptions(address: string) {
   };
 }
 
-function bindDesktopCommands(browser: WebdriverIO.Browser, url: string): DesktopWebdriverSession {
+const installedBrowsers = new WeakSet<WebdriverIO.Browser>();
+const installedStoryBrowsers = new WeakSet<WebdriverIO.Browser>();
+const boundSessions = new WeakMap<WebdriverIO.Browser, DesktopWebdriverSession>();
+
+/** Bind a WDIO-managed browser without creating a competing remote session. */
+export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, url: string): DesktopWebdriverSession {
+  if (browser.capabilities.browserName !== 'furn-native-desktop') {
+    throw new TypeError('Native desktop compatibility requires a Desktop Driver session.');
+  }
   const client = createDesktopDriverClient({ url });
   const session = new DesktopSessionClient(client, browser.sessionId, Object.fromEntries(Object.entries(browser.capabilities)));
   const desktop = new DesktopWebdriverSession(browser, session);
+  boundSessions.set(browser, desktop);
 
-  browser.addCommand('desktopListStories', () => desktop.listStories());
-  browser.addCommand('desktopOpenStory', (storyId: string, runId?: string) => desktop.openStory(storyId, runId));
-  browser.addCommand('desktopResetStory', (storyId: string, runId?: string) => desktop.resetStory(storyId, runId));
-  browser.addCommand('desktopExpect', (expectation: DesktopStoryExpectation) => desktop.expect(expectation));
-  browser.addCommand('desktopRunStoryTests', (runOptions?: DesktopWebdriverRunOptions) => desktop.runStoryTests(runOptions));
+  if (!installedBrowsers.has(browser)) {
+    browser.overwriteCommand(
+      'isDisplayed',
+      async function (this: WebdriverIO.Element) {
+        const id = await nativeElementId(this);
+        return id ? this.isElementDisplayed(id) : false;
+      },
+      true,
+    );
+    browser.overwriteCommand(
+      'isFocused',
+      async function (this: WebdriverIO.Element) {
+        const id = await nativeElementId(this);
+        if (!id) return false;
+        const focused = await this.getElementProperty(id, 'focused');
+        if (typeof focused !== 'boolean') throw new Error('Desktop Driver did not report native focus as a boolean.');
+        return focused;
+      },
+      true,
+    );
+    browser.addCommand('desktopExpect', (expectation: DesktopStoryExpectation) => boundSessions.get(browser)!.expect(expectation));
+    installedBrowsers.add(browser);
+  }
+  if (browser.capabilities['furn:storybook'] && !installedStoryBrowsers.has(browser)) {
+    browser.addCommand('desktopListStories', () => boundSessions.get(browser)!.listStories());
+    browser.addCommand('desktopOpenStory', (storyId: string, runId?: string) => boundSessions.get(browser)!.openStory(storyId, runId));
+    browser.addCommand('desktopResetStory', (storyId: string, runId?: string) => boundSessions.get(browser)!.resetStory(storyId, runId));
+    browser.addCommand('desktopRunStoryTests', (runOptions?: DesktopWebdriverRunOptions) =>
+      boundSessions.get(browser)!.runStoryTests(runOptions),
+    );
+    installedStoryBrowsers.add(browser);
+  }
 
   return desktop;
+}
+
+async function nativeElementId(element: WebdriverIO.Element): Promise<string | undefined> {
+  // Like WDIO's native visibility path, retry the selector when the first lookup preceded the native render.
+  if (!element.elementId) element.elementId = (await element.parent.$(element.selector).getElement()).elementId;
+  return element.elementId;
 }

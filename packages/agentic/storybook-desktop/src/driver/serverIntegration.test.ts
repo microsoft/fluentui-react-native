@@ -1,10 +1,12 @@
-import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
 import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
+import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/commands';
+import { deadline } from '@fluentui-react-native/desktop-test/commands';
+import { DesktopRunReporter, startReportTransport } from '@fluentui-react-native/desktop-test/reporting';
 
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
 
@@ -73,9 +75,27 @@ describe('desktop Storybook server integration', () => {
     };
     fs.writeFileSync(manifestPath, JSON.stringify(driverManifest));
 
-    const child = spawn(process.execPath, [path.resolve(__dirname, '../../config/server-runner.cjs')], {
+    const output: string[] = [];
+    const sink = {
+      write: (text: string) => {
+        output.push(text);
+        return true;
+      },
+    };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    const child = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+      cwd: projectRoot,
       env: {
-        ...process.env,
         STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
         STORYBOOK_DRIVER_MANIFEST: manifestPath,
         STORYBOOK_NATIVE_DRIVER_FAKE: '1',
@@ -83,11 +103,7 @@ describe('desktop Storybook server integration', () => {
         STORYBOOK_SMOKE_MODE: 'stories-and-tests',
         STORYBOOK_WS_PORT: String(storybookPort),
       },
-      stdio: ['ignore', 'pipe', 'pipe'],
     });
-    const output: Buffer[] = [];
-    child.stdout.on('data', (chunk: Buffer) => output.push(chunk));
-    child.stderr.on('data', (chunk: Buffer) => output.push(chunk));
 
     try {
       const [indexResponse, driverResponse] = await Promise.all([
@@ -108,6 +124,7 @@ describe('desktop Storybook server integration', () => {
         alwaysMatch: {
           platformName: 'windows',
           'furn:target': 'integration-windows',
+          'furn:launchMode': 'attach',
         },
       });
       await expect(session.selectStory('components-button--default', 'integration-run')).resolves.toEqual({
@@ -117,13 +134,109 @@ describe('desktop Storybook server integration', () => {
       });
       await session.delete();
     } finally {
-      child.kill();
-      await waitForExit(child);
-      fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      try {
+        await child.stop();
+        expect(await child.completed).toBe(0);
+        await runner.close();
+        await transport.close();
+        expect((await reporter.finish()).status).toBe('passed');
+      } finally {
+        fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      }
     }
 
-    expect(Buffer.concat(output).toString('utf8')).toContain('WebDriver:');
+    expect(output.join('')).toContain('WebDriver ');
   });
+});
+
+describe('PowerShell owned service integration', () => {
+  const windowsTest = process.platform === 'win32' ? test : test.skip;
+  windowsTest.each([false, true])(
+    'forwards live grandchild diagnostics and drains services (failure=%s)',
+    async (failService) => {
+      const port = await getAvailablePort();
+      const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-powershell-services-'));
+      const output: string[] = [];
+      const sink = {
+        write: (text: string) => {
+          output.push(text);
+          return true;
+        },
+      };
+      const reporter = new DesktopRunReporter({
+        artifactsRoot: temporaryDirectory,
+        kind: 'lifecycle',
+        output: sink,
+        errorOutput: sink,
+        summary: false,
+      });
+      const transport = await startReportTransport(reporter);
+      const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+      const quote = (text: string) => `'${text.replaceAll("'", "''")}'`;
+      const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+      const script = path.join(temporaryDirectory, 'fixture with spaces.ps1');
+      const marker = path.join(temporaryDirectory, 'service-pid.json');
+      const source = `
+      require('node:fs').writeFileSync(${JSON.stringify(marker)}, JSON.stringify(process.pid));
+      const server = require('node:net').createServer(socket => socket.end());
+      setTimeout(() => server.listen(${port}, '127.0.0.1', () => {
+        process.stderr.write('live PowerShell grandchild diagnostic\\n');
+        ${failService ? "setTimeout(() => { process.stderr.write('original nested service failure\\n'); process.exit(7); }, 700);" : ''}
+      }), 500);`;
+      fs.writeFileSync(
+        script,
+        `
+      $ErrorActionPreference = 'Stop'
+      $projectRoot = ${quote(projectRoot)}
+      . ${quote(path.resolve(__dirname, '../../config/owned-services.ps1'))}
+      try {
+        $service = Start-OwnedCommand -FilePath ${quote(process.execPath)} -ArgumentList @('-e', ${quote(source)}) -LogName 'contract-service'
+        Wait-ForTcpPort -Port ${port} -TimeoutSeconds 10
+        for ($index = 0; $index -lt 20; $index += 1) { Assert-OwnedServices; Start-Sleep -Milliseconds 100 }
+      } finally { Stop-OwnedServices }
+    `,
+      );
+      let completed = false;
+      const running = runner.start({
+        command: 'pwsh',
+        args: ['-NoProfile', '-NonInteractive', '-File', script],
+        cwd: projectRoot,
+        env: {},
+        label: 'PowerShell fixture',
+      });
+      void running.completed.then(() => {
+        completed = true;
+      });
+      try {
+        await deadline(
+          (async () => {
+            while (!output.join('').includes('live PowerShell grandchild diagnostic')) {
+              if (completed) throw new Error(output.join(''));
+              await new Promise((resolve) => setTimeout(resolve, 50));
+            }
+          })(),
+          15_000,
+          'PowerShell diagnostic',
+        );
+        expect(completed).toBe(false);
+        expect(await running.completed).toBe(failService ? 1 : 0);
+      } finally {
+        try {
+          await running.stop();
+          await runner.close();
+          await transport.close();
+          const result = await reporter.finish();
+          expect(result.status).toBe(failService ? 'failed' : 'passed');
+          if (failService) expect(output.join('')).toContain('original nested service failure');
+          const pid: number = JSON.parse(fs.readFileSync(marker, 'utf8'));
+          expect(() => process.kill(pid, 0)).toThrow();
+        } finally {
+          fs.rmSync(temporaryDirectory, { recursive: true, force: true });
+        }
+      }
+    },
+    45_000,
+  );
 });
 
 function getAvailablePort(): Promise<number> {
@@ -157,13 +270,6 @@ async function waitForResponse(url: string): Promise<Response> {
     await new Promise((resolve) => setTimeout(resolve, 100));
   } while (Date.now() < deadline);
   throw new Error(`Timed out waiting for ${url}: ${(lastError as Error)?.message ?? 'not ready'}`);
-}
-
-function waitForExit(child: ReturnType<typeof spawn>): Promise<void> {
-  if (child.exitCode !== null || child.signalCode !== null) {
-    return Promise.resolve();
-  }
-  return new Promise((resolve) => child.once('exit', () => resolve()));
 }
 
 function loopbackUrl(port: number, pathname: string): string {

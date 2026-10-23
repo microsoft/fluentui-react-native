@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const { legacyDesktopSpecs } = require('./desktop-specs.mts');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
 const appArgs =
@@ -14,7 +15,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: [['../E2E/src/**/specs/*.win.ts']],
+  specs: legacyDesktopSpecs.win32,
   exclude: [],
 
   capabilities: [

@@ -1,31 +1,31 @@
 ---
 name: agentic-storybook-development
-description: Develop, run, bundle, or troubleshoot the agentic-components Storybook app on macOS or Windows, including CocoaPods, Xcode, Metro, Fabric, and offline builds.
+description: Develop, bundle, build, or troubleshoot the agentic-components Storybook app in apps/storybook on macOS, Windows, or Win32, including app catalog configuration, Metro, CocoaPods, native projects, and renderer builds. Not for configuring or running desktop tests or changing desktop package source.
 license: MIT
 ---
 
-# Agentic Storybook development
+# Agentic Storybook app development
 
-Work on the native Storybook application in `apps/storybook`.
+This workflow covers the `apps/storybook` consumer and its native toolchain.
+For the shared Storybook integration API and CLI use
+[`storybook-desktop` references](../../../packages/agentic/storybook-desktop/references/README.md);
+for app identity, discovery, and diagnostics use the app's
+[`agent-map.yaml`](../../../apps/storybook/agent-map.yaml) and
+[`AGENTS.md`](../../../apps/storybook/AGENTS.md).
 
-## Workflow
+1. Inspect `desktop.config.mts` and the app's declared scripts; do not invent
+   aliases or direct native runner commands.
+2. Use the package's platform recipes for prep, bundle, build, smoke, and
+   diagnostics. Treat Pods, workspaces, generated solutions, build directories,
+   and DerivedData as disposable. Fix the owning hand-authored source.
+3. Reinstall/regenerate affected native dependency sources and use a clean
+   build after dependency or workaround changes.
+4. Validate the JavaScript bundle and affected native build. Run the app's
+   format/lint and root validation when shared manifests or references change.
+5. Finish code/configuration changes with `yarn clean-lage-cache` then
+   `yarn lage buildci` (R-VALID-003).
 
-1. Read the repository `AGENTS.md`, then the compact
-   [agent map](../../../apps/storybook/agent-map.yaml). Read the
-   [Storybook instructions](../../../apps/storybook/AGENTS.md), including its native diagnostics commands, and
-   [README](../../../apps/storybook/README.md) only as needed for the task.
-2. Inspect the Storybook `package.json` and run its declared workspace scripts; do not invent direct runner commands.
-3. Use `storybook-agent` to query runtime story IDs, select stories, and sweep renderability. Reproduce the first
-   failure from the Storybook workspace so pnpm-linked React Native tooling resolves from the app.
-4. Treat native workspaces, Pods, lockfiles, generated solutions, build directories, and DerivedData as disposable
-   outputs. Fix the owning manifest, Podfile, configuration, or script instead.
-5. After dependency or workaround changes, regenerate the affected native dependency source and use a clean build so
-   stale output cannot produce a false success.
-   When adding a codegen-enabled workspace dependency to existing macOS Pods, the first pod install can generate its
-   spec without refreshing ReactCodegen's source list. If the clean build then reports a missing generated spec header,
-   run `pods:macos` once more before changing native configuration.
-6. Validate the JavaScript bundle and the affected native build. Run Storybook format/lint and the root build when
-   manifests or shared package references changed. Finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
-
-Keep component API, slot, token, and rendering work in the `agentic-component-authoring` skill; use this skill for the
-Storybook application and its native toolchains.
+For test configuration, helper provisioning, test runs, smoke reports, or CI
+lanes, use `desktop-testing`. For package source changes, use
+`maintain-desktop-testing`. Component API and assertion work stays with
+`agentic-component-authoring`.

@@ -374,6 +374,10 @@ onto the actual accessible element, removes the structural Fabric TextInput's
 extra Tab stop, and separates read-only single-line editing from disabled state
 on both renderers. Read-only editors remain selectable/focusable; disabled editors
 remain disabled. It also maps their `textbox` role through the existing converter.
+Fabric paragraphs (`<Text>`) set `accessible` now expose themselves as static
+text on macOS. RNmacOS otherwise rejects them unconditionally because its iOS
+element provider is compiled out, which hides every Text label and `testID`
+from accessibility clients.
 
 These fixes belong in RNmacOS, not in a MenuItem-specific native host or a
 JavaScript accessibility-value workaround. The patch is used by this repository's

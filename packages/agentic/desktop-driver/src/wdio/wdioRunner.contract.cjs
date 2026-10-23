@@ -25,6 +25,9 @@ async function main() {
       waitforInterval: worker.browser.options.waitforInterval,
       waitforTimeout: worker.browser.options.waitforTimeout,
     };
+    const delayed = await worker.browser.$('~button-delayed');
+    await delayed.waitForDisplayed({ timeout: 2000 });
+    const delayedDisplayed = await delayed.isDisplayed();
     const manifest = await worker.browser.desktopListStories();
     await desktop.browser.desktopExpect({
       state: 'enabled',
@@ -32,7 +35,9 @@ async function main() {
       value: true,
     });
     const result = await desktop.browser.desktopRunStoryTests({ artifactsRoot });
-    process.stdout.write(JSON.stringify({ attachedWaitOptions, attachedWaitPolls, manifestEntries: manifest.entries.length, result }));
+    process.stdout.write(
+      JSON.stringify({ attachedWaitOptions, attachedWaitPolls, delayedDisplayed, manifestEntries: manifest.entries.length, result }),
+    );
   } finally {
     await desktop.delete();
   }

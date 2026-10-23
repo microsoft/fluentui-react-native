@@ -26,6 +26,11 @@ the declared scripts in the root [package.json](../../../package.json) and [lage
   hide a failure. If that run fails, fix the failure and rerun plain `yarn lage buildci`: tasks that never ran have no
   cache entry, so they execute, and tasks that passed after the clear reuse fresh results. Read-only reviews and plans
   do not need it.
+- **R-VALID-004:** While iterating, validate with the narrowest scope that covers the change: the selected tests in the
+  owning package, then its whole suite, then its dependents when shared code changed (see
+  [Focused test runs](#focused-test-runs)). Do not repeat the repository-wide aggregate after each edit; run it once as
+  final acceptance (R-VALID-003). Report the scope of every test run, because a focused run is not evidence that the
+  full suite passes.
 - **R-REPO-001:** Do not use barrel exports (`export * from '...'`). Use explicit named re-exports such as
   `export { Foo, Bar } from './module'` and `export type { Baz } from './module'` so bundlers can tree-shake.
 - **R-REPO-004:** Do not copy or mechanically transform private source bodies into this public repository. Record
@@ -72,12 +77,47 @@ through the `fluentui-scripts` CLI in [`scripts/`](../../../scripts/package.json
 - `yarn format`: formats the package; `yarn format --check` only checks.
 
 Packages differ. Check the scripts before running them; for example, `apps/storybook` has no `build` or `test` script.
-`fluentui-scripts jest` appends every discovered test path after forwarded arguments, so a positional file name does
-not isolate one file; use `--testNamePattern` to focus a run.
+Run a subset of a package's tests as described in [Focused test runs](#focused-test-runs).
+
+## Focused test runs
+
+`yarn test` and `yarn update-snapshots` run `fluentui-scripts jest`, which accepts test selectors, so a change to one
+component does not need the whole suite. Run these from the package directory, and widen the scope only as the change
+settles (R-VALID-004):
+
+| Scope                         | Command                                                      | Use it for                                                  |
+| ----------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| Test files selected by path   | `yarn test popover`                                          | the component or file you are editing                       |
+| One test by name              | `yarn test popover -t "opens on press"`                      | a single new or failing case                                |
+| Tests that depend on a source | `yarn test --findRelatedTests src/common/useFocusVisuals.ts` | shared helpers, primitives, and hooks                       |
+| Tests related to your changes | `yarn test --changedSince=origin/main`                       | a pass over everything changed in the package               |
+| Whole package                 | `yarn test`                                                  | before handing the package over                             |
+| Package and its dependents    | `yarn lage test --scope @fluentui-react-native/<package>`    | a change to design, framework-base, native-core, or scripts |
+| Final acceptance              | `yarn clean-lage-cache`, then `yarn lage buildci`            | once, when the change is complete (R-VALID-003)             |
+
+- A bare argument is a case-insensitive pattern, either plain text or a regular expression, matched against the test
+  path relative to the package. `menu` also selects the `menu-item` and `menu-button` tests; `src/components/menu/`
+  selects one directory. Selectors combine, may follow flags such as `-u`, and may be absolute or repository-relative
+  paths. `yarn update-snapshots popover` refreshes only the popover snapshots.
+- A selector that matches no test file fails the run, so a typo is never a pass. `--listTests` prints the files a
+  selection runs without running them.
+- `--findRelatedTests` takes source files relative to the package directory, and a path that does not exist is an
+  error. `--changedSince=<ref>` includes committed changes; `-o` sees only uncommitted ones. When nothing relates, the
+  run prints `Selected 0 of N test files` and runs nothing: report that check as not run (R-VALID-002), not passed.
+- A passing `*.types.test.ts` under Jest says nothing about its types, because Babel strips them. `yarn build`
+  type-checks them, so pair a focused run with `yarn build` after changing types.
+- Workspace dependencies resolve through their package `exports`, and some point at built `lib/` output. After editing a
+  dependency, run `yarn build` before testing a dependent.
+- A multi-step `test` script, such as the agentic components package's, runs its earlier checks in full and applies
+  the selector to the Jest step. A package with platform-suffixed tests runs Jest once for each platform that has
+  selected files, so `yarn test ColorTokens.test.win32` runs only the win32 file.
+- Do not call `jest` directly (R-VALID-001): it would run platform-suffixed test files under the package's base
+  platform instead of their own.
 
 ## Validation discipline
 
-- During iteration, run the smallest relevant test, and run package lint or build early after type-heavy edits.
+- During iteration, run the focused tests for the code you changed (R-VALID-004), and run package lint or build early
+  after type-heavy edits.
 - For final validation, run format, lint, the package build, and package tests, then the root build when public types,
   manifests, or project references change. Finish with `yarn clean-lage-cache` and `yarn lage buildci` (R-VALID-003).
 - After fixing a failed step, rerun that step and its downstream checks before rerunning the whole chain.
@@ -94,6 +134,7 @@ not isolate one file; use `--testNamePattern` to focus a run.
 
 - Use `workspace:*` for internal dependencies.
 - Add the package's `tsconfig.json` to the root `tsconfig.json` `references` so it joins the unified build.
+- Follow the [package-owned guidance standard](package-guidance.md) for guided packages and register them in the package guidance list.
 - [Dynamic package extensions](../../../scripts/dynamic.extensions.mts) add TypeScript, Jest, oxlint, and oxfmt
   development dependencies when the package has the matching configuration or scripts.
 - New components belong in the agentic package and new modern native code in native-core; see the

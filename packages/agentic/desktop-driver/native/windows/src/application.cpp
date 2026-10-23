@@ -5,7 +5,9 @@
 #include <tlhelp32.h>
 
 #include <algorithm>
+#include <cmath>
 #include <exception>
+#include <filesystem>
 #include <iostream>
 #include <optional>
 #include <unordered_set>
@@ -708,9 +710,24 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
   if (application == nullptr || !application->IsObject()) {
     Fail(kErrorInvalidParams, "The launch request is missing its application descriptor.");
   }
+  const json::Value* timeout = params.Find("launchTimeoutMs");
+  const double configuredTimeout = params.NumberField("launchTimeoutMs", kLaunchTimeoutMs);
+  if ((timeout != nullptr && !timeout->IsNumber()) || !std::isfinite(configuredTimeout) ||
+      configuredTimeout < 1 || configuredTimeout > 2147483647 || std::floor(configuredTimeout) != configuredTimeout) {
+    Fail(kErrorInvalidParams, "The registered launch timeout must be a positive bounded integer.");
+  }
   const std::wstring aumid = application->WideField("aumid");
   const std::wstring configuredExecutablePath = application->WideField("executablePath");
   const std::wstring windowTitle = application->WideField("windowTitle");
+  const std::wstring workingDirectory = application->WideField("workingDirectory");
+  if (!workingDirectory.empty() &&
+      (!std::filesystem::path(workingDirectory).is_absolute() ||
+       !std::filesystem::is_directory(workingDirectory))) {
+    Fail(kErrorInvalidParams, "The application workingDirectory must name an existing absolute directory.");
+  }
+  if (!workingDirectory.empty() && !aumid.empty()) {
+    Fail(kErrorInvalidParams, "Packaged activation does not support a workingDirectory override.");
+  }
   if (aumid.empty() && configuredExecutablePath.empty()) {
     Fail(kErrorInvalidParams, "The application descriptor needs an \"aumid\" or an \"executablePath\".");
   }
@@ -784,7 +801,8 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       STARTUPINFOW startup{};
       startup.cb = sizeof(startup);
       PROCESS_INFORMATION information{};
-      if (CreateProcessW(executablePath.c_str(), commandLine.data(), nullptr, nullptr, FALSE, 0, nullptr, nullptr,
+      if (CreateProcessW(executablePath.c_str(), commandLine.data(), nullptr, nullptr, FALSE, 0, nullptr,
+                         workingDirectory.empty() ? nullptr : workingDirectory.c_str(),
                          &startup, &information) == FALSE) {
         FailLastError(kErrorLaunchFailed, "Starting the unpackaged application", GetLastError());
       }
@@ -809,7 +827,7 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
 
     // Packaged activation can report a short-lived broker. Only a new,
     // identity-matched process with a non-preexisting window can become owned.
-    const Deadline deadline(kLaunchTimeoutMs);
+    const Deadline deadline(static_cast<unsigned int>(configuredTimeout));
     std::optional<Deadline> graceDeadline;
     HWND matched = nullptr;
     DWORD matchedProcessId = 0;
@@ -978,10 +996,29 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
     Fail(kErrorInvalidParams,
          "Attaching without a lease requires an exact \"windowTitle\" in the application descriptor.");
   }
+  const std::wstring aumid = application->WideField("aumid");
+  const std::wstring configuredExecutablePath = application->WideField("executablePath");
+  if (aumid.empty() && configuredExecutablePath.empty()) {
+    Fail(kErrorInvalidParams, "Attaching without a lease requires an executablePath or aumid, not a window title alone.");
+  }
+  const std::wstring executablePath =
+      aumid.empty() ? CanonicalizeExecutablePath(configuredExecutablePath) : std::wstring();
   std::vector<HWND> matches;
+  winrt::handle matchedProcess;
+  DWORD matchedProcessId = 0;
   for (const HWND window : FindWindowsWithTitle(windowTitle)) {
     token.ThrowIfCancelled();
-    matches.push_back(window);
+    DWORD candidateId = 0;
+    GetWindowThreadProcessId(window, &candidateId);
+    winrt::handle candidate(OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE, FALSE, candidateId));
+    if (candidate && IsProcessAlive(candidate.get()) &&
+        ProcessMatchesLaunchIdentity(candidate.get(), aumid, executablePath)) {
+      if (matches.empty()) {
+        matchedProcessId = candidateId;
+        matchedProcess = std::move(candidate);
+      }
+      matches.push_back(window);
+    }
   }
   if (matches.empty()) {
     Fail(kErrorAttachFailed, "No window titled \"" + ToUtf8(windowTitle) + "\" is currently open.");
@@ -993,8 +1030,11 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
   }
   DWORD processId = 0;
   GetWindowThreadProcessId(matches.front(), &processId);
-  winrt::handle process = OpenProcessForIdentity(processId, kErrorAttachFailed);
-  return CreateLease("attached", processId, process.detach(), matches.front(), windowTitle, params);
+  if (processId != matchedProcessId || !IsProcessAlive(matchedProcess.get()) ||
+      !ProcessMatchesLaunchIdentity(matchedProcess.get(), aumid, executablePath)) {
+    Fail(kErrorAttachFailed, "The application identity changed while attaching.");
+  }
+  return CreateLease("attached", processId, matchedProcess.detach(), matches.front(), windowTitle, params);
 }
 
 std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, const CancellationToken& token) {

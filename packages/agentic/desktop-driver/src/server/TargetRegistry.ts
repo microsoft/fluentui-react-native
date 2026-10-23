@@ -16,6 +16,15 @@ export class TargetRegistry {
     if (this.targets.has(target.id)) {
       throw new Error(`Desktop target "${target.id}" is already registered.`);
     }
+    if (
+      target.launchTimeoutMs !== undefined &&
+      (!Number.isSafeInteger(target.launchTimeoutMs) || target.launchTimeoutMs < 1 || target.launchTimeoutMs > 2_147_483_647)
+    ) {
+      throw new TypeError('Target launchTimeoutMs must be a positive bounded integer.');
+    }
+    if (target.launchModes && (!target.launchModes.length || target.launchModes.some((mode) => mode !== 'attach' && mode !== 'launch'))) {
+      throw new TypeError('Target launchModes must contain attach and/or launch.');
+    }
     this.targets.set(target.id, target);
   }
 

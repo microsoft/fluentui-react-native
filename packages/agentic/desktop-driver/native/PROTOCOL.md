@@ -106,6 +106,19 @@ Parameters are command-specific serializable data already validated by the
 Node boundary. Public WebDriver element UUIDs are resolved before dispatch;
 only helper-private opaque IDs cross FDR1.
 
+The `launch` request includes `launchTimeoutMs` when explicitly configured on
+the registered target. Both native providers validate its positive bounded
+integer value, otherwise use their 90-second launch default, and honor the
+cancellation token while discovering the application/window. Windows
+application descriptors may include an existing absolute `workingDirectory`
+for unpackaged process launch; packaged activation rejects that override.
+These fields are trusted supervisor configuration, not WebDriver capabilities.
+
+Element snapshots can additionally include `required` as a supported Boolean
+or an unsupported value with its reason. Older or non-supporting providers may
+omit it; the Node boundary treats absence as unsupported. This is additive
+snapshot metadata and does not change the FDR1 framing or wire version.
+
 Request and cancellation correlation IDs are limited to 256 UTF-8 bytes.
 Helpers ignore invalid IDs before queuing work or echoing a response.
 

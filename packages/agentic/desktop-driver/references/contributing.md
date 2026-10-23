@@ -1,3 +1,10 @@
+---
+id: desktop-driver.contributing
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Contributor reference
 
 This page expands the repository instructions in [AGENTS.md](../AGENTS.md).
@@ -59,7 +66,11 @@ package.
 
 Never patch generated SwiftPM, Xcode, MSBuild output, or cached artifacts.
 
-## Authored plans
+## Legacy static plans
+
+The following rules describe the serializable `parameters.desktopDriver`
+contract retained for compatibility. New Storybook test authoring uses named
+`wdio` callbacks owned by `@fluentui-react-native/storybook-desktop`.
 
 - Keep plans inline and statically extractable under
   `parameters.desktopDriver`.
@@ -77,13 +88,12 @@ Never patch generated SwiftPM, Xcode, MSBuild output, or cached artifacts.
 - `references/` holds long-form user and contributor guidance.
 - `native/<provider>/README.md` documents provider implementation and
   operations next to its source.
-- [PLAN.md](../PLAN.md) contains only unfinished or deferred work.
 - [references/protocol.md](protocol.md) is the public wire/behavior contract.
 - [native/PROTOCOL.md](../native/PROTOCOL.md) is the private helper protocol.
 
 When completing planned work, document the resulting behavior first, then
-remove the completed task from PLAN.md. Do not preserve implementation history
-as active instructions.
+update its tracking issue. Do not preserve implementation history as active
+instructions.
 
 ## Validation order
 

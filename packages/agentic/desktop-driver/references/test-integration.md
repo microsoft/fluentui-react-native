@@ -1,3 +1,10 @@
+---
+id: desktop-driver.test-integration
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Test integration
 
 Desktop Driver supports three complementary test levels:
@@ -9,6 +16,13 @@ Desktop Driver supports three complementary test levels:
 The same W3C service and `DesktopHost` contract underpin all three.
 
 ## WebdriverIO tests
+
+Use `@fluentui-react-native/desktop-test` for an application-owned
+configuration and normal WDIO/Jasmine suites. It preserves TypeScript hooks,
+Jasmine matchers, grouped spec arrays, retries, and native browser ownership.
+`installDesktopWebdriverCommands(browser, url)` binds an existing WDIO-managed
+browser, including native `isDisplayed`, `isFocused`, and delayed-render waits.
+No Appium capability spoofing or second session is required.
 
 Use `connectDesktopWebdriver` when a test owns service connection and session
 lifecycle:
@@ -43,8 +57,9 @@ For Storybook targets, the connection registers:
 - `desktopListStories()`;
 - `desktopOpenStory(storyId, runId?)`;
 - `desktopResetStory(storyId, runId?)`;
-- `desktopExpect(expectation)`;
 - `desktopRunStoryTests(options?)`.
+
+`desktopExpect(expectation)` is available without Storybook.
 
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
@@ -72,7 +87,7 @@ independent worker/session. Native feature flags are typed on the WebdriverIO
 browser's `furn:features` capability. Button now uses this authoring pattern
 instead of serializable plans. Extraction, native-bundle stripping, runner
 configuration, and source freshness belong to
-[`storybook-desktop`](../../storybook-desktop/README.md#executable-tests-inside-stories),
+`@fluentui-react-native/storybook-desktop`,
 not this Storybook-independent package. Static plans below are unchanged.
 
 ## Author portable story plans
@@ -170,6 +185,9 @@ desktop-driver stories run \
 
 Selectors can filter by story glob, test glob, tag, and deterministic shard.
 The CLI emits JSON and exits nonzero when the run status is not `passed`.
+An all-skipped static run is `incomplete`, not a passing run. The neutral
+harness's explicitly optional cohorts may finish skipped without claiming
+that the underlying capabilities were qualified.
 
 ## Evidence
 

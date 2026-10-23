@@ -1,4 +1,9 @@
 import { Command, Option } from 'commander';
+import path from 'node:path';
+import { claimDesktopWorkload, DesktopServiceScope, DesktopStopRequested } from '@fluentui-react-native/desktop-test';
+import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/commands';
+import { createDesktopReportSession } from '@fluentui-react-native/desktop-test/reporting';
+import type { DesktopReportSession } from '@fluentui-react-native/desktop-test/reporting';
 
 import { desktopSmokeModes, type DesktopSmokeMode } from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
@@ -36,8 +41,8 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
   const program = new Command()
     .name('storybook-desktop')
     .description('Serve, prepare, bundle, build, run, and smoke test a React Native desktop Storybook app.')
-    .option('-c, --config <path>', 'path to storybook.config.ts')
-    .option('-v, --verbose', 'replay full captured output for successful commands as well as failures');
+    .option('-c, --config <path>', 'path to desktop.config.mts (legacy storybook.config files are also accepted)')
+    .option('-v, --verbose', 'stream informational output as well as live errors and test progress');
   let apiPromise: Promise<DesktopStorybookCli> | undefined;
 
   const getApi = (flags: PlatformFlags) =>
@@ -58,6 +63,8 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           runSmokeTests: options.runSmokeTests,
           resolveNativeDriver: options.resolveNativeDriver,
           writeMacOSApplicationLease: options.writeMacOSApplicationLease,
+          reporter: options.reporter,
+          services: options.services,
         }),
     ));
 
@@ -160,7 +167,55 @@ function addInstanceCommand(program: Command, getApi: GetApi): void {
 }
 
 export async function runDesktopStorybookCli(argv: readonly string[] = process.argv): Promise<void> {
-  await createDesktopStorybookCommand().parseAsync([...argv]);
+  const options: CreateDesktopStorybookCommandOptions = {};
+  const program = createDesktopStorybookCommand(options);
+  let session: DesktopReportSession | undefined;
+  let runner: NodeDesktopCommandRunner | undefined;
+  let releaseClaim: (() => void) | undefined;
+  let failure: unknown;
+  const interrupt = () => options.services?.fail(new Error('Storybook run interrupted.'));
+  program.hook('preAction', async (_program, action) => {
+    if (['manifest', 'instance'].includes(action.name()) || action.opts<{ list?: boolean }>().list) return;
+    options.config = await loadDesktopStorybookConfig(program.opts<{ config?: string }>().config);
+    session = await createDesktopReportSession({
+      ...options.config.desktop?.reporting,
+      artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
+      kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+      verbose: program.opts<{ verbose?: boolean }>().verbose,
+      onFatal: (error) => options.services?.fail(error),
+    });
+    if (!session.delegated && ['driver', 'smoke'].includes(action.name())) releaseClaim = claimDesktopWorkload(session.reporter.runId);
+    options.reporter = session.reporter;
+    runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
+    options.runner = runner;
+    options.services = new DesktopServiceScope(runner, session.reporter);
+    session.onStop?.(() => options.services!.requestStop());
+    process.once('SIGINT', interrupt);
+    process.once('SIGTERM', interrupt);
+  });
+  try {
+    await program.parseAsync([...argv]);
+  } catch (error) {
+    if (!(error instanceof DesktopStopRequested)) failure = error;
+  } finally {
+    process.off('SIGINT', interrupt);
+    process.off('SIGTERM', interrupt);
+    try {
+      await options.services?.close();
+      await runner?.close();
+    } catch (error) {
+      options.reporter?.fail(error, 'cleanup');
+      failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook execution and cleanup failed.');
+    }
+    try {
+      releaseClaim?.();
+    } catch (error) {
+      options.reporter?.fail(error, 'cleanup');
+      failure ??= error;
+    }
+    if (session) process.exitCode = await session.close(failure);
+  }
+  if (failure !== undefined) throw failure;
 }
 
 function addActionCommand(program: Command, action: 'bundle' | 'run' | 'build', description: string, getApi: GetApi): void {

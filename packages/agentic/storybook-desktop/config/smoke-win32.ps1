@@ -28,6 +28,7 @@ if ($SmokeMode -eq 'stories-and-tests' -and (-not $driverPort -or -not $env:STOR
 }
 
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
+. (Join-Path $PSScriptRoot 'owned-services.ps1')
 
 function Invoke-DesktopCli {
   param([Parameter(Mandatory)][string[]]$Arguments)
@@ -36,21 +37,6 @@ function Invoke-DesktopCli {
   if ($LASTEXITCODE -ne 0) {
     throw "storybook-desktop $($Arguments -join ' ') failed with exit code $LASTEXITCODE."
   }
-}
-
-function Start-OwnedCommand {
-  param(
-    [Parameter(Mandatory)]
-    [string]$FilePath,
-    [Parameter(Mandatory)]
-    [string[]]$ArgumentList,
-    [Parameter(Mandatory)]
-    [string]$LogName
-  )
-
-  return Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -WorkingDirectory $projectRoot `
-    -RedirectStandardOutput (Join-Path $logRoot "$LogName.out.log") `
-    -RedirectStandardError (Join-Path $logRoot "$LogName.err.log") -PassThru -WindowStyle Hidden
 }
 
 function Write-ApplicationLease {
@@ -86,35 +72,12 @@ function Write-ApplicationLease {
   return $leasePath
 }
 
-function Wait-ForTcpPort {
-  param(
-    [Parameter(Mandatory)]
-    [int]$Port,
-    [int]$TimeoutSeconds = 120
-  )
-
-  $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
-  while ((Get-Date) -lt $deadline) {
-    $client = [System.Net.Sockets.TcpClient]::new()
-    try {
-      $task = $client.ConnectAsync('127.0.0.1', $Port)
-      if ($task.Wait(500) -and $client.Connected) {
-        return
-      }
-    } finally {
-      $client.Dispose()
-    }
-    Start-Sleep -Milliseconds 250
-  }
-
-  throw "Timed out waiting for port $Port."
-}
-
 function Wait-ForApp {
   param([int]$TimeoutSeconds = 120)
 
   $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
   while ((Get-Date) -lt $deadline) {
+    Assert-OwnedServices
     $process = Get-Process -Name ReactTest -ErrorAction SilentlyContinue |
       Where-Object { $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq $WindowTitle } |
       Select-Object -First 1
@@ -156,6 +119,7 @@ function Wait-ForAutomationId {
 
   $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
   while ((Get-Date) -lt $deadline) {
+    Assert-OwnedServices
     if (Find-AutomationElement -Process $Process -AutomationId $AutomationId) {
       return
     }
@@ -181,6 +145,7 @@ function Add-OwnedProcess {
   }
 }
 
+$smokeFailure = $null
 try {
   if (Get-NetTCPConnection -State Listen -LocalPort $storybookPort -ErrorAction SilentlyContinue) {
     throw "Storybook port $storybookPort is already in use."
@@ -247,7 +212,12 @@ try {
   if (-not (Get-Process -Id $appProcess.Id -ErrorAction SilentlyContinue)) {
     throw 'The Win32 Storybook host exited during the smoke test.'
   }
+} catch {
+  $smokeFailure = $_.Exception
+  throw
 } finally {
+  $cleanupFailure = $null
+  try { Stop-OwnedServices } catch { $cleanupFailure = $_.Exception }
   if ($applicationLeasePath) {
     Remove-Item -LiteralPath $applicationLeasePath -Force -ErrorAction SilentlyContinue
   }
@@ -258,6 +228,10 @@ try {
       if ($process) {
         Stop-Process -Id $ownedProcessId -ErrorAction Continue
       }
+    }
+    if ($cleanupFailure) {
+      if ($smokeFailure) { throw [System.AggregateException]::new('Smoke execution and service cleanup failed.', [System.Exception[]]@($smokeFailure, $cleanupFailure)) }
+      throw $cleanupFailure
     }
   }
 }

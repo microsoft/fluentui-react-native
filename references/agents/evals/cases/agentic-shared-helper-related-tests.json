@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "case_id": "agentic-shared-helper-related-tests",
+  "split": "development",
+  "task_mode": "maintain",
+  "prompt": "The shared hook packages/agentic/components/src/common/useFocusVisuals.ts returns a stale value after its inputs change. Fix it, and verify every component that depends on it as quickly as possible before you finish.",
+  "expected": {
+    "skills": ["agentic-component-authoring"],
+    "classification": {
+      "implementation_model": "agentic-higher-order",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": [
+      "packages/agentic/components/AGENTS.md",
+      "references/agents/components/agentic/tests-and-stories.md",
+      "references/agents/repository/development.md"
+    ],
+    "forbidden_actions": []
+  },
+  "assertions": [
+    {
+      "id": "related-tests",
+      "description": "Selects the dependent tests with `yarn test --findRelatedTests src/common/useFocusVisuals.ts` or `--changedSince`, rather than guessing component names or running every suite after each edit.",
+      "rule_ids": ["R-VALID-004"],
+      "source_refs": ["references/agents/repository/development.md"]
+    },
+    {
+      "id": "no-false-green",
+      "description": "Reports a selection that runs nothing, such as `Selected 0 of N test files` or an unmatched selector, as not run rather than passed.",
+      "rule_ids": ["R-VALID-002"],
+      "source_refs": ["references/agents/repository/development.md"]
+    },
+    {
+      "id": "widen-then-accept",
+      "description": "Widens to the whole package suite, then runs `yarn clean-lage-cache` and `yarn lage buildci` once as final acceptance.",
+      "rule_ids": ["R-VALID-003", "R-VALID-004"],
+      "source_refs": ["packages/agentic/components/AGENTS.md"]
+    }
+  ]
+}

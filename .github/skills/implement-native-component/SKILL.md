@@ -37,7 +37,8 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
 4. Implement with the TypeScript specification, codegen configuration, native props, events, commands, and registration
    kept consistent. Preserve public APIs and registration names (R-NATIVE-002) and keep fork imports in platform files
    (R-REPO-002).
-5. Validate the affected boundary with declared scripts (R-VALID-001): package build, test, and lint; native-core
+5. Validate the affected boundary with declared scripts (R-VALID-001), running focused package tests while iterating
+   (R-VALID-004): package build, test, and lint; native-core
    `codegen:windows` when Windows specs change; native builds through the owning app, such as
    `yarn storybook build --macos` or `--windows` from `apps/storybook`; and runtime evidence through Storybook smoke or
    `wdio` story tests. macOS Storybook commands default to Fabric: add `--paper` to `prep`, `build`, `run`, or `smoke`

@@ -81,6 +81,9 @@ export class SessionManager {
     clickMode: DesktopClickMode,
     launchMode: 'attach' | 'launch',
   ): Promise<DesktopSession> {
+    if (target.launchModes && !target.launchModes.includes(launchMode)) {
+      throw new WebDriverError('session not created', `Target "${target.id}" does not allow ${launchMode} sessions.`);
+    }
     if (this.sessionsByTarget.has(target.id) || this.reservedTargets.has(target.id)) {
       throw new WebDriverError('session not created', `Target "${target.id}" already has an active session.`);
     }
@@ -95,7 +98,7 @@ export class SessionManager {
           leasePromise = launchMode === 'attach' ? target.host.attach(target, signal) : target.host.launch(target, signal);
           return leasePromise;
         },
-        120_000,
+        target.launchTimeoutMs ?? 120_000,
         `${launchMode === 'attach' ? 'Attaching to' : 'Launching'} target "${target.id}"`,
       );
       const activeLease = lease;
@@ -114,7 +117,7 @@ export class SessionManager {
         clickMode,
         currentWindowId: windows[0].id,
         desktopTimeouts: {
-          appLaunch: 120_000,
+          appLaunch: target.launchTimeoutMs ?? 120_000,
           nativeCommand: 10_000,
           stableLayout: 1_000,
           storyRender: 30_000,

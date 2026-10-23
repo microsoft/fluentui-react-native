@@ -17,7 +17,7 @@ class SwitchPageObject extends BasePage {
   }
 
   async isSwitchChecked(): Promise<boolean> {
-    return await (await this._primaryComponent).isSelected();
+    return this.isChecked(this._primaryComponent);
   }
 
   async waitForSwitchStateChange(newState: boolean, errorMsg: string): Promise<boolean | void> {

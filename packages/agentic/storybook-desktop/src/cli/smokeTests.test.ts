@@ -201,11 +201,13 @@ describe('runDesktopStorybookSmokeTests', () => {
     const runWdio: jest.MockedFunction<typeof runWdioStoryTests> = jest.fn(async ({ story }) => [
       { storyId: story!, status: 'skipped' as const, durationMs: 0, skipReason: 'Capability unavailable' },
     ]);
-    const result = await runDesktopStorybookSmokeTests(options, connect, runWdio);
+    await expect(runDesktopStorybookSmokeTests(options, connect, runWdio)).rejects.toThrow('only skipped');
     expect(connect).not.toHaveBeenCalled();
     expect(runWdio).toHaveBeenCalledTimes(1);
-    expect(result.wdio).toMatchObject([{ storyId: inputId, status: 'skipped' }]);
-    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 1 desktop story tests (0 passed, 1 skipped).');
+    expect(JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'))).toMatchObject({
+      status: 'failed',
+      wdio: [{ storyId: inputId, status: 'skipped' }],
+    });
   });
 
   test('fails after persisting failed plan results and closing the session', async () => {

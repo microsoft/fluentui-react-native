@@ -30,9 +30,10 @@ v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new comp
    editing.
 5. Make the smallest change that fixes the problem. Preserve public props, types, exports and aliases, display names,
    `componentRef`, token contracts, and native registration names (R-V0-002, R-V0-003, R-V1-002, R-V1-003).
-6. Validate with the owning package's declared scripts (R-VALID-001): build, test, and lint, plus the framework
-   packages named in the recipe when framework semantics change. Review snapshot diffs before accepting them. Report
-   each check's outcome (R-VALID-002), and finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
+6. Validate with the owning package's declared scripts (R-VALID-001), narrowest first (R-VALID-004): `yarn test <component>`
+   while iterating, then the package's build, test, and lint, plus the framework packages named in the recipe when
+   framework semantics change. Review snapshot diffs before accepting them. Report each check's outcome (R-VALID-002),
+   and finish with one `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003).
 7. Add a changeset for published packages (R-REPO-003).
 
 Stop and confirm scope before migrating between frameworks, creating a component, or changing a public API. Those

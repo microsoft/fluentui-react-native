@@ -59,9 +59,12 @@ Primitive runtime tests should cover every renderer or source branch and verify 
 accessibility, and test props.
 
 Native motion stories compare repeated element screenshots and honor the runtime reduced-motion preference.
-Use `browser.isElementDisplayed(elementId)` and `browser.takeElementScreenshot(elementId)` for native protocol operations;
-WebdriverIO's DOM-oriented `element.isDisplayed()` tries unsupported JavaScript execution. Skip pixel checks explicitly
-when the driver does not provide element screenshots.
+With the desktop driver's installed WebdriverIO binding, use native
+`element.isDisplayed()` and `element.isFocused()` commands. An unbound WDIO
+client may still try unsupported DOM JavaScript. Use
+`browser.takeElementScreenshot(elementId)` for native capture and skip pixel
+checks explicitly when the target does not provide element screenshots. See
+`packages/agentic/desktop-driver/references/test-integration.md`.
 
 ## Visual snapshots
 
@@ -163,7 +166,7 @@ The single-function `wdio` form remains supported. Run with
 `yarn storybook test --<platform>` and optionally `--test <name-glob>`.
 `--list` discovers names without executing code. The `stories-and-tests`
 smoke mode runs these functions alongside remaining legacy plans, grouped by
-story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/README.md#executable-tests-inside-stories).
+story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/references/story-tests.md).
 
 The components package's `test:stories` project checks every test-bearing story
 without emitting it into the component library. Add new test-bearing files to
@@ -259,8 +262,21 @@ yarn workspace @fluentui-react-native/agentic-components-storybook storybook bun
 yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --windows
 ```
 
-Run the smallest affected package test while iterating. Run the full package sequence before completion. Run the root
-`yarn build` when public types, manifests, or project references change.
+While iterating, run only the affected component's tests from `packages/agentic/components` (R-VALID-004; see
+[Focused test runs](../../repository/development.md#focused-test-runs) for the selector rules):
+
+```sh
+yarn test popover                                           # one component's runtime and type-level test files
+yarn test popover -t "opens on press"                       # one test by name
+yarn build                                                  # type-checks *.types.test.ts, which Jest cannot
+yarn test --findRelatedTests src/common/useFocusVisuals.ts  # every test that imports a shared helper or primitive
+yarn update-snapshots popover                               # refresh only one component's snapshots
+```
+
+`menu` also selects the `menu-item` and `menu-button` tests; use `src/components/menu/` for one directory. A selector
+that matches no test fails the run. Run the full package sequence above before completion, and the root `yarn build`
+when public types, manifests, or project references change. Then run `yarn clean-lage-cache` and `yarn lage buildci`
+once as final acceptance (R-VALID-003) rather than after each edit.
 
 Run repository/package tests before the owned native Storybook lifecycle, not
 concurrently with it: some CLI fixtures still write into the app's generated

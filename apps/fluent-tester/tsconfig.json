@@ -14,6 +14,9 @@
       "path": "../../packages/shim/callout/tsconfig.json"
     },
     {
+      "path": "../../packages/agentic/desktop-test/tsconfig.json"
+    },
+    {
       "path": "../../packages/experimental/AppearanceAdditions/tsconfig.json"
     },
     {

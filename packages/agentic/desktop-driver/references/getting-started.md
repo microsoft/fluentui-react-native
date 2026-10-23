@@ -1,3 +1,10 @@
+---
+id: desktop-driver.getting-started
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Getting started
 
 This guide covers setup for package contributors and consumers who embed the

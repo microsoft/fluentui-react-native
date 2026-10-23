@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { legacyDesktopSpecs } = require('./desktop-specs.mts');
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 60000;
@@ -6,24 +7,8 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local',
-  /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
-  so we must specify which ones we want to test here. */
-  specs: [
-    [
-      'src/ActivityIndicator/specs/*.win.ts',
-      'src/ButtonLegacy/specs/*.win.ts',
-      'src/CheckboxLegacy/specs/*.win.ts', // See spec file for more information
-      'src/LinkLegacy/specs/*.win.ts',
-      'src/PersonaCoin/specs/*.win.ts',
-      'src/Pressable/specs/*.win.ts',
-      'src/Separator/specs/*.win.ts',
-      'src/TabsLegacy/specs/*.windows.ts', // See spec file for more information
-      'src/TextLegacy/specs/*.win.ts',
-      'src/TextV1/specs/*.win.ts',
-      'src/Theme/specs/*.win.ts',
-      'src/Tokens/specs/*.win.ts',
-    ],
-  ],
+  // Preserve the existing allowlist, including unmatched patterns that block native parity.
+  specs: legacyDesktopSpecs.windows,
   exclude: [/* 'path/to/excluded/files' */],
 
   maxInstances: 1,

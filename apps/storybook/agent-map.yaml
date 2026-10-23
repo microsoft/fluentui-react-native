@@ -2,13 +2,14 @@ version: 1
 purpose: Agent-optimized map of stable Storybook structure and runtime discovery paths.
 
 sources:
-  config: storybook.config.mts
+  config: desktop.config.mts
   config_adapter: src/main.ts
   app_entry: index.js
   app_shell: src/StorybookApp.tsx
   theme_host: ../../packages/agentic/storybook-desktop-runtime/src/StorybookTheme.tsx
   theme_palette: ../../packages/agentic/storybook-desktop-runtime/src/useStorybookTheme.ts
   shared_cli: ../../packages/agentic/storybook-desktop
+  shared_harness: ../../packages/agentic/desktop-test
   shared_runtime: ../../packages/agentic/storybook-desktop-runtime
   generated_requires:
     path: src/storybook.requires.ts
@@ -31,7 +32,7 @@ services:
     command: yarn storybook test --<platform>
     discovery: yarn storybook test --<platform> --list
     authoring: top-level wdio callbacks or named callback collections in CSF3 stories
-    config: storybook.config.mts wdio settings
+    config: desktop.config.mts Storybook integration wdio settings
     lifecycle: attached-session-per-test-with-isolated-node-worker
     context_platform: macos-or-windows-or-win32-target-endpoint
     test_filter: --test <name-glob>
@@ -43,17 +44,17 @@ agent_commands:
   start_driver: yarn storybook driver --<platform>
   inspect_instance: yarn storybook instance --<platform>
   list_stories: yarn desktop-driver stories list --url <driver-url> --target <target-id>
-  run_stories: yarn desktop-driver stories run --url <driver-url> --target <target-id> --tag desktop-e2e
+  run_story_tests: yarn storybook test --<platform> --test <test-name-glob>
 
 lookup_order:
   - Generate the exact platform manifest; never guess ID slugging.
   - Read this map for stable paths, services, and commands.
-  - Read storybook.config.mts for story-package and platform changes.
+  - Read desktop.config.mts for story-package and platform changes.
   - Read a matched story file for component-specific behavior.
   - Read generated requires only to diagnose generation output.
 
 interaction_order:
-  - Use the desktop-driver JSON CLI for listing and running authored story plans.
+  - Use desktop-driver stories list for runtime story IDs and storybook test for authored callbacks.
   - Use accessibility elements for native focus and control state.
   - Use screenshots for visual evidence, not element lookup.
 
@@ -97,8 +98,9 @@ validation:
     lifecycle: yarn storybook smoke --<platform> --mode stories-and-tests
 
 output_hygiene:
-  - Commands retain merged stdout/stderr logs under artifacts/storybook-commands; failures replay grouped output.
-  - Use --verbose to replay successful-command logs; files update continuously while commands run.
+  - Canonical reports and source-attributed command logs live under artifacts/desktop/<run-id>.
+  - Stderr and test progress are live; --verbose also streams informational output.
+  - Logs preserve collector arrival order across streams; failures replay grouped output.
   - Use structured CLI output instead of logging raw channel events.
   - Search large native build logs for errors and final status instead of reading them in full.
   - Keep warning suppression exact; console diagnostics remain available even when LogBox hides a warning.

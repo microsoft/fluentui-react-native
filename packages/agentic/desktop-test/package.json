@@ -1,0 +1,85 @@
+{
+  "name": "@fluentui-react-native/desktop-test",
+  "version": "0.1.0",
+  "description": "Application-neutral lifecycle and reporting for native desktop tests",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/desktop-test"
+  },
+  "bin": "./config/cli.cjs",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "config/",
+    "jest.config.cjs",
+    "lib/",
+    "package.json",
+    "references/",
+    "src/",
+    "tsconfig.json"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./config": {
+      "types": "./lib/config.d.ts",
+      "default": "./src/config.ts"
+    },
+    "./reporting": {
+      "types": "./lib/reporting/index.d.ts",
+      "import": "./lib/reporting/index.js",
+      "default": "./src/reporting/index.ts"
+    },
+    "./commands": {
+      "types": "./lib/commands.d.ts",
+      "import": "./lib/commands.js",
+      "default": "./src/commands.ts"
+    },
+    "./wdio": {
+      "types": "./lib/wdio/index.d.ts",
+      "import": "./lib/wdio/index.js",
+      "default": "./src/wdio/index.ts"
+    },
+    "./service": "./config/service.cjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "dependencies": {
+    "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@rnx-kit/reporter": "catalog:",
+    "@wdio/reporter": "9.24.0",
+    "commander": "^14.0.2",
+    "import-meta-resolve": "4.2.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@wdio/cli": "catalog:",
+    "@wdio/jasmine-framework": "catalog:",
+    "@wdio/local-runner": "catalog:",
+    "@wdio/runner": "catalog:",
+    "expect-webdriverio": "catalog:",
+    "webdriverio": "catalog:"
+  },
+  "furn": {
+    "jestPlatform": "react"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

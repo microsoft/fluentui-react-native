@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "case_id": "agentic-component-focused-tests",
+  "split": "development",
+  "task_mode": "implement",
+  "prompt": "Fix the agentic Popover in packages/agentic/components/src/components/popover so pressing its trigger while the popover is open dismisses it with the 'trigger' reason. Keep your edit-and-check loop fast, and validate the finished change.",
+  "expected": {
+    "skills": ["agentic-component-authoring"],
+    "classification": {
+      "implementation_model": "agentic-higher-order",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": [
+      "packages/agentic/components/AGENTS.md",
+      "packages/agentic/components/src/components/popover/SPEC.md",
+      "references/agents/components/agentic/tests-and-stories.md",
+      "references/agents/repository/development.md"
+    ],
+    "forbidden_actions": []
+  },
+  "assertions": [
+    {
+      "id": "focused-edit-loop",
+      "description": "Checks each edit with a component selector such as `yarn test popover` from the package, not the whole package suite, `yarn lage buildci`, or a direct `jest` call.",
+      "rule_ids": ["R-VALID-001", "R-VALID-004"],
+      "source_refs": ["references/agents/repository/development.md"]
+    },
+    {
+      "id": "types-by-build",
+      "description": "Type-checks any change to `popover.types.ts` or its `*.types.test.ts` with `yarn build`, because a Jest pass does not cover types.",
+      "rule_ids": ["R-VALID-004"],
+      "source_refs": ["references/agents/components/agentic/tests-and-stories.md"]
+    },
+    {
+      "id": "single-acceptance-run",
+      "description": "Runs the whole package suite before handover and `yarn clean-lage-cache` then `yarn lage buildci` once at the end, and reports the focused and full-suite results separately.",
+      "rule_ids": ["R-VALID-002", "R-VALID-003", "R-VALID-004"],
+      "source_refs": ["references/agents/repository/development.md"]
+    }
+  ]
+}

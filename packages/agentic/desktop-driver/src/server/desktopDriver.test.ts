@@ -4,11 +4,52 @@ import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import type { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import { HostWebDriverError } from '../protocol/errors.js';
-import { runDesktopStoryTests } from '../runner/StoryTestRunner.js';
+import { assertDesktopExpectation, runDesktopStoryTests } from '../runner/StoryTestRunner.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult } from '../storybook.js';
 
 describe('Desktop Driver W3C remote end', () => {
+  test.each([true, false, undefined])('preserves required-form state %s without inventing unsupported values', async (required) => {
+    const harness = await createDesktopDriverTestHarness({
+      windows: [
+        {
+          id: 'main',
+          title: 'Required-state fixture',
+          elements: [
+            {
+              id: 'field',
+              automationId: 'field',
+              role: 'checkbox',
+              scope: 'application',
+              windowId: 'main',
+              rect: { x: 0, y: 0, width: 100, height: 40 },
+              required,
+            },
+          ],
+        },
+      ],
+    });
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const element = await session.findElement('accessibility id', 'field');
+      const tree = await session.getTree();
+      if (required === undefined) {
+        await expect(element.getProperty('required')).rejects.toMatchObject({ code: 'unsupported operation' });
+        expect(tree[0].states).not.toHaveProperty('required');
+      } else {
+        expect(await element.getProperty('required')).toBe(required);
+        expect(tree[0].states.required).toBe(required);
+        await assertDesktopExpectation(session, { state: 'required', target: { testId: 'field' }, value: required });
+      }
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
   test('serves status and a complete fake-host session through raw HTTP', async () => {
     const harness = await createDesktopDriverTestHarness();
     try {

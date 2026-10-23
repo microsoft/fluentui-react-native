@@ -62,8 +62,17 @@ Launch requires:
 - an exact `windowTitle`;
 - optional fixed, server-owned arguments.
 
-Attach accepts an owner-generated nonce-bound lease, or an exact title only
-when it resolves to one live process/window. Zero or multiple matches fail.
+Unpackaged launch also accepts a server-owned `workingDirectory`, which must
+be an existing absolute directory. Packaged activation rejects that override.
+The helper validates and honors the server-owned `launchTimeoutMs`.
+
+Snapshots expose required-form state from cached `UIA_IsRequiredForFormPropertyId`
+with provider defaults disabled. A missing, unsupported, or non-Boolean native
+value remains unsupported rather than becoming `false`.
+
+Attach accepts an owner-generated nonce-bound lease, or an exact title
+qualified by the canonical executable or AUMID. Title-only attach, zero
+matches, and multiple qualified matches fail.
 Leases record ownership, PID, process start, executable, and the primary window.
 Attached apps survive WebDriver deletion; launched apps are closed only by
 their exact recorded process identity.
@@ -153,5 +162,6 @@ an actionable cache failure.
 
 See [Native helpers](../../references/native-helpers.md) for cache and
 verification policy, [CI integration](../../references/ci-integration.md) for
-runner requirements, and [PLAN.md](../../PLAN.md) for unfinished Windows
-qualification.
+runner requirements, and
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345)
+for unfinished Windows qualification.
