@@ -1,5 +1,32 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.3
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- d690e1c: Add package-owned agent guidance and user entry points, and restrict published
+  contents to the package files required at runtime and for documentation.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [f550cfb]
+- Updated dependencies [f550cfb]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+- Updated dependencies [f550cfb]
+- Updated dependencies [27dc8eb]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/default-theme@0.27.15
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/native-core@0.2.0
+
 ## 0.3.2
 
 ### Patch Changes
