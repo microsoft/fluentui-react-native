@@ -1,5 +1,24 @@
 # @fluentui-react-native/design
 
+## 0.5.2
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- cfa4c66: Add package-owned agent guidance, user entry points, and indexed references to
+  design and framework-base. Design's completed plan is removed and its open
+  theming work moves to `references/remaining-work.md`. Both packages now restrict
+  published contents with a `files` allowlist. Desktop Driver guidance now tracks
+  unfinished work in a remaining-work reference.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/adapters@0.15.2
+  - @fluentui-react-native/framework-base@0.9.0
+
 ## 0.5.1
 
 ### Patch Changes

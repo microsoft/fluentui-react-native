@@ -1,5 +1,33 @@
 # Change Log - @fluentui-react-native/focus-zone
 
+## 0.23.8
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- cfa4c66: Add package-owned agent guidance, user entry points, and indexed references to
+  components and native-core. The agentic component recipes and contract source
+  adapters move into the components package, the desktop focus plan is replaced
+  by `references/remaining-work.md`, and both packages publish their guidance.
+  Components now restricts published contents with a `files` allowlist, and the
+  callout and focus-zone shims link to native-core's architecture reference.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [f550cfb]
+- Updated dependencies [f550cfb]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+- Updated dependencies [f550cfb]
+- Updated dependencies [27dc8eb]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/native-core@0.2.0
+
 ## 0.23.7
 
 ### Patch Changes

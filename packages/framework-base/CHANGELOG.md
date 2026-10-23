@@ -1,5 +1,41 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.9.0
+
+### Minor Changes
+
+- e2092f9: Replace `useFocusablePressable`'s `focusOnPress` boolean with a `pointerFocus`
+  mode. `platform` (the default) keeps the existing behavior: Windows and Win32
+  focus a pressed target, and macOS follows AppKit by leaving keyboard focus in
+  place. `always` and `never` select an explicit behavior on every platform.
+  Export `PointerFocusMode`, `FocusablePressableOptions`, and
+  `requestsFocusOnPointerPress`.
+- 60121de: Add opt-in disabled-focusable pressable targets and MenuItem rows that retain
+  disabled semantics without enabling activation. Give Input its variant-specific
+  focus-visible treatment: a shared outline ring or an additive underline
+  indicator, without a competing native editor ring.
+  Keep keyboard release cleanup exactly once when disabling a pressed target.
+  
+  Extend the experimental modern Callout focus operation with native first/last
+  strategies, report observed dismissal causes without guessing unclassified
+  notifications, and ignore duplicate close or late ready events for a dismissed
+  presentation. Rebuild native hosts for the changed modern command schema.
+  Legacy APIs and prebuilt Win32 commands are unchanged.
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- cfa4c66: Add package-owned agent guidance, user entry points, and indexed references to
+  design and framework-base. Design's completed plan is removed and its open
+  theming work moves to `references/remaining-work.md`. Both packages now restrict
+  published contents with a `files` allowlist. Desktop Driver guidance now tracks
+  unfinished work in a remaining-work reference.
+- e2092f9: Clear React Native macOS's focused-input record when a focus target blurs or
+  detaches. A View focused through `requestFocus()` previously stayed recorded
+  after unmounting, so a later ScrollView touch dispatched `blur` to the removed
+  view and raised a Paper exception.
+
 ## 0.8.1
 
 ### Patch Changes

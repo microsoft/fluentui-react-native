@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/styling-utils
 
+## 0.8.8
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+
 ## 0.8.7
 
 ### Patch Changes

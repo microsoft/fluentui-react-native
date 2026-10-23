@@ -1,5 +1,17 @@
 # Change Log - @uifabricshared/theming-react-native
 
+## 0.21.15
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+  - @fluentui-react-native/default-theme@0.27.15
+  - @fluentui-react-native/win32-theme@0.39.15
+  - @uifabricshared/theme-registry@0.13.9
+  - @uifabricshared/theming-ramp@0.21.15
+
 ## 0.21.14
 
 ### Patch Changes

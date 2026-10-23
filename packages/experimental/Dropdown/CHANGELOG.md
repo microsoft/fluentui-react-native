@@ -1,5 +1,26 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.18
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/adapters@0.15.2
+  - @fluentui-react-native/button@0.40.16
+  - @fluentui-react-native/callout@0.29.8
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/framework@0.17.9
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/interactive-hooks@0.28.12
+  - @fluentui-react-native/text@0.25.16
+
 ## 0.11.17
 
 ### Patch Changes
