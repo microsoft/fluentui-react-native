@@ -59,7 +59,8 @@ Use the [classification guide](../components/classification.md) to identify the 
 - **Slots:** a slot is an inner component in the render tree, such as a Button's `root`, `icon`, and `content`. Slots
   enable composition and customization; components wrapping one native component typically have one slot.
 - **Tokens:** design-time values set by the theme or by component customization. See
-  [tokens and theming](../design/tokens-and-theming.md).
+  the design package's [tokens](../../../packages/agentic/design/references/tokens.md) and
+  [theming](../../../packages/agentic/design/references/theming.md) references.
 - **Platform files:** React Native resolves `.ios`, `.android`, `.macos`, `.windows`, and `.win32` variants. Document
   platform differences in the component's `SPEC.md`.
 - **Themes:** components require a `ThemeProvider` from `@fluentui-react-native/design/theming`.

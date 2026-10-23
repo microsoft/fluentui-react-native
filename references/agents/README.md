@@ -16,7 +16,6 @@ documents a task needs; links are navigation, not instructions to load everythin
 | Area                                                                          | Contents                                                                    |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | [`repository/`](repository)                                                   | Architecture, commands and validation, TypeScript, permissions, and release |
-| [`design/`](design)                                                           | Tokens, theming, and color utilities                                        |
 | [`components/`](components)                                                   | Classification, v0 and v1 recipes, and legacy test apps                     |
 | [`components/agentic/`](components/agentic)                                   | Agentic component recipes                                                   |
 | [`components/agentic/contract-sources/`](components/agentic/contract-sources) | Source adapters for agentic component contracts                             |
@@ -37,7 +36,6 @@ documents a task needs; links are navigation, not instructions to load everythin
 | `repository.dependency-security`                         | [Dependency security procedures](repository/dependency-security.md)                   | Remediating dependency advisories with the `fix-security-issues` skill          |
 | `repository.code-scanning`                               | [Code scanning](repository/code-scanning.md)                                          | Writing regular expressions or generated code; fixing CodeQL alerts             |
 | `repository.package-guidance`                            | [Package-owned guidance standard](repository/package-guidance.md)                     | Adding package instructions, references, skills, or documentation               |
-| `design.tokens-and-theming`                              | [Tokens and theming](design/tokens-and-theming.md)                                    | Mapping tokens, theme-dependent styles, or color utilities                      |
 | `components.classification`                              | [Classification and routing](components/classification.md)                            | Starting any component task                                                     |
 | `components.v0`                                          | [v0 maintenance](components/v0.md)                                                    | Changing or reviewing `foundation-compose` components                           |
 | `components.v1`                                          | [v1 maintenance](components/v1.md)                                                    | Changing or reviewing `compose` or `compressible` components                    |
@@ -67,8 +65,10 @@ documents a task needs; links are navigation, not instructions to load everythin
 - Put guidance here when more than one skill, reviewer, scoped `AGENTS.md`, or evaluation uses it, or when it is general
   repository knowledge. Keep guidance in a skill when only that workflow uses it.
 - Keep product contracts (`SPEC.md`, `spec/`, `CONTRACT.md`), protocols, token maps, and package documentation with
-  their packages, and link to them. Owner-local instruction trees, such as the desktop driver's `references/`, stay
-  with their packages.
+  their packages, and link to them. Packages listed in the
+  [guided package registry](repository/package-guidance-packages.json) own their guidance in their `AGENTS.md` and
+  `references/`; for example, design tokens and theming live in the
+  [design package references](../../packages/agentic/design/references/README.md).
 - Follow the [package-owned guidance standard](repository/package-guidance.md) when adding or extending a governed
   package's agent entry point, user README, package references, or skill routing.
 - Place a new document in the narrowest existing area. Create a new area only for a distinct domain, and add it to the

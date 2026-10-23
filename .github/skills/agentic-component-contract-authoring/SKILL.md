@@ -60,7 +60,7 @@ Load every adapter represented by the supplied evidence, but no others.
    - public API, slots, defaults, state ownership, and requirement IDs in
      `SPEC.md`;
    - FURN token bindings and gaps in `spec/tokens.yaml`, mapped through the
-     [Flex token map](../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml).
+     canonical Flex token map described in the [design tokens reference](../../../packages/agentic/design/references/tokens.md).
      Name each proposed binding or list it as unresolved;
    - native accessibility in `spec/accessibility.md`;
    - keyboard, pointer, focus, and motion behavior in

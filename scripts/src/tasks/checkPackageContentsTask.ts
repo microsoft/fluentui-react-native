@@ -104,7 +104,7 @@ export class CheckPackageContentsCommand extends Command {
         'README.md',
         'references/README.md',
         ...expectedEntrypoints(manifest),
-        ...listSourceFiles(root, packagePath).filter((file) => /^(?:references|src|lib|config|native)\//.test(file) || file === 'PLAN.md'),
+        ...listSourceFiles(root, packagePath).filter((file) => /^(?:references|src|lib|config|native)\//.test(file)),
       ];
       const missing = [...new Set(required)].filter((file) => !locations.has(file));
       const caches = [...locations].filter((file) => file === '.cache' || file.startsWith('.cache/'));

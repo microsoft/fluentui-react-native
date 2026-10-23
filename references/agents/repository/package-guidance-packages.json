@@ -3,7 +3,9 @@
   "packages": [
     "packages/agentic/desktop-driver",
     "packages/agentic/desktop-test",
+    "packages/agentic/design",
     "packages/agentic/storybook-desktop",
-    "packages/agentic/storybook-desktop-runtime"
+    "packages/agentic/storybook-desktop-runtime",
+    "packages/framework-base"
   ]
 }

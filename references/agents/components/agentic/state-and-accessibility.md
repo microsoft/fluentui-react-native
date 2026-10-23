@@ -132,8 +132,8 @@ or create a second activation path. The resolver preserves caller labels and
 custom names while deduplicating declarations.
 
 Future universal non-styling accessibility helpers belong in
-[`framework-base/src/accessibility`](../../../../packages/framework-base/src/accessibility/AGENTS.md).
-Read its source-evidence, native/generic boundary, handler-composition, and
+`framework-base/src/accessibility`. Read the
+[framework-base accessibility reference](../../../../packages/framework-base/references/accessibility.md) for its source-evidence, native/generic boundary, handler-composition, and
 validation requirements before extending it. Verify actual UIA/AX action
 invocation and callback counts; a state read after a physical click does not
 prove accessibility action dispatch.

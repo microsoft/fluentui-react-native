@@ -5,7 +5,7 @@
     "rootDir": "src",
     "composite": true,
     "resolveJsonModule": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
   "include": ["src", "src/**/*.json"],
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],

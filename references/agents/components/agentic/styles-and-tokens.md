@@ -27,8 +27,9 @@ value.
 - Record a genuine token gap in the component spec. Do not replace it with a nearby token or numeric literal.
 - For compatibility with an existing V1 component, derive cross-platform mappings from its Win32, macOS, or Windows
   implementation. Do not use iOS as the canonical value unless the change explicitly targets iOS.
-- `useThemeState` projects a FURN Theme from context into Flex tokens and stores one symbol-keyed `ThemeState` on that
-  Theme object. Consumers of the same Theme therefore share token and style-cache identity.
+- Consumers of the same theme source, revision, and resolved appearance share one `ThemeState`, and therefore token
+  and style-cache identity. The design [theming reference](../../../../packages/agentic/design/references/theming.md)
+  defines the cache keys and when a new state is created.
 
 ## Build styles in layers
 
@@ -41,7 +42,8 @@ Use four layers:
 
 Never create a style factory inside a hook or render function.
 
-Reuse the design package's `@fluentui-react-native/design/styling` submodule:
+Reuse the design package's `@fluentui-react-native/design/styling` submodule. The design
+[styling reference](../../../../packages/agentic/design/references/styling.md) owns the factory and hierarchy semantics:
 
 - [`getStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) lazily flattens and caches
   one theme-independent state definition.

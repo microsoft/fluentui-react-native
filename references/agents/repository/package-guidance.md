@@ -7,10 +7,9 @@ owner_paths:
 
 # Package-owned guidance
 
-This standard currently applies to the four desktop testing packages listed in
-the adjacent `package-guidance-packages.json`. The initial
-rollout does not require all workspaces to comply; a later change will extend
-coverage.
+This standard applies to the packages listed in the adjacent
+`package-guidance-packages.json`. Other workspaces do not yet need to comply;
+add a package to the registry when it adopts this standard.
 
 ## Content ownership
 
@@ -20,8 +19,9 @@ coverage.
 - **R-PKGDOC-004:** Each package reference Markdown file has the standard frontmatter and a stable, globally unique ID. Its package index lists the ID, document, and a concrete "Read when" condition.
 - **R-PKGDOC-005:** Relative Markdown links in shipped package guidance resolve inside the same package. Cross-package references use the package name and package-relative path in code spans; repository rules use rule IDs.
 - **R-PKGDOC-006:** Project skills live in root `.github/skills/`. A skill is a concise router to package references and repository safeguards, not a second home for package knowledge. Delegated tasks receive required entry-point and reference paths explicitly.
-- **R-PKGDOC-007:** Changes to behavior, commands, configuration, outputs, or contracts update the owning reference in the same change, and update `AGENTS.md` or `README.md` when their entry-point information changes. Plans describe unfinished or explicitly deferred work.
+- **R-PKGDOC-007:** Changes to behavior, commands, configuration, outputs, or contracts update the owning reference in the same change, and update `AGENTS.md` or `README.md` when their entry-point information changes.
 - **R-PKGDOC-008:** Published packages include their `AGENTS.md`, `README.md`, reference index, every reference document, and local linked assets. Validate the actual Yarn pack inventory; build caches and generated artifacts must not ship.
+- **R-PKGDOC-009:** Governed packages have no `PLAN.md` or other plan files outside `references/`. Unfinished or explicitly deferred work lives in an indexed `<package>/references/remaining-work.md`. When work completes, move durable behavior into the owning reference and delete the item rather than marking it done; delete the file when no work remains.
 
 ## Package entry points
 
@@ -54,13 +54,22 @@ root, for example:
 
 Do not use workspace-sibling Markdown paths: a published tarball has no sibling
 workspace. The checker resolves package-qualified code spans against the
-workspace registry.
+workspace registry. Cite repository guidance by rule ID, or by reference ID in
+a code span such as `focus.common`, rather than by a repository path.
+
+## Remaining work
+
+`<package>/references/remaining-work.md` uses the standard reference frontmatter with the
+`<package-basename>.remaining-work` ID. List each open item with its outcome,
+current evidence, owning issue when one exists, and the condition that
+completes it. Keep design rationale for implemented behavior in the owning
+reference, not in the remaining-work file.
 
 ## Validation
 
 `yarn check-agent-instructions` validates registered package entry points,
 reference metadata, indexes, internal links, skill routing, rule definitions,
-and evaluation cases. `yarn check-package-contents` uses Yarn's real
+and evaluation cases, and rejects plan files outside a package's `references/`. `yarn check-package-contents` uses Yarn's real
 `pack --dry-run --json` inventory to verify published file inclusion. Run the
 package's `format`, `lint`, `build`, and `test` scripts for source changes.
 Before a release, run `yarn check-publishing` and inspect the package inventory.

@@ -42,7 +42,8 @@ editing.
 
 Use [contributing](references/contributing.md) for module ownership, tests, and
 validation. Update the owning reference when user-visible behavior changes;
-keep README concise and PLAN limited to unfinished or deferred work.
+keep README concise and track unfinished or deferred work only in an indexed
+remaining-work reference (R-PKGDOC-009).
 
 ## Validation
 

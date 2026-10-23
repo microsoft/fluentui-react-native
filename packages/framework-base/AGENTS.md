@@ -1,58 +1,40 @@
-# Framework Base component authoring
+# Framework Base agent instructions
 
-These instructions apply to `packages/framework-base` and its descendants.
+This is the instruction root for `@fluentui-react-native/framework-base` and every descendant. The package owns the
+shared component patterns, custom JSX runtime, slot types, interaction and focus-target hooks, universal accessibility
+helpers, and the merge and memoization utilities used by v1 and agentic components.
 
-Read [`src/component-patterns/README.md`](./src/component-patterns/README.md) before
-adding or changing a component pattern.
+## Start here
 
-## Pattern selection
+Read the [user guide](README.md), then select the narrowest topic in the [reference index](references/README.md):
 
-- Use `directComponent` only for hook-free prop and render transformations.
-- Use `phasedComponent` when hooks, context, state, tokens, or slots are needed.
-- Create slots in the first phase and return a hook-free `directComponent` for the
-  final render when practical.
-- Use a normal React component when a distinct React boundary is intentional.
+| Task                                                               | Read                                                                                                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Author, change, or review direct, phased, slot, or legacy patterns | [Component patterns](references/component-patterns.md)                                                                                |
+| Add or consume a universal accessibility helper                    | [Accessibility](references/accessibility.md)                                                                                          |
+| Change merge or memoization utilities                              | [Immutable merge](references/immutable-merge.md), [memo cache](references/memo-cache.md), or [merge props](references/merge-props.md) |
+| Edit source, exports, types, tests, or compatibility               | [Contributing](references/contributing.md)                                                                                            |
+
+Focus-target and interaction abstractions also follow the repository's common focus authoring reference
+(`focus.common`) and its platform breakouts.
+
+## Invariants
+
+- Use `directComponent` only for hook-free prop and render transformations, and `phasedComponent` when hooks, context,
+  state, tokens, or slots are needed. Create slots in the first phase and return a hook-free render phase.
 - Do not add new uses of `legacyDirectComponent` or `stagedComponent`.
+- Put `/** @jsxImportSource @fluentui-react-native/framework-base */` on the first line of component files that use
+  these patterns, and render ref-bearing callable slots through that runtime.
+- Declare slots from component types, such as `Slot<typeof View>`, and prefer inferred calls such as
+  `useSlot(View, props)` so native ref types are preserved.
+- Keep generic entry points import-safe without a React Native runtime, preserve React 18 compatibility, and add no
+  dependency on design, components, or other higher-level packages.
+- Keep component roles, state transitions, and handler composition in the owning component; share only demonstrated
+  accessibility behavior here.
+- Add compile-time type assertions for public type behavior and runtime tests for affected rendering, prop merging,
+  children, keys, and refs.
 
-## Authoring rules
+## Validation
 
-- Put `/** @jsxImportSource @fluentui-react-native/framework-base */` on the first
-  line of component files using these patterns.
-- Keep children in props for modern direct and phased render functions.
-- Never call hooks from a `directComponent` or from the render phase returned by
-  `phasedComponent`.
-- Declare slots from component types, for example `Slot<typeof View>` and
-  `OptionalSlot<typeof Text>`.
-- Prefer inferred calls such as `useSlot(View, props)` so native ref types are
-  preserved.
-- Use `useSlot` for required slots and `useOptionalSlot` for optional slots. Both
-  accept raw props, shorthand children, and `as` customization.
-- For `useOptionalSlot`, treat `null` as explicitly hidden and use
-  `renderByDefault` to control whether `undefined` renders.
-- Ensure an `as` replacement accepts the declared props and forwards a compatible
-  ref when the slot is referenced.
-- Render ref-bearing callable slots through the custom JSX runtime. React 18's
-  classic `React.createElement` path does not forward refs through function slots.
-
-## Coverage
-
-Add compile-time type assertions for public type behavior and runtime tests for
-rendering, prop merging, children, keys, and refs affected by a change.
-
-## Accessibility
-
-Universal non-styling accessibility helpers belong in `src/accessibility`.
-Read its [authoring instructions](./src/accessibility/AGENTS.md) before adding
-an abstraction. Use `resolveAccessibilityAction` for the demonstrated
-toggle/select transport contract rather than duplicating platform constants,
-action-list merging, and event-name decisions in consumers. Keep component
-state transitions and handler composition local, and preserve the generic
-entrypoint's React-only import safety.
-
-## Focus and native refs
-
-Use the [common focus instructions](../../references/agents/focus/common.md)
-and their platform breakouts when adding focus-target or interaction abstractions.
-Reuse slot ref composition and cleanup; preserve this package's older React
-compatibility while agentic components use React 19 ref props. Keep proposed
-native services opt-in and do not add a design/components dependency here.
+Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` in this package, add a changeset, and finish with
+`yarn clean-lage-cache` followed by `yarn lage buildci`. See [contributing](references/contributing.md#validation).
