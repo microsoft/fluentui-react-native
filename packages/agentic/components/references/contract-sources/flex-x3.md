@@ -35,7 +35,7 @@ reviewer's assertion and remains empty after a source identity changes.
 
 Classify source guidance as adopted, adapted, intentionally divergent, not
 applicable, or deferred. Consult the
-[Flex token map](../../../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml) and the closest Win32,
+Flex token map (`@fluentui-react-native/design/src/tokens/mappings/flex-token-map.yaml`) and the closest Win32,
 macOS, or Windows FURN implementation for compatibility; do not use iOS as the
 cross-platform canonical reference unless the work targets iOS.
 

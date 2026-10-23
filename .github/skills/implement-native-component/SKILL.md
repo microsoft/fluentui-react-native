@@ -20,26 +20,30 @@ ownership and qualification rules (R-NATIVE-001 through R-NATIVE-003).
      [classification guide](../../../references/agents/components/classification.md);
    - native registration names and entrypoints that must not change.
 2. Choose ownership. New modern native code belongs in native-core (R-NATIVE-001); maintain existing native wrappers,
-   such as experimental packages, where they live. For native-core work, read the relevant sections of the
-   [native-core README](../../../packages/agentic/native-core/README.md); for a wrapper in another package, read that
-   package's sources and documentation instead.
+   such as experimental packages, where they live. For native-core work, start from its
+   [package instructions](../../../packages/agentic/native-core/AGENTS.md) and read the relevant
+   [native-core references](../../../packages/agentic/native-core/references/README.md); for a wrapper in another
+   package, read that package's sources and documentation instead.
 3. Load only the platform references the work needs:
    - React Native Windows Fabric views: [Windows Fabric](../../../references/agents/native/windows-fabric.md);
    - any iOS or macOS Swift, Objective-C, header, podspec, or bridge-manager change:
      [Apple native authoring and Office integration](../../../references/agents/native/apple-office.md)
-     (R-APPLE-001 through R-APPLE-007), plus native-core's macOS layout notes for native-core work;
+     (R-APPLE-001 through R-APPLE-007), plus native-core's
+     [native layout](../../../packages/agentic/native-core/references/architecture.md#native-layout-and-host-policy) and
+     [Swift interoperability](../../../packages/agentic/native-core/references/architecture.md#macos-swift-interoperability)
+     notes for native-core work;
    - focus targets or native focus visuals: [common focus authoring](../../../references/agents/focus/common.md) and its
      platform file;
    - accessibility actions:
-     [framework-base accessibility instructions](../../../packages/framework-base/src/accessibility/AGENTS.md);
+     [framework-base accessibility reference](../../../packages/framework-base/references/accessibility.md);
    - the JavaScript wrapper: the [agentic skill](../agentic-component-authoring/SKILL.md),
      [v0 recipe](../../../references/agents/components/v0.md), or [v1 recipe](../../../references/agents/components/v1.md).
 4. Implement with the TypeScript specification, codegen configuration, native props, events, commands, and registration
    kept consistent. Preserve public APIs and registration names (R-NATIVE-002) and keep fork imports in platform files
    (R-REPO-002).
 5. Validate the affected boundary with declared scripts (R-VALID-001), running focused package tests while iterating
-   (R-VALID-004): package build, test, and lint; native-core
-   `codegen:windows` when Windows specs change; native builds through the owning app, such as
+   (R-VALID-004): package build, test, and lint; native-core `yarn codegen:windows --check` when Windows specs change
+   and `yarn test:apple-integration` when its macOS native code changes; native builds through the owning app, such as
    `yarn storybook build --macos` or `--windows` from `apps/storybook`; and runtime evidence through Storybook smoke or
    `wdio` story tests. macOS Storybook commands default to Fabric: add `--paper` to `prep`, `build`, `run`, or `smoke`
    for Paper, and rerun `prep` when switching renderers. Desktop Storybook does not build iOS: validate iOS-only changes

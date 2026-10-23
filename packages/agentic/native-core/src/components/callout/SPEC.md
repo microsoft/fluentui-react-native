@@ -3,7 +3,7 @@
 Owner-authorized initial contract, 2026-10-02. `/macos` and `/windows` preview
 only, with a constrained [`/win32` adapter](#win32-adapter); not all-host root
 admission. See the
-[package qualification gates](../../../README.md#modern-component-previews)
+[package qualification gates](../../../references/remaining-work.md#qualification-and-admission-gates)
 for remaining geometry, lifecycle/accessibility, Menu/Popover, Win32, and
 peer-floor work and the owning workstream issues.
 

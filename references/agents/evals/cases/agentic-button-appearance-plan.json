@@ -13,10 +13,10 @@
     },
     "required_reads": [
       "packages/agentic/components/AGENTS.md",
-      "packages/agentic/components/src/components/AGENTS.md",
+      "packages/agentic/components/references/higher-order-components.md",
       "packages/agentic/components/src/components/button/SPEC.md",
-      "references/agents/components/agentic/types-and-slots.md",
-      "references/agents/components/agentic/styles-and-tokens.md"
+      "packages/agentic/components/references/types-and-slots.md",
+      "packages/agentic/components/references/styles-and-tokens.md"
     ],
     "forbidden_actions": ["edit-files"]
   },

@@ -14,7 +14,7 @@ movement, Home/End, type-ahead, focus restoration, or timed animation.
 Hover, press, and
 selection styling update without component-owned motion.
 
-The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+The focus target follows the [shared focus visual policy](../../../../references/higher-order-components.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
 to a private `FocusRing` slot. Its configured ring Views remain mounted on the
 custom path, but are visible only while focused with keyboard modality from

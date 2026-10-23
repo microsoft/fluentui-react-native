@@ -9,13 +9,13 @@ owner_paths:
 # Tests and stories
 
 Use this reference for runtime coverage, type coverage, visual snapshots, Storybook CSF, and validation. Canonical examples
-are [`button.test.tsx`](../../../../packages/agentic/components/src/components/button/button.test.tsx),
-[`button.stories.tsx`](../../../../packages/agentic/components/src/components/button/button.stories.tsx), and
-[`icon.stories.tsx`](../../../../packages/agentic/components/src/primitives/icon/icon.stories.tsx).
+are [`button.test.tsx`](../src/components/button/button.test.tsx),
+[`button.stories.tsx`](../src/components/button/button.stories.tsx), and
+[`icon.stories.tsx`](../src/primitives/icon/icon.stories.tsx).
 
 ## Runtime tests
 
-Use `render` from the package-private `src/common/renderWithTheme` helper for
+Use `render` from the package-private `src/common/renderWithTheme.tsx` helper for
 component scenes. It places a `ThemedRoot` outside the scene and any supplied
 wrapper, preserving the same root settings through rerenders. Import events,
 queries, and types from `@testing-library/react-native`; do not import
@@ -166,7 +166,7 @@ The single-function `wdio` form remains supported. Run with
 `yarn storybook test --<platform>` and optionally `--test <name-glob>`.
 `--list` discovers names without executing code. The `stories-and-tests`
 smoke mode runs these functions alongside remaining legacy plans, grouped by
-story. See the [executable test contract](../../../../packages/agentic/storybook-desktop/references/story-tests.md).
+story. See the executable test contract (`@fluentui-react-native/storybook-desktop/references/story-tests.md`).
 
 The components package's `test:stories` project checks every test-bearing story
 without emitting it into the component library. Add new test-bearing files to
@@ -230,7 +230,7 @@ with platform-skipped focus cases is not cross-platform focus qualification.
 
 The macOS Fabric View does not project disabled or selected accessibility state
 to AXEnabled/AXSelected (C-A11Y-005 in the
-[action transport evidence](../../accessibility/action-transport-evidence.md)). Those native
+repository evidence reference `accessibility.action-transport-evidence`). Those native
 announcement assertions are isolated in explicitly skipped cases; shared
 focus, activation, and selection-callback cases still run. Do not substitute
 rendered state for an AX result or describe these skips as intended macOS
@@ -262,8 +262,8 @@ yarn workspace @fluentui-react-native/agentic-components-storybook storybook bun
 yarn workspace @fluentui-react-native/agentic-components-storybook storybook bundle --windows
 ```
 
-While iterating, run only the affected component's tests from `packages/agentic/components` (R-VALID-004; see
-[Focused test runs](../../repository/development.md#focused-test-runs) for the selector rules):
+While iterating, run only the affected component's tests from `packages/agentic/components` (R-VALID-004; the
+focused test runs section of `repository.development` defines the selector rules):
 
 ```sh
 yarn test popover                                           # one component's runtime and type-level test files

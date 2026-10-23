@@ -13,7 +13,8 @@ license: MIT
 | Storybook integration, CLI, extraction, tests | [`storybook-desktop`](../../../packages/agentic/storybook-desktop/AGENTS.md) |
 | On-device bridge, Metro, theme, chrome        | [`runtime`](../../../packages/agentic/storybook-desktop-runtime/AGENTS.md)   |
 
-Read the matching contributing reference from the package index.
+Read the owning package's `AGENTS.md`, then its contributing reference from the package index. The runtime has no
+contributing reference; use its `AGENTS.md` validation section and its runtime contract reference instead.
 
 ## Mode first
 

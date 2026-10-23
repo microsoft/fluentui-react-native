@@ -48,7 +48,7 @@ a row of tags is one tab stop per enabled tag. Enter and Space activate the
 focused tag. A disabled tag stays in the accessibility tree and reports its
 disabled state, so it can still be read.
 
-The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+The focus target follows the [shared focus visual policy](../../../../references/higher-order-components.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
 to a private `FocusRing` slot. Its configured ring Views remain mounted on the
 custom path, but are visible only while focused with keyboard modality from

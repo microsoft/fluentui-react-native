@@ -5,7 +5,7 @@
     "allowImportingTsExtensions": true,
     "noImplicitAny": true,
     "noEmit": true,
-    "tsBuildInfoFile": ".cache/tsconfig.stories.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.stories.tsbuildinfo"
   },
   "include": ["src/legacy/callout/Callout.stories.tsx", "src/components/**/*.stories.tsx", "src/**/*.wdio.ts"],
   "exclude": [],

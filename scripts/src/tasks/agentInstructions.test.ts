@@ -272,6 +272,13 @@ describe('checkAgentInstructions', () => {
     assertIssue({ ...GUIDED_PACKAGE, 'packages/demo/AGENTS.md': '# Demo\n' }, /must link to packages\/demo\/references\/README\.md/);
   });
 
+  it('rejects package plan files outside the package references', () => {
+    assertIssue({ ...GUIDED_PACKAGE, 'packages/demo/PLAN.md': '# Plan\n' }, /packages\/demo\/PLAN\.md: .*R-PKGDOC-009/);
+    assertIssue({ ...GUIDED_PACKAGE, 'packages/demo/src/WIN32-FOCUS-PLAN.md': '# Plan\n' }, /WIN32-FOCUS-PLAN\.md: .*R-PKGDOC-009/);
+    const allowed = messages({ ...GUIDED_PACKAGE, 'packages/demo/references/plan.md': '# Plan\n', 'packages/other/PLAN.md': '# Plan\n' });
+    assert.ok(!allowed.some((message) => /R-PKGDOC-009/.test(message)), allowed.join('\n'));
+  });
+
   it('allows skills to link only to package entry points or indexed guidance', () => {
     assertIssue(
       {

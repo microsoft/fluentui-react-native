@@ -24,7 +24,8 @@ v0 and v1 are maintenance-only (R-V0-001 and R-V1-001). A request for a new comp
      [native component skill](../implement-native-component/SKILL.md) checklist;
    - focus, keyboard activation, or focus visuals: [common focus authoring](../../../references/agents/focus/common.md)
      and its platform file;
-   - token values or theme behavior: [tokens and theming](../../../references/agents/design/tokens-and-theming.md);
+   - token values or theme behavior: design [tokens](../../../packages/agentic/design/references/tokens.md) and
+     [theming](../../../packages/agentic/design/references/theming.md);
    - FluentTester pages or E2E specs: [legacy test apps](../../../references/agents/components/legacy-test-apps.md).
 4. Read the component's existing tests, snapshots, platform variants, and any `SPEC.md` or `MIGRATION.md` before
    editing.

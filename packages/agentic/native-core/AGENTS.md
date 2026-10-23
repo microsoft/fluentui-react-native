@@ -1,7 +1,29 @@
-# Native-core authoring
+# Native Core agent instructions
 
-- Follow the [Apple and Office rules](../../../references/agents/native/apple-office.md)
-  for shared services and renderer adapters. Paper `RCT_EXTERN_MODULE` files
+This is the instruction root for `@fluentui-react-native/native-core` and every descendant. The package owns modern
+native-backed components and modules, the legacy Callout and FocusZone wrappers, and their macOS and Windows native
+implementations.
+
+## Start here
+
+Read the [user guide](README.md), then select the narrowest topic in the [reference index](references/README.md):
+
+| Task                                                          | Read                                                                          |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Public entry points, legacy wrappers, shims, or autolinking   | [Entry points](references/entry-points.md)                                    |
+| Modern Callout, FocusZone, popups, or their platform behavior | [Modern components](references/modern-components.md)                          |
+| JavaScript, spec, native layout, or renderer adapters         | [Architecture](references/architecture.md)                                    |
+| Codegen, registration names, podspecs, or package contents    | [Codegen, registration, and publishing](references/codegen-and-publishing.md) |
+| macOS accessibility that depends on the RNmacOS patch         | [RNmacOS patch](references/rnmacos-patch.md)                                  |
+| Validation, native stories, or the Apple boundary probe       | [Contributing](references/contributing.md)                                    |
+| Planning work or checking open gates                          | [Remaining work](references/remaining-work.md)                                |
+
+Native changes use the `implement-native-component` skill. Apple changes follow the repository's Apple and Office
+rules (R-APPLE-001 through R-APPLE-007, in `native.apple-office`); Windows Fabric views follow `native.windows-fabric`.
+
+## Invariants
+
+- Follow R-APPLE-001 through R-APPLE-007 for shared services and renderer adapters. Paper `RCT_EXTERN_MODULE` files
   never import the generated Swift header or name generated Swift classes.
 - Prefer Swift for new macOS AppKit/domain behavior. Keep ObjC/ObjC++ for
   generated protocols, C++ conversion, registration, and renderer integration.
@@ -38,8 +60,16 @@
   root admission.
 - Keep generated code generated and verify packed native ownership. Preserve
   the module-named macOS Swift interoperability header.
-- Record exact executed validation and remaining work in the owning
+- Record exact executed validation in the owning
   [Components](https://github.com/microsoft/fluentui-react-native/issues/4274)
   or [Infrastructure](https://github.com/microsoft/fluentui-react-native/issues/4275)
-  workstream issue before switching machines. Keep the README and component
-  contracts aligned with qualified behavior.
+  workstream issue before switching machines. Keep the references and component
+  contracts aligned with qualified behavior, and track open work only in
+  [remaining work](references/remaining-work.md) (R-PKGDOC-009).
+
+## Validation
+
+Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` in this package, plus
+`yarn codegen:windows --check` after schema changes and `yarn test:apple-integration` after macOS changes. Native
+qualification requires the native story lanes in [contributing](references/contributing.md#delivery-and-validation).
+Add a changeset and finish with `yarn clean-lage-cache` followed by `yarn lage buildci`.

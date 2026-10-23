@@ -10,6 +10,9 @@
     "directory": "packages/agentic/native-core"
   },
   "files": [
+    "AGENTS.md",
+    "README.md",
+    "references",
     "lib",
     "src",
     "macos",

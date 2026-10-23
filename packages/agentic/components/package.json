@@ -9,6 +9,21 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/agentic/components"
   },
+  "files": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "README.md",
+    "jest.config.cjs",
+    "lib/",
+    "package.json",
+    "references/",
+    "scripts/",
+    "spec-source-lock.json",
+    "spec-source-report.json",
+    "src/",
+    "tsconfig.json",
+    "tsconfig.stories.json"
+  ],
   "type": "module",
   "sideEffects": false,
   "main": "lib/index.js",

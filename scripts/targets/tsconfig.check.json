@@ -7,7 +7,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2022",
     "composite": true,
-    "tsBuildInfoFile": "../.cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "../node_modules/.cache/tsconfig.check.tsbuildinfo"
   },
   "include": [".."],
   "exclude": ["../lib"]

@@ -555,6 +555,14 @@ export function checkAgentInstructions(root: string): CheckResult {
       const linked = extractLinks(read(source)).some((link) => resolveLink(source, link.target)?.file === target);
       if (!linked) issues.push({ file: source, message: `must link to ${target}` });
     }
+    for (const file of files.filter(
+      (candidate) =>
+        candidate.startsWith(`${packagePath}/`) &&
+        !candidate.startsWith(`${packagePath}/references/`) &&
+        /(?:^|[-_.])plan\.md$/i.test(path.posix.basename(candidate)),
+    )) {
+      issues.push({ file, message: 'guided package plans belong in references/remaining-work.md (R-PKGDOC-009)' });
+    }
   }
   for (const file of files.filter(
     (candidate) => (candidate === 'SKILL.md' || candidate.endsWith('/SKILL.md')) && !candidate.startsWith(`${SKILLS_DIR}/`),

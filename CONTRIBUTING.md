@@ -65,7 +65,7 @@ package's [contributor instructions](./packages/agentic/components/AGENTS.md) an
 
 1. A higher-order component starts with a reviewed contract: `SPEC.md` plus `spec/source.json`, `spec/tokens.yaml`,
    `spec/accessibility.md`, `spec/interaction.md`, and `spec/usage.md`. Follow
-   [SPEC-SOURCE.md](./packages/agentic/components/SPEC-SOURCE.md) for provenance, review state, and source adapters.
+   [the contracts reference](packages/agentic/components/references/contracts.md) for provenance, review state, and source adapters.
 1. A primitive instead keeps a colocated `CONTRACT.md` that describes its public API and renderer branches.
 1. Run `yarn workspace @fluentui-react-native/components check:spec-contracts` to validate the contract.
 
@@ -77,7 +77,7 @@ A higher-order component uses these files, in dependency order:
 1. `use<Component>.ts`: defaults, derived state, interaction, accessibility, and slot construction.
 1. `<component>.styles.ts` and `use<Component>Styles.ts`: token-based styles and slot style application.
 1. `render<Component>.tsx`: pure slot rendering. Put `/** @jsxImportSource @fluentui-react-native/framework-base */` on
-   the first line of files that render slots; see `packages/framework-base/src/component-patterns/README.md`.
+   the first line of files that render slots; see `packages/framework-base/references/component-patterns.md`.
 1. `<component>.ts`: assembly and `displayName`.
 
 Expose the native root ref through the React 19 `ref` prop rather than `forwardRef`. Export the component and its public

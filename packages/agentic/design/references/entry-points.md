@@ -1,4 +1,35 @@
-# Theming and styling symbol inventory
+---
+id: design.entry-points
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/design/package.json
+---
+
+# Entry points
+
+The package is `sideEffects: false` and exposes explicit subpaths so consumers load only the graph they use. Export
+public symbols by name from each entry point; do not add barrel re-exports.
+
+| Subpath                     | Contents                                                                                      |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `.` (root)                  | Modern theming (`ThemeProvider`, `ThemedRoot`, `FlexThemeReference`, hooks), Flex token types |
+| `./theming`                 | The complete modern and legacy theming API, including `ThemeReference` and `useTheme`         |
+| `./theming/legacy-source`   | `ThemeReference` without the legacy consumption graph                                         |
+| `./theming/compat`          | `themeFromFlexTokens` and `getDefaultLegacyTheme`                                             |
+| `./theming/compat/defaults` | `getDefaultLegacyTheme` alone, for platform theme packages                                    |
+| `./tokens/global`           | Generated platform global token constants                                                     |
+| `./tokens/legacy`           | Legacy alias, shadow, and global token data                                                   |
+| `./color-lib`               | The opt-in runtime color engine; see `color-lib.md`                                           |
+| `./styling`                 | State and color style factories; see `styling.md`                                             |
+| `./styling/stylesheet`      | The legacy `themedStyleSheet` helper                                                          |
+| `./styling/tokens`          | Legacy token-to-style builders                                                                |
+| `./testing`                 | Test-only fixtures and validation; see `testing.md`                                           |
+
+The `apps/bundle-size` `design-*` scenarios guard these boundaries: the modern root and legacy-source scenarios forbid
+the compatibility, legacy-token, and (for the root) color-library modules, while the color-library and legacy-projection
+scenarios require their expected modules.
+
+## Compatibility packages
 
 `@fluentui-react-native/design` is the definition site for the symbols below.
 The legacy packages listed here are compatibility entry points and contain only

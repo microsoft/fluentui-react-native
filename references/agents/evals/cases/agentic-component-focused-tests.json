@@ -14,7 +14,7 @@
     "required_reads": [
       "packages/agentic/components/AGENTS.md",
       "packages/agentic/components/src/components/popover/SPEC.md",
-      "references/agents/components/agentic/tests-and-stories.md",
+      "packages/agentic/components/references/tests-and-stories.md",
       "references/agents/repository/development.md"
     ],
     "forbidden_actions": []
@@ -30,7 +30,7 @@
       "id": "types-by-build",
       "description": "Type-checks any change to `popover.types.ts` or its `*.types.test.ts` with `yarn build`, because a Jest pass does not cover types.",
       "rule_ids": ["R-VALID-004"],
-      "source_refs": ["references/agents/components/agentic/tests-and-stories.md"]
+      "source_refs": ["packages/agentic/components/references/tests-and-stories.md"]
     },
     {
       "id": "single-acceptance-run",

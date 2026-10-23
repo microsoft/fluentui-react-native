@@ -10,13 +10,13 @@ owner_paths:
 
 Use this reference for `<component>.styles.ts`, `use<Component>Styles.ts`, token mapping, theme caching, state precedence, and
 slot prop application. The canonical examples are
-[`button.styles.ts`](../../../../packages/agentic/components/src/components/button/button.styles.ts) and
-[`useButtonStyles.ts`](../../../../packages/agentic/components/src/components/button/useButtonStyles.ts).
+[`button.styles.ts`](../src/components/button/button.styles.ts) and
+[`useButtonStyles.ts`](../src/components/button/useButtonStyles.ts).
 
 ## Resolve values from the correct token source
 
 Consult
-[`flex-token-map.yaml`](../../../../packages/agentic/design/src/tokens/mappings/flex-token-map.yaml) before choosing a
+`flex-token-map.yaml` before choosing a
 value.
 
 - Read semantic colors from `useThemeState().tokens.color`.
@@ -27,8 +27,9 @@ value.
 - Record a genuine token gap in the component spec. Do not replace it with a nearby token or numeric literal.
 - For compatibility with an existing V1 component, derive cross-platform mappings from its Win32, macOS, or Windows
   implementation. Do not use iOS as the canonical value unless the change explicitly targets iOS.
-- `useThemeState` projects a FURN Theme from context into Flex tokens and stores one symbol-keyed `ThemeState` on that
-  Theme object. Consumers of the same Theme therefore share token and style-cache identity.
+- Consumers of the same theme source, revision, and resolved appearance share one `ThemeState`, and therefore token
+  and style-cache identity. The design theming reference (`@fluentui-react-native/design/references/theming.md`)
+  defines the cache keys and when a new state is created.
 
 ## Build styles in layers
 
@@ -41,18 +42,19 @@ Use four layers:
 
 Never create a style factory inside a hook or render function.
 
-Reuse the design package's `@fluentui-react-native/design/styling` submodule:
+Reuse the design package's `@fluentui-react-native/design/styling` submodule. The design
+styling reference (`@fluentui-react-native/design/references/styling.md`) owns the factory and hierarchy semantics:
 
-- [`getStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) lazily flattens and caches
+- `getStateStyleFactory` lazily flattens and caches
   one theme-independent state definition.
-- [`getThemedStateStyleFactory`](../../../../packages/agentic/design/src/styling/branchedStyle.ts) resolves and caches
+- `getThemedStateStyleFactory` resolves and caches
   one flattened definition per `ThemeState`.
-- [`getThemedColorStyleFactory`](../../../../packages/agentic/design/src/styling/colorStyles.ts) converts semantic
+- `getThemedColorStyleFactory` converts semantic
   color keys and delegates its hierarchy and caching to `getThemedStateStyleFactory`.
 
 These are the canonical Button mechanisms and cache plain resolved style objects in `state.themeStyles`. Do not wrap them
 in another `StyleSheet.create` cache. Use
-[`themedStyleSheetFactory`](../../../../packages/agentic/design/src/useThemeState.ts) only when a component genuinely
+`themedStyleSheetFactory` only when a component genuinely
 needs a complete theme-only `StyleSheet.create` result that is not represented by a branched state definition.
 
 Every theme factory may depend only on `ThemeState` values such as tokens and high contrast. Props, interaction state,
@@ -129,7 +131,7 @@ content slot.
 
 ## Share focus behavior and styling
 
-Follow [common focus authoring](../../focus/common.md) and its Windows/Win32 or macOS detail.
+Follow common focus authoring (`focus.common`) and its Windows/Win32 or macOS detail.
 State hooks use `useFocusVisuals` to create a private optional `FocusRing` and determine the native
 `enableFocusRing` setting. The custom slot is absent on the native path; when present, its configured Views
 remain mounted across visibility changes.

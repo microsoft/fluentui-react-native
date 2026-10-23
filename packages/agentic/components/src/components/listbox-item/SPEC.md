@@ -52,7 +52,7 @@ owning list (LBI-006). A standalone list item ignores it.
 - **LBI-003:** Preserve externally owned selection and its separate
   checkmark and multiselect presentations.
 - **LBI-004:** Resolve disabled, hover, press, and focus presentation with
-  user root style last, following the [shared focus visual policy](../AGENTS.md#focus-visual-policy).
+  user root style last, following the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy).
 - **LBI-005:** Expose the native accessibility role and state appropriate to
   the resolved variant.
 - **LBI-006:** Inside a Dropdown list, a list item with a string `value` is a
@@ -109,7 +109,7 @@ navigation, selection, dismissal, and focus return.
 
 ## Divergences from Flex
 
-- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
+- `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `listbox-item-native-pressed-state` (**accepted**): The selected option is
   surfaced to native accessibility through `accessibilityState.pressed`

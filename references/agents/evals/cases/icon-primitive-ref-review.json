@@ -12,7 +12,7 @@
       "native_platforms": []
     },
     "required_reads": [
-      "packages/agentic/components/src/primitives/AGENTS.md",
+      "packages/agentic/components/references/primitives.md",
       "packages/agentic/components/src/primitives/icon/CONTRACT.md"
     ],
     "forbidden_actions": ["edit-files"]

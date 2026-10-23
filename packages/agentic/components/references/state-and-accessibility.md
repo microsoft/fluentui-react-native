@@ -9,7 +9,7 @@ owner_paths:
 
 Use this reference for `<Component>StateProps`, `use<Component>.ts`, defaults, interaction hooks, accessibility, derived
 state, and slot construction. The canonical example is
-[`useButton.ts`](../../../../packages/agentic/components/src/components/button/useButton.ts).
+[`useButton.ts`](../src/components/button/useButton.ts).
 
 ## State hook responsibilities
 
@@ -132,8 +132,8 @@ or create a second activation path. The resolver preserves caller labels and
 custom names while deduplicating declarations.
 
 Future universal non-styling accessibility helpers belong in
-[`framework-base/src/accessibility`](../../../../packages/framework-base/src/accessibility/AGENTS.md).
-Read its source-evidence, native/generic boundary, handler-composition, and
+`framework-base/src/accessibility`. Read the
+framework-base accessibility reference (`@fluentui-react-native/framework-base/references/accessibility.md`) for its source-evidence, native/generic boundary, handler-composition, and
 validation requirements before extending it. Verify actual UIA/AX action
 invocation and callback counts; a state read after a physical click does not
 prove accessibility action dispatch.
@@ -174,8 +174,8 @@ so another component can extend the state stage without importing package intern
 ## Platform behavior
 
 For focus ownership, activation, and native target lifetime, read
-[common focus authoring](../../focus/common.md), followed by the
-[Windows/Win32](../../focus/windows-win32.md) or [macOS](../../focus/macos.md) detail.
+common focus authoring (`focus.common`), followed by the
+Windows/Win32 (`focus.windows-win32`) or macOS (`focus.macos`) detail.
 
 Keep platform-specific native imports out of shared files when React Native forks expose incompatible types. Put fork
 imports in platform files or redeclare a small platform-neutral contract. Surface unsupported platform behavior rather

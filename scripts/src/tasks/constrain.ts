@@ -3,10 +3,46 @@ import { repoContext } from '../repoContext.ts';
 import type { Yarn } from '@yarnpkg/types';
 import { referencesToPaths, pathsToReferences, areSetsEqual, type TsConfigJson, addSubBuildPaths } from '../utils/tsConfigs.ts';
 import type { JSONValidator } from '@rnx-kit/lint-json';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const repoCtx = repoContext();
 
 const targetTSConfigs = new Set<string>();
+
+// TypeScript build information is a local cache. Yarn never packs node_modules and Git ignores it, so keeping the cache
+// there prevents it from being committed or published.
+const BUILD_INFO_DIR = 'node_modules/.cache';
+
+/** The enforced build information path for a TypeScript config, relative to that config's directory. */
+function buildInfoPath(configPath: string): string {
+  const configDir = path.posix.dirname(configPath);
+  const toRoot = configDir === '.' ? '' : `${path.posix.relative(configDir, '.')}/`;
+  return `${toRoot}${BUILD_INFO_DIR}/${path.posix.basename(configPath, '.json')}.tsbuildinfo`;
+}
+
+/** Additional workspace TypeScript configs that can write build information: `tsconfig.*.json` and `targets/tsconfig*.json`. */
+function auxiliaryTSConfigs(root: string): string[] {
+  const list = (dir: string, pattern: RegExp) =>
+    fs.existsSync(path.join(root, dir))
+      ? fs
+          .readdirSync(path.join(root, dir), { withFileTypes: true })
+          .filter((entry) => entry.isFile() && pattern.test(entry.name))
+          .map((entry) => (dir === '.' ? entry.name : `${dir}/${entry.name}`))
+      : [];
+  return [...list('.', /^tsconfig\..+\.json$/), ...list('targets', /^tsconfig.*\.json$/)];
+}
+
+function enforceBuildInfoLocation(ctx: PackageContext): void {
+  for (const config of auxiliaryTSConfigs(ctx.root)) {
+    const configCtx = ctx.validateJSON<TsConfigJson>(config);
+    const options = configCtx?.raw.compilerOptions as Record<string, unknown> | undefined;
+    if (configCtx && options && (options.tsBuildInfoFile !== undefined || options.composite === true || options.incremental === true)) {
+      configCtx.enforce('compilerOptions.tsBuildInfoFile', buildInfoPath(config));
+    }
+    configCtx?.finish();
+  }
+}
 
 export function constrain(workspace: Yarn.Constraints.Workspace): void {
   const ctx = PackageContext.initYarn(workspace);
@@ -39,10 +75,11 @@ export function constrain(workspace: Yarn.Constraints.Workspace): void {
     targetTSConfigs.add(`${workspace.cwd}/tsconfig.json`);
     if (!tsCtx.raw.files || tsCtx.raw.files.length > 0) {
       tsCtx.enforce('compilerOptions.composite', true);
-      tsCtx.enforce('compilerOptions.tsBuildInfoFile', '.cache/tsconfig.tsbuildinfo');
+      tsCtx.enforce('compilerOptions.tsBuildInfoFile', buildInfoPath('tsconfig.json'));
     }
     tsCtx.finish();
   }
+  enforceBuildInfoLocation(ctx);
   assertDeprecations(ctx);
   useCatalogs(ctx);
 }

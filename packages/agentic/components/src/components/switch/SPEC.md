@@ -93,7 +93,7 @@ value never moves.
 hovered state through the shared interactive precedence, and interpolate the
 track and thumb colors together with the thumb position from one progress value.
 
-**SWCH-005:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+**SWCH-005:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
 on the hit-area root, not the label container or track. Retain the mounted
 two-ring visual and its root-radius geometry for the custom path.
 
@@ -148,7 +148,7 @@ interpolates colors, which the native driver cannot animate.
 
 ## Divergences from Flex
 
-`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 | ID                                | Disposition | React Native contract                                                                                                                                                         | Follow-up                                                                                                    |
 | --------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |

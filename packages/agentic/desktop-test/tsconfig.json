@@ -5,7 +5,7 @@
     "rootDir": "src",
     "composite": true,
     "rewriteRelativeImportExtensions": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
   "references": [{ "path": "../desktop-driver/tsconfig.json" }, { "path": "../../../scripts/tsconfig.json" }]

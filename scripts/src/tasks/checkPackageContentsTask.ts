@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { Command } from 'clipanion';
+import micromatch from 'micromatch';
 import { findGitRoot } from 'workspace-tools';
 
 const REGISTRY = 'references/agents/repository/package-guidance-packages.json';
@@ -14,6 +15,7 @@ type PackageManifest = {
   types?: string;
   bin?: string | Record<string, string>;
   exports?: unknown;
+  files?: string[];
 };
 
 function exportPaths(value: unknown): string[] {
@@ -30,6 +32,12 @@ function expectedEntrypoints(manifest: PackageManifest): string[] {
     ...bin,
     ...exportPaths(manifest.exports),
   ].map((entry) => entry.replace(/^\.\//, ''));
+}
+
+/** A package may deliberately exclude files, such as tests, with negated `files` patterns. */
+function isExcludedByManifest(manifest: PackageManifest, file: string): boolean {
+  const negations = (manifest.files ?? []).filter((pattern) => pattern.startsWith('!')).map((pattern) => pattern.slice(1));
+  return negations.length > 0 && micromatch.isMatch(file, negations, { dot: true });
 }
 
 function listSourceFiles(root: string, packagePath: string): string[] {
@@ -104,7 +112,9 @@ export class CheckPackageContentsCommand extends Command {
         'README.md',
         'references/README.md',
         ...expectedEntrypoints(manifest),
-        ...listSourceFiles(root, packagePath).filter((file) => /^(?:references|src|lib|config|native)\//.test(file) || file === 'PLAN.md'),
+        ...listSourceFiles(root, packagePath).filter(
+          (file) => /^(?:references|src|lib|config|native)\//.test(file) && !isExcludedByManifest(manifest, file),
+        ),
       ];
       const missing = [...new Set(required)].filter((file) => !locations.has(file));
       const caches = [...locations].filter((file) => file === '.cache' || file.startsWith('.cache/'));

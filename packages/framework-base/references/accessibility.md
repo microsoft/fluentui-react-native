@@ -1,6 +1,13 @@
+---
+id: framework-base.accessibility
+kind: instruction-reference
+owner_paths:
+  - packages/framework-base/src/accessibility
+---
+
 # Shared accessibility foundation
 
-Put universal, non-styling accessibility helpers in this directory. Keep
+Put universal, non-styling accessibility helpers in `src/accessibility`. Keep
 component roles, state ownership, accessible-name policy, and activation
 callbacks in the owning component. Styling belongs in Design; native focus
 targets and keyboard coordination remain in the existing focus hooks.
@@ -35,8 +42,8 @@ The current transport contract is:
 | Other platforms | `Toggle` | `Select` | Existing custom declarations; not native pattern or gesture qualification  |
 
 The version-bound source evidence, including installed-package paths, is in the
-[action transport evidence](../../../../references/agents/accessibility/action-transport-evidence.md). Verify a
-renderer before claiming support on another platform.
+repository's action transport evidence reference (`accessibility.action-transport-evidence`),
+which defines each `C-A11Y` claim. Verify a renderer before claiming support on another platform.
 
 Keep caller labels in JavaScript rather than replacing them with guessed localized text, because macOS Fabric ignores
 labels when constructing custom actions (C-A11Y-003). Do not map toggle/select to `activate`, synthesize `onPress`, or

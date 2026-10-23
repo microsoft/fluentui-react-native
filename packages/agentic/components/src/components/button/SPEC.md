@@ -67,7 +67,7 @@ layout and requires an action-oriented `accessibilityLabel`.
 - **BTN-005:** Treat `selected` as externally owned state, expose checked
   accessibility state when that prop is present, and reserve semibold label
   width to prevent toggle reflow.
-- **BTN-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+- **BTN-006:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
   on the root: default to native rings on Windows/macOS and root-modality-aware
   custom rings on Win32, retaining the same dual-ring geometry.
 
@@ -96,7 +96,7 @@ Button adds no component-owned motion.
 
 ## Divergences from Flex
 
-`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 | ID                        | Disposition              | React Native contract                                                                                                                                 | Follow-up                                                           |
 | ------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
