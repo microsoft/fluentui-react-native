@@ -168,22 +168,22 @@ function createContentsStrokeDefinition(tokens: FlexTokens): StyleDefinition<Vie
     borderWidth: 0,
   };
   const outlineStates = {
-    disabled: { borderColor: color.strokeNeutralDisabled },
-    error: { borderColor: color.strokeDangerLoud },
-    focused: { borderColor: color.strokeNeutralSubtle },
-    hovered: { borderColor: color.hover.strokeNeutralLoud },
-    pressed: { borderColor: color.pressed.strokeNeutralLoud },
-    readOnly: { borderColor: color.strokeNeutralDisabled },
-    rest: { borderColor: color.strokeNeutralLoud },
+    disabled: { borderColor: color.strokeNeutralDisabled.rest },
+    error: { borderColor: color.strokeDangerLoud.rest },
+    focused: { borderColor: color.strokeNeutralSubtle.rest },
+    hovered: { borderColor: color.strokeNeutralLoud.hover },
+    pressed: { borderColor: color.strokeNeutralLoud.pressed },
+    readOnly: { borderColor: color.strokeNeutralDisabled.rest },
+    rest: { borderColor: color.strokeNeutralLoud.rest },
   } satisfies Record<InputVisualState, ViewStyle>;
   const underlineStates = {
-    disabled: { borderBottomColor: color.strokeNeutralDisabled },
-    error: { borderBottomColor: color.strokeDangerLoud },
-    focused: { borderBottomColor: color.strokeFocusOuter },
-    hovered: { borderBottomColor: color.hover.strokeNeutralLoud },
-    pressed: { borderBottomColor: color.pressed.strokeNeutralLoud },
-    readOnly: { borderBottomColor: color.strokeNeutralDisabled },
-    rest: { borderBottomColor: color.strokeNeutralLoud },
+    disabled: { borderBottomColor: color.strokeNeutralDisabled.rest },
+    error: { borderBottomColor: color.strokeDangerLoud.rest },
+    focused: { borderBottomColor: color.strokeFocusOuter.rest },
+    hovered: { borderBottomColor: color.strokeNeutralLoud.hover },
+    pressed: { borderBottomColor: color.strokeNeutralLoud.pressed },
+    readOnly: { borderBottomColor: color.strokeNeutralDisabled.rest },
+    rest: { borderBottomColor: color.strokeNeutralLoud.rest },
   } satisfies Record<InputVisualState, ViewStyle>;
 
   function createSizeBranch(base: ViewStyle, states: Record<InputVisualState, ViewStyle>) {
@@ -254,7 +254,7 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
   const medium = getMetrics(tokens, 'medium');
   const large = getMetrics(tokens, 'large');
   const base = {
-    color: color.foregroundNeutralPrimary,
+    color: color.foregroundNeutralPrimary.rest,
     fontFamily: fontFamily.functional,
   };
 
@@ -264,7 +264,7 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
       fontSize: small.textFontSize,
       marginVertical: small.verticalPadding,
       disabled: {
-        color: color.foregroundNeutralDisabled,
+        color: color.foregroundNeutralDisabled.rest,
       },
     },
     medium: {
@@ -272,7 +272,7 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
       fontSize: medium.textFontSize,
       marginVertical: medium.verticalPadding,
       disabled: {
-        color: color.foregroundNeutralDisabled,
+        color: color.foregroundNeutralDisabled.rest,
       },
     },
     large: {
@@ -280,7 +280,7 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
       fontSize: large.textFontSize,
       marginVertical: large.verticalPadding,
       disabled: {
-        color: color.foregroundNeutralDisabled,
+        color: color.foregroundNeutralDisabled.rest,
       },
     },
   };
@@ -312,7 +312,7 @@ function createUnderlineFocusDefinition(tokens: FlexTokens): StyleDefinition<Vie
     right: 0,
     position: 'absolute',
     borderBottomWidth: toNumber(tokens.strokeWidth.thin),
-    borderBottomColor: tokens.color.strokeFocusOuter,
+    borderBottomColor: tokens.color.strokeFocusOuter.rest,
   };
 }
 
@@ -401,13 +401,13 @@ export function getInputResolvedStyles(
     ...inputStyles.textInput,
     ...getThemedTextInputStyle(state, [state.size, state.visualState]),
   };
-  const iconColor = textInput.color ?? state.tokens.color.foregroundNeutralPrimary;
+  const iconColor = textInput.color ?? state.tokens.color.foregroundNeutralPrimary.rest;
   const placeholderTextColor =
     state.visualState === 'disabled'
-      ? state.tokens.color.foregroundNeutralDisabled
+      ? state.tokens.color.foregroundNeutralDisabled.rest
       : state.visualState === 'readOnly'
-        ? state.tokens.color.foregroundNeutralPrimary
-        : state.tokens.color.foregroundNeutralTertiary;
+        ? state.tokens.color.foregroundNeutralPrimary.rest
+        : state.tokens.color.foregroundNeutralTertiary.rest;
 
   return {
     contents,

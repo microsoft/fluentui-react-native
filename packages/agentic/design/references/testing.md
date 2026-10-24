@@ -38,3 +38,7 @@ The package's internal validation suite audits rest, hover, and pressed values
 for both the cool and warm color tones. Its pinned conformance fixtures and the
 bulk `getInteractionColorOverrides` helper under `src/test/fixtures` are
 implementation evidence rather than public testing exports.
+
+`validateContrastPairs` accepts a flat map of color values or resolved
+`InteractiveColor` envelopes, which it audits at rest. To audit an interaction
+state, pass a flat map of that state's values.

@@ -282,27 +282,27 @@ describe('Switch', () => {
     const baseThumbKey = checked ? 'foregroundNeutralOnloud' : 'foregroundNeutralSecondary';
     const expectedTrackBackground = disabled
       ? checked
-        ? colors.backgroundNeutralHeavyDisabled
-        : colors.backgroundNeutralTransparent
+        ? colors.backgroundNeutralHeavyDisabled.rest
+        : colors.backgroundNeutralTransparent.rest
       : pressed
-        ? colors.pressed[baseBackgroundKey]
+        ? colors[baseBackgroundKey].pressed
         : hovered
-          ? colors.hover[baseBackgroundKey]
-          : colors[baseBackgroundKey];
+          ? colors[baseBackgroundKey].hover
+          : colors[baseBackgroundKey].rest;
     const expectedTrackBorder = disabled
-      ? colors.strokeNeutralDisabled
+      ? colors.strokeNeutralDisabled.rest
       : pressed
-        ? colors.pressed[baseBorderKey]
+        ? colors[baseBorderKey].pressed
         : hovered
-          ? colors.hover[baseBorderKey]
-          : colors[baseBorderKey];
+          ? colors[baseBorderKey].hover
+          : colors[baseBorderKey].rest;
     const expectedThumb = disabled
-      ? colors.foregroundNeutralDisabled
+      ? colors.foregroundNeutralDisabled.rest
       : pressed
-        ? colors.pressed[baseThumbKey]
+        ? colors[baseThumbKey].pressed
         : hovered
-          ? colors.hover[baseThumbKey]
-          : colors[baseThumbKey];
+          ? colors[baseThumbKey].hover
+          : colors[baseThumbKey].rest;
 
     const resolvedTrack = getSwitchTrackColorStyle(state, checked);
     const resolvedThumb = getSwitchThumbColorStyle(state, checked);

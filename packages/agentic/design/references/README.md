@@ -10,6 +10,7 @@ owner_paths:
 | ID                      | Document                            | Read when                                                                        |
 | ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------- |
 | `design.theming`        | [Theming](theming.md)               | Authoring themes, providers, appearance, theme hooks, or the legacy projection   |
+| `design.flex-colors`    | [Flex colors](flex-colors.md)       | Authoring, resolving, or reading Flex colors, or migrating from flat colors      |
 | `design.tokens`         | [Tokens](tokens.md)                 | Choosing token sources, mapping Flex tokens, or updating mappings and the x3 pin |
 | `design.styling`        | [Styling](styling.md)               | Using or changing themed style caches and state or color style factories         |
 | `design.color-lib`      | [Color library](color-lib.md)       | Parsing, converting, compositing, or generating interaction colors at runtime    |

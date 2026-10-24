@@ -289,8 +289,8 @@ export function getMenuItemCheckboxStyle(state: MenuItemState): ViewStyle {
   const colors = state.tokens.color;
   return {
     alignItems: 'center',
-    backgroundColor: state.selected ? colors.backgroundBrandHeavy : colors.backgroundNeutralTransparent,
-    borderColor: state.selected ? colors.backgroundBrandHeavy : colors.strokeNeutralLoud,
+    backgroundColor: state.selected ? colors.backgroundBrandHeavy.rest : colors.backgroundNeutralTransparent.rest,
+    borderColor: state.selected ? colors.backgroundBrandHeavy.rest : colors.strokeNeutralLoud.rest,
     borderRadius: 4,
     borderWidth: 1,
     height: size160,

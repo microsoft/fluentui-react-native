@@ -35,13 +35,13 @@ describe('Badge', () => {
     expect(getRoot(component).props.accessible).toBe(true);
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: tokens.color.backgroundBrandSoft,
+      backgroundColor: tokens.color.backgroundBrandSoft.rest,
       borderRadius: tokens.borderRadius.circular,
       minHeight: 20,
       paddingHorizontal: tokens.spacing.componentBase150,
     });
     expect(StyleSheet.flatten(component.getByText('Badge').props.style)).toMatchObject({
-      color: tokens.color.foregroundBrandPrimary,
+      color: tokens.color.foregroundBrandPrimary.rest,
       fontFamily: expect.any(String),
       fontSize: tokens.fontSize.functionalBodySmall,
     });
@@ -50,7 +50,7 @@ describe('Badge', () => {
       width: 16,
     });
     expect(StyleSheet.flatten(component.getByText(String.fromCodePoint(badgeIcon.fontSource.codepoint)).props.style)).toMatchObject({
-      color: tokens.color.foregroundBrandPrimary,
+      color: tokens.color.foregroundBrandPrimary.rest,
     });
   });
 
@@ -121,11 +121,11 @@ describe('Badge', () => {
     });
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color[backgroundToken],
-      borderColor: tokens.color[borderToken],
+      backgroundColor: tokens.color[backgroundToken].rest,
+      borderColor: tokens.color[borderToken].rest,
       borderWidth,
     });
-    expect(StyleSheet.flatten(component.getByText('Badge').props.style).color).toBe(tokens.color[foregroundToken]);
+    expect(StyleSheet.flatten(component.getByText('Badge').props.style).color).toBe(tokens.color[foregroundToken].rest);
   });
 
   it.each([

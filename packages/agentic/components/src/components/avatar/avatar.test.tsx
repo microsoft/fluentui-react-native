@@ -41,7 +41,7 @@ describe('Avatar', () => {
     expect(component.getByText('LM', { includeHiddenElements: true })).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: tokens.color.backgroundNeutralSoft,
+      backgroundColor: tokens.color.backgroundNeutralSoft.rest,
       flexDirection: 'row',
       height: 40,
       justifyContent: 'center',
@@ -75,7 +75,7 @@ describe('Avatar', () => {
       top: 0,
     });
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.backgroundNeutralTransparent,
+      backgroundColor: tokens.color.backgroundNeutralTransparent.rest,
       height: 56,
       padding: 0,
       width: 56,
@@ -96,7 +96,7 @@ describe('Avatar', () => {
       height: 120,
     });
     expect(StyleSheet.flatten(component.getByTestId('avatar-activity-ring', { includeHiddenElements: true }).props.style)).toMatchObject({
-      borderColor: tokens.color.strokeBrandLoud,
+      borderColor: tokens.color.strokeBrandLoud.rest,
       borderRadius: tokens.borderRadius.circular,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thicker,
@@ -134,7 +134,7 @@ describe('Avatar', () => {
           pointerEvents: 'none',
         });
         expect(StyleSheet.flatten(ring.props.style)).toMatchObject({
-          borderColor: tokens.color.strokeBrandLoud,
+          borderColor: tokens.color.strokeBrandLoud.rest,
           borderWidth: width,
           bottom: -(offset + width),
           left: -(offset + width),

@@ -19,7 +19,7 @@ export function useSkeleton_unstable(props: SkeletonProps): SkeletonState {
   const { onLayout, style: userStyle, ...rest } = props;
   const themeState = useThemeState();
   const gradientId = `skeleton-gradient-${React.useId().replace(/:/g, '')}`;
-  const highlightColor: unknown = themeState.tokens.color.backgroundNeutralSubtle;
+  const highlightColor: unknown = themeState.tokens.color.backgroundNeutralSubtle.rest;
   const shimmerColor = typeof highlightColor === 'string' ? highlightColor : undefined;
   const [layout, setLayout] = React.useState<LayoutRectangle>(createEmptyLayout);
   const reduceMotion = useReducedMotion() ?? false;

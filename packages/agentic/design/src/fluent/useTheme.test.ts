@@ -112,7 +112,7 @@ describe('useTheme', () => {
     });
 
     expect(themes[0]).toBe(rawTheme);
-    expect(states[0].tokens.color.backgroundNeutralSubtle).toBe('#654321');
+    expect(states[0].tokens.color.backgroundNeutralSubtle.rest).toBe('#654321');
     act(() => component!.unmount());
   });
 });

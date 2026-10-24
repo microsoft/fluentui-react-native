@@ -264,7 +264,7 @@ describe('ThemedRoot', () => {
         </ThemedRoot>
       </ThemeProvider>,
     );
-    expect(nestedThemes[0].tokens.color.backgroundBrandHeavy).toBe('#111111');
+    expect(nestedThemes[0].tokens.color.backgroundBrandHeavy.rest).toBe('#111111');
     expect(nestedThemes[0].appearance).toEqual({
       colorScheme: 'dark',
       contrast: 'highContrast',
@@ -461,7 +461,7 @@ describe('ThemedRoot', () => {
         </ThemeContext.Provider>
       </ThemedRoot>,
     );
-    expect(themes[0].tokens.color.backgroundNeutralSubtle).toBe('#123456');
+    expect(themes[0].tokens.color.backgroundNeutralSubtle.rest).toBe('#123456');
     expect(themes[0].appearance.colorScheme).toBe('dark');
     expect(themes[0].appearance.colorTone).toBe('cool');
   });

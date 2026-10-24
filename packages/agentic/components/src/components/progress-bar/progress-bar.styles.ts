@@ -35,7 +35,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
       minWidth: 0,
     },
     indicator: {
-      backgroundColor: color.foregroundBrandPrimary,
+      backgroundColor: color.foregroundBrandPrimary.rest,
       borderRadius: cornerRadiusCircular,
       bottom: 0,
       left: 0,
@@ -43,7 +43,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
       top: 0,
     },
     label: {
-      color: color.foregroundNeutralPrimary,
+      color: color.foregroundNeutralPrimary.rest,
       flexGrow: 1,
       flexShrink: 1,
       fontFamily: fontFamily.functional,
@@ -62,7 +62,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
       gap: getGapStyleValue(spacing.componentBase100),
     },
     track: {
-      backgroundColor: color.backgroundNeutralSoft,
+      backgroundColor: color.backgroundNeutralSoft.rest,
       borderRadius: cornerRadiusCircular,
       height: spacing.componentBase100,
       overflow: 'hidden',
@@ -73,7 +73,7 @@ export function getProgressBarThemeStyles(themeState: ThemeState): ProgressBarTh
       width: size160,
     },
     valueText: {
-      color: color.foregroundNeutralSecondary,
+      color: color.foregroundNeutralSecondary.rest,
       fontFamily: fontFamily.functional,
       fontSize: fontSize.functionalBodySmall,
       lineHeight: lineHeight.functionalBodySmall,

@@ -54,7 +54,7 @@ describe('ListItem', () => {
 
     await fireEvent(root, 'hoverIn', {});
     expect(onHoverIn).toHaveBeenCalledTimes(1);
-    expect(getRootStyle(component).backgroundColor).toBe(colors.hover.backgroundNeutralTransparent);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralTransparent.hover);
 
     await fireEvent(root, 'pressIn', {});
     expect(onPress).toHaveBeenCalledTimes(0);
@@ -87,7 +87,7 @@ describe('ListItem', () => {
     const component = await renderListItem({ content: 'Selected', selectionMode: 'multiple', selected: true });
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralTransparent,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
     });
   });
 

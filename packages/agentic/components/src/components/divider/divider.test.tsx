@@ -48,12 +48,12 @@ describe('Divider', () => {
     const afterExpected = layout === 'end' ? { flexBasis: stub, flexGrow: 0 } : { flexBasis: 0, flexGrow: 1 };
 
     expect(StyleSheet.flatten(beforeLine.props.style)).toMatchObject({
-      backgroundColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.strokeNeutralSubtle.rest,
       height: tokens.strokeWidth.thin,
       ...beforeExpected,
     });
     expect(StyleSheet.flatten(afterLine.props.style)).toMatchObject({
-      backgroundColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.strokeNeutralSubtle.rest,
       height: tokens.strokeWidth.thin,
       ...afterExpected,
     });
@@ -72,7 +72,7 @@ describe('Divider', () => {
 
     expect(StyleSheet.flatten(root.props.style)).toMatchObject({ flexDirection: 'column' });
     expect(StyleSheet.flatten(beforeLine.props.style)).toMatchObject({
-      backgroundColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.strokeNeutralSubtle.rest,
       width: tokens.strokeWidth.thin,
       flexGrow: 1,
     });
@@ -81,7 +81,7 @@ describe('Divider', () => {
       paddingVertical: tokens.spacing.componentBase300,
     });
     expect(StyleSheet.flatten(component.getByText('Section').props.style)).toMatchObject({
-      color: tokens.color.foregroundNeutralSecondary,
+      color: tokens.color.foregroundNeutralSecondary.rest,
       fontFamily: tokens.fontFamily.functional,
       fontSize: tokens.fontSize.functionalBodySmall,
       lineHeight: tokens.lineHeight.functionalBodySmall,

@@ -38,8 +38,8 @@ describe('Checkbox', () => {
     expect(component.getByText('Save drafts')).toBeOnTheScreen();
     expect(getIndicatorStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: colors.backgroundNeutralTransparent,
-      borderColor: colors.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
+      borderColor: colors.strokeNeutralHeavy.rest,
     });
     expect(getRootStyle(component)).toMatchObject({
       borderStyle: 'solid',
@@ -250,23 +250,23 @@ describe('Checkbox', () => {
     const root = getRoot(component);
 
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralTransparent,
-      borderColor: colors.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
+      borderColor: colors.strokeNeutralHeavy.rest,
     });
 
     await fireEvent(root, 'hoverIn', {});
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: colors.hover.backgroundNeutralTransparent,
-      borderColor: colors.hover.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.hover,
+      borderColor: colors.strokeNeutralHeavy.hover,
     });
-    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.hover.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.foregroundNeutralSecondary.hover);
 
     await fireEvent(root, 'pressIn', {});
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: colors.pressed.backgroundNeutralTransparent,
-      borderColor: colors.pressed.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.pressed,
+      borderColor: colors.strokeNeutralHeavy.pressed,
     });
-    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.pressed.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.foregroundNeutralSecondary.pressed);
   });
 
   it('uses native focus visuals without mounting custom rings', async () => {
@@ -298,14 +298,14 @@ describe('Checkbox', () => {
     const component = await renderCheckbox({ label: status, status });
     const label = component.getByTestId('checkbox-label');
     const indicator = component.getByTestId('checkbox-indicator');
-    const expectedBackground = status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundBrandHeavy;
-    const expectedLabelColor = status === 'unchecked' ? colors.foregroundNeutralSecondary : colors.foregroundNeutralPrimary;
+    const expectedBackground = status === 'unchecked' ? colors.backgroundNeutralTransparent.rest : colors.backgroundBrandHeavy.rest;
+    const expectedLabelColor = status === 'unchecked' ? colors.foregroundNeutralSecondary.rest : colors.foregroundNeutralPrimary.rest;
 
     expect(StyleSheet.flatten(indicator.props.style).backgroundColor).toBe(expectedBackground);
     expect(StyleSheet.flatten(label.props.style).color).toBe(expectedLabelColor);
     if (status !== 'unchecked') {
       const icon = component.getByText(status === 'indeterminate' ? '\u2212' : '\u2713');
-      expect(StyleSheet.flatten(icon.props.style).color).toBe(colors.foregroundBrandOnloud);
+      expect(StyleSheet.flatten(icon.props.style).color).toBe(colors.foregroundBrandOnloud.rest);
     }
   });
 
@@ -325,9 +325,9 @@ describe('Checkbox', () => {
     const tokens = defaultFlexTokens.color;
 
     expect(StyleSheet.flatten(component.getByTestId('checkbox-indicator').props.style)).toMatchObject({
-      backgroundColor: tokens.backgroundNeutralHeavyDisabled,
-      borderColor: tokens.strokeNeutralTransparent,
+      backgroundColor: tokens.backgroundNeutralHeavyDisabled.rest,
+      borderColor: tokens.strokeNeutralTransparent.rest,
     });
-    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(tokens.foregroundNeutralDisabled);
+    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(tokens.foregroundNeutralDisabled.rest);
   });
 });

@@ -23,22 +23,24 @@ both models. Modern consumers read Flex tokens through `useThemeState`; legacy c
 | `ThemeReference`     | `legacy` | One legacy `Theme` per resolved appearance      | `@fluentui-react-native/design/theming` or `@fluentui-react-native/design/theming/legacy-source` |
 
 `FlexThemeReference` accepts `base`, `appearance`, `fallbackAppearance`, `appearanceSource`, and `legacyFallback`
-options followed by recipes. It resolves the design package's default Flex tokens, then the base input, then recipes in
-declaration order. A base or recipe may be a function of the resolved appearance, which always has a concrete
-`colorTone`. `PartialFlexTokens` is shape-aware so opaque React Native colors stay leaves.
+options followed by recipes. It merges the design package's default Flex token description, then the base input, then
+recipes in declaration order, and resolves the result once per appearance. A base may be a function of the resolved
+appearance, which always has a concrete `colorTone`. A recipe receives the accumulated authored description and the
+resolved appearance. `PartialFlexTokens` is shape-aware so opaque React Native colors stay leaves.
 
-After the recipes run, each omitted `hover` or `pressed` entry of an interactive color token is derived from that
-token's resolved rest color with the `color-lib` interaction algorithm for the appearance's color scheme and tone; no
-import, provider setting, or registration is required. Authored state values are kept. High contrast and rest values
-JavaScript cannot resolve, such as `PlatformColor`, resolve the omitted state to the rest value. `color-lib.md`
-describes the token classification. The derivation currently runs once when an appearance's tokens are resolved.
+Each color is authored as a value, a `[light, dark]` tuple, or `flexColor` options with explicit states and an
+interaction type, and replaces the previous color atomically. Each resolved color is an `InteractiveColor` with `rest`,
+`hover`, and `pressed`. Omitted states of interactive tokens are derived from rest with the `color-lib` interaction
+algorithm on first read; no import, provider setting, or registration is required. `flex-colors.md` owns the authoring,
+resolution, and merge rules and the migration from flat colors.
 
 ```ts
 import { FlexThemeReference } from '@fluentui-react-native/design';
 
-const theme = new FlexThemeReference({ appearance: { colorScheme: 'system' } }, (_parent, appearance) => ({
-  color: { surfaceNeutralNear: appearance.colorScheme === 'dark' ? '#1f1f1f' : '#ffffff' },
-}));
+const theme = new FlexThemeReference({
+  appearance: { colorScheme: 'system' },
+  base: { color: { surfaceNeutralNear: ['#ffffff', '#1f1f1f'] } },
+});
 ```
 
 `ThemeReference` keeps its constructor, one-argument recipes, `theme` accessor, `update`, `invalidate`, and listeners.
@@ -122,8 +124,9 @@ including `darkElevated`, `highContrast`, and `dynamic`. `getCurrentAppearance`,
 The package root exports only the modern authoring and consumption APIs. It reaches the forward Theme-to-Flex adapter,
 which `useThemeState` needs for legacy sources, and the Flex interaction policy with the raw `color-lib` interaction
 algorithm, but not `useTheme`, the reverse converter, the complete legacy defaults, or legacy token payloads. The legacy
-`ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. `entry-points.md` lists
-every subpath.
+`ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. An app that pairs a legacy
+`ThemeReference` with `useThemeState` reaches the forward adapter and the engine-free color envelope, but not
+`FlexThemeReference`, the interaction policy, or `color-lib`. `entry-points.md` lists every subpath.
 
 `themeFromFlexTokens` in `theming/compat` builds a complete `Theme` in this order:
 

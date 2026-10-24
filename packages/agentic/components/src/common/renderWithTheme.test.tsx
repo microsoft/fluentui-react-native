@@ -58,7 +58,7 @@ describe('themed test scenes', () => {
     await scene.rerender(<Probe roots={roots} themes={themes} label="Updated" />);
 
     expect(wrapperRoots.every((root) => root === roots[0])).toBe(true);
-    expect(themes.every((state) => state.tokens.color.foregroundNeutralPrimary === '#123456')).toBe(true);
+    expect(themes.every((state) => state.tokens.color.foregroundNeutralPrimary.rest === '#123456')).toBe(true);
     expect(roots.every((root) => root === roots[0])).toBe(true);
   });
 

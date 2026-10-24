@@ -29,12 +29,12 @@ function getStatusColor(themeState: ReturnType<typeof useThemeState>, status: Pr
   const { color } = themeState.tokens;
   switch (status) {
     case 'error':
-      return color.foregroundDangerPrimary;
+      return color.foregroundDangerPrimary.rest;
     case 'success':
-      return color.foregroundSuccessPrimary;
+      return color.foregroundSuccessPrimary.rest;
     case 'neutral':
     default:
-      return color.foregroundBrandPrimary;
+      return color.foregroundBrandPrimary.rest;
   }
 }
 

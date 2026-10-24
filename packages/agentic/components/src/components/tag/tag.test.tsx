@@ -119,21 +119,21 @@ describe('Tag', () => {
     const restForeground = StyleSheet.flatten(text.props.style).color;
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.backgroundBrandHeavy,
+      backgroundColor: tokens.color.backgroundBrandHeavy.rest,
     });
-    expect(restForeground).toBe(tokens.color.foregroundNeutralOnloud);
+    expect(restForeground).toBe(tokens.color.foregroundNeutralOnloud.rest);
 
     await fireEvent(root, 'hoverIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.hover.backgroundBrandHeavy,
+      backgroundColor: tokens.color.backgroundBrandHeavy.hover,
     });
-    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud);
+    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud.rest);
 
     await fireEvent(root, 'pressIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.pressed.backgroundBrandHeavy,
+      backgroundColor: tokens.color.backgroundBrandHeavy.pressed,
     });
-    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud);
+    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud.rest);
   });
 
   it('uses native focus visuals without mounting custom rings', async () => {

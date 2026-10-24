@@ -67,12 +67,12 @@ describe.each(['windows', 'macos', 'win32'])('component focus visuals on %s', (p
     expect(component.getByTestId('focus-visual', { includeHiddenElements: true })).toBe(outerRing);
     expect(component.getByTestId('focus-visual-inner', { includeHiddenElements: true })).toBe(innerRing);
     expect(StyleSheet.flatten(outerRing.props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusOuter,
+      borderColor: defaultFlexTokens.color.strokeFocusOuter.rest,
       borderWidth: defaultFlexTokens.strokeWidth.thick,
     });
     expect(StyleSheet.flatten(outerRing.props.style).opacity).toBeUndefined();
     expect(StyleSheet.flatten(innerRing.props.style)).toMatchObject({
-      borderColor: defaultFlexTokens.color.strokeFocusInner,
+      borderColor: defaultFlexTokens.color.strokeFocusInner.rest,
       borderWidth: defaultFlexTokens.strokeWidth.thin,
     });
     expect(outerRing.props).toMatchObject({ accessible: false, focusable: false, pointerEvents: 'none' });

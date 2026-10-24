@@ -1,9 +1,19 @@
 export type { FontSize, FontWeight } from './tokens/textAttributes';
 export { fontSize, fontWeight } from './tokens/textAttributes';
 export type {
+  ColorEntry,
+  ColorTuple,
+  FlexColorDescription,
+  FlexColorInput,
+  FlexTokenDescription,
   FlexTokens,
-  InteractiveColorOverrides,
+  InteractiveColor,
+  InteractiveColorOptions,
+  InteractiveColorType,
+  PartialSemanticColors,
   SemanticBorderRadii,
+  SemanticColorDescriptions,
+  SemanticColorName,
   SemanticColors,
   SemanticColorTokenValues,
   SemanticFontFamilies,
@@ -16,7 +26,9 @@ export type {
   SemanticTokens,
   UnsupportedFlexTokens,
 } from './flex/tokens.types';
-export { INTERACTIVE_COLOR_TOKENS, isInverseInteractionToken } from './flex/colors/interactiveTokens';
+export { INTERACTIVE_COLOR_TOKENS, isInteractiveColorToken, isInverseInteractionToken } from './flex/colors/interactiveTokens';
+export { flexColor, selectColorEntry } from './flex/colors/flexColor';
+export type { ColorSchemeSelector } from './flex/colors/flexColor';
 export type { InteractiveColorToken } from './flex/colors/interactiveTokens';
 export { flexTokensFromTheme } from './flex/adapters/flexTokensFromTheme';
 export {

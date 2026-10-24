@@ -41,15 +41,8 @@ export function fingerprint(value: unknown): string {
 export function effectiveFlexColors(color: FlexTokens['color']): Record<string, EffectiveColor> {
   const result: Record<string, EffectiveColor> = {};
   for (const name of Object.keys(color).sort()) {
-    if (name === 'hover' || name === 'pressed') {
-      continue;
-    }
-    const rest = color[name as keyof typeof color];
-    result[name] = {
-      rest,
-      hover: color.hover?.[name as keyof typeof color.hover] ?? rest,
-      pressed: color.pressed?.[name as keyof typeof color.pressed] ?? rest,
-    };
+    const { rest, hover, pressed } = color[name as keyof typeof color];
+    result[name] = { rest, hover, pressed };
   }
   return result;
 }

@@ -9,8 +9,8 @@ owner_paths:
 # Color library
 
 `@fluentui-react-native/design/color-lib` exposes the raw color algorithms for
-direct use. Theme authors do not need it: `FlexThemeReference` fills omitted
-interaction states automatically (see `theming.md`). It groups public utilities
+direct use. Theme authors do not need it: resolved Flex colors compute omitted
+interaction states on first read (see `flex-colors.md`). It groups public utilities
 by responsibility:
 
 - `parsing.ts` parses literal React Native colors and formats RGBA values;
@@ -41,9 +41,12 @@ const ratio = getContrastRatio('#000000db', '#ffffff');
 ```
 
 Token classification is Flex policy, not part of this library.
-`INTERACTIVE_COLOR_TOKENS` and `isInverseInteractionToken` are exported from
-the package root and owned by `src/flex/colors/`, which maps each Flex token to
-a direction and compositing mode before calling `getInteractionColor`.
+`INTERACTIVE_COLOR_TOKENS`, `isInteractiveColorToken`, and
+`isInverseInteractionToken` are exported from the package root and owned by
+`src/flex/colors/`, which maps each Flex token to a compositing mode and uses
+the authored color type as the direction before calling `getInteractionColor`.
+The inverse classification sets the type of package defaults and
+legacy-projected colors; newly authored colors declare their type.
 
 Keep the public exports narrow and add APIs only for demonstrated production
 needs. The public interaction surface is intentionally limited to generating one

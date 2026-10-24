@@ -59,7 +59,7 @@ type Story = WdioStory<StoryObj<typeof Skeleton>>;
 
 function MotionExample() {
   const reduceMotion = useReducedMotion();
-  const highlightColor: unknown = useThemeState().tokens.color.backgroundNeutralSubtle;
+  const highlightColor: unknown = useThemeState().tokens.color.backgroundNeutralSubtle.rest;
   return (
     <View style={styles.story}>
       <View accessible accessibilityLabel="Skeleton animation example" role="group" testID="skeleton-motion">

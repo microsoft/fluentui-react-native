@@ -13,8 +13,8 @@ export const popoverStyles = StyleSheet.create({
 export const getPopoverThemeStyles = themedStyleSheetFactory('Popover.surface', ({ tokens }) =>
   StyleSheet.create({
     surface: {
-      backgroundColor: tokens.color.surfaceNeutralNearer,
-      borderColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.surfaceNeutralNearer.rest,
+      borderColor: tokens.color.strokeNeutralSubtle.rest,
       borderRadius: tokens.borderRadius.base400,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thin,

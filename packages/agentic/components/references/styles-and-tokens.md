@@ -19,7 +19,9 @@ Consult
 `flex-token-map.yaml` before choosing a
 value.
 
-- Read semantic colors from `useThemeState().tokens.color`.
+- Read semantic colors from `useThemeState().tokens.color`. Each color is a resolved envelope: read `.rest` for static
+  styles and `.hover` or `.pressed` only for those states, because an omitted state is computed on first read. The design
+  Flex color reference (`@fluentui-react-native/design/references/flex-colors.md`) owns the color contract.
 - Read grouped categories from `tokens.borderRadius`, `tokens.spacing`, `tokens.strokeWidth`, `tokens.fontFamily`,
   `tokens.fontSize`, `tokens.fontWeight`, `tokens.lineHeight`, and `tokens.shadow`.
 - Prefer Flex tokens for every mapped semantic value.
@@ -74,12 +76,12 @@ states in `disabled`, `pressed`, `hovered` order so the first active state has t
 
 Use `getThemedStateStyleFactory` for token-derived hierarchy definitions and `getStateStyleFactory` for
 theme-independent definitions. Use `getThemedColorStyleFactory` for semantic background, border, and foreground colors;
-it automatically resolves `tokens.color.hover` and `tokens.color.pressed` for inherited semantic keys.
+it automatically reads the resolved `hover` and `pressed` states of inherited semantic keys.
 
 An interaction may intentionally switch semantic keys. Button Subtle is transparent at rest but explicitly selects
 `backgroundNeutralSubtle` inside hovered and pressed branches. Button Outline uses `strokeNeutralLoud`, whose hover and
 pressed token values provide visible stroke feedback. Do not assume a token named `Transparent` will produce visible
-interaction states; verify the resolved token maps.
+interaction states; verify the resolved colors' `hover` and `pressed` values.
 
 Build the state source from resolved state without hiding precedence in conditionals. Button pushes appearance, selected,
 disabled, pressed, and hovered values, then lets the declared hierarchy select the winner.

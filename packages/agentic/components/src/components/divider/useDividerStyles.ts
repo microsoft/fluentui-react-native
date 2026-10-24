@@ -27,7 +27,7 @@ export function useDividerStyles_unstable(state: DividerState) {
   if (state.icon) {
     attachSlotProps(state.icon, {
       accessible: false,
-      color: state.tokens.color.foregroundNeutralSecondary,
+      color: state.tokens.color.foregroundNeutralSecondary.rest,
       height: 20,
       width: 20,
     });

@@ -109,12 +109,12 @@ describe('Flex token mapping consistency', () => {
 
   it('rejects interaction fallbacks when the rest destination is Theme-backed', () => {
     const changed = cloneInputs(inputs);
-    changed.nonFluentValues.set('color.hover.backgroundBrandSoft', "'#000000'");
+    changed.nonFluentValues.set('color.backgroundBrandSoft.hover', "'#000000'");
 
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'interaction-fallback',
-      path: 'color.hover.backgroundBrandSoft',
-      expected: 'color.backgroundBrandSoft to be absent from flex-from-theme.json',
+      path: 'color.backgroundBrandSoft.hover',
+      expected: 'color.backgroundBrandSoft.rest to be absent from flex-from-theme.json',
       actual: 'colors.brandBackground2',
     });
   });
@@ -164,14 +164,14 @@ describe('Flex token mapping consistency', () => {
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'reverse-canonical',
       path: 'colors.black',
-      expected: 'one of ["color.expressionAchromaticHeavy","color.fixedBlack","color.shadow"]',
+      expected: 'one of ["color.expressionAchromaticHeavy.rest","color.fixedBlack.rest","color.shadow.rest"]',
       actual: 'color.notARealToken',
     });
   });
 
   it('requires every non-canonical candidate and an omission reason', () => {
     const changed = cloneInputs(inputs);
-    changed.mapping.reverse.canonical['colors.black'].omitted = ['color.expressionAchromaticHeavy'];
+    changed.mapping.reverse.canonical['colors.black'].omitted = ['color.expressionAchromaticHeavy.rest'];
     changed.mapping.reverse.canonical['colors.white'].reason = '';
 
     const violations = validateMappingInputs(changed);
@@ -179,8 +179,8 @@ describe('Flex token mapping consistency', () => {
     expect(violations).toContainEqual({
       rule: 'reverse-omission',
       path: 'colors.black',
-      expected: ['color.expressionAchromaticHeavy', 'color.shadow'],
-      actual: ['color.expressionAchromaticHeavy'],
+      expected: ['color.expressionAchromaticHeavy.rest', 'color.shadow.rest'],
+      actual: ['color.expressionAchromaticHeavy.rest'],
     });
     expect(violations).toContainEqual({
       rule: 'reverse-omission',
@@ -192,13 +192,13 @@ describe('Flex token mapping consistency', () => {
 
   it('validates generated interaction fallbacks against declared Flex paths', () => {
     const changed = cloneInputs(inputs);
-    changed.supportedTypePaths.delete('color.backgroundBrandHeavy');
+    changed.supportedTypePaths.delete('color.backgroundBrandHeavy.rest');
 
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'reverse-fallback',
       path: 'colors.brandBackgroundHover',
       expected: 'a declared Flex rest path',
-      actual: 'color.backgroundBrandHeavy',
+      actual: 'color.backgroundBrandHeavy.rest',
     });
   });
 
@@ -229,14 +229,30 @@ describe('Flex token mapping consistency', () => {
 
   it('reports drift in the checked-in reverse projection', () => {
     const changed = cloneInputs(inputs);
-    changed.reverseProjection['colors.black'] = { source: 'color.shadow' };
+    changed.reverseProjection['colors.black'] = { source: 'color.shadow.rest' };
 
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'reverse-projection',
       path: 'colors.black',
-      expected: { source: 'color.fixedBlack' },
-      actual: { source: 'color.shadow' },
+      expected: { source: 'color.fixedBlack.rest' },
+      actual: { source: 'color.shadow.rest' },
     });
+  });
+
+  it('projects color states to nested Flex paths', () => {
+    expect(inputs.themeProjection['color.backgroundBrandHeavy.rest']).toBe('colors.brandBackground');
+    expect(inputs.themeProjection['color.backgroundBrandHeavy.hover']).toBe('colors.brandBackgroundHover');
+    expect(inputs.reverseProjection['colors.brandBackgroundHover']).toEqual({
+      source: 'color.backgroundBrandHeavy.hover',
+      fallback: 'color.backgroundBrandHeavy.rest',
+    });
+    expect(Object.keys(inputs.themeProjection).filter((path) => /^color\.(?:hover|pressed)\./.test(path))).toEqual([]);
+  });
+
+  it('reads non-Fluent colors as rest values and explicit interaction states', () => {
+    expect(inputs.nonFluentValues.get('color.expressionAccentHeavy.rest')).toBe("'#242424'");
+    expect(inputs.nonFluentValues.get('color.backgroundNeutralSoft.hover')).toBe("'#0000001a'");
+    expect(inputs.nonFluentValues.has('color.expressionAccentHeavy')).toBe(false);
   });
 
   it('rejects unknown mapping schema versions', () => {

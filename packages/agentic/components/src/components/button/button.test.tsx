@@ -234,20 +234,20 @@ describe('Button', () => {
       const root = getRoot(component);
 
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[restBackground],
-        borderColor: colors[restBorder],
+        backgroundColor: colors[restBackground].rest,
+        borderColor: colors[restBorder].rest,
       });
 
       await fireEvent(root, 'hoverIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.hover[interactionBackground],
-        borderColor: colors.hover[interactionBorder],
+        backgroundColor: colors[interactionBackground].hover,
+        borderColor: colors[interactionBorder].hover,
       });
 
       await fireEvent(root, 'pressIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.pressed[interactionBackground],
-        borderColor: colors.pressed[interactionBorder],
+        backgroundColor: colors[interactionBackground].pressed,
+        borderColor: colors[interactionBorder].pressed,
       });
     },
   );
@@ -306,32 +306,32 @@ describe('Button', () => {
         StyleSheet.flatten(component.getAllByText(appearance, { includeHiddenElements: true })[1].props.style).color;
 
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[background],
-        borderColor: colors[border],
+        backgroundColor: colors[background].rest,
+        borderColor: colors[border].rest,
       });
-      expect(getForegroundColor()).toBe(colors[foreground]);
+      expect(getForegroundColor()).toBe(colors[foreground].rest);
 
       await fireEvent(root, 'hoverIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.hover[background],
-        borderColor: colors.hover[border],
+        backgroundColor: colors[background].hover,
+        borderColor: colors[border].hover,
       });
-      expect(getForegroundColor()).toBe(colors.hover[foreground]);
+      expect(getForegroundColor()).toBe(colors[foreground].hover);
 
       await fireEvent(root, 'pressIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.pressed[background],
-        borderColor: colors.pressed[border],
+        backgroundColor: colors[background].pressed,
+        borderColor: colors[border].pressed,
       });
-      expect(getForegroundColor()).toBe(colors.pressed[foreground]);
+      expect(getForegroundColor()).toBe(colors[foreground].pressed);
 
       const disabledComponent = await renderButton({ appearance, content: appearance, disabled: true, selected: true });
       expect(getRootStyle(disabledComponent)).toMatchObject({
-        backgroundColor: colors[disabledBackground],
-        borderColor: colors[disabledBorder],
+        backgroundColor: colors[disabledBackground].rest,
+        borderColor: colors[disabledBorder].rest,
       });
       expect(StyleSheet.flatten(disabledComponent.getAllByText(appearance, { includeHiddenElements: true })[1].props.style).color).toBe(
-        colors.foregroundNeutralDisabled,
+        colors.foregroundNeutralDisabled.rest,
       );
     },
   );

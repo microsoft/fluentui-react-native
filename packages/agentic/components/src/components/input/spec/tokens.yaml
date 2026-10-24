@@ -56,8 +56,8 @@ bindings:
       focused:
         outline: color.strokeNeutralSubtle
         underline: color.strokeFocusOuter
-      pressed: color.pressed.strokeNeutralLoud
-      hovered: color.hover.strokeNeutralLoud
+      pressed: color.strokeNeutralLoud.pressed
+      hovered: color.strokeNeutralLoud.hover
       rest: color.strokeNeutralLoud
 
   iconTextStack:

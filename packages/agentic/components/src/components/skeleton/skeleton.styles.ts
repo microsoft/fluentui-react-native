@@ -23,12 +23,12 @@ export const skeletonStyles = StyleSheet.create({
 });
 
 export const getSkeletonThemeStyles = themedStyleSheetFactory<SkeletonThemeStyles>('Skeleton', ({ tokens }: ThemeState) => {
-  const opaqueHighlight = typeof tokens.color.backgroundNeutralSubtle !== 'string';
+  const opaqueHighlight = typeof tokens.color.backgroundNeutralSubtle.rest !== 'string';
   return StyleSheet.create({
     root: {
-      backgroundColor: tokens.color.backgroundNeutralSoft,
+      backgroundColor: tokens.color.backgroundNeutralSoft.rest,
       borderRadius: tokens.borderRadius.base100,
-      ...(opaqueHighlight ? { borderColor: tokens.color.strokeNeutralLoud, borderWidth: Number(tokens.strokeWidth.thin) } : {}),
+      ...(opaqueHighlight ? { borderColor: tokens.color.strokeNeutralLoud.rest, borderWidth: Number(tokens.strokeWidth.thin) } : {}),
     },
   });
 });

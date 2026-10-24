@@ -74,8 +74,8 @@ describe('Card', () => {
     const colors = defaultFlexTokens.color;
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.surfaceNeutralTranslucent,
-      borderColor: colors.strokeNeutralSubtle,
+      backgroundColor: colors.surfaceNeutralTranslucent.rest,
+      borderColor: colors.strokeNeutralSubtle.rest,
     });
     expect(component.getByText('Summary')).toBeOnTheScreen();
   });
@@ -108,20 +108,20 @@ describe('Card', () => {
 
     expect(button.props.accessibilityState).toEqual({ disabled: false, selected: true });
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralSoft,
-      borderColor: colors.strokeNeutralSoft,
+      backgroundColor: colors.backgroundNeutralSoft.rest,
+      borderColor: colors.strokeNeutralSoft.rest,
     });
 
     await fireEvent(button, 'hoverIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.hover.backgroundNeutralSoft,
-      borderColor: colors.hover.strokeNeutralSoft,
+      backgroundColor: colors.backgroundNeutralSoft.hover,
+      borderColor: colors.strokeNeutralSoft.hover,
     });
 
     await fireEvent(button, 'pressIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.pressed.backgroundNeutralSoft,
-      borderColor: colors.pressed.strokeNeutralSoft,
+      backgroundColor: colors.backgroundNeutralSoft.pressed,
+      borderColor: colors.strokeNeutralSoft.pressed,
     });
 
     await fireEvent(button, 'focus', {});

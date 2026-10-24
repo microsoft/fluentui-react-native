@@ -129,13 +129,13 @@ const labelStateLevels = [['disabled']] as const;
 const getLabelStyle = getThemedStateStyleFactory(
   'Switch.label',
   ({ color, fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, typeof labelStateLevels> => ({
-    color: color.foregroundNeutralPrimary,
+    color: color.foregroundNeutralPrimary.rest,
     fontFamily: fontFamily.functional,
     fontSize: fontSize.functionalBodyMedium,
     fontWeight: fontWeight.functionalRegular,
     lineHeight: lineHeight.functionalBodyMedium,
     disabled: {
-      color: color.foregroundNeutralDisabled,
+      color: color.foregroundNeutralDisabled.rest,
     },
   }),
   labelStateLevels,

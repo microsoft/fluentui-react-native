@@ -58,14 +58,13 @@ function flattenTokenMappings(mapping, violations) {
     }
 
     if (basePath.startsWith('color.') && Object.hasOwn(mappingEntry, 'rest')) {
-      const colorName = basePath.slice('color.'.length);
       for (const state of ['rest', 'hover', 'pressed']) {
         if (!Object.hasOwn(mappingEntry, state)) {
           continue;
         }
 
         const stateEntry = mappingEntry[state];
-        const destination = state === 'rest' ? basePath : `color.${state}.${colorName}`;
+        const destination = `${basePath}.${state}`;
         if (!isRecord(stateEntry)) {
           addViolation(violations, 'schema', destination, 'a color-state mapping object', stateEntry);
           continue;
@@ -76,8 +75,9 @@ function flattenTokenMappings(mapping, violations) {
         });
       }
     } else {
-      entries.set(basePath, {
-        themeSource: getThemeSource(mappingEntry, basePath, violations),
+      const destination = basePath.startsWith('color.') ? `${basePath}.rest` : basePath;
+      entries.set(destination, {
+        themeSource: getThemeSource(mappingEntry, destination, violations),
       });
     }
   }
@@ -355,9 +355,9 @@ function readTypePaths(typesPath, typeName) {
   const paths = new Set();
   for (const [groupName, groupType] of resolveProperties(declaration, aliases)) {
     for (const [tokenName, tokenType] of resolveProperties(groupType, aliases)) {
-      if (groupName === 'color' && (tokenName === 'hover' || tokenName === 'pressed')) {
-        for (const stateTokenName of resolveProperties(tokenType, aliases).keys()) {
-          paths.add(`${groupName}.${tokenName}.${stateTokenName}`);
+      if (groupName === 'color') {
+        for (const state of resolveProperties(tokenType, aliases).keys()) {
+          paths.add(`${groupName}.${tokenName}.${state}`);
         }
       } else {
         paths.add(`${groupName}.${tokenName}`);
@@ -408,6 +408,8 @@ function findVariableInitializer(program, variableName) {
   throw new Error(`Unable to find ${variableName}.`);
 }
 
+const colorTokenPattern = /^color\.[^.]+$/;
+
 function readNonFluentValues(defaultTokensPath, supportedTypePaths) {
   const sourceText = fs.readFileSync(defaultTokensPath, 'utf8');
   const program = parseTypeScript(sourceText, {
@@ -419,7 +421,19 @@ function readNonFluentValues(defaultTokensPath, supportedTypePaths) {
   const values = new Map();
 
   function collect(expression, prefix) {
-    const value = unwrapExpression(expression);
+    let value = unwrapExpression(expression);
+    if (colorTokenPattern.test(prefix)) {
+      if (value.type === 'CallExpression' && value.callee.type === 'Identifier' && value.callee.name === 'flexColor') {
+        value = unwrapExpression(value.arguments[0]);
+      }
+      const isOptions =
+        value.type === 'ObjectExpression' &&
+        value.properties.some((property) => property.type === 'ObjectProperty' && getPropertyName(property) === 'rest');
+      if (!isOptions) {
+        values.set(`${prefix}.rest`, sourceText.slice(value.start, value.end));
+        return;
+      }
+    }
     if (prefix && supportedTypePaths.has(prefix)) {
       values.set(prefix, sourceText.slice(value.start, value.end));
       return;
@@ -437,6 +451,9 @@ function readNonFluentValues(defaultTokensPath, supportedTypePaths) {
       }
 
       const name = getPropertyName(property);
+      if (name === 'type' && colorTokenPattern.test(prefix)) {
+        continue;
+      }
       collect(property.value, prefix ? `${prefix}.${name}` : name);
     }
   }
@@ -462,8 +479,8 @@ function loadMappingInputs(paths = defaultPaths) {
 }
 
 function getInteractionRestPath(tokenPath) {
-  const match = /^color\.(?:hover|pressed)\.(.+)$/.exec(tokenPath);
-  return match ? `color.${match[1]}` : undefined;
+  const match = /^color\.([^.]+)\.(?:hover|pressed)$/.exec(tokenPath);
+  return match ? `color.${match[1]}.rest` : undefined;
 }
 
 function validateMappingInputs(inputs) {

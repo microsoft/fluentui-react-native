@@ -14,8 +14,8 @@ export const menuStyles = StyleSheet.create({
 export const getMenuThemeStyles = themedStyleSheetFactory('Menu.surface', ({ tokens }) =>
   StyleSheet.create({
     surface: {
-      backgroundColor: tokens.color.surfaceNeutralNearer,
-      borderColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.surfaceNeutralNearer.rest,
+      borderColor: tokens.color.strokeNeutralSubtle.rest,
       borderRadius: tokens.borderRadius.base400,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thin,

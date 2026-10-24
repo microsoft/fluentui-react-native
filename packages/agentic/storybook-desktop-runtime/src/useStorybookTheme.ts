@@ -24,14 +24,14 @@ function storybookThemeFromThemeState({ appearance, highContrast, tokens }: Them
   const background = base.base === 'dark' ? 'fixedBlack' : 'fixedWhite';
   const nativeColors = new Set<keyof SemanticColorTokenValues>();
   const color = (name: keyof SemanticColorTokenValues, role: 'foreground' | 'background' = 'foreground'): string => {
-    const value = tokens.color[name];
+    const value = tokens.color[name].rest;
     // Storybook also passes these colors to JS color utilities, not just native styles.
     if (typeof value === 'string') {
       return value;
     }
     nativeColors.add(name);
     const fallbackName = role === 'foreground' ? foreground : background;
-    const fallback = tokens.color[fallbackName];
+    const fallback = tokens.color[fallbackName].rest;
     if (typeof fallback !== 'string') {
       throw new Error(`Storybook chrome requires a literal "${fallbackName}" fallback for the "${name}" theme token.`);
     }

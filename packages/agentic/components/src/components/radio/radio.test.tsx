@@ -67,26 +67,26 @@ describe('Radio', () => {
 
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: tokens.color.backgroundNeutralTransparent,
+      backgroundColor: tokens.color.backgroundNeutralTransparent.rest,
       borderRadius: tokens.borderRadius.base300,
       gap: tokens.spacing.componentBase100,
     });
     expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style)).toMatchObject({
-      backgroundColor: tokens.color.backgroundNeutralTransparent,
-      borderColor: tokens.color.strokeNeutralHeavy,
+      backgroundColor: tokens.color.backgroundNeutralTransparent.rest,
+      borderColor: tokens.color.strokeNeutralHeavy.rest,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thin,
       height: 16,
       width: 16,
     });
     expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
-      backgroundColor: tokens.color.foregroundBrandPrimary,
+      backgroundColor: tokens.color.foregroundBrandPrimary.rest,
       height: 10,
       opacity: 0,
       width: 10,
     });
     expect(StyleSheet.flatten(getText(component, 'Choice').props.style)).toMatchObject({
-      color: tokens.color.foregroundNeutralSecondary,
+      color: tokens.color.foregroundNeutralSecondary.rest,
       fontSize: expect.any(Number),
     });
   });
@@ -97,12 +97,12 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     expect(root.props.accessibilityState).toEqual({ checked: true, disabled: false });
-    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeBrandLoud);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeBrandLoud.rest);
     expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
-      backgroundColor: tokens.foregroundBrandPrimary,
+      backgroundColor: tokens.foregroundBrandPrimary.rest,
       opacity: 1,
     });
-    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.foregroundNeutralPrimary);
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.foregroundNeutralPrimary.rest);
   });
 
   it('updates interaction colors on hover and press', async () => {
@@ -111,12 +111,12 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     await fireEvent(root, 'hoverIn', {});
-    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.hover.strokeNeutralHeavy);
-    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.hover.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeNeutralHeavy.hover);
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.foregroundNeutralSecondary.hover);
 
     await fireEvent(root, 'pressIn', {});
-    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.pressed.strokeNeutralHeavy);
-    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.pressed.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeNeutralHeavy.pressed);
+    expect(StyleSheet.flatten(getText(component, 'Choice').props.style).color).toBe(tokens.foregroundNeutralSecondary.pressed);
   });
 
   it('uses native focus visuals without mounting custom rings', async () => {

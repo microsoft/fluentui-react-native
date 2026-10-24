@@ -29,7 +29,8 @@ The `apps/bundle-size` `design-*` scenarios guard these boundaries. Input patter
 patterns check the modules a tree-shaken bundle retains. The modern root and legacy-source scenarios forbid the
 compatibility and legacy-token modules; the modern root scenarios forbid `color-lib/compositing` and require the
 retained Flex interaction policy; the legacy-source and legacy theme scenarios forbid any retained color-library or Flex
-interaction module; and the color-library and legacy-projection scenarios require their expected modules. Every scenario
+interaction module, although the legacy-source scenario retains the engine-free color envelope that `useThemeState`
+returns; and the color-library and legacy-projection scenarios require their expected modules. Every scenario
 also requires a module it is expected to load, so a moved file cannot make a forbidden pattern pass vacuously.
 
 The package specifiers above are the supported import surface. Source and build paths such as `src/fluent/...` or

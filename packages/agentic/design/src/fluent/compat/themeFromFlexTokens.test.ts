@@ -1,8 +1,11 @@
+import { createInteractiveColor } from '../../flex/colors/interactiveColor';
 import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
-import type { FlexTokens } from '../../flex/tokens.types';
+import type { FlexTokens, SemanticColorTokenValues } from '../../flex/tokens.types';
+import { restColorValues } from '../../test/fixtures/interactionColors';
 import type { PartialTheme } from '../types/Theme.types';
 
 import { themeFromFlexTokens } from './themeFromFlexTokens';
+import type { FlatFlexTokens } from './themeFromFlexTokens';
 
 const light = {
   colorScheme: 'light',
@@ -10,21 +13,21 @@ const light = {
   interfaceLevel: 'base',
 } as const;
 
-function createTokens(): FlexTokens {
-  const hover = { ...defaultFlexTokens.color.hover };
-  delete hover.surfaceNeutralNear;
+function solid(value: string) {
+  return createInteractiveColor(value, value, value);
+}
 
+function createTokens(): FlexTokens {
   return {
     ...defaultFlexTokens,
     color: {
       ...defaultFlexTokens.color,
-      backgroundBrandSoft: '#111111',
-      backgroundBrandSubtle: '#222222',
-      backgroundNeutralSubtle: '#333333',
-      surfaceNeutralNear: '#444444',
-      fixedBlack: '#050505',
-      expressionAchromaticHeavy: '#060606',
-      hover,
+      backgroundBrandSoft: solid('#111111'),
+      backgroundBrandSubtle: solid('#222222'),
+      backgroundNeutralSubtle: solid('#333333'),
+      surfaceNeutralNear: createInteractiveColor('#444444', '#454545', '#464646'),
+      fixedBlack: solid('#050505'),
+      expressionAchromaticHeavy: solid('#060606'),
     },
     borderRadius: {
       ...defaultFlexTokens.borderRadius,
@@ -72,7 +75,8 @@ describe('themeFromFlexTokens', () => {
     expect(theme.colors.customLegacyColor).toBe('#abcdef');
     expect(theme.colors.brandBackground2).toBe('#111111');
     expect(theme.colors.neutralBackground2).toBe('#444444');
-    expect(theme.colors.neutralBackground2Hover).toBe('#444444');
+    expect(theme.colors.neutralBackground2Hover).toBe('#454545');
+    expect(theme.colors.neutralBackground2Pressed).toBe('#464646');
     expect(theme.colors.black).toBe('#050505');
     expect(theme.components.Button.tokens).toMatchObject({
       borderRadius: 12,
@@ -111,6 +115,39 @@ describe('themeFromFlexTokens', () => {
 
     expect(first).not.toBe(second);
     expect(first.colors.customLegacyColor).toBe('#abcdef');
-    expect(tokens.color.surfaceNeutralNear).toBe('#444444');
+    expect(tokens.color.surfaceNeutralNear.rest).toBe('#444444');
+  });
+
+  it('accepts the deprecated flat representation with optional state maps', () => {
+    const color: FlatFlexTokens['color'] = {
+      ...restColorValues(defaultFlexTokens.color),
+      surfaceNeutralNear: '#444444',
+      backgroundBrandHeavy: '#0f6cbd',
+      hover: { backgroundBrandHeavy: '#115ea3' } satisfies Partial<SemanticColorTokenValues>,
+    };
+    const flat: FlatFlexTokens = { ...defaultFlexTokens, color };
+
+    const theme = themeFromFlexTokens(flat, light);
+
+    expect(theme.colors.neutralBackground2).toBe('#444444');
+    expect(theme.colors.neutralBackground2Hover).toBe('#444444');
+    expect(theme.colors.brandBackground).toBe('#0f6cbd');
+    expect(theme.colors.brandBackgroundHover).toBe('#115ea3');
+    expect(theme.colors.brandBackgroundPressed).toBe('#0f6cbd');
+  });
+
+  it('projects the same legacy theme from resolved and equivalent flat tokens', () => {
+    const resolved = themeFromFlexTokens(defaultFlexTokens, light);
+    const values = restColorValues(defaultFlexTokens.color);
+    const flat: FlatFlexTokens = {
+      ...defaultFlexTokens,
+      color: {
+        ...values,
+        hover: Object.fromEntries(Object.entries(defaultFlexTokens.color).map(([name, entry]) => [name, entry.hover])),
+        pressed: Object.fromEntries(Object.entries(defaultFlexTokens.color).map(([name, entry]) => [name, entry.pressed])),
+      },
+    };
+
+    expect(themeFromFlexTokens(flat, light)).toEqual(resolved);
   });
 });

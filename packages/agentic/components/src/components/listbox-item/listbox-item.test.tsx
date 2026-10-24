@@ -63,7 +63,7 @@ describe('ListboxItem', () => {
     const component = await renderListboxItem({ content: 'Choice', multiselect: true, selected: true });
     const root = component.getByRole('button');
 
-    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent);
+    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
     expect(StyleSheet.flatten(component.getByText('Choice').props.style).fontWeight).toBe(defaultFlexTokens.fontWeight.functionalRegular);
     expect(component.getByText('✓')).toBeOnTheScreen();
   });
@@ -91,16 +91,16 @@ describe('ListboxItem', () => {
     const component = await renderListboxItem({ content: 'Choice' });
     const root = component.getByRole('button');
     await fireEvent(root, 'hoverIn', {});
-    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.hover.backgroundNeutralTransparent);
+    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.hover);
 
     await fireEvent(root, 'pressIn', {});
-    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.pressed.backgroundNeutralTransparent);
+    expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.pressed);
 
     await fireEvent(root, 'focus', {});
     expect(root.props.enableFocusRing).toBe(true);
     expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
     expect(StyleSheet.flatten(root.props.style)).not.toMatchObject({
-      outlineColor: defaultFlexTokens.color.strokeFocusOuter,
+      outlineColor: defaultFlexTokens.color.strokeFocusOuter.rest,
       outlineStyle: 'solid',
     });
   });

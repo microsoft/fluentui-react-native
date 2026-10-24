@@ -21,8 +21,8 @@ bindings:
         paddingVertical: spacing.componentBase100
     background:
       rest: color.backgroundNeutralTransparent
-      hovered: color.hover.backgroundNeutralSubtle
-      pressed: color.pressed.backgroundNeutralSubtle
+      hovered: color.backgroundNeutralSubtle.hover
+      pressed: color.backgroundNeutralSubtle.pressed
   title:
     small:
       fontFamily: fontFamily.functional

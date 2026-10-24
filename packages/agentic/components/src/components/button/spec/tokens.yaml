@@ -67,10 +67,11 @@ bindings:
       selectedSubtle:
         backgroundColor: color.backgroundNeutralSubtleDisabled
     interaction:
-      hovered: color.hover
-      pressed: color.pressed
-      subtleHoveredBackground: color.hover.backgroundNeutralSubtle
-      subtlePressedBackground: color.pressed.backgroundNeutralSubtle
+      # <inherited> is the semantic color key the state inherits from its parent style.
+      hovered: color.<inherited>.hover
+      pressed: color.<inherited>.pressed
+      subtleHoveredBackground: color.backgroundNeutralSubtle.hover
+      subtlePressedBackground: color.backgroundNeutralSubtle.pressed
     size:
       small:
         roundedRadius: borderRadius.base200

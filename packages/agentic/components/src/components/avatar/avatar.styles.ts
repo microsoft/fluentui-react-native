@@ -39,7 +39,7 @@ type AvatarSizeState = StateNames<AvatarSizeStateLevels>;
 function createRingStyle({ color, strokeWidth }: FlexTokens, offset: 'thin' | 'thick', width: 'thin' | 'thick' | 'thicker'): ViewStyle {
   const inset = -(strokeWidth[offset] + strokeWidth[width]);
   return {
-    borderColor: color.strokeBrandLoud,
+    borderColor: color.strokeBrandLoud.rest,
     borderStyle: 'solid',
     borderWidth: strokeWidth[width],
     bottom: inset,
@@ -54,11 +54,11 @@ function createSizeStyleDefinition(tokens: FlexTokens, size: AvatarSize): StyleD
 
   return {
     alignItems: 'center',
-    backgroundColor: color.backgroundNeutralSoft,
+    backgroundColor: color.backgroundNeutralSoft.rest,
     borderRadius: borderRadius.circular,
     height: size,
     image: {
-      backgroundColor: color.backgroundNeutralTransparent,
+      backgroundColor: color.backgroundNeutralTransparent.rest,
       padding: 0,
     },
     minHeight: size,

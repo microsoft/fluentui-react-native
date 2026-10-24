@@ -10,12 +10,12 @@ import type { FocusVisualsState } from './useFocusVisuals';
 const getStyles = themedStyleSheetFactory('FocusRing', ({ tokens }) =>
   StyleSheet.create({
     outer: {
-      borderColor: tokens.color.strokeFocusOuter,
+      borderColor: tokens.color.strokeFocusOuter.rest,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thick,
     },
     inner: {
-      borderColor: tokens.color.strokeFocusInner,
+      borderColor: tokens.color.strokeFocusInner.rest,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thin,
     },

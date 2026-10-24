@@ -107,21 +107,21 @@ describe('Accordion', () => {
     const header = getHeader(component);
 
     expect(getHeaderStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralTransparent,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
     });
-    expect(getTitleStyle(component).color).toBe(colors.foregroundNeutralPrimary);
+    expect(getTitleStyle(component).color).toBe(colors.foregroundNeutralPrimary.rest);
 
     await fireEvent(header, 'hoverIn', {});
     expect(getHeaderStyle(component)).toMatchObject({
-      backgroundColor: colors.hover.backgroundNeutralSubtle,
+      backgroundColor: colors.backgroundNeutralSubtle.hover,
     });
-    expect(getTitleStyle(component).color).toBe(colors.hover.foregroundNeutralPrimary);
+    expect(getTitleStyle(component).color).toBe(colors.foregroundNeutralPrimary.hover);
 
     await fireEvent(header, 'pressIn', {});
     expect(getHeaderStyle(component)).toMatchObject({
-      backgroundColor: colors.pressed.backgroundNeutralSubtle,
+      backgroundColor: colors.backgroundNeutralSubtle.pressed,
     });
-    expect(getTitleStyle(component).color).toBe(colors.pressed.foregroundNeutralPrimary);
+    expect(getTitleStyle(component).color).toBe(colors.foregroundNeutralPrimary.pressed);
   });
 
   it('places the chevron at the leading or trailing edge according to layout', async () => {
