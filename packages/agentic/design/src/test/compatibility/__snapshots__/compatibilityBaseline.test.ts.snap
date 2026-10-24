@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flex default baseline keeps the dark legacy projection of the default Flex tokens 1`] = `
+{
+  "colorCount": 274,
+  "colors": "d455d2657fac4c32",
+  "components": "72a2537e550ec269",
+  "host": "e8e4ef993a27738e",
+  "shadows": "6cb9f79865a74b20",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "758be399ff81061a",
+}
+`;
+
+exports[`Flex default baseline keeps the darkElevated legacy projection of the default Flex tokens 1`] = `
+{
+  "colorCount": 274,
+  "colors": "d455d2657fac4c32",
+  "components": "72a2537e550ec269",
+  "host": "f94ca80c0bbf7966",
+  "shadows": "6cb9f79865a74b20",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "758be399ff81061a",
+}
+`;
+
+exports[`Flex default baseline keeps the highContrast legacy projection of the default Flex tokens 1`] = `
+{
+  "colorCount": 274,
+  "colors": "c43a121decc8c5b8",
+  "components": "72a2537e550ec269",
+  "host": "9db06d0a5ce1e422",
+  "shadows": "6cb9f79865a74b20",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "758be399ff81061a",
+}
+`;
+
+exports[`Flex default baseline keeps the light legacy projection of the default Flex tokens 1`] = `
+{
+  "colorCount": 274,
+  "colors": "86f973400507e95e",
+  "components": "72a2537e550ec269",
+  "host": "6be4fd450402dc4f",
+  "shadows": "6cb9f79865a74b20",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "758be399ff81061a",
+}
+`;
+
+exports[`Flex default baseline keeps the values consumers read from the default Flex tokens 1`] = `
+{
+  "borderRadius": "13bd91dc683ef515",
+  "color": "929614bda52b14dd",
+  "colorCount": 119,
+  "fontFamily": "7a4e96787cf538ad",
+  "fontSize": "684a251b98d9a7a5",
+  "fontWeight": "51d94cec151d0fba",
+  "lineHeight": "e10b09e52a79eb29",
+  "shadow": "844e4f7e40ea22d0",
+  "spacing": "d8a73be81c0519cd",
+  "strokeWidth": "d7b6d097ecd34db0",
+}
+`;
+
+exports[`legacy compatibility baseline keeps Flex values converted from the dark default legacy theme 1`] = `
+{
+  "borderRadius": "13bd91dc683ef515",
+  "color": "8b3240b5c9086b86",
+  "colorCount": 119,
+  "fontFamily": "1563f269b690db9d",
+  "fontSize": "52fa58b4bacaf329",
+  "fontWeight": "8fe4b9b24b1f62c7",
+  "lineHeight": "e10b09e52a79eb29",
+  "shadow": "f6ac563fefc348cd",
+  "spacing": "d8a73be81c0519cd",
+  "strokeWidth": "d7b6d097ecd34db0",
+}
+`;
+
+exports[`legacy compatibility baseline keeps Flex values converted from the darkElevated default legacy theme 1`] = `
+{
+  "borderRadius": "13bd91dc683ef515",
+  "color": "8b3240b5c9086b86",
+  "colorCount": 119,
+  "fontFamily": "1563f269b690db9d",
+  "fontSize": "52fa58b4bacaf329",
+  "fontWeight": "8fe4b9b24b1f62c7",
+  "lineHeight": "e10b09e52a79eb29",
+  "shadow": "f6ac563fefc348cd",
+  "spacing": "d8a73be81c0519cd",
+  "strokeWidth": "d7b6d097ecd34db0",
+}
+`;
+
+exports[`legacy compatibility baseline keeps Flex values converted from the highContrast default legacy theme 1`] = `
+{
+  "borderRadius": "13bd91dc683ef515",
+  "color": "428227abcd661352",
+  "colorCount": 119,
+  "fontFamily": "1563f269b690db9d",
+  "fontSize": "52fa58b4bacaf329",
+  "fontWeight": "8fe4b9b24b1f62c7",
+  "lineHeight": "e10b09e52a79eb29",
+  "shadow": "f6ac563fefc348cd",
+  "spacing": "d8a73be81c0519cd",
+  "strokeWidth": "d7b6d097ecd34db0",
+}
+`;
+
+exports[`legacy compatibility baseline keeps Flex values converted from the light default legacy theme 1`] = `
+{
+  "borderRadius": "13bd91dc683ef515",
+  "color": "847181f1c8ec73a4",
+  "colorCount": 119,
+  "fontFamily": "1563f269b690db9d",
+  "fontSize": "52fa58b4bacaf329",
+  "fontWeight": "8fe4b9b24b1f62c7",
+  "lineHeight": "e10b09e52a79eb29",
+  "shadow": "844e4f7e40ea22d0",
+  "spacing": "d8a73be81c0519cd",
+  "strokeWidth": "d7b6d097ecd34db0",
+}
+`;
+
+exports[`legacy compatibility baseline keeps Flex values converted from the mock theme 1`] = `
+{
+  "borderRadius": "13bd91dc683ef515",
+  "color": "182c4b50bcf5e1b8",
+  "colorCount": 119,
+  "fontFamily": "dc70eb85181162c3",
+  "fontSize": "5f02d7a42f1f300e",
+  "fontWeight": "8fe4b9b24b1f62c7",
+  "lineHeight": "e10b09e52a79eb29",
+  "shadow": "4d7c42320ddafbfb",
+  "spacing": "d8a73be81c0519cd",
+  "strokeWidth": "d7b6d097ecd34db0",
+}
+`;
+
+exports[`legacy compatibility baseline keeps the dark default legacy theme 1`] = `
+{
+  "colorCount": 275,
+  "colors": "6e9e7b821c45c476",
+  "components": "44136fa355b3678a",
+  "host": "e8e4ef993a27738e",
+  "shadows": "3388fc7114c96ee3",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "1c07bfca1b48a07f",
+}
+`;
+
+exports[`legacy compatibility baseline keeps the darkElevated default legacy theme 1`] = `
+{
+  "colorCount": 275,
+  "colors": "6e9e7b821c45c476",
+  "components": "44136fa355b3678a",
+  "host": "f94ca80c0bbf7966",
+  "shadows": "3388fc7114c96ee3",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "1c07bfca1b48a07f",
+}
+`;
+
+exports[`legacy compatibility baseline keeps the highContrast default legacy theme 1`] = `
+{
+  "colorCount": 275,
+  "colors": "730a40d80e103538",
+  "components": "44136fa355b3678a",
+  "host": "9db06d0a5ce1e422",
+  "shadows": "3388fc7114c96ee3",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "1c07bfca1b48a07f",
+}
+`;
+
+exports[`legacy compatibility baseline keeps the light default legacy theme 1`] = `
+{
+  "colorCount": 275,
+  "colors": "8b685906103f0ebf",
+  "components": "44136fa355b3678a",
+  "host": "6be4fd450402dc4f",
+  "shadows": "6cb9f79865a74b20",
+  "spacing": "ae5c5f37376210ff",
+  "typography": "1c07bfca1b48a07f",
+}
+`;
