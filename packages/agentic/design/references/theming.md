@@ -139,4 +139,5 @@ compatibility projection. `entry-points.md` lists every subpath.
 4. `host.appearance` metadata derived from the resolved appearance.
 
 The reverse projection is intentionally lossy; `tokens.md` describes how the mapping chooses one canonical Flex value per
+legacy path. A layered shadow keeps only its first and last layers as `ambient` and `key`, and motion tokens have no
 legacy path. The `apps/bundle-size` `design-*` scenarios guard this module boundary.
