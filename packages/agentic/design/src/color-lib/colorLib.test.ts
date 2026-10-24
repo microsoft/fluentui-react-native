@@ -4,9 +4,9 @@ import {
   x3BebopWarmInteractionConformance,
   x3InteractionConformance,
   x3WarmVariantDeviations,
-} from '../testing/color-validation/x3InteractionConformance';
-import { defaultFlexTokens } from '../tokens/defaultTokens';
-import type { SemanticColorTokenValues } from '../tokens/flex.types';
+} from '../test/fixtures/x3InteractionConformance';
+import { defaultFlexTokens } from '../flex/defaults/defaultTokens';
+import type { SemanticColorTokenValues } from '../flex/tokens.types';
 import {
   compositeColor,
   compositeRgba,

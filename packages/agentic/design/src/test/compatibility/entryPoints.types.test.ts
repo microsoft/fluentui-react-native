@@ -8,9 +8,9 @@ import type {
   ThemeAppearanceOptions as RootThemeAppearanceOptions,
   ThemeState,
 } from '../../index';
-import { getDefaultLegacyTheme as getDefaultLegacyThemeOnly } from '../../theming/compat/defaultLegacyTheme';
-import { getDefaultLegacyTheme, themeFromFlexTokens } from '../../theming/compat/index';
-import type { ThemeFromFlexTokensOptions } from '../../theming/compat/index';
+import { getDefaultLegacyTheme as getDefaultLegacyThemeOnly } from '../../fluent/compat/defaultLegacyTheme';
+import { getDefaultLegacyTheme, themeFromFlexTokens } from '../../fluent/compat/index';
+import type { ThemeFromFlexTokensOptions } from '../../fluent/compat/index';
 import {
   getCurrentAppearance,
   isHighContrast,
@@ -67,10 +67,10 @@ import type {
   Variants,
   VariantValue,
 } from '../../theming/index';
-import { ThemeReference as LegacySourceThemeReference } from '../../theming/legacySource';
-import type { OnThemeChange as LegacySourceOnThemeChange, ThemeRecipe as LegacySourceThemeRecipe } from '../../theming/legacySource';
-import { themedStyleSheet } from '../../styling/stylesheet/index';
-import type { NamedStyles } from '../../styling/stylesheet/index';
+import { ThemeReference as LegacySourceThemeReference } from '../../fluent/legacySource';
+import type { OnThemeChange as LegacySourceOnThemeChange, ThemeRecipe as LegacySourceThemeRecipe } from '../../fluent/legacySource';
+import { themedStyleSheet } from '../../fluent/styling/stylesheet/index';
+import type { NamedStyles } from '../../fluent/styling/stylesheet/index';
 import {
   backgroundColorTokens,
   borderStyles,
@@ -86,7 +86,7 @@ import {
   styleFunction,
   textTokens,
   tokenBuilder,
-} from '../../styling/tokens/index';
+} from '../../fluent/styling/tokens/index';
 import type {
   FontDecorationTokens,
   FontStyleTokens,
@@ -104,8 +104,8 @@ import type {
   StyleFactoryFunctionRaw,
   StyleFactoryOperation,
   TokenBuilder,
-} from '../../styling/tokens/index';
-import { getAliasTokens, getShadowTokens, globalTokens, hcAliasTokens } from '../../tokens/legacy/index';
+} from '../../fluent/styling/tokens/index';
+import { getAliasTokens, getShadowTokens, globalTokens, hcAliasTokens } from '../../fluent/tokens/index';
 
 /**
  * Every type name the compatibility packages re-export must remain importable

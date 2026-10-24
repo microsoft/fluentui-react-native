@@ -1,0 +1,58 @@
+import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+
+import { defaultThemeAppearanceState } from '../theming/appearance';
+import { useThemeBoundary } from '../theming/context';
+import { defaultThemeState, getThemeState } from '../theming/themeRuntime';
+import type { ThemeAppearanceState } from '../types/appearance.types';
+import type { ThemeState } from '../types/themeState.types';
+
+export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>;
+
+/**
+ * Theme state should be consistent on object identity until a theme change or system appearance change occurs. Each new
+ * theme state must own a new themeStyles registry so cached style sheets cannot leak across themes.
+ */
+/**
+ * Access the current theme state. Every consumer of the same source revision
+ * and resolved appearance shares one state identity.
+ *
+ * @returns The current theme state, including flex tokens, high contrast mode status, and shared theme style sheets.
+ */
+export function useThemeState(): ThemeState {
+  const boundary = useThemeBoundary();
+  return boundary ? getThemeState(boundary.source, boundary.appearance.resolved) : defaultThemeState;
+}
+
+/**
+ * Access both the requested appearance and its concrete resolution.
+ */
+export function useThemeAppearance(): Readonly<ThemeAppearanceState> {
+  const boundary = useThemeBoundary();
+  return boundary?.appearance ?? defaultThemeAppearanceState;
+}
+
+/**
+ * Creates a themed style sheet factory for a component. This provides a function which will return a style sheet from
+ * the theme state and ensure it is only created once per instance of the ThemeState object.
+ *
+ * @param symbolName A unique name for the component, used to create a symbol key.
+ * @param factory A function that creates the theme style sheet for the component.
+ * @returns A function that retrieves the cached theme style sheet for the component, creating it if necessary.
+ */
+export function themedStyleSheetFactory<TStyles extends ThemeStyleSheet>(
+  symbolName: string,
+  factory: (themeState: ThemeState) => TStyles,
+): (themeState: ThemeState) => TStyles {
+  // key should be unique per component, stored with the closure so that the same key is used for every instance of the component
+  const key = Symbol(symbolName);
+  return (themeState: ThemeState) => {
+    const cachedStyles = themeState.themeStyles[key] as TStyles | undefined;
+    if (cachedStyles) {
+      return cachedStyles;
+    }
+
+    const styles = factory(themeState);
+    themeState.themeStyles[key] = styles;
+    return styles;
+  };
+}

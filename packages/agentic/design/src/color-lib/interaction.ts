@@ -16,7 +16,7 @@ import type {
   RgbColor,
   RgbaColor,
 } from './types';
-import type { InteractiveColorOverrides, SemanticColors, SemanticColorTokenValues } from '../tokens/flex.types';
+import type { InteractiveColorOverrides, SemanticColors, SemanticColorTokenValues } from '../flex/tokens.types';
 
 /**
  * Interactive subset of the Flex semantic color tokens.

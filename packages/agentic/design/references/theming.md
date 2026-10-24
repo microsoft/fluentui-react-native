@@ -3,7 +3,10 @@ id: design.theming
 kind: instruction-reference
 owner_paths:
   - packages/agentic/design/src/theming
-  - packages/agentic/design/src/useThemeState.ts
+  - packages/agentic/design/src/types
+  - packages/agentic/design/src/flex/flexThemeReference.ts
+  - packages/agentic/design/src/flex/useThemeState.ts
+  - packages/agentic/design/src/fluent
 ---
 
 # Theming

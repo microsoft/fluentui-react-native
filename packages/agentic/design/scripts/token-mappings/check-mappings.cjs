@@ -9,10 +9,10 @@ const { parse: parseYaml } = nodeRequire(path.join(yamlPackageRoot, 'dist/index.
 
 const packageRoot = path.resolve(__dirname, '../..');
 const defaultPaths = {
-  defaultTokens: path.join(packageRoot, 'src/tokens/defaultTokens.ts'),
+  defaultTokens: path.join(packageRoot, 'src/flex/defaults/defaultTokens.ts'),
   flexFromTheme: path.join(packageRoot, 'src/tokens/mappings/flex-from-theme.json'),
   flexTokenMap: path.join(packageRoot, 'src/tokens/mappings/flex-token-map.yaml'),
-  flexTypes: path.join(packageRoot, 'src/tokens/flex.types.ts'),
+  flexTypes: path.join(packageRoot, 'src/flex/tokens.types.ts'),
   themeFromFlex: path.join(packageRoot, 'src/tokens/mappings/theme-from-flex.json'),
 };
 

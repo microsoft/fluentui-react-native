@@ -9,7 +9,7 @@ export type {
   ThemeColorScheme,
   ThemeContrast,
   ThemeInterfaceLevel,
-} from './appearance.types';
+} from '../types/appearance.types';
 export {
   appearanceOptionFromResolved,
   appearanceOptionsFromLegacy,
@@ -18,14 +18,14 @@ export {
   themeAppearanceKey,
 } from './appearance';
 export { createThemeAppearanceSource } from './appearanceSource';
-export { FlexThemeReference } from './flexThemeReference';
+export { FlexThemeReference } from '../flex/flexThemeReference';
 export type {
   FlexThemeInput,
   FlexThemeRecipe,
   FlexThemeReferenceOptions,
   LegacyThemeFallback,
   PartialFlexTokens,
-} from './flexThemeReference';
+} from '../flex/flexThemeReference';
 export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 export { ThemedRoot } from './ThemedRoot';

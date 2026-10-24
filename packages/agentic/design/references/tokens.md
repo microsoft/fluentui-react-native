@@ -3,6 +3,10 @@ id: design.tokens
 kind: instruction-reference
 owner_paths:
   - packages/agentic/design/src/tokens
+  - packages/agentic/design/src/flex/tokens.types.ts
+  - packages/agentic/design/src/flex/defaults
+  - packages/agentic/design/src/flex/adapters
+  - packages/agentic/design/src/fluent/tokens
   - packages/agentic/design/scripts
 ---
 
@@ -15,11 +19,11 @@ owner_paths:
   component, use the Win32, macOS, or Windows implementation as the compatibility reference; use iOS only when the work
   explicitly targets iOS.
 
-| Tokens                         | Entry point                                       | Source                                                                      |
-| ------------------------------ | ------------------------------------------------- | --------------------------------------------------------------------------- |
-| Flex semantic tokens           | `FlexTokens` from `@fluentui-react-native/design` | `src/tokens/flex.types.ts`; defaults in `src/tokens/defaultTokens.ts`       |
-| Platform global tokens         | `@fluentui-react-native/design/tokens/global`     | Generated into `src/tokens/global.generated.ts` and `src/tokens/generated/` |
-| Legacy alias and shadow tokens | `@fluentui-react-native/design/tokens/legacy`     | `src/tokens/legacy/`, for legacy themes only                                |
+| Tokens                         | Entry point                                       | Source                                                                       |
+| ------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Flex semantic tokens           | `FlexTokens` from `@fluentui-react-native/design` | `src/flex/tokens.types.ts`; defaults in `src/flex/defaults/defaultTokens.ts` |
+| Platform global tokens         | `@fluentui-react-native/design/tokens/global`     | Generated into `src/tokens/global.generated.ts` and `src/tokens/generated/`  |
+| Legacy alias and shadow tokens | `@fluentui-react-native/design/tokens/legacy`     | `src/fluent/tokens/`, for legacy themes only                                 |
 
 `FlexTokens` groups `color` (with `hover` and `pressed` overrides), `shadow`, `fontWeight`, `fontFamily`, `fontSize`,
 `lineHeight`, `borderRadius`, `spacing`, and `strokeWidth`. Components read the active values from
@@ -47,7 +51,7 @@ required by a target path.
 `nonFluentFlexTokens` supplies values for supported Flex destinations without a
 Theme source. A complete legacy Theme also requires values that Flex cannot
 represent; those values are supplied by the lazy compatibility base under
-`src/theming/compat`.
+`src/fluent/compat`.
 
 ### Internal consistency
 

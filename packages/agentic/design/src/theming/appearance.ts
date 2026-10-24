@@ -1,11 +1,11 @@
-import type { AppearanceOptions, Theme } from './types/Theme.types';
+import type { AppearanceOptions, Theme } from '../fluent/types/Theme.types';
 import type {
   ResolvedThemeAppearance,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,
   ThemeAppearanceSourceSnapshot,
   ThemeAppearanceState,
-} from './appearance.types';
+} from '../types/appearance.types';
 
 export const defaultThemeAppearanceRequest: Readonly<ThemeAppearanceRequest> = Object.freeze({
   colorScheme: 'system',

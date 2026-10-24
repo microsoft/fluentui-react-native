@@ -1,7 +1,7 @@
 import type { ColorValue } from 'react-native';
 
-import type { ThemeColorScheme } from '../theming/appearance.types';
-import type { InteractiveColorOverrides, SemanticColors, SemanticColorTokenValues } from '../tokens/flex.types';
+import type { ThemeColorScheme } from '../types/appearance.types';
+import type { InteractiveColorOverrides, SemanticColors, SemanticColorTokenValues } from '../flex/tokens.types';
 
 export type ColorDiagnosticReason = 'non-literal-color' | 'unsupported-color-format';
 
