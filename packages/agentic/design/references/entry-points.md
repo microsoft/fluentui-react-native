@@ -19,16 +19,18 @@ public symbols by name from each entry point; do not add barrel re-exports.
 | `./theming/compat/defaults` | `getDefaultLegacyTheme` alone, for platform theme packages                                    |
 | `./tokens/global`           | Generated platform global token constants                                                     |
 | `./tokens/legacy`           | Legacy alias, shadow, and global token data                                                   |
-| `./color-lib`               | The opt-in runtime color engine; see `color-lib.md`                                           |
+| `./color-lib`               | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`    |
 | `./styling`                 | State and color style factories; see `styling.md`                                             |
 | `./styling/stylesheet`      | The legacy `themedStyleSheet` helper                                                          |
 | `./styling/tokens`          | Legacy token-to-style builders                                                                |
 | `./testing`                 | Test-only fixtures and validation; see `testing.md`                                           |
 
-The `apps/bundle-size` `design-*` scenarios guard these boundaries: the modern root and legacy-source scenarios forbid
-the compatibility, legacy-token, and (for the root) color-library modules, while the color-library and legacy-projection
-scenarios require their expected modules. Every scenario also requires a module it is expected to load, so a moved file
-cannot make a forbidden pattern pass vacuously.
+The `apps/bundle-size` `design-*` scenarios guard these boundaries. Input patterns check the import graph and output
+patterns check the modules a tree-shaken bundle retains. The modern root and legacy-source scenarios forbid the
+compatibility and legacy-token modules; the modern root scenarios forbid `color-lib/compositing` and require the
+retained Flex interaction policy; the legacy-source and legacy theme scenarios forbid any retained color-library or Flex
+interaction module; and the color-library and legacy-projection scenarios require their expected modules. Every scenario
+also requires a module it is expected to load, so a moved file cannot make a forbidden pattern pass vacuously.
 
 The package specifiers above are the supported import surface. Source and build paths such as `src/fluent/...` or
 `lib/...` are private implementation details that may move without a breaking change.

@@ -15,19 +15,21 @@
       "name": "design-theme-state",
       "module": "@fluentui-react-native/design",
       "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
-      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/test/", "/color-lib/"],
+      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/test/", "/color-lib/compositing."],
       "requiredInputPatterns": [
         "/design/src/flex/flexThemeReference.",
         "/design/src/flex/useThemeState.",
         "/design/src/theming/ThemeProvider."
-      ]
+      ],
+      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
     },
     {
       "name": "design-themed-root",
       "module": "@fluentui-react-native/design",
       "exports": ["ThemedRoot", "useRootSettings", "useThemeState"],
-      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/test/", "/color-lib/"],
-      "requiredInputPatterns": ["/design/src/flex/useThemeState.", "/design/src/theming/ThemedRoot."]
+      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/test/", "/color-lib/compositing."],
+      "requiredInputPatterns": ["/design/src/flex/useThemeState.", "/design/src/theming/ThemedRoot."],
+      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
     },
     {
       "name": "design-color-lib",
@@ -48,7 +50,17 @@
         }
       ],
       "forbiddenInputPatterns": ["/design/src/fluent/compat/", "/design/src/fluent/tokens/", "/design/src/test/"],
-      "requiredInputPatterns": ["/design/src/fluent/themeReference."]
+      "requiredInputPatterns": ["/design/src/fluent/themeReference."],
+      "forbiddenOutputPatterns": ["/color-lib/", "/design/src/flex/colors/", "/design/src/flex/flexThemeReference."]
+    },
+    {
+      "name": "design-legacy-theme",
+      "module": "@fluentui-react-native/design/theming",
+      "exports": ["ThemeProvider", "ThemeReference", "useTheme"],
+      "forbiddenInputPatterns": ["/design/src/test/"],
+      "requiredInputPatterns": ["/design/src/theming/ThemeProvider."],
+      "forbiddenOutputPatterns": ["/color-lib/", "/design/src/flex/"],
+      "requiredOutputPatterns": ["/design/src/fluent/themeReference.", "/design/src/fluent/useTheme."]
     },
     {
       "name": "design-legacy-theme-from-flex",

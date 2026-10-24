@@ -36,7 +36,7 @@ Existing `ThemeReference` themes and `useTheme` consumers keep working under the
 | [Theming](references/theming.md)               | Theme references, providers, appearance, hooks, and legacy projection |
 | [Tokens](references/tokens.md)                 | Token sources and Flex token mapping maintenance                      |
 | [Styling](references/styling.md)               | Themed style caches and state or color style factories                |
-| [Color library](references/color-lib.md)       | The opt-in `color-lib` runtime color engine                           |
+| [Color library](references/color-lib.md)       | Raw `color-lib` algorithms and the Flex interaction-color policy      |
 | [Testing helpers](references/testing.md)       | Test-only fixtures and contrast validation                            |
 | [Entry points](references/entry-points.md)     | Every subpath and the legacy compatibility packages                   |
 | [Contributing](references/contributing.md)     | Source ownership, generated files, tests, and validation              |

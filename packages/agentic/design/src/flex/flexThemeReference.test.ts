@@ -1,5 +1,10 @@
+import { PlatformColor } from 'react-native';
+import type { ColorValue } from 'react-native';
+
 import { defaultResolvedThemeAppearance } from '../theming/appearance';
+import { defaultFlexTokens } from './defaults/defaultTokens';
 import { FlexThemeReference } from './flexThemeReference';
+import type { PartialFlexTokens } from './flexThemeReference';
 
 const darkAppearance = {
   colorScheme: 'dark',
@@ -80,5 +85,90 @@ describe('FlexThemeReference', () => {
 
     expect(child.revision).toBe(1);
     expect(child.resolveFlexTokens(defaultResolvedThemeAppearance)).not.toBe(initial);
+  });
+});
+
+describe('FlexThemeReference color tone', () => {
+  const lightAppearance = { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' } as const;
+
+  it('passes a concrete tone to bases and recipes and keys warm separately', () => {
+    const tones: string[] = [];
+    const reference = new FlexThemeReference(
+      {
+        base: (appearance) => {
+          tones.push(`base:${appearance.colorTone}`);
+          return {};
+        },
+      },
+      (_tokens, appearance) => {
+        tones.push(`recipe:${appearance.colorTone}`);
+        return {};
+      },
+    );
+    const omitted = reference.resolveFlexTokens(lightAppearance);
+
+    expect(reference.resolveFlexTokens({ ...lightAppearance, colorTone: 'cool' })).toBe(omitted);
+    expect(reference.resolveFlexTokens({ ...lightAppearance, colorTone: 'warm' })).not.toBe(omitted);
+    expect(tones).toEqual(['base:cool', 'recipe:cool', 'base:warm', 'recipe:warm']);
+  });
+
+  it('keeps the complete default interaction values for every tone', () => {
+    const reference = new FlexThemeReference();
+
+    for (const colorTone of ['cool', 'warm'] as const) {
+      for (const colorScheme of ['light', 'dark'] as const) {
+        const tokens = reference.resolveFlexTokens({ ...lightAppearance, colorScheme, colorTone });
+        expect(tokens.color).toBe(defaultFlexTokens.color);
+      }
+    }
+  });
+});
+
+describe('FlexThemeReference interaction derivation', () => {
+  const omitInteraction = (rest: ColorValue) =>
+    ({
+      color: {
+        backgroundNeutralTranslucent: rest,
+        hover: { backgroundNeutralTranslucent: undefined },
+        pressed: { backgroundNeutralTranslucent: undefined },
+      },
+    }) as PartialFlexTokens;
+
+  it('derives omitted states from rest with the appearance tone', () => {
+    const reference = new FlexThemeReference({}, omitInteraction('#e9e9e980'));
+    const cool = reference.resolveFlexTokens(defaultResolvedThemeAppearance).color;
+    const warm = reference.resolveFlexTokens({ ...defaultResolvedThemeAppearance, colorTone: 'warm' }).color;
+
+    expect(cool.hover.backgroundNeutralTranslucent).toBe('#dfdfdf8a');
+    expect(cool.pressed.backgroundNeutralTranslucent).toBe('#d5d5d594');
+    expect(warm.hover.backgroundNeutralTranslucent).toBe('#dcdcd68a');
+    expect(warm.pressed.backgroundNeutralTranslucent).toBe('#d2cfc894');
+  });
+
+  it('keeps authored interaction values', () => {
+    const reference = new FlexThemeReference({}, omitInteraction('#e9e9e980'), {
+      color: { hover: { backgroundNeutralTranslucent: '#123456' } },
+    });
+    const colors = reference.resolveFlexTokens(defaultResolvedThemeAppearance).color;
+
+    expect(colors.hover.backgroundNeutralTranslucent).toBe('#123456');
+    expect(colors.pressed.backgroundNeutralTranslucent).toBe('#d5d5d594');
+  });
+
+  it('falls back to the same rest value when it cannot be derived', () => {
+    const rest = PlatformColor('windowBackgroundColor');
+    const reference = new FlexThemeReference({}, omitInteraction(rest));
+    const colors = reference.resolveFlexTokens({ ...defaultResolvedThemeAppearance, colorTone: 'warm' }).color;
+
+    expect(colors.hover.backgroundNeutralTranslucent).toBe(rest);
+    expect(colors.pressed.backgroundNeutralTranslucent).toBe(rest);
+  });
+
+  it('uses rest in high contrast', () => {
+    const reference = new FlexThemeReference({}, omitInteraction('#e9e9e980'));
+    const colors = reference.resolveFlexTokens({ ...defaultResolvedThemeAppearance, contrast: 'highContrast' }).color;
+
+    expect(colors.hover.backgroundNeutralTranslucent).toBe('#e9e9e980');
+    expect(colors.pressed.backgroundNeutralTranslucent).toBe('#e9e9e980');
   });
 });

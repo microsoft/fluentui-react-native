@@ -1,4 +1,4 @@
-import type { InteractiveColorToken } from '../../color-lib';
+import type { InteractiveColorToken } from '../../flex/colors/interactiveTokens';
 
 export type InteractionConformanceVector = readonly [
   lightRest: string,
@@ -140,11 +140,10 @@ export const x3BebopWarmInteractionConformance = {
 
 /**
  * The generated x3 table routes these entries through its separately scoped
- * Bebop Warm path. `defaultValue` is the result of the default algorithm
- * requested by #4268; `warmValue` is retained to make every table deviation
- * explicit.
+ * Bebop Warm path. `defaultValue` is the result of the cool tone requested by
+ * #4268; `warmValue` is retained to make every table deviation explicit.
  */
-export const x3WarmVariantDeviations = {
+export const x3WarmToneDeviations = {
   'backgroundNeutralTranslucent.hover.light': {
     warmValue: '#d8d8d88a',
     defaultValue: '#dfdfdf8a',

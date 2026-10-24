@@ -25,7 +25,8 @@ owner_paths:
 | Platform global tokens         | `@fluentui-react-native/design/tokens/global`     | Generated into `src/tokens/global.generated.ts` and `src/tokens/generated/`  |
 | Legacy alias and shadow tokens | `@fluentui-react-native/design/tokens/legacy`     | `src/fluent/tokens/`, for legacy themes only                                 |
 
-`FlexTokens` groups `color` (with `hover` and `pressed` overrides), `shadow`, `fontWeight`, `fontFamily`, `fontSize`,
+`FlexTokens` groups `color` (with `hover` and `pressed` maps whose omitted interactive entries are derived from rest),
+`shadow`, `fontWeight`, `fontFamily`, `fontSize`,
 `lineHeight`, `borderRadius`, `spacing`, and `strokeWidth`. Components read the active values from
 `useThemeState().tokens`; `theming.md` explains how they are resolved. The defaults currently do not vary by
 appearance; see `remaining-work.md`.
@@ -44,8 +45,8 @@ canonical Flex value back to each representable legacy Theme path.
 The reverse projection is intentionally lossy. When several Flex roles share one
 legacy Theme path, `reverse.canonical` names the selected source, lists every
 omitted candidate, and records why that choice is stable. Interactive reverse
-entries fall back to their rest value when the authored hover or pressed map
-does not override that token. `reverse.transforms` owns any value conversion
+entries fall back to their rest value when the resolved hover or pressed map
+has no entry for that token. `reverse.transforms` owns any value conversion
 required by a target path.
 
 `nonFluentFlexTokens` supplies values for supported Flex destinations without a

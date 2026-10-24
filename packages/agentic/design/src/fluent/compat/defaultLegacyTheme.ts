@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 
 import { fontWeightRegular, fontWeightSemibold } from '../../tokens/global.generated';
 import globalTokens from '../tokens/tokens-global';
-import { appearanceOptionFromResolved, themeAppearanceKey } from '../../theming/appearance';
+import { appearanceOptionFromResolved, legacyThemeAppearanceKey } from '../../theming/appearance';
 import type { ResolvedThemeAppearance } from '../../types/appearance.types';
 import type { Theme, Spacing } from '../types/Theme.types';
 import type { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '../types/Typography.types';
@@ -104,10 +104,11 @@ function getDefaultSpacing(): Spacing {
 /**
  * Returns a complete legacy Theme without constructing any other appearance.
  * The result is stable for one resolved appearance and safe to use as an
- * immutable base for Flex-to-legacy projection.
+ * immutable base for Flex-to-legacy projection. Legacy themes do not vary by
+ * tone, so every tone shares one Theme identity.
  */
 export function getDefaultLegacyTheme(appearance: ResolvedThemeAppearance): Theme {
-  const key = themeAppearanceKey(appearance);
+  const key = legacyThemeAppearanceKey(appearance);
   const cached = defaultThemes.get(key);
   if (cached) {
     return cached;

@@ -3,6 +3,7 @@
 exports[`public entry points . keeps its runtime export names 1`] = `
 [
   "FlexThemeReference: function",
+  "INTERACTIVE_COLOR_TOKENS: object",
   "RootContext: object",
   "RootInputBoundary: object",
   "ThemeProvider: function",
@@ -11,6 +12,7 @@ exports[`public entry points . keeps its runtime export names 1`] = `
   "flexTokensFromTheme: function",
   "fontSize: function",
   "fontWeight: function",
+  "isInverseInteractionToken: function",
   "normalizeThemeAppearanceRequest: function",
   "resolveThemeAppearance: function",
   "themedStyleSheetFactory: function",
@@ -29,7 +31,6 @@ exports[`public entry points ./color-lib keeps its runtime export names 1`] = `
   "getHoverColor: function",
   "getInteractionColor: function",
   "getPressColor: function",
-  "isInverseInteractionToken: function",
   "oklchToRgb: function",
   "parseColorValue: function",
   "resolveContrastColors: function",

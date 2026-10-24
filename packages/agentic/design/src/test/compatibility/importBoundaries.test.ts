@@ -166,9 +166,26 @@ describe('runtime graph ownership', () => {
     expect(rootGraph).toContain('flex/useThemeState.ts');
     expect(rootGraph).toContain('flex/flexThemeReference.ts');
     expect(rootGraph).toContain('flex/adapters/flexTokensFromTheme.ts');
+    expect(rootGraph).toContain('flex/colors/interactionPolicy.ts');
+    expect(rootGraph).toContain('color-lib/interaction.ts');
     expect(rootGraph).toContain('theming/ThemeProvider.tsx');
     expect(reachedUnder(rootGraph, 'fluent/')).toEqual([]);
     expect(reachedUnder(rootGraph, 'test/')).toEqual([]);
+  });
+
+  it('keeps legacy theme runtime free of the Flex engine and color library', () => {
+    for (const entry of ['fluent/useTheme.ts', 'fluent/themeReference.ts', 'theming/ThemeProvider.tsx']) {
+      const graph = runtimeGraph(entry);
+      expect([entry, reachedUnder(graph, 'flex/')]).toEqual([entry, []]);
+      expect([entry, reachedUnder(graph, 'color-lib/')]).toEqual([entry, []]);
+    }
+    expect(runtimeGraph('theming/ThemedRoot.tsx')).toContain('flex/colors/interactionPolicy.ts');
+  });
+
+  it('keeps the color library free of token, theme, and test ownership', () => {
+    const colorLibGraph = runtimeGraph('color-lib/index.ts');
+    expect(colorLibGraph).toContain('color-lib/interaction.ts');
+    expect([...colorLibGraph].filter((file) => !file.startsWith('color-lib/')).sort()).toEqual([]);
   });
 
   it('keeps the shared styling entry free of legacy Fluent runtime', () => {

@@ -133,7 +133,7 @@ describe('useFocusVisuals', () => {
       get tokens() {
         return getTokens();
       },
-      appearance: { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' },
+      appearance: { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base', colorTone: 'cool' },
       highContrast: false,
       themeStyles: {},
     };

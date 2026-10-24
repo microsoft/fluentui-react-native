@@ -16,6 +16,8 @@ export type {
   SemanticTokens,
   UnsupportedFlexTokens,
 } from './flex/tokens.types';
+export { INTERACTIVE_COLOR_TOKENS, isInverseInteractionToken } from './flex/colors/interactiveTokens';
+export type { InteractiveColorToken } from './flex/colors/interactiveTokens';
 export { flexTokensFromTheme } from './flex/adapters/flexTokensFromTheme';
 export {
   createThemeAppearanceSource,
@@ -30,6 +32,7 @@ export {
   useRootInputModality,
 } from './theming/modern';
 export type {
+  ColorTone,
   FlexThemeInput,
   FlexThemeRecipe,
   FlexThemeReferenceOptions,
@@ -37,6 +40,7 @@ export type {
   InputModality,
   LegacyThemeFallback,
   LegacyThemeSource,
+  NormalizedThemeAppearance,
   PartialFlexTokens,
   ResolvedThemeAppearance,
   RootSettings,

@@ -1,7 +1,6 @@
 import type { ColorValue } from 'react-native';
 
-import type { ThemeColorScheme } from '../types/appearance.types';
-import type { InteractiveColorOverrides, SemanticColors, SemanticColorTokenValues } from '../flex/tokens.types';
+import type { ColorTone, ThemeColorScheme } from '../types/appearance.types';
 
 export type ColorDiagnosticReason = 'non-literal-color' | 'unsupported-color-format';
 
@@ -47,15 +46,31 @@ export interface ResolvedContrastColors {
 }
 
 export type InteractionColorState = 'hover' | 'pressed';
-export type InteractionColorVariant = 'default' | 'bebopWarm';
-export type InteractiveColorToken = keyof InteractiveColorOverrides;
+
+/**
+ * Lightness direction. Inverted colors shift opposite the standard direction
+ * for the scheme and keep their alpha.
+ */
+export type InteractionDirection = 'standard' | 'inverted';
+
+/**
+ * How the warm transform treats a translucent color. `backdrop` composites it
+ * over the scheme's reference backdrop, shifts the apparent color, and solves
+ * a source color at the target alpha. `direct` shifts the channels in place.
+ * The cool transform always shifts directly.
+ */
+export type InteractionCompositing = 'direct' | 'backdrop';
 
 export interface InteractionColorOptions {
-  readonly variant?: InteractionColorVariant;
+  /** Interaction algorithm tone. Defaults to cool. */
+  readonly colorTone?: ColorTone;
+  /** Defaults to standard. */
+  readonly direction?: InteractionDirection;
+  /** Defaults to direct. */
+  readonly compositing?: InteractionCompositing;
 }
 
 export interface InteractionColorDiagnostic extends ColorDiagnostic {
-  readonly token: InteractiveColorToken;
   readonly state: InteractionColorState;
 }
 
@@ -69,20 +84,5 @@ export type InteractionColorResult =
       readonly value: ColorValue;
       readonly diagnostic: InteractionColorDiagnostic;
     };
-
-export interface InteractionColorOverridesResult {
-  readonly overrides: InteractiveColorOverrides;
-  readonly diagnostics: readonly InteractionColorDiagnostic[];
-}
-
-export type InteractionColorInput = SemanticColorTokenValues & {
-  readonly hover?: InteractiveColorOverrides;
-  readonly pressed?: InteractiveColorOverrides;
-};
-
-export interface InteractionColorsResult {
-  readonly colors: SemanticColors;
-  readonly diagnostics: readonly InteractionColorDiagnostic[];
-}
 
 export type ColorMode = ThemeColorScheme;
