@@ -6,7 +6,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "primary",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#0000006d",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -18,9 +18,9 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f0f0f0",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#0000001a",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -36,7 +36,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "secondary",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#0000006d",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -48,9 +48,9 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f0f0f0",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#00000008",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -66,7 +66,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "outline",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#0000006d",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -78,9 +78,9 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#e0e0e0",
-      "borderRadius": 4,
+      "backgroundColor": "#24242400",
+      "borderColor": "#00000014",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -96,7 +96,7 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#bdbdbd",
+        "color": "#0000006d",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -108,9 +108,9 @@ exports[`Button matches the disabled visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#24242400",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -143,9 +143,9 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#185abd",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#242424",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -161,7 +161,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "appearance": "secondary",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -173,9 +173,9 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#fafafa",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#0000000d",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -191,7 +191,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "appearance": "outline",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -203,9 +203,9 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#d1d1d1",
-      "borderRadius": 4,
+      "backgroundColor": "#24242400",
+      "borderColor": "#6f6f6f",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -221,7 +221,7 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -233,9 +233,9 @@ exports[`Button matches the focused visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#24242400",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -268,9 +268,9 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#1651aa",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#363636",
+      "borderColor": "#1313130a",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -286,7 +286,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "appearance": "secondary",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000e5",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -298,9 +298,9 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f0f0f0",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#00000017",
+      "borderColor": "#1313130a",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -316,7 +316,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "appearance": "outline",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000e5",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -328,9 +328,9 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#c7c7c7",
-      "borderRadius": 4,
+      "backgroundColor": "#1313130a",
+      "borderColor": "#787878",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -346,7 +346,7 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000e5",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -358,9 +358,9 @@ exports[`Button matches the hovered visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f0f0f0",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#00000017",
+      "borderColor": "#1313130a",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -393,9 +393,9 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0e336a",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#494949",
+      "borderColor": "#05050514",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -411,7 +411,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "appearance": "secondary",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000ef",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -423,9 +423,9 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#dbdbdb",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#00000021",
+      "borderColor": "#05050514",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -441,7 +441,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "appearance": "outline",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000ef",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -453,9 +453,9 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#b3b3b3",
-      "borderRadius": 4,
+      "backgroundColor": "#05050514",
+      "borderColor": "#818181",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -471,7 +471,7 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000ef",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -483,9 +483,9 @@ exports[`Button matches the pressed visual state snapshot across appearances 1`]
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#dbdbdb",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#00000021",
+      "borderColor": "#05050514",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -518,9 +518,9 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#185abd",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#242424",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -536,7 +536,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "appearance": "secondary",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -548,9 +548,9 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#fafafa",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#0000000d",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -566,7 +566,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "appearance": "outline",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -578,9 +578,9 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#d1d1d1",
-      "borderRadius": 4,
+      "backgroundColor": "#24242400",
+      "borderColor": "#6f6f6f",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -596,7 +596,7 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -608,9 +608,9 @@ exports[`Button matches the rest visual state snapshot across appearances 1`] = 
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#00000000",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#24242400",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -653,9 +653,9 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#185abd",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#242424",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -693,9 +693,9 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#616161",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#242424",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -733,9 +733,9 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#616161",
-      "borderColor": "#616161",
-      "borderRadius": 4,
+      "backgroundColor": "#242424",
+      "borderColor": "#242424",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",
@@ -751,7 +751,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "appearance": "subtle",
     "contentStyles": [
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -761,7 +761,7 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
         "textAlign": "center",
       },
       {
-        "color": "#242424",
+        "color": "#000000db",
         "flexShrink": 1,
         "fontFamily": "Helvetica Neue",
         "fontSize": 14,
@@ -773,9 +773,9 @@ exports[`Button matches the selected visual state snapshot across appearances 1`
     "rootStyle": {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0000001a",
-      "borderColor": "#00000000",
-      "borderRadius": 4,
+      "backgroundColor": "#00000014",
+      "borderColor": "#24242400",
+      "borderRadius": 12,
       "borderStyle": "solid",
       "borderWidth": 1,
       "flexDirection": "row",

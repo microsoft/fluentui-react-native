@@ -37,10 +37,13 @@ behavior is documented in `theming.md`, `tokens.md`, and `entry-points.md`.
 
 - **Issue:** [#4263](https://github.com/microsoft/fluentui-react-native/issues/4263)
 - **Outcome:** default Flex tokens vary by resolved color scheme, contrast, and interface level.
-- **Current state:** `FlexThemeReference` resolves every appearance from the same `defaultFlexTokens`. Authors must
-  supply appearance-aware bases or recipes for dark or high-contrast values.
-- **Done when:** generated defaults exist for each supported appearance and `FlexThemeReference` selects them by the
-  resolved appearance without changing its laziness or identity guarantees.
+- **Current state:** the generated x3 defaults vary by color scheme and color tone. The pinned x3 sources define no
+  high-contrast or elevated values, so those appearances use the light or dark defaults, and high contrast only
+  suppresses derived interaction states. Authors must supply appearance-aware bases or recipes for high-contrast or
+  elevated values.
+- **Done when:** x3 publishes, or the owner approves, high-contrast and elevated values, the defaults generator emits
+  them, and `FlexThemeReference` selects them by the resolved appearance without changing its laziness or identity
+  guarantees.
 - **Review draft:** repository-only `packages/agentic/design/refactoring.md` coordinates package reorganization,
   tone-aware interactive colors, verified x3 defaults, and the legacy compatibility gates. It is an explicitly
   requested review artifact, not a second open-work index; remove the draft and this pointer when its durable contract

@@ -12,7 +12,7 @@ owner_paths:
 `@fluentui-react-native/design/testing` is the test-only entry point for
 fixtures and validation helpers associated with the design package. It exports:
 
-- the generated `defaultFlexTokens` fixture and default resolved appearance;
+- the x3 cool `defaultFlexTokens` and the default resolved appearance;
 - `mockTheme` for tests that need a legacy-compatible theme;
 - WCAG thresholds and canonical semantic color pairings;
 - structured contrast audits and filters for failed or unresolvable pairs.
@@ -38,6 +38,11 @@ The package's internal validation suite audits rest, hover, and pressed values
 for both the cool and warm color tones. Its pinned conformance fixtures and the
 bulk `getInteractionColorOverrides` helper under `src/test/fixtures` are
 implementation evidence rather than public testing exports.
+`x3InteractionConformance` and `x3WarmInteractionConformance` record each
+tone's x3 rest, hover, and pressed values, and `x3CoolExplicitStates` records
+the cool states the interaction policy does not reproduce, with the reason each
+default authors them. The x3 default parity tests under `src/flex/defaults` are
+described in `tokens.md`.
 
 `validateContrastPairs` accepts a flat map of color values or resolved
 `InteractiveColor` envelopes, which it audits at rest. To audit an interaction

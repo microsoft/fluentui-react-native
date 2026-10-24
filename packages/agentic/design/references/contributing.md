@@ -13,7 +13,9 @@ owner_paths:
 | ---------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `src/types/`           | Type-only contracts shared by the Flex and Fluent models, such as appearance and theme state                |
 | `src/theming/`         | Shared theme sources, providers, boundaries, appearance, runtime caches, and the `theming` facades          |
-| `src/flex/`            | Flex token types, defaults, the Theme-to-Flex adapter, `FlexThemeReference`, `useThemeState`, and styles    |
+| `src/flex/`            | Flex token types, `FlexThemeReference`, `useThemeState`, layered shadows, and styles                        |
+| `src/flex/defaults/`   | The generated x3 cool and warm defaults and their parity tests; see `tokens.md`                             |
+| `src/flex/adapters/`   | The engine-free Theme-to-Flex adapter and its Fluent-native fallbacks                                       |
 | `src/flex/colors/`     | Authored color normalization, the resolved color envelope, token classification, and the interaction policy |
 | `src/fluent/`          | Legacy Fluent theme types, `ThemeReference`, `useTheme`, platform utilities, and legacy styling             |
 | `src/fluent/compat/`   | The Flex-to-legacy projection and complete legacy defaults; never reachable from the root                   |
@@ -31,17 +33,18 @@ Shared modules may import types from either model. At runtime, only the `theming
 Production code never imports `src/test/`. Source paths are private: consumers use the package subpaths in
 `entry-points.md`, never `src/` or `lib/` paths.
 
-The package's scripts directory holds `codegen.cts`, which runs before every build, and the token-mapping check and
-upstream drift tools described in `tokens.md`. Generated token and projection files are committed; change their inputs
-and rebuild rather than editing them.
+The package's scripts directory holds `codegen.cts`, which runs before every build, the token-mapping check and
+upstream drift tools, and the x3 defaults generator, all described in `tokens.md`. Generated token, projection, and
+default files are committed; change their inputs and regenerate rather than editing them.
 
 ## Invariants
 
 - Keep the root import graph modern: it must not reach `useTheme` or anything under `src/fluent/`. It reaches
   `color-lib/interaction` (with its parsing and conversion dependencies) only through `src/flex/colors/`, never
   `color-lib/compositing`. The legacy `ThemeReference`, `useTheme`, and `ThemeProvider` graphs must not reach
-  `src/flex/` or `src/color-lib/`. `src/test/compatibility/importBoundaries.test.ts` checks the entry graphs; run the
-  bundle-size scenarios too when changing imports between these areas.
+  `src/flex/` or `src/color-lib/`, and the Theme-to-Flex adapter in `src/flex/adapters/` must not reach the interaction
+  policy, the x3 defaults, or `src/color-lib/`. `src/test/compatibility/importBoundaries.test.ts` checks these graphs;
+  run the bundle-size scenarios too when changing imports between these areas.
 - Never mutate author-owned theme inputs; caches are external and keyed by source, revision, and resolved appearance.
 - Keep color resolution lazy: resolving tokens, reading rest, merging, and copying the color map must not run the
   interaction algorithm, and a derived state computes at most once per resolved color. `flex-colors.md` owns the color

@@ -54,7 +54,7 @@ describe('Button', () => {
     expect(component.getByText('Save')).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: '#fafafa',
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle.rest,
       minHeight: 24,
       minWidth: 24,
     });
@@ -72,7 +72,7 @@ describe('Button', () => {
     expect(getRootStyle(component).backgroundColor).not.toBe(restBackground);
 
     await fireEvent(root, 'pressIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe('#dbdbdb');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtle.pressed);
 
     await fireEvent.press(root);
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -86,7 +86,7 @@ describe('Button', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true });
-    expect(getRootStyle(component).backgroundColor).toBe('#f0f0f0');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtleDisabled.rest);
     await fireEvent.press(root);
     expect(onPress).not.toHaveBeenCalled();
   });
@@ -214,13 +214,13 @@ describe('Button', () => {
   });
 
   it.each([
-    ['primary', '#185abd'],
-    ['secondary', '#fafafa'],
-    ['outline', '#00000000'],
-    ['subtle', '#00000000'],
-  ] as const)('resolves the %s appearance', async (appearance, backgroundColor) => {
+    ['primary', 'backgroundBrandHeavy'],
+    ['secondary', 'backgroundNeutralSubtle'],
+    ['outline', 'backgroundNeutralTransparent'],
+    ['subtle', 'backgroundNeutralTransparent'],
+  ] as const)('resolves the %s appearance', async (appearance, backgroundToken) => {
     const component = await renderButton({ appearance, content: appearance });
-    expect(getRootStyle(component).backgroundColor).toBe(backgroundColor);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color[backgroundToken].rest);
   });
 
   it.each([
@@ -337,9 +337,9 @@ describe('Button', () => {
   );
 
   it.each([
-    ['small', 12, 8, 4],
-    ['medium', 14, 10, 4],
-    ['large', 16, 12, 6],
+    ['small', 12, 8, defaultFlexTokens.borderRadius.base200],
+    ['medium', 14, 10, defaultFlexTokens.borderRadius.base300],
+    ['large', 16, 12, defaultFlexTokens.borderRadius.base400],
   ] as const)('resolves the %s size', async (size, fontSize, paddingHorizontal, borderRadius) => {
     const component = await renderButton({ content: size, size });
     expect(StyleSheet.flatten(component.getByText(size).props.style)).toMatchObject({

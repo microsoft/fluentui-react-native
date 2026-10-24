@@ -104,6 +104,7 @@
   "scripts": {
     "build": "tsc -b",
     "check:mappings": "node ./scripts/token-mappings/check-mappings.cjs",
+    "gen:flex-defaults": "node ./scripts/flex-defaults/generate-defaults.mjs",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "gen:upstream-drift": "node ./scripts/token-mappings/upstream-drift.cjs",

@@ -73,14 +73,16 @@ For each color and resolved appearance:
    setting, or registration is required. When JavaScript cannot map rest, such as a `PlatformColor`, the state is the
    identical rest value; unexpected algorithm failures still throw.
 
-The default description and the Theme-to-Flex adapter never derive states: their omitted states equal rest, so
-existing default and legacy-projected values are unchanged.
+The default descriptions are rest-first: they author a hover or pressed state only where the policy cannot reproduce the
+x3 source (see `tokens.md`), so their other states are derived like any authored color. The Theme-to-Flex adapter never
+derives states: its omitted states equal rest, so legacy-projected values are unchanged.
 
 ## Merging and recipes
 
 `FlexThemeReference` merges the package defaults, its `base`, and its recipes in order. A color override replaces the
-previous color atomically, including its explicit states and type, so a stale state never survives a new rest. An
-`undefined` color is not an override. Other token groups keep deep-merge semantics.
+previous color atomically, including its explicit states and type, so a stale state never survives a new rest. Shadow
+overrides also replace the whole layered shadow. An `undefined` color or shadow is not an override. Other token groups
+keep deep-merge semantics.
 
 Because replacement is atomic, a plain override uses the `standard` type even where the default color is inverted.
 Use `flexColor(value, 'inverted')` when overriding a heavy, loud, or on-loud role that should keep inverted interaction

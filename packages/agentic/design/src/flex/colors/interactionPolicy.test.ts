@@ -1,17 +1,13 @@
 import { PlatformColor } from 'react-native';
 
 import { getInteractionColorOverrides, restColorValues } from '../../test/fixtures/interactionColors';
-import {
-  x3BebopWarmInteractionConformance,
-  x3InteractionConformance,
-  x3WarmToneDeviations,
-} from '../../test/fixtures/x3InteractionConformance';
+import { x3WarmInteractionConformance, x3InteractionConformance, x3CoolExplicitStates } from '../../test/fixtures/x3InteractionConformance';
 import type { InteractionConformanceVector } from '../../test/fixtures/x3InteractionConformance';
 import type { ColorMode } from '../../color-lib/types';
 import type { ColorTone, NormalizedThemeAppearance } from '../../types/appearance.types';
 import { defaultFlexTokenDescription, defaultFlexTokens } from '../defaults/defaultTokens';
 import type { SemanticColorTokenValues } from '../tokens.types';
-import { normalizeFlexColor } from './flexColor';
+import { normalizeFlexColor, selectColorEntry } from './flexColor';
 import { deriveInteractionColor, resolveFlexColor, resolveFlexTokenDescription } from './interactionPolicy';
 import {
   getInteractionCompositing,
@@ -72,7 +68,7 @@ describe('interactive token classification', () => {
     expect(INTERACTIVE_COLOR_TOKENS.filter(isInverseInteractionToken)).toEqual(expected);
     expect(INTERACTIVE_COLOR_TOKENS.filter((token) => getInteractionDirection(token) === 'inverted')).toEqual(expected);
     expect(INTERACTIVE_COLOR_TOKENS).toHaveLength(59);
-    expect(Object.keys(x3WarmToneDeviations)).toHaveLength(10);
+    expect(Object.keys(x3CoolExplicitStates)).toHaveLength(10);
   });
 
   it('composites only background and stroke tokens against the warm backdrop', () => {
@@ -83,31 +79,48 @@ describe('interactive token classification', () => {
   });
 });
 
+describe('default explicit interaction states', () => {
+  it('authors exactly the cool table states the policy cannot reproduce', () => {
+    const authored = Object.entries(defaultFlexTokenDescription.color).flatMap(([token, color]) =>
+      (['hover', 'pressed'] as const).filter((state) => color[state] !== undefined).map((state) => `${token}.${state}`),
+    );
+    const fixtureStates = new Set(Object.keys(x3CoolExplicitStates).map((key) => key.slice(0, key.lastIndexOf('.'))));
+
+    expect(authored.sort()).toEqual([...fixtureStates].sort());
+    for (const [key, { sourceValue }] of Object.entries(x3CoolExplicitStates)) {
+      const [token, state, mode] = key.split('.') as [keyof SemanticColorTokenValues, 'hover' | 'pressed', ColorMode];
+      const entry = defaultFlexTokenDescription.color[token][state];
+
+      expect([key, entry === undefined ? undefined : selectColorEntry(entry, appearance(mode))]).toEqual([key, sourceValue]);
+    }
+  });
+});
+
 describe.each(['light', 'dark'] as const)('%s Flex interaction policy', (mode) => {
   it.each(INTERACTIVE_COLOR_TOKENS)('matches the cool and warm conformance values for %s', (token) => {
     const vector = x3InteractionConformance[token];
-    const warmVector = x3BebopWarmInteractionConformance[token];
+    const warmVector = x3WarmInteractionConformance[token];
     for (const state of ['hover', 'pressed'] as const) {
-      const deviationKey = `${token}.${state}.${mode}` as keyof typeof x3WarmToneDeviations;
-      const deviation = x3WarmToneDeviations[deviationKey];
+      const explicitKey = `${token}.${state}.${mode}` as keyof typeof x3CoolExplicitStates;
+      const explicitState = x3CoolExplicitStates[explicitKey];
       const upstreamValue = vector[modeIndexes[mode][state]];
 
       const direction = getInteractionDirection(token);
 
       expect(deriveInteractionColor(vector[modeIndexes[mode].rest], token, state, direction, appearance(mode))).toBe(
-        deviation?.defaultValue ?? upstreamValue,
+        explicitState?.derivedValue ?? upstreamValue,
       );
       expect(deriveInteractionColor(warmVector[modeIndexes[mode].rest], token, state, direction, appearance(mode, 'warm'))).toBe(
         warmVector[modeIndexes[mode][state]],
       );
-      if (deviation) {
-        expect(upstreamValue).toBe(deviation.warmValue);
+      if (explicitState) {
+        expect(upstreamValue).toBe(explicitState.sourceValue);
       }
     }
   });
 
   it.each(['cool', 'warm'] as const)('derives a complete %s override map', (colorTone) => {
-    const conformance = colorTone === 'warm' ? x3BebopWarmInteractionConformance : x3InteractionConformance;
+    const conformance = colorTone === 'warm' ? x3WarmInteractionConformance : x3InteractionConformance;
     const result = getInteractionColorOverrides(restColors(mode, conformance), mode, 'hover', colorTone);
 
     expect(result.diagnostics).toEqual([]);

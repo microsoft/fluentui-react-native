@@ -3,8 +3,8 @@ import type { ColorValue } from 'react-native';
 
 import { defaultResolvedThemeAppearance } from '../theming/appearance';
 import { flexColor, selectColorEntry } from './colors/flexColor';
-import { deriveInteractionColor } from './colors/interactionPolicy';
-import { defaultFlexTokenDescription, defaultFlexTokens } from './defaults/defaultTokens';
+import { deriveInteractionColor, resolveFlexTokenDescription } from './colors/interactionPolicy';
+import { defaultFlexTokenDescription, defaultFlexTokens, getDefaultFlexTokenDescription } from './defaults/defaultTokens';
 import { FlexThemeReference } from './flexThemeReference';
 import type { FlexTokenDescription, PartialFlexTokens } from './tokens.types';
 
@@ -114,15 +114,30 @@ describe('FlexThemeReference color tone', () => {
     expect(tones).toEqual(['base:cool', 'recipe:cool', 'base:warm', 'recipe:warm']);
   });
 
-  it('keeps the complete default interaction values for every tone', () => {
+  it('resolves the default description for each tone and scheme', () => {
     const reference = new FlexThemeReference();
 
     for (const colorTone of ['cool', 'warm'] as const) {
       for (const colorScheme of ['light', 'dark'] as const) {
-        const tokens = reference.resolveFlexTokens({ ...lightAppearance, colorScheme, colorTone });
-        expect(tokens.color).toEqual(defaultFlexTokens.color);
+        const appearance = { ...lightAppearance, colorScheme, colorTone };
+        const expected = resolveFlexTokenDescription(getDefaultFlexTokenDescription(colorTone), appearance);
+        expect(reference.resolveFlexTokens(appearance).color).toEqual(expected.color);
       }
     }
+    expect(reference.resolveFlexTokens(lightAppearance).color).toEqual(defaultFlexTokens.color);
+    expect(reference.resolveFlexTokens({ ...lightAppearance, colorTone: 'warm' }).color.surfaceNeutralFarther.rest).toBe('#f0eae5');
+    expect(reference.resolveFlexTokens(darkAppearance).color.surfaceNeutralFarther.rest).toBe('#1b1b1b');
+  });
+
+  it('shares the warm default description when nothing is authored', () => {
+    const descriptions: FlexTokenDescription[] = [];
+    const reference = new FlexThemeReference({}, (description) => {
+      descriptions.push(description);
+      return {};
+    });
+    reference.resolveFlexTokens({ ...lightAppearance, colorTone: 'warm' });
+
+    expect(descriptions[0]).toBe(getDefaultFlexTokenDescription('warm'));
   });
 });
 

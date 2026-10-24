@@ -3,10 +3,10 @@
 exports[`Flex default baseline keeps the dark legacy projection of the default Flex tokens 1`] = `
 {
   "colorCount": 274,
-  "colors": "d455d2657fac4c32",
-  "components": "72a2537e550ec269",
+  "colors": "bc2282479a31f977",
+  "components": "75484377ab62c281",
   "host": "e8e4ef993a27738e",
-  "shadows": "6cb9f79865a74b20",
+  "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
   "typography": "758be399ff81061a",
 }
@@ -15,10 +15,10 @@ exports[`Flex default baseline keeps the dark legacy projection of the default F
 exports[`Flex default baseline keeps the darkElevated legacy projection of the default Flex tokens 1`] = `
 {
   "colorCount": 274,
-  "colors": "d455d2657fac4c32",
-  "components": "72a2537e550ec269",
+  "colors": "bc2282479a31f977",
+  "components": "75484377ab62c281",
   "host": "f94ca80c0bbf7966",
-  "shadows": "6cb9f79865a74b20",
+  "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
   "typography": "758be399ff81061a",
 }
@@ -27,10 +27,10 @@ exports[`Flex default baseline keeps the darkElevated legacy projection of the d
 exports[`Flex default baseline keeps the highContrast legacy projection of the default Flex tokens 1`] = `
 {
   "colorCount": 274,
-  "colors": "c43a121decc8c5b8",
-  "components": "72a2537e550ec269",
+  "colors": "a560e8f2d3b4fa4a",
+  "components": "75484377ab62c281",
   "host": "9db06d0a5ce1e422",
-  "shadows": "6cb9f79865a74b20",
+  "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
   "typography": "758be399ff81061a",
 }
@@ -39,10 +39,10 @@ exports[`Flex default baseline keeps the highContrast legacy projection of the d
 exports[`Flex default baseline keeps the light legacy projection of the default Flex tokens 1`] = `
 {
   "colorCount": 274,
-  "colors": "86f973400507e95e",
-  "components": "72a2537e550ec269",
+  "colors": "9466ef021b8d326d",
+  "components": "75484377ab62c281",
   "host": "6be4fd450402dc4f",
-  "shadows": "6cb9f79865a74b20",
+  "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
   "typography": "758be399ff81061a",
 }
@@ -50,15 +50,16 @@ exports[`Flex default baseline keeps the light legacy projection of the default 
 
 exports[`Flex default baseline keeps the values consumers read from the default Flex tokens 1`] = `
 {
-  "borderRadius": "13bd91dc683ef515",
-  "color": "929614bda52b14dd",
+  "borderRadius": "cfa8c2371a72707b",
+  "color": "404280ad7ea5242b",
   "colorCount": 119,
   "fontFamily": "7a4e96787cf538ad",
-  "fontSize": "684a251b98d9a7a5",
+  "fontSize": "4a646185b2b8a198",
   "fontWeight": "51d94cec151d0fba",
-  "lineHeight": "e10b09e52a79eb29",
-  "shadow": "844e4f7e40ea22d0",
-  "spacing": "d8a73be81c0519cd",
+  "lineHeight": "ef6cefe619d4be48",
+  "motion": "4d1fcc8da5a5ae8e",
+  "shadow": "67f2d9a2496a3ba8",
+  "spacing": "3bb2ea09d57c34c3",
   "strokeWidth": "d7b6d097ecd34db0",
 }
 `;
@@ -72,8 +73,9 @@ exports[`legacy compatibility baseline keeps Flex values converted from the dark
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
-  "shadow": "f6ac563fefc348cd",
-  "spacing": "d8a73be81c0519cd",
+  "motion": "4d1fcc8da5a5ae8e",
+  "shadow": "3abb099ca48f96cf",
+  "spacing": "b696c8094b46fe18",
   "strokeWidth": "d7b6d097ecd34db0",
 }
 `;
@@ -87,8 +89,9 @@ exports[`legacy compatibility baseline keeps Flex values converted from the dark
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
-  "shadow": "f6ac563fefc348cd",
-  "spacing": "d8a73be81c0519cd",
+  "motion": "4d1fcc8da5a5ae8e",
+  "shadow": "3abb099ca48f96cf",
+  "spacing": "b696c8094b46fe18",
   "strokeWidth": "d7b6d097ecd34db0",
 }
 `;
@@ -102,8 +105,9 @@ exports[`legacy compatibility baseline keeps Flex values converted from the high
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
-  "shadow": "f6ac563fefc348cd",
-  "spacing": "d8a73be81c0519cd",
+  "motion": "4d1fcc8da5a5ae8e",
+  "shadow": "3abb099ca48f96cf",
+  "spacing": "b696c8094b46fe18",
   "strokeWidth": "d7b6d097ecd34db0",
 }
 `;
@@ -117,8 +121,9 @@ exports[`legacy compatibility baseline keeps Flex values converted from the ligh
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
-  "shadow": "844e4f7e40ea22d0",
-  "spacing": "d8a73be81c0519cd",
+  "motion": "4d1fcc8da5a5ae8e",
+  "shadow": "92288e2a96923296",
+  "spacing": "b696c8094b46fe18",
   "strokeWidth": "d7b6d097ecd34db0",
 }
 `;
@@ -132,8 +137,9 @@ exports[`legacy compatibility baseline keeps Flex values converted from the mock
   "fontSize": "5f02d7a42f1f300e",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
-  "shadow": "4d7c42320ddafbfb",
-  "spacing": "d8a73be81c0519cd",
+  "motion": "4d1fcc8da5a5ae8e",
+  "shadow": "79d43104cbb1984a",
+  "spacing": "b696c8094b46fe18",
   "strokeWidth": "d7b6d097ecd34db0",
 }
 `;

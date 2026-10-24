@@ -8,7 +8,7 @@ import type { ColorMode, InteractionColorOptions, InteractionColorResult, Intera
 /**
  * Default interaction lightness and alpha shifts for each state and mode.
  *
- * Source: x3-design/fluent-design@d334acf5cbad813f2b7cd554da942b09a7ff8f10.
+ * Source: x3-design/fluent-design@206e890b645fb450ad7c5df2ff981765349a2b58.
  */
 export const INTERACTION_COLOR_DELTAS = {
   hover: {

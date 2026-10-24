@@ -23,10 +23,11 @@ both models. Modern consumers read Flex tokens through `useThemeState`; legacy c
 | `ThemeReference`     | `legacy` | One legacy `Theme` per resolved appearance      | `@fluentui-react-native/design/theming` or `@fluentui-react-native/design/theming/legacy-source` |
 
 `FlexThemeReference` accepts `base`, `appearance`, `fallbackAppearance`, `appearanceSource`, and `legacyFallback`
-options followed by recipes. It merges the design package's default Flex token description, then the base input, then
-recipes in declaration order, and resolves the result once per appearance. A base may be a function of the resolved
-appearance, which always has a concrete `colorTone`. A recipe receives the accumulated authored description and the
-resolved appearance. `PartialFlexTokens` is shape-aware so opaque React Native colors stay leaves.
+options followed by recipes. It merges the design package's x3 default Flex token description for the resolved
+`colorTone`, then the base input, then recipes in declaration order, and resolves the result once per appearance. A base
+may be a function of the resolved appearance, which always has a concrete `colorTone`. A recipe receives the accumulated
+authored description and the resolved appearance. `PartialFlexTokens` is shape-aware so opaque React Native colors stay
+leaves. `tokens.md` describes the defaults.
 
 Each color is authored as a value, a `[light, dark]` tuple, or `flexColor` options with explicit states and an
 interaction type, and replaces the previous color atomically. Each resolved color is an `InteractiveColor` with `rest`,
@@ -125,8 +126,9 @@ The package root exports only the modern authoring and consumption APIs. It reac
 which `useThemeState` needs for legacy sources, and the Flex interaction policy with the raw `color-lib` interaction
 algorithm, but not `useTheme`, the reverse converter, the complete legacy defaults, or legacy token payloads. The legacy
 `ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. An app that pairs a legacy
-`ThemeReference` with `useThemeState` reaches the forward adapter and the engine-free color envelope, but not
-`FlexThemeReference`, the interaction policy, or `color-lib`. `entry-points.md` lists every subpath.
+`ThemeReference` with `useThemeState` reaches the forward adapter and, through the default theme state, the x3 defaults
+and the interaction policy with `color-lib/interaction`, but not `FlexThemeReference`, `color-lib/compositing`, or the
+compatibility projection. `entry-points.md` lists every subpath.
 
 `themeFromFlexTokens` in `theming/compat` builds a complete `Theme` in this order:
 

@@ -23,7 +23,9 @@ value.
   styles and `.hover` or `.pressed` only for those states, because an omitted state is computed on first read. The design
   Flex color reference (`@fluentui-react-native/design/references/flex-colors.md`) owns the color contract.
 - Read grouped categories from `tokens.borderRadius`, `tokens.spacing`, `tokens.strokeWidth`, `tokens.fontFamily`,
-  `tokens.fontSize`, `tokens.fontWeight`, `tokens.lineHeight`, and `tokens.shadow`.
+  `tokens.fontSize`, `tokens.fontWeight`, `tokens.lineHeight`, `tokens.shadow`, and `tokens.motion`. Each shadow is an
+  array of layers; the design token reference (`@fluentui-react-native/design/references/tokens.md`) describes shadow
+  and motion values.
 - Prefer Flex tokens for every mapped semantic value.
 - Import named global tokens only when Flex has no equivalent, such as current Button icon dimensions or a true zero.
 - Record a genuine token gap in the component spec. Do not replace it with a nearby token or numeric literal.
