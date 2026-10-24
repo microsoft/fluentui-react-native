@@ -209,8 +209,56 @@ describe('Flex token mapping consistency', () => {
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'reverse-transform',
       path: 'colors.black',
-      expected: ['identity', 'numberToPx'],
+      expected: ['identity', 'numberToPx', 'shadowLayersToToken'],
       actual: 'notARealTransform',
+    });
+  });
+
+  it('requires layered shadows to project through shadowLayersToToken', () => {
+    const changed = cloneInputs(inputs);
+    delete changed.mapping.reverse.transforms['shadows.shadow2'];
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'reverse-transform',
+      path: 'shadows.shadow2',
+      expected: 'shadowLayersToToken',
+      actual: '<missing>',
+    });
+  });
+
+  it('requires a YAML destination for every supported rest and non-color path', () => {
+    const changed = cloneInputs(inputs);
+    delete changed.mapping.tokens['spacing.componentBase800'];
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'mapping-coverage',
+      path: 'spacing.componentBase800',
+      expected: 'a destination in flex-token-map.yaml',
+      actual: '<missing>',
+    });
+  });
+
+  it('requires a generic source for every supported destination', () => {
+    const changed = cloneInputs(inputs);
+    delete (changed.mapping.tokens['motion.durationBase200'] as Record<string, unknown>).generic;
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'generic-source',
+      path: 'motion.durationBase200',
+      expected: 'a generic custom property',
+      actual: '<missing>',
+    });
+  });
+
+  it('rejects generic sources that are not --gnrc-* custom properties', () => {
+    const changed = cloneInputs(inputs);
+    (changed.mapping.tokens['motion.durationBase200'] as Record<string, unknown>).generic = '--fluent-duration';
+
+    expect(validateMappingInputs(changed)).toContainEqual({
+      rule: 'schema',
+      path: 'motion.durationBase200',
+      expected: 'a --gnrc-* custom property name or no generic field',
+      actual: '--fluent-duration',
     });
   });
 

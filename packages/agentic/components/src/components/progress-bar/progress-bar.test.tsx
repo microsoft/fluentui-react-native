@@ -6,6 +6,7 @@ import { render } from '../../common/renderWithTheme';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { ProgressBar } from './progress-bar';
 
 jest.mock('@fluentui-react-native/framework-base', () => ({
@@ -188,7 +189,10 @@ describe('ProgressBar', () => {
       nativeEvent: { layout: { height: 4, width: 200, x: 0, y: 0 } },
     });
 
-    expect(getIndicatorStyle(component)).toMatchObject({ backgroundColor: '#185abd', width: 100 });
+    expect(getIndicatorStyle(component)).toMatchObject({
+      backgroundColor: defaultFlexTokens.color.foregroundBrandPrimary.rest,
+      width: 100,
+    });
     expect(StyleSheet.flatten(getRoot(component).props.style)).toMatchObject({ backgroundColor: 'hotpink' });
     expect(component.getByText('Halfway there')).toBeOnTheScreen();
   });

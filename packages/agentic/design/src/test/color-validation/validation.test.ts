@@ -1,32 +1,26 @@
 import { PlatformColor } from 'react-native';
 
 import type { ColorMode, InteractionColorState } from '../../color-lib/types';
-import { INTERACTIVE_COLOR_TOKENS } from '../../flex/colors/interactiveTokens';
-import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
+import { resolveFlexTokenDescription } from '../../flex/colors/interactionPolicy';
+import { defaultFlexTokens, getDefaultFlexTokenDescription } from '../../flex/defaults/defaultTokens';
 import type { SemanticColorTokenValues } from '../../flex/tokens.types';
 import type { ColorTone } from '../../types/appearance.types';
 import { getContrastFailures, getUnresolvableContrastPairs, MODE_SURFACE, PAIRINGS, validateContrastPairs, WCAG } from '../index';
-import { getInteractionColorOverrides, restColorValues } from '../fixtures/interactionColors';
-import { x3BebopWarmInteractionConformance, x3InteractionConformance } from '../fixtures/x3InteractionConformance';
+import { restColorValues, stateColorValues } from '../fixtures/interactionColors';
 
-function conformanceColors(
+// The shipping defaults for one appearance; x3Defaults.test.ts proves they match the pinned design source.
+function defaultColors(
   mode: ColorMode,
-  conformance: typeof x3InteractionConformance | typeof x3BebopWarmInteractionConformance = x3InteractionConformance,
+  colorTone: ColorTone = 'cool',
+  state: 'rest' | InteractionColorState = 'rest',
 ): SemanticColorTokenValues {
-  const restIndex = mode === 'light' ? 0 : 3;
-  const colors = restColorValues(defaultFlexTokens.color);
-  for (const token of INTERACTIVE_COLOR_TOKENS) {
-    colors[token] = conformance[token][restIndex];
-  }
-  return colors;
-}
-
-function interactionConformanceColors(mode: ColorMode, state: InteractionColorState, colorTone: ColorTone): SemanticColorTokenValues {
-  const colors = conformanceColors(mode, colorTone === 'warm' ? x3BebopWarmInteractionConformance : x3InteractionConformance);
-  return {
-    ...colors,
-    ...getInteractionColorOverrides(colors, mode, state, colorTone).overrides,
-  };
+  const tokens = resolveFlexTokenDescription(getDefaultFlexTokenDescription(colorTone), {
+    colorScheme: mode,
+    contrast: 'standard',
+    interfaceLevel: 'base',
+    colorTone,
+  });
+  return stateColorValues(tokens.color, state);
 }
 
 const expectedPairs = [
@@ -85,17 +79,18 @@ describe('color validation constants', () => {
 });
 
 describe.each(['light', 'dark'] as const)('%s contrast validation', (mode) => {
-  it('passes every canonical rest pairing', () => {
-    const results = validateContrastPairs(conformanceColors(mode), mode);
+  it.each(['cool', 'warm'] as const)('passes every canonical %s rest pairing', (colorTone) => {
+    const results = validateContrastPairs(defaultColors(mode, colorTone), mode);
 
     expect(results.map((result) => `${result.foreground.token}/${result.background.token}`)).toEqual(expectedPairs);
     expect(getContrastFailures(results)).toEqual([]);
     expect(getUnresolvableContrastPairs(results)).toEqual([]);
   });
 
+  // Audit outcomes for the shipping defaults, kept visible rather than corrected away from the design source.
   it.each(['cool', 'warm'] as const)('audits %s interaction values', (colorTone) => {
     for (const state of ['hover', 'pressed'] as const) {
-      const failures = getContrastFailures(validateContrastPairs(interactionConformanceColors(mode, state, colorTone), mode)).map(
+      const failures = getContrastFailures(validateContrastPairs(defaultColors(mode, colorTone, state), mode)).map(
         (result) => `${result.foreground.token}/${result.background.token}`,
       );
       const expectedFailures =
@@ -125,7 +120,7 @@ describe('resolved color validation', () => {
 
 describe('unresolvable color validation', () => {
   it('identifies native foreground colors', () => {
-    const colors = conformanceColors('light');
+    const colors = defaultColors('light');
     colors.foregroundNeutralPrimary = PlatformColor('labelColor');
     const results = getUnresolvableContrastPairs(validateContrastPairs(colors, 'light')).filter(
       (result) => result.foreground.token === 'foregroundNeutralPrimary',
@@ -142,7 +137,7 @@ describe('unresolvable color validation', () => {
   });
 
   it('identifies native background colors', () => {
-    const colors = conformanceColors('dark');
+    const colors = defaultColors('dark');
     colors.backgroundSuccessSoft = PlatformColor('windowBackgroundColor');
     const result = getUnresolvableContrastPairs(validateContrastPairs(colors, 'dark')).find(
       (pair) => pair.background.token === 'backgroundSuccessSoft',

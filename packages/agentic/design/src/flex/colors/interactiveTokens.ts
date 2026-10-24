@@ -6,7 +6,7 @@ import type { SemanticColorName } from '../tokens.types';
  * compute omitted hover and pressed states; every other token's states equal
  * rest unless authored explicitly.
  *
- * Source: x3-design/fluent-design@d334acf5cbad813f2b7cd554da942b09a7ff8f10.
+ * Source: x3-design/fluent-design@206e890b645fb450ad7c5df2ff981765349a2b58.
  */
 export const INTERACTIVE_COLOR_TOKENS = [
   'surfaceNeutralFarther',

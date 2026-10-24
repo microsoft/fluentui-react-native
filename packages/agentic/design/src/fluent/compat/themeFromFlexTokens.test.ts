@@ -4,6 +4,7 @@ import type { FlexTokens, SemanticColorTokenValues } from '../../flex/tokens.typ
 import { restColorValues } from '../../test/fixtures/interactionColors';
 import type { PartialTheme } from '../types/Theme.types';
 
+import { getDefaultLegacyTheme } from './defaultLegacyTheme';
 import { themeFromFlexTokens } from './themeFromFlexTokens';
 import type { FlatFlexTokens } from './themeFromFlexTokens';
 
@@ -134,6 +135,34 @@ describe('themeFromFlexTokens', () => {
     expect(theme.colors.brandBackground).toBe('#0f6cbd');
     expect(theme.colors.brandBackgroundHover).toBe('#115ea3');
     expect(theme.colors.brandBackgroundPressed).toBe('#0f6cbd');
+  });
+
+  it('projects layered shadows lossily to legacy { ambient, key } shadows', () => {
+    const contour = { x: 0, y: 0, blur: 2, color: '#0000001a' };
+    const middle = { x: 0, y: 1, blur: 2, color: '#0000000d' };
+    const keyLayer = { x: 0, y: 4, blur: 8, color: '#00000014' };
+    const tokens: FlexTokens = {
+      ...createTokens(),
+      shadow: { ...defaultFlexTokens.shadow, lowest: [contour, middle, keyLayer], lower: [keyLayer], low: [] },
+    };
+
+    const theme = themeFromFlexTokens(tokens, light);
+
+    expect(theme.shadows.shadow2).toEqual({ ambient: contour, key: keyLayer });
+    expect(theme.shadows.shadow4).toEqual({ ambient: keyLayer, key: keyLayer });
+    expect(theme.shadows.shadow8).toEqual(getDefaultLegacyTheme(light).shadows.shadow8);
+    expect(theme.shadows.shadow16).toEqual({ ambient: defaultFlexTokens.shadow.high[0], key: defaultFlexTokens.shadow.high.at(-1) });
+  });
+
+  it('passes a legacy { ambient, key } shadow through the deprecated flat representation', () => {
+    const legacy = { ambient: { x: 0, y: 0, blur: 2, color: 'black' }, key: { x: 0, y: 2, blur: 4, color: 'red' } };
+    const flat = {
+      ...defaultFlexTokens,
+      color: restColorValues(defaultFlexTokens.color),
+      shadow: { ...defaultFlexTokens.shadow, lowest: legacy },
+    };
+
+    expect(themeFromFlexTokens(flat as unknown as FlatFlexTokens, light).shadows.shadow2).toEqual(legacy);
   });
 
   it('projects the same legacy theme from resolved and equivalent flat tokens', () => {

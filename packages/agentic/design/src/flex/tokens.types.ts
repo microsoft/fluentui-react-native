@@ -1,5 +1,4 @@
 import type { ColorValue, TextStyle, ViewStyle, DimensionValue } from 'react-native';
-import type { ShadowToken } from '../fluent/types/Shadow.types';
 
 type FontWeight = TextStyle['fontWeight'];
 type FontSize = TextStyle['fontSize'];
@@ -255,17 +254,37 @@ export type PartialSemanticColors = { [Name in SemanticColorName]?: FlexColorInp
 /** Normalized authored semantic colors. */
 export type SemanticColorDescriptions = { readonly [Name in SemanticColorName]: FlexColorDescription };
 
+/** One shadow layer. Offsets and blur are density-independent pixels. */
+export type FlexShadowLayer = {
+  readonly x: number;
+  readonly y: number;
+  readonly blur: number;
+  readonly color: ColorValue;
+};
+
 /**
- * The semantic shadow token set
+ * A layered shadow, ordered like CSS `box-shadow`: the first layer is the
+ * contour and the last is the key shadow.
+ */
+export type FlexShadow = readonly FlexShadowLayer[];
+
+/** One authored shadow for every scheme, or a light/dark tuple of shadows. */
+export type FlexShadowEntry = FlexShadow | readonly [light: FlexShadow, dark: FlexShadow];
+
+/**
+ * The semantic shadow token set, resolved for one appearance.
  */
 export type SemanticShadows = {
-  lowest: ShadowToken;
-  lower: ShadowToken;
-  low: ShadowToken;
-  high: ShadowToken;
-  higher: ShadowToken;
-  highest: ShadowToken;
+  lowest: FlexShadow;
+  lower: FlexShadow;
+  low: FlexShadow;
+  high: FlexShadow;
+  higher: FlexShadow;
+  highest: FlexShadow;
 };
+
+/** Authored semantic shadows. Each entry may select a shadow per scheme. */
+export type SemanticShadowEntries = { [Name in keyof SemanticShadows]: FlexShadowEntry };
 
 /**
  * Semantic font weight tokens.
@@ -373,6 +392,7 @@ export type SemanticSpacing = {
   componentBase500: DimensionValue;
   componentBase600: DimensionValue;
   componentBase700: DimensionValue;
+  componentBase800: DimensionValue;
   layoutBase100: DimensionValue;
   layoutBase200: DimensionValue;
   layoutBase300: DimensionValue;
@@ -393,6 +413,28 @@ export type SemanticStrokeWidths = {
   thickest: StrokeWidth;
 };
 
+/** A cubic Bézier easing curve as `[x1, y1, x2, y2]`, the arguments of `Easing.bezier`. */
+export type FlexEasing = readonly [x1: number, y1: number, x2: number, y2: number];
+
+/**
+ * Semantic motion tokens. Durations are milliseconds.
+ */
+export type SemanticMotion = {
+  durationBase50: number;
+  durationBase100: number;
+  durationBase200: number;
+  durationBase300: number;
+  durationBase500: number;
+  durationBase1000: number;
+  easingFunctionalEnter: FlexEasing;
+  easingFunctionalExit: FlexEasing;
+  easingFunctionalTransition: FlexEasing;
+  easingFunctionalLinear: FlexEasing;
+  easingExpressiveEnter: FlexEasing;
+  easingExpressiveExit: FlexEasing;
+  easingExpressiveTransition: FlexEasing;
+};
+
 /**
  * The complete, grouped Flex token set. Category prefixes are represented by
  * sub-objects and removed from the token names inside each category.
@@ -407,29 +449,36 @@ export type FlexTokens = {
   borderRadius: SemanticBorderRadii;
   spacing: SemanticSpacing;
   strokeWidth: SemanticStrokeWidths;
+  motion: SemanticMotion;
 };
 
 export type SemanticTokens = FlexTokens;
 
 type NonColorFlexTokenGroup = Exclude<keyof FlexTokens, 'color'>;
 
+/** Authored non-color groups. Shadows may select a value per scheme. */
+type AuthoredFlexTokenGroups = Omit<FlexTokens, 'color' | 'shadow'> & { shadow: SemanticShadowEntries };
+
 /**
- * Authored Flex token overrides. Each color is an atomic replacement; non-color
- * groups deep merge.
+ * Authored Flex token overrides. Each color and shadow is an atomic
+ * replacement; other non-color groups deep merge.
  */
 export type PartialFlexTokens = { color?: PartialSemanticColors } & {
-  [Group in NonColorFlexTokenGroup]?: Partial<FlexTokens[Group]>;
+  [Group in NonColorFlexTokenGroup]?: Partial<AuthoredFlexTokenGroups[Group]>;
 };
 
 /** A complete authored Flex token set. */
-export type CompleteFlexTokenInput = { color: { [Name in SemanticColorName]: FlexColorInput } } & Pick<FlexTokens, NonColorFlexTokenGroup>;
+export type CompleteFlexTokenInput = { color: { [Name in SemanticColorName]: FlexColorInput } } & Pick<
+  AuthoredFlexTokenGroups,
+  NonColorFlexTokenGroup
+>;
 
 /**
  * A complete, normalized authored token set before appearance resolution.
  * Recipes receive this form.
  */
 export type FlexTokenDescription = { readonly color: SemanticColorDescriptions } & {
-  readonly [Group in NonColorFlexTokenGroup]: FlexTokens[Group];
+  readonly [Group in NonColorFlexTokenGroup]: AuthoredFlexTokenGroups[Group];
 };
 
 /**

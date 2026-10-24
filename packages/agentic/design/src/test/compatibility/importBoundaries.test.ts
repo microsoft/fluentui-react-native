@@ -182,6 +182,14 @@ describe('runtime graph ownership', () => {
     expect(runtimeGraph('theming/ThemedRoot.tsx')).toContain('flex/colors/interactionPolicy.ts');
   });
 
+  it('keeps the forward Theme adapter and its Fluent fallback free of the interaction engine', () => {
+    const adapterGraph = runtimeGraph('flex/adapters/flexTokensFromTheme.ts');
+    expect(adapterGraph).toContain('flex/adapters/fluentFallbackTokens.ts');
+    expect(adapterGraph).not.toContain('flex/colors/interactionPolicy.ts');
+    expect(adapterGraph).not.toContain('flex/defaults/defaultTokens.ts');
+    expect(reachedUnder(adapterGraph, 'color-lib/')).toEqual([]);
+  });
+
   it('keeps the color library free of token, theme, and test ownership', () => {
     const colorLibGraph = runtimeGraph('color-lib/index.ts');
     expect(colorLibGraph).toContain('color-lib/interaction.ts');

@@ -1,6 +1,6 @@
 import { immutableMerge } from '@fluentui-react-native/framework-base';
 
-import { defaultFlexTokenDescription } from './defaults/defaultTokens';
+import { getDefaultFlexTokenDescription } from './defaults/defaultTokens';
 import { mergeFlexTokenDescription } from './flexTokenDescription';
 import type { FlexTokenDescription, FlexTokens, PartialFlexTokens } from './tokens.types';
 import { resolveFlexTokenDescription } from './colors/interactionPolicy';
@@ -150,7 +150,7 @@ export class FlexThemeReference implements FlexThemeSource {
       return this.base.resolveDescription(appearance, key);
     }
     const base = typeof this.base === 'function' ? this.base(appearance) : this.base;
-    return mergeFlexTokenDescription(defaultFlexTokenDescription, base);
+    return mergeFlexTokenDescription(getDefaultFlexTokenDescription(appearance.colorTone), base);
   }
 
   private syncParentRevision(): void {

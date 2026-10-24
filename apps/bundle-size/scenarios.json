@@ -49,14 +49,15 @@
           "exports": ["ThemeReference"]
         }
       ],
-      "forbiddenInputPatterns": ["/design/src/fluent/compat/", "/design/src/fluent/tokens/", "/design/src/test/"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/fluent/tokens/",
+        "/design/src/test/",
+        "/color-lib/compositing."
+      ],
       "requiredInputPatterns": ["/design/src/fluent/themeReference."],
-      "forbiddenOutputPatterns": [
-        "/color-lib/",
-        "/design/src/flex/colors/interactionPolicy.",
-        "/design/src/flex/colors/interactiveTokens.",
-        "/design/src/flex/flexThemeReference."
-      ]
+      "forbiddenOutputPatterns": ["/design/src/flex/flexThemeReference."],
+      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
     },
     {
       "name": "design-legacy-theme",

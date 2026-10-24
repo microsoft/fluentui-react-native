@@ -8,7 +8,7 @@ import type { PartialTheme, Theme } from '../types/Theme.types';
 
 import { getDefaultLegacyTheme } from './defaultLegacyTheme';
 
-type ReverseTransform = 'numberToPx';
+type ReverseTransform = 'numberToPx' | 'shadowLayersToToken';
 
 type ReverseProjectionEntry = {
   source: string;
@@ -73,12 +73,26 @@ function setValueAtPath(destination: Record<string, unknown>, path: string, valu
   target[segments[segments.length - 1]] = value;
 }
 
+function shadowLayersToToken(value: unknown): unknown {
+  if (!Array.isArray(value)) {
+    // Pass through a legacy { ambient, key } shadow.
+    return value;
+  }
+  if (value.length === 0) {
+    return undefined;
+  }
+  return { ambient: value[0], key: value[value.length - 1] };
+}
+
 function applyTransform(value: unknown, transform?: ReverseTransform): unknown {
   if (!transform) {
     return value;
   }
   if (transform === 'numberToPx') {
     return typeof value === 'number' ? `${value}px` : value;
+  }
+  if (transform === 'shadowLayersToToken') {
+    return shadowLayersToToken(value);
   }
   return value;
 }
@@ -91,7 +105,10 @@ function projectThemeValues(tokens: FlexTokens | FlatFlexTokens): PartialTheme {
       value = getValueAtPath(tokens, descriptor.fallback);
     }
     if (value !== undefined) {
-      setValueAtPath(projected, themePath, applyTransform(value, descriptor.transform));
+      value = applyTransform(value, descriptor.transform);
+    }
+    if (value !== undefined) {
+      setValueAtPath(projected, themePath, value);
     }
   }
   return projected as PartialTheme;
@@ -103,7 +120,10 @@ function projectThemeValues(tokens: FlexTokens | FlatFlexTokens): PartialTheme {
  * The compatibility base fills legacy-only values, the optional fallback adds
  * author or host metadata, mapped Flex values remain authoritative, and the
  * final host appearance reflects the resolved structured appearance. Reading
- * a derived interaction state computes it.
+ * a derived interaction state computes it. Layered Flex shadows project
+ * lossily to legacy { ambient, key } shadows: the first layer is ambient, the
+ * last is key, and middle layers are dropped. An empty shadow keeps the
+ * legacy base shadow.
  */
 export function themeFromFlexTokens(
   tokens: FlexTokens | FlatFlexTokens,

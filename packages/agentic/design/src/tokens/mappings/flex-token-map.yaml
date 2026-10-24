@@ -9,10 +9,12 @@ target:
   direction: flex token path <- authoring source token
 sources:
   generic:
-    description: Generic Flex CSS custom properties.
+    description: Generic Flex CSS custom properties. Cool and warm tones share names.
     locations:
       - dev/web/flex-themes/css/semantic.css
       - dev/web/flex-themes/css/interaction-fallback.css
+      - dev/web/flex-themes/css/warm/semantic.css
+      - dev/web/flex-themes/css/warm/interaction-fallback.css
   fluent:
     description: Fluent UI React Native / Fluent 2 tokens used for native defaults.
     package: '@fluentui-react-native/design-tokens-win32/colorful'
@@ -44,6 +46,10 @@ rules:
       differ in value from Fluent (400/500/600/700).
     fontFamily: role match (base / monospace).
   notes:
+    - Every rest and non-color destination declares its generic source. scripts/flex-defaults/generate-defaults.mjs
+      reads those custom properties from the pinned cool and warm snapshots and emits
+      ../../flex/defaults/defaultTokens.generated.ts plus its coverage ledger; check-mappings.cjs enforces the
+      coverage.
     - global.* references are best-fit matches into the Fluent global palette; expression
       families map to the matching shared-color ramp step, gray to the grey ramp, alpha/translucent
       roles to the *Alpha ramps.
@@ -55,18 +61,22 @@ rules:
       semantic.css.
     - letterSpacing* are null — Fluent global has no letter-spacing/tracking token.
     - fontFamily.contentEditorial is null — Fluent global has no serif family token.
+    - motion.* are null — Fluent global has no motion token, and Theme has no motion path.
     - furn-theme is omitted when Theme has no corresponding value path.
     - scripts/token-mappings/check-mappings.cjs enforces that flex-from-theme.json
       exactly matches the furn-theme mappings in this file.
     - ../../flex/adapters/flexTokensFromTheme.ts consumes flex-from-theme.json and merges the projected
-      Theme values over nonFluentFlexTokens. An interaction state the Theme does not map
-      resolves to the Theme's rest value; the forward adapter never runs the interaction
-      algorithm.
-    - The same check enforces that nonFluentFlexTokens in ../../flex/defaults/defaultTokens.ts covers
+      Theme values over the Fluent-native fallbacks in ../../flex/adapters/fluentFallbackTokens.ts.
+      An interaction state the Theme does not map resolves to the Theme's rest value; the forward
+      adapter never runs the interaction algorithm.
+    - The same check enforces that nonFluentFlexTokens in ../../flex/adapters/fluentFallbackTokens.ts covers
       unmapped supported destinations. An unmapped hover or pressed value is
       included only when its rest destination is also unmapped; otherwise the state
-      value remains only in defaultFlexTokenDescription so a Theme-provided rest value
+      value remains only in fluentFallbackFlexTokens so a Theme-provided rest value
       does not inherit a mismatched fallback interaction color.
+    - Theme shadows are legacy { ambient, key } pairs. The forward adapter converts each to
+      [ambient, key] layers. The reverse shadowLayersToToken transform projects the first layer
+      to ambient and the last to key, so middle layers are dropped; this projection is lossy.
     - Button uses borderRadius.base200 / base300 / base400 for small / medium / large.
       The FURN Theme exposes its shared small/medium Button radius, but its large
       size-specific radius remains sourced from Fluent global tokens.
@@ -76,7 +86,13 @@ rules:
 reverse:
   projection: ./theme-from-flex.json
   interactionFallback: rest
-  transforms: {}
+  transforms:
+    shadows.shadow16: shadowLayersToToken
+    shadows.shadow2: shadowLayersToToken
+    shadows.shadow28: shadowLayersToToken
+    shadows.shadow4: shadowLayersToToken
+    shadows.shadow64: shadowLayersToToken
+    shadows.shadow8: shadowLayersToToken
   canonical:
     colors.black:
       source: color.fixedBlack.rest
@@ -1511,6 +1527,45 @@ tokens:
   lineHeight.functionalTitleSmall:
     generic: '--gnrc-line-height-functional-title-small'
     fluent: global.font.lineHeight500
+  motion.durationBase100:
+    generic: '--gnrc-motion-duration-base-100'
+    fluent:
+  motion.durationBase1000:
+    generic: '--gnrc-motion-duration-base-1000'
+    fluent:
+  motion.durationBase200:
+    generic: '--gnrc-motion-duration-base-200'
+    fluent:
+  motion.durationBase300:
+    generic: '--gnrc-motion-duration-base-300'
+    fluent:
+  motion.durationBase50:
+    generic: '--gnrc-motion-duration-base-50'
+    fluent:
+  motion.durationBase500:
+    generic: '--gnrc-motion-duration-base-500'
+    fluent:
+  motion.easingExpressiveEnter:
+    generic: '--gnrc-motion-easing-expressive-enter'
+    fluent:
+  motion.easingExpressiveExit:
+    generic: '--gnrc-motion-easing-expressive-exit'
+    fluent:
+  motion.easingExpressiveTransition:
+    generic: '--gnrc-motion-easing-expressive-transition'
+    fluent:
+  motion.easingFunctionalEnter:
+    generic: '--gnrc-motion-easing-functional-enter'
+    fluent:
+  motion.easingFunctionalExit:
+    generic: '--gnrc-motion-easing-functional-exit'
+    fluent:
+  motion.easingFunctionalLinear:
+    generic: '--gnrc-motion-easing-functional-linear'
+    fluent:
+  motion.easingFunctionalTransition:
+    generic: '--gnrc-motion-easing-functional-transition'
+    fluent:
   shadow.high:
     generic: '--gnrc-shadow-high'
     fluent: shadow.shadow16
@@ -1565,6 +1620,9 @@ tokens:
   spacing.componentBase700:
     generic: '--gnrc-spacing-component-base-700'
     fluent: global.size280
+  spacing.componentBase800:
+    generic: '--gnrc-spacing-component-base-800'
+    fluent: global.size320
   spacing.layoutBase100:
     generic: '--gnrc-spacing-layout-base-100'
     fluent: global.size80

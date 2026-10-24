@@ -246,22 +246,28 @@
     "source": "borderRadius.base200"
   },
   "shadows.shadow16": {
-    "source": "shadow.high"
+    "source": "shadow.high",
+    "transform": "shadowLayersToToken"
   },
   "shadows.shadow2": {
-    "source": "shadow.lowest"
+    "source": "shadow.lowest",
+    "transform": "shadowLayersToToken"
   },
   "shadows.shadow28": {
-    "source": "shadow.higher"
+    "source": "shadow.higher",
+    "transform": "shadowLayersToToken"
   },
   "shadows.shadow4": {
-    "source": "shadow.lower"
+    "source": "shadow.lower",
+    "transform": "shadowLayersToToken"
   },
   "shadows.shadow64": {
-    "source": "shadow.highest"
+    "source": "shadow.highest",
+    "transform": "shadowLayersToToken"
   },
   "shadows.shadow8": {
-    "source": "shadow.low"
+    "source": "shadow.low",
+    "transform": "shadowLayersToToken"
   },
   "typography.families.monospace": {
     "source": "fontFamily.contentCode"

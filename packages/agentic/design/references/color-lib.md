@@ -24,7 +24,7 @@ colors. Direct compositing and contrast operations throw descriptive errors
 for unsupported values.
 
 The algorithms are ported from
-[`x3-design/fluent-design@d334acf5cbad813f2b7cd554da942b09a7ff8f10`](https://github.com/x3-design/fluent-design/tree/d334acf5cbad813f2b7cd554da942b09a7ff8f10/dev/web/flex-themes).
+[`x3-design/fluent-design@206e890b645fb450ad7c5df2ff981765349a2b58`](https://github.com/x3-design/fluent-design/tree/206e890b645fb450ad7c5df2ff981765349a2b58/dev/web/flex-themes).
 The interaction API knows nothing about Flex tokens. Its options select:
 
 | Option        | Values                           | Effect                                                                                                                                  |

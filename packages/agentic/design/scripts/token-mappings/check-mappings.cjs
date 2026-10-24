@@ -9,14 +9,15 @@ const { parse: parseYaml } = nodeRequire(path.join(yamlPackageRoot, 'dist/index.
 
 const packageRoot = path.resolve(__dirname, '../..');
 const defaultPaths = {
-  defaultTokens: path.join(packageRoot, 'src/flex/defaults/defaultTokens.ts'),
+  defaultTokens: path.join(packageRoot, 'src/flex/adapters/fluentFallbackTokens.ts'),
   flexFromTheme: path.join(packageRoot, 'src/tokens/mappings/flex-from-theme.json'),
   flexTokenMap: path.join(packageRoot, 'src/tokens/mappings/flex-token-map.yaml'),
   flexTypes: path.join(packageRoot, 'src/flex/tokens.types.ts'),
   themeFromFlex: path.join(packageRoot, 'src/tokens/mappings/theme-from-flex.json'),
 };
 
-const reverseTransforms = new Set(['identity', 'numberToPx']);
+const reverseTransforms = new Set(['identity', 'numberToPx', 'shadowLayersToToken']);
+const shadowReverseTransform = 'shadowLayersToToken';
 
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -42,6 +43,27 @@ function getThemeSource(entry, tokenPath, violations) {
   }
 
   return source;
+}
+
+function getGenericSource(entry, tokenPath, violations) {
+  if (!Object.hasOwn(entry, 'generic') || entry.generic === null) {
+    return undefined;
+  }
+
+  const source = entry.generic;
+  if (typeof source !== 'string' || !source.startsWith('--gnrc-')) {
+    addViolation(violations, 'schema', tokenPath, 'a --gnrc-* custom property name or no generic field', source);
+    return undefined;
+  }
+
+  return source;
+}
+
+function createMappingEntry(entry, tokenPath, violations) {
+  return {
+    genericSource: getGenericSource(entry, tokenPath, violations),
+    themeSource: getThemeSource(entry, tokenPath, violations),
+  };
 }
 
 function flattenTokenMappings(mapping, violations) {
@@ -70,15 +92,11 @@ function flattenTokenMappings(mapping, violations) {
           continue;
         }
 
-        entries.set(destination, {
-          themeSource: getThemeSource(stateEntry, destination, violations),
-        });
+        entries.set(destination, createMappingEntry(stateEntry, destination, violations));
       }
     } else {
       const destination = basePath.startsWith('color.') ? `${basePath}.rest` : basePath;
-      entries.set(destination, {
-        themeSource: getThemeSource(mappingEntry, destination, violations),
-      });
+      entries.set(destination, createMappingEntry(mappingEntry, destination, violations));
     }
   }
 
@@ -208,6 +226,9 @@ function buildReverseProjection(mapping, mappingEntries, supportedTypePaths, vio
       } else if (transform !== 'identity') {
         descriptor.transform = transform;
       }
+    }
+    if (source.startsWith('shadow.') && descriptor.transform !== shadowReverseTransform) {
+      addViolation(violations, 'reverse-transform', themePath, shadowReverseTransform, transform ?? '<missing>');
     }
 
     projectionEntries.push([themePath, descriptor]);
@@ -513,6 +534,18 @@ function validateMappingInputs(inputs) {
       }
     } else {
       addViolation(violations, 'flex-token-type', tokenPath, 'a path declared by FlexTokens or UnsupportedFlexTokens', '<undeclared>');
+    }
+  }
+
+  // Every rest and non-color destination needs a generic source for generated defaults; interaction states are optional.
+  for (const tokenPath of supportedTypePaths) {
+    if (getInteractionRestPath(tokenPath) === undefined && !supportedEntries.has(tokenPath)) {
+      addViolation(violations, 'mapping-coverage', tokenPath, 'a destination in flex-token-map.yaml', '<missing>');
+    }
+  }
+  for (const [tokenPath, entry] of supportedEntries) {
+    if (entry.genericSource === undefined) {
+      addViolation(violations, 'generic-source', tokenPath, 'a generic custom property', '<missing>');
     }
   }
 

@@ -49,8 +49,15 @@ export function getInteractionColorOverrides(
 }
 
 /**
+ * One state of every resolved color, keyed by token.
+ */
+export function stateColorValues(colors: SemanticColors, state: 'rest' | InteractionColorState): SemanticColorTokenValues {
+  return Object.fromEntries(Object.entries(colors).map(([name, color]) => [name, color[state]])) as SemanticColorTokenValues;
+}
+
+/**
  * The rest value of every resolved color, keyed by token.
  */
 export function restColorValues(colors: SemanticColors): SemanticColorTokenValues {
-  return Object.fromEntries(Object.entries(colors).map(([name, color]) => [name, color.rest])) as SemanticColorTokenValues;
+  return stateColorValues(colors, 'rest');
 }

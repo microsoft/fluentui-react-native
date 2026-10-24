@@ -10,8 +10,9 @@ export type InteractionConformanceVector = readonly [
 ];
 
 /**
- * Test fixture with base and interaction fallback values from the pinned x3 source commit.
- * Each row covers hover and pressed in both light and dark modes.
+ * Cool rest and interaction fallback values from x3-design/fluent-design@206e890b
+ * (`semantic-{light,dark}.css` and `interaction-fallback-{light,dark}.css`).
+ * Each row covers rest, hover, and pressed in light and then dark.
  */
 export const x3InteractionConformance = {
   surfaceNeutralFarther: ['#ebebeb', '#e1e1e1', '#d7d7d7', '#1b1b1b', '#2f2f2f', '#454545'],
@@ -75,8 +76,8 @@ export const x3InteractionConformance = {
   foregroundSuccessOnloud: ['#ffffff', '#ffffff', '#ffffff', '#000000db', '#000000db', '#000000db'],
 } as const satisfies Record<InteractiveColorToken, InteractionConformanceVector>;
 
-/** Base and generated interaction values for the pinned Bebop Warm theme. */
-export const x3BebopWarmInteractionConformance = {
+/** Warm rest and interaction fallback values from the same pinned `warm/` stylesheets. */
+export const x3WarmInteractionConformance = {
   surfaceNeutralFarther: ['#f0eae5', '#e8e0d9', '#dfd6ce', '#1e1916', '#342d29', '#4b423d'],
   surfaceNeutralFar: ['#faf4f0', '#f2eae4', '#e9dfd9', '#231e1a', '#38312b', '#4d453e'],
   surfaceNeutralNear: ['#f6f1ec', '#ede7e0', '#e5ddd4', '#1c1714', '#322b27', '#4b413c'],
@@ -139,59 +140,60 @@ export const x3BebopWarmInteractionConformance = {
 } as const satisfies Record<InteractiveColorToken, InteractionConformanceVector>;
 
 /**
- * The generated x3 table routes these entries through its separately scoped
- * Bebop Warm path. `defaultValue` is the result of the cool tone requested by
- * #4268; `warmValue` is retained to make every table deviation explicit.
+ * Cool table states the cool interaction policy does not reproduce. The x3
+ * generator routes these entries through its warm path, so the default cool
+ * description authors `sourceValue` explicitly; `derivedValue` is what the
+ * cool policy computes from rest.
  */
-export const x3WarmToneDeviations = {
+export const x3CoolExplicitStates = {
   'backgroundNeutralTranslucent.hover.light': {
-    warmValue: '#d8d8d88a',
-    defaultValue: '#dfdfdf8a',
-    reason: 'The warm path composites this translucent background against a reference surface before shifting it.',
+    sourceValue: '#d8d8d88a',
+    derivedValue: '#dfdfdf8a',
+    reason: 'The source composites this translucent background against a reference surface before shifting it.',
   },
   'backgroundNeutralTranslucent.pressed.light': {
-    warmValue: '#cacaca94',
-    defaultValue: '#d5d5d594',
-    reason: 'The warm path composites this translucent background against a reference surface before shifting it.',
+    sourceValue: '#cacaca94',
+    derivedValue: '#d5d5d594',
+    reason: 'The source composites this translucent background against a reference surface before shifting it.',
   },
   'backgroundNeutralTranslucent.hover.dark': {
-    warmValue: '#56565688',
-    defaultValue: '#47474788',
-    reason: 'The warm path composites this translucent background against a reference surface before shifting it.',
+    sourceValue: '#56565688',
+    derivedValue: '#47474788',
+    reason: 'The source composites this translucent background against a reference surface before shifting it.',
   },
   'backgroundNeutralTranslucent.pressed.dark': {
-    warmValue: '#6d6d6d8f',
-    defaultValue: '#5353538f',
-    reason: 'The warm path composites this translucent background against a reference surface before shifting it.',
+    sourceValue: '#6d6d6d8f',
+    derivedValue: '#5353538f',
+    reason: 'The source composites this translucent background against a reference surface before shifting it.',
   },
   'strokeNeutralSoft.hover.light': {
-    warmValue: '#02020277',
-    defaultValue: '#00000077',
-    reason: 'The warm path adds chroma while the default algorithm preserves chroma.',
+    sourceValue: '#02020277',
+    derivedValue: '#00000077',
+    reason: 'The source adds chroma while the cool policy preserves chroma.',
   },
   'strokeNeutralSoft.pressed.light': {
-    warmValue: '#04040481',
-    defaultValue: '#00000081',
-    reason: 'The warm path adds chroma while the default algorithm preserves chroma.',
+    sourceValue: '#04040481',
+    derivedValue: '#00000081',
+    reason: 'The source adds chroma while the cool policy preserves chroma.',
   },
   'strokeNeutralSubtle.pressed.light': {
-    warmValue: '#05050535',
-    defaultValue: '#00000035',
-    reason: 'The warm path adds chroma while the default algorithm preserves chroma.',
+    sourceValue: '#05050535',
+    derivedValue: '#00000035',
+    reason: 'The source adds chroma while the cool policy preserves chroma.',
   },
   'strokeBrandSoft.hover.light': {
-    warmValue: '#02020277',
-    defaultValue: '#00000077',
-    reason: 'The warm path adds chroma while the default algorithm preserves chroma.',
+    sourceValue: '#02020277',
+    derivedValue: '#00000077',
+    reason: 'The source adds chroma while the cool policy preserves chroma.',
   },
   'strokeBrandSoft.pressed.light': {
-    warmValue: '#04040481',
-    defaultValue: '#00000081',
-    reason: 'The warm path adds chroma while the default algorithm preserves chroma.',
+    sourceValue: '#04040481',
+    derivedValue: '#00000081',
+    reason: 'The source adds chroma while the cool policy preserves chroma.',
   },
   'strokeBrandSubtle.pressed.light': {
-    warmValue: '#05050535',
-    defaultValue: '#00000035',
-    reason: 'The warm path adds chroma while the default algorithm preserves chroma.',
+    sourceValue: '#05050535',
+    derivedValue: '#00000035',
+    reason: 'The source adds chroma while the cool policy preserves chroma.',
   },
 } as const;

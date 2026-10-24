@@ -5,6 +5,10 @@ export type {
   ColorTuple,
   FlexColorDescription,
   FlexColorInput,
+  FlexEasing,
+  FlexShadow,
+  FlexShadowEntry,
+  FlexShadowLayer,
   FlexTokenDescription,
   FlexTokens,
   InteractiveColor,
@@ -20,6 +24,8 @@ export type {
   SemanticFontSizes,
   SemanticFontWeights,
   SemanticLineHeights,
+  SemanticMotion,
+  SemanticShadowEntries,
   SemanticShadows,
   SemanticSpacing,
   SemanticStrokeWidths,
@@ -29,6 +35,7 @@ export type {
 export { INTERACTIVE_COLOR_TOKENS, isInteractiveColorToken, isInverseInteractionToken } from './flex/colors/interactiveTokens';
 export { flexColor, selectColorEntry } from './flex/colors/flexColor';
 export type { ColorSchemeSelector } from './flex/colors/flexColor';
+export { selectShadowEntry } from './flex/flexShadow';
 export type { InteractiveColorToken } from './flex/colors/interactiveTokens';
 export { flexTokensFromTheme } from './flex/adapters/flexTokensFromTheme';
 export {
