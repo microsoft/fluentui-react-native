@@ -1,6 +1,6 @@
-import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 
-import type { FlexTokens, SemanticColors } from '../tokens.types';
+import type { FlexTokens, InteractiveColor, SemanticColorName, SemanticColors } from '../tokens.types';
 import type { ThemeState } from '../../types/themeState.types';
 
 import { createStateLevelMap, getThemedStateStyleFactory } from '../../styling/branchedStyle';
@@ -15,7 +15,7 @@ const colorStyleKeys: readonly ColorStyleKeys[] = ['backgroundColor', 'borderCol
 /**
  * A semantic color key available in the Flex tokens.
  */
-export type ColorKey = keyof Omit<SemanticColors, 'hover' | 'pressed'>;
+export type ColorKey = SemanticColorName;
 
 type AnyColorStyle = ViewColorStyle | TextColorStyle;
 type ColorKeysForStyle<StyleType extends AnyColorStyle> = { [K in keyof StyleType]: ColorKey };
@@ -39,7 +39,7 @@ interface RawColorDef {
 }
 type InheritedColorKeys = Partial<Record<ColorStyleKeys, ColorKey>>;
 type RawStyleDef = Record<string, unknown>;
-type InteractionColors = Partial<Record<ColorKey, ColorValue>>;
+type ColorState = Exclude<keyof InteractiveColor, 'rest'>;
 
 function getColorKey(definition: RawColorDef, key: ColorStyleKeys): ColorKey | undefined {
   const value = definition[key];
@@ -51,19 +51,21 @@ function getStateDefinition(definition: RawColorDef, key: string): RawColorDef |
   return typeof value === 'object' && value !== null ? value : undefined;
 }
 
-function getInteractionColors(colors: SemanticColors, state: string | undefined): InteractionColors | undefined {
+function getColorState(state: string | undefined): ColorState | undefined {
   if (state === 'hovered') {
-    return colors.hover;
+    return 'hover';
   }
   if (state === 'pressed') {
-    return colors.pressed;
+    return 'pressed';
   }
   return undefined;
 }
 
 /**
  * Converts semantic color keys into resolved style values while synthesizing
- * hovered and pressed nodes wherever those states are declared.
+ * hovered and pressed nodes wherever those states are declared. Hovered and
+ * pressed nodes read each color's matching state, so a derived state is
+ * computed when the style is first built for a theme state.
  */
 function convertToStyleDef(
   name: string | undefined,
@@ -72,18 +74,17 @@ function convertToStyleDef(
   rawColorDef: RawColorDef,
   stateLevels: StateLevels,
   nextLevel: number,
-  activeInteractionState?: string,
+  activeInteractionState?: ColorState,
 ): RawStyleDef {
   const result: RawStyleDef = {};
   const inheritedKeys: InheritedColorKeys = { ...parent };
-  const interactionState = getInteractionColors(colors, name) ? name : activeInteractionState;
-  const interactionColors = getInteractionColors(colors, interactionState);
+  const interactionState = getColorState(name) ?? activeInteractionState;
 
   for (const styleKey of colorStyleKeys) {
-    const colorKey = getColorKey(rawColorDef, styleKey) ?? (interactionColors ? parent?.[styleKey] : undefined);
+    const colorKey = getColorKey(rawColorDef, styleKey) ?? (interactionState ? parent?.[styleKey] : undefined);
     if (colorKey !== undefined) {
       inheritedKeys[styleKey] = colorKey;
-      const colorValue = interactionColors?.[colorKey] ?? colors[colorKey];
+      const colorValue = colors[colorKey]?.[interactionState ?? 'rest'];
       if (colorValue !== undefined) {
         result[styleKey] = colorValue;
       }

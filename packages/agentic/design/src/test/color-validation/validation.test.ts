@@ -6,7 +6,7 @@ import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
 import type { SemanticColorTokenValues } from '../../flex/tokens.types';
 import type { ColorTone } from '../../types/appearance.types';
 import { getContrastFailures, getUnresolvableContrastPairs, MODE_SURFACE, PAIRINGS, validateContrastPairs, WCAG } from '../index';
-import { getInteractionColorOverrides } from '../fixtures/interactionColors';
+import { getInteractionColorOverrides, restColorValues } from '../fixtures/interactionColors';
 import { x3BebopWarmInteractionConformance, x3InteractionConformance } from '../fixtures/x3InteractionConformance';
 
 function conformanceColors(
@@ -14,7 +14,7 @@ function conformanceColors(
   conformance: typeof x3InteractionConformance | typeof x3BebopWarmInteractionConformance = x3InteractionConformance,
 ): SemanticColorTokenValues {
   const restIndex = mode === 'light' ? 0 : 3;
-  const { hover: _hover, pressed: _pressed, ...colors } = defaultFlexTokens.color;
+  const colors = restColorValues(defaultFlexTokens.color);
   for (const token of INTERACTIVE_COLOR_TOKENS) {
     colors[token] = conformance[token][restIndex];
   }
@@ -112,6 +112,14 @@ describe.each(['light', 'dark'] as const)('%s contrast validation', (mode) => {
 
       expect(failures).toEqual(expectedFailures);
     }
+  });
+});
+
+describe('resolved color validation', () => {
+  it('audits resolved Flex colors at rest', () => {
+    expect(validateContrastPairs(defaultFlexTokens.color, 'light')).toEqual(
+      validateContrastPairs(restColorValues(defaultFlexTokens.color), 'light'),
+    );
   });
 });
 

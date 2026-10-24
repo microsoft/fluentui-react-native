@@ -68,13 +68,10 @@ export { RootInputBoundary } from './RootInputBoundary';
 export { useRootInputModality } from './useRootInputModality';
 export type { InputModality, RootSettings } from './rootContext';
 export { FlexThemeReference } from '../flex/flexThemeReference';
-export type {
-  FlexThemeInput,
-  FlexThemeRecipe,
-  FlexThemeReferenceOptions,
-  LegacyThemeFallback,
-  PartialFlexTokens,
-} from '../flex/flexThemeReference';
+export type { FlexThemeInput, FlexThemeRecipe, FlexThemeReferenceOptions, LegacyThemeFallback } from '../flex/flexThemeReference';
+export { flexColor, selectColorEntry } from '../flex/colors/flexColor';
+export type { ColorSchemeSelector } from '../flex/colors/flexColor';
+export type { FlexTokenDescription, PartialFlexTokens } from '../flex/tokens.types';
 export { ThemeReference } from '../fluent/themeReference';
 export type { OnThemeChange, ThemeRecipe, ThemeReferenceOptions, ThemeTransform } from '../fluent/themeReference';
 export type { FlexThemeSource, LegacyThemeSource, ThemeSource, ThemeSourceBase } from './themeSource';

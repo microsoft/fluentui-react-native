@@ -24,7 +24,7 @@ export function getFlexTokens(source: ThemeSource, appearance: Readonly<Normaliz
 
   const cache = getThemeAppearanceCache(source, appearance);
   if (!cache.flexTokens) {
-    cache.flexTokens = flexTokensFromTheme(source.resolveTheme(appearance));
+    cache.flexTokens = flexTokensFromTheme(source.resolveTheme(appearance), appearance);
   }
   return cache.flexTokens;
 }

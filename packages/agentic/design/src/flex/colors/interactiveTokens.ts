@@ -1,11 +1,10 @@
 import type { InteractionCompositing, InteractionDirection } from '../../color-lib/types';
-import type { InteractiveColorOverrides } from '../tokens.types';
-
-/** A Flex semantic color token that has hover and pressed states. */
-export type InteractiveColorToken = keyof InteractiveColorOverrides;
+import type { SemanticColorName } from '../tokens.types';
 
 /**
- * Interactive subset of the Flex semantic color tokens.
+ * Interactive subset of the Flex semantic color tokens. Only these tokens
+ * compute omitted hover and pressed states; every other token's states equal
+ * rest unless authored explicitly.
  *
  * Source: x3-design/fluent-design@d334acf5cbad813f2b7cd554da942b09a7ff8f10.
  */
@@ -69,11 +68,23 @@ export const INTERACTIVE_COLOR_TOKENS = [
   'foregroundWarningOnloud',
   'foregroundSuccessPrimary',
   'foregroundSuccessOnloud',
-] as const satisfies readonly InteractiveColorToken[];
+] as const satisfies readonly SemanticColorName[];
+
+/** A Flex semantic color token whose omitted hover and pressed states are computed. */
+export type InteractiveColorToken = (typeof INTERACTIVE_COLOR_TOKENS)[number];
+
+const interactiveColorTokens: ReadonlySet<string> = new Set(INTERACTIVE_COLOR_TOKENS);
+
+/** Return whether a color token computes omitted hover and pressed states. */
+export function isInteractiveColorToken(token: string): token is InteractiveColorToken {
+  return interactiveColorTokens.has(token);
+}
 
 /**
- * Return whether an interactive token shifts opposite the standard lightness
- * direction. Heavy, loud, and on-loud roles are inverted.
+ * Return whether an interactive token's default color type is inverted. Heavy,
+ * loud, and on-loud roles shift opposite the standard lightness direction.
+ * Defaults and legacy adapters use this classification; newly authored colors
+ * declare their type explicitly.
  */
 export function isInverseInteractionToken(token: InteractiveColorToken): boolean {
   const name = token.toLowerCase();

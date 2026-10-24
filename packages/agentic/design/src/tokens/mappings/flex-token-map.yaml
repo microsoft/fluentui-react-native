@@ -30,9 +30,9 @@ rules:
   colorStates:
     shape: Each color has a required rest mapping and optional hover and pressed mappings.
     projection:
-      rest: color.<name>
-      hover: color.hover.<name>
-      pressed: color.pressed.<name>
+      rest: color.<name>.rest
+      hover: color.<name>.hover
+      pressed: color.<name>.pressed
     fluentAliases: Alias references identify explicit state leaves such as alias.brandBackground.rest,
       alias.brandBackground.hover, and alias.brandBackground.pressed.
   matching:
@@ -59,12 +59,14 @@ rules:
     - scripts/token-mappings/check-mappings.cjs enforces that flex-from-theme.json
       exactly matches the furn-theme mappings in this file.
     - ../../flex/adapters/flexTokensFromTheme.ts consumes flex-from-theme.json and merges the projected
-      Theme values over nonFluentFlexTokens.
+      Theme values over nonFluentFlexTokens. An interaction state the Theme does not map
+      resolves to the Theme's rest value; the forward adapter never runs the interaction
+      algorithm.
     - The same check enforces that nonFluentFlexTokens in ../../flex/defaults/defaultTokens.ts covers
-      unmapped supported destinations. An unmapped hover or pressed fallback is
+      unmapped supported destinations. An unmapped hover or pressed value is
       included only when its rest destination is also unmapped; otherwise the state
-      value remains only in defaultFlexTokens so a Theme-provided rest value does
-      not inherit a mismatched fallback interaction color.
+      value remains only in defaultFlexTokenDescription so a Theme-provided rest value
+      does not inherit a mismatched fallback interaction color.
     - Button uses borderRadius.base200 / base300 / base400 for small / medium / large.
       The FURN Theme exposes its shared small/medium Button radius, but its large
       size-specific radius remains sourced from Fluent global tokens.
@@ -77,135 +79,135 @@ reverse:
   transforms: {}
   canonical:
     colors.black:
-      source: color.fixedBlack
+      source: color.fixedBlack.rest
       omitted:
-        - color.expressionAchromaticHeavy
-        - color.shadow
+        - color.expressionAchromaticHeavy.rest
+        - color.shadow.rest
       reason: The fixed invariant is the canonical legacy black value; expression and shadow roles may diverge in Flex themes.
     colors.brandBackground2:
-      source: color.backgroundBrandSoft
+      source: color.backgroundBrandSoft.rest
       omitted:
-        - color.backgroundBrandSubtle
+        - color.backgroundBrandSubtle.rest
       reason: The soft brand background is the closest general-purpose match for legacy brandBackground2.
     colors.brandStroke1:
-      source: color.strokeBrandLoud
+      source: color.strokeBrandLoud.rest
       omitted:
-        - color.strokeBrandSoft
+        - color.strokeBrandSoft.rest
       reason: The loud brand stroke is the primary stroke role represented by legacy brandStroke1.
     colors.dangerBorder1:
-      source: color.strokeDangerSoft
+      source: color.strokeDangerSoft.rest
       omitted:
-        - color.strokeDangerSubtle
+        - color.strokeDangerSubtle.rest
       reason: The soft danger stroke is the closest general-purpose match for legacy dangerBorder1.
     colors.neutralBackground2:
-      source: color.surfaceNeutralNear
+      source: color.surfaceNeutralNear.rest
       omitted:
-        - color.backgroundNeutralSubtle
+        - color.backgroundNeutralSubtle.rest
       reason: The near neutral surface preserves the legacy neutralBackground2 surface progression.
     colors.neutralBackground2Hover:
-      source: color.hover.surfaceNeutralNear
+      source: color.surfaceNeutralNear.hover
       omitted:
-        - color.hover.backgroundNeutralSubtle
+        - color.backgroundNeutralSubtle.hover
       reason: Use the interaction state paired with the canonical near neutral surface.
     colors.neutralBackground2Pressed:
-      source: color.pressed.surfaceNeutralNear
+      source: color.surfaceNeutralNear.pressed
       omitted:
-        - color.pressed.backgroundNeutralSubtle
+        - color.backgroundNeutralSubtle.pressed
       reason: Use the interaction state paired with the canonical near neutral surface.
     colors.neutralBackgroundDisabled:
-      source: color.backgroundNeutralDisabled
+      source: color.backgroundNeutralDisabled.rest
       omitted:
-        - color.backgroundNeutralHeavyDisabled
-        - color.backgroundNeutralSubtleDisabled
+        - color.backgroundNeutralHeavyDisabled.rest
+        - color.backgroundNeutralSubtleDisabled.rest
       reason: The unqualified disabled background is the canonical general legacy disabled value.
     colors.neutralBackgroundInverted:
-      source: color.backgroundNeutralHeavy
+      source: color.backgroundNeutralHeavy.rest
       omitted:
-        - color.backgroundNeutralLoud
+        - color.backgroundNeutralLoud.rest
       reason: The heavy neutral background is the strongest general inverted background role.
     colors.neutralForegroundOnBrand:
-      source: color.foregroundNeutralOnloud
+      source: color.foregroundNeutralOnloud.rest
       omitted:
-        - color.foregroundBrandOnloud
-        - color.foregroundDangerOnloud
-        - color.foregroundSuccessOnloud
-        - color.foregroundWarningOnloud
-        - color.strokeBrandOnloud
-        - color.strokeDangerOnloud
-        - color.strokeNeutralOnloud
-        - color.strokeSuccessOnloud
-        - color.strokeWarningOnloud
+        - color.foregroundBrandOnloud.rest
+        - color.foregroundDangerOnloud.rest
+        - color.foregroundSuccessOnloud.rest
+        - color.foregroundWarningOnloud.rest
+        - color.strokeBrandOnloud.rest
+        - color.strokeDangerOnloud.rest
+        - color.strokeNeutralOnloud.rest
+        - color.strokeSuccessOnloud.rest
+        - color.strokeWarningOnloud.rest
       reason: The neutral on-loud foreground is the generic on-color legacy foreground role.
     colors.neutralForegroundOnBrandHover:
-      source: color.hover.foregroundNeutralOnloud
+      source: color.foregroundNeutralOnloud.hover
       omitted:
-        - color.hover.foregroundBrandOnloud
-        - color.hover.foregroundDangerOnloud
-        - color.hover.foregroundSuccessOnloud
-        - color.hover.foregroundWarningOnloud
-        - color.hover.strokeBrandOnloud
-        - color.hover.strokeDangerOnloud
-        - color.hover.strokeNeutralOnloud
-        - color.hover.strokeSuccessOnloud
-        - color.hover.strokeWarningOnloud
+        - color.foregroundBrandOnloud.hover
+        - color.foregroundDangerOnloud.hover
+        - color.foregroundSuccessOnloud.hover
+        - color.foregroundWarningOnloud.hover
+        - color.strokeBrandOnloud.hover
+        - color.strokeDangerOnloud.hover
+        - color.strokeNeutralOnloud.hover
+        - color.strokeSuccessOnloud.hover
+        - color.strokeWarningOnloud.hover
       reason: Use the interaction state paired with the canonical neutral on-loud foreground.
     colors.neutralForegroundOnBrandPressed:
-      source: color.pressed.foregroundNeutralOnloud
+      source: color.foregroundNeutralOnloud.pressed
       omitted:
-        - color.pressed.foregroundBrandOnloud
-        - color.pressed.foregroundDangerOnloud
-        - color.pressed.foregroundSuccessOnloud
-        - color.pressed.foregroundWarningOnloud
-        - color.pressed.strokeBrandOnloud
-        - color.pressed.strokeDangerOnloud
-        - color.pressed.strokeNeutralOnloud
-        - color.pressed.strokeSuccessOnloud
-        - color.pressed.strokeWarningOnloud
+        - color.foregroundBrandOnloud.pressed
+        - color.foregroundDangerOnloud.pressed
+        - color.foregroundSuccessOnloud.pressed
+        - color.foregroundWarningOnloud.pressed
+        - color.strokeBrandOnloud.pressed
+        - color.strokeDangerOnloud.pressed
+        - color.strokeNeutralOnloud.pressed
+        - color.strokeSuccessOnloud.pressed
+        - color.strokeWarningOnloud.pressed
       reason: Use the interaction state paired with the canonical neutral on-loud foreground.
     colors.neutralStroke1:
-      source: color.strokeNeutralLoud
+      source: color.strokeNeutralLoud.rest
       omitted:
-        - color.strokeNeutralSoft
+        - color.strokeNeutralSoft.rest
       reason: The loud neutral stroke is the primary stroke role represented by legacy neutralStroke1.
     colors.neutralStroke1Hover:
-      source: color.hover.strokeNeutralLoud
+      source: color.strokeNeutralLoud.hover
       omitted:
-        - color.hover.strokeNeutralSoft
+        - color.strokeNeutralSoft.hover
       reason: Use the interaction state paired with the canonical loud neutral stroke.
     colors.neutralStroke1Pressed:
-      source: color.pressed.strokeNeutralLoud
+      source: color.strokeNeutralLoud.pressed
       omitted:
-        - color.pressed.strokeNeutralSoft
+        - color.strokeNeutralSoft.pressed
       reason: Use the interaction state paired with the canonical loud neutral stroke.
     colors.successBorder1:
-      source: color.strokeSuccessSoft
+      source: color.strokeSuccessSoft.rest
       omitted:
-        - color.strokeSuccessSubtle
+        - color.strokeSuccessSubtle.rest
       reason: The soft success stroke is the closest general-purpose match for legacy successBorder1.
     colors.transparentBackground:
-      source: color.backgroundNeutralTransparent
+      source: color.backgroundNeutralTransparent.rest
       omitted:
-        - color.backgroundBrandTransparent
+        - color.backgroundBrandTransparent.rest
       reason: The neutral transparent background is the generic legacy transparent background role.
     colors.transparentBackgroundHover:
-      source: color.hover.backgroundNeutralTransparent
+      source: color.backgroundNeutralTransparent.hover
       omitted:
-        - color.hover.backgroundBrandTransparent
+        - color.backgroundBrandTransparent.hover
       reason: Use the interaction state paired with the canonical neutral transparent background.
     colors.transparentBackgroundPressed:
-      source: color.pressed.backgroundNeutralTransparent
+      source: color.backgroundNeutralTransparent.pressed
       omitted:
-        - color.pressed.backgroundBrandTransparent
+        - color.backgroundBrandTransparent.pressed
       reason: Use the interaction state paired with the canonical neutral transparent background.
     colors.warningBorder1:
-      source: color.strokeWarningSoft
+      source: color.strokeWarningSoft.rest
       omitted:
-        - color.strokeWarningSubtle
+        - color.strokeWarningSubtle.rest
       reason: The soft warning stroke is the closest general-purpose match for legacy warningBorder1.
     colors.white:
-      source: color.fixedWhite
+      source: color.fixedWhite.rest
       omitted:
-        - color.expressionAchromaticSubtle
+        - color.expressionAchromaticSubtle.rest
       reason: The fixed invariant is the canonical legacy white value; expression roles may diverge in Flex themes.
     components.Button.tokens.borderRadius:
       source: borderRadius.base200

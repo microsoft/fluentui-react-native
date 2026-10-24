@@ -80,12 +80,12 @@ const getStyles = themedStyleSheetFactory('StorybookTheme', ({ tokens }) =>
   StyleSheet.create({
     root: {
       flex: 1,
-      backgroundColor: tokens.color.surfaceNeutralFar,
+      backgroundColor: tokens.color.surfaceNeutralFar.rest,
     },
     header: {
       alignItems: 'center',
-      backgroundColor: tokens.color.backgroundNeutralSubtle,
-      borderBottomColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.backgroundNeutralSubtle.rest,
+      borderBottomColor: tokens.color.strokeNeutralSubtle.rest,
       borderBottomWidth: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
@@ -95,32 +95,32 @@ const getStyles = themedStyleSheetFactory('StorybookTheme', ({ tokens }) =>
       paddingVertical: 6,
     },
     label: {
-      color: tokens.color.foregroundNeutralPrimary,
+      color: tokens.color.foregroundNeutralPrimary.rest,
       fontSize: 14,
       fontWeight: '600',
       marginEnd: 4,
     },
     option: {
-      backgroundColor: tokens.color.backgroundNeutralLoud,
-      borderColor: tokens.color.strokeNeutralSoft,
+      backgroundColor: tokens.color.backgroundNeutralLoud.rest,
+      borderColor: tokens.color.strokeNeutralSoft.rest,
       borderRadius: 4,
       borderWidth: 1,
       paddingHorizontal: 10,
       paddingVertical: 5,
     },
     selectedOption: {
-      backgroundColor: tokens.color.backgroundBrandHeavy,
-      borderColor: tokens.color.strokeBrandLoud,
+      backgroundColor: tokens.color.backgroundBrandHeavy.rest,
+      borderColor: tokens.color.strokeBrandLoud.rest,
     },
     pressedOption: {
       opacity: 0.75,
     },
     optionText: {
-      color: tokens.color.foregroundNeutralPrimary,
+      color: tokens.color.foregroundNeutralPrimary.rest,
       fontSize: 12,
     },
     selectedOptionText: {
-      color: tokens.color.foregroundBrandOnloud,
+      color: tokens.color.foregroundBrandOnloud.rest,
       fontWeight: '600',
     },
   }),

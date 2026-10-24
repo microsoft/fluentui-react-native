@@ -44,8 +44,8 @@ describe('legacy compatibility baseline', () => {
     };
 
     const tokens = flexTokensFromTheme(theme);
-    expect(tokens.color.backgroundBrandHeavy).toEqual(rest);
-    expect(tokens.color.hover.backgroundBrandHeavy).toEqual(hover);
+    expect(tokens.color.backgroundBrandHeavy.rest).toBe(rest);
+    expect(tokens.color.backgroundBrandHeavy.hover).toBe(hover);
 
     const projected = themeFromFlexTokens(tokens, appearances[0][1]);
     expect(projected.colors.brandBackground).toEqual(rest);

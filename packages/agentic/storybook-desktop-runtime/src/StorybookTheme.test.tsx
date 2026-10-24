@@ -104,9 +104,9 @@ describe('Storybook app theme root', () => {
     const state = themes[themes.length - 1];
     const calls = jest.mocked(StorybookUIComponent).mock.calls;
     const theme = calls[calls.length - 1][0].theme;
-    expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFar);
+    expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFar.rest);
     expect(theme.background.content).toBe(theme.background.preview);
-    expect(theme.background.content).not.toBe(state.tokens.color.backgroundNeutralSubtle);
+    expect(theme.background.content).not.toBe(state.tokens.color.backgroundNeutralSubtle.rest);
   });
 
   it.each(['#ffeedd', 'transparent'])('preserves the explicit %s story background across theme changes', async (storyBackgroundColor) => {
@@ -125,7 +125,7 @@ describe('Storybook app theme root', () => {
     const { App, roots, themes, mounted, unmounted, getStorybookUI } = createTestApp();
     const scene = await render(<App />);
     const root = roots[0];
-    const defaultBackground = themes[0].tokens.color.surfaceNeutralFar;
+    const defaultBackground = themes[0].tokens.color.surfaceNeutralFar.rest;
     const backgrounds: Record<string, unknown> = {};
     await fireEvent(scene.getByTestId('test-app-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
 
@@ -138,18 +138,18 @@ describe('Storybook app theme root', () => {
 
       expect(scene.getByTestId(`test-theme-${choice}`).props.accessibilityState.selected).toBe(true);
       expect(StyleSheet.flatten(scene.getByTestId('test-theme-toolbar').props.style).backgroundColor).toBe(
-        state.tokens.color.backgroundNeutralSubtle,
+        state.tokens.color.backgroundNeutralSubtle.rest,
       );
-      expect(StyleSheet.flatten(scene.getByText('Theme').props.style).color).toBe(state.tokens.color.foregroundNeutralPrimary);
-      const foreground = theme.base === 'dark' ? state.tokens.color.fixedWhite : state.tokens.color.fixedBlack;
-      const background = theme.base === 'dark' ? state.tokens.color.fixedBlack : state.tokens.color.fixedWhite;
+      expect(StyleSheet.flatten(scene.getByText('Theme').props.style).color).toBe(state.tokens.color.foregroundNeutralPrimary.rest);
+      const foreground = theme.base === 'dark' ? state.tokens.color.fixedWhite.rest : state.tokens.color.fixedBlack.rest;
+      const background = theme.base === 'dark' ? state.tokens.color.fixedBlack.rest : state.tokens.color.fixedWhite.rest;
       const literal = (value: unknown, fallback: unknown) => (typeof value === 'string' ? value : fallback);
-      expect(theme.background.app).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
-      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
-      expect(theme.background.preview).toBe(literal(state.tokens.color.surfaceNeutralFar, background));
-      expect(theme.color.defaultText).toBe(literal(state.tokens.color.foregroundNeutralPrimary, foreground));
-      expect(theme.input.color).toBe(literal(state.tokens.color.foregroundNeutralPrimary, foreground));
-      expect(theme.button.background).toBe(literal(state.tokens.color.backgroundNeutralLoud, background));
+      expect(theme.background.app).toBe(literal(state.tokens.color.surfaceNeutralFar.rest, background));
+      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralFar.rest, background));
+      expect(theme.background.preview).toBe(literal(state.tokens.color.surfaceNeutralFar.rest, background));
+      expect(theme.color.defaultText).toBe(literal(state.tokens.color.foregroundNeutralPrimary.rest, foreground));
+      expect(theme.input.color).toBe(literal(state.tokens.color.foregroundNeutralPrimary.rest, foreground));
+      expect(theme.button.background).toBe(literal(state.tokens.color.backgroundNeutralLoud.rest, background));
       expect(root.inputModality).toBe('keyboard');
       expect(roots.every((settings) => settings === root)).toBe(true);
     }

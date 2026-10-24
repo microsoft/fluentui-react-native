@@ -1,6 +1,8 @@
 import { parseColorValue, resolveContrastColors } from '../../color-lib';
 import type { ColorDiagnostic, ColorMode } from '../../color-lib';
-import type { SemanticColorTokenValues } from '../../flex/tokens.types';
+import type { ColorValue } from 'react-native';
+
+import type { InteractiveColor, SemanticColors, SemanticColorTokenValues } from '../../flex/tokens.types';
 import { MODE_SURFACE } from './constants';
 import { PAIRINGS } from './pairings';
 import type {
@@ -24,23 +26,33 @@ function diagnosticFor(
   };
 }
 
+function isResolvedColor(value: ColorValue | InteractiveColor): value is InteractiveColor {
+  return typeof value === 'object' && value !== null && 'rest' in value;
+}
+
+function colorValue(colors: SemanticColorTokenValues | SemanticColors, token: ContrastColorToken): ColorValue {
+  const value = colors[token];
+  return isResolvedColor(value) ? value.rest : value;
+}
+
 /**
  * Audit semantic colors against canonical or caller-supplied contrast
- * pairings. This helper is intended for tests and design validation tooling,
- * not component render paths.
+ * pairings. Resolved Flex colors are audited at rest; pass a flat map of hover
+ * or pressed values to audit an interaction state. This helper is intended for
+ * tests and design validation tooling, not component render paths.
  */
 export function validateContrastPairs(
-  colors: SemanticColorTokenValues,
+  colors: SemanticColorTokenValues | SemanticColors,
   mode: ColorMode,
   pairings: readonly ContrastPairing[] = PAIRINGS,
 ): ContrastPairResult[] {
   const results: ContrastPairResult[] = [];
 
   for (const pairing of pairings) {
-    const foregroundValue = colors[pairing.foreground.token];
+    const foregroundValue = colorValue(colors, pairing.foreground.token);
     const foreground = parseColorValue(foregroundValue);
     for (const backgroundReference of pairing.backgrounds) {
-      const backgroundValue = colors[backgroundReference.token];
+      const backgroundValue = colorValue(colors, backgroundReference.token);
       const background = parseColorValue(backgroundValue);
       const base = {
         pairing,

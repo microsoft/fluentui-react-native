@@ -1,20 +1,9 @@
 import { immutableMerge } from '@fluentui-react-native/framework-base';
 
-import { defaultFlexTokens } from './defaults/defaultTokens';
-import type {
-  FlexTokens,
-  InteractiveColorOverrides,
-  SemanticBorderRadii,
-  SemanticColorTokenValues,
-  SemanticFontFamilies,
-  SemanticFontSizes,
-  SemanticFontWeights,
-  SemanticLineHeights,
-  SemanticShadows,
-  SemanticSpacing,
-  SemanticStrokeWidths,
-} from './tokens.types';
-import { withDerivedInteractionColors } from './colors/interactionPolicy';
+import { defaultFlexTokenDescription } from './defaults/defaultTokens';
+import { mergeFlexTokenDescription } from './flexTokenDescription';
+import type { FlexTokenDescription, FlexTokens, PartialFlexTokens } from './tokens.types';
+import { resolveFlexTokenDescription } from './colors/interactionPolicy';
 import { internResolvedThemeAppearance, themeAppearanceKey } from '../theming/appearance';
 import type {
   NormalizedThemeAppearance,
@@ -25,29 +14,20 @@ import type {
 import type { FlexThemeSource, OnThemeChange } from '../theming/themeSource';
 import type { PartialTheme, Theme } from '../fluent/types/Theme.types';
 
-export type PartialFlexTokens = {
-  color?: Partial<SemanticColorTokenValues> & {
-    hover?: Partial<InteractiveColorOverrides>;
-    pressed?: Partial<InteractiveColorOverrides>;
-  };
-  shadow?: Partial<SemanticShadows>;
-  fontWeight?: Partial<SemanticFontWeights>;
-  fontFamily?: Partial<SemanticFontFamilies>;
-  fontSize?: Partial<SemanticFontSizes>;
-  lineHeight?: Partial<SemanticLineHeights>;
-  borderRadius?: Partial<SemanticBorderRadii>;
-  spacing?: Partial<SemanticSpacing>;
-  strokeWidth?: Partial<SemanticStrokeWidths>;
-};
+/**
+ * Authored base tokens layered over the package defaults. Resolved
+ * `FlexTokens` are appearance-bound outputs and are not accepted.
+ */
+export type FlexThemeInput = PartialFlexTokens | ((appearance: Readonly<NormalizedThemeAppearance>) => PartialFlexTokens);
 
-export type FlexThemeInput =
-  | FlexTokens
-  | PartialFlexTokens
-  | ((appearance: Readonly<NormalizedThemeAppearance>) => FlexTokens | PartialFlexTokens);
-
+/**
+ * Authored overrides, or a function of the accumulated authored description
+ * and the appearance that returns overrides. Use `selectColorEntry` to read an
+ * appearance-specific authored color.
+ */
 export type FlexThemeRecipe =
   | PartialFlexTokens
-  | ((parent: FlexTokens, appearance: Readonly<NormalizedThemeAppearance>) => PartialFlexTokens);
+  | ((description: FlexTokenDescription, appearance: Readonly<NormalizedThemeAppearance>) => PartialFlexTokens);
 
 export type LegacyThemeFallback = Theme | PartialTheme | ((appearance: Readonly<NormalizedThemeAppearance>) => Theme | PartialTheme);
 
@@ -70,6 +50,7 @@ export class FlexThemeReference implements FlexThemeSource {
   private readonly legacyFallback?: LegacyThemeFallback;
   private recipes: FlexThemeRecipe[];
   private readonly listeners = new Set<OnThemeChange>();
+  private readonly descriptionsByAppearance = new Map<string, FlexTokenDescription>();
   private readonly tokensByAppearance = new Map<string, FlexTokens>();
   private parentListener?: OnThemeChange;
   private parentRevision?: number;
@@ -92,7 +73,7 @@ export class FlexThemeReference implements FlexThemeSource {
 
   /**
    * Resolve the tokens for one appearance. A missing tone means cool. Omitted
-   * interactive hover and pressed values are derived from rest automatically.
+   * interactive hover and pressed values are computed from rest on first read.
    */
   public resolveFlexTokens(requestedAppearance: ResolvedThemeAppearance): FlexTokens {
     this.syncParentRevision();
@@ -103,11 +84,7 @@ export class FlexThemeReference implements FlexThemeSource {
       return cached;
     }
 
-    let tokens = this.resolveBase(appearance);
-    for (const recipe of this.recipes) {
-      tokens = immutableMerge(tokens, typeof recipe === 'function' ? recipe(tokens, appearance) : recipe);
-    }
-    tokens = { ...tokens, color: withDerivedInteractionColors(tokens.color, appearance) };
+    const tokens = resolveFlexTokenDescription(this.resolveDescription(appearance, key), appearance);
     this.tokensByAppearance.set(key, tokens);
     return tokens;
   }
@@ -140,6 +117,7 @@ export class FlexThemeReference implements FlexThemeSource {
 
   public invalidate(): void {
     this.revisionValue += 1;
+    this.descriptionsByAppearance.clear();
     this.tokensByAppearance.clear();
     for (const listener of this.listeners) {
       listener();
@@ -151,12 +129,28 @@ export class FlexThemeReference implements FlexThemeSource {
     this.invalidate();
   }
 
-  private resolveBase(appearance: Readonly<NormalizedThemeAppearance>): FlexTokens {
+  // Parents supply authored descriptions, never appearance-bound resolved tokens.
+  private resolveDescription(appearance: Readonly<NormalizedThemeAppearance>, key: string): FlexTokenDescription {
+    const cached = this.descriptionsByAppearance.get(key);
+    if (cached) {
+      return cached;
+    }
+
+    let description = this.resolveBaseDescription(appearance, key);
+    for (const recipe of this.recipes) {
+      description = mergeFlexTokenDescription(description, typeof recipe === 'function' ? recipe(description, appearance) : recipe);
+    }
+    this.descriptionsByAppearance.set(key, description);
+    return description;
+  }
+
+  private resolveBaseDescription(appearance: Readonly<NormalizedThemeAppearance>, key: string): FlexTokenDescription {
     if (this.base instanceof FlexThemeReference) {
-      return this.base.resolveFlexTokens(appearance);
+      this.base.syncParentRevision();
+      return this.base.resolveDescription(appearance, key);
     }
     const base = typeof this.base === 'function' ? this.base(appearance) : this.base;
-    return base ? immutableMerge(defaultFlexTokens, base) : defaultFlexTokens;
+    return mergeFlexTokenDescription(defaultFlexTokenDescription, base);
   }
 
   private syncParentRevision(): void {

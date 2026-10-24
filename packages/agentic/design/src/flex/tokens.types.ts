@@ -6,278 +6,254 @@ type FontSize = TextStyle['fontSize'];
 type BorderRadius = ViewStyle['borderRadius'];
 type StrokeWidth = ViewStyle['borderWidth'];
 
+/** A color that selects light at index zero and dark at index one. */
+export type ColorTuple = readonly [light: ColorValue, dark: ColorValue];
+
+/** One authored color for every scheme, or a light/dark tuple. */
+export type ColorEntry = ColorValue | ColorTuple;
+
 /**
- * Every semantic color token's rest value. Interactive tokens carry only their
- * rest value here; their `hover`/`pressed` states live in `SemanticColors`.
+ * How omitted interaction states derive from rest. Standard and inverted use
+ * opposite scheme-dependent lightness directions. Fixed requires explicit
+ * states for derivable literal colors.
  */
-export type SemanticColorTokenValues = {
+export type InteractiveColorType = 'standard' | 'inverted' | 'fixed';
+
+/** An authored color with optional explicit interaction states. */
+export type InteractiveColorOptions = {
+  rest: ColorEntry;
+  hover?: ColorEntry;
+  pressed?: ColorEntry;
+  type?: InteractiveColorType;
+};
+
+/** Any authored Flex color. */
+export type FlexColorInput = ColorEntry | InteractiveColorOptions;
+
+/**
+ * A normalized, frozen authored color. Omitted states stay omitted until the
+ * color resolves for an appearance.
+ */
+export type FlexColorDescription = {
+  readonly rest: ColorEntry;
+  readonly hover?: ColorEntry;
+  readonly pressed?: ColorEntry;
+  readonly type: InteractiveColorType;
+};
+
+/**
+ * A resolved Flex color for one appearance. Omitted states are computed on
+ * first read and memoized.
+ */
+export type InteractiveColor = {
+  readonly rest: ColorValue;
+  readonly hover: ColorValue;
+  readonly pressed: ColorValue;
+};
+
+/**
+ * Every semantic color token, resolved for one appearance.
+ */
+export type SemanticColors = {
   // surface / neutral
-  surfaceNeutralFarther: ColorValue;
-  surfaceNeutralFar: ColorValue;
-  surfaceNeutralNear: ColorValue;
-  surfaceNeutralNearer: ColorValue;
-  surfaceNeutralTranslucent: ColorValue;
+  surfaceNeutralFarther: InteractiveColor;
+  surfaceNeutralFar: InteractiveColor;
+  surfaceNeutralNear: InteractiveColor;
+  surfaceNeutralNearer: InteractiveColor;
+  surfaceNeutralTranslucent: InteractiveColor;
 
   // background / neutral
-  backgroundNeutralHeavy: ColorValue;
-  backgroundNeutralLoud: ColorValue;
-  backgroundNeutralSoft: ColorValue;
-  backgroundNeutralSubtle: ColorValue;
-  backgroundNeutralTransparent: ColorValue;
-  backgroundNeutralTranslucent: ColorValue;
+  backgroundNeutralHeavy: InteractiveColor;
+  backgroundNeutralLoud: InteractiveColor;
+  backgroundNeutralSoft: InteractiveColor;
+  backgroundNeutralSubtle: InteractiveColor;
+  backgroundNeutralTransparent: InteractiveColor;
+  backgroundNeutralTranslucent: InteractiveColor;
 
   // background / brand
-  backgroundBrandHeavy: ColorValue;
-  backgroundBrandLoud: ColorValue;
-  backgroundBrandSoft: ColorValue;
-  backgroundBrandSubtle: ColorValue;
-  backgroundBrandTransparent: ColorValue;
+  backgroundBrandHeavy: InteractiveColor;
+  backgroundBrandLoud: InteractiveColor;
+  backgroundBrandSoft: InteractiveColor;
+  backgroundBrandSubtle: InteractiveColor;
+  backgroundBrandTransparent: InteractiveColor;
 
   // background / danger
-  backgroundDangerLoud: ColorValue;
-  backgroundDangerSoft: ColorValue;
-  backgroundDangerSubtle: ColorValue;
+  backgroundDangerLoud: InteractiveColor;
+  backgroundDangerSoft: InteractiveColor;
+  backgroundDangerSubtle: InteractiveColor;
 
   // background / warning
-  backgroundWarningLoud: ColorValue;
-  backgroundWarningSoft: ColorValue;
-  backgroundWarningSubtle: ColorValue;
+  backgroundWarningLoud: InteractiveColor;
+  backgroundWarningSoft: InteractiveColor;
+  backgroundWarningSubtle: InteractiveColor;
 
   // background / success
-  backgroundSuccessLoud: ColorValue;
-  backgroundSuccessSoft: ColorValue;
-  backgroundSuccessSubtle: ColorValue;
+  backgroundSuccessLoud: InteractiveColor;
+  backgroundSuccessSoft: InteractiveColor;
+  backgroundSuccessSubtle: InteractiveColor;
 
   // stroke / neutral
-  strokeNeutralHeavy: ColorValue;
-  strokeNeutralLoud: ColorValue;
-  strokeNeutralSoft: ColorValue;
-  strokeNeutralSubtle: ColorValue;
-  strokeNeutralTransparent: ColorValue;
-  strokeNeutralOnloud: ColorValue;
+  strokeNeutralHeavy: InteractiveColor;
+  strokeNeutralLoud: InteractiveColor;
+  strokeNeutralSoft: InteractiveColor;
+  strokeNeutralSubtle: InteractiveColor;
+  strokeNeutralTransparent: InteractiveColor;
+  strokeNeutralOnloud: InteractiveColor;
 
   // stroke / brand
-  strokeBrandLoud: ColorValue;
-  strokeBrandSoft: ColorValue;
-  strokeBrandSubtle: ColorValue;
-  strokeBrandOnloud: ColorValue;
+  strokeBrandLoud: InteractiveColor;
+  strokeBrandSoft: InteractiveColor;
+  strokeBrandSubtle: InteractiveColor;
+  strokeBrandOnloud: InteractiveColor;
 
   // stroke / danger
-  strokeDangerLoud: ColorValue;
-  strokeDangerSoft: ColorValue;
-  strokeDangerSubtle: ColorValue;
-  strokeDangerOnloud: ColorValue;
+  strokeDangerLoud: InteractiveColor;
+  strokeDangerSoft: InteractiveColor;
+  strokeDangerSubtle: InteractiveColor;
+  strokeDangerOnloud: InteractiveColor;
 
   // stroke / warning
-  strokeWarningLoud: ColorValue;
-  strokeWarningSoft: ColorValue;
-  strokeWarningSubtle: ColorValue;
-  strokeWarningOnloud: ColorValue;
+  strokeWarningLoud: InteractiveColor;
+  strokeWarningSoft: InteractiveColor;
+  strokeWarningSubtle: InteractiveColor;
+  strokeWarningOnloud: InteractiveColor;
 
   // stroke / success
-  strokeSuccessLoud: ColorValue;
-  strokeSuccessSoft: ColorValue;
-  strokeSuccessSubtle: ColorValue;
-  strokeSuccessOnloud: ColorValue;
+  strokeSuccessLoud: InteractiveColor;
+  strokeSuccessSoft: InteractiveColor;
+  strokeSuccessSubtle: InteractiveColor;
+  strokeSuccessOnloud: InteractiveColor;
 
   // foreground / neutral
-  foregroundNeutralPrimary: ColorValue;
-  foregroundNeutralSecondary: ColorValue;
-  foregroundNeutralTertiary: ColorValue;
-  foregroundNeutralOnloud: ColorValue;
+  foregroundNeutralPrimary: InteractiveColor;
+  foregroundNeutralSecondary: InteractiveColor;
+  foregroundNeutralTertiary: InteractiveColor;
+  foregroundNeutralOnloud: InteractiveColor;
 
   // foreground / brand
-  foregroundBrandPrimary: ColorValue;
-  foregroundBrandOnloud: ColorValue;
+  foregroundBrandPrimary: InteractiveColor;
+  foregroundBrandOnloud: InteractiveColor;
 
   // foreground / danger
-  foregroundDangerPrimary: ColorValue;
-  foregroundDangerOnloud: ColorValue;
+  foregroundDangerPrimary: InteractiveColor;
+  foregroundDangerOnloud: InteractiveColor;
 
   // foreground / warning
-  foregroundWarningPrimary: ColorValue;
-  foregroundWarningOnloud: ColorValue;
+  foregroundWarningPrimary: InteractiveColor;
+  foregroundWarningOnloud: InteractiveColor;
 
   // foreground / success
-  foregroundSuccessPrimary: ColorValue;
-  foregroundSuccessOnloud: ColorValue;
+  foregroundSuccessPrimary: InteractiveColor;
+  foregroundSuccessOnloud: InteractiveColor;
 
   // fixed
-  fixedWhite: ColorValue;
-  fixedBlack: ColorValue;
+  fixedWhite: InteractiveColor;
+  fixedBlack: InteractiveColor;
 
   // expression / accent
-  expressionAccentHeavy: ColorValue;
-  expressionAccentLoud: ColorValue;
-  expressionAccentSoft: ColorValue;
-  expressionAccentSubtle: ColorValue;
+  expressionAccentHeavy: InteractiveColor;
+  expressionAccentLoud: InteractiveColor;
+  expressionAccentSoft: InteractiveColor;
+  expressionAccentSubtle: InteractiveColor;
 
   // expression / achromatic
-  expressionAchromaticHeavy: ColorValue;
-  expressionAchromaticSubtle: ColorValue;
+  expressionAchromaticHeavy: InteractiveColor;
+  expressionAchromaticSubtle: InteractiveColor;
 
   // expression / gray
-  expressionGrayHeavy: ColorValue;
-  expressionGrayLoud: ColorValue;
-  expressionGraySoft: ColorValue;
-  expressionGraySubtle: ColorValue;
+  expressionGrayHeavy: InteractiveColor;
+  expressionGrayLoud: InteractiveColor;
+  expressionGraySoft: InteractiveColor;
+  expressionGraySubtle: InteractiveColor;
 
   // expression / navy
-  expressionNavyHeavy: ColorValue;
-  expressionNavyLoud: ColorValue;
-  expressionNavySoft: ColorValue;
-  expressionNavySubtle: ColorValue;
+  expressionNavyHeavy: InteractiveColor;
+  expressionNavyLoud: InteractiveColor;
+  expressionNavySoft: InteractiveColor;
+  expressionNavySubtle: InteractiveColor;
 
   // expression / blue
-  expressionBlueHeavy: ColorValue;
-  expressionBlueLoud: ColorValue;
-  expressionBlueSoft: ColorValue;
-  expressionBlueSubtle: ColorValue;
+  expressionBlueHeavy: InteractiveColor;
+  expressionBlueLoud: InteractiveColor;
+  expressionBlueSoft: InteractiveColor;
+  expressionBlueSubtle: InteractiveColor;
 
   // expression / green
-  expressionGreenHeavy: ColorValue;
-  expressionGreenLoud: ColorValue;
-  expressionGreenSoft: ColorValue;
-  expressionGreenSubtle: ColorValue;
+  expressionGreenHeavy: InteractiveColor;
+  expressionGreenLoud: InteractiveColor;
+  expressionGreenSoft: InteractiveColor;
+  expressionGreenSubtle: InteractiveColor;
 
   // expression / lime
-  expressionLimeHeavy: ColorValue;
-  expressionLimeLoud: ColorValue;
-  expressionLimeSoft: ColorValue;
-  expressionLimeSubtle: ColorValue;
+  expressionLimeHeavy: InteractiveColor;
+  expressionLimeLoud: InteractiveColor;
+  expressionLimeSoft: InteractiveColor;
+  expressionLimeSubtle: InteractiveColor;
 
   // expression / yellow
-  expressionYellowHeavy: ColorValue;
-  expressionYellowLoud: ColorValue;
-  expressionYellowSoft: ColorValue;
-  expressionYellowSubtle: ColorValue;
+  expressionYellowHeavy: InteractiveColor;
+  expressionYellowLoud: InteractiveColor;
+  expressionYellowSoft: InteractiveColor;
+  expressionYellowSubtle: InteractiveColor;
 
   // expression / pumpkin
-  expressionPumpkinHeavy: ColorValue;
-  expressionPumpkinLoud: ColorValue;
-  expressionPumpkinSoft: ColorValue;
-  expressionPumpkinSubtle: ColorValue;
+  expressionPumpkinHeavy: InteractiveColor;
+  expressionPumpkinLoud: InteractiveColor;
+  expressionPumpkinSoft: InteractiveColor;
+  expressionPumpkinSubtle: InteractiveColor;
 
   // expression / red
-  expressionRedHeavy: ColorValue;
-  expressionRedLoud: ColorValue;
-  expressionRedSoft: ColorValue;
-  expressionRedSubtle: ColorValue;
+  expressionRedHeavy: InteractiveColor;
+  expressionRedLoud: InteractiveColor;
+  expressionRedSoft: InteractiveColor;
+  expressionRedSubtle: InteractiveColor;
 
   // expression / pink
-  expressionPinkHeavy: ColorValue;
-  expressionPinkLoud: ColorValue;
-  expressionPinkSoft: ColorValue;
-  expressionPinkSubtle: ColorValue;
+  expressionPinkHeavy: InteractiveColor;
+  expressionPinkLoud: InteractiveColor;
+  expressionPinkSoft: InteractiveColor;
+  expressionPinkSubtle: InteractiveColor;
 
   // expression / purple
-  expressionPurpleHeavy: ColorValue;
-  expressionPurpleLoud: ColorValue;
-  expressionPurpleSoft: ColorValue;
-  expressionPurpleSubtle: ColorValue;
+  expressionPurpleHeavy: InteractiveColor;
+  expressionPurpleLoud: InteractiveColor;
+  expressionPurpleSoft: InteractiveColor;
+  expressionPurpleSubtle: InteractiveColor;
 
   // overlay
-  overlayNeutralTranslucent: ColorValue;
+  overlayNeutralTranslucent: InteractiveColor;
 
   // material / background
-  materialBackgroundThick: ColorValue;
-  materialBackgroundRegular: ColorValue;
-  materialBackgroundThin: ColorValue;
+  materialBackgroundThick: InteractiveColor;
+  materialBackgroundRegular: InteractiveColor;
+  materialBackgroundThin: InteractiveColor;
 
   // disabled
-  backgroundNeutralDisabled: ColorValue;
-  backgroundNeutralHeavyDisabled: ColorValue;
-  backgroundNeutralSubtleDisabled: ColorValue;
-  strokeNeutralDisabled: ColorValue;
-  foregroundNeutralDisabled: ColorValue;
+  backgroundNeutralDisabled: InteractiveColor;
+  backgroundNeutralHeavyDisabled: InteractiveColor;
+  backgroundNeutralSubtleDisabled: InteractiveColor;
+  strokeNeutralDisabled: InteractiveColor;
+  foregroundNeutralDisabled: InteractiveColor;
 
   // focus strokes
-  strokeFocusInner: ColorValue;
-  strokeFocusOuter: ColorValue;
+  strokeFocusInner: InteractiveColor;
+  strokeFocusOuter: InteractiveColor;
 
   // shadow
-  shadow: ColorValue;
+  shadow: InteractiveColor;
 };
 
-/**
- * The subset of `SemanticColorTokenValues` that has interaction states. Used to
- * shape the `hover` and `pressed` override maps on `SemanticColors`.
- *
- * Source of truth: `dev/web/flex-themes/css/interaction-fallback.css`.
- */
-export type InteractiveColorOverrides = Partial<
-  Pick<
-    SemanticColorTokenValues,
-    | 'surfaceNeutralFarther'
-    | 'surfaceNeutralFar'
-    | 'surfaceNeutralNear'
-    | 'surfaceNeutralNearer'
-    | 'surfaceNeutralTranslucent'
-    | 'backgroundNeutralHeavy'
-    | 'backgroundNeutralLoud'
-    | 'backgroundNeutralSoft'
-    | 'backgroundNeutralSubtle'
-    | 'backgroundNeutralTransparent'
-    | 'backgroundNeutralTranslucent'
-    | 'backgroundBrandHeavy'
-    | 'backgroundBrandLoud'
-    | 'backgroundBrandSoft'
-    | 'backgroundBrandSubtle'
-    | 'backgroundBrandTransparent'
-    | 'backgroundDangerLoud'
-    | 'backgroundDangerSoft'
-    | 'backgroundDangerSubtle'
-    | 'backgroundWarningLoud'
-    | 'backgroundWarningSoft'
-    | 'backgroundWarningSubtle'
-    | 'backgroundSuccessLoud'
-    | 'backgroundSuccessSoft'
-    | 'backgroundSuccessSubtle'
-    | 'strokeNeutralHeavy'
-    | 'strokeNeutralLoud'
-    | 'strokeNeutralSoft'
-    | 'strokeNeutralSubtle'
-    | 'strokeNeutralTransparent'
-    | 'strokeNeutralOnloud'
-    | 'strokeBrandLoud'
-    | 'strokeBrandSoft'
-    | 'strokeBrandSubtle'
-    | 'strokeBrandOnloud'
-    | 'strokeDangerLoud'
-    | 'strokeDangerSoft'
-    | 'strokeDangerSubtle'
-    | 'strokeDangerOnloud'
-    | 'strokeWarningLoud'
-    | 'strokeWarningSoft'
-    | 'strokeWarningSubtle'
-    | 'strokeWarningOnloud'
-    | 'strokeSuccessLoud'
-    | 'strokeSuccessSoft'
-    | 'strokeSuccessSubtle'
-    | 'strokeSuccessOnloud'
-    | 'foregroundNeutralPrimary'
-    | 'foregroundNeutralSecondary'
-    | 'foregroundNeutralTertiary'
-    | 'foregroundNeutralOnloud'
-    | 'foregroundBrandPrimary'
-    | 'foregroundBrandOnloud'
-    | 'foregroundDangerPrimary'
-    | 'foregroundDangerOnloud'
-    | 'foregroundWarningPrimary'
-    | 'foregroundWarningOnloud'
-    | 'foregroundSuccessPrimary'
-    | 'foregroundSuccessOnloud'
-  >
->;
+/** A semantic color token name. */
+export type SemanticColorName = keyof SemanticColors;
 
-/**
- * The full semantic color token set: every token's rest value, plus `hover` and
- * `pressed` maps that override only the interactive tokens.
- */
-export type SemanticColors = SemanticColorTokenValues & {
-  hover: InteractiveColorOverrides;
-  pressed: InteractiveColorOverrides;
-};
+/** One selected color value for each semantic color token. */
+export type SemanticColorTokenValues = { [Name in SemanticColorName]: ColorValue };
+
+/** Authored semantic colors. `undefined` means no override. */
+export type PartialSemanticColors = { [Name in SemanticColorName]?: FlexColorInput };
+
+/** Normalized authored semantic colors. */
+export type SemanticColorDescriptions = { readonly [Name in SemanticColorName]: FlexColorDescription };
 
 /**
  * The semantic shadow token set
@@ -434,6 +410,27 @@ export type FlexTokens = {
 };
 
 export type SemanticTokens = FlexTokens;
+
+type NonColorFlexTokenGroup = Exclude<keyof FlexTokens, 'color'>;
+
+/**
+ * Authored Flex token overrides. Each color is an atomic replacement; non-color
+ * groups deep merge.
+ */
+export type PartialFlexTokens = { color?: PartialSemanticColors } & {
+  [Group in NonColorFlexTokenGroup]?: Partial<FlexTokens[Group]>;
+};
+
+/** A complete authored Flex token set. */
+export type CompleteFlexTokenInput = { color: { [Name in SemanticColorName]: FlexColorInput } } & Pick<FlexTokens, NonColorFlexTokenGroup>;
+
+/**
+ * A complete, normalized authored token set before appearance resolution.
+ * Recipes receive this form.
+ */
+export type FlexTokenDescription = { readonly color: SemanticColorDescriptions } & {
+  readonly [Group in NonColorFlexTokenGroup]: FlexTokens[Group];
+};
 
 /**
  * These are flex tokens from web that are not supported on native.

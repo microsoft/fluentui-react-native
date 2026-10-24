@@ -16,7 +16,7 @@ const theme = new FlexThemeReference({ appearance: { colorScheme: 'system' } });
 
 const Title = () => {
   const { tokens } = useThemeState();
-  return <Text style={{ color: tokens.color.foregroundNeutralPrimary, fontSize: tokens.fontSize.functionalTitleSmall }}>Hello</Text>;
+  return <Text style={{ color: tokens.color.foregroundNeutralPrimary.rest, fontSize: tokens.fontSize.functionalTitleSmall }}>Hello</Text>;
 };
 
 export const App = () => (
@@ -34,6 +34,7 @@ Existing `ThemeReference` themes and `useTheme` consumers keep working under the
 | Topic                                          | Covers                                                                |
 | ---------------------------------------------- | --------------------------------------------------------------------- |
 | [Theming](references/theming.md)               | Theme references, providers, appearance, hooks, and legacy projection |
+| [Flex colors](references/flex-colors.md)       | Authoring and reading Flex colors, and migrating from flat colors     |
 | [Tokens](references/tokens.md)                 | Token sources and Flex token mapping maintenance                      |
 | [Styling](references/styling.md)               | Themed style caches and state or color style factories                |
 | [Color library](references/color-lib.md)       | Raw `color-lib` algorithms and the Flex interaction-color policy      |

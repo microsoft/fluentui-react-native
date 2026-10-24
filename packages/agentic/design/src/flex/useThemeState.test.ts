@@ -89,7 +89,7 @@ describe('useThemeState', () => {
       createCount += 1;
       return StyleSheet.create({
         root: {
-          backgroundColor: tokens.color.backgroundNeutralSubtle,
+          backgroundColor: tokens.color.backgroundNeutralSubtle.rest,
         },
       });
     });
@@ -114,7 +114,7 @@ describe('useThemeState', () => {
       createCount += 1;
       return StyleSheet.create({
         root: {
-          backgroundColor: tokens.color.backgroundNeutralSubtle,
+          backgroundColor: tokens.color.backgroundNeutralSubtle.rest,
         },
       });
     });
@@ -123,7 +123,7 @@ describe('useThemeState', () => {
     const second = getStyles(states[0]);
 
     expect(first).toBe(second);
-    expect(first.root.backgroundColor).toBe(states[0].tokens.color.backgroundNeutralSubtle);
+    expect(first.root.backgroundColor).toBe(states[0].tokens.color.backgroundNeutralSubtle.rest);
     expect(createCount).toBe(1);
     act(() => component!.unmount());
   });
@@ -151,7 +151,7 @@ describe('useThemeState', () => {
 
     expect(states).toHaveLength(2);
     expect(states[0]).toBe(states[1]);
-    expect(states[0].tokens.color.backgroundNeutralSubtle).toBe('#123456');
+    expect(states[0].tokens.color.backgroundNeutralSubtle.rest).toBe('#123456');
     expect(states[0].highContrast).toBe(true);
     expect(states[0].appearance.contrast).toBe('highContrast');
     expect(states[0].appearance.colorTone).toBe('cool');
@@ -185,7 +185,7 @@ describe('useThemeState', () => {
     });
 
     expect(states[1]).not.toBe(states[0]);
-    expect(states[1].tokens.color.backgroundNeutralSubtle).toBe('#222222');
+    expect(states[1].tokens.color.backgroundNeutralSubtle.rest).toBe('#222222');
     act(() => component!.unmount());
   });
 
@@ -217,7 +217,7 @@ describe('useThemeState', () => {
     });
 
     expect(resolver).toHaveBeenCalledTimes(1);
-    expect(states[0].tokens.color.backgroundBrandHeavy).toBe('#123456');
+    expect(states[0].tokens.color.backgroundBrandHeavy.rest).toBe('#123456');
     expect(states[0].appearance).toBe(defaultResolvedThemeAppearance);
     act(() => component!.unmount());
   });

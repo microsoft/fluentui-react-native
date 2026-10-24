@@ -1,8 +1,8 @@
-import type { FlexTokens } from '../../flex/tokens.types';
+import type { FlexTokens, SemanticColorTokenValues } from '../../flex/tokens.types';
 import reverseProjection from '../../tokens/mappings/theme-from-flex.json' with { type: 'json' };
 import { appearanceOptionFromResolved } from '../../theming/appearance';
 import type { ResolvedThemeAppearance } from '../../types/appearance.types';
-import { ensureParentRecord, getValueAtSegments, splitObjectPath } from '../../utilities/objects';
+import { ensureParentRecord, getValueAtSegments, isRecord, splitObjectPath } from '../../utilities/objects';
 import { mergeTheme } from '../mergeTheme';
 import type { PartialTheme, Theme } from '../types/Theme.types';
 
@@ -20,11 +20,49 @@ export interface ThemeFromFlexTokensOptions {
   fallback?: Theme | PartialTheme;
 }
 
+/**
+ * Flex tokens in the representation used before interactive colors: each color
+ * is its rest value, and optional `color.hover` and `color.pressed` maps hold
+ * explicit states.
+ *
+ * @deprecated Pass resolved {@link FlexTokens}, whose colors carry
+ * `rest`, `hover`, and `pressed`.
+ */
+export type FlatFlexTokens = Omit<FlexTokens, 'color'> & {
+  color: SemanticColorTokenValues & {
+    hover?: Partial<SemanticColorTokenValues>;
+    pressed?: Partial<SemanticColorTokenValues>;
+  };
+};
+
+const colorStatePathPattern = /^color\.([^.]+)\.(rest|hover|pressed)$/;
+
+function getOwnValue(source: unknown, key: string): unknown {
+  return isRecord(source) && Object.prototype.hasOwnProperty.call(source, key) ? source[key] : undefined;
+}
+
+/**
+ * Read a color state from resolved tokens, or from the flat representation
+ * where the color is its rest value and states live in `color.<state>` maps.
+ */
+function getColorState(tokens: FlexTokens | FlatFlexTokens, name: string, state: string): unknown {
+  const colors = getOwnValue(tokens, 'color');
+  const entry = getOwnValue(colors, name);
+  if (isRecord(entry) && Object.prototype.hasOwnProperty.call(entry, 'rest')) {
+    return entry[state];
+  }
+  return state === 'rest' ? entry : getOwnValue(getOwnValue(colors, state), name);
+}
+
 function getPathSegments(path: string): string[] {
   return splitObjectPath(path, () => new Error(`Invalid generated theme projection path "${path}".`));
 }
 
-function getValueAtPath(source: object, path: string): unknown {
+function getValueAtPath(source: FlexTokens | FlatFlexTokens, path: string): unknown {
+  const colorState = colorStatePathPattern.exec(path);
+  if (colorState) {
+    return getColorState(source, colorState[1], colorState[2]);
+  }
   return getValueAtSegments(source, getPathSegments(path));
 }
 
@@ -45,7 +83,7 @@ function applyTransform(value: unknown, transform?: ReverseTransform): unknown {
   return value;
 }
 
-function projectThemeValues(tokens: FlexTokens): PartialTheme {
+function projectThemeValues(tokens: FlexTokens | FlatFlexTokens): PartialTheme {
   const projected: Record<string, unknown> = {};
   for (const [themePath, descriptor] of Object.entries(reverseProjection as Record<string, ReverseProjectionEntry>)) {
     let value = getValueAtPath(tokens, descriptor.source);
@@ -64,10 +102,11 @@ function projectThemeValues(tokens: FlexTokens): PartialTheme {
  *
  * The compatibility base fills legacy-only values, the optional fallback adds
  * author or host metadata, mapped Flex values remain authoritative, and the
- * final host appearance reflects the resolved structured appearance.
+ * final host appearance reflects the resolved structured appearance. Reading
+ * a derived interaction state computes it.
  */
 export function themeFromFlexTokens(
-  tokens: FlexTokens,
+  tokens: FlexTokens | FlatFlexTokens,
   appearance: ResolvedThemeAppearance,
   options?: { fallback?: Theme | PartialTheme },
 ): Theme {

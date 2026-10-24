@@ -21,13 +21,10 @@ export {
 } from './appearance';
 export { createThemeAppearanceSource } from './appearanceSource';
 export { FlexThemeReference } from '../flex/flexThemeReference';
-export type {
-  FlexThemeInput,
-  FlexThemeRecipe,
-  FlexThemeReferenceOptions,
-  LegacyThemeFallback,
-  PartialFlexTokens,
-} from '../flex/flexThemeReference';
+export type { FlexThemeInput, FlexThemeRecipe, FlexThemeReferenceOptions, LegacyThemeFallback } from '../flex/flexThemeReference';
+export { flexColor, selectColorEntry } from '../flex/colors/flexColor';
+export type { ColorSchemeSelector } from '../flex/colors/flexColor';
+export type { FlexTokenDescription, PartialFlexTokens } from '../flex/tokens.types';
 export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 export { ThemedRoot } from './ThemedRoot';

@@ -64,18 +64,18 @@ export const listboxItemStyles = StyleSheet.create({
 function getColor(state: ListboxItemState, key: 'primary' | 'secondary'): ViewStyle['backgroundColor'] {
   const colors = state.tokens.color;
   if (state.disabled) {
-    return colors.foregroundNeutralDisabled;
+    return colors.foregroundNeutralDisabled.rest;
   }
   if (state.pressed) {
-    return key === 'primary' ? colors.pressed.foregroundNeutralPrimary : colors.pressed.foregroundNeutralSecondary;
+    return key === 'primary' ? colors.foregroundNeutralPrimary.pressed : colors.foregroundNeutralSecondary.pressed;
   }
   if (state.hovered) {
-    return key === 'primary' ? colors.hover.foregroundNeutralPrimary : colors.hover.foregroundNeutralSecondary;
+    return key === 'primary' ? colors.foregroundNeutralPrimary.hover : colors.foregroundNeutralSecondary.hover;
   }
   if (key === 'secondary' && state.variant === 'listItem' && state.selected && !state.multiselect) {
-    return colors.foregroundNeutralPrimary;
+    return colors.foregroundNeutralPrimary.rest;
   }
-  return key === 'primary' ? colors.foregroundNeutralPrimary : colors.foregroundNeutralSecondary;
+  return key === 'primary' ? colors.foregroundNeutralPrimary.rest : colors.foregroundNeutralSecondary.rest;
 }
 
 function getLabelWeight(state: ListboxItemState): TextStyle['fontWeight'] {
@@ -89,19 +89,19 @@ export function getListboxItemRootStyle(state: ListboxItemState): ViewStyle {
   const selected = state.variant === 'listItem' && state.selected && !state.multiselect;
   const backgroundColor = state.disabled
     ? selected
-      ? colors.backgroundNeutralSubtleDisabled
-      : colors.backgroundNeutralTransparent
+      ? colors.backgroundNeutralSubtleDisabled.rest
+      : colors.backgroundNeutralTransparent.rest
     : state.pressed
       ? selected
-        ? colors.pressed.backgroundNeutralSoft
-        : colors.pressed.backgroundNeutralTransparent
+        ? colors.backgroundNeutralSoft.pressed
+        : colors.backgroundNeutralTransparent.pressed
       : state.hovered
         ? selected
-          ? colors.hover.backgroundNeutralSoft
-          : colors.hover.backgroundNeutralTransparent
+          ? colors.backgroundNeutralSoft.hover
+          : colors.backgroundNeutralTransparent.hover
         : selected
-          ? colors.backgroundNeutralSoft
-          : colors.backgroundNeutralTransparent;
+          ? colors.backgroundNeutralSoft.rest
+          : colors.backgroundNeutralTransparent.rest;
 
   return {
     backgroundColor,
@@ -114,7 +114,7 @@ export function getListboxItemRootStyle(state: ListboxItemState): ViewStyle {
 
 export function getListboxItemHeaderStyle(state: ListboxItemState): ViewStyle {
   return {
-    backgroundColor: state.tokens.color.backgroundNeutralTransparent,
+    backgroundColor: state.tokens.color.backgroundNeutralTransparent.rest,
     borderRadius: state.tokens.borderRadius.base300,
     minHeight: 40,
     paddingHorizontal: state.tokens.spacing.componentBase300,

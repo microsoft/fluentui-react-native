@@ -1,246 +1,246 @@
 {
   "colors.black": {
-    "source": "color.fixedBlack"
+    "source": "color.fixedBlack.rest"
   },
   "colors.brandBackground": {
-    "source": "color.backgroundBrandHeavy"
+    "source": "color.backgroundBrandHeavy.rest"
   },
   "colors.brandBackground2": {
-    "source": "color.backgroundBrandSoft"
+    "source": "color.backgroundBrandSoft.rest"
   },
   "colors.brandBackgroundHover": {
-    "source": "color.hover.backgroundBrandHeavy",
-    "fallback": "color.backgroundBrandHeavy"
+    "source": "color.backgroundBrandHeavy.hover",
+    "fallback": "color.backgroundBrandHeavy.rest"
   },
   "colors.brandBackgroundPressed": {
-    "source": "color.pressed.backgroundBrandHeavy",
-    "fallback": "color.backgroundBrandHeavy"
+    "source": "color.backgroundBrandHeavy.pressed",
+    "fallback": "color.backgroundBrandHeavy.rest"
   },
   "colors.brandForeground1": {
-    "source": "color.foregroundBrandPrimary"
+    "source": "color.foregroundBrandPrimary.rest"
   },
   "colors.brandStroke1": {
-    "source": "color.strokeBrandLoud"
+    "source": "color.strokeBrandLoud.rest"
   },
   "colors.brandStroke2": {
-    "source": "color.strokeBrandSubtle"
+    "source": "color.strokeBrandSubtle.rest"
   },
   "colors.compoundBrandBackground1": {
-    "source": "color.backgroundBrandLoud"
+    "source": "color.backgroundBrandLoud.rest"
   },
   "colors.compoundBrandBackground1Hover": {
-    "source": "color.hover.backgroundBrandLoud",
-    "fallback": "color.backgroundBrandLoud"
+    "source": "color.backgroundBrandLoud.hover",
+    "fallback": "color.backgroundBrandLoud.rest"
   },
   "colors.compoundBrandBackground1Pressed": {
-    "source": "color.pressed.backgroundBrandLoud",
-    "fallback": "color.backgroundBrandLoud"
+    "source": "color.backgroundBrandLoud.pressed",
+    "fallback": "color.backgroundBrandLoud.rest"
   },
   "colors.dangerBackground1": {
-    "source": "color.backgroundDangerSubtle"
+    "source": "color.backgroundDangerSubtle.rest"
   },
   "colors.dangerBackground2": {
-    "source": "color.backgroundDangerSoft"
+    "source": "color.backgroundDangerSoft.rest"
   },
   "colors.dangerBackground3": {
-    "source": "color.backgroundDangerLoud"
+    "source": "color.backgroundDangerLoud.rest"
   },
   "colors.dangerBorder1": {
-    "source": "color.strokeDangerSoft"
+    "source": "color.strokeDangerSoft.rest"
   },
   "colors.dangerBorder2": {
-    "source": "color.strokeDangerLoud"
+    "source": "color.strokeDangerLoud.rest"
   },
   "colors.dangerForeground1": {
-    "source": "color.foregroundDangerPrimary"
+    "source": "color.foregroundDangerPrimary.rest"
   },
   "colors.neutralBackground1": {
-    "source": "color.surfaceNeutralNearer"
+    "source": "color.surfaceNeutralNearer.rest"
   },
   "colors.neutralBackground1Hover": {
-    "source": "color.hover.surfaceNeutralNearer",
-    "fallback": "color.surfaceNeutralNearer"
+    "source": "color.surfaceNeutralNearer.hover",
+    "fallback": "color.surfaceNeutralNearer.rest"
   },
   "colors.neutralBackground1Pressed": {
-    "source": "color.pressed.surfaceNeutralNearer",
-    "fallback": "color.surfaceNeutralNearer"
+    "source": "color.surfaceNeutralNearer.pressed",
+    "fallback": "color.surfaceNeutralNearer.rest"
   },
   "colors.neutralBackground2": {
-    "source": "color.surfaceNeutralNear"
+    "source": "color.surfaceNeutralNear.rest"
   },
   "colors.neutralBackground2Hover": {
-    "source": "color.hover.surfaceNeutralNear",
-    "fallback": "color.surfaceNeutralNear"
+    "source": "color.surfaceNeutralNear.hover",
+    "fallback": "color.surfaceNeutralNear.rest"
   },
   "colors.neutralBackground2Pressed": {
-    "source": "color.pressed.surfaceNeutralNear",
-    "fallback": "color.surfaceNeutralNear"
+    "source": "color.surfaceNeutralNear.pressed",
+    "fallback": "color.surfaceNeutralNear.rest"
   },
   "colors.neutralBackground3": {
-    "source": "color.surfaceNeutralFar"
+    "source": "color.surfaceNeutralFar.rest"
   },
   "colors.neutralBackground3Hover": {
-    "source": "color.hover.surfaceNeutralFar",
-    "fallback": "color.surfaceNeutralFar"
+    "source": "color.surfaceNeutralFar.hover",
+    "fallback": "color.surfaceNeutralFar.rest"
   },
   "colors.neutralBackground3Pressed": {
-    "source": "color.pressed.surfaceNeutralFar",
-    "fallback": "color.surfaceNeutralFar"
+    "source": "color.surfaceNeutralFar.pressed",
+    "fallback": "color.surfaceNeutralFar.rest"
   },
   "colors.neutralBackground5": {
-    "source": "color.surfaceNeutralFarther"
+    "source": "color.surfaceNeutralFarther.rest"
   },
   "colors.neutralBackground5Hover": {
-    "source": "color.hover.surfaceNeutralFarther",
-    "fallback": "color.surfaceNeutralFarther"
+    "source": "color.surfaceNeutralFarther.hover",
+    "fallback": "color.surfaceNeutralFarther.rest"
   },
   "colors.neutralBackground5Pressed": {
-    "source": "color.pressed.surfaceNeutralFarther",
-    "fallback": "color.surfaceNeutralFarther"
+    "source": "color.surfaceNeutralFarther.pressed",
+    "fallback": "color.surfaceNeutralFarther.rest"
   },
   "colors.neutralBackgroundDisabled": {
-    "source": "color.backgroundNeutralDisabled"
+    "source": "color.backgroundNeutralDisabled.rest"
   },
   "colors.neutralBackgroundInverted": {
-    "source": "color.backgroundNeutralHeavy"
+    "source": "color.backgroundNeutralHeavy.rest"
   },
   "colors.neutralForeground1": {
-    "source": "color.foregroundNeutralPrimary"
+    "source": "color.foregroundNeutralPrimary.rest"
   },
   "colors.neutralForeground1Hover": {
-    "source": "color.hover.foregroundNeutralPrimary",
-    "fallback": "color.foregroundNeutralPrimary"
+    "source": "color.foregroundNeutralPrimary.hover",
+    "fallback": "color.foregroundNeutralPrimary.rest"
   },
   "colors.neutralForeground1Pressed": {
-    "source": "color.pressed.foregroundNeutralPrimary",
-    "fallback": "color.foregroundNeutralPrimary"
+    "source": "color.foregroundNeutralPrimary.pressed",
+    "fallback": "color.foregroundNeutralPrimary.rest"
   },
   "colors.neutralForeground2": {
-    "source": "color.foregroundNeutralSecondary"
+    "source": "color.foregroundNeutralSecondary.rest"
   },
   "colors.neutralForeground2Hover": {
-    "source": "color.hover.foregroundNeutralSecondary",
-    "fallback": "color.foregroundNeutralSecondary"
+    "source": "color.foregroundNeutralSecondary.hover",
+    "fallback": "color.foregroundNeutralSecondary.rest"
   },
   "colors.neutralForeground2Pressed": {
-    "source": "color.pressed.foregroundNeutralSecondary",
-    "fallback": "color.foregroundNeutralSecondary"
+    "source": "color.foregroundNeutralSecondary.pressed",
+    "fallback": "color.foregroundNeutralSecondary.rest"
   },
   "colors.neutralForeground3": {
-    "source": "color.foregroundNeutralTertiary"
+    "source": "color.foregroundNeutralTertiary.rest"
   },
   "colors.neutralForeground3Hover": {
-    "source": "color.hover.foregroundNeutralTertiary",
-    "fallback": "color.foregroundNeutralTertiary"
+    "source": "color.foregroundNeutralTertiary.hover",
+    "fallback": "color.foregroundNeutralTertiary.rest"
   },
   "colors.neutralForeground3Pressed": {
-    "source": "color.pressed.foregroundNeutralTertiary",
-    "fallback": "color.foregroundNeutralTertiary"
+    "source": "color.foregroundNeutralTertiary.pressed",
+    "fallback": "color.foregroundNeutralTertiary.rest"
   },
   "colors.neutralForegroundDisabled": {
-    "source": "color.foregroundNeutralDisabled"
+    "source": "color.foregroundNeutralDisabled.rest"
   },
   "colors.neutralForegroundOnBrand": {
-    "source": "color.foregroundNeutralOnloud"
+    "source": "color.foregroundNeutralOnloud.rest"
   },
   "colors.neutralForegroundOnBrandHover": {
-    "source": "color.hover.foregroundNeutralOnloud",
-    "fallback": "color.foregroundNeutralOnloud"
+    "source": "color.foregroundNeutralOnloud.hover",
+    "fallback": "color.foregroundNeutralOnloud.rest"
   },
   "colors.neutralForegroundOnBrandPressed": {
-    "source": "color.pressed.foregroundNeutralOnloud",
-    "fallback": "color.foregroundNeutralOnloud"
+    "source": "color.foregroundNeutralOnloud.pressed",
+    "fallback": "color.foregroundNeutralOnloud.rest"
   },
   "colors.neutralStroke1": {
-    "source": "color.strokeNeutralLoud"
+    "source": "color.strokeNeutralLoud.rest"
   },
   "colors.neutralStroke1Hover": {
-    "source": "color.hover.strokeNeutralLoud",
-    "fallback": "color.strokeNeutralLoud"
+    "source": "color.strokeNeutralLoud.hover",
+    "fallback": "color.strokeNeutralLoud.rest"
   },
   "colors.neutralStroke1Pressed": {
-    "source": "color.pressed.strokeNeutralLoud",
-    "fallback": "color.strokeNeutralLoud"
+    "source": "color.strokeNeutralLoud.pressed",
+    "fallback": "color.strokeNeutralLoud.rest"
   },
   "colors.neutralStroke2": {
-    "source": "color.strokeNeutralSubtle"
+    "source": "color.strokeNeutralSubtle.rest"
   },
   "colors.neutralStrokeAccessible": {
-    "source": "color.strokeNeutralHeavy"
+    "source": "color.strokeNeutralHeavy.rest"
   },
   "colors.neutralStrokeAccessibleHover": {
-    "source": "color.hover.strokeNeutralHeavy",
-    "fallback": "color.strokeNeutralHeavy"
+    "source": "color.strokeNeutralHeavy.hover",
+    "fallback": "color.strokeNeutralHeavy.rest"
   },
   "colors.neutralStrokeAccessiblePressed": {
-    "source": "color.pressed.strokeNeutralHeavy",
-    "fallback": "color.strokeNeutralHeavy"
+    "source": "color.strokeNeutralHeavy.pressed",
+    "fallback": "color.strokeNeutralHeavy.rest"
   },
   "colors.neutralStrokeDisabled": {
-    "source": "color.strokeNeutralDisabled"
+    "source": "color.strokeNeutralDisabled.rest"
   },
   "colors.strokeFocus1": {
-    "source": "color.strokeFocusInner"
+    "source": "color.strokeFocusInner.rest"
   },
   "colors.strokeFocus2": {
-    "source": "color.strokeFocusOuter"
+    "source": "color.strokeFocusOuter.rest"
   },
   "colors.successBackground1": {
-    "source": "color.backgroundSuccessSubtle"
+    "source": "color.backgroundSuccessSubtle.rest"
   },
   "colors.successBackground2": {
-    "source": "color.backgroundSuccessSoft"
+    "source": "color.backgroundSuccessSoft.rest"
   },
   "colors.successBackground3": {
-    "source": "color.backgroundSuccessLoud"
+    "source": "color.backgroundSuccessLoud.rest"
   },
   "colors.successBorder1": {
-    "source": "color.strokeSuccessSoft"
+    "source": "color.strokeSuccessSoft.rest"
   },
   "colors.successBorder2": {
-    "source": "color.strokeSuccessLoud"
+    "source": "color.strokeSuccessLoud.rest"
   },
   "colors.successForeground1": {
-    "source": "color.foregroundSuccessPrimary"
+    "source": "color.foregroundSuccessPrimary.rest"
   },
   "colors.transparentBackground": {
-    "source": "color.backgroundNeutralTransparent"
+    "source": "color.backgroundNeutralTransparent.rest"
   },
   "colors.transparentBackgroundHover": {
-    "source": "color.hover.backgroundNeutralTransparent",
-    "fallback": "color.backgroundNeutralTransparent"
+    "source": "color.backgroundNeutralTransparent.hover",
+    "fallback": "color.backgroundNeutralTransparent.rest"
   },
   "colors.transparentBackgroundPressed": {
-    "source": "color.pressed.backgroundNeutralTransparent",
-    "fallback": "color.backgroundNeutralTransparent"
+    "source": "color.backgroundNeutralTransparent.pressed",
+    "fallback": "color.backgroundNeutralTransparent.rest"
   },
   "colors.transparentStroke": {
-    "source": "color.strokeNeutralTransparent"
+    "source": "color.strokeNeutralTransparent.rest"
   },
   "colors.transparentStrokeInteractive": {
-    "source": "color.hover.strokeNeutralTransparent",
-    "fallback": "color.strokeNeutralTransparent"
+    "source": "color.strokeNeutralTransparent.hover",
+    "fallback": "color.strokeNeutralTransparent.rest"
   },
   "colors.warningBackground1": {
-    "source": "color.backgroundWarningSubtle"
+    "source": "color.backgroundWarningSubtle.rest"
   },
   "colors.warningBackground2": {
-    "source": "color.backgroundWarningSoft"
+    "source": "color.backgroundWarningSoft.rest"
   },
   "colors.warningBackground3": {
-    "source": "color.backgroundWarningLoud"
+    "source": "color.backgroundWarningLoud.rest"
   },
   "colors.warningBorder1": {
-    "source": "color.strokeWarningSoft"
+    "source": "color.strokeWarningSoft.rest"
   },
   "colors.warningBorder2": {
-    "source": "color.strokeWarningLoud"
+    "source": "color.strokeWarningLoud.rest"
   },
   "colors.warningForeground1": {
-    "source": "color.foregroundWarningPrimary"
+    "source": "color.foregroundWarningPrimary.rest"
   },
   "colors.white": {
-    "source": "color.fixedWhite"
+    "source": "color.fixedWhite.rest"
   },
   "components.Button.tokens.borderRadius": {
     "source": "borderRadius.base200"

@@ -51,7 +51,12 @@
       ],
       "forbiddenInputPatterns": ["/design/src/fluent/compat/", "/design/src/fluent/tokens/", "/design/src/test/"],
       "requiredInputPatterns": ["/design/src/fluent/themeReference."],
-      "forbiddenOutputPatterns": ["/color-lib/", "/design/src/flex/colors/", "/design/src/flex/flexThemeReference."]
+      "forbiddenOutputPatterns": [
+        "/color-lib/",
+        "/design/src/flex/colors/interactionPolicy.",
+        "/design/src/flex/colors/interactiveTokens.",
+        "/design/src/flex/flexThemeReference."
+      ]
     },
     {
       "name": "design-legacy-theme",
