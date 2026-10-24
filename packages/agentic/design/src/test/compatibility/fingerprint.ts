@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 
-import type { Theme } from '../../theming/types/Theme.types';
-import type { FlexTokens } from '../../tokens/flex.types';
+import type { Theme } from '../../fluent/types/Theme.types';
+import type { FlexTokens } from '../../flex/tokens.types';
 
 type EffectiveColor = { rest: unknown; hover: unknown; pressed: unknown };
 

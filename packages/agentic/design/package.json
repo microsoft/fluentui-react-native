@@ -40,10 +40,10 @@
       "default": "./src/tokens/global.generated.ts"
     },
     "./tokens/legacy": {
-      "types": "./lib/tokens/legacy/index.d.ts",
-      "react-native": "./src/tokens/legacy/index.ts",
-      "import": "./lib/tokens/legacy/index.js",
-      "default": "./src/tokens/legacy/index.ts"
+      "types": "./lib/fluent/tokens/index.d.ts",
+      "react-native": "./src/fluent/tokens/index.ts",
+      "import": "./lib/fluent/tokens/index.js",
+      "default": "./src/fluent/tokens/index.ts"
     },
     "./color-lib": {
       "types": "./lib/color-lib/index.d.ts",
@@ -58,28 +58,28 @@
       "default": "./src/theming/index.ts"
     },
     "./theming/legacy-source": {
-      "types": "./lib/theming/legacySource.d.ts",
-      "react-native": "./src/theming/legacySource.ts",
-      "import": "./lib/theming/legacySource.js",
-      "default": "./src/theming/legacySource.ts"
+      "types": "./lib/fluent/legacySource.d.ts",
+      "react-native": "./src/fluent/legacySource.ts",
+      "import": "./lib/fluent/legacySource.js",
+      "default": "./src/fluent/legacySource.ts"
     },
     "./theming/compat": {
-      "types": "./lib/theming/compat/index.d.ts",
-      "react-native": "./src/theming/compat/index.ts",
-      "import": "./lib/theming/compat/index.js",
-      "default": "./src/theming/compat/index.ts"
+      "types": "./lib/fluent/compat/index.d.ts",
+      "react-native": "./src/fluent/compat/index.ts",
+      "import": "./lib/fluent/compat/index.js",
+      "default": "./src/fluent/compat/index.ts"
     },
     "./theming/compat/defaults": {
-      "types": "./lib/theming/compat/defaultLegacyTheme.d.ts",
-      "react-native": "./src/theming/compat/defaultLegacyTheme.ts",
-      "import": "./lib/theming/compat/defaultLegacyTheme.js",
-      "default": "./src/theming/compat/defaultLegacyTheme.ts"
+      "types": "./lib/fluent/compat/defaultLegacyTheme.d.ts",
+      "react-native": "./src/fluent/compat/defaultLegacyTheme.ts",
+      "import": "./lib/fluent/compat/defaultLegacyTheme.js",
+      "default": "./src/fluent/compat/defaultLegacyTheme.ts"
     },
     "./testing": {
-      "types": "./lib/testing/index.d.ts",
-      "react-native": "./src/testing/index.ts",
-      "import": "./lib/testing/index.js",
-      "default": "./src/testing/index.ts"
+      "types": "./lib/test/index.d.ts",
+      "react-native": "./src/test/index.ts",
+      "import": "./lib/test/index.js",
+      "default": "./src/test/index.ts"
     },
     "./styling": {
       "types": "./lib/styling/index.d.ts",
@@ -88,16 +88,16 @@
       "default": "./src/styling/index.ts"
     },
     "./styling/stylesheet": {
-      "types": "./lib/styling/stylesheet/index.d.ts",
-      "react-native": "./src/styling/stylesheet/index.ts",
-      "import": "./lib/styling/stylesheet/index.js",
-      "default": "./src/styling/stylesheet/index.ts"
+      "types": "./lib/fluent/styling/stylesheet/index.d.ts",
+      "react-native": "./src/fluent/styling/stylesheet/index.ts",
+      "import": "./lib/fluent/styling/stylesheet/index.js",
+      "default": "./src/fluent/styling/stylesheet/index.ts"
     },
     "./styling/tokens": {
-      "types": "./lib/styling/tokens/index.d.ts",
-      "react-native": "./src/styling/tokens/index.ts",
-      "import": "./lib/styling/tokens/index.js",
-      "default": "./src/styling/tokens/index.ts"
+      "types": "./lib/fluent/styling/tokens/index.d.ts",
+      "react-native": "./src/fluent/styling/tokens/index.ts",
+      "import": "./lib/fluent/styling/tokens/index.js",
+      "default": "./src/fluent/styling/tokens/index.ts"
     },
     "./package.json": "./package.json"
   },

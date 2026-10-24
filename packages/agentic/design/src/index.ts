@@ -1,5 +1,5 @@
-export type { FontSize, FontWeight } from './concepts/textAttributes';
-export { fontSize, fontWeight } from './concepts/textAttributes';
+export type { FontSize, FontWeight } from './tokens/textAttributes';
+export { fontSize, fontWeight } from './tokens/textAttributes';
 export type {
   FlexTokens,
   InteractiveColorOverrides,
@@ -15,8 +15,8 @@ export type {
   SemanticStrokeWidths,
   SemanticTokens,
   UnsupportedFlexTokens,
-} from './tokens/flex.types';
-export { flexTokensFromTheme } from './tokens/flexTokensFromTheme';
+} from './flex/tokens.types';
+export { flexTokensFromTheme } from './flex/adapters/flexTokensFromTheme';
 export {
   createThemeAppearanceSource,
   FlexThemeReference,
@@ -54,5 +54,6 @@ export type {
   ThemeSource,
   ThemeSourceBase,
 } from './theming/modern';
-export type { ThemeState, ThemeStyleSheet } from './useThemeState';
-export { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './useThemeState';
+export type { ThemeStyleSheet } from './flex/useThemeState';
+export type { ThemeState } from './types/themeState.types';
+export { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './flex/useThemeState';

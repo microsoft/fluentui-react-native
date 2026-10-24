@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { appearanceOptionsFromLegacy, resolveThemeAppearance } from './appearance';
-import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceState } from './appearance.types';
+import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceState } from '../types/appearance.types';
 import { platformAppearance } from './platformAppearance';
 import type { ThemeSource } from './themeSource';
 import { legacyThemeSourceFromTheme } from './themeSource';
-import type { Theme } from './types/Theme.types';
+import type { Theme } from '../fluent/types/Theme.types';
 
 export const ThemeContext = React.createContext<Theme>(undefined);
 

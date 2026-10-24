@@ -1,8 +1,8 @@
 import type { ViewStyle } from 'react-native';
 
 import { defaultResolvedThemeAppearance } from '../theming/appearance';
-import { defaultFlexTokens } from '../tokens/defaultTokens';
-import type { ThemeState } from '../useThemeState';
+import { defaultFlexTokens } from '../flex/defaults/defaultTokens';
+import type { ThemeState } from '../types/themeState.types';
 
 import {
   getActiveState,

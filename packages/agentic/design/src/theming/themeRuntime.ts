@@ -1,22 +1,14 @@
-import { defaultFlexTokens } from '../tokens/defaultTokens';
-import type { FlexTokens } from '../tokens/flex.types';
-import { flexTokensFromTheme } from '../tokens/flexTokensFromTheme';
+import { defaultFlexTokens } from '../flex/defaults/defaultTokens';
+import type { FlexTokens } from '../flex/tokens.types';
+import { flexTokensFromTheme } from '../flex/adapters/flexTokensFromTheme';
 import { defaultResolvedThemeAppearance, themeAppearanceKey } from './appearance';
-import type { ResolvedThemeAppearance } from './appearance.types';
+import type { ResolvedThemeAppearance } from '../types/appearance.types';
+import type { ThemeState } from '../types/themeState.types';
 import type { ThemeSource } from './themeSource';
-
-export type ThemeStyleRegistry = Record<symbol, unknown>;
-
-export interface RuntimeThemeState {
-  readonly tokens: FlexTokens;
-  readonly appearance: Readonly<ResolvedThemeAppearance>;
-  readonly highContrast: boolean;
-  readonly themeStyles: ThemeStyleRegistry;
-}
 
 type AppearanceCache = {
   flexTokens?: FlexTokens;
-  themeState?: RuntimeThemeState;
+  themeState?: ThemeState;
 };
 
 type SourceCache = {
@@ -26,7 +18,7 @@ type SourceCache = {
 
 const sourceCaches = new WeakMap<ThemeSource, SourceCache>();
 
-export const defaultThemeState: RuntimeThemeState = {
+export const defaultThemeState: ThemeState = {
   tokens: defaultFlexTokens,
   appearance: defaultResolvedThemeAppearance,
   highContrast: false,
@@ -57,7 +49,7 @@ export function getFlexTokens(source: ThemeSource, appearance: ResolvedThemeAppe
   return cache.flexTokens;
 }
 
-export function getThemeState(source: ThemeSource, appearance: ResolvedThemeAppearance): RuntimeThemeState {
+export function getThemeState(source: ThemeSource, appearance: ResolvedThemeAppearance): ThemeState {
   const cache = getAppearanceCache(source, appearance);
   if (!cache.themeState) {
     cache.themeState = {

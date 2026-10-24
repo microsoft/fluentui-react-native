@@ -2,7 +2,7 @@
 id: design.testing
 kind: instruction-reference
 owner_paths:
-  - packages/agentic/design/src/testing
+  - packages/agentic/design/src/test
 ---
 
 # Testing helpers
@@ -21,9 +21,11 @@ The color validation helpers build on `color-lib`, but are not designed for
 component render paths or other production runtime code. Production consumers
 that need parsing, conversion, interaction generation, compositing, or a direct
 contrast ratio should import `@fluentui-react-native/design/color-lib`.
-Color validation policy, semantic pairings, audit helpers, and conformance
-fixtures belong under `src/testing`; export them from the `testing` entry point
-when they are generally useful to tests. Testing-only validation is
+Color validation policy, semantic pairings, and audit helpers belong under
+`src/test/color-validation`, and conformance fixtures under `src/test/fixtures`;
+export them from the `testing` entry point when they are generally useful to
+tests. `src/test/compatibility` holds the public-surface, legacy-runtime, and
+import-boundary baselines. Testing-only validation is
 intentionally omitted from production bundle-size scenarios.
 
 ```ts

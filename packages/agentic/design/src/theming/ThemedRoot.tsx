@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
 import { useThemeBoundary } from './context';
-import { FlexThemeReference } from './flexThemeReference';
+import { FlexThemeReference } from '../flex/flexThemeReference';
 import { RootContext } from './rootContext';
 import { createRootInputController, RootInputContext } from './rootInputController';
 import { useRootInputProps } from './useRootInputProps';

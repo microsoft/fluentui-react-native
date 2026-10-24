@@ -3,7 +3,8 @@ id: design.styling
 kind: instruction-reference
 owner_paths:
   - packages/agentic/design/src/styling
-  - packages/agentic/design/src/useThemeState.ts
+  - packages/agentic/design/src/flex/styling
+  - packages/agentic/design/src/flex/useThemeState.ts
 ---
 
 # Styling

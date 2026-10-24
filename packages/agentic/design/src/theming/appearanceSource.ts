@@ -1,4 +1,4 @@
-import type { ThemeAppearanceSourceSnapshot, ThemeAppearanceStore } from './appearance.types';
+import type { ThemeAppearanceSourceSnapshot, ThemeAppearanceStore } from '../types/appearance.types';
 
 type NativeSubscribe = (listener: () => void) => () => void;
 

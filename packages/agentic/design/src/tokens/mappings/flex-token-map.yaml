@@ -5,7 +5,7 @@ target:
   types:
     supported: FlexTokens
     unsupported: UnsupportedFlexTokens
-  definition: '../flex.types.ts'
+  definition: '../../flex/tokens.types.ts'
   direction: flex token path <- authoring source token
 sources:
   generic:
@@ -23,7 +23,7 @@ sources:
   furn-theme:
     description: Dot path to the corresponding value in the Fluent UI React Native
       Theme type.
-    definition: '../../theming/types/Theme.types.ts'
+    definition: '../../fluent/types/Theme.types.ts'
     projection: './flex-from-theme.json'
     reverseProjection: './theme-from-flex.json'
 rules:
@@ -58,9 +58,9 @@ rules:
     - furn-theme is omitted when Theme has no corresponding value path.
     - scripts/token-mappings/check-mappings.cjs enforces that flex-from-theme.json
       exactly matches the furn-theme mappings in this file.
-    - flexTokensFromTheme.ts consumes flex-from-theme.json and merges the projected
+    - ../../flex/adapters/flexTokensFromTheme.ts consumes flex-from-theme.json and merges the projected
       Theme values over nonFluentFlexTokens.
-    - The same check enforces that nonFluentFlexTokens in ../defaultTokens.ts covers
+    - The same check enforces that nonFluentFlexTokens in ../../flex/defaults/defaultTokens.ts covers
       unmapped supported destinations. An unmapped hover or pressed fallback is
       included only when its rest destination is also unmapped; otherwise the state
       value remains only in defaultFlexTokens so a Theme-provided rest value does

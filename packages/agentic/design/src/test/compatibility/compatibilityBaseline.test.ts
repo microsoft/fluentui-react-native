@@ -1,12 +1,12 @@
 import { PlatformColor } from 'react-native';
 
-import { getDefaultLegacyTheme } from '../../theming/compat/defaultLegacyTheme';
-import { themeFromFlexTokens } from '../../theming/compat/themeFromFlexTokens';
-import type { ResolvedThemeAppearance } from '../../theming/appearance.types';
-import type { Theme } from '../../theming/types/Theme.types';
-import { mockTheme } from '../../testing/mockTheme';
-import { defaultFlexTokens } from '../../tokens/defaultTokens';
-import { flexTokensFromTheme } from '../../tokens/flexTokensFromTheme';
+import { getDefaultLegacyTheme } from '../../fluent/compat/defaultLegacyTheme';
+import { themeFromFlexTokens } from '../../fluent/compat/themeFromFlexTokens';
+import type { ResolvedThemeAppearance } from '../../types/appearance.types';
+import type { Theme } from '../../fluent/types/Theme.types';
+import { mockTheme } from '../fixtures/mockTheme';
+import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
+import { flexTokensFromTheme } from '../../flex/adapters/flexTokensFromTheme';
 import { flexTokenFingerprints, themeFingerprints } from './fingerprint';
 
 const appearances: [string, ResolvedThemeAppearance][] = [

@@ -1,6 +1,6 @@
-import type { FlexTokens } from '../tokens/flex.types';
-import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from './appearance.types';
-import type { PartialTheme, Theme } from './types/Theme.types';
+import type { FlexTokens } from '../flex/tokens.types';
+import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from '../types/appearance.types';
+import type { PartialTheme, Theme } from '../fluent/types/Theme.types';
 
 export type OnThemeChange = () => void;
 
