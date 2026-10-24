@@ -1,4 +1,6 @@
 export type {
+  ColorTone,
+  NormalizedThemeAppearance,
   ResolvedThemeAppearance,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,

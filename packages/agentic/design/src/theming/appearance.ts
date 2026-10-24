@@ -1,5 +1,7 @@
 import type { AppearanceOptions, Theme } from '../fluent/types/Theme.types';
 import type {
+  ColorTone,
+  NormalizedThemeAppearance,
   ResolvedThemeAppearance,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,
@@ -13,21 +15,38 @@ export const defaultThemeAppearanceRequest: Readonly<ThemeAppearanceRequest> = O
   interfaceLevel: 'system',
 });
 
-export const defaultResolvedThemeAppearance: Readonly<ResolvedThemeAppearance> = Object.freeze({
+export const defaultColorTone: ColorTone = 'cool';
+
+export const defaultResolvedThemeAppearance: Readonly<NormalizedThemeAppearance> = Object.freeze({
   colorScheme: 'light',
   contrast: 'standard',
   interfaceLevel: 'base',
+  colorTone: defaultColorTone,
 });
 
-const resolvedAppearances = new Map<string, Readonly<ResolvedThemeAppearance>>([['light|standard|base', defaultResolvedThemeAppearance]]);
+const resolvedAppearances = new Map<string, Readonly<NormalizedThemeAppearance>>([['light|standard|base', defaultResolvedThemeAppearance]]);
 const appearanceStates = new Map<string, Readonly<ThemeAppearanceState>>();
 
-export function themeAppearanceKey(appearance: ResolvedThemeAppearance): string {
+/**
+ * Key for the scheme, contrast, and interface-level axes only. Legacy Fluent
+ * themes do not vary by tone.
+ */
+export function legacyThemeAppearanceKey(appearance: ResolvedThemeAppearance): string {
   return `${appearance.colorScheme}|${appearance.contrast}|${appearance.interfaceLevel}`;
 }
 
+/**
+ * Identity key for a resolved appearance. Omitted and cool tones share the
+ * historical three-axis key; warm appends a suffix.
+ */
+export function themeAppearanceKey(appearance: ResolvedThemeAppearance): string {
+  const key = legacyThemeAppearanceKey(appearance);
+  return appearance.colorTone === 'warm' ? `${key}|warm` : key;
+}
+
 function themeAppearanceRequestKey(request: ThemeAppearanceRequest): string {
-  return `${request.colorScheme}|${request.contrast}|${request.interfaceLevel}`;
+  const key = `${request.colorScheme}|${request.contrast}|${request.interfaceLevel}`;
+  return request.colorTone === undefined ? key : `${key}|${request.colorTone}`;
 }
 
 export function normalizeThemeAppearanceRequest(options?: ThemeAppearanceOptions): Readonly<ThemeAppearanceRequest> {
@@ -35,23 +54,42 @@ export function normalizeThemeAppearanceRequest(options?: ThemeAppearanceOptions
     return defaultThemeAppearanceRequest;
   }
 
-  return Object.freeze({
+  const request: ThemeAppearanceRequest = {
     colorScheme: options.colorScheme ?? defaultThemeAppearanceRequest.colorScheme,
     contrast: options.contrast ?? defaultThemeAppearanceRequest.contrast,
     interfaceLevel: options.interfaceLevel ?? defaultThemeAppearanceRequest.interfaceLevel,
-  });
+  };
+  if (options.colorTone !== undefined) {
+    request.colorTone = options.colorTone;
+  }
+  return Object.freeze(request);
 }
 
-export function internResolvedThemeAppearance(appearance: ResolvedThemeAppearance): Readonly<ResolvedThemeAppearance> {
+/**
+ * Return the shared normalized identity for a concrete appearance. A missing
+ * tone resolves to cool, so three-field values and explicit cool converge.
+ */
+export function internResolvedThemeAppearance(appearance: ResolvedThemeAppearance): Readonly<NormalizedThemeAppearance> {
   const key = themeAppearanceKey(appearance);
   let interned = resolvedAppearances.get(key);
   if (!interned) {
-    interned = Object.freeze({ ...appearance });
+    interned = Object.freeze({
+      colorScheme: appearance.colorScheme,
+      contrast: appearance.contrast,
+      interfaceLevel: appearance.interfaceLevel,
+      colorTone: appearance.colorTone === 'warm' ? 'warm' : defaultColorTone,
+    });
     resolvedAppearances.set(key, interned);
   }
   return interned;
 }
 
+/**
+ * Resolve requested appearance options. Scheme, contrast, and interface level
+ * fall back from the request to the platform snapshot and then the fallback.
+ * Tone has no platform source: it falls back from the request to the fallback
+ * and then cool.
+ */
 export function resolveThemeAppearance(
   options?: ThemeAppearanceOptions,
   snapshot: ThemeAppearanceSourceSnapshot = {},
@@ -71,6 +109,7 @@ export function resolveThemeAppearance(
       requested.interfaceLevel === 'system'
         ? (snapshot.interfaceLevel ?? fallback.interfaceLevel ?? defaultResolvedThemeAppearance.interfaceLevel)
         : requested.interfaceLevel,
+    colorTone: requested.colorTone ?? fallback.colorTone ?? defaultColorTone,
   });
   const key = `${themeAppearanceRequestKey(requested)}>${themeAppearanceKey(resolved)}`;
   let state = appearanceStates.get(key);
@@ -97,6 +136,10 @@ export function appearanceOptionsFromLegacy(appearance: Theme['host']['appearanc
   }
 }
 
+/**
+ * Project a resolved appearance onto the legacy appearance union. Tone has no
+ * legacy representation and is intentionally dropped.
+ */
 export function appearanceOptionFromResolved(appearance: ResolvedThemeAppearance): AppearanceOptions {
   if (appearance.contrast === 'highContrast') {
     return 'highContrast';

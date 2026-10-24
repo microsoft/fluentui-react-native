@@ -1,6 +1,11 @@
 import type { PartialTheme, Theme } from './types/Theme.types';
 
-import { appearanceOptionsFromLegacy, resolveThemeAppearance, themeAppearanceKey } from '../theming/appearance';
+import {
+  appearanceOptionsFromLegacy,
+  internResolvedThemeAppearance,
+  resolveThemeAppearance,
+  themeAppearanceKey,
+} from '../theming/appearance';
 import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from '../types/appearance.types';
 import { mergeTheme } from './mergeTheme';
 import { platformAppearance } from '../theming/platformAppearance';
@@ -143,10 +148,12 @@ export class ThemeReference<TTheme extends Theme = Theme, TPartial extends Parti
 
   /**
    * Resolve the legacy Theme for one concrete appearance. Repeated resolutions
-   * share identity until this reference is invalidated.
+   * share identity until this reference is invalidated. A missing tone means
+   * cool; transforms always receive a concrete tone.
    */
-  public resolveTheme(appearance: ResolvedThemeAppearance): TTheme {
+  public resolveTheme(requestedAppearance: ResolvedThemeAppearance): TTheme {
     this.syncParentRevision();
+    const appearance = internResolvedThemeAppearance(requestedAppearance);
     const key = themeAppearanceKey(appearance);
     const cached = this.themesByAppearance.get(key);
     if (cached) {

@@ -24,8 +24,14 @@ both models. Modern consumers read Flex tokens through `useThemeState`; legacy c
 
 `FlexThemeReference` accepts `base`, `appearance`, `fallbackAppearance`, `appearanceSource`, and `legacyFallback`
 options followed by recipes. It resolves the design package's default Flex tokens, then the base input, then recipes in
-declaration order. A base or recipe may be a function of the resolved appearance. `PartialFlexTokens` is shape-aware so
-opaque React Native colors stay leaves.
+declaration order. A base or recipe may be a function of the resolved appearance, which always has a concrete
+`colorTone`. `PartialFlexTokens` is shape-aware so opaque React Native colors stay leaves.
+
+After the recipes run, each omitted `hover` or `pressed` entry of an interactive color token is derived from that
+token's resolved rest color with the `color-lib` interaction algorithm for the appearance's color scheme and tone; no
+import, provider setting, or registration is required. Authored state values are kept. High contrast and rest values
+JavaScript cannot resolve, such as `PlatformColor`, resolve the omitted state to the rest value. `color-lib.md`
+describes the token classification. The derivation currently runs once when an appearance's tokens are resolved.
 
 ```ts
 import { FlexThemeReference } from '@fluentui-react-native/design';
@@ -90,7 +96,12 @@ back to an appearance reuses its entry within a revision, and a revision change 
 ## Appearance
 
 A request has `colorScheme` (`light`, `dark`, or `system`), `contrast` (`standard`, `highContrast`, or `system`), and
-`interfaceLevel` (`base`, `elevated`, or `system`). The resolved appearance is always concrete. A
+`interfaceLevel` (`base`, `elevated`, or `system`), plus an optional `colorTone` (`cool` or `warm`). The resolved
+appearance is always concrete. `colorTone` is a design choice rather than a platform setting, so appearance sources never
+supply it: it resolves from the provider or root request, then the source's `appearance` option, then the fallback
+appearance, then `cool`. A nested `ThemedRoot` inherits it with the other requested axes, and a raw legacy
+`ThemeContext` boundary resolves to `cool`. Caches key a warm appearance separately; cool keeps the existing
+`colorScheme|contrast|interfaceLevel` key, and the complete legacy defaults do not vary by tone. A
 `ThemeAppearanceSource` provides a stable `getSnapshot()` and a `subscribe()` that installs native listeners only while
 subscribed; create one with `createThemeAppearanceSource`.
 
@@ -109,8 +120,10 @@ including `darkElevated`, `highContrast`, and `dynamic`. `getCurrentAppearance`,
 ## Legacy projection and bundle boundary
 
 The package root exports only the modern authoring and consumption APIs. It reaches the forward Theme-to-Flex adapter,
-which `useThemeState` needs for legacy sources, but not `useTheme`, the reverse converter, the complete legacy
-defaults, or legacy token payloads. `entry-points.md` lists every subpath.
+which `useThemeState` needs for legacy sources, and the Flex interaction policy with the raw `color-lib` interaction
+algorithm, but not `useTheme`, the reverse converter, the complete legacy defaults, or legacy token payloads. The legacy
+`ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. `entry-points.md` lists
+every subpath.
 
 `themeFromFlexTokens` in `theming/compat` builds a complete `Theme` in this order:
 

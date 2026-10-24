@@ -22,6 +22,13 @@ const highContrast = {
 } as const;
 
 describe('getDefaultLegacyTheme', () => {
+  it('shares one legacy base across color tones', () => {
+    const lightTheme = getDefaultLegacyTheme(light);
+
+    expect(getDefaultLegacyTheme({ ...light, colorTone: 'cool' })).toBe(lightTheme);
+    expect(getDefaultLegacyTheme({ ...light, colorTone: 'warm' })).toBe(lightTheme);
+  });
+
   it('creates complete stable legacy bases lazily per resolved appearance', () => {
     const lightTheme = getDefaultLegacyTheme(light);
     const darkTheme = getDefaultLegacyTheme(dark);

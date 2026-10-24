@@ -1,51 +1,19 @@
 import { PlatformColor } from 'react-native';
 
 import {
-  x3BebopWarmInteractionConformance,
-  x3InteractionConformance,
-  x3WarmVariantDeviations,
-} from '../test/fixtures/x3InteractionConformance';
-import { defaultFlexTokens } from '../flex/defaults/defaultTokens';
-import type { SemanticColorTokenValues } from '../flex/tokens.types';
-import {
   compositeColor,
   compositeRgba,
   getContrastRatio,
   getHoverColor,
   getInteractionColor,
   getPressColor,
-  isInverseInteractionToken,
   oklchToRgb,
   parseColorValue,
   resolveContrastColors,
   rgbaToHex,
   rgbToOklch,
 } from './index';
-import type { ColorMode, InteractionColorState } from './index';
-import { getInteractionColorOverrides, getInteractionColors, INTERACTIVE_COLOR_TOKENS } from './interaction';
-
-const modeIndexes = {
-  light: { rest: 0, hover: 1, pressed: 2 },
-  dark: { rest: 3, hover: 4, pressed: 5 },
-} as const;
-
-function conformanceColors(mode: ColorMode): SemanticColorTokenValues {
-  const { hover: _hover, pressed: _pressed, ...colors } = defaultFlexTokens.color;
-  for (const token of INTERACTIVE_COLOR_TOKENS) {
-    colors[token] = x3InteractionConformance[token][modeIndexes[mode].rest];
-  }
-  return colors;
-}
-
-function getStateColor(
-  state: InteractionColorState,
-  color: string,
-  token: (typeof INTERACTIVE_COLOR_TOKENS)[number],
-  mode: ColorMode,
-  variant: 'default' | 'bebopWarm',
-) {
-  return state === 'hover' ? getHoverColor(color, token, mode, { variant }) : getPressColor(color, token, mode, { variant });
-}
+import type { InteractionColorOptions } from './index';
 
 describe('color parsing and conversion', () => {
   it('parses supported literal formats', () => {
@@ -153,112 +121,84 @@ describe('color compositing and contrast', () => {
   });
 });
 
-describe.each(['light', 'dark'] as const)('%s interaction colors', (mode) => {
-  it.each(INTERACTIVE_COLOR_TOKENS)('matches default and Bebop Warm output for %s', (token) => {
-    const vector = x3InteractionConformance[token];
-    const warmVector = x3BebopWarmInteractionConformance[token];
-    for (const state of ['hover', 'pressed'] as const) {
-      const deviationKey = `${token}.${state}.${mode}` as keyof typeof x3WarmVariantDeviations;
-      const deviation = x3WarmVariantDeviations[deviationKey];
-      const upstreamValue = vector[modeIndexes[mode][state]];
-      const warmValue = warmVector[modeIndexes[mode][state]];
+describe('raw interaction colors', () => {
+  it('defaults to the cool tone, standard direction, and direct compositing', () => {
+    const explicit: InteractionColorOptions = { colorTone: 'cool', direction: 'standard', compositing: 'direct' };
 
-      expect(getStateColor(state, vector[modeIndexes[mode].rest], token, mode, 'default')).toEqual({
-        status: 'derived',
-        value: deviation?.defaultValue ?? upstreamValue,
-      });
-      expect(getStateColor(state, warmVector[modeIndexes[mode].rest], token, mode, 'bebopWarm')).toEqual({
-        status: 'derived',
-        value: warmValue,
-      });
-      if (deviation) {
-        expect(upstreamValue).toBe(deviation.warmValue);
+    expect(getHoverColor('#ebebeb', 'light')).toEqual({ status: 'derived', value: '#e1e1e1' });
+    expect(getPressColor('#ebebeb', 'light')).toEqual({ status: 'derived', value: '#d7d7d7' });
+    for (const state of ['hover', 'pressed'] as const) {
+      for (const mode of ['light', 'dark'] as const) {
+        expect(getInteractionColor('#e9e9e980', mode, state)).toEqual(getInteractionColor('#e9e9e980', mode, state, explicit));
       }
     }
   });
 
-  it('generates a complete override map', () => {
-    const colors = conformanceColors(mode);
-    for (const token of INTERACTIVE_COLOR_TOKENS) {
-      colors[token] = x3BebopWarmInteractionConformance[token][modeIndexes[mode].rest];
-    }
-    const result = getInteractionColorOverrides(colors, mode, 'hover', { variant: 'bebopWarm' });
-
-    expect(result.diagnostics).toEqual([]);
-    expect(Object.keys(result.overrides)).toHaveLength(59);
-  });
-});
-
-describe('interaction color API', () => {
-  it('classifies every inverse token with the upstream heavy/loud/onloud rule', () => {
-    const expected = [
-      'backgroundNeutralHeavy',
-      'backgroundNeutralLoud',
-      'backgroundBrandHeavy',
-      'backgroundBrandLoud',
-      'backgroundDangerLoud',
-      'backgroundWarningLoud',
-      'backgroundSuccessLoud',
-      'strokeNeutralHeavy',
-      'strokeNeutralLoud',
-      'strokeNeutralOnloud',
-      'strokeBrandLoud',
-      'strokeBrandOnloud',
-      'strokeDangerLoud',
-      'strokeDangerOnloud',
-      'strokeWarningLoud',
-      'strokeWarningOnloud',
-      'strokeSuccessLoud',
-      'strokeSuccessOnloud',
-      'foregroundNeutralOnloud',
-      'foregroundBrandOnloud',
-      'foregroundDangerOnloud',
-      'foregroundWarningOnloud',
-      'foregroundSuccessOnloud',
-    ];
-
-    expect(INTERACTIVE_COLOR_TOKENS.filter(isInverseInteractionToken)).toEqual(expected);
-    expect(INTERACTIVE_COLOR_TOKENS).toHaveLength(59);
-    expect(Object.keys(x3WarmVariantDeviations)).toHaveLength(10);
+  it('shifts standard colors with the scheme and inverted colors against it', () => {
+    expect(getHoverColor('#242424', 'light', { direction: 'inverted' })).toEqual({ status: 'derived', value: '#363636' });
+    expect(getHoverColor('#ffffff', 'dark', { direction: 'inverted' })).toEqual({ status: 'derived', value: '#f5f5f5' });
+    expect(getHoverColor('#1b1b1b', 'dark')).toEqual({ status: 'derived', value: '#2f2f2f' });
   });
 
-  it('fills missing values without replacing authored interaction colors', () => {
-    const input = {
-      ...conformanceColors('light'),
-      hover: { surfaceNeutralFarther: '#123456' },
-    };
-    const result = getInteractionColors(input, 'light');
+  it('raises standard alpha and keeps inverted alpha', () => {
+    expect(getHoverColor('#e9e9e980', 'light')).toEqual({ status: 'derived', value: '#dfdfdf8a' });
+    const inverted = getHoverColor('#00000080', 'light', { direction: 'inverted' });
 
-    expect(result.colors.hover.surfaceNeutralFarther).toBe('#123456');
-    expect(result.colors.hover.surfaceNeutralFar).toBe('#e8e8e8');
-    expect(result.colors.pressed.surfaceNeutralFarther).toBe('#d7d7d7');
-    expect(result.diagnostics).toEqual([]);
+    expect(inverted.status).toBe('derived');
+    expect(inverted.value).toMatch(/80$/);
   });
 
-  it('preserves identity when every interaction value is authored', () => {
-    const colors = conformanceColors('light');
-    const hover = getInteractionColorOverrides(colors, 'light', 'hover').overrides;
-    const pressed = getInteractionColorOverrides(colors, 'light', 'pressed').overrides;
-    const input = { ...colors, hover, pressed };
+  it('applies the warm reference backdrop only to translucent backdrop colors', () => {
+    const backdrop = getHoverColor('#e9e9e980', 'light', { colorTone: 'warm', compositing: 'backdrop' });
+    const direct = getHoverColor('#e9e9e980', 'light', { colorTone: 'warm', compositing: 'direct' });
 
-    expect(getInteractionColors(input, 'light').colors).toBe(input);
+    expect(backdrop).toEqual({ status: 'derived', value: '#dcdcd68a' });
+    expect(direct.status).toBe('derived');
+    expect(direct.value).not.toBe(backdrop.value);
+    expect(direct.value).toMatch(/8a$/);
+    expect(getHoverColor('#ebebeb', 'light', { colorTone: 'warm', compositing: 'backdrop' })).toEqual(
+      getHoverColor('#ebebeb', 'light', { colorTone: 'warm', compositing: 'direct' }),
+    );
+  });
+
+  it('ignores compositing for the cool tone', () => {
+    expect(getPressColor('#e9e9e980', 'dark', { compositing: 'backdrop' })).toEqual(getPressColor('#e9e9e980', 'dark'));
+  });
+
+  it('adds chroma for the warm tone and preserves it for the cool tone', () => {
+    const cool = getPressColor('#808080', 'light');
+    const warm = getPressColor('#808080', 'light', { colorTone: 'warm' });
+
+    expect(cool.status).toBe('derived');
+    expect(warm.status).toBe('derived');
+    expect(rgbToOklch(hexChannels(cool.value as string)).C).toBeCloseTo(0, 6);
+    expect(rgbToOklch(hexChannels(warm.value as string)).C).toBeGreaterThan(0.005);
   });
 
   it('reports opaque platform colors instead of deriving a wrong value', () => {
-    expect(getInteractionColor(PlatformColor('labelColor'), 'foregroundNeutralPrimary', 'light', 'hover')).toMatchObject({
+    const rest = PlatformColor('labelColor');
+    const result = getInteractionColor(rest, 'light', 'hover', { colorTone: 'warm' });
+
+    expect(result).toMatchObject({
       status: 'unresolvable',
-      diagnostic: {
-        reason: 'non-literal-color',
-        token: 'foregroundNeutralPrimary',
-        state: 'hover',
-      },
+      diagnostic: { reason: 'non-literal-color', state: 'hover' },
     });
+    expect(result.value).toBe(rest);
+    expect(result.status === 'unresolvable' && 'token' in result.diagnostic).toBe(false);
   });
 
   it('reports malformed literals', () => {
-    expect(getPressColor('rgb(12oops 0 0)', 'foregroundDangerPrimary', 'light')).toMatchObject({
+    expect(getPressColor('rgb(12oops 0 0)', 'light')).toMatchObject({
       status: 'unresolvable',
-      diagnostic: { reason: 'unsupported-color-format' },
+      diagnostic: { reason: 'unsupported-color-format', state: 'pressed' },
     });
   });
 });
+
+function hexChannels(value: string) {
+  const parsed = parseColorValue(value);
+  if (parsed.status !== 'resolved') {
+    throw new Error(`Expected a literal color: ${value}`);
+  }
+  return parsed.color;
+}

@@ -17,6 +17,8 @@ export type {
 } from '../fluent/types/Shadow.types';
 export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from '../fluent/types/Theme.types';
 export type {
+  ColorTone,
+  NormalizedThemeAppearance,
   ResolvedThemeAppearance,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,

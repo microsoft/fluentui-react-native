@@ -42,6 +42,23 @@ describe('ThemeReference tests', () => {
     expect(themeRef.resolveTheme(defaultResolvedThemeAppearance)).not.toBe(before);
   });
 
+  it('passes a concrete color tone to transforms and keys warm separately', () => {
+    const tones: unknown[] = [];
+    const themeRef = new ThemeReference(themeBase, (_theme, appearance) => {
+      tones.push(appearance?.colorTone);
+      return { colors: { white: appearance?.colorTone === 'warm' ? 'peach' : 'white' } };
+    });
+    const threeField = { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' } as const;
+    const omitted = themeRef.resolveTheme(threeField);
+
+    expect(themeRef.resolveTheme({ ...threeField, colorTone: 'cool' })).toBe(omitted);
+    const warm = themeRef.resolveTheme({ ...threeField, colorTone: 'warm' });
+    expect(warm).not.toBe(omitted);
+    expect(warm.colors.white).toBe('peach');
+    expect(omitted.colors.white).toBe('white');
+    expect(tones).toEqual(['cool', 'warm']);
+  });
+
   it('performs a simple merge', () => {
     const themeRef = new ThemeReference(themeBase, {
       colors: {

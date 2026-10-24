@@ -265,7 +265,12 @@ describe('ThemedRoot', () => {
       </ThemeProvider>,
     );
     expect(nestedThemes[0].tokens.color.backgroundBrandHeavy).toBe('#111111');
-    expect(nestedThemes[0].appearance).toEqual({ colorScheme: 'dark', contrast: 'highContrast', interfaceLevel: 'elevated' });
+    expect(nestedThemes[0].appearance).toEqual({
+      colorScheme: 'dark',
+      contrast: 'highContrast',
+      interfaceLevel: 'elevated',
+      colorTone: 'cool',
+    });
     expect(parentThemes[0].appearance.interfaceLevel).toBe('base');
     act(() => theme.update({ spacing: { componentBase100: 21 } }));
     expect(nestedThemes[nestedThemes.length - 1].tokens.spacing.componentBase100).toBe(21);
@@ -287,11 +292,82 @@ describe('ThemedRoot', () => {
         </ThemedRoot>
       </ThemeProvider>,
     );
-    expect(themes[0].appearance).toEqual({ colorScheme: 'dark', contrast: 'highContrast', interfaceLevel: 'elevated' });
+    expect(themes[0].appearance).toEqual({ colorScheme: 'dark', contrast: 'highContrast', interfaceLevel: 'elevated', colorTone: 'cool' });
     act(() => appearance.update({ colorScheme: 'light', contrast: 'standard' }));
-    expect(themes[themes.length - 1].appearance).toEqual({ colorScheme: 'light', contrast: 'standard', interfaceLevel: 'elevated' });
+    expect(themes[themes.length - 1].appearance).toEqual({
+      colorScheme: 'light',
+      contrast: 'standard',
+      interfaceLevel: 'elevated',
+      colorTone: 'cool',
+    });
     act(() => component!.unmount());
     expect(appearance.listeners.size).toBe(0);
+  });
+
+  it('inherits an explicit color tone through nested roots', () => {
+    const outer: ThemeState[] = [];
+    const inherited: ThemeState[] = [];
+    const overridden: ThemeState[] = [];
+    render(
+      <ThemeProvider theme={new FlexThemeReference()} appearance={{ colorTone: 'warm' }}>
+        <ThemedRoot>
+          <Probe themes={outer} />
+          <ThemedRoot appearance={{ colorScheme: 'dark' }}>
+            <Probe themes={inherited} />
+            <ThemedRoot appearance={{ colorTone: 'cool' }}>
+              <Probe themes={overridden} />
+            </ThemedRoot>
+          </ThemedRoot>
+        </ThemedRoot>
+      </ThemeProvider>,
+    );
+    expect(outer[0].appearance.colorTone).toBe('warm');
+    expect(inherited[0].appearance).toMatchObject({ colorScheme: 'dark', colorTone: 'warm' });
+    expect(overridden[0].appearance).toMatchObject({ colorScheme: 'dark', colorTone: 'cool' });
+  });
+
+  it('resolves tone from the provider, then the source, then the fallback, then cool', () => {
+    const fromProvider: ThemeState[] = [];
+    const fromSource: ThemeState[] = [];
+    const fromFallback: ThemeState[] = [];
+    const fromRootFallback: ThemeState[] = [];
+    const fromDefault: ThemeState[] = [];
+    const sourceWarm = new FlexThemeReference({ appearance: { colorTone: 'warm' }, fallbackAppearance: { colorTone: 'cool' } });
+    const fallbackWarm = new FlexThemeReference({ fallbackAppearance: { colorTone: 'warm' } });
+    render(
+      <>
+        <ThemeProvider theme={sourceWarm} appearance={{ colorTone: 'cool' }}>
+          <ThemedRoot>
+            <Probe themes={fromProvider} />
+          </ThemedRoot>
+        </ThemeProvider>
+        <ThemeProvider theme={sourceWarm}>
+          <ThemedRoot>
+            <Probe themes={fromSource} />
+          </ThemedRoot>
+        </ThemeProvider>
+        <ThemeProvider theme={fallbackWarm}>
+          <ThemedRoot>
+            <Probe themes={fromFallback} />
+          </ThemedRoot>
+        </ThemeProvider>
+        <ThemedRoot theme={new FlexThemeReference()} fallbackAppearance={{ colorTone: 'warm' }}>
+          <ThemedRoot>
+            <Probe themes={fromRootFallback} />
+          </ThemedRoot>
+        </ThemedRoot>
+        <ThemeProvider theme={new FlexThemeReference()}>
+          <ThemedRoot>
+            <Probe themes={fromDefault} />
+          </ThemedRoot>
+        </ThemeProvider>
+      </>,
+    );
+    expect(fromProvider[0].appearance.colorTone).toBe('cool');
+    expect(fromSource[0].appearance.colorTone).toBe('warm');
+    expect(fromFallback[0].appearance.colorTone).toBe('warm');
+    expect(fromRootFallback[0].appearance.colorTone).toBe('warm');
+    expect(fromDefault[0].appearance.colorTone).toBe('cool');
   });
 
   it('can opt an inherited fixed appearance back into the inherited system source', () => {
@@ -377,7 +453,7 @@ describe('ThemedRoot', () => {
       host: { ...mockTheme.host, appearance: 'dark' as const },
     };
     render(
-      <ThemedRoot>
+      <ThemedRoot appearance={{ colorTone: 'warm' }}>
         <ThemeContext.Provider value={legacyTheme}>
           <ThemedRoot>
             <Probe themes={themes} />
@@ -387,6 +463,7 @@ describe('ThemedRoot', () => {
     );
     expect(themes[0].tokens.color.backgroundNeutralSubtle).toBe('#123456');
     expect(themes[0].appearance.colorScheme).toBe('dark');
+    expect(themes[0].appearance.colorTone).toBe('cool');
   });
 
   it('reports a missing scene root instead of returning an untracked modality', () => {

@@ -3,7 +3,7 @@ import { themeFromFlexTokens } from './compat';
 import { themeAppearanceKey } from '../theming/appearance';
 import type { ResolvedThemeAppearance } from '../types/appearance.types';
 import { useThemeBoundary } from '../theming/context';
-import { getFlexTokens } from '../theming/themeRuntime';
+import { getFlexSourceTokens } from '../theming/themeRuntime';
 import type { FlexThemeSource } from '../theming/themeSource';
 
 type LegacyCache = {
@@ -24,7 +24,7 @@ function getLegacyTheme(source: FlexThemeSource, appearance: ResolvedThemeAppear
   let theme = cache.byAppearance.get(key);
   if (!theme) {
     const fallback: Theme | PartialTheme | undefined = source.resolveLegacyFallback?.(appearance);
-    theme = themeFromFlexTokens(getFlexTokens(source, appearance), appearance, { fallback });
+    theme = themeFromFlexTokens(getFlexSourceTokens(source, appearance), appearance, { fallback });
     cache.byAppearance.set(key, theme);
   }
   return theme;

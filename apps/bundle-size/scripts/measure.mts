@@ -97,9 +97,7 @@ function getWorkspacePackage(source: string): string | undefined {
   return undefined;
 }
 
-function getWorkspaceContributions(metafile: Metafile) {
-  const packageModules = new Map<string, number>();
-  const packageBytes = new Map<string, number>();
+function getContributingInputs(metafile: Metafile): Map<string, number> {
   const contributingInputs = new Map<string, number>();
 
   for (const output of Object.values(metafile.outputs)) {
@@ -109,6 +107,13 @@ function getWorkspaceContributions(metafile: Metafile) {
       }
     }
   }
+
+  return contributingInputs;
+}
+
+function getWorkspaceContributions(contributingInputs: Map<string, number>) {
+  const packageModules = new Map<string, number>();
+  const packageBytes = new Map<string, number>();
 
   for (const [source, bytes] of contributingInputs) {
     const packageName = getWorkspacePackage(source);
@@ -127,6 +132,29 @@ function getWorkspaceContributions(metafile: Metafile) {
   };
 }
 
+function assertModulePatterns(
+  scenario: Scenario,
+  kind: 'input' | 'output',
+  paths: string[],
+  forbidden: string[] = [],
+  required: string[] = [],
+) {
+  const subject = kind === 'input' ? 'includes' : 'retains';
+  for (const pattern of forbidden) {
+    const match = paths.find((source) => source.includes(pattern));
+    if (match) {
+      throw new Error(`Scenario "${scenario.name}" unexpectedly ${subject} "${match}" (forbidden by "${pattern}")`);
+    }
+  }
+  for (const pattern of required) {
+    if (!paths.some((source) => source.includes(pattern))) {
+      throw new Error(
+        `Scenario "${scenario.name}" does not ${subject.slice(0, -1)} a module matching required ${kind} pattern "${pattern}"`,
+      );
+    }
+  }
+}
+
 async function runBundle(platform: string, scenario: Scenario): Promise<Measurement> {
   const entryPath = join(entryRoot, `${scenario.name}.js`);
   const bundlePath = join(outputRoot, platform, `${scenario.name}.bundle`);
@@ -143,19 +171,23 @@ async function runBundle(platform: string, scenario: Scenario): Promise<Measurem
   writeJSONFileSync(metafilePath, metafile);
 
   const bundle = readFileSync(bundlePath);
-  const inputPaths = Object.keys(metafile.inputs).map((source) => source.replaceAll('\\', '/'));
-  for (const pattern of scenario.forbiddenInputPatterns ?? []) {
-    const match = inputPaths.find((source) => source.includes(pattern));
-    if (match) {
-      throw new Error(`Scenario "${scenario.name}" unexpectedly includes "${match}" (forbidden by "${pattern}")`);
-    }
-  }
-  for (const pattern of scenario.requiredInputPatterns ?? []) {
-    if (!inputPaths.some((source) => source.includes(pattern))) {
-      throw new Error(`Scenario "${scenario.name}" does not include a module matching required pattern "${pattern}"`);
-    }
-  }
-  const contributions = getWorkspaceContributions(metafile);
+  const normalizePath = (source: string) => source.replaceAll('\\', '/');
+  const contributingInputs = getContributingInputs(metafile);
+  assertModulePatterns(
+    scenario,
+    'input',
+    Object.keys(metafile.inputs).map(normalizePath),
+    scenario.forbiddenInputPatterns,
+    scenario.requiredInputPatterns,
+  );
+  assertModulePatterns(
+    scenario,
+    'output',
+    [...contributingInputs.keys()].map(normalizePath),
+    scenario.forbiddenOutputPatterns,
+    scenario.requiredOutputPatterns,
+  );
+  const contributions = getWorkspaceContributions(contributingInputs);
 
   return {
     platform,

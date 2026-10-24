@@ -14,8 +14,14 @@ import type {
   SemanticSpacing,
   SemanticStrokeWidths,
 } from './tokens.types';
-import { themeAppearanceKey } from '../theming/appearance';
-import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from '../types/appearance.types';
+import { withDerivedInteractionColors } from './colors/interactionPolicy';
+import { internResolvedThemeAppearance, themeAppearanceKey } from '../theming/appearance';
+import type {
+  NormalizedThemeAppearance,
+  ResolvedThemeAppearance,
+  ThemeAppearanceOptions,
+  ThemeAppearanceSource,
+} from '../types/appearance.types';
 import type { FlexThemeSource, OnThemeChange } from '../theming/themeSource';
 import type { PartialTheme, Theme } from '../fluent/types/Theme.types';
 
@@ -34,11 +40,16 @@ export type PartialFlexTokens = {
   strokeWidth?: Partial<SemanticStrokeWidths>;
 };
 
-export type FlexThemeInput = FlexTokens | PartialFlexTokens | ((appearance: ResolvedThemeAppearance) => FlexTokens | PartialFlexTokens);
+export type FlexThemeInput =
+  | FlexTokens
+  | PartialFlexTokens
+  | ((appearance: Readonly<NormalizedThemeAppearance>) => FlexTokens | PartialFlexTokens);
 
-export type FlexThemeRecipe = PartialFlexTokens | ((parent: FlexTokens, appearance: ResolvedThemeAppearance) => PartialFlexTokens);
+export type FlexThemeRecipe =
+  | PartialFlexTokens
+  | ((parent: FlexTokens, appearance: Readonly<NormalizedThemeAppearance>) => PartialFlexTokens);
 
-export type LegacyThemeFallback = Theme | PartialTheme | ((appearance: ResolvedThemeAppearance) => Theme | PartialTheme);
+export type LegacyThemeFallback = Theme | PartialTheme | ((appearance: Readonly<NormalizedThemeAppearance>) => Theme | PartialTheme);
 
 export interface FlexThemeReferenceOptions {
   base?: FlexThemeInput | FlexThemeReference;
@@ -79,8 +90,13 @@ export class FlexThemeReference implements FlexThemeSource {
     return this.revisionValue;
   }
 
-  public resolveFlexTokens(appearance: ResolvedThemeAppearance): FlexTokens {
+  /**
+   * Resolve the tokens for one appearance. A missing tone means cool. Omitted
+   * interactive hover and pressed values are derived from rest automatically.
+   */
+  public resolveFlexTokens(requestedAppearance: ResolvedThemeAppearance): FlexTokens {
     this.syncParentRevision();
+    const appearance = internResolvedThemeAppearance(requestedAppearance);
     const key = themeAppearanceKey(appearance);
     const cached = this.tokensByAppearance.get(key);
     if (cached) {
@@ -91,12 +107,13 @@ export class FlexThemeReference implements FlexThemeSource {
     for (const recipe of this.recipes) {
       tokens = immutableMerge(tokens, typeof recipe === 'function' ? recipe(tokens, appearance) : recipe);
     }
-    tokens = { ...tokens };
+    tokens = { ...tokens, color: withDerivedInteractionColors(tokens.color, appearance) };
     this.tokensByAppearance.set(key, tokens);
     return tokens;
   }
 
-  public resolveLegacyFallback(appearance: ResolvedThemeAppearance): Theme | PartialTheme | undefined {
+  public resolveLegacyFallback(requestedAppearance: ResolvedThemeAppearance): Theme | PartialTheme | undefined {
+    const appearance = internResolvedThemeAppearance(requestedAppearance);
     const parentFallback = this.base instanceof FlexThemeReference ? this.base.resolveLegacyFallback(appearance) : undefined;
     const fallback = typeof this.legacyFallback === 'function' ? this.legacyFallback(appearance) : this.legacyFallback;
     return parentFallback && fallback ? immutableMerge(parentFallback, fallback) : (fallback ?? parentFallback);
@@ -134,7 +151,7 @@ export class FlexThemeReference implements FlexThemeSource {
     this.invalidate();
   }
 
-  private resolveBase(appearance: ResolvedThemeAppearance): FlexTokens {
+  private resolveBase(appearance: Readonly<NormalizedThemeAppearance>): FlexTokens {
     if (this.base instanceof FlexThemeReference) {
       return this.base.resolveFlexTokens(appearance);
     }

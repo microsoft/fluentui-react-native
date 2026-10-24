@@ -1,5 +1,5 @@
 import type { FlexTokens } from '../flex/tokens.types';
-import type { ResolvedThemeAppearance } from './appearance.types';
+import type { NormalizedThemeAppearance } from './appearance.types';
 
 /**
  * Style sheets cached for one theme state, keyed by a module-scoped symbol per component.
@@ -14,7 +14,7 @@ export type ThemeState = {
   /**
    * Structured appearance values used to resolve this theme state.
    */
-  readonly appearance: Readonly<ResolvedThemeAppearance>;
+  readonly appearance: Readonly<NormalizedThemeAppearance>;
   /**
    * @deprecated Use appearance.contrast.
    */

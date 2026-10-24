@@ -2,7 +2,7 @@ import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 import { defaultThemeAppearanceState } from '../theming/appearance';
 import { useThemeBoundary } from '../theming/context';
-import { defaultThemeState, getThemeState } from '../theming/themeRuntime';
+import { defaultThemeState, getThemeState } from './themeState';
 import type { ThemeAppearanceState } from '../types/appearance.types';
 import type { ThemeState } from '../types/themeState.types';
 

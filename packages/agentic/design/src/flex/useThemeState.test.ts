@@ -154,6 +154,7 @@ describe('useThemeState', () => {
     expect(states[0].tokens.color.backgroundNeutralSubtle).toBe('#123456');
     expect(states[0].highContrast).toBe(true);
     expect(states[0].appearance.contrast).toBe('highContrast');
+    expect(states[0].appearance.colorTone).toBe('cool');
 
     expect(Object.getOwnPropertySymbols(theme)).toEqual(initialSymbols);
 
@@ -277,6 +278,42 @@ describe('useThemeState', () => {
     act(() => appearanceSource.setColorScheme('light'));
     expect(states.at(-1)).toBe(lightState);
     expect(appearanceStates.at(-1)?.requested.colorScheme).toBe('system');
+    act(() => component!.unmount());
+  });
+
+  it('keys ThemeState and theme styles by color tone', () => {
+    const reference = new FlexThemeReference();
+    const states: ThemeState[] = [];
+    const render = (colorTone: 'cool' | 'warm') =>
+      React.createElement(
+        ThemeProvider,
+        { theme: reference, appearanceSource: lightAppearanceSource, appearance: { colorTone } },
+        React.createElement(ThemeStateProbe, { states }),
+      );
+    let createCount = 0;
+    const getStyles = themedStyleSheetFactory('test.tone', ({ appearance }) => {
+      createCount += 1;
+      return { root: { opacity: appearance.colorTone === 'warm' ? 0.5 : 1 } };
+    });
+    let component: ReactTestRenderer;
+
+    act(() => {
+      component = create(render('cool'));
+    });
+    const coolState = states.at(-1)!;
+    act(() => component!.update(render('warm')));
+    const warmState = states.at(-1)!;
+
+    expect(warmState).not.toBe(coolState);
+    expect(warmState.appearance).toMatchObject({ colorScheme: 'light', colorTone: 'warm' });
+    expect(warmState.themeStyles).not.toBe(coolState.themeStyles);
+    expect(getStyles(coolState).root.opacity).toBe(1);
+    expect(getStyles(warmState).root.opacity).toBe(0.5);
+
+    act(() => component!.update(render('cool')));
+    expect(states.at(-1)).toBe(coolState);
+    expect(getStyles(coolState).root.opacity).toBe(1);
+    expect(createCount).toBe(2);
     act(() => component!.unmount());
   });
 

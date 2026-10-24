@@ -1,10 +1,12 @@
 import { PlatformColor } from 'react-native';
 
-import { getInteractionColorOverrides, INTERACTIVE_COLOR_TOKENS } from '../../color-lib/interaction';
-import type { ColorMode, InteractionColorState, InteractionColorVariant } from '../../color-lib/types';
+import type { ColorMode, InteractionColorState } from '../../color-lib/types';
+import { INTERACTIVE_COLOR_TOKENS } from '../../flex/colors/interactiveTokens';
 import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
 import type { SemanticColorTokenValues } from '../../flex/tokens.types';
+import type { ColorTone } from '../../types/appearance.types';
 import { getContrastFailures, getUnresolvableContrastPairs, MODE_SURFACE, PAIRINGS, validateContrastPairs, WCAG } from '../index';
+import { getInteractionColorOverrides } from '../fixtures/interactionColors';
 import { x3BebopWarmInteractionConformance, x3InteractionConformance } from '../fixtures/x3InteractionConformance';
 
 function conformanceColors(
@@ -19,15 +21,11 @@ function conformanceColors(
   return colors;
 }
 
-function interactionConformanceColors(
-  mode: ColorMode,
-  state: InteractionColorState,
-  variant: InteractionColorVariant,
-): SemanticColorTokenValues {
-  const colors = conformanceColors(mode, variant === 'bebopWarm' ? x3BebopWarmInteractionConformance : x3InteractionConformance);
+function interactionConformanceColors(mode: ColorMode, state: InteractionColorState, colorTone: ColorTone): SemanticColorTokenValues {
+  const colors = conformanceColors(mode, colorTone === 'warm' ? x3BebopWarmInteractionConformance : x3InteractionConformance);
   return {
     ...colors,
-    ...getInteractionColorOverrides(colors, mode, state, { variant }).overrides,
+    ...getInteractionColorOverrides(colors, mode, state, colorTone).overrides,
   };
 }
 
@@ -95,13 +93,13 @@ describe.each(['light', 'dark'] as const)('%s contrast validation', (mode) => {
     expect(getUnresolvableContrastPairs(results)).toEqual([]);
   });
 
-  it.each(['default', 'bebopWarm'] as const)('audits %s interaction values', (variant) => {
+  it.each(['cool', 'warm'] as const)('audits %s interaction values', (colorTone) => {
     for (const state of ['hover', 'pressed'] as const) {
-      const failures = getContrastFailures(validateContrastPairs(interactionConformanceColors(mode, state, variant), mode)).map(
+      const failures = getContrastFailures(validateContrastPairs(interactionConformanceColors(mode, state, colorTone), mode)).map(
         (result) => `${result.foreground.token}/${result.background.token}`,
       );
       const expectedFailures =
-        mode === 'dark' && variant === 'bebopWarm' && state === 'pressed'
+        mode === 'dark' && colorTone === 'warm' && state === 'pressed'
           ? [
               'foregroundDangerPrimary/surfaceNeutralNearer',
               'foregroundDangerPrimary/backgroundDangerSubtle',
