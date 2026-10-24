@@ -44,10 +44,24 @@ behavior is documented in `theming.md`, `tokens.md`, and `entry-points.md`.
 - **Done when:** x3 publishes, or the owner approves, high-contrast and elevated values, the defaults generator emits
   them, and `FlexThemeReference` selects them by the resolved appearance without changing its laziness or identity
   guarantees.
-- **Review draft:** repository-only `packages/agentic/design/refactoring.md` coordinates package reorganization,
-  tone-aware interactive colors, verified x3 defaults, and the legacy compatibility gates. It is an explicitly
-  requested review artifact, not a second open-work index; remove the draft and this pointer when its durable contract
-  has moved into the owning references.
+
+## Fixed interactive color derivation
+
+- **Outcome:** an omitted state of a `fixed` interactive color with a mappable rest derives from an authoritative,
+  scheme-independent rule.
+- **Current state:** the pinned x3 sources define no such rule, so resolving that state throws until the author
+  supplies `hover` and `pressed` (see `flex-colors.md`). No default color uses the `fixed` type.
+- **Done when:** x3 publishes, or the owner approves, the rule, the interaction policy implements it with conformance
+  fixtures, and `fixed` colors no longer require explicit states.
+
+## Native layered shadows and motion
+
+- **Outcome:** components render Flex layered shadows and motion tokens with qualified native behavior.
+- **Current state:** `tokens.shadow` and `tokens.motion` carry the pinned x3 values (see `tokens.md`), but no agentic
+  component reads them, and no native story qualifies how each platform and renderer draws every shadow layer or
+  applies the durations and easing curves.
+- **Done when:** the first consuming component defines that behavior for each supported platform and renderer, and
+  native stories qualify it in light and dark appearances.
 
 ## Flex authoring migration guide
 
