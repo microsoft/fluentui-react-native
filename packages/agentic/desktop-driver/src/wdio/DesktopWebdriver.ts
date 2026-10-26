@@ -172,6 +172,14 @@ export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, ur
   boundSessions.set(browser, desktop);
 
   if (!installedBrowsers.has(browser)) {
+    // WDIO otherwise inherits the session-wide screenshot command on elements.
+    browser.addCommand(
+      'takeScreenshot',
+      async function (this: WebdriverIO.Element) {
+        return this.takeElementScreenshot(this.elementId);
+      },
+      { attachToElement: true },
+    );
     browser.overwriteCommand(
       'isDisplayed',
       async function (this: WebdriverIO.Element) {
