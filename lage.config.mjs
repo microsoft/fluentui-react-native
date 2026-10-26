@@ -12,6 +12,11 @@ const config = {
     clean: {
       cache: false,
     },
+    // The root script already cleans TypeScript output before invoking Lage.
+    '@fluentui-react-native/root#clean': {
+      type: 'noop',
+      cache: false,
+    },
     'check:spec-contracts': {
       cache: false,
     },

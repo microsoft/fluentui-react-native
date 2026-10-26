@@ -44,7 +44,7 @@ Set up a clone with `yarn` to install dependencies, then `yarn build`.
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `yarn build`                    | `lage root-build`: runs `root-prebuild` (package `prebuild` steps), then `tsc -b` over the root graph |
 | `yarn build:clean`              | Cleans the root TypeScript build, then rebuilds                                                       |
-| `yarn clean`                    | `tsc -b --clean` plus `lage clean`                                                                    |
+| `yarn clean`                    | `tsc -b --clean` plus package artifact cleanup; Lage skips the root script to prevent recursion       |
 | `yarn clean-lage-cache`         | Clears the Lage task cache (`lage cache --clear`)                                                     |
 | `yarn lage test`                | Package tests after the root build and agentic contract checks                                        |
 | `yarn lage lint`                | Package lint (oxlint through `fluentui-scripts lint`)                                                 |

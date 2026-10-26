@@ -21,8 +21,14 @@ Use `@fluentui-react-native/desktop-test` for an application-owned
 configuration and normal WDIO/Jasmine suites. It preserves TypeScript hooks,
 Jasmine matchers, grouped spec arrays, retries, and native browser ownership.
 `installDesktopWebdriverCommands(browser, url)` binds an existing WDIO-managed
-browser, including native `isDisplayed`, `isFocused`, and delayed-render waits.
+browser, including native `isDisplayed`, `isFocused`, element screenshots, and delayed-render waits.
 No Appium capability spoofing or second session is required.
+
+With these commands installed, `element.takeScreenshot()` returns a base64 PNG
+cropped to the element, just like `browser.takeElementScreenshot(element.elementId)`.
+`element.saveScreenshot(path)` saves that element image, while
+`browser.takeScreenshot()` still captures the current window. Unsupported
+element capture fails explicitly; it never falls back to a window screenshot.
 
 Use `connectDesktopWebdriver` when a test owns service connection and session
 lifecycle:
