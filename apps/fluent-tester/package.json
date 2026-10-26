@@ -16,7 +16,7 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "react-native": "./src/index.ts",
+      "react-native": "./src/index.tsx",
       "import": "./lib/index.js",
       "default": "./src/index.tsx"
     }

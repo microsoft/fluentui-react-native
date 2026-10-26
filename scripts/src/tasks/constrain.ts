@@ -82,6 +82,7 @@ export function constrain(workspace: Yarn.Constraints.Workspace): void {
   enforceBuildInfoLocation(ctx);
   assertDeprecations(ctx);
   useCatalogs(ctx);
+  ensureReactNativeExports(ctx);
 }
 
 export function constrainRoot(workspace: Yarn.Constraints.Workspace): void {
@@ -114,6 +115,36 @@ function useCatalogs(ctx: PackageContext): void {
           ctx.enforce([dep as string, pkg], 'catalog:');
         }
       }
+    }
+  }
+}
+
+/**
+ * Metro resolves the "react-native" export condition to TypeScript source. Ensure published packages point that condition
+ * at a file that exists, and that React Native libraries provide it for every export.
+ */
+function ensureReactNativeExports(ctx: PackageContext): void {
+  const { exports, peerDependencies, private: isPrivate } = ctx.manifest;
+  if (isPrivate || !exports || typeof exports !== 'object' || Array.isArray(exports)) {
+    return;
+  }
+  const requireCondition = Boolean(peerDependencies?.['react-native']);
+  for (const [subpath, conditions] of Object.entries(exports)) {
+    if (!conditions || typeof conditions !== 'object' || Array.isArray(conditions)) {
+      continue;
+    }
+    const target = (conditions as Record<string, unknown>)['react-native'];
+    if (typeof target === 'string') {
+      if (!repoCtx.hasFile(ctx.root, target)) {
+        const swapped = target.endsWith('.tsx') ? target.slice(0, -1) : target.endsWith('.ts') ? `${target}x` : undefined;
+        if (swapped && repoCtx.hasFile(ctx.root, swapped)) {
+          ctx.enforce(['exports', subpath, 'react-native'], swapped);
+        } else {
+          ctx.error(`exports["${subpath}"]["react-native"] points to ${target}, which does not exist`);
+        }
+      }
+    } else if (requireCondition) {
+      ctx.error(`exports["${subpath}"] is missing a "react-native" condition pointing to its TypeScript source`);
     }
   }
 }
