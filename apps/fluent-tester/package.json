@@ -22,17 +22,13 @@
     }
   },
   "scripts": {
-    "android": "rnx-cli run --platform android",
     "build": "tsc -b",
     "bundle": "rnx-cli bundle --dev false",
-    "bundle:android": "rnx-cli bundle --dev false --platform android",
-    "bundle:ios": "rnx-cli bundle --dev false --platform ios",
     "bundle:macos": "rnx-cli bundle --dev false --platform macos",
     "bundle:windows": "rnx-cli bundle --dev false --platform windows",
     "clean": "fluentui-scripts clean",
     "desktop-test": "desktop-test",
     "format": "fluentui-scripts format",
-    "ios": "rnx-cli run --platform ios",
     "lint": "fluentui-scripts lint",
     "macos": "rnx-cli run --platform macos",
     "start": "rnx-cli start",
@@ -67,7 +63,6 @@
     "@fluentui-react-native/tooltip": "workspace:*",
     "@fluentui-react-native/vibrancy-view": "workspace:*",
     "@react-native-community/cli": "^20.0.0",
-    "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native-windows/cli": "^0.81.0",
     "@react-native/babel-preset": "^0.81.0",
@@ -112,8 +107,6 @@
         "entryFile": "index.js",
         "assetsDest": "dist",
         "targets": [
-          "android",
-          "ios",
           "macos",
           "windows"
         ],
@@ -132,15 +125,6 @@
           ]
         ],
         "platforms": {
-          "android": {
-            "bundleOutput": "dist/index.android.bundle",
-            "sourcemapOutput": "dist/index.android.bundle.map",
-            "assetsDest": "dist/res"
-          },
-          "ios": {
-            "bundleOutput": "dist/index.ios.jsbundle",
-            "sourcemapOutput": "dist/index.ios.jsbundle.map"
-          },
           "macos": {
             "bundleOutput": "dist/index.macos.jsbundle",
             "sourcemapOutput": "dist/index.macos.jsbundle.map"
@@ -160,9 +144,6 @@
       },
       "capabilities": [
         "babel-preset-react-native",
-        "community/cli",
-        "core-android",
-        "core-ios",
         "core-macos",
         "core-windows",
         "core/metro-config",

@@ -37,7 +37,22 @@ def patch_fmt_consteval(installer)
   Pod::UI.puts '[FluentTester] Patched fmt base.h to disable consteval (Xcode 26 / Clang 21 workaround)'
 end
 
-use_test_app!(:post_install => ->(installer) { patch_fmt_consteval(installer) }) do |target|
+# React Native Test App resolves `ios.icons` against app.json's file path instead of its directory and writes the
+# resized icons outside its asset catalog, so the manifest leaves no icon configured. Replace the generated catalog's
+# empty AppIcon set with the committed single-size set instead. Re-applied on every `pod install`.
+def install_app_icon(installer)
+  icon_set = File.join(__dir__, '../assets/AppIcon.appiconset')
+  installer.aggregate_targets.map(&:user_project_path).uniq.each do |project_path|
+    destination = File.join(File.dirname(project_path), 'Assets.xcassets', 'AppIcon.appiconset')
+    FileUtils.rm_rf(destination)
+    FileUtils.cp_r(icon_set, destination)
+  end
+end
+
+use_test_app!(:post_install => lambda { |installer|
+  patch_fmt_consteval(installer)
+  install_app_icon(installer)
+}) do |target|
   target.app do
     platform :ios, '16.0'
     pod 'MicrosoftFluentUI', :podspec => microsoft_fluent_ui_podspec

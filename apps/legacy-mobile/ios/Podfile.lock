@@ -4,15 +4,15 @@ PODS:
   - fast_float (8.0.0)
   - FBLazyVector (0.81.6)
   - fmt (11.0.2)
-  - FRNAppearanceAdditions (0.8.8):
+  - FRNAppearanceAdditions (0.8.12):
     - React
-  - FRNAvatar (0.22.8):
+  - FRNAvatar (0.22.15):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNDatePicker (0.12.7):
+  - FRNDatePicker (0.12.8):
     - MicrosoftFluentUI (= 0.13.1)
     - React
-  - FRNFontMetrics (0.7.7):
+  - FRNFontMetrics (0.7.8):
     - React
   - glog (0.3.5)
   - hermes-engine (0.81.6):
@@ -2539,7 +2539,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-6d85e861d1/node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../../../node_modules/.store/react-native-test-app-virtual-97409c2a5a/node_modules/@rnx-kit/react-native-host`)"
   - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2703,7 +2703,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeHost:
-    :path: "../../../node_modules/.store/react-native-test-app-virtual-6d85e861d1/node_modules/@rnx-kit/react-native-host"
+    :path: "../../../node_modules/.store/react-native-test-app-virtual-97409c2a5a/node_modules/@rnx-kit/react-native-host"
   ReactTestApp-DevSupport:
     :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
@@ -2719,10 +2719,10 @@ SPEC CHECKSUMS:
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 812782f0506ba4c4a1b9f4b793e6de1bfdfc4c25
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
-  FRNAppearanceAdditions: 706f6363f4f69e2b6d5ea71efa6487e9ce832c5d
-  FRNAvatar: a521e92d786b57f168897918d4c02f8c52239ca0
-  FRNDatePicker: 5458ca02b022733ebfa8c2a851f52dd188fadd92
-  FRNFontMetrics: 06e3fec8860d2e45ccb9febfeaa988ab4101dbb6
+  FRNAppearanceAdditions: dec94e57ee6dd933af438bacd19f0a860c48b2f0
+  FRNAvatar: 68d2f4885d2d5e92d82be381a47fe232e53d281f
+  FRNDatePicker: 518a68400bcf4a90f4f6aa8fed0a59b10b5dc5e7
+  FRNFontMetrics: 214d0cc39630279fa8f01339501fb70e43318a73
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
   hermes-engine: 7219f6e751ad6ec7f3d7ec121830ee34dae40749
   MicrosoftFluentUI: 117135c06c8ae043a9811af6312e4ce68b197860
@@ -2796,6 +2796,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 3196a843cc5f4bc433f1a41cf17cdf804a01a529
 
-PODFILE CHECKSUM: 79d0e7585d741181bef1b57ec0a885efaf034dd3
+PODFILE CHECKSUM: 6bd8d7398ad65666f17c2db552aa45ca90916423
 
 COCOAPODS: 1.17.0

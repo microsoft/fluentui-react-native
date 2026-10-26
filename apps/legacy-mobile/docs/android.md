@@ -20,14 +20,14 @@ yarn build
 2. Start the server by running:
 
 ```sh
-cd apps/fluent-tester
+cd apps/legacy-mobile
 yarn start
 ```
 
 3. To boot the app, open a new command prompt and run:
 
 ```sh
-cd apps/fluent-tester
+cd apps/legacy-mobile
 yarn android
 ```
 

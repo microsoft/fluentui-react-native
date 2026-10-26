@@ -105,8 +105,8 @@ Fixes to existing v0 and v1 components keep their current framework, public API,
 1. If a component contains a native module, add its `podspec` path to the FluentTester Podfile. The React Native
    community CLI does not support
    [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347). Then run
-   `yarn && yarn build` from the root, and run `pod install` from `apps/fluent-tester/macos` or `apps/fluent-tester/ios`
-   for native Apple code.
+   `yarn && yarn build` from the root, and run `pod install` from `apps/fluent-tester/macos` for macOS or
+   `apps/legacy-mobile/ios` for iOS.
 
 ## Adding native code to your new component
 
@@ -243,7 +243,7 @@ To add a native module that wraps a FluentUI Android control:
    - Add dependencies for kotlin, maven, react-native, etc
    - Add dependency for FluentUIAndroid
 
-   c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/fluent-tester/package.json in order for our Fluent Tester app to build and use your new Android component module
+   c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in the relevant tester host package.json (`apps/legacy-mobile` for iOS/Android and `apps/fluent-tester` for macOS/Windows) so native modules are available to each host.
 
 ## Creating a pull request
 

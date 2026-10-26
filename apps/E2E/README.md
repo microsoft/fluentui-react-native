@@ -66,11 +66,18 @@ Reports, original failures, and target-scoped evidence live under
 Windows additionally requires a built, registered RN Test App with a verified
 generated renderer; macOS requires its own built application and permissions.
 
-Keep all legacy desktop and mobile lanes until per-test assertion mapping,
+Keep all legacy desktop lanes until per-test assertion mapping,
 equivalent-build comparisons, and at least 100 representative runs per endpoint
 over 14 days demonstrate at least 99% infrastructure success and zero process
 or input leaks. Hosted input-disabled checks do not qualify physical input.
-The remaining sections describe the retained Appium workflow.
+Historical iOS and Android specs remain under `apps/E2E/src` as dormant
+assertion references. They have no active WebdriverIO configuration, Appium
+preparation command, or PR lane. The iOS/Android host and build instructions
+live in [`apps/legacy-mobile`](../legacy-mobile/README.md). Do not treat these
+source specifications as executed coverage or restore mobile Appium runners as
+part of the desktop migration.
+
+The remaining sections describe retained desktop Appium workflows.
 
 **There is currently an Appium issue with NPM v8.19.2. Please use an older version of NPM**
 
@@ -100,7 +107,8 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 
 - E2E - The root E2E testing folder containing test components and their respective platform-specific page objects and spec documents.
 - reports - Each platform folder (apple, win32, windows) contains this folder that saves the test reports from Appium/WebDriverIO.
-- wdio.conf.js - Each platform folder contains this file. It's the configuration file for WebDriverIO, which also configures Appium, WinAppDriver, and Jasmine parameters.
+- `wdio.conf.<desktop>.js` - The active desktop configurations for WebdriverIO, Appium, WinAppDriver, and Jasmine.
+- Historical iOS/Android spec files remain without runner configurations.
 
 # Running E2E Tests
 
@@ -116,7 +124,7 @@ Yarn-managed drivers and load only the Windows driver. Do not change this to
 `.appium` or run an unversioned `appium driver install windows`: that creates a
 separate dependency tree outside the lockfile and can leave the driver unable
 to import its Appium peer. Existing `.appium` installations are ignored by these
-two endpoints; the mobile and macOS commands retain their existing setup.
+two endpoints; the macOS command retains its existing setup.
 
 Run `yarn test:appium` to check driver discovery, the locked package path and
 version, the actual driver import, and the Windows/Win32 runner configuration
@@ -156,39 +164,6 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
    - (from fluentui-react-native/apps/fluent-tester) `yarn start`
 4. Open a new command prompt and run the E2E tests
    - (from fluentui-react-native/apps/E2E) `yarn e2etest:macos`
-
-_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
-
-## iOS Steps
-
-First check that iOS configs in wdio.conf.ios.js are updated to match your dev environment. If the config doesn't match you may get an error message "App with bundle identifier 'com.microsoft.ReactTestApp' unknown"
-
-- 'appium:deviceName' should be updated to a simulator that you have. You can check the ones you have by going to the 'Devices and Simulators' window in Xcode.
-- 'appium:platformVersion' should be updated to match the iOS version of the simulator you're using. You can check what version this should be in the same 'Devices and Simulators' window.
-
-1. Follow step #1 from "Win32 Steps" section above.
-2. POD Install
-   - (from fluentui-react-native) `cd apps/fluent-tester/ios`
-   - (from fluentui-react-native/apps/fluent-tester/ios) `pod install`
-3. Start the server
-   - (from fluentui-react-native) `cd apps/fluent-tester`
-   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
-4. Open a new command prompt and run the E2E tests
-   - (from fluentui-react-native/apps/E2E) `yarn e2etest:ios`
-
-_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
-
-## Android Steps
-
-1. Follow step #1 from "Win32 Steps" section above.
-2. Start the server
-   - (from fluentui-react-native) `cd apps/fluent-tester`
-   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
-3. Install and run the app from a new command prompt
-   - (from fluentui-react-native) `cd apps/fluent-tester`
-   - (from fluentui-react-native/apps/fluent-tester) `yarn android`
-4. Open a new command prompt and run the E2E tests
-   - (from fluentui-react-native/apps/E2E) `yarn e2etest:android`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
