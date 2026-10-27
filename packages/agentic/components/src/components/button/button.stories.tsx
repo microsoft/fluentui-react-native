@@ -559,7 +559,13 @@ export const ExternallyDrivenSelection: Story = {
             selectedIcon={filledStarIcon}
             testID="agentic-storybook-button-favorite"
           />
-          <Button appearance="subtle" content="Reset" onPress={() => setSelected(false)} testID="agentic-storybook-button-reset" />
+          <Button
+            appearance="subtle"
+            content="Reset"
+            onAccessibilityAction={() => setSelected(false)}
+            onPress={() => setSelected(false)}
+            testID="agentic-storybook-button-reset"
+          />
         </StoryGroup>
       );
     };
