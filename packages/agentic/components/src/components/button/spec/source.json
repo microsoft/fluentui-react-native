@@ -166,7 +166,7 @@
     },
     {
       "id": "BTN-005",
-      "evidence": ["useButton.ts", "renderButton.tsx", "button.test.tsx"]
+      "evidence": ["useButton.ts", "renderButton.tsx", "button.test.tsx", "button.stories.tsx"]
     },
     {
       "id": "BTN-006",

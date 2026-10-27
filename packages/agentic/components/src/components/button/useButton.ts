@@ -1,7 +1,13 @@
 import type { ButtonProps, ButtonState } from './button.types';
-import { useAccessibilityLabelWarning, useFocusablePressable, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
+import {
+  resolveAccessibilityAction,
+  useAccessibilityLabelWarning,
+  useFocusablePressable,
+  useSlot,
+  useOptionalSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
@@ -50,6 +56,10 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const themeState = useThemeState();
   const nativeProps: PressableProps = {
     ...rest,
+    accessibilityActions: isToggleButton
+      ? resolveAccessibilityAction('toggle', Platform.OS, rest.accessibilityActions).accessibilityActions
+      : rest.accessibilityActions,
+    'aria-checked': isToggleButton ? selected : rest['aria-checked'],
     role: 'button',
     accessibilityState: {
       ...accessibilityState,

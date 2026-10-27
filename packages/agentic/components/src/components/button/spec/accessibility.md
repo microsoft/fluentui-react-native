@@ -29,6 +29,14 @@ Disabled buttons communicate unavailable state, do not activate, and are
 removed from keyboard focus. Toggle-style buttons remain one button and
 announce their checked state from the externally supplied `selected` value.
 
+Supplying `selected`, including `false`, declares the platform's resolved
+Toggle action so Win32 UI Automation can expose checked state. Caller action
+labels and custom declarations are retained. The component-owned checked
+value also takes precedence over a conflicting `aria-checked` alias.
+Native action events are forwarded unchanged through `onAccessibilityAction`;
+they neither mutate `selected` nor synthesize `onPress`. An owner handling a
+native Toggle updates its own state from that event.
+
 The focus target follows the [shared focus visual policy](../../../../references/higher-order-components.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
 to a private `FocusRing` slot. Its configured ring Views remain mounted on the

@@ -40,6 +40,29 @@ Do not use `disabled` to represent an unselected value. Avoid introducing new
 uses of this Button-specific selection API when a dedicated ToggleButton
 contract is required for alignment with current Flex guidance.
 
+Native Toggle actions arrive through `onAccessibilityAction`, independently
+of pointer and keyboard `onPress`. A caller supporting that transport also
+handles the resolved Toggle name and updates its own selected value:
+
+```tsx
+const toggleName = resolveAccessibilityAction('toggle', Platform.OS).name;
+
+<Button
+  content="Favorite"
+  selected={favorite}
+  onPress={() => setFavorite((value) => !value)}
+  onAccessibilityAction={(event) => {
+    if (event.nativeEvent.actionName === toggleName) {
+      setFavorite((value) => !value);
+    }
+  }}
+/>;
+```
+
+Import `Platform` from `react-native` and `resolveAccessibilityAction` from
+`@fluentui-react-native/framework-base`. Button declares the native action;
+the caller need not supply `accessibilityActions` or synthesize a press.
+
 Content wraps when a consumer constrains the root. Supply a content-slot
 override only when a product deliberately needs a different truncation or
 text presentation policy.

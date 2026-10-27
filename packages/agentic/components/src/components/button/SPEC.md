@@ -65,8 +65,8 @@ layout and requires an action-oriented `accessibilityLabel`.
 - **BTN-004:** Expose button semantics, merge caller accessibility state, warn
   for an unnamed icon-only button, and hide decorative icons.
 - **BTN-005:** Treat `selected` as externally owned state, expose checked
-  accessibility state when that prop is present, and reserve semibold label
-  width to prevent toggle reflow.
+  accessibility state and the resolved native Toggle action when that prop is
+  present, and reserve semibold label width to prevent toggle reflow.
 - **BTN-006:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
   on the root: default to native rings on Windows/macOS and root-modality-aware
   custom rings on Win32, retaining the same dual-ring geometry.
@@ -112,5 +112,5 @@ Button adds no component-owned motion.
 | BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                 |
 | BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                 |
 | BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`                     |
-| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`                       |
+| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx` |
 | BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |

@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import type { Pressable, PressableProps, ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -183,6 +183,74 @@ describe('Button', () => {
     const component = await renderButton({ content: 'Action' });
 
     expect(getRoot(component).props.accessibilityState).toEqual({ disabled: false });
+  });
+
+  it.each([false, true])('declares a native toggle action for selected=%s and owns the checked alias', async (selected) => {
+    const component = await renderButton({ content: 'Favorite', selected, 'aria-checked': !selected });
+    const root = getRoot(component);
+
+    expect(root.props.accessibilityActions).toEqual([{ name: 'Toggle' }]);
+    expect(root.props.accessibilityState.checked).toBe(selected);
+  });
+
+  it.each([
+    ['win32', 'Toggle'],
+    ['windows', 'toggle'],
+    ['macos', 'Toggle'],
+  ] as const)('resolves the native toggle action on %s', async (platform, action) => {
+    const replacement = jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    try {
+      const component = await renderButton({ content: 'Favorite', selected: false });
+
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: action }]);
+    } finally {
+      replacement.restore();
+    }
+  });
+
+  it('preserves caller action labels and custom actions while deduplicating toggle declarations', async () => {
+    const component = await renderButton({
+      content: 'Favorite',
+      selected: false,
+      accessibilityActions: [{ name: 'toggle' }, { name: 'Toggle', label: 'Choose favorite' }, { name: 'custom', label: 'Details' }],
+    });
+
+    expect(getRoot(component).props.accessibilityActions).toEqual([
+      { name: 'Toggle', label: 'Choose favorite' },
+      { name: 'custom', label: 'Details' },
+    ]);
+  });
+
+  it('does not add a toggle action to an ordinary button', async () => {
+    const actions = [{ name: 'custom', label: 'Details' }];
+    const component = await renderButton({ content: 'Save', accessibilityActions: actions });
+
+    expect(getRoot(component).props.accessibilityActions).toBe(actions);
+    expect(getRoot(component).props['aria-checked']).toBeUndefined();
+  });
+
+  it.each([false, true])('preserves the caller action handler with disabled=%s', async (disabled) => {
+    const onAccessibilityAction = jest.fn();
+    const component = await renderButton({ content: 'Favorite', selected: true, disabled, onAccessibilityAction });
+    const root = getRoot(component);
+
+    expect(root.props.onAccessibilityAction).toBe(onAccessibilityAction);
+    expect(root.props.accessibilityState).toEqual({ disabled, checked: true });
+    expect(root.props.accessibilityActions).toEqual([{ name: 'Toggle' }]);
+  });
+
+  it('forwards the original native toggle event without synthesizing a press or changing controlled state', async () => {
+    const onAccessibilityAction = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderButton({ content: 'Favorite', selected: false, onAccessibilityAction, onPress });
+    const event = { nativeEvent: { actionName: 'Toggle' } };
+
+    await fireEvent(getRoot(component), 'accessibilityAction', event);
+
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(getRoot(component).props.accessibilityState.checked).toBe(false);
   });
 
   it('places the icon after content and applies user styles last', async () => {

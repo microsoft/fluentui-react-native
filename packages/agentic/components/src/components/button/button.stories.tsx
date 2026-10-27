@@ -1,10 +1,12 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { useState } from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import type { AccessibilityActionEvent } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ThemedRoot, useRootInputModality } from '@fluentui-react-native/design';
+import { resolveAccessibilityAction } from '@fluentui-react-native/framework-base';
 import type { FocusKeyboardEvent, FocusRequest } from '@fluentui-react-native/framework-base';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
@@ -582,6 +584,194 @@ export const Disabled: Story = {
     docs: {
       description: {
         story: 'Disabled buttons are unavailable, expose disabled accessibility state, and do not receive focus.',
+      },
+    },
+  },
+};
+
+export const NativeToggleSemantics: Story = {
+  render: () => {
+    const Scene = () => {
+      const [action, setAction] = useState({ count: 0, name: 'none' });
+      const [presses, setPresses] = useState(0);
+      return (
+        <View style={styles.story}>
+          <Button content="Not selected" selected={false} testID="button-native-toggle-off" />
+          <Button
+            content="Selected"
+            selected
+            testID="button-native-toggle-on"
+            onAccessibilityAction={(event: AccessibilityActionEvent) => {
+              const name = event.nativeEvent.actionName;
+              setAction((previous) => ({ count: previous.count + 1, name }));
+            }}
+            onPress={() => setPresses((count) => count + 1)}
+          />
+          <Button
+            content="Unavailable selection"
+            selected
+            disabled
+            testID="button-native-toggle-disabled"
+            onAccessibilityAction={(event: AccessibilityActionEvent) => {
+              const name = event.nativeEvent.actionName;
+              setAction((previous) => ({ count: previous.count + 1, name }));
+            }}
+            onPress={() => setPresses((count) => count + 1)}
+          />
+          <StoryStatus testID="button-native-toggle-actions">{`${action.count}:${action.name}`}</StoryStatus>
+          <StoryStatus testID="button-native-toggle-presses">{String(presses)}</StoryStatus>
+        </View>
+      );
+    };
+    return <Scene />;
+  },
+  wdio: {
+    'BTN-005 exposes caller-owned native checked state with and without disabled': async ({ browser, expect }) => {
+      const off = await browser.$('~button-native-toggle-off');
+      const on = await browser.$('~button-native-toggle-on');
+      const disabled = await browser.$('~button-native-toggle-disabled');
+      expect(await off.getTagName()).toBe('button');
+      expect(await on.getTagName()).toBe('button');
+      expect(await off.getProperty('checked')).toBe(false);
+      expect(await on.getProperty('checked')).toBe(true);
+      await expect(disabled).toBeDisabled();
+      expect(await disabled.getProperty('checked')).toBe(true);
+    },
+    'BTN-005 Win32 Toggle forwards once without a press or a controlled selection change': async ({ browser, expect, platform, skip }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies Win32 native Toggle transport.');
+        return;
+      }
+      if (!browser.capabilities['furn:features']?.accessibilityClick) {
+        skip('Native accessibility click is unavailable.');
+        return;
+      }
+      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+      const button = await browser.$('~button-native-toggle-on');
+      const actions = await browser.$('~button-native-toggle-actions');
+      const presses = await browser.$('~button-native-toggle-presses');
+      await expect(actions).toHaveAttribute('name', '0:none');
+      await expect(presses).toHaveAttribute('name', '0');
+      expect(await button.getProperty('checked')).toBe(true);
+      await button.click();
+      await expect(actions).toHaveAttribute('name', '1:Toggle');
+      await expect(presses).toHaveAttribute('name', '0');
+      expect(await button.getProperty('checked')).toBe(true);
+    },
+    'BTN-004 Win32 disabled public activation rejects without callbacks or a checked-state change': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies the Win32 disabled accessibility-click route, not disabled-provider dispatch.');
+        return;
+      }
+      if (!browser.capabilities['furn:features']?.accessibilityClick) {
+        skip('Native accessibility click is unavailable.');
+        return;
+      }
+      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+      const button = await browser.$('~button-native-toggle-disabled');
+      await expect(button).toBeDisabled();
+      expect(await button.getProperty('checked')).toBe(true);
+      await expect(button.click()).rejects.toThrow();
+      await expect(await browser.$('~button-native-toggle-actions')).toHaveAttribute('name', '0:none');
+      await expect(await browser.$('~button-native-toggle-presses')).toHaveAttribute('name', '0');
+      expect(await button.getProperty('checked')).toBe(true);
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Toggle state remains externally owned. Native Toggle declarations come from Button, not this fixture. Action counters observe the original native event separately from onPress.',
+      },
+    },
+  },
+};
+
+export const NativeToggleSelection: Story = {
+  render: () => {
+    const Scene = () => {
+      const [selected, setSelected] = useState(false);
+      const [actions, setActions] = useState(0);
+      const [presses, setPresses] = useState(0);
+      const toggle = resolveAccessibilityAction('toggle', Platform.OS).name;
+      return (
+        <View style={styles.story}>
+          <Button
+            content="Favorite"
+            selected={selected}
+            testID="button-native-selection"
+            onAccessibilityAction={(event: AccessibilityActionEvent) => {
+              if (event.nativeEvent.actionName === toggle) {
+                setActions((count) => count + 1);
+                setSelected((value) => !value);
+              }
+            }}
+            onPress={() => {
+              setPresses((count) => count + 1);
+              setSelected((value) => !value);
+            }}
+          />
+          <StoryStatus testID="button-native-selection-state">{String(selected)}</StoryStatus>
+          <StoryStatus testID="button-native-selection-actions">{String(actions)}</StoryStatus>
+          <StoryStatus testID="button-native-selection-presses">{String(presses)}</StoryStatus>
+        </View>
+      );
+    };
+    return <Scene />;
+  },
+  wdio: {
+    'BTN-002 BTN-005 Win32 native Toggle updates caller selection without reflow or duplicate presses': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies caller handling of Win32 native Toggle events.');
+        return;
+      }
+      if (!browser.capabilities['furn:features']?.accessibilityClick) {
+        skip('Native accessibility click is unavailable.');
+        return;
+      }
+      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const button = await browser.$('~button-native-selection');
+      const state = await browser.$('~button-native-selection-state');
+      const actions = await browser.$('~button-native-selection-actions');
+      const presses = await browser.$('~button-native-selection-presses');
+      await expect(state).toHaveAttribute('name', 'false');
+      await expect(actions).toHaveAttribute('name', '0');
+      await expect(presses).toHaveAttribute('name', '0');
+      await expectNativeState(browser, 'button-native-selection', 'checked', false);
+      const before = await browser.getElementRect(await button.elementId);
+      await button.click();
+      await expect(state).toHaveAttribute('name', 'true');
+      await expect(actions).toHaveAttribute('name', '1');
+      await expectNativeState(browser, 'button-native-selection', 'checked', true);
+      const selected = await browser.getElementRect(await button.elementId);
+      expect(selected.width).toBe(before.width);
+      expect(selected.height).toBe(before.height);
+      await button.click();
+      await expect(state).toHaveAttribute('name', 'false');
+      await expect(actions).toHaveAttribute('name', '2');
+      await expect(presses).toHaveAttribute('name', '0');
+      await expectNativeState(browser, 'button-native-selection', 'checked', false);
+      const reset = await browser.getElementRect(await button.elementId);
+      expect(reset.width).toBe(before.width);
+      expect(reset.height).toBe(before.height);
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The caller handles the native Toggle action and pointer onPress independently. This input-independent case checks native checked state and same-control bounds across both caller-owned transitions.',
       },
     },
   },
