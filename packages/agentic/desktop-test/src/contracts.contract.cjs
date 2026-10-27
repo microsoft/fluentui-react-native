@@ -323,6 +323,29 @@ async function main() {
         .slice(out.text().indexOf('::group::one'), out.text().indexOf('::endgroup::', out.text().indexOf('::group::one')));
       assert(groupOne.includes('::stop-commands::'));
       assert(!groupOne.includes('::warning::two'));
+    } else if (mode === 'command-secrets') {
+      const run = reporter({ kind: 'lifecycle' });
+      const runner = new NodeDesktopCommandRunner({ reporter: run });
+      // Secret-named variables with short values (flags, counters) must not rewrite machine output; 8 characters and up are redacted.
+      await runner.run({
+        ...command(
+          "console.log(JSON.stringify({ delegated: true, exitCode: 0 })); console.log('seven ' + process.env.FIXTURE_SEVEN_NONCE); console.log('eight ' + process.env.FIXTURE_EIGHT_SECRET);",
+          'secret-environment',
+        ),
+        env: { FIXTURE_FLAG_TOKEN: 'true', FIXTURE_SEVEN_NONCE: '1234567', FIXTURE_EIGHT_SECRET: 'abcdefgh' },
+      });
+      assert.equal((await run.finish()).status, 'passed');
+      const output = fs
+        .readFileSync(path.join(run.root, 'events.jsonl'), 'utf8')
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line))
+        .filter((event) => event.kind === 'output' && event.payload.stream === 'stdout')
+        .map((event) => event.payload.text);
+      assert.deepEqual(JSON.parse(output.find((text) => text.includes('"delegated"'))), { delegated: true, exitCode: 0 });
+      assert(output.includes('seven 1234567\n'), JSON.stringify(output));
+      assert(output.includes('eight [REDACTED]\n'), JSON.stringify(output));
+      assert(!output.join('').includes('abcdefgh'));
     } else if (mode === 'transport') {
       const { startReportTransport } = await import(lib('reporting/transport.js'));
       const run = reporter({ kind: 'lifecycle' });

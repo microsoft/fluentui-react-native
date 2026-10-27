@@ -16,6 +16,14 @@ Each run writes `artifacts/desktop/<run-id>/` by default:
 | `junit.xml`    | Test outcomes, infrastructure errors, and incomplete work        |
 | `commands/`    | Bounded, redacted stdout/stderr logs with source attribution     |
 
+Command output is redacted before it is logged or reported. Redaction covers the
+secrets the harness registers and the values of environment variables whose
+names contain `nonce`, `token`, `password`, `secret`, or `authorization`, when
+the value is at least 8 characters long. Shorter values such as `true` or `0`
+are flags, not credentials, and redacting them would rewrite machine-readable
+output. Register a shorter credential explicitly with the reporter's
+`addSecret`.
+
 Stderr and test progress are live without verbose mode. Failed commands replay
 the collected output. GitHub Actions grouping and annotations are rendered by
 the supervisor; child output cannot issue workflow commands. Upload the full
