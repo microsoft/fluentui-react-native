@@ -61,6 +61,18 @@ yarn run-win32
 
 6. At this time, VS Code will attach to the JS runtime and you can start debugging
 
+## End-to-end tests
+
+Run the Win32 end-to-end tests from this directory through `desktop-test`:
+
+```sh
+yarn e2eprep:win32
+yarn e2etest:win32
+```
+
+`e2eprep` builds the desktop driver helper and the Win32 bundle; `e2etest` runs the `legacy` suite from
+[`apps/E2E`](../E2E/README.md), which covers prerequisites, suites, and debugging failures.
+
 ## Dependencies
 
 Dependencies are managed by

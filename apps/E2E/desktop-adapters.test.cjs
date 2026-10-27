@@ -25,8 +25,8 @@ test('native checkbox and switch state never falls back to selected', async () =
   }
 });
 
-test('legacy runners retain their selected-based toggle behavior', async () => {
-  globalThis.browser = { capabilities: { browserName: 'legacy-appium' } };
+test('non-native runners retain their selected-based toggle behavior', async () => {
+  globalThis.browser = { capabilities: { browserName: 'non-native' } };
   const page = new BasePage();
   for (const value of [false, true]) assert.equal(await page.isChecked({ isSelected: async () => value }), value);
 });
@@ -34,9 +34,9 @@ test('legacy runners retain their selected-based toggle behavior', async () => {
 test('legacy required-form attributes use the authoritative native required property', async () => {
   let attribute;
   globalThis.browser = {
-    overwriteCommand(name, callback, element) {
+    overwriteCommand(name, callback, options) {
       assert.equal(name, 'getAttribute');
-      assert.equal(element, true);
+      assert.deepEqual(options, { attachToElement: true });
       attribute = callback;
     },
   };

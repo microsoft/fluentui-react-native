@@ -9,6 +9,11 @@ import { installLegacyDesktopAttributes } from './nativeDesktop';
 let reporting: DesktopReportSession | undefined;
 
 export default {
+  // The page objects were written for WebdriverIO 9, where `$` takes the first match, and a native tree can expose
+  // several elements for one testID. Keep that behavior instead of throwing a StrictSelectorError.
+  beforeSession(config: { strictSelectors?: boolean }) {
+    config.strictSelectors = false;
+  },
   async before() {
     reporting = await createDesktopReportSession({ artifactsRoot: path.resolve('artifacts', 'desktop'), kind: 'lifecycle' });
     installLegacyDesktopAttributes();

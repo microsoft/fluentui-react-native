@@ -23,6 +23,8 @@
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",
     "desktop-test": "desktop-test",
+    "e2eprep:win32": "desktop-test --target win32 build-driver && desktop-test --target win32 bundle",
+    "e2etest:win32": "desktop-test --config ../E2E/desktop.config.mts --target win32 test --suite legacy",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",

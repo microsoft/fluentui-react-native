@@ -17,7 +17,7 @@ iOS, Android, macOS, Windows, and Win32. It is an alpha-stage library under acti
 apps/
   bundle-size/          Bundle-size measurement and baselines
   component-generator/  Component scaffolding tool
-  E2E/                  Appium/WebdriverIO end-to-end tests for v0/v1 components
+  E2E/                  WebdriverIO end-to-end specs for v0/v1 components, run through desktop-test
   fluent-tester/        FluentTester host for Android, iOS, macOS, and Windows
   storybook/            Agentic component Storybook for macOS, Windows, and Win32
   tester-core/          Shared FluentTester pages and registry

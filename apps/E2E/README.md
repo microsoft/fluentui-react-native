@@ -1,29 +1,88 @@
 # E2E Testing Overview
 
-## Native desktop migration
+Desktop end-to-end tests run through the application-neutral
+[`desktop-test`](../../packages/agentic/desktop-test/README.md) harness and the
+[`desktop-driver`](../../packages/agentic/desktop-driver/README.md) W3C WebDriver
+server. WebdriverIO and Jasmine own the specs.
 
-`desktop.config.mts` adds the application-neutral
-[`desktop-test`](../../packages/agentic/desktop-test/README.md) harness alongside
-the existing Appium runners. It references canonical app targets in
-`apps/fluent-tester` and `apps/win32`; applications do not import E2E suites or
+`apps/E2E` owns the specs, page objects, and suite definitions
+(`desktop.config.mts` and `desktop-specs.mts`). The applications own their
+targets (`desktop.config.mts` in `apps/fluent-tester` and `apps/win32`) and run
+the suites from their own directories. Applications do not import E2E suites or
 install Storybook.
 
-From the repository root, after the normal repository build:
+## Run the tests
+
+After `yarn` and `yarn build` at the repository root, run the endpoint's
+`e2eprep` and `e2etest` scripts from its app directory:
+
+| Endpoint | Directory            | Prepare                | Test                   | Spec files |
+| -------- | -------------------- | ---------------------- | ---------------------- | ---------- |
+| macOS    | `apps/fluent-tester` | `yarn e2eprep:macos`   | `yarn e2etest:macos`   | 31         |
+| Windows  | `apps/fluent-tester` | `yarn e2eprep:windows` | `yarn e2etest:windows` | 10         |
+| Win32    | `apps/win32`         | `yarn e2eprep:win32`   | `yarn e2etest:win32`   | 40         |
+
+`e2etest` runs the `legacy` suite, the grouped selection in `desktop-specs.mts`.
+Rerun `e2eprep` when the app, its JavaScript, or its native dependencies change;
+`e2etest` alone repeats the tests against what is already prepared. Each stage
+also runs alone through the app's `desktop-test` script, for example
+`yarn desktop-test --target macos build`.
+
+`e2eprep` runs these stages:
+
+- **macOS:** build or verify the native helper, bundle, `pod install`, then
+  build with Xcode. The bundle comes first because CocoaPods embeds only the
+  resources that exist during `pod install`.
+- **Windows:** build or verify the helper, bundle, generate the Fabric RN Test
+  App project, build it with `rnx-cli`, and register the Debug package with
+  `apps/fluent-tester/scripts/register-windows-app.ps1`. `e2etest` starts Metro
+  itself, because Debug builds load their JavaScript from it, launches the
+  registered package, and stops both when the run ends.
+- **Win32:** build or verify the helper and bundle `dist/index.win32.bundle`.
+  There is no native build: `e2etest` launches the prebuilt REX host from
+  `@office-iss/rex-win32` against that bundle.
+
+A test run never builds the native helper implicitly. See the `desktop-test`
+[commands](../../packages/agentic/desktop-test/references/commands.md) and
+[platform setup](../../packages/agentic/desktop-test/references/platforms.md) for
+stage semantics.
+
+### Prerequisites
+
+- Node.js 22.19 or later (WebdriverIO 10).
+- **macOS:** Xcode, CocoaPods, and Accessibility and Screen Recording authority
+  for the verified native helper. Check it with
+  `desktop-driver doctor --platform macos --permissions`; see
+  [getting started](../../packages/agentic/desktop-driver/references/getting-started.md)
+  and the [macOS provider guide](../../packages/agentic/desktop-driver/native/macos/README.md).
+- **Windows:** the
+  [React Native Windows development dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
+  (grab every item and the appropriate versions), PowerShell 7 (`pwsh`),
+  [Developer Mode](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development),
+  and the Windows App Runtime 1.8 that Fabric apps load. See the
+  [Windows tester guide](../fluent-tester/docs/windows.md) for more setup.
+- **Win32:** a Windows host. The REX host is a prebuilt npm package, so no
+  native toolchain is required.
+
+### Suites
+
+`legacy` selects 31 macOS files, 10 Windows files, and 40 Win32 files. The
+Windows selection is an allowlist. It omits the `TabsLegacy` and `Tokens`
+patterns that the old Windows configuration carried, because neither folder
+exists any more: `TabsLegacy` was removed and `Tokens` was split into
+`ColorTokens`, `CornerRadiusTokens`, `Spacing`, and others. The harness fails on
+any unmatched pattern rather than silently omitting it.
+
+`pilot` and `behavioral-pilot` are smaller suites for qualifying an endpoint.
+Run them with the same options as `e2etest`:
 
 ```sh
-yarn workspace @fluentui-react-native/tester-win32 desktop-test --target win32 build-driver
-yarn workspace @fluentui-react-native/tester-win32 desktop-test --target win32 bundle
-yarn workspace @fluentui-react-native/e2e-testing desktop-test --target win32 test --suite pilot --list
-yarn workspace @fluentui-react-native/e2e-testing desktop-test --target win32 test --suite pilot
+yarn desktop-test --config ../E2E/desktop.config.mts --target win32 test --suite pilot --list
+yarn desktop-test --config ../E2E/desktop.config.mts --target win32 test --suite pilot
 ```
 
 The pilot deliberately starts small: Pressable navigation on Windows/Win32 and
-TextLegacy on macOS. It is not the behavioral parity gate. `legacy` retains the
-exact grouped selection shared with the old configs in `desktop-specs.mts`:
-31 macOS files, 40 Win32 files, and the existing Windows allowlist. That allowlist
-matches ten files and still contains two unmatched patterns
-(`TabsLegacy/specs/*.windows.ts` and `Tokens/specs/*.win.ts`). Native discovery
-fails on those patterns rather than silently omitting them.
+TextLegacy on macOS. It is not the behavioral parity gate.
 
 `--suite behavioral-pilot` selects the unchanged Win32 Button, Checkbox,
 Switch, directional FocusZone, and Callout specs in one group. An interactive
@@ -34,15 +93,13 @@ and popup opening. This probe is not the complete legacy baseline or an
 old/new comparative run. It does not enable restricted input or waive
 unsupported assertions.
 
-On macOS, bundle before `prep`, because CocoaPods embeds only resources that exist
-during `pod install`. Add `--paper` to `prep` and `test` for Paper:
+For macOS Paper, rerun the stages after the bundle with `--paper` on `prep` and
+`test`; changing the renderer requires a new `prep`:
 
 ```sh
-yarn workspace @fluentui-react-native/tester desktop-test --target macos build-driver
-yarn workspace @fluentui-react-native/tester desktop-test --target macos bundle
-yarn workspace @fluentui-react-native/tester desktop-test --target macos prep
-yarn workspace @fluentui-react-native/tester desktop-test --target macos build
-yarn workspace @fluentui-react-native/e2e-testing desktop-test --target macos test --suite legacy
+yarn desktop-test --target macos prep --paper
+yarn desktop-test --target macos build
+yarn desktop-test --config ../E2E/desktop.config.mts --target macos test --suite legacy --paper
 ```
 
 On October 22, 2026 (UTC), the macOS pilot and all 62 `legacy` tests pass on
@@ -61,111 +118,30 @@ and toggle-pattern availability remain unmapped. Native setup retains initial
 window bounds: it does **not** emulate the old maximize hook. Popup lookup
 remains scoped to the selected window.
 
+WebdriverIO 10 throws a `StrictSelectorError` when a selector matches several
+elements, where WebdriverIO 9 took the first match. A native tree can expose
+several elements for one `testID` (a container and its children), and the page
+objects rely on the first match, so the shared hooks in
+`src/common/desktopHooks.ts` set `strictSelectors: false` for these suites.
+Prefer a unique `testID` for new page-object selectors.
+
 Reports, original failures, and target-scoped evidence live under
-`artifacts/desktop/<run-id>`. Native helpers must be built/provisioned explicitly.
-Windows additionally requires a built, registered RN Test App with a verified
-generated renderer; macOS requires its own built application and permissions.
+`artifacts/desktop/<run-id>` (see [Debugging E2E Failures](#debugging-e2e-failures)).
+Windows requires a built, registered RN Test App with a verified generated
+renderer; macOS requires its own built application and permissions.
 
-Keep all legacy desktop lanes until per-test assertion mapping,
-equivalent-build comparisons, and at least 100 representative runs per endpoint
-over 14 days demonstrate at least 99% infrastructure success and zero process
-or input leaks. Hosted input-disabled checks do not qualify physical input.
+The `legacy` lanes replace the former Appium lanes in the PR pipeline, and
+Appium is no longer a dependency of this repository. The macOS baseline above is
+a local run. The Windows (Fabric) and Win32 `legacy` lanes have no recorded
+full run yet, so their first hosted PR runs are the qualification. Hosted
+input-disabled checks do not qualify physical input, and a skipped assertion is
+not a pass.
+
 Historical iOS and Android specs remain under `apps/E2E/src` as dormant
-assertion references. They have no active WebdriverIO configuration, Appium
-preparation command, or PR lane. The iOS/Android host and build instructions
-live in [`apps/legacy-mobile`](../legacy-mobile/README.md). Do not treat these
-source specifications as executed coverage or restore mobile Appium runners as
-part of the desktop migration.
-
-The remaining sections describe retained desktop Appium workflows.
-
-**There is currently an Appium issue with NPM v8.19.2. Please use an older version of NPM**
-
-## Win32/UWP Prerequisites
-
-- [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher.
-- [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
-  - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
-- [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
-- Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
-
-### UWP Additional Prerequisites
-
-- [UWP Prerequisites](../fluent-tester/docs/windows.md)
-
-## macOS Prerequisites
-
-- macOS 10.15 or later
-- XCode 12 or later should be installed
-- XCode Helper app should be enabled for Accessibility access. The app itself is usually found at: _/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/Xcode Helper.app_.
-
-In order to enable Accessibility access, simply open the parent folder in finder:
-_open /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/_
-and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> Accessibility** list of your **System Preferences**. This action must only be done once.
-
-## E2E Project Structure
-
-- E2E - The root E2E testing folder containing test components and their respective platform-specific page objects and spec documents.
-- reports - Each platform folder (apple, win32, windows) contains this folder that saves the test reports from Appium/WebDriverIO.
-- `wdio.conf.<desktop>.js` - The active desktop configurations for WebdriverIO, Appium, WinAppDriver, and Jasmine.
-- Historical iOS/Android spec files remain without runner configurations.
-
-# Running E2E Tests
-
-## Windows and Win32 Appium drivers
-
-After the repository's `yarn` install, run `yarn e2eprep:windows` or
-`yarn e2eprep:win32` from `apps/E2E`. These commands verify that Appium discovers
-and imports the Windows driver already installed from the Yarn lockfile.
-They do not download another driver from npm.
-
-Windows and Win32 test commands use `APPIUM_HOME=.` to discover the workspace's
-Yarn-managed drivers and load only the Windows driver. Do not change this to
-`.appium` or run an unversioned `appium driver install windows`: that creates a
-separate dependency tree outside the lockfile and can leave the driver unable
-to import its Appium peer. Existing `.appium` installations are ignored by these
-two endpoints; the macOS command retains its existing setup.
-
-Run `yarn test:appium` to check driver discovery, the locked package path and
-version, the actual driver import, and the Windows/Win32 runner configuration
-without launching a native app.
-
-## Win32 Steps
-
-1. Install node packages, build JS
-   - C:\repo> `cd fluentui-react-native`
-   - C:\repo\fluentui-react-native> `yarn`
-   - C:\repo\fluentui-react-native> `yarn build`
-2. Bundle the test app (pick specific platform you want to test, we'll use win32)
-   - C:\repo\fluentui-react-native>`cd apps\win32`
-   - C:\repo\fluentui-react-native\apps\win32> `yarn bundle`
-3. Run E2E tests
-   - C:\repo\fluentui-react-native\apps\win32> `yarn e2etest`
-
-## UWP Steps
-
-1. Follow step #1 from "Win32 Steps" section above.
-2. Start the server
-   - C:\repo\fluentui-react-native> `cd apps\windows`
-   - C:\repo\fluentui-react-native\apps\E2E> `yarn start`
-3. Open a new command prompt and run the E2E tests
-   - C:\repo\fluentui-react-native\apps\E2E> `yarn e2etest:windows`
-
-_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
-
-## macOS Steps
-
-1. Follow step #1 from "Win32 Steps" section above.
-2. POD Install
-   - (from fluentui-react-native) `cd apps/fluent-tester/macos`
-   - (from fluentui-react-native/apps/fluent-tester/macos) `pod install`
-3. Start the server
-   - (from fluentui-react-native) `cd apps/fluent-tester`
-   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
-4. Open a new command prompt and run the E2E tests
-   - (from fluentui-react-native/apps/E2E) `yarn e2etest:macos`
-
-_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
+assertion references. They have no WebdriverIO configuration, preparation
+command, or PR lane. The iOS/Android host and build instructions live in
+[`apps/legacy-mobile`](../legacy-mobile/README.md). Do not treat these source
+specifications as executed coverage.
 
 # Authoring E2E Test
 
@@ -310,53 +286,24 @@ describe('Click on each test page and check if it renders', function() {
 });
 ```
 
-# Debugging E2E Failures (Locally)
+# Debugging E2E Failures
 
-If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the **first** failing test and focus on fixing that one.
+The run stops at the first failure (`bail: 1`), so find the **first** failing test and focus on that one.
 
-Having a clear and concise report on testing failures is key in efficient debugging. We're utilizing two report generators:
+## Locally
 
-1. **Spec Reporter** - Low overhead, easy to read, automatically runs with E2E testing. However, less information and less reliable.
+Every run writes `artifacts/desktop/<run-id>/` under the project that owns the configuration. `e2etest` uses the E2E configuration, so its runs are in `apps/E2E/artifacts/desktop`. The `e2eprep` stages use the app's configuration, so their runs are in `apps/fluent-tester/artifacts/desktop` or `apps/win32/artifacts/desktop`. All three folders are git-ignored.
 
-2. **Allure Reporter** - Creates in-depth reports with key information about each test. Must have Java 1.8 downloaded to create reports and requires running additional script after E2E testing is complete.
+| Artifact         | Contents                                                                                                  |
+| ---------------- | --------------------------------------------------------------------------------------------------------- |
+| `junit.xml`      | Test outcomes, infrastructure errors, and incomplete work                                                 |
+| `run.json`       | Tests, attempts, failures, evidence, and the final status                                                 |
+| `events.jsonl`   | The versioned, source-attributed event journal                                                            |
+| `commands/`      | Redacted stdout and stderr of each command: the build, Metro, and the WDIO worker                         |
+| `evidence/<id>/` | Captured when a test fails: a screenshot, the page source, the accessibility tree, and other open windows |
 
-## Using Spec Reporter
+Progress and failures stream to the terminal as the run proceeds, and a failed command replays its collected output. For a failing `e2eprep` stage, start with its log under `commands/`. For a failing test, start with the first failed entry in `run.json` and its `evidence/` folder. A red-box error in the app appears in the screenshot and page source. See [reporting](../../packages/agentic/desktop-test/references/reporting.md) for the format.
 
-You can view the spec report right as E2E testing is finished. It shows the failing tests and a brief explanation of what went wrong. However, in some cases when a redbox error occurs (mostly in Win32), these messages and report will not exist. This is because the FluentTester app becomes a non-responsive window, and WebDriverIO cannot close the window, which leaves the spec reporter in a bad state. In this case, I would recommend using the Allure Reporter.
+## In CI
 
-In the example below, the SVG test is the one failing the run, and at the bottom, you can see an error message.
-
-![E2E Error Debugging](../../assets/E2E/E2E_spec_reporter.png)
-
-When running E2E locally, after failing an E2E run, you will get a screenshot of the error in /errorShots/ of the platform you tested.
-
-## Using Allure Reporter
-
-Allure Framework is a flexible, lightweight multi-language test report tool that not only shows a very concise representation of what have been tested in a neat web report form, but allows everyone participating in the development process to extract maximum of useful information from everyday execution of tests.
-
-After E2E testing runs, allure creates a folder of XML files with all relevant information from the tests. In order to generate the report, you need to run the following command:
-
-- `yarn generate-report`
-
-This will bundle all the generated information and create a report for you to read.
-
-# Debugging E2E Failures (CI Pipeline)
-
-When an E2E test run fails within our CI, crucial information is output to Azure-Pipelines to help you debug the failure. Follow these steps:
-
-1. On the PR page, navigate to the "Checks" tab, ensure you've selected the "PR" tab on the left, and press "View more details on Azure Pipelines" at the bottom. ![E2E_Debugging_Step_1](../../assets/E2E/E2E_Debugging_Step_1.png)
-
-2. Click on the "# published" section. ![E2E_Debugging_Step_2](../../assets/E2E/E2E_Debugging_Step_2.png)
-
-3. Here, you have crucial information to help you debug the problem.
-   - The bottom files (green) are screenshots of the failing tests. The first one from the top (in this case, Svg-Test-Page), is the test failing the whole run. This is the one you're focus should be on.
-
-   - The middle file (pink) is the Appium output file. This contains more in-depth information on each test, including possible failures with WebDriverIO or the driver being used.
-
-   - The top folder (blue) is the Allure reporter output. In order to generate the report, you must:
-     1. Download the folder and unzip it
-
-     2. Navigate to it's location within your cmd, and type:
-        - C:\pathToFolder\allure-report\E2E_win32_Dump> `allure open`
-
-![E2E_Debugging_Step_3](../../assets/E2E/E2E_Debugging_Step_3.png)
+The `macos`, `windows`, and `win32` jobs in [`pr.yml`](../../.github/workflows/pr.yml) upload the artifact folders even when a run fails, as `E2E_<endpoint>_<renderer>_<run id>_<attempt>`. Download the artifact from the workflow run's summary and read it the same way as a local run. It also contains the driver setup's doctor report and, on Windows, the helper build logs and any `ReactApp.exe` crash dumps.

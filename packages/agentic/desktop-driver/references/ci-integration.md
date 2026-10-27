@@ -118,7 +118,18 @@ registered host policy. The authored input plans therefore report explicit
 capability skips; interactive self-hosted qualification must leave those
 features enabled.
 
-Those jobs are consumer examples, not generic package requirements. The native
+The legacy FluentTester E2E jobs (`macos`, `windows`, and `win32`) run the WDIO
+`legacy` suite through `desktop-test` with the app-level `yarn e2eprep:<endpoint>`
+and `yarn e2etest:<endpoint>` commands, in `apps/fluent-tester` for macOS and
+Windows and in `apps/win32` for Win32. They use the same setup action and upload
+the run directories, doctor report, and (Windows) helper build logs. Those specs
+click, press keys, and scroll with the wheel, and the host rejects a disabled
+input feature instead of skipping the test. The hosted macOS job therefore
+disables only physical clicks, so `click()` uses the accessibility action, and
+the Windows jobs leave every input feature enabled. Whether hosted Windows
+delivers that input has not been established.
+
+These jobs are consumer examples, not generic package requirements. The native
 helper itself does not require CocoaPods, the Windows App Runtime, or a
 Storybook process.
 

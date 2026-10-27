@@ -264,7 +264,7 @@ This repo manages semantic versioning and publishing using [Changesets](https://
 1. `yarn changeset` will take you through a command line wizard to generate changeset files
 2. Make sure to push the newly generated changeset file (`.changeset/*.md`)
 
-Repository release tooling uses Changesets CLI v3 with Node.js 22.x (22.12 or later), 24.x, or 26+, and the repository-pinned Yarn version.
+Repository release tooling uses Changesets CLI v3 with Node.js 22.x (22.19 or later), 24.x, or 26+, and the repository-pinned Yarn version.
 Changelogs use oxfmt; run `yarn format` from the repository root to format changes.
 `yarn changeset:version` requires an unreleased changeset and fails when none are present.
 The GitHub Actions workflow only creates version-update pull requests; package publishing remains in Azure Pipelines.

@@ -62,7 +62,7 @@
   "dependencies": {
     "@fluentui-react-native/desktop-driver": "workspace:*",
     "@rnx-kit/reporter": "catalog:",
-    "@wdio/reporter": "9.24.0",
+    "@wdio/reporter": "catalog:",
     "commander": "^14.0.2",
     "import-meta-resolve": "4.2.0"
   },

@@ -150,7 +150,7 @@ Use declared workspace scripts and validate in increasing scope:
 ## Example
 
 If `extract-zip` is present only through optional browser installation code
-while the repository runs native Appium automation, inspect both dependents,
+while the repository runs native desktop automation, inspect both dependents,
 confirm their normal modules load without extraction, resolve `extract-zip` to
 `ignore:`, regenerate and deduplicate the lockfile, then prove the browser
 archive path fails closed and the native tooling still works.

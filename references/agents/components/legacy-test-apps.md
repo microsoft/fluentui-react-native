@@ -11,9 +11,9 @@ owner_paths:
 
 # FluentTester and E2E coverage for v0 and v1 components
 
-v0 and v1 components are exercised manually in FluentTester. Retained desktop E2E suites use Appium/WebdriverIO and
-the new desktop harness; iOS/Android Appium specs are dormant and have no runner configuration. Agentic
-components use Storybook stories and `wdio` story tests instead; see
+v0 and v1 components are exercised manually in FluentTester. Desktop E2E suites run through the `desktop-test`
+harness and WebdriverIO; iOS/Android specs are dormant and have no runner configuration. Agentic components use
+Storybook stories and `wdio` story tests instead; see
 [tests and stories](../../../packages/agentic/components/references/tests-and-stories.md).
 
 ## FluentTester
@@ -35,9 +35,9 @@ components use Storybook stories and `wdio` story tests instead; see
 - Active runner configurations exist for desktop platforms only. Historical iOS/Android spec files remain in
   `apps/E2E/src` without configs or commands; they are not executed coverage.
 - Android selectors use `accessibilityLabel`; other platforms use `testID`.
-- The retained Win32 Appium lane uses WinAppDriver. The new native desktop
-  lane uses `desktop-test` and the registered desktop driver. Consult
-  `apps/E2E/README.md` before changing E2E lane ownership.
+- Suites run from the app directories through `desktop-test` and the registered desktop driver: `yarn e2eprep:<endpoint>`
+  then `yarn e2etest:<endpoint>` in `apps/fluent-tester` (macOS, Windows) or `apps/win32` (Win32). `apps/E2E` owns the
+  specs, the shared `desktop.config.mts`, and the suites. Consult `apps/E2E/README.md` before changing them.
 
 When a maintenance change alters observable behavior, update the existing page and spec rather than creating a
 parallel test app. Report E2E runs that were not executed, and why, rather than implying coverage (R-VALID-002).

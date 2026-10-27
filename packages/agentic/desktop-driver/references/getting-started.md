@@ -15,7 +15,7 @@ their own build, installation, identity, and lifecycle policy.
 
 All environments need:
 
-- Node.js 22.12 or later;
+- Node.js 22.19 or later;
 - a package manager capable of installing the package and its WebdriverIO
   dependency;
 - a real, logged-in desktop session for native input and window automation.
