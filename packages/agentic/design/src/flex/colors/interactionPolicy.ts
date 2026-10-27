@@ -50,6 +50,9 @@ function resolveState(
   if (!isInteractiveColorToken(token)) {
     return rest;
   }
+  if (appearance.contrast === 'highContrast') {
+    return rest;
+  }
 
   const { type } = description;
   if (type === 'fixed') {
@@ -60,9 +63,6 @@ function resolveState(
     }
     return rest;
   }
-  if (appearance.contrast === 'highContrast') {
-    return rest;
-  }
   return () => deriveInteractionColor(rest, token, state, type, appearance);
 }
 
@@ -70,8 +70,8 @@ function resolveState(
  * Resolve one authored color for an appearance. Explicit states win. Omitted
  * states of interactive tokens are computed on first read from rest, using the
  * description's type for direction; other tokens and high contrast use rest.
- * A fixed interactive color whose rest the engine can map must author every
- * state, and throws here otherwise.
+ * Outside high contrast, a fixed interactive color whose rest the engine can
+ * map must author every state, and throws here otherwise.
  */
 export function resolveFlexColor(
   token: string,

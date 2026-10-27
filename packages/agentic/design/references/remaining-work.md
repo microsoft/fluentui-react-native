@@ -73,8 +73,5 @@ behavior is documented in `theming.md`, `tokens.md`, and `entry-points.md`.
 
 ## Dependent work owned by other packages
 
-- `@fluentui-react-native/storybook-desktop-runtime` still offers fixed light, dark, and high-contrast legacy themes;
-  [#4269](https://github.com/microsoft/fluentui-react-native/issues/4269) moves Storybook to the unified provider with
-  structured appearance controls.
 - `@fluentui-react-native/apple-theme` still authors a legacy `Theme`;
   [#4261](https://github.com/microsoft/fluentui-react-native/issues/4261) re-authors it on Flex tokens.

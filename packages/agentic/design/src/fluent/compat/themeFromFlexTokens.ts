@@ -1,9 +1,10 @@
-import type { FlexTokens, SemanticColorTokenValues } from '../../flex/tokens.types';
+import type { FlexTokens, SemanticColorTokenValues, SemanticMotion, SemanticShadows, SemanticSpacing } from '../../flex/tokens.types';
 import reverseProjection from '../../tokens/mappings/theme-from-flex.json' with { type: 'json' };
 import { appearanceOptionFromResolved } from '../../theming/appearance';
 import type { ResolvedThemeAppearance } from '../../types/appearance.types';
 import { ensureParentRecord, getValueAtSegments, isRecord, splitObjectPath } from '../../utilities/objects';
 import { mergeTheme } from '../mergeTheme';
+import type { ShadowToken } from '../types/Shadow.types';
 import type { PartialTheme, Theme } from '../types/Theme.types';
 
 import { getDefaultLegacyTheme } from './defaultLegacyTheme';
@@ -22,17 +23,21 @@ export interface ThemeFromFlexTokensOptions {
 
 /**
  * Flex tokens in the representation used before interactive colors: each color
- * is its rest value, and optional `color.hover` and `color.pressed` maps hold
- * explicit states.
+ * is its rest value, optional `color.hover` and `color.pressed` maps hold
+ * explicit states, a shadow may be a legacy `{ ambient, key }` token, and the
+ * later `motion` group and `spacing.componentBase800` may be absent.
  *
  * @deprecated Pass resolved {@link FlexTokens}, whose colors carry
  * `rest`, `hover`, and `pressed`.
  */
-export type FlatFlexTokens = Omit<FlexTokens, 'color'> & {
+export type FlatFlexTokens = Omit<FlexTokens, 'color' | 'shadow' | 'spacing' | 'motion'> & {
   color: SemanticColorTokenValues & {
     hover?: Partial<SemanticColorTokenValues>;
     pressed?: Partial<SemanticColorTokenValues>;
   };
+  shadow: { [Name in keyof SemanticShadows]: SemanticShadows[Name] | ShadowToken };
+  spacing: Omit<SemanticSpacing, 'componentBase800'> & Partial<Pick<SemanticSpacing, 'componentBase800'>>;
+  motion?: SemanticMotion;
 };
 
 const colorStatePathPattern = /^color\.([^.]+)\.(rest|hover|pressed)$/;

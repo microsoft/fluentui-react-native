@@ -52,11 +52,11 @@ const brand = flexColor(['#345678', '#abcdef'], 'inverted');
 const accent = flexColor({ rest: ['#345678', '#abcdef'], pressed: ['#123456', '#cdef01'], type: 'inverted' });
 ```
 
-| Type       | Omitted interactive states                                                               |
-| ---------- | ---------------------------------------------------------------------------------------- |
-| `standard` | Derived in the scheme's standard lightness direction; the type of a plain value          |
-| `inverted` | Derived in the opposite direction, as the default heavy, loud, and on-loud roles do      |
-| `fixed`    | Not derived; an interactive token with a mappable rest must author `hover` and `pressed` |
+| Type       | Omitted interactive states                                                                                      |
+| ---------- | --------------------------------------------------------------------------------------------------------------- |
+| `standard` | Derived in the scheme's standard lightness direction; the type of a plain value                                 |
+| `inverted` | Derived in the opposite direction, as the default heavy, loud, and on-loud roles do                             |
+| `fixed`    | Not derived; outside high contrast, an interactive token with a mappable rest must author `hover` and `pressed` |
 
 ## Resolution
 
@@ -65,9 +65,9 @@ For each color and resolved appearance:
 1. A tuple selects light or dark.
 2. An explicit state wins.
 3. An omitted state of a token outside `INTERACTIVE_COLOR_TOKENS` (see `color-lib.md`) is rest.
-4. A `fixed` interactive color throws while resolving if a state is omitted and JavaScript can map rest; with a rest it
+4. In high contrast, an omitted state is rest, including for a `fixed` color.
+5. A `fixed` interactive color throws while resolving if a state is omitted and JavaScript can map rest; with a rest it
    cannot map, the omitted state is rest.
-5. In high contrast, an omitted state is rest.
 6. Otherwise the omitted state is derived from rest on first read with the `color-lib` interaction algorithm, using the
    color's type as the direction, the appearance's `colorTone`, and the token's compositing mode. No import, provider
    setting, or registration is required. When JavaScript cannot map rest, such as a `PlatformColor`, the state is the
@@ -89,13 +89,18 @@ Use `flexColor(value, 'inverted')` when overriding a heavy, loud, or on-loud rol
 feedback.
 
 A `base` function receives the resolved appearance. A recipe function receives the accumulated authored description and
-the resolved appearance, and returns overrides. Description colors are authored entries, not resolved envelopes:
+the resolved appearance, and returns overrides. Description colors are authored entries, not resolved envelopes.
+Reusing a whole description keeps its type and explicit states; a value read with `selectColorEntry` is a plain color,
+so restate the type when it overrides an inverted role:
 
 ```ts
-import { FlexThemeReference, selectColorEntry } from '@fluentui-react-native/design';
+import { FlexThemeReference, flexColor, selectColorEntry } from '@fluentui-react-native/design';
 
 const theme = new FlexThemeReference({}, (description, appearance) => ({
-  color: { strokeBrandLoud: selectColorEntry(description.color.backgroundBrandLoud.rest, appearance) },
+  color: {
+    strokeBrandLoud: description.color.backgroundBrandLoud,
+    backgroundBrandHeavy: flexColor(selectColorEntry(description.color.foregroundBrandPrimary.rest, appearance), 'inverted'),
+  },
 }));
 ```
 
@@ -104,15 +109,15 @@ options, and the removed `color.hover` and `color.pressed` maps.
 
 ## Migrating from flat colors
 
-| Before                                                                       | After                                                                                   |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `tokens.color.backgroundBrandLoud`                                           | `tokens.color.backgroundBrandLoud.rest`                                                 |
-| `tokens.color.hover.backgroundBrandLoud ?? tokens.color.backgroundBrandLoud` | `tokens.color.backgroundBrandLoud.hover`                                                |
-| `{ color: { x: rest, hover: { x: hover } } }`                                | `{ color: { x: { rest, hover } } }`                                                     |
-| `{ color: { backgroundBrandLoud: '#…' } }` (implicitly inverted)             | `{ color: { backgroundBrandLoud: flexColor('#…', 'inverted') } }`                       |
-| A recipe branching on `appearance.colorScheme` for a color                   | A `[light, dark]` tuple                                                                 |
-| `(parent, appearance) => …parent.color.x…`                                   | `(description, appearance) => …selectColorEntry(description.color.x.rest, appearance)…` |
-| `InteractiveColorOverrides`                                                  | `InteractiveColorOptions` or `PartialSemanticColors`                                    |
+| Before                                                                       | After                                                                                                                                       |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens.color.backgroundBrandLoud`                                           | `tokens.color.backgroundBrandLoud.rest`                                                                                                     |
+| `tokens.color.hover.backgroundBrandLoud ?? tokens.color.backgroundBrandLoud` | `tokens.color.backgroundBrandLoud.hover`                                                                                                    |
+| `{ color: { x: rest, hover: { x: hover } } }`                                | `{ color: { x: { rest, hover } } }`                                                                                                         |
+| `{ color: { backgroundBrandLoud: '#…' } }` (implicitly inverted)             | `{ color: { backgroundBrandLoud: flexColor('#…', 'inverted') } }`                                                                           |
+| A recipe branching on `appearance.colorScheme` for a color                   | A `[light, dark]` tuple                                                                                                                     |
+| `(parent, appearance) => …parent.color.x…`                                   | `(description) => …description.color.x…`, or `flexColor(selectColorEntry(description.color.x.rest, appearance), type)` for a selected value |
+| `InteractiveColorOverrides`                                                  | `InteractiveColorOptions` or `PartialSemanticColors`                                                                                        |
 
 Other surfaces:
 

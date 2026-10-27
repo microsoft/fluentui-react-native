@@ -154,15 +154,18 @@ describe('themeFromFlexTokens', () => {
     expect(theme.shadows.shadow16).toEqual({ ambient: defaultFlexTokens.shadow.high[0], key: defaultFlexTokens.shadow.high.at(-1) });
   });
 
-  it('passes a legacy { ambient, key } shadow through the deprecated flat representation', () => {
+  it('accepts the pre-interactive flat representation, including legacy { ambient, key } shadows', () => {
     const legacy = { ambient: { x: 0, y: 0, blur: 2, color: 'black' }, key: { x: 0, y: 2, blur: 4, color: 'red' } };
-    const flat = {
-      ...defaultFlexTokens,
+    const { motion: _motion, spacing, ...groups } = defaultFlexTokens;
+    const { componentBase800: _componentBase800, ...previousSpacing } = spacing;
+    const flat: FlatFlexTokens = {
+      ...groups,
       color: restColorValues(defaultFlexTokens.color),
       shadow: { ...defaultFlexTokens.shadow, lowest: legacy },
+      spacing: previousSpacing,
     };
 
-    expect(themeFromFlexTokens(flat as unknown as FlatFlexTokens, light).shadows.shadow2).toEqual(legacy);
+    expect(themeFromFlexTokens(flat, light).shadows.shadow2).toEqual(legacy);
   });
 
   it('projects the same legacy theme from resolved and equivalent flat tokens', () => {
