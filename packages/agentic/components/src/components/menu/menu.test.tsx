@@ -70,6 +70,138 @@ function Scene(props: Partial<MenuProps> & { onCut?: () => void; onEmail?: () =>
 describe('Menu', () => {
   beforeEach(() => dispatchCommand.mockClear());
 
+  it.each([false, true])('MNU-007 MNU-008 delays sibling hover changes with replacement submenu=%s', async (hasSubmenu) => {
+    jest.useFakeTimers();
+    try {
+      const onOpenChange = jest.fn();
+      await render(
+        <Menu trigger={{ content: 'Edit', testID: 'trigger' }} submenuCloseDelay={60} onOpenChange={onOpenChange}>
+          <MenuItem {...row('Share', { submenu: { testID: 'share-surface', children: <MenuItem {...row('Email')} /> } })} />
+          <MenuItem
+            {...row('Target', {
+              submenu: hasSubmenu ? { testID: 'target-surface', children: <MenuItem {...row('Archive')} /> } : undefined,
+            })}
+          />
+        </Menu>,
+      );
+      await fireEvent(screen.getByTestId('trigger'), 'press', pointerPress);
+      await fireEvent(screen.getByTestId('share'), 'press', pointerPress);
+      expect(screen.getByTestId('share').props.accessibilityState.expanded).toBe(true);
+
+      await fireEvent(screen.getByTestId('target'), 'hoverIn', {});
+      await act(async () => {
+        jest.advanceTimersByTime(59);
+      });
+      expect(screen.getByTestId('share-surface')).toBeTruthy();
+      expect(screen.queryByTestId('target-surface')).toBeNull();
+
+      await act(async () => {
+        jest.advanceTimersByTime(1);
+      });
+      expect(screen.queryByTestId('share-surface')).toBeNull();
+      expect(screen.getByTestId('share').props.accessibilityState.expanded).toBe(false);
+      if (hasSubmenu) {
+        expect(screen.getByTestId('target-surface')).toBeTruthy();
+        expect(screen.getByTestId('target').props.accessibilityState.expanded).toBe(true);
+      } else {
+        expect(screen.queryByTestId('target-surface')).toBeNull();
+      }
+      expect(screen.getByTestId('trigger').props.accessibilityState.expanded).toBe(true);
+      expect(onOpenChange.mock.calls).toEqual([[true, { reason: 'trigger' }]]);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each(['trigger', 'native', 'unmount'] as const)('MNU-008 cancels pending hover opening on %s teardown', async (teardown) => {
+    jest.useFakeTimers();
+    const schedule = jest.spyOn(global, 'setTimeout');
+    const cancel = jest.spyOn(global, 'clearTimeout');
+    try {
+      const component = await render(<Scene submenuOpenDelay={50} />);
+      await fireEvent(screen.getByTestId('trigger'), 'press', pointerPress);
+      await fireEvent(screen.getByTestId('share'), 'hoverIn', {});
+      const hoverCalls = schedule.mock.calls.flatMap(([, delay], index) => (delay === 50 ? [index] : []));
+      expect(hoverCalls).toHaveLength(1);
+      const hoverTimer = schedule.mock.results[hoverCalls[0]].value;
+      expect(screen.queryByTestId('share-surface')).toBeNull();
+
+      if (teardown === 'unmount') {
+        await component.unmount();
+      } else if (teardown === 'native') {
+        await dismiss('outside-pointer');
+      } else {
+        await fireEvent(screen.getByTestId('trigger'), 'press', pointerPress);
+      }
+      expect(cancel).toHaveBeenCalledWith(hoverTimer);
+      await act(async () => {
+        jest.advanceTimersByTime(50);
+      });
+      expect(screen.queryByTestId('share-surface')).toBeNull();
+
+      if (teardown !== 'unmount') {
+        await fireEvent(screen.getByTestId('trigger'), 'press', pointerPress);
+        expect(screen.getByTestId('surface')).toBeTruthy();
+        expect(screen.getByTestId('share').props.accessibilityState.expanded).toBe(false);
+        expect(screen.queryByTestId('share-surface')).toBeNull();
+      }
+    } finally {
+      schedule.mockRestore();
+      cancel.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it('MNU-007 permits two submenu levels but warns and refuses a third', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const onOpenChange = jest.fn();
+    try {
+      await render(
+        <Menu defaultOpen trigger={{ content: 'Edit', testID: 'trigger' }} onOpenChange={onOpenChange}>
+          <MenuItem
+            {...row('First', {
+              submenu: {
+                testID: 'first-surface',
+                children: (
+                  <MenuItem
+                    {...row('Second', {
+                      submenu: {
+                        testID: 'second-surface',
+                        children: (
+                          <MenuItem
+                            {...row('Third', {
+                              submenu: { testID: 'third-surface', children: <MenuItem {...row('Leaf')} /> },
+                            })}
+                          />
+                        ),
+                      },
+                    })}
+                  />
+                ),
+              },
+            })}
+          />
+        </Menu>,
+      );
+      await fireEvent(screen.getByTestId('first'), 'press', keyboardPress);
+      expect(screen.getByTestId('first-surface')).toBeTruthy();
+      await fireEvent(screen.getByTestId('second'), 'press', keyboardPress);
+      expect(screen.getByTestId('second-surface')).toBeTruthy();
+
+      await fireEvent(screen.getByTestId('third'), 'press', keyboardPress);
+
+      expect(warn.mock.calls).toEqual([['Menu: submenus nest at most 2 levels; this submenu does not open.']]);
+      expect(screen.queryByTestId('third-surface')).toBeNull();
+      expect(screen.queryByTestId('leaf')).toBeNull();
+      expect(screen.getByTestId('third').props.accessibilityState.expanded).toBe(false);
+      expect(screen.getByTestId('first').props.accessibilityState.expanded).toBe(true);
+      expect(screen.getByTestId('second').props.accessibilityState.expanded).toBe(true);
+      expect(onOpenChange).not.toHaveBeenCalled();
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
   it('renders a collapsed Button trigger with a menu hint and no surface while closed', async () => {
     const ref = React.createRef<View>();
     await render(<Scene ref={ref} testID="root" />);
