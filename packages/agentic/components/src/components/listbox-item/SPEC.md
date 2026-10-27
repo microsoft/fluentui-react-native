@@ -171,6 +171,12 @@ Regression coverage includes rendered public state, contradictory caller aliases
 owner rerenders, and input-free native `checked`/enabled reads; JavaScript
 coverage alone does not establish native projection.
 
+Win32 action coverage separately uses the public accessibility-click route and
+requires exactly one `Toggle` event, no `onPress`, and unchanged owner-selected
+checked state. Disabled coverage verifies that the public route rejects
+activation with no callbacks or selection change; it does not claim that a
+disabled native Toggle was dispatched.
+
 | Requirement | Evidence                                                                                             |
 | ----------- | ---------------------------------------------------------------------------------------------------- |
 | LBI-001     | `listbox-item.types.ts`, `useListboxItem.ts`, `listbox-item.types.test.ts`                           |

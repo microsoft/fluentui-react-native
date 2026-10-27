@@ -2,12 +2,13 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import type { ViewProps } from 'react-native';
+import type { AccessibilityActionEvent, ViewProps } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { ListboxItem } from './listbox-item';
 
 type StoryGroupProps = {
@@ -23,6 +24,39 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
 );
 
 const Avatar = directComponent<ViewProps>((props: ViewProps) => <View {...props} accessibilityHint="avatar" />);
+
+const NativeToggleActionFixture = () => {
+  const [actions, setActions] = useState<string[]>([]);
+  const [presses, setPresses] = useState(0);
+  const [disabledActions, setDisabledActions] = useState(0);
+  const [disabledPresses, setDisabledPresses] = useState(0);
+  return (
+    <View style={styles.story}>
+      <ListboxItem
+        content="Controlled selected option"
+        selected
+        onAccessibilityAction={(event: AccessibilityActionEvent) => {
+          const actionName = event.nativeEvent.actionName;
+          setActions((previous) => [...previous, actionName]);
+        }}
+        onPress={() => setPresses((previous) => previous + 1)}
+        testID="listbox-toggle-option"
+      />
+      <StoryStatus testID="listbox-toggle-actions">{`${actions.length}:${actions.join(',') || 'none'}`}</StoryStatus>
+      <StoryStatus testID="listbox-toggle-presses">{String(presses)}</StoryStatus>
+      <ListboxItem
+        content="Disabled controlled selected option"
+        selected
+        disabled
+        onAccessibilityAction={() => setDisabledActions((previous) => previous + 1)}
+        onPress={() => setDisabledPresses((previous) => previous + 1)}
+        testID="listbox-toggle-disabled"
+      />
+      <StoryStatus testID="listbox-toggle-disabled-actions">{String(disabledActions)}</StoryStatus>
+      <StoryStatus testID="listbox-toggle-disabled-presses">{String(disabledPresses)}</StoryStatus>
+    </View>
+  );
+};
 
 const meta: Meta<typeof ListboxItem> = {
   title: 'Components/ListboxItem',
@@ -76,6 +110,75 @@ export const NativeSelection: Story = {
       expect(await option.getTagName()).toBe('button');
       await expect(option).toBeDisabled();
       expect(await option.getProperty('checked')).toBe(true);
+    },
+  },
+};
+
+export const NativeToggleActions: Story = {
+  render: () => <NativeToggleActionFixture />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Native accessibility activation records the original action and press callbacks separately. The owner deliberately keeps selection fixed; disabled activation must not call either handler.',
+      },
+    },
+  },
+  wdio: {
+    'LBI-005 Win32 native Toggle forwards once without a press or controlled selection change': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies the Win32 Toggle action transport; other hosts require their own action invocation.');
+        return;
+      }
+      if (!browser.capabilities['furn:features']?.accessibilityClick) {
+        skip('Native accessibility click is unavailable.');
+        return;
+      }
+      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+      const option = await browser.$('~listbox-toggle-option');
+      const actions = await browser.$('~listbox-toggle-actions');
+      const presses = await browser.$('~listbox-toggle-presses');
+      expect(await option.getProperty('checked')).toBe(true);
+      await expect(actions).toHaveAttribute('name', '0:none');
+      await expect(presses).toHaveAttribute('name', '0');
+      await option.click();
+      await expect(actions).toHaveAttribute('name', '1:Toggle');
+      expect(await option.getProperty('checked')).toBe(true);
+      await expect(presses).toHaveAttribute('name', '0');
+      await expect(actions).toHaveAttribute('name', '1:Toggle');
+    },
+    'LBI-003 LBI-005 Win32 disabled native activation has no callbacks or selection change': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies the Win32 disabled accessibility-click route.');
+        return;
+      }
+      if (!browser.capabilities['furn:features']?.accessibilityClick) {
+        skip('Native accessibility click is unavailable.');
+        return;
+      }
+      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+      const option = await browser.$('~listbox-toggle-disabled');
+      const actions = await browser.$('~listbox-toggle-disabled-actions');
+      const presses = await browser.$('~listbox-toggle-disabled-presses');
+      await expect(option).toBeDisabled();
+      expect(await option.getProperty('checked')).toBe(true);
+      await expect(actions).toHaveAttribute('name', '0');
+      await expect(presses).toHaveAttribute('name', '0');
+      // The public protocol command avoids WDIO's DOM-based element-error recovery.
+      await expect(browser.elementClick(await option.elementId)).rejects.toThrow('cannot be clicked');
+      expect(await option.getProperty('checked')).toBe(true);
+      await expect(actions).toHaveAttribute('name', '0');
+      await expect(presses).toHaveAttribute('name', '0');
     },
   },
 };
