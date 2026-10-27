@@ -186,7 +186,7 @@ export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, ur
         const id = await nativeElementId(this);
         return id ? this.isElementDisplayed(id) : false;
       },
-      true,
+      { attachToElement: true },
     );
     browser.overwriteCommand(
       'isFocused',
@@ -197,7 +197,7 @@ export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, ur
         if (typeof focused !== 'boolean') throw new Error('Desktop Driver did not report native focus as a boolean.');
         return focused;
       },
-      true,
+      { attachToElement: true },
     );
     browser.addCommand('desktopExpect', (expectation: DesktopStoryExpectation) => boundSessions.get(browser)!.expect(expectation));
     installedBrowsers.add(browser);

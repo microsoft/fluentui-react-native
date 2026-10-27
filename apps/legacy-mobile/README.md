@@ -33,7 +33,7 @@ yarn ios
 
 The PR validation bundles Android and bundles/builds the iOS simulator app.
 It does not run mobile UI tests. Historical mobile E2E specifications remain
-in `apps/E2E/src` but have no active Appium configuration or command.
+in `apps/E2E/src` but have no active runner configuration or command.
 
 The iOS app icon is the single-size set in `assets/AppIcon.appiconset`. The
 Podfile copies it into React Native Test App's generated asset catalog because

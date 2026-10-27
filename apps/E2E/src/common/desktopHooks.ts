@@ -9,10 +9,17 @@ import { installLegacyDesktopAttributes } from './nativeDesktop';
 let reporting: DesktopReportSession | undefined;
 
 export default {
+  // The page objects were written for WebdriverIO 9, where `$` takes the first match, and a native tree can expose
+  // several elements for one testID. Keep that behavior instead of throwing a StrictSelectorError.
+  beforeSession(config: { strictSelectors?: boolean }) {
+    config.strictSelectors = false;
+  },
   async before() {
     reporting = await createDesktopReportSession({ artifactsRoot: path.resolve('artifacts', 'desktop'), kind: 'lifecycle' });
     installLegacyDesktopAttributes();
-    // Native cohorts use the app's initial bounds and native scrolling, not an emulated maximize command.
+    // Initial app bounds can extend beyond the hosted 1024x768 desktop (or be smaller than the tester's minimum layout).
+    if (!browser.capabilities['furn:features']?.setWindowRect) throw new Error('The native tester window cannot be sized.');
+    await browser.setWindowRect(8, 32, 1000, 680);
     const { width, height } = await browser.getWindowRect();
     if (width <= 0 || height <= 0) throw new Error('The native tester window has no usable bounds.');
   },

@@ -150,40 +150,33 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle macOS
-        run: |
-          set -eox pipefail
-          yarn bundle:macos
+      # Hosted macOS clicks use accessibility actions, as in the Storybook job; keyboard and wheel stay enabled.
+      - name: Set up macOS Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: macos
+          disabled-input-features: physicalClick
+
+      - name: Prepare E2E macOS tests
+        run: yarn e2eprep:macos
         working-directory: apps/fluent-tester
-
-      - name: Pod install
-        run: |
-          set -eox pipefail
-          pod install --verbose
-        working-directory: apps/fluent-tester/macos
-
-      - name: Build macOS app
-        run: ./.github/scripts/xcodebuild.mts apps/fluent-tester/macos/FluentTester.xcworkspace macosx ReactTestApp build
         env:
           CCACHE_DISABLE: 1
 
-      # Disable macOS E2E test to unblock 0.81 checkin
-      - name: Prepare E2E macOS tests
-        run: yarn e2eprep:macos
-        working-directory: apps/E2E
-
       - name: Run E2E macOS tests
         run: yarn e2etest:macos
-        working-directory: apps/E2E
+        working-directory: apps/fluent-tester
 
       - name: Upload E2E macOS artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: E2E_macos_Dump
+          name: E2E_macos_fabric_${{ github.run_id }}_${{ github.run_attempt }}
           path: |
-            apps/E2E/reports
-            apps/E2E/errorShots
+            apps/E2E/artifacts/desktop
+            apps/fluent-tester/artifacts/desktop
+            ${{ steps.desktop-driver.outputs.doctor-path }}
 
   macos-storybook:
     name: macOS Storybook PR
@@ -348,50 +341,59 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle Windows
-        run: yarn bundle:windows
-        working-directory: apps/fluent-tester
+      # The legacy specs navigate with the keyboard and scroll with the wheel, so unlike the Storybook job
+      # every input feature stays enabled.
+      - name: Set up Windows Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: windows
 
-      - name: Install WinAppDriver 1.1
+      - name: Install Windows App Runtime 1.8
+        shell: pwsh
         run: |
-          Invoke-WebRequest https://github.com/microsoft/WinAppDriver/releases/download/v1.1/WindowsApplicationDriver.msi -OutFile $env:RUNNER_TEMP\WinAppDriver.msi
-          Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
-          Start-Process msiexec -ArgumentList "/quiet","/i","$env:RUNNER_TEMP\WinAppDriver.msi" -Verb runAs -Wait
-        shell: powershell
+          $installer = Join-Path $env:RUNNER_TEMP 'WindowsAppRuntimeInstall-x64.exe'
+          Invoke-WebRequest 'https://aka.ms/windowsappsdk/1.8/1.8.260804001/windowsappruntimeinstall-x64.exe' -OutFile $installer
+          & $installer --quiet
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows App Runtime installer exited with code $LASTEXITCODE."
+          }
 
-      - name: Generate RNW app
-        run: yarn install-windows-test-app --use-nuget
-        working-directory: apps/fluent-tester
+          $runtime = Get-AppxPackage -Name 'Microsoft.WindowsAppRuntime.1.8'
+          if (-not $runtime) {
+            throw 'Microsoft.WindowsAppRuntime.1.8 was not registered for the runner user.'
+          }
+
+      # Register before launch so first-launch crashes are captured.
+      - name: Enable crash dumps
+        shell: pwsh
+        run: |
+          $dumps = Join-Path $env:RUNNER_TEMP 'crash-dumps'
+          New-Item -ItemType Directory -Force -Path $dumps | Out-Null
+          reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\ReactApp.exe" /v DumpType /t REG_DWORD /d 2 /f
+          reg add "HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\ReactApp.exe" /v DumpFolder /t REG_EXPAND_SZ /d "$dumps" /f
 
       - name: Prepare E2E Windows tests
         run: yarn e2eprep:windows
-        working-directory: apps/E2E
-
-      - name: Start packager
-        run: cmd /c "start /B cmd /c yarn start ^> packager.log 2^>^&1"
         working-directory: apps/fluent-tester
 
-      # First build of RNW may fail with  Cannot open include file: 'CppWinRTIncludes.h' error
-      # So we run the build command twice
-      - name: Build RNW app
-        run: yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0; yarn windows --arch x64 --logging --no-packager --no-launch --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0 || yarn windows --arch x64 --logging --no-packager --no-launch --singleproc --msbuildprops WindowsTargetPlatformVersion=10.0.26100.0
+      - name: Run E2E Windows tests
+        run: yarn e2etest:windows
         working-directory: apps/fluent-tester
-
-      - name: Run E2E RNW tests
-        shell: powershell
-        run: |
-          .\launchE2EWindows.ps1 -enableDumpFiles
-        working-directory: apps/E2E
 
       - name: Upload E2E Windows artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: E2E_RNW_Dump
+          name: E2E_windows_fabric_${{ github.run_id }}_${{ github.run_attempt }}
           path: |
-            apps/E2E/reports
-            apps/E2E/errorShots
-            apps/fluent-tester/packager.log
+            apps/E2E/artifacts/desktop
+            apps/fluent-tester/artifacts/desktop
+            ${{ runner.temp }}/crash-dumps
+            ${{ steps.desktop-driver.outputs.doctor-path }}
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
+          if-no-files-found: warn
 
   windows-storybook:
     name: Windows Storybook PR
@@ -479,33 +481,33 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      - name: Bundle Win32
-        run: yarn bundle
-        working-directory: apps/win32
-
-      - name: Install WinAppDriver 1.1
-        run: |
-          Invoke-WebRequest https://github.com/microsoft/WinAppDriver/releases/download/v1.1/WindowsApplicationDriver.msi -OutFile $env:RUNNER_TEMP\WinAppDriver.msi
-          Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
-          Start-Process msiexec -ArgumentList "/quiet","/i","$env:RUNNER_TEMP\WinAppDriver.msi" -Verb runAs -Wait
-        shell: powershell
+      # Like the Windows job, this leaves every input feature enabled for the keyboard and wheel specs.
+      - name: Set up Win32 Desktop Driver
+        id: desktop-driver
+        uses: ./.github/actions/setup-desktop-driver
+        with:
+          platform: win32
 
       - name: Prepare E2E Win32 tests
         run: yarn e2eprep:win32
-        working-directory: apps/E2E
+        working-directory: apps/win32
 
       - name: Run E2E Win32 tests
         run: yarn e2etest:win32
-        working-directory: apps/E2E
+        working-directory: apps/win32
 
       - name: Upload E2E Win32 artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: E2E_win32_Dump
+          name: E2E_win32_paper_${{ github.run_id }}_${{ github.run_attempt }}
           path: |
-            apps/E2E/reports
-            apps/E2E/errorShots
+            apps/E2E/artifacts/desktop
+            apps/win32/artifacts/desktop
+            ${{ steps.desktop-driver.outputs.doctor-path }}
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/artifacts/**/build.log
+            ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
+          if-no-files-found: warn
 
   win32-storybook:
     name: Win32 Storybook PR

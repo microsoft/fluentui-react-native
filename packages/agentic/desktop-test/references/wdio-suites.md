@@ -31,6 +31,12 @@ report displayed while its center remains obscured. Before wheel input, bring
 the selected target window to the foreground. Fail explicitly if the endpoint
 does not support native wheel input.
 
+WebdriverIO 10 enables `strictSelectors` by default, so `$()` throws a
+`StrictSelectorError` when a selector matches more than one element, and native
+trees often expose a container and its children under one accessibility id.
+Prefer unique ids. A suite that depends on first-match lookup can set
+`config.strictSelectors = false` in its hooks module's `beforeSession`.
+
 Component story callback extraction is owned by
 `@fluentui-react-native/storybook-desktop`; use this suite guide for ordinary
 WDIO suites and app-level E2E adapters.

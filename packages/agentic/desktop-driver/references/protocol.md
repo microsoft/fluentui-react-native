@@ -129,6 +129,11 @@ defaults. A provider that does not expose this state, including the current
 macOS provider, returns `unsupported operation`, not `false`. Tree output
 includes `states.required` only when the provider supplies a value.
 
+The `helpText` property returns authoritative accessibility help text. Windows
+and Win32 read UI Automation's `HelpText` without provider defaults, preserving
+an explicitly empty string. Missing or unsupported help text, including on the
+current macOS provider, returns `unsupported operation` instead of an empty value.
+
 ## Errors
 
 | Condition                                         | WebDriver error             |

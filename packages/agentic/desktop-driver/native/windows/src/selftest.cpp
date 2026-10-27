@@ -281,6 +281,15 @@ void TestSnapshotShape() {
           required ? "required-form true is retained" : "required-form false is retained");
   }
   Check(serialized.find(R"("text")") == std::string::npos, "absent optional text is omitted");
+  Check(serialized.find(R"("helpText":{"supported":false,"reason":)") != std::string::npos,
+        "unknown help text is unsupported, not empty");
+  snapshot.helpText = SupportedString{true, "", {}};
+  Check(SerializeSnapshot(snapshot).Serialize().find(R"("helpText":{"supported":true,"value":""})") != std::string::npos,
+        "an explicitly empty help text is retained");
+  snapshot.helpText.value = "Accessible hint";
+  Check(SerializeSnapshot(snapshot).Serialize().find(R"("helpText":{"supported":true,"value":"Accessible hint"})") !=
+            std::string::npos,
+        "help text is retained");
   Check(serialized.find(R"("rect":{"height":40,"width":120,"x":10,"y":20})") != std::string::npos,
         "rect serializes logical geometry");
   Check(serialized.find(R"("parentId":"element-0")") != std::string::npos, "parent identifier is exposed");

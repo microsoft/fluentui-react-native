@@ -1,10 +1,13 @@
 import { Keys } from './consts.js';
 
+/** A page object getter, or the element it has already resolved to. */
+export type PageElement = ChainablePromiseElement | WebdriverIO.Element;
+
 export function isNativeDesktop(): boolean {
   return browser.capabilities.browserName === 'furn-native-desktop';
 }
 
-export async function sendNativeDesktopKeys(element: ChainablePromiseElement, keys: readonly Keys[]): Promise<void> {
+export async function sendNativeDesktopKeys(element: PageElement, keys: readonly Keys[]): Promise<void> {
   const target = await element;
   await browser.elementSendKeys(await target.elementId, '');
   const actions: { type: 'keyDown' | 'keyUp'; value: string }[] = [];
@@ -33,23 +36,32 @@ export async function sendNativeDesktopKeys(element: ChainablePromiseElement, ke
   if (failure !== undefined) throw failure;
 }
 
-async function isCenterWithinScroller(element: ChainablePromiseElement, scroller: ChainablePromiseElement): Promise<boolean> {
-  if (!(await element.isDisplayed())) return false;
-  const target = await browser.getElementRect(await element.elementId);
-  const viewport = await browser.getElementRect(await scroller.elementId);
-  const x = target.x + target.width / 2;
-  const y = target.y + target.height / 2;
-  return x > viewport.x && y > viewport.y && x < viewport.x + viewport.width && y < viewport.y + viewport.height;
+async function isCenterWithinScroller(element: PageElement, scroller: PageElement): Promise<boolean> {
+  const target = await element;
+  if (!(await target.isDisplayed())) return false;
+  const targetRect = await browser.getElementRect(await target.elementId);
+  const viewport = await browser.getElementRect(await (await scroller).elementId);
+  const window = await browser.getWindowRect();
+  const x = targetRect.x + targetRect.width / 2;
+  const y = targetRect.y + targetRect.height / 2;
+  // Avoid the native clip edge: a center one pixel inside the UIA bounds can still hit the surrounding pane.
+  const inset = 8;
+  return (
+    x > Math.max(0, viewport.x) + inset &&
+    y > Math.max(0, viewport.y) + inset &&
+    x < Math.min(window.width, viewport.x + viewport.width) - inset &&
+    y < Math.min(window.height, viewport.y + viewport.height) - inset
+  );
 }
 
-export async function scrollNativeDesktopElement(element: ChainablePromiseElement, scroller: ChainablePromiseElement): Promise<void> {
+export async function scrollNativeDesktopElement(element: PageElement, scroller: PageElement): Promise<void> {
   // A partly clipped control still reports displayed, but the driver clicks its center point, which may be covered.
   if (await isCenterWithinScroller(element, scroller)) return;
   if (!browser.capabilities['furn:features']?.wheel)
     throw new Error('This desktop does not support native wheel input; navigation cannot be qualified.');
   // Native wheel input goes to the topmost window under the pointer, so the tester window must be in front first.
   await browser.switchToWindow(await browser.getWindowHandle());
-  const origin = { 'element-6066-11e4-a52e-4f735466cecf': await scroller.elementId };
+  const origin = { 'element-6066-11e4-a52e-4f735466cecf': await (await scroller).elementId };
   await browser.waitUntil(
     async () => {
       await browser.performActions([
@@ -65,6 +77,7 @@ export function installLegacyDesktopAttributes(): void {
   const properties: Readonly<Record<string, string>> = {
     AutomationId: 'automationId',
     Name: 'name',
+    HelpText: 'helpText',
     ControlType: 'role',
     IsEnabled: 'enabled',
     HasKeyboardFocus: 'focused',
@@ -91,7 +104,7 @@ export function installLegacyDesktopAttributes(): void {
     async function (original, name) {
       const property = properties[name];
       if (!property) {
-        if (['HelpText', 'IsTogglePatternAvailable'].includes(name)) {
+        if (name === 'IsTogglePatternAvailable') {
           throw new Error(
             `Legacy attribute "${name}" has no qualified native mapping. It must not be reported as false or silently skipped.`,
           );
@@ -118,6 +131,6 @@ export function installLegacyDesktopAttributes(): void {
       if (value === null || typeof value === 'string') return value;
       throw new Error(`Native property "${property}" returned an invalid value.`);
     },
-    true,
+    { attachToElement: true },
   );
 }

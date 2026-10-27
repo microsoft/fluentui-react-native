@@ -57,7 +57,7 @@ export default class DesktopWdioReporter extends WDIOReporter {
 
   override onRunnerStart(runner: RunnerStats): void {
     this.groupId = wdioGroupId(runner.specs);
-    // WDIO 9 reports the remaining spec attempts (including the current worker), not an increasing attempt index.
+    // WDIO reports the remaining spec attempts (including the current worker), not an increasing attempt index.
     this.workerAttempt = this.specFileRetries + 1 - (runner.retry ?? 1);
     this.scopeId = `${this.groupId}-${this.workerAttempt}`;
     this.context = { ...this.context, worker: runner.cid, spec: runner.specs.join(' + '), attempt: this.workerAttempt };

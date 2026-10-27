@@ -26,7 +26,7 @@ helper.
 
 ## Start here
 
-For a repository checkout, use Node 22.12 or later and Yarn 4:
+For a repository checkout, use Node 22.19 or later and Yarn 4:
 
 ```sh
 yarn

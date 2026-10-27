@@ -180,6 +180,17 @@ json::Value SerializeSupported(const SupportedBool& state) {
   return value;
 }
 
+json::Value SerializeSupported(const SupportedString& state) {
+  json::Value value = json::Value::Object();
+  value.Set("supported", json::Value::Bool(state.supported));
+  if (state.supported) {
+    value.Set("value", json::Value::String(state.value));
+  } else {
+    value.Set("reason", json::Value::String(state.reason));
+  }
+  return value;
+}
+
 json::Value SerializeChecked(const SupportedChecked& state) {
   json::Value value = json::Value::Object();
   if (!state.supported) {
@@ -272,6 +283,7 @@ json::Value SerializeSnapshot(const ElementSnapshot& snapshot) {
   value.Set("enabled", SerializeSupported(snapshot.enabled));
   value.Set("expanded", SerializeSupported(snapshot.expanded));
   value.Set("focused", SerializeSupported(snapshot.focused));
+  value.Set("helpText", SerializeSupported(snapshot.helpText));
   value.Set("required", SerializeSupported(snapshot.required));
   if (!snapshot.name.empty()) {
     value.Set("name", json::Value::String(snapshot.name));
@@ -351,6 +363,7 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_RuntimeIdPropertyId,
       UIA_AutomationIdPropertyId,
       UIA_NamePropertyId,
+      UIA_HelpTextPropertyId,
       UIA_ControlTypePropertyId,
       UIA_BoundingRectanglePropertyId,
       UIA_IsEnabledPropertyId,
@@ -497,6 +510,10 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
   }
   if (SUCCEEDED(element->GetCachedPropertyValue(UIA_NamePropertyId, variant.put()))) {
     snapshot.name = VariantString(variant.get());
+  }
+  if (SUCCEEDED(element->GetCachedPropertyValueEx(UIA_HelpTextPropertyId, TRUE, variant.put())) &&
+      !IsNotSupported(variant.get()) && variant.type() == VT_BSTR) {
+    snapshot.helpText = SupportedString{true, VariantString(variant.get()), {}};
   }
 
   CONTROLTYPEID controlType = UIA_CustomControlTypeId;

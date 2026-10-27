@@ -60,6 +60,6 @@ macOS RN Test App users must bundle before `prep`, then build: CocoaPods embeds
 only resources that exist during `pod install`. Renderer changes require a new
 `prep`. See `references/platforms.md`.
 
-The E2E application retains its legacy Appium lanes; native desktop coverage
-is not a replacement for full parity. Consult the consumer's E2E migration
-documentation for its current lane selection.
+The repository's legacy E2E application runs its WebdriverIO suites through this
+harness; each endpoint's app directory provides its own `e2eprep` and `e2etest`
+commands. Consult the consumer's E2E documentation for suite selection.

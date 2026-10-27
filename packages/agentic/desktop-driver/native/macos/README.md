@@ -39,7 +39,7 @@ Requirements:
 - macOS 14 or later;
 - Apple Silicon (`arm64`);
 - Xcode and its Swift command-line tools;
-- Node 22.12 or later for the package CLI.
+- Node 22.19 or later for the package CLI.
 
 Build the package and helper:
 

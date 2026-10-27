@@ -72,7 +72,6 @@
     "@fluentui-react-native/desktop-driver": "workspace:*",
     "@fluentui-react-native/desktop-test": "workspace:*",
     "@rnx-kit/tools-react-native": "catalog:",
-    "@wdio/logger": "catalog:",
     "commander": "^14.0.2",
     "expect-webdriverio": "catalog:",
     "regexpu-core": "^6.3.1"

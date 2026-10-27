@@ -36,6 +36,12 @@ struct SupportedChecked {
   std::string reason;
 };
 
+struct SupportedString {
+  bool supported{false};
+  std::string value;
+  std::string reason;
+};
+
 struct ElementSnapshot {
   std::string id;
   std::string automationId;
@@ -52,6 +58,7 @@ struct ElementSnapshot {
   RECT physicalRect{};
   SupportedBool enabled;
   SupportedBool focused;
+  SupportedString helpText{false, {}, "The provider does not report accessibility help text."};
   SupportedBool required{false, false, "The provider does not report required-form state."};
   SupportedBool visible;
   SupportedBool expanded;

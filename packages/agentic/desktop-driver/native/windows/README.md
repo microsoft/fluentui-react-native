@@ -69,6 +69,9 @@ The helper validates and honors the server-owned `launchTimeoutMs`.
 Snapshots expose required-form state from cached `UIA_IsRequiredForFormPropertyId`
 with provider defaults disabled. A missing, unsupported, or non-Boolean native
 value remains unsupported rather than becoming `false`.
+Accessibility help text uses cached `UIA_HelpTextPropertyId` with defaults
+disabled. An explicit empty string is supported; absent or non-string values
+remain unsupported.
 
 Attach accepts an owner-generated nonce-bound lease, or an exact title
 qualified by the canonical executable or AUMID. Title-only attach, zero
