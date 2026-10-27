@@ -59,7 +59,7 @@ owning list (LBI-006). A standalone list item ignores it.
   bound option. It registers its value and focus target with the list and
   exposes the `listitem` role with `selected` and `disabled` state, its
   one-based position, and the option count, instead of the `button` role and
-  `pressed` state. It declares the select, add-to-selection, and
+  `checked` state. It declares the select, add-to-selection, and
   remove-from-selection actions, lowercase on Windows Fabric and title case
   elsewhere; the list applies an action before the caller's
   `onAccessibilityAction` receives the event once. The list owns the option's
@@ -95,9 +95,20 @@ These hook options do not add new component props. Scenes require `ThemedRoot`.
 
 On Windows and macOS, a list item is an accessible React Native `Pressable`
 with the `button` role. Its accessibility state combines the caller's state
-with `disabled` and `pressed: selected`, and it is focusable unless disabled.
+with `disabled` and `checked: selected`, and it is focusable unless disabled.
+The checked value represents persistent, externally owned toggle selection,
+not the transient pointer-pressed interaction state. The owned role, disabled
+state, and checked value take precedence over their caller-provided React Native
+and ARIA aliases; unrelated caller accessibility values are preserved.
+The standalone root declares the platform toggle accessibility action using
+the shared resolver, preserving caller labels and custom actions. This exposes
+the native Toggle pattern without changing the button's role. Selection still
+belongs to the caller: accessibility actions reach `onAccessibilityAction`
+unchanged and do not synthesize `onPress` or mutate `selected`.
 A bound option uses the `listitem` role and `selected` state instead, which
 Windows exposes through UI Automation's SelectionItem pattern (LBI-006).
+Its owned role, disabled state, and selected value also take precedence over
+their caller-provided aliases.
 A section header is exposed through a nonfocusable React Native `View` with
 the `header` role. The internal leading and trailing visuals are inaccessible.
 
@@ -111,9 +122,10 @@ navigation, selection, dismissal, and focus return.
 
 - `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
-- `listbox-item-native-pressed-state` (**accepted**): The selected option is
-  surfaced to native accessibility through `accessibilityState.pressed`
-  instead of a web accessibility attribute. A bound option uses `selected`
+- `listbox-item-native-toggle-state` (**accepted**): Standalone selection is
+  surfaced through `accessibilityState.checked`, preserving toggle-button
+  semantics using the supported React Native state instead of a web
+  accessibility attribute. A bound option continues to use `selected`
   (LBI-006).
 - `listbox-item-default-icon` (**accepted**): FURN creates the normal and
   selected icon slots by default; the pinned Flex reference requires an
@@ -127,11 +139,43 @@ navigation, selection, dismissal, and focus return.
 
 ## Conformance
 
+### October 27, 2026 representation review
+
+LBI-005 retains the requirement to expose both selected and unselected
+standalone buttons to native accessibility. The previous
+`listbox-item-native-pressed-state` adaptation named an unsupported state:
+[React Native 0.81 accessibility](https://reactnative.dev/docs/0.81/accessibility#accessibilitystate)
+defines `checked`, not `pressed`, and the pinned
+[`Pressable` implementation](https://github.com/facebook/react-native/blob/cddf8a7536de12db889e35e946281cfaf327197a/packages/react-native/Libraries/Components/Pressable/Pressable.js)
+reconstructs the native state without `pressed`. It also gives ARIA state
+aliases precedence over `accessibilityState`.
+
+The corrected representation follows the existing [Button state hook](../button/useButton.ts):
+`checked` mirrors the owner-supplied selection, including false and disabled
+selection, without changing selection on activation. This is a platform
+adaptation correction, not removal of the persistent pressed/toggled behavior.
+Native Win32 validation additionally showed that checked state alone on a
+generic button does not expose a Toggle pattern. Although the pinned public
+type lists `togglebutton`, the installed REX host projected that role as a
+Group rather than a Button. The shipped
+[FURN ToggleButton](../../../../../components/Button/src/ToggleButton/useToggleButton.ts)
+instead preserves the button role and declares `Toggle` alongside checked
+state. This component follows that native compatibility precedent using
+`resolveAccessibilityAction` for platform naming, without adopting its
+internally driven state or synthesizing a press event. The immutable
+compatibility source is recorded alongside the RN platform source.
+Flex source identities, slot anatomy, focus/ref ownership, disabled activation,
+and bound Dropdown option semantics are unchanged. The public RN source
+identity and per-requirement authority are recorded in `spec/source.json`.
+Regression coverage includes rendered public state, contradictory caller aliases,
+owner rerenders, and input-free native `checked`/enabled reads; JavaScript
+coverage alone does not establish native projection.
+
 | Requirement | Evidence                                                                                             |
 | ----------- | ---------------------------------------------------------------------------------------------------- |
 | LBI-001     | `listbox-item.types.ts`, `useListboxItem.ts`, `listbox-item.types.test.ts`                           |
 | LBI-002     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                                |
 | LBI-003     | `useListboxItem.ts`, `listbox-item.styles.ts`, `listbox-item.test.tsx`                               |
 | LBI-004     | `useListboxItem.ts`, `listbox-item.styles.ts`, `useListboxItemStyles.ts`, `listbox-item.test.tsx`    |
-| LBI-005     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`                                |
+| LBI-005     | `useListboxItem.ts`, `renderListboxItem.tsx`, `listbox-item.test.tsx`, `listbox-item.stories.tsx`    |
 | LBI-006     | `listbox-item.types.ts`, `listboxItemOptionContext.ts`, `useListboxItem.ts`, `listbox-item.test.tsx` |

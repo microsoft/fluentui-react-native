@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import type { ViewProps } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import { directComponent } from '@fluentui-react-native/framework-base';
 
 import { ListboxItem } from './listbox-item';
@@ -21,7 +22,7 @@ const StoryGroup = ({ children, label }: StoryGroupProps) => (
   </View>
 );
 
-const Avatar = directComponent<ViewProps>((props) => <View {...props} accessibilityHint="avatar" />);
+const Avatar = directComponent<ViewProps>((props: ViewProps) => <View {...props} accessibilityHint="avatar" />);
 
 const meta: Meta<typeof ListboxItem> = {
   title: 'Components/ListboxItem',
@@ -45,9 +46,39 @@ const meta: Meta<typeof ListboxItem> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ListboxItem>;
+type Story = WdioStory<StoryObj<typeof ListboxItem>>;
 
 export const Default: Story = {};
+
+export const NativeSelection: Story = {
+  render: () => (
+    <View style={styles.story}>
+      <ListboxItem content="Unselected option" selected={false} testID="listbox-fix-unselected" />
+      <ListboxItem content="Selected option" selected testID="listbox-fix-selected" />
+      <ListboxItem content="Disabled selected option" selected disabled testID="listbox-fix-disabled" />
+    </View>
+  ),
+  wdio: {
+    'LBI-005 standalone unselected exposes native checked false': async ({ browser, expect }) => {
+      const option = await browser.$('~listbox-fix-unselected');
+      expect(await option.getTagName()).toBe('button');
+      await expect(option).toBeEnabled();
+      expect(await option.getProperty('checked')).toBe(false);
+    },
+    'LBI-005 standalone selected exposes native checked true': async ({ browser, expect }) => {
+      const option = await browser.$('~listbox-fix-selected');
+      expect(await option.getTagName()).toBe('button');
+      await expect(option).toBeEnabled();
+      expect(await option.getProperty('checked')).toBe(true);
+    },
+    'LBI-005 standalone disabled retains native checked true': async ({ browser, expect }) => {
+      const option = await browser.$('~listbox-fix-disabled');
+      expect(await option.getTagName()).toBe('button');
+      await expect(option).toBeDisabled();
+      expect(await option.getProperty('checked')).toBe(true);
+    },
+  },
+};
 
 export const Overview: Story = {
   render: () => (

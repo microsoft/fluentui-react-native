@@ -3,7 +3,7 @@
   "component": "listbox-item",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-10-19",
+  "reviewedAt": "2026-10-27",
   "sources": [
     {
       "id": "flex-component",
@@ -67,6 +67,44 @@
         }
       ],
       "releaseDifferences": []
+    },
+    {
+      "id": "furn-toggle-button",
+      "kind": "git-files",
+      "authority": "compatibility-reference",
+      "repository": "microsoft/fluentui-react-native",
+      "commit": "e57c4dce9733ef459e544c72a9469a6594dcf5b1",
+      "files": [
+        {
+          "role": "toggle",
+          "path": "packages/components/Button/src/ToggleButton/useToggleButton.ts",
+          "sha256": "2340f2be1df9d9ddd0539a58f452b2cd565bd74fa05bb960eff303f6c51268ac"
+        },
+        {
+          "role": "button",
+          "path": "packages/components/Button/src/useButton.ts",
+          "sha256": "2776a0259f3305e5fa5cab6a9624c936acdf70df091aab8a56a1d4184ad0784c"
+        }
+      ]
+    },
+    {
+      "id": "react-native",
+      "kind": "git-files",
+      "authority": "platform-contract",
+      "repository": "facebook/react-native",
+      "commit": "cddf8a7536de12db889e35e946281cfaf327197a",
+      "files": [
+        {
+          "role": "implementation",
+          "path": "packages/react-native/Libraries/Components/Pressable/Pressable.js",
+          "sha256": "6b5cc38e2f8b19c4d4bbfb0227e4941eb01f68254d4a4825b783991f9bf6c442"
+        },
+        {
+          "role": "types",
+          "path": "packages/react-native/Libraries/Components/View/ViewAccessibility.d.ts",
+          "sha256": "c5dc49c81f9cb20dff16b7933b50e19ac3565430cf685bbe51bcbcdb760fc03f"
+        }
+      ]
     }
   ],
   "divergences": [
@@ -75,7 +113,7 @@
       "status": "accepted"
     },
     {
-      "id": "listbox-item-native-pressed-state",
+      "id": "listbox-item-native-toggle-state",
       "status": "accepted"
     },
     {
@@ -94,26 +132,32 @@
   "requirements": [
     {
       "id": "LBI-001",
+      "sources": ["flex-component"],
       "evidence": ["listbox-item.types.ts", "useListboxItem.ts", "listbox-item.types.test.ts"]
     },
     {
       "id": "LBI-002",
+      "sources": ["flex-component"],
       "evidence": ["useListboxItem.ts", "renderListboxItem.tsx", "listbox-item.test.tsx"]
     },
     {
       "id": "LBI-003",
+      "sources": ["flex-component"],
       "evidence": ["useListboxItem.ts", "listbox-item.styles.ts", "listbox-item.test.tsx"]
     },
     {
       "id": "LBI-004",
+      "sources": ["flex-component"],
       "evidence": ["useListboxItem.ts", "listbox-item.styles.ts", "useListboxItemStyles.ts", "listbox-item.test.tsx"]
     },
     {
       "id": "LBI-005",
-      "evidence": ["useListboxItem.ts", "renderListboxItem.tsx", "listbox-item.test.tsx"]
+      "sources": ["flex-component", "furn-toggle-button", "react-native"],
+      "evidence": ["useListboxItem.ts", "renderListboxItem.tsx", "listbox-item.test.tsx", "listbox-item.stories.tsx"]
     },
     {
       "id": "LBI-006",
+      "sources": ["flex-component", "react-native"],
       "evidence": ["listbox-item.types.ts", "listboxItemOptionContext.ts", "useListboxItem.ts", "listbox-item.test.tsx"]
     }
   ]

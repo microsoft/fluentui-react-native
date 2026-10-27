@@ -122,9 +122,13 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
       ? {
           ...accessibilityState,
           disabled,
-          pressed: selected,
+          checked: selected,
         }
       : accessibilityState;
+  const standaloneActions =
+    isListItem && !bound
+      ? resolveAccessibilityAction('toggle', Platform.OS, rest.accessibilityActions).accessibilityActions
+      : rest.accessibilityActions;
 
   const optionProps: Partial<FocusablePressableProps> | undefined = bound && {
     accessibilityActions: optionActions.accessibilityActions,
@@ -163,7 +167,13 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
 
   const [rootProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
+    accessibilityActions: standaloneActions,
     ...optionProps,
+    // Pressable gives ARIA aliases precedence over accessibilityState.
+    'aria-checked': isListItem && !bound ? selected : rest['aria-checked'],
+    'aria-disabled': isListItem ? disabled : rest['aria-disabled'],
+    'aria-selected': bound ? selected : rest['aria-selected'],
+    role: bound ? 'listitem' : isListItem ? 'button' : rest.role,
     accessibilityRole: bound ? 'listitem' : isListItem ? 'button' : 'header',
     accessibilityState: rootAccessibilityState,
     accessible: rest.accessible ?? true,

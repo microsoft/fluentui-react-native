@@ -13,6 +13,7 @@
     "src/components/checkbox/checkbox.stories.tsx",
     "src/components/dropdown/dropdown.stories.tsx",
     "src/components/input/input.stories.tsx",
+    "src/components/listbox-item/listbox-item.stories.tsx",
     "src/components/menu-item/menu-item.stories.tsx",
     "src/components/menu/menu.stories.tsx",
     "src/components/menu-button/menu-button.stories.tsx",
