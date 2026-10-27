@@ -525,8 +525,8 @@ export const ExternallyDrivenSelection: Story = {
     'updates and resets caller-owned selection': async ({ browser, expect, skip }) => {
       const features = browser.capabilities['furn:features'];
       if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.physicalClick) {
-        skip('This test requires physical pointer input.');
+      if (!features.physicalClick && !features.accessibilityClick) {
+        skip('This test requires native accessibility activation or physical pointer input.');
         return;
       }
       const favorite = await browser.$('~agentic-storybook-button-favorite');
@@ -543,12 +543,18 @@ export const ExternallyDrivenSelection: Story = {
   render: () => {
     const ToggleGroup = () => {
       const [selected, setSelected] = useState(false);
+      const toggle = resolveAccessibilityAction('toggle', Platform.OS).name;
       return (
         <StoryGroup label={selected ? 'Selected' : 'Not selected'} labelTestID="agentic-storybook-button-selection-state">
           <Button
             content="Favorite"
             icon={regularStarIcon}
             onPress={() => setSelected(!selected)}
+            onAccessibilityAction={(event: AccessibilityActionEvent) => {
+              if (event.nativeEvent.actionName === toggle) {
+                setSelected((value) => !value);
+              }
+            }}
             selected={selected}
             selectedIcon={filledStarIcon}
             testID="agentic-storybook-button-favorite"
@@ -563,7 +569,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A toggle button never changes its own state. The caller owns selected and updates it from onPress, which is why an external action such as Reset can change it just as easily.',
+          'A toggle button never changes its own state. The caller handles onPress and the native Toggle action independently; an external Reset can change the same caller-owned value. Pointer/focus policy is tested separately.',
       },
     },
   },
@@ -585,6 +591,33 @@ export const Disabled: Story = {
       description: {
         story: 'Disabled buttons are unavailable, expose disabled accessibility state, and do not receive focus.',
       },
+    },
+  },
+};
+
+export const NativeNames: Story = {
+  render: () => (
+    <View style={styles.story}>
+      <Button content="Save" testID="button-name-plain" />
+      <Button content={{ children: 'Slot label' }} testID="button-name-slot" />
+      <Button content={0} testID="button-name-number" />
+      <Button content="Save" accessibilityLabel="Create document" testID="button-name-explicit" />
+      <Button content="Save" aria-label="ARIA action" testID="button-name-aria" />
+    </View>
+  ),
+  wdio: {
+    'BTN-004 exposes plain, slot and numeric native names while preserving caller names': async ({ browser, expect }) => {
+      for (const [id, name] of [
+        ['button-name-plain', 'Save'],
+        ['button-name-slot', 'Slot label'],
+        ['button-name-number', '0'],
+        ['button-name-explicit', 'Create document'],
+        ['button-name-aria', 'ARIA action'],
+      ]) {
+        const button = await browser.$(`~${id}`);
+        expect(await button.getTagName()).toBe('button');
+        expect(await button.getProperty('name')).toBe(name);
+      }
     },
   },
 };

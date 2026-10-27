@@ -78,6 +78,47 @@ describe('Button', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it.each([
+    ['Save', 'Save'],
+    [0, '0'],
+    [{ children: 'From slot' }, 'From slot'],
+    [{ children: 0 }, '0'],
+  ] as const)('projects plain content %j onto the native name', async (content, name) => {
+    const component = await renderButton({ content });
+
+    expect(getRoot(component).props.accessibilityLabel).toBe(name);
+  });
+
+  it.each([{ accessibilityLabel: 'Custom name' }, { 'aria-label': 'Custom name' }])(
+    'preserves explicit native or ARIA naming %j',
+    async (naming) => {
+      const component = await renderButton({ content: 'Save', ...naming });
+
+      expect(getRoot(component).props.accessibilityLabel).toBe('Custom name');
+    },
+  );
+
+  it.each([{ accessibilityLabelledBy: 'external-label' }, { 'aria-labelledby': 'external-label' }])(
+    'does not add a competing name for an explicit label reference %j',
+    async (naming) => {
+      const component = await renderButton({ content: 'Save', ...naming });
+
+      expect(getRoot(component).props.accessibilityLabel).toBeUndefined();
+    },
+  );
+
+  it('preserves an explicitly empty native label', async () => {
+    const component = await renderButton({ content: 'Save', accessibilityLabel: '' });
+
+    expect(getRoot(component).props.accessibilityLabel).toBe('');
+  });
+
+  it('does not infer a native name from rich content', async () => {
+    const component = await renderButton({ content: { children: <View /> } });
+
+    expect(getRoot(component).props.accessibilityLabel).toBeUndefined();
+  });
+
   it('disables interaction and exposes disabled accessibility state', async () => {
     const onPress = jest.fn();
     const component = await renderButton({ content: 'Unavailable', disabled: true, onPress });

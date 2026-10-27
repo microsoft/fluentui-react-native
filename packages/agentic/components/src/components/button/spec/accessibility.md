@@ -12,6 +12,11 @@ The root defaults to `accessible={true}` and is focusable unless disabled.
 Callers may provide an accessible name through `accessibilityLabel` or
 `accessibilityLabelledBy`.
 
+Without explicit native or ARIA naming or a labelled-by reference, plain
+string or numeric content (including plain content-slot children) becomes
+the native accessible name. Rich content requires caller-supplied naming.
+Explicit names, including an empty native label, retain their existing precedence.
+
 ## Icon-only buttons
 
 An icon-only button must provide a concise label that describes its action,

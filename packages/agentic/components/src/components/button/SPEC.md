@@ -62,7 +62,8 @@ layout and requires an action-oriented `accessibilityLabel`.
   with the selected-icon fallback and wrapping content behavior.
 - **BTN-003:** Resolve appearance, selection, disabled, pressed, and hovered
   visual state from Flex tokens; user root style wins last.
-- **BTN-004:** Expose button semantics, merge caller accessibility state, warn
+- **BTN-004:** Expose button semantics and a native name from plain content
+  unless the caller supplies naming, merge caller accessibility state, warn
   for an unnamed icon-only button, and hide decorative icons.
 - **BTN-005:** Treat `selected` as externally owned state, expose checked
   accessibility state and the resolved native Toggle action when that prop is
@@ -106,11 +107,11 @@ Button adds no component-owned motion.
 
 ## Conformance
 
-| Requirement | Evidence                                                                    |
-| ----------- | --------------------------------------------------------------------------- |
-| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`                        |
-| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                 |
-| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                 |
-| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`                     |
-| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx` |
-| BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |
+| Requirement | Evidence                                                                      |
+| ----------- | ----------------------------------------------------------------------------- |
+| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`                          |
+| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                   |
+| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                   |
+| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`, `button.stories.tsx` |
+| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`   |
+| BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx`   |

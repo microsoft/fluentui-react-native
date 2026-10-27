@@ -2,4 +2,4 @@
 "@fluentui-react-native/components": patch
 ---
 
-Declare Button's native Toggle action when selected is supplied, preserving caller actions and externally owned checked state.
+Expose Button's plain content as its native name and declare Toggle when selected is supplied, preserving explicit naming, caller actions and externally owned checked state.
