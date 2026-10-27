@@ -44,11 +44,13 @@ async function isCenterWithinScroller(element: PageElement, scroller: PageElemen
   const window = await browser.getWindowRect();
   const x = targetRect.x + targetRect.width / 2;
   const y = targetRect.y + targetRect.height / 2;
+  // Avoid the native clip edge: a center one pixel inside the UIA bounds can still hit the surrounding pane.
+  const inset = 8;
   return (
-    x > Math.max(0, viewport.x) &&
-    y > Math.max(0, viewport.y) &&
-    x < Math.min(window.width, viewport.x + viewport.width) &&
-    y < Math.min(window.height, viewport.y + viewport.height)
+    x > Math.max(0, viewport.x) + inset &&
+    y > Math.max(0, viewport.y) + inset &&
+    x < Math.min(window.width, viewport.x + viewport.width) - inset &&
+    y < Math.min(window.height, viewport.y + viewport.height) - inset
   );
 }
 

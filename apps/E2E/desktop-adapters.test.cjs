@@ -85,24 +85,31 @@ test('native key chords release held input even when dispatch fails', async () =
   }
 });
 
-test('native scrolling clips an oversized scroller to the window client viewport', async () => {
-  let scrolled = false;
-  globalThis.browser = {
-    capabilities: { 'furn:features': { wheel: true } },
-    getWindowRect: async () => ({ x: 200, y: 100, width: 1000, height: 700 }),
-    getElementRect: async (id) =>
-      id === 'scroller' ? { x: 10, y: 80, width: 150, height: 670 } : { x: 20, y: scrolled ? 450 : 720, width: 120, height: 24 },
-    getWindowHandle: async () => 'window',
-    switchToWindow: async (handle) => assert.equal(handle, 'window'),
-    async performActions() {
-      scrolled = true;
-    },
-    async waitUntil(predicate) {
-      assert.equal(await predicate(), true);
-    },
-  };
-  await scrollNativeDesktopElement({ elementId: 'button', isDisplayed: async () => true }, { elementId: 'scroller' });
-  assert.equal(scrolled, true);
+test('native scrolling clips oversized scrollers and keeps click centers away from clip edges', async () => {
+  for (const [scrollerHeight, targetY] of [
+    [670, 720],
+    [585, 652],
+  ]) {
+    let scrolled = false;
+    globalThis.browser = {
+      capabilities: { 'furn:features': { wheel: true } },
+      getWindowRect: async () => ({ x: 200, y: 100, width: 1000, height: 700 }),
+      getElementRect: async (id) =>
+        id === 'scroller'
+          ? { x: 10, y: 80, width: 150, height: scrollerHeight }
+          : { x: 20, y: scrolled ? 450 : targetY, width: 120, height: 24 },
+      getWindowHandle: async () => 'window',
+      switchToWindow: async (handle) => assert.equal(handle, 'window'),
+      async performActions() {
+        scrolled = true;
+      },
+      async waitUntil(predicate) {
+        assert.equal(await predicate(), true);
+      },
+    };
+    await scrollNativeDesktopElement({ elementId: 'button', isDisplayed: async () => true }, { elementId: 'scroller' });
+    assert.equal(scrolled, true);
+  }
 });
 
 test('negative disabled-control clicks use physical input and release it on failure', async () => {
@@ -130,5 +137,53 @@ test('negative disabled-control clicks use physical input and release it on fail
     if (fail) await assert.rejects(result, /physical input failed/);
     else await result;
     assert.equal(released, true);
+  }
+});
+
+test('hosted macOS navigation uses keyboard only when physical clicks are explicitly disabled', async () => {
+  for (const physicalClick of [false, true, undefined]) {
+    const page = new BasePage();
+    page.platform = 'macos';
+    const inputs = [];
+    const button = {
+      elementId: 'page',
+      isDisplayed: async () => true,
+      isEnabled: async () => true,
+      click: async () => inputs.push('click'),
+    };
+    Object.defineProperties(page, {
+      _pageButton: { value: button },
+      _testPageButtonScrollViewer: { value: { elementId: 'scroller' } },
+    });
+    page.waitForPageToLoad = async () => true;
+    globalThis.browser = {
+      capabilities: { browserName: 'furn-native-desktop', 'furn:features': { physicalClick, keyboard: true } },
+      getWindowRect: async () => ({ x: 8, y: 32, width: 1000, height: 680 }),
+      getElementRect: async () => ({ x: 10, y: 80, width: 140, height: 30 }),
+      async elementSendKeys(id, text) {
+        assert.equal(id, 'page');
+        assert.equal(text, '');
+        inputs.push('focus');
+      },
+      async performActions([source]) {
+        assert.deepEqual(source.actions, [
+          { type: 'keyDown', value: Keys.SPACE },
+          { type: 'keyUp', value: Keys.SPACE },
+        ]);
+        inputs.push('space');
+      },
+      async releaseActions() {
+        inputs.push('release');
+      },
+    };
+    assert.equal(await page.navigateToPageAndLoadTests(), true);
+    assert.deepEqual(inputs, physicalClick === false ? ['focus', 'space', 'release'] : ['click']);
+    if (physicalClick === false) {
+      browser.capabilities['furn:features'].keyboard = false;
+      await assert.rejects(page.navigateToPageAndLoadTests(), /does not support keyboard navigation/);
+      button.isEnabled = async () => false;
+      assert.equal(await page.navigateToPageAndLoadTests(), true);
+      assert.deepEqual(inputs, ['focus', 'space', 'release']);
+    }
   }
 });

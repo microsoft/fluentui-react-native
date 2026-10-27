@@ -92,7 +92,13 @@ export abstract class BasePage {
       await this.sendKeys(pageButton, [Keys.ENTER]);
     } else if (!isNativeDesktop() || (await this._pageButton.isEnabled())) {
       // The tester disables the selected page's button; specs that share a page (e.g. IconLegacy and IconV1) find it already open.
-      await this._pageButton.click();
+      if (isNativeDesktop() && this.platform === 'macos' && browser.capabilities['furn:features']?.physicalClick === false) {
+        // Hosted macOS disables physical clicks, and legacy navigation buttons do not expose AXPress.
+        if (!browser.capabilities['furn:features']?.keyboard) throw new Error('This desktop does not support keyboard navigation.');
+        await this.sendKeys(this._pageButton, [Keys.SPACE]);
+      } else {
+        await this._pageButton.click();
+      }
     }
 
     // Wait for page to load

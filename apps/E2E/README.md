@@ -53,6 +53,12 @@ A test run never builds the native helper implicitly. See the `desktop-test`
 [platform setup](../../packages/agentic/desktop-test/references/platforms.md) for
 stage semantics.
 
+The suites size the native client window to 1000x680 at (8, 32), keeping it
+within the hosted 1024x768 desktop and above the tester's minimum layout size.
+On macOS runners that explicitly disable physical clicks, page navigation
+uses native focus and Space instead: legacy navigation buttons do not expose
+AXPress. Component interaction assertions keep their existing input semantics.
+
 ### Prerequisites
 
 - Node.js 22.19 or later (WebdriverIO 10).
