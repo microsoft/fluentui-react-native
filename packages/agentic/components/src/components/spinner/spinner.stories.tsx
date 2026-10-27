@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryGroup as SharedStoryGroup, StoryItem as SharedStoryItem, StoryStatus } from '../../test';
 import { Spinner } from './spinner';
 import type { SpinnerSize } from './spinner.types';
 
@@ -21,17 +21,15 @@ type StoryItemProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.groupLabel}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.groupLabel} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const StoryItem = ({ children, label }: StoryItemProps) => (
-  <View style={styles.item}>
+  <SharedStoryItem label={label} labelStyle={styles.itemLabel} style={styles.item}>
     {children}
-    <Text style={styles.itemLabel}>{label}</Text>
-  </View>
+  </SharedStoryItem>
 );
 
 const sizes: readonly { label: string; value: SpinnerSize }[] = [

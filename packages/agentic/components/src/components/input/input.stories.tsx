@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
@@ -15,7 +15,7 @@ import type { InputProps } from './input.types';
 import { useInput_unstable } from './useInput';
 import { useInputStyles_unstable } from './useInputStyles';
 import { renderInput_unstable } from './renderInput';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryGroup as SharedStoryGroup, StoryStatus } from '../../test';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -23,10 +23,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.label} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const sampleIcon = { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' } } as const;

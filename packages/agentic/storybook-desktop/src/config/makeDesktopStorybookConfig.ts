@@ -212,7 +212,7 @@ export class DesktopStorybookConfig {
       return cachedPackage;
     }
 
-    const root = packageName === '.' ? this.projectRoot : this.resolveDependencyRoot(packageName);
+    const root = packageName === '.' || packageName === this.packageName ? this.projectRoot : this.resolveDependencyRoot(packageName);
     const manifest = readJsonFile<PackageManifest>(path.join(root, 'package.json'));
     const resolvedName = requireSetting(manifest.name, `Package manifest at ${root} does not define "name".`);
     if (packageName !== '.' && resolvedName !== packageName) {

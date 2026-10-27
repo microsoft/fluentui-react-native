@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryStatus } from '../../test';
 import { Divider } from '../divider/divider';
 import { Input } from '../input/input';
 import { MenuItem } from '../menu-item/menu-item';

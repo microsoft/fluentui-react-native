@@ -9,7 +9,7 @@ import { Tab } from '../tab/tab';
 import { TabList } from './tablist';
 import type { TabKeyEvent, TabListProps } from './tablist.types';
 import { Input } from '../input/input';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryStatus } from '../../test';
 
 const meta: Meta<typeof TabList> = {
   title: 'Components/TabList',

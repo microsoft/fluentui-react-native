@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 import { useRootSettings, useThemeState } from '@fluentui-react-native/design';
 import type { RootSettings, ThemeState } from '@fluentui-react-native/design';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -12,8 +12,24 @@ import { createDesktopStorybookApp } from './createDesktopStorybookApp';
 import { DesktopDriverBridge } from './DesktopDriverBridge';
 import { StorybookUIComponent } from './StorybookUI';
 
+jest.mock('react-native/Libraries/ReactNative/RendererProxy', () => ({
+  ...jest.requireActual('react-native/Libraries/ReactNative/RendererProxy'),
+  dispatchCommand: jest.fn(),
+  findNodeHandle: jest.fn(() => 42),
+}));
 jest.mock('./DesktopDriverBridge', () => ({ DesktopDriverBridge: jest.fn(() => null) }));
 jest.mock('./StorybookUI', () => ({ StorybookUIComponent: jest.fn(() => null) }));
+
+const keyboardPress = { nativeEvent: { key: 'Enter' } };
+
+async function selectThemeOption(axis: 'source' | 'color-scheme' | 'contrast', value: string) {
+  const triggerID = `test-theme-${axis}-trigger`;
+  const listboxID = `test-theme-${axis}-listbox`;
+  await fireEvent(screen.getByTestId(triggerID), 'press', keyboardPress);
+  const listbox = screen.getByTestId(listboxID);
+  await fireEvent(listbox, 'ready', { nativeEvent: { generation: listbox.props.commandGeneration } });
+  await fireEvent(screen.getByTestId(`test-theme-${axis}-${value}`), 'press', keyboardPress);
+}
 
 function createTestApp(storyBackgroundColor?: string) {
   const roots: RootSettings[] = [];
@@ -65,14 +81,14 @@ afterEach(() => {
 });
 
 describe('Storybook app theme root', () => {
-  it('places the toolbar, UI, story, and runtime bridge in the same default Flex scene', async () => {
+  it('places the theme controls, UI, story, and runtime bridge in the inherited Flex scene', async () => {
     const { App, roots, bridgeRoots, themes } = createTestApp();
     const scene = await render(<App />);
 
     expect(scene.getByTestId('test-app-root')).toBeOnTheScreen();
     expect(scene.getByTestId('test-theme-toolbar')).toBeOnTheScreen();
     expect(scene.getByTestId('selected-story')).toBeOnTheScreen();
-    expect(scene.getByRole('button', { name: 'Default Flex' })).toBeOnTheScreen();
+    expect(scene.getByTestId('test-theme-source-trigger').props.accessibilityValue.text).toBe('Inherited theme');
     expect(themes[0].tokens).toEqual(defaultFlexTokens);
     expect(bridgeRoots.every((root) => root === roots[0])).toBe(true);
     expect(roots[0].inputModality).toBe('pointer');
@@ -95,11 +111,11 @@ describe('Storybook app theme root', () => {
     expect(roots).toHaveLength(renderCount);
   });
 
-  it.each(['none', 'light', 'dark'])('keeps the %s canvas distinct from the Secondary Button fill', async (choice) => {
+  it.each(['inherit', 'flex', 'fluent'])('keeps the %s canvas distinct from the Secondary Button fill', async (source) => {
     const { App, themes } = createTestApp();
     const scene = await render(<App />);
 
-    await fireEvent.press(scene.getByTestId(`test-theme-${choice}`));
+    await selectThemeOption('source', source);
 
     const state = themes[themes.length - 1];
     const calls = jest.mocked(StorybookUIComponent).mock.calls;
@@ -107,20 +123,23 @@ describe('Storybook app theme root', () => {
     expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFar);
     expect(theme.background.content).toBe(theme.background.preview);
     expect(theme.background.content).not.toBe(state.tokens.color.backgroundNeutralSubtle);
+    expect(scene.getByTestId('test-theme-source-trigger').props.accessibilityValue.text).toBe(
+      source === 'inherit' ? 'Inherited theme' : source === 'flex' ? 'Default Flex' : 'Default Fluent',
+    );
   });
 
   it.each(['#ffeedd', 'transparent'])('preserves the explicit %s story background across theme changes', async (storyBackgroundColor) => {
     const { App } = createTestApp(storyBackgroundColor);
-    const scene = await render(<App />);
+    await render(<App />);
 
-    for (const choice of ['none', 'dark', 'light']) {
-      await fireEvent.press(scene.getByTestId(`test-theme-${choice}`));
+    for (const source of ['flex', 'fluent', 'inherit']) {
+      await selectThemeOption('source', source);
       const calls = jest.mocked(StorybookUIComponent).mock.calls;
       expect(calls[calls.length - 1][0].storyBackgroundColor).toBe(storyBackgroundColor);
     }
   });
 
-  it('switches chrome and story colors together without recreating Storybook or resetting the scene', async () => {
+  it('switches Fluent appearance and chrome without recreating Storybook or resetting the scene', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation();
     const { App, roots, themes, mounted, unmounted, getStorybookUI } = createTestApp();
     const scene = await render(<App />);
@@ -129,18 +148,25 @@ describe('Storybook app theme root', () => {
     const backgrounds: Record<string, unknown> = {};
     await fireEvent(scene.getByTestId('test-app-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
 
-    for (const choice of ['dark', 'highContrast', 'light', 'none']) {
-      await fireEvent.press(scene.getByTestId(`test-theme-${choice}`));
+    await selectThemeOption('source', 'fluent');
+    for (const [scheme, contrast] of [
+      ['dark', 'system'],
+      ['dark', 'highContrast'],
+      ['light', 'highContrast'],
+      ['light', 'standard'],
+    ]) {
+      await selectThemeOption('color-scheme', scheme);
+      await selectThemeOption('contrast', contrast);
       const state = themes[themes.length - 1];
       const calls = jest.mocked(StorybookUIComponent).mock.calls;
       const theme = calls[calls.length - 1][0].theme;
-      backgrounds[choice] = theme.background.app;
+      backgrounds[scheme] = theme.background.app;
 
-      expect(scene.getByTestId(`test-theme-${choice}`).props.accessibilityState.selected).toBe(true);
+      expect(scene.getByTestId(`test-theme-color-scheme-trigger`).props.accessibilityValue.text).toBe(scheme === 'dark' ? 'Dark' : 'Light');
       expect(StyleSheet.flatten(scene.getByTestId('test-theme-toolbar').props.style).backgroundColor).toBe(
         state.tokens.color.backgroundNeutralSubtle,
       );
-      expect(StyleSheet.flatten(scene.getByText('Theme').props.style).color).toBe(state.tokens.color.foregroundNeutralPrimary);
+      expect(StyleSheet.flatten(scene.getByText('Theme').props.style).color).toEqual(state.tokens.color.foregroundNeutralPrimary);
       const foreground = theme.base === 'dark' ? state.tokens.color.fixedWhite : state.tokens.color.fixedBlack;
       const background = theme.base === 'dark' ? state.tokens.color.fixedBlack : state.tokens.color.fixedWhite;
       const literal = (value: unknown, fallback: unknown) => (typeof value === 'string' ? value : fallback);
@@ -155,7 +181,7 @@ describe('Storybook app theme root', () => {
     }
 
     expect(backgrounds.dark).not.toBe(backgrounds.light);
-    expect(backgrounds.none).toBe(defaultBackground);
+    expect(themes[0].tokens.color.surfaceNeutralFar).toBe(defaultBackground);
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('Storybook chrome cannot resolve native system colors'));
     expect(getStorybookUI).toHaveBeenCalledTimes(1);
     expect(mounted).toHaveBeenCalledTimes(1);

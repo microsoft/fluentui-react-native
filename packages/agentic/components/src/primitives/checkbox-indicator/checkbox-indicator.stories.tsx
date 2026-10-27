@@ -1,6 +1,8 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { StoryItem as SharedStoryItem } from '../../test';
+import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
@@ -13,10 +15,9 @@ type StoryItemProps = {
 };
 
 const StoryItem = ({ children, label }: StoryItemProps) => (
-  <View style={styles.item}>
+  <SharedStoryItem label={label} labelStyle={styles.label} style={styles.item}>
     {children}
-    <Text style={styles.label}>{label}</Text>
-  </View>
+  </SharedStoryItem>
 );
 
 const statuses: readonly CheckboxIndicatorStatus[] = ['unchecked', 'checked', 'indeterminate'];

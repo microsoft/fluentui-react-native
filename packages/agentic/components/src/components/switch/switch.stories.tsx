@@ -9,7 +9,7 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 import { Switch } from './switch';
 import type { SwitchLayout } from './switch.types';
 import { Input } from '../input/input';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryGroup as SharedStoryGroup, StoryItem as SharedStoryItem, StoryStatus } from '../../test';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -22,17 +22,15 @@ type StoryItemProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.groupLabel}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.groupLabel} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const StoryItem = ({ children, label }: StoryItemProps) => (
-  <View style={styles.item}>
+  <SharedStoryItem label={label} labelStyle={styles.itemLabel} style={styles.item}>
     {children}
-    <Text style={styles.itemLabel}>{label}</Text>
-  </View>
+  </SharedStoryItem>
 );
 
 const layouts: readonly { label: string; value: SwitchLayout }[] = [

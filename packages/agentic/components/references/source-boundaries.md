@@ -14,6 +14,7 @@ or [primitive](primitives.md) reference when a change crosses component boundari
 
 - Higher-order components live in `src/components`; read [higher-order components](higher-order-components.md).
 - Primitive components live in `src/primitives`; read [primitives](primitives.md).
+- Shared runtime-safe Storybook/test UI lives in `src/test`; read [test components](test-components.md).
 - Shared package-private helpers live in `src/common`.
 - Package-wide dependency and extraction reviews use the `agentic-component-optimization` skill.
 
@@ -28,6 +29,7 @@ or [primitive](primitives.md) reference when a change crosses component boundari
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.
+- Keep `src/test` implementations free of Storybook runtime/app, Node, Jest and RNTL dependencies. Stories and callback-local WDIO helpers remain excluded from production emit.
 - Primitives are public from `@fluentui-react-native/components/primitives`, must remain unstyled, and require a colocated
   `CONTRACT.md`. Extract one only for a repeated behavioral or structural contract that is useful to consumers; keep
   package-private helpers in `src/common`.

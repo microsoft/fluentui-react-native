@@ -25,15 +25,24 @@ export default defineDesktopConfig({
   suites: { stories: { kind: 'csf-wdio' } },
   integration: storybook({
     storyPackages: [
+      ['.', { platforms: ['win32'], storyPatterns: ['src/runtime-chrome.stories.tsx'] }],
       [
         '@fluentui-react-native/components',
         {
           platformSettings: {
             windows: {
-              storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion)/**/*.stories.?(ts|tsx)'],
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion)/**/*.stories.?(ts|tsx)',
+                'src/test/**/*.stories.?(ts|tsx)',
+              ],
             },
             win32: {
-              storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)'],
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)',
+                'src/test/**/*.stories.?(ts|tsx)',
+              ],
             },
           },
         },

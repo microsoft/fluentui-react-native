@@ -43,9 +43,11 @@
     "test": "fluentui-scripts jest"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/components": "workspace:*",
     "@fluentui-react-native/design": "workspace:*",
+    "@fluentui-react-native/framework-base": "workspace:*",
     "@fluentui-react-native/native-core": "workspace:*",
+    "@nozbe/microfuzz": "1.0.0",
     "@rnx-kit/metro-config": "catalog:",
     "@rnx-kit/metro-resolver-symlinks": "catalog:",
     "@storybook/react-native": "^10.4.7",
@@ -68,6 +70,7 @@
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
     "react-native-windows": "^0.81.0",
     "test-renderer": "catalog:"
   },
@@ -77,6 +80,7 @@
     "react": "19.1.4",
     "react-native": "^0.81.6",
     "react-native-macos": "^0.81.0",
+    "react-native-svg": "^15.12.1",
     "react-native-windows": "^0.81.0"
   },
   "peerDependenciesMeta": {
@@ -106,10 +110,12 @@
     "alignDeps": {
       "requirements": {
         "development": [
-          "react-native@0.81"
+          "react-native@0.81",
+          "react-native-svg@15"
         ],
         "production": [
-          "react-native@0.81"
+          "react-native@0.81",
+          "react-native-svg@15"
         ]
       },
       "capabilities": [
@@ -117,7 +123,8 @@
         "core",
         "core-macos",
         "core-win32",
-        "core-windows"
+        "core-windows",
+        "svg"
       ]
     },
     "extends": "@fluentui-react-native/scripts/kit-config"

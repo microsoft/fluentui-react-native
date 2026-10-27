@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { useState } from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { ThemedRoot, useRootInputModality } from '@fluentui-react-native/design';
@@ -14,7 +14,7 @@ import { useButtonStyles_unstable } from './useButtonStyles';
 import { renderButton_unstable } from './renderButton';
 import type { ButtonAppearance, ButtonShape, ButtonSize } from './button.types';
 import { Input } from '../input/input';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryGroup as SharedStoryGroup, StoryStatus } from '../../test';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -23,18 +23,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label, labelTestID }: StoryGroupProps) => (
-  <View style={styles.group}>
-    {labelTestID ? (
-      <View accessible accessibilityLabel={label} accessibilityRole="text" testID={labelTestID}>
-        <Text accessible={false} style={styles.label}>
-          {label}
-        </Text>
-      </View>
-    ) : (
-      <Text style={styles.label}>{label}</Text>
-    )}
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.label} labelTestID={labelTestID} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const appearances: readonly { label: string; value: ButtonAppearance }[] = [

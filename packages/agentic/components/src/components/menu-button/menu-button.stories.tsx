@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryStatus } from '../../test';
 import { Button } from '../button/button';
 import { Input } from '../input/input';
 import type { ButtonAppearance, ButtonSize } from '../button/button.types';

@@ -1,12 +1,12 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Avatar } from './avatar';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryGroup as SharedStoryGroup, StoryStatus } from '../../test';
 import type { AvatarProps, AvatarSize } from './avatar.types';
 
 type StoryGroupProps = {
@@ -15,10 +15,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.label} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const imageDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';

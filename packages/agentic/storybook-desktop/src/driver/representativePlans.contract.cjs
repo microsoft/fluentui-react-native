@@ -19,11 +19,41 @@ async function main() {
     ]);
   const config = makeDesktopStorybookConfig({
     projectRoot,
-    storyPackages: ['@fluentui-react-native/components'],
+    storyPackages: [
+      [
+        '@fluentui-react-native/components',
+        {
+          platformSettings: {
+            windows: {
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion)/**/*.stories.?(ts|tsx)',
+                'src/test/**/*.stories.?(ts|tsx)',
+              ],
+            },
+            win32: {
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)',
+                'src/test/**/*.stories.?(ts|tsx)',
+              ],
+            },
+          },
+        },
+      ],
+    ],
   });
   const manifest = await createDesktopStoryManifest(config, 'windows');
   if (manifest.entries.some(({ tests }) => tests)) {
     throw new Error('The component catalog must not contain legacy desktopDriver story plans.');
+  }
+  const win32Manifest = await createDesktopStoryManifest(config, 'win32');
+  if (
+    !win32Manifest.entries.some(({ sourcePath }) =>
+      sourcePath.replaceAll('\\', '/').endsWith('src/test/story-status/story-status.stories.tsx'),
+    )
+  ) {
+    throw new Error('The Win32 component catalog must discover the shared test-component stories.');
   }
   const fs = require('node:fs');
   const componentsRoot = config.resolvePackage('@fluentui-react-native/components').root;

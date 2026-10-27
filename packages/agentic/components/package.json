@@ -41,16 +41,23 @@
       "react-native": "./src/primitives/index.ts",
       "import": "./lib/primitives/index.js",
       "default": "./src/primitives/index.ts"
+    },
+    "./test": {
+      "types": "./lib/test/index.d.ts",
+      "react-native": "./src/test/index.ts",
+      "import": "./lib/test/index.js",
+      "default": "./src/test/index.ts"
     }
   },
   "scripts": {
     "build": "tsc -b",
     "check:spec-contracts": "node ./scripts/spec-contracts/check-spec-contracts.cjs",
+    "check:test-contracts": "node ./scripts/test-contracts/check-test-contracts.cjs",
     "clean": "fluentui-scripts clean",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "report:spec-source-drift": "node ./scripts/spec-contracts/report-spec-source-drift.cjs",
-    "test": "node ./scripts/spec-contracts/check-spec-contracts.cjs && yarn test:stories && fluentui-scripts jest",
+    "test": "node ./scripts/spec-contracts/check-spec-contracts.cjs && node ./scripts/test-contracts/check-test-contracts.cjs && yarn test:stories && fluentui-scripts jest",
     "test:stories": "tsc -p tsconfig.stories.json",
     "update-snapshots": "fluentui-scripts jest -u"
   },

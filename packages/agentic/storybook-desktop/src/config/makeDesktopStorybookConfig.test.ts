@@ -10,12 +10,24 @@ function makeAgenticConfig() {
   return makeDesktopStorybookConfig({
     projectRoot: storybookRoot,
     storyPackages: [
+      ['.', { platforms: ['win32'], storyPatterns: ['src/runtime-chrome.stories.tsx'] }],
       [
         '@fluentui-react-native/components',
         {
           platformSettings: {
+            windows: {
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion)/**/*.stories.?(ts|tsx)',
+                'src/test/**/*.stories.?(ts|tsx)',
+              ],
+            },
             win32: {
-              storyPatterns: ['src/primitives/**/*.stories.?(ts|tsx)', 'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)'],
+              storyPatterns: [
+                'src/primitives/**/*.stories.?(ts|tsx)',
+                'src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)',
+                'src/test/**/*.stories.?(ts|tsx)',
+              ],
             },
           },
         },
@@ -40,6 +52,7 @@ describe('DesktopStorybookConfig', () => {
     const config = makeAgenticConfig();
     const packages = config.getStoryPackages('macos');
 
+    expect(config.resolvePackage(config.packageName).root).toBe(storybookRoot);
     expect(packages.map(({ name }) => name)).toEqual(['@fluentui-react-native/components', '@fluentui-react-native/native-core']);
     expect(packages[0].root).toBe(path.resolve(storybookRoot, '../../packages/agentic/components'));
     expect(packages[0].storyPatterns).toEqual(['src/**/*.stories.?(ts|tsx)']);
@@ -52,9 +65,17 @@ describe('DesktopStorybookConfig', () => {
       '../../../packages/agentic/components/src/**/*.stories.?(ts|tsx)',
       '../../../packages/agentic/native-core/src/**/*.stories.?(ts|tsx)',
     ]);
+    expect(config.getStoryGlobs('windows')).toEqual([
+      '../../../packages/agentic/components/src/primitives/**/*.stories.?(ts|tsx)',
+      '../../../packages/agentic/components/src/components/!(accordion)/**/*.stories.?(ts|tsx)',
+      '../../../packages/agentic/components/src/test/**/*.stories.?(ts|tsx)',
+      '../../../packages/agentic/native-core/src/**/*.stories.?(ts|tsx)',
+    ]);
     expect(config.getStoryGlobs('win32')).toEqual([
+      '../src/runtime-chrome.stories.tsx',
       '../../../packages/agentic/components/src/primitives/**/*.stories.?(ts|tsx)',
       '../../../packages/agentic/components/src/components/!(accordion|list-item)/**/*.stories.?(ts|tsx)',
+      '../../../packages/agentic/components/src/test/**/*.stories.?(ts|tsx)',
       '../../../packages/agentic/native-core/src/**/*.stories.?(ts|tsx)',
     ]);
   });

@@ -176,9 +176,11 @@ extension inside callbacks. They are checked by the story project and excluded
 from production emit.
 
 Native-rendered story helpers use `*.story-helpers.tsx` and are also excluded
-from library emit while checked by the story project. Use `StoryStatus` for
-counter/modality probes: its named accessible View is observable on macOS
-Fabric, where a plain paragraph's `testID` is not exposed as an AX element.
+from library emit while checked by the story project. Prefer the public
+`@fluentui-react-native/components/test` `StoryStatus` for counter/modality
+probes: its named accessible View is observable on macOS Fabric, where a plain
+paragraph's `testID` is not exposed as an AX element. Keep runner and
+scenario-specific helpers local to their story package.
 
 Focus cases use native `focused`, `checked`, and `selected` properties together
 with activation and event-order probes. Cover stale key-up, repeats, disabled

@@ -87,7 +87,11 @@ export class CheckPackageContentsCommand extends Command {
 
       let locations: Set<string>;
       try {
-        const output = execFileSync('yarn', ['pack', '--dry-run', '--json'], {
+        const yarnPackCommand =
+          process.platform === 'win32'
+            ? { command: 'cmd.exe', args: ['/d', '/s', '/c', 'yarn.cmd pack --dry-run --json'] }
+            : { command: 'yarn', args: ['pack', '--dry-run', '--json'] };
+        const output = execFileSync(yarnPackCommand.command, yarnPackCommand.args, {
           cwd: packageRoot,
           encoding: 'utf8',
           stdio: ['ignore', 'pipe', 'pipe'],

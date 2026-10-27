@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { Button, Tab, TabList, Text } from '@fluentui-react-native/components';
 import { useTheme } from '@storybook/react-native-theming';
 import type { Parameters } from 'storybook/internal/csf';
 import { Addon_TypesEnum } from 'storybook/internal/types';
@@ -24,6 +25,7 @@ export function Win32AddonsPanel({ onClose, parameters, storyId }: Win32AddonsPa
   const panelTestID = useDesktopStorybookTestID('win32-addons-panel');
   const addonTestID = useDesktopStorybookTestID('win32-addon');
   const closeTestID = useDesktopStorybookTestID('win32-close-addons');
+  const tabPanelNativeID = `${panelTestID}-tabpanel`;
   const panels = React.useMemo(() => {
     const allPanels: Addon_Collection<Addon_BaseType> = addons.getElements(Addon_TypesEnum.PANEL);
     return Object.entries(allPanels).filter(([, panel]) => !panel.paramKey || !parameters?.[panel.paramKey]?.disable);
@@ -46,51 +48,51 @@ export function Win32AddonsPanel({ onClose, parameters, storyId }: Win32AddonsPa
         testID={`${panelTestID}-header`}
       >
         <ScrollView
-          contentContainerStyle={styles.tabs}
+          contentContainerStyle={styles.tabsScroller}
           horizontal
           keyboardShouldPersistTaps="handled"
           showsHorizontalScrollIndicator={false}
         >
-          {panels.map(([id, panel]) => {
-            const title = typeof panel.title === 'function' ? panel.title({}) : panel.title;
-            const selected = id === activePanel?.[0];
-
-            return (
-              <Pressable
-                accessibilityLabel={String(title)}
-                accessibilityRole="tab"
-                accessibilityState={{ selected }}
-                key={id}
-                onPress={() => setSelectedPanelId(id)}
-                style={[
-                  styles.tab,
-                  selected && {
-                    borderBottomColor: theme.barSelectedColor,
-                    borderBottomWidth: 2,
-                  },
-                ]}
-                testID={`${addonTestID}-${id.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`}
-              >
-                <Text style={{ color: selected ? theme.barSelectedColor : theme.color.mediumdark }}>{String(title)}</Text>
-              </Pressable>
-            );
-          })}
+          <TabList
+            onSelectionChange={setSelectedPanelId}
+            selectedValue={activePanel?.[0]}
+            style={styles.tabs}
+            testID={`${panelTestID}-tabs`}
+          >
+            {panels.map(([id, panel]) => {
+              const title = typeof panel.title === 'function' ? panel.title({}) : panel.title;
+              return (
+                <Tab
+                  content={String(title)}
+                  controls={tabPanelNativeID}
+                  key={id}
+                  testID={`${addonTestID}-${id.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`}
+                  value={id}
+                />
+              );
+            })}
+          </TabList>
         </ScrollView>
-        <Pressable
+        <Button
           accessibilityLabel="Close addons panel"
-          accessibilityRole="button"
+          appearance="subtle"
+          content="Close"
           onPress={onClose}
           style={styles.closeButton}
           testID={closeTestID}
-        >
-          <Text style={{ color: theme.color.mediumdark }}>Close</Text>
-        </Pressable>
+        />
       </View>
-      <ScrollView contentContainerStyle={styles.panelContent} key={storyId} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        accessibilityLabel="Addon panel content"
+        contentContainerStyle={styles.panelContent}
+        key={storyId}
+        keyboardShouldPersistTaps="handled"
+        nativeID={tabPanelNativeID}
+      >
         {!storyId ? (
-          <Text style={{ color: theme.color.mediumdark }}>No story selected.</Text>
+          <Text>No story selected.</Text>
         ) : !activePanel ? (
-          <Text style={{ color: theme.color.mediumdark }}>No addons loaded.</Text>
+          <Text>No addons loaded.</Text>
         ) : (
           <PanelRenderer panel={activePanel[1]} />
         )}
@@ -113,20 +115,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: 'row',
   },
+  tabsScroller: {
+    flexGrow: 1,
+  },
   tabs: {
     alignItems: 'stretch',
-  },
-  tab: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 40,
-    paddingHorizontal: 14,
+    flexDirection: 'row',
+    flexGrow: 1,
   },
   closeButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 40,
-    paddingHorizontal: 12,
+    marginHorizontal: 8,
   },
   panelContent: {
     flexGrow: 1,

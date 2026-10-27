@@ -1,6 +1,8 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { StoryGroup as SharedStoryGroup } from '../../test';
+import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
@@ -13,10 +15,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.label} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const badgeLeadingIcon = { fontSource: { codepoint: 0x2022, fontFamily: 'Arial' } } as const;

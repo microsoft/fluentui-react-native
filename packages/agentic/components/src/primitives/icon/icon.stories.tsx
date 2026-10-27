@@ -1,6 +1,8 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { StoryGroup as SharedStoryGroup, StoryItem as SharedStoryItem } from '../../test';
+import { StyleSheet, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -20,17 +22,15 @@ type StoryItemProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.groupLabel}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.groupLabel} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const StoryItem = ({ children, label }: StoryItemProps) => (
-  <View style={styles.item}>
+  <SharedStoryItem label={label} labelStyle={styles.itemLabel} style={styles.item}>
     {children}
-    <Text style={styles.itemLabel}>{label}</Text>
-  </View>
+  </SharedStoryItem>
 );
 
 const imageDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';

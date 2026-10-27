@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { LayoutStableText } from './layout-stable-text';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryStatus } from '../../test';
 
 type StoryItemProps = {
   children: ReactNode;

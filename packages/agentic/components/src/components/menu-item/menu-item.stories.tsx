@@ -1,7 +1,7 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { useState } from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
@@ -10,7 +10,7 @@ import { FocusZone } from '@fluentui-react-native/native-core/legacy';
 import { MenuItem } from './menu-item';
 import { Input } from '../input/input';
 import { Button } from '../button/button';
-import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { StoryGroup as SharedStoryGroup, StoryStatus } from '../../test';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -18,10 +18,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.label}>{label}</Text>
-    <View style={styles.row}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.row} label={label} labelStyle={styles.label} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const meta: Meta<typeof MenuItem> = {

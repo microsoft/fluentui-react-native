@@ -1,6 +1,8 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { useState } from 'react';
 import type { ReactNode } from 'react';
+
+import { StoryGroup as SharedStoryGroup } from '../../test';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -13,10 +15,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.groupLabel}>{label}</Text>
-    <View style={styles.column}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.column} label={label} labelStyle={styles.groupLabel} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const meta: Meta<typeof Radio> = {

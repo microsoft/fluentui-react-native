@@ -9,10 +9,13 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../../theming/default-theme/tsconfig.json"
+      "path": "../components/tsconfig.json"
     },
     {
       "path": "../design/tsconfig.json"
+    },
+    {
+      "path": "../../framework-base/tsconfig.json"
     },
     {
       "path": "../native-core/tsconfig.json"

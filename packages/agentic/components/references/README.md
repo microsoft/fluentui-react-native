@@ -11,6 +11,7 @@ owner_paths:
 | -------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | `components.higher-order-components`                     | [Higher-order components](higher-order-components.md)        | Adding or changing a component under `src/components`, or its focus visuals     |
 | `components.primitives`                                  | [Primitives](primitives.md)                                  | Adding, changing, or consuming a public primitive                               |
+| `components.test-components`                             | [Test components](test-components.md)                        | Adding or changing shared runtime-safe Storybook/test UI                        |
 | `components.source-boundaries`                           | [Source boundaries](source-boundaries.md)                    | Adding shared code, dependencies, or extractions across components              |
 | `components.contracts`                                   | [Contracts](contracts.md)                                    | Creating or reviewing `SPEC.md`, `spec/source.json`, lifecycle, or source drift |
 | `components.agentic.contract-sources.flex-x3`            | [Flex and X3](contract-sources/flex-x3.md)                   | Contract evidence from the pinned Flex catalog                                  |

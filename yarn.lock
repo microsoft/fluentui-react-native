@@ -5118,10 +5118,12 @@ __metadata:
   resolution: "@fluentui-react-native/storybook-desktop-runtime@workspace:packages/agentic/storybook-desktop-runtime"
   dependencies:
     "@babel/core": "catalog:"
-    "@fluentui-react-native/default-theme": "workspace:*"
+    "@fluentui-react-native/components": "workspace:*"
     "@fluentui-react-native/design": "workspace:*"
+    "@fluentui-react-native/framework-base": "workspace:*"
     "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
+    "@nozbe/microfuzz": "npm:1.0.0"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -5139,6 +5141,7 @@ __metadata:
     react: "npm:19.1.4"
     react-native: "npm:^0.81.6"
     react-native-macos: "npm:^0.81.0"
+    react-native-svg: "npm:^15.12.1"
     react-native-windows: "npm:^0.81.0"
     storybook: "npm:^10.4.0"
     test-renderer: "catalog:"
@@ -5148,6 +5151,7 @@ __metadata:
     react: 19.1.4
     react-native: ^0.81.6
     react-native-macos: ^0.81.0
+    react-native-svg: ^15.12.1
     react-native-windows: ^0.81.0
   peerDependenciesMeta:
     "@office-iss/react-native-win32":
@@ -7328,7 +7332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nozbe/microfuzz@npm:^1.0.0":
+"@nozbe/microfuzz@npm:1.0.0, @nozbe/microfuzz@npm:^1.0.0":
   version: 1.0.0
   resolution: "@nozbe/microfuzz@npm:1.0.0"
   checksum: 10c0/16ce1b36b521f3990b83b08d2a6d1f6eb43fe240d0ebfb600e8f469187a1303c6aa576925b6c0bebee8a8df2f8e8e768e12b1c67d4ac50133468b7a02c46efa9

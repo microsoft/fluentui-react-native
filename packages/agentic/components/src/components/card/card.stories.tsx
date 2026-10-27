@@ -1,6 +1,8 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { useState } from 'react';
 import type { ReactNode } from 'react';
+
+import { StoryGroup as SharedStoryGroup } from '../../test';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -15,10 +17,9 @@ type StoryGroupProps = {
 };
 
 const StoryGroup = ({ children, label }: StoryGroupProps) => (
-  <View style={styles.group}>
-    <Text style={styles.groupLabel}>{label}</Text>
-    <View style={styles.cardRow}>{children}</View>
-  </View>
+  <SharedStoryGroup contentStyle={styles.cardRow} label={label} labelStyle={styles.groupLabel} style={styles.group}>
+    {children}
+  </SharedStoryGroup>
 );
 
 const sizes: readonly { label: string; value: CardSize }[] = [

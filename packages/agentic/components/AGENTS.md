@@ -11,6 +11,7 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | Add or change a higher-order component                                  | [Higher-order components](references/higher-order-components.md), then the topic references  |
 | Add or change a public primitive                                        | [Primitives](references/primitives.md)                                                       |
+| Add or change reusable Storybook/test UI                                | [Test components](references/test-components.md)                                             |
 | Create or revise a component contract, its sources, or its review state | [Contracts](references/contracts.md) and the matching `references/contract-sources/` file    |
 | Public props, slots, refs, or exports                                   | [Types and slots](references/types-and-slots.md)                                             |
 | State, interaction, or accessibility                                    | [State and accessibility](references/state-and-accessibility.md)                             |
