@@ -21,7 +21,8 @@ yarn e2eprep:windows && yarn e2etest:windows
 from [`apps/E2E`](../E2E/README.md), which covers prerequisites, suites, and debugging failures. For the harness
 itself, see the `@fluentui-react-native/desktop-test` package guide at `packages/agentic/desktop-test/README.md`.
 
-Windows preparation requires Windows SDK 10.0.22621.0 and Windows App Runtime 1.8.
+Windows preparation requires Windows App Runtime 1.8 and Windows SDK 10.0.22621.0, or the SDK named by the
+`WindowsTargetPlatformVersion` environment variable (the PR workflow sets 10.0.26100.0).
 The target uses the SDK consistently for the app and its native dependencies,
 registers the Debug package, and matches its exact `FluentTester` window title.
 The test run owns Metro and stops it on completion.

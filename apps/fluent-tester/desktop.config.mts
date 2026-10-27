@@ -1,6 +1,8 @@
 import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
 
 const metroPort = 8081;
+// Hosted runners set the installed SDK (the Windows Server 2025 image ships only 10.0.26100.0).
+const windowsSdkVersion = process.env.WindowsTargetPlatformVersion || '10.0.22621.0';
 
 export default defineDesktopConfig({
   schemaVersion: 1,
@@ -21,9 +23,9 @@ export default defineDesktopConfig({
               '--no-deploy',
               '--no-launch',
               '--no-packager',
-              // RNSVG otherwise chooses the newest SDK and its WinMD is rejected by the RN Test App.
+              // One SDK for the whole solution; RNSVG otherwise chooses the newest SDK and its WinMD is rejected by the RN Test App.
               '--msbuildprops',
-              'WindowsTargetPlatformVersion=10.0.22621.0',
+              `WindowsTargetPlatformVersion=${windowsSdkVersion}`,
             ],
           },
           { command: 'pwsh', args: ['-NoProfile', '-File', 'scripts/register-windows-app.ps1'] },

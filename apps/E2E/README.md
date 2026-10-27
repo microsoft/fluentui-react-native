@@ -39,8 +39,10 @@ also runs alone through the app's `desktop-test` script, for example
   `apps/fluent-tester/scripts/register-windows-app.ps1`. `e2etest` starts Metro
   itself, because Debug builds load their JavaScript from it, launches the
   registered package, and stops both when the run ends.
-  The build pins Windows SDK 10.0.22621.0 across the solution so RNSVG's WinMD
-  does not target a newer SDK than the app. The target explicitly uses the
+  The build pins one Windows SDK across the solution so RNSVG's WinMD does not
+  target a newer SDK than the app: `WindowsTargetPlatformVersion` when it is set
+  (the PR workflow sets 10.0.26100.0, the only SDK on hosted Windows Server
+  2025), otherwise 10.0.22621.0. The target explicitly uses the
   Windows title `FluentTester`, rather than the component title `Fluent Tester`.
 - **Win32:** build or verify the helper and bundle `dist/index.win32.bundle`.
   There is no native build: `e2etest` launches the prebuilt REX host from
@@ -63,7 +65,8 @@ stage semantics.
   [React Native Windows development dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   (grab every item and the appropriate versions), PowerShell 7 (`pwsh`),
   [Developer Mode](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development),
-  Windows SDK 10.0.22621.0, and the Windows App Runtime 1.8 that Fabric apps load. See the
+  Windows SDK 10.0.22621.0 (or the SDK named by `WindowsTargetPlatformVersion`),
+  and the Windows App Runtime 1.8 that Fabric apps load. See the
   [Windows tester guide](../fluent-tester/docs/windows.md) for more setup.
 - **Win32:** a Windows host. The REX host is a prebuilt npm package, so no
   native toolchain is required.
