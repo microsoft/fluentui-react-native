@@ -8,6 +8,9 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 
 import { Checkbox } from './checkbox';
 import type { CheckboxStatus, CheckboxVariant } from './checkbox.types';
+import { Button } from '../button/button';
+import { Input } from '../input/input';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -82,6 +85,109 @@ export const Default: Story = {
       await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', true);
       await checkbox.click();
       await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
+    },
+  },
+};
+
+function StatusOwnershipScene() {
+  const [uncontrolledReports, setUncontrolledReports] = useState<CheckboxStatus[]>([]);
+  const [controlledReports, setControlledReports] = useState<CheckboxStatus[]>([]);
+  const [uncontrolledPresses, setUncontrolledPresses] = useState(0);
+  const [controlledPresses, setControlledPresses] = useState(0);
+  return (
+    <View style={styles.story}>
+      <Input accessibilityLabel="Keyboard entry" testID="checkbox-keyboard-entry" />
+      <Checkbox
+        defaultStatus="indeterminate"
+        label="Mixed option"
+        onPress={() => setUncontrolledPresses((count) => count + 1)}
+        onStatusChange={(next: CheckboxStatus) => setUncontrolledReports((reports) => [...reports, next])}
+        testID="checkbox-uncontrolled"
+      />
+      <Checkbox disabled label="Disabled keyboard stop" testID="checkbox-disabled-stop" />
+      <Button content="Next keyboard stop" testID="checkbox-next-stop" />
+      <Checkbox
+        label="Externally selected option"
+        onPress={() => setControlledPresses((count) => count + 1)}
+        onStatusChange={(next: CheckboxStatus) => setControlledReports((reports) => [...reports, next])}
+        status="checked"
+        testID="checkbox-controlled"
+      />
+      <StoryStatus testID="checkbox-uncontrolled-reports">{uncontrolledReports.join(',') || 'none'}</StoryStatus>
+      <StoryStatus testID="checkbox-uncontrolled-presses">{String(uncontrolledPresses)}</StoryStatus>
+      <StoryStatus testID="checkbox-controlled-reports">{controlledReports.join(',') || 'none'}</StoryStatus>
+      <StoryStatus testID="checkbox-controlled-presses">{String(controlledPresses)}</StoryStatus>
+    </View>
+  );
+}
+
+export const StatusOwnership: Story = {
+  render: () => <StatusOwnershipScene />,
+  tags: ['desktop-e2e', 'desktop-focus'],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tri-state activation, callback counts, controlled ownership, and keyboard navigation past a disabled checkbox.',
+      },
+    },
+  },
+  wdio: {
+    'CBX-002 advances mixed status with exactly one status and press callback per click': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.physicalClick) {
+        skip('This test requires physical pointer input.');
+        return;
+      }
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const checkbox = await browser.$('~checkbox-uncontrolled');
+      await expect(await browser.$('~checkbox-uncontrolled-reports')).toHaveText('none');
+      await expect(await browser.$('~checkbox-uncontrolled-presses')).toHaveText('0');
+      await checkbox.click();
+      await expectNativeState(browser, 'checkbox-uncontrolled', 'checked', true);
+      await expect(await browser.$('~checkbox-uncontrolled-reports')).toHaveText('checked');
+      await expect(await browser.$('~checkbox-uncontrolled-presses')).toHaveText('1');
+      await checkbox.click();
+      await expectNativeState(browser, 'checkbox-uncontrolled', 'checked', false);
+      await expect(await browser.$('~checkbox-uncontrolled-reports')).toHaveText('checked,unchecked');
+      await expect(await browser.$('~checkbox-uncontrolled-presses')).toHaveText('2');
+    },
+    'CBX-002 reports repeated controlled presses without changing native checked state': async ({ browser, expect, skip }) => {
+      const features = browser.capabilities['furn:features'];
+      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (!features.physicalClick) {
+        skip('This test requires physical pointer input.');
+        return;
+      }
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const checkbox = await browser.$('~checkbox-controlled');
+      await expectNativeState(browser, 'checkbox-controlled', 'checked', true);
+      await expect(await browser.$('~checkbox-controlled-reports')).toHaveText('none');
+      await checkbox.click();
+      await expect(await browser.$('~checkbox-controlled-reports')).toHaveText('unchecked');
+      await expect(await browser.$('~checkbox-controlled-presses')).toHaveText('1');
+      await expectNativeState(browser, 'checkbox-controlled', 'checked', true);
+      await checkbox.click();
+      await expect(await browser.$('~checkbox-controlled-reports')).toHaveText('unchecked,unchecked');
+      await expect(await browser.$('~checkbox-controlled-presses')).toHaveText('2');
+      await expectNativeState(browser, 'checkbox-controlled', 'checked', true);
+    },
+    'CBX-006 activates with Space exactly once and tabs past the disabled checkbox': async (context) => {
+      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+      if (!requireDesktopFocus(context)) return;
+      const { browser, expect } = context;
+      await focusByTab(browser, 'checkbox-keyboard-entry', 'checkbox-uncontrolled');
+      await browser.keys('\uE00D');
+      await expectNativeState(browser, 'checkbox-uncontrolled', 'checked', true);
+      await expect(await browser.$('~checkbox-uncontrolled-reports')).toHaveText('checked');
+      await expect(await browser.$('~checkbox-uncontrolled-presses')).toHaveText('1');
+      await browser.keys('\uE00D');
+      await expectNativeState(browser, 'checkbox-uncontrolled', 'checked', false);
+      await expect(await browser.$('~checkbox-uncontrolled-reports')).toHaveText('checked,unchecked');
+      await expect(await browser.$('~checkbox-uncontrolled-presses')).toHaveText('2');
+      await browser.keys('\uE004');
+      await expectNativeState(browser, 'checkbox-next-stop', 'focused', true);
+      await expectNativeState(browser, 'checkbox-disabled-stop', 'focused', false);
     },
   },
 };
@@ -166,9 +272,23 @@ export const ExternallyDrivenStatus: Story = {
 export const HiddenLabel: Story = {
   render: () => (
     <StoryGroup label="Label fallback">
-      <Checkbox accessibilityLabel="Enable notifications" label="Hidden label" showLabel={false} />
+      <Checkbox accessibilityLabel="Enable notifications" label="Hidden label" showLabel={false} testID="checkbox-explicit-name" />
+      <Checkbox label="Save drafts" showLabel={false} testID="checkbox-fallback-name" />
     </StoryGroup>
   ),
+  wdio: {
+    'CBX-004 preserves native explicit and fallback names without visible labels': async ({ browser, expect }) => {
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const explicit = await browser.$('~checkbox-explicit-name');
+      const fallback = await browser.$('~checkbox-fallback-name');
+      expect(await explicit.getTagName()).toBe('checkbox');
+      expect(await fallback.getTagName()).toBe('checkbox');
+      await expect(explicit).toHaveText('Enable notifications');
+      await expect(fallback).toHaveText('Save drafts');
+      await expectNativeState(browser, 'checkbox-explicit-name', 'checked', false);
+      await expectNativeState(browser, 'checkbox-fallback-name', 'checked', false);
+    },
+  },
   parameters: {
     docs: {
       description: {
@@ -199,9 +319,27 @@ export const ConstrainedText: Story = {
     <StoryGroup label="Constrained label">
       <Checkbox
         label="Long checkbox label that wraps inside constrained layouts without truncating"
-        secondaryText="Secondary text can wrap too."
+        style={styles.constrained}
+        testID="checkbox-narrow-label"
+      />
+      <Checkbox
+        label="Long checkbox label that wraps inside constrained layouts without truncating"
+        style={styles.unconstrained}
+        testID="checkbox-wide-label"
+      />
+      <Checkbox
+        label="Option"
+        secondaryText="Long supporting text that wraps inside constrained layouts without truncating"
         showSecondaryText
         style={styles.constrained}
+        testID="checkbox-narrow-secondary"
+      />
+      <Checkbox
+        label="Option"
+        secondaryText="Long supporting text that wraps inside constrained layouts without truncating"
+        showSecondaryText
+        style={styles.unconstrained}
+        testID="checkbox-wide-secondary"
       />
     </StoryGroup>
   ),
@@ -210,6 +348,24 @@ export const ConstrainedText: Story = {
       description: {
         story: 'Checkbox text wraps when constrained by surrounding layout.',
       },
+    },
+  },
+  wdio: {
+    'CBX-003 wraps the label into a taller constrained row': async ({ browser, expect }) => {
+      const narrow = await browser.$('~checkbox-narrow-label');
+      const wide = await browser.$('~checkbox-wide-label');
+      const narrowRect = await browser.getElementRect(await narrow.elementId);
+      const wideRect = await browser.getElementRect(await wide.elementId);
+      expect(narrowRect.width).toBeLessThan(wideRect.width);
+      expect(narrowRect.height).toBeGreaterThan(wideRect.height);
+    },
+    'CBX-003 wraps secondary text into a taller constrained row': async ({ browser, expect }) => {
+      const narrow = await browser.$('~checkbox-narrow-secondary');
+      const wide = await browser.$('~checkbox-wide-secondary');
+      const narrowRect = await browser.getElementRect(await narrow.elementId);
+      const wideRect = await browser.getElementRect(await wide.elementId);
+      expect(narrowRect.width).toBeLessThan(wideRect.width);
+      expect(narrowRect.height).toBeGreaterThan(wideRect.height);
     },
   },
 };
@@ -234,5 +390,8 @@ const styles = StyleSheet.create({
   story: {
     alignItems: 'flex-start',
     gap: 16,
+  },
+  unconstrained: {
+    width: 480,
   },
 });
