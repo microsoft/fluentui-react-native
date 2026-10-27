@@ -1,8 +1,9 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "description": "Fluent UI React Native Win32 Tester App",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
