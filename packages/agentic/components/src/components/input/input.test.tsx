@@ -26,6 +26,77 @@ function flattenStyle(style: unknown) {
 }
 
 describe('Input', () => {
+  it('INP-002 retains internally owned edits across defaultValue changes and reports each edit once', async () => {
+    const onChangeText = jest.fn();
+    const component = await render(<Input defaultValue="Seed" onChangeText={onChangeText} />);
+
+    expect(getTextbox(component)).toHaveDisplayValue('Seed');
+    await fireEvent.changeText(getTextbox(component), 'Edited');
+    expect(getTextbox(component)).toHaveDisplayValue('Edited');
+    expect(onChangeText.mock.calls).toEqual([['Edited']]);
+
+    await component.rerender(<Input defaultValue="Replacement seed" onChangeText={onChangeText} />);
+    expect(getTextbox(component)).toHaveDisplayValue('Edited');
+    expect(onChangeText).toHaveBeenCalledTimes(1);
+
+    await fireEvent.changeText(getTextbox(component), '');
+    expect(getTextbox(component)).toHaveDisplayValue('');
+    expect(onChangeText.mock.calls).toEqual([['Edited'], ['']]);
+  });
+
+  it('INP-002 leaves controlled text unchanged until the owner writes back, including an empty string', async () => {
+    const onChangeText = jest.fn();
+    const component = await render(<Input value="" defaultValue="Ignored" onChangeText={onChangeText} />);
+
+    expect(getTextbox(component)).toHaveDisplayValue('');
+    await fireEvent.changeText(getTextbox(component), 'Proposed');
+    expect(onChangeText.mock.calls).toEqual([['Proposed']]);
+    expect(getTextbox(component)).toHaveDisplayValue('');
+
+    await component.rerender(<Input value="Accepted" defaultValue="Ignored" onChangeText={onChangeText} />);
+    expect(getTextbox(component)).toHaveDisplayValue('Accepted');
+    expect(onChangeText).toHaveBeenCalledTimes(1);
+
+    await component.rerender(<Input value="" onChangeText={onChangeText} />);
+    expect(getTextbox(component)).toHaveDisplayValue('');
+    expect(onChangeText).toHaveBeenCalledTimes(1);
+  });
+
+  it('INP-001 INP-005 merges root and editor accessibility state without overriding owned semantics', async () => {
+    const component = await render(
+      <Input
+        accessibilityLabel="Root name"
+        accessibilityHint="Root hint"
+        accessibilityState={{ busy: true, disabled: true, selected: true }}
+        testID="root-identifier"
+        error
+        readOnly
+        textInput={{
+          accessibilityLabel: 'Editor name',
+          accessibilityHint: 'Editor hint',
+          accessibilityState: { busy: false, expanded: true },
+          testID: 'editor-identifier',
+        }}
+      />,
+    );
+    const textbox = component.getByRole('textbox', { name: 'Editor name' });
+
+    expect(textbox.props.accessibilityHint).toBe('Editor hint');
+    expect(textbox.props.accessibilityState).toEqual({
+      busy: true,
+      expanded: true,
+      selected: true,
+      disabled: false,
+      invalid: true,
+      readOnly: true,
+    });
+    expect(textbox.props.testID).toBe('editor-identifier');
+    expect(component.queryByTestId('root-identifier')).toBeNull();
+    expect(component.getByTestId('input-root').props.accessible).toBe(false);
+    expect(textbox.props.editable).toBe(false);
+    expect(textbox.props.focusable).toBe(true);
+  });
+
   it('forwards its ref prop through phased rendering to the native root', async () => {
     const ref = React.createRef<React.ElementRef<typeof View>>();
 
