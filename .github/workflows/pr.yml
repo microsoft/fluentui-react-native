@@ -128,13 +128,7 @@ jobs:
 
       - name: Bundle Android
         run: yarn bundle:android
-        working-directory: apps/fluent-tester
-
-      # Android E2E tests are currently disabled
-      # - name: Build Android APK
-      #   ...
-      # - name: Run E2E Android tests
-      #   ...
+        working-directory: apps/legacy-mobile
 
   macos:
     name: macOS PR
@@ -319,26 +313,18 @@ jobs:
         run: |
           set -eox pipefail
           yarn bundle:ios
-        working-directory: apps/fluent-tester
+        working-directory: apps/legacy-mobile
 
       - name: Pod install
         run: |
           set -eox pipefail
           pod install --verbose
-        working-directory: apps/fluent-tester/ios
+        working-directory: apps/legacy-mobile/ios
 
       - name: Build iOS app
-        run: ./.github/scripts/xcodebuild.mts apps/fluent-tester/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
+        run: ./.github/scripts/xcodebuild.mts apps/legacy-mobile/ios/FluentTester.xcworkspace iphonesimulator ReactTestApp build
         env:
           CCACHE_DISABLE: 1
-
-      # iOS E2E tests are currently disabled
-      # - name: Prepare E2E iOS tests
-      #   run: yarn e2eprep:ios
-      #   working-directory: apps/E2E
-      # - name: Run E2E iOS tests
-      #   run: yarn e2etest:ios
-      #   working-directory: apps/E2E
 
   windows:
     name: Windows PR

@@ -11,6 +11,9 @@
       "path": "apps/fluent-tester/tsconfig.json"
     },
     {
+      "path": "apps/legacy-mobile/tsconfig.json"
+    },
+    {
       "path": "apps/storybook/tsconfig.json"
     },
     {

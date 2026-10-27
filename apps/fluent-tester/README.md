@@ -2,8 +2,7 @@
 
 ## `FluentUI Tester` instructions to launch each platform's test app
 
-- [iOS](./docs/ios.md)
-- [Android](./docs/android.md)
+- [iOS and Android](../legacy-mobile/README.md)
 - [macOS](./docs/macos.md)
 - [Windows](./docs/windows.md)
 - [Win32](./../win32/README.md)

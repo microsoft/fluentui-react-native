@@ -5,7 +5,27 @@ const path = require('node:path');
 const { test } = require('node:test');
 const { pathToFileURL } = require('node:url');
 
-const { scripts } = require('./package.json');
+const { dependencies, devDependencies, scripts } = require('./package.json');
+const legacyMobilePackage = require('../legacy-mobile/package.json');
+
+test('legacy mobile Appium runner configs and commands are retired', () => {
+  for (const platform of ['android', 'ios']) {
+    const driver = platform === 'android' ? 'appium-uiautomator2-driver' : 'appium-xcuitest-driver';
+    assert.equal(scripts[`e2eprep:${platform}`], undefined);
+    assert.equal(scripts[`e2etest:${platform}`], undefined);
+    assert.equal(dependencies[driver], undefined);
+    assert.equal(devDependencies[driver], undefined);
+    assert.equal(require('node:fs').existsSync(path.join(__dirname, `wdio.conf.${platform}.js`)), false);
+  }
+});
+
+test('legacy mobile host has no Appium or WebdriverIO dependencies', () => {
+  const packageNames = [...Object.keys(legacyMobilePackage.dependencies ?? {}), ...Object.keys(legacyMobilePackage.devDependencies ?? {})];
+  assert.equal(
+    packageNames.some((name) => name === 'appium' || name.startsWith('appium-') || name === 'webdriverio' || name.startsWith('@wdio/')),
+    false,
+  );
+});
 
 test('Appium discovers and loads the Yarn-managed Windows driver', async () => {
   const output = execFileSync(process.execPath, [require.resolve('appium/index.js'), 'driver', 'list', '--installed', '--json'], {
