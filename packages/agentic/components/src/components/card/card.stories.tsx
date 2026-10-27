@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Button } from '../button/button';
 import { Card } from './card';
@@ -146,9 +147,48 @@ const meta: Meta<typeof Card> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Card>;
+type Story = WdioStory<StoryObj<typeof Card>>;
 
 export const Default: Story = {};
+
+export const NativeStructure: Story = {
+  render: () => (
+    <Card
+      accessibilityLabel="Unavailable report"
+      disabled
+      selected
+      layout="structured"
+      testID="card-spec-root"
+      header={{ accessible: true, accessibilityLabel: 'Report heading', testID: 'card-spec-header', children: <Text>Report</Text> }}
+      content={{ accessible: true, accessibilityLabel: 'Report summary', testID: 'card-spec-content', children: <Text>Summary</Text> }}
+      content02={{ accessible: true, accessibilityLabel: 'Report details', testID: 'card-spec-details', children: <Text>Details</Text> }}
+      footer={{ children: <Button content="Help" testID="card-spec-help" /> }}
+    />
+  ),
+  wdio: {
+    'CRD-002 renders structured sections in reading order': async ({ browser, expect }) => {
+      const header = await browser.$('~card-spec-header');
+      const content = await browser.$('~card-spec-content');
+      const details = await browser.$('~card-spec-details');
+      const help = await browser.$('~card-spec-help');
+      const headerRect = await browser.getElementRect(await header.elementId);
+      const contentRect = await browser.getElementRect(await content.elementId);
+      const detailsRect = await browser.getElementRect(await details.elementId);
+      const helpRect = await browser.getElementRect(await help.elementId);
+      expect(headerRect.height).toBeGreaterThan(0);
+      expect(contentRect.height).toBeGreaterThan(0);
+      expect(detailsRect.height).toBeGreaterThan(0);
+      expect(contentRect.y).toBeGreaterThanOrEqual(headerRect.y + headerRect.height);
+      expect(detailsRect.y).toBeGreaterThanOrEqual(contentRect.y + contentRect.height);
+      expect(helpRect.y).toBeGreaterThanOrEqual(detailsRect.y + detailsRect.height);
+    },
+    'CRD-005 keeps a nested action enabled inside a disabled selectable surface': async ({ browser, expect }) => {
+      const help = await browser.$('~card-spec-help');
+      expect(await help.getTagName()).toBe('button');
+      await expect(help).toBeEnabled();
+    },
+  },
+};
 
 export const Overview: Story = {
   render: () => (
@@ -220,7 +260,7 @@ export const Interactive: Story = {
         ),
       }}
       layout="structured"
-      onPress={() => undefined}
+      onPress={(): void => undefined}
       selected={false}
     />
   ),
@@ -234,7 +274,7 @@ export const Selected: Story = {
         children: <Text style={styles.body}>Quarterly summary with selected state.</Text>,
       }}
       layout="structured"
-      onPress={() => undefined}
+      onPress={(): void => undefined}
       selected
       header={{
         children: (
@@ -292,7 +332,7 @@ export const Disabled: Story = {
         children: <Text style={styles.body}>This card is unavailable.</Text>,
       }}
       layout="structured"
-      onPress={() => undefined}
+      onPress={(): void => undefined}
       disabled
       header={{
         children: (
@@ -331,7 +371,7 @@ export const Horizontal: Story = {
       footer={{ children: <Button content="Open" /> }}
       header={{ children: <Text style={styles.title}>Q3 report</Text> }}
       layout="structured"
-      onPress={() => undefined}
+      onPress={(): void => undefined}
       size="large"
     />
   ),
