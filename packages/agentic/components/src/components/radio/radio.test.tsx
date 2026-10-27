@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import type { ComponentProps } from 'react';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -46,7 +46,7 @@ describe('Radio', () => {
     const root = getRoot(component);
 
     expect(root.props.accessibilityLabel).toBe('Label');
-    expect(root.props.accessibilityState).toEqual({ checked: false, disabled: false });
+    expect(root.props.accessibilityState).toEqual({ checked: false, selected: false, disabled: false });
     expect(root.props.focusable).toBe(true);
     expect(getText(component, 'Label')).toBeOnTheScreen();
     expect(component.queryByText('Description')).toBeNull();
@@ -96,7 +96,7 @@ describe('Radio', () => {
     const component = await renderRadio({ label: 'Choice', selected: true });
     const root = getRoot(component);
 
-    expect(root.props.accessibilityState).toEqual({ checked: true, disabled: false });
+    expect(root.props.accessibilityState).toEqual({ checked: true, selected: true, disabled: false });
     expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(tokens.strokeBrandLoud);
     expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
       backgroundColor: tokens.foregroundBrandPrimary,
@@ -135,7 +135,7 @@ describe('Radio', () => {
 
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
-    expect(root.props.accessibilityState).toEqual({ busy: true, checked: false, disabled: true });
+    expect(root.props.accessibilityState).toEqual({ busy: true, checked: false, selected: false, disabled: true });
   });
 
   it('applies user styles last and allows constrained labels to shrink', async () => {
@@ -167,5 +167,48 @@ describe('Radio', () => {
       accessible: false,
       importantForAccessibility: 'no-hide-descendants',
     });
+  });
+
+  it.each([
+    ['win32', 'Select'],
+    ['windows', 'select'],
+    ['macos', 'Select'],
+  ] as const)('declares the native selection action on %s', async (platform, actionName) => {
+    const replacement = jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    try {
+      const component = await renderRadio({});
+      expect(getRoot(component).props.accessibilityActions).toEqual([{ name: actionName }]);
+    } finally {
+      replacement.restore();
+    }
+  });
+
+  it('preserves caller action labels and deduplicates selection declarations', async () => {
+    const component = await renderRadio({
+      accessibilityActions: [{ name: 'Select', label: 'Choose option' }, { name: 'Select' }, { name: 'custom' }],
+    });
+    expect(getRoot(component).props.accessibilityActions).toEqual([{ name: 'Select', label: 'Choose option' }, { name: 'custom' }]);
+  });
+
+  it.each([false, true])('owns native checked and selection state when selected is %s', async (selected) => {
+    const component = await renderRadio({
+      selected,
+      accessibilityState: { busy: true, checked: !selected, selected: !selected },
+      'aria-checked': !selected,
+      'aria-selected': !selected,
+    });
+    expect(getRoot(component).props.accessibilityState).toEqual({ busy: true, checked: selected, selected, disabled: false });
+  });
+
+  it.each([false, true])('forwards the original native action without pressing or selecting when disabled is %s', async (disabled) => {
+    const onAccessibilityAction = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderRadio({ disabled, selected: false, onAccessibilityAction, onPress });
+    const event = { nativeEvent: { actionName: 'Select' } };
+    getRoot(component).props.onAccessibilityAction(event);
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(getRoot(component).props.accessibilityState).toMatchObject({ checked: false, selected: false });
   });
 });
