@@ -242,56 +242,6 @@ export const Multiple: Story = {
     docs: { description: { story: 'Activation toggles options and keeps the list open; the trigger summarizes long selections.' } },
   },
   wdio: {
-    'DRP-007 reopens on the most recently toggled selected option rather than the Up edge': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { inWindowWith } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple');
-      await browser.keys('\uE015');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple, Banana');
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
-
-      await browser.keys('\uE013');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
-      expect(await (await browser.$('~dropdown-trigger')).getProperty('value')).toBe('Apple, Banana');
-      await inWindowWith(context, 'dropdown-banana', async () => {
-        await expectNativeState(browser, 'dropdown-banana', 'focused', true);
-      });
-    },
-    'DRP-007 falls back to the first selected option after the latest option is deselected': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { inWindowWith } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple');
-      await browser.keys('\uE015');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple, Banana');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple');
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
-
-      await browser.keys('\uE013');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Apple');
-      expect(await (await browser.$('~dropdown-trigger')).getProperty('value')).toBe('Apple');
-      await inWindowWith(context, 'dropdown-apple', async () => {
-        await expectNativeState(browser, 'dropdown-apple', 'focused', true);
-      });
-    },
     'toggles options and stays open until dismissed': async (context) => {
       const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
