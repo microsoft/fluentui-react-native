@@ -562,7 +562,7 @@ export const ExternallyDrivenSelection: Story = {
           <Button
             appearance="subtle"
             content="Reset"
-            onAccessibilityAction={() => setSelected(false)}
+            onAccessibilityTap={() => setSelected(false)}
             onPress={() => setSelected(false)}
             testID="agentic-storybook-button-reset"
           />
@@ -575,7 +575,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A toggle button never changes its own state. The caller handles onPress and the native Toggle action independently; an external Reset can change the same caller-owned value. Pointer/focus policy is tested separately.',
+          'A toggle button never changes its own state. The caller handles onPress, native Toggle actions, and the Reset accessibility tap independently. Pointer/focus policy is tested separately.',
       },
     },
   },
