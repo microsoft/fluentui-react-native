@@ -217,9 +217,11 @@ describe('resolveFlexColor', () => {
     expect(() => resolveFlexColor('backgroundBrandHeavy', fixed, appearance('light'))).toThrow(
       'type "fixed" and no explicit pressed value',
     );
-    expect(() => resolveFlexColor('backgroundBrandHeavy', fixed, { ...appearance('light'), contrast: 'highContrast' })).toThrow(
-      'type "fixed"',
-    );
+    expect(resolveFlexColor('backgroundBrandHeavy', fixed, { ...appearance('light'), contrast: 'highContrast' })).toEqual({
+      rest: '#0f6cbd',
+      hover: '#115ea3',
+      pressed: '#0f6cbd',
+    });
     expect(resolveFlexColor('backgroundBrandHeavy', complete, appearance('light'))).toEqual({
       rest: '#0f6cbd',
       hover: '#115ea3',
