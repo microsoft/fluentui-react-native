@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
@@ -236,5 +236,86 @@ describe('MenuItem inside a Menu (MNI-007)', () => {
     } finally {
       warn.mockRestore();
     }
+  });
+});
+
+describe('MenuItem native indicator semantics (MNI-003)', () => {
+  it.each([
+    ['win32', false, ['Select', 'Toggle']],
+    ['win32', true, ['Toggle']],
+    ['windows', false, ['select', 'toggle']],
+    ['windows', true, ['toggle']],
+    ['macos', false, ['Select', 'Toggle']],
+    ['macos', true, ['Toggle']],
+  ] as const)('declares native indicator actions on %s with multiselect %s', async (platform, hasMultiselect, actions) => {
+    const replacement = jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    try {
+      const component = await renderMenuItem({ hasCheckmark: !hasMultiselect, hasMultiselect });
+      expect(getRoot(component, hasMultiselect ? 'menuitemcheckbox' : 'menuitemradio').props.accessibilityActions).toEqual(
+        actions.map((name) => ({ name })),
+      );
+    } finally {
+      replacement.restore();
+    }
+  });
+
+  it('preserves caller labels and deduplicates both owned actions', async () => {
+    const component = await renderMenuItem({
+      hasCheckmark: true,
+      accessibilityActions: [
+        { name: 'Toggle', label: 'Toggle choice' },
+        { name: 'Toggle' },
+        { name: 'Select', label: 'Choose command' },
+        { name: 'Select' },
+        { name: 'custom' },
+      ],
+    });
+    expect(getRoot(component, 'menuitemradio').props.accessibilityActions).toEqual([
+      { name: 'Toggle', label: 'Toggle choice' },
+      { name: 'Select', label: 'Choose command' },
+      { name: 'custom' },
+    ]);
+  });
+
+  it.each([
+    [false, false],
+    [false, true],
+    [true, false],
+    [true, true],
+  ] as const)('owns checked aliases with multiselect %s and selected %s', async (hasMultiselect, selected) => {
+    const component = await renderMenuItem({
+      hasCheckmark: !hasMultiselect,
+      hasMultiselect,
+      selected,
+      accessibilityState: { busy: true, checked: !selected, selected: !selected },
+      'aria-checked': !selected,
+      'aria-selected': !selected,
+    });
+    expect(getRoot(component, hasMultiselect ? 'menuitemcheckbox' : 'menuitemradio').props.accessibilityState).toEqual({
+      busy: true,
+      checked: selected,
+      selected: hasMultiselect ? !selected : selected,
+      disabled: false,
+    });
+  });
+
+  it('does not add owned actions to ordinary rows or section headers', async () => {
+    const ordinary = await renderMenuItem({ accessibilityActions: [{ name: 'custom' }] });
+    expect(getRoot(ordinary).props.accessibilityActions).toEqual([{ name: 'custom' }]);
+    const header = await renderMenuItem({ menuStyle: 'section-header', hasCheckmark: true });
+    expect(getRoot(header, 'none').props.accessibilityActions).toBeUndefined();
+  });
+
+  it.each([false, true])('preserves original custom events without pressing or selecting when disabled is %s', async (disabled) => {
+    const onAccessibilityAction = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderMenuItem({ hasMultiselect: true, selected: false, disabled, onAccessibilityAction, onPress });
+    const event = { nativeEvent: { actionName: 'Toggle' } };
+    const root = getRoot(component, 'menuitemcheckbox');
+    root.props.onAccessibilityAction(event);
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+    expect(onAccessibilityAction).toHaveBeenCalledWith(event);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(root.props.accessibilityState.checked).toBe(false);
   });
 });

@@ -98,7 +98,7 @@
     },
     {
       "id": "MNI-003",
-      "evidence": ["useMenuItem.ts", "menu-item.styles.ts", "menu-item.test.tsx"]
+      "evidence": ["useMenuItem.ts", "menu-item.styles.ts", "menu-item.test.tsx", "menu-item.stories.tsx"]
     },
     {
       "id": "MNI-004",

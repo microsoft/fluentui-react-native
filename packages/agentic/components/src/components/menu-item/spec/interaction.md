@@ -6,6 +6,12 @@ or, unless `disabledFocusable` is set, receive focus. Pressing never changes
 `selected`, so an owning menu must
 update that value and clear peers when required.
 
+Indicator accessibility actions preserve the same external selection owner.
+The component forwards the original custom accessibility event once, including
+disabled events, but never synthesizes `onPress` or selects itself. An owner
+handling these actions must reject disabled activation and coordinate its
+menu just as it does for other caller-owned selection updates.
+
 Hover and press state select the root and text colors after style selection.
 
 Section headers do not activate, focus, or show a ring, including when their
