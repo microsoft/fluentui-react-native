@@ -33,6 +33,52 @@ function getTitleStyle(component: RenderResult): TextStyle {
 }
 
 describe('Accordion', () => {
+  it('ACC-001 ignores defaultExpanded while controlled and requests the inverse of each supplied value', async () => {
+    const onExpandedChange = jest.fn();
+    const component = await renderAccordion({ expanded: true, defaultExpanded: false, onExpandedChange });
+
+    await fireEvent.press(getHeader(component));
+    await fireEvent.press(getHeader(component));
+    expect(onExpandedChange.mock.calls).toEqual([[false], [false]]);
+    expect(getHeader(component).props.accessibilityState.expanded).toBe(true);
+
+    await component.rerender(<Accordion expanded={false} defaultExpanded onExpandedChange={onExpandedChange} />);
+    await fireEvent.press(getHeader(component));
+    expect(onExpandedChange.mock.calls).toEqual([[false], [false], [true]]);
+    expect(getHeader(component).props.accessibilityState.expanded).toBe(false);
+  });
+
+  it('ACC-004 retains the body identity and hides descendants only while collapsed', async () => {
+    const component = await renderAccordion({ bodyContent: { children: <Text>Persistent details</Text> } });
+    const bodyId = getBody(component).props.id;
+
+    expect(getHeader(component).props.accessibilityControls).toBe(bodyId);
+    expect(getHeader(component).props['aria-controls']).toBe(bodyId);
+    expect(getBody(component).props.accessibilityElementsHidden).toBe(true);
+    expect(getBody(component).props.importantForAccessibility).toBe('no-hide-descendants');
+    expect(component.getByText('Persistent details', { includeHiddenElements: true })).toBeOnTheScreen();
+
+    await fireEvent.press(getHeader(component));
+    expect(getBody(component).props.id).toBe(bodyId);
+    expect(getBody(component).props.accessibilityElementsHidden).toBe(false);
+    expect(getBody(component).props.importantForAccessibility).toBeUndefined();
+    expect(component.getByText('Persistent details')).toBeOnTheScreen();
+
+    await fireEvent.press(getHeader(component));
+    expect(getBody(component).props.id).toBe(bodyId);
+    expect(getBody(component).props.accessibilityElementsHidden).toBe(true);
+    expect(getBody(component).props.importantForAccessibility).toBe('no-hide-descendants');
+  });
+
+  it.each(['chevronStart', 'chevronEnd'] as const)('ACC-002 omits null optional header slots in %s layout', async (layout) => {
+    const component = await renderAccordion({ layout, title: null, leadingIcon: null, accessibilityLabel: 'Details' });
+    expect(component.queryByTestId('accordion-title')).toBeNull();
+    expect(component.queryByTestId('accordion-leading-icon')).toBeNull();
+    expect(getHeader(component).children).toHaveLength(1);
+    expect(getHeader(component).props.accessibilityLabel).toBe('Details');
+    expect(component.getByTestId('accordion-chevron-icon').props.accessible).toBe(false);
+  });
+
   it('renders a default header, default icon, and hidden body wiring', async () => {
     const component = await renderAccordion({});
     const header = getHeader(component);
