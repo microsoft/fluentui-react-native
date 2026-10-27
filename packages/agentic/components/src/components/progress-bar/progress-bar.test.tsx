@@ -25,6 +25,56 @@ function getIndicatorStyle(component: RenderResult) {
 }
 
 describe('ProgressBar', () => {
+  it.each(['determinate', 'static'] as const)('PGB-001/PGB-004/PGB-006 clamps %s values and recomputes width after track resize', async (type) => {
+    for (const [progress, resolved] of [[-20, 0], [140, 100], [NaN, 0], [25.5, 25.5]]) {
+      const component = await renderProgressBar({ progress, type });
+      expect(getIndicatorStyle(component).width).toBe(0);
+      expect(getRoot(component).props.accessibilityValue).toMatchObject({ min: 0, max: 100, now: resolved });
+      expect(component.getByText(`${resolved}%`)).toBeOnTheScreen();
+
+      for (const width of [100, 240]) {
+        await fireEvent(getTrack(component), 'layout', {
+          nativeEvent: { layout: { height: 4, width, x: 0, y: 0 } },
+        });
+        expect(getIndicatorStyle(component).width).toBeCloseTo((width * resolved) / 100);
+      }
+      await component.unmount();
+    }
+  });
+
+  it.each(['determinate', 'indeterminate', 'static'] as const)('PGB-003 gives status and explicit text precedence over %s type text', async (type) => {
+    for (const [status, text] of [['error', 'Progress failed'], ['success', 'Complete']] as const) {
+      const component = await renderProgressBar({ progress: 42, status, type });
+      expect(component.getByText(text)).toBeOnTheScreen();
+
+      await component.rerender(<ProgressBar progress={42} status={status} type={type} valueText="Caller text" />);
+      expect(component.getByText('Caller text')).toBeOnTheScreen();
+      expect(component.queryByText(text)).toBeNull();
+      if (type !== 'indeterminate') {
+        expect(getRoot(component).props.accessibilityValue.text).toBe('Caller text');
+      }
+      await component.unmount();
+    }
+  });
+
+  it.each([
+    { accessibilityLabelledBy: 'external-label' },
+    { accessibilityLabelledBy: ['external-label', 'description'] },
+  ])('PGB-006 appends a stable visible-label identifier to caller references %j', async ({ accessibilityLabelledBy }) => {
+    const original = Array.isArray(accessibilityLabelledBy) ? [...accessibilityLabelledBy] : accessibilityLabelledBy;
+    const component = await renderProgressBar({ accessibilityLabelledBy, label: 'Upload', progress: 10 });
+    const labelId = component.getByText('Upload').props.nativeID;
+    const expected = [...(Array.isArray(original) ? original : [original]), labelId];
+
+    expect(typeof labelId).toBe('string');
+    expect(labelId.length).toBeGreaterThan(0);
+    expect(getRoot(component).props.accessibilityLabelledBy).toEqual(expected);
+    expect(accessibilityLabelledBy).toEqual(original);
+    await component.rerender(<ProgressBar accessibilityLabelledBy={accessibilityLabelledBy} label="Upload" progress={80} />);
+    expect(component.getByText('Upload').props.nativeID).toBe(labelId);
+    expect(getRoot(component).props.accessibilityLabelledBy).toEqual(expected);
+  });
+
   it('renders the default label, value text, and determinate accessibility state', async () => {
     const component = await renderProgressBar({});
     const root = getRoot(component);
