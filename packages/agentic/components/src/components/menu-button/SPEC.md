@@ -81,8 +81,9 @@ The chevron is private and cannot be replaced or hidden.
   input (MNU-006) return focus to the trigger. Tab closes the whole menu and
   moves focus to the next focusable view after the trigger through native-core
   continuation.
-- **MNB-006:** Expose the button role, the expanded state from actual
-  presence, and the `Opens a menu` hint without toggle or selected semantics.
+- **MNB-006:** Expose the button role, a name from explicit naming props or
+  the plain label text, the expanded state from actual presence, and the
+  `Opens a menu` hint without toggle or selected semantics.
 - **MNB-007:** Present through native-core's modern Callout and FocusZone on
   macOS (Paper and Fabric) and Windows Fabric, and through its Win32 Callout
   and FocusZone adapters on Office Win32. Other hosts throw a descriptive error

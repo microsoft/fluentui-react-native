@@ -103,6 +103,13 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: {
+    'MNB-006 exposes a named, collapsed native button before input': async ({ browser, expect }) => {
+      const trigger = await browser.$('~menu-button-trigger');
+      expect(await trigger.getProperty('role')).toBe('button');
+      expect(await trigger.getProperty('name')).toBe('New');
+      expect(await trigger.getProperty('expanded')).toBe(false);
+      await expect(trigger).toBeEnabled();
+    },
     'opens on Down to the first row and on Up to the last row': async (context) => {
       const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
@@ -172,6 +179,40 @@ export const Variants: Story = {
   render: () => <VariantsScene />,
   parameters: {
     docs: { description: { story: 'Every appearance and size, with a label and with only a leading icon.' } },
+  },
+};
+
+export const AccessibleNames: Story = {
+  render: () => (
+    <View style={styles.story}>
+      <MenuButton content={{ children: 'Create' }} testID="menu-button-slot-name">
+        <MenuItem content="Message" />
+      </MenuButton>
+      <MenuButton content={0} testID="menu-button-numeric-name">
+        <MenuItem content="Message" />
+      </MenuButton>
+      <MenuButton content="New" accessibilityLabel="Create document" testID="menu-button-explicit-name">
+        <MenuItem content="Message" />
+      </MenuButton>
+      <MenuButton content="New" aria-label="More actions" testID="menu-button-alias-name">
+        <MenuItem content="Message" />
+      </MenuButton>
+    </View>
+  ),
+  wdio: {
+    'MNB-006 exposes slot, numeric and explicit native names without input': async ({ browser, expect }) => {
+      expect(await (await browser.$('~menu-button-slot-name')).getProperty('name')).toBe('Create');
+      expect(await (await browser.$('~menu-button-numeric-name')).getProperty('name')).toBe('0');
+      expect(await (await browser.$('~menu-button-explicit-name')).getProperty('name')).toBe('Create document');
+      expect(await (await browser.$('~menu-button-alias-name')).getProperty('name')).toBe('More actions');
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Plain labels name the native trigger directly. Explicit accessibility names override the visible label.',
+      },
+    },
   },
 };
 
