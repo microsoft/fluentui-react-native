@@ -47,8 +47,12 @@ function TextStateProbe({ seen, children }: { seen: TextState['root'][]; childre
 describe('Text', () => {
   it('TXT-001 resolves the nearest theme and refreshes defaults when that boundary changes', async () => {
     const outer = new FlexThemeReference({ base: { color: { foregroundNeutralPrimary: '#123456' } } });
-    const first = new FlexThemeReference({ base: { color: { foregroundNeutralPrimary: '#654321' }, fontSize: { functionalBodyMedium: 17 } } });
-    const second = new FlexThemeReference({ base: { color: { foregroundNeutralPrimary: '#abcdef' }, fontSize: { functionalBodyMedium: 23 } } });
+    const first = new FlexThemeReference({
+      base: { color: { foregroundNeutralPrimary: '#654321' }, fontSize: { functionalBodyMedium: 17 } },
+    });
+    const second = new FlexThemeReference({
+      base: { color: { foregroundNeutralPrimary: '#abcdef' }, fontSize: { functionalBodyMedium: 23 } },
+    });
     function Scene({ theme }: { theme: FlexThemeReference }) {
       return (
         <ThemeProvider theme={outer}>
