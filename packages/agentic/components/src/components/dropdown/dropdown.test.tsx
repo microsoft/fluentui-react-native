@@ -68,6 +68,100 @@ function Scene(props: Partial<DropdownProps>) {
 describe('Dropdown', () => {
   beforeEach(() => dispatchCommand.mockClear());
 
+  it.each(
+    (['controlled', 'uncontrolled'] as const).flatMap((owner) =>
+      [
+        { scenario: 'select replaces', actionName: 'Select', initial: ['apple'], target: 'cherry', next: ['cherry'], changed: true },
+        { scenario: 'select unchanged', actionName: 'Select', initial: ['apple'], target: 'apple', next: ['apple'], changed: false },
+        {
+          scenario: 'add appends',
+          actionName: 'AddToSelection',
+          initial: ['apple'],
+          target: 'cherry',
+          next: ['apple', 'cherry'],
+          changed: true,
+        },
+        {
+          scenario: 'add existing',
+          actionName: 'AddToSelection',
+          initial: ['apple', 'cherry'],
+          target: 'apple',
+          next: ['apple', 'cherry'],
+          changed: false,
+        },
+        { scenario: 'remove selected', actionName: 'RemoveFromSelection', initial: ['apple'], target: 'apple', next: [], changed: true },
+        {
+          scenario: 'remove absent',
+          actionName: 'RemoveFromSelection',
+          initial: ['apple'],
+          target: 'cherry',
+          next: ['apple'],
+          changed: false,
+        },
+        { scenario: 'custom forwarded', actionName: 'custom', initial: ['apple'], target: 'cherry', next: ['apple'], changed: false },
+      ].map((scenario) => ({ owner, ...scenario })),
+    ),
+  )('DRP-005 DRP-011 handles $scenario once with $owner multiselection', async ({ owner, actionName, initial, target, next, changed }) => {
+    const calls: string[] = [];
+    const onSelectedOptionsChange = jest.fn(() => calls.push('selection'));
+    const onAccessibilityAction = jest.fn(() => calls.push('action'));
+    const onOpenChange = jest.fn();
+    const onPress = jest.fn();
+    const scene = (selection: string[]) => (
+      <Dropdown
+        accessibilityLabel="Fruit"
+        defaultOpen
+        multiselect
+        selectedOptions={owner === 'controlled' ? selection : undefined}
+        defaultSelectedOptions={initial}
+        onSelectedOptionsChange={onSelectedOptionsChange}
+        onOpenChange={onOpenChange}
+      >
+        {['apple', 'cherry'].map((value) => (
+          <ListboxItem
+            key={value}
+            value={value}
+            content={value === 'apple' ? 'Apple' : 'Cherry'}
+            accessibilityActions={[{ name: 'custom', label: 'Custom action' }]}
+            onAccessibilityAction={onAccessibilityAction}
+            onPress={onPress}
+          />
+        ))}
+      </Dropdown>
+    );
+    const component = await render(scene(initial));
+    const event = action(actionName);
+    await fireEvent(component.getByRole('listitem', { name: target === 'apple' ? 'Apple' : 'Cherry' }), 'accessibilityAction', event);
+
+    expect(onSelectedOptionsChange.mock.calls).toEqual(changed ? [[next, { value: target }]] : []);
+    expect(onAccessibilityAction.mock.calls).toEqual([[event]]);
+    expect(calls).toEqual(changed ? ['selection', 'action'] : ['action']);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(onOpenChange).not.toHaveBeenCalled();
+    expect(component.getByRole('combobox', { name: 'Fruit' }).props.accessibilityState.expanded).toBe(true);
+    const displayed = owner === 'controlled' ? initial : next;
+    expect(component.getAllByRole('listitem').map((option) => option.props.accessibilityState.selected)).toEqual([
+      displayed.includes('apple'),
+      displayed.includes('cherry'),
+    ]);
+
+    await component.rerender(scene(next));
+    const trigger = component.getByRole('combobox', { name: 'Fruit' });
+    expect(trigger.props.accessibilityValue).toEqual({
+      text: ['apple', 'cherry']
+        .filter((value) => next.includes(value))
+        .map((value) => (value === 'apple' ? 'Apple' : 'Cherry'))
+        .join(', '),
+    });
+    expect(component.getAllByRole('listitem').map((option) => option.props.accessibilityState.selected)).toEqual([
+      next.includes('apple'),
+      next.includes('cherry'),
+    ]);
+    expect(onSelectedOptionsChange).toHaveBeenCalledTimes(changed ? 1 : 0);
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+    expect(onOpenChange).not.toHaveBeenCalled();
+  });
+
   it('renders an inaccessible root around a collapsed combobox trigger showing the placeholder', async () => {
     const ref = React.createRef<View>();
     await render(<Scene ref={ref} />);
