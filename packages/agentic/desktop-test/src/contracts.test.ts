@@ -7,6 +7,7 @@ describe('neutral desktop harness contracts', () => {
     'adapters',
     'reporting',
     'commands',
+    'command-arguments',
     'transport',
     'delegated-cli',
     'services',
@@ -31,7 +32,9 @@ describe('neutral desktop harness contracts', () => {
 
 function runContract(mode: string): Promise<unknown> {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [path.join(__dirname, 'contracts.contract.cjs'), mode], { stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, ['--throw-deprecation', path.join(__dirname, 'contracts.contract.cjs'), mode], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
     const stdout: Buffer[] = [];
     const stderr: Buffer[] = [];
     child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));

@@ -323,6 +323,34 @@ async function main() {
         .slice(out.text().indexOf('::group::one'), out.text().indexOf('::endgroup::', out.text().indexOf('::group::one')));
       assert(groupOne.includes('::stop-commands::'));
       assert(!groupOne.includes('::warning::two'));
+    } else if (mode === 'command-arguments') {
+      const run = reporter({ kind: 'lifecycle' });
+      const runner = new NodeDesktopCommandRunner({ reporter: run });
+      const bin = path.join(root, 'command shims (test)');
+      fs.mkdirSync(bin);
+      const fixture = path.join(bin, 'argv.cjs');
+      fs.writeFileSync(fixture, "require('node:fs').writeFileSync(process.argv[2], JSON.stringify(process.argv.slice(3)));");
+      const output = path.join(root, 'arguments.json');
+      const values = ['', 'with spaces', 'a&b|(c)<d>^e', '"quoted"', 'trailing\\', '%COMMAND_TEST_VALUE%'];
+      let prepared = {
+        command: process.execPath,
+        args: [fixture, output, ...values],
+        cwd: root,
+        env: { COMMAND_TEST_VALUE: 'must not expand' },
+      };
+      if (process.platform === 'win32') {
+        fs.writeFileSync(path.join(bin, 'argv-fixture.cmd'), '@"%COMMAND_TEST_NODE%" "%~dp0argv.cjs" %*\r\n');
+        prepared = {
+          ...prepared,
+          command: 'argv-fixture',
+          args: [output, ...values],
+          env: { ...prepared.env, COMMAND_TEST_NODE: process.execPath, PATH: `${bin}${path.delimiter}${process.env.PATH}` },
+        };
+      }
+      await runner.run(prepared);
+      assert.deepEqual(JSON.parse(fs.readFileSync(output, 'utf8')), values);
+      const result = await run.finish();
+      assert.equal(result.status, 'passed');
     } else if (mode === 'transport') {
       const { startReportTransport } = await import(lib('reporting/transport.js'));
       const run = reporter({ kind: 'lifecycle' });
