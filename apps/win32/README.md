@@ -72,6 +72,8 @@ yarn e2etest:win32
 
 `e2eprep` builds the desktop driver helper and the Win32 bundle; `e2etest` runs the `legacy` suite from
 [`apps/E2E`](../E2E/README.md), which covers prerequisites, suites, and debugging failures.
+The full 40-file Win32 Paper suite is qualified locally with 201 passing tests,
+no skips, and no retries. It uses the bundled REX host and does not start Metro.
 
 ## Dependencies
 

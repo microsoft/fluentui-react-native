@@ -34,10 +34,14 @@ also runs alone through the app's `desktop-test` script, for example
   build with Xcode. The bundle comes first because CocoaPods embeds only the
   resources that exist during `pod install`.
 - **Windows:** build or verify the helper, bundle, generate the Fabric RN Test
-  App project, build it with `rnx-cli`, and register the Debug package with
+  App project, build it with the app's `windows` script in build-only mode,
+  and register the Debug package with
   `apps/fluent-tester/scripts/register-windows-app.ps1`. `e2etest` starts Metro
   itself, because Debug builds load their JavaScript from it, launches the
   registered package, and stops both when the run ends.
+  The build pins Windows SDK 10.0.22621.0 across the solution so RNSVG's WinMD
+  does not target a newer SDK than the app. The target explicitly uses the
+  Windows title `FluentTester`, rather than the component title `Fluent Tester`.
 - **Win32:** build or verify the helper and bundle `dist/index.win32.bundle`.
   There is no native build: `e2etest` launches the prebuilt REX host from
   `@office-iss/rex-win32` against that bundle.
@@ -59,7 +63,7 @@ stage semantics.
   [React Native Windows development dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   (grab every item and the appropriate versions), PowerShell 7 (`pwsh`),
   [Developer Mode](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development),
-  and the Windows App Runtime 1.8 that Fabric apps load. See the
+  Windows SDK 10.0.22621.0, and the Windows App Runtime 1.8 that Fabric apps load. See the
   [Windows tester guide](../fluent-tester/docs/windows.md) for more setup.
 - **Win32:** a Windows host. The REX host is a prebuilt npm package, so no
   native toolchain is required.
@@ -114,7 +118,14 @@ The shared page adapter maps only established native attributes, uses checked
 state for toggles, explicit key actions for chords, and native wheel input for
 desktop scrolling. Required state maps to UI Automation's authoritative
 `IsRequiredForForm` property; providers without it fail explicitly. `HelpText`
-and toggle-pattern availability remain unmapped. Native setup retains initial
+maps to the native `helpText` property on Windows/Win32; absent help text
+remains unsupported rather than becoming an empty string. Toggle-pattern
+availability remains unmapped. Negative disabled-control click tests use
+physical pointer actions, since Element Click rejects disabled controls.
+The navigation safety check inspects the native tree instead of XPath.
+Scrolling checks the intersection of the scroller and window client viewport,
+because a Win32 scroller can extend below the visible window.
+Native setup retains initial
 window bounds: it does **not** emulate the old maximize hook. Popup lookup
 remains scoped to the selected window.
 
@@ -132,8 +143,11 @@ renderer; macOS requires its own built application and permissions.
 
 The `legacy` lanes replace the former Appium lanes in the PR pipeline, and
 Appium is no longer a dependency of this repository. The macOS baseline above is
-a local run. The Windows (Fabric) and Win32 `legacy` lanes have no recorded
-full run yet, so their first hosted PR runs are the qualification. Hosted
+a local run. On October 27, 2026 (UTC), local interactive runs pass all
+201 Win32 Paper tests (40 files) and all 39 Windows Fabric tests (10 files),
+with no skips, retries, or infrastructure failures. The Win32 FocusZone
+groups have distinct names, as required by Jasmine 6.
+These local runs do not qualify the hosted PR environment. Hosted
 input-disabled checks do not qualify physical input, and a skipped assertion is
 not a pass.
 

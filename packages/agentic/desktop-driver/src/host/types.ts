@@ -75,6 +75,7 @@ export type NativeElementSnapshot = {
   enabled: SupportedValue<boolean>;
   expanded: SupportedValue<boolean>;
   focused: SupportedValue<boolean>;
+  helpText?: SupportedValue<string>;
   name?: string;
   parentId?: string;
   rect: Rect;

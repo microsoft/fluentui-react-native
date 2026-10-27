@@ -20,3 +20,8 @@ yarn e2eprep:windows && yarn e2etest:windows
 `e2eprep` builds the desktop driver helper, bundles, prepares, and builds the app; `e2etest` runs the `legacy` suite
 from [`apps/E2E`](../E2E/README.md), which covers prerequisites, suites, and debugging failures. For the harness
 itself, see the `@fluentui-react-native/desktop-test` package guide at `packages/agentic/desktop-test/README.md`.
+
+Windows preparation requires Windows SDK 10.0.22621.0 and Windows App Runtime 1.8.
+The target uses the SDK consistently for the app and its native dependencies,
+registers the Debug package, and matches its exact `FluentTester` window title.
+The test run owns Metro and stops it on completion.

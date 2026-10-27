@@ -41,9 +41,15 @@ async function isCenterWithinScroller(element: PageElement, scroller: PageElemen
   if (!(await target.isDisplayed())) return false;
   const targetRect = await browser.getElementRect(await target.elementId);
   const viewport = await browser.getElementRect(await (await scroller).elementId);
+  const window = await browser.getWindowRect();
   const x = targetRect.x + targetRect.width / 2;
   const y = targetRect.y + targetRect.height / 2;
-  return x > viewport.x && y > viewport.y && x < viewport.x + viewport.width && y < viewport.y + viewport.height;
+  return (
+    x > Math.max(0, viewport.x) &&
+    y > Math.max(0, viewport.y) &&
+    x < Math.min(window.width, viewport.x + viewport.width) &&
+    y < Math.min(window.height, viewport.y + viewport.height)
+  );
 }
 
 export async function scrollNativeDesktopElement(element: PageElement, scroller: PageElement): Promise<void> {
@@ -69,6 +75,7 @@ export function installLegacyDesktopAttributes(): void {
   const properties: Readonly<Record<string, string>> = {
     AutomationId: 'automationId',
     Name: 'name',
+    HelpText: 'helpText',
     ControlType: 'role',
     IsEnabled: 'enabled',
     HasKeyboardFocus: 'focused',
@@ -95,7 +102,7 @@ export function installLegacyDesktopAttributes(): void {
     async function (original, name) {
       const property = properties[name];
       if (!property) {
-        if (['HelpText', 'IsTogglePatternAvailable'].includes(name)) {
+        if (name === 'IsTogglePatternAvailable') {
           throw new Error(
             `Legacy attribute "${name}" has no qualified native mapping. It must not be reported as false or silently skipped.`,
           );

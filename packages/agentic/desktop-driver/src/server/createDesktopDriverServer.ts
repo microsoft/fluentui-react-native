@@ -688,6 +688,11 @@ function getElementValue(snapshot: NativeElementSnapshot, name: string): unknown
       return snapshot.name ?? null;
     case 'role':
       return snapshot.role;
+    case 'helpText':
+      return requireSupported(
+        snapshot.helpText ?? { supported: false, reason: 'The provider does not expose accessibility help text.' },
+        'helpText',
+      );
     case 'value':
       return snapshot.value ?? null;
     case 'focused':

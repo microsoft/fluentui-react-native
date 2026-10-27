@@ -1,4 +1,7 @@
 import { BasePage } from '../../../common/BasePage';
+import { createDesktopDriverClient, DesktopSessionClient } from '@fluentui-react-native/desktop-driver';
+import type { DesktopTreeNode } from '@fluentui-react-native/desktop-driver';
+import { isNativeDesktop } from '../../nativeDesktop';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../consts';
 
 class NativeTestingPageObject extends BasePage {
@@ -18,8 +21,22 @@ class NativeTestingPageObject extends BasePage {
   /* Validate the Children of the ScrollView stay intact. The children are the buttons that
    * navigate to each test page. Also, validate these children exist with the proper testId format */
   async validateScrollViewChildren(): Promise<boolean> {
-    // Gets all the children
-    const testChildren = await (await this._testPageButtonScrollViewer).$$('//*');
+    let automationIds: (string | null)[];
+    if (isNativeDesktop()) {
+      const url = `${browser.options.protocol}://${browser.options.hostname}:${browser.options.port}${browser.options.path}`;
+      const session = new DesktopSessionClient(
+        createDesktopDriverClient({ url }),
+        browser.sessionId,
+        Object.fromEntries(Object.entries(browser.capabilities)),
+      );
+      const flatten = (nodes: readonly DesktopTreeNode[]): DesktopTreeNode[] => nodes.flatMap((node) => [node, ...flatten(node.children)]);
+      const scroller = flatten(await session.getTree()).find((node) => node.testId === TESTPAGE_BUTTONS_SCROLLVIEWER);
+      if (!scroller) throw new Error('The native tree does not contain the navigation ScrollView.');
+      automationIds = flatten(scroller.children).map((node) => node.testId ?? null);
+    } else {
+      const testChildren = await (await this._testPageButtonScrollViewer).$$('//*');
+      automationIds = await testChildren.map((child) => child.getAttribute('AutomationId'));
+    }
     let foundValidButton = false;
 
     // Ensure the testID (maps 1:1 to automationId) properties of the button children match the defined testing format
@@ -27,8 +44,7 @@ class NativeTestingPageObject extends BasePage {
 
     // Iterate through children. Validate at least one valid button exists as a child to the ScrollView.
     // If automationId is found in the wrong format, return false.
-    for await (const child of testChildren) {
-      const autoId = await child.getAttribute('AutomationId');
+    for (const autoId of automationIds) {
       if (autoId && autoId !== TESTPAGE_BUTTONS_SCROLLVIEWER) {
         if (autoId.match(reg)) {
           foundValidButton = true;

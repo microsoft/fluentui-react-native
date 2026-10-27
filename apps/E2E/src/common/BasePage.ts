@@ -199,6 +199,27 @@ export abstract class BasePage {
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
   async click(element: ChainablePromiseElement) {
+    if (isNativeDesktop() && !(await element.isEnabled())) {
+      // Element Click rejects disabled controls; physical input must still be exercised by negative callback tests.
+      if (!browser.capabilities['furn:features']?.physicalClick) throw new Error('This desktop does not support physical clicks.');
+      try {
+        await browser.performActions([
+          {
+            type: 'pointer',
+            id: 'tester-pointer',
+            parameters: { pointerType: 'mouse' },
+            actions: [
+              { type: 'pointerMove', origin: { 'element-6066-11e4-a52e-4f735466cecf': await element.elementId }, x: 0, y: 0 },
+              { type: 'pointerDown', button: 0 },
+              { type: 'pointerUp', button: 0 },
+            ],
+          },
+        ]);
+      } finally {
+        await browser.releaseActions();
+      }
+      return;
+    }
     return element.click();
   }
 

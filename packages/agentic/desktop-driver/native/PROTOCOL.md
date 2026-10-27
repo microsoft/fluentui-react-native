@@ -119,6 +119,10 @@ or an unsupported value with its reason. Older or non-supporting providers may
 omit it; the Node boundary treats absence as unsupported. This is additive
 snapshot metadata and does not change the FDR1 framing or wire version.
 
+Snapshots may also include `helpText` as a supported string (including an empty
+string) or an unsupported value with its reason. An omitted field is unsupported
+at the Node boundary. This additive metadata does not change the wire version.
+
 Request and cancellation correlation IDs are limited to 256 UTF-8 bytes.
 Helpers ignore invalid IDs before queuing work or echoing a response.
 

@@ -8,12 +8,24 @@ export default defineDesktopConfig({
   targets: {
     macos: { host: { kind: 'react-native-test-app', renderer: 'fabric' }, launchTimeoutMs: 180_000 },
     windows: {
-      host: { kind: 'react-native-test-app', renderer: 'fabric' },
+      // Windows uses the app displayName, not the component displayName used by macOS.
+      host: { kind: 'react-native-test-app', renderer: 'fabric', application: { windowTitle: 'FluentTester' } },
       launchTimeoutMs: 180_000,
       commands: {
         // The default build stage does not register the package that the harness launches by AUMID.
         build: [
-          { command: 'yarn', args: ['exec', 'rnx-cli', 'build', '--platform', 'windows', '--solution', 'windows/FluentTester.sln'] },
+          {
+            command: 'yarn',
+            args: [
+              'windows',
+              '--no-deploy',
+              '--no-launch',
+              '--no-packager',
+              // RNSVG otherwise chooses the newest SDK and its WinMD is rejected by the RN Test App.
+              '--msbuildprops',
+              'WindowsTargetPlatformVersion=10.0.22621.0',
+            ],
+          },
           { command: 'pwsh', args: ['-NoProfile', '-File', 'scripts/register-windows-app.ps1'] },
         ],
       },

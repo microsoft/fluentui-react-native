@@ -2,7 +2,7 @@ import { Attribute, AttributeValue, Keys } from '../../common/consts';
 import FocusZonePageObject from '../pages/FocusZonePageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('FocusZone Testing Initialization', () => {
+describe('FocusZone Tab and Circular Navigation Testing Initialization', () => {
   it('Wait for app load', async () => {
     expect(await FocusZonePageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
@@ -25,7 +25,7 @@ describe('FocusZone Testing Initialization', () => {
  * These tests validate Circular Navigation, disabled FZ, and tab with/without default tabbable element.
  *
  * */
-describe('FocusZone Functional Testing', () => {
+describe('FocusZone Tab and Circular Navigation Functional Testing', () => {
   beforeEach(async () => {
     await FocusZonePageObject.scrollToTestElement();
 

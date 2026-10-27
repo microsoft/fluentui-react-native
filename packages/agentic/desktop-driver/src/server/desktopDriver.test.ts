@@ -9,6 +9,28 @@ import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult } from '../storybook.js';
 
 describe('Desktop Driver W3C remote end', () => {
+  test.each([
+    undefined,
+    { supported: false as const, reason: 'Not exposed.' },
+    { supported: true as const, value: '' },
+    { supported: true as const, value: 'Accessible hint' },
+  ])('preserves native help text without inventing missing values: %j', async (helpText) => {
+    const harness = await createDesktopDriverTestHarness();
+    const snapshot = harness.host.snapshot.bind(harness.host);
+    harness.host.snapshot = async (id) => ({ ...(await snapshot(id)), helpText });
+    try {
+      const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+      const element = await session.findElement('accessibility id', 'button-primary');
+      if (helpText?.supported) expect(await element.getProperty('helpText')).toBe(helpText.value);
+      else await expect(element.getProperty('helpText')).rejects.toMatchObject({ code: 'unsupported operation' });
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
   test.each([true, false, undefined])('preserves required-form state %s without inventing unsupported values', async (required) => {
     const harness = await createDesktopDriverTestHarness({
       windows: [
