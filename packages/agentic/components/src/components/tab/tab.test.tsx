@@ -28,6 +28,98 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Tab', () => {
+  it.each((['iconOnly', 'iconAndText'] as const).flatMap((layout) => [false, true].map((disabled) => ({ layout, disabled }))))(
+    'TAB-003 TAB-006 retains the ordinary icon across selection changes for $layout disabled=$disabled',
+    async ({ layout, disabled }) => {
+      const icon = { imageSource: { uri: 'ordinary.png' }, testID: 'ordinary-icon' };
+      const scene = (selected: boolean) =>
+        layout === 'iconOnly' ? (
+          <Tab controls="files-panel" layout="iconOnly" accessibilityLabel="Files" icon={icon} selected={selected} disabled={disabled} />
+        ) : (
+          <Tab controls="files-panel" content="Files" icon={icon} selected={selected} disabled={disabled} />
+        );
+      const component = await render(scene(false));
+
+      for (const selected of [false, true, false]) {
+        await component.rerender(scene(selected));
+        const ordinary = component.getByTestId('ordinary-icon');
+        expect(ordinary.props.source).toEqual({ uri: 'ordinary.png' });
+        expect(ordinary.props.accessible).toBe(false);
+        expect(StyleSheet.flatten(ordinary.props.style)).toMatchObject({ width: 20, height: 20 });
+        expect(getRoot(component).props.accessibilityState).toMatchObject({ disabled, selected });
+      }
+    },
+  );
+
+  it.each([false, true].flatMap((selected) => [false, true].map((disabled) => ({ selected, disabled }))))(
+    'TAB-005 applies the same foreground to the icon and both text layers for selected=$selected disabled=$disabled',
+    async ({ selected, disabled }) => {
+      const component = await renderTab({
+        controls: 'files-panel',
+        content: 'Files',
+        icon: { fontSource: { codepoint: 0x2606, fontFamily: 'Arial' }, testID: 'ordinary-icon' },
+        selected,
+        disabled,
+      });
+      const colors = defaultFlexTokens.color;
+      const foreground = selected ? 'foregroundNeutralOnloud' : 'foregroundNeutralPrimary';
+      for (const interaction of ['rest', 'hover', 'pressed'] as const) {
+        if (interaction === 'hover') {
+          await fireEvent(getRoot(component), 'hoverIn', {});
+        } else if (interaction === 'pressed') {
+          await fireEvent(getRoot(component), 'pressIn', {});
+        }
+        const expected = disabled
+          ? colors.foregroundNeutralDisabled
+          : interaction === 'rest'
+            ? colors[foreground]
+            : colors[interaction][foreground];
+        const labels = component.getAllByText('Files', { includeHiddenElements: true });
+        expect(labels).toHaveLength(2);
+        expect(labels.map((label) => StyleSheet.flatten(label.props.style).color)).toEqual([expected, expected]);
+        expect(StyleSheet.flatten(component.getByText('\u2606', { includeHiddenElements: true }).props.style).color).toBe(expected);
+        expect(component.getByTestId('ordinary-icon').props.accessible).toBe(false);
+      }
+    },
+  );
+
+  it.each(
+    (['standalone', 'group'] as const).flatMap((owner) =>
+      [false, true].flatMap((selected) => [false, true].map((disabled) => ({ owner, selected, disabled }))),
+    ),
+  )('TAB-007 merges caller state beneath $owner selected=$selected disabled=$disabled semantics', async ({ owner, selected, disabled }) => {
+    const state = { busy: true, selected: !selected, disabled: !disabled };
+    const component = await render(
+      owner === 'standalone' ? (
+        <Tab
+          controls="files-panel"
+          content="Files"
+          accessibilityLabel="Files"
+          selected={selected}
+          disabled={disabled}
+          accessibilityState={state}
+        />
+      ) : (
+        <TabList disabled={disabled} selectedValue={selected ? 'files' : 'other'}>
+          <Tab
+            controls="files-panel"
+            content="Files"
+            accessibilityLabel="Files"
+            value="files"
+            selected={!selected}
+            accessibilityState={state}
+          />
+          <Tab controls="other-panel" content="Other" value="other" />
+        </TabList>
+      ),
+    );
+    const root = component.getByRole('tab', { name: 'Files' });
+
+    expect(root.props.accessibilityState).toEqual({ busy: true, disabled, selected });
+    expect(root.props.accessibilityControls).toBe('files-panel');
+    expect(root.props.focusable).toBe(!disabled && (owner === 'standalone' || selected));
+  });
+
   it('keeps its internal focus ref when the consumer omits ref', async () => {
     let registeredRef: FocusTarget | undefined;
     const contextValue: TabListContextValue = {
