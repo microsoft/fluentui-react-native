@@ -1,5 +1,19 @@
 # @fluentui-react-native/desktop-test
 
+## 0.2.1
+
+### Patch Changes
+
+- fe236bf: Move to WebdriverIO 10.1 and expect-webdriverio 8, replacing the patched expect-webdriverio 5.6.1. WebdriverIO 10
+  requires Node.js 22.19 or newer. Desktop Driver now passes the `{ attachToElement: true }` option object that
+  WebdriverIO 10 requires when it overwrites element commands. WebdriverIO 10 also makes selectors strict by default, so
+  a selector that matches several elements now throws; see the desktop-test WDIO suites reference for the opt-out. Storybook
+  Desktop no longer depends on `@wdio/logger`, which only satisfied the old expect-webdriverio peer requirement.
+- Updated dependencies [8fb422f]
+- Updated dependencies [fe236bf]
+- Updated dependencies [fe236bf]
+  - @fluentui-react-native/desktop-driver@0.4.1
+
 ## 0.2.0
 
 ### Minor Changes
