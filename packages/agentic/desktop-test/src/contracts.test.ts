@@ -7,6 +7,7 @@ describe('neutral desktop harness contracts', () => {
     'adapters',
     'reporting',
     'commands',
+    'command-secrets',
     'command-arguments',
     'transport',
     'delegated-cli',

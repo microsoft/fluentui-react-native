@@ -40,6 +40,10 @@ export type NodeDesktopCommandRunnerOptions = {
   maxLogBytes?: number;
 };
 
+// Credentials are long. Flags and counters such as `true` or `0` are not, and redacting them rewrites machine-readable
+// output (`"delegated":true` becomes `"delegated":[REDACTED]`). Shorter secrets must be registered explicitly with addSecret.
+const MIN_ENVIRONMENT_SECRET_LENGTH = 8;
+
 export class NodeDesktopCommandRunner implements DesktopCommandRunner {
   private reporterValue?: DesktopReportWriter;
   private ownedReporter?: DesktopRunReporter;
@@ -85,7 +89,8 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
           verbose: this.options.verbose,
         }));
     for (const [key, value] of Object.entries({ ...process.env, ...command.env, ...this.options.environment })) {
-      if (/nonce|token|password|secret|authorization/i.test(key) && value) reporter.addSecret(value);
+      if (/nonce|token|password|secret|authorization/i.test(key) && value && value.length >= MIN_ENVIRONMENT_SECRET_LENGTH)
+        reporter.addSecret(value);
     }
     const id = `command-${randomUUID()}`;
     const emit = reporter.source(id);
