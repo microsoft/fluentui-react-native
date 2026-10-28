@@ -170,26 +170,37 @@ export const NativeStructure: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The scene preserves intrinsic content height in compact previews so section order is measured without flex compression.',
+        story:
+          'The geometry check gives the native host enough room for its preview and addons, then restores its original bounds. Card section styles and strict reading-order checks remain unchanged.',
       },
     },
   },
   wdio: {
     'CRD-002 renders structured sections in reading order': async ({ browser, expect }) => {
-      const header = await browser.$('~card-spec-header');
-      const content = await browser.$('~card-spec-content');
-      const details = await browser.$('~card-spec-details');
-      const help = await browser.$('~card-spec-help');
-      const headerRect = await browser.getElementRect(await header.elementId);
-      const contentRect = await browser.getElementRect(await content.elementId);
-      const detailsRect = await browser.getElementRect(await details.elementId);
-      const helpRect = await browser.getElementRect(await help.elementId);
-      expect(headerRect.height).toBeGreaterThan(0);
-      expect(contentRect.height).toBeGreaterThan(0);
-      expect(detailsRect.height).toBeGreaterThan(0);
-      expect(contentRect.y).toBeGreaterThanOrEqual(headerRect.y + headerRect.height);
-      expect(detailsRect.y).toBeGreaterThanOrEqual(contentRect.y + contentRect.height);
-      expect(helpRect.y).toBeGreaterThanOrEqual(detailsRect.y + detailsRect.height);
+      expect(browser.capabilities.setWindowRect).toBe(true);
+      const originalWindow = await browser.getWindowRect();
+      try {
+        // The compact macOS host can allocate zero height to the preview above its addons panel.
+        await browser.setWindowSize(Math.max(originalWindow.width, 1024), Math.max(originalWindow.height, 768));
+        const header = await browser.$('~card-spec-header');
+        const content = await browser.$('~card-spec-content');
+        const details = await browser.$('~card-spec-details');
+        const help = await browser.$('~card-spec-help');
+        await browser.waitUntil(async () => (await browser.getElementRect(await header.elementId)).height > 0);
+        const headerRect = await browser.getElementRect(await header.elementId);
+        const contentRect = await browser.getElementRect(await content.elementId);
+        const detailsRect = await browser.getElementRect(await details.elementId);
+        const helpRect = await browser.getElementRect(await help.elementId);
+        expect(headerRect.height).toBeGreaterThan(0);
+        expect(contentRect.height).toBeGreaterThan(0);
+        expect(detailsRect.height).toBeGreaterThan(0);
+        expect(helpRect.height).toBeGreaterThan(0);
+        expect(contentRect.y).toBeGreaterThanOrEqual(headerRect.y + headerRect.height);
+        expect(detailsRect.y).toBeGreaterThanOrEqual(contentRect.y + contentRect.height);
+        expect(helpRect.y).toBeGreaterThanOrEqual(detailsRect.y + detailsRect.height);
+      } finally {
+        await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
+      }
     },
     'CRD-005 keeps a nested action enabled inside a disabled selectable surface': async ({ browser, expect }) => {
       const help = await browser.$('~card-spec-help');
