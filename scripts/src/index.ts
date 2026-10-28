@@ -7,3 +7,6 @@ export type { Constants, ConstValue, CodegenTargetFile, ReExports } from './code
 export { jsonToCodegenTargetFile, processPlatformJsonFiles } from './codegen/json.ts';
 export { writeConstExports, writeExportConst } from './codegen/constants.ts';
 export { outputCodegenFile } from './codegen/genFile.ts';
+export { makeComment, GeneratedFile, serialize } from './codegen/file.ts';
+export type { Chunk, Output, Comment } from './codegen/file.ts';
+export { Ramp } from './codegen/content.ts';
