@@ -153,18 +153,27 @@ export const Default: Story = {};
 
 export const NativeStructure: Story = {
   render: () => (
-    <Card
-      accessibilityLabel="Unavailable report"
-      disabled
-      selected
-      layout="structured"
-      testID="card-spec-root"
-      header={{ accessible: true, accessibilityLabel: 'Report heading', testID: 'card-spec-header', children: <Text>Report</Text> }}
-      content={{ accessible: true, accessibilityLabel: 'Report summary', testID: 'card-spec-content', children: <Text>Summary</Text> }}
-      content02={{ accessible: true, accessibilityLabel: 'Report details', testID: 'card-spec-details', children: <Text>Details</Text> }}
-      footer={{ children: <Button content="Help" testID="card-spec-help" /> }}
-    />
+    <View style={styles.story}>
+      <Card
+        accessibilityLabel="Unavailable report"
+        disabled
+        selected
+        layout="structured"
+        testID="card-spec-root"
+        header={{ accessible: true, accessibilityLabel: 'Report heading', testID: 'card-spec-header', children: <Text>Report</Text> }}
+        content={{ accessible: true, accessibilityLabel: 'Report summary', testID: 'card-spec-content', children: <Text>Summary</Text> }}
+        content02={{ accessible: true, accessibilityLabel: 'Report details', testID: 'card-spec-details', children: <Text>Details</Text> }}
+        footer={{ children: <Button content="Help" testID="card-spec-help" /> }}
+      />
+    </View>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'The scene preserves intrinsic content height in compact previews so section order is measured without flex compression.',
+      },
+    },
+  },
   wdio: {
     'CRD-002 renders structured sections in reading order': async ({ browser, expect }) => {
       const header = await browser.$('~card-spec-header');
