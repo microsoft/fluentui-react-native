@@ -181,7 +181,12 @@ export const NativeStructure: Story = {
       const originalWindow = await browser.getWindowRect();
       try {
         // The compact macOS host can allocate zero height to the preview above its addons panel.
-        await browser.setWindowSize(Math.max(originalWindow.width, 1024), Math.max(originalWindow.height, 768));
+        await browser.setWindowRect(
+          originalWindow.x,
+          originalWindow.y,
+          Math.max(originalWindow.width, 1024),
+          Math.max(originalWindow.height, 768),
+        );
         const header = await browser.$('~card-spec-header');
         const content = await browser.$('~card-spec-content');
         const details = await browser.$('~card-spec-details');
