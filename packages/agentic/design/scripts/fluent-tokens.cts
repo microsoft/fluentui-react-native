@@ -51,12 +51,20 @@ function addShadowLayer(file: GeneratedFileType, ramp: RampType, layer: ShadowLa
   file.add(ramp.add('shadowLayer', [`{ x: ${x}, y: ${y}, blur: ${blur}, color: `, ramp.add('color', `'${color}'`), ' }']));
 }
 
+function adjustShadowName(name: string) {
+  if (name.includes('Brand')) {
+    // shadowBrand16 needs to become shadow16brand
+    return name.replace('Brand', '') + 'brand';
+  }
+  return name;
+}
+
 function processShadowTokens(prefix: string, platformPath: string, file: GeneratedFileType, ramp: RampType) {
   const shadowTokens: ShadowTokens = require(`${platformPath}tokens-shadow.json`);
   const layerNames = ['ambient', 'key'];
-  file.add(`export const ${prefix}Shadows = {\n`);
+  file.add(`export const ${prefix}Shadows: BaseShadowAliasTokens = {\n`);
   for (const [name, layers] of Object.entries(shadowTokens)) {
-    file.add(`  ${name}: { `);
+    file.add(`  ${adjustShadowName(name)}: { `);
     for (const [index, layer] of layerNames.entries()) {
       file.add(`${layer}: `);
       addShadowLayer(file, ramp, layers[index]);
@@ -72,6 +80,7 @@ function processShadowTokens(prefix: string, platformPath: string, file: Generat
 function generatePlatformFluentTokens(platformData: PlatformData) {
   const target = path.join(__dirname, '../src/fluent/defaults', platformData.filename);
   const generatedFile = new GeneratedFile(target);
+  generatedFile.add(`import type { BaseShadowAliasTokens } from '../types/Shadow.types';\n\n`);
   const ramp = new Ramp();
   generatedFile.add(ramp);
   for (const [prefix, platformPath] of Object.entries(platformData.paths)) {

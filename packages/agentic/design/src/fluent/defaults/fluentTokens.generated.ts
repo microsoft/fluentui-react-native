@@ -1,6 +1,8 @@
 /**
  * WARNING: This file is auto-generated. Do not edit it manually.
  */
+import type { BaseShadowAliasTokens } from '../types/Shadow.types';
+
 const rgb0000001f = '#0000001f';
 const rgb00000024 = '#00000024';
 const rgb00000033 = '#00000033';
@@ -30,59 +32,59 @@ const shadowLayer16 = { x: 0, y: 4, blur: 8, color: rgb00000040 };
 const shadowLayer17 = { x: 0, y: 0, blur: 2, color: rgb0000001f };
 const shadowLayer18 = { x: 0, y: 0, blur: 8, color: rgb00000033 };
 
-export const darkShadows = {
+export const darkShadows: BaseShadowAliasTokens = {
   shadow16: { ambient: shadowLayer1, key: shadowLayer2 },
   shadow2: { ambient: shadowLayer1, key: shadowLayer3 },
   shadow28: { ambient: shadowLayer4, key: shadowLayer5 },
   shadow4: { ambient: shadowLayer1, key: shadowLayer6 },
   shadow64: { ambient: shadowLayer4, key: shadowLayer7 },
   shadow8: { ambient: shadowLayer1, key: shadowLayer8 },
-  shadowBrand16: { ambient: shadowLayer9, key: shadowLayer10 },
-  shadowBrand2: { ambient: shadowLayer9, key: shadowLayer11 },
-  shadowBrand28: { ambient: shadowLayer12, key: shadowLayer13 },
-  shadowBrand4: { ambient: shadowLayer9, key: shadowLayer14 },
-  shadowBrand64: { ambient: shadowLayer12, key: shadowLayer15 },
-  shadowBrand8: { ambient: shadowLayer9, key: shadowLayer16 },
+  shadow16brand: { ambient: shadowLayer9, key: shadowLayer10 },
+  shadow2brand: { ambient: shadowLayer9, key: shadowLayer11 },
+  shadow28brand: { ambient: shadowLayer12, key: shadowLayer13 },
+  shadow4brand: { ambient: shadowLayer9, key: shadowLayer14 },
+  shadow64brand: { ambient: shadowLayer12, key: shadowLayer15 },
+  shadow8brand: { ambient: shadowLayer9, key: shadowLayer16 },
 };
-export const lightShadows = {
+export const lightShadows: BaseShadowAliasTokens = {
   shadow16: { ambient: shadowLayer17, key: { x: 0, y: 8, blur: 16, color: rgb00000024 } },
   shadow2: { ambient: shadowLayer17, key: { x: 0, y: 1, blur: 2, color: rgb00000024 } },
   shadow28: { ambient: shadowLayer18, key: { x: 0, y: 14, blur: 28, color: rgb0000003d } },
   shadow4: { ambient: shadowLayer17, key: { x: 0, y: 2, blur: 4, color: rgb00000024 } },
   shadow64: { ambient: shadowLayer18, key: { x: 0, y: 32, blur: 64, color: rgb0000003d } },
   shadow8: { ambient: shadowLayer17, key: { x: 0, y: 4, blur: 8, color: rgb00000024 } },
-  shadowBrand16: { ambient: shadowLayer9, key: shadowLayer10 },
-  shadowBrand2: { ambient: shadowLayer9, key: shadowLayer11 },
-  shadowBrand28: { ambient: shadowLayer12, key: shadowLayer13 },
-  shadowBrand4: { ambient: shadowLayer9, key: shadowLayer14 },
-  shadowBrand64: { ambient: shadowLayer12, key: shadowLayer15 },
-  shadowBrand8: { ambient: shadowLayer9, key: shadowLayer16 },
+  shadow16brand: { ambient: shadowLayer9, key: shadowLayer10 },
+  shadow2brand: { ambient: shadowLayer9, key: shadowLayer11 },
+  shadow28brand: { ambient: shadowLayer12, key: shadowLayer13 },
+  shadow4brand: { ambient: shadowLayer9, key: shadowLayer14 },
+  shadow64brand: { ambient: shadowLayer12, key: shadowLayer15 },
+  shadow8brand: { ambient: shadowLayer9, key: shadowLayer16 },
 };
-export const hcShadows = {
+export const hcShadows: BaseShadowAliasTokens = {
   shadow16: { ambient: shadowLayer1, key: shadowLayer2 },
   shadow2: { ambient: shadowLayer1, key: shadowLayer3 },
   shadow28: { ambient: shadowLayer4, key: shadowLayer5 },
   shadow4: { ambient: shadowLayer1, key: shadowLayer6 },
   shadow64: { ambient: shadowLayer4, key: shadowLayer7 },
   shadow8: { ambient: shadowLayer1, key: shadowLayer8 },
-  shadowBrand16: { ambient: shadowLayer9, key: shadowLayer10 },
-  shadowBrand2: { ambient: shadowLayer9, key: shadowLayer11 },
-  shadowBrand28: { ambient: shadowLayer12, key: shadowLayer13 },
-  shadowBrand4: { ambient: shadowLayer9, key: shadowLayer14 },
-  shadowBrand64: { ambient: shadowLayer12, key: shadowLayer15 },
-  shadowBrand8: { ambient: shadowLayer9, key: shadowLayer16 },
+  shadow16brand: { ambient: shadowLayer9, key: shadowLayer10 },
+  shadow2brand: { ambient: shadowLayer9, key: shadowLayer11 },
+  shadow28brand: { ambient: shadowLayer12, key: shadowLayer13 },
+  shadow4brand: { ambient: shadowLayer9, key: shadowLayer14 },
+  shadow64brand: { ambient: shadowLayer12, key: shadowLayer15 },
+  shadow8brand: { ambient: shadowLayer9, key: shadowLayer16 },
 };
-export const darkGrayShadows = {
+export const darkGrayShadows: BaseShadowAliasTokens = {
   shadow16: { ambient: shadowLayer1, key: shadowLayer2 },
   shadow2: { ambient: shadowLayer1, key: shadowLayer3 },
   shadow28: { ambient: shadowLayer4, key: shadowLayer5 },
   shadow4: { ambient: shadowLayer1, key: shadowLayer6 },
   shadow64: { ambient: shadowLayer4, key: shadowLayer7 },
   shadow8: { ambient: shadowLayer1, key: shadowLayer8 },
-  shadowBrand16: { ambient: shadowLayer9, key: shadowLayer10 },
-  shadowBrand2: { ambient: shadowLayer9, key: shadowLayer11 },
-  shadowBrand28: { ambient: shadowLayer12, key: shadowLayer13 },
-  shadowBrand4: { ambient: shadowLayer9, key: shadowLayer14 },
-  shadowBrand64: { ambient: shadowLayer12, key: shadowLayer15 },
-  shadowBrand8: { ambient: shadowLayer9, key: shadowLayer16 },
+  shadow16brand: { ambient: shadowLayer9, key: shadowLayer10 },
+  shadow2brand: { ambient: shadowLayer9, key: shadowLayer11 },
+  shadow28brand: { ambient: shadowLayer12, key: shadowLayer13 },
+  shadow4brand: { ambient: shadowLayer9, key: shadowLayer14 },
+  shadow64brand: { ambient: shadowLayer12, key: shadowLayer15 },
+  shadow8brand: { ambient: shadowLayer9, key: shadowLayer16 },
 };
