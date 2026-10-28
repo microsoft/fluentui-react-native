@@ -177,8 +177,8 @@ export const HiddenLabel: Story = {
       const fallback = await browser.$('~checkbox-fallback-name');
       expect(await explicit.getTagName()).toBe('checkbox');
       expect(await fallback.getTagName()).toBe('checkbox');
-      await expect(explicit).toHaveText('Enable notifications');
-      await expect(fallback).toHaveText('Save drafts');
+      expect(await explicit.getProperty('name')).toBe('Enable notifications');
+      expect(await fallback.getProperty('name')).toBe('Save drafts');
       await expectNativeState(browser, 'checkbox-explicit-name', 'checked', false);
       await expectNativeState(browser, 'checkbox-fallback-name', 'checked', false);
     },
@@ -186,7 +186,8 @@ export const HiddenLabel: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'When the visible label is hidden, the component still requires an accessible name.',
+        story:
+          'When the visible label is hidden, the component still requires an accessible name. Native name and checked state are checked separately; macOS exposes checkbox state through AXValue.',
       },
     },
   },
