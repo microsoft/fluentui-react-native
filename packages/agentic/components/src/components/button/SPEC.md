@@ -93,6 +93,14 @@ Windows and macOS use React Native press, hover, and focus events. `Enter` and
 `Space` activation are supplied by the native `Pressable` button behavior.
 Disabled buttons are not focusable.
 
+The checked React Native state and resolved Toggle declaration do not imply
+identical native accessibility projection. Windows exposes toggle state through
+UI Automation. With the pinned macOS renderer and desktop provider, the retained
+AXButton role has no supported native `checked` read, and Toggle is a custom
+action rather than an AXPress mapping. Native role and enabled-state checks
+remain shared; checked projection is qualified separately on Windows.
+Caller-owned pointer transitions on macOS require physical input.
+
 Button adds no component-owned motion.
 
 ## Divergences from Flex

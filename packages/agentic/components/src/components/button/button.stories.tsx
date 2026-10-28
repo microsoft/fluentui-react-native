@@ -522,21 +522,34 @@ export const ExternallyDrivenSelection: Story = {
     'starts unselected': async ({ browser, expect }) => {
       await expect(await browser.$('~agentic-storybook-button-selection-state')).toHaveText('Not selected');
     },
-    'updates and resets caller-owned selection': async ({ browser, expect, skip }) => {
+    'updates and resets caller-owned selection': async ({ browser, expect, platform, skip }) => {
       const features = browser.capabilities['furn:features'];
       if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+      if (platform === 'macos' && !features.physicalClick) {
+        skip('macOS caller-owned selection requires physical pointer input; the custom Toggle action is not an AXPress route.');
+        return;
+      }
       if (!features.physicalClick && !features.accessibilityClick) {
         skip('This test requires native accessibility activation or physical pointer input.');
         return;
       }
+      const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
       const favorite = await browser.$('~agentic-storybook-button-favorite');
       const reset = await browser.$('~agentic-storybook-button-reset');
       const status = await browser.$('~agentic-storybook-button-selection-state');
       await expect(favorite).toBeEnabled();
       await expect(status).toHaveText('Not selected');
-      await favorite.click();
+      if (platform === 'macos') {
+        await clickPhysical(browser, 'agentic-storybook-button-favorite');
+      } else {
+        await favorite.click();
+      }
       await expect(status).toHaveText('Selected');
-      await reset.click();
+      if (platform === 'macos') {
+        await clickPhysical(browser, 'agentic-storybook-button-reset');
+      } else {
+        await reset.click();
+      }
       await expect(status).toHaveText('Not selected');
     },
   },
@@ -575,7 +588,7 @@ export const ExternallyDrivenSelection: Story = {
     docs: {
       description: {
         story:
-          'A toggle button never changes its own state. The caller handles onPress, native Toggle actions, and the Reset accessibility tap independently. Pointer/focus policy is tested separately.',
+          'A toggle button never changes its own state. The caller handles pointer onPress, Windows native Toggle activation, and the Reset accessibility tap independently. macOS uses physical pointer input because its custom Toggle is not an AXPress route. Pointer/focus policy is tested separately.',
       },
     },
   },
@@ -665,15 +678,34 @@ export const NativeToggleSemantics: Story = {
     return <Scene />;
   },
   wdio: {
-    'BTN-005 exposes caller-owned native checked state with and without disabled': async ({ browser, expect }) => {
+    'BTN-004 BTN-005 exposes native button roles and enabled or disabled state': async ({ browser, expect }) => {
       const off = await browser.$('~button-native-toggle-off');
       const on = await browser.$('~button-native-toggle-on');
       const disabled = await browser.$('~button-native-toggle-disabled');
       expect(await off.getTagName()).toBe('button');
       expect(await on.getTagName()).toBe('button');
+      expect(await disabled.getTagName()).toBe('button');
+      await expect(off).toBeEnabled();
+      await expect(on).toBeEnabled();
+      await expect(disabled).toBeDisabled();
+    },
+    'BTN-005 Windows native checked projection reflects caller selection including disabled': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform === 'macos') {
+        skip(
+          'Native checked projection is unsupported for the retained macOS AXButton role; shared role and enabled-state checks run separately.',
+        );
+        return;
+      }
+      const off = await browser.$('~button-native-toggle-off');
+      const on = await browser.$('~button-native-toggle-on');
+      const disabled = await browser.$('~button-native-toggle-disabled');
       expect(await off.getProperty('checked')).toBe(false);
       expect(await on.getProperty('checked')).toBe(true);
-      await expect(disabled).toBeDisabled();
       expect(await disabled.getProperty('checked')).toBe(true);
     },
     'BTN-005 Win32 Toggle forwards once without a press or a controlled selection change': async ({ browser, expect, platform, skip }) => {

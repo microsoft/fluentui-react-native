@@ -62,6 +62,8 @@ const toggleName = resolveAccessibilityAction('toggle', Platform.OS).name;
 Import `Platform` from `react-native` and `resolveAccessibilityAction` from
 `@fluentui-react-native/framework-base`. Button declares the native action;
 the caller need not supply `accessibilityActions` or synthesize a press.
+On macOS this is a custom action declaration, not a guarantee that default
+AX activation invokes Toggle.
 
 Content wraps when a consumer constrains the root. Supply a content-slot
 override only when a product deliberately needs a different truncation or
