@@ -15,6 +15,10 @@ Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees in reverse service order. An
 externally owned app is preserved.
 
+Commands keep their arguments as separate values. Windows executable lookup and
+command-shim escaping use `cross-spawn`, without Node's deprecated
+`spawn` argument array plus `shell: true` combination.
+
 Interactive runs acquire a per-user `interactive.lock`; concurrent workloads
 fail closed. If a crash leaves a lock, inspect its recorded owner and verify
 that process and its resources have stopped before removing that exact lock.

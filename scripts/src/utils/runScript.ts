@@ -1,4 +1,5 @@
-import { spawn, type SpawnOptions } from 'node:child_process';
+import type { SpawnOptions } from 'node:child_process';
+import spawn from 'cross-spawn';
 import { PackageContext } from '../pkgContext.ts';
 import os from 'node:os';
 
@@ -24,7 +25,6 @@ function resolveScript(command: string, args: string[], options?: SpawnOptions):
   const spawnOptions: SpawnOptions = {
     cwd: process.cwd(),
     stdio: 'inherit',
-    shell: verb.endsWith('.cmd') || verb.endsWith('.bat') ? true : undefined,
     ...options,
   };
   return [verb, spawnArgs, spawnOptions];
@@ -33,10 +33,12 @@ function resolveScript(command: string, args: string[], options?: SpawnOptions):
 export async function runScript(command: string, args: string[], options?: SpawnOptions): Promise<number> {
   const [verb, spawnArgs, spawnOptions] = resolveScript(command, args, options);
 
-  return new Promise((resolve) => {
-    spawn(verb, spawnArgs, spawnOptions).on('close', (code) => {
-      resolve(code ?? -1);
-    });
+  return new Promise((resolve, reject) => {
+    spawn(verb, spawnArgs, spawnOptions)
+      .on('error', reject)
+      .on('close', (code) => {
+        resolve(code ?? -1);
+      });
   });
 }
 
@@ -63,12 +65,14 @@ export async function captureScript(command: string, args: string[], options?: S
 export async function runYarn(command: string, ...args: string[]): Promise<number> {
   const verb = yarnVerb;
   const spawnArgs = [command, ...args];
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     spawn(verb, spawnArgs, {
       cwd: process.cwd(),
       stdio: 'inherit',
-    }).on('close', (code) => {
-      resolve(code ?? -1);
-    });
+    })
+      .on('error', reject)
+      .on('close', (code) => {
+        resolve(code ?? -1);
+      });
   });
 }

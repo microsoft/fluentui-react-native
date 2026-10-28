@@ -4,6 +4,7 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
   const j: JSCodeshift = api.jscodeshift;
 
   const printOptions = options.printOptions || {
+    lineTerminator: fileInfo.source.includes('\r\n') ? '\r\n' : '\n',
     printWidth: 140,
     quote: 'single',
     tabWidth: 2,

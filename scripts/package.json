@@ -30,7 +30,7 @@
     "bundlesize": "bundlesize --debug",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint",
-    "test": "node --test src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/utils/jestSelection.test.ts"
+    "test": "node --test src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts"
   },
   "dependencies": {
     "@babel/core": "catalog:",
@@ -53,6 +53,7 @@
     "@rnx-kit/tsconfig": "catalog:",
     "@rnx-kit/types-kit-config": "catalog:",
     "babel-jest": "^29.0.0",
+    "cross-spawn": "7.0.6",
     "oxlint": "1.76.0"
   },
   "devDependencies": {
@@ -72,6 +73,7 @@
     "@rnx-kit/tsconfig": "catalog:",
     "@rnx-kit/types-kit-config": "catalog:",
     "@rnx-kit/types-node": "catalog:",
+    "@types/cross-spawn": "6.0.6",
     "@types/micromatch": "^4.0.9",
     "@types/node": "catalog:",
     "@yarnpkg/types": "^4.0.1",
