@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { Command } from 'clipanion';
+import spawn from 'cross-spawn';
 import micromatch from 'micromatch';
 import { findGitRoot } from 'workspace-tools';
 
@@ -87,14 +88,16 @@ export class CheckPackageContentsCommand extends Command {
 
       let locations: Set<string>;
       try {
-        const output = execFileSync('yarn', ['pack', '--dry-run', '--json'], {
+        const result = spawn.sync('yarn', ['pack', '--dry-run', '--json'], {
           cwd: packageRoot,
           encoding: 'utf8',
           stdio: ['ignore', 'pipe', 'pipe'],
           maxBuffer: 64 * 1024 * 1024,
         });
+        if (result.error) throw result.error;
+        if (result.status !== 0) throw new Error(result.stderr || `Yarn exited with ${result.status ?? result.signal}`);
         locations = new Set(
-          output
+          result.stdout
             .split(/\r?\n/)
             .filter(Boolean)
             .map((line) => JSON.parse(line) as { location?: string })

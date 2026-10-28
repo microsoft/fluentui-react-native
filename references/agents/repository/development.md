@@ -61,6 +61,9 @@ Set up a clone with `yarn` to install dependencies, then `yarn build`.
 | `yarn change` / `change:check`  | Create or validate changesets; see [release](release.md)                                              |
 
 Lage caches task outputs in `node_modules/.cache/lage`. Iterate with cached runs, and add `--verbose` for detail.
+The repository patches Lage 2.14.19's task runner to use `cross-spawn` instead of spawning argument arrays with
+`shell: true` on Windows. The root resolution and matching `.yarnrc.yml` package extension must stay together;
+remove both once the upstream runner supports Windows command shims without DEP0190.
 `--no-cache` bypasses the cache for one run but leaves earlier entries in place, so a later cached run can still reuse
 results for tasks the uncached run never reached. For final validation, clear the cache instead (R-VALID-003). Before committing moved or renamed files, run
 `yarn lage test-links` and update stale links.

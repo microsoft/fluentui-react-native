@@ -1,4 +1,5 @@
-import { spawn } from 'node:child_process';
+import { spawn as spawnNative } from 'node:child_process';
+import spawn from 'cross-spawn';
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -106,11 +107,11 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       command.context,
     );
     emit({ kind: 'artifact', payload: { path: relativeLog, description: command.label ?? command.command } }, id, command.context);
-    const child = spawn(command.command, [...command.args], {
+    const spawnCommand = needsWindowsCommandShim(command.command) ? spawn : spawnNative;
+    const child = spawnCommand(command.command, [...command.args], {
       cwd: command.cwd,
       env: { ...process.env, ...command.env, ...this.options.environment, [DESKTOP_REPORT_SCOPE]: id },
       detached: process.platform !== 'win32',
-      shell: windowsShell(command.command),
       stdio: ['ignore', 'pipe', 'pipe'],
       windowsHide: true,
     });
@@ -257,7 +258,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
   }
 }
 
-function windowsShell(command: string): boolean {
+function needsWindowsCommandShim(command: string): boolean {
   return (
     process.platform === 'win32' &&
     !['.exe', '.com'].includes(path.extname(command).toLowerCase()) &&
@@ -267,7 +268,7 @@ function windowsShell(command: string): boolean {
 
 async function stopProcessTree(pid: number, completed: Promise<number>, timeoutMs: number): Promise<void> {
   if (process.platform === 'win32') {
-    const killer = spawn('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
+    const killer = spawnNative('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
     let diagnostic = '';
     killer.stdout.on('data', (data: Buffer) => {
       diagnostic += data.toString();

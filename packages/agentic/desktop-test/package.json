@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-test",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Application-neutral lifecycle and reporting for native desktop tests",
   "license": "MIT",
   "repository": {
@@ -64,10 +64,12 @@
     "@rnx-kit/reporter": "catalog:",
     "@wdio/reporter": "catalog:",
     "commander": "^14.0.2",
+    "cross-spawn": "7.0.6",
     "import-meta-resolve": "4.2.0"
   },
   "devDependencies": {
     "@fluentui-react-native/scripts": "workspace:*",
+    "@types/cross-spawn": "6.0.6",
     "@wdio/cli": "catalog:",
     "@wdio/jasmine-framework": "catalog:",
     "@wdio/local-runner": "catalog:",
