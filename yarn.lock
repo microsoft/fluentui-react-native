@@ -5851,8 +5851,8 @@ __metadata:
   linkType: soft
 
 "@fluentui/react-native-icons@npm:^2.0.322":
-  version: 2.0.341
-  resolution: "@fluentui/react-native-icons@npm:2.0.341"
+  version: 2.0.343
+  resolution: "@fluentui/react-native-icons@npm:2.0.343"
   dependencies:
     "@types/react-native": "npm:^0.68.0"
     tslib: "npm:^2.1.0"
@@ -5860,7 +5860,7 @@ __metadata:
     react: ">=16.8.0 <20.0.0"
     react-native: ">=0.68.0"
     react-native-svg: ">=12.5.0"
-  checksum: 10c0/abd60d2e74912ae646ceb973d8b2359b9389be1961dfa33c531f84193cc65ea1000360f2f6a5247e205225c202c2a1c10f588a6a3935119927e732eae6e8ef90
+  checksum: 10c0/2208d3f7ba2aa7f93020fe1ae98b7b0d16570821948c5f77621a3ce303e17613aa37eaa843005201894ab78674ed274f57e496905c033bb52991965f36b34a38
   languageName: node
   linkType: hard
 
