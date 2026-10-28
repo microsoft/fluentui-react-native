@@ -12,7 +12,13 @@ unless the caller supplies React Native naming props.
 
 The standalone root declares `toggle` on Windows Fabric and `Toggle` on
 Win32/macOS through the shared action resolver. This preserves the button role
-while exposing native toggle state, retaining caller labels and custom actions.
+and exposes toggle state through Windows UI Automation, retaining caller labels
+and custom actions. On macOS, Toggle is a custom action, not a default AXPress
+activation route. With the pinned renderer and desktop provider, the retained
+AXButton role has no supported native `checked` read. Native role and
+enabled/disabled assertions remain shared; Windows checked projection is
+qualified separately. The unsupported macOS observation is reported explicitly,
+not defaulted to false or replaced by rendered text.
 The caller receives the original accessibility action through
 `onAccessibilityAction` and owns any resulting selection change, just as it owns
 selection changes after `onPress`. The component never synthesizes a press event.

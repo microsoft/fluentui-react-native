@@ -101,8 +101,12 @@ not the transient pointer-pressed interaction state. The owned role, disabled
 state, and checked value take precedence over their caller-provided React Native
 and ARIA aliases; unrelated caller accessibility values are preserved.
 The standalone root declares the platform toggle accessibility action using
-the shared resolver, preserving caller labels and custom actions. This exposes
-the native Toggle pattern without changing the button's role. Selection still
+the shared resolver, preserving caller labels and custom actions. Windows
+exposes the native Toggle pattern without changing the button's role. On macOS,
+Toggle is a custom action, not an AXPress mapping; the pinned renderer and desktop
+provider do not expose a supported native `checked` read for the retained
+AXButton role. Shared native checks retain button roles and enabled/disabled
+state, while Windows checked projection is qualified separately. Selection still
 belongs to the caller: accessibility actions reach `onAccessibilityAction`
 unchanged and do not synthesize `onPress` or mutate `selected`.
 A bound option uses the `listitem` role and `selected` state instead, which
@@ -168,7 +172,10 @@ Flex source identities, slot anatomy, focus/ref ownership, disabled activation,
 and bound Dropdown option semantics are unchanged. The public RN source
 identity and per-requirement authority are recorded in `spec/source.json`.
 Regression coverage includes rendered public state, contradictory caller aliases,
-owner rerenders, and input-free native `checked`/enabled reads; JavaScript
+owner rerenders, shared input-free native role/enabled reads, and separate
+Windows native `checked` reads. Unsupported macOS button checked projection is
+reported explicitly, not treated as false or inferred from rendered selection.
+JavaScript
 coverage alone does not establish native projection.
 
 Win32 action coverage separately uses the public accessibility-click route and
