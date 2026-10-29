@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import type { GestureResponderEvent, MouseEvent, NativeSyntheticEvent, TargetedEvent } from 'react-native';
 
-import { useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
+import { resolveAccessibilityAction, useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import type { FocusablePressableProps, FocusKeyboardEvent } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 
@@ -78,6 +78,14 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   }, [inMenu, submenu]);
   const showChevron = hasChevron || hasSubmenu;
   const rowFocusable = isInteractive && (!disabled || disabledFocusable);
+  const ownsChecked = isInteractive && isSelectionIndicator;
+  const ownsSelected = ownsChecked && !hasMultiselect;
+  const toggleActions = ownsChecked
+    ? resolveAccessibilityAction('toggle', Platform.OS, rest.accessibilityActions).accessibilityActions
+    : rest.accessibilityActions;
+  const accessibilityActions = ownsSelected
+    ? resolveAccessibilityAction('select', Platform.OS, toggleActions).accessibilityActions
+    : toggleActions;
   const menuHandlers = inMenu
     ? {
         onBlur: (event: NativeSyntheticEvent<TargetedEvent>) => {
@@ -110,6 +118,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
 
   const rowProps: FocusablePressableProps = {
     ...rest,
+    accessibilityActions,
     accessible: rest.accessible ?? true,
     ...menuHandlers,
     accessibilityHint: accessibilityHint ?? (showChevron ? 'Has submenu' : undefined),
@@ -119,8 +128,11 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
       ...props.accessibilityState,
       disabled: disabled && isInteractive,
       ...(isSelectionIndicator ? { checked: selected } : isSelectedVisual ? { selected: true } : {}),
+      ...(ownsSelected && { selected }),
       ...(inMenu && hasSubmenu && { expanded: submenuOpen }),
     },
+    ...(ownsChecked && { 'aria-checked': selected }),
+    ...(ownsSelected && { 'aria-selected': selected }),
     disabled: !isInteractive || disabled,
     focusable: rowFocusable,
     onPress: isInteractive ? (menuHandlers?.onPress ?? rest.onPress) : undefined,

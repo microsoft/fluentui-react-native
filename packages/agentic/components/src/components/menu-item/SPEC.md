@@ -41,6 +41,11 @@ The caller owns `selected` and changes it from `onPress`. Checkmark creates a
 radio menu role and multiselect creates a checkbox menu role; either adds
 checked state. With neither, a selected list item exposes selected state.
 Multiselect takes visual precedence over selected fill and semibold text.
+Interactive indicator rows declare the native Toggle action; single-choice
+rows also declare Select and project selected state. Component-owned values
+take precedence over conflicting checked/selected ARIA aliases. Original
+custom action events and caller action labels are preserved without
+synthesizing presses or changing externally owned selection.
 
 ### Requirements
 
@@ -133,7 +138,7 @@ Windows and Win32 retain native `disabled` independently of `focusable`.
 | ----------- | --------------------------------------------------------------------------------------------------- |
 | MNI-001     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.types.test.ts`                                   |
 | MNI-002     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                                        |
-| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`                                       |
+| MNI-003     | `useMenuItem.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`, `menu-item.stories.tsx`              |
 | MNI-004     | `useMenuItem.ts`, `renderMenuItem.tsx`, `menu-item.test.tsx`                                        |
 | MNI-005     | `useMenuItem.ts`, `useMenuItemStyles.ts`, `menu-item.styles.ts`, `menu-item.test.tsx`               |
 | MNI-006     | `menu-item.types.ts`, `useMenuItem.ts`, `menu-item.test.tsx`, `menu-item.types.test.ts`             |

@@ -14,6 +14,15 @@ and on macOS through AX, using the resolved role, name, state, and availability.
 An owning menu remains responsible for a menu-level name, menu position, and
 relationships to any submenu.
 
+Interactive indicator rows declare the platform-resolved Toggle action so
+native automation exposes their checked value. Single-choice rows additionally
+declare Select and project selected state. Caller action labels and unrelated
+actions are preserved and owned declarations deduplicated. Owned checked
+aliases, and selected aliases for single-choice rows, cannot override the
+caller-supplied component selection. Ordinary rows and section headers gain
+no owned indicator actions. The Win32 story qualifies native checked state
+and Toggle dispatch; other renderer projection remains unqualified.
+
 `disabledFocusable` is an opt-in for interactive list rows. A disabled row
 remains announced as disabled, but can own native focus. It does not gain an
 enabled action: press, long press, keyboard activation, and accessibility tap

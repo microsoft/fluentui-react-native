@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import type { AccessibilityActionEvent } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
@@ -55,6 +56,102 @@ export default meta;
 type Story = WdioStory<StoryObj<typeof MenuItem>>;
 
 export const Default: Story = {};
+
+export const NativeIndicatorSemantics: Story = {
+  render: () => {
+    const Scene = () => {
+      const [actions, setActions] = useState(0);
+      const [presses, setPresses] = useState(0);
+      const [lastAction, setLastAction] = useState('none');
+      const recordAction = (event: AccessibilityActionEvent) => {
+        setLastAction(event.nativeEvent.actionName);
+        setActions((value) => value + 1);
+      };
+      return (
+        <View style={styles.story}>
+          <MenuItem content="Single choice off" hasCheckmark selected={false} testID="menu-item-native-single-off" />
+          <MenuItem content="Single choice on" hasCheckmark selected testID="menu-item-native-single-on" />
+          <MenuItem
+            content="Multiple choice off"
+            hasMultiselect
+            selected={false}
+            testID="menu-item-native-multi-off"
+            onAccessibilityAction={recordAction}
+            onPress={() => setPresses((value) => value + 1)}
+          />
+          <MenuItem content="Multiple choice on" hasMultiselect selected testID="menu-item-native-multi-on" />
+          <MenuItem
+            content="Disabled choice"
+            hasMultiselect
+            selected
+            disabled
+            testID="menu-item-native-disabled"
+            onAccessibilityAction={recordAction}
+            onPress={() => setPresses((value) => value + 1)}
+          />
+          <StoryStatus testID="menu-item-native-actions">{String(actions)}</StoryStatus>
+          <StoryStatus testID="menu-item-native-presses">{String(presses)}</StoryStatus>
+          <StoryStatus testID="menu-item-native-last-action">{lastAction}</StoryStatus>
+        </View>
+      );
+    };
+    return <Scene />;
+  },
+  wdio: {
+    'MNI-003 Win32 exposes checked native indicator roles, names and availability': async ({ browser, expect, platform, skip }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies Win32 UI Automation indicator-state projection.');
+        return;
+      }
+      for (const [id, name, checked] of [
+        ['menu-item-native-single-off', 'Single choice off', false],
+        ['menu-item-native-single-on', 'Single choice on', true],
+        ['menu-item-native-multi-off', 'Multiple choice off', false],
+        ['menu-item-native-multi-on', 'Multiple choice on', true],
+        ['menu-item-native-disabled', 'Disabled choice', true],
+      ] as const) {
+        const row = await browser.$(`~${id}`);
+        expect(await row.getTagName()).toBe('menuitem');
+        expect(await row.getProperty('name')).toBe(name);
+        expect(await row.getProperty('checked')).toBe(checked);
+      }
+      expect(await (await browser.$('~menu-item-native-single-off')).getProperty('selected')).toBe(false);
+      expect(await (await browser.$('~menu-item-native-single-on')).getProperty('selected')).toBe(true);
+      await expect(await browser.$('~menu-item-native-disabled')).toBeDisabled();
+    },
+    'MNI-003 Win32 Toggle forwards once without changing selection or pressing and disabled public activation rejects': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies Win32 UI Automation Toggle transport.');
+        return;
+      }
+      const row = await browser.$('~menu-item-native-multi-off');
+      const disabled = await browser.$('~menu-item-native-disabled');
+      const actions = await browser.$('~menu-item-native-actions');
+      const presses = await browser.$('~menu-item-native-presses');
+      await expect(actions).toHaveAttribute('name', '0');
+      await row.click();
+      await expect(actions).toHaveAttribute('name', '1');
+      await expect(await browser.$('~menu-item-native-last-action')).toHaveAttribute('name', 'Toggle');
+      await expect(presses).toHaveAttribute('name', '0');
+      expect(await row.getProperty('checked')).toBe(false);
+      let rejection: unknown;
+      try {
+        await disabled.click();
+      } catch (error) {
+        rejection = error;
+      }
+      expect(rejection).toBeDefined();
+      await expect(actions).toHaveAttribute('name', '1');
+      await expect(presses).toHaveAttribute('name', '0');
+      expect(await disabled.getProperty('checked')).toBe(true);
+    },
+  },
+};
 
 export const Overview: Story = {
   render: () => (
