@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, it } from 'node:test';
@@ -715,11 +715,14 @@ describe('same-PR source fingerprint and evidence reuse', () => {
       git(f.root, ['checkout', '-q', 'pilot/checkbox']);
       put(f.root, assessmentSummaryPath, formatCiSummary(f.root, bundle));
       put(f.root, assessmentSpecPath, `${formatCiSpec(f.root, bundle)}${mode ? '' : '\nHuman contract changed.\n'}`);
+      git(f.root, ['add', '.']);
       if (mode) {
-        git(f.root, ['add', '.']);
+        chmodSync(path.join(f.root, assessmentSpecPath), 0o755);
         git(f.root, ['update-index', '--chmod=+x', assessmentSpecPath]);
       }
-      const head = commit(f.root, 'Changed actual SPEC inputs');
+      git(f.root, ['commit', '-qm', 'Changed actual SPEC inputs']);
+      const head = git(f.root, ['rev-parse', 'HEAD']);
+      if (mode) assert.match(git(f.root, ['ls-tree', head, '--', assessmentSpecPath]), /^100755 blob /);
       const merged = merge(f.root, f.baseCommit, head);
       assert.notEqual(inputDigest(f.root, merged), bundle.identity.inputDigest);
       assert.equal(isReportOnlyUpdate(f.root, { ...bundle.identity, generatedAt: bundle.generatedAt }, head, merged), false);

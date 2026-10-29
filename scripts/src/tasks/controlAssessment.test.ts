@@ -464,19 +464,21 @@ describe('Checkbox advisory assessment', () => {
 
   it('produces deterministic decisions and escapes untrusted Markdown', () => {
     assert.deepEqual(assessCheckbox(options()), assessCheckbox(options()));
-    const report = assessCheckbox(
-      options({
-        report: parseNativeReport({
-          ...direct,
-          tests: [{ ...nativeCase, status: 'skipped', skipReason: '<script>|[link](bad)\nsecond line' }],
+    for (const tag of ['script', 'SCRIPT', 'ScRiPt']) {
+      const report = assessCheckbox(
+        options({
+          report: parseNativeReport({
+            ...direct,
+            tests: [{ ...nativeCase, status: 'skipped', skipReason: `<${tag}>|[link](bad)\nsecond line` }],
+          }),
+          context: undefined,
         }),
-        context: undefined,
-      }),
-    );
-    const output = formatAssessmentMarkdown(report);
-    assert.match(output, /not established/);
-    assert.match(output, /\\<script\\>\\\|\\\[link\\\]/);
-    assert.doesNotMatch(output, /<script>/);
+      );
+      const output = formatAssessmentMarkdown(report);
+      assert.match(output, /not established/);
+      assert.ok(output.includes(`\\<${tag}\\>\\|\\[link\\]`));
+      assert.equal(output.includes(`<${tag}>`), false);
+    }
   });
 });
 
