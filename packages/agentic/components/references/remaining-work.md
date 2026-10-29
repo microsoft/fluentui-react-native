@@ -25,7 +25,9 @@ is documented in the owning reference, component contract, or the repository foc
 - **Open gates:**
   - rerun the current `desktop-focus` cases on Windows Fabric and Win32 with real input and zero skips;
   - invoke UIA `TogglePattern.Toggle` and `SelectionItemPattern.Select`, and macOS AX custom actions, natively rather
-    than inferring them from clicks or state reads;
+    than inferring them from clicks or state reads (the Desktop Driver now lists macOS AX custom actions through
+    `getProperty('accessibilityActions')`: Fabric publishes `Toggle` and `Select`, while Paper publishes nothing until
+    the declaration carries a `label`, C-A11Y-007; invocation is still open);
   - qualify Narrator on both Windows endpoints and VoiceOver on macOS;
   - resolve or explicitly accept the native state announcement gaps: Win32 editors report UIA `IsEnabled` when
     noneditable (C-FOCUS-015), and RNmacOS Fabric does not project disabled or selected state without the

@@ -219,6 +219,11 @@ export class NativeDesktopHost implements DesktopHost {
     return this.request('windowEvents', { lease }, signal);
   }
 
+  async accessibilityActions(elementId: string, signal?: AbortSignal): Promise<string[]> {
+    const result = await this.request<{ actions: string[] }>('accessibilityActions', { elementId }, signal);
+    return result.actions;
+  }
+
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {
     this.listeners.add(listener);
     void this.getProcess().catch(() => undefined);
