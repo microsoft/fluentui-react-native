@@ -117,23 +117,18 @@ This is **optional maintainer-enabled publication**, separate from generating
 CI artifacts and a job summary. The setup enables later eligible CI runs to
 publish; configuring it does not itself write an assessment.
 
-1. **Merge the reviewed pilot into `main` with publication disabled.** The
-   trusted validator and `workflow_run` publisher must be on the default branch
-   before the complete publication flow can operate.
-2. **Install a dedicated GitHub App on this repository only.** Grant
-   **Contents: write**; no workflow-write, administration, review-approval, or
-   protection-bypass permission is needed.
-3. **Configure the App credentials in repository Actions settings.** Add
-   repository variable `CONTROL_ASSESSMENT_APP_CLIENT_ID` and repository secret
-   `CONTROL_ASSESSMENT_APP_PRIVATE_KEY`. Never put the private key in source,
-   reports, or logs.
-4. **Verify organization policies and permitted branch writes.** A maintainer
-   must confirm the Actions and App policies allow this workflow without
-   weakening repository protections.
-5. **Enable and trial publication.** Set repository variable
-   `CONTROL_ASSESSMENT_PUBLISH=true`, then run CI on a same-repository pilot PR
-   targeting `main`. Verify the generated commit and the subsequent trusted
-   report-only validation before considering the flow enabled successfully.
+A maintainer must:
+
+1. Merge the reviewed tooling/workflows into `main`, initially with publishing disabled.
+2. Install a dedicated GitHub App on FURN with **Contents: write**.
+3. Configure variable `CONTROL_ASSESSMENT_APP_CLIENT_ID` and secret `CONTROL_ASSESSMENT_APP_PRIVATE_KEY`.
+4. Verify organization policies permit the App's branch writes.
+5. Set `CONTROL_ASSESSMENT_PUBLISH=true` and validate the complete flow on a pilot PR.
+
+Scope the App installation to this repository only. No workflow-write,
+administration, review-approval, or protection-bypass permission is needed.
+Store the private key only as a repository Actions secret, never in source,
+reports, or logs. Trial publication on a same-repository PR targeting `main`.
 
 After an eligible source PR workflow completes, trusted code reconstructs the
 assessment from the matching evidence and atomically commits both files to the
