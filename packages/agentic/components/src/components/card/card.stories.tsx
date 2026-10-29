@@ -171,7 +171,7 @@ export const NativeStructure: Story = {
     docs: {
       description: {
         story:
-          'The geometry check gives the native host enough room for its preview and addons, then restores its original bounds. Card section styles and strict reading-order checks remain unchanged.',
+          'The geometry check requests room for the native preview and addons, then restores the original window bounds. Failures report window, preview, and section rectangles before restoration; this diagnoses geometry without changing Card styles or strict reading-order checks.',
       },
     },
   },
@@ -179,14 +179,18 @@ export const NativeStructure: Story = {
     'CRD-002 renders structured sections in reading order': async ({ browser, expect }) => {
       expect(browser.capabilities.setWindowRect).toBe(true);
       const originalWindow = await browser.getWindowRect();
+      const requestedWindow = {
+        x: originalWindow.x,
+        y: originalWindow.y,
+        width: Math.max(originalWindow.width, 1024),
+        height: Math.max(originalWindow.height, 768),
+      };
+      let returnedWindow: typeof originalWindow | undefined;
+      let readBackWindow: typeof originalWindow | undefined;
       try {
         // The compact macOS host can allocate zero height to the preview above its addons panel.
-        await browser.setWindowRect(
-          originalWindow.x,
-          originalWindow.y,
-          Math.max(originalWindow.width, 1024),
-          Math.max(originalWindow.height, 768),
-        );
+        returnedWindow = await browser.setWindowRect(requestedWindow.x, requestedWindow.y, requestedWindow.width, requestedWindow.height);
+        readBackWindow = await browser.getWindowRect();
         const header = await browser.$('~card-spec-header');
         const content = await browser.$('~card-spec-content');
         const details = await browser.$('~card-spec-details');
@@ -203,6 +207,45 @@ export const NativeStructure: Story = {
         expect(contentRect.y).toBeGreaterThanOrEqual(headerRect.y + headerRect.height);
         expect(detailsRect.y).toBeGreaterThanOrEqual(contentRect.y + contentRect.height);
         expect(helpRect.y).toBeGreaterThanOrEqual(detailsRect.y + detailsRect.height);
+      } catch (cause) {
+        const observe = async (read: () => Promise<unknown>) => {
+          const observedAt = new Date().toISOString();
+          try {
+            return { status: 'observed', observedAt, rect: await read() };
+          } catch (error) {
+            return {
+              status: 'error',
+              observedAt,
+              message: (error instanceof Error ? error.message : String(error)).slice(0, 500),
+            };
+          }
+        };
+        const windowAtFailure = await observe(() => browser.getWindowRect());
+        const elements: Record<string, unknown> = {};
+        for (const [name, selector] of [
+          ['preview', '~agentic-storybook-story-root'],
+          ['header', '~card-spec-header'],
+          ['content', '~card-spec-content'],
+          ['details', '~card-spec-details'],
+          ['help', '~card-spec-help'],
+        ]) {
+          elements[name] = await observe(async () => {
+            const element = await browser.$(selector);
+            return browser.getElementRect(await element.elementId);
+          });
+        }
+        const diagnostics = {
+          phase: 'before-window-restoration',
+          originalWindow,
+          requestedWindow,
+          returnedWindow: returnedWindow === undefined ? { status: 'not-returned' } : returnedWindow,
+          readBackWindow: readBackWindow === undefined ? { status: 'not-read' } : readBackWindow,
+          windowAtFailure,
+          elements,
+        };
+        throw new Error(`${cause instanceof Error ? cause.message : String(cause)}\nCRD-002 geometry: ${JSON.stringify(diagnostics)}`, {
+          cause,
+        });
       } finally {
         await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
       }
