@@ -9,6 +9,8 @@ export function checkboxJestFixture(overrides: Record<string, unknown> = {}) {
     title: string;
     status: string;
     failureMessages: string[];
+    invocations?: number;
+    retryReasons?: string[];
   }[] = checkboxUnitCases.map(({ fullName }) => {
     const win32 = fullName.includes(' accessibility actions ');
     const words = fullName.split(' ');

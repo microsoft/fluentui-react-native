@@ -8,6 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   assessCheckbox,
+  checkboxNativeAssertionPath,
   formatAssessmentMarkdown,
   parseEvidenceContext,
   parseNativeReport,
@@ -457,9 +458,21 @@ describe('Checkbox advisory assessment', () => {
       copyFileSync(path.join(root, component, file), destination);
       writeFileSync(destination, readFileSync(destination, 'utf8').replace(/\r?\n/g, '\r\n'));
     }
+    const helper = path.join(directory, checkboxNativeAssertionPath);
+    mkdirSync(path.dirname(helper), { recursive: true });
+    writeFileSync(helper, readFileSync(path.join(root, checkboxNativeAssertionPath), 'utf8').replace(/\r?\n/g, '\r\n'));
     assert.equal(readCheckboxContract(directory).mappingCurrent, true);
     writeFileSync(path.join(directory, component, 'checkbox.stories.tsx'), '// changed test\n');
     assert.equal(readCheckboxContract(directory).mappingCurrent, false);
+  });
+
+  it('invalidates native mappings when only the assertion-bearing helper changes', () => {
+    const changed = readCheckboxContractFrom((file) => {
+      const content = readFileSync(path.join(root, file), 'utf8');
+      return file === checkboxNativeAssertionPath ? `${content}\n// changed native assertion\n` : content;
+    });
+    assert.notEqual(changed.digest, contract.digest);
+    assert.equal(changed.mappingCurrent, false);
   });
 
   it('produces deterministic decisions and escapes untrusted Markdown', () => {
@@ -643,6 +656,9 @@ describe('assess-control command', () => {
       mkdirSync(path.dirname(target), { recursive: true });
       copyFileSync(path.join(root, component, file), target);
     }
+    const helper = path.join(checkout, checkboxNativeAssertionPath);
+    mkdirSync(path.dirname(helper), { recursive: true });
+    copyFileSync(path.join(root, checkboxNativeAssertionPath), helper);
     writeFileSync(path.join(checkout, assessmentPackagePath), JSON.stringify({ version: '1.2.3' }));
     invokeGit('add', '.');
     invokeGit(

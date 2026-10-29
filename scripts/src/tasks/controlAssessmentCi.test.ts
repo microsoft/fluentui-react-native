@@ -24,7 +24,7 @@ import {
   parseReportReference,
 } from './controlAssessmentCi.ts';
 import type { CiBundle } from './controlAssessmentCi.ts';
-import { readCheckboxContract, reportDigest, win32StorybookTargetId } from './controlAssessment.ts';
+import { checkboxNativeAssertionPath, readCheckboxContract, reportDigest, win32StorybookTargetId } from './controlAssessment.ts';
 import { assessmentPackagePath, assessmentSpecPath, splitSpecAssessment } from './controlAssessmentSpec.ts';
 import { checkboxJestFixture, componentJestFixture, desktopEvidenceFixture } from './controlAssessmentFixtures.ts';
 import { readCheckboxUnitMappingFrom, unitMappingFiles } from './controlAssessmentUnit.ts';
@@ -87,6 +87,7 @@ function fixture() {
     }),
   );
   for (const file of unitMappingFiles) put(root, file, readFileSync(path.join(repositoryRoot, file), 'utf8'));
+  put(root, checkboxNativeAssertionPath, readFileSync(path.join(repositoryRoot, checkboxNativeAssertionPath), 'utf8'));
   for (const file of [
     'SPEC.md',
     'spec/source.json',

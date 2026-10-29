@@ -19,7 +19,15 @@ const mappingVersion = 'checkbox-jest-macos-mock-v1';
 const environment = 'React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch';
 type Outcome = 'passed' | 'failed' | 'skipped' | 'not-run' | 'unverified' | 'mismatched' | 'stale';
 type Status = 'missing' | 'unverified' | 'matched' | 'mismatched' | 'stale';
-type UnitCase = { fullName: string; status: 'passed' | 'failed' | 'skipped'; reason: string | null };
+type UnitCase = {
+  fullName: string;
+  status: 'passed' | 'failed' | 'skipped';
+  reason: string | null;
+  invocations: number | null;
+  retryReasons: string[];
+  retries: number;
+  flaky: boolean;
+};
 
 const cases: { fullName: string; requirements: string[]; scope: string }[] = [];
 function mapped(title: string, requirements: string[], scope: string, group = 'Checkbox'): void {
@@ -148,7 +156,7 @@ export function parseCheckboxJest(content: string) {
   const counts = { passed: 0, failed: 0, skipped: 0 };
   const suites = { passed: 0, failed: 0, skipped: 0 };
   for (const suite of parsed) {
-    if (suite.status === 'passed') suites.passed++;
+    if (suite.status === 'passed' || suite.status === 'focused') suites.passed++;
     else if (suite.status === 'failed') suites.failed++;
     else suites.skipped++;
     for (const status of ['passed', 'failed', 'skipped'] as const) counts[status] += suite.counts[status];
@@ -168,11 +176,17 @@ export function parseCheckboxJest(content: string) {
   if (runtimeErrors > suites.failed || (data.success && (counts.failed || runtimeErrors || suites.failed))) {
     throw new Error('Jest execution status contradicts its failures.');
   }
+  const retryCounts = (entries: UnitCase[]) => ({
+    retries: entries.reduce((sum, entry) => sum + entry.retries, 0),
+    flaky: entries.filter(({ flaky }) => flaky).length,
+  });
   return {
     entries: selected[0].entries,
     counts: selected[0].counts,
     packageCounts: counts,
     packageSuites: parsed.length,
+    retryCounts: retryCounts(selected[0].entries),
+    packageRetryCounts: retryCounts(parsed.flatMap(({ entries }) => entries)),
     startTime,
     endTime: Math.max(...parsed.map(({ endTime }) => endTime)),
     failed: !data.success || data.wasInterrupted || runtimeErrors > 0 || suites.failed > 0,
@@ -183,7 +197,7 @@ function parseJestSuite(value: unknown, startTime: number) {
   const suite = object(value, 'Jest suite');
   const name = text(suite.name, 'Jest suite filename').replace(/\\/g, '/');
   const suiteStatus = suite.status;
-  if (suiteStatus !== 'passed' && suiteStatus !== 'failed' && suiteStatus !== 'skipped') {
+  if (suiteStatus !== 'passed' && suiteStatus !== 'failed' && suiteStatus !== 'skipped' && suiteStatus !== 'focused') {
     throw new Error('Unsupported Jest suite status.');
   }
   if (!Array.isArray(suite.assertionResults)) throw new Error('Jest suite must contain assertionResults.');
@@ -203,10 +217,23 @@ function parseJestSuite(value: unknown, startTime: number) {
       throw new Error('Jest failureMessages must be a string array.');
     }
     if (entry.status === 'passed' && entry.failureMessages.length) throw new Error('Passed Jest assertion contains a failure.');
+    const invocations = entry.invocations === undefined ? null : count(entry.invocations, 'Jest assertion invocations');
+    if (
+      entry.retryReasons !== undefined &&
+      (!Array.isArray(entry.retryReasons) || entry.retryReasons.some((reason) => typeof reason !== 'string'))
+    ) {
+      throw new Error('Jest retryReasons must be a string array.');
+    }
+    const retryReasons: string[] = entry.retryReasons ?? [];
+    const retries = Math.max(invocations === null ? 0 : invocations - 1, retryReasons.length);
     return {
       fullName,
       status: entry.status === 'passed' || entry.status === 'failed' ? entry.status : 'skipped',
       reason: entry.failureMessages.length ? entry.failureMessages.join('\n').slice(0, 2000) : entry.status === 'todo' ? 'todo' : null,
+      invocations,
+      retryReasons,
+      retries,
+      flaky: entry.status === 'passed' && retries > 0,
     };
   });
   const counts = {
@@ -214,7 +241,11 @@ function parseJestSuite(value: unknown, startTime: number) {
     failed: entries.filter(({ status }) => status === 'failed').length,
     skipped: entries.filter(({ status }) => status === 'skipped').length,
   };
-  if ((suite.status === 'passed' && counts.failed) || (suite.status === 'skipped' && (counts.passed || counts.failed))) {
+  if (
+    (suiteStatus === 'passed' && counts.failed) ||
+    (suiteStatus === 'focused' && (counts.failed || !counts.skipped)) ||
+    (suiteStatus === 'skipped' && (counts.passed || counts.failed))
+  ) {
     throw new Error('Jest execution status contradicts its failures.');
   }
   const suiteStart = count(suite.startTime, 'Jest suite start time');
@@ -289,16 +320,27 @@ export function assessCheckboxUnits(options: {
     reasons.push('Unit assertions or mock configuration changed since review; update the reviewed mapping before accepting evidence.');
   const current = mappingCurrent === true && options.contractMappingCurrent;
   const runFailed = Boolean(report?.failed || input?.executionFailure || (context && context.exitCode !== 0));
+  const runRetried = Boolean(report?.packageRetryCounts.retries);
+  if (runRetried) reasons.push('Retried or flaky unit execution is not qualifying evidence in this pilot.');
   const checks = checkboxUnitCases.map((mapping) => {
     const recorded = report?.entries.find(({ fullName }) => fullName === mapping.fullName);
     let evidenceOutcome: Outcome = 'not-run';
     if (recorded) {
       if (!current || status === 'stale') evidenceOutcome = 'stale';
       else if (status === 'mismatched') evidenceOutcome = 'mismatched';
-      else if (status !== 'matched' || (recorded.status === 'passed' && runFailed)) evidenceOutcome = 'unverified';
+      else if (status !== 'matched' || (recorded.status === 'passed' && (runFailed || runRetried))) evidenceOutcome = 'unverified';
       else evidenceOutcome = recorded.status;
     }
-    return { ...mapping, recordedOutcome: recorded?.status ?? 'not-run', evidenceOutcome, reason: recorded?.reason ?? null };
+    return {
+      ...mapping,
+      recordedOutcome: recorded?.status ?? 'not-run',
+      evidenceOutcome,
+      reason: recorded?.reason ?? null,
+      invocations: recorded?.invocations ?? null,
+      retryReasons: recorded?.retryReasons ?? [],
+      retries: recorded?.retries ?? 0,
+      flaky: recorded?.flaky ?? false,
+    };
   });
   const outcome = checks.some(({ evidenceOutcome }) => evidenceOutcome === 'failed')
     ? 'failed'
@@ -310,9 +352,11 @@ export function assessCheckboxUnits(options: {
           ? status === 'missing'
             ? 'not-run'
             : status
-          : report!.counts.passed === 0
-            ? 'skipped'
-            : 'passed';
+          : runRetried
+            ? 'retried'
+            : report!.counts.passed === 0
+              ? 'skipped'
+              : 'passed';
   return {
     status,
     reasons,
@@ -323,11 +367,14 @@ export function assessCheckboxUnits(options: {
     mappingDigest: input?.mapping?.digest ?? null,
     reportSha256: hash,
     runFailed,
+    runRetried,
     executionFailure: input?.executionFailure ?? null,
     context: context ?? null,
     caseCounts: report?.counts ?? { passed: 0, failed: 0, skipped: 0 },
     packageCounts: report?.packageCounts ?? null,
     packageSuites: report?.packageSuites ?? null,
+    retryCounts: report?.retryCounts ?? { retries: 0, flaky: 0 },
+    packageRetryCounts: report?.packageRetryCounts ?? null,
     checks,
     unmappedCases: report?.entries.filter(({ fullName }) => !checkboxUnitCases.some((mapping) => mapping.fullName === fullName)) ?? [],
   };

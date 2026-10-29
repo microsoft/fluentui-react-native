@@ -7,6 +7,7 @@ import { assessCheckboxUnits } from './controlAssessmentUnit.ts';
 import type { UnitInput } from './controlAssessmentUnit.ts';
 
 const componentPath = 'packages/agentic/components/src/components/checkbox';
+export const checkboxNativeAssertionPath = 'packages/agentic/components/src/common/desktopFocus.wdio.ts';
 const contractFiles = [
   'SPEC.md',
   'spec/source.json',
@@ -16,8 +17,8 @@ const contractFiles = [
   'spec/usage.md',
   'checkbox.stories.tsx',
 ];
-// October 29 review: added stories leave the mapped default callback and contract unchanged.
-const reviewedDigest = '14cafb4e0b13894d7bece8e17942dcbcf21c8d0af81b0808e997d49ec5493bdd';
+// October 29 review: the mapped default callback delegates checked-state assertions to the fingerprinted native helper.
+const reviewedDigest = '8e05597cabf63743066b9dc9dd929d11e8c48fad89e3a7eabb853efbc6c58b6a';
 const storyId = 'components-checkbox--default';
 const testName = 'toggles native checked state in both directions';
 
@@ -173,6 +174,7 @@ export function readCheckboxContractFrom(read: (file: string) => string): Checkb
   );
   const hash = createHash('sha256');
   for (const [file, content] of files) hash.update(`${file}\0${content}\0`);
+  hash.update(`${checkboxNativeAssertionPath}\0${read(checkboxNativeAssertionPath).replace(/\r\n/g, '\n')}\0`);
   const digest = hash.digest('hex');
   const source = object(JSON.parse(files.get('spec/source.json')!), 'Checkbox source metadata');
   if (source.component !== 'checkbox' || source.schemaVersion !== 2 || !Array.isArray(source.requirements)) {
@@ -656,6 +658,7 @@ export function formatAssessmentMarkdown(report: ControlAssessment): string {
     `Unit execution provenance: ${report.unitEvidence.status}. Outcome: ${report.unitEvidence.outcome}. Mapping current: ${report.unitEvidence.mappingCurrent ?? 'not collected'}.`,
     `Unit environment: ${report.unitEvidence.environment}.`,
     `Recorded unit cases: ${report.unitEvidence.caseCounts.passed} passed, ${report.unitEvidence.caseCounts.failed} failed, ${report.unitEvidence.caseCounts.skipped} skipped.`,
+    `Recorded unit retries: ${report.unitEvidence.retryCounts.retries}; retry-success cases: ${report.unitEvidence.retryCounts.flaky}. Enclosing package retries: ${report.unitEvidence.packageRetryCounts?.retries ?? 0}.`,
     ...(report.unitEvidence.packageSuites !== null
       ? [
           `Unit input contained ${report.unitEvidence.packageSuites} package suites; only the Checkbox runtime suite is mapped. Type-suite Jest passes are not type-check evidence.`,
@@ -683,11 +686,11 @@ export function formatAssessmentMarkdown(report: ControlAssessment): string {
     '',
     ...report.unitEvidence.reasons.map((reason) => `- ${markdown(reason)}`),
     ...(report.unitEvidence.executionFailure ? [`- ${markdown(report.unitEvidence.executionFailure)}`] : []),
-    '| Test | Win32 requirement mapping | Recorded | Evidence outcome | Scope |',
-    '| --- | --- | --- | --- | --- |',
+    '| Test | Win32 requirement mapping | Recorded | Evidence outcome | Retries | Scope |',
+    '| --- | --- | --- | --- | --- | --- |',
     ...report.unitEvidence.checks.map(
       (check) =>
-        `| ${markdown(check.fullName)} | ${check.requirements.join(', ') || 'Not mapped to Win32'} | ${check.recordedOutcome} | ${check.evidenceOutcome} | ${markdown(check.scope)}${check.reason ? ` ${markdown(check.reason)}` : ''} |`,
+        `| ${markdown(check.fullName)} | ${check.requirements.join(', ') || 'Not mapped to Win32'} | ${check.recordedOutcome} | ${check.evidenceOutcome} | ${check.retries} | ${markdown(check.scope)}${check.reason ? ` ${markdown(check.reason)}` : ''}${check.retryReasons.length ? ` Prior retry failures: ${markdown(check.retryReasons.join('\n'))}` : ''} |`,
     ),
     ...report.unitEvidence.unmappedCases.map((check) => `- Unmapped recorded unit case: ${markdown(check.fullName)} (${check.status}).`),
     '',

@@ -6,7 +6,14 @@ import path from 'node:path';
 import { afterEach, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { assessCheckbox, formatAssessmentMarkdown, parseNativeReport, readCheckboxContract, reportDigest } from './controlAssessment.ts';
+import {
+  assessCheckbox,
+  checkboxNativeAssertionPath,
+  formatAssessmentMarkdown,
+  parseNativeReport,
+  readCheckboxContract,
+  reportDigest,
+} from './controlAssessment.ts';
 import type { AssessmentOptions } from './controlAssessment.ts';
 import { checkboxJestFixture, componentJestFixture } from './controlAssessmentFixtures.ts';
 import { specAssessmentFor } from './controlAssessmentSpec.ts';
@@ -234,6 +241,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     for (const status of ['pending', 'todo']) {
       const data = checkboxJestFixture();
       data.testResults[0].assertionResults[0].status = status;
+      data.testResults[0].status = status === 'pending' ? 'focused' : 'passed';
       data.numPassedTests--;
       if (status === 'todo') data.numTodoTests++;
       else data.numPendingTests++;
@@ -242,6 +250,62 @@ describe('Checkbox JavaScript unit evidence', () => {
       assert.equal(report.unitEvidence.checks[0].evidenceOutcome, 'skipped');
       assert.equal(report.requirements[0].outcome, 'insufficient-evidence');
     }
+  });
+
+  it('preserves partially skipped unrelated suites using the Jest focused status', () => {
+    const data = componentJestFixture();
+    const other = data.testResults[1];
+    other.status = 'focused';
+    other.assertionResults.push({
+      fullName: 'Other pending assertion',
+      ancestorTitles: ['Other'],
+      title: 'pending assertion',
+      status: 'pending',
+      failureMessages: [],
+    });
+    data.numTotalTests++;
+    data.numPendingTests++;
+    const report = assessCheckbox(options(data));
+    assert.deepEqual(report.unitEvidence.packageCounts, { passed: 43, failed: 0, skipped: 1 });
+    assert.equal(report.unitEvidence.caseCounts.skipped, 0);
+    assert.equal(report.unitEvidence.outcome, 'passed');
+  });
+
+  it('preserves retry-success history without qualifying its enclosing execution', () => {
+    for (const metadata of [
+      { invocations: 2, retryReasons: ['Prior synthetic <failure>'] },
+      { invocations: 2 },
+      { retryReasons: ['Prior synthetic <failure>'] },
+    ]) {
+      const data = checkboxJestFixture();
+      Object.assign(data.testResults[0].assertionResults[0], metadata);
+      const report = assessCheckbox(options(data));
+      const check = report.unitEvidence.checks[0];
+      assert.equal(check.recordedOutcome, 'passed');
+      assert.equal(check.evidenceOutcome, 'unverified');
+      assert.equal(check.invocations, metadata.invocations ?? null);
+      assert.deepEqual(check.retryReasons, metadata.retryReasons ?? []);
+      assert.equal(check.retries, 1);
+      assert.equal(check.flaky, true);
+      assert.deepEqual(report.unitEvidence.retryCounts, { retries: 1, flaky: 1 });
+      assert.equal(report.unitEvidence.runFailed, false);
+      assert.equal(report.unitEvidence.runRetried, true);
+      assert.equal(report.unitEvidence.outcome, 'retried');
+      assert.ok(report.requirements.every(({ outcome }) => outcome === 'insufficient-evidence'));
+      const markdown = formatAssessmentMarkdown(report);
+      assert.match(markdown, /Retried or flaky unit execution/);
+      if (metadata.retryReasons) assert.ok(markdown.includes('Prior synthetic \\<failure\\>'));
+    }
+  });
+
+  it('retains unrelated package retries without attributing them to Checkbox cases', () => {
+    const data = componentJestFixture();
+    data.testResults[1].assertionResults[0].invocations = 2;
+    const report = assessCheckbox(options(data));
+    assert.deepEqual(report.unitEvidence.retryCounts, { retries: 0, flaky: 0 });
+    assert.deepEqual(report.unitEvidence.packageRetryCounts, { retries: 1, flaky: 1 });
+    assert.equal(report.unitEvidence.outcome, 'retried');
+    assert.ok(report.unitEvidence.checks.every(({ retries, evidenceOutcome }) => retries === 0 && evidenceOutcome === 'unverified'));
   });
 
   it('does not call an all-skipped suite passed', () => {
@@ -264,6 +328,8 @@ describe('Checkbox JavaScript unit evidence', () => {
     const entry = data.testResults[0].assertionResults.find(({ fullName }) => fullName.includes('disables interaction'))!;
     entry.status = 'failed';
     entry.failureMessages = ['Synthetic assertion failure'];
+    entry.invocations = 2;
+    entry.retryReasons = ['Prior synthetic assertion failure'];
     data.success = false;
     data.testResults[0].status = 'failed';
     data.numPassedTestSuites = 0;
@@ -384,6 +450,18 @@ describe('Checkbox JavaScript unit evidence', () => {
         data.numFailedTestSuites = 1;
       },
       (data: ReturnType<typeof checkboxJestFixture>) => {
+        Object.assign(data.testResults[0].assertionResults[0], { invocations: -1 });
+      },
+      (data: ReturnType<typeof checkboxJestFixture>) => {
+        Object.assign(data.testResults[0].assertionResults[0], { retryReasons: 'invalid' });
+      },
+      (data: ReturnType<typeof checkboxJestFixture>) => {
+        Object.assign(data.testResults[0].assertionResults[0], { retryReasons: [null] });
+      },
+      (data: ReturnType<typeof checkboxJestFixture>) => {
+        data.testResults[0].status = 'focused';
+      },
+      (data: ReturnType<typeof checkboxJestFixture>) => {
         data.testResults[0].status = 'skipped';
         data.numPassedTestSuites = 0;
         data.numPendingTestSuites = 1;
@@ -437,6 +515,7 @@ describe('unit execution capture', () => {
       writeFileSync(path.join(directory, file), content);
     };
     for (const file of [...unitMappingFiles, 'packages/agentic/components/package.json']) put(file, read(file));
+    put(checkboxNativeAssertionPath, read(checkboxNativeAssertionPath));
     for (const file of [
       'SPEC.md',
       'spec/source.json',

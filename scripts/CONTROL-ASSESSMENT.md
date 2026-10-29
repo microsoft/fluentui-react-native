@@ -115,7 +115,13 @@ runtime suite. It rejects type-only substitution, duplicate suites or Checkbox
 assertion identities, inconsistent names, invalid statuses, contradictory counts,
 and oversized JSON. Repeated titles in unrelated parameterized suites are counted
 without treating them as Checkbox assertion identities; their failures remain visible.
-Skipped/todo/missing cases never become passes. Enclosing unit-command failure
+Jest's `focused` status for nonfailed partially skipped suites is accepted and
+counted as an executed suite while individual pending assertions remain skipped.
+Skipped/todo/missing cases never become passes. Optional assertion `invocations`
+and `retryReasons` retain observed retry counts, retry-success flags and prior
+failure messages. Repeated execution disqualifies the enclosing package's passes
+even without logged retry reasons; its unit outcome is `retried`, not `passed`.
+Enclosing unit-command failure
 prevents its recorded passes from qualifying; mapped failures remain visible.
 
 ## Assessment snapshot in the agentic SPEC
@@ -319,7 +325,10 @@ remains unsupported in this pilot.
 
 The reviewed mapping fingerprint covers, in order, `SPEC.md`, `spec/source.json`,
 `spec/interaction.md`, `spec/accessibility.md`, `spec/tokens.yaml`, `spec/usage.md`,
-and `checkbox.stories.tsx`. Hash input is each relative filename, a NUL, its
+and `checkbox.stories.tsx`, followed by the assertion-bearing helper
+`packages/agentic/components/src/common/desktopFocus.wdio.ts`.
+Hash input is each listed filename (component-relative for the first seven,
+repository-relative for the shared helper), a NUL, its
 UTF-8 content normalized to LF, and a NUL, after removing only the validated
 generated SPEC assessment block. Any other changed input invalidates the
 mapping. Review the contract and exact assertions before deliberately updating
