@@ -111,6 +111,45 @@ input enablement, repository-rule changes, or additional control rollout is
 part of submitting this draft. No historical local assessment is checked in as
 current CI evidence.
 
+## Follow-up: mapping maintenance within one orchestrating agent
+
+This is **future work, not implemented in the pilot**. Extend the existing
+design with one orchestrating agent and separate mapping-maintenance and
+deterministic assessment modules; a separately deployed mapping agent is not
+required.
+
+The intended sequence is:
+
+```text
+Control / contract / test / harness change
+  -> validate mappings
+  -> propose updates if needed -> owner review
+  -> assess actual results using approved mappings
+  -> publish the advisory report
+```
+
+The mapping module should identify affected requirements, inspect actual test
+assertions rather than infer coverage from names, and propose explicit mapping
+deltas with their evidence layer and platform scope. It must distinguish an
+existing test that needs mapping from a claim that needs additional assertions.
+Not every implementation change requires a mapping change.
+
+Unchanged, validated mappings can proceed directly. Changed mappings require
+owner review and validation before they become authoritative; fingerprints must
+not be refreshed merely to suppress a drift warning. The assessor must not
+invent a mapping and immediately certify its own interpretation. If approved
+mappings are unavailable, it should still report stale mappings and evidence
+gaps without claiming readiness.
+
+Existing test jobs can remain parallel; acceptance of their evidence waits for
+valid mappings. Mapping changes are ordinary source changes requiring normal
+CI, not generated report-only updates, and are outside the publisher's two-file
+allowlist.
+
+This adds a preparatory phase rather than replacing evidence collection,
+provenance checks, deterministic evaluation, or report publication. The pilot
+continues to use reviewed static mappings and detect drift without repairing it.
+
 ## Automatically update the SPEC and report in the same PR
 
 This is **optional maintainer-enabled publication**, separate from generating
