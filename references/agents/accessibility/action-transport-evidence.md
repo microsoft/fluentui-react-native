@@ -31,7 +31,7 @@ paths are relative to each platform package's root. Recheck these claims when a 
 - **C-A11Y-005:** The React Native macOS Fabric View does not project `accessibilityState.disabled` or `selected` to
   AXEnabled or AXSelected. Version: `react-native-macos` 0.81.9. Observed: 2026-09-17 (PR #4314). Limits: revisit
   when the renderer is upgraded.
-- **C-A11Y-006:** The Desktop Driver's `accessibilityActions` property lists the action names macOS publishes through
+- **C-A11Y-007:** The Desktop Driver's `accessibilityActions` property lists the action names macOS publishes through
   `AXUIElementCopyActionNames`. AppKit presents a custom action as `Name:<name>\nTarget:<address>\nSelector:<selector>`,
   and the driver exposes only `<name>`. On the Storybook test app, Fabric listed `["Toggle"]` for both Switch
   instances and `["Select"]` for both Tab instances, with no `AXPress`. Paper listed `[]` for the same declarations,

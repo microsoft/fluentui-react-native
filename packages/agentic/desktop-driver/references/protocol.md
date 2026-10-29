@@ -145,7 +145,7 @@ rather than `[]`. The property only lists actions; it does not invoke them.
 What an element publishes depends on the renderer: React Native macOS Fabric
 publishes every declared `accessibilityActions` entry by `name`, while Paper
 publishes only entries that declare a `label` and lists them by that label
-(`C-A11Y-006` in `accessibility.action-transport-evidence`).
+(`C-A11Y-007` in `accessibility.action-transport-evidence`).
 
 ## Errors
 

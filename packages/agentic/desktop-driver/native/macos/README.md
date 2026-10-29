@@ -244,7 +244,7 @@ lists an `NSAccessibilityCustomAction` as
 only `<name>` and no process address or selector leaves the helper. Standard
 actions pass through unchanged. React Native macOS Fabric publishes each declared
 action by `name` (`Toggle`, `Select`), whereas Paper publishes only actions that
-declare a `label` and names them by it (`C-A11Y-006` in
+declare a `label` and names them by it (`C-A11Y-007` in
 `accessibility.action-transport-evidence`). The command lists actions only and
 never performs one.
 
