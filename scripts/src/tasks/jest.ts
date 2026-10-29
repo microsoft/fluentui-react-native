@@ -8,6 +8,7 @@ import { hasJestConfig } from '../preinstall/tool-versions.ts';
 import { PackageContext, type PlatformTarget } from '../pkgContext.ts';
 import { PLATFORM_ENV_VAR, DEFULT_WIN_PLATFORM } from '../const.mts';
 import { getFileMetadata } from '../utils/fileData.ts';
+import { runJestWithUnitCapture } from './controlAssessmentUnitExecution.ts';
 import {
   buildJestOptionTable,
   matchTestFiles,
@@ -103,7 +104,9 @@ export class JestCommand extends Command {
       if (files && files.length > 0) {
         console.log(`Running jest for platform ${platform} with ${files.length} test files.`);
         const options = getPlatformOptions(platform, defaultPlatform);
-        const result = await runScript('jest', [...args, ...parsed.passthrough, ...files], options);
+        const result = await runJestWithUnitCapture(context.root, platform, [...args, ...parsed.passthrough, ...files], (jestArgs) =>
+          runScript('jest', jestArgs, options),
+        );
         if (result !== 0) {
           return result;
         }

@@ -30,7 +30,7 @@
     "bundlesize": "bundlesize --debug",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint",
-    "test": "node --test src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts"
+    "test": "node --test \"$@\" src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts src/tasks/controlAssessment.test.ts src/tasks/controlAssessmentCi.test.ts src/tasks/controlAssessmentUnit.test.ts"
   },
   "dependencies": {
     "@babel/core": "catalog:",

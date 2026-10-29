@@ -1,0 +1,75 @@
+name: Control Assessment PR Summary
+
+on:
+  workflow_run:
+    workflows: [PR]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: control-assessment-${{ github.event.workflow_run.head_repository.id }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish trusted Checkbox assessment
+    if: ${{ github.event.workflow_run.event == 'pull_request' && vars.CONTROL_ASSESSMENT_PUBLISH == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout trusted publisher
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+
+      - name: Find source assessment
+        id: artifact
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts find-artifact
+
+      - name: Download source assessment data
+        if: steps.artifact.outputs.found == 'true'
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ steps.artifact.outputs.artifact-name }}
+          path: ${{ runner.temp }}/checkbox-source-evidence
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Validate publication without write credentials
+        id: prepare
+        if: steps.artifact.outputs.found == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BUNDLE_PATH: ${{ runner.temp }}/checkbox-source-evidence/bundle.json
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts prepare-publication
+
+      - name: Create narrowly scoped publisher token
+        id: app-token
+        if: steps.prepare.outputs.eligible == 'true'
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3
+        with:
+          client-id: ${{ vars.CONTROL_ASSESSMENT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CONTROL_ASSESSMENT_APP_PRIVATE_KEY }}
+          permission-contents: write
+
+      - name: Commit the generated summary and SPEC assessment fields to the PR branch
+        if: steps.prepare.outputs.eligible == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ASSESSMENT_WRITE_TOKEN: ${{ steps.app-token.outputs.token }}
+          BUNDLE_PATH: ${{ runner.temp }}/checkbox-source-evidence/bundle.json
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts publish

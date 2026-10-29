@@ -1,0 +1,249 @@
+# Control readiness assessor: Checkbox pilot
+
+## Purpose and scope
+
+Make the evidence behind a control's readiness review visible and repeatable.
+Start with the **agentic Checkbox on Win32/Paper**, using tests FURN already
+runs. This is an advisory assessor, not a new test framework, release gate,
+or automatic maturity promotion.
+
+The longer-term goal is an agent that evaluates affected controls against their
+reviewed contracts, reports gaps, and supports human decisions about lifecycle
+stages such as Backlog, Experimental, Beta, and Production. The pilot deliberately
+does not assign those stages: the evidence requirements and promotion policy
+still need agreement.
+
+## Design
+
+```text
+Reviewed Checkbox SPEC + requirement metadata + reviewed assertion mappings
+                              |
+Existing JS PR Jest results --+-- Existing Win32 Storybook native results
+                              |
+                  Validate execution provenance
+                              |
+                Assess each mapped requirement
+                              |
+              JSON + Markdown + proposed SPEC snapshot
+                              |
+       Optional trusted publisher -> same PR -> human review
+```
+
+1. **Use the contract as the inventory.** Read CBX-001 through CBX-006 from
+   `packages/agentic/components/src/components/checkbox/SPEC.md` and its
+   `spec/source.json`. A filename listed as evidence is not an executed test.
+2. **Use reviewed mappings, not guessed coverage.** Map exact test identities to
+   the particular assertions they establish. Fingerprints detect changes to the
+   contract, test sources, and relevant harness inputs. Drift requires review;
+   the pilot does not automatically rewrite its mappings.
+3. **Reuse existing execution.** Capture JSON and context from the component
+   package's existing Jest invocation in **JS PR**, without changing its test
+   selection or running Checkbox again. Independently collect the canonical
+   `desktop-test` report and Storybook companion from **Win32 Storybook PR**.
+   The subsequent **Assess Checkbox evidence** job combines results; it runs no
+   tests and does not serialize the JS and native workloads.
+4. **Bind evidence to what actually ran.** Validate source/build identity,
+   report hashes, target, execution intervals, dirty state, and mapping
+   fingerprints. Preserve failures, skips, missing execution, retries, flaky
+   results, and stale or mismatched evidence rather than turning them into a
+   pass. Other controls' results are not Checkbox coverage.
+5. **Publish an advisory explanation.** Emit machine-readable JSON and readable
+   Markdown with requirement-level observations, gaps, and provenance. Upload
+   attempt-specific artifacts and write a job summary. An opt-in publisher can
+   later commit the generated Markdown and managed SPEC assessment fields
+   atomically to the same PR; it does not change the human-authored contract.
+
+Implementation details, commands, schemas, and setup:
+[scripts/CONTROL-ASSESSMENT.md](scripts/CONTROL-ASSESSMENT.md).
+
+## What the initial mappings establish
+
+| Requirement                  | Appropriate evidence                                                                           | Initial pilot scope                                                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| CBX-001: defaults and API    | Runtime unit assertions and compiler/type assertions                                           | Selected existing unit assertions; compiler-result ingestion is not implemented.                     |
+| CBX-002: state and callbacks | Unit assertions for ownership/transitions; native execution for integration claims             | Selected existing units plus partial binary-toggle native coverage when physical input is available. |
+| CBX-003: anatomy and text    | Unit assertions for structure/props; native layout for rendered geometry                       | Selected existing units; no blanket claim about rendered wrapping.                                   |
+| CBX-004: accessibility       | Unit assertions for resolved semantics; native assertions for actual platform exposure/actions | Selected existing units plus the existing native callback's checkbox-role assertion.                 |
+| CBX-005: styling and tokens  | Unit assertions for resolved styles; visual evidence for visual claims                         | Selected existing units; no visual qualification.                                                    |
+| CBX-006: Win32 focus         | Native keyboard/focus and geometry evidence                                                    | No mapped executed evidence in the initial slice.                                                    |
+
+A requirement does **not** inherently need both unit and native tests. Choose
+the evidence layer that proves the claim. Jest's macOS mock and simulated
+`Platform.OS` values do not prove native Win32 behavior. The normal compiler
+already includes Checkbox type assertions, but the pilot does not yet ingest
+that build result.
+
+The initial mapping intentionally remains bounded to 42 previously reviewed
+runtime cases and the existing default-story callback,
+`toggles native checked state in both directions`. Subsequent Checkbox tests
+already on `main` remain existing tests; unmapped results are not silently
+credited as requirement coverage. Expanding those mappings is a follow-up.
+This PR adds tooling tests, not new Checkbox behavior tests.
+
+## Pilot rollout and acceptance
+
+1. **Review this draft.** Agree on the architecture, partial mappings, report
+   vocabulary, and CI impact before enabling any automated branch writes.
+2. **Validate collection in CI.** Confirm the ordinary Jest invocation executes
+   once, reports retain package-wide failures, and the assessor combines only
+   matching source/run/attempt evidence. Exercise missing and skipped evidence
+   as well as successful execution.
+3. **Review the Checkbox report.** Confirm each credited assertion is supported
+   and missing claims remain explicit. Hosted Win32 Storybook CI disables
+   `keyboard`, `physicalClick`, and `wheel`; the mapped physical-toggle test
+   therefore remains skipped there. A green CI job is not physical-input
+   qualification or full Checkbox readiness.
+4. **Enable optional same-PR publication separately.** After trusted tooling is
+   on the default branch, a maintainer may configure the narrowly scoped GitHub
+   App and opt-in variable described in the usage guide. The publisher executes
+   trusted default-branch code, treats PR artifacts as data, and permits only
+   the generated Checkbox summary and managed SPEC block. Verified report-only
+   follow-ups may reuse unchanged source validation; ordinary changes still run
+   normal checks. Fork PRs do not receive automated branch writes.
+5. **Expand only after the pilot is useful.** Review mappings for the remaining
+   existing Checkbox tests, ingest existing compiler results, define readiness
+   policy with owners, then introduce another control/platform through explicit
+   adapters rather than generalizing from Checkbox automatically.
+
+Acceptance means honest, reproducible evidence reporting with preserved source
+validation, not a Production rating. No hosted publisher activation, physical
+input enablement, repository-rule changes, or additional control rollout is
+part of submitting this draft. No historical local assessment is checked in as
+current CI evidence.
+
+## Follow-up: mapping maintenance within one orchestrating agent
+
+This is **future work, not implemented in the pilot**. Extend the existing
+design with one orchestrating agent and separate mapping-maintenance and
+deterministic assessment modules; a separately deployed mapping agent is not
+required.
+
+The intended sequence is:
+
+```text
+Control / contract / test / harness change
+  -> select affected controls and supported targets
+  -> validate mappings
+  -> propose updates if needed -> owner review
+  -> assess actual results using approved mappings
+  -> publish the advisory report
+```
+
+The mapping module should identify affected requirements, inspect actual test
+assertions rather than infer coverage from names, and propose explicit mapping
+deltas with their evidence layer and platform scope. It must distinguish an
+existing test that needs mapping from a claim that needs additional assertions.
+Not every implementation change requires a mapping change.
+
+Unchanged, validated mappings can proceed directly. Changed mappings require
+owner review and validation before they become authoritative; fingerprints must
+not be refreshed merely to suppress a drift warning. The assessor must not
+invent a mapping and immediately certify its own interpretation. If approved
+mappings are unavailable, it should still report stale mappings and evidence
+gaps without claiming readiness.
+
+Existing test jobs can remain parallel; acceptance of their evidence waits for
+valid mappings. Mapping changes are ordinary source changes requiring normal
+CI, not generated report-only updates, and are outside the publisher's two-file
+allowlist.
+
+This adds a preparatory phase rather than replacing evidence collection,
+provenance checks, deterministic evaluation, or report publication. The pilot
+continues to use reviewed static mappings and detect drift without repairing it.
+
+## Follow-up: affected-control selection, Fabric and multi-control CI
+
+These are **future work, not implemented in the pilot**. The current
+**Assess Checkbox evidence** job assesses Checkbox on ordinary PR runs even
+when Checkbox is unchanged. Verified generated-report-only updates remain a
+separate exception to avoid publication loops.
+
+### Assess only affected controls
+
+- [ ] Select affected controls and supported platform/renderer targets from
+      the PR changes and explicit dependency metadata, not just component filenames.
+- [ ] Include changes to each control's implementation, contract, stories,
+      tests and mappings. Shared dependencies, test harnesses, assessment tooling
+      and relevant workflow changes must select their affected dependents,
+      potentially all supported controls.
+- [ ] Skip assessment for reliably unrelated changes. If impact cannot be
+      determined, assess a conservative superset and explain the uncertainty
+      rather than silently skipping potentially affected controls.
+- [ ] Record the selected controls/targets and selection reasons. Missing
+      current execution evidence stays missing; an unaffected control's older
+      report remains a dated snapshot, not validation of the new revision.
+
+This selection scopes the assessor, not necessarily every existing CI test
+job. It must not silently narrow existing test selection or required checks.
+
+### Add Windows/Fabric assessment
+
+- [ ] Reuse results from the existing **Windows Storybook PR** Fabric lane;
+      add evidence collection and provenance validation rather than another test
+      runner. Fabric tests already run in CI, but the pilot does not assess them.
+- [ ] Review requirement-to-assertion mappings for that target. Reuse shared
+      unit evidence only for claims it establishes; identify native integration
+      gaps without assuming Paper mappings prove Fabric behavior.
+- [ ] Report each control's Office Win32/Paper and Windows/Fabric outcomes
+      separately, bound to their actual host, renderer and execution. Passing on
+      one target must not qualify another.
+- [ ] Preserve the Fabric lane's disabled `keyboard`, `physicalClick` and
+      `wheel` capabilities as explicit coverage gaps. Evidence ingestion does not
+      enable or qualify physical input.
+
+### Use one generic assessment job
+
+- [ ] Replace the pilot-specific job with a generic **Assess affected controls**
+      job. One orchestrator selects controls/targets, validates mappings and
+      dispatches deterministic assessment through explicit adapters.
+- [ ] Consume the existing parallel CI jobs' reports without rerunning tests.
+      Produce separate JSON/Markdown reports per control and target, plus a
+      combined summary that preserves each result's failures, skips and gaps.
+- [ ] Initially batch assessment in one job to avoid per-control runner startup
+      and artifact-download overhead. Do not hand-author a CI job for every control.
+- [ ] If measured assessment cost later warrants parallelism, use a reusable
+      job with a dynamically selected, concurrency-limited matrix. This is a
+      deferred scaling option, not a requirement for the initial expansion.
+
+## Automatically update the SPEC and report in the same PR
+
+This is **optional maintainer-enabled publication**, separate from generating
+CI artifacts and a job summary. The setup enables later eligible CI runs to
+publish; configuring it does not itself write an assessment.
+
+A maintainer must:
+
+1. Merge the reviewed tooling/workflows into `main`, initially with publishing disabled.
+2. Install a dedicated GitHub App on FURN with **Contents: write**.
+3. Configure variable `CONTROL_ASSESSMENT_APP_CLIENT_ID` and secret `CONTROL_ASSESSMENT_APP_PRIVATE_KEY`.
+4. Verify organization policies permit the App's branch writes.
+5. Set `CONTROL_ASSESSMENT_PUBLISH=true` and validate the complete flow on a pilot PR.
+
+Scope the App installation to this repository only. No workflow-write,
+administration, review-approval, or protection-bypass permission is needed.
+Store the private key only as a repository Actions secret, never in source,
+reports, or logs. Trial publication on a same-repository PR targeting `main`.
+
+After an eligible source PR workflow completes, trusted code reconstructs the
+assessment from the matching evidence and atomically commits both files to the
+same PR branch:
+
+- The managed `assessment-*` **YAML front-matter block** in Checkbox's `SPEC.md`.
+  It records the source/package identity, tested commit when supported by
+  matched clean native evidence, target, outcome, health, provenance,
+  generation time, and report link. The stage remains `not-determined`.
+- The linked `checkbox/assessment/ASSESSMENT.md` generated report.
+
+The publisher does not edit the human-authored requirements, contract approval,
+or lifecycle status. The report commit is not itself labelled as the tested
+source. Fork PRs retain artifacts but receive no automated branch write.
+The existing required **PR** check waits for verified publication when this
+opt-in applies; failed source validation cannot become green through a report
+commit. A misconfigured publisher therefore blocks eligible PRs rather than
+silently claiming success.
+
+For rollback, disable `CONTROL_ASSESSMENT_PUBLISH` and rerun the PR workflow if
+needed to restore the ordinary artifact-only path. No physical-input enablement
+or branch-protection bypass is required. The exact field schema, trust checks,
+and setup details remain in
+[the implementation guide](scripts/CONTROL-ASSESSMENT.md#maintainer-activation-and-first-hosted-trial).

@@ -10,6 +10,7 @@
     "**/*.generated.*",
     "**/lib-commonjs/**",
     "**/dist/**",
+    "packages/agentic/components/src/components/checkbox/assessment/ASSESSMENT.md",
     "packages/agentic/native-core/windows/NativeCore/codegen/**",
     "**/CHANGELOG.*",
     "**/CODE_OF_CONDUCT.md",
