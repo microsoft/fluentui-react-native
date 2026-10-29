@@ -1,5 +1,12 @@
 # @fluentui-react-native/desktop-test
 
+## 0.2.2
+
+### Patch Changes
+
+- 3b8430a: Stop redacting short environment values such as `true` or `0` from command output. Variables named like a token, secret, password, nonce, or authorization header are only registered as secrets when their value is at least 8 characters long, so machine-readable output like `"delegated":true` is no longer rewritten to `[REDACTED]`.
+- c9998e3: Launch Windows command shims with escaped arguments without deprecated shell-backed spawn calls.
+
 ## 0.2.1
 
 ### Patch Changes

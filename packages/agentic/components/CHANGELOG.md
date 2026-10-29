@@ -1,5 +1,16 @@
 # @fluentui-react-native/components
 
+## 0.7.1
+
+### Patch Changes
+
+- 68cfe41: Project MenuButton's plain content label onto its native trigger name while preserving explicit accessibility naming props.
+- b13da50: Expose Button's plain content as its native name and declare Toggle when selected is supplied, preserving explicit naming, caller actions and externally owned checked state.
+- cdea138: Project standalone ListboxItem selection through React Native's supported checked accessibility state and platform toggle action while preserving the button role. Keep externally owned selection and disabled semantics authoritative over caller ARIA aliases without changing Dropdown option selection.
+- 6e1c063: Expose native MenuItem indicator state and actions while preserving caller-owned selection and original accessibility events.
+- d732230: Declare Radio's native Select action and project caller-owned selection to UI Automation without synthesizing presses or changing the selected value.
+- @fluentui-react-native/native-core@0.2.0
+
 ## 0.7.0
 
 ### Minor Changes
