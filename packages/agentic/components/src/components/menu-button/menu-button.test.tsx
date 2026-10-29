@@ -58,6 +58,40 @@ describe('MenuButton', () => {
     expect(screen.queryByTestId('menu')).toBeNull();
   });
 
+  it.each([
+    { content: 'New', label: 'New' },
+    { content: 0, label: '0' },
+    { content: { children: 'Create' }, label: 'Create' },
+    { content: { children: 0 }, label: '0' },
+  ])('projects the plain content label $label onto the native trigger and menu', async ({ content, label }) => {
+    await render(<Scene content={content} />);
+    expect(screen.getByRole('button').props.accessibilityLabel).toBe(label);
+    await fireEvent.press(screen.getByTestId('trigger'));
+    expect(screen.getByTestId('menu').props.accessibilityLabel).toBe(label);
+  });
+
+  it.each([
+    { props: { accessibilityLabel: 'Create document' }, label: 'Create document' },
+    { props: { accessibilityLabel: '' }, label: '' },
+    { props: { 'aria-label': 'Create document' }, label: 'Create document' },
+    { props: { accessibilityLabelledBy: 'external-label' }, label: undefined },
+    { props: { 'aria-labelledby': 'external-label' }, label: undefined },
+    { props: { accessibilityLabel: 'Create document', accessibilityLabelledBy: 'external-label' }, label: 'Create document' },
+  ] satisfies { props: Partial<MenuButtonProps>; label: string | undefined }[])(
+    'preserves explicit native naming instead of using the visible content: $props',
+    async ({ props, label }) => {
+      await render(<Scene {...props} />);
+      expect(screen.getByTestId('trigger').props.accessibilityLabel).toBe(label);
+    },
+  );
+
+  it('updates the native name when the caller changes the plain content', async () => {
+    const { rerender } = await render(<Scene />);
+    expect(screen.getByRole('button').props.accessibilityLabel).toBe('New');
+    await rerender(<Scene content="Insert" />);
+    expect(screen.getByRole('button').props.accessibilityLabel).toBe('Insert');
+  });
+
   it('opens on Down to the first row and on Up to the last row, below and start-aligned', async () => {
     const onOpenChange = jest.fn();
     await render(<Scene onOpenChange={onOpenChange} />);

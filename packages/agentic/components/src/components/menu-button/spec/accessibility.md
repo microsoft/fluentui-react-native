@@ -9,6 +9,13 @@ development when neither label nor icon is present. It exposes
 `accessibilityState.expanded` from the menu's actual presence and the default
 hint `Opens a menu`. It never exposes checked or selected state.
 
+Project a plain string or numeric label onto the trigger's native
+`accessibilityLabel`, including plain `children` supplied through content-slot
+props. Do not rely on the native host to aggregate the label's descendant text.
+Explicit naming props (`accessibilityLabel`, `aria-label`,
+`accessibilityLabelledBy`, or `aria-labelledby`) suppress this fallback and
+retain their native precedence. Rich content needs an explicit naming prop.
+
 React Native has no typed has-popup or controls property on Windows or macOS;
 the hint describes the behavior but is not a programmatic relationship
 (`menu-button-haspopup`). The chevron is decorative and inaccessible.

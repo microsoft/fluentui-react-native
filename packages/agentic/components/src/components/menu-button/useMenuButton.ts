@@ -72,12 +72,20 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
   }));
 
   const disabled = buttonProps.disabled === true;
+  const content = buttonProps.content;
+  const contentChildren = content && typeof content === 'object' && 'children' in content ? content.children : content;
+  const contentLabel = typeof contentChildren === 'string' || typeof contentChildren === 'number' ? String(contentChildren) : undefined;
+  const hasExplicitName =
+    buttonProps.accessibilityLabel !== undefined ||
+    buttonProps['aria-label'] !== undefined ||
+    buttonProps.accessibilityLabelledBy !== undefined ||
+    buttonProps['aria-labelledby'] !== undefined;
   const controller = useMenuController({
     componentName: 'MenuButton',
     children,
     defaultOpen,
     disabledFocusable,
-    label: typeof buttonProps.content === 'string' ? buttonProps.content : undefined,
+    label: contentLabel,
     onOpenChange,
     open,
     placement: { side: 'bottom', align: 'start' },
@@ -109,6 +117,7 @@ export function useMenuButton_unstable(props: MenuButtonProps): MenuButtonState 
     withTriggerExpandActions<ButtonProps>(
       {
         ...buttonProps,
+        ...(!hasExplicitName && { accessibilityLabel: contentLabel }),
         accessibilityHint: accessibilityHint ?? defaultHint,
         accessibilityState: { ...accessibilityState, expanded: controller.presented },
         keyDownEvents: [...(keyDownEvents ?? []), ...triggerKeys],
