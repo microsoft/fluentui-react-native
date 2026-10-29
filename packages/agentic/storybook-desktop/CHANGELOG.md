@@ -1,5 +1,13 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [3b8430a]
+- Updated dependencies [c9998e3]
+  - @fluentui-react-native/desktop-test@0.2.2
+
 ## 0.4.1
 
 ### Patch Changes

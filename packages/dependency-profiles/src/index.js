@@ -8,7 +8,7 @@ module.exports = {
     },
     "@fluentui-react-native/components": {
       "name": "@fluentui-react-native/components",
-      "version": "0.7.0"
+      "version": "0.7.1"
     },
     "@fluentui-react-native/design": {
       "name": "@fluentui-react-native/design",
@@ -20,7 +20,7 @@ module.exports = {
     },
     "@fluentui-react-native/desktop-test": {
       "name": "@fluentui-react-native/desktop-test",
-      "version": "0.2.1"
+      "version": "0.2.2"
     },
     "@fluentui-react-native/native-core": {
       "name": "@fluentui-react-native/native-core",
@@ -32,7 +32,7 @@ module.exports = {
     },
     "@fluentui-react-native/storybook-desktop": {
       "name": "@fluentui-react-native/storybook-desktop",
-      "version": "0.4.1"
+      "version": "0.4.2"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
