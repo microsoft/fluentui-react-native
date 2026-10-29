@@ -120,6 +120,18 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: {
+    'DRP-011 exposes a named, empty, collapsed native combobox before input': async ({ browser, expect, platform }) => {
+      const trigger = await browser.$('~dropdown-trigger');
+      expect(await trigger.getProperty('role')).toBe('combobox');
+      expect(await trigger.getProperty('name')).toBe('Fruit');
+      expect(await trigger.getProperty('expanded')).toBe(false);
+      const renderer = 'furn:renderer' in browser.capabilities ? browser.capabilities['furn:renderer'] : undefined;
+      if (platform === 'macos') {
+        expect(['fabric', 'paper']).toContain(renderer);
+      }
+      // macOS Fabric converts empty accessibilityValue.text to nil; Paper and UIA retain the empty string.
+      expect(await trigger.getProperty('value')).toBe(platform === 'macos' && renderer === 'fabric' ? null : '');
+    },
     'opens from the keyboard on the first option and commits with Enter': async (context) => {
       const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
@@ -338,7 +350,12 @@ function GalleryScene() {
           </Dropdown>
         )),
       )}
-      <Dropdown accessibilityLabel="Selected" defaultSelectedOptions={['banana']} style={styles.field}>
+      <Dropdown
+        accessibilityLabel="Selected"
+        defaultSelectedOptions={['banana']}
+        trigger={{ testID: 'dropdown-selected-trigger' }}
+        style={styles.field}
+      >
         {options}
       </Dropdown>
       <Dropdown accessibilityLabel="Error" error style={styles.field}>
@@ -353,9 +370,23 @@ function GalleryScene() {
 
 export const Appearance: Story = {
   render: () => <GalleryScene />,
+  wdio: {
+    'DRP-011 exposes a nonempty selected native value without input': async ({ browser, expect }) => {
+      const trigger = await browser.$('~dropdown-selected-trigger');
+      expect(await trigger.getProperty('role')).toBe('combobox');
+      expect(await trigger.getProperty('name')).toBe('Selected');
+      expect(await trigger.getProperty('expanded')).toBe(false);
+      expect(await trigger.getProperty('value')).toBe('Banana');
+    },
+  },
   parameters: {
     controls: { disable: true },
-    docs: { description: { story: "Input's outline and underline chrome at each size, with selected, error, and disabled states." } },
+    docs: {
+      description: {
+        story:
+          "Input's outline and underline chrome at each size, with selected, error, and disabled states. Native selected values remain the option label on every renderer, including macOS Fabric, which omits empty AXValue.",
+      },
+    },
   },
 };
 
