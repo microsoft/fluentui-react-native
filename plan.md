@@ -7,7 +7,7 @@ Start with the **agentic Checkbox on Win32/Paper**, using tests FURN already
 runs. This is an advisory assessor, not a new test framework, release gate,
 or automatic maturity promotion.
 
-The longer-term goal is an agent that evaluates changed controls against their
+The longer-term goal is an agent that evaluates affected controls against their
 reviewed contracts, reports gaps, and supports human decisions about lifecycle
 stages such as Backlog, Experimental, Beta, and Production. The pilot deliberately
 does not assign those stages: the evidence requirements and promotion policy
@@ -122,6 +122,7 @@ The intended sequence is:
 
 ```text
 Control / contract / test / harness change
+  -> select affected controls and supported targets
   -> validate mappings
   -> propose updates if needed -> owner review
   -> assess actual results using approved mappings
@@ -149,6 +150,60 @@ allowlist.
 This adds a preparatory phase rather than replacing evidence collection,
 provenance checks, deterministic evaluation, or report publication. The pilot
 continues to use reviewed static mappings and detect drift without repairing it.
+
+## Follow-up: affected-control selection, Fabric and multi-control CI
+
+These are **future work, not implemented in the pilot**. The current
+**Assess Checkbox evidence** job assesses Checkbox on ordinary PR runs even
+when Checkbox is unchanged. Verified generated-report-only updates remain a
+separate exception to avoid publication loops.
+
+### Assess only affected controls
+
+- [ ] Select affected controls and supported platform/renderer targets from
+      the PR changes and explicit dependency metadata, not just component filenames.
+- [ ] Include changes to each control's implementation, contract, stories,
+      tests and mappings. Shared dependencies, test harnesses, assessment tooling
+      and relevant workflow changes must select their affected dependents,
+      potentially all supported controls.
+- [ ] Skip assessment for reliably unrelated changes. If impact cannot be
+      determined, assess a conservative superset and explain the uncertainty
+      rather than silently skipping potentially affected controls.
+- [ ] Record the selected controls/targets and selection reasons. Missing
+      current execution evidence stays missing; an unaffected control's older
+      report remains a dated snapshot, not validation of the new revision.
+
+This selection scopes the assessor, not necessarily every existing CI test
+job. It must not silently narrow existing test selection or required checks.
+
+### Add Windows/Fabric assessment
+
+- [ ] Reuse results from the existing **Windows Storybook PR** Fabric lane;
+      add evidence collection and provenance validation rather than another test
+      runner. Fabric tests already run in CI, but the pilot does not assess them.
+- [ ] Review requirement-to-assertion mappings for that target. Reuse shared
+      unit evidence only for claims it establishes; identify native integration
+      gaps without assuming Paper mappings prove Fabric behavior.
+- [ ] Report each control's Office Win32/Paper and Windows/Fabric outcomes
+      separately, bound to their actual host, renderer and execution. Passing on
+      one target must not qualify another.
+- [ ] Preserve the Fabric lane's disabled `keyboard`, `physicalClick` and
+      `wheel` capabilities as explicit coverage gaps. Evidence ingestion does not
+      enable or qualify physical input.
+
+### Use one generic assessment job
+
+- [ ] Replace the pilot-specific job with a generic **Assess affected controls**
+      job. One orchestrator selects controls/targets, validates mappings and
+      dispatches deterministic assessment through explicit adapters.
+- [ ] Consume the existing parallel CI jobs' reports without rerunning tests.
+      Produce separate JSON/Markdown reports per control and target, plus a
+      combined summary that preserves each result's failures, skips and gaps.
+- [ ] Initially batch assessment in one job to avoid per-control runner startup
+      and artifact-download overhead. Do not hand-author a CI job for every control.
+- [ ] If measured assessment cost later warrants parallelism, use a reusable
+      job with a dynamically selected, concurrency-limited matrix. This is a
+      deferred scaling option, not a requirement for the initial expansion.
 
 ## Automatically update the SPEC and report in the same PR
 
