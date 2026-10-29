@@ -10,6 +10,7 @@
   "include": [
     "src/components/avatar/avatar.stories.tsx",
     "src/components/button/button.stories.tsx",
+    "src/components/card/card.stories.tsx",
     "src/components/checkbox/checkbox.stories.tsx",
     "src/components/dropdown/dropdown.stories.tsx",
     "src/components/input/input.stories.tsx",
