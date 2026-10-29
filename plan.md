@@ -110,3 +110,51 @@ validation, not a Production rating. No hosted publisher activation, physical
 input enablement, repository-rule changes, or additional control rollout is
 part of submitting this draft. No historical local assessment is checked in as
 current CI evidence.
+
+## Automatically update the SPEC and report in the same PR
+
+This is **optional maintainer-enabled publication**, separate from generating
+CI artifacts and a job summary. The setup enables later eligible CI runs to
+publish; configuring it does not itself write an assessment.
+
+1. **Merge the reviewed pilot into `main` with publication disabled.** The
+   trusted validator and `workflow_run` publisher must be on the default branch
+   before the complete publication flow can operate.
+2. **Install a dedicated GitHub App on this repository only.** Grant
+   **Contents: write**; no workflow-write, administration, review-approval, or
+   protection-bypass permission is needed.
+3. **Configure the App credentials in repository Actions settings.** Add
+   repository variable `CONTROL_ASSESSMENT_APP_CLIENT_ID` and repository secret
+   `CONTROL_ASSESSMENT_APP_PRIVATE_KEY`. Never put the private key in source,
+   reports, or logs.
+4. **Verify organization policies and permitted branch writes.** A maintainer
+   must confirm the Actions and App policies allow this workflow without
+   weakening repository protections.
+5. **Enable and trial publication.** Set repository variable
+   `CONTROL_ASSESSMENT_PUBLISH=true`, then run CI on a same-repository pilot PR
+   targeting `main`. Verify the generated commit and the subsequent trusted
+   report-only validation before considering the flow enabled successfully.
+
+After an eligible source PR workflow completes, trusted code reconstructs the
+assessment from the matching evidence and atomically commits both files to the
+same PR branch:
+
+- The managed `assessment-*` **YAML front-matter block** in Checkbox's `SPEC.md`.
+  It records the source/package identity, tested commit when supported by
+  matched clean native evidence, target, outcome, health, provenance,
+  generation time, and report link. The stage remains `not-determined`.
+- The linked `checkbox/assessment/ASSESSMENT.md` generated report.
+
+The publisher does not edit the human-authored requirements, contract approval,
+or lifecycle status. The report commit is not itself labelled as the tested
+source. Fork PRs retain artifacts but receive no automated branch write.
+The existing required **PR** check waits for verified publication when this
+opt-in applies; failed source validation cannot become green through a report
+commit. A misconfigured publisher therefore blocks eligible PRs rather than
+silently claiming success.
+
+For rollback, disable `CONTROL_ASSESSMENT_PUBLISH` and rerun the PR workflow if
+needed to restore the ordinary artifact-only path. No physical-input enablement
+or branch-protection bypass is required. The exact field schema, trust checks,
+and setup details remain in
+[the implementation guide](scripts/CONTROL-ASSESSMENT.md#maintainer-activation-and-first-hosted-trial).
