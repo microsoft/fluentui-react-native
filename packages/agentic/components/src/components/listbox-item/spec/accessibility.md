@@ -1,10 +1,27 @@
 # ListboxItem accessibility
 
-A `listItem` root exposes the React Native `button` role. It merges caller
-accessibility state with disabled and pressed state; `pressed` mirrors the
-externally supplied selected value. The root is accessible and focusable by
+A standalone `listItem` root exposes the React Native `button` role. It merges caller
+accessibility state with owned disabled and checked state; `checked` mirrors the
+externally supplied selected value, including false and disabled selection.
+This is the supported React Native representation of a persistently toggled
+button, not the transient pointer-pressed state. Caller `aria-checked`,
+`aria-disabled`, or `role` values cannot override those owned semantics.
+Unrelated caller state such as `busy` is preserved. The root is accessible and focusable by
 default unless disabled. Its visible content provides the accessible name
 unless the caller supplies React Native naming props.
+
+The standalone root declares `toggle` on Windows Fabric and `Toggle` on
+Win32/macOS through the shared action resolver. This preserves the button role
+and exposes toggle state through Windows UI Automation, retaining caller labels
+and custom actions. On macOS, Toggle is a custom action, not a default AXPress
+activation route. With the pinned renderer and desktop provider, the retained
+AXButton role has no supported native `checked` read. Native role and
+enabled/disabled assertions remain shared; Windows checked projection is
+qualified separately. The unsupported macOS observation is reported explicitly,
+not defaulted to false or replaced by rendered text.
+The caller receives the original accessibility action through
+`onAccessibilityAction` and owns any resulting selection change, just as it owns
+selection changes after `onPress`. The component never synthesizes a press event.
 
 A `sectionHeader` is a nonfocusable accessible View with the `header` role.
 It does not expose an interactive option state. Icons, avatar, chevron,
@@ -18,7 +35,9 @@ rules, and any focus restoration policy.
 A bound option inside a Dropdown list (LBI-006) takes those from its list
 instead. It has the `listitem` role with `selected` and `disabled` state, its
 one-based position, and the option count, which Windows exposes as a ListItem
-with the SelectionItem pattern. It declares the select, add-to-selection, and
+with the SelectionItem pattern. Its owned role, selected and disabled state
+take precedence over caller `role`, `aria-selected`, and `aria-disabled`.
+It declares the select, add-to-selection, and
 remove-from-selection actions, lowercase on Windows Fabric and title case
 elsewhere. The list applies each action, or refuses it for a disabled option,
 and then forwards the original event to the caller's `onAccessibilityAction`

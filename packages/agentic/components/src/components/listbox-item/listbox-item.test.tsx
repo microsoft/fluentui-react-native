@@ -20,6 +20,59 @@ function renderListboxItem(props: React.ComponentProps<typeof ListboxItem>): Pro
 }
 
 describe('ListboxItem', () => {
+  it.each([
+    { selected: false, disabled: false },
+    { selected: true, disabled: false },
+    { selected: false, disabled: true },
+    { selected: true, disabled: true },
+  ])('LBI-003 LBI-005 projects owner-selected=$selected with disabled=$disabled', async ({ selected, disabled }) => {
+    const onPress = jest.fn();
+    const component = await renderListboxItem({ content: 'Choice', selected, disabled, onPress });
+    const root = component.getByRole('button');
+
+    expect(root.props.accessibilityState).toMatchObject({ checked: selected, disabled });
+    expect(root.props.focusable).toBe(!disabled);
+    await fireEvent.press(root);
+    expect(onPress).toHaveBeenCalledTimes(disabled ? 0 : 1);
+    expect(root.props.accessibilityState.checked).toBe(selected);
+
+    await component.rerender(<ListboxItem content="Choice" selected={!selected} disabled={disabled} onPress={onPress} />);
+    expect(component.getByRole('button').props.accessibilityState).toMatchObject({ checked: !selected, disabled });
+    expect(onPress).toHaveBeenCalledTimes(disabled ? 0 : 1);
+  });
+
+  it('LBI-005 owns checked, disabled and role over caller state and ARIA aliases without losing busy', async () => {
+    const component = await renderListboxItem({
+      content: 'Choice',
+      selected: false,
+      accessibilityState: { busy: true, checked: true, disabled: true },
+      'aria-checked': true,
+      'aria-disabled': true,
+      role: 'checkbox',
+    });
+
+    expect(component.getByRole('button').props.accessibilityState).toMatchObject({ busy: true, checked: false, disabled: false });
+  });
+
+  it('LBI-005 declares the native toggle action and forwards the original owner event without synthesizing a press', async () => {
+    const onAccessibilityAction = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderListboxItem({
+      content: 'Choice',
+      selected: true,
+      accessibilityActions: [{ name: 'Toggle', label: 'Update selection' }, { name: 'inspect' }],
+      onAccessibilityAction,
+      onPress,
+    });
+    const root = component.getByRole('button');
+    expect(root.props.accessibilityActions).toEqual([{ name: 'Toggle', label: 'Update selection' }, { name: 'inspect' }]);
+    const event = { nativeEvent: { actionName: 'Toggle' } };
+    await fireEvent(root, 'accessibilityAction', event);
+    expect(onAccessibilityAction.mock.calls).toEqual([[event]]);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(root.props.accessibilityState.checked).toBe(true);
+  });
+
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
     const component = await renderListboxItem({ content: 'Inbox', multiselect: true, onPress, selected: false });
@@ -40,6 +93,7 @@ describe('ListboxItem', () => {
     const component = await renderListboxItem({ content: 'Choice' });
 
     expect(component.getByRole('button').props.accessibilityState).toMatchObject({ disabled: false });
+    expect(component.getByRole('button').props.accessibilityActions).toContainEqual({ name: 'Toggle' });
     expect(component.getByText('Choice')).toBeOnTheScreen();
     expect(component.getByText('Secondary')).toBeOnTheScreen();
     expect(component.getByText('○')).toBeOnTheScreen();
@@ -85,6 +139,8 @@ describe('ListboxItem', () => {
     expect(component.getByRole('header')).toBeOnTheScreen();
     expect(component.queryByText('Group')).toBeNull();
     expect(component.queryByRole('button')).toBeNull();
+    expect(component.getByRole('header').props.focusable).toBe(false);
+    expect(component.getByRole('header').props.accessibilityState?.checked).toBeUndefined();
   });
 
   it('renders hover, press, and focus feedback for list items', async () => {
@@ -151,10 +207,22 @@ describe('ListboxItem bound to a list (LBI-006)', () => {
 
   it('exposes a list item with list-owned selection, position, and selection actions', async () => {
     const { binding, registrations } = createBinding();
-    const component = await renderBound(binding, { value: 'b', content: 'Bravo', selected: false, checkmark: false, testID: 'b' });
+    const component = await renderBound(binding, {
+      value: 'b',
+      content: 'Bravo',
+      selected: false,
+      checkmark: false,
+      testID: 'b',
+      accessibilityState: { busy: true, selected: false, disabled: true },
+      'aria-selected': false,
+      'aria-disabled': true,
+      role: 'button',
+    });
     const option = component.getByTestId('b');
     expect(option.props.accessibilityRole).toBe('listitem');
-    expect(option.props.accessibilityState).toMatchObject({ selected: true, disabled: false });
+    expect(component.getByRole('listitem')).toBe(option);
+    expect(option.props.accessibilityState).toMatchObject({ busy: true, selected: true, disabled: false });
+    expect(option.props.accessibilityState.checked).toBeUndefined();
     expect(option.props.accessibilityState.pressed).toBeUndefined();
     expect(option.props.accessibilityLabel).toBe('Bravo');
     expect(option.props.accessibilityPosInSet).toBe(2);
