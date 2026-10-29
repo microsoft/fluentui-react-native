@@ -166,13 +166,28 @@ export const ExternallyDrivenStatus: Story = {
 export const HiddenLabel: Story = {
   render: () => (
     <StoryGroup label="Label fallback">
-      <Checkbox accessibilityLabel="Enable notifications" label="Hidden label" showLabel={false} />
+      <Checkbox accessibilityLabel="Enable notifications" label="Hidden label" showLabel={false} testID="checkbox-explicit-name" />
+      <Checkbox label="Save drafts" showLabel={false} testID="checkbox-fallback-name" />
     </StoryGroup>
   ),
+  wdio: {
+    'CBX-004 preserves native explicit and fallback names without visible labels': async ({ browser, expect }) => {
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+      const explicit = await browser.$('~checkbox-explicit-name');
+      const fallback = await browser.$('~checkbox-fallback-name');
+      expect(await explicit.getTagName()).toBe('checkbox');
+      expect(await fallback.getTagName()).toBe('checkbox');
+      expect(await explicit.getProperty('name')).toBe('Enable notifications');
+      expect(await fallback.getProperty('name')).toBe('Save drafts');
+      await expectNativeState(browser, 'checkbox-explicit-name', 'checked', false);
+      await expectNativeState(browser, 'checkbox-fallback-name', 'checked', false);
+    },
+  },
   parameters: {
     docs: {
       description: {
-        story: 'When the visible label is hidden, the component still requires an accessible name.',
+        story:
+          'When the visible label is hidden, the component still requires an accessible name. Native name and checked state are checked separately; macOS exposes checkbox state through AXValue.',
       },
     },
   },
@@ -199,9 +214,27 @@ export const ConstrainedText: Story = {
     <StoryGroup label="Constrained label">
       <Checkbox
         label="Long checkbox label that wraps inside constrained layouts without truncating"
-        secondaryText="Secondary text can wrap too."
+        style={styles.constrained}
+        testID="checkbox-narrow-label"
+      />
+      <Checkbox
+        label="Long checkbox label that wraps inside constrained layouts without truncating"
+        style={styles.unconstrained}
+        testID="checkbox-wide-label"
+      />
+      <Checkbox
+        label="Option"
+        secondaryText="Long supporting text that wraps inside constrained layouts without truncating"
         showSecondaryText
         style={styles.constrained}
+        testID="checkbox-narrow-secondary"
+      />
+      <Checkbox
+        label="Option"
+        secondaryText="Long supporting text that wraps inside constrained layouts without truncating"
+        showSecondaryText
+        style={styles.unconstrained}
+        testID="checkbox-wide-secondary"
       />
     </StoryGroup>
   ),
@@ -210,6 +243,24 @@ export const ConstrainedText: Story = {
       description: {
         story: 'Checkbox text wraps when constrained by surrounding layout.',
       },
+    },
+  },
+  wdio: {
+    'CBX-003 wraps the label into a taller constrained row': async ({ browser, expect }) => {
+      const narrow = await browser.$('~checkbox-narrow-label');
+      const wide = await browser.$('~checkbox-wide-label');
+      const narrowRect = await browser.getElementRect(await narrow.elementId);
+      const wideRect = await browser.getElementRect(await wide.elementId);
+      expect(narrowRect.width).toBeLessThan(wideRect.width);
+      expect(narrowRect.height).toBeGreaterThan(wideRect.height);
+    },
+    'CBX-003 wraps secondary text into a taller constrained row': async ({ browser, expect }) => {
+      const narrow = await browser.$('~checkbox-narrow-secondary');
+      const wide = await browser.$('~checkbox-wide-secondary');
+      const narrowRect = await browser.getElementRect(await narrow.elementId);
+      const wideRect = await browser.getElementRect(await wide.elementId);
+      expect(narrowRect.width).toBeLessThan(wideRect.width);
+      expect(narrowRect.height).toBeGreaterThan(wideRect.height);
     },
   },
 };
@@ -234,5 +285,8 @@ const styles = StyleSheet.create({
   story: {
     alignItems: 'flex-start',
     gap: 16,
+  },
+  unconstrained: {
+    width: 480,
   },
 });
