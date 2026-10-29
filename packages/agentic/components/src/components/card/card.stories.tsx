@@ -171,7 +171,7 @@ export const NativeStructure: Story = {
     docs: {
       description: {
         story:
-          'The geometry check requests room for the native preview and addons, then restores the original window bounds. Failures report window, preview, and section rectangles before restoration; this diagnoses geometry without changing Card styles or strict reading-order checks.',
+          'The geometry check temporarily requests the primary-screen top-left and room for the native preview and addons, allowing native screen constraints before restoring the original window bounds. Failures report window, preview, and section rectangles before restoration; Card styles and strict reading-order checks remain unchanged.',
       },
     },
   },
@@ -180,15 +180,15 @@ export const NativeStructure: Story = {
       expect(browser.capabilities.setWindowRect).toBe(true);
       const originalWindow = await browser.getWindowRect();
       const requestedWindow = {
-        x: originalWindow.x,
-        y: originalWindow.y,
+        x: 0,
+        y: 0,
         width: Math.max(originalWindow.width, 1024),
         height: Math.max(originalWindow.height, 768),
       };
       let returnedWindow: typeof originalWindow | undefined;
       let readBackWindow: typeof originalWindow | undefined;
       try {
-        // The compact macOS host can allocate zero height to the preview above its addons panel.
+        // The native setter positions before resizing; the old offset left too little room above the addons panel.
         returnedWindow = await browser.setWindowRect(requestedWindow.x, requestedWindow.y, requestedWindow.width, requestedWindow.height);
         readBackWindow = await browser.getWindowRect();
         const header = await browser.$('~card-spec-header');
