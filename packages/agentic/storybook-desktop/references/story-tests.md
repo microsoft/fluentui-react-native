@@ -58,7 +58,10 @@ Metro resolves their dependencies.
 Use native selectors and WebDriver operations; the app has no DOM or JavaScript
 execution surface. Read native properties through `getProperty()` rather than
 ordinary object matchers. Feature-check native actions and explicitly skip
-unsupported cases; never turn unsupported state into false.
+unsupported cases; never turn unsupported state into false. For example,
+`getProperty('accessibilityActions')` lists the action names an element
+publishes (such as `Toggle` or `Select`) when
+`browser.capabilities['furn:features']?.accessibilityActions` is true.
 
 Tests in one story run in declaration order, each in its own Node process and
 native session. The preview is navigated/remounted before each case. A

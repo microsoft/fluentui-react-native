@@ -122,6 +122,9 @@ final class Driver {
       let elementID = try requireString(params, "elementId")
       let window = try windowForElement(elementID)
       return CommandResult(result: try accessibility.snapshot(elementID: elementID, window: window, token: token).json())
+    case "accessibilityActions":
+      let actions = try accessibility.accessibilityActions(try requireString(params, "elementId"), token: token)
+      return CommandResult(result: ["actions": actions])
     case "activeElement":
       let window = try applications.requireWindow(try requireString(params, "windowId"))
       let snapshot = try accessibility.activeElement(window: window, token: token)
@@ -231,6 +234,7 @@ final class Driver {
     return [
       "endpoint": optionalString(params, "endpoint") ?? "macos",
       "features": [
+        "accessibilityActions": trusted,
         "accessibilityClick": trusted,
         "elementScreenshot": screenshot,
         "focus": trusted,

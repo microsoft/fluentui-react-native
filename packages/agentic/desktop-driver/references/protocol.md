@@ -134,6 +134,19 @@ and Win32 read UI Automation's `HelpText` without provider defaults, preserving
 an explicitly empty string. Missing or unsupported help text, including on the
 current macOS provider, returns `unsupported operation` instead of an empty value.
 
+The `accessibilityActions` property (also readable as an attribute) lists the
+action names the native accessibility tree publishes for an element, in provider
+order, when `furn:features` advertises `accessibilityActions`. The macOS provider
+reads `AXUIElementCopyActionNames` and lists an authored custom action, such as
+`Toggle` or `Select`, by name without any provider handle, alongside any standard
+actions the element publishes. An element that publishes none returns `[]`; hosts
+without the feature, including Windows and Win32, return `unsupported operation`
+rather than `[]`. The property only lists actions; it does not invoke them.
+What an element publishes depends on the renderer: React Native macOS Fabric
+publishes every declared `accessibilityActions` entry by `name`, while Paper
+publishes only entries that declare a `label` and lists them by that label
+(`C-A11Y-006` in `accessibility.action-transport-evidence`).
+
 ## Errors
 
 | Condition                                         | WebDriver error             |

@@ -12,6 +12,8 @@ export type Rect = {
 export type SupportedValue<T> = { supported: true; value: T } | { supported: false; reason: string };
 
 export type DesktopHostFeatures = {
+  /** The host lists an element's accessibility actions, including authored custom actions such as `Select` and `Toggle`. */
+  accessibilityActions?: boolean;
   accessibilityClick: boolean;
   elementScreenshot: boolean;
   focus: boolean;
@@ -182,6 +184,12 @@ export interface DesktopHost {
   source(windowId: string, signal?: AbortSignal): Promise<string>;
   tree(windowId: string, signal?: AbortSignal): Promise<NativeElementSnapshot[]>;
   windowEvents?(lease: ApplicationLease, signal?: AbortSignal): Promise<DesktopWindowEventLog>;
+  /**
+   * Lists the names of the actions the native accessibility tree publishes for an element, in provider order. Custom
+   * action names are returned as authored and never include provider handles. Present only when the host advertises
+   * `features.accessibilityActions`.
+   */
+  accessibilityActions?(elementId: string, signal?: AbortSignal): Promise<string[]>;
 
   subscribe?(listener: (event: DesktopHostEvent) => void): () => void;
   dispose(signal?: AbortSignal): Promise<void>;
