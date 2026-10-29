@@ -37,8 +37,9 @@ its tested commit; local unverified snapshots leave that field null. The
 repository-only `@fluentui-react-native/scripts/CONTROL-ASSESSMENT.md` guide
 defines generation, fingerprinting, and trusted two-file publication. These
 assessment fields do not apply to legacy CheckboxV1.
-Generated files in `src/components/checkbox/assessment/` are source-repository
-snapshots, not package contents; they are excluded from the npm inventory.
+Generated Checkbox assessment reports are source-repository snapshots, not
+package contents; they are excluded from the npm inventory. Their directory
+is created only when an assessment is explicitly published.
 
 ## Schema version 2
 
