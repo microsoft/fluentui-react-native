@@ -10,3 +10,5 @@ export { outputCodegenFile } from './codegen/genFile.ts';
 export { makeComment, GeneratedFile, serialize } from './codegen/file.ts';
 export type { Chunk, Output, Comment } from './codegen/file.ts';
 export { Ramp } from './codegen/content.ts';
+export { CodeExpression, expression, ValuePool } from './codegen/valuePool.ts';
+export type { CodeValue, DeclarationOptions, ExpressionOptions, ValuePath, ValuePoolOptions } from './codegen/valuePool.ts';

@@ -47,6 +47,8 @@ nodeModule.registerHooks({
 
 const require = nodeModule.createRequire(import.meta.url);
 const { createMappingProjections, loadMappingInputs } = require('../token-mappings/check-mappings.cjs');
+// The scripts package is TypeScript source, so it loads only after the Node version check.
+const { CodeExpression, expression, GeneratedFile, makeComment, ValuePool } = await import('@fluentui-react-native/scripts');
 const { getInteractionColor } = await import(pathToFileURL(path.join(packageRoot, 'src/color-lib/interaction.ts')).href);
 const { getInteractionCompositing, getInteractionDirection, isInteractiveColorToken } = await import(
   pathToFileURL(path.join(packageRoot, 'src/flex/colors/interactiveTokens.ts')).href
@@ -310,13 +312,6 @@ function parseShadow(value, declarations, source) {
   });
 }
 
-/** An identifier emitted as code rather than as a literal. */
-class Raw {
-  constructor(code) {
-    this.code = code;
-  }
-}
-
 function readFontWeights() {
   const prefix = 'export const ';
   const weights = new Map();
@@ -364,7 +359,7 @@ function convertValue(group, token, value, context) {
         throw new Error(`${source} changed from ${sourceWeight} to ${value}; review its native weight role.`);
       }
       return {
-        value: new Raw(identifier),
+        value: expression(identifier),
         representation: `${identifier} ('${nativeFontWeights.get(identifier)}')`,
         adaptation: `The x3 variable weight ${value} uses the native static ${roleName.toLowerCase()} weight.`,
       };
@@ -375,7 +370,7 @@ function convertValue(group, token, value, context) {
       if (!family) {
         throw new Error(`${source} has an unsupported generic family in "${value}".`);
       }
-      return { value: new Raw(family[0]), representation: family[0], adaptation: family[1] };
+      return { value: expression(family[0]), representation: family[0], adaptation: family[1] };
     }
     case 'fontSize':
       return {
@@ -549,63 +544,12 @@ function resolveTone(tone, inputs, mappingEntries, ledger) {
 
 // Emission.
 
-const identifierPattern = /^[A-Za-z_$][\w$]*$/;
-
-function quote(value) {
-  return `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
-}
-
-function propertyKey(key) {
-  return identifierPattern.test(key) ? key : quote(key);
-}
-
-function isComposite(value) {
-  return typeof value === 'object' && value !== null && !(value instanceof Raw);
-}
-
-function inline(value) {
-  if (value instanceof Raw) {
-    return value.code;
-  }
-  if (typeof value === 'string') {
-    return quote(value);
-  }
-  if (typeof value === 'number') {
-    return String(value);
-  }
-  if (Array.isArray(value)) {
-    return `[${value.map(inline).join(', ')}]`;
-  }
-  const entries = Object.entries(value);
-  return entries.length === 0 ? '{}' : `{ ${entries.map(([key, item]) => `${propertyKey(key)}: ${inline(item)}`).join(', ')} }`;
-}
-
-/**
- * Format a value starting at `column`. The outermost `forcedDepth` composite
- * levels are always multiline; deeper values are inline when they fit.
- */
-function format(value, depth, column, forcedDepth = 0) {
-  const single = inline(value);
-  if (!isComposite(value) || (forcedDepth <= 0 && column + single.length + 1 <= printWidth)) {
-    return single;
-  }
-  const indent = '  '.repeat(depth + 1);
-  const lines = Array.isArray(value)
-    ? value.map((item) => `${indent}${format(item, depth + 1, indent.length, forcedDepth - 1)},`)
-    : Object.entries(value).map(([key, item]) => {
-        const prefix = `${indent}${propertyKey(key)}: `;
-        return `${prefix}${format(item, depth + 1, prefix.length, forcedDepth - 1)},`;
-      });
-  const [open, close] = Array.isArray(value) ? ['[', ']'] : ['{', '}'];
-  return `${open}\n${lines.join('\n')}\n${'  '.repeat(depth)}${close}`;
-}
-
-function collectRawIdentifiers(value, identifiers) {
-  if (value instanceof Raw) {
+function collectIdentifiers(value, identifiers) {
+  if (value instanceof CodeExpression) {
     identifiers.add(value.code);
-  } else if (isComposite(value)) {
+  } else if (typeof value === 'object' && value !== null) {
     for (const item of Object.values(value)) {
-      collectRawIdentifiers(item, identifiers);
+      collectIdentifiers(item, identifiers);
     }
   }
 }
@@ -615,51 +559,47 @@ function formatImport(names, from) {
   return single.length <= printWidth ? [single] : ['import {', ...names.map((name) => `  ${name},`), `} from '${from}';`];
 }
 
-function emitDefaults(pin, files, toneTokens) {
-  const groupNames = Object.keys(toneTokens[0].tokens).filter((group) => group !== 'color');
-  const shared = {};
-  for (const group of groupNames) {
-    if (toneTokens.every(({ tokens }) => sameValue(tokens[group], toneTokens[0].tokens[group]))) {
-      shared[group] = toneTokens[0].tokens[group];
-    }
+function nameValue(value) {
+  if (typeof value === 'object' && value !== null && 'blur' in value) {
+    return 'shadowLayer';
   }
+  return undefined;
+}
+
+/**
+ * Emit the tone defaults through a value pool, which shares the entries the tones hold in common through ancestor
+ * objects and hoists repeated values into constants, keeping the minified module small.
+ */
+function emitDefaults(pin, files, toneTokens) {
   const identifiers = new Set();
-  collectRawIdentifiers(
+  collectIdentifiers(
     toneTokens.map(({ tokens }) => tokens),
     identifiers,
   );
-
-  const lines = [
-    `// Generated by ${generatorPath}. Do not edit; run \`yarn gen:flex-defaults\`.`,
-    `// Source: ${pin.repository}@${pin.commit}`,
-    ...tones.map((tone) => `//   ${tone.name}: ${files[tone.name].join(', ')}`),
-    `// Generic sources: ${mappingPath}`,
-    `// Coverage: ${path.relative(packageRoot, outputPaths.ledger).replaceAll('\\', '/')}`,
-    '',
+  const file = new GeneratedFile(outputPaths.defaults);
+  file.header = makeComment(
+    [
+      `Generated by ${generatorPath}. Do not edit; run \`yarn gen:flex-defaults\`.`,
+      `Source: ${pin.repository}@${pin.commit}`,
+      ...tones.map((tone) => `  ${tone.name}: ${files[tone.name].join(', ')}`),
+      `Generic sources: ${mappingPath}`,
+      `Coverage: ${path.relative(packageRoot, outputPaths.ledger).replaceAll('\\', '/')}`,
+    ],
+    'line',
+  );
+  const pool = new ValuePool({ name: nameValue }).reserve('CompleteFlexTokenInput');
+  for (const { tone, tokens } of toneTokens) {
+    pool.declare(tone.exportName, tokens, {
+      type: 'CompleteFlexTokenInput',
+      comment: `The x3 ${tone.name}-tone defaults. Omitted interaction states are computed from rest.`,
+    });
+  }
+  const imports = [
     ...formatImport([...identifiers].sort(), '../../tokens/global.generated'),
     "import type { CompleteFlexTokenInput } from '../tokens.types';",
-    '',
-    `const sharedTokens = ${format(shared, 0, 0, 2)} satisfies Partial<Omit<CompleteFlexTokenInput, 'color'>>;`,
   ];
-
-  for (const { tone, tokens } of toneTokens) {
-    const own = { color: tokens.color };
-    for (const group of groupNames) {
-      if (!Object.hasOwn(shared, group)) {
-        own[group] = tokens[group];
-      }
-    }
-    const [open, ...body] = format(own, 0, 0, 2).split('\n');
-    body[body.length - 1] += ';';
-    lines.push(
-      '',
-      `/** The x3 ${tone.name}-tone defaults. Omitted interaction states are computed from rest. */`,
-      `export const ${tone.exportName}: CompleteFlexTokenInput = ${open}`,
-      '  ...sharedTokens,',
-      ...body,
-    );
-  }
-  return `${lines.join('\n')}\n`;
+  file.add(`\n${imports.join('\n')}\n\n`, pool);
+  return file.render();
 }
 
 function createLedger(supportedTypePaths, unsupportedTypePaths) {

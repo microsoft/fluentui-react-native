@@ -30,7 +30,7 @@
     "bundlesize": "bundlesize --debug",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint",
-    "test": "node --test src/tasks/agentInstructions.test.ts src/utils/jestSelection.test.ts"
+    "test": "node --test src/tasks/agentInstructions.test.ts src/utils/jestSelection.test.ts src/codegen/file.test.ts src/codegen/valuePool.test.ts"
   },
   "dependencies": {
     "@babel/core": "catalog:",
