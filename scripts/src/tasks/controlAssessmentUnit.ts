@@ -142,6 +142,9 @@ export function parseCheckboxJest(content: string) {
   if (new Set(parsed.map(({ name }) => name)).size !== parsed.length) throw new Error('Duplicate Jest suite identity.');
   const selected = parsed.filter(({ name }) => name === checkboxUnitTestPath || name.endsWith(`/${checkboxUnitTestPath}`));
   if (selected.length !== 1) throw new Error('Unit report must contain exactly one Checkbox runtime suite; type tests cannot substitute.');
+  if (new Set(selected[0].entries.map(({ fullName }) => fullName)).size !== selected[0].entries.length) {
+    throw new Error('Duplicate Jest assertion identity.');
+  }
   const counts = { passed: 0, failed: 0, skipped: 0 };
   const suites = { passed: 0, failed: 0, skipped: 0 };
   for (const suite of parsed) {
@@ -206,7 +209,6 @@ function parseJestSuite(value: unknown, startTime: number) {
       reason: entry.failureMessages.length ? entry.failureMessages.join('\n').slice(0, 2000) : entry.status === 'todo' ? 'todo' : null,
     };
   });
-  if (new Set(entries.map(({ fullName }) => fullName)).size !== entries.length) throw new Error('Duplicate Jest assertion identity.');
   const counts = {
     passed: entries.filter(({ status }) => status === 'passed').length,
     failed: entries.filter(({ status }) => status === 'failed').length,

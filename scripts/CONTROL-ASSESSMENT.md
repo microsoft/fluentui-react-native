@@ -111,8 +111,10 @@ configuration, Babel configuration, platform constant, and package test script/m
 profile, plus the Jest/capture harness source. Changed assertions or mock inputs invalidate the reviewed mapping even
 when test names are unchanged. CI additionally binds the complete tracked tree.
 The parser accepts a complete package report but requires exactly one Checkbox
-runtime suite. It rejects type-only substitution, duplicate suites/inconsistent
-case identities, invalid statuses, contradictory counts, and oversized JSON.
+runtime suite. It rejects type-only substitution, duplicate suites or Checkbox
+assertion identities, inconsistent names, invalid statuses, contradictory counts,
+and oversized JSON. Repeated titles in unrelated parameterized suites are counted
+without treating them as Checkbox assertion identities; their failures remain visible.
 Skipped/todo/missing cases never become passes. Enclosing unit-command failure
 prevents its recorded passes from qualifying; mapped failures remain visible.
 

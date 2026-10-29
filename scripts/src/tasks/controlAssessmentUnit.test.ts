@@ -74,6 +74,33 @@ describe('Checkbox JavaScript unit evidence', () => {
     assert.equal(specAssessmentFor(report, '0.7.0').testedCommit, null);
   });
 
+  it('counts duplicate titles in unrelated parameterized suites without using them as Checkbox identities', () => {
+    for (const failed of [false, true]) {
+      const data = componentJestFixture();
+      const other = data.testResults[1];
+      other.name = 'packages/agentic/components/src/components/menu-button/menu-button.test.tsx';
+      other.assertionResults.push({ ...other.assertionResults[0], failureMessages: [] });
+      data.numTotalTests++;
+      data.numPassedTests++;
+      if (failed) {
+        other.assertionResults[1].status = 'failed';
+        other.assertionResults[1].failureMessages.push('Synthetic unrelated duplicate-title failure');
+        other.status = 'failed';
+        data.success = false;
+        data.numPassedTests--;
+        data.numFailedTests++;
+        data.numPassedTestSuites--;
+        data.numFailedTestSuites++;
+      }
+      const report = assessCheckbox(options(data));
+      assert.equal(report.unitEvidence.caseCounts.passed, 42);
+      assert.equal(report.unitEvidence.checks.length, 42);
+      assert.equal(report.unitEvidence.unmappedCases.length, 0);
+      assert.deepEqual(report.unitEvidence.packageCounts, { passed: failed ? 43 : 44, failed: failed ? 1 : 0, skipped: 0 });
+      assert.equal(report.unitEvidence.outcome, failed ? 'execution-failed' : 'passed');
+    }
+  });
+
   it('retains a failed enclosing package run without attributing another suite failure to Checkbox', () => {
     const data = componentJestFixture();
     data.success = false;
