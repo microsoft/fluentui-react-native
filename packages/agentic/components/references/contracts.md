@@ -28,6 +28,18 @@ discard the main benefit of YAML comments. Keep this provenance in JSON.
 `spec/tokens.yaml` remains YAML because it is concise, human-authored token
 mapping data rather than a generated identity record.
 
+The optional Checkbox assessor snapshot is separate from contract provenance.
+It uses a strictly managed `assessment-*` block in the agentic Checkbox
+`SPEC.md` front matter; full evidence, digests, and workflow identity remain
+in the assessment JSON/report. It never changes `status`, `spec/source.json`,
+requirements, or review approval. Only a matched clean execution may populate
+its tested commit; local unverified snapshots leave that field null. The
+repository-only `@fluentui-react-native/scripts/CONTROL-ASSESSMENT.md` guide
+defines generation, fingerprinting, and trusted two-file publication. These
+assessment fields do not apply to legacy CheckboxV1.
+Generated files in `src/components/checkbox/assessment/` are source-repository
+snapshots, not package contents; they are excluded from the npm inventory.
+
 ## Schema version 2
 
 Every source document has the following document-level shape:

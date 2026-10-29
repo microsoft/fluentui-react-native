@@ -13,10 +13,70 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  assessment-inputs:
+    name: Validate assessment inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      report-only: ${{ steps.verify.outputs.report-only || steps.inspect.outputs.report-only || 'false' }}
+      source-result: ${{ steps.verify.outputs.source-result }}
+    steps:
+      - name: Checkout trusted input validator
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+
+      - name: Inspect report-only candidate
+        id: inspect
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f scripts/src/tasks/controlAssessmentCiTask.ts ]]; then
+            node scripts/src/tasks/controlAssessmentCiTask.ts inspect
+          else
+            echo "candidate=false" >> "$GITHUB_OUTPUT"
+            echo "report-only=false" >> "$GITHUB_OUTPUT"
+            echo "Trusted assessment validator is not on the base branch yet. Running all normal source checks." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Download original assessment evidence
+        if: steps.inspect.outputs.candidate == 'true'
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ steps.inspect.outputs.artifact-name }}
+          path: ${{ runner.temp }}/checkbox-source-evidence
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.inspect.outputs.run-id }}
+
+      - name: Verify unchanged inputs and generated report plus SPEC assessment fields
+        id: verify
+        if: steps.inspect.outputs.candidate == 'true'
+        env:
+          CANDIDATE_PATH: ${{ steps.inspect.outputs.candidate-path }}
+          BUNDLE_PATH: ${{ runner.temp }}/checkbox-source-evidence/bundle.json
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts verify
+
   js:
     name: JS PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    outputs:
+      unit-artifact: ${{ steps.unit-evidence.outputs.artifact-id }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -34,11 +94,28 @@ jobs:
       - name: Test agent permissions
         run: yarn test:agent-permissions
 
+      - name: Capture existing component test inputs
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts begin-unit
+
       - name: Build CI
+        env:
+          FURN_ASSESSMENT_UNIT_CAPTURE: ${{ github.workspace }}/apps/storybook/artifacts/assessment-unit-ci
         run: yarn lage buildci
+
+      - name: Upload existing component unit evidence
+        id: unit-evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: checkbox-unit-evidence-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/assessment-unit-ci
+          if-no-files-found: warn
+          retention-days: 14
 
   bundle-size:
     name: Bundle Size PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: windows-latest
     timeout-minutes: 30
     permissions:
@@ -108,6 +185,8 @@ jobs:
 
   android:
     name: Android PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -132,6 +211,8 @@ jobs:
 
   macos:
     name: macOS PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: macos-26
     timeout-minutes: 60
     steps:
@@ -180,6 +261,8 @@ jobs:
 
   macos-storybook:
     name: macOS Storybook PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: macos-26
     timeout-minutes: 40
     steps:
@@ -233,6 +316,8 @@ jobs:
 
   macos-paper-storybook:
     name: macOS Paper Storybook PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: macos-26
     timeout-minutes: 40
     steps:
@@ -284,6 +369,8 @@ jobs:
 
   ios:
     name: iOS PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: macos-26
     timeout-minutes: 60
     steps:
@@ -321,6 +408,8 @@ jobs:
 
   windows:
     name: Windows PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -397,6 +486,8 @@ jobs:
 
   windows-storybook:
     name: Windows Storybook PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -463,6 +554,8 @@ jobs:
 
   win32:
     name: Win32 PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -511,17 +604,23 @@ jobs:
 
   win32-storybook:
     name: Win32 Storybook PR
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: windows-latest
     timeout-minutes: 60
+    outputs:
+      native-artifact: ${{ steps.native-evidence.outputs.artifact-id }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@6046bdd4914c7ceb35ec83b92ae3211a03ddccef # 5.4.14
         with:
           platform: windows
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: yarn
@@ -536,9 +635,31 @@ jobs:
           platform: win32
           disabled-input-features: keyboard,physicalClick,wheel
 
+      - name: Capture Checkbox execution inputs
+        id: checkbox-inputs
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts begin
+
       - name: Smoke test Win32 Storybook
+        id: smoke
+        if: ${{ !cancelled() && steps.checkbox-inputs.outcome == 'success' }}
         run: yarn storybook smoke --win32 --mode stories-and-tests
         working-directory: apps/storybook
+
+      - name: Collect Checkbox native evidence
+        if: ${{ always() && !cancelled() }}
+        env:
+          SMOKE_OUTCOME: ${{ steps.smoke.outcome }}
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts finish
+
+      - name: Upload Checkbox native evidence
+        id: native-evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: checkbox-native-evidence-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/win32/assessment-ci
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Upload Win32 Storybook artifacts
         if: ${{ always() }}
@@ -553,11 +674,59 @@ jobs:
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
           if-no-files-found: warn
 
+  control-assessment:
+    name: Assess Checkbox evidence
+    needs: [assessment-inputs, js, win32-storybook]
+    if: ${{ always() && !cancelled() && needs.assessment-inputs.result == 'success' && needs.assessment-inputs.outputs.report-only != 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout assessed source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+
+      - name: Download native evidence
+        if: needs.win32-storybook.outputs.native-artifact != ''
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: checkbox-native-evidence-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/win32/assessment-ci
+
+      - name: Download existing unit evidence
+        if: needs.js.outputs.unit-artifact != ''
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: checkbox-unit-evidence-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/assessment-unit-ci
+
+      - name: Assess existing results without rerunning tests
+        env:
+          UNIT_OUTCOME: ${{ needs.js.result }}
+          NATIVE_OUTCOME: ${{ needs.win32-storybook.result }}
+        run: node scripts/src/tasks/controlAssessmentCiTask.ts combine
+
+      - name: Upload Checkbox assessment
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: checkbox-win32-assessment-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/win32/assessment-ci
+          if-no-files-found: error
+          retention-days: 14
+
   check-changesets:
     name: Check for Changesets
+    needs: assessment-inputs
     runs-on: ubuntu-latest
     # Skip this check for the version bump PR created by changesets
-    if: ${{ github.head_ref != 'changeset-release/main' }}
+    if: ${{ needs.assessment-inputs.outputs.report-only != 'true' && github.head_ref != 'changeset-release/main' }}
 
     steps:
       - name: Checkout
@@ -583,6 +752,8 @@ jobs:
 
   publish-dry-run-pack:
     name: NPM Publish Dry Run — Pack
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     outputs:
@@ -624,6 +795,8 @@ jobs:
 
   test-links:
     name: Test repo links
+    needs: assessment-inputs
+    if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -641,11 +814,12 @@ jobs:
       - name: Test markdown links
         run: yarn lage test-links --verbose --grouped
 
-  pr:
-    name: PR
+  pr-source:
+    name: PR source validation
     if: always()
     runs-on: ubuntu-latest
     needs:
+      - assessment-inputs
       - js
       - android
       - macos
@@ -656,6 +830,11 @@ jobs:
       - publish-dry-run-pack
       - test-links
     steps:
+      - name: Preserve reused source result
+        if: ${{ needs.assessment-inputs.outputs.report-only == 'true' && needs.assessment-inputs.outputs.source-result != 'success' }}
+        run: |
+          echo "The original source validation did not pass. A report-only commit cannot turn it green."
+          exit 1
       - name: Check for failures or cancellations
         if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         run: |
@@ -663,3 +842,23 @@ jobs:
           exit 1
       - name: All required jobs passed
         run: echo "All required jobs completed successfully."
+
+  pr:
+    name: PR
+    if: always()
+    runs-on: ubuntu-latest
+    needs: [assessment-inputs, pr-source]
+    steps:
+      - name: Require successful source validation
+        if: ${{ needs.assessment-inputs.result != 'success' || needs.pr-source.result != 'success' }}
+        run: |
+          echo "Source validation or assessment-input validation failed."
+          exit 1
+      - name: Require same-PR assessment when publishing is enabled
+        if: ${{ vars.CONTROL_ASSESSMENT_PUBLISH == 'true' && github.event.pull_request.head.repo.full_name == github.repository && github.base_ref == github.event.repository.default_branch && needs.assessment-inputs.outputs.report-only != 'true' }}
+        run: |
+          echo "Source CI completed. Waiting for the trusted publisher to commit the Checkbox assessment to this PR."
+          echo "The report-only follow-up run must verify that report before this required check can pass."
+          exit 1
+      - name: Required PR validation passed
+        run: echo "Source checks and the applicable assessment-publication requirements passed."

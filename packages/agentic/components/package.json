@@ -21,6 +21,7 @@
     "spec-source-lock.json",
     "spec-source-report.json",
     "src/",
+    "!src/components/checkbox/assessment/**",
     "tsconfig.json",
     "tsconfig.stories.json"
   ],
