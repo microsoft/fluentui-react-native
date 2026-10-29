@@ -62,11 +62,12 @@ layout and requires an action-oriented `accessibilityLabel`.
   with the selected-icon fallback and wrapping content behavior.
 - **BTN-003:** Resolve appearance, selection, disabled, pressed, and hovered
   visual state from Flex tokens; user root style wins last.
-- **BTN-004:** Expose button semantics, merge caller accessibility state, warn
+- **BTN-004:** Expose button semantics and a native name from plain content
+  unless the caller supplies naming, merge caller accessibility state, warn
   for an unnamed icon-only button, and hide decorative icons.
 - **BTN-005:** Treat `selected` as externally owned state, expose checked
-  accessibility state when that prop is present, and reserve semibold label
-  width to prevent toggle reflow.
+  accessibility state and the resolved native Toggle action when that prop is
+  present, and reserve semibold label width to prevent toggle reflow.
 - **BTN-006:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
   on the root: default to native rings on Windows/macOS and root-modality-aware
   custom rings on Win32, retaining the same dual-ring geometry.
@@ -92,6 +93,14 @@ Windows and macOS use React Native press, hover, and focus events. `Enter` and
 `Space` activation are supplied by the native `Pressable` button behavior.
 Disabled buttons are not focusable.
 
+The checked React Native state and resolved Toggle declaration do not imply
+identical native accessibility projection. Windows exposes toggle state through
+UI Automation. With the pinned macOS renderer and desktop provider, the retained
+AXButton role has no supported native `checked` read, and Toggle is a custom
+action rather than an AXPress mapping. Native role and enabled-state checks
+remain shared; checked projection is qualified separately on Windows.
+Caller-owned pointer transitions on macOS require physical input.
+
 Button adds no component-owned motion.
 
 ## Divergences from Flex
@@ -106,11 +115,11 @@ Button adds no component-owned motion.
 
 ## Conformance
 
-| Requirement | Evidence                                                                    |
-| ----------- | --------------------------------------------------------------------------- |
-| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`                        |
-| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                 |
-| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                 |
-| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`                     |
-| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`                       |
-| BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx` |
+| Requirement | Evidence                                                                      |
+| ----------- | ----------------------------------------------------------------------------- |
+| BTN-001     | `button.types.ts`, `useButton.ts`, `button.test.tsx`                          |
+| BTN-002     | `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`                   |
+| BTN-003     | `button.styles.ts`, `useButtonStyles.ts`, `button.test.tsx`                   |
+| BTN-004     | `useButton.ts`, `useButtonStyles.ts`, `button.test.tsx`, `button.stories.tsx` |
+| BTN-005     | `useButton.ts`, `renderButton.tsx`, `button.test.tsx`, `button.stories.tsx`   |
+| BTN-006     | `useButton.ts`, `useButtonStyles.ts`, `renderButton.tsx`, `button.test.tsx`   |

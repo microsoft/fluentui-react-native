@@ -12,6 +12,11 @@ The root defaults to `accessible={true}` and is focusable unless disabled.
 Callers may provide an accessible name through `accessibilityLabel` or
 `accessibilityLabelledBy`.
 
+Without explicit native or ARIA naming or a labelled-by reference, plain
+string or numeric content (including plain content-slot children) becomes
+the native accessible name. Rich content requires caller-supplied naming.
+Explicit names, including an empty native label, retain their existing precedence.
+
 ## Icon-only buttons
 
 An icon-only button must provide a concise label that describes its action,
@@ -27,7 +32,24 @@ Both icon slots are decorative children of the named root and set
 
 Disabled buttons communicate unavailable state, do not activate, and are
 removed from keyboard focus. Toggle-style buttons remain one button and
-announce their checked state from the externally supplied `selected` value.
+provide checked React Native state from the externally supplied `selected` value.
+
+Supplying `selected`, including `false`, declares the platform's resolved
+Toggle action so Win32 UI Automation can expose checked state. Caller action
+labels and custom declarations are retained. The component-owned checked
+value also takes precedence over a conflicting `aria-checked` alias.
+Native action events are forwarded unchanged through `onAccessibilityAction`;
+they neither mutate `selected` nor synthesize `onPress`. An owner handling a
+native Toggle updates its own state from that event.
+
+Native projection is platform-specific. Windows UI Automation exposes toggle
+state, but the pinned macOS renderer and desktop provider do not expose a
+supported `checked` property for the retained AXButton role. macOS Toggle is a
+custom action, not an implied AXPress/default activation route. Shared native
+tests still verify button roles and enabled/disabled state; Windows checked-state
+and Win32 action-transport tests qualify their respective native contracts.
+Unsupported macOS checked projection is reported explicitly, not treated as false
+or inferred from the rendered selection label.
 
 The focus target follows the [shared focus visual policy](../../../../references/higher-order-components.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
