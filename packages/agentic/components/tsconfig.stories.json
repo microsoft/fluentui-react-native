@@ -17,6 +17,7 @@
     "src/components/menu/menu.stories.tsx",
     "src/components/menu-button/menu-button.stories.tsx",
     "src/components/popover/popover.stories.tsx",
+    "src/components/radio/radio.stories.tsx",
     "src/components/skeleton/skeleton.stories.tsx",
     "src/components/spinner/spinner.stories.tsx",
     "src/components/switch/switch.stories.tsx",

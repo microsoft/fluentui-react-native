@@ -2,10 +2,14 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import type { AccessibilityActionEvent } from 'react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 
 import { Radio } from './radio';
+import type { RadioProps } from './radio.types';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -48,12 +52,100 @@ const meta: Meta<typeof Radio> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Radio>;
+type Story = WdioStory<StoryObj<typeof Radio>>;
 
 export const Default: Story = {};
 
+export const NativeSelectionSemantics: Story = {
+  render: () => {
+    const Scene = () => {
+      const [actions, setActions] = useState(0);
+      const [presses, setPresses] = useState(0);
+      const [lastAction, setLastAction] = useState('none');
+      const recordAction = (event: AccessibilityActionEvent) => {
+        setLastAction(event.nativeEvent.actionName);
+        setActions((value) => value + 1);
+      };
+      return (
+        <View style={styles.story}>
+          <Radio
+            label="Unselected option"
+            selected={false}
+            testID="radio-native-off"
+            onAccessibilityAction={recordAction}
+            onPress={() => setPresses((value) => value + 1)}
+          />
+          <Radio label="Selected option" selected testID="radio-native-on" />
+          <Radio
+            label="Disabled option"
+            selected
+            disabled
+            testID="radio-native-disabled"
+            onAccessibilityAction={recordAction}
+            onPress={() => setPresses((value) => value + 1)}
+          />
+          <StoryStatus testID="radio-native-actions">{String(actions)}</StoryStatus>
+          <StoryStatus testID="radio-native-presses">{String(presses)}</StoryStatus>
+          <StoryStatus testID="radio-native-last-action">{lastAction}</StoryStatus>
+        </View>
+      );
+    };
+    return <Scene />;
+  },
+  wdio: {
+    'RAD-003 RAD-005 Win32 exposes native RadioButton selection, names and disabled state': async ({ browser, expect, platform, skip }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies Win32 UI Automation SelectionItem projection.');
+        return;
+      }
+      for (const [id, name, selected] of [
+        ['radio-native-off', 'Unselected option', false],
+        ['radio-native-on', 'Selected option', true],
+        ['radio-native-disabled', 'Disabled option', true],
+      ] as const) {
+        const radio = await browser.$(`~${id}`);
+        expect(await radio.getTagName()).toBe('radio');
+        expect(await radio.getProperty('name')).toBe(name);
+        expect(await radio.getProperty('selected')).toBe(selected);
+      }
+      await expect(await browser.$('~radio-native-disabled')).toBeDisabled();
+    },
+    'RAD-003 Win32 Select forwards once without self-selection or presses and disabled public activation rejects': async ({
+      browser,
+      expect,
+      platform,
+      skip,
+    }) => {
+      if (platform !== 'win32') {
+        skip('This case qualifies Win32 UI Automation Select transport.');
+        return;
+      }
+      const radio = await browser.$('~radio-native-off');
+      const disabled = await browser.$('~radio-native-disabled');
+      const actions = await browser.$('~radio-native-actions');
+      const presses = await browser.$('~radio-native-presses');
+      await expect(actions).toHaveAttribute('name', '0');
+      await radio.click();
+      await expect(actions).toHaveAttribute('name', '1');
+      await expect(await browser.$('~radio-native-last-action')).toHaveAttribute('name', 'Select');
+      await expect(presses).toHaveAttribute('name', '0');
+      expect(await radio.getProperty('selected')).toBe(false);
+      let rejection: unknown;
+      try {
+        await disabled.click();
+      } catch (error) {
+        rejection = error;
+      }
+      expect(rejection).toBeDefined();
+      await expect(actions).toHaveAttribute('name', '1');
+      await expect(presses).toHaveAttribute('name', '0');
+      expect(await disabled.getProperty('selected')).toBe(true);
+    },
+  },
+};
+
 export const Overview: Story = {
-  render: ({ label, secondaryText }) => (
+  render: ({ label, secondaryText }: RadioProps) => (
     <View style={styles.story}>
       <StoryGroup label="Selection">
         <Radio label={label} secondaryText={secondaryText} showSecondaryText />

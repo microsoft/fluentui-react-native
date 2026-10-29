@@ -5,6 +5,10 @@ their corresponding caller handlers are forwarded. Disabled state prevents
 activation and focus. Pressing reports through `onPress`; Radio never changes
 its own selected value.
 
+Native Select is a separate accessibility transport. The caller handles
+onAccessibilityAction to update its owned value; the component only declares
+the action and forwards the original event, without manufacturing onPress.
+
 On Windows and macOS, native Pressable behavior activates a focused radio.
 
 Hover and press states change the token-derived colors.

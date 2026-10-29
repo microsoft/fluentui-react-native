@@ -1,6 +1,6 @@
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 
-import { useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
+import { resolveAccessibilityAction, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 
@@ -27,14 +27,18 @@ export function useRadio_unstable(props: RadioProps): RadioState {
   const themeState = useThemeState();
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
+    accessibilityActions: resolveAccessibilityAction('select', Platform.OS, rest.accessibilityActions).accessibilityActions,
     accessibilityLabel: accessibilityLabel ?? label,
     accessibilityHint: accessibilityHint ?? (showSecondaryText ? secondaryText : undefined),
     accessibilityRole: 'radio',
     accessibilityState: {
       ...accessibilityState,
       checked: selected,
+      selected,
       disabled,
     },
+    'aria-checked': selected,
+    'aria-selected': selected,
     accessible: rest.accessible ?? true,
     disabled,
     focusable: !disabled && (rest.focusable ?? true),

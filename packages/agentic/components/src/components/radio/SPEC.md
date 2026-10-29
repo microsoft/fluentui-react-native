@@ -46,7 +46,8 @@ rather than explicitly hiding the indicator and text children.
 - **RAD-002:** Render the indicator, dot, label, and optional supporting text
   in the fixed order.
 - **RAD-003:** Render externally owned checked state without self-selection
-  and preserve press reporting.
+  and preserve press reporting. Declare the native Select action and project
+  the same owned value through native selection state.
 - **RAD-004:** Apply selection, disabled, hovered, pressed, and user-style
   precedence to the documented token bindings.
 - **RAD-005:** Expose radio semantics, accessible naming, disabled behavior,
@@ -70,8 +71,10 @@ These hook options do not add new component props. Scenes require `ThemedRoot`.
 ## Platform behavior
 
 On Windows and macOS the root is an accessible React Native `Pressable` with
-the `radio` role. UIA and AX receive its name, checked value, and disabled
-value from the root. Disabled radios cannot be focused or activated. The
+the `radio` role. UIA RadioButton exposes its value through SelectionItem,
+not the Toggle pattern; the root projects its owned value to both React
+Native checked and selected state. Native Select events are forwarded without
+synthesizing presses or changing the caller's value. Disabled radios cannot be focused or activated. The
 indicator and text subtrees are explicitly hidden from assistive technology so
 the named root is the single announced element.
 
@@ -96,10 +99,10 @@ implemented by the component that renders the radios.
 
 ## Conformance
 
-| Requirement | Evidence                                                 |
-| ----------- | -------------------------------------------------------- |
-| RAD-001     | `radio.types.ts`, `useRadio.ts`, `radio.types.test.ts`   |
-| RAD-002     | `renderRadio.tsx`, `useRadioStyles.ts`, `radio.test.tsx` |
-| RAD-003     | `useRadio.ts`, `radio.test.tsx`, `radio.stories.tsx`     |
-| RAD-004     | `radio.styles.ts`, `useRadioStyles.ts`, `radio.test.tsx` |
-| RAD-005     | `useRadio.ts`, `useRadioStyles.ts`, `radio.test.tsx`     |
+| Requirement | Evidence                                                                  |
+| ----------- | ------------------------------------------------------------------------- |
+| RAD-001     | `radio.types.ts`, `useRadio.ts`, `radio.types.test.ts`                    |
+| RAD-002     | `renderRadio.tsx`, `useRadioStyles.ts`, `radio.test.tsx`                  |
+| RAD-003     | `useRadio.ts`, `radio.test.tsx`, `radio.stories.tsx`                      |
+| RAD-004     | `radio.styles.ts`, `useRadioStyles.ts`, `radio.test.tsx`                  |
+| RAD-005     | `useRadio.ts`, `useRadioStyles.ts`, `radio.test.tsx`, `radio.stories.tsx` |
