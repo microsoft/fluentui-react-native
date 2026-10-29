@@ -39,8 +39,30 @@ layers. Motion durations are milliseconds, and each easing is an `[x1, y1, x2, y
 colors and shadows vary by color scheme.
 
 The package's `prebuild` script (`codegen.cts`) generates the global token files from the platform
-`@fluentui-react-native/design-tokens-*` packages and regenerates both mapping projections. Do not edit generated files;
-change their inputs and rebuild.
+`@fluentui-react-native/design-tokens-*` packages and regenerates both mapping projections. It also generates
+`src/fluent/defaults/fluentTokens.generated.ts` (Win32) and its Windows, macOS, iOS, and Android variants. These modules
+contain complete Fluent alias colors, shadows, and font aliases; nothing consumes them yet. The runtime pipeline
+mappers and existing theme construction are unchanged. Do not edit generated files; change their inputs and rebuild.
+
+Every generated platform module exports `light`, `dark`, `darkGray`, `hc`, `hcLight`, `hcDark`, and `darkElevated`
+color and shadow sets, plus `fontAliasTokens`. Colors satisfy `Required<AliasColorTokens>` (including deprecated red
+aliases, mapped to danger), fonts satisfy `Required<Variants>`, and shadows satisfy `BaseShadowAliasTokens`.
+The generator preserves defined runtime-mapped values and additional native color states that those mappers omit.
+Missing colors use same-platform semantic equivalents first, with absent interaction states falling back to rest.
+Remaining gaps use portable light/dark defaults assembled from the Win32 and mobile palettes, never another
+platform's system colors. Explicit equivalents live in the [Fluent token generator](../scripts/fluent-tokens.cts).
+
+Unsupported appearances inherit their nearest supported source: dark gray and elevated dark use dark, `hc` uses
+high-contrast dark, and missing high-contrast palettes use the matching light/dark scheme. Win32's single `hc` palette
+supplies both high-contrast schemes. iOS's high-contrast files contain fonts but no colors, so they inherit the matching
+standard colors; this is coverage, not a synthesized or accessibility-qualified high-contrast palette. Native shadow
+sets remain intact. Missing font aliases use native equivalents, or the platform's global typography ramp when no
+aliases exist (macOS and Windows); legacy variant names alias the completed Fluent variants. Tests compare all
+platforms against the full token interfaces and reject missing or undefined entries.
+
+Generated token modules emit their values through the scripts package's `ValuePool`, which minimizes the minified size:
+values that repeat are hoisted into constants, and entries that several declarations share are emitted once in ancestor
+objects that the declarations spread. The emitted key order is therefore not meaningful.
 
 ## Default tokens
 

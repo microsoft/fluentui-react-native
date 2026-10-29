@@ -15,63 +15,207 @@ import {
 } from '../../tokens/global.generated';
 import type { CompleteFlexTokenInput } from '../tokens.types';
 
-const sharedTokens = {
+const inverted = 'inverted';
+const rgb000000 = '#000000';
+const rgb00000008 = '#00000008';
+const rgb0000000d = '#0000000d';
+const rgb0000000f = '#0000000f';
+const rgb00000014 = '#00000014';
+const rgb0000001a = '#0000001a';
+const rgb0000001f = '#0000001f';
+const rgb00000029 = '#00000029';
+const rgb000000db = '#000000db';
+const rgb0b0600e1 = '#0b0600e1';
+const rgb0b497f = '#0b497f';
+const rgb0c5722 = '#0c5722';
+const rgb242424 = '#242424';
+const rgb28231e = '#28231e';
+const rgb294482 = '#294482';
+const rgb2f95f4 = '#2f95f4';
+const rgb32ad52 = '#32ad52';
+const rgb345200 = '#345200';
+const rgb3c3c3c80 = '#3c3c3c80';
+const rgb484848 = '#484848';
+const rgb523778 = '#523778';
+const rgb524800 = '#524800';
+const rgb5c8df8 = '#5c8df8';
+const rgb5dce97 = '#5dce97';
+const rgb6da603 = '#6da603';
+const rgb6f2b53 = '#6f2b53';
+const rgb762f0e = '#762f0e';
+const rgb772b28 = '#772b28';
+const rgb929292 = '#929292';
+const rgba575e8 = '#a575e8';
+const rgbbaedc1 = '#baedc1';
+const rgbc6e1ff = '#c6e1ff';
+const rgbcbff93 = '#cbff93';
+const rgbcd4808 = '#cd4808';
+const rgbcedeff = '#cedeff';
+const rgbd961a6 = '#d961a6';
+const rgbdedede = '#dedede';
+const rgbe4d6ff = '#e4d6ff';
+const rgbe55e7a = '#e55e7a';
+const rgbe56738 = '#e56738';
+const rgbe6ffcf = '#e6ffcf';
+const rgbe7615b = '#e7615b';
+const rgbe7fce9 = '#e7fce9';
+const rgbeef6ff = '#eef6ff';
+const rgbf0f5ff = '#f0f5ff';
+const rgbf5f5f5 = '#f5f5f5';
+const rgbf7f3ff = '#f7f3ff';
+const rgbfb966e = '#fb966e';
+const rgbfbdf06 = '#fbdf06';
+const rgbfc9571 = '#fc9571';
+const rgbfef2ee = '#fef2ee';
+const rgbffcee6 = '#ffcee6';
+const rgbffd2cd = '#ffd2cd';
+const rgbffd3c2 = '#ffd3c2';
+const rgbffed85 = '#ffed85';
+const rgbfff1f7 = '#fff1f7';
+const rgbfff2f0 = '#fff2f0';
+const rgbfff7c4 = '#fff7c4';
+const rgbffffff = '#ffffff';
+const rgbffffff00 = '#ffffff00';
+const rgbffffff14 = '#ffffff14';
+const rgbffffff80 = '#ffffff80';
+
+const backgroundNeutralDisabled = [rgb00000008, '#ffffff07'] as const;
+const backgroundNeutralSoft1 = [rgb00000014, '#ffffff1f'] as const;
+const backgroundNeutralSoft2 = ['#4d200028', '#ffe3cb40'] as const;
+const backgroundNeutralSubtle = ['#6c31001a', '#fff4ef14'] as const;
+const backgroundNeutralTransparent1 = ['#24242400', rgbffffff00] as const;
+const backgroundNeutralTransparent2 = ['#28231e00', rgbffffff00] as const;
+const easingFunctionalEnter = [0, 0, 0, 1] as const;
+const easingFunctionalExit = [0.6, 0, 0.75, 0.4] as const;
+const easingFunctionalTransition = [0.33, 0, 0, 1] as const;
+const foregroundNeutralPrimary = [rgb0b0600e1, '#fff7f2e3'] as const;
+const rest1 = ['#6f6f6f', rgb929292] as const;
+const rest2 = ['#e9e9e980', rgb3c3c3c80] as const;
+const rest3 = ['#0000006d', '#ffffff61'] as const;
+const rest4 = ['#1e0d009a', '#ffeee39a'] as const;
+const shadowLayer1 = { x: 0, y: 0, blur: 2, color: rgb0000001a } as const;
+const shadowLayer2 = { x: 0, y: 0, blur: 2, color: '#00000033' } as const;
+const shadowLayer3 = { x: 0, y: 8, blur: 16, color: rgb0000001f } as const;
+const shadowLayer4 = { x: 0, y: 8, blur: 16, color: rgb00000008 } as const;
+const strokeNeutralSoft2 = ['#250f0076', '#ffe6d35c'] as const;
+
+const backgroundDangerLoud = { rest: ['#c02e56', rgbe55e7a], type: inverted } as const;
+const backgroundNeutralHeavy1 = { rest: [rgb242424, rgbffffff], type: inverted } as const;
+const backgroundNeutralHeavy2 = { rest: [rgb28231e, rgbffffff], type: inverted } as const;
+const backgroundNeutralLoud1 = { rest: rest1, type: inverted } as const;
+const backgroundNeutralLoud2 = { rest: rest4, type: inverted } as const;
+const backgroundSuccessLoud = { rest: ['#008455', '#05ad72'], type: inverted } as const;
+const strokeBrandOnloud = { rest: [rgbffffff, rgb242424], type: inverted } as const;
+const strokeNeutralLoud = { rest: ['#776d65', '#9a9089'], type: inverted } as const;
+const strokeNeutralOnloud1 = { rest: [rgbffffff, rgb000000db], type: inverted } as const;
+const strokeNeutralOnloud2 = { rest: [rgbffffff, rgb0b0600e1], type: inverted } as const;
+const strokeNeutralSoft1 = { rest: rest3, hover: ['#02020277', '#ffffff69'], pressed: ['#04040481', '#ffffff70'] } as const;
+const strokeNeutralSubtle = { rest: ['#00000021', '#ffffff48'], pressed: ['#05050535', '#ffffff57'] } as const;
+
+const sharedFlexTokenInputColor = {
+  backgroundDangerLoud,
+  backgroundDangerSoft: ['#ffe3e6', '#5a2932'],
+  backgroundDangerSubtle: ['#fff1f3', '#402529'],
+  backgroundWarningLoud: { rest: ['#bb4001', rgbe56738], type: inverted },
+  backgroundWarningSoft: ['#ffe5dc', '#592c1c'],
+  backgroundWarningSubtle: ['#fff2ee', '#40261d'],
+  backgroundSuccessLoud,
+  backgroundSuccessSoft: ['#c9f8dd', '#0c462d'],
+  backgroundSuccessSubtle: ['#e3fcee', '#193426'],
+  strokeDangerLoud: backgroundDangerLoud,
+  strokeDangerSoft: [rgbe55e7a, '#d14164'],
+  strokeDangerSubtle: ['#ffd0d6', '#76293a'],
+  strokeDangerOnloud: strokeBrandOnloud,
+  strokeWarningLoud: { rest: [rgbcd4808, rgbe56738], type: inverted },
+  strokeWarningSoft: [rgbfc9571, rgbcd4808],
+  strokeWarningSubtle: ['#ffd3c4', '#762e12'],
+  strokeWarningOnloud: strokeBrandOnloud,
+  strokeSuccessLoud: backgroundSuccessLoud,
+  strokeSuccessSoft: [rgb5dce97, '#008e5c'],
+  strokeSuccessSubtle: ['#b1efcc', '#025636'],
+  strokeSuccessOnloud: strokeBrandOnloud,
+  foregroundDangerPrimary: ['#a62147', '#fd8ea1'],
+  foregroundDangerOnloud: strokeNeutralOnloud1,
+  foregroundWarningPrimary: ['#a93901', rgbfc9571],
+  foregroundWarningOnloud: strokeNeutralOnloud1,
+  foregroundSuccessPrimary: ['#017048', rgb5dce97],
+  foregroundSuccessOnloud: strokeNeutralOnloud1,
+  fixedWhite: rgbffffff,
+  fixedBlack: rgb000000,
+  expressionAchromaticHeavy: [rgb000000, rgbffffff],
+  expressionAchromaticSubtle: [rgbffffff, rgb000000],
+  expressionGrayHeavy: [rgb484848, rgbf5f5f5],
+  expressionGrayLoud: [rgb929292, rgbdedede],
+  expressionGraySoft: [rgbdedede, rgb929292],
+  expressionGraySubtle: [rgbf5f5f5, rgb484848],
+  expressionNavyHeavy: [rgb294482, rgbf0f5ff],
+  expressionNavyLoud: [rgb5c8df8, rgbcedeff],
+  expressionNavySoft: [rgbcedeff, rgb5c8df8],
+  expressionNavySubtle: [rgbf0f5ff, rgb294482],
+  expressionBlueHeavy: [rgb0b497f, rgbeef6ff],
+  expressionBlueLoud: [rgb2f95f4, rgbc6e1ff],
+  expressionBlueSoft: [rgbc6e1ff, rgb2f95f4],
+  expressionBlueSubtle: [rgbeef6ff, rgb0b497f],
+  expressionGreenHeavy: [rgb0c5722, rgbe7fce9],
+  expressionGreenLoud: [rgb32ad52, rgbbaedc1],
+  expressionGreenSoft: [rgbbaedc1, rgb32ad52],
+  expressionGreenSubtle: [rgbe7fce9, rgb0c5722],
+  expressionLimeHeavy: [rgb345200, rgbe6ffcf],
+  expressionLimeLoud: [rgb6da603, rgbcbff93],
+  expressionLimeSoft: [rgbcbff93, rgb6da603],
+  expressionLimeSubtle: [rgbe6ffcf, rgb345200],
+  expressionYellowHeavy: [rgb524800, rgbfff7c4],
+  expressionYellowLoud: [rgbfbdf06, rgbffed85],
+  expressionYellowSoft: [rgbffed85, rgbfbdf06],
+  expressionYellowSubtle: [rgbfff7c4, rgb524800],
+  expressionPumpkinHeavy: [rgb762f0e, rgbfef2ee],
+  expressionPumpkinLoud: [rgbfb966e, rgbffd3c2],
+  expressionPumpkinSoft: [rgbffd3c2, rgbfb966e],
+  expressionPumpkinSubtle: [rgbfef2ee, rgb762f0e],
+  expressionRedHeavy: [rgb772b28, rgbfff2f0],
+  expressionRedLoud: [rgbe7615b, rgbffd2cd],
+  expressionRedSoft: [rgbffd2cd, rgbe7615b],
+  expressionRedSubtle: [rgbfff2f0, rgb772b28],
+  expressionPinkHeavy: [rgb6f2b53, rgbfff1f7],
+  expressionPinkLoud: [rgbd961a6, rgbffcee6],
+  expressionPinkSoft: [rgbffcee6, rgbd961a6],
+  expressionPinkSubtle: [rgbfff1f7, rgb6f2b53],
+  expressionPurpleHeavy: [rgb523778, rgbf7f3ff],
+  expressionPurpleLoud: [rgba575e8, rgbe4d6ff],
+  expressionPurpleSoft: [rgbe4d6ff, rgba575e8],
+  expressionPurpleSubtle: [rgbf7f3ff, rgb523778],
+  overlayNeutralTranslucent: ['#00000026', '#00000099'],
+  materialBackgroundThick: ['#fffffff1', '#262626ea'],
+  materialBackgroundRegular: ['#ffffffd7', '#2f2f2fd1'],
+  materialBackgroundThin: ['#ffffff7e', '#3434348b'],
+  backgroundNeutralDisabled,
+  backgroundNeutralHeavyDisabled: [rgb0000001a, '#ffffff20'],
+  strokeNeutralDisabled: [rgb00000014, '#ffffff24'],
+  foregroundNeutralDisabled: rest3,
+  strokeFocusInner: [rgbffffff, rgb000000],
+  strokeFocusOuter: [rgb000000, rgbffffff],
+  shadow: rgb000000,
+} as const;
+
+const sharedFlexTokenInput = {
   shadow: {
-    lowest: [
-      [{ x: 0, y: 0, blur: 2, color: '#0000001a' }, { x: 0, y: 1, blur: 2, color: '#0000000d' }],
-      [{ x: 0, y: 0, blur: 2, color: '#00000033' }, { x: 0, y: 1, blur: 2, color: '#0000001a' }],
-    ],
-    lower: [
-      [{ x: 0, y: 0, blur: 2, color: '#0000001a' }, { x: 0, y: 2, blur: 4, color: '#00000014' }],
-      [{ x: 0, y: 0, blur: 2, color: '#00000033' }, { x: 0, y: 2, blur: 4, color: '#00000029' }],
-    ],
+    lowest: [[shadowLayer1, { x: 0, y: 1, blur: 2, color: rgb0000000d }], [shadowLayer2, { x: 0, y: 1, blur: 2, color: rgb0000001a }]],
+    lower: [[shadowLayer1, { x: 0, y: 2, blur: 4, color: rgb00000014 }], [shadowLayer2, { x: 0, y: 2, blur: 4, color: rgb00000029 }]],
     low: [
-      [
-        { x: 0, y: 0, blur: 2, color: '#0000001a' },
-        { x: 0, y: 2, blur: 4, color: '#00000008' },
-        { x: 0, y: 4, blur: 8, color: '#00000014' },
-      ],
-      [
-        { x: 0, y: 0, blur: 2, color: '#00000033' },
-        { x: 0, y: 2, blur: 4, color: '#0000001f' },
-        { x: 0, y: 4, blur: 8, color: '#00000029' },
-      ],
+      [shadowLayer1, { x: 0, y: 2, blur: 4, color: rgb00000008 }, { x: 0, y: 4, blur: 8, color: rgb00000014 }],
+      [shadowLayer2, { x: 0, y: 2, blur: 4, color: rgb0000001f }, { x: 0, y: 4, blur: 8, color: rgb00000029 }],
     ],
     high: [
-      [
-        { x: 0, y: 0, blur: 2, color: '#0000001a' },
-        { x: 0, y: 4, blur: 8, color: '#00000008' },
-        { x: 0, y: 8, blur: 16, color: '#0000000f' },
-      ],
-      [
-        { x: 0, y: 0, blur: 2, color: '#00000033' },
-        { x: 0, y: 4, blur: 8, color: '#0000001f' },
-        { x: 0, y: 8, blur: 16, color: '#0000001f' },
-      ],
+      [shadowLayer1, { x: 0, y: 4, blur: 8, color: rgb00000008 }, { x: 0, y: 8, blur: 16, color: rgb0000000f }],
+      [shadowLayer2, { x: 0, y: 4, blur: 8, color: rgb0000001f }, shadowLayer3],
     ],
     higher: [
-      [
-        { x: 0, y: 0, blur: 2, color: '#0000001a' },
-        { x: 0, y: 8, blur: 16, color: '#00000008' },
-        { x: 0, y: 16, blur: 32, color: '#0000000f' },
-      ],
-      [
-        { x: 0, y: 0, blur: 2, color: '#00000033' },
-        { x: 0, y: 8, blur: 16, color: '#0000001f' },
-        { x: 0, y: 16, blur: 32, color: '#0000001f' },
-      ],
+      [shadowLayer1, shadowLayer4, { x: 0, y: 16, blur: 32, color: rgb0000000f }],
+      [shadowLayer2, shadowLayer3, { x: 0, y: 16, blur: 32, color: rgb0000001f }],
     ],
     highest: [
-      [
-        { x: 0, y: 0, blur: 2, color: '#0000001a' },
-        { x: 0, y: 8, blur: 16, color: '#00000008' },
-        { x: 0, y: 32, blur: 64, color: '#0000000f' },
-      ],
-      [
-        { x: 0, y: 0, blur: 2, color: '#00000033' },
-        { x: 0, y: 8, blur: 16, color: '#0000001f' },
-        { x: 0, y: 32, blur: 64, color: '#0000001f' },
-      ],
+      [shadowLayer1, shadowLayer4, { x: 0, y: 32, blur: 64, color: rgb0000000f }],
+      [shadowLayer2, shadowLayer3, { x: 0, y: 32, blur: 64, color: rgb0000001f }],
     ],
   },
   fontWeight: {
@@ -88,12 +232,7 @@ const sharedTokens = {
     contentEditorialSemibold: fontWeightSemibold,
     contentEditorialBold: fontWeightBold,
   },
-  fontFamily: {
-    functional: fontFamilyBase,
-    content: fontFamilyBase,
-    contentEditorial: fontFamilyBase,
-    contentCode: fontFamilyMonospace,
-  },
+  fontFamily: { functional: fontFamilyBase, content: fontFamilyBase, contentEditorial: fontFamilyBase, contentCode: fontFamilyMonospace },
   fontSize: {
     functionalDisplay: 68,
     functionalPagetitle: 40,
@@ -150,15 +289,7 @@ const sharedTokens = {
     contentTable: 22,
     contentCode: 22,
   },
-  borderRadius: {
-    base100: 4,
-    base200: 8,
-    base300: 12,
-    base400: 16,
-    base600: 24,
-    base700: 28,
-    circular: 9999,
-  },
+  borderRadius: { base100: 4, base200: 8, base300: 12, base400: 16, base600: 24, base700: 28, circular: 9999 },
   spacing: {
     componentBase50: 2,
     componentBase100: 4,
@@ -183,12 +314,7 @@ const sharedTokens = {
     layoutBase1000: 80,
     layoutBase1200: 96,
   },
-  strokeWidth: {
-    thin: 1,
-    thick: 2,
-    thicker: 3,
-    thickest: 4,
-  },
+  strokeWidth: { thin: 1, thick: 2, thicker: 3, thickest: 4 },
   motion: {
     durationBase50: 50,
     durationBase100: 100,
@@ -196,268 +322,102 @@ const sharedTokens = {
     durationBase300: 300,
     durationBase500: 500,
     durationBase1000: 1000,
-    easingFunctionalEnter: [0, 0, 0, 1],
-    easingFunctionalExit: [0.6, 0, 0.75, 0.4],
-    easingFunctionalTransition: [0.33, 0, 0, 1],
+    easingFunctionalEnter,
+    easingFunctionalExit,
+    easingFunctionalTransition,
     easingFunctionalLinear: [0, 0, 1, 1],
-    easingExpressiveEnter: [0, 0, 0, 1],
-    easingExpressiveExit: [0.6, 0, 0.75, 0.4],
-    easingExpressiveTransition: [0.33, 0, 0, 1],
+    easingExpressiveEnter: easingFunctionalEnter,
+    easingExpressiveExit: easingFunctionalExit,
+    easingExpressiveTransition: easingFunctionalTransition,
   },
-} satisfies Partial<Omit<CompleteFlexTokenInput, 'color'>>;
+} as const;
 
 /** The x3 cool-tone defaults. Omitted interaction states are computed from rest. */
 export const coolFlexTokenInput: CompleteFlexTokenInput = {
-  ...sharedTokens,
+  ...sharedFlexTokenInput,
   color: {
+    ...sharedFlexTokenInputColor,
     surfaceNeutralFarther: ['#ebebeb', '#1b1b1b'],
     surfaceNeutralFar: ['#f2f2f2', '#1f1f1f'],
     surfaceNeutralNear: ['#fcfcfc', '#181818'],
-    surfaceNeutralNearer: ['#ffffff', '#292929'],
-    surfaceNeutralTranslucent: ['#ffffff80', '#3c3c3c80'],
-    backgroundNeutralHeavy: { rest: ['#242424', '#ffffff'], type: 'inverted' },
-    backgroundNeutralLoud: { rest: ['#6f6f6f', '#929292'], type: 'inverted' },
-    backgroundNeutralSoft: ['#00000014', '#ffffff1f'],
-    backgroundNeutralSubtle: ['#0000000d', '#ffffff14'],
-    backgroundNeutralTransparent: ['#24242400', '#ffffff00'],
-    backgroundNeutralTranslucent: {
-      rest: ['#e9e9e980', '#3c3c3c80'],
-      hover: ['#d8d8d88a', '#56565688'],
-      pressed: ['#cacaca94', '#6d6d6d8f'],
-    },
-    backgroundBrandHeavy: { rest: ['#242424', '#ffffff'], type: 'inverted' },
-    backgroundBrandLoud: { rest: ['#6f6f6f', '#929292'], type: 'inverted' },
-    backgroundBrandSoft: ['#00000014', '#ffffff1f'],
-    backgroundBrandSubtle: ['#0000000a', '#ffffff14'],
-    backgroundBrandTransparent: ['#24242400', '#ffffff00'],
-    backgroundDangerLoud: { rest: ['#c02e56', '#e55e7a'], type: 'inverted' },
-    backgroundDangerSoft: ['#ffe3e6', '#5a2932'],
-    backgroundDangerSubtle: ['#fff1f3', '#402529'],
-    backgroundWarningLoud: { rest: ['#bb4001', '#e56738'], type: 'inverted' },
-    backgroundWarningSoft: ['#ffe5dc', '#592c1c'],
-    backgroundWarningSubtle: ['#fff2ee', '#40261d'],
-    backgroundSuccessLoud: { rest: ['#008455', '#05ad72'], type: 'inverted' },
-    backgroundSuccessSoft: ['#c9f8dd', '#0c462d'],
-    backgroundSuccessSubtle: ['#e3fcee', '#193426'],
-    strokeNeutralHeavy: { rest: ['#242424', '#dedede'], type: 'inverted' },
-    strokeNeutralLoud: { rest: ['#6f6f6f', '#929292'], type: 'inverted' },
-    strokeNeutralSoft: { rest: ['#0000006d', '#ffffff61'], hover: ['#02020277', '#ffffff69'], pressed: ['#04040481', '#ffffff70'] },
-    strokeNeutralSubtle: { rest: ['#00000021', '#ffffff48'], pressed: ['#05050535', '#ffffff57'] },
-    strokeNeutralTransparent: ['#24242400', '#ffffff00'],
-    strokeNeutralOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    strokeBrandLoud: { rest: ['#6f6f6f', '#929292'], type: 'inverted' },
-    strokeBrandSoft: { rest: ['#0000006d', '#ffffff61'], hover: ['#02020277', '#ffffff69'], pressed: ['#04040481', '#ffffff70'] },
-    strokeBrandSubtle: { rest: ['#00000021', '#ffffff48'], pressed: ['#05050535', '#ffffff57'] },
-    strokeBrandOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    strokeDangerLoud: { rest: ['#c02e56', '#e55e7a'], type: 'inverted' },
-    strokeDangerSoft: ['#e55e7a', '#d14164'],
-    strokeDangerSubtle: ['#ffd0d6', '#76293a'],
-    strokeDangerOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    strokeWarningLoud: { rest: ['#cd4808', '#e56738'], type: 'inverted' },
-    strokeWarningSoft: ['#fc9571', '#cd4808'],
-    strokeWarningSubtle: ['#ffd3c4', '#762e12'],
-    strokeWarningOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    strokeSuccessLoud: { rest: ['#008455', '#05ad72'], type: 'inverted' },
-    strokeSuccessSoft: ['#5dce97', '#008e5c'],
-    strokeSuccessSubtle: ['#b1efcc', '#025636'],
-    strokeSuccessOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    foregroundNeutralPrimary: ['#000000db', '#ffffffde'],
+    surfaceNeutralNearer: [rgbffffff, '#292929'],
+    surfaceNeutralTranslucent: [rgbffffff80, rgb3c3c3c80],
+    backgroundNeutralHeavy: backgroundNeutralHeavy1,
+    backgroundNeutralLoud: backgroundNeutralLoud1,
+    backgroundNeutralSoft: backgroundNeutralSoft1,
+    backgroundNeutralSubtle: [rgb0000000d, rgbffffff14],
+    backgroundNeutralTransparent: backgroundNeutralTransparent1,
+    backgroundNeutralTranslucent: { rest: rest2, hover: ['#d8d8d88a', '#56565688'], pressed: ['#cacaca94', '#6d6d6d8f'] },
+    backgroundBrandHeavy: backgroundNeutralHeavy1,
+    backgroundBrandLoud: backgroundNeutralLoud1,
+    backgroundBrandSoft: backgroundNeutralSoft1,
+    backgroundBrandSubtle: ['#0000000a', rgbffffff14],
+    backgroundBrandTransparent: backgroundNeutralTransparent1,
+    strokeNeutralHeavy: { rest: [rgb242424, rgbdedede], type: inverted },
+    strokeNeutralLoud: backgroundNeutralLoud1,
+    strokeNeutralSoft: strokeNeutralSoft1,
+    strokeNeutralSubtle,
+    strokeNeutralTransparent: backgroundNeutralTransparent1,
+    strokeNeutralOnloud: strokeNeutralOnloud1,
+    strokeBrandLoud: backgroundNeutralLoud1,
+    strokeBrandSoft: strokeNeutralSoft1,
+    strokeBrandSubtle: strokeNeutralSubtle,
+    strokeBrandOnloud,
+    foregroundNeutralPrimary: [rgb000000db, '#ffffffde'],
     foregroundNeutralSecondary: ['#000000a2', '#ffffffa1'],
-    foregroundNeutralTertiary: ['#00000090', '#ffffff80'],
-    foregroundNeutralOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    foregroundBrandPrimary: ['#242424', '#dedede'],
-    foregroundBrandOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    foregroundDangerPrimary: ['#a62147', '#fd8ea1'],
-    foregroundDangerOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    foregroundWarningPrimary: ['#a93901', '#fc9571'],
-    foregroundWarningOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    foregroundSuccessPrimary: ['#017048', '#5dce97'],
-    foregroundSuccessOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    fixedWhite: '#ffffff',
-    fixedBlack: '#000000',
-    expressionAccentHeavy: ['#242424', '#ffffff'],
-    expressionAccentLoud: ['#6f6f6f', '#929292'],
-    expressionAccentSoft: ['#00000014', '#ffffff1f'],
-    expressionAccentSubtle: ['#0000000d', '#ffffff14'],
-    expressionAchromaticHeavy: ['#000000', '#ffffff'],
-    expressionAchromaticSubtle: ['#ffffff', '#000000'],
-    expressionGrayHeavy: ['#484848', '#f5f5f5'],
-    expressionGrayLoud: ['#929292', '#dedede'],
-    expressionGraySoft: ['#dedede', '#929292'],
-    expressionGraySubtle: ['#f5f5f5', '#484848'],
-    expressionNavyHeavy: ['#294482', '#f0f5ff'],
-    expressionNavyLoud: ['#5c8df8', '#cedeff'],
-    expressionNavySoft: ['#cedeff', '#5c8df8'],
-    expressionNavySubtle: ['#f0f5ff', '#294482'],
-    expressionBlueHeavy: ['#0b497f', '#eef6ff'],
-    expressionBlueLoud: ['#2f95f4', '#c6e1ff'],
-    expressionBlueSoft: ['#c6e1ff', '#2f95f4'],
-    expressionBlueSubtle: ['#eef6ff', '#0b497f'],
-    expressionGreenHeavy: ['#0c5722', '#e7fce9'],
-    expressionGreenLoud: ['#32ad52', '#baedc1'],
-    expressionGreenSoft: ['#baedc1', '#32ad52'],
-    expressionGreenSubtle: ['#e7fce9', '#0c5722'],
-    expressionLimeHeavy: ['#345200', '#e6ffcf'],
-    expressionLimeLoud: ['#6da603', '#cbff93'],
-    expressionLimeSoft: ['#cbff93', '#6da603'],
-    expressionLimeSubtle: ['#e6ffcf', '#345200'],
-    expressionYellowHeavy: ['#524800', '#fff7c4'],
-    expressionYellowLoud: ['#fbdf06', '#ffed85'],
-    expressionYellowSoft: ['#ffed85', '#fbdf06'],
-    expressionYellowSubtle: ['#fff7c4', '#524800'],
-    expressionPumpkinHeavy: ['#762f0e', '#fef2ee'],
-    expressionPumpkinLoud: ['#fb966e', '#ffd3c2'],
-    expressionPumpkinSoft: ['#ffd3c2', '#fb966e'],
-    expressionPumpkinSubtle: ['#fef2ee', '#762f0e'],
-    expressionRedHeavy: ['#772b28', '#fff2f0'],
-    expressionRedLoud: ['#e7615b', '#ffd2cd'],
-    expressionRedSoft: ['#ffd2cd', '#e7615b'],
-    expressionRedSubtle: ['#fff2f0', '#772b28'],
-    expressionPinkHeavy: ['#6f2b53', '#fff1f7'],
-    expressionPinkLoud: ['#d961a6', '#ffcee6'],
-    expressionPinkSoft: ['#ffcee6', '#d961a6'],
-    expressionPinkSubtle: ['#fff1f7', '#6f2b53'],
-    expressionPurpleHeavy: ['#523778', '#f7f3ff'],
-    expressionPurpleLoud: ['#a575e8', '#e4d6ff'],
-    expressionPurpleSoft: ['#e4d6ff', '#a575e8'],
-    expressionPurpleSubtle: ['#f7f3ff', '#523778'],
-    overlayNeutralTranslucent: ['#00000026', '#00000099'],
-    materialBackgroundThick: ['#fffffff1', '#262626ea'],
-    materialBackgroundRegular: ['#ffffffd7', '#2f2f2fd1'],
-    materialBackgroundThin: ['#ffffff7e', '#3434348b'],
-    backgroundNeutralDisabled: ['#00000008', '#ffffff07'],
-    backgroundNeutralHeavyDisabled: ['#0000001a', '#ffffff20'],
-    backgroundNeutralSubtleDisabled: ['#00000008', '#ffffff07'],
-    strokeNeutralDisabled: ['#00000014', '#ffffff24'],
-    foregroundNeutralDisabled: ['#0000006d', '#ffffff61'],
-    strokeFocusInner: ['#ffffff', '#000000'],
-    strokeFocusOuter: ['#000000', '#ffffff'],
-    shadow: '#000000',
+    foregroundNeutralTertiary: ['#00000090', rgbffffff80],
+    foregroundNeutralOnloud: strokeNeutralOnloud1,
+    foregroundBrandPrimary: [rgb242424, rgbdedede],
+    foregroundBrandOnloud: strokeNeutralOnloud1,
+    expressionAccentHeavy: [rgb242424, rgbffffff],
+    expressionAccentLoud: rest1,
+    expressionAccentSoft: backgroundNeutralSoft1,
+    expressionAccentSubtle: [rgb0000000d, rgbffffff14],
+    backgroundNeutralSubtleDisabled: backgroundNeutralDisabled,
   },
 };
 
 /** The x3 warm-tone defaults. Omitted interaction states are computed from rest. */
 export const warmFlexTokenInput: CompleteFlexTokenInput = {
-  ...sharedTokens,
+  ...sharedFlexTokenInput,
   color: {
+    ...sharedFlexTokenInputColor,
     surfaceNeutralFarther: ['#f0eae5', '#1e1916'],
     surfaceNeutralFar: ['#faf4f0', '#231e1a'],
     surfaceNeutralNear: ['#f6f1ec', '#1c1714'],
-    surfaceNeutralNearer: ['#ffffff', '#2e2823'],
-    surfaceNeutralTranslucent: ['#ffffff80', '#00000080'],
-    backgroundNeutralHeavy: { rest: ['#28231e', '#ffffff'], type: 'inverted' },
-    backgroundNeutralLoud: { rest: ['#1e0d009a', '#ffeee39a'], type: 'inverted' },
-    backgroundNeutralSoft: ['#4d200028', '#ffe3cb40'],
-    backgroundNeutralSubtle: ['#6c31001a', '#fff4ef14'],
-    backgroundNeutralTransparent: ['#28231e00', '#ffffff00'],
-    backgroundNeutralTranslucent: ['#e9e9e980', '#3c3c3c80'],
-    backgroundBrandHeavy: { rest: ['#28231e', '#ffffff'], type: 'inverted' },
-    backgroundBrandLoud: { rest: ['#1e0d009a', '#ffeee39a'], type: 'inverted' },
-    backgroundBrandSoft: ['#4d200028', '#ffe3cb40'],
-    backgroundBrandSubtle: ['#6c31001a', '#fff4ef14'],
-    backgroundBrandTransparent: ['#28231e00', '#ffffff00'],
-    backgroundDangerLoud: { rest: ['#c02e56', '#e55e7a'], type: 'inverted' },
-    backgroundDangerSoft: ['#ffe3e6', '#5a2932'],
-    backgroundDangerSubtle: ['#fff1f3', '#402529'],
-    backgroundWarningLoud: { rest: ['#bb4001', '#e56738'], type: 'inverted' },
-    backgroundWarningSoft: ['#ffe5dc', '#592c1c'],
-    backgroundWarningSubtle: ['#fff2ee', '#40261d'],
-    backgroundSuccessLoud: { rest: ['#008455', '#05ad72'], type: 'inverted' },
-    backgroundSuccessSoft: ['#c9f8dd', '#0c462d'],
-    backgroundSuccessSubtle: ['#e3fcee', '#193426'],
-    strokeNeutralHeavy: { rest: ['#28231e', '#e3dcd7'], type: 'inverted' },
-    strokeNeutralLoud: { rest: ['#776d65', '#9a9089'], type: 'inverted' },
-    strokeNeutralSoft: ['#250f0076', '#ffe6d35c'],
-    strokeNeutralSubtle: ['#4d200028', '#ffe3cb40'],
-    strokeNeutralTransparent: ['#28231e00', '#ffffff00'],
-    strokeNeutralOnloud: { rest: ['#ffffff', '#0b0600e1'], type: 'inverted' },
-    strokeBrandLoud: { rest: ['#776d65', '#9a9089'], type: 'inverted' },
-    strokeBrandSoft: ['#250f0076', '#ffe6d35c'],
-    strokeBrandSubtle: ['#4d200028', '#ffe3cb40'],
-    strokeBrandOnloud: { rest: ['#ffffff', '#0b0600e1'], type: 'inverted' },
-    strokeDangerLoud: { rest: ['#c02e56', '#e55e7a'], type: 'inverted' },
-    strokeDangerSoft: ['#e55e7a', '#d14164'],
-    strokeDangerSubtle: ['#ffd0d6', '#76293a'],
-    strokeDangerOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    strokeWarningLoud: { rest: ['#cd4808', '#e56738'], type: 'inverted' },
-    strokeWarningSoft: ['#fc9571', '#cd4808'],
-    strokeWarningSubtle: ['#ffd3c4', '#762e12'],
-    strokeWarningOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    strokeSuccessLoud: { rest: ['#008455', '#05ad72'], type: 'inverted' },
-    strokeSuccessSoft: ['#5dce97', '#008e5c'],
-    strokeSuccessSubtle: ['#b1efcc', '#025636'],
-    strokeSuccessOnloud: { rest: ['#ffffff', '#242424'], type: 'inverted' },
-    foregroundNeutralPrimary: ['#0b0600e1', '#fff7f2e3'],
+    surfaceNeutralNearer: [rgbffffff, '#2e2823'],
+    surfaceNeutralTranslucent: [rgbffffff80, '#00000080'],
+    backgroundNeutralHeavy: backgroundNeutralHeavy2,
+    backgroundNeutralLoud: backgroundNeutralLoud2,
+    backgroundNeutralSoft: backgroundNeutralSoft2,
+    backgroundNeutralSubtle,
+    backgroundNeutralTransparent: backgroundNeutralTransparent2,
+    backgroundNeutralTranslucent: rest2,
+    backgroundBrandHeavy: backgroundNeutralHeavy2,
+    backgroundBrandLoud: backgroundNeutralLoud2,
+    backgroundBrandSoft: backgroundNeutralSoft2,
+    backgroundBrandSubtle: backgroundNeutralSubtle,
+    backgroundBrandTransparent: backgroundNeutralTransparent2,
+    strokeNeutralHeavy: { rest: [rgb28231e, '#e3dcd7'], type: inverted },
+    strokeNeutralLoud,
+    strokeNeutralSoft: strokeNeutralSoft2,
+    strokeNeutralSubtle: backgroundNeutralSoft2,
+    strokeNeutralTransparent: backgroundNeutralTransparent2,
+    strokeNeutralOnloud: strokeNeutralOnloud2,
+    strokeBrandLoud: strokeNeutralLoud,
+    strokeBrandSoft: strokeNeutralSoft2,
+    strokeBrandSubtle: backgroundNeutralSoft2,
+    strokeBrandOnloud: strokeNeutralOnloud2,
+    foregroundNeutralPrimary,
     foregroundNeutralSecondary: ['#190c00ab', '#fff2e8b5'],
-    foregroundNeutralTertiary: ['#1e0d009a', '#ffeee39a'],
-    foregroundNeutralOnloud: { rest: ['#ffffff', '#0b0600e1'], type: 'inverted' },
-    foregroundBrandPrimary: ['#0b0600e1', '#fff7f2e3'],
-    foregroundBrandOnloud: { rest: ['#ffffff', '#0b0600e1'], type: 'inverted' },
-    foregroundDangerPrimary: ['#a62147', '#fd8ea1'],
-    foregroundDangerOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    foregroundWarningPrimary: ['#a93901', '#fc9571'],
-    foregroundWarningOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    foregroundSuccessPrimary: ['#017048', '#5dce97'],
-    foregroundSuccessOnloud: { rest: ['#ffffff', '#000000db'], type: 'inverted' },
-    fixedWhite: '#ffffff',
-    fixedBlack: '#000000',
-    expressionAccentHeavy: ['#28231e', '#ffffff'],
-    expressionAccentLoud: ['#1e0d009a', '#ffeee39a'],
-    expressionAccentSoft: ['#4d200028', '#ffe3cb40'],
-    expressionAccentSubtle: ['#6c31001a', '#fff4ef14'],
-    expressionAchromaticHeavy: ['#000000', '#ffffff'],
-    expressionAchromaticSubtle: ['#ffffff', '#000000'],
-    expressionGrayHeavy: ['#484848', '#f5f5f5'],
-    expressionGrayLoud: ['#929292', '#dedede'],
-    expressionGraySoft: ['#dedede', '#929292'],
-    expressionGraySubtle: ['#f5f5f5', '#484848'],
-    expressionNavyHeavy: ['#294482', '#f0f5ff'],
-    expressionNavyLoud: ['#5c8df8', '#cedeff'],
-    expressionNavySoft: ['#cedeff', '#5c8df8'],
-    expressionNavySubtle: ['#f0f5ff', '#294482'],
-    expressionBlueHeavy: ['#0b497f', '#eef6ff'],
-    expressionBlueLoud: ['#2f95f4', '#c6e1ff'],
-    expressionBlueSoft: ['#c6e1ff', '#2f95f4'],
-    expressionBlueSubtle: ['#eef6ff', '#0b497f'],
-    expressionGreenHeavy: ['#0c5722', '#e7fce9'],
-    expressionGreenLoud: ['#32ad52', '#baedc1'],
-    expressionGreenSoft: ['#baedc1', '#32ad52'],
-    expressionGreenSubtle: ['#e7fce9', '#0c5722'],
-    expressionLimeHeavy: ['#345200', '#e6ffcf'],
-    expressionLimeLoud: ['#6da603', '#cbff93'],
-    expressionLimeSoft: ['#cbff93', '#6da603'],
-    expressionLimeSubtle: ['#e6ffcf', '#345200'],
-    expressionYellowHeavy: ['#524800', '#fff7c4'],
-    expressionYellowLoud: ['#fbdf06', '#ffed85'],
-    expressionYellowSoft: ['#ffed85', '#fbdf06'],
-    expressionYellowSubtle: ['#fff7c4', '#524800'],
-    expressionPumpkinHeavy: ['#762f0e', '#fef2ee'],
-    expressionPumpkinLoud: ['#fb966e', '#ffd3c2'],
-    expressionPumpkinSoft: ['#ffd3c2', '#fb966e'],
-    expressionPumpkinSubtle: ['#fef2ee', '#762f0e'],
-    expressionRedHeavy: ['#772b28', '#fff2f0'],
-    expressionRedLoud: ['#e7615b', '#ffd2cd'],
-    expressionRedSoft: ['#ffd2cd', '#e7615b'],
-    expressionRedSubtle: ['#fff2f0', '#772b28'],
-    expressionPinkHeavy: ['#6f2b53', '#fff1f7'],
-    expressionPinkLoud: ['#d961a6', '#ffcee6'],
-    expressionPinkSoft: ['#ffcee6', '#d961a6'],
-    expressionPinkSubtle: ['#fff1f7', '#6f2b53'],
-    expressionPurpleHeavy: ['#523778', '#f7f3ff'],
-    expressionPurpleLoud: ['#a575e8', '#e4d6ff'],
-    expressionPurpleSoft: ['#e4d6ff', '#a575e8'],
-    expressionPurpleSubtle: ['#f7f3ff', '#523778'],
-    overlayNeutralTranslucent: ['#00000026', '#00000099'],
-    materialBackgroundThick: ['#fffffff1', '#262626ea'],
-    materialBackgroundRegular: ['#ffffffd7', '#2f2f2fd1'],
-    materialBackgroundThin: ['#ffffff7e', '#3434348b'],
-    backgroundNeutralDisabled: ['#00000008', '#ffffff07'],
-    backgroundNeutralHeavyDisabled: ['#0000001a', '#ffffff20'],
-    backgroundNeutralSubtleDisabled: ['#0000000d', '#ffffff1b'],
-    strokeNeutralDisabled: ['#00000014', '#ffffff24'],
-    foregroundNeutralDisabled: ['#0000006d', '#ffffff61'],
-    strokeFocusInner: ['#ffffff', '#000000'],
-    strokeFocusOuter: ['#000000', '#ffffff'],
-    shadow: '#000000',
+    foregroundNeutralTertiary: rest4,
+    foregroundNeutralOnloud: strokeNeutralOnloud2,
+    foregroundBrandPrimary: foregroundNeutralPrimary,
+    foregroundBrandOnloud: strokeNeutralOnloud2,
+    expressionAccentHeavy: [rgb28231e, rgbffffff],
+    expressionAccentLoud: rest4,
+    expressionAccentSoft: backgroundNeutralSoft2,
+    expressionAccentSubtle: backgroundNeutralSubtle,
+    backgroundNeutralSubtleDisabled: [rgb0000000d, '#ffffff1b'],
   },
 };

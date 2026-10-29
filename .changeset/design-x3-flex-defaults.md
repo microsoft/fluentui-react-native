@@ -25,6 +25,6 @@ Breaking changes for Flex consumers and theme authors:
   `direction`, and `compositing`. `isInverseInteractionToken` moves from `color-lib` to the package root, alongside the
   new `INTERACTIVE_COLOR_TOKENS` and `isInteractiveColorToken`.
 
-Root `useThemeState` consumers now bundle the interaction algorithm and generated defaults, about 28 KB raw and 7 KB
+Root `useThemeState` consumers now bundle the interaction algorithm and generated defaults, about 23 KB raw and 8 KB
 gzip in the measured scenarios. Package sources move under `src/flex`, `src/fluent`, `src/types`, and `src/test`; export
 keys and conditions are unchanged.

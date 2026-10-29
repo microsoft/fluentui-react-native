@@ -48,8 +48,8 @@ export class GeneratedFile {
     this._content.push(...content);
   }
 
-  /** write the generated file to disk */
-  commit() {
+  /** the full text of the generated file */
+  render(): string {
     let content = this.header.output();
     if (this._content.length > 0) {
       content += '\n' + serialize(this._content);
@@ -57,8 +57,27 @@ export class GeneratedFile {
     if (!content.endsWith('\n')) {
       content += '\n';
     }
+    return content;
+  }
+
+  /** whether the file on disk already holds the generated content */
+  isCurrent(): boolean {
+    return this._entry.exists && this._entry.content === this.render();
+  }
+
+  /**
+   * write the generated file to disk when its content changed
+   * @returns true when the file was written
+   */
+  commit(): boolean {
+    const content = this.render();
+    // load the current content first so an unchanged file is not rewritten
+    if (this._entry.exists && this._entry.content === content) {
+      return false;
+    }
     this._entry.content = content;
     this._entry.writeContentsSync();
+    return true;
   }
 }
 
