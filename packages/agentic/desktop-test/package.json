@@ -32,6 +32,7 @@
     },
     "./config": {
       "types": "./lib/config.d.ts",
+      "import": "./lib/config.js",
       "default": "./src/config.ts"
     },
     "./reporting": {
