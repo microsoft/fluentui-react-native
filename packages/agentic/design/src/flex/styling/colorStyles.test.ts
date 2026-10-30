@@ -2,7 +2,7 @@ import { createInteractiveColor } from '../colors/interactiveColor';
 import type { FlexTokens } from '../tokens.types';
 import { defaultFlexTokens } from '../defaults/defaultTokens';
 import { defaultResolvedThemeAppearance } from '../../theming/appearance';
-import type { ThemeState } from '../../types/themeState.types';
+import type { ThemeState } from '../themeState.types';
 
 import { colorStyleDef, getThemedColorStyleFactory } from './colorStyles';
 import type { ColorStyleDefinition, ViewColorStyle } from './colorStyles';

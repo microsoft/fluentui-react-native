@@ -2,6 +2,7 @@ import { immutableMerge } from '@fluentui-react-native/framework-base';
 
 import { getDefaultFlexTokenDescription } from './defaults/defaultTokens';
 import { mergeFlexTokenDescription } from './flexTokenDescription';
+import type { FlexThemeDescription } from './themeState.types';
 import type { FlexTokenDescription, FlexTokens, PartialFlexTokens } from './tokens.types';
 import { resolveFlexTokenDescription } from './colors/interactionPolicy';
 import { internResolvedThemeAppearance, themeAppearanceKey } from '../theming/appearance';
@@ -31,8 +32,19 @@ export type FlexThemeRecipe =
 
 export type LegacyThemeFallback = Theme | PartialTheme | ((appearance: Readonly<NormalizedThemeAppearance>) => Theme | PartialTheme);
 
+// No token group is named `tokens`, so its presence identifies a complete description.
+function isFlexThemeDescription(base: FlexThemeReferenceOptions['base']): base is FlexThemeDescription {
+  return typeof base === 'object' && base !== null && !(base instanceof FlexThemeReference) && 'tokens' in base;
+}
+
 export interface FlexThemeReferenceOptions {
-  base?: FlexThemeInput | FlexThemeReference;
+  /**
+   * Authored tokens layered over the package defaults, a complete
+   * `FlexThemeDescription` that replaces them, or a parent reference. A
+   * description's `colorTone` fills `appearance.colorTone` when that option
+   * omits it.
+   */
+  base?: FlexThemeInput | FlexThemeDescription | FlexThemeReference;
   appearance?: ThemeAppearanceOptions;
   fallbackAppearance?: Partial<ResolvedThemeAppearance>;
   appearanceSource?: ThemeAppearanceSource;
@@ -46,7 +58,7 @@ export class FlexThemeReference implements FlexThemeSource {
   public readonly appearanceSource?: ThemeAppearanceSource;
 
   private revisionValue = 0;
-  private readonly base?: FlexThemeInput | FlexThemeReference;
+  private readonly base?: FlexThemeInput | FlexThemeDescription | FlexThemeReference;
   private readonly legacyFallback?: LegacyThemeFallback;
   private recipes: FlexThemeRecipe[];
   private readonly listeners = new Set<OnThemeChange>();
@@ -58,7 +70,10 @@ export class FlexThemeReference implements FlexThemeSource {
   public constructor(options: FlexThemeReferenceOptions = {}, ...recipes: FlexThemeRecipe[]) {
     this.base = options.base;
     const parent = options.base instanceof FlexThemeReference ? options.base : undefined;
-    this.appearanceOptions = options.appearance ?? parent?.appearanceOptions;
+    const appearance = options.appearance ?? parent?.appearanceOptions;
+    const descriptionTone = isFlexThemeDescription(options.base) ? options.base.colorTone : undefined;
+    this.appearanceOptions =
+      descriptionTone !== undefined && appearance?.colorTone === undefined ? { ...appearance, colorTone: descriptionTone } : appearance;
     this.fallbackAppearance = options.fallbackAppearance ?? parent?.fallbackAppearance;
     this.appearanceSource = options.appearanceSource ?? parent?.appearanceSource;
     this.legacyFallback = options.legacyFallback;
@@ -148,6 +163,9 @@ export class FlexThemeReference implements FlexThemeSource {
     if (this.base instanceof FlexThemeReference) {
       this.base.syncParentRevision();
       return this.base.resolveDescription(appearance, key);
+    }
+    if (isFlexThemeDescription(this.base)) {
+      return this.base.tokens;
     }
     const base = typeof this.base === 'function' ? this.base(appearance) : this.base;
     return mergeFlexTokenDescription(getDefaultFlexTokenDescription(appearance.colorTone), base);

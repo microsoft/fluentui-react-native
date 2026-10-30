@@ -52,6 +52,7 @@ export {
 } from './theming/modern';
 export type {
   ColorTone,
+  FlexThemeDescription,
   FlexThemeInput,
   FlexThemeRecipe,
   FlexThemeReferenceOptions,
@@ -78,5 +79,5 @@ export type {
   ThemeSourceBase,
 } from './theming/modern';
 export type { ThemeStyleSheet } from './flex/useThemeState';
-export type { ThemeState } from './types/themeState.types';
+export type { ThemeState } from './flex/themeState.types';
 export { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './flex/useThemeState';

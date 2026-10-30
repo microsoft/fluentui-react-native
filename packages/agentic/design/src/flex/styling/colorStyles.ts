@@ -1,7 +1,7 @@
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens, InteractiveColor, SemanticColorName, SemanticColors } from '../tokens.types';
-import type { ThemeState } from '../../types/themeState.types';
+import type { ThemeState } from '../themeState.types';
 
 import { createStateLevelMap, getThemedStateStyleFactory } from '../../styling/branchedStyle';
 import type { StateLevels, StateNames, StateSource, StyleDefinition, StyleDefFromTokens } from '../../styling/branchedStyle';

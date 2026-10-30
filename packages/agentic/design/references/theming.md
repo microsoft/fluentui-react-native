@@ -5,6 +5,7 @@ owner_paths:
   - packages/agentic/design/src/theming
   - packages/agentic/design/src/types
   - packages/agentic/design/src/flex/flexThemeReference.ts
+  - packages/agentic/design/src/flex/themeState.types.ts
   - packages/agentic/design/src/flex/useThemeState.ts
   - packages/agentic/design/src/fluent
   - packages/agentic/design/src/themes
@@ -29,6 +30,11 @@ options followed by recipes. It merges the design package's x3 default Flex toke
 may be a function of the resolved appearance, which always has a concrete `colorTone`. A recipe receives the accumulated
 authored description and the resolved appearance. `PartialFlexTokens` is shape-aware so opaque React Native colors stay
 leaves. `tokens.md` describes the defaults.
+
+A base may instead be a `FlexThemeDescription`: a complete `FlexTokenDescription` in `tokens` and an optional
+`colorTone`. Its tokens replace the package defaults for every appearance, and its tone becomes the reference's default
+`appearance.colorTone` when the `appearance` option sets none. A provider's `appearance` request still wins, and it
+changes only the interaction algorithm, not the description's palette. The Flex themes below are descriptions.
 
 Each color is authored as a value, a `[light, dark]` tuple, or `flexColor` options with explicit states and an
 interaction type, and replaces the previous color atomically. Each resolved color is an `InteractiveColor` with `rest`,
@@ -151,6 +157,27 @@ import { ThemedRoot } from '@fluentui-react-native/design';
 import { fluentTheme } from '@fluentui-react-native/design/themes';
 
 const App = () => <ThemedRoot theme={fluentTheme}>{/* scene */}</ThemedRoot>;
+```
+
+## Flex themes
+
+The `themes` entry point also provides the x3 Flex defaults (`tokens.md`) as `FlexThemeDescription` data:
+
+| Export          | Kind                   | Contents                                           |
+| --------------- | ---------------------- | -------------------------------------------------- |
+| `flexTheme`     | `FlexThemeDescription` | The cool light and dark defaults, with tone `cool` |
+| `flexWarmTheme` | `FlexThemeDescription` | The warm light and dark defaults, with tone `warm` |
+
+Each is a theme description rather than a source: pass it as a `FlexThemeReference` base, alone or under recipes. A
+reference built on `flexTheme` or `flexWarmTheme` resolves the same tokens as a default `FlexThemeReference` requesting
+that tone. Both descriptions are the shared default objects, so treat them as read-only; author changes as recipes or a
+new description.
+
+```ts
+import { FlexThemeReference } from '@fluentui-react-native/design';
+import { flexWarmTheme } from '@fluentui-react-native/design/themes';
+
+const theme = new FlexThemeReference({ base: flexWarmTheme, appearance: { colorScheme: 'system' } });
 ```
 
 ## Legacy projection and bundle boundary

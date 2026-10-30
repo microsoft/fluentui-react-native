@@ -79,7 +79,8 @@ derives states: its omitted states equal rest, so legacy-projected values are un
 
 ## Merging and recipes
 
-`FlexThemeReference` merges the package defaults, its `base`, and its recipes in order. A color override replaces the
+`FlexThemeReference` merges the package defaults, its `base`, and its recipes in order; a `FlexThemeDescription` base
+replaces the defaults instead (`theming.md`). A color override replaces the
 previous color atomically, including its explicit states and type, so a stale state never survives a new rest. Shadow
 overrides also replace the whole layered shadow. An `undefined` color or shadow is not an override. Other token groups
 keep deep-merge semantics.

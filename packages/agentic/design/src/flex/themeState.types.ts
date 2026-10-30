@@ -1,5 +1,23 @@
-import type { FlexTokens } from '../flex/tokens.types';
-import type { NormalizedThemeAppearance } from './appearance.types';
+import type { ColorTone, NormalizedThemeAppearance } from '../types/appearance.types';
+import type { FlexTokenDescription, FlexTokens } from './tokens.types';
+
+/**
+ * A complete Flex theme: a token description that replaces the package
+ * defaults, and the palette tone it was authored for.
+ */
+export type FlexThemeDescription = {
+  /**
+   * The complete authored token description, covering light and dark.
+   */
+  readonly tokens: FlexTokenDescription;
+  /**
+   * The palette tone of these tokens. A `FlexThemeReference` built on this
+   * description uses it as its default requested tone, which also selects the
+   * interaction-color algorithm. Omitted means no default, so the tone
+   * resolves as for any other source.
+   */
+  readonly colorTone?: ColorTone;
+};
 
 /**
  * Style sheets cached for one theme state, keyed by a module-scoped symbol per component.

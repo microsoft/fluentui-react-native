@@ -10,32 +10,33 @@ owner_paths:
 The package is `sideEffects: false` and exposes explicit subpaths so consumers load only the graph they use. Export
 public symbols by name from each entry point; do not add barrel re-exports.
 
-| Subpath                     | Contents                                                                                      |
-| --------------------------- | --------------------------------------------------------------------------------------------- |
-| `.` (root)                  | Modern theming (`ThemeProvider`, `ThemedRoot`, `FlexThemeReference`, hooks), Flex token types |
-| `./theming`                 | The complete modern and legacy theming API, including `ThemeReference` and `useTheme`         |
-| `./theming/legacy-source`   | `ThemeReference` without the legacy consumption graph                                         |
-| `./theming/compat`          | `themeFromFlexTokens` and `getDefaultLegacyTheme`                                             |
-| `./theming/compat/defaults` | `getDefaultLegacyTheme` alone, for platform theme packages                                    |
-| `./themes`                  | Ready-made Fluent themes: `fluentLightTheme`, `fluentDarkTheme`, and `fluentTheme`            |
-| `./tokens/global`           | Generated platform global token constants                                                     |
-| `./tokens/legacy`           | Legacy alias, shadow, and global token data                                                   |
-| `./color-lib`               | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`    |
-| `./styling`                 | State and color style factories; see `styling.md`                                             |
-| `./styling/stylesheet`      | The legacy `themedStyleSheet` helper                                                          |
-| `./styling/tokens`          | Legacy token-to-style builders                                                                |
-| `./testing`                 | Test-only fixtures and validation; see `testing.md`                                           |
+| Subpath                     | Contents                                                                                                  |
+| --------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `.` (root)                  | Modern theming (`ThemeProvider`, `ThemedRoot`, `FlexThemeReference`, hooks), Flex token types             |
+| `./theming`                 | The complete modern and legacy theming API, including `ThemeReference` and `useTheme`                     |
+| `./theming/legacy-source`   | `ThemeReference` without the legacy consumption graph                                                     |
+| `./theming/compat`          | `themeFromFlexTokens` and `getDefaultLegacyTheme`                                                         |
+| `./theming/compat/defaults` | `getDefaultLegacyTheme` alone, for platform theme packages                                                |
+| `./themes`                  | Ready-made themes: `fluentLightTheme`, `fluentDarkTheme`, `fluentTheme`, `flexTheme`, and `flexWarmTheme` |
+| `./tokens/global`           | Generated platform global token constants                                                                 |
+| `./tokens/legacy`           | Legacy alias, shadow, and global token data                                                               |
+| `./color-lib`               | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`                |
+| `./styling`                 | State and color style factories; see `styling.md`                                                         |
+| `./styling/stylesheet`      | The legacy `themedStyleSheet` helper                                                                      |
+| `./styling/tokens`          | Legacy token-to-style builders                                                                            |
+| `./testing`                 | Test-only fixtures and validation; see `testing.md`                                                       |
 
 The `apps/bundle-size` `design-*` scenarios guard these boundaries. Input patterns check the import graph and output
 patterns check the modules a tree-shaken bundle retains. The modern root and legacy-source scenarios forbid the
 compatibility and legacy-token modules and `color-lib/compositing`. The modern root scenarios and the legacy-source
 scenario, which pairs a legacy `ThemeReference` with `useThemeState`, require the retained Flex interaction policy and
 `color-lib/interaction`; the legacy-source scenario also forbids a retained `FlexThemeReference`. Only the legacy theme
-scenario forbids any retained `color-lib/` or `flex/` module. The Fluent theme scenarios forbid `flex/`, `color-lib/`,
-`useTheme`, and the compatibility and legacy-token modules from the import graph, and a bundle that imports only
-`fluentLightTheme` retains neither the dark theme nor `ThemeReference`. The color-library and legacy-projection
-scenarios require their expected modules. Every scenario also requires a module it is expected to load, so a moved file
-cannot make a forbidden pattern pass vacuously.
+scenario forbids any retained `color-lib/` or `flex/` module. The Fluent theme scenarios forbid `useTheme` and the
+compatibility and legacy-token modules from the import graph and any retained `flex/`, `color-lib/`, or Flex theme
+module, and a bundle that imports only `fluentLightTheme` retains neither the dark theme nor `ThemeReference`. The Flex
+theme scenarios require the x3 defaults and forbid `fluent/` and `color-lib/compositing`. The color-library and
+legacy-projection scenarios require their expected modules. Every scenario also requires a module it is expected to load,
+so a moved file cannot make a forbidden pattern pass vacuously.
 
 The package specifiers above are the supported import surface. Source and build paths such as `src/fluent/...` or
 `lib/...` are private implementation details that may move without a breaking change.

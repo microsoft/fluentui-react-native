@@ -7,7 +7,7 @@ import type { ReactTestRenderer } from 'react-test-renderer';
 import { mockTheme } from '../test/fixtures/mockTheme';
 import { defaultFlexTokens } from '../flex/defaults/defaultTokens';
 import { useThemeState } from '../flex/useThemeState';
-import type { ThemeState } from '../types/themeState.types';
+import type { ThemeState } from '../flex/themeState.types';
 import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceSourceSnapshot } from '../types/appearance.types';
 import { ThemeContext } from './context';
 import { FlexThemeReference } from '../flex/flexThemeReference';

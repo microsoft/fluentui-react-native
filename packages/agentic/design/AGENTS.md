@@ -1,8 +1,8 @@
 # Design agent instructions
 
 This is the instruction root for `@fluentui-react-native/design` and every descendant. The package owns Fluent UI React
-Native's theming contract: theme sources and providers, ready-made Fluent themes, structured appearance, Flex and legacy
-tokens, the token mappings, themed style factories, the runtime color library, and test-only design fixtures.
+Native's theming contract: theme sources and providers, ready-made Fluent and Flex themes, structured appearance, Flex
+and legacy tokens, the token mappings, themed style factories, the runtime color library, and test-only design fixtures.
 
 ## Start here
 

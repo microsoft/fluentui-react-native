@@ -69,6 +69,7 @@ export { useRootInputModality } from './useRootInputModality';
 export type { InputModality, RootSettings } from './rootContext';
 export { FlexThemeReference } from '../flex/flexThemeReference';
 export type { FlexThemeInput, FlexThemeRecipe, FlexThemeReferenceOptions, LegacyThemeFallback } from '../flex/flexThemeReference';
+export type { FlexThemeDescription } from '../flex/themeState.types';
 export { flexColor, selectColorEntry } from '../flex/colors/flexColor';
 export type { ColorSchemeSelector } from '../flex/colors/flexColor';
 export { selectShadowEntry } from '../flex/flexShadow';

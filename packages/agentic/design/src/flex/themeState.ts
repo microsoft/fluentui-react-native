@@ -5,7 +5,7 @@ import { defaultResolvedThemeAppearance } from '../theming/appearance';
 import { getFlexSourceTokens, getThemeAppearanceCache } from '../theming/themeRuntime';
 import type { ThemeSource } from '../theming/themeSource';
 import type { NormalizedThemeAppearance } from '../types/appearance.types';
-import type { ThemeState } from '../types/themeState.types';
+import type { ThemeState } from './themeState.types';
 
 export const defaultThemeState: ThemeState = {
   tokens: defaultFlexTokens,

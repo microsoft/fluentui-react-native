@@ -4,7 +4,7 @@ import { defaultThemeAppearanceState } from '../theming/appearance';
 import { useThemeBoundary } from '../theming/context';
 import { defaultThemeState, getThemeState } from './themeState';
 import type { ThemeAppearanceState } from '../types/appearance.types';
-import type { ThemeState } from '../types/themeState.types';
+import type { ThemeState } from './themeState.types';
 
 export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>;
 

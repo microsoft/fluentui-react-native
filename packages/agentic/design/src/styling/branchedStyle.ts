@@ -1,7 +1,7 @@
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '../flex/tokens.types';
-import type { ThemeState } from '../types/themeState.types';
+import type { ThemeState } from '../flex/themeState.types';
 
 type AnyStyle = ViewStyle | ImageStyle | TextStyle;
 

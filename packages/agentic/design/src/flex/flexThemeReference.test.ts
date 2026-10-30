@@ -6,6 +6,7 @@ import { flexColor, selectColorEntry } from './colors/flexColor';
 import { deriveInteractionColor, resolveFlexTokenDescription } from './colors/interactionPolicy';
 import { defaultFlexTokenDescription, defaultFlexTokens, getDefaultFlexTokenDescription } from './defaults/defaultTokens';
 import { FlexThemeReference } from './flexThemeReference';
+import type { FlexThemeDescription } from './themeState.types';
 import type { FlexTokenDescription, PartialFlexTokens } from './tokens.types';
 
 const darkAppearance = {
@@ -138,6 +139,32 @@ describe('FlexThemeReference color tone', () => {
     reference.resolveFlexTokens({ ...lightAppearance, colorTone: 'warm' });
 
     expect(descriptions[0]).toBe(getDefaultFlexTokenDescription('warm'));
+  });
+});
+
+describe('FlexThemeReference theme description base', () => {
+  const warmTheme: FlexThemeDescription = { tokens: getDefaultFlexTokenDescription('warm'), colorTone: 'warm' };
+
+  it('replaces the package defaults for every requested tone', () => {
+    const descriptions: FlexTokenDescription[] = [];
+    const reference = new FlexThemeReference({ base: warmTheme }, (description) => {
+      descriptions.push(description);
+      return {};
+    });
+
+    expect(reference.resolveFlexTokens({ ...defaultResolvedThemeAppearance, colorTone: 'cool' }).color.surfaceNeutralFarther.rest).toBe(
+      '#f0eae5',
+    );
+    expect(descriptions[0]).toBe(warmTheme.tokens);
+  });
+
+  it('uses the description tone unless the appearance option sets one', () => {
+    expect(new FlexThemeReference({ base: warmTheme, appearance: { colorScheme: 'dark' } }).appearanceOptions).toEqual({
+      colorScheme: 'dark',
+      colorTone: 'warm',
+    });
+    expect(new FlexThemeReference({ base: warmTheme, appearance: { colorTone: 'cool' } }).appearanceOptions).toEqual({ colorTone: 'cool' });
+    expect(new FlexThemeReference({ base: { tokens: warmTheme.tokens } }).appearanceOptions).toBeUndefined();
   });
 });
 

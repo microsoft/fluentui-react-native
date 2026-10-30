@@ -210,23 +210,42 @@ describe('runtime graph ownership', () => {
     expect(reachedUnder(legacySourceGraph, 'fluent/tokens/')).toEqual([]);
   });
 
-  it('keeps the themes entry on generated tokens and the legacy source, free of the Flex engine, projection, and payloads', () => {
+  it('keeps the themes entry free of the legacy projection, payloads, and test collateral', () => {
     const themesGraph = runtimeGraph('themes/index.ts');
     expect(themesGraph).toContain('themes/fluent/fluentTheme.ts');
-    expect(themesGraph).toContain('fluent/themeReference.ts');
-    expect(themesGraph).toContain('fluent/defaults/fluentTokens.generated.ts');
-    expect(themesGraph).toContain('tokens/global.generated.ts');
+    expect(themesGraph).toContain('themes/flex/flexWarmTheme.ts');
     expect(themesGraph).not.toContain('fluent/useTheme.ts');
-    for (const prefix of ['flex/', 'color-lib/', 'test/', 'fluent/compat/', 'fluent/tokens/']) {
+    for (const prefix of ['test/', 'fluent/compat/', 'fluent/tokens/']) {
       expect([prefix, reachedUnder(themesGraph, prefix)]).toEqual([prefix, []]);
+    }
+  });
+
+  it('keeps the Fluent themes on generated tokens and the legacy source, free of the Flex engine', () => {
+    for (const entry of ['themes/fluent/fluentLightTheme.ts', 'themes/fluent/fluentDarkTheme.ts', 'themes/fluent/fluentTheme.ts']) {
+      const graph = runtimeGraph(entry);
+      expect(graph).toContain('fluent/defaults/fluentTokens.generated.ts');
+      expect(graph).toContain('tokens/global.generated.ts');
+      for (const prefix of ['flex/', 'color-lib/']) {
+        expect([entry, prefix, reachedUnder(graph, prefix)]).toEqual([entry, prefix, []]);
+      }
+    }
+    expect(runtimeGraph('themes/fluent/fluentTheme.ts')).toContain('fluent/themeReference.ts');
+  });
+
+  it('keeps the Flex themes on the generated Flex defaults, free of legacy Fluent runtime', () => {
+    for (const entry of ['themes/flex/flexTheme.ts', 'themes/flex/flexWarmTheme.ts']) {
+      const graph = runtimeGraph(entry);
+      expect(graph).toContain('flex/defaults/defaultTokens.generated.ts');
+      expect([entry, reachedUnder(graph, 'fluent/')]).toEqual([entry, []]);
+      expect(graph).not.toContain('color-lib/compositing.ts');
     }
   });
 });
 
 describe('shared types', () => {
   it('contain only type declarations and type-only imports', () => {
-    const typeFiles = listSourceFiles(path.join(srcRoot, 'types'));
-    expect(typeFiles.map(toSrcPath).sort()).toEqual(expect.arrayContaining(['types/appearance.types.ts', 'types/themeState.types.ts']));
+    const typeFiles = [...listSourceFiles(path.join(srcRoot, 'types')), path.join(srcRoot, 'flex/themeState.types.ts')];
+    expect(typeFiles.map(toSrcPath).sort()).toEqual(expect.arrayContaining(['types/appearance.types.ts', 'flex/themeState.types.ts']));
     const runtimeStatements = typeFiles.flatMap((file) =>
       readStatements(file)
         .filter((statement) => !isTypeOnlyStatement(statement))

@@ -68,7 +68,8 @@ objects that the declarations spread. The emitted key order is therefore not mea
 ## Default tokens
 
 `src/flex/defaults/defaultTokens.generated.ts` holds the cool and warm x3 defaults, and `defaultTokens.ts` normalizes
-them. `FlexThemeReference` merges the default for the resolved `colorTone` under its base and recipes. The x3 sources
+them. `FlexThemeReference` merges the default for the resolved `colorTone` under its base and recipes, and the `themes`
+entry point exposes the two defaults as `flexTheme` and `flexWarmTheme` (`theming.md`). The x3 sources
 define no high-contrast or elevated values, so those appearances use the light or dark default. Defaults do not
 otherwise vary by contrast or interface level; see `remaining-work.md`. Tests that assert default values should read
 them from `defaultFlexTokens` in the `testing` entry point rather than repeating literals.

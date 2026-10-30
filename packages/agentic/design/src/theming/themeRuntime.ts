@@ -1,7 +1,7 @@
 import { themeAppearanceKey } from './appearance';
 import type { FlexTokens } from '../flex/tokens.types';
 import type { ResolvedThemeAppearance } from '../types/appearance.types';
-import type { ThemeState } from '../types/themeState.types';
+import type { ThemeState } from '../flex/themeState.types';
 import type { FlexThemeSource, ThemeSource } from './themeSource';
 
 /**

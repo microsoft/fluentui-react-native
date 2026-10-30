@@ -74,18 +74,11 @@ behavior is documented in `theming.md`, `tokens.md`, and `entry-points.md`.
 ## Fluent high-contrast and elevated themes
 
 - **Outcome:** `fluentTheme` selects distinct themes for high-contrast and elevated appearances.
-- **Current state:** `themes` exports only the light and dark Fluent themes. The generated Fluent tokens already supply
+- **Current state:** `themes` provides only light and dark Fluent themes. The generated Fluent tokens already supply
   the `hc`, `hcLight`, `hcDark`, `darkGray`, and `darkElevated` color and shadow sets (`tokens.md`), but `fluentTheme`
   resolves high-contrast and elevated requests by color scheme alone.
 - **Done when:** the owner approves how each appearance maps to those sets, including iOS, whose high-contrast files
   carry no colors, and `fluentTheme` selects the matching theme by the resolved appearance.
-
-## Flex themes
-
-- **Outcome:** the `themes` entry point also exposes ready-made Flex themes beside the Fluent themes.
-- **Current state:** `themes` exports only Fluent themes, authored as legacy `Theme` objects.
-- **Done when:** the owner defines the Flex theme set and its exports, and `theming.md` and `entry-points.md` document
-  them.
 
 ## Dependent work owned by other packages
 

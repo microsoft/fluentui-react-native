@@ -12,7 +12,7 @@ import { ThemeProvider } from '../theming/ThemeProvider';
 import type { Theme } from '../fluent/types/Theme.types';
 import { mockTheme } from '../test/fixtures/mockTheme';
 import { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './useThemeState';
-import type { ThemeState } from '../types/themeState.types';
+import type { ThemeState } from './themeState.types';
 
 function ThemeStateProbe({ states }: { states: ThemeState[] }) {
   states.push(useThemeState());
