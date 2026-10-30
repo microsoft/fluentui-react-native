@@ -26,7 +26,7 @@ export interface ColorLayerBase {
 export type ColorLayer = ColorLayerBase & Record<string, string>;
 
 /**
- * A unique combination of foreground, background, and stroke
+ * A unique combination of foreground, background, and stroke. An omitted role draws nothing for that role.
  */
 export type ComponentPresentation = {
   /**
@@ -39,18 +39,27 @@ export type ComponentPresentation = {
    */
   fg?: string;
   /**
-   * name of the stroke color layer used by this component variant
+   * name of the stroke color layer used by this component variant. Omit this for transparent strokes, since a transparent border and no
+   * border are equivalent; there is no transparent stroke layer.
    */
   stroke?: string;
+  /**
+   * the number of times this component presentation is used across all components. This helps in identifying frequently used layers and optimizing them.
+   */
+  count: number;
 };
 
 /**
- * The various state based presentations of a component
+ * The various state based presentations of a component. Each state is a complete presentation; roles omitted from a state are not
+ * inherited from base.
  */
 export type ComponentLayers = {
   /** the component layer representing the default or base presentation of the component */
   base: ComponentPresentation;
-  /** the component layer representing the disabled presentation of the component */
+  /**
+   * the component layer representing the disabled presentation of the component. Its colors come from the layers it references, not from
+   * extra keys on enabled layers, and it shares a layer with enabled presentations only when their values are identical.
+   */
   disabled?: ComponentPresentation;
   /** the component layer representing the selected presentation of the component */
   selected?: ComponentPresentation;
@@ -66,10 +75,15 @@ export type SwatchLayers = {
    * - background layers should be named bg.<name>
    * - foreground layers should be named fg.<name>
    * - stroke layers should be named stroke.<name>
+   * - layers in the same category with identical values must be a single layer, even when only one of them is used by disabled presentations.
+   *   e.g. read-only and disabled strokes that both use --gnrc-color-stroke-neutral-disabled share one stroke layer.
+   * - layers with different but non-conflicting values may also be merged, since a presentation may reference colors it does not use, but
+   *   layers used by disabled presentations merge with enabled layers only when identical.
    */
   layers: Record<string, ColorLayer>;
   /**
    * collection of all component presentations, keyed by their names. Names should be based on the layer names where possible, with precedence of bg, fg, stroke.
+   * Each combination is defined once, after transparent strokes are omitted and identical layers are merged.
    */
   presentations: Record<string, ComponentPresentation>;
   /**
