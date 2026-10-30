@@ -209,6 +209,18 @@ describe('runtime graph ownership', () => {
     expect(reachedUnder(legacySourceGraph, 'fluent/compat/')).toEqual([]);
     expect(reachedUnder(legacySourceGraph, 'fluent/tokens/')).toEqual([]);
   });
+
+  it('keeps the themes entry on generated tokens and the legacy source, free of the Flex engine, projection, and payloads', () => {
+    const themesGraph = runtimeGraph('themes/index.ts');
+    expect(themesGraph).toContain('themes/fluent/fluentTheme.ts');
+    expect(themesGraph).toContain('fluent/themeReference.ts');
+    expect(themesGraph).toContain('fluent/defaults/fluentTokens.generated.ts');
+    expect(themesGraph).toContain('tokens/global.generated.ts');
+    expect(themesGraph).not.toContain('fluent/useTheme.ts');
+    for (const prefix of ['flex/', 'color-lib/', 'test/', 'fluent/compat/', 'fluent/tokens/']) {
+      expect([prefix, reachedUnder(themesGraph, prefix)]).toEqual([prefix, []]);
+    }
+  });
 });
 
 describe('shared types', () => {

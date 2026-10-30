@@ -75,6 +75,12 @@
       "import": "./lib/fluent/compat/defaultLegacyTheme.js",
       "default": "./src/fluent/compat/defaultLegacyTheme.ts"
     },
+    "./themes": {
+      "types": "./lib/themes/index.d.ts",
+      "react-native": "./src/themes/index.ts",
+      "import": "./lib/themes/index.js",
+      "default": "./src/themes/index.ts"
+    },
     "./testing": {
       "types": "./lib/test/index.d.ts",
       "react-native": "./src/test/index.ts",

@@ -20,6 +20,7 @@ const publicEntryPoints = [
   './theming/legacy-source',
   './theming/compat',
   './theming/compat/defaults',
+  './themes',
   './testing',
   './styling',
   './styling/stylesheet',

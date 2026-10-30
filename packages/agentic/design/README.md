@@ -1,8 +1,8 @@
 # `@fluentui-react-native/design`
 
-Core design system concepts, utilities, and types for Fluent UI React Native: theme sources and providers, structured
-light, dark, high-contrast, and elevated appearance, Flex semantic tokens, themed style factories, and an opt-in runtime
-color library. Legacy theme and token packages re-export their APIs from here.
+Core design system concepts, utilities, and types for Fluent UI React Native: theme sources and providers, ready-made
+Fluent themes, structured light, dark, high-contrast, and elevated appearance, Flex semantic tokens, themed style
+factories, and an opt-in runtime color library. Legacy theme and token packages re-export their APIs from here.
 
 ## Quick start
 
@@ -28,6 +28,21 @@ export const App = () => (
 
 Existing `ThemeReference` themes and `useTheme` consumers keep working under the same provider; the
 [theming reference](references/theming.md) explains both authoring models and how they interoperate.
+
+Fluent's own light and dark themes ship in the `themes` entry point, and `fluentTheme` follows the system appearance:
+
+```tsx
+import { ThemedRoot } from '@fluentui-react-native/design';
+import { fluentTheme } from '@fluentui-react-native/design/themes';
+
+export const App = () => (
+  <ThemedRoot theme={fluentTheme} style={{ flex: 1 }}>
+    <Title />
+  </ThemedRoot>
+);
+```
+
+Use `fluentLightTheme` or `fluentDarkTheme` when you need one fixed `Theme` object.
 
 ## Documentation
 

@@ -20,6 +20,7 @@ owner_paths:
 | `src/fluent/`          | Legacy Fluent theme types, `ThemeReference`, `useTheme`, platform utilities, and legacy styling             |
 | `src/fluent/compat/`   | The Flex-to-legacy projection and complete legacy defaults; never reachable from the root                   |
 | `src/fluent/tokens/`   | Legacy alias, shadow, and global token data                                                                 |
+| `src/themes/`          | Ready-made Fluent themes built from the generated Fluent 2 and global tokens; see `theming.md`              |
 | `src/tokens/`          | Generated global tokens and shared token attributes                                                         |
 | `src/tokens/mappings/` | The canonical token map and its generated projections; see `tokens.md`                                      |
 | `src/styling/`         | Shared state style factories and the `styling` facade; see `styling.md`                                     |
@@ -27,11 +28,11 @@ owner_paths:
 | `src/test/`            | Test-only fixtures, compatibility baselines, and color validation; see `testing.md`                         |
 | `src/index.ts`         | The modern root entry point; see `entry-points.md` for every subpath                                        |
 
-Shared modules may import types from either model. At runtime, only the `theming` facade and the legacy subpaths reach
-`src/fluent/`; the root and `styling` graphs may reach `src/flex/` but never `src/fluent/`. Dependencies point one way:
-`src/flex/colors/` may import `src/color-lib/`, but `src/color-lib/` imports only its own modules and shared types.
-Production code never imports `src/test/`. Source paths are private: consumers use the package subpaths in
-`entry-points.md`, never `src/` or `lib/` paths.
+Shared modules may import types from either model. At runtime, only the `theming` facade, the `themes` entry, and the
+legacy subpaths reach `src/fluent/`; the root and `styling` graphs may reach `src/flex/` but never `src/fluent/`.
+Dependencies point one way: `src/flex/colors/` may import `src/color-lib/`, but `src/color-lib/` imports only its own
+modules and shared types. Production code never imports `src/test/`. Source paths are private: consumers use the package
+subpaths in `entry-points.md`, never `src/` or `lib/` paths.
 
 The package's scripts directory holds `codegen.cts`, which runs before every build, the token-mapping check and
 upstream drift tools, and the x3 defaults generator, all described in `tokens.md`. Generated token, projection, and
@@ -45,6 +46,11 @@ default files are committed; change their inputs and regenerate rather than edit
   `src/flex/` or `src/color-lib/`, and the Theme-to-Flex adapter in `src/flex/adapters/` must not reach the interaction
   policy, the x3 defaults, or `src/color-lib/`. `src/test/compatibility/importBoundaries.test.ts` checks these graphs;
   run the bundle-size scenarios too when changing imports between these areas.
+- Keep `src/themes/` a consumer of the generated Fluent 2 and global tokens: it may reach `ThemeReference`, the
+  generated Fluent tokens, and the generated global tokens, but never `src/flex/`, `src/color-lib/`, `useTheme`,
+  `src/fluent/compat/`, or the legacy token payloads, and it authors no color value that the generated alias colors lack.
+  `src/themes/fluent/fluentThemes.test.tsx`, the import-boundary test, and the `design-fluent-*` bundle-size scenarios
+  guard this.
 - Never mutate author-owned theme inputs; caches are external and keyed by source, revision, and resolved appearance.
 - Keep color resolution lazy: resolving tokens, reading rest, merging, and copying the color map must not run the
   interaction algorithm, and a derived state computes at most once per resolved color. `flex-colors.md` owns the color

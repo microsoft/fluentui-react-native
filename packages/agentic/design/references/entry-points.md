@@ -17,6 +17,7 @@ public symbols by name from each entry point; do not add barrel re-exports.
 | `./theming/legacy-source`   | `ThemeReference` without the legacy consumption graph                                         |
 | `./theming/compat`          | `themeFromFlexTokens` and `getDefaultLegacyTheme`                                             |
 | `./theming/compat/defaults` | `getDefaultLegacyTheme` alone, for platform theme packages                                    |
+| `./themes`                  | Ready-made Fluent themes: `fluentLightTheme`, `fluentDarkTheme`, and `fluentTheme`            |
 | `./tokens/global`           | Generated platform global token constants                                                     |
 | `./tokens/legacy`           | Legacy alias, shadow, and global token data                                                   |
 | `./color-lib`               | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`    |
@@ -30,9 +31,11 @@ patterns check the modules a tree-shaken bundle retains. The modern root and leg
 compatibility and legacy-token modules and `color-lib/compositing`. The modern root scenarios and the legacy-source
 scenario, which pairs a legacy `ThemeReference` with `useThemeState`, require the retained Flex interaction policy and
 `color-lib/interaction`; the legacy-source scenario also forbids a retained `FlexThemeReference`. Only the legacy theme
-scenario forbids any retained `color-lib/` or `flex/` module. The color-library and legacy-projection scenarios require
-their expected modules. Every scenario
-also requires a module it is expected to load, so a moved file cannot make a forbidden pattern pass vacuously.
+scenario forbids any retained `color-lib/` or `flex/` module. The Fluent theme scenarios forbid `flex/`, `color-lib/`,
+`useTheme`, and the compatibility and legacy-token modules from the import graph, and a bundle that imports only
+`fluentLightTheme` retains neither the dark theme nor `ThemeReference`. The color-library and legacy-projection
+scenarios require their expected modules. Every scenario also requires a module it is expected to load, so a moved file
+cannot make a forbidden pattern pass vacuously.
 
 The package specifiers above are the supported import surface. Source and build paths such as `src/fluent/...` or
 `lib/...` are private implementation details that may move without a breaking change.

@@ -98,6 +98,14 @@ exports[`public entry points ./testing keeps its runtime export names 1`] = `
 ]
 `;
 
+exports[`public entry points ./themes keeps its runtime export names 1`] = `
+[
+  "fluentDarkTheme: object",
+  "fluentLightTheme: object",
+  "fluentTheme: object",
+]
+`;
+
 exports[`public entry points ./theming keeps its runtime export names 1`] = `
 [
   "FlexThemeReference: function",

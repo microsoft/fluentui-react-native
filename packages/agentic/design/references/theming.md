@@ -7,6 +7,7 @@ owner_paths:
   - packages/agentic/design/src/flex/flexThemeReference.ts
   - packages/agentic/design/src/flex/useThemeState.ts
   - packages/agentic/design/src/fluent
+  - packages/agentic/design/src/themes
 ---
 
 # Theming
@@ -119,6 +120,38 @@ subscribed; create one with `createThemeAppearanceSource`.
 `appearanceOptionsFromLegacy` and `appearanceOptionFromResolved` translate the deprecated `AppearanceOptions` union,
 including `darkElevated`, `highContrast`, and `dynamic`. `getCurrentAppearance`, `isHighContrast`, and
 `setIsHighContrast` remain for existing callers.
+
+## Fluent themes
+
+The `themes` entry point provides legacy `Theme` objects authored from the generated Fluent 2 tokens (`tokens.md`):
+
+| Export             | Kind             | Contents                                         |
+| ------------------ | ---------------- | ------------------------------------------------ |
+| `fluentLightTheme` | `Theme`          | The light theme                                  |
+| `fluentDarkTheme`  | `Theme`          | The dark theme                                   |
+| `fluentTheme`      | `ThemeReference` | Both themes, chosen by the resolved color scheme |
+
+Each theme carries every platform alias color unchanged, plus the legacy palette keys (`bodyText`, `buttonBackground`,
+and so on) that existing components still read. `src/themes/fluent/legacyPalette.ts` points each legacy key at the alias
+color that plays the same role, so the palette adds no color values of its own, and its type is complete: a legacy key
+without a mapping fails to compile. Shadows and font variants are the generated Fluent shadows and font aliases; font
+families, sizes, weights, and spacing come from the global tokens. All of these are generated per platform, so each
+platform's theme carries that platform's values. Fluent 2 defines no serif or cursive family, so those slots use the base
+family. The themes carry no component token overrides.
+
+`fluentTheme` requests `system` for every appearance axis, so a `ThemeProvider` or `ThemedRoot` follows the platform
+appearance source and re-resolves when the system changes; pass `appearance` to pin a color scheme. Contrast and
+interface level do not select separate themes yet: high-contrast and elevated requests resolve by color scheme
+(`remaining-work.md`). Import `fluentLightTheme` or `fluentDarkTheme` alone to keep the other theme and `ThemeReference`
+out of a bundle, or use one as the base of your own `ThemeReference` to extend it. Flex consumers read these themes
+through `useThemeState`, which adapts their alias colors like any legacy source.
+
+```tsx
+import { ThemedRoot } from '@fluentui-react-native/design';
+import { fluentTheme } from '@fluentui-react-native/design/themes';
+
+const App = () => <ThemedRoot theme={fluentTheme}>{/* scene */}</ThemedRoot>;
+```
 
 ## Legacy projection and bundle boundary
 

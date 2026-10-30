@@ -41,8 +41,9 @@ colors and shadows vary by color scheme.
 The package's `prebuild` script (`codegen.cts`) generates the global token files from the platform
 `@fluentui-react-native/design-tokens-*` packages and regenerates both mapping projections. It also generates
 `src/fluent/defaults/fluentTokens.generated.ts` (Win32) and its Windows, macOS, iOS, and Android variants. These modules
-contain complete Fluent alias colors, shadows, and font aliases; nothing consumes them yet. The runtime pipeline
-mappers and existing theme construction are unchanged. Do not edit generated files; change their inputs and rebuild.
+contain complete Fluent alias colors, shadows, and font aliases, which the `themes` entry point consumes (`theming.md`).
+The runtime pipeline mappers and existing theme construction are unchanged. Do not edit generated files; change their
+inputs and rebuild.
 
 Every generated platform module exports `light`, `dark`, `darkGray`, `hc`, `hcLight`, `hcDark`, and `darkElevated`
 color and shadow sets, plus `fontAliasTokens`. Colors satisfy `Required<AliasColorTokens>` (including deprecated red
