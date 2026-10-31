@@ -48,4 +48,17 @@ describe('useMenuItem focus ring (win32)', () => {
     });
     expect(info.props.enableFocusRing).toBe(true);
   });
+
+  it('shows the focus ring for a keyboard focus after a hover that never focused the item', () => {
+    // Hover in and out before the hover focus lands, so no focus event comes from the hover.
+    const { onHoverIn, onHoverOut } = info.props;
+    act(() => {
+      onHoverIn({} as any);
+      onHoverOut({} as any);
+    });
+    act(() => {
+      info.props.onFocus({} as any);
+    });
+    expect(info.props.enableFocusRing).toBe(true);
+  });
 });

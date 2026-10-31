@@ -84,6 +84,15 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
     [pressable],
   );
 
+  const onHoverOut = React.useCallback(
+    (e) => {
+      pressable.props.onHoverOut(e);
+      // the hover ended, so any focus the hover asked for may never arrive; don't let it eat the next real focus
+      isHoverFocus.current = false;
+    },
+    [pressable],
+  );
+
   const onFocus = React.useCallback(
     (e) => {
       pressable.props.onFocus(e);
@@ -106,6 +115,10 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
       onHoverIn: Platform.select({
         macos: pressable.props.onHoverIn,
         default: onHoverIn, // win32
+      }),
+      onHoverOut: Platform.select({
+        macos: pressable.props.onHoverOut,
+        default: onHoverOut, // win32
       }),
       onFocus: Platform.select({
         macos: pressable.props.onFocus,
