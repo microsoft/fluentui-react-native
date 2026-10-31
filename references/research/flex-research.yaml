@@ -1,0 +1,721 @@
+# Flex token research
+#
+# Catalogs how the Flex component specs pair, shape, and animate semantic tokens, in the FlexResearch schema from
+# flexResearch.ts. flex-rules.yaml states the authoring rules drawn from this data and from the Flex system and token
+# skills.
+#
+# Source: the flex-components plugin at release flex-1.5.0-206c4996, the pin in
+# packages/agentic/components/spec-source-lock.json (origin x3-design/fluent-design@334d3b82). The data comes from
+# skills/<component>/web/tokens.yaml for all 49 components. Text styles resolve through the flex-tokens
+# skills/textstyle/textstyle.yaml at the same release. The catalog describes web. Mobile token specs exist for
+# button, destructive-button, divider, message-bar, tab, tablist, and tag (card has only a mobile overview);
+# flex-rules.yaml records where they differ.
+#
+# Names
+# - Tokens use FURN names from packages/agentic/design/src/tokens/flex.types.ts. Colors drop the --gnrc-color- prefix
+#   and are camelCased (backgroundBrandHeavy). Radius, spacing, and font tokens use their key inside the FlexTokens
+#   group (base300, componentBase250, layoutBase200, functional, functionalBodyMedium, functionalSemibold).
+# - Users are <component>[.<variant>...][.<slot>], camelCased. Variant segments use Flex variant values or token-object
+#   keys (primary, small, iconAndText, base, selected, checked, focused, error, readOnly). Slot segments name a part
+#   (label, secondary, secondaryText, icon, indicator, divider, chevron). base is the unselected token object. A bare
+#   component name means every variant uses the value.
+#
+# Keys
+# - colorMaps: <outer>: <inner>: { interactive, static }. A user is interactive when it drives the inner color through
+#   hover and pressed, and static when it uses only the rest value. bgToFg and bgToStroke therefore report whether
+#   the foreground or stroke animates; fgToBg and strokeToBg report whether the background does.
+# - corners: radius token. '0' marks flush, square edges.
+# - fonts: <fontFamily>.<fontSize>.<fontWeight>.<lineHeight>, using web weights; strong styles resolve to bold, which
+#   iOS and Android override to semibold. An empty segment is a value the user does not set.
+# - paddings: <horizontal>.<vertical>. 0 is a literal zero. checkbox and radio labelWrapper horizontal is end-only.
+# - interactivity: the colors that change on hover or pressed, in bg.fg.stroke order.
+#
+# Inclusion
+# - Only values a component authors itself. Values it delegates or inherits unchanged belong to the owner:
+#   - button: toggleButton unselected states and chrome, menuButton trigger, destructiveButton radius, spacing, and
+#     typography, breadcrumb items, infoLabel trigger, messageBar actions, teachingPopover actions, searchBox clear.
+#   - input: combobox, dropdown, searchBox, and select fields.
+#   - popover: menu, combobox, dropdown, infoLabel, and teachingPopover surfaces.
+#   - Composite rows and children: list (listItem), tablist (tab), radioGroup (radio, label), toolbar (buttons),
+#     nav and simpleNav items (navItem), avatarGroup items (avatar).
+# - Disabled values are excluded. Focused, error, visited, and read-only values are listed as users of their own.
+# - In the color maps, a slot without an authored fill is recorded against backgroundNeutralTransparent, because it
+#   renders on the parent surface. Examples are label and link text, field messages, input content, and divider,
+#   spinner, and scrollbar marks. Literal transparent strokes, which hold geometry on borderless styles, and
+#   no-stroke are omitted.
+# - Cross-role tokens keep their own names: a foreground used as a stroke (switch.unchecked,
+#   interactionTag.primary.divider) or as a fill (progressBar indicators, listed against the track in bgToFg).
+# - Not representable in this schema:
+#   - Fills with no foreground or stroke: skeleton bar (backgroundNeutralSubtle) and shimmer (backgroundNeutralSoft),
+#     card nestedContentBlock (backgroundNeutralTranslucent), teachingPopover imageSlot (surfaceNeutralNear), and the
+#     dialog, drawer, nav, and simpleNav scrims (overlayNeutralTranslucent).
+#   - The universal focus ring (strokeFocusOuter and strokeFocusInner around any target) and focus-ring radii.
+#   - The avatar initials line height, a literal 1 (its line-height segment is empty).
+#   - The destructiveButton.subtle hover source: rest is backgroundNeutralTransparent, while hover and pressed are
+#     derived from backgroundDangerSubtle.
+
+colorMaps:
+  bgToFg:
+    backgroundBrandHeavy:
+      foregroundBrandOnloud:
+        interactive: [button.primary, checkbox.checked, checkbox.indeterminate, splitButton.primary, toggleButton.primary.selected]
+        static: []
+      foregroundNeutralOnloud:
+        interactive: []
+        static: [interactionTag.primary, tag.primary]
+    backgroundBrandSoft:
+      foregroundBrandPrimary:
+        interactive: []
+        static: [badge.tint.brand]
+    backgroundDangerLoud:
+      foregroundDangerOnloud:
+        interactive: [destructiveButton.primary]
+        static: []
+    backgroundDangerSoft:
+      foregroundDangerPrimary:
+        interactive: []
+        static: [badge.tint.danger]
+    backgroundDangerSubtle:
+      foregroundDangerPrimary:
+        interactive: []
+        static: [messageBar.error.icon]
+      foregroundNeutralPrimary:
+        interactive: []
+        static: [messageBar.error]
+    backgroundNeutralHeavy:
+      foregroundNeutralOnloud:
+        interactive: [switch.checked, tab.selected, toggleButton.outline.selected, toggleButton.secondary.selected]
+        static: []
+    backgroundNeutralSoft:
+      foregroundBrandPrimary:
+        interactive: [navItem.selected.icon]
+        static: [progressBar.neutral.indicator]
+      foregroundDangerPrimary:
+        interactive: []
+        static: [progressBar.error.indicator]
+      foregroundNeutralPrimary:
+        interactive: [listboxItem.selected, listItem.selected, menuItem.selected, navItem.selected, toggleButton.subtle.selected]
+        static: [avatar.icon, avatar.initials, badge.tint.informative]
+      foregroundNeutralSecondary:
+        interactive: [navItem.selected.secondary]
+        static: []
+      foregroundSuccessPrimary:
+        interactive: []
+        static: [progressBar.success.indicator]
+    backgroundNeutralSubtle:
+      foregroundNeutralPrimary:
+        interactive: [button.secondary, splitButton.secondary]
+        static: [interactionTag.secondary, messageBar.information, tag.secondary]
+    backgroundNeutralTransparent:
+      foregroundBrandPrimary:
+        interactive: [radio.selected]
+        static: [badge.outline.brand]
+      foregroundDangerPrimary:
+        interactive: [destructiveButton.subtle]
+        static: [badge.outline.danger, field.error, label.required, progressBar.error.icon]
+      foregroundNeutralPrimary:
+        interactive:
+          [
+            accordion,
+            button.outline,
+            button.subtle,
+            checkbox.checked.label,
+            checkbox.indeterminate.label,
+            link.base,
+            listboxItem.base,
+            listItem.base,
+            menuItem.base,
+            navItem.base,
+            radio.selected.label,
+            splitButton.outline,
+            tab.base,
+          ]
+        static:
+          [
+            badge.outline.informative,
+            breadcrumb.current,
+            combobox.error.chevron,
+            combobox.focused,
+            dropdown.error.chevron,
+            dropdown.focused.chevron,
+            input.value,
+            label,
+            link.visited,
+            progressBar.label,
+            textarea.value,
+          ]
+      foregroundNeutralSecondary:
+        interactive:
+          [
+            checkbox.secondaryText,
+            checkbox.unchecked.label,
+            combobox.chevron,
+            combobox.clearButton,
+            listboxItem.base.secondary,
+            listItem.base.secondary,
+            menuItem.base.secondary,
+            navItem.base.secondary,
+            radio.secondaryText,
+            radio.unselected.label,
+            switch.unchecked,
+          ]
+        static: [divider, dropdown.chevron, field.helperText, progressBar.valueText, searchBox.searchIcon]
+      foregroundNeutralTertiary:
+        interactive: []
+        static: [breadcrumb.separator, input.placeholder, scrollbar, textarea.placeholder]
+      foregroundSuccessPrimary:
+        interactive: []
+        static: [badge.outline.success, field.success, progressBar.success.icon]
+      foregroundWarningPrimary:
+        interactive: []
+        static: [badge.outline.warning, field.warning]
+    backgroundSuccessSoft:
+      foregroundSuccessPrimary:
+        interactive: []
+        static: [badge.tint.success]
+    backgroundSuccessSubtle:
+      foregroundNeutralPrimary:
+        interactive: []
+        static: [messageBar.success]
+      foregroundSuccessPrimary:
+        interactive: []
+        static: [messageBar.success.icon]
+    backgroundWarningSoft:
+      foregroundWarningPrimary:
+        interactive: []
+        static: [badge.tint.warning]
+    backgroundWarningSubtle:
+      foregroundNeutralPrimary:
+        interactive: []
+        static: [messageBar.warning]
+      foregroundWarningPrimary:
+        interactive: []
+        static: [messageBar.warning.icon]
+    surfaceNeutralNearer:
+      foregroundNeutralPrimary:
+        interactive: []
+        static: [avatarGroup.overflow, dialog, drawer, nav.sectionHeader, simpleNav.sectionHeader, teachingPopover.title, tooltip]
+      foregroundNeutralSecondary:
+        interactive: []
+        static: [teachingPopover.body, teachingPopover.stepper]
+  bgToStroke:
+    backgroundBrandHeavy:
+      foregroundNeutralOnloud:
+        interactive: []
+        static: [interactionTag.primary.divider]
+      strokeNeutralOnloud:
+        interactive: []
+        static: [splitButton.primary.divider]
+    backgroundDangerSubtle:
+      strokeDangerSubtle:
+        interactive: []
+        static: [messageBar.error]
+    backgroundNeutralHeavy:
+      strokeNeutralHeavy:
+        interactive: [switch.checked]
+        static: [toggleButton.outline.selected]
+    backgroundNeutralSoft:
+      strokeBrandLoud:
+        interactive: []
+        static: [avatar.activityRing]
+      strokeNeutralSoft:
+        interactive: []
+        static: [card.selected]
+    backgroundNeutralSubtle:
+      strokeNeutralSubtle:
+        interactive: []
+        static: [interactionTag.secondary.divider, messageBar.information, splitButton.secondary.divider]
+    backgroundNeutralTransparent:
+      foregroundNeutralSecondary:
+        interactive: [switch.unchecked]
+        static: []
+      strokeBrandLoud:
+        interactive: [radio.selected]
+        static: [badge.outline.brand]
+      strokeDangerLoud:
+        interactive: []
+        static: [badge.outline.danger, input.error, textarea.error]
+      strokeFocusOuter:
+        interactive: []
+        static: [input.underline.focused]
+      strokeNeutralDisabled:
+        interactive: []
+        static: [input.readOnly, textarea.readOnly]
+      strokeNeutralHeavy:
+        interactive: [checkbox.unchecked, radio.unselected]
+        static: []
+      strokeNeutralLoud:
+        interactive: [input.base, textarea.base]
+        static: [badge.outline.informative, spinner.indicator]
+      strokeNeutralSubtle:
+        interactive: []
+        static:
+          [
+            button.outline,
+            divider,
+            input.outline.focused,
+            spinner.track,
+            splitButton.outline,
+            splitButton.outline.divider,
+            textarea.focused,
+            toolbar.divider,
+          ]
+      strokeSuccessLoud:
+        interactive: []
+        static: [badge.outline.success]
+      strokeWarningLoud:
+        interactive: []
+        static: [badge.outline.warning]
+    backgroundSuccessSubtle:
+      strokeSuccessSubtle:
+        interactive: []
+        static: [messageBar.success]
+    backgroundWarningSubtle:
+      strokeWarningSubtle:
+        interactive: []
+        static: [messageBar.warning]
+    surfaceNeutralNearer:
+      strokeBrandLoud:
+        interactive: []
+        static: [navItem.selected.indicator]
+      strokeNeutralSubtle:
+        interactive: []
+        static: [avatarGroup.overflow, drawer.bottom, drawer.inline, nav.inline, popover, simpleNav.inline]
+      strokeNeutralTransparent:
+        interactive: []
+        static: [dialog]
+    surfaceNeutralTranslucent:
+      strokeNeutralSubtle:
+        interactive: []
+        static: [card.base]
+  fgToBg:
+    foregroundBrandOnloud:
+      backgroundBrandHeavy:
+        interactive: [button.primary, checkbox.checked, checkbox.indeterminate, splitButton.primary, toggleButton.primary.selected]
+        static: []
+    foregroundBrandPrimary:
+      backgroundBrandSoft:
+        interactive: []
+        static: [badge.tint.brand]
+      backgroundNeutralSoft:
+        interactive: [navItem.selected.icon]
+        static: [progressBar.neutral.indicator]
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.brand, radio.selected]
+    foregroundDangerOnloud:
+      backgroundDangerLoud:
+        interactive: [destructiveButton.primary]
+        static: []
+    foregroundDangerPrimary:
+      backgroundDangerSoft:
+        interactive: []
+        static: [badge.tint.danger]
+      backgroundDangerSubtle:
+        interactive: []
+        static: [messageBar.error.icon]
+      backgroundNeutralSoft:
+        interactive: []
+        static: [progressBar.error.indicator]
+      backgroundNeutralTransparent:
+        interactive: [destructiveButton.subtle]
+        static: [badge.outline.danger, field.error, label.required, progressBar.error.icon]
+    foregroundNeutralOnloud:
+      backgroundBrandHeavy:
+        interactive: [interactionTag.primary, tag.primary]
+        static: []
+      backgroundNeutralHeavy:
+        interactive: [switch.checked, tab.selected, toggleButton.outline.selected, toggleButton.secondary.selected]
+        static: []
+    foregroundNeutralPrimary:
+      backgroundDangerSubtle:
+        interactive: []
+        static: [messageBar.error]
+      backgroundNeutralSoft:
+        interactive: [listboxItem.selected, listItem.selected, menuItem.selected, navItem.selected, toggleButton.subtle.selected]
+        static: [avatar.icon, avatar.initials, badge.tint.informative]
+      backgroundNeutralSubtle:
+        interactive: [button.secondary, interactionTag.secondary, splitButton.secondary, tag.secondary]
+        static: [messageBar.information]
+      backgroundNeutralTransparent:
+        interactive:
+          [
+            accordion,
+            button.outline,
+            button.subtle,
+            listboxItem.base,
+            listItem.base,
+            menuItem.base,
+            navItem.base,
+            splitButton.outline,
+            tab.base,
+          ]
+        static:
+          [
+            badge.outline.informative,
+            breadcrumb.current,
+            checkbox.checked.label,
+            checkbox.indeterminate.label,
+            combobox.error.chevron,
+            combobox.focused,
+            dropdown.error.chevron,
+            dropdown.focused.chevron,
+            input.value,
+            label,
+            link.base,
+            link.visited,
+            progressBar.label,
+            radio.selected.label,
+            textarea.value,
+          ]
+      backgroundSuccessSubtle:
+        interactive: []
+        static: [messageBar.success]
+      backgroundWarningSubtle:
+        interactive: []
+        static: [messageBar.warning]
+      surfaceNeutralNearer:
+        interactive: []
+        static: [avatarGroup.overflow, dialog, drawer, nav.sectionHeader, simpleNav.sectionHeader, teachingPopover.title, tooltip]
+    foregroundNeutralSecondary:
+      backgroundNeutralSoft:
+        interactive: [navItem.selected.secondary]
+        static: []
+      backgroundNeutralTransparent:
+        interactive:
+          [listboxItem.base.secondary, listItem.base.secondary, menuItem.base.secondary, navItem.base.secondary, switch.unchecked]
+        static:
+          [
+            checkbox.secondaryText,
+            checkbox.unchecked.label,
+            combobox.chevron,
+            combobox.clearButton,
+            divider,
+            dropdown.chevron,
+            field.helperText,
+            progressBar.valueText,
+            radio.secondaryText,
+            radio.unselected.label,
+            searchBox.searchIcon,
+          ]
+      surfaceNeutralNearer:
+        interactive: []
+        static: [teachingPopover.body, teachingPopover.stepper]
+    foregroundNeutralTertiary:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [breadcrumb.separator, input.placeholder, scrollbar, textarea.placeholder]
+    foregroundSuccessPrimary:
+      backgroundNeutralSoft:
+        interactive: []
+        static: [progressBar.success.indicator]
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.success, field.success, progressBar.success.icon]
+      backgroundSuccessSoft:
+        interactive: []
+        static: [badge.tint.success]
+      backgroundSuccessSubtle:
+        interactive: []
+        static: [messageBar.success.icon]
+    foregroundWarningPrimary:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.warning, field.warning]
+      backgroundWarningSoft:
+        interactive: []
+        static: [badge.tint.warning]
+      backgroundWarningSubtle:
+        interactive: []
+        static: [messageBar.warning.icon]
+  strokeToBg:
+    foregroundNeutralOnloud:
+      backgroundBrandHeavy:
+        interactive: [interactionTag.primary.divider]
+        static: []
+    foregroundNeutralSecondary:
+      backgroundNeutralTransparent:
+        interactive: [switch.unchecked]
+        static: []
+    strokeBrandLoud:
+      backgroundNeutralSoft:
+        interactive: []
+        static: [avatar.activityRing]
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.brand, radio.selected]
+      surfaceNeutralNearer:
+        interactive: []
+        static: [navItem.selected.indicator]
+    strokeDangerLoud:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.danger, input.error, textarea.error]
+    strokeDangerSubtle:
+      backgroundDangerSubtle:
+        interactive: []
+        static: [messageBar.error]
+    strokeFocusOuter:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [input.underline.focused]
+    strokeNeutralDisabled:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [input.readOnly, textarea.readOnly]
+    strokeNeutralHeavy:
+      backgroundNeutralHeavy:
+        interactive: [switch.checked, toggleButton.outline.selected]
+        static: []
+      backgroundNeutralTransparent:
+        interactive: [checkbox.unchecked]
+        static: [radio.unselected]
+    strokeNeutralLoud:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.informative, input.base, spinner.indicator, textarea.base]
+    strokeNeutralOnloud:
+      backgroundBrandHeavy:
+        interactive: [splitButton.primary.divider]
+        static: []
+    strokeNeutralSoft:
+      backgroundNeutralSoft:
+        interactive: [card.selected]
+        static: []
+    strokeNeutralSubtle:
+      backgroundNeutralSubtle:
+        interactive: [interactionTag.secondary.divider, splitButton.secondary.divider]
+        static: [messageBar.information]
+      backgroundNeutralTransparent:
+        interactive: [button.outline, splitButton.outline, splitButton.outline.divider]
+        static: [divider, input.outline.focused, spinner.track, textarea.focused, toolbar.divider]
+      surfaceNeutralNearer:
+        interactive: []
+        static: [avatarGroup.overflow, drawer.bottom, drawer.inline, nav.inline, popover, simpleNav.inline]
+      surfaceNeutralTranslucent:
+        interactive: [card.base]
+        static: []
+    strokeNeutralTransparent:
+      surfaceNeutralNearer:
+        interactive: []
+        static: [dialog]
+    strokeSuccessLoud:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.success]
+    strokeSuccessSubtle:
+      backgroundSuccessSubtle:
+        interactive: []
+        static: [messageBar.success]
+    strokeWarningLoud:
+      backgroundNeutralTransparent:
+        interactive: []
+        static: [badge.outline.warning]
+    strokeWarningSubtle:
+      backgroundWarningSubtle:
+        interactive: []
+        static: [messageBar.warning]
+corners:
+  '0': [drawer.bottom.bottomCorners, drawer.end, drawer.start, input.underline, nav, simpleNav]
+  base100: [badge.rounded.small, checkbox.standard, skeleton]
+  base200:
+    [
+      accordion,
+      badge.rounded.medium,
+      button.rounded.small,
+      input.outline.small,
+      interactionTag.rounded.small,
+      listboxItem.loading,
+      menuItem.loading,
+      splitButton.rounded.small,
+      tag.rounded.small,
+      teachingPopover.imageSlot,
+      textarea.small,
+      tooltip,
+    ]
+  base300:
+    [
+      button.rounded.medium,
+      card.small.nestedContentBlock,
+      input.outline.medium,
+      interactionTag.rounded.medium,
+      listboxItem,
+      listItem,
+      menuItem,
+      navItem,
+      splitButton.rounded.medium,
+      tab.iconAndText,
+      tag.rounded.medium,
+      textarea.medium,
+    ]
+  base400:
+    [
+      button.rounded.large,
+      card.large.nestedContentBlock,
+      dialog,
+      drawer.bottom.topCorners,
+      input.outline.large,
+      messageBar,
+      popover,
+      splitButton.rounded.large,
+      textarea.large,
+    ]
+  base600: [card.small]
+  base700: [card.large]
+  circular:
+    [
+      avatar,
+      badge.circular,
+      button.circular,
+      checkbox.circular,
+      interactionTag.circular,
+      interactionTag.iconOnly,
+      navItem.selected.indicator,
+      progressBar,
+      radio,
+      scrollbar,
+      searchBox.clearButton,
+      spinner,
+      splitButton.circular,
+      switch,
+      tab.iconOnly,
+      tag.circular,
+      tag.iconOnly,
+    ]
+fonts:
+  '..functionalSemibold.': [avatarGroup.overflow]
+  content.contentParagraphMedium.contentRegular.contentParagraphMedium: [link.content]
+  functional.functionalBodyLarge.functionalBold.functionalBodyLarge:
+    [breadcrumb.current.large, label.strong.large, listItem.large.selected, teachingPopover.title, toggleButton.selected.large]
+  functional.functionalBodyLarge.functionalRegular.: [avatar.size40]
+  functional.functionalBodyLarge.functionalRegular.functionalBodyLarge:
+    [button.large, input.large, label.regular.large, listItem.large.base, spinner.huge, spinner.xLarge, splitButton.large, textarea.large]
+  functional.functionalBodyMedium.functionalBold.functionalBodyMedium:
+    [
+      breadcrumb.current.medium,
+      drawer.title,
+      label.strong.medium,
+      listboxItem.selected,
+      listItem.medium.selected,
+      menuItem.selected,
+      nav.headerTitle,
+      navItem.comfortable.selected,
+      simpleNav.headerTitle,
+      tab.selected,
+      toggleButton.selected.medium,
+    ]
+  functional.functionalBodyMedium.functionalRegular.: [avatar.size32]
+  functional.functionalBodyMedium.functionalRegular.functionalBodyMedium:
+    [
+      button.medium,
+      checkbox.label,
+      dialog.body,
+      field.large,
+      input.medium,
+      interactionTag.medium,
+      label.regular.medium,
+      link.functional,
+      listboxItem.base,
+      listItem.large.secondary,
+      listItem.medium.base,
+      menuItem.base,
+      messageBar,
+      navItem.comfortable.base,
+      progressBar.label,
+      spinner.large,
+      spinner.medium,
+      splitButton.medium,
+      switch,
+      tab.base,
+      tag.medium,
+      teachingPopover.body,
+      textarea.medium,
+    ]
+  functional.functionalBodySmall.functionalBold.functionalBodySmall:
+    [
+      accordion,
+      breadcrumb.current.small,
+      label.strong.small,
+      listboxItem.sectionHeader,
+      listItem.small.selected,
+      menuItem.sectionHeader,
+      menuItem.selected.secondary,
+      nav.sectionHeader,
+      navItem.compact.selected,
+      simpleNav.sectionHeader,
+      toggleButton.selected.small,
+    ]
+  functional.functionalBodySmall.functionalRegular.: [avatar.size28]
+  functional.functionalBodySmall.functionalRegular.functionalBodySmall:
+    [
+      badge.medium,
+      button.small,
+      checkbox.secondaryText,
+      divider,
+      field.medium,
+      input.small,
+      interactionTag.small,
+      label.regular.small,
+      listboxItem.secondary,
+      listItem.medium.secondary,
+      listItem.small.base,
+      listItem.small.secondary,
+      menuItem.base.secondary,
+      navItem.compact.base,
+      progressBar.valueText,
+      radio.secondaryText,
+      spinner.small,
+      spinner.xSmall,
+      splitButton.small,
+      tag.small,
+      teachingPopover.stepper,
+      textarea.small,
+      tooltip,
+    ]
+  functional.functionalCaption.functionalRegular.: [avatar.size16, avatar.size20, avatar.size24]
+  functional.functionalCaption.functionalRegular.functionalCaption: [badge.small, field.small, spinner.tiny, spinner.xTiny]
+  functional.functionalSubtitle.functionalSemibold.functionalSubtitle: [dialog.title]
+  functional.functionalTitleLarge.functionalSemibold.: [avatar.size120]
+  functional.functionalTitleSmall.functionalSemibold.: [avatar.size56]
+paddings:
+  '0.0': [badge.iconOnly, card.none, label]
+  componentBase100.0: [badge.iconAndText.small]
+  componentBase100.componentBase100: [tag.iconOnly.small]
+  componentBase150.0: [badge.iconAndText.medium]
+  componentBase150.componentBase100: [input.small, interactionTag.action.small, textarea.small]
+  componentBase150.componentBase150: [tag.iconOnly.medium]
+  componentBase200.componentBase100: [accordion, button.iconAndText.small, splitButton.small, tag.iconAndText.small, tooltip]
+  componentBase200.componentBase150:
+    [checkbox.labelWrapper, interactionTag.action.medium, listItem.small, navItem.compact, radio.labelWrapper]
+  componentBase200.componentBase200: [menu]
+  componentBase250.componentBase150: [button.iconAndText.medium, input.medium, splitButton.medium, tag.iconAndText.medium, textarea.medium]
+  componentBase300.componentBase150: [tab.iconAndText]
+  componentBase300.componentBase200: [button.iconAndText.large, input.large, splitButton.large, textarea.large]
+  componentBase300.componentBase250: [listboxItem, listItem.medium, menuItem, navItem.comfortable]
+  componentBase300.componentBase300: [card.default, divider.content, messageBar]
+  componentBase400.componentBase300: [listItem.large]
+  componentBase400.componentBase400: [popover]
+  componentBase600.componentBase600: [dialog]
+  layoutBase100.layoutBase100: [nav.body, simpleNav.body]
+  layoutBase200.layoutBase100: [drawer, nav.footer, nav.header, simpleNav.footer, simpleNav.header]
+interactivity:
+  bg: [card, interactionTag, tag]
+  bg.fg:
+    [
+      accordion,
+      button,
+      checkbox.checked,
+      checkbox.indeterminate,
+      destructiveButton,
+      listboxItem.listItem,
+      listItem,
+      menuItem.listItem,
+      navItem,
+      splitButton,
+      tab,
+      toggleButton,
+    ]
+  bg.fg.stroke: [checkbox.unchecked, switch]
+  fg: [combobox, link.base]
+  fg.stroke: [radio]
+  stroke: [input.base, textarea.base]

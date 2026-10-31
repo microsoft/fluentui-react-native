@@ -1,0 +1,647 @@
+# Flex authoring rules
+#
+# Rules for authoring Flex token usage in FURN components and themes. Each rule paraphrases a directive from the Flex
+# system and token skills, or states a pattern measured across the component specs in flex-research.yaml. The source
+# release is flex-1.5.0-206c4996; flex-research.yaml documents provenance, token names, and user names.
+#
+# Fields
+# - id: stable FLEX-<AREA>-NNN identifier.
+# - category: naming, layering, pairing, interaction, disabled, focus, stroke, radius, spacing, typography, elevation,
+#   composition, or mobile.
+# - kind: directive (a Flex skill states it) or observed (a pattern across the component specs, not stated as a rule).
+# - rule: the rule, paraphrased.
+# - evidence: Flex skill IDs (flex-system:<skill>, flex-tokens:<skill>, flex-components:<component>) and
+#   flex-research.yaml users.
+# - exceptions: documented deviations, when any exist.
+# - furn: how the rule lands in FURN, when it affects code.
+
+rules:
+  # Naming
+  - id: FLEX-NAME-001
+    category: naming
+    kind: directive
+    rule: >-
+      Semantic color tokens are named role, family, weight, and an optional state. Roles are surface, background,
+      foreground, stroke, and overlay. Families are neutral, brand, danger, success, and warning. Fill and stroke
+      weights include transparent, translucent, subtle, soft, loud, heavy, and onloud; foregrounds use primary,
+      secondary, tertiary, and onloud.
+    evidence: [flex-system:color, flex-tokens:core]
+    furn: >-
+      flex.types.ts flattens the name to camelCase role, family, and weight (backgroundBrandHeavy). FURN defines no
+      state-suffixed color tokens; hover and pressed are derived (FLEX-INT-001).
+
+  - id: FLEX-NAME-002
+    category: naming
+    kind: directive
+    rule: >-
+      Components bind only to semantic tokens, never to primitives or raw values. Expression colors are not used for
+      component roles or status.
+    evidence: [flex-system:color, flex-system:system-index, flex-tokens:core]
+    furn: Component styles read Flex theme tokens; color literals belong in themes, not components.
+
+  - id: FLEX-NAME-003
+    category: naming
+    kind: directive
+    rule: >-
+      Empty values use a fixed vocabulary. transparent is a color with no visible fill that still holds geometry,
+      no-stroke means no border exists, n/a means the property does not apply, and 0 is a zero dimension. Bare none
+      is not used.
+    evidence: [flex-system:system-index, flex-system:component-boundaries]
+    exceptions: >-
+      Two specs still write none: interaction-tag container padding and the select option-list delegate.
+
+  - id: FLEX-NAME-004
+    category: naming
+    kind: directive
+    rule: >-
+      The token name carries the intent. A rationale is recorded only for a non-obvious choice, such as a cross-family
+      hover source, a cross-role token, or a departure from the spacing heuristics.
+    evidence: [flex-system:system-index, flex-system:spacing, flex-system:styling]
+
+  # Layering
+  - id: FLEX-LAYER-001
+    category: layering
+    kind: directive
+    rule: >-
+      A surface is the structural plane a component sits on and is declared as a surface token. A background is a
+      shader layered above a surface, never a replacement for one.
+    evidence: [flex-system:color, card.base, messageBar]
+
+  - id: FLEX-LAYER-002
+    category: layering
+    kind: observed
+    rule: >-
+      Floating and overlay containers own surfaceNeutralNearer, and their content pairs against it rather than the
+      page surface.
+    evidence:
+      [
+        flex-components:popover,
+        flex-components:tooltip,
+        flex-components:dialog,
+        flex-components:drawer,
+        flex-components:nav,
+        flex-components:simple-nav,
+        avatarGroup.overflow,
+        teachingPopover.title,
+      ]
+    furn: Content colors inside these containers resolve against surfaceNeutralNearer when checking contrast.
+
+  - id: FLEX-LAYER-003
+    category: layering
+    kind: observed
+    rule: Modal scrims use overlayNeutralTranslucent.
+    evidence: [flex-components:dialog, flex-components:drawer, flex-components:nav, flex-components:simple-nav]
+
+  - id: FLEX-LAYER-004
+    category: layering
+    kind: observed
+    rule: >-
+      Status containers layer background{Status}Subtle above a surfaceNeutralNearer surface, with a matching
+      stroke{Status}Subtle border. The information status uses the neutral subtle pair.
+    evidence: [flex-components:message-bar, messageBar.information, messageBar.warning, messageBar.error, messageBar.success]
+
+  - id: FLEX-LAYER-005
+    category: layering
+    kind: observed
+    rule: >-
+      Blocks inside a surface use quiet fills that carry no content color of their own: backgroundNeutralTranslucent
+      for card nested content blocks, surfaceNeutralNear for the teaching popover image slot, and
+      backgroundNeutralSubtle with a backgroundNeutralSoft shimmer for skeletons.
+    evidence: [flex-components:card, flex-components:teaching-popover, flex-components:skeleton]
+
+  # Pairing
+  - id: FLEX-PAIR-001
+    category: pairing
+    kind: observed
+    rule: >-
+      Content on a heavy or loud fill uses an onloud foreground. Brand and danger action fills pair with the onloud
+      foreground of their own family, and backgroundNeutralHeavy pairs with foregroundNeutralOnloud.
+    evidence: [button.primary, checkbox.checked, destructiveButton.primary, switch.checked, tab.selected, toggleButton.secondary.selected]
+    exceptions: >-
+      tag.primary and interactionTag.primary use foregroundNeutralOnloud on backgroundBrandHeavy. Mobile button primary
+      also uses foregroundNeutralOnloud.
+
+  - id: FLEX-PAIR-002
+    category: pairing
+    kind: observed
+    rule: >-
+      Neutral transparent, subtle, and soft fills carry foregroundNeutralPrimary for main content,
+      foregroundNeutralSecondary for supporting content, and foregroundNeutralTertiary for placeholders, separators,
+      and scrollbar thumbs.
+    evidence: [button.secondary, listItem.base.secondary, input.placeholder, breadcrumb.separator, scrollbar]
+
+  - id: FLEX-PAIR-003
+    category: pairing
+    kind: observed
+    rule: >-
+      Status tint pairs background{Status}Soft with foreground{Status}Primary. Status outline pairs a transparent fill
+      with foreground{Status}Primary and stroke{Status}Loud. The informative color maps to the neutral family.
+    evidence: [flex-components:badge, badge.tint.brand, badge.outline.danger, badge.tint.informative]
+
+  - id: FLEX-PAIR-004
+    category: pairing
+    kind: observed
+    rule: >-
+      In a status container only the icon takes the status color; message text stays foregroundNeutralPrimary.
+      Standalone status text on the parent surface uses foreground{Status}Primary.
+    evidence: [messageBar.warning.icon, messageBar.warning, field.error, label.required, progressBar.error.icon]
+
+  - id: FLEX-PAIR-005
+    category: pairing
+    kind: observed
+    rule: >-
+      Selection uses three emphasis levels. Quiet selection is backgroundNeutralSoft with foregroundNeutralPrimary
+      (rows, cards, subtle toggles). Strong selection is backgroundNeutralHeavy with foregroundNeutralOnloud (tabs,
+      switches, secondary and outline toggles). Brand selection is backgroundBrandHeavy with foregroundBrandOnloud
+      (checkboxes, primary toggles).
+    evidence:
+      [
+        listItem.selected,
+        menuItem.selected,
+        navItem.selected,
+        card.selected,
+        toggleButton.subtle.selected,
+        tab.selected,
+        switch.checked,
+        toggleButton.outline.selected,
+        checkbox.checked,
+        toggleButton.primary.selected,
+      ]
+    exceptions: >-
+      Selected list, listbox, and menu items promote secondary text to foregroundNeutralPrimary; selected nav items keep
+      foregroundNeutralSecondary and color the icon foregroundBrandPrimary instead.
+
+  - id: FLEX-PAIR-006
+    category: pairing
+    kind: observed
+    rule: >-
+      Brand color is reserved for primary actions, checked or selected indicators, progress, and presence marks.
+      Body text and links stay neutral.
+    evidence:
+      [
+        button.primary,
+        checkbox.checked,
+        radio.selected,
+        navItem.selected.icon,
+        navItem.selected.indicator,
+        avatar.activityRing,
+        progressBar.neutral.indicator,
+        link.base,
+      ]
+
+  - id: FLEX-PAIR-007
+    category: pairing
+    kind: observed
+    rule: >-
+      Unselected choice labels are quieter than selected ones: checkbox and radio labels use
+      foregroundNeutralSecondary until checked or selected, then foregroundNeutralPrimary.
+    evidence: [checkbox.unchecked.label, checkbox.checked.label, radio.unselected.label, radio.selected.label]
+
+  - id: FLEX-PAIR-008
+    category: pairing
+    kind: observed
+    rule: >-
+      A token may serve another role when the role reads differently: foreground tokens as fills (progress
+      indicators) or strokes (the unchecked switch track, the primary interaction tag divider), and a stroke token as
+      a fill (the divider line).
+    evidence: [progressBar.neutral.indicator, switch.unchecked, interactionTag.primary.divider, flex-components:divider]
+    furn: >-
+      Theme derivation cannot assume a token is used only in its own role. For example, switch.unchecked needs hover
+      and pressed values for foregroundNeutralSecondary as a stroke.
+
+  # Interaction
+  - id: FLEX-INT-001
+    category: interaction
+    kind: directive
+    rule: >-
+      Specs author only the rest value. Hover and pressed derive from the rest token through a relative OKLCH fragment,
+      standard or inverse. Web specs have no hover or pressed tokens.
+    evidence: [flex-tokens:interaction, flex-system:color]
+    furn: >-
+      packages/agentic/design/src/color-lib/interaction.ts implements the derivation (getHoverColor, getPressColor), and
+      INTERACTIVE_COLOR_TOKENS lists the derivable tokens.
+
+  - id: FLEX-INT-002
+    category: interaction
+    kind: directive
+    rule: >-
+      The fragment depends on the source token name. Names containing heavy, loud, or onloud take the inverse fragment;
+      all others take the standard fragment.
+    evidence: [flex-tokens:interaction]
+    furn: isInverseInteractionToken in color-lib/interaction.ts.
+
+  - id: FLEX-INT-003
+    category: interaction
+    kind: directive
+    rule: >-
+      In light mode, the standard fragment lowers OKLCH lightness by 0.03 for hover and 0.06 for pressed and raises
+      alpha by 0.04 and 0.08. Dark mode raises lightness by the same amounts and alpha by 0.03 and 0.06. The inverse
+      fragment reverses the lightness direction and keeps alpha. A multiplier, clamp((0.5 - L) / 0.1, 1, 3), scales
+      the lightness step for dark colors.
+    evidence: [flex-tokens:interaction]
+    furn: INTERACTION_COLOR_DELTAS and interactionCurveMultiplier in color-lib/interaction.ts.
+
+  - id: FLEX-INT-004
+    category: interaction
+    kind: directive
+    rule: A color that defines hover also defines pressed.
+    evidence: [flex-tokens:interaction]
+
+  - id: FLEX-INT-005
+    category: interaction
+    kind: directive
+    rule: >-
+      State precedence is rest, hover, pressed, focused, then disabled. A focused value overrides hover and pressed.
+      Disabled overrides every other state, and its values are authored rather than derived.
+    evidence: [flex-tokens:interaction, flex-system:color]
+
+  - id: FLEX-INT-006
+    category: interaction
+    kind: observed
+    rule: >-
+      Hover and pressed may derive from a token other than the rest token only when the spec says so. The subtle
+      destructive button rests on backgroundNeutralTransparent and derives hover and pressed from
+      backgroundDangerSubtle.
+    evidence: [flex-components:destructive-button, destructiveButton.subtle]
+    furn: Slot styling needs an optional interaction source token instead of always deriving from the rest token.
+
+  - id: FLEX-INT-007
+    category: interaction
+    kind: observed
+    rule: >-
+      Not every color on an interactive control animates. Derive hover and pressed only for the slots the spec marks.
+      Static by spec: tag and interaction tag foregrounds, outline button and card strokes, input and textarea text,
+      the dropdown chevron, and visited links.
+    evidence: [tag.primary, interactionTag.secondary, button.outline, card.base, input.value, dropdown.chevron, link.visited]
+    furn: flex-research.yaml interactivity lists which of bg, fg, and stroke change for each user.
+
+  - id: FLEX-INT-008
+    category: interaction
+    kind: observed
+    rule: >-
+      Focused is an authored state, not an interaction delta. Examples are input boundaries (strokeNeutralSubtle for
+      outline, strokeFocusOuter for underline) and combobox and dropdown icons (foregroundNeutralPrimary).
+    evidence: [input.outline.focused, input.underline.focused, combobox.focused, dropdown.focused.chevron]
+
+  # Disabled
+  - id: FLEX-DIS-001
+    category: disabled
+    kind: observed
+    rule: >-
+      Disabled values depend on fill weight, never on family or selection. Heavy and loud fills become
+      backgroundNeutralHeavyDisabled. Subtle, soft, and surface fills become backgroundNeutralSubtleDisabled.
+      Transparent fills and strokes stay transparent. Foregrounds become foregroundNeutralDisabled, and strokes become
+      strokeNeutralDisabled.
+    evidence:
+      [
+        flex-components:button,
+        flex-components:checkbox,
+        flex-components:switch,
+        flex-components:tab,
+        flex-components:toggle-button,
+        flex-components:card,
+        flex-components:list-item,
+      ]
+    exceptions: Mobile tabs use a transparent disabled fill for both selected and unselected states.
+    furn: Destructive buttons inherit the button disabled values, so danger collapses to neutral.
+
+  - id: FLEX-DIS-002
+    category: disabled
+    kind: observed
+    rule: >-
+      Some text stays undimmed: field helper text keeps foregroundNeutralSecondary when disabled. Read-only is not
+      disabled: value text stays foregroundNeutralPrimary and only the boundary uses strokeNeutralDisabled.
+    evidence: [flex-components:field, input.readOnly, textarea.readOnly]
+
+  # Focus
+  - id: FLEX-FOCUS-001
+    category: focus
+    kind: directive
+    rule: >-
+      The universal focus ring is two concentric strokes: an outer strokeFocusOuter at thick width and an inner
+      strokeFocusInner at thin width. It overlays the component without affecting layout, follows the corner radius of
+      the surface it wraps, and appears on focus-visible only. Disabled and non-interactive components have no ring.
+    evidence: [flex-system:styling, flex-tokens:core]
+
+  - id: FLEX-FOCUS-002
+    category: focus
+    kind: observed
+    rule: >-
+      Each interactive spec declares a focus model. universal draws the dual ring and covers most controls, including
+      outline inputs and textareas. boundary-stroke replaces the ring for underline inputs, which have no full boundary
+      to host it. delegated passes focus to a child: breadcrumb, combobox, dialog, drawer, dropdown, field, info label,
+      list, menu, nav, radio group, search box, select, simple nav, tablist, teaching popover, and toolbar.
+      Non-interactive components have no focus block, and the destructive and menu buttons inherit the button model.
+    evidence: [flex-components:input, flex-components:textarea, flex-components:list, flex-components:button, flex-components:avatar]
+
+  - id: FLEX-FOCUS-003
+    category: focus
+    kind: observed
+    rule: >-
+      Set a focus-ring radius explicitly when the ring wraps more than the painted shape. Checkbox and radio wrap the
+      indicator and label with base300, link uses base100, and switch uses circular.
+    evidence: [flex-components:checkbox, flex-components:radio, flex-components:link, flex-components:switch]
+
+  - id: FLEX-FOCUS-004
+    category: focus
+    kind: observed
+    rule: >-
+      Outline fields keep the universal ring and dim the boundary to strokeNeutralSubtle at once. Underline fields
+      replace the ring with a thin strokeFocusOuter inset indicator and recolor the bottom border. The error state keeps
+      strokeDangerLoud while focused.
+    evidence: [flex-components:input, flex-components:textarea, input.outline.focused, input.underline.focused, input.error]
+
+  # Stroke
+  - id: FLEX-STROKE-001
+    category: stroke
+    kind: directive
+    rule: >-
+      Stroke widths come in four whole-pixel steps shared by all platforms. thin is the default for rest borders,
+      dividers, and containment outlines. thick adds emphasis for focus and selected or active states. thicker carries
+      high-contrast weight. thickest is reserved for large-surface treatments such as the largest avatar group cutout.
+      Avatar, avatar group, spinner, link, and nav item specs use the heavier steps.
+    evidence: [flex-system:styling, flex-components:avatar, flex-components:spinner, flex-components:nav-item, flex-components:link]
+
+  - id: FLEX-STROKE-002
+    category: stroke
+    kind: directive
+    rule: >-
+      A component keeps one stroke width across its styles so outer dimensions match. Styles without a visible border
+      set the stroke color to transparent rather than removing the stroke.
+    evidence: [flex-components:button, flex-components:split-button, flex-components:toggle-button, flex-components:checkbox]
+    furn: Keep borderWidth constant across appearances and switch borderColor to transparent.
+
+  - id: FLEX-STROKE-003
+    category: stroke
+    kind: observed
+    rule: |-
+      Stroke weight follows purpose:
+      - strokeNeutralSubtle: low-emphasis boundaries and dividers.
+      - strokeNeutralLoud: editable-field boundaries.
+      - strokeNeutralHeavy: unchecked choice controls and selected neutral toggles.
+      - strokeBrandLoud: brand selection marks.
+      - stroke{Status}Loud: status outlines and error fields.
+      - stroke{Status}Subtle: pairs with background{Status}Subtle.
+    evidence:
+      [
+        button.outline,
+        popover,
+        divider,
+        input.base,
+        checkbox.unchecked,
+        switch.checked,
+        toggleButton.outline.selected,
+        radio.selected,
+        badge.outline.brand,
+        input.error,
+        messageBar.error,
+      ]
+
+  - id: FLEX-STROKE-004
+    category: stroke
+    kind: observed
+    rule: Dividers inside a heavy fill use an onloud color; dividers on other fills use strokeNeutralSubtle.
+    evidence: [splitButton.primary.divider, interactionTag.primary.divider, splitButton.secondary.divider, toolbar.divider]
+
+  - id: FLEX-STROKE-005
+    category: stroke
+    kind: observed
+    rule: The dialog keeps a thin strokeNeutralTransparent border, a stroke slot that is invisible by default.
+    evidence: [dialog]
+
+  # Radius
+  - id: FLEX-RADIUS-001
+    category: radius
+    kind: directive
+    rule: >-
+      Radius is one algorithmic tier on a 4px base: base-N resolves to 4px x N / 100 (base100 = 4px through base700 =
+      28px). circular is the only structural exception. Edges flush to the viewport use 0, which is not a token.
+    evidence: [flex-system:styling, flex-tokens:core]
+    furn: >-
+      defaultFlexTokens (packages/agentic/design/src/tokens/defaultTokens.ts) maps these names to Fluent 2 radii
+      (base100 2px, base200 and base300 4px, base400 6px, base600 8px, base700 12px), so components on the default
+      tokens render smaller radii than Flex specifies. A Flex theme must supply the 4px-based values.
+
+  - id: FLEX-RADIUS-002
+    category: radius
+    kind: observed
+    rule: >-
+      Size-scaled controls step radius with size: base200 for Small, base300 for Medium, and base400 for Large. The
+      Circular shape and icon-only tags and tabs override to circular.
+    evidence:
+      [
+        button.rounded.small,
+        button.rounded.medium,
+        button.rounded.large,
+        input.outline.medium,
+        textarea.large,
+        tag.rounded.small,
+        interactionTag.rounded.medium,
+        button.circular,
+        tag.iconOnly,
+        tab.iconOnly,
+      ]
+    exceptions: Badges step one lower, using base100 for Small and base200 for Medium.
+
+  - id: FLEX-RADIUS-003
+    category: radius
+    kind: observed
+    rule: Rows and items use base300 at every size. Loading placeholder rows use base200.
+    evidence: [listItem, listboxItem, menuItem, navItem, tab.iconAndText, listboxItem.loading, menuItem.loading]
+
+  - id: FLEX-RADIUS-004
+    category: radius
+    kind: observed
+    rule: >-
+      Container radius grows with footprint. The tooltip uses base200. Popover, dialog, message bar, and the top
+      corners of a bottom drawer use base400. Cards use base600 (Small) and base700 (Large). Edge-attached panels
+      (start and end drawers, nav) are square.
+    evidence: [tooltip, popover, dialog, messageBar, drawer.bottom.topCorners, card.small, card.large, drawer.start, nav]
+
+  - id: FLEX-RADIUS-005
+    category: radius
+    kind: directive
+    rule: >-
+      A parent uses a radius one or more steps above its children so inner corners do not punch through. A concentric
+      inset block uses inner radius = outer radius - padding, so it matches the outer radius when padding is 0. circular
+      is exempt.
+    evidence: [flex-system:styling, flex-components:card, card.small.nestedContentBlock, card.large.nestedContentBlock]
+
+  - id: FLEX-RADIUS-006
+    category: radius
+    kind: observed
+    rule: Pills, tracks, thumbs, and indicators are circular.
+    evidence: [avatar, switch, radio, progressBar, scrollbar, spinner, navItem.selected.indicator, badge.circular, searchBox.clearButton]
+
+  # Spacing
+  - id: FLEX-SPACE-001
+    category: spacing
+    kind: directive
+    rule: >-
+      Component spacing (componentBase*, 4px base) covers padding and gaps inside components and is the same on every
+      platform. Layout spacing (layoutBase*, 8px base) covers regions of large containers, and each step above
+      layoutBase100 halves on iOS and Android.
+    evidence: [flex-system:spacing, drawer, nav.header, simpleNav.body]
+
+  - id: FLEX-SPACE-002
+    category: spacing
+    kind: directive
+    rule: >-
+      Padding is squared (vertical equals horizontal) or cut in half (vertical is half of horizontal). Dense interactive
+      surfaces such as rows, menus, and inputs may need optical compensation; a deviation needs a recorded rationale.
+    evidence:
+      [flex-system:spacing, popover, dialog, card.default, messageBar, menu, button.iconAndText.small, tab.iconAndText, tooltip, accordion]
+    exceptions: >-
+      Medium and Large buttons and inputs (250/150 and 300/200) and Medium and Large list rows (300/250 and 400/300) fit
+      neither shape.
+
+  - id: FLEX-SPACE-003
+    category: spacing
+    kind: observed
+    rule: >-
+      Button-like controls scale padding as Small 200/100, Medium 250/150, and Large 300/200; input and textarea narrow
+      Small to 150/100. List rows scale 200/150, 300/250, and 400/300. Nav items use 200/150 compact and 300/250
+      comfortable.
+    evidence: [button.iconAndText.medium, splitButton.large, input.small, listItem.medium, navItem.compact]
+
+  - id: FLEX-SPACE-004
+    category: spacing
+    kind: observed
+    rule: Choice-control label wrappers pad only the inline end, using componentBase200 end and componentBase150 vertical.
+    evidence: [checkbox.labelWrapper, radio.labelWrapper]
+
+  # Typography
+  - id: FLEX-TYPE-001
+    category: typography
+    kind: directive
+    rule: >-
+      Functional styles serve UI chrome and content styles serve reading. Status text, helper text, and input labels
+      use functional body medium or body small. Content links switch to the content paragraph style and font family.
+    evidence: [flex-system:typography, flex-tokens:textstyle, link.functional, link.content]
+
+  - id: FLEX-TYPE-002
+    category: typography
+    kind: observed
+    rule: >-
+      Text size tracks control size: Small uses body small, Medium body medium, and Large body large. Field messages use
+      the same steps from caption to body medium.
+    evidence: [button.small, input.medium, textarea.large, label.regular.small, field.small, field.large]
+
+  - id: FLEX-TYPE-003
+    category: typography
+    kind: directive
+    rule: >-
+      The strong variant marks selection and emphasis: selected tabs, rows, and toggles, the current breadcrumb,
+      strong labels, section headers (body small strong), and drawer and nav header titles. Strong is bold on web and
+      semibold on iOS and Android.
+    evidence:
+      [
+        flex-tokens:textstyle,
+        flex-system:typography,
+        tab.selected,
+        menuItem.selected,
+        toggleButton.selected.medium,
+        breadcrumb.current.medium,
+        nav.sectionHeader,
+        drawer.title,
+      ]
+
+  - id: FLEX-TYPE-004
+    category: typography
+    kind: observed
+    rule: >-
+      Secondary text in a row is one size step below primary text, except in Small list items where both use body
+      small. Selected menu-item secondary text turns strong; listbox and list items keep it regular.
+    evidence: [listItem.medium.secondary, listItem.small.secondary, menuItem.selected.secondary, listboxItem.secondary]
+
+  - id: FLEX-TYPE-005
+    category: typography
+    kind: directive
+    rule: >-
+      A text style resolves to family, size, weight, and line height. Size and line height share the style's role name,
+      so the size and lineHeight segments of a font key match.
+    evidence: [flex-tokens:textstyle]
+    furn: SemanticFontSizes and SemanticLineHeights in flex.types.ts share keys (functionalBodyMedium).
+
+  - id: FLEX-TYPE-006
+    category: typography
+    kind: observed
+    rule: >-
+      Avatar initials scale from caption at 16px to title large at 120px, override line height to 1, and trim to the
+      cap-height and baseline band so they stay optically centered.
+    evidence: [flex-components:avatar, avatar.size16, avatar.size120]
+
+  # Elevation
+  - id: FLEX-ELEV-001
+    category: elevation
+    kind: directive
+    rule: >-
+      Inline elements such as buttons and tags get no shadow. Elevation separates container surfaces such as cards,
+      panels, and overlays.
+    evidence: [flex-system:styling]
+
+  - id: FLEX-ELEV-002
+    category: elevation
+    kind: observed
+    rule: >-
+      Transient floating surfaces (tooltip, popover, and the menus and teaching popovers built on it) use the low
+      shadow. Modal and overlay containers (dialog, overlay drawer, overlay nav) use the highest shadow.
+    evidence: [flex-system:styling, tooltip, popover, dialog, flex-components:drawer, flex-components:nav]
+    furn: SemanticShadows low and highest in flex.types.ts.
+
+  # Composition
+  - id: FLEX-COMP-001
+    category: composition
+    kind: observed
+    rule: >-
+      A composite delegates a slot to the component that owns it instead of restating tokens. Examples are select to
+      dropdown to input, the search box to input plus a secondary-button clear control, breadcrumb items to the subtle
+      button, and menu to popover plus menu item.
+    evidence: [flex-components:select, flex-components:search-box, flex-components:breadcrumb, flex-components:menu]
+
+  - id: FLEX-COMP-002
+    category: composition
+    kind: observed
+    rule: >-
+      Variant families inherit and override. The destructive button inherits button chrome, disabled values, and focus
+      and swaps only colors. The toggle button inherits the button for unselected states and adds a selected token
+      object.
+    evidence: [flex-components:destructive-button, flex-components:toggle-button]
+
+  - id: FLEX-COMP-003
+    category: composition
+    kind: directive
+    rule: >-
+      A dismiss glyph that shares a compact surface with a content icon renders one icon-size step smaller. The tap
+      target keeps its own minimum size. Components opt in explicitly.
+    evidence: [flex-system:styling]
+
+  # Mobile
+  - id: FLEX-MOBILE-001
+    category: mobile
+    kind: observed
+    rule: >-
+      Mobile specs name precomputed state tokens (-hover and -pressed suffixes) instead of OKLCH fragments, and they
+      animate some slots that web keeps static, such as the outline button stroke.
+    evidence: [flex-components:button, flex-components:tab, flex-components:tag]
+    furn: FURN has no state tokens; derive mobile hover and pressed with color-lib so platforms stay consistent.
+
+  - id: FLEX-MOBILE-002
+    category: mobile
+    kind: directive
+    rule: iOS has no hover state. Mobile destructive-button and tab specs define only rest, pressed, and disabled.
+    evidence: [flex-tokens:interaction, flex-system:color, flex-components:destructive-button, flex-components:tab]
+
+  - id: FLEX-MOBILE-003
+    category: mobile
+    kind: observed
+    rule: |-
+      Mobile shapes and pairings differ from web:
+      - Button, tab, and tag are circular at every size.
+      - Button primary text uses foregroundNeutralOnloud, and Large vertical padding is componentBase250.
+      - The destructive button adds a Secondary style (backgroundDangerSubtle with foregroundDangerPrimary).
+      - Unselected tab text uses foregroundNeutralTertiary.
+      - The tag has one neutral subtle style with body small strong text and componentBase250 padding.
+      - The message bar uses base600 radius with componentBase400 by componentBase300 padding.
+    evidence:
+      [flex-components:button, flex-components:tab, flex-components:tag, flex-components:destructive-button, flex-components:message-bar]
