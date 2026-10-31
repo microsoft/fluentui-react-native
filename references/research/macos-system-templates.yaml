@@ -1,0 +1,456 @@
+# macOS AppKit system color templates
+#
+# Maps every color that AppKit's NSColor class exposes into the ControlColorMap schema in ctlTemplates.ts. It uses the
+# same template and slot vocabulary as office-templates.yaml and windows-system-templates.yaml so that platforms can be
+# compared.
+#
+# Coverage: all 83 NSColor.h class properties appear as values, in 72 colors and 16 templates.
+#
+# Sources
+# - macOS 27.2 (26B123) on arm64, Xcode 26.4.1 (17E202) with the macOS 26.4 SDK (25E251), and Swift 6.3.1.
+# - NSColor.h in MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers: every class property that returns a
+#   color or a color array (lines 178-285, and the NSDeprecated category at lines 403-433), with its API_AVAILABLE and
+#   API_DEPRECATED annotations and header comment. NSTableView.h line 191 documents the table grid default.
+# - Runtime: compiled Swift probes resolved every NSColor.h property and every value in this file under the aqua and
+#   darkAqua appearances, using performAsCurrentDrawingAppearance, usingType(.componentBased), and
+#   usingColorSpace(.sRGB). All of them resolve. scrubberTexturedBackgroundColor is a pattern color with no RGB
+#   components.
+# - Observed: offscreen renders (NSView.cacheDisplay without a window) of AppKit controls, and the default color
+#   properties of AppKit views. Notes marked Observed come from these probes. Results may differ on screen, where
+#   windows use Liquid Glass materials.
+# - React Native macOS 0.81.9 in node_modules/.store/react-native-macos-virtual-2c02cc8a48/package: Paper's
+#   React/Base/RCTConvert.mm, and Fabric's RCTPlatformColorUtils.mm, PlatformColorParser.mm, and HostPlatformColor.mm
+#   in ReactCommon/react/renderer/graphics/platform/ios/react/renderer/graphics.
+#
+# Values
+# - Each value is a Swift expression that returns an NSColor. Swift drops the Color suffix for the standard colors
+#   (NSColor.black), the system colors (NSColor.systemRed), the fill colors (NSColor.systemFill), NSColor.quinaryLabel,
+#   and NSColor.scrubberTexturedBackground. Every other name keeps it (NSColor.labelColor).
+# - alternatingContentBackgroundColors and the deprecated controlAlternatingRowBackgroundColors return two-color
+#   arrays. Their values are quoted and indexed.
+# - The semantic, system, and fill colors are catalog colors. AppKit resolves them at draw time for the current
+#   appearance, accent color, highlight color, and Increase Contrast setting. AppKit names no separate Light, Dark, or
+#   HighContrast colors, so no color is split by appearance. The standard colors, such as NSColor.black, are fixed.
+#
+# Colors
+# - Colors are keyed by Objective-C selector name, including the Color suffix (systemRedColor). React Native macOS
+#   PlatformColor accepts the same names.
+# - AppKit puts state words first (selectedControlColor, disabledControlTextColor). A color is named after its base
+#   selector with the leading state words removed, keeping AppKit's spelling and Color suffix.
+# - State keys
+#   - selected: a selected control, row, or menu item (selectedControlColor, selectedControlTextColor,
+#     selectedContentBackgroundColor, selectedMenuItemTextColor, and the deprecated selectedKnobColor and
+#     selectedMenuItemColor).
+#   - disabled: disabledControlTextColor, or the .disabled system effect.
+#   - hover and pressed: system effects only. AppKit names no hover or pressed colors.
+#   - focused: not used. AppKit draws keyboard focus as a separate ring in keyboardFocusIndicatorColor (stroke.focus).
+# - Custom keys
+#   - selectionHighlight: selected text (selectedTextColor and selectedTextBackgroundColor). It is not the selected
+#     control state.
+#   - selectionHighlightUnemphasized: selected text while its view or window is not key (unemphasizedSelectedText*).
+#   - placeholder: placeholder text (placeholderTextColor).
+#   - selectedUnemphasized: selected rows or items while their view or window is not key
+#     (unemphasizedSelectedContentBackgroundColor).
+#   - alternatingEven and alternatingOdd: striped rows, from indexes 0 and 1 of an alternating color array.
+#   - deepPressed: the .deepPressed system effect, for a Force Touch deep click.
+# - Bases without a resting AppKit color
+#   - contentBackgroundColor rests on controlBackgroundColor, the "Background for content areas". The name is derived;
+#     a private +contentBackgroundColor responds at runtime but is not public API.
+#   - menuItemTextColor rests on labelColor. NSColor.h calls selectedMenuItemTextColor "Equivalent to +labelColor in a
+#     NSBackgroundStyleEmphasized context". AppKit's selected menu item is the highlighted one, under the pointer or
+#     reached with the keyboard.
+#   - menuItemColor, which is deprecated, rests on NSColor.clear.
+# - Names kept whole: alternateSelectedControlTextColor, because "alternate" is not a state, and the deprecated
+#   alternateSelectedControlColor and secondarySelectedControlColor. NSColor.h lists those two as the older names of
+#   selectedContentBackgroundColor and unemphasizedSelectedContentBackgroundColor.
+# - Some values deliberately appear more than once, such as the resting counterparts labelColor and
+#   controlBackgroundColor.
+# - Availability: most names have no API_AVAILABLE annotation. The exceptions are underPageBackgroundColor (10.8); the
+#   label colors through quaternaryLabelColor, linkColor, placeholderTextColor, and systemRed through systemGray
+#   (10.10); systemTeal and systemMint (10.12); scrubberTexturedBackgroundColor (10.12.2); findHighlightColor (10.13);
+#   separatorColor, controlAccentColor, and the selected-content, unemphasized, and alternating colors (10.14);
+#   systemIndigo (10.15); quinaryLabelColor (11.0); systemCyan (12.0); and textInsertionPointColor and the fill colors
+#   (14.0). Key comments mark the names introduced in macOS 11.0 or later. withSystemEffect requires 10.14.
+# - Deprecated: 13 names, all deprecated in macOS 11.0. Each keeps its color with a "deprecated" key comment that
+#   gives the replacement from API_DEPRECATED. Templates use only non-deprecated names.
+#
+# System effects
+# - NSColor.withSystemEffect(_:) applies an AppKit interaction effect to a color: .rollover -> hover, .pressed ->
+#   pressed, .disabled -> disabled, and .deepPressed -> deepPressed. .none returns the base color.
+# - Effect keys appear only on the colors that templates use as interactive control fills where AppKit names no state
+#   color: clearColor, controlAccentColor, controlColor, and tertiarySystemFillColor. Any other color accepts the
+#   effects too. Every effect used here resolves at runtime.
+# - Observed: for controlAccentColor (#007AFF), .rollover shifts the color further than .pressed: #0045B7 | #3DB7FF for
+#   .rollover and #005CD7 | #2EA8FF for .pressed (aqua | darkAqua). In aqua, .deepPressed equals .rollover.
+# - Effects on translucent colors change both the components and the alpha, so the composited result depends on the
+#   background. For example, over windowBackgroundColor in darkAqua, controlColor's .pressed moves further from rest
+#   than its .rollover.
+#
+# Templates
+# - Roles: bg, fg, stroke, and role-prefixed extras. stroke.focus is the keyboard focus ring, stroke.separator is a
+#   divider line, fg.glyph is a check mark or radio dot, and fg.secondary, fg.tertiary, fg.quaternary, and fg.quinary
+#   follow the label hierarchy. macOS adds bg.findHighlight (find-result bubbles), bg.underPage (the area revealed behind
+#   documents), and fg.insertionPoint (the text caret).
+# - A variant overrides only the roles it names and inherits the rest. While a control is selected, colors named by a
+#   selected variant resolve their own rest, hover, and pressed keys. Inherited colors resolve selected, falling back
+#   to rest.
+# - Templates follow NSColor.h semantics. Observed notes record where current AppKit drawing differs.
+# - button: NSButton push buttons. emphasis is the default (Return key) button, selected is a push-on/push-off button
+#   that is on, and transparent is a borderless, recessed, or toolbar button.
+#   - Observed: the default button and on push-on/push-off and accessory-bar buttons draw with controlAccentColor, not
+#     selectedControlColor ("Control face for selected controls"). A borderless button stays clear when on, so
+#     transparent has no selected variant.
+#   - Observed: the push button face is black or white at .08 alpha, like secondarySystemFillColor. controlColor,
+#     which NSColor.h calls the "Approximate background for the color of control faces", is #FFFFFF | #FFFFFF at .25
+#     alpha.
+# - checkbox and radio: the selected variant is the checked or mixed state. Observed: the box or circle fills with
+#   controlAccentColor and the check mark or dot is white. Mapping that white to alternateSelectedControlTextColor is
+#   Inferred. Unchecked faces render at .10 alpha, like systemFillColor.
+# - listItem: rows and items in NSTableView, NSOutlineView, and NSCollectionView. The selected variant is the
+#   emphasized selection, in a key window and focused view. AppKit re-resolves label colors on emphasized backgrounds
+#   (NSBackgroundStyleEmphasized), but only labelColor has a public emphasized form (alternateSelectedControlTextColor).
+#   An unemphasized selection uses contentBackgroundColor's selectedUnemphasized key with the base foregrounds. Tables
+#   show focus through the emphasized selection, so listItem has no stroke.focus.
+# - surface: the variants follow the NSColor.h fill guidance. content is scroll, table, and collection views; groupBox
+#   is "a group box or tab pane"; form is "content of a form".
+# - table: Observed: NSTableView.gridColor defaults to separatorColor, although NSTableView.h documents gridColor.
+# - textBox: NSTextView defaults, textColor on textBackgroundColor. An editable NSTextField defaults its text to
+#   controlTextColor, and label text fields use labelColor. Observed: a disabled NSTextField draws its text at about
+#   45% of its enabled alpha, which matches neither disabledControlTextColor nor the .disabled effect. NSTextView
+#   draws marked (uncommitted input-method) text over a background equal to systemYellow.withSystemEffect(.disabled).
+# - toggleSwitch and slider: NSColor.h assigns tertiarySystemFillColor to switch backings and systemFillColor to slider
+#   tracks. Observed: slider tracks match, but the off switch track renders at .10 alpha, like systemFillColor. As in
+#   office-templates.yaml, slider fg is the filled part of the track and fg.secondary is the unfilled part.
+# - progressBar: the bar style of NSProgressIndicator. Observed: an accent fill over secondarySystemFillColor.
+#
+# Gaps: AppKit draws these with private materials or CoreUI artwork and no public NSColor, so they are omitted.
+# - Roles
+#   - stroke on button, checkbox, radio, textBox, and colorSwatch: bezels and borders are CoreUI artwork.
+#   - fg.thumb on slider and toggleSwitch: the knobs are white artwork.
+#   - bg on menuItem (NSVisualEffectMaterialSelection) and tableHeader (NSVisualEffectMaterialHeaderView), and the
+#     window titlebar (NSVisualEffectMaterialTitlebar). The deprecated selectedMenuItemColor, headerColor, and
+#     windowFrameColor appear only in colors.
+#   - surface stroke and stroke.outline: AppKit names no region outline color, and window borders and standard NSBox
+#     borders are drawn privately. Observed: a custom NSBox's borderColor defaults to secondaryLabelColor.
+#   - surface fg.emphasis and fg.error, and the link variants parentHovered and parentSelected: AppKit names no such
+#     colors. Apps typically use controlAccentColor for emphasis and systemRedColor for errors (Inferred).
+# - Templates
+#   - badge: NSItemBadge (macOS 26.0) colors are private.
+#   - groupHeader: outline group rows, source-list section headers, and NSMenuItem section headers are styled
+#     privately.
+#   - menu: NSVisualEffectMaterialMenu.
+#   - scrollbar: NSScroller draws privately. The deprecated scrollBarColor, knobColor, and selectedKnobColor say "Use
+#     NSScroller instead".
+#   - tooltip: NSVisualEffectMaterialToolTip.
+#   - pivot, sliderToolTip, and stripedControl have no AppKit equivalent. NSTabView tabs look like an
+#     NSSegmentedControl (Inferred). Observed: a select-one segmented control fills its selected segment with
+#     controlAccentColor, and its other segments match the push button face.
+#
+# Excluded
+# - Private class methods that respond at runtime but are absent from the SDK headers, such as
+#   alternatingContentBackgroundColor, containerBorderColor, contentBackgroundColor, controlAccentBlueColor and the
+#   other per-accent colors, controlFillColor, detailAccentColor, progressIndicatorColor, quarternaryLabelColor (a
+#   misspelled alias), selectedContentTextColor, selectedHeaderTextColor, sourceListBackgroundColor, toolTipColor, and
+#   toolTipTextColor.
+# - NSColorList: the System list repeats public names, plus alternatingContentBackgroundColor
+#   (alternatingContentBackgroundColors[1]). The Apple, Crayons, and Web Safe Colors lists are fixed palettes.
+# - APIs that construct or transform colors rather than name them: NSColor(named:), which finds only asset-catalog
+#   colors and returns nil for system names; NSColor(name:dynamicProvider:); the component, pattern, and HDR (exposure
+#   and contentHeadroom) initializers; highlight(withLevel:); shadow(withLevel:); blended(withFraction:of:); and
+#   withAlphaComponent(_:).
+# - colorForControlTint(_:), deprecated in macOS 11.0 in favor of controlAccentColor, and currentControlTint.
+#
+# React Native macOS PlatformColor
+# - Paper (RCTConvert.mm) and Fabric (RCTPlatformColorUtils.mm) resolve PlatformColor(name) the same way. They try
+#   NSColor(named:) first, which finds only app asset-catalog colors. Then they look the name up in a fixed table of 46
+#   names, each mapped to a selector with an optional array index and a fallback selector for older macOS. Names are
+#   accepted with or without the Color suffix. For an unknown name, Paper logs a conversion error and returns nil;
+#   Fabric silently returns clear.
+# - Requestable: 44 NSColor.h names, plus alternatingEvenContentBackgroundColor and
+#   alternatingOddContentBackgroundColor, which return alternatingContentBackgroundColors[0] and [1].
+# - Not requestable, and marked "not exposed by RN macOS PlatformColor" on each value line: quinaryLabelColor,
+#   textInsertionPointColor, systemCyanColor, systemIndigoColor, systemMintColor, systemTealColor, the five fill colors,
+#   the standard colors except clearColor, and every deprecated name. Deprecated names serve only as fallbacks.
+# - ColorWithSystemEffectMacOS(color, effect) takes 'none', 'pressed', 'deepPressed', 'disabled', or 'rollover'.
+#   DynamicColorMacOS({light, dark, highContrastLight, highContrastDark}) picks a color per appearance.
+# - Paper keeps both dynamic. When Fabric parses them, it converts the effect's base color and each DynamicColorMacOS
+#   branch to a fixed ARGB value using NSApp.effectiveAppearance, so semantic colors inside them stop following
+#   appearance changes (Inferred from code). A plain PlatformColor stays dynamic in both.
+# - Pattern colors such as scrubberTexturedBackgroundColor have no ARGB value, so those Fabric paths cannot carry them
+#   (Inferred).
+#
+# Unresolved
+# - Increase Contrast: NSAppearance(named:) returns the plain aqua and darkAqua appearances for the
+#   accessibilityHighContrast names, so high-contrast values could not be sampled.
+# - Values were sampled with the default accent and highlight colors. Colors derived from them follow the user's
+#   choices.
+# - The Observed notes come from offscreen renders. On-screen drawing with Liquid Glass materials was not checked.
+# - textInsertionPointColor has no header comment. Its role is inferred from NSTextView.insertionPointColor, which
+#   defaults to it.
+colors:
+  alternateSelectedControlColor: # deprecated in macOS 11.0; use selectedContentBackgroundColor
+    rest: NSColor.alternateSelectedControlColor # not exposed by RN macOS PlatformColor
+  alternateSelectedControlTextColor: # text on emphasized selected rows and items; labelColor in an emphasized context
+    rest: NSColor.alternateSelectedControlTextColor
+  blackColor:
+    rest: NSColor.black # not exposed by RN macOS PlatformColor
+  blueColor:
+    rest: NSColor.blue # not exposed by RN macOS PlatformColor
+  brownColor:
+    rest: NSColor.brown # not exposed by RN macOS PlatformColor
+  clearColor:
+    rest: NSColor.clear
+    hover: NSColor.clear.withSystemEffect(.rollover)
+    pressed: NSColor.clear.withSystemEffect(.pressed)
+    disabled: NSColor.clear.withSystemEffect(.disabled)
+    deepPressed: NSColor.clear.withSystemEffect(.deepPressed)
+  contentBackgroundColor: # derived base for rows and items; rests on controlBackgroundColor
+    rest: NSColor.controlBackgroundColor
+    selected: NSColor.selectedContentBackgroundColor
+    alternatingEven: 'NSColor.alternatingContentBackgroundColors[0]' # RN macOS: alternatingEvenContentBackgroundColor
+    alternatingOdd: 'NSColor.alternatingContentBackgroundColors[1]' # RN macOS: alternatingOddContentBackgroundColor
+    selectedUnemphasized: NSColor.unemphasizedSelectedContentBackgroundColor
+  controlAccentColor: # the user's accent color
+    rest: NSColor.controlAccentColor
+    hover: NSColor.controlAccentColor.withSystemEffect(.rollover)
+    pressed: NSColor.controlAccentColor.withSystemEffect(.pressed)
+    disabled: NSColor.controlAccentColor.withSystemEffect(.disabled)
+    deepPressed: NSColor.controlAccentColor.withSystemEffect(.deepPressed)
+  controlAlternatingRowBackgroundColors: # deprecated in macOS 11.0; use alternatingContentBackgroundColors
+    rest: 'NSColor.controlAlternatingRowBackgroundColors[0]' # not exposed by RN macOS PlatformColor
+    alternatingEven: 'NSColor.controlAlternatingRowBackgroundColors[0]' # not exposed by RN macOS PlatformColor
+    alternatingOdd: 'NSColor.controlAlternatingRowBackgroundColors[1]' # not exposed by RN macOS PlatformColor
+  controlBackgroundColor: # background for content areas: scroll, table, and collection views
+    rest: NSColor.controlBackgroundColor
+  controlColor: # approximate background for control faces, such as buttons
+    rest: NSColor.controlColor
+    hover: NSColor.controlColor.withSystemEffect(.rollover)
+    pressed: NSColor.controlColor.withSystemEffect(.pressed)
+    selected: NSColor.selectedControlColor
+    disabled: NSColor.controlColor.withSystemEffect(.disabled)
+    deepPressed: NSColor.controlColor.withSystemEffect(.deepPressed)
+  controlDarkShadowColor: # deprecated in macOS 11.0; use a color that matches the semantics being used, such as separatorColor
+    rest: NSColor.controlDarkShadowColor # not exposed by RN macOS PlatformColor
+  controlHighlightColor: # deprecated in macOS 11.0; use a color that matches the semantics being used, such as separatorColor
+    rest: NSColor.controlHighlightColor # not exposed by RN macOS PlatformColor
+  controlLightHighlightColor: # deprecated in macOS 11.0; use a color that matches the semantics being used, such as separatorColor
+    rest: NSColor.controlLightHighlightColor # not exposed by RN macOS PlatformColor
+  controlShadowColor: # deprecated in macOS 11.0; use a color that matches the semantics being used, such as separatorColor
+    rest: NSColor.controlShadowColor # not exposed by RN macOS PlatformColor
+  controlTextColor: # text on controls
+    rest: NSColor.controlTextColor
+    selected: NSColor.selectedControlTextColor
+    disabled: NSColor.disabledControlTextColor
+  cyanColor:
+    rest: NSColor.cyan # not exposed by RN macOS PlatformColor
+  darkGrayColor:
+    rest: NSColor.darkGray # not exposed by RN macOS PlatformColor
+  findHighlightColor: # find-indicator bubbles around inline search results
+    rest: NSColor.findHighlightColor
+  grayColor:
+    rest: NSColor.gray # not exposed by RN macOS PlatformColor
+  greenColor:
+    rest: NSColor.green # not exposed by RN macOS PlatformColor
+  gridColor: # grids in controls; Observed: NSTableView.gridColor defaults to separatorColor instead
+    rest: NSColor.gridColor
+  headerColor: # deprecated in macOS 11.0; use NSVisualEffectMaterialHeaderView
+    rest: NSColor.headerColor # not exposed by RN macOS PlatformColor
+  headerTextColor: # header cells in NSTableView and NSOutlineView
+    rest: NSColor.headerTextColor
+  highlightColor: # abstract color that highlights tend toward
+    rest: NSColor.highlightColor
+  keyboardFocusIndicatorColor: # keyboard focus ring around controls
+    rest: NSColor.keyboardFocusIndicatorColor
+  knobColor: # deprecated in macOS 11.0; use NSScroller
+    rest: NSColor.knobColor # not exposed by RN macOS PlatformColor
+    selected: NSColor.selectedKnobColor # not exposed by RN macOS PlatformColor
+  labelColor: # static text
+    rest: NSColor.labelColor
+  lightGrayColor:
+    rest: NSColor.lightGray # not exposed by RN macOS PlatformColor
+  linkColor: # standard system links
+    rest: NSColor.linkColor
+  magentaColor:
+    rest: NSColor.magenta # not exposed by RN macOS PlatformColor
+  menuItemColor: # deprecated in macOS 11.0; use NSVisualEffectMaterialSelection. Only the selected form is named.
+    rest: NSColor.clear
+    selected: NSColor.selectedMenuItemColor # not exposed by RN macOS PlatformColor
+  menuItemTextColor: # only the selected form is named; rest is labelColor, its documented equivalent
+    rest: NSColor.labelColor
+    selected: NSColor.selectedMenuItemTextColor
+  orangeColor:
+    rest: NSColor.orange # not exposed by RN macOS PlatformColor
+  purpleColor:
+    rest: NSColor.purple # not exposed by RN macOS PlatformColor
+  quaternaryLabelColor: # large secondary or disabled text, separators, and large glyphs
+    rest: NSColor.quaternaryLabelColor
+  quaternarySystemFillColor: # macOS 14.0+; large areas, such as a group box or tab pane
+    rest: NSColor.quaternarySystemFill # not exposed by RN macOS PlatformColor
+  quinaryLabelColor: # macOS 11.0+; large images and subtle decoration, not general foreground content
+    rest: NSColor.quinaryLabel # not exposed by RN macOS PlatformColor
+  quinarySystemFillColor: # macOS 14.0+; large areas that need subtle emphasis, such as the content of a form
+    rest: NSColor.quinarySystemFill # not exposed by RN macOS PlatformColor
+  redColor:
+    rest: NSColor.red # not exposed by RN macOS PlatformColor
+  scrollBarColor: # deprecated in macOS 11.0; use NSScroller
+    rest: NSColor.scrollBarColor # not exposed by RN macOS PlatformColor
+  scrubberTexturedBackgroundColor: # pattern color for NSScrubber
+    rest: NSColor.scrubberTexturedBackground
+  secondaryLabelColor: # secondary static text
+    rest: NSColor.secondaryLabelColor
+  secondarySelectedControlColor: # deprecated in macOS 11.0; use unemphasizedSelectedContentBackgroundColor
+    rest: NSColor.secondarySelectedControlColor # not exposed by RN macOS PlatformColor
+  secondarySystemFillColor: # macOS 14.0+; small shapes, such as the backing of a progress indicator
+    rest: NSColor.secondarySystemFill # not exposed by RN macOS PlatformColor
+  separatorColor: # separators between sections of content, not split-view or window-chrome dividers
+    rest: NSColor.separatorColor
+  shadowColor: # abstract color that shadows tend toward
+    rest: NSColor.shadowColor
+  systemBlueColor:
+    rest: NSColor.systemBlue
+  systemBrownColor:
+    rest: NSColor.systemBrown
+  systemCyanColor: # macOS 12.0+
+    rest: NSColor.systemCyan # not exposed by RN macOS PlatformColor
+  systemFillColor: # macOS 14.0+; thin shapes, such as the track of a slider
+    rest: NSColor.systemFill # not exposed by RN macOS PlatformColor
+  systemGrayColor:
+    rest: NSColor.systemGray
+  systemGreenColor:
+    rest: NSColor.systemGreen
+  systemIndigoColor:
+    rest: NSColor.systemIndigo # not exposed by RN macOS PlatformColor
+  systemMintColor:
+    rest: NSColor.systemMint # not exposed by RN macOS PlatformColor
+  systemOrangeColor:
+    rest: NSColor.systemOrange
+  systemPinkColor:
+    rest: NSColor.systemPink
+  systemPurpleColor:
+    rest: NSColor.systemPurple
+  systemRedColor:
+    rest: NSColor.systemRed
+  systemTealColor:
+    rest: NSColor.systemTeal # not exposed by RN macOS PlatformColor
+  systemYellowColor:
+    rest: NSColor.systemYellow
+  tertiaryLabelColor: # disabled static text
+    rest: NSColor.tertiaryLabelColor
+  tertiarySystemFillColor: # macOS 14.0+; medium shapes, such as the backing of a switch
+    rest: NSColor.tertiarySystemFill # not exposed by RN macOS PlatformColor
+    hover: NSColor.tertiarySystemFill.withSystemEffect(.rollover) # not exposed by RN macOS PlatformColor
+    pressed: NSColor.tertiarySystemFill.withSystemEffect(.pressed) # not exposed by RN macOS PlatformColor
+    disabled: NSColor.tertiarySystemFill.withSystemEffect(.disabled) # not exposed by RN macOS PlatformColor
+    deepPressed: NSColor.tertiarySystemFill.withSystemEffect(.deepPressed) # not exposed by RN macOS PlatformColor
+  textBackgroundColor: # document text background
+    rest: NSColor.textBackgroundColor
+    selectionHighlight: NSColor.selectedTextBackgroundColor
+    selectionHighlightUnemphasized: NSColor.unemphasizedSelectedTextBackgroundColor
+  textColor: # document text
+    rest: NSColor.textColor
+    placeholder: NSColor.placeholderTextColor
+    selectionHighlight: NSColor.selectedTextColor
+    selectionHighlightUnemphasized: NSColor.unemphasizedSelectedTextColor
+  textInsertionPointColor: # macOS 14.0+; the text caret, and the NSTextView.insertionPointColor default
+    rest: NSColor.textInsertionPointColor # not exposed by RN macOS PlatformColor
+  underPageBackgroundColor: # areas revealed behind documents
+    rest: NSColor.underPageBackgroundColor
+  whiteColor:
+    rest: NSColor.white # not exposed by RN macOS PlatformColor
+  windowBackgroundColor: # window background
+    rest: NSColor.windowBackgroundColor
+  windowFrameColor: # deprecated in macOS 11.0; use NSVisualEffectMaterialTitlebar
+    rest: NSColor.windowFrameColor # not exposed by RN macOS PlatformColor
+  windowFrameTextColor: # text on window chrome
+    rest: NSColor.windowFrameTextColor
+  yellowColor:
+    rest: NSColor.yellow # not exposed by RN macOS PlatformColor
+templates:
+  button: # NSButton push buttons
+    bg: controlColor
+    fg: controlTextColor
+    stroke.focus: keyboardFocusIndicatorColor
+    variants:
+      emphasis: # the default (Return key) button
+        bg: controlAccentColor
+        fg: alternateSelectedControlTextColor
+      selected: # an on push-on/push-off button; Observed: drawn with the accent color, not selectedControlColor
+        bg: controlAccentColor
+        fg: alternateSelectedControlTextColor
+      transparent: # a borderless, recessed, or toolbar button
+        bg: clearColor
+  checkbox:
+    bg: controlColor
+    fg: controlTextColor
+    stroke.focus: keyboardFocusIndicatorColor
+    variants:
+      selected: # checked or mixed
+        bg: controlAccentColor
+        fg.glyph: alternateSelectedControlTextColor
+  colorSwatch: # NSColorWell; its border is CoreUI artwork
+    stroke.focus: keyboardFocusIndicatorColor
+  link:
+    fg: linkColor
+    stroke.focus: keyboardFocusIndicatorColor
+  listItem: # rows and items in NSTableView, NSOutlineView, and NSCollectionView
+    bg: contentBackgroundColor
+    fg: labelColor
+    fg.secondary: secondaryLabelColor
+    variants:
+      selected: # the emphasized selection; an unemphasized selection keeps the base foregrounds
+        fg: alternateSelectedControlTextColor
+  menuItem: # the menu and selection backgrounds are materials
+    fg: menuItemTextColor
+  progressBar: # the bar style of NSProgressIndicator
+    bg: secondarySystemFillColor
+    fg: controlAccentColor
+  radio:
+    bg: controlColor
+    fg: controlTextColor
+    stroke.focus: keyboardFocusIndicatorColor
+    variants:
+      selected: # checked
+        bg: controlAccentColor
+        fg.glyph: alternateSelectedControlTextColor
+  scrubber: # NSScrubber (Touch Bar)
+    bg: scrubberTexturedBackgroundColor
+  slider:
+    fg: controlAccentColor
+    fg.secondary: systemFillColor
+    stroke.focus: keyboardFocusIndicatorColor
+  surface:
+    bg: windowBackgroundColor
+    fg: labelColor
+    fg.quaternary: quaternaryLabelColor
+    fg.quinary: quinaryLabelColor
+    fg.secondary: secondaryLabelColor
+    fg.tertiary: tertiaryLabelColor
+    stroke.separator: separatorColor
+    variants:
+      content: # scroll, table, and collection views
+        bg: controlBackgroundColor
+      form: # the content of a form
+        bg: quinarySystemFillColor
+      groupBox: # a group box or tab pane
+        bg: quaternarySystemFillColor
+  table: # NSTableView and NSOutlineView; rows use listItem
+    bg: controlBackgroundColor
+    stroke.separator: separatorColor # Observed NSTableView.gridColor default; NSTableView.h documents gridColor
+  tableHeader: # NSTableHeaderView; its background is NSVisualEffectMaterialHeaderView
+    fg: headerTextColor
+  textBox: # NSTextView defaults; NSTextField text defaults to controlTextColor
+    bg: textBackgroundColor
+    fg: textColor
+    bg.findHighlight: findHighlightColor
+    fg.insertionPoint: textInsertionPointColor
+    stroke.focus: keyboardFocusIndicatorColor
+  toggleSwitch: # NSSwitch; the knob is white artwork
+    bg: tertiarySystemFillColor
+    stroke.focus: keyboardFocusIndicatorColor
+    variants:
+      'on':
+        bg: controlAccentColor
+  window:
+    bg: windowBackgroundColor
+    fg: windowFrameTextColor
+    bg.underPage: underPageBackgroundColor

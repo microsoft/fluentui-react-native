@@ -1,0 +1,787 @@
+# Colored component control templates
+#
+# Maps every role in colored-component-slots.yaml into the ControlColorMap schema in ctlTemplates.ts. colors holds
+# InteractiveColor entries, and templates holds one ControlTemplate per component, with bg, fg, stroke, dotted bg.*,
+# fg.*, and stroke.* roles, and nested variants. The roles are static, so every color defines only rest. Office
+# palette fields are mapped in office-templates.yaml; the Office badge seeds keep the same color names there and here
+# (BkgBadge, StrokeBadge, TextBadge).
+#
+# Source: colored-component-slots.yaml (schema_version 4), whose source is colors\Office.palette, revision
+# 6963a5424731338e25c68cc28627bcc3428f0131, selector Root/PaletteType[@Name=""], app Mso. Source locations,
+# used_by conditions, and other evidence live in colored-component-slots.yaml and semantic-slot-sources.yaml.
+#
+# Coverage: each of the 241 source field keys (Avatar, AvatarGroup, Badge, PersonaCoin, PersonaPresence, and
+# PresenceBadge) appears exactly once, as the trailing comment of the template slot it maps to. No other comment uses
+# that key form.
+#
+# Values name their source namespace:
+# - office(X): an Office SwatchSet field.
+# - alias(X): a fluent2 alias token (theme.colors.X in v1 components).
+# - flex(color.X): an X3 Flex token, with its full path.
+# - legacy(X): a FURN legacy theme color (theme.colors.X in v0 components).
+# - literal(X): a raw color literal.
+# - expr(X): the source value_expression, verbatim: a fluent2 global palette symbol such as colorRedPrimary, or a
+#   computed or caller expression. Hex annotations move to comments. expr(PNG bitmap) abbreviates a v0 presence PNG
+#   palette. Its comment lists the dominant opaque colors with opaque pixel counts, decoded from the 24x24 data URIs
+#   in packages/components/PersonaCoin/src/PersonaCoin.helpers.ts; antialias tints are omitted.
+#
+# Colors
+# - A color is named after the token its roles resolve to: the Office field, alias name, Flex name without color.,
+#   legacy name, global palette symbol, or literal. Roles that resolve to the same token share a color, so Light,
+#   Dark, and HighContrast forms are separate colors only when their tokens differ. No names collide across
+#   namespaces.
+# - Computed expressions have descriptive names, and each color comment names its source:
+#   - namedColorSet<Step>: v1 Avatar getNamedColorSet(avatarColor).<step>.
+#   - badgeColors<Input>: a v1 Badge helper expression over the per-color inputs only, named by its first operand.
+#   - badge<Appearance><Local>: an assignment to a helper local (color, colorDark, hcColor) in getFilledColorProps or
+#     getOutlineColorProps.
+#   - badge<Appearance>Colors<Input>: an expression whose fallback reads helper locals.
+#   - presenceBadgeOofColor, personaCoinRingNotRendered, and personaPresence<Status>Bitmap.
+#
+# Slots: Bkg -> bg, Text -> fg, Glyph -> fg.glyph, Stroke -> stroke, StrokeRing and RingStroke -> stroke.ring,
+# BkgRing -> bg.ring, ActivityStroke -> stroke.activity, GlowStroke -> stroke.glow, PresenceStroke -> stroke.presence,
+# Cutout -> bg.cutout, StrokeCutout -> stroke.cutout, and Bitmap -> fg.glyph (a whole bitmap rather than a tint).
+# Agentic badges color their icons with fg. v1 per-color Text roles feed fg and, through the appearance expressions,
+# fg.glyph.
+#
+# Variants
+# - The Standard appearance is the base template. Other appearances are camelCase variants. A variant overrides only
+#   the roles it names and inherits the rest.
+# - Light and unsuffixed roles are base values of their template or variant. Dark roles go in a nested dark variant
+#   (v1 DarkGray and Black themes) and HighContrast roles in a nested highContrast variant, at the level where the
+#   source defines them. OutOfOffice becomes a nested outOfOffice variant, with highContrast nested inside it for
+#   OutOfOfficeHighContrast.
+# - Composition order, first to last:
+#   - avatar: base; one of brand, named, or neutral (v1 avatarColor; neutral repeats the v1 base tokens, so it is the
+#     v1 default) or image (agentic contentMode=image); then named.variants.dark or named.variants.highContrast.
+#   - avatarGroup: no base roles. Apply overflow to the overflow-count item and stack to the stacked layout.
+#   - badge, v1 (color-first): base; appearance (filled, ghost, outline, or tint); <color><Appearance>; then
+#     <appearance>.variants.<mode>; then <color><Appearance>.variants.<mode>. The mode layers must follow the
+#     per-color layer; for example, high-contrast dangerFilled falls back to the filled highContrast fill.
+#     Expressions over colors.<input> read the active per-color variant: color, backgroundColor, and borderColor are
+#     its fg, bg, and stroke; colorDark, backgroundColorDark, and borderColorDark are its dark values; hcColor is its
+#     highContrast fg.
+#   - badge, agentic Flex (appearance-first): base, then one <appearance><Color> variant (outlineBrand through
+#     tintWarning). Flex tokens resolve per theme, so there are no mode variants. Do not combine them with v1
+#     variants.
+#   - personaCoin (v0): base; coin color; highContrast; then the ring options accent (ring.accent) and transparent
+#     (ring.transparent). accent follows highContrast because the high-contrast glow applies only without
+#     ring.accent.
+#   - personaPresence (v0): no base roles. Apply one presence variant.
+#   - presenceBadge (v1): base; status (available, away, blocked, busy, doNotDisturb, offline, outOfOfficeStatus, or
+#     unknown); with the outOfOffice prop, outOfOffice and then <status>.variants.outOfOffice; in high contrast,
+#     highContrast, then <status>.variants.highContrast, then outOfOffice.variants.highContrast.
+#
+# Multiple sources: when a role has more than one token namespace, its value follows the priority office, flex,
+# alias, legacy, literal, then expr, and the alternatives are noted.
+# - The three Badge Standard roles use their Office seeds. The v1 alias crosswalks are noted on BkgBadge, StrokeBadge,
+#   and TextBadge.
+# - The PersonaCoin Standard PresenceStroke role uses legacy background over literal white. Both come from the v0
+#   PersonaCoin: white is the default iconStrokeColor token, and background is the fallback when that token is
+#   falsy.
+# - The Burgundy and DarkRed coin colors use the top-level source value (the coinColor path); coinColorFluent swaps
+#   the two. Their slots note the alternative.
+#
+# Deviations
+# - presenceBadge: the OutOfOffice status appearance is outOfOfficeStatus, because the Standard OutOfOffice suffix
+#   already takes outOfOffice for the outOfOffice prop modifier, which also nests under away. In v1 the status and the
+#   prop share one outOfOffice token layer.
+# - avatarGroup and personaPresence have no Standard roles, so their base templates are empty.
+#
+# Unresolved
+# - PersonaCoin PresenceStroke: priority picks legacy background, but the shipped default token is literal white.
+# - personaCoin highContrast reuses personaActivityGlow. The stock high-contrast legacy theme sets that token to
+#   transparent; there is no distinct high-contrast token.
+# - presenceBadge offline with the outOfOffice prop: v1 offline nests no outOfOffice override, so the shared layer
+#   shows the OutOfOffice status color (colorBerryPrimary). Here outOfOffice resolves oofColor ?? nonHcColor, which
+#   offline does not define.
+# - badgeFilledColorDark equals badgeFilledColorsColorDark, and badgeOutlineColorDark equals badgeColorsColorDark,
+#   because the icon copies the resolved foreground. They stay separate because the source records different
+#   expressions.
+# - avatar stroke.ring (v1 activity ring) and stroke.activity (agentic activity ring) describe the same ring in two
+#   generations.
+colors:
+  BkgBadge: # Office seed. v1 alias crosswalk: brandBackgroundStatic (v1 base and brand filled fill)
+    rest: office(BkgBadge)
+  StrokeBadge: # Office seed. v1 alias crosswalk: transparentStroke (v1 base and filled border)
+    rest: office(StrokeBadge)
+  TextBadge: # Office seed. v1 alias crosswalk: neutralForegroundOnBrand (v1 base text, filled color fallback)
+    rest: office(TextBadge)
+  accentButtonBackground:
+    rest: legacy(accentButtonBackground)
+  background:
+    rest: legacy(background)
+  backgroundBrandSoft:
+    rest: flex(color.backgroundBrandSoft)
+  backgroundDangerSoft:
+    rest: flex(color.backgroundDangerSoft)
+  backgroundNeutralSoft:
+    rest: flex(color.backgroundNeutralSoft)
+  backgroundNeutralTransparent:
+    rest: flex(color.backgroundNeutralTransparent)
+  backgroundSuccessSoft:
+    rest: flex(color.backgroundSuccessSoft)
+  backgroundWarningSoft:
+    rest: flex(color.backgroundWarningSoft)
+  badgeColorsBackgroundColorDark: # v1 Badge getFilledColorProps and getTintColorProps dark backgroundColor
+    rest: 'expr(colors.backgroundColorDark || colors.backgroundColor)'
+  badgeColorsBorderColor: # v1 Badge getOutlineColorProps light borderColor
+    rest: 'expr(colors.borderColor || colors.color)'
+  badgeColorsBorderColorDark: # v1 Badge getTintColorProps dark borderColor
+    rest: 'expr(colors.borderColorDark || colors.borderColor)'
+  badgeColorsColor: # v1 Badge ghost, outline, and tint light iconColor, copying the color input
+    rest: expr(colors.color)
+  badgeColorsColorDark: # v1 Badge ghost, outline, and tint dark color; ghost and tint dark iconColor
+    rest: 'expr(colors.colorDark || colors.color)'
+  badgeFilledColor: # v1 Badge getFilledColorProps local color; light iconColor
+    rest: 'expr(color = colors.color || theme.colors.neutralForegroundOnBrand)'
+  badgeFilledColorDark: # v1 Badge getFilledColorProps local colorDark; dark iconColor, equal to badgeFilledColorsColorDark
+    rest: 'expr(colorDark = colors.colorDark || color)'
+  badgeFilledColorsColorDark: # v1 Badge getFilledColorProps dark color; color is the resolved local light color
+    rest: 'expr(colors.colorDark || color)'
+  badgeFilledHcColor: # v1 Badge getFilledColorProps local hcColor; high-contrast iconColor
+    rest: 'expr(hcColor = colors.hcColor || theme.colors.neutralForegroundInverted)'
+  badgeOutlineColorDark: # v1 Badge getOutlineColorProps local colorDark; dark iconColor, equal to badgeColorsColorDark
+    rest: 'expr(colorDark = colors.colorDark || colors.color)'
+  badgeOutlineColorsBorderColorDark: # v1 Badge getOutlineColorProps dark borderColor; borderColor and colorDark are locals
+    rest: 'expr(colors.borderColorDark || borderColor || colorDark)'
+  brandBackground2:
+    rest: alias(brandBackground2)
+  brandBackgroundStatic:
+    rest: alias(brandBackgroundStatic)
+  brandForeground1:
+    rest: alias(brandForeground1)
+  brandForeground2:
+    rest: alias(brandForeground2)
+  brandStroke2:
+    rest: alias(brandStroke2)
+  colorBeigePrimary:
+    rest: expr(colorBeigePrimary) # #7a7574
+  colorBerryPrimary:
+    rest: expr(colorBerryPrimary) # #c239b3
+  colorBluePrimary:
+    rest: expr(colorBluePrimary) # #0078d4
+  colorBrassPrimary:
+    rest: expr(colorBrassPrimary) # #986f0b
+  colorBrownPrimary:
+    rest: expr(colorBrownPrimary) # #8e562e
+  colorBurgundyPrimary:
+    rest: expr(colorBurgundyPrimary) # #a4262c
+  colorCornflowerPrimary:
+    rest: expr(colorCornflowerPrimary) # #4f6bed
+  colorDarkGreenPrimary:
+    rest: expr(colorDarkGreenPrimary) # #0b6a0b
+  colorDarkOrangePrimary:
+    rest: expr(colorDarkOrangePrimary)
+  colorDarkOrangeTint30:
+    rest: expr(colorDarkOrangeTint30)
+  colorDarkOrangeTint60:
+    rest: expr(colorDarkOrangeTint60)
+  colorDarkRedPrimary:
+    rest: expr(colorDarkRedPrimary) # #750b1c
+  colorForestPrimary:
+    rest: expr(colorForestPrimary) # #498205
+  colorGrapePrimary:
+    rest: expr(colorGrapePrimary) # #881798
+  colorGreenPrimary:
+    rest: expr(colorGreenPrimary)
+  colorGreenShade30:
+    rest: expr(colorGreenShade30)
+  colorGreenShade40:
+    rest: expr(colorGreenShade40)
+  colorGreenTint30:
+    rest: expr(colorGreenTint30)
+  colorGreenTint40:
+    rest: expr(colorGreenTint40)
+  colorGreenTint60:
+    rest: expr(colorGreenTint60)
+  colorGrey14:
+    rest: expr(colorGrey14)
+  colorGrey16:
+    rest: expr(colorGrey16)
+  colorGrey38:
+    rest: expr(colorGrey38)
+  colorGrey68:
+    rest: expr(colorGrey68)
+  colorHotPinkPrimary:
+    rest: expr(colorHotPinkPrimary) # #e3008c
+  colorLightGreenPrimary:
+    rest: expr(colorLightGreenPrimary)
+  colorMarigoldPrimary:
+    rest: expr(colorMarigoldPrimary)
+  colorOfficeShade10:
+    rest: expr(colorOfficeShade10)
+  colorOfficeShade40:
+    rest: expr(colorOfficeShade40)
+  colorOfficeTint40:
+    rest: expr(colorOfficeTint40)
+  colorOfficeTint50:
+    rest: expr(colorOfficeTint50)
+  colorOrangeShade40:
+    rest: expr(colorOrangeShade40)
+  colorOrchidPrimary:
+    rest: expr(colorOrchidPrimary) # #8764b8
+  colorPlatinumPrimary:
+    rest: expr(colorPlatinumPrimary) # #69797e
+  colorPumpkinPrimary:
+    rest: expr(colorPumpkinPrimary) # #ca5010
+  colorPurplePrimary:
+    rest: expr(colorPurplePrimary) # #5c2e91
+  colorRedPrimary:
+    rest: expr(colorRedPrimary) # #d13438
+  colorRedShade30:
+    rest: expr(colorRedShade30)
+  colorRedShade40:
+    rest: expr(colorRedShade40)
+  colorRedTint30:
+    rest: expr(colorRedTint30)
+  colorRedTint40:
+    rest: expr(colorRedTint40)
+  colorRedTint60:
+    rest: expr(colorRedTint60)
+  colorRoyalBluePrimary:
+    rest: expr(colorRoyalBluePrimary) # #004e8c
+  colorSteelPrimary:
+    rest: expr(colorSteelPrimary) # #005b70
+  colorTealPrimary:
+    rest: expr(colorTealPrimary) # #038387
+  colorWhite:
+    rest: expr(colorWhite)
+  colorYellowPrimary:
+    rest: expr(colorYellowPrimary)
+  colorYellowShade30:
+    rest: expr(colorYellowShade30)
+  colorYellowShade40:
+    rest: expr(colorYellowShade40)
+  colorYellowTint40:
+    rest: expr(colorYellowTint40)
+  colorYellowTint60:
+    rest: expr(colorYellowTint60)
+  foregroundBrandPrimary:
+    rest: flex(color.foregroundBrandPrimary)
+  foregroundDangerPrimary:
+    rest: flex(color.foregroundDangerPrimary)
+  foregroundNeutralPrimary:
+    rest: flex(color.foregroundNeutralPrimary)
+  foregroundSuccessPrimary:
+    rest: flex(color.foregroundSuccessPrimary)
+  foregroundWarningPrimary:
+    rest: flex(color.foregroundWarningPrimary)
+  namedColorSetPrimary: # v1 Avatar getColorProps: primary step of the avatarColor named color set
+    rest: expr(getNamedColorSet(avatarColor).primary)
+  namedColorSetShade30: # v1 Avatar getColorProps: shade30 step of the avatarColor named color set
+    rest: expr(getNamedColorSet(avatarColor).shade30)
+  namedColorSetTint30: # v1 Avatar getColorProps: tint30 step of the avatarColor named color set
+    rest: expr(getNamedColorSet(avatarColor).tint30)
+  namedColorSetTint40: # v1 Avatar getColorProps: tint40 step of the avatarColor named color set
+    rest: expr(getNamedColorSet(avatarColor).tint40)
+  neutralBackground1:
+    rest: alias(neutralBackground1)
+  neutralBackground3:
+    rest: alias(neutralBackground3)
+  neutralBackground4:
+    rest: alias(neutralBackground4)
+  neutralBackground5:
+    rest: alias(neutralBackground5)
+  neutralBackground6:
+    rest: alias(neutralBackground6)
+  neutralBackgroundInverted:
+    rest: alias(neutralBackgroundInverted)
+  neutralForeground1:
+    rest: alias(neutralForeground1)
+  neutralForeground3:
+    rest: alias(neutralForeground3)
+  neutralForegroundInverted:
+    rest: alias(neutralForegroundInverted)
+  neutralForegroundOnBrand:
+    rest: alias(neutralForegroundOnBrand)
+  neutralStroke1:
+    rest: alias(neutralStroke1)
+  neutralStroke2:
+    rest: alias(neutralStroke2)
+  neutralStrokeAccessible:
+    rest: alias(neutralStrokeAccessible)
+  personaActivityGlow:
+    rest: legacy(personaActivityGlow)
+  personaActivityRing:
+    rest: legacy(personaActivityRing)
+  personaCoinRingNotRendered: # v0 PersonaCoin: ring.transparent omits the background ring slot
+    rest: expr(not rendered (ring.transparent=true))
+  personaPresenceAwayBitmap: # v0 PersonaCoin presence icon, a 24x24 indexed PNG
+    rest: expr(PNG bitmap) # dominant opaque: #FAC914 (248 px), #FFFFFF (20 px)
+  personaPresenceBlockedBitmap: # v0 PersonaCoin presence icon, a 24x24 indexed PNG
+    rest: expr(PNG bitmap) # dominant opaque: #FFFFFF (158 px), #E9001B (54 px)
+  personaPresenceBusyBitmap: # v0 PersonaCoin presence icon, a 24x24 indexed PNG
+    rest: expr(PNG bitmap) # dominant opaque: #E9001B (332 px)
+  personaPresenceDoNotDisturbBitmap: # v0 PersonaCoin presence icon, a 24x24 indexed PNG
+    rest: expr(PNG bitmap) # dominant opaque: #E9001B (292 px), #FFFFFF (16 px)
+  personaPresenceOfflineBitmap: # v0 PersonaCoin presence icon, a 24x24 indexed PNG
+    rest: expr(PNG bitmap) # dominant opaque: #FFFFFF (172 px), #A8C4CF (68 px)
+  personaPresenceOnlineBitmap: # v0 PersonaCoin presence icon, a 24x24 indexed PNG
+    rest: expr(PNG bitmap) # dominant opaque: #6EB005 (293 px), #FFFFFF (15 px)
+  presenceBadgeOofColor: # v1 PresenceBadge getBadgeColor nested outOfOffice iconColor; oofColor defaults to the status color
+    rest: expr(oofColor ?? nonHcColor)
+  strokeBrandLoud:
+    rest: flex(color.strokeBrandLoud)
+  strokeDangerLoud:
+    rest: flex(color.strokeDangerLoud)
+  strokeNeutralLoud:
+    rest: flex(color.strokeNeutralLoud)
+  strokeNeutralSubtle:
+    rest: flex(color.strokeNeutralSubtle)
+  strokeNeutralTransparent:
+    rest: flex(color.strokeNeutralTransparent)
+  strokeSuccessLoud:
+    rest: flex(color.strokeSuccessLoud)
+  strokeWarningLoud:
+    rest: flex(color.strokeWarningLoud)
+  surfaceNeutralNearer:
+    rest: flex(color.surfaceNeutralNearer)
+  transparent:
+    rest: literal(transparent)
+  transparentBackground:
+    rest: alias(transparentBackground)
+  transparentStroke:
+    rest: alias(transparentStroke)
+  white:
+    rest: literal(white)
+templates:
+  avatar:
+    # bg, fg, and stroke.activity come from the agentic Avatar (Flex); stroke and bg.ring come from the v1 Avatar.
+    bg: backgroundNeutralSoft # Avatar.Standard.Bkg
+    fg: foregroundNeutralPrimary # Avatar.Standard.Text
+    stroke: neutralStroke1 # Avatar.Standard.Stroke
+    bg.ring: transparent # Avatar.Standard.BkgRing
+    stroke.activity: strokeBrandLoud # Avatar.Standard.ActivityStroke
+    variants:
+      brand:
+        # v1 brand avatarColor.
+        bg: brandBackgroundStatic # Avatar.Brand.Bkg
+        fg: neutralForegroundOnBrand # Avatar.Brand.Text
+        fg.glyph: neutralForegroundOnBrand # Avatar.Brand.Glyph
+        stroke.ring: transparentStroke # Avatar.Brand.StrokeRing
+      image:
+        # Agentic contentMode=image.
+        bg: backgroundNeutralTransparent # Avatar.Image.Bkg
+      named:
+        # v1 named avatarColor. Base values apply to light themes.
+        bg: namedColorSetTint40 # Avatar.Named.Bkg.Light
+        fg: namedColorSetShade30 # Avatar.Named.Text.Light
+        fg.glyph: namedColorSetShade30 # Avatar.Named.Glyph.Light
+        stroke.ring: namedColorSetPrimary # Avatar.Named.StrokeRing.Light
+        variants:
+          dark:
+            bg: namedColorSetShade30 # Avatar.Named.Bkg.Dark
+            fg: namedColorSetTint40 # Avatar.Named.Text.Dark
+            fg.glyph: namedColorSetTint40 # Avatar.Named.Glyph.Dark
+            stroke.ring: namedColorSetTint30 # Avatar.Named.StrokeRing.Dark
+          highContrast:
+            bg: neutralBackground6 # Avatar.Named.Bkg.HighContrast
+            fg: neutralForeground3 # Avatar.Named.Text.HighContrast
+            fg.glyph: neutralForeground3 # Avatar.Named.Glyph.HighContrast
+            stroke.ring: transparentStroke # Avatar.Named.StrokeRing.HighContrast
+      neutral:
+        # v1 neutral avatarColor. The v1 base tokens author the same values, so this is the v1 default.
+        bg: neutralBackground6 # Avatar.Neutral.Bkg
+        fg: neutralForeground3 # Avatar.Neutral.Text
+        fg.glyph: neutralForeground3 # Avatar.Neutral.Glyph
+        stroke.ring: transparentStroke # Avatar.Neutral.StrokeRing
+  avatarGroup:
+    # No Standard roles. Planned Flex contract (avatar-group tokens).
+    variants:
+      overflow:
+        # Overflow-count indicator.
+        bg: surfaceNeutralNearer # AvatarGroup.Overflow.Bkg
+        fg: foregroundNeutralPrimary # AvatarGroup.Overflow.Text
+        stroke: strokeNeutralSubtle # AvatarGroup.Overflow.Stroke
+      stack:
+        # Stacked layout.
+        bg.cutout: transparent # AvatarGroup.Stack.Cutout
+        stroke.cutout: surfaceNeutralNearer # AvatarGroup.Stack.StrokeCutout
+  badge:
+    # Office seeds. v1 per-color variants are <color><Appearance>, such as dangerFilled; agentic Flex variants are
+    # <appearance><Color>, outlineBrand through tintWarning. v1 brand filled has no per-color variant: it is this base
+    # plus filled.
+    bg: BkgBadge # Badge.Standard.Bkg
+    fg: TextBadge # Badge.Standard.Text
+    stroke: StrokeBadge # Badge.Standard.Stroke
+    variants:
+      brandGhost:
+        fg: brandForeground1 # Badge.BrandGhost.Text
+      brandOutline:
+        fg: brandForeground1 # Badge.BrandOutline.Text
+      brandTint:
+        bg: brandBackground2 # Badge.BrandTint.Bkg
+        fg: brandForeground2 # Badge.BrandTint.Text
+        stroke: brandStroke2 # Badge.BrandTint.Stroke
+      dangerFilled:
+        bg: colorRedPrimary # Badge.DangerFilled.Bkg
+      dangerGhost:
+        fg: colorRedPrimary # Badge.DangerGhost.Text.Light
+        variants:
+          dark:
+            fg: colorRedTint30 # Badge.DangerGhost.Text.Dark
+      dangerOutline:
+        fg: colorRedPrimary # Badge.DangerOutline.Text.Light
+        variants:
+          dark:
+            fg: colorRedTint30 # Badge.DangerOutline.Text.Dark
+      dangerTint:
+        bg: colorRedTint60 # Badge.DangerTint.Bkg.Light
+        fg: colorRedPrimary # Badge.DangerTint.Text.Light
+        stroke: colorRedTint40 # Badge.DangerTint.Stroke.Light
+        variants:
+          dark:
+            bg: colorRedShade40 # Badge.DangerTint.Bkg.Dark
+            fg: colorRedTint30 # Badge.DangerTint.Text.Dark
+            stroke: colorRedShade30 # Badge.DangerTint.Stroke.Dark
+      filled:
+        # v1 getFilledColorProps. No light bg, fg, or stroke roles: the per-color *Filled variants supply bg and fg,
+        # brand filled keeps the base bg and fg, and the stroke stays the base (v1 crosswalk transparentStroke).
+        fg.glyph: badgeFilledColor # Badge.Filled.Glyph.Light
+        variants:
+          dark:
+            bg: badgeColorsBackgroundColorDark # Badge.Filled.Bkg.Dark
+            fg: badgeFilledColorsColorDark # Badge.Filled.Text.Dark
+            fg.glyph: badgeFilledColorDark # Badge.Filled.Glyph.Dark
+          highContrast:
+            bg: neutralBackgroundInverted # Badge.Filled.Bkg.HighContrast
+            fg: neutralForegroundInverted # Badge.Filled.Text.HighContrast
+            stroke: transparentStroke # Badge.Filled.Stroke.HighContrast
+            fg.glyph: badgeFilledHcColor # Badge.Filled.Glyph.HighContrast
+      ghost:
+        # v1 getGhostColorProps. The per-color *Ghost variants supply fg.
+        bg: transparentBackground # Badge.Ghost.Bkg
+        stroke: transparentStroke # Badge.Ghost.Stroke
+        fg.glyph: badgeColorsColor # Badge.Ghost.Glyph.Light
+        variants:
+          dark:
+            fg: badgeColorsColorDark # Badge.Ghost.Text.Dark
+            fg.glyph: badgeColorsColorDark # Badge.Ghost.Glyph.Dark
+          highContrast:
+            fg: neutralForeground3 # Badge.Ghost.Text.HighContrast
+            fg.glyph: neutralForeground3 # Badge.Ghost.Glyph.HighContrast
+      importantFilled:
+        bg: neutralForeground1 # Badge.ImportantFilled.Bkg
+        fg: neutralBackground1 # Badge.ImportantFilled.Text
+      importantGhost:
+        fg: neutralForeground1 # Badge.ImportantGhost.Text
+      importantOutline:
+        fg: neutralForeground3 # Badge.ImportantOutline.Text
+        stroke: neutralStrokeAccessible # Badge.ImportantOutline.Stroke
+      importantTint:
+        bg: neutralForeground3 # Badge.ImportantTint.Bkg.Light
+        fg: neutralBackground1 # Badge.ImportantTint.Text.Light
+        stroke: neutralStrokeAccessible # Badge.ImportantTint.Stroke.Light
+        variants:
+          dark:
+            bg: colorGrey68 # Badge.ImportantTint.Bkg.Dark
+            fg: colorGrey16 # Badge.ImportantTint.Text.Dark
+            stroke: colorGrey68 # Badge.ImportantTint.Stroke.Dark
+      informativeFilled:
+        bg: neutralBackground5 # Badge.InformativeFilled.Bkg
+        fg: neutralForeground3 # Badge.InformativeFilled.Text
+        variants:
+          highContrast:
+            bg: neutralBackground3 # Badge.InformativeFilled.Bkg.HighContrast
+            fg: brandForeground1 # Badge.InformativeFilled.Text.HighContrast
+      informativeGhost:
+        fg: neutralForeground3 # Badge.InformativeGhost.Text
+      informativeOutline:
+        fg: neutralForeground3 # Badge.InformativeOutline.Text
+        stroke: neutralStroke2 # Badge.InformativeOutline.Stroke
+      informativeTint:
+        bg: neutralBackground4 # Badge.InformativeTint.Bkg
+        fg: neutralForeground3 # Badge.InformativeTint.Text
+        stroke: neutralStroke2 # Badge.InformativeTint.Stroke
+      outline:
+        # v1 getOutlineColorProps. The per-color *Outline variants supply fg, and stroke where authored.
+        bg: transparentBackground # Badge.Outline.Bkg
+        stroke: badgeColorsBorderColor # Badge.Outline.Stroke.Light
+        fg.glyph: badgeColorsColor # Badge.Outline.Glyph.Light
+        variants:
+          dark:
+            fg: badgeColorsColorDark # Badge.Outline.Text.Dark
+            stroke: badgeOutlineColorsBorderColorDark # Badge.Outline.Stroke.Dark
+            fg.glyph: badgeOutlineColorDark # Badge.Outline.Glyph.Dark
+          highContrast:
+            fg: neutralForeground3 # Badge.Outline.Text.HighContrast
+            stroke: transparentStroke # Badge.Outline.Stroke.HighContrast
+            fg.glyph: neutralForeground3 # Badge.Outline.Glyph.HighContrast
+      outlineBrand:
+        bg: backgroundNeutralTransparent # Badge.OutlineBrand.Bkg
+        fg: foregroundBrandPrimary # Badge.OutlineBrand.Text
+        stroke: strokeBrandLoud # Badge.OutlineBrand.Stroke
+      outlineDanger:
+        bg: backgroundNeutralTransparent # Badge.OutlineDanger.Bkg
+        fg: foregroundDangerPrimary # Badge.OutlineDanger.Text
+        stroke: strokeDangerLoud # Badge.OutlineDanger.Stroke
+      outlineInformative:
+        bg: backgroundNeutralTransparent # Badge.OutlineInformative.Bkg
+        fg: foregroundNeutralPrimary # Badge.OutlineInformative.Text
+        stroke: strokeNeutralLoud # Badge.OutlineInformative.Stroke
+      outlineSuccess:
+        bg: backgroundNeutralTransparent # Badge.OutlineSuccess.Bkg
+        fg: foregroundSuccessPrimary # Badge.OutlineSuccess.Text
+        stroke: strokeSuccessLoud # Badge.OutlineSuccess.Stroke
+      outlineWarning:
+        bg: backgroundNeutralTransparent # Badge.OutlineWarning.Bkg
+        fg: foregroundWarningPrimary # Badge.OutlineWarning.Text
+        stroke: strokeWarningLoud # Badge.OutlineWarning.Stroke
+      severeFilled:
+        bg: colorDarkOrangePrimary # Badge.SevereFilled.Bkg
+      severeGhost:
+        fg: colorDarkOrangePrimary # Badge.SevereGhost.Text.Light
+        variants:
+          dark:
+            fg: colorDarkOrangeTint30 # Badge.SevereGhost.Text.Dark
+      severeOutline:
+        fg: colorDarkOrangePrimary # Badge.SevereOutline.Text.Light
+        variants:
+          dark:
+            fg: colorDarkOrangeTint30 # Badge.SevereOutline.Text.Dark
+      severeTint:
+        bg: colorDarkOrangeTint60 # Badge.SevereTint.Bkg.Light
+        fg: colorOfficeShade10 # Badge.SevereTint.Text.Light
+        stroke: colorOfficeTint50 # Badge.SevereTint.Stroke.Light
+        variants:
+          dark:
+            bg: colorOrangeShade40 # Badge.SevereTint.Bkg.Dark
+            fg: colorOfficeTint40 # Badge.SevereTint.Text.Dark
+            stroke: colorOfficeShade40 # Badge.SevereTint.Stroke.Dark
+      subtleFilled:
+        bg: neutralBackground1 # Badge.SubtleFilled.Bkg
+        fg: neutralForeground1 # Badge.SubtleFilled.Text
+        variants:
+          highContrast:
+            bg: neutralBackground3 # Badge.SubtleFilled.Bkg.HighContrast
+            fg: brandForeground1 # Badge.SubtleFilled.Text.HighContrast
+      subtleGhost:
+        fg: neutralForegroundOnBrand # Badge.SubtleGhost.Text
+      subtleOutline:
+        fg: neutralForegroundOnBrand # Badge.SubtleOutline.Text
+      subtleTint:
+        bg: neutralBackground1 # Badge.SubtleTint.Bkg
+        fg: neutralForeground3 # Badge.SubtleTint.Text
+        stroke: neutralStroke2 # Badge.SubtleTint.Stroke
+      successFilled:
+        bg: colorGreenPrimary # Badge.SuccessFilled.Bkg
+      successGhost:
+        fg: colorGreenPrimary # Badge.SuccessGhost.Text.Light
+        variants:
+          dark:
+            fg: colorGreenTint40 # Badge.SuccessGhost.Text.Dark
+      successOutline:
+        fg: colorGreenPrimary # Badge.SuccessOutline.Text.Light
+        variants:
+          dark:
+            fg: colorGreenTint40 # Badge.SuccessOutline.Text.Dark
+      successTint:
+        bg: colorGreenTint60 # Badge.SuccessTint.Bkg.Light
+        fg: colorGreenPrimary # Badge.SuccessTint.Text.Light
+        stroke: colorGreenTint40 # Badge.SuccessTint.Stroke.Light
+        variants:
+          dark:
+            bg: colorGreenShade40 # Badge.SuccessTint.Bkg.Dark
+            fg: colorGreenTint30 # Badge.SuccessTint.Text.Dark
+            stroke: colorGreenShade30 # Badge.SuccessTint.Stroke.Dark
+      tint:
+        # v1 getTintColorProps. No light bg, fg, or stroke roles: the per-color *Tint variants supply them.
+        fg.glyph: badgeColorsColor # Badge.Tint.Glyph.Light
+        variants:
+          dark:
+            bg: badgeColorsBackgroundColorDark # Badge.Tint.Bkg.Dark
+            fg: badgeColorsColorDark # Badge.Tint.Text.Dark
+            stroke: badgeColorsBorderColorDark # Badge.Tint.Stroke.Dark
+            fg.glyph: badgeColorsColorDark # Badge.Tint.Glyph.Dark
+          highContrast:
+            bg: transparentBackground # Badge.Tint.Bkg.HighContrast
+            fg: neutralForeground3 # Badge.Tint.Text.HighContrast
+            stroke: transparentStroke # Badge.Tint.Stroke.HighContrast
+            fg.glyph: neutralForeground3 # Badge.Tint.Glyph.HighContrast
+      tintBrand:
+        bg: backgroundBrandSoft # Badge.TintBrand.Bkg
+        fg: foregroundBrandPrimary # Badge.TintBrand.Text
+        stroke: strokeNeutralTransparent # Badge.TintBrand.Stroke
+      tintDanger:
+        bg: backgroundDangerSoft # Badge.TintDanger.Bkg
+        fg: foregroundDangerPrimary # Badge.TintDanger.Text
+        stroke: strokeNeutralTransparent # Badge.TintDanger.Stroke
+      tintInformative:
+        bg: backgroundNeutralSoft # Badge.TintInformative.Bkg
+        fg: foregroundNeutralPrimary # Badge.TintInformative.Text
+        stroke: strokeNeutralTransparent # Badge.TintInformative.Stroke
+      tintSuccess:
+        bg: backgroundSuccessSoft # Badge.TintSuccess.Bkg
+        fg: foregroundSuccessPrimary # Badge.TintSuccess.Text
+        stroke: strokeNeutralTransparent # Badge.TintSuccess.Stroke
+      tintWarning:
+        bg: backgroundWarningSoft # Badge.TintWarning.Bkg
+        fg: foregroundWarningPrimary # Badge.TintWarning.Text
+        stroke: strokeNeutralTransparent # Badge.TintWarning.Stroke
+      warningFilled:
+        bg: colorYellowPrimary # Badge.WarningFilled.Bkg
+        fg: colorGrey14 # Badge.WarningFilled.Text
+      warningGhost:
+        fg: colorYellowShade30 # Badge.WarningGhost.Text.Light
+        variants:
+          dark:
+            fg: colorYellowTint40 # Badge.WarningGhost.Text.Dark
+      warningOutline:
+        fg: colorYellowShade30 # Badge.WarningOutline.Text.Light
+        variants:
+          dark:
+            fg: colorYellowTint40 # Badge.WarningOutline.Text.Dark
+      warningTint:
+        bg: colorYellowTint60 # Badge.WarningTint.Bkg.Light
+        fg: colorYellowShade30 # Badge.WarningTint.Text.Light
+        stroke: colorYellowTint40 # Badge.WarningTint.Stroke.Light
+        variants:
+          dark:
+            bg: colorYellowShade40 # Badge.WarningTint.Bkg.Dark
+            fg: colorYellowTint40 # Badge.WarningTint.Text.Dark
+            stroke: colorYellowShade30 # Badge.WarningTint.Stroke.Dark
+  personaCoin:
+    # v0 PersonaCoin and PersonaCoinRing.
+    bg: colorCornflowerPrimary # PersonaCoin.Standard.Bkg
+    fg: white # PersonaCoin.Standard.Text
+    stroke.glow: personaActivityGlow # PersonaCoin.Standard.GlowStroke
+    # Priority picks legacy background over literal white. White is the v0 default iconStrokeColor token;
+    # background applies only when that token is falsy.
+    stroke.presence: background # PersonaCoin.Standard.PresenceStroke
+    stroke.ring: personaActivityRing # PersonaCoin.Standard.RingStroke
+    variants:
+      accent:
+        # Applies when ring.accent is set.
+        stroke.glow: accentButtonBackground # PersonaCoin.Accent.GlowStroke
+      beige:
+        bg: colorBeigePrimary # PersonaCoin.Beige.Bkg
+      berry:
+        bg: colorBerryPrimary # PersonaCoin.Berry.Bkg
+      blue:
+        bg: colorBluePrimary # PersonaCoin.Blue.Bkg
+      brass:
+        bg: colorBrassPrimary # PersonaCoin.Brass.Bkg
+      brown:
+        bg: colorBrownPrimary # PersonaCoin.Brown.Bkg
+      burgundy:
+        # coinColor path. coinColorFluent burgundy resolves colorBurgundyPrimary (#a4262c).
+        bg: colorDarkRedPrimary # PersonaCoin.Burgundy.Bkg
+      coolGray:
+        bg: colorPlatinumPrimary # PersonaCoin.CoolGray.Bkg
+      cornflower:
+        bg: colorCornflowerPrimary # PersonaCoin.Cornflower.Bkg
+      cyan:
+        bg: colorSteelPrimary # PersonaCoin.Cyan.Bkg
+      darkBlue:
+        bg: colorRoyalBluePrimary # PersonaCoin.DarkBlue.Bkg
+      darkGreen:
+        bg: colorDarkGreenPrimary # PersonaCoin.DarkGreen.Bkg
+      darkRed:
+        # coinColor path. coinColorFluent darkRed resolves colorDarkRedPrimary (#750b1c).
+        bg: colorBurgundyPrimary # PersonaCoin.DarkRed.Bkg
+      forest:
+        bg: colorForestPrimary # PersonaCoin.Forest.Bkg
+      gold:
+        bg: colorBrassPrimary # PersonaCoin.Gold.Bkg
+      grape:
+        bg: colorGrapePrimary # PersonaCoin.Grape.Bkg
+      green:
+        bg: colorForestPrimary # PersonaCoin.Green.Bkg
+      highContrast:
+        # Same token as the base glow; the stock high-contrast legacy theme sets it to transparent. Applies only when
+        # ring.accent is falsy and ring.ringColor is unset.
+        stroke.glow: personaActivityGlow # PersonaCoin.Standard.GlowStroke.HighContrast
+      hotPink:
+        bg: colorHotPinkPrimary # PersonaCoin.HotPink.Bkg
+      lightBlue:
+        bg: colorCornflowerPrimary # PersonaCoin.LightBlue.Bkg
+      lightPink:
+        bg: colorBerryPrimary # PersonaCoin.LightPink.Bkg
+      lightRed:
+        bg: colorRedPrimary # PersonaCoin.LightRed.Bkg
+      magenta:
+        bg: colorGrapePrimary # PersonaCoin.Magenta.Bkg
+      orange:
+        bg: colorPumpkinPrimary # PersonaCoin.Orange.Bkg
+      orchid:
+        bg: colorOrchidPrimary # PersonaCoin.Orchid.Bkg
+      pink:
+        bg: colorHotPinkPrimary # PersonaCoin.Pink.Bkg
+      platinum:
+        bg: colorPlatinumPrimary # PersonaCoin.Platinum.Bkg
+      pumpkin:
+        bg: colorPumpkinPrimary # PersonaCoin.Pumpkin.Bkg
+      purple:
+        bg: colorPurplePrimary # PersonaCoin.Purple.Bkg
+      red:
+        bg: colorRedPrimary # PersonaCoin.Red.Bkg
+      royalBlue:
+        bg: colorRoyalBluePrimary # PersonaCoin.RoyalBlue.Bkg
+      rust:
+        bg: colorBrownPrimary # PersonaCoin.Rust.Bkg
+      steel:
+        bg: colorSteelPrimary # PersonaCoin.Steel.Bkg
+      teal:
+        bg: colorTealPrimary # PersonaCoin.Teal.Bkg
+      transparent:
+        # Applies when ring.transparent is set; the glow still renders.
+        stroke.ring: personaCoinRingNotRendered # PersonaCoin.Transparent.RingStroke
+      violet:
+        bg: colorOrchidPrimary # PersonaCoin.Violet.Bkg
+      warmGray:
+        bg: colorBeigePrimary # PersonaCoin.WarmGray.Bkg
+  personaPresence:
+    # No Standard roles. v0 PersonaCoin presence bitmaps; v0 reuses them when out of office.
+    variants:
+      away:
+        fg.glyph: personaPresenceAwayBitmap # PersonaPresence.Away.Bitmap
+      blocked:
+        fg.glyph: personaPresenceBlockedBitmap # PersonaPresence.Blocked.Bitmap
+      busy:
+        fg.glyph: personaPresenceBusyBitmap # PersonaPresence.Busy.Bitmap
+      doNotDisturb:
+        fg.glyph: personaPresenceDoNotDisturbBitmap # PersonaPresence.DoNotDisturb.Bitmap
+      offline:
+        fg.glyph: personaPresenceOfflineBitmap # PersonaPresence.Offline.Bitmap
+      online:
+        fg.glyph: personaPresenceOnlineBitmap # PersonaPresence.Online.Bitmap
+  presenceBadge:
+    # No light glyph role at this level: the status variants set fg.glyph, and the v1 base tokens default to the
+    # available color.
+    bg: neutralBackground1 # PresenceBadge.Standard.Bkg
+    stroke: colorWhite # PresenceBadge.Standard.Stroke
+    variants:
+      available:
+        # The v1 base tokens default to this color.
+        fg.glyph: colorLightGreenPrimary # PresenceBadge.Available.Glyph
+      away:
+        fg.glyph: colorMarigoldPrimary # PresenceBadge.Away.Glyph
+        variants:
+          outOfOffice:
+            fg.glyph: colorBerryPrimary # PresenceBadge.Away.Glyph.OutOfOffice
+      blocked:
+        fg.glyph: colorRedPrimary # PresenceBadge.Blocked.Glyph
+      busy:
+        fg.glyph: colorRedPrimary # PresenceBadge.Busy.Glyph
+      doNotDisturb:
+        fg.glyph: colorRedPrimary # PresenceBadge.DoNotDisturb.Glyph
+      highContrast:
+        stroke: transparent # PresenceBadge.Standard.Stroke.HighContrast
+        fg.glyph: neutralForeground3 # PresenceBadge.Standard.Glyph.HighContrast
+      offline:
+        fg.glyph: colorGrey38 # PresenceBadge.Offline.Glyph
+        variants:
+          highContrast:
+            fg.glyph: neutralForeground3 # PresenceBadge.Offline.Glyph.HighContrast
+      outOfOffice:
+        # outOfOffice prop modifier: the active status oofColor, else the status color (see the header for offline).
+        fg.glyph: presenceBadgeOofColor # PresenceBadge.Standard.Glyph.OutOfOffice
+        variants:
+          highContrast:
+            fg.glyph: neutralForeground3 # PresenceBadge.Standard.Glyph.OutOfOfficeHighContrast
+      outOfOfficeStatus:
+        # The outOfOffice status, renamed to avoid the outOfOffice prop modifier.
+        fg.glyph: colorBerryPrimary # PresenceBadge.OutOfOffice.Glyph
+      unknown:
+        fg.glyph: colorRedPrimary # PresenceBadge.Unknown.Glyph
