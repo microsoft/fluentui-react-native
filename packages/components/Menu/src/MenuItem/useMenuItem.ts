@@ -68,14 +68,27 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   useHoverFocusEffect(pressable.state.hovered, componentRef);
 
   const [enableFocusRing, setEnableFocusRing] = React.useState(!pressable.state.hovered);
+  // Tracked in a ref rather than state: the focus caused by hovering can fire before React re-renders, so state read in
+  // onFocus would still be the pre-hover value.
+  const isHoverFocus = React.useRef(false);
 
   const onHoverIn = React.useCallback(
     (e) => {
       pressable.props.onHoverIn(e);
       // when it's a hover focus, set enableFocusRing explicitly to false
       if (!pressable.state.focused) {
+        isHoverFocus.current = true;
         setEnableFocusRing(false);
       }
+    },
+    [pressable],
+  );
+
+  const onHoverOut = React.useCallback(
+    (e) => {
+      pressable.props.onHoverOut(e);
+      // the hover ended, so any focus the hover asked for may never arrive; don't let it eat the next real focus
+      isHoverFocus.current = false;
     },
     [pressable],
   );
@@ -84,7 +97,9 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
     (e) => {
       pressable.props.onFocus(e);
       // when it's not a hover focus, set enableFocusRing explicitly to true
-      if (!pressable.state.focused) {
+      if (isHoverFocus.current) {
+        isHoverFocus.current = false;
+      } else {
         setEnableFocusRing(true);
       }
     },
@@ -100,6 +115,10 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
       onHoverIn: Platform.select({
         macos: pressable.props.onHoverIn,
         default: onHoverIn, // win32
+      }),
+      onHoverOut: Platform.select({
+        macos: pressable.props.onHoverOut,
+        default: onHoverOut, // win32
       }),
       onFocus: Platform.select({
         macos: pressable.props.onFocus,
