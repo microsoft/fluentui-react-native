@@ -480,26 +480,26 @@ describe('Checkbox', () => {
       async (status) => {
         const colors = defaultFlexTokens.color;
         const component = await renderCheckbox({ status, showSecondaryText: true });
-        for (const [event, palette] of [
-          ['hoverIn', colors.hover],
-          ['pressIn', colors.pressed],
-          ['pressOut', colors.hover],
-          ['hoverOut', colors],
+        for (const [event, state] of [
+          ['hoverIn', 'hover'],
+          ['pressIn', 'pressed'],
+          ['pressOut', 'hover'],
+          ['hoverOut', 'rest'],
         ] as const) {
           await fireEvent(getRoot(component), event, {});
           expect(getIndicatorStyle(component)).toMatchObject({
-            backgroundColor: status === 'unchecked' ? palette.backgroundNeutralTransparent : palette.backgroundBrandHeavy,
-            borderColor: status === 'unchecked' ? palette.strokeNeutralHeavy : palette.strokeNeutralTransparent,
+            backgroundColor: (status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundBrandHeavy)[state],
+            borderColor: (status === 'unchecked' ? colors.strokeNeutralHeavy : colors.strokeNeutralTransparent)[state],
           });
           expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(
-            status === 'unchecked' ? palette.foregroundNeutralSecondary : palette.foregroundNeutralPrimary,
+            (status === 'unchecked' ? colors.foregroundNeutralSecondary : colors.foregroundNeutralPrimary)[state],
           );
           expect(StyleSheet.flatten(component.getByTestId('checkbox-secondary', { includeHiddenElements: true }).props.style).color).toBe(
-            palette.foregroundNeutralSecondary,
+            colors.foregroundNeutralSecondary[state],
           );
           if (status !== 'unchecked') {
             expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
-              palette.foregroundBrandOnloud,
+              colors.foregroundBrandOnloud[state],
             );
           }
         }
@@ -515,17 +515,17 @@ describe('Checkbox', () => {
         await component.rerender(<Checkbox status={status} showSecondaryText disabled />);
         const colors = defaultFlexTokens.color;
         expect(getIndicatorStyle(component)).toMatchObject({
-          backgroundColor: status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundNeutralHeavyDisabled,
-          borderColor: status === 'unchecked' ? colors.strokeNeutralDisabled : colors.strokeNeutralTransparent,
+          backgroundColor: (status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundNeutralHeavyDisabled).rest,
+          borderColor: (status === 'unchecked' ? colors.strokeNeutralDisabled : colors.strokeNeutralTransparent).rest,
         });
         for (const id of ['checkbox-label', 'checkbox-secondary']) {
           expect(StyleSheet.flatten(component.getByTestId(id, { includeHiddenElements: true }).props.style).color).toBe(
-            colors.foregroundNeutralDisabled,
+            colors.foregroundNeutralDisabled.rest,
           );
         }
         if (status !== 'unchecked') {
           expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
-            colors.foregroundNeutralDisabled,
+            colors.foregroundNeutralDisabled.rest,
           );
         }
       },

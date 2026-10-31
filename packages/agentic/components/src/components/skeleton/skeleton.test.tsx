@@ -80,7 +80,7 @@ describe('Skeleton', () => {
     await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
     expect(animation.stop).toHaveBeenCalledTimes(1);
     expect(getRoot(component).children).toHaveLength(0);
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
 
     mockUseReducedMotion.mockReturnValue(false);
     await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);

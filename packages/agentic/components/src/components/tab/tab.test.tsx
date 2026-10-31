@@ -69,11 +69,7 @@ describe('Tab', () => {
         } else if (interaction === 'pressed') {
           await fireEvent(getRoot(component), 'pressIn', {});
         }
-        const expected = disabled
-          ? colors.foregroundNeutralDisabled
-          : interaction === 'rest'
-            ? colors[foreground]
-            : colors[interaction][foreground];
+        const expected = disabled ? colors.foregroundNeutralDisabled.rest : colors[foreground][interaction];
         const labels = component.getAllByText('Files', { includeHiddenElements: true });
         expect(labels).toHaveLength(2);
         expect(labels.map((label) => StyleSheet.flatten(label.props.style).color)).toEqual([expected, expected]);

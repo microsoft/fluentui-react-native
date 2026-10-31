@@ -6,7 +6,6 @@ import { render } from '../../common/renderWithTheme';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
-import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { ProgressBar } from './progress-bar';
 
 jest.mock('@fluentui-react-native/framework-base', () => ({
@@ -95,9 +94,9 @@ describe('ProgressBar', () => {
     });
     const icon = component.getByTestId('validation-icon', { includeHiddenElements: true });
 
-    expect(getIndicatorStyle(component).backgroundColor).toBe(defaultFlexTokens.color[token]);
+    expect(getIndicatorStyle(component).backgroundColor).toBe(defaultFlexTokens.color[token].rest);
     expect(StyleSheet.flatten(component.getByText('★', { includeHiddenElements: true }).props.style).color).toBe(
-      defaultFlexTokens.color[token],
+      defaultFlexTokens.color[token].rest,
     );
     expect(icon.props.accessible).toBe(false);
     expect(StyleSheet.flatten(icon.props.style)).toMatchObject({ height: 16, width: 16 });

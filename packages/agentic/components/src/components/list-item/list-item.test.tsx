@@ -49,8 +49,8 @@ describe('ListItem', () => {
     }
     expect(getRootStyle(component).backgroundColor).toBe(
       selected && selectionMode !== 'multiple'
-        ? defaultFlexTokens.color.backgroundNeutralSoft
-        : defaultFlexTokens.color.backgroundNeutralTransparent,
+        ? defaultFlexTokens.color.backgroundNeutralSoft.rest
+        : defaultFlexTokens.color.backgroundNeutralTransparent.rest,
     );
   });
 
@@ -69,7 +69,7 @@ describe('ListItem', () => {
 
   it.each(['none', 'single', 'multiple'] as const)('LIT-004 suppresses selected fill while disabled in %s mode', async (selectionMode) => {
     const component = await renderListItem({ content: 'Unavailable', selected: true, disabled: true, selectionMode });
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
     expect(getRoot(component).props.accessibilityState).toEqual({ disabled: true, selected: true });
   });
 
