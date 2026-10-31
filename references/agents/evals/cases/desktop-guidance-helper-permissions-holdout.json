@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "case_id": "desktop-guidance-helper-permissions-holdout",
+  "split": "holdout",
+  "task_mode": "toolchain",
+  "prompt": "A macOS desktop-test run reports that no verified native helper is available and Accessibility is unavailable. Give a read-only diagnostic sequence. Do not edit files, prompt for privacy approval, reset permissions, or change OS settings.",
+  "expected": {
+    "skills": ["desktop-testing"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": ["macos"]
+    },
+    "required_reads": [
+      ".github/skills/desktop-testing/SKILL.md",
+      "packages/agentic/desktop-test/references/platforms.md",
+      "packages/agentic/desktop-driver/references/native-helpers.md",
+      "packages/agentic/desktop-driver/native/macos/README.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "nonprompt-permission-diagnostics",
+      "description": "Uses macOS doctor --permissions without --prompt to inspect the exact verified helper, responsible process, signing evidence, and permission preflights before proposing next steps.",
+      "rule_ids": [],
+      "source_refs": ["packages/agentic/desktop-driver/native/macos/README.md"]
+    },
+    {
+      "id": "explicit-helper-provisioning",
+      "description": "Treats doctor as prebuilt-only and recommends explicitly building or provisioning a verified helper on the target OS if none is available; it does not imply installation will build or download one.",
+      "rule_ids": ["R-DRIVER-001"],
+      "source_refs": [
+        "packages/agentic/desktop-driver/references/native-helpers.md",
+        "packages/agentic/desktop-driver/native/macos/README.md"
+      ]
+    },
+    {
+      "id": "no-os-permission-mutation",
+      "description": "Does not recommend --prompt, tccutil resets, editing TCC.db, or changing privacy settings; explains that ad hoc signing may change cdhash-bound grant continuity and that a stable signing identity is preferred for durable authorization.",
+      "rule_ids": [],
+      "source_refs": ["packages/agentic/desktop-driver/native/macos/README.md"]
+    }
+  ]
+}

@@ -13,6 +13,11 @@ This guide assumes you:
 
 There are some specific quirks to this repository that one should be familiar with.
 
+When configuring or maintaining a package, start with its `AGENTS.md` and
+`README.md`; package-owned recipes and shared agent guidance live in its
+indexed `references/` directory. Follow the
+[package-owned guidance standard](./references/agents/repository/package-guidance.md).
+
 ### Component generations
 
 The repository contains three generations of components. Identify the generation from a component's imports and
@@ -60,7 +65,7 @@ package's [contributor instructions](./packages/agentic/components/AGENTS.md) an
 
 1. A higher-order component starts with a reviewed contract: `SPEC.md` plus `spec/source.json`, `spec/tokens.yaml`,
    `spec/accessibility.md`, `spec/interaction.md`, and `spec/usage.md`. Follow
-   [SPEC-SOURCE.md](./packages/agentic/components/SPEC-SOURCE.md) for provenance, review state, and source adapters.
+   [the contracts reference](packages/agentic/components/references/contracts.md) for provenance, review state, and source adapters.
 1. A primitive instead keeps a colocated `CONTRACT.md` that describes its public API and renderer branches.
 1. Run `yarn workspace @fluentui-react-native/components check:spec-contracts` to validate the contract.
 
@@ -72,7 +77,7 @@ A higher-order component uses these files, in dependency order:
 1. `use<Component>.ts`: defaults, derived state, interaction, accessibility, and slot construction.
 1. `<component>.styles.ts` and `use<Component>Styles.ts`: token-based styles and slot style application.
 1. `render<Component>.tsx`: pure slot rendering. Put `/** @jsxImportSource @fluentui-react-native/framework-base */` on
-   the first line of files that render slots; see `packages/framework-base/src/component-patterns/README.md`.
+   the first line of files that render slots; see `packages/framework-base/references/component-patterns.md`.
 1. `<component>.ts`: assembly and `displayName`.
 
 Expose the native root ref through the React 19 `ref` prop rather than `forwardRef`. Export the component and its public
@@ -84,7 +89,8 @@ types explicitly from `src/index.ts`, or from `src/primitives/index.ts` for a pr
 1. Add Storybook stories next to the component. Desktop behavior tests are `wdio` functions in the stories and run on
    macOS, Windows, and Win32 through the [agentic Storybook app](./apps/storybook/README.md).
 1. Run the package's declared scripts, such as `yarn workspace @fluentui-react-native/components test`, plus `build`,
-   `lint`, and `format`.
+   `lint`, and `format`. While iterating, run only your component's tests from its package, for example
+   `yarn test button`.
 1. Before opening a pull request, run `yarn clean-lage-cache` and then `yarn lage buildci` from the repository root.
 
 ### Maintaining v0 and v1 components
@@ -99,8 +105,8 @@ Fixes to existing v0 and v1 components keep their current framework, public API,
 1. If a component contains a native module, add its `podspec` path to the FluentTester Podfile. The React Native
    community CLI does not support
    [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347). Then run
-   `yarn && yarn build` from the root, and run `pod install` from `apps/fluent-tester/macos` or `apps/fluent-tester/ios`
-   for native Apple code.
+   `yarn && yarn build` from the root, and run `pod install` from `apps/fluent-tester/macos` for macOS or
+   `apps/legacy-mobile/ios` for iOS.
 
 ## Adding native code to your new component
 
@@ -237,7 +243,7 @@ To add a native module that wraps a FluentUI Android control:
    - Add dependencies for kotlin, maven, react-native, etc
    - Add dependency for FluentUIAndroid
 
-   c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/fluent-tester/package.json in order for our Fluent Tester app to build and use your new Android component module
+   c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in the relevant tester host package.json (`apps/legacy-mobile` for iOS/Android and `apps/fluent-tester` for macOS/Windows) so native modules are available to each host.
 
 ## Creating a pull request
 
@@ -258,7 +264,7 @@ This repo manages semantic versioning and publishing using [Changesets](https://
 1. `yarn changeset` will take you through a command line wizard to generate changeset files
 2. Make sure to push the newly generated changeset file (`.changeset/*.md`)
 
-Repository release tooling uses Changesets CLI v3 with Node.js 22.x (22.12 or later), 24.x, or 26+, and the repository-pinned Yarn version.
+Repository release tooling uses Changesets CLI v3 with Node.js 22.x (22.19 or later), 24.x, or 26+, and the repository-pinned Yarn version.
 Changelogs use oxfmt; run `yarn format` from the repository root to format changes.
 `yarn changeset:version` requires an unreleased changeset and fails when none are present.
 The GitHub Actions workflow only creates version-update pull requests; package publishing remains in Azure Pipelines.

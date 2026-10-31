@@ -97,6 +97,8 @@ class InputController {
 };
 
 bool TryMapWebDriverKey(std::wstring_view value, WORD& virtualKey, bool& extended);
+// The virtual key that types `character` without modifiers in the foreground keyboard layout, or 0.
+WORD UnmodifiedLayoutKey(wchar_t character);
 INPUT MakeAbsoluteMouseInput(POINT screenPoint, DWORD flags, DWORD mouseData);
 // A positioned press and release injected as one batch for an atomic click.
 std::vector<INPUT> MakeClickInputs(POINT screenPoint, int button);

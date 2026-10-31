@@ -2,8 +2,7 @@ schemaVersion: 1
 component: input
 implementation: input.styles.ts
 
-# Every binding below is resolved once per render from the variant, the size,
-# and a single visual state. The visual state is picked with this precedence.
+# The boundary state and additive focus-visible indicator are resolved separately.
 statePrecedence:
   - disabled
   - error
@@ -54,7 +53,9 @@ bindings:
       disabled: color.strokeNeutralDisabled
       error: color.strokeDangerLoud
       readOnly: color.strokeNeutralDisabled
-      focused: color.strokeNeutralHeavy
+      focused:
+        outline: color.strokeNeutralSubtle
+        underline: color.strokeFocusOuter
       pressed: color.pressed.strokeNeutralLoud
       hovered: color.hover.strokeNeutralLoud
       rest: color.strokeNeutralLoud
@@ -137,9 +138,21 @@ bindings:
     borderBottomWidth: strokeWidth.thin
     borderBottomColor: same mapping as contents.strokeColor
 
+  FocusRing:
+    renderedWhen: variant is outline
+    visibleWhen: focused, keyboard modality, and not disabled
+    outer: [color.strokeFocusOuter, strokeWidth.thick]
+    inner: [color.strokeFocusInner, strokeWidth.thin]
+    borderRadius: same mapping as root.variant.outline.borderRadius
+
+  underlineFocus:
+    renderedWhen: variant is underline
+    visibleWhen: focused, keyboard modality, and not disabled
+    borderBottomWidth: strokeWidth.thin
+    borderBottomColor: color.strokeFocusOuter
+    bottom: strokeWidth.thin
+
 tokenGaps:
-  - binding: contents.strokeColor.focused
-    detail: Focus is expressed only as a stroke color change at the rest thickness. There is no focus visual binding and no focus stroke-width token.
   - binding: icons.color
     detail: The icon color is inherited from the resolved text color rather than bound to its own foreground token, so a disabled field dims the icons only because the text color changed.
   - binding: contents.gap, iconEnd.gap

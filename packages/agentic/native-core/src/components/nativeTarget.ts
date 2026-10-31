@@ -90,6 +90,7 @@ export function resolveTarget(target: NativeViewTarget) {
   const tag = snapshot.current ? findNodeHandle(snapshot.current) : null;
   return {
     tag,
+    instance: snapshot.current,
     isCurrent: () => store.getSnapshot().current === snapshot.current && store.getSnapshot().generation === snapshot.generation,
   };
 }

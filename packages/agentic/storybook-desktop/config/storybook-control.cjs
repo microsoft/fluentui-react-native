@@ -1,12 +1,15 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
-const { formatDesktopStorybookError, writeDesktopStorybookFailure } = require('./diagnostics.cjs');
+const { writeDesktopStorybookFailure } = require('./diagnostics.cjs');
 
 const host = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
 const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
 const smokeMode = process.env.STORYBOOK_SMOKE_MODE || 'stories';
 const smokePhase = parseSmokePhase(process.argv.slice(2));
+const controller = new AbortController();
+let report;
+let runner;
 
 function parseSmokePhase(args) {
   if (args.length === 0) {
@@ -24,8 +27,11 @@ function baseUrl() {
 }
 
 async function request(pathname, options) {
-  const response = await fetch(`${baseUrl()}${pathname}`, options);
-  const body = await response.json().catch(() => ({}));
+  const response = await fetch(`${baseUrl()}${pathname}`, {
+    ...options,
+    signal: AbortSignal.any([controller.signal, AbortSignal.timeout(30_000)]),
+  });
+  const body = await response.json();
   if (!response.ok) {
     throw new Error(body.error || `Storybook server returned ${response.status}`);
   }
@@ -35,6 +41,7 @@ async function request(pathname, options) {
 async function selectStory(storyId, attempts = 45) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    controller.signal.throwIfAborted();
     try {
       return await request(`/select-story-sync/${encodeURIComponent(storyId)}`, { method: 'POST' });
     } catch (error) {
@@ -61,17 +68,45 @@ async function smoke() {
     const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
     const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
     const failures = [];
+    for (const { id } of entries)
+      report.reporter.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Navigate ${id}` } });
 
     for (const { id } of entries) {
+      const started = Date.now();
+      const testId = `navigation:${id}`;
+      const title = `Navigate ${id}`;
+      const context = { story: id };
+      report.reporter.emit({ kind: 'scope-start', payload: { label: title, category: 'phase' } }, testId, context, testId);
+      report.reporter.emit({ kind: 'test-start', payload: { testId, title, attempt: 0 } }, testId, context);
       try {
         await selectStory(id);
         if (settleMilliseconds > 0) {
           await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
         }
-        process.stdout.write(`rendered ${id}\n`);
+        report.reporter.emit(
+          { kind: 'test-result', payload: { testId, title, attempt: 0, status: 'passed', durationMs: Date.now() - started } },
+          testId,
+          context,
+        );
+        report.reporter.emit({ kind: 'scope-end', payload: { status: 'passed' } }, testId);
       } catch (error) {
-        failures.push({ id, error: formatDesktopStorybookError(error) });
-        writeDesktopStorybookFailure(`navigation "${id}"`, error);
+        failures.push(error);
+        report.reporter.emit(
+          {
+            kind: 'test-result',
+            payload: {
+              testId,
+              title,
+              attempt: 0,
+              status: 'failed',
+              durationMs: Date.now() - started,
+              failure: report.reporter.failure(error, 'test'),
+            },
+          },
+          testId,
+          context,
+        );
+        report.reporter.emit({ kind: 'scope-end', payload: { status: 'failed' } }, testId);
         if (failFast) {
           break;
         }
@@ -79,9 +114,9 @@ async function smoke() {
     }
 
     if (failures.length > 0) {
-      throw new Error(`${failures.length} of ${entries.length} stories failed to render: ${failures.map(({ id }) => id).join(', ')}`);
+      throw new AggregateError(failures, `${failures.length} of ${entries.length} stories failed to render.`);
     }
-    process.stdout.write(`Rendered ${entries.length} stories.\n`);
+    report.reporter.emit({ kind: 'diagnostic', payload: { level: 'info', message: `Rendered ${entries.length} stories.` } });
   }
 
   if (smokeMode === 'stories-and-tests' && smokePhase !== 'stories') {
@@ -117,11 +152,44 @@ async function runAuthoredTests() {
     manifest: manifest.storyManifest,
     platform: manifest.endpoint,
     targetId: manifest.targetId,
+    report: report.reporter,
+    commandRunner: runner,
+    signal: controller.signal,
+    errorOutput: {
+      write: (text) => {
+        report.reporter.emit({ kind: 'diagnostic', payload: { level: 'warning', message: String(text) } });
+        return true;
+      },
+    },
   });
-  process.stdout.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
+  report.reporter.emit({ kind: 'diagnostic', payload: { level: 'info', message: formatDesktopStorybookSmokeTestSummary(result) } });
 }
 
-smoke().catch((error) => {
+async function main() {
+  const [{ createDesktopReportSession }, { NodeDesktopCommandRunner }] = await Promise.all([
+    import('@fluentui-react-native/desktop-test/reporting'),
+    import('@fluentui-react-native/desktop-test/commands'),
+  ]);
+  report = await createDesktopReportSession({ artifactsRoot: path.join(process.cwd(), 'artifacts', 'desktop'), kind: 'tests' });
+  runner = new NodeDesktopCommandRunner({ reporter: report.reporter, environment: report.environment });
+  report.onStop?.(() => controller.abort(new Error('Storybook control interrupted.')));
+  let failure;
+  try {
+    await smoke();
+  } catch (error) {
+    failure = error;
+  } finally {
+    try {
+      await runner.close();
+    } catch (error) {
+      report.reporter.fail(error, 'cleanup');
+      failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook control and cleanup failed.');
+    }
+    process.exitCode = await report.close(failure);
+  }
+}
+
+main().catch((error) => {
   writeDesktopStorybookFailure('smoke', error);
   process.exitCode = 1;
 });

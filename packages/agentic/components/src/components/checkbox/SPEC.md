@@ -80,7 +80,7 @@ renders the label first and secondary text second.
 - **CBX-005:** Resolve indicator, label, secondary text, and indicator glyph
   colors from status first and then disabled, pressed, and hovered state, select
   the indicator radius from `variant`, and apply the caller `style` last.
-- **CBX-006:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+- **CBX-006:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
   on the root, using root modality for the custom path while retaining the
   same dual-ring geometry.
 
@@ -121,7 +121,7 @@ the next render, so reduced-motion settings need no separate branch.
 
 ## Divergences from Flex
 
-`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 | ID                                       | Disposition | React Native contract                                                                                                                                                                                                            | Follow-up                                                                                         |
 | ---------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |

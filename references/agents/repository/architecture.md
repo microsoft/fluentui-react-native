@@ -17,7 +17,7 @@ iOS, Android, macOS, Windows, and Win32. It is an alpha-stage library under acti
 apps/
   bundle-size/          Bundle-size measurement and baselines
   component-generator/  Component scaffolding tool
-  E2E/                  Appium/WebdriverIO end-to-end tests for v0/v1 components
+  E2E/                  WebdriverIO end-to-end specs for v0/v1 components, run through desktop-test
   fluent-tester/        FluentTester host for Android, iOS, macOS, and Windows
   storybook/            Agentic component Storybook for macOS, Windows, and Win32
   tester-core/          Shared FluentTester pages and registry
@@ -59,7 +59,8 @@ Use the [classification guide](../components/classification.md) to identify the 
 - **Slots:** a slot is an inner component in the render tree, such as a Button's `root`, `icon`, and `content`. Slots
   enable composition and customization; components wrapping one native component typically have one slot.
 - **Tokens:** design-time values set by the theme or by component customization. See
-  [tokens and theming](../design/tokens-and-theming.md).
+  the design package's [tokens](../../../packages/agentic/design/references/tokens.md) and
+  [theming](../../../packages/agentic/design/references/theming.md) references.
 - **Platform files:** React Native resolves `.ios`, `.android`, `.macos`, `.windows`, and `.win32` variants. Document
   platform differences in the component's `SPEC.md`.
 - **Themes:** components require a `ThemeProvider` from `@fluentui-react-native/design/theming`.

@@ -25,6 +25,62 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Card', () => {
+  it.each([
+    [undefined, false],
+    [false, true],
+    [true, true],
+  ] as const)('CRD-001 derives overlay presence from selected=%s without requiring onPress', async (selected, interactive) => {
+    const component = await renderCard({ selected, testID: 'card-root', accessibilityLabel: 'Report' });
+    expect(getRoot(component).props.accessible).toBe(false);
+    if (interactive) {
+      expect(component.getByRole('button').props.accessibilityState).toEqual({ disabled: false, selected });
+    } else {
+      expect(component.queryByRole('button')).toBeNull();
+      expect(getRoot(component).props.focusable).toBe(false);
+    }
+  });
+
+  it.each([
+    ['default', ['content']],
+    ['nested', ['content', 'content02']],
+    ['structured', ['header', 'content', 'content02', 'footer']],
+  ] as const)('CRD-002 renders only the %s layout slots in order after the overlay', async (layout, expected) => {
+    const component = await renderCard({
+      accessibilityLabel: 'Report',
+      layout,
+      selected: false,
+      testID: 'card-root',
+      header: { testID: 'header' },
+      content: { testID: 'content' },
+      content02: { testID: 'content02' },
+      footer: { testID: 'footer' },
+    });
+    const children = getRoot(component).children as { props: { testID?: string; accessibilityRole?: string } }[];
+    expect(children[0].props.accessibilityRole).toBe('button');
+    expect(children.slice(1).map((child) => child.props.testID)).toEqual(expected);
+  });
+
+  it('CRD-004 CRD-005 disables the overlay without disabling a nested action', async () => {
+    const onPress = jest.fn();
+    const onNestedPress = jest.fn();
+    const component = await renderCard({
+      accessibilityLabel: 'Unavailable report',
+      disabled: true,
+      selected: true,
+      layout: 'structured',
+      onPress,
+      footer: { children: <Button content="Help" onPress={onNestedPress} /> },
+    });
+    const overlay = component.getByRole('button', { name: 'Unavailable report' });
+    expect(overlay).toBeDisabled();
+    expect(overlay.props.focusable).toBe(false);
+    expect(overlay.props.accessibilityState.selected).toBe(true);
+    await fireEvent.press(overlay);
+    await fireEvent.press(component.getByRole('button', { name: 'Help' }));
+    expect(onPress).not.toHaveBeenCalled();
+    expect(onNestedPress).toHaveBeenCalledTimes(1);
+  });
+
   afterEach(() => {
     jest.restoreAllMocks();
   });

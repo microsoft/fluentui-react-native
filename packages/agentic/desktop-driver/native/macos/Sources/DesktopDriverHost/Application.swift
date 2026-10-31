@@ -88,6 +88,7 @@ private final class LaunchResultBox: @unchecked Sendable {
   let lock = NSLock()
   var application: NSRunningApplication?
   var error: Error?
+  var abandoned = false
 }
 
 struct AXWindowAttributeDiagnostic {
@@ -306,6 +307,16 @@ final class ApplicationManager {
 
   func launch(_ params: JSONObject, token: CancellationToken) throws -> ApplicationLeaseRecord {
     let application = try requireObject(params["application"], "The launch request is missing its application descriptor.")
+    var launchTimeout = 90_000
+    if let value = params["launchTimeoutMs"] {
+      guard let number = value as? NSNumber, !isBoolean(number),
+        number.doubleValue.isFinite, number.doubleValue >= 1, number.doubleValue <= 2_147_483_647,
+        number.doubleValue == Double(number.intValue)
+      else {
+        try fail(ErrorCode.invalidParams, "The registered launch timeout must be a positive bounded integer.")
+      }
+      launchTimeout = number.intValue
+    }
     try failIfSessionUnavailable("Launching the application")
     let bundleIdentifier = optionalString(application, "bundleIdentifier")
     let executablePath = optionalString(application, "executablePath")
@@ -335,7 +346,9 @@ final class ApplicationManager {
           "The selected application bundle does not have the expected bundle identifier \"\(bundleIdentifier)\"."
         )
       }
-      running = try launchApplication(at: appURL, arguments: arguments, token: token)
+      running = try launchApplication(
+        at: appURL, arguments: arguments, preexisting: preexisting, timeoutMilliseconds: launchTimeout, token: token
+      )
       if preexisting.contains(running.processIdentifier) {
         try fail(
           ErrorCode.launchFailed,
@@ -370,7 +383,7 @@ final class ApplicationManager {
       _ = try waitForUniqueWindow(
         processID: running.processIdentifier,
         exactTitle: windowTitle,
-        timeoutMilliseconds: 90_000,
+        timeoutMilliseconds: launchTimeout,
         token: token,
         code: ErrorCode.launchFailed
       )
@@ -1013,6 +1026,8 @@ final class ApplicationManager {
   private func launchApplication(
     at url: URL,
     arguments: [String],
+    preexisting: Set<pid_t>,
+    timeoutMilliseconds: Int,
     token: CancellationToken
   ) throws -> NSRunningApplication {
     let configuration = NSWorkspace.OpenConfiguration()
@@ -1026,11 +1041,30 @@ final class ApplicationManager {
       result.lock.lock()
       result.application = application
       result.error = error
+      let abandoned = result.abandoned
       result.lock.unlock()
+      if abandoned, let application, !preexisting.contains(application.processIdentifier) {
+        application.terminate()
+      }
       semaphore.signal()
     }
-    while semaphore.wait(timeout: .now() + .milliseconds(50)) == .timedOut {
-      try token.throwIfCancelled()
+    let deadline = DispatchTime.now() + .milliseconds(timeoutMilliseconds)
+    do {
+      while semaphore.wait(timeout: .now() + .milliseconds(50)) == .timedOut {
+        try token.throwIfCancelled()
+        if DispatchTime.now() >= deadline {
+          try fail(ErrorCode.launchFailed, "Launch Services exceeded the registered launch timeout.")
+        }
+      }
+    } catch {
+      result.lock.lock()
+      result.abandoned = true
+      let application = result.application
+      result.lock.unlock()
+      if let application, !preexisting.contains(application.processIdentifier) {
+        application.terminate()
+      }
+      throw error
     }
     result.lock.lock()
     let application = result.application

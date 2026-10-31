@@ -1,5 +1,62 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.59
+
+### Patch Changes
+
+- fe236bf: FluentTester runs its macOS and Windows end-to-end tests through `desktop-test`: `yarn e2eprep:<platform>` prepares
+  the app and `yarn e2etest:<platform>` runs the `legacy` suite from `apps/E2E`. The Windows build also registers the
+  Debug package with `scripts/register-windows-app.ps1`. The Appium and WinAppDriver lanes are removed.
+- e8f017c: FluentTester now hosts only macOS and Windows. Its iOS and Android host,
+  native projects, and assets move to the private `legacy-mobile` app, and the
+  mobile Appium E2E configurations are retired.
+- fe236bf: Expose authoritative Windows accessibility help text for legacy desktop tests
+  and align the FluentTester Windows SDK and launch title across native dependencies
+  and the desktop harness.
+- 5681dd6: Point the `react-native` export condition at `./src/index.tsx`; it referenced `./src/index.ts`, which does not exist.
+- @fluentui-react-native/native-core@0.2.0
+
+## 0.170.58
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- d690e1c: Add an application-neutral desktop-test harness with canonical app/suite
+  configuration, native lifecycle ownership, standalone WDIO/Jasmine execution,
+  and shared event, JSON, JUnit, console, and GitHub Actions reporting.
+  
+  Make Storybook an optional integration while preserving isolated callbacks,
+  authenticated readiness, platform exclusions, and owned PowerShell services.
+  Bind native visibility/focus to existing WDIO browsers, retain delayed-render
+  waits, strengthen Windows attach identity, and forward trusted launch timeouts
+  and unpackaged working directories.
+  
+  Expose authoritative UI Automation required-form state, preserving unsupported
+  results on other providers. Adapt native checkbox/switch reads to checked state
+  without changing selected semantics or legacy Appium behavior.
+  
+  Expose the FluentTester application's canonical desktop targets for referenced
+  standalone suites without importing test or Storybook tooling into the app.
+  
+  Legacy desktop Appium and mobile lanes remain until native semantic parity and
+  multi-day reliability qualification are complete.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [f550cfb]
+- Updated dependencies [f550cfb]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+- Updated dependencies [f550cfb]
+- Updated dependencies [27dc8eb]
+- Updated dependencies [60121de]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/native-core@0.2.0
+
 ## 0.170.57
 
 ### Patch Changes

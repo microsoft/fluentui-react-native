@@ -5,10 +5,16 @@
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"],
     "rootDir": "src",
     "composite": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
   "references": [
+    {
+      "path": "../../packages/agentic/desktop-test/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/desktop-driver/tsconfig.json"
+    },
     {
       "path": "../../packages/shim/focus-zone/tsconfig.json"
     },

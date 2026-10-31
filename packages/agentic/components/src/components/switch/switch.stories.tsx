@@ -181,10 +181,10 @@ export const Checked: Story = {
   render: () => (
     <StoryGroup label="Checked">
       <StoryItem label="Off">
-        <Switch accessibilityLabel="Notifications" defaultChecked={false} layout="switch" />
+        <Switch accessibilityLabel="Notifications off" defaultChecked={false} layout="switch" testID="switch-spec-off" />
       </StoryItem>
       <StoryItem label="On">
-        <Switch accessibilityLabel="Notifications" defaultChecked layout="switch" />
+        <Switch accessibilityLabel="Notifications on" defaultChecked layout="switch" testID="switch-spec-on" />
       </StoryItem>
     </StoryGroup>
   ),
@@ -194,6 +194,16 @@ export const Checked: Story = {
         story:
           'The checked axis drives the filled track, thumb position, and checked accessibility state. These instances start from defaultChecked and still toggle when pressed.',
       },
+    },
+  },
+  wdio: {
+    'SWCH-001 SWCH-006 projects both initial checked values without input': async ({ browser, expect }) => {
+      const off = await browser.$('~switch-spec-off');
+      const on = await browser.$('~switch-spec-on');
+      await expect(off).toBeEnabled();
+      await expect(on).toBeEnabled();
+      expect(await off.getProperty('checked')).toBe(false);
+      expect(await on.getProperty('checked')).toBe(true);
     },
   },
 };

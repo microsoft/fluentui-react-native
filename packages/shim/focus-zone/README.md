@@ -16,4 +16,4 @@ Fabric library. Remove explicit `RCTFocusZone` pod declarations and regenerate
 autolinking/Pods after updating. Win32 keeps its host-provided native component.
 
 See the [FocusZone contract](../../agentic/native-core/src/legacy/focus-zone/SPEC.md)
-and [native-core organization](../../agentic/native-core/README.md).
+and [native-core organization](../../agentic/native-core/references/architecture.md).

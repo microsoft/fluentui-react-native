@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/experimental-native-font-metrics
 
+## 0.7.8
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+
 ## 0.7.7
 
 ### Patch Changes

@@ -14,10 +14,10 @@ references the current change needs.
 
 - **Higher-order components** live in `src/components`. Read the
   [package instructions](../../../packages/agentic/components/AGENTS.md) and the
-  [higher-order component instructions](../../../packages/agentic/components/src/components/AGENTS.md). The
+  [higher-order component reference](../../../packages/agentic/components/references/higher-order-components.md). The
   component's `SPEC.md` and `spec/` companions are its contract.
 - **Primitives** live in `src/primitives`. Read the package instructions and the
-  [primitive instructions](../../../packages/agentic/components/src/primitives/AGENTS.md). A primitive's colocated
+  [primitive reference](../../../packages/agentic/components/references/primitives.md). A primitive's colocated
   `CONTRACT.md` is its contract; primitives have no upstream-backed `SPEC.md`.
 - Changes spanning components, repeated helpers, or dependency boundaries also use the
   [optimization skill](../agentic-component-optimization/SKILL.md). Do not audit the whole package for a small edit.
@@ -28,17 +28,19 @@ references the current change needs.
 
 ## Load focused references
 
-| Work                                                                         | Reference                                                                                                                                                                                           |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Source interpretation, provenance, contract drafting, or divergences         | [Contract authoring](../agentic-component-contract-authoring/SKILL.md)                                                                                                                              |
-| Public props, slots, state types, native prop exposure, or exports           | [Types and slots](../../../references/agents/components/agentic/types-and-slots.md)                                                                                                                 |
-| Defaults, derived state, interaction hooks, accessibility, or slots          | [State and accessibility](../../../references/agents/components/agentic/state-and-accessibility.md)                                                                                                 |
-| Focus, focus visuals, keyboard activation, or native focus refs              | [Common focus authoring](../../../references/agents/focus/common.md), then [Windows/Win32](../../../references/agents/focus/windows-win32.md) or [macOS](../../../references/agents/focus/macos.md) |
-| Tokens, theme caching, state precedence, or slot style application           | [Styles and tokens](../../../references/agents/components/agentic/styles-and-tokens.md) and [tokens and theming](../../../references/agents/design/tokens-and-theming.md)                           |
-| Flex-backed motion, transitions, or reduced-motion design evidence           | [Agency design plugins](../../../references/agents/repository/agency-plugins.md)                                                                                                                    |
-| Pure slot rendering, component assembly, or display names                    | [Rendering and assembly](../../../references/agents/components/agentic/rendering.md)                                                                                                                |
-| Runtime tests, type tests, snapshots, Storybook stories, or validation       | [Tests and stories](../../../references/agents/components/agentic/tests-and-stories.md)                                                                                                             |
-| Native React Native Windows Fabric components, codegen, registration, or UIA | [Windows Fabric native components](../../../references/agents/native/windows-fabric.md)                                                                                                             |
+For Flex-backed motion, transitions, or reduced-motion design evidence, follow the scoped
+[Agency design plugin guidance](../../../references/agents/repository/agency-plugins.md).
+
+| Work                                                                         | Reference                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Source interpretation, provenance, contract drafting, or divergences         | [Contract authoring](../agentic-component-contract-authoring/SKILL.md)                                                                                                                                                                     |
+| Public props, slots, state types, native prop exposure, or exports           | [Types and slots](../../../packages/agentic/components/references/types-and-slots.md)                                                                                                                                                      |
+| Defaults, derived state, interaction hooks, accessibility, or slots          | [State and accessibility](../../../packages/agentic/components/references/state-and-accessibility.md)                                                                                                                                      |
+| Focus, focus visuals, keyboard activation, or native focus refs              | [Common focus authoring](../../../references/agents/focus/common.md), then [Windows/Win32](../../../references/agents/focus/windows-win32.md) or [macOS](../../../references/agents/focus/macos.md)                                        |
+| Tokens, theme caching, state precedence, or slot style application           | [Styles and tokens](../../../packages/agentic/components/references/styles-and-tokens.md) and design [tokens](../../../packages/agentic/design/references/tokens.md) and [styling](../../../packages/agentic/design/references/styling.md) |
+| Pure slot rendering, component assembly, or display names                    | [Rendering and assembly](../../../packages/agentic/components/references/rendering.md)                                                                                                                                                     |
+| Runtime tests, type tests, snapshots, Storybook stories, or validation       | [Tests and stories](../../../packages/agentic/components/references/tests-and-stories.md)                                                                                                                                                  |
+| Native React Native Windows Fabric components, codegen, registration, or UIA | [Windows Fabric native components](../../../references/agents/native/windows-fabric.md)                                                                                                                                                    |
 
 A new higher-order component normally needs the types, state, styles, rendering, and tests references, plus focus
 guidance when it is focusable. Load the Windows Fabric reference only for native Windows views. A focused fix loads only
@@ -56,8 +58,8 @@ references used, the implementation order, and the validation plan.
    [contract authoring workflow](../agentic-component-contract-authoring/SKILL.md) and complete its pre-code review
    gate first (R-AGENTIC-001 in the [package instructions](../../../packages/agentic/components/AGENTS.md)).
 3. Inspect the closest canonical implementation:
-   [`components/button`](../../../packages/agentic/components/src/components/button) for a styled higher-order
-   component, or [`primitives/icon`](../../../packages/agentic/components/src/primitives/icon) for a direct primitive.
+   `packages/agentic/components/src/components/button` for a styled higher-order component, or
+   `packages/agentic/components/src/primitives/icon` for a direct primitive.
 4. Establish the public contract before implementation: variants, slots, native props, accessibility, interaction
    states, and platform behavior.
 5. Implement in dependency order: types and slots, state and accessibility, styles and slot props, pure rendering,
@@ -67,9 +69,11 @@ references used, the implementation order, and the validation plan.
 7. Add focused tests and stories that exercise the public API and the resolved native output.
 8. Reconcile and ratify the local contract against the realized public types, tests, stories, and platform evidence.
    Upstream changes require explicit re-review and never overwrite the local contract.
-9. Run the smallest declared validation command while iterating. Finish with package format, lint, build, and tests;
-   run the Storybook bundle for story changes and the root build when public types, manifests, or project references
-   change. Finish with `yarn clean-lage-cache` and then `yarn lage buildci` (R-VALID-003) and report results truthfully (R-VALID-002).
+9. Iterate with focused validation (R-VALID-004): `yarn test <component>` from the package, `yarn build` after type
+   changes, and `yarn test --findRelatedTests <files>` after editing shared code. Before handover, run the package
+   format, lint, build, and whole test suite, the Storybook bundle for story changes, and the root build when public
+   types, manifests, or project references change. Then run `yarn clean-lage-cache` and `yarn lage buildci` once as
+   final acceptance (R-VALID-003) and report results truthfully (R-VALID-002).
 
 Do not divide one component implementation into separate sub-agent or sub-skill phases. Its types, state, styling, and
 rendering form one contract and should remain in one implementation context.

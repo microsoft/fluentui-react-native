@@ -11,6 +11,9 @@
       "path": "apps/fluent-tester/tsconfig.json"
     },
     {
+      "path": "apps/legacy-mobile/tsconfig.json"
+    },
+    {
       "path": "apps/storybook/tsconfig.json"
     },
     {
@@ -27,6 +30,9 @@
     },
     {
       "path": "packages/agentic/desktop-driver/tsconfig.json"
+    },
+    {
+      "path": "packages/agentic/desktop-test/tsconfig.json"
     },
     {
       "path": "packages/agentic/native-core/tsconfig.json"

@@ -14,10 +14,9 @@ native focus adapter. Then load only the applicable platform detail:
 - [Windows and Win32](windows-win32.md)
 - [macOS](macos.md)
 
-These files define authoring and review obligations. Execution status in
-the [desktop focus plan](../../../packages/agentic/components/WIN32-FOCUS-PLAN.md)
-distinguishes implemented APIs from native-only follow-ups. Keep each reviewed contract and
-source-specific divergences authoritative.
+These files define authoring and review obligations. Open native qualification gates are listed in the components
+[remaining work](../../../packages/agentic/components/references/remaining-work.md#desktop-focus-qualification). Keep
+each reviewed contract and source-specific divergences authoritative.
 
 ## Behavioral authority and platform evidence
 
@@ -190,5 +189,5 @@ or production dependencies on the desktop automation driver.
 - [React 19 refs and cleanup](https://react.dev/blog/2024/12/05/react-19)
 - [React imperative handles](https://react.dev/reference/react/useImperativeHandle)
 - [React Native 0.81 native commands](https://reactnative.dev/docs/0.81/the-new-architecture/fabric-component-native-commands)
-- [Types and slots](../components/agentic/types-and-slots.md)
-- [State and accessibility](../components/agentic/state-and-accessibility.md)
+- [Types and slots](../../../packages/agentic/components/references/types-and-slots.md)
+- [State and accessibility](../../../packages/agentic/components/references/state-and-accessibility.md)

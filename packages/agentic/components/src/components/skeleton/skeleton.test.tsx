@@ -49,6 +49,59 @@ describe('Skeleton', () => {
     return node;
   }
 
+  it.each([
+    { width: 0, height: 16 },
+    { width: 120, height: 0 },
+  ])('SKEL-002/SKEL-003 mounts only the input-transparent sweep for a positive rectangle: %j', async (emptyLayout) => {
+    const component = await renderSkeleton({ style: { width: 120, height: 16 } });
+    const root = getRoot(component);
+    expect(root.children).toHaveLength(0);
+
+    await fireEvent(root, 'layout', { nativeEvent: { layout: { ...emptyLayout, x: 0, y: 0 } } });
+    expect(root.children).toHaveLength(0);
+    expect(Animated.loop).not.toHaveBeenCalled();
+
+    await fireEvent(root, 'layout', { nativeEvent: { layout: { width: 120, height: 16, x: 0, y: 0 } } });
+    expect(root.children).toHaveLength(1);
+    expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true }).props.pointerEvents).toBe('none');
+
+    await fireEvent(root, 'layout', { nativeEvent: { layout: { ...emptyLayout, x: 0, y: 0 } } });
+    expect(root.children).toHaveLength(0);
+  });
+
+  it('SKEL-005 removes a running sweep when reduced motion changes and resumes after it is disabled', async () => {
+    const component = await renderSkeleton({ style: { width: 120, height: 16 } });
+    await fireEvent(getRoot(component), 'layout', { nativeEvent: { layout: { width: 120, height: 16, x: 0, y: 0 } } });
+    const animation = jest.mocked(Animated.loop).mock.results[0].value;
+    expect(animation.start).toHaveBeenCalledTimes(1);
+    expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
+
+    mockUseReducedMotion.mockReturnValue(true);
+    await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
+    expect(animation.stop).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).children).toHaveLength(0);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft);
+
+    mockUseReducedMotion.mockReturnValue(false);
+    await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
+    expect(animation.start).toHaveBeenCalledTimes(2);
+    expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
+  });
+
+  it('SKEL-001 retains owned hidden accessibility props even when caller root props request exposure', async () => {
+    const component = await renderSkeleton({
+      accessible: true,
+      accessibilityElementsHidden: false,
+      importantForAccessibility: 'yes',
+    });
+
+    expect(getRoot(component).props).toMatchObject({
+      accessible: false,
+      accessibilityElementsHidden: true,
+      importantForAccessibility: 'no-hide-descendants',
+    });
+  });
+
   it('renders a decorative bar with themed fill and rounded corners', async () => {
     const component = await renderSkeleton({ style: { height: 16, width: 120 } });
 

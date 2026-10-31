@@ -1,0 +1,36 @@
+schemaVersion: 1
+component: menu
+implementation: menu.styles.ts
+
+statePrecedence: []
+
+bindings:
+  root:
+    layout:
+      alignSelf: flex-start
+
+  trigger:
+    component: Button
+    notes: Button's reviewed bindings apply unchanged; Menu adds no trigger tokens.
+
+  surface:
+    backgroundColor: color.surfaceNeutralNearer
+    borderColor: color.strokeNeutralSubtle
+    borderStyle: solid
+    borderWidth: strokeWidth.thin
+    borderRadius: borderRadius.base400
+    padding: spacing.componentBase200
+    elevation: native popup window shadow
+
+  rows:
+    gap: 0
+
+  placement:
+    gap: spacing.componentBase100
+
+tokenGaps:
+  - binding: surface.elevation
+    detail: >-
+      shadow.low is not drawn; the native popup window shadow follows the surface silhouette (menu-native-elevation).
+  - binding: motion
+    detail: Flex motion is pending and native presentation is instant (menu-motion).

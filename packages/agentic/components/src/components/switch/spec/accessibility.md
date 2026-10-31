@@ -31,7 +31,7 @@ does not change internally. Disabled actions cannot toggle, but still reach the
 caller handler, as do unrelated custom actions. No action synthesizes
 `onPress`, and `activate` is not an additional toggle path.
 
-The [shared action foundation](../../../../../../framework-base/src/accessibility/AGENTS.md)
+The [shared action foundation](../../../../../../framework-base/references/accessibility.md)
 defines the action contract, and its
 [transport evidence](../../../../../../../references/agents/accessibility/action-transport-evidence.md)
 records RNW 0.81.35, Win32 0.81.8, and RNmacOS 0.81.9 source evidence.
@@ -72,7 +72,7 @@ because `focusable` defaults to the negation of `disabled`.
 Enter and the space
 keys toggle on key up.
 
-The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+The focus target follows the [shared focus visual policy](../../../../references/higher-order-components.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
 to a private `FocusRing` slot. Its configured ring Views remain mounted on the
 custom path, but are visible only while focused with keyboard modality from

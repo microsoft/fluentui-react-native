@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/vibrancy-view
 
+## 0.4.8
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+  - @fluentui-react-native/adapters@0.15.2
+
 ## 0.4.7
 
 ### Patch Changes

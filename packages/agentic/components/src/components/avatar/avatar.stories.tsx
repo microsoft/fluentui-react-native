@@ -109,6 +109,12 @@ export const ActivityRing: Story = {
     },
   },
   wdio: {
+    'AVT-004 exposes the informative identity as a named native image': async ({ browser, expect }) => {
+      const avatar = await browser.$('~agentic-storybook-avatar-activity-ring');
+      await expect(avatar).toExist();
+      expect(await avatar.getTagName()).toBe('image');
+      expect(await avatar.getProperty('name')).toBe('Lydia Mitchelson');
+    },
     'toggles the activity ring at every size without crashing or changing avatar bounds': async ({ browser, desktop, expect }) => {
       const assert: typeof import('node:assert') = (await import('node:assert')).default;
       for (const size of [16, 20, 24, 28, 32, 40, 56, 120]) {

@@ -4,9 +4,42 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { DesktopStoryManifest } from '../storybook.js';
-import { createDesktopDriverStoryHarness } from '../testing/protocolHarness.js';
+import { createDesktopDriverStoryHarness, createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 
 describe('sanctioned WebdriverIO API', () => {
+  test.each([true, false])(
+    'routes element screenshots without falling back to window capture (supported: %s)',
+    async (elementScreenshot) => {
+      const harness = await createDesktopDriverTestHarness({ features: { elementScreenshot } });
+      const captureElement = jest.spyOn(harness.host, 'captureElement');
+      const captureWindow = jest.spyOn(harness.host, 'captureWindow');
+      const windowImage = await harness.host.captureWindow('window-1');
+      const elementImage = Buffer.from('element-image');
+      captureWindow.mockClear();
+      if (elementScreenshot) {
+        captureElement.mockResolvedValue({ ...windowImage, data: elementImage });
+      }
+      const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-screenshots-'));
+      try {
+        const response = await runContract(harness.server.url, harness.target.id, artifactsRoot, 'screenshots.contract.cjs');
+        for (const mode of ['connected', 'attached', 'managed']) {
+          expect(response[mode]).toEqual({
+            window: Buffer.from(windowImage.data).toString('base64'),
+            element: elementScreenshot ? elementImage.toString('base64') : 'unsupported',
+            savedElement: elementScreenshot ? elementImage.toString('base64') : 'unsupported',
+          });
+        }
+        expect(captureElement.mock.calls.length).toBeGreaterThanOrEqual(6);
+        expect(captureElement.mock.calls.every(([id]) => id === 'button')).toBe(true);
+        expect(captureWindow).toHaveBeenCalledTimes(3);
+      } finally {
+        await harness.close();
+        fs.rmSync(artifactsRoot, { force: true, recursive: true });
+      }
+    },
+    60_000,
+  );
+
   test('lists and runs an authored plan through registered browser commands', async () => {
     const manifest: DesktopStoryManifest = {
       endpoint: 'windows',
@@ -37,18 +70,29 @@ describe('sanctioned WebdriverIO API', () => {
       schemaVersion: 1,
     };
     const harness = await createDesktopDriverStoryHarness(manifest);
+    const find = harness.host.find.bind(harness.host);
+    let delayedLookups = 0;
+    harness.host.find = async (root, selector) => {
+      if (selector.value === 'button-delayed') {
+        if (++delayedLookups < 3) return [];
+        return find(root, { ...selector, value: 'button-primary' });
+      }
+      return find(root, selector);
+    };
     const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-wdio-'));
     try {
       const response = await runContract(harness.server.url, harness.target.id, artifactsRoot);
       expect(response).toMatchObject({
         attachedWaitOptions: { waitforInterval: 100, waitforTimeout: 5000 },
         attachedWaitPolls: 3,
+        delayedDisplayed: true,
         manifestEntries: 1,
         result: {
           status: 'passed',
           tests: [{ status: 'passed', storyId: 'components-button--default', testId: 'click' }],
         },
       });
+      expect(delayedLookups).toBeGreaterThanOrEqual(3);
       expect(fs.existsSync(path.join(artifactsRoot, 'run.json'))).toBe(true);
     } finally {
       await harness.close();
@@ -57,9 +101,14 @@ describe('sanctioned WebdriverIO API', () => {
   }, 60_000);
 });
 
-function runContract(url: string, targetId: string, artifactsRoot: string): Promise<Record<string, unknown>> {
+function runContract(
+  url: string,
+  targetId: string,
+  artifactsRoot: string,
+  fixture = 'wdioRunner.contract.cjs',
+): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [path.join(__dirname, 'wdioRunner.contract.cjs'), url, targetId, artifactsRoot], {
+    const child = spawn(process.execPath, [path.join(__dirname, fixture), url, targetId, artifactsRoot], {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     const stdout: Buffer[] = [];

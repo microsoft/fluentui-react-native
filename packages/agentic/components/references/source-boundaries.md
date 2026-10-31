@@ -1,0 +1,49 @@
+---
+id: components.source-boundaries
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/components/src
+---
+
+# Source boundaries and extraction
+
+Use this reference with the package [`AGENTS.md`](../AGENTS.md) and the relevant [higher-order component](higher-order-components.md)
+or [primitive](primitives.md) reference when a change crosses component boundaries or adds shared code.
+
+## Routing
+
+- Higher-order components live in `src/components`; read [higher-order components](higher-order-components.md).
+- Primitive components live in `src/primitives`; read [primitives](primitives.md).
+- Shared package-private helpers live in `src/common`.
+- Package-wide dependency and extraction reviews use the `agentic-component-optimization` skill.
+
+## Source boundaries
+
+- Production source may depend only on React / React Native native components, `@fluentui-react-native/design`,
+  `@fluentui-react-native/framework-base`, and native-core's public modern platform entrypoints.
+- Import native-core values only from platform-resolved files (for example `common/popupHost.macos.ts` importing
+  `@fluentui-react-native/native-core/macos`). Shared files may use `import type` from `/macos`, whose types the
+  `/windows` entrypoint exports identically. Never import its root, `/legacy`, or internals, and give hosts without a
+  modern route a default file that fails descriptively on use.
+- Generalizable non-styling hooks belong in `framework-base/src/hooks`.
+- Styling helpers belong in `agentic/design/src/styling`.
+- Component-library-specific non-public types, constants, and helpers belong in `src/common`.
+- Primitives are public from `@fluentui-react-native/components/primitives`, must remain unstyled, and require a colocated
+  `CONTRACT.md`. Extract one only for a repeated behavioral or structural contract that is useful to consumers; keep
+  package-private helpers in `src/common`.
+
+## Optimization principles
+
+- Align native text with View layout, not synthetic text heights or baseline offsets. A font's em size, line box, and
+  visible glyph are different measurements. Use `Icon` for font icons and `LayoutStableText` for reserved labels; follow
+  the [native alignment rules](styles-and-tokens.md#native-text-and-vertical-alignment)
+  for editors, mixed-size text rows, and regression coverage.
+
+- Audit dependency direction before introducing shared code.
+- Look for repeated types, constants, routines, and subtrees across components.
+- Validate extraction payoff before creating another layer of indirection.
+- Preserve public component-qualified APIs and explicit exports. Higher-order components belong to the root entry point;
+  primitives belong to the `./primitives` entry point.
+- Keep local component fixes local; do not widen a tiny edit into a whole-package audit unless repetition or extraction
+  is part of the work.
+- Do not extract one-off logic, styling choices, or thin wrappers that are clearer in place.

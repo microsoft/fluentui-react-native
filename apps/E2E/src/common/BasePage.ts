@@ -11,10 +11,12 @@ import {
   ROOT_VIEW,
   TESTPAGE_BUTTONS_SCROLLVIEWER,
   TESTPAGE_CONTENT_SCROLLVIEWER,
-} from './consts';
+} from './consts.js';
+import { isNativeDesktop, scrollNativeDesktopElement, sendNativeDesktopKeys } from './nativeDesktop.js';
+import type { PageElement } from './nativeDesktop.js';
 
 const DUMMY_CHAR = '';
-// The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
+// The desktop-test harness sets the E2ETEST_PLATFORM environment variable to the endpoint (macos, windows, or win32)
 const PLATFORM = process.env['E2ETEST_PLATFORM'] as Platform;
 // NATIVE_TESTING should be set to true when testing natively. Should be false when testing in the FURN repo
 const NATIVE_TESTING = process.env['NATIVE_TESTING'] == 'true';
@@ -78,16 +80,25 @@ export abstract class BasePage {
    */
   async navigateToPageAndLoadTests(): Promise<boolean | void> {
     // Desktop platforms automatically scroll to a page's navigation button - this extra step is purely for mobile platforms.
-    if (this.platform === 'android' || this.platform === 'ios' || this.platform === 'windows') {
+    if (isNativeDesktop()) {
+      await scrollNativeDesktopElement(this._pageButton, this._testPageButtonScrollViewer);
+    } else if (this.platform === 'android' || this.platform === 'ios' || this.platform === 'windows') {
       await this.mobileScrollToComponentButton();
     }
 
-    if (this.platform === 'windows') {
+    if (this.platform === 'windows' && !isNativeDesktop()) {
       const pageButton = await this._pageButton;
       // sendKeys will move focus to the button, so we dont have to worry about the button being offscreen in the scrollable area.
       await this.sendKeys(pageButton, [Keys.ENTER]);
-    } else {
-      await this._pageButton.click();
+    } else if (!isNativeDesktop() || (await this._pageButton.isEnabled())) {
+      // The tester disables the selected page's button; specs that share a page (e.g. IconLegacy and IconV1) find it already open.
+      if (isNativeDesktop() && this.platform === 'macos' && browser.capabilities['furn:features']?.physicalClick === false) {
+        // Hosted macOS disables physical clicks, and legacy navigation buttons do not expose AXPress.
+        if (!browser.capabilities['furn:features']?.keyboard) throw new Error('This desktop does not support keyboard navigation.');
+        await this.sendKeys(this._pageButton, [Keys.SPACE]);
+      } else {
+        await this._pageButton.click();
+      }
     }
 
     // Wait for page to load
@@ -104,25 +115,32 @@ export abstract class BasePage {
     await e2eSwitch.waitForDisplayed({ timeoutMsg: 'E2E Test Switch should be visible to enable it' });
     await e2eSwitch.waitForEnabled({ timeoutMsg: 'The E2E Switch should be enabled before we interact with it' });
 
-    switch (this.platform) {
-      // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
-      // different on android because .isSelected() doesn't function as expected on the platform.
-      case 'android':
-        if ((await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'false') {
-          await e2eSwitch.click();
-          await e2eSwitch.waitUntil(async () => (await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'true', {
-            timeoutMsg: 'Clicked the E2E Mode Switch, but it failed to toggle.',
-          });
-        }
-        break;
-      default:
-        if (!(await e2eSwitch.isSelected())) {
-          await e2eSwitch.click();
-          await e2eSwitch.waitUntil(async () => await e2eSwitch.isSelected(), {
-            timeoutMsg: 'Clicked the E2E Mode Switch, but it failed to toggle.',
-          });
-        }
-    }
+    if (isNativeDesktop()) {
+      const checked = () => this.isChecked(e2eSwitch);
+      if (!(await checked())) {
+        await e2eSwitch.click();
+        await browser.waitUntil(checked, { timeoutMsg: 'Clicked the native E2E switch, but checked state did not become true.' });
+      }
+    } else
+      switch (this.platform) {
+        // Usually, we use .isSelected() to see if a control (our switch) is checked true or false, but the process is
+        // different on android because .isSelected() doesn't function as expected on the platform.
+        case 'android':
+          if ((await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'false') {
+            await e2eSwitch.click();
+            await e2eSwitch.waitUntil(async () => (await e2eSwitch.getAttribute(AndroidAttribute.Checked)) === 'true', {
+              timeoutMsg: 'Clicked the E2E Mode Switch, but it failed to toggle.',
+            });
+          }
+          break;
+        default:
+          if (!(await e2eSwitch.isSelected())) {
+            await e2eSwitch.click();
+            await e2eSwitch.waitUntil(async () => await e2eSwitch.isSelected(), {
+              timeoutMsg: 'Clicked the E2E Mode Switch, but it failed to toggle.',
+            });
+          }
+      }
 
     return await this._e2eSection.waitForDisplayed({
       timeoutMsg: 'Pressed E2E Mode Switch, but E2E Test Sections failed to display before the timeout.',
@@ -187,7 +205,35 @@ export abstract class BasePage {
 
   /** Given a WebdriverIO element promise, send a click input to the element. Use this across all PageObject methods and test specs. */
   async click(element: ChainablePromiseElement) {
+    if (isNativeDesktop() && !(await element.isEnabled())) {
+      // Element Click rejects disabled controls; physical input must still be exercised by negative callback tests.
+      if (!browser.capabilities['furn:features']?.physicalClick) throw new Error('This desktop does not support physical clicks.');
+      try {
+        await browser.performActions([
+          {
+            type: 'pointer',
+            id: 'tester-pointer',
+            parameters: { pointerType: 'mouse' },
+            actions: [
+              { type: 'pointerMove', origin: { 'element-6066-11e4-a52e-4f735466cecf': await element.elementId }, x: 0, y: 0 },
+              { type: 'pointerDown', button: 0 },
+              { type: 'pointerUp', button: 0 },
+            ],
+          },
+        ]);
+      } finally {
+        await browser.releaseActions();
+      }
+      return;
+    }
     return element.click();
+  }
+
+  async isChecked(element: ChainablePromiseElement): Promise<boolean> {
+    if (!isNativeDesktop()) return element.isSelected();
+    const value: unknown = await browser.getElementProperty(await element.elementId, 'checked');
+    if (typeof value !== 'boolean') throw new Error('The control did not expose a native boolean checked state.');
+    return value;
   }
 
   /** Given a WebdriverIO element promise, send the passed in list of keys as keyboard inputs. Use this across all PageObject methods and test specs.
@@ -197,8 +243,9 @@ export abstract class BasePage {
    * - Shift tab to the previous element: FocusZonePageObject.sendKeys(FocusZonePageObject.beforeButton, [KEY_SHIFT, KEY_TAB])
    * - Escape out of a menu: MenuPageObject.sendKeys(MenuPageObject.item1, [KEY_ESCAPE])
    */
-  async sendKeys(element: ChainablePromiseElement, keys: Keys[]) {
-    return element.addValue(keys.join());
+  async sendKeys(element: PageElement, keys: Keys[]) {
+    if (isNativeDesktop()) return sendNativeDesktopKeys(element, keys);
+    return (await element).addValue(keys.join());
   }
 
   /** Short-hand method for PageObjects to get an element attribute during testing, with attribute being type-enforced. */
@@ -209,6 +256,7 @@ export abstract class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async mobileScrollToComponentButton() {
+    if (isNativeDesktop()) return scrollNativeDesktopElement(this._pageButton, this._testPageButtonScrollViewer);
     if (this.platform !== 'android' && (await this._pageButton.isDisplayed())) {
       return;
     }
@@ -300,8 +348,9 @@ export abstract class BasePage {
   }
 
   /* Scrolls to the specified or primary UI test element until it is displayed. */
-  async scrollToTestElement(component?: ChainablePromiseElement) {
-    const ComponentToScrollTo = component ? component : this._primaryComponent;
+  async scrollToTestElement(component?: PageElement) {
+    const ComponentToScrollTo = await (component ?? this._primaryComponent);
+    if (isNativeDesktop()) return scrollNativeDesktopElement(ComponentToScrollTo, By(TESTPAGE_CONTENT_SCROLLVIEWER));
     if (await ComponentToScrollTo.isDisplayed()) {
       return;
     }
@@ -331,6 +380,7 @@ export abstract class BasePage {
   /* Scrolls to the specified or primary UI test element until it is displayed. */
   async mobileScrollToTestElement(componentIdentifier?: string): Promise<void> {
     const componentToScrollTo = componentIdentifier ?? this._primaryComponentName;
+    if (isNativeDesktop()) return scrollNativeDesktopElement(By(componentToScrollTo), By(TESTPAGE_CONTENT_SCROLLVIEWER));
     if (await By(componentToScrollTo).isDisplayed()) {
       return;
     }
@@ -380,7 +430,7 @@ export abstract class BasePage {
   ): Promise<boolean | void> {
     return await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
+      timeoutMsg: errorMsg ?? 'Error. Please see the failure evidence and logs under artifacts/desktop for more information.',
       interval: interval ?? 1000,
     });
   }

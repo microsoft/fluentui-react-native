@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/tooltip
 
+## 0.5.15
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/callout@0.29.8
+  - @fluentui-react-native/framework-base@0.9.0
+
 ## 0.5.14
 
 ### Patch Changes

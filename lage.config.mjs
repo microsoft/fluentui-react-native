@@ -12,6 +12,11 @@ const config = {
     clean: {
       cache: false,
     },
+    // The root script already cleans TypeScript output before invoking Lage.
+    '@fluentui-react-native/root#clean': {
+      type: 'noop',
+      cache: false,
+    },
     'check:spec-contracts': {
       cache: false,
     },
@@ -38,6 +43,10 @@ const config = {
       cache: false,
     },
     'check-agent-instructions': {
+      cache: false,
+    },
+    'check-package-contents': {
+      dependsOn: ['@fluentui-react-native/root#root-build'],
       cache: false,
     },
     'check-publishing': {
@@ -69,7 +78,15 @@ const config = {
 
     // ── Pipeline aliases ───────────────────────────────────────────────────
     'repo-checks': ['lint-repo', 'check-publishing', 'check-agent-instructions'],
-    buildci: ['lint-repo', 'check-publishing', 'check-agent-instructions', '@fluentui-react-native/root#root-build', 'test', 'lint'],
+    buildci: [
+      'lint-repo',
+      'check-publishing',
+      'check-agent-instructions',
+      'check-package-contents',
+      '@fluentui-react-native/root#root-build',
+      'test',
+      'lint',
+    ],
 
     // ── Worker tasks ───────────────────────────────────────────────────────
     'test-links': {

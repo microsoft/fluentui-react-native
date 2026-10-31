@@ -106,7 +106,7 @@
     },
     {
       "id": "RAD-005",
-      "evidence": ["useRadio.ts", "useRadioStyles.ts", "radio.test.tsx"]
+      "evidence": ["useRadio.ts", "useRadioStyles.ts", "radio.test.tsx", "radio.stories.tsx"]
     }
   ]
 }

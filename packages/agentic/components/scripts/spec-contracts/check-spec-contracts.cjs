@@ -603,7 +603,7 @@ function validateReport(lock, components) {
     legacyMigration: lock.legacyStagedSpecs.map((entry) => ({
       ...entry,
       outcome: 'source-copy-removed',
-      record: 'SPEC-MIGRATION.md',
+      record: 'references/contracts.md#legacy-staged-specs',
     })),
   };
   invariant(JSON.stringify(report.local) === JSON.stringify(expectedLocal), 'The report local component state is stale.');
@@ -681,7 +681,10 @@ function main() {
   const components = contractDirectories();
   validateAgencyProfile(lock);
   validateLegacyStagingRemoval();
-  invariant(fs.existsSync(path.join(packageRoot, 'SPEC-MIGRATION.md')), 'SPEC-MIGRATION.md must record legacy outcomes.');
+  invariant(
+    fs.readFileSync(path.join(packageRoot, 'references', 'contracts.md'), 'utf8').includes('\n## Legacy staged specs\n'),
+    'references/contracts.md must record legacy staged spec outcomes.',
+  );
   const requirementIds = new Set();
   const unratifiedContracts = [];
   for (const component of components) {

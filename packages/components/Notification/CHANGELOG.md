@@ -1,5 +1,30 @@
 # Change Log - @fluentui-react-native/notification
 
+## 0.26.16
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+- Updated dependencies [f550cfb]
+  - @fluentui-react-native/adapters@0.15.2
+  - @fluentui-react-native/button@0.40.16
+  - @fluentui-react-native/design@0.5.2
+  - @fluentui-react-native/experimental-appearance-additions@0.8.12
+  - @fluentui-react-native/experimental-shadow@0.7.15
+  - @fluentui-react-native/framework@0.17.9
+  - @fluentui-react-native/framework-base@0.9.0
+  - @fluentui-react-native/icon@0.22.16
+  - @fluentui-react-native/interactive-hooks@0.28.12
+  - @fluentui-react-native/pressable@0.13.12
+  - @fluentui-react-native/text@0.25.16
+  - @fluentui-react-native/use-styling@0.16.6
+
 ## 0.26.15
 
 ### Patch Changes

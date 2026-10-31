@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
+## 0.8.12
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- f550cfb: Import React Native headers in iOS Objective-C sources with the canonical `<React/...>` form instead of by bare header name.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/framework-base@0.9.0
+
 ## 0.8.11
 
 ### Patch Changes

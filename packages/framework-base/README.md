@@ -1,18 +1,43 @@
 # `@fluentui-react-native/framework-base`
 
-This package provides core implementations and types to support both the legacy and current frameworks.
+Core implementations and types shared by the Fluent UI React Native frameworks: component patterns, slots, the custom
+JSX runtime, interaction and accessibility helpers, and utilities for immutable merging, memoization, and prop merging.
+Earlier standalone packages, including the merge and memoization utilities, are now part of this package.
 
-The functionality in these packages is now exposed as part of this package.
+## Quick start
 
-## Component Patterns
+Add the package as a dependency, then put the JSX runtime pragma on the **first line** of each component file that
+uses the component patterns:
 
-The shared rendering patterns and JSX handlers are centralized in this package. See the
-[component authoring guide](./src/component-patterns/README.md) for how to choose and
-combine `directComponent`, `phasedComponent`, and slots.
+```tsx
+/** @jsxImportSource @fluentui-react-native/framework-base */
+import { Text } from 'react-native';
+import type { TextProps } from 'react-native';
+import { directComponent } from '@fluentui-react-native/framework-base';
 
-## Type Helpers
+export const StrongText = directComponent<TextProps>(({ style, ...props }) => <Text {...props} style={[{ fontWeight: '700' }, style]} />);
+```
 
-This package provides several TypeScript utility types:
+The runtime at `@fluentui-react-native/framework-base/jsx-runtime` flattens direct and phased components and supports
+slot refs. Compiled output imports it, so packages using the pragma declare this package in `dependencies`. The
+pragma replaces the legacy `/** @jsx withSlots */` directive; the exported `withSlots` helper remains only for the
+classic runtime used by deprecated framework code.
+
+## Documentation
+
+| Topic                                                  | Covers                                                                 |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| [Component patterns](references/component-patterns.md) | Choosing and combining `directComponent`, `phasedComponent`, and slots |
+| [Accessibility](references/accessibility.md)           | `resolveAccessibilityAction` and the shared semantic action contract   |
+| [Immutable merge](references/immutable-merge.md)       | `immutableMerge`, `immutableMergeCore`, and custom merge options       |
+| [Memo cache](references/memo-cache.md)                 | `getMemoCache`, `getTypedMemoCache`, and `memoize`                     |
+| [Merge props](references/merge-props.md)               | `mergeProps`, `mergeStyles`, and style identity                        |
+| [Contributing](references/contributing.md)             | Source ownership, compatibility, tests, and validation                 |
+
+The [reference index](references/README.md) lists every reference by ID. Agents working in this package start from
+[AGENTS.md](AGENTS.md).
+
+## Type helpers
 
 - `PropsOf<TComponent>` - Extract props from a React component type
 - `PropsWithRefOf<TComponent>` - Extract props, including a supported ref, from a React component type
@@ -29,15 +54,3 @@ This package provides several TypeScript utility types:
 - `Simplify<T>`, `OuterPartial<T>`, and `PartialExcept<T, K>` - Helpers for producing readable partial object types
 - `MergeCoreOptions` - Options accepted by `immutableMergeCore`
 - `ValueFactory<T>` - Factory signature accepted by memo cache functions
-
-## JSX Runtime
-
-This package exports a custom JSX runtime at `@fluentui-react-native/framework-base/jsx-runtime`. Use it in your component files by adding this pragma as the **first line** of the file:
-
-```tsx
-/** @jsxImportSource @fluentui-react-native/framework-base */
-```
-
-The custom runtime enables automatic element flattening for direct and phased components. Any package using this pragma must include `@fluentui-react-native/framework-base` in its `devDependencies`.
-
-> **Note:** This is the current pattern and replaces the legacy `/** @jsx withSlots */` directive (which required importing `withSlots` explicitly). The exported `withSlots` helper remains available only for the classic runtime used by deprecated framework code.

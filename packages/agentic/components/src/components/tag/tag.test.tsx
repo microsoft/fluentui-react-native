@@ -23,6 +23,79 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Tag', () => {
+  it('TAG-004 leaves removal to the caller after repeated whole-tag activation', async () => {
+    const onPress = jest.fn();
+    const component = await renderTag({ content: 'Engineering', onPress });
+
+    await fireEvent.press(getRoot(component));
+    await fireEvent.press(getRoot(component));
+
+    expect(onPress).toHaveBeenCalledTimes(2);
+    expect(component.getByText('Engineering')).toBeOnTheScreen();
+    expect(component.getAllByRole('button')).toHaveLength(1);
+    await component.rerender(<></>);
+    expect(component.queryByRole('button')).toBeNull();
+  });
+
+  it.each(['dismiss=false', 'dismissIcon=null'] as const)(
+    'TAG-002 TAG-004 %s suppresses only the glyph, not whole-tag activation',
+    async (suppression) => {
+      const onPress = jest.fn();
+      const component = await renderTag({
+        content: { children: 'Engineering', testID: 'tag-spec-content' },
+        dismiss: suppression !== 'dismiss=false',
+        dismissIcon:
+          suppression === 'dismissIcon=null'
+            ? null
+            : { fontSource: { codepoint: 0x2715, fontFamily: 'Arial' }, testID: 'tag-spec-dismiss' },
+        onPress,
+      });
+
+      expect(getRoot(component).children).toHaveLength(1);
+      expect(getRoot(component).children[0]).toBe(component.getByTestId('tag-spec-content'));
+      expect(component.queryByTestId('tag-spec-dismiss')).toBeNull();
+      await fireEvent.press(getRoot(component));
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(component.getByText('Engineering')).toBeOnTheScreen();
+    },
+  );
+
+  it('TAG-003 TAG-004 orders decorative leading and dismiss icons around the label in one target', async () => {
+    const component = await renderTag({
+      content: { children: 'Engineering', testID: 'tag-spec-content' },
+      dismissIcon: { fontSource: { codepoint: 0x2715, fontFamily: 'Arial' }, testID: 'tag-spec-dismiss' },
+      leadingIcon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'tag-spec-leading' },
+    });
+
+    expect(getRoot(component).children).toEqual([
+      component.getByTestId('tag-spec-leading'),
+      component.getByTestId('tag-spec-content'),
+      component.getByTestId('tag-spec-dismiss'),
+    ]);
+    expect(component.getAllByRole('button')).toHaveLength(1);
+    for (const id of ['tag-spec-leading', 'tag-spec-dismiss']) {
+      expect(component.getByTestId(id).props.accessible).toBe(false);
+    }
+  });
+
+  it('TAG-002 explicitly null content suppresses the placeholder while retaining the default dismiss glyph', async () => {
+    const component = await renderTag({ accessibilityLabel: 'Remove filter', content: null });
+    expect(component.queryByText('Tag text')).toBeNull();
+    expect(getRoot(component).children).toHaveLength(1);
+    expect(getRoot(component).props.accessibilityLabel).toBe('Remove filter');
+  });
+
+  it.each([false, true])('TAG-008 owned disabled=%s overrides contradictory caller state while preserving busy', async (disabled) => {
+    const component = await renderTag({
+      accessibilityState: { busy: true, disabled: !disabled },
+      content: 'Engineering',
+      disabled,
+    });
+
+    expect(getRoot(component).props.accessibilityState).toMatchObject({ busy: true, disabled });
+    expect(getRoot(component).props.focusable).toBe(!disabled);
+  });
+
   it('renders default dismissible tag accessibility and styling', async () => {
     const component = await renderTag({ content: 'Engineering' });
 

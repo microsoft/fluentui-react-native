@@ -27,7 +27,7 @@ The resolved state retains the controlled/uncontrolled expansion result, pressab
 
 - **ACC-001:** Resolve the documented defaults and implement controlled and uncontrolled expansion without mutating a controlled value.
 - **ACC-002:** Render the public slots, default slot content, body fallback, and layout-specific header order.
-- **ACC-003:** Apply theme-token header, title, body, chevron, and visibility styling, and follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy) on the header.
+- **ACC-003:** Apply theme-token header, title, body, chevron, and visibility styling, and follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy) on the header.
 - **ACC-004:** Expose a labeled button header with expanded state and an accessibility relationship to the body; hide collapsed body descendants.
 - **ACC-005:** Keep grouping policy, body contents, and motion outside the component contract.
 
@@ -54,7 +54,7 @@ The body remains mounted. Collapsing it sets height to zero, hides overflow, rem
 
 ## Divergences from Flex
 
-- `native-system-focus-visuals` — **accepted.** Apply the [shared native adaptation](../AGENTS.md#focus-visual-policy).
+- `native-system-focus-visuals` — **accepted.** Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `accordion-chevron-end-rotation` — **accepted.** Flex design evidence gives the trailing chevron a down-to-up caret sequence. FURN uses the same chevron source in both layouts and rotates it right-to-down as expansion changes. Changing that sequence requires an implementation and visual-contract review.
 

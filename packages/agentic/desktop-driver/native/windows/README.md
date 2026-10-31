@@ -62,8 +62,20 @@ Launch requires:
 - an exact `windowTitle`;
 - optional fixed, server-owned arguments.
 
-Attach accepts an owner-generated nonce-bound lease, or an exact title only
-when it resolves to one live process/window. Zero or multiple matches fail.
+Unpackaged launch also accepts a server-owned `workingDirectory`, which must
+be an existing absolute directory. Packaged activation rejects that override.
+The helper validates and honors the server-owned `launchTimeoutMs`.
+
+Snapshots expose required-form state from cached `UIA_IsRequiredForFormPropertyId`
+with provider defaults disabled. A missing, unsupported, or non-Boolean native
+value remains unsupported rather than becoming `false`.
+Accessibility help text uses cached `UIA_HelpTextPropertyId` with defaults
+disabled. An explicit empty string is supported; absent or non-string values
+remain unsupported.
+
+Attach accepts an owner-generated nonce-bound lease, or an exact title
+qualified by the canonical executable or AUMID. Title-only attach, zero
+matches, and multiple qualified matches fail.
 Leases record ownership, PID, process start, executable, and the primary window.
 Attached apps survive WebDriver deletion; launched apps are closed only by
 their exact recorded process identity.
@@ -104,9 +116,26 @@ the target coordinate. The batch is never interleaved with other input, so the
 press cannot land under a cursor that another source moved. Explicit pointer
 actions also carry their coordinate on every press and release.
 
+Keyboard actions inject a character that the foreground keyboard layout types
+with one unmodified key, such as `s` on a US layout, as that virtual key, as a
+user's press would. Applications then observe its key and code, so key-based
+handlers such as type-ahead match it. Other characters, dead-key characters,
+and letters while Caps Lock is on are injected as Unicode packets. Element
+`sendKeys` text always uses Unicode packets.
+
 Windows and Win32 share implementation but retain distinct endpoint and
 renderer capabilities. Minimized-window capture remains unsupported rather
 than changing app state through an implicit restore.
+
+Window activation treats a foreground window owned by the target window as
+already active, as macOS does for application activation. Reactivating the
+owner would light-dismiss an open popup with input that no user produced. A
+physical press on the owner still activates it.
+
+A subtree walk retries while its root remains available if a descendant
+becomes unavailable, or if a closing popup island's provider reports a UI
+Automation timeout or an unspecified failure. Only an unavailable root is a
+stale element.
 
 ## Verification and tests
 
@@ -136,5 +165,6 @@ an actionable cache failure.
 
 See [Native helpers](../../references/native-helpers.md) for cache and
 verification policy, [CI integration](../../references/ci-integration.md) for
-runner requirements, and [PLAN.md](../../PLAN.md) for unfinished Windows
-qualification.
+runner requirements, and
+[microsoft/fluentui-react-native#4345](https://github.com/microsoft/fluentui-react-native/issues/4345)
+for unfinished Windows qualification.

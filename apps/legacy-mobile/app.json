@@ -1,0 +1,13 @@
+{
+  "name": "FluentTester",
+  "displayName": "FluentTester",
+  "singleApp": "fluent-tester",
+  "components": [{ "appKey": "FluentTester", "displayName": "Fluent Tester", "slug": "fluent-tester" }],
+  "android": {
+    "icons": "assets/res"
+  },
+  "resources": {
+    "android": ["dist/res", "dist/index.android.bundle"],
+    "ios": ["dist/assets", "dist/index.ios.jsbundle"]
+  }
+}

@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
+## 0.12.8
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- f550cfb: Import `React` in iOS Swift sources only when the module is available, so hosts can provide React Native headers through an Objective-C bridging header.
+- f550cfb: Import React Native headers in iOS Objective-C sources with the canonical `<React/...>` form instead of by bare header name.
+
 ## 0.12.7
 
 ### Patch Changes

@@ -1,10 +1,19 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import { Animated, Easing, StyleSheet } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
+import { useReducedMotion } from '@fluentui-react-native/framework-base';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { ProgressBar } from './progress-bar';
+
+jest.mock('@fluentui-react-native/framework-base', () => ({
+  ...jest.requireActual('@fluentui-react-native/framework-base'),
+  useReducedMotion: jest.fn(),
+}));
+
+const mockUseReducedMotion = jest.mocked(useReducedMotion);
 
 async function renderProgressBar(props: React.ComponentProps<typeof ProgressBar>) {
   return render(<ProgressBar {...props} />);
@@ -25,6 +34,138 @@ function getIndicatorStyle(component: RenderResult) {
 }
 
 describe('ProgressBar', () => {
+  beforeEach(() => {
+    mockUseReducedMotion.mockReturnValue(false);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it.each([
+    [200, 70, 130],
+    [20, 16, 4],
+  ])(
+    'PGB-004/PGB-005 gates the measured %s track sweep and stops it for reduced motion and static type',
+    async (width, segment, travel) => {
+      const animation = { start: jest.fn(), stop: jest.fn(), reset: jest.fn() };
+      const loop = jest.spyOn(Animated, 'loop').mockReturnValue(animation);
+      const timing = jest.spyOn(Animated, 'timing');
+      const setValue = jest.spyOn(Animated.Value.prototype, 'setValue');
+      const component = await renderProgressBar({ type: 'indeterminate' });
+
+      expect(loop).not.toHaveBeenCalled();
+      expect(getIndicatorStyle(component).width).toBe(0);
+      await fireEvent(getTrack(component), 'layout', {
+        nativeEvent: { layout: { height: 4, width, x: 0, y: 0 } },
+      });
+      expect(getIndicatorStyle(component).width).toBe(segment);
+      expect(animation.start).toHaveBeenCalledTimes(1);
+      expect(timing).toHaveBeenCalledWith(
+        expect.any(Animated.Value),
+        expect.objectContaining({ duration: 2000, easing: Easing.linear, toValue: travel, useNativeDriver: false }),
+      );
+
+      mockUseReducedMotion.mockReturnValue(true);
+      await component.rerender(<ProgressBar type="indeterminate" />);
+      expect(animation.stop).toHaveBeenCalled();
+      expect(setValue).toHaveBeenLastCalledWith(0);
+      expect(getIndicatorStyle(component).transform).toBeUndefined();
+      expect(getIndicatorStyle(component).width).toBe(segment);
+      expect(getRoot(component).props.accessibilityState.busy).toBe(true);
+
+      mockUseReducedMotion.mockReturnValue(false);
+      await component.rerender(<ProgressBar progress={40} type="static" />);
+      expect(loop).toHaveBeenCalledTimes(1);
+      expect(getIndicatorStyle(component).transform).toBeUndefined();
+      expect(getIndicatorStyle(component).width).toBeCloseTo(width * 0.4);
+    },
+  );
+
+  it.each([
+    ['neutral', 'foregroundBrandPrimary'],
+    ['error', 'foregroundDangerPrimary'],
+    ['success', 'foregroundSuccessPrimary'],
+  ] as const)('PGB-007 shares the %s status color between indicator and decorative validation icon', async (status, token) => {
+    const component = await renderProgressBar({
+      status,
+      showValidationIcon: true,
+      validationIcon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'validation-icon' },
+    });
+    const icon = component.getByTestId('validation-icon', { includeHiddenElements: true });
+
+    expect(getIndicatorStyle(component).backgroundColor).toBe(defaultFlexTokens.color[token]);
+    expect(StyleSheet.flatten(component.getByText('★', { includeHiddenElements: true }).props.style).color).toBe(
+      defaultFlexTokens.color[token],
+    );
+    expect(icon.props.accessible).toBe(false);
+    expect(StyleSheet.flatten(icon.props.style)).toMatchObject({ height: 16, width: 16 });
+  });
+
+  it.each(['determinate', 'static'] as const)(
+    'PGB-001/PGB-004/PGB-006 clamps %s values and recomputes width after track resize',
+    async (type) => {
+      for (const [progress, resolved] of [
+        [-20, 0],
+        [140, 100],
+        [NaN, 0],
+        [25.5, 25.5],
+      ]) {
+        const component = await renderProgressBar({ progress, type });
+        expect(getIndicatorStyle(component).width).toBe(0);
+        expect(getRoot(component).props.accessibilityValue).toMatchObject({ min: 0, max: 100, now: resolved });
+        expect(component.getByText(`${resolved}%`)).toBeOnTheScreen();
+
+        for (const width of [100, 240]) {
+          await fireEvent(getTrack(component), 'layout', {
+            nativeEvent: { layout: { height: 4, width, x: 0, y: 0 } },
+          });
+          expect(getIndicatorStyle(component).width).toBeCloseTo((width * resolved) / 100);
+        }
+        await component.unmount();
+      }
+    },
+  );
+
+  it.each(['determinate', 'indeterminate', 'static'] as const)(
+    'PGB-003 gives status and explicit text precedence over %s type text',
+    async (type) => {
+      for (const [status, text] of [
+        ['error', 'Progress failed'],
+        ['success', 'Complete'],
+      ] as const) {
+        const component = await renderProgressBar({ progress: 42, status, type });
+        expect(component.getByText(text)).toBeOnTheScreen();
+
+        await component.rerender(<ProgressBar progress={42} status={status} type={type} valueText="Caller text" />);
+        expect(component.getByText('Caller text')).toBeOnTheScreen();
+        expect(component.queryByText(text)).toBeNull();
+        if (type !== 'indeterminate') {
+          expect(getRoot(component).props.accessibilityValue.text).toBe('Caller text');
+        }
+        await component.unmount();
+      }
+    },
+  );
+
+  it.each([{ accessibilityLabelledBy: 'external-label' }, { accessibilityLabelledBy: ['external-label', 'description'] }])(
+    'PGB-006 appends a stable visible-label identifier to caller references %j',
+    async ({ accessibilityLabelledBy }) => {
+      const original = Array.isArray(accessibilityLabelledBy) ? [...accessibilityLabelledBy] : accessibilityLabelledBy;
+      const component = await renderProgressBar({ accessibilityLabelledBy, label: 'Upload', progress: 10 });
+      const labelId = component.getByText('Upload').props.nativeID;
+      const expected = [...(Array.isArray(original) ? original : [original]), labelId];
+
+      expect(typeof labelId).toBe('string');
+      expect(labelId.length).toBeGreaterThan(0);
+      expect(getRoot(component).props.accessibilityLabelledBy).toEqual(expected);
+      expect(accessibilityLabelledBy).toEqual(original);
+      await component.rerender(<ProgressBar accessibilityLabelledBy={accessibilityLabelledBy} label="Upload" progress={80} />);
+      expect(component.getByText('Upload').props.nativeID).toBe(labelId);
+      expect(getRoot(component).props.accessibilityLabelledBy).toEqual(expected);
+    },
+  );
+
   it('renders the default label, value text, and determinate accessibility state', async () => {
     const component = await renderProgressBar({});
     const root = getRoot(component);

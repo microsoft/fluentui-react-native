@@ -27,6 +27,67 @@ async function flushAnimationFrame() {
 }
 
 describe('Switch', () => {
+  it.each([
+    ['switch', ['switch-spec-control']],
+    ['horizontal', ['switch-spec-before', 'switch-spec-control', 'switch-spec-after']],
+    ['vertical', ['switch-spec-above', 'switch-spec-control']],
+  ] as const)('SWCH-003 renders only the %s label slots in container order', async (layout, expected) => {
+    const component = await renderSwitch({
+      layout,
+      label: 'Notifications',
+      testID: 'switch-spec-control',
+      beforeLabel: { children: 'Notifications', testID: 'switch-spec-before' },
+      afterLabel: { children: 'Notifications', testID: 'switch-spec-after' },
+      aboveLabel: { children: 'Notifications', testID: 'switch-spec-above' },
+    });
+    const children = component.getByTestId('switch-layout-container').children as { props: { testID?: string } }[];
+    expect(children.map((child) => child.props.testID)).toEqual(expected);
+    for (const id of expected.filter((id) => id !== 'switch-spec-control')) {
+      expect(component.getByTestId(id).props.children).toBe('Notifications');
+      expect(component.getByTestId(id).props.accessible).toBe(false);
+    }
+  });
+
+  it.each(['horizontal', 'vertical'] as const)(
+    'SWCH-003 SWCH-006 suppresses null labels in %s without losing the root name',
+    async (layout) => {
+      const component = await renderSwitch({
+        layout,
+        label: 'Notifications',
+        beforeLabel: null,
+        afterLabel: null,
+        aboveLabel: null,
+      });
+      expect(component.getByTestId('switch-layout-container').children).toHaveLength(1);
+      expect(component.getByRole('switch', { name: 'Notifications' })).toBeOnTheScreen();
+      expect(component.queryByText('Notifications')).toBeNull();
+    },
+  );
+
+  it.each([
+    [false, false, 0],
+    [false, true, 1],
+    [true, false, 1],
+    [true, true, 2],
+  ] as const)('SWCH-003 respects horizontal labelBefore=%s labelAfter=%s', async (labelBefore, labelAfter, count) => {
+    const component = await renderSwitch({ label: 'Notifications', labelBefore, labelAfter });
+    expect(component.queryAllByText('Notifications')).toHaveLength(count);
+    expect(component.getByRole('switch', { name: 'Notifications' })).toBeOnTheScreen();
+  });
+
+  it('SWCH-001 SWCH-002 ignores defaultChecked while controlled and reports change before forwarding each press', async () => {
+    const calls: string[] = [];
+    const onChange = jest.fn((next: boolean) => calls.push(`change:${next}`));
+    const onPress = jest.fn(() => calls.push('press'));
+    const component = await renderSwitch({ checked: true, defaultChecked: false, onChange, onPress });
+    await fireEvent.press(component.getByRole('switch'));
+    await fireEvent.press(component.getByRole('switch'));
+    expect(calls).toEqual(['change:false', 'press', 'change:false', 'press']);
+    expect(onPress).toHaveBeenCalledTimes(2);
+    expect(onPress).toHaveBeenCalledWith(expect.objectContaining({ nativeEvent: expect.any(Object) }));
+    expect(component.getByRole('switch').props.accessibilityState.checked).toBe(true);
+  });
+
   it('renders a labeled switch with default unchecked semantics', async () => {
     const component = await renderSwitch({ label: 'Wi-Fi', labelAfter: false });
     const root = component.getByRole('switch', { name: 'Wi-Fi' });

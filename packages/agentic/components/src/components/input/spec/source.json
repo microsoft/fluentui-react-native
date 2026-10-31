@@ -3,7 +3,7 @@
   "component": "input",
   "lifecycle": "implemented",
   "conformance": "reviewed",
-  "reviewedAt": "2026-09-21",
+  "reviewedAt": "2026-10-16",
   "sources": [
     {
       "id": "flex-component",
@@ -79,7 +79,7 @@
   "divergences": [
     {
       "id": "input-focus-indicator",
-      "status": "deferred"
+      "status": "resolved"
     },
     {
       "id": "input-hover-target-scope",
@@ -118,6 +118,10 @@
     {
       "id": "INP-006",
       "evidence": ["input.styles.ts", "useInputStyles.ts", "input.test.tsx"]
+    },
+    {
+      "id": "INP-007",
+      "evidence": ["useInput.ts", "input.styles.ts", "useInputStyles.ts", "renderInput.tsx", "input.test.tsx", "input.stories.tsx"]
     }
   ]
 }

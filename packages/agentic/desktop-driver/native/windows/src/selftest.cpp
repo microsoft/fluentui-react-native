@@ -170,12 +170,13 @@ void TestInputLedger() {
   CancellationToken token;
 
   input.KeyDown(L"\uE008", token);
-  input.KeyDown(L"a", token);
+  input.KeyDown(L"\u4e2d", token);
   input.PointerDown(0, token);
   Check(input.DepressedKeyCount() == 2 && input.DepressedButtonCount() == 1, "ledger records depressed input");
   Check(recordedInputs.size() == 3, "ledger injected three down events");
   Check(recordedInputs[0].ki.wVk == VK_SHIFT, "special keys map to virtual keys");
-  Check((recordedInputs[1].ki.dwFlags & KEYEVENTF_UNICODE) != 0, "printable keys inject unicode");
+  Check((recordedInputs[1].ki.dwFlags & KEYEVENTF_UNICODE) != 0 && recordedInputs[1].ki.wScan == 0x4e2d,
+        "characters without an unmodified layout key inject unicode");
   constexpr DWORD kPositionedPress = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN;
   Check(recordedInputs[2].type == INPUT_MOUSE && (recordedInputs[2].mi.dwFlags & kPositionedPress) == kPositionedPress,
         "pointer presses carry their coordinate");
@@ -195,6 +196,13 @@ void TestInputLedger() {
   input.KeyDown(L"b", token);
   input.KeyUp(L"b", token);
   Check(!input.HasDepressedInput(), "explicit key release clears the ledger");
+  const WORD layoutKey = UnmodifiedLayoutKey(L'b');
+  Check(recordedInputs.size() == 2 &&
+            (layoutKey != 0 ? recordedInputs[0].ki.wVk == layoutKey &&
+                                  (recordedInputs[0].ki.dwFlags & KEYEVENTF_UNICODE) == 0
+                            : (recordedInputs[0].ki.dwFlags & KEYEVENTF_UNICODE) != 0) &&
+            recordedInputs[1].ki.wVk == recordedInputs[0].ki.wVk && recordedInputs[1].ki.wScan == recordedInputs[0].ki.wScan,
+        "characters with an unmodified layout key inject and release that key");
 
   input.PointerDown(0, token);
   recordedInputs.clear();
@@ -263,7 +271,25 @@ void TestSnapshotShape() {
         "mixed checked state serializes as a string");
   Check(serialized.find(R"("selected":{"supported":false,"reason":"no selection pattern"})") != std::string::npos,
         "unsupported state keeps its reason");
+  Check(serialized.find(R"("required":{"supported":false,"reason":)") != std::string::npos,
+        "unknown required-form state is unsupported, not false");
+  for (const bool required : {false, true}) {
+    snapshot.required = SupportedBool{true, required, {}};
+    const std::string state = required ? R"("required":{"supported":true,"value":true})"
+                                       : R"("required":{"supported":true,"value":false})";
+    Check(SerializeSnapshot(snapshot).Serialize().find(state) != std::string::npos,
+          required ? "required-form true is retained" : "required-form false is retained");
+  }
   Check(serialized.find(R"("text")") == std::string::npos, "absent optional text is omitted");
+  Check(serialized.find(R"("helpText":{"supported":false,"reason":)") != std::string::npos,
+        "unknown help text is unsupported, not empty");
+  snapshot.helpText = SupportedString{true, "", {}};
+  Check(SerializeSnapshot(snapshot).Serialize().find(R"("helpText":{"supported":true,"value":""})") != std::string::npos,
+        "an explicitly empty help text is retained");
+  snapshot.helpText.value = "Accessible hint";
+  Check(SerializeSnapshot(snapshot).Serialize().find(R"("helpText":{"supported":true,"value":"Accessible hint"})") !=
+            std::string::npos,
+        "help text is retained");
   Check(serialized.find(R"("rect":{"height":40,"width":120,"x":10,"y":20})") != std::string::npos,
         "rect serializes logical geometry");
   Check(serialized.find(R"("parentId":"element-0")") != std::string::npos, "parent identifier is exposed");
@@ -321,6 +347,27 @@ void TestLeaseIdentity() {
   Check(TryParseIso8601("2026-08-31T23:59:59.0000000+02:00", offset), "offset timestamps parse");
   Check(FileTimeTicks(offset) == FileTimeTicks(parsed) - 1234567, "offset timestamps normalize to UTC");
   Check(!TryParseIso8601("not-a-timestamp", parsed), "invalid timestamps are rejected");
+
+  ApplicationManager applications;
+  CancellationToken token;
+  for (const double timeout : {0.0, -1.0, 0.5, 2147483648.0}) {
+    json::Value request = json::Value::Parse(R"({"application":{"executablePath":"unused.exe","windowTitle":"self-test"}})");
+    request.Set("launchTimeoutMs", json::Value::Number(timeout));
+    bool rejected = false;
+    try {
+      applications.Launch(request, token);
+    } catch (const HelperError& error) {
+      rejected = std::string(error.code()) == kErrorInvalidParams;
+    }
+    Check(rejected, "invalid launch deadlines are rejected before application side effects");
+  }
+  bool titleOnlyRejected = false;
+  try {
+    applications.Attach(json::Value::Parse(R"({"application":{"windowTitle":"self-test"}})"), token);
+  } catch (const HelperError& error) {
+    titleOnlyRejected = std::string(error.code()) == kErrorInvalidParams;
+  }
+  Check(titleOnlyRejected, "unleased title-only attach is rejected");
 }
 
 void TestHello() {
@@ -373,11 +420,11 @@ void TestReleaseLedger() {
   recordedInputs.clear();
   InputController input;
   input.UseTestSender(&RecordInput);
-  const ReleaseCounts released = input.ReleaseExact(parse(R"({"keys":["\uE008","a"],"buttons":[0,1,2]})"));
+  const ReleaseCounts released = input.ReleaseExact(parse(R"({"keys":["\uE008","\u4e2d"],"buttons":[0,1,2]})"));
   Check(released.keys == 2 && released.buttons == 3, "ledger release reports its counts");
   Check(recordedInputs.size() == 5, "ledger release emits one event per entry");
   Check(recordedInputs[0].type == INPUT_KEYBOARD && (recordedInputs[0].ki.dwFlags & KEYEVENTF_UNICODE) != 0 &&
-            recordedInputs[0].ki.wScan == L'a' && (recordedInputs[0].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
+            recordedInputs[0].ki.wScan == 0x4e2d && (recordedInputs[0].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
         "ledger releases keys in reverse order");
   Check(recordedInputs[1].ki.wVk == VK_SHIFT && (recordedInputs[1].ki.dwFlags & KEYEVENTF_KEYUP) != 0,
         "ledger releases special keys with their virtual key");

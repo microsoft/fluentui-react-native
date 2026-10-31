@@ -177,18 +177,18 @@ describe('runDesktopStoryTests', () => {
     expect(second).toHaveLength(2);
   });
 
-  test('does not turn an unsupported runtime property into a passing skip', async () => {
+  test.each(['checked', 'required'] as const)('does not turn unsupported %s state into a passing skip', async (state) => {
     const manifest = makeManifest({
       version: 1,
       tests: [
         {
-          id: 'unsupported-checked',
-          steps: [{ expect: { state: 'checked', target: { testId: 'button-primary' }, value: true } }],
+          id: `unsupported-${state}`,
+          steps: [{ expect: { state, target: { testId: 'button-primary' }, value: true } }],
         },
       ],
     });
     const harness = await createDesktopDriverStoryHarness(manifest);
-    harness.host.setElementStateUnsupported('button', 'checked', 'not exposed by this platform');
+    harness.host.setElementStateUnsupported('button', state, 'not exposed by this platform');
     try {
       const client = createDesktopDriverClient({ url: harness.server.url });
       const session = await client.newSession({
@@ -315,8 +315,8 @@ describe('runDesktopStoryTests', () => {
       });
 
       expect(result).toMatchObject({
-        status: 'passed',
         tests: [{ skipReason: 'Unsupported capabilities: focus', status: 'skipped', steps: [] }],
+        status: 'incomplete',
       });
       await session.delete();
     } finally {

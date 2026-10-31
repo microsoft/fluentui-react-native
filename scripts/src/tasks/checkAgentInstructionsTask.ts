@@ -7,13 +7,13 @@ export class CheckAgentInstructionsCommand extends Command {
   static override paths = [['check-agent-instructions']];
 
   static override usage = Command.Usage({
-    description: 'Check the integrity of agent instructions, skills, shared references, and evaluation cases',
+    description: 'Check the integrity of agent instructions, skills, package references, and evaluation cases',
     details:
-      'Validates reference frontmatter, links and anchors, code-span paths, skill metadata, rule IDs, the reference index, and evaluation fixtures. See references/agents/README.md.',
+      'Validates reference frontmatter, links and anchors, code-span paths, skill metadata, package guidance, rule IDs, indexes, and evaluation fixtures. See references/agents/README.md.',
     examples: [['Check agent instructions', '$0 check-agent-instructions']],
   });
 
-  verbose = Option.Boolean('--verbose', false, { description: 'Report always-on instruction and skill sizes' });
+  verbose = Option.Boolean('--verbose', false, { description: 'Report always-on, skill, and guided package AGENTS.md sizes' });
 
   async execute() {
     const root = findGitRoot(process.cwd());

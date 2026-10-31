@@ -84,6 +84,20 @@ group, then the underline when the underline variant is active.
   keep read-only fields editable-in-name-only rather than disabled.
 - **INP-006:** Resolve size metrics, stroke colors, icon size and color, and
   placeholder color from theme tokens, and apply the caller `style` last.
+- **INP-007:** Use the scene's focus-visible policy for variant-specific focus
+  treatment without a competing native editor ring: an outline two-part
+  `FocusVisual`, or an additive underline indicator. Error and read-only
+  boundaries remain authoritative beneath the indicator; disabled wins over
+  both. Focus changes never change layout or the editor's native target.
+
+The INP-007 pre-code amendment was reviewed on October 16, 2026 after rereading
+all five unchanged pinned Input payloads and reconciling D11. Outline uses
+`strokeNeutralSubtle` beneath the ring only for the base object. Underline
+adds one `strokeWidth.thin` focus-color inset above the existing thin edge,
+giving base focus a thicker edge while preserving the danger/read-only edge.
+This resolves the interaction/token wording through an additive native View,
+not a CSS shadow or a new native outline. High-contrast, scaling, and theme
+visual qualification has not been recorded.
 
 ## Platform behavior
 
@@ -111,29 +125,34 @@ surrounding container, so pointer feedback follows the text area. Disabling the
 control clears focus, hover, and press so a disabled field never keeps stale
 interaction styling.
 
-Input renders no dedicated focus ring on either platform. Focus is shown by
-recoloring the boundary to the heavy neutral stroke at the same thickness as
-the rest state. `focusable` defaults to `true` unless disabled.
+Outline paints the shared two-part custom ring over the whole field when the
+actual editor is focused and the scene modality is keyboard. The base outline
+boundary softens beneath it. Underline paints a thin focus-color inset just
+above its existing bottom edge instead of a full ring; base focus also
+recolors that edge, while error/read-only keep their boundary. Both suppress
+the native editor ring. The indicator is decorative, does not intercept
+input, and never adds a focus stop. `focusable` defaults to `true` unless disabled.
 
 There is no timed animation, so visual state changes are immediate and
 reduced-motion settings need no separate path.
 
 ## Divergences from Flex
 
-| ID                              | Disposition | React Native contract                                                                                                                                                                                      | Follow-up                                                                                                                                         |
-| ------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `input-focus-indicator`         | Deferred    | Focus recolors the existing boundary to the heavy neutral stroke at the rest thickness. There is no dual-ring focus visual for the outline variant and no thickened bottom edge for the underline variant. | Adopt the shared focus visual for the outline variant and a thicker focused edge for the underline variant, then update the conformance evidence. |
-| `input-hover-target-scope`      | Deferred    | Hover and press are tracked from the text input, so pointer feedback does not cover the container padding or the icon areas. Flex treats the whole field as the hover surface.                             | Move interaction tracking to the contents row, which requires reworking how the state is derived.                                                 |
-| `input-underline-double-stroke` | Resolved    | The dedicated absolutely positioned underline view is the sole owner of the underline variant's bottom edge, so exactly one thin stroke is drawn.                                                          | Implemented in `input.styles.ts` and covered by variant style tests.                                                                              |
-| `input-icon-count`              | Accepted    | The trailing icon surface is exactly two ordered slots, with the second gated on the first, rather than an open-ended icon area.                                                                           | None. The fixed arity keeps the trailing group measurable at layout time.                                                                         |
+| ID                              | Disposition | React Native contract                                                                                                                                                                              | Follow-up                                                                                         |
+| ------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `input-focus-indicator`         | Resolved    | Outline uses the shared custom two-part ring; underline uses an additive focus-color inset. The native editor ring is suppressed, and error/read-only retain their boundary beneath the indicator. | Qualify clipping, contrast, and ring exclusivity on every desktop endpoint.                       |
+| `input-hover-target-scope`      | Deferred    | Hover and press are tracked from the text input, so pointer feedback does not cover the container padding or the icon areas. Flex treats the whole field as the hover surface.                     | Move interaction tracking to the contents row, which requires reworking how the state is derived. |
+| `input-underline-double-stroke` | Resolved    | The dedicated absolutely positioned underline view is the sole owner of the underline variant's bottom edge, so exactly one thin stroke is drawn.                                                  | Implemented in `input.styles.ts` and covered by variant style tests.                              |
+| `input-icon-count`              | Accepted    | The trailing icon surface is exactly two ordered slots, with the second gated on the first, rather than an open-ended icon area.                                                                   | None. The fixed arity keeps the trailing group measurable at layout time.                         |
 
 ## Conformance
 
-| Requirement | Evidence                                                                  |
-| ----------- | ------------------------------------------------------------------------- |
-| INP-001     | `input.types.ts`, `useInput.ts`, `input.types.test.tsx`, `input.test.tsx` |
-| INP-002     | `useInput.ts`, `input.test.tsx`                                           |
-| INP-003     | `useInput.ts`, `input.styles.ts`, `input.test.tsx`                        |
-| INP-004     | `renderInput.tsx`, `useInput.ts`, `input.test.tsx`, `input.stories.tsx`   |
-| INP-005     | `useInput.ts`, `useInputStyles.ts`, `input.test.tsx`                      |
-| INP-006     | `input.styles.ts`, `useInputStyles.ts`, `input.test.tsx`                  |
+| Requirement | Evidence                                                                                                        |
+| ----------- | --------------------------------------------------------------------------------------------------------------- |
+| INP-001     | `input.types.ts`, `useInput.ts`, `input.types.test.tsx`, `input.test.tsx`                                       |
+| INP-002     | `useInput.ts`, `input.test.tsx`                                                                                 |
+| INP-003     | `useInput.ts`, `input.styles.ts`, `input.test.tsx`                                                              |
+| INP-004     | `renderInput.tsx`, `useInput.ts`, `input.test.tsx`, `input.stories.tsx`                                         |
+| INP-005     | `useInput.ts`, `useInputStyles.ts`, `input.test.tsx`                                                            |
+| INP-006     | `input.styles.ts`, `useInputStyles.ts`, `input.test.tsx`                                                        |
+| INP-007     | `useInput.ts`, `input.styles.ts`, `useInputStyles.ts`, `renderInput.tsx`, `input.test.tsx`, `input.stories.tsx` |

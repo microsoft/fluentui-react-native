@@ -12,6 +12,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 
 export type InputVariant = 'outline' | 'underline';
 export type InputSize = 'small' | 'medium' | 'large';
@@ -25,12 +26,14 @@ export type InputSlots = {
   iconEnd2: OptionalSlot<typeof Icon>;
 };
 
-type InputStateSlots = InputSlots & {
-  contents: OptionalSlot<typeof Pressable>;
-  iconTextStack: OptionalSlot<typeof View>;
-  iconEnd: OptionalSlot<typeof View>;
-  underline: OptionalSlot<typeof View>;
-};
+type InputStateSlots = InputSlots &
+  FocusVisualsSlots & {
+    contents: OptionalSlot<typeof Pressable>;
+    iconTextStack: OptionalSlot<typeof View>;
+    iconEnd: OptionalSlot<typeof View>;
+    underline: OptionalSlot<typeof View>;
+    underlineFocus: OptionalSlot<typeof View>;
+  };
 
 export type InputStateProps = {
   variant?: InputVariant;
@@ -60,6 +63,7 @@ export type InputState = ComponentState<InputStateSlots> &
   ThemeState & {
     value: string;
     focused: boolean;
+    focusVisible: boolean;
     hovered: boolean;
     pressed: boolean;
     visualState: InputVisualState;
@@ -69,6 +73,7 @@ export type InputState = ComponentState<InputStateSlots> &
     iconTextStackStyle: ViewStyle;
     iconEndStyle: ViewStyle;
     underlineStyle: ViewStyle;
+    underlineFocusStyle: ViewStyle;
     textInputStyle: TextStyle;
     iconSize: number;
     iconColor: ColorValue;

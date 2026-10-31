@@ -190,6 +190,32 @@ bool TryMapWebDriverKey(std::wstring_view value, WORD& virtualKey, bool& extende
   return false;
 }
 
+WORD UnmodifiedLayoutKey(wchar_t character) {
+  if (character < 0x20 || character == 0x7f) {
+    return 0;
+  }
+  // Physical keys are translated with the layout of the thread that receives them.
+  const HWND foreground = GetForegroundWindow();
+  HKL layout = foreground != nullptr ? GetKeyboardLayout(GetWindowThreadProcessId(foreground, nullptr)) : nullptr;
+  if (layout == nullptr) {
+    layout = GetKeyboardLayout(0);
+  }
+  const SHORT mapping = VkKeyScanExW(character, layout);
+  if (mapping == -1 || HIBYTE(mapping) != 0) {
+    return 0;
+  }
+  const WORD virtualKey = LOBYTE(mapping);
+  // A dead key composes with the next key instead of typing its character.
+  if ((MapVirtualKeyExW(virtualKey, MAPVK_VK_TO_CHAR, layout) & 0x80000000u) != 0) {
+    return 0;
+  }
+  // Caps Lock changes the case an unmodified letter key types.
+  if (IsCharAlphaW(character) != FALSE && (GetKeyState(VK_CAPITAL) & 1) != 0) {
+    return 0;
+  }
+  return virtualKey;
+}
+
 bool InputController::PhysicalInputAvailable() {
   if (physicalInput_ == 1) {
     return true;
@@ -373,6 +399,14 @@ std::vector<KeyStroke> InputController::StrokesForValue(std::wstring_view value)
   if (TryMapWebDriverKey(value, virtualKey, extended)) {
     strokes.push_back(KeyStroke{false, virtualKey, extended});
     return strokes;
+  }
+  // Like a user's press, a character that one unmodified layout key types arrives as that key, so applications
+  // observe its key and code. Other characters arrive as Unicode packets.
+  if (value.size() == 1) {
+    if (const WORD layoutKey = UnmodifiedLayoutKey(value[0]); layoutKey != 0) {
+      strokes.push_back(KeyStroke{false, layoutKey, false});
+      return strokes;
+    }
   }
   for (const wchar_t unit : value) {
     strokes.push_back(KeyStroke{true, static_cast<WORD>(unit), false});

@@ -24,6 +24,39 @@ function getRootStyle(component: Awaited<ReturnType<typeof renderBadge>>): ViewS
 }
 
 describe('Badge', () => {
+  it('BDG-002/BDG-004 hides an unnamed default badge and renders no unsupplied trailing icon', async () => {
+    const component = await renderBadge({ testID: 'badge', trailingIconVisible: true });
+
+    expect(component.queryByRole('image')).toBeNull();
+    const root = component.getByTestId('badge', { includeHiddenElements: true });
+    expect(root.props).toMatchObject({
+      accessible: false,
+      accessibilityElementsHidden: true,
+      importantForAccessibility: 'no-hide-descendants',
+      focusable: false,
+    });
+    expect(component.getByText('Badge', { includeHiddenElements: true })).toBeOnTheScreen();
+    expect(root.children).toHaveLength(2);
+  });
+
+  it.each([
+    [false, false, ['content']],
+    [false, true, ['content', 'trailing-icon']],
+    [true, false, ['leading-icon', 'content']],
+    [true, true, ['leading-icon', 'content', 'trailing-icon']],
+  ] as const)('BDG-002 preserves slot order with leading=%s and trailing=%s', async (leadingIconVisible, trailingIconVisible, order) => {
+    const component = await renderBadge({
+      accessibilityLabel: 'Status',
+      content: { children: 'Status', testID: 'content' },
+      leadingIcon: { ...badgeIcon, testID: 'leading-icon' },
+      trailingIcon: { ...trailingIcon, testID: 'trailing-icon' },
+      leadingIconVisible,
+      trailingIconVisible,
+    });
+
+    expect(getRoot(component).children.map((child) => (typeof child === 'string' ? child : child.props.testID))).toEqual(order);
+  });
+
   it('renders default icon-and-text styling with forwarded icons and label', async () => {
     const component = await renderBadge({
       accessibilityLabel: 'Badge',
@@ -107,10 +140,16 @@ describe('Badge', () => {
 
   it.each([
     ['tint', 'brand', 'backgroundBrandSoft', 'foregroundBrandPrimary', 'strokeNeutralTransparent', 0],
+    ['tint', 'danger', 'backgroundDangerSoft', 'foregroundDangerPrimary', 'strokeNeutralTransparent', 0],
+    ['tint', 'success', 'backgroundSuccessSoft', 'foregroundSuccessPrimary', 'strokeNeutralTransparent', 0],
+    ['tint', 'warning', 'backgroundWarningSoft', 'foregroundWarningPrimary', 'strokeNeutralTransparent', 0],
     ['tint', 'informative', 'backgroundNeutralSoft', 'foregroundNeutralPrimary', 'strokeNeutralTransparent', 0],
+    ['outline', 'brand', 'backgroundNeutralTransparent', 'foregroundBrandPrimary', 'strokeBrandLoud', 1],
     ['outline', 'danger', 'backgroundNeutralTransparent', 'foregroundDangerPrimary', 'strokeDangerLoud', 1],
+    ['outline', 'success', 'backgroundNeutralTransparent', 'foregroundSuccessPrimary', 'strokeSuccessLoud', 1],
     ['outline', 'warning', 'backgroundNeutralTransparent', 'foregroundWarningPrimary', 'strokeWarningLoud', 1],
-  ] as const)('resolves %s %s colors', async (appearance, color, backgroundToken, foregroundToken, borderToken, borderWidth) => {
+    ['outline', 'informative', 'backgroundNeutralTransparent', 'foregroundNeutralPrimary', 'strokeNeutralLoud', 1],
+  ] as const)('BDG-003 resolves %s %s colors', async (appearance, color, backgroundToken, foregroundToken, borderToken, borderWidth) => {
     const tokens = defaultFlexTokens;
     const component = await renderBadge({
       accessibilityLabel: `${appearance} ${color} badge`,

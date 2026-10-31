@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
+## 0.29.9
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+  - @fluentui-react-native/design@0.5.2
+
 ## 0.29.8
 
 ### Patch Changes

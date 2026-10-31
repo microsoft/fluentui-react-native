@@ -1,3 +1,10 @@
+---
+id: desktop-driver.getting-started
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Getting started
 
 This guide covers setup for package contributors and consumers who embed the
@@ -8,7 +15,7 @@ their own build, installation, identity, and lifecycle policy.
 
 All environments need:
 
-- Node.js 22.12 or later;
+- Node.js 22.19 or later;
 - a package manager capable of installing the package and its WebdriverIO
   dependency;
 - a real, logged-in desktop session for native input and window automation.

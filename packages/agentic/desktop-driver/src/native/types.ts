@@ -62,6 +62,7 @@ export type NativeDesktopApplicationDescriptor = {
   leaseNonce?: string;
   leasePath?: string;
   windowTitle?: string;
+  workingDirectory?: string;
 };
 
 export type NativeHostHello = {

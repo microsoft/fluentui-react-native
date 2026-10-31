@@ -1,25 +1,17 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { I18nManager, View } from 'react-native';
+import { View } from 'react-native';
 import { directComponent, mergeProps, phasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 
 import { CalloutHost } from '../../internal/CalloutHost';
 import { assertModernHost } from '../../internal/modernHost';
 import { Commands } from '../../specs/components/CalloutNativeComponent';
 import type NativeCallout from '../../specs/components/CalloutNativeComponent';
-import type { DirectionalHint } from '../../legacy/callout/Callout.types';
 import { allocateGeneration, createOperationChannel } from '../nativeOperation';
 import { resolveTarget, useTargetTag } from '../nativeTarget';
+import { directionalHint, gapSpace } from './calloutPlacement';
 import type { CalloutAnchor, CalloutHandle, CalloutPresentation, CalloutProps, CalloutDismissReason } from './Callout.types';
-import { presentationBrand } from './Callout.types';
-
-class Presentation implements CalloutPresentation {
-  readonly [presentationBrand] = true as const;
-  readonly generation: number;
-  constructor(generation: number) {
-    this.generation = generation;
-  }
-}
+import { Presentation } from './presentation';
 
 interface Lifetime {
   open: boolean;
@@ -27,24 +19,6 @@ interface Lifetime {
   presentation: Presentation;
   closed: boolean;
   anchored: boolean;
-}
-
-function hint(placement: CalloutProps['placement']): DirectionalHint {
-  const side = placement?.side ?? 'bottom';
-  const align = placement?.align ?? 'start';
-  const rtl = I18nManager.isRTL;
-  const physical = side === 'start' ? (rtl ? 'right' : 'left') : side === 'end' ? (rtl ? 'left' : 'right') : side;
-  if (physical === 'left' || physical === 'right') {
-    return `${physical}${align === 'center' ? 'Center' : align === 'end' ? 'BottomEdge' : 'TopEdge'}`;
-  }
-  const edge = align === 'center' ? 'Center' : (align === 'start') !== rtl ? 'LeftEdge' : 'RightEdge';
-  return `${physical}${edge}`;
-}
-
-function gapSpace(placement: CalloutProps['placement']): number {
-  const gap = placement?.gap ?? 0;
-  if (!Number.isInteger(gap) || gap < 0) throw new RangeError('Callout gap must be a nonnegative integer in logical units.');
-  return gap;
 }
 
 function rectangle(anchor: CalloutAnchor) {
@@ -56,9 +30,19 @@ function rectangle(anchor: CalloutAnchor) {
   return { screenX: rect.x, screenY: rect.y, width: rect.width, height: rect.height };
 }
 
-const reasons: readonly string[] = ['native-light-dismiss', 'programmatic', 'anchor-lost', 'host-detached'];
+const reasons: readonly CalloutDismissReason[] = [
+  'native-light-dismiss',
+  'escape',
+  'outside-pointer',
+  'application-deactivated',
+  'tab-forward',
+  'tab-backward',
+  'programmatic',
+  'anchor-lost',
+  'host-detached',
+];
 function isReason(value: string): value is CalloutDismissReason {
-  return reasons.includes(value);
+  return reasons.some((reason) => reason === value);
 }
 
 /**
@@ -99,6 +83,7 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
   const presented = open && !closed && tag !== undefined;
   const committedGeneration = React.useRef(generation);
   const ready = React.useRef<CalloutPresentation | null>(null);
+  const dismissed = React.useRef<CalloutPresentation | null>(null);
   const Content = useSlot(View, content);
 
   React.useLayoutEffect(() => {
@@ -131,9 +116,15 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
     return {
       getPresentation: () => ready.current,
       requestFocus(expected, target, options) {
-        const resolved = resolveTarget(target);
-        if (resolved.tag == null) return Promise.resolve({ status: 'not-mounted' });
-        return request(expected, (view, scope, id) => Commands.requestFocus(view, scope, id, resolved.tag), options, resolved.isCurrent);
+        const resolved = typeof target === 'string' ? undefined : resolveTarget(target);
+        if (resolved && resolved.tag == null) return Promise.resolve({ status: 'not-mounted' });
+        const strategy = typeof target === 'string' ? target : 'target';
+        return request(
+          expected,
+          (view, scope, id) => Commands.requestFocus(view, scope, id, resolved?.tag ?? 0, strategy),
+          options,
+          resolved?.isCurrent,
+        );
       },
       close: (expected, options) => request(expected, (view, scope, id) => Commands.close(view, scope, id), options),
       reposition: (expected, options) => request(expected, (view, scope, id) => Commands.reposition(view, scope, id), options),
@@ -142,7 +133,7 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
 
   return directComponent<CalloutProps>((renderProps) => {
     if (!presented) return null;
-    const { placement, onReady, onDismissed, children } = mergeProps(props, renderProps);
+    const { placement, tabNavigation, onReady, onDismissed, children } = mergeProps(props, renderProps);
     const isCurrent = (eventGeneration: number) => eventGeneration === generation && eventGeneration === committedGeneration.current;
 
     return (
@@ -152,17 +143,20 @@ export const Callout = phasedComponent<CalloutProps>((props) => {
         target={tag}
         commandGeneration={generation}
         anchorMode={anchor.kind}
+        tabNavigation={tabNavigation}
         anchorRect={anchorRect}
-        directionalHint={hint(placement)}
+        directionalHint={directionalHint(placement)}
         gapSpace={gapSpace(placement)}
         onReady={(event) => {
-          if (!isCurrent(event.nativeEvent.generation) || ready.current) return;
+          if (!isCurrent(event.nativeEvent.generation) || ready.current || dismissed.current === presentation) return;
           ready.current = presentation;
           onReady?.({ presentation });
         }}
         onClosed={(event) => {
           if (!isCurrent(event.nativeEvent.generation)) return;
+          if (dismissed.current === presentation) return;
           if (!isReason(event.nativeEvent.reason)) throw new Error('Callout received an invalid native dismissal reason.');
+          dismissed.current = presentation;
           ready.current = null;
           channel.cancel();
           setLifetime((current) => (current.presentation === presentation ? { ...current, closed: true } : current));

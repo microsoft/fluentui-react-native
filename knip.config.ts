@@ -14,7 +14,7 @@ const config = async (): Promise<KnipConfig> => {
   // now fill in the details for those
   const workspaceDetails = Object.fromEntries(
     workspaceDirs.map((dir: string) => {
-      const relativePath = path.posix.normalize(path.relative(process.cwd(), dir));
+      const relativePath = path.posix.normalize(path.relative(process.cwd(), dir).split(path.sep).join('/'));
       if (relativePath === '.') {
         // skip the root dir
         return [relativePath, {}];

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Tag } from './tag';
 import type { TagAppearance, TagLayout, TagShape, TagSize } from './tag.types';
@@ -73,9 +74,28 @@ const meta: Meta<typeof Tag> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Tag>;
+type Story = WdioStory<StoryObj<typeof Tag>>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  wdio: {
+    'TAG-004 TAG-008 exposes the whole enabled tag as a native button': async ({ browser, expect }) => {
+      const tag = await browser.$('~agentic-storybook-tag');
+      expect(await tag.getTagName()).toBe('button');
+      await expect(tag).toBeEnabled();
+    },
+  },
+};
+
+export const NativeDisabled: Story = {
+  args: { content: 'Unavailable filter', disabled: true },
+  wdio: {
+    'TAG-008 exposes disabled native button semantics': async ({ browser, expect }) => {
+      const tag = await browser.$('~agentic-storybook-tag');
+      expect(await tag.getTagName()).toBe('button');
+      await expect(tag).toBeDisabled();
+    },
+  },
+};
 
 export const Overview: Story = {
   render: () => (

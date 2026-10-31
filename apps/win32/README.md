@@ -1,5 +1,9 @@
 # Running the FluentUI Tester on Win32
 
+For the native desktop test harness, see
+`@fluentui-react-native/desktop-test` and
+`packages/agentic/desktop-test/references/platforms.md`.
+
 `FluentUI Tester` is the test app that we use to test our FluentUI components during development.
 
 ## Launch `FluentUI Tester` app on Win32
@@ -56,6 +60,20 @@ yarn run-win32
 ![Image of Visual Studio Code debug pane](./../../assets/fluent_tester_vscode_debug.png)
 
 6. At this time, VS Code will attach to the JS runtime and you can start debugging
+
+## End-to-end tests
+
+Run the Win32 end-to-end tests from this directory through `desktop-test`:
+
+```sh
+yarn e2eprep:win32
+yarn e2etest:win32
+```
+
+`e2eprep` builds the desktop driver helper and the Win32 bundle; `e2etest` runs the `legacy` suite from
+[`apps/E2E`](../E2E/README.md), which covers prerequisites, suites, and debugging failures.
+The full 40-file Win32 Paper suite is qualified locally with 201 passing tests,
+no skips, and no retries. It uses the bundled REX host and does not start Metro.
 
 ## Dependencies
 

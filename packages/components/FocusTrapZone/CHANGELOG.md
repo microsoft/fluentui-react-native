@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
+## 0.14.6
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- Updated dependencies [cfa4c66]
+  - @fluentui-react-native/adapters@0.15.2
+  - @fluentui-react-native/interactive-hooks@0.28.12
+  - @uifabricshared/foundation-composable@0.15.6
+  - @uifabricshared/foundation-settings@0.16.12
+
 ## 0.14.5
 
 ### Patch Changes

@@ -395,7 +395,7 @@ function localState(lock) {
     legacyMigration: lock.legacyStagedSpecs.map((entry) => ({
       ...entry,
       outcome: 'source-copy-removed',
-      record: 'SPEC-MIGRATION.md',
+      record: 'references/contracts.md#legacy-staged-specs',
     })),
   };
 }

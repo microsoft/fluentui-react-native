@@ -90,11 +90,9 @@ export const FocusManagement: Story = {
     'commits selection before focus, skips disabled tabs, and supports wrap, Home, and End': async (context) => {
       const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
+      const { browser, expect } = context;
       await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
-      if (platform !== 'macos') {
-        await expect(await browser.$('~focus-tab-disabled')).not.toBeEnabled();
-      }
+      await expect(await browser.$('~focus-tab-disabled')).not.toBeEnabled();
       for (const [key, id, value] of [
         ['\uE014', 'focus-tab-two', 'focus-panel-two'],
         ['\uE014', 'focus-tab-one', 'focus-panel-one'],
@@ -103,9 +101,7 @@ export const FocusManagement: Story = {
       ]) {
         await browser.keys(key);
         await expectNativeState(browser, id, 'focused', true);
-        if (platform !== 'macos') {
-          await expectNativeState(browser, id, 'selected', true);
-        }
+        await expectNativeState(browser, id, 'selected', true);
         await expect(await browser.$('~focus-tab-selection')).toHaveText(value);
         await expect(await browser.$('~focus-tab-selection-at-focus')).toHaveText(value);
         await expectNativeState(browser, 'focus-tab-disabled', 'focused', false);
@@ -127,20 +123,12 @@ export const FocusManagement: Story = {
         await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
         await browser.keys([modifier, '\uE014']);
         await expect(await browser.$('~focus-tab-owner-key')).toHaveText(`${name}+ArrowRight`);
-        if (platform !== 'macos') {
-          await expectNativeState(browser, 'focus-tab-one', 'selected', true);
-        }
+        await expectNativeState(browser, 'focus-tab-one', 'selected', true);
         await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
       }
     },
     'exposes native selected and disabled accessibility states': async (context) => {
-      const { browser, platform, skip, expect } = context;
-      if (platform === 'macos') {
-        skip(
-          'RNmacOS 0.81.9 Fabric does not project accessibilityState.selected/disabled to AX; navigation and selection callbacks run separately.',
-        );
-        return;
-      }
+      const { browser, expect } = context;
       const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
       await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
@@ -160,19 +148,15 @@ export const ManualFocusManagement: Story = {
     'keeps manual selection independent until Enter activates the focused tab': async (context) => {
       const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
       if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
+      const { browser, expect } = context;
       await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
       await browser.keys('\uE014');
       await expectNativeState(browser, 'focus-tab-two', 'focused', true);
-      if (platform !== 'macos') {
-        await expectNativeState(browser, 'focus-tab-one', 'selected', true);
-        await expectNativeState(browser, 'focus-tab-two', 'selected', false);
-      }
+      await expectNativeState(browser, 'focus-tab-one', 'selected', true);
+      await expectNativeState(browser, 'focus-tab-two', 'selected', false);
       await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
       await browser.keys('\uE007');
-      if (platform !== 'macos') {
-        await expectNativeState(browser, 'focus-tab-two', 'selected', true);
-      }
+      await expectNativeState(browser, 'focus-tab-two', 'selected', true);
       await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-two');
     },
   },

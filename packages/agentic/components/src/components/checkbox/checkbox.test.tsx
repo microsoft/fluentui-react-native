@@ -9,6 +9,7 @@ import type { RenderResult } from '@testing-library/react-native';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { Checkbox } from './checkbox';
+import type { CheckboxStatus } from './checkbox.types';
 
 function renderCheckbox(props: React.ComponentProps<typeof Checkbox>): Promise<RenderResult> {
   return render(<Checkbox {...props} />);
@@ -329,5 +330,215 @@ describe('Checkbox', () => {
       borderColor: tokens.strokeNeutralTransparent,
     });
     expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(tokens.foregroundNeutralDisabled);
+  });
+
+  describe('SPEC regression coverage', () => {
+    afterEach(() => jest.restoreAllMocks());
+
+    it('CBX-001 resolves omitted defaults rather than caller-supplied values', async () => {
+      const component = await renderCheckbox({});
+      expect(getRoot(component).props).toMatchObject({
+        accessible: true,
+        accessibilityLabel: 'Label',
+        accessibilityState: { checked: false, disabled: false },
+        focusable: true,
+      });
+      expect(getRoot(component)).toBeEnabled();
+      expect(component.getByText('Label')).toBeOnTheScreen();
+      expect(component.queryByTestId('checkbox-secondary', { includeHiddenElements: true })).toBeNull();
+      expect(component.queryByTestId('checkbox-check-icon')).toBeNull();
+      expect(component.queryByTestId('checkbox-dash-icon')).toBeNull();
+      expect(getIndicatorStyle(component)).toMatchObject({
+        borderRadius: defaultFlexTokens.borderRadius.base100,
+        height: 16,
+        width: 16,
+      });
+    });
+
+    it('CBX-001 forwards native root props and the original layout event', async () => {
+      const onLayout = jest.fn();
+      const hitSlop = { bottom: 4, left: 8, right: 8, top: 4 };
+      const component = await renderCheckbox({ focusable: false, hitSlop, nativeID: 'choice', onLayout, testID: 'consumer-checkbox' });
+      const root = getRoot(component);
+      expect(root).toBe(component.getByTestId('consumer-checkbox'));
+      expect(root.props).toMatchObject({ focusable: false, hitSlop, nativeID: 'choice' });
+      const event = { nativeEvent: { layout: { height: 24, width: 120, x: 0, y: 0 } } };
+      await fireEvent(root, 'layout', event);
+      expect(onLayout).toHaveBeenCalledTimes(1);
+      expect(onLayout).toHaveBeenCalledWith(event);
+    });
+
+    describe.each(['unchecked', 'checked', 'indeterminate'] as const)('CBX-002 starting from %s', (status) => {
+      it.each([false, true])('preserves status ownership and callback order with controlled=%s', async (controlled) => {
+        const calls: string[] = [];
+        const onStatusChange = jest.fn((next: CheckboxStatus) => calls.push(next));
+        const onPress = jest.fn(() => calls.push('press'));
+        const component = await renderCheckbox({
+          defaultStatus: controlled ? (status === 'checked' ? 'unchecked' : 'checked') : status,
+          onPress,
+          onStatusChange,
+          ...(controlled ? { status } : {}),
+        });
+        const initialChecked = status === 'indeterminate' ? 'mixed' : status === 'checked';
+        expect(getRoot(component).props.accessibilityState.checked).toBe(initialChecked);
+        const first = status === 'checked' ? 'unchecked' : 'checked';
+        const second = controlled ? first : first === 'checked' ? 'unchecked' : 'checked';
+        const event = { nativeEvent: { pageX: 12, pageY: 12 } };
+
+        await fireEvent.press(getRoot(component), event);
+        expect(getRoot(component).props.accessibilityState.checked).toBe(controlled ? initialChecked : first === 'checked');
+        await fireEvent.press(getRoot(component), event);
+        expect(getRoot(component).props.accessibilityState.checked).toBe(controlled ? initialChecked : second === 'checked');
+        expect(onStatusChange.mock.calls).toEqual([[first], [second]]);
+        expect(onPress).toHaveBeenCalledTimes(2);
+        for (const call of [1, 2]) {
+          expect(onPress).toHaveBeenNthCalledWith(
+            call,
+            expect.objectContaining({ nativeEvent: expect.objectContaining(event.nativeEvent) }),
+          );
+        }
+        expect(calls).toEqual([first, 'press', second, 'press']);
+      });
+
+      it('does not report or apply a disabled press', async () => {
+        const onPress = jest.fn();
+        const onStatusChange = jest.fn();
+        const component = await renderCheckbox({ defaultStatus: status, disabled: true, onPress, onStatusChange });
+        await fireEvent.press(getRoot(component));
+        expect(onPress).not.toHaveBeenCalled();
+        expect(onStatusChange).not.toHaveBeenCalled();
+        expect(getRoot(component).props.accessibilityState.checked).toBe(status === 'indeterminate' ? 'mixed' : status === 'checked');
+      });
+    });
+
+    it('CBX-002 keeps defaultStatus as an initializer and accepts later controlled values', async () => {
+      const component = await renderCheckbox({ defaultStatus: 'checked' });
+      await component.rerender(<Checkbox defaultStatus="unchecked" />);
+      expect(getRoot(component).props.accessibilityState.checked).toBe(true);
+
+      const controlled = await renderCheckbox({ status: 'unchecked', defaultStatus: 'checked' });
+      await controlled.rerender(<Checkbox status="indeterminate" defaultStatus="checked" />);
+      expect(getRoot(controlled).props.accessibilityState.checked).toBe('mixed');
+    });
+
+    it.each([
+      [false, false],
+      [false, true],
+      [true, false],
+      [true, true],
+    ])('CBX-003 gates text and development warnings with showLabel=%s and showSecondaryText=%s', async (showLabel, showSecondaryText) => {
+      const warn = jest.spyOn(console, 'warn').mockImplementation();
+      const component = await renderCheckbox({ showLabel, showSecondaryText, accessibilityHint: 'Caller hint' });
+      expect(component.queryByTestId('checkbox-label') !== null).toBe(showLabel);
+      expect(component.queryByTestId('checkbox-secondary', { includeHiddenElements: true }) !== null).toBe(showLabel && showSecondaryText);
+      expect(getRoot(component).props.accessibilityHint).toBe(showLabel && showSecondaryText ? 'Caller hint. Description' : 'Caller hint');
+      if (showSecondaryText && !showLabel) {
+        expect(warn.mock.calls).toEqual([['Checkbox: secondary text requires a visible label.']]);
+      } else {
+        expect(warn).not.toHaveBeenCalled();
+      }
+    });
+
+    it('CBX-003 and CBX-004 render indicator, label, and secondary text in order without duplicate accessible nodes', async () => {
+      const component = await renderCheckbox({ showSecondaryText: true });
+      const indicator = component.getByTestId('checkbox-indicator');
+      const label = component.getByTestId('checkbox-label');
+      const secondary = component.getByTestId('checkbox-secondary', { includeHiddenElements: true });
+      expect(getRoot(component).children).toEqual([
+        indicator,
+        expect.objectContaining({
+          props: expect.objectContaining({ accessible: false }),
+          children: [label, secondary],
+        }),
+      ]);
+      expect(indicator.props.accessible).toBe(false);
+      expect(label.props.accessible).toBe(false);
+      expect(secondary.props).toMatchObject({ accessible: false, accessibilityElementsHidden: true });
+      expect(secondary).toHaveTextContent('Description');
+    });
+
+    it('CBX-004 owns role and checked/disabled state while preserving caller context', async () => {
+      const component = await renderCheckbox({
+        accessibilityRole: 'button',
+        accessibilityState: { busy: true, checked: false, disabled: true },
+        accessibilityLabel: 'Explicit option name',
+        accessibilityHint: 'Caller context',
+        secondaryText: 'Supporting context',
+        showSecondaryText: true,
+        status: 'indeterminate',
+      });
+      expect(getRoot(component).props).toMatchObject({
+        accessibilityRole: 'checkbox',
+        accessibilityState: { busy: true, checked: 'mixed', disabled: false },
+        accessibilityLabel: 'Explicit option name',
+        accessibilityHint: 'Caller context. Supporting context',
+      });
+    });
+
+    it.each(['unchecked', 'checked', 'indeterminate'] as const)(
+      'CBX-005 resolves all %s colors and restores hover after release',
+      async (status) => {
+        const colors = defaultFlexTokens.color;
+        const component = await renderCheckbox({ status, showSecondaryText: true });
+        for (const [event, palette] of [
+          ['hoverIn', colors.hover],
+          ['pressIn', colors.pressed],
+          ['pressOut', colors.hover],
+          ['hoverOut', colors],
+        ] as const) {
+          await fireEvent(getRoot(component), event, {});
+          expect(getIndicatorStyle(component)).toMatchObject({
+            backgroundColor: status === 'unchecked' ? palette.backgroundNeutralTransparent : palette.backgroundBrandHeavy,
+            borderColor: status === 'unchecked' ? palette.strokeNeutralHeavy : palette.strokeNeutralTransparent,
+          });
+          expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(
+            status === 'unchecked' ? palette.foregroundNeutralSecondary : palette.foregroundNeutralPrimary,
+          );
+          expect(StyleSheet.flatten(component.getByTestId('checkbox-secondary', { includeHiddenElements: true }).props.style).color).toBe(
+            palette.foregroundNeutralSecondary,
+          );
+          if (status !== 'unchecked') {
+            expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
+              palette.foregroundBrandOnloud,
+            );
+          }
+        }
+      },
+    );
+
+    it.each(['unchecked', 'checked', 'indeterminate'] as const)(
+      'CBX-005 selects disabled %s colors during an active press',
+      async (status) => {
+        const component = await renderCheckbox({ status, showSecondaryText: true });
+        await fireEvent(getRoot(component), 'hoverIn', {});
+        await fireEvent(getRoot(component), 'pressIn', {});
+        await component.rerender(<Checkbox status={status} showSecondaryText disabled />);
+        const colors = defaultFlexTokens.color;
+        expect(getIndicatorStyle(component)).toMatchObject({
+          backgroundColor: status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundNeutralHeavyDisabled,
+          borderColor: status === 'unchecked' ? colors.strokeNeutralDisabled : colors.strokeNeutralTransparent,
+        });
+        for (const id of ['checkbox-label', 'checkbox-secondary']) {
+          expect(StyleSheet.flatten(component.getByTestId(id, { includeHiddenElements: true }).props.style).color).toBe(
+            colors.foregroundNeutralDisabled,
+          );
+        }
+        if (status !== 'unchecked') {
+          expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
+            colors.foregroundNeutralDisabled,
+          );
+        }
+      },
+    );
+
+    it('CBX-005 applies the last caller style after structural and token styles', async () => {
+      const component = await renderCheckbox({
+        style: [
+          { minHeight: 40, gap: 20 },
+          { minHeight: 48, gap: 12, flexDirection: 'column' },
+        ],
+      });
+      expect(getRootStyle(component)).toMatchObject({ minHeight: 48, gap: 12, flexDirection: 'column' });
+    });
   });
 });

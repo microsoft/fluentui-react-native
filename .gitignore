@@ -5,9 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 **/reports/
-**/errorShots/
-**/allure-results/
-**/allure-report/
+**/artifacts/desktop/
 
 # Runtime data
 pids
@@ -131,6 +129,3 @@ packages/**/windows/**/x64/[Rr]elease*/
 
 # Ccache
 .ccache
-
-# Appium
-**/.appium

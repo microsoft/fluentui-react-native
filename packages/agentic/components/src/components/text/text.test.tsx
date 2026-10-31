@@ -45,6 +45,90 @@ function TextStateProbe({ seen, children }: { seen: TextState['root'][]; childre
 }
 
 describe('Text', () => {
+  it('TXT-001 resolves the nearest theme and refreshes defaults when that boundary changes', async () => {
+    const outer = new FlexThemeReference({ base: { color: { foregroundNeutralPrimary: '#123456' } } });
+    const first = new FlexThemeReference({
+      base: { color: { foregroundNeutralPrimary: '#654321' }, fontSize: { functionalBodyMedium: 17 } },
+    });
+    const second = new FlexThemeReference({
+      base: { color: { foregroundNeutralPrimary: '#abcdef' }, fontSize: { functionalBodyMedium: 23 } },
+    });
+    function Scene({ theme }: { theme: FlexThemeReference }) {
+      return (
+        <ThemeProvider theme={outer}>
+          <Text testID="outer">Outer</Text>
+          <ThemeProvider theme={theme}>
+            <Text testID="inner">Inner</Text>
+          </ThemeProvider>
+        </ThemeProvider>
+      );
+    }
+    const component = await render(<Scene theme={first} />);
+
+    expect(StyleSheet.flatten(component.getByTestId('inner').props.style)).toMatchObject({ color: '#654321', fontSize: 17 });
+    expect(StyleSheet.flatten(component.getByTestId('outer').props.style).color).toBe('#123456');
+    await component.rerender(<Scene theme={second} />);
+    expect(StyleSheet.flatten(component.getByTestId('inner').props.style)).toMatchObject({ color: '#abcdef', fontSize: 23 });
+    expect(StyleSheet.flatten(component.getByTestId('outer').props.style).color).toBe('#123456');
+  });
+
+  it('TXT-002 preserves native style-array precedence for every default typography field', async () => {
+    const styles = StyleSheet.create({
+      override: { color: '#abcdef', fontFamily: 'Caller family', fontSize: 21, fontWeight: '700', lineHeight: 28 },
+    });
+    const component = await render(
+      <Text testID="text" style={[{ color: 'red', fontSize: 10 }, false, [styles.override, { lineHeight: 31 }]]}>
+        Styled
+      </Text>,
+    );
+
+    expect(StyleSheet.flatten(component.getByTestId('text').props.style)).toMatchObject({
+      color: '#abcdef',
+      fontFamily: 'Caller family',
+      fontSize: 21,
+      fontWeight: '700',
+      lineHeight: 31,
+    });
+  });
+
+  it('TXT-003 forwards text layout, scaling, truncation, and caller accessibility without synthesizing semantics', async () => {
+    const onTextLayout = jest.fn();
+    const component = await render(
+      <Text
+        testID="text"
+        accessibilityLabel="Section title"
+        accessibilityRole="header"
+        accessibilityState={{ selected: true }}
+        allowFontScaling={false}
+        ellipsizeMode="middle"
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={2}
+        onTextLayout={onTextLayout}
+      >
+        Native text
+      </Text>,
+    );
+    const root = component.getByTestId('text');
+    const event = { nativeEvent: { lines: [{ text: 'Native text', x: 0, y: 0, width: 80, height: 20 }] } };
+
+    expect(root.props).toMatchObject({
+      accessibilityLabel: 'Section title',
+      accessibilityRole: 'header',
+      accessibilityState: { selected: true },
+      allowFontScaling: false,
+      ellipsizeMode: 'middle',
+      maxFontSizeMultiplier: 1.5,
+      numberOfLines: 2,
+    });
+    await fireEvent(root, 'textLayout', event);
+    expect(onTextLayout).toHaveBeenCalledTimes(1);
+    expect(onTextLayout.mock.calls[0][0]).toBe(event);
+
+    await component.rerender(<Text testID="text">Plain text</Text>);
+    expect(component.getByTestId('text').props.accessibilityRole).toBeUndefined();
+    expect(component.getByTestId('text').props.accessibilityLabel).toBeUndefined();
+  });
+
   it('applies theme typography and foreground defaults', async () => {
     const theme = new FlexThemeReference({
       base: {

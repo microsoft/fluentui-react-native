@@ -23,6 +23,27 @@ const signedMacosTest =
   process.platform === 'darwin' && macosSigningIdentity && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 
 describe('native driver build and resolution', () => {
+  test('locates its published sources independently of the caller working directory', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-native-caller-'));
+    try {
+      const anchor = path.resolve(__dirname, '../../lib/native/packageRoot.cjs');
+      const child = spawnSync(
+        process.execPath,
+        ['-e', `process.stdout.write(require(${JSON.stringify(anchor)}).nativeDriverPackageRoot)`],
+        {
+          cwd: root,
+          encoding: 'utf8',
+          timeout: 10_000,
+        },
+      );
+      expect(child.status).toBe(0);
+      expect(child.stdout).toBe(path.resolve(__dirname, '../..'));
+      expect(fs.existsSync(path.join(child.stdout, 'native', 'protocol.json'))).toBe(true);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
   macosTest('builds, signs, reuses, and handshakes with the macOS helper', async () => {
     const cacheRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-macos-native-'));
     const emitWarning = jest.spyOn(process, 'emitWarning').mockImplementation(() => undefined);

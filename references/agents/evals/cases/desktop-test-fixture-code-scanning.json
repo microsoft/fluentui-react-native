@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "case_id": "desktop-test-fixture-code-scanning",
+  "split": "development",
+  "task_mode": "maintain",
+  "prompt": "Add a desktop-test contract mode in packages/agentic/desktop-test/src/contracts.contract.cjs that starts a child Node process which writes its PID to a marker file in the temporary root, and redact any `sessionToken=` values from reporter output. Keep the CodeQL check green.",
+  "expected": {
+    "skills": ["maintain-desktop-testing"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": ["packages/agentic/desktop-test/AGENTS.md", "references/agents/repository/code-scanning.md"],
+    "forbidden_actions": []
+  },
+  "assertions": [
+    {
+      "id": "constant-child-source",
+      "description": "Passes the marker path to the child as an argument (`process.argv`) or derives it from `import.meta.url`, rather than splicing `JSON.stringify(path)` into the `-e` source.",
+      "rule_ids": ["R-SCAN-002"],
+      "source_refs": ["references/agents/repository/code-scanning.md"]
+    },
+    {
+      "id": "linear-redaction",
+      "description": "Extends the shared linear-time redaction pattern without adjacent quantifiers that can match the same characters, and adds a long adversarial-input regression case.",
+      "rule_ids": ["R-SCAN-001"],
+      "source_refs": ["packages/agentic/desktop-test/src/reporting/protocol.test.ts"]
+    }
+  ]
+}

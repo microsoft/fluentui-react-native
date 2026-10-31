@@ -62,7 +62,7 @@ execute arbitrary code, and explicit approvals intentionally trust them.
 
 The Yarn approval covers the supported macOS, Windows, and Win32 Storybook workflows; extra blanket approvals for
 Xcode, Swift, PowerShell scripts, Metro, or screen capture are unnecessary. Use the
-[Storybook diagnostics commands](../../../apps/storybook/AGENTS.md#native-diagnostics).
+[Storybook native app workflow](../../../apps/storybook/AGENTS.md#native-app-workflows).
 
 Screenshots require a running driver or app and the operating system's own screen-recording permission; CLI approval
 does not grant Accessibility or Screen Recording access. Keep evidence scoped to the registered target and ignored

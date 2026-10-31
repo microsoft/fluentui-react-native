@@ -23,6 +23,56 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('ListItem', () => {
+  it.each([
+    ['none', false, undefined],
+    ['none', true, undefined],
+    ['single', false, '○'],
+    ['single', true, '◉'],
+    ['multiple', false, '☐'],
+    ['multiple', true, '☑'],
+  ] as const)('LIT-003 keeps %s selection=%s caller-owned and presents only its glyph', async (selectionMode, selected, glyph) => {
+    const onPress = jest.fn();
+    const component = await renderListItem({ content: 'Choice', selectionMode, selected, onPress });
+    await fireEvent.press(getRoot(component));
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(getRoot(component).props.accessibilityState.selected).toBe(selected);
+    for (const candidate of ['○', '◉', '☐', '☑']) {
+      if (candidate === glyph) {
+        expect(component.getByText(candidate, { includeHiddenElements: true }).props).toMatchObject({
+          accessible: false,
+          accessibilityElementsHidden: true,
+          importantForAccessibility: 'no-hide-descendants',
+        });
+      } else {
+        expect(component.queryByText(candidate, { includeHiddenElements: true })).toBeNull();
+      }
+    }
+    expect(getRootStyle(component).backgroundColor).toBe(
+      selected && selectionMode !== 'multiple'
+        ? defaultFlexTokens.color.backgroundNeutralSoft
+        : defaultFlexTokens.color.backgroundNeutralTransparent,
+    );
+  });
+
+  it.each([false, true])('LIT-002 gives avatar precedence over both icons when selected=%s', async (selected) => {
+    const component = await renderListItem({
+      content: 'Contact',
+      selected,
+      avatar: { testID: 'contact-avatar' },
+      icon: { imageSource: { uri: 'regular.png' }, testID: 'regular-icon' },
+      selectedIcon: { imageSource: { uri: 'selected.png' }, testID: 'selected-icon' },
+    });
+    expect(component.getByTestId('contact-avatar').props.accessible).toBe(false);
+    expect(component.queryByTestId('regular-icon')).toBeNull();
+    expect(component.queryByTestId('selected-icon')).toBeNull();
+  });
+
+  it.each(['none', 'single', 'multiple'] as const)('LIT-004 suppresses selected fill while disabled in %s mode', async (selectionMode) => {
+    const component = await renderListItem({ content: 'Unavailable', selected: true, disabled: true, selectionMode });
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent);
+    expect(getRoot(component).props.accessibilityState).toEqual({ disabled: true, selected: true });
+  });
+
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
     const component = await renderListItem({ content: 'Inbox', onPress, selected: false, selectionMode: 'multiple' });

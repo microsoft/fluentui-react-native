@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text as NativeText, View } from 'react-native';
+import type { TextProps } from 'react-native';
 
 import { render } from '../../common/renderWithTheme';
 
@@ -20,6 +21,75 @@ function getRoot(component: Awaited<ReturnType<typeof renderDivider>>) {
 }
 
 describe('Divider', () => {
+  it.each([
+    ['Section', 'Section'],
+    [42, '42'],
+    [{ children: 'Overview' }, 'Overview'],
+    [{ children: 7 }, '7'],
+    [null, undefined],
+  ] as const)('DIV-005 derives the accessible name from label %j', async (label, name) => {
+    const component = await renderDivider({ label });
+
+    expect(getRoot(component).props.accessibilityLabel).toBe(name);
+    await component.rerender(<Divider accessibilityLabel="Caller name" label={label} />);
+    expect(getRoot(component).props.accessibilityLabel).toBe('Caller name');
+  });
+
+  it('DIV-002 preserves an icon-only content container when the label is removed', async () => {
+    const component = await renderDivider({
+      icon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'divider-icon' },
+      label: null,
+    });
+    const root = getRoot(component);
+
+    expect(root.children).toHaveLength(3);
+    expect(component.getByTestId('divider-icon')).toBeOnTheScreen();
+    expect(component.queryByText('Text')).toBeNull();
+    expect(root.props.accessibilityLabel).toBeUndefined();
+  });
+
+  it('DIV-002/DIV-006 honors a label replacement and applies caller root styles last', async () => {
+    const ReplacementLabel = directComponent<TextProps>((props) => <NativeText {...props} accessibilityHint="replacement" />);
+    const component = await renderDivider({
+      label: { as: ReplacementLabel, children: 'Section', testID: 'replacement-label' },
+      style: { alignItems: 'flex-end', flexDirection: 'column' },
+    });
+
+    expect(component.getByTestId('replacement-label').props).toMatchObject({
+      accessibilityHint: 'replacement',
+      accessible: false,
+    });
+    expect(StyleSheet.flatten(getRoot(component).props.style)).toMatchObject({
+      alignItems: 'flex-end',
+      flexDirection: 'column',
+    });
+  });
+
+  it.each(['start', 'end'] as const)('DIV-003/DIV-004 resolves vertical %s stubs without horizontal line dimensions', async (layout) => {
+    const component = await renderDivider({ layout, vertical: true });
+    const root = getRoot(component);
+    const lines = [root.children[0], root.children[2]];
+
+    for (const [index, line] of lines.entries()) {
+      if (typeof line === 'string') throw new TypeError('Divider lines must be native views.');
+      const style = StyleSheet.flatten(line.props.style);
+      const stub = layout === 'start' ? index === 0 : index === 1;
+      expect(style).toMatchObject({
+        width: defaultFlexTokens.strokeWidth.thin,
+        flexBasis: stub ? defaultFlexTokens.spacing.componentBase100 : 0,
+        flexGrow: stub ? 0 : 1,
+      });
+      expect(style.height).toBeUndefined();
+    }
+    const content = root.children[1];
+    if (typeof content === 'string') throw new TypeError('Divider content must be a native view.');
+    expect(StyleSheet.flatten(content.props.style)).toMatchObject({
+      flexDirection: 'row',
+      paddingVertical: defaultFlexTokens.spacing.componentBase300,
+    });
+    expect(StyleSheet.flatten(content.props.style).paddingHorizontal).toBeUndefined();
+  });
+
   it('renders a labeled separator by default', async () => {
     const component = await renderDivider({});
     const root = getRoot(component);

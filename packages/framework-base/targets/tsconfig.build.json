@@ -6,7 +6,7 @@
     "checkJs": true,
     "rootDir": "../src",
     "composite": true,
-    "tsBuildInfoFile": "../.cache/tsconfig.build.tsbuildinfo"
+    "tsBuildInfoFile": "../node_modules/.cache/tsconfig.build.tsbuildinfo"
   },
   "include": ["../src"],
   "exclude": ["../**/*.test.*"]

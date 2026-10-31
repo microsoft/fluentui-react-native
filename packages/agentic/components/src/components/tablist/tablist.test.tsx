@@ -37,6 +37,155 @@ function selected(tab: ReturnType<typeof getTabs>[number]) {
 }
 
 describe('TabList', () => {
+  it.each(
+    (['controlled', 'uncontrolled'] as const).flatMap((owner) => (['remove', 'disable'] as const).map((change) => ({ owner, change }))),
+  )('TBL-001 TBL-004 recovers after $change of the active Tab under $owner selection', async ({ owner, change }) => {
+    const ref = React.createRef<React.ComponentRef<typeof Pressable>>();
+    const onSelectionChange = jest.fn();
+    let context: TabListContextValue | undefined;
+    function Probe() {
+      context = React.useContext(TabListContext);
+      return null;
+    }
+    const scene = (invalid: boolean) => (
+      <TabList
+        selectedValue={owner === 'controlled' ? 'activity' : undefined}
+        defaultSelectedValue="activity"
+        onSelectionChange={onSelectionChange}
+      >
+        <Tab controls="overview-panel" content="Overview" accessibilityLabel="Overview" value="overview" ref={ref} />
+        {!(invalid && change === 'remove') && (
+          <Tab controls="activity-panel" content="Activity" accessibilityLabel="Activity" value="activity" disabled={invalid} />
+        )}
+        <Tab controls="files-panel" content="Files" accessibilityLabel="Files" value="files" />
+        <Probe />
+      </TabList>
+    );
+    const component = await render(scene(false));
+    expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([false, true, false]);
+    await fireEvent(component.getByRole('tab', { name: 'Activity' }), 'focus', {});
+    expect(context?.focusedValue).toBe('activity');
+    const focus = jest.spyOn(ref.current!, 'focus').mockImplementation(() => {
+      const overview = component.getByRole('tab', { name: 'Overview' });
+      expect(overview.props.focusable).toBe(true);
+      expect(selected(overview)).toBe(owner === 'uncontrolled');
+    });
+    try {
+      await component.rerender(scene(true));
+
+      expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual(change === 'remove' ? [true, false] : [true, false, false]);
+      expect(selected(component.getByRole('tab', { name: 'Overview' }))).toBe(owner === 'uncontrolled');
+      if (change === 'remove') {
+        expect(component.queryByRole('tab', { name: 'Activity' })).toBeNull();
+        expect(getTabs(component).map(selected)).toEqual([owner === 'uncontrolled', false]);
+      } else {
+        const activity = component.getByRole('tab', { name: 'Activity' });
+        expect(activity).toBeDisabled();
+        expect(selected(activity)).toBe(owner === 'controlled');
+      }
+      expect(onSelectionChange.mock.calls).toEqual(owner === 'controlled' ? [] : [['overview']]);
+      expect(focus).toHaveBeenCalledTimes(1);
+      expect(context?.focusedValue).toBeUndefined();
+
+      await fireEvent(component.getByRole('tab', { name: 'Overview' }), 'focus', {});
+      expect(context?.focusedValue).toBe('overview');
+      await component.rerender(scene(true));
+      expect(focus).toHaveBeenCalledTimes(1);
+      expect(onSelectionChange.mock.calls).toEqual(owner === 'controlled' ? [] : [['overview']]);
+    } finally {
+      focus.mockRestore();
+    }
+  });
+
+  it.each(['controlled', 'uncontrolled'] as const)(
+    'TBL-004 exposes no tab stop while all Tabs are disabled and recovers eligibility for %s selection',
+    async (owner) => {
+      const onSelectionChange = jest.fn();
+      const scene = (stage: 'initial' | 'disabled' | 'files') => (
+        <TabList
+          disabled={stage === 'disabled'}
+          selectedValue={owner === 'controlled' ? 'activity' : undefined}
+          defaultSelectedValue="activity"
+          onSelectionChange={onSelectionChange}
+        >
+          <Tab controls="overview-panel" content="Overview" value="overview" disabled={stage === 'files'} />
+          <Tab controls="activity-panel" content="Activity" value="activity" disabled={stage === 'files'} />
+          <Tab controls="files-panel" content="Files" value="files" />
+        </TabList>
+      );
+      const component = await render(scene('initial'));
+      expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([false, true, false]);
+
+      await component.rerender(scene('disabled'));
+      expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([false, false, false]);
+      expect(getTabs(component).every((tab) => tab.props.accessibilityState.disabled)).toBe(true);
+      expect(onSelectionChange).not.toHaveBeenCalled();
+
+      await component.rerender(scene('files'));
+      expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([false, false, true]);
+      expect(getTabs(component).map(selected)).toEqual(owner === 'controlled' ? [false, true, false] : [false, false, true]);
+      expect(onSelectionChange.mock.calls).toEqual(owner === 'controlled' ? [] : [['files']]);
+    },
+  );
+
+  it.each(
+    (['horizontal', 'vertical'] as const).flatMap((orientation) =>
+      (['altKey', 'ctrlKey', 'metaKey', 'shiftKey'] as const).flatMap((modifier) =>
+        [
+          orientation === 'horizontal' ? 'ArrowLeft' : 'ArrowUp',
+          orientation === 'horizontal' ? 'ArrowRight' : 'ArrowDown',
+          'Home',
+          'End',
+        ].map((key) => ({ orientation, modifier, key })),
+      ),
+    ),
+  )('TBL-005 TBL-006 forwards $modifier+$key once in $orientation lists without consuming it', async ({ orientation, modifier, key }) => {
+    const onKeyDown = jest.fn();
+    const onSelectionChange = jest.fn();
+    const component = await render(
+      <TabList orientation={orientation} onSelectionChange={onSelectionChange}>
+        <Tab controls="one" content="One" onKeyDown={onKeyDown} />
+        <Tab controls="two" content="Two" />
+      </TabList>,
+    );
+    const event = { nativeEvent: { key, [modifier]: true }, preventDefault: jest.fn(), stopPropagation: jest.fn() };
+
+    await fireEvent(getTabs(component)[0], 'keyDown', event);
+
+    expect(onKeyDown.mock.calls).toEqual([[event]]);
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    expect(event.stopPropagation).not.toHaveBeenCalled();
+    expect(onSelectionChange).not.toHaveBeenCalled();
+    expect(getTabs(component).map(selected)).toEqual([true, false]);
+    expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([true, false]);
+  });
+
+  it.each([
+    { orientation: 'horizontal', key: 'ArrowUp' },
+    { orientation: 'horizontal', key: 'ArrowDown' },
+    { orientation: 'vertical', key: 'ArrowLeft' },
+    { orientation: 'vertical', key: 'ArrowRight' },
+  ] as const)('TBL-005 forwards the inactive-axis $key in $orientation lists', async ({ orientation, key }) => {
+    const onKeyDown = jest.fn();
+    const onSelectionChange = jest.fn();
+    const component = await render(
+      <TabList orientation={orientation} onSelectionChange={onSelectionChange}>
+        <Tab controls="one" content="One" onKeyDown={onKeyDown} />
+        <Tab controls="two" content="Two" />
+      </TabList>,
+    );
+    const event = { nativeEvent: { key }, preventDefault: jest.fn(), stopPropagation: jest.fn() };
+
+    await fireEvent(getTabs(component)[0], 'keyDown', event);
+
+    expect(onKeyDown.mock.calls).toEqual([[event]]);
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    expect(event.stopPropagation).not.toHaveBeenCalled();
+    expect(onSelectionChange).not.toHaveBeenCalled();
+    expect(getTabs(component).map(selected)).toEqual([true, false]);
+    expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([true, false]);
+  });
+
   it('defaults to the first enabled Tab and exposes the list semantics', async () => {
     const component = await renderTabList();
     const root = getRoot(component);

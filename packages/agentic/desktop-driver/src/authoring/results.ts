@@ -8,7 +8,7 @@ export type DesktopArtifact = {
 
 export type DesktopStepStatus = 'failed' | 'passed' | 'skipped';
 export type DesktopTestStatus = 'cancelled' | 'failed' | 'infrastructure-error' | 'passed' | 'skipped' | 'timed-out';
-export type DesktopRunStatus = 'failed' | 'passed';
+export type DesktopRunStatus = 'failed' | 'passed' | 'incomplete';
 
 export type DesktopStoryStepResult = {
   artifacts: readonly DesktopArtifact[];

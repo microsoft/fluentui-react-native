@@ -26,6 +26,7 @@ export type DesktopStoryState =
   | 'expanded'
   | 'exists'
   | 'focused'
+  | 'required'
   | 'role'
   | 'selected'
   | 'text'
@@ -224,6 +225,7 @@ function validateExpectation(value: unknown, source: string): void {
         'expanded',
         'exists',
         'focused',
+        'required',
         'role',
         'selected',
         'text',
@@ -259,6 +261,7 @@ function validateExpectation(value: unknown, source: string): void {
       expectation.state === 'expanded' ||
       expectation.state === 'exists' ||
       expectation.state === 'focused' ||
+      expectation.state === 'required' ||
       expectation.state === 'selected') &&
     expectation.value !== undefined &&
     typeof expectation.value !== 'boolean' &&

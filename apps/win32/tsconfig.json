@@ -2,6 +2,9 @@
   "files": [],
   "references": [
     {
+      "path": "../../packages/agentic/desktop-test/tsconfig.json"
+    },
+    {
       "path": "../../scripts/tsconfig.json"
     },
     {

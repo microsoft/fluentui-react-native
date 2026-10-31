@@ -35,15 +35,17 @@ function activationKey(event: FocusKeyboardEvent): string | undefined {
  */
 export function useFocusablePressable(
   props: FocusablePressableProps,
-  { pointerFocus = 'platform' }: FocusablePressableOptions = {},
+  { pointerFocus = 'platform', disabledFocusable = false }: FocusablePressableOptions = {},
 ): [FocusablePressableProps, PressableState, FocusTargetBinding] {
   const platform: string = Platform.OS;
   const focusOnPointerPress = requestsFocusOnPointerPress(platform, pointerFocus);
   const { disabled = false, focusable = true, onFocus, onBlur, onPress, onKeyDown, onKeyUp } = props;
-  const target = useFocusTarget(!disabled && focusable);
+  const focusEligible = (!disabled || disabledFocusable) && focusable;
+  const target = useFocusTarget(focusEligible);
   const { focusTarget, focusTargetRef } = target;
   const keyDown = React.useRef<string | undefined>(undefined);
   const keyGeneration = React.useRef<number | undefined>(undefined);
+  const pressActive = React.useRef(false);
   const keyboardPress = React.useRef<{ event: PressEvent; key: string; generation: number } | undefined>(undefined);
   const [interactionProps, interactionState] = usePressableState(props, interactionKeys);
   const { onPressOut: releasePress } = interactionProps;
@@ -51,6 +53,7 @@ export function useFocusablePressable(
     const press = keyboardPress.current;
     if (press) {
       keyboardPress.current = undefined;
+      pressActive.current = false;
       releasePress?.(press.event);
     }
   }, [releasePress]);
@@ -82,6 +85,8 @@ export function useFocusablePressable(
   };
   const focusProps = {
     onPressIn: (event: PressEvent) => {
+      if (disabled) return;
+      pressActive.current = true;
       const key = event?.nativeEvent ? activationKey(event) : undefined;
       if (key) {
         event.persist?.();
@@ -90,6 +95,9 @@ export function useFocusablePressable(
       interactionProps.onPressIn?.(event);
     },
     onPressOut: (event: PressEvent) => {
+      // Native release can arrive after blur/disable has already ended the keyboard press.
+      if (!pressActive.current) return;
+      pressActive.current = false;
       keyboardPress.current = undefined;
       interactionProps.onPressOut?.(event);
     },
@@ -184,11 +192,32 @@ export function useFocusablePressable(
       }
     },
     onPress: handlePress,
+    onLongPress:
+      props.onLongPress &&
+      ((event: PressEvent) => {
+        if (!disabled) props.onLongPress?.(event);
+      }),
+    onAccessibilityTap:
+      props.onAccessibilityTap &&
+      (() => {
+        if (!disabled) props.onAccessibilityTap?.();
+      }),
   };
 
   return [
-    { ...interactionProps, ...focusProps, focusable: !disabled && focusable },
-    { ...interactionState, focused: target.focused },
+    {
+      ...interactionProps,
+      ...focusProps,
+      // macOS Pressable otherwise removes focusability and overwrites the disabled accessibility state.
+      disabled: disabled && disabledFocusable && platform === 'macos' ? undefined : props.disabled,
+      ...(disabled &&
+        disabledFocusable && {
+          'aria-disabled': true,
+          accessibilityState: { ...props.accessibilityState, disabled: true },
+        }),
+      focusable: focusEligible,
+    },
+    { ...interactionState, ...(disabled && { pressed: false, hovered: false }), focused: target.focused },
     { focusTarget, focusTargetRef },
   ];
 }

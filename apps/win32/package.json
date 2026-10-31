@@ -1,8 +1,9 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "description": "Fluent UI React Native Win32 Tester App",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
@@ -22,6 +23,9 @@
     "bundle": "rnx-cli bundle --dev false",
     "bundle-dev": "rnx-cli bundle",
     "clean": "fluentui-scripts clean",
+    "desktop-test": "desktop-test",
+    "e2eprep:win32": "desktop-test --target win32 build-driver && desktop-test --target win32 bundle",
+    "e2etest:win32": "desktop-test --config ../E2E/desktop.config.mts --target win32 test --suite legacy",
     "format": "fluentui-scripts format",
     "lint": "fluentui-scripts lint",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDirectDebugger --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
@@ -41,6 +45,7 @@
   "devDependencies": {
     "@babel/core": "catalog:",
     "@babel/runtime": "catalog:",
+    "@fluentui-react-native/desktop-test": "workspace:*",
     "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/rex-win32": "0.81.1",
     "@react-native-community/cli": "^20.0.0",

@@ -18,8 +18,10 @@ export async function exerciseMenuComposition(
   const status = await browser.$('~modern-menu-status');
   const focused = await browser.$('~modern-menu-focus');
   for (let attempt = 0; attempt < 2; attempt++) {
+    expect(await trigger.getProperty('expanded')).toBe(false);
     await trigger.click();
     await expect(status).toHaveText('Ready: confirmed');
+    expect(await trigger.getProperty('expanded')).toBe(true);
     await expect(focused).toHaveText('Cut');
     await browser.keys('\uE015');
     await expect(focused).toHaveText('Copy');
@@ -27,7 +29,8 @@ export async function exerciseMenuComposition(
     await browser.keys('\uE013');
     await expect(focused).toHaveText('Paste');
     await browser.keys('\uE00C');
-    await expect(status).toHaveText('Dismissed: native-light-dismiss');
+    await expect(status).toHaveText('Dismissed: escape');
+    expect(await trigger.getProperty('expanded')).toBe(false);
     if (restoresTrigger) {
       await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
         timeout: 5000,

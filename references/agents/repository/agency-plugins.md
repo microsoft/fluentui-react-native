@@ -69,13 +69,13 @@ plugin alongside them. Updating the release requires the source-review and drift
 Confirm the expected profile/skills are available in the new session; configuration validation alone does not prove
 that private plugins downloaded or loaded successfully.
 
-| Plugin            | Loading and task scope                                                                                                                                                                                        |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `flex-components` | Included in all three profiles. Invoke `flex-components:<name>` only for a real pinned Flex catalog component; use the [Flex/X3 source adapter](../components/agentic/contract-sources/flex-x3.md).           |
-| `flex-system`     | Included in all three profiles. Load only the relevant foundation, such as `flex-system:focus`, `flex-system:accessibility`, `flex-system:spacing`, or `flex-system:typography`.                              |
-| `flex-tokens`     | Included in all three profiles. Use `flex-tokens:core`, `flex-tokens:interaction`, or `flex-tokens:textstyle` for token evidence, then map it through [FURN token guidance](../design/tokens-and-theming.md). |
-| `flex-motion`     | Select `flex-motion` only for animation, transitions, or reduced-motion work. Start with `flex-motion:motion-index`, then consult the relevant recipe, accessibility, governance, or performance material.    |
-| `flex-processes`  | Select `flex-processes` for Flex-backed contract review or design-documentation work. Start with `flex-processes:processes-index`; use `flex-processes:spec-review` or `flex-processes:d11n` when applicable. |
+| Plugin            | Loading and task scope                                                                                                                                                                                                              |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `flex-components` | Included in all three profiles. Invoke `flex-components:<name>` only for a real pinned Flex catalog component; use the [Flex/X3 source adapter](../../../packages/agentic/components/references/contract-sources/flex-x3.md).       |
+| `flex-system`     | Included in all three profiles. Load only the relevant foundation, such as `flex-system:focus`, `flex-system:accessibility`, `flex-system:spacing`, or `flex-system:typography`.                                                    |
+| `flex-tokens`     | Included in all three profiles. Use `flex-tokens:core`, `flex-tokens:interaction`, or `flex-tokens:textstyle` for token evidence, then map it through [FURN token guidance](../../../packages/agentic/design/references/tokens.md). |
+| `flex-motion`     | Select `flex-motion` only for animation, transitions, or reduced-motion work. Start with `flex-motion:motion-index`, then consult the relevant recipe, accessibility, governance, or performance material.                          |
+| `flex-processes`  | Select `flex-processes` for Flex-backed contract review or design-documentation work. Start with `flex-processes:processes-index`; use `flex-processes:spec-review` or `flex-processes:d11n` when applicable.                       |
 
 The candidate plugins not loaded here are `flex-dataviz` (chart implementations), `flex-figma` (Figma library/API
 authoring), and `flex-output` (editorial, document, and conversational output rendering). Those surfaces are not

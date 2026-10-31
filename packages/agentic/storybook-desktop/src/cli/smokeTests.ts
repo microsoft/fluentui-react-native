@@ -6,6 +6,7 @@ import type { DesktopStoryRunResult, DesktopStoryTestResult } from '@fluentui-re
 import { ArtifactManager } from '@fluentui-react-native/desktop-driver/artifacts';
 import { selectDesktopStoryTests } from '@fluentui-react-native/desktop-driver/runner';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
+import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui-react-native/desktop-driver/wdio';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
@@ -30,6 +31,8 @@ export type DesktopStorybookSmokeTestOptions = {
   testTag?: string;
   errorOutput?: DesktopStorybookErrorOutput;
   commandRunner?: DesktopCommandRunner;
+  report?: DesktopReportWriter;
+  signal?: AbortSignal;
 };
 
 export type DesktopStorybookSmokeTestResult = DesktopStoryRunResult & {
@@ -60,18 +63,33 @@ export async function runDesktopStorybookSmokeTests(
   if (storyIds.length === 0) {
     throw new Error('No desktop story tests matched the smoke selection.');
   }
-  const artifacts = new ArtifactManager(options.artifactsRoot ?? path.join(config.projectRoot, 'artifacts', platform, 'desktop-driver'));
+  const artifacts = new ArtifactManager(
+    options.artifactsRoot ??
+      (options.report
+        ? options.report.artifactPath(path.join('evidence', platform, 'static'))
+        : path.join(config.projectRoot, 'artifacts', platform, 'desktop-driver')),
+  );
   const startedAt = new Date().toISOString();
   const tests: DesktopStoryTestResult[] = [];
   const wdio: WdioStoryTestResult[] = [];
   const failures: unknown[] = [];
+  const staticFailures = new Map<string, Error>();
+  for (const storyId of storyIds) options.report?.emit({ kind: 'work-selected', payload: { workId: `smoke:${storyId}`, label: storyId } });
 
   for (const storyId of storyIds) {
+    const scope = `smoke:${storyId}`;
+    options.report?.emit(
+      { kind: 'scope-start', payload: { label: storyId, category: 'phase' } },
+      scope,
+      { story: storyId, endpoint: platform },
+      scope,
+    );
     try {
+      options.signal?.throwIfAborted();
       if (planStoryIds.has(storyId)) {
-        const plans = await runStoryPlans(options, storyId, artifacts.root, connect, testTag ?? 'desktop-e2e');
+        const plans = await runStoryPlans(options, storyId, artifacts.root, connect, testTag ?? 'desktop-e2e', staticFailures);
         tests.push(...plans.tests);
-        if (plans.status !== 'passed' && plans.tests.every(({ status }) => status === 'passed' || status === 'skipped')) {
+        if (plans.status === 'failed' && plans.tests.every(({ status }) => status === 'passed' || status === 'skipped')) {
           throw new Error(`The static test runner failed for "${storyId}" without failed test details.`);
         }
       }
@@ -90,6 +108,9 @@ export async function runDesktopStorybookSmokeTests(
                 targetId: options.targetId,
                 url: options.driverUrl,
                 errorOutput: options.errorOutput,
+                report: options.report,
+                signal: options.signal,
+                optional: true,
               },
               options.commandRunner,
             )),
@@ -106,14 +127,19 @@ export async function runDesktopStorybookSmokeTests(
       }
     } catch (error) {
       failures.push(new Error(`Smoke tests for "${storyId}" failed: ${errorMessage(error)}`, { cause: error }));
+      options.report?.emit({ kind: 'scope-end', payload: { status: 'failed' } }, scope);
       break;
     }
+    options.report?.emit({ kind: 'scope-end', payload: { status: 'passed' } }, scope);
   }
 
   const failedTests = tests.filter(({ status }) => status !== 'passed' && status !== 'skipped');
   if (failedTests.length) {
     failures.push(
-      new Error(
+      new AggregateError(
+        failedTests.map(
+          (test) => staticFailures.get(`${test.storyId}/${test.testId}`) ?? new Error(test.error ?? 'Static story test failed.'),
+        ),
         `${failedTests.length} of ${tests.length} desktop story tests failed: ${failedTests
           .map(({ status, storyId, testId }) => `${storyId}/${testId} (${status})`)
           .join(', ')}`,
@@ -126,6 +152,9 @@ export async function runDesktopStorybookSmokeTests(
     }
     failures.push(new Error('Executable smoke tests reported failures.'));
   }
+  const allSkipped = tests.length + wdio.length > 0 && [...tests, ...wdio].every(({ status }) => status === 'skipped');
+  if (allSkipped && failures.length === 0)
+    failures.push(new Error('Required desktop smoke cohort only skipped tests; it is not a passing run.'));
   const result: DesktopStorybookSmokeTestResult = {
     endpoint: platform,
     finishedAt: new Date().toISOString(),
@@ -140,9 +169,13 @@ export async function runDesktopStorybookSmokeTests(
     wdio,
   };
   try {
-    artifacts.writeMetadata('run', {
+    const reportPath = artifacts.writeMetadata('run', {
       ...result,
       ...(failures.length ? { errors: failures.map(errorMessage) } : {}),
+    });
+    options.report?.emit({
+      kind: 'artifact',
+      payload: { path: path.relative(options.report.root, reportPath), description: 'Story smoke results' },
     });
   } catch (error) {
     failures.push(error);
@@ -163,6 +196,7 @@ async function runStoryPlans(
   artifactsRoot: string,
   connect: DesktopStorybookSmokeConnector,
   tag: string,
+  failures: Map<string, Error>,
 ): Promise<DesktopStoryRunResult> {
   const desktop = await connect({
     launchMode: 'attach',
@@ -179,10 +213,42 @@ async function runStoryPlans(
     }
     const reported = new Set<string>();
     const onTestResult = (test: Readonly<DesktopStoryTestResult>) => {
+      const key = `${test.storyId}/${test.testId}`;
+      if (reported.has(key)) return;
+      reported.add(key);
+      const failure =
+        test.status === 'passed' || test.status === 'skipped' ? undefined : new Error(test.error ?? 'Static story test failed.');
+      if (failure) failures.set(key, failure);
+      options.report?.emit(
+        {
+          kind: 'test-result',
+          payload: {
+            testId: `static:${key}`,
+            title: key,
+            attempt: 0,
+            status: test.status === 'passed' || test.status === 'skipped' ? test.status : 'failed',
+            durationMs: test.durationMs,
+            ...(test.status === 'skipped' ? { reason: test.skipReason ?? 'Unsupported by the static test runner.' } : {}),
+            ...(failure ? { failure: options.report.failure(failure, 'test') } : {}),
+          },
+        },
+        `static:${key}`,
+        { story: test.storyId, test: test.testId, endpoint: options.platform },
+      );
+      for (const artifact of test.artifacts)
+        options.report?.emit(
+          {
+            kind: 'artifact',
+            payload: {
+              path: path.relative(options.report.root, path.join(artifactsRoot, artifact.path)),
+              description: `${key}: ${artifact.kind}`,
+            },
+          },
+          `static:${key}`,
+        );
       if (test.status === 'passed' || test.status === 'skipped') {
         return;
       }
-      reported.add(`${test.storyId}/${test.testId}`);
       const step = test.steps.find(({ status }) => status === 'failed');
       writeDesktopStorybookFailure(
         `test "${test.storyId}/${test.testId}" (${test.status}${step ? `, step ${step.index + 1}` : ''})`,

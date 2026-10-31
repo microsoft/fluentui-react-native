@@ -4,7 +4,7 @@
     "outDir": "lib",
     "rootDir": "src",
     "composite": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
   "exclude": ["**/*.stories.ts", "**/*.stories.tsx"],

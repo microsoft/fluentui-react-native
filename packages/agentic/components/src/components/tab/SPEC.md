@@ -92,7 +92,7 @@ icon the same fixed size in both layouts.
 the controlled-panel relationship, merging caller state underneath, and drop a
 disabled tab from the tab order.
 
-**TAB-008:** Follow the [shared focus visual policy](../AGENTS.md#focus-visual-policy)
+**TAB-008:** Follow the [shared focus visual policy](../../../references/higher-order-components.md#focus-visual-policy)
 on the root, retaining the mounted two-ring visual and active-layout radius
 for the custom path.
 
@@ -140,7 +140,7 @@ native invocation limits.
 
 ## Divergences from Flex
 
-`native-system-focus-visuals` is an **accepted** [shared native adaptation](../AGENTS.md#focus-visual-policy).
+`native-system-focus-visuals` is an **accepted** [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 | ID                                | Disposition | React Native contract                                                                                                                                                                            | Follow-up                                                                                                 |
 | --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |

@@ -5,9 +5,10 @@
 Input observes native self-focus through `useFocusTarget`, tracks hover and press
 locally, and reduces them, together
 with `disabled`, `error`, and `readOnly`, to exactly one visual state per
-render. The precedence is disabled, error, read only, focused, pressed,
-hovered, rest. Only that one state contributes styling, so an errored field
-that is also hovered keeps the error boundary.
+render. The boundary precedence is disabled, error, read only, focused, pressed,
+hovered, rest, so an errored field that is also hovered keeps the error
+boundary. Focus indication is additive and independently gated by native
+self-focus, keyboard modality, and disabled eligibility.
 
 When `disabled` becomes true the component clears focus, hover, and press, so a
 field that is disabled while the pointer is over it or while it holds focus does
@@ -49,9 +50,12 @@ A disabled or read-only field is not editable: the text input receives
 removed from the tab order by the default `focusable` resolution, while a
 read-only field remains reachable so its value can be read and copied.
 
-Focus recolors the boundary to the heavy neutral stroke at the rest thickness.
-There is no separate focus ring, so the focused field is distinguished by color
-rather than by an added visual.
+Keyboard-visible focus paints a two-part ring around outline fields and
+softens the base boundary beneath it. Underline instead paints one thin
+focus-color inset above the existing bottom edge; base also recolors that
+edge, while error/read-only retain their own boundary. Both suppress the
+native editor ring. Indicators are absolute overlays, so focus never shifts
+the field's dimensions. Pointer modality hides them without changing focus.
 
 ## Value
 
@@ -83,8 +87,9 @@ composes with the caller's `textInput.ref`; the public root ref remains on the
 structural View. Native self-focus is distinct from descendant events, and
 detach/disable invalidates pending focus requests. The target and native slot
 share the resolved `focusable` value: direct textInput props override the root
-setting, but disabled always wins. Input retains its border-only focus styling;
-it does not subscribe to root modality or mount a custom focus ring.
+setting, but disabled always wins. Focus-visible treatment subscribes to the
+existing scene modality only while focused; it introduces no local tracker.
+Outline's configured ring stays mounted and only changes visibility.
 
 ## Native focus qualification
 

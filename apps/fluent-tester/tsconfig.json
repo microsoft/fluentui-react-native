@@ -6,12 +6,15 @@
     "types": ["@types/jasmine", "@wdio/globals/types", "@wdio/jasmine-framework", "node"],
     "rootDir": "src",
     "composite": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
   },
   "include": ["src"],
   "references": [
     {
       "path": "../../packages/shim/callout/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/desktop-test/tsconfig.json"
     },
     {
       "path": "../../packages/experimental/AppearanceAdditions/tsconfig.json"

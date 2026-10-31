@@ -15,4 +15,4 @@ Fabric library. Remove explicit `FRNCallout` pod declarations and regenerate
 autolinking/Pods after updating.
 
 See the [Callout contract](../../agentic/native-core/src/legacy/callout/SPEC.md)
-and [native-core organization](../../agentic/native-core/README.md).
+and [native-core organization](../../agentic/native-core/references/architecture.md).

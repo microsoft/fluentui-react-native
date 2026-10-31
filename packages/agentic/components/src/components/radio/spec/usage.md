@@ -18,6 +18,12 @@ component does not clear a selected peer or manage directional navigation, so
 the surrounding group must perform those duties. Use `disabled` only for an
 unavailable option, not to represent an unselected one.
 
+To support native selection, handle onAccessibilityAction as well as onPress.
+Compare its actionName with
+resolveAccessibilityAction('select', Platform.OS).name and update the
+group's owned value. Import the resolver from framework-base. Radio declares
+the action; the caller must not synthesize a press.
+
 ## Scene root
 
 Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.

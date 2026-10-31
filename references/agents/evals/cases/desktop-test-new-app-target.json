@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "case_id": "desktop-test-new-app-target",
+  "split": "development",
+  "task_mode": "plan",
+  "prompt": "Plan adding a native macOS and Windows desktop-test target for a new React Native Test App with one standalone WDIO suite. Include configuration and first-run steps.",
+  "expected": {
+    "skills": ["desktop-testing"],
+    "classification": {
+      "implementation_model": "none",
+      "public_compatibility": [],
+      "native_platforms": ["macos", "windows"]
+    },
+    "required_reads": [
+      "packages/agentic/desktop-test/references/configuration.md",
+      "packages/agentic/desktop-test/references/platforms.md"
+    ],
+    "forbidden_actions": ["edit-files"]
+  },
+  "assertions": [
+    {
+      "id": "explicit-helper",
+      "description": "Builds or provisions the verified helper explicitly before app preparation or tests.",
+      "rule_ids": ["R-DRIVER-001"],
+      "source_refs": ["packages/agentic/desktop-test/references/configuration.md"]
+    },
+    {
+      "id": "macos-resource-order",
+      "description": "Bundles before macOS prep when CocoaPods must embed JavaScript resources.",
+      "rule_ids": [],
+      "source_refs": ["packages/agentic/desktop-test/references/platforms.md"]
+    },
+    {
+      "id": "exact-application-identity",
+      "description": "Configures an exact app identity and uses declared workspace scripts rather than guessed commands.",
+      "rule_ids": [],
+      "source_refs": ["packages/agentic/desktop-test/references/configuration.md"]
+    }
+  ]
+}

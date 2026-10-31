@@ -14,7 +14,7 @@
     "required_reads": [
       "references/agents/native/components-and-modules.md",
       "references/agents/native/apple-office.md",
-      "packages/agentic/native-core/README.md"
+      "packages/agentic/native-core/references/architecture.md"
     ],
     "forbidden_actions": ["edit-files"]
   },

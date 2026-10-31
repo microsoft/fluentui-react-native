@@ -1,5 +1,20 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
+## 0.22.15
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+- f550cfb: Import `React` in iOS Swift sources only when the module is available, so hosts can provide React Native headers through an Objective-C bridging header.
+- Updated dependencies [cfa4c66]
+- Updated dependencies [cfa4c66]
+- Updated dependencies [e2092f9]
+- Updated dependencies [e2092f9]
+- Updated dependencies [60121de]
+  - @fluentui-react-native/framework@0.17.9
+  - @fluentui-react-native/framework-base@0.9.0
+
 ## 0.22.14
 
 ### Patch Changes

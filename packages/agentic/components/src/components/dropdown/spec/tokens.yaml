@@ -1,0 +1,69 @@
+schemaVersion: 1
+component: dropdown
+implementation: dropdown.styles.ts
+
+statePrecedence: [disabled, error, focused, pressed, hovered]
+
+bindings:
+  trigger:
+    component: Input
+    notes: >-
+      Input's reviewed outline and underline chrome, metrics, padding, typography, placeholder color, icon color, and
+      style-specific focus indicator apply to the trigger for every variant, size, and state. The trigger counts as
+      focused while it holds focus or the list is presented, and the indicator follows keyboard modality as in Input.
+
+  iconStart:
+    size:
+      small: size160
+      medium: size200
+      large: size240
+    color: Input icon color
+
+  chevron:
+    size:
+      small: size160
+      medium: size200
+      large: size240
+    color:
+      disabled: color.foregroundNeutralDisabled
+      error: color.foregroundNeutralPrimary
+      focused: color.foregroundNeutralPrimary
+      rest: color.foregroundNeutralSecondary
+    open-behavior: up glyph while the list is presented
+
+  listbox:
+    backgroundColor: color.surfaceNeutralNearer
+    borderColor: color.strokeNeutralSubtle
+    borderStyle: solid
+    borderWidth: strokeWidth.thin
+    borderRadius: borderRadius.base400
+    padding: spacing.componentBase100
+    minWidth: trigger width
+    maxHeight: 320 for the option area, which scrolls internally
+    elevation: native popup window shadow
+
+  options:
+    component: ListboxItem
+    gap: 0
+    notes: >-
+      ListboxItem's reviewed bindings apply. Single mode shows the checkmark and multiple mode the checkbox indicator;
+      the default icon and secondary content render only when supplied (LBI-006).
+
+  placement:
+    side: bottom
+    align: start
+    gap: spacing.componentBase100
+
+tokenGaps:
+  - binding: chevron.icon
+    detail: >-
+      The Fluent ChevronDown and ChevronUp assets are unavailable; the package's shared chevron glyphs are used
+      (dropdown-chevron-glyph).
+  - binding: listbox.maxHeight
+    detail: Flex sets no token for the row cap; the option area is capped at 320, about eight rows.
+  - binding: listbox.elevation
+    detail: >-
+      shadow.low is not drawn; the native popup window shadow follows the surface silhouette
+      (dropdown-native-elevation).
+  - binding: motion
+    detail: Flex motion is pending; presentation, chevron, and trigger changes are instant (dropdown-motion).

@@ -4,7 +4,7 @@
     "rootDir": "..",
     "noEmit": true,
     "composite": true,
-    "tsBuildInfoFile": "../.cache/tsconfig.tsbuildinfo"
+    "tsBuildInfoFile": "../node_modules/.cache/tsconfig.check.tsbuildinfo"
   },
   "include": ["../index.js", "../src"]
 }

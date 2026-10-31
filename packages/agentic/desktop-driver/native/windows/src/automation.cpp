@@ -180,6 +180,17 @@ json::Value SerializeSupported(const SupportedBool& state) {
   return value;
 }
 
+json::Value SerializeSupported(const SupportedString& state) {
+  json::Value value = json::Value::Object();
+  value.Set("supported", json::Value::Bool(state.supported));
+  if (state.supported) {
+    value.Set("value", json::Value::String(state.value));
+  } else {
+    value.Set("reason", json::Value::String(state.reason));
+  }
+  return value;
+}
+
 json::Value SerializeChecked(const SupportedChecked& state) {
   json::Value value = json::Value::Object();
   if (!state.supported) {
@@ -272,6 +283,8 @@ json::Value SerializeSnapshot(const ElementSnapshot& snapshot) {
   value.Set("enabled", SerializeSupported(snapshot.enabled));
   value.Set("expanded", SerializeSupported(snapshot.expanded));
   value.Set("focused", SerializeSupported(snapshot.focused));
+  value.Set("helpText", SerializeSupported(snapshot.helpText));
+  value.Set("required", SerializeSupported(snapshot.required));
   if (!snapshot.name.empty()) {
     value.Set("name", json::Value::String(snapshot.name));
   }
@@ -350,9 +363,11 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_RuntimeIdPropertyId,
       UIA_AutomationIdPropertyId,
       UIA_NamePropertyId,
+      UIA_HelpTextPropertyId,
       UIA_ControlTypePropertyId,
       UIA_BoundingRectanglePropertyId,
       UIA_IsEnabledPropertyId,
+      UIA_IsRequiredForFormPropertyId,
       UIA_HasKeyboardFocusPropertyId,
       UIA_IsKeyboardFocusablePropertyId,
       UIA_IsOffscreenPropertyId,
@@ -496,6 +511,10 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
   if (SUCCEEDED(element->GetCachedPropertyValue(UIA_NamePropertyId, variant.put()))) {
     snapshot.name = VariantString(variant.get());
   }
+  if (SUCCEEDED(element->GetCachedPropertyValueEx(UIA_HelpTextPropertyId, TRUE, variant.put())) &&
+      !IsNotSupported(variant.get()) && variant.type() == VT_BSTR) {
+    snapshot.helpText = SupportedString{true, VariantString(variant.get()), {}};
+  }
 
   CONTROLTYPEID controlType = UIA_CustomControlTypeId;
   if (FAILED(element->get_CachedControlType(&controlType))) {
@@ -523,6 +542,7 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
 
   snapshot.enabled = readBool(UIA_IsEnabledPropertyId, "The provider does not report an enabled state.");
   snapshot.focused = readBool(UIA_HasKeyboardFocusPropertyId, "The provider does not report keyboard focus.");
+  snapshot.required = readBool(UIA_IsRequiredForFormPropertyId, "The provider does not report required-form state.");
   const SupportedBool focusable =
       readBool(UIA_IsKeyboardFocusablePropertyId, "The provider does not report keyboard focusability.");
   snapshot.keyboardFocusable = focusable.supported && focusable.value;
@@ -655,9 +675,13 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   winrt::com_ptr<IUIAutomationElement> cachedRoot;
   HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
                                            cachedRoot.put());
-  // A descendant can disappear while its subtree is cached, for example when an owned popup island closes. Retry
-  // while the root itself remains available; only an unavailable root is a stale element.
-  for (int attempt = 0; result == UIA_E_ELEMENTNOTAVAILABLE && attempt < 5; attempt += 1) {
+  // A descendant can disappear while its subtree is cached, for example when an owned popup island closes; a closing
+  // island's provider can also report a timeout or unspecified failure. Retry while the root itself remains
+  // available; only an unavailable root is a stale element.
+  const auto isTransient = [](HRESULT value) {
+    return value == UIA_E_ELEMENTNOTAVAILABLE || value == UIA_E_TIMEOUT || value == E_FAIL;
+  };
+  for (int attempt = 0; isTransient(result) && attempt < 5; attempt += 1) {
     winrt::com_ptr<IUIAutomationElement> probe;
     if (FAILED(root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, controlViewOnly).get(), probe.put())) ||
         !probe) {

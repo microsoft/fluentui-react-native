@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { NativeDesktopApplicationDescriptor } from '@fluentui-react-native/desktop-driver';
+import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import type {
   DesktopCommand,
   DesktopCommandPlan,
@@ -73,7 +74,7 @@ export type StoryPackageSpec = string | readonly [packageName: string, settings:
 
 export type DesktopStorybookConfigOptions = StorySettings & {
   /**
-   * Path to the consuming app. A file URL is convenient from storybook.config.ts.
+   * Path to the consuming app. A file URL is convenient from desktop.config.mts.
    * @default process.cwd()
    */
   projectRoot?: string | URL;
@@ -142,6 +143,7 @@ export class DesktopStorybookConfig {
   readonly projectRoot: string;
   readonly storybookConfigDir: string;
   readonly appConfigPath: string;
+  readonly desktop?: ResolvedDesktopConfig;
 
   private readonly config: DesktopStorybookConfigOptions;
   private readonly requireFromProject: NodeJS.Require;
@@ -150,7 +152,8 @@ export class DesktopStorybookConfig {
   private packageManifestCache?: Readonly<PackageManifest>;
   private appManifestCache?: Readonly<AppManifest>;
 
-  constructor(userConfig: DesktopStorybookConfigOptions = {}) {
+  constructor(userConfig: DesktopStorybookConfigOptions = {}, desktop?: ResolvedDesktopConfig) {
+    this.desktop = desktop;
     this.projectRoot = resolveProjectRoot(userConfig.projectRoot);
     this.storybookConfigDir = resolveFromProject(this.projectRoot, userConfig.storybookConfigDir ?? 'src');
     this.appConfigPath = resolveFromProject(this.projectRoot, userConfig.appConfigPath ?? 'app.json');
@@ -259,12 +262,19 @@ export class DesktopStorybookConfig {
 
   getPlatformOptions(platformSetting: Platforms | string | undefined = this.platform): Readonly<DesktopPlatformOptions> {
     const platform = requirePlatform(platformSetting);
-    const configured = this.config.platformOptions?.[platform] ?? {};
+    const target = this.getDesktopTarget(platform);
+    if (this.desktop && !target) throw new Error(`No canonical desktop target is configured for ${platform}.`);
+    const legacy = this.config.platformOptions?.[platform] ?? {};
+    for (const stage of ['prep', 'bundle', 'build', 'run'] as const) {
+      if (target?.commands?.[stage] !== undefined && legacy[stage] !== undefined)
+        throw new Error(`Ambiguous ${platform}.${stage}: configure it on the desktop target, not also in the Storybook integration.`);
+    }
+    const configured = { ...legacy, ...target?.commands };
     const nativeProject = {
       ...defaultNativeProjectOptions(this, platform),
       ...configured.nativeProject,
     };
-    const configuredNativeDriver = configured.nativeDriver;
+    const configuredNativeDriver = configured.nativeDriver === false ? false : { ...target?.nativeDriver, ...configured.nativeDriver };
 
     return Object.freeze({
       nativeDriver:
@@ -278,8 +288,13 @@ export class DesktopStorybookConfig {
               installRoot: resolveOptionalProjectPath(this.projectRoot, configuredNativeDriver?.installRoot),
               application: Object.freeze({
                 ...defaultNativeApplication(this, platform),
+                ...(target?.host.windowTitle ? { windowTitle: target.host.windowTitle } : {}),
+                ...target?.host.application,
                 ...configuredNativeDriver?.application,
-                executablePath: resolveOptionalProjectPath(this.projectRoot, configuredNativeDriver?.application?.executablePath),
+                executablePath: resolveOptionalProjectPath(
+                  this.projectRoot,
+                  configuredNativeDriver?.application?.executablePath ?? target?.host.application?.executablePath,
+                ),
               }),
             }),
       nativeProject: Object.freeze(nativeProject),
@@ -290,6 +305,12 @@ export class DesktopStorybookConfig {
       build: configured.build !== undefined ? configured.build : defaultNativePlan(platform, 'build', nativeProject),
       smoke: configured.smoke !== undefined ? configured.smoke : defaultSmokeOptions(this, platform),
     });
+  }
+
+  getDesktopTarget(platform: Platforms): ResolvedDesktopTarget | undefined {
+    const targets = Object.values(this.desktop?.targets ?? {}).filter((target) => target.endpoint === platform);
+    if (targets.length > 1) throw new Error(`Storybook requires one unambiguous target per endpoint; ${platform} has ${targets.length}.`);
+    return targets[0];
   }
 
   getCommandPlan(

@@ -30,6 +30,7 @@ export type NativeDesktopHostOptions = {
   disabledInputFeatures?: readonly NativeDisabledInputFeature[];
   endpoint: DesktopEndpoint;
   onStderr?: (message: string) => void;
+  onFailure?: (error: Error) => void;
 };
 
 export type NativeDisabledInputFeature = 'keyboard' | 'physicalClick' | 'wheel';
@@ -43,6 +44,8 @@ export class NativeDesktopHost implements DesktopHost {
   private readonly artifact: NativeDriverArtifact;
   private readonly disabledInputFeatures: ReadonlySet<NativeDisabledInputFeature>;
   private readonly onStderr?: (message: string) => void;
+  private readonly onFailure?: (error: Error) => void;
+  private disposing = false;
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
   private readonly depressedButtons = new Set<number>();
   private readonly depressedKeys = new Set<string>();
@@ -51,7 +54,7 @@ export class NativeDesktopHost implements DesktopHost {
   private failure?: Error;
   private processPromise?: Promise<NativeHostProcess>;
 
-  constructor({ application, artifact, disabledInputFeatures, endpoint, onStderr }: NativeDesktopHostOptions) {
+  constructor({ application, artifact, disabledInputFeatures, endpoint, onStderr, onFailure }: NativeDesktopHostOptions) {
     if (!artifact.endpoints.includes(endpoint)) {
       throw new TypeError(`Native helper ${artifact.provider} does not support endpoint "${endpoint}".`);
     }
@@ -60,6 +63,7 @@ export class NativeDesktopHost implements DesktopHost {
     this.disabledInputFeatures = resolveDisabledInputFeatures(disabledInputFeatures);
     this.endpoint = endpoint;
     this.onStderr = onStderr;
+    this.onFailure = onFailure;
   }
 
   async probe(signal?: AbortSignal): Promise<DesktopHostInfo> {
@@ -222,6 +226,7 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   async dispose(signal?: AbortSignal): Promise<void> {
+    this.disposing = true;
     const process = await this.processPromise;
     await process?.dispose(signal);
   }
@@ -230,6 +235,7 @@ export class NativeDesktopHost implements DesktopHost {
     return {
       application: this.application,
       endpoint: target.endpoint,
+      launchTimeoutMs: target.launchTimeoutMs,
       renderer: target.renderer,
       storyRootTestId: target.storyRootTestId,
       targetId: target.id,
@@ -272,6 +278,7 @@ export class NativeDesktopHost implements DesktopHost {
       process.on('exit', (error) => {
         this.failure = error;
         this.processPromise = undefined;
+        if (!this.disposing) this.onFailure?.(error);
       });
       return process;
     }));

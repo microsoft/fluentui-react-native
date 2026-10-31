@@ -5,6 +5,10 @@ their corresponding caller handlers are forwarded. Disabled state prevents
 activation and focus. Pressing reports through `onPress`; Radio never changes
 its own selected value.
 
+Native Select is a separate accessibility transport. The caller handles
+onAccessibilityAction to update its owned value; the component only declares
+the action and forwards the original event, without manufacturing onPress.
+
 On Windows and macOS, native Pressable behavior activates a focused radio.
 
 Hover and press states change the token-derived colors.
@@ -12,7 +16,7 @@ Hover and press states change the token-derived colors.
 There is no component-owned timed
 animation.
 
-The focus target follows the [shared focus visual policy](../../AGENTS.md#focus-visual-policy).
+The focus target follows the [shared focus visual policy](../../../../references/higher-order-components.md#focus-visual-policy).
 Windows/macOS default to the native ring, with no custom subtree. Win32 defaults
 to a private `FocusRing` slot. Its configured ring Views remain mounted on the
 custom path, but are visible only while focused with keyboard modality from

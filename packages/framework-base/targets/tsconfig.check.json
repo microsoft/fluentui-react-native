@@ -6,7 +6,7 @@
     "allowJs": true,
     "checkJs": true,
     "composite": true,
-    "tsBuildInfoFile": "../.cache/tsconfig.check.tsbuildinfo"
+    "tsBuildInfoFile": "../node_modules/.cache/tsconfig.check.tsbuildinfo"
   },
   "include": ["../src", "../jsx-runtime.js"],
   "references": [

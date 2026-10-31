@@ -29,6 +29,27 @@ export async function focusByTab(browser: WdioStoryContext['browser'], entryId: 
   await expectNativeState(browser, targetId, 'focused', true);
 }
 
+export async function clickPhysical(browser: WdioStoryContext['browser'], testId: string): Promise<void> {
+  const element = await browser.$(`~${testId}`);
+  const rect = await browser.getElementRect(await element.elementId);
+  try {
+    await browser.performActions([
+      {
+        type: 'pointer',
+        id: 'physical-click',
+        parameters: { pointerType: 'mouse' },
+        actions: [
+          { type: 'pointerMove', origin: 'viewport', x: Math.round(rect.x + rect.width / 2), y: Math.round(rect.y + rect.height / 2) },
+          { type: 'pointerDown', button: 0 },
+          { type: 'pointerUp', button: 0 },
+        ],
+      },
+    ]);
+  } finally {
+    await browser.releaseActions();
+  }
+}
+
 export async function expectNativeState(
   browser: WdioStoryContext['browser'],
   testId: string,

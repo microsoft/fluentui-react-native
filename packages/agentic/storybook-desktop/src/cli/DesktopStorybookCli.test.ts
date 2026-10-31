@@ -3,9 +3,11 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
+import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 
 import { STORYBOOK_SMOKE_MODE } from '../config/commands';
-import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
+import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
@@ -105,6 +107,7 @@ class RecordingRunner implements DesktopCommandRunner {
   readonly background: PreparedDesktopCommand[] = [];
   stopped = 0;
   failCommand?: string;
+  exitService?: string;
 
   async run(command: PreparedDesktopCommand): Promise<void> {
     this.foreground.push(command);
@@ -116,7 +119,7 @@ class RecordingRunner implements DesktopCommandRunner {
   start(command: PreparedDesktopCommand): RunningDesktopCommand {
     this.background.push(command);
     return {
-      completed: new Promise<number>(() => {}),
+      completed: command.context?.service === this.exitService && this.exitService ? Promise.resolve(7) : new Promise<number>(() => {}),
       stop: async () => {
         this.stopped += 1;
       },
@@ -321,14 +324,19 @@ describe('DesktopStorybookCli', () => {
       output: { write: () => true },
       runner: new RecordingRunner(),
     };
+    options.runner.exitService = 'storybook-channel';
     const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json');
 
     try {
-      await new DesktopStorybookCli(makeConfig(), options).driver('macos');
+      await expect(new DesktopStorybookCli(makeConfig(), options).driver('macos')).rejects.toThrow('exited unexpectedly');
       const fabricManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      await new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos');
+      await expect(new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos')).rejects.toThrow(
+        'exited unexpectedly',
+      );
       const paperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      await new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos');
+      await expect(new DesktopStorybookCli(makeConfig(), { ...options, paper: true }).driver('macos')).rejects.toThrow(
+        'exited unexpectedly',
+      );
       const repeatedPaperManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 
       expect(fabricManifest.renderer).toBe('fabric');
@@ -685,6 +693,8 @@ describe('DesktopStorybookCli', () => {
       driverUrl: `http://127.0.0.1:${cli.instance.driverPort}`,
       manifest: await createEmptyStoryManifest(cli.config, 'macos'),
       platform: 'macos',
+      report: undefined,
+      signal: expect.any(AbortSignal),
       targetId: 'agenticstorybook-macos',
     });
     expect(fetch.mock.calls.map(([input]) => input.toString())).toContain(
@@ -754,6 +764,56 @@ describe('createDesktopStorybookCommand', () => {
       renderer: 'paper',
     });
     expect(runner.stopped).toBe(2);
+  });
+
+  test.each([[[]], [['--paper']]])('requests the canonical target registered by the driver manifest (%j)', async (flags) => {
+    const runner = new RecordingRunner();
+    const runSmokeTests = jest.fn(async ({ targetId }: { targetId: string }) => ({
+      endpoint: 'macos' as const,
+      finishedAt: '2026-10-02T08:00:01.000Z',
+      manifest: { platform: 'macos-digest', portable: 'portable-digest' },
+      platformName: 'macos' as const,
+      runId: 'canonical-smoke',
+      schemaVersion: 1 as const,
+      startedAt: '2026-10-02T08:00:00.000Z',
+      status: 'passed' as const,
+      targetId,
+      tests: [],
+    }));
+    const target = {
+      configPath: path.join(storybookRoot, 'desktop.config.mts'),
+      endpoint: 'macos',
+      host: { kind: 'react-native-test-app', renderer: 'fabric' },
+      id: 'macos-configured',
+      instanceId: 'configured',
+      projectRoot: storybookRoot,
+    } as unknown as ResolvedDesktopTarget;
+    const config = new DesktopStorybookConfig(
+      {
+        projectRoot: storybookRoot,
+        storyPackages: [],
+        platformOptions: { macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' } } } },
+      },
+      { targets: { macos: target } } as unknown as ResolvedDesktopConfig,
+    );
+    const program = createDesktopStorybookCommand({
+      ...nativeDriverTestOptions,
+      config,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response(JSON.stringify({ entries: { story: { id: 'first--story', type: 'story' } } })),
+      isPortAvailable: async () => true,
+      output: { write: () => true },
+      runner,
+      runSmokeTests,
+    });
+
+    await program.parseAsync(['node', 'storybook', 'smoke', '--macos', ...flags, '--mode', 'stories-and-tests']);
+
+    const manifest = JSON.parse(
+      fs.readFileSync(path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'), 'utf8'),
+    );
+    expect(manifest.targetId).toBe(selectDesktopRenderer(target, flags.length ? 'paper' : 'fabric').id);
+    expect(runSmokeTests).toHaveBeenCalledWith(expect.objectContaining({ platform: 'macos', targetId: manifest.targetId }));
   });
 
   test.each(['windows', 'win32'])('rejects --paper with explicit --%s', async (platform) => {
@@ -857,6 +917,7 @@ describe('createDesktopStorybookCommand', () => {
 
   test('starts the channel and embedded driver from one server command', async () => {
     const runner = new RecordingRunner();
+    runner.exitService = 'storybook-channel';
     const program = createDesktopStorybookCommand({
       ...nativeDriverTestOptions,
       config: makeConfig(),
@@ -867,9 +928,11 @@ describe('createDesktopStorybookCommand', () => {
     const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.win32.json');
 
     try {
-      await program.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']);
+      await expect(program.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102'])).rejects.toThrow(
+        'exited unexpectedly',
+      );
 
-      expect(runner.foreground[0]).toMatchObject({
+      expect(runner.background[1]).toMatchObject({
         args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
         env: {
           [FURN_STORYBOOK_PLATFORM]: 'win32',
@@ -892,6 +955,7 @@ describe('createDesktopStorybookCommand', () => {
       });
 
       const secondRunner = new RecordingRunner();
+      secondRunner.exitService = 'storybook-channel';
       const secondProgram = createDesktopStorybookCommand({
         ...nativeDriverTestOptions,
         config: makeConfig(),
@@ -899,7 +963,9 @@ describe('createDesktopStorybookCommand', () => {
         isPortAvailable: async () => true,
         runner: secondRunner,
       });
-      await secondProgram.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']);
+      await expect(
+        secondProgram.parseAsync(['node', 'test', 'driver', '--win32', '--host', 'localhost', '--port', '7102']),
+      ).rejects.toThrow('exited unexpectedly');
       const secondManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as Record<string, unknown>;
       expect(secondManifest.bridgeNonce).toBe(firstManifest.bridgeNonce);
     } finally {

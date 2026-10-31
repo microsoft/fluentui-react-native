@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.7
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+
 ## 0.6.6
 
 ### Patch Changes

@@ -28,7 +28,9 @@ export function renderInput_unstable(state: InputState) {
         </IconTextStack>
         {trailingIcons}
         {state.underline && <state.underline />}
+        {state.underlineFocus && <state.underlineFocus />}
       </state.contents>
+      {state.FocusRing && <state.FocusRing />}
     </state.root>
   );
 }

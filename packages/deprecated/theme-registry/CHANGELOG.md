@@ -1,5 +1,12 @@
 # Change Log - @uifabricshared/theme-registry
 
+## 0.13.9
+
+### Patch Changes
+
+- cfa4c66: Write TypeScript build information to `node_modules/.cache` instead of `.cache`, so
+  incremental build state is no longer included in published packages.
+
 ## 0.13.8
 
 ### Patch Changes

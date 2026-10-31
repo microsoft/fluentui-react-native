@@ -1,7 +1,6 @@
 import { spawn } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import {
@@ -17,6 +16,7 @@ import {
 } from './filesystem.js';
 import { nativeDriverWireProtocol } from './constants.js';
 import { NativeDriverError } from './NativeDriverError.js';
+import { nativeDriverPackageRoot } from './packageRoot.cjs';
 import type {
   NativeDriverArchitecture,
   NativeDriverArtifact,
@@ -121,8 +121,10 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
       }
     }
     throwIfAborted(options.signal);
-    const stagingRoot = path.join(context.cacheRoot, 'v1', 'staging', `${buildFingerprint}-${process.pid}-${randomUUID()}`);
-    fs.mkdirSync(stagingRoot, { recursive: true });
+    const stagingParent = path.join(context.cacheRoot, 'v1', 'staging');
+    fs.mkdirSync(stagingParent, { recursive: true });
+    // MSBuild's tracking files still use MAX_PATH even on long-path-enabled Windows hosts.
+    const stagingRoot = fs.mkdtempSync(path.join(stagingParent, `${shortKey(buildFingerprint)}-`));
     try {
       const buildId = buildFingerprint;
       const built = await build(buildId, stagingRoot);
@@ -317,7 +319,7 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
   const architecture = options.architecture ?? defaultArchitecture(provider);
   validateArchitecture(provider, architecture);
   const configuration = options.configuration ?? resolveConfiguration();
-  const packageRoot = resolvePackageRoot();
+  const packageRoot = nativeDriverPackageRoot;
   const nativeRoot = path.join(packageRoot, 'native');
   const providerRoot = path.join(nativeRoot, provider);
   if (!fs.existsSync(providerRoot)) {
@@ -703,41 +705,4 @@ function isArtifactRoot(compatibilityRoot: string, candidate: string): boolean {
 
 function shortKey(value: string): string {
   return value.slice(0, 20);
-}
-
-function resolvePackageRoot(): string {
-  const cliRoot = findPackageRoot(process.argv[1] ? path.dirname(path.resolve(process.argv[1])) : undefined);
-  if (cliRoot) {
-    return cliRoot;
-  }
-  try {
-    const requireFromCwd = createRequire(path.join(process.cwd(), 'package.json'));
-    return path.dirname(requireFromCwd.resolve('@fluentui-react-native/desktop-driver/package.json'));
-  } catch (error) {
-    throw new NativeDriverError(
-      'build-source-missing',
-      `Could not resolve @fluentui-react-native/desktop-driver from "${process.cwd()}": ${
-        error instanceof Error ? error.message : String(error)
-      }`,
-    );
-  }
-}
-
-function findPackageRoot(start?: string): string | undefined {
-  let current = start;
-  while (current) {
-    const manifestPath = path.join(current, 'package.json');
-    if (fs.existsSync(manifestPath)) {
-      const manifest = readJsonFile<{ name?: string }>(manifestPath);
-      if (manifest.name === '@fluentui-react-native/desktop-driver') {
-        return current;
-      }
-    }
-    const parent = path.dirname(current);
-    if (parent === current) {
-      return undefined;
-    }
-    current = parent;
-  }
-  return undefined;
 }

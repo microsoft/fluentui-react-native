@@ -20,10 +20,11 @@ inline bool Eligible(const rn::ComponentView &view) noexcept {
   return eligible && eligible.Tag() == view.Tag();
 }
 
-// A window is active when it, or the root owner of an owned popup such as a Callout, is the foreground window.
+// A window is active when the foreground window shares its root owner: the window itself, its application window,
+// or another popup that window owns, such as an owning or nested Callout.
 inline bool WindowActive(HWND hwnd) noexcept {
   const auto foreground = ::GetForegroundWindow();
-  return foreground && hwnd && (::GetAncestor(hwnd, GA_ROOT) == foreground || ::GetAncestor(hwnd, GA_ROOTOWNER) == foreground);
+  return foreground && hwnd && ::GetAncestor(hwnd, GA_ROOTOWNER) == ::GetAncestor(foreground, GA_ROOTOWNER);
 }
 
 inline std::string FocusWithin(

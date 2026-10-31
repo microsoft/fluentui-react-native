@@ -18,6 +18,54 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Avatar', () => {
+  it.each([
+    [16, '  lmn  ', 'L'],
+    [40, '  lmn  ', 'LM'],
+    [16, 123, '1'],
+    [40, 123, '12'],
+  ] as const)('AVT-001 normalizes initials %s / %s to %s', async (size, children, expected) => {
+    const component = await renderAvatar({ accessibilityLabel: 'Identity', initials: { children }, size });
+
+    expect(component.getByText(expected, { includeHiddenElements: true })).toBeOnTheScreen();
+  });
+
+  it('AVT-001/AVT-002 selects initials over a supplied icon and warns about the accepted ambiguous input', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation();
+    try {
+      const component = await renderAvatar({
+        accessibilityLabel: 'Identity',
+        icon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'unused-icon' },
+        initials: 'lm',
+      });
+
+      expect(component.getByText('LM', { includeHiddenElements: true })).toBeOnTheScreen();
+      expect(component.queryByTestId('unused-icon', { includeHiddenElements: true })).toBeNull();
+      expect(warn).toHaveBeenCalledWith('Avatar: provide only one content mode at a time.');
+    } finally {
+      warn.mockRestore();
+    }
+  });
+
+  it.each([
+    { image: { source: { uri: 'avatar.png' }, testID: 'identity-content' } },
+    { icon: { fontSource: { codepoint: 0x2605, fontFamily: 'Arial' }, testID: 'identity-content' } },
+    { initials: { children: 'LM', testID: 'identity-content' } },
+  ])('AVT-004 keeps the selected content decorative and honors an explicit root opt-out: %j', async (content) => {
+    const component = await renderAvatar({ ...content, accessibilityLabel: 'Identity', accessible: false, testID: 'identity' });
+
+    expect(component.queryByRole('image')).toBeNull();
+    expect(component.getByTestId('identity', { includeHiddenElements: true }).props).toMatchObject({
+      accessible: false,
+      accessibilityElementsHidden: true,
+      importantForAccessibility: 'no-hide-descendants',
+    });
+    expect(component.getByTestId('identity-content', { includeHiddenElements: true }).props).toMatchObject({
+      accessible: false,
+      accessibilityElementsHidden: true,
+      importantForAccessibility: 'no-hide-descendants',
+    });
+  });
+
   it('renders the default icon fallback as a decorative image avatar', async () => {
     const component = await renderAvatar({});
 

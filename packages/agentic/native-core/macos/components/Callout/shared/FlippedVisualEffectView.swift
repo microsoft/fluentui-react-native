@@ -8,3 +8,10 @@ internal class FlippedVisualEffectView: NSVisualEffectView {
 		return true
 	}
 }
+
+/// Transparent flipped host for Callout content, drawn above the optional legacy backdrop.
+internal class FlippedContentView: NSView {
+	override var isFlipped: Bool {
+		return true
+	}
+}

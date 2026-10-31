@@ -5,7 +5,7 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import { isPhasedComponent, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Callout } from './callout/Callout';
-import type { CalloutHandle, CalloutPresentation } from './callout/Callout.types';
+import type { CalloutDismissReason, CalloutHandle, CalloutPresentation } from './callout/Callout.types';
 import { FocusZone } from './focus-zone/FocusZone';
 import type { FocusZoneCommands, FocusZoneHandle } from './focus-zone/FocusZone.types';
 import { useNativeViewTarget, resolveTarget } from './nativeTarget';
@@ -128,6 +128,23 @@ describe('modern native facades', () => {
     await component.unmount();
   });
 
+  it('forwards the Tab exit mode to the native presentation', async () => {
+    function Fixture({ tabNavigation }: { tabNavigation?: 'dismiss' | 'continue' }) {
+      const anchor = useNativeViewTarget();
+      return (
+        <>
+          <View ref={anchor.ref} />
+          <Callout open tabNavigation={tabNavigation} content={{ testID: 'content' }} anchor={{ kind: 'view', target: anchor.target }} />
+        </>
+      );
+    }
+    const component = await render(<Fixture />);
+    expect(calloutRoot(component).props.tabNavigation).toBeUndefined();
+    await component.rerender(<Fixture tabNavigation="continue" />);
+    expect(calloutRoot(component).props.tabNavigation).toBe('continue');
+    await component.unmount();
+  });
+
   it('settles a close result before invalidating the presentation and forwards local point geometry', async () => {
     const ref = React.createRef<CalloutHandle>();
     const dispatch = jest.spyOn(CalloutCommands, 'close').mockImplementation(() => undefined);
@@ -160,6 +177,88 @@ describe('modern native facades', () => {
     await fireEvent(root, 'operationResult', { nativeEvent: { generation, requestId, status: 'confirmed' } });
     await fireEvent(root, 'closed', { nativeEvent: { generation, reason: 'programmatic' } });
     expect(await result).toEqual({ status: 'confirmed' });
+    await component.unmount();
+  });
+
+  it.each(['first', 'last', 'target'] as const)('confirms Callout %s focus only from the native result', async (strategy) => {
+    const ref = React.createRef<CalloutHandle>();
+    const dispatch = jest.spyOn(CalloutCommands, 'requestFocus').mockImplementation(() => undefined);
+    let child: ReturnType<typeof useNativeViewTarget>;
+    function Fixture() {
+      const anchor = useNativeViewTarget();
+      child = useNativeViewTarget();
+      return (
+        <>
+          <View ref={anchor.ref} />
+          <Callout ref={ref} open anchor={{ kind: 'view', target: anchor.target }} content={{ testID: 'content' }}>
+            <View ref={child.ref} focusable />
+          </Callout>
+        </>
+      );
+    }
+    const component = await render(<Fixture />);
+    const root = calloutRoot(component);
+    await fireEvent(root, 'ready', { nativeEvent: { generation: root.props.commandGeneration } });
+    const presentation = ref.current.getPresentation();
+    let result: ReturnType<CalloutHandle['requestFocus']>;
+    await act(async () => {
+      result = ref.current.requestFocus(presentation, strategy === 'target' ? child.target : strategy);
+    });
+    const [, generation, requestId, tag, dispatchedStrategy] = dispatch.mock.calls[0];
+    expect(tag).toBe(strategy === 'target' ? 42 : 0);
+    expect(dispatchedStrategy).toBe(strategy);
+    await fireEvent(root, 'operationResult', { nativeEvent: { generation, requestId, status: 'not-mounted' } });
+    expect(await result).toEqual({ status: 'not-mounted' });
+    await act(async () => {
+      result = ref.current.requestFocus(presentation, strategy === 'target' ? child.target : strategy);
+    });
+    const nextRequest = dispatch.mock.calls[1][2];
+    await fireEvent(root, 'operationResult', { nativeEvent: { generation, requestId: nextRequest, status: 'confirmed' } });
+    expect(await result).toEqual({ status: 'confirmed' });
+    await component.unmount();
+  });
+
+  it.each<CalloutDismissReason>([
+    'escape',
+    'outside-pointer',
+    'application-deactivated',
+    'tab-forward',
+    'tab-backward',
+    'native-light-dismiss',
+  ])('forwards %s once and ignores duplicate or late readiness for the closed presentation', async (reason) => {
+    const ref = React.createRef<CalloutHandle>();
+    const dismissed = jest.fn();
+    const ready = jest.fn();
+    function Fixture() {
+      const anchor = useNativeViewTarget();
+      return (
+        <>
+          <View ref={anchor.ref} />
+          <Callout
+            ref={ref}
+            open
+            anchor={{ kind: 'view', target: anchor.target }}
+            content={{ testID: 'content' }}
+            onReady={ready}
+            onDismissed={dismissed}
+          />
+        </>
+      );
+    }
+    const component = await render(<Fixture />);
+    const root = calloutRoot(component);
+    const onClosed = root.props.onClosed;
+    const onReady = root.props.onReady;
+    const generation = root.props.commandGeneration;
+    await act(async () => onClosed({ nativeEvent: { generation, reason } }));
+    await act(async () => {
+      onClosed({ nativeEvent: { generation, reason } });
+      onReady({ nativeEvent: { generation } });
+    });
+    expect(dismissed).toHaveBeenCalledTimes(1);
+    expect(dismissed).toHaveBeenCalledWith(expect.objectContaining({ reason }));
+    expect(ready).not.toHaveBeenCalled();
+    expect(ref.current.getPresentation()).toBeNull();
     await component.unmount();
   });
 

@@ -2,9 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
+import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
+import { loadDesktopConfig, validateDesktopConfig } from '@fluentui-react-native/desktop-test/config';
+import { getStorybookIntegration } from '../config/integration.js';
 
 const defaultConfigNames = [
+  'desktop.config.mts',
+  'desktop.config.ts',
+  'desktop.config.mjs',
+  'desktop.config.js',
+  'desktop.config.cjs',
   'storybook.config.ts',
   'storybook.config.mts',
   'storybook.config.js',
@@ -16,10 +23,35 @@ export async function loadDesktopStorybookConfig(configPath?: string, cwd = proc
   const resolvedPath = configPath ? resolveConfigPath(configPath, cwd) : findConfigPath(cwd);
   const loadedModule = (await import(pathToFileURL(resolvedPath).href)) as Record<string, unknown>;
   const config = loadedModule.default ?? loadedModule.config;
-  if (!(config instanceof DesktopStorybookConfig)) {
-    throw new TypeError(`Desktop Storybook config at ${resolvedPath} must default-export the result of makeDesktopStorybookConfig().`);
+  if (config && typeof config === 'object' && 'schemaVersion' in config) {
+    validateDesktopConfig(config);
+    const resolved = await loadDesktopConfig(resolvedPath);
+    return getStorybookIntegration(config).configure(resolved.projectRoot, resolved);
+  }
+  if (!isLegacyConfig(config)) {
+    throw new TypeError(
+      `Desktop Storybook config at ${resolvedPath} must export a desktop config with the Storybook integration or makeDesktopStorybookConfig().`,
+    );
   }
   return config;
+}
+
+function isLegacyConfig(config: unknown): config is DesktopStorybookConfig {
+  return (
+    !!config &&
+    typeof config === 'object' &&
+    'projectRoot' in config &&
+    typeof config.projectRoot === 'string' &&
+    [
+      'getStorybookConfig',
+      'getPlatformOptions',
+      'getStoryPackages',
+      'getCommandPlan',
+      'getSmokeOptions',
+      'getNativeDriverOptions',
+      'resolvePackage',
+    ].every((key) => key in config && typeof Reflect.get(config, key) === 'function')
+  );
 }
 
 function resolveConfigPath(configPath: string, cwd: string): string {

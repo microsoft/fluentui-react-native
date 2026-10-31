@@ -1,7 +1,13 @@
 import type { ButtonProps, ButtonState } from './button.types';
-import { useAccessibilityLabelWarning, useFocusablePressable, useSlot, useOptionalSlot } from '@fluentui-react-native/framework-base';
+import {
+  resolveAccessibilityAction,
+  useAccessibilityLabelWarning,
+  useFocusablePressable,
+  useSlot,
+  useOptionalSlot,
+} from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
@@ -35,6 +41,13 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const hasIcon = iconProp !== undefined && iconProp !== null;
   const hasSelectedIcon = selectedIconProp !== undefined && selectedIconProp !== null;
   const iconOnly = !hasContent && (hasIcon || hasSelectedIcon);
+  const contentChildren = contentProp && typeof contentProp === 'object' && 'children' in contentProp ? contentProp.children : contentProp;
+  const contentLabel = typeof contentChildren === 'string' || typeof contentChildren === 'number' ? String(contentChildren) : undefined;
+  const hasExplicitName =
+    rest.accessibilityLabel !== undefined ||
+    rest['aria-label'] !== undefined ||
+    rest.accessibilityLabelledBy !== undefined ||
+    rest['aria-labelledby'] !== undefined;
 
   // A button renders selection but never changes it: a press is an action, so the caller owns the selected value.
   const isToggleButton = selected !== undefined;
@@ -50,6 +63,11 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
   const themeState = useThemeState();
   const nativeProps: PressableProps = {
     ...rest,
+    ...(!hasExplicitName && { accessibilityLabel: contentLabel }),
+    accessibilityActions: isToggleButton
+      ? resolveAccessibilityAction('toggle', Platform.OS, rest.accessibilityActions).accessibilityActions
+      : rest.accessibilityActions,
+    'aria-checked': isToggleButton ? selected : rest['aria-checked'],
     role: 'button',
     accessibilityState: {
       ...accessibilityState,

@@ -162,11 +162,11 @@
     },
     {
       "id": "BTN-004",
-      "evidence": ["useButton.ts", "useButtonStyles.ts", "button.test.tsx"]
+      "evidence": ["useButton.ts", "useButtonStyles.ts", "button.test.tsx", "button.stories.tsx"]
     },
     {
       "id": "BTN-005",
-      "evidence": ["useButton.ts", "renderButton.tsx", "button.test.tsx"]
+      "evidence": ["useButton.ts", "renderButton.tsx", "button.test.tsx", "button.stories.tsx"]
     },
     {
       "id": "BTN-006",

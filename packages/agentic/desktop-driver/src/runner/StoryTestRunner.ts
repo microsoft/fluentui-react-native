@@ -98,7 +98,11 @@ export async function runDesktopStoryTests({
     runId,
     schemaVersion: 1,
     startedAt: startedAt.toISOString(),
-    status: results.every(({ status }) => status === 'passed' || status === 'skipped') ? 'passed' : 'failed',
+    status: results.every(({ status }) => status === 'skipped')
+      ? 'incomplete'
+      : results.every(({ status }) => status === 'passed' || status === 'skipped')
+        ? 'passed'
+        : 'failed',
     targetId,
     tests: results,
   };
@@ -362,6 +366,9 @@ export async function assertDesktopExpectation(session: DesktopSessionClient, ex
       break;
     case 'focused':
       actual = await element.getProperty('focused');
+      break;
+    case 'required':
+      actual = await element.getProperty('required');
       break;
     case 'role':
       actual = await element.getTagName();

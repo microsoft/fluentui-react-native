@@ -12,7 +12,7 @@ class CheckboxV1PageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
-    return await (await this._primaryComponent).isSelected();
+    return this.isChecked(this._primaryComponent);
   }
 
   /* Waits for the checkbox to be checked or unchecked if the new state is true or false. Returns true if the

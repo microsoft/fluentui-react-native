@@ -5,10 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to packager",
+      "name": "Attach to mobile packager",
       "request": "attach",
       "type": "reactnative",
-      "cwd": "${workspaceFolder}/apps/fluent-tester"
+      "cwd": "${workspaceFolder}/apps/legacy-mobile"
     },
     {
       "name": "Attach to packager (Win32)",

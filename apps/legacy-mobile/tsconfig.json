@@ -1,0 +1,59 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig",
+  "compilerOptions": {
+    "outDir": "lib",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    "rootDir": "src",
+    "composite": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo"
+  },
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../../packages/shim/callout/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/AppearanceAdditions/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Avatar/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Checkbox/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/NativeDatePicker/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/NativeFontMetrics/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Shimmer/tsconfig.json"
+    },
+    {
+      "path": "../../packages/shim/focus-zone/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/MenuButton/tsconfig.json"
+    },
+    {
+      "path": "../../packages/agentic/native-core/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/RadioGroup/tsconfig.json"
+    },
+    {
+      "path": "../../scripts/tsconfig.json"
+    },
+    {
+      "path": "../tester-core/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/Tooltip/tsconfig.json"
+    },
+    {
+      "path": "../../packages/experimental/VibrancyView/tsconfig.json"
+    }
+  ]
+}

@@ -89,7 +89,7 @@
       </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>user32.lib;windowsapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dwmapi.lib;user32.lib;windowsapp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
       <ModuleDefinitionFile>NativeCore.def</ModuleDefinitionFile>
@@ -110,6 +110,7 @@
     <ClInclude Include="components\Callout\Callout.h" />
     <ClInclude Include="components\FocusZone\FocusZoneComponentView.h" />
     <ClInclude Include="shared\FocusRequest.h" />
+    <ClInclude Include="shared\FocusTree.h" />
     <ClInclude Include="ReactPackageProvider.h">
       <DependentUpon>ReactPackageProvider.idl</DependentUpon>
     </ClInclude>

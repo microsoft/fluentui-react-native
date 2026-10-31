@@ -1,4 +1,13 @@
+---
+id: desktop-driver.native-helpers
+kind: instruction-reference
+owner_paths:
+  - packages/agentic/desktop-driver
+---
+
 # Native helpers
+
+- **R-DRIVER-001:** Build or provision native helpers explicitly on the target operating system. Installation never compiles or downloads a helper; CI builds it, runs `doctor`, then pins prebuilt-only resolution before app preparation or tests.
 
 The package ships checked-in native source and builds one small helper on the
 target operating system. Native binaries are not published in npm, compiled
@@ -99,6 +108,11 @@ macOS:   $RUNNER_TEMP/furn-desktop-driver-native
 Build the helper explicitly, run `doctor` against that cache, then set
 `FURN_DESKTOP_DRIVER_BUILD_POLICY=never` before application preparation or
 smoke so later phases cannot compile implicitly.
+
+Source resolution is anchored in the driver's own package, not the caller's
+working directory or direct dependencies. Windows staging paths use a short
+unique directory name to stay within MSBuild's path-length limits; immutable
+artifact identities and the shared cache layout are unchanged.
 
 Hosted runners that cannot provide authoritative global input may set
 `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel`.

@@ -13,6 +13,16 @@ use both. Select `under` secondary content when the description needs a second
 line; use `right` for compact metadata. A chevron is visual only—the owner
 must perform any nested-navigation action.
 
+Inside a Dropdown, give each option a unique `value` and string `content`, and
+omit `selected`, `checkmark`, and `multiselect`; the Dropdown owns them.
+
+```tsx
+<Dropdown accessibilityLabel="Sort order">
+  <ListboxItem value="ascending" content="Ascending" />
+  <ListboxItem value="descending" content="Descending" />
+</Dropdown>
+```
+
 ## Scene root
 
 Render the scene inside `ThemedRoot` so focus policy can query `useRootSettings`.

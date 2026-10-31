@@ -2,7 +2,7 @@ import { Attribute, AttributeValue, Keys } from '../../common/consts';
 import FocusZonePageObject from '../pages/FocusZonePageObject';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('FocusZone Testing Initialization', () => {
+describe('FocusZone Directional Testing Initialization', () => {
   it('Wait for app load', async () => {
     expect(await FocusZonePageObject.waitForInitialPageToDisplay()).toBeTrue();
   });
@@ -25,7 +25,7 @@ describe('FocusZone Testing Initialization', () => {
  * Focuses on the directional aspect of FocusZone with arrow keys.
  *
  * */
-describe('FocusZone Functional Testing', () => {
+describe('FocusZone Directional Functional Testing', () => {
   beforeEach(async () => {
     await FocusZonePageObject.scrollToTestElement();
 

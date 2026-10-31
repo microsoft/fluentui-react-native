@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/storybook-desktop-runtime",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "React Native runtime and Metro services for desktop Storybook applications",
   "license": "MIT",
   "author": "",
@@ -9,6 +9,18 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/agentic/storybook-desktop-runtime"
   },
+  "files": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "README.md",
+    "config/",
+    "jest.config.cjs",
+    "lib/",
+    "package.json",
+    "references/",
+    "src/",
+    "tsconfig.json"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",

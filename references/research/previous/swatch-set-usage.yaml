@@ -1,5 +1,5 @@
 schema_version: 1
-palette_type: ""
+palette_type: ''
 app: Mso
 scope: >-
   The 181 fields of the shared, standard Office SwatchSet. Specialized palette

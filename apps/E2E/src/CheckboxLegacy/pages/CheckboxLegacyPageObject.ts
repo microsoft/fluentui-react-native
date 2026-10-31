@@ -18,7 +18,7 @@ class CheckboxLegacyPageObject extends BasePage {
       // for native windows, .isSelected() always returns false. this is a workaround
       return (await checkbox.getAttribute(Attribute.ToggleState)) === AttributeValue.on;
     } else {
-      return await checkbox.isSelected();
+      return this.isChecked(checkbox);
     }
   }
 

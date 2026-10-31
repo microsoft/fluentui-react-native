@@ -129,6 +129,103 @@ describe('focusable pressable', () => {
     expect(subject.props().testID).toBe('blurred');
   });
 
+  it.each(['windows', 'win32', 'macos'])('keeps a disabled-focusable %s target registered while refusing activation', (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    const onPress = jest.fn();
+    const onPressIn = jest.fn();
+    const onLongPress = jest.fn();
+    const onAccessibilityTap = jest.fn();
+    const onAccessibilityAction = jest.fn();
+    const props = {
+      focusable: true,
+      onPress,
+      onPressIn,
+      onLongPress,
+      onAccessibilityTap,
+      onAccessibilityAction,
+      accessibilityState: { busy: true },
+      'aria-disabled': false,
+    };
+    const subject = render(props, undefined, false, { disabledFocusable: true });
+    act(() => subject.props().onFocus({ target: 1, currentTarget: 1 }));
+    const generation = subject.bindings[0].focusTarget.generation;
+    subject.update({ ...props, disabled: true });
+    expect(subject.props().testID).toBe('focused');
+    expect(subject.props().focusable).toBe(true);
+    expect(subject.props().disabled).toBe(platform === 'macos' ? undefined : true);
+    expect(subject.props()['aria-disabled']).toBe(true);
+    expect(subject.props().accessibilityState).toEqual({ disabled: true, busy: true });
+    expect(subject.bindings[0].focusTarget.generation).toBe(generation);
+    act(() => {
+      subject.props().onPress({ nativeEvent: {} });
+      subject.props().onPressIn({ nativeEvent: {} });
+      subject.props().onLongPress({ nativeEvent: {} });
+      subject.props().onAccessibilityTap();
+    });
+    const key = keyboardEvent('Enter', { code: 'Unidentified' });
+    act(() => subject.props().onKeyDown(key));
+    expect(key.defaultPrevented).toBe(true);
+    act(() => subject.props().onKeyUp(keyboardEvent('Enter', { code: 'Unidentified' })));
+    expect(onPress).not.toHaveBeenCalled();
+    expect(onPressIn).not.toHaveBeenCalled();
+    expect(onLongPress).not.toHaveBeenCalled();
+    expect(onAccessibilityTap).not.toHaveBeenCalled();
+    expect(subject.isPressed()).toBe(false);
+    const action = { nativeEvent: { actionName: 'custom' } };
+    act(() => subject.props().onAccessibilityAction(action));
+    expect(onAccessibilityAction).toHaveBeenCalledTimes(1);
+    expect(onAccessibilityAction).toHaveBeenCalledWith(action);
+  });
+
+  it('does not make explicitly nonfocusable disabled targets eligible', () => {
+    const subject = render({ disabled: true, focusable: false }, undefined, false, { disabledFocusable: true });
+    expect(subject.props().focusable).toBe(false);
+    expect(subject.bindings[0].focusTarget.requestFocus('keyboard').status).toBe('not-focusable');
+  });
+
+  it('forwards enabled long-press and accessibility-tap callbacks once', () => {
+    const onLongPress = jest.fn();
+    const onAccessibilityTap = jest.fn();
+    const subject = render({ onLongPress, onAccessibilityTap }, undefined, false, { disabledFocusable: true });
+    const event = { nativeEvent: {} };
+    act(() => {
+      subject.props().onLongPress(event);
+      subject.props().onAccessibilityTap();
+    });
+    expect(onLongPress).toHaveBeenCalledTimes(1);
+    expect(onLongPress).toHaveBeenCalledWith(event);
+    expect(onAccessibilityTap).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not add native activation handlers or disabled state that the caller omitted', () => {
+    const subject = render();
+    expect(subject.props().disabled).toBeUndefined();
+    expect(subject.props().onLongPress).toBeUndefined();
+    expect(subject.props().onAccessibilityTap).toBeUndefined();
+  });
+
+  it.each(['windows', 'win32', 'macos'])('finishes a disabled-focusable %s keyboard press only once when disabled', (platform) => {
+    jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+    const onPress = jest.fn();
+    const onPressOut = jest.fn();
+    const subject = render({ onPress, onPressOut }, undefined, false, { disabledFocusable: true });
+    const down = keyboardEvent(' ');
+    act(() => {
+      subject.props().onKeyDown(down);
+      subject.props().onPressIn(down);
+    });
+    expect(subject.isPressed()).toBe(true);
+    subject.update({ disabled: true, onPress, onPressOut });
+    expect(subject.isPressed()).toBe(false);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    act(() => {
+      subject.props().onKeyUp(keyboardEvent(' '));
+      subject.props().onPressOut(keyboardEvent(' '));
+    });
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
   it('guards repeats, chords, descendant activation, and unmatched key-up without synthesizing presses', () => {
     jest.replaceProperty(Platform, 'OS', 'windows');
     const onPress = jest.fn();

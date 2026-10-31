@@ -13,6 +13,7 @@ function pathForRegex(...parts) {
 
 const blockList = exclusionList([
   // Exclude other test apps
+  new RegExp(pathForRegex(__dirname, '../legacy-mobile')),
   new RegExp(pathForRegex(__dirname, '../win32')),
   new RegExp(pathForRegex(__dirname, '../win32-81')),
   // Exclude build output directory

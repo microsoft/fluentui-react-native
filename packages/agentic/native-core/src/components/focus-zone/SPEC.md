@@ -36,3 +36,18 @@ Cancellation cannot reverse a mutation already executed natively.
 
 Disabled discoverability, remembered focus, natural cross-popup Tab
 continuation, and all-host root behavior are separate admission gates.
+
+## Win32 adapter
+
+`@fluentui-react-native/native-core/win32` exports `FocusZone` as a JavaScript
+adapter over the Office Win32 host's prebuilt legacy `RCTFocusZone`
+registration, for Menu. It requires the host's view manager. It maps
+direction, spatial navigation, arrow wrap, Tab mode, `disabled`, and a live
+`defaultTarget` onto the host's legacy props. The host accepts no modern
+command, so `requestFocus` focuses an explicit or default target directly, or
+for `default` without one focuses the host zone, which moves to its default
+element. Each request is confirmed by the focus event that bubbles to the zone,
+and focus already held is confirmed at once. The host has no first or last
+search, so those requests report `unsupported`; a caller focuses the edge
+target itself. The host does not handle Home or End. Adapter regressions belong
+in `Win32FocusZone.test.tsx`.

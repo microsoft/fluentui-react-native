@@ -26,6 +26,77 @@ function flattenStyle(style: unknown) {
 }
 
 describe('Input', () => {
+  it('INP-002 retains internally owned edits across defaultValue changes and reports each edit once', async () => {
+    const onChangeText = jest.fn();
+    const component = await render(<Input defaultValue="Seed" onChangeText={onChangeText} />);
+
+    expect(getTextbox(component)).toHaveDisplayValue('Seed');
+    await fireEvent.changeText(getTextbox(component), 'Edited');
+    expect(getTextbox(component)).toHaveDisplayValue('Edited');
+    expect(onChangeText.mock.calls).toEqual([['Edited']]);
+
+    await component.rerender(<Input defaultValue="Replacement seed" onChangeText={onChangeText} />);
+    expect(getTextbox(component)).toHaveDisplayValue('Edited');
+    expect(onChangeText).toHaveBeenCalledTimes(1);
+
+    await fireEvent.changeText(getTextbox(component), '');
+    expect(getTextbox(component)).toHaveDisplayValue('');
+    expect(onChangeText.mock.calls).toEqual([['Edited'], ['']]);
+  });
+
+  it('INP-002 leaves controlled text unchanged until the owner writes back, including an empty string', async () => {
+    const onChangeText = jest.fn();
+    const component = await render(<Input value="" defaultValue="Ignored" onChangeText={onChangeText} />);
+
+    expect(getTextbox(component)).toHaveDisplayValue('');
+    await fireEvent.changeText(getTextbox(component), 'Proposed');
+    expect(onChangeText.mock.calls).toEqual([['Proposed']]);
+    expect(getTextbox(component)).toHaveDisplayValue('');
+
+    await component.rerender(<Input value="Accepted" defaultValue="Ignored" onChangeText={onChangeText} />);
+    expect(getTextbox(component)).toHaveDisplayValue('Accepted');
+    expect(onChangeText).toHaveBeenCalledTimes(1);
+
+    await component.rerender(<Input value="" onChangeText={onChangeText} />);
+    expect(getTextbox(component)).toHaveDisplayValue('');
+    expect(onChangeText).toHaveBeenCalledTimes(1);
+  });
+
+  it('INP-001 INP-005 merges root and editor accessibility state without overriding owned semantics', async () => {
+    const component = await render(
+      <Input
+        accessibilityLabel="Root name"
+        accessibilityHint="Root hint"
+        accessibilityState={{ busy: true, disabled: true, selected: true }}
+        testID="root-identifier"
+        error
+        readOnly
+        textInput={{
+          accessibilityLabel: 'Editor name',
+          accessibilityHint: 'Editor hint',
+          accessibilityState: { busy: false, expanded: true },
+          testID: 'editor-identifier',
+        }}
+      />,
+    );
+    const textbox = component.getByRole('textbox', { name: 'Editor name' });
+
+    expect(textbox.props.accessibilityHint).toBe('Editor hint');
+    expect(textbox.props.accessibilityState).toEqual({
+      busy: true,
+      expanded: true,
+      selected: true,
+      disabled: false,
+      invalid: true,
+      readOnly: true,
+    });
+    expect(textbox.props.testID).toBe('editor-identifier');
+    expect(component.queryByTestId('root-identifier')).toBeNull();
+    expect(component.getByTestId('input-root').props.accessible).toBe(false);
+    expect(textbox.props.editable).toBe(false);
+    expect(textbox.props.focusable).toBe(true);
+  });
+
   it('forwards its ref prop through phased rendering to the native root', async () => {
     const ref = React.createRef<React.ElementRef<typeof View>>();
 
@@ -122,6 +193,7 @@ describe('Input', () => {
 
     await fireEvent(textbox, 'hoverIn', {});
     await fireEvent(textbox, 'pressIn', {});
+    await fireEvent(component.getByTestId('test-scene-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
     await fireEvent(textbox, 'focus', {});
     await fireEvent.changeText(textbox, 'hello');
 
@@ -130,7 +202,7 @@ describe('Input', () => {
     expect(onFocus).toHaveBeenCalledTimes(1);
     expect(onChangeText).toHaveBeenCalledWith('hello');
     expect(flattenStyle(getContents(component).props.style)).toMatchObject({
-      borderColor: colors.strokeNeutralHeavy,
+      borderColor: colors.strokeNeutralSubtle,
     });
   });
 
@@ -170,6 +242,73 @@ describe('Input', () => {
       borderBottomWidth: 1,
       position: 'absolute',
     });
+  });
+
+  it.each([
+    { variant: 'outline', error: false, readOnly: false },
+    { variant: 'outline', error: true, readOnly: false },
+    { variant: 'outline', error: false, readOnly: true },
+    { variant: 'underline', error: false, readOnly: false },
+    { variant: 'underline', error: true, readOnly: false },
+    { variant: 'underline', error: false, readOnly: true },
+  ] as const)('uses the additive $variant focus treatment with error=$error readOnly=$readOnly', async (props) => {
+    const component = await render(<Input {...props} />);
+    const textbox = getTextbox(component);
+    const colors = defaultFlexTokens.color;
+    const indicatorId = props.variant === 'outline' ? 'focus-visual' : 'input-underline-focus';
+    const indicator = component.getByTestId(indicatorId, { includeHiddenElements: true });
+    const before = flattenStyle(getContents(component).props.style);
+    expect(flattenStyle(indicator.props.style).opacity).toBe(0);
+    expect(textbox.props.enableFocusRing).toBe(false);
+
+    await fireEvent(component.getByTestId('test-scene-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
+    expect(textbox.props.focusable).toBe(true);
+    if (props.readOnly) {
+      // fireEvent filters focus on noneditable editors, even when they remain focusable.
+      await act(() => textbox.props.onFocus({}));
+    } else {
+      await fireEvent(textbox, 'focus', {});
+    }
+    expect(flattenStyle(indicator.props.style).opacity).not.toBe(0);
+    const boundary = props.error
+      ? colors.strokeDangerLoud
+      : props.readOnly
+        ? colors.strokeNeutralDisabled
+        : props.variant === 'outline'
+          ? colors.strokeNeutralSubtle
+          : colors.strokeFocusOuter;
+    if (props.variant === 'outline') {
+      expect(flattenStyle(getContents(component).props.style).borderColor).toBe(boundary);
+      expect(flattenStyle(indicator.props.style)).toMatchObject({
+        borderColor: colors.strokeFocusOuter,
+        borderWidth: defaultFlexTokens.strokeWidth.thick,
+      });
+      const inner = component.getByTestId('focus-visual-inner', { includeHiddenElements: true });
+      expect(flattenStyle(inner.props.style)).toMatchObject({
+        borderColor: colors.strokeFocusInner,
+        borderWidth: defaultFlexTokens.strokeWidth.thin,
+      });
+    } else {
+      expect(component.queryByTestId('focus-visual', { includeHiddenElements: true })).toBeNull();
+      expect(flattenStyle(component.getByTestId('input-underline').props.style)).toMatchObject({
+        borderBottomColor: boundary,
+        borderBottomWidth: defaultFlexTokens.strokeWidth.thin,
+      });
+      expect(flattenStyle(indicator.props.style)).toMatchObject({
+        borderBottomColor: colors.strokeFocusOuter,
+        borderBottomWidth: defaultFlexTokens.strokeWidth.thin,
+        bottom: defaultFlexTokens.strokeWidth.thin,
+      });
+    }
+    expect(flattenStyle(getContents(component).props.style).minHeight).toBe(before.minHeight);
+    expect(indicator.props).toMatchObject({ accessible: false, focusable: false, pointerEvents: 'none' });
+
+    await fireEvent(component.getByTestId('test-scene-root'), 'pointerDownCapture', {});
+    expect(flattenStyle(indicator.props.style).opacity).toBe(0);
+    await fireEvent(component.getByTestId('test-scene-root'), 'keyDownCapture', { nativeEvent: { key: 'ArrowLeft' } });
+    expect(flattenStyle(indicator.props.style).opacity).not.toBe(0);
+    await component.rerender(<Input {...props} disabled />);
+    expect(flattenStyle(component.getByTestId(indicatorId, { includeHiddenElements: true }).props.style).opacity).toBe(0);
   });
 
   it('renders leading and trailing icons with the resolved size and color', async () => {
