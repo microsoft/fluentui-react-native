@@ -2,8 +2,8 @@
 '@fluentui-react-native/design': minor
 ---
 
-Rework Flex tokens around the current x3 defaults. Legacy `ThemeReference` themes, `ThemeProvider`, `useTheme`, the
-legacy Fluent defaults, and Flex tokens projected from legacy themes keep their values.
+Rework Flex tokens around the current x3 defaults. Legacy `ThemeReference` themes, `ThemeProvider`, `useTheme`, and
+Flex tokens projected from legacy themes keep their values.
 
 Breaking changes for Flex consumers and theme authors:
 

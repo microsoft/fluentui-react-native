@@ -129,4 +129,5 @@ Other surfaces:
 - `legacyFallback` is unchanged and still supplies values Flex cannot represent to the projected legacy `Theme`.
 - `themeFromFlexTokens` accepts resolved tokens and still accepts the deprecated `FlatFlexTokens` shape.
 - `validateContrastPairs` audits resolved colors at rest; pass a flat map of state values to audit hover or pressed.
-- Legacy `ThemeReference` themes, `ThemeProvider`, `useTheme`, and the legacy Fluent defaults are unchanged.
+- Legacy `ThemeReference` themes, `ThemeProvider`, and `useTheme` are unchanged. The legacy default theme is removed:
+  `themeFromFlexTokens` fills values Flex cannot represent from the generated Fluent theme.
