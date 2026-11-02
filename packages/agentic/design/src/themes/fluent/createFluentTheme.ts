@@ -1,7 +1,7 @@
 import { fontAliasTokens } from '../../fluent/defaults/fluentTokens.generated';
 import type { AliasColorTokens } from '../../fluent/types/Color.types';
 import type { BaseShadowAliasTokens } from '../../fluent/types/Shadow.types';
-import type { Spacing, Theme } from '../../fluent/types/Theme.types';
+import type { AppearanceOptions, Spacing, Theme } from '../../fluent/types/Theme.types';
 import {
   fontFamilyBase,
   fontFamilyMonospace,
@@ -29,7 +29,7 @@ import { legacyPaletteFromAliasColors } from './legacyPalette';
  * parameter so that bundlers can drop the appearance a consumer never imports.
  */
 export function createFluentTheme(
-  appearance: 'light' | 'dark',
+  appearance: AppearanceOptions,
   aliasColors: Required<AliasColorTokens>,
   shadows: BaseShadowAliasTokens,
 ): Theme {

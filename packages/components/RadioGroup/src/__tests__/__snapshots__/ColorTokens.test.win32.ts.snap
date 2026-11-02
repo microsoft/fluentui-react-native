@@ -85,5 +85,6 @@ exports[`RadioGroup color tokens pins RadioGroup v1 colors: RadioGroup v1 1`] = 
   "disabled": {
     "color": "#B1B1B1",
   },
+  "requiredColor": "#d13438",
 }
 `;

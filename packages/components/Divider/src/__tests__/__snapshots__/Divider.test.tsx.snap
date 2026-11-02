@@ -135,7 +135,7 @@ exports[`Divider component tests Divider with all props + tokens set 1`] = `
       style={
         {
           "color": "red",
-          "fontFamily": "System",
+          "fontFamily": "Segoe UI",
           "fontSize": 10,
           "fontStyle": "italic",
           "fontWeight": "600",

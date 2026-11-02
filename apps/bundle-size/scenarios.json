@@ -92,6 +92,7 @@
       "forbiddenOutputPatterns": [
         "/design/src/themes/fluent/fluentDarkTheme.",
         "/design/src/themes/fluent/fluentTheme.",
+        "/design/src/themes/fluent/fluentHc",
         "/design/src/fluent/themeReference.",
         "/design/src/flex/",
         "/design/src/themes/flex/",
@@ -114,6 +115,33 @@
         "/design/src/themes/fluent/fluentTheme.",
         "/design/src/themes/fluent/fluentLightTheme.",
         "/design/src/themes/fluent/fluentDarkTheme.",
+        "/design/src/themes/fluent/fluentHcLightTheme.",
+        "/design/src/themes/fluent/fluentHcDarkTheme.",
+        "/design/src/fluent/themeReference."
+      ]
+    },
+    {
+      "name": "design-fluent-hc-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["fluentHcTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/fluent/tokens/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/"
+      ],
+      "forbiddenOutputPatterns": [
+        "/design/src/themes/fluent/fluentLightTheme.",
+        "/design/src/themes/fluent/fluentDarkTheme.",
+        "/design/src/themes/fluent/fluentTheme.",
+        "/design/src/flex/",
+        "/design/src/themes/flex/",
+        "/color-lib/"
+      ],
+      "requiredOutputPatterns": [
+        "/design/src/themes/fluent/fluentHcTheme.",
+        "/design/src/themes/fluent/fluentHcLightTheme.",
+        "/design/src/themes/fluent/fluentHcDarkTheme.",
         "/design/src/fluent/themeReference."
       ]
     },

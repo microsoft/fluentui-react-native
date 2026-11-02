@@ -16,10 +16,12 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   <Text
     style={
       {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "color": "#242424",
+        "fontFamily": "Roboto",
         "fontSize": 16,
         "fontWeight": "600",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }
@@ -76,7 +78,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "#323130",
+            "borderColor": "#242424",
             "borderRadius": 10,
             "borderStyle": "solid",
             "borderWidth": 1,
@@ -94,7 +96,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#323130",
+              "backgroundColor": "#242424",
               "borderRadius": 5,
               "height": 10,
               "left": 4,
@@ -112,10 +114,12 @@ exports[`RadioButton component tests RadioButton default 1`] = `
             "borderColor": "transparent",
             "borderStyle": "solid",
             "borderWidth": 2,
-            "color": "#323130",
-            "fontFamily": "Segoe UI",
-            "fontSize": 16,
-            "fontWeight": "400",
+            "color": "#242424",
+            "fontFamily": "Roboto",
+            "fontSize": 18,
+            "fontWeight": "500",
+            "letterSpacing": 0,
+            "lineHeight": 24,
             "margin": 0,
             "marginTop": 2,
           }
@@ -171,7 +175,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "#323130",
+            "borderColor": "#242424",
             "borderRadius": 10,
             "borderStyle": "solid",
             "borderWidth": 1,
@@ -189,7 +193,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         <View
           style={
             {
-              "backgroundColor": "#323130",
+              "backgroundColor": "#242424",
               "borderRadius": 5,
               "height": 10,
               "left": 4,
@@ -207,10 +211,12 @@ exports[`RadioButton component tests RadioButton default 1`] = `
             "borderColor": "transparent",
             "borderStyle": "solid",
             "borderWidth": 2,
-            "color": "#323130",
-            "fontFamily": "Segoe UI",
-            "fontSize": 16,
-            "fontWeight": "400",
+            "color": "#242424",
+            "fontFamily": "Roboto",
+            "fontSize": 18,
+            "fontWeight": "500",
+            "letterSpacing": 0,
+            "lineHeight": 24,
             "margin": 0,
             "marginTop": 2,
           }
@@ -239,10 +245,12 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
   <Text
     style={
       {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "color": "#242424",
+        "fontFamily": "Roboto",
         "fontSize": 16,
         "fontWeight": "600",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }
@@ -300,7 +308,7 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "#323130",
+              "borderColor": "#242424",
               "borderRadius": 10,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -318,7 +326,7 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
           <View
             style={
               {
-                "backgroundColor": "#323130",
+                "backgroundColor": "#242424",
                 "borderRadius": 5,
                 "height": 10,
                 "left": 4,
@@ -336,10 +344,12 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
               "borderColor": "transparent",
               "borderStyle": "solid",
               "borderWidth": 2,
-              "color": "#323130",
-              "fontFamily": "Segoe UI",
-              "fontSize": 16,
-              "fontWeight": "400",
+              "color": "#242424",
+              "fontFamily": "Roboto",
+              "fontSize": 18,
+              "fontWeight": "500",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginTop": 2,
             }
@@ -395,7 +405,7 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "#323130",
+              "borderColor": "#242424",
               "borderRadius": 10,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -413,7 +423,7 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
           <View
             style={
               {
-                "backgroundColor": "#323130",
+                "backgroundColor": "#242424",
                 "borderRadius": 5,
                 "height": 10,
                 "left": 4,
@@ -431,10 +441,12 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
               "borderColor": "transparent",
               "borderStyle": "solid",
               "borderWidth": 2,
-              "color": "#323130",
-              "fontFamily": "Segoe UI",
-              "fontSize": 16,
-              "fontWeight": "400",
+              "color": "#242424",
+              "fontFamily": "Roboto",
+              "fontSize": 18,
+              "fontWeight": "500",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginTop": 2,
             }

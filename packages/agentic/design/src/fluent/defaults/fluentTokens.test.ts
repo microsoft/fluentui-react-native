@@ -16,7 +16,11 @@ import { mapPipelineToShadow } from '../mapPipelineToShadow';
 import { mapFontPipelineToTheme, mapPipelineToTheme } from '../mapPipelineToTheme';
 import * as androidMapper from '../mapPipelineToTheme.android';
 import * as iosMapper from '../mapPipelineToTheme.ios';
-import { processAliasTokens, transformWin32PlatformColorName } from '../tokens/highContrast/processAliasTokens';
+import {
+  processAliasTokens,
+  transformWin32PlatformColorName,
+  transformWindowsPlatformColorName,
+} from '../tokens/highContrast/processAliasTokens';
 import * as android from './fluentTokens.generated.android';
 import * as ios from './fluentTokens.generated.ios';
 import * as macos from './fluentTokens.generated.macos';
@@ -35,8 +39,8 @@ const processedHcAliasTokens = processAliasTokens(JSON.parse(JSON.stringify(hcAl
 const appearances = [
   ['light', generated.lightAliasColors, generated.lightShadows, colorfulAliasTokens, colorfulShadowTokens],
   ['dark', generated.darkAliasColors, generated.darkShadows, blackAliasTokens, blackShadowTokens],
-  ['darkGray', generated.darkGrayAliasColors, generated.darkGrayShadows, darkGrayAliasTokens, darkGrayShadowTokens],
-  ['hc', generated.hcAliasColors, generated.hcShadows, processedHcAliasTokens, hcShadowTokens],
+  ['darkElevated', generated.darkElevatedAliasColors, generated.darkElevatedShadows, darkGrayAliasTokens, darkGrayShadowTokens],
+  ['hcDark', generated.hcDarkAliasColors, generated.hcDarkShadows, processedHcAliasTokens, hcShadowTokens],
 ] as const;
 
 describe('generated win32 Fluent tokens', () => {
@@ -50,7 +54,7 @@ describe('generated win32 Fluent tokens', () => {
   });
 
   it('emit high-contrast colors as distinct PlatformColor values', () => {
-    expect(generated.hcAliasColors.neutralForeground1).toEqual(PlatformColor('WindowText'));
+    expect(generated.hcDarkAliasColors.neutralForeground1).toEqual(PlatformColor('WindowText'));
     expect(PlatformColor('WindowText')).not.toEqual(PlatformColor('ButtonFace'));
   });
 });
@@ -81,32 +85,33 @@ function expectDefined(value: unknown): void {
   }
 }
 
-const allAppearances = ['light', 'dark', 'darkGray', 'hc', 'hcLight', 'hcDark', 'darkElevated'] as const;
+const allAppearances = ['light', 'dark', 'lightElevated', 'darkElevated', 'hcLight', 'hcDark'] as const;
+type Appearance = (typeof allAppearances)[number];
 const platforms = [
   {
     platform: 'win32',
     tokens: generated,
     mapper: { mapPipelineToTheme, mapFontPipelineToTheme },
-    sources: { light: 'colorful', dark: 'black', darkGray: 'darkgray', hc: 'hc' },
+    sources: { light: 'win32/colorful', dark: 'win32/black', darkElevated: 'win32/darkgray', hcDark: 'win32/hc' },
   },
   {
     platform: 'macos',
     tokens: macos,
     mapper: { mapPipelineToTheme, mapFontPipelineToTheme },
-    sources: { light: 'light', dark: 'dark', hcLight: 'hclight', hcDark: 'hcdark' },
+    sources: { light: 'macos/light', dark: 'macos/dark', hcLight: 'macos/hclight', hcDark: 'macos/hcdark' },
   },
   {
     platform: 'windows',
     tokens: windows,
     mapper: { mapPipelineToTheme, mapFontPipelineToTheme },
-    sources: { light: 'light', dark: 'dark' },
+    sources: { light: 'windows/light', dark: 'windows/dark', hcDark: 'win32/hc' },
   },
-  { platform: 'android', tokens: android, mapper: androidMapper, sources: { light: 'light', dark: 'dark' } },
+  { platform: 'android', tokens: android, mapper: androidMapper, sources: { light: 'android/light', dark: 'android/dark' } },
   {
     platform: 'ios',
     tokens: ios,
     mapper: iosMapper,
-    sources: { light: 'light', dark: 'dark', hcLight: 'hclight', hcDark: 'hcdark', darkElevated: 'elevateddark' },
+    sources: { light: 'ios/light', dark: 'ios/dark', hcLight: 'ios/hclight', hcDark: 'ios/hcdark', darkElevated: 'ios/elevateddark' },
   },
 ] as const;
 
@@ -127,12 +132,13 @@ describe.each(platforms)('complete $platform Fluent tokens', ({ platform, tokens
   });
 
   it('preserves every defined runtime-mapped native color, font alias, and shadow', () => {
+    const colorName = platform === 'windows' ? transformWindowsPlatformColorName : transformWin32PlatformColorName;
     for (const [appearance, source] of Object.entries(sources)) {
-      const packagePath = `@fluentui-react-native/design-tokens-${platform}/${source}/`;
+      const packagePath = `@fluentui-react-native/design-tokens-${source}/`;
       const raw = require(`${packagePath}tokens-aliases.json`);
-      const aliases = processAliasTokens(JSON.parse(JSON.stringify(raw)), transformWin32PlatformColorName);
+      const aliases = processAliasTokens(JSON.parse(JSON.stringify(raw)), colorName);
       const shadows = require(`${packagePath}tokens-shadow.json`);
-      const key = appearance as (typeof allAppearances)[number];
+      const key = appearance as Appearance;
       // iOS high-contrast files contain fonts only, with no native colors to preserve.
       if (aliases.neutralBackground1) {
         expect(tokens[`${key}AliasColors`]).toMatchObject(definedEntries(mapper.mapPipelineToTheme(aliases)));
@@ -157,16 +163,26 @@ describe('Fluent token fallbacks', () => {
     expect(tokens.darkAliasColors.outofofficeBackground3).toBe(generated.darkAliasColors.outofofficeBackground3);
   });
 
-  it('inherits missing appearances without importing Win32 system colors onto other platforms', () => {
+  it.each([
+    ['win32', generated, { lightElevated: 'light', hcLight: 'hcDark' }],
+    ['macos', macos, { lightElevated: 'light', darkElevated: 'dark' }],
+    ['windows', windows, { lightElevated: 'light', darkElevated: 'dark', hcLight: 'hcDark' }],
+    ['android', android, { lightElevated: 'light', darkElevated: 'dark', hcLight: 'light', hcDark: 'dark' }],
+    ['ios', ios, { lightElevated: 'light' }],
+  ] as const)('%s returns the inherited appearance for each appearance without token data', (_, tokens, inherited) => {
+    for (const [appearance, source] of Object.entries(inherited) as [Appearance, Appearance][]) {
+      expect(tokens[`${appearance}AliasColors`]).toBe(tokens[`${source}AliasColors`]);
+      expect(tokens[`${appearance}Shadows`]).toBe(tokens[`${source}Shadows`]);
+    }
+  });
+
+  it('uses standard colors for color-free high-contrast sets and system colors only for Windows high contrast', () => {
     expect(ios.hcLightAliasColors).toEqual(ios.lightAliasColors);
     expect(ios.hcDarkAliasColors).toEqual(ios.darkAliasColors);
-    expect(generated.hcLightAliasColors).toEqual(generated.hcAliasColors);
-    expect(generated.hcDarkAliasColors).toEqual(generated.hcAliasColors);
-    for (const { tokens } of platforms.filter(({ platform }) => platform !== 'win32')) {
-      expect(tokens.darkGrayAliasColors).toEqual(tokens.darkAliasColors);
-      expect(tokens.darkGrayShadows).toEqual(tokens.darkShadows);
+    for (const { platform, tokens } of platforms) {
       for (const appearance of allAppearances) {
-        expect(Object.values(tokens[`${appearance}AliasColors`]).every((color) => typeof color === 'string')).toBe(true);
+        const systemColors = (platform === 'win32' || platform === 'windows') && appearance.startsWith('hc');
+        expect(Object.values(tokens[`${appearance}AliasColors`]).some((color) => typeof color !== 'string')).toBe(systemColors);
       }
     }
   });

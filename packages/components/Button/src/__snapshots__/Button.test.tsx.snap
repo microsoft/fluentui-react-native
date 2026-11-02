@@ -63,7 +63,7 @@ exports[`Button component tests Button circular 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -139,7 +139,7 @@ exports[`Button component tests Button composed 1`] = `
         "color": "#ffffff",
         "dynamicTypeRamp": undefined,
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontStyle": undefined,
         "fontWeight": "600",
         "letterSpacing": undefined,
@@ -220,7 +220,7 @@ exports[`Button component tests Button customized 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -297,7 +297,7 @@ exports[`Button component tests Button default 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -352,7 +352,7 @@ exports[`Button component tests Button disabled 1`] = `
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#b4d6fa",
-      "borderColor": "#f3f2f1",
+      "borderColor": "#e0e0e0",
       "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
@@ -374,7 +374,7 @@ exports[`Button component tests Button disabled 1`] = `
       {
         "color": "#bdbdbd",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -452,7 +452,7 @@ exports[`Button component tests Button large 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -530,7 +530,7 @@ exports[`Button component tests Button primary 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -608,7 +608,7 @@ exports[`Button component tests Button small 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -686,7 +686,7 @@ exports[`Button component tests Button square 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -741,8 +741,8 @@ exports[`Button component tests Button subtle 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#ffffff",
-      "borderColor": "#ffffff",
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 8,
       "borderWidth": 1,
       "display": "flex",
@@ -762,9 +762,9 @@ exports[`Button component tests Button subtle 1`] = `
     numberOfLines={0}
     style={
       {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

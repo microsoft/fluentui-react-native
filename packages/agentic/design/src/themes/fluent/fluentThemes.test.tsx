@@ -9,6 +9,10 @@ import {
   darkAliasColors,
   darkShadows,
   fontAliasTokens,
+  hcDarkAliasColors,
+  hcDarkShadows,
+  hcLightAliasColors,
+  hcLightShadows,
   lightAliasColors,
   lightShadows,
 } from '../../fluent/defaults/fluentTokens.generated';
@@ -17,12 +21,21 @@ import { useTheme } from '../../fluent/useTheme';
 import { useThemeState } from '../../flex/useThemeState';
 import { ThemedRoot } from '../../theming/ThemedRoot';
 import { ThemeProvider } from '../../theming/ThemeProvider';
-import type { ThemeAppearanceSource, ThemeAppearanceSourceSnapshot } from '../../types/appearance.types';
-import { fluentDarkTheme, fluentLightTheme, fluentTheme } from '../index';
+import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceSourceSnapshot } from '../../types/appearance.types';
+import { fluentDarkTheme, fluentHcTheme, fluentLightTheme, fluentTheme } from '../index';
+import { fluentHcDarkTheme } from './fluentHcDarkTheme';
+import { fluentHcLightTheme } from './fluentHcLightTheme';
+
+const standardLight = { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' } as const;
+const standardDark = { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' } as const;
+const hcLight = { colorScheme: 'light', contrast: 'highContrast', interfaceLevel: 'base' } as const;
+const hcDark = { colorScheme: 'dark', contrast: 'highContrast', interfaceLevel: 'base' } as const;
 
 const themes = [
-  ['light', fluentLightTheme, lightAliasColors, lightShadows],
-  ['dark', fluentDarkTheme, darkAliasColors, darkShadows],
+  ['light', fluentLightTheme, lightAliasColors, lightShadows, 'light', standardLight],
+  ['dark', fluentDarkTheme, darkAliasColors, darkShadows, 'dark', standardDark],
+  ['high-contrast light', fluentHcLightTheme, hcLightAliasColors, hcLightShadows, 'highContrast', hcLight],
+  ['high-contrast dark', fluentHcDarkTheme, hcDarkAliasColors, hcDarkShadows, 'highContrast', hcDark],
 ] as const;
 
 function undefinedPaths(value: unknown, path = 'theme'): string[] {
@@ -58,9 +71,9 @@ function ThemeProbe({ themes: seen }: { themes: Theme[] }) {
   return null;
 }
 
-describe.each(themes)('Fluent %s theme', (appearance, theme, aliasColors, shadows) => {
+describe.each(themes)('Fluent %s theme', (_name, theme, aliasColors, shadows, hostAppearance, appearance) => {
   it('carries every Fluent 2 alias color unchanged for its host appearance', () => {
-    expect(theme.host.appearance).toBe(appearance);
+    expect(theme.host.appearance).toBe(hostAppearance);
     for (const [name, color] of Object.entries(aliasColors)) {
       expect(theme.colors[name]).toBe(color);
     }
@@ -83,7 +96,7 @@ describe.each(themes)('Fluent %s theme', (appearance, theme, aliasColors, shadow
   });
 
   it('defines every key the legacy default theme defines, with no undefined values', () => {
-    const legacy = getDefaultLegacyTheme({ colorScheme: appearance, contrast: 'standard', interfaceLevel: 'base' });
+    const legacy = getDefaultLegacyTheme(appearance);
     const missing = [
       ...Object.keys(legacy.colors).filter((key) => !(key in theme.colors)),
       ...Object.keys(legacy.shadows).filter((key) => !(key in theme.shadows)),
@@ -103,16 +116,15 @@ describe('fluentTheme', () => {
     jest.restoreAllMocks();
   });
 
-  it('resolves the theme for the requested color scheme, including high contrast and elevated requests', () => {
-    expect(fluentTheme.resolveTheme({ colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' }).colors).toBe(
-      fluentLightTheme.colors,
-    );
-    expect(fluentTheme.resolveTheme({ colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' }).colors).toBe(
-      fluentDarkTheme.colors,
-    );
-    expect(fluentTheme.resolveTheme({ colorScheme: 'dark', contrast: 'highContrast', interfaceLevel: 'elevated' }).host.appearance).toBe(
-      'dark',
-    );
+  it.each([
+    [standardLight, fluentLightTheme],
+    [standardDark, fluentDarkTheme],
+    [{ ...standardDark, interfaceLevel: 'elevated' }, fluentDarkTheme],
+    [hcLight, fluentHcLightTheme],
+    [hcDark, fluentHcDarkTheme],
+    [{ ...hcDark, interfaceLevel: 'elevated' }, fluentHcDarkTheme],
+  ] as [ResolvedThemeAppearance, Theme][])('resolves %o by contrast and color scheme', (appearance, theme) => {
+    expect(fluentTheme.resolveTheme(appearance).colors).toBe(theme.colors);
   });
 
   it('follows the system color scheme from the Appearance module', () => {
@@ -142,8 +154,11 @@ describe('fluentTheme', () => {
     act(() => appearance.update({ colorScheme: 'dark' }));
     expect(seen.at(-1)?.colors).toBe(fluentDarkTheme.colors);
 
+    act(() => appearance.update({ colorScheme: 'dark', contrast: 'highContrast' }));
+    expect(seen.at(-1)?.colors).toBe(fluentHcDarkTheme.colors);
+
     act(() => component.update(render({ colorScheme: 'light' })));
-    expect(seen.at(-1)?.colors).toBe(fluentLightTheme.colors);
+    expect(seen.at(-1)?.colors).toBe(fluentHcLightTheme.colors);
 
     act(() => component.unmount());
   });
@@ -170,5 +185,25 @@ describe('fluentTheme', () => {
     expect(seen.at(-1)).toBe(lightAliasColors.neutralForeground1);
 
     act(() => component.unmount());
+  });
+});
+
+describe('fluentHcTheme', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('resolves the high-contrast theme for the color scheme, whatever contrast is requested', () => {
+    expect(fluentHcTheme.resolveTheme(standardLight).colors).toBe(fluentHcLightTheme.colors);
+    expect(fluentHcTheme.resolveTheme(hcDark).colors).toBe(fluentHcDarkTheme.colors);
+  });
+
+  it('follows the system color scheme from the Appearance module', () => {
+    const colorScheme = jest.spyOn(Appearance, 'getColorScheme');
+
+    colorScheme.mockReturnValue('dark');
+    expect(fluentHcTheme.theme).toBe(fluentHcDarkTheme);
+    colorScheme.mockReturnValue('light');
+    expect(fluentHcTheme.theme).toBe(fluentHcLightTheme);
   });
 });

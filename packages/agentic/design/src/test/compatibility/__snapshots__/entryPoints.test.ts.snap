@@ -103,6 +103,7 @@ exports[`public entry points ./themes keeps its runtime export names 1`] = `
   "flexTheme: object",
   "flexWarmTheme: object",
   "fluentDarkTheme: object",
+  "fluentHcTheme: object",
   "fluentLightTheme: object",
   "fluentTheme: object",
 ]

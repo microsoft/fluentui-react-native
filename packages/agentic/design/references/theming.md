@@ -131,11 +131,12 @@ including `darkElevated`, `highContrast`, and `dynamic`. `getCurrentAppearance`,
 
 The `themes` entry point provides legacy `Theme` objects authored from the generated Fluent 2 tokens (`tokens.md`):
 
-| Export             | Kind             | Contents                                         |
-| ------------------ | ---------------- | ------------------------------------------------ |
-| `fluentLightTheme` | `Theme`          | The light theme                                  |
-| `fluentDarkTheme`  | `Theme`          | The dark theme                                   |
-| `fluentTheme`      | `ThemeReference` | Both themes, chosen by the resolved color scheme |
+| Export             | Kind             | Contents                                                               |
+| ------------------ | ---------------- | ---------------------------------------------------------------------- |
+| `fluentLightTheme` | `Theme`          | The light theme                                                        |
+| `fluentDarkTheme`  | `Theme`          | The dark theme                                                         |
+| `fluentHcTheme`    | `ThemeReference` | The high-contrast light and dark themes, chosen by the resolved scheme |
+| `fluentTheme`      | `ThemeReference` | Every Fluent theme, chosen by the resolved contrast and color scheme   |
 
 Each theme carries every platform alias color unchanged, plus the legacy palette keys (`bodyText`, `buttonBackground`,
 and so on) that existing components still read. `src/themes/fluent/legacyPalette.ts` points each legacy key at the alias
@@ -146,9 +147,10 @@ platform's theme carries that platform's values. Fluent 2 defines no serif or cu
 family. The themes carry no component token overrides.
 
 `fluentTheme` requests `system` for every appearance axis, so a `ThemeProvider` or `ThemedRoot` follows the platform
-appearance source and re-resolves when the system changes; pass `appearance` to pin a color scheme. Contrast and
-interface level do not select separate themes yet: high-contrast and elevated requests resolve by color scheme
-(`remaining-work.md`). Import `fluentLightTheme` or `fluentDarkTheme` alone to keep the other theme and `ThemeReference`
+appearance source and re-resolves when the system changes; pass `appearance` to pin a color scheme or contrast. High
+contrast selects the high-contrast theme for the color scheme. `fluentHcTheme` always requests high contrast and follows
+the system color scheme. Interface level does not select separate themes yet: elevated requests resolve by color scheme
+(`remaining-work.md`). Import `fluentLightTheme` or `fluentDarkTheme` alone to keep the other themes and `ThemeReference`
 out of a bundle, or use one as the base of your own `ThemeReference` to extend it. Flex consumers read these themes
 through `useThemeState`, which adapts their alias colors like any legacy source.
 

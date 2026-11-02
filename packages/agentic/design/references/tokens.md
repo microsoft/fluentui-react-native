@@ -45,18 +45,20 @@ contain complete Fluent alias colors, shadows, and font aliases, which the `them
 The runtime pipeline mappers and existing theme construction are unchanged. Do not edit generated files; change their
 inputs and rebuild.
 
-Every generated platform module exports `light`, `dark`, `darkGray`, `hc`, `hcLight`, `hcDark`, and `darkElevated`
-color and shadow sets, plus `fontAliasTokens`. Colors satisfy `Required<AliasColorTokens>` (including deprecated red
+Every generated platform module exports `light`, `dark`, `lightElevated`, `darkElevated`, `hcLight`, and `hcDark` color
+and shadow sets, plus `fontAliasTokens`. Colors satisfy `Required<AliasColorTokens>` (including deprecated red
 aliases, mapped to danger), fonts satisfy `Required<Variants>`, and shadows satisfy `BaseShadowAliasTokens`.
 The generator preserves defined runtime-mapped values and additional native color states that those mappers omit.
 Missing colors use same-platform semantic equivalents first, with absent interaction states falling back to rest.
 Remaining gaps use portable light/dark defaults assembled from the Win32 and mobile palettes, never another
 platform's system colors. Explicit equivalents live in the [Fluent token generator](../scripts/fluent-tokens.cts).
 
-Unsupported appearances inherit their nearest supported source: dark gray and elevated dark use dark, `hc` uses
-high-contrast dark, and missing high-contrast palettes use the matching light/dark scheme. Win32's single `hc` palette
-supplies both high-contrast schemes. iOS's high-contrast files contain fonts but no colors, so they inherit the matching
-standard colors; this is coverage, not a synthesized or accessibility-qualified high-contrast palette. Native shadow
+An appearance without platform data inherits the nearest supported set: an elevated set uses its color scheme's
+standard set, a single high-contrast set serves both color schemes, and a platform without high-contrast data uses
+light and dark. Win32's Dark Gray palette is its elevated dark set, and its single `hc` palette of system colors is
+`hcDark`. Windows has no high-contrast palette, so it uses the Win32 `hc` palette as `SystemColor…Color` Windows
+brushes. iOS's high-contrast files contain fonts but no colors, so they inherit the matching standard colors; this is
+coverage, not a synthesized or accessibility-qualified high-contrast palette. Native shadow
 sets remain intact. Missing font aliases use native equivalents, or the platform's global typography ramp when no
 aliases exist (macOS and Windows); legacy variant names alias the completed Fluent variants. Tests compare all
 platforms against the full token interfaces and reject missing or undefined entries.

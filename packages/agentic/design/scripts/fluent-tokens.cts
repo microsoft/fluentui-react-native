@@ -5,34 +5,51 @@ const { GeneratedFile, ValuePool, expression, makeComment } = require('@fluentui
 const path = require('node:path');
 const { mapPipelineToShadow } = require('../src/fluent/mapPipelineToShadow.ts');
 
-type Appearance = 'light' | 'dark' | 'darkGray' | 'hc' | 'hcLight' | 'hcDark' | 'darkElevated';
+type Appearance = 'light' | 'dark' | 'lightElevated' | 'darkElevated' | 'hcLight' | 'hcDark';
 type ColorKey = keyof AliasColorTokens;
 type PipelineTokens = Record<string, Record<string, string | number>>;
 
 type PlatformData = {
-  /** Token package directory for each supported appearance. Light supplies the font aliases. */
+  /** Token package directory for each appearance the platform supplies. Light supplies the font aliases. */
   paths: Partial<Record<Appearance, string>> & { light: string; dark: string };
   /** Pipeline mapper module in src/fluent for the platform. */
   mapper: string;
   filename: string;
+  /** Native name for a pipeline `PlatformColor(Name)` system color. Defaults to the Win32 name. */
+  platformColorName?: (name: string) => string;
 };
 
-const appearanceFallbacks: Record<Exclude<Appearance, 'light' | 'dark'>, Appearance> = {
-  darkGray: 'dark',
-  hc: 'hcDark',
+const appearances: Appearance[] = ['light', 'dark', 'lightElevated', 'darkElevated', 'hcLight', 'hcDark'];
+
+/** The color scheme of each appearance, which selects the base aliases and portable defaults beneath it. */
+const appearanceSchemes: Record<Appearance, 'light' | 'dark'> = {
+  light: 'light',
+  dark: 'dark',
+  lightElevated: 'light',
+  darkElevated: 'dark',
   hcLight: 'light',
   hcDark: 'dark',
-  darkElevated: 'dark',
 };
-const appearances: Appearance[] = ['light', 'dark', 'darkGray', 'hc', 'hcLight', 'hcDark', 'darkElevated'];
+
+/**
+ * Appearances to use, in order, when a platform has no token data for an appearance. A single high-contrast set
+ * serves both color schemes; without one, high contrast uses the standard set for its scheme.
+ */
+const appearanceFallbacks: Record<Exclude<Appearance, 'light' | 'dark'>, Appearance[]> = {
+  lightElevated: ['light'],
+  darkElevated: ['dark'],
+  hcLight: ['hcDark', 'light'],
+  hcDark: ['hcLight', 'dark'],
+};
 
 const platformPaths: Record<string, PlatformData> = {
   win32: {
     paths: {
       light: '@fluentui-react-native/design-tokens-win32/colorful/',
       dark: '@fluentui-react-native/design-tokens-win32/black/',
-      darkGray: '@fluentui-react-native/design-tokens-win32/darkgray/',
-      hc: '@fluentui-react-native/design-tokens-win32/hc/',
+      // Office Dark Gray serves as the elevated dark set, and the one high-contrast set of system colors as dark.
+      darkElevated: '@fluentui-react-native/design-tokens-win32/darkgray/',
+      hcDark: '@fluentui-react-native/design-tokens-win32/hc/',
     },
     mapper: 'mapPipelineToTheme.ts',
     filename: 'fluentTokens.generated.ts',
@@ -51,7 +68,10 @@ const platformPaths: Record<string, PlatformData> = {
     paths: {
       light: '@fluentui-react-native/design-tokens-windows/light/',
       dark: '@fluentui-react-native/design-tokens-windows/dark/',
+      // Windows has no high-contrast set, so it uses the Win32 system colors as Windows brushes, as the legacy tokens do.
+      hcDark: '@fluentui-react-native/design-tokens-win32/hc/',
     },
+    platformColorName: (name) => `SystemColor${name}Color`,
     mapper: 'mapPipelineToTheme.ts',
     filename: 'fluentTokens.generated.windows.ts',
   },
@@ -278,25 +298,28 @@ function mapFonts(platformData: PlatformData): Record<string, VariantValue> {
   return variants;
 }
 
-function resolveAppearance(platformData: PlatformData, appearance: Appearance): string {
-  if (platformData.paths[appearance]) {
-    return platformData.paths[appearance];
+/** The appearance whose token data supplies an appearance: its own, or the first fallback the platform supplies. */
+function sourceAppearance(platformData: PlatformData, appearance: Appearance): Appearance {
+  const candidates = appearance === 'light' || appearance === 'dark' ? [appearance] : [appearance, ...appearanceFallbacks[appearance]];
+  const source = candidates.find((candidate) => platformData.paths[candidate]);
+  if (!source) {
+    throw new Error(`No token data for the ${appearance} appearance`);
   }
-  if ((appearance === 'hcLight' || appearance === 'hcDark') && platformData.paths.hc) {
-    return platformData.paths.hc;
-  }
-  return resolveAppearance(platformData, appearanceFallbacks[appearance as keyof typeof appearanceFallbacks]);
+  return source;
+}
+
+function sourcePath(platformData: PlatformData, appearance: Appearance): string {
+  return platformData.paths[sourceAppearance(platformData, appearance)] as string;
 }
 
 function appearanceScheme(platformData: PlatformData, appearance: Appearance): 'light' | 'dark' {
-  const source = resolveAppearance(platformData, appearance);
-  return source === platformData.paths.light || source === platformData.paths.hcLight ? 'light' : 'dark';
+  return appearanceSchemes[sourceAppearance(platformData, appearance)];
 }
 
 function readAliases(platformData: PlatformData, appearance: Appearance): PipelineTokens {
   const scheme = appearanceScheme(platformData, appearance);
   const base: PipelineTokens = require(`${platformData.paths[scheme]}tokens-aliases.json`);
-  const tokens: PipelineTokens = require(`${resolveAppearance(platformData, appearance)}tokens-aliases.json`);
+  const tokens: PipelineTokens = require(`${sourcePath(platformData, appearance)}tokens-aliases.json`);
   return Object.fromEntries(
     [...new Set([...Object.keys(base), ...Object.keys(tokens)])].map((key) => [key, { ...base[key], ...tokens[key] }]),
   );
@@ -305,10 +328,10 @@ function readAliases(platformData: PlatformData, appearance: Appearance): Pipeli
 const platformColorPattern = /^PlatformColor\(([A-Za-z][A-Za-z0-9]*)\)$/;
 
 /**
- * Replace the pipeline's `PlatformColor(Name)` strings with PlatformColor calls, as processAliasTokens does at runtime
- * with win32 color names.
+ * Replace the pipeline's `PlatformColor(Name)` strings with PlatformColor calls of the platform's system color names, as
+ * processAliasTokens does at runtime.
  */
-function toCodeValues(value: unknown, platformColors: Set<string>): unknown {
+function toCodeValues(value: unknown, platformColors: Set<string>, colorName: (name: string) => string): unknown {
   if (typeof value === 'string') {
     const match = platformColorPattern.exec(value);
     if (!match) {
@@ -317,14 +340,15 @@ function toCodeValues(value: unknown, platformColors: Set<string>): unknown {
       }
       return value;
     }
-    platformColors.add(match[1]);
-    return expression(`PlatformColor('${match[1]}')`, { pure: true, name: `platformColor${match[1]}` });
+    const name = colorName(match[1]);
+    platformColors.add(name);
+    return expression(`PlatformColor('${name}')`, { pure: true, name: `platformColor${match[1]}` });
   }
   if (Array.isArray(value)) {
-    return value.map((item) => toCodeValues(item, platformColors));
+    return value.map((item) => toCodeValues(item, platformColors, colorName));
   }
   if (value && typeof value === 'object') {
-    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, toCodeValues(item, platformColors)]));
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, toCodeValues(item, platformColors, colorName)]));
   }
   return value;
 }
@@ -346,7 +370,8 @@ function generatePlatformFluentTokens(
   generatedFile.header = makeComment([
     'WARNING: This file is auto-generated by scripts/fluent-tokens.cts. Do not edit it manually.',
     'Complete Fluent tokens: native values, same-platform equivalents, then same-scheme portable defaults.',
-    'Unsupported appearances inherit the closest supported appearance. Shared values are emitted once.',
+    'An appearance without token data inherits elevated from standard, and high contrast from the other',
+    'high-contrast appearance, else from standard. Shared values are emitted once.',
   ]);
   const pool = new ValuePool({ name: nameValue });
   const typeImports = {
@@ -356,18 +381,24 @@ function generatePlatformFluentTokens(
   };
   pool.reserve(...Object.keys(typeImports));
 
+  // Appearances with token data come first, so each inherited appearance is emitted as an alias of its source.
+  const ordered = [
+    ...appearances.filter((appearance) => platformData.paths[appearance]),
+    ...appearances.filter((appearance) => !platformData.paths[appearance]),
+  ];
   const platformColors = new Set<string>();
-  for (const appearance of appearances) {
-    const packagePath = resolveAppearance(platformData, appearance);
-    pool.declare(`${appearance}Shadows`, mapPipelineToShadow(require(`${packagePath}tokens-shadow.json`)), {
+  for (const appearance of ordered) {
+    pool.declare(`${appearance}Shadows`, mapPipelineToShadow(require(`${sourcePath(platformData, appearance)}tokens-shadow.json`)), {
       type: 'BaseShadowAliasTokens',
     });
   }
-  for (const appearance of appearances) {
+  for (const appearance of ordered) {
     const native = mapColors(readAliases(platformData, appearance), platformData.mapper, colorKeys);
     const scheme = appearanceScheme(platformData, appearance);
     const colors = completeColors(native, fallbackColors[scheme], colorKeys);
-    pool.declare(`${appearance}AliasColors`, toCodeValues(colors, platformColors), { type: 'Required<AliasColorTokens>' });
+    pool.declare(`${appearance}AliasColors`, toCodeValues(colors, platformColors, platformData.platformColorName ?? ((name) => name)), {
+      type: 'Required<AliasColorTokens>',
+    });
   }
   pool.declare('fontAliasTokens', mapFonts(platformData), {
     type: 'Required<Variants>',

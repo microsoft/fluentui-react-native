@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
-import { FlexThemeReference, ThemedRoot, themedStyleSheetFactory, useThemeState } from '@fluentui-react-native/design';
+import { FlexThemeReference, ThemedRoot, ThemeProvider, themedStyleSheetFactory, useThemeState } from '@fluentui-react-native/design';
 import type { ColorTone, ThemeAppearanceOptions, ThemeSource } from '@fluentui-react-native/design';
 
 import { useDesktopStorybookTestID } from './DesktopStorybookConfig';
 
 /** The theme configuration selected in the Storybook toolbar. */
 export type StorybookThemeSelection = {
-  /** The package's Flex defaults or the legacy Fluent default theme. */
+  /** The story theme: the package's Flex defaults or the legacy Fluent default theme. The chrome always uses Flex. */
   source: 'flex' | 'fluent';
   colorScheme: 'light' | 'dark' | 'system';
   contrast: 'standard' | 'highContrast';
@@ -79,17 +79,43 @@ function isAxisDisabled(key: ThemeAxisKey, selection: StorybookThemeSelection): 
   return key === 'colorTone' && selection.source !== 'flex';
 }
 
+type StoryTheme = {
+  readonly theme: ThemeSource;
+  readonly appearance: ThemeAppearanceOptions;
+};
+
+const StoryThemeContext = React.createContext<StoryTheme | undefined>(undefined);
+
 export function StorybookThemeHost({ children }: React.PropsWithChildren) {
   const [selection, setSelection] = React.useState<StorybookThemeSelection>(defaultStorybookThemeSelection);
-  const appearance = React.useMemo(() => appearanceFromSelection(selection), [selection]);
+  const storyTheme = React.useMemo<StoryTheme>(
+    () => ({ theme: themeSources[selection.source], appearance: appearanceFromSelection(selection) }),
+    [selection],
+  );
   const testID = useDesktopStorybookTestID('app-root');
 
+  // The chrome always uses Flex at the selected appearance; only story content follows the selected source.
   return (
-    <ThemedRoot appearance={appearance} style={layoutStyles.root} testID={testID} theme={themeSources[selection.source]}>
-      <StorybookThemeContent selection={selection} onSelectionChange={setSelection}>
-        {children}
-      </StorybookThemeContent>
+    <ThemedRoot appearance={storyTheme.appearance} style={layoutStyles.root} testID={testID} theme={themeSources.flex}>
+      <StoryThemeContext.Provider value={storyTheme}>
+        <StorybookThemeContent selection={selection} onSelectionChange={setSelection}>
+          {children}
+        </StorybookThemeContent>
+      </StoryThemeContext.Provider>
     </ThemedRoot>
+  );
+}
+
+/** Applies the selected story theme inside the Flex chrome without adding a view or a second input root. */
+export function StorybookStoryTheme({ children }: React.PropsWithChildren) {
+  const storyTheme = React.useContext(StoryThemeContext);
+  if (!storyTheme) {
+    return <>{children}</>;
+  }
+  return (
+    <ThemeProvider appearance={storyTheme.appearance} theme={storyTheme.theme}>
+      {children}
+    </ThemeProvider>
   );
 }
 

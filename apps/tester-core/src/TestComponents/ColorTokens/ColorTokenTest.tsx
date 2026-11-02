@@ -3,14 +3,12 @@ import type { ViewStyle, ColorValue } from 'react-native';
 import { View, StyleSheet, Platform } from 'react-native';
 
 import { Text, ToggleButton } from '@fluentui/react-native';
-import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
 import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';
 import type { Theme } from '@fluentui-react-native/design/theming';
 import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';
-import { getCurrentAppearance } from '@fluentui-react-native/design/theming';
 import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { G, Path } from 'react-native-svg';
@@ -100,9 +98,7 @@ const AliasColorTokensSwatchList: React.FunctionComponent = () => {
     theme.name === 'Black' ||
     theme.name === 'HighContrast';
 
-  const aliasColorTokens = isOfficeTheme
-    ? createOfficeAliasTokens(theme.name)
-    : createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
+  const aliasColorTokens = isOfficeTheme ? createOfficeAliasTokens(theme.name) : theme.colors;
 
   const aggregator = React.useCallback(
     (colorName: string) => {

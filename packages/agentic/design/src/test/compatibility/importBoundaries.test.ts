@@ -221,7 +221,12 @@ describe('runtime graph ownership', () => {
   });
 
   it('keeps the Fluent themes on generated tokens and the legacy source, free of the Flex engine', () => {
-    for (const entry of ['themes/fluent/fluentLightTheme.ts', 'themes/fluent/fluentDarkTheme.ts', 'themes/fluent/fluentTheme.ts']) {
+    for (const entry of [
+      'themes/fluent/fluentLightTheme.ts',
+      'themes/fluent/fluentDarkTheme.ts',
+      'themes/fluent/fluentHcTheme.ts',
+      'themes/fluent/fluentTheme.ts',
+    ]) {
       const graph = runtimeGraph(entry);
       expect(graph).toContain('fluent/defaults/fluentTokens.generated.ts');
       expect(graph).toContain('tokens/global.generated.ts');
@@ -230,6 +235,7 @@ describe('runtime graph ownership', () => {
       }
     }
     expect(runtimeGraph('themes/fluent/fluentTheme.ts')).toContain('fluent/themeReference.ts');
+    expect(runtimeGraph('themes/fluent/fluentHcTheme.ts')).toContain('fluent/themeReference.ts');
   });
 
   it('keeps the Flex themes on the generated Flex defaults, free of legacy Fluent runtime', () => {

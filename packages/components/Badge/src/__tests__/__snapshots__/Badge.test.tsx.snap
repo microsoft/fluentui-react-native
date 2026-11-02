@@ -8,7 +8,7 @@ exports[`Badge component tests Badge all props 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
       "borderColor": "#0f6cbd",
       "borderRadius": 4,
       "borderWidth": 1,
@@ -29,9 +29,12 @@ exports[`Badge component tests Badge all props 1`] = `
     style={
       {
         "color": "#fff",
+        "dynamicTypeRamp": "body",
         "fontFamily": "Arial",
         "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
       }
     }
@@ -64,8 +67,8 @@ exports[`Badge component tests Badge tokens 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "yellow",
-      "borderColor": "#f09",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 4,
       "bottom": 0,
@@ -86,6 +89,7 @@ exports[`Badge component tests Badge tokens 1`] = `
     numberOfLines={0}
     style={
       {
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 12,
         "fontWeight": "400",
@@ -104,7 +108,8 @@ exports[`Badge component tests Empty Badge 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -126,6 +131,8 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
   style={
     {
       "alignSelf": "flex-start",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "bottom": 0,
       "justifyContent": "center",
@@ -149,6 +156,8 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
       {
         "alignItems": "center",
         "alignSelf": "flex-start",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#00000000",
         "borderRadius": 9999,
         "borderWidth": 1,
         "flexDirection": "row",
@@ -173,6 +182,7 @@ exports[`Badge component tests Filled badge with shadow 1`] = `
       numberOfLines={0}
       style={
         {
+          "color": "#ffffff",
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "400",
@@ -195,7 +205,8 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -214,9 +225,12 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     style={
       {
         "color": "#fff",
+        "dynamicTypeRamp": "body",
         "fontFamily": "Arial",
         "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
       }
     }
@@ -228,13 +242,13 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     numberOfLines={0}
     style={
       {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontStyle": undefined,
         "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -252,7 +266,8 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -271,13 +286,13 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     numberOfLines={0}
     style={
       {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontStyle": undefined,
         "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -295,7 +310,8 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -314,13 +330,13 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     numberOfLines={0}
     style={
       {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontStyle": undefined,
         "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -339,7 +355,8 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#00000000",
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -358,13 +375,13 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     numberOfLines={0}
     style={
       {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontStyle": undefined,
         "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -402,13 +419,13 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
     numberOfLines={0}
     style={
       {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontStyle": undefined,
         "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,

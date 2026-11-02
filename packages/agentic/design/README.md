@@ -29,7 +29,8 @@ export const App = () => (
 Existing `ThemeReference` themes and `useTheme` consumers keep working under the same provider; the
 [theming reference](references/theming.md) explains both authoring models and how they interoperate.
 
-Fluent's own light and dark themes ship in the `themes` entry point, and `fluentTheme` follows the system appearance:
+Fluent's own light, dark, and high-contrast themes ship in the `themes` entry point, and `fluentTheme` follows the
+system appearance, including high contrast:
 
 ```tsx
 import { ThemedRoot } from '@fluentui-react-native/design';
@@ -42,7 +43,8 @@ export const App = () => (
 );
 ```
 
-Use `fluentLightTheme` or `fluentDarkTheme` when you need one fixed `Theme` object.
+Use `fluentLightTheme` or `fluentDarkTheme` when you need one fixed `Theme` object, or `fluentHcTheme` to always use
+high contrast.
 
 The same entry point ships the x3 Flex defaults as `flexTheme` (cool) and `flexWarmTheme` (warm). Each is a
 `FlexThemeDescription` covering light and dark; use one as a `FlexThemeReference` base to start from that palette and

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Appearance, StyleSheet, Text } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
-import { useRootSettings, useThemeAppearance, useThemeState } from '@fluentui-react-native/design';
+import { FlexThemeReference, useRootSettings, useThemeAppearance, useThemeState } from '@fluentui-react-native/design';
 import type { RootSettings, ThemeAppearanceState, ThemeState } from '@fluentui-react-native/design';
 import { ThemeContext } from '@fluentui-react-native/design/theming';
 import type { Theme as LegacyTheme } from '@fluentui-react-native/design/theming';
@@ -23,6 +23,7 @@ function createTestApp(storyBackgroundColor?: string) {
   const roots: RootSettings[] = [];
   const bridgeRoots: RootSettings[] = [];
   const themes: ThemeState[] = [];
+  const chromeThemes: ThemeState[] = [];
   const appearances: ThemeAppearanceState[] = [];
   const legacyThemes: (LegacyTheme | undefined)[] = [];
   const mounted = jest.fn();
@@ -44,7 +45,10 @@ function createTestApp(storyBackgroundColor?: string) {
     bridgeRoots.push(useRootSettings());
     return null;
   });
-  jest.mocked(StorybookUIComponent).mockImplementation(({ children }) => <>{children}</>);
+  jest.mocked(StorybookUIComponent).mockImplementation(({ children }) => {
+    chromeThemes.push(useThemeState());
+    return <>{children}</>;
+  });
 
   const getStorybookUI = jest.fn<ReturnType<StorybookView['getStorybookUI']>, Parameters<StorybookView['getStorybookUI']>>((params) => {
     const UI = params?.CustomUIComponent;
@@ -64,7 +68,7 @@ function createTestApp(storyBackgroundColor?: string) {
     );
   });
   const App = createDesktopStorybookApp({ getStorybookUI }, { enableWebsockets: false, testIDPrefix: 'test' });
-  return { App, roots, bridgeRoots, themes, appearances, legacyThemes, mounted, unmounted, getStorybookUI };
+  return { App, roots, bridgeRoots, themes, chromeThemes, appearances, legacyThemes, mounted, unmounted, getStorybookUI };
 }
 
 async function selectTheme(scene: Scene, axis: string, value: string) {
@@ -95,7 +99,7 @@ afterEach(() => {
 
 describe('Storybook app theme root', () => {
   it('places the toolbar, UI, story, and runtime bridge in one deterministic default Flex scene', async () => {
-    const { App, roots, bridgeRoots, themes, appearances, legacyThemes } = createTestApp();
+    const { App, roots, bridgeRoots, themes, chromeThemes, appearances, legacyThemes } = createTestApp();
     const scene = await render(<App />);
 
     expect(scene.getByTestId('test-app-root')).toBeOnTheScreen();
@@ -117,6 +121,7 @@ describe('Storybook app theme root', () => {
     });
     expect(themes[0].appearance).toBe(appearances[0].resolved);
     expect(themes[0].tokens).toEqual(defaultFlexTokens);
+    expect(chromeThemes[0]).toBe(themes[0]);
     expect(legacyThemes[0]).toBeUndefined();
     expect(bridgeRoots.every((root) => root === roots[0])).toBe(true);
     expect(roots[0].inputModality).toBe('pointer');
@@ -194,8 +199,8 @@ describe('Storybook app theme root', () => {
     expect(themes[themes.length - 1].appearance.colorScheme).toBe('dark');
   });
 
-  it('uses the legacy Fluent default theme without tone and restores the Flex tone', async () => {
-    const { App, themes, legacyThemes } = createTestApp();
+  it('applies the legacy Fluent default theme to stories without tone and restores the Flex tone', async () => {
+    const { App, themes, chromeThemes, legacyThemes } = createTestApp();
     const scene = await render(<App />);
     await selectTheme(scene, 'tone', 'warm');
 
@@ -206,6 +211,8 @@ describe('Storybook app theme root', () => {
     await fireEvent.press(tone);
     expect(scene.queryByTestId('test-theme-tone-menu')).toBeNull();
     expect(themes[themes.length - 1].appearance.colorTone).toBe('cool');
+    expect(themes[themes.length - 1].tokens).not.toEqual(defaultFlexTokens);
+    expect(chromeThemes[chromeThemes.length - 1].tokens).toEqual(defaultFlexTokens);
     expect(legacyThemes[legacyThemes.length - 1]?.host.appearance).toBe('light');
 
     await selectTheme(scene, 'scheme', 'dark');
@@ -224,22 +231,22 @@ describe('Storybook app theme root', () => {
     ['flex', 'dark'],
     ['fluent', 'light'],
     ['fluent', 'dark'],
-  ])('keeps the %s %s canvas distinct from the Secondary Button fill', async (source, scheme) => {
-    const { App, themes } = createTestApp();
+  ])('keeps the Flex canvas distinct from the %s %s Secondary Button fill', async (source, scheme) => {
+    const { App, themes, chromeThemes } = createTestApp();
     const scene = await render(<App />);
 
     await selectTheme(scene, 'source', source);
     await selectTheme(scene, 'scheme', scheme);
 
-    const state = themes[themes.length - 1];
+    const story = themes[themes.length - 1];
+    const chrome = chromeThemes[chromeThemes.length - 1];
     const theme = latestStorybookTheme();
-    expect(theme.background.content).toBe(state.tokens.color.surfaceNeutralFar.rest);
+    expect(theme.background.content).toBe(chrome.tokens.color.surfaceNeutralFar.rest);
     expect(theme.background.content).toBe(theme.background.preview);
-    expect(theme.background.content).not.toBe(state.tokens.color.backgroundNeutralSubtle.rest);
+    expect(theme.background.content).not.toBe(story.tokens.color.backgroundNeutralSubtle.rest);
   });
 
   it.each(['#ffeedd', 'transparent'])('preserves the explicit %s story background across theme changes', async (storyBackgroundColor) => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation();
     const { App } = createTestApp(storyBackgroundColor);
     const scene = await render(<App />);
 
@@ -248,44 +255,46 @@ describe('Storybook app theme root', () => {
       const calls = jest.mocked(StorybookUIComponent).mock.calls;
       expect(calls[calls.length - 1][0].storyBackgroundColor).toBe(storyBackgroundColor);
     }
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Storybook chrome cannot resolve native system colors'));
   });
 
-  it('switches chrome and story colors together without recreating Storybook or resetting the scene', async () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation();
-    const { App, roots, themes, mounted, unmounted, getStorybookUI } = createTestApp();
+  it('switches Flex chrome and selected story colors together without recreating Storybook or resetting the scene', async () => {
+    const flex = new FlexThemeReference();
+    const { App, roots, themes, chromeThemes, mounted, unmounted, getStorybookUI } = createTestApp();
     const scene = await render(<App />);
     const root = roots[0];
     const defaultBackground = themes[0].tokens.color.surfaceNeutralFar.rest;
     const backgrounds = new Set<unknown>([defaultBackground]);
+    let source = 'flex';
     await fireEvent(scene.getByTestId('test-app-root'), 'keyDownCapture', { nativeEvent: { key: 'Tab' } });
 
     for (const [axis, value] of selectionSteps) {
       await selectTheme(scene, axis, value);
-      const state = themes[themes.length - 1];
+      source = axis === 'source' ? value : source;
+      const story = themes[themes.length - 1];
+      const chrome = chromeThemes[chromeThemes.length - 1];
+      const { color } = chrome.tokens;
       const theme = latestStorybookTheme();
       backgrounds.add(theme.background.app);
 
+      expect(chrome.appearance).toEqual(story.appearance);
+      expect(chrome.tokens).toEqual(flex.resolveFlexTokens(chrome.appearance));
+      expect(story === chrome).toBe(source === 'flex');
       expect(StyleSheet.flatten(scene.getByTestId('test-theme-toolbar').props.style).backgroundColor).toBe(
-        state.tokens.color.backgroundNeutralSubtle.rest,
+        color.backgroundNeutralSubtle.rest,
       );
-      expect(StyleSheet.flatten(scene.getByText('Theme').props.style).color).toBe(state.tokens.color.foregroundNeutralPrimary.rest);
-      const foreground = theme.base === 'dark' ? state.tokens.color.fixedWhite.rest : state.tokens.color.fixedBlack.rest;
-      const background = theme.base === 'dark' ? state.tokens.color.fixedBlack.rest : state.tokens.color.fixedWhite.rest;
-      const literal = (value: unknown, fallback: unknown) => (typeof value === 'string' ? value : fallback);
-      expect(theme.background.app).toBe(literal(state.tokens.color.surfaceNeutralFar.rest, background));
-      expect(theme.background.content).toBe(literal(state.tokens.color.surfaceNeutralFar.rest, background));
-      expect(theme.background.preview).toBe(literal(state.tokens.color.surfaceNeutralFar.rest, background));
-      expect(theme.color.defaultText).toBe(literal(state.tokens.color.foregroundNeutralPrimary.rest, foreground));
-      expect(theme.input.color).toBe(literal(state.tokens.color.foregroundNeutralPrimary.rest, foreground));
-      expect(theme.button.background).toBe(literal(state.tokens.color.backgroundNeutralLoud.rest, background));
+      expect(StyleSheet.flatten(scene.getByText('Theme').props.style).color).toBe(color.foregroundNeutralPrimary.rest);
+      expect(theme.background.app).toBe(color.surfaceNeutralFar.rest);
+      expect(theme.background.content).toBe(color.surfaceNeutralFar.rest);
+      expect(theme.background.preview).toBe(color.surfaceNeutralFar.rest);
+      expect(theme.color.defaultText).toBe(color.foregroundNeutralPrimary.rest);
+      expect(theme.input.color).toBe(color.foregroundNeutralPrimary.rest);
+      expect(theme.button.background).toBe(color.backgroundNeutralLoud.rest);
       expect(root.inputModality).toBe('keyboard');
       expect(roots.every((settings) => settings === root)).toBe(true);
     }
 
     expect(themes[themes.length - 1].tokens.color.surfaceNeutralFar.rest).toBe(defaultBackground);
     expect(backgrounds.size).toBeGreaterThan(3);
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('Storybook chrome cannot resolve native system colors'));
     expect(getStorybookUI).toHaveBeenCalledTimes(1);
     expect(mounted).toHaveBeenCalledTimes(1);
     expect(unmounted).not.toHaveBeenCalled();
