@@ -1,9 +1,6 @@
 import { ThemeReference } from '../../fluent/themeReference';
 import type { Theme } from '../../fluent/types/Theme.types';
-import { fluentDarkTheme } from './fluentDarkTheme';
-import { fluentHcDarkTheme } from './fluentHcDarkTheme';
-import { fluentHcLightTheme } from './fluentHcLightTheme';
-import { fluentLightTheme } from './fluentLightTheme';
+import { selectFluentTheme } from './selectFluentTheme';
 
 /**
  * Theme source holding every Fluent theme. It follows the system appearance reported by the React Native `Appearance`
@@ -14,13 +11,5 @@ import { fluentLightTheme } from './fluentLightTheme';
 export const fluentTheme: ThemeReference = /* @__PURE__ */ new ThemeReference({
   base: {} as Theme,
   appearance: { colorScheme: 'system', contrast: 'system', interfaceLevel: 'system' },
-  recipes: [
-    (_parent, appearance) => {
-      const dark = appearance?.colorScheme === 'dark';
-      if (appearance?.contrast === 'highContrast') {
-        return dark ? fluentHcDarkTheme : fluentHcLightTheme;
-      }
-      return dark ? fluentDarkTheme : fluentLightTheme;
-    },
-  ],
+  recipes: [(_parent, appearance) => selectFluentTheme(appearance)],
 });

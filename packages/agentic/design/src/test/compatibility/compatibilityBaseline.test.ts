@@ -1,7 +1,7 @@
 import { PlatformColor } from 'react-native';
 
-import { getDefaultLegacyTheme } from '../../fluent/compat/defaultLegacyTheme';
 import { themeFromFlexTokens } from '../../fluent/compat/themeFromFlexTokens';
+import { selectFluentTheme } from '../../themes/fluent/selectFluentTheme';
 import type { ResolvedThemeAppearance } from '../../types/appearance.types';
 import type { Theme } from '../../fluent/types/Theme.types';
 import { mockTheme } from '../fixtures/mockTheme';
@@ -23,12 +23,12 @@ const appearances: [string, ResolvedThemeAppearance][] = [
  * those values passes unchanged.
  */
 describe('legacy compatibility baseline', () => {
-  it.each(appearances)('keeps the %s default legacy theme', (_name, appearance) => {
-    expect(themeFingerprints(getDefaultLegacyTheme(appearance))).toMatchSnapshot();
+  it.each(appearances)('keeps the %s Fluent projection base', (_name, appearance) => {
+    expect(themeFingerprints(selectFluentTheme(appearance))).toMatchSnapshot();
   });
 
-  it.each(appearances)('keeps Flex values converted from the %s default legacy theme', (_name, appearance) => {
-    expect(flexTokenFingerprints(flexTokensFromTheme(getDefaultLegacyTheme(appearance)))).toMatchSnapshot();
+  it.each(appearances)('keeps Flex values converted from the %s Fluent projection base', (_name, appearance) => {
+    expect(flexTokenFingerprints(flexTokensFromTheme(selectFluentTheme(appearance)))).toMatchSnapshot();
   });
 
   it('keeps Flex values converted from the mock theme', () => {

@@ -1,5 +1,5 @@
-import type { AliasColorTokens } from './types/Color.types';
-import type { Variants, VariantValue } from './types/Typography.types';
+import type { AliasColorTokens } from '../fluent/types/Color.types';
+import type { Variants, VariantValue } from '../fluent/types/Typography.types';
 
 // API that maps tokens coming from the android token pipeline to Theme color values.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {

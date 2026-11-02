@@ -1,4 +1,5 @@
 import type { FlexTokens, SemanticColorTokenValues, SemanticMotion, SemanticShadows, SemanticSpacing } from '../../flex/tokens.types';
+import { selectFluentTheme } from '../../themes/fluent/selectFluentTheme';
 import reverseProjection from '../../tokens/mappings/theme-from-flex.json' with { type: 'json' };
 import { appearanceOptionFromResolved } from '../../theming/appearance';
 import type { ResolvedThemeAppearance } from '../../types/appearance.types';
@@ -6,8 +7,6 @@ import { ensureParentRecord, getValueAtSegments, isRecord, splitObjectPath } fro
 import { mergeTheme } from '../mergeTheme';
 import type { ShadowToken } from '../types/Shadow.types';
 import type { PartialTheme, Theme } from '../types/Theme.types';
-
-import { getDefaultLegacyTheme } from './defaultLegacyTheme';
 
 type ReverseTransform = 'numberToPx' | 'shadowLayersToToken';
 
@@ -122,20 +121,20 @@ function projectThemeValues(tokens: FlexTokens | FlatFlexTokens): PartialTheme {
 /**
  * Project Flex tokens into a complete legacy Theme.
  *
- * The compatibility base fills legacy-only values, the optional fallback adds
- * author or host metadata, mapped Flex values remain authoritative, and the
- * final host appearance reflects the resolved structured appearance. Reading
- * a derived interaction state computes it. Layered Flex shadows project
- * lossily to legacy { ambient, key } shadows: the first layer is ambient, the
- * last is key, and middle layers are dropped. An empty shadow keeps the
- * legacy base shadow.
+ * The Fluent theme for the appearance fills values that Flex cannot represent,
+ * the optional fallback adds author or host metadata, mapped Flex values remain
+ * authoritative, and the final host appearance reflects the resolved
+ * structured appearance. Reading a derived interaction state computes it.
+ * Layered Flex shadows project lossily to legacy { ambient, key } shadows: the
+ * first layer is ambient, the last is key, and middle layers are dropped. An
+ * empty shadow keeps the Fluent theme's shadow.
  */
 export function themeFromFlexTokens(
   tokens: FlexTokens | FlatFlexTokens,
   appearance: ResolvedThemeAppearance,
   options?: { fallback?: Theme | PartialTheme },
 ): Theme {
-  let theme = getDefaultLegacyTheme(appearance);
+  let theme = selectFluentTheme(appearance);
   if (options?.fallback) {
     theme = mergeTheme(theme, options.fallback as PartialTheme);
   }

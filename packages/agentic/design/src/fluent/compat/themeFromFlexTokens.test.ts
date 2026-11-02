@@ -2,9 +2,14 @@ import { createInteractiveColor } from '../../flex/colors/interactiveColor';
 import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
 import type { FlexTokens, SemanticColorTokenValues } from '../../flex/tokens.types';
 import { restColorValues } from '../../test/fixtures/interactionColors';
-import type { PartialTheme } from '../types/Theme.types';
+import { fluentDarkTheme } from '../../themes/fluent/fluentDarkTheme';
+import { fluentHcDarkTheme } from '../../themes/fluent/fluentHcDarkTheme';
+import { fluentHcLightTheme } from '../../themes/fluent/fluentHcLightTheme';
+import { fluentLightTheme } from '../../themes/fluent/fluentLightTheme';
+import reverseProjection from '../../tokens/mappings/theme-from-flex.json' with { type: 'json' };
+import type { ResolvedThemeAppearance } from '../../types/appearance.types';
+import type { PartialTheme, Theme } from '../types/Theme.types';
 
-import { getDefaultLegacyTheme } from './defaultLegacyTheme';
 import { themeFromFlexTokens } from './themeFromFlexTokens';
 import type { FlatFlexTokens } from './themeFromFlexTokens';
 
@@ -13,6 +18,7 @@ const light = {
   contrast: 'standard',
   interfaceLevel: 'base',
 } as const;
+const dark = { ...light, colorScheme: 'dark' } as const;
 
 function solid(value: string) {
   return createInteractiveColor(value, value, value);
@@ -44,6 +50,31 @@ function createTokens(): FlexTokens {
 }
 
 describe('themeFromFlexTokens', () => {
+  it.each([
+    [light, fluentLightTheme],
+    [dark, fluentDarkTheme],
+    [{ ...dark, interfaceLevel: 'elevated' }, fluentDarkTheme],
+    [{ ...light, contrast: 'highContrast' }, fluentHcLightTheme],
+    [{ ...dark, contrast: 'highContrast' }, fluentHcDarkTheme],
+  ] as [ResolvedThemeAppearance, Theme][])('fills values Flex cannot represent from the Fluent theme for %o', (appearance, base) => {
+    const baseline = JSON.stringify(base);
+    const projectedPaths = new Set(Object.keys(reverseProjection));
+    const unmappedColors = Object.keys(base.colors).filter((name) => !projectedPaths.has(`colors.${name}`));
+
+    const theme = themeFromFlexTokens(createTokens(), appearance, {
+      fallback: { colors: { customLegacyColor: '#abcdef' } } as PartialTheme,
+    });
+
+    expect(unmappedColors.length).toBeGreaterThan(0);
+    for (const name of unmappedColors) {
+      expect([name, theme.colors[name]]).toEqual([name, base.colors[name]]);
+    }
+    expect(theme.typography.variants).toEqual(base.typography.variants);
+    expect(theme.spacing).toEqual(base.spacing);
+    expect(theme).not.toBe(base);
+    expect(JSON.stringify(base)).toBe(baseline);
+  });
+
   it('merges the base, legacy fallback, mapped Flex values, and final appearance in order', () => {
     const fallback = {
       name: 'Host theme',
@@ -150,7 +181,7 @@ describe('themeFromFlexTokens', () => {
 
     expect(theme.shadows.shadow2).toEqual({ ambient: contour, key: keyLayer });
     expect(theme.shadows.shadow4).toEqual({ ambient: keyLayer, key: keyLayer });
-    expect(theme.shadows.shadow8).toEqual(getDefaultLegacyTheme(light).shadows.shadow8);
+    expect(theme.shadows.shadow8).toEqual(fluentLightTheme.shadows.shadow8);
     expect(theme.shadows.shadow16).toEqual({ ambient: defaultFlexTokens.shadow.high[0], key: defaultFlexTokens.shadow.high.at(-1) });
   });
 

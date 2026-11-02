@@ -5,7 +5,7 @@ import { View, StyleSheet, Platform } from 'react-native';
 import { Text, ToggleButton } from '@fluentui/react-native';
 import { COLORTOKENS_TEST_COMPONENT, COLORTOKEN_TESTPAGE } from '@fluentui-react-native/e2e-testing';
 import type { SvgIconProps } from '@fluentui-react-native/icon';
-import { globalTokens } from '@fluentui-react-native/design/tokens/legacy';
+import { globalTokens } from '@fluentui-react-native/design/deprecated';
 import type { Theme } from '@fluentui-react-native/design/theming';
 import { useTheme } from '@fluentui-react-native/design/theming';
 import { themedStyleSheet } from '@fluentui-react-native/design/styling/stylesheet';

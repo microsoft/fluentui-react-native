@@ -29,7 +29,7 @@ repository reference `components.agentic.styles-and-tokens`.
   models, and neither hook constructs the model it does not return.
 - Key caches by source, revision, and resolved appearance, keep them outside author-owned objects, and give every new
   `ThemeState` a new style registry.
-- Keep the root entry point free of the legacy projection, legacy token payloads, and color compositing; it reaches
+- Keep the root entry point free of the legacy projection, deprecated token data, and color compositing; it reaches
   the color library's interaction algorithm only through the Flex interaction policy. Legacy and optional APIs stay
   behind their subpaths.
 - Keep color resolution lazy: resolving, merging, and reading rest never run the interaction algorithm, and a derived
@@ -37,6 +37,9 @@ repository reference `components.agentic.styles-and-tokens`.
 - Treat `src/tokens/mappings/flex-token-map.yaml` as the canonical token mapping (R-DESIGN-001), and regenerate rather
   than edit generated token and projection files.
 - Production code must not depend on the `testing` entry point (R-DESIGN-002).
+- Keep the Fluent 2 token JSON loaders and pipeline mappers in `src/deprecated/`. Only tests, other deprecated code,
+  build scripts, and the existing deprecated consumers may use them, and no other entry point may reach them
+  (R-DESIGN-003).
 - Update the owning reference with every behavior or API change, and record unfinished work only in
   `references/remaining-work.md` (R-PKGDOC-009).
 

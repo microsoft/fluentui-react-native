@@ -12,15 +12,15 @@ import hcAliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-
 import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
 import { PlatformColor } from 'react-native';
 
-import { mapPipelineToShadow } from '../mapPipelineToShadow';
-import { mapFontPipelineToTheme, mapPipelineToTheme } from '../mapPipelineToTheme';
-import * as androidMapper from '../mapPipelineToTheme.android';
-import * as iosMapper from '../mapPipelineToTheme.ios';
+import { mapPipelineToShadow } from '../../deprecated/mapPipelineToShadow';
+import { mapFontPipelineToTheme, mapPipelineToTheme } from '../../deprecated/mapPipelineToTheme';
+import * as androidMapper from '../../deprecated/mapPipelineToTheme.android';
+import * as iosMapper from '../../deprecated/mapPipelineToTheme.ios';
 import {
   processAliasTokens,
   transformWin32PlatformColorName,
   transformWindowsPlatformColorName,
-} from '../tokens/highContrast/processAliasTokens';
+} from '../../deprecated/tokens/highContrast/processAliasTokens';
 import * as android from './fluentTokens.generated.android';
 import * as ios from './fluentTokens.generated.ios';
 import * as macos from './fluentTokens.generated.macos';

@@ -8,15 +8,20 @@ import type {
   ThemeAppearanceOptions as RootThemeAppearanceOptions,
   ThemeState,
 } from '../../index';
-import { getDefaultLegacyTheme as getDefaultLegacyThemeOnly } from '../../fluent/compat/defaultLegacyTheme';
-import { getDefaultLegacyTheme, themeFromFlexTokens } from '../../fluent/compat/index';
+import {
+  getAliasTokens,
+  getShadowTokens,
+  globalTokens,
+  hcAliasTokens,
+  mapFontPipelineToTheme,
+  mapPipelineToShadow,
+  mapPipelineToTheme,
+} from '../../deprecated/index';
+import { themeFromFlexTokens } from '../../fluent/compat/index';
 import type { ThemeFromFlexTokensOptions } from '../../fluent/compat/index';
 import {
   getCurrentAppearance,
   isHighContrast,
-  mapFontPipelineToTheme,
-  mapPipelineToShadow,
-  mapPipelineToTheme,
   resolveThemeAppearance,
   setIsHighContrast,
   ThemeContext,
@@ -71,6 +76,7 @@ import { ThemeReference as LegacySourceThemeReference } from '../../fluent/legac
 import type { OnThemeChange as LegacySourceOnThemeChange, ThemeRecipe as LegacySourceThemeRecipe } from '../../fluent/legacySource';
 import { themedStyleSheet } from '../../fluent/styling/stylesheet/index';
 import type { NamedStyles } from '../../fluent/styling/stylesheet/index';
+import { fluentDarkTheme } from '../../themes/index';
 import {
   backgroundColorTokens,
   borderStyles,
@@ -105,7 +111,6 @@ import type {
   StyleFactoryOperation,
   TokenBuilder,
 } from '../../fluent/styling/tokens/index';
-import { getAliasTokens, getShadowTokens, globalTokens, hcAliasTokens } from '../../fluent/tokens/index';
 
 /**
  * Every type name the compatibility packages re-export must remain importable
@@ -213,8 +218,7 @@ describe('legacy compatibility types', () => {
       expect.objectContaining({ colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' }),
     );
 
-    const legacyTheme = getDefaultLegacyTheme(legacyAppearance);
-    expect(getDefaultLegacyThemeOnly(legacyAppearance)).toBe(legacyTheme);
+    const legacyTheme = fluentDarkTheme;
     expect(themeFromFlexTokens(flexTokensFromTheme(legacyTheme), legacyAppearance).host.appearance).toBe('dark');
 
     const reference = new ThemeReference(legacyTheme, legacyTransform);

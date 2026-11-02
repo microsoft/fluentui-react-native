@@ -1,7 +1,7 @@
 import { memoize } from '@fluentui-react-native/framework-base';
+import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/design/deprecated';
 import type { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/design/theming';
 import type { ThemeShadowDefinition } from '@fluentui-react-native/design/theming';
-import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/design/theming';
 
 import { getMacOSAliasTokens, getMacOSShadowTokens } from './getMacOSTokens';
 

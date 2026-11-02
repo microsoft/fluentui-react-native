@@ -1,5 +1,5 @@
-import type { AliasColorTokens } from './types/Color.types';
-import type { Variants } from './types/Typography.types';
+import type { AliasColorTokens } from '../fluent/types/Color.types';
+import type { Variants } from '../fluent/types/Typography.types';
 
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {

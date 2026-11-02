@@ -152,13 +152,65 @@ describe('production code never depends on test collateral', () => {
   });
 });
 
+describe('deprecated code stays behind its boundary', () => {
+  const deprecatedSpecifier = '@fluentui-react-native/design/deprecated';
+  const tokenPackagePrefix = '@fluentui-react-native/design-tokens-';
+  const nonDeprecatedProductionFiles = productionFiles.filter((file) => !toSrcPath(file).startsWith('deprecated/'));
+
+  function importsTokenPackage(edge: ImportEdge): boolean {
+    return edge.specifier.startsWith(tokenPackagePrefix);
+  }
+
+  it('detects the deprecated token payloads', () => {
+    expect(readImports(path.join(srcRoot, 'deprecated/tokens/getTokens.ts')).some(importsTokenPackage)).toBe(true);
+    expect(nonDeprecatedProductionFiles.length).toBeGreaterThan(50);
+  });
+
+  it('has no production import of src/deprecated or the deprecated entry point outside src/deprecated', () => {
+    const violations = nonDeprecatedProductionFiles.flatMap((file) =>
+      readImports(file)
+        .filter((edge) =>
+          edge.specifier.startsWith('.')
+            ? resolveRelative(file, edge.specifier).some((resolved) => toSrcPath(resolved).startsWith('deprecated/'))
+            : edge.specifier === deprecatedSpecifier || edge.specifier.startsWith(`${deprecatedSpecifier}/`),
+        )
+        .map((edge) => `${toSrcPath(file)} -> ${edge.specifier}`),
+    );
+    expect(violations).toEqual([]);
+  });
+
+  it('keeps the Fluent 2 token packages out of production code outside src/deprecated', () => {
+    const violations = nonDeprecatedProductionFiles.flatMap((file) =>
+      readImports(file)
+        .filter(importsTokenPackage)
+        .map((edge) => `${toSrcPath(file)} -> ${edge.specifier}`),
+    );
+    expect(violations).toEqual([]);
+  });
+
+  it('keeps every production entry point free of deprecated code', () => {
+    const packageJson = jest.requireActual<{ exports: Record<string, string | { 'react-native': string }> }>('../../../package.json');
+    const entries = Object.entries(packageJson.exports).flatMap(([subpath, conditions]) =>
+      typeof conditions === 'string' || subpath === './deprecated' || subpath === './testing'
+        ? []
+        : [conditions['react-native'].slice('./src/'.length)],
+    );
+    expect(entries).toContain('fluent/compat/index.ts');
+    for (const entry of entries) {
+      expect([entry, reachedUnder(runtimeGraph(entry), 'deprecated/')]).toEqual([entry, []]);
+    }
+    expect(reachedUnder(runtimeGraph('deprecated/index.ts'), 'deprecated/').length).toBeGreaterThan(1);
+  });
+});
+
 describe('runtime graph ownership', () => {
   const legacyThemingGraph = runtimeGraph('theming/index.ts');
 
-  it('detects the legacy projection and payloads from the legacy theming entry', () => {
+  it('detects the legacy projection and its Fluent base from the legacy theming entry', () => {
     expect(legacyThemingGraph).toContain('fluent/useTheme.ts');
     expect(legacyThemingGraph).toContain('fluent/compat/themeFromFlexTokens.ts');
-    expect(reachedUnder(legacyThemingGraph, 'fluent/tokens/').length).toBeGreaterThan(0);
+    expect(legacyThemingGraph).toContain('themes/fluent/selectFluentTheme.ts');
+    expect(legacyThemingGraph).toContain('fluent/defaults/fluentTokens.generated.ts');
   });
 
   it('keeps the modern root free of legacy Fluent runtime and test collateral', () => {
@@ -207,7 +259,7 @@ describe('runtime graph ownership', () => {
     const legacySourceGraph = runtimeGraph('fluent/legacySource.ts');
     expect(legacySourceGraph).toContain('fluent/themeReference.ts');
     expect(reachedUnder(legacySourceGraph, 'fluent/compat/')).toEqual([]);
-    expect(reachedUnder(legacySourceGraph, 'fluent/tokens/')).toEqual([]);
+    expect(reachedUnder(legacySourceGraph, 'deprecated/')).toEqual([]);
   });
 
   it('keeps the themes entry free of the legacy projection, payloads, and test collateral', () => {
@@ -215,7 +267,7 @@ describe('runtime graph ownership', () => {
     expect(themesGraph).toContain('themes/fluent/fluentTheme.ts');
     expect(themesGraph).toContain('themes/flex/flexWarmTheme.ts');
     expect(themesGraph).not.toContain('fluent/useTheme.ts');
-    for (const prefix of ['test/', 'fluent/compat/', 'fluent/tokens/']) {
+    for (const prefix of ['test/', 'fluent/compat/', 'deprecated/']) {
       expect([prefix, reachedUnder(themesGraph, prefix)]).toEqual([prefix, []]);
     }
   });

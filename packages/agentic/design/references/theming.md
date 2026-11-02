@@ -107,13 +107,13 @@ back to an appearance reuses its entry within a revision, and a revision change 
 
 A request has `colorScheme` (`light`, `dark`, or `system`), `contrast` (`standard`, `highContrast`, or `system`), and
 `interfaceLevel` (`base`, `elevated`, or `system`), plus an optional `colorTone` (`cool` or `warm`). The resolved
-appearance is always concrete. `colorTone` is a design choice rather than a platform setting, so appearance sources never
-supply it: it resolves from the provider or root request, then the source's `appearance` option, then the fallback
+appearance is always concrete. `colorTone` is a design choice rather than a platform setting, so appearance sources
+never supply it: it resolves from the provider or root request, then the source's `appearance` option, then the fallback
 appearance, then `cool`. A nested `ThemedRoot` inherits it with the other requested axes, and a raw legacy
 `ThemeContext` boundary resolves to `cool`. Caches key a warm appearance separately; cool keeps the existing
-`colorScheme|contrast|interfaceLevel` key, and the complete legacy defaults do not vary by tone. A
-`ThemeAppearanceSource` provides a stable `getSnapshot()` and a `subscribe()` that installs native listeners only while
-subscribed; create one with `createThemeAppearanceSource`.
+`colorScheme|contrast|interfaceLevel` key, and the Fluent theme that backs the legacy projection does not vary by tone.
+A `ThemeAppearanceSource` provides a stable `getSnapshot()` and a `subscribe()` that installs native listeners only
+while subscribed; create one with `createThemeAppearanceSource`.
 
 | Platform       | Platform appearance source                                                                    |
 | -------------- | --------------------------------------------------------------------------------------------- |
@@ -186,15 +186,16 @@ const theme = new FlexThemeReference({ base: flexWarmTheme, appearance: { colorS
 
 The package root exports only the modern authoring and consumption APIs. It reaches the forward Theme-to-Flex adapter,
 which `useThemeState` needs for legacy sources, and the Flex interaction policy with the raw `color-lib` interaction
-algorithm, but not `useTheme`, the reverse converter, the complete legacy defaults, or legacy token payloads. The legacy
-`ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. An app that pairs a legacy
-`ThemeReference` with `useThemeState` reaches the forward adapter and, through the default theme state, the x3 defaults
-and the interaction policy with `color-lib/interaction`, but not `FlexThemeReference`, `color-lib/compositing`, or the
-compatibility projection. `entry-points.md` lists every subpath.
+algorithm, but not `useTheme`, the reverse converter, the Fluent themes it projects onto, or deprecated token data. The
+legacy `ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. An app that pairs a
+legacy `ThemeReference` with `useThemeState` reaches the forward adapter and, through the default theme state, the x3
+defaults and the interaction policy with `color-lib/interaction`, but not `FlexThemeReference`, `color-lib/compositing`,
+or the compatibility projection. `entry-points.md` lists every subpath.
 
 `themeFromFlexTokens` in `theming/compat` builds a complete `Theme` in this order:
 
-1. the appearance-specific complete legacy base from `getDefaultLegacyTheme`;
+1. the generated Fluent theme for the platform and appearance, selected as `fluentTheme` selects it, which supplies
+   every value Flex cannot represent;
 2. the source's `legacyFallback`, which preserves component recipes, custom colors, and host metadata that Flex cannot
    represent;
 3. the generated Flex projection, so mapped Flex values are authoritative;

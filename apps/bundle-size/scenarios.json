@@ -15,7 +15,7 @@
       "name": "design-theme-state",
       "module": "@fluentui-react-native/design",
       "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
-      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/test/", "/color-lib/compositing."],
+      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
       "requiredInputPatterns": [
         "/design/src/flex/flexThemeReference.",
         "/design/src/flex/useThemeState.",
@@ -27,7 +27,7 @@
       "name": "design-themed-root",
       "module": "@fluentui-react-native/design",
       "exports": ["ThemedRoot", "useRootSettings", "useThemeState"],
-      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/test/", "/color-lib/compositing."],
+      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
       "requiredInputPatterns": ["/design/src/flex/useThemeState.", "/design/src/theming/ThemedRoot."],
       "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
     },
@@ -49,12 +49,7 @@
           "exports": ["ThemeReference"]
         }
       ],
-      "forbiddenInputPatterns": [
-        "/design/src/fluent/compat/",
-        "/design/src/fluent/tokens/",
-        "/design/src/test/",
-        "/color-lib/compositing."
-      ],
+      "forbiddenInputPatterns": ["/design/src/fluent/compat/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
       "requiredInputPatterns": ["/design/src/fluent/themeReference."],
       "forbiddenOutputPatterns": ["/design/src/flex/flexThemeReference."],
       "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
@@ -63,7 +58,7 @@
       "name": "design-legacy-theme",
       "module": "@fluentui-react-native/design/theming",
       "exports": ["ThemeProvider", "ThemeReference", "useTheme"],
-      "forbiddenInputPatterns": ["/design/src/test/"],
+      "forbiddenInputPatterns": ["/design/src/deprecated/", "/design/src/test/"],
       "requiredInputPatterns": ["/design/src/theming/ThemeProvider."],
       "forbiddenOutputPatterns": ["/color-lib/", "/design/src/flex/"],
       "requiredOutputPatterns": ["/design/src/fluent/themeReference.", "/design/src/fluent/useTheme."]
@@ -72,9 +67,11 @@
       "name": "design-legacy-theme-from-flex",
       "module": "@fluentui-react-native/design/theming",
       "exports": ["FlexThemeReference", "ThemeProvider", "useTheme"],
+      "forbiddenInputPatterns": ["/design/src/deprecated/", "/design/src/test/"],
       "requiredInputPatterns": [
         "/design/src/fluent/compat/themeFromFlexTokens.",
-        "/design/src/fluent/tokens/",
+        "/design/src/themes/fluent/selectFluentTheme.",
+        "/design/src/fluent/defaults/fluentTokens.generated.",
         "/design/src/fluent/useTheme."
       ]
     },
@@ -84,7 +81,7 @@
       "exports": ["fluentLightTheme"],
       "forbiddenInputPatterns": [
         "/design/src/fluent/compat/",
-        "/design/src/fluent/tokens/",
+        "/design/src/deprecated/",
         "/design/src/fluent/useTheme.",
         "/design/src/test/"
       ],
@@ -106,7 +103,7 @@
       "exports": ["fluentTheme"],
       "forbiddenInputPatterns": [
         "/design/src/fluent/compat/",
-        "/design/src/fluent/tokens/",
+        "/design/src/deprecated/",
         "/design/src/fluent/useTheme.",
         "/design/src/test/"
       ],
@@ -126,7 +123,7 @@
       "exports": ["fluentHcTheme"],
       "forbiddenInputPatterns": [
         "/design/src/fluent/compat/",
-        "/design/src/fluent/tokens/",
+        "/design/src/deprecated/",
         "/design/src/fluent/useTheme.",
         "/design/src/test/"
       ],
@@ -151,7 +148,7 @@
       "exports": ["flexTheme"],
       "forbiddenInputPatterns": [
         "/design/src/fluent/compat/",
-        "/design/src/fluent/tokens/",
+        "/design/src/deprecated/",
         "/design/src/fluent/useTheme.",
         "/design/src/test/",
         "/color-lib/compositing."
@@ -166,7 +163,7 @@
       "exports": ["flexWarmTheme"],
       "forbiddenInputPatterns": [
         "/design/src/fluent/compat/",
-        "/design/src/fluent/tokens/",
+        "/design/src/deprecated/",
         "/design/src/fluent/useTheme.",
         "/design/src/test/",
         "/color-lib/compositing."

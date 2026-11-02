@@ -3,7 +3,7 @@ import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/t
 import darkShadowTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json';
 import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
 import lightShadowTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json';
-import type { AppearanceOptions } from '../types/Theme.types';
+import type { AppearanceOptions } from '../../fluent/types/Theme.types';
 import { assertNever } from 'assert-never';
 
 import { hcAliasTokens } from './highContrast/tokens-alias';

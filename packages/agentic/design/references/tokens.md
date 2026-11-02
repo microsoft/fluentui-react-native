@@ -6,7 +6,7 @@ owner_paths:
   - packages/agentic/design/src/flex/tokens.types.ts
   - packages/agentic/design/src/flex/defaults
   - packages/agentic/design/src/flex/adapters
-  - packages/agentic/design/src/fluent/tokens
+  - packages/agentic/design/src/deprecated
   - packages/agentic/design/scripts
 ---
 
@@ -23,7 +23,7 @@ owner_paths:
 | ------------------------------ | ------------------------------------------------- | --------------------------------------------------------------------------- |
 | Flex semantic tokens           | `FlexTokens` from `@fluentui-react-native/design` | `src/flex/tokens.types.ts`; x3 defaults in `src/flex/defaults/`             |
 | Platform global tokens         | `@fluentui-react-native/design/tokens/global`     | Generated into `src/tokens/global.generated.ts` and `src/tokens/generated/` |
-| Legacy alias and shadow tokens | `@fluentui-react-native/design/tokens/legacy`     | `src/fluent/tokens/`, for legacy themes only                                |
+| Deprecated Fluent 2 token data | `@fluentui-react-native/design/deprecated`        | `src/deprecated/`, for existing platform themes only (R-DESIGN-003)         |
 
 `FlexTokens` groups `color` (one `InteractiveColor` with `rest`, `hover`, and `pressed` per semantic color; see
 `flex-colors.md`), `shadow`, `fontWeight`, `fontFamily`, `fontSize`, `lineHeight`, `borderRadius`, `spacing`,
@@ -42,8 +42,9 @@ The package's `prebuild` script (`codegen.cts`) generates the global token files
 `@fluentui-react-native/design-tokens-*` packages and regenerates both mapping projections. It also generates
 `src/fluent/defaults/fluentTokens.generated.ts` (Win32) and its Windows, macOS, iOS, and Android variants. These modules
 contain complete Fluent alias colors, shadows, and font aliases, which the `themes` entry point consumes (`theming.md`).
-The runtime pipeline mappers and existing theme construction are unchanged. Do not edit generated files; change their
-inputs and rebuild.
+The generator applies the deprecated pipeline mappers from `src/deprecated/` at build time, so runtime code outside that
+directory reads Fluent 2 values only from these generated modules (R-DESIGN-003). Do not edit generated files; change
+their inputs and rebuild.
 
 Every generated platform module exports `light`, `dark`, `lightElevated`, `darkElevated`, `hcLight`, and `hcDark` color
 and shadow sets, plus `fontAliasTokens`. Colors satisfy `Required<AliasColorTokens>` (including deprecated red
@@ -119,8 +120,9 @@ never derives states: a state that neither the Theme nor a fallback supplies
 equals rest. X3 default changes therefore never alter projected legacy themes.
 Legacy
 `{ ambient, key }` Theme shadows become `[ambient, key]` layers. A complete
-legacy Theme also requires values that Flex cannot represent; those values are
-supplied by the lazy compatibility base under `src/fluent/compat`.
+legacy Theme also requires values that Flex cannot represent; the Flex-to-legacy
+projection takes those values from the Fluent theme for the appearance
+(`theming.md`).
 
 ### Internal consistency
 

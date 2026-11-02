@@ -78,5 +78,3 @@ export { ThemeReference } from '../fluent/themeReference';
 export type { OnThemeChange, ThemeRecipe, ThemeReferenceOptions, ThemeTransform } from '../fluent/themeReference';
 export type { FlexThemeSource, LegacyThemeSource, ThemeSource, ThemeSourceBase } from './themeSource';
 export { getCurrentAppearance, isHighContrast, setIsHighContrast } from '../fluent/platformUtils';
-export { mapFontPipelineToTheme, mapPipelineToTheme } from '../fluent/mapPipelineToTheme';
-export { mapPipelineToShadow } from '../fluent/mapPipelineToShadow';

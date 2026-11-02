@@ -18,25 +18,27 @@ owner_paths:
 | `src/flex/adapters/`   | The engine-free Theme-to-Flex adapter and its Fluent-native fallbacks                                       |
 | `src/flex/colors/`     | Authored color normalization, the resolved color envelope, token classification, and the interaction policy |
 | `src/fluent/`          | Legacy Fluent theme types, `ThemeReference`, `useTheme`, platform utilities, and legacy styling             |
-| `src/fluent/compat/`   | The Flex-to-legacy projection and complete legacy defaults; never reachable from the root                   |
-| `src/fluent/tokens/`   | Legacy alias, shadow, and global token data                                                                 |
+| `src/fluent/compat/`   | The Flex-to-legacy projection onto the Fluent themes; never reachable from the root                         |
 | `src/themes/`          | Ready-made Fluent themes from the generated Fluent 2 tokens and Flex themes from the x3 defaults            |
 | `src/tokens/`          | Generated global tokens and shared token attributes                                                         |
 | `src/tokens/mappings/` | The canonical token map and its generated projections; see `tokens.md`                                      |
 | `src/styling/`         | Shared state style factories and the `styling` facade; see `styling.md`                                     |
 | `src/color-lib/`       | Raw, token-free color algorithms; see `color-lib.md`                                                        |
+| `src/deprecated/`      | Fluent 2 token JSON loaders and pipeline mappers behind `./deprecated`; see `entry-points.md`               |
 | `src/test/`            | Test-only fixtures, compatibility baselines, and color validation; see `testing.md`                         |
 | `src/index.ts`         | The modern root entry point; see `entry-points.md` for every subpath                                        |
 
 Shared modules may import types from either model. At runtime, only the `theming` facade, the `themes` entry, and the
 legacy subpaths reach `src/fluent/`; the root and `styling` graphs may reach `src/flex/` but never `src/fluent/`.
 Dependencies point one way: `src/flex/colors/` may import `src/color-lib/`, but `src/color-lib/` imports only its own
-modules and shared types. Production code never imports `src/test/`. Source paths are private: consumers use the package
-subpaths in `entry-points.md`, never `src/` or `lib/` paths.
+modules and shared types. Production code never imports `src/test/`, and only `src/deprecated/` imports the Fluent 2
+token JSON packages. Source paths are private: consumers use the package subpaths in `entry-points.md`, never `src/` or
+`lib/` paths.
 
-The package's scripts directory holds `codegen.cts`, which runs before every build, the token-mapping check and
-upstream drift tools, and the x3 defaults generator, all described in `tokens.md`. Generated token, projection, and
-default files are committed; change their inputs and regenerate rather than editing them.
+The package's scripts directory holds `codegen.cts`, which runs before every build, the token-mapping check and upstream
+drift tools, and the x3 defaults generator, all described in `tokens.md`. The Fluent token generator applies the
+deprecated pipeline mappers from `src/deprecated/` at build time. Generated token, projection, and default files are
+committed; change their inputs and regenerate rather than editing them.
 
 ## Invariants
 
@@ -48,7 +50,7 @@ default files are committed; change their inputs and regenerate rather than edit
   run the bundle-size scenarios too when changing imports between these areas.
 - Keep `src/themes/` a consumer of generated tokens. `src/themes/fluent/` may reach `ThemeReference`, the generated
   Fluent tokens, and the generated global tokens, but never `src/flex/`, `src/color-lib/`, `useTheme`,
-  `src/fluent/compat/`, or the legacy token payloads, and it authors no color value that the generated alias colors lack.
+  `src/fluent/compat/`, or `src/deprecated/`, and it authors no color value that the generated alias colors lack.
   `src/themes/flex/` exposes the x3 default descriptions unchanged and never reaches `src/fluent/` or
   `color-lib/compositing`. The tests under `src/themes/`, the import-boundary test, and the `design-fluent-*` and
   `design-flex-*` bundle-size scenarios guard this.
@@ -60,11 +62,13 @@ default files are committed; change their inputs and regenerate rather than edit
 - Keep the experimental native appearance modules and platform theme packages out of this package's dependencies;
   platform theme packages inject their sources.
 - Production code must not import the `testing` entry point (R-DESIGN-002).
+- Keep the Fluent 2 token JSON behind `src/deprecated/`: only tests, other deprecated modules, build scripts, and the
+  existing deprecated consumers may use it, and no other production entry point may reach it (R-DESIGN-003).
 
 ## Tests
 
-Jest runs with the macOS platform preset declared in `package.json`. A test named `*.test.<platform>.ts`, such as
-`defaultLegacyTheme.test.ios.ts`, runs under that platform, so add one when a platform implementation file changes.
+Jest runs with the macOS platform preset declared in `package.json`. A test named `*.test.<platform>.ts` runs under
+that platform, so add one when a platform implementation file changes.
 Iterate with a focused selection, such as `yarn test themeRuntime` or `yarn test --findRelatedTests src/theming/appearance.ts`.
 `src/test/compatibility/` holds the public-surface, legacy-runtime, and import-boundary baselines; update their
 snapshots only for an intended compatibility change.

@@ -2,49 +2,49 @@
 
 exports[`Flex default baseline keeps the dark legacy projection of the default Flex tokens 1`] = `
 {
-  "colorCount": 274,
-  "colors": "bc2282479a31f977",
+  "colorCount": 318,
+  "colors": "00e96311260ec7a0",
   "components": "75484377ab62c281",
   "host": "e8e4ef993a27738e",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
-  "typography": "758be399ff81061a",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
 exports[`Flex default baseline keeps the darkElevated legacy projection of the default Flex tokens 1`] = `
 {
-  "colorCount": 274,
-  "colors": "bc2282479a31f977",
+  "colorCount": 318,
+  "colors": "00e96311260ec7a0",
   "components": "75484377ab62c281",
   "host": "f94ca80c0bbf7966",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
-  "typography": "758be399ff81061a",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
 exports[`Flex default baseline keeps the highContrast legacy projection of the default Flex tokens 1`] = `
 {
-  "colorCount": 274,
-  "colors": "a560e8f2d3b4fa4a",
+  "colorCount": 318,
+  "colors": "95d8ba84933eb351",
   "components": "75484377ab62c281",
   "host": "9db06d0a5ce1e422",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
-  "typography": "758be399ff81061a",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
 exports[`Flex default baseline keeps the light legacy projection of the default Flex tokens 1`] = `
 {
-  "colorCount": 274,
-  "colors": "9466ef021b8d326d",
+  "colorCount": 318,
+  "colors": "17121c304beef7e4",
   "components": "75484377ab62c281",
   "host": "6be4fd450402dc4f",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
-  "typography": "758be399ff81061a",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
@@ -64,12 +64,12 @@ exports[`Flex default baseline keeps the values consumers read from the default 
 }
 `;
 
-exports[`legacy compatibility baseline keeps Flex values converted from the dark default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps Flex values converted from the dark Fluent projection base 1`] = `
 {
   "borderRadius": "13bd91dc683ef515",
-  "color": "8b3240b5c9086b86",
+  "color": "79755e1e202aa0e8",
   "colorCount": 119,
-  "fontFamily": "1563f269b690db9d",
+  "fontFamily": "7a4e96787cf538ad",
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
@@ -80,12 +80,12 @@ exports[`legacy compatibility baseline keeps Flex values converted from the dark
 }
 `;
 
-exports[`legacy compatibility baseline keeps Flex values converted from the darkElevated default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps Flex values converted from the darkElevated Fluent projection base 1`] = `
 {
   "borderRadius": "13bd91dc683ef515",
-  "color": "8b3240b5c9086b86",
+  "color": "79755e1e202aa0e8",
   "colorCount": 119,
-  "fontFamily": "1563f269b690db9d",
+  "fontFamily": "7a4e96787cf538ad",
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
@@ -96,12 +96,12 @@ exports[`legacy compatibility baseline keeps Flex values converted from the dark
 }
 `;
 
-exports[`legacy compatibility baseline keeps Flex values converted from the highContrast default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps Flex values converted from the highContrast Fluent projection base 1`] = `
 {
   "borderRadius": "13bd91dc683ef515",
-  "color": "428227abcd661352",
+  "color": "a6b03a11b350d9af",
   "colorCount": 119,
-  "fontFamily": "1563f269b690db9d",
+  "fontFamily": "7a4e96787cf538ad",
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
@@ -112,12 +112,12 @@ exports[`legacy compatibility baseline keeps Flex values converted from the high
 }
 `;
 
-exports[`legacy compatibility baseline keeps Flex values converted from the light default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps Flex values converted from the light Fluent projection base 1`] = `
 {
   "borderRadius": "13bd91dc683ef515",
-  "color": "847181f1c8ec73a4",
+  "color": "6887e2160d35b879",
   "colorCount": 119,
-  "fontFamily": "1563f269b690db9d",
+  "fontFamily": "7a4e96787cf538ad",
   "fontSize": "52fa58b4bacaf329",
   "fontWeight": "8fe4b9b24b1f62c7",
   "lineHeight": "e10b09e52a79eb29",
@@ -144,50 +144,50 @@ exports[`legacy compatibility baseline keeps Flex values converted from the mock
 }
 `;
 
-exports[`legacy compatibility baseline keeps the dark default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps the dark Fluent projection base 1`] = `
 {
-  "colorCount": 275,
-  "colors": "6e9e7b821c45c476",
+  "colorCount": 316,
+  "colors": "b56d0c7ca32cf2cf",
   "components": "44136fa355b3678a",
   "host": "e8e4ef993a27738e",
   "shadows": "3388fc7114c96ee3",
   "spacing": "ae5c5f37376210ff",
-  "typography": "1c07bfca1b48a07f",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
-exports[`legacy compatibility baseline keeps the darkElevated default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps the darkElevated Fluent projection base 1`] = `
 {
-  "colorCount": 275,
-  "colors": "6e9e7b821c45c476",
+  "colorCount": 316,
+  "colors": "b56d0c7ca32cf2cf",
   "components": "44136fa355b3678a",
-  "host": "f94ca80c0bbf7966",
+  "host": "e8e4ef993a27738e",
   "shadows": "3388fc7114c96ee3",
   "spacing": "ae5c5f37376210ff",
-  "typography": "1c07bfca1b48a07f",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
-exports[`legacy compatibility baseline keeps the highContrast default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps the highContrast Fluent projection base 1`] = `
 {
-  "colorCount": 275,
-  "colors": "730a40d80e103538",
+  "colorCount": 316,
+  "colors": "bc1662992dbe6db5",
   "components": "44136fa355b3678a",
   "host": "9db06d0a5ce1e422",
   "shadows": "3388fc7114c96ee3",
   "spacing": "ae5c5f37376210ff",
-  "typography": "1c07bfca1b48a07f",
+  "typography": "03f7ecba1c80477d",
 }
 `;
 
-exports[`legacy compatibility baseline keeps the light default legacy theme 1`] = `
+exports[`legacy compatibility baseline keeps the light Fluent projection base 1`] = `
 {
-  "colorCount": 275,
-  "colors": "8b685906103f0ebf",
+  "colorCount": 316,
+  "colors": "e8b1164fbd03da1f",
   "components": "44136fa355b3678a",
   "host": "6be4fd450402dc4f",
   "shadows": "6cb9f79865a74b20",
   "spacing": "ae5c5f37376210ff",
-  "typography": "1c07bfca1b48a07f",
+  "typography": "03f7ecba1c80477d",
 }
 `;

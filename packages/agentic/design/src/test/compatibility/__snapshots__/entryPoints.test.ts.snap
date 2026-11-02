@@ -43,6 +43,18 @@ exports[`public entry points ./color-lib keeps its runtime export names 1`] = `
 ]
 `;
 
+exports[`public entry points ./deprecated keeps its runtime export names 1`] = `
+[
+  "getAliasTokens: function",
+  "getShadowTokens: function",
+  "globalTokens: object",
+  "hcAliasTokens: object",
+  "mapFontPipelineToTheme: function",
+  "mapPipelineToShadow: function",
+  "mapPipelineToTheme: function",
+]
+`;
+
 exports[`public entry points ./styling keeps its runtime export names 1`] = `
 [
   "colorStyleDef: function",
@@ -124,9 +136,6 @@ exports[`public entry points ./theming keeps its runtime export names 1`] = `
   "flexColor: function",
   "getCurrentAppearance: function",
   "isHighContrast: function",
-  "mapFontPipelineToTheme: function",
-  "mapPipelineToShadow: function",
-  "mapPipelineToTheme: function",
   "normalizeThemeAppearanceRequest: function",
   "resolveThemeAppearance: function",
   "selectColorEntry: function",
@@ -141,14 +150,7 @@ exports[`public entry points ./theming keeps its runtime export names 1`] = `
 
 exports[`public entry points ./theming/compat keeps its runtime export names 1`] = `
 [
-  "getDefaultLegacyTheme: function",
   "themeFromFlexTokens: function",
-]
-`;
-
-exports[`public entry points ./theming/compat/defaults keeps its runtime export names 1`] = `
-[
-  "getDefaultLegacyTheme: function",
 ]
 `;
 
@@ -1026,14 +1028,5 @@ exports[`public entry points ./tokens/global keeps its runtime export names 1`] 
   "strokeWidth40: number",
   "strokeWidth60: number",
   "strokeWidthNone: number",
-]
-`;
-
-exports[`public entry points ./tokens/legacy keeps its runtime export names 1`] = `
-[
-  "getAliasTokens: function",
-  "getShadowTokens: function",
-  "globalTokens: object",
-  "hcAliasTokens: object",
 ]
 `;

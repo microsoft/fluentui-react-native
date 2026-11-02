@@ -3,7 +3,7 @@ import type { AliasColorTokens } from '../src/fluent/types/Color.types';
 import type { Variants, VariantValue } from '../src/fluent/types/Typography.types';
 const { GeneratedFile, ValuePool, expression, makeComment } = require('@fluentui-react-native/scripts');
 const path = require('node:path');
-const { mapPipelineToShadow } = require('../src/fluent/mapPipelineToShadow.ts');
+const { mapPipelineToShadow } = require('../src/deprecated/mapPipelineToShadow.ts');
 
 type Appearance = 'light' | 'dark' | 'lightElevated' | 'darkElevated' | 'hcLight' | 'hcDark';
 type ColorKey = keyof AliasColorTokens;
@@ -12,7 +12,7 @@ type PipelineTokens = Record<string, Record<string, string | number>>;
 type PlatformData = {
   /** Token package directory for each appearance the platform supplies. Light supplies the font aliases. */
   paths: Partial<Record<Appearance, string>> & { light: string; dark: string };
-  /** Pipeline mapper module in src/fluent for the platform. */
+  /** Pipeline mapper module in src/deprecated for the platform. */
   mapper: string;
   filename: string;
   /** Native name for a pipeline `PlatformColor(Name)` system color. Defaults to the Win32 name. */
@@ -170,7 +170,7 @@ function definedEntries<T>(values: Record<string, T | undefined>): Record<string
 }
 
 function mapColors(tokens: PipelineTokens, mapper: string, keys?: Set<ColorKey>): Record<string, string> {
-  const { mapPipelineToTheme } = require(`../src/fluent/${mapper}`);
+  const { mapPipelineToTheme } = require(`../src/deprecated/${mapper}`);
   const colors = definedEntries<string>(mapPipelineToTheme(tokens));
   // Keep native states that a legacy mapper omits, but do not add keys outside the alias contract.
   if (keys) {
@@ -272,7 +272,7 @@ const legacyFontAliases: Record<string, string> = {
 };
 
 function mapFonts(platformData: PlatformData): Record<string, VariantValue> {
-  const { mapFontPipelineToTheme } = require(`../src/fluent/${platformData.mapper}`);
+  const { mapFontPipelineToTheme } = require(`../src/deprecated/${platformData.mapper}`);
   const { font } = require(`${platformData.paths.light}tokens-global.json`);
   const defaults = Object.fromEntries(
     Object.entries(fontRamp).map(([name, [size, weight]]) => [

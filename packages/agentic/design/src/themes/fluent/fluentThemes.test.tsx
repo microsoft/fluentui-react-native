@@ -4,7 +4,6 @@ import { Appearance } from 'react-native';
 
 import { act, create } from 'react-test-renderer';
 
-import { getDefaultLegacyTheme } from '../../fluent/compat/defaultLegacyTheme';
 import {
   darkAliasColors,
   darkShadows,
@@ -25,6 +24,7 @@ import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceSou
 import { fluentDarkTheme, fluentHcTheme, fluentLightTheme, fluentTheme } from '../index';
 import { fluentHcDarkTheme } from './fluentHcDarkTheme';
 import { fluentHcLightTheme } from './fluentHcLightTheme';
+import { selectFluentTheme } from './selectFluentTheme';
 
 const standardLight = { colorScheme: 'light', contrast: 'standard', interfaceLevel: 'base' } as const;
 const standardDark = { colorScheme: 'dark', contrast: 'standard', interfaceLevel: 'base' } as const;
@@ -95,19 +95,13 @@ describe.each(themes)('Fluent %s theme', (_name, theme, aliasColors, shadows, ho
     expect(theme.spacing).toEqual({ s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' });
   });
 
-  it('defines every key the legacy default theme defines, with no undefined values', () => {
-    const legacy = getDefaultLegacyTheme(appearance);
-    const missing = [
-      ...Object.keys(legacy.colors).filter((key) => !(key in theme.colors)),
-      ...Object.keys(legacy.shadows).filter((key) => !(key in theme.shadows)),
-      ...Object.keys(legacy.typography.families).filter((key) => !(key in theme.typography.families)),
-      ...Object.keys(legacy.typography.sizes).filter((key) => !(key in theme.typography.sizes)),
-      ...Object.keys(legacy.typography.variants).filter((key) => !(key in theme.typography.variants)),
-      ...Object.keys(legacy.spacing).filter((key) => !(key in theme.spacing)),
-    ];
-
-    expect(missing).toEqual([]);
+  it('defines no undefined values', () => {
     expect(undefinedPaths(theme)).toEqual([]);
+  });
+
+  it('is the Fluent theme selected for its appearance', () => {
+    expect(selectFluentTheme(appearance)).toBe(theme);
+    expect(selectFluentTheme({ ...appearance, interfaceLevel: 'elevated' })).toBe(theme);
   });
 });
 

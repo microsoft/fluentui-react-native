@@ -1,4 +1,4 @@
-import type { ThemeShadowDefinition } from './types/Shadow.types';
+import type { ThemeShadowDefinition } from '../fluent/types/Shadow.types';
 
 /**
  * Given design token pipeline output for shadow tokens, creates an object that can be used in Theme object.

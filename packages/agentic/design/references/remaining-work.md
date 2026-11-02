@@ -75,10 +75,22 @@ behavior is documented in `theming.md`, `tokens.md`, and `entry-points.md`.
 
 - **Outcome:** `fluentTheme` selects distinct themes for elevated appearances.
 - **Current state:** `themes` provides light, dark, and high-contrast Fluent themes. The generated Fluent tokens already
-  supply `lightElevated` and `darkElevated` color and shadow sets (`tokens.md`), but `fluentTheme` resolves elevated
-  requests by color scheme alone.
-- **Done when:** the owner approves how elevated appearances map to those sets, and `fluentTheme` selects the matching
-  theme by the resolved interface level.
+  supply `lightElevated` and `darkElevated` color and shadow sets (`tokens.md`), but `fluentTheme` and the Flex-to-legacy
+  projection, which share `selectFluentTheme`, resolve elevated requests by color scheme alone.
+- **Done when:** the owner approves how elevated appearances map to those sets, and `selectFluentTheme` selects the
+  matching theme by the resolved interface level.
+
+## Retire the deprecated entry point
+
+- **Outcome:** no package reads the Fluent 2 token JSON at runtime, and `@fluentui-react-native/design/deprecated`,
+  `src/deprecated/`, and the runtime `design-tokens-*` dependencies are removed.
+- **Current state:** the Android, Apple, and Win32 theme packages build their legacy themes from the JSON through
+  `./deprecated`, the `theme-tokens` and `theming-utils` shims re-export it, and the private tester app reads the
+  `globalTokens` palettes (R-DESIGN-003). The generated Fluent sets already provide each platform's alias colors,
+  shadows, and font aliases (`tokens.md`), and the build still derives them from the JSON with the deprecated mappers.
+- **Done when:** the platform themes and the tester read the generated Fluent sets, generated global tokens, or Flex
+  tokens instead, the shims drop the deprecated re-exports in a release that permits the break, and the build reads the
+  JSON without runtime modules.
 
 ## Dependent work owned by other packages
 
