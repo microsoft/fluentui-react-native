@@ -1,0 +1,402 @@
+# Office palette control templates
+#
+# Maps the standard Office SwatchSet (the OfficePalette colors) into the ControlColorMap schema in ctlTemplates.ts.
+# Roles come from swatch-set-usage.yaml. The fields that semantic-slots.yaml and colored-component-slots.yaml split
+# apart are both covered here; BkgBadge, StrokeBadge, and TextBadge (Badge.Standard in colored-component-slots.yaml)
+# form the badge template. Component-sourced colored roles are mapped in colored-component-templates.yaml.
+#
+# Source: colors\Office.palette, revision 6963a5424731338e25c68cc28627bcc3428f0131, selector
+# Root/PaletteType[@Name=""], app Mso. Values are Office SwatchSet field names. Resolve them through the palette of
+# the containing UI region; actual colors vary with the palette, theme, application, and high-contrast mode. Office
+# swaps palette values per theme behind the same field names, so there are no Light, Dark, or HighContrast colors.
+#
+# Coverage: each of the 167 non-deprecated fields appears exactly once as a color value.
+#
+# Colors
+# - A color is named after its Office field with the state suffix removed. Aliases appear in comments.
+# - State suffixes: Rest -> rest, Hover -> hover, Pressed -> pressed, Selected -> selected, Disabled -> disabled,
+#   and Keyboard -> focused, which is the inner keyboard-focus border of a Ctl, CtlEmphasis, CtlSubtle, or TextBox
+#   control.
+# - Custom keys:
+#   - selectionHighlight: selected text. It is not the selected control state.
+#   - placeholder: placeholder text in a text box.
+#   - hyperlink: an inline hyperlink in a text box.
+#   - inverse: a secondary focus outline for unknown surroundings.
+#   - static: see below.
+# - static: Text, TextSecondary, and TextEmphasis are non-interactive foregrounds. TextRest, TextSecondaryRest, and
+#   TextEmphasisRest start the stateful transparent-control families. The stateful field is rest and the
+#   non-interactive field is static. Non-interactive templates (surface) resolve static when a color defines it.
+# - transparent is used as rest only where Office defines state borders without a resting field (StrokeOnly,
+#   StrokeOverSubtle, StrokeSelected). Those borders are absent at rest.
+#
+# Templates
+# - stroke.focus is the outer keyboard-focus rectangle, which pairs with the surrounding Bkg (StrokeKeyboard, or
+#   SliderKeyboard for sliders). A control's own Keyboard field is the focused key of its stroke color.
+# - A variant overrides only the roles it names and inherits the rest. While a control is selected, colors named by a
+#   selected variant resolve their own rest, hover, and pressed keys. Inherited colors resolve selected, falling back
+#   to rest.
+# - Ctl colors are for standard push buttons (button), CtlEmphasis for emphasis push buttons (button.emphasis), and
+#   CtlSubtle for checkboxes and radio buttons. Transparent push buttons such as ribbon buttons use button.transparent
+#   with the StrokeOver borders. Other transparent-at-rest controls, such as list items, use listItem.
+# - pivot covers text-only interactive controls. Their background stays the region's Bkg in every state, so pivot
+#   sets no bg.
+# - Slider parts follow each slider style's primary and secondary assignments. The definition does not fix a
+#   thumb-versus-track split.
+#
+# Excluded deprecated (DocsOnly) fields
+# - Do not use:
+#   - BkgCtlSubtleSelectionHighlight -> BkgTextBoxSelectionHighlight
+#   - TextCtlSubtlePlaceholder -> TextTextBoxPlaceholder
+#   - TextCtlSubtleSelectionHighlight -> TextTextBoxSelectionHighlight
+# - Legacy text entry: BkgTextBoxSelected, BkgTextBoxFocus, BkgTextBoxHoverDisabled, BkgTextBoxSelectedDisabled,
+#   TextTextBoxSelected.
+# - Legacy Android: BkgCtlSubtleSelected, TextCtlSubtleSelected, BkgCtlEmphasisFocus, BkgCtlSubtleFocus,
+#   BkgCtlSubtleHoverDisabled, BkgCtlSubtleSelectedDisabled. These six remain in FURN's OfficePalette type.
+#
+# FURN's OfficePalette type (packages/agentic/design/src/theming/types/palette.types.ts) lacks 36 mapped fields:
+# - the Stripe fields
+# - the TextBox fields except TextTextBoxPlaceholder
+# - the TextHyperlinkParent fields
+# - GlyphAsButtonSubtle*
+# - StrokeOverSubtleHover
+# - StrokeKeyboardInverse and StrokeKeyboardSelected
+# - BkgBadge, StrokeBadge, and TextBadge
+colors:
+  AccentDark: # alias: Accent
+    rest: AccentDark
+  AccentEmphasis:
+    rest: AccentEmphasis
+  AccentLight: # alias: AccentSubtle
+    rest: AccentLight
+  AccentOutline:
+    rest: AccentOutline
+  Bkg:
+    rest: Bkg
+    hover: BkgHover
+    pressed: BkgPressed
+    selected: BkgSelected
+    selectionHighlight: BkgSelectionHighlight
+  BkgAccentTint:
+    rest: BkgAccentTint
+  BkgBadge:
+    rest: BkgBadge
+  BkgCtl:
+    rest: BkgCtl
+    hover: BkgCtlHover
+    pressed: BkgCtlPressed
+    selected: BkgCtlSelected
+    disabled: BkgCtlDisabled
+  BkgCtlEmphasis:
+    rest: BkgCtlEmphasis
+    hover: BkgCtlEmphasisHover
+    pressed: BkgCtlEmphasisPressed
+    disabled: BkgCtlEmphasisDisabled
+  BkgCtlSubtle:
+    rest: BkgCtlSubtle
+    hover: BkgCtlSubtleHover
+    pressed: BkgCtlSubtlePressed
+    disabled: BkgCtlSubtleDisabled
+  BkgHeader:
+    rest: BkgHeader
+  BkgStripe:
+    rest: BkgStripe
+  BkgSubtle: # scrollbar gutter, not a general subtle surface
+    rest: BkgSubtle
+  BkgTextBox:
+    rest: BkgTextBox
+    hover: BkgTextBoxHover
+    pressed: BkgTextBoxPressed
+    disabled: BkgTextBoxDisabled
+    selectionHighlight: BkgTextBoxSelectionHighlight
+  BkgToggleSwitchOff:
+    rest: BkgToggleSwitchOff
+    hover: BkgToggleSwitchOffHover
+    pressed: BkgToggleSwitchOffPressed
+    disabled: BkgToggleSwitchOffDisabled
+  BkgToggleSwitchOn:
+    rest: BkgToggleSwitchOn
+    hover: BkgToggleSwitchOnHover
+    pressed: BkgToggleSwitchOnPressed
+    disabled: BkgToggleSwitchOnDisabled
+  GlyphAsButtonSubtle:
+    rest: GlyphAsButtonSubtle
+    hover: GlyphAsButtonSubtleHover
+    pressed: GlyphAsButtonSubtlePressed
+  SliderBuffer:
+    rest: SliderBuffer
+  SliderKeyboard:
+    rest: SliderKeyboard
+  SliderPrimary:
+    rest: SliderPrimary
+    hover: SliderPrimaryHover
+    pressed: SliderPrimaryPressed
+    disabled: SliderPrimaryDisabled
+  SliderSecondary:
+    rest: SliderSecondary
+  SliderToolTipBkg:
+    rest: SliderToolTipBkg
+  SliderToolTipBorder:
+    rest: SliderToolTipBorder
+  SliderToolTipLabel:
+    rest: SliderToolTipLabel
+  StrokeBadge:
+    rest: StrokeBadge
+  StrokeCtl:
+    rest: StrokeCtl
+    hover: StrokeCtlHover
+    pressed: StrokeCtlPressed
+    selected: StrokeCtlSelected
+    disabled: StrokeCtlDisabled
+    focused: StrokeCtlKeyboard
+  StrokeCtlEmphasis:
+    rest: StrokeCtlEmphasis
+    hover: StrokeCtlEmphasisHover
+    pressed: StrokeCtlEmphasisPressed
+    disabled: StrokeCtlEmphasisDisabled
+    focused: StrokeCtlEmphasisKeyboard
+  StrokeCtlSubtle:
+    rest: StrokeCtlSubtle
+    hover: StrokeCtlSubtleHover
+    pressed: StrokeCtlSubtlePressed
+    disabled: StrokeCtlSubtleDisabled
+    focused: StrokeCtlSubtleKeyboard
+  StrokeKeyboard: # drawn only while focused; selected is the high-contrast distinction
+    rest: StrokeKeyboard
+    selected: StrokeKeyboardSelected
+    inverse: StrokeKeyboardInverse
+  StrokeOnly: # color-swatch border; fill and foreground never change
+    rest: transparent
+    hover: StrokeOnlyHover
+    pressed: StrokeOnlyPressed
+    selected: StrokeOnlySelected
+  StrokeOver: # transparent push-button border, normally transparent at rest
+    rest: StrokeOverRest
+    hover: StrokeOverHover
+    pressed: StrokeOverPressed
+  StrokeOverSelected:
+    rest: StrokeOverSelectedRest
+    hover: StrokeOverSelectedHover
+    pressed: StrokeOverSelectedPressed
+  StrokeOverSubtle: # scrollbar hover frame
+    rest: transparent
+    hover: StrokeOverSubtleHover
+  StrokeSelected: # extra border on a selected transparent control while hovered
+    rest: transparent
+    hover: StrokeSelectedHover
+  StrokeStripe:
+    rest: StrokeStripe
+  StrokeStripeOuter:
+    rest: StrokeStripeOuter
+  StrokeTextBox:
+    rest: StrokeTextBox
+    hover: StrokeTextBoxHover
+    pressed: StrokeTextBoxPressed
+    disabled: StrokeTextBoxDisabled
+    focused: StrokeTextBoxKeyboard
+  StrokeToggleSwitchOff:
+    rest: StrokeToggleSwitchOff
+    hover: StrokeToggleSwitchOffHover
+    pressed: StrokeToggleSwitchOffPressed
+    disabled: StrokeToggleSwitchOffDisabled
+  StrokeToggleSwitchOn:
+    rest: StrokeToggleSwitchOn
+    hover: StrokeToggleSwitchOnHover
+    pressed: StrokeToggleSwitchOnPressed
+    disabled: StrokeToggleSwitchOnDisabled
+  Text:
+    rest: TextRest
+    hover: TextHover
+    pressed: TextPressed
+    selected: TextSelected
+    disabled: TextDisabled
+    selectionHighlight: TextSelectionHighlight
+    static: Text
+  TextAccentTint:
+    rest: TextAccentTint
+  TextActive:
+    rest: TextActive
+    hover: TextActiveHover
+    pressed: TextActivePressed
+    selected: TextActiveSelected
+  TextBadge:
+    rest: TextBadge
+  TextCtl:
+    rest: TextCtl
+    hover: TextCtlHover
+    pressed: TextCtlPressed
+    selected: TextCtlSelected
+    disabled: TextCtlDisabled
+  TextCtlEmphasis:
+    rest: TextCtlEmphasis
+    hover: TextCtlEmphasisHover
+    pressed: TextCtlEmphasisPressed
+    disabled: TextCtlEmphasisDisabled
+  TextCtlSubtle:
+    rest: TextCtlSubtle
+    hover: TextCtlSubtleHover
+    pressed: TextCtlSubtlePressed
+    disabled: TextCtlSubtleDisabled
+  TextEmphasis:
+    rest: TextEmphasisRest
+    hover: TextEmphasisHover
+    pressed: TextEmphasisPressed
+    selected: TextEmphasisSelected
+    static: TextEmphasis
+  TextEmphasis2:
+    rest: TextEmphasis2
+  TextError:
+    rest: TextError
+    hover: TextErrorHover
+    pressed: TextErrorPressed
+    selected: TextErrorSelected
+  TextHeader:
+    rest: TextHeader
+  TextHyperlink:
+    rest: TextHyperlink
+    hover: TextHyperlinkHover
+    pressed: TextHyperlinkPressed
+  TextHyperlinkParentHovered:
+    rest: TextHyperlinkParentHovered
+    hover: TextHyperlinkParentHoveredHover
+    pressed: TextHyperlinkParentHoveredPressed
+  TextHyperlinkParentSelected:
+    rest: TextHyperlinkParentSelected
+    hover: TextHyperlinkParentSelectedHover
+    pressed: TextHyperlinkParentSelectedPressed
+  TextSecondary: # alias: TextSubtle
+    rest: TextSecondaryRest
+    hover: TextSecondaryHover
+    pressed: TextSecondaryPressed
+    selected: TextSecondarySelected
+    static: TextSecondary
+  TextStripe:
+    rest: TextStripe
+    disabled: TextStripeDisabled
+  TextTextBox:
+    rest: TextTextBox
+    hover: TextTextBoxHover
+    pressed: TextTextBoxPressed
+    disabled: TextTextBoxDisabled
+    hyperlink: TextTextBoxHyperlink
+    placeholder: TextTextBoxPlaceholder
+    selectionHighlight: TextTextBoxSelectionHighlight
+  ThumbToggleSwitchOff:
+    rest: ThumbToggleSwitchOff
+    hover: ThumbToggleSwitchOffHover
+    pressed: ThumbToggleSwitchOffPressed
+    disabled: ThumbToggleSwitchOffDisabled
+  ThumbToggleSwitchOn:
+    rest: ThumbToggleSwitchOn
+    hover: ThumbToggleSwitchOnHover
+    pressed: ThumbToggleSwitchOnPressed
+    disabled: ThumbToggleSwitchOnDisabled
+templates:
+  badge:
+    bg: BkgBadge
+    fg: TextBadge
+    stroke: StrokeBadge
+  button:
+    bg: BkgCtl
+    fg: TextCtl
+    stroke: StrokeCtl
+    stroke.focus: StrokeKeyboard
+    variants:
+      emphasis:
+        bg: BkgCtlEmphasis
+        fg: TextCtlEmphasis
+        stroke: StrokeCtlEmphasis
+      transparent:
+        bg: Bkg
+        fg: Text
+        stroke: StrokeOver
+        fg.emphasis: TextEmphasis
+        fg.error: TextError
+        fg.secondary: TextSecondary
+        variants:
+          selected:
+            stroke: StrokeOverSelected
+  checkbox:
+    bg: BkgCtlSubtle
+    fg: TextCtlSubtle
+    stroke: StrokeCtlSubtle
+    stroke.focus: StrokeKeyboard
+  colorSwatch:
+    stroke: StrokeOnly
+    stroke.focus: StrokeKeyboard
+  groupHeader:
+    bg: BkgHeader
+    fg: TextHeader
+  link:
+    fg: TextHyperlink
+    stroke.focus: StrokeKeyboard
+    variants:
+      parentHovered: # link inside a hovered parent filled with BkgHover
+        fg: TextHyperlinkParentHovered
+      parentSelected: # link inside a selected parent filled with BkgSelected
+        fg: TextHyperlinkParentSelected
+  listItem:
+    bg: Bkg
+    fg: Text
+    fg.emphasis: TextEmphasis
+    fg.error: TextError
+    fg.secondary: TextSecondary
+    stroke.focus: StrokeKeyboard
+    variants:
+      selected:
+        stroke: StrokeSelected
+  pivot:
+    fg: TextActive
+    stroke.focus: StrokeKeyboard
+  radio:
+    bg: BkgCtlSubtle
+    fg: TextCtlSubtle
+    stroke: StrokeCtlSubtle
+    stroke.focus: StrokeKeyboard
+  scrollbar:
+    bg: BkgSubtle
+    stroke: StrokeOverSubtle
+    fg.glyph: GlyphAsButtonSubtle
+  slider:
+    fg: SliderPrimary
+    fg.buffer: SliderBuffer
+    fg.secondary: SliderSecondary
+    stroke.focus: SliderKeyboard
+  sliderToolTip:
+    bg: SliderToolTipBkg
+    fg: SliderToolTipLabel
+    stroke: SliderToolTipBorder
+  stripedControl: # pseudo-disabled control drawn with diagonal stripes and a dashed border
+    bg: BkgStripe
+    fg: TextStripe
+    stroke: StrokeStripeOuter
+    stroke.stripe: StrokeStripe
+  surface:
+    bg: Bkg
+    fg: Text
+    stroke: AccentDark
+    fg.emphasis: TextEmphasis
+    fg.emphasis2: TextEmphasis2
+    fg.error: TextError
+    fg.secondary: TextSecondary
+    stroke.emphasis: AccentEmphasis
+    stroke.outline: AccentOutline
+    stroke.separator: AccentLight
+    variants:
+      accentTint: # TextAccentTint is the only foreground defined for the tinted region
+        bg: BkgAccentTint
+        fg: TextAccentTint
+  textBox:
+    bg: BkgTextBox
+    fg: TextTextBox
+    stroke: StrokeTextBox
+    stroke.focus: StrokeKeyboard
+  toggleSwitch:
+    bg: BkgToggleSwitchOff
+    stroke: StrokeToggleSwitchOff
+    fg.thumb: ThumbToggleSwitchOff
+    stroke.focus: StrokeKeyboard
+    variants:
+      'on':
+        bg: BkgToggleSwitchOn
+        stroke: StrokeToggleSwitchOn
+        fg.thumb: ThumbToggleSwitchOn
