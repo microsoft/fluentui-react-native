@@ -154,3 +154,41 @@ while the repository runs native desktop automation, inspect both dependents,
 confirm their normal modules load without extraction, resolve `extract-zip` to
 `ignore:`, regenerate and deduplicate the lockfile, then prove the browser
 archive path fails closed and the native tooling still works.
+
+## Carried security backports
+
+The root resolutions carry the following focused Yarn patches. Run
+`yarn workspace @fluentui-react-native/scripts test` to exercise the installed
+CommonJS and ESM entry points, not just the patch text.
+
+- `deepmerge` 4.3.1: reject prototype-sensitive keys in both the target-copy
+  and source-merge loops, following the remediation in
+  [upstream issue 273](https://github.com/TehShrike/deepmerge/issues/273)
+  (GHSA-gcqx-w48m-w2h4). There is no published fixed release. Regressions cover
+  null-prototype targets, own malicious keys, and nested null placeholders.
+- `joi` 17.13.8: backport the linear-time email separator expression from
+  [upstream commit 807858d](https://github.com/hapijs/joi/commit/807858d7480f5075b0610817e3e44230890fb18e)
+  (GHSA-4528-x5fx-h6hg). Replace with 17.13.9 once its 2026-10-28
+  publication passes the seven-day age gate.
+- `glob` 13.0.6: backport cancellation returns and resume handling from
+  [upstream commit 4682e8c](https://github.com/isaacs/node-glob/commit/4682e8c9babee1b385202ede36389634e12076d7)
+  (GHSA-3g3m-2fjr-6pw4). Route package entry points to the patched unbundled
+  modules, so the bundled copy cannot bypass either this fix or the minimatch
+  patch. Fixed 14.x releases were published on 2026-10-27 and 2026-10-28;
+  validate major-version compatibility before replacing the backport.
+- `minimatch` 9.0.9 and 10.2.6: backport pattern expansion and pairwise
+  comparison bounds from
+  [upstream commit 77a0f5c](https://github.com/isaacs/minimatch/commit/77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8)
+  (GHSA-g3hv-75wg-m249). Keep each consumer on its existing major. Fixed
+  11.x releases were first published on 2026-10-27; do not force the new
+  object API into callers that require the callable 3.x API.
+
+Version-based audits still report these patched versions. Do not exclude the
+advisories or describe the audit as clean. The remaining minimatch 3.1.5 report
+is a version-range overmatch: it has neither affected preprocessing method;
+the regression suite checks that fact and its callable API. Remove each patch
+only after an age-eligible compatible release and its runtime regression pass.
+
+Legacy depcheck and its manifest exclusions are retired. Repository dependency
+checking uses the existing Knip step in `yarn lint-repo`; bundle budgets use
+`yarn bundle-size`, not the retired scripts-workspace `bundlesize` command.
