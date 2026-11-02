@@ -39,6 +39,7 @@
     "./babel": "./config/babel.cjs",
     "./config": {
       "types": "./lib/config/index.d.ts",
+      "import": "./lib/config/index.js",
       "default": "./src/config/index.ts"
     },
     "./driver": {
