@@ -24,6 +24,7 @@ export default defineDesktopConfig({
   reporting: { artifactsRoot: './artifacts/desktop' },
   suites: { stories: { kind: 'csf-wdio' } },
   integration: storybook({
+    wdio: { test: process.env.STORYBOOK_SMOKE_TEST },
     storyPackages: [
       [
         '@fluentui-react-native/components',

@@ -36,6 +36,7 @@ services:
     lifecycle: attached-session-per-test-with-isolated-node-worker
     context_platform: macos-or-windows-or-win32-target-endpoint
     test_filter: --test <name-glob>
+    smoke_test_filter_env: STORYBOOK_SMOKE_TEST
     smoke_mode: stories-and-tests
     execution: navigate-and-remount-then-run-tests-grouped-by-story
 
