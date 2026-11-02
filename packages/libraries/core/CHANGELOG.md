@@ -1,5 +1,23 @@
 # Change Log - @fluentui/react-native
 
+## 0.44.12
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/button@0.40.17
+  - @fluentui-react-native/checkbox@0.24.17
+  - @fluentui-react-native/contextual-menu@0.25.19
+  - @fluentui-react-native/menu-button@0.15.13
+  - @fluentui-react-native/radio-group@0.22.18
+  - @fluentui-react-native/tablist@0.8.18
+  - @fluentui-react-native/link@0.24.17
+  - @fluentui-react-native/persona@0.18.11
+  - @fluentui-react-native/persona-coin@0.17.11
+  - @fluentui-react-native/separator@0.19.16
+  - @fluentui-react-native/text@0.25.17
+
 ## 0.44.11
 
 ### Patch Changes

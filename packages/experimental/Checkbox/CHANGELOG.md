@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
+## 0.18.17
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/checkbox@0.24.17
+  - @fluentui-react-native/framework@0.17.10
+
 ## 0.18.16
 
 ### Patch Changes

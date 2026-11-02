@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/codemods
 
+## 0.6.8
+
+### Patch Changes
+
+- c9998e3: Preserve source line endings when printing codemod results instead of using the host platform's default.
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+
 ## 0.6.7
 
 ### Patch Changes

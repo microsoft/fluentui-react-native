@@ -1,5 +1,11 @@
 # @fluentui-react-native/design
 
+## 0.5.3
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+
 ## 0.5.2
 
 ### Patch Changes

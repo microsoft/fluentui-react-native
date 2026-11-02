@@ -1,5 +1,17 @@
 # Change Log - @fluentui-react-native/menu-button
 
+## 0.15.13
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/design@0.5.3
+  - @uifabricshared/foundation-compose@1.16.16
+  - @fluentui-react-native/button@0.40.17
+  - @fluentui-react-native/contextual-menu@0.25.19
+  - @fluentui-react-native/icon@0.22.17
+
 ## 0.15.12
 
 ### Patch Changes
