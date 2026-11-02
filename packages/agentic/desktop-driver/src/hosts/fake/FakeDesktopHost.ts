@@ -23,6 +23,8 @@ export type FakeDesktopElement = Omit<
   NativeElementSnapshot,
   'checked' | 'enabled' | 'expanded' | 'focused' | 'required' | 'selected' | 'visible'
 > & {
+  /** Names reported by `accessibilityActions` when the fake host advertises that feature. */
+  accessibilityActions?: readonly string[];
   checked?: boolean | 'mixed';
   enabled?: boolean;
   expanded?: boolean;
@@ -212,6 +214,14 @@ export class FakeDesktopHost implements DesktopHost {
       observing: true,
       source: 'fake',
     };
+  }
+
+  async accessibilityActions(elementId: string): Promise<string[]> {
+    if (!this.features.accessibilityActions) {
+      throw new HostUnsupportedError('The fake host is not configured to list accessibility actions.');
+    }
+    const element = this.requireElement(elementId) as Pick<FakeDesktopElement, 'accessibilityActions'>;
+    return [...(element.accessibilityActions ?? [])];
   }
 
   async activate(windowId: string): Promise<void> {

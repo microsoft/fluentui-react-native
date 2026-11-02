@@ -435,6 +435,20 @@ func copyAXActionNames(_ element: AXUIElement) throws -> [String] {
   return names as? [String] ?? []
 }
 
+// AppKit lists an NSAccessibilityCustomAction as "Name:<name>\nTarget:<address>\nSelector:<selector>". The target
+// and selector are process-local details, so only the authored name is exposed. Standard AX actions are unchanged.
+func accessibilityActionName(_ raw: String) -> String {
+  let prefix = "Name:"
+  guard raw.hasPrefix(prefix) else {
+    return raw
+  }
+  let remainder = raw.dropFirst(prefix.count)
+  guard let target = remainder.range(of: "\nTarget:", options: .backwards) else {
+    return String(remainder)
+  }
+  return String(remainder[..<target.lowerBound])
+}
+
 func axPoint(_ value: CFTypeRef?) -> CGPoint? {
   guard let value, CFGetTypeID(value) == AXValueGetTypeID() else {
     return nil

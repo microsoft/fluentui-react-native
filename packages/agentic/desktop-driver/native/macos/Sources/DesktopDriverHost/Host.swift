@@ -14,6 +14,7 @@ func createHello() -> JSONObject {
       "minor": 0,
     ],
     "features": [
+      "accessibilityActions",
       "accessibilityClick",
       "activeElement",
       "attach",

@@ -390,6 +390,50 @@ describe('Desktop Driver W3C remote end', () => {
     }
   });
 
+  test('lists published accessibility actions only for hosts that provide them', async () => {
+    const element = (id: string, accessibilityActions?: readonly string[]) => ({
+      id,
+      automationId: id,
+      role: 'checkbox',
+      scope: 'application' as const,
+      windowId: 'main',
+      rect: { x: 0, y: 0, width: 100, height: 40 },
+      accessibilityActions,
+    });
+    const windows = [{ id: 'main', title: 'Action fixture', elements: [element('toggle', ['Toggle', 'AXPress']), element('plain', [])] }];
+    const options = { endpoint: 'macos', platformName: 'macos', windows } as const;
+
+    const supported = await createDesktopDriverTestHarness({ ...options, features: { accessibilityActions: true } });
+    try {
+      const session = await createDesktopDriverClient({ url: supported.server.url }).newSession({
+        alwaysMatch: { platformName: 'macos', 'furn:target': supported.target.id },
+      });
+      const toggle = await session.findElement('accessibility id', 'toggle');
+      expect(await toggle.getProperty('accessibilityActions')).toEqual(['Toggle', 'AXPress']);
+      expect(await toggle.getAttribute('accessibilityActions')).toEqual(['Toggle', 'AXPress']);
+      expect(await (await session.findElement('accessibility id', 'plain')).getProperty('accessibilityActions')).toEqual([]);
+      await session.delete();
+    } finally {
+      await supported.close();
+    }
+
+    const withoutFeature = await createDesktopDriverTestHarness(options);
+    const withoutMethod = await createDesktopDriverTestHarness({ ...options, features: { accessibilityActions: true } });
+    Object.assign(withoutMethod.host, { accessibilityActions: undefined });
+    for (const harness of [withoutFeature, withoutMethod]) {
+      try {
+        const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+          alwaysMatch: { platformName: 'macos', 'furn:target': harness.target.id },
+        });
+        const toggle = await session.findElement('accessibility id', 'toggle');
+        await expect(toggle.getProperty('accessibilityActions')).rejects.toMatchObject({ code: 'unsupported operation' });
+        await session.delete();
+      } finally {
+        await harness.close();
+      }
+    }
+  });
+
   test('routes Storybook commands and invalidates only preview element references', async () => {
     const manifest: DesktopStoryManifest = {
       endpoint: 'windows',

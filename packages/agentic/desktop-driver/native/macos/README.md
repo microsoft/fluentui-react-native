@@ -227,6 +227,7 @@ The AX provider supports:
 - bounded tree/source generation;
 - snapshots with explicit supported/unsupported state;
 - active element, focus, hit testing, clear, and accessibility activation;
+- the action names an element publishes (`accessibilityActions`), including authored custom actions;
 - primary and secondary application windows.
 
 AppKit omits `AXEnabled` from elements that have no disabled state, and React
@@ -235,6 +236,17 @@ set. The provider therefore reports `enabled: true` when an element's attribute
 list does not contain `AXEnabled`, matching how assistive technologies treat
 it. An element that lists `AXEnabled` without a readable value still reports
 an unsupported enabled state. Fabric views always publish the attribute.
+
+The `accessibilityActions` command reads `AXUIElementCopyActionNames` for a live
+element; an element whose actions are unsupported yields an empty list. AppKit
+lists an `NSAccessibilityCustomAction` as
+`Name:<name>\nTarget:<address>\nSelector:<selector>`, so the provider returns
+only `<name>` and no process address or selector leaves the helper. Standard
+actions pass through unchanged. React Native macOS Fabric publishes each declared
+action by `name` (`Toggle`, `Select`), whereas Paper publishes only actions that
+declare a `label` and names them by it (`C-A11Y-007` in
+`accessibility.action-transport-evidence`). The command lists actions only and
+never performs one.
 
 Quartz Event Services supplies physical pointer, keyboard, text, and wheel
 input. Physical input requires Accessibility/PostEvent authority for the
@@ -385,7 +397,7 @@ FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="<identity>" \
 
 The Swift self-test covers framing, JSON, input ledger and lock recovery,
 capture scaling, snapshot normalization, AX diagnostics, CoreGraphics fallback
-classification, permission and login-session diagnostics, and hello identity. The Node native
+classification, custom AX action name parsing, permission and login-session diagnostics, and hello identity. The Node native
 contract additionally builds, verifies, reuses, and directly resolves the app;
 starts the actual long-lived process; and exercises malformed-frame recovery.
 

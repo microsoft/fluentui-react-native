@@ -27,6 +27,7 @@ private final class SelfTestRunner {
     testAXWindowDiagnostics()
     testCoreGraphicsWindowSelection()
     testReactNativeAccessibilityFallbacks()
+    testAccessibilityActionNames()
     testPermissionDiagnostic()
     testLoginSessionState()
     testWindowEventMonitor()
@@ -661,6 +662,29 @@ private final class SelfTestRunner {
       "hello carries the generated build identity"
     )
     check((hello["protocol"] as? JSONObject)?["major"] as? Int == 1, "hello reports the wire protocol")
+    check(
+      (hello["features"] as? [String])?.contains("accessibilityActions") == true,
+      "hello advertises accessibility action inspection"
+    )
+  }
+
+  private func testAccessibilityActionNames() {
+    check(
+      accessibilityActionName("Name:Toggle\nTarget:0x6190039a0880\nSelector:didActivateAccessibilityCustomAction:") == "Toggle"
+        && accessibilityActionName("Name:Select\nTarget:0x61900399fe80\nSelector:didActivateAccessibilityCustomAction:") == "Select",
+      "a custom action is listed by its authored name without the provider target or selector"
+    )
+    check(
+      accessibilityActionName("Name:Open in tab\nTarget:0x1\nSelector:didActivateAccessibilityCustomAction:") == "Open in tab",
+      "a custom action name keeps its spaces"
+    )
+    check(
+      accessibilityActionName("Name:a\nTarget:b\nTarget:0x1\nSelector:s:") == "a\nTarget:b",
+      "an authored name containing the target marker is not truncated"
+    )
+    check(accessibilityActionName("Name:Toggle") == "Toggle", "a custom action without provider fields keeps its name")
+    check(accessibilityActionName("AXPress") == "AXPress", "a standard accessibility action is listed unchanged")
+    check(accessibilityActionName("") == "", "an empty action name stays empty")
   }
 }
 
