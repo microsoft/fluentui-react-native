@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { resolveThemeAppearance } from './appearance';
-import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from './appearance.types';
+import type { ResolvedThemeAppearance, ThemeAppearanceOptions, ThemeAppearanceSource } from '../types/appearance.types';
 import { ThemeContext, ThemeSourceContext } from './context';
 import { platformAppearance } from './platformAppearance';
 import type { ThemeSource } from './themeSource';

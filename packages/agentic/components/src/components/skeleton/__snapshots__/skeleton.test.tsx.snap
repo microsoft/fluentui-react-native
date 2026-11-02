@@ -2,8 +2,8 @@
 
 exports[`Skeleton renders a decorative bar with themed fill and rounded corners 1`] = `
 {
-  "backgroundColor": "#0000001a",
-  "borderRadius": 2,
+  "backgroundColor": "#00000014",
+  "borderRadius": 4,
   "height": 16,
   "overflow": "hidden",
   "position": "relative",

@@ -331,6 +331,7 @@ exports[`Button color tokens pins v1 CompoundButton color tokens 1`] = `
 exports[`Button color tokens pins v1 FAB color tokens 1`] = `
 {
   "backgroundColor": "#D83B01",
+  "color": "#ffffff",
   "disabled": {
     "backgroundColor": "#ebebeb",
     "color": "#B1B1B1",
@@ -340,9 +341,14 @@ exports[`Button color tokens pins v1 FAB color tokens 1`] = `
     "backgroundColor": "#D83B01",
     "borderColor": "#969696",
     "borderInnerColor": "#ffffff",
+    "color": "#ffffff",
+    "iconColor": "#ffffff",
   },
+  "iconColor": "#ffffff",
   "pressed": {
     "backgroundColor": "#A22C01",
+    "color": "#ffffff",
+    "iconColor": "#ffffff",
   },
   "rippleColor": "#D4D4D4",
   "subtle": {
@@ -363,6 +369,8 @@ exports[`Button color tokens pins v1 FAB color tokens 1`] = `
     "iconColor": "#aec6eb",
     "pressed": {
       "backgroundColor": "#B1B1B1",
+      "color": "#185abd",
+      "iconColor": "#185abd",
     },
     "rippleColor": "#D4D4D4",
   },

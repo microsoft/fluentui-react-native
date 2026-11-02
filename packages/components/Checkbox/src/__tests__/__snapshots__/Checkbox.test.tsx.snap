@@ -95,6 +95,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     onAccessibilityTap={[Function]}
     style={
       {
+        "color": "#bc2f32",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
         "fontWeight": "400",

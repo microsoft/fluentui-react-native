@@ -17,8 +17,8 @@ const contractFiles = [
   'spec/usage.md',
   'checkbox.stories.tsx',
 ];
-// October 29 review: the mapped default callback delegates checked-state assertions to the fingerprinted native helper.
-const reviewedDigest = '8e05597cabf63743066b9dc9dd929d11e8c48fad89e3a7eabb853efbc6c58b6a';
+// November 2 review: token-state documentation changed; the mapped callback and native helper assertions are unchanged.
+const reviewedDigest = '741883094831e617dca3ce8c0f0f32a2520ed94be710773d1a70f600e41c28b4';
 const storyId = 'components-checkbox--default';
 const testName = 'toggles native checked state in both directions';
 

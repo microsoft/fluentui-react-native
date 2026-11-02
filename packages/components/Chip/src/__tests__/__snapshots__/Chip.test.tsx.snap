@@ -68,6 +68,8 @@ exports[`Chip component tests Chip all props 1`] = `
         "fontFamily": "Arial",
         "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }
@@ -81,9 +83,11 @@ exports[`Chip component tests Chip all props 1`] = `
     style={
       {
         "color": "#616161",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "Roboto",
         "fontSize": 14,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 18,
         "margin": 0,
         "marginStart": 8,
       }
@@ -152,9 +156,11 @@ exports[`Chip component tests Chip tokens 1`] = `
     style={
       {
         "color": "#616161",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "Roboto",
         "fontSize": 14,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 18,
         "margin": 0,
       }
     }

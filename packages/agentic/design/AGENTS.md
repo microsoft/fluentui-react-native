@@ -1,8 +1,8 @@
 # Design agent instructions
 
 This is the instruction root for `@fluentui-react-native/design` and every descendant. The package owns Fluent UI React
-Native's theming contract: theme sources and providers, structured appearance, Flex and legacy tokens, the token
-mappings, themed style factories, the runtime color library, and test-only design fixtures.
+Native's theming contract: theme sources and providers, ready-made Fluent and Flex themes, structured appearance, Flex
+and legacy tokens, the token mappings, themed style factories, the runtime color library, and test-only design fixtures.
 
 ## Start here
 
@@ -11,6 +11,7 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | Task                                                                      | Read                                           |
 | ------------------------------------------------------------------------- | ---------------------------------------------- |
 | Theme authoring, providers, appearance, theme hooks, or legacy projection | [Theming](references/theming.md)               |
+| Authoring, resolving, or reading Flex colors, or migrating flat colors    | [Flex colors](references/flex-colors.md)       |
 | Token sources, Flex token mapping, or the pinned x3 source                | [Tokens](references/tokens.md)                 |
 | Themed style caches or state and color style factories                    | [Styling](references/styling.md)               |
 | Runtime color parsing, contrast, or interaction colors                    | [Color library](references/color-lib.md)       |
@@ -28,11 +29,17 @@ repository reference `components.agentic.styles-and-tokens`.
   models, and neither hook constructs the model it does not return.
 - Key caches by source, revision, and resolved appearance, keep them outside author-owned objects, and give every new
   `ThemeState` a new style registry.
-- Keep the root entry point free of the legacy projection, legacy token payloads, and the color library; legacy and
-  optional APIs stay behind their subpaths.
+- Keep the root entry point free of the legacy projection, deprecated token data, and color compositing; it reaches
+  the color library's interaction algorithm only through the Flex interaction policy. Legacy and optional APIs stay
+  behind their subpaths.
+- Keep color resolution lazy: resolving, merging, and reading rest never run the interaction algorithm, and a derived
+  state computes once per resolved color.
 - Treat `src/tokens/mappings/flex-token-map.yaml` as the canonical token mapping (R-DESIGN-001), and regenerate rather
   than edit generated token and projection files.
 - Production code must not depend on the `testing` entry point (R-DESIGN-002).
+- Keep the Fluent 2 token JSON loaders and pipeline mappers in `src/deprecated/`. Only tests, other deprecated code,
+  build scripts, and the existing deprecated consumers may use them, and no other entry point may reach them
+  (R-DESIGN-003).
 - Update the owning reference with every behavior or API change, and record unfinished work only in
   `references/remaining-work.md` (R-PKGDOC-009).
 

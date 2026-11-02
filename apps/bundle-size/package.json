@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@fluentui-react-native/scripts": "workspace:*",
-    "@rnx-kit/tools-filesystem": "^0.2.0",
-    "@rnx-kit/tools-formatting": "^0.1.0",
+    "@rnx-kit/tools-filesystem": "catalog:",
+    "@rnx-kit/tools-formatting": "catalog:",
     "@rnx-kit/tsconfig": "catalog:",
     "esbuild": "^0.28.2"
   },

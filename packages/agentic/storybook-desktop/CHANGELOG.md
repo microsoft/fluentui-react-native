@@ -1,5 +1,17 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.2
+
+### Patch Changes
+
+- ff3f961: Expose desktop-test and storybook-desktop config exports for installed dependency import
+- Updated dependencies [f6a26b9]
+- Updated dependencies [3b8430a]
+- Updated dependencies [ff3f961]
+- Updated dependencies [c9998e3]
+  - @fluentui-react-native/desktop-driver@0.4.2
+  - @fluentui-react-native/desktop-test@0.2.2
+
 ## 0.4.1
 
 ### Patch Changes

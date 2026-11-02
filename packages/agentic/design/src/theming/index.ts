@@ -7,10 +7,18 @@ export type {
   PaletteTextColors,
   PartialPalette,
   ThemeColorDefinition,
-} from './types/Color.types';
-export type { ShadowValue, ShadowToken, BaseShadowAliasTokens, ThemeShadowDefinition, PartialShadowDefinition } from './types/Shadow.types';
-export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './types/Theme.types';
+} from '../fluent/types/Color.types';
 export type {
+  ShadowValue,
+  ShadowToken,
+  BaseShadowAliasTokens,
+  ThemeShadowDefinition,
+  PartialShadowDefinition,
+} from '../fluent/types/Shadow.types';
+export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from '../fluent/types/Theme.types';
+export type {
+  ColorTone,
+  NormalizedThemeAppearance,
   ResolvedThemeAppearance,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,
@@ -21,7 +29,7 @@ export type {
   ThemeColorScheme,
   ThemeContrast,
   ThemeInterfaceLevel,
-} from './appearance.types';
+} from '../types/appearance.types';
 export {
   appearanceOptionFromResolved,
   appearanceOptionsFromLegacy,
@@ -47,10 +55,10 @@ export type {
   Variant,
   VariantValue,
   Variants,
-} from './types/Typography.types';
+} from '../fluent/types/Typography.types';
 export { ThemeContext } from './context';
-export { useTheme } from './useTheme';
-export type { OfficePalette } from './types/palette.types';
+export { useTheme } from '../fluent/useTheme';
+export type { OfficePalette } from '../fluent/types/palette.types';
 export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 export { ThemedRoot } from './ThemedRoot';
@@ -59,17 +67,14 @@ export { RootContext, useRootSettings } from './rootContext';
 export { RootInputBoundary } from './RootInputBoundary';
 export { useRootInputModality } from './useRootInputModality';
 export type { InputModality, RootSettings } from './rootContext';
-export { FlexThemeReference } from './flexThemeReference';
-export type {
-  FlexThemeInput,
-  FlexThemeRecipe,
-  FlexThemeReferenceOptions,
-  LegacyThemeFallback,
-  PartialFlexTokens,
-} from './flexThemeReference';
-export { ThemeReference } from './themeReference';
-export type { OnThemeChange, ThemeRecipe, ThemeReferenceOptions, ThemeTransform } from './themeReference';
+export { FlexThemeReference } from '../flex/flexThemeReference';
+export type { FlexThemeInput, FlexThemeRecipe, FlexThemeReferenceOptions, LegacyThemeFallback } from '../flex/flexThemeReference';
+export type { FlexThemeDescription } from '../flex/themeState.types';
+export { flexColor, selectColorEntry } from '../flex/colors/flexColor';
+export type { ColorSchemeSelector } from '../flex/colors/flexColor';
+export { selectShadowEntry } from '../flex/flexShadow';
+export type { FlexTokenDescription, PartialFlexTokens } from '../flex/tokens.types';
+export { ThemeReference } from '../fluent/themeReference';
+export type { OnThemeChange, ThemeRecipe, ThemeReferenceOptions, ThemeTransform } from '../fluent/themeReference';
 export type { FlexThemeSource, LegacyThemeSource, ThemeSource, ThemeSourceBase } from './themeSource';
-export { getCurrentAppearance, isHighContrast, setIsHighContrast } from './platformUtils';
-export { mapFontPipelineToTheme, mapPipelineToTheme } from './mapPipelineToTheme';
-export { mapPipelineToShadow } from './mapPipelineToShadow';
+export { getCurrentAppearance, isHighContrast, setIsHighContrast } from '../fluent/platformUtils';

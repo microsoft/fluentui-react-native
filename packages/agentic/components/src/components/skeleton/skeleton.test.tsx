@@ -80,7 +80,7 @@ describe('Skeleton', () => {
     await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
     expect(animation.stop).toHaveBeenCalledTimes(1);
     expect(getRoot(component).children).toHaveLength(0);
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
 
     mockUseReducedMotion.mockReturnValue(false);
     await component.rerender(<Skeleton testID="skeleton" style={{ width: 120, height: 16 }} />);
@@ -154,7 +154,7 @@ describe('Skeleton', () => {
       y2: bandWidth / 2,
     });
     expect(gradient.props.x2 - gradient.props.x1).toBe(gradient.props.y2 - gradient.props.y1);
-    const color = processColor(defaultFlexTokens.color.backgroundNeutralSubtle);
+    const color = processColor(defaultFlexTokens.color.backgroundNeutralSubtle.rest);
     if (typeof color !== 'number') {
       throw new Error('The test theme must supply a concrete SVG highlight color.');
     }
@@ -220,8 +220,8 @@ describe('Skeleton', () => {
     });
 
     expect(component.queryByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeNull();
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft);
-    expect(getRootStyle(component).backgroundColor).not.toBe(defaultFlexTokens.color.backgroundNeutralSubtle);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
+    expect(getRootStyle(component).backgroundColor).not.toBe(defaultFlexTokens.color.backgroundNeutralSubtle.rest);
   });
 
   it('reports unsupported opaque gradient colors and retains a native outlined placeholder', async () => {

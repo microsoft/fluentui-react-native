@@ -15,8 +15,9 @@ authenticated bridge, Metro, theme, and platform chrome.
   test reporting belong to the integration and harness packages.
 - Preserve the authenticated nonce, correlated request/run IDs, readiness,
   error signaling, and native story-root verification.
-- Keep one `ThemedRoot` around app content and chrome. Preserve explicit story
-  background overrides and safe fallback behavior for opaque native colors.
+- Keep one Flex `ThemedRoot` around app content and chrome; apply the selected
+  theme only to story content through the nested provider. Preserve explicit
+  story background overrides and safe fallback behavior for opaque native colors.
 - Keep platform-specific behavior in platform files. Preserve Win32's
   desktop-only chrome and keep macOS/Windows on upstream LiteUI.
 - Metro configuration has side effects: loading it can generate the runtime

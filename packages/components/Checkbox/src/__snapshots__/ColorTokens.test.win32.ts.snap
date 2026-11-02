@@ -78,5 +78,6 @@ exports[`Checkbox color tokens pins v1 Checkbox color tokens 1`] = `
     "checkmarkColor": "#262626",
     "color": "#262626",
   },
+  "requiredColor": "#bc2f32",
 }
 `;

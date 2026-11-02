@@ -60,9 +60,12 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     style={
       {
         "color": "#fff",
+        "dynamicTypeRamp": "body",
         "fontFamily": "Arial",
         "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": -0.43,
+        "lineHeight": 22,
         "margin": 0,
       }
     }
@@ -77,7 +80,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 13,
+        "fontSize": 17,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -178,9 +181,12 @@ exports[`Default FAB (iOS) 1`] = `
       style={
         {
           "color": "#fff",
+          "dynamicTypeRamp": "body",
           "fontFamily": "Arial",
           "fontSize": 16,
           "fontWeight": "400",
+          "letterSpacing": -0.43,
+          "lineHeight": 22,
           "margin": 0,
         }
       }
@@ -195,7 +201,7 @@ exports[`Default FAB (iOS) 1`] = `
         {
           "color": "#ffffff",
           "fontFamily": "System",
-          "fontSize": 13,
+          "fontSize": 17,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,

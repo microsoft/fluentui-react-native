@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.16.15",
+  "version": "1.16.16",
   "description": "Compose infrastructure",
   "keywords": [],
   "license": "MIT",
@@ -71,15 +71,6 @@
     },
     "react-native-windows": {
       "optional": true
-    }
-  },
-  "furn": {
-    "depcheck": {
-      "ignoreMatches": [
-        "@fluentui-react-native/default-theme",
-        "@fluentui-react-native/design",
-        "@fluentui-react-native/memo-cache"
-      ]
     }
   },
   "rnx-kit": {

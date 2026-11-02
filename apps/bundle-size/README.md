@@ -54,5 +54,12 @@ workflow.
 3. Run `yarn bundle-size` and inspect the generated esbuild metafile. The metafile can also be
    loaded into the esbuild bundle analyzer.
 
+A scenario can also guard module boundaries with path substrings. `forbiddenInputPatterns` and
+`requiredInputPatterns` match every module esbuild resolves from the entry, including modules
+tree shaking later removes. `forbiddenOutputPatterns` and `requiredOutputPatterns` match only
+the modules that contribute bytes to the bundle. Use input patterns when a module must not
+even be reachable, and output patterns when a shared entry reaches a module that a consumer's
+imports must not retain.
+
 Use a supported public package or subpath export when measuring consumer cost. A source-relative
 module path is useful for diagnostics, but it does not prove the cost of the published API.

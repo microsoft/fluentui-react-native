@@ -1,37 +1,21 @@
-import { ThemeReference } from '@fluentui-react-native/design/theming';
+import { appearanceOptionsFromLegacy, resolveThemeAppearance, ThemeReference } from '@fluentui-react-native/design/theming';
 import type { Theme, ThemeOptions } from '@fluentui-react-native/design/theming';
-import {
-  appearanceOptionFromResolved,
-  appearanceOptionsFromLegacy,
-  getCurrentAppearance,
-  resolveThemeAppearance,
-} from '@fluentui-react-native/design/theming';
-import assertNever from 'assert-never';
+import { fluentTheme } from '@fluentui-react-native/design/themes';
 
-import { defaultFluentDarkTheme, defaultFluentHighConstrastTheme, defaultFluentTheme } from './defaultTheme';
-
+/**
+ * Create a theme reference for legacy theme options. It resolves the design package's Fluent themes, including the
+ * high-contrast themes, for the requested appearance.
+ */
 export function createDefaultTheme(options: ThemeOptions = {}): ThemeReference {
+  const getAppearance = () => appearanceOptionsFromLegacy(options.appearance ?? options.defaultAppearance ?? 'light');
+  const getFallbackAppearance = () => resolveThemeAppearance(appearanceOptionsFromLegacy(options.defaultAppearance ?? 'light')).resolved;
   return new ThemeReference({
     base: {} as Theme,
-    getAppearance: () => appearanceOptionsFromLegacy(options.appearance ?? options.defaultAppearance ?? 'light'),
-    getFallbackAppearance: () => resolveThemeAppearance(appearanceOptionsFromLegacy(options.defaultAppearance ?? 'light')).resolved,
+    getAppearance,
+    getFallbackAppearance,
     recipes: [
-      (_theme, resolvedAppearance) => {
-        const current = resolvedAppearance
-          ? appearanceOptionFromResolved(resolvedAppearance)
-          : getCurrentAppearance(options.appearance, options.defaultAppearance ?? 'light');
-        switch (current) {
-          case 'light':
-            return defaultFluentTheme;
-          case 'dark':
-          case 'darkElevated':
-            return defaultFluentDarkTheme;
-          case 'highContrast':
-            return defaultFluentHighConstrastTheme;
-          default:
-            assertNever(current);
-        }
-      },
+      (_theme, appearance) =>
+        fluentTheme.resolveTheme(appearance ?? resolveThemeAppearance(getAppearance(), undefined, getFallbackAppearance()).resolved),
     ],
   });
 }

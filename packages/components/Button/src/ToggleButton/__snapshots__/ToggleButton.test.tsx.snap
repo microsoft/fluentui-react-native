@@ -69,7 +69,7 @@ exports[`ToggleButton default 1`] = `
       {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

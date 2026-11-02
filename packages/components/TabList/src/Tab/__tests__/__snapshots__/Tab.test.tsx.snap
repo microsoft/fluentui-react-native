@@ -48,7 +48,8 @@ exports[`Tab component tests Customized Tab 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -88,9 +89,12 @@ exports[`Tab component tests Customized Tab 1`] = `
         style={
           {
             "color": "red",
+            "dynamicTypeRamp": "body",
             "fontFamily": "System",
-            "fontSize": 13,
+            "fontSize": 17,
             "fontWeight": "400",
+            "letterSpacing": -0.43,
+            "lineHeight": 22,
             "margin": 0,
           }
         }
@@ -102,7 +106,7 @@ exports[`Tab component tests Customized Tab 1`] = `
   <View
     style={
       {
-        "backgroundColor": undefined,
+        "backgroundColor": "#00000000",
         "height": 4,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -112,7 +116,7 @@ exports[`Tab component tests Customized Tab 1`] = `
     <View
       style={
         {
-          "backgroundColor": undefined,
+          "backgroundColor": "#00000000",
           "borderRadius": 99,
           "flex": 1,
         }
@@ -170,7 +174,8 @@ exports[`Tab component tests Tab default props 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -210,9 +215,12 @@ exports[`Tab component tests Tab default props 1`] = `
         style={
           {
             "color": "#616161",
+            "dynamicTypeRamp": "body",
             "fontFamily": "System",
-            "fontSize": 13,
+            "fontSize": 17,
             "fontWeight": "400",
+            "letterSpacing": -0.43,
+            "lineHeight": 22,
             "margin": 0,
           }
         }
@@ -224,7 +232,7 @@ exports[`Tab component tests Tab default props 1`] = `
   <View
     style={
       {
-        "backgroundColor": undefined,
+        "backgroundColor": "#00000000",
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -234,7 +242,7 @@ exports[`Tab component tests Tab default props 1`] = `
     <View
       style={
         {
-          "backgroundColor": undefined,
+          "backgroundColor": "#00000000",
           "borderRadius": 99,
           "flex": 1,
         }
@@ -292,7 +300,8 @@ exports[`Tab component tests Tab disabled 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -331,9 +340,13 @@ exports[`Tab component tests Tab disabled 1`] = `
         numberOfLines={1}
         style={
           {
+            "color": "#bdbdbd",
+            "dynamicTypeRamp": "body",
             "fontFamily": "System",
-            "fontSize": 13,
+            "fontSize": 17,
             "fontWeight": "400",
+            "letterSpacing": -0.43,
+            "lineHeight": 22,
             "margin": 0,
           }
         }
@@ -345,7 +358,7 @@ exports[`Tab component tests Tab disabled 1`] = `
   <View
     style={
       {
-        "backgroundColor": undefined,
+        "backgroundColor": "#00000000",
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -355,7 +368,7 @@ exports[`Tab component tests Tab disabled 1`] = `
     <View
       style={
         {
-          "backgroundColor": undefined,
+          "backgroundColor": "#00000000",
           "borderRadius": 99,
           "flex": 1,
         }
@@ -413,7 +426,8 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -465,9 +479,12 @@ exports[`Tab component tests Tab render icon + text 1`] = `
         style={
           {
             "color": "#616161",
+            "dynamicTypeRamp": "body",
             "fontFamily": "System",
-            "fontSize": 13,
+            "fontSize": 17,
             "fontWeight": "400",
+            "letterSpacing": -0.43,
+            "lineHeight": 22,
             "margin": 0,
           }
         }
@@ -479,7 +496,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
   <View
     style={
       {
-        "backgroundColor": undefined,
+        "backgroundColor": "#00000000",
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -489,7 +506,7 @@ exports[`Tab component tests Tab render icon + text 1`] = `
     <View
       style={
         {
-          "backgroundColor": undefined,
+          "backgroundColor": "#00000000",
           "borderRadius": 99,
           "flex": 1,
         }
@@ -547,7 +564,8 @@ exports[`Tab component tests Tab render icon only 1`] = `
     {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#00000000",
+      "borderColor": "#00000000",
       "borderRadius": 4,
       "borderWidth": 2,
       "display": "flex",
@@ -588,7 +606,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
   <View
     style={
       {
-        "backgroundColor": undefined,
+        "backgroundColor": "#00000000",
         "height": 2,
         "paddingHorizontal": 8,
         "width": "100%",
@@ -598,7 +616,7 @@ exports[`Tab component tests Tab render icon only 1`] = `
     <View
       style={
         {
-          "backgroundColor": undefined,
+          "backgroundColor": "#00000000",
           "borderRadius": 99,
           "flex": 1,
         }

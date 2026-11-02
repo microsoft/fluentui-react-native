@@ -3,14 +3,11 @@ export type {
   ColorDiagnosticReason,
   ColorMode,
   InteractionColorDiagnostic,
-  InteractionColorInput,
   InteractionColorOptions,
-  InteractionColorOverridesResult,
   InteractionColorResult,
-  InteractionColorsResult,
   InteractionColorState,
-  InteractionColorVariant,
-  InteractiveColorToken,
+  InteractionCompositing,
+  InteractionDirection,
   OklchColor,
   ParsedColorValue,
   ResolvedContrastColors,
@@ -20,4 +17,4 @@ export type {
 export { parseColorValue, rgbaToHex } from './parsing';
 export { oklchToRgb, rgbToOklch } from './conversion';
 export { compositeColor, compositeRgba, getContrastRatio, resolveContrastColors } from './compositing';
-export { getHoverColor, getInteractionColor, getPressColor, isInverseInteractionToken } from './interaction';
+export { getHoverColor, getInteractionColor, getPressColor } from './interaction';

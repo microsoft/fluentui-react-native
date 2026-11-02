@@ -332,6 +332,14 @@ final class AccessibilityEngine {
     }
   }
 
+  func accessibilityActions(_ elementID: String, token: CancellationToken) throws -> [String] {
+    try requireAccessibility("Accessibility action inspection")
+    try token.throwIfCancelled()
+    let record = try requireRecord(elementID)
+    try validateLive(record)
+    return try copyAXActionNames(record.element).map(accessibilityActionName)
+  }
+
   func tryClearValue(_ elementID: String) throws -> Bool {
     let record = try requireRecord(elementID)
     try validateLive(record)

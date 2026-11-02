@@ -6,13 +6,13 @@ exports[`Text component tests Text all props 1`] = `
   numberOfLines={0}
   style={
     {
-      "color": "#323130",
-      "fontFamily": "Segoe UI",
+      "color": "#242424",
+      "fontFamily": "Roboto",
       "fontSize": 14,
       "fontStyle": undefined,
       "fontWeight": "400",
-      "letterSpacing": undefined,
-      "lineHeight": undefined,
+      "letterSpacing": 0,
+      "lineHeight": 18,
       "margin": 0,
       "textAlign": undefined,
       "textDecorationLine": undefined,
@@ -29,13 +29,13 @@ exports[`Text component tests Text all tokens 1`] = `
   numberOfLines={0}
   style={
     {
-      "color": "#323130",
+      "color": "#242424",
       "fontFamily": "Wingdings",
       "fontSize": 20,
       "fontStyle": undefined,
       "fontWeight": "900",
-      "letterSpacing": undefined,
-      "lineHeight": undefined,
+      "letterSpacing": 0,
+      "lineHeight": 24,
       "margin": 0,
       "textAlign": undefined,
       "textDecorationLine": undefined,
@@ -52,13 +52,13 @@ exports[`Text component tests Text default 1`] = `
   numberOfLines={0}
   style={
     {
-      "color": "#323130",
-      "fontFamily": "Segoe UI",
-      "fontSize": 13,
+      "color": "#242424",
+      "fontFamily": "Roboto",
+      "fontSize": 16,
       "fontStyle": undefined,
       "fontWeight": "400",
-      "letterSpacing": undefined,
-      "lineHeight": undefined,
+      "letterSpacing": 0,
+      "lineHeight": 24,
       "margin": 0,
       "textAlign": undefined,
       "textDecorationLine": undefined,
@@ -76,9 +76,11 @@ exports[`Text component tests Text variants render correctly with style 1`] = `
   style={
     {
       "color": "blue",
-      "fontFamily": "Segoe UI",
+      "fontFamily": "Roboto",
       "fontSize": 60,
-      "fontWeight": "600",
+      "fontWeight": "400",
+      "letterSpacing": -0.5,
+      "lineHeight": 72,
       "margin": 0,
       "marginBottom": 8,
       "marginTop": 4,

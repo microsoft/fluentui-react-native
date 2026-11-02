@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/storybook-desktop",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "CLI and configuration for React Native desktop Storybook applications",
   "license": "MIT",
   "author": "",
@@ -39,6 +39,7 @@
     "./babel": "./config/babel.cjs",
     "./config": {
       "types": "./lib/config/index.d.ts",
+      "import": "./lib/config/index.js",
       "default": "./src/config/index.ts"
     },
     "./driver": {

@@ -13,10 +13,6 @@ export type PlatformTarget = 'react' | 'win32' | 'macos' | 'ios' | 'android' | '
 export type FurnConfig = {
   packageType?: PackageType;
   jestPlatform?: PlatformTarget;
-  depcheck?: {
-    ignoreMatches?: string[];
-    ignorePatterns?: string[];
-  };
   knip?: {
     entry?: string[];
     extraEntries?: string[];

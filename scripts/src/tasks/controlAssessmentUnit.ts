@@ -13,8 +13,8 @@ export const unitMappingFiles = [
   'scripts/src/tasks/jest.ts',
   'scripts/src/tasks/controlAssessmentUnitExecution.ts',
 ];
-// October 29 review: appended regression cases preserve these 42 assertions; additions remain explicitly unmapped.
-const reviewedUnitDigest = 'b12a44cea1897231d43ead2734d32a55e2fea2e5e12921d7e3f4c8bff086e7fa';
+// November 2 review: token-state access changed; the 42 mapped assertions and their requirement scopes are unchanged.
+const reviewedUnitDigest = '6a4b2649cc93d070859bc7f874621bcfbc54c9b4d1be9aec8d64aec67ee37f93';
 const mappingVersion = 'checkbox-jest-macos-mock-v1';
 const environment = 'React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch';
 type Outcome = 'passed' | 'failed' | 'skipped' | 'not-run' | 'unverified' | 'mismatched' | 'stale';

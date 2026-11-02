@@ -533,6 +533,15 @@ async function handleElementCommand(
   if (method === 'GET' && operation[0] === 'displayed') {
     return requireSupported(snapshot.visible, 'displayed');
   }
+  if (method === 'GET' && (operation[0] === 'attribute' || operation[0] === 'property') && operation[1] === 'accessibilityActions') {
+    const accessibilityActions = session.target.host.accessibilityActions?.bind(session.target.host);
+    if (!accessibilityActions) {
+      throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not list accessibility actions.`);
+    }
+    return hostCommand(session, `Reading accessibility actions of element "${record.id}"`, (signal) =>
+      accessibilityActions(record.nativeId, signal),
+    );
+  }
   if (method === 'GET' && operation[0] === 'attribute' && operation[1]) {
     return getElementValue(snapshot, operation[1]);
   }

@@ -7,7 +7,7 @@ import { avatarStyles, getAvatarActivityRingStyle, getAvatarIconSize, getAvatarI
 import type { AvatarState } from './avatar.types';
 
 export function useAvatarStyles_unstable(state: AvatarState) {
-  const foregroundColor = state.tokens.color.foregroundNeutralPrimary;
+  const foregroundColor = state.tokens.color.foregroundNeutralPrimary.rest;
   const imageStyle: StyleProp<ImageStyle> = [
     avatarStyles.image,
     {

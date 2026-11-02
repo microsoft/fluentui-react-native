@@ -12,6 +12,8 @@ export interface Scenario {
   imports?: ScenarioImport[];
   forbiddenInputPatterns?: string[];
   requiredInputPatterns?: string[];
+  forbiddenOutputPatterns?: string[];
+  requiredOutputPatterns?: string[];
 }
 
 export interface ScenarioConfig {
