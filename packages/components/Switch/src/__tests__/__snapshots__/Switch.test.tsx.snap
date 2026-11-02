@@ -71,9 +71,11 @@ exports[`Switch Default 1`] = `
       {
         "color": "#242424",
         "flexShrink": 1,
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "Roboto",
+        "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }
@@ -197,9 +199,11 @@ exports[`Switch Disabled 1`] = `
       {
         "color": "#e0e0e0",
         "flexShrink": 1,
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "Roboto",
+        "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }

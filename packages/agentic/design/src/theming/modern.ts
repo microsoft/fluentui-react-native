@@ -1,4 +1,6 @@
 export type {
+  ColorTone,
+  NormalizedThemeAppearance,
   ResolvedThemeAppearance,
   ThemeAppearanceOptions,
   ThemeAppearanceRequest,
@@ -9,7 +11,7 @@ export type {
   ThemeColorScheme,
   ThemeContrast,
   ThemeInterfaceLevel,
-} from './appearance.types';
+} from '../types/appearance.types';
 export {
   appearanceOptionFromResolved,
   appearanceOptionsFromLegacy,
@@ -18,14 +20,13 @@ export {
   themeAppearanceKey,
 } from './appearance';
 export { createThemeAppearanceSource } from './appearanceSource';
-export { FlexThemeReference } from './flexThemeReference';
-export type {
-  FlexThemeInput,
-  FlexThemeRecipe,
-  FlexThemeReferenceOptions,
-  LegacyThemeFallback,
-  PartialFlexTokens,
-} from './flexThemeReference';
+export { FlexThemeReference } from '../flex/flexThemeReference';
+export type { FlexThemeInput, FlexThemeRecipe, FlexThemeReferenceOptions, LegacyThemeFallback } from '../flex/flexThemeReference';
+export type { FlexThemeDescription } from '../flex/themeState.types';
+export { flexColor, selectColorEntry } from '../flex/colors/flexColor';
+export type { ColorSchemeSelector } from '../flex/colors/flexColor';
+export { selectShadowEntry } from '../flex/flexShadow';
+export type { FlexTokenDescription, PartialFlexTokens } from '../flex/tokens.types';
 export { ThemeProvider } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
 export { ThemedRoot } from './ThemedRoot';

@@ -4,7 +4,26 @@ const path = require('node:path');
 
 const packageRoot = path.resolve(__dirname, '../..');
 const pinPath = path.join(packageRoot, 'src/tokens/mappings/upstream-pin.json');
-const requiredFileIds = ['semanticCss', 'interactionFallbackCss', 'mappings'];
+// Every pinned source and how its contents are compared. `css` sources compare custom-property declarations;
+// `tokenSections` sources compare the token names listed in their generics and interaction sections.
+const requiredFileKinds = {
+  semanticCss: 'css',
+  semanticLightCss: 'css',
+  semanticDarkCss: 'css',
+  interactionFallbackCss: 'css',
+  interactionFallbackLightCss: 'css',
+  interactionFallbackDarkCss: 'css',
+  warmSemanticCss: 'css',
+  warmSemanticLightCss: 'css',
+  warmSemanticDarkCss: 'css',
+  warmInteractionFallbackCss: 'css',
+  warmInteractionFallbackLightCss: 'css',
+  warmInteractionFallbackDarkCss: 'css',
+  mappings: 'tokenSections',
+  tokens: 'tokenSections',
+};
+const requiredFileIds = Object.keys(requiredFileKinds);
+const tokenSectionNames = ['generics', 'interaction'];
 
 class UpstreamFetchError extends Error {}
 
@@ -163,17 +182,17 @@ function gitBlobSha(source) {
   return crypto.createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex');
 }
 
-function namesFromMappingSection(source, sectionName) {
+function namesFromTokenSection(fileId, source, sectionName) {
   const parsed = JSON.parse(source);
   const section = parsed[sectionName];
   if (!Array.isArray(section)) {
-    throw new Error(`Upstream mappings.json section ${sectionName} must be an array.`);
+    throw new Error(`Upstream ${fileId} section ${sectionName} must be an array.`);
   }
 
   return new Set(
     section.map((entry, index) => {
       if (!entry || typeof entry.name !== 'string') {
-        throw new Error(`Upstream mappings.json ${sectionName}[${index}] must have a string name.`);
+        throw new Error(`Upstream ${fileId} ${sectionName}[${index}] must have a string name.`);
       }
       return entry.name;
     }),
@@ -200,16 +219,18 @@ function validateUpstreamContents(contents) {
     }
   }
 
-  for (const sectionName of ['generics', 'interaction']) {
-    if (namesFromMappingSection(contents.mappings, sectionName).size === 0) {
-      throw new Error(`Upstream mappings.json section ${sectionName} must not be empty.`);
+  for (const [fileId, kind] of Object.entries(requiredFileKinds)) {
+    if (kind === 'css') {
+      if (cssDeclarations(contents[fileId]).size === 0) {
+        throw new Error(`Upstream ${fileId} must declare at least one custom property.`);
+      }
+    } else {
+      for (const sectionName of tokenSectionNames) {
+        if (namesFromTokenSection(fileId, contents[fileId], sectionName).size === 0) {
+          throw new Error(`Upstream ${fileId} section ${sectionName} must not be empty.`);
+        }
+      }
     }
-  }
-  if (cssDeclarations(contents.semanticCss).size === 0) {
-    throw new Error('Upstream semantic.css must declare at least one custom property.');
-  }
-  if (cssDeclarations(contents.interactionFallbackCss).size === 0) {
-    throw new Error('Upstream interaction-fallback.css must declare at least one custom property.');
   }
 }
 
@@ -240,22 +261,25 @@ function hasNameChanges(comparison) {
 function createReport(pin, baseline, candidate, candidateRef, mode) {
   const normalizedBaseline = Object.fromEntries(Object.entries(baseline).map(([id, source]) => [id, normalizeSourceContent(source)]));
   const normalizedCandidate = Object.fromEntries(Object.entries(candidate).map(([id, source]) => [id, normalizeSourceContent(source)]));
-  const genericTokens = compareNames(
-    namesFromMappingSection(normalizedBaseline.mappings, 'generics'),
-    namesFromMappingSection(normalizedCandidate.mappings, 'generics'),
-  );
-  const interactionTokens = compareNames(
-    namesFromMappingSection(normalizedBaseline.mappings, 'interaction'),
-    namesFromMappingSection(normalizedCandidate.mappings, 'interaction'),
-  );
-  const semanticProperties = compareNames(
-    new Set(cssDeclarations(normalizedBaseline.semanticCss).keys()),
-    new Set(cssDeclarations(normalizedCandidate.semanticCss).keys()),
-  );
-  const interactionFallbackTokens = compareDeclarations(
-    cssDeclarations(normalizedBaseline.interactionFallbackCss),
-    cssDeclarations(normalizedCandidate.interactionFallbackCss),
-  );
+  const tokenSections = {};
+  const css = {};
+  for (const [fileId, kind] of Object.entries(requiredFileKinds)) {
+    if (kind === 'css') {
+      css[fileId] = {
+        customProperties: compareDeclarations(cssDeclarations(normalizedBaseline[fileId]), cssDeclarations(normalizedCandidate[fileId])),
+      };
+    } else {
+      tokenSections[fileId] = Object.fromEntries(
+        tokenSectionNames.map((sectionName) => [
+          sectionName,
+          compareNames(
+            namesFromTokenSection(fileId, normalizedBaseline[fileId], sectionName),
+            namesFromTokenSection(fileId, normalizedCandidate[fileId], sectionName),
+          ),
+        ]),
+      );
+    }
+  }
   const contentChangedFiles = pin.files
     .filter((file) => normalizedBaseline[file.id] !== normalizedCandidate[file.id])
     .map((file) => file.upstreamPath);
@@ -271,11 +295,8 @@ function createReport(pin, baseline, candidate, candidateRef, mode) {
   const hasDrift =
     contentChangedFiles.length > 0 ||
     snapshotIntegrity.some((file) => !file.matches) ||
-    hasNameChanges(genericTokens) ||
-    hasNameChanges(interactionTokens) ||
-    hasNameChanges(semanticProperties) ||
-    hasNameChanges(interactionFallbackTokens) ||
-    interactionFallbackTokens.changed.length > 0;
+    Object.values(tokenSections).some((sections) => Object.values(sections).some(hasNameChanges)) ||
+    Object.values(css).some(({ customProperties }) => hasNameChanges(customProperties) || customProperties.changed.length > 0);
 
   return {
     repository: pin.repository,
@@ -286,16 +307,8 @@ function createReport(pin, baseline, candidate, candidateRef, mode) {
     hasDrift,
     contentChangedFiles,
     snapshotIntegrity,
-    mappings: {
-      generics: genericTokens,
-      interaction: interactionTokens,
-    },
-    semanticCss: {
-      customProperties: semanticProperties,
-    },
-    interactionFallbackCss: {
-      tokens: interactionFallbackTokens,
-    },
+    tokenSections,
+    css,
   };
 }
 

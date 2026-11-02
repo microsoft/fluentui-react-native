@@ -1,22 +1,43 @@
-export type { FontSize, FontWeight } from './concepts/textAttributes';
-export { fontSize, fontWeight } from './concepts/textAttributes';
+export type { FontSize, FontWeight } from './tokens/textAttributes';
+export { fontSize, fontWeight } from './tokens/textAttributes';
 export type {
+  ColorEntry,
+  ColorTuple,
+  FlexColorDescription,
+  FlexColorInput,
+  FlexEasing,
+  FlexShadow,
+  FlexShadowEntry,
+  FlexShadowLayer,
+  FlexTokenDescription,
   FlexTokens,
-  InteractiveColorOverrides,
+  InteractiveColor,
+  InteractiveColorOptions,
+  InteractiveColorType,
+  PartialSemanticColors,
   SemanticBorderRadii,
+  SemanticColorDescriptions,
+  SemanticColorName,
   SemanticColors,
   SemanticColorTokenValues,
   SemanticFontFamilies,
   SemanticFontSizes,
   SemanticFontWeights,
   SemanticLineHeights,
+  SemanticMotion,
+  SemanticShadowEntries,
   SemanticShadows,
   SemanticSpacing,
   SemanticStrokeWidths,
   SemanticTokens,
   UnsupportedFlexTokens,
-} from './tokens/flex.types';
-export { flexTokensFromTheme } from './tokens/flexTokensFromTheme';
+} from './flex/tokens.types';
+export { INTERACTIVE_COLOR_TOKENS, isInteractiveColorToken, isInverseInteractionToken } from './flex/colors/interactiveTokens';
+export { flexColor, selectColorEntry } from './flex/colors/flexColor';
+export type { ColorSchemeSelector } from './flex/colors/flexColor';
+export { selectShadowEntry } from './flex/flexShadow';
+export type { InteractiveColorToken } from './flex/colors/interactiveTokens';
+export { flexTokensFromTheme } from './flex/adapters/flexTokensFromTheme';
 export {
   createThemeAppearanceSource,
   FlexThemeReference,
@@ -30,6 +51,8 @@ export {
   useRootInputModality,
 } from './theming/modern';
 export type {
+  ColorTone,
+  FlexThemeDescription,
   FlexThemeInput,
   FlexThemeRecipe,
   FlexThemeReferenceOptions,
@@ -37,6 +60,7 @@ export type {
   InputModality,
   LegacyThemeFallback,
   LegacyThemeSource,
+  NormalizedThemeAppearance,
   PartialFlexTokens,
   ResolvedThemeAppearance,
   RootSettings,
@@ -54,5 +78,6 @@ export type {
   ThemeSource,
   ThemeSourceBase,
 } from './theming/modern';
-export type { ThemeState, ThemeStyleSheet } from './useThemeState';
-export { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './useThemeState';
+export type { ThemeStyleSheet } from './flex/useThemeState';
+export type { ThemeState } from './flex/themeState.types';
+export { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './flex/useThemeState';

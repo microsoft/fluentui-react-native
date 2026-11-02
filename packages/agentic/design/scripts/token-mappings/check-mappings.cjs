@@ -9,14 +9,15 @@ const { parse: parseYaml } = nodeRequire(path.join(yamlPackageRoot, 'dist/index.
 
 const packageRoot = path.resolve(__dirname, '../..');
 const defaultPaths = {
-  defaultTokens: path.join(packageRoot, 'src/tokens/defaultTokens.ts'),
+  defaultTokens: path.join(packageRoot, 'src/flex/adapters/fluentFallbackTokens.ts'),
   flexFromTheme: path.join(packageRoot, 'src/tokens/mappings/flex-from-theme.json'),
   flexTokenMap: path.join(packageRoot, 'src/tokens/mappings/flex-token-map.yaml'),
-  flexTypes: path.join(packageRoot, 'src/tokens/flex.types.ts'),
+  flexTypes: path.join(packageRoot, 'src/flex/tokens.types.ts'),
   themeFromFlex: path.join(packageRoot, 'src/tokens/mappings/theme-from-flex.json'),
 };
 
-const reverseTransforms = new Set(['identity', 'numberToPx']);
+const reverseTransforms = new Set(['identity', 'numberToPx', 'shadowLayersToToken']);
+const shadowReverseTransform = 'shadowLayersToToken';
 
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -44,6 +45,27 @@ function getThemeSource(entry, tokenPath, violations) {
   return source;
 }
 
+function getGenericSource(entry, tokenPath, violations) {
+  if (!Object.hasOwn(entry, 'generic') || entry.generic === null) {
+    return undefined;
+  }
+
+  const source = entry.generic;
+  if (typeof source !== 'string' || !source.startsWith('--gnrc-')) {
+    addViolation(violations, 'schema', tokenPath, 'a --gnrc-* custom property name or no generic field', source);
+    return undefined;
+  }
+
+  return source;
+}
+
+function createMappingEntry(entry, tokenPath, violations) {
+  return {
+    genericSource: getGenericSource(entry, tokenPath, violations),
+    themeSource: getThemeSource(entry, tokenPath, violations),
+  };
+}
+
 function flattenTokenMappings(mapping, violations) {
   const entries = new Map();
   if (!isRecord(mapping.tokens)) {
@@ -58,27 +80,23 @@ function flattenTokenMappings(mapping, violations) {
     }
 
     if (basePath.startsWith('color.') && Object.hasOwn(mappingEntry, 'rest')) {
-      const colorName = basePath.slice('color.'.length);
       for (const state of ['rest', 'hover', 'pressed']) {
         if (!Object.hasOwn(mappingEntry, state)) {
           continue;
         }
 
         const stateEntry = mappingEntry[state];
-        const destination = state === 'rest' ? basePath : `color.${state}.${colorName}`;
+        const destination = `${basePath}.${state}`;
         if (!isRecord(stateEntry)) {
           addViolation(violations, 'schema', destination, 'a color-state mapping object', stateEntry);
           continue;
         }
 
-        entries.set(destination, {
-          themeSource: getThemeSource(stateEntry, destination, violations),
-        });
+        entries.set(destination, createMappingEntry(stateEntry, destination, violations));
       }
     } else {
-      entries.set(basePath, {
-        themeSource: getThemeSource(mappingEntry, basePath, violations),
-      });
+      const destination = basePath.startsWith('color.') ? `${basePath}.rest` : basePath;
+      entries.set(destination, createMappingEntry(mappingEntry, destination, violations));
     }
   }
 
@@ -208,6 +226,9 @@ function buildReverseProjection(mapping, mappingEntries, supportedTypePaths, vio
       } else if (transform !== 'identity') {
         descriptor.transform = transform;
       }
+    }
+    if (source.startsWith('shadow.') && descriptor.transform !== shadowReverseTransform) {
+      addViolation(violations, 'reverse-transform', themePath, shadowReverseTransform, transform ?? '<missing>');
     }
 
     projectionEntries.push([themePath, descriptor]);
@@ -355,9 +376,9 @@ function readTypePaths(typesPath, typeName) {
   const paths = new Set();
   for (const [groupName, groupType] of resolveProperties(declaration, aliases)) {
     for (const [tokenName, tokenType] of resolveProperties(groupType, aliases)) {
-      if (groupName === 'color' && (tokenName === 'hover' || tokenName === 'pressed')) {
-        for (const stateTokenName of resolveProperties(tokenType, aliases).keys()) {
-          paths.add(`${groupName}.${tokenName}.${stateTokenName}`);
+      if (groupName === 'color') {
+        for (const state of resolveProperties(tokenType, aliases).keys()) {
+          paths.add(`${groupName}.${tokenName}.${state}`);
         }
       } else {
         paths.add(`${groupName}.${tokenName}`);
@@ -408,6 +429,8 @@ function findVariableInitializer(program, variableName) {
   throw new Error(`Unable to find ${variableName}.`);
 }
 
+const colorTokenPattern = /^color\.[^.]+$/;
+
 function readNonFluentValues(defaultTokensPath, supportedTypePaths) {
   const sourceText = fs.readFileSync(defaultTokensPath, 'utf8');
   const program = parseTypeScript(sourceText, {
@@ -419,7 +442,19 @@ function readNonFluentValues(defaultTokensPath, supportedTypePaths) {
   const values = new Map();
 
   function collect(expression, prefix) {
-    const value = unwrapExpression(expression);
+    let value = unwrapExpression(expression);
+    if (colorTokenPattern.test(prefix)) {
+      if (value.type === 'CallExpression' && value.callee.type === 'Identifier' && value.callee.name === 'flexColor') {
+        value = unwrapExpression(value.arguments[0]);
+      }
+      const isOptions =
+        value.type === 'ObjectExpression' &&
+        value.properties.some((property) => property.type === 'ObjectProperty' && getPropertyName(property) === 'rest');
+      if (!isOptions) {
+        values.set(`${prefix}.rest`, sourceText.slice(value.start, value.end));
+        return;
+      }
+    }
     if (prefix && supportedTypePaths.has(prefix)) {
       values.set(prefix, sourceText.slice(value.start, value.end));
       return;
@@ -437,6 +472,9 @@ function readNonFluentValues(defaultTokensPath, supportedTypePaths) {
       }
 
       const name = getPropertyName(property);
+      if (name === 'type' && colorTokenPattern.test(prefix)) {
+        continue;
+      }
       collect(property.value, prefix ? `${prefix}.${name}` : name);
     }
   }
@@ -462,8 +500,8 @@ function loadMappingInputs(paths = defaultPaths) {
 }
 
 function getInteractionRestPath(tokenPath) {
-  const match = /^color\.(?:hover|pressed)\.(.+)$/.exec(tokenPath);
-  return match ? `color.${match[1]}` : undefined;
+  const match = /^color\.([^.]+)\.(?:hover|pressed)$/.exec(tokenPath);
+  return match ? `color.${match[1]}.rest` : undefined;
 }
 
 function validateMappingInputs(inputs) {
@@ -496,6 +534,18 @@ function validateMappingInputs(inputs) {
       }
     } else {
       addViolation(violations, 'flex-token-type', tokenPath, 'a path declared by FlexTokens or UnsupportedFlexTokens', '<undeclared>');
+    }
+  }
+
+  // Every rest and non-color destination needs a generic source for generated defaults; interaction states are optional.
+  for (const tokenPath of supportedTypePaths) {
+    if (getInteractionRestPath(tokenPath) === undefined && !supportedEntries.has(tokenPath)) {
+      addViolation(violations, 'mapping-coverage', tokenPath, 'a destination in flex-token-map.yaml', '<missing>');
+    }
+  }
+  for (const [tokenPath, entry] of supportedEntries) {
+    if (entry.genericSource === undefined) {
+      addViolation(violations, 'generic-source', tokenPath, 'a generic custom property', '<missing>');
     }
   }
 

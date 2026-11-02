@@ -13,7 +13,7 @@ exports[`Stack with tokens 1`] = `
   <Text
     style={
       {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -26,7 +26,7 @@ exports[`Stack with tokens 1`] = `
   <Text
     style={
       {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -40,7 +40,7 @@ exports[`Stack with tokens 1`] = `
   <Text
     style={
       {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",

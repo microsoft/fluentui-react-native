@@ -69,11 +69,7 @@ describe('Tab', () => {
         } else if (interaction === 'pressed') {
           await fireEvent(getRoot(component), 'pressIn', {});
         }
-        const expected = disabled
-          ? colors.foregroundNeutralDisabled
-          : interaction === 'rest'
-            ? colors[foreground]
-            : colors[interaction][foreground];
+        const expected = disabled ? colors.foregroundNeutralDisabled.rest : colors[foreground][interaction];
         const labels = component.getAllByText('Files', { includeHiddenElements: true });
         expect(labels).toHaveLength(2);
         expect(labels.map((label) => StyleSheet.flatten(label.props.style).color)).toEqual([expected, expected]);
@@ -325,7 +321,7 @@ describe('Tab', () => {
     expect(StyleSheet.flatten(labels[1].parent?.props.style)).toMatchObject({ position: 'absolute', justifyContent: 'center' });
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: tokens.color.backgroundNeutralTransparent,
+      backgroundColor: tokens.color.backgroundNeutralTransparent.rest,
       borderRadius: tokens.borderRadius.base300,
       gap: tokens.spacing.componentBase100,
       paddingHorizontal: tokens.spacing.componentBase300,
@@ -345,11 +341,11 @@ describe('Tab', () => {
     const root = getRoot(component);
     const colors = defaultFlexTokens.color;
 
-    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy.rest);
     await fireEvent(root, 'hoverIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe(colors.hover.backgroundNeutralHeavy);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy.hover);
     await fireEvent(root, 'pressIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe(colors.pressed.backgroundNeutralHeavy);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralHeavy.pressed);
     await fireEvent.press(root);
     expect(onHoverIn).toHaveBeenCalledTimes(1);
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -378,7 +374,7 @@ describe('Tab', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true, selected: true });
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralHeavyDisabled);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralHeavyDisabled.rest);
   });
 
   it('renders icon-only tabs with icon swap and accessible labels', async () => {

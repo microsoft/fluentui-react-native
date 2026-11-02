@@ -54,7 +54,7 @@ describe('Button', () => {
     expect(component.getByText('Save')).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: '#fafafa',
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle.rest,
       minHeight: 24,
       minWidth: 24,
     });
@@ -72,7 +72,7 @@ describe('Button', () => {
     expect(getRootStyle(component).backgroundColor).not.toBe(restBackground);
 
     await fireEvent(root, 'pressIn', {});
-    expect(getRootStyle(component).backgroundColor).toBe('#dbdbdb');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtle.pressed);
 
     await fireEvent.press(root);
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -127,7 +127,7 @@ describe('Button', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true });
-    expect(getRootStyle(component).backgroundColor).toBe('#f0f0f0');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtleDisabled.rest);
     await fireEvent.press(root);
     expect(onPress).not.toHaveBeenCalled();
   });
@@ -323,13 +323,13 @@ describe('Button', () => {
   });
 
   it.each([
-    ['primary', '#185abd'],
-    ['secondary', '#fafafa'],
-    ['outline', '#00000000'],
-    ['subtle', '#00000000'],
-  ] as const)('resolves the %s appearance', async (appearance, backgroundColor) => {
+    ['primary', 'backgroundBrandHeavy'],
+    ['secondary', 'backgroundNeutralSubtle'],
+    ['outline', 'backgroundNeutralTransparent'],
+    ['subtle', 'backgroundNeutralTransparent'],
+  ] as const)('resolves the %s appearance', async (appearance, backgroundToken) => {
     const component = await renderButton({ appearance, content: appearance });
-    expect(getRootStyle(component).backgroundColor).toBe(backgroundColor);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color[backgroundToken].rest);
   });
 
   it.each([
@@ -343,20 +343,20 @@ describe('Button', () => {
       const root = getRoot(component);
 
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[restBackground],
-        borderColor: colors[restBorder],
+        backgroundColor: colors[restBackground].rest,
+        borderColor: colors[restBorder].rest,
       });
 
       await fireEvent(root, 'hoverIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.hover[interactionBackground],
-        borderColor: colors.hover[interactionBorder],
+        backgroundColor: colors[interactionBackground].hover,
+        borderColor: colors[interactionBorder].hover,
       });
 
       await fireEvent(root, 'pressIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.pressed[interactionBackground],
-        borderColor: colors.pressed[interactionBorder],
+        backgroundColor: colors[interactionBackground].pressed,
+        borderColor: colors[interactionBorder].pressed,
       });
     },
   );
@@ -415,40 +415,40 @@ describe('Button', () => {
         StyleSheet.flatten(component.getAllByText(appearance, { includeHiddenElements: true })[1].props.style).color;
 
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors[background],
-        borderColor: colors[border],
+        backgroundColor: colors[background].rest,
+        borderColor: colors[border].rest,
       });
-      expect(getForegroundColor()).toBe(colors[foreground]);
+      expect(getForegroundColor()).toBe(colors[foreground].rest);
 
       await fireEvent(root, 'hoverIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.hover[background],
-        borderColor: colors.hover[border],
+        backgroundColor: colors[background].hover,
+        borderColor: colors[border].hover,
       });
-      expect(getForegroundColor()).toBe(colors.hover[foreground]);
+      expect(getForegroundColor()).toBe(colors[foreground].hover);
 
       await fireEvent(root, 'pressIn', {});
       expect(getRootStyle(component)).toMatchObject({
-        backgroundColor: colors.pressed[background],
-        borderColor: colors.pressed[border],
+        backgroundColor: colors[background].pressed,
+        borderColor: colors[border].pressed,
       });
-      expect(getForegroundColor()).toBe(colors.pressed[foreground]);
+      expect(getForegroundColor()).toBe(colors[foreground].pressed);
 
       const disabledComponent = await renderButton({ appearance, content: appearance, disabled: true, selected: true });
       expect(getRootStyle(disabledComponent)).toMatchObject({
-        backgroundColor: colors[disabledBackground],
-        borderColor: colors[disabledBorder],
+        backgroundColor: colors[disabledBackground].rest,
+        borderColor: colors[disabledBorder].rest,
       });
       expect(StyleSheet.flatten(disabledComponent.getAllByText(appearance, { includeHiddenElements: true })[1].props.style).color).toBe(
-        colors.foregroundNeutralDisabled,
+        colors.foregroundNeutralDisabled.rest,
       );
     },
   );
 
   it.each([
-    ['small', 12, 8, 4],
-    ['medium', 14, 10, 4],
-    ['large', 16, 12, 6],
+    ['small', 12, 8, defaultFlexTokens.borderRadius.base200],
+    ['medium', 14, 10, defaultFlexTokens.borderRadius.base300],
+    ['large', 16, 12, defaultFlexTokens.borderRadius.base400],
   ] as const)('resolves the %s size', async (size, fontSize, paddingHorizontal, borderRadius) => {
     const component = await renderButton({ content: size, size });
     expect(StyleSheet.flatten(component.getByText(size).props.style)).toMatchObject({

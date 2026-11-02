@@ -29,7 +29,7 @@
     "build": "tsc -b",
     "format": "node ./src/cli.ts format",
     "lint": "node ./src/cli.ts lint",
-    "test": "node --test src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts src/utils/securityPatches.test.ts"
+    "test": "node --test src/tasks/agentInstructions.test.ts src/tasks/clean.test.mjs src/utils/jestSelection.test.ts src/utils/runScript.test.ts src/utils/securityPatches.test.ts src/codegen/file.test.ts src/codegen/valuePool.test.ts"
   },
   "dependencies": {
     "@babel/core": "catalog:",

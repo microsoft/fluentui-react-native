@@ -4,8 +4,8 @@ exports[`ListItem renders the default row with selection hidden and stable conte
 {
   "alignItems": "center",
   "alignSelf": "stretch",
-  "backgroundColor": "#00000000",
-  "borderRadius": 4,
+  "backgroundColor": "#24242400",
+  "borderRadius": 12,
   "flexDirection": "row",
   "justifyContent": "flex-start",
   "paddingHorizontal": 12,

@@ -1,0 +1,216 @@
+import { createInteractiveColor } from '../../flex/colors/interactiveColor';
+import { defaultFlexTokens } from '../../flex/defaults/defaultTokens';
+import type { FlexTokens, SemanticColorTokenValues } from '../../flex/tokens.types';
+import { restColorValues } from '../../test/fixtures/interactionColors';
+import { fluentDarkTheme } from '../../themes/fluent/fluentDarkTheme';
+import { fluentHcDarkTheme } from '../../themes/fluent/fluentHcDarkTheme';
+import { fluentHcLightTheme } from '../../themes/fluent/fluentHcLightTheme';
+import { fluentLightTheme } from '../../themes/fluent/fluentLightTheme';
+import reverseProjection from '../../tokens/mappings/theme-from-flex.json' with { type: 'json' };
+import type { ResolvedThemeAppearance } from '../../types/appearance.types';
+import type { PartialTheme, Theme } from '../types/Theme.types';
+
+import { themeFromFlexTokens } from './themeFromFlexTokens';
+import type { FlatFlexTokens } from './themeFromFlexTokens';
+
+const light = {
+  colorScheme: 'light',
+  contrast: 'standard',
+  interfaceLevel: 'base',
+} as const;
+const dark = { ...light, colorScheme: 'dark' } as const;
+
+function solid(value: string) {
+  return createInteractiveColor(value, value, value);
+}
+
+function createTokens(): FlexTokens {
+  return {
+    ...defaultFlexTokens,
+    color: {
+      ...defaultFlexTokens.color,
+      backgroundBrandSoft: solid('#111111'),
+      backgroundBrandSubtle: solid('#222222'),
+      backgroundNeutralSubtle: solid('#333333'),
+      surfaceNeutralNear: createInteractiveColor('#444444', '#454545', '#464646'),
+      fixedBlack: solid('#050505'),
+      expressionAchromaticHeavy: solid('#060606'),
+    },
+    borderRadius: {
+      ...defaultFlexTokens.borderRadius,
+      base200: 12,
+      base300: 24,
+    },
+    fontWeight: {
+      ...defaultFlexTokens.fontWeight,
+      functionalSemibold: '700',
+      contentBold: '900',
+    },
+  };
+}
+
+describe('themeFromFlexTokens', () => {
+  it.each([
+    [light, fluentLightTheme],
+    [dark, fluentDarkTheme],
+    [{ ...dark, interfaceLevel: 'elevated' }, fluentDarkTheme],
+    [{ ...light, contrast: 'highContrast' }, fluentHcLightTheme],
+    [{ ...dark, contrast: 'highContrast' }, fluentHcDarkTheme],
+  ] as [ResolvedThemeAppearance, Theme][])('fills values Flex cannot represent from the Fluent theme for %o', (appearance, base) => {
+    const baseline = JSON.stringify(base);
+    const projectedPaths = new Set(Object.keys(reverseProjection));
+    const unmappedColors = Object.keys(base.colors).filter((name) => !projectedPaths.has(`colors.${name}`));
+
+    const theme = themeFromFlexTokens(createTokens(), appearance, {
+      fallback: { colors: { customLegacyColor: '#abcdef' } } as PartialTheme,
+    });
+
+    expect(unmappedColors.length).toBeGreaterThan(0);
+    for (const name of unmappedColors) {
+      expect([name, theme.colors[name]]).toEqual([name, base.colors[name]]);
+    }
+    expect(theme.typography.variants).toEqual(base.typography.variants);
+    expect(theme.spacing).toEqual(base.spacing);
+    expect(theme).not.toBe(base);
+    expect(JSON.stringify(base)).toBe(baseline);
+  });
+
+  it('merges the base, legacy fallback, mapped Flex values, and final appearance in order', () => {
+    const fallback = {
+      name: 'Host theme',
+      colors: {
+        brandBackground2: '#777777',
+        customLegacyColor: '#abcdef',
+      },
+      components: {
+        Button: {
+          tokens: {
+            borderRadius: 2,
+            legacyOnlyMetric: 42,
+          },
+        },
+      },
+      host: {
+        appearance: 'dynamic',
+        palette: {
+          Bkg: '#101010',
+        },
+        colors: {
+          AppPrimary: '#202020',
+        },
+      },
+    } as PartialTheme;
+
+    const theme = themeFromFlexTokens(createTokens(), light, { fallback });
+
+    expect(theme.name).toBe('Host theme');
+    expect(theme.colors.customLegacyColor).toBe('#abcdef');
+    expect(theme.colors.brandBackground2).toBe('#111111');
+    expect(theme.colors.neutralBackground2).toBe('#444444');
+    expect(theme.colors.neutralBackground2Hover).toBe('#454545');
+    expect(theme.colors.neutralBackground2Pressed).toBe('#464646');
+    expect(theme.colors.black).toBe('#050505');
+    expect(theme.components.Button.tokens).toMatchObject({
+      borderRadius: 12,
+      legacyOnlyMetric: 42,
+    });
+    expect(theme.host.palette?.Bkg).toBe('#101010');
+    expect(theme.host.colors?.AppPrimary).toBe('#202020');
+    expect(theme.host.appearance).toBe('light');
+    expect(theme.typography.weights.semiBold).toBe('700');
+  });
+
+  it('uses declared canonical sources when several Flex roles share one legacy path', () => {
+    const theme = themeFromFlexTokens(createTokens(), light);
+
+    expect(theme.colors.brandBackground2).toBe('#111111');
+    expect(theme.colors.neutralBackground2).toBe('#444444');
+    expect(theme.colors.black).toBe('#050505');
+    expect(theme.components.Button).toMatchObject({
+      tokens: {
+        borderRadius: 12,
+      },
+    });
+    expect(theme.typography.weights.semiBold).toBe('700');
+  });
+
+  it('does not mutate frozen author inputs and returns a fresh legacy root', () => {
+    const tokens = Object.freeze(createTokens());
+    const fallback = Object.freeze({
+      colors: Object.freeze({
+        customLegacyColor: '#abcdef',
+      }),
+    }) as PartialTheme;
+
+    const first = themeFromFlexTokens(tokens, light, { fallback });
+    const second = themeFromFlexTokens(tokens, light, { fallback });
+
+    expect(first).not.toBe(second);
+    expect(first.colors.customLegacyColor).toBe('#abcdef');
+    expect(tokens.color.surfaceNeutralNear.rest).toBe('#444444');
+  });
+
+  it('accepts the deprecated flat representation with optional state maps', () => {
+    const color: FlatFlexTokens['color'] = {
+      ...restColorValues(defaultFlexTokens.color),
+      surfaceNeutralNear: '#444444',
+      backgroundBrandHeavy: '#0f6cbd',
+      hover: { backgroundBrandHeavy: '#115ea3' } satisfies Partial<SemanticColorTokenValues>,
+    };
+    const flat: FlatFlexTokens = { ...defaultFlexTokens, color };
+
+    const theme = themeFromFlexTokens(flat, light);
+
+    expect(theme.colors.neutralBackground2).toBe('#444444');
+    expect(theme.colors.neutralBackground2Hover).toBe('#444444');
+    expect(theme.colors.brandBackground).toBe('#0f6cbd');
+    expect(theme.colors.brandBackgroundHover).toBe('#115ea3');
+    expect(theme.colors.brandBackgroundPressed).toBe('#0f6cbd');
+  });
+
+  it('projects layered shadows lossily to legacy { ambient, key } shadows', () => {
+    const contour = { x: 0, y: 0, blur: 2, color: '#0000001a' };
+    const middle = { x: 0, y: 1, blur: 2, color: '#0000000d' };
+    const keyLayer = { x: 0, y: 4, blur: 8, color: '#00000014' };
+    const tokens: FlexTokens = {
+      ...createTokens(),
+      shadow: { ...defaultFlexTokens.shadow, lowest: [contour, middle, keyLayer], lower: [keyLayer], low: [] },
+    };
+
+    const theme = themeFromFlexTokens(tokens, light);
+
+    expect(theme.shadows.shadow2).toEqual({ ambient: contour, key: keyLayer });
+    expect(theme.shadows.shadow4).toEqual({ ambient: keyLayer, key: keyLayer });
+    expect(theme.shadows.shadow8).toEqual(fluentLightTheme.shadows.shadow8);
+    expect(theme.shadows.shadow16).toEqual({ ambient: defaultFlexTokens.shadow.high[0], key: defaultFlexTokens.shadow.high.at(-1) });
+  });
+
+  it('accepts the pre-interactive flat representation, including legacy { ambient, key } shadows', () => {
+    const legacy = { ambient: { x: 0, y: 0, blur: 2, color: 'black' }, key: { x: 0, y: 2, blur: 4, color: 'red' } };
+    const { motion: _motion, spacing, ...groups } = defaultFlexTokens;
+    const { componentBase800: _componentBase800, ...previousSpacing } = spacing;
+    const flat: FlatFlexTokens = {
+      ...groups,
+      color: restColorValues(defaultFlexTokens.color),
+      shadow: { ...defaultFlexTokens.shadow, lowest: legacy },
+      spacing: previousSpacing,
+    };
+
+    expect(themeFromFlexTokens(flat, light).shadows.shadow2).toEqual(legacy);
+  });
+
+  it('projects the same legacy theme from resolved and equivalent flat tokens', () => {
+    const resolved = themeFromFlexTokens(defaultFlexTokens, light);
+    const values = restColorValues(defaultFlexTokens.color);
+    const flat: FlatFlexTokens = {
+      ...defaultFlexTokens,
+      color: {
+        ...values,
+        hover: Object.fromEntries(Object.entries(defaultFlexTokens.color).map(([name, entry]) => [name, entry.hover])),
+        pressed: Object.fromEntries(Object.entries(defaultFlexTokens.color).map(([name, entry]) => [name, entry.pressed])),
+      },
+    };
+
+    expect(themeFromFlexTokens(flat, light)).toEqual(resolved);
+  });
+});

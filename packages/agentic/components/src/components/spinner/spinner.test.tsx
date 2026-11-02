@@ -69,9 +69,9 @@ describe('Spinner', () => {
     expect(getRootStyle(component)).toMatchObject({ height: 32, width: 32 });
     expect(svg.props.width).toBe(32);
     expect(svg.props.height).toBe(32);
-    expect(track.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralSubtle));
+    expect(track.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralSubtle.rest));
     expect(track.props.strokeWidth).toBe(tokens.strokeWidth.thick);
-    expect(indicator.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralLoud));
+    expect(indicator.props.stroke).toEqual(normalizeColor(tokens.color.strokeNeutralLoud.rest));
     const circumference = 2 * Math.PI * ((32 - Number(tokens.strokeWidth.thick)) / 2);
     expect(indicator.props.strokeDasharray).toEqual([circumference / 4, (circumference * 3) / 4]);
     expect(indicator.props).not.toHaveProperty('pathLength');

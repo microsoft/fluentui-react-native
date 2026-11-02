@@ -202,7 +202,7 @@ describe('Input', () => {
     expect(onFocus).toHaveBeenCalledTimes(1);
     expect(onChangeText).toHaveBeenCalledWith('hello');
     expect(flattenStyle(getContents(component).props.style)).toMatchObject({
-      borderColor: colors.strokeNeutralSubtle,
+      borderColor: colors.strokeNeutralSubtle.rest,
     });
   });
 
@@ -215,7 +215,7 @@ describe('Input', () => {
     expect(textbox.props.editable).toBe(false);
     expect(textbox.props.accessibilityState).toMatchObject({ disabled: true, readOnly: false });
     expect(flattenStyle(getContents(component).props.style)).toMatchObject({
-      borderColor: colors.strokeNeutralDisabled,
+      borderColor: colors.strokeNeutralDisabled.rest,
     });
 
     await fireEvent.changeText(textbox, 'blocked');
@@ -230,7 +230,7 @@ describe('Input', () => {
     expect(textbox.props.editable).toBe(false);
     expect(textbox.props.accessibilityState).toMatchObject({ disabled: false, readOnly: true });
     expect(flattenStyle(getContents(component).props.style)).toMatchObject({
-      borderColor: colors.strokeNeutralDisabled,
+      borderColor: colors.strokeNeutralDisabled.rest,
     });
   });
 
@@ -271,21 +271,21 @@ describe('Input', () => {
     }
     expect(flattenStyle(indicator.props.style).opacity).not.toBe(0);
     const boundary = props.error
-      ? colors.strokeDangerLoud
+      ? colors.strokeDangerLoud.rest
       : props.readOnly
-        ? colors.strokeNeutralDisabled
+        ? colors.strokeNeutralDisabled.rest
         : props.variant === 'outline'
-          ? colors.strokeNeutralSubtle
-          : colors.strokeFocusOuter;
+          ? colors.strokeNeutralSubtle.rest
+          : colors.strokeFocusOuter.rest;
     if (props.variant === 'outline') {
       expect(flattenStyle(getContents(component).props.style).borderColor).toBe(boundary);
       expect(flattenStyle(indicator.props.style)).toMatchObject({
-        borderColor: colors.strokeFocusOuter,
+        borderColor: colors.strokeFocusOuter.rest,
         borderWidth: defaultFlexTokens.strokeWidth.thick,
       });
       const inner = component.getByTestId('focus-visual-inner', { includeHiddenElements: true });
       expect(flattenStyle(inner.props.style)).toMatchObject({
-        borderColor: colors.strokeFocusInner,
+        borderColor: colors.strokeFocusInner.rest,
         borderWidth: defaultFlexTokens.strokeWidth.thin,
       });
     } else {
@@ -295,7 +295,7 @@ describe('Input', () => {
         borderBottomWidth: defaultFlexTokens.strokeWidth.thin,
       });
       expect(flattenStyle(indicator.props.style)).toMatchObject({
-        borderBottomColor: colors.strokeFocusOuter,
+        borderBottomColor: colors.strokeFocusOuter.rest,
         borderBottomWidth: defaultFlexTokens.strokeWidth.thin,
         bottom: defaultFlexTokens.strokeWidth.thin,
       });
@@ -327,7 +327,7 @@ describe('Input', () => {
       width: 24,
     });
     expect(flattenStyle(component.getByText('\u2605').props.style)).toMatchObject({
-      color: colors.foregroundNeutralPrimary,
+      color: colors.foregroundNeutralPrimary.rest,
     });
     expect(component.getByTestId('icon-end-1').props.style).toMatchObject({ height: 24, width: 24 });
     expect(component.getByTestId('icon-end-2').props.style).toMatchObject({ height: 24, width: 24 });

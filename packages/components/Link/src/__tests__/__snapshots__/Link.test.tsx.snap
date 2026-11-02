@@ -40,9 +40,11 @@ exports[`Link component tests Default Link 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "Roboto",
+        "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }
@@ -91,9 +93,11 @@ exports[`Link component tests Default Link as a pressable 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "Roboto",
+        "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }
@@ -143,9 +147,11 @@ exports[`Link component tests Inline Link 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "Roboto",
+        "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
         "textDecorationLine": "underline",
       }
@@ -197,9 +203,11 @@ exports[`Link component tests Subtle Link 1`] = `
       {
         "alignSelf": "flex-start",
         "color": "#0f6cbd",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "Roboto",
+        "fontSize": 16,
         "fontWeight": "400",
+        "letterSpacing": 0,
+        "lineHeight": 24,
         "margin": 0,
       }
     }

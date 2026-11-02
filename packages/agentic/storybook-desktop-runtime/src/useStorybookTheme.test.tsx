@@ -47,7 +47,7 @@ describe('Storybook theme palette', () => {
     expect(themes[themes.length - 1].background.content).toBe('#654321');
     expect(themes[themes.length - 1].background.preview).toBe('#654321');
     expect(themes[themes.length - 1]).not.toBe(themes[0]);
-    expect(themes[themes.length - 1].appBorderColor).toBe(states[states.length - 1].tokens.color.strokeNeutralSubtle);
+    expect(themes[themes.length - 1].appBorderColor).toBe(states[states.length - 1].tokens.color.strokeNeutralSubtle.rest);
   });
 
   it('warns and substitutes a contrasting theme color for native opaque colors', async () => {
@@ -60,7 +60,7 @@ describe('Storybook theme palette', () => {
         <Probe themes={themes} states={states} />
       </ThemedRoot>,
     );
-    expect(themes[0].color.primary).toBe(states[0].tokens.color.fixedBlack);
+    expect(themes[0].color.primary).toBe(states[0].tokens.color.fixedBlack.rest);
     expect(warn).toHaveBeenCalledTimes(1);
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('foregroundBrandPrimary'));
   });
@@ -84,8 +84,8 @@ describe('Storybook theme palette', () => {
       </ThemedRoot>,
     );
 
-    expect(themes[0].background.content).toBe(states[0].tokens.color[fallback]);
-    expect(themes[0].background.preview).toBe(states[0].tokens.color[fallback]);
+    expect(themes[0].background.content).toBe(states[0].tokens.color[fallback].rest);
+    expect(themes[0].background.preview).toBe(states[0].tokens.color[fallback].rest);
     expect(warn).toHaveBeenCalledTimes(1);
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('surfaceNeutralFar'));
   });

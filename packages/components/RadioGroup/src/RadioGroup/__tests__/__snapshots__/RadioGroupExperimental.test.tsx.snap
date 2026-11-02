@@ -36,9 +36,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
       style={
         {
           "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
         }
       }
@@ -205,9 +207,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -366,9 +370,11 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -418,9 +424,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       style={
         {
           "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
         }
       }
@@ -587,9 +595,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -748,9 +758,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -800,9 +812,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
       style={
         {
           "color": "#bdbdbd",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
         }
       }
@@ -969,9 +983,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             {
               "color": "#bdbdbd",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -1130,9 +1146,11 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
           style={
             {
               "color": "#bdbdbd",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -1183,9 +1201,11 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
       style={
         {
           "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
         }
       }
@@ -1352,9 +1372,11 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -1513,9 +1535,11 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -1566,9 +1590,11 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
       style={
         {
           "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
         }
       }
@@ -1735,9 +1761,11 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -1896,9 +1924,11 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -1948,9 +1978,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       style={
         {
           "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
         }
       }
@@ -1963,9 +1995,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
       style={
         {
           "color": "#750b1c",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "600",
+          "fontFamily": "Roboto",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
           "paddingStart": 2,
         }
@@ -2133,9 +2167,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }
@@ -2294,9 +2330,11 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           style={
             {
               "color": "#242424",
-              "fontFamily": "Segoe UI",
-              "fontSize": 13,
+              "fontFamily": "Roboto",
+              "fontSize": 16,
               "fontWeight": "400",
+              "letterSpacing": 0,
+              "lineHeight": 24,
               "margin": 0,
               "marginHorizontal": 2,
             }

@@ -50,7 +50,7 @@ const toDimensionValue = (value: unknown): number => Number(getNumericStyleValue
 const getRadioRootLayoutStyle = getThemedStateStyleFactory(
   'Radio.rootLayout',
   ({ borderRadius, color, spacing }: FlexTokens): StyleDefinition<ViewStyle, typeof noStateLevels> => ({
-    backgroundColor: color.backgroundNeutralTransparent,
+    backgroundColor: color.backgroundNeutralTransparent.rest,
     borderRadius: borderRadius.base300,
     gap: toDimensionValue(spacing.componentBase100),
   }),
@@ -60,7 +60,7 @@ const getRadioRootLayoutStyle = getThemedStateStyleFactory(
 const getRadioIndicatorLayoutStyle = getThemedStateStyleFactory(
   'Radio.indicatorLayout',
   ({ color, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof noStateLevels> => ({
-    backgroundColor: color.backgroundNeutralTransparent,
+    backgroundColor: color.backgroundNeutralTransparent.rest,
     borderRadius: 8,
     borderStyle: 'solid',
     borderWidth: strokeWidth.thin,

@@ -1,13 +1,25 @@
 {
   "repository": "x3-design/fluent-design",
-  "commit": "d334acf5cbad813f2b7cd554da942b09a7ff8f10",
-  "verifiedDate": "2026-08-27",
+  "commit": "206e890b645fb450ad7c5df2ff981765349a2b58",
+  "verifiedDate": "2026-10-24",
   "files": [
     {
       "id": "semanticCss",
       "upstreamPath": "dev/web/flex-themes/css/semantic.css",
       "snapshotPath": "scripts/token-mappings/__fixtures__/x3/semantic.css",
-      "blobSha": "6dac670ac83f3251898d40f07c0e90a2779a1915"
+      "blobSha": "4c9f3e0a70bdbb8b7183d2db15254d9427d8e6ab"
+    },
+    {
+      "id": "semanticLightCss",
+      "upstreamPath": "dev/web/flex-themes/css/semantic-light.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/semantic-light.css",
+      "blobSha": "633b87a634be88bf37b018f287b3d1758a189707"
+    },
+    {
+      "id": "semanticDarkCss",
+      "upstreamPath": "dev/web/flex-themes/css/semantic-dark.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/semantic-dark.css",
+      "blobSha": "d9ae7355fc3ed934a385bf6cd36244e2f5bba7b0"
     },
     {
       "id": "interactionFallbackCss",
@@ -16,10 +28,64 @@
       "blobSha": "c69ff3145f4f9b1228a694a3e7ba8b1a65d2c032"
     },
     {
+      "id": "interactionFallbackLightCss",
+      "upstreamPath": "dev/web/flex-themes/css/interaction-fallback-light.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/interaction-fallback-light.css",
+      "blobSha": "87f488d731babc06f457edf9ca4c358fa79b39b2"
+    },
+    {
+      "id": "interactionFallbackDarkCss",
+      "upstreamPath": "dev/web/flex-themes/css/interaction-fallback-dark.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/interaction-fallback-dark.css",
+      "blobSha": "f4d6af7fdcd16a315f024f907c2a5b264366cda8"
+    },
+    {
+      "id": "warmSemanticCss",
+      "upstreamPath": "dev/web/flex-themes/css/warm/semantic.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/warm/semantic.css",
+      "blobSha": "dfe8416dffb4b215777d0270c3fe40a5d631ee2c"
+    },
+    {
+      "id": "warmSemanticLightCss",
+      "upstreamPath": "dev/web/flex-themes/css/warm/semantic-light.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/warm/semantic-light.css",
+      "blobSha": "0c155116e886e55f98b5b9212a96ed25efcf89ee"
+    },
+    {
+      "id": "warmSemanticDarkCss",
+      "upstreamPath": "dev/web/flex-themes/css/warm/semantic-dark.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/warm/semantic-dark.css",
+      "blobSha": "cacec7d267fb11a44d6e42f943e3aa6ab5955e1f"
+    },
+    {
+      "id": "warmInteractionFallbackCss",
+      "upstreamPath": "dev/web/flex-themes/css/warm/interaction-fallback.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/warm/interaction-fallback.css",
+      "blobSha": "6dbe4a963fd197cac7fabf35cf6c801f68aa1f4c"
+    },
+    {
+      "id": "warmInteractionFallbackLightCss",
+      "upstreamPath": "dev/web/flex-themes/css/warm/interaction-fallback-light.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/warm/interaction-fallback-light.css",
+      "blobSha": "ffb1ef7e3eda4a0c2428cbed75db707f14c0173f"
+    },
+    {
+      "id": "warmInteractionFallbackDarkCss",
+      "upstreamPath": "dev/web/flex-themes/css/warm/interaction-fallback-dark.css",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/warm/interaction-fallback-dark.css",
+      "blobSha": "6d51a1eb182381eeb9dcd14d7c6b7a4ca0de7ed1"
+    },
+    {
       "id": "mappings",
       "upstreamPath": "dev/web/flex-tokens/mappings.json",
       "snapshotPath": "scripts/token-mappings/__fixtures__/x3/mappings.json",
-      "blobSha": "4b917a8c93a18591741482136ee0df2b05bdce2f"
+      "blobSha": "33c7a100a200d52d48f35faae5adf9f6282e462a"
+    },
+    {
+      "id": "tokens",
+      "upstreamPath": "dev/web/flex-tokens/tokens.json",
+      "snapshotPath": "scripts/token-mappings/__fixtures__/x3/tokens.json",
+      "blobSha": "49bec466b835c0df87c879f399a29fc60db6b426"
     }
   ]
 }

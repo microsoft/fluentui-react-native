@@ -74,14 +74,14 @@ function createLabelStyleDefinition({
 
   return {
     horizontal: {
-      color: color.foregroundNeutralSecondary,
+      color: color.foregroundNeutralSecondary.rest,
       fontFamily: fontFamily.functional,
       fontSize: bodySmallSize,
       fontWeight: fontWeight.functionalRegular,
       lineHeight: bodySmallLineHeight,
     },
     vertical: {
-      color: color.foregroundNeutralSecondary,
+      color: color.foregroundNeutralSecondary.rest,
       fontFamily: fontFamily.functional,
       fontSize: bodySmallSize,
       fontWeight: fontWeight.functionalRegular,
@@ -102,7 +102,7 @@ export function getDividerLineStyle(state: DividerState, position: 'before' | 'a
   const lineThickness = Number(state.tokens.strokeWidth.thin);
 
   return {
-    backgroundColor: state.tokens.color.strokeNeutralSubtle,
+    backgroundColor: state.tokens.color.strokeNeutralSubtle.rest,
     ...(state.vertical ? { width: lineThickness } : { height: lineThickness }),
     flexBasis,
     flexGrow: isStub ? 0 : 1,
