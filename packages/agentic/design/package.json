@@ -133,7 +133,7 @@
     "@react-native-community/cli-platform-android": "^20.0.0",
     "@react-native-community/cli-platform-ios": "^20.0.0",
     "@react-native/babel-preset": "^0.81.0",
-    "@rnx-kit/tools-filesystem": "^0.2.0",
+    "@rnx-kit/tools-filesystem": "catalog:",
     "@types/react": "~19.1.4",
     "@types/react-test-renderer": "^19.1.0",
     "react": "19.1.4",

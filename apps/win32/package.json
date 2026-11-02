@@ -64,18 +64,10 @@
     "oxc-resolver": "catalog:",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "catalog:",
-    "react-test-renderer": "19.1.4",
-    "rimraf": "catalog:"
+    "react-test-renderer": "19.1.4"
   },
   "jest": {
     "preset": "react-native"
-  },
-  "furn": {
-    "depcheck": {
-      "ignoreMatches": [
-        "@office-iss/react-native-win32"
-      ]
-    }
   },
   "rnx-kit": {
     "kitType": "app",

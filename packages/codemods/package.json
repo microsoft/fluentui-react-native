@@ -45,14 +45,6 @@
     "@types/node": "catalog:"
   },
   "furn": {
-    "depcheck": {
-      "ignoreMatches": [
-        ".bin"
-      ],
-      "ignorePatterns": [
-        "src/transforms/__testfixtures__/*"
-      ]
-    },
     "jestPlatform": "react",
     "knip": {
       "extraEntries": [

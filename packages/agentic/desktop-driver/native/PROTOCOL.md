@@ -181,6 +181,17 @@ destroyed. Helpers without the feature reject the command as
 `unsupported-operation`; Node never requests the log unless the feature is
 negotiated.
 
+Helpers that advertise the `accessibilityActions` feature also accept an
+`accessibilityActions` command with the helper-private `elementId` and return
+`{ "actions": ["<name>", ...] }`: the names of the actions the platform
+accessibility tree publishes for the element, in provider order. Names are
+authored text only; provider handles, targets, and selectors never cross FDR1.
+The command is read-only and follows the liveness rules of other element
+queries. An element that publishes no actions returns an empty list. Helpers
+without the feature reject the command as `unsupported-operation`, which Node
+reports as `unsupported operation` rather than an empty list. The feature is
+additive and does not change the wire version.
+
 ### `cancel` and `cancelled`
 
 When a command's `AbortSignal` fires, Node sends:

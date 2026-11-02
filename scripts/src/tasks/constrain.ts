@@ -55,6 +55,7 @@ export function constrain(workspace: Yarn.Constraints.Workspace): void {
   ctx.enforce('scripts.build-cjs', undefined);
   ctx.enforce('scripts.build-core', undefined);
   ctx.enforce('scripts.depcheck', undefined);
+  ctx.enforce('furn.depcheck', undefined);
   const tsCtx = ctx.validateJSON<TsConfigJson>('tsconfig.json');
   if (tsCtx) {
     const depBuilds = new Set<string>();
