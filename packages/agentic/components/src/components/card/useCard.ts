@@ -3,9 +3,12 @@ import type { PressableProps } from 'react-native';
 
 import { type PropsWithRefOf, useFocusablePressable, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 import { useThemeState } from '@fluentui-react-native/design';
-import { useFocusVisuals } from '../../common/useFocusVisuals';
+import { getFocusVisualOptions, useFocusVisuals } from '../../common/useFocusVisuals';
 
 import type { CardProps, CardState } from './card.types';
+import { cardTraits } from './spec/traits';
+
+const focusVisualOptions = getFocusVisualOptions(cardTraits.focusVisual);
 
 const horizontalCollapseWidth = 480;
 
@@ -85,7 +88,10 @@ export function useCard_unstable(props: CardProps): CardState {
     unstable_pressDelay,
   } as PressableProps);
 
-  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled && isInteractive });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({
+    focused: pressableState.focused && !disabled && isInteractive,
+    ...focusVisualOptions,
+  });
 
   const rootProps: PropsWithRefOf<typeof View> = isInteractive
     ? ({ ...rest, accessible: false, accessibilityState: { ...accessibilityState, disabled }, ref: rootRef, testID } as PropsWithRefOf<

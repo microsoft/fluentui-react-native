@@ -7,7 +7,7 @@ import type { ThemeState } from '@fluentui-react-native/design';
 
 import { applyFocusRingStyles } from './applyFocusRingStyles';
 import { render } from './renderWithTheme';
-import { useFocusVisuals } from './useFocusVisuals';
+import { getFocusVisualOptions, useFocusVisuals } from './useFocusVisuals';
 import type { FocusVisualsOptions, FocusVisualsState } from './useFocusVisuals';
 
 function Probe({ seen, radius = 4, ...options }: FocusVisualsOptions & { seen: FocusVisualsState[]; radius?: number }) {
@@ -139,5 +139,13 @@ describe('useFocusVisuals', () => {
     };
     applyFocusRingStyles(undefined, theme, 4);
     expect(getTokens).not.toHaveBeenCalled();
+  });
+});
+
+describe('getFocusVisualOptions', () => {
+  it('maps focus-visual traits to stable hook options', () => {
+    expect(getFocusVisualOptions('platform')).toEqual({});
+    expect(getFocusVisualOptions('custom-always-visible')).toEqual({ useSystemFocusRing: false, alwaysVisible: true });
+    expect(getFocusVisualOptions('custom-always-visible')).toBe(getFocusVisualOptions('custom-always-visible'));
   });
 });

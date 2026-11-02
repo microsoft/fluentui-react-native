@@ -3,15 +3,27 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { attachSlotProps } from '@fluentui-react-native/framework-base';
 import { applyFocusRingStyles } from '../../common/applyFocusRingStyles';
 
-import { cardStyles, getCardNestedBlockStyle, getCardOverlayStyle, getCardRootStyle, getCardSurfaceColors } from './card.styles';
+import {
+  cardStyles,
+  getCardBackgroundStyle,
+  getCardNestedBlockStyle,
+  getCardOverlayStyle,
+  getCardRootStyle,
+  getCardStrokeStyle,
+} from './card.styles';
 import type { CardState } from './card.types';
 
 /**
  * Applies stable theme styles and instance-specific style selections to the Card slots.
  */
 export function useCardStyles_unstable(state: CardState) {
-  const colors = getCardSurfaceColors(state);
-  const rootStyle: StyleProp<ViewStyle> = [cardStyles.root, getCardRootStyle(state), colors, state.userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [
+    cardStyles.root,
+    getCardRootStyle(state),
+    getCardBackgroundStyle(state),
+    getCardStrokeStyle(state),
+    state.userStyle,
+  ];
   const overlayStyle = getCardOverlayStyle(state);
 
   applyFocusRingStyles(state.FocusRing, state, overlayStyle.borderRadius);

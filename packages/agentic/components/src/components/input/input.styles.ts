@@ -3,11 +3,18 @@ import type { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 import type { ThemeState } from '@fluentui-react-native/design';
-import { getNumericStyleValue, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  functionalTypography,
+  getNumericStyleValue,
+  getRadiusStyleValue,
+  getStrokeWidthStyleValue,
+  getThemedStateStyleFactory,
+} from '@fluentui-react-native/design/styling';
 import type { StyleDefinition } from '@fluentui-react-native/design/styling';
 import { cornerRadiusNone, size160, size200, size240 } from '@fluentui-react-native/design/tokens/global';
 
 import type { InputSize, InputVariant, InputVisualState } from './input.types';
+import { inputTraits } from './spec/traits';
 
 export const inputStyles = StyleSheet.create({
   root: {
@@ -75,27 +82,27 @@ type VisualStateLevels = typeof visualStateLevels;
 const toNumber = (value: unknown): number => Number(getNumericStyleValue(value));
 
 function getMetrics(tokens: FlexTokens, size: InputSize) {
-  const { fontSize, lineHeight, spacing } = tokens;
+  const { lineHeight, spacing } = tokens;
   const metrics = {
     small: {
       height: toNumber(lineHeight.functionalBodySmall) + toNumber(spacing.componentBase100) * 2,
       horizontalPadding: toNumber(spacing.componentBase150),
       iconSize: toNumber(size160),
-      textFontSize: toNumber(fontSize.functionalBodySmall),
+      textRole: 'functionalBodySmall',
       verticalPadding: toNumber(spacing.componentBase100),
     },
     medium: {
       height: toNumber(lineHeight.functionalBodyMedium) + toNumber(spacing.componentBase150) * 2,
       horizontalPadding: toNumber(spacing.componentBase250),
       iconSize: toNumber(size200),
-      textFontSize: toNumber(fontSize.functionalBodyMedium),
+      textRole: 'functionalBodyMedium',
       verticalPadding: toNumber(spacing.componentBase150),
     },
     large: {
       height: toNumber(lineHeight.functionalBodyLarge) + toNumber(spacing.componentBase200) * 2,
       horizontalPadding: toNumber(spacing.componentBase300),
       iconSize: toNumber(size240),
-      textFontSize: toNumber(fontSize.functionalBodyLarge),
+      textRole: 'functionalBodyLarge',
       verticalPadding: toNumber(spacing.componentBase200),
     },
   } as const;
@@ -104,13 +111,14 @@ function getMetrics(tokens: FlexTokens, size: InputSize) {
 }
 
 function createRootStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, RootStateLevels> {
-  const { borderRadius } = tokens;
+  const { radius } = inputTraits.geometry.root;
   return {
     outline: {
-      small: { borderRadius: toNumber(borderRadius.base200) },
-      medium: { borderRadius: toNumber(borderRadius.base300) },
-      large: { borderRadius: toNumber(borderRadius.base400) },
+      small: { borderRadius: toNumber(getRadiusStyleValue(tokens, radius, 'small')) },
+      medium: { borderRadius: toNumber(getRadiusStyleValue(tokens, radius, 'medium')) },
+      large: { borderRadius: toNumber(getRadiusStyleValue(tokens, radius, 'large')) },
     },
+    // The underline variant draws only a bottom stroke, so its corners stay square.
     underline: {
       small: { borderRadius: cornerRadiusNone },
       medium: { borderRadius: cornerRadiusNone },
@@ -160,12 +168,13 @@ function createContentsLayoutDefinition(tokens: FlexTokens): StyleDefinition<Vie
 }
 
 function createContentsStrokeDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, ContentStateLevels> {
-  const { color, strokeWidth } = tokens;
+  const { color } = tokens;
+  const { strokeWidth } = inputTraits.geometry.contents;
   const outlineBase = {
-    borderWidth: toNumber(strokeWidth.thin),
+    borderWidth: toNumber(getStrokeWidthStyleValue(tokens, strokeWidth, 'outline')),
   };
   const underlineBase = {
-    borderWidth: 0,
+    borderWidth: toNumber(getStrokeWidthStyleValue(tokens, strokeWidth, 'underline')),
   };
   const outlineStates = {
     disabled: { borderColor: color.strokeNeutralDisabled.rest },
@@ -249,35 +258,33 @@ function createIconEndDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle,
 }
 
 function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyle, TextStateLevels> {
-  const { color, fontFamily } = tokens;
+  const { color } = tokens;
   const small = getMetrics(tokens, 'small');
   const medium = getMetrics(tokens, 'medium');
   const large = getMetrics(tokens, 'large');
-  const base = {
-    color: color.foregroundNeutralPrimary.rest,
-    fontFamily: fontFamily.functional,
-  };
+  const typography = inputTraits.typography.textInput;
+  const foreground = { color: color.foregroundNeutralPrimary.rest };
 
   return {
     small: {
-      ...base,
-      fontSize: small.textFontSize,
+      ...foreground,
+      ...functionalTypography(tokens, small.textRole, typography),
       marginVertical: small.verticalPadding,
       disabled: {
         color: color.foregroundNeutralDisabled.rest,
       },
     },
     medium: {
-      ...base,
-      fontSize: medium.textFontSize,
+      ...foreground,
+      ...functionalTypography(tokens, medium.textRole, typography),
       marginVertical: medium.verticalPadding,
       disabled: {
         color: color.foregroundNeutralDisabled.rest,
       },
     },
     large: {
-      ...base,
-      fontSize: large.textFontSize,
+      ...foreground,
+      ...functionalTypography(tokens, large.textRole, typography),
       marginVertical: large.verticalPadding,
       disabled: {
         color: color.foregroundNeutralDisabled.rest,
@@ -286,32 +293,38 @@ function createTextInputDefinition(tokens: FlexTokens): StyleDefinition<TextStyl
   };
 }
 
+function getUnderlineWidth(tokens: FlexTokens): number {
+  return toNumber(getStrokeWidthStyleValue(tokens, inputTraits.geometry.underline.strokeWidth));
+}
+
 function createUnderlineDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, VisualStateLevels> {
-  const { strokeWidth } = tokens;
   const base = {
     bottom: 0,
+    borderBottomWidth: getUnderlineWidth(tokens),
     left: 0,
     position: 'absolute' as const,
     right: 0,
   };
   return {
-    disabled: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    error: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    focused: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    hovered: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    pressed: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    readOnly: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
-    rest: { ...base, borderBottomWidth: toNumber(strokeWidth.thin) },
+    disabled: base,
+    error: base,
+    focused: base,
+    hovered: base,
+    pressed: base,
+    readOnly: base,
+    rest: base,
   };
 }
 
+// The focus underline sits directly above the underline and matches its width.
 function createUnderlineFocusDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, VisualStateLevels> {
+  const width = getUnderlineWidth(tokens);
   return {
-    bottom: toNumber(tokens.strokeWidth.thin),
+    bottom: width,
     left: 0,
     right: 0,
     position: 'absolute',
-    borderBottomWidth: toNumber(tokens.strokeWidth.thin),
+    borderBottomWidth: width,
     borderBottomColor: tokens.color.strokeFocusOuter.rest,
   };
 }

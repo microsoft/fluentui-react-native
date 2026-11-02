@@ -4,7 +4,6 @@ exports[`Flex default baseline keeps the dark legacy projection of the default F
 {
   "colorCount": 318,
   "colors": "00e96311260ec7a0",
-  "components": "75484377ab62c281",
   "host": "e8e4ef993a27738e",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
@@ -16,7 +15,6 @@ exports[`Flex default baseline keeps the darkElevated legacy projection of the d
 {
   "colorCount": 318,
   "colors": "00e96311260ec7a0",
-  "components": "75484377ab62c281",
   "host": "f94ca80c0bbf7966",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
@@ -28,7 +26,6 @@ exports[`Flex default baseline keeps the highContrast legacy projection of the d
 {
   "colorCount": 318,
   "colors": "95d8ba84933eb351",
-  "components": "75484377ab62c281",
   "host": "9db06d0a5ce1e422",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
@@ -40,7 +37,6 @@ exports[`Flex default baseline keeps the light legacy projection of the default 
 {
   "colorCount": 318,
   "colors": "17121c304beef7e4",
-  "components": "75484377ab62c281",
   "host": "6be4fd450402dc4f",
   "shadows": "6cc8dc2e49311041",
   "spacing": "ae5c5f37376210ff",
@@ -66,7 +62,7 @@ exports[`Flex default baseline keeps the values consumers read from the default 
 
 exports[`legacy compatibility baseline keeps Flex values converted from the dark Fluent projection base 1`] = `
 {
-  "borderRadius": "13bd91dc683ef515",
+  "borderRadius": "cfa8c2371a72707b",
   "color": "79755e1e202aa0e8",
   "colorCount": 119,
   "fontFamily": "7a4e96787cf538ad",
@@ -82,7 +78,7 @@ exports[`legacy compatibility baseline keeps Flex values converted from the dark
 
 exports[`legacy compatibility baseline keeps Flex values converted from the darkElevated Fluent projection base 1`] = `
 {
-  "borderRadius": "13bd91dc683ef515",
+  "borderRadius": "cfa8c2371a72707b",
   "color": "79755e1e202aa0e8",
   "colorCount": 119,
   "fontFamily": "7a4e96787cf538ad",
@@ -98,7 +94,7 @@ exports[`legacy compatibility baseline keeps Flex values converted from the dark
 
 exports[`legacy compatibility baseline keeps Flex values converted from the highContrast Fluent projection base 1`] = `
 {
-  "borderRadius": "13bd91dc683ef515",
+  "borderRadius": "cfa8c2371a72707b",
   "color": "a6b03a11b350d9af",
   "colorCount": 119,
   "fontFamily": "7a4e96787cf538ad",
@@ -114,7 +110,7 @@ exports[`legacy compatibility baseline keeps Flex values converted from the high
 
 exports[`legacy compatibility baseline keeps Flex values converted from the light Fluent projection base 1`] = `
 {
-  "borderRadius": "13bd91dc683ef515",
+  "borderRadius": "cfa8c2371a72707b",
   "color": "6887e2160d35b879",
   "colorCount": 119,
   "fontFamily": "7a4e96787cf538ad",
@@ -130,7 +126,7 @@ exports[`legacy compatibility baseline keeps Flex values converted from the ligh
 
 exports[`legacy compatibility baseline keeps Flex values converted from the mock theme 1`] = `
 {
-  "borderRadius": "13bd91dc683ef515",
+  "borderRadius": "cfa8c2371a72707b",
   "color": "182c4b50bcf5e1b8",
   "colorCount": 119,
   "fontFamily": "dc70eb85181162c3",

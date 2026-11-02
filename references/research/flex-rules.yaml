@@ -418,9 +418,10 @@ rules:
       28px). circular is the only structural exception. Edges flush to the viewport use 0, which is not a token.
     evidence: [flex-system:styling, flex-tokens:core]
     furn: >-
-      defaultFlexTokens (packages/agentic/design/src/tokens/defaultTokens.ts) maps these names to Fluent 2 radii
-      (base100 2px, base200 and base300 4px, base400 6px, base600 8px, base700 12px), so components on the default
-      tokens render smaller radii than Flex specifies. A Flex theme must supply the 4px-based values.
+      defaultFlexTokens and the Fluent forward adapter's nonFluentFlexTokens
+      (packages/agentic/design/src/flex/adapters/fluentFallbackTokens.ts) both use these 4px-based values, and radius
+      has no legacy Theme mapping in either direction, so agentic components render Flex radii in every theme. A
+      Fluent radius look is a future theme setting.
 
   - id: FLEX-RADIUS-002
     category: radius

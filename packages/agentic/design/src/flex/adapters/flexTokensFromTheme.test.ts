@@ -34,19 +34,15 @@ describe('flexTokensFromTheme', () => {
     expect(tokens.color.backgroundBrandSoft).toEqual({ rest: '#112233', hover: '#112233', pressed: '#112233' });
     expect(tokens.color.backgroundNeutralSoft).toEqual({ rest: '#0000001a', hover: '#0000001a', pressed: '#0000001a' });
     expect(tokens.color.expressionAccentHeavy).toEqual({ rest: '#242424', hover: '#242424', pressed: '#242424' });
-    expect(tokens.borderRadius.base100).toBe(2);
-    expect(tokens.borderRadius.base200).toBe(10);
-    expect(tokens.borderRadius.base300).toBe(10);
-    expect(tokens.borderRadius.base400).toBe(6);
     expect(tokens.fontWeight.functionalMedium).toBe(theme.typography.weights.semiBold);
   });
 
-  it('uses native defaults when an optional mapped Theme path is absent', () => {
-    const tokens = flexTokensFromTheme({ ...createTheme(), components: {} });
+  it('keeps Flex border radius independent of the Theme Button radius', () => {
+    const flexRadius = { base100: 4, base200: 8, base300: 12, base400: 16, base600: 24, base700: 28, circular: 9999 };
 
-    expect(tokens.borderRadius.base200).toBe(4);
-    expect(tokens.borderRadius.base300).toBe(4);
-    expect(tokens.color.backgroundBrandHeavy.rest).toBe('#185abd');
+    expect(flexTokensFromTheme(createTheme()).borderRadius).toEqual(flexRadius);
+    expect(flexTokensFromTheme({ ...createTheme(), components: {} }).borderRadius).toEqual(flexRadius);
+    expect(defaultFlexTokens.borderRadius).toEqual(flexRadius);
   });
 
   it('converts legacy { ambient, key } Theme shadows to [ambient, key] layers', () => {

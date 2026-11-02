@@ -18,6 +18,24 @@ Use the
 composite evidence. Use the component authoring skill after the contract has
 passed its pre-code review.
 
+## SPEC front matter
+
+`SPEC.md` starts with YAML front matter written as one single-line `key: value` field per line, with no repeated or
+unknown keys:
+
+| Key             | Value                                                            |
+| --------------- | ---------------------------------------------------------------- |
+| `name`          | The component directory name                                     |
+| `status`        | The `lifecycle` recorded in `spec/source.json`                   |
+| `platform`      | `react-native (Windows, macOS)`                                  |
+| `source`        | `./spec/source.json`                                             |
+| `tokens`        | `./spec/tokens.yaml`                                             |
+| `accessibility` | `./spec/accessibility.md`                                        |
+| `interaction`   | `./spec/interaction.md`                                          |
+| `usage`         | `./spec/usage.md`                                                |
+| `traits`        | Optional; `./spec/traits.ts` (see [component traits](traits.md)) |
+| `traits-schema` | Optional; `1`, and only with `traits`                            |
+
 ## Why provenance stays JSON
 
 `spec/source.json` is generated, digest-heavy, strictly validated metadata.
@@ -253,8 +271,8 @@ yarn workspace @fluentui-react-native/components check:spec-contracts
 ```
 
 It validates schema version 2, local references and artifact digests,
-requirement evidence, lifecycle, and review state. It does not claim that a
-remote source is current.
+requirement evidence, lifecycle, review state, `SPEC.md` front matter, and any
+`spec/traits.ts` declaration. It does not claim that a remote source is current.
 
 With `GH_TOKEN` or `GITHUB_TOKEN` authorized for the curated Marketplace and X3
 source, generate the Flex-only digest report:

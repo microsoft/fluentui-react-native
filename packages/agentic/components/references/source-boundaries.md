@@ -28,6 +28,8 @@ or [primitive](primitives.md) reference when a change crosses component boundari
 - Generalizable non-styling hooks belong in `framework-base/src/hooks`.
 - Styling helpers belong in `agentic/design/src/styling`.
 - Component-library-specific non-public types, constants, and helpers belong in `src/common`.
+- The traits vocabulary and its helpers belong in `agentic/design/src/styling`; each component's traits constant stays
+  private in its own `spec/traits.ts` (see [component traits](traits.md)).
 - Primitives are public from `@fluentui-react-native/components/primitives`, must remain unstyled, and require a colocated
   `CONTRACT.md`. Extract one only for a repeated behavioral or structural contract that is useful to consumers; keep
   package-private helpers in `src/common`.

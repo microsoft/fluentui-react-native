@@ -57,16 +57,21 @@ exports[`public entry points ./deprecated keeps its runtime export names 1`] = `
 
 exports[`public entry points ./styling keeps its runtime export names 1`] = `
 [
+  "channelStatePriority: function",
   "colorStyleDef: function",
   "createStateLevelMap: function",
+  "functionalTypography: function",
   "getActiveState: function",
   "getGapStyleValue: function",
   "getNumericStyleValue: function",
+  "getRadiusStyleValue: function",
   "getStateStyleFactory: function",
+  "getStrokeWidthStyleValue: function",
   "getThemedColorStyleFactory: function",
   "getThemedStateStyleFactory: function",
   "interactiveStatePriority: object",
   "pickActiveStyle: function",
+  "resolveHoverMode: function",
   "styleDefinitionToBranchedStyles: function",
 ]
 `;

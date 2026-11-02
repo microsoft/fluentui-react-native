@@ -4,13 +4,17 @@ import type { ViewStyle } from 'react-native';
 import type { FlexTokens } from '@fluentui-react-native/design';
 
 import {
+  channelStatePriority,
   getGapStyleValue,
+  getRadiusStyleValue,
+  getStrokeWidthStyleValue,
   getThemedColorStyleFactory,
   getThemedStateStyleFactory,
-  interactiveStatePriority,
+  resolveHoverMode,
 } from '@fluentui-react-native/design/styling';
 import type { ColorStyleDefinition, StateNames, StyleDefinition, ViewColorStyle } from '@fluentui-react-native/design/styling';
-import type { CardState } from './card.types';
+import type { CardSize, CardState } from './card.types';
+import { cardTraits } from './spec/traits';
 
 export const cardStyles = StyleSheet.create({
   root: {
@@ -39,35 +43,33 @@ export const cardStyles = StyleSheet.create({
   },
 });
 
-const surfaceColorStateLevels = [['selected'], interactiveStatePriority] as const;
-type SurfaceColorStateLevels = typeof surfaceColorStateLevels;
-type SurfaceColorState = StateNames<SurfaceColorStateLevels>;
+const paintsHover = resolveHoverMode(cardTraits.hover) !== 'suppressed';
 
-const surfaceColorDefinition: ColorStyleDefinition<ViewColorStyle, SurfaceColorStateLevels> = {
+const backgroundStateLevels = [['selected'], channelStatePriority(cardTraits.channels.root.background)] as const;
+type BackgroundStateLevels = typeof backgroundStateLevels;
+type BackgroundState = StateNames<BackgroundStateLevels>;
+
+const backgroundDefinition: ColorStyleDefinition<Pick<ViewColorStyle, 'backgroundColor'>, BackgroundStateLevels> = {
   backgroundColor: 'surfaceNeutralTranslucent',
-  borderColor: 'strokeNeutralSubtle',
   selected: {
     backgroundColor: 'backgroundNeutralSoft',
-    borderColor: 'strokeNeutralSoft',
     disabled: {
       backgroundColor: 'backgroundNeutralDisabled',
-      borderColor: 'strokeNeutralDisabled',
     },
   },
   disabled: {
     backgroundColor: 'backgroundNeutralDisabled',
-    borderColor: 'strokeNeutralDisabled',
   },
 };
 
-const getThemedSurfaceColors = getThemedColorStyleFactory<ViewColorStyle, SurfaceColorStateLevels>(
-  'Card.surface',
-  surfaceColorDefinition,
-  surfaceColorStateLevels,
+const getThemedBackgroundStyle = getThemedColorStyleFactory<Pick<ViewColorStyle, 'backgroundColor'>, BackgroundStateLevels>(
+  'Card.background',
+  backgroundDefinition,
+  backgroundStateLevels,
 );
 
-function getSurfaceColorStateSource(state: CardState): SurfaceColorState[] {
-  const source: SurfaceColorState[] = [];
+function getBackgroundStateSource(state: CardState): BackgroundState[] {
+  const source: BackgroundState[] = [];
   if (state.selected) {
     source.push('selected');
   }
@@ -77,14 +79,56 @@ function getSurfaceColorStateSource(state: CardState): SurfaceColorState[] {
   if (state.pressed) {
     source.push('pressed');
   }
-  if (state.hovered) {
+  if (state.hovered && paintsHover) {
     source.push('hovered');
   }
   return source;
 }
 
-export function getCardSurfaceColors(state: CardState): ViewColorStyle {
-  return getThemedSurfaceColors(state, getSurfaceColorStateSource(state));
+export function getCardBackgroundStyle(state: CardState): Pick<ViewColorStyle, 'backgroundColor'> {
+  return getThemedBackgroundStyle(state, getBackgroundStateSource(state));
+}
+
+const strokeStateLevels = [['selected'], channelStatePriority(cardTraits.channels.root.stroke)] as const;
+type StrokeStateLevels = typeof strokeStateLevels;
+type StrokeState = StateNames<StrokeStateLevels>;
+
+const strokeDefinition: ColorStyleDefinition<Pick<ViewColorStyle, 'borderColor'>, StrokeStateLevels> = {
+  borderColor: 'strokeNeutralSubtle',
+  selected: {
+    borderColor: 'strokeNeutralSoft',
+    disabled: {
+      borderColor: 'strokeNeutralDisabled',
+    },
+  },
+  disabled: {
+    borderColor: 'strokeNeutralDisabled',
+  },
+};
+
+const getThemedStrokeStyle = getThemedColorStyleFactory<Pick<ViewColorStyle, 'borderColor'>, StrokeStateLevels>(
+  'Card.stroke',
+  strokeDefinition,
+  strokeStateLevels,
+);
+
+function getStrokeStateSource(state: CardState): StrokeState[] {
+  const source: StrokeState[] = [];
+  if (state.selected) {
+    source.push('selected');
+  }
+  if (state.disabled) {
+    source.push('disabled');
+  }
+  return source;
+}
+
+export function getCardStrokeStyle(state: CardState): Pick<ViewColorStyle, 'borderColor'> {
+  return getThemedStrokeStyle(state, getStrokeStateSource(state));
+}
+
+function getCardRadius(tokens: FlexTokens, size: CardSize) {
+  return getRadiusStyleValue(tokens, cardTraits.geometry.root.radius, size);
 }
 
 const rootStyleStateLevels = [
@@ -95,26 +139,28 @@ const rootStyleStateLevels = [
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
-function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
-  const gap = getGapStyleValue(spacing.componentBase300);
-  const padding = spacing.componentBase300;
+function createRootStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
+  const gap = getGapStyleValue(tokens.spacing.componentBase300);
+  const padding = tokens.spacing.componentBase300;
+  const small = getCardRadius(tokens, 'small');
+  const large = getCardRadius(tokens, 'large');
   return {
-    borderWidth: strokeWidth.thin,
+    borderWidth: getStrokeWidthStyleValue(tokens, cardTraits.geometry.root.strokeWidth),
     small: {
       default: {
-        borderRadius: borderRadius.base600,
+        borderRadius: small,
         flexDirection: 'column',
         gap,
         padding,
       },
       none: {
-        borderRadius: borderRadius.base600,
+        borderRadius: small,
         flexDirection: 'column',
         gap,
         padding: 0,
       },
       horizontal: {
-        borderRadius: borderRadius.base600,
+        borderRadius: small,
         flexDirection: 'row',
         gap,
         padding,
@@ -122,19 +168,19 @@ function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexT
     },
     large: {
       default: {
-        borderRadius: borderRadius.base700,
+        borderRadius: large,
         flexDirection: 'column',
         gap,
         padding,
       },
       none: {
-        borderRadius: borderRadius.base700,
+        borderRadius: large,
         flexDirection: 'column',
         gap,
         padding: 0,
       },
       horizontal: {
-        borderRadius: borderRadius.base700,
+        borderRadius: large,
         flexDirection: 'row',
         gap,
         padding,
@@ -160,7 +206,8 @@ const nestedBlockStyleStateLevels = [
 type NestedBlockStyleStateLevels = typeof nestedBlockStyleStateLevels;
 type NestedBlockStyleState = StateNames<NestedBlockStyleStateLevels>;
 
-function createNestedBlockStyleDefinition({ borderRadius, color }: FlexTokens): StyleDefinition<ViewStyle, NestedBlockStyleStateLevels> {
+function createNestedBlockStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, NestedBlockStyleStateLevels> {
+  const { borderRadius, color } = tokens;
   const nestedBackground: ViewStyle = { backgroundColor: color.backgroundNeutralTranslucent.rest };
   return {
     small: {
@@ -168,9 +215,10 @@ function createNestedBlockStyleDefinition({ borderRadius, color }: FlexTokens): 
         ...nestedBackground,
         borderRadius: borderRadius.base300,
       },
+      // Without padding, the nested block meets the card edge and takes the outer radius.
       none: {
         ...nestedBackground,
-        borderRadius: borderRadius.base600,
+        borderRadius: getCardRadius(tokens, 'small'),
       },
     },
     large: {
@@ -180,7 +228,7 @@ function createNestedBlockStyleDefinition({ borderRadius, color }: FlexTokens): 
       },
       none: {
         ...nestedBackground,
-        borderRadius: borderRadius.base700,
+        borderRadius: getCardRadius(tokens, 'large'),
       },
     },
   };
@@ -203,13 +251,14 @@ export function getCardNestedBlockStyle(state: CardState): ViewStyle {
 const overlayStyleStateLevels = [['small', 'large']] as const;
 type OverlayStyleStateLevels = typeof overlayStyleStateLevels;
 
-function createOverlayStyleDefinition({ borderRadius }: FlexTokens): StyleDefinition<ViewStyle, OverlayStyleStateLevels> {
+// The overlay covers the root, so it shares the root radius.
+function createOverlayStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, OverlayStyleStateLevels> {
   return {
     small: {
-      borderRadius: borderRadius.base600,
+      borderRadius: getCardRadius(tokens, 'small'),
     },
     large: {
-      borderRadius: borderRadius.base700,
+      borderRadius: getCardRadius(tokens, 'large'),
     },
   };
 }

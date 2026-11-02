@@ -24,9 +24,11 @@ bindings:
       disabled:
         backgroundColor: color.backgroundNeutralDisabled
         borderColor: color.strokeNeutralDisabled
-      # <inherited> is the semantic color key the state inherits from its parent style.
+      # <inherited> is the semantic color key the state inherits from its parent style. Hovered and pressed apply to
+      # backgroundColor; borderColor keeps its rest value.
       hovered: color.<inherited>.hover
       pressed: color.<inherited>.pressed
+      borderColor: color.<inherited>.rest
     size:
       small:
         borderRadius: borderRadius.base600

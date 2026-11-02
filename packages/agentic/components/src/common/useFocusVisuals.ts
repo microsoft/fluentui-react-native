@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 
 import { useRootInputModality } from '@fluentui-react-native/design';
+import type { FocusVisualMode } from '@fluentui-react-native/design/styling';
 import { useOptionalSlot } from '@fluentui-react-native/framework-base';
 import type { ComponentState, OptionalSlot } from '@fluentui-react-native/framework-base';
 
@@ -26,6 +27,19 @@ export type FocusVisualsSlots = {
 export type FocusVisualsState = ComponentState<FocusVisualsSlots> & {
   enableFocusRing: boolean;
 };
+
+type FocusVisualTraitOptions = Omit<FocusVisualsOptions, 'focused'>;
+
+const platformFocusVisualOptions: FocusVisualTraitOptions = {};
+const customAlwaysVisibleFocusVisualOptions: FocusVisualTraitOptions = { useSystemFocusRing: false, alwaysVisible: true };
+
+/**
+ * Maps a component's focus-visual trait to `useFocusVisuals` options. Bind the result at module scope and spread it
+ * into the hook call.
+ */
+export function getFocusVisualOptions(mode: FocusVisualMode): FocusVisualTraitOptions {
+  return mode === 'custom-always-visible' ? customAlwaysVisibleFocusVisualOptions : platformFocusVisualOptions;
+}
 
 /**
  * Chooses the native or custom focus visual. Apply custom ring geometry and

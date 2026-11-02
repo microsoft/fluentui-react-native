@@ -92,6 +92,15 @@ behavior is documented in `theming.md`, `tokens.md`, and `entry-points.md`.
   tokens instead, the shims drop the deprecated re-exports in a release that permits the break, and the build reads the
   JSON without runtime modules.
 
+## Fluent radius look as a theme setting
+
+- **Outcome:** a theme can opt agentic components into the Fluent 2 corner radii (for example 4px small and medium
+  Button corners) without changing the Flex radius roles components bind.
+- **Current state:** `borderRadius` follows the Flex spec values in every theme, including Fluent-backed themes, and has
+  no legacy Theme mapping in either direction (`tokens.md`). The legacy Theme keeps its own Button radius.
+- **Done when:** the owner approves the setting's shape and scope, Fluent themes can select it, and focused tests cover
+  both radius sets.
+
 ## Dependent work owned by other packages
 
 - `@fluentui-react-native/apple-theme` still authors a legacy `Theme`;

@@ -1,5 +1,6 @@
 import { INTERACTIVE_COLOR_TOKENS } from '../colors/interactiveTokens';
 import { fluentFallbackFlexTokens, nonFluentFlexTokens } from './fluentFallbackTokens';
+import { defaultFlexTokens } from '../defaults/defaultTokens';
 
 const flexFromTheme = jest.requireActual<Record<string, string>>('../../tokens/mappings/flex-from-theme.json');
 const interactiveTokens = new Set<string>(INTERACTIVE_COLOR_TOKENS);
@@ -46,11 +47,10 @@ describe('Fluent fallback Flex tokens', () => {
     expect(getAuthoredPaths(nonFluentFlexTokens)).toEqual(expectedNonFluentPaths);
     expect(Object.keys(nonFluentFlexTokens)).toEqual(['color', 'lineHeight', 'borderRadius', 'spacing', 'strokeWidth', 'motion']);
     expect(nonFluentFlexTokens.color.backgroundNeutralSoft).toEqual({ rest: '#0000001a', hover: '#0000001a', pressed: '#0000001a' });
-    expect(nonFluentFlexTokens.borderRadius.base100).toBe(2);
+    expect(nonFluentFlexTokens.borderRadius).toEqual(defaultFlexTokens.borderRadius);
     expect('backgroundBrandHeavy' in nonFluentFlexTokens.color).toBe(false);
     expect('backgroundBrandSoft' in nonFluentFlexTokens.color).toBe(false);
     expect('surfaceNeutralFarther' in nonFluentFlexTokens.color).toBe(false);
-    expect('base200' in nonFluentFlexTokens.borderRadius).toBe(false);
     expect(fluentFallbackFlexTokens.lineHeight).toBe(nonFluentFlexTokens.lineHeight);
     expect(fluentFallbackFlexTokens.motion).toBe(nonFluentFlexTokens.motion);
     expect(fluentFallbackFlexTokens.color.backgroundNeutralSoft.rest).toBe(nonFluentFlexTokens.color.backgroundNeutralSoft.rest);

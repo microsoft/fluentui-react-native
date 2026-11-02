@@ -7,8 +7,12 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { functionalTypography, getRadiusStyleValue } from '@fluentui-react-native/design/styling';
+
+import { expectChannelConformance, readInteractionStates } from '../../common/traitConformance';
 import { Button } from '../button/button';
 import { ListItem } from './list-item';
+import { listItemTraits } from './spec/traits';
 
 function renderListItem(props: React.ComponentProps<typeof ListItem>): Promise<RenderResult> {
   return render(<ListItem {...props} />);
@@ -241,5 +245,43 @@ describe('ListItem', () => {
     const component = await renderListItem({ content: 'Working', ...props });
 
     expect(getRoot(component).props.accessibilityState).toEqual({ busy: true, disabled: false, selected: false });
+  });
+});
+
+describe('ListItem traits conformance', () => {
+  it('paints each color channel as its traits declare', async () => {
+    const component = await renderListItem({
+      content: 'Inbox',
+      secondaryContent: { children: 'Details' },
+      selectionMode: 'multiple',
+      testID: 'item',
+    });
+    const root = component.getByTestId('item');
+    const readColor = (text: string) => StyleSheet.flatten(component.getByText(text, { includeHiddenElements: true }).props.style).color;
+
+    expectChannelConformance(
+      await readInteractionStates(root, () => StyleSheet.flatten(root.props.style).backgroundColor),
+      listItemTraits.channels.root.background,
+    );
+    expectChannelConformance(await readInteractionStates(root, () => readColor('☐')), listItemTraits.channels.icon.foreground);
+    expectChannelConformance(
+      await readInteractionStates(root, () => readColor('Details')),
+      listItemTraits.channels.secondaryContent.foreground,
+    );
+  });
+
+  it.each([
+    ['small', 'functionalBodySmall', 'functionalBodySmall'],
+    ['medium', 'functionalBodyMedium', 'functionalBodySmall'],
+    ['large', 'functionalBodyLarge', 'functionalBodyMedium'],
+  ] as const)('binds %s geometry and typography to its traits', async (size, contentRole, secondaryRole) => {
+    const component = await renderListItem({ content: 'Inbox', secondaryContent: { children: 'Details' }, size });
+    const readStyle = (text: string) => StyleSheet.flatten(component.getAllByText(text)[0].props.style);
+
+    expect(getRootStyle(component).borderRadius).toBe(getRadiusStyleValue(defaultFlexTokens, listItemTraits.geometry.root.radius));
+    expect(readStyle('Inbox')).toMatchObject(functionalTypography(defaultFlexTokens, contentRole, listItemTraits.typography.content));
+    expect(readStyle('Details')).toMatchObject(
+      functionalTypography(defaultFlexTokens, secondaryRole, listItemTraits.typography.secondaryContent),
+    );
   });
 });

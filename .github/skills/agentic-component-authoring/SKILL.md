@@ -35,6 +35,7 @@ references the current change needs.
 | Defaults, derived state, interaction hooks, accessibility, or slots          | [State and accessibility](../../../packages/agentic/components/references/state-and-accessibility.md)                                                                                                                                      |
 | Focus, focus visuals, keyboard activation, or native focus refs              | [Common focus authoring](../../../references/agents/focus/common.md), then [Windows/Win32](../../../references/agents/focus/windows-win32.md) or [macOS](../../../references/agents/focus/macos.md)                                        |
 | Tokens, theme caching, state precedence, or slot style application           | [Styles and tokens](../../../packages/agentic/components/references/styles-and-tokens.md) and design [tokens](../../../packages/agentic/design/references/tokens.md) and [styling](../../../packages/agentic/design/references/styling.md) |
+| Declaring or consuming `spec/traits.ts`, or trait conformance tests          | [Component traits](../../../packages/agentic/components/references/traits.md)                                                                                                                                                              |
 | Pure slot rendering, component assembly, or display names                    | [Rendering and assembly](../../../packages/agentic/components/references/rendering.md)                                                                                                                                                     |
 | Runtime tests, type tests, snapshots, Storybook stories, or validation       | [Tests and stories](../../../packages/agentic/components/references/tests-and-stories.md)                                                                                                                                                  |
 | Native React Native Windows Fabric components, codegen, registration, or UIA | [Windows Fabric native components](../../../references/agents/native/windows-fabric.md)                                                                                                                                                    |
@@ -60,10 +61,12 @@ references used, the implementation order, and the validation plan.
 4. Establish the public contract before implementation: variants, slots, native props, accessibility, interaction
    states, and platform behavior.
 5. Implement in dependency order: types and slots, state and accessibility, styles and slot props, pure rendering,
-   component assembly, and explicit exports.
+   component assembly, and explicit exports. When the component declares `spec/traits.ts`, read those choices from the
+   constant rather than restating them in code.
 6. Preserve the contract. Record a genuine token or platform gap rather than substituting an unrelated value or
    web-only behavior.
-7. Add focused tests and stories that exercise the public API and the resolved native output.
+7. Add focused tests and stories that exercise the public API and the resolved native output, plus a traits
+   conformance block when the component declares traits.
 8. Reconcile and ratify the local contract against the realized public types, tests, stories, and platform evidence.
    Upstream changes require explicit re-review and never overwrite the local contract.
 9. Iterate with focused validation (R-VALID-004): `yarn test <component>` from the package, `yarn build` after type

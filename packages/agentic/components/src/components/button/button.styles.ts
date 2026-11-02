@@ -3,10 +3,14 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 import {
+  channelStatePriority,
+  functionalTypography,
   getGapStyleValue,
+  getRadiusStyleValue,
+  getStrokeWidthStyleValue,
   getThemedColorStyleFactory,
   getThemedStateStyleFactory,
-  interactiveStatePriority,
+  resolveHoverMode,
 } from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
@@ -18,6 +22,7 @@ import type {
 import { cornerRadiusNone, size160, size200, size240 } from '@fluentui-react-native/design/tokens/global';
 
 import type { ButtonSize, ButtonState } from './button.types';
+import { buttonTraits } from './spec/traits';
 
 export const buttonStyles = StyleSheet.create({
   root: {
@@ -33,21 +38,23 @@ export const buttonStyles = StyleSheet.create({
   },
 });
 
-const colorStateLevels = [['primary', 'secondary', 'outline', 'subtle'], ['selected'], interactiveStatePriority] as const;
-type ColorStateLevels = typeof colorStateLevels;
-type ColorState = StateNames<ColorStateLevels>;
+const appearances = ['primary', 'secondary', 'outline', 'subtle'] as const;
+const backgroundStateLevels = [appearances, ['selected'], channelStatePriority(buttonTraits.channels.root.background)] as const;
+const foregroundStateLevels = [appearances, ['selected'], channelStatePriority(buttonTraits.channels.content.foreground)] as const;
+const strokeStateLevels = [appearances, ['selected'], channelStatePriority(buttonTraits.channels.root.stroke)] as const;
+type ColorState = StateNames<typeof backgroundStateLevels> | StateNames<typeof foregroundStateLevels>;
+type StrokeState = StateNames<typeof strokeStateLevels>;
+type StrokeColorStyle = Pick<ViewColorStyle, 'borderColor'>;
 
-const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorStateLevels> = {
+const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, typeof backgroundStateLevels> = {
   primary: {
     backgroundColor: 'backgroundBrandHeavy',
-    borderColor: 'strokeNeutralTransparent',
     disabled: {
       backgroundColor: 'backgroundNeutralHeavyDisabled',
     },
   },
   secondary: {
     backgroundColor: 'backgroundNeutralSubtle',
-    borderColor: 'strokeNeutralTransparent',
     selected: {
       backgroundColor: 'backgroundNeutralHeavy',
       disabled: {
@@ -60,22 +67,15 @@ const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorState
   },
   outline: {
     backgroundColor: 'backgroundNeutralTransparent',
-    borderColor: 'strokeNeutralLoud',
     selected: {
       backgroundColor: 'backgroundNeutralHeavy',
-      borderColor: 'strokeNeutralHeavy',
       disabled: {
         backgroundColor: 'backgroundNeutralHeavyDisabled',
-        borderColor: 'strokeNeutralDisabled',
       },
-    },
-    disabled: {
-      borderColor: 'strokeNeutralDisabled',
     },
   },
   subtle: {
     backgroundColor: 'backgroundNeutralTransparent',
-    borderColor: 'strokeNeutralTransparent',
     hovered: {
       backgroundColor: 'backgroundNeutralSubtle',
     },
@@ -91,7 +91,31 @@ const backgroundColorDefinition: ColorStyleDefinition<ViewColorStyle, ColorState
   },
 };
 
-const foregroundColorDefinition: ColorStyleDefinition<TextColorStyle, ColorStateLevels> = {
+const strokeColorDefinition: ColorStyleDefinition<StrokeColorStyle, typeof strokeStateLevels> = {
+  primary: {
+    borderColor: 'strokeNeutralTransparent',
+  },
+  secondary: {
+    borderColor: 'strokeNeutralTransparent',
+  },
+  outline: {
+    borderColor: 'strokeNeutralLoud',
+    selected: {
+      borderColor: 'strokeNeutralHeavy',
+      disabled: {
+        borderColor: 'strokeNeutralDisabled',
+      },
+    },
+    disabled: {
+      borderColor: 'strokeNeutralDisabled',
+    },
+  },
+  subtle: {
+    borderColor: 'strokeNeutralTransparent',
+  },
+};
+
+const foregroundColorDefinition: ColorStyleDefinition<TextColorStyle, typeof foregroundStateLevels> = {
   primary: {
     color: 'foregroundBrandOnloud',
     disabled: {
@@ -124,16 +148,32 @@ const foregroundColorDefinition: ColorStyleDefinition<TextColorStyle, ColorState
   },
 };
 
-const getThemedBackgroundStyle = getThemedColorStyleFactory<ViewColorStyle, ColorStateLevels>(
+const getThemedBackgroundStyle = getThemedColorStyleFactory<ViewColorStyle, typeof backgroundStateLevels>(
   'Button.background',
   backgroundColorDefinition,
-  colorStateLevels,
+  backgroundStateLevels,
 );
-const getThemedForegroundStyle = getThemedColorStyleFactory<TextColorStyle, ColorStateLevels>(
+const getThemedStrokeStyle = getThemedColorStyleFactory<StrokeColorStyle, typeof strokeStateLevels>(
+  'Button.stroke',
+  strokeColorDefinition,
+  strokeStateLevels,
+);
+const getThemedForegroundStyle = getThemedColorStyleFactory<TextColorStyle, typeof foregroundStateLevels>(
   'Button.foreground',
   foregroundColorDefinition,
-  colorStateLevels,
+  foregroundStateLevels,
 );
+
+function getStrokeStateSource(state: ButtonState): StrokeState[] {
+  const source: StrokeState[] = [state.appearance];
+  if (state.selected) {
+    source.push('selected');
+  }
+  if (state.disabled) {
+    source.push('disabled');
+  }
+  return source;
+}
 
 function getColorStateSource(state: ButtonState): ColorState[] {
   const source: ColorState[] = [state.appearance];
@@ -146,7 +186,7 @@ function getColorStateSource(state: ButtonState): ColorState[] {
   if (state.pressed) {
     source.push('pressed');
   }
-  if (state.hovered) {
+  if (state.hovered && resolveHoverMode(buttonTraits.hover, state.appearance) !== 'suppressed') {
     source.push('hovered');
   }
   return source;
@@ -154,11 +194,13 @@ function getColorStateSource(state: ButtonState): ColorState[] {
 
 export function getButtonColorStyles(state: ButtonState): {
   background: ViewColorStyle;
+  stroke: StrokeColorStyle;
   foreground: TextColorStyle;
 } {
   const source = getColorStateSource(state);
   return {
     background: getThemedBackgroundStyle(state, source),
+    stroke: getThemedStrokeStyle(state, getStrokeStateSource(state)),
     foreground: getThemedForegroundStyle(state, source),
   };
 }
@@ -196,13 +238,15 @@ function createSizeStyle(
   };
 }
 
-function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
+function createRootStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
+  const { borderRadius, spacing } = tokens;
+  const { radius, strokeWidth } = buttonTraits.geometry.root;
   return {
-    borderWidth: strokeWidth.thin,
+    borderWidth: getStrokeWidthStyleValue(tokens, strokeWidth),
     minHeight: size240,
     minWidth: size240,
     small: createSizeStyle(
-      borderRadius.base200,
+      getRadiusStyleValue(tokens, radius, 'small'),
       borderRadius.circular,
       {
         gap: getGapStyleValue(spacing.componentBase50),
@@ -215,7 +259,7 @@ function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexT
       },
     ),
     medium: createSizeStyle(
-      borderRadius.base300,
+      getRadiusStyleValue(tokens, radius, 'medium'),
       borderRadius.circular,
       {
         gap: getGapStyleValue(spacing.componentBase100),
@@ -228,7 +272,7 @@ function createRootStyleDefinition({ borderRadius, spacing, strokeWidth }: FlexT
       },
     ),
     large: createSizeStyle(
-      borderRadius.base400,
+      getRadiusStyleValue(tokens, radius, 'large'),
       borderRadius.circular,
       {
         gap: getGapStyleValue(spacing.componentBase150),
@@ -257,33 +301,14 @@ const contentStyleStateLevels = [['small', 'medium', 'large'], ['selected']] as 
 type ContentStyleStateLevels = typeof contentStyleStateLevels;
 type ContentStyleState = StateNames<ContentStyleStateLevels>;
 
-function createContentStyleDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, ContentStyleStateLevels> {
-  const selected: TextStyle = { fontWeight: fontWeight.functionalSemibold };
+function createContentStyleDefinition(tokens: FlexTokens): StyleDefinition<TextStyle, ContentStyleStateLevels> {
+  // Selection reserves semibold label width structurally (BTN-005), so it is not a typography trait.
+  const selected: TextStyle = { fontWeight: tokens.fontWeight.functionalSemibold };
+  const typography = buttonTraits.typography.content;
   return {
-    fontFamily: fontFamily.functional,
-    small: {
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-      selected,
-    },
-    medium: {
-      fontSize: fontSize.functionalBodyMedium,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyMedium,
-      selected,
-    },
-    large: {
-      fontSize: fontSize.functionalBodyLarge,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyLarge,
-      selected,
-    },
+    small: { ...functionalTypography(tokens, 'functionalBodySmall', typography), selected },
+    medium: { ...functionalTypography(tokens, 'functionalBodyMedium', typography), selected },
+    large: { ...functionalTypography(tokens, 'functionalBodyLarge', typography), selected },
   };
 }
 

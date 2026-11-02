@@ -22,7 +22,8 @@ owner_paths:
 | `components.agentic.types-and-slots`                     | [Types and slots](types-and-slots.md)                        | Public props, slots, resolved state, native props, refs, or exports             |
 | `components.agentic.state-and-accessibility`             | [State and accessibility](state-and-accessibility.md)        | State hooks, defaults, interaction, or accessibility                            |
 | `components.agentic.styles-and-tokens`                   | [Styles and tokens](styles-and-tokens.md)                    | Styles, token mapping, theme caching, or state precedence                       |
+| `components.agentic.traits`                              | [Component traits](traits.md)                                | Writing or consuming `spec/traits.ts`, or changing the traits checker           |
 | `components.agentic.rendering`                           | [Rendering and assembly](rendering.md)                       | Render functions, assembly, or display names                                    |
 | `components.agentic.tests-and-stories`                   | [Tests and stories](tests-and-stories.md)                    | Tests, stories, `wdio` story tests, or validation                               |
 | `components.contributing`                                | [Contributing](contributing.md)                              | Finding source ownership, test commands, or validation                          |
-| `components.remaining-work`                              | [Remaining work](remaining-work.md)                          | Planning focus qualification, missing components, or open contract decisions    |
+| `components.remaining-work`                              | [Remaining work](remaining-work.md)                          | Planning focus qualification, traits adoption, missing components, or decisions |

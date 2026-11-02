@@ -104,7 +104,7 @@
     },
     {
       "id": "CRD-003",
-      "evidence": ["useCard.ts", "card.styles.ts", "useCardStyles.ts", "card.test.tsx"]
+      "evidence": ["useCard.ts", "card.styles.ts", "spec/traits.ts", "useCardStyles.ts", "card.test.tsx"]
     },
     {
       "id": "CRD-004",

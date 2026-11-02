@@ -9,9 +9,12 @@ import {
 import { useThemeState } from '@fluentui-react-native/design';
 import { Platform, Pressable } from 'react-native';
 import type { PressableProps } from 'react-native';
-import { useFocusVisuals } from '../../common/useFocusVisuals';
+import { getFocusVisualOptions, useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
+import { buttonTraits } from './spec/traits';
+
+const focusVisualOptions = getFocusVisualOptions(buttonTraits.focusVisual);
 
 /**
  * Hook to create the state for a Button component. This is responsible for:
@@ -79,7 +82,7 @@ export function useButton_unstable(props: ButtonProps): ButtonState {
     focusable: !disabled && (rest.focusable ?? true),
   };
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable(nativeProps);
-  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled, ...focusVisualOptions });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const icon = useOptionalSlot(Icon, iconProp);

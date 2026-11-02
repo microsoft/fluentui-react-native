@@ -1,6 +1,4 @@
 {
-  "borderRadius.base200": "components.Button.tokens.borderRadius",
-  "borderRadius.base300": "components.Button.tokens.borderRadius",
   "color.backgroundBrandHeavy.hover": "colors.brandBackgroundHover",
   "color.backgroundBrandHeavy.pressed": "colors.brandBackgroundPressed",
   "color.backgroundBrandHeavy.rest": "colors.brandBackground",

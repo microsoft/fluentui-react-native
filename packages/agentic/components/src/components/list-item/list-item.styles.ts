@@ -2,7 +2,14 @@ import { StyleSheet } from 'react-native';
 import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
-import { getThemedColorStyleFactory, getThemedStateStyleFactory, interactiveStatePriority } from '@fluentui-react-native/design/styling';
+import {
+  channelStatePriority,
+  functionalTypography,
+  getRadiusStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+  resolveHoverMode,
+} from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -13,6 +20,7 @@ import type {
 import { size160, size200, size240, size320, size400 } from '@fluentui-react-native/design/tokens/global';
 
 import type { ListItemState } from './list-item.types';
+import { listItemTraits } from './spec/traits';
 
 export const listItemStyles = StyleSheet.create({
   root: {
@@ -52,7 +60,9 @@ export const listItemStyles = StyleSheet.create({
   },
 });
 
-const backgroundStateLevels = [['rest', 'selected'], interactiveStatePriority] as const;
+const paintsHover = resolveHoverMode(listItemTraits.hover) !== 'suppressed';
+
+const backgroundStateLevels = [['rest', 'selected'], channelStatePriority(listItemTraits.channels.root.background)] as const;
 type BackgroundStateLevels = typeof backgroundStateLevels;
 type BackgroundState = StateNames<BackgroundStateLevels>;
 
@@ -95,7 +105,7 @@ function getBackgroundStateSource(state: ListItemState): BackgroundState[] {
     source.push('disabled');
   } else if (state.pressed) {
     source.push('pressed');
-  } else if (state.hovered) {
+  } else if (state.hovered && paintsHover) {
     source.push('hovered');
   }
   return source;
@@ -105,7 +115,7 @@ export function getListItemBackgroundStyle(state: ListItemState): ViewColorStyle
   return getThemedBackgroundStyle(state, getBackgroundStateSource(state));
 }
 
-const primaryForegroundStateLevels = [['rest'], interactiveStatePriority] as const;
+const primaryForegroundStateLevels = [['rest'], channelStatePriority(listItemTraits.channels.icon.foreground)] as const;
 type PrimaryForegroundStateLevels = typeof primaryForegroundStateLevels;
 type PrimaryForegroundState = StateNames<PrimaryForegroundStateLevels>;
 
@@ -138,7 +148,7 @@ function getPrimaryForegroundStateSource(state: ListItemState): PrimaryForegroun
     source.push('pressed');
     return source;
   }
-  if (state.hovered) {
+  if (state.hovered && paintsHover) {
     source.push('hovered');
     return source;
   }
@@ -149,7 +159,10 @@ export function getListItemPrimaryForegroundStyle(state: ListItemState): TextCol
   return getThemedPrimaryForegroundStyle(state, getPrimaryForegroundStateSource(state));
 }
 
-const secondaryForegroundStateLevels = [['rest', 'selected'], interactiveStatePriority] as const;
+const secondaryForegroundStateLevels = [
+  ['rest', 'selected'],
+  channelStatePriority(listItemTraits.channels.secondaryContent.foreground),
+] as const;
 type SecondaryForegroundStateLevels = typeof secondaryForegroundStateLevels;
 type SecondaryForegroundState = StateNames<SecondaryForegroundStateLevels>;
 
@@ -192,7 +205,7 @@ function getSecondaryForegroundStateSource(state: ListItemState): SecondaryForeg
     source.push('disabled');
   } else if (state.pressed) {
     source.push('pressed');
-  } else if (state.hovered) {
+  } else if (state.hovered && paintsHover) {
     source.push('hovered');
   }
   return source;
@@ -205,33 +218,14 @@ export function getListItemSecondaryForegroundStyle(state: ListItemState): TextC
 const contentStateLevels = [['small', 'medium', 'large'], ['selected']] as const;
 type ContentStateLevels = typeof contentStateLevels;
 
-function createContentStyleDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, ContentStateLevels> {
-  const selected: TextStyle = { fontWeight: fontWeight.functionalSemibold };
+function createContentStyleDefinition(tokens: FlexTokens): StyleDefinition<TextStyle, ContentStateLevels> {
+  // Selection reserves semibold label width structurally, so it is not a typography trait.
+  const selected: TextStyle = { fontWeight: tokens.fontWeight.functionalSemibold };
+  const typography = listItemTraits.typography.content;
   return {
-    fontFamily: fontFamily.functional,
-    small: {
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-      selected,
-    },
-    medium: {
-      fontSize: fontSize.functionalBodyMedium,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyMedium,
-      selected,
-    },
-    large: {
-      fontSize: fontSize.functionalBodyLarge,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyLarge,
-      selected,
-    },
+    small: { ...functionalTypography(tokens, 'functionalBodySmall', typography), selected },
+    medium: { ...functionalTypography(tokens, 'functionalBodyMedium', typography), selected },
+    large: { ...functionalTypography(tokens, 'functionalBodyLarge', typography), selected },
   };
 }
 
@@ -244,29 +238,12 @@ export function getListItemContentStyle(state: ListItemState, selected = state.s
 const secondaryStateLevels = [['small', 'medium', 'large']] as const;
 type SecondaryStateLevels = typeof secondaryStateLevels;
 
-function createSecondaryStyleDefinition({
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-}: FlexTokens): StyleDefinition<TextStyle, SecondaryStateLevels> {
+function createSecondaryStyleDefinition(tokens: FlexTokens): StyleDefinition<TextStyle, SecondaryStateLevels> {
+  const typography = listItemTraits.typography.secondaryContent;
   return {
-    fontFamily: fontFamily.functional,
-    small: {
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-    },
-    medium: {
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-    },
-    large: {
-      fontSize: fontSize.functionalBodyMedium,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodyMedium,
-    },
+    small: functionalTypography(tokens, 'functionalBodySmall', typography),
+    medium: functionalTypography(tokens, 'functionalBodySmall', typography),
+    large: functionalTypography(tokens, 'functionalBodyMedium', typography),
   };
 }
 
@@ -278,7 +255,7 @@ export function getListItemSecondaryContentStyle(state: ListItemState): TextStyl
 
 export function getListItemRootSizeStyle(state: ListItemState): ViewStyle {
   return {
-    borderRadius: state.tokens.borderRadius.base300,
+    borderRadius: getRadiusStyleValue(state.tokens, listItemTraits.geometry.root.radius),
     paddingHorizontal: state.metrics.rootPaddingHorizontal,
     paddingVertical: state.metrics.rootPaddingVertical,
   };

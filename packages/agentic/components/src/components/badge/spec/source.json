@@ -81,7 +81,7 @@
     },
     {
       "id": "BDG-003",
-      "evidence": ["badge.styles.ts", "useBadgeStyles.ts", "badge.test.tsx"]
+      "evidence": ["badge.styles.ts", "spec/traits.ts", "useBadgeStyles.ts", "badge.test.tsx"]
     },
     {
       "id": "BDG-004",

@@ -50,6 +50,11 @@ Button coverage demonstrates:
 Use table-driven tests for complete finite axes. When fixing one state regression, add a focused assertion even if a
 snapshot also changes.
 
+A component with traits also has a `<Component> traits conformance` block. Behavior tests stay written from the
+contract; the conformance block uses `readInteractionStates` and `expectChannelConformance` from the package-private
+`src/common/traitConformance.ts` to check channel modes, and compares typography and geometry with the design helpers.
+The [component traits](traits.md#conformance-tests) reference describes how to choose readouts.
+
 ## Type tests and primitives
 
 Add committed `*.types.test.ts` coverage for compile-time slot acceptance, mutually exclusive props, and public type

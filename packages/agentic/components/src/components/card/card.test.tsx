@@ -8,9 +8,13 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { getRadiusStyleValue, getStrokeWidthStyleValue } from '@fluentui-react-native/design/styling';
+
+import { expectChannelConformance, readInteractionStates } from '../../common/traitConformance';
 
 import { Button } from '../button/button';
 import { Card } from './card';
+import { cardTraits } from './spec/traits';
 
 async function renderCard(props: React.ComponentProps<typeof Card>): Promise<RenderResult> {
   return render(<Card {...props} />);
@@ -149,7 +153,7 @@ describe('Card', () => {
     expect(component.getByRole('group', { name: 'Overview' })).toBeOnTheScreen();
   });
 
-  it('renders selected colors and hover, press, and focus feedback', async () => {
+  it('renders selected colors, hover and press feedback with a static stroke, and focus feedback', async () => {
     const component = await renderCard({
       accessibilityLabel: 'Open report',
       content: {
@@ -171,13 +175,13 @@ describe('Card', () => {
     await fireEvent(button, 'hoverIn', {});
     expect(getRootStyle(component)).toMatchObject({
       backgroundColor: colors.backgroundNeutralSoft.hover,
-      borderColor: colors.strokeNeutralSoft.hover,
+      borderColor: colors.strokeNeutralSoft.rest,
     });
 
     await fireEvent(button, 'pressIn', {});
     expect(getRootStyle(component)).toMatchObject({
       backgroundColor: colors.backgroundNeutralSoft.pressed,
-      borderColor: colors.strokeNeutralSoft.pressed,
+      borderColor: colors.strokeNeutralSoft.rest,
     });
 
     await fireEvent(button, 'focus', {});
@@ -245,5 +249,45 @@ describe('Card', () => {
       busy: true,
       disabled: false,
     });
+  });
+});
+
+describe('Card traits conformance', () => {
+  it('paints each surface color channel as its traits declare', async () => {
+    const component = await renderCard({
+      accessibilityLabel: 'Open report',
+      content: { children: <Text>Report summary</Text> },
+      onPress: jest.fn(),
+      selected: true,
+      testID: 'card-root',
+    });
+    const button = component.getByRole('button', { name: 'Open report' });
+
+    expectChannelConformance(
+      await readInteractionStates(button, () => getRootStyle(component).backgroundColor),
+      cardTraits.channels.root.background,
+    );
+    expectChannelConformance(
+      await readInteractionStates(button, () => getRootStyle(component).borderColor),
+      cardTraits.channels.root.stroke,
+    );
+  });
+
+  it.each(['small', 'large'] as const)('binds %s geometry to its traits', async (size) => {
+    const component = await renderCard({
+      accessibilityLabel: 'Open report',
+      content: { children: <Text>Report summary</Text> },
+      onPress: jest.fn(),
+      size,
+      testID: 'card-root',
+    });
+    const { radius, strokeWidth } = cardTraits.geometry.root;
+    const borderRadius = getRadiusStyleValue(defaultFlexTokens, radius, size);
+
+    expect(getRootStyle(component)).toMatchObject({
+      borderRadius,
+      borderWidth: getStrokeWidthStyleValue(defaultFlexTokens, strokeWidth),
+    });
+    expect(StyleSheet.flatten(component.getByRole('button', { name: 'Open report' }).props.style).borderRadius).toBe(borderRadius);
   });
 });

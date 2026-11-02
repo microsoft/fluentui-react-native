@@ -118,6 +118,11 @@ values for supported Flex destinations without a Theme source, and
 `fluentFallbackFlexTokens` supplies mapped values a Theme omits. The adapter
 never derives states: a state that neither the Theme nor a fallback supplies
 equals rest. X3 default changes therefore never alter projected legacy themes.
+Border radius is the exception to Fluent-native fallbacks: `nonFluentFlexTokens`
+uses the Flex spec radii, and radius has no Theme mapping in either direction.
+Agentic components therefore render Flex radii in every theme, and the legacy
+Theme keeps its own Button radius. A Fluent radius look is planned as a theme
+setting in `remaining-work.md`.
 Legacy
 `{ ambient, key }` Theme shadows become `[ambient, key]` layers. A complete
 legacy Theme also requires values that Flex cannot represent; the Flex-to-legacy

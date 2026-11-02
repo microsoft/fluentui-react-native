@@ -4,7 +4,7 @@ A Card becomes interactive when `onPress` is provided or when `selected` is pres
 
 Selection is externally owned. A press reports through `onPress` but never changes `selected`; the caller updates that prop if its collection behavior requires it. Selected cards use the supplied value for visual and accessibility state.
 
-The overlay owns hover, pressed, and focus feedback.
+The overlay owns hover, pressed, and focus feedback. Hover and press change the surface background; the stroke keeps its rest or selected color.
 
 It does not trap focus, move focus, or manage collection navigation.
 

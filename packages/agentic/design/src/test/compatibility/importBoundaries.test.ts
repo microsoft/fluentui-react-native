@@ -251,6 +251,7 @@ describe('runtime graph ownership', () => {
   it('keeps the shared styling entry free of legacy Fluent runtime', () => {
     const stylingGraph = runtimeGraph('styling/index.ts');
     expect(stylingGraph).toContain('flex/styling/colorStyles.ts');
+    expect(stylingGraph).not.toContain('styling/traits.types.ts');
     expect(reachedUnder(stylingGraph, 'fluent/')).toEqual([]);
     expect(reachedUnder(stylingGraph, 'test/')).toEqual([]);
   });
@@ -302,8 +303,14 @@ describe('runtime graph ownership', () => {
 
 describe('shared types', () => {
   it('contain only type declarations and type-only imports', () => {
-    const typeFiles = [...listSourceFiles(path.join(srcRoot, 'types')), path.join(srcRoot, 'flex/themeState.types.ts')];
-    expect(typeFiles.map(toSrcPath).sort()).toEqual(expect.arrayContaining(['types/appearance.types.ts', 'flex/themeState.types.ts']));
+    const typeFiles = [
+      ...listSourceFiles(path.join(srcRoot, 'types')),
+      path.join(srcRoot, 'flex/themeState.types.ts'),
+      path.join(srcRoot, 'styling/traits.types.ts'),
+    ];
+    expect(typeFiles.map(toSrcPath).sort()).toEqual(
+      expect.arrayContaining(['types/appearance.types.ts', 'flex/themeState.types.ts', 'styling/traits.types.ts']),
+    );
     const runtimeStatements = typeFiles.flatMap((file) =>
       readStatements(file)
         .filter((statement) => !isTypeOnlyStatement(statement))

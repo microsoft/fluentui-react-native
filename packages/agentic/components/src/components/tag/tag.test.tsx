@@ -7,6 +7,10 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { functionalTypography, getRadiusStyleValue, getStrokeWidthStyleValue } from '@fluentui-react-native/design/styling';
+
+import { expectChannelConformance, readInteractionStates } from '../../common/traitConformance';
+import { tagTraits } from './spec/traits';
 
 import { Tag } from './tag';
 
@@ -282,5 +286,37 @@ describe('Tag', () => {
     expect(component.queryByTestId('dismiss')).toBeNull();
     expect(getRootStyle(component).backgroundColor).toBe('hotpink');
     expect(getRoot(component).children).toHaveLength(2);
+  });
+});
+
+describe('Tag traits conformance', () => {
+  it.each(['primary', 'secondary'] as const)('paints %s color channels as its traits declare', async (appearance) => {
+    const component = await renderTag({ appearance, content: { children: 'Engineering', testID: 'content' } });
+    const root = getRoot(component);
+
+    expectChannelConformance(
+      await readInteractionStates(root, () => getRootStyle(component).backgroundColor),
+      tagTraits.channels.root.background,
+    );
+    expectChannelConformance(
+      await readInteractionStates(root, () => StyleSheet.flatten(component.getByTestId('content').props.style).color),
+      tagTraits.channels.content.foreground,
+    );
+  });
+
+  it.each([
+    ['small', 'functionalBodySmall'],
+    ['medium', 'functionalBodyMedium'],
+  ] as const)('binds %s geometry and typography to its traits', async (size, role) => {
+    const component = await renderTag({ content: { children: 'Engineering', testID: 'content' }, size });
+    const { radius, strokeWidth } = tagTraits.geometry.root;
+
+    expect(getRootStyle(component)).toMatchObject({
+      borderRadius: getRadiusStyleValue(defaultFlexTokens, radius, size),
+      borderWidth: getStrokeWidthStyleValue(defaultFlexTokens, strokeWidth),
+    });
+    expect(StyleSheet.flatten(component.getByTestId('content').props.style)).toMatchObject(
+      functionalTypography(defaultFlexTokens, role, tagTraits.typography.content),
+    );
   });
 });

@@ -81,12 +81,18 @@ theme-independent definitions. Use `getThemedColorStyleFactory` for semantic bac
 it automatically reads the resolved `hover` and `pressed` states of inherited semantic keys.
 
 An interaction may intentionally switch semantic keys. Button Subtle is transparent at rest but explicitly selects
-`backgroundNeutralSubtle` inside hovered and pressed branches. Button Outline uses `strokeNeutralLoud`, whose hover and
-pressed token values provide visible stroke feedback. Do not assume a token named `Transparent` will produce visible
-interaction states; verify the resolved colors' `hover` and `pressed` values.
+`backgroundNeutralSubtle` inside hovered and pressed branches. Do not assume a token named `Transparent` will produce
+visible interaction states; verify the resolved colors' `hover` and `pressed` values.
 
 Build the state source from resolved state without hiding precedence in conditionals. Button pushes appearance, selected,
 disabled, pressed, and hovered values, then lets the declared hierarchy select the winner.
+
+A component with [traits](traits.md) derives the last level from each channel's mode: `channelStatePriority('interactive')`
+is `disabled`, `pressed`, `hovered`, and `channelStatePriority('rest')` is `disabled` alone. Give each channel whose mode
+differs its own color factory. A color factory synthesizes hovered and pressed nodes for every key wherever those states
+are declared, so a rest stroke that shares a factory with an interactive background would still change on hover. Button
+and Card build separate background and stroke factories, and their outline strokes keep the rest or selected color
+while hovered and pressed.
 
 ## Group related layout axes
 
@@ -217,6 +223,7 @@ preserve visible-text accessibility and input handling. Typography remains owned
 - Every factory is module-scoped and theme-safe.
 - State hierarchy makes precedence explicit.
 - Hover and pressed values are verified, not inferred from token names.
+- Channel, hover, typography, and geometry choices declared as traits are read from the component's traits constant.
 - Independent concerns use independent factories.
 - User styles are last.
 - Slot props share resolved color and size values consistently.

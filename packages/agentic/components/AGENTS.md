@@ -15,6 +15,7 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | Public props, slots, refs, or exports                                   | [Types and slots](references/types-and-slots.md)                                             |
 | State, interaction, or accessibility                                    | [State and accessibility](references/state-and-accessibility.md)                             |
 | Styles, tokens, theme caching, or state precedence                      | [Styles and tokens](references/styles-and-tokens.md)                                         |
+| Component traits in `spec/traits.ts`                                    | [Component traits](references/traits.md)                                                     |
 | Render functions and assembly                                           | [Rendering and assembly](references/rendering.md)                                            |
 | Tests, stories, or native `wdio` story tests                            | [Tests and stories](references/tests-and-stories.md)                                         |
 | Shared helpers, dependencies, or cross-component extraction             | [Source boundaries](references/source-boundaries.md)                                         |
@@ -40,6 +41,9 @@ Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
 - Read the component `SPEC.md`, `spec/source.json`, and all referenced companions before changing its contract.
 - Use `src/components/button` and `src/primitives/icon` as the canonical implementations, and keep public props and
   slots small, typed, and contract-driven.
+- A component with `spec/traits.ts` reads those styling choices from its private traits constant. Changing a consumed
+  trait value is a behavior change: update the contract, tests, and a changeset together
+  ([component traits](references/traits.md)).
 - Export higher-order components explicitly from `src/index.ts` and primitives from `src/primitives/index.ts`; never use
   wildcard exports (R-REPO-001).
 - Colocate runtime tests, type tests, and stories, include every test-bearing story in `tsconfig.stories.json`, and keep

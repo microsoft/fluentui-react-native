@@ -19,7 +19,7 @@ public symbols by name from each entry point; do not add barrel re-exports.
 | `./themes`                | Ready-made themes: `fluentLightTheme`, `fluentDarkTheme`, `fluentHcTheme`, `fluentTheme`, `flexTheme`, and `flexWarmTheme` |
 | `./tokens/global`         | Generated platform global token constants                                                                                  |
 | `./color-lib`             | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`                                 |
-| `./styling`               | State and color style factories; see `styling.md`                                                                          |
+| `./styling`               | State and color style factories and the component traits vocabulary; see `styling.md`                                      |
 | `./styling/stylesheet`    | The legacy `themedStyleSheet` helper                                                                                       |
 | `./styling/tokens`        | Legacy token-to-style builders                                                                                             |
 | `./testing`               | Test-only fixtures and validation; see `testing.md`                                                                        |

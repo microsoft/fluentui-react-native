@@ -55,6 +55,24 @@ only when that node is built. An interaction branch may still select a different
 Token types can be wider than a React Native style property. `getGapStyleValue` narrows a gap token to a valid
 `ViewStyle['gap']`, and `getNumericStyleValue` accepts finite numbers and numeric strings.
 
+## Component traits
+
+`traits.types.ts` defines the vocabulary components use to declare reviewed styling choices: `Traits<Part, Variant,
+Size>` and its facets `TypographyTraits`, `ChannelTraits` (`ChannelMode`), `HoverTraits` (`HoverMode`),
+`FocusVisualMode`, and `GeometryTraits` (`RadiusTrait`, `StrokeWidthTrait`, `TraitScale`). The types describe styling
+only and are unrelated to iOS `accessibilityTraits`. The values are private to each component; for agentic components
+the repository reference `components.agentic.traits` describes where they live and how they are checked.
+
+| Helper                     | Returns                                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `functionalTypography`     | A `TextStyle` for a functional role: family and size, weight unless `unowned`, line height only for `token`           |
+| `channelStatePriority`     | The last state level for a color channel: `disabled`, `pressed`, `hovered` when `interactive`; `disabled` when `rest` |
+| `resolveHoverMode`         | An appearance's hover mode, falling back to `base`                                                                    |
+| `getRadiusStyleValue`      | A radius role, or the role for a size, as a style value; `none` is `0`                                                |
+| `getStrokeWidthStyleValue` | A stroke width role, or the role for a variant, as a style value; `none` is `0`                                       |
+
+The helpers are pure. Call them while building a cached themed definition, or bind their results at module scope.
+
 ## Legacy styling
 
 `@fluentui-react-native/design/styling/stylesheet` (`themedStyleSheet`) and `@fluentui-react-native/design/styling/tokens`

@@ -5,8 +5,10 @@ import type { ViewStyle } from 'react-native';
 import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { functionalTypography, getRadiusStyleValue, getStrokeWidthStyleValue } from '@fluentui-react-native/design/styling';
 
 import { Badge } from './badge';
+import { badgeTraits } from './spec/traits';
 
 const badgeIcon = { fontSource: { codepoint: 0x2022, fontFamily: 'Arial' } } as const;
 const trailingIcon = { fontSource: { codepoint: 0x2713, fontFamily: 'Arial' } } as const;
@@ -208,5 +210,23 @@ describe('Badge', () => {
     expect(component.queryByTestId('trailing-icon')).toBeNull();
     expect(component.queryByText('Badge')).toBeNull();
     expect(getRoot(component).children).toHaveLength(1);
+  });
+});
+
+describe('Badge traits conformance', () => {
+  it.each([
+    ['small', 'tint', 'functionalCaption'],
+    ['medium', 'outline', 'functionalBodySmall'],
+  ] as const)('binds %s %s geometry and typography to its traits', async (size, appearance, role) => {
+    const component = await renderBadge({ accessibilityLabel: 'Status', appearance, shape: 'rounded', size });
+    const { radius, strokeWidth } = badgeTraits.geometry.root;
+
+    expect(getRootStyle(component)).toMatchObject({
+      borderRadius: getRadiusStyleValue(defaultFlexTokens, radius, size),
+      borderWidth: getStrokeWidthStyleValue(defaultFlexTokens, strokeWidth, appearance),
+    });
+    expect(StyleSheet.flatten(component.getByText('Badge', { includeHiddenElements: true }).props.style)).toMatchObject(
+      functionalTypography(defaultFlexTokens, role, badgeTraits.typography.content),
+    );
   });
 });

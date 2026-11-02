@@ -117,11 +117,19 @@
     },
     {
       "id": "INP-006",
-      "evidence": ["input.styles.ts", "useInputStyles.ts", "input.test.tsx"]
+      "evidence": ["input.styles.ts", "spec/traits.ts", "useInputStyles.ts", "input.test.tsx"]
     },
     {
       "id": "INP-007",
-      "evidence": ["useInput.ts", "input.styles.ts", "useInputStyles.ts", "renderInput.tsx", "input.test.tsx", "input.stories.tsx"]
+      "evidence": [
+        "useInput.ts",
+        "input.styles.ts",
+        "spec/traits.ts",
+        "useInputStyles.ts",
+        "renderInput.tsx",
+        "input.test.tsx",
+        "input.stories.tsx"
+      ]
     }
   ]
 }

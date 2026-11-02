@@ -102,7 +102,7 @@
     },
     {
       "id": "LIT-005",
-      "evidence": ["list-item.styles.ts", "list-item.stories.tsx", "list-item.test.tsx"]
+      "evidence": ["list-item.styles.ts", "spec/traits.ts", "list-item.stories.tsx", "list-item.test.tsx"]
     }
   ]
 }

@@ -16,7 +16,7 @@ export function useMenuButtonStyles_unstable(state: MenuButtonState) {
   const { size, userStyle } = state;
   const colors = getButtonColorStyles({ ...state, pressed: state.pressed || state.open });
   const rootLayoutStyle = getButtonRootStyle({ ...state, shape: 'rounded', iconOnly: false });
-  const rootStyle: StyleProp<ViewStyle> = [buttonStyles.root, rootLayoutStyle, colors.background, userStyle];
+  const rootStyle: StyleProp<ViewStyle> = [buttonStyles.root, rootLayoutStyle, colors.background, colors.stroke, userStyle];
   const contentStyle: StyleProp<TextStyle> = [buttonStyles.content, getButtonContentStyle(state), colors.foreground];
   const iconSize = getButtonIconSize(size);
   const chevronSize = getMenuButtonChevronSize(size);

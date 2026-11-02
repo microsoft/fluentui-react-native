@@ -3,7 +3,14 @@ import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { FlexTokens } from '@fluentui-react-native/design';
 
-import { getGapStyleValue, getThemedColorStyleFactory, getThemedStateStyleFactory } from '@fluentui-react-native/design/styling';
+import {
+  functionalTypography,
+  getGapStyleValue,
+  getRadiusStyleValue,
+  getStrokeWidthStyleValue,
+  getThemedColorStyleFactory,
+  getThemedStateStyleFactory,
+} from '@fluentui-react-native/design/styling';
 import type {
   ColorStyleDefinition,
   StateNames,
@@ -12,6 +19,7 @@ import type {
   ViewColorStyle,
 } from '@fluentui-react-native/design/styling';
 import type { BadgeSize, BadgeState } from './badge.types';
+import { badgeTraits } from './spec/traits';
 
 export const badgeStyles = StyleSheet.create({
   root: {
@@ -145,12 +153,12 @@ export function getBadgeForegroundStyle(state: BadgeState): TextColorStyle {
 const appearanceStateLevels = [['tint', 'outline']] as const;
 const getThemedAppearanceStyle = getThemedStateStyleFactory(
   'Badge.appearance',
-  ({ strokeWidth }: FlexTokens): StyleDefinition<ViewStyle, typeof appearanceStateLevels> => ({
+  (tokens: FlexTokens): StyleDefinition<ViewStyle, typeof appearanceStateLevels> => ({
     tint: {
-      borderWidth: 0,
+      borderWidth: getStrokeWidthStyleValue(tokens, badgeTraits.geometry.root.strokeWidth, 'tint'),
     },
     outline: {
-      borderWidth: strokeWidth.thin,
+      borderWidth: getStrokeWidthStyleValue(tokens, badgeTraits.geometry.root.strokeWidth, 'outline'),
     },
   }),
   appearanceStateLevels,
@@ -168,7 +176,9 @@ const rootStyleStateLevels = [
 type RootStyleStateLevels = typeof rootStyleStateLevels;
 type RootStyleState = StateNames<RootStyleStateLevels>;
 
-function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
+function createRootStyleDefinition(tokens: FlexTokens): StyleDefinition<ViewStyle, RootStyleStateLevels> {
+  const { borderRadius, spacing } = tokens;
+  const { radius } = badgeTraits.geometry.root;
   const gap = getGapStyleValue(spacing.componentBase50);
 
   return {
@@ -192,7 +202,7 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
         },
       },
       rounded: {
-        borderRadius: borderRadius.base100,
+        borderRadius: getRadiusStyleValue(tokens, radius, 'small'),
         iconAndText: {
           gap,
           paddingHorizontal: spacing.componentBase100,
@@ -217,7 +227,7 @@ function createRootStyleDefinition({ borderRadius, spacing }: FlexTokens): Style
         },
       },
       rounded: {
-        borderRadius: borderRadius.base200,
+        borderRadius: getRadiusStyleValue(tokens, radius, 'medium'),
         iconAndText: {
           gap,
           paddingHorizontal: spacing.componentBase150,
@@ -245,18 +255,9 @@ const contentStateLevels = [['small', 'medium']] as const;
 
 const getThemedContentStyle = getThemedStateStyleFactory(
   'Badge.content',
-  ({ fontFamily, fontSize, fontWeight, lineHeight }: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> => ({
-    fontFamily: fontFamily.functional,
-    small: {
-      fontSize: fontSize.functionalCaption,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalCaption,
-    },
-    medium: {
-      fontSize: fontSize.functionalBodySmall,
-      fontWeight: fontWeight.functionalRegular,
-      lineHeight: lineHeight.functionalBodySmall,
-    },
+  (tokens: FlexTokens): StyleDefinition<TextStyle, typeof contentStateLevels> => ({
+    small: functionalTypography(tokens, 'functionalCaption', badgeTraits.typography.content),
+    medium: functionalTypography(tokens, 'functionalBodySmall', badgeTraits.typography.content),
   }),
   contentStateLevels,
 );

@@ -7,6 +7,8 @@ tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
+traits: ./spec/traits.ts
+traits-schema: 1
 ---
 
 # Tag
@@ -139,14 +141,14 @@ moves across a row of tags.
 
 ## Conformance
 
-| Requirement | Evidence                                                         |
-| ----------- | ---------------------------------------------------------------- |
-| TAG-001     | `tag.types.ts`, `useTag.ts`, `tag.types.test.ts`, `tag.test.tsx` |
-| TAG-002     | `useTag.ts`, `tag.test.tsx`                                      |
-| TAG-003     | `renderTag.tsx`, `tag.test.tsx`                                  |
-| TAG-004     | `useTag.ts`, `useTagStyles.ts`, `renderTag.tsx`, `tag.test.tsx`  |
-| TAG-005     | `tag.styles.ts`, `useTagStyles.ts`, `tag.test.tsx`               |
-| TAG-006     | `tag.styles.ts`, `tag.stories.tsx`                               |
-| TAG-007     | `tag.styles.ts`, `useTagStyles.ts`, `tag.test.tsx`               |
-| TAG-008     | `useTag.ts`, `tag.test.tsx`                                      |
-| TAG-009     | `useTag.ts`, `useTagStyles.ts`, `tag.test.tsx`                   |
+| Requirement | Evidence                                                             |
+| ----------- | -------------------------------------------------------------------- |
+| TAG-001     | `tag.types.ts`, `useTag.ts`, `tag.types.test.ts`, `tag.test.tsx`     |
+| TAG-002     | `useTag.ts`, `tag.test.tsx`                                          |
+| TAG-003     | `renderTag.tsx`, `tag.test.tsx`                                      |
+| TAG-004     | `useTag.ts`, `useTagStyles.ts`, `renderTag.tsx`, `tag.test.tsx`      |
+| TAG-005     | `tag.styles.ts`, `spec/traits.ts`, `useTagStyles.ts`, `tag.test.tsx` |
+| TAG-006     | `tag.styles.ts`, `spec/traits.ts`, `tag.stories.tsx`, `tag.test.tsx` |
+| TAG-007     | `tag.styles.ts`, `useTagStyles.ts`, `tag.test.tsx`                   |
+| TAG-008     | `useTag.ts`, `tag.test.tsx`                                          |
+| TAG-009     | `useTag.ts`, `useTagStyles.ts`, `tag.test.tsx`                       |

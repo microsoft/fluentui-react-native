@@ -1,10 +1,4 @@
 import {
-  cornerRadius120,
-  cornerRadius20,
-  cornerRadius40,
-  cornerRadius60,
-  cornerRadius80,
-  cornerRadiusCircular,
   fontFamilyBase,
   fontFamilyMonospace,
   fontLineHeight100,
@@ -61,7 +55,8 @@ type NonFluentFlexTokens = Omit<PartialFlexTokens, 'shadow' | 'fontWeight' | 'fo
 /**
  * Fallback values for Flex tokens that cannot be populated from a FURN Theme.
  * The forward Theme adapter layers projected Theme values over these. They are
- * Fluent-native values, not the x3 defaults. Fluent and Theme have no motion
+ * Fluent-native values, not the x3 defaults, except for border radius, which
+ * follows the Flex specs in every theme. Fluent and Theme have no motion
  * tokens, so motion uses the x3 values pinned at 206e890b.
  */
 export const nonFluentFlexTokens = {
@@ -147,11 +142,13 @@ export const nonFluentFlexTokens = {
     contentCode: fontLineHeight400,
   },
   borderRadius: {
-    base100: cornerRadius20,
-    base400: cornerRadius60,
-    base600: cornerRadius80,
-    base700: cornerRadius120,
-    circular: cornerRadiusCircular,
+    base100: 4,
+    base200: 8,
+    base300: 12,
+    base400: 16,
+    base600: 24,
+    base700: 28,
+    circular: 9999,
   },
   spacing: {
     componentBase50: size20,
@@ -337,11 +334,6 @@ const fluentFallbackFlexTokenDescription = createFlexTokenDescription({
     contentSubtext: fontSize100,
     contentTable: fontSize400,
     contentCode: fontSize400,
-  },
-  borderRadius: {
-    ...nonFluentFlexTokens.borderRadius,
-    base200: cornerRadius40,
-    base300: cornerRadius40,
   },
 });
 

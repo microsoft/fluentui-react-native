@@ -25,8 +25,8 @@ The canonical implementations are `src/components/button` and `src/primitives/ic
 
 ## Tests
 
-`yarn test` runs the contract checker, the story type check, and Jest with the macOS platform preset declared in
-`package.json`. While iterating, run only the affected component's Jest tests with `yarn test <component>` or
+`yarn test` runs the contract checker, its `node --test` suite for the traits parser, the story type check, and Jest
+with the macOS platform preset declared in `package.json`. While iterating, run only the affected component's Jest tests with `yarn test <component>` or
 `yarn test --findRelatedTests <source>` (R-VALID-004), and run `yarn check:spec-contracts` after contract changes.
 `tests-and-stories.md` covers runtime, type, snapshot, and Storybook coverage, including native `wdio` story tests,
 which run from the Storybook app with `yarn storybook test --<platform>`.

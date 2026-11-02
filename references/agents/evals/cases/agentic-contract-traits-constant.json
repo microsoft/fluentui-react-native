@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "case_id": "agentic-contract-traits-constant",
+  "split": "development",
+  "task_mode": "contract",
+  "prompt": "Add component traits to the agentic Switch contract in packages/agentic/components/src/components/switch. Contract work only; the implementation will consume the traits in a later change.",
+  "expected": {
+    "skills": ["agentic-component-contract-authoring"],
+    "classification": {
+      "implementation_model": "agentic-higher-order",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": [
+      "packages/agentic/components/AGENTS.md",
+      "packages/agentic/components/references/contracts.md",
+      "packages/agentic/components/references/traits.md",
+      "packages/agentic/components/src/components/switch/SPEC.md",
+      "packages/agentic/components/src/components/switch/spec/source.json"
+    ],
+    "forbidden_actions": ["create-component"]
+  },
+  "assertions": [
+    {
+      "id": "private-literal-constant",
+      "description": "Writes `spec/traits.ts` with only type imports and one `switchTraits` literal written `as const satisfies Traits<...>`, imports `Traits` from `@fluentui-react-native/design/styling`, and does not export it from the package.",
+      "rule_ids": ["R-REPO-001"],
+      "source_refs": ["packages/agentic/components/references/traits.md", "packages/agentic/components/scripts/spec-contracts/traits.cjs"]
+    },
+    {
+      "id": "front-matter-link",
+      "description": "Links the constant from `SPEC.md` front matter with `traits: ./spec/traits.ts` (and optionally `traits-schema: 1`) and runs the contract checker.",
+      "rule_ids": [],
+      "source_refs": ["packages/agentic/components/references/contracts.md"]
+    },
+    {
+      "id": "traced-values",
+      "description": "Traces each value to a reviewed requirement, lists `spec/traits.ts` as that requirement's evidence, and classifies disagreements with current behavior instead of writing placeholders or silently changing behavior.",
+      "rule_ids": ["R-AGENTIC-001"],
+      "source_refs": ["packages/agentic/components/references/traits.md"]
+    }
+  ]
+}

@@ -7,14 +7,14 @@ owner_paths:
 
 # Design references
 
-| ID                      | Document                            | Read when                                                                        |
-| ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------- |
-| `design.theming`        | [Theming](theming.md)               | Choosing or authoring themes, providers, appearance, hooks, or legacy projection |
-| `design.flex-colors`    | [Flex colors](flex-colors.md)       | Authoring, resolving, or reading Flex colors, or migrating from flat colors      |
-| `design.tokens`         | [Tokens](tokens.md)                 | Choosing token sources, mapping Flex tokens, or updating mappings and the x3 pin |
-| `design.styling`        | [Styling](styling.md)               | Using or changing themed style caches and state or color style factories         |
-| `design.color-lib`      | [Color library](color-lib.md)       | Parsing, converting, compositing, or generating interaction colors at runtime    |
-| `design.testing`        | [Testing helpers](testing.md)       | Using test fixtures or contrast validation helpers                               |
-| `design.entry-points`   | [Entry points](entry-points.md)     | Adding exports, choosing a subpath, or changing compatibility re-exports         |
-| `design.contributing`   | [Contributing](contributing.md)     | Editing package source, generated files, tests, or validation                    |
-| `design.remaining-work` | [Remaining work](remaining-work.md) | Planning theming or appearance work, or checking what is unfinished              |
+| ID                      | Document                            | Read when                                                                          |
+| ----------------------- | ----------------------------------- | ---------------------------------------------------------------------------------- |
+| `design.theming`        | [Theming](theming.md)               | Choosing or authoring themes, providers, appearance, hooks, or legacy projection   |
+| `design.flex-colors`    | [Flex colors](flex-colors.md)       | Authoring, resolving, or reading Flex colors, or migrating from flat colors        |
+| `design.tokens`         | [Tokens](tokens.md)                 | Choosing token sources, mapping Flex tokens, or updating mappings and the x3 pin   |
+| `design.styling`        | [Styling](styling.md)               | Using or changing style caches, state or color factories, or the traits vocabulary |
+| `design.color-lib`      | [Color library](color-lib.md)       | Parsing, converting, compositing, or generating interaction colors at runtime      |
+| `design.testing`        | [Testing helpers](testing.md)       | Using test fixtures or contrast validation helpers                                 |
+| `design.entry-points`   | [Entry points](entry-points.md)     | Adding exports, choosing a subpath, or changing compatibility re-exports           |
+| `design.contributing`   | [Contributing](contributing.md)     | Editing package source, generated files, tests, or validation                      |
+| `design.remaining-work` | [Remaining work](remaining-work.md) | Planning theming or appearance work, or checking what is unfinished                |

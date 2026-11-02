@@ -45,6 +45,32 @@ is documented in the owning reference, component contract, or the repository foc
   disabled and removed targets neither activate nor keep phantom focus, collection focus matches committed selection,
   popups restore focus by dismissal reason, and theme or high-contrast changes keep stable identities.
 
+## Component traits adoption
+
+- **Outcome:** every component with a `SPEC.md` declares `spec/traits.ts`, and the contract checker requires it.
+- **Current state:** Button, ListItem, Tag, Badge, Card, and Input declare and consume traits (see
+  [component traits](traits.md)). Accordion, Avatar, Checkbox, Divider, Dropdown, ListboxItem, Menu, MenuButton, MenuItem, Popover, ProgressBar, Radio,
+  Skeleton, Spinner, Switch, Tab, TabList, and Text do not. Primitives do not take traits.
+- **Plan:** retrofit the remaining components in separate pull requests, classifying any contract mismatch before writing a
+  value. Make `traits` required in the
+  [contract checker](../scripts/spec-contracts/check-spec-contracts.cjs) once the last one lands.
+- **Done when:** every contracted component consumes its traits and the checker rejects a `SPEC.md` without them.
+
+## Trait follow-ups
+
+- **Interaction-source helper:** benchmark a shared builder for the disabled, pressed, and hovered state source against
+  the existing builders before adopting one. It must preserve the appended form (Button) and the exclusive-branch form
+  (ListItem, MenuItem); Tag's builder stays as written. Done when a measured helper is adopted or rejected.
+- **Geometry size scales:** geometry traits cover radius and stroke width. Decide whether control heights, padding, or
+  icon sizes become traits once the adoption retrofit shows which scales repeat. Done when the decision is recorded here
+  or in `traits.md`.
+- **macOS hover:** the `hover` facet records the current contract behavior on every platform. Review macOS hover per
+  component and appearance against V1 conventions separately, then express any change through `hover.byAppearance` or a
+  platform rule. Done when each adopting contract records its macOS hover decision.
+- **Motion and elevation:** traits do not describe motion or elevation, and no component consumes `tokens.motion` or
+  `tokens.shadow`. Spinner, Skeleton, and ProgressBar each run an animation loop and Switch uses motion literals. Try a
+  narrow shared loop helper first, then decide whether either becomes a facet.
+
 ## Components without a local contract
 
 These components had staged specs that were removed under

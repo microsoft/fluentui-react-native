@@ -170,11 +170,11 @@
     },
     {
       "id": "TAG-005",
-      "evidence": ["tag.styles.ts", "useTagStyles.ts", "tag.test.tsx"]
+      "evidence": ["tag.styles.ts", "spec/traits.ts", "useTagStyles.ts", "tag.test.tsx"]
     },
     {
       "id": "TAG-006",
-      "evidence": ["tag.styles.ts", "tag.stories.tsx"]
+      "evidence": ["tag.styles.ts", "spec/traits.ts", "tag.stories.tsx", "tag.test.tsx"]
     },
     {
       "id": "TAG-007",

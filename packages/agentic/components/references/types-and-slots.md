@@ -99,8 +99,8 @@ Export each component and its composition pipeline explicitly from
 - the render helper as `render<Component>_unstable`
 
 Name the source file `use<Component>Styles.ts` and the implementation `use<Component>Styles_unstable` so the local and
-public composition APIs match without aliases. Never use wildcard exports. Do not export private state-only slots or
-internal style definitions.
+public composition APIs match without aliases. Never use wildcard exports. Do not export private state-only slots,
+internal style definitions, or the component's traits constant.
 
 ## Review checklist
 

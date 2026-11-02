@@ -68,18 +68,18 @@ describe('Flex token mapping consistency', () => {
 
   it('reports a conflicting Theme projection with both values', () => {
     const changed = cloneInputs(inputs);
-    changed.themeProjection['borderRadius.base200'] = 'components.Button.tokens.changed';
+    changed.themeProjection['fontSize.functionalBodySmall'] = 'typography.sizes.changed';
 
     const violations = validateMappingInputs(changed);
 
     expect(violations).toContainEqual({
       rule: 'theme-projection',
-      path: 'borderRadius.base200',
-      expected: 'components.Button.tokens.borderRadius',
-      actual: 'components.Button.tokens.changed',
+      path: 'fontSize.functionalBodySmall',
+      expected: 'typography.sizes.secondary',
+      actual: 'typography.sizes.changed',
     });
     expect(formatMappingViolations(violations)).toContain(
-      '[theme-projection] borderRadius.base200: expected "components.Button.tokens.borderRadius"; actual "components.Button.tokens.changed"',
+      '[theme-projection] fontSize.functionalBodySmall: expected "typography.sizes.secondary"; actual "typography.sizes.changed"',
     );
   });
 
@@ -97,13 +97,13 @@ describe('Flex token mapping consistency', () => {
 
   it('rejects Theme-backed destinations in nonFluentFlexTokens', () => {
     const changed = cloneInputs(inputs);
-    changed.nonFluentValues.set('borderRadius.base200', 'cornerRadius40');
+    changed.nonFluentValues.set('fontSize.functionalBodySmall', 'fontSize200');
 
     expect(validateMappingInputs(changed)).toContainEqual({
       rule: 'non-fluent-coverage',
-      path: 'borderRadius.base200',
+      path: 'fontSize.functionalBodySmall',
       expected: '<absent because the destination is Theme-backed>',
-      actual: 'cornerRadius40',
+      actual: 'fontSize200',
     });
   });
 

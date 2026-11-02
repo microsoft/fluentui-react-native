@@ -7,6 +7,8 @@ tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
+traits: ./spec/traits.ts
+traits-schema: 1
 ---
 
 # ListItem
@@ -93,10 +95,10 @@ those behaviors through its own React Native composition.
 
 ## Conformance
 
-| Requirement | Evidence                                                             |
-| ----------- | -------------------------------------------------------------------- |
-| LIT-001     | `list-item.types.ts`, `useListItem.ts`, `list-item.types.test.ts`    |
-| LIT-002     | `renderListItem.tsx`, `useListItem.ts`, `list-item.test.tsx`         |
-| LIT-003     | `useListItem.ts`, `list-item.styles.ts`, `list-item.test.tsx`        |
-| LIT-004     | `useListItem.ts`, `useListItemStyles.ts`, `list-item.test.tsx`       |
-| LIT-005     | `list-item.styles.ts`, `list-item.stories.tsx`, `list-item.test.tsx` |
+| Requirement | Evidence                                                                               |
+| ----------- | -------------------------------------------------------------------------------------- |
+| LIT-001     | `list-item.types.ts`, `useListItem.ts`, `list-item.types.test.ts`                      |
+| LIT-002     | `renderListItem.tsx`, `useListItem.ts`, `list-item.test.tsx`                           |
+| LIT-003     | `useListItem.ts`, `list-item.styles.ts`, `list-item.test.tsx`                          |
+| LIT-004     | `useListItem.ts`, `useListItemStyles.ts`, `list-item.test.tsx`                         |
+| LIT-005     | `list-item.styles.ts`, `spec/traits.ts`, `list-item.stories.tsx`, `list-item.test.tsx` |

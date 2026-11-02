@@ -66,12 +66,17 @@ Load every adapter represented by the supplied evidence, but no others.
    - keyboard, pointer, focus, and motion behavior in
      `spec/interaction.md`;
    - FURN examples and constraints in `spec/usage.md`;
+   - reviewed typography, color channel, hover, focus visual, and geometry choices in `spec/traits.ts`, linked from the
+     `SPEC.md` front matter as described in the
+     [component traits reference](../../../packages/agentic/components/references/traits.md). New contracts declare
+     traits; a revision may add them to a contract that has none;
    - lifecycle, provenance, divergences, and requirement evidence in
      `spec/source.json`.
 6. Classify every relevant source claim as adopted, adapted, intentionally
    divergent, not applicable, deferred, or unknown. Do not turn missing
    evidence into an inferred guarantee.
-7. Review the contract before code. Keep `contract-draft`,
+7. Review the contract before code, including any traits constant against the
+   [traits authoring rules](../../../packages/agentic/components/references/traits.md#author-traits). Keep `contract-draft`,
    `review-required`, and a null review date until the source interpretation,
    native adaptation, authority decisions, and planned evidence are coherent.
    Move to `contract-reviewed` only after that explicit review.

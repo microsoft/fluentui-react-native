@@ -77,9 +77,9 @@ rules:
     - Theme shadows are legacy { ambient, key } pairs. The forward adapter converts each to
       [ambient, key] layers. The reverse shadowLayersToToken transform projects the first layer
       to ambient and the last to key, so middle layers are dropped; this projection is lossy.
-    - Button uses borderRadius.base200 / base300 / base400 for small / medium / large.
-      The FURN Theme exposes its shared small/medium Button radius, but its large
-      size-specific radius remains sourced from Fluent global tokens.
+    - borderRadius has no furn-theme mapping in either direction. Flex radius values follow the
+      Flex specs in every theme, and the legacy Theme keeps its own Button radius. A Fluent
+      radius look is a future theme setting.
     - Flex has finer/larger steps than Fluent in a few scales (e.g. radius 16/24/28,
       spacing 96); nearest emits the closest Fluent token — prefer the flex default
       where an exact step matters.
@@ -225,11 +225,6 @@ reverse:
       omitted:
         - color.expressionAchromaticSubtle.rest
       reason: The fixed invariant is the canonical legacy white value; expression roles may diverge in Flex themes.
-    components.Button.tokens.borderRadius:
-      source: borderRadius.base200
-      omitted:
-        - borderRadius.base300
-      reason: base200 is the small/shared Button radius and is canonical when base200 and base300 diverge.
     typography.families.primary:
       source: fontFamily.functional
       omitted:
@@ -303,11 +298,9 @@ tokens:
   borderRadius.base200:
     generic: '--gnrc-border-radius-base-200'
     fluent: global.corner.radius40
-    furn-theme: components.Button.tokens.borderRadius
   borderRadius.base300:
     generic: '--gnrc-border-radius-base-300'
     fluent: global.corner.radius40
-    furn-theme: components.Button.tokens.borderRadius
   borderRadius.base400:
     generic: '--gnrc-border-radius-base-400'
     fluent: global.corner.radius60

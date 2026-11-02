@@ -111,7 +111,7 @@ describe('themeFromFlexTokens', () => {
     expect(theme.colors.neutralBackground2Pressed).toBe('#464646');
     expect(theme.colors.black).toBe('#050505');
     expect(theme.components.Button.tokens).toMatchObject({
-      borderRadius: 12,
+      borderRadius: 2,
       legacyOnlyMetric: 42,
     });
     expect(theme.host.palette?.Bkg).toBe('#101010');
@@ -126,12 +126,13 @@ describe('themeFromFlexTokens', () => {
     expect(theme.colors.brandBackground2).toBe('#111111');
     expect(theme.colors.neutralBackground2).toBe('#444444');
     expect(theme.colors.black).toBe('#050505');
-    expect(theme.components.Button).toMatchObject({
-      tokens: {
-        borderRadius: 12,
-      },
-    });
     expect(theme.typography.weights.semiBold).toBe('700');
+  });
+
+  it('does not project Flex border radius into the legacy Button radius', () => {
+    const theme = themeFromFlexTokens(createTokens(), light);
+
+    expect(theme.components?.Button).toBeUndefined();
   });
 
   it('does not mutate frozen author inputs and returns a fresh legacy root', () => {

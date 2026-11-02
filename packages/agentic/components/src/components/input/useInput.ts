@@ -6,11 +6,14 @@ import { useRootInputModality, useThemeState } from '@fluentui-react-native/desi
 import { useControllableValue, useFocusTarget, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
 import { composeHandlers } from '../../common/eventHandlers';
-import { useFocusVisuals } from '../../common/useFocusVisuals';
+import { getFocusVisualOptions, useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 
 import { getInputResolvedStyles, getInputVisualState } from './input.styles';
 import type { InputAccessibilityState, InputProps, InputState } from './input.types';
+import { inputTraits } from './spec/traits';
+
+const focusVisualOptions = getFocusVisualOptions(inputTraits.focusVisual);
 
 type InteractiveTextInputProps = TextInputProps & {
   onHoverIn?: (...args: any[]) => void;
@@ -58,7 +61,7 @@ export function useInput_unstable(props: InputProps): InputState {
   const { focused, focusTarget } = focus;
   const modality = useRootInputModality(focused && !disabled);
   const focusVisible = focused && !disabled && modality === 'keyboard';
-  const { FocusRing } = useFocusVisuals({ focused: focusVisible, useSystemFocusRing: false, alwaysVisible: true });
+  const { FocusRing } = useFocusVisuals({ focused: focusVisible, ...focusVisualOptions });
   const blurFocusTarget = focus.onBlur;
   const [hovered, setHovered] = React.useState(false);
   const [pressed, setPressed] = React.useState(false);

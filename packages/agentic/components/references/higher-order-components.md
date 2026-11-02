@@ -35,6 +35,7 @@ audit.
 - `use<Component>Styles.ts`: cached style selection, ordered style arrays, and `attachSlotProps`.
 - `render<Component>.tsx`: pure slot ordering and conditional structure.
 - `<component>.ts`: state -> styles -> render assembly and `displayName`.
+- `spec/traits.ts`: the private traits constant, for components that have adopted [traits](traits.md).
 
 ## Non-negotiable invariants
 
@@ -83,7 +84,9 @@ Current implementation: `useFocusablePressable`/`useFocusTarget` own ref-backed 
 compose `focusTargetRef` on the actual target and retain the public native root ref. `useFocusVisuals`
 returns a private optional `FocusRing` and `enableFocusRing`;
 Windows/macOS default to native and Win32 defaults to custom. `alwaysVisible` selects a custom ring only
-while focused. `applyFocusRingStyles` owns cached colors/widths; component styles supply radius. Put the ring
+while focused. Components with [traits](traits.md) bind `getFocusVisualOptions(<component>Traits.focusVisual)` at
+module scope and spread it into the `useFocusVisuals` call. `applyFocusRingStyles` owns cached colors/widths; component
+styles supply radius. Put the ring
 and native setting only on the actual focus target. Scenes require `ThemedRoot`; custom focused rings
 subscribe through `useRootInputModality`, while `useRootSettings` remains stable and non-subscribing.
 The native Windows path requires RNW 0.81.35 or newer.
@@ -98,5 +101,6 @@ Do not change behavior or pinned source identities to close a gate before the co
 - [Types and slots](types-and-slots.md)
 - [State and accessibility](state-and-accessibility.md)
 - [Styles and tokens](styles-and-tokens.md)
+- [Component traits](traits.md)
 - [Rendering and assembly](rendering.md)
 - [Tests and stories](tests-and-stories.md)

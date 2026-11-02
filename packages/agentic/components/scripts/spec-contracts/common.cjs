@@ -43,14 +43,17 @@ function normalizeText(content) {
 }
 
 function parseFrontMatter(markdown, filePath) {
-  const match = markdown.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
+  const match = normalizeText(markdown).match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
   invariant(match, `${filePath} must start with YAML front matter.`);
   const values = {};
   for (const line of match[1].split('\n')) {
-    const field = line.match(/^([A-Za-z][A-Za-z0-9-]*):\s*(.*)$/);
-    if (field) {
-      values[field[1]] = field[2].replace(/^['"]|['"]$/g, '');
+    if (line.trim() === '') {
+      continue;
     }
+    const field = line.match(/^([A-Za-z][A-Za-z0-9-]*):[ \t]*(\S.*)$/);
+    invariant(field, `${filePath} front matter must use one single-line key: value field per line.`);
+    invariant(!Object.hasOwn(values, field[1]), `${filePath} front matter repeats ${field[1]}.`);
+    values[field[1]] = field[2].trimEnd().replace(/^['"]|['"]$/g, '');
   }
   return values;
 }

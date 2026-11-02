@@ -5,11 +5,14 @@ import { useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react
 
 import { Icon } from '../../primitives/icon/icon';
 import { hideSlotProps } from '../../common/accessibility';
-import { useFocusVisuals } from '../../common/useFocusVisuals';
+import { getFocusVisualOptions, useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 
 import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
 import type { ListItemMetrics, ListItemProps, ListItemState } from './list-item.types';
+import { listItemTraits } from './spec/traits';
+
+const focusVisualOptions = getFocusVisualOptions(listItemTraits.focusVisual);
 
 function getMetrics(size: ListItemState['size'], tokens: ListItemState['tokens']): ListItemMetrics {
   const { spacing } = tokens;
@@ -97,7 +100,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     focusable: !disabled && (rest.focusable ?? true),
   });
 
-  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled, ...focusVisualOptions });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const content = useSlot(NativeText, contentProp);

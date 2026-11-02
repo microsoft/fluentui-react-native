@@ -7,6 +7,8 @@ tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
+traits: ./spec/traits.ts
+traits-schema: 1
 ---
 
 # Card
@@ -21,7 +23,7 @@ Card is a bounded React Native surface for related content. It owns surface styl
 
 `root` and `content` are required. `header`, `content02`, and `footer` are optional. Rendering always begins with the interactive overlay when enabled. `default` renders content only. `nested` renders content followed by `content02`. `structured` renders header, content, optional `content02`, and footer. Each supplied public slot is a `View` slot; Card does not add child layout beyond its section style.
 
-Providing `onPress` or `selected` enables the pressable overlay. The resolved state derives interactive and selectable state, direction after the current window-width check, pressable hover/pressed/focused values, theme state, and user root style. A horizontal card becomes vertical below 480 React Native layout units. Surface state precedence is selection, then disabled, pressed, and hovered; user style is final.
+Providing `onPress` or `selected` enables the pressable overlay. The resolved state derives interactive and selectable state, direction after the current window-width check, pressable hover/pressed/focused values, theme state, and user root style. A horizontal card becomes vertical below 480 React Native layout units. Surface state precedence is selection, then disabled, pressed, and hovered; the stroke reads only selection and disabled state, so it keeps its rest color while hovered or pressed. User style is final.
 
 ### Requirements
 
@@ -63,10 +65,10 @@ On Windows and macOS, interactive overlays respond to native pointer, touch, `En
 
 ## Conformance
 
-| Requirement | Evidence                                                                  |
-| ----------- | ------------------------------------------------------------------------- |
-| CRD-001     | `card.types.ts`, `useCard.ts`, `card.stories.tsx`                         |
-| CRD-002     | `useCard.ts`, `renderCard.tsx`, `card.types.test.tsx`, `card.stories.tsx` |
-| CRD-003     | `useCard.ts`, `card.styles.ts`, `useCardStyles.ts`, `card.test.tsx`       |
-| CRD-004     | `useCard.ts`, `useCardStyles.ts`, `card.test.tsx`                         |
-| CRD-005     | `useCard.ts`, `renderCard.tsx`, `card.test.tsx`, `card.stories.tsx`       |
+| Requirement | Evidence                                                                              |
+| ----------- | ------------------------------------------------------------------------------------- |
+| CRD-001     | `card.types.ts`, `useCard.ts`, `card.stories.tsx`                                     |
+| CRD-002     | `useCard.ts`, `renderCard.tsx`, `card.types.test.tsx`, `card.stories.tsx`             |
+| CRD-003     | `useCard.ts`, `card.styles.ts`, `spec/traits.ts`, `useCardStyles.ts`, `card.test.tsx` |
+| CRD-004     | `useCard.ts`, `useCardStyles.ts`, `card.test.tsx`                                     |
+| CRD-005     | `useCard.ts`, `renderCard.tsx`, `card.test.tsx`, `card.stories.tsx`                   |

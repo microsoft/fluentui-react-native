@@ -15,6 +15,7 @@ const {
   repositoryRoot,
   sourcePathFor,
 } = require('./common.cjs');
+const { validateTraitsLink } = require('./traits.cjs');
 
 const requiredCompanions = ['tokens.yaml', 'accessibility.md', 'interaction.md', 'usage.md', 'source.json'];
 const forbiddenCompanionPatterns = [
@@ -508,6 +509,14 @@ function validateComponent(component, lock) {
   const specPath = path.join(componentRoot, 'SPEC.md');
   const spec = fs.readFileSync(specPath, 'utf8');
   const frontMatter = parseFrontMatter(spec, specPath);
+  validateExactKeys(
+    frontMatter,
+    ['name', 'status', 'platform', 'source', 'tokens', 'accessibility', 'interaction', 'usage'],
+    ['traits', 'traits-schema'],
+    `${component}/SPEC.md front matter`,
+  );
+  const traitsPath = path.join(componentRoot, 'spec/traits.ts');
+  validateTraitsLink(frontMatter, fs.existsSync(traitsPath) ? fs.readFileSync(traitsPath, 'utf8') : undefined, component);
 
   invariant(frontMatter.name === component, `${component}/SPEC.md must use name: ${component}.`);
   invariant(frontMatter.platform === 'react-native (Windows, macOS)', `${component}/SPEC.md has the wrong platform.`);

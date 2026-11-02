@@ -4,10 +4,13 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
 import { semanticIconSources } from '../../common/iconSources';
-import { useFocusVisuals } from '../../common/useFocusVisuals';
+import { getFocusVisualOptions, useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
+import { tagTraits } from './spec/traits';
 import type { TagProps, TagState } from './tag.types';
+
+const focusVisualOptions = getFocusVisualOptions(tagTraits.focusVisual);
 
 const defaultDismissIcon = {
   fontSource: semanticIconSources.dismiss,
@@ -62,7 +65,7 @@ export function useTag_unstable(props: TagProps): TagState {
     focusable: !disabled && (rest.focusable ?? true),
   });
 
-  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled });
+  const { FocusRing, ...nativeFocusProps } = useFocusVisuals({ focused: pressableState.focused && !disabled, ...focusVisualOptions });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
   const content = useOptionalSlot(Text, iconOnly ? null : contentProp, {

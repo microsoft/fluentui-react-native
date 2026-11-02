@@ -7,6 +7,8 @@ tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
+traits: ./spec/traits.ts
+traits-schema: 1
 ---
 
 # Input
@@ -147,12 +149,12 @@ reduced-motion settings need no separate path.
 
 ## Conformance
 
-| Requirement | Evidence                                                                                                        |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| INP-001     | `input.types.ts`, `useInput.ts`, `input.types.test.tsx`, `input.test.tsx`                                       |
-| INP-002     | `useInput.ts`, `input.test.tsx`                                                                                 |
-| INP-003     | `useInput.ts`, `input.styles.ts`, `input.test.tsx`                                                              |
-| INP-004     | `renderInput.tsx`, `useInput.ts`, `input.test.tsx`, `input.stories.tsx`                                         |
-| INP-005     | `useInput.ts`, `useInputStyles.ts`, `input.test.tsx`                                                            |
-| INP-006     | `input.styles.ts`, `useInputStyles.ts`, `input.test.tsx`                                                        |
-| INP-007     | `useInput.ts`, `input.styles.ts`, `useInputStyles.ts`, `renderInput.tsx`, `input.test.tsx`, `input.stories.tsx` |
+| Requirement | Evidence                                                                                                                          |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| INP-001     | `input.types.ts`, `useInput.ts`, `input.types.test.tsx`, `input.test.tsx`                                                         |
+| INP-002     | `useInput.ts`, `input.test.tsx`                                                                                                   |
+| INP-003     | `useInput.ts`, `input.styles.ts`, `input.test.tsx`                                                                                |
+| INP-004     | `renderInput.tsx`, `useInput.ts`, `input.test.tsx`, `input.stories.tsx`                                                           |
+| INP-005     | `useInput.ts`, `useInputStyles.ts`, `input.test.tsx`                                                                              |
+| INP-006     | `input.styles.ts`, `spec/traits.ts`, `useInputStyles.ts`, `input.test.tsx`                                                        |
+| INP-007     | `useInput.ts`, `input.styles.ts`, `spec/traits.ts`, `useInputStyles.ts`, `renderInput.tsx`, `input.test.tsx`, `input.stories.tsx` |

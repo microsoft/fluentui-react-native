@@ -1,14 +1,18 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import type { TextInput, View, ViewStyle } from 'react-native';
+import type { TextInput, TextStyle, View, ViewStyle } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { functionalTypography, getRadiusStyleValue, getStrokeWidthStyleValue } from '@fluentui-react-native/design/styling';
+
+import { expectChannelConformance, readInteractionStates } from '../../common/traitConformance';
 
 import { Input } from './input';
 import type { InputProps, InputState } from './input.types';
+import { inputTraits } from './spec/traits';
 import { renderInput_unstable } from './renderInput';
 import { useInput_unstable } from './useInput';
 import { useInputStyles_unstable } from './useInputStyles';
@@ -418,5 +422,47 @@ describe('Input', () => {
 
     await fireEvent.press(getContents(component));
     expect(focus).not.toHaveBeenCalled();
+  });
+});
+
+describe('Input traits conformance', () => {
+  it('keeps the text color at rest while hovered and pressed', async () => {
+    const component = await render(<Input placeholder="Search" />);
+    const textbox = getTextbox(component);
+
+    expectChannelConformance(
+      await readInteractionStates(textbox, () => StyleSheet.flatten(textbox.props.style as TextStyle).color),
+      inputTraits.channels.textInput.foreground,
+    );
+  });
+
+  it.each([
+    ['small', 'functionalBodySmall'],
+    ['medium', 'functionalBodyMedium'],
+    ['large', 'functionalBodyLarge'],
+  ] as const)('binds %s outline geometry and typography to its traits', async (size, role) => {
+    const component = await render(<Input placeholder="Search" size={size} />);
+    const textStyle = flattenStyle(getTextbox(component).props.style);
+
+    expect(flattenStyle(component.getByTestId('input-root').props.style).borderRadius).toBe(
+      getRadiusStyleValue(defaultFlexTokens, inputTraits.geometry.root.radius, size),
+    );
+    expect(flattenStyle(getContents(component).props.style).borderWidth).toBe(
+      getStrokeWidthStyleValue(defaultFlexTokens, inputTraits.geometry.contents.strokeWidth, 'outline'),
+    );
+    expect(textStyle).toMatchObject(functionalTypography(defaultFlexTokens, role, inputTraits.typography.textInput));
+    expect(textStyle).not.toHaveProperty('lineHeight');
+    expect(textStyle).not.toHaveProperty('fontWeight');
+  });
+
+  it('binds underline stroke widths to its traits', async () => {
+    const component = await render(<Input placeholder="Underline" variant="underline" />);
+
+    expect(flattenStyle(getContents(component).props.style).borderWidth).toBe(
+      getStrokeWidthStyleValue(defaultFlexTokens, inputTraits.geometry.contents.strokeWidth, 'underline'),
+    );
+    expect(flattenStyle(component.getByTestId('input-underline').props.style).borderBottomWidth).toBe(
+      getStrokeWidthStyleValue(defaultFlexTokens, inputTraits.geometry.underline.strokeWidth),
+    );
   });
 });

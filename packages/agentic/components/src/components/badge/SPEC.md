@@ -7,6 +7,8 @@ tokens: ./spec/tokens.yaml
 accessibility: ./spec/accessibility.md
 interaction: ./spec/interaction.md
 usage: ./spec/usage.md
+traits: ./spec/traits.ts
+traits-schema: 1
 ---
 
 # Badge
@@ -47,6 +49,6 @@ No material behavioral divergence was identified. The source evidence’s web ac
 | ----------- | --------------------------------------------------------------------------- |
 | BDG-001     | `badge.types.ts`, `useBadge.ts`, `badge.types.test.ts`, `badge.stories.tsx` |
 | BDG-002     | `useBadge.ts`, `renderBadge.tsx`, `badge.test.tsx`                          |
-| BDG-003     | `badge.styles.ts`, `useBadgeStyles.ts`, `badge.test.tsx`                    |
+| BDG-003     | `badge.styles.ts`, `spec/traits.ts`, `useBadgeStyles.ts`, `badge.test.tsx`  |
 | BDG-004     | `useBadge.ts`, `useBadgeStyles.ts`, `badge.test.tsx`                        |
 | BDG-005     | `badge.types.ts`, `useBadge.ts`, `badge.stories.tsx`                        |

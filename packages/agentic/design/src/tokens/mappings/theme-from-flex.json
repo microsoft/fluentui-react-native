@@ -242,9 +242,6 @@
   "colors.white": {
     "source": "color.fixedWhite.rest"
   },
-  "components.Button.tokens.borderRadius": {
-    "source": "borderRadius.base200"
-  },
   "shadows.shadow16": {
     "source": "shadow.high",
     "transform": "shadowLayersToToken"

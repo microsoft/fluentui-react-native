@@ -8,9 +8,12 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { functionalTypography, getRadiusStyleValue, getStrokeWidthStyleValue } from '@fluentui-react-native/design/styling';
 
+import { expectChannelConformance, readInteractionStates } from '../../common/traitConformance';
 import { Button } from './button';
 import type { ButtonAppearance } from './button.types';
+import { buttonTraits } from './spec/traits';
 
 function renderButton(props: React.ComponentProps<typeof Button>): Promise<RenderResult> {
   return render(<Button {...props} />);
@@ -333,11 +336,11 @@ describe('Button', () => {
   });
 
   it.each([
-    ['outline', 'backgroundNeutralTransparent', 'strokeNeutralLoud', 'backgroundNeutralTransparent', 'strokeNeutralLoud'],
-    ['subtle', 'backgroundNeutralTransparent', 'strokeNeutralTransparent', 'backgroundNeutralSubtle', 'strokeNeutralTransparent'],
+    ['outline', 'backgroundNeutralTransparent', 'strokeNeutralLoud', 'backgroundNeutralTransparent'],
+    ['subtle', 'backgroundNeutralTransparent', 'strokeNeutralTransparent', 'backgroundNeutralSubtle'],
   ] as const)(
-    'resolves visible interaction feedback for the %s appearance',
-    async (appearance, restBackground, restBorder, interactionBackground, interactionBorder) => {
+    'resolves visible interaction feedback with a static stroke for the %s appearance',
+    async (appearance, restBackground, restBorder, interactionBackground) => {
       const colors = defaultFlexTokens.color;
       const component = await renderButton({ appearance, content: appearance });
       const root = getRoot(component);
@@ -350,13 +353,13 @@ describe('Button', () => {
       await fireEvent(root, 'hoverIn', {});
       expect(getRootStyle(component)).toMatchObject({
         backgroundColor: colors[interactionBackground].hover,
-        borderColor: colors[interactionBorder].hover,
+        borderColor: colors[restBorder].rest,
       });
 
       await fireEvent(root, 'pressIn', {});
       expect(getRootStyle(component)).toMatchObject({
         backgroundColor: colors[interactionBackground].pressed,
-        borderColor: colors[interactionBorder].pressed,
+        borderColor: colors[restBorder].rest,
       });
     },
   );
@@ -423,14 +426,14 @@ describe('Button', () => {
       await fireEvent(root, 'hoverIn', {});
       expect(getRootStyle(component)).toMatchObject({
         backgroundColor: colors[background].hover,
-        borderColor: colors[border].hover,
+        borderColor: colors[border].rest,
       });
       expect(getForegroundColor()).toBe(colors[foreground].hover);
 
       await fireEvent(root, 'pressIn', {});
       expect(getRootStyle(component)).toMatchObject({
         backgroundColor: colors[background].pressed,
-        borderColor: colors[border].pressed,
+        borderColor: colors[border].rest,
       });
       expect(getForegroundColor()).toBe(colors[foreground].pressed);
 
@@ -503,5 +506,36 @@ describe('Button', () => {
     }));
 
     expect(visualSnapshot).toMatchSnapshot();
+  });
+});
+
+describe('Button traits conformance', () => {
+  it('paints each color channel as its traits declare', async () => {
+    const component = await renderButton({ content: 'Save' });
+    const root = getRoot(component);
+    const readContentColor = () => StyleSheet.flatten(component.getByText('Save').props.style).color;
+
+    expectChannelConformance(
+      await readInteractionStates(root, () => getRootStyle(component).backgroundColor),
+      buttonTraits.channels.root.background,
+    );
+    expectChannelConformance(
+      await readInteractionStates(root, () => getRootStyle(component).borderColor),
+      buttonTraits.channels.root.stroke,
+    );
+    expectChannelConformance(await readInteractionStates(root, readContentColor), buttonTraits.channels.content.foreground);
+  });
+
+  it.each(['small', 'medium', 'large'] as const)('binds %s geometry and typography to its traits', async (size) => {
+    const component = await renderButton({ content: 'Save', size });
+    const role = ({ small: 'functionalBodySmall', medium: 'functionalBodyMedium', large: 'functionalBodyLarge' } as const)[size];
+
+    expect(getRootStyle(component)).toMatchObject({
+      borderRadius: getRadiusStyleValue(defaultFlexTokens, buttonTraits.geometry.root.radius, size),
+      borderWidth: getStrokeWidthStyleValue(defaultFlexTokens, buttonTraits.geometry.root.strokeWidth),
+    });
+    expect(StyleSheet.flatten(component.getByText('Save').props.style)).toMatchObject(
+      functionalTypography(defaultFlexTokens, role, buttonTraits.typography.content),
+    );
   });
 });

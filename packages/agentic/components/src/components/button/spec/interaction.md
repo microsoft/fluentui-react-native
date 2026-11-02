@@ -4,8 +4,10 @@
 
 `useFocusablePressable` derives hover and press and observes native self-focus
 on the root `Pressable`. Token resolution uses appearance first, then selected and
-interaction state. Disabled values override interactive presentation. User
-root style is the final style layer.
+interaction state. Background and foreground read hover and press values; the
+stroke reads only appearance, selection, and disabled state, so it keeps its
+rest color while hovered or pressed. Disabled values override interactive
+presentation. User root style is the final style layer.
 
 The component forwards native action and interaction handlers. It does not
 trap focus, implement arrow-key navigation, or move focus after activation.

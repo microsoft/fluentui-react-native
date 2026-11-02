@@ -158,7 +158,7 @@
     },
     {
       "id": "BTN-003",
-      "evidence": ["button.styles.ts", "useButtonStyles.ts", "button.test.tsx"]
+      "evidence": ["button.styles.ts", "spec/traits.ts", "useButtonStyles.ts", "button.test.tsx"]
     },
     {
       "id": "BTN-004",
