@@ -1,5 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
+## 1.16.16
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/design@0.5.3
+  - @uifabricshared/foundation-tokens@0.16.16
+  - @uifabricshared/theming-ramp@0.21.16
+  - @fluentui-react-native/default-theme@0.27.16
+
 ## 1.16.15
 
 ### Patch Changes

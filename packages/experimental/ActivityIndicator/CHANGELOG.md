@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
+## 0.11.16
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- @fluentui-react-native/framework@0.17.10
+
 ## 0.11.15
 
 ### Patch Changes

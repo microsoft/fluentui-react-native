@@ -1,5 +1,15 @@
 # Change Log - @fluentui-react-native/spinner
 
+## 0.10.17
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/design@0.5.3
+  - @fluentui-react-native/text@0.25.17
+  - @fluentui-react-native/framework@0.17.10
+
 ## 0.10.16
 
 ### Patch Changes

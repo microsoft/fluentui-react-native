@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/tooltip
 
+## 0.5.16
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+
 ## 0.5.15
 
 ### Patch Changes
