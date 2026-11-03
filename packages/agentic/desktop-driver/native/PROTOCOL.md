@@ -156,6 +156,13 @@ A failed response carries a structured helper error:
 platform error codes, but not native handles or unrestricted environment data.
 Node maps helper codes onto the public WebDriver error contract.
 
+`data.reason`, when a provider sets it, is a short lowercase token a caller can
+branch on instead of parsing `message`. A provider sets `target-non-response` on
+`automation-failed` when the target application did not answer an accessibility
+request in time, such as a hung, busy, or exiting application: the request was
+well formed, a read leaves nothing to settle, and a retry can succeed once the
+application answers. A provider that cannot tell the cause omits `reason`.
+
 ### Mutation settlement
 
 A failed or cancelled mutating command also reports what it did to the

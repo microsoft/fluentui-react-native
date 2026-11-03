@@ -28,7 +28,7 @@ describe('NativeDesktopHost error translation', () => {
     });
   });
 
-  test.each(['no-such-element', 'stale-element', 'unsupported-operation', 'unmapped-failure'])(
+  test.each(['no-such-element', 'stale-element', 'unsupported-operation', 'automation-failed', 'unmapped-failure'])(
     'carries the effect a provider reports through the translation of %s',
     (nativeCode) => {
       const reported = translateNativeError(attachFailureEffect(new NativeDriverError(nativeCode, 'native failure'), 'partial'));
@@ -38,6 +38,21 @@ describe('NativeDesktopHost error translation', () => {
       expect(readFailureEffect(silent)).toBeUndefined();
     },
   );
+
+  test('keeps the reason a provider gives an automation failure, so a caller can tell a target that stopped responding', () => {
+    const translated = translateNativeError(
+      new NativeDriverError('automation-failed', 'native failure', { axError: { name: 'cannotComplete' }, reason: 'target-non-response' }),
+    );
+
+    expect(toWebDriverError(translated)).toMatchObject({
+      code: 'unknown error',
+      data: { axError: { name: 'cannotComplete' }, nativeCode: 'automation-failed', reason: 'target-non-response' },
+      message: 'native failure',
+    });
+    expect(toWebDriverError(translateNativeError(new NativeDriverError('automation-failed', 'native failure'))).data).toEqual({
+      nativeCode: 'automation-failed',
+    });
+  });
 
   describe('provider settlement codes', () => {
     test.each<[nativeCode: string, effect: string, disposition: string]>([

@@ -253,6 +253,7 @@ extension SelfTestRunner {
     testObservationRandomTrees(dump)
     testObservationRecords()
     testPublishedActions()
+    testUnansweredTarget()
     testObservationCommands()
     if let path = ProcessInfo.processInfo.environment["FURN_DRIVER_SELF_TEST_OBSERVATIONS"], !path.isEmpty {
       do {
@@ -1067,6 +1068,28 @@ extension SelfTestRunner {
     check(outcome(.invalidUIElement).code == ErrorCode.staleElement, "a dead element is stale rather than action free")
     check(outcome(.apiDisabled).code == ErrorCode.inputUnavailable, "a disabled Accessibility API is not read as no actions")
     check(outcome(.cannotComplete).code == ErrorCode.automationFailed, "an unanswered action query is not read as no actions")
+  }
+
+  /// A target that does not answer is reported with a reason a caller can act on, apart from a request that was wrong.
+  private func testUnansweredTarget() {
+    func failure(_ error: AXError) -> HelperError? {
+      do {
+        try throwAX(error, operation: "Reading AXRole")
+        return nil
+      } catch {
+        return error as? HelperError
+      }
+    }
+
+    let unanswered = failure(.cannotComplete)
+    check(unanswered?.code == ErrorCode.automationFailed, "a target that does not answer fails as an automation failure")
+    check(unanswered?.data?["reason"] as? String == "target-non-response", "an unanswered request says the target did not respond")
+    check(
+      (unanswered?.data?["axError"] as? JSONObject)?["name"] as? String == "cannotComplete",
+      "an unanswered request names the platform error"
+    )
+    check(failure(.failure)?.code == ErrorCode.automationFailed, "a general failure is still an automation failure")
+    check(failure(.failure)?.data?["reason"] == nil, "a general failure does not claim the target stopped responding")
   }
 
   private func testObservationCommands() {

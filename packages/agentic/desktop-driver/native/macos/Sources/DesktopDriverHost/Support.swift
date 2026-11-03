@@ -457,6 +457,14 @@ func throwAX(_ error: AXError, operation: String, staleMessage: String? = nil) t
       ]
     )
   }
+  if error == .cannotComplete {
+    // A hung, busy, or exiting target: the reason lets a caller wait and retry rather than treat the request as wrong.
+    try fail(
+      ErrorCode.automationFailed,
+      "\(operation) failed because \(describeAXError(error)).",
+      data: ["axError": axErrorJSON(error), "reason": "target-non-response"]
+    )
+  }
   try fail(ErrorCode.automationFailed, "\(operation) failed because \(describeAXError(error)).")
 }
 

@@ -550,5 +550,9 @@ export function translateNativeError(error: unknown): unknown {
   if (webdriverCode) {
     return attachFailureEffect(new HostWebDriverError(webdriverCode, error.message, error.data), effect);
   }
+  if (error.code === 'automation-failed') {
+    // It stays the generic code, but a provider's `reason` and the native code must reach the caller that branches on them.
+    return attachFailureEffect(new HostWebDriverError('unknown error', error.message, { ...error.data, nativeCode: error.code }), effect);
+  }
   return error;
 }

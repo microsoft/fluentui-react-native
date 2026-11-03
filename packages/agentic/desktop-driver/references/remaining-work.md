@@ -1166,15 +1166,65 @@ open):
   pipe ever matters, a compact unsupported form is a candidate contract change.
   Without facts, `observe` is 3.5 to 4 times smaller and about 3 times faster.
 
-Observation items **not run**: the Windows provider and its self-test; a
-genuinely hung application and the deadline plus one in-flight call bound; trees
+Observation items **not run**: the Windows provider and its self-test; trees
 near the 5,000-node limit and the 10,000-record table capacity; a real secure
-text field (the rule is covered by self-tests only); the FluentUI macOS
-Storybook application; and retained memory across repeated observations. The
-snapshot path has no secure-field rule and reports whatever `AXValue` returns,
-which is a pre-existing gap that `observe` does not share. The helper
-release build also prints one pre-existing warning (`main.swift`, "weak
+text field (the rule is covered by self-tests only); and the FluentUI macOS
+Storybook application. A hung application and retained memory across repeated
+observations are covered in the operation-layer checks below. The snapshot path has no secure-field rule and reports whatever
+`AXValue` returns, which is a pre-existing gap that `observe` does not share. The
+helper release build also prints one pre-existing warning (`main.swift`, "weak
 reference will always be nil").
+
+Operation layer implementation checks on macOS (the Windows provider and the MCP
+adapter are open). The release helper ran through the real server against
+Calculator (37 elements) and Font Book (272), each launched and closed by the
+helper. Token counts use the `gpt-tokenizer` package's default encoding, a proxy
+for any model's own:
+
+- The default outline costs 390 tokens for Calculator against 1,843 for the
+  legacy `getTree` (4.7 times fewer), and 1,504 for Font Book against 13,094 (8.7
+  times fewer). Warm wall time was 9 ms against 16 ms, and 50 ms against 126 ms. A
+  `find` took about 5 ms and 26 ms and answered in 117 to 460 tokens. The
+  inputs-only catalog is 1,010 tokens.
+- Font Book's whole tree needs `maxNodes: 500` (2,659 tokens); the default 100
+  returns 1,051 tokens and says `complete: false` with 172 elements omitted. The
+  `nodes` format costs 1.8 times the outline. `deadlineMs`, `maxDepth`,
+  `maxBytes`, and `maxVisited` each produced their own truncation reason, and a
+  `find` cut off by `maxVisited` was `inconclusive`, never `none`.
+- References stayed stable across calls, and `ref-malformed` and `ref-foreign`
+  failed as documented. A caller aborting 0 to 11 ms into a call left either no
+  journal entry or a journaled `error` of 2 to 13 ms, never quarantined the
+  session, and the next observation was complete. 200 pairs of a full `observe`
+  and a `find` on Font Book took a median of 66.5 ms (p95 70.1 ms), with
+  references held at the element count (272 to 274).
+- **The helper leaked memory on every request.** Its resident size grew without a
+  plateau: about 25 KB per `probe`, 83 KB per legacy `tree`, and 248 KB per
+  500-element `observe`, while Node's heap stayed flat. Neither its stdin reader
+  nor its worker thread runs a run loop, so nothing drained their autorelease
+  pools. Running each frame and each request in its own pool fixed it: a raw helper
+  grew 0.02 to 0.03 KB per `probe` over 4,000 requests, and 3,000 calls each of
+  `observe` and `tree` against Calculator through the full server stayed between
+  18 and 20 MB after warm-up, with the journal and reference table bounded. A
+  gated test now fails a helper that grows more than 8 MiB over 1,000 probes; it
+  grew 25 MiB without the fix.
+- **A stopped application.** With Calculator under `SIGSTOP`, `observe` and
+  `find` each failed after about 1.5 seconds whatever the deadline (500 ms or the
+  default), because the system, not the helper, bounds an Accessibility call.
+  The error carried no reason, so `automation-failed` now carries
+  `target-non-response`, and the response and the journal report it. The next
+  `observe` and `find` succeeded 38 ms and 9 ms after `SIGCONT`, the session was
+  never quarantined, and the helper needed no restart.
+
+Operation-layer items **not run**: the Windows provider; the MCP adapter and any
+client test; generic AppKit and Win32 fixtures (only two system applications were
+read); the FluentUI Storybook macOS application; trees near the 5,000-element
+limit and the 10,000-record table; a real secure text field; an application that
+hangs partway through a walk, and a helper blocked longer than
+`cancellationTimeoutMs`; `server.close()` against a host that never settles; and
+ownership and security qualification, which belong to M2. Other native codes,
+such as `input-unavailable` for a missing permission and `attach-failed`, still
+reach a caller as a generic `unknown error` without their `data.reason`; M2 and
+M3 decide how each is surfaced.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

@@ -121,6 +121,12 @@ ancestors:
   `?checked`, `expanded`, `collapsed`, `required`, `hidden`. An element with no
   remarkable state has none.
 - `more` marks an element with children the sample did not return.
+- `actions=` lists the actions that say what an element does. The passive ones
+  that nearly every element publishes (`AXRaise`, `AXScrollToVisible`,
+  `AXShowAlternateUI`, `AXShowDefaultUI`, `AXShowMenu`) are dropped, and any other
+  published action makes an element interactive. A macOS scroll area therefore
+  appears in the interactive view with its `AXScroll…ByPage` family listed, as in
+  Calculator and Font Book. Collapsing that family is possible later.
 - The `interactive` and `content` views keep the root, the elements of
   interest, and the named or structural containers above them; anonymous
   wrappers are elided. Selection takes a breadth-first prefix under
@@ -218,6 +224,7 @@ rebuilt `mutation` report.
 | `bounded-observation-unsupported` | `unsupported operation` | The provider cannot observe                             |
 | `content-denied`                  | `unsupported operation` | The operator denied reading displayed content           |
 | `no-window`, `window-closed`      | `no such window`        | There is no window to read, or it closed                |
+| `target-non-response`             | `unknown error`         | The application did not answer in time; retry later     |
 | `ref-…`                           | see above               | A reference did not resolve                             |
 | `cancelled`                       | `unknown error`         | The caller left, or the command was cancelled           |
 
@@ -238,6 +245,11 @@ The default is `allow`. Under `deny`, a request for content facts, the
 `content` view, or a `text` or `textContains` predicate fails with
 `content-denied`; names and states stay available. A request cannot change the
 policy.
+
+The policy cannot see inside identifiers. An application that puts what it
+displays into a name or automation id still shows it under `deny`: Calculator's
+input field has the automation id `StandardInputView;value:113,463`, where the
+value is what the field displays.
 
 Each session keeps a bounded journal of 500 entries: operation, request id,
 outcome, effect, timing, an error code and reason, and scalar summary fields the
@@ -268,9 +280,14 @@ argument. Parse real results against the published schemas with
 
 ## Limitations
 
-- Observation depends on the provider. The Windows provider, real hung
-  applications, trees near the 5,000-element limit, and retained memory across
-  long sessions are not yet qualified.
+- Observation depends on the provider. The Windows provider and trees near the
+  5,000-element limit are not yet qualified. On macOS, a stopped application
+  fails a read after about 1.5 seconds with the reason `target-non-response`, and
+  the helper's memory stayed flat across thousands of reads; both were measured
+  against Calculator and Font Book only
+  ([details](../native/macos/README.md#bounded-observation)).
+- Names come from the application. Font Book exposes three window-control
+  buttons with no name, so an agent finds them by role and position.
 - A provider repeats `{ "supported": false }` for every node when an
   application cannot report a fact. The projection names such facts once in
   `unsupportedFacts`, so that cost stays on the helper pipe and does not reach

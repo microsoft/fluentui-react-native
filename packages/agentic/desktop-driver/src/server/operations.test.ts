@@ -3,6 +3,8 @@ import { z } from 'zod';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import type { DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
+import { translateNativeError } from '../hosts/native/NativeDesktopHost.js';
+import { NativeDriverError } from '../native/NativeDriverError.js';
 import type { OperationCatalogEntry } from '../operations/index.js';
 import { createFakeTree, fakeTreeSize } from '../testing/fakeTree.js';
 import type { FakeTreeShape } from '../testing/fakeTree.js';
@@ -356,6 +358,55 @@ describe('Desktop Driver agent operations', () => {
           await expect(session.find({ automationId: 'auto-n.0.0' })).resolves.toMatchObject({ result: { outcome: 'unique' } });
         },
       );
+    });
+  });
+
+  describe('an application that stops responding', () => {
+    test('fails a read with a reason an agent can wait on, journals it, and recovers when the application answers', async () => {
+      await withFixture({ windows: treeWindows({ depth: 1, fanout: 2 }) }, async ({ harness, post: raw, session }) => {
+        let responding = false;
+        const observe = harness.host.observe.bind(harness.host);
+        harness.host.observe = async (request, signal) => {
+          if (!responding) {
+            throw translateNativeError(
+              new NativeDriverError(
+                'automation-failed',
+                'Reading AXRole failed because the target application did not complete the accessibility request.',
+                {
+                  axError: { name: 'cannotComplete' },
+                  reason: 'target-non-response',
+                },
+              ),
+            );
+          }
+          return observe(request, signal);
+        };
+
+        const response = await raw('observe', { requestId: 'hung' });
+        expect(response.status).toBe(500);
+        expect(response.value).toMatchObject({
+          data: {
+            nativeCode: 'automation-failed',
+            operation: 'observe',
+            reason: 'target-non-response',
+            requestId: 'hung',
+            schemaVersion: 1,
+          },
+          error: 'unknown error',
+          stacktrace: '',
+        });
+        expect(response.value.data).not.toHaveProperty('axError');
+
+        const { entries } = (await session.journal()).result;
+        expect(entries).toMatchObject([
+          { error: { code: 'unknown error', reason: 'target-non-response' }, operation: 'observe', outcome: 'error', requestId: 'hung' },
+        ]);
+
+        responding = true;
+        const recovered = await session.observe();
+        expect(recovered.session.quarantined).toBeUndefined();
+        expect(recovered.result.complete).toBe(true);
+      });
     });
   });
 

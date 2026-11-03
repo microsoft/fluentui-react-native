@@ -333,9 +333,14 @@ self-test drives the same code with a synthetic tree and a controllable clock.
   dividers answer `kAXErrorFailure`, and one of them must not drop the element
   from a sample. `click` keeps its strict handling of the same errors.
 - **Deadline.** The sampler checks the deadline and cancellation between
-  Accessibility calls and never sets a messaging timeout, so one call to an
-  application that has stopped responding cannot be interrupted. Real
-  hung-application behavior is not yet qualified.
+  Accessibility calls and never sets a messaging timeout, so a deadline cannot
+  interrupt one call to an application that has stopped responding. Measured
+  against a stopped Calculator on macOS 27.2, the system fails such a call after
+  about 1.5 seconds whatever the deadline: a failed root read ends the command as
+  `automation-failed` with the reason `target-non-response`, and a failure later
+  in the walk marks the affected element or its children `unreadable` instead.
+  The next command succeeds as soon as the application resumes, with no helper
+  restart. A walk can overrun its deadline by one such call.
 
 A sample is not one instant. AppKit creates some accessibility elements lazily,
 so the first read of a just-launched application can see one element fewer than
@@ -490,7 +495,7 @@ differential check against a reference model, record release and reuse, and the
 contract additionally builds, verifies, reuses, and directly resolves the app;
 starts the actual long-lived process; exercises malformed-frame recovery;
 requires a run of 1,000 `probe` round trips to leave the process's resident
-memory within 8 MiB (it grew by about 24 MiB before the autorelease pools); and
+memory within 8 MiB (it grew by about 25 MiB before the autorelease pools); and
 replays the self-test's observation samples through the protocol oracle that
 checks every `observe` result.
 
