@@ -30,7 +30,14 @@ struct AbandonedMutation {
   std::shared_ptr<CallState> call;
   // The provider call itself returned a timeout instead of the helper giving up.
   bool providerTimedOut{false};
+  // The lease of the application the mutation acted on; empty when unknown.
+  std::string leaseId;
 };
+
+std::string& CurrentLeaseId() {
+  thread_local std::string leaseId;
+  return leaseId;
+}
 
 // Leaked on purpose: abandoned workers can outlive static destruction, and the
 // ledger must stay valid for them until the process exits.
@@ -65,7 +72,8 @@ std::string DescribeUnsettled(const AbandonedMutation& entry) {
 void Abandon(std::string_view operation, DWORD timeoutMs, std::shared_ptr<CallState> call, bool providerTimedOut) {
   Ledger& ledger = LedgerInstance();
   const std::lock_guard<std::mutex> lock(ledger.mutex);
-  ledger.abandoned.push_back(AbandonedMutation{std::string(operation), timeoutMs, std::move(call), providerTimedOut});
+  ledger.abandoned.push_back(
+      AbandonedMutation{std::string(operation), timeoutMs, std::move(call), providerTimedOut, CurrentLeaseId()});
 }
 
 constexpr char kUnsettledNotice[] =
@@ -109,8 +117,8 @@ void RequireMutationsAllowed() {
     message += " " + std::to_string(ledger.abandoned.size()) + " mutations are unsettled.";
   }
   message +=
-      " Reads are still allowed so the application can be re-observed once it responds; restart the helper session "
-      "once the application is safe.";
+      " Reads are still allowed so the application can be re-observed once it responds. Closing the launched "
+      "application ends the quarantine; otherwise restart the helper session once the application is safe.";
   Fail(kErrorTargetQuarantined, std::move(message));
 }
 
@@ -118,6 +126,23 @@ bool MutationsQuarantined() {
   Ledger& ledger = LedgerInstance();
   const std::lock_guard<std::mutex> lock(ledger.mutex);
   return !ledger.abandoned.empty();
+}
+
+MutationScope::MutationScope(std::string leaseId) : previous_(CurrentLeaseId()) {
+  CurrentLeaseId() = std::move(leaseId);
+}
+
+MutationScope::~MutationScope() {
+  CurrentLeaseId() = std::move(previous_);
+}
+
+void ReleaseMutationQuarantine(const std::string& leaseId) {
+  if (leaseId.empty()) {
+    return;
+  }
+  Ledger& ledger = LedgerInstance();
+  const std::lock_guard<std::mutex> lock(ledger.mutex);
+  std::erase_if(ledger.abandoned, [&leaseId](const AbandonedMutation& entry) { return entry.leaseId == leaseId; });
 }
 
 void ResetMutationQuarantineForTesting() {

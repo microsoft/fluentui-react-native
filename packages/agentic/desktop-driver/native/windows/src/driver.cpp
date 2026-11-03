@@ -195,6 +195,15 @@ InputVerdict Driver::ClickAvailability(const std::string& elementId) {
   return input_.AvailabilityFor(processId);
 }
 
+std::string Driver::LeaseIdForElement(const std::string& elementId) {
+  try {
+    const ApplicationLease* lease = applications_.LeaseForWindow(automation_.RequireRecord(elementId).window);
+    return lease == nullptr ? std::string() : lease->id;
+  } catch (const HelperError&) {
+    return {};
+  }
+}
+
 HWND Driver::FocusForKeyboard(const std::string& elementId, const CancellationToken& token) {
   const HWND window = automation_.RequireRecord(elementId).window;
   if (window == nullptr || IsWindow(window) == FALSE) {
@@ -642,6 +651,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     const std::string elementId = RequireString(params, "elementId");
     const std::string mode = params.StringField("mode", "auto");
     RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
     InputVerdict availability;
     if (mode != "accessibility") {
       availability = ClickAvailability(elementId);
@@ -672,6 +682,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
   if (command == "clear") {
     const std::string elementId = RequireString(params, "elementId");
     RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
     if (!automation_.TryClearValue(elementId)) {
       RunPhysical(token, [&]() {
         const HWND window = FocusForKeyboard(elementId, token);
@@ -690,6 +701,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
       Fail(kErrorInvalidParams, "The sendKeys request requires a string \"text\".");
     }
     RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
     RunPhysical(token, [&]() {
       const HWND window = FocusForKeyboard(elementId, token);
       const KeyboardGuardScope guard(input_, KeyboardGuardFor(window));

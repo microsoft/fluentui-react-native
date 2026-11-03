@@ -111,6 +111,9 @@ class Driver {
   // the window. Nothing changes before the input checks have passed.
   HWND FocusForKeyboard(const std::string& elementId, const CancellationToken& token);
   InputVerdict ClickAvailability(const std::string& elementId);
+  // The lease of the application the element belongs to, or empty when the
+  // element or its window is unknown; the command itself then reports why.
+  std::string LeaseIdForElement(const std::string& elementId);
   // Refuses each key press unless the foreground belongs to the application of
   // `window`, or to any leased application when `window` is null.
   InputController::KeyboardGuard KeyboardGuardFor(HWND window);

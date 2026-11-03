@@ -533,7 +533,7 @@ Fabric and Win32 Paper retain distinct app/runtime behavior and qualification.
 | ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | Specified by the bounded observation contract; the work package below is the Windows side. Budgets must apply before subtree-wide caching: the bounded walk still caches the whole subtree before it fails `tree-too-large`, and `find` shares the 5,000-node cap. Large trees must return honest partial results, and incomplete searches must never authorize unique mutation.                                                    |
 | Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)). Remaining: reconciling its eviction and release with the bounded observation contract (work package below), macOS token-recycling evidence (ids are never reused and actions check the pid and role; fingerprints wait on it), PID reuse against a real application, and a retention plateau measured on a real React Native session. |
-| Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations)) and qualified against the stuck and hung Win32 fixture. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and the follow-ups below (report `effect`, scope the ledger to the lease, self-test the paths).                  |
+| Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations)) and qualified against the stuck and hung Win32 fixture, directly and behind a protected service. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and the follow-ups below (report `effect`, self-test the paths).        |
 | Input authority          | `native/windows/src/input.cpp` and application activation               | Windows implemented ([contract](../native/windows/README.md#input-authority)), and the Win32 Paper smoke passed physical pointer and keyboard actions. Remaining: live lock, RDP disconnect, and elevation transitions (the self-test injects them), a `uiAccess` decision, delivery evidence for `SendInput` beyond its return value, and foreground matching that is finer than the owning process.                               |
 | Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).                                |
 | Application ownership    | `native/windows/src/application.cpp` and trusted supervisor             | Not started: packaged AUMID and unpackaged executable identity under duplicate or changing titles, ACL validation, stale claims, and Job Object restrictions. The fixture has only a lifetime watchdog.                                                                                                                                                                                                                             |
@@ -552,7 +552,11 @@ exercises the helper against a real application through the opt-in
 `win32Fixture` native contract: observation, native and accessibility actions,
 hit testing, PNG capture, a title change, an owned dialog, a hung application,
 a stuck provider call, trees near and beyond the node cap, and 500 repeated
-cycles. A focused Win32 Paper smoke (176 stories and 5 authored tests,
+cycles. The opt-in `protectedService` native contract serves the same fixture
+through a grant-protected service, so grants, session ownership, revocation, and
+quarantine are shown with the real helper behind them: a stuck call quarantines
+the target for every grant until closing the launched application ends the
+helper's lease-scoped quarantine, as Node ends its own. A focused Win32 Paper smoke (176 stories and 5 authored tests,
 including the native Callout popup) passed against the same helper source.
 Node reads the helper's settlement codes as effects (`mutation-indeterminate` is
 `unknown`, `target-quarantined` is `none`) and mirrors its quarantine at the
@@ -569,13 +573,7 @@ cannot be verified from macOS):
    `unknown` and quarantines the target. That is safe but over-broad. A request
    refused or rejected before any provider call, or cancelled while still
    queued, is `none`.
-2. Scope the helper's ledger to the application lease instead of the process,
-   and clear it when `closeApplication` verifies the exit of a launched
-   application. Node lifts its own quarantine in that case; without this, one
-   unsettled call keeps refusing mutations for every other target and every
-   later session until the service restarts. Attached applications stay
-   quarantined.
-3. Add native self-test cases for the effect reported by each mutating
+2. Add native self-test cases for the effect reported by each mutating
    command's rejection, cancellation, and abandoned paths.
 
 **Windows work package for bounded observation (M3).** Implement the
@@ -747,7 +745,8 @@ helper reports `mutation-indeterminate` and `target-quarantined`, including for
 a mutation whose provider call times out, and its Win32 fixture contract shows a
 stuck call landing exactly once with later mutations staying refused. Node reads
 both as the same effects, so the providers settle identically. A launched
-target's quarantine lifts when its application's exit is verified; an attached
+target's quarantine lifts when its application's exit is verified, and the
+Windows helper's lease-scoped records end the same way; an attached
 target stays quarantined until the M2 `recover` operation. Still open: the
 Windows follow-ups in section 7, persisting in-flight records across a service
 restart, `recover`, and qualification against real hung applications on either
@@ -1152,6 +1151,18 @@ Windows implementation checks (Windows 11, PowerShell 7, Node 26):
   elements stayed at 20, working set moved from 22.5 to 23.6 MB, and private
   bytes from 5.0 to 6.2 MB. Without the variable the same suites **passed** or
   skipped (89 passed, 10 skipped).
+- The lease-scoped helper quarantine and the `protectedService` contract, on the
+  tree that merges macOS's private-discovery slice: the rebuilt helper's
+  self-test **passed** 464 of 464 checks, and
+  `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand protectedService` **passed**
+  3 of 3. Before the helper change the third test failed: the process-wide
+  quarantine outlived the launched application that raised it, so the next
+  grant's first click was refused. `win32Fixture` still **passed** 7 of 7, and
+  `nativeDriver` **passed** 6 with 2 skipped, including the shared
+  `expectProtectedNativeService` check against the real helper. Without the
+  variable the driver suite **passed** (40 suites; 558 passed, 25 skipped). Run
+  `yarn build` first: the WDIO contract children load `lib/`, and a stale build
+  fails them with "A valid Desktop Driver grant is required."
 - The focused Win32 Paper smoke **passed**: with `STORYBOOK_SMOKE_STORY`
   `{components-button--default,components-checkbox--default,components-input--default,native-callout--default}`
   selecting the authored tests,
@@ -1194,6 +1205,9 @@ Windows items **not run**:
 - DPI scaling other than the machine's current setting, mixed-DPI moves, and
   negative monitor origins.
 - Menu popups, which need activation to open.
+- The protected service against an elevated service, another account, or a real
+  React Native application: the `protectedService` contract uses the plain Win32
+  fixture, one account, and no physical input.
 
 Deferred Windows work, listed in section 7: incremental UIA reads (the bounded
 observation work package), Job Object and ACL application ownership, and

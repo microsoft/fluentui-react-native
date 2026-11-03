@@ -22,7 +22,8 @@ Remove-Item Env:\FURN_NATIVE_DRIVER_TEST
 Without `FURN_NATIVE_DRIVER_TEST=1` the suite is skipped. Use `--runInBand`: the scenarios share one desktop and one
 build cache, and each starts its own helper process because the mutation quarantine is process-wide. A full run takes
 about one minute. The onscreen scenario needs an unlocked interactive desktop for hit testing and capture; every other
-scenario places the window off every monitor.
+scenario places the window off every monitor. `yarn test --runInBand protectedService` runs the second suite that uses
+this fixture, described below.
 
 ## Options
 
@@ -72,6 +73,16 @@ The default tree has 18 nodes; `--nodes N` yields about `N + 24` in total.
 - **Large tree:** 4,900 items stay within the 5,000-node limit; 10,000 items fail `tree` and a root `find` as
   `tree-too-large` while `windows` keeps answering.
 - **Retention:** 500 command cycles keep retained elements, working set, and private bytes within the documented bounds.
+
+`src/native/windows/protectedService.contract.test.ts` serves the same fixture through a grant-protected Desktop Driver
+service with the real helper behind it, and covers what the fake host in `src/server` cannot show:
+
+- **Grant and ownership:** an unauthenticated request reaches no helper call, a session keeps its owner, and another
+  grant gets `target-busy` without learning the holder's grant, session, or process identifiers.
+- **Revocation:** revoking a grant closes its launched application and frees the target for the next grant.
+- **Quarantine:** a stuck click quarantines the target for every grant while the status and refusal name no session;
+  deleting the session verifies the launched application's exit, which ends the helper's quarantine, so the next grant
+  clicks once.
 
 Behavior contracts live with the helper: see [Windows helper](../../native/windows/README.md) and the
 [protocol](../../native/PROTOCOL.md).

@@ -265,6 +265,17 @@ subject to their own timeouts. A late completion is reported in the refusal but
 does not lift the quarantine, because its effect is still unverified. A stalled
 read fails as `automation-failed` and does not quarantine.
 
+The helper records each unsettled mutation against the lease of the application
+it acted on, though the refusal stays session-wide while any record exists.
+`closeApplication` ends the records of a launched application once it has
+verified that the process exited, because nothing that application left in
+flight can land any more, so the next session on the same helper can mutate. An
+attached application keeps running, so its records stay and only restarting the
+helper session ends them. A mutation whose lease cannot be resolved is recorded
+without one, and no close releases it. The refusal says so: closing the launched
+application ends the quarantine, otherwise restart the helper session once the
+application is safe.
+
 The quarantine lives in the helper process, so it ends with the helper. It does
 not yet persist across helper restarts or provide an operator `recover`
 operation; an unsettled call can still land after the helper exits. See
@@ -286,7 +297,12 @@ verifies shared Windows/Win32 selection. A second suite builds the test-only
 Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
 through the helper: window events, owned popups, hung and stuck providers, large
 trees, and bounded retention. `yarn test --runInBand win32Fixture` runs only
-that suite.
+that suite. A third suite serves the same fixture through a grant-protected
+Desktop Driver service with the helper behind it: unauthenticated requests reach
+no helper call, sessions keep their owner, a revoked grant closes its
+application, and a stuck call quarantines the target until the launched
+application is closed. `yarn test --runInBand protectedService` runs only that
+suite.
 
 The helper self-test (`furn-desktop-driver-host.exe --self-test`) covers
 settlement, element identity, retention, input authority, and event bookkeeping

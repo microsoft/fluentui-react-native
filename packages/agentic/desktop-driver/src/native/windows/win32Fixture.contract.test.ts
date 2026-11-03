@@ -3,24 +3,16 @@
 // helper over the wire protocol. Opt in with FURN_NATIVE_DRIVER_TEST=1 and run it serially on an interactive
 // desktop: yarn test --runInBand win32Fixture. Only the first scenario shows a window (topmost, non-activating, for
 // about a second); the others keep it off every monitor, and none of them steals the foreground.
-import { execFile } from 'node:child_process';
-import fs from 'node:fs';
-import path from 'node:path';
-import { promisify } from 'node:util';
-
 import { NativeHostProcess } from '../../hosts/native/NativeHostProcess';
 import type { NativeHostRequestResult } from '../../hosts/native/NativeHostProcess';
-import { acquireDirectoryLock, defaultNativeDriverCacheRoot, delay, hashTree, sha256 } from '../filesystem';
-import { buildNativeDesktopDriver, FURN_DESKTOP_DRIVER_CACHE_ROOT } from '../nativeDriver';
-import type { NativeDriverArtifact, NativeHostEventMessage } from '../types';
-import { probeWindowsToolchain } from './buildWindowsDriver';
+import { delay } from '../filesystem';
+import type { NativeHostEventMessage } from '../types';
+import { fixtureExecutable, helperArtifact, required, waitFor } from './win32FixtureSupport';
 
 jest.setTimeout(240_000);
 
 const windowsTest = process.platform === 'win32' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 
-const execFileAsync = promisify(execFile);
-const fixtureRoot = path.resolve(__dirname, '../../../fixtures/win32');
 const megabyte = 1024 * 1024;
 
 type Rect = { height: number; width: number; x: number; y: number };
@@ -36,104 +28,6 @@ type WindowEventReport = {
 };
 type Attempt = { code?: string; message?: string; ms: number; ok: boolean };
 type Capture = { height: number; mimeType: string; width: number };
-
-let helperArtifactPromise: Promise<NativeDriverArtifact> | undefined;
-let fixtureExecutablePromise: Promise<string> | undefined;
-
-function helperArtifact(): Promise<NativeDriverArtifact> {
-  helperArtifactPromise ??= buildNativeDesktopDriver({ platform: 'windows' });
-  return helperArtifactPromise;
-}
-
-function fixtureExecutable(): Promise<string> {
-  fixtureExecutablePromise ??= buildFixture();
-  return fixtureExecutablePromise;
-}
-
-async function buildFixture(): Promise<string> {
-  const toolchain = await probeWindowsToolchain();
-  const cacheRoot = path.resolve(process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT] ?? defaultNativeDriverCacheRoot());
-  const digest = sha256(`${hashTree(fixtureRoot)}:${toolchain.fingerprint}`).slice(0, 20);
-  const publishedRoot = path.join(cacheRoot, 'v1', 'fixtures', 'win32', digest);
-  const executable = path.join(publishedRoot, 'furn-win32-fixture.exe');
-  if (fs.existsSync(executable)) {
-    return executable;
-  }
-
-  const lockRoot = path.join(cacheRoot, 'v1', 'locks');
-  const stagingParent = path.join(cacheRoot, 'v1', 'staging');
-  fs.mkdirSync(lockRoot, { recursive: true });
-  fs.mkdirSync(stagingParent, { recursive: true });
-  const lock = await acquireDirectoryLock(path.join(lockRoot, `fixture-win32-${digest}`));
-  try {
-    if (!fs.existsSync(executable)) {
-      // MSBuild's tracking files still use MAX_PATH on long-path hosts, so the staging path stays short.
-      const stagingRoot = fs.mkdtempSync(path.join(stagingParent, `fixture-${digest.slice(0, 8)}-`));
-      try {
-        const outputRoot = path.join(stagingRoot, 'bin');
-        fs.mkdirSync(outputRoot);
-        await runMsbuild(toolchain.msbuildPath, [
-          path.join(fixtureRoot, 'Win32Fixture.vcxproj'),
-          '-nologo',
-          '-m',
-          '-restore:false',
-          '-v:minimal',
-          '/p:Configuration=Release',
-          '/p:Platform=x64',
-          `/p:PlatformToolset=${toolchain.platformToolset}`,
-          `/p:WindowsTargetPlatformVersion=${toolchain.sdkVersion}`,
-          `/p:OutDir=${outputRoot}${path.sep}`,
-          `/p:IntDir=${path.join(stagingRoot, 'obj')}${path.sep}`,
-        ]);
-        fs.mkdirSync(path.dirname(publishedRoot), { recursive: true });
-        fs.rmSync(publishedRoot, { force: true, recursive: true });
-        fs.renameSync(outputRoot, publishedRoot);
-      } finally {
-        fs.rmSync(stagingRoot, { force: true, recursive: true });
-      }
-    }
-  } finally {
-    lock.release();
-  }
-  if (!fs.existsSync(executable)) {
-    throw new Error(`Building the Win32 fixture did not produce "${executable}".`);
-  }
-  return executable;
-}
-
-async function runMsbuild(msbuildPath: string, args: string[]): Promise<void> {
-  try {
-    await execFileAsync(msbuildPath, args, { maxBuffer: 32 * megabyte, timeout: 10 * 60 * 1000, windowsHide: true });
-  } catch (error) {
-    const output = (error as { stdout?: string }).stdout ?? '';
-    throw new Error(`MSBuild failed to build the Win32 fixture.\n${output}`.trim(), { cause: error });
-  }
-}
-
-function required<T>(value: T | undefined, description: string): T {
-  if (value === undefined) {
-    throw new Error(`Expected ${description}.`);
-  }
-  return value;
-}
-
-async function waitFor<T>(
-  description: string,
-  read: () => Promise<T | false | undefined>,
-  { intervalMs = 10, timeoutMs = 5_000 }: { intervalMs?: number; timeoutMs?: number } = {},
-): Promise<T> {
-  const deadline = Date.now() + timeoutMs;
-  for (;;) {
-    const value = await read();
-    if (value) {
-      return value;
-    }
-    if (Date.now() >= deadline) {
-      throw new Error(`Timed out after ${timeoutMs} ms waiting for ${description}.`);
-    }
-    await delay(intervalMs);
-  }
-}
 
 function expectPng(response: NativeHostRequestResult<Capture>): void {
   expect(response.binary).toBeDefined();

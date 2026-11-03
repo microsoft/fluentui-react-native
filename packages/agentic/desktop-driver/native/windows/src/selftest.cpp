@@ -686,6 +686,47 @@ void TestMutationSettlement() {
   Check(outcome(ProviderCall::Mutation, []() { return static_cast<HRESULT>(0x80040200); }, 1000) == "failed" &&
             !MutationsQuarantined(),
         "a mutation that is rejected as not enabled settles without quarantine");
+
+  // A stalled mutation is recorded against the lease scope active on its thread,
+  // and only a release for that lease ends the quarantine.
+  const auto stallUnder = [&](const std::string& leaseId) {
+    ResetMutationQuarantineForTesting();
+    const auto gate = std::make_shared<Gate>();
+    const MutationScope scope(leaseId);
+    const std::string code = outcome(ProviderCall::Mutation, [gate]() { return gate->Hold(); }, 50);
+    gate->Open();
+    return code;
+  };
+  Check(stallUnder("lease-a") == kErrorMutationIndeterminate && MutationsQuarantined(),
+        "a mutation stalled under a lease scope quarantines the session");
+  ReleaseMutationQuarantine("lease-b");
+  ReleaseMutationQuarantine("");
+  Check(MutationsQuarantined(), "another lease's release and an empty lease id leave the quarantine in place");
+  ReleaseMutationQuarantine("lease-a");
+  Check(!MutationsQuarantined() && outcome(ProviderCall::Mutation, []() { return S_OK; }, 1000) == "completed",
+        "releasing the lease that raised the quarantine lets mutations run again");
+
+  Check(stallUnder("") == kErrorMutationIndeterminate && MutationsQuarantined(),
+        "a mutation stalled without a lease scope still quarantines the session");
+  ReleaseMutationQuarantine("lease-a");
+  ReleaseMutationQuarantine("");
+  Check(MutationsQuarantined(), "a mutation recorded without a lease is never released by a close");
+
+  ResetMutationQuarantineForTesting();
+  {
+    const MutationScope outer("lease-outer");
+    {
+      const MutationScope inner("lease-inner");
+    }
+    const auto gate = std::make_shared<Gate>();
+    Check(outcome(ProviderCall::Mutation, [gate]() { return gate->Hold(); }, 50) == kErrorMutationIndeterminate,
+          "a mutation stalls after an inner scope ended");
+    gate->Open();
+  }
+  ReleaseMutationQuarantine("lease-inner");
+  Check(MutationsQuarantined(), "a finished inner scope does not claim a later mutation");
+  ReleaseMutationQuarantine("lease-outer");
+  Check(!MutationsQuarantined(), "the outer scope is restored when an inner scope ends");
   ResetMutationQuarantineForTesting();
 }
 
@@ -1130,6 +1171,38 @@ void TestWindowCloseWithoutEvents() {
   Check(FailureCode([&]() { applications.RequireWindow("window-unknown"); }, &message) == kErrorNoSuchWindow &&
             message.find("not tracked") != std::string::npos,
         "a window this helper never issued is reported as untracked");
+}
+
+void TestAttachedCloseKeepsQuarantine() {
+  ResetMutationQuarantineForTesting();
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestQuarantine", L"Quarantine window");
+  ApplicationManager applications;
+  const CancellationToken token;
+  const std::string leaseId = applications.AdoptWindowForTesting(window, L"Quarantine window").id;
+
+  const auto gate = std::make_shared<Gate>();
+  std::string code = "none";
+  {
+    const MutationScope scope(leaseId);
+    try {
+      RunBoundedProviderCall(ProviderCall::Mutation, [gate]() { return gate->Hold(); }, 50, "Testing the provider",
+                             kErrorAutomationFailed);
+    } catch (const HelperError& error) {
+      code = error.code();
+    }
+  }
+  gate->Open();
+  Check(code == kErrorMutationIndeterminate && MutationsQuarantined(),
+        "a mutation stalled against an attached application quarantines the session");
+
+  applications.CloseApplication(leaseId, token);
+  Check(MutationsQuarantined(), "closing an attached lease keeps the quarantine because the application keeps running");
+  Check(FailureCode([]() { RequireMutationsAllowed(); }) == kErrorTargetQuarantined,
+        "mutations stay refused after an attached lease closes");
+
+  ResetMutationQuarantineForTesting();
+  windows.Destroy(window);
 }
 
 void TestWindowEventHooks() {
@@ -2486,6 +2559,7 @@ int RunSelfTest() {
   TestWindowEventPublisher();
   TestWindowEventRegistration();
   TestWindowCloseWithoutEvents();
+  TestAttachedCloseKeepsQuarantine();
   TestWindowEventHooks();
   TestDriverWindowEvents();
   TestInputEnvironment();

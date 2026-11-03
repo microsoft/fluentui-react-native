@@ -16,6 +16,7 @@
 #include <winrt/base.h>
 
 #include "geometry.h"
+#include "settlement.h"
 
 namespace furn {
 
@@ -1216,6 +1217,11 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
     }
   }
 
+  // A mutation abandoned against an application this helper launched can no
+  // longer land once that process is verified gone, so closing it ends the
+  // quarantine. An attached application keeps running and keeps its quarantine.
+  const bool ownedProcessGone =
+      lease.ownership == "launched" && lease.process != nullptr && !IsProcessAlive(lease.process);
   if (lease.process != nullptr) {
     CloseHandle(lease.process);
     lease.process = nullptr;
@@ -1238,6 +1244,9 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
       });
   if (!processStillLeased) {
     windowEvents_.Stop(leasedProcessId);
+  }
+  if (ownedProcessGone) {
+    ReleaseMutationQuarantine(leaseId);
   }
 }
 

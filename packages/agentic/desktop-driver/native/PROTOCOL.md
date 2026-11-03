@@ -203,10 +203,16 @@ a rejection:
 | `target-quarantined`     | `none`    | The provider refused a mutation because an earlier one is unsettled. Nothing reached the application.         |
 
 While a provider is quarantined, observation, input release, close, and
-`dispose` remain available so the application can be re-observed. Node reports
-both codes as `unknown error` with the helper code in `data.nativeCode`, and
-mirrors a provider's quarantine so the service refuses mutations for that target
-as well. A caller must never replay an indeterminate mutation. A provider that
+`dispose` remain available so the application can be re-observed. A provider
+that records its quarantine per application lease may end the records of a
+launched application when `closeApplication` verifies that the process exited,
+because nothing that application left in flight can land afterwards, as Node does
+for its own quarantine. It must never end the records of an attached
+application, which keeps running, nor of a mutation it could not attribute to a
+lease. Node reports both codes as `unknown error` with the helper code in
+`data.nativeCode`, and mirrors a provider's quarantine so the service refuses
+mutations for that target as well. A caller must never replay an indeterminate
+mutation. A provider that
 cannot establish settlement must fail closed this way rather than advance its
 queue. A mutation whose provider call times out after the request reached the
 provider is such a case; an explicit provider rejection and any failed read

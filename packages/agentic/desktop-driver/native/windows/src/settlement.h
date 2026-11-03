@@ -32,7 +32,30 @@ void RequireMutationsAllowed();
 
 bool MutationsQuarantined();
 
-// The ledger is process wide by design; tests restore the clean state.
+// Names the application lease that the mutations on this thread act on, so a
+// mutation that does not settle is recorded against it. A command that cannot
+// resolve its lease records the mutation without one, and no close releases it.
+// The previous scope returns when the guard ends.
+class MutationScope {
+ public:
+  explicit MutationScope(std::string leaseId);
+  ~MutationScope();
+  MutationScope(const MutationScope&) = delete;
+  MutationScope& operator=(const MutationScope&) = delete;
+
+ private:
+  std::string previous_;
+};
+
+// Forgets the unsettled mutations recorded against `leaseId`, which ends their
+// quarantine. Call it only after the exit of the application the helper
+// launched for that lease is verified: nothing it left in flight can land any
+// more. An attached application keeps running, so its quarantine stays, and a
+// mutation recorded without a lease is never released.
+void ReleaseMutationQuarantine(const std::string& leaseId);
+
+// Refusals are process wide by design, whichever lease raised the quarantine;
+// tests restore the clean state.
 void ResetMutationQuarantineForTesting();
 
 }  // namespace furn
