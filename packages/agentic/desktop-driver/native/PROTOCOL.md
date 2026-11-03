@@ -208,7 +208,9 @@ both codes as `unknown error` with the helper code in `data.nativeCode`, and
 mirrors a provider's quarantine so the service refuses mutations for that target
 as well. A caller must never replay an indeterminate mutation. A provider that
 cannot establish settlement must fail closed this way rather than advance its
-queue. The codes and `effect` do not change the wire version.
+queue. A mutation whose provider call times out after the request reached the
+provider is such a case; an explicit provider rejection and any failed read
+remain ordinary errors. The codes and `effect` do not change the wire version.
 
 ### `event`
 
@@ -230,10 +232,13 @@ not replace a liveness or state query.
 Helpers that advertise the `windowEvents` feature also accept a `windowEvents`
 command with the target `lease` and return a bounded diagnostic log of recent
 window notifications and helper commands, and publish a `window-closed` event
-with `{ "windowId": "..." }` when the platform reports a tracked window
-destroyed. Helpers without the feature reject the command as
-`unsupported-operation`; Node never requests the log unless the feature is
-negotiated.
+with `{ "windowId": "..." }` once when the platform reports a tracked window
+destroyed. A window closed through `closeWindow` publishes no event for that
+id. The log fields are provider diagnostics described in each provider README.
+A provider whose platform notifications cannot be registered says so in the log
+and keeps answering from liveness queries, which stay authoritative. Helpers
+without the feature reject the command as `unsupported-operation`; Node never
+requests the log unless the feature is negotiated.
 
 Helpers that advertise the `accessibilityActions` feature also accept an
 `accessibilityActions` command with the helper-private `elementId` and return

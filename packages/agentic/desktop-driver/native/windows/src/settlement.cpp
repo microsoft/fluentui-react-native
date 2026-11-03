@@ -28,6 +28,8 @@ struct AbandonedMutation {
   std::string operation;
   DWORD timeoutMs{0};
   std::shared_ptr<CallState> call;
+  // The provider call itself returned a timeout instead of the helper giving up.
+  bool providerTimedOut{false};
 };
 
 // Leaked on purpose: abandoned workers can outlive static destruction, and the
@@ -42,12 +44,33 @@ Ledger& LedgerInstance() {
   return *ledger;
 }
 
-std::string DescribeSettlement(const AbandonedMutation& entry) {
-  if (!entry.call->Settled()) {
-    return "is still pending";
-  }
-  return "completed late with " + DescribeHresult(entry.call->result.load());
+// UI Automation and COM report their own client-side timeouts as failures. The
+// provider may still apply a timed-out mutation, so such a result is exactly as
+// uncertain as a call the helper stopped waiting for.
+bool IsProviderTimeout(HRESULT result) {
+  return result == kUiaTimeoutResult || result == RPC_E_TIMEOUT || result == HRESULT_FROM_WIN32(ERROR_TIMEOUT);
 }
+
+std::string DescribeUnsettled(const AbandonedMutation& entry) {
+  const std::string subject = "\"" + entry.operation + "\"";
+  if (entry.providerTimedOut) {
+    return subject + " timed out in the provider (" + DescribeHresult(entry.call->result.load()) + ")";
+  }
+  const std::string settlement = entry.call->Settled()
+                                     ? "completed late with " + DescribeHresult(entry.call->result.load())
+                                     : std::string("is still pending");
+  return subject + " did not settle within " + std::to_string(entry.timeoutMs) + " ms and " + settlement;
+}
+
+void Abandon(std::string_view operation, DWORD timeoutMs, std::shared_ptr<CallState> call, bool providerTimedOut) {
+  Ledger& ledger = LedgerInstance();
+  const std::lock_guard<std::mutex> lock(ledger.mutex);
+  ledger.abandoned.push_back(AbandonedMutation{std::string(operation), timeoutMs, std::move(call), providerTimedOut});
+}
+
+constexpr char kUnsettledNotice[] =
+    "Later mutations in this helper session are refused; reads are still allowed so the application can be "
+    "re-observed once it responds.";
 
 HRESULT RunBounded(std::function<HRESULT()> call, DWORD timeoutMs, std::shared_ptr<CallState>& state,
                    bool& completed) {
@@ -80,13 +103,14 @@ void RequireMutationsAllowed() {
     return;
   }
   const AbandonedMutation& first = ledger.abandoned.front();
-  std::string message = "The mutation was refused because \"" + first.operation + "\" did not settle within " +
-                        std::to_string(first.timeoutMs) + " ms and " + DescribeSettlement(first) +
-                        ", so its effect on the application is unknown.";
+  std::string message =
+      "The mutation was refused because " + DescribeUnsettled(first) + ", so its effect on the application is unknown.";
   if (ledger.abandoned.size() > 1) {
     message += " " + std::to_string(ledger.abandoned.size()) + " mutations are unsettled.";
   }
-  message += " Reads remain available for re-observation; restart the helper session once the application is safe.";
+  message +=
+      " Reads are still allowed so the application can be re-observed once it responds; restart the helper session "
+      "once the application is safe.";
   Fail(kErrorTargetQuarantined, std::move(message));
 }
 
@@ -111,20 +135,21 @@ HRESULT RunBoundedProviderCall(ProviderCall kind, std::function<HRESULT()> call,
   bool completed = false;
   const HRESULT result = RunBounded(std::move(call), timeoutMs, state, completed);
   if (completed) {
+    if (kind == ProviderCall::Mutation && IsProviderTimeout(result)) {
+      Abandon(operation, timeoutMs, state, true);
+      Fail(kErrorMutationIndeterminate,
+           std::string(operation) + " timed out in the provider (" + DescribeHresult(result) +
+               "), so its effect on the application is unknown. " + kUnsettledNotice);
+    }
     return result;
   }
   if (kind == ProviderCall::Read) {
     Fail(timeoutCode, std::string(operation) + " did not complete within " + std::to_string(timeoutMs) + " ms.");
   }
-  {
-    Ledger& ledger = LedgerInstance();
-    const std::lock_guard<std::mutex> lock(ledger.mutex);
-    ledger.abandoned.push_back(AbandonedMutation{std::string(operation), timeoutMs, state});
-  }
+  Abandon(operation, timeoutMs, state, false);
   Fail(kErrorMutationIndeterminate,
        std::string(operation) + " did not settle within " + std::to_string(timeoutMs) +
-           " ms, so its effect on the application is unknown. Later mutations in this helper session are refused; reads "
-           "remain available for re-observation.");
+           " ms, so its effect on the application is unknown. " + kUnsettledNotice);
 }
 
 }  // namespace furn

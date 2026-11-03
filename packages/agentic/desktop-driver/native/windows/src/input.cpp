@@ -216,31 +216,48 @@ WORD UnmodifiedLayoutKey(wchar_t character) {
   return virtualKey;
 }
 
-bool InputController::PhysicalInputAvailable() {
-  if (physicalInput_ == 1) {
-    return true;
+InputVerdict InputController::Availability() {
+  return EvaluateInputEnvironment(environmentReader_ ? environmentReader_() : ReadInputEnvironment());
+}
+
+InputVerdict InputController::IntegrityFor(DWORD processId) {
+  if (processId == 0) {
+    return InputAvailable();
   }
-  const HDESK desktop = OpenInputDesktop(0, FALSE, DESKTOP_READOBJECTS);
-  if (desktop != nullptr) {
-    CloseDesktop(desktop);
-    physicalInput_ = 1;
-    return true;
+  const ProcessIntegrity target = integrityReader_ ? integrityReader_(processId) : ReadProcessIntegrity(processId);
+  const ProcessIntegrity helper = integrityReader_ ? integrityReader_(0) : HelperIntegrity();
+  return EvaluateInjectionTarget(helper, target);
+}
+
+void InputController::RequireIntegrityFor(DWORD processId) {
+  const InputVerdict verdict = IntegrityFor(processId);
+  if (!verdict.available) {
+    Fail(kErrorInputUnavailable, verdict.reason);
   }
-  // Some hosted and packaged launch contexts deny an input-desktop handle even
-  // while the process shares the active interactive session. A live foreground
-  // window or active-console session is the non-mutating fallback; SendInput
-  // remains authoritative and still fails explicitly if UIPI or the desktop
-  // blocks it.
-  DWORD sessionId = 0;
-  return GetForegroundWindow() != nullptr ||
-         (ProcessIdToSessionId(GetCurrentProcessId(), &sessionId) != FALSE &&
-          sessionId == WTSGetActiveConsoleSessionId());
+}
+
+InputVerdict InputController::AvailabilityFor(DWORD processId) {
+  const InputVerdict verdict = Availability();
+  return verdict.available ? IntegrityFor(processId) : verdict;
+}
+
+void InputController::RequireInputFor(DWORD processId) {
+  const InputVerdict verdict = AvailabilityFor(processId);
+  if (!verdict.available) {
+    Fail(kErrorInputUnavailable, verdict.reason);
+  }
 }
 
 void InputController::RequirePhysicalInput() {
-  if (!PhysicalInputAvailable()) {
-    Fail(kErrorInputUnavailable,
-         "Physical input is unavailable because the helper is not attached to an interactive input desktop.");
+  const InputVerdict verdict = Availability();
+  if (!verdict.available) {
+    Fail(kErrorInputUnavailable, verdict.reason);
+  }
+}
+
+void InputController::GuardKeyPress() {
+  if (keyboardGuard_) {
+    keyboardGuard_();
   }
 }
 
@@ -257,10 +274,23 @@ void InputController::Send(std::vector<INPUT>& inputs) {
     return;
   }
   const InputSender send = sender_ != nullptr ? sender_ : &SendInput;
+  SetLastError(ERROR_SUCCESS);
   const UINT sent = send(static_cast<UINT>(inputs.size()), inputs.data(), sizeof(INPUT));
-  if (sent != inputs.size()) {
-    FailLastError(kErrorInputFailed, "Injecting physical input", GetLastError());
+  if (sent == inputs.size()) {
+    return;
   }
+  // SendInput does not report a UIPI or secure-desktop rejection, so a bare
+  // "completed successfully" would hide the likely causes.
+  const DWORD error = GetLastError();
+  std::string message = "Windows accepted " + std::to_string(sent) + " of " + std::to_string(inputs.size()) +
+                        " injected input events";
+  if (error != ERROR_SUCCESS) {
+    message += "; the last error was " + DescribeHresult(HRESULT_FROM_WIN32(error));
+  }
+  message +=
+      ". Windows rejects injected input while another thread blocks it, while the target runs at a higher integrity "
+      "level than this helper (UIPI), or while a secure desktop such as the lock screen is active.";
+  Fail(kErrorInputFailed, message);
 }
 
 void InputController::MovePointer(POINT target, unsigned int durationMs, const CancellationToken& token) {
@@ -441,6 +471,7 @@ void InputController::KeyDown(std::wstring_view value, const CancellationToken& 
     return;
   }
   const std::vector<KeyStroke> strokes = StrokesForValue(value);
+  GuardKeyPress();
   // The ledger records the press before injection so a partially injected
   // sequence is still released by the ledger.
   pressedKeys_.emplace_back(std::wstring(value), strokes);
@@ -503,6 +534,7 @@ void InputController::TypeText(std::wstring_view text, const CancellationToken& 
 void InputController::PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
                                       const CancellationToken& token) {
   token.ThrowIfCancelled();
+  GuardKeyPress();
   pressedKeys_.emplace_back(std::move(ledgerKey), strokes);
   for (const KeyStroke& stroke : strokes) {
     SendStroke(stroke, true);
@@ -517,6 +549,7 @@ void InputController::PressAndRelease(std::wstring ledgerKey, const std::vector<
 void InputController::PressChord(const std::vector<WORD>& virtualKeys, const CancellationToken& token) {
   RequirePhysicalInput();
   token.ThrowIfCancelled();
+  GuardKeyPress();
   const std::size_t base = pressedKeys_.size();
   for (const WORD key : virtualKeys) {
     const KeyStroke stroke{false, key, false};

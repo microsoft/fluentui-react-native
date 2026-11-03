@@ -292,6 +292,9 @@ yarn test --runInBand
 The native contract builds into a temporary or configured external cache,
 verifies the artifact and long-lived handshake, runs the helper self-test,
 checks cache reuse and resolution, and exercises malformed-frame recovery.
+On Windows it also builds the test-only plain Win32 fixture and drives the
+helper against it: events, owned popups, hung and stuck providers, large trees,
+and retention. `yarn test --runInBand win32Fixture` runs only that suite.
 Stable-signed macOS coverage also requires
 `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
 

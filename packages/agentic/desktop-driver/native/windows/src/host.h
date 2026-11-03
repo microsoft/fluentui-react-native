@@ -38,6 +38,7 @@ class Host {
                   const std::string& message) noexcept;
   bool WriteCancelled(const std::string& id) noexcept;
   void RecordWriteFailure(std::string_view operation, const char* message) noexcept;
+  void PublishWindowClosed(const std::string& windowId) noexcept;
 
   FrameWriter* writer_{nullptr};
   HANDLE readerThread_{nullptr};
@@ -48,6 +49,7 @@ class Host {
   std::deque<PendingRequest> queue_;
   std::string activeId_;
   std::atomic<bool> writeFailed_{false};
+  std::atomic<std::uint64_t> eventSequence_{0};
   bool stopping_{false};
 };
 

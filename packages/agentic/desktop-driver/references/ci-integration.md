@@ -53,7 +53,9 @@ yarn workspace @fluentui-react-native/desktop-driver test --runInBand
 
 This gate builds source, verifies cache publication and reuse, starts the exact
 long-lived artifact, runs the native self-test, exercises FDR1 framing, and
-checks failure behavior. It does not by itself prove automation against a real
+checks failure behavior. On Windows it also drives the helper against the
+test-only plain Win32 fixture, whose onscreen scenario needs an unlocked
+interactive desktop. It does not by itself prove automation against a real
 React Native app.
 
 To ensure CI never compiles after a separately provisioned or restored helper,

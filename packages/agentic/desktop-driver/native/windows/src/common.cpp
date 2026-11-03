@@ -25,6 +25,27 @@ const std::string& SessionSalt() {
   return salt;
 }
 
+// The system message table has no text for UI Automation's own failures, which
+// would otherwise reach callers as a bare number.
+const char* DescribeUiaHresult(HRESULT result) {
+  switch (static_cast<std::uint32_t>(result)) {
+    case 0x80040200:
+      return "The UI Automation element is not enabled";
+    case 0x80040201:
+      return "The UI Automation element is no longer available";
+    case 0x80040202:
+      return "The UI Automation element has no clickable point";
+    case 0x80040204:
+      return "The UI Automation operation is not supported by the element";
+    case 0x80131505:
+      return "The UI Automation request timed out because the application did not respond";
+    case 0x80131509:
+      return "The UI Automation element is not in a state that allows the operation";
+    default:
+      return nullptr;
+  }
+}
+
 }  // namespace
 
 std::string ToUtf8(std::wstring_view value) {
@@ -93,6 +114,11 @@ void Fail(std::string code, std::string message) {
 }
 
 std::string DescribeHresult(HRESULT result) {
+  std::array<char, 32> hex{};
+  std::snprintf(hex.data(), hex.size(), "0x%08X", static_cast<unsigned>(result));
+  if (const char* known = DescribeUiaHresult(result)) {
+    return std::string(known) + " (" + hex.data() + ")";
+  }
   wchar_t* text = nullptr;
   const DWORD length = FormatMessageW(
       FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
@@ -105,9 +131,7 @@ std::string DescribeHresult(HRESULT result) {
   if (text != nullptr) {
     LocalFree(text);
   }
-  std::array<char, 32> code{};
-  std::snprintf(code.data(), code.size(), "0x%08X", static_cast<unsigned>(result));
-  return description.empty() ? std::string(code.data()) : description + " (" + code.data() + ")";
+  return description.empty() ? std::string(hex.data()) : description + " (" + hex.data() + ")";
 }
 
 void FailHresult(std::string code, std::string_view operation, HRESULT result) {
