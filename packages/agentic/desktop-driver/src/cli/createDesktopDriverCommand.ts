@@ -13,6 +13,7 @@ import {
   formatDesktopReporterValue,
   resolveDesktopReporterMode,
   resolveDesktopReporterModeFromArgv,
+  tolerateClosedDesktopStdout,
 } from './reporter.js';
 import type { ResolvedDesktopReporterMode } from './reporter.js';
 import type {
@@ -315,6 +316,7 @@ function addNativeDoctorCommand(
 }
 
 export async function runDesktopDriverCli(argv: readonly string[] = process.argv): Promise<void> {
+  tolerateClosedDesktopStdout();
   let diagnostics = '';
   let reporterMode: ResolvedDesktopReporterMode = 'plain';
   let reporterResolutionError: unknown;

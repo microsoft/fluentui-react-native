@@ -896,7 +896,8 @@ async function main() {
     }
     process.stdout.write(JSON.stringify({ mode, passed: true }));
   } finally {
-    fs.rmSync(root, { recursive: true, force: true });
+    // Windows can hold WDIO worker handles briefly after exit, which surfaces as transient EPERM/EBUSY.
+    fs.rmSync(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
   }
 }
 

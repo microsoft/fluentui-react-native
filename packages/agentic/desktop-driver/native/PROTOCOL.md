@@ -156,7 +156,7 @@ A failed response carries a structured helper error:
 platform error codes, but not native handles or unrestricted environment data.
 Node maps helper codes onto the public WebDriver error contract.
 
-### Mutation `effect`
+### Mutation settlement
 
 A failed or cancelled mutating command also reports what it did to the
 application, so Node can tell a rejected mutation from one that may have
@@ -185,6 +185,23 @@ Providers MUST report `effect` on every failed or cancelled mutating command.
 A mutation rejected before any platform call is `none`; a request cancelled while
 still queued never started and is `none`. Providers must not promote an
 ambiguous dispatch to `none`.
+
+A provider that bounds its own application calls can also settle for itself.
+Two additive codes carry their own effect, so a bare timeout is never reported as
+a rejection:
+
+| Code                     | Effect    | Meaning                                                                                                       |
+| ------------------------ | --------- | ------------------------------------------------------------------------------------------------------------- |
+| `mutation-indeterminate` | `unknown` | A mutation did not settle before the provider's deadline and may still land. The provider quarantines itself. |
+| `target-quarantined`     | `none`    | The provider refused a mutation because an earlier one is unsettled. Nothing reached the application.         |
+
+While a provider is quarantined, observation, input release, close, and
+`dispose` remain available so the application can be re-observed. Node reports
+both codes as `unknown error` with the helper code in `data.nativeCode`, and
+mirrors a provider's quarantine so the service refuses mutations for that target
+as well. A caller must never replay an indeterminate mutation. A provider that
+cannot establish settlement must fail closed this way rather than advance its
+queue. The codes and `effect` do not change the wire version.
 
 ### `event`
 

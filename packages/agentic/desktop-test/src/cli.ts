@@ -8,6 +8,7 @@ import {
   resolveDesktopEventLevel,
   resolveDesktopReporterMode,
   resolveDesktopReporterModeFromArgv,
+  tolerateClosedDesktopStdout,
 } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import { desktopStageCommands } from './adapters.js';
@@ -19,6 +20,7 @@ import { DesktopSupervisor } from './supervisor.js';
 import { runDesktopWdioSuite } from './wdio/run.js';
 
 export async function runDesktopTestCli(argv = process.argv): Promise<void> {
+  tolerateClosedDesktopStdout();
   const program = new Command('desktop-test')
     .description('Application-neutral native desktop lifecycle and WDIO suites')
     .option('--config <path>', 'desktop.config file')
@@ -93,7 +95,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       environment: process.env.DESKTOP_REPORTER,
       configured: config.reporting.reporter ?? config.reporting.console,
     });
-    const requestedEventLevel = options.events ?? process.env.DESKTOP_EVENTS ?? config.reporting.events;
+    const requestedEventLevel = options.events ?? (process.env.DESKTOP_EVENTS || undefined) ?? config.reporting.events;
     if (requestedEventLevel && reporterMode !== 'ndjson')
       throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
     const eventLevel = resolveDesktopEventLevel({

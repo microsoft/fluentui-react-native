@@ -8,55 +8,27 @@
 #include <memory>
 #include <thread>
 
+#include "settlement.h"
 namespace furn {
 namespace {
 
 constexpr std::size_t kMaximumAncestorWalk = 64;
-// Provider mutations run on their application's UI thread, which a suspended or
-// busy application can stall indefinitely. Every mutation therefore runs as a
-// bounded step that reports an explicit failure instead of wedging the helper.
-constexpr DWORD kMutationTimeoutMs = 5000;
+// Provider calls run on their application's UI thread, which a suspended or
+// busy application can stall indefinitely. Every call therefore runs as a
+// bounded step that reports an explicit failure instead of wedging the helper;
+// a mutation that cannot settle also quarantines later mutations (settlement.h).
+constexpr DWORD kProviderCallTimeoutMs = 5000;
 
-struct BoundedState {
-  std::atomic<HRESULT> result{E_PENDING};
-  HANDLE done{nullptr};
-
-  ~BoundedState() {
-    if (done != nullptr) {
-      CloseHandle(done);
-    }
-  }
-};
-
-HRESULT RunBounded(std::function<HRESULT()> call, DWORD timeoutMs, bool& completed) {
-  const auto state = std::make_shared<BoundedState>();
-  state->done = CreateEventW(nullptr, TRUE, FALSE, nullptr);
-  if (state->done == nullptr) {
-    completed = true;
-    return call();
-  }
-  std::thread worker([state, call]() {
-    const HRESULT initialized = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-    state->result.store(call());
-    SetEvent(state->done);
-    if (SUCCEEDED(initialized)) {
-      CoUninitialize();
-    }
-  });
-  worker.detach();
-  completed = WaitForSingleObject(state->done, timeoutMs) == WAIT_OBJECT_0;
-  return completed ? state->result.load() : E_PENDING;
+template <typename Fn>
+HRESULT BoundedMutation(Fn&& call, std::string_view operation) {
+  return RunBoundedProviderCall(ProviderCall::Mutation, std::function<HRESULT()>(std::forward<Fn>(call)),
+                                kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
 }
 
 template <typename Fn>
-HRESULT BoundedCall(Fn&& call, std::string_view operation, std::string code) {
-  bool completed = false;
-  const HRESULT result = RunBounded(std::function<HRESULT()>(std::forward<Fn>(call)), kMutationTimeoutMs, completed);
-  if (!completed) {
-    Fail(std::move(code),
-         std::string(operation) + " did not complete within " + std::to_string(kMutationTimeoutMs) + " ms.");
-  }
-  return result;
+HRESULT BoundedRead(Fn&& call, std::string_view operation) {
+  return RunBoundedProviderCall(ProviderCall::Read, std::function<HRESULT()>(std::forward<Fn>(call)),
+                                kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
 }
 
 // Small RAII wrapper so every cached property read clears its VARIANT.
@@ -974,8 +946,7 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
 void Automation::SetFocus(const std::string& elementId) {
   const ElementRecord& record = RequireRecord(elementId);
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
-  const HRESULT result =
-      BoundedCall([element]() { return element->SetFocus(); }, "Focusing the element", kErrorAutomationFailed);
+  const HRESULT result = BoundedMutation([element]() { return element->SetFocus(); }, "Focusing the element");
   if (result == UIA_E_ELEMENTNOTAVAILABLE) {
     Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
   }
@@ -988,8 +959,8 @@ bool Automation::HasKeyboardFocus(const std::string& elementId) {
   const ElementRecord& record = RequireRecord(elementId);
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
   const auto focused = std::make_shared<BOOL>(FALSE);
-  const HRESULT result = BoundedCall([element, focused]() { return element->get_CurrentHasKeyboardFocus(focused.get()); },
-                                     "Reading the element focus state", kErrorAutomationFailed);
+  const HRESULT result = BoundedRead([element, focused]() { return element->get_CurrentHasKeyboardFocus(focused.get()); },
+                                     "Reading the element focus state");
   return SUCCEEDED(result) && *focused != FALSE;
 }
 
@@ -1001,44 +972,42 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
   winrt::com_ptr<IUIAutomationInvokePattern> invoke;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_InvokePatternId, IID_PPV_ARGS(invoke.put()))) && invoke) {
     CheckHresult(kErrorAutomationFailed, "Invoking the element",
-                 BoundedCall([invoke]() { return invoke->Invoke(); }, "Invoking the element", kErrorAutomationFailed));
+                 BoundedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationTogglePattern> toggle;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_TogglePatternId, IID_PPV_ARGS(toggle.put()))) && toggle) {
     CheckHresult(kErrorAutomationFailed, "Toggling the element",
-                 BoundedCall([toggle]() { return toggle->Toggle(); }, "Toggling the element", kErrorAutomationFailed));
+                 BoundedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationSelectionItemPattern> selection;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_SelectionItemPatternId, IID_PPV_ARGS(selection.put()))) &&
       selection) {
-    CheckHresult(
-        kErrorAutomationFailed, "Selecting the element",
-        BoundedCall([selection]() { return selection->Select(); }, "Selecting the element", kErrorAutomationFailed));
+    CheckHresult(kErrorAutomationFailed, "Selecting the element",
+                 BoundedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_ExpandCollapsePatternId, IID_PPV_ARGS(expand.put()))) && expand) {
     const auto state = std::make_shared<ExpandCollapseState>(ExpandCollapseState_Collapsed);
     CheckHresult(kErrorAutomationFailed, "Reading the expand state",
-                 BoundedCall([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
-                             "Reading the expand state", kErrorAutomationFailed));
+                 BoundedRead([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
+                             "Reading the expand state"));
     if (*state == ExpandCollapseState_LeafNode) {
       Fail(kErrorUnsupported, "The element is a leaf node and cannot be activated through accessibility.");
     }
     const bool collapse = *state == ExpandCollapseState_Expanded;
     CheckHresult(kErrorAutomationFailed, "Expanding or collapsing the element",
-                 BoundedCall([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
-                             "Expanding or collapsing the element", kErrorAutomationFailed));
+                 BoundedMutation([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
+                                 "Expanding or collapsing the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_LegacyIAccessiblePatternId, IID_PPV_ARGS(legacy.put()))) && legacy) {
-    CheckHresult(
-        kErrorAutomationFailed, "Invoking the legacy accessibility default action",
-        BoundedCall([legacy]() { return legacy->DoDefaultAction(); }, "Invoking the legacy accessibility default action",
-                    kErrorAutomationFailed));
+    CheckHresult(kErrorAutomationFailed, "Invoking the legacy accessibility default action",
+                 BoundedMutation([legacy]() { return legacy->DoDefaultAction(); },
+                                 "Invoking the legacy accessibility default action"));
     return;
   }
   Fail(kErrorUnsupported,
@@ -1053,19 +1022,19 @@ bool Automation::TryClearValue(const std::string& elementId) {
     return false;
   }
   const auto readOnly = std::make_shared<BOOL>(TRUE);
-  const HRESULT state = BoundedCall([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
-                                    "Reading the element value state", kErrorAutomationFailed);
+  const HRESULT state = BoundedRead([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
+                                    "Reading the element value state");
   if (FAILED(state) || *readOnly != FALSE) {
     return false;
   }
-  const HRESULT result = BoundedCall(
+  const HRESULT result = BoundedMutation(
       [value]() {
         const BSTR empty = SysAllocString(L"");
         const HRESULT assigned = value->SetValue(empty);
         SysFreeString(empty);
         return assigned;
       },
-      "Clearing the element value", kErrorAutomationFailed);
+      "Clearing the element value");
   return SUCCEEDED(result);
 }
 

@@ -76,3 +76,18 @@ export function attachMutationReport<T extends Error>(error: T, report: Mutation
 export function readMutationReport(error: unknown): MutationReport | undefined {
   return error instanceof Error ? (error as ReportCarrier).mutation : undefined;
 }
+
+type ProviderQuarantineCarrier = { providerQuarantined?: true };
+
+/**
+ * Marks a failure raised by a provider that quarantined itself, so the service quarantines the target to match even
+ * when the failure was a refusal that dispatched nothing.
+ */
+export function attachProviderQuarantine<T extends Error>(error: T): T {
+  (error as T & ProviderQuarantineCarrier).providerQuarantined = true;
+  return error;
+}
+
+export function readProviderQuarantine(error: unknown): boolean {
+  return error instanceof Error && (error as ProviderQuarantineCarrier).providerQuarantined === true;
+}

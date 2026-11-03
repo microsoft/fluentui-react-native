@@ -3,8 +3,18 @@
 #include <algorithm>
 #include <cmath>
 
+#include "settlement.h"
+
 namespace furn {
 namespace {
+
+// Commands that change application or window state. Observation, input
+// release, lifecycle cleanup, and disposal stay available while a mutation is
+// unsettled so the session can be re-observed and shut down safely.
+bool IsGuardedMutation(const std::string& command) {
+  return command == "click" || command == "clear" || command == "sendKeys" || command == "performActions" ||
+         command == "activate" || command == "setWindowRect";
+}
 
 json::Value SerializeRect(const RectD& rect) {
   json::Value value = json::Value::Object();
@@ -257,6 +267,9 @@ void Driver::ReleaseInput() noexcept {
 CommandResult Driver::Execute(const std::string& command, const json::Value& params, const CancellationToken& token) {
   CommandResult result;
   token.ThrowIfCancelled();
+  if (IsGuardedMutation(command)) {
+    RequireMutationsAllowed();
+  }
 
   if (command == "probe") {
     result.result = ProbeResult(params);

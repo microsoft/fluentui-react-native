@@ -147,6 +147,30 @@ describe('Desktop Driver mutation settlement', () => {
     });
   });
 
+  test("mirrors a provider's own quarantine, so a refused mutation still stops the target", async () => {
+    await withFixture(
+      { faults: { click: { mode: 'reject', providerQuarantined: true } } },
+      async ({ element: findElement, harness, session }) => {
+        const element = await findElement();
+
+        await expect(element.click()).rejects.toMatchObject({
+          data: { mutation: { disposition: 'rejected', effect: 'none', quarantined: true } },
+        });
+        await expect(element.click()).rejects.toMatchObject({
+          ...blockedByQuarantine,
+          message: expect.stringContaining('native provider quarantined itself'),
+        });
+        expect(recordedClicks(harness)).toHaveLength(0);
+        await expect(readQuarantine(harness)).resolves.toMatchObject({
+          effect: 'unknown',
+          origin: 'provider',
+          sessionId: session.id,
+          targetId: harness.target.id,
+        });
+      },
+    );
+  });
+
   test('reports a mutation that lands after its deadline as applied without quarantining the target', async () => {
     await withFixture(
       { faults: { click: { delayMs: 40, mode: 'late-success' } } },

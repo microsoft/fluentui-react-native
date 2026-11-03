@@ -9,9 +9,14 @@ owner_paths:
 
 **Status:** Implementation in progress. Reporter modes (section 5) have been
 implemented in the three JavaScript packages, and the Node timeout boundary
-now waits for an aborted host operation to settle. MR still requires Windows
-qualification; M0-M6 remain open unless marked below. This status does not
-claim native qualification.
+now waits for an aborted host operation to settle. Failed and cancelled
+mutations are settled: providers report an `effect`, and the service
+quarantines a target whose mutation may have landed. The macOS helper reports
+it through an effect ledger and the Windows helper fails closed on unsettled UI
+Automation mutations. MR has Windows/PowerShell pipe qualification; GitHub
+Actions rendering and console-interrupt coverage remain. M0-M6 remain open
+unless marked below. This status does not claim real-application
+qualification.
 Planning baseline: `c84acb741`, 2026-11-02.
 
 **Delivery constraint:** Complete the shared architecture, macOS implementation,
@@ -544,6 +549,39 @@ Keep UIA operations on correctly initialized/marshaled COM workers. Document
 the bounded-call settlement strategy explicitly; abandoning a thread and
 returning a timeout is not an acceptable guarantee.
 
+**Settlement progress:** the helper now reports an unsettled UIA mutation as
+`mutation-indeterminate`, quarantines its session, and refuses later UIA,
+physical-input, activation, and window-geometry mutations as
+`target-quarantined` ([contract](../native/windows/README.md#unsettled-mutations)).
+Native self-tests cover the stalled, refused, late-completion, and read paths
+with a controllable stalled provider call. Node reads those codes as effects
+(`mutation-indeterminate` is `unknown`, `target-quarantined` is `none`) and
+mirrors the provider's quarantine at the service, so no Node change is needed
+for the Windows contract to take effect. Still open for Windows: quarantine
+persistence across helper restarts and the trusted `recover` operation (M2);
+delivery evidence for physical `SendInput` rather than its return value;
+re-observing actual application effects after a late completion; and a
+qualification run against a genuinely hung React Native app.
+
+**Windows follow-ups for the settlement contract** (each is native work that
+cannot be verified from macOS):
+
+1. Report `effect` (`none`, `partial`, `unknown`) on every failed or cancelled
+   mutating command, as the macOS helper does
+   ([contract](../native/PROTOCOL.md#mutation-settlement)). A cancelled or
+   non-timeout UIA failure currently carries no effect, so Node reads it as
+   `unknown` and quarantines the target. That is safe but over-broad. A request
+   refused or rejected before any provider call, or cancelled while still
+   queued, is `none`.
+2. Scope the helper's ledger to the application lease instead of the process,
+   and clear it when `closeApplication` verifies the exit of a launched
+   application. Node lifts its own quarantine in that case; without this, one
+   unsettled call keeps refusing mutations for every other target and every
+   later session until the service restarts. Attached applications stay
+   quarantined.
+3. Add native self-test cases for the effect reported by each mutating
+   command's rejection, cancellation, and abandoned paths.
+
 Windows native events need a real implementation rather than inferred parity
 from macOS. Operation-time permission/capability changes must be surfaced
 truthfully even if session-start feature negotiation previously succeeded.
@@ -586,12 +624,26 @@ Exercise late native effects and target-wide exclusion in matching-OS tests.
 If a provider cannot establish settlement, implement an explicit fail-closed
 outcome rather than advancing its queue.
 
-**Progress:** the Node timeout wrapper now aborts at the deadline but does not
-return until the host operation promise settles. This prevents a Node-level
-timeout from advancing its queues early; it does not resolve or qualify
-provider-level late effects, especially the Windows UIA bounded worker.
-Portable story-plan reads and actions now reject selectors that match multiple
-elements; explicit `count` and `exists` expectations remain multi-match-safe.
+**Progress:** the Node timeout wrapper aborts at the deadline and does not
+return until the host operation promise settles, so a Node-level timeout cannot
+advance its queues early. Settlement is implemented across Node, the fake host,
+and both providers' contracts. Providers report an additive FDR1 `effect` on
+failed and cancelled mutating commands (`none`, `partial`, `unknown`; absent
+means `unknown`). The service settles it into an `applied`, `indeterminate`, or
+`rejected` disposition under `data.mutation`, quarantines a target whose
+mutation may have landed, and blocks every mutating route, story operation, and
+new session for it ([contract](../native/PROTOCOL.md#mutation-settlement)). A
+late success after a Node timeout is reported as applied. The macOS helper
+tracks primary mutations in an effect ledger and reports `effect`; the Windows
+helper reports `mutation-indeterminate` and `target-quarantined`. Node reads
+both as the same effects, so the providers settle identically. A launched
+target's quarantine lifts when its application's exit is verified; an attached
+target stays quarantined until the M2 `recover` operation. Still open: the
+Windows follow-ups in section 7, persisting in-flight records across a service
+restart, `recover`, and qualification against real hung applications on either
+OS. Portable story-plan reads and actions now reject selectors that match
+multiple elements; explicit `count` and `exists` expectations remain
+multi-match-safe.
 
 The journal records versioned operations, explicit checks, outcomes, and
 provenance, redacted **before persistence**. Do not record passwords or default
@@ -618,9 +670,13 @@ record, plus the commands and reporting references.
 **Progress:** shared mode/framing helpers, bounded JSON/NDJSON reports,
 delegated setting propagation, structured CLI errors, and Storybook service
 readiness records are implemented. Mac-host package checks pass, including
-synthetic 10,000-test, 1,000-failure, and 1 MiB-message coverage. MR remains
-open for Windows/PowerShell and GitHub Actions qualification, plus any
-remaining exit-path gaps.
+synthetic 10,000-test, 1,000-failure, and 1 MiB-message coverage. Windows
+pipe qualification found and fixed two defects: an empty `DESKTOP_REPORTER`
+or `DESKTOP_EVENTS` (common in CI templates) was rejected instead of treated
+as unset, and a consumer that closed stdout crashed the one-shot CLI entry
+points with an unhandled `EPIPE`. MR remains open for GitHub Actions
+rendering, interruption on Windows (signals cannot be delivered to a child
+there; it needs console Ctrl+C), and any remaining exit-path gaps.
 
 **Complete when:** every reporter mode is tested on every exit path: pass,
 test failure, infrastructure failure, usage or configuration error,
@@ -873,13 +929,83 @@ Reporter implementation checks on macOS:
   aggregate completed 176 tasks with 0 failed, skipped, pending, or aborted.
 
 The synthetic reporter tests cover 10,000 selected tests, 1,000 failures, and
-1 MiB event text. Windows/PowerShell, Windows native contracts, both Windows
-Storybook renderers, real-app smoke on either OS, MCP clients, and efficiency
-benchmarks are **not run**. Native macOS application smoke and the full plan's
-security/ownership qualification are also **not run**. M1's Node timeout
-boundary and selector uniqueness are partial implementations only; provider
-late-effect behavior is unresolved. M0-M6 and the final branch qualification
-remain open. No commit, push, or PR was created.
+1 MiB event text. On macOS, Windows/PowerShell, Windows native contracts, and
+both Windows Storybook renderers were **not run**; the Windows block below
+records what ran afterward. Real-app smoke on either OS, MCP clients, and
+efficiency benchmarks are **not run**. Native macOS application smoke and the
+full plan's security/ownership qualification are also **not run**. M1's Node
+timeout boundary and selector uniqueness are partial implementations only;
+provider late-effect behavior is unresolved. M0-M6 and the final branch
+qualification remain open.
+
+Windows implementation checks (Windows 11, PowerShell 7, Node 26):
+
+- The three owning package format, lint, build, and full test suites **passed**.
+  The checks found and fixed one test defect: the `desktop-test` reporting
+  results test hardcoded a POSIX temporary path.
+- A throwaway harness drove all three CLIs over real operating-system pipes
+  (14 of 15 expectations **passed**). It found and the branch now fixes two
+  defects: an empty `DESKTOP_REPORTER` or `DESKTOP_EVENTS` was rejected instead
+  of treated as unset, and a consumer closing stdout crashed the one-shot CLIs
+  with an unhandled `EPIPE`. Both have regression tests, and the closed-stdout
+  test was verified to fail without the guard. The one remaining harness
+  mismatch is `--reporter bogus`, which Commander rejects before mode
+  resolution, as the contract allows; it is not a defect.
+- `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand` in the driver package
+  **passed** (90 passed, 2 skipped). The skips are the macOS-only tests, so the
+  Windows native contract ran. The helper self-test, built from source with
+  `node config/cli.cjs build-driver --platform windows`, **passed** 182 of 182
+  checks, including the new `TestMutationSettlement` cases.
+- The `desktop-test` owned-service contract's temporary-directory cleanup hit a
+  transient Windows `EPERM` under `lage buildci` parallel load; it now retries
+  the removal. One `storybook-desktop` `sourceConfig` test also timed out its
+  10 s child process once under the same load (244 ms standalone, no diff in
+  that area); a re-run passed without changes.
+- `yarn oxfmt --check`, `yarn check-agent-instructions`, `git diff --check`,
+  `yarn clean-lage-cache`, and `yarn lage buildci` **passed**. The clean-cache
+  aggregate completed 176 tasks with 0 failed.
+- `yarn markdown-link-check -c .github/markdown-link-check-config.json` over all
+  39 Markdown files in the three packages **passed**. `yarn lage test-links`
+  itself **failed** on this Windows machine for 71 packages, including
+  untouched files, while the direct invocation of the same checker passes for
+  those files. Treat the Windows lage worker as unsupported until it is fixed;
+  its result says nothing about the links.
+
+Windows items **not run**: GitHub Actions rendering, signal or console Ctrl+C
+interruption (a signal cannot be delivered to a child process on Windows),
+both Windows Storybook renderers, real-app smoke, and qualification against a
+genuinely hung React Native application.
+
+Settlement implementation checks on macOS (after merging the Windows commit):
+
+- The Swift helper self-test built outside the repository tree **passed** 148
+  of 148 checks, including `testEffectLedger` and `testMutationEffects`. With
+  `effects.reset()` removed from `Driver.init`, four residue checks failed;
+  they pass again with it restored.
+- `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand` in the driver package
+  **passed** (138 passed, 2 skipped). The coordinator built, signed, and
+  handshook with the real macOS helper, and the gated test asserted the
+  reported effect over FDR1: `click` on a missing element is `stale-element`
+  with effect `none`; `sendKeys` without text is `invalid-params` with effect
+  `none`; an untracked command reports no effect; cancelling an unknown id
+  reports `none`. A deliberately wrong expectation made it fail.
+- The driver suite without the gate **passed** (137 passed, 3 skipped), and the
+  `desktop-test` (32) and `storybook-desktop` (182 passed, 2 skipped) suites
+  **passed**, as did format, lint, and build for all three packages. These
+  re-ran after the merge because the shared reporter, the three CLI entry
+  points, and `NativeDesktopHost` changed.
+- The unified provider contract is covered by unit tests: both Windows codes
+  translate to their effects and mirror the provider's quarantine at the service,
+  and the fake host's `providerQuarantined` fault proves a refused mutation
+  still stops the target. Removing the mirroring branch makes that test fail.
+
+Settlement items **not run**: the merged Node mapping against the real Windows
+helper (macOS cannot build it, so the Windows lane must re-run its gated
+native contract and self-test after pulling this branch), a genuinely hung
+application on either OS, and the macOS ledger against real AX failures. The
+ledger counts primary mutations only, so a failed AX call it cannot classify
+reports `unknown` and quarantines the target; expect some false quarantines
+until real applications show which AX errors are safe to classify as `none`.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

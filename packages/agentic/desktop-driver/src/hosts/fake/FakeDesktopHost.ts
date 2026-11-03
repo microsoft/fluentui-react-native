@@ -17,7 +17,7 @@ import type {
   Rect,
 } from '../../host/types.js';
 import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
-import { attachFailureEffect } from '../../protocol/settlement.js';
+import { attachFailureEffect, attachProviderQuarantine } from '../../protocol/settlement.js';
 import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName } from '../../protocol/types.js';
 
@@ -62,12 +62,14 @@ export type FakeMutation =
  * - `late-success`: ignores the abort and applies the change after `delayMs`, so the driver sees a timeout for a command
  *   that took effect.
  *
- * `effect: 'unreported'` models a provider that attaches no effect to its failure.
+ * `effect: 'unreported'` models a provider that attaches no effect to its failure. `providerQuarantined` models a
+ * provider that quarantined itself earlier and reports that on this failure, as a refusal that dispatched nothing.
  */
 export type FakeFault = {
   delayMs?: number;
   effect?: MutationEffect | 'unreported';
   mode: 'hang' | 'late-success' | 'lost-response' | 'reject';
+  providerQuarantined?: boolean;
   /** How many calls the fault applies to before the command behaves normally again. Defaults to 1. */
   times?: number;
 };
@@ -180,8 +182,10 @@ export class FakeDesktopHost implements DesktopHost {
     }
     this.actions.push({ type: 'fault', command, mode: fault.mode });
     switch (fault.mode) {
-      case 'reject':
-        throw reportEffect(new Error(`Injected ${command} failure.`), fault.effect ?? 'none');
+      case 'reject': {
+        const failure = reportEffect(new Error(`Injected ${command} failure.`), fault.effect ?? 'none');
+        throw fault.providerQuarantined ? attachProviderQuarantine(failure) : failure;
+      }
       case 'hang':
         return untilAborted(signal, fault.effect ?? 'unknown');
       case 'lost-response':

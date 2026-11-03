@@ -8,6 +8,7 @@ import {
   resolveDesktopEventLevel,
   resolveDesktopReporterMode,
   resolveDesktopReporterModeFromArgv,
+  tolerateClosedDesktopStdout,
 } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopEventLevel } from '@fluentui-react-native/desktop-test/reporting';
 import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/commands';
@@ -70,7 +71,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           environment: process.env.DESKTOP_REPORTER,
           configured: config.desktop?.reporting?.reporter ?? config.desktop?.reporting?.console,
         });
-        const requestedEventLevel = reporterFlags.events ?? process.env.DESKTOP_EVENTS ?? config.desktop?.reporting?.events;
+        const requestedEventLevel = reporterFlags.events ?? (process.env.DESKTOP_EVENTS || undefined) ?? config.desktop?.reporting?.events;
         if (requestedEventLevel && reporterMode !== 'ndjson')
           throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
         if (requestedEventLevel)
@@ -198,6 +199,7 @@ function addInstanceCommand(program: Command, getApi: GetApi): void {
 }
 
 export async function runDesktopStorybookCli(argv: readonly string[] = process.argv): Promise<void> {
+  tolerateClosedDesktopStdout();
   const options: CreateDesktopStorybookCommandOptions = {};
   const program = createDesktopStorybookCommand(options);
   let session: DesktopReportSession | undefined;
@@ -234,7 +236,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       environment: process.env.DESKTOP_REPORTER,
       configured: options.config.desktop?.reporting?.reporter ?? options.config.desktop?.reporting?.console,
     });
-    const requestedEventLevel = reporterFlags.events ?? process.env.DESKTOP_EVENTS ?? options.config.desktop?.reporting?.events;
+    const requestedEventLevel =
+      reporterFlags.events ?? (process.env.DESKTOP_EVENTS || undefined) ?? options.config.desktop?.reporting?.events;
     if (requestedEventLevel && reporterMode !== 'ndjson')
       throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
     const eventLevel = resolveDesktopEventLevel({

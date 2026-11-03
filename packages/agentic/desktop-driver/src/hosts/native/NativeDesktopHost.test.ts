@@ -2,7 +2,7 @@ import { NativeDriverError } from '../../native/NativeDriverError';
 import type { NativeDriverArtifact } from '../../native/types';
 import { toWebDriverError } from '../../protocol/errors';
 import type { WebDriverErrorCode } from '../../protocol/errors';
-import { attachFailureEffect, readFailureEffect } from '../../protocol/settlement';
+import { attachFailureEffect, dispositionOfFailure, readFailureEffect, readProviderQuarantine } from '../../protocol/settlement';
 import {
   applyDisabledInputFeaturePolicy,
   FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES,
@@ -39,6 +39,33 @@ describe('NativeDesktopHost error translation', () => {
     },
   );
 
+  describe('provider settlement codes', () => {
+    test.each<[nativeCode: string, effect: string, disposition: string]>([
+      ['mutation-indeterminate', 'unknown', 'indeterminate'],
+      ['target-quarantined', 'none', 'rejected'],
+    ])('reads %s as a %s effect that a quarantined provider reports', (nativeCode, effect, disposition) => {
+      const translated = translateNativeError(new NativeDriverError(nativeCode, 'native failure', { command: 'click' }));
+
+      expect(toWebDriverError(translated)).toMatchObject({
+        code: 'unknown error',
+        data: { command: 'click', nativeCode },
+        message: 'native failure',
+      });
+      expect(readFailureEffect(translated)).toBe(effect);
+      expect(dispositionOfFailure(translated)).toBe(disposition);
+      expect(readProviderQuarantine(translated)).toBe(true);
+    });
+
+    test('lets the settlement code decide the effect over a contradictory report', () => {
+      const reported = attachFailureEffect(new NativeDriverError('mutation-indeterminate', 'native failure'), 'none');
+
+      expect(readFailureEffect(translateNativeError(reported))).toBe('unknown');
+    });
+
+    test('does not mark an ordinary failure as a provider quarantine', () => {
+      expect(readProviderQuarantine(translateNativeError(new NativeDriverError('no-such-element', 'native failure')))).toBe(false);
+    });
+  });
   describe('NativeDesktopHost input policy', () => {
     const artifact: NativeDriverArtifact = {
       architecture: 'x64',

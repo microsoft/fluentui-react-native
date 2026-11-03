@@ -21,7 +21,8 @@ import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
 import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
 import type { WebDriverErrorCode } from '../../protocol/errors.js';
-import { attachFailureEffect, readFailureEffect } from '../../protocol/settlement.js';
+import { attachFailureEffect, attachProviderQuarantine, readFailureEffect } from '../../protocol/settlement.js';
+import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopEndpoint } from '../../protocol/types.js';
 import { NativeHostProcess } from './NativeHostProcess.js';
 
@@ -487,9 +488,24 @@ function rejectedBeforeDispatch<T>(error: T): T {
   return error instanceof Error ? attachFailureEffect(error, 'none') : error;
 }
 
+/**
+ * Codes a provider raises when it bounds its own application calls and quarantines itself. Each carries its effect, so
+ * a provider that reports no `effect` is still read correctly: an unsettled mutation may have landed, while a refused
+ * one never reached the application.
+ */
+const nativeSettlementEffects: Readonly<Record<string, MutationEffect>> = {
+  'mutation-indeterminate': 'unknown',
+  'target-quarantined': 'none',
+};
+
 export function translateNativeError(error: unknown): unknown {
   if (!(error instanceof NativeDriverError)) {
     return error;
+  }
+  const settlementEffect = nativeSettlementEffects[error.code];
+  if (settlementEffect) {
+    const settled = new HostWebDriverError('unknown error', error.message, { ...error.data, nativeCode: error.code });
+    return attachProviderQuarantine(attachFailureEffect(settled, settlementEffect));
   }
   const effect = readFailureEffect(error);
   if (error.code === 'unsupported-operation') {
