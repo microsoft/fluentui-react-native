@@ -522,6 +522,25 @@ The macOS provider additionally implements:
 These modes emit versioned unframed diagnostic JSON. Ordinary handshake,
 self-test, stdio, build, and resolution paths never prompt for privacy access.
 
+The Windows provider additionally implements:
+
+```text
+--private-storage
+--service-identity
+```
+
+These are one-shot modes, not FDR1 sessions. Each reads one JSON request from
+standard input (at most 128 KiB, a leading UTF-8 byte order mark ignored),
+writes one JSON line to standard output, and exits 0 exactly when the line has
+`"ok":true`. A completed `--service-identity` verification that finds a
+mismatch is still `"ok":true` with `"verified":false`. A missing, empty,
+oversize, or malformed request answers `{"ok":false,"reason":"request"}`.
+Record contents travel as canonical base64 in the request, never on a command
+line, and a failure carries only a fixed `reason`, an optional `detail`, and an
+optional `win32` code, never a path or a record's contents. The Node adapters in
+`src/authority` own the request and response shapes; see
+[the Windows private storage and service verifier](../references/security.md#windows-private-storage-and-service-verifier).
+
 ## Change rules
 
 When changing FDR1:
