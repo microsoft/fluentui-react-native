@@ -134,6 +134,20 @@ describe('desktop-driver CLI', () => {
     }
   });
 
+  test('does not crash when the consumer closes stdout before a structured error is written', async () => {
+    const response = await new Promise<{ code: number | null; stderr: string }>((resolve, reject) => {
+      const child = spawnCli(['--reporter', 'json', 'unknown']);
+      const stderr: Buffer[] = [];
+      child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+      child.stdout.destroy();
+      child.once('error', reject);
+      child.once('close', (code) => resolve({ code, stderr: Buffer.concat(stderr).toString('utf8') }));
+    });
+
+    expect(response.stderr).toBe('');
+    expect(response.code).toBe(1);
+  });
+
   test('runs noninteractive permission diagnostics through the resolved macOS helper', async () => {
     const artifact = createNativeArtifact({
       architecture: 'arm64',

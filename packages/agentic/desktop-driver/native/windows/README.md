@@ -13,6 +13,7 @@ third-party native dependency.
 | `src/host.*`                     | FDR1 request loop, cancellation, and command dispatch                     |
 | `src/application.*`              | Launch/attach leases, process and window ownership                        |
 | `src/automation.*`               | UI Automation tree, lookup, state, and opaque identities                  |
+| `src/settlement.*`               | Bounded provider calls and the unsettled-mutation quarantine              |
 | `src/input.*`                    | Physical/accessibility activation, keyboard, pointer, wheel, and recovery |
 | `src/inputlock.*`                | Session-local cross-process physical-input mutex                          |
 | `src/capture.*`                  | HWND Windows Graphics Capture, D3D11, WIC PNG output                      |
@@ -136,6 +137,31 @@ A subtree walk retries while its root remains available if a descendant
 becomes unavailable, or if a closing popup island's provider reports a UI
 Automation timeout or an unspecified failure. Only an unavailable root is a
 stale element.
+
+### Unsettled mutations
+
+UI Automation mutations (`SetFocus`, `Invoke`, `Toggle`, `Select`,
+`Expand`/`Collapse`, `DoDefaultAction`, and `SetValue`) run on a bounded worker
+with a five-second deadline because a suspended or busy application can stall
+its UI thread indefinitely. A deadline does not cancel the provider call: the
+application can still apply the effect later. The helper therefore reports
+`mutation-indeterminate` and quarantines its session instead of treating the
+timeout as a rejection, so nothing replays the call or interleaves new input
+with a late effect.
+
+While quarantined, `click`, `clear`, `sendKeys`, `performActions`, `activate`,
+and `setWindowRect` fail with `target-quarantined` before reaching the
+application, and the physical `clear` fallback never runs after an unsettled
+`SetValue`. Observation commands, `releaseActions`, application and window
+close, and `dispose` stay available so the application can be re-observed and
+depressed input released. A late completion is reported in the refusal but does
+not lift the quarantine, because its effect is still unverified. A stalled
+read fails as `automation-failed` and does not quarantine.
+
+The quarantine lives in the helper process, so it ends with the helper. It does
+not yet persist across helper restarts or provide an operator `recover`
+operation; an unsettled call can still land after the helper exits. See
+[the remaining-work plan](../../references/remaining-work.md).
 
 ## Verification and tests
 

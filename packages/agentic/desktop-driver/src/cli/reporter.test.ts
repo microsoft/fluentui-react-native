@@ -1,3 +1,5 @@
+import { PassThrough } from 'node:stream';
+
 import {
   formatDesktopReporterError,
   formatDesktopReporterValue,
@@ -5,6 +7,7 @@ import {
   resolveDesktopEventLevel,
   resolveDesktopReporterMode,
   resolveDesktopReporterModeFromArgv,
+  tolerateClosedDesktopStdout,
 } from './reporter.js';
 
 describe('desktop reporter modes', () => {
@@ -12,6 +15,23 @@ describe('desktop reporter modes', () => {
     expect(resolveDesktopReporterMode({ flag: 'json', environment: 'ndjson', configured: 'plain' })).toBe('json');
     expect(resolveDesktopReporterMode({ environment: 'ndjson', configured: 'plain' })).toBe('ndjson');
     expect(resolveDesktopReporterMode({ configured: 'github-actions' })).toBe('github-actions');
+  });
+
+  test('treats empty environment and configuration values as unset', () => {
+    expect(resolveDesktopReporterMode({ environment: '', configured: ' ', githubActions: false })).toBe('plain');
+    expect(resolveDesktopReporterMode({ environment: '', configured: 'ndjson' })).toBe('ndjson');
+    expect(resolveDesktopEventLevel({ environment: '', configured: 'all' })).toBe('all');
+    expect(resolveDesktopEventLevel({ environment: '' })).toBe('milestones');
+  });
+
+  test('keeps a consumer-closed stdout from crashing a command', () => {
+    const stream = new PassThrough() as unknown as NodeJS.WriteStream;
+    tolerateClosedDesktopStdout(stream);
+    tolerateClosedDesktopStdout(stream);
+    expect(stream.listenerCount('error')).toBe(1);
+    expect(() => stream.emit('error', Object.assign(new Error('closed'), { code: 'EPIPE' }))).not.toThrow();
+    expect(() => stream.emit('error', Object.assign(new Error('closed'), { code: 'ERR_STREAM_DESTROYED' }))).not.toThrow();
+    expect(() => stream.emit('error', new Error('disk failure'))).toThrow('disk failure');
   });
 
   test('resolves auto to the current human renderer', () => {

@@ -3,20 +3,25 @@
 #include <windows.h>
 
 #include <algorithm>
+#include <atomic>
 #include <cmath>
+#include <functional>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <thread>
 #include <vector>
 
 #include "automation.h"
 #include "common.h"
+#include "driver.h"
 #include "framing.h"
 #include "geometry.h"
 #include "host.h"
 #include "input.h"
 #include "inputlock.h"
 #include "json.h"
+#include "settlement.h"
 
 namespace furn {
 namespace {
@@ -550,6 +555,106 @@ void TestPhysicalInputLock() {
   Check(acquireElsewhere(500) == "acquired", "adoption releases the mutex when recovery finishes");
 }
 
+// Manual-reset event that outlives the stalled worker which waits on it.
+struct Gate {
+  HANDLE event{CreateEventW(nullptr, TRUE, FALSE, nullptr)};
+  ~Gate() { CloseHandle(event); }
+  Gate() = default;
+  Gate(const Gate&) = delete;
+  Gate& operator=(const Gate&) = delete;
+  void Open() const { SetEvent(event); }
+  HRESULT Hold() const {
+    WaitForSingleObject(event, 10000);
+    return S_OK;
+  }
+};
+
+void TestMutationSettlement() {
+  ResetMutationQuarantineForTesting();
+  Check(!MutationsQuarantined(), "a fresh session has no unsettled mutation");
+
+  const auto outcome = [](ProviderCall kind, std::function<HRESULT()> call, DWORD timeoutMs) {
+    try {
+      const HRESULT result =
+          RunBoundedProviderCall(kind, std::move(call), timeoutMs, "Testing the provider", kErrorAutomationFailed);
+      return std::string(SUCCEEDED(result) ? "completed" : "failed");
+    } catch (const HelperError& error) {
+      return std::string(error.code());
+    }
+  };
+  const auto refusalMessage = []() {
+    try {
+      RequireMutationsAllowed();
+    } catch (const HelperError& error) {
+      return std::string(error.code()) + ": " + error.what();
+    }
+    return std::string("allowed");
+  };
+
+  Check(outcome(ProviderCall::Mutation, []() { return S_OK; }, 1000) == "completed",
+        "a settled mutation reports its result");
+  Check(outcome(ProviderCall::Mutation, []() { return E_FAIL; }, 1000) == "failed",
+        "a rejected mutation reports its failure");
+  Check(!MutationsQuarantined(), "settled mutations never quarantine the session");
+
+  const auto readGate = std::make_shared<Gate>();
+  Check(outcome(ProviderCall::Read, [readGate]() { return readGate->Hold(); }, 50) == kErrorAutomationFailed,
+        "a stalled read fails with the caller's error code");
+  Check(!MutationsQuarantined(), "a stalled read does not quarantine the session");
+  readGate->Open();
+
+  const auto mutationGate = std::make_shared<Gate>();
+  Check(outcome(ProviderCall::Mutation, [mutationGate]() { return mutationGate->Hold(); }, 50) ==
+            kErrorMutationIndeterminate,
+        "a stalled mutation reports an indeterminate effect");
+  Check(MutationsQuarantined(), "a stalled mutation quarantines the session");
+
+  const auto laterRan = std::make_shared<std::atomic<bool>>(false);
+  Check(outcome(ProviderCall::Mutation, [laterRan]() {
+          laterRan->store(true);
+          return S_OK;
+        }, 1000) == kErrorTargetQuarantined,
+        "a later mutation is refused while quarantined");
+  Check(!laterRan->load(), "a refused mutation never reaches the provider");
+  Check(outcome(ProviderCall::Read, []() { return S_OK; }, 1000) == "completed",
+        "reads stay available for re-observation while quarantined");
+  Check(refusalMessage().find("target-quarantined: ") == 0 && refusalMessage().find("still pending") != std::string::npos,
+        "the refusal reports the pending operation");
+
+  Driver driver;
+  const CancellationToken token;
+  for (const char* command : {"click", "clear", "sendKeys", "performActions", "activate", "setWindowRect"}) {
+    std::string code = "none";
+    try {
+      driver.Execute(command, json::Value::Object(), token);
+    } catch (const HelperError& error) {
+      code = error.code();
+    }
+    Check(code == kErrorTargetQuarantined, std::string("the ") + command + " command is refused while quarantined");
+  }
+  std::string readCode = "none";
+  try {
+    driver.Execute("getWindowRect", json::Value::Object(), token);
+  } catch (const HelperError& error) {
+    readCode = error.code();
+  }
+  Check(readCode == kErrorInvalidParams, "window reads are not blocked by the quarantine");
+
+  mutationGate->Open();
+  std::string settled = refusalMessage();
+  for (int attempt = 0; attempt < 100 && settled.find("completed late") == std::string::npos; attempt += 1) {
+    Sleep(20);
+    settled = refusalMessage();
+  }
+  Check(settled.find("completed late") != std::string::npos,
+        "a late completion is reported but does not clear the quarantine");
+  Check(MutationsQuarantined(), "the quarantine outlives the late completion");
+
+  ResetMutationQuarantineForTesting();
+  Check(outcome(ProviderCall::Mutation, []() { return S_OK; }, 1000) == "completed",
+        "mutations run again after the session is reset");
+}
+
 }  // namespace
 
 int RunSelfTest() {
@@ -561,6 +666,7 @@ int RunSelfTest() {
   TestInputLedger();
   TestReleaseLedger();
   TestPhysicalInputLock();
+  TestMutationSettlement();
   TestSnapshotShape();
   TestLeaseIdentity();
   TestHello();

@@ -476,6 +476,12 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
   'no-such-window': 'no such window',
 };
 
+// A mutation that did not settle has an unknown effect; a refused one never reached the application.
+const nativeMutationDispositions: Readonly<Record<string, 'indeterminate' | 'rejected'>> = {
+  'mutation-indeterminate': 'indeterminate',
+  'target-quarantined': 'rejected',
+};
+
 export function translateNativeError(error: unknown): unknown {
   if (!(error instanceof NativeDriverError)) {
     return error;
@@ -485,6 +491,10 @@ export function translateNativeError(error: unknown): unknown {
   }
   if (error.code === 'stale-element') {
     return new HostStaleError(error.message);
+  }
+  const disposition = nativeMutationDispositions[error.code];
+  if (disposition) {
+    return new HostWebDriverError('unknown error', error.message, { ...error.data, disposition, nativeCode: error.code });
   }
   const webdriverCode = nativeWebDriverErrorCodes[error.code];
   if (webdriverCode) {

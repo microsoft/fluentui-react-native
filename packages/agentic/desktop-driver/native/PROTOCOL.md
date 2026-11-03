@@ -156,6 +156,17 @@ A failed response carries a structured helper error:
 platform error codes, but not native handles or unrestricted environment data.
 Node maps helper codes onto the public WebDriver error contract.
 
+Two additive codes separate mutation outcomes that a bare timeout conflates;
+they do not change the wire version. A provider that cannot establish whether a
+mutation was applied after its deadline fails the request with
+`mutation-indeterminate` and quarantines the session. While quarantined, every
+later mutation fails with `target-quarantined` before it reaches the
+application. Observation, input release, close, and `dispose` remain available.
+Node reports the codes as `unknown error` with `data.disposition` set to
+`indeterminate` or `rejected` and the helper code in `data.nativeCode`. A caller
+must never replay an indeterminate mutation. A provider that cannot establish
+settlement must fail closed this way rather than advance its queue.
+
 ### `event`
 
 Helpers can publish advisory application, window, structure, and transport

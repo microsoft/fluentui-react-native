@@ -27,6 +27,21 @@ describe('NativeDesktopHost error translation', () => {
     });
   });
 
+  describe('mutation settlement', () => {
+    test.each<[nativeCode: string, disposition: string]>([
+      ['mutation-indeterminate', 'indeterminate'],
+      ['target-quarantined', 'rejected'],
+    ])('reports %s as a %s mutation without hiding the native code', (nativeCode, disposition) => {
+      const error = toWebDriverError(translateNativeError(new NativeDriverError(nativeCode, 'native failure', { command: 'click' })));
+
+      expect(error).toMatchObject({
+        code: 'unknown error',
+        data: { command: 'click', disposition, nativeCode },
+        message: 'native failure',
+      });
+    });
+  });
+
   describe('NativeDesktopHost input policy', () => {
     const artifact: NativeDriverArtifact = {
       architecture: 'x64',

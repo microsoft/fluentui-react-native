@@ -18,8 +18,13 @@ export type DesktopReporterModeOptions = {
   githubActions?: boolean;
 };
 
+// CI templates and Windows shells commonly export an empty variable for an unset value.
+function nonEmpty(value: string | undefined): string | undefined {
+  return value?.trim() ? value : undefined;
+}
+
 export function resolveDesktopReporterMode(options: DesktopReporterModeOptions = {}): ResolvedDesktopReporterMode {
-  const configured = options.flag ?? options.environment ?? options.configured ?? 'auto';
+  const configured = options.flag ?? nonEmpty(options.environment) ?? nonEmpty(options.configured) ?? 'auto';
   if (!desktopReporterModes.includes(configured as DesktopReporterMode)) {
     throw Object.assign(new TypeError(`Reporter must be one of ${desktopReporterModes.join(', ')}. Received "${configured}".`), {
       code: 'config',
@@ -30,7 +35,7 @@ export function resolveDesktopReporterMode(options: DesktopReporterModeOptions =
 }
 
 export function resolveDesktopEventLevel(options: { flag?: string; environment?: string; configured?: string } = {}): DesktopEventLevel {
-  const configured = options.flag ?? options.environment ?? options.configured ?? 'milestones';
+  const configured = options.flag ?? nonEmpty(options.environment) ?? nonEmpty(options.configured) ?? 'milestones';
   if (!desktopEventLevels.includes(configured as DesktopEventLevel)) {
     throw Object.assign(new TypeError(`Event level must be one of ${desktopEventLevels.join(', ')}. Received "${configured}".`), {
       code: 'config',
@@ -60,6 +65,27 @@ export function resolveDesktopReporterModeFromArgv(argv: readonly string[], opti
     else if (argument.startsWith('--reporter=')) flag = argument.slice('--reporter='.length);
   }
   return resolveDesktopReporterMode({ ...options, flag: json ? 'json' : flag });
+}
+
+const closedStreamErrorCodes = new Set(['EPIPE', 'EOF', 'ECONNRESET', 'ERR_STREAM_DESTROYED']);
+const guardedStreams = new WeakSet<object>();
+
+/** True when a write failed because the consumer closed the pipe rather than because the output itself was invalid. */
+export function isClosedDesktopStreamError(error: unknown): boolean {
+  return Boolean(error && typeof error === 'object' && 'code' in error && closedStreamErrorCodes.has(String(error.code)));
+}
+
+/**
+ * Keeps a consumer that closes stdout from crashing a command with an unhandled stream error. Collectors that own
+ * presentation record the closed pipe as a reporting diagnostic from their write failure; here the command's own
+ * exit status stays authoritative and other stream errors keep their default failure behavior.
+ */
+export function tolerateClosedDesktopStdout(stream: NodeJS.WriteStream = process.stdout): void {
+  if (guardedStreams.has(stream)) return;
+  guardedStreams.add(stream);
+  stream.on('error', (error) => {
+    if (!isClosedDesktopStreamError(error)) throw error;
+  });
 }
 
 export function projectDesktopCliError(error: unknown): DesktopCliError {

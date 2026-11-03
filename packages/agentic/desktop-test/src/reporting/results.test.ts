@@ -1,3 +1,6 @@
+import os from 'node:os';
+import path from 'node:path';
+
 import { projectDesktopRunSummary, summarizeDesktopRun } from './results.js';
 
 describe('bounded desktop run summary', () => {
@@ -37,11 +40,12 @@ describe('bounded desktop run summary', () => {
         { path: 'junit.xml', description: 'JUnit' },
       ],
     });
-    const summary = projectDesktopRunSummary(result, '/tmp/desktop-artifacts/run-id');
+    const root = path.join(os.tmpdir(), 'desktop-artifacts', 'run-id');
+    const summary = projectDesktopRunSummary(result, root);
 
     expect(summary.problems.length).toBeLessThanOrEqual(10);
     expect(summary.omissions.problems).toBeGreaterThan(0);
     expect(Buffer.byteLength(JSON.stringify(summary))).toBeLessThanOrEqual(4 * 1024);
-    expect(summary.artifacts.runJson).toBe('/tmp/desktop-artifacts/run-id/run.json');
+    expect(summary.artifacts.runJson).toBe(path.join(root, 'run.json'));
   });
 });
