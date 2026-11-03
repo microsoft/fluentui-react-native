@@ -76,6 +76,50 @@ std::wstring ToWide(std::string_view value) {
   return output;
 }
 
+bool IsStrictUtf8(std::string_view bytes) {
+  std::size_t index = 0;
+  while (index < bytes.size()) {
+    const unsigned char lead = static_cast<unsigned char>(bytes[index]);
+    if (lead < 0x80) {
+      index += 1;
+      continue;
+    }
+    std::size_t continuation = 0;
+    std::uint32_t codepoint = 0;
+    std::uint32_t minimum = 0;
+    if ((lead & 0xE0) == 0xC0) {
+      continuation = 1;
+      codepoint = lead & 0x1F;
+      minimum = 0x80;
+    } else if ((lead & 0xF0) == 0xE0) {
+      continuation = 2;
+      codepoint = lead & 0x0F;
+      minimum = 0x800;
+    } else if ((lead & 0xF8) == 0xF0) {
+      continuation = 3;
+      codepoint = lead & 0x07;
+      minimum = 0x10000;
+    } else {
+      return false;
+    }
+    if (index + continuation >= bytes.size()) {
+      return false;
+    }
+    for (std::size_t offset = 1; offset <= continuation; offset += 1) {
+      const unsigned char next = static_cast<unsigned char>(bytes[index + offset]);
+      if ((next & 0xC0) != 0x80) {
+        return false;
+      }
+      codepoint = (codepoint << 6) | (next & 0x3F);
+    }
+    if (codepoint < minimum || codepoint > 0x10FFFF || (codepoint >= 0xD800 && codepoint <= 0xDFFF)) {
+      return false;
+    }
+    index += continuation + 1;
+  }
+  return true;
+}
+
 std::string TrimAscii(std::string_view value) {
   const auto isSpace = [](unsigned char character) { return character == ' ' || character == '\t' || character == '\r' || character == '\n'; };
   std::size_t start = 0;

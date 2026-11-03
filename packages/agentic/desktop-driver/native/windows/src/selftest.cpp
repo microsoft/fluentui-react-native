@@ -18,6 +18,7 @@
 #include <thread>
 #include <vector>
 
+#include "authoritytests.h"
 #include "automation.h"
 #include "common.h"
 #include "driver.h"
@@ -1120,9 +1121,9 @@ void TestWindowEventRegistration() {
     return std::make_pair(monitor.IsObserving(processId), monitor.Diagnostic(processId));
   };
   const auto mentions = [](const json::Value& log, const std::string& hook) {
-    const json::Value* failures = log.Find("registrationFailures");
-    return failures != nullptr && !failures->Items().empty() &&
-           std::all_of(failures->Items().begin(), failures->Items().end(), [&hook](const json::Value& failure) {
+    const json::Value* reported = log.Find("registrationFailures");
+    return reported != nullptr && !reported->Items().empty() &&
+           std::all_of(reported->Items().begin(), reported->Items().end(), [&hook](const json::Value& failure) {
              return failure.AsString().find(hook) != std::string::npos;
            });
   };
@@ -2584,6 +2585,7 @@ int RunSelfTest() {
   TestSnapshotShape();
   TestLeaseIdentity();
   TestHello();
+  RunAuthoritySelfTests(Check);
   std::cout << (failures == 0 ? "self-test passed: " : "self-test failed: ") << (checks - failures) << '/' << checks
             << " checks\n";
   return failures == 0 ? 0 : 1;

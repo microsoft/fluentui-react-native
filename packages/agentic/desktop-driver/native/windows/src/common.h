@@ -46,6 +46,10 @@ inline constexpr HRESULT kUiaTimeoutResult = static_cast<HRESULT>(0x80131505);
 
 std::string ToUtf8(std::wstring_view value);
 std::wstring ToWide(std::string_view value);
+
+// True only for well-formed UTF-8: no overlong forms, surrogates, or code points
+// above U+10FFFF. ToWide substitutes invalid input instead of rejecting it.
+bool IsStrictUtf8(std::string_view bytes);
 std::string TrimAscii(std::string_view value);
 std::string ToLowerAscii(std::string_view value);
 std::wstring TrimWide(std::wstring_view value);
