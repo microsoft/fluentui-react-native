@@ -125,6 +125,7 @@ toolchains, first builds, and diagnostic commands.
 | [CI integration](references/ci-integration.md)      | Package gates, native jobs, real-app smoke, signing, and artifacts                             |
 | [Security model](references/security.md)            | Loopback boundary, registered targets, helper trust, process ownership, and sensitive evidence |
 | [WebDriver contract](references/protocol.md)        | Supported W3C routes, capabilities, elements, errors, and Storybook extensions                 |
+| [Agent operations](references/operations.md)        | Bounded observe, find, and journal operations, references, budgets, and privacy                |
 | [Native wire protocol](native/PROTOCOL.md)          | Private framed stdio protocol between Node and the native helper                               |
 | [Changelog](CHANGELOG.md)                           | Versioned package changes                                                                      |
 
@@ -141,6 +142,7 @@ The [reference index](references/README.md) describes each package-owned guide.
 | `/client`       | Low-level typed W3C client                                                                |
 | `/server`       | Embeddable remote end, session manager, and target registry                               |
 | `/agent`        | Bounded JSON-safe inspection, action, and evidence API                                    |
+| `/operations`   | Versioned agent operation catalog, executor, and result types                             |
 | `/artifacts`    | Confined, atomic evidence persistence                                                     |
 | `/runner`       | Plan selection, sharding, execution, and result classification                            |
 | `/storybook`    | Story manifest and orchestration contracts, without a Storybook dependency                |

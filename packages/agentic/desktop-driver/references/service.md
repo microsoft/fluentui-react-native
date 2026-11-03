@@ -196,6 +196,12 @@ try {
 Use `./agent` for bounded inspection and evidence operations. It deliberately
 does not expose native handles, arbitrary commands, or unrestricted paths.
 
+Agents that drive a session through the service use the versioned operations
+under `furn/ops` (`session.observe()`, `session.find()`, `session.journal()`);
+see [Agent operations](operations.md). Operators choose whether applications'
+displayed content may be read when constructing the server:
+`createDesktopDriverServer({ targets, operations: { content: 'deny' } })`.
+
 ## Fake service CLI
 
 `desktop-driver serve` starts a deterministic fake target:

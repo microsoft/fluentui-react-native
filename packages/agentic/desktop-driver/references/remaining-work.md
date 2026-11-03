@@ -13,10 +13,14 @@ now waits for an aborted host operation to settle. Failed and cancelled
 mutations are settled: providers report an `effect`, and the service
 quarantines a target whose mutation may have landed. The macOS helper reports
 it through an effect ledger and the Windows helper fails closed on unsettled UI
-Automation mutations. MR has Windows/PowerShell pipe qualification; GitHub
-Actions rendering and console-interrupt coverage remain. M0-M6 remain open
-unless marked below. This status does not claim real-application
-qualification.
+Automation mutations. Bounded observation is implemented in the Node host, the
+fake host, and the macOS helper, and the driver service serves the read
+operations `observe`, `find`, and `journal` ([Agent operations](operations.md));
+the Windows helper's `observe` is open (section 7). Actions, waits, capture,
+controller lifecycle, and the MCP adapter are not started. MR has
+Windows/PowerShell pipe qualification; GitHub Actions rendering and
+console-interrupt coverage remain. M0-M6 remain open unless marked below. This
+status does not claim real-application qualification.
 Planning baseline: `c84acb741`, 2026-11-02.
 
 **Delivery constraint:** Complete the shared architecture, macOS implementation,
@@ -232,8 +236,10 @@ keep the target quarantined and explain the required operator intervention.
 ### Model-facing operation families
 
 Keep five core tool families and one optional story tool; do not generate a
-tool per story, control, or native pattern. These are proposed names, not
-commands available today.
+tool per story, control, or native pattern. These are proposed tool names, not
+commands available today. The service already implements the operations
+`observe`, `find`, and `journal` ([Agent operations](operations.md)); the
+families below group operations like them.
 
 | Family            | Purpose                                                                                                        |
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -261,63 +267,51 @@ a delivered click does not by itself produce a passed application assertion.
 
 ### Observation contract
 
-Default to the current window; application scope explicitly groups a bounded
-set of windows. A registered context root can provide story scope without
-hard-coded test-ID suffixes. Unsupported context scope is an error, not an
-empty successful observation.
+Window and subtree observation, the compact outline, budgets enforced inside
+native traversal and again at projection, per-node supported and unsupported
+states, sample IDs, completeness and truncation reasons, `find` outcomes that
+never prove absence or uniqueness from an incomplete search, and the refusal to
+substitute the unbounded `tree` are implemented
+([Agent operations](operations.md)). Open:
 
-Return a compact outline with opaque short refs, role, accessible name,
-automation ID, requested state, and available actions. Geometry is opt-in.
-Interactive filtering uses native affordances/focusability as well as roles;
-retain ancestor context and allow static text when it is the requested
-evidence. Keep supported, unsupported, and unobserved fields distinguishable
-per element.
-
-Enforce budgets **inside native traversal** and again at projection:
-visited/emitted nodes, depth, string length, bytes, elapsed work, and retained
-references. Proposed starting output defaults are 100 nodes and 12 KiB, with
-finite server-owned ceilings. Tune visited-node and time budgets independently
-on AX/UIA; a deadline prevents additional work but cannot guarantee that an OS
-provider call is interruptible.
-
-Providers lacking negotiated bounded traversal must return
-unsupported/upgrade-required for this API. Legacy full-tree retrieval can
-remain separate; it is not a silent fallback for a bounded request. Artifact
-links are not an escape hatch for unlimited collection.
-
-Each observation includes sample ID, capture interval, scope/projection
-identity, counts, completeness, and explicit truncation reasons. An incomplete
-search cannot establish absence, exact count, or uniqueness. Selector-based
-mutation requires proven uniqueness within the declared scope; otherwise
-return bounded candidates and request narrowing.
+- Application scope that explicitly groups a bounded set of windows, and story
+  scope from a registered context root without hard-coded test-ID suffixes.
+  Unsupported context scope must be an error, not an empty successful
+  observation.
+- Visited-node and time budgets tuned independently on AX and UIA from real
+  applications. The defaults (100 nodes, 12 KiB, 3 s, 1,500 visited) are
+  placeholders until then, and a deadline prevents more work but cannot
+  guarantee that an OS provider call is interruptible.
+- Selector-based mutation that requires proven uniqueness within the declared
+  scope and otherwise returns bounded candidates and asks for narrowing (M4).
+  Artifact links are not an escape hatch for unlimited collection.
 
 ### References, paging, and deltas
 
-Refs bind to exact native element identity, application/process incarnation,
-opaque window identity, and an optional region-lifetime epoch. Revalidate
-liveness, ownership, capability, and action preconditions immediately before
-dispatch. Do not rebuild a stale ref using label, path, parent/index, or the
-first selector match.
+References that bind native element identity, application incarnation, window,
+and the preview-region epoch; that survive new reads of unchanged elements; that
+expire with a replaced preview region but not application chrome or other
+windows; and that release agent-only provider records while preserving live W3C
+ones are implemented ([Agent operations](operations.md)). A stale reference is
+never rebuilt from a label, path, or first match, and a reference is never
+reissued. Open:
 
-Role/name fingerprints are useful preconditions, not identity proofs.
-Explicitly qualify provider recycling, including indistinguishable replacement
-controls. Where lifetime identity cannot be established, report that stable
-reference use is unsupported rather than substituting a replacement.
-
-Separate observation samples from lifetime epochs. A new read does not
-invalidate unchanged refs. Preview replacement invalidates its region, not
-application chrome or still-live secondary windows. Optional orchestrators
-register context and generation; generic apps require neither.
-
-Page only within bounded immutable observation caches. Expanding an unvisited
-frontier produces another sample, not a falsely consistent continuation.
-Deltas require retained, matching scope/projection bases. Lost bases return an
-explicit fresh snapshot; omitted or truncated nodes are never reported as
-deleted. Use epoch-scoped cursors for event tails and report overflow.
-
-Bound Node and helper caches together. Release agent-only native references on
-expiry/reset and preserve live W3C references. At capacity, fail explicitly or
-expire eligible records; never recycle a public ref onto another element.
+- Revalidating liveness, ownership, capability, and action preconditions
+  immediately before dispatch, with role/name fingerprints as preconditions
+  rather than identity proofs (M4).
+- Qualifying provider identity recycling, including indistinguishable
+  replacement controls, on both OSes. Where lifetime identity cannot be
+  established, report that stable reference use is unsupported rather than
+  substituting a replacement.
+- Paging only within bounded immutable observation caches: expanding an
+  unvisited frontier produces another sample, not a falsely consistent
+  continuation. Deltas require retained, matching scope and projection bases;
+  lost bases return an explicit fresh snapshot, and omitted or truncated nodes
+  are never reported as deleted. Epoch-scoped cursors for event tails report
+  overflow.
+- Bounding the helper's record cache together with Node's (10,000 records on
+  macOS; the Windows capacity is in section 7) and proving a retained-memory
+  plateau.
 
 ### Actions, waits, and fidelity
 
@@ -642,6 +636,10 @@ the Windows provider must match them, with a self-test case for each:
 - The `actions` fact and `accessibilityActions` both publish an empty list when
   the platform has no action list for an element, so one such element never
   drops out of a sample.
+- Records end with their window: `closeWindow` and `closeApplication` drop every
+  record of the closed window, and `dispose` drops all of them. Node cannot
+  release an id it never learned, such as one an abandoned `observe` recorded,
+  so this is the only way those records end.
 
 `sampleObservation` and its randomized differential self-test in
 `native/macos/Sources/DesktopDriverHost` are a worked reference for the loop
@@ -715,6 +713,18 @@ restart, `recover`, and qualification against real hung applications on either
 OS. Portable story-plan reads and actions now reject selectors that match
 multiple elements; explicit `count` and `exists` expectations remain
 multi-match-safe.
+
+**Operation layer progress:** the read half is built: one validated catalog, an
+executor with request correlation and a bounded in-memory journal, reference and
+provider-record bookkeeping, a typed client, and the `observe`, `find`, and
+`journal` operations served at `furn/ops` on the session queue
+([Agent operations](operations.md)). A server-level corpus runs them without
+WDIO or Storybook against the fake host, covering every reference failure,
+truncation, cancellation on disconnect, content denial, and reads while
+quarantined. Still open for M1: persisting the journal and in-flight records
+(today the journal is per session, in memory, and holds no typed text),
+delegating `DesktopAgent` and the CLI to the operations, and idempotent request
+IDs, which arrive with the first mutating operation (M4).
 
 The journal records versioned operations, explicit checks, outcomes, and
 provenance, redacted **before persistence**. Do not record passwords or default
@@ -817,6 +827,17 @@ Implement explicit semantic/physical actions, AX action tickets, UIA pattern
 mappings, authoritative check/wait batching, per-operation input checks, and
 capture provenance/previews. Extend M1's settlement guarantees to every new
 action; no new path may bypass target-wide exclusion or outcome recording.
+
+The read operations fix three requirements that actions inherit:
+
+- An action names its element by a reference from a `find` whose outcome was
+  `unique`, and cites the sample that showed it, so no request can act on an
+  element nothing proved unique.
+- A mutating request ID is idempotent through the settlement ledger: a repeated
+  ID returns the recorded outcome and never replays the action.
+- Quarantine data is sanitized before it enters an operation error, as provider
+  data already is. A mutating operation is refused while the target is
+  quarantined; reads continue to run.
 
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and

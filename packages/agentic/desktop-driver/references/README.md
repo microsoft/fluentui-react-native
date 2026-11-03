@@ -17,5 +17,6 @@ owner_paths:
 | `desktop-driver.ci-integration`   | [CI integration](ci-integration.md)        | Provisioning helpers and validating CI lanes                    |
 | `desktop-driver.security`         | [Security model](security.md)              | Reviewing target trust, ownership, or evidence boundaries       |
 | `desktop-driver.protocol`         | [WebDriver contract](protocol.md)          | Changing or consuming WebDriver behavior                        |
+| `desktop-driver.operations`       | [Agent operations](operations.md)          | Calling or changing observe, find, journal, refs, or budgets    |
 | `desktop-driver.contributing`     | [Contributor reference](contributing.md)   | Changing package source, tests, or build tooling                |
 | `desktop-driver.remaining-work`   | [Agent efficiency plan](remaining-work.md) | Implementing MCP-first agent workflows and macOS/Windows parity |

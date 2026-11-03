@@ -38,6 +38,13 @@ editing.
   preserve compact JSON/NDJSON framing and the auto-mode compatibility default.
 - Never translate an unsupported native state into `false`. Capability-check it
   and return an explicit skip or unsupported result.
+- Agent operations (`src/operations`) depend only on their `OperationRuntime`,
+  never on `src/server`. Text an application displays or a caller types never
+  enters the journal, an error message, or a log; failures are branched on
+  `data.reason`, and provider error data is reduced to an allowlist.
+- Every agent-operation budget is rejected outside its range, never clamped,
+  and every new operation's results stay bounded and carry `complete` and
+  `truncation`.
 - Confine artifacts beneath the configured root, preserve the original failure
   when evidence capture also fails, and never expose native handles or
   unrestricted commands through agent APIs.

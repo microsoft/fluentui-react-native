@@ -404,6 +404,11 @@ like any untracked id: element commands reject it as `stale-element`. Node
 releases only ids it created for agent observation and never an id it has
 issued to a WebDriver client.
 
+A provider also drops a window's records when it forgets the window: at
+`closeWindow` and `closeApplication`, and every record at `dispose`. That covers
+ids Node never learned, such as those an abandoned `observe` recorded before it
+could answer, and ids issued to WebDriver clients, which Node never releases.
+
 #### Conformance
 
 Both providers must pass the same cases before Node enables the feature for

@@ -66,7 +66,10 @@ Implemented `furn` extensions:
 - `POST /session/{id}/furn/story/args`;
 - `GET /session/{id}/furn/tree`;
 - `GET /session/{id}/furn/window-events`, when the `windowEvents` feature is
-  advertised in `furn:features`.
+  advertised in `furn:features`;
+- `GET /session/{id}/furn/ops` and `POST /session/{id}/furn/ops/{name}`, the
+  versioned agent operations described in [Agent operations](operations.md);
+  they need the `boundedObservation` feature to observe.
 
 `furn/window-events` returns the helper's bounded diagnostic timeline for the
 session's application: recent window notifications (created, destroyed, focus,
