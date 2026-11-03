@@ -46,7 +46,7 @@ describe('DesktopAuthority', () => {
       `Bearer ${scheme}.${id}`,
       `Bearer ${scheme}.${id}.${secret}.extra`,
       `Bearer fdg2.${id}.${secret}`,
-      `Bearer ${scheme}.${id}.${secret.slice(0, -1)}A`,
+      `Bearer ${scheme}.${id}.${secret.slice(0, -1)}${secret.endsWith('A') ? 'B' : 'A'}`,
       `Bearer ${scheme}.${id}.`,
       `Bearer ${scheme}..${secret}`,
       `Bearer ${scheme}.${'0'.repeat(32)}.${secret}`,

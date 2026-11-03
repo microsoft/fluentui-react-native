@@ -3,8 +3,8 @@ import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 
 import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
-import { grantAllowsTarget } from '../authority/grants.js';
-import type { DesktopAuthority, DesktopGrant } from '../authority/grants.js';
+import { DesktopAuthority, grantAllowsTarget } from '../authority/grants.js';
+import type { DesktopGrant } from '../authority/grants.js';
 import type { ContentPolicy } from '../operations/runtime.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
 import { createReturnedCapabilities, matchCapabilities } from '../protocol/capabilities.js';
@@ -72,6 +72,9 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     throw new Error(`Desktop Driver binds to loopback by default; "${host}" is not a supported loopback host.`);
   }
 
+  if (options.authority !== undefined && !(options.authority instanceof DesktopAuthority)) {
+    throw new TypeError('The authority option must be a DesktopAuthority; a missing authority is undefined, never null.');
+  }
   const targets = new TargetRegistry(options.targets);
   options.authority?.assertTargetsRegistered(new Set(targets.list().map(({ id }) => id)));
   const sessions = new SessionManager({ redactSessionIds: options.authority !== undefined });

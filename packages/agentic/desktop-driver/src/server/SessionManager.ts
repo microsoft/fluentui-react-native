@@ -100,6 +100,7 @@ export class SessionManager {
   private readonly reservedTargets = new Map<string, TargetHolder>();
   private readonly commandQueues = new Map<string, Promise<void>>();
   private readonly inFlightCreates = new Set<Promise<void>>();
+  private readonly revokedOwners = new Set<string>();
   private readonly quarantines = new Map<string, QuarantineRecord>();
   private inputQueue: Promise<void> = Promise.resolve();
   private closing = false;
@@ -118,6 +119,11 @@ export class SessionManager {
   ): Promise<DesktopSession> {
     if (this.closing) {
       return Promise.reject(new WebDriverError('session not created', 'Desktop Driver is shutting down.'));
+    }
+    // Checked in the same tick that the create registers as in flight, so a create is either rejected here or awaited
+    // by deleteOwnedBy.
+    if (owner && this.revokedOwners.has(owner.grantId)) {
+      return Promise.reject(new WebDriverError('session not created', 'The grant for this request was revoked.'));
     }
     const result = this.createSession(target, hostInfo, clickMode, launchMode, owner);
     const settled = result.then(
@@ -266,7 +272,7 @@ export class SessionManager {
   get(id: string): DesktopSession {
     const session = this.sessions.get(id);
     if (!session) {
-      throw new WebDriverError('invalid session id', `Session "${id}" does not exist.`);
+      throw missingSession(id);
     }
     return session;
   }
@@ -279,7 +285,7 @@ export class SessionManager {
   getFor(id: string, grantId: string | undefined): DesktopSession {
     const session = this.get(id);
     if (session.owner && session.owner.grantId !== grantId) {
-      throw new WebDriverError('invalid session id', `Session "${id}" does not exist.`);
+      throw missingSession(id);
     }
     return session;
   }
@@ -444,6 +450,7 @@ export class SessionManager {
    * that is still launching registers only when it finishes, so creates in flight are awaited before looking.
    */
   async deleteOwnedBy(grantId: string): Promise<void> {
+    this.revokedOwners.add(grantId);
     await this.waitForCreates();
     await this.deleteWhere((session) => session.owner?.grantId === grantId, 'One or more sessions of a revoked grant failed to close.');
   }
@@ -532,6 +539,13 @@ function createQuarantineError(
   // The blocked command never reached the host, so it is a settled rejection even though the target stays quarantined.
   attachFailureEffect(error, 'none');
   return attachMutationReport(error, createMutationReport(error, true));
+}
+
+function missingSession(id: string): WebDriverError {
+  // Both "no such session" and "another grant's session" come from here so the answers, stack included, are identical.
+  const error = new WebDriverError('invalid session id', `Session "${id}" does not exist.`);
+  error.stack = '';
+  return error;
 }
 
 function truncate(text: string, maxLength: number): string {

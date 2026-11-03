@@ -1380,10 +1380,18 @@ session id, revocation draining, and an unchanged service without an authority.
 Disabling the pre-queue ownership check fails exactly the queueing test. The
 review found that revoking a grant while its session was still launching left
 the session, and its target, held with nothing able to address it; revocation
-now waits for creates in flight, and a test covers it. Not run: an independent
-security review of the boundary (required before this milestone completes, per
-[the security model](security.md#review-triggers)), a native provider behind a
-protected service, and timing measurements of the authentication path.
+now waits for creates in flight, and a test covers it. Not run: a review by a person on the boundary (required before this milestone
+completes, per [the security model](security.md#review-triggers)), a native
+provider behind a protected service, and timing measurements of the
+authentication path. An automated security review and code review of the slice
+found a create that authenticated before a revoke and then reached the session
+manager, which left a session owned by a dead grant; revocation now refuses that
+create, and a test fails without the check. They also found a differing
+stack trace between a missing and a foreign session, a client that printed its
+token when serialized, a `null` authority that disabled authentication, and a
+flaky test credential; all are fixed. Left open: revocation does not abort a
+command already queued or running (a long `implicit` wait keeps the target until
+it ends), which the lifecycle slice's cancellation must cover.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

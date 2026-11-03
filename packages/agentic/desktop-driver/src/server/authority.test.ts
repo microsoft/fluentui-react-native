@@ -1,3 +1,5 @@
+import { inspect } from 'node:util';
+
 import { DesktopAuthority } from '../authority/grants.js';
 import type { IssuedDesktopGrant } from '../authority/grants.js';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
@@ -132,6 +134,14 @@ describe('Desktop Driver protected service', () => {
     });
   });
 
+  test('keeps the grant out of a serialized client and refuses a null authority', async () => {
+    const client = createDesktopDriverClient({ grant: 'fdg1.id.secret-value', url: 'https://127.0.0.1:1' });
+
+    expect(JSON.stringify(client)).not.toContain('secret-value');
+    expect(inspect(client)).not.toContain('secret-value');
+    await expect(createDesktopDriverTestHarness({}, undefined, { authority: null as never })).rejects.toThrow(TypeError);
+  });
+
   test('rejects an unauthenticated caller before reading or validating its body', async () => {
     await withFixture(async ({ agent, harness }) => {
       const unauthenticated = await call(harness, 'POST', '/session', { body: '{not json' });
@@ -203,6 +213,7 @@ describe('Desktop Driver protected service', () => {
           expect({ path, status: response.status }).toEqual({ path, status: 404 });
           expect(response.body.value.error).toBe('invalid session id');
           expect(response.body.value.message).toBe(`Session "${session.id}" does not exist.`);
+          expect(response.body.value.stacktrace).toBe(missing.body.value.stacktrace);
         }
         expect(missing.body.value).toMatchObject({ error: 'invalid session id', message: 'Session "no-such-session" does not exist.' });
 
@@ -392,6 +403,22 @@ describe('Desktop Driver protected service', () => {
         },
         { launchDelayMs: 100 },
       );
+    });
+
+    test('rejects a create that reaches the session manager after its grant was revoked', async () => {
+      await withFixture(async ({ agent, authority, harness, other }) => {
+        const target = harness.server.targets.get('fake-windows')!;
+        const hostInfo = await target.host.probe(new AbortController().signal);
+        authority.revoke(agent.id);
+        await harness.server.sessions.waitForCreates();
+
+        await expect(
+          harness.server.sessions.create(target, hostInfo, 'auto', 'launch', { grantId: agent.id, label: agent.label }),
+        ).rejects.toMatchObject({ code: 'session not created' });
+        expect(harness.host.actions.some(({ type }) => type === 'launch')).toBe(false);
+        const owned = await harness.server.sessions.create(target, hostInfo, 'auto', 'launch', { grantId: other.id, label: other.label });
+        expect(owned.owner?.grantId).toBe(other.id);
+      });
     });
 
     test('leaves the sessions of other grants running', async () => {

@@ -35,12 +35,12 @@ export type DesktopDriverClientOptions = {
 
 export class DesktopDriverClient {
   private readonly fetch: typeof globalThis.fetch;
-  private readonly grant?: string;
+  readonly #grant?: string;
   private readonly url: string;
 
   constructor({ fetch = globalThis.fetch, grant, url }: DesktopDriverClientOptions) {
     this.fetch = fetch;
-    this.grant = grant;
+    this.#grant = grant;
     this.url = url.replace(/\/$/, '');
   }
 
@@ -58,7 +58,7 @@ export class DesktopDriverClient {
   async request<T>(method: string, path: string, body?: unknown): Promise<T> {
     const headers: Record<string, string> = {
       ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
-      ...(this.grant ? { Authorization: `Bearer ${this.grant}` } : {}),
+      ...(this.#grant ? { Authorization: `Bearer ${this.#grant}` } : {}),
     };
     const response = await this.fetch(`${this.url}${path}`, {
       method,
