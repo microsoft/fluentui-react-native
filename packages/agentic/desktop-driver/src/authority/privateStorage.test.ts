@@ -4,7 +4,21 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 import { createMacOSPrivateStorage } from './macosPrivateStorage.js';
-import { privateRecordMaxBytes } from './privateStorage.js';
+import { assertPrivateRecordName, privateRecordMaxBytes } from './privateStorage.js';
+
+describe('private record names', () => {
+  test('accepts portable names', () => {
+    for (const name of ['connection.json', 'agent-1.json', 'console.json', 'nul_record', 'com10', 'a']) {
+      expect(() => assertPrivateRecordName(name)).not.toThrow();
+    }
+  });
+
+  test('rejects names that are traversal, a trailing dot, or a Windows device alias on any platform', () => {
+    for (const name of ['../outside', '.hidden', 'trailing.', 'NUL', 'nul.json', 'Con.tar.gz', 'COM1', 'lpt9.txt', 'aux', 'prn']) {
+      expect(() => assertPrivateRecordName(name)).toThrow(TypeError);
+    }
+  });
+});
 
 const macosDescribe = process.platform === 'darwin' ? describe : describe.skip;
 
