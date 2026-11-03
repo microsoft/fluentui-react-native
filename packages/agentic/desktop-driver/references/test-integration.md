@@ -83,6 +83,15 @@ result formats remain unchanged.
 An external supervisor can share an existing session with an isolated Node
 worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
 This registers the same custom commands without creating a second session.
+On a protected service, include the supervisor-provided `grant` in that
+attachment and in `connectDesktopWebdriver`. For an existing WDIO-managed
+transport, configure `desktopWebdriverGrantOptions(grant)` before attaching
+and pass `{ grant }` as the third argument to
+`installDesktopWebdriverCommands`. Never put the grant in capabilities or
+worker command-line arguments. Use private IPC or a supervisor-controlled
+environment such as `FURN_DESKTOP_DRIVER_GRANT_TOKEN`; the `TOKEN` suffix
+participates in the desktop-test reporter's secret redaction. The helper does
+not automatically read process environment variables.
 The supervisor retains ownership and must call `delete()` after the worker
 exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
 `attach()` does not apply the defaults `remote()` uses, so the attached browser

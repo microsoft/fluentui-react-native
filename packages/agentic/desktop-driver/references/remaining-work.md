@@ -830,12 +830,17 @@ grants, and a service given one authenticates every route before reading the
 request, binds each session to its grant, scopes targets per grant, redacts
 other grants' identifiers from contention and quarantine data, and closes a
 revoked grant's sessions. Its contract is in
-[the security model](security.md#protected-service). Still open: the private
-connection descriptor and its state root (with the Windows ownership adapter),
-the WDIO grant path (the typed client already accepts a grant), controller
-lifecycle, leases and idle expiry,
-exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+[the security model](security.md#protected-service). Still open: the Windows
+private-storage adapter and live process/listener identity verifier, controller
+lifecycle, leases and idle expiry, exact ownership ledgers, status/stop/`recover`, quarantine persistence,
 cross-service claims, Storybook mutation coordination, and supervisor wiring.
+
+The shared Slice 2 descriptor contract, macOS owner-validated storage, and WDIO
+grant transport are implemented. Descriptor reads require a trusted live
+identity verifier and check the authenticated service incarnation; there is no
+permissive default verifier. The macOS adapter rejects Windows until its
+native ownership adapter lands. See [private discovery](security.md#private-discovery)
+and [service integration](service.md#private-connection-descriptors).
 
 **Complete when:** agent/WDIO contention, all-route authorization, stale-owner
 recovery, reconnect, supervisor/helper/app crashes, quarantine persistence, and
@@ -1392,6 +1397,23 @@ token when serialized, a `null` authority that disabled authentication, and a
 flaky test credential; all are fixed. Left open: revocation does not abort a
 command already queued or running (a long `implicit` wait keeps the target until
 it ends), which the lifecycle slice's cancellation must cover.
+
+Slice 2 adds focused tests for immutable private records, root identity and
+permissions, traversal, symlinks, hardlinks, oversized records, macOS ACLs,
+descriptor validation, verifier-before-credential ordering, stale service
+incarnations, and redirect rejection. The real WDIO contract now exercises
+connected, attached, and managed browsers with a grant, including a typed
+custom command and checks that options, capabilities, and ordinary output do
+not expose the token.
+
+The opt-in macOS native contract passed after adding a protected service
+around the real helper: unauthorized and out-of-scope callers did not reach
+native probe, an authorized caller completed native probe, and a revoked grant
+was rejected. `FURN_NATIVE_DRIVER_TEST=1 yarn test nativeDriver` passed 6 tests;
+2 were skipped (Windows and stable-signing paths). This does not qualify
+real-application session ownership, physical input, or revocation of in-flight
+native mutations. Windows native/ACL qualification and the new discovery
+boundary's human security review remain open.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

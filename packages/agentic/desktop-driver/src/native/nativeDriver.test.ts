@@ -3,11 +3,15 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { DesktopAuthority } from '../authority/grants';
+import { createDesktopDriverClient } from '../client/DesktopDriverClient';
 import type { NativeObserveRequest } from '../host/types';
 import { encodeJsonFrame, NativeFrameDecoder } from '../hosts/native/framing';
+import { NativeDesktopHost } from '../hosts/native/NativeDesktopHost';
 import { NativeHostProcess } from '../hosts/native/NativeHostProcess';
 import { parseNativeObservation } from '../protocol/observation';
-import type { NativeHostJsonMessage } from './types';
+import { createDesktopDriverServer } from '../server/createDesktopDriverServer';
+import type { NativeDriverArtifact, NativeHostJsonMessage } from './types';
 import {
   hashMacOSDriverSources,
   macOSCertificateExtractionArguments,
@@ -15,6 +19,44 @@ import {
   parseMacOSSigningIdentities,
 } from './macos/buildMacOSDriver';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDriver';
+
+async function expectProtectedNativeService(artifact: NativeDriverArtifact): Promise<void> {
+  const endpoint = artifact.provider;
+  const authority = new DesktopAuthority();
+  const grant = authority.issue({ label: 'native-contract', targets: ['native-contract'] });
+  const host = new NativeDesktopHost({ application: {}, artifact, endpoint });
+  const probe = jest.spyOn(host, 'probe');
+  const launch = jest.spyOn(host, 'launch');
+  const service = await createDesktopDriverServer({
+    authority,
+    targets: [{ endpoint, host, id: 'native-contract', platformName: endpoint, renderer: 'fabric' }],
+  });
+  try {
+    const unauthenticated = createDesktopDriverClient({ url: service.url });
+    await expect(unauthenticated.status()).rejects.toMatchObject({ code: 'unauthorized' });
+    await expect(unauthenticated.newSession({ alwaysMatch: {} })).rejects.toMatchObject({ code: 'unauthorized' });
+    expect(probe).not.toHaveBeenCalled();
+    expect(launch).not.toHaveBeenCalled();
+
+    const hidden = authority.issue({ label: 'out-of-scope', targets: ['not-registered'] });
+    await expect(createDesktopDriverClient({ grant: hidden.token, url: service.url }).status()).resolves.toMatchObject({
+      targets: [],
+    });
+    expect(probe).not.toHaveBeenCalled();
+
+    const authenticated = createDesktopDriverClient({ grant: grant.token, url: service.url });
+    await expect(authenticated.status()).resolves.toMatchObject({
+      service: { incarnation: authority.incarnation },
+      targets: [{ id: 'native-contract', host: { endpoint, platformName: endpoint, protocolVersion: 1 } }],
+    });
+    expect(probe).toHaveBeenCalledTimes(1);
+    authority.revoke(grant.id);
+    await expect(authenticated.status()).rejects.toMatchObject({ code: 'unauthorized' });
+    expect(probe).toHaveBeenCalledTimes(1);
+  } finally {
+    await service.close();
+  }
+}
 
 jest.setTimeout(240_000);
 
@@ -110,6 +152,7 @@ describe('native driver build and resolution', () => {
         },
       });
       await helper.dispose();
+      await expectProtectedNativeService(resolved);
       await expectMacosEffectReporting(resolved.executablePath);
       await expectMacosBoundedObservation(resolved.executablePath);
       await expectMacosRequestMemoryStable(resolved.executablePath);
@@ -306,6 +349,7 @@ describe('native driver build and resolution', () => {
           },
         });
         await helper.dispose();
+        await expectProtectedNativeService(resolved);
 
         const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
           encoding: 'utf8',

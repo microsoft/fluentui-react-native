@@ -27,7 +27,7 @@ export type DesktopDriverClientOptions = {
   fetch?: typeof globalThis.fetch;
   /**
    * The bearer token of a grant, for a service that requires one. It is sent on every request, so a client cannot reach
-   * a protected service by accident without it. Never log or persist it.
+   * a protected service by accident without it. Never log it or persist it outside owner-validated private storage.
    */
   grant?: string;
   url: string;
@@ -62,6 +62,7 @@ export class DesktopDriverClient {
     };
     const response = await this.fetch(`${this.url}${path}`, {
       method,
+      ...(this.#grant ? { redirect: 'error' as const } : {}),
       ...(body === undefined ? {} : { body: JSON.stringify(body) }),
       ...(Object.keys(headers).length > 0 ? { headers } : {}),
     });

@@ -27,6 +27,7 @@ change-oriented guidance.
 | `src/runner`       | Plan selection, capability checks, execution, and classification        |
 | `src/wdio`         | Sanctioned WebdriverIO connection and commands                          |
 | `src/client`       | Low-level typed W3C client                                              |
+| `src/authority`    | Grants, private discovery records, and platform ownership adapters      |
 | `src/agent`        | Bounded agent-facing operations                                         |
 | `src/operations`   | Versioned agent operations, references, release ledger, and journal     |
 | `src/artifacts`    | Evidence naming, confinement, and atomic writes                         |

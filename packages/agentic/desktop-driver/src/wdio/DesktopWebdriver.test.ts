@@ -3,14 +3,21 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { DesktopAuthority } from '../authority/grants.js';
 import type { DesktopStoryManifest } from '../storybook.js';
 import { createDesktopDriverStoryHarness, createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 
 describe('sanctioned WebdriverIO API', () => {
-  test.each([true, false])(
-    'routes element screenshots without falling back to window capture (supported: %s)',
-    async (elementScreenshot) => {
-      const harness = await createDesktopDriverTestHarness({ features: { elementScreenshot } });
+  test.each([
+    [true, false],
+    [false, false],
+    [true, true],
+  ])(
+    'routes element screenshots without falling back to window capture (supported: %s, protected: %s)',
+    async (elementScreenshot, protectedService) => {
+      const authority = protectedService ? new DesktopAuthority() : undefined;
+      const grant = authority?.issue({ label: 'wdio', targets: '*' });
+      const harness = await createDesktopDriverTestHarness({ features: { elementScreenshot } }, undefined, { authority });
       const captureElement = jest.spyOn(harness.host, 'captureElement');
       const captureWindow = jest.spyOn(harness.host, 'captureWindow');
       const windowImage = await harness.host.captureWindow('window-1');
@@ -21,7 +28,7 @@ describe('sanctioned WebdriverIO API', () => {
       }
       const artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-screenshots-'));
       try {
-        const response = await runContract(harness.server.url, harness.target.id, artifactsRoot, 'screenshots.contract.cjs');
+        const response = await runContract(harness.server.url, harness.target.id, artifactsRoot, 'screenshots.contract.cjs', grant?.token);
         for (const mode of ['connected', 'attached', 'managed']) {
           expect(response[mode]).toEqual({
             window: Buffer.from(windowImage.data).toString('base64'),
@@ -106,10 +113,12 @@ function runContract(
   targetId: string,
   artifactsRoot: string,
   fixture = 'wdioRunner.contract.cjs',
+  grant?: string,
 ): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [path.join(__dirname, fixture), url, targetId, artifactsRoot], {
       stdio: ['ignore', 'pipe', 'pipe'],
+      env: { ...process.env, FURN_DESKTOP_DRIVER_GRANT_TOKEN: grant ?? '' },
     });
     const stdout: Buffer[] = [];
     const stderr: Buffer[] = [];
@@ -117,6 +126,10 @@ function runContract(
     child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
     child.once('error', reject);
     child.once('exit', (code) => {
+      if (grant && (Buffer.concat(stdout).includes(grant) || Buffer.concat(stderr).includes(grant))) {
+        reject(new Error('The WebdriverIO contract exposed a grant in its output.'));
+        return;
+      }
       if (code !== 0) {
         reject(new Error(Buffer.concat(stderr).toString('utf8') || `WebdriverIO runner exited with code ${code}.`));
         return;

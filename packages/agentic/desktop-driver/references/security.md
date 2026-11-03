@@ -70,10 +70,46 @@ and before the body, route, or any session is read.
 
 The boundary is other operating-system accounts and accidental cross-client
 access. It does not isolate mutually hostile processes of the same account and
-does not protect against administrators. The service neither stores nor
-publishes tokens: the embedding supervisor delivers each to its client over a
-private channel and must keep it out of capabilities, command lines, logs, and
-test output.
+does not protect against administrators. The service does not publish tokens
+over HTTP. The embedding supervisor delivers each over a private channel or in
+an owner-validated connection descriptor, keeping it out of capabilities,
+command lines, logs, and test output. Private descriptors contain plaintext
+credentials; process-wide heap dumps can also contain credentials.
+
+## Private discovery
+
+The `/authority` entry exports a version-1 connection descriptor and a
+`PrivateStorage` adapter contract. A descriptor contains one grant, a numeric
+loopback HTTP endpoint, and the intended service's platform, PID, process-start
+identity, executable path, interactive-session identity, and random
+`incarnation`. Unknown fields, unsupported versions, non-loopback addresses,
+userinfo, redirects, and records larger than 16 KiB are rejected.
+
+`readConnectionDescriptor` requires a trusted `VerifyDesktopService` callback.
+It must verify the actual listener owner, exact live process start/executable,
+OS user, and current interactive session **before any credential is sent**.
+Missing, false, or unavailable verification fails closed. An authenticated
+status request then checks the service incarnation under a 15-second deadline.
+The library does not supply an OS process/listener verifier yet; that remains
+supervisor/native integration work. A callback that unconditionally returns
+true is not a production verifier. Filesystem ownership alone is not
+logon-session isolation or live process verification.
+
+`createMacOSPrivateStorage` uses the owner's Application Support directory,
+requiring a 0700 root and 0600 regular records owned by the current UID. It
+validates ancestors, rejects symlinks and hardlinked records, checks actual
+macOS ACLs rather than mode bits alone, and revalidates the root identity on
+each operation. Ancestor deny-only ACLs and root-owned sticky temporary
+directories are allowed; an ancestor ACL that grants access fails closed.
+Existing permissions are never repaired. Publication is atomic and
+non-overwriting; cleanup compares the validated record's exact contents and
+file identity. Other processes of the same OS account remain outside this
+boundary.
+
+The macOS adapter rejects Windows and every other platform. Windows requires a
+native SID/DACL/reparse-point ownership adapter implementing `PrivateStorage`;
+Node chmod is not a fallback. This slice does not implement cross-service
+claims, process recovery, automatic discovery, or supervisor wiring.
 
 ## Native-helper trust
 
