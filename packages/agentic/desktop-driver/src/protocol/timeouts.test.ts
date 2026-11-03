@@ -1,3 +1,5 @@
+import { getEventListeners } from 'node:events';
+
 import { attachFailureEffect, readFailureEffect } from './settlement';
 import { withCommandTimeout } from './timeouts';
 import { SessionManager } from '../server/SessionManager';
@@ -52,6 +54,117 @@ describe('withCommandTimeout', () => {
     await nextCommand;
     expect(settled).toBe(true);
     expect(nextCommandStarted).toBe(true);
+  });
+
+  describe('caller cancellation', () => {
+    test('aborts the operation, holds the session queue until it settles, and reports a cancellation', async () => {
+      let resolveOperation!: () => void;
+      let started!: () => void;
+      let operationSignal: AbortSignal | undefined;
+      let nextCommandStarted = false;
+      const operation = new Promise<void>((resolve) => {
+        resolveOperation = resolve;
+      });
+      const operationStarted = new Promise<void>((resolve) => {
+        started = resolve;
+      });
+      const caller = new AbortController();
+      const sessions = new SessionManager();
+      const result = sessions.runCommand('session-id', () =>
+        withCommandTimeout(
+          (signal) => {
+            operationSignal = signal;
+            started();
+            return operation;
+          },
+          60_000,
+          'Native operation',
+          { signal: caller.signal },
+        ),
+      );
+      const outcome = result.then(
+        () => undefined,
+        (error: unknown) => error,
+      );
+      await operationStarted;
+
+      caller.abort();
+
+      expect(operationSignal?.aborted).toBe(true);
+      const nextCommand = sessions.runCommand('session-id', async () => {
+        nextCommandStarted = true;
+      });
+      await Promise.resolve();
+      expect(nextCommandStarted).toBe(false);
+
+      resolveOperation();
+      const failure = await outcome;
+      await nextCommand;
+
+      expect(failure).toMatchObject({ code: 'unknown error', data: { reason: 'cancelled' }, message: 'Native operation was cancelled.' });
+      expect(readFailureEffect(failure)).toBe('applied');
+      expect(nextCommandStarted).toBe(true);
+    });
+
+    test('never starts an operation for a signal that is already aborted', async () => {
+      const operation = jest.fn(async () => 'ran');
+      const caller = new AbortController();
+      caller.abort();
+
+      const failure = await withCommandTimeout(operation, 1_000, 'Native operation', { signal: caller.signal }).catch(
+        (error: unknown) => error,
+      );
+
+      expect(operation).not.toHaveBeenCalled();
+      expect(failure).toMatchObject({ code: 'unknown error', data: { reason: 'cancelled' } });
+      expect(readFailureEffect(failure)).toBe('none');
+    });
+
+    test('keeps the effect an aborted command reports', async () => {
+      const caller = new AbortController();
+      let started!: () => void;
+      const operationStarted = new Promise<void>((resolve) => {
+        started = resolve;
+      });
+      const outcome = withCommandTimeout(
+        (signal) =>
+          new Promise<void>((_resolve, reject) => {
+            signal.addEventListener('abort', () => reject(attachFailureEffect(new Error('aborted'), 'partial')), { once: true });
+            started();
+          }),
+        60_000,
+        'Native operation',
+        { signal: caller.signal },
+      ).catch((error: unknown) => error);
+
+      await operationStarted;
+      caller.abort();
+      const failure = await outcome;
+
+      expect(failure).toMatchObject({ data: { reason: 'cancelled' } });
+      expect(readFailureEffect(failure)).toBe('partial');
+    });
+
+    test('reports no effect when the caller leaves before the operation begins', async () => {
+      const operation = jest.fn(async () => 'ran');
+      const caller = new AbortController();
+      const outcome = withCommandTimeout(operation, 60_000, 'Native operation', { signal: caller.signal }).catch((error: unknown) => error);
+
+      caller.abort();
+      const failure = await outcome;
+
+      expect(operation).not.toHaveBeenCalled();
+      expect(failure).toMatchObject({ data: { reason: 'cancelled' } });
+      expect(readFailureEffect(failure)).toBe('none');
+    });
+
+    test('stops listening to the caller once the operation finishes', async () => {
+      const caller = new AbortController();
+
+      await expect(withCommandTimeout(async () => 'done', 1_000, 'Native operation', { signal: caller.signal })).resolves.toBe('done');
+
+      expect(getEventListeners(caller.signal, 'abort')).toHaveLength(0);
+    });
   });
 
   describe('timeout effect', () => {
