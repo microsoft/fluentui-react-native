@@ -2,7 +2,7 @@ import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
 import type { DesktopTarget } from '../host/types.js';
 import { createDesktopDriverServer } from '../server/createDesktopDriverServer.js';
-import type { DesktopDriverServer } from '../server/createDesktopDriverServer.js';
+import type { DesktopDriverServer, DesktopDriverServerOptions } from '../server/createDesktopDriverServer.js';
 import type { StoryOrchestrator } from '../storybook.js';
 import type { DesktopStoryManifest } from '../storybook.js';
 import { FakeStoryOrchestrator } from './FakeStoryOrchestrator.js';
@@ -18,6 +18,7 @@ export type DesktopDriverTestHarness = {
 export async function createDesktopDriverTestHarness(
   options: FakeDesktopHostOptions = {},
   storyOrchestrator?: StoryOrchestrator,
+  serverOptions: Omit<DesktopDriverServerOptions, 'targets'> = {},
 ): Promise<DesktopDriverTestHarness> {
   const host = new FakeDesktopHost(options);
   const endpoint = options.endpoint ?? 'windows';
@@ -30,7 +31,7 @@ export async function createDesktopDriverTestHarness(
     ...(storyOrchestrator ? { storyRootTestId: 'story-root' } : {}),
     storyOrchestrator,
   };
-  const server = await createDesktopDriverServer({ targets: [target] });
+  const server = await createDesktopDriverServer({ ...serverOptions, targets: [target] });
   return {
     host,
     server,

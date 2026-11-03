@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 
 import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
+import type { ContentPolicy } from '../operations/runtime.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
 import { createReturnedCapabilities, matchCapabilities } from '../protocol/capabilities.js';
 import { webElementIdentifier } from '../protocol/constants.js';
@@ -11,11 +12,20 @@ import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
 import type { DesktopSession, ElementRecord, MutationOptions } from './SessionManager.js';
+import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from './sessionOperations.js';
 import { TargetRegistry } from './TargetRegistry.js';
 
 export type DesktopDriverServerOptions = {
   host?: string;
   maxBodyBytes?: number;
+  /** Policy for the agent operations (`furn/ops`), which the server operator controls rather than the caller. */
+  operations?: {
+    /**
+     * Whether operations may read what applications display (values, text, help). `deny` withholds it for every
+     * session. Element names and automation ids stay readable. Defaults to `allow`.
+     */
+    content?: ContentPolicy;
+  };
   port?: number;
   targets?: readonly DesktopTarget[];
 };
@@ -31,8 +41,16 @@ export type DesktopDriverServer = {
 
 type RouteContext = {
   body: unknown;
+  contentPolicy: ContentPolicy;
   method: string;
   segments: string[];
+  /** Aborts when the client disconnects before the response is complete. */
+  signal: AbortSignal;
+};
+
+type RequestSettings = {
+  contentPolicy: ContentPolicy;
+  maxBodyBytes: number;
 };
 
 export async function createDesktopDriverServer(options: DesktopDriverServerOptions = {}): Promise<DesktopDriverServer> {
@@ -52,7 +70,10 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
       writeJson(response, error.status, { value: error.toJSON() });
       return;
     }
-    void handleRequest(request, response, sessions, targets, options.maxBodyBytes ?? 1024 * 1024);
+    void handleRequest(request, response, sessions, targets, {
+      contentPolicy: options.operations?.content ?? 'allow',
+      maxBodyBytes: options.maxBodyBytes ?? 1024 * 1024,
+    });
   });
   const port = await listen(httpServer, host, options.port ?? 0);
 
@@ -103,8 +124,14 @@ async function handleRequest(
   response: ServerResponse,
   sessions: SessionManager,
   targets: TargetRegistry,
-  maxBodyBytes: number,
+  settings: RequestSettings,
 ): Promise<void> {
+  const disconnected = new AbortController();
+  response.once('close', () => {
+    if (!response.writableFinished) {
+      disconnected.abort();
+    }
+  });
   try {
     if (request.headers.origin) {
       throw new WebDriverError('unknown error', 'Browser-origin requests are not accepted by Desktop Driver.');
@@ -113,8 +140,10 @@ async function handleRequest(
     const url = new URL(request.url ?? '/', 'http://127.0.0.1');
     const segments = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
     const method = request.method ?? 'GET';
-    const body = method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, maxBodyBytes);
-    const operation = () => route({ body, method, segments }, sessions, targets);
+    const body =
+      method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, requestBodyLimit(segments, settings.maxBodyBytes));
+    const operation = () =>
+      route({ body, contentPolicy: settings.contentPolicy, method, segments, signal: disconnected.signal }, sessions, targets);
     const value = segments[0] === 'session' && segments[1] ? await sessions.runCommand(segments[1], operation) : await operation();
     writeJson(response, 200, { value });
   } catch (error) {
@@ -252,6 +281,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
         throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not record native window events.`);
       }
       return hostCommand(session, 'Reading native window events', (signal) => windowEvents(session.lease, signal));
+    }
+    if (command[1] === 'ops') {
+      const runtime = createOperationRuntime(session, sessions, { contentPolicy: context.contentPolicy, signal: context.signal });
+      return handleOperationRoute(method, command.slice(2), body, runtime);
     }
     return handleStorybookCommand(method, command.slice(1), body, session, sessions);
   }

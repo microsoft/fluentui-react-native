@@ -4,6 +4,16 @@ import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
 import type {
+  FindInput,
+  FindResult,
+  JournalInput,
+  JournalResult,
+  ObserveInput,
+  ObserveResult,
+  OperationCatalog,
+  OperationResponse,
+} from '../operations/index.js';
+import type {
   NewSessionCapabilities,
   WebDriverActionSequence,
   WebDriverElement,
@@ -132,6 +142,37 @@ export class DesktopSessionClient {
 
   getWindowEvents(): Promise<DesktopWindowEventLog> {
     return this.command('GET', '/furn/window-events');
+  }
+
+  /** The agent operations this session offers, with the JSON Schema of each one's input and result. */
+  operations(): Promise<OperationCatalog> {
+    return this.command('GET', '/furn/ops');
+  }
+
+  /**
+   * Runs one agent operation by name. Name your own `requestId` to find the call in the journal; otherwise the server
+   * assigns one and returns it.
+   */
+  operation<Result = unknown>(name: string, input: object = {}, options: { requestId?: string } = {}): Promise<OperationResponse<Result>> {
+    return this.command('POST', `/furn/ops/${encodeURIComponent(name)}`, {
+      input,
+      ...(options.requestId === undefined ? {} : { requestId: options.requestId }),
+    });
+  }
+
+  /** Reads a bounded outline of the current window, or of the subtree under a reference an earlier call returned. */
+  observe(input: ObserveInput = {}, options?: { requestId?: string }): Promise<OperationResponse<ObserveResult>> {
+    return this.operation('observe', input, options);
+  }
+
+  /** Finds elements by role, name, automation id, or text, and says whether the match is unique. */
+  find(input: FindInput, options?: { requestId?: string }): Promise<OperationResponse<FindResult>> {
+    return this.operation('find', input, options);
+  }
+
+  /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */
+  journal(input: JournalInput = {}, options?: { requestId?: string }): Promise<OperationResponse<JournalResult>> {
+    return this.operation('journal', input, options);
   }
 
   /** True when the target advertises a native window-event timeline for diagnostics. */

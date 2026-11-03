@@ -8,6 +8,7 @@ import type {
   NativeElementScope,
   NativeElementSnapshot,
 } from '../host/types.js';
+import { OperationSessionState } from '../operations/sessionState.js';
 import { createInputState } from '../protocol/actions.js';
 import type { WebDriverInputState } from '../protocol/actions.js';
 import { WebDriverError } from '../protocol/errors.js';
@@ -61,6 +62,8 @@ export type DesktopSession = {
   inputState: WebDriverInputState;
   issuedElementIds: Set<string>;
   lease: ApplicationLease;
+  /** What the operation layer remembers about this session: its references, pending releases, and journal. */
+  operations: OperationSessionState;
   previewGeneration: number;
   story: { previewGeneration: number; runId: string; storyId: string } | null;
   target: DesktopTarget;
@@ -163,6 +166,7 @@ export class SessionManager {
         inputState: createInputState(),
         issuedElementIds: new Set(),
         lease,
+        operations: new OperationSessionState(),
         previewGeneration: 0,
         story: null,
         target,
@@ -360,7 +364,12 @@ export class SessionManager {
     const failures: unknown[] = [];
     for (const id of Array.from(this.sessions.keys())) {
       try {
-        await this.delete(id);
+        // Queued behind the session's own commands, so closing never overlaps native work whose caller has left.
+        await this.runCommand(id, async () => {
+          if (this.sessions.has(id)) {
+            await this.delete(id);
+          }
+        });
       } catch (error) {
         failures.push(error);
       }
@@ -384,6 +393,8 @@ export class SessionManager {
     session.elements.set(record.id, record);
     session.elementIdsByNativeId.set(record.nativeId, record.id);
     session.issuedElementIds.add(record.id);
+    // A WebDriver client now holds this provider record, and the operation layer may release only records it created.
+    session.operations.ledger.markExternal(snapshot.id);
     return record;
   }
 
