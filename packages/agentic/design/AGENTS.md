@@ -36,7 +36,7 @@ repository reference `components.agentic.styles-and-tokens`.
   state computes once per resolved color.
 - Treat `src/tokens/mappings/flex-token-map.yaml` as the canonical token mapping (R-DESIGN-001), and regenerate rather
   than edit generated token and projection files.
-- Production code must not depend on the `testing` entry point (R-DESIGN-002).
+- Production code must not depend on the `testing` entry points (R-DESIGN-002).
 - Keep the Fluent 2 token JSON loaders and pipeline mappers in `src/deprecated/`. Only tests, other deprecated code,
   build scripts, and the existing deprecated consumers may use them, and no other entry point may reach them
   (R-DESIGN-003).

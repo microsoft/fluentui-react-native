@@ -110,6 +110,13 @@ exports[`public entry points ./testing keeps its runtime export names 1`] = `
 ]
 `;
 
+exports[`public entry points ./testing/theme keeps its runtime export names 1`] = `
+[
+  "TestThemeProvider: function",
+  "createThemeWrapper: function",
+]
+`;
+
 exports[`public entry points ./themes keeps its runtime export names 1`] = `
 [
   "flexTheme: object",

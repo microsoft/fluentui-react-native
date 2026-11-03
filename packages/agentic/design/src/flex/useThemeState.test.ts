@@ -11,6 +11,7 @@ import { FlexThemeReference } from './flexThemeReference';
 import { ThemeProvider } from '../theming/ThemeProvider';
 import type { Theme } from '../fluent/types/Theme.types';
 import { mockTheme } from '../test/fixtures/mockTheme';
+import { TestThemeProvider } from '../test/TestThemeProvider';
 import { themedStyleSheetFactory, useThemeAppearance, useThemeState } from './useThemeState';
 import type { ThemeState } from './themeState.types';
 
@@ -70,13 +71,24 @@ function createMutableAppearanceSource() {
 }
 
 describe('useThemeState', () => {
+  it('throws when no theme is provided', () => {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+
+    expect(() => act(() => void create(React.createElement(ThemeStateProbe, { states: [] })))).toThrow('useThemeState requires a theme');
+    expect(() => act(() => void create(React.createElement(ThemeAppearanceProbe, { states: [] })))).toThrow(
+      'useThemeAppearance requires a theme',
+    );
+
+    consoleError.mockRestore();
+  });
+
   it('shares lazily created theme style sheets between component instances', () => {
     const states: ThemeState[] = [];
     let component: ReactTestRenderer;
     act(() => {
       component = create(
         React.createElement(
-          React.Fragment,
+          TestThemeProvider,
           null,
           React.createElement(ThemeStateProbe, { states }),
           React.createElement(ThemeStateProbe, { states }),
@@ -106,7 +118,7 @@ describe('useThemeState', () => {
     const states: ThemeState[] = [];
     let component: ReactTestRenderer;
     act(() => {
-      component = create(React.createElement(ThemeStateProbe, { states }));
+      component = create(React.createElement(TestThemeProvider, null, React.createElement(ThemeStateProbe, { states })));
     });
 
     let createCount = 0;

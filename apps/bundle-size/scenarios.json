@@ -51,8 +51,12 @@
       ],
       "forbiddenInputPatterns": ["/design/src/fluent/compat/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
       "requiredInputPatterns": ["/design/src/fluent/themeReference."],
-      "forbiddenOutputPatterns": ["/design/src/flex/flexThemeReference."],
-      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
+      "forbiddenOutputPatterns": [
+        "/design/src/flex/flexThemeReference.",
+        "/design/src/flex/defaults/",
+        "/color-lib/interaction.",
+        "/design/src/flex/colors/interactionPolicy."
+      ]
     },
     {
       "name": "design-legacy-theme",

@@ -149,5 +149,3 @@ export function appearanceOptionFromResolved(appearance: ResolvedThemeAppearance
   }
   return appearance.colorScheme;
 }
-
-export const defaultThemeAppearanceState = resolveThemeAppearance();

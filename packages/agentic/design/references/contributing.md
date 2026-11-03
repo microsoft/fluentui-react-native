@@ -61,7 +61,7 @@ committed; change their inputs and regenerate rather than editing them.
 - Keep platform appearance listeners subscription-scoped; nothing subscribes at module import.
 - Keep the experimental native appearance modules and platform theme packages out of this package's dependencies;
   platform theme packages inject their sources.
-- Production code must not import the `testing` entry point (R-DESIGN-002).
+- Production code must not import the `testing` entry points (R-DESIGN-002).
 - Keep the Fluent 2 token JSON behind `src/deprecated/`: only tests, other deprecated modules, build scripts, and the
   existing deprecated consumers may use it, and no other production entry point may reach it (R-DESIGN-003).
 

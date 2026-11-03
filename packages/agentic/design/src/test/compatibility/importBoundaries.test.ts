@@ -137,14 +137,15 @@ describe('production code never depends on test collateral', () => {
     expect(resolvedTestImports).toContain('test/index.ts');
   });
 
-  it('has no production import of src/test or the testing entry point', () => {
+  it('has no production import of src/test or the testing entry points', () => {
+    const testingSpecifier = '@fluentui-react-native/design/testing';
     expect(productionFiles.length).toBeGreaterThan(50);
     const violations = productionFiles.flatMap((file) =>
       readImports(file)
         .filter((edge) =>
           edge.specifier.startsWith('.')
             ? resolveRelative(file, edge.specifier).some((resolved) => toSrcPath(resolved).startsWith('test/'))
-            : edge.specifier === '@fluentui-react-native/design/testing',
+            : edge.specifier === testingSpecifier || edge.specifier.startsWith(`${testingSpecifier}/`),
         )
         .map((edge) => `${toSrcPath(file)} -> ${edge.specifier}`),
     );
@@ -191,7 +192,7 @@ describe('deprecated code stays behind its boundary', () => {
   it('keeps every production entry point free of deprecated code', () => {
     const packageJson = jest.requireActual<{ exports: Record<string, string | { 'react-native': string }> }>('../../../package.json');
     const entries = Object.entries(packageJson.exports).flatMap(([subpath, conditions]) =>
-      typeof conditions === 'string' || subpath === './deprecated' || subpath === './testing'
+      typeof conditions === 'string' || subpath === './deprecated' || subpath.startsWith('./testing')
         ? []
         : [conditions['react-native'].slice('./src/'.length)],
     );

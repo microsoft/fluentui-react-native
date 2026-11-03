@@ -75,6 +75,12 @@
       "import": "./lib/test/index.js",
       "default": "./src/test/index.ts"
     },
+    "./testing/theme": {
+      "types": "./lib/test/TestThemeProvider.d.ts",
+      "react-native": "./src/test/TestThemeProvider.tsx",
+      "import": "./lib/test/TestThemeProvider.js",
+      "default": "./src/test/TestThemeProvider.tsx"
+    },
     "./deprecated": {
       "types": "./lib/deprecated/index.d.ts",
       "react-native": "./src/deprecated/index.ts",

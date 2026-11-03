@@ -1,12 +1,23 @@
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
-import { defaultThemeAppearanceState } from '../theming/appearance';
+import type { ThemeSourceContextValue } from '../theming/context';
 import { useThemeBoundary } from '../theming/context';
-import { defaultThemeState, getThemeState } from './themeState';
+import { getThemeState } from './themeState';
 import type { ThemeAppearanceState } from '../types/appearance.types';
 import type { ThemeState } from './themeState.types';
 
 export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>;
+
+function useRequiredThemeBoundary(hookName: string): ThemeSourceContextValue {
+  const boundary = useThemeBoundary();
+  if (!boundary) {
+    throw new Error(
+      `${hookName} requires a theme. Render the component inside a ThemedRoot or ThemeProvider; in tests, use the ` +
+        `helpers from '@fluentui-react-native/design/testing/theme'.`,
+    );
+  }
+  return boundary;
+}
 
 /**
  * Theme state should be consistent on object identity until a theme change or system appearance change occurs. Each new
@@ -17,18 +28,20 @@ export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>
  * and resolved appearance shares one state identity.
  *
  * @returns The current theme state, including flex tokens, high contrast mode status, and shared theme style sheets.
+ * @throws When no `ThemeProvider`, `ThemedRoot`, or legacy theme context is above the caller.
  */
 export function useThemeState(): ThemeState {
-  const boundary = useThemeBoundary();
-  return boundary ? getThemeState(boundary.source, boundary.appearance.resolved) : defaultThemeState;
+  const boundary = useRequiredThemeBoundary('useThemeState');
+  return getThemeState(boundary.source, boundary.appearance.resolved);
 }
 
 /**
  * Access both the requested appearance and its concrete resolution.
+ *
+ * @throws When no `ThemeProvider`, `ThemedRoot`, or legacy theme context is above the caller.
  */
 export function useThemeAppearance(): Readonly<ThemeAppearanceState> {
-  const boundary = useThemeBoundary();
-  return boundary?.appearance ?? defaultThemeAppearanceState;
+  return useRequiredThemeBoundary('useThemeAppearance').appearance;
 }
 
 /**

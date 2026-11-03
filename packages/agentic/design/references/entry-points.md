@@ -23,14 +23,15 @@ public symbols by name from each entry point; do not add barrel re-exports.
 | `./styling/stylesheet`    | The legacy `themedStyleSheet` helper                                                                                       |
 | `./styling/tokens`        | Legacy token-to-style builders                                                                                             |
 | `./testing`               | Test-only fixtures and validation; see `testing.md`                                                                        |
+| `./testing/theme`         | Test-only `TestThemeProvider` and `createThemeWrapper`, which need `react-native`; see `testing.md`                        |
 | `./deprecated`            | Fluent 2 token JSON loaders and pipeline mappers, restricted to existing consumers; see [below](#deprecated-entry-point)   |
 
 The `apps/bundle-size` `design-*` scenarios guard these boundaries. Input patterns check the import graph and output
 patterns check the modules a tree-shaken bundle retains. Every design scenario except the color-library one forbids
 `src/deprecated/` from the import graph. The modern root and legacy-source scenarios forbid the compatibility modules
-and `color-lib/compositing`. The modern root scenarios and the legacy-source scenario, which pairs a legacy
-`ThemeReference` with `useThemeState`, require the retained Flex interaction policy and `color-lib/interaction`; the
-legacy-source scenario also forbids a retained `FlexThemeReference`. Only the legacy theme scenario forbids any retained
+and `color-lib/compositing`. The modern root scenarios require the retained Flex interaction policy and `color-lib/interaction`. The legacy-source
+scenario, which pairs a legacy `ThemeReference` with `useThemeState`, forbids a retained `FlexThemeReference`, x3
+default, interaction policy, or `color-lib/interaction`, because the forward adapter derives no interaction state. Only the legacy theme scenario forbids any retained
 `color-lib/` or `flex/` module. The Fluent theme scenarios forbid `useTheme` and the compatibility modules from the
 import graph and any retained `flex/`, `color-lib/`, or Flex theme module, and a bundle that imports only
 `fluentLightTheme` retains no other theme and no `ThemeReference`, while one that imports only `fluentHcTheme` retains

@@ -20,7 +20,8 @@ component scenes. It places a `ThemedRoot` outside the scene and any supplied
 wrapper, preserving the same root settings through rerenders. Import events,
 queries, and types from `@testing-library/react-native`; do not import
 `react-test-renderer` directly. Tests can dispatch root modality events through
-the helper's `test-scene-root` test ID.
+the helper's `test-scene-root` test ID. Components read the theme through `useThemeState`, which throws without a
+themed ancestor, so every rendered component needs the helper's `ThemedRoot` or a `ThemeProvider`.
 
 Prefer public semantics:
 

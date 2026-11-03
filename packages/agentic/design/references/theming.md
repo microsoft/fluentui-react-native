@@ -84,11 +84,15 @@ legacy boundary for all of them, which keeps deprecated `ThemeLayer` and direct 
 
 ## Consumption and laziness
 
-| Hook                 | Returns                                                          | Without a boundary           |
-| -------------------- | ---------------------------------------------------------------- | ---------------------------- |
-| `useThemeState`      | `ThemeState`: `tokens`, resolved `appearance`, and `themeStyles` | The default state            |
-| `useThemeAppearance` | The requested and resolved appearance                            | The default appearance state |
-| `useTheme`           | The legacy `Theme` (from the `theming` subpath)                  | `undefined`                  |
+| Hook                 | Returns                                                          | Without a boundary |
+| -------------------- | ---------------------------------------------------------------- | ------------------ |
+| `useThemeState`      | `ThemeState`: `tokens`, resolved `appearance`, and `themeStyles` | Throws             |
+| `useThemeAppearance` | The requested and resolved appearance                            | Throws             |
+| `useTheme`           | The legacy `Theme` (from the `theming` subpath)                  | `undefined`        |
+
+Flex consumers require a theme: there is no default `ThemeState`. Render them inside a `ThemedRoot`, a `ThemeProvider`,
+or a legacy `ThemeContext` provider. In tests, use `TestThemeProvider` or `createThemeWrapper` from
+`@fluentui-react-native/design/testing/theme` (see `testing.md`).
 
 `ThemeState.highContrast` is deprecated; use `appearance.contrast`.
 
@@ -188,9 +192,8 @@ The package root exports only the modern authoring and consumption APIs. It reac
 which `useThemeState` needs for legacy sources, and the Flex interaction policy with the raw `color-lib` interaction
 algorithm, but not `useTheme`, the reverse converter, the Fluent themes it projects onto, or deprecated token data. The
 legacy `ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. An app that pairs a
-legacy `ThemeReference` with `useThemeState` reaches the forward adapter and, through the default theme state, the x3
-defaults and the interaction policy with `color-lib/interaction`, but not `FlexThemeReference`, `color-lib/compositing`,
-or the compatibility projection. `entry-points.md` lists every subpath.
+legacy `ThemeReference` with `useThemeState` reaches the forward adapter, but not the x3 defaults, the interaction
+policy, `color-lib/interaction`, `FlexThemeReference`, `color-lib/compositing`, or the compatibility projection. `entry-points.md` lists every subpath.
 
 `themeFromFlexTokens` in `theming/compat` builds a complete `Theme` in this order:
 
