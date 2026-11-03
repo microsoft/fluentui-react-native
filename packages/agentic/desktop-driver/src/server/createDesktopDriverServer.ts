@@ -10,7 +10,7 @@ import { invalidArgument, toWebDriverError, WebDriverError } from '../protocol/e
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
-import type { DesktopSession, ElementRecord } from './SessionManager.js';
+import type { DesktopSession, ElementRecord, MutationOptions } from './SessionManager.js';
 import { TargetRegistry } from './TargetRegistry.js';
 
 export type DesktopDriverServerOptions = {
@@ -128,13 +128,17 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
 
   if (method === 'GET' && segments.length === 1 && segments[0] === 'status') {
     const targetInfo = await Promise.all(
-      targets.list().map(async (target) => ({
-        endpoint: target.endpoint,
-        id: target.id,
-        platformName: target.platformName,
-        renderer: target.renderer,
-        host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
-      })),
+      targets.list().map(async (target) => {
+        const quarantine = sessions.getQuarantine(target.id);
+        return {
+          endpoint: target.endpoint,
+          id: target.id,
+          platformName: target.platformName,
+          renderer: target.renderer,
+          host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
+          ...(quarantine ? { quarantine } : {}),
+        };
+      }),
     );
     return { message: 'Desktop Driver is ready.', ready: true, targets: targetInfo };
   }
@@ -194,13 +198,20 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       const { actions, nextState } = parseActionSequences(requireObject(body, 'actions request').actions, session.inputState);
       const resolvedActions = await resolveActionOrigins(actions, session, sessions);
       await sessions.runInputCommand(async () => {
+        sessions.assertMutable(session);
         session.inputState = nextState;
         try {
-          await hostCommand(session, 'Performing input actions', (signal) => session.target.host.performActions(resolvedActions, signal));
-        } catch (error) {
-          await hostCommand(session, 'Releasing failed input actions', (signal) => session.target.host.releaseActions(signal)).catch(
-            () => undefined,
+          await mutationCommand(sessions, session, 'Performing input actions', (signal) =>
+            session.target.host.performActions(resolvedActions, signal),
           );
+        } catch (error) {
+          await mutationCommand(
+            sessions,
+            session,
+            'Releasing failed input actions',
+            (signal) => session.target.host.releaseActions(signal),
+            { recovery: true },
+          ).catch(() => undefined);
           session.inputState = createInputState();
           throw error;
         }
@@ -209,7 +220,9 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     }
     if (method === 'DELETE') {
       await sessions.runInputCommand(() =>
-        hostCommand(session, 'Releasing input actions', (signal) => session.target.host.releaseActions(signal)),
+        mutationCommand(sessions, session, 'Releasing input actions', (signal) => session.target.host.releaseActions(signal), {
+          recovery: true,
+        }),
       );
       session.inputState = createInputState();
       return null;
@@ -325,6 +338,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       return session.story;
     }
     if (method === 'POST' && command[0] === 'story' && command.length === 1) {
+      sessions.assertMutable(session);
       const request = parseStorySelection(body);
       const deadline = Date.now() + session.desktopTimeouts.storyRender;
       sessions.invalidatePreview(session);
@@ -339,6 +353,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       return result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'reset') {
+      sessions.assertMutable(session);
       const request = parseStorySelection(body);
       const deadline = Date.now() + session.desktopTimeouts.storyRender;
       sessions.invalidatePreview(session);
@@ -391,6 +406,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       }
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'args') {
+      sessions.assertMutable(session);
       if (!orchestrator.updateArgs) {
         throw new WebDriverError('unsupported operation', 'This Storybook target does not support arg updates.');
       }
@@ -464,14 +480,18 @@ async function handleWindowCommand(
     if (typeof handle !== 'string' || !session.windows.some(({ id }) => id === handle)) {
       throw new WebDriverError('no such window', `Window "${String(handle)}" does not exist in this session.`);
     }
-    await sessions.runInputCommand(() => hostCommand(session, `Activating window "${handle}"`, (signal) => host.activate(handle, signal)));
+    await sessions.runInputCommand(() =>
+      mutationCommand(sessions, session, `Activating window "${handle}"`, (signal) => host.activate(handle, signal)),
+    );
     session.currentWindowId = handle;
     return null;
   }
   if (command.length === 0 && method === 'DELETE') {
     ensureCurrentWindow(session);
     await sessions.runInputCommand(() =>
-      hostCommand(session, `Closing window "${session.currentWindowId}"`, (signal) => host.closeWindow(session.currentWindowId, signal)),
+      mutationCommand(sessions, session, `Closing window "${session.currentWindowId}"`, (signal) =>
+        host.closeWindow(session.currentWindowId, signal),
+      ),
     );
     session.windows = await hostCommand(session, 'Reading application windows', (signal) => host.windows(session.lease, signal));
     session.currentWindowId = session.windows[0]?.id ?? '';
@@ -488,7 +508,7 @@ async function handleWindowCommand(
     }
     if (method === 'POST') {
       const rect = validatePartialRect(requireObject(body, 'window rectangle'));
-      return hostCommand(session, 'Setting the current window rectangle', (signal) =>
+      return mutationCommand(sessions, session, 'Setting the current window rectangle', (signal) =>
         host.setWindowRect(session.currentWindowId, rect, signal),
       );
     }
@@ -554,7 +574,7 @@ async function handleElementCommand(
     }
     await sessions.runInputCommand(async () => {
       if (session.clickMode !== 'accessibility') {
-        await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
+        await mutationCommand(sessions, session, `Activating window "${snapshot.windowId}"`, (signal) =>
           session.target.host.activate(snapshot.windowId, signal),
         );
         const point = {
@@ -571,7 +591,7 @@ async function handleElementCommand(
           );
         }
       }
-      await hostCommand(session, `Clicking element "${record.id}"`, (signal) =>
+      await mutationCommand(sessions, session, `Clicking element "${record.id}"`, (signal) =>
         session.target.host.click(record.nativeId, session.clickMode, signal),
       );
     });
@@ -579,7 +599,7 @@ async function handleElementCommand(
   }
   if (method === 'POST' && operation[0] === 'clear') {
     await sessions.runInputCommand(() =>
-      hostCommand(session, `Clearing element "${record.id}"`, (signal) => session.target.host.clear(record.nativeId, signal)),
+      mutationCommand(sessions, session, `Clearing element "${record.id}"`, (signal) => session.target.host.clear(record.nativeId, signal)),
     );
     return null;
   }
@@ -595,7 +615,7 @@ async function handleElementCommand(
       throw invalidArgument('Send Keys requires a string "text" or string-array "value".');
     }
     await sessions.runInputCommand(() =>
-      hostCommand(session, `Sending keys to element "${record.id}"`, (signal) =>
+      mutationCommand(sessions, session, `Sending keys to element "${record.id}"`, (signal) =>
         session.target.host.sendKeys(record.nativeId, text, signal),
       ),
     );
@@ -748,6 +768,17 @@ function ensureCurrentWindow(session: DesktopSession): void {
 
 function hostCommand<T>(session: DesktopSession, description: string, operation: (signal: AbortSignal) => Promise<T>): Promise<T> {
   return withCommandTimeout(operation, session.desktopTimeouts.nativeCommand, description);
+}
+
+/** Runs a mutating host command behind the target quarantine guard and settles its failure into a disposition. */
+function mutationCommand<T>(
+  sessions: SessionManager,
+  session: DesktopSession,
+  description: string,
+  operation: (signal: AbortSignal) => Promise<T>,
+  options?: MutationOptions,
+): Promise<T> {
+  return sessions.runMutation(session, description, () => hostCommand(session, description, operation), options);
 }
 
 function requireObject(value: unknown, name: string): Record<string, unknown> {

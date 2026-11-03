@@ -2,6 +2,7 @@ import { NativeDriverError } from '../../native/NativeDriverError';
 import type { NativeDriverArtifact } from '../../native/types';
 import { toWebDriverError } from '../../protocol/errors';
 import type { WebDriverErrorCode } from '../../protocol/errors';
+import { attachFailureEffect, readFailureEffect } from '../../protocol/settlement';
 import {
   applyDisabledInputFeaturePolicy,
   FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES,
@@ -26,6 +27,17 @@ describe('NativeDesktopHost error translation', () => {
       message: 'native failure',
     });
   });
+
+  test.each(['no-such-element', 'stale-element', 'unsupported-operation', 'unmapped-failure'])(
+    'carries the effect a provider reports through the translation of %s',
+    (nativeCode) => {
+      const reported = translateNativeError(attachFailureEffect(new NativeDriverError(nativeCode, 'native failure'), 'partial'));
+      const silent = translateNativeError(new NativeDriverError(nativeCode, 'native failure'));
+
+      expect(readFailureEffect(reported)).toBe('partial');
+      expect(readFailureEffect(silent)).toBeUndefined();
+    },
+  );
 
   describe('NativeDesktopHost input policy', () => {
     const artifact: NativeDriverArtifact = {
@@ -93,6 +105,36 @@ describe('NativeDesktopHost error translation', () => {
       await expect(
         host.performActions([{ actions: [{ button: 0, type: 'pointerDown' }], id: 'pointer', type: 'pointer' }]),
       ).rejects.toMatchObject({ name: 'HostUnsupportedError' });
+    });
+
+    test('reports input rejected before dispatch as having no effect, so it never quarantines a target', async () => {
+      const policyHost = new NativeDesktopHost({
+        application: { windowTitle: 'Test App' },
+        artifact,
+        disabledInputFeatures: ['keyboard', 'physicalClick', 'wheel'],
+        endpoint: 'windows',
+      });
+      const host = new NativeDesktopHost({ application: { windowTitle: 'Test App' }, artifact, endpoint: 'windows' });
+      const failures = await Promise.all(
+        [
+          policyHost.click('element', 'physical'),
+          policyHost.clear('element'),
+          policyHost.sendKeys('element', 'text'),
+          policyHost.performActions([{ actions: [{ button: 0, type: 'pointerDown' }], id: 'pointer', type: 'pointer' }]),
+          host.performActions([{ actions: [{ type: 'keyDown', value: 'AB' }], id: 'key', type: 'key' }]),
+        ].map((attempt) =>
+          attempt.then(
+            () => undefined,
+            (error: unknown) => error,
+          ),
+        ),
+      );
+
+      expect(failures).toHaveLength(5);
+      for (const failure of failures) {
+        expect(failure).toBeInstanceOf(Error);
+        expect(readFailureEffect(failure)).toBe('none');
+      }
     });
 
     test('rejects unknown disabled input features from the environment', () => {

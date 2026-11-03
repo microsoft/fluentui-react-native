@@ -1,5 +1,11 @@
 import { WebDriverError } from './errors.js';
+import { attachFailureEffect, readFailureEffect } from './settlement.js';
 
+/**
+ * Aborts `operation` at the deadline and waits for it to settle before reporting a timeout, so callers never advance
+ * their queues while native work may still be running. The timeout carries what the settled operation revealed: a
+ * command that completed after the deadline had its effect applied, and a failure keeps the effect it reported.
+ */
 export async function withCommandTimeout<T>(
   operation: (signal: AbortSignal) => Promise<T>,
   timeoutMs: number,
@@ -23,11 +29,17 @@ export async function withCommandTimeout<T>(
       ]);
     } catch (error) {
       if (timeoutError) {
+        let completed = false;
+        let failure: unknown;
         await command.then(
-          () => undefined,
-          () => undefined,
+          () => {
+            completed = true;
+          },
+          (reason: unknown) => {
+            failure = reason;
+          },
         );
-        throw timeoutError;
+        throw attachFailureEffect(timeoutError, completed ? 'applied' : readFailureEffect(failure));
       }
       throw error;
     }

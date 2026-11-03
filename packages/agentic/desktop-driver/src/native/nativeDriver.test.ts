@@ -108,6 +108,7 @@ describe('native driver build and resolution', () => {
         },
       });
       await helper.dispose();
+      await expectMacosEffectReporting(resolved.executablePath);
 
       const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
         encoding: 'utf8',
@@ -396,6 +397,45 @@ describe('native driver build and resolution', () => {
         }),
       );
       await disposed;
+      await closed;
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+        await closed;
+      }
+    }
+  }
+
+  // The effect is what lets the driver tell a rejected mutation from one that may have reached the application.
+  async function expectMacosEffectReporting(executablePath: string): Promise<void> {
+    const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const decoder = new NativeFrameDecoder();
+    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
+    child.stderr.resume();
+    const request = (id: string, command: string, params: Record<string, unknown>) => {
+      const response = waitForMessage(decoder, (message) => message.type === 'response' && message.id === id);
+      child.stdin.write(encodeJsonFrame({ command, id, params, type: 'request' }));
+      return response;
+    };
+    try {
+      await waitForMessage(decoder, (message) => message.type === 'hello');
+
+      await expect(request('click-unknown-element', 'click', { elementId: 'element-never-issued' })).resolves.toMatchObject({
+        error: { code: 'stale-element', effect: 'none' },
+      });
+      await expect(request('send-keys-without-text', 'sendKeys', { elementId: 'element-never-issued' })).resolves.toMatchObject({
+        error: { code: 'invalid-params', effect: 'none' },
+      });
+      const read = await request('windows-without-lease', 'windows', {});
+      expect(read).toHaveProperty('error.code');
+      expect(read).not.toHaveProperty('error.effect');
+
+      const cancelled = waitForMessage(decoder, (message) => message.type === 'cancelled' && message.id === 'never-dispatched');
+      child.stdin.write(encodeJsonFrame({ id: 'never-dispatched', type: 'cancel' }));
+      await expect(cancelled).resolves.toMatchObject({ effect: 'none' });
+
+      await request('dispose-after-effects', 'dispose', {});
       await closed;
     } finally {
       if (child.exitCode === null && child.signalCode === null) {

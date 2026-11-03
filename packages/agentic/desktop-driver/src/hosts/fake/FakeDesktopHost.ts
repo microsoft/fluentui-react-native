@@ -17,6 +17,8 @@ import type {
   Rect,
 } from '../../host/types.js';
 import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
+import { attachFailureEffect } from '../../protocol/settlement.js';
+import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName } from '../../protocol/types.js';
 
 export type FakeDesktopElement = Omit<
@@ -39,10 +41,42 @@ export type FakeDesktopWindow = Omit<DesktopWindow, 'rect'> & {
   rect?: Rect;
 };
 
+/** Host commands that change application or input state and so settle into a mutation effect. */
+export type FakeMutation =
+  | 'activate'
+  | 'clear'
+  | 'click'
+  | 'closeWindow'
+  | 'performActions'
+  | 'releaseActions'
+  | 'sendKeys'
+  | 'setWindowRect';
+
+/**
+ * A scripted provider failure for a mutating command. Modes:
+ *
+ * - `reject`: fails at dispatch without changing anything. The reported effect defaults to `none`.
+ * - `hang`: changes nothing and never answers until the driver aborts it. The reported effect defaults to `unknown`.
+ * - `lost-response`: applies the change, then never answers until the driver aborts it. The reported effect defaults to
+ *   `unknown`, which models a provider that cannot tell whether the change landed.
+ * - `late-success`: ignores the abort and applies the change after `delayMs`, so the driver sees a timeout for a command
+ *   that took effect.
+ *
+ * `effect: 'unreported'` models a provider that attaches no effect to its failure.
+ */
+export type FakeFault = {
+  delayMs?: number;
+  effect?: MutationEffect | 'unreported';
+  mode: 'hang' | 'late-success' | 'lost-response' | 'reject';
+  /** How many calls the fault applies to before the command behaves normally again. Defaults to 1. */
+  times?: number;
+};
+
 export type FakeDesktopHostOptions = {
   actionDelayMs?: number;
   closeDelayMs?: number;
   endpoint?: DesktopEndpoint;
+  faults?: Partial<Record<FakeMutation, FakeFault>>;
   features?: Partial<DesktopHostFeatures>;
   launchDelayMs?: number;
   platformName?: DesktopPlatformName;
@@ -81,6 +115,7 @@ export class FakeDesktopHost implements DesktopHost {
   private readonly elements = new Map<string, NativeElementSnapshot>();
   private readonly initialElements = new Map<string, NativeElementSnapshot>();
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
+  private readonly faults = new Map<FakeMutation, { fault: FakeFault; remaining: number }>();
   private readonly windowEventLog: { at: number; notification: string; sequence: number; windowId: string }[] = [];
 
   constructor(options: FakeDesktopHostOptions = {}) {
@@ -91,6 +126,9 @@ export class FakeDesktopHost implements DesktopHost {
     this.features = { ...defaultFeatures, ...options.features };
     this.launchDelayMs = options.launchDelayMs ?? 0;
     this.screenshot = options.screenshot ?? onePixelPng;
+    for (const [command, fault] of Object.entries(options.faults ?? {}) as [FakeMutation, FakeFault][]) {
+      this.injectFault(command, fault);
+    }
 
     const windows = options.windows ?? [createDefaultWindow(options.storyRootTestId)];
     for (const window of windows) {
@@ -110,6 +148,49 @@ export class FakeDesktopHost implements DesktopHost {
 
   setElementName(elementId: string, name: string): void {
     this.requireElement(elementId).name = name;
+  }
+
+  /** Scripts a provider failure for the next `fault.times` calls (default 1) of a mutating command. */
+  injectFault(command: FakeMutation, fault: FakeFault): void {
+    this.faults.set(command, { fault, remaining: fault.times ?? 1 });
+  }
+
+  clearFaults(): void {
+    this.faults.clear();
+  }
+
+  /**
+   * Runs a mutating command. A scripted fault replaces the normal outcome; otherwise `apply` runs and any rejection it
+   * raises is a definitive pre-dispatch rejection, as a well-behaved provider would report. `apply` receives the abort
+   * signal the command should honor, which a late success deliberately lacks.
+   */
+  private async mutate<T>(
+    command: FakeMutation,
+    signal: AbortSignal | undefined,
+    apply: (observed: AbortSignal | undefined) => T | Promise<T>,
+  ): Promise<T> {
+    const scripted = this.faults.get(command);
+    if (!scripted) {
+      return apply(signal);
+    }
+    const { fault } = scripted;
+    scripted.remaining -= 1;
+    if (scripted.remaining <= 0) {
+      this.faults.delete(command);
+    }
+    this.actions.push({ type: 'fault', command, mode: fault.mode });
+    switch (fault.mode) {
+      case 'reject':
+        throw reportEffect(new Error(`Injected ${command} failure.`), fault.effect ?? 'none');
+      case 'hang':
+        return untilAborted(signal, fault.effect ?? 'unknown');
+      case 'lost-response':
+        await apply(signal);
+        return untilAborted(signal, fault.effect ?? 'unknown');
+      case 'late-success':
+        await new Promise<void>((resolve) => setTimeout(resolve, fault.delayMs ?? 0));
+        return apply(undefined);
+    }
   }
 
   setElementStateUnsupported(
@@ -182,19 +263,21 @@ export class FakeDesktopHost implements DesktopHost {
     return [...this.windowsById.values()].map(cloneWindow);
   }
 
-  async closeWindow(windowId: string): Promise<void> {
-    if (!this.windowsById.delete(windowId)) {
-      throw new HostStaleError(`Window "${windowId}" is no longer available.`);
-    }
-    for (const [id, element] of this.elements) {
-      if (element.windowId === windowId) {
-        this.elements.delete(id);
+  async closeWindow(windowId: string, signal?: AbortSignal): Promise<void> {
+    return this.mutate('closeWindow', signal, () => {
+      if (!this.windowsById.delete(windowId)) {
+        throw reportEffect(new HostStaleError(`Window "${windowId}" is no longer available.`), 'none');
       }
-    }
-    this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
-    for (const listener of this.listeners) {
-      listener({ type: 'window-closed', windowId });
-    }
+      for (const [id, element] of this.elements) {
+        if (element.windowId === windowId) {
+          this.elements.delete(id);
+        }
+      }
+      this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
+      for (const listener of this.listeners) {
+        listener({ type: 'window-closed', windowId });
+      }
+    });
   }
 
   async windowEvents(_lease: ApplicationLease): Promise<DesktopWindowEventLog> {
@@ -224,22 +307,26 @@ export class FakeDesktopHost implements DesktopHost {
     return [...(element.accessibilityActions ?? [])];
   }
 
-  async activate(windowId: string): Promise<void> {
-    this.requireWindow(windowId);
-    this.actions.push({ type: 'activate', windowId });
+  async activate(windowId: string, signal?: AbortSignal): Promise<void> {
+    return this.mutate('activate', signal, () => {
+      this.requireWindow(windowId);
+      this.actions.push({ type: 'activate', windowId });
+    });
   }
 
   async getWindowRect(windowId: string): Promise<Rect> {
     return { ...this.requireWindow(windowId).rect };
   }
 
-  async setWindowRect(windowId: string, rect: Partial<Rect>): Promise<Rect> {
-    if (!this.features.setWindowRect) {
-      throw new HostUnsupportedError('The fake target does not support setting the window rectangle.');
-    }
-    const window = this.requireWindow(windowId);
-    window.rect = { ...window.rect, ...rect };
-    return { ...window.rect };
+  async setWindowRect(windowId: string, rect: Partial<Rect>, signal?: AbortSignal): Promise<Rect> {
+    return this.mutate('setWindowRect', signal, () => {
+      if (!this.features.setWindowRect) {
+        throw reportEffect(new HostUnsupportedError('The fake target does not support setting the window rectangle.'), 'none');
+      }
+      const window = this.requireWindow(windowId);
+      window.rect = { ...window.rect, ...rect };
+      return { ...window.rect };
+    });
   }
 
   async find(root: NativeSearchRoot, selector: NativeSelector): Promise<NativeElementSnapshot[]> {
@@ -283,53 +370,69 @@ export class FakeDesktopHost implements DesktopHost {
   }
 
   async click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    const element = this.requireElement(elementId);
-    const resolvedMode =
-      mode === 'auto' ? (this.features.physicalClick ? 'physical' : this.features.accessibilityClick ? 'accessibility' : undefined) : mode;
-    if (
-      !resolvedMode ||
-      (resolvedMode === 'physical' && !this.features.physicalClick) ||
-      (resolvedMode === 'accessibility' && !this.features.accessibilityClick)
-    ) {
-      throw new HostUnsupportedError(`Click mode "${mode}" is unavailable.`);
-    }
-    for (const current of this.elements.values()) {
-      if (current.windowId === element.windowId && current.focused.supported) {
-        current.focused = { supported: true, value: current.id === element.id };
+    return this.mutate('click', signal, (observed) => {
+      throwIfAborted(observed);
+      const element = this.requireElement(elementId);
+      const resolvedMode =
+        mode === 'auto'
+          ? this.features.physicalClick
+            ? 'physical'
+            : this.features.accessibilityClick
+              ? 'accessibility'
+              : undefined
+          : mode;
+      if (
+        !resolvedMode ||
+        (resolvedMode === 'physical' && !this.features.physicalClick) ||
+        (resolvedMode === 'accessibility' && !this.features.accessibilityClick)
+      ) {
+        throw reportEffect(new HostUnsupportedError(`Click mode "${mode}" is unavailable.`), 'none');
       }
-    }
-    if (element.role === 'checkbox' && element.checked.supported) {
-      element.checked = { supported: true, value: element.checked.value === true ? false : true };
-    }
-    this.actions.push({ type: 'click', elementId, mode: resolvedMode });
+      for (const current of this.elements.values()) {
+        if (current.windowId === element.windowId && current.focused.supported) {
+          current.focused = { supported: true, value: current.id === element.id };
+        }
+      }
+      if (element.role === 'checkbox' && element.checked.supported) {
+        element.checked = { supported: true, value: element.checked.value === true ? false : true };
+      }
+      this.actions.push({ type: 'click', elementId, mode: resolvedMode });
+    });
   }
 
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    const element = this.requireElement(elementId);
-    element.value = '';
-    element.text = '';
-    this.actions.push({ type: 'clear', elementId });
+    return this.mutate('clear', signal, (observed) => {
+      throwIfAborted(observed);
+      const element = this.requireElement(elementId);
+      element.value = '';
+      element.text = '';
+      this.actions.push({ type: 'clear', elementId });
+    });
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    const element = this.requireElement(elementId);
-    element.value = `${element.value ?? ''}${text}`;
-    element.text = element.value;
-    this.actions.push({ type: 'send-keys', elementId, text });
+    return this.mutate('sendKeys', signal, (observed) => {
+      throwIfAborted(observed);
+      const element = this.requireElement(elementId);
+      element.value = `${element.value ?? ''}${text}`;
+      element.text = element.value;
+      this.actions.push({ type: 'send-keys', elementId, text });
+    });
   }
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
-    this.actions.push({ type: 'actions-start' });
-    await delay(this.actionDelayMs, signal);
-    this.actions.push({ type: 'actions', actions });
+    return this.mutate('performActions', signal, async (observed) => {
+      this.actions.push({ type: 'actions-start' });
+      await delay(this.actionDelayMs, observed);
+      this.actions.push({ type: 'actions', actions });
+    });
   }
 
   async releaseActions(signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    this.actions.push({ type: 'release-actions' });
+    return this.mutate('releaseActions', signal, (observed) => {
+      throwIfAborted(observed);
+      this.actions.push({ type: 'release-actions' });
+    });
   }
 
   async captureWindow(windowId: string): Promise<NativeImage> {
@@ -412,7 +515,7 @@ export class FakeDesktopHost implements DesktopHost {
   private requireWindow(windowId: string): DesktopWindow {
     const window = this.windowsById.get(windowId);
     if (!window) {
-      throw new HostStaleError(`Window "${windowId}" is no longer available.`);
+      throw reportEffect(new HostStaleError(`Window "${windowId}" is no longer available.`), 'none');
     }
     return window;
   }
@@ -420,7 +523,7 @@ export class FakeDesktopHost implements DesktopHost {
   private requireElement(elementId: string): NativeElementSnapshot {
     const element = this.elements.get(elementId);
     if (!element) {
-      throw new HostStaleError(`Element "${elementId}" is no longer available.`);
+      throw reportEffect(new HostStaleError(`Element "${elementId}" is no longer available.`), 'none');
     }
     return element;
   }
@@ -574,9 +677,34 @@ function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 }
 
+function reportEffect<T extends Error>(error: T, effect: MutationEffect | 'unreported'): T {
+  return effect === 'unreported' ? error : attachFailureEffect(error, effect);
+}
+
+function createAbortError(signal: AbortSignal | undefined, effect: MutationEffect | 'unreported'): Error {
+  const error = new Error('Fake desktop host operation was aborted.', { cause: signal?.reason });
+  error.name = 'AbortError';
+  return reportEffect(error, effect);
+}
+
+/** Never settles until the driver aborts the command, then fails with the effect a provider would report. */
+function untilAborted(signal: AbortSignal | undefined, effect: MutationEffect | 'unreported'): Promise<never> {
+  return new Promise<never>((_resolve, reject) => {
+    if (!signal) {
+      return;
+    }
+    if (signal.aborted) {
+      reject(createAbortError(signal, effect));
+      return;
+    }
+    signal.addEventListener('abort', () => reject(createAbortError(signal, effect)), { once: true });
+  });
+}
+
+// An abort observed before the fake records a change leaves nothing behind.
 function throwIfAborted(signal: AbortSignal | undefined): void {
   if (signal?.aborted) {
-    throw signal.reason instanceof Error ? signal.reason : new Error('Fake desktop host operation was aborted.');
+    throw createAbortError(signal, 'none');
   }
 }
 
@@ -592,7 +720,7 @@ function delay(milliseconds: number, signal?: AbortSignal): Promise<void> {
     }, milliseconds);
     const onAbort = () => {
       clearTimeout(timer);
-      reject(signal.reason instanceof Error ? signal.reason : new Error('Fake desktop host operation was aborted.'));
+      reject(createAbortError(signal, 'none'));
     };
     signal.addEventListener('abort', onAbort, { once: true });
   });

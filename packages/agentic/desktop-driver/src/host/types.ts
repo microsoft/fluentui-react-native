@@ -154,6 +154,12 @@ export type DesktopHostEvent =
   | { type: 'window-closed'; windowId: string }
   | { type: 'window-opened'; windowId: string };
 
+/**
+ * A host that mutates an application (`activate`, `clear`, `click`, `closeWindow`, `performActions`, `releaseActions`,
+ * `sendKeys`, `setWindowRect`) must attach the effect of a failed or cancelled call with `attachFailureEffect` from
+ * `protocol/settlement`. An unannotated failure is `unknown` and quarantines the target; only `none` leaves it usable,
+ * so a host that cannot tell whether a dispatched mutation landed must not claim `none`.
+ */
 export interface DesktopHost {
   readonly endpoint: DesktopEndpoint;
 

@@ -25,7 +25,7 @@ Accessibility.
 | `Capture.swift`                        | ScreenCaptureKit window capture, element crop, scale, and PNG encoding      |
 | `Permissions.swift`                    | TCC preflight/prompt diagnostics and Security.framework signing evidence    |
 | `Session.swift`                        | Login-session lock and console diagnostics                                  |
-| `Support.swift`                        | Errors, cancellation, JSON helpers, deadlines, and AX utilities             |
+| `Support.swift`                        | Errors, cancellation, mutation effect ledger, JSON helpers, deadlines, AX   |
 | `SelfTest.swift`                       | Provider-local framing, identity, AX, input, capture, and permission checks |
 
 The Node build coordinator is
@@ -286,6 +286,37 @@ Repeated keydowns are still posted but do not add another held physical key.
 Aliases for the same key share one entry; left and right modifiers remain
 independent. One release must remove that physical key from later keyboard and
 pointer flags.
+
+## Mutation effects
+
+Failed and cancelled mutating commands (`activate`, `clear`, `click`,
+`closeWindow`, `performActions`, `releaseActions`, `sendKeys`, `setWindowRect`)
+report an FDR1 `effect`, so Node can tell a rejection from a mutation that may
+have reached the application (see [PROTOCOL.md](../PROTOCOL.md)). Reads and
+lifecycle commands carry none.
+
+The worker owns an `EffectLedger` that `Driver.execute` resets at the start of
+each command. It counts only primary mutations, at the point they are
+dispatched:
+
+- an `AXPress`, an `AXValue` write, the close-button press, and each window
+  position or size set, bracketed by `dispatching()` and `completed(_:)`;
+- every posted key, button, and wheel event, through `delivered()`.
+
+An AX call that succeeds is applied. One that returns an error the platform
+documents as a rejection (`actionUnsupported`, `attributeUnsupported`,
+`illegalArgument`, `invalidUIElement`, `noValue`, `notImplemented`, `apiDisabled`,
+`notEnoughPrecision`) did nothing. Any other result, including `cannotComplete`
+from a busy or modal target, stays unresolved, so a failure reports `unknown` and
+Node quarantines the target. That can quarantine a target that was not changed,
+but it never lets a possibly applied mutation be retried as a rejection.
+
+Focus, window raise and activation, pointer moves, and key or button releases that
+clean up counted input are idempotent and not counted. `setWindowRect` checks that
+both position and size are settable before it sets either, so a non-resizable
+window rejects without moving. A queued request that is cancelled before it starts
+reports `none`. A new provider-side mutation must bracket its platform call with
+the ledger and be listed in `Driver.trackedMutations`.
 
 ## Capture
 

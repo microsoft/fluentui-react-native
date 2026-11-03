@@ -10,14 +10,26 @@ struct CommandResult {
 }
 
 final class Driver {
+  // Commands whose failure or cancellation can leave the target changed. Lifecycle commands are not tracked.
+  private static let trackedMutations: Set<String> = [
+    "activate", "clear", "click", "closeWindow", "performActions", "releaseActions", "sendKeys", "setWindowRect",
+  ]
+
   private let applications = ApplicationManager()
-  private let accessibility = AccessibilityEngine()
-  private let input = InputController()
+  private let effects: EffectLedger
+  private let accessibility: AccessibilityEngine
+  private let input: InputController
   private let capture = CaptureEngine()
   private let inputLock = PhysicalInputLock.shared
   private var persistentInputLock = false
   // Commands execute serially on the worker thread, so one current journal entry is sufficient.
   private var journalEntry: Int?
+
+  init(effects: EffectLedger = EffectLedger()) {
+    self.effects = effects
+    accessibility = AccessibilityEngine(effects: effects)
+    input = InputController(effects: effects)
+  }
 
   /// Publishes advisory `window-closed` events for tracked windows that Accessibility reports destroyed.
   func setWindowClosedPublisher(_ publish: @escaping (String) -> Void) {
@@ -28,20 +40,32 @@ final class Driver {
     let entry = applications.commands.begin(command, detail: journalDetail(params))
     journalEntry = entry
     defer { journalEntry = nil }
+    let tracked = Self.trackedMutations.contains(command)
+    effects.reset()
     do {
       let result = try executeCommand(command: command, params: params, token: token)
       applications.commands.finish(entry, outcome: "ok", detail: journalResult(command, result.result))
       return result
-    } catch let error as HelperError {
-      applications.commands.finish(entry, outcome: error.code)
+    } catch var error as HelperError {
+      applications.commands.finish(entry, outcome: error.code, detail: failureDetail(tracked))
+      if tracked {
+        error.effect = effects.effect
+      }
       throw error
     } catch is CancelledError {
-      applications.commands.finish(entry, outcome: "cancelled")
-      throw CancelledError()
+      applications.commands.finish(entry, outcome: "cancelled", detail: failureDetail(tracked))
+      throw CancelledError(effect: tracked ? effects.effect : nil)
     } catch {
-      applications.commands.finish(entry, outcome: "internal-error")
-      throw error
+      applications.commands.finish(entry, outcome: "internal-error", detail: failureDetail(tracked))
+      guard tracked else {
+        throw error
+      }
+      throw HelperError(code: ErrorCode.internalError, message: error.localizedDescription, effect: effects.effect)
     }
+  }
+
+  private func failureDetail(_ tracked: Bool) -> JSONObject {
+    tracked ? ["effect": effects.effect.rawValue] : [:]
   }
 
   // Journal only identifiers needed to correlate commands with window events, never text or native handles.
@@ -275,7 +299,9 @@ final class Driver {
     else {
       try fail(ErrorCode.unsupported, "The application window does not expose an accessibility close button.")
     }
+    effects.dispatching()
     let error = AXUIElementPerformAction(closeButton, kAXPressAction as CFString)
+    effects.completed(error)
     guard error == .success else {
       try fail(ErrorCode.automationFailed, "Closing the application window failed because \(describeAXError(error)).")
     }
@@ -371,6 +397,9 @@ final class Driver {
     else {
       try fail(ErrorCode.invalidParams, "The requested window rectangle must contain finite positive dimensions.")
     }
+    // Settle support for both attributes first so an unsupported size cannot leave the window moved but not resized.
+    try requireSettableGeometry(window.element, attribute: kAXPositionAttribute, noun: "position")
+    try requireSettableGeometry(window.element, attribute: kAXSizeAttribute, noun: "size")
     try setAXGeometry(window.element, attribute: kAXPositionAttribute, point: target.origin)
     try setAXGeometry(window.element, attribute: kAXSizeAttribute, size: target.size)
     try token.wait(milliseconds: 16)
@@ -382,35 +411,36 @@ final class Driver {
     return target
   }
 
-  private func setAXGeometry(_ element: AXUIElement, attribute: String, point: CGPoint) throws {
+  private func requireSettableGeometry(_ element: AXUIElement, attribute: String, noun: String) throws {
     var settable: DarwinBoolean = false
     let check = AXUIElementIsAttributeSettable(element, attribute as CFString, &settable)
-    try throwAX(check, operation: "Checking window position support")
+    try throwAX(check, operation: "Checking window \(noun) support")
     guard settable.boolValue else {
-      try fail(ErrorCode.unsupported, "The application window position cannot be changed through Accessibility.")
+      try fail(ErrorCode.unsupported, "The application window \(noun) cannot be changed through Accessibility.")
     }
+  }
+
+  private func setAXGeometry(_ element: AXUIElement, attribute: String, point: CGPoint) throws {
     var point = point
     guard let value = AXValueCreate(.cgPoint, &point) else {
       try fail(ErrorCode.internalError, "Creating the accessibility window position failed.")
     }
+    effects.dispatching()
     let error = AXUIElementSetAttributeValue(element, attribute as CFString, value)
+    effects.completed(error)
     guard error == .success else {
       try fail(ErrorCode.automationFailed, "Setting the window position failed because \(describeAXError(error)).")
     }
   }
 
   private func setAXGeometry(_ element: AXUIElement, attribute: String, size: CGSize) throws {
-    var settable: DarwinBoolean = false
-    let check = AXUIElementIsAttributeSettable(element, attribute as CFString, &settable)
-    try throwAX(check, operation: "Checking window size support")
-    guard settable.boolValue else {
-      try fail(ErrorCode.unsupported, "The application window size cannot be changed through Accessibility.")
-    }
     var size = size
     guard let value = AXValueCreate(.cgSize, &size) else {
       try fail(ErrorCode.internalError, "Creating the accessibility window size failed.")
     }
+    effects.dispatching()
     let error = AXUIElementSetAttributeValue(element, attribute as CFString, value)
+    effects.completed(error)
     guard error == .success else {
       try fail(ErrorCode.automationFailed, "Setting the window size failed because \(describeAXError(error)).")
     }

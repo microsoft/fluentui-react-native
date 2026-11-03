@@ -31,21 +31,87 @@ enum ErrorCode {
   static let internalError = "internal-error"
 }
 
+/// What a failed or cancelled mutating command left behind, reported as `effect` on the wire.
+enum MutationEffect: String {
+  // Not `none`: that spelling resolves to `Optional.none` wherever the value is optional.
+  case noEffect = "none"
+  case partial
+  case unknown
+}
+
+/// Records whether the current mutating command handed anything to the target that a retry could repeat.
+///
+/// Commands run one at a time on the worker thread, so the ledger needs no lock. Only primary mutations count:
+/// Accessibility actions and value writes, and key, button, and wheel events. Focus, window raising, and pointer
+/// placement are idempotent, and releasing input that an earlier command already counted is cleanup.
+final class EffectLedger {
+  private var pending = false
+  private var ambiguous = false
+  private var applied = 0
+
+  func reset() {
+    pending = false
+    ambiguous = false
+    applied = 0
+  }
+
+  /// Marks an Accessibility request as sent. A dispatch that never settled stays ambiguous for the whole command.
+  func dispatching() {
+    if pending {
+      ambiguous = true
+    }
+    pending = true
+  }
+
+  /// Records an event the OS accepted. Posting cannot fail afterward, so it needs no pending state.
+  func delivered() {
+    dispatching()
+    completed(.success)
+  }
+
+  /// Settles the pending dispatch from its Accessibility result. Only errors that prove the target never acted leave
+  /// no effect: `cannotComplete` also covers a busy or modal target that may still process the request.
+  func completed(_ error: AXError) {
+    switch error {
+    case .success:
+      pending = false
+      applied += 1
+    case .actionUnsupported, .apiDisabled, .attributeUnsupported, .illegalArgument, .invalidUIElement, .noValue,
+      .notEnoughPrecision, .notImplemented:
+      pending = false
+    default:
+      break
+    }
+  }
+
+  /// What a command that stopped now has left behind. Anything unsettled is `unknown`, which quarantines the target.
+  var effect: MutationEffect {
+    if pending || ambiguous {
+      return .unknown
+    }
+    return applied > 0 ? .partial : .noEffect
+  }
+}
+
 struct HelperError: Error, CustomStringConvertible {
   let code: String
   let message: String
   let data: JSONObject?
+  var effect: MutationEffect?
 
   var description: String { message }
 
-  init(code: String, message: String, data: JSONObject? = nil) {
+  init(code: String, message: String, data: JSONObject? = nil, effect: MutationEffect? = nil) {
     self.code = code
     self.message = message
     self.data = data
+    self.effect = effect
   }
 }
 
-struct CancelledError: Error {}
+struct CancelledError: Error {
+  var effect: MutationEffect?
+}
 
 @inline(__always)
 func fail(_ code: String, _ message: String, data: JSONObject? = nil) throws -> Never {

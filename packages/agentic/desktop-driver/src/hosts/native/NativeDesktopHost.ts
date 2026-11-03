@@ -21,6 +21,7 @@ import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
 import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
 import type { WebDriverErrorCode } from '../../protocol/errors.js';
+import { attachFailureEffect, readFailureEffect } from '../../protocol/settlement.js';
 import type { DesktopEndpoint } from '../../protocol/types.js';
 import { NativeHostProcess } from './NativeHostProcess.js';
 
@@ -126,7 +127,7 @@ export class NativeDesktopHost implements DesktopHost {
         return;
       }
       if (mode === 'physical') {
-        throw new HostUnsupportedError('Physical pointer input is disabled by the registered target policy.');
+        throw rejectedBeforeDispatch(new HostUnsupportedError('Physical pointer input is disabled by the registered target policy.'));
       }
     }
     const includePointer = mode !== 'accessibility';
@@ -142,14 +143,14 @@ export class NativeDesktopHost implements DesktopHost {
 
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
     if (this.disabledInputFeatures.has('keyboard')) {
-      throw new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.');
+      throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.'));
     }
     await this.request('clear', { elementId }, signal);
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
     if (this.disabledInputFeatures.has('keyboard')) {
-      throw new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.');
+      throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.'));
     }
     this.potentialKeys = new Set([...this.depressedKeys, ...typedTextRecoveryKeys(text)]);
     try {
@@ -166,10 +167,15 @@ export class NativeDesktopHost implements DesktopHost {
         (sequence.type === 'pointer' && this.disabledInputFeatures.has('physicalClick')) ||
         (sequence.type === 'wheel' && this.disabledInputFeatures.has('wheel'))
       ) {
-        throw new HostUnsupportedError(`${sequence.type} input is disabled by the registered target policy.`);
+        throw rejectedBeforeDispatch(new HostUnsupportedError(`${sequence.type} input is disabled by the registered target policy.`));
       }
     }
-    const plan = planInputLedger(actions, this.depressedKeys, this.depressedButtons);
+    let plan: InputLedgerPlan;
+    try {
+      plan = planInputLedger(actions, this.depressedKeys, this.depressedButtons);
+    } catch (error) {
+      throw rejectedBeforeDispatch(error);
+    }
     this.potentialKeys = plan.potentialKeys;
     this.potentialButtons = plan.potentialButtons;
     try {
@@ -476,19 +482,25 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
   'no-such-window': 'no such window',
 };
 
+/** Marks a failure raised before any command reached the provider, so no effect can have been dispatched. */
+function rejectedBeforeDispatch<T>(error: T): T {
+  return error instanceof Error ? attachFailureEffect(error, 'none') : error;
+}
+
 export function translateNativeError(error: unknown): unknown {
   if (!(error instanceof NativeDriverError)) {
     return error;
   }
+  const effect = readFailureEffect(error);
   if (error.code === 'unsupported-operation') {
-    return new HostUnsupportedError(error.message);
+    return attachFailureEffect(new HostUnsupportedError(error.message), effect);
   }
   if (error.code === 'stale-element') {
-    return new HostStaleError(error.message);
+    return attachFailureEffect(new HostStaleError(error.message), effect);
   }
   const webdriverCode = nativeWebDriverErrorCodes[error.code];
   if (webdriverCode) {
-    return new HostWebDriverError(webdriverCode, error.message, error.data);
+    return attachFailureEffect(new HostWebDriverError(webdriverCode, error.message, error.data), effect);
   }
   return error;
 }

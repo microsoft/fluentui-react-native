@@ -128,6 +128,11 @@ final class AccessibilityEngine {
 
   private var records: [String: ElementRecord] = [:]
   private var recordIDsByHash: [CFHashCode: [String]] = [:]
+  private let effects: EffectLedger
+
+  init(effects: EffectLedger = EffectLedger()) {
+    self.effects = effects
+  }
 
   func tree(
     window: WindowRecord,
@@ -323,7 +328,9 @@ final class AccessibilityEngine {
         "The element does not expose an AXPress, AXConfirm, or AXPick action, so accessibility click is unavailable."
       )
     }
+    effects.dispatching()
     let error = AXUIElementPerformAction(record.element, action as CFString)
+    effects.completed(error)
     if error == .invalidUIElement {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
     }
@@ -354,7 +361,9 @@ final class AccessibilityEngine {
     guard settableError == .success else {
       return false
     }
+    effects.dispatching()
     let error = AXUIElementSetAttributeValue(record.element, kAXValueAttribute as CFString, "" as CFString)
+    effects.completed(error)
     if error == .invalidUIElement {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
     }

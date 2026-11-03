@@ -32,6 +32,8 @@ private final class SelfTestRunner {
     testLoginSessionState()
     testWindowEventMonitor()
     testCommandJournal()
+    testEffectLedger()
+    testMutationEffects()
     testHello()
   }
 
@@ -648,6 +650,93 @@ private final class SelfTestRunner {
       missing.unavailableReason == nil && missing.json["status"] as? String == "unavailable",
       "an unreadable session dictionary is reported as unavailable rather than locked"
     )
+  }
+
+  private func testEffectLedger() {
+    check(
+      MutationEffect.noEffect.rawValue == "none" && MutationEffect.partial.rawValue == "partial"
+        && MutationEffect.unknown.rawValue == "unknown",
+      "effects use the protocol spellings"
+    )
+    let ledger = EffectLedger()
+    check(ledger.effect == .noEffect, "a command that dispatched nothing has no effect")
+    ledger.delivered()
+    check(ledger.effect == .partial, "a delivered event that the command did not finish is a partial effect")
+    ledger.reset()
+    check(ledger.effect == .noEffect, "resetting the ledger starts the next command clean")
+
+    ledger.dispatching()
+    check(ledger.effect == .unknown, "an Accessibility request without a result may still be processed")
+    ledger.completed(.success)
+    check(ledger.effect == .partial, "an acknowledged request is a partial effect once the command stops")
+
+    let proofOfNoEffect: [AXError] = [
+      .actionUnsupported, .apiDisabled, .attributeUnsupported, .illegalArgument, .invalidUIElement, .noValue,
+      .notEnoughPrecision, .notImplemented,
+    ]
+    for error in proofOfNoEffect {
+      ledger.reset()
+      ledger.dispatching()
+      ledger.completed(error)
+      check(ledger.effect == .noEffect, "\(axErrorName(error)) proves the target never acted")
+    }
+    for error in [AXError.cannotComplete, .failure] {
+      ledger.reset()
+      ledger.dispatching()
+      ledger.completed(error)
+      check(ledger.effect == .unknown, "\(axErrorName(error)) leaves the outcome unknown")
+    }
+
+    ledger.reset()
+    ledger.dispatching()
+    ledger.completed(.cannotComplete)
+    ledger.delivered()
+    check(ledger.effect == .unknown, "a later success does not settle an earlier unresolved dispatch")
+    ledger.reset()
+    check(ledger.effect == .noEffect, "resetting clears an unresolved dispatch")
+  }
+
+  private func testMutationEffects() {
+    let residue = EffectLedger()
+    let driver = Driver(effects: residue)
+    let token = CancellationToken()
+    func failure(_ command: String, _ params: JSONObject = [:]) -> Error? {
+      do {
+        _ = try driver.execute(command: command, params: params, token: token)
+        return nil
+      } catch {
+        return error
+      }
+    }
+
+    residue.dispatching()
+    let click = failure("click", ["elementId": "element-missing"]) as? HelperError
+    check(
+      click?.code == ErrorCode.staleElement && click?.effect == .noEffect,
+      "a click rejected before dispatch reports no effect, whatever the previous command left in the ledger"
+    )
+    let sendKeys = failure("sendKeys", ["elementId": "element-missing"]) as? HelperError
+    check(
+      sendKeys?.code == ErrorCode.invalidParams && sendKeys?.effect == .noEffect,
+      "a malformed keyboard request reports no effect"
+    )
+    let actions = failure("performActions", ["actions": "not-an-array"]) as? HelperError
+    check(
+      actions?.code == ErrorCode.invalidParams && actions?.effect == .noEffect,
+      "a malformed input sequence reports no effect"
+    )
+    let read = failure("windows") as? HelperError
+    check(read != nil && read?.effect == nil, "a read-only command does not claim an effect")
+    let unsupported = failure("not-a-command") as? HelperError
+    check(unsupported?.code == ErrorCode.unsupported && unsupported?.effect == nil, "an unknown command does not claim an effect")
+
+    token.cancel()
+    check(
+      (failure("setWindowRect", ["windowId": "window-missing"]) as? CancelledError)?.effect == .noEffect,
+      "a mutation cancelled before dispatch reports no effect"
+    )
+    let cancelledRead = failure("windows") as? CancelledError
+    check(cancelledRead != nil && cancelledRead?.effect == nil, "a cancelled read-only command does not claim an effect")
   }
 
   private func testHello() {

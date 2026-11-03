@@ -161,7 +161,8 @@ final class Host {
       queue.remove(at: index)
     }
     condition.unlock()
-    writeCancelled(id)
+    // A command that never started cannot have changed anything.
+    writeCancelled(id, effect: .noEffect)
   }
 
   private func workerLoop() {
@@ -180,14 +181,21 @@ final class Host {
       token.reset()
       condition.unlock()
 
-      var cancelled = false
+      var cancellation: CancelledError?
       do {
         let result = try driver.execute(command: request.command, params: request.params, token: token)
         try writeResponse(id: request.id, command: request.command, result: result)
-      } catch is CancelledError {
-        cancelled = true
+      } catch let error as CancelledError {
+        cancellation = error
       } catch let error as HelperError {
-        writeError(id: request.id, command: request.command, code: error.code, message: error.message, data: error.data)
+        writeError(
+          id: request.id,
+          command: request.command,
+          code: error.code,
+          message: error.message,
+          data: error.data,
+          effect: error.effect
+        )
       } catch {
         writeError(
           id: request.id,
@@ -197,15 +205,15 @@ final class Host {
         )
       }
 
-      if cancelled {
+      if let cancellation {
         driver.releaseInput()
-        writeCancelled(request.id)
+        writeCancelled(request.id, effect: cancellation.effect)
       }
       condition.lock()
       activeID = nil
       condition.unlock()
 
-      if request.command == "dispose" && !cancelled {
+      if request.command == "dispose" && cancellation == nil {
         try? FileHandle.standardOutput.synchronize()
         Darwin.exit(EXIT_SUCCESS)
       }
@@ -254,29 +262,31 @@ final class Host {
     command: String,
     code: String,
     message: String,
-    data: JSONObject? = nil
+    data: JSONObject? = nil,
+    effect: MutationEffect? = nil
   ) {
     var errorData = data ?? [:]
     errorData["command"] = bounded(command, bytes: 256)
+    var error: JSONObject = [
+      "code": code,
+      "message": bounded(message, bytes: 4096),
+      "data": errorData,
+    ]
+    if let effect {
+      error["effect"] = effect.rawValue
+    }
     var response: JSONObject = [
       "type": "response",
       "id": id,
-      "error": [
-        "code": code,
-        "message": bounded(message, bytes: 4096),
-        "data": errorData,
-      ],
+      "error": error,
     ]
     do {
       if try serializeJSON(response).count > Framing.maximumJSONBytes {
-        response["error"] = [
-          "code": code,
-          "message": bounded(message, bytes: 4096),
-          "data": [
-            "command": bounded(command, bytes: 256),
-            "diagnosticsTruncated": true,
-          ],
+        error["data"] = [
+          "command": bounded(command, bytes: 256),
+          "diagnosticsTruncated": true,
         ]
+        response["error"] = error
       }
       try writer?.writeJSON(response)
     } catch {
@@ -285,12 +295,16 @@ final class Host {
     }
   }
 
-  private func writeCancelled(_ id: String) {
+  private func writeCancelled(_ id: String, effect: MutationEffect? = nil) {
+    var message: JSONObject = [
+      "type": "cancelled",
+      "id": id,
+    ]
+    if let effect {
+      message["effect"] = effect.rawValue
+    }
     do {
-      try writer?.writeJSON([
-        "type": "cancelled",
-        "id": id,
-      ])
+      try writer?.writeJSON(message)
     } catch {
       writeDiagnostic("Native cancellation write failed: \(error)")
       Darwin.exit(EXIT_FAILURE)

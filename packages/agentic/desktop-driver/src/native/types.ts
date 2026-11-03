@@ -1,4 +1,5 @@
 import type { DesktopEndpoint } from '../protocol/types.js';
+import type { MutationEffect } from '../protocol/settlement.js';
 
 export type NativeDriverProvider = 'macos' | 'windows';
 export type NativeDriverArchitecture = 'arm64' | 'x64';
@@ -94,6 +95,8 @@ export type NativeHostResponse = {
   error?: {
     code: string;
     data?: Record<string, unknown>;
+    /** What a failed mutating command left behind. Absent means the provider cannot rule an effect out. */
+    effect?: MutationEffect;
     message: string;
   };
   id: string;
@@ -114,6 +117,8 @@ export type NativeHostCancel = {
 };
 
 export type NativeHostCancelled = {
+  /** What the cancelled mutating command left behind. Absent means the provider cannot rule an effect out. */
+  effect?: MutationEffect;
   id: string;
   type: 'cancelled';
 };

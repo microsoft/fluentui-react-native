@@ -156,6 +156,36 @@ A failed response carries a structured helper error:
 platform error codes, but not native handles or unrestricted environment data.
 Node maps helper codes onto the public WebDriver error contract.
 
+### Mutation `effect`
+
+A failed or cancelled mutating command also reports what it did to the
+application, so Node can tell a rejected mutation from one that may have
+reached it. `effect` is an optional string on `response.error` and on
+`cancelled`:
+
+| `effect`  | Meaning                                                                                 |
+| --------- | --------------------------------------------------------------------------------------- |
+| `none`    | Nothing observable was dispatched. Idempotent focus and pointer placement do not count. |
+| `partial` | Some primary mutations completed and none is still in flight or unresolved.             |
+| `unknown` | A mutation was dispatched and not settled, or the helper cannot tell.                   |
+
+The mutating commands are `activate`, `clear`, `click`, `closeWindow`,
+`performActions`, `releaseActions`, `sendKeys`, and `setWindowRect`. Reads and
+lifecycle commands (`launch`, `attach`, `closeApplication`, `dispose`) carry no
+`effect`.
+
+Node fails closed: an absent `effect` on a failed or cancelled mutation is
+`unknown`. `none` is a rejection and leaves the target usable; `partial` and
+`unknown` are indeterminate, and Node quarantines the target until it is
+re-observed or restarted. A helper that dies, a failed write, and a missed
+cancellation deadline never carry an `effect`, so they are also indeterminate. A
+success that arrives after Node aborted the request is an applied mutation.
+
+Providers MUST report `effect` on every failed or cancelled mutating command.
+A mutation rejected before any platform call is `none`; a request cancelled while
+still queued never started and is `none`. Providers must not promote an
+ambiguous dispatch to `none`.
+
 ### `event`
 
 Helpers can publish advisory application, window, structure, and transport
@@ -203,8 +233,11 @@ When a command's `AbortSignal` fires, Node sends:
 The helper stops side effects, unwinds command-local work, and emits:
 
 ```json
-{ "type": "cancelled", "id": "<request uuid>" }
+{ "type": "cancelled", "id": "<request uuid>", "effect": "none" }
 ```
+
+`effect` is the mutation effect described above and is present for mutating
+commands. A queued request that is cancelled before it starts reports `none`.
 
 Node retains the session queue and physical-input ownership until the request
 settles. Failure to settle before the cancellation deadline is fatal to the
@@ -280,5 +313,8 @@ When changing FDR1:
 2. preserve major-version rejection and explicit feature negotiation;
 3. add Node framing and provider-native self-tests;
 4. verify malformed, oversize, cancellation, binary, and handshake behavior;
-5. update [the public protocol](../references/protocol.md) only if observable
+5. report `effect` on every failed or cancelled mutating command; the field is
+   additive and does not change the wire version, but a provider that omits it
+   makes every failed mutation quarantine its target;
+6. update [the public protocol](../references/protocol.md) only if observable
    WebDriver semantics also change.

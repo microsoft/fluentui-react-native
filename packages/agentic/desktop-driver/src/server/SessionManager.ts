@@ -11,6 +11,8 @@ import type {
 import { createInputState } from '../protocol/actions.js';
 import type { WebDriverInputState } from '../protocol/actions.js';
 import { WebDriverError } from '../protocol/errors.js';
+import { attachFailureEffect, attachMutationReport, createMutationReport, dispositionForEffect } from '../protocol/settlement.js';
+import type { MutationEffect } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { DesktopClickMode, DesktopTimeouts, WebDriverTimeouts } from '../protocol/types.js';
 
@@ -19,6 +21,24 @@ export type ElementRecord = {
   nativeId: string;
   previewGeneration: number;
   scope: NativeElementScope;
+};
+
+/**
+ * Why a target refuses mutations. A target is quarantined when a mutating command ended without the provider being
+ * able to say whether it changed the application, so replaying it or issuing further input could compound the change.
+ */
+export type QuarantineRecord = {
+  command: string;
+  effect: MutationEffect;
+  message: string;
+  sessionId: string;
+  since: string;
+  targetId: string;
+};
+
+export type MutationOptions = {
+  /** Recovery commands run while quarantined; they can extend a quarantine but never lift it. */
+  recovery?: boolean;
 };
 
 export type DesktopSession = {
@@ -45,6 +65,7 @@ export class SessionManager {
   private readonly reservedTargets = new Set<string>();
   private readonly commandQueues = new Map<string, Promise<void>>();
   private readonly inFlightCreates = new Set<Promise<void>>();
+  private readonly quarantines = new Map<string, QuarantineRecord>();
   private inputQueue: Promise<void> = Promise.resolve();
   private closing = false;
 
@@ -83,6 +104,10 @@ export class SessionManager {
   ): Promise<DesktopSession> {
     if (target.launchModes && !target.launchModes.includes(launchMode)) {
       throw new WebDriverError('session not created', `Target "${target.id}" does not allow ${launchMode} sessions.`);
+    }
+    const quarantine = this.quarantines.get(target.id);
+    if (quarantine) {
+      throw createQuarantineError('session not created', quarantine);
     }
     if (this.sessionsByTarget.has(target.id) || this.reservedTargets.has(target.id)) {
       throw new WebDriverError('session not created', `Target "${target.id}" already has an active session.`);
@@ -210,6 +235,59 @@ export class SessionManager {
     return result;
   }
 
+  getQuarantine(targetId: string): QuarantineRecord | undefined {
+    return this.quarantines.get(targetId);
+  }
+
+  /** Rejects with a settled "rejected" failure when the session's target is quarantined. */
+  assertMutable(session: DesktopSession): void {
+    const record = this.quarantines.get(session.target.id);
+    if (record) {
+      throw createQuarantineError('unknown error', record);
+    }
+  }
+
+  /**
+   * Runs one mutating host command. The guard is evaluated when the command runs, not when it is queued, so a command
+   * queued behind one that turns out indeterminate is blocked. A failure is settled into a disposition: only a
+   * definitive "none" is safe to retry, "applied" means the change landed despite the failure, and anything else
+   * quarantines the target.
+   */
+  async runMutation<T>(
+    session: DesktopSession,
+    description: string,
+    operation: () => Promise<T>,
+    options: MutationOptions = {},
+  ): Promise<T> {
+    if (!options.recovery) {
+      this.assertMutable(session);
+    }
+    try {
+      return await operation();
+    } catch (error) {
+      const failure = error instanceof Error ? error : new Error(String(error));
+      const report = createMutationReport(failure, false);
+      if (dispositionForEffect(report.effect) === 'indeterminate') {
+        this.quarantine(session, description, report.effect, failure);
+      }
+      throw attachMutationReport(failure, { ...report, quarantined: this.quarantines.has(session.target.id) });
+    }
+  }
+
+  private quarantine(session: DesktopSession, command: string, effect: MutationEffect, failure: Error): void {
+    if (this.quarantines.has(session.target.id)) {
+      return;
+    }
+    this.quarantines.set(session.target.id, {
+      command,
+      effect,
+      message: truncate(failure.message, 300),
+      sessionId: session.id,
+      since: new Date().toISOString(),
+      targetId: session.target.id,
+    });
+  }
+
   async delete(id: string): Promise<void> {
     const session = this.get(id);
     this.reservedTargets.add(session.target.id);
@@ -217,10 +295,16 @@ export class SessionManager {
     try {
       try {
         await this.runInputCommand(() =>
-          withCommandTimeout(
-            (signal) => session.target.host.releaseActions(signal),
-            session.desktopTimeouts.nativeCommand,
+          this.runMutation(
+            session,
             `Releasing input for session "${id}"`,
+            () =>
+              withCommandTimeout(
+                (signal) => session.target.host.releaseActions(signal),
+                session.desktopTimeouts.nativeCommand,
+                `Releasing input for session "${id}"`,
+              ),
+            { recovery: true },
           ),
         );
       } catch (error) {
@@ -243,6 +327,11 @@ export class SessionManager {
       }
       this.sessions.delete(id);
       this.sessionsByTarget.delete(session.target.id);
+      // Closing a launched application verifies the exit of the exact incarnation the quarantine was raised against.
+      // An attached application is left running, so its quarantine stays until it is explicitly recovered.
+      if (session.lease.ownership === 'launched') {
+        this.quarantines.delete(session.target.id);
+      }
     } finally {
       this.reservedTargets.delete(session.target.id);
     }
@@ -302,4 +391,20 @@ export class SessionManager {
       }
     }
   }
+}
+
+function createQuarantineError(code: 'session not created' | 'unknown error', record: QuarantineRecord): WebDriverError {
+  const error = new WebDriverError(
+    code,
+    `Target "${record.targetId}" is quarantined: "${record.command}" ended without confirming whether it changed the application (${record.message}). ` +
+      'Mutations stay blocked until the target is recovered or its launched application is closed.',
+    { quarantine: { ...record }, reason: 'target-quarantined' },
+  );
+  // The blocked command never reached the host, so it is a settled rejection even though the target stays quarantined.
+  attachFailureEffect(error, 'none');
+  return attachMutationReport(error, createMutationReport(error, true));
+}
+
+function truncate(text: string, maxLength: number): string {
+  return text.length <= maxLength ? text : `${text.slice(0, maxLength - 1)}…`;
 }
