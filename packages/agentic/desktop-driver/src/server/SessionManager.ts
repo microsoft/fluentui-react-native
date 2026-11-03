@@ -51,8 +51,29 @@ export type MutationOptions = {
   recovery?: boolean;
 };
 
+/** The grant that created a session on a protected service. Only that grant may address the session afterwards. */
+export type SessionOwner = {
+  grantId: string;
+  label: string;
+};
+
+/** Who has a target reserved, as far as a contending caller may be told. `label` is set only for a grant's session. */
+type TargetHolder = {
+  label?: string;
+  since: string;
+};
+
+export type SessionManagerOptions = {
+  /**
+   * Removes session ids from the quarantine details a caller receives. A protected service sets this, because the id of
+   * another grant's session must not reach a caller that is only contending for the same target.
+   */
+  redactSessionIds?: boolean;
+};
+
 export type DesktopSession = {
   clickMode: DesktopClickMode;
+  createdAt: string;
   currentWindowId: string;
   desktopTimeouts: DesktopTimeouts;
   elements: Map<string, ElementRecord>;
@@ -64,6 +85,8 @@ export type DesktopSession = {
   lease: ApplicationLease;
   /** What the operation layer remembers about this session: its references, pending releases, and journal. */
   operations: OperationSessionState;
+  /** Set on a protected service; absent when the service does not authenticate callers. */
+  owner?: SessionOwner;
   previewGeneration: number;
   story: { previewGeneration: number; runId: string; storyId: string } | null;
   target: DesktopTarget;
@@ -74,23 +97,29 @@ export type DesktopSession = {
 export class SessionManager {
   private readonly sessions = new Map<string, DesktopSession>();
   private readonly sessionsByTarget = new Map<string, string>();
-  private readonly reservedTargets = new Set<string>();
+  private readonly reservedTargets = new Map<string, TargetHolder>();
   private readonly commandQueues = new Map<string, Promise<void>>();
   private readonly inFlightCreates = new Set<Promise<void>>();
   private readonly quarantines = new Map<string, QuarantineRecord>();
   private inputQueue: Promise<void> = Promise.resolve();
   private closing = false;
+  private readonly redactSessionIds: boolean;
+
+  constructor(options: SessionManagerOptions = {}) {
+    this.redactSessionIds = options.redactSessionIds === true;
+  }
 
   create(
     target: DesktopTarget,
     hostInfo: DesktopHostInfo,
     clickMode: DesktopClickMode,
     launchMode: 'attach' | 'launch',
+    owner?: SessionOwner,
   ): Promise<DesktopSession> {
     if (this.closing) {
       return Promise.reject(new WebDriverError('session not created', 'Desktop Driver is shutting down.'));
     }
-    const result = this.createSession(target, hostInfo, clickMode, launchMode);
+    const result = this.createSession(target, hostInfo, clickMode, launchMode, owner);
     const settled = result.then(
       () => undefined,
       () => undefined,
@@ -113,19 +142,20 @@ export class SessionManager {
     hostInfo: DesktopHostInfo,
     clickMode: DesktopClickMode,
     launchMode: 'attach' | 'launch',
+    owner?: SessionOwner,
   ): Promise<DesktopSession> {
     if (target.launchModes && !target.launchModes.includes(launchMode)) {
       throw new WebDriverError('session not created', `Target "${target.id}" does not allow ${launchMode} sessions.`);
     }
     const quarantine = this.quarantines.get(target.id);
     if (quarantine) {
-      throw createQuarantineError('session not created', quarantine);
+      throw createQuarantineError('session not created', quarantine, this.redactSessionIds);
     }
     if (this.sessionsByTarget.has(target.id) || this.reservedTargets.has(target.id)) {
-      throw new WebDriverError('session not created', `Target "${target.id}" already has an active session.`);
+      throw this.createBusyError(target.id);
     }
 
-    this.reservedTargets.add(target.id);
+    this.reservedTargets.set(target.id, { ...(owner ? { label: owner.label } : {}), since: new Date().toISOString() });
     let lease: ApplicationLease | undefined;
     let releaseReservation = true;
     let leasePromise: Promise<ApplicationLease> | undefined;
@@ -152,6 +182,7 @@ export class SessionManager {
       }
       const session: DesktopSession = {
         clickMode,
+        createdAt: new Date().toISOString(),
         currentWindowId: windows[0].id,
         desktopTimeouts: {
           appLaunch: target.launchTimeoutMs ?? 120_000,
@@ -167,6 +198,7 @@ export class SessionManager {
         issuedElementIds: new Set(),
         lease,
         operations: new OperationSessionState(),
+        ...(owner ? { owner } : {}),
         previewGeneration: 0,
         story: null,
         target,
@@ -215,12 +247,50 @@ export class SessionManager {
     }
   }
 
+  /**
+   * Why a target cannot be opened right now. The holder is described only by the label its grant chose, so a caller that
+   * is merely contending learns who to wait for without learning any grant or session identifier.
+   */
+  private createBusyError(targetId: string): WebDriverError {
+    const sessionId = this.sessionsByTarget.get(targetId);
+    const session = sessionId ? this.sessions.get(sessionId) : undefined;
+    const holder: TargetHolder | undefined =
+      this.reservedTargets.get(targetId) ??
+      (session ? { ...(session.owner ? { label: session.owner.label } : {}), since: session.createdAt } : undefined);
+    return new WebDriverError('session not created', `Target "${targetId}" already has an active session.`, {
+      reason: 'target-busy',
+      ...(this.redactSessionIds && holder?.label ? { holder: { label: holder.label, since: holder.since } } : {}),
+    });
+  }
+
   get(id: string): DesktopSession {
     const session = this.sessions.get(id);
     if (!session) {
       throw new WebDriverError('invalid session id', `Session "${id}" does not exist.`);
     }
     return session;
+  }
+
+  /**
+   * Looks a session up for a caller. A session created by a grant is visible only to that grant; every other caller
+   * gets the same answer as for an id that does not exist, so a valid grant cannot probe for or address another
+   * grant's session.
+   */
+  getFor(id: string, grantId: string | undefined): DesktopSession {
+    const session = this.get(id);
+    if (session.owner && session.owner.grantId !== grantId) {
+      throw new WebDriverError('invalid session id', `Session "${id}" does not exist.`);
+    }
+    return session;
+  }
+
+  /** The quarantine as a caller may see it. */
+  describeQuarantine(record: QuarantineRecord): Omit<QuarantineRecord, 'sessionId'> & { sessionId?: string } {
+    if (!this.redactSessionIds) {
+      return { ...record };
+    }
+    const { sessionId: _sessionId, ...visible } = record;
+    return visible;
   }
 
   runCommand<T>(sessionId: string, operation: () => Promise<T>): Promise<T> {
@@ -256,7 +326,7 @@ export class SessionManager {
   assertMutable(session: DesktopSession): void {
     const record = this.quarantines.get(session.target.id);
     if (record) {
-      throw createQuarantineError('unknown error', record);
+      throw createQuarantineError('unknown error', record, this.redactSessionIds);
     }
   }
 
@@ -313,19 +383,24 @@ export class SessionManager {
 
   async delete(id: string): Promise<void> {
     const session = this.get(id);
-    this.reservedTargets.add(session.target.id);
+    this.reservedTargets.set(session.target.id, {
+      ...(session.owner ? { label: session.owner.label } : {}),
+      since: session.createdAt,
+    });
     const failures: unknown[] = [];
     try {
       try {
+        // The quarantine record keeps this description and the failure text, and other callers can read both, so
+        // neither names the session.
         await this.runInputCommand(() =>
           this.runMutation(
             session,
-            `Releasing input for session "${id}"`,
+            'Releasing input while closing the session',
             () =>
               withCommandTimeout(
                 (signal) => session.target.host.releaseActions(signal),
                 session.desktopTimeouts.nativeCommand,
-                `Releasing input for session "${id}"`,
+                'Releasing input while closing the session',
               ),
             { recovery: true },
           ),
@@ -361,8 +436,24 @@ export class SessionManager {
   }
 
   async deleteAll(): Promise<void> {
+    await this.deleteWhere(() => true, 'One or more desktop sessions failed to close.');
+  }
+
+  /**
+   * Closes every session a grant created. Used when the grant is revoked, since nothing else can address them. A session
+   * that is still launching registers only when it finishes, so creates in flight are awaited before looking.
+   */
+  async deleteOwnedBy(grantId: string): Promise<void> {
+    await this.waitForCreates();
+    await this.deleteWhere((session) => session.owner?.grantId === grantId, 'One or more sessions of a revoked grant failed to close.');
+  }
+
+  private async deleteWhere(predicate: (session: DesktopSession) => boolean, summary: string): Promise<void> {
     const failures: unknown[] = [];
-    for (const id of Array.from(this.sessions.keys())) {
+    for (const [id, session] of Array.from(this.sessions.entries())) {
+      if (!predicate(session)) {
+        continue;
+      }
       try {
         // Queued behind the session's own commands, so closing never overlaps native work whose caller has left.
         await this.runCommand(id, async () => {
@@ -375,7 +466,7 @@ export class SessionManager {
       }
     }
     if (failures.length > 0) {
-      throw new AggregateError(failures, 'One or more desktop sessions failed to close.');
+      throw new AggregateError(failures, summary);
     }
   }
 
@@ -423,15 +514,20 @@ export class SessionManager {
   }
 }
 
-function createQuarantineError(code: 'session not created' | 'unknown error', record: QuarantineRecord): WebDriverError {
+function createQuarantineError(
+  code: 'session not created' | 'unknown error',
+  record: QuarantineRecord,
+  redactSessionId: boolean,
+): WebDriverError {
   const cause =
     record.origin === 'provider'
       ? `the native provider quarantined itself and refused "${record.command}" (${record.message})`
       : `"${record.command}" ended without confirming whether it changed the application (${record.message})`;
+  const { sessionId: _sessionId, ...withoutSessionId } = record;
   const error = new WebDriverError(
     code,
     `Target "${record.targetId}" is quarantined: ${cause}. Mutations stay blocked until the target is recovered or its launched application is closed.`,
-    { quarantine: { ...record }, reason: 'target-quarantined' },
+    { quarantine: redactSessionId ? withoutSessionId : { ...record }, reason: 'target-quarantined' },
   );
   // The blocked command never reached the host, so it is a settled rejection even though the target stays quarantined.
   attachFailureEffect(error, 'none');

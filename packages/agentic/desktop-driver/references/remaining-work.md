@@ -16,8 +16,10 @@ it through an effect ledger and the Windows helper fails closed on unsettled UI
 Automation mutations. Bounded observation is implemented in the Node host, the
 fake host, and the macOS helper, and the driver service serves the read
 operations `observe`, `find`, and `journal` ([Agent operations](operations.md));
-the Windows helper's `observe` is open (section 7). Actions, waits, capture,
-controller lifecycle, and the MCP adapter are not started. MR has
+the Windows helper's `observe` is open (section 7). A service given a
+`DesktopAuthority` now requires a grant on every route and scopes sessions and
+targets per grant ([security](security.md#protected-service)). Actions, waits,
+capture, controller lifecycle, and the MCP adapter are not started. MR has
 Windows/PowerShell pipe qualification; GitHub Actions rendering and
 console-interrupt coverage remain. M0-M6 remain open unless marked below. This
 status does not claim real-application qualification.
@@ -823,6 +825,18 @@ runtime prepare messages, not only the new driver tool. If upstream selection
 cannot honor controller authority, expose documentation-only behavior while
 driver control is active rather than retaining a bypass.
 
+**Progress:** the service boundary is implemented. A `DesktopAuthority` issues
+grants, and a service given one authenticates every route before reading the
+request, binds each session to its grant, scopes targets per grant, redacts
+other grants' identifiers from contention and quarantine data, and closes a
+revoked grant's sessions. Its contract is in
+[the security model](security.md#protected-service). Still open: the private
+connection descriptor and its state root (with the Windows ownership adapter),
+the WDIO grant path (the typed client already accepts a grant), controller
+lifecycle, leases and idle expiry,
+exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+cross-service claims, Storybook mutation coordination, and supervisor wiring.
+
 **Complete when:** agent/WDIO contention, all-route authorization, stale-owner
 recovery, reconnect, supervisor/helper/app crashes, quarantine persistence, and
 attached-app preservation pass. No cleanup broadens authority or silently
@@ -1354,6 +1368,22 @@ settles both identically. The other three were checked against the macOS helper:
   Two self-test checks cover both paths and fail when the mark is disabled, and
   the fake host no longer publishes for `closeWindow` while keeping its log
   entry.
+
+M2 slice 1 (the service boundary) is checked against the fake host only, with
+no native provider, real client, or Windows run. Its tests cover every route
+(including unknown ones) with no grant, indistinguishable rejection of a
+missing, malformed, wrong-secret, revoked, and foreign grant, rejection before
+the body is read, ownership from another grant (including a reused label and a
+caller that would queue behind the owner), target scoping, startup failure on an
+unregistered grant target, contention without identifiers, quarantine without a
+session id, revocation draining, and an unchanged service without an authority.
+Disabling the pre-queue ownership check fails exactly the queueing test. The
+review found that revoking a grant while its session was still launching left
+the session, and its target, held with nothing able to address it; revocation
+now waits for creates in flight, and a test covers it. Not run: an independent
+security review of the boundary (required before this milestone completes, per
+[the security model](security.md#review-triggers)), a native provider behind a
+protected service, and timing measurements of the authentication path.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

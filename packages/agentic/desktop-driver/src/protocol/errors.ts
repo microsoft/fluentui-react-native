@@ -14,6 +14,7 @@ const errorStatuses = {
   'stale element reference': 404,
   timeout: 500,
   'unable to capture screen': 500,
+  unauthorized: 401,
   'unknown command': 404,
   'unknown error': 500,
   'unknown method': 405,

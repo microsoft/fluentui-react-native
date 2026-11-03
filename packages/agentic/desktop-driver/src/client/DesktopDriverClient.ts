@@ -25,15 +25,22 @@ import type { DesktopStoryManifest, StoryReadyResult } from '../storybook.js';
 
 export type DesktopDriverClientOptions = {
   fetch?: typeof globalThis.fetch;
+  /**
+   * The bearer token of a grant, for a service that requires one. It is sent on every request, so a client cannot reach
+   * a protected service by accident without it. Never log or persist it.
+   */
+  grant?: string;
   url: string;
 };
 
 export class DesktopDriverClient {
   private readonly fetch: typeof globalThis.fetch;
+  private readonly grant?: string;
   private readonly url: string;
 
-  constructor({ fetch = globalThis.fetch, url }: DesktopDriverClientOptions) {
+  constructor({ fetch = globalThis.fetch, grant, url }: DesktopDriverClientOptions) {
     this.fetch = fetch;
+    this.grant = grant;
     this.url = url.replace(/\/$/, '');
   }
 
@@ -49,14 +56,14 @@ export class DesktopDriverClient {
   }
 
   async request<T>(method: string, path: string, body?: unknown): Promise<T> {
+    const headers: Record<string, string> = {
+      ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+      ...(this.grant ? { Authorization: `Bearer ${this.grant}` } : {}),
+    };
     const response = await this.fetch(`${this.url}${path}`, {
       method,
-      ...(body === undefined
-        ? {}
-        : {
-            body: JSON.stringify(body),
-            headers: { 'Content-Type': 'application/json' },
-          }),
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+      ...(Object.keys(headers).length > 0 ? { headers } : {}),
     });
     const payload = (await response.json()) as WebDriverResponse<T> | WebDriverErrorResponse;
     if (!response.ok) {

@@ -28,6 +28,9 @@ V1 platform names are `macos` and `windows`. Endpoint names are `macos`,
 - Cleanup uses exact process identity, never process-name matching.
 - Renderer is optional for non-React-Native targets.
 - A registered target may restrict `launchModes`; clients cannot override that policy.
+- On a protected service, a session belongs to the grant that created it and
+  every other grant sees it as nonexistent; see
+  [the security model](security.md#protected-service).
 
 Supported extension capabilities:
 
@@ -157,6 +160,7 @@ publishes only entries that declare a `label` and lists them by that label
 
 | Condition                                         | WebDriver error             |
 | ------------------------------------------------- | --------------------------- |
+| No valid grant on a protected service             | `unauthorized`              |
 | Target cannot launch or attach                    | `session not created`       |
 | Missing or closed session                         | `invalid session id`        |
 | Missing or closed window                          | `no such window`            |
@@ -171,6 +175,15 @@ publishes only entries that declare a `label` and lists them by that label
 
 An intercepted click names the occluding element's role, name, and ID; an
 external occluder names its owning application and process ID.
+
+`unauthorized` is HTTP 401 on every route of a protected service, with a
+constant message, an empty stack trace, `WWW-Authenticate: Bearer`, and a closed
+connection. It never says whether a grant was missing, malformed, revoked, or
+wrong. A `session not created` for a target that already has a session carries
+`data.reason: 'target-busy'`, and a protected service adds
+`data.holder: { label, since }`. A quarantined target carries
+`data.reason: 'target-quarantined'`, without the session id on a protected
+service.
 
 Error data may include bounded operation names, native diagnostic codes, and
 artifact IDs. It must not expose unrestricted environment values, native

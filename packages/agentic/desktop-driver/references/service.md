@@ -202,6 +202,40 @@ see [Agent operations](operations.md). Operators choose whether applications'
 displayed content may be read when constructing the server:
 `createDesktopDriverServer({ targets, operations: { content: 'deny' } })`.
 
+## Protect the service with grants
+
+Pass a `DesktopAuthority` to require a grant on every request, including
+ordinary WebDriver routes and `/status`. Without one, the service keeps its
+loopback model and an unauthenticated client works as before. One service never
+serves both modes.
+
+```ts
+import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
+import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
+import { createDesktopDriverServer } from '@fluentui-react-native/desktop-driver/server';
+
+const authority = new DesktopAuthority();
+const agent = authority.issue({ label: 'agent', targets: ['contoso-windows'] });
+const service = await createDesktopDriverServer({ authority, targets }); // The targets registered above.
+
+// Deliver agent.token to the client over a private channel; it is returned once.
+const client = createDesktopDriverClient({ grant: agent.token, url: service.url });
+```
+
+- `issue({ label, targets })` returns the grant's `token` once. `targets` is a
+  list of registered target IDs or `'*'`, and startup fails if a listed ID is
+  not registered.
+- A session belongs to the grant that created it; other grants see it as a
+  session that does not exist.
+- `/status` lists only the grant's targets and reports
+  `service.incarnation`, which changes whenever the service restarts.
+- `authority.revoke(grant.id)` closes the sessions that grant owns.
+- A rejected request returns HTTP 401 `unauthorized`; see
+  [the WebDriver contract](protocol.md#errors).
+
+Read [the security model](security.md#protected-service) for what the boundary
+does and does not cover.
+
 ## Fake service CLI
 
 `desktop-driver serve` starts a deterministic fake target:
@@ -230,8 +264,8 @@ must resolve a verified helper and embed the service.
 - Commands are serialized per session. Input is serialized globally.
 - Browser-origin requests are rejected.
 - Non-loopback hosts are rejected even when passed explicitly.
-- There is no network authentication or TLS. Do not proxy or expose the service
-  beyond the local trusted process boundary.
+- There is no TLS, and a service without an `authority` has no authentication.
+  Do not proxy or expose the service beyond the local trusted process boundary.
 
 See [the WebDriver contract](protocol.md) for routes and errors and
 [the security model](security.md) before adding a new service surface.

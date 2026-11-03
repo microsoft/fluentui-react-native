@@ -3,6 +3,8 @@ import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 
 import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
+import { grantAllowsTarget } from '../authority/grants.js';
+import type { DesktopAuthority, DesktopGrant } from '../authority/grants.js';
 import type { ContentPolicy } from '../operations/runtime.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
 import { createReturnedCapabilities, matchCapabilities } from '../protocol/capabilities.js';
@@ -16,6 +18,13 @@ import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from '
 import { TargetRegistry } from './TargetRegistry.js';
 
 export type DesktopDriverServerOptions = {
+  /**
+   * Makes this a protected service. Every request, including ordinary WebDriver routes and `/status`, must carry a grant
+   * from this authority as `Authorization: Bearer <token>`. A session belongs to the grant that created it, and a grant
+   * can open only the targets it names. Without an authority the service keeps its documented loopback model, so one
+   * service never serves both modes.
+   */
+  authority?: DesktopAuthority;
   host?: string;
   maxBodyBytes?: number;
   /** Policy for the agent operations (`furn/ops`), which the server operator controls rather than the caller. */
@@ -40,8 +49,11 @@ export type DesktopDriverServer = {
 };
 
 type RouteContext = {
+  authority?: DesktopAuthority;
   body: unknown;
   contentPolicy: ContentPolicy;
+  /** The authenticated caller on a protected service. */
+  grant?: DesktopGrant;
   method: string;
   segments: string[];
   /** Aborts when the client disconnects before the response is complete. */
@@ -49,6 +61,7 @@ type RouteContext = {
 };
 
 type RequestSettings = {
+  authority?: DesktopAuthority;
   contentPolicy: ContentPolicy;
   maxBodyBytes: number;
 };
@@ -60,7 +73,8 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   }
 
   const targets = new TargetRegistry(options.targets);
-  const sessions = new SessionManager();
+  options.authority?.assertTargetsRegistered(new Set(targets.list().map(({ id }) => id)));
+  const sessions = new SessionManager({ redactSessionIds: options.authority !== undefined });
   let closing = false;
   let listenerClosePromise: Promise<void> | undefined;
   let cleanupQueue: Promise<void> = Promise.resolve();
@@ -71,11 +85,17 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
       return;
     }
     void handleRequest(request, response, sessions, targets, {
+      authority: options.authority,
       contentPolicy: options.operations?.content ?? 'allow',
       maxBodyBytes: options.maxBodyBytes ?? 1024 * 1024,
     });
   });
   const port = await listen(httpServer, host, options.port ?? 0);
+  // A revoked grant leaves its sessions unreachable, so they are closed rather than holding their targets. A session that
+  // fails to close stays tracked, and service shutdown retries it and reports the failure.
+  const stopDrainingRevokedGrants = options.authority?.onRevoke((grant) => {
+    void sessions.deleteOwnedBy(grant.id).catch(() => undefined);
+  });
 
   return {
     host,
@@ -86,6 +106,7 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     url: `http://${formatHost(host)}:${port}`,
     close() {
       closing = true;
+      stopDrainingRevokedGrants?.();
       sessions.beginClose();
       const attempt = cleanupQueue.then(runCleanup, runCleanup);
       cleanupQueue = attempt.then(
@@ -136,20 +157,66 @@ async function handleRequest(
     if (request.headers.origin) {
       throw new WebDriverError('unknown error', 'Browser-origin requests are not accepted by Desktop Driver.');
     }
+    // Authentication precedes everything that reads or parses the request, so an unauthenticated caller reaches no route
+    // logic, learns nothing about sessions or targets, and cannot make the service buffer a body.
+    const grant = authenticateRequest(request, settings.authority);
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- This base URL only parses a loopback listener path.
     const url = new URL(request.url ?? '/', 'http://127.0.0.1');
     const segments = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
     const method = request.method ?? 'GET';
+    const sessionId = segments[0] === 'session' ? segments[1] : undefined;
+    if (sessionId) {
+      // Checked before the command queues, so a caller never waits in, or delays, another grant's session queue.
+      sessions.getFor(sessionId, grant?.id);
+    }
     const body =
       method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, requestBodyLimit(segments, settings.maxBodyBytes));
     const operation = () =>
-      route({ body, contentPolicy: settings.contentPolicy, method, segments, signal: disconnected.signal }, sessions, targets);
-    const value = segments[0] === 'session' && segments[1] ? await sessions.runCommand(segments[1], operation) : await operation();
+      route(
+        {
+          authority: settings.authority,
+          body,
+          contentPolicy: settings.contentPolicy,
+          grant,
+          method,
+          segments,
+          signal: disconnected.signal,
+        },
+        sessions,
+        targets,
+      );
+    const value = sessionId ? await sessions.runCommand(sessionId, operation) : await operation();
     writeJson(response, 200, { value });
   } catch (error) {
     const webdriverError = toWebDriverError(error);
-    writeJson(response, webdriverError.status, { value: webdriverError.toJSON() });
+    writeJson(response, webdriverError.status, { value: webdriverError.toJSON() }, errorHeaders(webdriverError));
   }
+}
+
+/** Returns the caller's grant on a protected service, and undefined on a service that does not authenticate. */
+function authenticateRequest(request: IncomingMessage, authority: DesktopAuthority | undefined): DesktopGrant | undefined {
+  if (!authority) {
+    return undefined;
+  }
+  const grant = authority.authenticate(request.headers.authorization);
+  if (!grant) {
+    // A missing, malformed, revoked, and wrong-secret grant are indistinguishable, and the stack trace stays server-side.
+    const error = new WebDriverError('unauthorized', 'A valid Desktop Driver grant is required.');
+    error.stack = '';
+    throw error;
+  }
+  return grant;
+}
+
+function errorHeaders(error: WebDriverError): Record<string, string> | undefined {
+  // The connection closes after a rejection so an unauthenticated caller cannot hold it open and keep streaming a body.
+  return error.code === 'unauthorized' ? { Connection: 'close', 'WWW-Authenticate': 'Bearer realm="furn-desktop-driver"' } : undefined;
+}
+
+/** The targets a caller may open: every registered target for the legacy service, and the grant's targets otherwise. */
+function visibleTargets(context: Pick<RouteContext, 'grant'>, targets: TargetRegistry): readonly DesktopTarget[] {
+  const { grant } = context;
+  return grant ? targets.list().filter(({ id }) => grantAllowsTarget(grant, id)) : targets.list();
 }
 
 async function route(context: RouteContext, sessions: SessionManager, targets: TargetRegistry): Promise<unknown> {
@@ -157,7 +224,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
 
   if (method === 'GET' && segments.length === 1 && segments[0] === 'status') {
     const targetInfo = await Promise.all(
-      targets.list().map(async (target) => {
+      visibleTargets(context, targets).map(async (target) => {
         const quarantine = sessions.getQuarantine(target.id);
         return {
           endpoint: target.endpoint,
@@ -165,11 +232,17 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
           platformName: target.platformName,
           renderer: target.renderer,
           host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
-          ...(quarantine ? { quarantine } : {}),
+          ...(quarantine ? { quarantine: sessions.describeQuarantine(quarantine) } : {}),
         };
       }),
     );
-    return { message: 'Desktop Driver is ready.', ready: true, targets: targetInfo };
+    return {
+      message: 'Desktop Driver is ready.',
+      ready: true,
+      // A client that remembers the incarnation can tell a restarted service from the one it was using.
+      ...(context.authority ? { service: { incarnation: context.authority.incarnation } } : {}),
+      targets: targetInfo,
+    };
   }
 
   if (method === 'POST' && segments.length === 1 && segments[0] === 'session') {
@@ -177,9 +250,11 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     if (!request.capabilities) {
       throw invalidArgument('New Session requires "capabilities".');
     }
-    const matched = await matchCapabilities(request.capabilities, targets.list());
+    // A target outside the grant matches as if it were not registered, so a grant cannot discover what it may not use.
+    const matched = await matchCapabilities(request.capabilities, visibleTargets(context, targets));
     try {
-      const session = await sessions.create(matched.target, matched.hostInfo, matched.clickMode, matched.launchMode);
+      const owner = context.grant ? { grantId: context.grant.id, label: context.grant.label } : undefined;
+      const session = await sessions.create(matched.target, matched.hostInfo, matched.clickMode, matched.launchMode, owner);
       return {
         sessionId: session.id,
         capabilities: createReturnedCapabilities(matched, matched.hostInfo, session.timeouts),
@@ -197,7 +272,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     throw new WebDriverError('unknown command', `No WebDriver command matches ${method} /${segments.join('/')}.`);
   }
 
-  const session = sessions.get(segments[1]);
+  const session = sessions.getFor(segments[1], context.grant?.id);
   const command = segments.slice(2);
 
   if (method === 'DELETE' && command.length === 0) {
@@ -846,12 +921,13 @@ async function readJsonBody(request: IncomingMessage, maxBytes: number): Promise
   }
 }
 
-function writeJson(response: ServerResponse, status: number, body: WebDriverResponse): void {
+function writeJson(response: ServerResponse, status: number, body: WebDriverResponse, headers?: Record<string, string>): void {
   const json = JSON.stringify(body);
   response.writeHead(status, {
     'Cache-Control': 'no-cache',
     'Content-Length': Buffer.byteLength(json),
     'Content-Type': 'application/json; charset=utf-8',
+    ...headers,
   });
   response.end(json);
 }

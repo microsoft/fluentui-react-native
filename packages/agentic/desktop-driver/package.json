@@ -63,6 +63,11 @@
       "import": "./lib/artifacts/index.js",
       "default": "./src/artifacts/index.ts"
     },
+    "./authority": {
+      "types": "./lib/authority/index.d.ts",
+      "import": "./lib/authority/index.js",
+      "default": "./src/authority/index.ts"
+    },
     "./operations": {
       "types": "./lib/operations/index.d.ts",
       "import": "./lib/operations/index.js",

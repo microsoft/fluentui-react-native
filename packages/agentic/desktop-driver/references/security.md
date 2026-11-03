@@ -16,7 +16,10 @@ service.
 
 - `createDesktopDriverServer` accepts only loopback hosts.
 - Browser-origin requests are rejected.
-- The service has no TLS, user authentication, or remote authorization.
+- A service started without an `authority` has no authentication and relies on
+  the loopback binding and its trusted supervisor. A service started with a
+  `DesktopAuthority` is protected (below). One service never serves both modes.
+  There is no TLS or remote authorization.
 - Clients can select only server-registered targets.
 - Capabilities cannot provide executables, arguments, environment variables,
   helper paths, lease paths, cache roots, or artifact destinations.
@@ -25,6 +28,52 @@ service.
 Do not proxy, tunnel, container-port-forward, or expose the listener to another
 machine. A remote deployment needs a separately designed authenticated
 transport and target authorization model.
+
+## Protected service
+
+A service created with a `DesktopAuthority` requires a grant on **every**
+route, including ordinary WebDriver routes, routes that do not exist, and
+`/status`. Protecting only new endpoints would leave an ordinary-route bypass,
+so authentication runs once in the request handler, after the `Origin` check
+and before the body, route, or any session is read.
+
+- A grant is a bearer token `fdg1.<id>.<secret>`: a 128-bit id that names the
+  grant in ownership records, and a 256-bit random secret that authenticates.
+  The authority keeps only a SHA-256 digest of each secret and compares it in
+  constant time, doing the same work for an unknown id, so a heap snapshot or an
+  accidentally serialized authority holds no usable credential.
+- A missing, malformed, wrong-secret, revoked, or foreign-authority token is
+  indistinguishable: HTTP 401 `unauthorized` with a constant message, an empty
+  stack trace, `WWW-Authenticate: Bearer realm="furn-desktop-driver"`, and a
+  closed connection so an unauthenticated caller cannot hold it open while
+  streaming a body.
+- A grant names the registered target ids it may open, or `*`. A target outside
+  the grant behaves as one that is not registered, in `/status` and in
+  capability matching. The service refuses to start when a grant names a target
+  it does not register.
+- A session belongs to the grant that created it. Every other grant gets the
+  answer for an id that does not exist, and that check runs before the command
+  queues, so a grant can neither probe for another grant's session nor wait in,
+  or delay, its queue.
+- A grant's label (1-32 letters, digits, and `._:-`) is the only holder
+  information a contending grant learns, in `session not created` data
+  `{ reason: 'target-busy', holder: { label, since } }`. Grant ids, secrets,
+  session ids, and the session id inside a quarantine never reach another
+  grant. Choose labels that say what the holder is (`agent`, `wdio`), not who
+  or where.
+- Revoking a grant closes every session it owns, including one still
+  launching, so a session nothing can address does not hold a target. A session
+  that fails to close stays tracked, and shutdown retries it.
+- Grants and the service `incarnation` that `/status` reports as
+  `service.incarnation` end with the service process. A restarted service
+  never honors an old token.
+
+The boundary is other operating-system accounts and accidental cross-client
+access. It does not isolate mutually hostile processes of the same account and
+does not protect against administrators. The service neither stores nor
+publishes tokens: the embedding supervisor delivers each to its client over a
+private channel and must keep it out of capabilities, command lines, logs, and
+test output.
 
 ## Native-helper trust
 
