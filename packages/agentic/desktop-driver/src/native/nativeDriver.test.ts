@@ -3,8 +3,10 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import type { NativeObserveRequest } from '../host/types';
 import { encodeJsonFrame, NativeFrameDecoder } from '../hosts/native/framing';
 import { NativeHostProcess } from '../hosts/native/NativeHostProcess';
+import { parseNativeObservation } from '../protocol/observation';
 import type { NativeHostJsonMessage } from './types';
 import {
   hashMacOSDriverSources,
@@ -109,13 +111,17 @@ describe('native driver build and resolution', () => {
       });
       await helper.dispose();
       await expectMacosEffectReporting(resolved.executablePath);
+      await expectMacosBoundedObservation(resolved.executablePath);
 
+      const observationDump = path.join(cacheRoot, 'self-test-observations.json');
       const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
         encoding: 'utf8',
+        env: { ...process.env, FURN_DRIVER_SELF_TEST_OBSERVATIONS: observationDump },
         timeout: 120_000,
       });
       expect(selfTest.status).toBe(0);
       expect(selfTest.stdout).toContain('ok ');
+      expectSelfTestObservationsToConform(observationDump);
     } finally {
       emitWarning.mockRestore();
       fs.rmSync(cacheRoot, { force: true, maxRetries: 10, recursive: true, retryDelay: 100 });
@@ -443,6 +449,73 @@ describe('native driver build and resolution', () => {
         await closed;
       }
     }
+  }
+
+  // These commands run before any application is leased, so they hold on any machine, trusted for Accessibility or not.
+  async function expectMacosBoundedObservation(executablePath: string): Promise<void> {
+    const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const decoder = new NativeFrameDecoder();
+    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
+    child.stderr.resume();
+    const request = (id: string, command: string, params: Record<string, unknown>) => {
+      const response = waitForMessage(decoder, (message) => message.type === 'response' && message.id === id);
+      child.stdin.write(encodeJsonFrame({ command, id, params, type: 'request' }));
+      return response;
+    };
+    const budget = { deadlineMs: 1000, maxBytes: 65_536, maxDepth: 4, maxStringLength: 64, maxVisited: 50 };
+    try {
+      await expect(waitForMessage(decoder, (message) => message.type === 'hello')).resolves.toMatchObject({
+        features: expect.arrayContaining(['boundedObservation']),
+      });
+      await expect(request('probe-observation', 'probe', { endpoint: 'macos' })).resolves.toMatchObject({
+        result: { features: { boundedObservation: expect.any(Boolean) } },
+      });
+
+      const malformed = await request('observe-without-budget', 'observe', { facts: [], windowId: 'window-never-issued' });
+      expect(malformed).toMatchObject({ error: { code: 'invalid-params' } });
+      expect(malformed).not.toHaveProperty('error.effect');
+      const unknownWindow = await request('observe-unknown-window', 'observe', {
+        budget,
+        facts: ['enabled'],
+        windowId: 'window-never-issued',
+      });
+      expect(unknownWindow).toMatchObject({ error: { code: 'no-such-window' } });
+      expect(unknownWindow).not.toHaveProperty('error.effect');
+
+      await expect(request('release-nothing', 'releaseElements', { ids: ['element-never-issued'] })).resolves.toMatchObject({
+        result: { released: 0 },
+      });
+      await expect(request('release-malformed', 'releaseElements', { ids: 'element-never-issued' })).resolves.toMatchObject({
+        error: { code: 'invalid-params' },
+      });
+
+      await request('dispose-after-observation', 'dispose', {});
+      await closed;
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+        await closed;
+      }
+    }
+  }
+
+  // The self-test builds samples from synthetic trees; the Node validator is the independent judge of their conformance.
+  function expectSelfTestObservationsToConform(dumpPath: string): void {
+    const entries = JSON.parse(fs.readFileSync(dumpPath, 'utf8')) as {
+      name: string;
+      request: NativeObserveRequest;
+      result: unknown;
+    }[];
+    expect(entries.length).toBeGreaterThan(100);
+    const rejected = entries.flatMap((entry) => {
+      const parsed = parseNativeObservation(entry.request, entry.result);
+      return parsed.status === 'rejected' ? [`${entry.name}: ${parsed.message}`] : [];
+    });
+    expect(rejected).toEqual([]);
+    const complete = entries.filter((entry) => (entry.result as { complete: boolean }).complete);
+    expect(complete.length).toBeGreaterThan(0);
+    expect(complete.length).toBeLessThan(entries.length);
   }
 
   function encodeMalformedJsonFrame(): Buffer {

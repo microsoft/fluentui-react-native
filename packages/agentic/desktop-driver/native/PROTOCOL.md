@@ -234,10 +234,16 @@ Helpers that advertise the `accessibilityActions` feature also accept an
 accessibility tree publishes for the element, in provider order. Names are
 authored text only; provider handles, targets, and selectors never cross FDR1.
 The command is read-only and follows the liveness rules of other element
-queries. An element that publishes no actions returns an empty list. Helpers
-without the feature reject the command as `unsupported-operation`, which Node
-reports as `unsupported operation` rather than an empty list. The feature is
-additive and does not change the wire version.
+queries. An element that publishes no actions returns an empty list, and so
+does an element whose platform query answers that it has no action list (for
+example a native split divider whose action query reports a general failure);
+only failures that mean the connection or the element itself is broken are
+`automation-failed` or `stale-element`. The `actions` fact of `observe` follows
+the same rule, so one element without an action list never drops that element
+from a sample. Helpers without the feature reject the command as
+`unsupported-operation`, which Node reports as `unsupported operation` rather
+than an empty list. The feature is additive and does not change the wire
+version.
 
 ### Bounded observation
 
@@ -291,7 +297,13 @@ untracked or foreign root is `stale-element` and an unknown window is
 
 The helper walks **breadth first** from the root, children in provider order,
 and emits the root first; the root is always read, whatever the budgets. An
-element reachable twice is emitted once. Work is
+element reachable twice is emitted once, under the first parent that reached it
+in breadth-first order; later parents neither emit it nor count it in their
+`childCount`. A child that turns out stale when the helper reads it is dropped
+from its parent's `childCount`, so a parent whose children all vanished becomes
+`none`. A child that cannot be read for any other reason is skipped, counts
+toward its parent's `childCount`, leaves that parent `truncated`, and adds the
+`unreadable` truncation. Work is
 incremental: the helper reads a node's children only when the budget still
 allows visiting them, and never prefetches a whole subtree before applying a
 limit. The result is deterministic for an unchanged tree.
@@ -321,10 +333,14 @@ when a later sample is rooted below it. A provider never reports `value` or
 `text` for a password or secure field. When the platform cannot report a
 requested fact for any element, the provider lists the fact once in
 `unsupportedFacts` and omits it from every node instead of repeating a reason
-per node. A string cut to `maxStringLength` is listed in that node's `clipped`
-array, for example `["name"]`. A cut never separates the two halves of a
-surrogate pair, so a clipped string may be one unit shorter than the limit;
-that keeps every emitted string encodable.
+per node. The list is a provider capability, not a statistic of the sample: it
+holds only requested facts, a fact that some elements report and others cannot
+is never listed and keeps its per-node unsupported value, and a provider that
+can report every fact returns an empty list. A string cut to
+`maxStringLength` is listed in that node's `clipped` array, for example
+`["name"]`. A cut never separates the two halves of a surrogate pair, so a
+clipped string may be one unit shorter than the limit; that keeps every emitted
+string encodable.
 
 `childrenState` states what the sample knows about a node's children:
 
@@ -352,11 +368,11 @@ The response:
 truncated sample never establishes absence, an exact count, or uniqueness.
 Each `truncation` entry has a `reason` that appears at most once: `visited`,
 `depth`, `bytes`, `deadline`, `references` (the helper's element table is at
-capacity), or `unreadable` (a provider read of children failed other than as a
-stale element). `limit` repeats the budget that applied and `unvisited` is a
-lower bound on elements known to exist but not visited. An element that
-disappears during the walk is skipped; a changing tree yields a best-effort
-sample, so Node brackets each call with its own capture interval.
+capacity), or `unreadable` (a provider read of an element or of its children
+failed other than as a stale element). `limit` repeats the budget that applied
+and `unvisited` is a lower bound on elements known to exist but not visited. An
+element that disappears during the walk is skipped; a changing tree yields a
+best-effort sample, so Node brackets each call with its own capture interval.
 
 An element's `id` is the id every element command uses. One underlying element
 keeps one id while the helper retains its record, so a repeated sample reports
@@ -395,9 +411,11 @@ them: a tree larger than every budget returns a partial sample instead of
 `tree-too-large`; each truncation reason can be provoked on its own; two
 samples of an unchanged tree report identical ids and order; a duplicate
 reachable element is emitted once; a released id is rejected and never
-reappears; capacity stops emission with `references`; a hung provider read
-ends at the deadline plus the one in-flight call; cancellation unwinds without
-an `effect`; and no response exceeds `maxBytes` by more than one node.
+reappears; capacity stops emission with `references`; an element or child list
+that cannot be read is skipped or left `unknown` with the `unreadable` reason
+instead of failing the sample; a hung provider read ends at the deadline plus
+the one in-flight call; cancellation unwinds without an `effect`; and no
+response exceeds `maxBytes` by more than one node.
 
 ### `cancel` and `cancelled`
 

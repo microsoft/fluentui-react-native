@@ -501,6 +501,23 @@ func copyAXActionNames(_ element: AXUIElement) throws -> [String] {
   return names as? [String] ?? []
 }
 
+/// The actions an element publishes, for the read-only commands that report them. AppKit answers the query for some
+/// elements, such as split view dividers, with a general failure instead of an empty list, and an element that cannot
+/// list its actions publishes none. Clicking keeps `copyAXActionNames`, where that failure stays an automation error.
+func copyPublishedAXActionNames(_ element: AXUIElement) throws -> [String] {
+  var names: CFArray?
+  let error = AXUIElementCopyActionNames(element, &names)
+  return try publishedActionNames(error: error, names: names as? [String])
+}
+
+func publishedActionNames(error: AXError, names: [String]?) throws -> [String] {
+  if error == .actionUnsupported || error == .failure {
+    return []
+  }
+  try throwAX(error, operation: "Reading accessibility actions")
+  return names ?? []
+}
+
 // AppKit lists an NSAccessibilityCustomAction as "Name:<name>\nTarget:<address>\nSelector:<selector>". The target
 // and selector are process-local details, so only the authored name is exposed. Standard AX actions are unchanged.
 func accessibilityActionName(_ raw: String) -> String {

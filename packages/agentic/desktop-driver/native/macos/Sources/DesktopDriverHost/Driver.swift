@@ -149,6 +149,17 @@ final class Driver {
     case "accessibilityActions":
       let actions = try accessibility.accessibilityActions(try requireString(params, "elementId"), token: token)
       return CommandResult(result: ["actions": actions])
+    case "observe":
+      let request = try ObserveRequest.parse(params)
+      let window = try applications.requireWindow(request.windowID)
+      // `no-such-lease` has no Node translation, and a window without a lease is not one a caller can observe.
+      guard let lease = applications.lease(for: window) else {
+        try fail(ErrorCode.noSuchWindow, "The requested window no longer belongs to a held application lease.")
+      }
+      return CommandResult(result: try accessibility.observe(request, window: window, lease: lease, token: token).json())
+    case "releaseElements":
+      let released = accessibility.releaseRecords(try parseReleasedElementIDs(params))
+      return CommandResult(result: ["released": released])
     case "activeElement":
       let window = try applications.requireWindow(try requireString(params, "windowId"))
       let snapshot = try accessibility.activeElement(window: window, token: token)
@@ -260,6 +271,7 @@ final class Driver {
       "features": [
         "accessibilityActions": trusted,
         "accessibilityClick": trusted,
+        "boundedObservation": trusted,
         "elementScreenshot": screenshot,
         "focus": trusted,
         "keyboard": trusted,

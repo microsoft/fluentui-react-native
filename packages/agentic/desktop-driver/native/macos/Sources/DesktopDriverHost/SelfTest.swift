@@ -1,7 +1,7 @@
 import ApplicationServices
 import Foundation
 
-private final class SelfTestRunner {
+final class SelfTestRunner {
   private(set) var checks = 0
   private(set) var failures = 0
 
@@ -34,6 +34,7 @@ private final class SelfTestRunner {
     testCommandJournal()
     testEffectLedger()
     testMutationEffects()
+    testObservation()
     testHello()
   }
 
@@ -754,6 +755,10 @@ private final class SelfTestRunner {
     check(
       (hello["features"] as? [String])?.contains("accessibilityActions") == true,
       "hello advertises accessibility action inspection"
+    )
+    check(
+      (hello["features"] as? [String])?.contains("boundedObservation") == true,
+      "hello advertises bounded observation"
     )
   }
 

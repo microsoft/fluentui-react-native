@@ -123,7 +123,7 @@ final class ElementRecord {
 
 final class AccessibilityEngine {
   private static let maximumTreeNodes = 5_000
-  private static let maximumElementRecords = 10_000
+  static let maximumElementRecords = 10_000
   private static let maximumAncestorDepth = 64
 
   private var records: [String: ElementRecord] = [:]
@@ -344,7 +344,7 @@ final class AccessibilityEngine {
     try token.throwIfCancelled()
     let record = try requireRecord(elementID)
     try validateLive(record)
-    return try copyAXActionNames(record.element).map(accessibilityActionName)
+    return try copyPublishedAXActionNames(record.element).map(accessibilityActionName)
   }
 
   func tryClearValue(_ elementID: String) throws -> Bool {
@@ -380,12 +380,29 @@ final class AccessibilityEngine {
   func forgetWindow(_ windowID: String) {
     let removed = records.values.filter { $0.windowID == windowID }
     for record in removed {
-      records.removeValue(forKey: record.id)
-      let hash = CFHash(record.element)
-      recordIDsByHash[hash]?.removeAll { $0 == record.id }
-      if recordIDsByHash[hash]?.isEmpty == true {
-        recordIDsByHash.removeValue(forKey: hash)
+      drop(record)
+    }
+  }
+
+  /// Drops the records for ids the caller no longer needs and returns how many it held. An id that is not tracked is
+  /// ignored, so releasing twice is harmless. Ids are never reused, so a released id stays stale.
+  func releaseRecords(_ elementIDs: [String]) -> Int {
+    var released = 0
+    for elementID in elementIDs {
+      if let record = records[elementID] {
+        drop(record)
+        released += 1
       }
+    }
+    return released
+  }
+
+  private func drop(_ record: ElementRecord) {
+    records.removeValue(forKey: record.id)
+    let hash = CFHash(record.element)
+    recordIDsByHash[hash]?.removeAll { $0 == record.id }
+    if recordIDsByHash[hash]?.isEmpty == true {
+      recordIDsByHash.removeValue(forKey: hash)
     }
   }
 
@@ -516,6 +533,30 @@ final class AccessibilityEngine {
     parentID: String?,
     scope: ElementScope
   ) throws -> ElementRecord {
+    guard let record = registerIfRoom(
+      element,
+      processID: processID,
+      windowID: windowID,
+      parentID: parentID,
+      scope: scope
+    ) else {
+      try fail(
+        ErrorCode.treeTooLarge,
+        "The native element table reached its 10000-record safety limit. Close the session and create a new one."
+      )
+    }
+    return record
+  }
+
+  /// Finds or creates the record for an element, or returns nil when a new record would exceed the table's capacity.
+  /// A bounded observation ends its sample at that point instead of failing the command.
+  func registerIfRoom(
+    _ element: AXUIElement,
+    processID: pid_t,
+    windowID: String,
+    parentID: String?,
+    scope: ElementScope
+  ) -> ElementRecord? {
     let hash = CFHash(element)
     for id in recordIDsByHash[hash] ?? [] {
       if let record = records[id], sameAXElement(record.element, element) {
@@ -527,10 +568,7 @@ final class AccessibilityEngine {
       }
     }
     guard records.count < Self.maximumElementRecords else {
-      try fail(
-        ErrorCode.treeTooLarge,
-        "The native element table reached its 10000-record safety limit. Close the session and create a new one."
-      )
+      return nil
     }
     let record = ElementRecord(
       processID: processID,
@@ -544,7 +582,7 @@ final class AccessibilityEngine {
     return record
   }
 
-  private func validateLive(_ record: ElementRecord) throws {
+  func validateLive(_ record: ElementRecord) throws {
     var pid: pid_t = 0
     guard AXUIElementGetPid(record.element, &pid) == .success, pid == record.processID, processIsAlive(pid) else {
       try fail(ErrorCode.staleElement, "Element \"\(record.id)\" is no longer available.")
@@ -689,7 +727,7 @@ final class AccessibilityEngine {
     return .unsupported("The element does not expose a Boolean or mixed accessibility value.")
   }
 
-  private func stringValue(_ value: CFTypeRef?) -> String? {
+  func stringValue(_ value: CFTypeRef?) -> String? {
     if let string = axString(value) {
       return string
     }

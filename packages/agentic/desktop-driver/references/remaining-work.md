@@ -625,6 +625,29 @@ helper must:
    flight; cancellation unwinds with no `effect`; and no `TreeScope_Subtree`
    fetch happens while observing.
 
+**Rules the macOS provider settled.** The first contract text left these
+implicit; they are now in [FDR1](../native/PROTOCOL.md#bounded-observation) and
+the Windows provider must match them, with a self-test case for each:
+
+- An element whose own read fails for a reason other than staleness is skipped.
+  Its parent still counts it, becomes `truncated`, and the sample reports
+  `unreadable`; a child list that cannot be read leaves `childrenState`
+  `unknown`.
+- A child reached through an earlier parent is emitted once, under the first
+  parent, and is not counted in later parents' `childCount`. A child that turns
+  out stale is dropped from its parent's count.
+- `unsupportedFacts` is a provider capability: list a fact only when no element
+  can report it. Per-node unsupported values keep their reasons, and macOS
+  lists none.
+- The `actions` fact and `accessibilityActions` both publish an empty list when
+  the platform has no action list for an element, so one such element never
+  drops out of a sample.
+
+`sampleObservation` and its randomized differential self-test in
+`native/macos/Sources/DesktopDriverHost` are a worked reference for the loop
+and the test strategy, and `src/hosts/fake/observeTree.ts` is the TypeScript
+model; port the algorithm, not the Accessibility call pattern.
+
 Document the identity evidence, capacity, and release behavior in the
 [Windows README](../native/windows/README.md). After pulling, run the helper
 `--self-test` and the gated native contract (`FURN_NATIVE_DRIVER_TEST=1 yarn
@@ -776,10 +799,10 @@ produced it, so a provider cannot pass unrequested or inconsistent data to an
 agent, and it never substitutes the unbounded `tree` or `find`. The fake host
 is the reference provider, with one identity registry shared across `find`,
 `snapshot`, `observe`, and release, and a conformance grid covers each
-truncation reason. The native providers are open: the Windows work package is in
-section 7, and the macOS provider follows. M3 also still owns action
-descriptors, bounded event tails, and the native large-tree, replacement,
-pagination, and delta tests.
+truncation reason. The macOS provider is implemented and live-checked (section
+11). The Windows provider is open: its work package is in section 7. M3 also
+still owns action descriptors, bounded event tails, and the native large-tree,
+replacement, pagination, and delta tests.
 
 **Complete when:** native large-tree, duplicate, replacement, pagination/delta,
 and repeated-context tests pass; no new bounded request uses a full-tree
@@ -1070,6 +1093,67 @@ application on either OS, and the macOS ledger against real AX failures. The
 ledger counts primary mutations only, so a failed AX call it cannot classify
 reports `unknown` and quarantines the target; expect some false quarantines
 until real applications show which AX errors are safe to classify as `none`.
+
+Bounded observation implementation checks on macOS (the Windows provider is
+open):
+
+- The Swift helper self-test built outside the repository tree **passed** 314
+  of 314 checks (148 before this work). The new checks cover request validation
+  and every budget bound, each truncation reason alone, a randomized
+  differential check of 500 generated trees against a reference model, element
+  release and id reuse, secure fields, the cancellation and deadline paths with
+  a controllable clock, and the `observe` and `releaseElements` commands.
+- `FURN_NATIVE_DRIVER_TEST=1 yarn test nativeDriver --runInBand` **passed** (6
+  passed, 2 skipped). The real helper negotiated `boundedObservation`, rejected
+  a missing budget as `invalid-params` without an `effect`, and reported
+  `no-such-window` and the `releaseElements` results. Node's protocol oracle
+  **accepted** all 110 samples the self-test dumped (30 fixed, 80 random, 53
+  complete).
+- A live run against real applications (release build, helper launching and
+  closing each app) found one provider defect that no synthetic tree had:
+  `AXUIElementCopyActionNames` answers a general failure for AppKit split
+  dividers, so the `actions` fact dropped those elements and reported
+  `unreadable`. The `actions` fact and `accessibilityActions` now publish an
+  empty list for that answer, and `click` keeps its strict handling.
+- Calculator (37 nodes, depth 6) and Font Book (272 nodes, depth 11) matched the
+  legacy `tree` on every element id, role, name, automation id, scope, parent,
+  rectangle, and enabled, focused, selected, visible, checked, and expanded
+  state, with no extra elements, and `observe` reported `helpText` and
+  `required` that snapshots never emit. The only element `observe` lacked is the
+  lazily created group described next. Every budget run (visited, depth, bytes,
+  string length), a rooted sample, release followed by `stale-element`, and
+  `no-such-window` after `closeApplication` conformed.
+- Both applications gained one depth-3 group on the second read, through
+  `observe` and through `tree` alike, so the first read of a just-launched app
+  can see one element fewer. Treat it as application behavior, and expect an
+  agent's first observation to differ from its second.
+- Warm medians of seven runs on the release build:
+
+  | App        | Request             | Bytes   | Wall    |
+  | ---------- | ------------------- | ------- | ------- |
+  | Calculator | `tree`              | 22,463  | 12.9 ms |
+  | Calculator | `observe`, 12 facts | 30,286  | 9.1 ms  |
+  | Calculator | `observe`, no facts | ~6,500  | ~4 ms   |
+  | Font Book  | `tree`              | 169,695 | 84.5 ms |
+  | Font Book  | `observe`, 12 facts | 226,583 | 55.9 ms |
+  | Font Book  | `observe`, no facts | 42,395  | 26.8 ms |
+
+  Requesting every fact is about 1.3 times the legacy tree's bytes, because a
+  fact a node cannot report repeats its `{ "supported": false, "reason" }` value
+  on every node. The helper pipe is not the agent's cost, and the Node
+  projection must drop those values from what a model sees. If the local
+  pipe ever matters, a compact unsupported form is a candidate contract change.
+  Without facts, `observe` is 3.5 to 4 times smaller and about 3 times faster.
+
+Observation items **not run**: the Windows provider and its self-test; a
+genuinely hung application and the deadline plus one in-flight call bound; trees
+near the 5,000-node limit and the 10,000-record table capacity; a real secure
+text field (the rule is covered by self-tests only); the FluentUI macOS
+Storybook application; and retained memory across repeated observations. The
+snapshot path has no secure-field rule and reports whatever `AXValue` returns,
+which is a pre-existing gap that `observe` does not share. The helper
+release build also prints one pre-existing warning (`main.swift`, "weak
+reference will always be nil").
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

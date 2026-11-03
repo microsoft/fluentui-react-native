@@ -20,6 +20,8 @@ Accessibility.
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `Accessibility.swift`                  | AX tree walking, lookup, snapshots, focus, hit testing, actions, and source |
+| `Observation.swift`                    | Provider-neutral bounded sampler: request rules, budgets, and BFS result    |
+| `AccessibilityObservation.swift`       | AX source for `observe`: multi-attribute reads, shared ids, `observe` run   |
 | `Input.swift`                          | Quartz pointer, keyboard, text, wheel, ledger, and recovery behavior        |
 | `InputLock.swift`                      | Per-user cross-process physical-input lock and abandoned-owner recovery     |
 | `Capture.swift`                        | ScreenCaptureKit window capture, element crop, scale, and PNG encoding      |
@@ -27,6 +29,7 @@ Accessibility.
 | `Session.swift`                        | Login-session lock and console diagnostics                                  |
 | `Support.swift`                        | Errors, cancellation, mutation effect ledger, JSON helpers, deadlines, AX   |
 | `SelfTest.swift`                       | Provider-local framing, identity, AX, input, capture, and permission checks |
+| `ObservationSelfTest.swift`            | Synthetic-tree, randomized differential, and command checks for `observe`   |
 
 The Node build coordinator is
 `../../src/native/macos/buildMacOSDriver.ts`; runtime adaptation is under
@@ -287,6 +290,50 @@ Aliases for the same key share one entry; left and right modifiers remain
 independent. One release must remove that physical key from later keyboard and
 pointer flags.
 
+## Bounded observation
+
+The helper advertises `boundedObservation` in `hello.features` and in the
+`features` map of `probe`, where it is `trusted` when Accessibility access is
+granted, as for `tree`. `observe` returns one budgeted, breadth-first sample of
+a window's accessibility tree and `releaseElements` drops the helper's records
+for ids Node no longer needs (see [PROTOCOL.md](../PROTOCOL.md)). Both are reads:
+they report no `effect` and never quarantine a target.
+
+`Observation.swift` is provider-neutral. It parses and validates the request,
+shapes facts, and runs the sampler against an `ObservationSource`, so the
+self-test drives the same code with a synthetic tree and a controllable clock.
+`AccessibilityObservation.swift` supplies the AX source:
+
+- **One round trip per element.** `AXUIElementCopyMultipleAttributeValues` reads
+  role, subrole, identifier, title, description, help, and children, plus only the
+  attributes the requested facts need (value, enabled, focused, expanded,
+  selected, position, and size). Per-slot errors keep the semantics of snapshots:
+  an unsupported or empty attribute is an absent fact, `invalidUIElement` is a
+  stale element, and any other slot error makes that one element `unreadable` for
+  the sample instead of failing the call.
+- **Shared ids.** `observe`, `tree`, `find`, and `snapshot` register elements in
+  one record table that dedupes by `CFEqual`, so an element keeps one id across
+  commands until it is released. The table holds 10,000 records. At capacity
+  `observe` ends the sample with the `references` truncation, where `tree` fails
+  with `tree-too-large`.
+- **Observe-only facts.** `helpText` (`AXHelp`) and `required` (`AXRequired`)
+  exist only through `observe`; snapshots never report them. Secure text fields
+  never report `value` or `text` through `observe`, whereas the snapshot path has
+  no secure-field rule and reports whatever `AXValue` returns.
+- **Actions.** The `actions` fact and `accessibilityActions` publish an empty
+  list when the action query answers that the element has no list. AppKit split
+  dividers answer `kAXErrorFailure`, and one of them must not drop the element
+  from a sample. `click` keeps its strict handling of the same errors.
+- **Deadline.** The sampler checks the deadline and cancellation between
+  Accessibility calls and never sets a messaging timeout, so one call to an
+  application that has stopped responding cannot be interrupted. Real
+  hung-application behavior is not yet qualified.
+
+A sample is not one instant. AppKit creates some accessibility elements lazily,
+so the first read of a just-launched application can see one element fewer than
+later reads: Calculator and Font Book each gained a depth-3 group on the second
+read, through both `observe` and `tree`.
+
 ## Mutation effects
 
 Failed and cancelled mutating commands (`activate`, `clear`, `click`,
@@ -428,9 +475,14 @@ FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="<identity>" \
 
 The Swift self-test covers framing, JSON, input ledger and lock recovery,
 capture scaling, snapshot normalization, AX diagnostics, CoreGraphics fallback
-classification, custom AX action name parsing, permission and login-session diagnostics, and hello identity. The Node native
+classification, custom AX action name parsing, permission and login-session diagnostics, hello identity, and
+bounded observation: request validation, each truncation reason, a randomized
+differential check against a reference model, record release and reuse, and the
+`observe` and `releaseElements` commands. The Node native
 contract additionally builds, verifies, reuses, and directly resolves the app;
-starts the actual long-lived process; and exercises malformed-frame recovery.
+starts the actual long-lived process; exercises malformed-frame recovery; and
+replays the self-test's observation samples through the protocol oracle that
+checks every `observe` result.
 
 Native contract tests do not prove TCC authority against a real app. Real
 qualification must attach to a built React Native macOS application and cover

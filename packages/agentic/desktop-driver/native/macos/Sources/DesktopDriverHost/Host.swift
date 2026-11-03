@@ -18,6 +18,7 @@ func createHello() -> JSONObject {
       "accessibilityClick",
       "activeElement",
       "attach",
+      "boundedObservation",
       "capture",
       "elementCapture",
       "find",
