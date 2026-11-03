@@ -63,6 +63,21 @@ export function quoteText(text: string, clipped = false): string {
   return clipped ? `${quoted.slice(0, -1)}…"` : quoted;
 }
 
+/**
+ * Cuts text to at most `maxLength` UTF-16 units without ending inside a surrogate pair. The result carries no marker:
+ * callers that show it pass `clipped` to `quoteText`, and structured results list the field as clipped.
+ */
+export function clipText(text: string, maxLength: number): { clipped: boolean; text: string } {
+  if (text.length <= maxLength) {
+    return { clipped: false, text };
+  }
+  let end = Math.max(0, maxLength);
+  if (end > 0 && text.charCodeAt(end - 1) >= 0xd800 && text.charCodeAt(end - 1) <= 0xdbff) {
+    end -= 1;
+  }
+  return { clipped: true, text: text.slice(0, end) };
+}
+
 function isTokenCode(code: number): boolean {
   return (
     (code >= 0x30 && code <= 0x39) ||

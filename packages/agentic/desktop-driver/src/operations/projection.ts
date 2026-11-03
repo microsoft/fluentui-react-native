@@ -7,7 +7,7 @@ export type ProjectionView = 'all' | 'content' | 'interactive';
 export type ProjectionFormat = 'nodes' | 'outline';
 
 /** Every fact an observation can show, in the order providers list them. */
-export const observeFacts: readonly NativeObserveFact[] = [
+export const observeFacts = [
   'actions',
   'checked',
   'enabled',
@@ -20,7 +20,7 @@ export const observeFacts: readonly NativeObserveFact[] = [
   'text',
   'value',
   'visible',
-];
+] as const satisfies readonly NativeObserveFact[];
 
 /** State facts that are cheap and say what an element is doing. Content (`value`, `text`, `help`) is opt-in. */
 export const defaultObservedFacts: readonly NativeObserveFact[] = ['checked', 'enabled', 'expanded', 'focused', 'selected'];

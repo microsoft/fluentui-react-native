@@ -26,11 +26,21 @@ export const observationBudgets = {
 
 export type ObservationBudgetName = keyof typeof observationBudgets;
 
-/** Search budgets: finding needs the whole bounded sample to prove uniqueness, but returns only a few candidates. */
+/**
+ * Search budgets: finding needs the whole bounded sample to prove uniqueness, but returns only a few candidates. The
+ * walk defaults to the largest the provider accepts, because a search that stops early can prove only that it found
+ * more than one match; `deadlineMs` is what keeps it quick.
+ */
 export const searchBudgets = {
+  deadlineMs: { ceiling: 15_000, default: 5_000, floor: 50 },
   limit: { ceiling: 50, default: 10, floor: 1 },
+  maxDepth: { ceiling: 64, default: 64, floor: 0 },
   maxStringLength: { ceiling: 1_024, default: 256, floor: 16 },
+  maxVisited: { ceiling: 5_000, default: 5_000, floor: 1 },
 } as const satisfies Record<string, OperationBudget>;
+
+/** How much of the native command timeout a provider deadline may use; the rest covers transport and release. */
+export const nativeDeadlineMarginMs = 1_500;
 
 /**
  * The most element references one session retains. Older, unobserved references expire first. The floor keeps one

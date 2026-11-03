@@ -63,6 +63,11 @@
       "import": "./lib/artifacts/index.js",
       "default": "./src/artifacts/index.ts"
     },
+    "./operations": {
+      "types": "./lib/operations/index.d.ts",
+      "import": "./lib/operations/index.js",
+      "default": "./src/operations/index.ts"
+    },
     "./server": {
       "types": "./lib/server/index.d.ts",
       "import": "./lib/server/index.js",

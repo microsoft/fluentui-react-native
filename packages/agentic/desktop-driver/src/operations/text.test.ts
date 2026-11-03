@@ -1,4 +1,4 @@
-import { isBareToken, neutralizeText, quoteText, safeToken, utf8Length } from './text';
+import { clipText, isBareToken, neutralizeText, quoteText, safeToken, utf8Length } from './text';
 
 describe('neutralizeText', () => {
   test('leaves ordinary text, emoji, joiners, tabs, and newlines alone', () => {
@@ -64,6 +64,23 @@ describe('isBareToken', () => {
     ['x'.repeat(129), false],
   ])('%j -> %s', (value, expected) => {
     expect(isBareToken(value)).toBe(expected);
+  });
+});
+
+describe('clipText', () => {
+  test('leaves text within the limit alone', () => {
+    expect(clipText('abc', 3)).toEqual({ clipped: false, text: 'abc' });
+  });
+
+  test('cuts to the limit and reports it', () => {
+    expect(clipText('abcdef', 4)).toEqual({ clipped: true, text: 'abcd' });
+  });
+
+  test('never ends inside a surrogate pair', () => {
+    // Each emoji is two UTF-16 units, so a limit of 3 would otherwise keep half of the second one.
+    expect(clipText('😀😀😀', 3)).toEqual({ clipped: true, text: '😀' });
+    expect(clipText('😀😀😀', 4)).toEqual({ clipped: true, text: '😀😀' });
+    expect(clipText('a😀', 1)).toEqual({ clipped: true, text: 'a' });
   });
 });
 

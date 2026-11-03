@@ -1,8 +1,16 @@
 import type { NativeObservedNode, NativeObserveFact } from '../host/types';
 import { buildSample, supportedFact, unsupportedFact } from '../testing/observationSample';
 import type { SampleSpec } from '../testing/observationSample';
-import { defaultObservedFacts, nativeFacts, project, shownFacts } from './projection';
+import { defaultObservedFacts, nativeFacts, observeFacts, project, shownFacts } from './projection';
 import type { ProjectedElement, ProjectionFormat, ProjectionRefs, ProjectionView } from './projection';
+
+// A fact added to the native protocol but not to `observeFacts` makes this the compile error that says so.
+const everyNativeFactIsListed: Exclude<NativeObserveFact, (typeof observeFacts)[number]> extends never ? true : false = true;
+
+test('lists every fact the native protocol defines, once', () => {
+  expect(everyNativeFactIsListed).toBe(true);
+  expect(new Set(observeFacts).size).toBe(observeFacts.length);
+});
 
 function refSource(tag = 'k3xa'): ProjectionRefs & { assigned: string[][] } {
   let issued = 0;
