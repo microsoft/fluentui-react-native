@@ -55,6 +55,7 @@ final class WindowEventMonitor: @unchecked Sendable {
   private var trackedByHash: [CFHashCode: [TrackedWindow]] = [:]
   private var watchedElements: [pid_t: [CFHashCode: [AXUIElement]]] = [:]
   private var closedWindowIDs: Set<String> = []
+  private var helperClosing: Set<String> = []
   private var lastStructuralEvent: [pid_t: UInt64] = [:]
   private var runLoop: CFRunLoop?
   private var thread: Thread?
@@ -139,6 +140,23 @@ final class WindowEventMonitor: @unchecked Sendable {
     }
     trackedByHash = trackedByHash.filter { !$0.value.isEmpty }
     closedWindowIDs.remove(windowID)
+    helperClosing.remove(windowID)
+    lock.unlock()
+  }
+
+  /// Marks a window the helper is about to close through `closeWindow`. Its destroyed notification is still recorded,
+  /// but no `window-closed` event is published for it: the caller that asked for the close already knows, and the
+  /// notification can reach the observer thread before the close command finishes and forgets the window.
+  func beginHelperClose(windowID: String) {
+    lock.lock()
+    helperClosing.insert(windowID)
+    lock.unlock()
+  }
+
+  /// Restores event publication for a window whose close the helper did not complete. `forget` ends the mark otherwise.
+  func cancelHelperClose(windowID: String) {
+    lock.lock()
+    helperClosing.remove(windowID)
     lock.unlock()
   }
 
@@ -212,7 +230,9 @@ final class WindowEventMonitor: @unchecked Sendable {
     let windowID = trackedByHash[hash]?.first { sameAXElement($0.element, element) }?.windowID
     if notification == kAXUIElementDestroyedNotification, let windowID, !closedWindowIDs.contains(windowID) {
       closedWindowIDs.insert(windowID)
-      closedWindowID = windowID
+      if !helperClosing.contains(windowID) {
+        closedWindowID = windowID
+      }
     }
     events.append(Event(
       sequence: nextSequence,

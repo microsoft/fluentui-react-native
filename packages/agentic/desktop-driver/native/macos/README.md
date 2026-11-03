@@ -217,7 +217,11 @@ description, identifier, title, frame, parent, child count, and the matching
 WindowServer window's number, layer, alpha, on-screen state, and name.
 Activation events record which application owns system-wide keyboard focus.
 Destroyed notifications for tracked windows close them and publish the FDR1
-`window-closed` event.
+`window-closed` event once. A window closed through `closeWindow` publishes none:
+the helper marks the window before it presses the close button, because the
+destroyed notification can reach the observer thread before the command returns
+and forgets the window. A `closeWindow` that fails removes the mark, so the
+window's later destruction is published.
 
 A 128-entry command journal records each helper command's start, duration,
 outcome, and window or element identifiers on the same monotonic clock. It

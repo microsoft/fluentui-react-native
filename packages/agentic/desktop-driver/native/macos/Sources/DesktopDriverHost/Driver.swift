@@ -113,7 +113,13 @@ final class Driver {
     case "closeWindow":
       let windowID = try requireString(params, "windowId")
       let window = try applications.requireWindow(windowID)
-      try closeWindow(window)
+      applications.windowEvents.beginHelperClose(windowID: windowID)
+      do {
+        try closeWindow(window)
+      } catch {
+        applications.windowEvents.cancelHelperClose(windowID: windowID)
+        throw error
+      }
       accessibility.forgetWindow(windowID)
       applications.forgetWindow(windowID)
       return CommandResult()

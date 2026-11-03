@@ -594,6 +594,25 @@ final class SelfTestRunner {
     )
     monitor.forget(windowID: "window-test")
     check(!monitor.isClosed(windowID: "window-test"), "forgetting a window clears its closed state")
+
+    // A destroyed notification can arrive before the close command finishes and forgets the window.
+    monitor.track(element, windowID: "window-closing", processID: getpid())
+    monitor.beginHelperClose(windowID: "window-closing")
+    monitor.record(element: element, notification: kAXUIElementDestroyedNotification)
+    check(
+      published == ["window-test"] && monitor.isClosed(windowID: "window-closing"),
+      "a window closed through closeWindow is recorded as closed but publishes no event"
+    )
+    monitor.forget(windowID: "window-closing")
+    monitor.track(element, windowID: "window-kept", processID: getpid())
+    monitor.beginHelperClose(windowID: "window-kept")
+    monitor.cancelHelperClose(windowID: "window-kept")
+    monitor.record(element: element, notification: kAXUIElementDestroyedNotification)
+    check(
+      published == ["window-test", "window-kept"],
+      "a closeWindow that fails leaves the window's later destruction published"
+    )
+    monitor.forget(windowID: "window-kept")
     for _ in 0..<(WindowEventMonitor.maximumEvents + 10) {
       monitor.record(element: element, notification: kAXApplicationActivatedNotification)
     }

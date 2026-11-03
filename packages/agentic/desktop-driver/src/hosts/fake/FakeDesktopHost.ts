@@ -302,10 +302,9 @@ export class FakeDesktopHost implements DesktopHost {
           this.deleteElement(id);
         }
       }
+      // The log records the destruction as a native provider would, but no event is published for a window the caller
+      // closed: the native protocol reserves `window-closed` events for windows the platform reports destroyed.
       this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
-      for (const listener of this.listeners) {
-        listener({ type: 'window-closed', windowId });
-      }
     });
   }
 

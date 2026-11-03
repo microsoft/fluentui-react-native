@@ -530,7 +530,7 @@ Fabric and Win32 Paper retain distinct app/runtime behavior and qualification.
 | Work area                | Source owner                                                            | Remaining evidence                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | Specified by the bounded observation contract; the work package below is the Windows side. Budgets must apply before subtree-wide caching: the bounded walk still caches the whole subtree before it fails `tree-too-large`, and `find` shares the 5,000-node cap. Large trees must return honest partial results, and incomplete searches must never authorize unique mutation.                                                    |
-| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)). Remaining: reconciling its eviction and release with the bounded observation contract (work package below), macOS parity (it keeps a hard 10,000-record fail-closed cap and a process check, with no fingerprint or eviction), PID reuse against a real application, and a retention plateau measured on a real React Native session. |
+| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)). Remaining: reconciling its eviction and release with the bounded observation contract (work package below), macOS token-recycling evidence (ids are never reused and actions check the pid and role; fingerprints wait on it), PID reuse against a real application, and a retention plateau measured on a real React Native session. |
 | Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations)) and qualified against the stuck and hung Win32 fixture. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and the follow-ups below (report `effect`, scope the ledger to the lease, self-test the paths).                  |
 | Input authority          | `native/windows/src/input.cpp` and application activation               | Windows implemented ([contract](../native/windows/README.md#input-authority)), and the Win32 Paper smoke passed physical pointer and keyboard actions. Remaining: live lock, RDP disconnect, and elevation transitions (the self-test injects them), a `uiAccess` decision, delivery evidence for `SendInput` beyond its return value, and foreground matching that is finer than the owning process.                               |
 | Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).                                |
@@ -1329,9 +1329,31 @@ M3 decide how each is surfaced.
 The Windows identity, input-authority, and event commit asked macOS to adopt
 three things. The settlement rule is met by the effect ledger above: the macOS
 helper reports `effect` where the Windows helper reports its codes, and Node
-settles both identically. A parity check against Windows element reclamation and
-fingerprint revalidation, the hit-test ownership check, and the `closeWindow`
-event semantics has not been done on macOS.
+settles both identically. The other three were checked against the macOS helper:
+
+- **Hit-test ownership already held.** `hitTest` returns an unregistered
+  synthetic `external-window` snapshot when the element under the point belongs
+  to another process or to another window, and never registers a foreign tree. A
+  live hit test at the top-left corner of the screen, which another process owns,
+  returned that snapshot.
+- **Reclamation and fingerprints.** Read from the code, not measured. Element
+  ids are never reused, one record exists per `AXUIElementRef`, and each action
+  checks that the process is alive and that the element still answers a role
+  read. Records end only on `releaseElements`, `closeWindow`, `closeApplication`,
+  or disposal, and the 10,000-record cap fails closed without evicting. No
+  fingerprint compares the role or identifier before an action. Whether the
+  Accessibility server can hand the same token to a different element has not
+  been measured, so a fingerprint waits on that evidence.
+- **`closeWindow` published an event it should not have.** The protocol says a
+  window closed through `closeWindow` publishes no event, but the observer
+  thread published `window-closed` whenever the destroyed notification arrived
+  before the command forgot the window. Against Calculator, 4 of 4 closes
+  published it. The helper now marks the window before it presses the close
+  button, still records the destruction in the event log, and publishes nothing;
+  a failed press removes the mark. The same 4 closes then published no event.
+  Two self-test checks cover both paths and fail when the mark is disabled, and
+  the fake host no longer publishes for `closeWindow` while keeping its log
+  entry.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

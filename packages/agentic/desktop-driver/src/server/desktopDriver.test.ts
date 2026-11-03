@@ -369,7 +369,11 @@ describe('Desktop Driver W3C remote end', () => {
       const session = await client.newSession({ alwaysMatch: { platformName: 'macos', 'furn:target': harness.target.id } });
       expect(session.recordsWindowEvents()).toBe(true);
       const [windowId] = await session.getWindowHandles();
+      const published: unknown[] = [];
+      const unsubscribe = harness.host.subscribe((event) => published.push(event));
       await harness.host.closeWindow(windowId);
+      unsubscribe();
+      expect(published).toEqual([]);
       const log = await session.getWindowEvents();
       expect(log).toMatchObject({ observing: true, source: 'fake' });
       expect(log.events).toEqual([expect.objectContaining({ notification: 'window-closed', sequence: 1, windowId })]);
