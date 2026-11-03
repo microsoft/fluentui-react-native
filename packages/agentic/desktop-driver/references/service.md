@@ -128,7 +128,9 @@ default verifier, automatic lookup, or Windows filesystem fallback. See
 [private discovery](security.md#private-discovery) for the boundary and the
 remaining native/supervisor integration.
 
-The `PrivateStorage` contract has bounded single-component record names and
+The `PrivateStorage` contract has bounded single-component record names, which
+on every platform may not end in `.` or use a Windows device name such as `NUL`
+or `com1.json`, and
 UTF-8 contents (16 KiB maximum):
 `read(name)` returns undefined only when absent,
 `publish(name, contents)` atomically creates without replacing, and

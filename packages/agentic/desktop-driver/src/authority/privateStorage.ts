@@ -9,8 +9,17 @@ export interface PrivateStorage {
 
 export const privateRecordMaxBytes = 16 * 1024;
 
+// Windows strips a trailing dot and aliases these device names, with or without an extension, to devices rather than
+// files. One rule for every platform keeps a record name portable.
+const windowsDeviceNames = /^(?:con|prn|aux|nul|com[0-9]|lpt[0-9])$/i;
+
 export function assertPrivateRecordName(name: string): void {
-  if (typeof name !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(name)) {
+  if (
+    typeof name !== 'string' ||
+    !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(name) ||
+    name.endsWith('.') ||
+    windowsDeviceNames.test(name.split('.')[0])
+  ) {
     throw new TypeError('A private record name must be a single bounded ASCII filename.');
   }
 }
