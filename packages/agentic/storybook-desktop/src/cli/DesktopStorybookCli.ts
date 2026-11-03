@@ -4,6 +4,8 @@ import { createServer } from 'node:net';
 import path from 'node:path';
 import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
 import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import { formatDesktopReporterValue } from '@fluentui-react-native/desktop-driver/cli/reporter';
+import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import {
@@ -69,6 +71,7 @@ export type DesktopStorybookCliOptions = {
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
   writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
   reporter?: DesktopReportWriter;
+  reporterMode?: ResolvedDesktopReporterMode;
   services?: DesktopServiceScope;
 };
 
@@ -77,8 +80,9 @@ export type DesktopStorybookServerOptions = {
   port?: number;
 };
 
-export type DesktopStorybookTestOptions = DesktopStorybookWdioOptions & {
+export type DesktopStorybookTestOptions = Omit<DesktopStorybookWdioOptions, 'reporter'> & {
   list?: boolean;
+  testReporter?: DesktopStorybookWdioOptions['reporter'];
   url?: string;
   target?: string;
 };
@@ -100,11 +104,14 @@ export class DesktopStorybookCli {
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
   private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
   private readonly reporter?: DesktopReportWriter;
+  private readonly reporterMode?: ResolvedDesktopReporterMode;
+  private readonly structuredOutput: Pick<NodeJS.WriteStream, 'write'>;
   private readonly services: DesktopServiceScope;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
     this.reporter = options.reporter;
+    this.reporterMode = options.reporterMode;
     this.paper = options.paper ?? config.getDesktopTarget?.('macos')?.host.renderer === 'paper';
     this.instance = createDesktopStorybookInstance({
       projectRoot: config.projectRoot,
@@ -122,8 +129,11 @@ export class DesktopStorybookCli {
     this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
-    this.output = options.output ?? reportOutput(this.reporter, 'info', process.stdout);
-    this.errorOutput = options.errorOutput ?? reportOutput(this.reporter, 'warning', process.stderr);
+    const structured = this.reporterMode === 'json' || this.reporterMode === 'ndjson';
+    const silentOutput = { write: () => true };
+    this.output = options.output ?? (structured ? silentOutput : reportOutput(this.reporter, 'info', process.stdout));
+    this.errorOutput = options.errorOutput ?? (structured ? silentOutput : reportOutput(this.reporter, 'warning', process.stderr));
+    this.structuredOutput = options.output ?? process.stdout;
     this.verbose = options.verbose ?? process.env[STORYBOOK_VERBOSE] === '1';
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
@@ -137,17 +147,42 @@ export class DesktopStorybookCli {
     if (command === false || command === undefined) {
       throw unsupportedAction('server', platform);
     }
-    await this.executePlan(
-      {
-        ...command,
-        env: {
-          ...command.env,
-          ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
-          ...(options.port ? { STORYBOOK_WS_PORT: String(options.port) } : {}),
-        },
-      },
-      platform,
-    );
+    const host = options.host ?? command.env?.STORYBOOK_WS_HOST ?? process.env.STORYBOOK_WS_HOST ?? '127.0.0.1';
+    const port = options.port ?? Number(command.env?.STORYBOOK_WS_PORT ?? process.env.STORYBOOK_WS_PORT ?? 7007);
+    validateServerOptions({ host, port });
+    const failures: unknown[] = [];
+    try {
+      this.services.start(
+        'storybook-channel',
+        this.prepareCommand(
+          {
+            ...command,
+            env: {
+              ...command.env,
+              ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+              ...(options.port ? { STORYBOOK_WS_PORT: String(options.port) } : {}),
+            },
+          },
+          platform,
+        ),
+      );
+      await this.services.ready('storybook-channel', loopbackUrl(port, '/index.json'), 120_000, this.fetch);
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
+        this.writeStructured({ type: 'ready', host, port, runId: this.reporter?.runId });
+      } else {
+        this.output.write(`Storybook server ready: ${host}:${port}\n`);
+      }
+      await this.services.guard(new Promise<never>(() => undefined));
+    } catch (error) {
+      failures.push(error);
+    }
+    try {
+      await this.services.close();
+    } catch (error) {
+      failures.push(error);
+    }
+    if (failures.length === 1) throw failures[0];
+    if (failures.length > 1) throw new AggregateError(failures, 'Storybook server execution and cleanup failed.');
   }
 
   async driver(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -168,7 +203,6 @@ export class DesktopStorybookCli {
       storybookPort,
     };
     resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
-    this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
     this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     const failures: unknown[] = [];
     try {
@@ -186,6 +220,28 @@ export class DesktopStorybookCli {
           resolvedInstance,
         ),
       );
+      await Promise.all([
+        this.services.ready('metro', loopbackUrl(metroPort, '/status'), 120_000, this.fetch),
+        this.services.ready('storybook-channel', loopbackUrl(storybookPort, '/index.json'), 120_000, this.fetch),
+      ]);
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
+        this.writeStructured({
+          type: 'ready',
+          services: ['metro', 'storybook-channel'],
+          instanceId: resolvedInstance.id,
+          endpoint: platform,
+          renderer: this.renderer(platform),
+          storybookPort,
+          metroPort,
+          driverPort,
+          targetId: this.targetId(platform),
+          runId: this.reporter?.runId,
+        });
+      } else {
+        this.output.write(
+          `Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`,
+        );
+      }
       await this.services.guard(new Promise<never>(() => undefined));
     } catch (error) {
       failures.push(error);
@@ -210,14 +266,19 @@ export class DesktopStorybookCli {
       outputPath ?? path.join('storybook-desktop.generated', `story-manifest.${platform}.json`),
     );
     writeDesktopStoryManifest(manifest, resolvedOutput);
-    this.output.write(`${resolvedOutput}\n`);
+    if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured({ path: resolvedOutput });
+    else this.output.write(`${resolvedOutput}\n`);
     return resolvedOutput;
   }
 
   async test(platform: Platforms, options: DesktopStorybookTestOptions = {}): Promise<void> {
     const settings = resolveWdioOptions({
       ...this.config.wdio,
-      ...Object.fromEntries(Object.entries(options).filter(([, value]) => value !== undefined)),
+      ...Object.fromEntries(
+        Object.entries({ ...options, reporter: options.testReporter }).filter(
+          ([key, value]) => key !== 'testReporter' && value !== undefined,
+        ),
+      ),
     });
     const manifest = await this.createStoryManifest(this.config, platform);
     const selected = selectWdioStories(manifest, settings);
@@ -225,17 +286,13 @@ export class DesktopStorybookCli {
       throw new Error('No executable wdio story tests matched the requested selection.');
     }
     if (options.list) {
-      this.output.write(
-        `${JSON.stringify(
-          selected.map(({ id, sourcePath, wdio }) => ({
-            id,
-            sourcePath,
-            ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
-          })),
-          null,
-          2,
-        )}\n`,
-      );
+      const value = selected.map(({ id, sourcePath, wdio }) => ({
+        id,
+        sourcePath,
+        ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
+      }));
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
+      else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
       return;
     }
     const connection = this.testConnection(platform, options);
@@ -299,19 +356,15 @@ export class DesktopStorybookCli {
   }
 
   printInstance(platform: Platforms): void {
-    this.output.write(
-      `${JSON.stringify(
-        {
-          ...this.instance,
-          endpoint: platform,
-          renderer: this.renderer(platform),
-          targetId: this.targetId(platform),
-          testIDPrefix: this.config.testIDPrefix,
-        },
-        null,
-        2,
-      )}\n`,
-    );
+    const value = {
+      ...this.instance,
+      endpoint: platform,
+      renderer: this.renderer(platform),
+      targetId: this.targetId(platform),
+      testIDPrefix: this.config.testIDPrefix,
+    };
+    if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
+    else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
   }
 
   async buildDriver(platform: Platforms, options: DesktopStorybookBuildDriverOptions = {}): Promise<NativeDriverArtifact> {
@@ -320,8 +373,13 @@ export class DesktopStorybookCli {
       ...this.toBuildOptions(platform, nativeOptions),
       force: options.force,
     });
-    this.output.write(`${JSON.stringify(artifact, null, 2)}\n`);
+    if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(artifact);
+    else this.output.write(`${JSON.stringify(artifact, null, 2)}\n`);
     return artifact;
+  }
+
+  private writeStructured(value: unknown): void {
+    if (this.reporterMode) this.structuredOutput.write(formatDesktopReporterValue(this.reporterMode, value));
   }
 
   async prep(platform: Platforms, options: DesktopStorybookPrepOptions = {}): Promise<void> {

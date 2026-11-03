@@ -34,6 +34,8 @@ editing.
   artifacts only to the configured native store.
 - Keep plans, manifests, results, CLI output, and agent output serializable.
   Reject unknown or dynamic plan fields instead of silently dropping them.
+- Shared CLI reporter selection and framing live in `src/cli/reporter.ts`;
+  preserve compact JSON/NDJSON framing and the auto-mode compatibility default.
 - Never translate an unsupported native state into `false`. Capability-check it
   and return an explicit skip or unsupported result.
 - Confine artifacts beneath the configured root, preserve the original failure

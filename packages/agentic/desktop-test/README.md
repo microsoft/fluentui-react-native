@@ -38,12 +38,16 @@ Expose the CLI in the workspace script and run a declared stage:
 yarn desktop-test --target windows build-driver
 yarn desktop-test --target windows test --suite regression --list
 yarn desktop-test --target windows test --suite regression
+yarn desktop-test --target windows --reporter json test --suite regression
 ```
 
 Read the [configuration guide](references/configuration.md) to define app
 targets or suites, then use the [command guide](references/commands.md) to run
-them. See the [reference index](references/README.md) for all topics, and
-[AGENTS.md](AGENTS.md) when working on the package.
+them. `--reporter json` emits a bounded result summary; use
+`--reporter ndjson --events progress` for machine-readable live progress. See
+[reporting](references/reporting.md) for precedence and artifact details, the
+[reference index](references/README.md) for all topics, and [AGENTS.md](AGENTS.md)
+when working on the package.
 
 ## Supported responsibilities
 

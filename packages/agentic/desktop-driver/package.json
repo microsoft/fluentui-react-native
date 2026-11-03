@@ -43,6 +43,11 @@
       "import": "./lib/cli/index.js",
       "default": "./src/cli/index.ts"
     },
+    "./cli/reporter": {
+      "types": "./lib/cli/reporter.d.ts",
+      "import": "./lib/cli/reporter.js",
+      "default": "./src/cli/reporter.ts"
+    },
     "./authoring": {
       "types": "./lib/authoring/index.d.ts",
       "import": "./lib/authoring/index.js",

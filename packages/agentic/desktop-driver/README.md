@@ -133,19 +133,20 @@ The [reference index](references/README.md) describes each package-owned guide.
 
 ## Public entry points
 
-| Export       | Purpose                                                                                   |
-| ------------ | ----------------------------------------------------------------------------------------- |
-| Package root | Native-helper build/resolution, `DesktopHost`, server, low-level client, and common types |
-| `/authoring` | Serializable story plans, selectors, capabilities, and result types                       |
-| `/wdio`      | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
-| `/client`    | Low-level typed W3C client                                                                |
-| `/server`    | Embeddable remote end, session manager, and target registry                               |
-| `/agent`     | Bounded JSON-safe inspection, action, and evidence API                                    |
-| `/artifacts` | Confined, atomic evidence persistence                                                     |
-| `/runner`    | Plan selection, sharding, execution, and result classification                            |
-| `/storybook` | Story manifest and orchestration contracts, without a Storybook dependency                |
-| `/testing`   | Fake host, fake Storybook orchestrator, and protocol harnesses                            |
-| `/cli`       | Embeddable Commander command and CLI runner                                               |
+| Export          | Purpose                                                                                   |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| Package root    | Native-helper build/resolution, `DesktopHost`, server, low-level client, and common types |
+| `/authoring`    | Serializable story plans, selectors, capabilities, and result types                       |
+| `/wdio`         | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
+| `/client`       | Low-level typed W3C client                                                                |
+| `/server`       | Embeddable remote end, session manager, and target registry                               |
+| `/agent`        | Bounded JSON-safe inspection, action, and evidence API                                    |
+| `/artifacts`    | Confined, atomic evidence persistence                                                     |
+| `/runner`       | Plan selection, sharding, execution, and result classification                            |
+| `/storybook`    | Story manifest and orchestration contracts, without a Storybook dependency                |
+| `/testing`      | Fake host, fake Storybook orchestrator, and protocol harnesses                            |
+| `/cli`          | Embeddable Commander command and CLI runner                                               |
+| `/cli/reporter` | Shared reporter mode resolution and structured output framing                             |
 
 The service implements native application semantics rather than pretending to
 be a browser. Unsupported browser features return `unsupported operation`

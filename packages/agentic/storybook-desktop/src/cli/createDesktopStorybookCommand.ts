@@ -1,6 +1,15 @@
 import { Command, Option } from 'commander';
 import path from 'node:path';
 import { claimDesktopWorkload, DesktopServiceScope, DesktopStopRequested } from '@fluentui-react-native/desktop-test';
+import {
+  desktopEventLevels,
+  desktopReporterModes,
+  formatDesktopReporterError,
+  resolveDesktopEventLevel,
+  resolveDesktopReporterMode,
+  resolveDesktopReporterModeFromArgv,
+} from '@fluentui-react-native/desktop-driver/cli/reporter';
+import type { DesktopEventLevel } from '@fluentui-react-native/desktop-test/reporting';
 import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/commands';
 import { createDesktopReportSession } from '@fluentui-react-native/desktop-test/reporting';
 import type { DesktopReportSession } from '@fluentui-react-native/desktop-test/reporting';
@@ -42,15 +51,36 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
     .name('storybook-desktop')
     .description('Serve, prepare, bundle, build, run, and smoke test a React Native desktop Storybook app.')
     .option('-c, --config <path>', 'path to desktop.config.mts (legacy storybook.config files are also accepted)')
+    .addOption(new Option('--reporter <mode>', 'output format').choices([...desktopReporterModes]))
+    .option('--json', 'alias for --reporter json')
+    .addOption(new Option('--events <level>', 'NDJSON event detail').choices([...desktopEventLevels]))
     .option('-v, --verbose', 'stream informational output as well as live errors and test progress');
   let apiPromise: Promise<DesktopStorybookCli> | undefined;
 
   const getApi = (flags: PlatformFlags) =>
-    (apiPromise ??= Promise.resolve(
-      options.config ?? loadDesktopStorybookConfig(program.opts<{ config?: string }>().config, options.cwd),
-    ).then(
-      (config) =>
-        new DesktopStorybookCli(config, {
+    (apiPromise ??= Promise.resolve()
+      .then(() => options.config ?? loadDesktopStorybookConfig(program.opts<{ config?: string }>().config, options.cwd))
+      .catch((error: unknown) => {
+        throw Object.assign(error instanceof Error ? error : new Error(String(error)), { code: 'config' });
+      })
+      .then((config) => {
+        const reporterFlags = program.opts<{ reporter?: string; json?: boolean; events?: DesktopEventLevel }>();
+        const reporterMode = resolveDesktopReporterMode({
+          flag: reporterFlags.json ? 'json' : reporterFlags.reporter,
+          environment: process.env.DESKTOP_REPORTER,
+          configured: config.desktop?.reporting?.reporter ?? config.desktop?.reporting?.console,
+        });
+        const requestedEventLevel = reporterFlags.events ?? process.env.DESKTOP_EVENTS ?? config.desktop?.reporting?.events;
+        if (requestedEventLevel && reporterMode !== 'ndjson')
+          throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
+        if (requestedEventLevel)
+          resolveDesktopEventLevel({
+            flag: reporterFlags.events,
+            environment: process.env.DESKTOP_EVENTS,
+            configured: config.desktop?.reporting?.events,
+          });
+        options.reporterMode = reporterMode;
+        return new DesktopStorybookCli(config, {
           buildNativeDriver: options.buildNativeDriver,
           runner: options.runner,
           createStoryManifest: options.createStoryManifest,
@@ -64,9 +94,10 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           resolveNativeDriver: options.resolveNativeDriver,
           writeMacOSApplicationLease: options.writeMacOSApplicationLease,
           reporter: options.reporter,
+          reporterMode,
           services: options.services,
-        }),
-    ));
+        });
+      }));
 
   addServerCommand(program, getApi);
   addBuildDriverCommand(program, getApi);
@@ -94,7 +125,7 @@ function addTestCommand(program: Command, getApi: GetApi): void {
     .option('--url <url>', 'Desktop Driver URL (requires --target)')
     .option('--target <id>', 'registered target ID (requires --url)')
     .option('--timeout-ms <milliseconds>', 'timeout per executable test', Number)
-    .addOption(new Option('--reporter <reporter>', 'Node test reporter').choices(['spec', 'tap', 'dot']))
+    .addOption(new Option('--test-reporter <reporter>', 'Node test reporter').choices(['spec', 'tap', 'dot']))
     .addOption(new Option('--click-mode <mode>', 'native click semantics').choices(['auto', 'physical', 'accessibility']));
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags & DesktopStorybookTestOptions) => {
@@ -102,7 +133,7 @@ function addTestCommand(program: Command, getApi: GetApi): void {
     await api.test(resolvePlatform(flags, api), {
       clickMode: flags.clickMode,
       list: flags.list,
-      reporter: flags.reporter,
+      testReporter: flags.testReporter,
       story: flags.story,
       tag: flags.tag,
       test: flags.test,
@@ -173,19 +204,67 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
   let runner: NodeDesktopCommandRunner | undefined;
   let releaseClaim: (() => void) | undefined;
   let failure: unknown;
-  const interrupt = () => options.services?.fail(new Error('Storybook run interrupted.'));
+  let parseDiagnostics = '';
+  const interrupt = () => options.services?.requestStop();
+  const normalized = normalizeLegacyTestReporter(argv);
+  let reporterResolutionError: unknown;
+  try {
+    options.reporterMode = resolveDesktopReporterModeFromArgv(normalized.argv, { environment: process.env.DESKTOP_REPORTER });
+  } catch (error) {
+    reporterResolutionError = error;
+    try {
+      options.reporterMode = resolveDesktopReporterMode({ environment: process.env.DESKTOP_REPORTER });
+    } catch {
+      options.reporterMode = 'plain';
+    }
+  }
+  configureCommandOutput(program, (message) => {
+    parseDiagnostics += message;
+  });
   program.hook('preAction', async (_program, action) => {
-    if (['manifest', 'instance'].includes(action.name()) || action.opts<{ list?: boolean }>().list) return;
-    options.config = await loadDesktopStorybookConfig(program.opts<{ config?: string }>().config);
+    if (['manifest', 'instance', 'build-driver'].includes(action.name()) || action.opts<{ list?: boolean }>().list) return;
+    try {
+      options.config = await loadDesktopStorybookConfig(program.opts<{ config?: string }>().config);
+    } catch (error) {
+      throw Object.assign(error instanceof Error ? error : new Error(String(error)), { code: 'config' });
+    }
+    const reporterFlags = program.opts<{ reporter?: string; json?: boolean; events?: DesktopEventLevel }>();
+    const reporterMode = resolveDesktopReporterMode({
+      flag: reporterFlags.json ? 'json' : reporterFlags.reporter,
+      environment: process.env.DESKTOP_REPORTER,
+      configured: options.config.desktop?.reporting?.reporter ?? options.config.desktop?.reporting?.console,
+    });
+    const requestedEventLevel = reporterFlags.events ?? process.env.DESKTOP_EVENTS ?? options.config.desktop?.reporting?.events;
+    if (requestedEventLevel && reporterMode !== 'ndjson')
+      throw Object.assign(new TypeError('--events requires --reporter ndjson.'), { code: 'config' });
+    const eventLevel = resolveDesktopEventLevel({
+      flag: reporterFlags.events,
+      environment: process.env.DESKTOP_EVENTS,
+      configured: options.config.desktop?.reporting?.events,
+    });
+    options.reporterMode = reporterMode;
     session = await createDesktopReportSession({
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
       kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+      reporterMode,
+      eventLevel,
+      suppressFinalOutput: ['driver', 'server'].includes(action.name()),
       verbose: program.opts<{ verbose?: boolean }>().verbose,
       onFatal: (error) => options.services?.fail(error),
     });
     if (!session.delegated && ['driver', 'smoke'].includes(action.name())) releaseClaim = claimDesktopWorkload(session.reporter.runId);
     options.reporter = session.reporter;
+    if (normalized.deprecated) {
+      if (reporterMode === 'json' || reporterMode === 'ndjson') {
+        session.reporter.emit({
+          kind: 'diagnostic',
+          payload: { level: 'warning', message: 'test --reporter is deprecated; use --test-reporter instead.' },
+        });
+      } else {
+        process.stderr.write('Warning: test --reporter is deprecated; use --test-reporter instead.\n');
+      }
+    }
     runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
     options.runner = runner;
     options.services = new DesktopServiceScope(runner, session.reporter);
@@ -194,9 +273,10 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
     process.once('SIGTERM', interrupt);
   });
   try {
-    await program.parseAsync([...argv]);
+    await program.parseAsync([...normalized.argv]);
   } catch (error) {
-    if (!(error instanceof DesktopStopRequested)) failure = error;
+    if (error && typeof error === 'object' && 'exitCode' in error && error.exitCode === 0) return;
+    if (!(error instanceof DesktopStopRequested)) failure = reporterResolutionError ?? error;
   } finally {
     process.off('SIGINT', interrupt);
     process.off('SIGTERM', interrupt);
@@ -215,7 +295,50 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
     }
     if (session) process.exitCode = await session.close(failure);
   }
-  if (failure !== undefined) throw failure;
+  if (failure !== undefined) {
+    if (options.reporterMode === 'json' || options.reporterMode === 'ndjson') {
+      if (!session) {
+        process.stdout.write(formatDesktopReporterError(options.reporterMode, failure));
+        process.exitCode = 1;
+      }
+      return;
+    }
+    if (!session && parseDiagnostics) {
+      process.stderr.write(parseDiagnostics);
+      process.exitCode = 1;
+      return;
+    }
+    throw failure;
+  }
+}
+
+function configureCommandOutput(command: Command, writeErr: (message: string) => void): void {
+  command.exitOverride().configureOutput({
+    writeErr,
+    writeOut: (message) => process.stdout.write(message),
+  });
+  for (const child of command.commands) {
+    configureCommandOutput(child, writeErr);
+  }
+}
+
+export function normalizeLegacyTestReporter(argv: readonly string[]): { argv: string[]; deprecated: boolean } {
+  const result = [...argv];
+  const testIndex = result.indexOf('test');
+  if (testIndex < 0) return { argv: result, deprecated: false };
+  let deprecated = false;
+  for (let index = testIndex + 1; index < result.length; index++) {
+    const argument = result[index];
+    if (argument === '--reporter' && ['spec', 'tap', 'dot'].includes(result[index + 1] ?? '')) {
+      result[index] = '--test-reporter';
+      deprecated = true;
+      index++;
+    } else if (argument.startsWith('--reporter=') && ['spec', 'tap', 'dot'].includes(argument.slice('--reporter='.length))) {
+      result[index] = argument.replace('--reporter=', '--test-reporter=');
+      deprecated = true;
+    }
+  }
+  return { argv: result, deprecated };
 }
 
 function addActionCommand(program: Command, action: 'bundle' | 'run' | 'build', description: string, getApi: GetApi): void {
@@ -284,10 +407,10 @@ function selectedPlatform(flags: PlatformFlags): Platforms | undefined {
 function resolvePlatform(flags: PlatformFlags, api: DesktopStorybookCli): Platforms {
   const platform = selectedPlatform(flags) ?? api.config.platform;
   if (!platform) {
-    throw new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.');
+    throw Object.assign(new Error('Select --windows, --macos, or --win32, or set FURN_STORYBOOK_PLATFORM.'), { code: 'usage' });
   }
   if (api.paper && platform !== 'macos') {
-    throw new Error('--paper is only supported on macOS. Select --macos --paper.');
+    throw Object.assign(new Error('--paper is only supported on macOS. Select --macos --paper.'), { code: 'usage' });
   }
   return platform;
 }

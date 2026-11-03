@@ -94,8 +94,11 @@ Clients cannot override it through capabilities. A timed-out launch must
 cancel and dispose causally owned processes before the target can be reused.
 
 Every host operation receives an `AbortSignal`. On timeout, the server aborts
-and drains native work before input release, teardown, or a later command. A
-provider may never apply late input after timeout cleanup.
+and waits for the host operation promise to settle before input release,
+teardown, or a later command. This is only a Node-side guarantee: a provider
+must not report settlement while its native side effects remain live. The
+Windows UIA bounded mutation worker currently has an unqualified late-effect
+case; do not treat its timeout response as proof that the operation settled.
 
 ## Elements and selectors
 

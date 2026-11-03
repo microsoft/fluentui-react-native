@@ -4,6 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 
 import type { DesktopEndpoint, DesktopRenderer, NativeDesktopApplicationDescriptor } from '@fluentui-react-native/desktop-driver';
+import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
 
 export type DesktopCommand = {
@@ -54,8 +55,10 @@ export type DesktopWdioSuite = {
 export type DesktopReportingConfig = {
   artifactsRoot?: string;
   console?: 'auto' | 'plain' | 'github-actions';
+  reporter?: DesktopReporterMode;
   junit?: boolean;
   summary?: 'auto' | false;
+  events?: 'milestones' | 'progress' | 'all';
 };
 
 export type DesktopConfig = {
@@ -193,9 +196,11 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
   }
   if (config.reporting !== undefined) {
     const reporting = object(config.reporting, 'reporting');
-    keys(reporting, ['artifactsRoot', 'console', 'junit', 'summary'], 'reporting');
+    keys(reporting, ['artifactsRoot', 'console', 'reporter', 'junit', 'summary', 'events'], 'reporting');
     if (reporting.artifactsRoot !== undefined) text(reporting.artifactsRoot, 'reporting.artifactsRoot');
     optionalEnum(reporting.console, ['auto', 'plain', 'github-actions'], 'reporting.console');
+    optionalEnum(reporting.reporter, ['auto', 'plain', 'github-actions', 'json', 'ndjson'], 'reporting.reporter');
+    optionalEnum(reporting.events, ['milestones', 'progress', 'all'], 'reporting.events');
     if (reporting.junit !== undefined && typeof reporting.junit !== 'boolean') throw new TypeError('reporting.junit must be boolean.');
     if (reporting.summary !== undefined && reporting.summary !== false && reporting.summary !== 'auto') {
       throw new TypeError('reporting.summary must be auto or false.');

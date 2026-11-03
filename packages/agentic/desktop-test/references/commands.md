@@ -16,11 +16,23 @@ workspace's declared script.
 | `prep`, `bundle`, `build`, `run` | Run the selected target adapter stage                |
 | `test --suite <name> --list`     | Resolve groups without launching a target            |
 | `test --suite <name>`            | Run the selected WDIO suite                          |
-| `serve --json`                   | Start the real driver listener and required services |
+| `serve --reporter json`          | Start the real driver listener and required services |
 
-`serve` reports the actual URL and target, then waits for an owned stop.
-Clients create sessions explicitly. JSON mode keeps stdout machine-readable
-and sends diagnostics to stderr.
+Global reporter options are `--reporter auto|plain|github-actions|json|ndjson`
+and `--json` (an alias for `--reporter json`). Mode precedence is CLI flag,
+`DESKTOP_REPORTER`, config, then `auto`. `auto` selects GitHub Actions rendering
+when `GITHUB_ACTIONS=true`, otherwise plain output.
+
+One-shot JSON commands emit a bounded summary; `--json` no longer prints the
+complete `run.json`. NDJSON starts with run metadata, emits milestone records
+by default, then ends with the same summary. Use `--events progress|all` for
+more detail; `DESKTOP_EVENTS` propagates a level to delegated commands. The
+default is `milestones`. Structured modes keep normal stderr empty. The full
+results and logs remain under the returned artifact paths.
+
+`serve` reports the actual URL and target after readiness, then waits for an
+owned stop. Long-lived JSON mode emits only that readiness document. Clients
+create sessions explicitly.
 
 For macOS RN Test App projects, run bundle before `prep`; CocoaPods embeds only
 resources present during pod installation. Changing the renderer requires

@@ -4,6 +4,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { pathToFileURL } = require('node:url');
 const { Writable } = require('node:stream');
+const { spawnSync } = require('node:child_process');
 
 const mode = process.argv[2];
 const packageRoot = path.resolve(__dirname, '..');
@@ -29,7 +30,7 @@ const waitFor = async (condition) => {
 async function main() {
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
-  const { DesktopServiceScope } = await import(lib('services.js'));
+  const { DesktopServiceScope, DesktopStopRequested } = await import(lib('services.js'));
   const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs } = await import(lib('config.js'));
   // Config resolution canonicalizes paths; macOS temporary directories are symlinked (/var -> /private/var).
   const root = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-harness-contract-')));
@@ -158,7 +159,135 @@ async function main() {
       assert.equal(result.counts.selected, 1);
       assert.equal(result.counts.retries, 1);
       assert(out.text().includes('(attempt 2)'), 'sparse attempt keys are labeled by ordinal');
+      const structuredOut = capture();
+      const structuredErr = capture();
+      const structured = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: structuredOut,
+        errorOutput: structuredErr,
+        reporterMode: 'json',
+        kind: 'tests',
+      });
+      structured.emit({ kind: 'test-start', payload: { testId: 'bounded', title: 'Bounded output', attempt: 0 } });
+      structured.emit({
+        kind: 'test-result',
+        payload: { testId: 'bounded', title: 'Bounded output', attempt: 0, status: 'passed', durationMs: 1 },
+      });
+      await structured.finish();
+      const summaryText = structuredOut.text().trim();
+      const summary = JSON.parse(summaryText);
+      assert.equal(summary.type, 'summary');
+      assert.equal(summary.counts.passed, 1);
+      assert.equal(summary.artifacts.runJson, path.join(structured.root, 'run.json'));
+      assert(Buffer.byteLength(summaryText) <= 4 * 1024);
+      assert.equal(structuredErr.text(), '', 'structured mode suppresses the human presenter');
+      const failedOut = capture();
+      const failedErr = capture();
+      const failedStructured = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: failedOut,
+        errorOutput: failedErr,
+        reporterMode: 'json',
+        kind: 'tests',
+      });
+      failedStructured.emit({
+        kind: 'test-result',
+        payload: {
+          testId: 'failed',
+          title: 'Failed test',
+          attempt: 0,
+          status: 'failed',
+          durationMs: 1,
+          failure: failedStructured.failure(new Error('assertion failed'), 'test'),
+        },
+      });
+      await failedStructured.finish();
+      assert.equal(JSON.parse(failedOut.text()).status, 'failed');
+      assert.equal(failedErr.text(), '', 'structured test failures do not write human diagnostics to stderr');
+
+      const ndjsonOut = capture();
+      const ndjsonErr = capture();
+      const ndjson = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: ndjsonOut,
+        errorOutput: ndjsonErr,
+        reporterMode: 'ndjson',
+        eventLevel: 'milestones',
+        kind: 'tests',
+      });
+      for (let index = 0; index < 10_000; index++) {
+        ndjson.emit({ kind: 'test-start', payload: { testId: `passing-${index}`, title: `Passing ${index}`, attempt: 0 } });
+        ndjson.emit({
+          kind: 'test-result',
+          payload: { testId: `passing-${index}`, title: `Passing ${index}`, attempt: 0, status: 'passed', durationMs: 1 },
+        });
+      }
+      await ndjson.finish();
+      const records = ndjsonOut
+        .text()
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      assert.equal(records[0].type, 'start');
+      assert.equal(records[0].runId, ndjson.runId);
+      assert.equal(records.at(-1).type, 'summary');
+      assert.equal(records.filter((record) => record.type === 'event').length, 1, 'passing tests do not inflate milestone output');
+      assert.equal(records.filter((record) => record.type === 'suppressed').length, 1);
+      assert.equal(records.at(-1).counts.passed, 10_000);
+      assert.equal(ndjsonErr.text(), '');
       assert(!out.text().includes('(attempt 1000001)'));
+      const interruptedOut = capture();
+      const interrupted = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: interruptedOut,
+        errorOutput: capture(),
+        reporterMode: 'ndjson',
+        kind: 'tests',
+      });
+      const interruptedServices = new DesktopServiceScope(
+        {
+          start: () => {
+            throw new Error('not used');
+          },
+        },
+        interrupted,
+      );
+      interruptedServices.requestStop();
+      await assert.rejects(interruptedServices.guard(Promise.resolve()), DesktopStopRequested);
+      await interruptedServices.close();
+      await interrupted.finish();
+      const interruptedRecords = interruptedOut
+        .text()
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      assert.equal(interruptedRecords.at(-1).status, 'incomplete');
+      assert.equal(
+        interruptedRecords.some((record) => record.type === 'event' && record.kind === 'diagnostic' && record.payload.level === 'error'),
+        false,
+        'user cancellation is not an infrastructure failure',
+      );
+      const closedError = new Error('consumer closed stdout');
+      const closedOut = new Writable({
+        write(_chunk, _encoding, callback) {
+          callback(closedError);
+        },
+      });
+      const closedErr = capture();
+      const closed = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: closedOut,
+        errorOutput: closedErr,
+        reporterMode: 'json',
+        kind: 'lifecycle',
+      });
+      const closedResult = await closed.finish();
+      assert.equal(closedResult.status, 'passed');
+      assert.equal(closedResult.failures.length, 0);
+      assert(closedErr.text().includes('Structured output stopped: consumer closed stdout'));
+      const closedJournal = fs.readFileSync(path.join(closed.root, 'events.jsonl'), 'utf8');
+      assert(closedJournal.includes('"level":"warning"'));
+      assert(closedJournal.includes('Structured output stopped: consumer closed stdout'));
       const journal = fs.readFileSync(path.join(run.root, 'events.jsonl'), 'utf8');
       assert(!journal.includes('secret-value'));
       assert(journal.includes('root cause'));
@@ -283,6 +412,27 @@ async function main() {
         if (priorSummary === undefined) delete process.env.GITHUB_STEP_SUMMARY;
         else process.env.GITHUB_STEP_SUMMARY = priorSummary;
       }
+    } else if (mode === 'reporter-cli') {
+      const configPath = path.join(root, 'desktop.config.mjs');
+      fs.writeFileSync(
+        configPath,
+        `export default ${JSON.stringify({
+          schemaVersion: 1,
+          targets: { win32: { host: { kind: 'installed', application: { executablePath: 'app.exe' } } } },
+        })};`,
+      );
+      const response = spawnSync(
+        process.execPath,
+        [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'missing', '--reporter', 'json', 'prep'],
+        { cwd: root, encoding: 'utf8' },
+      );
+      assert.equal(response.status, 1, response.stderr);
+      assert.equal(response.stderr, '');
+      assert.deepEqual(JSON.parse(response.stdout), {
+        schemaVersion: 1,
+        type: 'error',
+        error: { code: 'unknown-target', message: 'Unknown target "missing".' },
+      });
     } else if (mode === 'commands') {
       const run = reporter({ kind: 'lifecycle', console: 'github-actions' });
       const runner = new NodeDesktopCommandRunner({ reporter: run });
@@ -442,10 +592,17 @@ async function main() {
       assert.equal((await delegatedRun.finish()).status, 'passed');
       assert(!fs.readFileSync(path.join(delegatedRun.root, 'events.jsonl'), 'utf8').includes('child-only-secret'));
     } else if (mode === 'delegated-cli') {
-      const { startReportTransport } = await import(lib('reporting/transport.js'));
-      const run = reporter({ kind: 'lifecycle' });
-      const transport = await startReportTransport(run);
-      const runner = new NodeDesktopCommandRunner({ reporter: run, environment: transport.environment });
+      const { createDesktopReportSession } = await import(lib('reporting/session.js'));
+      const session = await createDesktopReportSession({
+        artifactsRoot: root,
+        errorOutput: err,
+        eventLevel: 'all',
+        kind: 'lifecycle',
+        output: out,
+        reporterMode: 'ndjson',
+        summary: false,
+      });
+      const runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
       const configPath = path.join(root, 'desktop.config.mjs');
       fs.writeFileSync(
         configPath,
@@ -454,37 +611,60 @@ async function main() {
           targets: {
             win32: {
               host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } },
-              commands: { prep: { command: process.execPath, args: ['-e', "process.stderr.write('nested CLI diagnostic\\n')"] } },
+              commands: {
+                prep: {
+                  command: process.execPath,
+                  args: ['-e', "process.stderr.write('nested CLI diagnostic ' + process.env.DESKTOP_REPORTER + '\\n')"],
+                },
+              },
             },
           },
           reporting: { artifactsRoot: path.join(root, 'competing-collector') },
         })}`,
       );
+      let exitCode;
       try {
         await runner.run({
           command: process.execPath,
-          args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', '--json', 'prep'],
+          args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', 'prep'],
           cwd: root,
           env: { GITHUB_ACTIONS: 'true' },
         });
       } finally {
         await runner.close();
-        await transport.close();
+        exitCode = await session.close();
       }
       assert(!fs.existsSync(path.join(root, 'competing-collector')));
-      assert(err.text().includes('nested CLI diagnostic'));
-      const result = await run.finish();
-      assert.equal(result.status, 'passed', JSON.stringify(result));
-      const events = fs
-        .readFileSync(path.join(run.root, 'events.jsonl'), 'utf8')
+      assert.equal(session.reporter.runId.length, 36);
+      assert.equal(exitCode, 0);
+      assert.equal(session.result.status, 'passed', JSON.stringify(session.result));
+      assert.equal(err.text(), '', `structured runs keep stderr empty: ${err.text()}`);
+      const records = out
+        .text()
         .trim()
         .split('\n')
         .map((line) => JSON.parse(line));
-      const machine = events.find(
+      const terminal = records.at(-1);
+      assert.equal(terminal.status, 'passed');
+      assert.equal(terminal.type, 'summary');
+      const journal = fs
+        .readFileSync(path.join(session.reporter.root, 'events.jsonl'), 'utf8')
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      const machine = journal.find(
         (event) => event.kind === 'output' && event.payload.stream === 'stdout' && event.payload.text.includes('"delegated"'),
       );
-      assert.deepEqual(JSON.parse(machine.payload.text), { runId: run.runId, delegated: true, exitCode: 0 });
-      assert.equal((out.text().match(/\[desktop\] PASSED:/g) || []).length, 1);
+      assert.deepEqual(JSON.parse(machine.payload.text), {
+        schemaVersion: 1,
+        type: 'terminal',
+        result: { runId: session.reporter.runId, delegated: true, exitCode: 0 },
+      });
+      assert(
+        records.some(
+          (record) => record.type === 'event' && record.kind === 'output' && record.payload.text.includes('nested CLI diagnostic ndjson'),
+        ),
+      );
     } else if (mode === 'owned-service') {
       const { startReportTransport } = await import(lib('reporting/transport.js'));
       const run = reporter({ kind: 'lifecycle' });

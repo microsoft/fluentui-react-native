@@ -70,6 +70,9 @@ For Storybook targets, the connection registers:
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
+Selectors used to read a value or perform an action must resolve to exactly one
+element. `count` and `exists` expectations intentionally allow multiple matches;
+narrow other selectors rather than relying on the first match.
 
 Pass `onTestResult(result)` to `runStoryTests` or `runDesktopStoryTests` to
 receive each settled test result before the next test starts. This supports

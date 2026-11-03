@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
 import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 
@@ -165,6 +166,51 @@ describe('DesktopStorybookCli', () => {
     await expect(cli.test('macos', { list: true, test: 'missing' })).rejects.toThrow('No executable');
   });
 
+  test('supports structured reporter output and rejects event levels outside NDJSON mode', async () => {
+    const output = { write: jest.fn() };
+    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot, storyPackages: [] });
+    const createStoryManifest = async () => ({
+      endpoint: 'macos' as const,
+      schemaVersion: 1 as const,
+      platformManifestDigest: 'digest',
+      portablePlanDigest: 'portable',
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { exportName: 'Default', digest: 'callback' },
+        },
+      ],
+    });
+
+    await createDesktopStorybookCommand({ config, createStoryManifest, output }).parseAsync([
+      'node',
+      'storybook',
+      'test',
+      '--macos',
+      '--list',
+      '--reporter',
+      'json',
+    ]);
+    expect(JSON.parse(output.write.mock.calls[0][0])).toEqual([{ id: 'button--default', sourcePath: 'button.stories.tsx' }]);
+
+    await expect(
+      createDesktopStorybookCommand({ config, createStoryManifest, output }).parseAsync([
+        'node',
+        'storybook',
+        'test',
+        '--macos',
+        '--list',
+        '--events',
+        'progress',
+      ]),
+    ).rejects.toThrow('--events requires --reporter ndjson.');
+  });
+
   test('prints story navigation failures before throwing the smoke summary', async () => {
     const runner = new RecordingRunner();
     const errorOutput = { write: jest.fn() };
@@ -234,11 +280,24 @@ describe('DesktopStorybookCli', () => {
 
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
-    const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });
+    const services = new DesktopServiceScope(runner);
+    const output = { write: jest.fn() };
+    const fetch: typeof globalThis.fetch = async () => {
+      setTimeout(() => services.requestStop(), 0);
+      return new Response('{}');
+    };
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      fetch,
+      output,
+      reporterMode: 'json',
+      runner,
+      services,
+    });
 
-    await cli.server('win32', { host: '0.0.0.0', port: 7100 });
+    await expect(cli.server('win32', { host: '0.0.0.0', port: 7100 })).rejects.toThrow('Owned desktop service stop requested.');
 
-    expect(runner.foreground[0]).toMatchObject({
+    expect(runner.background[0]).toMatchObject({
       command: process.execPath,
       args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
       cwd: storybookRoot,
@@ -249,6 +308,7 @@ describe('DesktopStorybookCli', () => {
         STORYBOOK_WS_PORT: '7100',
       },
     });
+    expect(output.write).toHaveBeenCalledWith('{"type":"ready","host":"0.0.0.0","port":7100}\n');
   });
 
   test('uses shared preparation and rnx-cli bundle defaults', async () => {
@@ -975,11 +1035,18 @@ describe('createDesktopStorybookCommand', () => {
 
   test('forwards server platform and connection options', async () => {
     const runner = new RecordingRunner();
-    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), runner });
+    const services = new DesktopServiceScope(runner);
+    const fetch: typeof globalThis.fetch = async () => {
+      setTimeout(() => services.requestStop(), 0);
+      return new Response('{}');
+    };
+    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), fetch, runner, services });
 
-    await program.parseAsync(['node', 'test', 'server', '--win32', '--host', 'localhost', '--port', '7101']);
+    await expect(program.parseAsync(['node', 'test', 'server', '--win32', '--host', 'localhost', '--port', '7101'])).rejects.toThrow(
+      'Owned desktop service stop requested.',
+    );
 
-    expect(runner.foreground[0]).toMatchObject({
+    expect(runner.background[0]).toMatchObject({
       args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
       env: {
         [FURN_STORYBOOK_PLATFORM]: 'win32',
