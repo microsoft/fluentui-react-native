@@ -112,6 +112,7 @@ describe('native driver build and resolution', () => {
       await helper.dispose();
       await expectMacosEffectReporting(resolved.executablePath);
       await expectMacosBoundedObservation(resolved.executablePath);
+      await expectMacosRequestMemoryStable(resolved.executablePath);
 
       const observationDump = path.join(cacheRoot, 'self-test-observations.json');
       const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
@@ -491,6 +492,43 @@ describe('native driver build and resolution', () => {
       });
 
       await request('dispose-after-observation', 'dispose', {});
+      await closed;
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+        await closed;
+      }
+    }
+  }
+
+  // The helper serves one session for a long time from threads that run no run loop, so anything autoreleased per request
+  // that is not drained there accumulates; before the fix a probe round trip cost the helper about 25 KB for good.
+  async function expectMacosRequestMemoryStable(executablePath: string): Promise<void> {
+    const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const decoder = new NativeFrameDecoder();
+    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
+    child.stderr.resume();
+    const residentKilobytes = (): number =>
+      Number(spawnSync('ps', ['-o', 'rss=', '-p', String(child.pid)], { encoding: 'utf8' }).stdout.trim());
+    const roundTrip = async (id: string, command: string, params: Record<string, unknown>) => {
+      const response = waitForMessage(decoder, (message) => message.type === 'response' && message.id === id);
+      child.stdin.write(encodeJsonFrame({ command, id, params, type: 'request' }));
+      await response;
+    };
+    try {
+      await waitForMessage(decoder, (message) => message.type === 'hello');
+      for (let index = 0; index < 200; index += 1) {
+        await roundTrip(`warm-${index}`, 'probe', { endpoint: 'macos' });
+      }
+      const before = residentKilobytes();
+      expect(before).toBeGreaterThan(0);
+      for (let index = 0; index < 1000; index += 1) {
+        await roundTrip(`probe-${index}`, 'probe', { endpoint: 'macos' });
+      }
+      expect(residentKilobytes() - before).toBeLessThan(8 * 1024);
+
+      await roundTrip('dispose-after-memory-check', 'dispose', {});
       await closed;
     } finally {
       if (child.exitCode === null && child.signalCode === null) {

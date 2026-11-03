@@ -97,44 +97,17 @@ final class Host {
 
     var exitCode: Int32 = 0
     do {
-      while let frame = try reader.read() {
-        if frame.type != .json {
-          writeDiagnostic("The native helper ignored an unexpected binary frame on stdin.")
-          continue
+      var open = true
+      while open {
+        // This thread runs no run loop either, so its autorelease pool is never drained. The frame reads and the JSON
+        // parser autorelease on every request, which would otherwise grow the helper's memory with each one.
+        open = try autoreleasepool {
+          guard let frame = try reader.read() else {
+            return false
+          }
+          accept(frame)
+          return true
         }
-        let value: Any
-        do {
-          value = try parseJSON(frame.payload)
-        } catch {
-          writeDiagnostic("The native helper ignored malformed JSON: \(error)")
-          continue
-        }
-        guard let message = value as? JSONObject else {
-          writeDiagnostic("The native helper ignored a JSON message that is not an object.")
-          continue
-        }
-        let type = message["type"] as? String ?? ""
-        let id = message["id"] as? String ?? ""
-        if (type == "cancel" || type == "request")
-          && (id.isEmpty || id.utf8.count > Framing.maximumCorrelationIDBytes)
-        {
-          writeDiagnostic("The native helper ignored a request with an invalid correlation identifier.")
-          continue
-        }
-        if type == "cancel" {
-          handleCancel(id)
-          continue
-        }
-        guard type == "request" else {
-          writeDiagnostic("The native helper received a message that is not a correlated request.")
-          continue
-        }
-        let command = message["command"] as? String ?? ""
-        let params = message["params"] as? JSONObject ?? [:]
-        condition.lock()
-        queue.append(PendingRequest(id: id, command: command, params: params))
-        condition.signal()
-        condition.unlock()
       }
     } catch {
       writeDiagnostic("furn-desktop-driver-host: \(error)")
@@ -149,6 +122,47 @@ final class Host {
     workerDone.wait()
     self.writer = nil
     return exitCode
+  }
+
+  /// Validates one inbound frame, then cancels the request it names or queues it for the worker.
+  private func accept(_ frame: Frame) {
+    if frame.type != .json {
+      writeDiagnostic("The native helper ignored an unexpected binary frame on stdin.")
+      return
+    }
+    let value: Any
+    do {
+      value = try parseJSON(frame.payload)
+    } catch {
+      writeDiagnostic("The native helper ignored malformed JSON: \(error)")
+      return
+    }
+    guard let message = value as? JSONObject else {
+      writeDiagnostic("The native helper ignored a JSON message that is not an object.")
+      return
+    }
+    let type = message["type"] as? String ?? ""
+    let id = message["id"] as? String ?? ""
+    if (type == "cancel" || type == "request")
+      && (id.isEmpty || id.utf8.count > Framing.maximumCorrelationIDBytes)
+    {
+      writeDiagnostic("The native helper ignored a request with an invalid correlation identifier.")
+      return
+    }
+    if type == "cancel" {
+      handleCancel(id)
+      return
+    }
+    guard type == "request" else {
+      writeDiagnostic("The native helper received a message that is not a correlated request.")
+      return
+    }
+    let command = message["command"] as? String ?? ""
+    let params = message["params"] as? JSONObject ?? [:]
+    condition.lock()
+    queue.append(PendingRequest(id: id, command: command, params: params))
+    condition.signal()
+    condition.unlock()
   }
 
   private func handleCancel(_ id: String) {
@@ -182,43 +196,52 @@ final class Host {
       token.reset()
       condition.unlock()
 
-      var cancellation: CancelledError?
-      do {
-        let result = try driver.execute(command: request.command, params: request.params, token: token)
-        try writeResponse(id: request.id, command: request.command, result: result)
-      } catch let error as CancelledError {
-        cancellation = error
-      } catch let error as HelperError {
-        writeError(
-          id: request.id,
-          command: request.command,
-          code: error.code,
-          message: error.message,
-          data: error.data,
-          effect: error.effect
-        )
-      } catch {
-        writeError(
-          id: request.id,
-          command: request.command,
-          code: ErrorCode.internalError,
-          message: error.localizedDescription
-        )
-      }
+      // This thread lives as long as the helper and runs no run loop, so nothing drains its autorelease pool between
+      // requests. Draining one per request frees what Accessibility and Foundation autoreleased while serving it;
+      // without it every tree read and observation adds to the helper's memory for the life of the session.
+      let wasCancelled = autoreleasepool { process(request) }
 
-      if let cancellation {
-        driver.releaseInput()
-        writeCancelled(request.id, effect: cancellation.effect)
-      }
-      condition.lock()
-      activeID = nil
-      condition.unlock()
-
-      if request.command == "dispose" && cancellation == nil {
+      if request.command == "dispose" && !wasCancelled {
         try? FileHandle.standardOutput.synchronize()
         Darwin.exit(EXIT_SUCCESS)
       }
     }
+  }
+
+  /// Runs one request to its response, error, or cancellation, and reports whether it was cancelled.
+  private func process(_ request: PendingRequest) -> Bool {
+    var cancellation: CancelledError?
+    do {
+      let result = try driver.execute(command: request.command, params: request.params, token: token)
+      try writeResponse(id: request.id, command: request.command, result: result)
+    } catch let error as CancelledError {
+      cancellation = error
+    } catch let error as HelperError {
+      writeError(
+        id: request.id,
+        command: request.command,
+        code: error.code,
+        message: error.message,
+        data: error.data,
+        effect: error.effect
+      )
+    } catch {
+      writeError(
+        id: request.id,
+        command: request.command,
+        code: ErrorCode.internalError,
+        message: error.localizedDescription
+      )
+    }
+
+    if let cancellation {
+      driver.releaseInput()
+      writeCancelled(request.id, effect: cancellation.effect)
+    }
+    condition.lock()
+    activeID = nil
+    condition.unlock()
+    return cancellation != nil
   }
 
   private func writeResponse(id: String, command: String, result: CommandResult) throws {

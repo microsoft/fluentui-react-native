@@ -155,6 +155,14 @@ helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
 
+Neither the stdin reader nor the worker thread runs a run loop, so nothing
+drains their autorelease pools between requests. The reader runs each frame, and
+the worker each request, inside its own `autoreleasepool`; without that, every
+frame read, JSON parse, tree read, and observation added to the helper's
+resident memory for the life of the session (about 25 KB for a `probe`, 80 KB
+for a `tree`, and 250 KB for a 500-element `observe`). A new thread that serves
+requests must drain a pool per request too.
+
 ## Application and window identity
 
 The helper uses server-owned `bundleIdentifier`, `executablePath`,
@@ -480,7 +488,9 @@ bounded observation: request validation, each truncation reason, a randomized
 differential check against a reference model, record release and reuse, and the
 `observe` and `releaseElements` commands. The Node native
 contract additionally builds, verifies, reuses, and directly resolves the app;
-starts the actual long-lived process; exercises malformed-frame recovery; and
+starts the actual long-lived process; exercises malformed-frame recovery;
+requires a run of 1,000 `probe` round trips to leave the process's resident
+memory within 8 MiB (it grew by about 24 MiB before the autorelease pools); and
 replays the self-test's observation samples through the protocol oracle that
 checks every `observe` result.
 
