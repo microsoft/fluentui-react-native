@@ -239,6 +239,166 @@ without the feature reject the command as `unsupported-operation`, which Node
 reports as `unsupported operation` rather than an empty list. The feature is
 additive and does not change the wire version.
 
+### Bounded observation
+
+Helpers that advertise `boundedObservation` in `hello.features` and in the
+`features` map of the `probe` result accept the `observe` and `releaseElements`
+commands. Both are read-only: they never report an `effect` and never
+quarantine a target. Helpers without the feature reject them as
+`unsupported-operation`. Node never sends them unless the feature is negotiated
+and never substitutes the unbounded `tree` or `find` for a bounded request.
+The feature is additive and does not change the wire version.
+
+The helper bounds the traversal and reports raw facts; Node owns projection
+policy (interactive filtering, ancestor outlines, page sizes, deltas), so the
+agent-facing result is identical on every provider. `tree`, `find`, and
+`source` keep their existing unbounded behavior.
+
+#### `observe`
+
+Reads one bounded, ordered sample of a window's accessibility tree:
+
+```json
+{
+  "windowId": "<helper window id>",
+  "rootId": "<optional element id that roots the sample>",
+  "budget": {
+    "maxVisited": 1000,
+    "maxDepth": 12,
+    "maxStringLength": 256,
+    "maxBytes": 262144,
+    "deadlineMs": 2000
+  },
+  "facts": ["enabled", "focused", "actions"]
+}
+```
+
+All `budget` fields are required integers. A helper rejects an out-of-range
+value as `invalid-params` and never clamps it silently; it also rejects unknown
+fields and unknown or repeated `facts`.
+
+| Budget            | Range          | Bounds                                                                             |
+| ----------------- | -------------- | ---------------------------------------------------------------------------------- |
+| `maxVisited`      | 1 to 5,000     | Nodes the helper may read, which are the nodes it emits.                           |
+| `maxDepth`        | 0 to 64        | Distance from the root; the root is depth 0.                                       |
+| `maxStringLength` | 16 to 1,024    | UTF-16 code units kept per string; longer strings are cut and the field is listed. |
+| `maxBytes`        | 4,096 to 4 MiB | Approximate UTF-8 size of the emitted nodes.                                       |
+| `deadlineMs`      | 50 to 30,000   | Elapsed time after which the helper starts no further provider call.               |
+
+`rootId` is an element id the helper already tracks in that window; an
+untracked or foreign root is `stale-element` and an unknown window is
+`no-such-window`. Without a root the sample starts at the window.
+
+The helper walks **breadth first** from the root, children in provider order,
+and emits the root first; the root is always read, whatever the budgets. An
+element reachable twice is emitted once. Work is
+incremental: the helper reads a node's children only when the budget still
+allows visiting them, and never prefetches a whole subtree before applying a
+limit. The result is deterministic for an unchanged tree.
+
+Every node always carries `id`, `depth`, `role`, `scope`, and `childrenState`,
+and carries `parentId` (absent only on the root), `name`, `automationId`, and
+`childCount` when known. Everything else appears only when named in `facts`,
+so a field's absence means **unobserved**. The exception is `value` and `text`,
+which are plain strings: when they are requested, a node without one omits the
+field because the element has none. A requested fact that a node cannot
+report keeps the supported or unsupported value shape of snapshots
+(`{ "supported": false, "reason": "..." }`), so unobserved, unsupported, and
+observed stay distinguishable:
+
+| `facts` entry                                                                  | Adds to the node                                                             |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `checked`, `enabled`, `expanded`, `focused`, `required`, `selected`, `visible` | The field of that name, as a supported or unsupported value as in snapshots. |
+| `actions`                                                                      | `actions`: the names `accessibilityActions` returns, possibly empty.         |
+| `geometry`                                                                     | `rect`, relative to the window's origin as in snapshots.                     |
+| `value`, `text`                                                                | `value` or `text`, derived as in snapshots.                                  |
+| `help`                                                                         | `helpText`, as a supported or unsupported value.                             |
+
+`role`, `name`, `automationId`, `scope`, and the facts use the same derivation
+and vocabularies as element snapshots; `scope` includes the preview-region
+detection `tree` performs, and a node under a preview root keeps that scope
+when a later sample is rooted below it. A provider never reports `value` or
+`text` for a password or secure field. When the platform cannot report a
+requested fact for any element, the provider lists the fact once in
+`unsupportedFacts` and omits it from every node instead of repeating a reason
+per node. A string cut to `maxStringLength` is listed in that node's `clipped`
+array, for example `["name"]`. A cut never separates the two halves of a
+surrogate pair, so a clipped string may be one unit shorter than the limit;
+that keeps every emitted string encodable.
+
+`childrenState` states what the sample knows about a node's children:
+
+| Value       | Meaning                                                                            |
+| ----------- | ---------------------------------------------------------------------------------- |
+| `none`      | The helper read the children and the node has none.                                |
+| `complete`  | Every child was emitted.                                                           |
+| `truncated` | The node has children that were not emitted; `childCount` is the total when known. |
+| `unknown`   | The helper did not read the children, so the node must not be reported as a leaf.  |
+
+The response:
+
+```json
+{
+  "nodes": [{ "id": "e1", "depth": 0, "role": "window", "scope": "application", "childrenState": "complete" }],
+  "complete": false,
+  "truncation": [{ "reason": "visited", "limit": 1000, "unvisited": 85 }],
+  "elapsedMs": 83,
+  "unsupportedFacts": ["required"]
+}
+```
+
+`nodes` are in emission order and every `parentId` names an earlier node.
+`complete` is true only when no limit stopped the walk, so a depth-limited or
+truncated sample never establishes absence, an exact count, or uniqueness.
+Each `truncation` entry has a `reason` that appears at most once: `visited`,
+`depth`, `bytes`, `deadline`, `references` (the helper's element table is at
+capacity), or `unreadable` (a provider read of children failed other than as a
+stale element). `limit` repeats the budget that applied and `unvisited` is a
+lower bound on elements known to exist but not visited. An element that
+disappears during the walk is skipped; a changing tree yields a best-effort
+sample, so Node brackets each call with its own capture interval.
+
+An element's `id` is the id every element command uses. One underlying element
+keeps one id while the helper retains its record, so a repeated sample reports
+unchanged elements under unchanged ids. The helper never reuses an id after the
+record is released or forgotten. At capacity the helper stops emitting with
+the `references` reason instead of evicting or recycling a record; when the
+table has no room even for the root, `nodes` is empty and `references` is the
+only reason that may accompany an empty sample. To see more of a `truncated`
+node, Node sends a new `observe` rooted at its id; that is a new sample, not a
+continuation of the previous one.
+
+`observe` fails as `invalid-params`, `no-such-window`, `stale-element`, or
+`automation-failed`, and with the same permission failure `tree` reports when
+accessibility access is missing. A cancelled `observe` ends as `cancelled`
+without an `effect`; records it already created stay until released.
+
+#### `releaseElements`
+
+Drops the helper's records for ids Node no longer needs:
+
+```json
+{ "ids": ["e12", "e13"] }
+```
+
+The result is `{ "released": 2 }`, the number of records actually dropped. At
+most 1,000 ids of at most 256 UTF-8 bytes each may be sent. An id the helper
+does not track is ignored, so the command is idempotent. A released id behaves
+like any untracked id: element commands reject it as `stale-element`. Node
+releases only ids it created for agent observation and never an id it has
+issued to a WebDriver client.
+
+#### Conformance
+
+Both providers must pass the same cases before Node enables the feature for
+them: a tree larger than every budget returns a partial sample instead of
+`tree-too-large`; each truncation reason can be provoked on its own; two
+samples of an unchanged tree report identical ids and order; a duplicate
+reachable element is emitted once; a released id is rejected and never
+reappears; capacity stops emission with `references`; a hung provider read
+ends at the deadline plus the one in-flight call; cancellation unwinds without
+an `effect`; and no response exceeds `maxBytes` by more than one node.
+
 ### `cancel` and `cancelled`
 
 When a command's `AbortSignal` fires, Node sends:

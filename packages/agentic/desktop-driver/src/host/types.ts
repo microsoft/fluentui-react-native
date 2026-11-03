@@ -15,6 +15,8 @@ export type DesktopHostFeatures = {
   /** The host lists an element's accessibility actions, including authored custom actions such as `Select` and `Toggle`. */
   accessibilityActions?: boolean;
   accessibilityClick: boolean;
+  /** The host samples a window's tree within explicit budgets (`observe`) and drops element records (`releaseElements`). */
+  boundedObservation?: boolean;
   elementScreenshot: boolean;
   focus: boolean;
   keyboard: boolean;
@@ -94,6 +96,87 @@ export type NativeElementSnapshot = {
 export type NativeSelector = {
   strategy: '-furn:text' | 'accessibility id' | 'link text' | 'partial link text' | 'tag name';
   value: string;
+};
+
+/** Facts a bounded observation can add to its base node fields; the closed set is part of FDR1 (`native/PROTOCOL.md`). */
+export type NativeObserveFact =
+  | 'actions'
+  | 'checked'
+  | 'enabled'
+  | 'expanded'
+  | 'focused'
+  | 'geometry'
+  | 'help'
+  | 'required'
+  | 'selected'
+  | 'text'
+  | 'value'
+  | 'visible';
+
+/** Every field is required and range-checked by the provider; see the budget table in `native/PROTOCOL.md`. */
+export type NativeObserveBudget = {
+  deadlineMs: number;
+  maxBytes: number;
+  maxDepth: number;
+  maxStringLength: number;
+  maxVisited: number;
+};
+
+export type NativeObserveRequest = {
+  budget: NativeObserveBudget;
+  facts: readonly NativeObserveFact[];
+  /** Element id that roots the sample; the window root when omitted. */
+  rootId?: string;
+  windowId: string;
+};
+
+/** What a sample knows about a node's children. `unknown` means they were not read, so the node is not a leaf. */
+export type NativeChildrenState = 'complete' | 'none' | 'truncated' | 'unknown';
+
+/** Base fields are always present; fact fields appear only when requested, so absence means unobserved. */
+export type NativeObservedNode = {
+  actions?: string[];
+  automationId?: string;
+  checked?: SupportedValue<boolean | 'mixed'>;
+  childCount?: number;
+  childrenState: NativeChildrenState;
+  /** Fields whose string was cut to the budget's `maxStringLength`. */
+  clipped?: string[];
+  depth: number;
+  enabled?: SupportedValue<boolean>;
+  expanded?: SupportedValue<boolean>;
+  focused?: SupportedValue<boolean>;
+  helpText?: SupportedValue<string>;
+  id: string;
+  name?: string;
+  parentId?: string;
+  rect?: Rect;
+  required?: SupportedValue<boolean>;
+  role: string;
+  scope: NativeElementScope;
+  selected?: SupportedValue<boolean>;
+  text?: string;
+  value?: string;
+  visible?: SupportedValue<boolean>;
+};
+
+export type NativeObserveTruncationReason = 'bytes' | 'deadline' | 'depth' | 'references' | 'unreadable' | 'visited';
+
+export type NativeObserveTruncation = {
+  /** The budget that applied, for the reasons that have one. */
+  limit?: number;
+  reason: NativeObserveTruncationReason;
+  /** A lower bound on elements known to exist but not visited. */
+  unvisited?: number;
+};
+
+/** One bounded, ordered sample; `complete` is true only when no limit stopped the walk. */
+export type NativeObservation = {
+  complete: boolean;
+  elapsedMs: number;
+  nodes: NativeObservedNode[];
+  truncation: NativeObserveTruncation[];
+  unsupportedFacts: NativeObserveFact[];
 };
 
 export type NativeSearchRoot = {
@@ -196,6 +279,17 @@ export interface DesktopHost {
    * `features.accessibilityActions`.
    */
   accessibilityActions?(elementId: string, signal?: AbortSignal): Promise<string[]>;
+
+  /**
+   * Samples a window's tree within explicit budgets without failing on large trees. Read-only: it never carries an
+   * effect. Present only when the host advertises `features.boundedObservation`; Node never substitutes `tree` for it.
+   */
+  observe?(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation>;
+  /**
+   * Drops the host's records for element ids Node no longer needs and returns how many were dropped. Unknown ids are
+   * ignored, and a released id is rejected as stale afterwards. Present only with `features.boundedObservation`.
+   */
+  releaseElements?(elementIds: readonly string[], signal?: AbortSignal): Promise<number>;
 
   subscribe?(listener: (event: DesktopHostEvent) => void): () => void;
   dispose(signal?: AbortSignal): Promise<void>;

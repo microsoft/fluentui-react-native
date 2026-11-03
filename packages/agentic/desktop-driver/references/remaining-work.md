@@ -582,6 +582,54 @@ cannot be verified from macOS):
 3. Add native self-test cases for the effect reported by each mutating
    command's rejection, cancellation, and abandoned paths.
 
+**Windows work package for bounded observation (M3).** Implement the
+[bounded observation contract](../native/PROTOCOL.md#bounded-observation) in
+`native/windows/**`. The Node host, its request and response validation, a fake
+reference provider, and the conformance suite already exist, so the helper needs
+no Node change: Node enables `observe` only after the helper negotiates
+`boundedObservation` and rejects any response that breaks the contract. The
+helper must:
+
+1. **Traverse incrementally.** `WalkCachedSubtree` builds a `TreeScope_Subtree`
+   cache for the whole window before it checks the 5,000-node limit, so a large
+   tree is paid for (and fails `tree-too-large`) before any budget applies.
+   `observe` instead walks breadth first with one cached `TreeScope_Children`
+   fetch per expanded parent, in control view as `tree` does, reads a node's
+   children only while the budget still allows visiting them, and starts no new
+   provider call after `deadlineMs`. It never falls back to `SnapshotWindowTree`.
+2. **Share one bounded identity table.** `find`, `snapshot`, `tree`, and
+   `observe` keep sharing `recordsById_` and `idsByRuntimeKey_`, which only
+   `ForgetWindow` and `Reset` release today. Add a capacity (10,000 records, as
+   on macOS) that stops emission with the `references` truncation instead of
+   evicting; an id-to-key reverse index so a release drops both maps; and
+   `releaseElements`. Ids are never reused after a release. A reused runtime id
+   or an identical replacement must not retarget an existing id to a different
+   element: choose and document the identity evidence, and prove it with a
+   provider whose runtime ids repeat.
+3. **Report facts as snapshots do.** Reuse `ReadSnapshot`'s derivation of role,
+   name, automation id, scope (including preview-root detection), and facts, so
+   an agent sees identical vocabularies on both providers. Never report `value`
+   or `text` for a password (`UIA_IsPasswordPropertyId`). Cut strings in UTF-16
+   code units without splitting a surrogate pair, and list each cut field in
+   `clipped`. Keep `rect` window-relative, as snapshots do.
+4. **Advertise the feature last.** Add `boundedObservation` to the `hello`
+   features in `host.cpp` and the `probe` features map in `driver.cpp` only
+   when the self-tests below pass.
+5. **Prove the conformance cases** with the controllable synthetic provider the
+   settlement tests use: a tree larger than every budget returns a partial
+   sample; each truncation reason is provoked alone; two samples of an
+   unchanged tree report identical ids and order; a duplicate reachable element
+   is emitted once; a released id is rejected and never reappears; capacity
+   stops emission with `references` and leaves an empty sample when even the
+   root has no room; a hung read ends at the deadline plus the one call in
+   flight; cancellation unwinds with no `effect`; and no `TreeScope_Subtree`
+   fetch happens while observing.
+
+Document the identity evidence, capacity, and release behavior in the
+[Windows README](../native/windows/README.md). After pulling, run the helper
+`--self-test` and the gated native contract (`FURN_NATIVE_DRIVER_TEST=1 yarn
+test --runInBand` in this package).
+
 Windows native events need a real implementation rather than inferred parity
 from macOS. Operation-time permission/capability changes must be surfaced
 truthfully even if session-start feature negotiation previously succeeded.
@@ -716,6 +764,22 @@ Update [FDR1 schema and protocol](../native/PROTOCOL.md), Node host types, fake
 host, and both providers together. Add budgeted traversal, reference release,
 window/context scope, action descriptors, completeness, and bounded event
 tails. Negotiate additive features and reject incompatible helpers.
+
+**Progress:** the `boundedObservation` contract is frozen in
+[FDR1](../native/PROTOCOL.md#bounded-observation): `observe` reads one bounded
+breadth-first sample under explicit visited, depth, string, byte, and deadline
+budgets (rejected, never clamped), names the reason it stopped, and states per
+node whether children are none, complete, truncated, or unread;
+`releaseElements` drops records Node created for agents. Node validates every
+request before it reaches a helper and every response against the request that
+produced it, so a provider cannot pass unrequested or inconsistent data to an
+agent, and it never substitutes the unbounded `tree` or `find`. The fake host
+is the reference provider, with one identity registry shared across `find`,
+`snapshot`, `observe`, and release, and a conformance grid covers each
+truncation reason. The native providers are open: the Windows work package is in
+section 7, and the macOS provider follows. M3 also still owns action
+descriptors, bounded event tails, and the native large-tree, replacement,
+pagination, and delta tests.
 
 **Complete when:** native large-tree, duplicate, replacement, pagination/delta,
 and repeated-context tests pass; no new bounded request uses a full-tree

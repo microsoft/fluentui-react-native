@@ -12,14 +12,19 @@ import type {
   NativeElementSnapshot,
   NativeImage,
   NativeActionSequence,
+  NativeObservation,
+  NativeObserveFact,
+  NativeObserveRequest,
   NativeSearchRoot,
   NativeSelector,
   Rect,
 } from '../../host/types.js';
-import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
+import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
+import { describeObserveRequestViolation, describeReleaseViolation } from '../../protocol/observation.js';
 import { attachFailureEffect, attachProviderQuarantine } from '../../protocol/settlement.js';
 import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName } from '../../protocol/types.js';
+import { sampleTree } from './observeTree.js';
 
 export type FakeDesktopElement = Omit<
   NativeElementSnapshot,
@@ -32,6 +37,8 @@ export type FakeDesktopElement = Omit<
   expanded?: boolean;
   focused?: boolean;
   required?: boolean;
+  /** A password or secure field: bounded observation never reports its value or text. */
+  secure?: boolean;
   selected?: boolean;
   visible?: boolean;
 };
@@ -81,10 +88,21 @@ export type FakeDesktopHostOptions = {
   faults?: Partial<Record<FakeMutation, FakeFault>>;
   features?: Partial<DesktopHostFeatures>;
   launchDelayMs?: number;
+  /** Tunables for the bounded-observation model, used when `features.boundedObservation` is on. */
+  observation?: FakeObservationOptions;
   platformName?: DesktopPlatformName;
   screenshot?: Uint8Array;
   storyRootTestId?: string;
   windows?: readonly FakeDesktopWindow[];
+};
+
+export type FakeObservationOptions = {
+  /** How many element records the fake keeps before an observation stops with `references`. Defaults to 10,000. */
+  maxElementRecords?: number;
+  /** Time each element read takes, modelling a slow accessibility provider. */
+  readDelayMs?: number;
+  /** Elements whose children the provider cannot read, so a sample reports them `unknown`. */
+  unreadableChildrenOf?: readonly string[];
 };
 
 const onePixelPng = Uint8Array.from(
@@ -112,6 +130,7 @@ export class FakeDesktopHost implements DesktopHost {
   private readonly closeDelayMs: number;
   private readonly features: DesktopHostFeatures;
   private readonly launchDelayMs: number;
+  private readonly observation: Required<FakeObservationOptions>;
   private readonly screenshot: Uint8Array;
   private readonly windowsById = new Map<string, DesktopWindow>();
   private readonly elements = new Map<string, NativeElementSnapshot>();
@@ -119,6 +138,11 @@ export class FakeDesktopHost implements DesktopHost {
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
   private readonly faults = new Map<FakeMutation, { fault: FakeFault; remaining: number }>();
   private readonly windowEventLog: { at: number; notification: string; sequence: number; windowId: string }[] = [];
+  // Element ids the fake has issued. A released or forgotten id stays dead and is never issued again, as in a helper.
+  private readonly recordTargets = new Map<string, string>();
+  private readonly recordsByElement = new Map<string, string>();
+  private readonly releasedRecords = new Set<string>();
+  private recordSequence = 0;
 
   constructor(options: FakeDesktopHostOptions = {}) {
     this.endpoint = options.endpoint ?? 'windows';
@@ -127,6 +151,7 @@ export class FakeDesktopHost implements DesktopHost {
     this.platformName = options.platformName ?? (this.endpoint === 'macos' ? 'macos' : 'windows');
     this.features = { ...defaultFeatures, ...options.features };
     this.launchDelayMs = options.launchDelayMs ?? 0;
+    this.observation = { maxElementRecords: 10_000, readDelayMs: 0, unreadableChildrenOf: [], ...options.observation };
     this.screenshot = options.screenshot ?? onePixelPng;
     for (const [command, fault] of Object.entries(options.faults ?? {}) as [FakeMutation, FakeFault][]) {
       this.injectFault(command, fault);
@@ -274,7 +299,7 @@ export class FakeDesktopHost implements DesktopHost {
       }
       for (const [id, element] of this.elements) {
         if (element.windowId === windowId) {
-          this.elements.delete(id);
+          this.deleteElement(id);
         }
       }
       this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
@@ -311,6 +336,69 @@ export class FakeDesktopHost implements DesktopHost {
     return [...(element.accessibilityActions ?? [])];
   }
 
+  async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {
+    if (!this.features.boundedObservation) {
+      throw new HostUnsupportedError('The fake host is not configured for bounded observation.');
+    }
+    throwIfAborted(signal);
+    const violation = describeObserveRequestViolation(request);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', violation);
+    }
+    this.requireWindow(request.windowId);
+    const root = request.rootId ? this.requireElement(request.rootId) : this.windowRoot(request.windowId);
+    if (!root || root.windowId !== request.windowId) {
+      throw new HostStaleError(`Element "${request.rootId ?? request.windowId}" is no longer available in this window.`);
+    }
+    const childrenByParent = new Map<string, NativeElementSnapshot[]>();
+    for (const element of this.elements.values()) {
+      if (element.parentId !== undefined) {
+        childrenByParent.set(element.parentId, [...(childrenByParent.get(element.parentId) ?? []), element]);
+      }
+    }
+    const unsupportedFacts = new Set<NativeObserveFact>(this.features.accessibilityActions ? [] : ['actions']);
+    return sampleTree(
+      root,
+      request,
+      {
+        childrenOf: (elementId) => childrenByParent.get(elementId) ?? [],
+        extras: (elementId) => {
+          const element = this.elements.get(elementId) as Pick<FakeDesktopElement, 'accessibilityActions' | 'secure'> | undefined;
+          return { actions: element?.accessibilityActions, secure: element?.secure };
+        },
+        recordFor: (elementId) => this.recordFor(elementId, true),
+      },
+      {
+        beforeRead: () => {
+          if (this.observation.readDelayMs > 0) {
+            return delay(this.observation.readDelayMs, signal);
+          }
+          throwIfAborted(signal);
+          return Promise.resolve();
+        },
+        unreadableChildrenOf: new Set(this.observation.unreadableChildrenOf),
+        unsupportedFacts,
+      },
+    );
+  }
+
+  async releaseElements(elementIds: readonly string[], signal?: AbortSignal): Promise<number> {
+    if (!this.features.boundedObservation) {
+      throw new HostUnsupportedError('The fake host is not configured for bounded observation.');
+    }
+    throwIfAborted(signal);
+    const violation = describeReleaseViolation(elementIds);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', violation);
+    }
+    return elementIds.filter((id) => this.releaseRecord(id)).length;
+  }
+
+  /** The number of element ids the fake currently tracks, for asserting that retention reaches a plateau. */
+  get trackedElementCount(): number {
+    return this.recordTargets.size;
+  }
+
   async activate(windowId: string, signal?: AbortSignal): Promise<void> {
     return this.mutate('activate', signal, () => {
       this.requireWindow(windowId);
@@ -335,19 +423,17 @@ export class FakeDesktopHost implements DesktopHost {
 
   async find(root: NativeSearchRoot, selector: NativeSelector): Promise<NativeElementSnapshot[]> {
     this.requireWindow(root.windowId);
-    if (root.elementId) {
-      this.requireElement(root.elementId);
-    }
+    const rootElement = root.elementId ? this.requireElement(root.elementId) : undefined;
 
     return [...this.elements.values()]
       .filter((element) => element.windowId === root.windowId)
-      .filter((element) => !root.elementId || isDescendantOf(element, root.elementId, this.elements))
+      .filter((element) => !rootElement || isDescendantOf(element, rootElement.id, this.elements))
       .filter((element) => matches(element, selector))
-      .map(cloneElement);
+      .map((element) => this.expose(element));
   }
 
   async snapshot(elementId: string): Promise<NativeElementSnapshot> {
-    return cloneElement(this.requireElement(elementId));
+    return this.expose(this.requireElement(elementId));
   }
 
   async activeElement(windowId: string): Promise<NativeElementSnapshot | null> {
@@ -355,7 +441,7 @@ export class FakeDesktopHost implements DesktopHost {
     const focused = [...this.elements.values()].find(
       (element) => element.windowId === windowId && element.focused.supported && element.focused.value,
     );
-    return focused ? cloneElement(focused) : null;
+    return focused ? this.expose(focused) : null;
   }
 
   async hitTest(windowId: string, x: number, y: number): Promise<NativeElementSnapshot | null> {
@@ -370,7 +456,7 @@ export class FakeDesktopHost implements DesktopHost {
         y <= element.rect.y + element.rect.height,
     );
     const element = matchesPoint.at(-1);
-    return element ? cloneElement(element) : null;
+    return element ? this.expose(element) : null;
   }
 
   async click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void> {
@@ -463,7 +549,7 @@ export class FakeDesktopHost implements DesktopHost {
 
   async tree(windowId: string): Promise<NativeElementSnapshot[]> {
     this.requireWindow(windowId);
-    return [...this.elements.values()].filter((element) => element.windowId === windowId).map(cloneElement);
+    return [...this.elements.values()].filter((element) => element.windowId === windowId).map((element) => this.expose(element));
   }
 
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {
@@ -477,8 +563,13 @@ export class FakeDesktopHost implements DesktopHost {
     this.actions.push({ type: 'dispose' });
   }
 
+  /** Adds an element after construction, as when an app renders new content. */
+  addElement(element: FakeDesktopElement): void {
+    this.elements.set(element.id, toSnapshot(element));
+  }
+
   removeElement(elementId: string): void {
-    if (this.elements.delete(elementId)) {
+    if (this.deleteElement(elementId)) {
       for (const [id, element] of this.elements) {
         if (element.parentId === elementId) {
           this.removeElement(id);
@@ -490,7 +581,7 @@ export class FakeDesktopHost implements DesktopHost {
   replacePreview(elements: readonly FakeDesktopElement[]): void {
     for (const [id, element] of this.elements) {
       if (element.scope === 'preview') {
-        this.elements.delete(id);
+        this.deleteElement(id);
       }
     }
     for (const element of elements) {
@@ -506,7 +597,7 @@ export class FakeDesktopHost implements DesktopHost {
   resetPreview(): void {
     for (const [id, element] of this.elements) {
       if (element.scope === 'preview') {
-        this.elements.delete(id);
+        this.deleteElement(id);
       }
     }
     for (const [id, element] of this.initialElements) {
@@ -525,11 +616,84 @@ export class FakeDesktopHost implements DesktopHost {
   }
 
   private requireElement(elementId: string): NativeElementSnapshot {
-    const element = this.elements.get(elementId);
+    const element = this.resolveElement(elementId);
     if (!element) {
       throw reportEffect(new HostStaleError(`Element "${elementId}" is no longer available.`), 'none');
     }
     return element;
+  }
+
+  /**
+   * Resolves an id a client holds. With bounded observation on, an id the fake issued stays bound to the element it
+   * named: once released, or once its element is deleted, it is stale for good even if an element with the same
+   * authored id returns, which then gets a fresh id.
+   */
+  private resolveElement(id: string): NativeElementSnapshot | undefined {
+    if (!this.features.boundedObservation) {
+      return this.elements.get(id);
+    }
+    if (this.releasedRecords.has(id)) {
+      return undefined;
+    }
+    return this.elements.get(this.recordTargets.get(id) ?? id);
+  }
+
+  private windowRoot(windowId: string): NativeElementSnapshot | undefined {
+    return [...this.elements.values()].find((element) => element.windowId === windowId && element.parentId === undefined);
+  }
+
+  /** A copy of an element carrying the ids the fake issued, which `observe` shares so every command agrees on identity. */
+  private expose(element: NativeElementSnapshot): NativeElementSnapshot {
+    const snapshot = cloneElement(element);
+    if (!this.features.boundedObservation) {
+      return snapshot;
+    }
+    snapshot.id = this.recordFor(element.id, false);
+    if (element.parentId !== undefined && this.elements.has(element.parentId)) {
+      snapshot.parentId = this.recordFor(element.parentId, false);
+    }
+    return snapshot;
+  }
+
+  /**
+   * The id issued for an element: its authored id the first time, then a fresh alias once an earlier id was released.
+   * Returns `undefined` when `enforceCapacity` is set and the element table is full.
+   */
+  private recordFor(elementId: string, enforceCapacity: boolean): string | undefined {
+    const live = this.recordsByElement.get(elementId);
+    if (live !== undefined) {
+      return live;
+    }
+    if (enforceCapacity && this.recordTargets.size >= this.observation.maxElementRecords) {
+      return undefined;
+    }
+    let recordId = elementId;
+    while (this.releasedRecords.has(recordId) || this.recordTargets.has(recordId)) {
+      this.recordSequence += 1;
+      recordId = `${elementId}~${this.recordSequence}`;
+    }
+    this.recordTargets.set(recordId, elementId);
+    this.recordsByElement.set(elementId, recordId);
+    return recordId;
+  }
+
+  private releaseRecord(recordId: string): boolean {
+    const elementId = this.recordTargets.get(recordId);
+    if (elementId === undefined) {
+      return false;
+    }
+    this.recordTargets.delete(recordId);
+    this.recordsByElement.delete(elementId);
+    this.releasedRecords.add(recordId);
+    return true;
+  }
+
+  private deleteElement(elementId: string): boolean {
+    const recordId = this.recordsByElement.get(elementId);
+    if (recordId !== undefined) {
+      this.releaseRecord(recordId);
+    }
+    return this.elements.delete(elementId);
   }
 }
 

@@ -12,6 +12,8 @@ import type {
   NativeActionSequence,
   NativeElementSnapshot,
   NativeImage,
+  NativeObservation,
+  NativeObserveRequest,
   NativeSearchRoot,
   NativeSelector,
   Rect,
@@ -20,6 +22,7 @@ import type { NativeDesktopApplicationDescriptor, NativeDriverArtifact, NativeHo
 import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
 import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
+import { describeObserveRequestViolation, describeReleaseViolation, parseNativeObservation } from '../../protocol/observation.js';
 import type { WebDriverErrorCode } from '../../protocol/errors.js';
 import { attachFailureEffect, attachProviderQuarantine, readFailureEffect } from '../../protocol/settlement.js';
 import type { MutationEffect } from '../../protocol/settlement.js';
@@ -229,6 +232,35 @@ export class NativeDesktopHost implements DesktopHost {
   async accessibilityActions(elementId: string, signal?: AbortSignal): Promise<string[]> {
     const result = await this.request<{ actions: string[] }>('accessibilityActions', { elementId }, signal);
     return result.actions;
+  }
+
+  async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {
+    const violation = describeObserveRequestViolation(request);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', `The observation request is invalid: ${violation}`);
+    }
+    const parsed = parseNativeObservation(request, await this.request<unknown>('observe', request, signal));
+    if (parsed.status === 'rejected') {
+      throw new HostWebDriverError('unknown error', `The native helper returned an invalid observation: ${parsed.message}`, {
+        nativeCode: 'invalid-observation',
+      });
+    }
+    return parsed.observation;
+  }
+
+  async releaseElements(elementIds: readonly string[], signal?: AbortSignal): Promise<number> {
+    const violation = describeReleaseViolation(elementIds);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', `The release request is invalid: ${violation}`);
+    }
+    const result = await this.request<{ released?: unknown }>('releaseElements', { ids: elementIds }, signal);
+    const released = result?.released;
+    if (typeof released !== 'number' || !Number.isInteger(released) || released < 0 || released > elementIds.length) {
+      throw new HostWebDriverError('unknown error', 'The native helper returned an invalid release count.', {
+        nativeCode: 'invalid-release',
+      });
+    }
+    return released;
   }
 
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {

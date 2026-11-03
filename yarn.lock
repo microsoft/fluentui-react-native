@@ -3316,6 +3316,7 @@ __metadata:
     "@fluentui-react-native/scripts": "workspace:*"
     commander: "npm:^14.0.2"
     webdriverio: "catalog:"
+    zod: "npm:^4.6.7"
   bin:
     desktop-driver: ./config/cli.cjs
   languageName: unknown
@@ -22394,7 +22395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^4.1.11":
+"zod@npm:^4.1.11, zod@npm:^4.6.7":
   version: 4.6.7
   resolution: "zod@npm:4.6.7"
   checksum: 10c0/4ce2eb14034317b7254e347ca37b5ad591cf8333147030cf05b9b5d31692d45073f7f2747aa50cf8c6b29012194d2b22978cecc89969cf34a0d18e89d0ee7d7b
