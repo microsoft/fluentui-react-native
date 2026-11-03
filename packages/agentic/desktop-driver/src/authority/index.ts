@@ -4,3 +4,7 @@ export { publishConnectionDescriptor, readConnectionDescriptor } from './connect
 export type { DesktopConnectionDescriptor, DesktopServiceIdentity, VerifyDesktopService } from './connectionDescriptor.js';
 export { createMacOSPrivateStorage } from './macosPrivateStorage.js';
 export type { PrivateStorage } from './privateStorage.js';
+export { createWindowsPrivateStorage } from './windowsPrivateStorage.js';
+export type { WindowsPrivateStorageOptions } from './windowsPrivateStorage.js';
+export { createWindowsServiceVerifier, describeWindowsService } from './windowsServiceIdentity.js';
+export type { DescribeWindowsServiceOptions, WindowsServiceVerifierOptions } from './windowsServiceIdentity.js';

@@ -119,14 +119,48 @@ client-supplied capabilities. `createMacOSPrivateStorage` defaults to the
 owner's Application Support state root; an override must be absolute,
 canonical, and have existing safe ancestors.
 
+On Windows the verified helper supplies the storage, the identity, and the
+verifier. `artifact` is the helper from `resolveNativeDesktopDriver`;
+`describeWindowsService` reports the identity of a running process without its
+`incarnation`, and `createWindowsServiceVerifier` is the trusted `verifyService`
+callback for `readConnectionDescriptor`:
+
+```ts
+import {
+  createWindowsPrivateStorage,
+  createWindowsServiceVerifier,
+  describeWindowsService,
+  publishConnectionDescriptor,
+  readConnectionDescriptor,
+} from '@fluentui-react-native/desktop-driver/authority';
+
+const storage = await createWindowsPrivateStorage({ artifact });
+const verifiedServiceIdentity = await describeWindowsService({ artifact, pid: process.pid });
+const removeDescriptor = await publishConnectionDescriptor(storage, 'agent-connection.json', {
+  version: 1,
+  url: service.url,
+  grant: grant.token,
+  service: { ...verifiedServiceIdentity, incarnation: authority.incarnation },
+});
+
+// A client on the same desktop session reads it back.
+const descriptor = await readConnectionDescriptor(storage, 'agent-connection.json', createWindowsServiceVerifier({ artifact }));
+```
+
+`createWindowsPrivateStorage` defaults to a per-user folder under the local
+application data folder; an override must be a canonical absolute local-drive
+path whose parent exists. Each Windows adapter throws on a host that is not
+Windows.
+
 Consumers call
 `readConnectionDescriptor(storage, name, verifyService)`. The required trusted
 verifier must establish the live listener's process identity, ownership, and
 interactive session before this function transmits the grant. The function
 then checks the authenticated service incarnation. There is no permissive
-default verifier, automatic lookup, or Windows filesystem fallback. See
-[private discovery](security.md#private-discovery) for the boundary and the
-remaining native/supervisor integration.
+default verifier, automatic lookup, or Node-only filesystem fallback. See
+[private discovery](security.md#private-discovery) and the
+[Windows storage and verifier](security.md#windows-private-storage-and-service-verifier)
+for the boundary and the remaining native/supervisor integration.
 
 The `PrivateStorage` contract has bounded single-component record names, which
 on every platform may not end in `.` or use a Windows device name such as `NUL`

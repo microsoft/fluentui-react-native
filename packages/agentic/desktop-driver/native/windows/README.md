@@ -22,7 +22,11 @@ third-party native dependency.
 | `src/capture.*`                  | HWND Windows Graphics Capture, D3D11, WIC PNG output                      |
 | `src/framing.*` and `src/json.*` | Bounded FDR1 framing and JSON                                             |
 | `src/driver.*`                   | Command surface and normalized provider results                           |
+| `src/privatestorage.*`           | Owner-only record storage behind the `--private-storage` mode             |
+| `src/serviceidentity.*`          | Process and loopback-listener checks behind `--service-identity`          |
+| `src/winsecurity.*`              | Scoped handles and SID helpers shared by the two authority modes          |
 | `src/selftest.*`                 | Native parsing, state, cancellation, geometry, and recovery checks        |
+| `src/authoritytests.*`           | Self-test cases for the two authority modes                               |
 
 The Node build coordinator is
 `../../src/native/windows/buildWindowsDriver.ts`; runtime adaptation is under
@@ -281,6 +285,43 @@ not yet persist across helper restarts or provide an operator `recover`
 operation; an unsettled call can still land after the helper exits. See
 [the remaining-work plan](../../references/remaining-work.md).
 
+## Authority helper modes
+
+Two restricted one-shot modes of the same executable back the Node `/authority`
+adapters `createWindowsPrivateStorage`, `describeWindowsService`, and
+`createWindowsServiceVerifier` (see
+[the security model](../../references/security.md#windows-private-storage-and-service-verifier)).
+They are not FDR1. Each reads one JSON request from standard input (at most
+128 KiB, a leading byte order mark ignored), writes one JSON line to standard
+output, and exits 0 exactly when the answer has `"ok":true`. A malformed request
+answers `{"ok":false,"reason":"request"}`. A failure carries a fixed `reason`
+category and optionally a `detail` and a `win32` error code, never a path or a
+record's contents. Record contents travel as canonical base64 on standard input,
+never on a command line.
+
+`--private-storage` handles `open`, `read`, `publish`, and `remove`. `open`
+names the root or defaults it to a per-user folder under the local application
+data folder, creates a missing root atomically with an owner-only protected
+DACL, validates the root and every ancestor, and answers the root's volume and
+file identity. The other operations carry that identity back and answer
+`identity` when the root was replaced or removed, so a root that was swapped for
+another valid one is never adopted. Reasons are `request`, `name`, `root`,
+`ancestor`, `owner`, `dacl`, `reparse`, `links`, `type`, `volume`, `path`,
+`identity`, `size`, `encoding`, `exists`, and `io`. Publication writes a
+temporary file under the owner-only descriptor and renames it without replacing,
+so an existing record answers `exists`. A crash between the two steps can leave a
+temporary file of at most 16 KiB.
+
+`--service-identity` handles `describe` and `verify`. `describe` answers the
+identity of a live process of the current user in the current interactive
+session, or `ok:false` with `process`, `user`, `session`, `exited`, or
+`request`. `verify` takes a claim and a loopback URL and answers `ok:true` with
+`verified:true`, or `verified:false` with the first check that failed: `url`,
+`claim`, `start`, `image`, `session`, `listener`, `exited`, `process`, or
+`user`. It holds the process open while it checks, and a listener counts only
+when every listening TCP socket that can accept a connection to the address,
+including a wildcard listener on the same port, belongs to the claimed process.
+
 ## Verification and tests
 
 Run package tests first, then the opt-in native contract:
@@ -304,10 +345,26 @@ application, and a stuck call quarantines the target until the launched
 application is closed. `yarn test --runInBand protectedService` runs only that
 suite.
 
+Two more suites drive only the authority modes against the real helper. They
+need no application and never touch the per-user default root.
+`privateStorage` checks byte-exact round trips, exclusive and concurrent
+publication, a replaced or removed root, a junction root, a second hard link,
+and an ACL that grants another principal access. `serviceIdentity` uses real
+child processes and a loopback listener (IPv4 and, where the machine has it,
+IPv6) to check `describe`, claims whose start time, image, or session differ, a
+case-different image path, an address nobody serves, and an exited process. Run
+them with `yarn test --runInBand privateStorage.contract` and
+`yarn test --runInBand serviceIdentity.contract`.
+
 The helper self-test (`furn-desktop-driver-host.exe --self-test`) covers
 settlement, element identity, retention, input authority, and event bookkeeping
 against offscreen windows. Lock, disconnect, and integrity transitions are
-exercised through injected state, not by changing the real desktop.
+exercised through injected state, not by changing the real desktop. It also
+covers the authority modes: the record-name, base64, UTF-8, root, ancestor-ACL,
+URL, and listener rules; an owner-only store in a scratch directory with its
+tamper and race cases; and `describe` and `verify` against this process, a child
+process, and a loopback listener. A case the machine cannot host prints an
+`info` line and is skipped.
 
 Real qualification must run against the target React Native app. Use an
 interactive runner for physical click, keyboard, wheel, multi-window, capture,

@@ -90,10 +90,10 @@ It must verify the actual listener owner, exact live process start/executable,
 OS user, and current interactive session **before any credential is sent**.
 Missing, false, or unavailable verification fails closed. An authenticated
 status request then checks the service incarnation under a 15-second deadline.
-The library does not supply an OS process/listener verifier yet; that remains
-supervisor/native integration work. A callback that unconditionally returns
-true is not a production verifier. Filesystem ownership alone is not
-logon-session isolation or live process verification.
+The library supplies a [Windows verifier](#windows-private-storage-and-service-verifier)
+and no macOS verifier yet, so a macOS supervisor brings its own. A callback that
+unconditionally returns true is not a production verifier. Filesystem ownership
+alone is not logon-session isolation or live process verification.
 
 `createMacOSPrivateStorage` uses the owner's Application Support directory,
 requiring a 0700 root and 0600 regular records owned by the current UID. It
@@ -106,10 +106,67 @@ non-overwriting; cleanup compares the validated record's exact contents and
 file identity. Other processes of the same OS account remain outside this
 boundary.
 
-The macOS adapter rejects Windows and every other platform. Windows requires a
-native SID/DACL/reparse-point ownership adapter implementing `PrivateStorage`;
-Node chmod is not a fallback. This slice does not implement cross-service
-claims, process recovery, automatic discovery, or supervisor wiring.
+The macOS adapter rejects Windows and every other platform; Node `chmod` is not
+a fallback on either. This slice does not implement cross-service claims,
+process recovery, automatic discovery, or supervisor wiring.
+
+## Windows private storage and service verifier
+
+`createWindowsPrivateStorage({ artifact, root? })` implements the same
+`PrivateStorage` contract through the verified Windows helper's one-shot
+`--private-storage` mode, so the operating system judges ownership from open
+handles and Node never trusts a path check. The default root is a per-user
+folder under the local application data folder. An override must be a canonical
+absolute local-drive path of at most 240 characters whose parent exists. A
+missing root is created atomically with an owner-only protected DACL (one allow
+entry giving the current user full control); an existing root is validated and
+never repaired. The helper fails closed, with a fixed reason category, unless:
+
+- every ancestor, from the volume root down, is a real directory that is not a
+  reparse point and is owned by the current user, SYSTEM, Administrators, or
+  TrustedInstaller, and no other principal holds a right to add a file, delete a
+  child, delete the directory, or change its DACL or owner. Adding a
+  subdirectory is allowed, so the default `C:\` entry that lets users create
+  folders passes;
+- the root and every record are owned by the current user and carry exactly the
+  owner-only protected DACL, no reparse point, and (for records) one hard link
+  and one regular file;
+- the volume keeps persistent ACLs and is a local fixed, removable, or RAM drive,
+  so network and ACL-less volumes are refused;
+- the root's volume and file identity equal the identity the helper reported
+  when the storage opened. The adapter sends that identity with every call, so a
+  root replaced by another valid one is refused rather than adopted.
+
+`publish` writes a temporary file under the same DACL and renames it without
+replacing, so a record is never visible with a weaker descriptor and an existing
+record reports `exists`. A crash between the two steps can leave a harmless
+temporary file of at most 16 KiB. `remove` deletes only a validated record whose
+contents match, and `read` of an absent record is the only miss. Contents cross
+the process boundary as base64 on standard input, never on a command line, and
+no failure carries a path or contents. Errors reuse the macOS adapter's two
+messages and add a non-enumerable `reason` for diagnostics only; callers must
+not depend on it.
+
+`describeWindowsService({ artifact, pid })` returns the identity a supervisor
+publishes for itself: `platform: 'windows'`, `pid`, `startedAt` (the process
+creation time as UTC ISO-8601 with 100 ns precision), `executablePath`, and
+`interactiveSession` (`windows-session:<id>`). The supervisor adds the
+`incarnation`. It refuses a process of another user or session and a process
+that has exited.
+
+`createWindowsServiceVerifier({ artifact })` returns a `VerifyDesktopService`.
+It resolves `true` only when the helper, holding the process open so its
+identifier cannot be reused mid-check, verified in order: a numeric loopback
+origin (exactly `http://127.0.0.1:<port>` or `http://[::1]:<port>`); a Windows
+claim; a live process of the current user in the verifier's interactive session;
+the exact start time; the executable path, compared case-insensitively; the
+claimed session; and that every listening TCP socket able to accept a connection
+to the address, including a wildcard listener on the same port, belongs to the
+claimed process. Anything the helper refuses resolves `false`. A helper that is
+missing, times out, or answers anything else rejects, so a verifier failure never
+sends a credential. Windows and macOS identities are never compared. As on
+macOS, other processes of the same account and administrators remain outside
+this boundary.
 
 ## Native-helper trust
 

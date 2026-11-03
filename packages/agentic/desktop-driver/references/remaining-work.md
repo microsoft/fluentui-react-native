@@ -829,16 +829,18 @@ grants, and a service given one authenticates every route before reading the
 request, binds each session to its grant, scopes targets per grant, redacts
 other grants' identifiers from contention and quarantine data, and closes a
 revoked grant's sessions. Its contract is in
-[the security model](security.md#protected-service). Still open: the Windows
-private-storage adapter and live process/listener identity verifier, controller
-lifecycle, leases and idle expiry, exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+[the security model](security.md#protected-service). Still open: the macOS
+process/listener identity verifier, controller lifecycle, leases and idle
+expiry, exact ownership ledgers, status/stop/`recover`, quarantine persistence,
 cross-service claims, Storybook mutation coordination, and supervisor wiring.
 
-The shared Slice 2 descriptor contract, macOS owner-validated storage, and WDIO
-grant transport are implemented. Descriptor reads require a trusted live
-identity verifier and check the authenticated service incarnation; there is no
-permissive default verifier. The macOS adapter rejects Windows until its
-native ownership adapter lands. See [private discovery](security.md#private-discovery)
+The shared Slice 2 descriptor contract, macOS owner-validated storage, the
+Windows storage adapter and service verifier, and WDIO grant transport are
+implemented. Descriptor reads require a trusted live identity verifier and check
+the authenticated service incarnation; there is no permissive default verifier.
+The macOS adapter rejects Windows, and the Windows adapters reject every other
+platform. See [private discovery](security.md#private-discovery), the
+[Windows storage and verifier](security.md#windows-private-storage-and-service-verifier),
 and [service integration](service.md#private-connection-descriptors).
 
 **Complete when:** agent/WDIO contention, all-route authorization, stale-owner
@@ -1173,6 +1175,24 @@ Windows implementation checks (Windows 11, PowerShell 7, Node 26):
   against the helper built from the final C++ sources. The run records no helper
   statistics, so the UI Automation tree size of a real application is not
   measured.
+- The Windows private-storage and service-identity helper modes and their Node
+  adapters (`createWindowsPrivateStorage`, `describeWindowsService`,
+  `createWindowsServiceVerifier`). The helper built from source with no compiler
+  warnings, and `furn-desktop-driver-host.exe --self-test` **passed** 548 of 548
+  checks; 84 are new and cover the record-name, base64, UTF-8, root, ancestor-ACL,
+  URL, and listener rules, an owner-only store with tamper and race cases, and
+  `describe`/`verify` against this process, a child process, and a loopback
+  listener. The adapters' 112 new unit tests run against a scripted helper on any
+  host and **passed**. Weakening the verifier's reading of the helper's answer
+  (accepting extra fields, accepting any failure reason) failed exactly the two
+  rows that guard it. The opt-in contracts drive the real helper with no
+  application: `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand
+privateStorage.contract` **passed** 9 of 9 and `serviceIdentity.contract`
+  **passed** 13 of 13 (the IPv6 row ran), each five times in a row, leaving no
+  scratch directory or child process behind. They cover exclusive and concurrent
+  publication, a replaced, removed, or junction root, a second hard link, an ACL
+  that grants another principal access, and claims that differ in start time,
+  image, session, listener owner, or address, or whose process has exited.
 - The `desktop-test` owned-service contract's temporary-directory cleanup hit a
   transient Windows `EPERM` under `lage buildci` parallel load; it now retries
   the removal. One `storybook-desktop` `sourceConfig` test also timed out its
@@ -1208,6 +1228,13 @@ Windows items **not run**:
 - The protected service against an elevated service, another account, or a real
   React Native application: the `protectedService` contract uses the plain Win32
   fixture, one account, and no physical input.
+- The Windows private-storage adapter and service verifier on another account, an
+  elevated token, a domain or folder-redirected profile, a Dev Drive or ReFS
+  volume, or a helper run as SYSTEM, and a verification that spans a live lock or
+  RDP disconnect. Creating the per-user default root through the adapter is not
+  run either: the self-test checks only its path shape, and creation shares the
+  code path the scratch-root contracts exercise. The wildcard-listener
+  competitor is covered by the native self-test, not the Node contract.
 
 Deferred Windows work, listed in section 7: incremental UIA reads (the bounded
 observation work package), Job Object and ACL application ownership, and
@@ -1426,8 +1453,9 @@ native probe, an authorized caller completed native probe, and a revoked grant
 was rejected. `FURN_NATIVE_DRIVER_TEST=1 yarn test nativeDriver` passed 6 tests;
 2 were skipped (Windows and stable-signing paths). This does not qualify
 real-application session ownership, physical input, or revocation of in-flight
-native mutations. Windows native/ACL qualification and the new discovery
-boundary's human security review remain open.
+native mutations. The Windows storage and verifier evidence is in the Windows
+implementation checks above; the new discovery boundary's human security review
+remains open.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

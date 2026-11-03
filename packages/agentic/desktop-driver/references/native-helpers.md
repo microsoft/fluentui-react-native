@@ -179,6 +179,12 @@ input may be depressed, Node invokes the same verified binary in restricted
 `--release-input` mode with only the recorded keys and buttons. Further
 physical input must not proceed if release cannot be proven.
 
+The Windows helper also has two restricted one-shot modes, `--private-storage`
+and `--service-identity`. The `/authority` adapters invoke them on the verified
+artifact to enforce owner-only private storage and to verify a service's process
+and listener before a credential is sent. See the
+[Windows provider guide](../native/windows/README.md#authority-helper-modes).
+
 ## Diagnostics
 
 `doctor` uses prebuilt-only resolution:
