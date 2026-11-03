@@ -102,7 +102,6 @@ Source review corrects or qualifies several assumptions:
 | Generic installed targets and optional renderer metadata already exist. Windows can attach using exact executable/AUMID and title identity.                                                              | Extend existing application-neutral seams; do not require a Storybook lease file for every app. |
 | The [timeout wrapper](../src/protocol/timeouts.ts) can return before aborted work settles. Windows [bounded UIA calls](../native/windows/src/automation.cpp) can leave a worker running after a timeout. | Qualify cancellation and uncertain side effects before expanding persistent agent mutations.    |
 | Both providers collect before agent-side projection; retained element records are unsuitable for unlimited repeated observations.                                                                        | Budget native work and retained identities, not just output bytes.                              |
-| Windows [input availability](../native/windows/src/input.cpp) caches a successful probe.                                                                                                                 | Recheck interactive session, foreground, and integrity conditions at operation time.            |
 | Existing semantic activation already uses several AX actions/UIA patterns.                                                                                                                               | Add explicit discovery and selection, not a duplicate implementation of all activation.         |
 | The desktop-test `--json` option prints the complete run result and still writes human progress to stderr; storybook-desktop has no structured mode.                                                     | Add bounded reporter modes shared by all three CLIs (section 5).                                |
 
@@ -531,35 +530,47 @@ Source ownership follows [contributing](contributing.md),
 The [Windows provider](../native/windows/README.md) is shared, but Windows
 Fabric and Win32 Paper retain distinct app/runtime behavior and qualification.
 
-| Work area                | Source owner                                                            | Required evidence                                                                                                                                                         |
-| ------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | Budgets apply before subtree-wide caching; large trees return honest partial results; incomplete searches never authorize unique mutation.                                |
-| Identity and reclamation | UIA records, window/process records, SessionManager                     | Identical replacements, PID/HWND reuse, preview churn, and long sessions cannot retarget stale refs or grow retained memory without bound.                                |
-| Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Hung/late provider calls report uncertainty, quarantine the target, and cannot interleave subsequent mutations. Observe actual app effects, not just cancellation frames. |
-| Input authority          | `native/windows/src/input.cpp` and application activation               | Recheck lock/session/integrity/foreground state; test elevation mismatch and RDP transitions. SendInput return alone is not evidence of delivery.                         |
-| Events                   | UIA MTA worker and bounded event dispatch                               | Correct COM ownership and subscription lifetime; callback threads enqueue hints without reentrant provider calls. Verify overflow and polling fallback.                   |
-| Application ownership    | `native/windows/src/application.cpp` and trusted supervisor             | Packaged AUMID and unpackaged executable identity, duplicate/changing titles, ACL validation, stale claims, and Job Object restrictions.                                  |
-| Popups and islands       | UIA traversal and window ownership                                      | Menu/dialog islands remain discoverable; closing stales only affected refs; inspection does not light-dismiss a popup by activating its owner.                            |
-| Geometry and capture     | Windows geometry/capture modules                                        | 100/150/200% and mixed-DPI monitor moves, negative origins, crop alignment, minimized windows, and cancellation during capture.                                           |
+| Work area                | Source owner                                                            | Remaining evidence                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | Measured and deferred (see Windows progress). Budgets must apply before subtree-wide caching: the bounded walk still caches the whole subtree before it fails `tree-too-large`, and `find` shares the 5,000-node cap. Large trees must return honest partial results, and incomplete searches must never authorize unique mutation.                                                                   |
+| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)). Remaining: macOS parity (it keeps a hard 10,000-record fail-closed cap and a process check, with no fingerprint or eviction), PID reuse against a real application, and a retention plateau measured on a real React Native session.                                                                    |
+| Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations)) and qualified against the stuck and hung Win32 fixture. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and macOS adoption of the codes and the provider-timeout rule.                     |
+| Input authority          | `native/windows/src/input.cpp` and application activation               | Windows implemented ([contract](../native/windows/README.md#input-authority)), and the Win32 Paper smoke passed physical pointer and keyboard actions. Remaining: live lock, RDP disconnect, and elevation transitions (the self-test injects them), a `uiAccess` decision, delivery evidence for `SendInput` beyond its return value, and foreground matching that is finer than the owning process. |
+| Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).  |
+| Application ownership    | `native/windows/src/application.cpp` and trusted supervisor             | Not started: packaged AUMID and unpackaged executable identity under duplicate or changing titles, ACL validation, stale claims, and Job Object restrictions. The fixture has only a lifetime watchdog.                                                                                                                                                                                               |
+| Popups and islands       | UIA traversal and window ownership                                      | Owned dialogs verified: the fixture rejects owner clicks and publishes destroy events, and a real native Callout test passed on Win32 Paper. Remaining: menu popups, which need activation to open and so are unqualified, and Fabric islands.                                                                                                                                                        |
+| Geometry and capture     | Windows geometry/capture modules                                        | Window and element PNG capture is verified on the fixture only. Remaining: 100/150/200% and mixed-DPI monitor moves, negative origins, crop alignment, minimized windows, and cancellation during capture.                                                                                                                                                                                            |
 
 Keep UIA operations on correctly initialized/marshaled COM workers. Document
 the bounded-call settlement strategy explicitly; abandoning a thread and
 returning a timeout is not an acceptable guarantee.
 
-**Settlement progress:** the helper now reports an unsettled UIA mutation as
-`mutation-indeterminate`, quarantines its session, and refuses later UIA,
-physical-input, activation, and window-geometry mutations as
-`target-quarantined` ([contract](../native/windows/README.md#unsettled-mutations)).
-Native self-tests cover the stalled, refused, late-completion, and read paths
-with a controllable stalled provider call. Still open for Windows: quarantine
-persistence across helper restarts and the trusted `recover` operation (M2);
-delivery evidence for physical `SendInput` rather than its return value;
-re-observing actual application effects after a late completion; and a
-qualification run against a genuinely hung React Native app.
+**Windows progress:** the helper now implements the settlement, identity,
+input-authority, and event work areas above. Each has a contract in the
+[Windows provider](../native/windows/README.md) and checks in its native
+self-test. A test-only plain Win32 fixture (`fixtures/win32`, repository only)
+exercises the helper against a real application through the opt-in
+`win32Fixture` native contract: observation, native and accessibility actions,
+hit testing, PNG capture, a title change, an owned dialog, a hung application,
+a stuck provider call, trees near and beyond the node cap, and 500 repeated
+cycles. A focused Win32 Paper smoke (176 stories and 5 authored tests,
+including the native Callout popup) passed against the same helper source.
+Section 11 records what did not run.
 
-Windows native events need a real implementation rather than inferred parity
-from macOS. Operation-time permission/capability changes must be surfaced
-truthfully even if session-start feature negotiation previously succeeded.
+Incremental UIA reads were measured and deliberately not started. UIA caches a
+subtree at about 0.4 ms per node, so a 4,900-node tree reads in about 2
+seconds and a 10,000-node tree fails after about 4 seconds. A root `find`
+shares the 5,000-node cap. Bounding the work before it is done needs per-level
+or budgeted reads with explicit completeness fields, and a single very wide
+level needs its own budget because a children-scope request returns every
+sibling. That is an FDR1 protocol change with Node types and fake-host
+support, so it belongs to M3 and must land with the macOS provider rather than
+as a Windows-only change.
+
+Operation-time permission and capability changes must be surfaced truthfully
+even if session-start feature negotiation previously succeeded. The Windows
+input authority rechecks session, foreground, and integrity for every physical
+operation; the macOS provider must show the same for its permissions.
 
 ## 8. Dependency-ordered work on this branch
 
@@ -601,12 +612,14 @@ outcome rather than advancing its queue.
 
 **Progress:** the Node timeout wrapper now aborts at the deadline but does not
 return until the host operation promise settles. This prevents a Node-level
-timeout from advancing its queues early. The Windows provider now fails closed
-on unsettled UIA mutations (section 7); the macOS provider's ambiguous AX
-mutation handling must adopt the same `mutation-indeterminate` and
-`target-quarantined` codes from the [native protocol](../native/PROTOCOL.md).
-Provider late-effect behavior is otherwise unqualified against real hung
-applications.
+timeout from advancing its queues early. The Windows provider fails closed on
+unsettled UIA mutations (section 7), including a mutation whose provider call
+times out. The Win32 fixture contract verifies that a
+stuck call lands exactly once and that later mutations stay refused afterward.
+The macOS provider's ambiguous AX mutation handling must adopt the same
+`mutation-indeterminate` and `target-quarantined` codes and the same timeout
+rule from the [native protocol](../native/PROTOCOL.md). Provider late-effect
+behavior is otherwise unqualified against real hung applications.
 Portable story-plan reads and actions now reject selectors that match multiple
 elements; explicit `count` and `exists` expectations remain multi-match-safe.
 
@@ -682,6 +695,17 @@ host, and both providers together. Add budgeted traversal, reference release,
 window/context scope, action descriptors, completeness, and bounded event
 tails. Negotiate additive features and reject incompatible helpers.
 
+**Progress:** the Windows provider already bounds identity and retention
+without a protocol change. Element ids are never reused, every action
+revalidates a fingerprint, and a 20,000-record LRU caps memory
+([contract](../native/windows/README.md#element-identity-and-retention)). On the
+Win32 fixture, 500 observation, action, and popup cycles keep about 20 retained
+elements and grow the working set by under 8 MB after the first 100 cycles; no
+longer run was recorded. The wire-level work
+(budgeted traversal, completeness, explicit release, window scope, delta bases)
+has not started on either OS, and no real React Native session has been
+measured for a plateau.
+
 **Complete when:** native large-tree, duplicate, replacement, pagination/delta,
 and repeated-context tests pass; no new bounded request uses a full-tree
 fallback. Retained memory reaches a documented plateau rather than growing
@@ -729,6 +753,11 @@ Update the driver architecture/service/protocol/security/provider references,
 downstream lifecycle references, short agent instructions, and consumer maps.
 Document exact supported scope and recovery, not just happy-path commands.
 
+**Progress:** the plain Win32 fixture and its opt-in contract exist, and the
+Windows provider contract, protocol notes, and fixture documentation are
+current. Section 11 lists the Windows evidence. The AppKit fixture and the
+Windows Fabric, DPI, live-transition, and menu-popup lanes remain open.
+
 **Complete when:** all mandatory native/consumer lanes and efficiency gates
 have evidence at the final revision, implementation changesets are present,
 and the final clean-cache repository aggregate passes. Only then prepare/push
@@ -758,6 +787,11 @@ title changes, and a tree of at least 10,000 nodes. Run at least 500 repeated
 observation/action/context-change cycles for retention evidence. Uncatchable
 supervisor-death tests must verify explicit incomplete status and subsequent
 ownership-safe recovery, not claim an unimplemented immediate watchdog.
+
+The Windows fixture (`fixtures/win32`, repository only) covers an owned popup,
+title changes, 4,900- and 10,000-node trees, and 500 cycles. Its menu bar
+exists, but opening a menu popup needs activation and is not exercised. The
+AppKit fixture does not exist yet.
 
 **Implementation validation, not commands executed for this plan:**
 
@@ -896,7 +930,7 @@ Reporter implementation checks on macOS:
 The synthetic reporter tests cover 10,000 selected tests, 1,000 failures, and
 1 MiB event text. On macOS, Windows/PowerShell, Windows native contracts, and
 both Windows Storybook renderers were **not run**; the Windows block below
-records what ran afterward. Real-app smoke on either OS, MCP clients, and
+records what ran afterward. Real-app smoke on macOS, MCP clients, and
 efficiency benchmarks are **not run**. Native macOS application smoke and the
 full plan's security/ownership qualification are also **not run**. M1's Node
 timeout boundary and selector uniqueness are partial implementations only;
@@ -916,34 +950,78 @@ Windows implementation checks (Windows 11, PowerShell 7, Node 26):
   test was verified to fail without the guard. The one remaining harness
   mismatch is `--reporter bogus`, which Commander rejects before mode
   resolution, as the contract allows; it is not a defect.
+- Helper checks on Windows 11 x64 in an RDP session (MSBuild toolset v145,
+  Windows SDK 10.0.26100). The helper built from source with
+  `node config/cli.cjs build-driver --platform windows` and no compiler
+  warnings, and `furn-desktop-driver-host.exe --self-test` **passed** 453 of 453
+  checks. They cover settlement, element identity, retention, input authority
+  through injected state, and event bookkeeping.
 - `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand` in the driver package
-  **passed** (90 passed, 2 skipped). The skips are the macOS-only tests, so the
-  Windows native contract ran. The helper self-test, built from source with
-  `node config/cli.cjs build-driver --platform windows`, **passed** 182 of 182
-  checks, including the new `TestMutationSettlement` cases.
+  **passed** (17 suites; 97 passed, 2 skipped macOS-only tests). That includes
+  the seven-scenario `win32Fixture` contract, which takes about 66 seconds:
+  observation, actions, hit testing, and PNG capture; a title change; an owned
+  popup; a hung application; a stuck provider call and its quarantine; trees of
+  4,900 and 10,000 nodes; and 500 repeated cycles. Across those cycles retained
+  elements stayed at 20, working set moved from 22.5 to 23.6 MB, and private
+  bytes from 5.0 to 6.2 MB. Without the variable the same suites **passed** or
+  skipped (89 passed, 10 skipped).
+- The focused Win32 Paper smoke **passed**: with `STORYBOOK_SMOKE_STORY`
+  `{components-button--default,components-checkbox--default,components-input--default,native-callout--default}`
+  selecting the authored tests,
+  `yarn storybook smoke --win32 --mode stories-and-tests` selected 181 items and
+  passed all 181. That is the full 176-story catalog render plus 5 authored tests (native
+  pointer activation, enabled-button semantics, checkbox toggle, keyboard input
+  and clear, and native-callout open, light-dismiss, and recreate). It ran
+  against the helper built from the final C++ sources. The run records no helper
+  statistics, so the UI Automation tree size of a real application is not
+  measured.
 - The `desktop-test` owned-service contract's temporary-directory cleanup hit a
   transient Windows `EPERM` under `lage buildci` parallel load; it now retries
   the removal. One `storybook-desktop` `sourceConfig` test also timed out its
   10 s child process once under the same load (244 ms standalone, no diff in
   that area); a re-run passed without changes.
-- `yarn oxfmt --check`, `yarn check-agent-instructions`, `git diff --check`,
-  `yarn clean-lage-cache`, and `yarn lage buildci` **passed**. The clean-cache
-  aggregate completed 176 tasks with 0 failed.
-- `yarn markdown-link-check -c .github/markdown-link-check-config.json` over all
-  39 Markdown files in the three packages **passed**. `yarn lage test-links`
+- `yarn oxfmt --check`, `yarn check-agent-instructions`, and `git diff --check`
+  **passed**. `yarn clean-lage-cache` then `yarn lage buildci` first failed one
+  storybook-desktop test (the known timing-sensitive flake recorded above, not
+  reproduced) and passed on the immediate rerun: 176 tasks, 8 run and 168
+  replayed from cache, 0 failed. The final `closeWindow` reorder was validated
+  by the rebuilt helper's self-test and native contract, not a repeat smoke.
+- The direct `yarn markdown-link-check -c .github/markdown-link-check-config.json`
+  over this revision's changed Markdown files **passed**. `yarn lage test-links`
   itself **failed** on this Windows machine for 71 packages, including
   untouched files, while the direct invocation of the same checker passes for
   those files. Treat the Windows lage worker as unsupported until it is fixed;
   its result says nothing about the links.
 
-Windows items **not run**: GitHub Actions rendering, signal or console Ctrl+C
-interruption (a signal cannot be delivered to a child process on Windows),
-both Windows Storybook renderers, real-app smoke, and qualification against a
-genuinely hung React Native application. The macOS provider has not adopted the
-`mutation-indeterminate` and `target-quarantined` codes. After pulling this
-branch, macOS should rebuild and re-run the three packages' tests, because the
-shared reporter, the desktop-test and Storybook CLI entry points, and
-`NativeDesktopHost` changed.
+Windows items **not run**:
+
+- GitHub Actions rendering, and signal or console Ctrl+C interruption (a signal
+  cannot be delivered to a child process on Windows).
+- The Windows Fabric renderer, which needs a native MSBuild and NuGet build and
+  a registered packaged application, and the Win32 Paper authored tests for
+  stories outside the four above.
+- Qualification against a genuinely hung React Native application, and the
+  retention plateau of a real session.
+- Live session lock, RDP disconnect, and elevation transitions (the self-test
+  injects them), and delivery of events across integrity levels.
+- DPI scaling other than the machine's current setting, mixed-DPI moves, and
+  negative monitor origins.
+- Menu popups, which need activation to open.
+
+Deferred Windows work, listed in section 7: incremental UIA reads, Job Object
+and ACL application ownership, and quarantine persistence with the trusted
+`recover` operation. Also open: the `window-closed` publication writes to
+stdout from the hook thread, so a Node side that stops draining stdout can stall
+event processing; move the write to a queue drained off the hook thread.
+
+The macOS provider has not adopted the `mutation-indeterminate` and
+`target-quarantined` codes or the rule that a provider timeout on a mutation is
+indeterminate. It also needs a parity check against Windows element reclamation
+and fingerprint revalidation, the hit-test ownership check, and the
+`closeWindow` event semantics. After pulling this branch, macOS should rebuild
+the helper, re-run the driver native contract and the three packages' tests, and
+adopt those behaviors, because the shared reporter, the desktop-test and
+Storybook CLI entry points, and `NativeDesktopHost` changed.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

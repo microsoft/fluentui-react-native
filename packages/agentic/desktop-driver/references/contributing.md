@@ -63,6 +63,10 @@ package.
   identity, capture geometry, or recovery changes.
 - Add or update the opt-in Node native contract when build, cache, selection,
   signing, or handshake behavior changes.
+- On Windows, extend the Win32 fixture contract
+  (`src/native/windows/win32Fixture.contract.test.ts` and `fixtures/win32`) when
+  a change needs a real application: events, popups, hung providers, tree
+  limits, or retention.
 
 Never patch generated SwiftPM, Xcode, MSBuild output, or cached artifacts.
 

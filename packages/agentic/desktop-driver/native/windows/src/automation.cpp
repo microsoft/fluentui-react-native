@@ -31,6 +31,13 @@ HRESULT BoundedRead(Fn&& call, std::string_view operation) {
                                 kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
 }
 
+// UI Automation reports a disabled element, such as a control of an owner window
+// while its modal dialog is open, as a failed pattern call. That is the element
+// refusing interaction, not an automation fault.
+void CheckClickResult(std::string_view operation, HRESULT result) {
+  CheckHresult(result == UIA_E_ELEMENTNOTENABLED ? kErrorNotInteractable : kErrorAutomationFailed, operation, result);
+}
+
 // Small RAII wrapper so every cached property read clears its VARIANT.
 class Variant {
  public:
@@ -105,6 +112,45 @@ std::string VariantString(const VARIANT& value) {
     return {};
   }
   return BstrToUtf8(value.bstrVal);
+}
+
+std::string TakeBstr(BSTR value) {
+  const std::string text = BstrToUtf8(value);
+  SysFreeString(value);
+  return text;
+}
+
+// The cached form reads what the element's cache request already fetched; the
+// live form asks the provider, for ancestors that were never cached.
+ElementFingerprint ReadFingerprint(IUIAutomationElement* element, bool cached) {
+  ElementFingerprint fingerprint;
+  int processId = 0;
+  if (SUCCEEDED(cached ? element->get_CachedProcessId(&processId) : element->get_CurrentProcessId(&processId)) &&
+      processId > 0) {
+    fingerprint.processId = static_cast<DWORD>(processId);
+  }
+  CONTROLTYPEID controlType = 0;
+  if (SUCCEEDED(cached ? element->get_CachedControlType(&controlType) : element->get_CurrentControlType(&controlType))) {
+    fingerprint.controlType = controlType;
+  }
+  BSTR automationId = nullptr;
+  if (SUCCEEDED(cached ? element->get_CachedAutomationId(&automationId)
+                       : element->get_CurrentAutomationId(&automationId))) {
+    fingerprint.automationId = TakeBstr(automationId);
+  }
+  BSTR className = nullptr;
+  if (SUCCEEDED(cached ? element->get_CachedClassName(&className) : element->get_CurrentClassName(&className))) {
+    fingerprint.className = TakeBstr(className);
+  }
+  return fingerprint;
+}
+
+ElementFingerprint FingerprintFromCache(IUIAutomationElement* element) {
+  return ReadFingerprint(element, true);
+}
+
+ElementFingerprint FingerprintLive(IUIAutomationElement* element) {
+  return ReadFingerprint(element, false);
 }
 
 std::string EscapeXml(std::string_view value) {
@@ -346,6 +392,7 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_IsControlElementPropertyId,
       UIA_NativeWindowHandlePropertyId,
       UIA_ProcessIdPropertyId,
+      UIA_ClassNamePropertyId,
       UIA_ValueValuePropertyId,
       UIA_ValueIsReadOnlyPropertyId,
       UIA_LegacyIAccessibleStatePropertyId,
@@ -378,7 +425,9 @@ winrt::com_ptr<IUIAutomationElement> Automation::RootForWindow(HWND window) cons
   winrt::com_ptr<IUIAutomationElement> element;
   const HRESULT result = automation_->ElementFromHandle(window, element.put());
   if (FAILED(result) || !element) {
-    FailHresult(kErrorNoSuchWindow, "Reading the window automation element", result);
+    // A window that still exists but cannot be read is busy or unresponsive, not gone.
+    FailHresult(IsWindow(window) != FALSE ? kErrorAutomationFailed : kErrorNoSuchWindow,
+                "Reading the window automation element", result);
   }
   return element;
 }
@@ -434,37 +483,45 @@ std::wstring Automation::RuntimeKeyLive(IUIAutomationElement* element) const {
 
 std::string Automation::RegisterElement(IUIAutomationElement* element, const std::wstring& runtimeKey,
                                         const std::string& windowId, HWND window, const std::string& parentId,
-                                        ElementScope scope) {
-  std::string id;
-  if (!runtimeKey.empty()) {
-    const auto existing = idsByRuntimeKey_.find(runtimeKey);
-    if (existing != idsByRuntimeKey_.end()) {
-      id = existing->second;
-    }
-  }
-  if (id.empty()) {
-    id = NextIdentifier("element");
-    if (!runtimeKey.empty()) {
-      idsByRuntimeKey_.emplace(runtimeKey, id);
-    }
-  }
-  ElementRecord& record = recordsById_[id];
-  record.id = id;
-  record.element = nullptr;
-  record.element.copy_from(element);
-  record.windowId = windowId;
-  record.window = window;
-  record.parentId = parentId;
-  record.scope = scope;
-  return id;
+                                        ElementScope scope, std::uint64_t generation) {
+  ElementRecord candidate;
+  candidate.element.copy_from(element);
+  candidate.windowId = windowId;
+  candidate.window = window;
+  candidate.parentId = parentId;
+  candidate.scope = scope;
+  candidate.fingerprint = FingerprintFromCache(element);
+  candidate.runtimeKey = runtimeKey;
+  return registry_.Register(std::move(candidate), generation);
 }
 
-const ElementRecord& Automation::RequireRecord(const std::string& elementId) const {
-  const auto record = recordsById_.find(elementId);
-  if (record == recordsById_.end()) {
-    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer tracked by the native helper.");
+ElementRecord Automation::RequireRecord(const std::string& elementId) {
+  return registry_.Require(elementId);
+}
+
+ElementRecord Automation::RefreshElement(const std::string& elementId,
+                                         winrt::com_ptr<IUIAutomationElement>& refreshed) {
+  ElementRecord record = registry_.Require(elementId);
+  const HRESULT result =
+      record.element->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, true).get(), refreshed.put());
+  if (result == UIA_E_ELEMENTNOTAVAILABLE || (SUCCEEDED(result) && !refreshed)) {
+    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
   }
-  return record->second;
+  CheckHresult(kErrorAutomationFailed, "Refreshing the cached element", result);
+
+  // A refresh can succeed against a different element: a destroyed window's
+  // handle that was reused still resolves. A known property that disagrees
+  // means the id no longer addresses what it was issued for.
+  const ElementFingerprint observed = FingerprintFromCache(refreshed.get());
+  if (FingerprintsConflict(record.fingerprint, observed)) {
+    registry_.Erase(elementId);
+    Fail(kErrorStaleElement,
+         "Element \"" + elementId +
+             "\" now reports a different process, control type, automation id, or class, so a different element has "
+             "reused its native identity.");
+  }
+  registry_.Refresh(elementId, refreshed, observed);
+  return record;
 }
 
 ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const std::string& windowId,
@@ -670,6 +727,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
 
   const WindowMetrics metrics = MeasureWindow(context.window);
   const std::string storyRootTestId = ToUtf8(context.storyRootTestId);
+  const std::uint64_t generation = registry_.BeginObservation();
   std::vector<PendingNode> stack;
   stack.push_back(PendingNode{cachedRoot, rootParentId, rootScope});
 
@@ -688,8 +746,8 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
 
     ElementScope scope = node.scope;
     const std::wstring runtimeKey = RuntimeKeyFromCache(node.element.get());
-    const std::string id =
-        RegisterElement(node.element.get(), runtimeKey, context.windowId, context.window, node.parentId, scope);
+    const std::string id = RegisterElement(node.element.get(), runtimeKey, context.windowId, context.window,
+                                           node.parentId, scope, generation);
     ElementSnapshot snapshot = ReadSnapshot(node.element.get(), context.windowId, node.parentId, scope, id);
 
     ElementScope childScope = scope;
@@ -698,7 +756,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
       scope = ElementScope::Preview;
       childScope = ElementScope::Preview;
       snapshot.scope = ElementScope::Preview;
-      recordsById_[id].scope = ElementScope::Preview;
+      registry_.SetScope(id, ElementScope::Preview);
     } else if (context.primary && scope == ElementScope::Application) {
       childScope = ElementScope::Chrome;
     }
@@ -741,8 +799,9 @@ std::vector<ElementSnapshot> Automation::Find(const WindowContext& context, cons
   std::string rootParentId;
   ElementScope rootScope = context.primary ? ElementScope::Application : ElementScope::SecondaryWindow;
   if (!rootElementId.empty()) {
-    const ElementRecord& record = RequireRecord(rootElementId);
-    searchRoot = record.element;
+    // The search must stay beneath the element the id was issued for, so a
+    // replaced or vanished root fails here instead of searching its successor.
+    const ElementRecord record = RefreshElement(rootElementId, searchRoot);
     rootId = record.id;
     rootParentId = record.parentId;
     rootScope = record.scope;
@@ -776,27 +835,16 @@ std::vector<ElementSnapshot> Automation::Find(const WindowContext& context, cons
 ElementSnapshot Automation::SnapshotElement(const std::string& elementId, const CancellationToken& token) {
   Initialize();
   token.ThrowIfCancelled();
-  const ElementRecord& record = RequireRecord(elementId);
-  const std::string windowId = record.windowId;
-  const std::string parentId = record.parentId;
-  const ElementScope scope = record.scope;
-  HWND window = record.window;
   winrt::com_ptr<IUIAutomationElement> refreshed;
-  const HRESULT result =
-      record.element->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, true).get(), refreshed.put());
-  if (result == UIA_E_ELEMENTNOTAVAILABLE || (SUCCEEDED(result) && !refreshed)) {
-    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
-  }
-  CheckHresult(kErrorAutomationFailed, "Refreshing the cached element", result);
-
+  const ElementRecord record = RefreshElement(elementId, refreshed);
+  HWND window = record.window;
   if (window == nullptr || IsWindow(window) == FALSE) {
     UIA_HWND nativeWindow = nullptr;
     if (SUCCEEDED(refreshed->get_CachedNativeWindowHandle(&nativeWindow))) {
       window = static_cast<HWND>(nativeWindow);
     }
   }
-  ElementSnapshot snapshot = ReadSnapshot(refreshed.get(), windowId, parentId, scope, elementId);
-  recordsById_[elementId].element = refreshed;
+  ElementSnapshot snapshot = ReadSnapshot(refreshed.get(), record.windowId, record.parentId, record.scope, elementId);
 
   const WindowMetrics metrics = MeasureWindow(window);
   snapshot.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics);
@@ -833,23 +881,51 @@ std::optional<ElementSnapshot> Automation::ActiveElement(const WindowContext& co
   const std::wstring runtimeKey = RuntimeKeyLive(focused.get());
   std::string parentId;
   ElementScope scope = context.primary ? ElementScope::Chrome : ElementScope::SecondaryWindow;
-  if (!runtimeKey.empty()) {
-    const auto existing = idsByRuntimeKey_.find(runtimeKey);
-    if (existing != idsByRuntimeKey_.end()) {
-      const auto record = recordsById_.find(existing->second);
-      if (record != recordsById_.end()) {
-        parentId = record->second.parentId;
-        scope = record->second.scope;
-      }
-    }
+  // The element inherits what is already known about it only while the known
+  // record is plausibly the same element.
+  if (const ElementRecord* known = registry_.FindByRuntimeKey(runtimeKey);
+      known != nullptr && !FingerprintsConflict(known->fingerprint, FingerprintFromCache(focused.get()))) {
+    parentId = known->parentId;
+    scope = known->scope;
   }
-  const std::string id =
-      RegisterElement(focused.get(), runtimeKey, context.windowId, context.window, parentId, scope);
+  const std::string id = RegisterElement(focused.get(), runtimeKey, context.windowId, context.window, parentId, scope,
+                                         registry_.BeginObservation());
   ElementSnapshot snapshot = ReadSnapshot(focused.get(), context.windowId, parentId, scope, id);
   const WindowMetrics metrics = MeasureWindow(context.window);
   snapshot.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics);
   return snapshot;
 }
+
+namespace {
+
+// A hit outside the target's process is described as an opaque external window
+// and never registered, so no foreign element enters the registry under a window
+// it does not belong to.
+ElementSnapshot ExternalWindowSnapshot(const WindowContext& context, const std::optional<RECT>& bounds) {
+  ElementSnapshot intercepted;
+  intercepted.id = NextIdentifier("external-window");
+  intercepted.windowId = context.windowId;
+  intercepted.scope = ElementScope::Application;
+  intercepted.role = "window";
+  intercepted.name = "External desktop window";
+  intercepted.enabled.supported = true;
+  intercepted.enabled.value = true;
+  intercepted.focused.supported = true;
+  intercepted.focused.value = false;
+  intercepted.visible.supported = true;
+  intercepted.visible.value = true;
+  intercepted.checked.supported = false;
+  intercepted.checked.reason = "An external desktop window does not expose checked state.";
+  intercepted.selected = Unsupported("An external desktop window does not expose selected state.");
+  intercepted.expanded = Unsupported("An external desktop window does not expose expanded state.");
+  if (bounds) {
+    intercepted.physicalRect = *bounds;
+    intercepted.rect = PhysicalRectToClientDips(*bounds, MeasureWindow(context.window));
+  }
+  return intercepted;
+}
+
+}  // namespace
 
 std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context, POINT screenPoint,
                                                    const CancellationToken& token) {
@@ -858,33 +934,17 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
   DWORD targetProcessId = 0;
   GetWindowThreadProcessId(context.window, &targetProcessId);
   const HWND pointWindow = WindowFromPoint(screenPoint);
-  DWORD pointProcessId = 0;
-  if (pointWindow != nullptr) {
-    GetWindowThreadProcessId(pointWindow, &pointProcessId);
+  if (pointWindow == nullptr) {
+    // No window exists at the point, for example beyond every monitor, where
+    // UI Automation would answer with the desktop root.
+    return std::nullopt;
   }
+  DWORD pointProcessId = 0;
+  GetWindowThreadProcessId(pointWindow, &pointProcessId);
   if (pointProcessId != 0 && targetProcessId != 0 && pointProcessId != targetProcessId) {
-    ElementSnapshot intercepted;
-    intercepted.id = NextIdentifier("external-window");
-    intercepted.windowId = context.windowId;
-    intercepted.scope = ElementScope::Application;
-    intercepted.role = "window";
-    intercepted.name = "External desktop window";
-    intercepted.enabled.supported = true;
-    intercepted.enabled.value = true;
-    intercepted.focused.supported = true;
-    intercepted.focused.value = false;
-    intercepted.visible.supported = true;
-    intercepted.visible.value = true;
-    intercepted.checked.supported = false;
-    intercepted.checked.reason = "An external desktop window does not expose checked state.";
-    intercepted.selected = Unsupported("An external desktop window does not expose selected state.");
-    intercepted.expanded = Unsupported("An external desktop window does not expose expanded state.");
     RECT bounds{};
-    if (GetWindowRect(GetAncestor(pointWindow, GA_ROOT), &bounds) != FALSE) {
-      intercepted.physicalRect = bounds;
-      intercepted.rect = PhysicalRectToClientDips(bounds, MeasureWindow(context.window));
-    }
-    return intercepted;
+    const bool measured = GetWindowRect(GetAncestor(pointWindow, GA_ROOT), &bounds) != FALSE;
+    return ExternalWindowSnapshot(context, measured ? std::optional<RECT>(bounds) : std::nullopt);
   }
   winrt::com_ptr<IUIAutomationElement> hit;
   const HRESULT result =
@@ -892,6 +952,15 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
                                               hit.put());
   if (FAILED(result) || !hit) {
     return std::nullopt;
+  }
+  // UI Automation can answer with an element of another process even when the
+  // window under the point belongs to the target, for example an overlay with
+  // its own provider.
+  const DWORD hitProcessId = FingerprintFromCache(hit.get()).processId;
+  if (hitProcessId != 0 && targetProcessId != 0 && hitProcessId != targetProcessId) {
+    RECT bounds{};
+    const bool measured = SUCCEEDED(hit->get_CachedBoundingRectangle(&bounds));
+    return ExternalWindowSnapshot(context, measured ? std::optional<RECT>(bounds) : std::nullopt);
   }
 
   // The point belongs to the deepest identity the client already knows about:
@@ -905,18 +974,13 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
   for (std::size_t depth = 0; depth < kMaximumAncestorWalk && cursor; depth += 1) {
     token.ThrowIfCancelled();
     const std::wstring key = RuntimeKeyLive(cursor.get());
-    if (!key.empty()) {
-      const auto existing = idsByRuntimeKey_.find(key);
-      if (existing != idsByRuntimeKey_.end()) {
-        const auto record = recordsById_.find(existing->second);
-        if (record != recordsById_.end()) {
-          resolved = cursor;
-          resolvedId = existing->second;
-          parentId = record->second.parentId;
-          scope = record->second.scope;
-          break;
-        }
-      }
+    if (const ElementRecord* known = registry_.FindByRuntimeKey(key);
+        known != nullptr && !FingerprintsConflict(known->fingerprint, FingerprintLive(cursor.get()))) {
+      resolved = cursor;
+      resolvedId = known->id;
+      parentId = known->parentId;
+      scope = known->scope;
+      break;
     }
     const winrt::com_ptr<IUIAutomationElement> parent = ParentOf(cursor.get());
     if (!parent) {
@@ -932,11 +996,13 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
     return std::nullopt;
   }
   const std::wstring runtimeKey = RuntimeKeyFromCache(cached.get());
-  const std::string id =
-      resolvedId.empty()
-          ? RegisterElement(cached.get(), runtimeKey, context.windowId, context.window, parentId, scope)
-          : resolvedId;
-  recordsById_[id].element = cached;
+  std::string id = resolvedId;
+  if (id.empty()) {
+    id = RegisterElement(cached.get(), runtimeKey, context.windowId, context.window, parentId, scope,
+                         registry_.BeginObservation());
+  } else {
+    registry_.Refresh(id, cached, FingerprintFromCache(cached.get()));
+  }
   ElementSnapshot snapshot = ReadSnapshot(cached.get(), context.windowId, parentId, scope, id);
   const WindowMetrics metrics = MeasureWindow(context.window);
   snapshot.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics);
@@ -971,21 +1037,21 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
 
   winrt::com_ptr<IUIAutomationInvokePattern> invoke;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_InvokePatternId, IID_PPV_ARGS(invoke.put()))) && invoke) {
-    CheckHresult(kErrorAutomationFailed, "Invoking the element",
-                 BoundedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
+    CheckClickResult("Invoking the element",
+                     BoundedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationTogglePattern> toggle;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_TogglePatternId, IID_PPV_ARGS(toggle.put()))) && toggle) {
-    CheckHresult(kErrorAutomationFailed, "Toggling the element",
-                 BoundedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
+    CheckClickResult("Toggling the element",
+                     BoundedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationSelectionItemPattern> selection;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_SelectionItemPatternId, IID_PPV_ARGS(selection.put()))) &&
       selection) {
-    CheckHresult(kErrorAutomationFailed, "Selecting the element",
-                 BoundedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
+    CheckClickResult("Selecting the element",
+                     BoundedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand;
@@ -998,16 +1064,16 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
       Fail(kErrorUnsupported, "The element is a leaf node and cannot be activated through accessibility.");
     }
     const bool collapse = *state == ExpandCollapseState_Expanded;
-    CheckHresult(kErrorAutomationFailed, "Expanding or collapsing the element",
-                 BoundedMutation([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
-                                 "Expanding or collapsing the element"));
+    CheckClickResult("Expanding or collapsing the element",
+                     BoundedMutation([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
+                                     "Expanding or collapsing the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_LegacyIAccessiblePatternId, IID_PPV_ARGS(legacy.put()))) && legacy) {
-    CheckHresult(kErrorAutomationFailed, "Invoking the legacy accessibility default action",
-                 BoundedMutation([legacy]() { return legacy->DoDefaultAction(); },
-                                 "Invoking the legacy accessibility default action"));
+    CheckClickResult("Invoking the legacy accessibility default action",
+                     BoundedMutation([legacy]() { return legacy->DoDefaultAction(); },
+                                     "Invoking the legacy accessibility default action"));
     return;
   }
   Fail(kErrorUnsupported,
@@ -1039,21 +1105,11 @@ bool Automation::TryClearValue(const std::string& elementId) {
 }
 
 void Automation::ForgetWindow(const std::string& windowId) {
-  for (auto iterator = recordsById_.begin(); iterator != recordsById_.end();) {
-    if (iterator->second.windowId == windowId) {
-      for (auto key = idsByRuntimeKey_.begin(); key != idsByRuntimeKey_.end();) {
-        key = key->second == iterator->first ? idsByRuntimeKey_.erase(key) : std::next(key);
-      }
-      iterator = recordsById_.erase(iterator);
-      continue;
-    }
-    ++iterator;
-  }
+  registry_.ForgetWindow(windowId);
 }
 
 void Automation::Reset() {
-  recordsById_.clear();
-  idsByRuntimeKey_.clear();
+  registry_.Clear();
 }
 
 std::string Automation::SerializeSourceXml(const std::vector<ElementSnapshot>& snapshots) const {

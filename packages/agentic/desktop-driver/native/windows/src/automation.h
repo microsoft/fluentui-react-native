@@ -11,14 +11,13 @@
 
 #include <winrt/base.h>
 
+#include "elementregistry.h"
 #include "geometry.h"
 #include "json.h"
 
 namespace furn {
 
 inline constexpr std::size_t kMaximumTreeNodes = 5000;
-
-enum class ElementScope { Application, Chrome, Preview, SecondaryWindow };
 
 enum class CheckedValue { False, True, Mixed };
 
@@ -86,15 +85,6 @@ struct WindowContext {
   std::wstring storyRootTestId;
 };
 
-struct ElementRecord {
-  std::string id;
-  winrt::com_ptr<IUIAutomationElement> element;
-  std::string windowId;
-  HWND window{nullptr};
-  std::string parentId;
-  ElementScope scope{ElementScope::Chrome};
-};
-
 std::string RoleForControlType(CONTROLTYPEID controlType);
 std::string NormalizeRoleQuery(std::string_view value);
 const char* ScopeName(ElementScope scope);
@@ -104,6 +94,9 @@ bool MatchesSelector(const ElementSnapshot& snapshot, const Selector& selector);
 // the native tree. All members must be used from the dedicated MTA worker.
 class Automation {
  public:
+  explicit Automation(std::size_t retainedElementLimit = kMaximumRetainedElements)
+      : registry_(retainedElementLimit) {}
+
   void Initialize();
 
   std::vector<ElementSnapshot> SnapshotWindowTree(const WindowContext& context, const CancellationToken& token);
@@ -114,7 +107,10 @@ class Automation {
   std::optional<ElementSnapshot> HitTest(const WindowContext& context, POINT screenPoint,
                                          const CancellationToken& token);
 
-  const ElementRecord& RequireRecord(const std::string& elementId) const;
+  // A copy of the tracked record, stamped as recently used; stale-element when
+  // the id is not tracked. It does not check that the native element still
+  // matches: SnapshotElement does, immediately before an action dispatches.
+  ElementRecord RequireRecord(const std::string& elementId);
   void SetFocus(const std::string& elementId);
   void AccessibilityClick(const std::string& elementId, const CancellationToken& token);
   bool TryClearValue(const std::string& elementId);
@@ -123,7 +119,14 @@ class Automation {
   void ForgetWindow(const std::string& windowId);
   void Reset();
 
+  // How many elements the helper currently tracks and the cap that bounds them,
+  // for diagnostics. Both are read on the command thread.
+  std::size_t RetainedElementCount() const noexcept { return registry_.size(); }
+  std::size_t RetainedElementLimit() const noexcept { return registry_.capacity(); }
+
   std::string SerializeSourceXml(const std::vector<ElementSnapshot>& snapshots) const;
+
+  ElementRegistry& RegistryForTesting() noexcept { return registry_; }
 
  private:
   winrt::com_ptr<IUIAutomationCacheRequest> CreateCacheRequest(TreeScope scope, bool controlViewOnly) const;
@@ -136,7 +139,11 @@ class Automation {
                                ElementScope scope, const std::string& knownId);
   std::string RegisterElement(IUIAutomationElement* element, const std::wstring& runtimeKey,
                               const std::string& windowId, HWND window, const std::string& parentId,
-                              ElementScope scope);
+                              ElementScope scope, std::uint64_t generation);
+  // Refreshes the native element behind an id and proves it is still the element
+  // the id was issued for: stale-element when it is gone or a different element
+  // has reused its native identity. Returns the record as it was before.
+  ElementRecord RefreshElement(const std::string& elementId, winrt::com_ptr<IUIAutomationElement>& refreshed);
   std::wstring RuntimeKeyFromCache(IUIAutomationElement* element) const;
   std::wstring RuntimeKeyLive(IUIAutomationElement* element) const;
   bool IsNotSupported(const VARIANT& value) const;
@@ -146,8 +153,7 @@ class Automation {
   winrt::com_ptr<IUIAutomationCondition> rawViewCondition_;
   winrt::com_ptr<IUIAutomationTreeWalker> rawWalker_;
   winrt::com_ptr<IUnknown> notSupportedValue_;
-  std::unordered_map<std::string, ElementRecord> recordsById_;
-  std::unordered_map<std::wstring, std::string> idsByRuntimeKey_;
+  ElementRegistry registry_;
 };
 
 json::Value SerializeSnapshot(const ElementSnapshot& snapshot);

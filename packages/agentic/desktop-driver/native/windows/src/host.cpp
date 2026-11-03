@@ -50,7 +50,7 @@ json::Value CreateHello() {
   json::Value features = json::Value::Array();
   for (const char* feature : {"accessibilityClick", "activeElement", "capture", "elementCapture", "find", "hitTest",
                               "keyboard", "launch", "attach", "pointer", "probe", "releaseActions", "setWindowRect",
-                              "source", "tree", "wheel"}) {
+                              "source", "tree", "wheel", "windowEvents"}) {
     features.Append(json::Value::String(std::string(feature)));
   }
   hello.Set("features", features);
@@ -63,6 +63,28 @@ void Host::RecordWriteFailure(std::string_view operation, const char* message) n
     CancelSynchronousIo(readerThread_);
   }
   WriteFailureDiagnostic(operation, message);
+}
+
+// Runs on the window event thread. The publisher is cleared before Run ends, so
+// the writer outlives every call.
+void Host::PublishWindowClosed(const std::string& windowId) noexcept {
+  try {
+    if (writeFailed_.load(std::memory_order_acquire) || writer_ == nullptr) {
+      return;
+    }
+    json::Value payload = json::Value::Object();
+    payload.Set("windowId", json::Value::String(windowId));
+    json::Value event = json::Value::Object();
+    event.Set("type", json::Value::String(std::string("event")));
+    event.Set("event", json::Value::String(std::string("window-closed")));
+    event.Set("sequence", json::Value::Integer(static_cast<std::int64_t>(eventSequence_.fetch_add(1) + 1)));
+    event.Set("payload", std::move(payload));
+    writer_->WriteJson(event);
+  } catch (const std::exception& error) {
+    RecordWriteFailure("Native event write failed", error.what());
+  } catch (...) {
+    RecordWriteFailure("Native event write failed", "unknown error");
+  }
 }
 
 bool Host::WriteResponse(const std::string& id, const std::string& command, const CommandResult& result) noexcept {
@@ -227,6 +249,7 @@ int Host::Run() {
   DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &readerThread_, 0, FALSE,
                   DUPLICATE_SAME_ACCESS);
   std::thread worker(&Host::WorkerLoop, this);
+  driver_.SetWindowClosedPublisher([this](const std::string& windowId) { PublishWindowClosed(windowId); });
 
   int exitCode = 0;
   try {
@@ -291,6 +314,8 @@ int Host::Run() {
   }
   signal_.notify_all();
   worker.join();
+  // Waits for an in-flight publication, so the writer can be released below.
+  driver_.SetWindowClosedPublisher(nullptr);
   if (readerThread_ != nullptr) {
     CloseHandle(readerThread_);
     readerThread_ = nullptr;

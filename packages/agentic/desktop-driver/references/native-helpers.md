@@ -125,6 +125,7 @@ not set this policy.
 ```text
 <cache-root>/v1/
   artifacts/<provider>-<architecture>/<compatibility>/<build>/<artifact>/
+  fixtures/win32/<digest>/
   selections/<compatibility>/
   locks/
   staging/
@@ -136,6 +137,9 @@ not set this policy.
   coordinator, protocol, and macOS signing identity.
 - The build fingerprint adds the actual toolchain fingerprint.
 - The artifact ID hashes the built executable.
+- `fixtures/` holds test-only executables that the opt-in native contract
+  builds, keyed by fixture source and toolchain. Resolution never selects them,
+  and they are not published.
 - Builds publish through same-volume staging and atomic rename.
 - Cross-process directory locks prevent duplicate publication.
 - Failed build logs are copied to immutable diagnostics before staging cleanup.

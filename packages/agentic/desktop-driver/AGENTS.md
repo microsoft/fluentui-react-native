@@ -60,8 +60,8 @@ yarn test
 
 Set `FURN_NATIVE_DRIVER_TEST=1` only on the matching target operating system to
 exercise the real native build, handshake, self-test, cache, and resolution
-contract. Stable-signed macOS coverage additionally needs
-`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
+contract (on Windows, also the Win32 fixture contract). Stable-signed macOS
+coverage additionally needs `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
 
 Use [CI integration](references/ci-integration.md) and
 [Test integration](references/test-integration.md) for native and consuming-app

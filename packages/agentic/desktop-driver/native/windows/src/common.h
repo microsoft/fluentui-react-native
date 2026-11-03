@@ -40,6 +40,10 @@ inline constexpr char kErrorCleanupFailed[] = "cleanup-failed";
 inline constexpr char kErrorTreeTooLarge[] = "tree-too-large";
 inline constexpr char kErrorInternal[] = "internal-error";
 
+// UIA_E_TIMEOUT: UI Automation's own client-side transaction timeout. The
+// header only defines it for UI Automation clients, so it is repeated here.
+inline constexpr HRESULT kUiaTimeoutResult = static_cast<HRESULT>(0x80131505);
+
 std::string ToUtf8(std::wstring_view value);
 std::wstring ToWide(std::string_view value);
 std::string TrimAscii(std::string_view value);
