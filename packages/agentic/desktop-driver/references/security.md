@@ -68,6 +68,14 @@ in its command queue authenticates again immediately before dispatch.
   dispatch, and teardown waits behind the settled command. A draining session
   accepts only `DELETE`. A session that fails to close stays tracked, and
   shutdown retries it.
+- A grant's session that receives no request for `idleSessionTimeoutMs`
+  (ten minutes by default; 0 disables) closes as `DELETE` would: input is
+  released, a launched application is closed, and an attached application is
+  left running with any quarantine kept. The clock runs only while none of the
+  session's requests is queued or running, and only the owning grant's
+  requests renew it; another grant's probe does not. Expiry
+  releases the target for other grants, so a client that keeps a session
+  must keep using it. Sessions on a service without an authority never expire.
 - Grants and the service `incarnation` that `/status` reports as
   `service.incarnation` end with the service process. A restarted service
   never honors an old token.

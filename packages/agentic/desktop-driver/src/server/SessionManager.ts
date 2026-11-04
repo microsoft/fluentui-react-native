@@ -67,6 +67,12 @@ type TargetHolder = {
 
 export type SessionManagerOptions = {
   /**
+   * Closes a grant's session after this many milliseconds without a request for it. The clock runs only while none of the
+   * session's requests is queued or running, so a long command never expires its own session. Sessions without an owner
+   * never expire. 0 or absent disables expiry.
+   */
+  idleTimeoutMs?: number;
+  /**
    * Removes session ids from the quarantine details a caller receives. A protected service sets this, because the id of
    * another grant's session must not reach a caller that is only contending for the same target.
    */
@@ -107,10 +113,14 @@ export class SessionManager {
   private readonly revokedOwners = new Set<string>();
   private readonly quarantines = new Map<string, QuarantineRecord>();
   private inputQueue: Promise<void> = Promise.resolve();
+  private readonly pendingCommands = new Map<string, number>();
+  private readonly idleTimers = new Map<string, ReturnType<typeof setTimeout>>();
   private closing = false;
+  private readonly idleTimeoutMs: number;
   private readonly redactSessionIds: boolean;
 
   constructor(options: SessionManagerOptions = {}) {
+    this.idleTimeoutMs = options.idleTimeoutMs ?? 0;
     this.redactSessionIds = options.redactSessionIds === true;
   }
 
@@ -142,6 +152,10 @@ export class SessionManager {
 
   beginClose(): void {
     this.closing = true;
+    for (const timer of this.idleTimers.values()) {
+      clearTimeout(timer);
+    }
+    this.idleTimers.clear();
     for (const { controller } of this.inFlightCreates.values()) {
       controller.abort();
     }
@@ -248,6 +262,7 @@ export class SessionManager {
       };
       this.sessions.set(session.id, session);
       this.sessionsByTarget.set(target.id, session.id);
+      this.armIdleTimer(session.id);
       return session;
     } catch (error) {
       await this.runInputCommand(() =>
@@ -343,6 +358,9 @@ export class SessionManager {
   }
 
   runCommand<T>(sessionId: string, operation: () => Promise<T>): Promise<T> {
+    // Every request for a session passes through here, so queuing one renews the session's idle clock.
+    this.pendingCommands.set(sessionId, (this.pendingCommands.get(sessionId) ?? 0) + 1);
+    this.clearIdleTimer(sessionId);
     const previous = this.commandQueues.get(sessionId) ?? Promise.resolve();
     const result = previous.catch(() => undefined).then(operation);
     const tail = result.then(
@@ -354,8 +372,59 @@ export class SessionManager {
       if (this.commandQueues.get(sessionId) === tail) {
         this.commandQueues.delete(sessionId);
       }
+      const remaining = (this.pendingCommands.get(sessionId) ?? 1) - 1;
+      if (remaining > 0) {
+        this.pendingCommands.set(sessionId, remaining);
+      } else {
+        this.pendingCommands.delete(sessionId);
+        this.armIdleTimer(sessionId);
+      }
     });
     return result;
+  }
+
+  /** Starts the idle clock of an active grant's session that has no request queued or running. */
+  private armIdleTimer(sessionId: string): void {
+    const session = this.sessions.get(sessionId);
+    if (
+      this.idleTimeoutMs <= 0 ||
+      this.closing ||
+      !session?.owner ||
+      session.lifecycle !== 'active' ||
+      this.pendingCommands.has(sessionId)
+    ) {
+      return;
+    }
+    this.clearIdleTimer(sessionId);
+    const timer = setTimeout(() => {
+      this.idleTimers.delete(sessionId);
+      void this.expireIdle(sessionId);
+    }, this.idleTimeoutMs);
+    // An idle clock alone never keeps the process alive.
+    timer.unref?.();
+    this.idleTimers.set(sessionId, timer);
+  }
+
+  private clearIdleTimer(sessionId: string): void {
+    const timer = this.idleTimers.get(sessionId);
+    if (timer) {
+      clearTimeout(timer);
+      this.idleTimers.delete(sessionId);
+    }
+  }
+
+  /**
+   * Closes an idle session the way DELETE would. Draining starts at once, so a request that arrives while the close is
+   * queued is refused rather than renewing a session that has already expired. A session that fails to close stays
+   * tracked and draining, and service shutdown retries it, as for a revoked grant.
+   */
+  private async expireIdle(sessionId: string): Promise<void> {
+    const session = this.sessions.get(sessionId);
+    if (!session || session.lifecycle !== 'active' || this.pendingCommands.has(sessionId)) {
+      return;
+    }
+    this.beginDraining(session);
+    await this.deleteWhere(({ id }) => id === sessionId, 'An idle session failed to close.').catch(() => undefined);
   }
 
   runInputCommand<T>(operation: () => Promise<T>): Promise<T> {
