@@ -65,6 +65,18 @@ export const outcomeCapacity = 256;
 /** The longest text one `type` action sends. */
 export const maxTypedTextLength = 4_096;
 
+/**
+ * How long a `check` may wait for its expectation, in milliseconds. A wait holds the session's queue, never the
+ * target's input turn; an evaluation still running when the wait ends finishes before the result is returned.
+ */
+export const checkWaitMs = { ceiling: 30_000, default: 0, floor: 0 } as const satisfies OperationBudget;
+
+/** The first and the longest pause between a waiting check's evaluations. Host events end a pause early. */
+export const checkPollMs = { first: 100, longest: 1_000 } as const;
+
+/** The longest exact name, value, or text a check compares. */
+export const maxExpectedTextLength = 1_024;
+
 /** The largest request an operation accepts, measured as serialized JSON. */
 export const maxOperationRequestBytes = 65_536;
 

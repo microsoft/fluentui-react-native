@@ -815,14 +815,21 @@ The read operations fix three requirements that actions inherit:
 
 **Progress:** the [`act` operation](operations.md#act) meets all three. It
 clicks (physical pointer after a hit test), activates (default accessibility
-action), types, or clears an element a `find` proved unique, revalidates the
+action), types, or clears an element a search proved unique, revalidates the
 element's liveness and fingerprint inside the target's input turn, reports the
 mechanism it used, and records caller-chosen request ids in a bounded outcome
 ledger so a retry returns the first outcome. Every primary step runs through
 the settlement path, so an unconfirmed action quarantines the target, and
-quarantine refusals use fixed wording. It is covered against the fake host
-only; native qualification on macOS and Windows, AX action tickets, UIA
-pattern mappings, checks and waits, sequences, and capture remain.
+quarantine refusals use fixed wording. `act` also takes a selector, which a
+search run inside the request must prove unique. The
+[`check` operation](operations.md#check) reads states, name, value, or text,
+or counts a selector's matches, optionally waiting on provider change events
+with a bounded poll backoff; an incomplete search is `inconclusive`, never an
+absence. On macOS both were exercised against Calculator: physical `click`,
+selector and cited `activate`, `selector-not-unique` and `no-match` refusals,
+`check` passing, failing with the actual value, `unsupported` for an
+unreported state, and a timed-out wait. Windows qualification, AX action
+tickets, UIA pattern mappings, sequences, and capture remain.
 
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and

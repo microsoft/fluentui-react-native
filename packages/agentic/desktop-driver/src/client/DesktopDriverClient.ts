@@ -6,6 +6,8 @@ import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
 import type {
   ActInput,
   ActResult,
+  CheckInput,
+  CheckResult,
   FindInput,
   FindResult,
   JournalInput,
@@ -181,11 +183,17 @@ export class DesktopSessionClient {
   }
 
   /**
-   * Clicks, activates, types into, or clears an element a `find` proved unique, citing that find's sample. Name a
-   * `requestId` to make a retry safe: repeating it returns the first outcome instead of acting again.
+   * Clicks, activates, types into, or clears one element: one a `find` proved unique, citing that find's sample, or one
+   * a selector proves unique now. Name a `requestId` to make a retry safe: repeating it returns the first outcome
+   * instead of acting again.
    */
   act(input: ActInput, options?: { requestId?: string }): Promise<OperationResponse<ActResult>> {
     return this.operation('act', input, options);
+  }
+
+  /** Checks an element's state, name, value, or text, or how many elements a selector matches, optionally waiting. */
+  check(input: CheckInput, options?: { requestId?: string }): Promise<OperationResponse<CheckResult>> {
+    return this.operation('check', input, options);
   }
 
   /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */

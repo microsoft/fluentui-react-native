@@ -1,4 +1,5 @@
 export type { ActInput, ActResult } from './act.js';
+export type { CheckInput, CheckResult } from './check.js';
 export type { OperationRequest, OperationResponse } from './envelope.js';
 export { executeOperation } from './executor.js';
 export type { FindInput, FindResult } from './find.js';

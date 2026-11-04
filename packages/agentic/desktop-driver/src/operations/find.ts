@@ -2,13 +2,10 @@ import { z } from 'zod';
 
 import type { NativeObservation } from '../host/types.js';
 import { searchBudgets } from './limits.js';
-import { classify, factsNeeded, hasPredicate } from './match.js';
-import type { FindPredicates } from './match.js';
-import { assertContentAllowed, requestsContent, requireBoundedObservation } from './policy.js';
-import { fingerprintOf } from './proofs.js';
+import { requireBoundedObservation } from './policy.js';
 import { registerOperation } from './runtime.js';
-import { sampleTree } from './sampling.js';
-import { budgetField, referenceSchema, sampleSchema, truncationSchema, warningSchema } from './shapes.js';
+import { searchSelector, selectorFields, selectorKeys, selectorRequirement, withSelectorRules } from './selector.js';
+import { budgetField, sampleSchema, truncationSchema, warningSchema } from './shapes.js';
 import { clipText, neutralizeText, quoteText, safeToken } from './text.js';
 import { indexParents } from './tree.js';
 
@@ -17,11 +14,9 @@ const matchNameLength = 120;
 const pathNameLength = 48;
 const pathDepth = 3;
 
-const predicate = z.string().min(1).max(256);
-
-const findInput = z
-  .strictObject({
-    automationId: predicate.optional().describe('Exact automation id.'),
+const findInput = withSelectorRules(
+  z.strictObject({
+    ...selectorFields,
     budget: z
       .strictObject({
         deadlineMs: budgetField(searchBudgets.deadlineMs).describe('Milliseconds the application may take.'),
@@ -32,19 +27,8 @@ const findInput = z
       .prefault({})
       .describe('Search limits. A search that hits one can prove at most that matches exist.'),
     limit: budgetField(searchBudgets.limit).describe('Most matches returned.'),
-    name: predicate.optional().describe('Exact accessible name. Not with nameContains.'),
-    nameContains: predicate.optional().describe('Part of the accessible name, ignoring case.'),
-    role: predicate.optional().describe('Role, ignoring case, as shown by observe.'),
-    text: predicate.optional().describe('Exact displayed text. Not with textContains.'),
-    textContains: predicate.optional().describe('Part of the displayed text, ignoring case.'),
-    within: referenceSchema.optional().describe('An element reference to search inside, instead of the whole window.'),
-  })
-  .refine((input) => hasPredicate(predicatesOf(input)), {
-    message: 'Give at least one of role, name, nameContains, automationId, text, or textContains.',
-  })
-  .refine((input) => input.name === undefined || input.nameContains === undefined, { message: 'Give name or nameContains, not both.' })
-  .refine((input) => input.text === undefined || input.textContains === undefined, { message: 'Give text or textContains, not both.' })
-  .describe('At least one of role, name, nameContains, automationId, text, or textContains is required.');
+  }),
+).describe(selectorRequirement);
 
 export type FindInput = z.input<typeof findInput>;
 
@@ -81,17 +65,6 @@ const findOutput = z.strictObject({
 
 export type FindResult = z.infer<typeof findOutput>;
 type Match = FindResult['matches'][number];
-
-function predicatesOf(input: FindPredicates): FindPredicates {
-  return {
-    automationId: input.automationId,
-    name: input.name,
-    nameContains: input.nameContains,
-    role: input.role,
-    text: input.text,
-    textContains: input.textContains,
-  };
-}
 
 function hasContent(value: string | undefined): value is string {
   return value !== undefined && value.trim().length > 0;
@@ -154,51 +127,34 @@ export const findElementsOperation = registerOperation({
   summary:
     'Searches the window, or an element inside it, and states whether the match is unique. Matches carry references other operations accept.',
   async run(input, runtime) {
-    const predicates = predicatesOf(input);
-    const facts = factsNeeded(predicates);
-    assertContentAllowed(runtime, requestsContent(facts));
     const { budget } = input;
-    const sampled = await sampleTree(
-      runtime,
-      {
-        facts,
-        limits: {
-          deadlineMs: budget.deadlineMs,
-          maxDepth: budget.maxDepth,
-          maxStringLength: budget.maxStringLength,
-          maxVisited: budget.maxVisited,
-        },
-        within: input.within,
+    const sampled = await searchSelector(runtime, input, {
+      issueUnique: true,
+      limits: {
+        deadlineMs: budget.deadlineMs,
+        maxDepth: budget.maxDepth,
+        maxStringLength: budget.maxStringLength,
+        maxVisited: budget.maxVisited,
       },
-      ({ issue, observation }) => {
-        const classification = classify(observation, predicates, input.within === undefined);
+      use: ({ issue, observation }, { classification }) => {
         const parents = indexParents(observation.nodes);
         const candidates = [
           ...classification.definite.map((index) => ({ index, match: 'definite' as const })),
           ...classification.possible.map((index) => ({ index, match: 'possible' as const })),
         ];
         const returned = candidates.slice(0, input.limit);
-        const proven = classification.outcome === 'unique' ? observation.nodes[classification.definite[0]] : undefined;
         return {
-          classification,
-          complete: observation.complete,
           matches: returned.map(({ index, match }) => describeMatch(observation, parents, index, match, issue(observation.nodes[index]))),
           more: candidates.length - returned.length,
-          proven,
           truncation: observation.truncation.map((entry) => ({ ...entry })),
-          visited: observation.nodes.length,
         };
       },
-    );
-    const { classification, complete, matches, more, proven, truncation, visited } = sampled.value;
-    if (proven !== undefined && matches[0] !== undefined) {
-      runtime.state.proofs.record({
-        fingerprint: fingerprintOf(proven),
-        nativeId: proven.id,
-        reference: matches[0].ref,
-        sample: sampled.sample.id,
-      });
+    });
+    const { classification, complete, extra, proof, visited } = sampled.value;
+    if (proof) {
+      runtime.state.proofs.record(proof);
     }
+    const { matches, more, truncation } = extra!;
     return {
       sample: sampled.sample,
       outcome: classification.outcome,
@@ -212,13 +168,8 @@ export const findElementsOperation = registerOperation({
     };
   },
   summarize(input, output) {
-    // Predicate values can quote what an application displayed or what a caller typed, so only their names are kept.
-    const given = Object.entries(predicatesOf(input))
-      .filter(([, value]) => value !== undefined)
-      .map(([key]) => key)
-      .join(',');
     return {
-      by: given,
+      by: selectorKeys(input),
       scoped: input.within !== undefined,
       ...(output
         ? { complete: output.complete, definite: output.counts.definite, outcome: output.outcome, visited: output.counts.visited }

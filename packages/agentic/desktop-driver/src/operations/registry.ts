@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { actOperation } from './act.js';
+import { checkOperation } from './check.js';
 import { findElementsOperation } from './find.js';
 import { readJournalOperation } from './journalOperation.js';
 import { operationSchemaVersion } from './limits.js';
@@ -24,7 +25,13 @@ export type OperationCatalog = {
   schemaVersion: number;
 };
 
-const operations: readonly RegisteredOperation[] = [observeOperation, findElementsOperation, actOperation, readJournalOperation];
+const operations: readonly RegisteredOperation[] = [
+  observeOperation,
+  findElementsOperation,
+  actOperation,
+  checkOperation,
+  readJournalOperation,
+];
 const operationsByName = new Map(operations.map((definition) => [definition.name, definition]));
 const schemaCache = new Map<string, { input: JsonSchema; output: JsonSchema }>();
 

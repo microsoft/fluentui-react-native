@@ -644,6 +644,171 @@ describe('Desktop Driver agent operations', () => {
         await expect(session.find({ automationId: 'save' })).resolves.toMatchObject({ session: { quarantined: true } });
       });
     });
+
+    test('acts on a selector only when a search run now proves it names exactly one element', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, post, session }) => {
+        const { result } = await session.act({ action: 'activate', find: { automationId: 'save' } });
+        expect(result).toMatchObject({ disposition: 'applied', mechanism: 'accessibility', ref: expect.any(String) });
+        // The selector's proof is recorded, so the element can be cited again without another search.
+        await expect(session.act({ action: 'activate', ref: result.ref, sample: result.sample })).resolves.toBeDefined();
+
+        const refused = (code: string, reason: string) => ({ code, data: { mutation: rejected(), reason } });
+        await expect(session.act({ action: 'activate', find: { name: 'Dup' } })).rejects.toMatchObject(
+          refused('invalid argument', 'selector-not-unique'),
+        );
+        await expect(session.act({ action: 'activate', find: { automationId: 'missing' } })).rejects.toMatchObject(
+          refused('no such element', 'no-match'),
+        );
+        for (const input of [
+          { action: 'activate', find: { automationId: 'save' }, ref: result.ref, sample: result.sample },
+          { action: 'activate', ref: result.ref },
+          { action: 'activate', find: {} },
+        ]) {
+          expect((await post('act', { input })).value).toMatchObject({ error: 'invalid argument' });
+        }
+        expect(harness.host.actions.filter((action) => action.type === 'click')).toHaveLength(2);
+
+        await session.act({ action: 'type', find: { automationId: 'field' }, text: 'typed words' });
+        expect(JSON.stringify((await session.journal()).result)).not.toMatch(/typed words|"field"/);
+      });
+    });
+  });
+
+  describe('check', () => {
+    test("compares a referenced element's states, name, and value with what is expected, and shows what failed", async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        const agree = await refTo(session, { automationId: 'agree' });
+        await expect(session.check({ expect: { checked: false, enabled: true, nameContains: 'AGR' }, ref: agree })).resolves.toMatchObject({
+          result: {
+            attempts: 1,
+            predicates: [
+              { expect: 'checked', status: 'passed' },
+              { expect: 'enabled', status: 'passed' },
+              { expect: 'nameContains', status: 'passed' },
+            ],
+            status: 'passed',
+            window: 'window-1',
+          },
+        });
+
+        await session.act({ action: 'activate', find: { automationId: 'agree' } });
+        const { result } = await session.check({ expect: { checked: false, name: 'Agree' }, ref: agree });
+        expect(result).toMatchObject({ status: 'failed' });
+        expect(result.predicates).toEqual([
+          { actual: true, expect: 'checked', status: 'failed' },
+          { expect: 'name', status: 'passed' },
+        ]);
+
+        harness.host.setElementStateUnsupported('agree', 'expanded', 'not reported');
+        await expect(session.check({ expect: { expanded: false }, ref: agree })).resolves.toMatchObject({
+          result: { predicates: [{ expect: 'expanded', status: 'unsupported' }], status: 'unsupported' },
+        });
+
+        const field = await refTo(session, { automationId: 'field' });
+        await expect(session.check({ expect: { value: '' }, ref: field })).resolves.toMatchObject({ result: { status: 'passed' } });
+        await session.act({ action: 'type', find: { automationId: 'field' }, text: 'Hello' });
+        await expect(session.check({ expect: { valueContains: 'hELLO' }, ref: field })).resolves.toMatchObject({
+          result: { status: 'passed' },
+        });
+        await expect(session.check({ expect: { value: 'Help' }, ref: field })).resolves.toMatchObject({
+          result: { predicates: [{ actual: 'Hello', expect: 'value', status: 'failed' }], status: 'failed' },
+        });
+        expect(JSON.stringify((await session.journal()).result)).not.toMatch(/Hello|Help|AGR/);
+      });
+    });
+
+    test('counts what a selector matches, and never calls an incomplete search an absence', async () => {
+      await withFixture({ windows: actWindow }, async ({ session }) => {
+        await expect(session.check({ find: { name: 'Dup' }, matches: 'some' })).resolves.toMatchObject({
+          result: { search: { definite: 2, outcome: 'multiple' }, status: 'passed' },
+        });
+        await expect(session.check({ find: { name: 'Dup' }, matches: 'unique' })).resolves.toMatchObject({ result: { status: 'failed' } });
+        await expect(session.check({ find: { automationId: 'missing' }, matches: 'none' })).resolves.toMatchObject({
+          result: { search: { outcome: 'none' }, status: 'passed' },
+        });
+        const [counted] = (await session.journal()).result.entries.filter((entry) => entry.operation === 'check');
+        expect(counted.summary).toEqual({ attempts: 1, by: 'name', matches: 'some', status: 'passed', waitMs: 0 });
+
+        const { result } = await session.check({ expect: { checked: false }, find: { automationId: 'agree' } });
+        expect(result).toMatchObject({ ref: expect.any(String), sample: expect.any(String), status: 'passed' });
+        await expect(session.act({ action: 'activate', ref: result.ref!, sample: result.sample! })).resolves.toBeDefined();
+      });
+      await withFixture(
+        { observation: { unreadableChildrenOf: ['n'] }, windows: treeWindows({ depth: 1, fanout: 1 }) },
+        async ({ session }) => {
+          await expect(session.check({ find: { automationId: 'missing' }, matches: 'none' })).resolves.toMatchObject({
+            result: { search: { outcome: 'inconclusive', reasons: ['incomplete'] }, status: 'inconclusive' },
+          });
+        },
+      );
+    });
+
+    test('passes an absence only once the provider says the element is gone, and stops waiting on a gone element', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        const save = await refTo(session, { automationId: 'save' });
+        await expect(session.check({ expect: { present: false }, ref: save })).resolves.toMatchObject({ result: { status: 'failed' } });
+        harness.host.removeElement('save');
+        await expect(session.check({ expect: { present: false }, ref: save, waitMs: 5_000 })).resolves.toMatchObject({
+          result: { attempts: 1, status: 'passed' },
+        });
+
+        const off = await refTo(session, { automationId: 'off' });
+        harness.host.removeElement('off');
+        await expect(session.check({ expect: { enabled: false }, ref: off, waitMs: 5_000 })).resolves.toMatchObject({
+          result: { attempts: 1, predicates: [{ actual: false, expect: 'present', status: 'failed' }], status: 'failed' },
+        });
+      });
+    });
+
+    test('waits until the expectation holds, or says the wait ran out and what it last saw', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        setTimeout(() => {
+          harness.host.addElement({
+            automationId: 'later',
+            id: 'later',
+            name: 'Later',
+            parentId: 'root',
+            rect: { height: 30, width: 100, x: 10, y: 400 },
+            role: 'button',
+            scope: 'preview',
+            windowId: 'window-1',
+          });
+        }, 150);
+        const appeared = await session.check({ find: { automationId: 'later' }, matches: 'unique', waitMs: 5_000 });
+        expect(appeared.result).toMatchObject({ ref: expect.any(String), status: 'passed' });
+        expect(appeared.result.attempts).toBeGreaterThan(1);
+
+        const agree = await refTo(session, { automationId: 'agree' });
+        const waited = await session.check({ expect: { checked: true }, ref: agree, waitMs: 250 });
+        expect(waited.result).toMatchObject({ last: 'failed', predicates: [{ actual: false, status: 'failed' }], status: 'timed-out' });
+        expect(waited.result.attempts).toBeGreaterThan(1);
+        expect(waited.result.elapsedMs).toBeGreaterThanOrEqual(250);
+      });
+    });
+
+    test('refuses displayed content when the operator denies it, and malformed requests', async () => {
+      await withFixture(
+        { windows: actWindow },
+        async ({ post, session }) => {
+          const field = await refTo(session, { automationId: 'field' });
+          await expect(session.check({ expect: { value: '' }, ref: field })).rejects.toMatchObject(
+            operationFailure('unsupported operation', 'content-denied', 'check'),
+          );
+          await expect(session.check({ expect: { name: 'Field' }, ref: field })).resolves.toMatchObject({ result: { status: 'passed' } });
+          for (const input of [
+            { expect: { enabled: true }, find: { automationId: 'field' }, ref: field },
+            { matches: 'none', ref: field },
+            { expect: { present: false }, find: { automationId: 'field' } },
+            { expect: { enabled: true, present: false }, ref: field },
+            { expect: {}, ref: field },
+            { expect: { enabled: true }, ref: field, waitMs: 30_001 },
+          ]) {
+            expect((await post('check', { input })).value).toMatchObject({ error: 'invalid argument' });
+          }
+        },
+        { operations: { content: 'deny' } },
+      );
+    });
   });
 
   describe('a quarantined target', () => {

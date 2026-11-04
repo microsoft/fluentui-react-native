@@ -14,6 +14,8 @@ import type { ReferenceEntry } from './refs.js';
 import { registerOperation } from './runtime.js';
 import type { OperationCapabilities, OperationRuntime } from './runtime.js';
 import { flushLedger, interpretFailure } from './sampling.js';
+import { searchSelector, selectorKeys, selectorSchema } from './selector.js';
+import type { Selector } from './selector.js';
 import { referenceSchema, sampleIdSchema, warningSchema } from './shapes.js';
 
 /** How far up from a hit-tested element the check walks to find the target. Deeper nesting is reported as obscured. */
@@ -44,11 +46,20 @@ export const actInput = z
       .describe(
         "click: a physical pointer click at the hit-tested centre. activate: the element's default accessibility action, no pointer. type: keyboard input after focusing. clear: empty the value.",
       ),
-    ref: referenceSchema.describe('A reference from a find whose outcome was unique.'),
-    sample: sampleIdSchema.describe('The sample id of that find, which proved the reference unique.'),
+    find: selectorSchema.optional().describe('Instead of ref and sample: a selector a complete search, run now, must prove unique.'),
+    ref: referenceSchema.optional().describe('A reference from a find whose outcome was unique. Give sample with it.'),
+    sample: sampleIdSchema.optional().describe('The sample id of that find, which proved the reference unique.'),
     text: z.string().min(1).max(maxTypedTextLength).optional().describe('Text to type. Only with type; never recorded.'),
   })
-  .refine((input) => (input.action === 'type') === (input.text !== undefined), { message: 'Give text with type, and only with type.' });
+  .refine((input) => (input.action === 'type') === (input.text !== undefined), { message: 'Give text with type, and only with type.' })
+  .refine(
+    (input) =>
+      input.find === undefined
+        ? input.ref !== undefined && input.sample !== undefined
+        : input.ref === undefined && input.sample === undefined,
+    { message: 'Give ref with sample, or find, not both.' },
+  )
+  .describe('Name the element by ref with the sample that proved it unique, or by find.');
 
 export type ActInput = z.input<typeof actInput>;
 
@@ -57,6 +68,7 @@ export const actOutput = z.strictObject({
   disposition: z.literal('applied').describe('The provider reported the action done. A failure says whether anything landed.'),
   mechanism: z.enum(actionMechanisms).describe('How the action was carried out. Semantic activation is never physical input.'),
   ref: z.string(),
+  sample: z.string().describe('The sample that proved the element unique; cite it with ref to act on the element again.'),
   warnings: z.array(warningSchema).optional(),
   window: z.string(),
 });
@@ -133,6 +145,46 @@ export function resolveProven(runtime: OperationRuntime, ref: string, sample: st
     throw rejection(runtime, 'stale element reference', 'ref-stale', `Reference "${ref}" no longer names the proven element.`);
   }
   return { entry: resolution.entry, proof };
+}
+
+/**
+ * Proves a selector names exactly one element with a complete search run now, exactly as `find` would, records the
+ * proof, and resolves the match. Anything short of a unique match is refused before the input turn, asking the caller
+ * to narrow the selector rather than acting on a guess.
+ */
+export async function proveSelector(
+  runtime: OperationRuntime,
+  selector: Selector,
+): Promise<{ entry: ReferenceEntry; proof: UniquenessProof }> {
+  let search;
+  try {
+    search = (await searchSelector(runtime, selector, { issueUnique: true })).value;
+  } catch (error) {
+    throw asRejection(runtime, error);
+  }
+  const { classification, proof } = search;
+  if (proof) {
+    runtime.state.proofs.record(proof);
+    return resolveProven(runtime, proof.reference, proof.sample);
+  }
+  switch (classification.outcome) {
+    case 'none':
+      throw rejection(runtime, 'no such element', 'no-match', 'Nothing matches the selector. Observe the window to see what is there.');
+    case 'multiple':
+      throw rejection(
+        runtime,
+        'invalid argument',
+        'selector-not-unique',
+        `${search.complete ? classification.definite.length : 'At least ' + classification.definite.length} elements match the selector, so it names none of them. Narrow it, or run find and cite one match.`,
+      );
+    default:
+      throw rejection(
+        runtime,
+        'invalid argument',
+        'selector-inconclusive',
+        `The search could not prove only one element matches (${classification.reasons.join(', ')}). Narrow it with within or another predicate, or run find.`,
+      );
+  }
 }
 
 /** Reads the element again, immediately before acting: the provider's liveness check and the fingerprint precondition. */
@@ -242,7 +294,7 @@ export async function performAction(runtime: OperationRuntime, input: ActOptions
     throw quarantinedError(runtime);
   }
   assertActionSupported(runtime, input.action);
-  const { entry, proof } = resolveProven(runtime, input.ref, input.sample);
+  const { entry, proof } = input.find ? await proveSelector(runtime, input.find) : resolveProven(runtime, input.ref!, input.sample!);
   try {
     await runtime.input(async () => {
       if (runtime.signal.aborted) {
@@ -265,7 +317,8 @@ export async function performAction(runtime: OperationRuntime, input: ActOptions
     action: input.action,
     disposition: 'applied',
     mechanism: mechanismOf[input.action],
-    ref: input.ref,
+    ref: entry.reference,
+    sample: proof.sample,
     ...(warnings.length > 0 ? { warnings } : {}),
     window: entry.windowId,
   };
@@ -278,14 +331,14 @@ export const actOperation = registerOperation({
   name: 'act',
   output: actOutput,
   summary:
-    'Clicks, activates, types into, or clears one element. Cite a reference and the sample of a find that proved it unique. Name your own requestId: repeating it returns the first outcome instead of acting twice.',
+    'Clicks, activates, types into, or clears one element: a reference with the sample of a find that proved it unique, or a selector proven unique now. Name your own requestId: repeating it returns the first outcome instead of acting twice.',
   run: (input, runtime) => performAction(runtime, input),
   summarize(input, output) {
+    const by = input.find ? selectorKeys(input.find) : undefined;
     return {
       action: input.action,
-      ref: input.ref,
-      sample: input.sample,
-      ...(output ? { mechanism: output.mechanism } : {}),
+      ...(by === undefined ? { ref: input.ref!, sample: input.sample! } : { by }),
+      ...(output ? { mechanism: output.mechanism, ...(by === undefined ? {} : { ref: output.ref, sample: output.sample }) } : {}),
     };
   },
 });

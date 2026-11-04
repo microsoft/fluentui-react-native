@@ -10,15 +10,15 @@ owner_paths:
 Operations are the bounded, schema-described calls an agent makes instead of
 reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
-results sized by explicit budgets. Four exist today: the reads `observe`,
-`find`, and `journal`, and `act`, which changes the application. Waits, checks,
-capture, controller lifecycle, and the MCP adapter that will expose these
-operations are open work in the [implementation plan](remaining-work.md).
+results sized by explicit budgets. Five exist today: the reads `observe`,
+`find`, `check`, and `journal`, and `act`, which changes the application.
+Sequences, capture, controller lifecycle, and the MCP adapter that will expose
+these operations are open work in the [implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
 ([FDR1](../native/PROTOCOL.md#bounded-observation)): the macOS helper and the
 fake host today. The Windows helper is open work. On any other provider the
-catalog reports `observe`, `find`, and `act` as unavailable with
+catalog reports `observe`, `find`, `act`, and `check` as unavailable with
 `bounded-observation-unsupported`, and the driver never substitutes the
 unbounded `tree`.
 
@@ -65,7 +65,7 @@ Each entry has `name`, `summary`, `effect` (`read` or `mutate`), `available`,
 the same Zod schemas the executor validates with. Output schemas do not forbid
 unknown properties: a result may gain optional fields within a schema version,
 so consumers ignore fields they do not know. Descriptions are written for a
-model reader, and the whole catalog stays near 15 KB because MCP clients load
+model reader, and the whole catalog stays near 20 KB because MCP clients load
 it into context. An adapter may omit `outputSchema` from `tools/list` to save
 more.
 
@@ -167,16 +167,24 @@ it. Matches are definite first, then possible, each in document order, and carry
 
 ## act
 
-Changes one element. It names the element by a reference from a `find` whose
-outcome was `unique`, and cites that find's `sample` id, so nothing can act on an
-element no search proved unique.
+Changes one element. Nothing can act on an element no search proved unique, so
+the element is named one of two ways: by a reference from a `find` or `check`
+whose search proved it unique, citing that search's `sample` id, or by a
+selector that a search run now must prove unique.
 
-| Input    | Meaning                                                       |
-| -------- | ------------------------------------------------------------- |
-| `action` | `click`, `activate`, `type`, or `clear`                       |
-| `ref`    | The reference the cited find returned as its only match       |
-| `sample` | That find's `sample.id`                                       |
-| `text`   | Up to 4,096 characters to type; required with `type`, only it |
+| Input    | Meaning                                                            |
+| -------- | ------------------------------------------------------------------ |
+| `action` | `click`, `activate`, `type`, or `clear`                            |
+| `ref`    | The reference the cited search returned as its only match          |
+| `sample` | That search's `sample.id`                                          |
+| `find`   | A selector with `find`'s predicates, instead of `ref` and `sample` |
+| `text`   | Up to 4,096 characters to type; required with `type`, only it      |
+
+A selector that matches nothing fails with `no-match`, more than one element
+with `selector-not-unique`, and a search that could not be completed with
+`selector-inconclusive`; nothing is dispatched. A unique match's proof is
+recorded like a `find`'s, and the result returns its `ref` and `sample` so the
+element can be cited again without another search.
 
 | Action     | Mechanism          | What the provider does                                                         |
 | ---------- | ------------------ | ------------------------------------------------------------------------------ |
@@ -223,6 +231,50 @@ response can retry. The repeat is journaled with the summary `{ "replay": true
 The session keeps the 256 most recent outcomes; a request with no `requestId`
 is never recorded. A request that fails validation or availability is not
 recorded either, so it can be corrected and sent under the same id.
+
+## check
+
+Asks whether the application is in an expected state, and can wait up to 30
+seconds for it to get there. It is a read: it never changes the application and
+runs while the target is quarantined.
+
+| Input     | Meaning                                                                    |
+| --------- | -------------------------------------------------------------------------- |
+| `ref`     | An element to read; needs `expect`                                         |
+| `find`    | A selector to search for; needs `expect` or `matches`                      |
+| `expect`  | States, name, value, or text the element must have                         |
+| `matches` | With `find`: `none`, `unique`, or `some` elements must match               |
+| `waitMs`  | How long to keep checking until the expectation holds (default 0, max 30s) |
+
+`expect` takes `checked` (`true`, `false`, or `"mixed"`), `enabled`, `expanded`,
+`focused`, `selected`, `visible`, `name`, `value`, `text`, their case-insensitive
+`nameContains`, `valueContains`, and `textContains` forms, and, with `ref` only,
+`present`. `present: false` stands alone: it passes once the provider says the
+element is gone. A field and its partial form cannot be given together. With
+`find` and `expect`, the search must prove one element unique; the result
+returns its `ref` and `sample`, which `act` accepts.
+
+| Status         | Meaning                                                                 |
+| -------------- | ----------------------------------------------------------------------- |
+| `passed`       | Every expectation held                                                  |
+| `failed`       | An expectation did not hold                                             |
+| `unsupported`  | The provider does not report a state or field the check needs           |
+| `inconclusive` | The search could not be completed, so absence or uniqueness is unproven |
+| `timed-out`    | `waitMs` ran out; `last` is the final attempt's status                  |
+
+Each predicate reports its own status and, when it failed, the `actual` value,
+clipped to 120 characters with invisible characters made visible. A `find`
+check also reports the search outcome and counts. A check never calls an
+incomplete search an absence: `matches: "none"` over an unreadable subtree is
+`inconclusive`.
+
+Waiting re-evaluates on the provider's change events for the window, on a new
+window, or on the application exiting, and otherwise polls from 100 ms backing
+off to 1 second. Only `failed` and `inconclusive` are retried: an element the
+provider says is gone stays gone, so a `ref` check that expects anything other
+than its absence fails at once. The result reports `attempts` and `elapsedMs`.
+Only the final search's proof is recorded, so a long wait does not evict the
+proofs the caller holds.
 
 ## References and provider records
 
@@ -290,6 +342,9 @@ rebuilt `mutation` report.
 | `action-unsupported`              | `unsupported operation`     | The provider cannot perform this action                 |
 | `sample-not-unique`               | `invalid argument`          | The sample proved nothing unique, or it was forgotten   |
 | `ref-not-proven`                  | `invalid argument`          | The sample proved a different reference unique          |
+| `no-match`                        | `no such element`           | `act`'s selector matched nothing                        |
+| `selector-not-unique`             | `invalid argument`          | `act`'s selector matched more than one element          |
+| `selector-inconclusive`           | `invalid argument`          | `act`'s search could not be completed                   |
 | `fingerprint-changed`             | `stale element reference`   | The element's role, name, or automation id changed      |
 | `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                      |
 | `obscured`                        | `element click intercepted` | Something else is at the element's centre               |
@@ -309,9 +364,9 @@ createDesktopDriverServer({ targets, operations: { content: 'deny' } });
 ```
 
 The default is `allow`. Under `deny`, a request for content facts, the
-`content` view, or a `text` or `textContains` predicate fails with
-`content-denied`; names and states stay available. A request cannot change the
-policy.
+`content` view, a `text` or `textContains` predicate, or a `check` expecting a
+value or text fails with `content-denied`; names and states stay available. A
+request cannot change the policy.
 
 The policy cannot see inside identifiers. An application that puts what it
 displays into a name or automation id still shows it under `deny`: Calculator's
@@ -320,8 +375,9 @@ value is what the field displays.
 
 Each session keeps a bounded journal of 500 entries: operation, request id,
 outcome, effect, timing, an error code and reason, and scalar summary fields the
-operation declared safe (for `find`, the names of the predicates, never their
-values). Typed text, displayed content, and error messages never enter it. The
+operation declared safe (for `find` and `check`, the names of the predicates
+and expectations, never their values). Typed text, expected text, displayed
+content, and error messages never enter it. The
 `journal` operation reads it in pages (default 50, at most 200) with `after` and
 `next` cursors and reports `dropped` entries; it is not itself journaled.
 
