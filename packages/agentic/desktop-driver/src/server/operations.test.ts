@@ -85,6 +85,55 @@ function operationFailure(code: string, reason: string, operation: string) {
   return { code, data: { operation, reason, requestId: requestIdPattern, schemaVersion: 1 } };
 }
 
+const actWindow: FakeDesktopHostOptions['windows'] = [
+  {
+    elements: [
+      {
+        id: 'root',
+        name: 'Form',
+        rect: { height: 600, width: 800, x: 0, y: 0 },
+        role: 'window',
+        scope: 'application',
+        windowId: 'window-1',
+      },
+      ...(
+        [
+          ['save', 'button', 'Save', 10, {}],
+          ['off', 'button', 'Off', 50, { enabled: false }],
+          ['hidden', 'button', 'Hidden', 90, { visible: false }],
+          ['covered', 'button', 'Covered', 130, {}],
+          ['overlay', 'group', 'Overlay', 120, {}],
+          ['field', 'textbox', 'Field', 200, { value: '' }],
+          ['agree', 'checkbox', 'Agree', 240, { checked: false }],
+          ['dup-1', 'button', 'Dup', 280, {}],
+          ['dup-2', 'button', 'Dup', 320, {}],
+        ] as const
+      ).map(([id, role, name, y, extra]) => ({
+        automationId: id,
+        id,
+        name,
+        parentId: 'root',
+        rect: { height: id === 'overlay' ? 60 : 30, width: id === 'overlay' ? 300 : 100, x: 10, y },
+        role,
+        scope: 'preview' as const,
+        windowId: 'window-1',
+        ...extra,
+      })),
+    ],
+    id: 'window-1',
+    title: 'Form',
+  },
+];
+
+/** Finds one element by automation id and returns what `act` needs to cite it. */
+async function proven(session: DesktopSessionClient, automationId: string): Promise<{ ref: string; sample: string }> {
+  const { result } = await session.find({ automationId });
+  expect(result.outcome).toBe('unique');
+  return { ref: result.matches[0].ref, sample: result.sample.id };
+}
+
+const rejected = (quarantined = false) => ({ disposition: 'rejected', effect: 'none', quarantined });
+
 async function refTo(session: DesktopSessionClient, selector: Parameters<DesktopSessionClient['find']>[0]): Promise<string> {
   const { matches } = (await session.find(selector)).result;
   return matches[0].ref;
@@ -98,6 +147,7 @@ describe('Desktop Driver agent operations', () => {
         const entries = Object.fromEntries(catalog.operations.map((entry) => [entry.name, entry]));
         expect(catalog.schemaVersion).toBe(1);
         expect(entries).toMatchObject({
+          act: { available: true, effect: 'mutate' },
           find: { available: true, effect: 'read' },
           journal: { available: true, effect: 'read' },
           observe: { available: true, effect: 'read' },
@@ -441,6 +491,157 @@ describe('Desktop Driver agent operations', () => {
         expect(journal).toContain('"operation":"find"');
         expect(journal).not.toContain('Primary');
         expect(journal).not.toContain('button-primary');
+      });
+    });
+  });
+
+  describe('act', () => {
+    test('clicks, activates, types into, and clears a proven element, and says how each was carried out', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        await expect(session.act({ action: 'click', ...(await proven(session, 'agree')) })).resolves.toMatchObject({
+          result: { action: 'click', disposition: 'applied', mechanism: 'physical-pointer', window: 'window-1' },
+        });
+        await expect(session.act({ action: 'activate', ...(await proven(session, 'save')) })).resolves.toMatchObject({
+          result: { mechanism: 'accessibility' },
+        });
+        const field = await proven(session, 'field');
+        await expect(session.act({ action: 'type', text: 'secret words', ...field })).resolves.toMatchObject({
+          result: { mechanism: 'keyboard' },
+        });
+        await expect(session.act({ action: 'clear', ...field })).resolves.toMatchObject({ result: { mechanism: 'provider' } });
+
+        const dispatched = harness.host.actions.map(({ elementId, ...action }) =>
+          // The fake issues a fresh record id, such as `save~2`, each time an element is observed again.
+          elementId === undefined ? action : { ...action, elementId: String(elementId).split('~')[0] },
+        );
+        expect(dispatched).toEqual(
+          expect.arrayContaining([
+            { type: 'activate', windowId: 'window-1' },
+            { elementId: 'agree', mode: 'physical', type: 'click' },
+            { elementId: 'save', mode: 'accessibility', type: 'click' },
+            { elementId: 'field', text: 'secret words', type: 'send-keys' },
+            { elementId: 'field', type: 'clear' },
+          ]),
+        );
+        const journal = await session.journal();
+        expect(journal.result.entries.filter((entry) => entry.operation === 'act')).toMatchObject([
+          { effect: 'mutate', outcome: 'ok', summary: { action: 'click', mechanism: 'physical-pointer' } },
+          { summary: { action: 'activate', mechanism: 'accessibility' } },
+          { summary: { action: 'type', mechanism: 'keyboard' } },
+          { summary: { action: 'clear', mechanism: 'provider' } },
+        ]);
+        expect(JSON.stringify(journal.result)).not.toContain('secret words');
+      });
+    });
+
+    test('acts only on a reference the cited find proved unique', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, post, session }) => {
+        const several = await session.find({ name: 'Dup' });
+        expect(several.result.outcome).toBe('multiple');
+        const save = await proven(session, 'save');
+        const agree = await proven(session, 'agree');
+        const refused = (reason: string, code = 'invalid argument') => ({
+          ...operationFailure(code, reason, 'act'),
+          data: { ...operationFailure(code, reason, 'act').data, mutation: rejected() },
+        });
+
+        await expect(
+          session.act({ action: 'activate', ref: several.result.matches[0].ref, sample: several.result.sample.id }),
+        ).rejects.toMatchObject(refused('sample-not-unique'));
+        await expect(session.act({ action: 'activate', ref: save.ref, sample: agree.sample })).rejects.toMatchObject(
+          refused('ref-not-proven'),
+        );
+        await expect(session.act({ action: 'activate', ref: save.ref, sample: 'o999' })).rejects.toMatchObject(
+          refused('sample-not-unique'),
+        );
+
+        harness.host.setElementName('save', 'Saved');
+        await expect(session.act({ action: 'activate', ...save })).rejects.toMatchObject(
+          refused('fingerprint-changed', 'stale element reference'),
+        );
+
+        for (const input of [
+          { action: 'click', text: 'x', ...agree },
+          { action: 'type', ...agree },
+          { action: 'activate', ref: save.ref, sample: 'not a sample' },
+        ]) {
+          expect((await post('act', { input })).value).toMatchObject({ error: 'invalid argument' });
+        }
+        expect(harness.host.actions.filter((action) => action.type === 'click')).toEqual([]);
+      });
+    });
+
+    test('refuses an element that is disabled, hidden from a pointer, or covered, and an action the provider lacks', async () => {
+      await withFixture({ features: { keyboard: false }, windows: actWindow }, async ({ harness, session }) => {
+        const failure = (code: string, reason: string) => ({ code, data: { mutation: rejected(), reason } });
+        await expect(session.act({ action: 'activate', ...(await proven(session, 'off')) })).rejects.toMatchObject(
+          failure('element not interactable', 'not-enabled'),
+        );
+        const hidden = await proven(session, 'hidden');
+        await expect(session.act({ action: 'click', ...hidden })).rejects.toMatchObject(failure('element not interactable', 'not-visible'));
+        const covered = await proven(session, 'covered');
+        await expect(session.act({ action: 'click', ...covered })).rejects.toMatchObject(failure('element click intercepted', 'obscured'));
+        await expect(session.act({ action: 'type', text: 'x', ...(await proven(session, 'field')) })).rejects.toMatchObject(
+          failure('unsupported operation', 'action-unsupported'),
+        );
+        expect(harness.host.actions.filter((action) => action.type === 'click')).toEqual([]);
+
+        await expect(session.act({ action: 'activate', ...hidden })).resolves.toMatchObject({ result: { mechanism: 'accessibility' } });
+        await expect(session.act({ action: 'activate', ...covered })).resolves.toMatchObject({ result: { mechanism: 'accessibility' } });
+      });
+    });
+
+    test('answers a repeated request id with the first outcome, and refuses the id for a different request', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        const agree = await proven(session, 'agree');
+        const first = await session.act({ action: 'activate', ...agree }, { requestId: 'toggle-1' });
+        await expect(session.act({ action: 'activate', ...agree }, { requestId: 'toggle-1' })).resolves.toEqual(first);
+        expect(harness.host.actions.filter((action) => action.type === 'click')).toHaveLength(1);
+
+        await expect(session.act({ action: 'click', ...agree }, { requestId: 'toggle-1' })).rejects.toMatchObject({
+          code: 'invalid argument',
+          data: { reason: 'request-id-reused', requestId: 'toggle-1' },
+        });
+
+        harness.host.injectFault('click', { effect: 'none', mode: 'reject' });
+        const failed = session.act({ action: 'activate', ...agree }, { requestId: 'toggle-2' });
+        await expect(failed).rejects.toMatchObject({ data: { mutation: rejected() } });
+        // The fault is spent, so running the request again would succeed; the repeat reports the first outcome instead.
+        await expect(session.act({ action: 'activate', ...agree }, { requestId: 'toggle-2' })).rejects.toMatchObject({
+          data: { mutation: rejected(), requestId: 'toggle-2' },
+        });
+        expect(harness.host.actions.filter((action) => action.type === 'click')).toHaveLength(1);
+
+        const entries = (await session.journal()).result.entries.filter((entry) => entry.operation === 'act');
+        expect(entries.map((entry) => [entry.requestId, entry.outcome, entry.summary?.replay ?? false])).toEqual([
+          ['toggle-1', 'ok', false],
+          ['toggle-1', 'ok', true],
+          ['toggle-1', 'error', false],
+          ['toggle-2', 'error', false],
+          ['toggle-2', 'error', true],
+        ]);
+      });
+    });
+
+    test('quarantines the target when an action may still land, then refuses actions in fixed words while reads continue', async () => {
+      await withFixture({ faults: { click: { mode: 'lost-response' } }, windows: actWindow }, async ({ harness, session }) => {
+        const save = await proven(session, 'save');
+        const timeouts = harness.server.sessions.get(session.id).desktopTimeouts;
+        const previous = timeouts.nativeCommand;
+        timeouts.nativeCommand = 10;
+        try {
+          await expect(session.act({ action: 'activate', ...save })).rejects.toMatchObject({
+            code: 'timeout',
+            data: { mutation: { disposition: 'indeterminate', quarantined: true } },
+          });
+        } finally {
+          timeouts.nativeCommand = previous;
+        }
+
+        const refusal = await session.act({ action: 'activate', ...save }).catch((error: unknown) => error);
+        expect(refusal).toMatchObject({ code: 'unknown error', data: { mutation: rejected(true), reason: 'target-quarantined' } });
+        expect((refusal as Error).message).not.toMatch(/Activating|reference/);
+        await expect(session.find({ automationId: 'save' })).resolves.toMatchObject({ session: { quarantined: true } });
       });
     });
   });

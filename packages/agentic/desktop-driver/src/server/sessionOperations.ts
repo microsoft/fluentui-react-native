@@ -35,7 +35,15 @@ export function createOperationRuntime(
   const nativeHost = session.target.host;
   const observe = nativeHost.observe?.bind(nativeHost);
   const releaseElements = nativeHost.releaseElements?.bind(nativeHost);
+  const subscribe = nativeHost.subscribe?.bind(nativeHost);
+  const features = session.hostInfo.features;
   const host: OperationHost = {
+    activate: (windowId, signal) => nativeHost.activate(windowId, signal),
+    captureElement: (nativeId, signal) => nativeHost.captureElement(nativeId, signal),
+    captureWindow: (windowId, signal) => nativeHost.captureWindow(windowId, signal),
+    clear: (nativeId, signal) => nativeHost.clear(nativeId, signal),
+    click: (nativeId, mode, signal) => nativeHost.click(nativeId, mode, signal),
+    hitTest: (windowId, x, y, signal) => nativeHost.hitTest(windowId, x, y, signal),
     observe(request, signal) {
       if (!observe) {
         throw new HostUnsupportedError(`Target "${session.target.id}" does not support bounded observation.`);
@@ -48,20 +56,37 @@ export function createOperationRuntime(
       }
       return releaseElements(nativeIds, signal);
     },
+    sendKeys: (nativeId, text, signal) => nativeHost.sendKeys(nativeId, text, signal),
+    snapshot: (nativeId, signal) => nativeHost.snapshot(nativeId, signal),
+    ...(subscribe ? { subscribe } : {}),
   };
+  const sessionSignal = session.commandAbortController.signal;
   return {
-    capabilities: { boundedObservation: session.hostInfo.features.boundedObservation === true && !!observe && !!releaseElements },
+    capabilities: {
+      accessibilityClick: features.accessibilityClick,
+      boundedObservation: features.boundedObservation === true && !!observe && !!releaseElements,
+      elementCapture: features.elementScreenshot,
+      keyboard: features.keyboard,
+      physicalClick: features.physicalClick,
+      windowCapture: features.screenshot,
+    },
     cleanup: (description, run) => withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description),
     command: (description, run) =>
       withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description, {
-        signal: AbortSignal.any([options.signal, session.commandAbortController.signal]),
+        signal: AbortSignal.any([options.signal, sessionSignal]),
       }),
     contentPolicy: options.contentPolicy,
     currentWindowId: () => session.currentWindowId || undefined,
     host,
+    input: (run) => sessions.runInputCommand(run),
+    mutate: (description, run) =>
+      sessions.runMutation(session, description, () =>
+        withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description, { signal: sessionSignal }),
+      ),
     nativeTimeoutMs: () => session.desktopTimeouts.nativeCommand,
     previewGeneration: () => session.previewGeneration,
     quarantined: () => sessions.getQuarantine(session.target.id) !== undefined,
+    signal: options.signal,
     state: session.operations,
   };
 }

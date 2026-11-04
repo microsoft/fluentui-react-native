@@ -10,15 +10,15 @@ owner_paths:
 Operations are the bounded, schema-described calls an agent makes instead of
 reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
-results sized by explicit budgets. Three exist today, all reads: `observe`,
-`find`, and `journal`. Actions, waits, checks, capture, controller lifecycle,
-and the MCP adapter that will expose these operations are open work in the
-[implementation plan](remaining-work.md).
+results sized by explicit budgets. Four exist today: the reads `observe`,
+`find`, and `journal`, and `act`, which changes the application. Waits, checks,
+capture, controller lifecycle, and the MCP adapter that will expose these
+operations are open work in the [implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
 ([FDR1](../native/PROTOCOL.md#bounded-observation)): the macOS helper and the
 fake host today. The Windows helper is open work. On any other provider the
-catalog reports `observe` and `find` as unavailable with
+catalog reports `observe`, `find`, and `act` as unavailable with
 `bounded-observation-unsupported`, and the driver never substitutes the
 unbounded `tree`.
 
@@ -51,7 +51,7 @@ still run). `session.incarnation` changes when the application restarts;
 references never cross one.
 
 `DesktopSessionClient` (`/client`) wraps the routes as `operations()`,
-`operation(name, input, { requestId })`, `observe()`, `find()`, and
+`operation(name, input, { requestId })`, `observe()`, `find()`, `act()`, and
 `journal()`. `/operations` exports `executeOperation`, `describeOperations`,
 `lookupOperation`, `OperationSessionState`, and the request, response, and
 result types. The server builds the `OperationRuntime` in
@@ -65,7 +65,7 @@ Each entry has `name`, `summary`, `effect` (`read` or `mutate`), `available`,
 the same Zod schemas the executor validates with. Output schemas do not forbid
 unknown properties: a result may gain optional fields within a schema version,
 so consumers ignore fields they do not know. Descriptions are written for a
-model reader, and the whole catalog stays near 13 KB because MCP clients load
+model reader, and the whole catalog stays near 15 KB because MCP clients load
 it into context. An adapter may omit `outputSchema` from `tools/list` to save
 more.
 
@@ -165,6 +165,65 @@ it. Matches are definite first, then possible, each in document order, and carry
 `ref`, `role`, `name`, `automationId`, `path` (the nearest named ancestors), and
 `clipped`. `more` counts candidates beyond `limit`.
 
+## act
+
+Changes one element. It names the element by a reference from a `find` whose
+outcome was `unique`, and cites that find's `sample` id, so nothing can act on an
+element no search proved unique.
+
+| Input    | Meaning                                                       |
+| -------- | ------------------------------------------------------------- |
+| `action` | `click`, `activate`, `type`, or `clear`                       |
+| `ref`    | The reference the cited find returned as its only match       |
+| `sample` | That find's `sample.id`                                       |
+| `text`   | Up to 4,096 characters to type; required with `type`, only it |
+
+| Action     | Mechanism          | What the provider does                                                         |
+| ---------- | ------------------ | ------------------------------------------------------------------------------ |
+| `click`    | `physical-pointer` | Activates the window, hit-tests the element's centre, and clicks there         |
+| `activate` | `accessibility`    | Performs the element's default accessibility action; no pointer moves          |
+| `type`     | `keyboard`         | Focuses the element and synthesizes key input                                  |
+| `clear`    | `provider`         | Empties the value: sets it directly when the element allows, otherwise by keys |
+
+The result reports the `mechanism`, so physical and semantic evidence stay
+distinguishable, and `disposition: "applied"`: the provider reported the action
+done. Whether the application then did what the agent intended is for a later
+read to establish.
+
+Before dispatching, `act` checks, in order:
+
+1. The target is not quarantined.
+2. The provider supports the action (`click` needs `physicalClick`, `activate`
+   needs `accessibilityClick`, `type` needs `keyboard`).
+3. The cited sample proved a reference unique, and it is this reference. The
+   service keeps the 64 most recent proofs; an application restart clears them.
+4. The reference resolves, to the same provider element the proof named.
+
+Then, inside the target's input turn, so no other input interleaves, it reads
+the element again and requires its role, name, and automation id to match what
+the sample showed (a clipped field matches by prefix). That fingerprint is a
+precondition, not an identity: the provider's liveness check is what says the
+element is still the one referenced. `click`, `activate`, and `type` need the
+element enabled; `click` needs it visible and the element at its centre to be
+it or inside it. A covered element fails with `obscured`, which `activate` does
+not check.
+
+Each primary step runs as a settled mutation, so a failure reports what it did
+in `data.mutation`: `rejected` with effect `none` when nothing was dispatched,
+or a disposition such as `indeterminate` that quarantines the target. Typed
+text never enters the journal, a mutation description, or an error.
+
+### Retrying safely
+
+A mutating request whose caller chose the `requestId` is recorded with a digest
+of its validated input. Repeating the id with the same request returns the first
+outcome, success or failure, and never acts again, so a caller that lost a
+response can retry. The repeat is journaled with the summary `{ "replay": true
+}`. Repeating the id with a different request fails with `request-id-reused`.
+The session keeps the 256 most recent outcomes; a request with no `requestId`
+is never recorded. A request that fails validation or availability is not
+recorded either, so it can be corrected and sent under the same id.
+
 ## References and provider records
 
 A reference is an opaque `<tag><serial>` string. The tag is random per session
@@ -214,19 +273,27 @@ is bounded to 300 characters with invisible characters made visible, and
 Provider data is reduced to an allowlist: `reason`, `nativeCode`, and a
 rebuilt `mutation` report.
 
-| Reason                            | Error code              | Meaning                                                 |
-| --------------------------------- | ----------------------- | ------------------------------------------------------- |
-| `invalid-envelope`                | `invalid argument`      | Not a JSON object, or an unknown request field          |
-| `invalid-request-id`              | `invalid argument`      | `requestId` is malformed                                |
-| `unsupported-version`             | `invalid argument`      | `version` is not the catalog's                          |
-| `invalid-input`                   | `invalid argument`      | Input failed validation; names the field, not the value |
-| `unknown-operation`               | `unknown command`       | No such operation                                       |
-| `bounded-observation-unsupported` | `unsupported operation` | The provider cannot observe                             |
-| `content-denied`                  | `unsupported operation` | The operator denied reading displayed content           |
-| `no-window`, `window-closed`      | `no such window`        | There is no window to read, or it closed                |
-| `target-non-response`             | `unknown error`         | The application did not answer in time; retry later     |
-| `ref-…`                           | see above               | A reference did not resolve                             |
-| `cancelled`                       | `unknown error`         | The caller left, or the command was cancelled           |
+| Reason                            | Error code                  | Meaning                                                 |
+| --------------------------------- | --------------------------- | ------------------------------------------------------- |
+| `invalid-envelope`                | `invalid argument`          | Not a JSON object, or an unknown request field          |
+| `invalid-request-id`              | `invalid argument`          | `requestId` is malformed                                |
+| `unsupported-version`             | `invalid argument`          | `version` is not the catalog's                          |
+| `invalid-input`                   | `invalid argument`          | Input failed validation; names the field, not the value |
+| `unknown-operation`               | `unknown command`           | No such operation                                       |
+| `bounded-observation-unsupported` | `unsupported operation`     | The provider cannot observe                             |
+| `content-denied`                  | `unsupported operation`     | The operator denied reading displayed content           |
+| `no-window`, `window-closed`      | `no such window`            | There is no window to read, or it closed                |
+| `target-non-response`             | `unknown error`             | The application did not answer in time; retry later     |
+| `ref-…`                           | see above                   | A reference did not resolve                             |
+| `cancelled`                       | `unknown error`             | The caller left, or the command was cancelled           |
+| `request-id-reused`               | `invalid argument`          | The `requestId` already named a different request       |
+| `action-unsupported`              | `unsupported operation`     | The provider cannot perform this action                 |
+| `sample-not-unique`               | `invalid argument`          | The sample proved nothing unique, or it was forgotten   |
+| `ref-not-proven`                  | `invalid argument`          | The sample proved a different reference unique          |
+| `fingerprint-changed`             | `stale element reference`   | The element's role, name, or automation id changed      |
+| `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                      |
+| `obscured`                        | `element click intercepted` | Something else is at the element's centre               |
+| `target-quarantined`              | `unknown error`             | An earlier change may still land; reads still work      |
 
 A provider's own failure carries its `nativeCode` and, for a command that may
 have changed the application, the settled `mutation` disposition.
@@ -263,8 +330,16 @@ values). Typed text, displayed content, and error messages never enter it. The
 Operations run on the session's command queue, so they serialize with W3C
 commands and the queue advances only after a command settles. A caller that
 disconnects aborts its host commands; the journal records the call as
-`cancelled`. All three operations are reads, so they still run while the target
-is quarantined and report it in `session.quarantined`.
+`cancelled`. The reads still run while the target is quarantined and report it
+in `session.quarantined`. `act` is refused with `target-quarantined` in fixed
+words: the service's own quarantine message quotes the command and provider
+text, which an agent might read as instructions, so operations keep only the
+machine-readable report.
+
+A dispatched action runs to settlement even when its caller leaves; only the
+session ending or the native command timeout stops it, and an unconfirmed stop
+quarantines the target. A caller that leaves before dispatch gets `cancelled`
+with nothing done.
 
 ## Testing
 

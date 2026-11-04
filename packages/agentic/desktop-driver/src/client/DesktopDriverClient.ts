@@ -4,6 +4,8 @@ import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
 import type {
+  ActInput,
+  ActResult,
   FindInput,
   FindResult,
   JournalInput,
@@ -176,6 +178,14 @@ export class DesktopSessionClient {
   /** Finds elements by role, name, automation id, or text, and says whether the match is unique. */
   find(input: FindInput, options?: { requestId?: string }): Promise<OperationResponse<FindResult>> {
     return this.operation('find', input, options);
+  }
+
+  /**
+   * Clicks, activates, types into, or clears an element a `find` proved unique, citing that find's sample. Name a
+   * `requestId` to make a retry safe: repeating it returns the first outcome instead of acting again.
+   */
+  act(input: ActInput, options?: { requestId?: string }): Promise<OperationResponse<ActResult>> {
+    return this.operation('act', input, options);
   }
 
   /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */

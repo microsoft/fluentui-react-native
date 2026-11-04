@@ -5,6 +5,7 @@ import { searchBudgets } from './limits.js';
 import { classify, factsNeeded, hasPredicate } from './match.js';
 import type { FindPredicates } from './match.js';
 import { assertContentAllowed, requestsContent, requireBoundedObservation } from './policy.js';
+import { fingerprintOf } from './proofs.js';
 import { registerOperation } from './runtime.js';
 import { sampleTree } from './sampling.js';
 import { budgetField, referenceSchema, sampleSchema, truncationSchema, warningSchema } from './shapes.js';
@@ -177,17 +178,27 @@ export const findElementsOperation = registerOperation({
           ...classification.possible.map((index) => ({ index, match: 'possible' as const })),
         ];
         const returned = candidates.slice(0, input.limit);
+        const proven = classification.outcome === 'unique' ? observation.nodes[classification.definite[0]] : undefined;
         return {
           classification,
           complete: observation.complete,
           matches: returned.map(({ index, match }) => describeMatch(observation, parents, index, match, issue(observation.nodes[index]))),
           more: candidates.length - returned.length,
+          proven,
           truncation: observation.truncation.map((entry) => ({ ...entry })),
           visited: observation.nodes.length,
         };
       },
     );
-    const { classification, complete, matches, more, truncation, visited } = sampled.value;
+    const { classification, complete, matches, more, proven, truncation, visited } = sampled.value;
+    if (proven !== undefined && matches[0] !== undefined) {
+      runtime.state.proofs.record({
+        fingerprint: fingerprintOf(proven),
+        nativeId: proven.id,
+        reference: matches[0].ref,
+        sample: sampled.sample.id,
+      });
+    }
     return {
       sample: sampled.sample,
       outcome: classification.outcome,

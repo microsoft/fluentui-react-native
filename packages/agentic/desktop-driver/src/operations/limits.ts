@@ -56,6 +56,15 @@ export const journalCapacity = { ceiling: 5_000, default: 500, floor: 16 } as co
 
 export const journalPage = { ceiling: 200, default: 50, floor: 1 } as const satisfies OperationBudget;
 
+/** The most uniqueness proofs one session keeps; an action must cite one, so older proofs need a fresh `find`. */
+export const proofCapacity = 64;
+
+/** The most caller-chosen mutating request ids whose outcomes one session remembers for idempotent retries. */
+export const outcomeCapacity = 256;
+
+/** The longest text one `type` action sends. */
+export const maxTypedTextLength = 4_096;
+
 /** The largest request an operation accepts, measured as serialized JSON. */
 export const maxOperationRequestBytes = 65_536;
 

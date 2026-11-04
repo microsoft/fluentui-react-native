@@ -2,7 +2,15 @@ import { z } from 'zod';
 
 import { describeOperations, lookupOperation } from './registry';
 
-const everything = { boundedObservation: true };
+const readOnly = {
+  accessibilityClick: false,
+  elementCapture: false,
+  keyboard: false,
+  physicalClick: false,
+  windowCapture: false,
+};
+
+const everything = { ...readOnly, boundedObservation: true };
 
 function walk(value: unknown, visit: (key: string, child: unknown) => void): void {
   if (Array.isArray(value)) {
@@ -37,6 +45,7 @@ describe('describeOperations', () => {
     expect(catalog.operations.map(({ available, effect, name }) => [name, effect, available])).toEqual([
       ['observe', 'read', true],
       ['find', 'read', true],
+      ['act', 'mutate', true],
       ['journal', 'read', true],
     ]);
     for (const entry of catalog.operations) {
@@ -46,10 +55,11 @@ describe('describeOperations', () => {
   });
 
   test('marks the operations that need bounded observation unavailable, with the reason, when the provider lacks it', () => {
-    const catalog = describeOperations({ boundedObservation: false });
+    const catalog = describeOperations({ ...readOnly, boundedObservation: false });
     expect(catalog.operations.map(({ available, name, unavailableReason }) => [name, available, unavailableReason])).toEqual([
       ['observe', false, 'bounded-observation-unsupported'],
       ['find', false, 'bounded-observation-unsupported'],
+      ['act', false, 'bounded-observation-unsupported'],
       ['journal', true, undefined],
     ]);
   });
@@ -99,7 +109,7 @@ describe('describeOperations', () => {
         expect(JSON.stringify(entry.input).length).toBeLessThan(2_500);
         expect(JSON.stringify(entry.output).length).toBeLessThan(5_000);
       }
-      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(14_000);
+      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(16_000);
     });
 
     test('are frozen, so a consumer cannot corrupt the cache the next caller reads', () => {

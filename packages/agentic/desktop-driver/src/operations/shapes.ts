@@ -19,6 +19,9 @@ export const factSchema = z.enum(observeFacts);
 /** An element reference as callers send it. The reference table owns the grammar; this only bounds the input. */
 export const referenceSchema = z.string().min(1).max(32);
 
+/** A sample id as callers cite it: `o` and the sample's sequence number. */
+export const sampleIdSchema = z.string().regex(/^o[1-9][0-9]{0,9}$/, 'A sample id is "o" followed by a number, as a result showed it.');
+
 export const sampleSchema = z.strictObject({
   capturedAt: z.string().describe('ISO time the provider answered.'),
   elapsedMs: z.number().describe('Provider time spent walking the tree.'),

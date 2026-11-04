@@ -813,6 +813,17 @@ The read operations fix three requirements that actions inherit:
   data already is. A mutating operation is refused while the target is
   quarantined; reads continue to run.
 
+**Progress:** the [`act` operation](operations.md#act) meets all three. It
+clicks (physical pointer after a hit test), activates (default accessibility
+action), types, or clears an element a `find` proved unique, revalidates the
+element's liveness and fingerprint inside the target's input turn, reports the
+mechanism it used, and records caller-chosen request ids in a bounded outcome
+ledger so a retry returns the first outcome. Every primary step runs through
+the settlement path, so an unconfirmed action quarantines the target, and
+quarantine refusals use fixed wording. It is covered against the fake host
+only; native qualification on macOS and Windows, AX action tickets, UIA
+pattern mappings, checks and waits, sequences, and capture remain.
+
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and
 physical versus semantic evidence is distinguishable on both OSes.

@@ -1,13 +1,23 @@
 import type { z } from 'zod';
 
-import type { NativeObservation, NativeObserveRequest } from '../host/types.js';
+import type { DesktopHostEvent, NativeElementSnapshot, NativeImage, NativeObservation, NativeObserveRequest } from '../host/types.js';
 import type { JournalScalar } from './journal.js';
 import type { OperationSessionState } from './sessionState.js';
 
 /** The slice of a desktop host an operation uses. The server builds it from the session's host. */
 export type OperationHost = {
+  activate(windowId: string, signal: AbortSignal): Promise<void>;
+  captureElement(nativeId: string, signal: AbortSignal): Promise<NativeImage>;
+  captureWindow(windowId: string, signal: AbortSignal): Promise<NativeImage>;
+  clear(nativeId: string, signal: AbortSignal): Promise<void>;
+  click(nativeId: string, mode: 'accessibility' | 'physical', signal: AbortSignal): Promise<void>;
+  hitTest(windowId: string, x: number, y: number, signal: AbortSignal): Promise<NativeElementSnapshot | null>;
   observe(request: NativeObserveRequest, signal: AbortSignal): Promise<NativeObservation>;
   releaseElements(nativeIds: readonly string[], signal: AbortSignal): Promise<number>;
+  sendKeys(nativeId: string, text: string, signal: AbortSignal): Promise<void>;
+  snapshot(nativeId: string, signal: AbortSignal): Promise<NativeElementSnapshot>;
+  /** Advisory host events, which may wake a wait early but never satisfy it. Absent when the host publishes none. */
+  subscribe?(listener: (event: DesktopHostEvent) => void): () => void;
 };
 
 /**
@@ -18,7 +28,14 @@ export type ContentPolicy = 'allow' | 'deny';
 
 /** What the session's provider supports, which decides which operations are available. */
 export type OperationCapabilities = {
+  /** Semantic activation through the accessibility tree, such as AXPress or a UIA pattern. */
+  readonly accessibilityClick: boolean;
   readonly boundedObservation: boolean;
+  readonly elementCapture: boolean;
+  readonly keyboard: boolean;
+  /** A synthesized pointer click at the element's hit-tested centre. */
+  readonly physicalClick: boolean;
+  readonly windowCapture: boolean;
 };
 
 /**
@@ -44,6 +61,20 @@ export type OperationRuntime = {
   previewGeneration(): number;
   /** True while the session's target refuses mutations. Reads stay allowed. */
   quarantined(): boolean;
+  /**
+   * Runs `run` in the target-wide physical input turn, so no other session's input interleaves with it. Reads that
+   * revalidate an element run inside the turn, immediately before the mutation they guard.
+   */
+  input<T>(run: () => Promise<T>): Promise<T>;
+  /**
+   * Runs one mutating host command behind the target quarantine guard and settles its failure into a disposition. The
+   * command runs to settlement once dispatched: leaving the request does not abort it, because an aborted dispatch is
+   * indeterminate and quarantines the target. `description` is recorded with any quarantine, so it names the command
+   * and the reference, never typed or displayed text.
+   */
+  mutate<T>(description: string, run: (signal: AbortSignal) => Promise<T>): Promise<T>;
+  /** Aborts when the caller leaves. Operations check it before dispatching, never after. */
+  readonly signal: AbortSignal;
 };
 
 export type OperationAvailability = { available: true } | { available: false; reason: string };

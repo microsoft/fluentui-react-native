@@ -173,8 +173,9 @@ export class FakeDesktopHost implements DesktopHost {
     }
   }
 
+  /** Renames an element, as the application would. Accepts the element's own id even after its records were released. */
   setElementName(elementId: string, name: string): void {
-    this.requireElement(elementId).name = name;
+    (this.elements.get(elementId) ?? this.requireElement(elementId)).name = name;
   }
 
   /** Scripts a provider failure for the next `fault.times` calls (default 1) of a mutating command. */

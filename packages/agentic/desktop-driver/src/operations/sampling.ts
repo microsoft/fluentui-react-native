@@ -71,7 +71,7 @@ function resolveTarget(runtime: OperationRuntime, within: string | undefined): T
  * Turns a provider failure into what the caller can act on, and forgets what the failure proved gone. The provider
  * rejected the reference's element or window, so Node stops offering it instead of waiting for the next rejection.
  */
-function interpretFailure(runtime: OperationRuntime, target: Target, error: unknown): unknown {
+export function interpretFailure(runtime: OperationRuntime, target: Pick<Target, 'windowId' | 'within'>, error: unknown): unknown {
   const failure = toWebDriverError(error);
   const { ledger, refs } = runtime.state;
   if (failure.code === 'no such window') {
@@ -97,7 +97,7 @@ async function observeNative(runtime: OperationRuntime, target: Target, request:
 }
 
 /** Releases what the session no longer retains. A failure leaves the ids pending and warns; it never fails the operation. */
-async function flushLedger(runtime: OperationRuntime): Promise<OperationWarning[]> {
+export async function flushLedger(runtime: OperationRuntime): Promise<OperationWarning[]> {
   const { ledger } = runtime.state;
   if (ledger.pendingCount === 0) {
     return [];

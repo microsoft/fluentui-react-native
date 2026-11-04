@@ -1,5 +1,7 @@
 import { OperationJournal } from './journal.js';
 import { ReleaseLedger } from './ledger.js';
+import { OutcomeLedger } from './outcomes.js';
+import { UniquenessProofs } from './proofs.js';
 import { allocateReferenceTag, ReferenceTable } from './refs.js';
 
 /**
@@ -27,6 +29,10 @@ export type OperationSessionStateOptions = {
 export class OperationSessionState {
   readonly journal: OperationJournal;
   readonly ledger: ReleaseLedger;
+  /** Outcomes of mutating requests whose ids the caller chose, so a retry never runs an action twice. */
+  readonly outcomes = new OutcomeLedger();
+  /** Recent `find` results that proved a unique match, which actions must cite. */
+  readonly proofs = new UniquenessProofs();
   readonly refs: ReferenceTable;
   private incarnationNumber = 1;
   private requests = 0;
@@ -61,6 +67,7 @@ export class OperationSessionState {
   startIncarnation(): void {
     this.refs.reset(drawTag());
     this.ledger.clear();
+    this.proofs.clear();
     this.incarnationNumber += 1;
   }
 }

@@ -1,6 +1,8 @@
 import type { NativeObservation, NativeObserveRequest } from '../host/types.js';
 import type { ContentPolicy, OperationCapabilities, OperationHost, OperationRuntime } from '../operations/runtime.js';
 import { OperationSessionState } from '../operations/sessionState.js';
+import { HostUnsupportedError } from '../protocol/errors.js';
+import { attachMutationReport, createMutationReport } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import { buildSample } from './observationSample.js';
 
@@ -40,7 +42,18 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
   };
   const observed: NativeObserveRequest[] = [];
   const released: string[][] = [];
+  const unsupported = (): never => {
+    throw new HostUnsupportedError('The stub runtime does not act on elements.');
+  };
   const host: OperationHost = {
+    activate: async () => unsupported(),
+    captureElement: async () => unsupported(),
+    captureWindow: async () => unsupported(),
+    clear: async () => unsupported(),
+    click: async () => unsupported(),
+    hitTest: async () => unsupported(),
+    sendKeys: async () => unsupported(),
+    snapshot: async () => unsupported(),
     async observe(request, signal) {
       observed.push(request);
       if (options.observe) {
@@ -57,15 +70,29 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
     },
   };
   const runtime: OperationRuntime = {
-    capabilities: { boundedObservation: true, ...options.capabilities },
+    capabilities: {
+      accessibilityClick: false,
+      boundedObservation: true,
+      elementCapture: false,
+      keyboard: false,
+      physicalClick: false,
+      windowCapture: false,
+      ...options.capabilities,
+    },
     cleanup: (description, run) => withCommandTimeout(run, nativeTimeoutMs, description),
     command: (description, run) => withCommandTimeout(run, nativeTimeoutMs, description, { signal: options.signal }),
     contentPolicy: options.contentPolicy ?? 'allow',
     currentWindowId: () => control.windowId,
     host,
+    input: (run) => run(),
+    mutate: (description, run) =>
+      withCommandTimeout(run, nativeTimeoutMs, description).catch((error: unknown) => {
+        throw attachMutationReport(error instanceof Error ? error : new Error(String(error)), createMutationReport(error, false));
+      }),
     nativeTimeoutMs: () => nativeTimeoutMs,
     previewGeneration: () => control.previewGeneration,
     quarantined: () => control.quarantined,
+    signal: options.signal ?? new AbortController().signal,
     state,
   };
   return { control, observed, released, runtime, state };
