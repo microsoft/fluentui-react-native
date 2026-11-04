@@ -186,45 +186,6 @@ std::string EscapeXml(std::string_view value) {
   return output;
 }
 
-json::Value SerializeSupported(const SupportedBool& state) {
-  json::Value value = json::Value::Object();
-  if (state.supported) {
-    value.Set("supported", json::Value::Bool(true));
-    value.Set("value", json::Value::Bool(state.value));
-  } else {
-    value.Set("supported", json::Value::Bool(false));
-    value.Set("reason", json::Value::String(state.reason));
-  }
-  return value;
-}
-
-json::Value SerializeSupported(const SupportedString& state) {
-  json::Value value = json::Value::Object();
-  value.Set("supported", json::Value::Bool(state.supported));
-  if (state.supported) {
-    value.Set("value", json::Value::String(state.value));
-  } else {
-    value.Set("reason", json::Value::String(state.reason));
-  }
-  return value;
-}
-
-json::Value SerializeChecked(const SupportedChecked& state) {
-  json::Value value = json::Value::Object();
-  if (!state.supported) {
-    value.Set("supported", json::Value::Bool(false));
-    value.Set("reason", json::Value::String(state.reason));
-    return value;
-  }
-  value.Set("supported", json::Value::Bool(true));
-  if (state.value == CheckedValue::Mixed) {
-    value.Set("value", json::Value::String(std::string("mixed")));
-  } else {
-    value.Set("value", json::Value::Bool(state.value == CheckedValue::True));
-  }
-  return value;
-}
-
 SupportedBool Unsupported(std::string reason) {
   SupportedBool state;
   state.supported = false;
@@ -355,6 +316,8 @@ void Automation::Initialize() {
                automation->get_RawViewCondition(rawViewCondition_.put()));
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation raw walker",
                automation->get_RawViewWalker(rawWalker_.put()));
+  CheckHresult(kErrorAutomationFailed, "Reading the UI Automation control walker",
+               automation->get_ControlViewWalker(controlWalker_.put()));
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation not-supported sentinel",
                UiaGetReservedNotSupportedValue(notSupportedValue_.put()));
   automation_ = automation;
@@ -406,6 +369,7 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_IsSelectionItemPatternAvailablePropertyId,
       UIA_IsExpandCollapsePatternAvailablePropertyId,
       UIA_IsValuePatternAvailablePropertyId,
+      UIA_IsPasswordPropertyId,
   };
   for (const PROPERTYID property : properties) {
     CheckHresult(kErrorAutomationFailed, "Adding a cached UI Automation property", request->AddProperty(property));
@@ -830,6 +794,186 @@ std::vector<ElementSnapshot> Automation::Find(const WindowContext& context, cons
     }
   }
   return matches;
+}
+
+// Feeds SampleObservation from UI Automation. Every element it hands out came
+// from a control-view walker call that cached the snapshot properties, so a
+// read never calls the provider; only paging does.
+class UiaObservationSource final : public ObservationSource {
+ public:
+  UiaObservationSource(Automation& automation, const WindowContext& context,
+                       winrt::com_ptr<IUIAutomationElement> root, std::optional<std::string> rootId)
+      : automation_(automation),
+        context_(context),
+        storyRootTestId_(ToUtf8(context.storyRootTestId)),
+        rootId_(std::move(rootId)),
+        metrics_(MeasureWindow(context.window)),
+        cacheRequest_(automation.CreateCacheRequest(TreeScope_Element, true)),
+        generation_(automation.registry_.BeginObservation()) {
+    elements_.push_back(std::move(root));
+  }
+
+  std::vector<ObserveFact> UnsupportedFacts() const override {
+    // UI Automation has no per-element action list.
+    return {ObserveFact::Actions};
+  }
+
+  ObservedFacts Read(ObservationHandle handle) override {
+    IUIAutomationElement* element = elements_.at(handle).get();
+    const ElementSnapshot snapshot = automation_.ReadSnapshot(element, context_.windowId, {}, ElementScope::Chrome, {});
+    ObservedFacts facts;
+    facts.role = snapshot.role;
+    facts.name = snapshot.name;
+    facts.automationId = snapshot.automationId;
+    Variant password;
+    facts.secure = SUCCEEDED(element->GetCachedPropertyValueEx(UIA_IsPasswordPropertyId, TRUE, password.put())) &&
+                   password.type() == VT_BOOL && password.get().boolVal != VARIANT_FALSE;
+    facts.checked = snapshot.checked;
+    facts.enabled = snapshot.enabled;
+    facts.expanded = snapshot.expanded;
+    facts.focused = snapshot.focused;
+    facts.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics_);
+    facts.helpText = snapshot.helpText;
+    facts.required = snapshot.required;
+    facts.selected = snapshot.selected;
+    if (snapshot.hasText) {
+      facts.text = snapshot.text;
+    }
+    if (snapshot.hasValue) {
+      facts.value = snapshot.value;
+    }
+    facts.visible = snapshot.visible;
+    return facts;
+  }
+
+  std::unique_ptr<ObservationChildCursor> Children(ObservationHandle handle) override {
+    return std::make_unique<Cursor>(*this, elements_.at(handle));
+  }
+
+  std::wstring Key(ObservationHandle handle) const override {
+    return automation_.RuntimeKeyFromCache(elements_.at(handle).get());
+  }
+
+  // The scopes a tree walk assigns: the story root and everything beneath it
+  // are the preview; the primary window's descendants are its chrome.
+  ObservedScopes Scopes(ElementScope inherited, const ObservedFacts& facts) const override {
+    if (context_.primary && inherited != ElementScope::Preview && !storyRootTestId_.empty() &&
+        facts.automationId == storyRootTestId_) {
+      return {ElementScope::Preview, ElementScope::Preview};
+    }
+    if (context_.primary && inherited == ElementScope::Application) {
+      return {ElementScope::Application, ElementScope::Chrome};
+    }
+    return {inherited, inherited};
+  }
+
+  std::optional<std::string> Identify(ObservationHandle handle, const std::string& parentId,
+                                      ElementScope scope) override {
+    ElementRegistry& registry = automation_.registry_;
+    if (handle == 0 && rootId_) {
+      // A requested root keeps the id it was requested by, even when its
+      // provider reports no runtime identity.
+      if (!registry.Pin(*rootId_, generation_)) {
+        Fail(kErrorStaleElement, "Element \"" + *rootId_ + "\" is no longer available.");
+      }
+      registry.SetScope(*rootId_, scope);
+      return rootId_;
+    }
+    IUIAutomationElement* element = elements_.at(handle).get();
+    ElementRecord candidate;
+    candidate.element.copy_from(element);
+    candidate.windowId = context_.windowId;
+    candidate.window = context_.window;
+    candidate.parentId = parentId;
+    candidate.scope = scope;
+    candidate.fingerprint = FingerprintFromCache(element);
+    candidate.runtimeKey = automation_.RuntimeKeyFromCache(element);
+    return registry.RegisterPinned(std::move(candidate), generation_);
+  }
+
+ private:
+  class Cursor final : public ObservationChildCursor {
+   public:
+    Cursor(UiaObservationSource& source, winrt::com_ptr<IUIAutomationElement> parent)
+        : source_(source), parent_(std::move(parent)) {}
+
+    std::optional<ObservationHandle> Next() override {
+      if (done_) {
+        return std::nullopt;
+      }
+      IUIAutomationTreeWalker* walker = source_.automation_.controlWalker_.get();
+      IUIAutomationCacheRequest* cache = source_.cacheRequest_.get();
+      winrt::com_ptr<IUIAutomationElement> next;
+      const HRESULT result = current_ ? walker->GetNextSiblingElementBuildCache(current_.get(), cache, next.put())
+                                      : walker->GetFirstChildElementBuildCache(parent_.get(), cache, next.put());
+      if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+        done_ = true;
+        Fail(kErrorStaleElement, "The element whose children were being read is no longer available.");
+      }
+      if (FAILED(result)) {
+        done_ = true;
+        FailHresult(kErrorAutomationFailed, "Reading the next control-view child", result);
+      }
+      if (!next) {
+        done_ = true;
+        return std::nullopt;
+      }
+      current_ = next;
+      source_.elements_.push_back(std::move(next));
+      return source_.elements_.size() - 1;
+    }
+
+   private:
+    UiaObservationSource& source_;
+    winrt::com_ptr<IUIAutomationElement> parent_;
+    winrt::com_ptr<IUIAutomationElement> current_;
+    bool done_{false};
+  };
+
+  Automation& automation_;
+  const WindowContext& context_;
+  std::string storyRootTestId_;
+  std::optional<std::string> rootId_;
+  WindowMetrics metrics_;
+  winrt::com_ptr<IUIAutomationCacheRequest> cacheRequest_;
+  std::uint64_t generation_;
+  std::vector<winrt::com_ptr<IUIAutomationElement>> elements_;
+};
+
+ObservedSample Automation::Observe(const WindowContext& context, const ObserveRequest& request,
+                                   const CancellationToken& token) {
+  const std::int64_t startedAt = SteadyMilliseconds();
+  Initialize();
+  token.ThrowIfCancelled();
+
+  ObservationRoot root;
+  winrt::com_ptr<IUIAutomationElement> rootElement;
+  if (request.rootId) {
+    const ElementRecord known = registry_.Require(*request.rootId);
+    if (known.windowId != context.windowId) {
+      Fail(kErrorStaleElement, "Element \"" + *request.rootId + "\" does not belong to window \"" + context.windowId +
+                                   "\".");
+    }
+    const ElementRecord record = RefreshElement(*request.rootId, rootElement);
+    root.parentId = record.parentId;
+    root.scope = record.scope;
+  } else {
+    const winrt::com_ptr<IUIAutomationElement> window = RootForWindow(context.window);
+    const HRESULT result =
+        window->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, true).get(), rootElement.put());
+    if (FAILED(result) || !rootElement) {
+      FailHresult(IsWindow(context.window) != FALSE ? kErrorAutomationFailed : kErrorNoSuchWindow,
+                  "Reading the window automation element", result);
+    }
+    root.scope = context.primary ? ElementScope::Application : ElementScope::SecondaryWindow;
+  }
+
+  UiaObservationSource source(*this, context, std::move(rootElement), request.rootId);
+  return SampleObservation(source, root, request, token, SteadyMilliseconds, startedAt);
+}
+
+std::size_t Automation::ReleaseElements(const std::vector<std::string>& ids) {
+  return registry_.Release(ids);
 }
 
 ElementSnapshot Automation::SnapshotElement(const std::string& elementId, const CancellationToken& token) {

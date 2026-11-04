@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iterator>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace furn {
@@ -34,28 +35,34 @@ ElementFingerprint MergeFingerprints(const ElementFingerprint& known, const Elem
 
 ElementRegistry::ElementRegistry(std::size_t capacity) : capacity_(std::max<std::size_t>(capacity, 1)) {}
 
-std::string ElementRegistry::Register(ElementRecord candidate, std::uint64_t generation) {
-  if (!candidate.runtimeKey.empty()) {
-    if (const auto known = idsByRuntimeKey_.find(candidate.runtimeKey); known != idsByRuntimeKey_.end()) {
-      const std::string knownId = known->second;
-      const auto existing = records_.find(knownId);
-      if (existing != records_.end() && !FingerprintsConflict(existing->second.fingerprint, candidate.fingerprint)) {
-        ElementRecord& record = existing->second;
-        record.element = std::move(candidate.element);
-        record.windowId = std::move(candidate.windowId);
-        record.window = candidate.window;
-        record.parentId = std::move(candidate.parentId);
-        record.scope = candidate.scope;
-        record.fingerprint = MergeFingerprints(record.fingerprint, candidate.fingerprint);
-        Touch(knownId, generation);
-        return knownId;
-      }
-      // A different element now answers to this native identity, so the old id
-      // must never address it.
-      Erase(knownId);
-    }
+std::string ElementRegistry::Reuse(ElementRecord& candidate, std::uint64_t generation) {
+  if (candidate.runtimeKey.empty()) {
+    return {};
   }
+  const auto known = idsByRuntimeKey_.find(candidate.runtimeKey);
+  if (known == idsByRuntimeKey_.end()) {
+    return {};
+  }
+  const std::string knownId = known->second;
+  const auto existing = records_.find(knownId);
+  if (existing != records_.end() && !FingerprintsConflict(existing->second.fingerprint, candidate.fingerprint)) {
+    ElementRecord& record = existing->second;
+    record.element = std::move(candidate.element);
+    record.windowId = std::move(candidate.windowId);
+    record.window = candidate.window;
+    record.parentId = std::move(candidate.parentId);
+    record.scope = candidate.scope;
+    record.fingerprint = MergeFingerprints(record.fingerprint, candidate.fingerprint);
+    Touch(knownId, generation);
+    return knownId;
+  }
+  // A different element now answers to this native identity, so the old id
+  // must never address it.
+  Erase(knownId);
+  return {};
+}
 
+std::string ElementRegistry::Insert(ElementRecord candidate, std::uint64_t generation) {
   candidate.id = NextIdentifier("element");
   candidate.generation = 0;
   const std::string id = candidate.id;
@@ -64,10 +71,60 @@ std::string ElementRegistry::Register(ElementRecord candidate, std::uint64_t gen
   }
   records_.emplace(id, std::move(candidate));
   Touch(id, generation);
+  return id;
+}
+
+std::string ElementRegistry::Register(ElementRecord candidate, std::uint64_t generation) {
+  if (std::string id = Reuse(candidate, generation); !id.empty()) {
+    return id;
+  }
+  candidate.pinned = false;
+  const std::string id = Insert(std::move(candidate), generation);
   if (records_.size() > capacity_) {
     Evict(generation);
   }
   return id;
+}
+
+std::optional<std::string> ElementRegistry::RegisterPinned(ElementRecord candidate, std::uint64_t generation) {
+  if (std::string id = Reuse(candidate, generation); !id.empty()) {
+    records_.at(id).pinned = true;
+    return id;
+  }
+  if (records_.size() >= capacity_) {
+    Evict(generation);
+    if (records_.size() >= capacity_) {
+      return std::nullopt;
+    }
+  }
+  candidate.pinned = true;
+  return Insert(std::move(candidate), generation);
+}
+
+bool ElementRegistry::Pin(const std::string& id, std::uint64_t generation) {
+  const auto record = records_.find(id);
+  if (record == records_.end()) {
+    return false;
+  }
+  record->second.pinned = true;
+  Touch(id, generation);
+  return true;
+}
+
+std::size_t ElementRegistry::Release(const std::vector<std::string>& ids) {
+  std::size_t released = 0;
+  for (const std::string& id : ids) {
+    if (const auto record = records_.find(id); record != records_.end()) {
+      EraseRecord(record);
+      released += 1;
+    }
+  }
+  return released;
+}
+
+bool ElementRegistry::IsPinned(const std::string& id) const {
+  const auto record = records_.find(id);
+  return record != records_.end() && record->second.pinned;
 }
 
 ElementRecord ElementRegistry::Require(const std::string& id) {
@@ -123,13 +180,13 @@ void ElementRegistry::Erase(const std::string& id) {
     }
   }
   // A record is expanded only once it is erased, so a malformed parent cycle
-  // ends instead of looping.
+  // ends instead of looping. A pinned descendant stops the cascade.
   std::vector<std::string> pending{id};
   while (!pending.empty()) {
     const std::string next = std::move(pending.back());
     pending.pop_back();
     const auto record = records_.find(next);
-    if (record == records_.end()) {
+    if (record == records_.end() || (next != id && record->second.pinned)) {
       continue;
     }
     EraseRecord(record);
@@ -181,20 +238,37 @@ void ElementRegistry::Touch(const std::string& id, std::uint64_t generation) {
   }
 }
 
-// Drops the oldest records until the table is about nine tenths of its capacity,
-// so the cost of a pass is spread over many registrations. Everything at or
-// below one generation goes together, which keeps a retained record's ancestors
-// (they are never older than it). The protected generation is the observation in
-// progress; its records stay even when it alone exceeds the capacity.
+// Drops the oldest unpinned records until the table is about nine tenths of its
+// capacity, so the cost of a pass is spread over many registrations. Everything
+// at or below one generation goes together, which keeps a retained record's
+// ancestors (they are never older than it), and a pinned record's ancestors are
+// kept with it. The protected generation is the observation in progress; its
+// records stay even when it alone exceeds the capacity.
 void ElementRegistry::Evict(std::uint64_t protectedGeneration) {
   const std::size_t target = capacity_ - capacity_ / 10;
   if (records_.size() <= target) {
     return;
   }
+  std::unordered_set<std::string> kept;
+  for (const auto& entry : records_) {
+    if (!entry.second.pinned) {
+      continue;
+    }
+    // Every step keeps one record that was not kept before, so a malformed
+    // parent cycle ends.
+    std::string cursor = entry.first;
+    while (!cursor.empty() && kept.insert(cursor).second) {
+      const auto record = records_.find(cursor);
+      cursor = record == records_.end() ? std::string() : record->second.parentId;
+    }
+  }
+  const auto evictable = [&](const auto& entry) {
+    return entry.second.generation < protectedGeneration && !kept.contains(entry.first);
+  };
   std::vector<std::uint64_t> generations;
   generations.reserve(records_.size());
   for (const auto& entry : records_) {
-    if (entry.second.generation < protectedGeneration) {
+    if (evictable(entry)) {
       generations.push_back(entry.second.generation);
     }
   }
@@ -206,7 +280,7 @@ void ElementRegistry::Evict(std::uint64_t protectedGeneration) {
                    generations.end());
   const std::uint64_t threshold = generations[count - 1];
   for (auto record = records_.begin(); record != records_.end();) {
-    record = record->second.generation <= threshold ? EraseRecord(record) : std::next(record);
+    record = evictable(*record) && record->second.generation <= threshold ? EraseRecord(record) : std::next(record);
   }
 }
 

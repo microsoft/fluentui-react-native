@@ -14,32 +14,11 @@
 #include "elementregistry.h"
 #include "geometry.h"
 #include "json.h"
+#include "observation.h"
 
 namespace furn {
 
 inline constexpr std::size_t kMaximumTreeNodes = 5000;
-
-enum class CheckedValue { False, True, Mixed };
-
-// Mirrors the SupportedValue<T> contract: an unavailable native state is never
-// flattened into false.
-struct SupportedBool {
-  bool supported{true};
-  bool value{false};
-  std::string reason;
-};
-
-struct SupportedChecked {
-  bool supported{true};
-  CheckedValue value{CheckedValue::False};
-  std::string reason;
-};
-
-struct SupportedString {
-  bool supported{false};
-  std::string value;
-  std::string reason;
-};
 
 struct ElementSnapshot {
   std::string id;
@@ -107,6 +86,14 @@ class Automation {
   std::optional<ElementSnapshot> HitTest(const WindowContext& context, POINT screenPoint,
                                          const CancellationToken& token);
 
+  // A bounded breadth-first sample of the window, or of a tracked element in it
+  // (PROTOCOL.md "Bounded observation"). Each family of children is paged one
+  // control-view sibling at a time; nothing caches a subtree. Every emitted id
+  // is pinned until ReleaseElements or ForgetWindow drops it. A hung provider
+  // call ends within the UI Automation transaction timeout set in Initialize.
+  ObservedSample Observe(const WindowContext& context, const ObserveRequest& request, const CancellationToken& token);
+  // Drops exactly the tracked ids named and returns how many it dropped.
+  std::size_t ReleaseElements(const std::vector<std::string>& ids);
   // A copy of the tracked record, stamped as recently used; stale-element when
   // the id is not tracked. It does not check that the native element still
   // matches: SnapshotElement does, immediately before an action dispatches.
@@ -129,6 +116,8 @@ class Automation {
   ElementRegistry& RegistryForTesting() noexcept { return registry_; }
 
  private:
+  friend class UiaObservationSource;
+
   winrt::com_ptr<IUIAutomationCacheRequest> CreateCacheRequest(TreeScope scope, bool controlViewOnly) const;
   winrt::com_ptr<IUIAutomationElement> RootForWindow(HWND window) const;
   winrt::com_ptr<IUIAutomationElement> ParentOf(IUIAutomationElement* element) const;
@@ -152,6 +141,7 @@ class Automation {
   winrt::com_ptr<IUIAutomationCondition> controlViewCondition_;
   winrt::com_ptr<IUIAutomationCondition> rawViewCondition_;
   winrt::com_ptr<IUIAutomationTreeWalker> rawWalker_;
+  winrt::com_ptr<IUIAutomationTreeWalker> controlWalker_;
   winrt::com_ptr<IUnknown> notSupportedValue_;
   ElementRegistry registry_;
 };

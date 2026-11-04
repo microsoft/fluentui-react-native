@@ -92,6 +92,8 @@
     <ClCompile Include="src\inputlock.cpp" />
     <ClCompile Include="src\json.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\observation.cpp" />
+    <ClCompile Include="src\observationtests.cpp" />
     <ClCompile Include="src\privatestorage.cpp" />
     <ClCompile Include="src\selftest.cpp" />
     <ClCompile Include="src\serviceidentity.cpp" />
@@ -114,6 +116,8 @@
     <ClInclude Include="src\inputauthority.h" />
     <ClInclude Include="src\inputlock.h" />
     <ClInclude Include="src\json.h" />
+    <ClInclude Include="src\observation.h" />
+    <ClInclude Include="src\observationtests.h" />
     <ClInclude Include="src\privatestorage.h" />
     <ClInclude Include="src\selftest.h" />
     <ClInclude Include="src\serviceidentity.h" />

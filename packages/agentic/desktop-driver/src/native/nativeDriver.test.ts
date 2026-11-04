@@ -154,7 +154,7 @@ describe('native driver build and resolution', () => {
       await helper.dispose();
       await expectProtectedNativeService(resolved);
       await expectMacosEffectReporting(resolved.executablePath);
-      await expectMacosBoundedObservation(resolved.executablePath);
+      await expectBoundedObservation(resolved.executablePath, 'macos');
       await expectMacosRequestMemoryStable(resolved.executablePath);
 
       const observationDump = path.join(cacheRoot, 'self-test-observations.json');
@@ -350,13 +350,17 @@ describe('native driver build and resolution', () => {
         });
         await helper.dispose();
         await expectProtectedNativeService(resolved);
+        await expectBoundedObservation(resolved.executablePath, 'windows');
 
+        const observationDump = path.join(cacheRoot, 'self-test-observations.json');
         const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
           encoding: 'utf8',
+          env: { ...process.env, FURN_DRIVER_SELF_TEST_OBSERVATIONS: observationDump },
           timeout: 120_000,
         });
         expect(selfTest.status).toBe(0);
         expect(selfTest.stdout).toContain('self-test passed');
+        expectSelfTestObservationsToConform(observationDump);
 
         fs.writeFileSync(resolved.executablePath, 'corrupt');
         await expect(resolveNativeDesktopDriver({ buildPolicy: 'never', cacheRoot, platform: 'windows' })).rejects.toMatchObject({
@@ -497,7 +501,7 @@ describe('native driver build and resolution', () => {
   }
 
   // These commands run before any application is leased, so they hold on any machine, trusted for Accessibility or not.
-  async function expectMacosBoundedObservation(executablePath: string): Promise<void> {
+  async function expectBoundedObservation(executablePath: string, endpoint: 'macos' | 'windows'): Promise<void> {
     const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
     const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
     const decoder = new NativeFrameDecoder();
@@ -513,7 +517,7 @@ describe('native driver build and resolution', () => {
       await expect(waitForMessage(decoder, (message) => message.type === 'hello')).resolves.toMatchObject({
         features: expect.arrayContaining(['boundedObservation']),
       });
-      await expect(request('probe-observation', 'probe', { endpoint: 'macos' })).resolves.toMatchObject({
+      await expect(request('probe-observation', 'probe', { endpoint })).resolves.toMatchObject({
         result: { features: { boundedObservation: expect.any(Boolean) } },
       });
 

@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "authoritytests.h"
+#include "observationtests.h"
 #include "automation.h"
 #include "common.h"
 #include "driver.h"
@@ -398,6 +399,11 @@ void TestHello() {
       features != nullptr && std::any_of(features->Items().begin(), features->Items().end(),
                                          [](const json::Value& feature) { return feature.AsString() == "windowEvents"; });
   Check(announcesEvents, "hello announces window event support");
+  const bool announcesObservation =
+      features != nullptr &&
+      std::any_of(features->Items().begin(), features->Items().end(),
+                  [](const json::Value& feature) { return feature.AsString() == "boundedObservation"; });
+  Check(announcesObservation, "hello announces bounded observation");
 }
 
 void TestReleaseLedger() {
@@ -877,10 +883,10 @@ class WindowThread {
     return window;
   }
 
-  HWND CreateChild(HWND parent, const wchar_t* className, const wchar_t* text, int controlId) {
+  HWND CreateChild(HWND parent, const wchar_t* className, const wchar_t* text, int controlId, DWORD style = 0) {
     HWND child = nullptr;
-    Run([&child, parent, className, text, controlId]() {
-      child = CreateWindowExW(0, className, text, WS_CHILD | WS_VISIBLE, 4, 4, 48, 24, parent,
+    Run([&child, parent, className, text, controlId, style]() {
+      child = CreateWindowExW(0, className, text, WS_CHILD | WS_VISIBLE | style, 4, 4, 48, 24, parent,
                               reinterpret_cast<HMENU>(static_cast<INT_PTR>(controlId)), GetModuleHandleW(nullptr),
                               nullptr);
     });
@@ -2541,6 +2547,172 @@ void TestDriverHitTestBeyondScreens() {
         "a hit test beyond every monitor registers no foreign element");
 }
 
+void TestDriverObservation() {
+  const CancellationToken token;
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestObserve", L"Observe window");
+  const HWND button = windows.CreateChild(window, L"BUTTON", L"Observe button", 101);
+  const HWND password = windows.CreateChild(window, L"EDIT", L"hunter2", 102, ES_PASSWORD);
+  const HWND other = windows.Create(L"FurnSelfTestObserveOther", L"Other window");
+  const HWND otherButton = windows.CreateChild(other, L"BUTTON", L"Other button", 103);
+  Check(window != nullptr && button != nullptr && password != nullptr && other != nullptr && otherButton != nullptr,
+        "the observation fixture creates two windows with controls and a password field");
+  if (window == nullptr || button == nullptr || password == nullptr || other == nullptr || otherButton == nullptr) {
+    return;
+  }
+
+  Driver driver;
+  const auto adopt = [&](HWND target, const wchar_t* title) {
+    json::Value leaseRequest = json::Value::Object();
+    leaseRequest.Set("lease", driver.AdoptWindowForTesting(target, title));
+    const CommandResult listed = driver.Execute("windows", leaseRequest, token);
+    const std::string wanted = ToUtf8(title);
+    for (const json::Value& entry : listed.result.Items()) {
+      if (entry.StringField("title") == wanted) {
+        return entry.StringField("id");
+      }
+    }
+    return std::string();
+  };
+  const std::string windowId = adopt(window, L"Observe window");
+  const std::string otherId = adopt(other, L"Other window");
+  Check(!windowId.empty() && !otherId.empty() && windowId != otherId, "the driver lists both adopted windows");
+  if (windowId.empty() || otherId.empty()) {
+    return;
+  }
+
+  const auto request = [](const std::string& target, std::int64_t maxVisited, std::optional<std::string> rootId = {}) {
+    json::Value budget = json::Value::Object();
+    budget.Set("maxVisited", json::Value::Integer(maxVisited));
+    budget.Set("maxDepth", json::Value::Integer(64));
+    budget.Set("maxStringLength", json::Value::Integer(256));
+    budget.Set("maxBytes", json::Value::Integer(1048576));
+    budget.Set("deadlineMs", json::Value::Integer(10000));
+    json::Value facts = json::Value::Array();
+    for (const char* fact : {"value", "text", "checked", "enabled", "geometry", "actions"}) {
+      facts.Append(json::Value::String(std::string(fact)));
+    }
+    json::Value value = json::Value::Object();
+    value.Set("windowId", json::Value::String(target));
+    value.Set("budget", budget);
+    value.Set("facts", facts);
+    if (rootId) {
+      value.Set("rootId", json::Value::String(*rootId));
+    }
+    return value;
+  };
+  const auto observe = [&](const json::Value& params) { return driver.Execute("observe", params, token).result; };
+  const auto nodeIds = [](const json::Value& sample) {
+    std::vector<std::string> ids;
+    if (const json::Value* nodes = sample.Find("nodes"); nodes != nullptr) {
+      for (const json::Value& node : nodes->Items()) {
+        ids.push_back(node.StringField("id"));
+      }
+    }
+    return ids;
+  };
+  const auto nodeOfRole = [](const json::Value& sample, const char* role) {
+    const json::Value* nodes = sample.Find("nodes");
+    if (nodes != nullptr) {
+      for (const json::Value& node : nodes->Items()) {
+        if (node.StringField("role") == role) {
+          return node;
+        }
+      }
+    }
+    return json::Value::Null();
+  };
+
+  const json::Value first = observe(request(windowId, 5000));
+  const json::Value* unsupported = first.Find("unsupportedFacts");
+  const json::Value buttonNode = nodeOfRole(first, "button");
+  const json::Value passwordNode = nodeOfRole(first, "textbox");
+  const std::vector<std::string> ids = nodeIds(first);
+  Check(first.BoolField("complete") && ids.size() >= 3 && unsupported != nullptr &&
+            unsupported->Items().size() == 1 && unsupported->Items().front().AsString() == "actions",
+        "a window observed within every budget is complete and refuses only actions");
+  Check(buttonNode.IsObject() && buttonNode.StringField("name") == "Observe button" &&
+            buttonNode.StringField("parentId") == ids.front() && buttonNode.Find("rect") != nullptr &&
+            buttonNode.Find("enabled") != nullptr && buttonNode.Find("enabled")->BoolField("value") &&
+            !buttonNode.Has("actions"),
+        "an observed button reports its parent, name, geometry, and requested states");
+  Check(passwordNode.IsObject() && !passwordNode.Has("value") && !passwordNode.Has("text"),
+        "an observed password field never reports its value or text");
+
+  const json::Value second = observe(request(windowId, 5000));
+  Check(nodeIds(second) == ids, "observing an unchanged window again reports the same ids in the same order");
+  const CommandResult tree = driver.Execute("tree", [&]() {
+    json::Value params = json::Value::Object();
+    params.Set("windowId", json::Value::String(windowId));
+    return params;
+  }(), token);
+  std::vector<std::string> treeIds;
+  for (const json::Value& entry : tree.result.Items()) {
+    treeIds.push_back(entry.StringField("id"));
+  }
+  Check(treeIds == ids, "a tree walk of the observed window reports the observed ids");
+
+  const json::Value limited = observe(request(windowId, 1));
+  const json::Value* truncation = limited.Find("truncation");
+  Check(!limited.BoolField("complete", true) && nodeIds(limited) == std::vector<std::string>{ids.front()} &&
+            truncation != nullptr && truncation->Items().size() == 1 &&
+            truncation->Items().front().StringField("reason") == "visited",
+        "a visited budget of one reports the window root and the visited reason");
+
+  const std::string buttonId = buttonNode.StringField("id");
+  const json::Value rooted = observe(request(windowId, 5000, buttonId));
+  const json::Value* rootedNodes = rooted.Find("nodes");
+  Check(rootedNodes != nullptr && !rootedNodes->Items().empty() &&
+            rootedNodes->Items().front().StringField("id") == buttonId &&
+            !rootedNodes->Items().front().Has("parentId") && rootedNodes->Items().front().NumberField("depth", -1) == 0,
+        "an observation rooted at a tracked element starts at that element without a parent");
+
+  const json::Value otherSample = observe(request(otherId, 5000));
+  const std::string otherButtonId = nodeOfRole(otherSample, "button").StringField("id");
+  Check(!otherButtonId.empty() &&
+            FailureCode([&]() { observe(request(windowId, 5000, otherButtonId)); }) == kErrorStaleElement,
+        "a root from another window is refused as stale-element");
+  Check(FailureCode([&]() { observe(request(windowId, 5000, std::string("element-unknown"))); }) ==
+            kErrorStaleElement,
+        "an untracked root is refused as stale-element");
+  Check(FailureCode([&]() { observe(request("window-unknown", 5000)); }) == kErrorNoSuchWindow,
+        "an unknown window is refused as no-such-window");
+
+  const auto release = [&](std::vector<std::string> released) {
+    json::Value list = json::Value::Array();
+    for (std::string& id : released) {
+      list.Append(json::Value::String(std::move(id)));
+    }
+    json::Value params = json::Value::Object();
+    params.Set("ids", list);
+    return driver.Execute("releaseElements", params, token).result;
+  };
+  const auto released = [&](std::vector<std::string> named) {
+    const json::Value* count = release(std::move(named)).Find("released");
+    return count == nullptr ? -1 : count->AsInteger(-1);
+  };
+  Check(released({otherButtonId, "element-unknown"}) == 1 && released({otherButtonId}) == 0,
+        "releasing reports how many tracked ids it dropped");
+  Check(FailureCode([&]() { release({buttonId, buttonId}); }) == kErrorInvalidParams,
+        "a release that names an id twice is refused");
+  json::Value snapshot = json::Value::Object();
+  snapshot.Set("elementId", json::Value::String(otherButtonId));
+  Check(FailureCode([&]() { driver.Execute("snapshot", snapshot, token); }) == kErrorStaleElement,
+        "a released id answers stale-element");
+  const std::string renewed = nodeOfRole(observe(request(otherId, 5000)), "button").StringField("id");
+  Check(!renewed.empty() && renewed != otherButtonId, "an element observed again after release gets a new id");
+
+  const CommandResult probe = driver.Execute("probe", json::Value::Object(), token);
+  const json::Value* features = probe.result.Find("features");
+  Check(features != nullptr && features->BoolField("boundedObservation"), "the probe reports bounded observation");
+
+  ElementRegistry& registry = driver.AutomationForTesting().RegistryForTesting();
+  const std::size_t before = registry.size();
+  driver.AutomationForTesting().ForgetWindow(windowId);
+  driver.AutomationForTesting().ForgetWindow(otherId);
+  Check(before > 0 && registry.size() == 0, "forgetting the windows drops every observed element");
+}
+
 }  // namespace
 
 int RunSelfTest() {
@@ -2582,10 +2754,12 @@ int RunSelfTest() {
   TestDriverRefusesReplacedElements();
   TestDriverDisabledElements();
   TestDriverHitTestBeyondScreens();
+  TestDriverObservation();
   TestSnapshotShape();
   TestLeaseIdentity();
   TestHello();
   RunAuthoritySelfTests(Check);
+  RunObservationSelfTests(Check);
   std::cout << (failures == 0 ? "self-test passed: " : "self-test failed: ") << (checks - failures) << '/' << checks
             << " checks\n";
   return failures == 0 ? 0 : 1;
