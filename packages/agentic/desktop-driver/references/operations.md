@@ -17,8 +17,8 @@ exposes them to MCP clients as five tools. Controller lifecycle is open work in
 the [implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
-([FDR1](../native/PROTOCOL.md#bounded-observation)): the macOS helper and the
-fake host today. The Windows helper is open work. On any other provider the
+([FDR1](../native/PROTOCOL.md#bounded-observation)): both native helpers and the
+fake host. On any other provider the
 catalog reports every operation but `journal` as unavailable with
 `bounded-observation-unsupported`, and the driver never substitutes the
 unbounded `tree`.
@@ -226,7 +226,9 @@ it or inside it. A covered element fails with `obscured`, which `activate` does
 not check.
 
 `perform` names an action by what `observe`'s `actions` fact shows, such as
-`AXPress` or an application's custom action. Names are not unique, so inside
+`AXPress`, an application's custom action, or Windows UIA `Invoke` and
+`Toggle` (see [the Windows mapping](../native/windows/README.md#named-accessibility-actions)).
+Names are not unique, so inside
 the same input turn the service lists the element's actions again and refuses
 a name the element does not publish (`action-not-published`) or publishes more
 than once (`action-not-unique`). It then sends the provider the opaque key the
@@ -492,14 +494,29 @@ option. Pass server options, such as the content policy, as the harness's third
 argument. Parse real results against the published schemas with
 `z.fromJSONSchema(entry.output)`.
 
+On Windows, opt in with `FURN_NATIVE_DRIVER_TEST=1` and run
+`yarn test --runInBand operations.contract`. The test-only plain Win32
+fixture exercises the real helper through the service and typed client:
+`act` (physical click, activation, type, clear, and named Invoke/Toggle),
+ambiguity rejection, `check` and timed waits, `sequence` and early stop,
+window/element `capture` with paged `artifact` hashes, and unsettled named
+mutation quarantine. Physical click and crop geometry are qualified at 100%
+and 150% scale. These are native Win32 fixture results, not React Native
+Fabric or Paper application qualification.
+
 ## Limitations
 
-- Observation depends on the provider. The Windows provider and trees near the
-  5,000-element limit are not yet qualified. On macOS, a stopped application
+- Observation depends on the provider. Real React Native application
+  qualification and bounded-operation trees near the 5,000-element limit
+  remain open. On macOS, a stopped application
   fails a read after about 1.5 seconds with the reason `target-non-response`, and
   the helper's memory stayed flat across thousands of reads; both were measured
   against Calculator and Font Book only
   ([details](../native/macos/README.md#bounded-observation)).
+- A Windows UIA read can time out while serialized behind an unsettled
+  provider action. `check` waits retry unmet predicates, not provider failures;
+  after a read failure, re-observe once the application responds. A late
+  action completion does not lift quarantine.
 - Names come from the application. Font Book exposes three window-control
   buttons with no name, so an agent finds them by role and position.
 - A provider repeats `{ "supported": false }` for every node when an

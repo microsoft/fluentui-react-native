@@ -15,7 +15,7 @@ namespace {
 // unsettled so the session can be re-observed and shut down safely.
 bool IsGuardedMutation(const std::string& command) {
   return command == "click" || command == "clear" || command == "sendKeys" || command == "performActions" ||
-         command == "activate" || command == "setWindowRect";
+         command == "activate" || command == "setWindowRect" || command == "performAccessibilityAction";
 }
 
 json::Value EffectDetail(MutationEffect effect) {
@@ -264,6 +264,8 @@ json::Value Driver::ProbeResult(const json::Value& params) {
   const bool physical = input_.Availability().available;
   const bool screenshot = capture_.Available();
   json::Value features = json::Value::Object();
+  features.Set("accessibilityActions", json::Value::Bool(true));
+  features.Set("performAccessibilityAction", json::Value::Bool(true));
   features.Set("accessibilityClick", json::Value::Bool(true));
   features.Set("boundedObservation", json::Value::Bool(true));
   features.Set("elementScreenshot", json::Value::Bool(screenshot));
@@ -746,6 +748,22 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
         }
         break;
     }
+    result.result = json::Value::Null();
+    return result;
+  }
+  if (command == "accessibilityActions") {
+    result.result = automation_.AccessibilityActions(RequireString(params, "elementId"), token);
+    return result;
+  }
+  if (command == "performAccessibilityAction") {
+    const std::string elementId = RequireString(params, "elementId");
+    const std::string key = RequireString(params, "key");
+    if (key.size() > 128) {
+      Fail(kErrorInvalidParams, "The action key exceeds 128 bytes.");
+    }
+    RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
+    automation_.PerformAccessibilityAction(elementId, key, token);
     result.result = json::Value::Null();
     return result;
   }

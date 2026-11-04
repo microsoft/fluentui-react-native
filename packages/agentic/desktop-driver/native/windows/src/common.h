@@ -73,16 +73,18 @@ inline const char* MutationEffectName(MutationEffect effect) noexcept {
 // Structured failure that maps directly onto a protocol error response.
 class HelperError : public std::runtime_error {
  public:
-  HelperError(std::string code, const std::string& message)
-      : std::runtime_error(message), code_(std::move(code)) {}
+  HelperError(std::string code, const std::string& message, std::string reason = {})
+      : std::runtime_error(message), code_(std::move(code)), reason_(std::move(reason)) {}
 
   const std::string& code() const noexcept { return code_; }
+  const std::string& reason() const noexcept { return reason_; }
   // Set only when a mutating command fails; reads and lifecycle commands carry none.
   const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
   void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
 
  private:
   std::string code_;
+  std::string reason_;
   std::optional<MutationEffect> effect_;
 };
 

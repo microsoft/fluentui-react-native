@@ -108,6 +108,7 @@ The helper provides:
 - live opaque window and element identity;
 - physical SendInput click, keyboard, pointer, and wheel actions;
 - accessibility activation where the control exposes a supported pattern;
+- named UIA actions with opaque keys and live pattern revalidation;
 - window activation and hit testing;
 - complete source/tree output;
 - occlusion-independent window capture and scaled element crops through
@@ -147,6 +148,29 @@ A subtree walk retries while its root remains available if a descendant
 becomes unavailable, or if a closing popup island's provider reports a UI
 Automation timeout or an unspecified failure. Only an unavailable root is a
 stale element.
+
+### Named accessibility actions
+
+The helper advertises `accessibilityActions` and `performAccessibilityAction`.
+`accessibilityActions` reads the live element's supported UIA patterns and
+returns parallel `actions` and `keys` arrays. Names are in this provider order:
+`Invoke`, `Toggle`, `Expand`, `Collapse`, `Select`, `AddToSelection`,
+`RemoveFromSelection`, `ScrollIntoView`. Only actions of supported patterns
+are listed; an element without them returns two empty arrays. Legacy
+IAccessible default actions are not part of this named surface.
+
+Each key is an HMAC-SHA256 of the fixed pattern-and-method identity under a
+random process secret, truncated to 32 hexadecimal characters. It is not a
+display-name lookup. `performAccessibilityAction` refreshes the element and
+its available patterns, requires exactly one matching key, and resolves that
+pattern's current interface before invoking its exact method. A missing or
+ambiguous key fails with `element-not-interactable`, reason `action-changed`,
+and effect `none`; an expired element is `stale-element`. Dispatch uses the
+same bounded mutation worker, effect ledger, and lease-scoped quarantine as
+accessibility clicks. Neither names nor keys enter the native command journal.
+
+The `observe` `actions` fact uses cached pattern-availability properties, so
+listing actions adds no per-node provider calls to the bounded walk.
 
 ### Window events and identity
 
@@ -240,8 +264,9 @@ the UI Automation connection and transaction timeouts (2 and 5 seconds).
 Nodes carry the same role, name, automation id, scope, and facts as `snapshot`,
 with `rect` window-relative. A password field (`UIA_IsPasswordPropertyId`) never
 reports `value` or `text`. Strings are cut to `maxStringLength` UTF-16 code
-units without splitting a surrogate pair and named in `clipped`. UI Automation
-has no action list, so `unsupportedFacts` lists `actions` when it is requested.
+units without splitting a surrogate pair and named in `clipped`. Requested
+`actions` lists the supported named UIA operations, including an empty list
+for an element without an action pattern.
 An element reachable twice (the same runtime id) is emitted once under its first
 parent; elements without a runtime id are never taken for duplicates.
 
@@ -304,7 +329,8 @@ Click tries `Invoke`, `Toggle`, `SelectionItem`, `ExpandCollapse`, then
 the call and the application applies the effect afterwards, so callers poll for
 the visible result.
 
-While quarantined, `click`, `clear`, `sendKeys`, `performActions`, `activate`,
+While quarantined, `click`, `clear`, `sendKeys`, `performActions`,
+`performAccessibilityAction`, `activate`,
 and `setWindowRect` fail with `target-quarantined` before reaching the
 application, for every window the helper drives, and the physical `clear`
 fallback never runs after an unsettled `SetValue`. Observation commands,
@@ -333,7 +359,8 @@ operation; an unsettled call can still land after the helper exits. See
 ### Mutation effects
 
 Failed and cancelled mutating commands (`activate`, `clear`, `click`,
-`closeWindow`, `performActions`, `releaseActions`, `sendKeys`, `setWindowRect`)
+`closeWindow`, `performAccessibilityAction`, `performActions`, `releaseActions`,
+`sendKeys`, `setWindowRect`)
 report an FDR1 `effect`, so Node can tell a rejection from a mutation that may
 have reached the application (see [PROTOCOL.md](../PROTOCOL.md)). Reads and
 lifecycle commands carry none.
@@ -343,7 +370,8 @@ resets and scopes to each command. It counts only primary mutations, at the
 point they are dispatched:
 
 - each UI Automation pattern action and value write (`Invoke`, `Toggle`,
-  `Select`, `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
+  `Select`, `AddToSelection`, `RemoveFromSelection`, `ScrollIntoView`,
+  `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
   `RecordDispatching()` and `RecordSettled()`;
 - every key, button, and wheel event that `SendInput` inserts into the input
   stream, a posted `WM_CLOSE`, and each window restore or `SetWindowPos` that
@@ -444,6 +472,14 @@ application, and a stuck call quarantines the target until the launched
 application is closed. `yarn test --runInBand protectedService` runs only that
 suite.
 
+`yarn test --runInBand operations.contract` exercises the agent operation
+routes against the same fixture. It activates the window and sends physical
+pointer and keyboard input, so it requires an unlocked interactive desktop.
+It covers cited and selector-based actions, ambiguity rejection, checks and
+bounded waits, sequence stop behavior, paged window and element captures,
+named Invoke/Toggle, privacy, and an unsettled named action whose late
+completion does not lift quarantine.
+
 Three more suites drive only the authority modes against the real helper. They
 need no application and never touch the per-user default root.
 `privateStorage` checks byte-exact round trips, exclusive and concurrent
@@ -489,8 +525,21 @@ React Native Win32 Paper smoke on Windows 11 x64 in an RDP session:
 authored tests rendered the full 176-story catalog and ran 5 authored tests (pointer activation,
 toggle, keyboard input and clear, native popup) with no failures. Not yet
 qualified: Windows Fabric (it needs a native build and packaged app
-registration), DPI scaling beyond the machine's current setting, live lock,
+registration), 200% and mixed-monitor DPI, live lock,
 disconnect, and integrity transitions, a hung React Native app, and menu popups.
+
+The agent operation routes have also passed against the plain Win32 fixture
+at 100% and 150% scale: hit-tested physical click, keyboard type/clear,
+semantic activation, named Invoke/Toggle, checks, sequences, and captures.
+The status crop measured 440 x 20 and 660 x 30 pixels respectively; visual
+inspection confirmed the whole status text was aligned in each crop.
+`desktop-test serve --agent` and the no-argument MCP adapter were exercised
+at both scales with an external fixture: owner-only default descriptor,
+live service verification, resolved target identity, launch refusal, attach,
+act/check, hash-verified capture resources, and descriptor removal while the
+attached app survived. Shutdown used the CLI's stop handler through a
+test-only IPC bridge, not a physical console Ctrl+C. These fixture results
+do not qualify either React Native renderer's new agent-operation path.
 
 CI must build this helper explicitly into a job-local cache, run the opt-in
 native contract once for the shared Windows/Win32 provider, verify each

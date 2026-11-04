@@ -8,6 +8,8 @@
 #include <memory>
 #include <thread>
 
+#include <bcrypt.h>
+
 #include "settlement.h"
 namespace furn {
 namespace {
@@ -18,6 +20,61 @@ constexpr std::size_t kMaximumAncestorWalk = 64;
 // bounded step that reports an explicit failure instead of wedging the helper;
 // a mutation that cannot settle also quarantines later mutations (settlement.h).
 constexpr DWORD kProviderCallTimeoutMs = 5000;
+
+struct ActionMapping {
+  const char* name;
+  const char* identity;
+  bool ElementSnapshot::*available;
+};
+
+constexpr ActionMapping kAccessibilityActions[] = {
+    {"Invoke", "UIA.Invoke.Invoke", &ElementSnapshot::invokePattern},
+    {"Toggle", "UIA.Toggle.Toggle", &ElementSnapshot::togglePattern},
+    {"Expand", "UIA.ExpandCollapse.Expand", &ElementSnapshot::expandCollapsePattern},
+    {"Collapse", "UIA.ExpandCollapse.Collapse", &ElementSnapshot::expandCollapsePattern},
+    {"Select", "UIA.SelectionItem.Select", &ElementSnapshot::selectionItemPattern},
+    {"AddToSelection", "UIA.SelectionItem.AddToSelection", &ElementSnapshot::selectionItemPattern},
+    {"RemoveFromSelection", "UIA.SelectionItem.RemoveFromSelection", &ElementSnapshot::selectionItemPattern},
+    {"ScrollIntoView", "UIA.ScrollItem.ScrollIntoView", &ElementSnapshot::scrollItemPattern},
+};
+
+std::string ActionKey(const ActionMapping& action) {
+  static auto secret = []() {
+    std::array<unsigned char, 32> bytes{};
+    if (BCryptGenRandom(nullptr, bytes.data(), static_cast<ULONG>(bytes.size()), BCRYPT_USE_SYSTEM_PREFERRED_RNG) < 0) {
+      Fail(kErrorInternal, "Could not initialize accessibility action keys.");
+    }
+    return bytes;
+  }();
+  std::string identity(action.identity);
+  std::array<unsigned char, 32> digest{};
+  if (BCryptHash(BCRYPT_HMAC_SHA256_ALG_HANDLE, secret.data(), static_cast<ULONG>(secret.size()),
+                 reinterpret_cast<PUCHAR>(identity.data()), static_cast<ULONG>(identity.size()),
+                 digest.data(), static_cast<ULONG>(digest.size())) < 0) {
+    Fail(kErrorInternal, "Could not identify the accessibility action.");
+  }
+  constexpr char hex[] = "0123456789abcdef";
+  std::string key;
+  for (std::size_t index = 0; index < 16; ++index) {
+    key += hex[digest[index] >> 4];
+    key += hex[digest[index] & 15];
+  }
+  return key;
+}
+
+std::vector<std::string> ActionNames(const ElementSnapshot& snapshot) {
+  std::vector<std::string> names;
+  for (const auto& action : kAccessibilityActions) {
+    if (snapshot.*(action.available)) {
+      names.emplace_back(action.name);
+    }
+  }
+  return names;
+}
+
+[[noreturn]] void ActionChanged() {
+  throw HelperError(kErrorNotInteractable, "The element no longer publishes exactly one matching action.", "action-changed");
+}
 
 template <typename Fn>
 HRESULT BoundedMutation(Fn&& call, std::string_view operation) {
@@ -34,6 +91,29 @@ HRESULT CountedMutation(Fn&& call, std::string_view operation) {
   const HRESULT result = BoundedMutation(std::forward<Fn>(call), operation);
   RecordSettled(result);
   return result;
+}
+
+template <typename Pattern>
+void PerformPatternAction(IUIAutomationElement* element, PATTERNID patternId, HRESULT (STDMETHODCALLTYPE Pattern::*method)(),
+                          const CancellationToken& token) {
+  winrt::com_ptr<Pattern> pattern;
+  const HRESULT query = element->GetCurrentPatternAs(patternId, IID_PPV_ARGS(pattern.put()));
+  if (query == UIA_E_ELEMENTNOTAVAILABLE) {
+    Fail(kErrorStaleElement, "The element is no longer available.");
+  }
+  if (query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL || query == E_FAIL ||
+      (SUCCEEDED(query) && !pattern)) {
+    ActionChanged();
+  }
+  CheckHresult(kErrorAutomationFailed, "Reading the accessibility action pattern", query);
+  token.ThrowIfCancelled();
+  const HRESULT result = CountedMutation([pattern, method]() { return (pattern.get()->*method)(); },
+                                         "Performing the accessibility action");
+  if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+    Fail(kErrorStaleElement, "The element is no longer available.");
+  }
+  CheckHresult(result == UIA_E_ELEMENTNOTENABLED ? kErrorNotInteractable : kErrorAutomationFailed,
+               "Performing the accessibility action", result);
 }
 
 template <typename Fn>
@@ -379,6 +459,7 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_IsTogglePatternAvailablePropertyId,
       UIA_IsSelectionItemPatternAvailablePropertyId,
       UIA_IsExpandCollapsePatternAvailablePropertyId,
+      UIA_IsScrollItemPatternAvailablePropertyId,
       UIA_IsValuePatternAvailablePropertyId,
       UIA_IsPasswordPropertyId,
   };
@@ -574,6 +655,7 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
   snapshot.togglePattern = patternAvailable(UIA_IsTogglePatternAvailablePropertyId);
   snapshot.selectionItemPattern = patternAvailable(UIA_IsSelectionItemPatternAvailablePropertyId);
   snapshot.expandCollapsePattern = patternAvailable(UIA_IsExpandCollapsePatternAvailablePropertyId);
+  snapshot.scrollItemPattern = patternAvailable(UIA_IsScrollItemPatternAvailablePropertyId);
   snapshot.valuePattern = patternAvailable(UIA_IsValuePatternAvailablePropertyId);
   if (snapshot.role == "group" && snapshot.valuePattern && snapshot.keyboardFocusable) {
     snapshot.role = "textbox";
@@ -825,8 +907,7 @@ class UiaObservationSource final : public ObservationSource {
   }
 
   std::vector<ObserveFact> UnsupportedFacts() const override {
-    // UI Automation has no per-element action list.
-    return {ObserveFact::Actions};
+    return {};
   }
 
   ObservedFacts Read(ObservationHandle handle) override {
@@ -836,6 +917,7 @@ class UiaObservationSource final : public ObservationSource {
     facts.role = snapshot.role;
     facts.name = snapshot.name;
     facts.automationId = snapshot.automationId;
+    facts.actions = ActionNames(snapshot);
     Variant password;
     facts.secure = SUCCEEDED(element->GetCachedPropertyValueEx(UIA_IsPasswordPropertyId, TRUE, password.put())) &&
                    password.type() == VT_BOOL && password.get().boolVal != VARIANT_FALSE;
@@ -1234,6 +1316,67 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
   Fail(kErrorUnsupported,
        "The element does not implement an Invoke, Toggle, SelectionItem, ExpandCollapse, or LegacyIAccessible pattern, so an "
        "accessibility click is unavailable.");
+}
+
+json::Value Automation::AccessibilityActions(const std::string& elementId, const CancellationToken& token) {
+  const ElementSnapshot snapshot = SnapshotElement(elementId, token);
+  json::Value names = json::Value::Array();
+  json::Value keys = json::Value::Array();
+  for (const auto& action : kAccessibilityActions) {
+    if (snapshot.*(action.available)) {
+      names.Append(json::Value::String(std::string(action.name)));
+      keys.Append(json::Value::String(ActionKey(action)));
+    }
+  }
+  json::Value result = json::Value::Object();
+  result.Set("actions", std::move(names));
+  result.Set("keys", std::move(keys));
+  return result;
+}
+
+void Automation::PerformAccessibilityAction(const std::string& elementId, const std::string& key,
+                                            const CancellationToken& token) {
+  const ElementSnapshot snapshot = SnapshotElement(elementId, token);
+  std::optional<std::size_t> matched;
+  for (std::size_t index = 0; index < std::size(kAccessibilityActions); ++index) {
+    const auto& action = kAccessibilityActions[index];
+    if (snapshot.*(action.available) && ActionKey(action) == key) {
+      if (matched) {
+        ActionChanged();
+      }
+      matched = index;
+    }
+  }
+  if (!matched) {
+    ActionChanged();
+  }
+  const auto element = RequireRecord(elementId).element;
+  switch (*matched) {
+    case 0:
+      PerformPatternAction(element.get(), UIA_InvokePatternId, &IUIAutomationInvokePattern::Invoke, token);
+      break;
+    case 1:
+      PerformPatternAction(element.get(), UIA_TogglePatternId, &IUIAutomationTogglePattern::Toggle, token);
+      break;
+    case 2:
+      PerformPatternAction(element.get(), UIA_ExpandCollapsePatternId, &IUIAutomationExpandCollapsePattern::Expand, token);
+      break;
+    case 3:
+      PerformPatternAction(element.get(), UIA_ExpandCollapsePatternId, &IUIAutomationExpandCollapsePattern::Collapse, token);
+      break;
+    case 4:
+      PerformPatternAction(element.get(), UIA_SelectionItemPatternId, &IUIAutomationSelectionItemPattern::Select, token);
+      break;
+    case 5:
+      PerformPatternAction(element.get(), UIA_SelectionItemPatternId, &IUIAutomationSelectionItemPattern::AddToSelection, token);
+      break;
+    case 6:
+      PerformPatternAction(element.get(), UIA_SelectionItemPatternId, &IUIAutomationSelectionItemPattern::RemoveFromSelection, token);
+      break;
+    case 7:
+      PerformPatternAction(element.get(), UIA_ScrollItemPatternId, &IUIAutomationScrollItemPattern::ScrollIntoView, token);
+      break;
+  }
 }
 
 bool Automation::TryClearValue(const std::string& elementId) {

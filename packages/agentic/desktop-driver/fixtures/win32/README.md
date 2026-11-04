@@ -22,8 +22,10 @@ Remove-Item Env:\FURN_NATIVE_DRIVER_TEST
 Without `FURN_NATIVE_DRIVER_TEST=1` the suite is skipped. Use `--runInBand`: the scenarios share one desktop and one
 build cache, and each starts its own helper process because the mutation quarantine is process-wide. A full run takes
 about one minute. The onscreen scenario needs an unlocked interactive desktop for hit testing and capture; every other
-scenario places the window off every monitor. `yarn test --runInBand protectedService` runs the second suite that uses
-this fixture, described below.
+scenario places the window off every monitor. `yarn test --runInBand protectedService` runs the protected-service suite,
+and `yarn test --runInBand operations.contract` runs the agent-operation
+suite described below. The latter activates the fixture and sends real
+pointer and keyboard input.
 
 ## Options
 
@@ -86,3 +88,20 @@ service with the real helper behind it, and covers what the fake host in `src/se
 
 Behavior contracts live with the helper: see [Windows helper](../../native/windows/README.md) and the
 [protocol](../../native/PROTOCOL.md).
+
+`src/native/windows/operations.contract.test.ts` drives the real service
+operation routes rather than raw helper commands:
+
+- Cited activation and physical click, selector-based type/clear, and
+  refusal of an ambiguous selector.
+- Two actions and a check in a sequence, early stop, and a timed-out wait.
+- Window and status-element PNG captures, scaled crop dimensions, and
+  byte-for-byte artifact paging verified against SHA-256.
+- Published UIA Invoke/Toggle, an unpublished name rejected without effect,
+  and journals without action names or typed content.
+- A stuck named Invoke that quarantines later operations even after its
+  late application effect is observed exactly once.
+
+Physical click and crop alignment have been checked at 100% and 150% scale.
+Other DPI configurations and React Native applications remain separate
+qualification lanes.

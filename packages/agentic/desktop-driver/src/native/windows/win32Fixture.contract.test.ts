@@ -151,6 +151,10 @@ describe('Windows helper against a plain Win32 application', () => {
       expect(control('1002')).toMatchObject({ name: 'Name:', role: 'textbox' });
       expect(control('1003')).toMatchObject({ name: 'Enabled', role: 'checkbox' });
       expect(control('1004')).toMatchObject({ name: 'Ready', role: 'text' });
+      expect(await session.call('accessibilityActions', { elementId: control('1004').id })).toEqual({ actions: [], keys: [] });
+      await expect(
+        session.host.request('performAccessibilityAction', { elementId: control('1001').id, key: 'unknown-key' }),
+      ).rejects.toMatchObject({ code: 'element-not-interactable', data: { reason: 'action-changed' }, effect: 'none' });
       expect(tree.filter((element) => element.role === 'menuitem').map((element) => element.name)).toEqual(
         expect.arrayContaining(['File', 'Help']),
       );

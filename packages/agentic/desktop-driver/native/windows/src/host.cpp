@@ -48,7 +48,8 @@ json::Value CreateHello() {
   hello.Set("protocol", protocol);
 
   json::Value features = json::Value::Array();
-  for (const char* feature : {"accessibilityClick", "activeElement", "boundedObservation", "capture", "elementCapture",
+  for (const char* feature : {"accessibilityActions", "accessibilityClick", "performAccessibilityAction",
+                              "activeElement", "boundedObservation", "capture", "elementCapture",
                               "find", "hitTest", "keyboard", "launch", "attach", "pointer", "probe", "releaseActions",
                               "setWindowRect", "source", "tree", "wheel", "windowEvents"}) {
     features.Append(json::Value::String(std::string(feature)));
@@ -123,13 +124,17 @@ bool Host::WriteResponse(const std::string& id, const std::string& command, cons
 }
 
 bool Host::WriteError(const std::string& id, const std::string& command, const std::string& code,
-                      const std::string& message, std::optional<MutationEffect> effect) noexcept {
+                      const std::string& message, std::optional<MutationEffect> effect,
+                      const std::string& reason) noexcept {
   try {
     json::Value error = json::Value::Object();
     error.Set("code", json::Value::String(code));
     error.Set("message", json::Value::String(BoundedField(message, 4096)));
     json::Value data = json::Value::Object();
     data.Set("command", json::Value::String(BoundedField(command, 256)));
+    if (!reason.empty()) {
+      data.Set("reason", json::Value::String(BoundedField(reason, 128)));
+    }
     error.Set("data", data);
     if (effect) {
       error.Set("effect", json::Value::String(std::string(MutationEffectName(*effect))));
@@ -230,7 +235,7 @@ void Host::WorkerLoop() {
       cancelled = true;
       cancelledEffect = error.effect();
     } catch (const HelperError& error) {
-      wroteResult = WriteError(request.id, request.command, error.code(), error.what(), error.effect());
+      wroteResult = WriteError(request.id, request.command, error.code(), error.what(), error.effect(), error.reason());
     } catch (const winrt::hresult_error& error) {
       wroteResult = WriteError(request.id, request.command, kErrorInternal, ToUtf8(error.message().c_str()));
     } catch (const std::exception& error) {

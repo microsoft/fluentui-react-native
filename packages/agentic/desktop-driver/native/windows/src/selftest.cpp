@@ -2759,6 +2759,7 @@ void TestDriverMutationEffects() {
   // Rejected before anything reached the application.
   const std::vector<std::pair<const char*, json::Value>> rejected = {
       {"click", unknownElement},
+      {"performAccessibilityAction", StringFields({{"elementId", "element-unknown"}, {"key", "unknown"}})},
       {"clear", unknownElement},
       {"sendKeys", StringFields({{"elementId", buttonId}})},
       {"performActions", empty},
@@ -2797,6 +2798,7 @@ void TestDriverMutationEffects() {
   cancelled.Cancel();
   const std::vector<std::pair<const char*, json::Value>> started = {
       {"click", StringFields({{"elementId", buttonId}, {"mode", "accessibility"}})},
+      {"performAccessibilityAction", StringFields({{"elementId", buttonId}, {"key", "unknown"}})},
       {"clear", StringFields({{"elementId", buttonId}})},
       {"sendKeys", StringFields({{"elementId", buttonId}, {"text", "a"}})},
       {"performActions", typeA},
@@ -2846,6 +2848,9 @@ void TestDriverMutationEffects() {
                 "none" &&
             code == kErrorTargetQuarantined,
         "a mutation refused by the resulting quarantine reports no effect");
+  Check(effectOf("performAccessibilityAction", StringFields({{"elementId", buttonId}, {"key", "unknown"}}), token, &code) ==
+                "none" && code == kErrorTargetQuarantined,
+        "a named action refused by the resulting quarantine reports no effect");
   SetEditGate(nullptr);
   gate->Open();
   std::string refusal;
@@ -2992,6 +2997,98 @@ void TestDriverHitTestBeyondScreens() {
         "a hit test beyond every monitor registers no foreign element");
 }
 
+void TestAccessibilityActions() {
+  const CancellationToken token;
+  buttonClicks.store(0);
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestNamedActions", L"Named actions", &CountingWindowProc);
+  const HWND button = windows.CreateChild(window, L"BUTTON", L"Invoke control", 101);
+  const HWND toggle = windows.CreateChild(window, L"BUTTON", L"Toggle control", 102, BS_AUTOCHECKBOX);
+  const HWND label = windows.CreateChild(window, L"STATIC", L"No actions", 103);
+  Check(window != nullptr && button != nullptr && toggle != nullptr && label != nullptr,
+        "the named-action fixture creates invoke, toggle, and read-only controls");
+  if (window == nullptr || button == nullptr || toggle == nullptr || label == nullptr) {
+    return;
+  }
+  Driver driver;
+  json::Value lease = json::Value::Object();
+  lease.Set("lease", driver.AdoptWindowForTesting(window, L"Named actions"));
+  const auto listed = driver.Execute("windows", lease, token).result;
+  const std::string windowId = listed.Items().front().StringField("id");
+  const auto tree = driver.Execute("tree", StringFields({{"windowId", windowId}}), token).result;
+  const auto idFor = [&](const char* id) {
+    for (const auto& node : tree.Items()) {
+      if (node.StringField("automationId") == id) {
+        return node.StringField("id");
+      }
+    }
+    return std::string();
+  };
+  const std::string buttonId = idFor("101");
+  const std::string toggleId = idFor("102");
+  const std::string labelId = idFor("103");
+  const auto actions = [&](const std::string& id) {
+    return driver.Execute("accessibilityActions", StringFields({{"elementId", id}}), token).result;
+  };
+  const auto keyFor = [](const json::Value& list, const char* name) {
+    const auto* names = list.Find("actions");
+    const auto* keys = list.Find("keys");
+    if (names != nullptr && keys != nullptr && names->Items().size() == keys->Items().size()) {
+      for (std::size_t index = 0; index < names->Items().size(); ++index) {
+        if (names->Items()[index].AsString() == name) {
+          return keys->Items()[index].AsString();
+        }
+      }
+    }
+    return std::string();
+  };
+  const std::string invokeKey = keyFor(actions(buttonId), "Invoke");
+  const std::string toggleKey = keyFor(actions(toggleId), "Toggle");
+  const auto opaque = [](const std::string& key) {
+    return key.size() == 32 && key.find_first_not_of("0123456789abcdef") == std::string::npos;
+  };
+  Check(opaque(invokeKey) && opaque(toggleKey) && invokeKey != toggleKey &&
+            keyFor(actions(buttonId), "Invoke") == invokeKey,
+        "named-action keys are opaque, stable, and distinguish exact pattern operations");
+  const auto empty = actions(labelId);
+  Check(empty.Find("actions") != nullptr && empty.Find("actions")->Items().empty() &&
+            empty.Find("keys") != nullptr && empty.Find("keys")->Items().empty(),
+        "an element without supported action patterns returns empty names and keys");
+  const auto perform = [&](const std::string& id, const std::string& key) {
+    return driver.Execute("performAccessibilityAction", StringFields({{"elementId", id}, {"key", key}}), token);
+  };
+  perform(buttonId, invokeKey);
+  Check(WaitFor([]() { return buttonClicks.load() == 1; }),
+        "performing the published Invoke key reaches the button once");
+  perform(toggleId, toggleKey);
+  Check(WaitFor([toggle]() { return SendMessageW(toggle, BM_GETCHECK, 0, 0) == BST_CHECKED; }),
+        "performing the published Toggle key changes the checkbox");
+  const auto refused = [&](const std::string& id, const std::string& key) {
+    try {
+      perform(id, key);
+    } catch (const HelperError& error) {
+      return error.code() == kErrorNotInteractable && error.reason() == "action-changed" &&
+             error.effect() == MutationEffect::None;
+    }
+    return false;
+  };
+  Check(refused(buttonId, "unknown-key"), "an unknown action key is refused with action-changed and no effect");
+  Check(refused(buttonId, toggleKey), "a key whose pattern is absent never falls through to another action");
+  Check(refused(labelId, invokeKey), "an action that is not in the live list is refused without dispatch");
+  windows.Destroy(button);
+  std::string code;
+  Check(FailureEffect([&]() { perform(buttonId, invokeKey); }, &code) == "none" && code == kErrorStaleElement,
+        "performing a formerly published action on a destroyed element is stale with no effect");
+  Check(buttonClicks.load() == 1, "refused named actions dispatch no additional button notifications");
+  const auto journal = driver.Execute("windowEvents", lease, token).result;
+  const auto* commands = journal.Find("commands");
+  Check(commands != nullptr && commands->Serialize().find(invokeKey) == std::string::npos &&
+            commands->Serialize().find(toggleKey) == std::string::npos &&
+            commands->Serialize().find("Invoke") == std::string::npos &&
+            commands->Serialize().find("Toggle") == std::string::npos,
+        "the native command journal records neither action names nor keys");
+}
+
 void TestDriverObservation() {
   const CancellationToken token;
   WindowThread windows;
@@ -3074,13 +3171,14 @@ void TestDriverObservation() {
   const json::Value passwordNode = nodeOfRole(first, "textbox");
   const std::vector<std::string> ids = nodeIds(first);
   Check(first.BoolField("complete") && ids.size() >= 3 && unsupported != nullptr &&
-            unsupported->Items().size() == 1 && unsupported->Items().front().AsString() == "actions",
-        "a window observed within every budget is complete and refuses only actions");
+            unsupported->Items().empty(),
+        "a window observed within every budget is complete with all requested facts supported");
   Check(buttonNode.IsObject() && buttonNode.StringField("name") == "Observe button" &&
             buttonNode.StringField("parentId") == ids.front() && buttonNode.Find("rect") != nullptr &&
             buttonNode.Find("enabled") != nullptr && buttonNode.Find("enabled")->BoolField("value") &&
-            !buttonNode.Has("actions"),
-        "an observed button reports its parent, name, geometry, and requested states");
+            buttonNode.Find("actions") != nullptr &&
+            buttonNode.Find("actions")->Serialize() == R"(["Invoke"])",
+        "an observed button reports its parent, name, geometry, states, and UIA actions");
   Check(passwordNode.IsObject() && !passwordNode.Has("value") && !passwordNode.Has("text"),
         "an observed password field never reports its value or text");
 
@@ -3202,6 +3300,7 @@ int RunSelfTest() {
   TestDriverMutationEffects();
   TestHostQueuedCancellation();
   TestDriverHitTestBeyondScreens();
+  TestAccessibilityActions();
   TestDriverObservation();
   TestSnapshotShape();
   TestLeaseIdentity();

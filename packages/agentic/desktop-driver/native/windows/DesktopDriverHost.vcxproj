@@ -53,7 +53,7 @@
       <PreprocessorDefinitions>UNICODE;_UNICODE;NOMINMAX;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>windowsapp.lib;uiautomationcore.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwmapi.lib;wtsapi32.lib;psapi.lib;iphlpapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>windowsapp.lib;uiautomationcore.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwmapi.lib;wtsapi32.lib;psapi.lib;iphlpapi.lib;ws2_32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -69,7 +69,7 @@
       <PreprocessorDefinitions>UNICODE;_UNICODE;NOMINMAX;WIN32_LEAN_AND_MEAN;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>windowsapp.lib;uiautomationcore.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwmapi.lib;wtsapi32.lib;psapi.lib;iphlpapi.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>windowsapp.lib;uiautomationcore.lib;d3d11.lib;dxgi.lib;windowscodecs.lib;dwmapi.lib;wtsapi32.lib;psapi.lib;iphlpapi.lib;ws2_32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>

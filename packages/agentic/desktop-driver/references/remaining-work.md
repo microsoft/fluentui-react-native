@@ -24,9 +24,11 @@ cancels active host work, rejects queued requests after re-authentication, and
 waits for native settlement before teardown. Lease expiry/reconnect,
 ownership ledgers, status/stop/recovery, cross-service claims, and supervisor
 wiring remain. The `act`, `check`, `sequence`, `capture`, and `artifact`
-operations exist and are exercised on macOS (M4), and the MCP adapter exposes
-them as five tools, exercised over stdio against Calculator on macOS (M5);
-Windows qualification remains. MR
+operations exist and are exercised against macOS Calculator and the plain
+Win32 fixture (M4). The MCP adapter exposes them as five tools, exercised over
+stdio through `desktop-test serve --agent` on both OSes (M5). Windows fixture
+operation and capture checks cover 100% and 150% scale; the React Native
+renderer lanes remain. MR
 has Windows/PowerShell pipe qualification; GitHub Actions rendering and
 console-interrupt coverage remain. M0-M6 remain open unless marked below. This
 status does not claim real-application qualification.
@@ -545,7 +547,7 @@ Fabric and Win32 Paper retain distinct app/runtime behavior and qualification.
 | Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).                                                                                                        |
 | Application ownership    | `native/windows/src/application.cpp` and trusted supervisor             | Not started: packaged AUMID and unpackaged executable identity under duplicate or changing titles, ACL validation, stale claims, and Job Object restrictions. The fixture has only a lifetime watchdog.                                                                                                                                                                                                                                                                                                     |
 | Popups and islands       | UIA traversal and window ownership                                      | Owned dialogs verified: the fixture rejects owner clicks and publishes destroy events, and a real native Callout test passed on Win32 Paper. Remaining: menu popups, which need activation to open and so are unqualified, and Fabric islands.                                                                                                                                                                                                                                                              |
-| Geometry and capture     | Windows geometry/capture modules                                        | Window and element PNG capture is verified on the fixture only. Remaining: 100/150/200% and mixed-DPI monitor moves, negative origins, crop alignment, minimized windows, and cancellation during capture.                                                                                                                                                                                                                                                                                                  |
+| Geometry and capture     | Windows geometry/capture modules                                        | Window/element PNG capture, physical hit-tested click, and crop alignment are verified on the fixture at 100% and 150%. Remaining: 200% and mixed-DPI monitor moves, negative origins, minimized windows, cancellation during capture, and React Native application qualification.                                                                                                                                                                                                                          |
 
 Keep UIA operations on correctly initialized/marshaled COM workers. Document
 the bounded-call settlement strategy explicitly; abandoning a thread and
@@ -778,11 +780,12 @@ is the reference provider, with one identity registry shared across `find`,
 `snapshot`, `observe`, and release, and a conformance grid covers each
 truncation reason. The macOS provider is implemented and live-checked, and the
 Windows provider is implemented and checked against its synthetic provider and
-the Win32 fixture (section 11). Action descriptors are implemented on macOS:
+the Win32 fixture (section 11). Action descriptors are implemented on both OSes:
 with `performAccessibilityAction`, the `accessibilityActions` response pairs
 each action with an opaque per-process key bound to the exact native action
-([FDR1](../native/PROTOCOL.md)); the Windows provider does not advertise it
-yet. M3 still owns bounded event tails and the native large-tree, replacement,
+([FDR1](../native/PROTOCOL.md)). Windows maps the supported standard UIA
+patterns to named operations without publishing platform identities.
+M3 still owns bounded event tails and the native large-tree, replacement,
 pagination, and delta tests.
 
 **Windows identity progress:** the Windows provider already bounds identity and
@@ -849,8 +852,13 @@ refuses a name the element does not publish exactly once, then performs the
 one action whose provider key matches, so display labels are never action ids.
 On macOS, `perform` with `AXPress`, by reference and by selector, entered 76 on
 Calculator, an unpublished name was rejected with effect `none`, and the
-journal held no action name. Windows qualification and the UIA pattern mapping
-behind `performAccessibilityAction` remain.
+journal held no action name. The Windows UIA mapping and the gated Win32
+operation-route contract are implemented
+([Windows behavior and qualification](../native/windows/README.md#named-accessibility-actions)).
+Remaining Windows geometry work is 200% and mixed-DPI monitor moves, negative
+origins, minimized windows, capture cancellation, and real React Native
+renderer qualification; the fixture's 100%/150% physical click and crop
+alignment checks pass.
 
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and
@@ -892,9 +900,14 @@ platform default, and withdraws it before revoking the grant on stop. On
 macOS, the adapter with no arguments connected to a served external Calculator
 target, was refused a launch session, attached, entered 6 × 7 with `perform`
 steps, and passed `check` on 42; after stop it reported the descriptor absent.
+Windows also passes the SDK stdio qualification against a served external
+Win32 fixture at 100% and 150% scale: default descriptor publication and live
+identity verification, resolved target instance id, launch refusal, attach,
+named action/check, hash-verified window and element resources, descriptor
+removal on the CLI stop handler, and preservation of the attached app.
 Remaining: `desktop_story` and `--agent` for integration-served targets, the
-CLI and attach work below, Windows qualification of the adapter and of
-`serve --agent`, and clients other than the SDK's.
+CLI and attach work below, physical console interruption on Windows, real
+React Native application qualification, and clients other than the SDK's.
 
 **Complete when:** the same requests produce equivalent outcomes through MCP,
 CLI, and typed clients; actual MCP clients exercise initialize/discover/call,

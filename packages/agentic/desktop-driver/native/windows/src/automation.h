@@ -47,6 +47,7 @@ struct ElementSnapshot {
   bool togglePattern{false};
   bool selectionItemPattern{false};
   bool expandCollapsePattern{false};
+  bool scrollItemPattern{false};
   bool valuePattern{false};
   bool valueReadOnly{false};
   bool keyboardFocusable{false};
@@ -100,6 +101,8 @@ class Automation {
   ElementRecord RequireRecord(const std::string& elementId);
   void SetFocus(const std::string& elementId);
   void AccessibilityClick(const std::string& elementId, const CancellationToken& token);
+  json::Value AccessibilityActions(const std::string& elementId, const CancellationToken& token);
+  void PerformAccessibilityAction(const std::string& elementId, const std::string& key, const CancellationToken& token);
   bool TryClearValue(const std::string& elementId);
   bool HasKeyboardFocus(const std::string& elementId);
 
