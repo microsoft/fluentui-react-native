@@ -1,4 +1,5 @@
-import { failureWithReason, requestWindowsAuthority, runWindowsAuthorityHelper, verifyWindowsAuthorityArtifact } from './authorityHelper';
+import { failureWithReason } from '../authorityHelper';
+import { requestWindowsAuthority, runWindowsAuthorityHelper, verifyWindowsAuthorityArtifact } from './authorityHelper';
 import { FakeAuthorityHelper } from './fakeAuthorityHelper';
 
 const mockSpawn = jest.fn();

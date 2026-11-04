@@ -35,6 +35,7 @@ final class SelfTestRunner {
     testEffectLedger()
     testMutationEffects()
     testObservation()
+    testServiceIdentity()
     testHello()
   }
 

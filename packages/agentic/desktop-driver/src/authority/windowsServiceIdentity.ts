@@ -6,13 +6,9 @@ import path from 'node:path';
 
 import { z } from 'zod';
 
+import { failureWithReason } from '../native/authorityHelper.js';
 import type { NativeDriverArtifact } from '../native/types.js';
-import {
-  failureWithReason,
-  requestWindowsAuthority,
-  runWindowsAuthorityHelper,
-  verifyWindowsAuthorityArtifact,
-} from '../native/windows/authorityHelper.js';
+import { requestWindowsAuthority, runWindowsAuthorityHelper, verifyWindowsAuthorityArtifact } from '../native/windows/authorityHelper.js';
 import type { WindowsAuthorityAnswer } from '../native/windows/authorityHelper.js';
 import type { DesktopServiceIdentity, VerifyDesktopService } from './connectionDescriptor.js';
 

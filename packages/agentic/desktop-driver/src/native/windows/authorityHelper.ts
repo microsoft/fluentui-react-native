@@ -1,132 +1,34 @@
-// Client for the Windows helper's restricted authority modes, `--private-storage` and `--service-identity`. Each call
-// runs one short-lived helper child that reads one JSON request on standard input and writes one JSON line, so neither
-// needs a Desktop Driver session. Callers own the meaning of the answer; this module owns only the bounded exchange.
-import { spawn } from 'node:child_process';
-
-import { NativeDriverError } from '../NativeDriverError.js';
-import { verifyNativeDriverArtifact } from '../nativeDriver.js';
+// The Windows helper's restricted authority modes, `--private-storage` and `--service-identity`, over the shared one-shot
+// helper client.
+import { requestAuthority, runAuthorityHelper, verifyAuthorityArtifact } from '../authorityHelper.js';
+import type { AuthorityAnswer, AuthorityHelperMode } from '../authorityHelper.js';
 import type { NativeDriverArtifact } from '../types.js';
 
-export type WindowsAuthorityMode = '--private-storage' | '--service-identity';
+export type WindowsAuthorityMode = AuthorityHelperMode;
 
 /** The helper's decoded answer. `ok` is true exactly when the helper exited with status 0. */
-export type WindowsAuthorityAnswer = Readonly<Record<string, unknown> & { ok: boolean }>;
-
-const answerTimeoutMs = 10_000;
-// The largest answer is one 16 KiB record as base64 plus a short envelope.
-const maximumAnswerBytes = 64 * 1024;
+export type WindowsAuthorityAnswer = AuthorityAnswer;
 
 /** Refuses an artifact for another provider, then verifies the helper's hash and handshake. */
-export async function verifyWindowsAuthorityArtifact(artifact: NativeDriverArtifact): Promise<NativeDriverArtifact> {
-  if (typeof artifact !== 'object' || artifact === null || artifact.provider !== 'windows') {
-    throw new TypeError('A Windows native driver artifact is required.');
-  }
-  return verifyNativeDriverArtifact(artifact);
+export function verifyWindowsAuthorityArtifact(artifact: NativeDriverArtifact): Promise<NativeDriverArtifact> {
+  return verifyAuthorityArtifact(artifact, 'Windows');
 }
 
-/**
- * Sends one request and resolves the helper's answer. Rejects with a fixed, non-secret NativeDriverError when the helper
- * cannot run, times out, exceeds the answer bound, or answers outside the documented shape. The error never carries the
- * request, the output, or the helper's diagnostics, because those can hold grants or machine-local paths.
- */
+/** Sends one request to the Windows helper; see `runAuthorityHelper`. */
 export function runWindowsAuthorityHelper(
   artifact: Pick<NativeDriverArtifact, 'executablePath'>,
   mode: WindowsAuthorityMode,
   request: unknown,
 ): Promise<WindowsAuthorityAnswer> {
-  return new Promise((resolve, reject) => {
-    const unavailable = () => new NativeDriverError('authority-helper-unavailable', 'The Windows authority helper did not answer.');
-    const body = JSON.stringify(request);
-    let settled = false;
-    let child: ReturnType<typeof spawn> | undefined;
-    const finish = (settle: () => void): void => {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timer);
-        settle();
-      }
-    };
-    const fail = (): void => {
-      finish(() => {
-        child?.kill();
-        reject(unavailable());
-      });
-    };
-    const timer = setTimeout(fail, answerTimeoutMs);
-
-    try {
-      child = spawn(artifact.executablePath, [mode], { stdio: ['pipe', 'pipe', 'ignore'], windowsHide: true });
-    } catch {
-      fail();
-      return;
-    }
-    const output: Buffer[] = [];
-    let received = 0;
-    child.stdout?.on('data', (chunk: Buffer) => {
-      received += chunk.length;
-      if (received > maximumAnswerBytes) {
-        fail();
-      } else {
-        output.push(chunk);
-      }
-    });
-    child.once('error', fail);
-    // A helper that exits before reading its request still answers; the exit decides the outcome.
-    child.stdin?.on('error', () => undefined);
-    child.once('close', (code) => {
-      finish(() => {
-        try {
-          resolve(parseAnswer(Buffer.concat(output), code));
-        } catch {
-          reject(unavailable());
-        }
-      });
-    });
-    child.stdin?.end(body);
-  });
+  return runAuthorityHelper('Windows', artifact, mode, request);
 }
 
-/**
- * Resolves the answer to a request the helper accepted. A helper that cannot answer, or that refuses the request, throws
- * what `failure` builds from a closed reason token and never from the helper's own text.
- */
-export async function requestWindowsAuthority(
+/** Resolves the Windows helper's answer to an accepted request; see `requestAuthority`. */
+export function requestWindowsAuthority(
   artifact: Pick<NativeDriverArtifact, 'executablePath'>,
   mode: WindowsAuthorityMode,
   request: unknown,
   failure: (reason: string) => Error,
 ): Promise<WindowsAuthorityAnswer> {
-  let answer: WindowsAuthorityAnswer;
-  try {
-    answer = await runWindowsAuthorityHelper(artifact, mode, request);
-  } catch {
-    throw failure('helper');
-  }
-  if (!answer.ok) {
-    throw failure(refusalReason(answer.reason));
-  }
-  return answer;
-}
-
-/** An error with a fixed message. The reason is diagnostic only; it stays off enumeration, so logging the error cannot print it. */
-export function failureWithReason(message: string, reason: string): Error {
-  return Object.defineProperty(new Error(message), 'reason', { enumerable: false, value: reason });
-}
-
-// A closed lowercase token, so a diagnostic can never carry a path, a grant, or record contents.
-function refusalReason(reason: unknown): string {
-  return typeof reason === 'string' && /^[a-z]{1,16}$/.test(reason) ? reason : 'unknown';
-}
-
-function parseAnswer(output: Buffer, exitCode: number | null): WindowsAuthorityAnswer {
-  const answer: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(output));
-  if (typeof answer !== 'object' || answer === null || Array.isArray(answer)) {
-    throw new Error();
-  }
-  const ok = (answer as { ok?: unknown }).ok;
-  // The exit status and the answer must agree, so a truncated or substituted answer cannot read as success.
-  if (typeof ok !== 'boolean' || (exitCode === 0) !== ok) {
-    throw new Error();
-  }
-  return Object.freeze({ ...(answer as Record<string, unknown>), ok });
+  return requestAuthority('Windows', artifact, mode, request, failure);
 }

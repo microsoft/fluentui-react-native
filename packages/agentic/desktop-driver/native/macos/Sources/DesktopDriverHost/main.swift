@@ -24,6 +24,7 @@ private func printUsage() -> Int32 {
            furn-desktop-driver-host --permissions [--prompt]
            furn-desktop-driver-host --release-input          (reads {"keys":[],"buttons":[]} from stdin)
            furn-desktop-driver-host --release-input --sweep  (diagnostics: release held modifiers/buttons)
+           furn-desktop-driver-host --service-identity       (reads one describe or verify request from stdin)
     """
   )
   return 2
@@ -120,6 +121,8 @@ case "--release-input":
   } else {
     result = printUsage()
   }
+case "--service-identity":
+  result = arguments.count == 1 ? ServiceIdentity.run() : printUsage()
 case "--stdio":
   result = arguments.count == 1 ? Host().run() : printUsage()
 default:

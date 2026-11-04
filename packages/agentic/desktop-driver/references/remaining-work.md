@@ -835,19 +835,19 @@ other grants' identifiers from contention and quarantine data, and closes a
 revoked grant's sessions. Opening sessions are cancelled on revocation;
 session commands re-authenticate when dequeued, and active host operations
 settle before teardown runs. Its contract is in
-[the security model](security.md#protected-service). Still open: the macOS
-process/listener identity verifier, controller leases and idle expiry, reconnect,
-exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+[the security model](security.md#protected-service). Still open: controller
+leases and idle expiry, reconnect, exact ownership ledgers, status/stop/`recover`, quarantine persistence,
 cross-service claims, Storybook mutation coordination, and supervisor wiring.
 
-The shared Slice 2 descriptor contract, macOS owner-validated storage, the
-Windows storage adapter and service verifier, and WDIO grant transport are
-implemented. Descriptor reads require a trusted live identity verifier and check
+The shared Slice 2 descriptor contract, macOS owner-validated storage and
+service verifier, the Windows storage adapter and service verifier, and WDIO
+grant transport are implemented. Descriptor reads require a trusted live identity verifier and check
 the authenticated service incarnation; there is no permissive default verifier.
 The macOS adapter rejects Windows, and the Windows adapters reject every other
 platform. See [private discovery](security.md#private-discovery), the
 [Windows storage and verifier](security.md#windows-private-storage-and-service-verifier),
-and [service integration](service.md#private-connection-descriptors).
+the [macOS verifier](security.md#macos-service-verifier), and
+[service integration](service.md#private-connection-descriptors).
 
 **Complete when:** agent/WDIO contention, all-route authorization, stale-owner
 recovery, reconnect, supervisor/helper/app crashes, quarantine persistence, and
@@ -1462,6 +1462,18 @@ real-application session ownership, physical input, or revocation of in-flight
 native mutations. The Windows storage and verifier evidence is in the Windows
 implementation checks above; the new discovery boundary's human security review
 remains open.
+
+The macOS service verifier's helper built with `-warnings-as-errors`, and
+`--self-test` passed, including 33 new URL, start-time, claim, listener-policy,
+and live describe/verify checks. `FURN_NATIVE_DRIVER_TEST=1 yarn test
+--runInBand serviceIdentity.contract` passed 15 macOS cases against real
+processes and listeners: describe, exited and foreign processes, listener
+ownership, start, executable (including a case-changed path), and session
+mismatches, an unused port, address refusals, IPv6 and IPv4 separation, a
+same-user 0.0.0.0 or `[::]` wildcard sharing the port, and a Python listener with
+`SO_REUSEPORT`. The kernel rule for other users' binds rests on a manual test on
+macOS 27.2 recorded in [the macOS verifier](security.md#macos-service-verifier);
+the contract does not run as a second user, an administrator, or root.
 
 Read [architecture](architecture.md), [service integration](service.md),
 [security](security.md), [contributing](contributing.md),

@@ -95,7 +95,7 @@ OS user, and current interactive session **before any credential is sent**.
 Missing, false, or unavailable verification fails closed. An authenticated
 status request then checks the service incarnation under a 15-second deadline.
 The library supplies a [Windows verifier](#windows-private-storage-and-service-verifier)
-and no macOS verifier yet, so a macOS supervisor brings its own. A callback that
+and a [macOS verifier](#macos-service-verifier). A callback that
 unconditionally returns true is not a production verifier. Filesystem ownership
 alone is not logon-session isolation or live process verification.
 
@@ -171,6 +171,45 @@ missing, times out, or answers anything else rejects, so a verifier failure neve
 sends a credential. Windows and macOS identities are never compared. As on
 macOS, other processes of the same account and administrators remain outside
 this boundary.
+
+## macOS service verifier
+
+`describeMacOSService({ artifact, pid })` and
+`createMacOSServiceVerifier({ artifact })` mirror the Windows pair through the
+verified macOS helper's one-shot `--service-identity` mode. The identity is
+`platform: 'macos'`, `pid`, `startedAt` (the kernel's process start time as UTC
+ISO-8601 with microsecond precision), `executablePath` (the kernel's path for
+the process image), and `interactiveSession` (`macos-session:<asid>`, the audit
+session). The helper refuses a process of another user (effective or real UID),
+of another audit session, or that has exited or is a zombie.
+
+The verifier resolves `true` only when the helper verified in order: a numeric
+loopback origin (exactly `http://127.0.0.1:<port>` or `http://[::1]:<port>`); a
+macOS claim; a live process of the current user in the verifier's audit
+session; the exact start time; the executable path, compared byte for byte, so
+a differently cased or normalized path naming the same file is refused; the
+claimed session; and the listeners. The claimed process must hold a TCP listener
+bound to exactly the claimed address and port, and every listener of the current
+user's processes able to accept a connection to it (the same address, a
+wildcard, an IPv4-mapped address, or an IPv6 wildcard for an IPv4 claim) must
+belong to the claimed process and lack `SO_REUSEPORT`. After the scan the helper
+re-reads the process and requires the same start time and audit-token PID
+version, so a reused process identifier is refused. Results and failures follow
+the Windows verifier: refusals resolve `false`, and a missing, slow, or
+malformed helper rejects.
+
+Unprivileged processes cannot enumerate another user's sockets on macOS; the
+system-wide socket tables require a private entitlement. The verifier therefore
+relies on the kernel refusing another user's bind to a port held by a listener
+without `SO_REUSEPORT`, which is why it refuses any matching listener with that
+option. A test on macOS 27.2 (Darwin 27.2.0) confirmed that another user could
+not bind 127.0.0.1, 0.0.0.0, or a dual-stack `[::]` beside a 127.0.0.1 listener
+with `SO_REUSEADDR` alone, nor `[::]` or `[::1]` beside a `[::1]` listener, and
+that it could bind a dual-stack `[::]` beside a listener with `SO_REUSEPORT`. A
+`[::1]` bind beside a 127.0.0.1 listener succeeds but cannot accept IPv4
+connections. Root and administrators remain outside this boundary, as do other
+processes of the same account; verification and the first request are separate
+steps on both platforms.
 
 ## Native-helper trust
 

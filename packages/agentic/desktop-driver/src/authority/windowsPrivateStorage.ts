@@ -7,7 +7,8 @@ import path from 'node:path';
 import { z } from 'zod';
 
 import type { NativeDriverArtifact } from '../native/types.js';
-import { failureWithReason, requestWindowsAuthority, verifyWindowsAuthorityArtifact } from '../native/windows/authorityHelper.js';
+import { failureWithReason } from '../native/authorityHelper.js';
+import { requestWindowsAuthority, verifyWindowsAuthorityArtifact } from '../native/windows/authorityHelper.js';
 import { assertPrivateRecordContents, assertPrivateRecordName, privateRecordMaxBytes } from './privateStorage.js';
 import type { PrivateStorage } from './privateStorage.js';
 

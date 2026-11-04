@@ -14,7 +14,7 @@ Accessibility.
 
 | Source                                 | Responsibility                                                              |
 | -------------------------------------- | --------------------------------------------------------------------------- |
-| `Package.swift`                        | macOS 14 executable target and framework links                              |
+| `Package.swift`                        | macOS 14 executable target, framework links, and `libbsm`                   |
 | `Sources/DesktopDriverHost/main.swift` | Helper modes and top-level error handling                                   |
 | `Host.swift`                           | FDR1 hello, request queue, framing, cancellation, and disposal              |
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
@@ -27,9 +27,11 @@ Accessibility.
 | `Capture.swift`                        | ScreenCaptureKit window capture, element crop, scale, and PNG encoding      |
 | `Permissions.swift`                    | TCC preflight/prompt diagnostics and Security.framework signing evidence    |
 | `Session.swift`                        | Login-session lock and console diagnostics                                  |
+| `ServiceIdentity.swift`                | One-shot `--service-identity`: process identity and exclusive listeners     |
 | `Support.swift`                        | Errors, cancellation, mutation effect ledger, JSON helpers, deadlines, AX   |
 | `SelfTest.swift`                       | Provider-local framing, identity, AX, input, capture, and permission checks |
 | `ObservationSelfTest.swift`            | Synthetic-tree, randomized differential, and command checks for `observe`   |
+| `ServiceIdentitySelfTest.swift`        | URL, claim, listener-policy, and live describe/verify checks                |
 
 The Node build coordinator is
 `../../src/native/macos/buildMacOSDriver.ts`; runtime adaptation is under
@@ -138,6 +140,7 @@ furn-desktop-driver-host --stdio
 furn-desktop-driver-host --self-test
 furn-desktop-driver-host --permissions [--prompt]
 furn-desktop-driver-host --release-input [--sweep]
+furn-desktop-driver-host --service-identity
 ```
 
 The long-lived `--stdio` process:
@@ -154,6 +157,10 @@ The input lock lives beneath
 helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
+The one-shot `--service-identity` mode describes a service process or verifies a
+service claim for `describeMacOSService` and `createMacOSServiceVerifier`; it
+uses only public process and socket information APIs and links `libbsm` for the
+audit session. See [the macOS service verifier](../../references/security.md#macos-service-verifier).
 
 Neither the stdin reader nor the worker thread runs a run loop, so nothing
 drains their autorelease pools between requests. The reader runs each frame, and

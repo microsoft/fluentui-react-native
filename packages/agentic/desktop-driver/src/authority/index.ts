@@ -8,3 +8,5 @@ export { createWindowsPrivateStorage } from './windowsPrivateStorage.js';
 export type { WindowsPrivateStorageOptions } from './windowsPrivateStorage.js';
 export { createWindowsServiceVerifier, describeWindowsService } from './windowsServiceIdentity.js';
 export type { DescribeWindowsServiceOptions, WindowsServiceVerifierOptions } from './windowsServiceIdentity.js';
+export { createMacOSServiceVerifier, describeMacOSService } from './macosServiceIdentity.js';
+export type { DescribeMacOSServiceOptions, MacOSServiceVerifierOptions } from './macosServiceIdentity.js';
