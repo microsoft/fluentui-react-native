@@ -13,6 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # A separate optional publisher can add the generated report and SPEC assessment fields
+  # to this PR. Verify those report-only follow-ups before skipping source checks.
   assessment-inputs:
     name: Validate assessment inputs
     runs-on: ubuntu-latest
@@ -20,10 +22,14 @@ jobs:
     permissions:
       actions: read
       contents: read
+    # Pass the verified decision and original source result to the other jobs.
+    # Unless report-only reuse is verified, take the normal source-check path.
     outputs:
       report-only: ${{ steps.verify.outputs.report-only || steps.inspect.outputs.report-only || 'false' }}
       source-result: ${{ steps.verify.outputs.source-result }}
     steps:
+      # Use the validator from the target branch, not rules proposed by the PR.
+      # Fetch its history without leaving checkout credentials for later steps.
       - name: Checkout trusted input validator
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -36,6 +42,8 @@ jobs:
         with:
           node-version: '24'
 
+      # Until the validator lands on the base branch, run all normal source checks.
+      # An inspection error must fail this job, not silently approve report-only reuse.
       - name: Inspect report-only candidate
         id: inspect
         env:
@@ -51,6 +59,7 @@ jobs:
             echo "Trusted assessment validator is not on the base branch yet. Running all normal source checks." >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # Get evidence from the original run referenced by this candidate, not another run.
       - name: Download original assessment evidence
         if: steps.inspect.outputs.candidate == 'true'
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -61,6 +70,8 @@ jobs:
           repository: ${{ github.repository }}
           run-id: ${{ steps.inspect.outputs.run-id }}
 
+      # Looking report-only is not enough: verify unchanged tested inputs and the exact
+      # generated report/SPEC assessment fields before reusing the saved source result.
       - name: Verify unchanged inputs and generated report plus SPEC assessment fields
         id: verify
         if: steps.inspect.outputs.candidate == 'true'
@@ -69,12 +80,15 @@ jobs:
           BUNDLE_PATH: ${{ runner.temp }}/checkbox-source-evidence/bundle.json
         run: node scripts/src/tasks/controlAssessmentCiTask.ts verify
 
+  # The source jobs below wait for that decision. Normal code changes still run them;
+  # only verified report-only follow-ups skip the repeated builds and tests.
   js:
     name: JS PR
     needs: assessment-inputs
     if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Tell the assessor whether this job actually saved an evidence artifact.
     outputs:
       unit-artifact: ${{ steps.unit-evidence.outputs.artifact-id }}
     steps:
@@ -94,14 +108,19 @@ jobs:
       - name: Test agent permissions
         run: yarn test:agent-permissions
 
+      # Record the inputs before testing so results can be tied to the tested version.
       - name: Capture existing component test inputs
         run: node scripts/src/tasks/controlAssessmentCiTask.ts begin-unit
 
+      # Keep the existing build and tests; capture their component Jest results for the
+      # assessor rather than launching a second unit-test run.
       - name: Build CI
         env:
           FURN_ASSESSMENT_UNIT_CAPTURE: ${{ github.workspace }}/apps/storybook/artifacts/assessment-unit-ci
         run: yarn lage buildci
 
+      # Save captured evidence after failures too, unless cancelled. Attempt-scoped
+      # names keep reruns separate; missing files warn, but do not count as passing tests.
       - name: Upload existing component unit evidence
         id: unit-evidence
         if: ${{ always() && !cancelled() }}
@@ -608,14 +627,17 @@ jobs:
     if: needs.assessment-inputs.outputs.report-only != 'true'
     runs-on: windows-latest
     timeout-minutes: 60
+    # Tell the assessor whether this job actually saved a native evidence artifact.
     outputs:
       native-artifact: ${{ steps.native-evidence.outputs.artifact-id }}
     steps:
+      # Full history lets evidence capture identify the tested merge and source parents.
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
+      # Use Node 24 for the native TypeScript evidence-collection scripts.
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@6046bdd4914c7ceb35ec83b92ae3211a03ddccef # 5.4.14
         with:
@@ -628,6 +650,8 @@ jobs:
       - name: Build packages
         run: yarn build
 
+      # This pilot keeps keyboard, physical clicks and wheel input disabled.
+      # Tests that require them must still appear as evidence gaps, not passes.
       - name: Set up Win32 Desktop Driver
         id: desktop-driver
         uses: ./.github/actions/setup-desktop-driver
@@ -635,22 +659,28 @@ jobs:
           platform: win32
           disabled-input-features: keyboard,physicalClick,wheel
 
+      # Record source and assessment inputs before running the existing Storybook tests.
       - name: Capture Checkbox execution inputs
         id: checkbox-inputs
         run: node scripts/src/tasks/controlAssessmentCiTask.ts begin
 
+      # Run only if input capture succeeded and this run was not cancelled.
+      # Keep the step ID so evidence collection can record the smoke outcome.
       - name: Smoke test Win32 Storybook
         id: smoke
         if: ${{ !cancelled() && steps.checkbox-inputs.outcome == 'success' }}
         run: yarn storybook smoke --win32 --mode stories-and-tests
         working-directory: apps/storybook
 
+      # Collect available reports and the smoke outcome even after a failure, unless cancelled.
       - name: Collect Checkbox native evidence
         if: ${{ always() && !cancelled() }}
         env:
           SMOKE_OUTCOME: ${{ steps.smoke.outcome }}
         run: node scripts/src/tasks/controlAssessmentCiTask.ts finish
 
+      # Preserve this attempt's native evidence after failures too. Unlike the unit
+      # upload, missing native evidence files fail this step.
       - name: Upload Checkbox native evidence
         id: native-evidence
         if: ${{ always() && !cancelled() }}
@@ -674,6 +704,9 @@ jobs:
             ${{ steps.desktop-driver.outputs.cache-root }}/v1/diagnostics/**
           if-no-files-found: warn
 
+  # Wait for the evidence jobs, but still assess what is available if they failed.
+  # Skip cancellations, invalid assessment inputs and verified report-only follow-ups.
+  # This advisory job reads existing results; it does not rerun tests or assign a stage.
   control-assessment:
     name: Assess Checkbox evidence
     needs: [assessment-inputs, js, win32-storybook]
@@ -681,6 +714,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      # Assess the PR's tested merge and its history, without leaving checkout credentials.
       - name: Checkout assessed source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -692,6 +726,7 @@ jobs:
         with:
           node-version: '24'
 
+      # Download this attempt's Win32 evidence only if the job saved an artifact.
       - name: Download native evidence
         if: needs.win32-storybook.outputs.native-artifact != ''
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -699,6 +734,7 @@ jobs:
           name: checkbox-native-evidence-${{ github.run_attempt }}
           path: apps/storybook/artifacts/win32/assessment-ci
 
+      # Do the same for component-test results. Missing artifacts remain evidence gaps.
       - name: Download existing unit evidence
         if: needs.js.outputs.unit-artifact != ''
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -706,12 +742,16 @@ jobs:
           name: checkbox-unit-evidence-${{ github.run_attempt }}
           path: apps/storybook/artifacts/assessment-unit-ci
 
+      # Combine the saved results and both jobs' outcomes into coverage and gap findings.
+      # The readable report goes into the job summary; this does not rerun component tests.
       - name: Assess existing results without rerunning tests
         env:
           UNIT_OUTCOME: ${{ needs.js.result }}
           NATIVE_OUTCOME: ${{ needs.win32-storybook.result }}
         run: node scripts/src/tasks/controlAssessmentCiTask.ts combine
 
+      # Keep the downloadable report for 14 days, even after failures unless cancelled.
+      # Missing report files fail the upload rather than silently losing the assessment.
       - name: Upload Checkbox assessment
         if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -725,7 +765,8 @@ jobs:
     name: Check for Changesets
     needs: assessment-inputs
     runs-on: ubuntu-latest
-    # Skip this check for the version bump PR created by changesets
+    # Keep the release-PR exception and also skip verified report-only follow-ups:
+    # adding generated assessment metadata is not another product change needing release notes.
     if: ${{ needs.assessment-inputs.outputs.report-only != 'true' && github.head_ref != 'changeset-release/main' }}
 
     steps:
@@ -814,6 +855,7 @@ jobs:
       - name: Test markdown links
         run: yarn lage test-links --verbose --grouped
 
+  # Keep "did the source checks pass?" separate from optional assessment publication.
   pr-source:
     name: PR source validation
     if: always()
@@ -830,6 +872,7 @@ jobs:
       - publish-dry-run-pack
       - test-links
     steps:
+      # A report-only commit cannot erase a failed original source-validation result.
       - name: Preserve reused source result
         if: ${{ needs.assessment-inputs.outputs.report-only == 'true' && needs.assessment-inputs.outputs.source-result != 'success' }}
         run: |
@@ -843,17 +886,23 @@ jobs:
       - name: All required jobs passed
         run: echo "All required jobs completed successfully."
 
+  # Keep the existing required status named PR. It checks source validation and,
+  # when enabled, the verified same-PR assessment-publication follow-up.
   pr:
     name: PR
     if: always()
     runs-on: ubuntu-latest
     needs: [assessment-inputs, pr-source]
     steps:
+      # Both the initial input validation and source-validation result must pass.
       - name: Require successful source validation
         if: ${{ needs.assessment-inputs.result != 'success' || needs.pr-source.result != 'success' }}
         run: |
           echo "Source validation or assessment-input validation failed."
           exit 1
+      # Only same-repository PRs into the default branch participate when publishing is on.
+      # Fail this source run rather than wait: the separate trusted publisher must add the
+      # report, and the report-only follow-up must verify it before this check can pass.
       - name: Require same-PR assessment when publishing is enabled
         if: ${{ vars.CONTROL_ASSESSMENT_PUBLISH == 'true' && github.event.pull_request.head.repo.full_name == github.repository && github.base_ref == github.event.repository.default_branch && needs.assessment-inputs.outputs.report-only != 'true' }}
         run: |
