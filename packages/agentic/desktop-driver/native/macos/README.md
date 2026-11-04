@@ -385,9 +385,12 @@ but it never lets a possibly applied mutation be retried as a rejection.
 Focus, window raise and activation, pointer moves, and key or button releases that
 clean up counted input are idempotent and not counted. `setWindowRect` checks that
 both position and size are settable before it sets either, so a non-resizable
-window rejects without moving. A queued request that is cancelled before it starts
-reports `none`. A new provider-side mutation must bracket its platform call with
-the ledger and be listed in `Driver.trackedMutations`.
+window rejects without moving. A queued mutating request that is cancelled before
+it starts reports `none`, a queued read or lifecycle command reports no `effect`,
+and neither ever runs. A cancel for an id the helper does not hold also reports
+`none` (a settled request already reported its effect). A new provider-side
+mutation must bracket its platform call with the ledger and be listed in
+`Driver.trackedMutations`.
 
 ## Capture
 

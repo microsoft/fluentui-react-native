@@ -1216,6 +1216,15 @@ Automation `Invoke` is posted and never blocks), and real-application UI
 Automation failures, so the rejection list is unqualified. `SetWindowPos` on a
 hung window owned by another thread is still not bounded.
 
+Queued cancellation check on macOS (matching the Windows Host follow-up): the
+macOS helper used to report `none` when a queued read or lifecycle command was
+cancelled. It now omits `effect` for those commands, and still reports `none`
+for a queued mutation and for an unknown id. `testHostQueuedCancellation`
+drives the real `Host` over in-process pipes with the same scenario as the
+Windows test. The self-test **passed** 362 of 362, stable across three runs,
+under `-warnings-as-errors`. With the read classification removed, the
+queued-read check failed.
+
 Bounded observation implementation checks on macOS:
 
 - The Swift helper self-test built outside the repository tree **passed** 314

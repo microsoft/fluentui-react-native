@@ -15,6 +15,10 @@ final class Driver {
     "activate", "clear", "click", "closeWindow", "performActions", "releaseActions", "sendKeys", "setWindowRect",
   ]
 
+  static func isTrackedMutation(_ command: String) -> Bool {
+    trackedMutations.contains(command)
+  }
+
   private let applications = ApplicationManager()
   private let effects: EffectLedger
   private let accessibility: AccessibilityEngine

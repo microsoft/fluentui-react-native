@@ -34,6 +34,7 @@ final class SelfTestRunner {
     testCommandJournal()
     testEffectLedger()
     testMutationEffects()
+    testHostQueuedCancellation()
     testObservation()
     testServiceIdentity()
     testHello()
@@ -758,6 +759,127 @@ final class SelfTestRunner {
     )
     let cancelledRead = failure("windows") as? CancelledError
     check(cancelledRead != nil && cancelledRead?.effect == nil, "a cancelled read-only command does not claim an effect")
+  }
+
+  /// Drives the real `Host` over in-process pipes: cancelling a request that is still queued acknowledges it with the
+  /// right effect and keeps it from ever reaching the driver, while later requests still run.
+  private func testHostQueuedCancellation() {
+    let toHost = Pipe()
+    let fromHost = Pipe()
+    let state = NSCondition()
+    var messages: [JSONObject] = []
+    var executed: [String] = []
+    let gate = DispatchSemaphore(value: 0)
+    let hostDone = DispatchSemaphore(value: 0)
+    let readerDone = DispatchSemaphore(value: 0)
+
+    func waitUntil(_ predicate: () -> Bool) -> Bool {
+      let deadline = Date().addingTimeInterval(10)
+      state.lock()
+      defer { state.unlock() }
+      while !predicate() {
+        if !state.wait(until: deadline) {
+          return predicate()
+        }
+      }
+      return true
+    }
+    // Callers hold `state`.
+    func received(_ type: String, _ id: String) -> Bool {
+      messages.contains { $0["type"] as? String == type && $0["id"] as? String == id }
+    }
+    func find(_ type: String, _ id: String) -> JSONObject? {
+      state.lock()
+      defer { state.unlock() }
+      return messages.first { $0["type"] as? String == type && $0["id"] as? String == id }
+    }
+    func ran(_ id: String) -> Bool {
+      state.lock()
+      defer { state.unlock() }
+      return executed.contains(id)
+    }
+
+    let host = Host()
+    host.beforeExecuteForTesting = { id, _ in
+      state.lock()
+      executed.append(id)
+      state.broadcast()
+      state.unlock()
+      if id == "blocker" {
+        gate.wait()
+      }
+    }
+    Thread {
+      let reader = FrameReader(fromHost.fileHandleForReading)
+      while let frame = try? reader.read() {
+        if frame.type == .json, let message = (try? parseJSON(frame.payload)) as? JSONObject {
+          state.lock()
+          messages.append(message)
+          state.broadcast()
+          state.unlock()
+        }
+      }
+      readerDone.signal()
+    }.start()
+    Thread {
+      _ = host.run(input: toHost.fileHandleForReading, output: fromHost.fileHandleForWriting)
+      hostDone.signal()
+    }.start()
+
+    let writer = FrameWriter(toHost.fileHandleForWriting)
+    func send(_ type: String, _ id: String, _ command: String? = nil, _ params: JSONObject = [:]) {
+      var message: JSONObject = ["type": type, "id": id]
+      if let command {
+        message["command"] = command
+        message["params"] = params
+      }
+      try? writer.writeJSON(message)
+    }
+
+    send("request", "blocker", "probe")
+    let blocked = waitUntil { executed.contains("blocker") }
+    check(blocked, "the host worker starts the blocking request")
+    send("request", "queued-click", "click", ["elementId": "element-never-issued"])
+    send("request", "queued-read", "windows")
+    send("request", "after", "probe")
+    send("cancel", "queued-click")
+    send("cancel", "queued-read")
+    send("cancel", "never-sent")
+
+    let acknowledged = waitUntil {
+      ["queued-click", "queued-read", "never-sent"].allSatisfy { received("cancelled", $0) }
+    }
+    check(
+      acknowledged && !ran("queued-click") && !ran("queued-read"),
+      "queued requests are acknowledged as cancelled while the worker is still busy"
+    )
+    check(
+      find("cancelled", "queued-click")?["effect"] as? String == "none",
+      "a cancelled queued mutation reports no effect"
+    )
+    let read = find("cancelled", "queued-read")
+    check(read != nil && read?["effect"] == nil, "a cancelled queued read carries no effect")
+    check(
+      find("cancelled", "never-sent")?["effect"] as? String == "none",
+      "a cancel for an id the host does not hold reports none"
+    )
+
+    gate.signal()
+    let finished = waitUntil { received("response", "blocker") && received("response", "after") }
+    check(finished, "the host runs the requests around the cancelled ones")
+    state.lock()
+    let order = executed
+    state.unlock()
+    check(order == ["blocker", "after"], "cancelled queued requests never reach the driver")
+    check(
+      find("response", "queued-click") == nil && find("response", "queued-read") == nil,
+      "cancelled queued requests never produce a response"
+    )
+
+    try? toHost.fileHandleForWriting.close()
+    check(hostDone.wait(timeout: .now() + 10) == .success, "the host stops when its input ends")
+    try? fromHost.fileHandleForWriting.close()
+    _ = readerDone.wait(timeout: .now() + 10)
   }
 
   private func testHello() {

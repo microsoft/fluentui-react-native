@@ -63,11 +63,22 @@ final class Host {
   private var activeID: String?
   private var stopping = false
   private var writer: FrameWriter?
+  private var output: FileHandle?
   private let workerDone = DispatchSemaphore(value: 0)
+  /// Called on the worker with each request's id and command just before the driver executes it. Set before `run`;
+  /// self-tests use it to hold the worker and record dispatch.
+  var beforeExecuteForTesting: ((String, String) -> Void)?
 
+  /// Serves FDR1 on the process's standard input and output.
   func run() -> Int32 {
-    let writer = FrameWriter(.standardOutput)
+    run(input: .standardInput, output: .standardOutput)
+  }
+
+  /// Serves FDR1 on the given handles until the input ends. Self-tests drive the host in process through pipes.
+  func run(input: FileHandle, output: FileHandle) -> Int32 {
+    let writer = FrameWriter(output)
     self.writer = writer
+    self.output = output
     let eventSequence = EventSequence()
     driver.setWindowClosedPublisher { windowID in
       do {
@@ -81,7 +92,7 @@ final class Host {
         writeDiagnostic("furn-desktop-driver-host: publishing a window event failed: \(error)")
       }
     }
-    let reader = FrameReader(.standardInput)
+    let reader = FrameReader(input)
     do {
       try writer.writeJSON(createHello())
     } catch {
@@ -172,12 +183,17 @@ final class Host {
       condition.unlock()
       return
     }
+    // A command that never started cannot have changed anything, and only mutations carry an effect. An id the helper
+    // does not hold reports none: a settled request already reported its own effect.
+    var effect: MutationEffect? = .noEffect
     if let index = queue.firstIndex(where: { $0.id == id }) {
-      queue.remove(at: index)
+      let request = queue.remove(at: index)
+      if !Driver.isTrackedMutation(request.command) {
+        effect = nil
+      }
     }
     condition.unlock()
-    // A command that never started cannot have changed anything.
-    writeCancelled(id, effect: .noEffect)
+    writeCancelled(id, effect: effect)
   }
 
   private func workerLoop() {
@@ -202,7 +218,7 @@ final class Host {
       let wasCancelled = autoreleasepool { process(request) }
 
       if request.command == "dispose" && !wasCancelled {
-        try? FileHandle.standardOutput.synchronize()
+        try? output?.synchronize()
         Darwin.exit(EXIT_SUCCESS)
       }
     }
@@ -212,6 +228,7 @@ final class Host {
   private func process(_ request: PendingRequest) -> Bool {
     var cancellation: CancelledError?
     do {
+      beforeExecuteForTesting?(request.id, request.command)
       let result = try driver.execute(command: request.command, params: request.params, token: token)
       try writeResponse(id: request.id, command: request.command, result: result)
     } catch let error as CancelledError {
