@@ -71,6 +71,15 @@ export const maxTypedTextLength = 4_096;
  */
 export const checkWaitMs = { ceiling: 30_000, default: 0, floor: 0 } as const satisfies OperationBudget;
 
+/**
+ * Captured images a session keeps in memory: the most artifacts, their total bytes, and the largest one image may be.
+ * The oldest are dropped first.
+ */
+export const artifactLimits = { maxBytes: 16 * 1024 * 1024, maxCount: 16, maxTotalBytes: 32 * 1024 * 1024 } as const;
+
+/** Image bytes `capture` returns inline, and `artifact` returns per page, before base64 encoding. */
+export const artifactPageBytes = { ceiling: 1024 * 1024, default: 1024 * 1024, floor: 1024 } as const satisfies OperationBudget;
+
 /** The most steps one `sequence` runs. Its checks share one `checkWaitMs` ceiling, so it holds the queue no longer. */
 export const maxSequenceSteps = 8;
 

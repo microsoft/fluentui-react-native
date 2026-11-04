@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { actOperation } from './act.js';
+import { artifactOperation, captureOperation } from './capture.js';
 import { checkOperation } from './check.js';
 import { findElementsOperation } from './find.js';
 import { readJournalOperation } from './journalOperation.js';
@@ -33,6 +34,8 @@ const operations: readonly RegisteredOperation[] = [
   actOperation,
   checkOperation,
   sequenceOperation,
+  captureOperation,
+  artifactOperation,
   readJournalOperation,
 ];
 const operationsByName = new Map(operations.map((definition) => [definition.name, definition]));

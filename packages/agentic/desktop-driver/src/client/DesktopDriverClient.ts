@@ -6,6 +6,10 @@ import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
 import type {
   ActInput,
   ActResult,
+  ArtifactInput,
+  ArtifactResult,
+  CaptureInput,
+  CaptureResult,
   CheckInput,
   CheckResult,
   FindInput,
@@ -191,6 +195,16 @@ export class DesktopSessionClient {
    */
   act(input: ActInput, options?: { requestId?: string }): Promise<OperationResponse<ActResult>> {
     return this.operation('act', input, options);
+  }
+
+  /** Captures the window, or one element, as a PNG artifact with its provenance; the image comes inline only when asked. */
+  capture(input: CaptureInput = {}, options?: { requestId?: string }): Promise<OperationResponse<CaptureResult>> {
+    return this.operation('capture', input, options);
+  }
+
+  /** Reads a captured image in base64 pages. */
+  artifact(input: ArtifactInput, options?: { requestId?: string }): Promise<OperationResponse<ArtifactResult>> {
+    return this.operation('artifact', input, options);
   }
 
   /** Checks an element's state, name, value, or text, or how many elements a selector matches, optionally waiting. */

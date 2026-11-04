@@ -1,3 +1,4 @@
+import { ArtifactStore } from './artifacts.js';
 import { OperationJournal } from './journal.js';
 import { ReleaseLedger } from './ledger.js';
 import { OutcomeLedger } from './outcomes.js';
@@ -27,6 +28,8 @@ export type OperationSessionStateOptions = {
  * without a provider.
  */
 export class OperationSessionState {
+  /** Images the session captured, bounded by count and bytes. */
+  readonly artifacts = new ArtifactStore();
   readonly journal: OperationJournal;
   readonly ledger: ReleaseLedger;
   /** Outcomes of mutating requests whose ids the caller chose, so a retry never runs an action twice. */

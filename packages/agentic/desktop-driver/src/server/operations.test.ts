@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 import { z } from 'zod';
 
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
@@ -897,6 +899,119 @@ describe('Desktop Driver agent operations', () => {
         },
         { operations: { content: 'deny' } },
       );
+    });
+  });
+
+  describe('capture', () => {
+    const png = Uint8Array.from(
+      Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', 'base64'),
+    );
+    const pngBase64 = Buffer.from(png).toString('base64');
+    const sha256 = createHash('sha256').update(png).digest('hex');
+
+    test('keeps the window or an element as an artifact with where and when it was taken, and returns pixels only when asked', async () => {
+      await withFixture({}, async ({ session }) => {
+        const window = await session.capture();
+        expect(window.result).toEqual({
+          artifact: 'a1',
+          bytes: png.byteLength,
+          capturedAt: expect.any(String),
+          height: 1,
+          incarnation: 1,
+          mimeType: 'image/png',
+          previewGeneration: expect.any(Number),
+          scaleFactor: 1,
+          scope: 'window',
+          sha256,
+          width: 1,
+          window: expect.any(String),
+        });
+        expect((await session.capture({ image: true })).result).toMatchObject({ artifact: 'a2', image: pngBase64, scope: 'window' });
+
+        const ref = await refTo(session, { automationId: 'button-primary' });
+        expect((await session.capture({ ref })).result).toMatchObject({ artifact: 'a3', ref, scope: 'element', sha256 });
+        expect((await session.artifact({ artifact: 'a1' })).result).toEqual({
+          artifact: 'a1',
+          bytes: png.byteLength,
+          data: pngBase64,
+          mimeType: 'image/png',
+          offset: 0,
+          sha256,
+        });
+
+        const journal = JSON.stringify((await session.journal()).result);
+        expect(journal).toContain('"operation":"capture"');
+        expect(journal).toContain('"operation":"artifact"');
+        expect(journal).not.toContain(pngBase64);
+        expect(journal).not.toContain(sha256);
+      });
+    });
+
+    test('pages an image too large to return inline, and refuses one too large to keep', async () => {
+      const large = Uint8Array.from({ length: 1024 * 1024 + 300 }, (_, index) => index % 251);
+      await withFixture({ screenshot: large }, async ({ post, session }) => {
+        const { result } = await session.capture({ image: true });
+        expect(result).toMatchObject({ bytes: large.byteLength, imageOmitted: 'too-large' });
+        expect(result.image).toBeUndefined();
+
+        const first = (await session.artifact({ artifact: result.artifact })).result;
+        expect(first).toMatchObject({ next: 1024 * 1024, offset: 0 });
+        const second = (await session.artifact({ artifact: result.artifact, offset: first.next })).result;
+        expect(second.next).toBeUndefined();
+        expect(Buffer.concat([Buffer.from(first.data, 'base64'), Buffer.from(second.data, 'base64')]).equals(Buffer.from(large))).toBe(
+          true,
+        );
+        expect((await session.artifact({ artifact: result.artifact, length: 1024, offset: 1024 })).result).toMatchObject({ next: 2048 });
+
+        await expect(session.artifact({ artifact: result.artifact, offset: large.byteLength + 1 })).rejects.toMatchObject(
+          operationFailure('invalid argument', 'offset-out-of-range', 'artifact'),
+        );
+        for (const input of [{ artifact: 'b1' }, { artifact: 'a0' }, { artifact: 'a1', length: 2 * 1024 * 1024 }]) {
+          expect((await post('artifact', { input })).value).toMatchObject({ error: 'invalid argument' });
+        }
+      });
+      await withFixture({ screenshot: new Uint8Array(16 * 1024 * 1024 + 1) }, async ({ session }) => {
+        await expect(session.capture()).rejects.toMatchObject(operationFailure('unsupported operation', 'capture-too-large', 'capture'));
+      });
+    });
+
+    test('drops the oldest captures and says a dropped one expired, not that it never existed', async () => {
+      await withFixture({}, async ({ session }) => {
+        for (let count = 0; count < 17; count += 1) {
+          await session.capture();
+        }
+        await expect(session.artifact({ artifact: 'a1' })).rejects.toMatchObject(
+          operationFailure('invalid argument', 'artifact-expired', 'artifact'),
+        );
+        await expect(session.artifact({ artifact: 'a18' })).rejects.toMatchObject(
+          operationFailure('invalid argument', 'artifact-unknown', 'artifact'),
+        );
+        await expect(session.artifact({ artifact: 'a2' })).resolves.toMatchObject({ result: { artifact: 'a2' } });
+      });
+    });
+
+    test('is refused when the operator denies content or the provider cannot capture what was asked for', async () => {
+      await withFixture(
+        {},
+        async ({ session }) => {
+          await expect(session.capture()).rejects.toMatchObject(operationFailure('unsupported operation', 'content-denied', 'capture'));
+          await expect(session.artifact({ artifact: 'a1' })).rejects.toMatchObject(
+            operationFailure('unsupported operation', 'content-denied', 'artifact'),
+          );
+        },
+        { operations: { content: 'deny' } },
+      );
+      await withFixture({ features: { elementScreenshot: false } }, async ({ session }) => {
+        const ref = await refTo(session, { automationId: 'button-primary' });
+        await expect(session.capture({ ref })).rejects.toMatchObject(
+          operationFailure('unsupported operation', 'element-capture-unsupported', 'capture'),
+        );
+        await expect(session.capture()).resolves.toMatchObject({ result: { scope: 'window' } });
+      });
+      await withFixture({ features: { screenshot: false } }, async ({ session }) => {
+        expect(await catalogEntry(session, 'capture')).toMatchObject({ available: false, unavailableReason: 'capture-unsupported' });
+        await expect(session.capture()).rejects.toMatchObject(operationFailure('unsupported operation', 'capture-unsupported', 'capture'));
+      });
     });
   });
 

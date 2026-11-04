@@ -10,7 +10,14 @@ const readOnly = {
   windowCapture: false,
 };
 
-const everything = { ...readOnly, boundedObservation: true };
+const everything = {
+  accessibilityClick: true,
+  boundedObservation: true,
+  elementCapture: true,
+  keyboard: true,
+  physicalClick: true,
+  windowCapture: true,
+};
 
 function walk(value: unknown, visit: (key: string, child: unknown) => void): void {
   if (Array.isArray(value)) {
@@ -48,6 +55,8 @@ describe('describeOperations', () => {
       ['act', 'mutate', true],
       ['check', 'read', true],
       ['sequence', 'mutate', true],
+      ['capture', 'read', true],
+      ['artifact', 'read', true],
       ['journal', 'read', true],
     ]);
     for (const entry of catalog.operations) {
@@ -64,7 +73,20 @@ describe('describeOperations', () => {
       ['act', false, 'bounded-observation-unsupported'],
       ['check', false, 'bounded-observation-unsupported'],
       ['sequence', false, 'bounded-observation-unsupported'],
+      ['capture', false, 'bounded-observation-unsupported'],
+      ['artifact', false, 'bounded-observation-unsupported'],
       ['journal', true, undefined],
+    ]);
+  });
+
+  test('marks capture unavailable when the provider cannot capture a window', () => {
+    const catalog = describeOperations({ ...everything, windowCapture: false });
+    const reasons = catalog.operations
+      .filter(({ available }) => !available)
+      .map(({ name, unavailableReason }) => [name, unavailableReason]);
+    expect(reasons).toEqual([
+      ['capture', 'capture-unsupported'],
+      ['artifact', 'capture-unsupported'],
     ]);
   });
 
@@ -108,12 +130,13 @@ describe('describeOperations', () => {
     });
 
     // The catalog is context an agent spends on every session; raise these bounds deliberately, not to make a test pass.
+    // Capture and artifact raised the total from 23,500.
     test('stay small', () => {
       for (const entry of operations) {
         expect(JSON.stringify(entry.input).length).toBeLessThan(2_500);
         expect(JSON.stringify(entry.output).length).toBeLessThan(5_000);
       }
-      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(23_500);
+      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(26_500);
     });
 
     test('are frozen, so a consumer cannot corrupt the cache the next caller reads', () => {

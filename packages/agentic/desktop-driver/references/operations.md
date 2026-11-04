@@ -10,10 +10,10 @@ owner_paths:
 Operations are the bounded, schema-described calls an agent makes instead of
 reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
-results sized by explicit budgets. Six exist today: the reads `observe`,
-`find`, `check`, and `journal`, and `act` and `sequence`, which change the
-application. Capture, controller lifecycle, and the MCP adapter that will
-expose these operations are open work in the
+results sized by explicit budgets. Eight exist today: the reads `observe`,
+`find`, `check`, `capture`, `artifact`, and `journal`, and `act` and
+`sequence`, which change the application. Controller lifecycle and the MCP
+adapter that will expose these operations are open work in the
 [implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
@@ -52,8 +52,9 @@ still run). `session.incarnation` changes when the application restarts;
 references never cross one.
 
 `DesktopSessionClient` (`/client`) wraps the routes as `operations()`,
-`operation(name, input, { requestId })`, `observe()`, `find()`, `act()`, and
-`journal()`. `/operations` exports `executeOperation`, `describeOperations`,
+`operation(name, input, { requestId })`, and one method per operation:
+`observe()`, `find()`, `act()`, `check()`, `sequence()`, `capture()`,
+`artifact()`, and `journal()`. `/operations` exports `executeOperation`, `describeOperations`,
 `lookupOperation`, `OperationSessionState`, and the request, response, and
 result types. The server builds the `OperationRuntime` in
 `src/server/sessionOperations.ts`; nothing under `src/operations` imports from
@@ -66,7 +67,7 @@ Each entry has `name`, `summary`, `effect` (`read` or `mutate`), `available`,
 the same Zod schemas the executor validates with. Output schemas do not forbid
 unknown properties: a result may gain optional fields within a schema version,
 so consumers ignore fields they do not know. Descriptions are written for a
-model reader, and the whole catalog stays near 23 KB because MCP clients load
+model reader, and the whole catalog stays near 26 KB because MCP clients load
 it into context. An operation that embeds another's input or output, as
 `sequence` does, names it in the catalog instead of repeating its schema, and
 validates it exactly as that operation does. An adapter may omit
@@ -311,6 +312,30 @@ denies, so such a refusal never lands halfway. A `requestId` makes the whole
 sequence one recorded outcome, as for `act`. The journal keeps the step kinds
 and the stopping index, never their selectors' values or typed text.
 
+## capture and artifact
+
+`capture` takes a PNG of the current window, or of one element when given a
+`ref`, and keeps it in the session as an artifact. The result names the
+artifact (`a1`, `a2`, …) and records where and when it was taken: `scope`,
+`window`, `ref`, `capturedAt`, the application `incarnation`, and the preview
+`previewGeneration`, with `width` and `height` in pixels, `scaleFactor`,
+`bytes`, and `sha256`. Pixels come back only when the caller asks with
+`image: true`, as base64, and only when the image is at most 1 MiB; a larger
+one reports `imageOmitted: "too-large"`.
+
+`artifact` reads a kept image in base64 pages of up to 1 MiB (`length`,
+default 1 MiB), from `offset`, with `next` naming the following page until the
+end. The session keeps its 16 most recent captures and at most 32 MiB of them,
+dropping the oldest first, and an id is never reused: a dropped id fails with
+`artifact-expired`, one never issued with `artifact-unknown`. A capture larger
+than 16 MiB is refused with `capture-too-large`; capture an element instead.
+
+Both need the provider's window capture (`capture-unsupported` otherwise), and
+element capture needs element capture (`element-capture-unsupported`). Pixels
+show whatever the application displays, so both fail with `content-denied`
+under a `deny` policy. The journal keeps the scope, artifact id, size, and
+dimensions, never pixels or the hash.
+
 ## References and provider records
 
 A reference is an opaque `<tag><serial>` string. The tag is random per session
@@ -384,6 +409,12 @@ rebuilt `mutation` report.
 | `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                      |
 | `obscured`                        | `element click intercepted` | Something else is at the element's centre               |
 | `target-quarantined`              | `unknown error`             | An earlier change may still land; reads still work      |
+| `capture-unsupported`             | `unsupported operation`     | The provider cannot capture a window                    |
+| `element-capture-unsupported`     | `unsupported operation`     | The provider cannot capture one element                 |
+| `capture-too-large`               | `unsupported operation`     | The image is larger than 16 MiB                         |
+| `artifact-expired`                | `invalid argument`          | The capture was dropped to make room for newer ones     |
+| `artifact-unknown`                | `invalid argument`          | No capture in this session has that id                  |
+| `offset-out-of-range`             | `invalid argument`          | `artifact`'s offset is past the end of the image        |
 
 A provider's own failure carries its `nativeCode` and, for a command that may
 have changed the application, the settled `mutation` disposition.
@@ -400,8 +431,8 @@ createDesktopDriverServer({ targets, operations: { content: 'deny' } });
 
 The default is `allow`. Under `deny`, a request for content facts, the
 `content` view, a `text` or `textContains` predicate, or a `check` expecting a
-value or text fails with `content-denied`; names and states stay available. A
-request cannot change the policy.
+value or text, and `capture` or `artifact`, fails with `content-denied`; names
+and states stay available. A request cannot change the policy.
 
 The policy cannot see inside identifiers. An application that puts what it
 displays into a name or automation id still shows it under `deny`: Calculator's

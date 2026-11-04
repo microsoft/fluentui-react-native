@@ -23,7 +23,9 @@ lifecycle work has started: grant revocation drains opening and active sessions,
 cancels active host work, rejects queued requests after re-authentication, and
 waits for native settlement before teardown. Lease expiry/reconnect,
 ownership ledgers, status/stop/recovery, cross-service claims, and supervisor
-wiring remain. Actions, waits, capture, and the MCP adapter are not started. MR
+wiring remain. The `act`, `check`, `sequence`, `capture`, and `artifact`
+operations exist and are exercised on macOS (M4); Windows qualification and the
+MCP adapter remain. MR
 has Windows/PowerShell pipe qualification; GitHub Actions rendering and
 console-interrupt coverage remain. M0-M6 remain open unless marked below. This
 status does not claim real-application qualification.
@@ -832,8 +834,12 @@ unreported state, and a timed-out wait. The
 [`sequence` operation](operations.md#sequence) runs up to eight act and check
 steps in one call, stopping at the first that fails or does not pass, with a
 closing observation; on macOS it entered 6 × 7 on Calculator and checked the
-display read 42. Windows qualification, AX action tickets, UIA pattern
-mappings, and capture remain.
+display read 42. The [`capture` and `artifact` operations](operations.md#capture-and-artifact)
+keep window and element PNGs as bounded session artifacts with their
+incarnation, preview generation, and SHA-256, returning pixels only on request
+and paging larger images; on macOS they captured Calculator's 460 × 816 window
+and its display element, and the paged bytes matched the reported hash.
+Windows qualification, AX action tickets, and UIA pattern mappings remain.
 
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and
