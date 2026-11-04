@@ -12,12 +12,16 @@ import {
 } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import { desktopStageCommands } from './adapters.js';
+import { defaultAgentDescriptor } from './agentConnection.js';
+import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import { loadDesktopConfig, resolveDesktopSpecs, selectDesktopRenderer } from './config.js';
 import type { DesktopStage } from './config.js';
 import { createDesktopReportSession } from './reporting/session.js';
 import { DesktopStopRequested } from './services.js';
 import { DesktopSupervisor } from './supervisor.js';
 import { runDesktopWdioSuite } from './wdio/run.js';
+
+type AgentFlags = { agent?: boolean; descriptor?: string; root?: string };
 
 export async function runDesktopTestCli(argv = process.argv): Promise<void> {
   tolerateClosedDesktopStdout();
@@ -39,7 +43,12 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
   });
   for (const stage of ['prep', 'bundle', 'build', 'run'] as const) program.command(stage).action(() => execute(stage));
   program.command('build-driver').action(() => execute('build-driver'));
-  program.command('serve').action(() => execute('serve'));
+  program
+    .command('serve')
+    .option('--agent', 'require a grant on every route and publish one agent connection descriptor')
+    .option('--descriptor <name>', `agent connection descriptor record name (default ${defaultAgentDescriptor})`)
+    .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location')
+    .action((options: AgentFlags) => execute('serve', undefined, options));
   program
     .command('test')
     .requiredOption('--suite <name>', 'configured suite')
@@ -74,6 +83,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
   async function execute(
     action: DesktopStage | 'build-driver' | 'serve' | 'test',
     test?: { suite: string; list?: boolean },
+    agentFlags: AgentFlags = {},
   ): Promise<void> {
     const options = program.opts<{
       config?: string;
@@ -121,6 +131,19 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         return;
       }
     } else if (test?.list) throw Object.assign(new Error('--list currently requires a standalone WDIO suite.'), { code: 'config' });
+    if (!agentFlags.agent && (agentFlags.descriptor !== undefined || agentFlags.root !== undefined))
+      throw Object.assign(new TypeError('--descriptor and --root require --agent.'), { code: 'config' });
+    // An integration serves through its own lifecycle, which does not protect its routes with a grant authority yet.
+    if (agentFlags.agent && config.config.integration?.run)
+      throw Object.assign(new TypeError('serve --agent does not support targets served by an imported integration.'), {
+        code: 'config',
+      });
+    const agent: DesktopAgentConnectionOptions | undefined = agentFlags.agent
+      ? {
+          ...(agentFlags.descriptor === undefined ? {} : { descriptor: agentFlags.descriptor }),
+          ...(agentFlags.root === undefined ? {} : { root: agentFlags.root }),
+        }
+      : undefined;
     const session = await createDesktopReportSession({
       ...config.reporting,
       kind: action === 'test' ? 'tests' : 'lifecycle',
@@ -133,7 +156,13 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       onFatal: (error) => owner.services.fail(error),
     });
     const { reporter } = session;
-    const owner = new DesktopSupervisor({ target, reporter, reportSession: session, integration: config.config.integration });
+    const owner = new DesktopSupervisor({
+      target,
+      reporter,
+      reportSession: session,
+      integration: config.config.integration,
+      ...(agent ? { agent } : {}),
+    });
     session.onStop?.(() => owner.services.requestStop());
     const interrupt = () => owner.services.requestStop();
     process.once('SIGINT', interrupt);
@@ -164,7 +193,12 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         if (action === 'serve') {
           if (reporterMode === 'json' || reporterMode === 'ndjson')
             process.stdout.write(
-              formatDesktopReporterValue(reporterMode, { url: owner.server.url, targetId: target.id, runId: reporter.runId }),
+              formatDesktopReporterValue(reporterMode, {
+                url: owner.server.url,
+                targetId: target.id,
+                runId: reporter.runId,
+                ...(owner.agentDescriptor ? { agentDescriptor: owner.agentDescriptor } : {}),
+              }),
             );
           await owner.services.guard(new Promise<never>(() => undefined));
         } else if (suite?.kind === 'wdio') await runDesktopWdioSuite(owner, config, test!.suite);

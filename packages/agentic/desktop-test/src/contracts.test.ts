@@ -14,6 +14,7 @@ describe('neutral desktop harness contracts', () => {
     'delegated-cli',
     'services',
     'owned-service',
+    'agent',
     'wdio',
     'typescript',
     'retry',

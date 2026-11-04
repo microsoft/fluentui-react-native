@@ -4,7 +4,16 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 
 import { createDesktopDriverServer, NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
-import type { DesktopDriverServer, DesktopHost, DesktopTarget, NativeDesktopHostOptions } from '@fluentui-react-native/desktop-driver';
+import type {
+  DesktopDriverServer,
+  DesktopHost,
+  DesktopTarget,
+  NativeDesktopHostOptions,
+  NativeDriverArtifact,
+} from '@fluentui-react-native/desktop-driver';
+import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
+import { createNativeAgentPublisher, defaultAgentDescriptor } from './agentConnection.js';
+import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import type { DesktopCommand, ResolvedDesktopTarget } from './config.js';
 import type { DesktopIntegration } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
@@ -24,6 +33,11 @@ export type DesktopSupervisorOptions = {
   integration?: DesktopIntegration;
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
+  /**
+   * Protects the service with a grant authority and publishes one agent's connection descriptor once the target is
+   * ready. Every route then requires a grant, so only clients given one, such as the Desktop Driver MCP adapter, connect.
+   */
+  agent?: DesktopAgentConnectionOptions;
 };
 
 export class DesktopSupervisor {
@@ -36,6 +50,11 @@ export class DesktopSupervisor {
   private opened = false;
   private releaseClaim?: () => void;
   private closePromise?: Promise<void>;
+  private artifact?: NativeDriverArtifact;
+  private authority?: DesktopAuthority;
+  private agentGrantId?: string;
+  private removeAgentDescriptor?: () => Promise<unknown>;
+  private agentDescriptorValue?: string;
   private readonly environment: Record<string, string> = {};
   private readonly workers = new Set<RunningDesktopCommand>();
   private readonly options: DesktopSupervisorOptions;
@@ -52,6 +71,11 @@ export class DesktopSupervisor {
   get server(): DesktopDriverServer {
     if (!this.serverValue) throw new Error('Desktop supervisor has not started.');
     return this.serverValue;
+  }
+
+  /** The record name of the published agent connection descriptor, once it is published. */
+  get agentDescriptor(): string | undefined {
+    return this.agentDescriptorValue;
   }
 
   async open(interactive = true): Promise<void> {
@@ -81,7 +105,9 @@ export class DesktopSupervisor {
       const host = this.options.hostFactory ? await this.options.hostFactory(this.target) : await this.createHost();
       try {
         const extension = await this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter });
+        if (this.options.agent) this.authority = new DesktopAuthority();
         this.serverValue = await createDesktopDriverServer({
+          ...(this.authority ? { authority: this.authority } : {}),
           targets: [
             {
               endpoint: this.target.endpoint,
@@ -111,6 +137,7 @@ export class DesktopSupervisor {
         'webdriver',
         { endpoint: this.target.endpoint, renderer: this.target.host.renderer },
       );
+      if (this.options.agent) await this.publishAgentConnection(this.options.agent);
     } catch (error) {
       this.reporter.fail(error);
       try {
@@ -120,6 +147,34 @@ export class DesktopSupervisor {
       }
       throw error;
     }
+  }
+
+  private async publishAgentConnection(options: DesktopAgentConnectionOptions): Promise<void> {
+    const authority = this.authority!;
+    const descriptor = options.descriptor ?? defaultAgentDescriptor;
+    const grant = authority.issue({ label: 'agent', targets: [this.target.id] });
+    this.agentGrantId = grant.id;
+    this.reporter.addSecret(grant.token);
+    const artifact = this.artifact;
+    const publish = options.publish ?? createNativeAgentPublisher(artifact ? async () => artifact : undefined);
+    this.removeAgentDescriptor = await this.services.guard(
+      publish(
+        {
+          descriptor,
+          grant: grant.token,
+          incarnation: authority.incarnation,
+          ...(options.root === undefined ? {} : { root: options.root }),
+          target: this.target,
+          url: this.server.url,
+        },
+        this.services.controller.signal,
+      ),
+    );
+    this.agentDescriptorValue = descriptor;
+    this.reporter.emit({
+      kind: 'diagnostic',
+      payload: { level: 'info', message: `Published agent connection ${descriptor} for target ${this.target.id}` },
+    });
   }
 
   async startConfiguredServices(): Promise<void> {
@@ -141,6 +196,7 @@ export class DesktopSupervisor {
       buildPolicy: 'never',
       signal: this.services.controller.signal,
     });
+    this.artifact = artifact;
     return new NativeDesktopHost({
       application,
       artifact,
@@ -205,6 +261,10 @@ export class DesktopSupervisor {
       };
       for (const worker of this.workers) await close('worker', () => worker.stop({ failed: true }));
       this.workers.clear();
+      // Withdraw the descriptor before the grant, so no adapter discovers a connection that can no longer authenticate.
+      if (this.removeAgentDescriptor) await close('agent-descriptor', async () => void (await this.removeAgentDescriptor!()));
+      this.agentDescriptorValue = undefined;
+      if (this.agentGrantId) this.authority?.revoke(this.agentGrantId);
       if (this.serverValue) await close('webdriver', () => deadline(this.serverValue!.close(), 30_000, 'Closing desktop sessions'));
       await close('services', () => this.services.close());
       await close('commands', () => this.runner.close());

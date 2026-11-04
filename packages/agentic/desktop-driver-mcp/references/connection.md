@@ -26,7 +26,16 @@ four things before an agent connects:
 The descriptor format, storage, and verifier contracts belong to
 `@fluentui-react-native/desktop-driver`
 (its service reference, "Private connection descriptors").
-A macOS supervisor looks like this:
+
+`desktop-test` is the shipped supervisor. For a target registered in a
+`desktop.config` file, `desktop-test --target <name> serve --agent` does all
+four steps and publishes `agent-connection.json` at the platform default;
+`--descriptor` and `--root` change where. A target with `ownership: "external"`
+accepts only attach sessions. See `@fluentui-react-native/desktop-test` (its
+commands reference).
+
+A program that embeds the service instead does the same steps itself. A macOS
+supervisor looks like this:
 
 ```ts
 import { createDesktopDriverServer, NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
@@ -59,8 +68,7 @@ const removeDescriptor = await publishConnectionDescriptor(await createMacOSPriv
 ```
 
 On Windows, use `createWindowsPrivateStorage({ artifact })` and
-`describeWindowsService({ artifact, pid })` instead. No shipped command
-publishes a descriptor yet; the supervisor is the consumer's program.
+`describeWindowsService({ artifact, pid })` instead.
 
 ## Running the adapter
 

@@ -728,7 +728,8 @@ ten minutes (configurable, 0 disables) closes through the same path as
 `DELETE`; the clock pauses while a request is queued or running. Its contract is in
 [the security model](security.md#protected-service). Still open: controller
 leases beyond idle expiry and reconnect grace (which needs the M5 transport), exact ownership ledgers, status/stop,
-cross-service claims, Storybook mutation coordination, and supervisor wiring.
+cross-service claims, Storybook mutation coordination, and supervisor wiring
+beyond desktop-test's `serve --agent` (M5).
 
 Quarantine persistence and operator recovery are implemented: an optional
 `recovery` server option writes each mutation ahead of dispatch and each
@@ -884,10 +885,16 @@ over stdio against a supervisor that served Calculator with a grant and a
 published descriptor: verified connect, attach, 6 × 7 through `desktop_act`,
 `desktop_check` passing on 42, progress during a wait, a cancelled wait
 journaled as `cancelled`, an inline capture and its resource read with a
-matching hash, and a closed session's link refused. Remaining: a shipped
-supervisor command that serves registered targets and publishes the
-descriptor, `desktop_story`, the CLI and attach work below, Windows
-qualification of the adapter, and clients other than the SDK's.
+matching hash, and a closed session's link refused. desktop-test is the shipped
+supervisor: `desktop-test serve --agent` protects its registered target with
+an authority, issues one target-scoped grant, publishes the descriptor at the
+platform default, and withdraws it before revoking the grant on stop. On
+macOS, the adapter with no arguments connected to a served external Calculator
+target, was refused a launch session, attached, entered 6 × 7 with `perform`
+steps, and passed `check` on 42; after stop it reported the descriptor absent.
+Remaining: `desktop_story` and `--agent` for integration-served targets, the
+CLI and attach work below, Windows qualification of the adapter and of
+`serve --agent`, and clients other than the SDK's.
 
 **Complete when:** the same requests produce equivalent outcomes through MCP,
 CLI, and typed clients; actual MCP clients exercise initialize/discover/call,

@@ -750,6 +750,82 @@ async function main() {
       const result = await run.finish();
       assert.equal(result.status, 'failed');
       assert(err.text().includes('original metro failure'));
+    } else if (mode === 'agent') {
+      const { DesktopSupervisor } = await import(lib('supervisor.js'));
+      const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
+      const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
+      const target = {
+        endpoint: 'win32',
+        host: { kind: 'installed', application: { windowTitle: 'fake' }, renderer: 'paper' },
+        id: 'agent-app',
+        instanceId: 'agent',
+        projectRoot: packageRoot,
+        configPath: path.join(root, 'desktop.config.mjs'),
+      };
+      const capabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': 'agent-app' } };
+      const published = [];
+      let removed = 0;
+      const run = reporter({ kind: 'lifecycle' });
+      const supervisor = new DesktopSupervisor({
+        target,
+        reporter: run,
+        lockDirectory: path.join(root, 'locks'),
+        hostFactory: async () => new FakeDesktopHost({ endpoint: 'win32', features: { boundedObservation: true } }),
+        agent: {
+          root: path.join(root, 'private'),
+          publish: async (connection) => {
+            published.push(connection);
+            return async () => void removed++;
+          },
+        },
+      });
+      try {
+        await supervisor.start();
+        assert.equal(published.length, 1);
+        const [connection] = published;
+        assert.equal(connection.descriptor, 'agent-connection.json');
+        assert.equal(supervisor.agentDescriptor, 'agent-connection.json');
+        assert.equal(connection.root, path.join(root, 'private'));
+        assert.equal(connection.url, supervisor.server.url);
+        assert.equal(connection.target.id, 'agent-app');
+        assert.match(connection.incarnation, /^inc_/);
+        // Every route needs the grant once an agent connection is published.
+        await assert.rejects(createDesktopDriverClient({ url: connection.url }).newSession(capabilities));
+        await assert.rejects(createDesktopDriverClient({ grant: `${connection.grant}x`, url: connection.url }).newSession(capabilities));
+        const session = await createDesktopDriverClient({ grant: connection.grant, url: connection.url }).newSession(capabilities);
+        assert.equal((await session.operations()).operations.find(({ name }) => name === 'observe')?.available, true);
+        await session.delete();
+      } finally {
+        await supervisor.close();
+      }
+      assert.equal(removed, 1);
+      assert.equal(supervisor.agentDescriptor, undefined);
+      const result = await run.finish();
+      assert.equal(result.status, 'passed', JSON.stringify(result));
+      const { grant } = published[0];
+      assert(!out.text().includes(grant) && !err.text().includes(grant), 'the grant must never reach reporter output');
+      for (const entry of fs.readdirSync(root, { recursive: true, withFileTypes: true }))
+        if (entry.isFile())
+          assert(
+            !fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8').includes(grant),
+            `the grant must never reach ${entry.name}`,
+          );
+      assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')));
+
+      const failing = new DesktopSupervisor({
+        target,
+        reporter: reporter({ kind: 'lifecycle' }),
+        lockDirectory: path.join(root, 'locks'),
+        hostFactory: async () => new FakeDesktopHost({ endpoint: 'win32' }),
+        agent: {
+          publish: async () => {
+            throw new Error('original publication failure');
+          },
+        },
+      });
+      await assert.rejects(failing.start(), /original publication failure/);
+      assert.equal(failing.agentDescriptor, undefined);
+      assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')), 'a failed publication must release the claim');
     } else {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
       const { runDesktopWdioSuite } = await import(lib('wdio/run.js'));
