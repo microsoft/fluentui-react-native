@@ -26,6 +26,12 @@ export type DesktopDriverServerOptions = {
    */
   authority?: DesktopAuthority;
   host?: string;
+  /**
+   * How long, in milliseconds, a grant's session may go without a request before the service closes it as DELETE would.
+   * The clock runs only while none of the session's requests is queued or running, and every request for the session
+   * renews it. Defaults to ten minutes; 0 disables expiry. Only a protected service, one with an `authority`, accepts it.
+   */
+  idleSessionTimeoutMs?: number;
   maxBodyBytes?: number;
   /** Policy for the agent operations (`furn/ops`), which the server operator controls rather than the caller. */
   operations?: {
@@ -77,7 +83,10 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   }
   const targets = new TargetRegistry(options.targets);
   options.authority?.assertTargetsRegistered(new Set(targets.list().map(({ id }) => id)));
-  const sessions = new SessionManager({ redactSessionIds: options.authority !== undefined });
+  const sessions = new SessionManager({
+    idleTimeoutMs: resolveIdleSessionTimeout(options),
+    redactSessionIds: options.authority !== undefined,
+  });
   let closing = false;
   let listenerClosePromise: Promise<void> | undefined;
   let cleanupQueue: Promise<void> = Promise.resolve();
@@ -198,6 +207,24 @@ async function handleRequest(
     const webdriverError = toWebDriverError(error);
     writeJson(response, webdriverError.status, { value: webdriverError.toJSON() }, errorHeaders(webdriverError));
   }
+}
+
+const defaultIdleSessionTimeoutMs = 10 * 60 * 1000;
+// The largest delay a Node timer honors; a larger value would fire at once.
+const maxIdleSessionTimeoutMs = 2_147_483_647;
+
+function resolveIdleSessionTimeout(options: DesktopDriverServerOptions): number {
+  const value = options.idleSessionTimeoutMs;
+  if (value === undefined) {
+    return options.authority ? defaultIdleSessionTimeoutMs : 0;
+  }
+  if (!options.authority) {
+    throw new TypeError('The idleSessionTimeoutMs option applies only to a protected service, which needs an authority.');
+  }
+  if (!Number.isSafeInteger(value) || value < 0 || value > maxIdleSessionTimeoutMs) {
+    throw new RangeError(`The idleSessionTimeoutMs option must be an integer from 0 to ${maxIdleSessionTimeoutMs}.`);
+  }
+  return value;
 }
 
 /** Returns the caller's grant on a protected service, and undefined on a service that does not authenticate. */

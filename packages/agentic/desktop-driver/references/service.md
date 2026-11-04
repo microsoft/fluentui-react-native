@@ -324,6 +324,10 @@ const client = createDesktopDriverClient({ grant: agent.token, url: service.url 
 - `/status` lists only the grant's targets and reports
   `service.incarnation`, which changes whenever the service restarts.
 - `authority.revoke(grant.id)` closes the sessions that grant owns.
+- A grant's session closes after `idleSessionTimeoutMs` without a request for
+  it, ten minutes by default. Every request for the session renews it, and a
+  running request is never interrupted by expiry. Pass `0` to disable expiry.
+  Only a protected service accepts the option.
 - A rejected request returns HTTP 401 `unauthorized`; see
   [the WebDriver contract](protocol.md#errors).
 

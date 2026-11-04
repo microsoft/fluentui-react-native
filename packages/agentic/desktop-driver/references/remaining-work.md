@@ -189,10 +189,11 @@ client or an alternate route.
 - Separate application ownership, workload claims, controller leases, and
   transport connections. A CLI invocation can end without deleting its
   explicitly retained controller session.
-- Proposed initial defaults: ten-minute idle expiry and thirty-second
-  reconnect grace, capped by operator policy. Meaningful operations renew
-  idle activity; heartbeats establish transport liveness, not perpetual
-  ownership. Final defaults require measurement.
+- Idle expiry is implemented for grant sessions: ten minutes by default, set
+  by the operator's `idleSessionTimeoutMs`. The owner chose that every request
+  of the owning grant renews it, so a client polling a session keeps it; a
+  transport heartbeat (M5) must not. The proposed thirty-second reconnect
+  grace waits for the M5 transport. Final defaults require measurement.
 - Disconnect, expiry, and shutdown drain or quarantine work before releasing
   authority. Reconnection requires the same grant and service incarnation;
   service restart never resurrects old references.
@@ -734,9 +735,11 @@ request, binds each session to its grant, scopes targets per grant, redacts
 other grants' identifiers from contention and quarantine data, and closes a
 revoked grant's sessions. Opening sessions are cancelled on revocation;
 session commands re-authenticate when dequeued, and active host operations
-settle before teardown runs. Its contract is in
+settle before teardown runs. A grant's session that receives no request for
+ten minutes (configurable, 0 disables) closes through the same path as
+`DELETE`; the clock pauses while a request is queued or running. Its contract is in
 [the security model](security.md#protected-service). Still open: controller
-leases and idle expiry, reconnect, exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+leases beyond idle expiry and reconnect grace (which needs the M5 transport), exact ownership ledgers, status/stop/`recover`, quarantine persistence,
 cross-service claims, Storybook mutation coordination, and supervisor wiring.
 
 The shared Slice 2 descriptor contract, macOS owner-validated storage and

@@ -20,11 +20,15 @@ type Fixture = {
   capabilities: { alwaysMatch: Record<string, unknown> };
 };
 
-async function withFixture(body: (fixture: Fixture) => Promise<void>, hostOptions: FakeDesktopHostOptions = {}): Promise<void> {
+async function withFixture(
+  body: (fixture: Fixture) => Promise<void>,
+  hostOptions: FakeDesktopHostOptions = {},
+  serverOptions: { idleSessionTimeoutMs?: number } = {},
+): Promise<void> {
   const authority = new DesktopAuthority();
   const agent = authority.issue({ label: 'agent', targets: ['fake-windows'] });
   const other = authority.issue({ label: 'wdio', targets: ['fake-windows'] });
-  const harness = await createDesktopDriverTestHarness(hostOptions, undefined, { authority });
+  const harness = await createDesktopDriverTestHarness(hostOptions, undefined, { authority, ...serverOptions });
   try {
     await body({
       agent,
@@ -492,6 +496,112 @@ describe('Desktop Driver protected service', () => {
         await kept.delete();
         expect(other.label).toBe('wdio');
       });
+    });
+  });
+
+  describe('idle expiry', () => {
+    test('closes an idle session as DELETE would and frees its target', async () => {
+      await withFixture(
+        async ({ agent, capabilities, harness, other }) => {
+          const session = await createDesktopDriverClient({ grant: agent.token, url: harness.server.url }).newSession(capabilities);
+
+          await waitUntil(() => !hasSession(harness, session.id));
+
+          const release = harness.host.actions.findIndex(({ type }) => type === 'release-actions');
+          expect(release).toBeGreaterThanOrEqual(0);
+          expect(harness.host.actions.findIndex(({ type }) => type === 'close-application')).toBeGreaterThan(release);
+          const late = await call(harness, 'GET', `/session/${session.id}/window`, { authorization: bearer(agent) });
+          expect(late.body.value).toMatchObject({ error: 'invalid session id' });
+          const reopened = await call(harness, 'POST', '/session', { authorization: bearer(other), body: { capabilities } });
+          expect(reopened.status).toBe(200);
+        },
+        {},
+        { idleSessionTimeoutMs: 50 },
+      );
+    });
+
+    test('renews the idle clock on every request for the session', async () => {
+      await withFixture(
+        async ({ agent, capabilities, harness }) => {
+          const session = await createDesktopDriverClient({ grant: agent.token, url: harness.server.url }).newSession(capabilities);
+
+          for (let request = 0; request < 8; request += 1) {
+            await new Promise((resolve) => setTimeout(resolve, 50));
+            const response = await call(harness, 'GET', `/session/${session.id}/window`, { authorization: bearer(agent) });
+            expect(response.status).toBe(200);
+          }
+
+          expect(hasSession(harness, session.id)).toBe(true);
+          await waitUntil(() => !hasSession(harness, session.id));
+        },
+        {},
+        { idleSessionTimeoutMs: 150 },
+      );
+    });
+
+    test('does not expire a session while its request is running', async () => {
+      await withFixture(
+        async ({ agent, capabilities, harness }) => {
+          const session = await createDesktopDriverClient({ grant: agent.token, url: harness.server.url }).newSession(capabilities);
+          const element = await session.findElement('accessibility id', 'button-primary');
+          harness.host.injectFault('click', { delayMs: 300, mode: 'late-success' });
+
+          await element.click();
+
+          expect(hasSession(harness, session.id)).toBe(true);
+          expect(harness.host.actions.some(({ type }) => type === 'close-application')).toBe(false);
+          await waitUntil(() => !hasSession(harness, session.id));
+        },
+        {},
+        { idleSessionTimeoutMs: 50 },
+      );
+    });
+
+    test('is not renewed by another grant addressing the session', async () => {
+      await withFixture(
+        async ({ agent, capabilities, harness, other }) => {
+          const session = await createDesktopDriverClient({ grant: agent.token, url: harness.server.url }).newSession(capabilities);
+          const runCommand = jest.spyOn(harness.server.sessions, 'runCommand');
+
+          const probe = setInterval(() => {
+            void call(harness, 'GET', `/session/${session.id}/window`, { authorization: bearer(other) }).catch(() => undefined);
+          }, 20);
+          try {
+            await waitUntil(() => !hasSession(harness, session.id));
+          } finally {
+            clearInterval(probe);
+          }
+
+          expect(runCommand.mock.calls.every(([id]) => id === session.id)).toBe(true);
+          expect(runCommand).toHaveBeenCalledTimes(1);
+        },
+        {},
+        { idleSessionTimeoutMs: 100 },
+      );
+    });
+
+    test('never expires when the timeout is 0', async () => {
+      await withFixture(
+        async ({ agent, capabilities, harness }) => {
+          const session = await createDesktopDriverClient({ grant: agent.token, url: harness.server.url }).newSession(capabilities);
+
+          await new Promise((resolve) => setTimeout(resolve, 100));
+
+          expect(hasSession(harness, session.id)).toBe(true);
+        },
+        {},
+        { idleSessionTimeoutMs: 0 },
+      );
+    });
+
+    test.each([-1, 1.5, Number.NaN, 2_147_483_648])('rejects %p as the idle timeout', async (idleSessionTimeoutMs) => {
+      await expect(
+        createDesktopDriverTestHarness({}, undefined, { authority: new DesktopAuthority(), idleSessionTimeoutMs }),
+      ).rejects.toBeInstanceOf(RangeError);
+    });
+
+    test('is refused on a service without an authority', async () => {
+      await expect(createDesktopDriverTestHarness({}, undefined, { idleSessionTimeoutMs: 1_000 })).rejects.toBeInstanceOf(TypeError);
     });
   });
 });
