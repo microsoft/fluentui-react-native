@@ -344,13 +344,14 @@ point they are dispatched:
 - each UI Automation pattern action and value write (`Invoke`, `Toggle`,
   `Select`, `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
   `RecordDispatching()` and `RecordSettled()`;
-- every key, button, and wheel event that `SendInput` accepts, a posted
-  `WM_CLOSE`, and each window restore or `SetWindowPos` that succeeds, through
-  `RecordDelivered()`. `SendInput` is synchronous, so events it accepted are
-  applied even when it refused the rest of a batch.
+- every key, button, and wheel event that `SendInput` inserts into the input
+  stream, a posted `WM_CLOSE`, and each window restore or `SetWindowPos` that
+  succeeds, through `RecordDelivered()`. `SendInput` reports only completed
+  injection, not how the application handled the events, so any insertion,
+  even part of a refused batch, counts toward `partial`.
 
-A pattern call that succeeds is applied. One that returns a UI Automation
-rejection (`UIA_E_ELEMENTNOTENABLED`, `UIA_E_ELEMENTNOTAVAILABLE`,
+A pattern call that succeeds counts toward `partial`. One that returns a UI
+Automation rejection (`UIA_E_ELEMENTNOTENABLED`, `UIA_E_ELEMENTNOTAVAILABLE`,
 `UIA_E_NOTSUPPORTED`, `UIA_E_INVALIDOPERATION`) or `E_INVALIDARG`, `E_NOTIMPL`,
 `E_NOINTERFACE`, or `E_ACCESSDENIED` did nothing. Any other result, including
 `E_FAIL` and RPC failures, stays unresolved, so the failure reports `unknown` and
@@ -359,14 +360,20 @@ That can quarantine a target that was not changed, but it never lets a possibly
 applied mutation be retried as a rejection. `target-quarantined` refuses before
 anything is dispatched, so it reports `none`.
 
+`partial` means part of the command reached the application, not that the
+application finished handling it. Node quarantines the target for `partial` as
+well, and only an authoritative re-observation of the application can establish
+what changed.
+
 Focus, activation (including its restore and `SetForegroundWindow`), pointer
 moves, `pointerCancel`, and the modifier and depressed-input releases that clean
 up around counted input are idempotent and not counted. A queued mutating
-request that is cancelled before it starts reports `none`, as does a cancel for
-an id the helper does not hold (a settled request already reported its effect).
-A new provider-side mutation must
-record itself in the ledger, through `CountedMutation` in `src/automation.cpp`
-or the `Record*` functions, and be listed in `IsTrackedMutation`.
+request that is cancelled before it starts reports `none`, a queued read reports
+no `effect`, and neither ever runs. A cancel for an id the helper does not hold
+also reports `none` (a settled request already reported its effect). A new
+provider-side mutation must record itself in the ledger, through
+`CountedMutation` in `src/automation.cpp` or the `Record*` functions, and be
+listed in `IsTrackedMutation`.
 
 ## Authority helper modes
 

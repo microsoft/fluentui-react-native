@@ -77,8 +77,10 @@ class EffectLedger {
   // provider never acted (ProvesNoEffect) leave no effect; any other failure
   // stays unresolved.
   void Settled(HRESULT result) noexcept;
-  // A mutation that completed synchronously, such as input events Windows
-  // accepted. Nothing about it is still in flight.
+  // A mutation whose hand-off to the application is complete when the call
+  // returns, such as input events Windows inserted into the input stream or a
+  // posted close. It counts toward `partial`; whether and how the application
+  // handled it is unknown here and needs authoritative re-observation.
   void Delivered() noexcept;
   // Unresolved dispatches are `unknown`; otherwise `partial` once anything was
   // applied, and `none` before that.

@@ -220,6 +220,9 @@ void Host::WorkerLoop() {
     bool commandSucceeded = false;
     bool wroteResult = true;
     try {
+      if (beforeExecute_) {
+        beforeExecute_(request.id, request.command);
+      }
       const CommandResult result = driver_.Execute(request.command, request.params, token_);
       commandSucceeded = true;
       wroteResult = WriteResponse(request.id, request.command, result);
@@ -249,19 +252,28 @@ void Host::WorkerLoop() {
     if (request.command == "dispose" && commandSucceeded) {
       // The session is over: flush the acknowledged response and end the
       // process instead of leaving the reader blocked on a dead stream.
-      FlushFileBuffers(GetStdHandle(STD_OUTPUT_HANDLE));
+      FlushFileBuffers(output_);
       ExitProcess(0);
     }
   }
   winrt::uninit_apartment();
 }
 
+void Host::SetBeforeExecuteForTesting(std::function<void(const std::string&, const std::string&)> hook) {
+  beforeExecute_ = std::move(hook);
+}
+
 int Host::Run() {
   _setmode(_fileno(stdin), _O_BINARY);
   _setmode(_fileno(stdout), _O_BINARY);
-  FrameWriter writer(GetStdHandle(STD_OUTPUT_HANDLE));
+  return Run(GetStdHandle(STD_INPUT_HANDLE), GetStdHandle(STD_OUTPUT_HANDLE));
+}
+
+int Host::Run(HANDLE input, HANDLE output) {
+  output_ = output;
+  FrameWriter writer(output);
   writer_ = &writer;
-  FrameReader reader(GetStdHandle(STD_INPUT_HANDLE));
+  FrameReader reader(input);
 
   writer.WriteJson(CreateHello());
   DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &readerThread_, 0, FALSE,

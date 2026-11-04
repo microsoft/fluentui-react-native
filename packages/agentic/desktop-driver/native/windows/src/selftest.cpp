@@ -2856,6 +2856,115 @@ void TestDriverMutationEffects() {
   ResetMutationQuarantineForTesting();
 }
 
+// Drives the real Host over in-process pipes: a cancel for a request still in
+// the queue must acknowledge it with the right effect and keep it from ever
+// reaching the driver, while later requests still run.
+void TestHostQueuedCancellation() {
+  HANDLE hostInput = nullptr;
+  HANDLE testOutput = nullptr;
+  HANDLE testInput = nullptr;
+  HANDLE hostOutput = nullptr;
+  if (!CreatePipe(&hostInput, &testOutput, nullptr, 0) || !CreatePipe(&testInput, &hostOutput, nullptr, 0)) {
+    Check(false, "the host test creates its pipes");
+    return;
+  }
+
+  std::mutex mutex;
+  std::vector<json::Value> messages;
+  std::vector<std::string> executed;
+  const auto blocker = std::make_shared<Gate>();
+  Host host;
+  host.SetBeforeExecuteForTesting([&](const std::string& id, const std::string&) {
+    {
+      const std::lock_guard<std::mutex> guard(mutex);
+      executed.push_back(id);
+    }
+    if (id == "blocker") {
+      blocker->Hold();
+    }
+  });
+  std::thread reader([&]() {
+    try {
+      FrameReader frames(testInput);
+      Frame frame;
+      while (frames.Read(frame)) {
+        if (frame.type == kJsonFrameType) {
+          json::Value message = json::Value::Parse(
+              std::string_view(reinterpret_cast<const char*>(frame.payload.data()), frame.payload.size()));
+          const std::lock_guard<std::mutex> guard(mutex);
+          messages.push_back(std::move(message));
+        }
+      }
+    } catch (...) {
+    }
+  });
+  std::thread server([&]() { host.Run(hostInput, hostOutput); });
+
+  FrameWriter writer(testOutput);
+  const auto send = [&writer](const std::string& type, const std::string& id, const char* command,
+                              json::Value params) {
+    json::Value message = json::Value::Object();
+    message.Set("type", json::Value::String(type));
+    message.Set("id", json::Value::String(id));
+    if (command != nullptr) {
+      message.Set("command", json::Value::String(std::string(command)));
+      message.Set("params", std::move(params));
+    }
+    writer.WriteJson(message);
+  };
+  const auto find = [&](const char* type, const std::string& id) -> std::optional<json::Value> {
+    const std::lock_guard<std::mutex> guard(mutex);
+    for (const json::Value& message : messages) {
+      if (message.StringField("type") == type && message.StringField("id") == id) {
+        return message;
+      }
+    }
+    return std::nullopt;
+  };
+  const auto ran = [&](const std::string& id) {
+    const std::lock_guard<std::mutex> guard(mutex);
+    return std::find(executed.begin(), executed.end(), id) != executed.end();
+  };
+
+  send("request", "blocker", "probe", json::Value::Object());
+  Check(WaitFor([&]() { return ran("blocker"); }), "the host worker starts the blocking request");
+  send("request", "queued-click", "click", StringFields({{"elementId", "element-never-issued"}}));
+  send("request", "queued-read", "windows", json::Value::Object());
+  send("request", "after", "probe", json::Value::Object());
+  send("cancel", "queued-click", nullptr, json::Value::Object());
+  send("cancel", "queued-read", nullptr, json::Value::Object());
+  send("cancel", "never-sent", nullptr, json::Value::Object());
+
+  const bool acknowledged = WaitFor([&]() {
+    return find("cancelled", "queued-click") && find("cancelled", "queued-read") && find("cancelled", "never-sent");
+  });
+  Check(acknowledged && !ran("queued-click") && !ran("queued-read"),
+        "queued requests are acknowledged as cancelled while the worker is still busy");
+  const std::optional<json::Value> click = find("cancelled", "queued-click");
+  const std::optional<json::Value> read = find("cancelled", "queued-read");
+  const std::optional<json::Value> unknown = find("cancelled", "never-sent");
+  Check(click && click->StringField("effect") == "none", "a cancelled queued mutation reports no effect on the wire");
+  Check(read && read->Find("effect") == nullptr, "a cancelled queued read carries no effect on the wire");
+  Check(unknown && unknown->StringField("effect") == "none", "a cancel for an id the host does not hold reports none");
+
+  blocker->Open();
+  Check(WaitFor([&]() { return find("response", "blocker") && find("response", "after"); }),
+        "the host runs the requests around the cancelled ones");
+  {
+    const std::lock_guard<std::mutex> guard(mutex);
+    Check(executed == std::vector<std::string>({"blocker", "after"}), "cancelled queued requests never reach the driver");
+  }
+  Check(!find("response", "queued-click") && !find("response", "queued-read"),
+        "cancelled queued requests never produce a response");
+
+  CloseHandle(testOutput);
+  server.join();
+  CloseHandle(hostOutput);
+  reader.join();
+  CloseHandle(hostInput);
+  CloseHandle(testInput);
+}
+
 void TestDriverHitTestBeyondScreens() {
   const CancellationToken token;
   WindowThread windows;
@@ -3091,6 +3200,7 @@ int RunSelfTest() {
   TestDriverDisabledElements();
   TestEffectLedger();
   TestDriverMutationEffects();
+  TestHostQueuedCancellation();
   TestDriverHitTestBeyondScreens();
   TestDriverObservation();
   TestSnapshotShape();

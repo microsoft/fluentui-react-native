@@ -277,8 +277,10 @@ void InputController::Send(std::vector<INPUT>& inputs, bool counted) {
   const InputSender send = sender_ != nullptr ? sender_ : &SendInput;
   SetLastError(ERROR_SUCCESS);
   const UINT sent = send(static_cast<UINT>(inputs.size()), inputs.data(), sizeof(INPUT));
-  // SendInput returns once the accepted events are in the input stream, so
-  // nothing it accepted is still in flight, even when it accepted only part.
+  // SendInput returns the number of events it inserted into the input stream,
+  // not whether the application has handled them. Any insertion, even part of
+  // a batch, may reach the application, so it counts as a partial effect whose
+  // outcome only re-observing the application can establish.
   if (counted && sent > 0) {
     RecordDelivered();
   }

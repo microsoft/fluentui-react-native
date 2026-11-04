@@ -630,16 +630,16 @@ means `unknown`). The service settles it into an `applied`, `indeterminate`, or
 `rejected` disposition under `data.mutation`, quarantines a target whose
 mutation may have landed, and blocks every mutating route, story operation, and
 new session for it ([contract](../native/PROTOCOL.md#mutation-settlement)). A
-late success after a Node timeout is reported as applied. The macOS helper
-tracks primary mutations in an effect ledger and reports `effect`; the Windows
-helper reports `mutation-indeterminate` and `target-quarantined`, including for
+late success after a Node timeout is reported as applied. Both helpers track
+primary mutations in an effect ledger and report `effect`; the Windows helper
+also reports `mutation-indeterminate` and `target-quarantined`, including for
 a mutation whose provider call times out, and its Win32 fixture contract shows a
 stuck call landing exactly once with later mutations staying refused. Node reads
 both as the same effects, so the providers settle identically. A launched
 target's quarantine lifts when its application's exit is verified, and the
 Windows helper's lease-scoped records end the same way; an attached
-target stays quarantined until the M2 `recover` operation. Still open: the
-Windows follow-ups in section 7, persisting in-flight records across a service
+target stays quarantined until the M2 `recover` operation. Still open:
+persisting in-flight records across a service
 restart, `recover`, and qualification against real hung applications on either
 OS. Portable story-plan reads and actions now reject selectors that match
 multiple elements; explicit `count` and `exists` expectations remain
@@ -1192,10 +1192,25 @@ commit; these re-run the Windows items listed as not run above):
   (`expectEffectReporting`) now runs against the Windows helper too. A
   deliberately wrong cancel expectation made it fail. Matching macOS, the
   Windows helper now answers a cancel for an id it does not hold with `none`.
+- After the macOS review, `TestHostQueuedCancellation` drives the real `Host`
+  over in-process pipes. While a gated request holds the worker, it queues a
+  `click` and a `windows` read, then cancels both and an id it never sent. The
+  `cancelled` frames carry `effect: none` for the `click` and the unknown id,
+  and no `effect` for the read. Neither cancelled request reaches the driver
+  or produces a response, and the request queued after them still runs. The
+  self-test **passed** 735 of 735, stable across three runs. With
+  `HandleCancel` changed to report `none` for every queued request and keep it
+  queued, three of the new checks failed.
+- The gated driver suite for this follow-up ran in a disconnected Remote
+  Desktop session: 731 passed, 30 skipped, and 2 Win32 fixture tests
+  **failed**. Windows Graphics Capture delivered no frame, and retained
+  elements grew from 316 to 1,516 over 400 cycles. The unchanged base commit
+  failed the same two tests with the same counts, so they need a connected
+  desktop and are not a regression. Re-run the Win32 fixture contract on an
+  active console session.
 
-Settlement effect items **not run** on Windows: a Host-level self-test of a
-queued mutating request cancelled before it starts (the path was reviewed
-only), the delivered effect of `closeWindow` and `setWindowRect` after a later
+Settlement effect items **not run** on Windows: the delivered effect of
+`closeWindow` and `setWindowRect` after a later
 failure, a `click` abandoned on a genuinely hung provider (a Win32 button's UI
 Automation `Invoke` is posted and never blocks), and real-application UI
 Automation failures, so the rejection list is unqualified. `SetWindowPos` on a
