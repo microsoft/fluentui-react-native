@@ -55,6 +55,8 @@ describe('describeOperations', () => {
     expect(catalog.schemaVersion).toBe(1);
     expect(catalog.operations.map(({ available, effect, name }) => [name, effect, available])).toEqual([
       ['observe', 'read', true],
+      ['observeDelta', 'read', true],
+      ['observePage', 'read', true],
       ['find', 'read', true],
       ['act', 'mutate', true],
       ['check', 'read', true],
@@ -75,6 +77,8 @@ describe('describeOperations', () => {
     const catalog = describeOperations({ ...readOnly, boundedObservation: false });
     expect(catalog.operations.map(({ available, name, unavailableReason }) => [name, available, unavailableReason])).toEqual([
       ['observe', false, 'bounded-observation-unsupported'],
+      ['observeDelta', false, 'bounded-observation-unsupported'],
+      ['observePage', false, 'bounded-observation-unsupported'],
       ['find', false, 'bounded-observation-unsupported'],
       ['act', false, 'bounded-observation-unsupported'],
       ['check', false, 'bounded-observation-unsupported'],
@@ -137,14 +141,13 @@ describe('describeOperations', () => {
       }
     });
 
-    // The catalog is context an agent spends on every session; raise these bounds deliberately, not to make a test pass.
-    // Capture and artifact raised the total from 23,500; stories and story raised it from 26,500.
+    // The catalog is context an agent spends on every session; references keep nested observe schemas from being repeated.
     test('stay small', () => {
       for (const entry of operations) {
         expect(JSON.stringify(entry.input).length).toBeLessThan(2_500);
         expect(JSON.stringify(entry.output).length).toBeLessThan(5_000);
       }
-      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(29_500);
+      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(42_000);
     });
 
     test('are frozen, so a consumer cannot corrupt the cache the next caller reads', () => {

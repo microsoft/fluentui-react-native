@@ -87,6 +87,7 @@ export type ProjectionRequest = {
   budgets: { maxBytes: number; maxNodes: number };
   format: ProjectionFormat;
   observation: NativeObservation;
+  offset?: number;
   refs: ProjectionRefs;
   shown: readonly NativeObserveFact[];
   view: ProjectionView;
@@ -105,6 +106,8 @@ export type Projection = {
   };
   nodes?: ProjectedElement[];
   outline?: string;
+  /** Candidate offset for a continuation over the same immutable sample. */
+  nextOffset?: number;
   /** The reference of the sample's root, when it was emitted. */
   root?: string;
   truncation: ProjectionTruncation[];
@@ -117,9 +120,9 @@ const toggleRoles: ReadonlySet<string> = new Set(['checkbox', 'menuitem', 'radio
  *
  * The view chooses which nodes matter: `all` keeps every node, `interactive` keeps operable nodes, and `content` adds
  * the nodes that display something. The root and the named or structural containers above kept nodes stay as context;
- * anonymous wrappers are elided. Selection takes a breadth-first prefix of what the view keeps, so the top of the
- * window is always shown before its depths, and stops at the node or byte budget. Output is then written in document
- * order. A node that has children the sample did not return, or that the limits left out, carries `more`.
+ * anonymous wrappers are elided. Each page takes a breadth-first range under the node or byte budget and includes its
+ * kept ancestors as context. Output is then written in document order. A node that has children the sample did not
+ * return, or that the page left out, carries `more`.
  */
 export function project(request: ProjectionRequest): Projection {
   const { budgets, format, observation, refs, view } = request;
@@ -136,73 +139,93 @@ export function project(request: ProjectionRequest): Projection {
   }
 
   const nativeMore = nodes.map((node) => node.childrenState === 'truncated' || node.childrenState === 'unknown');
-  const unselectedKids = Array.from({ length: nodes.length }, () => 0);
-  for (const index of order) {
-    if (kept.parent[index] >= 0) {
-      unselectedKids[kept.parent[index]] += 1;
-    }
-  }
   const base = new Map<number, ElementBase>();
   for (const index of order) {
     base.set(index, describe(nodes[index], shown, view));
   }
 
-  // The marker a selected node gains when part of its subtree is left out. Reserved while it can still happen.
-  const moreCost = format === 'outline' ? ' more'.length : ',"more":true'.length;
-  let bytes = -1; // The first line has no separator.
-  let selectedCount = 0;
+  const offset = Math.min(request.offset ?? 0, order.length);
+  const pageTargets: number[] = [];
+  let pageIndices: number[] = [];
+  let pageUnselectedKids = Array.from({ length: nodes.length }, () => 0);
   let stop: 'maxBytes' | 'maxNodes' | undefined;
-  for (const index of order) {
-    if (selectedCount >= budgets.maxNodes) {
+
+  const indicesWithAncestors = (targets: readonly number[]) => {
+    const included = new Set<number>();
+    for (const target of targets) {
+      for (let index = target; index >= 0; index = kept.parent[index]) {
+        included.add(index);
+      }
+    }
+    return inDocumentOrder([...included], parents);
+  };
+  const omittedChildren = (included: readonly number[]) => {
+    const includedSet = new Set(included);
+    const counts = Array.from({ length: nodes.length }, () => 0);
+    for (const index of order) {
+      if (!includedSet.has(index) && kept.parent[index] >= 0) {
+        counts[kept.parent[index]] += 1;
+      }
+    }
+    return counts;
+  };
+  const measurePage = (indices: readonly number[], unselectedKids: readonly number[]) => {
+    const placeholder = 'x'.repeat(refs.maxLength(indices.length));
+    return indices.reduce(
+      (total, index) =>
+        total + measure(format, assemble(base.get(index), kept.depth[index], placeholder, nativeMore[index] || unselectedKids[index] > 0)),
+      -1,
+    );
+  };
+
+  for (let position = offset; position < order.length; position += 1) {
+    const targets = [...pageTargets, order[position]];
+    const indices = indicesWithAncestors(targets);
+    if (indices.length > budgets.maxNodes) {
       stop = 'maxNodes';
       break;
     }
-    const placeholder = 'x'.repeat(refs.maxLength(selectedCount + 1));
-    let delta = measure(format, assemble(base.get(index), kept.depth[index], placeholder, nativeMore[index]));
-    const parent = kept.parent[index];
-    if (!nativeMore[index] && unselectedKids[index] > 0) {
-      delta += moreCost;
-    }
-    if (parent >= 0 && !nativeMore[parent] && unselectedKids[parent] === 1) {
-      delta -= moreCost;
-    }
-    if (bytes + delta > budgets.maxBytes) {
+    const unselectedKids = omittedChildren(indices);
+    if (measurePage(indices, unselectedKids) > budgets.maxBytes) {
       stop = 'maxBytes';
       break;
     }
-    bytes += delta;
-    if (parent >= 0) {
-      unselectedKids[parent] -= 1;
-    }
-    selectedCount += 1;
+    pageTargets.push(order[position]);
+    pageIndices = indices;
+    pageUnselectedKids = unselectedKids;
   }
 
-  const selected = order.slice(0, selectedCount);
-  const issued = refs.assign(selected.map((index) => nodes[index]));
+  const nextOffset = offset + pageTargets.length;
+  const pageIndexSet = new Set(pageIndices);
+  const issueOrder = order.filter((index) => pageIndexSet.has(index));
+  const issued = refs.assign(issueOrder.map((index) => nodes[index]));
   const refByIndex = new Map<number, string>();
-  for (const [position, index] of selected.entries()) {
+  for (const [position, index] of issueOrder.entries()) {
     refByIndex.set(index, issued[position]);
   }
 
-  const elements = inDocumentOrder(selected, parents).map((index) =>
-    assemble(base.get(index), kept.depth[index], refByIndex.get(index), nativeMore[index] || unselectedKids[index] > 0),
+  const elements = pageIndices.map((index) =>
+    assemble(base.get(index), kept.depth[index], refByIndex.get(index), nativeMore[index] || pageUnselectedKids[index] > 0),
   );
   const truncation: ProjectionTruncation[] = observation.truncation.map((entry) => ({ ...entry }));
   if (stop) {
     truncation.push({
       limit: stop === 'maxNodes' ? budgets.maxNodes : budgets.maxBytes,
-      omitted: order.length - selectedCount,
+      omitted: order.length - nextOffset,
       reason: stop,
     });
   }
 
   const projection: Projection = {
-    complete: observation.complete && selectedCount === order.length,
-    counts: { bytes: 0, emitted: selectedCount, matched: order.length, visited: nodes.length },
+    complete: observation.complete && nextOffset === order.length,
+    counts: { bytes: 0, emitted: elements.length, matched: order.length, visited: nodes.length },
     truncation,
   };
-  if (selectedCount > 0 && selected[0] === 0) {
+  if (pageIndices.includes(0)) {
     projection.root = refByIndex.get(0);
+  }
+  if (nextOffset < order.length) {
+    projection.nextOffset = nextOffset;
   }
   if (format === 'outline') {
     projection.outline = elements.map(outlineLine).join('\n');

@@ -6,7 +6,7 @@ import { checkOperation } from './check.js';
 import { findElementsOperation } from './find.js';
 import { readJournalOperation } from './journalOperation.js';
 import { operationSchemaVersion } from './limits.js';
-import { observeOperation } from './observe.js';
+import { observeDeltaOperation, observeOperation, observePageOperation } from './observe.js';
 import type { OperationCapabilities, OperationEffect, RegisteredOperation } from './runtime.js';
 import { collapseSchemaReferences } from './schemaReferences.js';
 import { sequenceOperation } from './sequence.js';
@@ -31,6 +31,8 @@ export type OperationCatalog = {
 
 const operations: readonly RegisteredOperation[] = [
   observeOperation,
+  observeDeltaOperation,
+  observePageOperation,
   findElementsOperation,
   actOperation,
   checkOperation,

@@ -16,7 +16,11 @@ import type {
   FindResult,
   JournalInput,
   JournalResult,
+  ObserveDeltaInput,
+  ObserveDeltaResult,
   ObserveInput,
+  ObservePageInput,
+  ObservePageResult,
   ObserveResult,
   OperationCatalog,
   OperationResponse,
@@ -196,6 +200,16 @@ export class DesktopSessionClient {
   /** Reads a bounded outline of the current window, or of the subtree under a reference an earlier call returned. */
   observe(input: ObserveInput = {}, options?: OperationCallOptions): Promise<OperationResponse<ObserveResult>> {
     return this.operation('observe', input, options);
+  }
+
+  /** Compares a fresh observation with a retained sample; incomplete samples never report removals. */
+  observeDelta(input: ObserveDeltaInput, options?: OperationCallOptions): Promise<OperationResponse<ObserveDeltaResult>> {
+    return this.operation('observeDelta', input, options);
+  }
+
+  /** Reads another page from an immutable observation or delta without sampling the application again. */
+  observePage(input: ObservePageInput, options?: OperationCallOptions): Promise<OperationResponse<ObservePageResult>> {
+    return this.operation('observePage', input, options);
   }
 
   /** Finds elements by role, name, automation id, or text, and says whether the match is unique. */

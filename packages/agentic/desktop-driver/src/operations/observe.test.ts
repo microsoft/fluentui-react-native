@@ -2,8 +2,8 @@ import { buildSample, supportedFact } from '../testing/observationSample';
 import { stubRuntime } from '../testing/operationRuntime';
 import type { StubRuntime, StubRuntimeOptions } from '../testing/operationRuntime';
 import { executeOperation } from './executor';
-import { observeOperation } from './observe';
-import type { ObserveResult } from './observe';
+import { observeDeltaOperation, observeOperation, observePageOperation } from './observe';
+import type { ObserveDeltaResult, ObserveResult } from './observe';
 
 function calculator() {
   return buildSample({
@@ -33,6 +33,11 @@ function stub(options: StubRuntimeOptions = {}): StubRuntime {
 async function observe(runtime: StubRuntime, input: Record<string, unknown> = {}): Promise<ObserveResult> {
   const response = await executeOperation(runtime.runtime, 'observe', { input });
   return observeOperation.output.parse(response.result) as ObserveResult;
+}
+
+async function observeDelta(runtime: StubRuntime, input: Record<string, unknown>): Promise<ObserveDeltaResult> {
+  const response = await executeOperation(runtime.runtime, 'observeDelta', { input });
+  return observeDeltaOperation.output.parse(response.result) as ObserveDeltaResult;
 }
 
 const ref = (runtime: StubRuntime, nativeId: string) => runtime.state.refs.peek(nativeId);
@@ -93,6 +98,162 @@ describe('observe', () => {
     expect(second.sample.id).toBe('o2');
   });
 
+  test('continues pages from one immutable sample, without asking the provider again', async () => {
+    const runtime = stub();
+    const first = await observe(runtime, { budget: { maxNodes: 3 } });
+    expect(first.complete).toBe(false);
+    expect(first.next).toBeDefined();
+
+    const response = await executeOperation(runtime.runtime, 'observePage', {
+      input: { budget: { maxNodes: 4 }, cursor: first.next },
+    });
+    const page = observePageOperation.output.parse(response.result) as ObserveResult;
+    expect(page.sample.id).toBe(first.sample.id);
+    expect(page.sample.root).toBe(first.sample.root);
+    expect(page.complete).toBe(true);
+    expect(page.outline).toContain('button "Eight"');
+    expect(runtime.observed).toHaveLength(1);
+  });
+
+  test('reports added and changed elements against a retained complete sample', async () => {
+    const first = buildSample({
+      children: [{ id: 'one', name: 'One', role: 'button' }],
+      id: 'win',
+      role: 'window',
+    });
+    const second = buildSample({
+      children: [
+        { id: 'one', name: 'Renamed', role: 'button' },
+        { id: 'two', name: 'Two', role: 'button' },
+      ],
+      id: 'win',
+      role: 'window',
+    });
+    const runtime = stubRuntime({ observe: (_request, _signal, call) => (call === 1 ? first : second) });
+    const base = await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    expect(delta).toMatchObject({
+      mode: 'delta',
+      baseSample: base.sample.id,
+      complete: true,
+      removalsSuppressed: false,
+      counts: { added: 1, changed: 1, removed: 0, emitted: 2, omitted: 0 },
+    });
+    if (delta.mode !== 'delta') {
+      throw new Error('Expected a delta result.');
+    }
+    expect(delta.changes.map(({ change }) => change)).toEqual(['changed', 'added']);
+  });
+
+  test('reports removals only when both retained samples are complete', async () => {
+    const first = buildSample({
+      children: [{ id: 'gone', name: 'Gone', role: 'button' }],
+      id: 'win',
+      role: 'window',
+    });
+    const second = buildSample({ id: 'win', role: 'window' });
+    const runtime = stubRuntime({ observe: (_request, _signal, call) => (call === 1 ? first : second) });
+    const base = await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    expect(delta).toMatchObject({
+      mode: 'delta',
+      complete: true,
+      removalsSuppressed: false,
+      counts: { removed: 1 },
+    });
+    if (delta.mode !== 'delta') {
+      throw new Error('Expected a delta result.');
+    }
+    expect(delta.changes.map(({ change }) => change)).toEqual(['removed']);
+  });
+
+  test('pages through a large delta without re-sampling', async () => {
+    const first = buildSample({ id: 'win', role: 'window' });
+    const second = buildSample({
+      children: [
+        { id: 'one', name: 'One', role: 'button' },
+        { id: 'two', name: 'Two', role: 'button' },
+        { id: 'three', name: 'Three', role: 'button' },
+      ],
+      id: 'win',
+      role: 'window',
+    });
+    const runtime = stubRuntime({ observe: (_request, _signal, call) => (call === 1 ? first : second) });
+    const base = await observe(runtime);
+    const firstPage = await observeDelta(runtime, { since: base.sample.id, budget: { maxNodes: 1 } });
+
+    expect(firstPage).toMatchObject({ mode: 'delta', counts: { added: 3, emitted: 1, omitted: 2 } });
+    if (firstPage.mode !== 'delta' || !firstPage.next) {
+      throw new Error('Expected a paged delta.');
+    }
+    const response = await executeOperation(runtime.runtime, 'observePage', {
+      input: { budget: { maxNodes: 2 }, cursor: firstPage.next },
+    });
+    const lastPage = observePageOperation.output.parse(response.result);
+
+    expect(lastPage).toMatchObject({ mode: 'delta', complete: true, counts: { emitted: 2, omitted: 0 } });
+    expect(runtime.observed).toHaveLength(2);
+  });
+
+  test('returns a fresh snapshot when the projection basis does not match', async () => {
+    const runtime = stub();
+    const base = await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id, view: 'all' });
+
+    expect(delta).toMatchObject({
+      mode: 'fresh',
+      reset: { baseSample: base.sample.id, reason: 'basis-mismatch' },
+      snapshot: { view: 'all' },
+    });
+  });
+
+  test('suppresses removals when either sample is incomplete', async () => {
+    const first = buildSample({
+      children: [{ id: 'gone', name: 'Gone', role: 'button' }],
+      id: 'win',
+      role: 'window',
+    });
+    const second = buildSample(
+      { id: 'win', role: 'window' },
+      { complete: false, truncation: [{ reason: 'visited', limit: 1, unvisited: 1 }] },
+    );
+    const runtime = stubRuntime({ observe: (_request, _signal, call) => (call === 1 ? first : second) });
+    const base = await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    expect(delta).toMatchObject({
+      mode: 'delta',
+      complete: false,
+      removalsSuppressed: true,
+      counts: { removed: 0 },
+    });
+    if (delta.mode !== 'delta') {
+      throw new Error('Expected a delta result.');
+    }
+    expect(delta.changes).toEqual([]);
+  });
+
+  test('returns an explicit fresh snapshot when the delta base was evicted', async () => {
+    const runtime = stub();
+    const base = await observe(runtime);
+    await observe(runtime);
+    await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    expect(delta).toMatchObject({
+      mode: 'fresh',
+      reset: { baseSample: base.sample.id, reason: 'base-expired' },
+      snapshot: { sample: { id: 'o4' } },
+    });
+  });
+
   test('observes inside a reference and roots the sample there', async () => {
     const runtime = stub({
       observe: (request) =>
@@ -144,10 +305,24 @@ describe('observe', () => {
     expect(result.counts.emitted).toBe(2);
   });
 
-  test('warns when it could not release provider records, and says nothing otherwise', async () => {
-    const runtime = stub();
+  test('warns when evicting an unreferenced cached sample cannot release provider records', async () => {
+    const runtime = stubRuntime({
+      observe: (_request, _signal, call) =>
+        buildSample({
+          children: [
+            { id: `button${call}`, role: 'button' },
+            { id: `label${call}`, role: 'text' },
+          ],
+          id: `window${call}`,
+          role: 'window',
+        }),
+    });
     runtime.control.releaseError = new Error('the helper went away');
+    await observe(runtime);
+    await observe(runtime);
     const result = await observe(runtime);
+    expect(runtime.state.observations.holds('label1')).toBe(false);
+    expect(runtime.released.flat()).toContain('label1');
     expect(result.warnings).toEqual([{ code: 'release-failed', pending: expect.any(Number) }]);
     runtime.control.releaseError = undefined;
     expect((await observe(runtime)).warnings).toBeUndefined();

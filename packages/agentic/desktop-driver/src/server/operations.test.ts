@@ -246,7 +246,7 @@ describe('Desktop Driver agent operations', () => {
   });
 
   describe('provider records', () => {
-    test('releases every record a bounded observation did not return, so retention stays at the references held', async () => {
+    test('retains the bounded samples needed for paging without growing across repeated observations', async () => {
       const shape = { depth: 3, fanout: 6 };
       await withFixture({ windows: treeWindows(shape) }, async ({ harness, session }) => {
         const { refs } = harness.server.sessions.get(session.id).operations;
@@ -254,7 +254,7 @@ describe('Desktop Driver agent operations', () => {
           const { result } = await session.observe({ budget: { maxNodes: 10 }, view: 'all' });
           expect(result.counts).toMatchObject({ emitted: 10 });
           expect(result.counts.visited).toBe(fakeTreeSize(shape));
-          expect(harness.host.trackedElementCount).toBe(refs.size);
+          expect(harness.host.trackedElementCount).toBe(fakeTreeSize(shape));
         }
         expect(refs.size).toBe(10);
       });

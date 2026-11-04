@@ -38,16 +38,19 @@ type Options = {
   budgets?: { maxBytes: number; maxNodes: number };
   facts?: readonly NativeObserveFact[];
   format?: ProjectionFormat;
+  offset?: number;
+  refs?: ProjectionRefs & { assigned: string[][] };
   view?: ProjectionView;
 };
 
 function run(spec: SampleSpec, options: Options = {}, overrides = {}) {
   const view = options.view ?? 'all';
-  const refs = refSource();
+  const refs = options.refs ?? refSource();
   const projection = project({
     budgets: options.budgets ?? { maxBytes: 65_536, maxNodes: 500 },
     format: options.format ?? 'outline',
     observation: buildSample(spec, overrides),
+    offset: options.offset,
     refs,
     shown: shownFacts(view, options.facts ?? defaultObservedFacts),
     view,
@@ -280,6 +283,26 @@ describe('project: limits', () => {
       counts: { emitted: 4, matched: 6, visited: 6 },
       truncation: [{ limit: 4, omitted: 2, reason: 'maxNodes' }],
     });
+  });
+
+  test('continues a bounded page over the same sample and repeats only the ancestors needed for context', () => {
+    const refs = refSource();
+    const first = run(wide(), { budgets: { maxBytes: 65_536, maxNodes: 4 }, refs }).projection;
+    const second = run(wide(), { budgets: { maxBytes: 65_536, maxNodes: 4 }, offset: first.nextOffset, refs }).projection;
+    const third = run(wide(), { budgets: { maxBytes: 65_536, maxNodes: 4 }, offset: second.nextOffset, refs }).projection;
+
+    expect(first.nextOffset).toBe(4);
+    expect(first.outline.split('\n')).toEqual([
+      'window "W" k3xa1',
+      ' group "A" k3xa2 more',
+      '  button "A1" k3xa4',
+      ' group "B" k3xa3 more',
+    ]);
+    expect(second.outline.split('\n')).toEqual(['window "W" k3xa1 more', ' group "A" k3xa2 more', '  button "A2" k3xa5']);
+    expect(second.nextOffset).toBe(5);
+    expect(third.outline.split('\n')).toEqual(['window "W" k3xa1 more', ' group "B" k3xa3', '  button "B1" k3xa6']);
+    expect(third.complete).toBe(true);
+    expect(third.nextOffset).toBeUndefined();
   });
 
   test('drops the marker once the last child of a node fits', () => {

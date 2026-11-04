@@ -23,11 +23,15 @@ export type SamplingRequest = {
 };
 
 export type SamplingContext = {
+  deadlineMs: number;
   /** Issues the element's reference, or returns the one it already has. */
   issue(node: NativeObservedNode): string;
   observation: NativeObservation;
   /** References for a projection, which asks for them only for the nodes it emits. */
   refs: ProjectionRefs;
+  sample: Omit<SampleInfo, 'root'>;
+  rootId?: string;
+  windowId: string;
 };
 
 export type Sampled<T> = {
@@ -76,6 +80,7 @@ export function interpretFailure(runtime: OperationRuntime, target: Pick<Target,
   const { ledger, refs } = runtime.state;
   if (failure.code === 'no such window') {
     ledger.queue(refs.dropWindow(target.windowId));
+    ledger.queue(runtime.state.observations.dropWindow(target.windowId));
     return operationError('no such window', 'window-closed', 'The window is no longer open.');
   }
   if (target.within !== undefined && (failure.code === 'stale element reference' || failure.code === 'no such element')) {
@@ -112,7 +117,7 @@ export async function flushLedger(runtime: OperationRuntime): Promise<OperationW
  * Takes one bounded sample of the application and keeps the session's records consistent around it, so no operation
  * can leak provider records or reference table entries however it ends:
  *
- * - `use` issues references only for the elements it returns;
+ * - `use` issues references only for emitted elements, while a retained immutable observation pins the sample's ids;
  * - references beyond the table's capacity are evicted, oldest and stale-region first;
  * - every other element the provider read is queued for release, and the queue is flushed on a command that does not
  *   end when the caller leaves, whether `use` succeeded or threw.
@@ -144,6 +149,15 @@ export async function sampleTree<T>(
   const observation = await observeNative(runtime, target, nativeRequest);
   const capturedAt = new Date().toISOString();
   const previewGeneration = runtime.previewGeneration();
+  const sample: Omit<SampleInfo, 'root'> = {
+    capturedAt,
+    elapsedMs: Math.round(observation.elapsedMs),
+    epoch: { incarnation: state.incarnation, region: previewGeneration },
+    id: `o${sequence}`,
+    scope: target.scope,
+    window: target.windowId,
+  };
+  state.ledger.queue(state.observations.dropOtherEpoch(state.incarnation, previewGeneration));
 
   const issue = (node: NativeObservedNode): string =>
     state.refs.issue({ nativeId: node.id, previewGeneration, scope: node.scope, windowId: target.windowId }, sequence);
@@ -155,7 +169,15 @@ export async function sampleTree<T>(
   let value: T | undefined;
   let failure: { error: unknown } | undefined;
   try {
-    value = use({ issue, observation, refs });
+    value = use({
+      deadlineMs,
+      issue,
+      observation,
+      refs,
+      sample,
+      ...(target.rootId === undefined ? {} : { rootId: target.rootId }),
+      windowId: target.windowId,
+    });
     state.ledger.queue(state.refs.evict(sequence, previewGeneration));
   } catch (error) {
     failure = { error };
@@ -168,14 +190,7 @@ export async function sampleTree<T>(
 
   return {
     deadlineMs,
-    sample: {
-      capturedAt,
-      elapsedMs: Math.round(observation.elapsedMs),
-      epoch: { incarnation: state.incarnation, region: previewGeneration },
-      id: `o${sequence}`,
-      scope: target.scope,
-      window: target.windowId,
-    },
+    sample,
     value: value as T,
     warnings,
   };

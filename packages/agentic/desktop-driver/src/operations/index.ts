@@ -6,7 +6,7 @@ export { executeOperation } from './executor.js';
 export type { FindInput, FindResult } from './find.js';
 export type { JournalInput, JournalResult } from './journalOperation.js';
 export { maxRequestIdLength, operationSchemaVersion } from './limits.js';
-export type { ObserveInput, ObserveResult } from './observe.js';
+export type { ObserveDeltaInput, ObserveDeltaResult, ObserveInput, ObservePageInput, ObservePageResult, ObserveResult } from './observe.js';
 export { describeOperations, lookupOperation } from './registry.js';
 export type { JsonSchema, OperationCatalog, OperationCatalogEntry } from './registry.js';
 export type {

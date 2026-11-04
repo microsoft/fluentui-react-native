@@ -800,9 +800,33 @@ patterns to named operations without publishing platform identities.
 The macOS helper now records event-ring overflow in `eventsTruncated` and
 self-tests both the bounded event tail and a deterministic 10,000-node sample
 under its 5,000-node cap. The Windows fixture also covers a large-tree
-observation. M3 still needs real-application macOS tree/identity replacement
-and repeated-context pagination/delta qualification, plus a macOS retained
-memory plateau measurement.
+observation.
+
+**Live macOS qualification:** On the arm64 Fabric Storybook target, the
+marker-verified `components-button--appearance` story was switched to
+`components-button--default`. Fifty observations within
+`agentic-storybook-story-root` returned 50 distinct sample ids, the same root
+reference, and complete results. Switching stories advanced the preview region,
+rejected the old root reference, and issued a different root reference. After
+100 full-window warmups, 500 additional complete full-window observations kept
+helper RSS between 18,128 and 18,160 KiB (+32 KiB), stable at every 100-call
+checkpoint.
+
+The shared Node operation layer now pages only immutable cached samples with
+session-bound cursors; expanding an unvisited frontier still requires a fresh
+sample. The bounded cache pins native ids and is capped at two samples, 8 MiB,
+and 8,000 ids. `observeDelta` requires matching scope and projection bases,
+returns an explicit fresh snapshot when a base is unavailable, and suppresses
+removals if either sample is incomplete. Focused operation and MCP tests cover
+continuations, cache eviction, basis mismatch, complete removals, and
+incomplete-sample suppression. Windows real-app identity and repeated-context
+qualification remain open.
+
+**Post-paging live qualification:** not run. The current protected Storybook
+service's descriptor and process identity verified, but session attachment
+failed because its `application-lease.macos.json` was absent. Do not bypass the
+lease check; repeat against a Storybook instance started or attached through
+its owning lifecycle.
 
 **Windows identity progress:** the Windows provider already bounds identity and
 retention without a protocol change. Element ids are never reused, every action
@@ -815,9 +839,9 @@ LRU until released or their window ends, and no real React Native session has
 been measured for a plateau.
 
 **Complete when:** native large-tree, duplicate, replacement, pagination/delta,
-and repeated-context tests pass; no new bounded request uses a full-tree
-fallback. Retained memory reaches a documented plateau rather than growing
-with every observation.
+and repeated-context tests pass on the target providers; no new bounded request
+uses a full-tree fallback. Retained memory reaches a documented plateau rather
+than growing with every observation.
 
 ### M4. Complete action fidelity, settlement, waits, and capture
 

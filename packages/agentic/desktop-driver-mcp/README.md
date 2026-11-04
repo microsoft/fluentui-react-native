@@ -32,7 +32,8 @@ Register the server with an MCP client that launches it over stdio:
 ```
 
 The agent then calls `desktop_session` to list targets and open one,
-`desktop_observe` to read the window, `desktop_act` to change it,
+`desktop_observe` to read or page an immutable observation, compare it with a
+retained sample, search, or inspect the journal, `desktop_act` to change it,
 `desktop_check` to verify state, and `desktop_capture` for pixels. On a
 Storybook target, `desktop_story` lists the stories and renders one. See
 [Tools](references/tools.md).

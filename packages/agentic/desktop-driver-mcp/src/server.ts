@@ -75,12 +75,14 @@ const sessionInput = z
 const observeInput = z
   .strictObject({
     artifact: operationInput('artifact').optional().describe('Read a captured image in base64 pages.'),
+    delta: operationInput('observeDelta').optional().describe('Compare a fresh sample with a retained sample id.'),
     find: operationInput('find').optional().describe('Find elements by role, name, automation id, or text.'),
     journal: operationInput('journal').optional().describe('Read what this session ran.'),
     observe: operationInput('observe').optional().describe('Read an outline of the window or of a subtree.'),
+    read: operationInput('observePage').optional().describe('Read the next page from an observation or delta cursor.'),
   })
   .refine((input) => Object.values(input).filter((value) => value !== undefined).length <= 1, {
-    message: 'Give at most one of observe, find, journal, or artifact.',
+    message: 'Give at most one of observe, delta, read, find, journal, or artifact.',
   });
 
 const actInput = objectInput('sequence').safeExtend({ requestId: requestIdInput });
@@ -148,13 +150,14 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
     {
       annotations: { openWorldHint: false, readOnlyHint: true },
       description:
-        'Reads the application without changing it: an outline of the window (the default), a find, the session journal, or a page of a captured image.',
+        'Reads without changing the application: observe, find, compare a retained observation, read an observation page, read the journal, or page a captured image.',
       inputSchema: observeInput,
       title: 'Observe the desktop',
     },
     tool(async (args, extra) => {
       const [name, input] = Object.entries(args).find(([, value]) => value !== undefined) ?? ['observe', {}];
-      const { response } = await controller.run(name, input as object, { signal: extra.signal });
+      const operation = name === 'delta' ? 'observeDelta' : name === 'read' ? 'observePage' : name;
+      const { response } = await controller.run(operation, input as object, { signal: extra.signal });
       return jsonResult(response);
     }),
   );

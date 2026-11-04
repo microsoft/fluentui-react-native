@@ -10,9 +10,10 @@ owner_paths:
 Operations are the bounded, schema-described calls an agent makes instead of
 reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
-results sized by explicit budgets. Ten exist today: the reads `observe`,
-`find`, `check`, `capture`, `artifact`, `stories`, and `journal`, and `act`,
-`sequence`, and `story`, which change the application.
+results sized by explicit budgets. Twelve exist today: the reads `observe`,
+`observeDelta`, `observePage`, `find`, `check`, `capture`, `artifact`,
+`stories`, and `journal`, and `act`, `sequence`, and `story`, which change the
+application.
 `@fluentui-react-native/desktop-driver-mcp` exposes them to MCP clients as six
 tools. Controller lifecycle is open work in
 the [implementation plan](remaining-work.md).
@@ -55,9 +56,9 @@ references never cross one.
 
 `DesktopSessionClient` (`/client`) wraps the routes as `operations()`,
 `operation(name, input, { requestId, signal })`, and one method per operation:
-`observe()`, `find()`, `act()`, `check()`, `sequence()`, `capture()`,
-`artifact()`, `stories()`, `story()`, and `journal()`, each taking the same
-options. Aborting `signal`
+`observe()`, `observeDelta()`, `observePage()`, `find()`, `act()`, `check()`,
+`sequence()`, `capture()`, `artifact()`, `stories()`, `story()`, and
+`journal()`, each taking the same options. Aborting `signal`
 abandons the HTTP call, which the service treats as the caller leaving.
 `/operations` exports `executeOperation`, `describeOperations`,
 `lookupOperation`, `OperationSessionState`, `maxRequestIdLength`, and the
@@ -104,8 +105,8 @@ Budgets are rejected, never clamped, when outside their range:
 | `maxDepth`        | 24      | 0 – 64         | Levels below the root                     |
 | `maxStringLength` | 120     | 16 – 1,024     | Longest name, value, or text kept         |
 | `deadlineMs`      | 3,000   | 50 – 15,000    | Time the application may take             |
-| `maxNodes`        | 100     | 1 – 500        | Elements returned                         |
-| `maxBytes`        | 12,288  | 1,024 – 65,536 | Bytes of outline or nodes returned        |
+| `maxNodes`        | 100     | 1 – 500        | Elements returned on this page            |
+| `maxBytes`        | 12,288  | 1,024 – 65,536 | Bytes of outline or nodes on this page    |
 
 The provider's deadline is the requested one, capped to the session's native
 command timeout minus 1.5 seconds, so a slow application yields a partial
@@ -129,7 +130,8 @@ ancestors:
   `focused`, `selected`, `checked`, `unchecked` (toggle roles only), `mixed`,
   `?checked`, `expanded`, `collapsed`, `required`, `hidden`. An element with no
   remarkable state has none.
-- `more` marks an element with children the sample did not return.
+- `more` marks children not returned on this page or by the provider. Page
+  results repeat the ancestors needed to place their elements in context.
 - `actions=` lists the actions that say what an element does. The passive ones
   that nearly every element publishes (`AXRaise`, `AXScrollToVisible`,
   `AXShowAlternateUI`, `AXShowDefaultUI`, `AXShowMenu`) are dropped, and any other
@@ -143,11 +145,39 @@ ancestors:
   its depths, and the output is written in document order.
 
 `complete` is true only when the provider finished and every element the view
-selects was returned. `truncation` lists why not: `visited`, `depth`, `bytes`,
+selects has been returned across the pages. If `next` is present, pass it to
+`observePage` to read the next page from the same immutable sample without
+calling the provider again. A continuation can expire when its bounded cache
+entry is evicted or its application/preview epoch changes; then take a fresh
+observation. If ancestor context does not fit the requested page budget, retry
+that cursor with a larger `maxNodes` or `maxBytes`.
+
+The session retains at most two immutable samples, 8 MiB, and 8,000 native
+element ids for page and delta reads. Cached ids stay pinned until eviction so
+the provider cannot release an element still named by a cursor. When a sample
+cannot be retained, `continuationUnavailable: "cache-limit"` is explicit.
+`truncation` lists provider and page limits: `visited`, `depth`, `bytes`,
 `deadline`, `unreadable`, `references`, `maxNodes`, or `maxBytes`, with counts
 where known. `unsupportedFacts` lists shown facts the application cannot report
 for any element, once, instead of per node. `counts` gives `visited`,
-`matched`, `emitted`, and `bytes`.
+`matched`, `emitted`, and `bytes` for this page.
+
+## observeDelta and observePage
+
+`observeDelta` takes a fresh sample and compares it with a retained base named
+by `since`. The base and fresh sample must match in application and preview
+epoch, window or element scope, view, shown facts, format, and native walk
+limits. Page-size limits may differ. A missing or mismatched base returns
+`mode: "fresh"` with a new snapshot and a reset reason; it never presents a
+new sample as a continuation of an old one.
+
+A matching base returns `mode: "delta"` with added, changed, and removed
+projected elements. Removals are reported only when both provider samples and
+their projections are complete. Otherwise `removalsSuppressed` is true, so an
+omitted or truncated node is never called deleted. Delta pages carry `next`;
+pass it to `observePage`, which reads the retained base and fresh sample without
+sampling again. Page cursors are opaque, session-bound, and fail explicitly
+when their bases are evicted.
 
 ## find
 

@@ -71,8 +71,8 @@ describe('desktop-driver-mcp', () => {
         'desktop_capture',
         'desktop_story',
       ]);
-      // The whole tool list is read into every agent's context: about 17.5 KB today, well under the 29 KB operation catalog.
-      expect(JSON.stringify(tools).length).toBeLessThan(18_500);
+      // The whole tool list is read into every agent's context and must remain below the operation catalog's 29 KB.
+      expect(JSON.stringify(tools).length).toBeLessThan(22_000);
       const readOnly = Object.fromEntries(tools.map((tool) => [tool.name, tool.annotations?.readOnlyHint]));
       expect(readOnly).toEqual({
         desktop_act: false,
@@ -130,6 +130,26 @@ describe('desktop-driver-mcp', () => {
 
       expect(json(await call(client, 'desktop_session', { action: 'close' }))).toEqual({ closed: opened.id });
       expect(json(await call(client, 'desktop_session'))).not.toHaveProperty('session');
+    });
+  });
+
+  test('reads observation continuation and delta variants through the typed observe tool', async () => {
+    await withFixture({}, async ({ client, harness }) => {
+      await open(client, harness);
+      const first = json(await call(client, 'desktop_observe', { observe: { budget: { maxNodes: 1 } } })).result as Record<string, unknown>;
+      expect(first.next).toEqual(expect.any(String));
+
+      const page = json(await call(client, 'desktop_observe', { read: { cursor: first.next, budget: { maxNodes: 4 } } }));
+      expect(page).toMatchObject({
+        operation: 'observePage',
+        result: { sample: { id: (first.sample as Record<string, unknown>).id } },
+      });
+
+      const delta = json(await call(client, 'desktop_observe', { delta: { since: (first.sample as Record<string, unknown>).id } }));
+      expect(delta).toMatchObject({
+        operation: 'observeDelta',
+        result: { mode: 'delta', baseSample: (first.sample as Record<string, unknown>).id },
+      });
     });
   });
 

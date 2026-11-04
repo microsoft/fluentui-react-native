@@ -2,6 +2,7 @@ import { ArtifactStore } from './artifacts.js';
 import { OperationJournal } from './journal.js';
 import { ReleaseLedger } from './ledger.js';
 import { OutcomeLedger } from './outcomes.js';
+import { ObservationStore } from './observations.js';
 import { UniquenessProofs } from './proofs.js';
 import { allocateReferenceTag, ReferenceTable } from './refs.js';
 
@@ -34,6 +35,8 @@ export class OperationSessionState {
   readonly ledger: ReleaseLedger;
   /** Outcomes of mutating requests whose ids the caller chose, so a retry never runs an action twice. */
   readonly outcomes = new OutcomeLedger();
+  /** Immutable bounded observations retained for page continuations and deltas. */
+  readonly observations = new ObservationStore();
   /** Recent `find` results that proved a unique match, which actions must cite. */
   readonly proofs = new UniquenessProofs();
   readonly refs: ReferenceTable;
@@ -44,7 +47,7 @@ export class OperationSessionState {
   constructor(options: OperationSessionStateOptions = {}) {
     this.journal = new OperationJournal(options.journalCapacity);
     this.refs = new ReferenceTable(drawTag(), options.referenceCapacity);
-    this.ledger = new ReleaseLedger((nativeId) => this.refs.holds(nativeId));
+    this.ledger = new ReleaseLedger((nativeId) => this.refs.holds(nativeId) || this.observations.holds(nativeId));
   }
 
   /** Counts the application incarnations this session has had. References and records never cross one. */
@@ -69,6 +72,7 @@ export class OperationSessionState {
    */
   startIncarnation(): void {
     this.refs.reset(drawTag());
+    this.observations.clear();
     this.ledger.clear();
     this.proofs.clear();
     this.incarnationNumber += 1;

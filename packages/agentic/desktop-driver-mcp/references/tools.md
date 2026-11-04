@@ -11,17 +11,17 @@ Six tools group the driver's agent operations. Each operation's input schema,
 result, and failure reasons are defined once in `@fluentui-react-native/desktop-driver`
 (its agent operations reference); the tools reuse those schemas, so a field the
 service rejects is rejected here first, before anything reaches the service.
-Unknown fields are refused. The whole tool list is about 17.5 KB, and a test
-bounds it at 18.5 KB.
+Unknown fields are refused. The whole tool list is about 20.3 KB, and a test
+bounds it at 22 KB.
 
-| Tool              | Calls                                              | Hints                       |
-| ----------------- | -------------------------------------------------- | --------------------------- |
-| `desktop_session` | service status, session creation and deletion      | not read-only               |
-| `desktop_observe` | `observe` (default), `find`, `journal`, `artifact` | read-only                   |
-| `desktop_act`     | `sequence`                                         | destructive, not idempotent |
-| `desktop_check`   | `check`                                            | read-only                   |
-| `desktop_capture` | `capture`                                          | read-only                   |
-| `desktop_story`   | `stories` (default), `story`                       | destructive, not idempotent |
+| Tool              | Calls                                                               | Hints                       |
+| ----------------- | ------------------------------------------------------------------- | --------------------------- |
+| `desktop_session` | service status, session creation and deletion                       | not read-only               |
+| `desktop_observe` | `observe` (default), `delta`, `read`, `find`, `journal`, `artifact` | read-only                   |
+| `desktop_act`     | `sequence`                                                          | destructive, not idempotent |
+| `desktop_check`   | `check`                                                             | read-only                   |
+| `desktop_capture` | `capture`                                                           | read-only                   |
+| `desktop_story`   | `stories` (default), `story`                                        | destructive, not idempotent |
 
 ## desktop_session
 
@@ -38,9 +38,13 @@ bounds it at 18.5 KB.
 
 ## desktop_observe
 
-Give at most one of `observe`, `find`, `journal`, or `artifact`, each with that
-operation's input; an empty call observes the current window. The `artifact`
-form pages through a capture for clients that cannot read resources.
+Give at most one of `observe`, `delta`, `read`, `find`, `journal`, or
+`artifact`, each with that operation's input; an empty call observes the
+current window. `observe` returns an opaque `next` cursor when more of the same
+sample is available. `delta` takes a `since` sample id and compares a fresh
+observation with that retained base. `read` accepts the cursor from either
+result and reads its next page without sampling again. The `artifact` form
+pages through a capture for clients that cannot read resources.
 
 ## desktop_act
 
