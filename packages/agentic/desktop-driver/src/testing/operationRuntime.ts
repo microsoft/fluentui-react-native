@@ -1,5 +1,5 @@
 import type { NativeObservation, NativeObserveRequest } from '../host/types.js';
-import type { ContentPolicy, OperationCapabilities, OperationHost, OperationRuntime } from '../operations/runtime.js';
+import type { ContentPolicy, OperationCapabilities, OperationHost, OperationRuntime, OperationStories } from '../operations/runtime.js';
 import { OperationSessionState } from '../operations/sessionState.js';
 import { HostUnsupportedError } from '../protocol/errors.js';
 import { attachMutationReport, createMutationReport } from '../protocol/settlement.js';
@@ -16,6 +16,8 @@ export type StubRuntimeOptions = {
   /** Ends the request's commands, the way a disconnected client does. */
   signal?: AbortSignal;
   state?: OperationSessionState;
+  /** The target's Storybook stories. Supplying them makes the `stories` capability true. */
+  stories?: OperationStories;
   /** The session's current window, or `null` for none. Defaults to `w1`. */
   windowId?: string | null;
 };
@@ -79,6 +81,7 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
       elementCapture: false,
       keyboard: false,
       physicalClick: false,
+      stories: options.stories !== undefined,
       windowCapture: false,
       ...options.capabilities,
     },
@@ -97,6 +100,7 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
     quarantined: () => control.quarantined,
     signal: options.signal ?? new AbortController().signal,
     state,
+    ...(options.stories ? { stories: options.stories } : {}),
   };
   return { control, observed, released, runtime, state };
 }

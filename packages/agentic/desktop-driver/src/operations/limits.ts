@@ -68,6 +68,12 @@ export const maxTypedTextLength = 4_096;
 /** The longest accessibility action name `act` accepts. Authored action names are short labels. */
 export const maxActionNameLength = 256;
 
+/** Stories one `stories` call lists. */
+export const storyPage = { ceiling: 100, default: 25, floor: 1 } as const satisfies OperationBudget;
+
+/** The longest story id `story` accepts and `stories` returns, and the longest `stories` filter. */
+export const storyTextLimits = { filter: 128, id: 256, name: 200, tag: 64, tags: 16 } as const;
+
 /**
  * How long a `check` may wait for its expectation, in milliseconds. A wait holds the session's queue, never the
  * target's input turn; an evaluation still running when the wait ends finishes before the result is returned.

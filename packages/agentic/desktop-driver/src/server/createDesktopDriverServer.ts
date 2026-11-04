@@ -18,6 +18,7 @@ import type { DesktopSession, ElementRecord, MutationOptions, RecoverTargetReque
 import { SettlementJournal } from './settlementJournal.js';
 import type { ProbeApplication } from './settlementJournal.js';
 import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from './sessionOperations.js';
+import { changeStory } from './sessionStories.js';
 import { TargetRegistry } from './TargetRegistry.js';
 
 export type DesktopDriverServerOptions = {
@@ -511,71 +512,11 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     }
     if (method === 'POST' && command[0] === 'story' && command.length === 1) {
       sessions.assertMutable(session);
-      const request = parseStorySelection(body);
-      const deadline = Date.now() + session.desktopTimeouts.storyRender;
-      sessions.invalidatePreview(session);
-      session.story = null;
-      const result = await withCommandTimeout(
-        () => orchestrator.selectStory(request),
-        remainingTime(deadline),
-        `Selecting Storybook story "${request.storyId}"`,
-      );
-      await verifyStoryMarker(session, result, deadline);
-      session.story = result;
-      return result;
+      return (await changeStory(session, sessions, 'select', parseStorySelection(body))).result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'reset') {
       sessions.assertMutable(session);
-      const request = parseStorySelection(body);
-      const deadline = Date.now() + session.desktopTimeouts.storyRender;
-      sessions.invalidatePreview(session);
-      session.story = null;
-      const result = await withCommandTimeout(
-        () => orchestrator.resetStory(request),
-        remainingTime(deadline),
-        `Resetting Storybook story "${request.storyId}"`,
-      );
-      await verifyStoryMarker(session, result, deadline);
-      session.story = result;
-      return result;
-    }
-
-    async function verifyStoryMarker(
-      session: DesktopSession,
-      expected: { previewGeneration: number; runId: string; storyId: string },
-      deadline: number,
-    ): Promise<void> {
-      const testId = session.target.storyRootTestId;
-      if (!testId) {
-        return;
-      }
-      do {
-        const matches = await hostCommand(session, 'Finding the native Storybook story marker', (signal) =>
-          session.target.host.find({ windowId: session.currentWindowId }, { strategy: 'accessibility id', value: testId }, signal),
-        );
-        for (const marker of matches) {
-          const value = marker.name ?? marker.value ?? marker.text;
-          if (value && matchesStoryMarker(value, expected)) {
-            return;
-          }
-        }
-        await delay(25);
-      } while (Date.now() <= deadline);
-      throw new WebDriverError(
-        'timeout',
-        `The native Storybook marker did not confirm story "${expected.storyId}" run "${expected.runId}".`,
-      );
-    }
-
-    function matchesStoryMarker(value: string, expected: { previewGeneration: number; runId: string; storyId: string }): boolean {
-      try {
-        const marker = JSON.parse(value) as Record<string, unknown>;
-        return (
-          marker.storyId === expected.storyId && marker.runId === expected.runId && marker.previewGeneration === expected.previewGeneration
-        );
-      } catch {
-        return false;
-      }
+      return (await changeStory(session, sessions, 'reset', parseStorySelection(body))).result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'args') {
       sessions.assertMutable(session);
@@ -1030,8 +971,4 @@ function closeServer(server: Server): Promise<void> {
 
 function delay(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
-function remainingTime(deadline: number): number {
-  return Math.max(1, deadline - Date.now());
 }

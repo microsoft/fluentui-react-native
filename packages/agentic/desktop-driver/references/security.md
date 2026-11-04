@@ -285,6 +285,18 @@ service configuration. Without it, a restart forgets every quarantine.
   account cannot open, an earlier creation time, or a start time it cannot
   match is `unknown`.
 
+## Story control
+
+The `story` operation renders only an id from the build's story catalog and
+takes no args, so a grant cannot load code through it. A render that does not
+confirm is reported as indeterminate in fixed words, because a story's render
+error may quote its own text. It does not quarantine the target: the preview
+region changes before the render, so no reference crosses stories, and the next
+render replaces the whole preview. Storybook's own MCP server and runtime
+prepare messages can still change the story outside the controller; `stories`
+detects a different story, or another render of the same one, from the story
+root's marker but cannot say who changed it.
+
 ## Native protocol
 
 The helper has no listener and receives only validated commands over inherited

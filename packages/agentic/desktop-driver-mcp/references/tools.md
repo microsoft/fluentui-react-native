@@ -7,12 +7,12 @@ owner_paths:
 
 # Tools
 
-Five tools group the driver's agent operations. Each operation's input schema,
+Six tools group the driver's agent operations. Each operation's input schema,
 result, and failure reasons are defined once in `@fluentui-react-native/desktop-driver`
 (its agent operations reference); the tools reuse those schemas, so a field the
 service rejects is rejected here first, before anything reaches the service.
-Unknown fields are refused. The whole tool list is about 15.7 KB, and a test
-bounds it at 17 KB.
+Unknown fields are refused. The whole tool list is about 17.5 KB, and a test
+bounds it at 18.5 KB.
 
 | Tool              | Calls                                              | Hints                       |
 | ----------------- | -------------------------------------------------- | --------------------------- |
@@ -21,6 +21,7 @@ bounds it at 17 KB.
 | `desktop_act`     | `sequence`                                         | destructive, not idempotent |
 | `desktop_check`   | `check`                                            | read-only                   |
 | `desktop_capture` | `capture`                                          | read-only                   |
+| `desktop_story`   | `stories` (default), `story`                       | destructive, not idempotent |
 
 ## desktop_session
 
@@ -64,6 +65,20 @@ Reading the link returns the whole PNG as one blob. The adapter pages it from
 the service and checks the bytes against the recorded SHA-256. A link from a
 session that is no longer open is refused, because artifact ids restart in
 every session.
+
+## desktop_story
+
+Give at most one of `list`, with the `stories` input, or `story`, with the
+`story` input; an empty call lists the first page. `list` pages through the
+build's story catalog and names the story this session rendered. `story`
+renders a story by id (`action: "select"`, the default) or renders it again
+from its initial state (`action: "reset"`); either expires every earlier
+reference into the preview. `requestId` makes a `story` retry safe, as it does
+for `desktop_act`.
+
+The tool is always listed. On a target without Storybook, both forms fail with
+`stories-unsupported`. When `list` reports `changed: true`, another client
+rendered a story since this session's, and earlier references have expired.
 
 ## Results
 

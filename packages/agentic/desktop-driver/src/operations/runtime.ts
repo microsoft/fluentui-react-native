@@ -8,6 +8,7 @@ import type {
   NativeObservation,
   NativeObserveRequest,
 } from '../host/types.js';
+import type { DesktopStoryManifestEntry } from '../storybook.js';
 import type { JournalScalar } from './journal.js';
 import type { OperationSessionState } from './sessionState.js';
 
@@ -48,7 +49,36 @@ export type OperationCapabilities = {
   readonly keyboard: boolean;
   /** A synthesized pointer click at the element's hit-tested centre. */
   readonly physicalClick: boolean;
+  /** The target renders Storybook stories the session can list and select. */
+  readonly stories: boolean;
   readonly windowCapture: boolean;
+};
+
+/**
+ * How the session knows which story is rendered. `marker`: the native story root confirmed it. `unconfirmed`: the root
+ * could not be read in the current window. `none`: the target has no native story root.
+ */
+export type StoryVerification = 'marker' | 'none' | 'unconfirmed';
+
+/** The story this session selected, as revalidated when it was read. */
+export type OperationCurrentStory = {
+  /** The rendered story is not the one this session selected, so the session forgot it and expired the preview. */
+  changed?: true;
+  /** Absent when no story is selected. */
+  story?: { storyId: string; verification: StoryVerification };
+};
+
+/** The session's Storybook catalog and selection. Present only when `capabilities.stories` is true. */
+export type OperationStories = {
+  /** The target's story catalog. */
+  catalog(signal: AbortSignal): Promise<readonly DesktopStoryManifestEntry[]>;
+  /** The selected story, checked against the rendered story root so a change made by another client is noticed. */
+  current(signal: AbortSignal): Promise<OperationCurrentStory>;
+  /**
+   * Selects or resets a story and waits until it renders. The preview region expires before anything is dispatched,
+   * and the call runs to settlement once dispatched. A failure leaves no story selected.
+   */
+  change(action: 'reset' | 'select', storyId: string): Promise<{ storyId: string; verification: 'marker' | 'none' }>;
 };
 
 /**
@@ -88,6 +118,8 @@ export type OperationRuntime = {
   mutate<T>(description: string, run: (signal: AbortSignal) => Promise<T>): Promise<T>;
   /** Aborts when the caller leaves. Operations check it before dispatching, never after. */
   readonly signal: AbortSignal;
+  /** Present when `capabilities.stories` is true. */
+  readonly stories?: OperationStories;
 };
 
 export type OperationAvailability = { available: true } | { available: false; reason: string };

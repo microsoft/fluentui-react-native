@@ -8,6 +8,7 @@ const readOnly = {
   elementCapture: false,
   keyboard: false,
   physicalClick: false,
+  stories: false,
   windowCapture: false,
 };
 
@@ -18,6 +19,7 @@ const everything = {
   elementCapture: true,
   keyboard: true,
   physicalClick: true,
+  stories: true,
   windowCapture: true,
 };
 
@@ -59,6 +61,8 @@ describe('describeOperations', () => {
       ['sequence', 'mutate', true],
       ['capture', 'read', true],
       ['artifact', 'read', true],
+      ['stories', 'read', true],
+      ['story', 'mutate', true],
       ['journal', 'read', true],
     ]);
     for (const entry of catalog.operations) {
@@ -77,6 +81,8 @@ describe('describeOperations', () => {
       ['sequence', false, 'bounded-observation-unsupported'],
       ['capture', false, 'bounded-observation-unsupported'],
       ['artifact', false, 'bounded-observation-unsupported'],
+      ['stories', false, 'stories-unsupported'],
+      ['story', false, 'stories-unsupported'],
       ['journal', true, undefined],
     ]);
   });
@@ -132,13 +138,13 @@ describe('describeOperations', () => {
     });
 
     // The catalog is context an agent spends on every session; raise these bounds deliberately, not to make a test pass.
-    // Capture and artifact raised the total from 23,500.
+    // Capture and artifact raised the total from 23,500; stories and story raised it from 26,500.
     test('stay small', () => {
       for (const entry of operations) {
         expect(JSON.stringify(entry.input).length).toBeLessThan(2_500);
         expect(JSON.stringify(entry.output).length).toBeLessThan(5_000);
       }
-      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(26_500);
+      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(29_500);
     });
 
     test('are frozen, so a consumer cannot corrupt the cache the next caller reads', () => {

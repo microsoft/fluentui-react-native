@@ -95,11 +95,11 @@ const requiredCapability: Partial<Record<ActionName, keyof OperationCapabilities
 };
 
 /** A failure before anything was dispatched: a settled rejection the caller may retry with a new request id. */
-function rejection(runtime: OperationRuntime, code: WebDriverErrorCode, reason: string, message: string): WebDriverError {
+export function rejection(runtime: OperationRuntime, code: WebDriverErrorCode, reason: string, message: string): WebDriverError {
   return asRejection(runtime, operationError(code, reason, message));
 }
 
-function asRejection(runtime: OperationRuntime, error: unknown): WebDriverError {
+export function asRejection(runtime: OperationRuntime, error: unknown): WebDriverError {
   const failure = toWebDriverError(error);
   attachFailureEffect(failure, 'none');
   return attachMutationReport(failure, { disposition: 'rejected', effect: 'none', quarantined: runtime.quarantined() });

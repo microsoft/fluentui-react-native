@@ -22,6 +22,10 @@ import type {
   OperationResponse,
   SequenceInput,
   SequenceResult,
+  StoriesInput,
+  StoriesResult,
+  StoryInput,
+  StoryResult,
 } from '../operations/index.js';
 import type {
   NewSessionCapabilities,
@@ -229,6 +233,19 @@ export class DesktopSessionClient {
    */
   sequence(input: SequenceInput, options?: OperationCallOptions): Promise<OperationResponse<SequenceResult>> {
     return this.operation('sequence', input, options);
+  }
+
+  /** Lists the target's Storybook stories and the story this session selected, checked against what is rendered. */
+  stories(input: StoriesInput = {}, options?: OperationCallOptions): Promise<OperationResponse<StoriesResult>> {
+    return this.operation('stories', input, options);
+  }
+
+  /**
+   * Selects or resets a Storybook story and waits until it renders; earlier references into the preview expire. Name a
+   * `requestId` to make a retry safe.
+   */
+  story(input: StoryInput, options?: OperationCallOptions): Promise<OperationResponse<StoryResult>> {
+    return this.operation('story', input, options);
   }
 
   /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */

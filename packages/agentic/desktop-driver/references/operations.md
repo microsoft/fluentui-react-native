@@ -10,18 +10,20 @@ owner_paths:
 Operations are the bounded, schema-described calls an agent makes instead of
 reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
-results sized by explicit budgets. Eight exist today: the reads `observe`,
-`find`, `check`, `capture`, `artifact`, and `journal`, and `act` and
-`sequence`, which change the application. `@fluentui-react-native/desktop-driver-mcp`
-exposes them to MCP clients as five tools. Controller lifecycle is open work in
+results sized by explicit budgets. Ten exist today: the reads `observe`,
+`find`, `check`, `capture`, `artifact`, `stories`, and `journal`, and `act`,
+`sequence`, and `story`, which change the application.
+`@fluentui-react-native/desktop-driver-mcp` exposes them to MCP clients as six
+tools. Controller lifecycle is open work in
 the [implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
 ([FDR1](../native/PROTOCOL.md#bounded-observation)): both native helpers and the
 fake host. On any other provider the
-catalog reports every operation but `journal` as unavailable with
-`bounded-observation-unsupported`, and the driver never substitutes the
-unbounded `tree`.
+catalog reports every operation but `journal`, `stories`, and `story` as
+unavailable with `bounded-observation-unsupported`, and the driver never
+substitutes the unbounded `tree`. The story operations need a story
+orchestrator instead.
 
 ## Routes and envelope
 
@@ -54,7 +56,8 @@ references never cross one.
 `DesktopSessionClient` (`/client`) wraps the routes as `operations()`,
 `operation(name, input, { requestId, signal })`, and one method per operation:
 `observe()`, `find()`, `act()`, `check()`, `sequence()`, `capture()`,
-`artifact()`, and `journal()`, each taking the same options. Aborting `signal`
+`artifact()`, `stories()`, `story()`, and `journal()`, each taking the same
+options. Aborting `signal`
 abandons the HTTP call, which the service treats as the caller leaving.
 `/operations` exports `executeOperation`, `describeOperations`,
 `lookupOperation`, `OperationSessionState`, `maxRequestIdLength`, and the
@@ -69,7 +72,7 @@ Each entry has `name`, `summary`, `effect` (`read` or `mutate`), `available`,
 the same Zod schemas the executor validates with. Output schemas do not forbid
 unknown properties: a result may gain optional fields within a schema version,
 so consumers ignore fields they do not know. Descriptions are written for a
-model reader, and the whole catalog stays near 26 KB because MCP clients load
+model reader, and the whole catalog stays near 29 KB because MCP clients load
 it into context. An operation that embeds another's input or output, as
 `sequence` does, names it in the catalog instead of repeating its schema, and
 validates it exactly as that operation does. An adapter may omit
@@ -352,6 +355,41 @@ show whatever the application displays, so both fail with `content-denied`
 under a `deny` policy. The journal keeps the scope, artifact id, size, and
 dimensions, never pixels or the hash.
 
+## stories and story
+
+On a Storybook target, one with a story orchestrator, `stories` pages through
+the catalog the build recorded: `entries` of `id`, `title`, `name`, and
+`tags`, filtered by `filter` (any case, over id, title, and name), `limit` per
+page (default 25, at most 100), from `offset`, with `next` naming the following
+page. `matched` counts the stories the filter matches and `total` the catalog.
+Ids are clipped to 256 characters, titles and names to 200, and tags to 16 of
+64, with invisible characters made visible. Any other target reports both
+operations as unavailable with `stories-unsupported`.
+
+`current` names the story this session selected and how it was confirmed:
+`marker` when the story root's marker in the current window names it,
+`unconfirmed` when the current window has no marker (a popup, say), and `none`
+when the target has no story root. When the marker names a different story,
+or a different render of this one, another client rendered it: `stories`
+reports `changed: true`, forgets the selection, and replaces the preview
+region, so references into the old render expire.
+
+`story` renders the story `storyId` names. `action` is `select` (the default)
+or `reset`, which renders it again from its initial state. An id the catalog
+lacks fails with `story-unknown` before anything changes. Rendering replaces
+the preview region first, so every earlier preview reference fails with
+`ref-region-changed`, then waits up to the target's story render deadline for
+the story root to confirm the story. The result gives the new `region` and the
+`verification`: `marker`, or `none` on a target without a story root. A render
+that does not confirm fails with `story-not-ready`, coded `timeout` when the
+deadline passed, in fixed words because the cause may quote the story's own
+error, with an `indeterminate` mutation report. It does not quarantine the
+target, because the next `story` replaces the whole preview. A quarantined
+target refuses `story` with `target-quarantined`, and a `requestId` makes a
+retry safe as it does for `act`. A story change waits on the session's queue
+but not the server's input turn, as the WebDriver story routes do, because a
+render may take far longer than an input.
+
 ## References and provider records
 
 A reference is an opaque `<tag><serial>` string. The tag is random per session
@@ -434,6 +472,9 @@ rebuilt `mutation` report.
 | `artifact-expired`                | `invalid argument`          | The capture was dropped to make room for newer ones     |
 | `artifact-unknown`                | `invalid argument`          | No capture in this session has that id                  |
 | `offset-out-of-range`             | `invalid argument`          | `artifact`'s offset is past the end of the image        |
+| `stories-unsupported`             | `unsupported operation`     | The target has no story orchestrator                    |
+| `story-unknown`                   | `invalid argument`          | The catalog has no story with that id                   |
+| `story-not-ready`                 | `timeout`, `unknown error`  | The story did not confirm it rendered; select it again  |
 
 A provider's own failure carries its `nativeCode` and, for a command that may
 have changed the application, the settled `mutation` disposition.
@@ -451,7 +492,9 @@ createDesktopDriverServer({ targets, operations: { content: 'deny' } });
 The default is `allow`. Under `deny`, a request for content facts, the
 `content` view, a `text` or `textContains` predicate, or a `check` expecting a
 value or text, and `capture` or `artifact`, fails with `content-denied`; names
-and states stay available. A request cannot change the policy.
+and states stay available. `stories` and `story` stay available too: the
+catalog comes from build metadata, not from what the application displays. A
+request cannot change the policy.
 
 The policy cannot see inside identifiers. An application that puts what it
 displays into a name or automation id still shows it under `deny`: Calculator's
@@ -461,8 +504,9 @@ value is what the field displays.
 Each session keeps a bounded journal of 500 entries: operation, request id,
 outcome, effect, timing, an error code and reason, and scalar summary fields the
 operation declared safe (for `find` and `check`, the names of the predicates
-and expectations, never their values). Typed text, expected text, displayed
-content, and error messages never enter it. The
+and expectations, never their values; for `stories`, whether a filter was
+used, never its text). Typed text, expected text, displayed content, and error
+messages never enter it. The
 `journal` operation reads it in pages (default 50, at most 200) with `after` and
 `next` cursors and reports `dropped` entries; it is not itself journaled.
 
@@ -486,7 +530,8 @@ with nothing done.
 
 `src/operations/*.test.ts` covers each module against a stub runtime, and
 `src/server/operations.test.ts` drives the routes over HTTP against the fake
-host. Enable observation on the fake with
+host; `src/server/storyOperations.test.ts` drives the story operations against
+`createDesktopDriverStoryHarness`. Enable observation on the fake with
 `features: { boundedObservation: true, accessibilityActions: true }`, build large
 trees with `createFakeTree` in `src/testing/fakeTree.ts`, and script slow reads,
 record limits, or unreadable subtrees with the fake host's `observation`
@@ -525,4 +570,7 @@ Fabric or Paper application qualification.
   the agent.
 - The first read of a freshly launched application can see fewer elements than
   the second, because applications create some elements lazily.
+- Only `stories` notices a story another client rendered; `observe` and `find`
+  do not yet read the story marker. A change of story args is not detected,
+  and operations cannot set args yet.
 - Persisting the journal, recording, and replay are follow-on work.

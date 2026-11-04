@@ -2,7 +2,8 @@ import { createHash, randomBytes } from 'node:crypto';
 
 import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
 import type { DesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
-import { createDesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
+import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver/storybook';
+import { createDesktopDriverStoryHarness, createDesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
 import type { DesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
@@ -59,7 +60,7 @@ async function open(client: Client, harness: DesktopDriverTestHarness): Promise<
 }
 
 describe('desktop-driver-mcp', () => {
-  test('offers five tools with bounded schemas, and lists the service targets', async () => {
+  test('offers six tools with bounded schemas, and lists the service targets', async () => {
     await withFixture({}, async ({ client, harness }) => {
       const { tools } = await client.listTools();
       expect(tools.map((tool) => tool.name)).toEqual([
@@ -68,9 +69,10 @@ describe('desktop-driver-mcp', () => {
         'desktop_act',
         'desktop_check',
         'desktop_capture',
+        'desktop_story',
       ]);
-      // The whole tool list is read into every agent's context: about 15.7 KB today, well under the 26 KB operation catalog.
-      expect(JSON.stringify(tools).length).toBeLessThan(17_000);
+      // The whole tool list is read into every agent's context: about 17.5 KB today, well under the 29 KB operation catalog.
+      expect(JSON.stringify(tools).length).toBeLessThan(18_500);
       const readOnly = Object.fromEntries(tools.map((tool) => [tool.name, tool.annotations?.readOnlyHint]));
       expect(readOnly).toEqual({
         desktop_act: false,
@@ -78,6 +80,7 @@ describe('desktop-driver-mcp', () => {
         desktop_check: true,
         desktop_observe: true,
         desktop_session: false,
+        desktop_story: false,
       });
       expect(tools.every((tool) => tool.inputSchema.additionalProperties === false)).toBe(true);
 
@@ -145,6 +148,71 @@ describe('desktop-driver-mcp', () => {
         expect({ name, isError: result.isError }).toEqual({ isError: true, name });
       }
       expect(harness.host.actions).toHaveLength(before);
+    });
+  });
+
+  test('lists stories and renders one, expiring references into the preview it replaced', async () => {
+    const manifest: DesktopStoryManifest = {
+      endpoint: 'windows',
+      entries: [
+        { id: 'components-button--default', name: 'Default', packageName: 'pkg', sourcePath: 'a.stories.tsx', tags: [], title: 'Button' },
+        {
+          id: 'components-checkbox--default',
+          name: 'Default',
+          packageName: 'pkg',
+          sourcePath: 'b.stories.tsx',
+          tags: [],
+          title: 'Checkbox',
+        },
+      ],
+      platformManifestDigest: 'platform',
+      portablePlanDigest: 'portable',
+      schemaVersion: 1,
+    };
+    const harness = await createDesktopDriverStoryHarness(manifest, { features });
+    const client = await connectClient(async () => createDesktopDriverClient({ url: harness.server.url }));
+    try {
+      await open(client, harness);
+      expect(json(await call(client, 'desktop_story', { list: { filter: 'checkbox' } }))).toMatchObject({
+        operation: 'stories',
+        result: { entries: [{ id: 'components-checkbox--default' }], matched: 1, total: 2 },
+      });
+      const found = json(await call(client, 'desktop_observe', { find: { automationId: 'button-primary' } })) as {
+        result: { matches: { ref: string }[] };
+      };
+
+      const select = { requestId: 'story-1', story: { storyId: 'components-checkbox--default' } };
+      const rendered = json(await call(client, 'desktop_story', select));
+      expect(rendered).toMatchObject({
+        operation: 'story',
+        requestId: 'story-1',
+        result: { disposition: 'applied', storyId: 'components-checkbox--default', verification: 'marker' },
+      });
+      // The same request id returns the first outcome instead of rendering again.
+      expect(json(await call(client, 'desktop_story', select))).toEqual(rendered);
+      expect(json(await call(client, 'desktop_story'))).toMatchObject({
+        result: { current: { storyId: 'components-checkbox--default', verification: 'marker' } },
+      });
+      expect(json(await call(client, 'desktop_observe', { observe: { within: found.result.matches[0].ref } }))).toMatchObject({
+        error: 'stale element reference',
+        reason: 'ref-region-changed',
+      });
+      for (const args of [
+        { list: {}, story: { storyId: 'components-button--default' } },
+        { list: {}, requestId: 'r' },
+      ]) {
+        expect((await call(client, 'desktop_story', args)).isError).toBe(true);
+      }
+    } finally {
+      await client.close();
+      await harness.close();
+    }
+  });
+
+  test('reports stories as unsupported on a target without Storybook', async () => {
+    await withFixture({}, async ({ client, harness }) => {
+      await open(client, harness);
+      expect(json(await call(client, 'desktop_story'))).toMatchObject({ error: 'unsupported operation', reason: 'stories-unsupported' });
     });
   });
 

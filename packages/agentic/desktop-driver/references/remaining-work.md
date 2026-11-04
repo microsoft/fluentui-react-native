@@ -25,8 +25,11 @@ waits for native settlement before teardown. Lease expiry/reconnect,
 ownership ledgers, status/stop/recovery, cross-service claims, and supervisor
 wiring remain. The `act`, `check`, `sequence`, `capture`, and `artifact`
 operations exist and are exercised against macOS Calculator and the plain
-Win32 fixture (M4). The MCP adapter exposes them as five tools, exercised over
-stdio through `desktop-test serve --agent` on both OSes (M5). Windows fixture
+Win32 fixture (M4). The `stories` and `story` operations list and render
+Storybook stories against the fake orchestrator. The MCP adapter exposes the
+operations as six tools, exercised over stdio through `desktop-test serve
+--agent` on both OSes (M5); `desktop_story` is exercised only against the fake
+host so far. Windows fixture
 operation and capture checks cover 100% and 150% scale; the React Native
 renderer lanes remain. MR
 has Windows/PowerShell pipe qualification; GitHub Actions rendering and
@@ -248,8 +251,10 @@ keep the target quarantined and explain the required operator intervention.
 
 Keep five core tool families and one optional story tool; do not generate a
 tool per story, control, or native pattern. `@fluentui-react-native/desktop-driver-mcp`
-implements the five core families over the [agent operations](operations.md);
-`desktop_story` remains.
+implements all six over the [agent operations](operations.md). `desktop_story`
+is always listed; a target without a story orchestrator reports its operations
+unavailable with `stories-unsupported`. Story args and story-scoped
+observation remain.
 
 | Family            | Purpose                                                                                                        |
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -731,7 +736,10 @@ ten minutes (configurable, 0 disables) closes through the same path as
 [the security model](security.md#protected-service). Still open: controller
 leases beyond idle expiry and reconnect grace (which needs the M5 transport), exact ownership ledgers, status/stop,
 cross-service claims, Storybook mutation coordination, and supervisor wiring
-beyond desktop-test's `serve --agent` (M5).
+beyond desktop-test's `serve --agent` (M5). The `stories` operation revalidates
+the story root's marker and expires preview references when another client
+rendered a story since this session's; `observe` and `find` do not revalidate yet, and
+Storybook's own MCP selection is not coordinated with the controller.
 
 Quarantine persistence and operator recovery are implemented: an optional
 `recovery` server option writes each mutation ahead of dispatch and each
@@ -905,8 +913,14 @@ Win32 fixture at 100% and 150% scale: default descriptor publication and live
 identity verification, resolved target instance id, launch refusal, attach,
 named action/check, hash-verified window and element resources, descriptor
 removal on the CLI stop handler, and preservation of the attached app.
-Remaining: `desktop_story` and `--agent` for integration-served targets, the
-CLI and attach work below, physical console interruption on Windows, real
+`desktop_story` lists stories and renders one through the `stories` and
+`story` operations; rendering replaces the preview region first, so earlier
+references expire, and a render that does not confirm is indeterminate without
+quarantining the target. Fake-host tests cover listing, filtering, paging,
+marker verification, out-of-band story changes, unknown stories, failed
+renders, and request-id replay. Remaining: `--agent` for integration-served
+targets and a live Storybook qualification of `desktop_story`, the CLI and
+attach work below, physical console interruption on Windows, real
 React Native application qualification, and clients other than the SDK's.
 
 **Complete when:** the same requests produce equivalent outcomes through MCP,

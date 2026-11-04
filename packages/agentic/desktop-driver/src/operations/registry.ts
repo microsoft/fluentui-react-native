@@ -10,6 +10,7 @@ import { observeOperation } from './observe.js';
 import type { OperationCapabilities, OperationEffect, RegisteredOperation } from './runtime.js';
 import { collapseSchemaReferences } from './schemaReferences.js';
 import { sequenceOperation } from './sequence.js';
+import { storiesOperation, storyOperation } from './story.js';
 
 export type JsonSchema = Record<string, unknown>;
 
@@ -36,6 +37,8 @@ const operations: readonly RegisteredOperation[] = [
   sequenceOperation,
   captureOperation,
   artifactOperation,
+  storiesOperation,
+  storyOperation,
   readJournalOperation,
 ];
 const operationsByName = new Map(operations.map((definition) => [definition.name, definition]));

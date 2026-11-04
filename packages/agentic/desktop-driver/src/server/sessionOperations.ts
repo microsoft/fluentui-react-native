@@ -6,6 +6,7 @@ import { safeToken } from '../operations/text.js';
 import { HostUnsupportedError, WebDriverError } from '../protocol/errors.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { DesktopSession, SessionManager } from './SessionManager.js';
+import { createOperationStories } from './sessionStories.js';
 
 export type SessionOperationOptions = {
   contentPolicy: ContentPolicy;
@@ -75,6 +76,7 @@ export function createOperationRuntime(
     ...(subscribe ? { subscribe } : {}),
   };
   const sessionSignal = session.commandAbortController.signal;
+  const stories = createOperationStories(session, sessions, options.signal);
   return {
     capabilities: {
       accessibilityActions:
@@ -87,6 +89,7 @@ export function createOperationRuntime(
       elementCapture: features.elementScreenshot,
       keyboard: features.keyboard,
       physicalClick: features.physicalClick,
+      stories: !!session.target.storyOrchestrator,
       windowCapture: features.screenshot,
     },
     cleanup: (description, run) => withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description),
@@ -107,6 +110,7 @@ export function createOperationRuntime(
     quarantined: () => sessions.getQuarantine(session.target.id) !== undefined,
     signal: options.signal,
     state: session.operations,
+    ...(stories ? { stories } : {}),
   };
 }
 
