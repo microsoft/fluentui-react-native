@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "geometry.h"
+#include "settlement.h"
 
 namespace furn {
 namespace {
@@ -269,13 +270,18 @@ void InputController::SyncPointerFromCursor() {
   }
 }
 
-void InputController::Send(std::vector<INPUT>& inputs) {
+void InputController::Send(std::vector<INPUT>& inputs, bool counted) {
   if (inputs.empty()) {
     return;
   }
   const InputSender send = sender_ != nullptr ? sender_ : &SendInput;
   SetLastError(ERROR_SUCCESS);
   const UINT sent = send(static_cast<UINT>(inputs.size()), inputs.data(), sizeof(INPUT));
+  // SendInput returns once the accepted events are in the input stream, so
+  // nothing it accepted is still in flight, even when it accepted only part.
+  if (counted && sent > 0) {
+    RecordDelivered();
+  }
   if (sent == inputs.size()) {
     return;
   }
@@ -308,7 +314,7 @@ void InputController::MovePointer(POINT target, unsigned int durationMs, const C
     position.x = start.x + RoundToPixel(static_cast<double>(target.x - start.x) * progress);
     position.y = start.y + RoundToPixel(static_cast<double>(target.y - start.y) * progress);
     std::vector<INPUT> inputs{MakeAbsoluteMouseInput(position, MOUSEEVENTF_MOVE, 0)};
-    Send(inputs);
+    Send(inputs, false);
     pointer_ = position;
     if (step < steps) {
       token.Wait(durationMs / steps);
@@ -371,7 +377,7 @@ void InputController::PointerCancel() {
     ButtonFlags(*iterator, downFlag, upFlag, mouseData);
     std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, upFlag, mouseData)};
     try {
-      Send(inputs);
+      Send(inputs, false);
     } catch (const HelperError&) {
       // Release as much as possible; the remaining ledger entries still drop.
     }
@@ -444,7 +450,7 @@ std::vector<KeyStroke> InputController::StrokesForValue(std::wstring_view value)
   return strokes;
 }
 
-void InputController::SendStroke(const KeyStroke& stroke, bool down) {
+void InputController::SendStroke(const KeyStroke& stroke, bool down, bool counted) {
   INPUT input{};
   input.type = INPUT_KEYBOARD;
   if (stroke.unicode) {
@@ -457,7 +463,7 @@ void InputController::SendStroke(const KeyStroke& stroke, bool down) {
     input.ki.dwFlags = (stroke.extended ? KEYEVENTF_EXTENDEDKEY : 0u) | (down ? 0u : KEYEVENTF_KEYUP);
   }
   std::vector<INPUT> inputs{input};
-  Send(inputs);
+  Send(inputs, counted);
 }
 
 void InputController::KeyDown(std::wstring_view value, const CancellationToken& token) {
@@ -577,7 +583,7 @@ ReleaseCounts InputController::ReleaseExact(const ReleaseLedger& ledger) {
   for (auto key = ledger.keys.rbegin(); key != ledger.keys.rend(); ++key) {
     const std::vector<KeyStroke> strokes = StrokesForValue(*key);
     for (auto stroke = strokes.rbegin(); stroke != strokes.rend(); ++stroke) {
-      SendStroke(*stroke, false);
+      SendStroke(*stroke, false, false);
     }
     counts.keys += 1;
   }
@@ -587,7 +593,7 @@ ReleaseCounts InputController::ReleaseExact(const ReleaseLedger& ledger) {
     DWORD mouseData = 0;
     ButtonFlags(*button, downFlag, upFlag, mouseData);
     std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, upFlag, mouseData)};
-    Send(inputs);
+    Send(inputs, false);
     counts.buttons += 1;
   }
   return counts;
@@ -603,7 +609,7 @@ std::size_t InputController::ReleaseDesktopModifiers() {
       continue;
     }
     const bool extended = key == VK_RCONTROL || key == VK_RMENU || key == VK_LWIN || key == VK_RWIN;
-    SendStroke(KeyStroke{false, key, extended}, false);
+    SendStroke(KeyStroke{false, key, extended}, false, false);
     released += 1;
   }
   for (const WORD button : kStickyButtons) {
@@ -621,7 +627,7 @@ std::size_t InputController::ReleaseDesktopModifiers() {
     ButtonFlags(index, downFlag, upFlag, mouseData);
     SyncPointerFromCursor();
     std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, upFlag, mouseData)};
-    Send(inputs);
+    Send(inputs, false);
     released += 1;
   }
   return released;
@@ -631,7 +637,7 @@ void InputController::ReleaseAll() {
   for (auto iterator = pressedKeys_.rbegin(); iterator != pressedKeys_.rend(); ++iterator) {
     for (auto stroke = iterator->second.rbegin(); stroke != iterator->second.rend(); ++stroke) {
       try {
-        SendStroke(*stroke, false);
+        SendStroke(*stroke, false, false);
       } catch (const HelperError&) {
         // Continue releasing the remaining ledger entries.
       }

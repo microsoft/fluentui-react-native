@@ -25,6 +25,17 @@ HRESULT BoundedMutation(Fn&& call, std::string_view operation) {
                                 kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
 }
 
+// A primary mutation, recorded in the command's effect ledger: a refusal before
+// dispatch leaves no effect, and a call that never returns stays unresolved.
+template <typename Fn>
+HRESULT CountedMutation(Fn&& call, std::string_view operation) {
+  RequireMutationsAllowed();
+  RecordDispatching();
+  const HRESULT result = BoundedMutation(std::forward<Fn>(call), operation);
+  RecordSettled(result);
+  return result;
+}
+
 template <typename Fn>
 HRESULT BoundedRead(Fn&& call, std::string_view operation) {
   return RunBoundedProviderCall(ProviderCall::Read, std::function<HRESULT()>(std::forward<Fn>(call)),
@@ -1182,20 +1193,20 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
   winrt::com_ptr<IUIAutomationInvokePattern> invoke;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_InvokePatternId, IID_PPV_ARGS(invoke.put()))) && invoke) {
     CheckClickResult("Invoking the element",
-                     BoundedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
+                     CountedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationTogglePattern> toggle;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_TogglePatternId, IID_PPV_ARGS(toggle.put()))) && toggle) {
     CheckClickResult("Toggling the element",
-                     BoundedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
+                     CountedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationSelectionItemPattern> selection;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_SelectionItemPatternId, IID_PPV_ARGS(selection.put()))) &&
       selection) {
     CheckClickResult("Selecting the element",
-                     BoundedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
+                     CountedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand;
@@ -1209,14 +1220,14 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
     }
     const bool collapse = *state == ExpandCollapseState_Expanded;
     CheckClickResult("Expanding or collapsing the element",
-                     BoundedMutation([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
+                     CountedMutation([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
                                      "Expanding or collapsing the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_LegacyIAccessiblePatternId, IID_PPV_ARGS(legacy.put()))) && legacy) {
     CheckClickResult("Invoking the legacy accessibility default action",
-                     BoundedMutation([legacy]() { return legacy->DoDefaultAction(); },
+                     CountedMutation([legacy]() { return legacy->DoDefaultAction(); },
                                      "Invoking the legacy accessibility default action"));
     return;
   }
@@ -1237,7 +1248,7 @@ bool Automation::TryClearValue(const std::string& elementId) {
   if (FAILED(state) || *readOnly != FALSE) {
     return false;
   }
-  const HRESULT result = BoundedMutation(
+  const HRESULT result = CountedMutation(
       [value]() {
         const BSTR empty = SysAllocString(L"");
         const HRESULT assigned = value->SetValue(empty);

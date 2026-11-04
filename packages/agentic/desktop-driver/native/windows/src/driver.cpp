@@ -18,6 +18,12 @@ bool IsGuardedMutation(const std::string& command) {
          command == "activate" || command == "setWindowRect";
 }
 
+json::Value EffectDetail(MutationEffect effect) {
+  json::Value detail = json::Value::Object();
+  detail.Set("effect", json::Value::String(std::string(MutationEffectName(effect))));
+  return detail;
+}
+
 json::Value SerializeRect(const RectD& rect) {
   json::Value value = json::Value::Object();
   value.Set("height", json::Value::Number(rect.height));
@@ -102,6 +108,10 @@ json::Value RetentionDiagnostic(const Automation& automation) {
 }
 
 }  // namespace
+
+bool IsTrackedMutation(const std::string& command) {
+  return IsGuardedMutation(command) || command == "closeWindow" || command == "releaseActions";
+}
 
 ClickRoute RouteClick(const std::string& mode, bool physicalAvailable) {
   if (mode == "accessibility") {
@@ -461,23 +471,64 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
   // between, no longer have addressable elements.
   ForgetRetiredWindows();
   const std::uint64_t entry = journal_.Begin(command, JournalDetail(params));
+  const bool tracked = IsTrackedMutation(command);
+  effects_.Reset();
+  const EffectScope effectScope(effects_);
+  // A provider deadline that passed is always unknown, whatever the ledger
+  // recorded before it.
+  const auto effectOf = [this](const std::string& code) {
+    return code == kErrorMutationIndeterminate ? MutationEffect::Unknown : effects_.Effect();
+  };
   try {
     CommandResult result = ExecuteCommand(command, params, token);
     ForgetRetiredWindows();
     journal_.Finish(entry, "ok", JournalResult(command, result.result));
     return result;
-  } catch (const HelperError& error) {
+  } catch (HelperError& error) {
     ForgetRetiredWindows();
-    journal_.Finish(entry, error.code());
+    if (!tracked) {
+      journal_.Finish(entry, error.code());
+      throw;
+    }
+    error.SetEffect(effectOf(error.code()));
+    journal_.Finish(entry, error.code(), EffectDetail(*error.effect()));
     throw;
-  } catch (const CancelledError&) {
+  } catch (CancelledError& cancelled) {
     ForgetRetiredWindows();
-    journal_.Finish(entry, "cancelled");
+    if (!tracked) {
+      journal_.Finish(entry, "cancelled");
+      throw;
+    }
+    cancelled.SetEffect(effects_.Effect());
+    journal_.Finish(entry, "cancelled", EffectDetail(*cancelled.effect()));
     throw;
+  } catch (const winrt::hresult_error& error) {
+    ForgetRetiredWindows();
+    journal_.Finish(entry, kErrorInternal, tracked ? EffectDetail(effects_.Effect()) : json::Value::Null());
+    if (!tracked) {
+      throw;
+    }
+    HelperError failure(kErrorInternal, ToUtf8(error.message().c_str()));
+    failure.SetEffect(effects_.Effect());
+    throw failure;
+  } catch (const std::exception& error) {
+    ForgetRetiredWindows();
+    journal_.Finish(entry, kErrorInternal, tracked ? EffectDetail(effects_.Effect()) : json::Value::Null());
+    if (!tracked) {
+      throw;
+    }
+    HelperError failure(kErrorInternal, error.what());
+    failure.SetEffect(effects_.Effect());
+    throw failure;
   } catch (...) {
     ForgetRetiredWindows();
-    journal_.Finish(entry, kErrorInternal);
-    throw;
+    journal_.Finish(entry, kErrorInternal, tracked ? EffectDetail(effects_.Effect()) : json::Value::Null());
+    if (!tracked) {
+      throw;
+    }
+    HelperError failure(kErrorInternal, "The native command failed with an unknown error.");
+    failure.SetEffect(effects_.Effect());
+    throw failure;
   }
 }
 
@@ -539,7 +590,9 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     ContextForWindow(windowId, window);
     automation_.ForgetWindow(windowId);
     applications_.ForgetWindow(windowId);
-    PostMessageW(window, WM_CLOSE, 0, 0);
+    if (PostMessageW(window, WM_CLOSE, 0, 0) != FALSE) {
+      RecordDelivered();
+    }
     result.result = json::Value::Null();
     return result;
   }
@@ -565,6 +618,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     }
     if (IsZoomed(window) != FALSE || IsIconic(window) != FALSE) {
       ShowWindow(window, SW_RESTORE);
+      RecordDelivered();
     }
     WindowMetrics metrics = MeasureWindow(window);
     const RectD current = ClientRectInScreenDips(metrics);
@@ -589,6 +643,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
                        SWP_NOZORDER | SWP_NOACTIVATE) == FALSE) {
         FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
       }
+      RecordDelivered();
       token.Wait(16);
       metrics = MeasureWindow(window);
       const long deltaX = target.left - metrics.clientOrigin.x;

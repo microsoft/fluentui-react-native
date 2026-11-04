@@ -645,12 +645,15 @@ void TestMutationSettlement() {
   const CancellationToken token;
   for (const char* command : {"click", "clear", "sendKeys", "performActions", "activate", "setWindowRect"}) {
     std::string code = "none";
+    std::optional<MutationEffect> effect;
     try {
       driver.Execute(command, json::Value::Object(), token);
     } catch (const HelperError& error) {
       code = error.code();
+      effect = error.effect();
     }
-    Check(code == kErrorTargetQuarantined, std::string("the ") + command + " command is refused while quarantined");
+    Check(code == kErrorTargetQuarantined && effect == MutationEffect::None,
+          std::string("the ") + command + " command is refused while quarantined, with no effect");
   }
   std::string readCode = "none";
   try {
@@ -807,6 +810,30 @@ std::string FailureCode(const std::function<void()>& call, std::string* message 
   return "none";
 }
 
+// The `effect` a failed or cancelled call reports: "absent" when it reports
+// none, and "succeeded" when the call does not fail. `code` receives the error
+// code, "cancelled", or "none".
+std::string FailureEffect(const std::function<void()>& call, std::string* code = nullptr) {
+  const auto name = [](const std::optional<MutationEffect>& effect) {
+    return effect ? std::string(MutationEffectName(*effect)) : std::string("absent");
+  };
+  std::string failure = "none";
+  std::string effect = "succeeded";
+  try {
+    call();
+  } catch (const CancelledError& cancelled) {
+    failure = "cancelled";
+    effect = name(cancelled.effect());
+  } catch (const HelperError& error) {
+    failure = error.code();
+    effect = name(error.effect());
+  }
+  if (code != nullptr) {
+    *code = failure;
+  }
+  return effect;
+}
+
 // WinEvent callbacks reach the monitor asynchronously, so tests poll for them.
 bool WaitFor(const std::function<bool()>& condition, DWORD timeoutMs = 3000) {
   const ULONGLONG deadline = GetTickCount64() + timeoutMs;
@@ -831,12 +858,42 @@ void RegisterTestWindowClass(const wchar_t* name, WNDPROC procedure = DefWindowP
 // Counts the notifications controls send their parent, which is how a test sees
 // that an accessibility click reached a button.
 std::atomic<int> commandNotifications{0};
+// Clicks of the control with id 101, ignoring other controls' notifications.
+std::atomic<int> buttonClicks{0};
 
 LRESULT CALLBACK CountingWindowProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
   if (message == WM_COMMAND) {
     commandNotifications.fetch_add(1);
+    if (LOWORD(wparam) == 101 && HIWORD(wparam) == BN_CLICKED) {
+      buttonClicks.fetch_add(1);
+    }
   }
   return DefWindowProcW(window, message, wparam, lparam);
+}
+
+// While a gate is set, writing an edit control's text holds its window thread,
+// so a value write through UI Automation never settles.
+std::mutex editGateMutex;
+std::shared_ptr<Gate> editGate;
+WNDPROC originalEditProc = nullptr;
+
+void SetEditGate(std::shared_ptr<Gate> gate) {
+  const std::lock_guard<std::mutex> guard(editGateMutex);
+  editGate = std::move(gate);
+}
+
+LRESULT CALLBACK GatedEditProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
+  if (message == WM_SETTEXT) {
+    std::shared_ptr<Gate> gate;
+    {
+      const std::lock_guard<std::mutex> guard(editGateMutex);
+      gate = editGate;
+    }
+    if (gate != nullptr) {
+      gate->Hold();
+    }
+  }
+  return CallWindowProcW(originalEditProc, window, message, wparam, lparam);
 }
 
 // A thread with its own message loop that owns real top-level windows, so the
@@ -1408,6 +1465,20 @@ UINT WINAPI RejectInputAsDenied(UINT, LPINPUT, int) {
 
 UINT WINAPI AcceptFirstInputOnly(UINT, LPINPUT, int) {
   return 1;
+}
+
+// Records input and then cancels the command that sent it, once a key press
+// reaches the application; the modifier releases before it do not count.
+CancellationToken* cancelOnInput = nullptr;
+
+UINT WINAPI RecordInputThenCancel(UINT count, LPINPUT inputs, int size) {
+  const UINT sent = RecordInput(count, inputs, size);
+  for (UINT index = 0; index < count && cancelOnInput != nullptr; index += 1) {
+    if (inputs[index].type == INPUT_KEYBOARD && (inputs[index].ki.dwFlags & KEYEVENTF_KEYUP) == 0) {
+      cancelOnInput->Cancel();
+    }
+  }
+  return sent;
 }
 
 // A window of another process, or null when this desktop has none to borrow.
@@ -2512,12 +2583,277 @@ void TestDriverDisabledElements() {
   request.Set("elementId", json::Value::String(id));
   request.Set("mode", json::Value::String(std::string("accessibility")));
   std::string message;
-  Check(FailureCode([&]() { driver.Execute("click", request, token); }, &message) == kErrorNotInteractable &&
-            Contains(message, "not enabled"),
+  std::string code;
+  const std::string effect = FailureEffect(
+      [&]() {
+        try {
+          driver.Execute("click", request, token);
+        } catch (const HelperError& error) {
+          message = error.what();
+          throw;
+        }
+      },
+      &code);
+  Check(code == kErrorNotInteractable && Contains(message, "not enabled"),
         "an accessibility click on a disabled element is refused as not interactable");
+  Check(effect == "none", "a click the provider refuses as not enabled reports no effect");
   Sleep(100);
   Check(commandNotifications.load() == 0, "a click on a disabled element reaches nothing");
   Check(!MutationsQuarantined(), "a disabled element does not quarantine later mutations");
+}
+
+json::Value StringFields(std::initializer_list<std::pair<const char*, std::string>> fields) {
+  json::Value value = json::Value::Object();
+  for (const auto& [name, text] : fields) {
+    value.Set(name, json::Value::String(text));
+  }
+  return value;
+}
+
+void TestEffectLedger() {
+  EffectLedger ledger;
+  Check(ledger.Effect() == MutationEffect::None, "a command that dispatched nothing has no effect");
+  ledger.Delivered();
+  Check(ledger.Effect() == MutationEffect::Partial, "a delivered mutation is a partial effect");
+  ledger.Reset();
+  Check(ledger.Effect() == MutationEffect::None, "each command starts with an empty ledger");
+  ledger.Dispatching();
+  Check(ledger.Effect() == MutationEffect::Unknown, "a dispatch that has not settled leaves the effect unknown");
+  ledger.Settled(S_OK);
+  Check(ledger.Effect() == MutationEffect::Partial, "a dispatch that settles successfully is applied");
+
+  bool refusalsProveNothing = true;
+  for (const HRESULT refused : {static_cast<HRESULT>(0x80040200), static_cast<HRESULT>(0x80040201),
+                                static_cast<HRESULT>(0x80040204), static_cast<HRESULT>(0x80131509), E_INVALIDARG,
+                                E_NOTIMPL, E_NOINTERFACE, E_ACCESSDENIED}) {
+    ledger.Reset();
+    ledger.Dispatching();
+    ledger.Settled(refused);
+    refusalsProveNothing = refusalsProveNothing && ProvesNoEffect(refused) && ledger.Effect() == MutationEffect::None;
+  }
+  Check(refusalsProveNothing, "a provider refusal proves the mutation never acted");
+  bool failuresStayUnknown = true;
+  for (const HRESULT failed : {E_FAIL, RPC_E_DISCONNECTED, kUiaTimeoutResult}) {
+    ledger.Reset();
+    ledger.Dispatching();
+    ledger.Settled(failed);
+    failuresStayUnknown = failuresStayUnknown && !ProvesNoEffect(failed) && ledger.Effect() == MutationEffect::Unknown;
+  }
+  Check(failuresStayUnknown, "a provider failure that may have acted leaves the effect unknown");
+
+  ledger.Reset();
+  ledger.Dispatching();
+  ledger.Settled(E_FAIL);
+  ledger.Delivered();
+  ledger.Dispatching();
+  ledger.Settled(S_OK);
+  Check(ledger.Effect() == MutationEffect::Unknown, "later mutations never resolve an earlier unknown dispatch");
+  ledger.Reset();
+  ledger.Delivered();
+  ledger.Dispatching();
+  ledger.Settled(E_ACCESSDENIED);
+  Check(ledger.Effect() == MutationEffect::Partial, "a refusal after a delivered mutation keeps the partial effect");
+
+  EffectLedger outer;
+  EffectLedger inner;
+  RecordDelivered();
+  {
+    const EffectScope outerScope(outer);
+    {
+      const EffectScope innerScope(inner);
+      RecordDelivered();
+    }
+    RecordDispatching();
+  }
+  RecordDispatching();
+  Check(inner.Effect() == MutationEffect::Partial && outer.Effect() == MutationEffect::Unknown,
+        "records reach the innermost active scope and are ignored outside every scope");
+
+  // The bounded provider call a counted mutation makes, abandoned at its deadline.
+  ResetMutationQuarantineForTesting();
+  EffectLedger abandoned;
+  const auto gate = std::make_shared<Gate>();
+  std::string code;
+  {
+    const EffectScope scope(abandoned);
+    code = FailureCode([&]() {
+      RecordDispatching();
+      RecordSettled(RunBoundedProviderCall(ProviderCall::Mutation, [gate]() { return gate->Hold(); }, 50,
+                                           "Testing the provider", kErrorAutomationFailed));
+    });
+  }
+  gate->Open();
+  Check(code == kErrorMutationIndeterminate && abandoned.Effect() == MutationEffect::Unknown,
+        "a provider mutation abandoned at its deadline leaves the effect unknown");
+  std::string refusal;
+  WaitFor([&refusal]() {
+    FailureCode([]() { RequireMutationsAllowed(); }, &refusal);
+    return Contains(refusal, "completed late");
+  });
+  ResetMutationQuarantineForTesting();
+}
+
+// Every mutating command reports what it handed to the application when it
+// fails or is cancelled; reads report nothing.
+void TestDriverMutationEffects() {
+  ResetMutationQuarantineForTesting();
+  SetEditGate(nullptr);
+  buttonClicks.store(0);
+  recordedInputs.clear();
+  const CancellationToken token;
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestEffects", L"Effects window", &CountingWindowProc);
+  const HWND button = windows.CreateChild(window, L"BUTTON", L"Effects button", 101);
+  const HWND edit = windows.CreateChild(window, L"EDIT", L"Effects text", 102);
+  Check(window != nullptr && button != nullptr && edit != nullptr,
+        "the effects fixture creates a window with a button and an edit");
+  if (window == nullptr || button == nullptr || edit == nullptr) {
+    return;
+  }
+  originalEditProc = reinterpret_cast<WNDPROC>(
+      SetWindowLongPtrW(edit, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&GatedEditProc)));
+
+  Driver driver;
+  json::Value leaseRequest = json::Value::Object();
+  leaseRequest.Set("lease", driver.AdoptWindowForTesting(window, L"Effects window"));
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  driver.InputForTesting().UseTestEnvironment([]() { return InteractiveEnvironmentForTesting(); });
+  driver.UseTestForeground([window]() { return window; }, [](HWND, const CancellationToken&) { return true; });
+  const CommandResult listed = driver.Execute("windows", leaseRequest, token);
+  const std::string windowId = listed.result.IsArray() && listed.result.Items().size() == 1
+                                   ? listed.result.Items().front().StringField("id")
+                                   : std::string();
+  std::string buttonId;
+  std::string editId;
+  const CommandResult tree = driver.Execute("tree", StringFields({{"windowId", windowId}}), token);
+  for (const json::Value& entry : tree.result.Items()) {
+    if (entry.StringField("role") == "button") {
+      buttonId = entry.StringField("id");
+    } else if (entry.StringField("role") == "textbox") {
+      editId = entry.StringField("id");
+    }
+  }
+  Check(!windowId.empty() && !buttonId.empty() && !editId.empty(), "the driver lists the effects controls");
+  if (buttonId.empty() || editId.empty()) {
+    return;
+  }
+
+  const auto effectOf = [&](const char* command, const json::Value& params, const CancellationToken& with,
+                            std::string* code = nullptr) {
+    return FailureEffect([&]() { driver.Execute(command, params, with); }, code);
+  };
+  const auto actions = [](const char* list) {
+    json::Value request = json::Value::Object();
+    request.Set("actions", json::Value::Parse(list));
+    return request;
+  };
+  const json::Value empty = json::Value::Object();
+  const json::Value unknownElement = StringFields({{"elementId", "element-unknown"}});
+  const json::Value unknownWindow = StringFields({{"windowId", "window-unknown"}});
+  const json::Value knownWindow = StringFields({{"windowId", windowId}});
+  json::Value resize = StringFields({{"windowId", windowId}});
+  resize.Set("rect", json::Value::Parse(R"({"x":0,"y":0,"width":40,"height":40})"));
+  const json::Value typeA = actions(
+      R"([{"type":"key","id":"keyboard","actions":[{"type":"keyDown","value":"a"},{"type":"keyUp","value":"a"}]}])");
+
+  // Rejected before anything reached the application.
+  const std::vector<std::pair<const char*, json::Value>> rejected = {
+      {"click", unknownElement},
+      {"clear", unknownElement},
+      {"sendKeys", StringFields({{"elementId", buttonId}})},
+      {"performActions", empty},
+      {"activate", unknownWindow},
+      {"closeWindow", unknownWindow},
+      {"setWindowRect", knownWindow},
+  };
+  for (const auto& [command, params] : rejected) {
+    std::string code;
+    Check(effectOf(command, params, token, &code) == "none" && code != "none" && code != "cancelled",
+          std::string("a rejected ") + command + " reports no effect");
+  }
+  // Another helper that crashed while holding physical input leaves the lock
+  // abandoned, which refuses the next physical command before it starts.
+  std::thread abandoner([]() {
+    const HANDLE handle = CreateMutexW(nullptr, FALSE, PhysicalInputMutexName());
+    if (handle != nullptr) {
+      WaitForSingleObject(handle, 1000);
+      CloseHandle(handle);
+    }
+  });
+  abandoner.join();
+  std::string code;
+  Check(effectOf("releaseActions", empty, token, &code) == "none" && code == kErrorInputBusy,
+        "a refused releaseActions reports no effect");
+  driver.InputForTesting().UseTestSender(&RejectAllInput);
+  Check(effectOf("performActions", typeA, token, &code) == "none" && code != "none" && code != "cancelled",
+        "input that Windows refuses entirely reports no effect");
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  Check(effectOf("getWindowRect", unknownWindow, token) == "absent" &&
+            effectOf("snapshot", unknownElement, token) == "absent",
+        "a failed read carries no effect");
+
+  // Cancelled before the command started.
+  CancellationToken cancelled;
+  cancelled.Cancel();
+  const std::vector<std::pair<const char*, json::Value>> started = {
+      {"click", StringFields({{"elementId", buttonId}, {"mode", "accessibility"}})},
+      {"clear", StringFields({{"elementId", buttonId}})},
+      {"sendKeys", StringFields({{"elementId", buttonId}, {"text", "a"}})},
+      {"performActions", typeA},
+      {"activate", knownWindow},
+      {"closeWindow", knownWindow},
+      {"setWindowRect", resize},
+      {"releaseActions", empty},
+  };
+  for (const auto& [command, params] : started) {
+    Check(effectOf(command, params, cancelled, &code) == "none" && code == "cancelled",
+          std::string("a ") + command + " cancelled before it starts reports no effect");
+  }
+  Check(effectOf("getWindowRect", knownWindow, cancelled, &code) == "absent" && code == "cancelled",
+        "a cancelled read carries no effect");
+  Sleep(100);
+  Check(recordedInputs.empty() && buttonClicks.load() == 0 && IsWindow(window) != FALSE,
+        "rejected and cancelled mutations reach nothing");
+
+  // Stopped after part of the command reached the application.
+  recordedInputs.clear();
+  const json::Value brokenSequence =
+      actions(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyDown","value":"a"},{"type":"keyDown"}]}])");
+  Check(effectOf("performActions", brokenSequence, token, &code) == "partial" && code == kErrorInvalidParams &&
+            !recordedInputs.empty(),
+        "an action sequence that fails after delivering input reports a partial effect");
+  driver.ReleaseInput();
+
+  recordedInputs.clear();
+  CancellationToken interrupted;
+  cancelOnInput = &interrupted;
+  driver.InputForTesting().UseTestSender(&RecordInputThenCancel);
+  Check(effectOf("performActions", typeA, interrupted, &code) == "partial" && code == "cancelled" &&
+            !recordedInputs.empty(),
+        "an action sequence cancelled after delivering input reports a partial effect");
+  cancelOnInput = nullptr;
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  driver.ReleaseInput();
+
+  // Abandoned: the provider never returns from the value write.
+  ResetMutationQuarantineForTesting();
+  const auto gate = std::make_shared<Gate>();
+  SetEditGate(gate);
+  Check(effectOf("clear", StringFields({{"elementId", editId}}), token, &code) == "unknown" &&
+            code == kErrorMutationIndeterminate,
+        "a value write that never settles reports an unknown effect");
+  Check(effectOf("click", StringFields({{"elementId", buttonId}, {"mode", "accessibility"}}), token, &code) ==
+                "none" &&
+            code == kErrorTargetQuarantined,
+        "a mutation refused by the resulting quarantine reports no effect");
+  SetEditGate(nullptr);
+  gate->Open();
+  std::string refusal;
+  WaitFor([&refusal]() {
+    FailureCode([]() { RequireMutationsAllowed(); }, &refusal);
+    return Contains(refusal, "completed late");
+  });
+  ResetMutationQuarantineForTesting();
 }
 
 void TestDriverHitTestBeyondScreens() {
@@ -2753,6 +3089,8 @@ int RunSelfTest() {
   TestAutomationRetention();
   TestDriverRefusesReplacedElements();
   TestDriverDisabledElements();
+  TestEffectLedger();
+  TestDriverMutationEffects();
   TestDriverHitTestBeyondScreens();
   TestDriverObservation();
   TestSnapshotShape();

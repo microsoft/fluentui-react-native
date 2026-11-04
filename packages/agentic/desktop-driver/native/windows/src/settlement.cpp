@@ -39,6 +39,18 @@ std::string& CurrentLeaseId() {
   return leaseId;
 }
 
+EffectLedger*& CurrentEffectLedger() {
+  thread_local EffectLedger* ledger = nullptr;
+  return ledger;
+}
+
+// UI Automation refusals, repeated here because the header defines them only
+// for UI Automation clients.
+constexpr HRESULT kUiaElementNotEnabled = static_cast<HRESULT>(0x80040200);
+constexpr HRESULT kUiaElementNotAvailable = static_cast<HRESULT>(0x80040201);
+constexpr HRESULT kUiaNotSupported = static_cast<HRESULT>(0x80040204);
+constexpr HRESULT kUiaInvalidOperation = static_cast<HRESULT>(0x80131509);
+
 // Leaked on purpose: abandoned workers can outlive static destruction, and the
 // ledger must stay valid for them until the process exits.
 struct Ledger {
@@ -149,6 +161,82 @@ void ResetMutationQuarantineForTesting() {
   Ledger& ledger = LedgerInstance();
   const std::lock_guard<std::mutex> lock(ledger.mutex);
   ledger.abandoned.clear();
+}
+
+void EffectLedger::Reset() noexcept {
+  pending_ = false;
+  ambiguous_ = false;
+  applied_ = 0;
+}
+
+void EffectLedger::Dispatching() noexcept {
+  if (pending_) {
+    ambiguous_ = true;
+  }
+  pending_ = true;
+}
+
+void EffectLedger::Settled(HRESULT result) noexcept {
+  if (SUCCEEDED(result)) {
+    pending_ = false;
+    applied_ += 1;
+  } else if (ProvesNoEffect(result)) {
+    pending_ = false;
+  }
+}
+
+void EffectLedger::Delivered() noexcept {
+  Dispatching();
+  Settled(S_OK);
+}
+
+MutationEffect EffectLedger::Effect() const noexcept {
+  if (pending_ || ambiguous_) {
+    return MutationEffect::Unknown;
+  }
+  return applied_ > 0 ? MutationEffect::Partial : MutationEffect::None;
+}
+
+bool ProvesNoEffect(HRESULT result) noexcept {
+  switch (result) {
+    case kUiaElementNotEnabled:
+    case kUiaElementNotAvailable:
+    case kUiaNotSupported:
+    case kUiaInvalidOperation:
+    case E_INVALIDARG:
+    case E_NOTIMPL:
+    case E_NOINTERFACE:
+    case E_ACCESSDENIED:
+      return true;
+    default:
+      return false;
+  }
+}
+
+EffectScope::EffectScope(EffectLedger& ledger) noexcept : previous_(CurrentEffectLedger()) {
+  CurrentEffectLedger() = &ledger;
+}
+
+EffectScope::~EffectScope() {
+  CurrentEffectLedger() = previous_;
+}
+
+void RecordDispatching() noexcept {
+  if (EffectLedger* ledger = CurrentEffectLedger(); ledger != nullptr) {
+    ledger->Dispatching();
+  }
+}
+
+void RecordSettled(HRESULT result) noexcept {
+  if (EffectLedger* ledger = CurrentEffectLedger(); ledger != nullptr) {
+    ledger->Settled(result);
+  }
+}
+
+void RecordDelivered() noexcept {
+  if (EffectLedger* ledger = CurrentEffectLedger(); ledger != nullptr) {
+    ledger->Delivered();
+  }
 }
 
 HRESULT RunBoundedProviderCall(ProviderCall kind, std::function<HRESULT()> call, DWORD timeoutMs,

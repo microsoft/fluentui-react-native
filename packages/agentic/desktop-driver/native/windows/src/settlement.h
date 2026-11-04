@@ -2,9 +2,12 @@
 
 #include <windows.h>
 
+#include <cstddef>
 #include <functional>
 #include <string>
 #include <string_view>
+
+#include "common.h"
 
 namespace furn {
 
@@ -57,5 +60,57 @@ void ReleaseMutationQuarantine(const std::string& leaseId);
 // Refusals are process wide by design, whichever lease raised the quarantine;
 // tests restore the clean state.
 void ResetMutationQuarantineForTesting();
+
+// Records what the running mutating command handed to the application, so its
+// failure or cancellation can report an `effect`. Only primary mutations count:
+// UI Automation pattern actions and value writes, injected key, button, and
+// wheel input, a posted window close, and window geometry changes. Focus,
+// activation, pointer placement, and the release of input are idempotent and
+// are not counted.
+class EffectLedger {
+ public:
+  void Reset() noexcept;
+  // A provider call that may change the application is about to start. A
+  // dispatch that never settles stays ambiguous for the rest of the command.
+  void Dispatching() noexcept;
+  // Settles the pending dispatch from its result. Only results that prove the
+  // provider never acted (ProvesNoEffect) leave no effect; any other failure
+  // stays unresolved.
+  void Settled(HRESULT result) noexcept;
+  // A mutation that completed synchronously, such as input events Windows
+  // accepted. Nothing about it is still in flight.
+  void Delivered() noexcept;
+  // Unresolved dispatches are `unknown`; otherwise `partial` once anything was
+  // applied, and `none` before that.
+  MutationEffect Effect() const noexcept;
+
+ private:
+  bool pending_{false};
+  bool ambiguous_{false};
+  std::size_t applied_{0};
+};
+
+// True for provider results that report the request was refused before it was
+// acted on: a disabled, vanished, or unsupported element, an invalid
+// operation or argument, a missing implementation, or denied access.
+bool ProvesNoEffect(HRESULT result) noexcept;
+
+// Routes the Record* calls made on this thread to `ledger` for one command.
+// Without an active scope they are ignored, so components behave the same
+// outside a command.
+class EffectScope {
+ public:
+  explicit EffectScope(EffectLedger& ledger) noexcept;
+  ~EffectScope();
+  EffectScope(const EffectScope&) = delete;
+  EffectScope& operator=(const EffectScope&) = delete;
+
+ private:
+  EffectLedger* previous_;
+};
+
+void RecordDispatching() noexcept;
+void RecordSettled(HRESULT result) noexcept;
+void RecordDelivered() noexcept;
 
 }  // namespace furn

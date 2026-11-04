@@ -123,7 +123,7 @@ bool Host::WriteResponse(const std::string& id, const std::string& command, cons
 }
 
 bool Host::WriteError(const std::string& id, const std::string& command, const std::string& code,
-                      const std::string& message) noexcept {
+                      const std::string& message, std::optional<MutationEffect> effect) noexcept {
   try {
     json::Value error = json::Value::Object();
     error.Set("code", json::Value::String(code));
@@ -131,6 +131,9 @@ bool Host::WriteError(const std::string& id, const std::string& command, const s
     json::Value data = json::Value::Object();
     data.Set("command", json::Value::String(BoundedField(command, 256)));
     error.Set("data", data);
+    if (effect) {
+      error.Set("effect", json::Value::String(std::string(MutationEffectName(*effect))));
+    }
 
     json::Value response = json::Value::Object();
     response.Set("type", json::Value::String(std::string("response")));
@@ -147,11 +150,14 @@ bool Host::WriteError(const std::string& id, const std::string& command, const s
   }
 }
 
-bool Host::WriteCancelled(const std::string& id) noexcept {
+bool Host::WriteCancelled(const std::string& id, std::optional<MutationEffect> effect) noexcept {
   try {
     json::Value cancelled = json::Value::Object();
     cancelled.Set("type", json::Value::String(std::string("cancelled")));
     cancelled.Set("id", json::Value::String(id));
+    if (effect) {
+      cancelled.Set("effect", json::Value::String(std::string(MutationEffectName(*effect))));
+    }
     writer_->WriteJson(cancelled);
     return true;
   } catch (const std::exception& error) {
@@ -164,6 +170,7 @@ bool Host::WriteCancelled(const std::string& id) noexcept {
 }
 
 void Host::HandleCancel(const std::string& id) {
+  std::optional<MutationEffect> effect;
   {
     const std::lock_guard<std::mutex> guard(mutex_);
     if (activeId_ == id) {
@@ -174,13 +181,22 @@ void Host::HandleCancel(const std::string& id) {
     }
     const auto queued = std::find_if(queue_.begin(), queue_.end(),
                                      [&id](const PendingRequest& request) { return request.id == id; });
-    if (queued != queue_.end()) {
+    if (queued == queue_.end()) {
+      // Nothing this helper still holds can run under an unknown or settled
+      // id, and a settled mutation already reported its own effect.
+      effect = MutationEffect::None;
+    } else {
+      // A mutation that never started cannot have changed anything; read-only
+      // commands never report an effect.
+      if (IsTrackedMutation(queued->command)) {
+        effect = MutationEffect::None;
+      }
       queue_.erase(queued);
     }
   }
   // A queued or already-settled request has no running side effects, so the
   // acknowledgement can be written immediately.
-  WriteCancelled(id);
+  WriteCancelled(id, effect);
 }
 
 void Host::WorkerLoop() {
@@ -200,16 +216,18 @@ void Host::WorkerLoop() {
     }
 
     bool cancelled = false;
+    std::optional<MutationEffect> cancelledEffect;
     bool commandSucceeded = false;
     bool wroteResult = true;
     try {
       const CommandResult result = driver_.Execute(request.command, request.params, token_);
       commandSucceeded = true;
       wroteResult = WriteResponse(request.id, request.command, result);
-    } catch (const CancelledError&) {
+    } catch (const CancelledError& error) {
       cancelled = true;
+      cancelledEffect = error.effect();
     } catch (const HelperError& error) {
-      wroteResult = WriteError(request.id, request.command, error.code(), error.what());
+      wroteResult = WriteError(request.id, request.command, error.code(), error.what(), error.effect());
     } catch (const winrt::hresult_error& error) {
       wroteResult = WriteError(request.id, request.command, kErrorInternal, ToUtf8(error.message().c_str()));
     } catch (const std::exception& error) {
@@ -218,7 +236,7 @@ void Host::WorkerLoop() {
 
     if (cancelled) {
       driver_.ReleaseInput();
-      wroteResult = WriteCancelled(request.id);
+      wroteResult = WriteCancelled(request.id, cancelledEffect);
     }
 
     {

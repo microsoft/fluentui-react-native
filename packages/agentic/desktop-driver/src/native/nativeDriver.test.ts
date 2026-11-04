@@ -153,7 +153,7 @@ describe('native driver build and resolution', () => {
       });
       await helper.dispose();
       await expectProtectedNativeService(resolved);
-      await expectMacosEffectReporting(resolved.executablePath);
+      await expectEffectReporting(resolved.executablePath);
       await expectBoundedObservation(resolved.executablePath, 'macos');
       await expectMacosRequestMemoryStable(resolved.executablePath);
 
@@ -350,6 +350,7 @@ describe('native driver build and resolution', () => {
         });
         await helper.dispose();
         await expectProtectedNativeService(resolved);
+        await expectEffectReporting(resolved.executablePath);
         await expectBoundedObservation(resolved.executablePath, 'windows');
 
         const observationDump = path.join(cacheRoot, 'self-test-observations.json');
@@ -462,7 +463,7 @@ describe('native driver build and resolution', () => {
   }
 
   // The effect is what lets the driver tell a rejected mutation from one that may have reached the application.
-  async function expectMacosEffectReporting(executablePath: string): Promise<void> {
+  async function expectEffectReporting(executablePath: string): Promise<void> {
     const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
     const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
     const decoder = new NativeFrameDecoder();

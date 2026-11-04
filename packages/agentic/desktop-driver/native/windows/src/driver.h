@@ -13,6 +13,7 @@
 #include "input.h"
 #include "inputlock.h"
 #include "json.h"
+#include "settlement.h"
 
 namespace furn {
 
@@ -23,6 +24,10 @@ struct CommandResult {
   std::vector<std::uint8_t> binaryData;
   json::Value binaryMetadata;
 };
+
+// Whether a failed or cancelled `command` reports an `effect`: the protocol's
+// mutating commands. Reads and lifecycle commands never do.
+bool IsTrackedMutation(const std::string& command);
 
 // How a click reaches its element: the requested mode against whether physical
 // input can be delivered. Automatic mode substitutes the accessibility click
@@ -130,6 +135,8 @@ class Driver {
   InputController input_;
   CaptureEngine capture_;
   CommandJournal journal_;
+  // What the running mutating command has handed to the application.
+  EffectLedger effects_;
   ForegroundReader foregroundReader_;
   WindowActivator activator_;
 };

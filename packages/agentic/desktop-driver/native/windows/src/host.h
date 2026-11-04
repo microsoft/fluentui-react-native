@@ -6,6 +6,7 @@
 #include <condition_variable>
 #include <deque>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <unordered_set>
 
@@ -35,8 +36,8 @@ class Host {
   void HandleCancel(const std::string& id);
   bool WriteResponse(const std::string& id, const std::string& command, const CommandResult& result) noexcept;
   bool WriteError(const std::string& id, const std::string& command, const std::string& code,
-                  const std::string& message) noexcept;
-  bool WriteCancelled(const std::string& id) noexcept;
+                  const std::string& message, std::optional<MutationEffect> effect = std::nullopt) noexcept;
+  bool WriteCancelled(const std::string& id, std::optional<MutationEffect> effect) noexcept;
   void RecordWriteFailure(std::string_view operation, const char* message) noexcept;
   void PublishWindowClosed(const std::string& windowId) noexcept;
 

@@ -114,8 +114,11 @@ class InputController {
   void GuardKeyPress();
   void PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
                        const CancellationToken& token);
-  void Send(std::vector<INPUT>& inputs);
-  void SendStroke(const KeyStroke& stroke, bool down);
+  // Counted sends are primary mutations in the command's effect ledger. Pointer
+  // placement and releases that clean up input pass `counted = false`, so
+  // cleanup after a failure cannot turn a rejection into a partial effect.
+  void Send(std::vector<INPUT>& inputs, bool counted = true);
+  void SendStroke(const KeyStroke& stroke, bool down, bool counted = true);
   std::vector<KeyStroke> StrokesForValue(std::wstring_view value) const;
 
   std::vector<std::pair<std::wstring, std::vector<KeyStroke>>> pressedKeys_;

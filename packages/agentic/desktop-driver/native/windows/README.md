@@ -329,6 +329,45 @@ not yet persist across helper restarts or provide an operator `recover`
 operation; an unsettled call can still land after the helper exits. See
 [the remaining-work plan](../../references/remaining-work.md).
 
+### Mutation effects
+
+Failed and cancelled mutating commands (`activate`, `clear`, `click`,
+`closeWindow`, `performActions`, `releaseActions`, `sendKeys`, `setWindowRect`)
+report an FDR1 `effect`, so Node can tell a rejection from a mutation that may
+have reached the application (see [PROTOCOL.md](../PROTOCOL.md)). Reads and
+lifecycle commands carry none.
+
+The driver owns an `EffectLedger` (`src/settlement.*`) that `Driver::Execute`
+resets and scopes to each command. It counts only primary mutations, at the
+point they are dispatched:
+
+- each UI Automation pattern action and value write (`Invoke`, `Toggle`,
+  `Select`, `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
+  `RecordDispatching()` and `RecordSettled()`;
+- every key, button, and wheel event that `SendInput` accepts, a posted
+  `WM_CLOSE`, and each window restore or `SetWindowPos` that succeeds, through
+  `RecordDelivered()`. `SendInput` is synchronous, so events it accepted are
+  applied even when it refused the rest of a batch.
+
+A pattern call that succeeds is applied. One that returns a UI Automation
+rejection (`UIA_E_ELEMENTNOTENABLED`, `UIA_E_ELEMENTNOTAVAILABLE`,
+`UIA_E_NOTSUPPORTED`, `UIA_E_INVALIDOPERATION`) or `E_INVALIDARG`, `E_NOTIMPL`,
+`E_NOINTERFACE`, or `E_ACCESSDENIED` did nothing. Any other result, including
+`E_FAIL` and RPC failures, stays unresolved, so the failure reports `unknown` and
+Node quarantines the target, and `mutation-indeterminate` is always `unknown`.
+That can quarantine a target that was not changed, but it never lets a possibly
+applied mutation be retried as a rejection. `target-quarantined` refuses before
+anything is dispatched, so it reports `none`.
+
+Focus, activation (including its restore and `SetForegroundWindow`), pointer
+moves, `pointerCancel`, and the modifier and depressed-input releases that clean
+up around counted input are idempotent and not counted. A queued mutating
+request that is cancelled before it starts reports `none`, as does a cancel for
+an id the helper does not hold (a settled request already reported its effect).
+A new provider-side mutation must
+record itself in the ledger, through `CountedMutation` in `src/automation.cpp`
+or the `Record*` functions, and be listed in `IsTrackedMutation`.
+
 ## Authority helper modes
 
 Two restricted one-shot modes of the same executable back the Node `/authority`

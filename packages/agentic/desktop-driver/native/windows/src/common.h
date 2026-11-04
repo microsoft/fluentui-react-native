@@ -8,6 +8,7 @@
 #include <atomic>
 #include <cstdint>
 #include <exception>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -54,6 +55,21 @@ std::string TrimAscii(std::string_view value);
 std::string ToLowerAscii(std::string_view value);
 std::wstring TrimWide(std::wstring_view value);
 
+// What a failed or cancelled mutating command left behind, reported as `effect`
+// on the wire (native/PROTOCOL.md, "Mutation settlement").
+enum class MutationEffect { None, Partial, Unknown };
+
+inline const char* MutationEffectName(MutationEffect effect) noexcept {
+  switch (effect) {
+    case MutationEffect::None:
+      return "none";
+    case MutationEffect::Partial:
+      return "partial";
+    default:
+      return "unknown";
+  }
+}
+
 // Structured failure that maps directly onto a protocol error response.
 class HelperError : public std::runtime_error {
  public:
@@ -61,9 +77,13 @@ class HelperError : public std::runtime_error {
       : std::runtime_error(message), code_(std::move(code)) {}
 
   const std::string& code() const noexcept { return code_; }
+  // Set only when a mutating command fails; reads and lifecycle commands carry none.
+  const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
+  void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
 
  private:
   std::string code_;
+  std::optional<MutationEffect> effect_;
 };
 
 [[noreturn]] void Fail(std::string code, std::string message);
@@ -76,6 +96,12 @@ std::string DescribeHresult(HRESULT result);
 class CancelledError : public std::exception {
  public:
   const char* what() const noexcept override { return "The native command was cancelled."; }
+  // Set only when a mutating command is cancelled.
+  const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
+  void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
+
+ private:
+  std::optional<MutationEffect> effect_;
 };
 
 class CancellationToken {
