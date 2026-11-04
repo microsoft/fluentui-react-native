@@ -28,9 +28,14 @@ export type DesktopIntegration = {
     /** Set only for `serve --agent`, and only for an integration that `supportsAgent`. */
     agent?: Pick<DesktopAgentConnectionOptions, 'descriptor' | 'root'>;
     /**
-     * Set only for `serve`. `serve` writes no final output, so in `json` or `ndjson` mode the integration writes its own
-     * readiness record to stdout in this format once its services are ready.
+     * Set only for `serve`. A ready `serve` writes no final output, so in `json` or `ndjson` mode the integration writes its
+     * own readiness record to stdout in this format once its services are ready.
      */
     reporterMode?: ResolvedDesktopReporterMode;
+    /**
+     * Set only for `serve`. Call once the readiness record is written. A `serve` that fails before then writes its final
+     * summary instead, so structured output is never empty.
+     */
+    onReady?: () => void;
   }): Promise<void>;
 };

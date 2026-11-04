@@ -21,7 +21,30 @@ import {
   type MacOSRunningApplication,
 } from './DesktopStorybookCli';
 
-const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+const appRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+const linkedAppDirectories = ['node_modules', 'src'];
+// CLI commands replace driver manifests, leases, and agent readiness records under the project root, so they run
+// against a copy that cannot disturb a live Storybook instance of the real app.
+const storybookRoot = createIsolatedStorybookRoot();
+afterAll(() => removeIsolatedStorybookRoot(storybookRoot));
+
+function createIsolatedStorybookRoot(): string {
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-cli-')));
+  for (const file of ['app.json', 'package.json']) fs.copyFileSync(path.join(appRoot, file), path.join(root, file));
+  for (const directory of linkedAppDirectories) fs.symlinkSync(path.join(appRoot, directory), path.join(root, directory), 'junction');
+  return root;
+}
+
+function removeIsolatedStorybookRoot(root: string): void {
+  // Remove the links themselves first so cleanup can never recurse into the real app.
+  for (const directory of linkedAppDirectories) {
+    const link = path.join(root, directory);
+    if (process.platform === 'win32') fs.rmdirSync(link);
+    else fs.unlinkSync(link);
+  }
+  fs.rmSync(root, { force: true, recursive: true });
+}
+
 const nativeDriverArtifact: NativeDriverArtifact = {
   architecture: 'x64',
   artifactId: 'artifact',
@@ -341,6 +364,7 @@ describe('DesktopStorybookCli', () => {
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
     const output = { write: jest.fn() };
+    const onReady = jest.fn(() => expect(output.write).toHaveBeenCalledTimes(1));
     const fetch: typeof globalThis.fetch = async () => {
       setTimeout(() => services.requestStop(), 0);
       return new Response('{}');
@@ -348,6 +372,7 @@ describe('DesktopStorybookCli', () => {
     const cli = new DesktopStorybookCli(makeConfig(), {
       ...nativeDriverTestOptions,
       fetch,
+      onReady,
       output,
       reporterMode: 'json',
       runner,
@@ -358,7 +383,7 @@ describe('DesktopStorybookCli', () => {
 
     expect(runner.background[0]).toMatchObject({
       command: process.execPath,
-      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
       cwd: storybookRoot,
       env: {
         [FURN_STORYBOOK_PLATFORM]: 'win32',
@@ -368,6 +393,7 @@ describe('DesktopStorybookCli', () => {
       },
     });
     expect(output.write).toHaveBeenCalledWith('{"type":"ready","host":"0.0.0.0","port":7100}\n');
+    expect(onReady).toHaveBeenCalledTimes(1);
   });
 
   test('uses shared preparation and rnx-cli bundle defaults', async () => {
@@ -501,12 +527,13 @@ describe('DesktopStorybookCli', () => {
       fetch,
       isPortAvailable: async () => true,
       maintainMacOSApplicationLease: async (leaseManifestPath, signal) => {
-        expect(written).toEqual([expect.stringMatching(/^published: Storybook instance .*, agent=custom\.json\n$/)]);
+        expect(written).toEqual([expect.stringMatching(/^published: Storybook instance .*, agent=custom\.json\n$/), 'onReady']);
         maintained.push(leaseManifestPath);
         services.requestStop();
         signal.throwIfAborted();
         throw new Error('unreachable');
       },
+      onReady: () => written.push('onReady'),
       output: { write: (chunk: string) => written.push(`${fs.existsSync(readyPath) ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
       runner,
       services,
@@ -1113,7 +1140,7 @@ describe('createDesktopStorybookCommand', () => {
       );
 
       expect(runner.background[1]).toMatchObject({
-        args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+        args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
         env: {
           [FURN_STORYBOOK_PLATFORM]: 'win32',
           STORYBOOK_DRIVER_MANIFEST: manifestPath,
@@ -1167,7 +1194,7 @@ describe('createDesktopStorybookCommand', () => {
     );
 
     expect(runner.background[0]).toMatchObject({
-      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
       env: {
         [FURN_STORYBOOK_PLATFORM]: 'win32',
         STORYBOOK_WS_HOST: 'localhost',

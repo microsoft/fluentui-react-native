@@ -66,7 +66,10 @@ services so runs join one owned lifecycle.
 
 JSON mode emits one compact command result, or one readiness record for the
 long-running `driver` and `server` commands. Their readiness records are
-written only after Metro/Storybook services pass readiness checks.
+written only after Metro/Storybook services pass readiness checks. If one of
+them fails before readiness, for example because another workload holds the
+interactive lock, it writes the bounded failure summary instead, so
+structured output is never empty.
 
 `driver --agent` protects the embedded Desktop Driver with a grant authority.
 Once the driver listens, the channel service publishes one private connection

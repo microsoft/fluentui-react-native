@@ -79,6 +79,8 @@ export type DesktopStorybookCliOptions = {
   reporter?: DesktopReportWriter;
   reporterMode?: ResolvedDesktopReporterMode;
   services?: DesktopServiceScope;
+  /** Called once `server` or `driver` has written its readiness record. */
+  onReady?: () => void;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -127,11 +129,13 @@ export class DesktopStorybookCli {
   private readonly reporterMode?: ResolvedDesktopReporterMode;
   private readonly structuredOutput: Pick<NodeJS.WriteStream, 'write'>;
   private readonly services: DesktopServiceScope;
+  private readonly onReady?: () => void;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
     this.reporter = options.reporter;
     this.reporterMode = options.reporterMode;
+    this.onReady = options.onReady;
     this.paper = options.paper ?? config.getDesktopTarget?.('macos')?.host.renderer === 'paper';
     this.instance = createDesktopStorybookInstance({
       projectRoot: config.projectRoot,
@@ -193,6 +197,7 @@ export class DesktopStorybookCli {
       } else {
         this.output.write(`Storybook server ready: ${host}:${port}\n`);
       }
+      this.onReady?.();
       await this.services.guard(new Promise<never>(() => undefined));
     } catch (error) {
       failures.push(error);
@@ -275,6 +280,7 @@ export class DesktopStorybookCli {
             `${agentManifest ? `, agent=${agentManifest.descriptor}` : ''}\n`,
         );
       }
+      this.onReady?.();
       // No WDIO run writes the lease an agent's attach session verifies, so the driver keeps it current.
       await this.services.guard(
         agentManifest && platform === 'macos'

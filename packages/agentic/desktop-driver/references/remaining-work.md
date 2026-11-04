@@ -696,9 +696,12 @@ synthetic 10,000-test, 1,000-failure, and 1 MiB-message coverage. Windows
 pipe qualification found and fixed two defects: an empty `DESKTOP_REPORTER`
 or `DESKTOP_EVENTS` (common in CI templates) was rejected instead of treated
 as unset, and a consumer that closed stdout crashed the one-shot CLI entry
-points with an unhandled `EPIPE`. MR remains open for GitHub Actions
-rendering, interruption on Windows (signals cannot be delivered to a child
-there; it needs console Ctrl+C), and any remaining exit-path gaps.
+points with an unhandled `EPIPE`. Long-lived `serve`, `driver`, and `server`
+commands that fail before readiness, for example on a held workload lock, now
+write the bounded summary rather than leaving stdout empty. MR remains open
+for GitHub Actions rendering, interruption on Windows (signals cannot be
+delivered to a child there; it needs console Ctrl+C), and any remaining
+exit-path gaps.
 
 **Complete when:** every reporter mode is tested on every exit path: pass,
 test failure, infrastructure failure, usage or configuration error,
@@ -765,6 +768,11 @@ platform. See [private discovery](security.md#private-discovery), the
 the [macOS verifier](security.md#macos-service-verifier), and
 [service integration](service.md#private-connection-descriptors).
 
+Supervisor crashes are not contained yet. When the Storybook `driver` CLI is
+killed outright, Metro and the server runner, with its helper, keep running and
+the interactive lock stays held, because the runner does not watch its parent.
+SIGINT stops all of them and releases the lock.
+
 **Complete when:** agent/WDIO contention, all-route authorization, stale-owner
 recovery, reconnect, supervisor/helper/app crashes, quarantine persistence, and
 attached-app preservation pass. No cleanup broadens authority or silently
@@ -822,11 +830,31 @@ continuations, cache eviction, basis mismatch, complete removals, and
 incomplete-sample suppression. Windows real-app identity and repeated-context
 qualification remain open.
 
-**Post-paging live qualification:** not run. The current protected Storybook
-service's descriptor and process identity verified, but session attachment
-failed because its `application-lease.macos.json` was absent. Do not bypass the
-lease check; repeat against a Storybook instance started or attached through
-its owning lifecycle.
+**Post-paging live qualification (macOS):** The run used the agent-served arm64
+Fabric Storybook, attached through its connection descriptor and the
+application lease that `driver --agent` maintains.
+
+- **Paging:** one 134-element full-window sample was read in 11 pages of at
+  most 20 nodes. Every page carried the same sample id and capture time, and
+  the union of their references matched one 500-node read. Pages repeat
+  context ancestors, so 205 references were emitted.
+- **Eviction:** after two later samples, the first sample's cursor failed with
+  `observation-cursor-expired`, and a delta against it returned a fresh
+  snapshot with `base-expired`.
+- **Deltas:** an unchanged content delta reported no changes. A pointer click
+  on the `components-checkbox--default` checkbox reported exactly one
+  `changed` checkbox carrying `checked`.
+- **Basis resets:** a story switch advances the preview region, which is part
+  of the basis, so a delta across it resets with `basis-mismatch`. Changing the
+  view resets the same way.
+- **Removal suppression:** bases capped at `maxVisited` 40 were incomplete, and
+  their delta reported `removalsSuppressed` with no removals.
+- **MCP:** over stdio, the adapter's `desktop_observe` `read` and `delta`
+  reproduced paging (16 pages of 15 nodes from one sample), the checkbox
+  change, and the expired cursor.
+- **Memory:** after 100 warmups, 500 complete 142-element full-window
+  observations kept helper RSS between 24,496 and 24,624 KiB, ending 128 KiB
+  below the first checkpoint.
 
 **Windows identity progress:** the Windows provider already bounds identity and
 retention without a protocol change. Element ids are never reused, every action

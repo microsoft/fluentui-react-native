@@ -98,6 +98,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           reporter: options.reporter,
           reporterMode,
           services: options.services,
+          onReady: options.onReady,
         });
       }));
 
@@ -219,6 +220,10 @@ function addInstanceCommand(program: Command, getApi: GetApi): void {
 export async function runDesktopStorybookCli(argv: readonly string[] = process.argv): Promise<void> {
   tolerateClosedDesktopStdout();
   const options: CreateDesktopStorybookCommandOptions = {};
+  let ready = false;
+  options.onReady = () => {
+    ready = true;
+  };
   const program = createDesktopStorybookCommand(options);
   let session: DesktopReportSession | undefined;
   let runner: NodeDesktopCommandRunner | undefined;
@@ -270,7 +275,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
       reporterMode,
       eventLevel,
-      suppressFinalOutput: ['driver', 'server'].includes(action.name()),
+      // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.
+      suppressFinalOutput: ['driver', 'server'].includes(action.name()) ? () => ready : false,
       verbose: program.opts<{ verbose?: boolean }>().verbose,
       onFatal: (error) => options.services?.fail(error),
     });

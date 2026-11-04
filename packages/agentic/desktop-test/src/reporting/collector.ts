@@ -31,7 +31,11 @@ export type DesktopRunReporterOptions = DesktopReportingConfig & {
   errorOutput?: ReportOutput;
   reporterMode?: ResolvedDesktopReporterMode;
   eventLevel?: DesktopEventLevel;
-  suppressFinalOutput?: boolean;
+  /**
+   * Withholds the structured final summary. A long-lived command passes a predicate that turns true once it has written
+   * its readiness document, so a run that fails before readiness still reports its summary.
+   */
+  suppressFinalOutput?: boolean | (() => boolean);
   structured?: boolean;
   verbose?: boolean;
   secrets?: readonly string[];
@@ -563,7 +567,9 @@ export class DesktopRunReporter {
     }
     await this.queue;
     result = persist();
-    if (this.structured && !this.options.suppressFinalOutput && !this.presentationFailed) {
+    const { suppressFinalOutput } = this.options;
+    const suppressed = typeof suppressFinalOutput === 'function' ? suppressFinalOutput() : suppressFinalOutput === true;
+    if (this.structured && !suppressed && !this.presentationFailed) {
       try {
         if (this.reporterMode === 'ndjson' && this.suppressedEvents > 0) {
           await this.write(

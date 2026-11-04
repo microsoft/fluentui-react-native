@@ -32,9 +32,11 @@ default is `milestones`. Structured modes keep normal stderr empty. The full
 results and logs remain under the returned artifact paths.
 
 `serve` reports the actual URL and target after readiness, then waits for an
-owned stop. Long-lived JSON mode emits only that readiness document. For a
-target served by an imported integration, `run` receives the output format and
-writes its own readiness document. Clients create sessions explicitly.
+owned stop. Long-lived JSON mode emits only that readiness document; a `serve`
+that fails before readiness writes the bounded summary instead. For a
+target served by an imported integration, `run` receives the output format,
+writes its own readiness document, and calls `onReady` once it has.
+Clients create sessions explicitly.
 
 `serve --agent` makes the service require a grant on every route, issues one
 grant for the target, and publishes it with the service URL and the helper's

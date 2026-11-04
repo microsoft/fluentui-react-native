@@ -28,7 +28,8 @@ warning naming more than one running application means another instance with
 the same bundle identifier is open; leases resume once only one remains. The
 app's runtime bridge does not reconnect, so after restarting the driver,
 relaunch an app left running; until then story renders report
-`story-not-ready`.
+`story-not-ready`. Quit the app first: on macOS, `run` only reactivates an
+instance that is already open.
 
 For macOS CocoaPods codegen failures, rerun the documented `prep` stage once
 when ReactCodegen has a stale generated source list; diagnose the first

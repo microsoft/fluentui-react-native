@@ -147,6 +147,10 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
           ...(agentFlags.root === undefined ? {} : { root: agentFlags.root }),
         }
       : undefined;
+    let ready = false;
+    const markReady = () => {
+      ready = true;
+    };
     const session = await createDesktopReportSession({
       ...config.reporting,
       kind: action === 'test' ? 'tests' : 'lifecycle',
@@ -154,7 +158,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       context: { endpoint: target.endpoint, renderer: target.host.renderer },
       reporterMode,
       eventLevel,
-      suppressFinalOutput: action === 'serve',
+      suppressFinalOutput: action === 'serve' ? () => ready : false,
       verbose: options.verbose,
       onFatal: (error) => owner.services.fail(error),
     });
@@ -193,7 +197,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
             action,
             suite: test?.suite,
             ...(agent ? { agent } : {}),
-            ...(action === 'serve' ? { reporterMode } : {}),
+            ...(action === 'serve' ? { reporterMode, onReady: markReady } : {}),
           }),
         );
       } else if (action !== 'test' && action !== 'serve') {
@@ -213,6 +217,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
                 ...(owner.agentDescriptor ? { agentDescriptor: owner.agentDescriptor } : {}),
               }),
             );
+          markReady();
           await owner.services.guard(new Promise<never>(() => undefined));
         } else if (suite?.kind === 'wdio') await runDesktopWdioSuite(owner, config, test!.suite);
         else throw new Error('The imported integration does not implement this suite.');

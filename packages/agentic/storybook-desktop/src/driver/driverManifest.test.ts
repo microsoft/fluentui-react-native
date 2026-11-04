@@ -116,7 +116,7 @@ describe('Desktop Storybook driver manifest', () => {
         bundleIdentifierPrefix: config.macosBundleIdentifier,
         projectRoot: config.projectRoot,
       });
-      const manifest = createDesktopStorybookDriverManifest({
+      const created = createDesktopStorybookDriverManifest({
         agent: { descriptor: 'agent.json' },
         bridgeNonce: 'nonce',
         config,
@@ -125,9 +125,17 @@ describe('Desktop Storybook driver manifest', () => {
         platform: 'windows',
         storyManifest,
       });
-      const readyPath = path.join(storybookRoot, 'storybook-desktop.generated', 'agent-ready.windows.json');
-      expect(manifest.agent).toEqual({ descriptor: 'agent.json', readyPath });
-      fs.mkdirSync(path.dirname(manifest.application.leasePath), { recursive: true });
+      expect(created.agent).toEqual({
+        descriptor: 'agent.json',
+        readyPath: path.join(storybookRoot, 'storybook-desktop.generated', 'agent-ready.windows.json'),
+      });
+      // Stale files live in the temporary directory so the test cannot remove a live instance's lease or readiness record.
+      const readyPath = path.join(temporaryDirectory, 'agent-ready.windows.json');
+      const manifest = {
+        ...created,
+        agent: { descriptor: 'agent.json', readyPath },
+        application: { ...created.application, leasePath: path.join(temporaryDirectory, 'application-lease.windows.json') },
+      };
       fs.writeFileSync(manifest.application.leasePath, '{}');
       fs.writeFileSync(readyPath, '{}');
       const outputPath = path.join(temporaryDirectory, 'driver-manifest.json');

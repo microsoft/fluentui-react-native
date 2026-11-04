@@ -55,7 +55,8 @@ diagnostic.
 
 SIGINT and SIGTERM cancel owned work; one-shot structured runs finish with an
 `incomplete` summary instead of reporting cancellation as an infrastructure
-failure. Long-lived readiness commands retain their single readiness document.
+failure. Long-lived readiness commands retain their single readiness document;
+one that fails before readiness writes the summary instead.
 
 The supervisor owns rendering. Delegated producers inherit the selected mode
 and report into the parent journal; they do not create a second result
