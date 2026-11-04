@@ -22,28 +22,14 @@ import {
 import type { MutationEffect } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { DesktopClickMode, DesktopTimeouts, WebDriverTimeouts } from '../protocol/types.js';
+import { applicationOf } from './settlementJournal.js';
+import type { ProbeApplication, QuarantineRecord, SettlementJournal } from './settlementJournal.js';
 
 export type ElementRecord = {
   id: string;
   nativeId: string;
   previewGeneration: number;
   scope: NativeElementScope;
-};
-
-/**
- * Why a target refuses mutations. A target is quarantined when a mutating command ended without the provider being
- * able to say whether it changed the application, so replaying it or issuing further input could compound the change.
- * `origin` is `command` when the recorded command is the one that did not settle, and `provider` when the provider
- * quarantined itself earlier and refused the recorded command.
- */
-export type QuarantineRecord = {
-  command: string;
-  effect: MutationEffect;
-  message: string;
-  origin: 'command' | 'provider';
-  sessionId: string;
-  since: string;
-  targetId: string;
 };
 
 export type MutationOptions = {
@@ -77,6 +63,27 @@ export type SessionManagerOptions = {
    * another grant's session must not reach a caller that is only contending for the same target.
    */
   redactSessionIds?: boolean;
+  /**
+   * Durable settlement state. When set, every mutation is recorded before it is dispatched and every quarantine is
+   * recorded when it is raised, so both survive a restart of the service.
+   */
+  journal?: SettlementJournal;
+  /** Proves that a quarantined application incarnation has exited, which lifts its quarantine. */
+  probeApplication?: ProbeApplication;
+};
+
+/** The evidence an operator gives for lifting a quarantine. */
+export type RecoveryEvidence = 'application-exited' | 'operator';
+
+export type RecoverTargetRequest = {
+  evidence: RecoveryEvidence;
+  /** The id of the quarantine the operator inspected; a different or newer quarantine is never lifted. */
+  quarantineId: string;
+};
+
+export type RecoverTargetResult = {
+  evidence: RecoveryEvidence;
+  quarantine: QuarantineRecord;
 };
 
 export type DesktopSession = {
@@ -115,13 +122,124 @@ export class SessionManager {
   private inputQueue: Promise<void> = Promise.resolve();
   private readonly pendingCommands = new Map<string, number>();
   private readonly idleTimers = new Map<string, ReturnType<typeof setTimeout>>();
+  private readonly loadedTargets = new Map<string, Promise<void>>();
+  private readonly mutatingTargets = new Set<string>();
+  private readonly recoveringTargets = new Set<string>();
   private closing = false;
   private readonly idleTimeoutMs: number;
+  private readonly journal: SettlementJournal | undefined;
+  private readonly probeApplication: ProbeApplication | undefined;
   private readonly redactSessionIds: boolean;
 
   constructor(options: SessionManagerOptions = {}) {
     this.idleTimeoutMs = options.idleTimeoutMs ?? 0;
+    this.journal = options.journal;
+    this.probeApplication = options.probeApplication;
     this.redactSessionIds = options.redactSessionIds === true;
+  }
+
+  /**
+   * Restores what an earlier run of the service recorded for a target: its quarantine, or a mutation that never
+   * settled, which quarantines the target. Each target is read once; a read that fails is retried next time.
+   */
+  loadTarget(targetId: string): Promise<void> {
+    const journal = this.journal;
+    if (!journal) {
+      return Promise.resolve();
+    }
+    let loading = this.loadedTargets.get(targetId);
+    if (!loading) {
+      loading = journal.load(targetId).then((record) => {
+        if (record && !this.quarantines.has(targetId)) {
+          this.quarantines.set(targetId, record);
+        }
+      });
+      this.loadedTargets.set(targetId, loading);
+      loading.catch(() => this.loadedTargets.delete(targetId));
+    }
+    return loading;
+  }
+
+  /**
+   * Lifts a quarantine. Only the trusted operator calls this; no grant or WebDriver route reaches it. `application-exited`
+   * lifts it only when the probe proves the recorded application incarnation has exited. The durable records are removed
+   * before the quarantine is lifted, so a failure leaves the target quarantined.
+   */
+  async recoverTarget(targetId: string, request: RecoverTargetRequest): Promise<RecoverTargetResult> {
+    await this.loadTarget(targetId);
+    let record = this.requireQuarantine(targetId, request.quarantineId);
+    if (request.evidence === 'application-exited') {
+      const state = record.application ? await this.probe(record.application) : 'unknown';
+      if (state !== 'exited') {
+        throw new Error(`The application of target "${targetId}" was not proven to have exited (${state}).`);
+      }
+      record = this.requireQuarantine(targetId, request.quarantineId);
+    }
+    // No mutation, recovery commands included, may start while the records are being removed.
+    this.recoveringTargets.add(targetId);
+    try {
+      await this.journal?.clear(targetId);
+      this.quarantines.delete(targetId);
+    } finally {
+      this.recoveringTargets.delete(targetId);
+    }
+    return { evidence: request.evidence, quarantine: { ...record } };
+  }
+
+  private requireQuarantine(targetId: string, quarantineId: string): QuarantineRecord {
+    const record = this.quarantines.get(targetId);
+    if (!record || record.id !== quarantineId) {
+      throw new Error(`Target "${targetId}" has no quarantine with that id.`);
+    }
+    if (this.mutatingTargets.has(targetId) || this.recoveringTargets.has(targetId)) {
+      throw new Error(`Target "${targetId}" has a mutation in flight.`);
+    }
+    return record;
+  }
+
+  private async probe(application: NonNullable<QuarantineRecord['application']>): Promise<'exited' | 'running' | 'unknown'> {
+    if (!this.probeApplication) {
+      return 'unknown';
+    }
+    try {
+      return await this.probeApplication({ processId: application.processId, processStartedAt: application.processStartedAt });
+    } catch {
+      return 'unknown';
+    }
+  }
+
+  /**
+   * Lifts the quarantine of a target that nothing holds when the exact application incarnation it was raised against
+   * has exited. Anything less than proof leaves the quarantine for the operator.
+   */
+  private async clearExitedQuarantine(targetId: string): Promise<void> {
+    const record = this.quarantines.get(targetId);
+    if (!record?.application || !this.probeApplication || this.isHeld(targetId)) {
+      return;
+    }
+    if ((await this.probe(record.application)) !== 'exited') {
+      return;
+    }
+    if (this.quarantines.get(targetId) !== record || this.isHeld(targetId)) {
+      return;
+    }
+    try {
+      await this.journal?.clear(targetId);
+    } catch {
+      return;
+    }
+    if (this.quarantines.get(targetId) === record) {
+      this.quarantines.delete(targetId);
+    }
+  }
+
+  private isHeld(targetId: string): boolean {
+    return (
+      this.sessionsByTarget.has(targetId) ||
+      this.reservedTargets.has(targetId) ||
+      this.mutatingTargets.has(targetId) ||
+      this.recoveringTargets.has(targetId)
+    );
   }
 
   create(
@@ -186,6 +304,18 @@ export class SessionManager {
   ): Promise<DesktopSession> {
     if (target.launchModes && !target.launchModes.includes(launchMode)) {
       throw new WebDriverError('session not created', `Target "${target.id}" does not allow ${launchMode} sessions.`);
+    }
+    try {
+      await this.loadTarget(target.id);
+    } catch {
+      throw new WebDriverError('session not created', `The settlement journal of target "${target.id}" could not be read.`);
+    }
+    await this.clearExitedQuarantine(target.id);
+    if (this.closing) {
+      throw new WebDriverError('session not created', 'Desktop Driver is shutting down.');
+    }
+    if (owner && this.revokedOwners.has(owner.grantId)) {
+      throw new WebDriverError('session not created', 'The grant for this request was revoked.');
     }
     const quarantine = this.quarantines.get(target.id);
     if (quarantine) {
@@ -349,12 +479,8 @@ export class SessionManager {
   }
 
   /** The quarantine as a caller may see it. */
-  describeQuarantine(record: QuarantineRecord): Omit<QuarantineRecord, 'sessionId'> & { sessionId?: string } {
-    if (!this.redactSessionIds) {
-      return { ...record };
-    }
-    const { sessionId: _sessionId, ...visible } = record;
-    return visible;
+  describeQuarantine(record: QuarantineRecord): QuarantineRecord {
+    return visibleQuarantine(record, this.redactSessionIds);
   }
 
   runCommand<T>(sessionId: string, operation: () => Promise<T>): Promise<T> {
@@ -465,17 +591,76 @@ export class SessionManager {
     if (!options.recovery) {
       this.assertMutable(session);
     }
+    const targetId = session.target.id;
+    const recovering = this.quarantines.get(targetId);
+    if (this.recoveringTargets.has(targetId) && recovering) {
+      throw createQuarantineError('unknown error', recovering, this.redactSessionIds);
+    }
+    const journal = this.journal;
+    // A mutation record left by an earlier failure already keeps the target quarantined across a restart; only recovery
+    // commands get past the quarantine, and they need no record of their own.
+    const journaled = journal !== undefined && !journal.hasMutation(targetId);
+    // Marked before the record is written, so recovery can never interleave with a mutation that is being recorded.
+    this.mutatingTargets.add(targetId);
     try {
-      return await operation();
-    } catch (error) {
-      const failure = error instanceof Error ? error : new Error(String(error));
-      const report = createMutationReport(failure, false);
-      if (dispositionForEffect(report.effect) === 'indeterminate') {
-        this.quarantine(session, description, report.effect, failure, 'command');
-      } else if (readProviderQuarantine(failure)) {
-        this.quarantine(session, description, 'unknown', failure, 'provider');
+      if (journaled) {
+        try {
+          await journal.beginMutation({ application: applicationOf(session.lease), command: description, sessionId: session.id, targetId });
+        } catch (error) {
+          throw createJournalRefusal(error);
+        }
       }
-      throw attachMutationReport(failure, { ...report, quarantined: this.quarantines.has(session.target.id) });
+      let result: T;
+      try {
+        result = await operation();
+      } catch (error) {
+        const failure = error instanceof Error ? error : new Error(String(error));
+        const report = createMutationReport(failure, false);
+        let raised: QuarantineRecord | undefined;
+        if (dispositionForEffect(report.effect) === 'indeterminate') {
+          raised = this.quarantine(session, description, report.effect, failure.message, 'command');
+        } else if (readProviderQuarantine(failure)) {
+          raised = this.quarantine(session, description, 'unknown', failure.message, 'provider');
+        }
+        if (journaled) {
+          await this.settleJournal(session, description, raised);
+        }
+        throw attachMutationReport(failure, { ...report, quarantined: this.quarantines.has(targetId) });
+      }
+      if (journaled) {
+        await this.settleJournal(session, description, undefined);
+      }
+      return result;
+    } finally {
+      this.mutatingTargets.delete(targetId);
+    }
+  }
+
+  /**
+   * Records how a journaled mutation settled. A quarantine it raised is recorded before the mutation record is removed,
+   * and when it cannot be, the mutation record stays so a restart still quarantines the target. A mutation record that
+   * cannot be removed quarantines the target, because a restart would otherwise find it and quarantine the target then.
+   */
+  private async settleJournal(session: DesktopSession, description: string, raised: QuarantineRecord | undefined): Promise<void> {
+    const journal = this.journal!;
+    const targetId = session.target.id;
+    if (raised) {
+      try {
+        await journal.recordQuarantine(raised);
+      } catch {
+        return;
+      }
+    }
+    try {
+      await journal.endMutation(targetId);
+    } catch (error) {
+      this.quarantine(
+        session,
+        description,
+        'applied',
+        `The settlement journal could not record that this mutation settled: ${error instanceof Error ? error.message : String(error)}`,
+        'journal',
+      );
     }
   }
 
@@ -483,21 +668,26 @@ export class SessionManager {
     session: DesktopSession,
     command: string,
     effect: MutationEffect,
-    failure: Error,
+    message: string,
     origin: QuarantineRecord['origin'],
-  ): void {
+  ): QuarantineRecord | undefined {
     if (this.quarantines.has(session.target.id)) {
-      return;
+      return undefined;
     }
-    this.quarantines.set(session.target.id, {
+    const application = applicationOf(session.lease);
+    const record: QuarantineRecord = {
+      ...(application ? { application } : {}),
       command,
       effect,
-      message: truncate(failure.message, 300),
+      id: randomUUID(),
+      message: truncate(message, 300),
       origin,
       sessionId: session.id,
       since: new Date().toISOString(),
       targetId: session.target.id,
-    });
+    };
+    this.quarantines.set(session.target.id, record);
+    return record;
   }
 
   async delete(id: string): Promise<void> {
@@ -550,8 +740,15 @@ export class SessionManager {
       this.sessionsByTarget.delete(session.target.id);
       // Closing a launched application verifies the exit of the exact incarnation the quarantine was raised against.
       // An attached application is left running, so its quarantine stays until it is explicitly recovered.
-      if (session.lease.ownership === 'launched') {
-        this.quarantines.delete(session.target.id);
+      // Its durable records go first, so a target whose records remain stays quarantined until a probe or the operator
+      // lifts it.
+      if (session.lease.ownership === 'launched' && this.quarantines.has(session.target.id)) {
+        try {
+          await this.journal?.clear(session.target.id);
+          this.quarantines.delete(session.target.id);
+        } catch {
+          // The application has exited, so the next session for this target can prove that and lift the quarantine.
+        }
       }
     } finally {
       this.reservedTargets.delete(session.target.id);
@@ -670,19 +867,40 @@ function createQuarantineError(
   record: QuarantineRecord,
   redactSessionId: boolean,
 ): WebDriverError {
-  const cause =
-    record.origin === 'provider'
-      ? `the native provider quarantined itself and refused "${record.command}" (${record.message})`
-      : `"${record.command}" ended without confirming whether it changed the application (${record.message})`;
-  const { sessionId: _sessionId, ...withoutSessionId } = record;
+  const cause = {
+    command: `"${record.command}" ended without confirming whether it changed the application (${record.message})`,
+    interrupted: `the service stopped before "${record.command}" settled (${record.message})`,
+    journal: `the service could not record that "${record.command}" settled (${record.message})`,
+    provider: `the native provider quarantined itself and refused "${record.command}" (${record.message})`,
+  }[record.origin];
   const error = new WebDriverError(
     code,
     `Target "${record.targetId}" is quarantined: ${cause}. Mutations stay blocked until the target is recovered or its launched application is closed.`,
-    { quarantine: redactSessionId ? withoutSessionId : { ...record }, reason: 'target-quarantined' },
+    { quarantine: visibleQuarantine(record, redactSessionId), reason: 'target-quarantined' },
   );
   // The blocked command never reached the host, so it is a settled rejection even though the target stays quarantined.
   attachFailureEffect(error, 'none');
   return attachMutationReport(error, createMutationReport(error, true));
+}
+
+/** A quarantine as a caller may see it. Redaction also removes the application's process identity. */
+function visibleQuarantine(record: QuarantineRecord, redact: boolean): QuarantineRecord {
+  if (!redact) {
+    return { ...record };
+  }
+  const { application: _application, sessionId: _sessionId, ...visible } = record;
+  return visible;
+}
+
+/** The journal could not record a mutation before dispatch, so nothing was sent and the target is unchanged. */
+function createJournalRefusal(cause: unknown): WebDriverError {
+  const error = new WebDriverError(
+    'unknown error',
+    `The settlement journal could not record this mutation, so it was not dispatched (${truncate(cause instanceof Error ? cause.message : String(cause), 300)}).`,
+    { reason: 'journal-unavailable' },
+  );
+  attachFailureEffect(error, 'none');
+  return attachMutationReport(error, createMutationReport(error, false));
 }
 
 function missingSession(id: string): WebDriverError {

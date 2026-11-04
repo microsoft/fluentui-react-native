@@ -518,12 +518,21 @@ The macOS provider additionally implements:
 --permissions
 --permissions --prompt
 --service-identity
+--application-incarnation
 ```
 
 The permission modes emit versioned unframed diagnostic JSON. Ordinary
 handshake, self-test, stdio, build, and resolution paths never prompt for
 privacy access. `--service-identity` follows the one-shot contract below; see
 [the macOS service verifier](../references/security.md#macos-service-verifier).
+`--application-incarnation` also follows it: the request is exactly
+`{"pid":<positive 31-bit integer>,"startedAt":"<ISO 8601 time>"}`, and the
+answer is `{"ok":true,"state":"running"|"exited"|"unknown"}`. `running` means
+the process id names a process whose start time is within 10 ms of `startedAt`;
+`exited` means the process id is free or a zombie, or names a process that
+started more than one second later; anything else, including a process the
+kernel will not show this user, is `unknown`. See
+[settlement journal and recovery](../references/security.md#settlement-journal-and-recovery).
 
 The Windows provider additionally implements:
 
@@ -532,7 +541,7 @@ The Windows provider additionally implements:
 --service-identity
 ```
 
-These and the macOS `--service-identity` are one-shot modes, not FDR1
+These and the macOS `--service-identity` and `--application-incarnation` are one-shot modes, not FDR1
 sessions. Each reads one JSON request from
 standard input (at most 128 KiB, a leading UTF-8 byte order mark ignored),
 writes one JSON line to standard output, and exits 0 exactly when the line has

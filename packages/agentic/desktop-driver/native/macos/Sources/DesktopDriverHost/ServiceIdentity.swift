@@ -57,7 +57,8 @@ enum ServiceIdentity {
     return (answer["ok"] as? Bool) == true ? 0 : 1
   }
 
-  private static func readRequest() -> Data? {
+  /// Reads standard input to its end, or nil when it fails or exceeds `limit` bytes.
+  static func readRequest(limit: Int = maximumRequestBytes) -> Data? {
     var data = Data()
     while true {
       let chunk: Data?
@@ -71,7 +72,7 @@ enum ServiceIdentity {
         return data
       }
       data.append(chunk)
-      if data.count > maximumRequestBytes {
+      if data.count > limit {
         return nil
       }
     }
@@ -186,7 +187,7 @@ enum ServiceIdentity {
     return value
   }
 
-  private static func requiredPid(_ object: JSONObject, _ key: String) throws -> pid_t {
+  static func requiredPid(_ object: JSONObject, _ key: String) throws -> pid_t {
     guard let number = object[key] as? NSNumber, CFGetTypeID(number) != CFBooleanGetTypeID() else {
       throw MalformedRequest()
     }

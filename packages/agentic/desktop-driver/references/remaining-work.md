@@ -725,8 +725,18 @@ settle before teardown runs. A grant's session that receives no request for
 ten minutes (configurable, 0 disables) closes through the same path as
 `DELETE`; the clock pauses while a request is queued or running. Its contract is in
 [the security model](security.md#protected-service). Still open: controller
-leases beyond idle expiry and reconnect grace (which needs the M5 transport), exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+leases beyond idle expiry and reconnect grace (which needs the M5 transport), exact ownership ledgers, status/stop,
 cross-service claims, Storybook mutation coordination, and supervisor wiring.
+
+Quarantine persistence and operator recovery are implemented: an optional
+`recovery` server option writes each mutation ahead of dispatch and each
+quarantine to private storage, restores them before the service listens, lifts
+a quarantine only when its launched application closes, a probe proves the
+recorded application incarnation exited, or the operator calls
+`recoverTarget`. The macOS `--application-incarnation` helper mode and
+`createMacOSApplicationProbe` are implemented; the Windows mode and
+`createWindowsApplicationProbe` are open. See
+[settlement journal and recovery](security.md#settlement-journal-and-recovery).
 
 The shared Slice 2 descriptor contract, macOS owner-validated storage and
 service verifier, the Windows storage adapter and service verifier, and WDIO

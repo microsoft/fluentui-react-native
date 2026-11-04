@@ -5,6 +5,7 @@ import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
 import { DesktopAuthority, grantAllowsTarget } from '../authority/grants.js';
 import type { DesktopGrant } from '../authority/grants.js';
+import type { PrivateStorage } from '../authority/privateStorage.js';
 import type { ContentPolicy } from '../operations/runtime.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
 import { createReturnedCapabilities, matchCapabilities } from '../protocol/capabilities.js';
@@ -13,7 +14,9 @@ import { invalidArgument, toWebDriverError, WebDriverError } from '../protocol/e
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
-import type { DesktopSession, ElementRecord, MutationOptions } from './SessionManager.js';
+import type { DesktopSession, ElementRecord, MutationOptions, RecoverTargetRequest, RecoverTargetResult } from './SessionManager.js';
+import { SettlementJournal } from './settlementJournal.js';
+import type { ProbeApplication } from './settlementJournal.js';
 import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from './sessionOperations.js';
 import { TargetRegistry } from './TargetRegistry.js';
 
@@ -42,6 +45,16 @@ export type DesktopDriverServerOptions = {
     content?: ContentPolicy;
   };
   port?: number;
+  /**
+   * Durable settlement state, supplied by the trusted supervisor. Each mutation is recorded in `storage` before it is
+   * dispatched and each quarantine when it is raised, so a restarted service still refuses a target whose mutation
+   * never settled. The storage must belong to this one service configuration. `probeApplication` lifts a quarantine
+   * once the exact application incarnation it was raised against has exited; without it only the operator can.
+   */
+  recovery?: {
+    probeApplication?: ProbeApplication;
+    storage: PrivateStorage;
+  };
   targets?: readonly DesktopTarget[];
 };
 
@@ -52,6 +65,12 @@ export type DesktopDriverServer = {
   targets: TargetRegistry;
   url: string;
   close(): Promise<void>;
+  /**
+   * Lifts a target's quarantine. For the trusted operator only: no grant or WebDriver route can reach it. The request
+   * names the quarantine the operator inspected in `/status`, and `application-exited` requires the probe to prove the
+   * recorded application incarnation has exited.
+   */
+  recoverTarget(targetId: string, request: RecoverTargetRequest): Promise<RecoverTargetResult>;
 };
 
 type RouteContext = {
@@ -85,8 +104,12 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   options.authority?.assertTargetsRegistered(new Set(targets.list().map(({ id }) => id)));
   const sessions = new SessionManager({
     idleTimeoutMs: resolveIdleSessionTimeout(options),
+    ...(options.recovery ? { journal: new SettlementJournal(options.recovery.storage) } : {}),
+    ...(options.recovery?.probeApplication ? { probeApplication: options.recovery.probeApplication } : {}),
     redactSessionIds: options.authority !== undefined,
   });
+  // A target recorded as quarantined must refuse from the first request, so a journal that cannot be read stops startup.
+  await Promise.all(targets.list().map(({ id }) => sessions.loadTarget(id)));
   let closing = false;
   let listenerClosePromise: Promise<void> | undefined;
   let cleanupQueue: Promise<void> = Promise.resolve();
@@ -126,6 +149,12 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
         () => undefined,
       );
       return attempt;
+    },
+    recoverTarget(targetId, request) {
+      if (!targets.list().some(({ id }) => id === targetId)) {
+        return Promise.reject(new Error(`Target "${targetId}" is not registered.`));
+      }
+      return sessions.recoverTarget(targetId, request);
     },
   };
 

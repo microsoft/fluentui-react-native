@@ -182,8 +182,13 @@ connection. It never says whether a grant was missing, malformed, revoked, or
 wrong. A `session not created` for a target that already has a session carries
 `data.reason: 'target-busy'`, and a protected service adds
 `data.holder: { label, since }`. A quarantined target carries
-`data.reason: 'target-quarantined'`, without the session id on a protected
-service.
+`data.reason: 'target-quarantined'` and `data.quarantine` with its `id`,
+`origin` (`command`, `provider`, `interrupted`, or `journal`), and the
+recorded `application` incarnation, without the session id or the application
+on a protected service. A mutation that a service with a
+[settlement journal](service.md#persist-quarantines) cannot record before
+dispatch fails with `data.reason: 'journal-unavailable'` and a settled `none`
+effect; nothing was sent.
 
 Error data may include bounded operation names, native diagnostic codes, and
 artifact IDs. It must not expose unrestricted environment values, native

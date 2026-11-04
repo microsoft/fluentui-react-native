@@ -37,6 +37,7 @@ final class SelfTestRunner {
     testHostQueuedCancellation()
     testObservation()
     testServiceIdentity()
+    testApplicationIncarnation()
     testHello()
   }
 

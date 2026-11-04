@@ -7,7 +7,7 @@ import { NativeDriverError } from './NativeDriverError.js';
 import { verifyNativeDriverArtifact } from './nativeDriver.js';
 import type { NativeDriverArtifact, NativeDriverProvider } from './types.js';
 
-export type AuthorityHelperMode = '--private-storage' | '--service-identity';
+export type AuthorityHelperMode = '--application-incarnation' | '--private-storage' | '--service-identity';
 
 /** The helper's decoded answer. `ok` is true exactly when the helper exited with status 0. */
 export type AuthorityAnswer = Readonly<Record<string, unknown> & { ok: boolean }>;

@@ -334,6 +334,37 @@ const client = createDesktopDriverClient({ grant: agent.token, url: service.url 
 Read [the security model](security.md#protected-service) for what the boundary
 does and does not cover.
 
+## Persist quarantines
+
+Pass `recovery` so a target quarantined by an unsettled mutation stays
+quarantined across a service restart:
+
+```ts
+import { createMacOSApplicationProbe, createMacOSPrivateStorage } from '@fluentui-react-native/desktop-driver/authority';
+
+const service = await createDesktopDriverServer({
+  recovery: {
+    probeApplication: createMacOSApplicationProbe({ artifact }), // The verified macOS native driver artifact.
+    storage: await createMacOSPrivateStorage(settlementDirectory), // Dedicated to this service configuration.
+  },
+  targets,
+});
+
+// The operator inspected `quarantine.id` in /status and decided the target is safe.
+await service.recoverTarget('contoso-macos', { evidence: 'operator', quarantineId });
+```
+
+- Mutations are recorded before dispatch; one that cannot be recorded fails
+  with `journal-unavailable` and is not sent.
+- A quarantine lifts when its launched application closes, when the probe
+  proves the recorded application has exited, or when the operator calls
+  `recoverTarget`. `evidence: 'application-exited'` requires the probe's proof;
+  `evidence: 'operator'` records the operator's own judgment.
+- Without a probe, an attached application's quarantine lifts only through
+  `recoverTarget`.
+
+See [the security model](security.md#settlement-journal-and-recovery).
+
 ## Fake service CLI
 
 `desktop-driver serve` starts a deterministic fake target:

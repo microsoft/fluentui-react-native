@@ -10,3 +10,5 @@ export { createWindowsServiceVerifier, describeWindowsService } from './windowsS
 export type { DescribeWindowsServiceOptions, WindowsServiceVerifierOptions } from './windowsServiceIdentity.js';
 export { createMacOSServiceVerifier, describeMacOSService } from './macosServiceIdentity.js';
 export type { DescribeMacOSServiceOptions, MacOSServiceVerifierOptions } from './macosServiceIdentity.js';
+export { createMacOSApplicationProbe } from './macosApplicationProbe.js';
+export type { MacOSApplicationProbeOptions } from './macosApplicationProbe.js';

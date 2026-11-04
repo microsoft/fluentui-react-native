@@ -248,6 +248,38 @@ Ambiguous matches fail. Cleanup preserves attached applications and terminates
 only exact resources recorded as owned. Never add process-name or “first
 window” fallback cleanup.
 
+## Settlement journal and recovery
+
+A quarantine outlives the service only when the supervisor passes
+`recovery.storage`, owner-validated private storage dedicated to that one
+service configuration. Without it, a restart forgets every quarantine.
+
+- Each mutation is recorded before dispatch, and a mutation that cannot be
+  recorded is refused without being sent. A quarantine is recorded before the
+  mutation record is removed, so a service that stops at any point finds the
+  target quarantined again: an unsettled mutation record becomes an
+  `interrupted` quarantine, and a record that cannot be read becomes one
+  without an application. A record that cannot be removed after a mutation
+  settled quarantines the target as `journal`.
+- Records hold the target id, the static command description, the session id,
+  the failure text, and the application's process id and start time. They never
+  hold typed text, grants, or element content.
+- The service reads every registered target's records before it listens, and
+  startup fails when it cannot.
+- A quarantine lifts only with evidence. Closing a launched application lifts
+  it once its records are removed. `recovery.probeApplication` lifts it when
+  the exact recorded process id and start time are proven to have exited,
+  checked when a session for an unheld target opens. Otherwise only the
+  operator's `server.recoverTarget(targetId, { quarantineId, evidence })`
+  lifts it. That API is for the trusted supervisor; no grant and no HTTP route
+  can reach it. It names the quarantine the operator inspected, refuses while a
+  mutation of the target is in flight, and removes the stored records before
+  lifting the quarantine.
+- The macOS probe, `createMacOSApplicationProbe`, answers `exited` only when
+  the process id is gone or now names a process that started more than one
+  second later; another user's process, or a start time it cannot match, is
+  `unknown`.
+
 ## Native protocol
 
 The helper has no listener and receives only validated commands over inherited
