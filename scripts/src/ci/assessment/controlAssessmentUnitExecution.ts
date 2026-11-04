@@ -3,10 +3,12 @@ import { randomUUID } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { PLATFORM_ENV_VAR } from '../const.mts';
-import { object, readCheckboxContract, reportDigest, text, timestamp } from './controlAssessment.ts';
-import { checkboxUnitTestPath, parseUnitContext, readCheckboxUnitMappingFrom } from './controlAssessmentUnit.ts';
+import { PLATFORM_ENV_VAR } from '../../const.mts';
+import { object, readControlContract, reportDigest, text, timestamp } from './controlAssessment.ts';
+import { parseUnitContext, readUnitMappingFrom } from './controlAssessmentUnit.ts';
 import type { UnitContext } from './controlAssessmentUnit.ts';
+import { readPackageAssessments, selectAssessment, unitCaptureDirectory } from './assessmentConfig.ts';
+import type { AssessmentDefinition } from './assessmentConfig.ts';
 
 export type UnitExecution = {
   schemaVersion: 1;
@@ -23,11 +25,11 @@ function sourceState(root: string) {
   return { sourceCommit, workingTreeDirty: status.length > 0, fingerprint: reportDigest(`${status}\0${diff.toString('base64')}`) };
 }
 
-function beginUnitExecution(root: string, directory: string, expectedBuildId?: string) {
+function beginUnitExecution(root: string, directory: string, definition: AssessmentDefinition, expectedBuildId?: string) {
   const initial = sourceState(root);
   const read = (file: string) => readFileSync(path.join(root, file), 'utf8');
-  const mapping = readCheckboxUnitMappingFrom(read);
-  const contract = readCheckboxContract(root);
+  const mapping = readUnitMappingFrom(read, definition);
+  const contract = readControlContract(root, definition);
   const runId = randomUUID();
   const runDirectory = path.join(directory, `unit-${runId}`);
   mkdirSync(directory, { recursive: true });
@@ -36,13 +38,14 @@ function beginUnitExecution(root: string, directory: string, expectedBuildId?: s
   const startedAt = new Date().toISOString();
   return {
     root,
+    definition,
     initial,
     mapping,
     contract,
     runDirectory,
     reportPath,
     startedAt,
-    buildId: expectedBuildId ?? `local-checkbox-unit/${runId}`,
+    buildId: expectedBuildId ?? `local-unit/${definition.component}/${runId}`,
   };
 }
 
@@ -51,26 +54,26 @@ function finishUnitExecution(
   status: number | null,
   launchError?: string,
 ): UnitExecution & { directory: string } {
-  const { root, initial, mapping, contract, reportPath, startedAt, runDirectory, buildId } = capture;
+  const { root, definition, initial, mapping, contract, reportPath, startedAt, runDirectory, buildId } = capture;
   const finishedAt = new Date().toISOString();
   const final = sourceState(root);
   const current = initial.sourceCommit === final.sourceCommit && initial.fingerprint === final.fingerprint;
   const report = existsSync(reportPath) ? readFileSync(reportPath, 'utf8') : null;
   const executionFailure = launchError
-    ? `Checkbox unit command could not start: ${launchError}`
+    ? `Component unit command could not start: ${launchError}`
     : !current
-      ? 'Source inputs changed during Checkbox unit execution; its results cannot qualify.'
+      ? 'Source inputs changed during component unit execution; its results cannot qualify.'
       : status !== 0
-        ? `Checkbox unit command failed (exit ${status ?? 'none'}).`
+        ? `Component unit command failed (exit ${status ?? 'none'}).`
         : report === null
-          ? `Checkbox unit command produced no fresh ${checkboxUnitTestPath} Jest report.`
+          ? `Component unit command produced no fresh Jest report.`
           : null;
   const context =
     report === null
       ? null
       : parseUnitContext({
           schemaVersion: 1,
-          platform: 'macos',
+          platform: definition.unit.platform,
           sourceCommit: initial.sourceCommit,
           workingTreeDirty: initial.workingTreeDirty || final.workingTreeDirty || !current,
           buildId,
@@ -93,23 +96,28 @@ function finishUnitExecution(
   return { ...execution, directory: runDirectory };
 }
 
-export function runCheckboxUnitTests(root: string, directory: string, expectedBuildId?: string): UnitExecution & { directory: string } {
+export function runUnitTests(
+  root: string,
+  directory: string,
+  expectedBuildId?: string,
+  definition = selectAssessment(root),
+): UnitExecution & { directory: string } {
   const manifest = object(JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8')), 'Root manifest');
   const version = /^yarn@(\d+\.\d+\.\d+)$/.exec(text(manifest.packageManager, 'Package manager'))?.[1];
   if (!version) throw new Error('Unit collection requires the repository-pinned Yarn release.');
   const yarn = path.join(root, '.yarn', 'releases', `yarn-${version}.cjs`);
   if (!existsSync(yarn)) throw new Error(`Pinned Yarn entry point is missing: ${yarn}.`);
-  const capture = beginUnitExecution(root, directory, expectedBuildId);
-  const env: NodeJS.ProcessEnv = { ...process.env, [PLATFORM_ENV_VAR]: 'macos' };
+  const capture = beginUnitExecution(root, directory, definition, expectedBuildId);
+  const env: NodeJS.ProcessEnv = { ...process.env, [PLATFORM_ENV_VAR]: definition.unit.platform };
   delete env.FURN_ASSESSMENT_UNIT_CAPTURE;
   const result = spawnSync(
     process.execPath,
     [
       yarn,
       'workspace',
-      '@fluentui-react-native/components',
+      definition.packageName,
       'test',
-      'src/components/checkbox/checkbox.test.tsx',
+      ...definition.unit.testFiles,
       '--runInBand',
       '--json',
       '--outputFile',
@@ -129,13 +137,14 @@ export async function runJestWithUnitCapture(
   env: NodeJS.ProcessEnv = process.env,
 ): Promise<number> {
   const directory = env.FURN_ASSESSMENT_UNIT_CAPTURE;
-  if (!directory || platform !== 'macos') return run(args);
+  if (!directory) return run(args);
   const root = execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: packageRoot, encoding: 'utf8' }).trim();
-  if (path.relative(realpathSync.native(root), realpathSync.native(packageRoot)).replace(/\\/g, '/') !== 'packages/agentic/components') {
-    return run(args);
-  }
-  if (env[PLATFORM_ENV_VAR] !== undefined && env[PLATFORM_ENV_VAR] !== 'macos')
-    throw new Error('Unit capture requires the declared macOS Jest mock.');
+  const definitions = readPackageAssessments(realpathSync.native(root), realpathSync.native(packageRoot)).filter(
+    (definition) => definition.unit.platform === platform,
+  );
+  if (!definitions.length) return run(args);
+  if (env[PLATFORM_ENV_VAR] !== undefined && env[PLATFORM_ENV_VAR] !== platform)
+    throw new Error('Unit capture requires the declared package Jest mock.');
   if (args.some((arg) => arg === '--outputFile' || arg.startsWith('--outputFile=') || arg === '--listTests')) {
     throw new Error('Assessment capture cannot replace explicit output/list-only Jest options.');
   }
@@ -144,29 +153,35 @@ export async function runJestWithUnitCapture(
   if (start.schemaVersion !== 1) throw new Error('Unsupported unit collection capture schema.');
   const identity = object(start.identity, 'Unit collection identity');
   const began = timestamp(start.startedAt, 'Unit collection start time');
-  if (existsSync(path.join(destination, 'unit-execution.json')))
-    throw new Error('A unit execution was already collected; refusing replacement.');
-  const capture = beginUnitExecution(root, destination, text(start.buildId, 'Unit collection build ID'));
-  if (capture.initial.sourceCommit !== identity.testedCommit || Date.parse(capture.startedAt) < Date.parse(began)) {
-    throw new Error('Existing unit invocation does not match pre-execution source or interval.');
-  }
+  const captures = definitions.map((definition) => {
+    const output = unitCaptureDirectory(destination, definition);
+    if (existsSync(path.join(output, 'unit-execution.json')))
+      throw new Error('A unit execution was already collected; refusing replacement.');
+    const capture = beginUnitExecution(root, output, definition, text(start.buildId, 'Unit collection build ID'));
+    if (capture.initial.sourceCommit !== identity.testedCommit || Date.parse(capture.startedAt) < Date.parse(began))
+      throw new Error('Existing unit invocation does not match pre-execution source or interval.');
+    return capture;
+  });
+  const reportPath = captures[0].reportPath;
   let exitCode: number | null = null;
   try {
-    exitCode = await run([...args, '--json', '--outputFile', capture.reportPath]);
+    exitCode = await run([...args, '--json', '--outputFile', reportPath]);
     return exitCode;
   } finally {
-    const execution = finishUnitExecution(capture, exitCode);
-    writeFileSync(
-      path.join(destination, 'unit-execution.json'),
-      `${JSON.stringify(
-        {
-          ...execution,
-          identity,
-          collectionStartedAt: began,
-        },
-        null,
-        2,
-      )}\n`,
-    );
+    for (const capture of captures) {
+      const execution = finishUnitExecution({ ...capture, reportPath }, exitCode);
+      writeFileSync(
+        path.join(unitCaptureDirectory(destination, capture.definition), 'unit-execution.json'),
+        `${JSON.stringify(
+          {
+            ...execution,
+            identity,
+            collectionStartedAt: began,
+          },
+          null,
+          2,
+        )}\n`,
+      );
+    }
   }
 }

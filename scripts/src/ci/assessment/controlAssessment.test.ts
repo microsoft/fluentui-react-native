@@ -7,29 +7,30 @@ import { afterEach, describe, it } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
-  assessCheckbox,
-  checkboxNativeAssertionPath,
+  assessControl,
   formatAssessmentMarkdown,
   parseEvidenceContext,
   parseNativeReport,
-  readCheckboxContract,
-  readCheckboxContractFrom,
+  readControlContract,
   readNativeEvidence,
   reportDigest,
   win32StorybookTargetId,
 } from './controlAssessment.ts';
 import type { AssessmentOptions, EvidenceContext } from './controlAssessment.ts';
-import { checkboxJestFixture, desktopEvidenceFixture } from './controlAssessmentFixtures.ts';
 import {
+  assessmentDefinition,
+  assessmentMappingPath,
   assessmentPackagePath,
   assessmentSpecPath,
-  specAssessmentFor,
-  splitSpecAssessment,
-  updateSpecAssessment,
-} from './controlAssessmentSpec.ts';
+  checkboxJestFixture,
+  checkboxNativeAssertionPath,
+  desktopEvidenceFixture,
+  readControlContractFrom,
+} from './controlAssessmentFixtures.ts';
+import { specAssessmentFor, splitSpecAssessment, updateSpecAssessment } from './controlAssessmentSpec.ts';
 
-const root = fileURLToPath(new URL('../../../', import.meta.url));
-const contract = readCheckboxContract(root);
+const root = fileURLToPath(new URL('../../../../', import.meta.url));
+const contract = readControlContract(root);
 const sourceCommit = 'a'.repeat(40);
 const platformManifestDigest = 'b'.repeat(64);
 const now = new Date('2026-10-21T21:00:00.000Z');
@@ -100,7 +101,7 @@ describe('Checkbox advisory assessment', () => {
       contract.requirements.map(({ id }) => id),
       ['CBX-001', 'CBX-002', 'CBX-003', 'CBX-004', 'CBX-005', 'CBX-006'],
     );
-    const report = assessCheckbox(options());
+    const report = assessControl(options());
     assert.equal(report.contract.lifecycle, 'implemented');
     assert.equal(report.contract.conformance, 'reviewed');
     assert.equal(report.declaredStatus, null);
@@ -147,11 +148,11 @@ describe('Checkbox advisory assessment', () => {
       const report = parseNativeReport(JSON.parse(envelope));
       const bound = parseEvidenceContext({ ...context, reportSha256: reportDigest(envelope), targetId });
       const input = options({ report, reportSha256: reportDigest(envelope), context: bound, expectedTargetId: targetId });
-      assert.equal(assessCheckbox(input).evidence.status, 'matched');
-      assert.equal(assessCheckbox({ ...input, expectedTargetId: undefined }).evidence.status, 'unverified');
-      assert.equal(assessCheckbox({ ...input, expectedTargetId: `win32-${'2'.repeat(16)}` }).evidence.status, 'mismatched');
-      assert.equal(assessCheckbox({ ...input, context: { ...bound, targetId: 'agenticstorybook-win32' } }).evidence.status, 'mismatched');
-      assert.equal(assessCheckbox({ ...input, context: undefined, expectedTargetId: undefined }).evidence.status, 'unverified');
+      assert.equal(assessControl(input).evidence.status, 'matched');
+      assert.equal(assessControl({ ...input, expectedTargetId: undefined }).evidence.status, 'unverified');
+      assert.equal(assessControl({ ...input, expectedTargetId: `win32-${'2'.repeat(16)}` }).evidence.status, 'mismatched');
+      assert.equal(assessControl({ ...input, context: { ...bound, targetId: 'agenticstorybook-win32' } }).evidence.status, 'mismatched');
+      assert.equal(assessControl({ ...input, context: undefined, expectedTargetId: undefined }).evidence.status, 'unverified');
     });
 
     it('combines canonical supervisor and smoke evidence without counting navigation as requirement coverage', () => {
@@ -321,7 +322,7 @@ describe('Checkbox advisory assessment', () => {
   });
 
   it('records a raw historical pass without accepting it as current qualification', () => {
-    const report = assessCheckbox(options({ context: undefined, expectedBuildId: undefined, maxAgeHours: undefined }));
+    const report = assessControl(options({ context: undefined, expectedBuildId: undefined, maxAgeHours: undefined }));
     assert.equal(report.evidence.status, 'unverified');
     assert.equal(report.requirements[1].check?.recordedOutcome, 'passed');
     assert.equal(report.requirements[1].check?.evidenceOutcome, 'unverified');
@@ -329,7 +330,7 @@ describe('Checkbox advisory assessment', () => {
   });
 
   it('uses aggregate wdio results, not enclosing success or portable tests', () => {
-    const report = assessCheckbox(options({ report: parseNativeReport(aggregate), context: undefined }));
+    const report = assessControl(options({ report: parseNativeReport(aggregate), context: undefined }));
     assert.equal(report.evidence.runStatus, 'passed');
     assert.equal(report.evidence.caseCounts.skipped, 1);
     assert.equal(report.evidence.caseCounts.passed, 0);
@@ -339,7 +340,7 @@ describe('Checkbox advisory assessment', () => {
   });
 
   it('keeps a matched skip as a skip and never counts it as a pass', () => {
-    const report = assessCheckbox(
+    const report = assessControl(
       options({
         report: parseNativeReport(aggregate),
         context: { ...context, physicalClick: false },
@@ -351,7 +352,7 @@ describe('Checkbox advisory assessment', () => {
   });
 
   it('blocks mapped evidence on a case failure without attributing the precise broken requirement', () => {
-    const report = assessCheckbox(
+    const report = assessControl(
       options({
         report: parseNativeReport({ ...direct, status: 'failed', tests: [{ ...nativeCase, status: 'failed', error: 'assertion failed' }] }),
       }),
@@ -363,7 +364,7 @@ describe('Checkbox advisory assessment', () => {
   });
 
   it('separates runner errors from product assertion failures and does not accept partial-run passes', () => {
-    const report = assessCheckbox(options({ report: parseNativeReport({ ...direct, status: 'failed', error: 'driver disconnected' }) }));
+    const report = assessControl(options({ report: parseNativeReport({ ...direct, status: 'failed', error: 'driver disconnected' }) }));
     assert.equal(report.assessmentOutcome, 'execution-failed');
     assert.equal(report.evidence.runError, 'driver disconnected');
     assert.equal(report.requirements[1].check?.recordedOutcome, 'passed');
@@ -376,17 +377,17 @@ describe('Checkbox advisory assessment', () => {
     parseNativeReport({ ...direct, tests: [{ ...nativeCase, storyId: 'components-button--default' }] }),
   ]) {
     it(`reports missing coverage for ${report === undefined ? 'absent report' : report.cases.length ? 'unrelated cases' : 'empty cases'}`, () => {
-      const result = assessCheckbox(options({ report, context: undefined }));
+      const result = assessControl(options({ report, context: undefined }));
       assert.equal(result.requirements[1].check?.recordedOutcome, 'not-run');
       assert.equal(result.requirements[1].outcome, 'insufficient-evidence');
     });
   }
 
   it('detects endpoint and native-host mismatches even without provenance context', () => {
-    const report = assessCheckbox(options({ report: parseNativeReport({ ...direct, endpoint: 'windows' }), context: undefined }));
+    const report = assessControl(options({ report: parseNativeReport({ ...direct, endpoint: 'windows' }), context: undefined }));
     assert.equal(report.assessmentHealth, 'blocked');
     assert.equal(report.evidence.status, 'mismatched');
-    const host = assessCheckbox(options({ report: parseNativeReport({ ...aggregate, targetId: 'different-host' }), context: undefined }));
+    const host = assessControl(options({ report: parseNativeReport({ ...aggregate, targetId: 'different-host' }), context: undefined }));
     assert.equal(host.evidence.status, 'mismatched');
   });
 
@@ -400,7 +401,7 @@ describe('Checkbox advisory assessment', () => {
     physicalClick: false,
   })) {
     it(`rejects mismatched ${field} provenance`, () => {
-      const report = assessCheckbox(options({ context: parseEvidenceContext({ ...context, [field]: value }) }));
+      const report = assessControl(options({ context: parseEvidenceContext({ ...context, [field]: value }) }));
       assert.equal(report.evidence.status, 'mismatched');
       assert.equal(report.requirements[1].check?.evidenceOutcome, 'mismatched');
       assert.equal(report.evidenceSupportedStatus, null);
@@ -408,7 +409,7 @@ describe('Checkbox advisory assessment', () => {
   }
 
   it('does not accept a context timestamp that contradicts the aggregate', () => {
-    const report = assessCheckbox(
+    const report = assessControl(
       options({ report: parseNativeReport(aggregate), context: { ...context, finishedAt: '2026-10-21T20:01:00.000Z' } }),
     );
     assert.equal(report.evidence.status, 'mismatched');
@@ -416,17 +417,17 @@ describe('Checkbox advisory assessment', () => {
 
   it('requires explicit freshness/build policy and a commit-identifiable working tree', () => {
     for (const missing of [{ maxAgeHours: undefined }, { expectedBuildId: undefined }, { workingTreeDirty: true }]) {
-      assert.equal(assessCheckbox(options(missing)).evidence.status, 'unverified');
+      assert.equal(assessControl(options(missing)).evidence.status, 'unverified');
     }
-    assert.equal(assessCheckbox(options({ maxAgeHours: 1 })).evidence.status, 'matched');
-    const stale = assessCheckbox(options({ maxAgeHours: 0.5 }));
+    assert.equal(assessControl(options({ maxAgeHours: 1 })).evidence.status, 'matched');
+    const stale = assessControl(options({ maxAgeHours: 0.5 }));
     assert.equal(stale.assessmentHealth, 'stale');
     assert.equal(stale.requirements[1].check?.evidenceOutcome, 'stale');
     assert.equal(stale.evidenceSupportedStatus, null);
   });
 
   it('invalidates changed reviewed inputs and never promotes an unmapped requirement', () => {
-    const report = assessCheckbox(
+    const report = assessControl(
       options({
         contract: {
           ...contract,
@@ -461,13 +462,14 @@ describe('Checkbox advisory assessment', () => {
     const helper = path.join(directory, checkboxNativeAssertionPath);
     mkdirSync(path.dirname(helper), { recursive: true });
     writeFileSync(helper, readFileSync(path.join(root, checkboxNativeAssertionPath), 'utf8').replace(/\r?\n/g, '\r\n'));
-    assert.equal(readCheckboxContract(directory).mappingCurrent, true);
+    copyFileSync(path.join(root, assessmentMappingPath), path.join(directory, assessmentMappingPath));
+    assert.equal(readControlContract(directory, assessmentDefinition).mappingCurrent, true);
     writeFileSync(path.join(directory, component, 'checkbox.stories.tsx'), '// changed test\n');
-    assert.equal(readCheckboxContract(directory).mappingCurrent, false);
+    assert.equal(readControlContract(directory, assessmentDefinition).mappingCurrent, false);
   });
 
   it('invalidates native mappings when only the assertion-bearing helper changes', () => {
-    const changed = readCheckboxContractFrom((file) => {
+    const changed = readControlContractFrom((file) => {
       const content = readFileSync(path.join(root, file), 'utf8');
       return file === checkboxNativeAssertionPath ? `${content}\n// changed native assertion\n` : content;
     });
@@ -476,9 +478,9 @@ describe('Checkbox advisory assessment', () => {
   });
 
   it('produces deterministic decisions and escapes untrusted Markdown', () => {
-    assert.deepEqual(assessCheckbox(options()), assessCheckbox(options()));
+    assert.deepEqual(assessControl(options()), assessControl(options()));
     for (const tag of ['script', 'SCRIPT', 'ScRiPt']) {
-      const report = assessCheckbox(
+      const report = assessControl(
         options({
           report: parseNativeReport({
             ...direct,
@@ -540,9 +542,9 @@ describe('native evidence validation', () => {
   }
   it('round-trips a valid execution context', () => assert.deepEqual(parseEvidenceContext(context), context));
   it('rejects context without report, invalid target identity, and invalid age options', () => {
-    assert.throws(() => assessCheckbox(options({ report: undefined })));
-    assert.throws(() => assessCheckbox(options({ sourceCommit: 'HEAD' })));
-    for (const maxAgeHours of [0, -1, NaN, Infinity]) assert.throws(() => assessCheckbox(options({ maxAgeHours })));
+    assert.throws(() => assessControl(options({ report: undefined })));
+    assert.throws(() => assessControl(options({ sourceCommit: 'HEAD' })));
+    for (const maxAgeHours of [0, -1, NaN, Infinity]) assert.throws(() => assessControl(options({ maxAgeHours })));
   });
 });
 
@@ -553,6 +555,20 @@ describe('assess-control command', () => {
       encoding: 'utf8',
     });
   }
+
+  it('lists owned mappings and explicitly unconfigured controls without producing readiness claims', () => {
+    const result = run(['--package', path.join(root, assessmentDefinition.packagePath), '--list']);
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    const inventory = JSON.parse(result.stdout);
+    assert.equal(inventory.configured.length, 1);
+    assert.equal(inventory.configured[0].component, 'checkbox');
+    assert.ok(
+      inventory.unconfigured.some(
+        (entry: { component: string; status: string }) => entry.component === 'button' && entry.status === 'not-configured',
+      ),
+    );
+    assert.equal(Object.hasOwn(inventory, 'approvedStatus'), false);
+  });
 
   it('consumes runtime unit JSON without inventing provenance, and protects unit inputs from overwrite', () => {
     const directory = fixture();
@@ -659,7 +675,11 @@ describe('assess-control command', () => {
     const helper = path.join(checkout, checkboxNativeAssertionPath);
     mkdirSync(path.dirname(helper), { recursive: true });
     copyFileSync(path.join(root, checkboxNativeAssertionPath), helper);
-    writeFileSync(path.join(checkout, assessmentPackagePath), JSON.stringify({ version: '1.2.3' }));
+    copyFileSync(path.join(root, assessmentMappingPath), path.join(checkout, assessmentMappingPath));
+    writeFileSync(
+      path.join(checkout, assessmentPackagePath),
+      JSON.stringify({ ...JSON.parse(readFileSync(path.join(root, assessmentPackagePath), 'utf8')), version: '1.2.3' }),
+    );
     invokeGit('add', '.');
     invokeGit(
       '-c',
@@ -721,7 +741,7 @@ describe('assess-control command', () => {
 
 describe('generated SPEC assessment snapshot', () => {
   const original = splitSpecAssessment(readFileSync(path.join(root, assessmentSpecPath), 'utf8')).contract;
-  const snapshot = specAssessmentFor(assessCheckbox(options()), '0.7.0');
+  const snapshot = specAssessmentFor(assessControl(options()), '0.7.0');
 
   for (const eol of ['\n', '\r\n']) {
     it(`preserves all contract bytes and lifecycle with ${JSON.stringify(eol)} line endings`, () => {
@@ -736,7 +756,7 @@ describe('generated SPEC assessment snapshot', () => {
 
   it('keeps the reviewed mapping digest stable only for the generated block', () => {
     const read = (spec: string) =>
-      readCheckboxContractFrom((file) => (file === assessmentSpecPath ? spec : readFileSync(path.join(root, file), 'utf8')));
+      readControlContractFrom((file) => (file === assessmentSpecPath ? spec : readFileSync(path.join(root, file), 'utf8')));
     const generated = updateSpecAssessment(original, snapshot);
     assert.equal(read(generated).digest, contract.digest);
     assert.equal(read(generated).mappingCurrent, true);
@@ -747,10 +767,10 @@ describe('generated SPEC assessment snapshot', () => {
 
   it('does not invent a tested commit from missing, dirty, mismatched, or stale evidence', () => {
     for (const report of [
-      assessCheckbox(options({ report: undefined, context: undefined, reportSha256: undefined })),
-      assessCheckbox(options({ workingTreeDirty: true })),
-      assessCheckbox(options({ context: { ...context, sourceCommit: 'b'.repeat(40) } })),
-      assessCheckbox(options({ maxAgeHours: 0.01 })),
+      assessControl(options({ report: undefined, context: undefined, reportSha256: undefined })),
+      assessControl(options({ workingTreeDirty: true })),
+      assessControl(options({ context: { ...context, sourceCommit: 'b'.repeat(40) } })),
+      assessControl(options({ maxAgeHours: 0.01 })),
     ]) {
       const metadata = specAssessmentFor(report, '0.7.0');
       assert.equal(metadata.testedCommit, null);
@@ -766,7 +786,7 @@ describe('generated SPEC assessment snapshot', () => {
   it('preserves native assertion and execution failures rather than promoting a maturity stage', () => {
     const failure = { ...direct, status: 'failed', tests: [{ ...nativeCase, status: 'failed', error: 'Native assertion failed.' }] };
     const bytes = JSON.stringify(failure);
-    const failed = assessCheckbox(
+    const failed = assessControl(
       options({
         report: parseNativeReport(failure),
         reportSha256: reportDigest(bytes),
@@ -774,7 +794,7 @@ describe('generated SPEC assessment snapshot', () => {
       }),
     );
     assert.equal(specAssessmentFor(failed, '0.7.0').outcome, 'failed');
-    const blocked = assessCheckbox(options({ executionFailure: 'Native helper exited unexpectedly.' }));
+    const blocked = assessControl(options({ executionFailure: 'Native helper exited unexpectedly.' }));
     assert.equal(specAssessmentFor(blocked, '0.7.0').outcome, 'execution-failed');
   });
 

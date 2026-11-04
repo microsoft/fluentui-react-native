@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   publish:
-    name: Publish trusted Checkbox assessment
+    name: Publish trusted component assessment
     if: ${{ github.event.workflow_run.event == 'pull_request' && vars.CONTROL_ASSESSMENT_PUBLISH == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -37,25 +37,32 @@ jobs:
         id: artifact
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/src/tasks/controlAssessmentCiTask.ts find-artifact
+        run: node scripts/src/ci/controlAssessmentCiTask.ts find-artifact
 
       - name: Download source assessment data
         if: steps.artifact.outputs.found == 'true'
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: ${{ steps.artifact.outputs.artifact-name }}
-          path: ${{ runner.temp }}/checkbox-source-evidence
+          path: ${{ runner.temp }}/component-source-evidence
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
           run-id: ${{ github.event.workflow_run.id }}
+
+      # Install the formatter from trusted workflow configuration, never from PR code.
+      - name: Set up trusted report formatter
+        if: steps.artifact.outputs.found == 'true'
+        run: |
+          npm install --prefix "$RUNNER_TEMP/assessment-tools" --ignore-scripts --no-audit --no-fund oxfmt@0.61.0
+          echo "FURN_ASSESSMENT_TOOLS=$RUNNER_TEMP/assessment-tools" >> "$GITHUB_ENV"
 
       - name: Validate publication without write credentials
         id: prepare
         if: steps.artifact.outputs.found == 'true'
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          BUNDLE_PATH: ${{ runner.temp }}/checkbox-source-evidence/bundle.json
-        run: node scripts/src/tasks/controlAssessmentCiTask.ts prepare-publication
+          BUNDLE_DIRECTORY: ${{ runner.temp }}/component-source-evidence
+        run: node scripts/src/ci/controlAssessmentCiTask.ts prepare-publication
 
       - name: Create narrowly scoped publisher token
         id: app-token
@@ -71,5 +78,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           ASSESSMENT_WRITE_TOKEN: ${{ steps.app-token.outputs.token }}
-          BUNDLE_PATH: ${{ runner.temp }}/checkbox-source-evidence/bundle.json
-        run: node scripts/src/tasks/controlAssessmentCiTask.ts publish
+          BUNDLE_DIRECTORY: ${{ runner.temp }}/component-source-evidence
+        run: node scripts/src/ci/controlAssessmentCiTask.ts publish

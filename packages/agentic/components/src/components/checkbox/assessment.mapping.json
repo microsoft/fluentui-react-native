@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "component": "checkbox",
+  "displayName": "Checkbox",
+  "componentPath": "src/components/checkbox",
+  "contract": {
+    "files": [
+      "SPEC.md",
+      "spec/source.json",
+      "spec/interaction.md",
+      "spec/accessibility.md",
+      "spec/tokens.yaml",
+      "spec/usage.md",
+      "checkbox.stories.tsx"
+    ],
+    "assertionFiles": ["src/common/desktopFocus.wdio.ts"],
+    "reviewedDigest": "8757c960ce204bf59dc4c0238604149e7a5caa11663ce1c069a963d02ead4831",
+    "mappingVersion": "checkbox-win32-v1",
+    "nativeCheck": {
+      "storyId": "components-checkbox--default",
+      "testName": "toggles native checked state in both directions",
+      "requiresPhysicalClick": true
+    },
+    "requirements": {
+      "CBX-001": {
+        "remaining": "Map the additional existing defaults/root-prop assertions and ingest the existing compiler/type result; no native duplicate is inherently required."
+      },
+      "CBX-002": {
+        "observed": "Uncontrolled unchecked -> checked -> unchecked through physical clicks.",
+        "remaining": "Map the additional existing JS controlled/uncontrolled press and callback-count assertions, including defaultStatus precedence; native duplication is not required for state logic."
+      },
+      "CBX-003": {
+        "remaining": "Map the additional existing anatomy/order, text-gating and warning assertions and native wrapping cases; rendered geometry needs layout evidence."
+      },
+      "CBX-004": {
+        "observed": "Native checkbox role (not the complete accessibility requirement).",
+        "remaining": "Map the additional existing inner-node and JS semantics assertions and native naming cases; actual native action dispatch needs platform evidence when claimed."
+      },
+      "CBX-005": {
+        "remaining": "Map the additional existing secondary-text/state, interaction/status and caller-style assertions; resolved styles can be established by unit tests."
+      },
+      "CBX-006": {
+        "remaining": "Win32 focus modality, disabled/detached targets, and dual-ring geometry; collect focus/visual evidence."
+      }
+    }
+  },
+  "unit": {
+    "testFiles": ["src/components/checkbox/checkbox.test.tsx"],
+    "inputs": [
+      "packages/agentic/components/src/components/checkbox/checkbox.test.tsx",
+      "packages/agentic/components/jest.config.cjs",
+      "scripts/configs/jest/jest.config.cjs",
+      "scripts/configs/jest/babel.config.cjs",
+      "scripts/src/const.mts",
+      "scripts/src/tasks/jest.ts",
+      "scripts/src/ci/assessment/controlAssessmentUnitExecution.ts"
+    ],
+    "platform": "macos",
+    "reviewedDigest": "2fe23ba1fe5582f300db655c5feb8b5849dea00126512288b9254741d02d38c6",
+    "mappingVersion": "checkbox-jest-macos-mock-v1",
+    "environment": "React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch",
+    "cases": [
+      {
+        "fullName": "Checkbox renders default checkbox accessibility and secondary styling",
+        "requirements": ["CBX-001", "CBX-004", "CBX-005"],
+        "scope": "Default JS props and styles."
+      },
+      {
+        "fullName": "Checkbox toggles uncontrolled status on press and forwards user handlers",
+        "requirements": ["CBX-002"],
+        "scope": "JS unchecked-to-checked press and forwarded handler."
+      },
+      {
+        "fullName": "Checkbox reports presses without changing state when the status is externally driven",
+        "requirements": ["CBX-002"],
+        "scope": "JS controlled ownership on press."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions toggles unchecked once without synthesizing a press",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions toggles checked once without synthesizing a press",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions toggles indeterminate once without synthesizing a press",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions preserves a normalized caller action list and labels",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions reports accessibility toggles without changing externally driven status",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions forwards custom, wrong-case, and activate actions without a second activation path",
+        "requirements": [],
+        "scope": "windows Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions toggles unchecked once without synthesizing a press",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions toggles checked once without synthesizing a press",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions toggles indeterminate once without synthesizing a press",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions preserves a normalized caller action list and labels",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions reports accessibility toggles without changing externally driven status",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox win32 accessibility actions forwards custom, wrong-case, and activate actions without a second activation path",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "win32 Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions toggles unchecked once without synthesizing a press",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions toggles checked once without synthesizing a press",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions toggles indeterminate once without synthesizing a press",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions preserves a normalized caller action list and labels",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions reports accessibility toggles without changing externally driven status",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions forwards custom, wrong-case, and activate actions without a second activation path",
+        "requirements": [],
+        "scope": "macos Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox advances indeterminate status to checked on press",
+        "requirements": ["CBX-002"],
+        "scope": "JS indeterminate-to-checked transition."
+      },
+      {
+        "fullName": "Checkbox disables interaction and exposes disabled accessibility state",
+        "requirements": ["CBX-002", "CBX-004"],
+        "scope": "JS disabled props and press suppression."
+      },
+      {
+        "fullName": "Checkbox renders checked and indeterminate indicator glyphs",
+        "requirements": ["CBX-003", "CBX-004"],
+        "scope": "JS glyph sizes and checked/mixed accessibility props."
+      },
+      {
+        "fullName": "Checkbox shows secondary text and exposes it as a description",
+        "requirements": ["CBX-003", "CBX-004"],
+        "scope": "JS secondary text and accessibilityHint."
+      },
+      {
+        "fullName": "Checkbox keeps the visible label optional while preserving an accessible name",
+        "requirements": ["CBX-003", "CBX-004"],
+        "scope": "JS explicit accessible name."
+      },
+      {
+        "fullName": "Checkbox falls back to the label text when the visible label is hidden",
+        "requirements": ["CBX-003", "CBX-004"],
+        "scope": "JS hidden-label name fallback."
+      },
+      {
+        "fullName": "Checkbox resolves hover and pressed feedback for label, indicator, and status colors",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS hover/pressed tokens."
+      },
+      {
+        "fullName": "Checkbox uses native focus visuals without mounting custom rings",
+        "requirements": [],
+        "scope": "macOS mock focus props, not Win32 dual-ring coverage."
+      },
+      {
+        "fullName": "Checkbox resolves the standard variant",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS variant border radius."
+      },
+      {
+        "fullName": "Checkbox resolves the circular variant",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS variant border radius."
+      },
+      {
+        "fullName": "Checkbox resolves unchecked status colors",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS status colors."
+      },
+      {
+        "fullName": "Checkbox resolves checked status colors",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS status colors."
+      },
+      {
+        "fullName": "Checkbox resolves indeterminate status colors",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS status colors."
+      },
+      {
+        "fullName": "Checkbox allows constrained label text to wrap",
+        "requirements": ["CBX-003"],
+        "scope": "JS label flexShrink, not rendered wrapping geometry."
+      },
+      {
+        "fullName": "Checkbox applies disabled colors to the label and indicator",
+        "requirements": ["CBX-005"],
+        "scope": "Resolved JS disabled colors."
+      }
+    ]
+  },
+  "limitations": [
+    "Only the existing named native Checkbox case is mapped; passing it covers parts of CBX-002 and CBX-004, not either full requirement.",
+    "The macOS focus case and non-Win32 platform tables are recorded but do not map to Win32 SPEC coverage."
+  ]
+}

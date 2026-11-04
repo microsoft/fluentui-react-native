@@ -8,7 +8,7 @@ import { hasJestConfig } from '../preinstall/tool-versions.ts';
 import { PackageContext, type PlatformTarget } from '../pkgContext.ts';
 import { PLATFORM_ENV_VAR, DEFULT_WIN_PLATFORM } from '../const.mts';
 import { getFileMetadata } from '../utils/fileData.ts';
-import { runJestWithUnitCapture } from './controlAssessmentUnitExecution.ts';
+import { runJestWithUnitCapture } from '../ci/assessment/controlAssessmentUnitExecution.ts';
 import {
   buildJestOptionTable,
   matchTestFiles,

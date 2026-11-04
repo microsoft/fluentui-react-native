@@ -8,7 +8,6 @@ import { afterEach, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import {
-  assessmentSummaryPath,
   assertFresh,
   assessCiBundle,
   beginCiExecution,
@@ -24,24 +23,49 @@ import {
   parseReportReference,
 } from './controlAssessmentCi.ts';
 import type { CiBundle } from './controlAssessmentCi.ts';
-import { checkboxNativeAssertionPath, readCheckboxContract, reportDigest, win32StorybookTargetId } from './controlAssessment.ts';
-import { assessmentPackagePath, assessmentSpecPath, splitSpecAssessment } from './controlAssessmentSpec.ts';
-import { checkboxJestFixture, componentJestFixture, desktopEvidenceFixture } from './controlAssessmentFixtures.ts';
-import { readCheckboxUnitMappingFrom, unitMappingFiles } from './controlAssessmentUnit.ts';
+import { readControlContract, reportDigest, win32StorybookTargetId } from './controlAssessment.ts';
+import { splitSpecAssessment } from './controlAssessmentSpec.ts';
+import {
+  assessmentDefinition,
+  assessmentMappingPath,
+  assessmentPackagePath,
+  assessmentSpecPath,
+  assessmentSummaryPath,
+  checkboxNativeAssertionPath,
+  checkboxJestFixture,
+  componentJestFixture,
+  desktopEvidenceFixture,
+  readUnitMappingFrom,
+  unitMappingFiles,
+} from './controlAssessmentFixtures.ts';
 import { runJestWithUnitCapture } from './controlAssessmentUnitExecution.ts';
 import {
   AssessmentGitHub,
   inspectReportUpdate,
+  inspectReportUpdates,
   preparePublication,
+  preparePublications,
   publishAssessment,
+  publishAssessments,
   verifyReportUpdate,
+  verifyReportUpdates,
 } from './controlAssessmentGithub.ts';
+import { formatAssessmentDocument } from './assessmentMarkdown.ts';
+import { discoverAssessments } from './assessmentConfig.ts';
 
-const repositoryRoot = fileURLToPath(new URL('../../../', import.meta.url));
+const repositoryRoot = fileURLToPath(new URL('../../../../', import.meta.url));
 const contractPath = 'packages/agentic/components/src/components/checkbox';
 const now = new Date('2026-10-21T20:00:03.000Z');
 const directories: string[] = [];
-const reportDirectory = ['apps', 'storybook', 'artifacts', 'win32', 'assessment-ci'];
+const reportDirectory = [
+  'apps',
+  'storybook',
+  'artifacts',
+  'win32',
+  'assessment-ci',
+  assessmentDefinition.packagePath,
+  assessmentDefinition.component,
+];
 const desktopDirectory = ['apps', 'storybook', 'artifacts', 'desktop'];
 const nativePath = [...desktopDirectory, 'synthetic-desktop-run', 'run.json'];
 
@@ -63,7 +87,7 @@ function merge(root: string, base: string, head: string): string {
   return git(root, ['rev-parse', 'HEAD']);
 }
 
-function fixture() {
+function fixture(extraControl = false) {
   const directory = mkdtempSync(path.join(tmpdir(), 'furn-ci-pilot-'));
   directories.push(directory);
   const root = path.join(directory, 'repo');
@@ -82,11 +106,12 @@ function fixture() {
     JSON.stringify({
       name: originalManifest.name,
       version: '0.7.0',
-      furn: { jestPlatform: originalManifest.furn.jestPlatform },
+      furn: originalManifest.furn,
       scripts: { test: originalManifest.scripts.test },
     }),
   );
   for (const file of unitMappingFiles) put(root, file, readFileSync(path.join(repositoryRoot, file), 'utf8'));
+  put(root, assessmentMappingPath, readFileSync(path.join(repositoryRoot, assessmentMappingPath), 'utf8'));
   put(root, checkboxNativeAssertionPath, readFileSync(path.join(repositoryRoot, checkboxNativeAssertionPath), 'utf8'));
   for (const file of [
     'SPEC.md',
@@ -104,6 +129,34 @@ function fixture() {
     } else {
       copyFileSync(path.join(repositoryRoot, contractPath, file), target);
     }
+  }
+  if (extraControl) {
+    const mapping = JSON.parse(readFileSync(path.join(root, assessmentMappingPath), 'utf8'));
+    mapping.component = 'toggle';
+    mapping.displayName = 'Toggle';
+    mapping.componentPath = 'src/components/toggle';
+    mapping.contract.requirements = Object.fromEntries(
+      Object.entries(mapping.contract.requirements).map(([id, value]) => [id.replace('CBX-', 'TGL-'), value]),
+    );
+    for (const entry of mapping.unit.cases) entry.requirements = entry.requirements.map((id: string) => id.replace('CBX-', 'TGL-'));
+    for (const file of mapping.contract.files) {
+      put(
+        root,
+        `packages/agentic/components/src/components/toggle/${file}`,
+        readFileSync(path.join(root, contractPath, file), 'utf8')
+          .replaceAll('CBX-', 'TGL-')
+          .replaceAll('checkbox', 'toggle')
+          .replaceAll('Checkbox', 'Toggle'),
+      );
+    }
+    const file = 'packages/agentic/components/src/components/toggle/assessment.mapping.json';
+    put(root, file, JSON.stringify(mapping));
+    const manifest = JSON.parse(readFileSync(path.join(root, assessmentPackagePath), 'utf8'));
+    manifest.furn.assessments.push('src/components/toggle/assessment.mapping.json');
+    put(root, assessmentPackagePath, JSON.stringify(manifest));
+    const definition = discoverAssessments(root).find(({ component }) => component === 'toggle')!;
+    mapping.contract.reviewedDigest = readControlContract(root, definition).digest;
+    put(root, file, JSON.stringify(mapping));
   }
   put(root, 'source.ts', 'export const value = 0;\n');
   const baseCommit = commit(root, 'Synthetic base');
@@ -177,7 +230,7 @@ function putNative(root: string, smoke: string): void {
 function putUnit(f: Fixture, modify: (capture: Record<string, unknown>) => void = () => {}): void {
   const started = JSON.parse(readFileSync(path.join(f.root, ...reportDirectory, 'execution-start.json'), 'utf8'));
   const report = JSON.stringify(checkboxJestFixture());
-  const mapping = readCheckboxUnitMappingFrom((file) => readFileSync(path.join(f.root, file), 'utf8'));
+  const mapping = readUnitMappingFrom((file) => readFileSync(path.join(f.root, file), 'utf8'));
   const capture = {
     schemaVersion: 1,
     identity: started.identity,
@@ -191,7 +244,7 @@ function putUnit(f: Fixture, modify: (capture: Record<string, unknown>) => void 
       sourceCommit: f.testedCommit,
       workingTreeDirty: false,
       buildId: 'example/furn/actions/runs/456/attempts/1',
-      contractDigest: readCheckboxContract(f.root).digest,
+      contractDigest: readControlContract(f.root).digest,
       mappingDigest: mapping.digest,
       reportSha256: reportDigest(report),
       startedAt: '2026-10-21T20:00:00.100Z',
@@ -242,7 +295,7 @@ function fakeApi(f: Fixture, overrides: Record<string, unknown> = {}) {
       },
       '/repos/example/furn/actions/runs/456/artifacts?per_page=100&page=1': {
         total_count: 1,
-        artifacts: [{ name: 'checkbox-win32-assessment-1', expired: false }],
+        artifacts: [{ name: 'component-assessments-1', expired: false }],
       },
       '/repos/example/furn/pulls/123': {
         number: 123,
@@ -271,7 +324,15 @@ describe('CI execution binding', () => {
     putUnit(f);
     put(
       f.root,
-      path.join('apps', 'storybook', 'artifacts', 'assessment-unit-ci', 'unit-execution.json'),
+      path.join(
+        'apps',
+        'storybook',
+        'artifacts',
+        'assessment-unit-ci',
+        assessmentDefinition.packagePath,
+        assessmentDefinition.component,
+        'unit-execution.json',
+      ),
       readFileSync(path.join(f.root, ...reportDirectory, 'unit-execution.json'), 'utf8'),
     );
     f.env.NATIVE_OUTCOME = 'failure';
@@ -292,7 +353,7 @@ describe('CI execution binding', () => {
   for (const mode of ['passed', 'failed'] as const) {
     it(`reuses exactly one existing package invocation and retains its ${mode} exit status across jobs`, async () => {
       const f = fixture();
-      const command = path.join(repositoryRoot, 'scripts', 'src', 'tasks', 'controlAssessmentCiTask.ts');
+      const command = path.join(repositoryRoot, 'scripts', 'src', 'ci', 'controlAssessmentCiTask.ts');
       const run = (argument: string) =>
         spawnSync(process.execPath, [command, argument], {
           cwd: f.root,
@@ -332,7 +393,17 @@ describe('CI execution binding', () => {
       putNative(f.root, nativeReport({ startedAt: time, finishedAt: time }));
       const finish = run('finish');
       assert.equal(finish.status, 0, finish.stderr || finish.stdout);
-      const combined = run('combine');
+      const combined = spawnSync(
+        process.execPath,
+        [
+          path.join(repositoryRoot, 'scripts', 'src', 'cli.ts'),
+          'assess-components',
+          '--package',
+          path.join(f.root, assessmentDefinition.packagePath),
+          '--ci',
+        ],
+        { cwd: f.root, env: { ...process.env, ...f.env }, encoding: 'utf8' },
+      );
       assert.equal(combined.status, 0, combined.stderr || combined.stdout);
       const report = JSON.parse(readFileSync(path.join(f.root, ...reportDirectory, 'assessment.json'), 'utf8'));
       assert.equal(report.unitEvidence.status, 'matched');
@@ -590,7 +661,7 @@ describe('CI execution binding', () => {
 
   it('runs the actual CI entry point and persists files without dependencies or network writes', () => {
     const f = fixture();
-    const command = path.join(repositoryRoot, 'scripts', 'src', 'tasks', 'controlAssessmentCiTask.ts');
+    const command = path.join(repositoryRoot, 'scripts', 'src', 'ci', 'controlAssessmentCiTask.ts');
     const run = (argument: string) =>
       spawnSync(process.execPath, [command, argument], {
         cwd: f.root,
@@ -663,7 +734,13 @@ describe('same-PR source fingerprint and evidence reuse', () => {
       const f = fixture();
       const bundle = execute(f);
       git(f.root, ['checkout', '-q', 'pilot/checkbox']);
-      put(f.root, file, `${readFileIfPresent(f.root, file)}\n// changed input\n`);
+      put(
+        f.root,
+        file,
+        file === assessmentPackagePath
+          ? JSON.stringify({ ...JSON.parse(readFileIfPresent(f.root, file)), assessmentTestChange: true })
+          : `${readFileIfPresent(f.root, file)}\n// changed input\n`,
+      );
       put(f.root, assessmentSummaryPath, formatCiSummary(f.root, bundle));
       const changed = commit(f.root, 'Synthetic source and report changes');
       const merged = merge(f.root, f.baseCommit, changed);
@@ -735,7 +812,11 @@ describe('same-PR source fingerprint and evidence reuse', () => {
     const headSpec = readFileSync(path.join(f.root, assessmentSpecPath), 'utf8');
     git(f.root, ['checkout', '-q', 'main']);
     put(f.root, assessmentSpecPath, `${headSpec}\nBase-only contract note.\n`);
-    put(f.root, assessmentPackagePath, JSON.stringify({ version: '0.8.0' }));
+    put(
+      f.root,
+      assessmentPackagePath,
+      JSON.stringify({ ...JSON.parse(readFileSync(path.join(f.root, assessmentPackagePath), 'utf8')), version: '0.8.0' }),
+    );
     f.baseCommit = commit(f.root, 'New main contract and version');
     f.testedCommit = merge(f.root, f.baseCommit, f.headCommit);
     f.env.GITHUB_SHA = f.testedCommit;
@@ -909,6 +990,46 @@ describe('same-PR source fingerprint and evidence reuse', () => {
 });
 
 describe('trusted report publication', () => {
+  it('publishes two configured controls atomically and verifies the complete report-only follow-up', async () => {
+    const f = fixture(true);
+    const definitions = discoverAssessments(f.root);
+    for (const definition of definitions) beginCiExecution(f.root, f.env, new Date('2026-10-21T20:00:00.000Z'), definition);
+    putNative(f.root, nativeReport());
+    const bundles = definitions.map((definition) => finishCiExecution(f.root, f.env, now, definition));
+    const expected = { repository: 'example/furn', runId: '456', runAttempt: 1, defaultBranch: 'main' };
+    const { github, calls } = fakeApi(f);
+    await assert.rejects(preparePublications(f.root, bundles.slice(1), github, expected, now), /every configured component/);
+    const publications = await preparePublications(f.root, bundles, github, expected, now);
+    await publishAssessments(publications, github);
+    const mutations = calls.filter(({ url }) => url.endsWith('/graphql'));
+    assert.equal(mutations.length, 1);
+    const payload = JSON.parse(String(mutations[0].options?.body));
+    assert.equal(payload.variables.input.expectedHeadOid, f.headCommit);
+    assert.deepEqual(
+      payload.variables.input.fileChanges.additions.map((addition: { path: string }) => addition.path).sort(),
+      definitions.flatMap(({ summaryPath, specPath }) => [summaryPath, specPath]).sort(),
+    );
+    git(f.root, ['checkout', '-q', 'pilot/checkbox']);
+    for (const publication of publications) {
+      assert.ok(publication.eligible);
+      put(f.root, publication.summaryPath, publication.summary);
+      put(f.root, publication.specPath, publication.spec);
+    }
+    const head = commit(f.root, 'Synthetic atomic component reports');
+    const merged = merge(f.root, f.baseCommit, head);
+    writeFileSync(f.event, JSON.stringify(f.payload(head, f.baseCommit)));
+    f.env.GITHUB_SHA = merged;
+    const candidate = await inspectReportUpdates(f.root, f.env, fakeApi(f).github, now);
+    assert.ok(candidate.reportOnly);
+    assert.equal(candidate.candidates.length, 2);
+    verifyReportUpdates(f.root, candidate, bundles, now);
+    assert.throws(() => verifyReportUpdates(f.root, candidate, bundles.slice(1), now), /every configured component/);
+    assert.throws(
+      () => verifyReportUpdates(f.root, { ...candidate, candidates: [candidate.candidates[0], candidate.candidates[0]] }, bundles, now),
+      /every configured component/,
+    );
+  });
+
   const expected = { repository: 'example/furn', runId: '456', runAttempt: 1, defaultBranch: 'main' };
 
   it('writes exactly the allowlisted summary and SPEC paths with one atomic expected-head check', async () => {
@@ -985,6 +1106,30 @@ describe('trusted report publication', () => {
 });
 
 describe('CI input schema and workflow wiring', () => {
+  it('accepts formatter-stable generated output but still rejects altered assessment findings', async () => {
+    const f = fixture();
+    const bundle = execute(f);
+    const summary = formatCiSummary(f.root, bundle);
+    assert.equal(formatAssessmentDocument(summary), summary);
+    reportCommit(f, summary);
+    const candidate = await inspectReportUpdate(f.root, f.env, fakeApi(f).github, now);
+    assert.ok(candidate.reportOnly);
+    verifyReportUpdate(f.root, candidate, bundle, now);
+    assert.throws(
+      () =>
+        verifyReportUpdate(
+          f.root,
+          {
+            ...candidate,
+            summary: candidate.summary.replace('Readiness: not established.', 'Readiness: approved.'),
+          },
+          bundle,
+          now,
+        ),
+      /trusted rendering/,
+    );
+  });
+
   it('rejects invalid IDs, unsafe references, malformed markers, and oversized bundles', () => {
     for (const value of [null, {}, { repository: '../repo' }]) assert.throws(() => parseIdentity(value));
     assert.throws(() => parseReportReference('# Manual report'));
@@ -1003,19 +1148,21 @@ describe('CI input schema and workflow wiring', () => {
     assert.ok(win32.indexOf('controlAssessmentCiTask.ts begin') < win32.indexOf('name: Smoke test Win32 Storybook'));
     assert.ok(win32.indexOf('controlAssessmentCiTask.ts finish') > win32.indexOf('name: Smoke test Win32 Storybook'));
     assert.match(win32, /disabled-input-features: keyboard,physicalClick,wheel/);
-    assert.match(win32, /checkbox-win32-assessment-\$\{\{ github.run_attempt \}\}/);
+    assert.match(win32, /component-native-evidence-\$\{\{ github.run_attempt \}\}/);
     const js = workflow.slice(workflow.indexOf('  js:'), workflow.indexOf('  bundle-size:'));
     assert.match(js, /FURN_ASSESSMENT_UNIT_CAPTURE:/);
     assert.equal(js.match(/run: yarn lage buildci/g)?.length, 1);
     assert.doesNotMatch(workflow, /--run-unit-tests|controlAssessmentCiTask\.ts unit(?:\s|$)/);
     assert.match(workflow, /needs: \[assessment-inputs, js, win32-storybook\]/);
-    assert.match(workflow, /run: node scripts\/src\/tasks\/controlAssessmentCiTask\.ts combine/);
+    assert.match(workflow, /FURN_ASSESSMENT_CI: 'true'/);
+    assert.match(workflow, /run: node \.yarn\/releases\/yarn-4\.18\.0\.cjs lage assess-components/);
     const jest = readFileSync(path.join(repositoryRoot, 'scripts', 'src', 'tasks', 'jest.ts'), 'utf8');
     assert.match(jest, /runJestWithUnitCapture\(\s*context.root/);
     const publisher = readFileSync(path.join(repositoryRoot, '.github', 'workflows', 'pr-control-assessment.yml'), 'utf8');
     assert.match(publisher, /workflow_run:/);
     assert.match(publisher, /ref: \$\{\{ github.event.repository.default_branch \}\}/);
-    assert.doesNotMatch(publisher, /pull_request_target|run: yarn|npm install|ref: \$\{\{ github.event.workflow_run.head_sha/);
+    assert.doesNotMatch(publisher, /pull_request_target|run: yarn|ref: \$\{\{ github.event.workflow_run.head_sha/);
+    assert.match(publisher, /npm install --prefix "\$RUNNER_TEMP\/assessment-tools" --ignore-scripts --no-audit --no-fund oxfmt@0\.61\.0/);
     assert.ok(
       publisher.indexOf('Validate publication without write credentials') < publisher.indexOf('Create narrowly scoped publisher token'),
     );

@@ -1,7 +1,5 @@
 import type { ControlAssessment } from './controlAssessment.ts';
 
-export const assessmentSpecPath = 'packages/agentic/components/src/components/checkbox/SPEC.md';
-export const assessmentPackagePath = 'packages/agentic/components/package.json';
 const begin = '# furn-assessment:begin';
 const end = '# furn-assessment:end';
 const outcomes = ['failed', 'execution-failed', 'insufficient-evidence'] as const;
@@ -153,14 +151,13 @@ export function updateSpecAssessment(spec: string, assessment: SpecAssessment): 
 
 export function specAssessmentFor(report: ControlAssessment, packageVersion: string): SpecAssessment {
   if (
-    report.component !== 'checkbox' ||
     report.target.endpoint !== 'win32' ||
     report.target.renderer !== 'paper' ||
     report.target.host !== 'storybook' ||
     report.evidenceSupportedStatus !== null ||
     report.approvedStatus !== null
   ) {
-    throw new Error('The SPEC assessment pilot supports only unassigned Checkbox Win32/Paper maturity.');
+    throw new Error('The SPEC assessment adapter supports only unassigned Win32/Paper maturity.');
   }
   const value: SpecAssessment = {
     packageVersion,

@@ -2,22 +2,25 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, lstatSync, mkdirSync, readFileSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { Command, Option } from 'clipanion';
-import { findGitRoot } from 'workspace-tools';
 
 import {
-  assessCheckbox,
+  assessControl,
   formatAssessmentMarkdown,
   object,
   parseEvidenceContext,
   parseNativeReport,
-  readCheckboxContract,
+  readControlContract,
   readNativeEvidence,
   reportDigest,
   text,
-} from './controlAssessment.ts';
-import { assessmentPackagePath, assessmentSpecPath, specAssessmentFor, updateSpecAssessment } from './controlAssessmentSpec.ts';
-import { parseUnitContext, readCheckboxUnitMappingFrom } from './controlAssessmentUnit.ts';
-import { runCheckboxUnitTests } from './controlAssessmentUnitExecution.ts';
+} from '../ci/assessment/controlAssessment.ts';
+import { specAssessmentFor, updateSpecAssessment } from '../ci/assessment/controlAssessmentSpec.ts';
+import { parseUnitContext, readUnitMappingFrom } from '../ci/assessment/controlAssessmentUnit.ts';
+import { runUnitTests } from '../ci/assessment/controlAssessmentUnitExecution.ts';
+import { discoverAssessments, unconfiguredControls } from '../ci/assessment/assessmentConfig.ts';
+import type { AssessmentDefinition } from '../ci/assessment/assessmentConfig.ts';
+import { combineCiEvidence, git } from '../ci/assessment/controlAssessmentCi.ts';
+import { formatAssessmentDocument } from '../ci/assessment/assessmentMarkdown.ts';
 
 function sameFile(first: string, second: string): boolean {
   if (path.relative(first, second) === '') return true;
@@ -28,32 +31,35 @@ function sameFile(first: string, second: string): boolean {
 }
 
 export class AssessControlCommand extends Command {
-  static override paths = [['assess-control']];
+  static override paths = [['assess-components'], ['assess-control']];
 
   static override usage = Command.Usage({
-    description: 'Produce an advisory Checkbox/Win32 assessment from native and JavaScript unit evidence',
+    description: 'Assess configured package components from existing native and JavaScript unit evidence',
     details:
-      'Reads existing native/unit reports, or explicitly runs Checkbox runtime tests with --run-unit-tests. Writes assessment.json and assessment.md, preserving skips, provenance, and evidence gaps. --update-spec records a generated SPEC snapshot and linked report. No maturity stage is assigned. See scripts/CONTROL-ASSESSMENT.md.',
+      'Discovers package-owned assessment mappings and reads existing reports. --run-unit-tests explicitly runs configured runtime tests locally; CI only combines existing evidence. Unconfigured controls are listed, never treated as passes. No maturity stage is assigned. See @fluentui-react-native/components/references/assessments/README.md.',
     examples: [
       [
         'Assess an existing native report',
-        '$0 assess-control --component checkbox --evidence apps/storybook/artifacts/desktop/<run-id>/run.json',
+        '$0 assess-components --component checkbox --evidence apps/storybook/artifacts/desktop/<run-id>/run.json',
       ],
     ],
   });
 
-  component = Option.String('--component', { required: true, description: 'Pilot component: checkbox' });
+  component = Option.String('--component', { description: 'Select one configured component; otherwise assess all configured controls' });
+  packageDirectory = Option.String('--package', { description: 'Owning package directory; defaults to the current package' });
+  list = Option.Boolean('--list', false, { description: 'List configured and unconfigured package controls without assessing them' });
+  ci = Option.Boolean('--ci', false, { description: 'Combine existing CI evidence without running tests or editing tracked files' });
   evidence = Option.String('--evidence', {
     description: 'Canonical desktop-test run.json with its Storybook companion, or a historical WDIO/smoke report',
   });
   contextFile = Option.String('--context', {
     description: 'Optional execution-generated provenance sidecar, never synthesized from the current checkout',
   });
-  unitEvidence = Option.String('--unit-evidence', { description: 'Jest JSON selecting only checkbox.test.tsx, not type tests' });
+  unitEvidence = Option.String('--unit-evidence', { description: 'Existing Jest JSON; only configured runtime suites are mapped' });
   unitContextFile = Option.String('--unit-context', { description: 'Execution-generated unit provenance sidecar' });
   unitBuildId = Option.String('--unit-build-id', { description: 'Expected unit build ID for replayed evidence' });
   runUnitTests = Option.Boolean('--run-unit-tests', false, {
-    description: 'Run the declared Checkbox runtime test script and capture fresh unit evidence',
+    description: 'Explicitly run the configured runtime tests locally and capture fresh evidence',
   });
   buildId = Option.String('--build-id', { description: 'Expected test build ID; required to accept bound evidence' });
   targetId = Option.String('--target-id', { description: 'Expected native target instance; required for bound desktop-test evidence' });
@@ -64,15 +70,75 @@ export class AssessControlCommand extends Command {
   });
 
   async execute() {
-    if (this.component !== 'checkbox') throw new Error('This pilot supports only --component checkbox on Win32/Paper.');
+    const root = git(process.cwd(), ['rev-parse', '--show-toplevel']);
+    const packageRoot =
+      this.packageDirectory === undefined
+        ? this.path[0] === 'assess-components'
+          ? process.cwd()
+          : undefined
+        : path.resolve(this.packageDirectory);
+    const configured = discoverAssessments(root, packageRoot);
+    const definitions = configured.filter((definition) => this.component === undefined || definition.component === this.component);
+    if (!definitions.length) throw new Error('No approved assessment mapping is configured for the requested component/package.');
+    if (this.component !== undefined && definitions.length !== 1)
+      throw new Error('Component selection is ambiguous; select its package explicitly.');
+    const packages = [...new Set(configured.map(({ packagePath }) => packagePath))];
+    const inventory = {
+      configured: definitions.map(({ component, packagePath, mappingPath }) => ({ component, packagePath, mappingPath })),
+      unconfigured: packages.flatMap((packagePath) =>
+        unconfiguredControls(path.join(root, packagePath), configured).map((component) => ({
+          component,
+          packagePath,
+          status: 'not-configured',
+        })),
+      ),
+    };
+    if (this.list) {
+      this.context.stdout.write(`${JSON.stringify(inventory, null, 2)}\n`);
+      return 0;
+    }
+    if (inventory.unconfigured.length)
+      this.context.stdout.write(
+        `Not configured for assessment: ${inventory.unconfigured.map(({ component }) => component).join(', ')}. These are not passes.\n`,
+      );
+    if (this.ci || process.env.FURN_ASSESSMENT_CI === 'true') {
+      if (
+        this.runUnitTests ||
+        this.updateSpec ||
+        this.evidence ||
+        this.unitEvidence ||
+        this.contextFile ||
+        this.unitContextFile ||
+        this.output ||
+        this.buildId ||
+        this.unitBuildId ||
+        this.targetId ||
+        this.maxAgeHours
+      )
+        throw new Error(
+          'CI assessment consumes only the captured workflow evidence; local execution, replay and tracked writes are not allowed.',
+        );
+      for (const definition of definitions) combineCiEvidence(root, process.env, new Date(), definition);
+      this.context.stdout.write(
+        `Assessed ${definitions.length} configured component(s) using existing CI evidence; no tests were rerun.\n`,
+      );
+      return 0;
+    }
+    let exitCode = 0;
+    for (const definition of definitions) exitCode = Math.max(exitCode, await this.assess(root, definition, definitions.length > 1));
+    return exitCode;
+  }
+
+  private async assess(root: string, definition: AssessmentDefinition, multiple: boolean) {
     if (this.runUnitTests && (this.unitEvidence !== undefined || this.unitContextFile !== undefined || this.unitBuildId !== undefined)) {
       throw new Error('--run-unit-tests cannot be combined with replayed unit evidence, context, or build ID.');
     }
     if (this.unitContextFile !== undefined && this.unitEvidence === undefined) throw new Error('--unit-context requires --unit-evidence.');
     if (this.unitBuildId !== undefined && this.unitEvidence === undefined) throw new Error('--unit-build-id requires --unit-evidence.');
-    const root = findGitRoot(process.cwd());
+    const assessmentSpecPath = definition.specPath;
+    const assessmentPackagePath = `${definition.packagePath}/package.json`;
     const unitRun = this.runUnitTests
-      ? runCheckboxUnitTests(root, path.join(root, 'apps', 'storybook', 'artifacts', 'win32', 'assessment-units'))
+      ? runUnitTests(root, path.join(root, 'apps', 'storybook', 'artifacts', 'win32', 'assessment-units'), undefined, definition)
       : undefined;
     const sourceCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
     const workingTreeDirty =
@@ -92,8 +158,8 @@ export class AssessControlCommand extends Command {
     const content = input === undefined ? undefined : readNativeEvidence(input);
     const specPath = path.join(root, assessmentSpecPath);
     const originalSpec = readFileSync(specPath, 'utf8');
-    const report = assessCheckbox({
-      contract: readCheckboxContract(root),
+    const report = assessControl({
+      contract: readControlContract(root, definition),
       sourceCommit,
       workingTreeDirty,
       now: new Date(),
@@ -106,7 +172,7 @@ export class AssessControlCommand extends Command {
       unit:
         unitRun || unitInput !== undefined
           ? {
-              mapping: readCheckboxUnitMappingFrom((file) => readFileSync(path.join(root, file), 'utf8')),
+              mapping: readUnitMappingFrom((file) => readFileSync(path.join(root, file), 'utf8'), definition),
               report: unitRun?.report ?? (unitInput === undefined ? undefined : readFileSync(unitInput, 'utf8')),
               context:
                 unitRun?.context ??
@@ -116,8 +182,9 @@ export class AssessControlCommand extends Command {
             }
           : undefined,
     });
-    const directory =
+    const baseDirectory =
       this.output === undefined ? path.join(root, 'apps', 'storybook', 'artifacts', 'win32', 'assessment') : path.resolve(this.output);
+    const directory = multiple ? path.join(baseDirectory, definition.packagePath, definition.component) : baseDirectory;
     const jsonPath = path.join(directory, 'assessment.json');
     const markdownPath = path.join(directory, 'assessment.md');
     const localSummary = path.join(path.dirname(specPath), 'assessment', 'ASSESSMENT.md');
@@ -166,13 +233,16 @@ export class AssessControlCommand extends Command {
         2,
       )}\n`,
     );
-    writeFileSync(markdownPath, formatAssessmentMarkdown(report));
+    writeFileSync(markdownPath, formatAssessmentDocument(formatAssessmentMarkdown(report), definition.summaryPath));
     if (updatedSpec !== undefined) {
       if (readFileSync(specPath, 'utf8') !== originalSpec)
         throw new Error('SPEC changed during assessment; refusing concurrent overwrite.');
       writeFileSync(
         localSummary,
-        `<!-- AUTO-GENERATED LOCAL ASSESSMENT. Not a bound CI publication. -->\n\n${formatAssessmentMarkdown(report)}`,
+        formatAssessmentDocument(
+          `<!-- AUTO-GENERATED LOCAL ASSESSMENT. Not a bound CI publication. -->\n\n${formatAssessmentMarkdown(report)}`,
+          definition.summaryPath,
+        ),
       );
       writeFileSync(specPath, updatedSpec);
     }

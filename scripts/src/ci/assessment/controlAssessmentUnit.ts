@@ -2,21 +2,9 @@ import { createHash } from 'node:crypto';
 
 import { hex, object, reportDigest, text, timestamp } from './controlAssessment.ts';
 
-export const checkboxUnitTestPath = 'packages/agentic/components/src/components/checkbox/checkbox.test.tsx';
-const packagePath = 'packages/agentic/components/package.json';
-export const unitMappingFiles = [
-  checkboxUnitTestPath,
-  'packages/agentic/components/jest.config.cjs',
-  'scripts/configs/jest/jest.config.cjs',
-  'scripts/configs/jest/babel.config.cjs',
-  'scripts/src/const.mts',
-  'scripts/src/tasks/jest.ts',
-  'scripts/src/tasks/controlAssessmentUnitExecution.ts',
-];
-// November 2 review: token-state access changed; the 42 mapped assertions and their requirement scopes are unchanged.
-const reviewedUnitDigest = '6a4b2649cc93d070859bc7f874621bcfbc54c9b4d1be9aec8d64aec67ee37f93';
-const mappingVersion = 'checkbox-jest-macos-mock-v1';
-const environment = 'React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch';
+import { readMappingContent } from './assessmentConfig.ts';
+import type { AssessmentDefinition } from './assessmentConfig.ts';
+
 type Outcome = 'passed' | 'failed' | 'skipped' | 'not-run' | 'unverified' | 'mismatched' | 'stale';
 type Status = 'missing' | 'unverified' | 'matched' | 'mismatched' | 'stale';
 type UnitCase = {
@@ -29,60 +17,10 @@ type UnitCase = {
   flaky: boolean;
 };
 
-const cases: { fullName: string; requirements: string[]; scope: string }[] = [];
-function mapped(title: string, requirements: string[], scope: string, group = 'Checkbox'): void {
-  cases.push({ fullName: `${group} ${title}`, requirements, scope });
-}
-mapped('renders default checkbox accessibility and secondary styling', ['CBX-001', 'CBX-004', 'CBX-005'], 'Default JS props and styles.');
-mapped(
-  'toggles uncontrolled status on press and forwards user handlers',
-  ['CBX-002'],
-  'JS unchecked-to-checked press and forwarded handler.',
-);
-mapped('reports presses without changing state when the status is externally driven', ['CBX-002'], 'JS controlled ownership on press.');
-for (const platform of ['windows', 'win32', 'macos']) {
-  const group = `Checkbox ${platform} accessibility actions`;
-  const requirements = platform === 'win32' ? ['CBX-002', 'CBX-004'] : [];
-  const scope = `${platform} Platform.OS simulation under the macOS Jest mock; no native accessibility dispatch.`;
-  for (const status of ['unchecked', 'checked', 'indeterminate']) {
-    mapped(`toggles ${status} once without synthesizing a press`, requirements, scope, group);
-  }
-  for (const title of [
-    'preserves a normalized caller action list and labels',
-    'deduplicates legacy and native spellings without losing the caller label or custom actions',
-    'reports accessibility toggles without changing externally driven status',
-    'blocks disabled accessibility toggles while forwarding the caller handler once',
-    'forwards custom, wrong-case, and activate actions without a second activation path',
-  ]) {
-    mapped(title, requirements, scope, group);
-  }
-}
-mapped('advances indeterminate status to checked on press', ['CBX-002'], 'JS indeterminate-to-checked transition.');
-mapped('disables interaction and exposes disabled accessibility state', ['CBX-002', 'CBX-004'], 'JS disabled props and press suppression.');
-mapped(
-  'renders checked and indeterminate indicator glyphs',
-  ['CBX-003', 'CBX-004'],
-  'JS glyph sizes and checked/mixed accessibility props.',
-);
-mapped('shows secondary text and exposes it as a description', ['CBX-003', 'CBX-004'], 'JS secondary text and accessibilityHint.');
-mapped('keeps the visible label optional while preserving an accessible name', ['CBX-003', 'CBX-004'], 'JS explicit accessible name.');
-mapped('falls back to the label text when the visible label is hidden', ['CBX-003', 'CBX-004'], 'JS hidden-label name fallback.');
-mapped('resolves hover and pressed feedback for label, indicator, and status colors', ['CBX-005'], 'Resolved JS hover/pressed tokens.');
-mapped('uses native focus visuals without mounting custom rings', [], 'macOS mock focus props, not Win32 dual-ring coverage.');
-for (const variant of ['standard', 'circular']) {
-  mapped(`resolves the ${variant} variant`, ['CBX-005'], 'Resolved JS variant border radius.');
-}
-for (const status of ['unchecked', 'checked', 'indeterminate']) {
-  mapped(`resolves ${status} status colors`, ['CBX-005'], 'Resolved JS status colors.');
-}
-mapped('allows constrained label text to wrap', ['CBX-003'], 'JS label flexShrink, not rendered wrapping geometry.');
-mapped('applies disabled colors to the label and indicator', ['CBX-005'], 'Resolved JS disabled colors.');
-export const checkboxUnitCases: readonly (typeof cases)[number][] = cases;
-
 export type UnitMapping = { digest: string; current: boolean };
 export type UnitContext = {
   schemaVersion: 1;
-  platform: 'macos';
+  platform: string;
   sourceCommit: string;
   workingTreeDirty: boolean;
   buildId: string;
@@ -101,15 +39,17 @@ export type UnitInput = {
   expectedBuildId?: string;
 };
 
-export function readCheckboxUnitMappingFrom(read: (file: string) => string): UnitMapping {
+export function readUnitMappingFrom(read: (file: string) => string, definition: AssessmentDefinition): UnitMapping {
   const hash = createHash('sha256');
-  for (const file of unitMappingFiles) hash.update(`${file}\0${read(file).replace(/\r\n/g, '\n')}\0`);
+  for (const file of definition.unit.inputs) hash.update(`${file}\0${read(file).replace(/\r\n/g, '\n')}\0`);
+  const packagePath = `${definition.packagePath}/package.json`;
   const manifest = object(JSON.parse(read(packagePath)), 'Unit package manifest');
   const profile = object(manifest.furn, 'Unit package profile').jestPlatform;
   const script = object(manifest.scripts, 'Unit package scripts').test;
   hash.update(`${packagePath}\0${JSON.stringify({ profile, script })}\0`);
+  hash.update(readMappingContent(read, definition));
   const digest = hash.digest('hex');
-  return { digest, current: digest === reviewedUnitDigest };
+  return { digest, current: digest === definition.unit.reviewedDigest };
 }
 
 function count(value: unknown, label: string): number {
@@ -119,7 +59,11 @@ function count(value: unknown, label: string): number {
 
 export function parseUnitContext(value: unknown): UnitContext {
   const data = object(value, 'Unit execution context');
-  if (data.schemaVersion !== 1 || data.platform !== 'macos' || typeof data.workingTreeDirty !== 'boolean') {
+  if (
+    data.schemaVersion !== 1 ||
+    !['react', 'win32', 'macos', 'ios', 'android', 'windows'].includes(String(data.platform)) ||
+    typeof data.workingTreeDirty !== 'boolean'
+  ) {
     throw new Error('Unsupported unit context schema, platform, or dirty flag.');
   }
   const startedAt = timestamp(data.startedAt, 'Unit execution start');
@@ -127,7 +71,7 @@ export function parseUnitContext(value: unknown): UnitContext {
   if (Date.parse(startedAt) > Date.parse(finishedAt)) throw new Error('Unit execution finished before it started.');
   return {
     schemaVersion: 1,
-    platform: 'macos',
+    platform: text(data.platform, 'Unit platform'),
     sourceCommit: hex(data.sourceCommit, 40, 'Unit source commit'),
     workingTreeDirty: data.workingTreeDirty,
     buildId: text(data.buildId, 'Unit build ID'),
@@ -140,7 +84,7 @@ export function parseUnitContext(value: unknown): UnitContext {
   };
 }
 
-export function parseCheckboxJest(content: string) {
+export function parseComponentJest(content: string, definition: AssessmentDefinition) {
   if (Buffer.byteLength(content) > 1_000_000) throw new Error('Unit report exceeds its size limit.');
   const data = object(JSON.parse(content), 'Jest report');
   if (typeof data.success !== 'boolean' || typeof data.wasInterrupted !== 'boolean') throw new Error('Invalid Jest execution flags.');
@@ -148,9 +92,15 @@ export function parseCheckboxJest(content: string) {
   const startTime = count(data.startTime, 'Jest start time');
   const parsed = data.testResults.map((value) => parseJestSuite(value, startTime));
   if (new Set(parsed.map(({ name }) => name)).size !== parsed.length) throw new Error('Duplicate Jest suite identity.');
-  const selected = parsed.filter(({ name }) => name === checkboxUnitTestPath || name.endsWith(`/${checkboxUnitTestPath}`));
-  if (selected.length !== 1) throw new Error('Unit report must contain exactly one Checkbox runtime suite; type tests cannot substitute.');
-  if (new Set(selected[0].entries.map(({ fullName }) => fullName)).size !== selected[0].entries.length) {
+  const selected = definition.unit.testFiles.map((file) => {
+    const expected = `${definition.packagePath}/${file}`;
+    const matches = parsed.filter(({ name }) => name === expected || name.endsWith(`/${expected}`));
+    if (matches.length !== 1)
+      throw new Error('Unit report must contain each configured runtime suite exactly once; type tests cannot substitute.');
+    return matches[0];
+  });
+  const entries = selected.flatMap(({ entries }) => entries);
+  if (new Set(entries.map(({ fullName }) => fullName)).size !== entries.length) {
     throw new Error('Duplicate Jest assertion identity.');
   }
   const counts = { passed: 0, failed: 0, skipped: 0 };
@@ -181,11 +131,18 @@ export function parseCheckboxJest(content: string) {
     flaky: entries.filter(({ flaky }) => flaky).length,
   });
   return {
-    entries: selected[0].entries,
-    counts: selected[0].counts,
+    entries,
+    counts: selected.reduce(
+      (counts, suite) => ({
+        passed: counts.passed + suite.counts.passed,
+        failed: counts.failed + suite.counts.failed,
+        skipped: counts.skipped + suite.counts.skipped,
+      }),
+      { passed: 0, failed: 0, skipped: 0 },
+    ),
     packageCounts: counts,
     packageSuites: parsed.length,
-    retryCounts: retryCounts(selected[0].entries),
+    retryCounts: retryCounts(entries),
     packageRetryCounts: retryCounts(parsed.flatMap(({ entries }) => entries)),
     startTime,
     endTime: Math.max(...parsed.map(({ endTime }) => endTime)),
@@ -264,7 +221,8 @@ function parseJestSuite(value: unknown, startTime: number) {
   };
 }
 
-export function assessCheckboxUnits(options: {
+export function assessControlUnits(options: {
+  definition: AssessmentDefinition;
   input?: UnitInput;
   sourceCommit: string;
   workingTreeDirty: boolean;
@@ -273,8 +231,8 @@ export function assessCheckboxUnits(options: {
   now: Date;
   maxAgeHours?: number;
 }) {
-  const { input } = options;
-  const report = input?.report === undefined ? undefined : parseCheckboxJest(input.report);
+  const { input, definition } = options;
+  const report = input?.report === undefined ? undefined : parseComponentJest(input.report, definition);
   if (report && !input?.mapping) throw new Error('Unit report requires the current source mapping fingerprint.');
   const context = input?.context;
   if (context && !report) throw new Error('Unit execution context requires a unit report.');
@@ -285,6 +243,7 @@ export function assessCheckboxUnits(options: {
     if (
       context &&
       (context.sourceCommit !== options.sourceCommit ||
+        context.platform !== definition.unit.platform ||
         context.reportSha256 !== hash ||
         context.contractDigest !== options.contractDigest ||
         context.mappingDigest !== input!.mapping!.digest ||
@@ -322,7 +281,7 @@ export function assessCheckboxUnits(options: {
   const runFailed = Boolean(report?.failed || input?.executionFailure || (context && context.exitCode !== 0));
   const runRetried = Boolean(report?.packageRetryCounts.retries);
   if (runRetried) reasons.push('Retried or flaky unit execution is not qualifying evidence in this pilot.');
-  const checks = checkboxUnitCases.map((mapping) => {
+  const checks = definition.unit.cases.map((mapping) => {
     const recorded = report?.entries.find(({ fullName }) => fullName === mapping.fullName);
     let evidenceOutcome: Outcome = 'not-run';
     if (recorded) {
@@ -361,8 +320,8 @@ export function assessCheckboxUnits(options: {
     status,
     reasons,
     outcome,
-    environment,
-    mappingVersion,
+    environment: definition.unit.environment,
+    mappingVersion: definition.unit.mappingVersion,
     mappingCurrent,
     mappingDigest: input?.mapping?.digest ?? null,
     reportSha256: hash,
@@ -376,6 +335,6 @@ export function assessCheckboxUnits(options: {
     retryCounts: report?.retryCounts ?? { retries: 0, flaky: 0 },
     packageRetryCounts: report?.packageRetryCounts ?? null,
     checks,
-    unmappedCases: report?.entries.filter(({ fullName }) => !checkboxUnitCases.some((mapping) => mapping.fullName === fullName)) ?? [],
+    unmappedCases: report?.entries.filter(({ fullName }) => !definition.unit.cases.some((mapping) => mapping.fullName === fullName)) ?? [],
   };
 }

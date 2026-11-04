@@ -26,3 +26,5 @@ owner_paths:
 | `components.agentic.tests-and-stories`                   | [Tests and stories](tests-and-stories.md)                    | Tests, stories, `wdio` story tests, or validation                               |
 | `components.contributing`                                | [Contributing](contributing.md)                              | Finding source ownership, test commands, or validation                          |
 | `components.remaining-work`                              | [Remaining work](remaining-work.md)                          | Planning focus qualification, missing components, or open contract decisions    |
+| `components.assessments`                                 | [Component assessment](assessments/README.md)                | Running assessment, configuring mappings, or understanding CI and publication   |
+| `components.assessments.checkbox`                        | [Checkbox assessment](assessments/checkbox.md)               | Reviewing Checkbox evidence, coverage, or mapping drift                         |

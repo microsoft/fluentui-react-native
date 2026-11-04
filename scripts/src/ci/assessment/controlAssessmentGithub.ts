@@ -1,9 +1,10 @@
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
 
 import { hex, object, text } from './controlAssessment.ts';
 import {
   assessmentArtifactName,
-  assessmentSummaryPath,
+  assessmentForBundle,
   assessmentWorkflowPath,
   assertFresh,
   assertTestedInputs,
@@ -18,7 +19,8 @@ import {
   parseReportReference,
 } from './controlAssessmentCi.ts';
 import type { CiBundle, CiIdentity, ReportReference } from './controlAssessmentCi.ts';
-import { assessmentSpecPath } from './controlAssessmentSpec.ts';
+import { discoverAssessments, selectAssessment } from './assessmentConfig.ts';
+import type { AssessmentDefinition } from './assessmentConfig.ts';
 
 type Run = {
   id: number;
@@ -116,14 +118,29 @@ export class AssessmentGitHub {
 
 export type Candidate =
   | { reportOnly: false; reason: string }
-  | { reportOnly: true; reference: ReportReference; summary: string; spec: string; sourceResult: 'success' | 'failure' };
+  | {
+      reportOnly: true;
+      component: string;
+      packagePath: string;
+      reference: ReportReference;
+      summary: string;
+      spec: string;
+      sourceResult: 'success' | 'failure';
+    };
+
+export type Candidates =
+  | { reportOnly: false; reason: string }
+  | { reportOnly: true; candidates: Extract<Candidate, { reportOnly: true }>[] };
 
 export async function inspectReportUpdate(
   root: string,
   env: NodeJS.ProcessEnv,
   github: AssessmentGitHub,
   now = new Date(),
+  definition = selectAssessment(root),
 ): Promise<Candidate> {
+  const assessmentSummaryPath = definition.summaryPath;
+  const assessmentSpecPath = definition.specPath;
   const event = object(JSON.parse(readFileSync(text(env.GITHUB_EVENT_PATH, 'GITHUB_EVENT_PATH'), 'utf8')), 'PR event');
   const pr = object(event.pull_request, 'PR event pull_request');
   const head = object(pr.head, 'PR head');
@@ -162,11 +179,22 @@ export async function inspectReportUpdate(
   }
   const spec = gitFile(root, hex(head.sha, 40, 'PR head revision'), assessmentSpecPath);
   if (spec === undefined) throw new Error('Report-only update is missing its SPEC assessment snapshot.');
-  return { reportOnly: true, reference, summary, spec, sourceResult: await github.sourceValidation(reference) };
+  return {
+    reportOnly: true,
+    component: definition.component,
+    packagePath: definition.packagePath,
+    reference,
+    summary,
+    spec,
+    sourceResult: await github.sourceValidation(reference),
+  };
 }
 
 export function verifyReportUpdate(root: string, candidate: Candidate, bundle: CiBundle, now = new Date()): void {
   if (!candidate.reportOnly) throw new Error('No report-only candidate was identified.');
+  const definition = assessmentForBundle(root, bundle);
+  if (candidate.component !== definition.component || candidate.packagePath !== definition.packagePath)
+    throw new Error('Downloaded evidence belongs to a different component.');
   assertFresh(bundle.generatedAt, now);
   const reference: ReportReference = { ...bundle.identity, generatedAt: bundle.generatedAt };
   if (JSON.stringify(reference) !== JSON.stringify(candidate.reference)) throw new Error('Downloaded evidence belongs to a different run.');
@@ -177,9 +205,69 @@ export function verifyReportUpdate(root: string, candidate: Candidate, bundle: C
     throw new Error('Checked-in SPEC is not the trusted rendering of its source evidence.');
 }
 
+export async function inspectReportUpdates(
+  root: string,
+  env: NodeJS.ProcessEnv,
+  github: AssessmentGitHub,
+  now = new Date(),
+): Promise<Candidates> {
+  const definitions = discoverAssessments(root);
+  if (!definitions.length) return { reportOnly: false, reason: 'No component assessment is configured: run normal source CI.' };
+  const candidates: Extract<Candidate, { reportOnly: true }>[] = [];
+  for (const definition of definitions) {
+    const candidate = await inspectReportUpdate(root, env, github, now, definition);
+    if (!candidate.reportOnly) return candidate;
+    const first = candidates[0];
+    if (
+      first &&
+      (JSON.stringify({ ...first.reference, generatedAt: undefined }) !==
+        JSON.stringify({ ...candidate.reference, generatedAt: undefined }) ||
+        first.sourceResult !== candidate.sourceResult)
+    )
+      return { reportOnly: false, reason: 'Component reports do not share the same tested workflow attempt: run normal source CI.' };
+    candidates.push(candidate);
+  }
+  return { reportOnly: true, candidates };
+}
+
+function assertCompleteComponentSet(root: string, entries: { component?: string; packagePath?: string }[]): AssessmentDefinition[] {
+  const definitions = discoverAssessments(root);
+  if (
+    !definitions.length ||
+    entries.length !== definitions.length ||
+    definitions.some(
+      (definition) =>
+        entries.filter((entry) => entry.component === definition.component && entry.packagePath === definition.packagePath).length !== 1,
+    )
+  )
+    throw new Error('Assessment evidence must include every configured component exactly once.');
+  return definitions;
+}
+
+export function verifyReportUpdates(root: string, candidate: Candidates, bundles: CiBundle[], now = new Date()): void {
+  if (!candidate.reportOnly) throw new Error('No report-only candidate was identified.');
+  assertCompleteComponentSet(root, candidate.candidates);
+  assertCompleteComponentSet(root, bundles);
+  for (const entry of candidate.candidates) {
+    const bundle = bundles.find((bundle) => bundle.component === entry.component && bundle.packagePath === entry.packagePath);
+    if (!bundle) throw new Error('Missing component evidence.');
+    verifyReportUpdate(root, entry, bundle, now);
+  }
+}
+
 export type Publication =
   | { eligible: false; reason: string }
-  | { eligible: true; repository: string; branch: string; expectedHead: string; summary: string; spec: string; sourceRunId: string };
+  | {
+      eligible: true;
+      repository: string;
+      branch: string;
+      expectedHead: string;
+      summary: string;
+      spec: string;
+      summaryPath: string;
+      specPath: string;
+      sourceRunId: string;
+    };
 
 export async function preparePublication(
   root: string,
@@ -188,6 +276,9 @@ export async function preparePublication(
   expected: { repository: string; runId: string; runAttempt: number; defaultBranch: string },
   now = new Date(),
 ): Promise<Publication> {
+  const definition = assessmentForBundle(root, bundle);
+  const assessmentSummaryPath = definition.summaryPath;
+  const assessmentSpecPath = definition.specPath;
   const identity = bundle.identity;
   if (identity.repository !== expected.repository || identity.runId !== expected.runId || identity.runAttempt !== expected.runAttempt) {
     throw new Error('Downloaded bundle is not from the triggering workflow attempt.');
@@ -232,12 +323,53 @@ export async function preparePublication(
     expectedHead: identity.headCommit,
     summary,
     spec,
+    summaryPath: assessmentSummaryPath,
+    specPath: assessmentSpecPath,
     sourceRunId: identity.runId,
   };
 }
 
 export async function publishAssessment(publication: Publication, github: AssessmentGitHub): Promise<string> {
   if (!publication.eligible) throw new Error('Assessment publication was not validated.');
+  return publishAssessments([publication], github);
+}
+
+export async function preparePublications(
+  root: string,
+  bundles: CiBundle[],
+  github: AssessmentGitHub,
+  expected: Parameters<typeof preparePublication>[3],
+  now = new Date(),
+): Promise<Publication[]> {
+  assertCompleteComponentSet(root, bundles);
+  if (bundles.some((bundle) => JSON.stringify(bundle.identity) !== JSON.stringify(bundles[0].identity)))
+    throw new Error('Component evidence does not share the same tested workflow attempt.');
+  const publications: Publication[] = [];
+  for (const bundle of bundles) publications.push(await preparePublication(root, bundle, github, expected, now));
+  return publications;
+}
+
+export async function publishAssessments(publications: Publication[], github: AssessmentGitHub): Promise<string> {
+  const first = publications[0];
+  if (!first?.eligible || publications.some((publication) => !publication.eligible))
+    throw new Error('Every component publication must be validated before an atomic update.');
+  const additions: { path: string; contents: string }[] = [];
+  for (const publication of publications) {
+    if (!publication.eligible) throw new Error('Assessment publication was not validated.');
+    if (
+      publication.repository !== first.repository ||
+      publication.branch !== first.branch ||
+      publication.expectedHead !== first.expectedHead ||
+      publication.sourceRunId !== first.sourceRunId
+    )
+      throw new Error('Component publications do not share the same source branch and tested head.');
+    additions.push(
+      { path: publication.summaryPath, contents: Buffer.from(publication.summary).toString('base64') },
+      { path: publication.specPath, contents: Buffer.from(publication.spec).toString('base64') },
+    );
+  }
+  if (new Set(additions.map((addition) => addition.path)).size !== additions.length)
+    throw new Error('Component publication paths must not overlap.');
   const response = await github.request<{
     data?: { createCommitOnBranch?: { commit?: { oid?: string } } };
     errors?: unknown[];
@@ -247,17 +379,14 @@ export async function publishAssessment(publication: Publication, github: Assess
       query: 'mutation($input: CreateCommitOnBranchInput!) { createCommitOnBranch(input: $input) { commit { oid } } }',
       variables: {
         input: {
-          branch: { repositoryNameWithOwner: publication.repository, branchName: publication.branch },
-          expectedHeadOid: publication.expectedHead,
+          branch: { repositoryNameWithOwner: first.repository, branchName: first.branch },
+          expectedHeadOid: first.expectedHead,
           message: {
-            headline: 'chore: update Checkbox Win32 assessment',
-            body: `Auto-generated from CI run ${publication.sourceRunId}. No source inputs changed.`,
+            headline: 'chore: update component Win32 assessment',
+            body: `Auto-generated from CI run ${first.sourceRunId}. No source inputs changed.`,
           },
           fileChanges: {
-            additions: [
-              { path: assessmentSummaryPath, contents: Buffer.from(publication.summary).toString('base64') },
-              { path: assessmentSpecPath, contents: Buffer.from(publication.spec).toString('base64') },
-            ],
+            additions,
           },
         },
       },
@@ -269,4 +398,10 @@ export async function publishAssessment(publication: Publication, github: Assess
 
 export function readBundle(file: string): CiBundle {
   return parseBundle(readFileSync(file, 'utf8'));
+}
+
+export function readBundles(root: string, directory: string): CiBundle[] {
+  return discoverAssessments(root).map((definition) =>
+    readBundle(path.join(directory, definition.packagePath, definition.component, 'bundle.json')),
+  );
 }

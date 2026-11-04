@@ -34,7 +34,7 @@ It uses a strictly managed `assessment-*` block in the agentic Checkbox
 in the assessment JSON/report. It never changes `status`, `spec/source.json`,
 requirements, or review approval. Only a matched clean execution may populate
 its tested commit; local unverified snapshots leave that field null. The
-repository-only `@fluentui-react-native/scripts/CONTROL-ASSESSMENT.md` guide
+[component assessment guide](assessments/README.md)
 defines generation, fingerprinting, and trusted two-file publication. These
 assessment fields do not apply to legacy CheckboxV1.
 Generated Checkbox assessment reports are source-repository snapshots, not

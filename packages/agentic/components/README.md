@@ -41,6 +41,7 @@ Each component's `src/components/<name>/SPEC.md` describes its supported props, 
 | [Tests and stories](references/tests-and-stories.md)             | Runtime, type, and Storybook coverage, including native story tests  |
 | [Contributing](references/contributing.md)                       | Source ownership, test commands, and validation                      |
 | [Remaining work](references/remaining-work.md)                   | Open focus qualification, missing components, and contract decisions |
+| [Component assessment](references/assessments/README.md)         | Advisory assessment commands, mappings, evidence and CI              |
 
 The [reference index](references/README.md) lists every reference by ID. Agents working in this package start from
 [AGENTS.md](AGENTS.md).

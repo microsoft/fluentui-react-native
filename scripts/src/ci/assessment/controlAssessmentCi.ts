@@ -4,14 +4,14 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, write
 import path from 'node:path';
 
 import {
-  assessCheckbox,
+  assessControl,
   formatAssessmentMarkdown,
   hasStorybookArtifact,
   hex,
   object,
   parseEvidenceContext,
   parseNativeReport,
-  readCheckboxContractFrom,
+  readControlContractFrom,
   readNativeEvidence,
   reportDigest,
   text,
@@ -19,22 +19,17 @@ import {
   win32StorybookTargetId,
 } from './controlAssessment.ts';
 import type { EvidenceContext } from './controlAssessment.ts';
-import {
-  assessmentPackagePath,
-  assessmentSpecPath,
-  specAssessmentFor,
-  splitSpecAssessment,
-  updateSpecAssessment,
-} from './controlAssessmentSpec.ts';
-import { parseUnitContext, readCheckboxUnitMappingFrom } from './controlAssessmentUnit.ts';
+import { specAssessmentFor, splitSpecAssessment, updateSpecAssessment } from './controlAssessmentSpec.ts';
+import { parseUnitContext, readUnitMappingFrom } from './controlAssessmentUnit.ts';
 import type { UnitContext } from './controlAssessmentUnit.ts';
+import { assessmentDirectory, discoverAssessments, selectAssessment, unitCaptureDirectory } from './assessmentConfig.ts';
+import type { AssessmentDefinition } from './assessmentConfig.ts';
+import { formatAssessmentDocument } from './assessmentMarkdown.ts';
 
-export const assessmentSummaryPath = 'packages/agentic/components/src/components/checkbox/assessment/ASSESSMENT.md';
-export const assessmentArtifactName = 'checkbox-win32-assessment';
+export const assessmentArtifactName = 'component-assessments';
 export const assessmentMaxAgeHours = 168;
 export const assessmentWorkflowPath = '.github/workflows/pr.yml';
-const marker = '<!-- furn-checkbox-assessment:';
-const artifactDirectory = ['apps', 'storybook', 'artifacts', 'win32', 'assessment-ci'];
+const marker = '<!-- furn-control-assessment:';
 const desktopRunsPath = ['apps', 'storybook', 'artifacts', 'desktop'];
 const maximumBundleBytes = 2_000_000;
 
@@ -52,6 +47,8 @@ export type CiIdentity = {
 };
 export type CiBundle = {
   schemaVersion: 1 | 2;
+  component?: string;
+  packagePath?: string;
   identity: CiIdentity;
   generatedAt: string;
   nativeReport: string | null;
@@ -110,14 +107,18 @@ export function ensureCommit(root: string, commit: string): void {
 export function inputDigest(root: string, commit: string): string {
   hex(commit, 40, 'Input revision');
   const tree = execFileSync('git', ['ls-tree', '-rz', '--full-tree', commit], { cwd: root, maxBuffer: 32_000_000 });
-  const excluded = Buffer.from(assessmentSummaryPath);
+  const definitions = discoverAssessments(root);
+  const excluded = new Set(definitions.map(({ summaryPath }) => summaryPath));
+  const specs = new Set(definitions.map(({ specPath }) => specPath));
   const hash = createHash('sha256');
   let start = 0;
   for (let end = tree.indexOf(0); end !== -1; end = tree.indexOf(0, start)) {
     const entry = tree.subarray(start, end);
     const name = entry.subarray(entry.indexOf(9) + 1);
-    if (!name.equals(excluded)) {
-      if (name.toString('utf8') === assessmentSpecPath) {
+    const file = name.toString('utf8');
+    if (!excluded.has(file)) {
+      if (specs.has(file)) {
+        const assessmentSpecPath = file;
         const bytes = execFileSync('git', ['show', `${commit}:${assessmentSpecPath}`], { cwd: root, maxBuffer: maximumBundleBytes });
         const spec = bytes.toString('utf8');
         if (!Buffer.from(spec).equals(bytes)) throw new Error('Tested SPEC must contain valid UTF-8.');
@@ -193,6 +194,12 @@ export function parseBundle(content: string): CiBundle {
   }
   return {
     schemaVersion: data.schemaVersion,
+    ...(data.component === undefined && data.packagePath === undefined
+      ? {}
+      : {
+          component: text(data.component, 'Bundle component'),
+          packagePath: text(data.packagePath, 'Bundle package'),
+        }),
     identity: parseIdentity(data.identity),
     generatedAt: timestamp(data.generatedAt, 'CI generation time'),
     nativeReport,
@@ -230,18 +237,19 @@ export function assertTestedInputs(root: string, identity: CiIdentity): void {
 }
 
 export function assessCiBundle(root: string, bundle: CiBundle) {
+  const definition = assessmentForBundle(root, bundle);
   assertTestedInputs(root, bundle.identity);
   const read = (file: string) => {
     const content = gitFile(root, bundle.identity.testedCommit, file);
     if (content === undefined) throw new Error(`Tested contract file is missing: ${file}.`);
     return content;
   };
-  const contract = readCheckboxContractFrom(read);
+  const contract = readControlContractFrom(read, definition);
   if (bundle.context && Date.parse(bundle.context.finishedAt) > Date.parse(bundle.generatedAt)) {
     throw new Error('Native execution finished after its assessment was generated.');
   }
   const expectedBuildId = `${bundle.identity.repository}/actions/runs/${bundle.identity.runId}/attempts/${bundle.identity.runAttempt}`;
-  const report = assessCheckbox({
+  const report = assessControl({
     contract,
     sourceCommit: bundle.identity.testedCommit,
     workingTreeDirty: false,
@@ -255,7 +263,7 @@ export function assessCiBundle(root: string, bundle: CiBundle) {
     executionFailure: bundle.executionFailure ?? undefined,
     unit: bundle.unit
       ? {
-          mapping: bundle.unit.report === null ? undefined : readCheckboxUnitMappingFrom(read),
+          mapping: bundle.unit.report === null ? undefined : readUnitMappingFrom(read, definition),
           report: bundle.unit.report ?? undefined,
           context: bundle.unit.context ?? undefined,
           executionFailure: bundle.unit.executionFailure ?? undefined,
@@ -274,33 +282,40 @@ export function assessCiBundle(root: string, bundle: CiBundle) {
 }
 
 export function formatCiSummary(root: string, bundle: CiBundle): string {
+  const definition = assessmentForBundle(root, bundle);
   const report = assessCiBundle(root, bundle);
   const reference: ReportReference = { ...bundle.identity, generatedAt: bundle.generatedAt };
   const encoded = Buffer.from(JSON.stringify(reference)).toString('base64');
-  return [
-    `${marker}${encoded} -->`,
-    '<!-- AUTO-GENERATED. DO NOT EDIT. Regenerate from the linked CI execution. -->',
-    '',
-    ...formatAssessmentMarkdown(report).trimEnd().split('\n'),
-    '',
-    '## CI source and freshness',
-    '',
-    `Assessed at: ${bundle.generatedAt}.`,
-    `Pull request source: \`${bundle.identity.headCommit}\`. Tested base: \`${bundle.identity.baseCommit}\`.`,
-    `All tracked input digest: \`${bundle.identity.inputDigest}\`.`,
-    `Execution: https://github.com/${bundle.identity.repository}/actions/runs/${bundle.identity.runId}/attempts/${bundle.identity.runAttempt}`,
-    '',
-    'This is a snapshot of that execution, not a claim that the latest revision has passed.',
-    'Only this generated summary and the exact validated assessment block in Checkbox SPEC front matter are excluded from the input digest. All other contract bytes, code, tests, dependencies, workflows, and configuration remain inputs.',
-    'A report-only commit is not relabeled as a tested commit. CI may reuse the original results only after checking unchanged inputs and the original required PR result.',
-    ...(bundle.executionFailure
-      ? ['', `CI execution limitation: ${bundle.executionFailure.replace(/[<>]/g, '').replace(/[\r\n]/g, ' ')}`]
-      : []),
-    '',
-  ].join('\n');
+  return formatAssessmentDocument(
+    [
+      `${marker}${encoded} -->`,
+      '<!-- AUTO-GENERATED. DO NOT EDIT. Regenerate from the linked CI execution. -->',
+      '',
+      ...formatAssessmentMarkdown(report).trimEnd().split('\n'),
+      '',
+      '## CI source and freshness',
+      '',
+      `Assessed at: ${bundle.generatedAt}.`,
+      `Pull request source: \`${bundle.identity.headCommit}\`. Tested base: \`${bundle.identity.baseCommit}\`.`,
+      `All tracked input digest: \`${bundle.identity.inputDigest}\`.`,
+      `Execution: https://github.com/${bundle.identity.repository}/actions/runs/${bundle.identity.runId}/attempts/${bundle.identity.runAttempt}`,
+      '',
+      'This is a snapshot of that execution, not a claim that the latest revision has passed.',
+      'Only configured generated summaries and exact validated SPEC assessment blocks are excluded from the input digest. All other contract bytes, mappings, code, tests, dependencies, workflows, and configuration remain inputs.',
+      'A report-only commit is not relabeled as a tested commit. CI may reuse the original results only after checking unchanged inputs and the original required PR result.',
+      ...(bundle.executionFailure
+        ? ['', `CI execution limitation: ${bundle.executionFailure.replace(/[<>]/g, '').replace(/[\r\n]/g, ' ')}`]
+        : []),
+      '',
+    ].join('\n'),
+    definition.summaryPath,
+  );
 }
 
 export function formatCiSpec(root: string, bundle: CiBundle): string {
+  const definition = assessmentForBundle(root, bundle);
+  const assessmentSpecPath = definition.specPath;
+  const assessmentPackagePath = `${definition.packagePath}/package.json`;
   const report = assessCiBundle(root, bundle);
   for (const commit of [bundle.identity.headCommit, bundle.identity.testedCommit]) {
     if (!git(root, ['ls-tree', commit, '--', assessmentSpecPath]).startsWith('100644 blob ')) {
@@ -339,13 +354,22 @@ function identityFromEnvironment(root: string, env: NodeJS.ProcessEnv): CiIdenti
 }
 
 function assertCleanInputs(root: string): void {
-  if (git(root, ['status', '--porcelain', '--untracked-files=all', '--', '.', `:(exclude)${assessmentSummaryPath}`])) {
+  if (
+    git(root, [
+      'status',
+      '--porcelain',
+      '--untracked-files=all',
+      '--',
+      '.',
+      ...discoverAssessments(root).map(({ summaryPath }) => `:(exclude)${summaryPath}`),
+    ])
+  ) {
     throw new Error('CI tracked or nonignored inputs changed outside the generated assessment summary.');
   }
 }
 
-export function beginCiExecution(root: string, env: NodeJS.ProcessEnv, now = new Date()): void {
-  const directory = path.join(root, ...artifactDirectory);
+export function beginCiExecution(root: string, env: NodeJS.ProcessEnv, now = new Date(), definition = selectAssessment(root)): void {
+  const directory = assessmentDirectory(root, definition);
   const identity = identityFromEnvironment(root, env);
   assertCleanInputs(root);
   if (
@@ -356,7 +380,7 @@ export function beginCiExecution(root: string, env: NodeJS.ProcessEnv, now = new
   ) {
     throw new Error('The hosted pilot requires explicit physicalClick disabling; do not claim interactive-runner qualification.');
   }
-  const contract = readCheckboxContractFrom((file) => readFileSync(path.join(root, file), 'utf8'));
+  const contract = readControlContractFrom((file) => readFileSync(path.join(root, file), 'utf8'), definition);
   mkdirSync(directory, { recursive: true });
   const start: ExecutionStart = {
     schemaVersion: 2,
@@ -374,7 +398,12 @@ export function beginCiUnitCollection(root: string, env: NodeJS.ProcessEnv, now 
   const identity = identityFromEnvironment(root, env);
   assertCleanInputs(root);
   mkdirSync(directory, { recursive: true });
-  if (existsSync(path.join(directory, 'unit-execution.json'))) throw new Error('Unit results already exist before CI collection.');
+  if (
+    discoverAssessments(root).some((definition) =>
+      existsSync(path.join(unitCaptureDirectory(directory, definition), 'unit-execution.json')),
+    )
+  )
+    throw new Error('Unit results already exist before CI collection.');
   writeFileSync(
     path.join(directory, 'unit-collection-start.json'),
     `${JSON.stringify(
@@ -390,8 +419,8 @@ export function beginCiUnitCollection(root: string, env: NodeJS.ProcessEnv, now 
   );
 }
 
-export function finishCiExecution(root: string, env: NodeJS.ProcessEnv, now = new Date()): CiBundle {
-  const directory = path.join(root, ...artifactDirectory);
+export function finishCiExecution(root: string, env: NodeJS.ProcessEnv, now = new Date(), definition = selectAssessment(root)): CiBundle {
+  const directory = assessmentDirectory(root, definition);
   mkdirSync(directory, { recursive: true });
   const identity = identityFromEnvironment(root, env);
   assertCleanInputs(root);
@@ -458,7 +487,17 @@ export function finishCiExecution(root: string, env: NodeJS.ProcessEnv, now = ne
         : null;
   const unit = readCiUnitCapture(directory, identity, env.UNIT_OUTCOME);
   const bundle = parseBundle(
-    JSON.stringify({ schemaVersion: 2, identity, generatedAt: now.toISOString(), nativeReport, context, executionFailure, unit }),
+    JSON.stringify({
+      schemaVersion: 2,
+      component: definition.component,
+      packagePath: definition.packagePath,
+      identity,
+      generatedAt: now.toISOString(),
+      nativeReport,
+      context,
+      executionFailure,
+      unit,
+    }),
   );
   writeCiAssessment(root, directory, bundle, env);
   return bundle;
@@ -488,28 +527,30 @@ function readCiUnitCapture(directory: string, identity: CiIdentity, unitOutcome?
       context,
       executionFailure:
         unitOutcome !== undefined && unitOutcome !== 'success'
-          ? `Checkbox unit step outcome: ${unitOutcome}.`
+          ? `Component unit step outcome: ${unitOutcome}.`
           : Number(captured.exitCode) !== 0
-            ? `Checkbox unit collector failed with exit ${captured.exitCode}.`
+            ? `Component unit collector failed with exit ${captured.exitCode}.`
             : captured.executionFailure,
     };
   } else if (unitOutcome !== undefined) {
-    unit.executionFailure = `Checkbox unit step outcome: ${unitOutcome}; no current execution capture was produced.`;
+    unit.executionFailure = `Component unit step outcome: ${unitOutcome}; no current execution capture was produced.`;
   }
   return unit;
 }
 
-export function combineCiEvidence(root: string, env: NodeJS.ProcessEnv, now = new Date()): CiBundle {
-  const directory = path.join(root, ...artifactDirectory);
+export function combineCiEvidence(root: string, env: NodeJS.ProcessEnv, now = new Date(), definition = selectAssessment(root)): CiBundle {
+  const directory = assessmentDirectory(root, definition);
   mkdirSync(directory, { recursive: true });
   const identity = identityFromEnvironment(root, env);
   assertCleanInputs(root);
   const nativePath = path.join(directory, 'bundle.json');
   const native = existsSync(nativePath) ? parseBundle(readFileSync(nativePath, 'utf8')) : undefined;
+  if (native && (native.component !== definition.component || native.packagePath !== definition.packagePath))
+    throw new Error('Native artifact belongs to a different configured component.');
   if (native && JSON.stringify(native.identity) !== JSON.stringify(identity))
     throw new Error('Native artifact belongs to different CI inputs or attempt.');
   if (native) assertFresh(native.generatedAt, now);
-  const unitDirectory = path.join(root, 'apps', 'storybook', 'artifacts', 'assessment-unit-ci');
+  const unitDirectory = unitCaptureDirectory(path.join(root, 'apps', 'storybook', 'artifacts', 'assessment-unit-ci'), definition);
   const unit = readCiUnitCapture(
     unitDirectory,
     identity,
@@ -518,6 +559,8 @@ export function combineCiEvidence(root: string, env: NodeJS.ProcessEnv, now = ne
   const bundle = parseBundle(
     JSON.stringify({
       schemaVersion: 2,
+      component: definition.component,
+      packagePath: definition.packagePath,
       identity,
       generatedAt: now.toISOString(),
       nativeReport: native?.nativeReport ?? null,
@@ -547,18 +590,28 @@ function writeCiAssessment(root: string, directory: string, bundle: CiBundle, en
 }
 
 export function isReportOnlyUpdate(root: string, reference: ReportReference, head: string, merged: string): boolean {
+  const definitions = discoverAssessments(root);
+  const allowedPaths = definitions.flatMap(({ summaryPath, specPath }) => [summaryPath, specPath]);
   ensureCommit(root, reference.headCommit);
   ensureCommit(root, head);
   ensureCommit(root, merged);
   const parents = git(root, ['rev-list', '--parents', '-n', '1', head]).split(' ');
   if (parents.length !== 2 || parents[1] !== reference.headCommit) return false;
   const changed = git(root, ['diff', '--name-only', reference.headCommit, head]).split('\n');
-  if (changed.length !== 2 || changed.some((file) => ![assessmentSummaryPath, assessmentSpecPath].includes(file))) return false;
-  for (const file of [assessmentSummaryPath, assessmentSpecPath]) {
+  if (!definitions.length || changed.length !== allowedPaths.length || changed.some((file) => !allowedPaths.includes(file))) return false;
+  for (const file of allowedPaths) {
     if (!git(root, ['ls-tree', merged, '--', file]).startsWith('100644 blob ')) return false;
   }
-  const spec = gitFile(root, head, assessmentSpecPath);
-  if (spec === undefined || splitSpecAssessment(spec).assessment === undefined) return false;
+
+  for (const definition of definitions) {
+    const spec = gitFile(root, head, definition.specPath);
+    if (spec === undefined || splitSpecAssessment(spec).assessment === undefined) return false;
+  }
   assertTestedInputs(root, reference);
   return inputDigest(root, merged) === reference.inputDigest;
+}
+
+export function assessmentForBundle(root: string, bundle: CiBundle): AssessmentDefinition {
+  const packageRoot = bundle.packagePath === undefined ? undefined : path.resolve(root, bundle.packagePath);
+  return selectAssessment(root, bundle.component, packageRoot);
 }

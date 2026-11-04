@@ -6,31 +6,30 @@ import path from 'node:path';
 import { afterEach, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import {
-  assessCheckbox,
-  checkboxNativeAssertionPath,
-  formatAssessmentMarkdown,
-  parseNativeReport,
-  readCheckboxContract,
-  reportDigest,
-} from './controlAssessment.ts';
+import { assessControl, formatAssessmentMarkdown, parseNativeReport, readControlContract, reportDigest } from './controlAssessment.ts';
 import type { AssessmentOptions } from './controlAssessment.ts';
-import { checkboxJestFixture, componentJestFixture } from './controlAssessmentFixtures.ts';
-import { specAssessmentFor } from './controlAssessmentSpec.ts';
 import {
+  assessmentDefinition,
+  assessmentMappingPath,
+  checkboxNativeAssertionPath,
+  checkboxJestFixture,
+  componentJestFixture,
   checkboxUnitCases,
   checkboxUnitTestPath,
-  parseCheckboxJest,
-  parseUnitContext,
-  readCheckboxUnitMappingFrom,
+  parseComponentJest,
+  readUnitMappingFrom,
   unitMappingFiles,
-} from './controlAssessmentUnit.ts';
-import { runCheckboxUnitTests, runJestWithUnitCapture } from './controlAssessmentUnitExecution.ts';
+} from './controlAssessmentFixtures.ts';
+import { specAssessmentFor } from './controlAssessmentSpec.ts';
+import { parseUnitContext } from './controlAssessmentUnit.ts';
+import { runUnitTests, runJestWithUnitCapture } from './controlAssessmentUnitExecution.ts';
+import { parseAssessmentDefinition, readPackageAssessments, unitCaptureDirectory } from './assessmentConfig.ts';
+import { readUnitMappingFrom as readConfiguredMapping } from './controlAssessmentUnit.ts';
 
-const root = fileURLToPath(new URL('../../../', import.meta.url));
+const root = fileURLToPath(new URL('../../../../', import.meta.url));
 const read = (file: string) => readFileSync(path.join(root, file), 'utf8');
-const contract = readCheckboxContract(root);
-const mapping = readCheckboxUnitMappingFrom(read);
+const contract = readControlContract(root);
+const mapping = readUnitMappingFrom(read);
 const sourceCommit = 'a'.repeat(40);
 const now = new Date('2026-10-21T20:00:03.000Z');
 const directories: string[] = [];
@@ -69,13 +68,41 @@ afterEach(() => {
 });
 
 describe('Checkbox JavaScript unit evidence', () => {
+  it('rejects unsafe paths, unknown requirements and unfingerprinted or type-only runtime selections', () => {
+    for (const mutate of [
+      (value: typeof assessmentDefinition) => {
+        value.componentPath = '../outside';
+      },
+      (value: typeof assessmentDefinition) => {
+        value.unit.cases[0].requirements = ['UNKNOWN-001'];
+      },
+      (value: typeof assessmentDefinition) => {
+        value.unit.testFiles = ['src/unreviewed.test.tsx'];
+      },
+      (value: typeof assessmentDefinition) => {
+        value.unit.testFiles = ['src/checkbox.types.test.ts'];
+      },
+    ]) {
+      const value = structuredClone(assessmentDefinition);
+      mutate(value);
+      assert.throws(() =>
+        parseAssessmentDefinition(
+          value,
+          assessmentDefinition.packagePath,
+          assessmentDefinition.packageName,
+          `${assessmentDefinition.componentPath}/assessment.mapping.json`,
+        ),
+      );
+    }
+  });
+
   it('maps Checkbox from a complete existing package report without counting its type suite', () => {
-    const parsed = parseCheckboxJest(JSON.stringify(componentJestFixture()));
+    const parsed = parseComponentJest(JSON.stringify(componentJestFixture()));
     assert.equal(parsed.packageSuites, 2);
     assert.equal(parsed.packageCounts.passed, 43);
     assert.equal(parsed.counts.passed, 42);
     assert.equal(parsed.entries.length, 42);
-    const report = assessCheckbox(options(componentJestFixture()));
+    const report = assessControl(options(componentJestFixture()));
     assert.equal(report.unitEvidence.outcome, 'passed');
     assert.equal(report.requirements[5].outcome, 'insufficient-evidence');
     assert.equal(specAssessmentFor(report, '0.7.0').testedCommit, null);
@@ -99,7 +126,7 @@ describe('Checkbox JavaScript unit evidence', () => {
         data.numPassedTestSuites--;
         data.numFailedTestSuites++;
       }
-      const report = assessCheckbox(options(data));
+      const report = assessControl(options(data));
       assert.equal(report.unitEvidence.caseCounts.passed, 42);
       assert.equal(report.unitEvidence.checks.length, 42);
       assert.equal(report.unitEvidence.unmappedCases.length, 0);
@@ -118,7 +145,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     data.testResults[1].status = 'failed';
     data.testResults[1].assertionResults[0].status = 'failed';
     data.testResults[1].assertionResults[0].failureMessages.push('Synthetic other-suite failure');
-    const report = assessCheckbox(options(data));
+    const report = assessControl(options(data));
     assert.equal(report.unitEvidence.packageCounts!.failed, 1);
     assert.equal(report.unitEvidence.caseCounts.failed, 0);
     assert.equal(report.unitEvidence.caseCounts.passed, 42);
@@ -130,7 +157,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     assert.equal(mapping.current, true);
     assert.equal(checkboxUnitCases.length, 42);
     assert.equal(new Set(checkboxUnitCases.map(({ fullName }) => fullName)).size, 42);
-    const report = assessCheckbox(options());
+    const report = assessControl(options());
     assert.equal(report.schemaVersion, 2);
     assert.equal(report.unitEvidence.status, 'matched');
     assert.equal(report.unitEvidence.outcome, 'passed');
@@ -156,29 +183,39 @@ describe('Checkbox JavaScript unit evidence', () => {
   it('pins assertion and mock configuration bytes, not merely familiar test names', () => {
     for (const changed of unitMappingFiles) {
       assert.equal(
-        readCheckboxUnitMappingFrom((file) => read(file) + (file === changed ? '\n// changed assertion or configuration\n' : '')).current,
+        readUnitMappingFrom((file) => read(file) + (file === changed ? '\n// changed assertion or configuration\n' : '')).current,
         false,
       );
     }
-    assert.equal(readCheckboxUnitMappingFrom((file) => read(file).replace(/\r?\n/g, '\r\n')).current, true);
+    assert.equal(readUnitMappingFrom((file) => read(file).replace(/\r?\n/g, '\r\n')).current, true);
     assert.equal(
-      readCheckboxUnitMappingFrom((file) =>
+      readUnitMappingFrom((file) =>
         file.endsWith('/package.json') ? JSON.stringify({ ...JSON.parse(read(file)), furn: { jestPlatform: 'win32' } }) : read(file),
       ).current,
       false,
     );
     const input = options();
     input.unit!.mapping = { ...mapping, current: false };
-    const report = assessCheckbox(input);
+    const report = assessControl(input);
     assert.equal(report.assessmentHealth, 'stale');
     assert.equal(report.unitEvidence.outcome, 'stale');
     assert.ok(report.unitEvidence.checks.every(({ evidenceOutcome }) => evidenceOutcome === 'stale'));
   });
 
+  it('invalidates reviewed evidence when package-owned assertion scopes change', () => {
+    const changed = (file: string) => {
+      if (file !== assessmentMappingPath) return read(file);
+      const value = JSON.parse(read(file));
+      value.unit.cases[0].scope = 'Changed claim that has not been reviewed.';
+      return JSON.stringify(value);
+    };
+    assert.equal(readUnitMappingFrom(changed).current, false);
+  });
+
   it('keeps a passing suite without execution context unverified', () => {
     const input = options();
     input.unit!.context = undefined;
-    const report = assessCheckbox(input);
+    const report = assessControl(input);
     assert.equal(report.unitEvidence.status, 'unverified');
     assert.equal(report.unitEvidence.caseCounts.passed, 42);
     assert.ok(report.requirements.every(({ outcome }) => outcome === 'insufficient-evidence'));
@@ -191,7 +228,7 @@ describe('Checkbox JavaScript unit evidence', () => {
       if (missing === 'dirty execution') input.unit!.context!.workingTreeDirty = true;
       if (missing === 'build') input.unit!.expectedBuildId = undefined;
       if (missing === 'age') input.maxAgeHours = undefined;
-      assert.equal(assessCheckbox(input).unitEvidence.status, 'unverified');
+      assert.equal(assessControl(input).unitEvidence.status, 'unverified');
     });
   }
 
@@ -202,7 +239,7 @@ describe('Checkbox JavaScript unit evidence', () => {
       if (field === 'startedAt') context.startedAt = '2026-10-21T20:00:00.900Z';
       else if (field === 'finishedAt') context.finishedAt = '2026-10-21T20:01:00.000Z';
       else context[field] = field === 'buildId' ? 'different-build' : 'f'.repeat(field === 'sourceCommit' ? 40 : 64);
-      const report = assessCheckbox(input);
+      const report = assessControl(input);
       assert.equal(report.unitEvidence.status, 'mismatched');
       assert.equal(report.assessmentHealth, 'blocked');
       assert.ok(report.requirements.every(({ outcome }) => outcome === 'insufficient-evidence'));
@@ -212,10 +249,10 @@ describe('Checkbox JavaScript unit evidence', () => {
   it('preserves stale execution and contract mapping state independently', () => {
     const input = options();
     input.now = new Date('2026-10-23T20:00:00.000Z');
-    assert.equal(assessCheckbox(input).unitEvidence.status, 'stale');
+    assert.equal(assessControl(input).unitEvidence.status, 'stale');
     input.now = now;
     input.contract = { ...contract, mappingCurrent: false };
-    const report = assessCheckbox(input);
+    const report = assessControl(input);
     assert.equal(report.assessmentHealth, 'stale');
     assert.ok(report.unitEvidence.checks.every(({ evidenceOutcome }) => evidenceOutcome === 'stale'));
   });
@@ -230,7 +267,7 @@ describe('Checkbox JavaScript unit evidence', () => {
         data.numTotalTests--;
         data.numPassedTests--;
       }
-      const report = assessCheckbox(options(data));
+      const report = assessControl(options(data));
       assert.equal(report.requirements[0].outcome, 'insufficient-evidence');
       assert.equal(report.unitEvidence.checks[0].recordedOutcome, 'not-run');
       assert.equal(report.unitEvidence.unmappedCases.length, replace ? 1 : 0);
@@ -245,7 +282,7 @@ describe('Checkbox JavaScript unit evidence', () => {
       data.numPassedTests--;
       if (status === 'todo') data.numTodoTests++;
       else data.numPendingTests++;
-      const report = assessCheckbox(options(data));
+      const report = assessControl(options(data));
       assert.equal(report.unitEvidence.caseCounts.skipped, 1);
       assert.equal(report.unitEvidence.checks[0].evidenceOutcome, 'skipped');
       assert.equal(report.requirements[0].outcome, 'insufficient-evidence');
@@ -265,7 +302,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     });
     data.numTotalTests++;
     data.numPendingTests++;
-    const report = assessCheckbox(options(data));
+    const report = assessControl(options(data));
     assert.deepEqual(report.unitEvidence.packageCounts, { passed: 43, failed: 0, skipped: 1 });
     assert.equal(report.unitEvidence.caseCounts.skipped, 0);
     assert.equal(report.unitEvidence.outcome, 'passed');
@@ -279,7 +316,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     ]) {
       const data = checkboxJestFixture();
       Object.assign(data.testResults[0].assertionResults[0], metadata);
-      const report = assessCheckbox(options(data));
+      const report = assessControl(options(data));
       const check = report.unitEvidence.checks[0];
       assert.equal(check.recordedOutcome, 'passed');
       assert.equal(check.evidenceOutcome, 'unverified');
@@ -301,7 +338,7 @@ describe('Checkbox JavaScript unit evidence', () => {
   it('retains unrelated package retries without attributing them to Checkbox cases', () => {
     const data = componentJestFixture();
     data.testResults[1].assertionResults[0].invocations = 2;
-    const report = assessCheckbox(options(data));
+    const report = assessControl(options(data));
     assert.deepEqual(report.unitEvidence.retryCounts, { retries: 0, flaky: 0 });
     assert.deepEqual(report.unitEvidence.packageRetryCounts, { retries: 1, flaky: 1 });
     assert.equal(report.unitEvidence.outcome, 'retried');
@@ -318,7 +355,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     for (const entry of data.testResults[0].assertionResults) entry.status = 'pending';
     data.numPassedTests = 0;
     data.numPendingTests = 42;
-    const report = assessCheckbox(options(data));
+    const report = assessControl(options(data));
     assert.equal(report.unitEvidence.outcome, 'skipped');
     assert.ok(report.requirements.every(({ outcome }) => outcome === 'insufficient-evidence'));
   });
@@ -336,7 +373,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     data.numFailedTestSuites = 1;
     data.numPassedTests--;
     data.numFailedTests++;
-    const report = assessCheckbox(options(data));
+    const report = assessControl(options(data));
     assert.equal(report.unitEvidence.outcome, 'failed');
     assert.equal(report.assessmentOutcome, 'failed');
     assert.equal(report.requirements[1].outcome, 'blocked-by-failure');
@@ -354,7 +391,7 @@ describe('Checkbox JavaScript unit evidence', () => {
       const input = options(data);
       if (failure === 'parent command') input.unit!.executionFailure = 'Declared workspace script failed.';
       if (failure === 'exit code') input.unit!.context!.exitCode = 1;
-      const report = assessCheckbox(input);
+      const report = assessControl(input);
       assert.equal(report.unitEvidence.outcome, 'execution-failed');
       assert.equal(report.assessmentOutcome, 'execution-failed');
       assert.ok(report.requirements.every(({ outcome }) => outcome === 'insufficient-evidence'));
@@ -392,7 +429,7 @@ describe('Checkbox JavaScript unit evidence', () => {
       finishedAt: '2026-10-21T20:00:02.000Z',
       physicalClick: true,
     };
-    const report = assessCheckbox(input);
+    const report = assessControl(input);
     assert.equal(report.unitEvidence.outcome, 'passed');
     assert.equal(report.assessmentOutcome, 'failed');
     assert.equal(report.requirements[1].outcome, 'blocked-by-failure');
@@ -411,7 +448,7 @@ describe('Checkbox JavaScript unit evidence', () => {
       numPassedTests: 0,
     });
     Object.assign(data.testResults[0], { status: 'failed', startTime: 0, endTime: 0, assertionResults: [] });
-    const report = assessCheckbox(options(data));
+    const report = assessControl(options(data));
     assert.equal(report.unitEvidence.outcome, 'execution-failed');
     assert.equal(report.unitEvidence.caseCounts.passed, 0);
     assert.ok(report.requirements.every(({ outcome }) => outcome === 'insufficient-evidence'));
@@ -470,16 +507,16 @@ describe('Checkbox JavaScript unit evidence', () => {
     for (const mutate of mutations) {
       const data = checkboxJestFixture();
       mutate(data);
-      assert.throws(() => parseCheckboxJest(JSON.stringify(data)));
+      assert.throws(() => parseComponentJest(JSON.stringify(data)));
     }
-    assert.throws(() => parseCheckboxJest('{}'));
-    assert.throws(() => parseCheckboxJest(' '.repeat(1_000_001)), /size limit/);
+    assert.throws(() => parseComponentJest('{}'));
+    assert.throws(() => parseComponentJest(' '.repeat(1_000_001)), /size limit/);
     const input = options();
-    assert.throws(() => parseUnitContext({ ...input.unit!.context, platform: 'win32' }), /platform/);
+    assert.throws(() => parseUnitContext({ ...input.unit!.context, platform: 'invalid' }), /platform/);
     assert.throws(() => parseUnitContext({ ...input.unit!.context, exitCode: -1 }), /exit code/);
     assert.throws(() => parseUnitContext({ ...input.unit!.context, finishedAt: '2026-10-20T00:00:00.000Z' }), /before/);
     input.unit!.report = undefined;
-    assert.throws(() => assessCheckbox(input), /requires a unit report/);
+    assert.throws(() => assessControl(input), /requires a unit report/);
   });
 });
 
@@ -492,7 +529,7 @@ describe('unit execution capture', () => {
     ] as const) {
       let invocations = 0;
       const code = await runJestWithUnitCapture(
-        'unused',
+        path.join(root, assessmentDefinition.packagePath),
         platform,
         args,
         async (forwarded) => {
@@ -514,7 +551,7 @@ describe('unit execution capture', () => {
       mkdirSync(path.dirname(path.join(directory, file)), { recursive: true });
       writeFileSync(path.join(directory, file), content);
     };
-    for (const file of [...unitMappingFiles, 'packages/agentic/components/package.json']) put(file, read(file));
+    for (const file of [...unitMappingFiles, assessmentMappingPath, 'packages/agentic/components/package.json']) put(file, read(file));
     put(checkboxNativeAssertionPath, read(checkboxNativeAssertionPath));
     for (const file of [
       'SPEC.md',
@@ -561,24 +598,141 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
     return { directory, output: path.join(directory, 'apps', 'storybook', 'artifacts', 'unit') };
   }
 
+  it('discovers a second control from package data and binds both to one unchanged Jest invocation', async () => {
+    const f = fixture();
+    const packageRoot = path.join(f.directory, assessmentDefinition.packagePath);
+    const put = (file: string, value: string) => {
+      mkdirSync(path.dirname(path.join(f.directory, file)), { recursive: true });
+      writeFileSync(path.join(f.directory, file), value);
+    };
+    const original = JSON.parse(read(assessmentMappingPath));
+    const second = structuredClone(original);
+    second.component = 'synthetic-toggle';
+    second.displayName = 'Synthetic Toggle';
+    second.componentPath = 'src/components/synthetic-toggle';
+    second.contract.nativeCheck = {
+      storyId: 'components-synthetic-toggle--default',
+      testName: 'changes native state',
+      requiresPhysicalClick: true,
+    };
+    second.contract.requirements = Object.fromEntries(
+      Object.entries(second.contract.requirements).map(([id, value]) => [id.replace('CBX-', 'TGL-'), value]),
+    );
+    second.unit.testFiles = ['src/components/synthetic-toggle/toggle.test.tsx'];
+    second.unit.inputs[0] = `${assessmentDefinition.packagePath}/${second.unit.testFiles[0]}`;
+    second.unit.cases = [{ fullName: 'Synthetic Toggle changes state', requirements: ['TGL-002'], scope: 'Synthetic JS state assertion.' }];
+    const secondMapping = `${assessmentDefinition.packagePath}/${second.componentPath}/assessment.mapping.json`;
+    for (const file of second.contract.files) {
+      let content = read(`${assessmentDefinition.packagePath}/${assessmentDefinition.componentPath}/${file}`).replaceAll('CBX-', 'TGL-');
+      if (file === 'spec/source.json') content = JSON.stringify({ ...JSON.parse(content), component: second.component });
+      put(`${assessmentDefinition.packagePath}/${second.componentPath}/${file}`, content);
+    }
+    put(second.unit.inputs[0], '// Synthetic test-selection fixture, not a component execution.\n');
+    put(secondMapping, JSON.stringify(second));
+    const manifestFile = `${assessmentDefinition.packagePath}/package.json`;
+    const manifest = JSON.parse(read(manifestFile));
+    manifest.furn.assessments.push(`${second.componentPath}/assessment.mapping.json`);
+    put(manifestFile, JSON.stringify(manifest));
+    let definitions = readPackageAssessments(f.directory, packageRoot);
+    const secondDefinition = definitions.find(({ component }) => component === second.component)!;
+    second.contract.reviewedDigest = readControlContract(f.directory, secondDefinition).digest;
+    second.unit.reviewedDigest = readConfiguredMapping(
+      (file) => readFileSync(path.join(f.directory, file), 'utf8'),
+      secondDefinition,
+    ).digest;
+    put(secondMapping, JSON.stringify(second));
+    definitions = readPackageAssessments(f.directory, packageRoot);
+    execFileSync('git', ['add', '.'], { cwd: f.directory });
+    execFileSync('git', ['commit', '-qm', 'Synthetic second control configuration'], { cwd: f.directory });
+    const testedCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: f.directory, encoding: 'utf8' }).trim();
+    mkdirSync(f.output, { recursive: true });
+    writeFileSync(
+      path.join(f.output, 'unit-collection-start.json'),
+      JSON.stringify({
+        schemaVersion: 1,
+        identity: { testedCommit },
+        buildId: 'synthetic-shared-run',
+        startedAt: new Date().toISOString(),
+      }),
+    );
+    const args = ['--runTestsByPath', ...definitions.flatMap(({ unit }) => unit.testFiles)];
+    let calls = 0;
+    const code = await runJestWithUnitCapture(
+      packageRoot,
+      'macos',
+      args,
+      async (forwarded) => {
+        calls++;
+        assert.deepEqual(forwarded.slice(0, args.length), args);
+        const data = checkboxJestFixture();
+        const time = Date.now();
+        data.startTime = time;
+        Object.assign(data.testResults[0], { startTime: time, endTime: time });
+        data.testResults.push({
+          ...data.testResults[0],
+          name: `${assessmentDefinition.packagePath}/${second.unit.testFiles[0]}`,
+          assertionResults: [
+            {
+              fullName: 'Synthetic Toggle changes state',
+              ancestorTitles: ['Synthetic Toggle'],
+              title: 'changes state',
+              status: 'passed',
+              failureMessages: [],
+            },
+          ],
+        });
+        data.numTotalTestSuites++;
+        data.numPassedTestSuites++;
+        data.numTotalTests++;
+        data.numPassedTests++;
+        writeFileSync(forwarded[forwarded.indexOf('--outputFile') + 1], JSON.stringify(data));
+        return 0;
+      },
+      { FURN_ASSESSMENT_UNIT_CAPTURE: f.output },
+    );
+    assert.equal(code, 0);
+    assert.equal(calls, 1);
+    for (const definition of definitions) {
+      const capture = JSON.parse(readFileSync(path.join(unitCaptureDirectory(f.output, definition), 'unit-execution.json'), 'utf8'));
+      const report = assessControl({
+        contract: readControlContract(f.directory, definition),
+        sourceCommit: testedCommit,
+        workingTreeDirty: false,
+        now: new Date(),
+        maxAgeHours: 24,
+        unit: {
+          ...capture,
+          expectedBuildId: 'synthetic-shared-run',
+          mapping: readConfiguredMapping((file) => readFileSync(path.join(f.directory, file), 'utf8'), definition),
+        },
+      });
+      assert.equal(report.component, definition.component);
+      assert.equal(report.unitEvidence.status, 'matched');
+      assert.equal(report.unitEvidence.outcome, 'passed');
+      assert.equal(report.unitEvidence.checks.length, definition.unit.cases.length);
+      assert.equal(report.evidenceSupportedStatus, null);
+    }
+    assert.equal(calls, 1);
+  });
+
   it('captures exact bytes and source before execution, with a fresh output directory for each run', () => {
     const f = fixture();
-    const first = runCheckboxUnitTests(f.directory, f.output);
-    const second = runCheckboxUnitTests(f.directory, f.output);
+    const first = runUnitTests(f.directory, f.output);
+    const second = runUnitTests(f.directory, f.output);
     assert.equal(first.exitCode, 0);
     assert.equal(first.context!.workingTreeDirty, false);
     assert.equal(first.context!.platform, 'macos');
     assert.equal(first.context!.reportSha256, reportDigest(first.report!));
     assert.notEqual(first.context!.buildId, second.context!.buildId);
     assert.equal(readdirSync(f.output).length, 2);
-    const report = assessCheckbox({
-      contract: readCheckboxContract(f.directory),
+    const report = assessControl({
+      contract: readControlContract(f.directory),
       sourceCommit: first.context!.sourceCommit,
       workingTreeDirty: false,
       now: new Date(),
       maxAgeHours: 24,
       unit: {
-        mapping: readCheckboxUnitMappingFrom((file) => readFileSync(path.join(f.directory, file), 'utf8')),
+        mapping: readUnitMappingFrom((file) => readFileSync(path.join(f.directory, file), 'utf8')),
         report: first.report!,
         context: first.context!,
         expectedBuildId: first.context!.buildId,
@@ -590,7 +744,7 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
   for (const mode of ['missing', 'failed', 'changed']) {
     it(`surfaces ${mode} execution instead of returning a successful capture`, () => {
       const f = fixture(mode);
-      const result = runCheckboxUnitTests(f.directory, f.output, 'synthetic-build');
+      const result = runUnitTests(f.directory, f.output, 'synthetic-build');
       assert.notEqual(result.exitCode, 0);
       assert.ok(result.executionFailure);
       if (mode === 'missing') assert.equal(result.report, null);

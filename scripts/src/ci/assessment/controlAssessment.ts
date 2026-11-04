@@ -3,53 +3,14 @@ import { readFileSync, realpathSync } from 'node:fs';
 import path from 'node:path';
 
 import { splitSpecAssessment } from './controlAssessmentSpec.ts';
-import { assessCheckboxUnits } from './controlAssessmentUnit.ts';
+import { assessControlUnits } from './controlAssessmentUnit.ts';
 import type { UnitInput } from './controlAssessmentUnit.ts';
-
-const componentPath = 'packages/agentic/components/src/components/checkbox';
-export const checkboxNativeAssertionPath = 'packages/agentic/components/src/common/desktopFocus.wdio.ts';
-const contractFiles = [
-  'SPEC.md',
-  'spec/source.json',
-  'spec/interaction.md',
-  'spec/accessibility.md',
-  'spec/tokens.yaml',
-  'spec/usage.md',
-  'checkbox.stories.tsx',
-];
-// November 2 review: token-state documentation changed; the mapped callback and native helper assertions are unchanged.
-const reviewedDigest = '741883094831e617dca3ce8c0f0f32a2520ed94be710773d1a70f600e41c28b4';
-const storyId = 'components-checkbox--default';
-const testName = 'toggles native checked state in both directions';
-
-const coverage: Record<string, { observed?: string; remaining: string }> = {
-  'CBX-001': {
-    remaining:
-      'Map the additional existing defaults/root-prop assertions and ingest the existing compiler/type result; no native duplicate is inherently required.',
-  },
-  'CBX-002': {
-    observed: 'Uncontrolled unchecked -> checked -> unchecked through physical clicks.',
-    remaining:
-      'Map the additional existing JS controlled/uncontrolled press and callback-count assertions, including defaultStatus precedence; native duplication is not required for state logic.',
-  },
-  'CBX-003': {
-    remaining:
-      'Map the additional existing anatomy/order, text-gating and warning assertions and native wrapping cases; rendered geometry needs layout evidence.',
-  },
-  'CBX-004': {
-    observed: 'Native checkbox role (not the complete accessibility requirement).',
-    remaining:
-      'Map the additional existing inner-node and JS semantics assertions and native naming cases; actual native action dispatch needs platform evidence when claimed.',
-  },
-  'CBX-005': {
-    remaining:
-      'Map the additional existing secondary-text/state, interaction/status and caller-style assertions; resolved styles can be established by unit tests.',
-  },
-  'CBX-006': { remaining: 'Win32 focus modality, disabled/detached targets, and dual-ring geometry; collect focus/visual evidence.' },
-};
+import { readMappingContent, selectAssessment } from './assessmentConfig.ts';
+import type { AssessmentDefinition } from './assessmentConfig.ts';
 
 type Requirement = { id: string; summary: string; declaredEvidence: string[] };
-export type CheckboxContract = {
+export type ControlContract = {
+  definition: AssessmentDefinition;
   digest: string;
   mappingCurrent: boolean;
   lifecycle: string;
@@ -94,7 +55,7 @@ export type EvidenceContext = {
 type Provenance = { status: 'missing' | 'unverified' | 'matched' | 'mismatched' | 'stale'; reasons: string[] };
 type CheckOutcome = CaseStatus | 'not-run' | 'unverified' | 'mismatched' | 'stale';
 export type AssessmentOptions = {
-  contract: CheckboxContract;
+  contract: ControlContract;
   sourceCommit: string;
   workingTreeDirty: boolean;
   now: Date;
@@ -161,27 +122,32 @@ function isWin32StorybookTarget(value: string): boolean {
   return value === 'agenticstorybook-win32' || /^win32-[0-9a-f]{16}$/.test(value);
 }
 
-export function readCheckboxContract(root: string): CheckboxContract {
-  return readCheckboxContractFrom((file) => readFileSync(path.join(root, file), 'utf8'));
+export function readControlContract(root: string, definition = selectAssessment(root)): ControlContract {
+  return readControlContractFrom((file) => readFileSync(path.join(root, file), 'utf8'), definition);
 }
 
-export function readCheckboxContractFrom(read: (file: string) => string): CheckboxContract {
+export function readControlContractFrom(read: (file: string) => string, definition: AssessmentDefinition): ControlContract {
+  const componentPath = `${definition.packagePath}/${definition.componentPath}`;
   const files = new Map(
-    contractFiles.map((file) => {
+    definition.contract.files.map((file) => {
       const content = read(`${componentPath}/${file}`).replace(/\r\n/g, '\n');
       return [file, file === 'SPEC.md' ? splitSpecAssessment(content).contract : content];
     }),
   );
   const hash = createHash('sha256');
   for (const [file, content] of files) hash.update(`${file}\0${content}\0`);
-  hash.update(`${checkboxNativeAssertionPath}\0${read(checkboxNativeAssertionPath).replace(/\r\n/g, '\n')}\0`);
+  for (const file of definition.contract.assertionFiles) {
+    const name = `${definition.packagePath}/${file}`;
+    hash.update(`${name}\0${read(name).replace(/\r\n/g, '\n')}\0`);
+  }
+  hash.update(readMappingContent(read, definition));
   const digest = hash.digest('hex');
-  const source = object(JSON.parse(files.get('spec/source.json')!), 'Checkbox source metadata');
-  if (source.component !== 'checkbox' || source.schemaVersion !== 2 || !Array.isArray(source.requirements)) {
-    throw new Error('Expected Checkbox source metadata schemaVersion 2 and a requirements array.');
+  const source = object(JSON.parse(files.get('spec/source.json')!), 'Component source metadata');
+  if (source.component !== definition.component || source.schemaVersion !== 2 || !Array.isArray(source.requirements)) {
+    throw new Error('Expected matching component source metadata schemaVersion 2 and a requirements array.');
   }
   const summaries = new Map(
-    [...files.get('SPEC.md')!.matchAll(/^- \*\*(CBX-\d{3}):\*\* (.+(?:\n {2}.+)*)/gm)].map((match) => [
+    [...files.get('SPEC.md')!.matchAll(/^- \*\*([A-Z][A-Z0-9]*-\d{3}):\*\* (.+(?:\n {2}.+)*)/gm)].map((match) => [
       match[1],
       match[2].replace(/\s+/g, ' ').trim(),
     ]),
@@ -194,11 +160,12 @@ export function readCheckboxContractFrom(read: (file: string) => string): Checkb
     return { id, summary, declaredEvidence: entry.evidence.map((file) => text(file, `${id} evidence file`)) };
   });
   if (new Set(requirements.map(({ id }) => id)).size !== requirements.length || summaries.size !== requirements.length) {
-    throw new Error('Checkbox SPEC and metadata must contain the same unique requirement IDs.');
+    throw new Error('Component SPEC and metadata must contain the same unique requirement IDs.');
   }
   return {
+    definition,
     digest,
-    mappingCurrent: digest === reviewedDigest,
+    mappingCurrent: digest === definition.contract.reviewedDigest,
     lifecycle: text(source.lifecycle, 'Contract lifecycle'),
     conformance: text(source.conformance, 'Contract conformance'),
     requirements,
@@ -454,6 +421,7 @@ export function parseEvidenceContext(value: unknown): EvidenceContext {
 
 function provenance(options: AssessmentOptions): Provenance {
   const { report, context, contract } = options;
+  const { storyId, testName, requiresPhysicalClick } = contract.definition.contract.nativeCheck;
   if (!report) return { status: 'missing', reasons: ['No native execution report supplied.'] };
   const mismatches: string[] = [];
   if (report.endpoint !== 'win32') mismatches.push(`Report endpoint is ${report.endpoint}, not win32.`);
@@ -476,10 +444,11 @@ function provenance(options: AssessmentOptions): Provenance {
       mismatches.push('Execution build ID does not match the requested build.');
     if (Date.parse(context.finishedAt) > options.now.getTime()) mismatches.push('Execution timestamp is in the future.');
     if (
+      requiresPhysicalClick &&
       !context.physicalClick &&
       report.cases.some((entry) => entry.storyId === storyId && entry.testName === testName && entry.status === 'passed')
     ) {
-      mismatches.push('Recorded Checkbox pass contradicts the execution physical-click capability.');
+      mismatches.push('Recorded native pass contradicts the execution physical-click capability.');
     }
   }
   if (mismatches.length) return { status: 'mismatched', reasons: mismatches };
@@ -500,7 +469,9 @@ function provenance(options: AssessmentOptions): Provenance {
   return { status: reasons.length ? 'unverified' : 'matched', reasons };
 }
 
-export function assessCheckbox(options: AssessmentOptions) {
+export function assessControl(options: AssessmentOptions) {
+  const definition = options.contract.definition;
+  const { storyId, testName } = definition.contract.nativeCheck;
   hex(options.sourceCommit, 40, 'Target sourceCommit');
   if (!Number.isFinite(options.now.getTime())) throw new Error('Assessment time is invalid.');
   if (options.maxAgeHours !== undefined && (!Number.isFinite(options.maxAgeHours) || options.maxAgeHours <= 0)) {
@@ -513,7 +484,8 @@ export function assessCheckbox(options: AssessmentOptions) {
     throw new Error('Expected target ID is not a supported Win32 Storybook target.');
   const evidence = provenance(options);
   const mappingCurrent = options.contract.mappingCurrent;
-  const unitEvidence = assessCheckboxUnits({
+  const unitEvidence = assessControlUnits({
+    definition,
     input: options.unit,
     sourceCommit: options.sourceCommit,
     workingTreeDirty: options.workingTreeDirty,
@@ -526,7 +498,7 @@ export function assessCheckbox(options: AssessmentOptions) {
   const observed = options.report?.cases.find((entry) => entry.storyId === storyId && entry.testName === testName);
   const eligible = evidence.status === 'matched' && mappingCurrent;
   const requirements = options.contract.requirements.map((requirement) => {
-    const mapping = coverage[requirement.id];
+    const mapping = definition.contract.requirements[requirement.id];
     const mapped = Boolean(mapping?.observed);
     let outcome: CheckOutcome = 'not-run';
     if (mapped && observed) {
@@ -560,7 +532,8 @@ export function assessCheckbox(options: AssessmentOptions) {
   });
   return {
     schemaVersion: 2,
-    component: 'checkbox',
+    component: definition.component,
+    displayName: definition.displayName,
     generation: 'agentic',
     target: {
       endpoint: 'win32',
@@ -589,11 +562,11 @@ export function assessCheckbox(options: AssessmentOptions) {
           ? 'execution-failed'
           : 'insufficient-evidence',
     contract: {
-      path: `${componentPath}/SPEC.md`,
+      path: definition.specPath,
       digest: options.contract.digest,
       lifecycle: options.contract.lifecycle,
       conformance: options.contract.conformance,
-      mappingVersion: 'checkbox-win32-v1',
+      mappingVersion: definition.contract.mappingVersion,
       mappingCurrent,
     },
     evidence: {
@@ -615,10 +588,9 @@ export function assessCheckbox(options: AssessmentOptions) {
     unitEvidence,
     requirements,
     limitations: [
-      'Only the existing named native Checkbox case is mapped; passing it covers parts of CBX-002 and CBX-004, not either full requirement.',
+      ...definition.limitations,
       'Unit evidence is mocked JavaScript execution, not native Win32 UIA, focus, visual, or physical-input qualification.',
       'Evidence requirements follow the claim: unit/type checks can suffice for logic/API/style requirements; native tests are not mandatory duplicates for every requirement.',
-      'The macOS focus case and non-Win32 platform tables are recorded but do not map to Win32 SPEC coverage.',
       'Type/build/visual/manual result adapters are not implemented. A Jest pass of a types test would not prove type checking.',
       'Maturity gates and release approvals are not defined by this pilot. No lifecycle status is inferred or changed.',
       'A multi-assertion native case failure blocks its mapped evidence; it does not identify which individual requirement assertion failed.',
@@ -633,7 +605,7 @@ export function assessCheckbox(options: AssessmentOptions) {
   };
 }
 
-export type ControlAssessment = ReturnType<typeof assessCheckbox>;
+export type ControlAssessment = ReturnType<typeof assessControl>;
 
 function markdown(value: string): string {
   return value.replace(/[\\|`*_[\]<>]/g, '\\$&').replace(/[\r\n]+/g, ' ');
@@ -641,7 +613,7 @@ function markdown(value: string): string {
 
 export function formatAssessmentMarkdown(report: ControlAssessment): string {
   return [
-    '# Checkbox / Win32 advisory assessment',
+    `# ${markdown(report.displayName)} / Win32 advisory assessment`,
     '',
     '**Readiness: not established.** Maturity policy is pending; no stage is assigned.',
     '',
@@ -661,7 +633,7 @@ export function formatAssessmentMarkdown(report: ControlAssessment): string {
     `Recorded unit retries: ${report.unitEvidence.retryCounts.retries}; retry-success cases: ${report.unitEvidence.retryCounts.flaky}. Enclosing package retries: ${report.unitEvidence.packageRetryCounts?.retries ?? 0}.`,
     ...(report.unitEvidence.packageSuites !== null
       ? [
-          `Unit input contained ${report.unitEvidence.packageSuites} package suites; only the Checkbox runtime suite is mapped. Type-suite Jest passes are not type-check evidence.`,
+          `Unit input contained ${report.unitEvidence.packageSuites} package suites; only the configured component runtime suites are mapped. Type-suite Jest passes are not type-check evidence.`,
         ]
       : []),
     '',

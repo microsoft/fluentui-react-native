@@ -1,5 +1,20 @@
-import { reportDigest } from './controlAssessment.ts';
-import { checkboxUnitCases, checkboxUnitTestPath } from './controlAssessmentUnit.ts';
+import { fileURLToPath } from 'node:url';
+import { reportDigest, readControlContractFrom as readContract } from './controlAssessment.ts';
+import { parseComponentJest as parseJest, readUnitMappingFrom as readMapping } from './controlAssessmentUnit.ts';
+import { selectAssessment } from './assessmentConfig.ts';
+
+export const assessmentDefinition = selectAssessment(fileURLToPath(new URL('../../../../', import.meta.url)), 'checkbox');
+export const assessmentSpecPath = assessmentDefinition.specPath;
+export const assessmentSummaryPath = assessmentDefinition.summaryPath;
+export const assessmentPackagePath = `${assessmentDefinition.packagePath}/package.json`;
+export const assessmentMappingPath = assessmentDefinition.mappingPath;
+export const checkboxUnitCases = assessmentDefinition.unit.cases;
+export const checkboxUnitTestPath = `${assessmentDefinition.packagePath}/${assessmentDefinition.unit.testFiles[0]}`;
+export const checkboxNativeAssertionPath = `${assessmentDefinition.packagePath}/${assessmentDefinition.contract.assertionFiles[0]}`;
+export const unitMappingFiles = assessmentDefinition.unit.inputs;
+export const readUnitMappingFrom = (read: (file: string) => string) => readMapping(read, assessmentDefinition);
+export const parseComponentJest = (content: string) => parseJest(content, assessmentDefinition);
+export const readControlContractFrom = (read: (file: string) => string) => readContract(read, assessmentDefinition);
 
 /** Synthetic Jest protocol fixture, not an actual Checkbox test execution. */
 export function checkboxJestFixture(overrides: Record<string, unknown> = {}) {
