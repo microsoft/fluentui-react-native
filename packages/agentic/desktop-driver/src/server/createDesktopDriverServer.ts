@@ -174,8 +174,11 @@ async function handleRequest(
     }
     const body =
       method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, requestBodyLimit(segments, settings.maxBodyBytes));
-    const operation = () =>
-      route(
+    const operation = () => {
+      // Session requests may wait in a queue after their initial authentication. Revalidate before allowing
+      // a queued request to run under a grant that has since been revoked.
+      authenticateRequest(request, settings.authority);
+      return route(
         {
           authority: settings.authority,
           body,
@@ -188,6 +191,7 @@ async function handleRequest(
         sessions,
         targets,
       );
+    };
     const value = sessionId ? await sessions.runCommand(sessionId, operation) : await operation();
     writeJson(response, 200, { value });
   } catch (error) {
@@ -282,6 +286,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     await sessions.delete(session.id);
     return null;
   }
+  sessions.assertActive(session);
   if (command[0] === 'timeouts') {
     return handleTimeouts(method, body, session);
   }
@@ -878,7 +883,9 @@ function ensureCurrentWindow(session: DesktopSession): void {
 }
 
 function hostCommand<T>(session: DesktopSession, description: string, operation: (signal: AbortSignal) => Promise<T>): Promise<T> {
-  return withCommandTimeout(operation, session.desktopTimeouts.nativeCommand, description);
+  return withCommandTimeout(operation, session.desktopTimeouts.nativeCommand, description, {
+    signal: session.commandAbortController.signal,
+  });
 }
 
 /** Runs a mutating host command behind the target quarantine guard and settles its failure into a disposition. */

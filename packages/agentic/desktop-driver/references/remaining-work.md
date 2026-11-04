@@ -18,9 +18,13 @@ fake host, and the macOS helper, and the driver service serves the read
 operations `observe`, `find`, and `journal` ([Agent operations](operations.md));
 the Windows helper's `observe` is open (section 7). A service given a
 `DesktopAuthority` now requires a grant on every route and scopes sessions and
-targets per grant ([security](security.md#protected-service)). Actions, waits,
-capture, controller lifecycle, and the MCP adapter are not started. MR has
-Windows/PowerShell pipe qualification; GitHub Actions rendering and
+targets per grant ([security](security.md#protected-service)). Controller
+lifecycle work has started: grant revocation drains opening and active sessions,
+cancels active host work, rejects queued requests after re-authentication, and
+waits for native settlement before teardown. Lease expiry/reconnect,
+ownership ledgers, status/stop/recovery, cross-service claims, and supervisor
+wiring remain. Actions, waits, capture, and the MCP adapter are not started. MR
+has Windows/PowerShell pipe qualification; GitHub Actions rendering and
 console-interrupt coverage remain. M0-M6 remain open unless marked below. This
 status does not claim real-application qualification.
 Planning baseline: `c84acb741`, 2026-11-02.
@@ -828,10 +832,12 @@ driver control is active rather than retaining a bypass.
 grants, and a service given one authenticates every route before reading the
 request, binds each session to its grant, scopes targets per grant, redacts
 other grants' identifiers from contention and quarantine data, and closes a
-revoked grant's sessions. Its contract is in
+revoked grant's sessions. Opening sessions are cancelled on revocation;
+session commands re-authenticate when dequeued, and active host operations
+settle before teardown runs. Its contract is in
 [the security model](security.md#protected-service). Still open: the macOS
-process/listener identity verifier, controller lifecycle, leases and idle
-expiry, exact ownership ledgers, status/stop/`recover`, quarantine persistence,
+process/listener identity verifier, controller leases and idle expiry, reconnect,
+exact ownership ledgers, status/stop/`recover`, quarantine persistence,
 cross-service claims, Storybook mutation coordination, and supervisor wiring.
 
 The shared Slice 2 descriptor contract, macOS owner-validated storage, the

@@ -35,7 +35,8 @@ A service created with a `DesktopAuthority` requires a grant on **every**
 route, including ordinary WebDriver routes, routes that do not exist, and
 `/status`. Protecting only new endpoints would leave an ordinary-route bypass,
 so authentication runs once in the request handler, after the `Origin` check
-and before the body, route, or any session is read.
+and before the body, route, or any session is read. A session request that waits
+in its command queue authenticates again immediately before dispatch.
 
 - A grant is a bearer token `fdg1.<id>.<secret>`: a 128-bit id that names the
   grant in ownership records, and a 256-bit random secret that authenticates.
@@ -61,9 +62,12 @@ and before the body, route, or any session is read.
   session ids, and the session id inside a quarantine never reach another
   grant. Choose labels that say what the holder is (`agent`, `wdio`), not who
   or where.
-- Revoking a grant closes every session it owns, including one still
-  launching, so a session nothing can address does not hold a target. A session
-  that fails to close stays tracked, and shutdown retries it.
+- Revoking a grant drains every session it owns. Opening host operations are
+  cancelled and settled before the target reservation is released; active host
+  work receives cancellation, queued requests are rejected when they reach
+  dispatch, and teardown waits behind the settled command. A draining session
+  accepts only `DELETE`. A session that fails to close stays tracked, and
+  shutdown retries it.
 - Grants and the service `incarnation` that `/status` reports as
   `service.incarnation` end with the service process. A restarted service
   never honors an old token.

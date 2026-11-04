@@ -388,6 +388,54 @@ describe('Desktop Driver protected service', () => {
       });
     });
 
+    test('aborts opening a session when its grant is revoked', async () => {
+      await withFixture(
+        async ({ agent, authority, capabilities, harness, other }) => {
+          const launch = jest.spyOn(harness.host, 'launch');
+          const opening = call(harness, 'POST', '/session', { authorization: bearer(agent), body: { capabilities } });
+          await waitUntil(() => launch.mock.calls.length === 1);
+
+          authority.revoke(agent.id);
+
+          const refused = await opening;
+          expect(refused.status).toBe(500);
+          expect(harness.host.actions.some(({ type }) => type === 'close-application')).toBe(false);
+          const reopened = await call(harness, 'POST', '/session', { authorization: bearer(other), body: { capabilities } });
+          expect(reopened.status).toBe(200);
+        },
+        { launchDelayMs: 1_000 },
+      );
+    });
+
+    test('cancels active work, rejects queued work, and drains only after native settlement on revocation', async () => {
+      await withFixture(async ({ agent, authority, capabilities, harness }) => {
+        const client = createDesktopDriverClient({ grant: agent.token, url: harness.server.url });
+        const session = await client.newSession(capabilities);
+        const element = await session.findElement('accessibility id', 'button-primary');
+        harness.host.injectFault('click', { delayMs: 50, mode: 'late-success' });
+        const runCommand = jest.spyOn(harness.server.sessions, 'runCommand');
+
+        const running = element.click();
+        await waitUntil(() => harness.host.actions.some(({ type }) => type === 'fault'));
+        const queued = element.click();
+        await waitUntil(() => runCommand.mock.calls.length === 2);
+
+        authority.revoke(agent.id);
+
+        await expect(running).rejects.toMatchObject({ code: 'unknown error' });
+        await expect(queued).rejects.toMatchObject({ code: 'unauthorized' });
+        await waitUntil(() => !hasSession(harness, session.id));
+
+        const click = harness.host.actions.findIndex(({ type }) => type === 'click');
+        const release = harness.host.actions.findIndex(({ type }) => type === 'release-actions');
+        const close = harness.host.actions.findIndex(({ type }) => type === 'close-application');
+        expect(click).toBeGreaterThanOrEqual(0);
+        expect(release).toBeGreaterThan(click);
+        expect(close).toBeGreaterThan(release);
+        expect(harness.host.actions.filter(({ type }) => type === 'click')).toHaveLength(1);
+      });
+    });
+
     test('closes a session that finishes launching after its grant was revoked', async () => {
       await withFixture(
         async ({ agent, authority, capabilities, harness, other }) => {

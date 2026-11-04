@@ -279,7 +279,8 @@ describe('Desktop Driver W3C remote end', () => {
     await expect(creating).rejects.toMatchObject({ code: 'session not created' });
     await closing;
     expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'release-actions' }));
-    expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'close-application' }));
+    expect(harness.host.actions).toContainEqual(expect.objectContaining({ type: 'dispose' }));
+    expect(harness.host.actions).not.toContainEqual(expect.objectContaining({ type: 'close-application' }));
   });
 
   test('retries host cleanup after the listener has already closed', async () => {

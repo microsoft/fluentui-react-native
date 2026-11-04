@@ -52,7 +52,10 @@ export function createOperationRuntime(
   return {
     capabilities: { boundedObservation: session.hostInfo.features.boundedObservation === true && !!observe && !!releaseElements },
     cleanup: (description, run) => withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description),
-    command: (description, run) => withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description, { signal: options.signal }),
+    command: (description, run) =>
+      withCommandTimeout(run, session.desktopTimeouts.nativeCommand, description, {
+        signal: AbortSignal.any([options.signal, session.commandAbortController.signal]),
+      }),
     contentPolicy: options.contentPolicy,
     currentWindowId: () => session.currentWindowId || undefined,
     host,

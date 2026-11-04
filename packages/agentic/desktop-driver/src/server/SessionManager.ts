@@ -59,6 +59,8 @@ export type SessionOwner = {
 
 /** Who has a target reserved, as far as a contending caller may be told. `label` is set only for a grant's session. */
 type TargetHolder = {
+  grantId?: string;
+  lifecycle: 'opening' | 'active' | 'draining';
   label?: string;
   since: string;
 };
@@ -72,6 +74,7 @@ export type SessionManagerOptions = {
 };
 
 export type DesktopSession = {
+  commandAbortController: AbortController;
   clickMode: DesktopClickMode;
   createdAt: string;
   currentWindowId: string;
@@ -83,6 +86,7 @@ export type DesktopSession = {
   inputState: WebDriverInputState;
   issuedElementIds: Set<string>;
   lease: ApplicationLease;
+  lifecycle: 'active' | 'draining' | 'closed';
   /** What the operation layer remembers about this session: its references, pending releases, and journal. */
   operations: OperationSessionState;
   /** Set on a protected service; absent when the service does not authenticate callers. */
@@ -99,7 +103,7 @@ export class SessionManager {
   private readonly sessionsByTarget = new Map<string, string>();
   private readonly reservedTargets = new Map<string, TargetHolder>();
   private readonly commandQueues = new Map<string, Promise<void>>();
-  private readonly inFlightCreates = new Set<Promise<void>>();
+  private readonly inFlightCreates = new Map<Promise<void>, { controller: AbortController; grantId?: string }>();
   private readonly revokedOwners = new Set<string>();
   private readonly quarantines = new Map<string, QuarantineRecord>();
   private inputQueue: Promise<void> = Promise.resolve();
@@ -125,22 +129,37 @@ export class SessionManager {
     if (owner && this.revokedOwners.has(owner.grantId)) {
       return Promise.reject(new WebDriverError('session not created', 'The grant for this request was revoked.'));
     }
-    const result = this.createSession(target, hostInfo, clickMode, launchMode, owner);
+    const controller = new AbortController();
+    const result = this.createSession(target, hostInfo, clickMode, launchMode, owner, controller.signal);
     const settled = result.then(
       () => undefined,
       () => undefined,
     );
-    this.inFlightCreates.add(settled);
+    this.inFlightCreates.set(settled, { controller, ...(owner ? { grantId: owner.grantId } : {}) });
     void settled.finally(() => this.inFlightCreates.delete(settled));
     return result;
   }
 
   beginClose(): void {
     this.closing = true;
+    for (const { controller } of this.inFlightCreates.values()) {
+      controller.abort();
+    }
+    for (const session of this.sessions.values()) {
+      this.beginDraining(session);
+    }
   }
 
-  async waitForCreates(): Promise<void> {
-    await Promise.all(this.inFlightCreates);
+  async waitForCreates(grantId?: string): Promise<void> {
+    while (true) {
+      const pending = Array.from(this.inFlightCreates.entries())
+        .filter(([, create]) => grantId === undefined || create.grantId === grantId)
+        .map(([promise]) => promise);
+      if (pending.length === 0) {
+        return;
+      }
+      await Promise.all(pending);
+    }
   }
 
   private async createSession(
@@ -149,6 +168,7 @@ export class SessionManager {
     clickMode: DesktopClickMode,
     launchMode: 'attach' | 'launch',
     owner?: SessionOwner,
+    signal?: AbortSignal,
   ): Promise<DesktopSession> {
     if (target.launchModes && !target.launchModes.includes(launchMode)) {
       throw new WebDriverError('session not created', `Target "${target.id}" does not allow ${launchMode} sessions.`);
@@ -161,7 +181,11 @@ export class SessionManager {
       throw this.createBusyError(target.id);
     }
 
-    this.reservedTargets.set(target.id, { ...(owner ? { label: owner.label } : {}), since: new Date().toISOString() });
+    this.reservedTargets.set(target.id, {
+      ...(owner ? { grantId: owner.grantId, label: owner.label } : {}),
+      lifecycle: 'opening',
+      since: new Date().toISOString(),
+    });
     let lease: ApplicationLease | undefined;
     let releaseReservation = true;
     let leasePromise: Promise<ApplicationLease> | undefined;
@@ -173,12 +197,14 @@ export class SessionManager {
         },
         target.launchTimeoutMs ?? 120_000,
         `${launchMode === 'attach' ? 'Attaching to' : 'Launching'} target "${target.id}"`,
+        { signal },
       );
       const activeLease = lease;
       const windows = await withCommandTimeout(
         (signal) => target.host.windows(activeLease, signal),
         10_000,
         `Reading windows for target "${target.id}"`,
+        { signal },
       );
       if (windows.length === 0) {
         throw new WebDriverError('session not created', `Target "${target.id}" did not expose any windows.`);
@@ -186,8 +212,12 @@ export class SessionManager {
       if (this.closing) {
         throw new WebDriverError('session not created', 'Desktop Driver shut down while the target was starting.');
       }
+      if (owner && this.revokedOwners.has(owner.grantId)) {
+        throw new WebDriverError('session not created', 'The grant for this request was revoked.');
+      }
       const session: DesktopSession = {
         clickMode,
+        commandAbortController: new AbortController(),
         createdAt: new Date().toISOString(),
         currentWindowId: windows[0].id,
         desktopTimeouts: {
@@ -203,6 +233,7 @@ export class SessionManager {
         inputState: createInputState(),
         issuedElementIds: new Set(),
         lease,
+        lifecycle: 'active',
         operations: new OperationSessionState(),
         ...(owner ? { owner } : {}),
         previewGeneration: 0,
@@ -231,7 +262,7 @@ export class SessionManager {
         ).catch(() => undefined);
       } else if (leasePromise) {
         releaseReservation = false;
-        void leasePromise
+        await leasePromise
           .then(async (lateLease) => {
             await this.runInputCommand(() =>
               withCommandTimeout((signal) => target.host.releaseActions(signal), 10_000, `Releasing late input for target "${target.id}"`),
@@ -262,7 +293,13 @@ export class SessionManager {
     const session = sessionId ? this.sessions.get(sessionId) : undefined;
     const holder: TargetHolder | undefined =
       this.reservedTargets.get(targetId) ??
-      (session ? { ...(session.owner ? { label: session.owner.label } : {}), since: session.createdAt } : undefined);
+      (session
+        ? {
+            ...(session.owner ? { grantId: session.owner.grantId, label: session.owner.label } : {}),
+            lifecycle: session.lifecycle === 'closed' ? 'draining' : session.lifecycle,
+            since: session.createdAt,
+          }
+        : undefined);
     return new WebDriverError('session not created', `Target "${targetId}" already has an active session.`, {
       reason: 'target-busy',
       ...(this.redactSessionIds && holder?.label ? { holder: { label: holder.label, since: holder.since } } : {}),
@@ -288,6 +325,12 @@ export class SessionManager {
       throw missingSession(id);
     }
     return session;
+  }
+
+  assertActive(session: DesktopSession): void {
+    if (session.lifecycle !== 'active') {
+      throw new WebDriverError('invalid session id', `Session "${session.id}" is not active.`);
+    }
   }
 
   /** The quarantine as a caller may see it. */
@@ -330,6 +373,7 @@ export class SessionManager {
 
   /** Rejects with a settled "rejected" failure when the session's target is quarantined. */
   assertMutable(session: DesktopSession): void {
+    this.assertActive(session);
     const record = this.quarantines.get(session.target.id);
     if (record) {
       throw createQuarantineError('unknown error', record, this.redactSessionIds);
@@ -389,7 +433,10 @@ export class SessionManager {
 
   async delete(id: string): Promise<void> {
     const session = this.get(id);
+    this.beginDraining(session);
     this.reservedTargets.set(session.target.id, {
+      ...(session.owner ? { grantId: session.owner.grantId } : {}),
+      lifecycle: 'draining',
       ...(session.owner ? { label: session.owner.label } : {}),
       since: session.createdAt,
     });
@@ -429,6 +476,7 @@ export class SessionManager {
       if (failures.length > 1) {
         throw new AggregateError(failures, `Failed to close session "${id}".`);
       }
+      session.lifecycle = 'closed';
       this.sessions.delete(id);
       this.sessionsByTarget.delete(session.target.id);
       // Closing a launched application verifies the exit of the exact incarnation the quarantine was raised against.
@@ -451,7 +499,22 @@ export class SessionManager {
    */
   async deleteOwnedBy(grantId: string): Promise<void> {
     this.revokedOwners.add(grantId);
-    await this.waitForCreates();
+    for (const [targetId, reservation] of this.reservedTargets) {
+      if (reservation.grantId === grantId) {
+        this.reservedTargets.set(targetId, { ...reservation, lifecycle: 'draining' });
+      }
+    }
+    for (const create of this.inFlightCreates.values()) {
+      if (create.grantId === grantId) {
+        create.controller.abort();
+      }
+    }
+    for (const session of this.sessions.values()) {
+      if (session.owner?.grantId === grantId) {
+        this.beginDraining(session);
+      }
+    }
+    await this.waitForCreates(grantId);
     await this.deleteWhere((session) => session.owner?.grantId === grantId, 'One or more sessions of a revoked grant failed to close.');
   }
 
@@ -475,6 +538,18 @@ export class SessionManager {
     if (failures.length > 0) {
       throw new AggregateError(failures, summary);
     }
+  }
+
+  private beginDraining(session: DesktopSession): void {
+    if (session.lifecycle === 'active') {
+      session.lifecycle = 'draining';
+      session.commandAbortController.abort();
+    }
+    this.reservedTargets.set(session.target.id, {
+      ...(session.owner ? { grantId: session.owner.grantId, label: session.owner.label } : {}),
+      lifecycle: 'draining',
+      since: session.createdAt,
+    });
   }
 
   registerElement(session: DesktopSession, snapshot: NativeElementSnapshot): ElementRecord {
