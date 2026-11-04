@@ -32,8 +32,9 @@ default is `milestones`. Structured modes keep normal stderr empty. The full
 results and logs remain under the returned artifact paths.
 
 `serve` reports the actual URL and target after readiness, then waits for an
-owned stop. Long-lived JSON mode emits only that readiness document. Clients
-create sessions explicitly.
+owned stop. Long-lived JSON mode emits only that readiness document. For a
+target served by an imported integration, `run` receives the output format and
+writes its own readiness document. Clients create sessions explicitly.
 
 `serve --agent` makes the service require a grant on every route, issues one
 grant for the target, and publishes it with the service URL and the helper's
@@ -43,10 +44,13 @@ the platform's private storage root unless `--descriptor <name>` or
 `--root <path>` say otherwise; the readiness document adds its
 `agentDescriptor` name, and the grant never appears in output or artifacts.
 Stopping `serve` removes the descriptor before revoking the grant. Ordinary
-WDIO clients cannot connect to a service started with `--agent`, and targets
-served by an imported integration, such as Storybook, reject it. A target with
-`host.ownership: "external"` accepts only attach sessions, which suits an
-application someone else started.
+WDIO clients cannot connect to a service started with `--agent`. A target
+served by an imported integration accepts `--agent` only when the integration
+declares `supportsAgent`; its `run` receives the descriptor and root and
+publishes the connection from the process that serves the driver. Storybook
+does, through its `driver --agent` command; other integrations reject it. A
+target with `host.ownership: "external"` accepts only attach sessions, which
+suits an application someone else started.
 
 For macOS RN Test App projects, run bundle before `prep`; CocoaPods embeds only
 resources present during pod installation. Changing the renderer requires

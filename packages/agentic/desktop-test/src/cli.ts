@@ -133,11 +133,14 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     } else if (test?.list) throw Object.assign(new Error('--list currently requires a standalone WDIO suite.'), { code: 'config' });
     if (!agentFlags.agent && (agentFlags.descriptor !== undefined || agentFlags.root !== undefined))
       throw Object.assign(new TypeError('--descriptor and --root require --agent.'), { code: 'config' });
-    // An integration serves through its own lifecycle, which does not protect its routes with a grant authority yet.
-    if (agentFlags.agent && config.config.integration?.run)
-      throw Object.assign(new TypeError('serve --agent does not support targets served by an imported integration.'), {
-        code: 'config',
-      });
+    // An integration serves through its own lifecycle, so it must publish the agent connection itself.
+    if (agentFlags.agent && config.config.integration?.run && config.config.integration.supportsAgent !== true)
+      throw Object.assign(
+        new TypeError(`serve --agent requires an integration that supports agents; "${config.config.integration.name}" does not.`),
+        {
+          code: 'config',
+        },
+      );
     const agent: DesktopAgentConnectionOptions | undefined = agentFlags.agent
       ? {
           ...(agentFlags.descriptor === undefined ? {} : { descriptor: agentFlags.descriptor }),
@@ -182,7 +185,17 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       } else if (config.config.integration?.run && suite?.kind !== 'wdio') {
         await owner.open(['test', 'serve', 'run'].includes(action));
         if (action === 'test' || action === 'serve') await owner.startConfiguredServices();
-        await owner.services.guard(config.config.integration.run({ config, target, supervisor: owner, action, suite: test?.suite }));
+        await owner.services.guard(
+          config.config.integration.run({
+            config,
+            target,
+            supervisor: owner,
+            action,
+            suite: test?.suite,
+            ...(agent ? { agent } : {}),
+            ...(action === 'serve' ? { reporterMode } : {}),
+          }),
+        );
       } else if (action !== 'test' && action !== 'serve') {
         await owner.open(action === 'run');
         for (const command of desktopStageCommands(target, action)) {

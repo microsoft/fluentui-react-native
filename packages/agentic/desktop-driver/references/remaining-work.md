@@ -26,10 +26,11 @@ ownership ledgers, status/stop/recovery, cross-service claims, and supervisor
 wiring remain. The `act`, `check`, `sequence`, `capture`, and `artifact`
 operations exist and are exercised against macOS Calculator and the plain
 Win32 fixture (M4). The `stories` and `story` operations list and render
-Storybook stories against the fake orchestrator. The MCP adapter exposes the
+Storybook stories. The MCP adapter exposes the
 operations as six tools, exercised over stdio through `desktop-test serve
---agent` on both OSes (M5); `desktop_story` is exercised only against the fake
-host so far. Windows fixture
+--agent` on both OSes (M5); `desktop_story` is qualified live against the macOS
+Fabric Storybook app through `storybook driver --agent`, and Windows has not
+run it yet. Windows fixture
 operation and capture checks cover 100% and 150% scale; the React Native
 renderer lanes remain. MR
 has Windows/PowerShell pipe qualification; GitHub Actions rendering and
@@ -739,7 +740,10 @@ cross-service claims, Storybook mutation coordination, and supervisor wiring
 beyond desktop-test's `serve --agent` (M5). The `stories` operation revalidates
 the story root's marker and expires preview references when another client
 rendered a story since this session's; `observe` and `find` do not revalidate yet, and
-Storybook's own MCP selection is not coordinated with the controller.
+Storybook's own MCP selection is disabled while the channel serves an agent
+connection, but the channel's `/select-story-sync` route remains
+unauthenticated whenever WebSockets are on (smoke traversal uses it), so the
+channel relay still needs grant protection.
 
 Quarantine persistence and operator recovery are implemented: an optional
 `recovery` server option writes each mutation ahead of dispatch and each
@@ -918,9 +922,21 @@ removal on the CLI stop handler, and preservation of the attached app.
 references expire, and a render that does not confirm is indeterminate without
 quarantining the target. Fake-host tests cover listing, filtering, paging,
 marker verification, out-of-band story changes, unknown stories, failed
-renders, and request-id replay. Remaining: `--agent` for integration-served
-targets and a live Storybook qualification of `desktop_story`, the CLI and
-attach work below, physical console interruption on Windows, real
+renders, and request-id replay. An imported integration serves `--agent` when
+it declares `supportsAgent`: Storybook's `driver --agent` protects the embedded
+driver, publishes the descriptor from the channel service, disables the
+channel's own MCP endpoint, and on macOS keeps the application lease current
+so agents attach without `storybook test`. On macOS Fabric, `desktop-test
+--target macos serve --agent` reported readiness with the descriptor; the
+adapter attached, listed 18 button stories of 209, rendered two with marker
+verification, replayed a request id to the same region, reset a story,
+observed, found, and captured with a matching hash, refused an unknown story,
+and closed; the driver refused unauthenticated `/status` and `newSession`, the
+channel's `/mcp` returned 404, and stopping removed the descriptor and ready
+file. The runtime bridge does not reconnect: an app left running across a
+driver restart reports `story-not-ready` until relaunched. Remaining: Windows
+and Win32 Storybook qualification of `--agent`, runtime-bridge reconnect, the
+CLI and attach work below, physical console interruption on Windows, real
 React Native application qualification, and clients other than the SDK's.
 
 **Complete when:** the same requests produce equivalent outcomes through MCP,

@@ -21,6 +21,15 @@ Triage by failure boundary:
 6. **Evidence/cleanup:** inspect the complete canonical run directory; preserve
    the primary failure if capture or cleanup also fails.
 
+For `driver --agent`, a readiness timeout means the channel service did not
+publish the connection: inspect the `storybook-channel` log. Publication needs
+the verified native helper and an owner-only storage root. A macOS lease
+warning naming more than one running application means another instance with
+the same bundle identifier is open; leases resume once only one remains. The
+app's runtime bridge does not reconnect, so after restarting the driver,
+relaunch an app left running; until then story renders report
+`story-not-ready`.
+
 For macOS CocoaPods codegen failures, rerun the documented `prep` stage once
 when ReactCodegen has a stale generated source list; diagnose the first
 actionable error before editing configuration.

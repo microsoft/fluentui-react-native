@@ -22,6 +22,7 @@ async function startDesktopStorybookServer({
   const report = await createDesktopReportSession({ artifactsRoot: path.join(projectRoot, 'artifacts', 'desktop'), kind: 'lifecycle' });
   let server;
   let driver;
+  let agentReadyPath;
   let keepAlive;
   let closing;
   const close = (error) =>
@@ -29,6 +30,13 @@ async function startDesktopStorybookServer({
       process.off('SIGINT', stop);
       process.off('SIGTERM', stop);
       const failures = error === undefined ? [] : [error];
+      try {
+        // The parent reads readiness from this record, so it must not outlive the published descriptor.
+        if (agentReadyPath) fs.rmSync(agentReadyPath, { force: true });
+      } catch (failure) {
+        report.reporter.fail(failure, 'cleanup');
+        failures.push(failure);
+      }
       try {
         await driver?.close();
       } catch (failure) {
@@ -74,12 +82,25 @@ async function startDesktopStorybookServer({
         typeof driverManifest.application.leaseNonce !== 'string')
     )
       throw new Error(`Invalid native Desktop Driver manifest at ${driverManifestPath}.`);
+    const agent = driverManifest?.agent;
+    if (
+      agent !== undefined &&
+      (typeof agent !== 'object' ||
+        agent === null ||
+        typeof agent.descriptor !== 'string' ||
+        typeof agent.readyPath !== 'string' ||
+        (agent.root !== undefined && typeof agent.root !== 'string'))
+    )
+      throw new Error(`Invalid agent connection in the native Desktop Driver manifest at ${driverManifestPath}.`);
+    if (agent && process.env.STORYBOOK_NATIVE_DRIVER_FAKE === '1')
+      throw new Error('An agent connection requires the native Desktop Driver; the fake driver cannot publish one.');
     if (driverManifest) {
       report.reporter.addSecret(driverManifest.application.leaseNonce);
       report.reporter.addSecret(driverManifest.bridgeNonce);
     }
-    // The upstream HTTP server is unref'd and closes on beforeExit; own only our clearable keepalive.
-    server = createChannelServer({ host, port, configPath, websockets: true, experimental_mcp: true, keepNodeProcessAlive: false });
+    // The upstream HTTP server is unref'd and closes on beforeExit; own only our clearable keepalive. Its MCP endpoint
+    // selects stories without a grant, so an agent-served driver disables it and agents select through the driver.
+    server = createChannelServer({ host, port, configPath, websockets: true, experimental_mcp: !agent, keepNodeProcessAlive: false });
     if (!server) {
       throw new Error('Desktop Driver Storybook orchestration requires WebSockets.');
     }
@@ -122,6 +143,12 @@ async function startDesktopStorybookServer({
           onStderr: (text) =>
             report.reporter.emit({ kind: 'output', payload: { stream: 'stderr', text } }, 'native-helper', { service: 'native-helper' }),
           onFailure: fatal,
+          ...(agent
+            ? {
+                agent: { descriptor: agent.descriptor, ...(agent.root === undefined ? {} : { root: agent.root }) },
+                addSecret: (secret) => report.reporter.addSecret(secret),
+              }
+            : {}),
           target: {
             ...target,
             storyOrchestrator: createChannelOrchestrator({
@@ -132,6 +159,10 @@ async function startDesktopStorybookServer({
             }),
           },
         });
+      }
+      if (agent) {
+        agentReadyPath = agent.readyPath;
+        writeAgentReady(agentReadyPath, agent.descriptor);
       }
     }
     report.reporter.emit(
@@ -154,6 +185,17 @@ function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, S
     driverManifest,
     serverUrl,
   });
+}
+
+function writeAgentReady(readyPath, descriptor) {
+  const temporaryPath = `${readyPath}.${process.pid}.tmp`;
+  fs.mkdirSync(path.dirname(readyPath), { mode: 0o700, recursive: true });
+  try {
+    fs.writeFileSync(temporaryPath, `${JSON.stringify({ descriptor, processId: process.pid, schemaVersion: 1 })}\n`, { mode: 0o600 });
+    fs.renameSync(temporaryPath, readyPath);
+  } finally {
+    fs.rmSync(temporaryPath, { force: true });
+  }
 }
 
 function loopbackUrl(host, port) {

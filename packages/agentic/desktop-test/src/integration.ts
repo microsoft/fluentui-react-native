@@ -1,4 +1,6 @@
 import type { DesktopHost, DesktopTarget } from '@fluentui-react-native/desktop-driver';
+import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
+import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import type { DesktopStage, ResolvedDesktopConfig, ResolvedDesktopTarget } from './config.js';
 import type { DesktopSupervisor } from './supervisor.js';
 import type { DesktopReportWriter } from './reporting/collector.js';
@@ -7,6 +9,11 @@ import type { DesktopReportWriter } from './reporting/collector.js';
 export type DesktopIntegration = {
   name: string;
   validate(): void;
+  /**
+   * Whether `run` serves `serve --agent`: it protects its driver with a grant authority, publishes one agent connection
+   * from the process that listens, and reports the descriptor in its readiness record. `serve --agent` requires it.
+   */
+  supportsAgent?: boolean;
   createTarget?(context: {
     target: ResolvedDesktopTarget;
     host: DesktopHost;
@@ -18,5 +25,12 @@ export type DesktopIntegration = {
     supervisor: DesktopSupervisor;
     action: DesktopStage | 'test' | 'serve';
     suite?: string;
+    /** Set only for `serve --agent`, and only for an integration that `supportsAgent`. */
+    agent?: Pick<DesktopAgentConnectionOptions, 'descriptor' | 'root'>;
+    /**
+     * Set only for `serve`. `serve` writes no final output, so in `json` or `ndjson` mode the integration writes its own
+     * readiness record to stdout in this format once its services are ready.
+     */
+    reporterMode?: ResolvedDesktopReporterMode;
   }): Promise<void>;
 };

@@ -20,15 +20,16 @@ Global output options are `--reporter auto|plain|github-actions|json|ndjson`,
 only). The mode precedence is CLI flag, `DESKTOP_REPORTER`, config, then
 `auto`. Global options may appear before or after a subcommand.
 
-| Command                                       | Purpose                                           |
-| --------------------------------------------- | ------------------------------------------------- |
-| `manifest --<platform>`                       | Validate static story-plan extraction             |
-| `driver --<platform>`                         | Own Metro, Storybook channel, and driver services |
-| `instance --<platform>`                       | Inspect the active instance's ports and target    |
-| `test --<platform> --list`                    | Discover authored executable story-test IDs       |
-| `test --<platform> --test <glob>`             | Run matching isolated story callbacks             |
-| `smoke --<platform> --mode stories`           | Build/bundle/launch, traverse stories, clean up   |
-| `smoke --<platform> --mode stories-and-tests` | Traverse stories and execute callbacks            |
+| Command                                       | Purpose                                             |
+| --------------------------------------------- | --------------------------------------------------- |
+| `manifest --<platform>`                       | Validate static story-plan extraction               |
+| `driver --<platform>`                         | Own Metro, Storybook channel, and driver services   |
+| `driver --<platform> --agent`                 | Also require grants and publish an agent connection |
+| `instance --<platform>`                       | Inspect the active instance's ports and target      |
+| `test --<platform> --list`                    | Discover authored executable story-test IDs         |
+| `test --<platform> --test <glob>`             | Run matching isolated story callbacks               |
+| `smoke --<platform> --mode stories`           | Build/bundle/launch, traverse stories, clean up     |
+| `smoke --<platform> --mode stories-and-tests` | Traverse stories and execute callbacks              |
 
 macOS defaults to Fabric. `--paper` selects Paper for a macOS command; rerun
 `prep` after switching because the project and Pods are shared. The endpoint
@@ -65,7 +66,21 @@ services so runs join one owned lifecycle.
 
 JSON mode emits one compact command result, or one readiness record for the
 long-running `driver` and `server` commands. Their readiness records are
-written only after Metro/Storybook services pass readiness checks. NDJSON
+written only after Metro/Storybook services pass readiness checks.
+
+`driver --agent` protects the embedded Desktop Driver with a grant authority.
+Once the driver listens, the channel service publishes one private connection
+descriptor for the Desktop Driver MCP adapter: `agent-connection.json` under
+the platform's private storage root unless `--descriptor <name>` or
+`--root <path>` say otherwise. Readiness waits for that publication and adds
+`agentDescriptor`; stopping removes the descriptor before revoking the grant.
+`desktop-test --target <name> serve --agent` routes here for a Storybook
+target. Agent mode disables the channel's unauthenticated MCP endpoint, so
+agents select stories through the adapter's `desktop_story`. On macOS the
+command keeps the application lease naming the one running app instance, so
+agents attach without `storybook test`. `storybook test` refuses an
+agent-served instance because WDIO holds no grant, and the fake driver
+(`STORYBOOK_NATIVE_DRIVER_FAKE=1`) refuses agent mode. NDJSON
 streams bounded report events and finishes one-shot runs with a summary.
 Structured modes keep normal stderr empty.
 

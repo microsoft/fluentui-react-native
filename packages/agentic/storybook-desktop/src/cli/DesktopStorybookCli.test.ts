@@ -13,7 +13,13 @@ import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '..
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
-import { DesktopStorybookCli, parseMacOSRunningApplications, writeMacOSApplicationLeaseFile } from './DesktopStorybookCli';
+import {
+  DesktopStorybookCli,
+  maintainMacOSApplicationLease,
+  parseMacOSRunningApplications,
+  writeMacOSApplicationLeaseFile,
+  type MacOSRunningApplication,
+} from './DesktopStorybookCli';
 
 const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
 const nativeDriverArtifact: NativeDriverArtifact = {
@@ -97,6 +103,59 @@ describe('macOS application leases', () => {
       if (process.platform !== 'win32') {
         expect(fs.statSync(leasePath).mode & 0o777).toBe(0o600);
       }
+    } finally {
+      fs.rmSync(root, { force: true, recursive: true });
+    }
+  });
+
+  test('keeps the lease naming the one running application', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-macos-lease-'));
+    const leasePath = path.join(root, 'application.json');
+    const manifestPath = path.join(root, 'driver-manifest.json');
+    fs.writeFileSync(
+      manifestPath,
+      JSON.stringify({ application: { bundleIdentifier: 'com.example.storybook', leaseNonce: 'nonce', leasePath } }),
+    );
+    const running = (processId: number): MacOSRunningApplication => ({
+      executablePath: '/Applications/Storybook.app/Contents/MacOS/Storybook',
+      processId,
+      processStartedAt: processId,
+    });
+    const answers: (() => MacOSRunningApplication[])[] = [
+      () => [],
+      () => [running(42)],
+      () => {
+        fs.rmSync(leasePath);
+        return [running(42)];
+      },
+      () => {
+        throw new Error('query failed');
+      },
+      () => {
+        throw new Error('query failed');
+      },
+      () => [running(42), running(43)],
+      () => [running(43)],
+    ];
+    const leased: (number | undefined)[] = [];
+    const warnings: string[] = [];
+    const controller = new AbortController();
+    try {
+      await expect(
+        maintainMacOSApplicationLease(manifestPath, controller.signal, {
+          intervalMs: 1,
+          onWarning: (message) => warnings.push(message),
+          queryApplications: async (bundleIdentifier) => {
+            expect(bundleIdentifier).toBe('com.example.storybook');
+            leased.push(fs.existsSync(leasePath) ? JSON.parse(fs.readFileSync(leasePath, 'utf8')).processId : undefined);
+            const answer = answers.shift();
+            if (!answer) controller.abort(new Error('maintenance stopped'));
+            return answer?.() ?? [];
+          },
+        }),
+      ).rejects.toThrow('maintenance stopped');
+      expect(leased).toEqual([undefined, undefined, 42, 42, 42, 42, 42, 43]);
+      expect(warnings).toEqual(['query failed', 'More than one running application has bundle identifier "com.example.storybook".']);
     } finally {
       fs.rmSync(root, { force: true, recursive: true });
     }
@@ -405,6 +464,67 @@ describe('DesktopStorybookCli', () => {
       expect(repeatedPaperManifest.bridgeNonce).toBe(paperManifest.bridgeNonce);
     } finally {
       fs.rmSync(manifestPath, { force: true });
+    }
+  });
+
+  test('reports readiness only after the agent connection is published, then keeps the macOS lease', async () => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, 'driver-manifest.macos.json');
+    const readyPath = path.join(generated, 'agent-ready.macos.json');
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const written: string[] = [];
+    const maintained: string[] = [];
+    const fetch: typeof globalThis.fetch = async (input) => {
+      if (String(input).endsWith('/index.json')) {
+        setTimeout(() => fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'custom.json', processId: 1, schemaVersion: 1 })), 300);
+      }
+      return new Response('{}');
+    };
+    const createStoryManifest = async () => ({
+      ...(await createEmptyStoryManifest(undefined, 'macos')),
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { digest: 'callback', exportName: 'Default' },
+        },
+      ],
+    });
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      createStoryManifest,
+      fetch,
+      isPortAvailable: async () => true,
+      maintainMacOSApplicationLease: async (leaseManifestPath, signal) => {
+        expect(written).toEqual([expect.stringMatching(/^published: Storybook instance .*, agent=custom\.json\n$/)]);
+        maintained.push(leaseManifestPath);
+        services.requestStop();
+        signal.throwIfAborted();
+        throw new Error('unreachable');
+      },
+      output: { write: (chunk: string) => written.push(`${fs.existsSync(readyPath) ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
+      runner,
+      services,
+    });
+    try {
+      await expect(cli.driver('macos', { agent: { descriptor: 'custom.json', root: 'relative-root' } })).rejects.toThrow(
+        'Owned desktop service stop requested.',
+      );
+      expect(JSON.parse(fs.readFileSync(manifestPath, 'utf8')).agent).toEqual({
+        descriptor: 'custom.json',
+        readyPath,
+        root: path.resolve('relative-root'),
+      });
+      expect(maintained).toEqual([manifestPath]);
+      await expect(new DesktopStorybookCli(makeConfig(), { createStoryManifest, runner }).test('macos')).rejects.toThrow('serves an agent');
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
     }
   });
 
@@ -1054,6 +1174,27 @@ describe('createDesktopStorybookCommand', () => {
         STORYBOOK_WS_PORT: '7101',
       },
     });
+  });
+
+  test('forwards agent options to the driver and requires --agent for its options', async () => {
+    const driver = jest.spyOn(DesktopStorybookCli.prototype, 'driver').mockResolvedValue(undefined);
+    try {
+      const program = () => createDesktopStorybookCommand({ config: makeConfig(), runner: new RecordingRunner() });
+      await program().parseAsync(['node', 'test', 'driver', '--win32', '--agent', '--descriptor', 'custom.json', '--root', 'state']);
+      await program().parseAsync(['node', 'test', 'driver', '--win32', '--agent']);
+      await program().parseAsync(['node', 'test', 'driver', '--win32']);
+      expect(driver.mock.calls.map(([, options]) => options)).toEqual([
+        { host: undefined, port: undefined, agent: { descriptor: 'custom.json', root: 'state' } },
+        { host: undefined, port: undefined, agent: {} },
+        { host: undefined, port: undefined },
+      ]);
+      await expect(program().parseAsync(['node', 'test', 'driver', '--win32', '--descriptor', 'custom.json'])).rejects.toThrow(
+        '--descriptor and --root require --agent.',
+      );
+      expect(driver).toHaveBeenCalledTimes(3);
+    } finally {
+      driver.mockRestore();
+    }
   });
 
   test('honors an explicit platform flag', async () => {

@@ -826,6 +826,174 @@ async function main() {
       await assert.rejects(failing.start(), /original publication failure/);
       assert.equal(failing.agentDescriptor, undefined);
       assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')), 'a failed publication must release the claim');
+
+      // The Storybook channel child's composition: one service, protected and published from the process that listens.
+      const { startDesktopService } = await import(lib('supervisor.js'));
+      const { publishDesktopAgent } = await import(lib('agentConnection.js'));
+      const { DesktopAuthority } = await import('@fluentui-react-native/desktop-driver/authority');
+      const serviceTarget = { endpoint: 'win32', id: 'agent-service', platformName: 'windows', renderer: 'paper', launchModes: ['launch'] };
+      const serviceCapabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': 'agent-service' } };
+      const trackedHost = (steps) => {
+        const host = new FakeDesktopHost({ endpoint: 'win32' });
+        const dispose = host.dispose.bind(host);
+        host.dispose = async (...args) => {
+          steps.push('dispose');
+          return dispose(...args);
+        };
+        return host;
+      };
+      const steps = [];
+      const secrets = [];
+      const servicePublished = [];
+      const service = await startDesktopService(trackedHost(steps), {
+        target: serviceTarget,
+        addSecret: (secret) => secrets.push(secret),
+        agent: {
+          descriptor: 'service.json',
+          publish: async (connection) => {
+            servicePublished.push(connection);
+            steps.push('publish');
+            return async () => void steps.push('withdraw');
+          },
+        },
+      });
+      try {
+        const [connection] = servicePublished;
+        assert.equal(connection.descriptor, 'service.json');
+        assert.deepEqual(connection.target, { endpoint: 'win32', id: 'agent-service' });
+        assert.equal(connection.url, service.url);
+        assert.deepEqual(secrets, [connection.grant]);
+        await assert.rejects(createDesktopDriverClient({ url: service.url }).newSession(serviceCapabilities));
+        const session = await createDesktopDriverClient({ grant: connection.grant, url: service.url }).newSession(serviceCapabilities);
+        await session.delete();
+      } finally {
+        await service.close();
+      }
+      await service.close();
+      assert.deepEqual(steps, ['publish', 'withdraw', 'dispose'], 'withdraw the descriptor before closing the listener');
+
+      const failedSteps = [];
+      await assert.rejects(
+        startDesktopService(trackedHost(failedSteps), {
+          target: serviceTarget,
+          agent: {
+            publish: async () => {
+              throw new Error('original service publication failure');
+            },
+          },
+        }),
+        /original service publication failure/,
+      );
+      assert.deepEqual(failedSteps, ['dispose'], 'a failed publication closes the service');
+
+      // A publication that completes after its owner's guard settles is withdrawn, and its grant is revoked.
+      const authority = new DesktopAuthority();
+      const issued = [];
+      const issue = authority.issue.bind(authority);
+      authority.issue = (request) => {
+        const grant = issue(request);
+        issued.push(grant);
+        return grant;
+      };
+      let release;
+      let lateRemoved = 0;
+      await assert.rejects(
+        publishDesktopAgent({
+          authority,
+          connection: { publish: () => new Promise((resolve) => (release = resolve)) },
+          target: { endpoint: 'win32', id: 'late' },
+          url: service.url,
+          guard: () => Promise.reject(new Error('original guard failure')),
+        }),
+        /original guard failure/,
+      );
+      assert.equal(authority.authenticate(`Bearer ${issued[0].token}`), undefined, 'an abandoned publication revokes its grant');
+      release(async () => void lateRemoved++);
+      await new Promise((resolve) => setImmediate(resolve));
+      assert.equal(lateRemoved, 1, 'a late publication is withdrawn');
+    } else if (mode === 'agent-cli') {
+      const { createDesktopReportSession } = await import(lib('reporting/session.js'));
+      // serve --agent passes the agent options to an integration that serves agents, and rejects one that does not.
+      const configPath = path.join(root, 'desktop.config.mjs');
+      fs.writeFileSync(
+        configPath,
+        [
+          "import fs from 'node:fs';",
+          'export default {',
+          '  schemaVersion: 1,',
+          "  targets: { win32: { host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } } } },",
+          '  integration: {',
+          "    name: 'fixture',",
+          "    supportsAgent: process.env.FIXTURE_SUPPORTS_AGENT === '1',",
+          '    validate() {},',
+          '    async run({ action, agent, reporterMode }) {',
+          '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          '    },',
+          '  },',
+          '};',
+          '',
+        ].join('\n'),
+      );
+      const invoke = async (supportsAgent, args) => {
+        const session = await createDesktopReportSession({
+          artifactsRoot: root,
+          errorOutput: err,
+          kind: 'lifecycle',
+          output: out,
+          reporterMode: 'ndjson',
+          summary: false,
+        });
+        const runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
+        const marker = path.join(root, `marker-${supportsAgent}-${args.join('-').replace(/[^a-z-]/g, '')}.json`);
+        let failure;
+        try {
+          await runner.run({
+            command: process.execPath,
+            args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', ...args],
+            cwd: root,
+            env: { FIXTURE_MARKER: marker, FIXTURE_SUPPORTS_AGENT: supportsAgent ? '1' : '0' },
+          });
+        } catch (error) {
+          failure = error;
+        } finally {
+          await runner.close();
+          await session.close(failure);
+        }
+        return { failure, marker: fs.existsSync(marker) ? JSON.parse(fs.readFileSync(marker, 'utf8')) : undefined };
+      };
+      const commandLogs = () =>
+        fs
+          .readdirSync(root, { recursive: true, withFileTypes: true })
+          .filter((entry) => entry.isFile() && entry.name.endsWith('.log'))
+          .map((entry) => fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8'));
+      const privateRoot = path.join(root, 'private');
+      // serve writes no final output, so only serve receives the output format for the integration's readiness record.
+      const served = await invoke(true, [
+        '--reporter',
+        'ndjson',
+        'serve',
+        '--agent',
+        '--descriptor',
+        'storybook.json',
+        '--root',
+        privateRoot,
+      ]);
+      assert.equal(served.failure, undefined, commandLogs().join('\n'));
+      assert.deepEqual(served.marker, {
+        action: 'serve',
+        agent: { descriptor: 'storybook.json', root: privateRoot },
+        reporterMode: 'ndjson',
+      });
+      assert.deepEqual((await invoke(true, ['serve'])).marker, { action: 'serve', agent: null, reporterMode: 'ndjson' });
+      assert.deepEqual((await invoke(true, ['--reporter', 'ndjson', 'prep'])).marker, { action: 'prep', agent: null });
+      const refused = await invoke(false, ['serve', '--agent']);
+      assert(refused.failure, 'an integration that does not serve agents must refuse --agent');
+      assert.equal(refused.marker, undefined);
+      const logs = commandLogs();
+      assert(
+        logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
+        logs.join('\n'),
+      );
     } else {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
       const { runDesktopWdioSuite } = await import(lib('wdio/run.js'));

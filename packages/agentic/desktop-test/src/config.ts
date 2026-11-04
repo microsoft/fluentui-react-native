@@ -210,6 +210,8 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
     const integration = object(config.integration, 'integration');
     text(integration.name, 'integration.name');
     if (typeof integration.validate !== 'function') throw new TypeError('An integration must expose validate().');
+    if (integration.supportsAgent !== undefined && typeof integration.supportsAgent !== 'boolean')
+      throw new TypeError('integration.supportsAgent must be a boolean.');
     integration.validate();
   }
 }

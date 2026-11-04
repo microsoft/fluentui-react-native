@@ -32,7 +32,11 @@ The descriptor format, storage, and verifier contracts belong to
 four steps and publishes `agent-connection.json` at the platform default;
 `--descriptor` and `--root` change where. A target with `ownership: "external"`
 accepts only attach sessions. See `@fluentui-react-native/desktop-test` (its
-commands reference).
+commands reference). For a Storybook app, `storybook-desktop driver --agent`
+(or `desktop-test serve --agent` on a Storybook target) publishes the same
+descriptor from the channel service that embeds the driver, so `desktop_story`
+can list and render its stories. See `@fluentui-react-native/storybook-desktop`
+(its commands reference).
 
 A program that embeds the service instead does the same steps itself. A macOS
 supervisor looks like this:

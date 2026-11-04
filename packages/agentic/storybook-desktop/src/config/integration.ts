@@ -10,6 +10,7 @@ export type StorybookDesktopIntegration = DesktopIntegration & {
 export function storybook(options: DesktopStorybookConfigOptions = {}): StorybookDesktopIntegration {
   return {
     name: 'storybook',
+    supportsAgent: true,
     validate() {
       const allowed = [
         'projectRoot',
@@ -31,15 +32,16 @@ export function storybook(options: DesktopStorybookConfigOptions = {}): Storyboo
     configure(projectRoot, desktop) {
       return new DesktopStorybookConfig({ ...options, projectRoot }, desktop);
     },
-    async run({ config, target, supervisor, action }) {
+    async run({ config, target, supervisor, action, agent, reporterMode }) {
       const { DesktopStorybookCli } = await import('@fluentui-react-native/storybook-desktop/cli');
       const api = new DesktopStorybookCli(this.configure(config.projectRoot, config), {
         paper: target.endpoint === 'macos' && target.host.renderer === 'paper',
         reporter: supervisor.reporter,
         runner: supervisor.runner,
         services: supervisor.services,
+        ...(action === 'serve' && reporterMode ? { reporterMode } : {}),
       });
-      if (action === 'serve') await api.driver(target.endpoint);
+      if (action === 'serve') await api.driver(target.endpoint, agent ? { agent } : {});
       else if (action === 'test') await api.smoke(target.endpoint, { mode: 'stories-and-tests' });
       else await api[action](target.endpoint);
     },

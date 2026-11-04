@@ -36,6 +36,7 @@ type PlatformFlags = {
 };
 
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
+type DriverFlags = ServerFlags & { agent?: boolean; descriptor?: string; root?: string };
 type ManifestFlags = PlatformFlags & { out?: string };
 type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode };
 type BuildDriverFlags = PlatformFlags & DesktopStorybookBuildDriverOptions;
@@ -172,11 +173,28 @@ function addDriverCommand(program: Command, getApi: GetApi): void {
     .command('driver')
     .description('Start the Storybook channel, MCP, and embedded Desktop Driver servers.')
     .option('--host <host>', 'server host; defaults to STORYBOOK_WS_HOST or 127.0.0.1')
-    .option('--port <port>', 'Storybook channel port; defaults to the enlistment-specific port', parsePort);
+    .option('--port <port>', 'Storybook channel port; defaults to the enlistment-specific port', parsePort)
+    .option('--agent', 'require a grant on every driver route and publish one agent connection descriptor')
+    .option('--descriptor <name>', 'agent connection descriptor record name (default agent-connection.json)')
+    .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location');
   addPlatformOptions(command);
-  command.action(async (flags: ServerFlags) => {
+  command.action(async (flags: DriverFlags) => {
+    if (!flags.agent && (flags.descriptor !== undefined || flags.root !== undefined)) {
+      throw new TypeError('--descriptor and --root require --agent.');
+    }
     const api = await getApi(flags);
-    await api.driver(resolvePlatform(flags, api), { host: flags.host, port: flags.port });
+    await api.driver(resolvePlatform(flags, api), {
+      host: flags.host,
+      port: flags.port,
+      ...(flags.agent
+        ? {
+            agent: {
+              ...(flags.descriptor === undefined ? {} : { descriptor: flags.descriptor }),
+              ...(flags.root === undefined ? {} : { root: flags.root }),
+            },
+          }
+        : {}),
+    });
   });
 }
 
