@@ -1,0 +1,409 @@
+schema_version: 1
+analysis_date: 2026-11-01
+authority: Research evidence and provisional candidates, NOT production mappings.
+equality: Equal literal values are observations, not semantic aliases. Missing states are not synthesized.
+summary:
+  office_contexts: 48
+  office_fields_per_context: 181
+  office_effective_values: 8688
+  office_color_groups: 58
+  office_groups_with_hover_or_pressed: 34
+  office_deprecated_fields: 14
+  office_declared_aliases: 3
+  office_public_type_fields: 137
+  office_fields_absent_from_public_type: 44
+  office_nondeprecated_fields_absent_from_public_type: 36
+  office_no_direct_equivalent_groups:
+    [
+      BkgBadge,
+      BkgStripe,
+      BkgSubtle,
+      SliderBuffer,
+      StrokeBadge,
+      StrokeOverSubtle,
+      StrokeSelected,
+      StrokeStripe,
+      StrokeStripeOuter,
+      TextEmphasis2,
+      TextStripe,
+    ]
+  office_equal_value_classes_across_all_contexts: 20
+  fluent_color_groups: 87
+  fluent_appearances: 4
+  fluent_authored_state_values: 600
+  fluent_no_direct_equivalent_groups:
+    [
+      brandBackgroundStatic,
+      dangerForegroundInverted,
+      neutralForegroundInvertedLink,
+      outofofficeBackground1,
+      outofofficeBackground2,
+      outofofficeBackground3,
+      outofofficeBorder1,
+      outofofficeBorder2,
+      outofofficeBorderActive,
+      outofofficeForeground1,
+      outofofficeForeground2,
+      outofofficeForeground3,
+      severeBackground1,
+      severeBackground2,
+      severeBackground3,
+      severeBorder1,
+      severeBorder2,
+      severeBorderActive,
+      severeForeground1,
+      severeForeground2,
+      severeForeground3,
+      successForegroundInverted,
+      warningForegroundInverted,
+    ]
+  flex_color_groups: 119
+  flex_contexts: 4
+  flex_absent_interaction_state_values: 480
+  flex_unrepresented_color_variables: []
+source_manifest:
+  - source: references/research/office_colors.json
+    sha256: 06597a1a8a2dbd839ea4d4cdbdb426c07913b51aa9a1bdc4d7c25f6996c206ef
+  - source: references/research/office_app_overrides.json
+    sha256: 08efd751b7172af8c36d00d5de7c77f74d38db455afb3a6f6ebef9f6914dd1fd
+  - source: references/research/office-swatch-set-usage.yaml
+    sha256: 879e2fd0261185fe85fbd725634ff0dfcf36284fe6c8906d2418ffe5c4f3ae01
+  - source: references/research/office-templates.yaml
+    sha256: 4df6ee9b40ef4570d945aa5545779f8e88a6f2a275df10c31d95e0dc1a7990f8
+  - source: references/research/flex-research.yaml
+    sha256: 018df51f08db7adde086840bd779f0a5c44811aa159b7ece274ee690f040d266
+  - source: references/research/color-equivalents/catalog-colors.mjs
+    sha256: 6224d60f2597baa6aedeb69b4a4df74eb46cc9de8bb779823d430561a14dea8f
+  - source: packages/agentic/design/src/tokens/mappings/upstream-pin.json
+    sha256: 39a000548aa2300309a540d0004f318bdc45251b197c4e3f26598d182778588b
+  - source: packages/agentic/design/src/flex/tokens.types.ts
+    sha256: d1124ba583d69339ad333f13d3a707e31a83af761658c389db8288ceed867154
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/semantic-light.css
+    sha256: f35ba89ed7870abf51389eaa7382f92fb542383d7add14930a8afa128ce168c5
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/interaction-fallback-light.css
+    sha256: 742eefd2f8ec81a7aac296dc1fc2c19364f254164731c09791a5a9396e6ed05a
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/semantic-dark.css
+    sha256: 691d26088991e830a94477100250a1ca11db14ed5dcecfce7cf3c86893facce1
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/interaction-fallback-dark.css
+    sha256: 8b6436b14f1281aaf1148c5b773e7069c5e252122ed2f733ae7184c75917947b
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/warm/semantic-light.css
+    sha256: 505737770b10c4f167762eba3fff1ba137806aac6adcc77a27265dcd0c93baa7
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/warm/interaction-fallback-light.css
+    sha256: 50ae4f7c455fa22dfeaa17dec620f3d6dc75fd4a4f4cb9d7832f646db0f3c1a9
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/warm/semantic-dark.css
+    sha256: 88f0670b1f106fbd6d4df5716b834f659b92bc463bb99285c32c3346e3cfefbe
+  - source: packages/agentic/design/scripts/token-mappings/__fixtures__/x3/warm/interaction-fallback-dark.css
+    sha256: 2416d085fbfec562a1e40f2c04a55a19076e88283e8543806ea5750c824341f7
+  - source: '@fluentui-react-native/design-tokens-win32@0.53.0/colorful/tokens-aliases.json'
+    sha256: a0ab555dbada8e508421812c90b5e205b3f32f825f2d2f3a9719031c36c0f83f
+  - source: '@fluentui-react-native/design-tokens-win32@0.53.0/black/tokens-aliases.json'
+    sha256: 99ef6beb66015f02513f72a605cab03c4c63643c8da212257a0dc75f59c0a5bc
+  - source: '@fluentui-react-native/design-tokens-win32@0.53.0/darkgray/tokens-aliases.json'
+    sha256: 65312179ca0a1d48751a47484c3efa6c8ac3c36e2e1df5ea3ebb598a4c7c3199
+  - source: '@fluentui-react-native/design-tokens-win32@0.53.0/hc/tokens-aliases.json'
+    sha256: f66c841623cd9c80e624f46af67296bd32c7caac7f8419b170abb3e38b60b313
+  - source: packages/agentic/design/src/fluent/types/palette.types.ts
+    sha256: 3c05c482425db17e227da3230d2a4b12682efa875c9f66a774b1db6132eb997a
+forbidden_baselines_not_read:
+  [
+    src/tokens/mappings/flex-token-map.yaml,
+    src/tokens/mappings/flex-from-theme.json,
+    src/tokens/mappings/theme-from-flex.json,
+    src/flex/adapters/fluentFallbackTokens.ts,
+    src/themes/fluent/legacyPalette.ts,
+    scripts/token-mappings/__fixtures__/x3/mappings.json,
+    scripts/flex-defaults/coverage.generated.json,
+  ]
+office_observational_equal_value_classes:
+  - [Text, TextAccentTint, TextHeader]
+  - [TextRest, TextActive]
+  - [TextHover, TextPressed, TextSelected, TextCtlSubtleSelectionHighlight, SliderBuffer]
+  - [StrokeOverRest, StrokeOverHover, StrokeOverPressed]
+  - [TextCtl, TextCtlSubtle, TextCtlSubtlePressed, TextTextBox, TextTextBoxHover, TextTextBoxPressed]
+  - [TextCtlHover, TextCtlPressed, TextCtlSelected]
+  - [StrokeCtlDisabled, StrokeCtlEmphasisDisabled]
+  - [TextCtlEmphasis, StrokeCtlEmphasisKeyboard]
+  - [TextCtlEmphasisHover, TextCtlEmphasisPressed, TextBadge]
+  - [TextErrorHover, TextErrorSelected]
+  - [ThumbToggleSwitchOff, StrokeToggleSwitchOff]
+  - [ThumbToggleSwitchOffHover, StrokeToggleSwitchOffHover]
+  - [ThumbToggleSwitchOffPressed, StrokeToggleSwitchOffPressed]
+  - [ThumbToggleSwitchOffDisabled, StrokeToggleSwitchOffDisabled]
+  - [BkgToggleSwitchOff, BkgToggleSwitchOffDisabled]
+  - [BkgToggleSwitchOn, StrokeToggleSwitchOn]
+  - [BkgToggleSwitchOnPressed, StrokeToggleSwitchOnPressed]
+  - [BkgToggleSwitchOnDisabled, StrokeToggleSwitchOnDisabled]
+  - [BkgTextBoxSelected, BkgTextBoxFocus, BkgTextBoxHoverDisabled, BkgTextBoxSelectedDisabled]
+  - [BkgCtlSubtleSelected, BkgCtlSubtleFocus, BkgCtlSubtleHoverDisabled, BkgCtlSubtleSelectedDisabled]
+office_fields_absent_from_public_type:
+  [
+    StrokeKeyboardInverse,
+    StrokeKeyboardSelected,
+    BkgStripe,
+    StrokeStripe,
+    StrokeStripeOuter,
+    TextStripe,
+    TextStripeDisabled,
+    BkgCtlSubtleSelectionHighlight,
+    BkgTextBox,
+    BkgTextBoxHover,
+    BkgTextBoxPressed,
+    BkgTextBoxDisabled,
+    BkgTextBoxSelectionHighlight,
+    TextCtlSubtlePlaceholder,
+    TextCtlSubtleSelectionHighlight,
+    TextTextBox,
+    TextTextBoxHyperlink,
+    TextTextBoxHover,
+    TextTextBoxPressed,
+    TextTextBoxDisabled,
+    TextTextBoxSelectionHighlight,
+    StrokeTextBox,
+    StrokeTextBoxHover,
+    StrokeTextBoxPressed,
+    StrokeTextBoxDisabled,
+    StrokeTextBoxKeyboard,
+    TextHyperlinkParentHovered,
+    TextHyperlinkParentHoveredHover,
+    TextHyperlinkParentHoveredPressed,
+    TextHyperlinkParentSelected,
+    TextHyperlinkParentSelectedHover,
+    TextHyperlinkParentSelectedPressed,
+    GlyphAsButtonSubtle,
+    GlyphAsButtonSubtleHover,
+    GlyphAsButtonSubtlePressed,
+    StrokeOverSubtleHover,
+    BkgTextBoxSelected,
+    BkgTextBoxFocus,
+    BkgTextBoxHoverDisabled,
+    BkgTextBoxSelectedDisabled,
+    TextTextBoxSelected,
+    BkgBadge,
+    StrokeBadge,
+    TextBadge,
+  ]
+fluent_observational_equal_full_state_classes:
+  - [compoundBrandBackground1, compoundBrandStroke1]
+  - [neutralForegroundInverted, strokeFocus1]
+  - [outofofficeBorder2, outofofficeForeground3]
+  - [severeBorder2, severeForeground3]
+  - [successBorder2, successForeground3]
+  - [warningBorder2, warningForeground3]
+scalar_candidate_collisions:
+  strokeNeutralSoft: [AccentDark, StrokeCtl, StrokeCtlSubtle, StrokeOnly, StrokeOverSelected, StrokeTextBox, StrokeToggleSwitchOff]
+  strokeBrandLoud: [AccentEmphasis, StrokeCtlEmphasis, StrokeCtlSubtle, StrokeOverSelected, StrokeToggleSwitchOn]
+  strokeNeutralSubtle: [AccentLight, SliderSecondary, SliderToolTipBorder, StrokeCtl, StrokeTextBox]
+  strokeNeutralHeavy: [AccentOutline, StrokeToggleSwitchOn]
+  surfaceNeutralFar: [Bkg, BkgHeader]
+  surfaceNeutralNearer: [Bkg, SliderToolTipBkg]
+  backgroundNeutralTransparent: [Bkg, BkgCtlSubtle, BkgTextBox, BkgToggleSwitchOff]
+  backgroundNeutralSoft: [Bkg, SliderSecondary]
+  backgroundNeutralSubtle: [BkgCtl, BkgHeader]
+  backgroundBrandHeavy: [BkgCtlEmphasis, SliderPrimary]
+  backgroundNeutralHeavy: [BkgToggleSwitchOn, SliderPrimary]
+  strokeFocusOuter: [SliderKeyboard, StrokeKeyboard]
+  foregroundBrandPrimary:
+    [
+      SliderPrimary,
+      TextAccentTint,
+      TextActive,
+      TextCtlSubtle,
+      TextEmphasis,
+      TextHyperlink,
+      TextHyperlinkParentHovered,
+      TextHyperlinkParentSelected,
+    ]
+  foregroundNeutralPrimary:
+    [SliderToolTipLabel, Text, TextAccentTint, TextActive, TextCtl, TextCtlSubtle, TextHeader, TextTextBox, ThumbToggleSwitchOff]
+  foregroundNeutralSecondary: [StrokeToggleSwitchOff, TextHeader, TextSecondary, ThumbToggleSwitchOff]
+  foregroundNeutralOnloud: [TextBadge, TextCtlEmphasis, ThumbToggleSwitchOn]
+  foregroundBrandOnloud: [TextCtlEmphasis, TextCtlSubtle]
+pairing_specificity_probes:
+  - id: primary-button-versus-checkbox
+    flex_pair: [backgroundBrandHeavy, foregroundBrandOnloud]
+    flex_users: [button.primary, checkbox.checked, checkbox.indeterminate]
+    office_pairs:
+      - [BkgCtlEmphasis, TextCtlEmphasis]
+      - [BkgCtlSubtle, TextCtlSubtle]
+    gate: Checkbox selected/mark ownership is provisional; Office CtlSubtle is not a generic subtle button.
+    flex_usage_evidence:
+      interactive: [button.primary, checkbox.checked, checkbox.indeterminate, splitButton.primary, toggleButton.primary.selected]
+      static: []
+    witnesses:
+      - context: Mso.Colorful.TaskPane
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#d83b01', '#a22c01', '#6c1e01']
+            - ['#ffffff', '#ffffff', '#ffffff']
+          - - ['#ffffff', '#fff7f0', '#fbdfd0']
+            - ['#262626', '#505050', '#262626']
+      - context: Mso.Colorful.TaskPaneCard
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#d83b01', '#a22c01', '#6c1e01']
+            - ['#ffffff', '#ffffff', '#ffffff']
+          - - ['#ffffff', '#fff7f0', '#fbdfd0']
+            - ['#262626', '#262626', '#262626']
+      - context: Mso.Colorful.TaskPaneCard_VisualRefresh
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#d83b01', '#a22c01', '#6c1e01']
+            - ['#ffffff', '#ffffff', '#ffffff']
+          - - ['#ffffff', '#fff7f0', '#fbdfd0']
+            - ['#252423', '#252423', '#252423']
+    contexts_with_different_vectors: 48
+    contexts_with_different_authored_rest_pairs: 36
+    comparison_status: provisional_comparison
+  - id: secondary-button-versus-surface
+    flex_pair: [backgroundNeutralSubtle, foregroundNeutralPrimary]
+    flex_users: [button.secondary, tag.secondary, messageBar.information]
+    office_pairs:
+      - [BkgCtl, TextCtl]
+      - [BkgHeader, TextHeader]
+    gate: Group-header analogy is provisional; static and interactive consumers cannot share all states automatically.
+    flex_usage_evidence:
+      interactive: [button.secondary, splitButton.secondary]
+      static: [interactionTag.secondary, messageBar.information, tag.secondary]
+    witnesses:
+      - context: Mso.Colorful.TaskPane
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#ffffff', '#fff7f0', '#fbdfd0']
+            - ['#262626', '#262626', '#262626']
+          - - ['#d2d2d2', null, null]
+            - ['#262626', null, null]
+      - context: Mso.Colorful.TaskPaneCard
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#e6e6e6', '#fff7f0', '#fbdfd0']
+            - ['#262626', '#262626', '#262626']
+          - - ['#e6e6e6', null, null]
+            - ['#262626', null, null]
+      - context: Mso.Colorful.TaskPaneCard_VisualRefresh
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#e1dfdd', '#fff7f0', '#fbdfd0']
+            - ['#252423', '#252423', '#252423']
+          - - ['#e1dfdd', null, null]
+            - ['#252423', null, null]
+    contexts_with_different_vectors: 48
+    contexts_with_different_authored_rest_pairs: 36
+    comparison_status: provisional_comparison
+  - id: transparent-button-versus-input
+    flex_pair: [backgroundNeutralTransparent, foregroundNeutralPrimary]
+    flex_users: [button.outline, button.subtle, input]
+    office_pairs:
+      - [Bkg, Text]
+      - [BkgTextBox, TextTextBox]
+    gate: Bkg is the exposed region at rest, not an authored transparent shader. Evaluate final composited colors.
+    flex_usage_evidence:
+      interactive:
+        [
+          accordion,
+          button.outline,
+          button.subtle,
+          checkbox.checked.label,
+          checkbox.indeterminate.label,
+          link.base,
+          listboxItem.base,
+          listItem.base,
+          menuItem.base,
+          navItem.base,
+          radio.selected.label,
+          splitButton.outline,
+          tab.base,
+        ]
+      static:
+        [
+          badge.outline.informative,
+          breadcrumb.current,
+          combobox.error.chevron,
+          combobox.focused,
+          dropdown.error.chevron,
+          dropdown.focused.chevron,
+          input.value,
+          label,
+          link.visited,
+          progressBar.label,
+          textarea.value,
+        ]
+    witnesses:
+      - context: Mso.Colorful.TaskPane
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#e6e6e6', '#d2d2d2', '#b1b1b1']
+            - ['#262626', '#262626', '#262626']
+          - - ['#ffffff', '#ffffff', '#ffffff']
+            - ['#262626', '#262626', '#262626']
+      - context: Mso.Colorful.TaskPaneCard
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#ffffff', '#d2d2d2', '#b1b1b1']
+            - ['#262626', '#262626', '#262626']
+          - - ['#ffffff', '#fff7f0', '#fbdfd0']
+            - ['#262626', '#262626', '#262626']
+      - context: Mso.Colorful.TaskPaneCard_VisualRefresh
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#ffffff', '#d2d0ce', '#b3b0ad']
+            - ['#252423', '#252423', '#252423']
+          - - ['#ffffff', '#fff7f0', '#fbdfd0']
+            - ['#252423', '#252423', '#252423']
+    contexts_with_different_vectors: 48
+    contexts_with_different_authored_rest_pairs: 24
+    comparison_status: provisional_comparison
+  - id: checked-switch-versus-selected-control
+    flex_pair: [backgroundNeutralHeavy, foregroundNeutralOnloud]
+    flex_users: [switch.checked, tab.selected, toggleButton.secondary.selected]
+    office_pairs:
+      - [BkgToggleSwitchOn, ThumbToggleSwitchOn]
+    gate: Only the switch has an established Office pair; tab/toggle selections need component-specific usage evidence.
+    flex_usage_evidence:
+      interactive: [switch.checked, tab.selected, toggleButton.outline.selected, toggleButton.secondary.selected]
+      static: []
+    witnesses: []
+    contexts_with_different_vectors: 0
+    contexts_with_different_authored_rest_pairs: 0
+    comparison_status: insufficient_pairs
+  - id: brand-foreground-parent-context
+    flex_pair: [backgroundNeutralTransparent, foregroundBrandPrimary]
+    flex_users: [radio.selected]
+    office_pairs:
+      - [Bkg, TextHyperlink]
+      - [Bkg, TextHyperlinkParentHovered]
+      - [Bkg, TextHyperlinkParentSelected]
+    parent_background_states: [rest, hover, selected]
+    gate:
+      Office parent-context probe, NOT evidence that Flex link uses this pair. The parent stays in its own rest/hover/selected state through
+      the child interaction.
+    flex_usage_evidence:
+      interactive: [radio.selected]
+      static: [badge.outline.brand]
+    witnesses:
+      - context: Mso.Colorful.TaskPane
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#e6e6e6', '#e6e6e6', '#e6e6e6']
+            - ['#a22c01', '#6c1e01', '#000000']
+          - - ['#d2d2d2', '#d2d2d2', '#d2d2d2']
+            - ['#6c1e01', '#a22c01', '#000000']
+          - - ['#c6c6c6', '#c6c6c6', '#c6c6c6']
+            - ['#262626', '#6c1e01', '#000000']
+      - context: Mso.Colorful.TaskPaneCard
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#ffffff', '#ffffff', '#ffffff']
+            - ['#d83b01', '#a22c01', '#6c1e01']
+          - - ['#d2d2d2', '#d2d2d2', '#d2d2d2']
+            - ['#6c1e01', '#a22c01', '#000000']
+          - - ['#c6c6c6', '#c6c6c6', '#c6c6c6']
+            - ['#6c1e01', '#6c1e01', '#000000']
+      - context: Mso.Colorful.TaskPaneCard_VisualRefresh
+        vectors_bg_fg_rest_hover_pressed:
+          - - ['#ffffff', '#ffffff', '#ffffff']
+            - ['#6c1e01', '#d83b01', '#a22c01']
+          - - ['#d2d0ce', '#d2d0ce', '#d2d0ce']
+            - ['#252423', '#6c1e01', '#000000']
+          - - ['#c8c6c4', '#c8c6c4', '#c8c6c4']
+            - ['#252423', '#6c1e01', '#000000']
+    contexts_with_different_vectors: 48
+    contexts_with_different_authored_rest_pairs: 48
+    comparison_status: provisional_comparison
+limits:
+  [
+    'No nearest-color ranking: numeric proximity cannot establish role equivalence.',
+    'Pair probes are hypotheses supported by usage; a difference is a specificity witness, not an approved component binding.',
+    Alpha values preserve RGB and alpha. No backdrop-independent contrast or perceptual distance is claimed.,
+    'High contrast is symbolic only; no OS palette, live Office host, native renderer or accessibility result is claimed.',
+    JSON has no declared cross-field alias graph. Office alias metadata supplies three alternate field names only.,
+    'All 181 fields are cataloged, including 14 deprecated fields quarantined from new mappings.',
+  ]

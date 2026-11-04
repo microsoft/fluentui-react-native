@@ -1,0 +1,2090 @@
+schema_version: 1
+analysis_date: 2026-11-01
+authority: Research evidence and provisional candidates, NOT production mappings.
+equality: Equal literal values are observations, not semantic aliases. Missing states are not synthesized.
+source_package: '@fluentui-react-native/design-tokens-win32@0.53.0'
+source_files: '{colorful,black,darkgray,hc}/tokens-aliases.json'
+state_policy: Retain authored state names including selected and brandHover/brandPressed/brandSelected. Absence is NOT a rest alias.
+declared_aliases: Not encoded in the resolved package JSON; equal values do not prove source references.
+omitted_noncolor_entries:
+  colorful:
+    [
+      body1,
+      body1Strong,
+      body2,
+      body2Strong,
+      caption1,
+      display,
+      largeTitle,
+      subtitle1,
+      subtitle1Strong,
+      subtitle2,
+      subtitle2Strong,
+      title1,
+      title1Strong,
+    ]
+  black:
+    [
+      body1,
+      body1Strong,
+      body2,
+      body2Strong,
+      caption1,
+      display,
+      largeTitle,
+      subtitle1,
+      subtitle1Strong,
+      subtitle2,
+      subtitle2Strong,
+      title1,
+      title1Strong,
+    ]
+  darkgray:
+    [
+      body1,
+      body1Strong,
+      body2,
+      body2Strong,
+      caption1,
+      display,
+      largeTitle,
+      subtitle1,
+      subtitle1Strong,
+      subtitle2,
+      subtitle2Strong,
+      title1,
+      title1Strong,
+    ]
+  hc:
+    [
+      body1,
+      body1Strong,
+      body2,
+      body2Strong,
+      caption1,
+      display,
+      largeTitle,
+      subtitle1,
+      subtitle1Strong,
+      subtitle2,
+      subtitle2Strong,
+      title1,
+      title1Strong,
+    ]
+colors:
+  brandBackground:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundBrandHeavy, backgroundBrandLoud]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+        selected: '#13458f'
+      black:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+        selected: '#13458f'
+      darkgray:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+        selected: '#13458f'
+      hc:
+        rest: PlatformColor(ButtonFace)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  brandBackground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundBrandSoft, backgroundBrandSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#d2e0f4'
+      black:
+        rest: '#d2e0f4'
+      darkgray:
+        rest: '#d2e0f4'
+      hc:
+        rest: PlatformColor(ButtonFace)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  brandBackgroundStatic:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: Fixed-brand semantics cannot be merged with appearance-dependent brand backgrounds.
+    values:
+      colorful:
+        rest: '#185abd'
+      black:
+        rest: '#185abd'
+      darkgray:
+        rest: '#185abd'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  brandForeground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundBrandPrimary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+      black:
+        rest: '#aec6eb'
+      darkgray:
+        rest: '#aec6eb'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  brandForeground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundBrandPrimary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#1651aa'
+      black:
+        rest: '#d2e0f4'
+      darkgray:
+        rest: '#d2e0f4'
+      hc:
+        rest: PlatformColor(ButtonText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  brandForegroundLink:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundBrandPrimary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+        selected: '#13458f'
+      black:
+        rest: '#aec6eb'
+        hover: '#d2e0f4'
+        pressed: '#2e6ac5'
+        selected: '#d2e0f4'
+      darkgray:
+        rest: '#aec6eb'
+        hover: '#d2e0f4'
+        pressed: '#2e6ac5'
+        selected: '#d2e0f4'
+      hc:
+        rest: PlatformColor(Hotlight)
+        hover: PlatformColor(Hotlight)
+        pressed: PlatformColor(Hotlight)
+        selected: PlatformColor(Hotlight)
+    equal_value_states:
+      colorful: {}
+      black:
+        selected: hover
+      darkgray:
+        selected: hover
+      hc:
+        hover: rest
+        pressed: rest
+        selected: rest
+  brandStroke1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeBrandLoud]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+      black:
+        rest: '#185abd'
+      darkgray:
+        rest: '#185abd'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  brandStroke2:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeBrandSoft, strokeBrandSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#6794d7'
+      black:
+        rest: '#6794d7'
+      darkgray:
+        rest: '#6794d7'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  compoundBrandBackground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundBrandHeavy]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      black:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      darkgray:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      hc:
+        rest: PlatformColor(Highlight)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        hover: rest
+        pressed: rest
+  compoundBrandForeground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundBrandPrimary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      black:
+        rest: '#aec6eb'
+        hover: '#d2e0f4'
+        pressed: '#2e6ac5'
+      darkgray:
+        rest: '#aec6eb'
+        hover: '#d2e0f4'
+        pressed: '#2e6ac5'
+      hc:
+        rest: PlatformColor(Highlight)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        hover: rest
+        pressed: rest
+  compoundBrandStroke1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeBrandLoud]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      black:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      darkgray:
+        rest: '#185abd'
+        hover: '#1651aa'
+        pressed: '#0e336a'
+      hc:
+        rest: PlatformColor(Highlight)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        hover: rest
+        pressed: rest
+  dangerBackground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundDangerSubtle]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fdf6f6'
+      black:
+        rest: '#3f1011'
+      darkgray:
+        rest: '#3f1011'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerBackground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundDangerSoft]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#f1bbbc'
+      black:
+        rest: '#751d1f'
+      darkgray:
+        rest: '#751d1f'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerBackground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundDangerLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#d13438'
+      black:
+        rest: '#d13438'
+      darkgray:
+        rest: '#d13438'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerBorder1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeDangerSubtle]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#f1bbbc'
+      black:
+        rest: '#d13438'
+      darkgray:
+        rest: '#d13438'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerBorder2:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeDangerLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#d13438'
+      black:
+        rest: '#dc5e62'
+      darkgray:
+        rest: '#dc5e62'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerBorderActive:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeDangerLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#d13438'
+      black:
+        rest: '#e37d80'
+      darkgray:
+        rest: '#e37d80'
+      hc:
+        rest: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerForeground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundDangerPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#bc2f32'
+      black:
+        rest: '#e37d80'
+      darkgray:
+        rest: '#e37d80'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerForeground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundDangerPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#751d1f'
+      black:
+        rest: '#f1bbbc'
+      darkgray:
+        rest: '#f1bbbc'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerForeground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundDangerPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#d13438'
+      black:
+        rest: '#e37d80'
+      darkgray:
+        rest: '#e37d80'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  dangerForegroundInverted:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: Inverted status foreground is a separate context absent from the current generic status roles.
+    values:
+      colorful:
+        rest: '#dc5e62'
+      black:
+        rest: '#d13438'
+      darkgray:
+        rest: '#d13438'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralBackground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [surfaceNeutralNearer, backgroundNeutralSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#ffffff'
+        hover: '#f5f5f5'
+        pressed: '#e0e0e0'
+        selected: '#ebebeb'
+      black:
+        rest: '#292929'
+        hover: '#3d3d3d'
+        pressed: '#1f1f1f'
+        selected: '#383838'
+      darkgray:
+        rest: '#4d4d4d'
+        hover: '#5c5c5c'
+        pressed: '#424242'
+        selected: '#575757'
+      hc:
+        rest: PlatformColor(Window)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralBackground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [surfaceNeutralNear]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#fafafa'
+        hover: '#f0f0f0'
+        pressed: '#dbdbdb'
+        selected: '#e6e6e6'
+      black:
+        rest: '#1f1f1f'
+        hover: '#333333'
+        pressed: '#141414'
+        selected: '#2e2e2e'
+      darkgray:
+        rest: '#424242'
+        hover: '#525252'
+        pressed: '#383838'
+        selected: '#4d4d4d'
+      hc:
+        rest: PlatformColor(Window)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralBackground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [surfaceNeutralFar]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#f5f5f5'
+        hover: '#ebebeb'
+        pressed: '#d6d6d6'
+        selected: '#e0e0e0'
+      black:
+        rest: '#141414'
+        hover: '#292929'
+        pressed: '#0a0a0a'
+        selected: '#242424'
+      darkgray:
+        rest: '#383838'
+        hover: '#474747'
+        pressed: '#2e2e2e'
+        selected: '#424242'
+      hc:
+        rest: PlatformColor(Window)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralBackground4:
+    flex:
+      status: candidate_not_approved
+      tokens: [surfaceNeutralFar, surfaceNeutralFarther]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#f0f0f0'
+        hover: '#fafafa'
+        pressed: '#f5f5f5'
+        selected: '#ffffff'
+      black:
+        rest: '#0a0a0a'
+        hover: '#1f1f1f'
+        pressed: '#000000'
+        selected: '#1a1a1a'
+      darkgray:
+        rest: '#2e2e2e'
+        hover: '#3d3d3d'
+        pressed: '#242424'
+        selected: '#383838'
+      hc:
+        rest: PlatformColor(Window)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralBackground5:
+    flex:
+      status: candidate_not_approved
+      tokens: [surfaceNeutralFarther]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#ebebeb'
+        hover: '#f5f5f5'
+        pressed: '#f0f0f0'
+        selected: '#fafafa'
+      black:
+        rest: '#000000'
+        hover: '#141414'
+        pressed: '#050505'
+        selected: '#0f0f0f'
+      darkgray:
+        rest: '#242424'
+        hover: '#333333'
+        pressed: '#1a1a1a'
+        selected: '#2e2e2e'
+      hc:
+        rest: PlatformColor(Window)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralBackground6:
+    flex:
+      status: candidate_not_approved
+      tokens: [surfaceNeutralFarther]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#e6e6e6'
+      black:
+        rest: '#333333'
+      darkgray:
+        rest: '#1a1a1a'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralBackgroundDisabled:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundNeutralDisabled, backgroundNeutralSubtleDisabled]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#f0f0f0'
+      black:
+        rest: '#141414'
+      darkgray:
+        rest: '#383838'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralBackgroundInverted:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundNeutralHeavy]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#616161'
+      black:
+        rest: '#ffffff'
+      darkgray:
+        rest: '#ffffff'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralForeground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundNeutralPrimary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#242424'
+        hover: '#242424'
+        pressed: '#242424'
+        selected: '#242424'
+      black:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        selected: '#ffffff'
+      darkgray:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        selected: '#ffffff'
+      hc:
+        rest: PlatformColor(WindowText)
+        hover: PlatformColor(HighlightText)
+        pressed: PlatformColor(HighlightText)
+        selected: PlatformColor(HighlightText)
+    equal_value_states:
+      colorful:
+        hover: rest
+        pressed: rest
+        selected: rest
+      black:
+        hover: rest
+        pressed: rest
+        selected: rest
+      darkgray:
+        hover: rest
+        pressed: rest
+        selected: rest
+      hc:
+        pressed: hover
+        selected: hover
+  neutralForeground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundNeutralSecondary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#424242'
+        hover: '#242424'
+        pressed: '#242424'
+        brandHover: '#1651aa'
+        brandPressed: '#0e336a'
+        brandSelected: '#13458f'
+        selected: '#242424'
+      black:
+        rest: '#d6d6d6'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        brandHover: '#d2e0f4'
+        brandPressed: '#2e6ac5'
+        brandSelected: '#d2e0f4'
+        selected: '#ffffff'
+      darkgray:
+        rest: '#e6e6e6'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        brandHover: '#d2e0f4'
+        brandPressed: '#2e6ac5'
+        brandSelected: '#d2e0f4'
+        selected: '#ffffff'
+      hc:
+        rest: PlatformColor(WindowText)
+        hover: PlatformColor(HighlightText)
+        pressed: PlatformColor(HighlightText)
+        brandHover: PlatformColor(HighlightText)
+        brandPressed: PlatformColor(HighlightText)
+        brandSelected: PlatformColor(HighlightText)
+        selected: PlatformColor(HighlightText)
+    equal_value_states:
+      colorful:
+        pressed: hover
+        selected: hover
+      black:
+        pressed: hover
+        brandSelected: brandHover
+        selected: hover
+      darkgray:
+        pressed: hover
+        brandSelected: brandHover
+        selected: hover
+      hc:
+        pressed: hover
+        brandHover: hover
+        brandPressed: hover
+        brandSelected: hover
+        selected: hover
+  neutralForeground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundNeutralTertiary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#616161'
+        hover: '#424242'
+        pressed: '#424242'
+        brandHover: '#1651aa'
+        brandPressed: '#0e336a'
+        brandSelected: '#13458f'
+        selected: '#424242'
+      black:
+        rest: '#adadad'
+        hover: '#d6d6d6'
+        pressed: '#d6d6d6'
+        brandHover: '#d2e0f4'
+        brandPressed: '#2e6ac5'
+        brandSelected: '#d2e0f4'
+        selected: '#d6d6d6'
+      darkgray:
+        rest: '#cccccc'
+        hover: '#e6e6e6'
+        pressed: '#e6e6e6'
+        brandHover: '#d2e0f4'
+        brandPressed: '#2e6ac5'
+        brandSelected: '#d2e0f4'
+        selected: '#e6e6e6'
+      hc:
+        rest: PlatformColor(WindowText)
+        hover: PlatformColor(HighlightText)
+        pressed: PlatformColor(HighlightText)
+        brandHover: PlatformColor(HighlightText)
+        brandPressed: PlatformColor(HighlightText)
+        brandSelected: PlatformColor(HighlightText)
+        selected: PlatformColor(HighlightText)
+    equal_value_states:
+      colorful:
+        pressed: hover
+        selected: hover
+      black:
+        pressed: hover
+        brandSelected: brandHover
+        selected: hover
+      darkgray:
+        pressed: hover
+        brandSelected: brandHover
+        selected: hover
+      hc:
+        pressed: hover
+        brandHover: hover
+        brandPressed: hover
+        brandSelected: hover
+        selected: hover
+  neutralForeground4:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundNeutralTertiary]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#707070'
+      black:
+        rest: '#999999'
+      darkgray:
+        rest: '#c2c2c2'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralForegroundDisabled:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundNeutralDisabled]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#bdbdbd'
+      black:
+        rest: '#5c5c5c'
+      darkgray:
+        rest: '#666666'
+      hc:
+        rest: PlatformColor(GrayText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralForegroundInverted:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundNeutralOnloud]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#ffffff'
+      black:
+        rest: '#000000'
+      darkgray:
+        rest: '#000000'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralForegroundInvertedLink:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: Inverted parent and link interaction need a separate presentation.
+    values:
+      colorful:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        selected: '#ffffff'
+      black:
+        rest: '#292929'
+        hover: '#292929'
+        pressed: '#292929'
+        selected: '#292929'
+      darkgray:
+        rest: '#4d4d4d'
+        hover: '#4d4d4d'
+        pressed: '#4d4d4d'
+        selected: '#4d4d4d'
+      hc:
+        rest: PlatformColor(Hotlight)
+        hover: PlatformColor(Hotlight)
+        pressed: PlatformColor(Hotlight)
+        selected: PlatformColor(Hotlight)
+    equal_value_states:
+      colorful:
+        hover: rest
+        pressed: rest
+        selected: rest
+      black:
+        hover: rest
+        pressed: rest
+        selected: rest
+      darkgray:
+        hover: rest
+        pressed: rest
+        selected: rest
+      hc:
+        hover: rest
+        pressed: rest
+        selected: rest
+  neutralForegroundOnBrand:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundBrandOnloud, foregroundNeutralOnloud]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        selected: '#ffffff'
+      black:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        selected: '#ffffff'
+      darkgray:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+        selected: '#ffffff'
+      hc:
+        rest: PlatformColor(ButtonText)
+        hover: PlatformColor(HighlightText)
+        pressed: PlatformColor(HighlightText)
+        selected: PlatformColor(HighlightText)
+    equal_value_states:
+      colorful:
+        hover: rest
+        pressed: rest
+        selected: rest
+      black:
+        hover: rest
+        pressed: rest
+        selected: rest
+      darkgray:
+        hover: rest
+        pressed: rest
+        selected: rest
+      hc:
+        pressed: hover
+        selected: hover
+  neutralStencil1:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundNeutralSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#e6e6e6'
+      black:
+        rest: '#333333'
+      darkgray:
+        rest: '#1a1a1a'
+      hc:
+        rest: '#141414'
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralStencil2:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundNeutralSoft]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#fafafa'
+      black:
+        rest: '#575757'
+      darkgray:
+        rest: '#424242'
+      hc:
+        rest: '#858585'
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralStroke1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeNeutralSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#d1d1d1'
+        hover: '#c7c7c7'
+        pressed: '#b3b3b3'
+        selected: '#bdbdbd'
+      black:
+        rest: '#666666'
+        hover: '#757575'
+        pressed: '#6b6b6b'
+        selected: '#707070'
+      darkgray:
+        rest: '#8a8a8a'
+        hover: '#999999'
+        pressed: '#8f8f8f'
+        selected: '#949494'
+      hc:
+        rest: PlatformColor(WindowText)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralStroke2:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeNeutralSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#e0e0e0'
+      black:
+        rest: '#525252'
+      darkgray:
+        rest: '#757575'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralStroke3:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeNeutralSubtle]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#f0f0f0'
+      black:
+        rest: '#3d3d3d'
+      darkgray:
+        rest: '#616161'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  neutralStrokeAccessible:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeNeutralSoft]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#616161'
+        hover: '#575757'
+        pressed: '#4d4d4d'
+        selected: '#185abd'
+      black:
+        rest: '#adadad'
+        hover: '#bdbdbd'
+        pressed: '#b3b3b3'
+        selected: '#185abd'
+      darkgray:
+        rest: '#a8a8a8'
+        hover: '#b8b8b8'
+        pressed: '#adadad'
+        selected: '#185abd'
+      hc:
+        rest: PlatformColor(WindowText)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  neutralStrokeDisabled:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeNeutralDisabled]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#e0e0e0'
+      black:
+        rest: '#424242'
+      darkgray:
+        rest: '#474747'
+      hc:
+        rest: PlatformColor(GrayText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeBackground1:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#fdf5fc'
+      black:
+        rest: '#3a1136'
+      darkgray:
+        rest: '#3a1136'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeBackground2:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#edbbe7'
+      black:
+        rest: '#6d2064'
+      darkgray:
+        rest: '#6d2064'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeBackground3:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#c239b3'
+      black:
+        rest: '#c239b3'
+      darkgray:
+        rest: '#c239b3'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeBorder1:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#edbbe7'
+      black:
+        rest: '#c239b3'
+      darkgray:
+        rest: '#c239b3'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeBorder2:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#c239b3'
+      black:
+        rest: '#d161c4'
+      darkgray:
+        rest: '#d161c4'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeBorderActive:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#c239b3'
+      black:
+        rest: '#da7ed0'
+      darkgray:
+        rest: '#da7ed0'
+      hc:
+        rest: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeForeground1:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#af33a1'
+      black:
+        rest: '#da7ed0'
+      darkgray:
+        rest: '#da7ed0'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeForeground2:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#6d2064'
+      black:
+        rest: '#edbbe7'
+      darkgray:
+        rest: '#edbbe7'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  outofofficeForeground3:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#c239b3'
+      black:
+        rest: '#d161c4'
+      darkgray:
+        rest: '#d161c4'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeBackground1:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#fdf6f3'
+      black:
+        rest: '#411200'
+      darkgray:
+        rest: '#411200'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeBackground2:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#f4bfab'
+      black:
+        rest: '#7a2101'
+      darkgray:
+        rest: '#7a2101'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeBackground3:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#da3b01'
+      black:
+        rest: '#da3b01'
+      darkgray:
+        rest: '#da3b01'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeBorder1:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#f4bfab'
+      black:
+        rest: '#da3b01'
+      darkgray:
+        rest: '#da3b01'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeBorder2:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#da3b01'
+      black:
+        rest: '#e9835e'
+      darkgray:
+        rest: '#e9835e'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeBorderActive:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#da3b01'
+      black:
+        rest: '#e9835e'
+      darkgray:
+        rest: '#e9835e'
+      hc:
+        rest: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeForeground1:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#c43501'
+      black:
+        rest: '#e9835e'
+      darkgray:
+        rest: '#e9835e'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeForeground2:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#7a2101'
+      black:
+        rest: '#f4bfab'
+      darkgray:
+        rest: '#f4bfab'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  severeForeground3:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: No matching Flex semantic family; do not substitute a similarly colored expression token or another status.
+    values:
+      colorful:
+        rest: '#da3b01'
+      black:
+        rest: '#e9835e'
+      darkgray:
+        rest: '#e9835e'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  strokeFocus1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeFocusInner]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#ffffff'
+      black:
+        rest: '#000000'
+      darkgray:
+        rest: '#000000'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  strokeFocus2:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeFocusOuter]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#000000'
+      black:
+        rest: '#ffffff'
+      darkgray:
+        rest: '#ffffff'
+      hc:
+        rest: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  subtleBackground:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundNeutralTransparent]
+      rationale: Transparent rest plus opaque interaction fills; not equivalent to an alpha shader without a backdrop.
+    values:
+      colorful:
+        rest: '#00000000'
+        hover: '#f5f5f5'
+        pressed: '#e0e0e0'
+        selected: '#ebebeb'
+      black:
+        rest: '#00000000'
+        hover: '#3d3d3d'
+        pressed: '#1f1f1f'
+        selected: '#383838'
+      darkgray:
+        rest: '#00000000'
+        hover: '#5c5c5c'
+        pressed: '#424242'
+        selected: '#575757'
+      hc:
+        rest: '#00000000'
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        selected: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc:
+        pressed: hover
+        selected: hover
+  successBackground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundSuccessSubtle]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#f1faf1'
+      black:
+        rest: '#052505'
+      darkgray:
+        rest: '#052505'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successBackground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundSuccessSoft]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#9fd89f'
+      black:
+        rest: '#094509'
+      darkgray:
+        rest: '#094509'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successBackground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundSuccessLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#107c10'
+      black:
+        rest: '#107c10'
+      darkgray:
+        rest: '#107c10'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successBorder1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeSuccessSubtle]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#9fd89f'
+      black:
+        rest: '#107c10'
+      darkgray:
+        rest: '#107c10'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successBorder2:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeSuccessLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#107c10'
+      black:
+        rest: '#9fd89f'
+      darkgray:
+        rest: '#9fd89f'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successBorderActive:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeSuccessLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#107c10'
+      black:
+        rest: '#54b054'
+      darkgray:
+        rest: '#54b054'
+      hc:
+        rest: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successForeground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundSuccessPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#0e700e'
+      black:
+        rest: '#54b054'
+      darkgray:
+        rest: '#54b054'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successForeground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundSuccessPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#094509'
+      black:
+        rest: '#9fd89f'
+      darkgray:
+        rest: '#9fd89f'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successForeground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundSuccessPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#107c10'
+      black:
+        rest: '#9fd89f'
+      darkgray:
+        rest: '#9fd89f'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  successForegroundInverted:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: Inverted status foreground is a separate context absent from the current generic status roles.
+    values:
+      colorful:
+        rest: '#359b35'
+      black:
+        rest: '#107c10'
+      darkgray:
+        rest: '#107c10'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  transparentBackground:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundNeutralTransparent, backgroundBrandTransparent]
+      rationale: Always transparent states differ from interactive transparent Flex shaders.
+    values:
+      colorful:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        selected: '#00000000'
+      black:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        selected: '#00000000'
+      darkgray:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        selected: '#00000000'
+      hc:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        selected: '#00000000'
+    equal_value_states:
+      colorful:
+        hover: rest
+        pressed: rest
+        selected: rest
+      black:
+        hover: rest
+        pressed: rest
+        selected: rest
+      darkgray:
+        hover: rest
+        pressed: rest
+        selected: rest
+      hc:
+        hover: rest
+        pressed: rest
+        selected: rest
+  transparentStroke:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeNeutralTransparent]
+      rationale: Semantic-name and role candidate only; state vectors and component usage must decide specificity.
+    values:
+      colorful:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        disabled: '#00000000'
+      black:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        disabled: '#00000000'
+      darkgray:
+        rest: '#00000000'
+        hover: '#00000000'
+        pressed: '#00000000'
+        disabled: '#00000000'
+      hc:
+        rest: PlatformColor(WindowText)
+        hover: PlatformColor(Highlight)
+        pressed: PlatformColor(Highlight)
+        disabled: PlatformColor(GrayText)
+    equal_value_states:
+      colorful:
+        hover: rest
+        pressed: rest
+        disabled: rest
+      black:
+        hover: rest
+        pressed: rest
+        disabled: rest
+      darkgray:
+        hover: rest
+        pressed: rest
+        disabled: rest
+      hc:
+        pressed: hover
+  warningBackground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundWarningSubtle]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fffef5'
+      black:
+        rest: '#4c4400'
+      darkgray:
+        rest: '#4c4400'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningBackground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundWarningSoft]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fef7b2'
+      black:
+        rest: '#817400'
+      darkgray:
+        rest: '#817400'
+      hc:
+        rest: PlatformColor(Window)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningBackground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [backgroundWarningLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fde300'
+      black:
+        rest: '#fde300'
+      darkgray:
+        rest: '#fde300'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningBorder1:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeWarningSubtle]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fef7b2'
+      black:
+        rest: '#fde300'
+      darkgray:
+        rest: '#fde300'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningBorder2:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeWarningLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fde300'
+      black:
+        rest: '#fdea3d'
+      darkgray:
+        rest: '#fdea3d'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningBorderActive:
+    flex:
+      status: candidate_not_approved
+      tokens: [strokeWarningLoud]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fde300'
+      black:
+        rest: '#feee66'
+      darkgray:
+        rest: '#feee66'
+      hc:
+        rest: PlatformColor(Highlight)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningForeground1:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundWarningPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#817400'
+      black:
+        rest: '#feee66'
+      darkgray:
+        rest: '#feee66'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningForeground2:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundWarningPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#817400'
+      black:
+        rest: '#fef7b2'
+      darkgray:
+        rest: '#fef7b2'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningForeground3:
+    flex:
+      status: candidate_not_approved
+      tokens: [foregroundWarningPrimary]
+      rationale: Status role candidate; numbered foregrounds and active borders remain distinct until usage proves equivalence.
+    values:
+      colorful:
+        rest: '#fde300'
+      black:
+        rest: '#fdea3d'
+      darkgray:
+        rest: '#fdea3d'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}
+  warningForegroundInverted:
+    flex:
+      status: no_direct_equivalent
+      tokens: []
+      rationale: Inverted status foreground is a separate context absent from the current generic status roles.
+    values:
+      colorful:
+        rest: '#fef7b2'
+      black:
+        rest: '#817400'
+      darkgray:
+        rest: '#817400'
+      hc:
+        rest: PlatformColor(WindowText)
+    equal_value_states:
+      colorful: {}
+      black: {}
+      darkgray: {}
+      hc: {}

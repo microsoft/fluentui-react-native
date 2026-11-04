@@ -1,0 +1,2905 @@
+schema_version: 1
+analysis_date: 2026-11-01
+authority: Research evidence and provisional candidates, NOT production mappings.
+equality: Equal literal values are observations, not semantic aliases. Missing states are not synthesized.
+source_commit: 206e890b645fb450ad7c5df2ff981765349a2b58
+source_note: Direct CSS variable spelling to SemanticColors key; no cross-system mapping or coverage ledger used.
+missing_state_policy: null means no literal in the pinned interaction-fallback file, not a computed or rest value.
+usage_version_note: flex-research.yaml uses component release flex-1.5.0-206c4996 / 334d3b82, not the token pin. Reconcile before promotion.
+colors:
+  fixedWhite:
+    source_variable: --gnrc-color-fixed-white
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  fixedBlack:
+    source_variable: --gnrc-color-fixed-black
+    values:
+      cool.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionAccentHeavy:
+    source_variable: --gnrc-color-expression-accent-heavy
+    values:
+      cool.light:
+        rest: '#242424'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#28231e'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionAccentLoud:
+    source_variable: --gnrc-color-expression-accent-loud
+    values:
+      cool.light:
+        rest: '#6f6f6f'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#929292'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#1e0d009a'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffeee39a'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionAccentSoft:
+    source_variable: --gnrc-color-expression-accent-soft
+    values:
+      cool.light:
+        rest: '#00000014'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff1f'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#4d200028'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffe3cb40'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionAccentSubtle:
+    source_variable: --gnrc-color-expression-accent-subtle
+    values:
+      cool.light:
+        rest: '#0000000d'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff14'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#6c31001a'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fff4ef14'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionAchromaticHeavy:
+    source_variable: --gnrc-color-expression-achromatic-heavy
+    values:
+      cool.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionAchromaticSubtle:
+    source_variable: --gnrc-color-expression-achromatic-subtle
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGrayHeavy:
+    source_variable: --gnrc-color-expression-gray-heavy
+    values:
+      cool.light:
+        rest: '#484848'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#f5f5f5'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#484848'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#f5f5f5'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGrayLoud:
+    source_variable: --gnrc-color-expression-gray-loud
+    values:
+      cool.light:
+        rest: '#929292'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#dedede'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#929292'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#dedede'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGraySoft:
+    source_variable: --gnrc-color-expression-gray-soft
+    values:
+      cool.light:
+        rest: '#dedede'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#929292'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#dedede'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#929292'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGraySubtle:
+    source_variable: --gnrc-color-expression-gray-subtle
+    values:
+      cool.light:
+        rest: '#f5f5f5'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#484848'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#f5f5f5'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#484848'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionNavyHeavy:
+    source_variable: --gnrc-color-expression-navy-heavy
+    values:
+      cool.light:
+        rest: '#294482'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#f0f5ff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#294482'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#f0f5ff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionNavyLoud:
+    source_variable: --gnrc-color-expression-navy-loud
+    values:
+      cool.light:
+        rest: '#5c8df8'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#cedeff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#5c8df8'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#cedeff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionNavySoft:
+    source_variable: --gnrc-color-expression-navy-soft
+    values:
+      cool.light:
+        rest: '#cedeff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#5c8df8'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#cedeff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#5c8df8'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionNavySubtle:
+    source_variable: --gnrc-color-expression-navy-subtle
+    values:
+      cool.light:
+        rest: '#f0f5ff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#294482'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#f0f5ff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#294482'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionBlueHeavy:
+    source_variable: --gnrc-color-expression-blue-heavy
+    values:
+      cool.light:
+        rest: '#0b497f'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#eef6ff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#0b497f'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#eef6ff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionBlueLoud:
+    source_variable: --gnrc-color-expression-blue-loud
+    values:
+      cool.light:
+        rest: '#2f95f4'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#c6e1ff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#2f95f4'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#c6e1ff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionBlueSoft:
+    source_variable: --gnrc-color-expression-blue-soft
+    values:
+      cool.light:
+        rest: '#c6e1ff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#2f95f4'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#c6e1ff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#2f95f4'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionBlueSubtle:
+    source_variable: --gnrc-color-expression-blue-subtle
+    values:
+      cool.light:
+        rest: '#eef6ff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#0b497f'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#eef6ff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#0b497f'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGreenHeavy:
+    source_variable: --gnrc-color-expression-green-heavy
+    values:
+      cool.light:
+        rest: '#0c5722'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#e7fce9'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#0c5722'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#e7fce9'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGreenLoud:
+    source_variable: --gnrc-color-expression-green-loud
+    values:
+      cool.light:
+        rest: '#32ad52'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#baedc1'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#32ad52'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#baedc1'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGreenSoft:
+    source_variable: --gnrc-color-expression-green-soft
+    values:
+      cool.light:
+        rest: '#baedc1'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#32ad52'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#baedc1'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#32ad52'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionGreenSubtle:
+    source_variable: --gnrc-color-expression-green-subtle
+    values:
+      cool.light:
+        rest: '#e7fce9'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#0c5722'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#e7fce9'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#0c5722'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionLimeHeavy:
+    source_variable: --gnrc-color-expression-lime-heavy
+    values:
+      cool.light:
+        rest: '#345200'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#e6ffcf'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#345200'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#e6ffcf'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionLimeLoud:
+    source_variable: --gnrc-color-expression-lime-loud
+    values:
+      cool.light:
+        rest: '#6da603'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#cbff93'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#6da603'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#cbff93'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionLimeSoft:
+    source_variable: --gnrc-color-expression-lime-soft
+    values:
+      cool.light:
+        rest: '#cbff93'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#6da603'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#cbff93'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#6da603'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionLimeSubtle:
+    source_variable: --gnrc-color-expression-lime-subtle
+    values:
+      cool.light:
+        rest: '#e6ffcf'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#345200'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#e6ffcf'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#345200'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionYellowHeavy:
+    source_variable: --gnrc-color-expression-yellow-heavy
+    values:
+      cool.light:
+        rest: '#524800'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#fff7c4'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#524800'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fff7c4'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionYellowLoud:
+    source_variable: --gnrc-color-expression-yellow-loud
+    values:
+      cool.light:
+        rest: '#fbdf06'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffed85'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fbdf06'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffed85'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionYellowSoft:
+    source_variable: --gnrc-color-expression-yellow-soft
+    values:
+      cool.light:
+        rest: '#ffed85'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#fbdf06'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffed85'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fbdf06'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionYellowSubtle:
+    source_variable: --gnrc-color-expression-yellow-subtle
+    values:
+      cool.light:
+        rest: '#fff7c4'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#524800'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fff7c4'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#524800'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPumpkinHeavy:
+    source_variable: --gnrc-color-expression-pumpkin-heavy
+    values:
+      cool.light:
+        rest: '#762f0e'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#fef2ee'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#762f0e'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fef2ee'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPumpkinLoud:
+    source_variable: --gnrc-color-expression-pumpkin-loud
+    values:
+      cool.light:
+        rest: '#fb966e'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffd3c2'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fb966e'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffd3c2'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPumpkinSoft:
+    source_variable: --gnrc-color-expression-pumpkin-soft
+    values:
+      cool.light:
+        rest: '#ffd3c2'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#fb966e'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffd3c2'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fb966e'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPumpkinSubtle:
+    source_variable: --gnrc-color-expression-pumpkin-subtle
+    values:
+      cool.light:
+        rest: '#fef2ee'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#762f0e'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fef2ee'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#762f0e'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionRedHeavy:
+    source_variable: --gnrc-color-expression-red-heavy
+    values:
+      cool.light:
+        rest: '#772b28'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#fff2f0'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#772b28'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fff2f0'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionRedLoud:
+    source_variable: --gnrc-color-expression-red-loud
+    values:
+      cool.light:
+        rest: '#e7615b'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffd2cd'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#e7615b'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffd2cd'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionRedSoft:
+    source_variable: --gnrc-color-expression-red-soft
+    values:
+      cool.light:
+        rest: '#ffd2cd'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#e7615b'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffd2cd'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#e7615b'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionRedSubtle:
+    source_variable: --gnrc-color-expression-red-subtle
+    values:
+      cool.light:
+        rest: '#fff2f0'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#772b28'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fff2f0'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#772b28'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPinkHeavy:
+    source_variable: --gnrc-color-expression-pink-heavy
+    values:
+      cool.light:
+        rest: '#6f2b53'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#fff1f7'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#6f2b53'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#fff1f7'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPinkLoud:
+    source_variable: --gnrc-color-expression-pink-loud
+    values:
+      cool.light:
+        rest: '#d961a6'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffcee6'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#d961a6'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffcee6'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPinkSoft:
+    source_variable: --gnrc-color-expression-pink-soft
+    values:
+      cool.light:
+        rest: '#ffcee6'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#d961a6'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffcee6'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#d961a6'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPinkSubtle:
+    source_variable: --gnrc-color-expression-pink-subtle
+    values:
+      cool.light:
+        rest: '#fff1f7'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#6f2b53'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fff1f7'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#6f2b53'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPurpleHeavy:
+    source_variable: --gnrc-color-expression-purple-heavy
+    values:
+      cool.light:
+        rest: '#523778'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#f7f3ff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#523778'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#f7f3ff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPurpleLoud:
+    source_variable: --gnrc-color-expression-purple-loud
+    values:
+      cool.light:
+        rest: '#a575e8'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#e4d6ff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#a575e8'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#e4d6ff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPurpleSoft:
+    source_variable: --gnrc-color-expression-purple-soft
+    values:
+      cool.light:
+        rest: '#e4d6ff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#a575e8'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#e4d6ff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#a575e8'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  expressionPurpleSubtle:
+    source_variable: --gnrc-color-expression-purple-subtle
+    values:
+      cool.light:
+        rest: '#f7f3ff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#523778'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#f7f3ff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#523778'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  overlayNeutralTranslucent:
+    source_variable: --gnrc-color-overlay-neutral-translucent
+    values:
+      cool.light:
+        rest: '#00000026'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#00000099'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#00000026'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#00000099'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  surfaceNeutralFarther:
+    source_variable: --gnrc-color-surface-neutral-farther
+    values:
+      cool.light:
+        rest: '#ebebeb'
+        hover: '#e1e1e1'
+        pressed: '#d7d7d7'
+      cool.dark:
+        rest: '#1b1b1b'
+        hover: '#2f2f2f'
+        pressed: '#454545'
+      warm.light:
+        rest: '#f0eae5'
+        hover: '#e8e0d9'
+        pressed: '#dfd6ce'
+      warm.dark:
+        rest: '#1e1916'
+        hover: '#342d29'
+        pressed: '#4b423d'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  surfaceNeutralFar:
+    source_variable: --gnrc-color-surface-neutral-far
+    values:
+      cool.light:
+        rest: '#f2f2f2'
+        hover: '#e8e8e8'
+        pressed: '#dedede'
+      cool.dark:
+        rest: '#1f1f1f'
+        hover: '#323232'
+        pressed: '#464646'
+      warm.light:
+        rest: '#faf4f0'
+        hover: '#f2eae4'
+        pressed: '#e9dfd9'
+      warm.dark:
+        rest: '#231e1a'
+        hover: '#38312b'
+        pressed: '#4d453e'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  surfaceNeutralNear:
+    source_variable: --gnrc-color-surface-neutral-near
+    values:
+      cool.light:
+        rest: '#fcfcfc'
+        hover: '#f2f2f2'
+        pressed: '#e8e8e8'
+      cool.dark:
+        rest: '#181818'
+        hover: '#2d2d2d'
+        pressed: '#434343'
+      warm.light:
+        rest: '#f6f1ec'
+        hover: '#ede7e0'
+        pressed: '#e5ddd4'
+      warm.dark:
+        rest: '#1c1714'
+        hover: '#322b27'
+        pressed: '#4b413c'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  surfaceNeutralNearer:
+    source_variable: --gnrc-color-surface-neutral-nearer
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#f5f5f5'
+        pressed: '#ebebeb'
+      cool.dark:
+        rest: '#292929'
+        hover: '#3a3a3a'
+        pressed: '#4b4b4b'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#f6f5f3'
+        pressed: '#edebe7'
+      warm.dark:
+        rest: '#2e2823'
+        hover: '#403832'
+        pressed: '#534941'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  surfaceNeutralTranslucent:
+    source_variable: --gnrc-color-surface-neutral-translucent
+    values:
+      cool.light:
+        rest: '#ffffff80'
+        hover: '#f5f5f58a'
+        pressed: '#ebebeb94'
+      cool.dark:
+        rest: '#3c3c3c80'
+        hover: '#47474788'
+        pressed: '#5353538f'
+      warm.light:
+        rest: '#ffffff80'
+        hover: '#f7f6f48a'
+        pressed: '#f0eeea94'
+      warm.dark:
+        rest: '#00000080'
+        hover: '#02010188'
+        pressed: '#0e0b0c8f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  materialBackgroundThick:
+    source_variable: --gnrc-material-background-thick
+    values:
+      cool.light:
+        rest: '#fffffff1'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#262626ea'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#fffffff1'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#262626ea'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  materialBackgroundRegular:
+    source_variable: --gnrc-material-background-regular
+    values:
+      cool.light:
+        rest: '#ffffffd7'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#2f2f2fd1'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffffffd7'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#2f2f2fd1'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  materialBackgroundThin:
+    source_variable: --gnrc-material-background-thin
+    values:
+      cool.light:
+        rest: '#ffffff7e'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#3434348b'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffffff7e'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#3434348b'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralHeavy:
+    source_variable: --gnrc-color-background-neutral-heavy
+    values:
+      cool.light:
+        rest: '#242424'
+        hover: '#363636'
+        pressed: '#494949'
+      cool.dark:
+        rest: '#ffffff'
+        hover: '#f5f5f5'
+        pressed: '#ebebeb'
+      warm.light:
+        rest: '#28231e'
+        hover: '#3b352e'
+        pressed: '#50473f'
+      warm.dark:
+        rest: '#ffffff'
+        hover: '#f6f5f3'
+        pressed: '#edebe7'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralLoud:
+    source_variable: --gnrc-color-background-neutral-loud
+    values:
+      cool.light:
+        rest: '#6f6f6f'
+        hover: '#787878'
+        pressed: '#818181'
+      cool.dark:
+        rest: '#929292'
+        hover: '#898989'
+        pressed: '#808080'
+      warm.light:
+        rest: '#1e0d009a'
+        hover: '#2e1a0a9a'
+        pressed: '#3f28169a'
+      warm.dark:
+        rest: '#ffeee39a'
+        hover: '#f3dfd29a'
+        pressed: '#e6d0c09a'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralSoft:
+    source_variable: --gnrc-color-background-neutral-soft
+    values:
+      cool.light:
+        rest: '#00000014'
+        hover: '#0000001e'
+        pressed: '#00000028'
+      cool.dark:
+        rest: '#ffffff1f'
+        hover: '#ffffff27'
+        pressed: '#ffffff2e'
+      warm.light:
+        rest: '#4d200028'
+        hover: '#61330f32'
+        pressed: '#6a3b193c'
+      warm.dark:
+        rest: '#ffe3cb40'
+        hover: '#fde1c548'
+        pressed: '#ffdec44f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralSubtle:
+    source_variable: --gnrc-color-background-neutral-subtle
+    values:
+      cool.light:
+        rest: '#0000000d'
+        hover: '#00000017'
+        pressed: '#00000021'
+      cool.dark:
+        rest: '#ffffff14'
+        hover: '#ffffff1c'
+        pressed: '#ffffff23'
+      warm.light:
+        rest: '#6c31001a'
+        hover: '#7f471c24'
+        pressed: '#8b53272e'
+      warm.dark:
+        rest: '#fff4ef14'
+        hover: '#ffe8e81c'
+        pressed: '#ffdfdf23'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralTransparent:
+    source_variable: --gnrc-color-background-neutral-transparent
+    values:
+      cool.light:
+        rest: '#24242400'
+        hover: '#1313130a'
+        pressed: '#05050514'
+      cool.dark:
+        rest: '#ffffff00'
+        hover: '#ffffff08'
+        pressed: '#ffffff0f'
+      warm.light:
+        rest: '#28231e00'
+        hover: '#231d170a'
+        pressed: '#1e170f14'
+      warm.dark:
+        rest: '#ffffff00'
+        hover: '#fbfaf808'
+        pressed: '#fefcf80f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralTranslucent:
+    source_variable: --gnrc-color-background-neutral-translucent
+    values:
+      cool.light:
+        rest: '#e9e9e980'
+        hover: '#d8d8d88a'
+        pressed: '#cacaca94'
+      cool.dark:
+        rest: '#3c3c3c80'
+        hover: '#56565688'
+        pressed: '#6d6d6d8f'
+      warm.light:
+        rest: '#e9e9e980'
+        hover: '#dcdcd68a'
+        pressed: '#d2cfc894'
+      warm.dark:
+        rest: '#3c3c3c80'
+        hover: '#52524e88'
+        pressed: '#67665e8f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralDisabled:
+    source_variable: --gnrc-color-background-neutral-disabled
+    values:
+      cool.light:
+        rest: '#00000008'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff07'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#00000008'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff07'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralHeavyDisabled:
+    source_variable: --gnrc-color-background-neutral-heavy-disabled
+    values:
+      cool.light:
+        rest: '#0000001a'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff20'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#0000001a'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff20'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundNeutralSubtleDisabled:
+    source_variable: --gnrc-color-background-neutral-subtle-disabled
+    values:
+      cool.light:
+        rest: '#00000008'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff07'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#0000000d'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff1b'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundBrandHeavy:
+    source_variable: --gnrc-color-background-brand-heavy
+    values:
+      cool.light:
+        rest: '#242424'
+        hover: '#363636'
+        pressed: '#494949'
+      cool.dark:
+        rest: '#ffffff'
+        hover: '#f5f5f5'
+        pressed: '#ebebeb'
+      warm.light:
+        rest: '#28231e'
+        hover: '#3b352e'
+        pressed: '#50473f'
+      warm.dark:
+        rest: '#ffffff'
+        hover: '#f6f5f3'
+        pressed: '#edebe7'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundBrandLoud:
+    source_variable: --gnrc-color-background-brand-loud
+    values:
+      cool.light:
+        rest: '#6f6f6f'
+        hover: '#787878'
+        pressed: '#818181'
+      cool.dark:
+        rest: '#929292'
+        hover: '#898989'
+        pressed: '#808080'
+      warm.light:
+        rest: '#1e0d009a'
+        hover: '#2e1a0a9a'
+        pressed: '#3f28169a'
+      warm.dark:
+        rest: '#ffeee39a'
+        hover: '#f3dfd29a'
+        pressed: '#e6d0c09a'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundBrandSoft:
+    source_variable: --gnrc-color-background-brand-soft
+    values:
+      cool.light:
+        rest: '#00000014'
+        hover: '#0000001e'
+        pressed: '#00000028'
+      cool.dark:
+        rest: '#ffffff1f'
+        hover: '#ffffff27'
+        pressed: '#ffffff2e'
+      warm.light:
+        rest: '#4d200028'
+        hover: '#61330f32'
+        pressed: '#6a3b193c'
+      warm.dark:
+        rest: '#ffe3cb40'
+        hover: '#fde1c548'
+        pressed: '#ffdec44f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundBrandSubtle:
+    source_variable: --gnrc-color-background-brand-subtle
+    values:
+      cool.light:
+        rest: '#0000000a'
+        hover: '#00000014'
+        pressed: '#0000001e'
+      cool.dark:
+        rest: '#ffffff14'
+        hover: '#ffffff1c'
+        pressed: '#ffffff23'
+      warm.light:
+        rest: '#6c31001a'
+        hover: '#7f471c24'
+        pressed: '#8b53272e'
+      warm.dark:
+        rest: '#fff4ef14'
+        hover: '#ffe8e81c'
+        pressed: '#ffdfdf23'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundBrandTransparent:
+    source_variable: --gnrc-color-background-brand-transparent
+    values:
+      cool.light:
+        rest: '#24242400'
+        hover: '#1313130a'
+        pressed: '#05050514'
+      cool.dark:
+        rest: '#ffffff00'
+        hover: '#ffffff08'
+        pressed: '#ffffff0f'
+      warm.light:
+        rest: '#28231e00'
+        hover: '#231d170a'
+        pressed: '#1e170f14'
+      warm.dark:
+        rest: '#ffffff00'
+        hover: '#fbfaf808'
+        pressed: '#fefcf80f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundDangerLoud:
+    source_variable: --gnrc-color-background-danger-loud
+    values:
+      cool.light:
+        rest: '#c02e56'
+        hover: '#cb395e'
+        pressed: '#d54467'
+      cool.dark:
+        rest: '#e55e7a'
+        hover: '#da5471'
+        pressed: '#d04b69'
+      warm.light:
+        rest: '#c02e56'
+        hover: '#cd355e'
+        pressed: '#da3c65'
+      warm.dark:
+        rest: '#e55e7a'
+        hover: '#dd5170'
+        pressed: '#d54467'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundDangerSoft:
+    source_variable: --gnrc-color-background-danger-soft
+    values:
+      cool.light:
+        rest: '#ffe3e6'
+        hover: '#f5d9dc'
+        pressed: '#ebcfd2'
+      cool.dark:
+        rest: '#5a2932'
+        hover: '#67353e'
+        pressed: '#754149'
+      warm.light:
+        rest: '#ffe3e6'
+        hover: '#f7d8dc'
+        pressed: '#efced1'
+      warm.dark:
+        rest: '#5a2932'
+        hover: '#68343d'
+        pressed: '#773f49'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundDangerSubtle:
+    source_variable: --gnrc-color-background-danger-subtle
+    values:
+      cool.light:
+        rest: '#fff1f3'
+        hover: '#f5e7e9'
+        pressed: '#ebdddf'
+      cool.dark:
+        rest: '#402529'
+        hover: '#503438'
+        pressed: '#614448'
+      warm.light:
+        rest: '#fff1f3'
+        hover: '#f7e6e9'
+        pressed: '#efdcde'
+      warm.dark:
+        rest: '#402529'
+        hover: '#523338'
+        pressed: '#644247'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundWarningLoud:
+    source_variable: --gnrc-color-background-warning-loud
+    values:
+      cool.light:
+        rest: '#bb4001'
+        hover: '#c54a14'
+        pressed: '#d05321'
+      cool.dark:
+        rest: '#e56738'
+        hover: '#da5d2e'
+        pressed: '#d05422'
+      warm.light:
+        rest: '#bb4001'
+        hover: '#c84709'
+        pressed: '#d54e11'
+      warm.dark:
+        rest: '#e56738'
+        hover: '#dd5b28'
+        pressed: '#d54f13'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundWarningSoft:
+    source_variable: --gnrc-color-background-warning-soft
+    values:
+      cool.light:
+        rest: '#ffe5dc'
+        hover: '#f5dbd2'
+        pressed: '#ebd1c9'
+      cool.dark:
+        rest: '#592c1c'
+        hover: '#663828'
+        pressed: '#744434'
+      warm.light:
+        rest: '#ffe5dc'
+        hover: '#f7dbd1'
+        pressed: '#eed0c6'
+      warm.dark:
+        rest: '#592c1c'
+        hover: '#673726'
+        pressed: '#764331'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundWarningSubtle:
+    source_variable: --gnrc-color-background-warning-subtle
+    values:
+      cool.light:
+        rest: '#fff2ee'
+        hover: '#f5e8e4'
+        pressed: '#ebdeda'
+      cool.dark:
+        rest: '#40261d'
+        hover: '#51352c'
+        pressed: '#62453b'
+      warm.light:
+        rest: '#fff2ee'
+        hover: '#f7e7e3'
+        pressed: '#efddd7'
+      warm.dark:
+        rest: '#40261d'
+        hover: '#52352b'
+        pressed: '#644439'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundSuccessLoud:
+    source_variable: --gnrc-color-background-success-loud
+    values:
+      cool.light:
+        rest: '#008455'
+        hover: '#188d5d'
+        pressed: '#279666'
+      cool.dark:
+        rest: '#05ad72'
+        hover: '#00a369'
+        pressed: '#009a60'
+      warm.light:
+        rest: '#008455'
+        hover: '#088e5c'
+        pressed: '#119864'
+      warm.dark:
+        rest: '#05ad72'
+        hover: '#00a468'
+        pressed: '#009c5e'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundSuccessSoft:
+    source_variable: --gnrc-color-background-success-soft
+    values:
+      cool.light:
+        rest: '#c9f8dd'
+        hover: '#bfeed3'
+        pressed: '#b6e4ca'
+      cool.dark:
+        rest: '#0c462d'
+        hover: '#1c5238'
+        pressed: '#295f44'
+      warm.light:
+        rest: '#c9f8dd'
+        hover: '#bdefd3'
+        pressed: '#b2e5c8'
+      warm.dark:
+        rest: '#0c462d'
+        hover: '#185338'
+        pressed: '#246043'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  backgroundSuccessSubtle:
+    source_variable: --gnrc-color-background-success-subtle
+    values:
+      cool.light:
+        rest: '#e3fcee'
+        hover: '#d9f2e4'
+        pressed: '#cfe8da'
+      cool.dark:
+        rest: '#193426'
+        hover: '#294435'
+        pressed: '#385445'
+      warm.light:
+        rest: '#e3fcee'
+        hover: '#d7f3e3'
+        pressed: '#cce9d9'
+      warm.dark:
+        rest: '#193426'
+        hover: '#274435'
+        pressed: '#355544'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeNeutralHeavy:
+    source_variable: --gnrc-color-stroke-neutral-heavy
+    values:
+      cool.light:
+        rest: '#242424'
+        hover: '#363636'
+        pressed: '#494949'
+      cool.dark:
+        rest: '#dedede'
+        hover: '#d4d4d4'
+        pressed: '#cbcbcb'
+      warm.light:
+        rest: '#28231e'
+        hover: '#3b352e'
+        pressed: '#50473f'
+      warm.dark:
+        rest: '#e3dcd7'
+        hover: '#dbd2cb'
+        pressed: '#d3c8c0'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeNeutralLoud:
+    source_variable: --gnrc-color-stroke-neutral-loud
+    values:
+      cool.light:
+        rest: '#6f6f6f'
+        hover: '#787878'
+        pressed: '#818181'
+      cool.dark:
+        rest: '#929292'
+        hover: '#898989'
+        pressed: '#808080'
+      warm.light:
+        rest: '#776d65'
+        hover: '#81756c'
+        pressed: '#8c7e73'
+      warm.dark:
+        rest: '#9a9089'
+        hover: '#92877e'
+        pressed: '#8b7d74'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeNeutralSoft:
+    source_variable: --gnrc-color-stroke-neutral-soft
+    values:
+      cool.light:
+        rest: '#0000006d'
+        hover: '#02020277'
+        pressed: '#04040481'
+      cool.dark:
+        rest: '#ffffff61'
+        hover: '#ffffff69'
+        pressed: '#ffffff70'
+      warm.light:
+        rest: '#250f0076'
+        hover: '#2a120280'
+        pressed: '#2e16048a'
+      warm.dark:
+        rest: '#ffe6d35c'
+        hover: '#ffe6cf64'
+        pressed: '#ffe8d06b'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeNeutralSubtle:
+    source_variable: --gnrc-color-stroke-neutral-subtle
+    values:
+      cool.light:
+        rest: '#00000021'
+        hover: '#0000002b'
+        pressed: '#05050535'
+      cool.dark:
+        rest: '#ffffff48'
+        hover: '#ffffff50'
+        pressed: '#ffffff57'
+      warm.light:
+        rest: '#4d200028'
+        hover: '#61330f32'
+        pressed: '#6a3b193c'
+      warm.dark:
+        rest: '#ffe3cb40'
+        hover: '#fde1c548'
+        pressed: '#ffdec44f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeNeutralTransparent:
+    source_variable: --gnrc-color-stroke-neutral-transparent
+    values:
+      cool.light:
+        rest: '#24242400'
+        hover: '#1313130a'
+        pressed: '#05050514'
+      cool.dark:
+        rest: '#ffffff00'
+        hover: '#ffffff08'
+        pressed: '#ffffff0f'
+      warm.light:
+        rest: '#28231e00'
+        hover: '#231d170a'
+        pressed: '#1e170f14'
+      warm.dark:
+        rest: '#ffffff00'
+        hover: '#fbfaf808'
+        pressed: '#fefcf80f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeNeutralOnloud:
+    source_variable: --gnrc-color-stroke-neutral-onloud
+    values:
+      cool.light:
+        rest: '#ffffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+      warm.light:
+        rest: '#ffffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#0b0600e1'
+        hover: '#000000e1'
+        pressed: '#000000e1'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark:
+        hover: rest
+        pressed: rest
+      warm.light: {}
+      warm.dark:
+        pressed: hover
+  strokeNeutralDisabled:
+    source_variable: --gnrc-color-stroke-neutral-disabled
+    values:
+      cool.light:
+        rest: '#00000014'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff24'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#00000014'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff24'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeBrandLoud:
+    source_variable: --gnrc-color-stroke-brand-loud
+    values:
+      cool.light:
+        rest: '#6f6f6f'
+        hover: '#787878'
+        pressed: '#818181'
+      cool.dark:
+        rest: '#929292'
+        hover: '#898989'
+        pressed: '#808080'
+      warm.light:
+        rest: '#776d65'
+        hover: '#81756c'
+        pressed: '#8c7e73'
+      warm.dark:
+        rest: '#9a9089'
+        hover: '#92877e'
+        pressed: '#8b7d74'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeBrandSoft:
+    source_variable: --gnrc-color-stroke-brand-soft
+    values:
+      cool.light:
+        rest: '#0000006d'
+        hover: '#02020277'
+        pressed: '#04040481'
+      cool.dark:
+        rest: '#ffffff61'
+        hover: '#ffffff69'
+        pressed: '#ffffff70'
+      warm.light:
+        rest: '#250f0076'
+        hover: '#2a120280'
+        pressed: '#2e16048a'
+      warm.dark:
+        rest: '#ffe6d35c'
+        hover: '#ffe6cf64'
+        pressed: '#ffe8d06b'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeBrandSubtle:
+    source_variable: --gnrc-color-stroke-brand-subtle
+    values:
+      cool.light:
+        rest: '#00000021'
+        hover: '#0000002b'
+        pressed: '#05050535'
+      cool.dark:
+        rest: '#ffffff48'
+        hover: '#ffffff50'
+        pressed: '#ffffff57'
+      warm.light:
+        rest: '#4d200028'
+        hover: '#61330f32'
+        pressed: '#6a3b193c'
+      warm.dark:
+        rest: '#ffe3cb40'
+        hover: '#fde1c548'
+        pressed: '#ffdec44f'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeBrandOnloud:
+    source_variable: --gnrc-color-stroke-brand-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#242424'
+        hover: '#131313'
+        pressed: '#050505'
+      warm.light:
+        rest: '#ffffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#0b0600e1'
+        hover: '#000000e1'
+        pressed: '#000000e1'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark: {}
+      warm.light: {}
+      warm.dark:
+        pressed: hover
+  strokeDangerLoud:
+    source_variable: --gnrc-color-stroke-danger-loud
+    values:
+      cool.light:
+        rest: '#c02e56'
+        hover: '#cb395e'
+        pressed: '#d54467'
+      cool.dark:
+        rest: '#e55e7a'
+        hover: '#da5471'
+        pressed: '#d04b69'
+      warm.light:
+        rest: '#c02e56'
+        hover: '#cd355e'
+        pressed: '#da3c65'
+      warm.dark:
+        rest: '#e55e7a'
+        hover: '#dd5170'
+        pressed: '#d54467'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeDangerSoft:
+    source_variable: --gnrc-color-stroke-danger-soft
+    values:
+      cool.light:
+        rest: '#e55e7a'
+        hover: '#da5471'
+        pressed: '#d04b69'
+      cool.dark:
+        rest: '#d14164'
+        hover: '#dc4b6d'
+        pressed: '#e65575'
+      warm.light:
+        rest: '#e55e7a'
+        hover: '#dd5170'
+        pressed: '#d54467'
+      warm.dark:
+        rest: '#d14164'
+        hover: '#de486c'
+        pressed: '#eb4f74'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeDangerSubtle:
+    source_variable: --gnrc-color-stroke-danger-subtle
+    values:
+      cool.light:
+        rest: '#ffd0d6'
+        hover: '#f5c6cc'
+        pressed: '#ebbdc3'
+      cool.dark:
+        rest: '#76293a'
+        hover: '#803242'
+        pressed: '#893a4a'
+      warm.light:
+        rest: '#ffd0d6'
+        hover: '#f7c5cc'
+        pressed: '#eebbc2'
+      warm.dark:
+        rest: '#76293a'
+        hover: '#813041'
+        pressed: '#8c3749'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeDangerOnloud:
+    source_variable: --gnrc-color-stroke-danger-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#242424'
+        hover: '#131313'
+        pressed: '#050505'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#242424'
+        hover: '#141312'
+        pressed: '#060504'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeWarningLoud:
+    source_variable: --gnrc-color-stroke-warning-loud
+    values:
+      cool.light:
+        rest: '#cd4808'
+        hover: '#d8521a'
+        pressed: '#e25c27'
+      cool.dark:
+        rest: '#e56738'
+        hover: '#da5d2e'
+        pressed: '#d05422'
+      warm.light:
+        rest: '#cd4808'
+        hover: '#da4f11'
+        pressed: '#e75618'
+      warm.dark:
+        rest: '#e56738'
+        hover: '#dd5b28'
+        pressed: '#d54f13'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeWarningSoft:
+    source_variable: --gnrc-color-stroke-warning-soft
+    values:
+      cool.light:
+        rest: '#fc9571'
+        hover: '#f28c68'
+        pressed: '#e7825f'
+      cool.dark:
+        rest: '#cd4808'
+        hover: '#d8521a'
+        pressed: '#e25c27'
+      warm.light:
+        rest: '#fc9571'
+        hover: '#f48a65'
+        pressed: '#ec7f58'
+      warm.dark:
+        rest: '#cd4808'
+        hover: '#da4f11'
+        pressed: '#e75618'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeWarningSubtle:
+    source_variable: --gnrc-color-stroke-warning-subtle
+    values:
+      cool.light:
+        rest: '#ffd3c4'
+        hover: '#f5c9ba'
+        pressed: '#ebc0b1'
+      cool.dark:
+        rest: '#762e12'
+        hover: '#7f371b'
+        pressed: '#893f24'
+      warm.light:
+        rest: '#ffd3c4'
+        hover: '#f7c9b9'
+        pressed: '#eebeae'
+      warm.dark:
+        rest: '#762e12'
+        hover: '#813518'
+        pressed: '#8c3c1e'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeWarningOnloud:
+    source_variable: --gnrc-color-stroke-warning-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#242424'
+        hover: '#131313'
+        pressed: '#050505'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#242424'
+        hover: '#141312'
+        pressed: '#060504'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeSuccessLoud:
+    source_variable: --gnrc-color-stroke-success-loud
+    values:
+      cool.light:
+        rest: '#008455'
+        hover: '#188d5d'
+        pressed: '#279666'
+      cool.dark:
+        rest: '#05ad72'
+        hover: '#00a369'
+        pressed: '#009a60'
+      warm.light:
+        rest: '#008455'
+        hover: '#088e5c'
+        pressed: '#119864'
+      warm.dark:
+        rest: '#05ad72'
+        hover: '#00a468'
+        pressed: '#009c5e'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeSuccessSoft:
+    source_variable: --gnrc-color-stroke-success-soft
+    values:
+      cool.light:
+        rest: '#5dce97'
+        hover: '#52c48e'
+        pressed: '#47bb85'
+      cool.dark:
+        rest: '#008e5c'
+        hover: '#1a9765'
+        pressed: '#2aa16d'
+      warm.light:
+        rest: '#5dce97'
+        hover: '#4cc58d'
+        pressed: '#39bc82'
+      warm.dark:
+        rest: '#008e5c'
+        hover: '#089863'
+        pressed: '#11a26b'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeSuccessSubtle:
+    source_variable: --gnrc-color-stroke-success-subtle
+    values:
+      cool.light:
+        rest: '#b1efcc'
+        hover: '#a7e5c2'
+        pressed: '#9edbb9'
+      cool.dark:
+        rest: '#025636'
+        hover: '#125f3e'
+        pressed: '#1e6746'
+      warm.light:
+        rest: '#b1efcc'
+        hover: '#a5e6c2'
+        pressed: '#9adcb7'
+      warm.dark:
+        rest: '#025636'
+        hover: '#0a5f3d'
+        pressed: '#136844'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeSuccessOnloud:
+    source_variable: --gnrc-color-stroke-success-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#242424'
+        hover: '#131313'
+        pressed: '#050505'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#242424'
+        hover: '#141312'
+        pressed: '#060504'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeFocusInner:
+    source_variable: --gnrc-color-stroke-focus-inner
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  strokeFocusOuter:
+    source_variable: --gnrc-color-stroke-focus-outer
+    values:
+      cool.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundNeutralPrimary:
+    source_variable: --gnrc-color-foreground-neutral-primary
+    values:
+      cool.light:
+        rest: '#000000db'
+        hover: '#000000e5'
+        pressed: '#000000ef'
+      cool.dark:
+        rest: '#ffffffde'
+        hover: '#ffffffe6'
+        pressed: '#ffffffed'
+      warm.light:
+        rest: '#0b0600e1'
+        hover: '#060300eb'
+        pressed: '#040100f5'
+      warm.dark:
+        rest: '#fff7f2e3'
+        hover: '#fff8f2eb'
+        pressed: '#fffaf2f2'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundNeutralSecondary:
+    source_variable: --gnrc-color-foreground-neutral-secondary
+    values:
+      cool.light:
+        rest: '#000000a2'
+        hover: '#000000ac'
+        pressed: '#000000b6'
+      cool.dark:
+        rest: '#ffffffa1'
+        hover: '#ffffffa9'
+        pressed: '#ffffffb0'
+      warm.light:
+        rest: '#190c00ab'
+        hover: '#0a0100b5'
+        pressed: '#060000bf'
+      warm.dark:
+        rest: '#fff2e8b5'
+        hover: '#fff7ebbd'
+        pressed: '#fff9ecc4'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundNeutralTertiary:
+    source_variable: --gnrc-color-foreground-neutral-tertiary
+    values:
+      cool.light:
+        rest: '#00000090'
+        hover: '#0000009a'
+        pressed: '#000000a4'
+      cool.dark:
+        rest: '#ffffff80'
+        hover: '#ffffff88'
+        pressed: '#ffffff8f'
+      warm.light:
+        rest: '#1e0d009a'
+        hover: '#0c0100a4'
+        pressed: '#080000ae'
+      warm.dark:
+        rest: '#ffeee39a'
+        hover: '#fff6eaa2'
+        pressed: '#fff8eaa9'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundNeutralOnloud:
+    source_variable: --gnrc-color-foreground-neutral-onloud
+    values:
+      cool.light:
+        rest: '#ffffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+      warm.light:
+        rest: '#ffffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#0b0600e1'
+        hover: '#010000e1'
+        pressed: '#000000e1'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark:
+        hover: rest
+        pressed: rest
+      warm.light: {}
+      warm.dark: {}
+  foregroundNeutralDisabled:
+    source_variable: --gnrc-color-foreground-neutral-disabled
+    values:
+      cool.light:
+        rest: '#0000006d'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#ffffff61'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#0000006d'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#ffffff61'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundBrandPrimary:
+    source_variable: --gnrc-color-foreground-brand-primary
+    values:
+      cool.light:
+        rest: '#242424'
+        hover: '#131313'
+        pressed: '#050505'
+      cool.dark:
+        rest: '#dedede'
+        hover: '#e8e8e8'
+        pressed: '#f2f2f2'
+      warm.light:
+        rest: '#0b0600e1'
+        hover: '#060300eb'
+        pressed: '#040100f5'
+      warm.dark:
+        rest: '#fff7f2e3'
+        hover: '#fff8f2eb'
+        pressed: '#fffaf2f2'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundBrandOnloud:
+    source_variable: --gnrc-color-foreground-brand-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+      warm.light:
+        rest: '#ffffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#0b0600e1'
+        hover: '#010000e1'
+        pressed: '#000000e1'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark:
+        hover: rest
+        pressed: rest
+      warm.light: {}
+      warm.dark: {}
+  foregroundDangerPrimary:
+    source_variable: --gnrc-color-foreground-danger-primary
+    values:
+      cool.light:
+        rest: '#a62147'
+        hover: '#9c133f'
+        pressed: '#910037'
+      cool.dark:
+        rest: '#fd8ea1'
+        hover: '#ff97aa'
+        pressed: '#ffa1b4'
+      warm.light:
+        rest: '#a62147'
+        hover: '#9e0b3e'
+        pressed: '#950035'
+      warm.dark:
+        rest: '#fd8ea1'
+        hover: '#ff96aa'
+        pressed: '#ff9db2'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundDangerOnloud:
+    source_variable: --gnrc-color-foreground-danger-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark:
+        hover: rest
+        pressed: rest
+      warm.light: {}
+      warm.dark:
+        hover: rest
+        pressed: rest
+  foregroundWarningPrimary:
+    source_variable: --gnrc-color-foreground-warning-primary
+    values:
+      cool.light:
+        rest: '#a93901'
+        hover: '#9f2f00'
+        pressed: '#952500'
+      cool.dark:
+        rest: '#fc9571'
+        hover: '#ff9f7a'
+        pressed: '#ffa884'
+      warm.light:
+        rest: '#a93901'
+        hover: '#a12c00'
+        pressed: '#991c00'
+      warm.dark:
+        rest: '#fc9571'
+        hover: '#ff9d77'
+        pressed: '#ffa57d'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundWarningOnloud:
+    source_variable: --gnrc-color-foreground-warning-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark:
+        hover: rest
+        pressed: rest
+      warm.light: {}
+      warm.dark:
+        hover: rest
+        pressed: rest
+  foregroundSuccessPrimary:
+    source_variable: --gnrc-color-foreground-success-primary
+    values:
+      cool.light:
+        rest: '#017048'
+        hover: '#006740'
+        pressed: '#005f38'
+      cool.dark:
+        rest: '#5dce97'
+        hover: '#67d8a0'
+        pressed: '#72e2aa'
+      warm.light:
+        rest: '#017048'
+        hover: '#00683f'
+        pressed: '#006036'
+      warm.dark:
+        rest: '#5dce97'
+        hover: '#62d99f'
+        pressed: '#67e4a7'
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
+  foregroundSuccessOnloud:
+    source_variable: --gnrc-color-foreground-success-onloud
+    values:
+      cool.light:
+        rest: '#ffffff'
+        hover: '#ffffff'
+        pressed: '#ffffff'
+      cool.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+      warm.light:
+        rest: '#ffffff'
+        hover: '#fffffd'
+        pressed: '#fffffb'
+      warm.dark:
+        rest: '#000000db'
+        hover: '#000000db'
+        pressed: '#000000db'
+    equal_value_states:
+      cool.light:
+        hover: rest
+        pressed: rest
+      cool.dark:
+        hover: rest
+        pressed: rest
+      warm.light: {}
+      warm.dark:
+        hover: rest
+        pressed: rest
+  shadow:
+    source_variable: --gnrc-color-shadow
+    values:
+      cool.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      cool.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.light:
+        rest: '#000000'
+        hover: null
+        pressed: null
+      warm.dark:
+        rest: '#000000'
+        hover: null
+        pressed: null
+    equal_value_states:
+      cool.light: {}
+      cool.dark: {}
+      warm.light: {}
+      warm.dark: {}
