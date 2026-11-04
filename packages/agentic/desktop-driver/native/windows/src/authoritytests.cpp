@@ -25,6 +25,7 @@
 #include <utility>
 #include <vector>
 
+#include "applicationincarnation.h"
 #include "common.h"
 #include "json.h"
 #include "privatestorage.h"
@@ -1803,6 +1804,213 @@ void RunServiceSections(const CheckFunction& check) {
   Section(check, "service requests", [&] { TestServiceRequests(check); });
 }
 
+// ---------------------------------------------------------------------------
+// Application incarnation
+// ---------------------------------------------------------------------------
+
+using incarnation::Observation;
+using incarnation::State;
+
+std::string StateText(State state) {
+  switch (state) {
+    case State::kExited:
+      return "exited";
+    case State::kRunning:
+      return "running";
+    case State::kUnknown:
+      break;
+  }
+  return "unknown";
+}
+
+json::Value IncarnationRequest(const json::Value& pid, const json::Value& startedAt) {
+  return Object({{"pid", pid}, {"startedAt", startedAt}});
+}
+
+// The answer as `state:<value>`, `error:<reason>`, or `malformed`.
+std::string IncarnationOutcome(const json::Value& response) {
+  const json::Value* ok = response.Find("ok");
+  if (ok == nullptr || !ok->IsBool() || response.Members().size() != 2) {
+    return "malformed";
+  }
+  if (ok->AsBool()) {
+    const json::Value* state = response.Find("state");
+    return state != nullptr && state->IsString() ? "state:" + state->AsString() : "malformed";
+  }
+  return "error:" + response.StringField("reason");
+}
+
+std::string Incarnation(DWORD pid, const std::string& startedAt) {
+  return IncarnationOutcome(incarnation::HandleApplicationIncarnationRequest(
+      IncarnationRequest(json::Value::Integer(pid), Text(startedAt))));
+}
+
+std::atomic<int> gObservations{0};
+
+Observation CountingObserve(DWORD) {
+  gObservations += 1;
+  return {Observation::Kind::kStarted, 0};
+}
+
+void TestIncarnationClassifier(const CheckFunction& check) {
+  constexpr std::uint64_t recorded = 133000000000000000ULL;
+  const auto started = [](std::uint64_t ticks) { return Observation{Observation::Kind::kStarted, ticks}; };
+  struct Row {
+    std::string name;
+    Observation observed;
+    State expected;
+  };
+  const std::vector<Row> rows = {
+      {"no process", {Observation::Kind::kGone}, State::kExited},
+      {"inspection unavailable", {Observation::Kind::kUnavailable}, State::kUnknown},
+      {"same start", started(recorded), State::kRunning},
+      {"10 ms later", started(recorded + 100000), State::kRunning},
+      {"10 ms earlier", started(recorded - 100000), State::kRunning},
+      {"just over 10 ms later", started(recorded + 100001), State::kUnknown},
+      {"just over 10 ms earlier", started(recorded - 100001), State::kUnknown},
+      {"1 s later", started(recorded + 10000000), State::kUnknown},
+      {"just over 1 s later", started(recorded + 10000001), State::kExited},
+      {"a day earlier", started(recorded - 864000000000ULL), State::kUnknown},
+      {"a day later", started(recorded + 864000000000ULL), State::kExited},
+  };
+  std::vector<std::string> failed;
+  for (const Row& row : rows) {
+    const State actual = incarnation::Classify(recorded, row.observed);
+    if (actual != row.expected) {
+      failed.push_back(row.name + " -> " + StateText(actual));
+    }
+  }
+  CheckRows(check, "incarnation: exited needs proof; a near start is running; everything else is unknown", failed);
+}
+
+void TestIncarnationStartTimes(const CheckFunction& check) {
+  const std::vector<std::string> accepted = {
+      "2026-11-04T05:35:46Z",
+      "2026-11-04T05:35:46.1Z",
+      "2026-11-04T05:35:46.123456789Z",
+      "2026-11-04T05:35:46.1234567Z",
+      "2026-11-04T05:35:46+05:30",
+      "2026-11-04T05:35:46.000-08:00",
+  };
+  const std::vector<std::string> refused = {
+      "",
+      "2026-11-04",
+      "2026-11-04 05:35:46Z",
+      "2026-11-04T05:35:46",
+      "2026-11-04T05:35:46.Z",
+      "2026-11-04T05:35:46.1234567890Z",
+      "2026-11-04T05:35:46Zx",
+      "2026-11-04T05:35:46+0530",
+      "2026-11-04T05:35:46+05:3",
+      " 2026-11-04T05:35:46Z",
+      "2026-11-04T05:35:46Z ",
+      "2026-13-04T05:35:46Z",
+      "2026-11-04T25:35:46Z",
+      "2026-11-04t05:35:46z",
+      "not a time",
+  };
+  std::vector<std::string> failed;
+  std::uint64_t ticks = 0;
+  for (const std::string& text : accepted) {
+    if (!incarnation::ParseStartedAt(text, ticks)) {
+      failed.push_back("refused " + Label(text));
+    }
+  }
+  for (const std::string& text : refused) {
+    if (incarnation::ParseStartedAt(text, ticks)) {
+      failed.push_back("accepted " + Label(text));
+    }
+  }
+  std::uint64_t utc = 0;
+  std::uint64_t offset = 0;
+  if (!incarnation::ParseStartedAt("2026-11-04T05:35:46.5Z", utc) ||
+      !incarnation::ParseStartedAt("2026-11-04T11:05:46.5+05:30", offset) || utc != offset) {
+    failed.push_back("an offset does not name the same instant as its UTC form");
+  }
+  CheckRows(check, "incarnation: a start time is a strict ISO 8601 instant of at most 64 bytes", failed);
+}
+
+void TestIncarnationRequests(const CheckFunction& check) {
+  const std::string start = "2026-11-04T05:35:46.1234567Z";
+  const json::Value valid = IncarnationRequest(json::Value::Integer(1234), Text(start));
+  const std::vector<std::pair<std::string, json::Value>> rows = {
+      {"pid zero", IncarnationRequest(json::Value::Integer(0), Text(start))},
+      {"negative pid", IncarnationRequest(json::Value::Integer(-1), Text(start))},
+      {"fractional pid", IncarnationRequest(json::Value::Number(1.5), Text(start))},
+      {"textual pid", IncarnationRequest(Text("1234"), Text(start))},
+      {"pid above the signed 32-bit range", IncarnationRequest(json::Value::Integer(2147483648LL), Text(start))},
+      {"numeric start", IncarnationRequest(json::Value::Integer(1234), json::Value::Number(1))},
+      {"null start", IncarnationRequest(json::Value::Integer(1234), json::Value::Null())},
+      {"start of 65 bytes", IncarnationRequest(json::Value::Integer(1234), Text(start + std::string(37, '0')))},
+      {"start with trailing text", IncarnationRequest(json::Value::Integer(1234), Text(start + "x"))},
+      {"missing pid", Without(valid, "pid")},
+      {"missing start", Without(valid, "startedAt")},
+      {"extra key", With(valid, "operation", Text("probe"))},
+      {"array request", json::Value::Array()},
+      {"string request", Text(start)},
+      {"null request", json::Value::Null()},
+  };
+  gObservations = 0;
+  std::vector<std::string> failed;
+  for (const auto& row : rows) {
+    const std::string actual =
+        IncarnationOutcome(incarnation::HandleApplicationIncarnationRequest(row.second, CountingObserve));
+    if (actual != "error:request") {
+      failed.push_back(row.first + " -> " + actual);
+    }
+  }
+  CheckRows(check, "incarnation requests: a malformed request is refused", failed);
+  check(gObservations == 0, "incarnation requests: a malformed request never inspects a process");
+  const json::Value answer = incarnation::HandleApplicationIncarnationRequest(
+      IncarnationRequest(json::Value::Integer(2147483647), Text(start)), CountingObserve);
+  check(IncarnationOutcome(answer) == "state:unknown" && gObservations == 1,
+        "incarnation requests: the largest process identifier is accepted and the answer has only ok and state");
+}
+
+void TestIncarnationProcesses(const CheckFunction& check) {
+  const ProcessFacts facts = SelfFacts();
+  if (!facts.complete) {
+    check(false, "incarnation: the helper can read its own start time");
+    return;
+  }
+  const DWORD self = GetCurrentProcessId();
+  check(Incarnation(self, facts.startedAt) == "state:running",
+        "incarnation: this process at its recorded start is running");
+  check(Incarnation(self, facts.startedAt.substr(0, 23) + "Z") == "state:running",
+        "incarnation: a start recorded with millisecond resolution still matches");
+  check(Incarnation(self, "1970-01-01T00:00:00.000Z") == "state:exited",
+        "incarnation: a process id now naming a much later process proves the recorded one exited");
+  check(Incarnation(self, "2999-01-01T00:00:00.000Z") == "state:unknown",
+        "incarnation: a process id naming an earlier process proves nothing");
+  check(Incarnation(2147483644, facts.startedAt) == "state:exited",
+        "incarnation: a process identifier nothing owns is exited");
+  check(Incarnation(4, facts.startedAt) == "state:unknown",
+        "incarnation: the System process, started before this one, is unknown");
+
+  ChildProcess child;
+  if (!child.Started()) {
+    NoteSkipped("application incarnation: a child process cannot be started here; skipping the child cases");
+    return;
+  }
+  const json::Value described = Describe(child.Pid());
+  const json::Value* identity = described.Find("identity");
+  if (Result(described) != "ok" || identity == nullptr) {
+    check(false, "incarnation: a child of this user and session can be described [" + Result(described) + "]");
+    return;
+  }
+  const std::string childStart = identity->StringField("startedAt");
+  check(Incarnation(child.Pid(), childStart) == "state:running", "incarnation: a live child is running");
+  child.Stop();
+  check(Incarnation(child.Pid(), childStart) == "state:exited", "incarnation: a child that has exited is exited");
+}
+
+void RunIncarnationSections(const CheckFunction& check) {
+  Section(check, "incarnation classifier", [&] { TestIncarnationClassifier(check); });
+  Section(check, "incarnation start times", [&] { TestIncarnationStartTimes(check); });
+  Section(check, "incarnation requests", [&] { TestIncarnationRequests(check); });
+  Section(check, "incarnation processes", [&] { TestIncarnationProcesses(check); });
+}
+
 }  // namespace
 
 void RunAuthoritySelfTests(const CheckFunction& check) {
@@ -1816,6 +2024,7 @@ void RunAuthoritySelfTests(const CheckFunction& check) {
   Section(check, "default root", [&] { TestDefaultStorageRoot(check); });
   Section(check, "private storage", [&] { RunStorageSections(check); });
   Section(check, "service identity", [&] { RunServiceSections(check); });
+  Section(check, "application incarnation", [&] { RunIncarnationSections(check); });
 }
 
 }  // namespace furn

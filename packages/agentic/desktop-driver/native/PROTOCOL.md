@@ -539,7 +539,16 @@ The Windows provider additionally implements:
 ```text
 --private-storage
 --service-identity
+--application-incarnation
 ```
+
+The Windows `--application-incarnation` takes the same request and gives the
+same answer. `exited` means the process id names no process, the process holding
+it has exited, or it names a process created more than one second later;
+`running` means a live process created within 10 ms of `startedAt`; anything
+else, including a process this account cannot open, is `unknown`. The request's
+`startedAt` must be exactly `YYYY-MM-DDTHH:MM:SS`, an optional fraction of 1 to
+9 digits, and `Z` or a `+HH:MM`/`-HH:MM` offset.
 
 These and the macOS `--service-identity` and `--application-incarnation` are one-shot modes, not FDR1
 sessions. Each reads one JSON request from

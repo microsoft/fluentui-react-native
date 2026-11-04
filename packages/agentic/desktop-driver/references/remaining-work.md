@@ -733,9 +733,9 @@ Quarantine persistence and operator recovery are implemented: an optional
 quarantine to private storage, restores them before the service listens, lifts
 a quarantine only when its launched application closes, a probe proves the
 recorded application incarnation exited, or the operator calls
-`recoverTarget`. The macOS `--application-incarnation` helper mode and
-`createMacOSApplicationProbe` are implemented; the Windows mode and
-`createWindowsApplicationProbe` are open. See
+`recoverTarget`. The macOS and Windows `--application-incarnation` helper modes
+and `createMacOSApplicationProbe` and `createWindowsApplicationProbe` are
+implemented. See
 [settlement journal and recovery](security.md#settlement-journal-and-recovery).
 
 The shared Slice 2 descriptor contract, macOS owner-validated storage and

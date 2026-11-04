@@ -9,6 +9,7 @@
 
 #include <winrt/base.h>
 
+#include "applicationincarnation.h"
 #include "common.h"
 #include "host.h"
 #include "input.h"
@@ -145,7 +146,9 @@ int PrintUsage() {
                "       furn-desktop-driver-host --private-storage        "
                "(owner-only record storage: one JSON request on stdin)\n"
                "       furn-desktop-driver-host --service-identity       "
-               "(describe or verify a local service process: one JSON request on stdin)\n";
+               "(describe or verify a local service process: one JSON request on stdin)\n"
+               "       furn-desktop-driver-host --application-incarnation "
+               "(whether a recorded application process still runs: one JSON request on stdin)\n";
   return 2;
 }
 
@@ -175,12 +178,19 @@ int wmain(int argc, wchar_t** argv) {
       }
       return ReleaseInputFromLedger();
     }
-    if (mode == L"--private-storage" || mode == L"--service-identity") {
+    furn::json::Value (*authority)(const furn::json::Value&) = nullptr;
+    if (mode == L"--private-storage") {
+      authority = furn::storage::HandlePrivateStorageRequest;
+    } else if (mode == L"--service-identity") {
+      authority = furn::service::HandleServiceIdentityRequest;
+    } else if (mode == L"--application-incarnation") {
+      authority = furn::incarnation::HandleApplicationIncarnationRequest;
+    }
+    if (authority != nullptr) {
       if (argc >= 3) {
         return PrintUsage();
       }
-      return RunAuthorityMode(mode == L"--private-storage" ? furn::storage::HandlePrivateStorageRequest
-                                                          : furn::service::HandleServiceIdentityRequest);
+      return RunAuthorityMode(authority);
     }
     if (mode == L"--stdio") {
       furn::Host host;

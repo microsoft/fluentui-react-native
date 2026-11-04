@@ -25,9 +25,10 @@ third-party native dependency.
 | `src/driver.*`                   | Command surface and normalized provider results                           |
 | `src/privatestorage.*`           | Owner-only record storage behind the `--private-storage` mode             |
 | `src/serviceidentity.*`          | Process and loopback-listener checks behind `--service-identity`          |
-| `src/winsecurity.*`              | Scoped handles and SID helpers shared by the two authority modes          |
+| `src/applicationincarnation.*`   | Recorded-process liveness check behind `--application-incarnation`        |
+| `src/winsecurity.*`              | Scoped handles and SID helpers shared by the authority modes              |
 | `src/selftest.*`                 | Native parsing, state, cancellation, geometry, and recovery checks        |
-| `src/authoritytests.*`           | Self-test cases for the two authority modes                               |
+| `src/authoritytests.*`           | Self-test cases for the authority modes                                   |
 | `src/observationtests.*`         | Self-test cases for bounded observation and pinned records                |
 
 The Node build coordinator is
@@ -377,9 +378,9 @@ listed in `IsTrackedMutation`.
 
 ## Authority helper modes
 
-Two restricted one-shot modes of the same executable back the Node `/authority`
-adapters `createWindowsPrivateStorage`, `describeWindowsService`, and
-`createWindowsServiceVerifier` (see
+Three restricted one-shot modes of the same executable back the Node `/authority`
+adapters `createWindowsPrivateStorage`, `describeWindowsService`,
+`createWindowsServiceVerifier`, and `createWindowsApplicationProbe` (see
 [the security model](../../references/security.md#windows-private-storage-and-service-verifier)).
 They are not FDR1. Each reads one JSON request from standard input (at most
 128 KiB, a leading byte order mark ignored), writes one JSON line to standard
@@ -412,6 +413,14 @@ session, or `ok:false` with `process`, `user`, `session`, `exited`, or
 when every listening TCP socket that can accept a connection to the address,
 including a wildcard listener on the same port, belongs to the claimed process.
 
+`--application-incarnation` takes exactly `{"pid":...,"startedAt":...}` and
+answers `{"ok":true,"state":...}` for settlement recovery. It opens the process
+for limited query and synchronization only. `exited` needs proof: the process id
+names no process (`ERROR_INVALID_PARAMETER`), the process holding it has exited,
+or it names a process created more than one second after `startedAt`. A creation
+time within 10 ms is `running`; access denied, an earlier creation time, and
+everything else are `unknown`.
+
 ## Verification and tests
 
 Run package tests first, then the opt-in native contract:
@@ -435,16 +444,19 @@ application, and a stuck call quarantines the target until the launched
 application is closed. `yarn test --runInBand protectedService` runs only that
 suite.
 
-Two more suites drive only the authority modes against the real helper. They
+Three more suites drive only the authority modes against the real helper. They
 need no application and never touch the per-user default root.
 `privateStorage` checks byte-exact round trips, exclusive and concurrent
 publication, a replaced or removed root, a junction root, a second hard link,
 and an ACL that grants another principal access. `serviceIdentity` uses real
 child processes and a loopback listener (IPv4 and, where the machine has it,
 IPv6) to check `describe`, claims whose start time, image, or session differ, a
-case-different image path, an address nobody serves, and an exited process. Run
-them with `yarn test --runInBand privateStorage.contract` and
-`yarn test --runInBand serviceIdentity.contract`.
+case-different image path, an address nobody serves, and an exited process.
+`applicationIncarnation` probes a real child process at its recorded start, at a
+much earlier and a later start, and after it exits. Run them with
+`yarn test --runInBand privateStorage.contract`,
+`yarn test --runInBand serviceIdentity.contract`, and
+`yarn test --runInBand applicationIncarnation.contract`.
 
 The helper self-test (`furn-desktop-driver-host.exe --self-test`) covers
 settlement, element identity, retention, input authority, and event bookkeeping

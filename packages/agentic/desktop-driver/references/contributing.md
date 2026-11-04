@@ -69,11 +69,12 @@ package.
   (`src/native/windows/win32Fixture.contract.test.ts` and `fixtures/win32`) when
   a change needs a real application: events, popups, hung providers, tree
   limits, or retention.
-- On Windows, change the `--private-storage` and `--service-identity` modes
-  together with their native self-test cases
+- On Windows, change the `--private-storage`, `--service-identity`, and
+  `--application-incarnation` modes together with their native self-test cases
   (`native/windows/src/authoritytests.cpp`) and the application-free contracts
-  `src/native/windows/privateStorage.contract.test.ts` and
-  `src/native/windows/serviceIdentity.contract.test.ts`.
+  `src/native/windows/privateStorage.contract.test.ts`,
+  `src/native/windows/serviceIdentity.contract.test.ts`, and
+  `src/native/windows/applicationIncarnation.contract.test.ts`.
 
 Never patch generated SwiftPM, Xcode, MSBuild output, or cached artifacts.
 

@@ -279,6 +279,11 @@ service configuration. Without it, a restart forgets every quarantine.
   the process id is gone or now names a process that started more than one
   second later; another user's process, or a start time it cannot match, is
   `unknown`.
+- The Windows probe, `createWindowsApplicationProbe`, answers `exited` only
+  when the process id names no process, the process holding it has exited, or
+  it names a process created more than one second later. A process this
+  account cannot open, an earlier creation time, or a start time it cannot
+  match is `unknown`.
 
 ## Native protocol
 

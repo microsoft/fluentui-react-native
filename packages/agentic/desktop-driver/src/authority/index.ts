@@ -12,3 +12,5 @@ export { createMacOSServiceVerifier, describeMacOSService } from './macosService
 export type { DescribeMacOSServiceOptions, MacOSServiceVerifierOptions } from './macosServiceIdentity.js';
 export { createMacOSApplicationProbe } from './macosApplicationProbe.js';
 export type { MacOSApplicationProbeOptions } from './macosApplicationProbe.js';
+export { createWindowsApplicationProbe } from './windowsApplicationProbe.js';
+export type { WindowsApplicationProbeOptions } from './windowsApplicationProbe.js';

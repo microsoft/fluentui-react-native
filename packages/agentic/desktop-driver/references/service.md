@@ -362,6 +362,9 @@ await service.recoverTarget('contoso-macos', { evidence: 'operator', quarantineI
   `evidence: 'operator'` records the operator's own judgment.
 - Without a probe, an attached application's quarantine lifts only through
   `recoverTarget`.
+- On Windows, pass `createWindowsApplicationProbe({ artifact })` and
+  `await createWindowsPrivateStorage({ artifact, root })` with the verified
+  Windows native driver artifact.
 
 See [the security model](security.md#settlement-journal-and-recovery).
 

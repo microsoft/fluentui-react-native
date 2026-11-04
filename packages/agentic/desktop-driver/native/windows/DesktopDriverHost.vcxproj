@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\applicationincarnation.cpp" />
     <ClCompile Include="src\authoritytests.cpp" />
     <ClCompile Include="src\automation.cpp" />
     <ClCompile Include="src\capture.cpp" />
@@ -102,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\application.h" />
+    <ClInclude Include="src\applicationincarnation.h" />
     <ClInclude Include="src\authoritytests.h" />
     <ClInclude Include="src\automation.h" />
     <ClInclude Include="src\capture.h" />
