@@ -472,6 +472,6 @@ Ordered by expected value. "All" means a change in the Node layer or protocol th
 - https://agent-device.dev/docs/ (commands, snapshots, capabilities, replay-e2e, security-trust, agent-setup).
 - https://www.callstack.com/blog/how-we-optimized-agent-device-for-mobile-app-automation
 - https://appium.github.io/appium-mac2-driver
-- https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/AutomatingUI.html
+- https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/AutomatetheUserInterface.html
 - https://github.com/openclaw/peekaboo
 - Anthropic and OpenAI computer-use documentation (screenshot and coordinate agents; image token formulas).
