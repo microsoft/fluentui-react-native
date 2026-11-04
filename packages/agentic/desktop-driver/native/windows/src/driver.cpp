@@ -255,6 +255,7 @@ json::Value Driver::ProbeResult(const json::Value& params) {
   const bool screenshot = capture_.Available();
   json::Value features = json::Value::Object();
   features.Set("accessibilityClick", json::Value::Bool(true));
+  features.Set("boundedObservation", json::Value::Bool(true));
   features.Set("elementScreenshot", json::Value::Bool(screenshot));
   features.Set("focus", json::Value::Bool(true));
   features.Set("keyboard", json::Value::Bool(physical));
@@ -628,6 +629,20 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
   }
   if (command == "snapshot") {
     result.result = SerializeSnapshot(RequireLiveElement(RequireString(params, "elementId"), token));
+    return result;
+  }
+  if (command == "observe") {
+    const ObserveRequest request = ParseObserveRequest(params);
+    HWND window = nullptr;
+    const WindowContext context = ContextForWindow(request.windowId, window);
+    result.result = automation_.Observe(context, request, token).ToJson();
+    return result;
+  }
+  if (command == "releaseElements") {
+    const std::vector<std::string> ids = ParseReleaseElementsRequest(params);
+    json::Value released = json::Value::Object();
+    released.Set("released", json::Value::Integer(static_cast<std::int64_t>(automation_.ReleaseElements(ids))));
+    result.result = std::move(released);
     return result;
   }
   if (command == "activeElement") {

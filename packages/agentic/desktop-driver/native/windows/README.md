@@ -13,6 +13,7 @@ third-party native dependency.
 | `src/host.*`                     | FDR1 request loop, cancellation, and command dispatch                     |
 | `src/application.*`              | Launch/attach leases, process and window ownership                        |
 | `src/automation.*`               | UI Automation tree, lookup, state, and opaque identities                  |
+| `src/observation.*`              | Bounded `observe` sampler, request parsing, and response shaping          |
 | `src/elementregistry.*`          | Element identity, revalidation fingerprints, and bounded retention        |
 | `src/events.*`                   | WinEvent window notifications, bounded event log, and command journal     |
 | `src/settlement.*`               | Bounded provider calls and the unsettled-mutation quarantine              |
@@ -27,6 +28,7 @@ third-party native dependency.
 | `src/winsecurity.*`              | Scoped handles and SID helpers shared by the two authority modes          |
 | `src/selftest.*`                 | Native parsing, state, cancellation, geometry, and recovery checks        |
 | `src/authoritytests.*`           | Self-test cases for the two authority modes                               |
+| `src/observationtests.*`         | Self-test cases for bounded observation and pinned records                |
 
 The Node build coordinator is
 `../../src/native/windows/buildWindowsDriver.ts`; runtime adaptation is under
@@ -203,14 +205,57 @@ known on both sides differs, and the fingerprint is a precondition, not proof:
 an element whose `AutomationId` legitimately changed is treated as replaced.
 
 Retention is a generation-based LRU capped at 20,000 elements. Exceeding the cap
-evicts the least recently used records down to 90 percent of it, never the
-observation in progress, and stamps ancestors so a retained record never loses
-its parent. A replaced parent erases its subtree. Elements without a runtime id
-mint a new id per observation and are bounded only by the cap. `windowEvents`
-reports a `retention` object with the retained count, the limit, and the
-helper's working set and private bytes. The `stale-element` message says the
-window closed, a different element reused its native identity, or the helper
-released it to bound retained memory.
+evicts the least recently used unpinned records down to 90 percent of it, never
+the observation in progress, a pinned record, or a pinned record's ancestors, so
+a retained record never loses its parent to eviction. A replaced parent erases
+its unpinned subtree. Elements without a runtime id mint a new id per
+observation and are bounded only by the cap. `windowEvents` reports a
+`retention` object with the retained count, the limit, and the helper's working
+set and private bytes. The `stale-element` message says the window closed, a
+different element reused its native identity, or the helper released it to
+bound retained memory.
+
+Records that `observe` emits are pinned: eviction never takes them, and they end
+only through `releaseElements`, a replacement that reuses their native identity,
+or their window ending (`closeWindow`, `closeApplication`, `dispose`, or a
+destroy notification). `releaseElements` drops exactly the named records and
+not their descendants, so a retained child keeps naming its released parent's
+id, which then answers `stale-element`. A `tree`, `find`, or `snapshot` that
+meets a pinned element returns its id and keeps the pin.
+
+### Bounded observation
+
+`observe` implements the
+[bounded observation contract](../PROTOCOL.md#bounded-observation) and is
+advertised as `boundedObservation` in `hello` and `probe`. It walks the control
+view breadth first from the window root, or from a tracked `rootId` of that
+window. Each family of children is paged with the cached tree walker, one
+sibling per provider call, so `maxVisited`, `maxBytes`, and `deadlineMs` take
+effect between any two siblings, and no `TreeScope_Subtree` cache is built.
+Only the root read may start after the deadline; a read that ends after it is
+abandoned without a record, and a provider call already in flight is bounded by
+the UI Automation connection and transaction timeouts (2 and 5 seconds).
+
+Nodes carry the same role, name, automation id, scope, and facts as `snapshot`,
+with `rect` window-relative. A password field (`UIA_IsPasswordPropertyId`) never
+reports `value` or `text`. Strings are cut to `maxStringLength` UTF-16 code
+units without splitting a surrogate pair and named in `clipped`. UI Automation
+has no action list, so `unsupportedFacts` lists `actions` when it is requested.
+An element reachable twice (the same runtime id) is emitted once under its first
+parent; elements without a runtime id are never taken for duplicates.
+
+A pinned record needs room in the 20,000-record table. When pinned records and
+the observation in progress fill it, the sample ends with the `references`
+truncation instead of evicting an id an agent holds, and is empty when even the
+root has no room. Known deviations from the macOS provider: a `maxVisited` equal
+to the tree size reports `visited` with `unvisited` 0 because the walk stops
+before learning that nothing remains, and a root read that outlasts the deadline
+reports `unvisited` 0 because no child is paged after it.
+
+On the Win32 fixture's 10,000-item tree, a 5,000-node sample takes about 4.6
+seconds (about 0.9 ms per node, since each sibling is a separate call) and
+repeats with identical ids; a 50 ms deadline answers in about 50 ms with a
+partial sample.
 
 ### Hit testing
 
@@ -236,9 +281,8 @@ that. `find` walks the same bounded subtree, so a window with more than 5,000
 nodes cannot be searched from its root; a scoped search walks only the scope's
 subtree. On the Win32 fixture a read costs about 0.4 ms per node: 4,900 nodes
 take 1.9 to 2.2 seconds, and a 10,000-item tree fails after 3.8 to 4.3 seconds.
-Reads are not incremental yet. Bounding them needs per-level reads with
-completeness fields, an FDR1 and Node type change that must land with macOS (see
-[the plan](../../references/remaining-work.md)).
+`tree` and `find` are not incremental; use `observe` for a budgeted, partial
+read of a large tree.
 
 ### Unsettled mutations
 
@@ -364,7 +408,14 @@ covers the authority modes: the record-name, base64, UTF-8, root, ancestor-ACL,
 URL, and listener rules; an owner-only store in a scratch directory with its
 tamper and race cases; and `describe` and `verify` against this process, a child
 process, and a loopback listener. A case the machine cannot host prints an
-`info` line and is skipped.
+`info` line and is skipped. Bounded observation is covered by a synthetic
+provider (each truncation reason alone, duplicates, cycles, stale and unreadable
+elements, a stalled read, cancellation, secure fields, clipping, and 300
+randomized trees), by pinned-record registry cases, and by `observe` and
+`releaseElements` against a real window. With
+`FURN_DRIVER_SELF_TEST_OBSERVATIONS` set to a file path, the self-test writes
+its synthetic samples there, and the native contract checks each one with the
+Node validator.
 
 Real qualification must run against the target React Native app. Use an
 interactive runner for physical click, keyboard, wheel, multi-window, capture,

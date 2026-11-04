@@ -5,6 +5,8 @@
 // about a second); the others keep it off every monitor, and none of them steals the foreground.
 import { NativeHostProcess } from '../../hosts/native/NativeHostProcess';
 import type { NativeHostRequestResult } from '../../hosts/native/NativeHostProcess';
+import type { NativeObserveRequest } from '../../host/types';
+import { parseNativeObservation } from '../../protocol/observation';
 import { delay } from '../filesystem';
 import type { NativeHostEventMessage } from '../types';
 import { fixtureExecutable, helperArtifact, required, waitFor } from './win32FixtureSupport';
@@ -350,6 +352,35 @@ describe('Windows helper against a plain Win32 application', () => {
       expect(await overLimit.windows()).toHaveLength(1);
       const { retention } = await overLimit.eventReport();
       expect(retention.retainedElements).toBeLessThanOrEqual(retention.retainedElementLimit);
+
+      // A bounded observation of the same tree returns a partial sample instead of failing.
+      const observe = async (budget: NativeObserveRequest['budget']) => {
+        const request: NativeObserveRequest = { budget, facts: ['enabled', 'geometry'], windowId: overLimit.main.id };
+        const started = Date.now();
+        const parsed = parseNativeObservation(request, await overLimit.call('observe', request));
+        if (parsed.status === 'rejected') {
+          throw new Error(`The helper's observation breaks the contract: ${parsed.message}`);
+        }
+        return { ms: Date.now() - started, observation: parsed.observation };
+      };
+      const generous = { deadlineMs: 30_000, maxBytes: 4_194_304, maxDepth: 64, maxStringLength: 256, maxVisited: 5_000 };
+      const visited = await observe(generous);
+      expect(visited.observation.complete).toBe(false);
+      expect(visited.observation.nodes).toHaveLength(5_000);
+      expect(visited.observation.truncation).toEqual([{ limit: 5_000, reason: 'visited', unvisited: 0 }]);
+      const repeated = await observe(generous);
+      expect(repeated.observation.nodes.map((node) => node.id)).toEqual(visited.observation.nodes.map((node) => node.id));
+      const deadline = await observe({ ...generous, deadlineMs: 50 });
+      expect(deadline.observation.truncation.map((entry) => entry.reason)).toEqual(['deadline']);
+      expect(deadline.ms).toBeLessThan(2_000);
+      expect(await overLimit.windows()).toHaveLength(1);
+
+      const ids = visited.observation.nodes.map((node) => node.id);
+      let released = 0;
+      for (let start = 0; start < ids.length; start += 1_000) {
+        released += (await overLimit.call<{ released: number }>('releaseElements', { ids: ids.slice(start, start + 1_000) })).released;
+      }
+      expect(released).toBe(5_000);
     } finally {
       await overLimit.dispose();
     }

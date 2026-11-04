@@ -14,9 +14,9 @@ mutations are settled: providers report an `effect`, and the service
 quarantines a target whose mutation may have landed. The macOS helper reports
 it through an effect ledger and the Windows helper fails closed on unsettled UI
 Automation mutations. Bounded observation is implemented in the Node host, the
-fake host, and the macOS helper, and the driver service serves the read
-operations `observe`, `find`, and `journal` ([Agent operations](operations.md));
-the Windows helper's `observe` is open (section 7). A service given a
+fake host, and both native helpers, and the driver service serves the read
+operations `observe`, `find`, and `journal` ([Agent operations](operations.md)).
+A service given a
 `DesktopAuthority` now requires a grant on every route and scopes sessions and
 targets per grant ([security](security.md#protected-service)). Actions, waits,
 capture, controller lifecycle, and the MCP adapter are not started. MR has
@@ -529,16 +529,16 @@ Source ownership follows [contributing](contributing.md),
 The [Windows provider](../native/windows/README.md) is shared, but Windows
 Fabric and Win32 Paper retain distinct app/runtime behavior and qualification.
 
-| Work area                | Source owner                                                            | Remaining evidence                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | Specified by the bounded observation contract; the work package below is the Windows side. Budgets must apply before subtree-wide caching: the bounded walk still caches the whole subtree before it fails `tree-too-large`, and `find` shares the 5,000-node cap. Large trees must return honest partial results, and incomplete searches must never authorize unique mutation.                                                    |
-| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)). Remaining: reconciling its eviction and release with the bounded observation contract (work package below), macOS token-recycling evidence (ids are never reused and actions check the pid and role; fingerprints wait on it), PID reuse against a real application, and a retention plateau measured on a real React Native session. |
-| Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations)) and qualified against the stuck and hung Win32 fixture, directly and behind a protected service. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and the follow-ups below (report `effect`, self-test the paths).        |
-| Input authority          | `native/windows/src/input.cpp` and application activation               | Windows implemented ([contract](../native/windows/README.md#input-authority)), and the Win32 Paper smoke passed physical pointer and keyboard actions. Remaining: live lock, RDP disconnect, and elevation transitions (the self-test injects them), a `uiAccess` decision, delivery evidence for `SendInput` beyond its return value, and foreground matching that is finer than the owning process.                               |
-| Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).                                |
-| Application ownership    | `native/windows/src/application.cpp` and trusted supervisor             | Not started: packaged AUMID and unpackaged executable identity under duplicate or changing titles, ACL validation, stale claims, and Job Object restrictions. The fixture has only a lifetime watchdog.                                                                                                                                                                                                                             |
-| Popups and islands       | UIA traversal and window ownership                                      | Owned dialogs verified: the fixture rejects owner clicks and publishes destroy events, and a real native Callout test passed on Win32 Paper. Remaining: menu popups, which need activation to open and so are unqualified, and Fabric islands.                                                                                                                                                                                      |
-| Geometry and capture     | Windows geometry/capture modules                                        | Window and element PNG capture is verified on the fixture only. Remaining: 100/150/200% and mixed-DPI monitor moves, negative origins, crop alignment, minimized windows, and cancellation during capture.                                                                                                                                                                                                                          |
+| Work area                | Source owner                                                            | Remaining evidence                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | `observe` is implemented ([contract](../native/windows/README.md#bounded-observation)): it pages siblings one call at a time, so every budget applies mid-level, and a 10,000-item fixture tree returns a 5,000-node partial sample. Remaining: `tree` and `find` still cache the whole subtree and fail `tree-too-large`, incomplete searches must never authorize unique mutation, and no React Native tree has been observed. |
+| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)), including pinned `observe` records and `releaseElements`. Remaining: macOS token-recycling evidence (ids are never reused and actions check the pid and role; fingerprints wait on it), PID reuse against a real application, and a retention plateau measured on a real React Native session.                                     |
+| Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations)) and qualified against the stuck and hung Win32 fixture, directly and behind a protected service. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and the follow-ups below (report `effect`, self-test the paths).     |
+| Input authority          | `native/windows/src/input.cpp` and application activation               | Windows implemented ([contract](../native/windows/README.md#input-authority)), and the Win32 Paper smoke passed physical pointer and keyboard actions. Remaining: live lock, RDP disconnect, and elevation transitions (the self-test injects them), a `uiAccess` decision, delivery evidence for `SendInput` beyond its return value, and foreground matching that is finer than the owning process.                            |
+| Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).                             |
+| Application ownership    | `native/windows/src/application.cpp` and trusted supervisor             | Not started: packaged AUMID and unpackaged executable identity under duplicate or changing titles, ACL validation, stale claims, and Job Object restrictions. The fixture has only a lifetime watchdog.                                                                                                                                                                                                                          |
+| Popups and islands       | UIA traversal and window ownership                                      | Owned dialogs verified: the fixture rejects owner clicks and publishes destroy events, and a real native Callout test passed on Win32 Paper. Remaining: menu popups, which need activation to open and so are unqualified, and Fabric islands.                                                                                                                                                                                   |
+| Geometry and capture     | Windows geometry/capture modules                                        | Window and element PNG capture is verified on the fixture only. Remaining: 100/150/200% and mixed-DPI monitor moves, negative origins, crop alignment, minimized windows, and cancellation during capture.                                                                                                                                                                                                                       |
 
 Keep UIA operations on correctly initialized/marshaled COM workers. Document
 the bounded-call settlement strategy explicitly; abandoning a thread and
@@ -576,116 +576,16 @@ cannot be verified from macOS):
 2. Add native self-test cases for the effect reported by each mutating
    command's rejection, cancellation, and abandoned paths.
 
-**Windows work package for bounded observation (M3).** Implement the
-[bounded observation contract](../native/PROTOCOL.md#bounded-observation) in
-`native/windows/**`. The Node host, its request and response validation, a fake
-reference provider, and the conformance suite already exist, so the helper needs
-no Node change: Node enables `observe` only after the helper negotiates
-`boundedObservation` and rejects any response that breaks the contract. The
-helper must:
-
-1. **Traverse incrementally.** `WalkCachedSubtree` builds a `TreeScope_Subtree`
-   cache for the whole window before it checks the 5,000-node limit, so a large
-   tree is paid for (and fails `tree-too-large`) before any budget applies.
-   `observe` instead walks breadth first with one cached `TreeScope_Children`
-   fetch per expanded parent, in control view as `tree` does, reads a node's
-   children only while the budget still allows visiting them, and starts no new
-   provider call after `deadlineMs`. It never falls back to `SnapshotWindowTree`.
-   A single very wide level costs one call for all of its siblings (about 0.4 ms
-   each on the Win32 fixture), so the deadline cannot stop inside it: page the
-   siblings, for example with the cached tree walker, so that `maxVisited`,
-   `maxBytes`, and `deadlineMs` take effect mid-level, and measure it on the
-   fixture's 10,000-node tree.
-2. **Reconcile the identity table with the contract.** `find`, `snapshot`,
-   `tree`, and `observe` already share the helper's `ElementRegistry`
-   (`native/windows/src/elementregistry.cpp`): ids from a monotonic counter that
-   is never reused, a runtime-key map guarded by a fingerprint, and a
-   generation-based LRU capped at 20,000 records that evicts older generations
-   and never the observation in progress
-   ([contract](../native/windows/README.md#element-identity-and-retention)).
-   Keep that identity evidence. Two parts disagree with the frozen
-   [bounded observation contract](../native/PROTOCOL.md#bounded-observation):
-   - **Capacity.** The contract says capacity stops emission with the
-     `references` truncation instead of evicting, so an id an agent was given
-     never goes stale to make room for another sample. Records that `observe`
-     emitted must stay retained until `releaseElements`, `closeWindow`,
-     `closeApplication`, or `dispose`. For example, pin them so that eviction
-     takes only unpinned records from `find`, `snapshot`, and `tree`, and end
-     the sample with `references` (empty when even the root has no room) when
-     pinned records leave no room. If another policy fits the registry better,
-     change the contract in the same commit, with matching macOS and fake-host
-     changes and conformance cases, instead of diverging.
-   - **Release.** Add `releaseElements`, which drops only the named records,
-     ignores unknown ids, and returns how many it dropped. Node rejects a count
-     above the number of ids it sent, so the registry's `Erase`, which also
-     drops every record beneath an id so that no record loses its parent, cannot
-     be reused as it is: a descendant Node still holds must stay retained after
-     its parent is released. Keep ancestry independent of retention, or relax
-     that invariant, since `observe` reports `parentId` from the sample itself.
-
-   Prove both in the registry self-test, including a provider whose runtime ids
-   repeat.
-
-3. **Report facts as snapshots do.** Reuse `ReadSnapshot`'s derivation of role,
-   name, automation id, scope (including preview-root detection), and facts, so
-   an agent sees identical vocabularies on both providers. Never report `value`
-   or `text` for a password (`UIA_IsPasswordPropertyId`). Cut strings in UTF-16
-   code units without splitting a surrogate pair, and list each cut field in
-   `clipped`. Keep `rect` window-relative, as snapshots do.
-4. **Advertise the feature last.** Add `boundedObservation` to the `hello`
-   features in `host.cpp` and the `probe` features map in `driver.cpp` only
-   when the self-tests below pass.
-5. **Prove the conformance cases** with the controllable synthetic provider the
-   settlement tests use: a tree larger than every budget returns a partial
-   sample; each truncation reason is provoked alone; two samples of an
-   unchanged tree report identical ids and order; a duplicate reachable element
-   is emitted once; a released id is rejected and never reappears; capacity
-   stops emission with `references` and leaves an empty sample when even the
-   root has no room; a hung read ends at the deadline plus the one call in
-   flight; cancellation unwinds with no `effect`; and no `TreeScope_Subtree`
-   fetch happens while observing.
-
-**Rules the macOS provider settled.** The first contract text left these
-implicit; they are now in [FDR1](../native/PROTOCOL.md#bounded-observation) and
-the Windows provider must match them, with a self-test case for each:
-
-- An element whose own read fails for a reason other than staleness is skipped.
-  Its parent still counts it, becomes `truncated`, and the sample reports
-  `unreadable`; a child list that cannot be read leaves `childrenState`
-  `unknown`.
-- A child reached through an earlier parent is emitted once, under the first
-  parent, and is not counted in later parents' `childCount`. A child that turns
-  out stale is dropped from its parent's count.
-- `unsupportedFacts` is a provider capability: list a fact only when no element
-  can report it. Per-node unsupported values keep their reasons, and macOS
-  lists none.
-- The `actions` fact and `accessibilityActions` both publish an empty list when
-  the platform has no action list for an element, so one such element never
-  drops out of a sample.
-- Records end with their window: `closeWindow` and `closeApplication` drop every
-  record of the closed window, and `dispose` drops all of them. Node cannot
-  release an id it never learned, such as one an abandoned `observe` recorded,
-  so this is the only way those records end.
-
-`sampleObservation` and its randomized differential self-test in
-`native/macos/Sources/DesktopDriverHost` are a worked reference for the loop
-and the test strategy, and `src/hosts/fake/observeTree.ts` is the TypeScript
-model; port the algorithm, not the Accessibility call pattern.
-
-Document the identity evidence, capacity, and release behavior in the
-[Windows README](../native/windows/README.md). After pulling, run the helper
-`--self-test` and the gated native contract (`FURN_NATIVE_DRIVER_TEST=1 yarn
-test --runInBand` in this package).
-
-Incremental UIA reads were measured before the protocol existed. UIA caches a
-subtree at about 0.4 ms per node, so a 4,900-node tree reads in about 2
-seconds and a 10,000-node tree fails after about 4 seconds. A root `find`
-shares the 5,000-node cap. Bounding the work before it is done needs per-level
-or budgeted reads with explicit completeness fields, and a single very wide
-level needs its own budget because a children-scope request returns every
-sibling. That needed an FDR1 protocol change with Node types and fake-host
-support, so it waited for M3; the contract and the macOS provider are now on
-this branch, and the work package above is the Windows side.
+**Windows bounded observation progress:** `observe` and `releaseElements` are
+implemented ([contract](../native/windows/README.md#bounded-observation)). The
+sampler pages each family of children with the cached tree walker, so every
+budget takes effect between two siblings, and no `TreeScope_Subtree` cache is
+built. Records `observe` emits are pinned until `releaseElements` or their
+window ends, capacity ends a sample with `references`, and release drops only
+the named records. `tree` and `find` still cache the whole subtree and share
+the 5,000-node cap: about 0.4 ms per node, so a 4,900-node tree reads in about 2
+seconds and a 10,000-node tree fails after about 4. Section 11 records the
+evidence and what did not run.
 
 Operation-time permission and capability changes must be surfaced truthfully
 even if session-start feature negotiation previously succeeded. The Windows
@@ -868,9 +768,9 @@ produced it, so a provider cannot pass unrequested or inconsistent data to an
 agent, and it never substitutes the unbounded `tree` or `find`. The fake host
 is the reference provider, with one identity registry shared across `find`,
 `snapshot`, `observe`, and release, and a conformance grid covers each
-truncation reason. The macOS provider is implemented and live-checked (section
-11). The Windows provider is open: its work package is in section 7. M3 also
-still owns action descriptors, bounded event tails, and the native large-tree,
+truncation reason. The macOS provider is implemented and live-checked, and the
+Windows provider is implemented and checked against its synthetic provider and
+the Win32 fixture (section 11). M3 also still owns action descriptors, bounded event tails, and the native large-tree,
 replacement, pagination, and delta tests.
 
 **Windows identity progress:** the Windows provider already bounds identity and
@@ -879,9 +779,9 @@ revalidates a fingerprint, and a 20,000-record LRU caps memory
 ([contract](../native/windows/README.md#element-identity-and-retention)). On the
 Win32 fixture, 500 observation, action, and popup cycles keep about 20 retained
 elements and grow the working set by under 8 MB after the first 100 cycles; no
-longer run was recorded. Its eviction and its subtree-wide release do not yet
-match the bounded observation contract (see the work package in section 7), and
-no real React Native session has been measured for a plateau.
+longer run was recorded. Records that `observe` emits are pinned outside the
+LRU until released or their window ends, and no real React Native session has
+been measured for a plateau.
 
 **Complete when:** native large-tree, duplicate, replacement, pagination/delta,
 and repeated-context tests pass; no new bounded request uses a full-tree
@@ -1236,8 +1136,8 @@ Windows items **not run**:
   code path the scratch-root contracts exercise. The wildcard-listener
   competitor is covered by the native self-test, not the Node contract.
 
-Deferred Windows work, listed in section 7: incremental UIA reads (the bounded
-observation work package), Job Object and ACL application ownership, and
+Deferred Windows work, listed in section 7: incremental `tree` and `find`, Job
+Object and ACL application ownership, and
 quarantine persistence with the trusted `recover` operation. Also open: the
 `window-closed` publication writes to stdout from the hook thread, so a Node
 side that stops draining stdout can stall event processing; move the write to a
@@ -1275,8 +1175,7 @@ ledger counts primary mutations only, so a failed AX call it cannot classify
 reports `unknown` and quarantines the target; expect some false quarantines
 until real applications show which AX errors are safe to classify as `none`.
 
-Bounded observation implementation checks on macOS (the Windows provider is
-open):
+Bounded observation implementation checks on macOS:
 
 - The Swift helper self-test built outside the repository tree **passed** 314
   of 314 checks (148 before this work). The new checks cover request validation
@@ -1326,7 +1225,7 @@ open):
   pipe ever matters, a compact unsupported form is a candidate contract change.
   Without facts, `observe` is 3.5 to 4 times smaller and about 3 times faster.
 
-Observation items **not run**: the Windows provider and its self-test; trees
+Observation items **not run** on macOS: trees
 near the 5,000-node limit and the 10,000-record table capacity; a real secure
 text field (the rule is covered by self-tests only); and the FluentUI macOS
 Storybook application. A hung application and retained memory across repeated
@@ -1334,6 +1233,42 @@ observations are covered in the operation-layer checks below. The snapshot path 
 `AXValue` returns, which is a pre-existing gap that `observe` does not share. The
 helper release build also prints one pre-existing warning (`main.swift`, "weak
 reference will always be nil").
+
+Bounded observation implementation checks on Windows (Windows 11 x64, Visual
+Studio 18, helper built from source with no compiler warnings):
+
+- `furn-desktop-driver-host.exe --self-test` **passed** 690 of 690 checks (548
+  before this work). A synthetic provider covers request validation and every
+  budget bound, each truncation reason alone (a 10,001-node tree, depth, bytes,
+  a fake-clock deadline, a stalled read, a root read past the deadline, and
+  `references` capacity of 3 and 0), duplicates, a cycle, stale and unreadable
+  elements, cancellation inside a read, secure fields, clipping, fact key order,
+  and 300 randomized trees checked against a structural model. Registry cases
+  cover pinning, eviction that skips pinned records and their ancestors,
+  non-cascading release, and records ending with their window. `observe` and
+  `releaseElements` also ran against two real windows in the test process,
+  including a password edit, a foreign or unknown `rootId`, and release
+  followed by `stale-element`.
+- `FURN_NATIVE_DRIVER_TEST=1 yarn test nativeDriver --runInBand` **passed** (6
+  passed, 2 skipped as macOS-only). The real helper negotiated
+  `boundedObservation` and gave the same `invalid-params`, `no-such-window`, and
+  `releaseElements` answers as macOS (the shared helper is now
+  `expectBoundedObservation`), and Node's protocol oracle **accepted** all 332
+  samples the self-test dumped (32 fixed, 300 random, 30 complete).
+- `win32Fixture.contract` "bounds a large tree" **passed**: on the 10,000-item
+  fixture tree, `observe` with `maxVisited` 5,000 returned 5,000 nodes with the
+  `visited` truncation in 4,624 ms (4,613 ms repeated, identical ids), a 50 ms
+  deadline answered in 50 ms with 41 nodes, `tree` and `find` still fail
+  `tree-too-large`, and the 5,000 ids released in five chunks of 1,000.
+
+Windows observation items **not run**: a React Native tree (Paper or Fabric),
+retained memory across repeated observations of a real session, a hung
+application during `observe` (the stalled read is synthetic), DPI scaling other
+than the machine's, and the operation layer and MCP adapter against the Windows
+helper. Known deviations, documented in the
+[Windows README](../native/windows/README.md#bounded-observation): `maxVisited`
+equal to the tree size reports `visited` with `unvisited` 0, and a root read
+past the deadline reports `unvisited` 0.
 
 Operation layer implementation checks on macOS (the Windows provider and the MCP
 adapter are open). The release helper ran through the real server against
