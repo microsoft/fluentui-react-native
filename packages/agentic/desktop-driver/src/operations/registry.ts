@@ -7,6 +7,8 @@ import { readJournalOperation } from './journalOperation.js';
 import { operationSchemaVersion } from './limits.js';
 import { observeOperation } from './observe.js';
 import type { OperationCapabilities, OperationEffect, RegisteredOperation } from './runtime.js';
+import { collapseSchemaReferences } from './schemaReferences.js';
+import { sequenceOperation } from './sequence.js';
 
 export type JsonSchema = Record<string, unknown>;
 
@@ -30,6 +32,7 @@ const operations: readonly RegisteredOperation[] = [
   findElementsOperation,
   actOperation,
   checkOperation,
+  sequenceOperation,
   readJournalOperation,
 ];
 const operationsByName = new Map(operations.map((definition) => [definition.name, definition]));
@@ -41,7 +44,7 @@ export function lookupOperation(name: string): RegisteredOperation | undefined {
 
 /** A JSON Schema without the `$schema` marker, which every catalog entry would otherwise repeat. */
 function describeSchema(schema: z.ZodType, io: 'input' | 'output'): JsonSchema {
-  const { $schema: _marker, ...rest } = z.toJSONSchema(schema, { io }) as JsonSchema;
+  const { $schema: _marker, ...rest } = z.toJSONSchema(schema, { io, override: collapseSchemaReferences }) as JsonSchema;
   return rest;
 }
 

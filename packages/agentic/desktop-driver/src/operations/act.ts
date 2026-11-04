@@ -74,7 +74,7 @@ export const actOutput = z.strictObject({
 });
 
 export type ActResult = z.infer<typeof actOutput>;
-type ActOptions = z.output<typeof actInput>;
+export type ActOptions = z.output<typeof actInput>;
 
 const requiredCapability: Partial<Record<ActionName, keyof OperationCapabilities>> = {
   activate: 'accessibilityClick',
@@ -114,6 +114,13 @@ function sanitizeQuarantine(runtime: OperationRuntime, error: unknown): unknown 
   const report = readMutationReport(error);
   const sanitized = quarantinedError(runtime);
   return report ? attachMutationReport(sanitized, report) : sanitized;
+}
+
+/** Refuses a change while the target is quarantined, in fixed words. */
+export function assertNotQuarantined(runtime: OperationRuntime): void {
+  if (runtime.quarantined()) {
+    throw quarantinedError(runtime);
+  }
 }
 
 export function assertActionSupported(runtime: OperationRuntime, action: ActionName): void {
@@ -290,9 +297,7 @@ export async function dispatchAction(
  * Shared by `act` and by the action steps of `sequence`.
  */
 export async function performAction(runtime: OperationRuntime, input: ActOptions): Promise<ActResult> {
-  if (runtime.quarantined()) {
-    throw quarantinedError(runtime);
-  }
+  assertNotQuarantined(runtime);
   assertActionSupported(runtime, input.action);
   const { entry, proof } = input.find ? await proveSelector(runtime, input.find) : resolveProven(runtime, input.ref!, input.sample!);
   try {

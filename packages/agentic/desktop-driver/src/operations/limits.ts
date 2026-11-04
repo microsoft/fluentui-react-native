@@ -71,6 +71,9 @@ export const maxTypedTextLength = 4_096;
  */
 export const checkWaitMs = { ceiling: 30_000, default: 0, floor: 0 } as const satisfies OperationBudget;
 
+/** The most steps one `sequence` runs. Its checks share one `checkWaitMs` ceiling, so it holds the queue no longer. */
+export const maxSequenceSteps = 8;
+
 /** The first and the longest pause between a waiting check's evaluations. Host events end a pause early. */
 export const checkPollMs = { first: 100, longest: 1_000 } as const;
 

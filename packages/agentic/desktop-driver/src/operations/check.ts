@@ -57,7 +57,7 @@ type Expectation = z.output<typeof expectation>;
 
 const matchCounts = ['none', 'unique', 'some'] as const;
 
-const checkInput = z
+export const checkInput = z
   .strictObject({
     expect: expectation.optional().describe('All must hold. With find, the selector must also match exactly one element.'),
     find: selectorSchema.optional(),
@@ -78,7 +78,7 @@ const checkInput = z
   .describe('Give ref with expect, or find with expect or matches.');
 
 export type CheckInput = z.input<typeof checkInput>;
-type CheckOptions = z.output<typeof checkInput>;
+export type CheckOptions = z.output<typeof checkInput>;
 
 const predicateStatus = ['passed', 'failed', 'unsupported'] as const;
 type PredicateStatus = (typeof predicateStatus)[number];
@@ -97,7 +97,7 @@ type PredicateResult = z.infer<typeof predicateResult>;
 const evaluationStatus = ['passed', 'failed', 'unsupported', 'inconclusive'] as const;
 type EvaluationStatus = (typeof evaluationStatus)[number];
 
-const checkOutput = z.strictObject({
+export const checkOutput = z.strictObject({
   status: z
     .enum([...evaluationStatus, 'timed-out'])
     .describe(
@@ -323,6 +323,68 @@ function evaluate(runtime: OperationRuntime, input: CheckOptions): Promise<Evalu
   return input.find ? evaluateSelector(runtime, { ...input, find: input.find }) : evaluateReference(runtime, input.ref!, input.expect!);
 }
 
+/** True when the check compares displayed content, which the operator's content policy governs. */
+export function checkNeedsContent(input: CheckOptions): boolean {
+  return expectationKeys.some((key) => contentKeys.has(key) && input.expect?.[key] !== undefined);
+}
+
+/** Evaluates one check, waiting as asked. Shared by `check` and by the check steps of `sequence`. */
+export async function runCheck(runtime: OperationRuntime, input: CheckOptions): Promise<CheckResult> {
+  assertContentAllowed(runtime, checkNeedsContent(input));
+  const startedAt = Date.now();
+  const deadline = startedAt + input.waitMs;
+  let evaluation: Evaluation | undefined;
+  const watcher = watchHost(runtime, () => evaluation?.window);
+  let attempts = 0;
+  let timedOut = false;
+  try {
+    for (let pauseMs: number = checkPollMs.first; ; pauseMs = Math.min(checkPollMs.longest, pauseMs * 2)) {
+      attempts += 1;
+      evaluation = await evaluate(runtime, input);
+      if (evaluation.terminal || input.waitMs === 0) {
+        break;
+      }
+      const remaining = deadline - Date.now();
+      if (remaining <= 0) {
+        timedOut = true;
+        break;
+      }
+      await watcher.pause(Math.min(pauseMs, remaining));
+      if (runtime.signal.aborted) {
+        throw cancelledError();
+      }
+    }
+  } finally {
+    watcher.dispose();
+  }
+  if (evaluation.proof) {
+    runtime.state.proofs.record(evaluation.proof);
+  }
+  const warnings = await flushLedger(runtime);
+  const { classification } = evaluation.search ?? {};
+  return {
+    status: timedOut ? 'timed-out' : evaluation.status,
+    ...(timedOut ? { last: evaluation.status as 'failed' | 'inconclusive' } : {}),
+    attempts,
+    elapsedMs: Date.now() - startedAt,
+    ...(evaluation.window === undefined ? {} : { window: evaluation.window }),
+    ...(evaluation.search && classification
+      ? {
+          search: {
+            outcome: classification.outcome,
+            ...(classification.reasons.length > 0 ? { reasons: classification.reasons } : {}),
+            definite: classification.definite.length,
+            possible: classification.possible.length,
+            visited: evaluation.search.visited,
+          },
+        }
+      : {}),
+    ...(evaluation.proof ? { ref: evaluation.proof.reference, sample: evaluation.proof.sample } : {}),
+    ...(evaluation.predicates ? { predicates: evaluation.predicates } : {}),
+    ...(warnings.length > 0 ? { warnings } : {}),
+  };
+}
+
 export const checkOperation = registerOperation({
   availability: requireBoundedObservation,
   effect: 'read',
@@ -331,64 +393,7 @@ export const checkOperation = registerOperation({
   output: checkOutput,
   summary:
     'Checks that an element shows a state, name, value, or text, or that a selector matches none, one, or some elements, optionally waiting. A completed action does not by itself pass a check.',
-  async run(input, runtime) {
-    assertContentAllowed(
-      runtime,
-      expectationKeys.some((key) => contentKeys.has(key) && input.expect?.[key] !== undefined),
-    );
-    const startedAt = Date.now();
-    const deadline = startedAt + input.waitMs;
-    let evaluation: Evaluation | undefined;
-    const watcher = watchHost(runtime, () => evaluation?.window);
-    let attempts = 0;
-    let timedOut = false;
-    try {
-      for (let pauseMs: number = checkPollMs.first; ; pauseMs = Math.min(checkPollMs.longest, pauseMs * 2)) {
-        attempts += 1;
-        evaluation = await evaluate(runtime, input);
-        if (evaluation.terminal || input.waitMs === 0) {
-          break;
-        }
-        const remaining = deadline - Date.now();
-        if (remaining <= 0) {
-          timedOut = true;
-          break;
-        }
-        await watcher.pause(Math.min(pauseMs, remaining));
-        if (runtime.signal.aborted) {
-          throw cancelledError();
-        }
-      }
-    } finally {
-      watcher.dispose();
-    }
-    if (evaluation.proof) {
-      runtime.state.proofs.record(evaluation.proof);
-    }
-    const warnings = await flushLedger(runtime);
-    const { classification } = evaluation.search ?? {};
-    return {
-      status: timedOut ? 'timed-out' : evaluation.status,
-      ...(timedOut ? { last: evaluation.status as 'failed' | 'inconclusive' } : {}),
-      attempts,
-      elapsedMs: Date.now() - startedAt,
-      ...(evaluation.window === undefined ? {} : { window: evaluation.window }),
-      ...(evaluation.search && classification
-        ? {
-            search: {
-              outcome: classification.outcome,
-              ...(classification.reasons.length > 0 ? { reasons: classification.reasons } : {}),
-              definite: classification.definite.length,
-              possible: classification.possible.length,
-              visited: evaluation.search.visited,
-            },
-          }
-        : {}),
-      ...(evaluation.proof ? { ref: evaluation.proof.reference, sample: evaluation.proof.sample } : {}),
-      ...(evaluation.predicates ? { predicates: evaluation.predicates } : {}),
-      ...(warnings.length > 0 ? { warnings } : {}),
-    };
-  },
+  run: (input, runtime) => runCheck(runtime, input),
   summarize(input, output) {
     // Expected names, values, and text can quote what an application displayed, so only the expectation names are kept.
     return {

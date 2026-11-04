@@ -4,12 +4,13 @@ import { observationBudgets } from './limits.js';
 import { assertContentAllowed, requestsContent, requireBoundedObservation } from './policy.js';
 import { defaultObservedFacts, nativeFacts, observeFacts, project, shownFacts } from './projection.js';
 import { registerOperation } from './runtime.js';
+import type { OperationRuntime } from './runtime.js';
 import { sampleTree } from './sampling.js';
 import { budgetField, factSchema, referenceSchema, sampleSchema, truncationSchema, warningSchema } from './shapes.js';
 
 const viewSchema = z.enum(['interactive', 'content', 'all']);
 
-const observeInput = z.strictObject({
+export const observeInput = z.strictObject({
   budget: z
     .strictObject({
       deadlineMs: budgetField(observationBudgets.deadlineMs).describe('Milliseconds the application may take.'),
@@ -54,7 +55,7 @@ const elementSchema = z.strictObject({
   value: z.string().optional(),
 });
 
-const observeOutput = z.strictObject({
+export const observeOutput = z.strictObject({
   sample: sampleSchema,
   view: viewSchema,
   facts: z.array(factSchema).describe('Facts shown for each element.'),
@@ -85,6 +86,50 @@ const observeOutput = z.strictObject({
 
 export type ObserveInput = z.input<typeof observeInput>;
 export type ObserveResult = z.infer<typeof observeOutput>;
+export type ObserveOptions = z.output<typeof observeInput>;
+
+/** True when the observation would show displayed content, which the operator's content policy governs. */
+export function observeNeedsContent(input: ObserveOptions): boolean {
+  return requestsContent(shownFacts(input.view, input.facts ?? defaultObservedFacts));
+}
+
+/** Reads one bounded observation. Shared by `observe` and by the closing observation of `sequence`. */
+export async function observeWindow(runtime: OperationRuntime, input: ObserveOptions): Promise<ObserveResult> {
+  const { budget, format, view } = input;
+  const shown = shownFacts(view, input.facts ?? defaultObservedFacts);
+  assertContentAllowed(runtime, requestsContent(shown));
+  const sampled = await sampleTree(
+    runtime,
+    {
+      facts: nativeFacts(view, shown),
+      limits: {
+        deadlineMs: budget.deadlineMs,
+        maxDepth: budget.maxDepth,
+        maxStringLength: budget.maxStringLength,
+        maxVisited: budget.maxVisited,
+      },
+      within: input.within,
+    },
+    ({ observation, refs }) => ({
+      projection: project({ budgets: { maxBytes: budget.maxBytes, maxNodes: budget.maxNodes }, format, observation, refs, shown, view }),
+      unsupportedFacts: observation.unsupportedFacts.filter((fact) => shown.includes(fact)),
+    }),
+  );
+  const { projection, unsupportedFacts } = sampled.value;
+  return {
+    sample: projection.root === undefined ? sampled.sample : { ...sampled.sample, root: projection.root },
+    view,
+    facts: shown,
+    unsupportedFacts,
+    budgets: { ...budget, deadlineMs: sampled.deadlineMs },
+    complete: projection.complete,
+    truncation: projection.truncation,
+    counts: projection.counts,
+    ...(sampled.warnings.length > 0 ? { warnings: sampled.warnings } : {}),
+    ...(projection.outline === undefined ? {} : { outline: projection.outline }),
+    ...(projection.nodes === undefined ? {} : { nodes: projection.nodes }),
+  };
+}
 
 export const observeOperation = registerOperation({
   availability: requireBoundedObservation,
@@ -93,42 +138,7 @@ export const observeOperation = registerOperation({
   name: 'observe',
   output: observeOutput,
   summary: 'Reads a bounded outline of the window, or of an element inside it. Elements carry references other operations accept.',
-  async run(input, runtime) {
-    const { budget, format, view } = input;
-    const shown = shownFacts(view, input.facts ?? defaultObservedFacts);
-    assertContentAllowed(runtime, requestsContent(shown));
-    const sampled = await sampleTree(
-      runtime,
-      {
-        facts: nativeFacts(view, shown),
-        limits: {
-          deadlineMs: budget.deadlineMs,
-          maxDepth: budget.maxDepth,
-          maxStringLength: budget.maxStringLength,
-          maxVisited: budget.maxVisited,
-        },
-        within: input.within,
-      },
-      ({ observation, refs }) => ({
-        projection: project({ budgets: { maxBytes: budget.maxBytes, maxNodes: budget.maxNodes }, format, observation, refs, shown, view }),
-        unsupportedFacts: observation.unsupportedFacts.filter((fact) => shown.includes(fact)),
-      }),
-    );
-    const { projection, unsupportedFacts } = sampled.value;
-    return {
-      sample: projection.root === undefined ? sampled.sample : { ...sampled.sample, root: projection.root },
-      view,
-      facts: shown,
-      unsupportedFacts,
-      budgets: { ...budget, deadlineMs: sampled.deadlineMs },
-      complete: projection.complete,
-      truncation: projection.truncation,
-      counts: projection.counts,
-      ...(sampled.warnings.length > 0 ? { warnings: sampled.warnings } : {}),
-      ...(projection.outline === undefined ? {} : { outline: projection.outline }),
-      ...(projection.nodes === undefined ? {} : { nodes: projection.nodes }),
-    };
-  },
+  run: (input, runtime) => observeWindow(runtime, input),
   summarize(input, output) {
     return {
       format: input.format,

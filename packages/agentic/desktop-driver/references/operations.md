@@ -10,15 +10,16 @@ owner_paths:
 Operations are the bounded, schema-described calls an agent makes instead of
 reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
-results sized by explicit budgets. Five exist today: the reads `observe`,
-`find`, `check`, and `journal`, and `act`, which changes the application.
-Sequences, capture, controller lifecycle, and the MCP adapter that will expose
-these operations are open work in the [implementation plan](remaining-work.md).
+results sized by explicit budgets. Six exist today: the reads `observe`,
+`find`, `check`, and `journal`, and `act` and `sequence`, which change the
+application. Capture, controller lifecycle, and the MCP adapter that will
+expose these operations are open work in the
+[implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
 ([FDR1](../native/PROTOCOL.md#bounded-observation)): the macOS helper and the
 fake host today. The Windows helper is open work. On any other provider the
-catalog reports `observe`, `find`, `act`, and `check` as unavailable with
+catalog reports every operation but `journal` as unavailable with
 `bounded-observation-unsupported`, and the driver never substitutes the
 unbounded `tree`.
 
@@ -65,9 +66,11 @@ Each entry has `name`, `summary`, `effect` (`read` or `mutate`), `available`,
 the same Zod schemas the executor validates with. Output schemas do not forbid
 unknown properties: a result may gain optional fields within a schema version,
 so consumers ignore fields they do not know. Descriptions are written for a
-model reader, and the whole catalog stays near 20 KB because MCP clients load
-it into context. An adapter may omit `outputSchema` from `tools/list` to save
-more.
+model reader, and the whole catalog stays near 23 KB because MCP clients load
+it into context. An operation that embeds another's input or output, as
+`sequence` does, names it in the catalog instead of repeating its schema, and
+validates it exactly as that operation does. An adapter may omit
+`outputSchema` from `tools/list` to save more.
 
 ## observe
 
@@ -275,6 +278,38 @@ provider says is gone stays gone, so a `ref` check that expects anything other
 than its absence fails at once. The result reports `attempts` and `elapsedMs`.
 Only the final search's proof is recorded, so a long wait does not evict the
 proofs the caller holds.
+
+## sequence
+
+Runs up to eight steps in order in one call, each `{ "act": … }` or
+`{ "check": … }` with that operation's input, and stops at the first act that
+fails or check that does not pass. An optional `observe` input adds a closing
+observation, read after the last step that ran, even when the sequence stopped.
+
+```json
+{
+  "steps": [
+    { "act": { "action": "activate", "find": { "name": "7", "role": "button" } } },
+    { "check": { "expect": { "value": "7" }, "find": { "name": "Edit field" }, "waitMs": 2000 } }
+  ],
+  "observe": { "budget": { "maxNodes": 40 } }
+}
+```
+
+The result's `status` is `completed` or `stopped`, with `stoppedAt` naming the
+step. `steps` holds one outcome per step that ran: the act or check result, or
+an `error` reduced as an operation error is, with the act's `mutation` report.
+A sequence is not a transaction: steps that ran stay done, and nothing is
+rolled back.
+
+Each act takes its own input turn and releases it once its input settles, so a
+check waits for the application without holding input. The checks share one
+30-second wait ceiling. Before the first step, the request is refused as a
+whole if the target is quarantined and a step acts, a step's action is
+unsupported, or a check or the closing observation reads content the operator
+denies, so such a refusal never lands halfway. A `requestId` makes the whole
+sequence one recorded outcome, as for `act`. The journal keeps the step kinds
+and the stopping index, never their selectors' values or typed text.
 
 ## References and provider records
 

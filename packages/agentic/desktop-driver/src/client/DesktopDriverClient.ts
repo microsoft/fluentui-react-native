@@ -16,6 +16,8 @@ import type {
   ObserveResult,
   OperationCatalog,
   OperationResponse,
+  SequenceInput,
+  SequenceResult,
 } from '../operations/index.js';
 import type {
   NewSessionCapabilities,
@@ -194,6 +196,14 @@ export class DesktopSessionClient {
   /** Checks an element's state, name, value, or text, or how many elements a selector matches, optionally waiting. */
   check(input: CheckInput, options?: { requestId?: string }): Promise<OperationResponse<CheckResult>> {
     return this.operation('check', input, options);
+  }
+
+  /**
+   * Runs act and check steps in order in one turn, stopping at the first that fails or does not pass, then optionally
+   * observes. Steps that ran stay done.
+   */
+  sequence(input: SequenceInput, options?: { requestId?: string }): Promise<OperationResponse<SequenceResult>> {
+    return this.operation('sequence', input, options);
   }
 
   /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */

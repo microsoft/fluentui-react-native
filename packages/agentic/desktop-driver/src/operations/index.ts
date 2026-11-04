@@ -9,6 +9,7 @@ export type { ObserveInput, ObserveResult } from './observe.js';
 export { describeOperations, lookupOperation } from './registry.js';
 export type { JsonSchema, OperationCatalog, OperationCatalogEntry } from './registry.js';
 export type { ContentPolicy, OperationCapabilities, OperationEffect, OperationHost, OperationRuntime } from './runtime.js';
+export type { SequenceInput, SequenceResult } from './sequence.js';
 export { OperationSessionState } from './sessionState.js';
 export type { OperationSessionStateOptions } from './sessionState.js';
 export type { OperationWarning, SampleInfo, Truncation } from './shapes.js';

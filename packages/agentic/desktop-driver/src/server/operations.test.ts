@@ -811,6 +811,95 @@ describe('Desktop Driver agent operations', () => {
     });
   });
 
+  describe('sequence', () => {
+    const clicks = (harness: { host: { actions: readonly Record<string, unknown>[] } }) =>
+      harness.host.actions.filter((action) => action.type === 'click').length;
+
+    test('runs act and check steps in order and closes with an observation', async () => {
+      await withFixture({ windows: actWindow }, async ({ session }) => {
+        const { result } = await session.sequence({
+          observe: { budget: { maxNodes: 20 } },
+          steps: [
+            { act: { action: 'activate', find: { automationId: 'agree' } } },
+            { check: { expect: { checked: true }, find: { automationId: 'agree' } } },
+            { act: { action: 'type', find: { automationId: 'field' }, text: 'secret words' } },
+            { check: { expect: { valueContains: 'SECRET' }, find: { automationId: 'field' } } },
+          ],
+        });
+        expect(result).toMatchObject({
+          status: 'completed',
+          steps: [
+            { act: { disposition: 'applied', mechanism: 'accessibility' } },
+            { check: { status: 'passed' } },
+            { act: { disposition: 'applied', mechanism: 'keyboard' } },
+            { check: { status: 'passed' } },
+          ],
+        });
+        expect(result.stoppedAt).toBeUndefined();
+        expect(result.observation?.outline).toMatch(/checkbox "Agree"/);
+        const [entry] = (await session.journal()).result.entries.filter((candidate) => candidate.operation === 'sequence');
+        expect(entry.summary).toEqual({ observed: true, status: 'completed', steps: 'activate,check,type,check' });
+        expect(JSON.stringify((await session.journal()).result)).not.toMatch(/secret/i);
+      });
+    });
+
+    test('stops at a check that does not pass or a step that fails, and still observes', async () => {
+      await withFixture({ windows: actWindow }, async ({ harness, session }) => {
+        const unchecked = await session.sequence({
+          observe: {},
+          steps: [
+            { act: { action: 'activate', find: { automationId: 'save' } } },
+            { check: { expect: { checked: true }, find: { automationId: 'agree' } } },
+            { act: { action: 'activate', find: { automationId: 'agree' } } },
+          ],
+        });
+        expect(unchecked.result).toMatchObject({
+          status: 'stopped',
+          stoppedAt: 1,
+          steps: [{ act: { disposition: 'applied' } }, { check: { predicates: [{ actual: false }], status: 'failed' } }],
+        });
+        expect(unchecked.result.steps).toHaveLength(2);
+        expect(unchecked.result.observation).toBeDefined();
+        expect(clicks(harness)).toBe(1);
+
+        const refused = await session.sequence({ observe: {}, steps: [{ act: { action: 'activate', find: { automationId: 'off' } } }] });
+        expect(refused.result).toMatchObject({
+          status: 'stopped',
+          stoppedAt: 0,
+          steps: [{ error: { code: 'element not interactable', mutation: rejected(), reason: 'not-enabled' } }],
+        });
+        expect(refused.result.observation).toBeDefined();
+        expect(clicks(harness)).toBe(1);
+      });
+    });
+
+    test('refuses the whole request before any step when one step could not run, and replays a repeated request id', async () => {
+      await withFixture(
+        { windows: actWindow },
+        async ({ harness, post, session }) => {
+          const save = { act: { action: 'activate', find: { automationId: 'save' } } } as const;
+          await expect(
+            session.sequence({ steps: [save, { check: { expect: { value: '' }, find: { automationId: 'field' } } }] }),
+          ).rejects.toMatchObject(operationFailure('unsupported operation', 'content-denied', 'sequence'));
+          await expect(session.sequence({ observe: { view: 'content' }, steps: [save] })).rejects.toMatchObject({
+            data: { reason: 'content-denied' },
+          });
+          expect(clicks(harness)).toBe(0);
+
+          const first = await session.sequence({ steps: [save] }, { requestId: 'twice' });
+          await expect(session.sequence({ steps: [save] }, { requestId: 'twice' })).resolves.toEqual(first);
+          expect(clicks(harness)).toBe(1);
+
+          const wait = { check: { find: { automationId: 'save' }, matches: 'some', waitMs: 20_000 } };
+          for (const input of [{ steps: [] }, { steps: Array(9).fill(save) }, { steps: [wait, wait] }, { steps: [{ observe: {} }] }]) {
+            expect((await post('sequence', { input })).value).toMatchObject({ error: 'invalid argument' });
+          }
+        },
+        { operations: { content: 'deny' } },
+      );
+    });
+  });
+
   describe('a quarantined target', () => {
     test('still answers reads, and says it is quarantined', async () => {
       await withFixture({ faults: { click: { mode: 'lost-response' } } }, async ({ harness, session }) => {

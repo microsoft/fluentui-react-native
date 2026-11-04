@@ -47,6 +47,7 @@ describe('describeOperations', () => {
       ['find', 'read', true],
       ['act', 'mutate', true],
       ['check', 'read', true],
+      ['sequence', 'mutate', true],
       ['journal', 'read', true],
     ]);
     for (const entry of catalog.operations) {
@@ -62,6 +63,7 @@ describe('describeOperations', () => {
       ['find', false, 'bounded-observation-unsupported'],
       ['act', false, 'bounded-observation-unsupported'],
       ['check', false, 'bounded-observation-unsupported'],
+      ['sequence', false, 'bounded-observation-unsupported'],
       ['journal', true, undefined],
     ]);
   });
@@ -111,7 +113,7 @@ describe('describeOperations', () => {
         expect(JSON.stringify(entry.input).length).toBeLessThan(2_500);
         expect(JSON.stringify(entry.output).length).toBeLessThan(5_000);
       }
-      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(20_500);
+      expect(JSON.stringify(describeOperations(everything)).length).toBeLessThan(23_500);
     });
 
     test('are frozen, so a consumer cannot corrupt the cache the next caller reads', () => {

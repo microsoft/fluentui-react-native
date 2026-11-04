@@ -828,8 +828,12 @@ with a bounded poll backoff; an incomplete search is `inconclusive`, never an
 absence. On macOS both were exercised against Calculator: physical `click`,
 selector and cited `activate`, `selector-not-unique` and `no-match` refusals,
 `check` passing, failing with the actual value, `unsupported` for an
-unreported state, and a timed-out wait. Windows qualification, AX action
-tickets, UIA pattern mappings, sequences, and capture remain.
+unreported state, and a timed-out wait. The
+[`sequence` operation](operations.md#sequence) runs up to eight act and check
+steps in one call, stopping at the first that fails or does not pass, with a
+closing observation; on macOS it entered 6 × 7 on Calculator and checked the
+display read 42. Windows qualification, AX action tickets, UIA pattern
+mappings, and capture remain.
 
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and
