@@ -5,7 +5,7 @@ import { toWebDriverError } from '../protocol/errors.js';
 import type { WebDriverError, WebDriverErrorCode } from '../protocol/errors.js';
 import { attachFailureEffect, attachMutationReport, readMutationReport } from '../protocol/settlement.js';
 import { operationError } from './envelope.js';
-import { maxTypedTextLength } from './limits.js';
+import { maxActionNameLength, maxTypedTextLength } from './limits.js';
 import { requireBoundedObservation } from './policy.js';
 import { matchesFingerprint } from './proofs.js';
 import type { UniquenessProof } from './proofs.js';
@@ -21,13 +21,14 @@ import { referenceSchema, sampleIdSchema, warningSchema } from './shapes.js';
 /** How far up from a hit-tested element the check walks to find the target. Deeper nesting is reported as obscured. */
 const maxHitAncestors = 64;
 
-export const actionNames = ['click', 'activate', 'type', 'clear'] as const;
+export const actionNames = ['click', 'activate', 'perform', 'type', 'clear'] as const;
 export type ActionName = (typeof actionNames)[number];
 
 /**
  * How the provider carried the action out. `physical-pointer` is a synthesized click at a hit-tested point,
- * `accessibility` is the element's default accessibility action, `keyboard` is synthesized key input to the focused
- * element, and `provider` means the provider chose and did not say, as `clear` does when it can set a value directly.
+ * `accessibility` is an accessibility action (the element's default one for `activate`, the named one for `perform`),
+ * `keyboard` is synthesized key input to the focused element, and `provider` means the provider chose and did not say,
+ * as `clear` does when it can set a value directly.
  */
 export const actionMechanisms = ['physical-pointer', 'accessibility', 'keyboard', 'provider'] as const;
 export type ActionMechanism = (typeof actionMechanisms)[number];
@@ -36,6 +37,7 @@ const mechanismOf: Record<ActionName, ActionMechanism> = {
   activate: 'accessibility',
   clear: 'provider',
   click: 'physical-pointer',
+  perform: 'accessibility',
   type: 'keyboard',
 };
 
@@ -44,14 +46,23 @@ export const actInput = z
     action: z
       .enum(actionNames)
       .describe(
-        "click: a physical pointer click at the hit-tested centre. activate: the element's default accessibility action, no pointer. type: keyboard input after focusing. clear: empty the value.",
+        "click: a physical pointer click at the hit-tested centre. activate: the element's default accessibility action, no pointer. perform: the accessibility action named by name, no pointer. type: keyboard input after focusing. clear: empty the value.",
       ),
     find: selectorSchema.optional().describe('Instead of ref and sample: a selector a complete search, run now, must prove unique.'),
+    name: z
+      .string()
+      .min(1)
+      .max(maxActionNameLength)
+      .optional()
+      .describe("Only with perform: an action as observe's actions fact lists it. The element must publish exactly one by that name."),
     ref: referenceSchema.optional().describe('A reference from a find whose outcome was unique. Give sample with it.'),
     sample: sampleIdSchema.optional().describe('The sample id of that find, which proved the reference unique.'),
     text: z.string().min(1).max(maxTypedTextLength).optional().describe('Text to type. Only with type; never recorded.'),
   })
   .refine((input) => (input.action === 'type') === (input.text !== undefined), { message: 'Give text with type, and only with type.' })
+  .refine((input) => (input.action === 'perform') === (input.name !== undefined), {
+    message: 'Give name with perform, and only with perform.',
+  })
   .refine(
     (input) =>
       input.find === undefined
@@ -79,6 +90,7 @@ export type ActOptions = z.output<typeof actInput>;
 const requiredCapability: Partial<Record<ActionName, keyof OperationCapabilities>> = {
   activate: 'accessibilityClick',
   click: 'physicalClick',
+  perform: 'accessibilityActions',
   type: 'keyboard',
 };
 
@@ -272,10 +284,49 @@ async function physicalClick(runtime: OperationRuntime, entry: ReferenceEntry, s
   await runtime.mutate(`Clicking reference ${entry.reference}`, (signal) => host.click(entry.nativeId, 'physical', signal));
 }
 
+/**
+ * Performs one named accessibility action. The element's actions are listed again inside the input turn, the name must
+ * pick out exactly one, and the provider's key for it binds the exact native action, so an action renamed or
+ * re-registered between the listing and the dispatch is refused rather than guessed at. Display names are not unique
+ * identifiers, so a name the element publishes twice names neither action.
+ */
+async function performNamedAction(runtime: OperationRuntime, entry: ReferenceEntry, name: string): Promise<void> {
+  const { host } = runtime;
+  let actions;
+  try {
+    actions = await runtime.command(`Listing the actions of reference ${entry.reference}`, (signal) =>
+      host.listAccessibilityActions(entry.nativeId, signal),
+    );
+  } catch (error) {
+    throw asRejection(runtime, interpretFailure(runtime, { windowId: entry.windowId, within: entry.reference }, error));
+  }
+  const matches = actions.filter((action) => action.name === name);
+  if (matches.length === 0) {
+    throw rejection(
+      runtime,
+      'element not interactable',
+      'action-not-published',
+      `Reference "${entry.reference}" publishes no action by that name. Observe it with the actions fact to see what it publishes.`,
+    );
+  }
+  if (matches.length > 1) {
+    throw rejection(
+      runtime,
+      'element not interactable',
+      'action-not-unique',
+      `Reference "${entry.reference}" publishes ${matches.length} actions by that name, so the name names none of them.`,
+    );
+  }
+  const [{ key }] = matches;
+  await runtime.mutate(`Performing an accessibility action on reference ${entry.reference}`, (signal) =>
+    host.performAccessibilityAction(entry.nativeId, key, signal),
+  );
+}
+
 /** Dispatches one action on a revalidated element. Runs inside the physical input turn. */
 export async function dispatchAction(
   runtime: OperationRuntime,
-  options: { action: ActionName; text?: string },
+  options: { action: ActionName; name?: string; text?: string },
   entry: ReferenceEntry,
   snapshot: NativeElementSnapshot,
 ): Promise<void> {
@@ -285,6 +336,8 @@ export async function dispatchAction(
       return physicalClick(runtime, entry, snapshot);
     case 'activate':
       return runtime.mutate(`Activating reference ${entry.reference}`, (signal) => host.click(entry.nativeId, 'accessibility', signal));
+    case 'perform':
+      return performNamedAction(runtime, entry, options.name!);
     case 'type':
       return runtime.mutate(`Typing into reference ${entry.reference}`, (signal) => host.sendKeys(entry.nativeId, options.text!, signal));
     case 'clear':
@@ -336,7 +389,7 @@ export const actOperation = registerOperation({
   name: 'act',
   output: actOutput,
   summary:
-    'Clicks, activates, types into, or clears one element: a reference with the sample of a find that proved it unique, or a selector proven unique now. Name your own requestId: repeating it returns the first outcome instead of acting twice.',
+    'Clicks, activates, performs a named accessibility action on, types into, or clears one element: a reference with the sample of a find that proved it unique, or a selector proven unique now. Name your own requestId: repeating it returns the first outcome instead of acting twice.',
   run: (input, runtime) => performAction(runtime, input),
   summarize(input, output) {
     const by = input.find ? selectorKeys(input.find) : undefined;

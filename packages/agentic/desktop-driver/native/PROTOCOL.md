@@ -177,7 +177,8 @@ reached it. `effect` is an optional string on `response.error` and on
 | `unknown` | A mutation was dispatched and not settled, or the helper cannot tell.                   |
 
 The mutating commands are `activate`, `clear`, `click`, `closeWindow`,
-`performActions`, `releaseActions`, `sendKeys`, and `setWindowRect`. Reads and
+`performAccessibilityAction`, `performActions`, `releaseActions`, `sendKeys`,
+and `setWindowRect`. Reads and
 lifecycle commands (`launch`, `attach`, `closeApplication`, `dispose`) carry no
 `effect`.
 
@@ -262,6 +263,22 @@ from a sample. Helpers without the feature reject the command as
 `unsupported-operation`, which Node reports as `unsupported operation` rather
 than an empty list. The feature is additive and does not change the wire
 version.
+
+Helpers that also advertise `performAccessibilityAction` add a `keys` array to
+the `accessibilityActions` response, one opaque string of 1 to 128 characters
+per entry of `actions`, in the same order. A key names the exact platform
+action the helper listed, not its display name: two actions with the same name
+have different keys. Keys are stable for the life of the helper process, must
+not reveal the platform identity they stand for (the macOS helper uses an HMAC
+under a per-process secret), and mean nothing to another helper. The mutating
+`performAccessibilityAction` command takes `{ "elementId": "<id>", "key":
+"<key>" }`, re-reads the live element's actions, and performs the one action
+whose key matches. If no action or more than one action matches, it fails
+`element-not-interactable` with `data.reason` `action-changed` and effect
+`none`; a broken element is `stale-element`. Node lists and performs inside
+one input turn and refuses a display name the element does not publish
+exactly once, so a key never reaches a different action than the one the
+agent named.
 
 ### Bounded observation
 

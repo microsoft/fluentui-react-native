@@ -777,8 +777,12 @@ is the reference provider, with one identity registry shared across `find`,
 `snapshot`, `observe`, and release, and a conformance grid covers each
 truncation reason. The macOS provider is implemented and live-checked, and the
 Windows provider is implemented and checked against its synthetic provider and
-the Win32 fixture (section 11). M3 also still owns action descriptors, bounded event tails, and the native large-tree,
-replacement, pagination, and delta tests.
+the Win32 fixture (section 11). Action descriptors are implemented on macOS:
+with `performAccessibilityAction`, the `accessibilityActions` response pairs
+each action with an opaque per-process key bound to the exact native action
+([FDR1](../native/PROTOCOL.md)); the Windows provider does not advertise it
+yet. M3 still owns bounded event tails and the native large-tree, replacement,
+pagination, and delta tests.
 
 **Windows identity progress:** the Windows provider already bounds identity and
 retention without a protocol change. Element ids are never reused, every action
@@ -838,8 +842,14 @@ display read 42. The [`capture` and `artifact` operations](operations.md#capture
 keep window and element PNGs as bounded session artifacts with their
 incarnation, preview generation, and SHA-256, returning pixels only on request
 and paging larger images; on macOS they captured Calculator's 460 × 816 window
-and its display element, and the paged bytes matched the reported hash.
-Windows qualification, AX action tickets, and UIA pattern mappings remain.
+and its display element, and the paged bytes matched the reported hash. `act`'s
+`perform` action runs an accessibility action an element publishes by name: it
+refuses a name the element does not publish exactly once, then performs the
+one action whose provider key matches, so display labels are never action ids.
+On macOS, `perform` with `AXPress`, by reference and by selector, entered 76 on
+Calculator, an unpublished name was rejected with effect `none`, and the
+journal held no action name. Windows qualification and the UIA pattern mapping
+behind `performAccessibilityAction` remain.
 
 **Complete when:** per-target quarantine survives transport loss, no later
 operation overtakes unsettled work, unsupported controls remain honest, and

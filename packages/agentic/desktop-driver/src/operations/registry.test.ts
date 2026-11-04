@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { describeOperations, lookupOperation } from './registry';
 
 const readOnly = {
+  accessibilityActions: false,
   accessibilityClick: false,
   elementCapture: false,
   keyboard: false,
@@ -11,6 +12,7 @@ const readOnly = {
 };
 
 const everything = {
+  accessibilityActions: true,
   accessibilityClick: true,
   boundedObservation: true,
   elementCapture: true,

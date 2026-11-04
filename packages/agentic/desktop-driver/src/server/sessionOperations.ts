@@ -36,6 +36,8 @@ export function createOperationRuntime(
   const observe = nativeHost.observe?.bind(nativeHost);
   const releaseElements = nativeHost.releaseElements?.bind(nativeHost);
   const subscribe = nativeHost.subscribe?.bind(nativeHost);
+  const listAccessibilityActions = nativeHost.listAccessibilityActions?.bind(nativeHost);
+  const performAccessibilityAction = nativeHost.performAccessibilityAction?.bind(nativeHost);
   const features = session.hostInfo.features;
   const host: OperationHost = {
     activate: (windowId, signal) => nativeHost.activate(windowId, signal),
@@ -44,6 +46,12 @@ export function createOperationRuntime(
     clear: (nativeId, signal) => nativeHost.clear(nativeId, signal),
     click: (nativeId, mode, signal) => nativeHost.click(nativeId, mode, signal),
     hitTest: (windowId, x, y, signal) => nativeHost.hitTest(windowId, x, y, signal),
+    listAccessibilityActions(nativeId, signal) {
+      if (!listAccessibilityActions) {
+        throw new HostUnsupportedError(`Target "${session.target.id}" does not perform accessibility actions.`);
+      }
+      return listAccessibilityActions(nativeId, signal);
+    },
     observe(request, signal) {
       if (!observe) {
         throw new HostUnsupportedError(`Target "${session.target.id}" does not support bounded observation.`);
@@ -56,6 +64,12 @@ export function createOperationRuntime(
       }
       return releaseElements(nativeIds, signal);
     },
+    performAccessibilityAction(nativeId, key, signal) {
+      if (!performAccessibilityAction) {
+        throw new HostUnsupportedError(`Target "${session.target.id}" does not perform accessibility actions.`);
+      }
+      return performAccessibilityAction(nativeId, key, signal);
+    },
     sendKeys: (nativeId, text, signal) => nativeHost.sendKeys(nativeId, text, signal),
     snapshot: (nativeId, signal) => nativeHost.snapshot(nativeId, signal),
     ...(subscribe ? { subscribe } : {}),
@@ -63,6 +77,11 @@ export function createOperationRuntime(
   const sessionSignal = session.commandAbortController.signal;
   return {
     capabilities: {
+      accessibilityActions:
+        features.accessibilityActions === true &&
+        features.performAccessibilityAction === true &&
+        !!listAccessibilityActions &&
+        !!performAccessibilityAction,
       accessibilityClick: features.accessibilityClick,
       boundedObservation: features.boundedObservation === true && !!observe && !!releaseElements,
       elementCapture: features.elementScreenshot,

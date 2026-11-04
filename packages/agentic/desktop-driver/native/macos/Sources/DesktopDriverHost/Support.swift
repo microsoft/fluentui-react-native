@@ -1,4 +1,5 @@
 import ApplicationServices
+import CryptoKit
 import Foundation
 import Darwin
 
@@ -538,6 +539,21 @@ func accessibilityActionName(_ raw: String) -> String {
     return String(remainder)
   }
   return String(remainder[..<target.lowerBound])
+}
+
+/// Binds a published action to its exact native identity without revealing it. A key is a truncated HMAC of the raw
+/// action string under a secret that exists only in this process: the same action on the same element keeps its key, a
+/// custom action re-registered with another target gets a new one, and nothing about the target can be read back.
+struct AccessibilityActionKeys {
+  private let secret: SymmetricKey
+
+  init(secret: SymmetricKey = SymmetricKey(size: .bits256)) {
+    self.secret = secret
+  }
+
+  func key(for raw: String) -> String {
+    HMAC<SHA256>.authenticationCode(for: Data(raw.utf8), using: secret).prefix(16).map { String(format: "%02x", $0) }.joined()
+  }
 }
 
 func axPoint(_ value: CFTypeRef?) -> CGPoint? {

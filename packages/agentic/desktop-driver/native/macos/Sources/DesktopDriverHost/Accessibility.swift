@@ -129,6 +129,7 @@ final class AccessibilityEngine {
   private var records: [String: ElementRecord] = [:]
   private var recordIDsByHash: [CFHashCode: [String]] = [:]
   private let effects: EffectLedger
+  private let actionKeys = AccessibilityActionKeys()
 
   init(effects: EffectLedger = EffectLedger()) {
     self.effects = effects
@@ -339,12 +340,42 @@ final class AccessibilityEngine {
     }
   }
 
-  func accessibilityActions(_ elementID: String, token: CancellationToken) throws -> [String] {
+  /// The element's published actions by authored name, each with the key `performAccessibilityAction` takes.
+  func accessibilityActions(_ elementID: String, token: CancellationToken) throws -> (names: [String], keys: [String]) {
     try requireAccessibility("Accessibility action inspection")
     try token.throwIfCancelled()
     let record = try requireRecord(elementID)
     try validateLive(record)
-    return try copyPublishedAXActionNames(record.element).map(accessibilityActionName)
+    let raw = try copyPublishedAXActionNames(record.element)
+    return (raw.map(accessibilityActionName), raw.map(actionKeys.key))
+  }
+
+  /// Performs the one published action whose key matches. The key binds the exact native action the caller listed, so
+  /// an action renamed, removed, or re-registered with another target since then is refused rather than guessed at.
+  func performAccessibilityAction(_ elementID: String, key: String, token: CancellationToken) throws {
+    try requireAccessibility("Performing an accessibility action")
+    try token.throwIfCancelled()
+    let record = try requireRecord(elementID)
+    try validateLive(record)
+    let matches = try copyAXActionNames(record.element).filter { actionKeys.key(for: $0) == key }
+    guard matches.count == 1, let action = matches.first else {
+      try fail(
+        ErrorCode.notInteractable,
+        matches.isEmpty
+          ? "The element no longer publishes the listed action. List its actions again."
+          : "The element publishes the listed action more than once, so the key names none of them.",
+        data: ["reason": "action-changed"]
+      )
+    }
+    effects.dispatching()
+    let error = AXUIElementPerformAction(record.element, action as CFString)
+    effects.completed(error)
+    if error == .invalidUIElement {
+      try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
+    }
+    guard error == .success else {
+      try fail(ErrorCode.automationFailed, "Performing the accessibility action failed because \(describeAXError(error)).")
+    }
   }
 
   func tryClearValue(_ elementID: String) throws -> Bool {

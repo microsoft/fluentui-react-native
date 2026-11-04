@@ -52,6 +52,8 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
     clear: async () => unsupported(),
     click: async () => unsupported(),
     hitTest: async () => unsupported(),
+    listAccessibilityActions: async () => unsupported(),
+    performAccessibilityAction: async () => unsupported(),
     sendKeys: async () => unsupported(),
     snapshot: async () => unsupported(),
     async observe(request, signal) {
@@ -71,6 +73,7 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
   };
   const runtime: OperationRuntime = {
     capabilities: {
+      accessibilityActions: false,
       accessibilityClick: false,
       boundedObservation: true,
       elementCapture: false,

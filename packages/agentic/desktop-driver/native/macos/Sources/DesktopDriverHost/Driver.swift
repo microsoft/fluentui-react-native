@@ -12,7 +12,8 @@ struct CommandResult {
 final class Driver {
   // Commands whose failure or cancellation can leave the target changed. Lifecycle commands are not tracked.
   private static let trackedMutations: Set<String> = [
-    "activate", "clear", "click", "closeWindow", "performActions", "releaseActions", "sendKeys", "setWindowRect",
+    "activate", "clear", "click", "closeWindow", "performAccessibilityAction", "performActions", "releaseActions",
+    "sendKeys", "setWindowRect",
   ]
 
   static func isTrackedMutation(_ command: String) -> Bool {
@@ -158,7 +159,13 @@ final class Driver {
       return CommandResult(result: try accessibility.snapshot(elementID: elementID, window: window, token: token).json())
     case "accessibilityActions":
       let actions = try accessibility.accessibilityActions(try requireString(params, "elementId"), token: token)
-      return CommandResult(result: ["actions": actions])
+      return CommandResult(result: ["actions": actions.names, "keys": actions.keys])
+    case "performAccessibilityAction":
+      let elementID = try requireString(params, "elementId")
+      let key = try requireString(params, "key")
+      _ = try accessibility.snapshot(elementID: elementID, window: try windowForElement(elementID), token: token)
+      try accessibility.performAccessibilityAction(elementID, key: key, token: token)
+      return CommandResult()
     case "observe":
       let request = try ObserveRequest.parse(params)
       let window = try applications.requireWindow(request.windowID)
@@ -285,6 +292,7 @@ final class Driver {
         "elementScreenshot": screenshot,
         "focus": trusted,
         "keyboard": trusted,
+        "performAccessibilityAction": trusted,
         "physicalClick": trusted,
         "screenshot": screenshot,
         "setWindowRect": trusted,

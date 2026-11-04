@@ -267,8 +267,17 @@ only `<name>` and no process address or selector leaves the helper. Standard
 actions pass through unchanged. React Native macOS Fabric publishes each declared
 action by `name` (`Toggle`, `Select`), whereas Paper publishes only actions that
 declare a `label` and names them by it (`C-A11Y-007` in
-`accessibility.action-transport-evidence`). The command lists actions only and
-never performs one.
+`accessibility.action-transport-evidence`). The command itself never performs
+an action.
+
+The `performAccessibilityAction` feature pairs each listed action with a key:
+HMAC-SHA256 of the raw action string under a secret generated when the helper
+starts, truncated to 32 hex characters. The key therefore distinguishes custom
+actions that share a name without revealing their target address, and stops
+matching if the application replaces an action. `performAccessibilityAction`
+re-reads `AXUIElementCopyActionNames`, refuses unless exactly one raw action
+has the key (`action-changed`), and calls `AXUIElementPerformAction` with it.
+Like `activate`, it moves no pointer and takes no physical input lock.
 
 Quartz Event Services supplies physical pointer, keyboard, text, and wheel
 input. Physical input requires Accessibility/PostEvent authority for the

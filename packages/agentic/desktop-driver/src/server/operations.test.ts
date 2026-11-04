@@ -669,6 +669,92 @@ describe('Desktop Driver agent operations', () => {
         expect(JSON.stringify((await session.journal()).result)).not.toMatch(/typed words|"field"/);
       });
     });
+
+    describe('perform', () => {
+      const actionWindow = actWindow!.map((window) => ({
+        ...window,
+        elements: window.elements.map((element) =>
+          element.id === 'save' ? { ...element, accessibilityActions: ['AXPress', 'Pin', 'Share', 'Share'] } : element,
+        ),
+      }));
+      const performing = { features: { performAccessibilityAction: true }, windows: actionWindow };
+
+      test('performs the one action an element publishes by a name, as a semantic action', async () => {
+        await withFixture(performing, async ({ harness, session }) => {
+          await expect(session.act({ action: 'perform', name: 'Pin', ...(await proven(session, 'save')) })).resolves.toMatchObject({
+            result: { action: 'perform', disposition: 'applied', mechanism: 'accessibility' },
+          });
+          await expect(
+            session.sequence({ steps: [{ act: { action: 'perform', find: { automationId: 'save' }, name: 'AXPress' } }] }),
+          ).resolves.toMatchObject({
+            result: { status: 'completed', steps: [{ act: { action: 'perform', mechanism: 'accessibility' } }] },
+          });
+          expect(
+            harness.host.actions
+              .filter((action) => action.type === 'accessibility-action')
+              .map(({ elementId, name }) => [String(elementId).split('~')[0], name]),
+          ).toEqual([
+            ['save', 'Pin'],
+            ['save', 'AXPress'],
+          ]);
+          // Action names are application text, so the journal keeps only what kind of action ran.
+          const journal = JSON.stringify((await session.journal()).result);
+          expect(journal).toContain('"perform"');
+          expect(journal).not.toMatch(/Pin|AXPress/);
+        });
+      });
+
+      test('refuses a name the element does not publish exactly once, and a name without perform', async () => {
+        await withFixture(performing, async ({ harness, post, session }) => {
+          const save = await proven(session, 'save');
+          const refused = (reason: string) => ({ code: 'element not interactable', data: { mutation: rejected(), reason } });
+          await expect(session.act({ action: 'perform', name: 'Share', ...save })).rejects.toMatchObject(refused('action-not-unique'));
+          await expect(session.act({ action: 'perform', name: 'Missing', ...save })).rejects.toMatchObject(refused('action-not-published'));
+          await expect(session.act({ action: 'perform', name: 'Pin', ...(await proven(session, 'off')) })).rejects.toMatchObject(
+            refused('not-enabled'),
+          );
+          for (const input of [
+            { action: 'perform', ...save },
+            { action: 'activate', name: 'Pin', ...save },
+            { action: 'perform', name: '', ...save },
+          ]) {
+            expect((await post('act', { input })).value).toMatchObject({ error: 'invalid argument' });
+          }
+          harness.host.injectFault('performAccessibilityAction', { effect: 'none', mode: 'reject' });
+          await expect(session.act({ action: 'perform', name: 'Pin', ...save })).rejects.toMatchObject({
+            data: { mutation: rejected() },
+          });
+          expect(harness.host.actions.filter((action) => action.type === 'accessibility-action')).toEqual([]);
+        });
+      });
+
+      test('is unsupported on a provider that cannot perform named actions', async () => {
+        await withFixture({ windows: actionWindow }, async ({ harness, session }) => {
+          await expect(session.act({ action: 'perform', name: 'Pin', ...(await proven(session, 'save')) })).rejects.toMatchObject({
+            code: 'unsupported operation',
+            data: { mutation: rejected(), reason: 'action-unsupported' },
+          });
+          expect(harness.host.actions.filter((action) => action.type === 'accessibility-action')).toEqual([]);
+        });
+      });
+
+      test('binds an action key to the exact action the provider listed', async () => {
+        await withFixture(performing, async ({ harness }) => {
+          const { host } = harness;
+          const listed = await host.listAccessibilityActions('save');
+          expect(listed.map(({ name }) => name)).toEqual(['AXPress', 'Pin', 'Share', 'Share']);
+          expect(new Set(listed.map(({ key }) => key)).size).toBe(4);
+          host.setElementActions('save', ['Pin', 'AXPress']);
+          await expect(host.performAccessibilityAction('save', listed[1].key)).rejects.toMatchObject({
+            code: 'element not interactable',
+            data: { reason: 'action-changed' },
+          });
+          const relisted = await host.listAccessibilityActions('save');
+          await host.performAccessibilityAction('save', relisted[0].key);
+          expect(host.actions.at(-1)).toEqual({ elementId: 'save', name: 'Pin', type: 'accessibility-action' });
+        });
+      });
+    });
   });
 
   describe('check', () => {

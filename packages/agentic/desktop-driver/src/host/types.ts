@@ -20,6 +20,11 @@ export type DesktopHostFeatures = {
   elementScreenshot: boolean;
   focus: boolean;
   keyboard: boolean;
+  /**
+   * The host performs one listed accessibility action by its key (`listAccessibilityActions` and
+   * `performAccessibilityAction`). Requires `accessibilityActions`.
+   */
+  performAccessibilityAction?: boolean;
   physicalClick: boolean;
   screenshot: boolean;
   setWindowRect: boolean;
@@ -48,6 +53,15 @@ export type DesktopWindowEventLog = {
   registrationFailures?: string[];
   source: string;
   trackedWindows?: { closed: boolean; element: string; id: string; primary: boolean; title: string }[];
+};
+
+/**
+ * One action an element publishes. `key` is opaque: it binds the exact native action, such as a custom action's target,
+ * without revealing it, and stays meaningful only to the host that issued it.
+ */
+export type NativeAccessibilityAction = {
+  key: string;
+  name: string;
 };
 
 export type DesktopHostInfo = {
@@ -279,6 +293,17 @@ export interface DesktopHost {
    * `features.accessibilityActions`.
    */
   accessibilityActions?(elementId: string, signal?: AbortSignal): Promise<string[]>;
+  /**
+   * Lists an element's published actions with the keys `performAccessibilityAction` takes. Read-only. Present only when
+   * the host advertises `features.performAccessibilityAction`.
+   */
+  listAccessibilityActions?(elementId: string, signal?: AbortSignal): Promise<NativeAccessibilityAction[]>;
+  /**
+   * Performs the one published action whose key matches, a mutation that settles like `click`. An action that changed
+   * since it was listed is refused as `element not interactable` with the reason `action-changed`. Present only with
+   * `features.performAccessibilityAction`.
+   */
+  performAccessibilityAction?(elementId: string, key: string, signal?: AbortSignal): Promise<void>;
 
   /**
    * Samples a window's tree within explicit budgets without failing on large trees. Read-only: it never carries an

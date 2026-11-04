@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 
 import type {
   ApplicationLease,
@@ -9,6 +9,7 @@ import type {
   DesktopTarget,
   DesktopWindow,
   DesktopWindowEventLog,
+  NativeAccessibilityAction,
   NativeElementSnapshot,
   NativeImage,
   NativeActionSequence,
@@ -54,6 +55,7 @@ export type FakeMutation =
   | 'clear'
   | 'click'
   | 'closeWindow'
+  | 'performAccessibilityAction'
   | 'performActions'
   | 'releaseActions'
   | 'sendKeys'
@@ -143,6 +145,8 @@ export class FakeDesktopHost implements DesktopHost {
   private readonly recordsByElement = new Map<string, string>();
   private readonly releasedRecords = new Set<string>();
   private recordSequence = 0;
+  // Action keys bind an element, an action's position, and its name under a secret only this host knows, as a helper's do.
+  private readonly actionKeySecret = randomUUID();
 
   constructor(options: FakeDesktopHostOptions = {}) {
     this.endpoint = options.endpoint ?? 'windows';
@@ -176,6 +180,12 @@ export class FakeDesktopHost implements DesktopHost {
   /** Renames an element, as the application would. Accepts the element's own id even after its records were released. */
   setElementName(elementId: string, name: string): void {
     (this.elements.get(elementId) ?? this.requireElement(elementId)).name = name;
+  }
+
+  /** Replaces the actions an element publishes, as the application would. */
+  setElementActions(elementId: string, actions: readonly string[]): void {
+    const element = (this.elements.get(elementId) ?? this.requireElement(elementId)) as Pick<FakeDesktopElement, 'accessibilityActions'>;
+    element.accessibilityActions = [...actions];
   }
 
   /** Scripts a provider failure for the next `fault.times` calls (default 1) of a mutating command. */
@@ -334,6 +344,41 @@ export class FakeDesktopHost implements DesktopHost {
     }
     const element = this.requireElement(elementId) as Pick<FakeDesktopElement, 'accessibilityActions'>;
     return [...(element.accessibilityActions ?? [])];
+  }
+
+  async listAccessibilityActions(elementId: string): Promise<NativeAccessibilityAction[]> {
+    if (!this.features.accessibilityActions || !this.features.performAccessibilityAction) {
+      throw new HostUnsupportedError('The fake host is not configured to perform accessibility actions.');
+    }
+    return this.keyedActions(this.requireElement(elementId));
+  }
+
+  async performAccessibilityAction(elementId: string, key: string, signal?: AbortSignal): Promise<void> {
+    return this.mutate('performAccessibilityAction', signal, (observed) => {
+      throwIfAborted(observed);
+      if (!this.features.accessibilityActions || !this.features.performAccessibilityAction) {
+        throw reportEffect(new HostUnsupportedError('The fake host is not configured to perform accessibility actions.'), 'none');
+      }
+      const element = this.requireElement(elementId);
+      const matches = this.keyedActions(element).filter((action) => action.key === key);
+      if (matches.length !== 1) {
+        throw reportEffect(
+          new HostWebDriverError('element not interactable', 'The element no longer publishes the listed action. List its actions again.', {
+            reason: 'action-changed',
+          }),
+          'none',
+        );
+      }
+      this.actions.push({ type: 'accessibility-action', elementId, name: matches[0].name });
+    });
+  }
+
+  private keyedActions(element: NativeElementSnapshot): NativeAccessibilityAction[] {
+    const names = (element as Pick<FakeDesktopElement, 'accessibilityActions'>).accessibilityActions ?? [];
+    return names.map((name, index) => ({
+      key: createHash('sha256').update(`${this.actionKeySecret}\0${element.id}\0${index}\0${name}`).digest('hex').slice(0, 32),
+      name,
+    }));
   }
 
   async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {

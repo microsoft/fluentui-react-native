@@ -28,6 +28,7 @@ final class SelfTestRunner {
     testCoreGraphicsWindowSelection()
     testReactNativeAccessibilityFallbacks()
     testAccessibilityActionNames()
+    testAccessibilityActionKeys()
     testPermissionDiagnostic()
     testLoginSessionState()
     testWindowEventMonitor()
@@ -743,6 +744,17 @@ final class SelfTestRunner {
       sendKeys?.code == ErrorCode.invalidParams && sendKeys?.effect == .noEffect,
       "a malformed keyboard request reports no effect"
     )
+    residue.dispatching()
+    let perform = failure("performAccessibilityAction", ["elementId": "element-missing", "key": "0123"]) as? HelperError
+    check(
+      perform?.code == ErrorCode.staleElement && perform?.effect == .noEffect,
+      "an accessibility action on a missing element reports no effect"
+    )
+    let unkeyed = failure("performAccessibilityAction", ["elementId": "element-missing"]) as? HelperError
+    check(
+      unkeyed?.code == ErrorCode.invalidParams && unkeyed?.effect == .noEffect,
+      "an accessibility action without a key reports no effect"
+    )
     let actions = failure("performActions", ["actions": "not-an-array"]) as? HelperError
     check(
       actions?.code == ErrorCode.invalidParams && actions?.effect == .noEffect,
@@ -903,6 +915,10 @@ final class SelfTestRunner {
       (hello["features"] as? [String])?.contains("boundedObservation") == true,
       "hello advertises bounded observation"
     )
+    check(
+      (hello["features"] as? [String])?.contains("performAccessibilityAction") == true,
+      "hello advertises performing accessibility actions"
+    )
   }
 
   private func testAccessibilityActionNames() {
@@ -922,6 +938,23 @@ final class SelfTestRunner {
     check(accessibilityActionName("Name:Toggle") == "Toggle", "a custom action without provider fields keeps its name")
     check(accessibilityActionName("AXPress") == "AXPress", "a standard accessibility action is listed unchanged")
     check(accessibilityActionName("") == "", "an empty action name stays empty")
+  }
+
+  private func testAccessibilityActionKeys() {
+    let keys = AccessibilityActionKeys()
+    let toggle = "Name:Toggle\nTarget:0x6190039a0880\nSelector:didActivateAccessibilityCustomAction:"
+    let key = keys.key(for: toggle)
+    check(
+      key.count == 32 && key.allSatisfy { "0123456789abcdef".contains($0) },
+      "an action key is 32 lowercase hexadecimal digits"
+    )
+    check(keys.key(for: toggle) == key, "the same native action keeps its key")
+    check(
+      keys.key(for: "Name:Toggle\nTarget:0x6190039a0990\nSelector:didActivateAccessibilityCustomAction:") != key,
+      "a custom action with the same name and another target gets another key"
+    )
+    check(!key.contains("6190039a0880"), "a key does not carry the action's target")
+    check(AccessibilityActionKeys().key(for: toggle) != key, "keys from another secret do not match")
   }
 }
 

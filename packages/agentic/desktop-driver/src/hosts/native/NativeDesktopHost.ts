@@ -9,6 +9,7 @@ import type {
   DesktopTarget,
   DesktopWindow,
   DesktopWindowEventLog,
+  NativeAccessibilityAction,
   NativeActionSequence,
   NativeElementSnapshot,
   NativeImage,
@@ -232,6 +233,15 @@ export class NativeDesktopHost implements DesktopHost {
   async accessibilityActions(elementId: string, signal?: AbortSignal): Promise<string[]> {
     const result = await this.request<{ actions: string[] }>('accessibilityActions', { elementId }, signal);
     return result.actions;
+  }
+
+  async listAccessibilityActions(elementId: string, signal?: AbortSignal): Promise<NativeAccessibilityAction[]> {
+    const result = await this.request<{ actions?: unknown; keys?: unknown }>('accessibilityActions', { elementId }, signal);
+    return parseKeyedActions(result);
+  }
+
+  async performAccessibilityAction(elementId: string, key: string, signal?: AbortSignal): Promise<void> {
+    await this.request('performAccessibilityAction', { elementId, key }, signal);
   }
 
   async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {
@@ -504,6 +514,27 @@ function resolveDisabledInputFeatures(configured?: readonly NativeDisabledInputF
     resolved.add(value as NativeDisabledInputFeature);
   }
   return resolved;
+}
+
+/** The longest action key a provider may issue. Keys are opaque, so this only bounds what Node holds. */
+const maxActionKeyLength = 128;
+
+/** Pairs each listed action with its key, refusing a response whose lists disagree or whose keys are malformed. */
+export function parseKeyedActions(result: { actions?: unknown; keys?: unknown } | undefined): NativeAccessibilityAction[] {
+  const actions = result?.actions;
+  const keys = result?.keys;
+  if (
+    !Array.isArray(actions) ||
+    !Array.isArray(keys) ||
+    actions.length !== keys.length ||
+    !actions.every((name) => typeof name === 'string') ||
+    !keys.every((key) => typeof key === 'string' && key.length > 0 && key.length <= maxActionKeyLength)
+  ) {
+    throw new HostWebDriverError('unknown error', 'The native helper returned invalid accessibility action keys.', {
+      nativeCode: 'invalid-action-keys',
+    });
+  }
+  return actions.map((name: string, index) => ({ key: keys[index] as string, name }));
 }
 
 const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = {

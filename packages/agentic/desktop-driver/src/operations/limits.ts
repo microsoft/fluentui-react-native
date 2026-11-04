@@ -65,6 +65,9 @@ export const outcomeCapacity = 256;
 /** The longest text one `type` action sends. */
 export const maxTypedTextLength = 4_096;
 
+/** The longest accessibility action name `act` accepts. Authored action names are short labels. */
+export const maxActionNameLength = 256;
+
 /**
  * How long a `check` may wait for its expectation, in milliseconds. A wait holds the session's queue, never the
  * target's input turn; an evaluation still running when the wait ends finishes before the result is returned.

@@ -25,6 +25,7 @@ func createHello() -> JSONObject {
       "hitTest",
       "keyboard",
       "launch",
+      "performAccessibilityAction",
       "pointer",
       "probe",
       "releaseActions",

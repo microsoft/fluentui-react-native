@@ -7,8 +7,29 @@ import {
   applyDisabledInputFeaturePolicy,
   FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES,
   NativeDesktopHost,
+  parseKeyedActions,
   translateNativeError,
 } from './NativeDesktopHost';
+
+describe('NativeDesktopHost accessibility action keys', () => {
+  test('pairs each listed action with its key', () => {
+    expect(parseKeyedActions({ actions: ['AXPress', 'Toggle'], keys: ['k1', 'k2'] })).toEqual([
+      { key: 'k1', name: 'AXPress' },
+      { key: 'k2', name: 'Toggle' },
+    ]);
+    expect(parseKeyedActions({ actions: [], keys: [] })).toEqual([]);
+  });
+
+  test.each([
+    ['no keys', { actions: ['AXPress'] }],
+    ['lists of different lengths', { actions: ['AXPress', 'Toggle'], keys: ['k1'] }],
+    ['an empty key', { actions: ['AXPress'], keys: [''] }],
+    ['an overlong key', { actions: ['AXPress'], keys: ['k'.repeat(129)] }],
+    ['a name that is not a string', { actions: [1], keys: ['k1'] }],
+  ])('refuses a response with %s', (_, result) => {
+    expect(() => parseKeyedActions(result)).toThrow(expect.objectContaining({ data: { nativeCode: 'invalid-action-keys' } }));
+  });
+});
 
 describe('NativeDesktopHost error translation', () => {
   test.each<[nativeCode: string, webdriverCode: WebDriverErrorCode]>([

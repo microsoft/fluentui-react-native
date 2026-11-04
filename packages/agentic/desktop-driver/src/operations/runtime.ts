@@ -1,6 +1,13 @@
 import type { z } from 'zod';
 
-import type { DesktopHostEvent, NativeElementSnapshot, NativeImage, NativeObservation, NativeObserveRequest } from '../host/types.js';
+import type {
+  DesktopHostEvent,
+  NativeAccessibilityAction,
+  NativeElementSnapshot,
+  NativeImage,
+  NativeObservation,
+  NativeObserveRequest,
+} from '../host/types.js';
 import type { JournalScalar } from './journal.js';
 import type { OperationSessionState } from './sessionState.js';
 
@@ -12,7 +19,11 @@ export type OperationHost = {
   clear(nativeId: string, signal: AbortSignal): Promise<void>;
   click(nativeId: string, mode: 'accessibility' | 'physical', signal: AbortSignal): Promise<void>;
   hitTest(windowId: string, x: number, y: number, signal: AbortSignal): Promise<NativeElementSnapshot | null>;
+  /** The element's published actions with their keys. Called only when `capabilities.accessibilityActions` is true. */
+  listAccessibilityActions(nativeId: string, signal: AbortSignal): Promise<NativeAccessibilityAction[]>;
   observe(request: NativeObserveRequest, signal: AbortSignal): Promise<NativeObservation>;
+  /** Performs the listed action whose key matches. Called only when `capabilities.accessibilityActions` is true. */
+  performAccessibilityAction(nativeId: string, key: string, signal: AbortSignal): Promise<void>;
   releaseElements(nativeIds: readonly string[], signal: AbortSignal): Promise<number>;
   sendKeys(nativeId: string, text: string, signal: AbortSignal): Promise<void>;
   snapshot(nativeId: string, signal: AbortSignal): Promise<NativeElementSnapshot>;
@@ -30,6 +41,8 @@ export type ContentPolicy = 'allow' | 'deny';
 export type OperationCapabilities = {
   /** Semantic activation through the accessibility tree, such as AXPress or a UIA pattern. */
   readonly accessibilityClick: boolean;
+  /** Performing one named accessibility action an element publishes, such as a custom `Toggle` or `AXShowMenu`. */
+  readonly accessibilityActions: boolean;
   readonly boundedObservation: boolean;
   readonly elementCapture: boolean;
   readonly keyboard: boolean;

@@ -180,11 +180,12 @@ selector that a search run now must prove unique.
 
 | Input    | Meaning                                                            |
 | -------- | ------------------------------------------------------------------ |
-| `action` | `click`, `activate`, `type`, or `clear`                            |
+| `action` | `click`, `activate`, `perform`, `type`, or `clear`                 |
 | `ref`    | The reference the cited search returned as its only match          |
 | `sample` | That search's `sample.id`                                          |
 | `find`   | A selector with `find`'s predicates, instead of `ref` and `sample` |
 | `text`   | Up to 4,096 characters to type; required with `type`, only it      |
+| `name`   | An action name `observe` listed; required with `perform`, only it  |
 
 A selector that matches nothing fails with `no-match`, more than one element
 with `selector-not-unique`, and a search that could not be completed with
@@ -196,6 +197,7 @@ element can be cited again without another search.
 | ---------- | ------------------ | ------------------------------------------------------------------------------ |
 | `click`    | `physical-pointer` | Activates the window, hit-tests the element's centre, and clicks there         |
 | `activate` | `accessibility`    | Performs the element's default accessibility action; no pointer moves          |
+| `perform`  | `accessibility`    | Performs the accessibility action the element publishes as `name`              |
 | `type`     | `keyboard`         | Focuses the element and synthesizes key input                                  |
 | `clear`    | `provider`         | Empties the value: sets it directly when the element allows, otherwise by keys |
 
@@ -208,7 +210,8 @@ Before dispatching, `act` checks, in order:
 
 1. The target is not quarantined.
 2. The provider supports the action (`click` needs `physicalClick`, `activate`
-   needs `accessibilityClick`, `type` needs `keyboard`).
+   needs `accessibilityClick`, `perform` needs `accessibilityActions` and
+   `performAccessibilityAction`, `type` needs `keyboard`).
 3. The cited sample proved a reference unique, and it is this reference. The
    service keeps the 64 most recent proofs; an application restart clears them.
 4. The reference resolves, to the same provider element the proof named.
@@ -221,6 +224,15 @@ element is still the one referenced. `click`, `activate`, and `type` need the
 element enabled; `click` needs it visible and the element at its centre to be
 it or inside it. A covered element fails with `obscured`, which `activate` does
 not check.
+
+`perform` names an action by what `observe`'s `actions` fact shows, such as
+`AXPress` or an application's custom action. Names are not unique, so inside
+the same input turn the service lists the element's actions again and refuses
+a name the element does not publish (`action-not-published`) or publishes more
+than once (`action-not-unique`). It then sends the provider the opaque key the
+provider gave that one action, so the provider performs exactly the action it
+listed; if the application replaced it in between, the provider refuses with
+`action-changed`. The journal records that `perform` ran, never the name.
 
 Each primary step runs as a settled mutation, so a failure reports what it did
 in `data.mutation`: `rejected` with effect `none` when nothing was dispatched,
@@ -409,6 +421,9 @@ rebuilt `mutation` report.
 | `selector-inconclusive`           | `invalid argument`          | `act`'s search could not be completed                   |
 | `fingerprint-changed`             | `stale element reference`   | The element's role, name, or automation id changed      |
 | `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                      |
+| `action-not-published`            | `element not interactable`  | The element does not publish an action by that `name`   |
+| `action-not-unique`               | `element not interactable`  | The element publishes more than one action by `name`    |
+| `action-changed`                  | `element not interactable`  | The listed action changed before it was performed       |
 | `obscured`                        | `element click intercepted` | Something else is at the element's centre               |
 | `target-quarantined`              | `unknown error`             | An earlier change may still land; reads still work      |
 | `capture-unsupported`             | `unsupported operation`     | The provider cannot capture a window                    |
