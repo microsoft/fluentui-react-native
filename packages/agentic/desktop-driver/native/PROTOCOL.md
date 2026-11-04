@@ -242,6 +242,9 @@ window notifications and helper commands, and publish a `window-closed` event
 with `{ "windowId": "..." }` once when the platform reports a tracked window
 destroyed. A window closed through `closeWindow` publishes no event for that
 id. The log fields are provider diagnostics described in each provider README.
+A log's `eventsTruncated` is true when older events were evicted from its
+bounded history or omitted by the requested tail limit; it is false when the
+returned events include the full retained history for that application.
 A provider whose platform notifications cannot be registered says so in the log
 and keeps answering from liveness queries, which stay authoritative. Helpers
 without the feature reject the command as `unsupported-operation`; Node never

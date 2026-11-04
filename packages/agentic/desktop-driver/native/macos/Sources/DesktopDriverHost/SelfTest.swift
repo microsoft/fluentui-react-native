@@ -620,11 +620,23 @@ final class SelfTestRunner {
     for _ in 0..<(WindowEventMonitor.maximumEvents + 10) {
       monitor.record(element: element, notification: kAXApplicationActivatedNotification)
     }
+    let boundedEvents = monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)
+    let recentEvents = boundedEvents["events"] as? [JSONObject] ?? []
     check(
-      monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)["eventsTruncated"] as? Bool == false
-        && (monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)["events"] as? [JSONObject])?.count
-          == WindowEventMonitor.maximumEvents,
+      boundedEvents["eventsTruncated"] as? Bool == true
+        && recentEvents.count == WindowEventMonitor.maximumEvents
+        && recentEvents.allSatisfy { $0["notification"] as? String == kAXApplicationActivatedNotification },
       "the window event timeline stays bounded"
+    )
+    check(
+      monitor.diagnostic(processID: getpid())["eventsTruncated"] as? Bool == true,
+      "the default event tail reports older buffered events"
+    )
+    monitor.stop(processID: getpid())
+    let stopped = monitor.diagnostic(processID: getpid())
+    check(
+      (stopped["events"] as? [JSONObject])?.isEmpty == true && stopped["eventsTruncated"] as? Bool == false,
+      "stopping an application clears its event tail and truncation state"
     )
   }
 

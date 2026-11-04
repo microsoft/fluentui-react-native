@@ -248,6 +248,7 @@ extension SelfTestRunner {
     testObservationRequests()
     testObservationWalk(dump)
     testObservationBudgets(dump)
+    testObservationLargeTree(dump)
     testObservationFailures(dump)
     testObservationFacts(dump)
     testObservationRandomTrees(dump)
@@ -649,6 +650,7 @@ extension SelfTestRunner {
       )
       check(sample.truncation.map { $0.reason } == [.unreadable] && !sample.complete, "unread children make the sample incomplete")
     }
+
     let rootUnreadable = SyntheticTree()
     rootUnreadable.unreadableChildren = [0]
     if let sample = walk("a root whose children cannot be read", rootUnreadable, dump) {
@@ -699,6 +701,28 @@ extension SelfTestRunner {
         surfaced = "other"
       }
       check(surfaced == code, "a root that fails with \(code) fails the command instead of returning a sample")
+    }
+  }
+
+  private func testObservationLargeTree(_ dump: ObservationDump) {
+    let tree = SyntheticTree([0: Array(1...9_999)])
+    if let sample = walk("a large tree under the maximum visited budget", tree, dump, budget: limited(visited: 5_000)) {
+      check(
+        sample.nodes.count == 5_000 && tree.reads.count == 5_000,
+        "a large tree stops reading at the 5,000-node cap"
+      )
+      check(
+        sample.nodes.first?.id == "e0" && sample.nodes.last?.id == "e4999",
+        "a large tree preserves breadth-first order up to the cap"
+      )
+      check(
+        sample.truncation.first?.reason == .visited && sample.truncation.first?.unvisited == 5_000,
+        "a large tree reports the exact unread tail"
+      )
+      check(
+        sample.nodes[0].childrenState == .truncated && sample.nodes[0].childCount == 9_999,
+        "a large tree marks its partially emitted root children"
+      )
     }
   }
 

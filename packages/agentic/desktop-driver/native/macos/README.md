@@ -228,7 +228,11 @@ Destroyed notifications for tracked windows close them and publish the FDR1
 the helper marks the window before it presses the close button, because the
 destroyed notification can reach the observer thread before the command returns
 and forgets the window. A `closeWindow` that fails removes the mark, so the
-window's later destruction is published.
+window's later destruction is published. The 512-event ring is shared by the
+helper's observed applications; `eventsTruncated` remains true for an
+application whose older events were evicted, even when a diagnostic requests
+the entire retained ring. Stopping observation clears that application's
+events and truncation state.
 
 A 128-entry command journal records each helper command's start, duration,
 outcome, and window or element identifiers on the same monotonic clock. It

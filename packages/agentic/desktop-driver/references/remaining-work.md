@@ -797,8 +797,12 @@ with `performAccessibilityAction`, the `accessibilityActions` response pairs
 each action with an opaque per-process key bound to the exact native action
 ([FDR1](../native/PROTOCOL.md)). Windows maps the supported standard UIA
 patterns to named operations without publishing platform identities.
-M3 still owns bounded event tails and the native large-tree, replacement,
-pagination, and delta tests.
+The macOS helper now records event-ring overflow in `eventsTruncated` and
+self-tests both the bounded event tail and a deterministic 10,000-node sample
+under its 5,000-node cap. The Windows fixture also covers a large-tree
+observation. M3 still needs real-application macOS tree/identity replacement
+and repeated-context pagination/delta qualification, plus a macOS retained
+memory plateau measurement.
 
 **Windows identity progress:** the Windows provider already bounds identity and
 retention without a protocol change. Element ids are never reused, every action
