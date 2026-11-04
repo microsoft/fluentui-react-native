@@ -18,7 +18,12 @@ and evaluation are described in [Advisory component assessment](README.md). Noth
 - Existing native callback: `components-checkbox--default` / `toggles native checked state in both directions`,
   including assertions in `src/common/desktopFocus.wdio.ts`.
 - Generated repository report, only on explicit local opt-in or maintainer-enabled publication:
-  `src/components/checkbox/assessment/ASSESSMENT.md`. Generated reports are excluded from npm package contents.
+
+  ```text
+  src/components/checkbox/assessment/ASSESSMENT.md
+  ```
+
+  This is an output path, not a checked-in file. Generated reports are excluded from npm package contents.
 
 The knowledge-base guide, machine mapping, and generated report are separate files with different purposes.
 The package's `furn.assessments` setting registers the mapping. Shared tooling contains no Checkbox test selection
