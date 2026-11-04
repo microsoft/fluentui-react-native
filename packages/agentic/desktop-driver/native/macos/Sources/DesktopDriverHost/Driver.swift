@@ -357,7 +357,12 @@ final class Driver {
     }
     _ = AXUIElementSetAttributeValue(window.element, kAXMainAttribute as CFString, kCFBooleanTrue)
     let raised = AXUIElementPerformAction(window.element, kAXRaiseAction as CFString)
-    if raised != .success && raised != .actionUnsupported {
+    // SwiftUI windows, such as Calculator's on macOS 27, answer AXRaise with attributeUnsupported rather than
+    // actionUnsupported. Either way the loop below decides whether the window became frontmost and main.
+    if raised != .success {
+      diagnostics["raiseError"] = axErrorName(raised)
+    }
+    if raised != .success && raised != .actionUnsupported && raised != .attributeUnsupported {
       try fail(ErrorCode.windowActivation, "Raising the application window failed because \(describeAXError(raised)).")
     }
     let deadline = DispatchTime.now() + .seconds(2)

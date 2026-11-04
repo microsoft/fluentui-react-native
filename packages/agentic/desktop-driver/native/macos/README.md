@@ -289,7 +289,11 @@ client applies immediately, and falls back to `NSRunningApplication.activate`
 only if that fails. Cooperative workspace activation was observed to wait about
 a second for the active application to yield. Activation completes when the
 application reports `AXFrontmost` and the primary window reports `AXMain`;
-a timeout names the application that kept keyboard focus.
+a timeout names the application that kept keyboard focus. The window is also
+raised with `AXRaise`, but only as a hint: SwiftUI windows, such as Calculator's
+on macOS 27, refuse it with `attributeUnsupported`, so that refusal and
+`actionUnsupported` are recorded in the journal entry and the frontmost and
+main checks decide.
 
 A physical click first hit-tests its target. When another element owns the
 point, `element click intercepted` names the occluding element, or the external
