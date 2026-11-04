@@ -12,9 +12,9 @@ reading the whole accessibility tree. They run inside the Desktop Driver
 service, share the session's command queue with W3C commands, and return
 results sized by explicit budgets. Eight exist today: the reads `observe`,
 `find`, `check`, `capture`, `artifact`, and `journal`, and `act` and
-`sequence`, which change the application. Controller lifecycle and the MCP
-adapter that will expose these operations are open work in the
-[implementation plan](remaining-work.md).
+`sequence`, which change the application. `@fluentui-react-native/desktop-driver-mcp`
+exposes them to MCP clients as five tools. Controller lifecycle is open work in
+the [implementation plan](remaining-work.md).
 
 Operations need a provider that advertises the `boundedObservation` feature
 ([FDR1](../native/PROTOCOL.md#bounded-observation)): the macOS helper and the
@@ -52,11 +52,13 @@ still run). `session.incarnation` changes when the application restarts;
 references never cross one.
 
 `DesktopSessionClient` (`/client`) wraps the routes as `operations()`,
-`operation(name, input, { requestId })`, and one method per operation:
+`operation(name, input, { requestId, signal })`, and one method per operation:
 `observe()`, `find()`, `act()`, `check()`, `sequence()`, `capture()`,
-`artifact()`, and `journal()`. `/operations` exports `executeOperation`, `describeOperations`,
-`lookupOperation`, `OperationSessionState`, and the request, response, and
-result types. The server builds the `OperationRuntime` in
+`artifact()`, and `journal()`, each taking the same options. Aborting `signal`
+abandons the HTTP call, which the service treats as the caller leaving.
+`/operations` exports `executeOperation`, `describeOperations`,
+`lookupOperation`, `OperationSessionState`, `maxRequestIdLength`, and the
+request, response, and result types. The server builds the `OperationRuntime` in
 `src/server/sessionOperations.ts`; nothing under `src/operations` imports from
 `src/server`.
 

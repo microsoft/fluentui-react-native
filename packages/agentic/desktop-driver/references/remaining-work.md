@@ -24,8 +24,9 @@ cancels active host work, rejects queued requests after re-authentication, and
 waits for native settlement before teardown. Lease expiry/reconnect,
 ownership ledgers, status/stop/recovery, cross-service claims, and supervisor
 wiring remain. The `act`, `check`, `sequence`, `capture`, and `artifact`
-operations exist and are exercised on macOS (M4); Windows qualification and the
-MCP adapter remain. MR
+operations exist and are exercised on macOS (M4), and the MCP adapter exposes
+them as five tools, exercised over stdio against Calculator on macOS (M5);
+Windows qualification remains. MR
 has Windows/PowerShell pipe qualification; GitHub Actions rendering and
 console-interrupt coverage remain. M0-M6 remain open unless marked below. This
 status does not claim real-application qualification.
@@ -244,10 +245,9 @@ keep the target quarantined and explain the required operator intervention.
 ### Model-facing operation families
 
 Keep five core tool families and one optional story tool; do not generate a
-tool per story, control, or native pattern. These are proposed tool names, not
-commands available today. The service already implements the operations
-`observe`, `find`, and `journal` ([Agent operations](operations.md)); the
-families below group operations like them.
+tool per story, control, or native pattern. `@fluentui-react-native/desktop-driver-mcp`
+implements the five core families over the [agent operations](operations.md);
+`desktop_story` remains.
 
 | Family            | Purpose                                                                                                        |
 | ----------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -856,6 +856,28 @@ discovery, progress/cancellation, bounded resources, and explicit image
 requests. Route CLI and programmatic operations through the same contract,
 and render CLI results through the MR reporter modes.
 Fix CLI attach handling without adding a separate CLI daemon.
+
+**Progress:** `@fluentui-react-native/desktop-driver-mcp` implements the five
+core tools over the operation routes, reusing the registered operation schemas,
+so the adapter cannot accept what the service rejects. It connects only through
+a verified private descriptor and never launches or builds anything; it holds
+one session per MCP connection and deletes it when the connection closes; it
+forgets the client and session when the service stops answering and reconnects
+on the next call. Captures link a session-scoped resource that the adapter
+reassembles from pages and checks against the SHA-256, with the `artifact`
+observe variant as the fallback for clients without resources. Progress ticks
+come from the adapter only, and cancellation aborts the HTTP call, which the
+service journals as `cancelled`. Fake-host tests cover discovery, the tool-list
+bound, every tool, malformed input, image and paged resource reads, progress,
+cancellation, reconnect, and cleanup. On macOS, the SDK client drove the CLI
+over stdio against a supervisor that served Calculator with a grant and a
+published descriptor: verified connect, attach, 6 × 7 through `desktop_act`,
+`desktop_check` passing on 42, progress during a wait, a cancelled wait
+journaled as `cancelled`, an inline capture and its resource read with a
+matching hash, and a closed session's link refused. Remaining: a shipped
+supervisor command that serves registered targets and publishes the
+descriptor, `desktop_story`, the CLI and attach work below, Windows
+qualification of the adapter, and clients other than the SDK's.
 
 **Complete when:** the same requests produce equivalent outcomes through MCP,
 CLI, and typed clients; actual MCP clients exercise initialize/discover/call,

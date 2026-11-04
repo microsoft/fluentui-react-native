@@ -391,12 +391,7 @@ describe('Desktop Driver agent operations', () => {
           };
 
           const caller = new AbortController();
-          const disconnected = fetch(`${harness.server.url}/session/${session.id}/furn/ops/observe`, {
-            body: JSON.stringify({ input: { view: 'all' }, requestId: 'walk' }),
-            headers: { 'content-type': 'application/json' },
-            method: 'POST',
-            signal: caller.signal,
-          });
+          const disconnected = session.observe({ view: 'all' }, { requestId: 'walk', signal: caller.signal });
           await walkStarted;
           caller.abort();
           await expect(disconnected).rejects.toThrow();

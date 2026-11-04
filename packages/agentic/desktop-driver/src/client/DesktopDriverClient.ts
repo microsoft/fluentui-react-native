@@ -43,6 +43,14 @@ export type DesktopDriverClientOptions = {
   url: string;
 };
 
+/** Options for one operation call. */
+export type OperationCallOptions = {
+  /** Names the call in the journal and, for an operation that changes the application, makes a retry return the first outcome. */
+  requestId?: string;
+  /** Abandons the call. The service treats it as the caller leaving: work not yet dispatched is cancelled. */
+  signal?: AbortSignal;
+};
+
 export class DesktopDriverClient {
   private readonly fetch: typeof globalThis.fetch;
   readonly #grant?: string;
@@ -65,7 +73,7 @@ export class DesktopDriverClient {
     return new DesktopSessionClient(this, value.sessionId, value.capabilities);
   }
 
-  async request<T>(method: string, path: string, body?: unknown): Promise<T> {
+  async request<T>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
     const headers: Record<string, string> = {
       ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
       ...(this.#grant ? { Authorization: `Bearer ${this.#grant}` } : {}),
@@ -75,6 +83,7 @@ export class DesktopDriverClient {
       ...(this.#grant ? { redirect: 'error' as const } : {}),
       ...(body === undefined ? {} : { body: JSON.stringify(body) }),
       ...(Object.keys(headers).length > 0 ? { headers } : {}),
+      ...(signal ? { signal } : {}),
     });
     const payload = (await response.json()) as WebDriverResponse<T> | WebDriverErrorResponse;
     if (!response.ok) {
@@ -171,20 +180,22 @@ export class DesktopSessionClient {
    * Runs one agent operation by name. Name your own `requestId` to find the call in the journal; otherwise the server
    * assigns one and returns it.
    */
-  operation<Result = unknown>(name: string, input: object = {}, options: { requestId?: string } = {}): Promise<OperationResponse<Result>> {
-    return this.command('POST', `/furn/ops/${encodeURIComponent(name)}`, {
-      input,
-      ...(options.requestId === undefined ? {} : { requestId: options.requestId }),
-    });
+  operation<Result = unknown>(name: string, input: object = {}, options: OperationCallOptions = {}): Promise<OperationResponse<Result>> {
+    return this.command(
+      'POST',
+      `/furn/ops/${encodeURIComponent(name)}`,
+      { input, ...(options.requestId === undefined ? {} : { requestId: options.requestId }) },
+      options.signal,
+    );
   }
 
   /** Reads a bounded outline of the current window, or of the subtree under a reference an earlier call returned. */
-  observe(input: ObserveInput = {}, options?: { requestId?: string }): Promise<OperationResponse<ObserveResult>> {
+  observe(input: ObserveInput = {}, options?: OperationCallOptions): Promise<OperationResponse<ObserveResult>> {
     return this.operation('observe', input, options);
   }
 
   /** Finds elements by role, name, automation id, or text, and says whether the match is unique. */
-  find(input: FindInput, options?: { requestId?: string }): Promise<OperationResponse<FindResult>> {
+  find(input: FindInput, options?: OperationCallOptions): Promise<OperationResponse<FindResult>> {
     return this.operation('find', input, options);
   }
 
@@ -193,22 +204,22 @@ export class DesktopSessionClient {
    * a selector proves unique now. Name a `requestId` to make a retry safe: repeating it returns the first outcome
    * instead of acting again.
    */
-  act(input: ActInput, options?: { requestId?: string }): Promise<OperationResponse<ActResult>> {
+  act(input: ActInput, options?: OperationCallOptions): Promise<OperationResponse<ActResult>> {
     return this.operation('act', input, options);
   }
 
   /** Captures the window, or one element, as a PNG artifact with its provenance; the image comes inline only when asked. */
-  capture(input: CaptureInput = {}, options?: { requestId?: string }): Promise<OperationResponse<CaptureResult>> {
+  capture(input: CaptureInput = {}, options?: OperationCallOptions): Promise<OperationResponse<CaptureResult>> {
     return this.operation('capture', input, options);
   }
 
   /** Reads a captured image in base64 pages. */
-  artifact(input: ArtifactInput, options?: { requestId?: string }): Promise<OperationResponse<ArtifactResult>> {
+  artifact(input: ArtifactInput, options?: OperationCallOptions): Promise<OperationResponse<ArtifactResult>> {
     return this.operation('artifact', input, options);
   }
 
   /** Checks an element's state, name, value, or text, or how many elements a selector matches, optionally waiting. */
-  check(input: CheckInput, options?: { requestId?: string }): Promise<OperationResponse<CheckResult>> {
+  check(input: CheckInput, options?: OperationCallOptions): Promise<OperationResponse<CheckResult>> {
     return this.operation('check', input, options);
   }
 
@@ -216,12 +227,12 @@ export class DesktopSessionClient {
    * Runs act and check steps in order in one turn, stopping at the first that fails or does not pass, then optionally
    * observes. Steps that ran stay done.
    */
-  sequence(input: SequenceInput, options?: { requestId?: string }): Promise<OperationResponse<SequenceResult>> {
+  sequence(input: SequenceInput, options?: OperationCallOptions): Promise<OperationResponse<SequenceResult>> {
     return this.operation('sequence', input, options);
   }
 
   /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */
-  journal(input: JournalInput = {}, options?: { requestId?: string }): Promise<OperationResponse<JournalResult>> {
+  journal(input: JournalInput = {}, options?: OperationCallOptions): Promise<OperationResponse<JournalResult>> {
     return this.operation('journal', input, options);
   }
 
@@ -251,8 +262,8 @@ export class DesktopSessionClient {
     return this.command('POST', '/furn/story/args', { args, storyId });
   }
 
-  command<T>(method: string, path: string, body?: unknown): Promise<T> {
-    return this.driver.request(method, `/session/${this.id}${path}`, body);
+  command<T>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    return this.driver.request(method, `/session/${this.id}${path}`, body, signal);
   }
 }
 

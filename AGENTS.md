@@ -72,6 +72,7 @@ For package-owned knowledge, follow the
 | [packages/agentic/components](packages/agentic/components/AGENTS.md)                               | Agentic components, primitives, and contracts        |
 | [packages/agentic/design](packages/agentic/design/AGENTS.md)                                       | Tokens, theming, styling, and color utilities        |
 | [packages/agentic/desktop-driver](packages/agentic/desktop-driver/AGENTS.md)                       | Desktop WebDriver driver                             |
+| [packages/agentic/desktop-driver-mcp](packages/agentic/desktop-driver-mcp/AGENTS.md)               | Desktop Driver MCP adapter                           |
 | [packages/agentic/desktop-test](packages/agentic/desktop-test/AGENTS.md)                           | Application-neutral desktop test harness             |
 | [packages/agentic/native-core](packages/agentic/native-core/AGENTS.md)                             | Native components and modules                        |
 | [packages/agentic/storybook-desktop](packages/agentic/storybook-desktop/AGENTS.md)                 | Storybook desktop integration                        |
