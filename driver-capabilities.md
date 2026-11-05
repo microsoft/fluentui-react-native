@@ -88,7 +88,6 @@ Callstack's [`agent-device`](https://github.com/callstackincubator/agent-device)
   `story-not-ready` until it is relaunched (Observed).
 - **[New]** The Storybook channel's `/select-story-sync` route is unauthenticated whenever WebSockets are on. Another
   local client can change the story; `stories` detects this and expires refs, but `observe` and `find` do not yet.
-- **[New]** The new Win32 fixture contract tests fail on the hosted Windows Storybook lane (Observed, §4.2).
 - **[Unchanged]** Recording and replay, `wdio` export, logs, visual comparison, screenshot point scaling, and an
   agent skill or `agent-map.yaml` section for the MCP tools.
 - **[Unchanged]** Issues #4342, #4345, #4348, and #4349 are open; macOS remains Apple silicon only.
@@ -511,8 +510,9 @@ Against the Storybook app, it attached with no prior `storybook test` run (Obser
   Storybook (Fabric and Paper), Windows, Win32, Win32 Storybook, iOS, Android, and JS lanes passed. The Windows
   Storybook lane failed in its Windows native-contract step: three new Win32 fixture tests
   (`win32Fixture.contract.test.ts` and `operations.contract.test.ts`) need physical click and window capture, but the
-  hosted runner disables `keyboard,physicalClick,wheel` and could not create a capture item (`0x80070057`). The tests
-  need the same capability gating as the rest of the hosted contract.
+  hosted runner disables `keyboard,physicalClick,wheel` and could not create a capture item (`0x80070057`). A
+  follow-up commit gates those scenarios on the host policy, so hosted runs report them as explicit skips and
+  interactive runs still execute them.
 - **[New] Branch live qualification (Observed).** The M3 real-app observation checks and the `desktop_story` MCP path
   passed on macOS Fabric Storybook on the macOS machine and on Windows Fabric and Win32 Paper on the Windows machine. The legacy E2E
   suite and the full local Storybook smoke were not rerun for this update.
@@ -544,8 +544,8 @@ Against the Storybook app, it attached with no prior `storybook test` run (Obser
   actions.
 - The reliability window for required CI (100 runs over 14 days at 99%) is not yet established (#4349).
   **[Unchanged]**
-- **[New]** The Win32 fixture contract tests are not gated on hosted-runner capability, so the Windows Storybook PR
-  lane fails (§4.2).
+- **[New]** Hosted Windows runs skip the Win32 fixture's physical-input and window-capture scenarios (§4.2); only an
+  interactive runner qualifies them.
 
 ## 5. Suggestions
 

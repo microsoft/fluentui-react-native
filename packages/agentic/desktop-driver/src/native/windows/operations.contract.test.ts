@@ -1,5 +1,6 @@
 // Opt in on an unlocked Windows desktop with FURN_NATIVE_DRIVER_TEST=1 and run --runInBand.
-// These scenarios activate the test-only Win32 fixture and send real pointer and keyboard input.
+// These scenarios activate the test-only Win32 fixture and send real pointer and keyboard input. A runner that disables
+// input through the host policy skips the physical-input and capture scenarios (see windowsContractTest).
 import { createHash } from 'node:crypto';
 
 import { createDesktopDriverClient } from '../../client/DesktopDriverClient';
@@ -7,11 +8,13 @@ import type { DesktopSessionClient } from '../../client/DesktopDriverClient';
 import { NativeDesktopHost } from '../../hosts/native/NativeDesktopHost';
 import type { CaptureResult } from '../../operations/capture';
 import { createDesktopDriverServer } from '../../server/createDesktopDriverServer';
-import { fixtureExecutable, helperArtifact, waitFor } from './win32FixtureSupport';
+import { fixtureExecutable, helperArtifact, waitFor, windowsContractTest } from './win32FixtureSupport';
 
 jest.setTimeout(240_000);
 
-const windowsTest = process.platform === 'win32' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
+const windowsTest = windowsContractTest();
+const inputTest = windowsContractTest('physicalClick', 'keyboard');
+const captureTest = windowsContractTest('capture');
 const activate = { automationId: '1001' };
 const field = { automationId: '1002' };
 const checkbox = { automationId: '1003' };
@@ -70,15 +73,26 @@ async function readImage(session: DesktopSessionClient, capture: CaptureResult):
 }
 
 describe('Windows agent operations against the Win32 fixture', () => {
-  windowsTest('activates, physically clicks with a hit-tested proof, types, clears, and refuses ambiguous selectors', async () => {
+  windowsTest('activates a cited element and refuses ambiguous selectors', async () => {
     await withFixture(async (session) => {
       const { result: found } = await session.find(activate);
       expect(found.outcome).toBe('unique');
       const proof = { ref: found.matches[0].ref, sample: found.sample.id };
       expect((await session.act({ action: 'activate', ...proof })).result.mechanism).toBe('accessibility');
       await expectStatus(session, 1);
+      await expect(session.act({ action: 'activate', find: { role: 'button' } })).rejects.toMatchObject({
+        data: { mutation: { disposition: 'rejected', effect: 'none' }, reason: 'selector-not-unique' },
+      });
+      await expectStatus(session, 1);
+    });
+  });
+
+  inputTest('physically clicks with a hit-tested proof, types, and clears without journaling the text', async () => {
+    await withFixture(async (session) => {
+      const { result: found } = await session.find(activate);
+      const proof = { ref: found.matches[0].ref, sample: found.sample.id };
       expect((await session.act({ action: 'click', ...proof })).result.mechanism).toBe('physical-pointer');
-      await expectStatus(session, 2);
+      await expectStatus(session, 1);
 
       await session.act({ action: 'type', find: field, text: 'Windows operation text' });
       expect((await session.check({ expect: { value: 'Windows operation text' }, find: field, waitMs: 2_000 })).result.status).toBe(
@@ -86,10 +100,6 @@ describe('Windows agent operations against the Win32 fixture', () => {
       );
       await session.act({ action: 'clear', find: field });
       expect((await session.check({ expect: { value: '' }, find: field })).result.status).toBe('passed');
-      await expect(session.act({ action: 'activate', find: { role: 'button' } })).rejects.toMatchObject({
-        data: { mutation: { disposition: 'rejected', effect: 'none' }, reason: 'selector-not-unique' },
-      });
-      await expectStatus(session, 2);
       expect(JSON.stringify((await session.journal()).result)).not.toContain('Windows operation text');
     });
   });
@@ -116,7 +126,7 @@ describe('Windows agent operations against the Win32 fixture', () => {
     });
   });
 
-  windowsTest('captures a window and status crop and pages each complete PNG with its hash and scaled dimensions', async () => {
+  captureTest('captures a window and status crop and pages each complete PNG with its hash and scaled dimensions', async () => {
     await withFixture(async (session) => {
       const found = (await session.find(status)).result;
       const ref = found.matches[0].ref;

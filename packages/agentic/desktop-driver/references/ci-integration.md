@@ -54,9 +54,11 @@ yarn workspace @fluentui-react-native/desktop-driver test --runInBand
 This gate builds source, verifies cache publication and reuse, starts the exact
 long-lived artifact, runs the native self-test, exercises FDR1 framing, and
 checks failure behavior. On Windows it also drives the helper against the
-test-only plain Win32 fixture, whose onscreen scenario needs an unlocked
-interactive desktop. It does not by itself prove automation against a real
-React Native app.
+test-only plain Win32 fixture, whose onscreen scenarios need an unlocked
+interactive desktop. When `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES`
+disables input, the fixture scenarios that need a disabled feature or window
+capture report explicit skips. It does not by itself prove automation against a
+real React Native app.
 
 To ensure CI never compiles after a separately provisioned or restored helper,
 set:
@@ -117,7 +119,9 @@ preserved failed-build diagnostics with the Storybook artifacts. Neither
 Because GitHub-hosted Windows does not provide authoritative global input,
 both jobs disable keyboard, physical-click, and wheel capabilities through the
 registered host policy. The authored input plans therefore report explicit
-capability skips; interactive self-hosted qualification must leave those
+capability skips, and so do the Windows native contract's physical-input and
+window-capture fixture scenarios, because hosted Windows Graphics Capture cannot
+create a capture item. Interactive self-hosted qualification must leave those
 features enabled.
 
 The legacy FluentTester E2E jobs (`macos`, `windows`, and `win32`) run the WDIO

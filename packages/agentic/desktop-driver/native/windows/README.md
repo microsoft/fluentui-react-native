@@ -478,7 +478,11 @@ pointer and keyboard input, so it requires an unlocked interactive desktop.
 It covers cited and selector-based actions, ambiguity rejection, checks and
 bounded waits, sequence stop behavior, paged window and element captures,
 named Invoke/Toggle, privacy, and an unsettled named action whose late
-completion does not lift quarantine.
+completion does not lift quarantine. When
+`FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` disables input, as on
+GitHub-hosted runners, this suite and the fixture suite skip the scenarios that
+need a disabled feature or window capture; hosted Windows Graphics Capture
+cannot create a capture item. Those skips are not a pass.
 
 Three more suites drive only the authority modes against the real helper. They
 need no application and never touch the per-user default root.

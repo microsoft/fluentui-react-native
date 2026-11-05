@@ -5,6 +5,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
+import { FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES } from '../../hosts/native/NativeDesktopHost';
+import type { NativeDisabledInputFeature } from '../../hosts/native/NativeDesktopHost';
 import { acquireDirectoryLock, defaultNativeDriverCacheRoot, delay, hashTree, sha256 } from '../filesystem';
 import { buildNativeDesktopDriver, FURN_DESKTOP_DRIVER_CACHE_ROOT } from '../nativeDriver';
 import type { NativeDriverArtifact } from '../types';
@@ -16,6 +18,29 @@ const megabyte = 1024 * 1024;
 
 let helperArtifactPromise: Promise<NativeDriverArtifact> | undefined;
 let fixtureExecutablePromise: Promise<string> | undefined;
+
+const disabledInputFeatures = new Set(
+  (process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES] ?? '')
+    .split(',')
+    .map((feature) => feature.trim())
+    .filter(Boolean),
+);
+
+/**
+ * Selects `test` for a Windows native contract scenario, or `test.skip` when this runner cannot host it. Scenarios run
+ * only on Windows with FURN_NATIVE_DRIVER_TEST=1. A runner that disables input features through the host policy
+ * (GitHub-hosted CI) skips scenarios needing them. Such a runner has no interactive desktop, and Windows Graphics
+ * Capture cannot create a capture item there, so `capture` scenarios skip when the policy disables any input feature.
+ */
+export function windowsContractTest(...requirements: (NativeDisabledInputFeature | 'capture')[]): jest.It {
+  if (process.platform !== 'win32' || process.env.FURN_NATIVE_DRIVER_TEST !== '1') {
+    return test.skip;
+  }
+  const unavailable = requirements.some((requirement) =>
+    requirement === 'capture' ? disabledInputFeatures.size > 0 : disabledInputFeatures.has(requirement),
+  );
+  return unavailable ? test.skip : test;
+}
 
 export function helperArtifact(): Promise<NativeDriverArtifact> {
   helperArtifactPromise ??= buildNativeDesktopDriver({ platform: 'windows' });

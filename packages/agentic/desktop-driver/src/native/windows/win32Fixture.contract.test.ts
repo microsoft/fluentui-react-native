@@ -1,19 +1,21 @@
 // Native contract for the Windows helper against a plain Win32 application. It builds the test-only fixture in
 // fixtures/win32 on demand into the external native cache (never at install time) and drives it through the real
 // helper over the wire protocol. Opt in with FURN_NATIVE_DRIVER_TEST=1 and run it serially on an interactive
-// desktop: yarn test --runInBand win32Fixture. Only the first scenario shows a window (topmost, non-activating, for
-// about a second); the others keep it off every monitor, and none of them steals the foreground.
+// desktop: yarn test --runInBand win32Fixture. Only the first two scenarios show a window (topmost, non-activating, for
+// about a second each); the others keep it off every monitor, and none of them steals the foreground. A runner that
+// disables input through the host policy skips the capture scenario (see windowsContractTest).
 import { NativeHostProcess } from '../../hosts/native/NativeHostProcess';
 import type { NativeHostRequestResult } from '../../hosts/native/NativeHostProcess';
 import type { NativeObserveRequest } from '../../host/types';
 import { parseNativeObservation } from '../../protocol/observation';
 import { delay } from '../filesystem';
 import type { NativeHostEventMessage } from '../types';
-import { fixtureExecutable, helperArtifact, required, waitFor } from './win32FixtureSupport';
+import { fixtureExecutable, helperArtifact, required, waitFor, windowsContractTest } from './win32FixtureSupport';
 
 jest.setTimeout(240_000);
 
-const windowsTest = process.platform === 'win32' && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
+const windowsTest = windowsContractTest();
+const captureTest = windowsContractTest('capture');
 
 const megabyte = 1024 * 1024;
 
@@ -133,7 +135,7 @@ class FixtureSession {
 }
 
 describe('Windows helper against a plain Win32 application', () => {
-  windowsTest('observes, drives, hit tests, and captures a plain Win32 window', async () => {
+  windowsTest('observes, drives, and hit tests a plain Win32 window', async () => {
     const session = await FixtureSession.start('basic', { onscreen: true });
     try {
       const { main } = session;
@@ -186,9 +188,17 @@ describe('Windows helper against a plain Win32 application', () => {
       expect(identified).toBeGreaterThan(0);
       expect(await session.call('hitTest', { windowId: main.id, x: 100_000, y: 100_000 })).toBeNull();
       expect(await session.call('activeElement', { windowId: main.id })).toBeNull();
+    } finally {
+      await session.dispose();
+    }
+  });
 
-      expectPng(await session.host.request<Capture>('captureWindow', { windowId: main.id }));
-      expectPng(await session.host.request<Capture>('captureElement', { elementId: control('1001').id }));
+  captureTest('captures a plain Win32 window and one of its controls', async () => {
+    const session = await FixtureSession.start('capture', { onscreen: true });
+    try {
+      expectPng(await session.host.request<Capture>('captureWindow', { windowId: session.main.id }));
+      const activate = await session.control(session.main.id, '1001');
+      expectPng(await session.host.request<Capture>('captureElement', { elementId: activate.id }));
     } finally {
       await session.dispose();
     }
