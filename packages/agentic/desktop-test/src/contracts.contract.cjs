@@ -4,6 +4,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { pathToFileURL } = require('node:url');
 const { Writable } = require('node:stream');
+const { spawnSync } = require('node:child_process');
 
 const mode = process.argv[2];
 const packageRoot = path.resolve(__dirname, '..');
@@ -29,7 +30,7 @@ const waitFor = async (condition) => {
 async function main() {
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
-  const { DesktopServiceScope } = await import(lib('services.js'));
+  const { DesktopServiceScope, DesktopStopRequested } = await import(lib('services.js'));
   const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs } = await import(lib('config.js'));
   // Config resolution canonicalizes paths; macOS temporary directories are symlinked (/var -> /private/var).
   const root = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-harness-contract-')));
@@ -108,6 +109,20 @@ async function main() {
         { bundleIdentifier: 'com.microsoft.ReactTestApp', windowTitle: 'Fixture Window', leasePath },
         'configured identity must not require local build products',
       );
+      const rexDirectory = path.join(project, 'node_modules', '@office-iss', 'rex-win32');
+      fs.mkdirSync(rexDirectory, { recursive: true });
+      fs.writeFileSync(path.join(rexDirectory, 'rex-win32.js'), '');
+      const rexTarget = {
+        endpoint: 'win32',
+        projectRoot: project,
+        host: { kind: 'rex', renderer: 'paper', component: 'Fixture', windowTitle: 'Fixture (Win32)' },
+      };
+      await assert.rejects(resolveDesktopApplication(rexTarget), /REX bundle is missing/);
+      assert.deepEqual(
+        { ...(await resolveDesktopApplication(rexTarget, undefined, { attach: true })) },
+        { executablePath: path.join(fs.realpathSync(rexDirectory), 'ReactTest.exe'), windowTitle: 'Fixture (Win32)' },
+        'an attach identity must not require a bundle or carry launch arguments',
+      );
       if (process.platform === 'darwin') {
         const writeInfo = ({ identifier = 'com.microsoft.ReactTestApp', newArch = 'false' } = {}) =>
           fs.writeFileSync(
@@ -158,7 +173,135 @@ async function main() {
       assert.equal(result.counts.selected, 1);
       assert.equal(result.counts.retries, 1);
       assert(out.text().includes('(attempt 2)'), 'sparse attempt keys are labeled by ordinal');
+      const structuredOut = capture();
+      const structuredErr = capture();
+      const structured = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: structuredOut,
+        errorOutput: structuredErr,
+        reporterMode: 'json',
+        kind: 'tests',
+      });
+      structured.emit({ kind: 'test-start', payload: { testId: 'bounded', title: 'Bounded output', attempt: 0 } });
+      structured.emit({
+        kind: 'test-result',
+        payload: { testId: 'bounded', title: 'Bounded output', attempt: 0, status: 'passed', durationMs: 1 },
+      });
+      await structured.finish();
+      const summaryText = structuredOut.text().trim();
+      const summary = JSON.parse(summaryText);
+      assert.equal(summary.type, 'summary');
+      assert.equal(summary.counts.passed, 1);
+      assert.equal(summary.artifacts.runJson, path.join(structured.root, 'run.json'));
+      assert(Buffer.byteLength(summaryText) <= 4 * 1024);
+      assert.equal(structuredErr.text(), '', 'structured mode suppresses the human presenter');
+      const failedOut = capture();
+      const failedErr = capture();
+      const failedStructured = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: failedOut,
+        errorOutput: failedErr,
+        reporterMode: 'json',
+        kind: 'tests',
+      });
+      failedStructured.emit({
+        kind: 'test-result',
+        payload: {
+          testId: 'failed',
+          title: 'Failed test',
+          attempt: 0,
+          status: 'failed',
+          durationMs: 1,
+          failure: failedStructured.failure(new Error('assertion failed'), 'test'),
+        },
+      });
+      await failedStructured.finish();
+      assert.equal(JSON.parse(failedOut.text()).status, 'failed');
+      assert.equal(failedErr.text(), '', 'structured test failures do not write human diagnostics to stderr');
+
+      const ndjsonOut = capture();
+      const ndjsonErr = capture();
+      const ndjson = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: ndjsonOut,
+        errorOutput: ndjsonErr,
+        reporterMode: 'ndjson',
+        eventLevel: 'milestones',
+        kind: 'tests',
+      });
+      for (let index = 0; index < 10_000; index++) {
+        ndjson.emit({ kind: 'test-start', payload: { testId: `passing-${index}`, title: `Passing ${index}`, attempt: 0 } });
+        ndjson.emit({
+          kind: 'test-result',
+          payload: { testId: `passing-${index}`, title: `Passing ${index}`, attempt: 0, status: 'passed', durationMs: 1 },
+        });
+      }
+      await ndjson.finish();
+      const records = ndjsonOut
+        .text()
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      assert.equal(records[0].type, 'start');
+      assert.equal(records[0].runId, ndjson.runId);
+      assert.equal(records.at(-1).type, 'summary');
+      assert.equal(records.filter((record) => record.type === 'event').length, 1, 'passing tests do not inflate milestone output');
+      assert.equal(records.filter((record) => record.type === 'suppressed').length, 1);
+      assert.equal(records.at(-1).counts.passed, 10_000);
+      assert.equal(ndjsonErr.text(), '');
       assert(!out.text().includes('(attempt 1000001)'));
+      const interruptedOut = capture();
+      const interrupted = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: interruptedOut,
+        errorOutput: capture(),
+        reporterMode: 'ndjson',
+        kind: 'tests',
+      });
+      const interruptedServices = new DesktopServiceScope(
+        {
+          start: () => {
+            throw new Error('not used');
+          },
+        },
+        interrupted,
+      );
+      interruptedServices.requestStop();
+      await assert.rejects(interruptedServices.guard(Promise.resolve()), DesktopStopRequested);
+      await interruptedServices.close();
+      await interrupted.finish();
+      const interruptedRecords = interruptedOut
+        .text()
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      assert.equal(interruptedRecords.at(-1).status, 'incomplete');
+      assert.equal(
+        interruptedRecords.some((record) => record.type === 'event' && record.kind === 'diagnostic' && record.payload.level === 'error'),
+        false,
+        'user cancellation is not an infrastructure failure',
+      );
+      const closedError = new Error('consumer closed stdout');
+      const closedOut = new Writable({
+        write(_chunk, _encoding, callback) {
+          callback(closedError);
+        },
+      });
+      const closedErr = capture();
+      const closed = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: closedOut,
+        errorOutput: closedErr,
+        reporterMode: 'json',
+        kind: 'lifecycle',
+      });
+      const closedResult = await closed.finish();
+      assert.equal(closedResult.status, 'passed');
+      assert.equal(closedResult.failures.length, 0);
+      assert(closedErr.text().includes('Structured output stopped: consumer closed stdout'));
+      const closedJournal = fs.readFileSync(path.join(closed.root, 'events.jsonl'), 'utf8');
+      assert(closedJournal.includes('"level":"warning"'));
+      assert(closedJournal.includes('Structured output stopped: consumer closed stdout'));
       const journal = fs.readFileSync(path.join(run.root, 'events.jsonl'), 'utf8');
       assert(!journal.includes('secret-value'));
       assert(journal.includes('root cause'));
@@ -283,6 +426,27 @@ async function main() {
         if (priorSummary === undefined) delete process.env.GITHUB_STEP_SUMMARY;
         else process.env.GITHUB_STEP_SUMMARY = priorSummary;
       }
+    } else if (mode === 'reporter-cli') {
+      const configPath = path.join(root, 'desktop.config.mjs');
+      fs.writeFileSync(
+        configPath,
+        `export default ${JSON.stringify({
+          schemaVersion: 1,
+          targets: { win32: { host: { kind: 'installed', application: { executablePath: 'app.exe' } } } },
+        })};`,
+      );
+      const response = spawnSync(
+        process.execPath,
+        [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'missing', '--reporter', 'json', 'prep'],
+        { cwd: root, encoding: 'utf8' },
+      );
+      assert.equal(response.status, 1, response.stderr);
+      assert.equal(response.stderr, '');
+      assert.deepEqual(JSON.parse(response.stdout), {
+        schemaVersion: 1,
+        type: 'error',
+        error: { code: 'unknown-target', message: 'Unknown target "missing".' },
+      });
     } else if (mode === 'commands') {
       const run = reporter({ kind: 'lifecycle', console: 'github-actions' });
       const runner = new NodeDesktopCommandRunner({ reporter: run });
@@ -442,10 +606,17 @@ async function main() {
       assert.equal((await delegatedRun.finish()).status, 'passed');
       assert(!fs.readFileSync(path.join(delegatedRun.root, 'events.jsonl'), 'utf8').includes('child-only-secret'));
     } else if (mode === 'delegated-cli') {
-      const { startReportTransport } = await import(lib('reporting/transport.js'));
-      const run = reporter({ kind: 'lifecycle' });
-      const transport = await startReportTransport(run);
-      const runner = new NodeDesktopCommandRunner({ reporter: run, environment: transport.environment });
+      const { createDesktopReportSession } = await import(lib('reporting/session.js'));
+      const session = await createDesktopReportSession({
+        artifactsRoot: root,
+        errorOutput: err,
+        eventLevel: 'all',
+        kind: 'lifecycle',
+        output: out,
+        reporterMode: 'ndjson',
+        summary: false,
+      });
+      const runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
       const configPath = path.join(root, 'desktop.config.mjs');
       fs.writeFileSync(
         configPath,
@@ -454,37 +625,60 @@ async function main() {
           targets: {
             win32: {
               host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } },
-              commands: { prep: { command: process.execPath, args: ['-e', "process.stderr.write('nested CLI diagnostic\\n')"] } },
+              commands: {
+                prep: {
+                  command: process.execPath,
+                  args: ['-e', "process.stderr.write('nested CLI diagnostic ' + process.env.DESKTOP_REPORTER + '\\n')"],
+                },
+              },
             },
           },
           reporting: { artifactsRoot: path.join(root, 'competing-collector') },
         })}`,
       );
+      let exitCode;
       try {
         await runner.run({
           command: process.execPath,
-          args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', '--json', 'prep'],
+          args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', 'prep'],
           cwd: root,
           env: { GITHUB_ACTIONS: 'true' },
         });
       } finally {
         await runner.close();
-        await transport.close();
+        exitCode = await session.close();
       }
       assert(!fs.existsSync(path.join(root, 'competing-collector')));
-      assert(err.text().includes('nested CLI diagnostic'));
-      const result = await run.finish();
-      assert.equal(result.status, 'passed', JSON.stringify(result));
-      const events = fs
-        .readFileSync(path.join(run.root, 'events.jsonl'), 'utf8')
+      assert.equal(session.reporter.runId.length, 36);
+      assert.equal(exitCode, 0);
+      assert.equal(session.result.status, 'passed', JSON.stringify(session.result));
+      assert.equal(err.text(), '', `structured runs keep stderr empty: ${err.text()}`);
+      const records = out
+        .text()
         .trim()
         .split('\n')
         .map((line) => JSON.parse(line));
-      const machine = events.find(
+      const terminal = records.at(-1);
+      assert.equal(terminal.status, 'passed');
+      assert.equal(terminal.type, 'summary');
+      const journal = fs
+        .readFileSync(path.join(session.reporter.root, 'events.jsonl'), 'utf8')
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      const machine = journal.find(
         (event) => event.kind === 'output' && event.payload.stream === 'stdout' && event.payload.text.includes('"delegated"'),
       );
-      assert.deepEqual(JSON.parse(machine.payload.text), { runId: run.runId, delegated: true, exitCode: 0 });
-      assert.equal((out.text().match(/\[desktop\] PASSED:/g) || []).length, 1);
+      assert.deepEqual(JSON.parse(machine.payload.text), {
+        schemaVersion: 1,
+        type: 'terminal',
+        result: { runId: session.reporter.runId, delegated: true, exitCode: 0 },
+      });
+      assert(
+        records.some(
+          (record) => record.type === 'event' && record.kind === 'output' && record.payload.text.includes('nested CLI diagnostic ndjson'),
+        ),
+      );
     } else if (mode === 'owned-service') {
       const { startReportTransport } = await import(lib('reporting/transport.js'));
       const run = reporter({ kind: 'lifecycle' });
@@ -570,6 +764,271 @@ async function main() {
       const result = await run.finish();
       assert.equal(result.status, 'failed');
       assert(err.text().includes('original metro failure'));
+    } else if (mode === 'agent') {
+      const { DesktopSupervisor } = await import(lib('supervisor.js'));
+      const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
+      const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
+      const target = {
+        endpoint: 'win32',
+        host: { kind: 'installed', application: { windowTitle: 'fake' }, renderer: 'paper' },
+        id: 'agent-app',
+        instanceId: 'agent',
+        projectRoot: packageRoot,
+        configPath: path.join(root, 'desktop.config.mjs'),
+      };
+      const capabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': 'agent-app' } };
+      const published = [];
+      let removed = 0;
+      const run = reporter({ kind: 'lifecycle' });
+      const supervisor = new DesktopSupervisor({
+        target,
+        reporter: run,
+        lockDirectory: path.join(root, 'locks'),
+        hostFactory: async () => new FakeDesktopHost({ endpoint: 'win32', features: { boundedObservation: true } }),
+        agent: {
+          root: path.join(root, 'private'),
+          publish: async (connection) => {
+            published.push(connection);
+            return async () => void removed++;
+          },
+        },
+      });
+      try {
+        await supervisor.start();
+        assert.equal(published.length, 1);
+        const [connection] = published;
+        assert.equal(connection.descriptor, 'agent-connection.json');
+        assert.equal(supervisor.agentDescriptor, 'agent-connection.json');
+        assert.equal(connection.root, path.join(root, 'private'));
+        assert.equal(connection.url, supervisor.server.url);
+        assert.equal(connection.target.id, 'agent-app');
+        assert.match(connection.incarnation, /^inc_/);
+        // Every route needs the grant once an agent connection is published.
+        await assert.rejects(createDesktopDriverClient({ url: connection.url }).newSession(capabilities));
+        await assert.rejects(createDesktopDriverClient({ grant: `${connection.grant}x`, url: connection.url }).newSession(capabilities));
+        const session = await createDesktopDriverClient({ grant: connection.grant, url: connection.url }).newSession(capabilities);
+        assert.equal((await session.operations()).operations.find(({ name }) => name === 'observe')?.available, true);
+        await session.delete();
+      } finally {
+        await supervisor.close();
+      }
+      assert.equal(removed, 1);
+      assert.equal(supervisor.agentDescriptor, undefined);
+      const result = await run.finish();
+      assert.equal(result.status, 'passed', JSON.stringify(result));
+      const { grant } = published[0];
+      assert(!out.text().includes(grant) && !err.text().includes(grant), 'the grant must never reach reporter output');
+      for (const entry of fs.readdirSync(root, { recursive: true, withFileTypes: true }))
+        if (entry.isFile())
+          assert(
+            !fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8').includes(grant),
+            `the grant must never reach ${entry.name}`,
+          );
+      assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')));
+
+      const failing = new DesktopSupervisor({
+        target,
+        reporter: reporter({ kind: 'lifecycle' }),
+        lockDirectory: path.join(root, 'locks'),
+        hostFactory: async () => new FakeDesktopHost({ endpoint: 'win32' }),
+        agent: {
+          publish: async () => {
+            throw new Error('original publication failure');
+          },
+        },
+      });
+      await assert.rejects(failing.start(), /original publication failure/);
+      assert.equal(failing.agentDescriptor, undefined);
+      assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')), 'a failed publication must release the claim');
+
+      const failedCleanupLocks = path.join(root, 'failed-cleanup-locks');
+      const failedCleanup = new DesktopSupervisor({
+        target,
+        reporter: reporter({ kind: 'lifecycle' }),
+        lockDirectory: failedCleanupLocks,
+        hostFactory: async () => {
+          const host = new FakeDesktopHost({ endpoint: 'win32' });
+          const dispose = host.dispose.bind(host);
+          host.dispose = async (...args) => {
+            await dispose(...args);
+            throw new Error('injected cleanup uncertainty');
+          };
+          return host;
+        },
+      });
+      await failedCleanup.start();
+      await assert.rejects(failedCleanup.close(), /cleanup failed/);
+      assert(fs.existsSync(path.join(failedCleanupLocks, 'interactive.lock')), 'uncertain cleanup must retain the workload claim');
+      const { claimDesktopWorkload } = await import(lib('supervisor.js'));
+      assert.throws(() => claimDesktopWorkload('replacement', failedCleanupLocks), /Another desktop workload/);
+
+      // The Storybook channel child's composition: one service, protected and published from the process that listens.
+      const { startDesktopService } = await import(lib('supervisor.js'));
+      const { publishDesktopAgent } = await import(lib('agentConnection.js'));
+      const { DesktopAuthority } = await import('@fluentui-react-native/desktop-driver/authority');
+      const serviceTarget = { endpoint: 'win32', id: 'agent-service', platformName: 'windows', renderer: 'paper', launchModes: ['launch'] };
+      const serviceCapabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': 'agent-service' } };
+      const trackedHost = (steps) => {
+        const host = new FakeDesktopHost({ endpoint: 'win32' });
+        const dispose = host.dispose.bind(host);
+        host.dispose = async (...args) => {
+          steps.push('dispose');
+          return dispose(...args);
+        };
+        return host;
+      };
+      const steps = [];
+      const secrets = [];
+      const servicePublished = [];
+      const service = await startDesktopService(trackedHost(steps), {
+        target: serviceTarget,
+        addSecret: (secret) => secrets.push(secret),
+        agent: {
+          descriptor: 'service.json',
+          publish: async (connection) => {
+            servicePublished.push(connection);
+            steps.push('publish');
+            return async () => void steps.push('withdraw');
+          },
+        },
+      });
+      try {
+        const [connection] = servicePublished;
+        assert.equal(connection.descriptor, 'service.json');
+        assert.deepEqual(connection.target, { endpoint: 'win32', id: 'agent-service' });
+        assert.equal(connection.url, service.url);
+        assert.deepEqual(secrets, [connection.grant]);
+        await assert.rejects(createDesktopDriverClient({ url: service.url }).newSession(serviceCapabilities));
+        const session = await createDesktopDriverClient({ grant: connection.grant, url: service.url }).newSession(serviceCapabilities);
+        await session.delete();
+      } finally {
+        await service.close();
+      }
+      await service.close();
+      assert.deepEqual(steps, ['publish', 'withdraw', 'dispose'], 'withdraw the descriptor before closing the listener');
+
+      const failedSteps = [];
+      await assert.rejects(
+        startDesktopService(trackedHost(failedSteps), {
+          target: serviceTarget,
+          agent: {
+            publish: async () => {
+              throw new Error('original service publication failure');
+            },
+          },
+        }),
+        /original service publication failure/,
+      );
+      assert.deepEqual(failedSteps, ['dispose'], 'a failed publication closes the service');
+
+      // A publication that completes after its owner's guard settles is withdrawn, and its grant is revoked.
+      const authority = new DesktopAuthority();
+      const issued = [];
+      const issue = authority.issue.bind(authority);
+      authority.issue = (request) => {
+        const grant = issue(request);
+        issued.push(grant);
+        return grant;
+      };
+      let release;
+      let lateRemoved = 0;
+      await assert.rejects(
+        publishDesktopAgent({
+          authority,
+          connection: { publish: () => new Promise((resolve) => (release = resolve)) },
+          target: { endpoint: 'win32', id: 'late' },
+          url: service.url,
+          guard: () => Promise.reject(new Error('original guard failure')),
+        }),
+        /original guard failure/,
+      );
+      assert.equal(authority.authenticate(`Bearer ${issued[0].token}`), undefined, 'an abandoned publication revokes its grant');
+      release(async () => void lateRemoved++);
+      await new Promise((resolve) => setImmediate(resolve));
+      assert.equal(lateRemoved, 1, 'a late publication is withdrawn');
+    } else if (mode === 'agent-cli') {
+      const { createDesktopReportSession } = await import(lib('reporting/session.js'));
+      // serve --agent passes the agent options to an integration that serves agents, and rejects one that does not.
+      const configPath = path.join(root, 'desktop.config.mjs');
+      fs.writeFileSync(
+        configPath,
+        [
+          "import fs from 'node:fs';",
+          'export default {',
+          '  schemaVersion: 1,',
+          "  targets: { win32: { host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } } } },",
+          '  integration: {',
+          "    name: 'fixture',",
+          "    supportsAgent: process.env.FIXTURE_SUPPORTS_AGENT === '1',",
+          '    validate() {},',
+          '    async run({ action, agent, reporterMode }) {',
+          '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, agent: agent ?? null, reporterMode }));',
+          '    },',
+          '  },',
+          '};',
+          '',
+        ].join('\n'),
+      );
+      const invoke = async (supportsAgent, args) => {
+        const session = await createDesktopReportSession({
+          artifactsRoot: root,
+          errorOutput: err,
+          kind: 'lifecycle',
+          output: out,
+          reporterMode: 'ndjson',
+          summary: false,
+        });
+        const runner = new NodeDesktopCommandRunner({ reporter: session.reporter, environment: session.environment });
+        const marker = path.join(root, `marker-${supportsAgent}-${args.join('-').replace(/[^a-z-]/g, '')}.json`);
+        let failure;
+        try {
+          await runner.run({
+            command: process.execPath,
+            args: [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', ...args],
+            cwd: root,
+            env: { FIXTURE_MARKER: marker, FIXTURE_SUPPORTS_AGENT: supportsAgent ? '1' : '0' },
+          });
+        } catch (error) {
+          failure = error;
+        } finally {
+          await runner.close();
+          await session.close(failure);
+        }
+        return { failure, marker: fs.existsSync(marker) ? JSON.parse(fs.readFileSync(marker, 'utf8')) : undefined };
+      };
+      const commandLogs = () =>
+        fs
+          .readdirSync(root, { recursive: true, withFileTypes: true })
+          .filter((entry) => entry.isFile() && entry.name.endsWith('.log'))
+          .map((entry) => fs.readFileSync(path.join(entry.parentPath, entry.name), 'utf8'));
+      const privateRoot = path.join(root, 'private');
+      // serve writes no final output, so only serve receives the output format for the integration's readiness record.
+      const served = await invoke(true, [
+        '--reporter',
+        'ndjson',
+        'serve',
+        '--agent',
+        '--descriptor',
+        'storybook.json',
+        '--root',
+        privateRoot,
+      ]);
+      assert.equal(served.failure, undefined, commandLogs().join('\n'));
+      assert.deepEqual(served.marker, {
+        action: 'serve',
+        agent: { descriptor: 'storybook.json', root: privateRoot },
+        reporterMode: 'ndjson',
+      });
+      assert.deepEqual((await invoke(true, ['serve'])).marker, { action: 'serve', agent: null, reporterMode: 'ndjson' });
+      assert.deepEqual((await invoke(true, ['--reporter', 'ndjson', 'prep'])).marker, { action: 'prep', agent: null });
+      const refused = await invoke(false, ['serve', '--agent']);
+      assert(refused.failure, 'an integration that does not serve agents must refuse --agent');
+      assert.equal(refused.marker, undefined);
+      const logs = commandLogs();
+      assert(
+        logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
+        logs.join('\n'),
+      );
     } else {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
       const { runDesktopWdioSuite } = await import(lib('wdio/run.js'));
@@ -716,7 +1175,8 @@ async function main() {
     }
     process.stdout.write(JSON.stringify({ mode, passed: true }));
   } finally {
-    fs.rmSync(root, { recursive: true, force: true });
+    // Windows can hold WDIO worker handles briefly after exit, which surfaces as transient EPERM/EBUSY.
+    fs.rmSync(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
   }
 }
 

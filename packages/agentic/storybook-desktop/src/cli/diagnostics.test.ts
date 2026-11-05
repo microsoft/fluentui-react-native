@@ -4,8 +4,21 @@ import os from 'node:os';
 import path from 'node:path';
 
 import { formatDesktopStorybookError, writeDesktopStorybookFailure } from '../../config/diagnostics.cjs';
+import { normalizeLegacyTestReporter } from './createDesktopStorybookCommand';
 
 describe('pipeline failure diagnostics', () => {
+  test.each(['spec', 'tap', 'dot'])('normalizes the legacy test reporter alias: %s', (reporter) => {
+    expect(normalizeLegacyTestReporter(['node', 'storybook', 'test', '--reporter', reporter])).toEqual({
+      argv: ['node', 'storybook', 'test', '--test-reporter', reporter],
+      deprecated: true,
+    });
+  });
+
+  test('leaves global reporter modes and unrelated commands unchanged', () => {
+    const argv = ['node', 'storybook', '--reporter', 'json', 'manifest', '--macos'];
+    expect(normalizeLegacyTestReporter(argv)).toEqual({ argv, deprecated: false });
+  });
+
   test('preserves aggregate errors, nested causes, stacks and non-Error throws without truncation', () => {
     const error = new AggregateError(
       [
@@ -68,6 +81,38 @@ describe('pipeline failure diagnostics', () => {
       expect(response.stderr).toContain('components-button--default navigation failed');
       expect(response.stderr).toContain('preview did not mount');
       expect(response.stderr).toContain('session cleanup failed');
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test.each([
+    ['usage', ['test', '--macos', '--reporter', 'json', '--unknown']],
+    ['config', ['--reporter', 'json', '--config', 'missing-storybook.config.mjs', 'manifest', '--macos']],
+  ])('emits one structured %s error without stderr', async (_kind, args) => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-cli-structured-error-'));
+    try {
+      const response = await new Promise<{ code: number | null; stdout: string; stderr: string }>((resolve, reject) => {
+        const child = spawn(process.execPath, [path.resolve(__dirname, '../../config/cli.cjs'), ...args], {
+          cwd: root,
+          stdio: ['ignore', 'pipe', 'pipe'],
+        });
+        const stdout: Buffer[] = [];
+        const stderr: Buffer[] = [];
+        child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
+        child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+        child.once('error', reject);
+        child.once('close', (code) =>
+          resolve({ code, stdout: Buffer.concat(stdout).toString('utf8'), stderr: Buffer.concat(stderr).toString('utf8') }),
+        );
+      });
+      expect(response.code).toBe(1);
+      expect(response.stderr).toBe('');
+      expect(JSON.parse(response.stdout)).toMatchObject({
+        schemaVersion: 1,
+        type: 'error',
+        error: { code: _kind },
+      });
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }

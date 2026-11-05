@@ -18,61 +18,7 @@ describe('desktop Storybook server integration', () => {
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
     const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
     const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
-    const driverManifest: DesktopStorybookDriverManifest = {
-      application: {
-        leaseNonce: 'integration-nonce',
-        leasePath: path.join(temporaryDirectory, 'application-lease.json'),
-        windowTitle: 'Agentic Components Storybook',
-      },
-      appName: 'AgenticStorybook',
-      bridgeNonce: 'integration-nonce',
-      displayName: 'Agentic Components Storybook',
-      driverPort,
-      endpoint: 'windows',
-      instanceId: 'integration',
-      metroPort: 8081,
-      nativeDriver: {
-        architecture: 'x64',
-        artifactId: 'artifact',
-        artifactRoot: temporaryDirectory,
-        buildFingerprint: 'build',
-        buildId: 'build-id',
-        compatibilityKey: 'compatibility',
-        configuration: 'release',
-        endpoints: ['windows', 'win32'],
-        executablePath: path.join(temporaryDirectory, 'driver.exe'),
-        features: ['probe'],
-        origin: 'cache',
-        provider: 'windows',
-        schemaVersion: 1,
-        signing: { mode: 'none' },
-        sourceDigest: 'source',
-        wireProtocol: { major: 1, minor: 0 },
-      },
-      platformManifestDigest: 'platform-digest',
-      portablePlanDigest: 'portable-digest',
-      renderer: 'fabric',
-      schemaVersion: 2,
-      storyManifest: {
-        endpoint: 'windows',
-        entries: [
-          {
-            id: 'components-button--default',
-            name: 'Default',
-            packageName: '@fluentui-react-native/components',
-            sourcePath: 'src/components/button/button.stories.tsx',
-            tags: ['desktop-e2e'],
-            title: 'Components/Button',
-          },
-        ],
-        platformManifestDigest: 'platform-digest',
-        portablePlanDigest: 'portable-digest',
-        schemaVersion: 1,
-      },
-      storybookPort,
-      targetId: 'integration-windows',
-      testIDPrefix: 'integration-storybook',
-    };
+    const driverManifest = createIntegrationManifest(temporaryDirectory, storybookPort, driverPort);
     fs.writeFileSync(manifestPath, JSON.stringify(driverManifest));
 
     const output: string[] = [];
@@ -147,7 +93,118 @@ describe('desktop Storybook server integration', () => {
 
     expect(output.join('')).toContain('WebDriver ');
   });
+
+  test('refuses an agent connection from the fake driver', async () => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const readyPath = path.join(temporaryDirectory, 'agent-ready.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(
+      manifestPath,
+      JSON.stringify({
+        ...createIntegrationManifest(temporaryDirectory, storybookPort, driverPort),
+        agent: { descriptor: 'agent.json', readyPath },
+      }),
+    );
+    const output: string[] = [];
+    const sink = {
+      write: (text: string) => {
+        output.push(text);
+        return true;
+      },
+    };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    try {
+      const child = runner.start({
+        command: process.execPath,
+        args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+        cwd: projectRoot,
+        env: {
+          STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+          STORYBOOK_DRIVER_MANIFEST: manifestPath,
+          STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+          STORYBOOK_PROJECT_ROOT: projectRoot,
+          STORYBOOK_WS_PORT: String(storybookPort),
+        },
+      });
+      expect(await child.completed).not.toBe(0);
+      expect(fs.existsSync(readyPath)).toBe(false);
+      await runner.close();
+      await transport.close();
+      await reporter.finish();
+      expect(output.join('')).toContain('An agent connection requires the native Desktop Driver');
+    } finally {
+      fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+    }
+  });
 });
+
+function createIntegrationManifest(temporaryDirectory: string, storybookPort: number, driverPort: number): DesktopStorybookDriverManifest {
+  return {
+    application: {
+      leaseNonce: 'integration-nonce',
+      leasePath: path.join(temporaryDirectory, 'application-lease.json'),
+      windowTitle: 'Agentic Components Storybook',
+    },
+    appName: 'AgenticStorybook',
+    bridgeNonce: 'integration-nonce',
+    displayName: 'Agentic Components Storybook',
+    driverPort,
+    endpoint: 'windows',
+    instanceId: 'integration',
+    metroPort: 8081,
+    nativeDriver: {
+      architecture: 'x64',
+      artifactId: 'artifact',
+      artifactRoot: temporaryDirectory,
+      buildFingerprint: 'build',
+      buildId: 'build-id',
+      compatibilityKey: 'compatibility',
+      configuration: 'release',
+      endpoints: ['windows', 'win32'],
+      executablePath: path.join(temporaryDirectory, 'driver.exe'),
+      features: ['probe'],
+      origin: 'cache',
+      provider: 'windows',
+      schemaVersion: 1,
+      signing: { mode: 'none' },
+      sourceDigest: 'source',
+      wireProtocol: { major: 1, minor: 0 },
+    },
+    platformManifestDigest: 'platform-digest',
+    portablePlanDigest: 'portable-digest',
+    renderer: 'fabric',
+    schemaVersion: 2,
+    storyManifest: {
+      endpoint: 'windows',
+      entries: [
+        {
+          id: 'components-button--default',
+          name: 'Default',
+          packageName: '@fluentui-react-native/components',
+          sourcePath: 'src/components/button/button.stories.tsx',
+          tags: ['desktop-e2e'],
+          title: 'Components/Button',
+        },
+      ],
+      platformManifestDigest: 'platform-digest',
+      portablePlanDigest: 'portable-digest',
+      schemaVersion: 1,
+    },
+    storybookPort,
+    targetId: 'integration-windows',
+    testIDPrefix: 'integration-storybook',
+  };
+}
 
 describe('PowerShell owned service integration', () => {
   const windowsTest = process.platform === 'win32' ? test : test.skip;

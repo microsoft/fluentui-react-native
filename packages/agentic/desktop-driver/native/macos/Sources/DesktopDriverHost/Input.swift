@@ -50,10 +50,15 @@ struct ReleaseLedger {
 
 final class InputController {
   private let source = CGEventSource(stateID: .hidSystemState)
+  private let effects: EffectLedger
   private var pressedKeys: [PressedKey] = []
   private var pressedButtons: [Int] = []
   private(set) var pointer: CGPoint = .zero
   private var pointerInitialized = false
+
+  init(effects: EffectLedger = EffectLedger()) {
+    self.effects = effects
+  }
 
   var hasDepressedInput: Bool {
     !pressedKeys.isEmpty || !pressedButtons.isEmpty
@@ -88,7 +93,7 @@ final class InputController {
         x: start.x + (target.x - start.x) * progress,
         y: start.y + (target.y - start.y) * progress
       )
-      try postMouse(type: moveEventType(), point: position, button: pressedButtons.last ?? 0)
+      try postMouse(type: moveEventType(), point: position, button: pressedButtons.last ?? 0, counted: false)
       pointer = position
       if step < steps {
         try token.wait(milliseconds: max(1, duration / steps))
@@ -127,7 +132,7 @@ final class InputController {
 
   func pointerCancel() {
     for button in pressedButtons.reversed() {
-      try? postMouse(type: mouseEventType(button: button, down: false), point: pointer, button: button)
+      try? postMouse(type: mouseEventType(button: button, down: false), point: pointer, button: button, counted: false)
     }
     pressedButtons.removeAll()
   }
@@ -154,6 +159,7 @@ final class InputController {
       try fail(ErrorCode.inputFailed, "Creating the macOS wheel event failed.")
     }
     event.post(tap: .cghidEventTap)
+    effects.delivered()
   }
 
   func keyDown(_ value: String, token: CancellationToken) throws {
@@ -210,7 +216,7 @@ final class InputController {
 
   func releaseAll() {
     while let key = pressedKeys.last {
-      try? postKey(key.stroke, down: false)
+      try? postKey(key.stroke, down: false, counted: false)
       pressedKeys.removeLast()
     }
     pointerCancel()
@@ -282,7 +288,9 @@ final class InputController {
     try failIfSessionUnavailable("Physical input")
   }
 
-  private func postKey(_ stroke: KeyStroke, down: Bool) throws {
+  // Counted posts are primary mutations. Pointer placement and the release of input an earlier command already counted
+  // pass `counted: false`, so cleanup after a failure cannot turn a rejected command into a partial one.
+  private func postKey(_ stroke: KeyStroke, down: Bool, counted: Bool = true) throws {
     let event: CGEvent?
     switch stroke {
     case let .keyCode(code):
@@ -306,9 +314,12 @@ final class InputController {
     flags.formUnion(modifierFlagsAfterKey(stroke, down: down, held: pressedKeys.map(\.stroke)))
     event.flags = flags
     event.post(tap: .cghidEventTap)
+    if counted {
+      effects.delivered()
+    }
   }
 
-  private func postMouse(type: CGEventType, point: CGPoint, button: Int) throws {
+  private func postMouse(type: CGEventType, point: CGPoint, button: Int, counted: Bool = true) throws {
     let nativeButton = try mouseButton(button)
     guard let event = CGEvent(
       mouseEventSource: source,

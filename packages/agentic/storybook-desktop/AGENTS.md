@@ -20,6 +20,9 @@ source ownership and validation.
   native story-root verification. Never accept uncorrelated channel events.
 - Treat generated manifests, runtime state, native workspaces, and build
   products as disposable; fix their owning source.
+- Keep global output formatting on `--reporter`; the child Node test reporter
+  is `--test-reporter`. Long-lived command readiness is emitted only after its
+  owned services pass readiness checks.
 
 ## Validation
 

@@ -81,6 +81,73 @@ describe('desktop-driver CLI', () => {
     expect(JSON.parse(output[1])).toMatchObject({ artifactId: 'artifact-id', origin: 'cache' });
   });
 
+  test('supports compact JSON and NDJSON result modes without changing the default output', async () => {
+    const artifact = createNativeArtifact();
+    const output: string[] = [];
+    const createProgram = () =>
+      createDesktopDriverCommand({
+        buildDriver: jest.fn(async () => artifact),
+        stdout: {
+          write(value) {
+            output.push(String(value));
+            return true;
+          },
+        },
+      });
+
+    await createProgram().parseAsync(['node', 'test', 'build-driver', '--platform', 'macos', '--reporter', 'json']);
+    await createProgram().parseAsync(['node', 'test', 'build-driver', '--platform', 'macos', '--json']);
+    await createProgram().parseAsync(['node', 'test', 'build-driver', '--platform', 'macos', '--reporter', 'ndjson']);
+
+    expect(output[0]).toBe(`${JSON.stringify(artifact)}\n`);
+    expect(output[1]).toBe(output[0]);
+    expect(JSON.parse(output[2])).toEqual({ schemaVersion: 1, type: 'terminal', result: artifact });
+  });
+
+  test('writes structured usage errors before failing command parsing', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-driver-cli-error-'));
+    try {
+      const response = await new Promise<{ code: number | null; stdout: string; stderr: string }>((resolve, reject) => {
+        const child = spawn(process.execPath, [path.resolve(__dirname, '../../config/cli.cjs'), '--reporter', 'json', 'unknown'], {
+          cwd: root,
+          stdio: ['ignore', 'pipe', 'pipe'],
+        });
+        const stdout: Buffer[] = [];
+        const stderr: Buffer[] = [];
+        child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
+        child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+        child.once('error', reject);
+        child.once('close', (code) =>
+          resolve({ code, stdout: Buffer.concat(stdout).toString('utf8'), stderr: Buffer.concat(stderr).toString('utf8') }),
+        );
+      });
+
+      expect(response.code).toBe(1);
+      expect(response.stderr).toBe('');
+      expect(JSON.parse(response.stdout)).toMatchObject({
+        schemaVersion: 1,
+        type: 'error',
+        error: { code: 'usage' },
+      });
+    } finally {
+      fs.rmSync(root, { force: true, recursive: true });
+    }
+  });
+
+  test('does not crash when the consumer closes stdout before a structured error is written', async () => {
+    const response = await new Promise<{ code: number | null; stderr: string }>((resolve, reject) => {
+      const child = spawnCli(['--reporter', 'json', 'unknown']);
+      const stderr: Buffer[] = [];
+      child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
+      child.stdout.destroy();
+      child.once('error', reject);
+      child.once('close', (code) => resolve({ code, stderr: Buffer.concat(stderr).toString('utf8') }));
+    });
+
+    expect(response.stderr).toBe('');
+    expect(response.code).toBe(1);
+  });
+
   test('runs noninteractive permission diagnostics through the resolved macOS helper', async () => {
     const artifact = createNativeArtifact({
       architecture: 'arm64',

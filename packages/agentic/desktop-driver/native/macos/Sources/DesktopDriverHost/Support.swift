@@ -1,4 +1,5 @@
 import ApplicationServices
+import CryptoKit
 import Foundation
 import Darwin
 
@@ -31,21 +32,87 @@ enum ErrorCode {
   static let internalError = "internal-error"
 }
 
+/// What a failed or cancelled mutating command left behind, reported as `effect` on the wire.
+enum MutationEffect: String {
+  // Not `none`: that spelling resolves to `Optional.none` wherever the value is optional.
+  case noEffect = "none"
+  case partial
+  case unknown
+}
+
+/// Records whether the current mutating command handed anything to the target that a retry could repeat.
+///
+/// Commands run one at a time on the worker thread, so the ledger needs no lock. Only primary mutations count:
+/// Accessibility actions and value writes, and key, button, and wheel events. Focus, window raising, and pointer
+/// placement are idempotent, and releasing input that an earlier command already counted is cleanup.
+final class EffectLedger {
+  private var pending = false
+  private var ambiguous = false
+  private var applied = 0
+
+  func reset() {
+    pending = false
+    ambiguous = false
+    applied = 0
+  }
+
+  /// Marks an Accessibility request as sent. A dispatch that never settled stays ambiguous for the whole command.
+  func dispatching() {
+    if pending {
+      ambiguous = true
+    }
+    pending = true
+  }
+
+  /// Records an event the OS accepted. Posting cannot fail afterward, so it needs no pending state.
+  func delivered() {
+    dispatching()
+    completed(.success)
+  }
+
+  /// Settles the pending dispatch from its Accessibility result. Only errors that prove the target never acted leave
+  /// no effect: `cannotComplete` also covers a busy or modal target that may still process the request.
+  func completed(_ error: AXError) {
+    switch error {
+    case .success:
+      pending = false
+      applied += 1
+    case .actionUnsupported, .apiDisabled, .attributeUnsupported, .illegalArgument, .invalidUIElement, .noValue,
+      .notEnoughPrecision, .notImplemented:
+      pending = false
+    default:
+      break
+    }
+  }
+
+  /// What a command that stopped now has left behind. Anything unsettled is `unknown`, which quarantines the target.
+  var effect: MutationEffect {
+    if pending || ambiguous {
+      return .unknown
+    }
+    return applied > 0 ? .partial : .noEffect
+  }
+}
+
 struct HelperError: Error, CustomStringConvertible {
   let code: String
   let message: String
   let data: JSONObject?
+  var effect: MutationEffect?
 
   var description: String { message }
 
-  init(code: String, message: String, data: JSONObject? = nil) {
+  init(code: String, message: String, data: JSONObject? = nil, effect: MutationEffect? = nil) {
     self.code = code
     self.message = message
     self.data = data
+    self.effect = effect
   }
 }
 
-struct CancelledError: Error {}
+struct CancelledError: Error {
+  var effect: MutationEffect?
+}
 
 @inline(__always)
 func fail(_ code: String, _ message: String, data: JSONObject? = nil) throws -> Never {
@@ -391,6 +458,14 @@ func throwAX(_ error: AXError, operation: String, staleMessage: String? = nil) t
       ]
     )
   }
+  if error == .cannotComplete {
+    // A hung, busy, or exiting target: the reason lets a caller wait and retry rather than treat the request as wrong.
+    try fail(
+      ErrorCode.automationFailed,
+      "\(operation) failed because \(describeAXError(error)).",
+      data: ["axError": axErrorJSON(error), "reason": "target-non-response"]
+    )
+  }
   try fail(ErrorCode.automationFailed, "\(operation) failed because \(describeAXError(error)).")
 }
 
@@ -435,6 +510,23 @@ func copyAXActionNames(_ element: AXUIElement) throws -> [String] {
   return names as? [String] ?? []
 }
 
+/// The actions an element publishes, for the read-only commands that report them. AppKit answers the query for some
+/// elements, such as split view dividers, with a general failure instead of an empty list, and an element that cannot
+/// list its actions publishes none. Clicking keeps `copyAXActionNames`, where that failure stays an automation error.
+func copyPublishedAXActionNames(_ element: AXUIElement) throws -> [String] {
+  var names: CFArray?
+  let error = AXUIElementCopyActionNames(element, &names)
+  return try publishedActionNames(error: error, names: names as? [String])
+}
+
+func publishedActionNames(error: AXError, names: [String]?) throws -> [String] {
+  if error == .actionUnsupported || error == .failure {
+    return []
+  }
+  try throwAX(error, operation: "Reading accessibility actions")
+  return names ?? []
+}
+
 // AppKit lists an NSAccessibilityCustomAction as "Name:<name>\nTarget:<address>\nSelector:<selector>". The target
 // and selector are process-local details, so only the authored name is exposed. Standard AX actions are unchanged.
 func accessibilityActionName(_ raw: String) -> String {
@@ -447,6 +539,21 @@ func accessibilityActionName(_ raw: String) -> String {
     return String(remainder)
   }
   return String(remainder[..<target.lowerBound])
+}
+
+/// Binds a published action to its exact native identity without revealing it. A key is a truncated HMAC of the raw
+/// action string under a secret that exists only in this process: the same action on the same element keeps its key, a
+/// custom action re-registered with another target gets a new one, and nothing about the target can be read back.
+struct AccessibilityActionKeys {
+  private let secret: SymmetricKey
+
+  init(secret: SymmetricKey = SymmetricKey(size: .bits256)) {
+    self.secret = secret
+  }
+
+  func key(for raw: String) -> String {
+    HMAC<SHA256>.authenticationCode(for: Data(raw.utf8), using: secret).prefix(16).map { String(format: "%02x", $0) }.joined()
+  }
 }
 
 func axPoint(_ value: CFTypeRef?) -> CGPoint? {

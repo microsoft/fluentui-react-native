@@ -1,6 +1,7 @@
 export {
   attachDesktopWebdriver,
   connectDesktopWebdriver,
+  desktopWebdriverGrantOptions,
   DesktopWebdriverSession,
   installDesktopWebdriverCommands,
 } from './DesktopWebdriver.js';

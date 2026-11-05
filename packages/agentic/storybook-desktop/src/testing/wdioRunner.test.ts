@@ -22,7 +22,8 @@ test('executes isolated inline code and releases sessions after assertion failur
           !diagnostics.includes('intentional inline assertion') ||
           !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
           !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
-          !diagnostics.includes('Navigation failed: preview did not mount') ||
+          !diagnostics.includes('Storybook context did not settle.') ||
+          diagnostics.includes('Navigation refused before dispatch') ||
           output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
         ) {
           reject(new Error('Assertion diagnostics were lost.'));

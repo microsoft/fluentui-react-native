@@ -28,6 +28,9 @@ V1 platform names are `macos` and `windows`. Endpoint names are `macos`,
 - Cleanup uses exact process identity, never process-name matching.
 - Renderer is optional for non-React-Native targets.
 - A registered target may restrict `launchModes`; clients cannot override that policy.
+- On a protected service, a session belongs to the grant that created it and
+  every other grant sees it as nonexistent; see
+  [the security model](security.md#protected-service).
 
 Supported extension capabilities:
 
@@ -66,7 +69,10 @@ Implemented `furn` extensions:
 - `POST /session/{id}/furn/story/args`;
 - `GET /session/{id}/furn/tree`;
 - `GET /session/{id}/furn/window-events`, when the `windowEvents` feature is
-  advertised in `furn:features`.
+  advertised in `furn:features`;
+- `GET /session/{id}/furn/ops` and `POST /session/{id}/furn/ops/{name}`, the
+  versioned agent operations described in [Agent operations](operations.md);
+  they need the `boundedObservation` feature to observe.
 
 `furn/window-events` returns the helper's bounded diagnostic timeline for the
 session's application: recent window notifications (created, destroyed, focus,
@@ -94,8 +100,11 @@ Clients cannot override it through capabilities. A timed-out launch must
 cancel and dispose causally owned processes before the target can be reused.
 
 Every host operation receives an `AbortSignal`. On timeout, the server aborts
-and drains native work before input release, teardown, or a later command. A
-provider may never apply late input after timeout cleanup.
+and waits for the host operation promise to settle before input release,
+teardown, or a later command. This is only a Node-side guarantee: a provider
+must not report settlement while its native side effects remain live. The
+Windows UIA bounded mutation worker currently has an unqualified late-effect
+case; do not treat its timeout response as proof that the operation settled.
 
 ## Elements and selectors
 
@@ -151,6 +160,7 @@ publishes only entries that declare a `label` and lists them by that label
 
 | Condition                                         | WebDriver error             |
 | ------------------------------------------------- | --------------------------- |
+| No valid grant on a protected service             | `unauthorized`              |
 | Target cannot launch or attach                    | `session not created`       |
 | Missing or closed session                         | `invalid session id`        |
 | Missing or closed window                          | `no such window`            |
@@ -165,6 +175,20 @@ publishes only entries that declare a `label` and lists them by that label
 
 An intercepted click names the occluding element's role, name, and ID; an
 external occluder names its owning application and process ID.
+
+`unauthorized` is HTTP 401 on every route of a protected service, with a
+constant message, an empty stack trace, `WWW-Authenticate: Bearer`, and a closed
+connection. It never says whether a grant was missing, malformed, revoked, or
+wrong. A `session not created` for a target that already has a session carries
+`data.reason: 'target-busy'`, and a protected service adds
+`data.holder: { label, since }`. A quarantined target carries
+`data.reason: 'target-quarantined'` and `data.quarantine` with its `id`,
+`origin` (`command`, `provider`, `interrupted`, or `journal`), and the
+recorded `application` incarnation, without the session id or the application
+on a protected service. A mutation that a service with a
+[settlement journal](service.md#persist-quarantines) cannot record before
+dispatch fails with `data.reason: 'journal-unavailable'` and a settled `none`
+effect; nothing was sent.
 
 Error data may include bounded operation names, native diagnostic codes, and
 artifact IDs. It must not expose unrestricted environment values, native

@@ -106,7 +106,7 @@ describe('Desktop Storybook driver manifest', () => {
     });
   });
 
-  test('removes a stale application lease before writing a new manifest', () => {
+  test('removes a stale application lease and agent readiness record before writing a new manifest', () => {
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-driver-manifest-'));
     try {
       const config = makeDesktopStorybookConfig({
@@ -116,7 +116,8 @@ describe('Desktop Storybook driver manifest', () => {
         bundleIdentifierPrefix: config.macosBundleIdentifier,
         projectRoot: config.projectRoot,
       });
-      const manifest = createDesktopStorybookDriverManifest({
+      const created = createDesktopStorybookDriverManifest({
+        agent: { descriptor: 'agent.json' },
         bridgeNonce: 'nonce',
         config,
         instance,
@@ -124,13 +125,25 @@ describe('Desktop Storybook driver manifest', () => {
         platform: 'windows',
         storyManifest,
       });
-      fs.mkdirSync(path.dirname(manifest.application.leasePath), { recursive: true });
+      expect(created.agent).toEqual({
+        descriptor: 'agent.json',
+        readyPath: path.join(storybookRoot, 'storybook-desktop.generated', 'agent-ready.windows.json'),
+      });
+      // Stale files live in the temporary directory so the test cannot remove a live instance's lease or readiness record.
+      const readyPath = path.join(temporaryDirectory, 'agent-ready.windows.json');
+      const manifest = {
+        ...created,
+        agent: { descriptor: 'agent.json', readyPath },
+        application: { ...created.application, leasePath: path.join(temporaryDirectory, 'application-lease.windows.json') },
+      };
       fs.writeFileSync(manifest.application.leasePath, '{}');
+      fs.writeFileSync(readyPath, '{}');
       const outputPath = path.join(temporaryDirectory, 'driver-manifest.json');
 
       writeDesktopStorybookDriverManifest(manifest, outputPath);
 
       expect(fs.existsSync(manifest.application.leasePath)).toBe(false);
+      expect(fs.existsSync(readyPath)).toBe(false);
       expect(JSON.parse(fs.readFileSync(outputPath, 'utf8'))).toMatchObject({ schemaVersion: 2 });
     } finally {
       fs.rmSync(temporaryDirectory, { force: true, recursive: true });

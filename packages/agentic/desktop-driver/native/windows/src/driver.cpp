@@ -3,8 +3,26 @@
 #include <algorithm>
 #include <cmath>
 
+#include <psapi.h>
+
+#include "settlement.h"
+
 namespace furn {
 namespace {
+
+// Commands that change application or window state. Observation, input
+// release, lifecycle cleanup, and disposal stay available while a mutation is
+// unsettled so the session can be re-observed and shut down safely.
+bool IsGuardedMutation(const std::string& command) {
+  return command == "click" || command == "clear" || command == "sendKeys" || command == "performActions" ||
+         command == "activate" || command == "setWindowRect" || command == "performAccessibilityAction";
+}
+
+json::Value EffectDetail(MutationEffect effect) {
+  json::Value detail = json::Value::Object();
+  detail.Set("effect", json::Value::String(std::string(MutationEffectName(effect))));
+  return detail;
+}
 
 json::Value SerializeRect(const RectD& rect) {
   json::Value value = json::Value::Object();
@@ -40,7 +58,122 @@ unsigned int ActionDuration(const json::Value& action) {
   return value <= 0 ? 0u : static_cast<unsigned int>(std::min<std::int64_t>(value, 30000));
 }
 
+// Journals only the identifiers that correlate a command with window events,
+// never text or native handles.
+json::Value JournalDetail(const json::Value& params) {
+  json::Value detail = json::Value::Object();
+  for (const char* key : {"elementId", "windowId", "mode"}) {
+    const json::Value* value = params.Find(key);
+    if (value != nullptr && value->IsString()) {
+      detail.Set(key, json::Value::String(BoundedText(value->AsString(), 128)));
+    }
+  }
+  return detail;
+}
+
+json::Value JournalResult(const std::string& command, const json::Value& result) {
+  json::Value detail = json::Value::Object();
+  if (command != "windows" || !result.IsArray()) {
+    return detail;
+  }
+  json::Value windowIds = json::Value::Array();
+  for (const json::Value& window : result.Items()) {
+    const json::Value* id = window.Find("id");
+    if (id != nullptr && id->IsString()) {
+      windowIds.Append(json::Value::String(id->AsString()));
+    }
+  }
+  detail.Set("windowIds", std::move(windowIds));
+  return detail;
+}
+
+// Retention evidence for qualification runs: what the helper tracks and what it
+// holds. The memory figures are left out when the system does not report them.
+json::Value RetentionDiagnostic(const Automation& automation) {
+  json::Value retention = json::Value::Object();
+  PROCESS_MEMORY_COUNTERS_EX counters{};
+  counters.cb = sizeof(counters);
+  const bool measured = GetProcessMemoryInfo(GetCurrentProcess(), reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&counters),
+                                             sizeof(counters)) != FALSE;
+  if (measured) {
+    retention.Set("privateBytes", json::Value::Integer(static_cast<std::int64_t>(counters.PrivateUsage)));
+  }
+  retention.Set("retainedElementLimit",
+                json::Value::Integer(static_cast<std::int64_t>(automation.RetainedElementLimit())));
+  retention.Set("retainedElements", json::Value::Integer(static_cast<std::int64_t>(automation.RetainedElementCount())));
+  if (measured) {
+    retention.Set("workingSetBytes", json::Value::Integer(static_cast<std::int64_t>(counters.WorkingSetSize)));
+  }
+  return retention;
+}
+
 }  // namespace
+
+bool IsTrackedMutation(const std::string& command) {
+  return IsGuardedMutation(command) || command == "closeWindow" || command == "releaseActions";
+}
+
+ClickRoute RouteClick(const std::string& mode, bool physicalAvailable) {
+  if (mode == "accessibility") {
+    return ClickRoute::Accessibility;
+  }
+  if (mode != "physical" && mode != "auto") {
+    Fail(kErrorInvalidParams, "Click mode \"" + mode + "\" is not supported.");
+  }
+  if (physicalAvailable) {
+    return ClickRoute::Physical;
+  }
+  return mode == "auto" ? ClickRoute::Accessibility : ClickRoute::Unavailable;
+}
+
+bool ActionsPressKeys(const json::Value& actions) {
+  if (!actions.IsArray()) {
+    return false;
+  }
+  for (const json::Value& source : actions.Items()) {
+    const json::Value* list = source.Find("actions");
+    if (source.StringField("type", "none") != "key" || list == nullptr || !list->IsArray()) {
+      continue;
+    }
+    for (const json::Value& action : list->Items()) {
+      // The null key releases everything instead of pressing a key, and an
+      // empty value is rejected by validation before anything is sent.
+      const std::wstring value = action.WideField("value");
+      if (action.StringField("type") == "keyDown" && !value.empty() && value != L"\uE000") {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+void RequireKeyboardTarget(const ApplicationManager& applications, InputController& input, HWND window,
+                           HWND foreground) {
+  applications.RequireForegroundOwnedBy(window, foreground);
+  DWORD processId = 0;
+  GetWindowThreadProcessId(foreground, &processId);
+  input.RequireIntegrityFor(processId);
+}
+
+void RequireClickPointOwnedBy(HWND window, POINT point, ClickHitTester hitTest) {
+  if (window == nullptr) {
+    return;
+  }
+  const HWND hit = hitTest(point);
+  if (hit == nullptr || GetAncestor(hit, GA_ROOTOWNER) == GetAncestor(window, GA_ROOTOWNER)) {
+    return;
+  }
+  DWORD hitProcess = 0;
+  DWORD windowProcess = 0;
+  GetWindowThreadProcessId(hit, &hitProcess);
+  GetWindowThreadProcessId(window, &windowProcess);
+  if (hitProcess == windowProcess) {
+    return;
+  }
+  Fail(kErrorNotInteractable, "A window of another application, " + DescribeWindowHandle(hit) +
+                                  ", covers the point where the element would be clicked, so the click was not "
+                                  "sent.");
+}
 
 WindowContext Driver::ContextForWindow(const std::string& windowId, HWND& window) {
   const WindowInfo info = applications_.RequireWindow(windowId);
@@ -64,11 +197,77 @@ HWND Driver::ReferenceWindow() {
   Fail(kErrorInvalidParams, "The helper does not hold an application window to resolve viewport coordinates against.");
 }
 
+InputVerdict Driver::ClickAvailability(const std::string& elementId) {
+  DWORD processId = 0;
+  if (const HWND window = automation_.RequireRecord(elementId).window; window != nullptr) {
+    GetWindowThreadProcessId(window, &processId);
+  }
+  return input_.AvailabilityFor(processId);
+}
+
+std::string Driver::LeaseIdForElement(const std::string& elementId) {
+  try {
+    const ApplicationLease* lease = applications_.LeaseForWindow(automation_.RequireRecord(elementId).window);
+    return lease == nullptr ? std::string() : lease->id;
+  } catch (const HelperError&) {
+    return {};
+  }
+}
+
+HWND Driver::FocusForKeyboard(const std::string& elementId, const CancellationToken& token) {
+  const HWND window = automation_.RequireRecord(elementId).window;
+  if (window == nullptr || IsWindow(window) == FALSE) {
+    Fail(kErrorStaleElement, "The element no longer belongs to a live window.");
+  }
+  DWORD processId = 0;
+  GetWindowThreadProcessId(window, &processId);
+  input_.RequireInputFor(processId);
+  // Keys follow the foreground window, so a window that did not become the
+  // foreground fails here instead of typing into whatever is.
+  ActivateWindow(window, token);
+  automation_.SetFocus(elementId);
+  for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId); attempt += 1) {
+    token.Wait(20);
+  }
+  if (!automation_.HasKeyboardFocus(elementId)) {
+    Fail(kErrorNotInteractable, "The element did not take keyboard focus, so keys were not sent.");
+  }
+  return window;
+}
+
+InputController::KeyboardGuard Driver::KeyboardGuardFor(HWND window) {
+  return [this, window]() { RequireKeyboardTarget(applications_, input_, window, ForegroundWindow()); };
+}
+
+void Driver::ClickPhysically(const std::string& elementId, const CancellationToken& token) {
+  // Copied because resolving the element again can change the record table.
+  const HWND window = automation_.RequireRecord(elementId).window;
+  if (window != nullptr) {
+    // The server activates the window explicitly before a click; this is a
+    // best-effort refresh that must not mask the click failure itself.
+    ActivateBestEffort(window, token);
+  }
+  const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
+  if (IsEmptyRect(snapshot.physicalRect)) {
+    Fail(kErrorNotInteractable, "The element does not occupy a clickable area.");
+  }
+  POINT center{};
+  center.x = (snapshot.physicalRect.left + snapshot.physicalRect.right) / 2;
+  center.y = (snapshot.physicalRect.top + snapshot.physicalRect.bottom) / 2;
+  RequireClickPointOwnedBy(window, center);
+  input_.ClickAt(center, token);
+}
+
 json::Value Driver::ProbeResult(const json::Value& params) {
-  const bool physical = input_.PhysicalInputAvailable();
+  // Re-read on every probe: a session that is locked now can be unlocked when
+  // the next probe runs.
+  const bool physical = input_.Availability().available;
   const bool screenshot = capture_.Available();
   json::Value features = json::Value::Object();
+  features.Set("accessibilityActions", json::Value::Bool(true));
+  features.Set("performAccessibilityAction", json::Value::Bool(true));
   features.Set("accessibilityClick", json::Value::Bool(true));
+  features.Set("boundedObservation", json::Value::Bool(true));
   features.Set("elementScreenshot", json::Value::Bool(screenshot));
   features.Set("focus", json::Value::Bool(true));
   features.Set("keyboard", json::Value::Bool(physical));
@@ -76,6 +275,7 @@ json::Value Driver::ProbeResult(const json::Value& params) {
   features.Set("screenshot", json::Value::Bool(screenshot));
   features.Set("setWindowRect", json::Value::Bool(true));
   features.Set("wheel", json::Value::Bool(physical));
+  features.Set("windowEvents", json::Value::Bool(true));
 
   json::Value result = json::Value::Object();
   result.Set("endpoint", json::Value::String(params.StringField("endpoint", "windows")));
@@ -254,9 +454,93 @@ void Driver::ReleaseInput() noexcept {
   }
 }
 
+json::Value Driver::AdoptWindowForTesting(HWND window, const std::wstring& title) {
+  return applications_.SerializeLease(applications_.AdoptWindowForTesting(window, title));
+}
+
+void Driver::ForgetRetiredWindows() noexcept {
+  try {
+    for (const std::string& windowId : applications_.TakeRetiredWindowIds()) {
+      automation_.ForgetWindow(windowId);
+    }
+  } catch (...) {
+    // Dropping cached elements must never mask the command outcome.
+  }
+}
+
 CommandResult Driver::Execute(const std::string& command, const json::Value& params, const CancellationToken& token) {
+  // Windows retired by the previous command, or by a destroy notification in
+  // between, no longer have addressable elements.
+  ForgetRetiredWindows();
+  const std::uint64_t entry = journal_.Begin(command, JournalDetail(params));
+  const bool tracked = IsTrackedMutation(command);
+  effects_.Reset();
+  const EffectScope effectScope(effects_);
+  // A provider deadline that passed is always unknown, whatever the ledger
+  // recorded before it.
+  const auto effectOf = [this](const std::string& code) {
+    return code == kErrorMutationIndeterminate ? MutationEffect::Unknown : effects_.Effect();
+  };
+  try {
+    CommandResult result = ExecuteCommand(command, params, token);
+    ForgetRetiredWindows();
+    journal_.Finish(entry, "ok", JournalResult(command, result.result));
+    return result;
+  } catch (HelperError& error) {
+    ForgetRetiredWindows();
+    if (!tracked) {
+      journal_.Finish(entry, error.code());
+      throw;
+    }
+    error.SetEffect(effectOf(error.code()));
+    journal_.Finish(entry, error.code(), EffectDetail(*error.effect()));
+    throw;
+  } catch (CancelledError& cancelled) {
+    ForgetRetiredWindows();
+    if (!tracked) {
+      journal_.Finish(entry, "cancelled");
+      throw;
+    }
+    cancelled.SetEffect(effects_.Effect());
+    journal_.Finish(entry, "cancelled", EffectDetail(*cancelled.effect()));
+    throw;
+  } catch (const winrt::hresult_error& error) {
+    ForgetRetiredWindows();
+    journal_.Finish(entry, kErrorInternal, tracked ? EffectDetail(effects_.Effect()) : json::Value::Null());
+    if (!tracked) {
+      throw;
+    }
+    HelperError failure(kErrorInternal, ToUtf8(error.message().c_str()));
+    failure.SetEffect(effects_.Effect());
+    throw failure;
+  } catch (const std::exception& error) {
+    ForgetRetiredWindows();
+    journal_.Finish(entry, kErrorInternal, tracked ? EffectDetail(effects_.Effect()) : json::Value::Null());
+    if (!tracked) {
+      throw;
+    }
+    HelperError failure(kErrorInternal, error.what());
+    failure.SetEffect(effects_.Effect());
+    throw failure;
+  } catch (...) {
+    ForgetRetiredWindows();
+    journal_.Finish(entry, kErrorInternal, tracked ? EffectDetail(effects_.Effect()) : json::Value::Null());
+    if (!tracked) {
+      throw;
+    }
+    HelperError failure(kErrorInternal, "The native command failed with an unknown error.");
+    failure.SetEffect(effects_.Effect());
+    throw failure;
+  }
+}
+
+CommandResult Driver::ExecuteCommand(const std::string& command, const json::Value& params,
+                                     const CancellationToken& token) {
   CommandResult result;
   token.ThrowIfCancelled();
+  if (IsGuardedMutation(command)) {
+    RequireMutationsAllowed();
+  }
 
   if (command == "probe") {
     result.result = ProbeResult(params);
@@ -292,13 +576,25 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     }
     return result;
   }
+  if (command == "windowEvents") {
+    const json::Value* lease = params.Find("lease");
+    if (lease == nullptr || !lease->IsObject()) {
+      Fail(kErrorInvalidParams, "The windowEvents request is missing its lease.");
+    }
+    result.result = applications_.WindowEventLog(RequireString(*lease, "id"));
+    result.result.Set("commands", journal_.Diagnostic());
+    result.result.Set("retention", RetentionDiagnostic(automation_));
+    return result;
+  }
   if (command == "closeWindow") {
     const std::string windowId = RequireString(params, "windowId");
     HWND window = nullptr;
     ContextForWindow(windowId, window);
-    PostMessageW(window, WM_CLOSE, 0, 0);
     automation_.ForgetWindow(windowId);
     applications_.ForgetWindow(windowId);
+    if (PostMessageW(window, WM_CLOSE, 0, 0) != FALSE) {
+      RecordDelivered();
+    }
     result.result = json::Value::Null();
     return result;
   }
@@ -324,6 +620,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     }
     if (IsZoomed(window) != FALSE || IsIconic(window) != FALSE) {
       ShowWindow(window, SW_RESTORE);
+      RecordDelivered();
     }
     WindowMetrics metrics = MeasureWindow(window);
     const RectD current = ClientRectInScreenDips(metrics);
@@ -348,6 +645,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
                        SWP_NOZORDER | SWP_NOACTIVATE) == FALSE) {
         FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
       }
+      RecordDelivered();
       token.Wait(16);
       metrics = MeasureWindow(window);
       const long deltaX = target.left - metrics.clientOrigin.x;
@@ -390,6 +688,20 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     result.result = SerializeSnapshot(RequireLiveElement(RequireString(params, "elementId"), token));
     return result;
   }
+  if (command == "observe") {
+    const ObserveRequest request = ParseObserveRequest(params);
+    HWND window = nullptr;
+    const WindowContext context = ContextForWindow(request.windowId, window);
+    result.result = automation_.Observe(context, request, token).ToJson();
+    return result;
+  }
+  if (command == "releaseElements") {
+    const std::vector<std::string> ids = ParseReleaseElementsRequest(params);
+    json::Value released = json::Value::Object();
+    released.Set("released", json::Value::Integer(static_cast<std::int64_t>(automation_.ReleaseElements(ids))));
+    result.result = std::move(released);
+    return result;
+  }
   if (command == "activeElement") {
     HWND window = nullptr;
     const WindowContext context = ContextForWindow(RequireString(params, "windowId"), window);
@@ -411,54 +723,58 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     const std::string elementId = RequireString(params, "elementId");
     const std::string mode = params.StringField("mode", "auto");
     RequireLiveElement(elementId, token);
-    if (mode == "accessibility") {
-      automation_.AccessibilityClick(elementId, token);
-      result.result = json::Value::Null();
-      return result;
+    const MutationScope scope(LeaseIdForElement(elementId));
+    InputVerdict availability;
+    if (mode != "accessibility") {
+      availability = ClickAvailability(elementId);
     }
-    if (mode != "physical" && mode != "auto") {
-      Fail(kErrorInvalidParams, "Click mode \"" + mode + "\" is not supported.");
-    }
-    if (!input_.PhysicalInputAvailable()) {
-      if (mode == "auto") {
+    switch (RouteClick(mode, availability.available)) {
+      case ClickRoute::Accessibility:
         automation_.AccessibilityClick(elementId, token);
-        result.result = json::Value::Null();
-        return result;
-      }
-      Fail(kErrorInputUnavailable, "Physical pointer input is unavailable on this desktop.");
+        break;
+      case ClickRoute::Unavailable:
+        Fail(kErrorInputUnavailable, availability.reason);
+      case ClickRoute::Physical:
+        try {
+          RunPhysical(token, [&]() { ClickPhysically(elementId, token); });
+        } catch (const HelperError& error) {
+          // The environment can change between the check and the click. When
+          // it refused before any click was delivered, automatic mode still
+          // has the accessibility click.
+          if (mode != "auto" || error.code() != kErrorInputUnavailable) {
+            throw;
+          }
+          automation_.AccessibilityClick(elementId, token);
+        }
+        break;
     }
-    RunPhysical(token, [&]() {
-      const ElementRecord& record = automation_.RequireRecord(elementId);
-      if (record.window != nullptr) {
-        // The server activates the window explicitly before a click; this is a
-        // best-effort refresh that must not mask the click failure itself.
-        TryActivateWindow(record.window, token);
-      }
-      const ElementSnapshot snapshot = RequireLiveElement(elementId, token);
-      if (IsEmptyRect(snapshot.physicalRect)) {
-        Fail(kErrorNotInteractable, "The element does not occupy a clickable area.");
-      }
-      POINT center{};
-      center.x = (snapshot.physicalRect.left + snapshot.physicalRect.right) / 2;
-      center.y = (snapshot.physicalRect.top + snapshot.physicalRect.bottom) / 2;
-      input_.ClickAt(center, token);
-    });
+    result.result = json::Value::Null();
+    return result;
+  }
+  if (command == "accessibilityActions") {
+    result.result = automation_.AccessibilityActions(RequireString(params, "elementId"), token);
+    return result;
+  }
+  if (command == "performAccessibilityAction") {
+    const std::string elementId = RequireString(params, "elementId");
+    const std::string key = RequireString(params, "key");
+    if (key.size() > 128) {
+      Fail(kErrorInvalidParams, "The action key exceeds 128 bytes.");
+    }
+    RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
+    automation_.PerformAccessibilityAction(elementId, key, token);
     result.result = json::Value::Null();
     return result;
   }
   if (command == "clear") {
     const std::string elementId = RequireString(params, "elementId");
     RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
     if (!automation_.TryClearValue(elementId)) {
-      // Only take focus when the physical fallback can actually run, so a
-      // failed clear never leaves the application in a changed focus state.
-      if (!input_.PhysicalInputAvailable()) {
-        Fail(kErrorInputUnavailable,
-             "The element does not expose a writable value and physical input is unavailable on this desktop.");
-      }
       RunPhysical(token, [&]() {
-        automation_.SetFocus(elementId);
-        token.Wait(16);
+        const HWND window = FocusForKeyboard(elementId, token);
+        const KeyboardGuardScope guard(input_, KeyboardGuardFor(window));
         input_.PressChord({VK_CONTROL, 'A'}, token);
         input_.PressChord({VK_DELETE}, token);
       });
@@ -472,22 +788,11 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
     if (text == nullptr || !text->IsString()) {
       Fail(kErrorInvalidParams, "The sendKeys request requires a string \"text\".");
     }
-    if (!input_.PhysicalInputAvailable()) {
-      Fail(kErrorInputUnavailable, "Physical keyboard input is unavailable on this desktop.");
-    }
     RequireLiveElement(elementId, token);
+    const MutationScope scope(LeaseIdForElement(elementId));
     RunPhysical(token, [&]() {
-      const ElementRecord& record = automation_.RequireRecord(elementId);
-      if (record.window != nullptr) {
-        TryActivateWindow(record.window, token);
-      }
-      automation_.SetFocus(elementId);
-      for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId); attempt += 1) {
-        token.Wait(20);
-      }
-      if (!automation_.HasKeyboardFocus(elementId)) {
-        Fail(kErrorNotInteractable, "The element did not take keyboard focus, so text could not be typed.");
-      }
+      const HWND window = FocusForKeyboard(elementId, token);
+      const KeyboardGuardScope guard(input_, KeyboardGuardFor(window));
       input_.TypeText(text->AsWide(), token);
     });
     result.result = json::Value::Null();
@@ -499,7 +804,23 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
       Fail(kErrorInvalidParams, "The performActions request is missing its actions.");
     }
     // One command owns physical input for its entire tick sequence.
-    RunPhysical(token, [&]() { PerformActions(*actions, token); });
+    RunPhysical(token, [&]() {
+      if (!ActionsPressKeys(*actions)) {
+        PerformActions(*actions, token);
+        return;
+      }
+      // Keys go to the foreground window. Bring the application forward only
+      // when something else holds it, so a popup the application owns keeps its
+      // focus, and refuse every press that would reach another application.
+      if (!applications_.ForegroundBelongsToApplication(nullptr, ForegroundWindow())) {
+        if (const ApplicationLease* lease = applications_.PrimaryLease();
+            lease != nullptr && lease->primaryWindow != nullptr && IsWindow(lease->primaryWindow) != FALSE) {
+          ActivateBestEffort(lease->primaryWindow, token);
+        }
+      }
+      const KeyboardGuardScope guard(input_, KeyboardGuardFor(nullptr));
+      PerformActions(*actions, token);
+    });
     result.result = json::Value::Null();
     return result;
   }

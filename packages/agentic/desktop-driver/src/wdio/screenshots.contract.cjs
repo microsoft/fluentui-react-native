@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+const { inspect } = require('node:util');
 const { attach } = require('webdriverio');
 
 async function capture(browser, artifactsRoot, mode) {
@@ -21,12 +22,15 @@ async function capture(browser, artifactsRoot, mode) {
 
 async function main() {
   const moduleUrl = pathToFileURL(path.resolve(__dirname, '..', '..', 'lib', 'wdio', 'index.js')).href;
-  const { attachDesktopWebdriver, connectDesktopWebdriver, installDesktopWebdriverCommands } = await import(moduleUrl);
+  const { attachDesktopWebdriver, connectDesktopWebdriver, desktopWebdriverGrantOptions, installDesktopWebdriverCommands } = await import(
+    moduleUrl
+  );
   const [url, targetId, artifactsRoot] = process.argv.slice(2);
-  const desktop = await connectDesktopWebdriver({ platformName: 'windows', targetId, url });
+  const grant = process.env.FURN_DESKTOP_DRIVER_GRANT_TOKEN || undefined;
+  const desktop = await connectDesktopWebdriver({ platformName: 'windows', targetId, url, grant });
   try {
     const connected = await capture(desktop.browser, artifactsRoot, 'connected');
-    const attachment = { url, sessionId: desktop.browser.sessionId, capabilities: desktop.browser.capabilities };
+    const attachment = { url, sessionId: desktop.browser.sessionId, capabilities: desktop.browser.capabilities, grant };
     const worker = await attachDesktopWebdriver(attachment);
     const attached = await capture(worker.browser, artifactsRoot, 'attached');
     const address = new URL(url);
@@ -36,10 +40,20 @@ async function main() {
       path: '/',
       sessionId: attachment.sessionId,
       capabilities: attachment.capabilities,
-      options: { logLevel: 'silent' },
+      options: { logLevel: 'silent', ...(grant ? desktopWebdriverGrantOptions(grant) : {}) },
     });
-    installDesktopWebdriverCommands(browser, url);
-    installDesktopWebdriverCommands(browser, url);
+    installDesktopWebdriverCommands(browser, url, { grant });
+    installDesktopWebdriverCommands(browser, url, { grant });
+    await browser.desktopExpect({ state: 'enabled', target: { testId: 'button-primary' }, value: true });
+    if (grant) {
+      const request = desktopWebdriverGrantOptions(grant).transformRequest({ method: 'GET' });
+      assert.equal(inspect(request).includes(grant), false, 'Grant leaked through request diagnostics.');
+      assert.equal(request.redirect, 'error');
+      for (const current of [desktop.browser, worker.browser, browser]) {
+        assert.equal(JSON.stringify(current.options).includes(grant), false, 'Grant leaked through WDIO options.');
+        assert.equal(JSON.stringify(current.capabilities).includes(grant), false, 'Grant leaked through capabilities.');
+      }
+    }
     const managed = await capture(browser, artifactsRoot, 'managed');
     process.stdout.write(JSON.stringify({ connected, attached, managed }));
   } finally {

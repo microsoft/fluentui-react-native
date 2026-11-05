@@ -8,7 +8,8 @@ aggregate reporting.
 Read the [user guide](README.md), then select the narrowest topic in the
 [reference index](references/README.md). For configuration work, begin with
 [configuration](references/configuration.md); for reports and run status, use
-[reporting](references/reporting.md).
+[reporting](references/reporting.md), including the shared CLI reporter modes
+and bounded structured output contract.
 
 ## Invariants
 

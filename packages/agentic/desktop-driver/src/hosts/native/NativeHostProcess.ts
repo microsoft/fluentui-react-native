@@ -12,6 +12,7 @@ import type {
 } from '../../native/types.js';
 import { nativeDriverWireProtocol } from '../../native/constants.js';
 import { NativeDriverError } from '../../native/NativeDriverError.js';
+import { attachFailureEffect, parseMutationEffect } from '../../protocol/settlement.js';
 import { encodeJsonFrame, NativeFrameDecoder } from './framing.js';
 import type { NativeBinaryFrame } from './framing.js';
 
@@ -115,19 +116,19 @@ export class NativeHostProcess extends EventEmitter<{
 
   request<T>(command: string, params?: unknown, signal?: AbortSignal): Promise<NativeHostRequestResult<T>> {
     if (this.closed) {
-      return Promise.reject(new NativeDriverError('host-closed', 'Native driver helper is closed.'));
+      return Promise.reject(attachFailureEffect(new NativeDriverError('host-closed', 'Native driver helper is closed.'), 'none'));
     }
     if (signal?.aborted) {
       const error = new Error(`Native driver command "${command}" was cancelled before dispatch.`);
       error.name = 'AbortError';
-      return Promise.reject(error);
+      return Promise.reject(attachFailureEffect(error, 'none'));
     }
     const id = randomUUID();
     let requestFrame: Buffer;
     try {
       requestFrame = encodeJsonFrame({ command, id, params, type: 'request' });
     } catch (error) {
-      return Promise.reject(asError(error));
+      return Promise.reject(attachFailureEffect(asError(error), 'none'));
     }
     return new Promise<NativeHostRequestResult<T>>((resolve, reject) => {
       const pending: PendingRequest = {
@@ -191,7 +192,13 @@ export class NativeHostProcess extends EventEmitter<{
         }
         throw new NativeDriverError('host-exited', 'Native driver helper exited before acknowledging disposal.');
       }
-      const exited = await Promise.race([this.completed.then(() => true), delay(2000).then(() => false)]);
+      let graceTimer: NodeJS.Timeout | undefined;
+      const exited = await Promise.race([
+        this.completed.then(() => true),
+        new Promise<false>((resolve) => {
+          graceTimer = setTimeout(() => resolve(false), 2000);
+        }),
+      ]).finally(() => clearTimeout(graceTimer));
       if (!exited && this.child.exitCode === null && this.child.signalCode === null) {
         this.child.kill();
         await this.completed;
@@ -229,7 +236,8 @@ export class NativeHostProcess extends EventEmitter<{
     if (message.type === 'cancelled') {
       const error = new Error(`Native driver command "${message.id}" was cancelled.`);
       error.name = 'AbortError';
-      this.rejectPending(message.id, error);
+      // A provider that does not report what the cancelled command left behind cannot rule out an effect.
+      this.rejectPending(message.id, attachFailureEffect(error, parseMutationEffect(message.effect) ?? 'unknown'));
       return;
     }
     if (message.type !== 'response') {
@@ -274,13 +282,19 @@ export class NativeHostProcess extends EventEmitter<{
       this.pendingBinaryIds.delete(pending.binaryId);
     }
     if (response.error) {
-      pending.reject(new NativeHostResponseError(response.error.code, response.error.message, response.error.data));
+      pending.reject(
+        attachFailureEffect(
+          new NativeHostResponseError(response.error.code, response.error.message, response.error.data),
+          parseMutationEffect(response.error.effect),
+        ),
+      );
       return;
     }
     if (pending.aborted) {
-      const error = new Error(`Native driver command "${id}" was cancelled.`);
+      const error = new Error(`Native driver command "${id}" completed before its cancellation took effect.`);
       error.name = 'AbortError';
-      pending.reject(error);
+      // The helper finished the command instead of unwinding it, so its effect landed even though the caller gave up.
+      pending.reject(attachFailureEffect(error, 'applied'));
       return;
     }
     pending.resolve({ binary: pending.binary, result: response.result });
@@ -424,10 +438,6 @@ function validateHello(hello: NativeHostHello, artifact: NativeDriverArtifact): 
   ) {
     throw new NativeDriverError('handshake-failed', 'Native helper hello does not match the selected artifact.');
   }
-}
-
-function delay(milliseconds: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
 function asError(error: unknown): Error {

@@ -2,12 +2,16 @@
 
 #include <windows.h>
 
+#include <deque>
+#include <functional>
 #include <optional>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "common.h"
+#include "events.h"
 #include "json.h"
 
 namespace furn {
@@ -49,23 +53,62 @@ class ApplicationManager {
   const ApplicationLease* FindLease(const std::string& leaseId) const;
   const ApplicationLease* LeaseForWindow(HWND window) const;
   const ApplicationLease* PrimaryLease() const;
+  // Whether `foreground` is `window`, a window that owns it or hosts it, or a
+  // window of the application that runs it. A null `window` accepts any leased
+  // application.
+  bool ForegroundBelongsToApplication(HWND window, HWND foreground) const;
+  // Fails with window-activation-failed unless it does, so keys are never
+  // typed into another application.
+  void RequireForegroundOwnedBy(HWND window, HWND foreground) const;
   std::vector<std::string> WindowIdsForLease(const std::string& leaseId) const;
   void ForgetWindow(const std::string& windowId);
   json::Value SerializeLease(const ApplicationLease& lease) const;
 
+  // Window identifiers dropped since the last call because their window closed
+  // or a different window reused its handle. The caller discards whatever it
+  // cached for them.
+  std::vector<std::string> TakeRetiredWindowIds();
+
+  // The bounded WinEvent timeline for the lease's process, the current native
+  // window publication, and the lease's tracked windows.
+  json::Value WindowEventLog(const std::string& leaseId);
+
+  // Receives each tracked window close once, on the event thread.
+  void SetWindowClosedPublisher(std::function<void(const std::string&)> publisher);
+
+  // Test seams: adopt a window of this process as an attached lease so the real
+  // lease paths run against windows the self-test creates, and reach the
+  // monitor to inject notifications.
+  const ApplicationLease& AdoptWindowForTesting(HWND window, const std::wstring& title);
+  WindowEventMonitor& WindowEventsForTesting() { return windowEvents_; }
+
  private:
-  std::string RegisterWindow(HWND window, DWORD processId, const std::string& leaseId, bool primary);
-  ApplicationLease& CreateLease(std::string ownership, DWORD processId, HANDLE process, HWND primaryWindow,
-                                const std::wstring& title, const json::Value& params);
-  void TrackPendingCleanupProcess(DWORD processId, HANDLE process);
+  static constexpr std::size_t kMaximumRetiredWindowIds = 256;
 
   struct WindowRecord {
     std::string id;
     HWND window{nullptr};
     DWORD processId{0};
+    // A handle value can be reused by a later window, so the creating thread
+    // and class, which never change for a live window, fingerprint the window
+    // this identifier was issued for.
+    DWORD threadId{0};
+    std::wstring className;
+    std::wstring title;
     std::string leaseId;
     bool primary{false};
   };
+
+  std::string RegisterWindow(HWND window, DWORD processId, const std::string& leaseId, bool primary,
+                             const std::wstring& title);
+  void RetireWindow(const std::string& windowId);
+  void RetireClosedWindows(const std::string& leaseId);
+  bool IsWindowClosed(const WindowRecord& record) const;
+  bool ForegroundBelongsToLease(const ApplicationLease& lease, HWND foreground) const;
+  json::Value PublicationDiagnostic(const ApplicationLease& lease) const;
+  ApplicationLease& CreateLease(std::string ownership, DWORD processId, HANDLE process, HWND primaryWindow,
+                                const std::wstring& title, const json::Value& params);
+  void TrackPendingCleanupProcess(DWORD processId, HANDLE process);
 
   struct PendingCleanupProcess {
     DWORD processId{0};
@@ -78,6 +121,12 @@ class ApplicationManager {
   std::unordered_map<std::string, WindowRecord> windowsById_;
   std::unordered_map<HWND, std::string> windowIdsByHandle_;
   std::vector<PendingCleanupProcess> pendingCleanupProcesses_;
+  // Identifiers are never reissued, so a retired one keeps reporting that its
+  // window closed instead of reading as unknown.
+  std::deque<std::string> retiredOrder_;
+  std::unordered_set<std::string> retiredIds_;
+  std::vector<std::string> pendingRetirements_;
+  WindowEventMonitor windowEvents_;
 };
 
 std::vector<HWND> EnumerateTopLevelWindows(DWORD processId);

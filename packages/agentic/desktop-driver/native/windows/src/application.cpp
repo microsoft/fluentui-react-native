@@ -16,6 +16,7 @@
 #include <winrt/base.h>
 
 #include "geometry.h"
+#include "settlement.h"
 
 namespace furn {
 
@@ -85,6 +86,40 @@ BOOL CALLBACK CollectWindow(HWND window, LPARAM parameter) {
   }
   context->windows.push_back(window);
   return TRUE;
+}
+
+BOOL CALLBACK CollectProcessWindow(HWND window, LPARAM parameter) {
+  auto* context = reinterpret_cast<EnumerationContext*>(parameter);
+  DWORD processId = 0;
+  GetWindowThreadProcessId(window, &processId);
+  if (processId == context->processId) {
+    context->windows.push_back(window);
+  }
+  return TRUE;
+}
+
+// Every top-level window of a process, hidden ones included, in z-order.
+std::vector<HWND> EnumerateAllTopLevelWindows(DWORD processId) {
+  EnumerationContext context;
+  context.processId = processId;
+  EnumWindows(CollectProcessWindow, reinterpret_cast<LPARAM>(&context));
+  return context.windows;
+}
+
+struct WindowFingerprint {
+  DWORD threadId{0};
+  std::wstring className;
+};
+
+WindowFingerprint ReadWindowFingerprint(HWND window) {
+  WindowFingerprint fingerprint;
+  fingerprint.threadId = GetWindowThreadProcessId(window, nullptr);
+  wchar_t className[256] = {};
+  const int length = GetClassNameW(window, className, static_cast<int>(std::size(className)));
+  if (length > 0) {
+    fingerprint.className.assign(className, static_cast<std::size_t>(length));
+  }
+  return fingerprint;
 }
 
 std::string ReadFileWithRetry(const std::wstring& path, const CancellationToken& token) {
@@ -659,25 +694,98 @@ void ApplicationManager::TrackPendingCleanupProcess(DWORD processId, HANDLE proc
 }
 
 std::string ApplicationManager::RegisterWindow(HWND window, DWORD processId, const std::string& leaseId,
-                                               bool primary) {
+                                               bool primary, const std::wstring& title) {
+  const WindowFingerprint fingerprint = ReadWindowFingerprint(window);
   const auto existing = windowIdsByHandle_.find(window);
   if (existing != windowIdsByHandle_.end()) {
-    WindowRecord& record = windowsById_[existing->second];
-    record.primary = primary || record.primary;
-    record.processId = processId;
-    record.leaseId = leaseId;
-    return existing->second;
+    const std::string existingId = existing->second;
+    const auto found = windowsById_.find(existingId);
+    if (found != windowsById_.end()) {
+      WindowRecord& record = found->second;
+      // A handle can be reused by a later window. The identifier stays with
+      // the window it was issued for only while no destroy notification was
+      // seen and the creating thread and class still match.
+      if (!windowEvents_.IsClosed(existingId) && record.threadId == fingerprint.threadId &&
+          record.className == fingerprint.className) {
+        record.primary = primary || record.primary;
+        record.processId = processId;
+        record.leaseId = leaseId;
+        record.title = title;
+        windowEvents_.Track(window, existingId, processId);
+        return existingId;
+      }
+    }
+    RetireWindow(existingId);
   }
   WindowRecord record;
   record.id = NextIdentifier("window");
   record.window = window;
   record.processId = processId;
+  record.threadId = fingerprint.threadId;
+  record.className = fingerprint.className;
+  record.title = title;
   record.leaseId = leaseId;
   record.primary = primary;
   windowIdsByHandle_.emplace(window, record.id);
   const std::string id = record.id;
   windowsById_.emplace(id, std::move(record));
+  windowEvents_.Track(window, id, processId);
   return id;
+}
+
+bool ApplicationManager::IsWindowClosed(const WindowRecord& record) const {
+  return record.window == nullptr || IsWindow(record.window) == FALSE || windowEvents_.IsClosed(record.id);
+}
+
+void ApplicationManager::RetireWindow(const std::string& windowId) {
+  const auto entry = windowsById_.find(windowId);
+  if (entry != windowsById_.end()) {
+    const auto byHandle = windowIdsByHandle_.find(entry->second.window);
+    if (byHandle != windowIdsByHandle_.end() && byHandle->second == windowId) {
+      windowIdsByHandle_.erase(byHandle);
+    }
+    windowsById_.erase(entry);
+  }
+  windowEvents_.Forget(windowId);
+  if (retiredIds_.insert(windowId).second) {
+    retiredOrder_.push_back(windowId);
+    while (retiredOrder_.size() > kMaximumRetiredWindowIds) {
+      retiredIds_.erase(retiredOrder_.front());
+      retiredOrder_.pop_front();
+    }
+  }
+  pendingRetirements_.push_back(windowId);
+}
+
+void ApplicationManager::RetireClosedWindows(const std::string& leaseId) {
+  std::vector<std::string> closed;
+  for (const auto& entry : windowsById_) {
+    if (entry.second.leaseId == leaseId && IsWindowClosed(entry.second)) {
+      closed.push_back(entry.first);
+    }
+  }
+  for (const std::string& windowId : closed) {
+    RetireWindow(windowId);
+  }
+}
+
+std::vector<std::string> ApplicationManager::TakeRetiredWindowIds() {
+  std::vector<std::string> retired;
+  retired.swap(pendingRetirements_);
+  return retired;
+}
+
+void ApplicationManager::SetWindowClosedPublisher(std::function<void(const std::string&)> publisher) {
+  windowEvents_.SetClosedPublisher(std::move(publisher));
+}
+
+const ApplicationLease& ApplicationManager::AdoptWindowForTesting(HWND window, const std::wstring& title) {
+  const DWORD processId = GetCurrentProcessId();
+  HANDLE process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE, FALSE, processId);
+  if (process == nullptr) {
+    FailLastError(kErrorAttachFailed, "Opening the self-test process", GetLastError());
+  }
+  return CreateLease("attached", processId, process, window, title, json::Value::Object());
 }
 
 ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD processId, HANDLE process,
@@ -699,8 +807,11 @@ ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD p
   leases_.emplace(id, std::move(lease));
   leaseOrder_.push_back(id);
   ApplicationLease& stored = leases_[id];
+  // Observation starts before the first window is registered so a window that
+  // closes right after the lease exists is still seen.
+  windowEvents_.Observe(processId);
   if (primaryWindow != nullptr) {
-    RegisterWindow(primaryWindow, processId, id, true);
+    RegisterWindow(primaryWindow, processId, id, true, title);
   }
   return stored;
 }
@@ -1049,13 +1160,16 @@ std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, 
   }
 
   std::vector<WindowInfo> results;
+  // Closed windows leave the table before the live ones register, so a handle
+  // reused by a later window can never keep its predecessor's identifier.
+  RetireClosedWindows(leaseId);
   for (const HWND window : EnumerateTopLevelWindows(lease.processId)) {
     WindowInfo info;
     info.window = window;
     info.processId = lease.processId;
     info.title = ReadWindowTitle(window);
     info.primary = window == lease.primaryWindow || (lease.primaryWindow == nullptr && info.title == lease.windowTitle);
-    info.id = RegisterWindow(window, lease.processId, leaseId, info.primary);
+    info.id = RegisterWindow(window, lease.processId, leaseId, info.primary, info.title);
     results.push_back(std::move(info));
   }
   if (lease.primaryWindow != nullptr && IsWindow(lease.primaryWindow) == FALSE) {
@@ -1077,6 +1191,7 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
     return;
   }
   ApplicationLease& lease = entry->second;
+  const DWORD leasedProcessId = lease.processId;
 
   // The lease and its window records stay intact until the close sequence
   // finishes, so a cancelled teardown remains retryable instead of orphaning an
@@ -1102,12 +1217,18 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
     }
   }
 
+  // A mutation abandoned against an application this helper launched can no
+  // longer land once that process is verified gone, so closing it ends the
+  // quarantine. An attached application keeps running and keeps its quarantine.
+  const bool ownedProcessGone =
+      lease.ownership == "launched" && lease.process != nullptr && !IsProcessAlive(lease.process);
   if (lease.process != nullptr) {
     CloseHandle(lease.process);
     lease.process = nullptr;
   }
   for (auto iterator = windowsById_.begin(); iterator != windowsById_.end();) {
     if (iterator->second.leaseId == leaseId) {
+      windowEvents_.Forget(iterator->first);
       windowIdsByHandle_.erase(iterator->second.window);
       iterator = windowsById_.erase(iterator);
       continue;
@@ -1116,6 +1237,17 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
   }
   leases_.erase(leaseId);
   leaseOrder_.erase(std::remove(leaseOrder_.begin(), leaseOrder_.end(), leaseId), leaseOrder_.end());
+  // Several leases can observe the same process; events stop with the last one.
+  const bool processStillLeased =
+      std::any_of(leases_.begin(), leases_.end(), [leasedProcessId](const auto& other) {
+        return other.second.processId == leasedProcessId;
+      });
+  if (!processStillLeased) {
+    windowEvents_.Stop(leasedProcessId);
+  }
+  if (ownedProcessGone) {
+    ReleaseMutationQuarantine(leaseId);
+  }
 }
 
 void ApplicationManager::Dispose(const CancellationToken& token) {
@@ -1211,16 +1343,26 @@ void ApplicationManager::Dispose(const CancellationToken& token) {
 WindowInfo ApplicationManager::RequireWindow(const std::string& windowId) {
   const auto entry = windowsById_.find(windowId);
   if (entry == windowsById_.end()) {
+    if (retiredIds_.count(windowId) > 0) {
+      Fail(kErrorNoSuchWindow, "Window \"" + windowId + "\" has been closed.");
+    }
     Fail(kErrorNoSuchWindow, "Window \"" + windowId + "\" is not tracked by this helper.");
   }
-  const WindowRecord& record = entry->second;
-  if (record.window == nullptr || IsWindow(record.window) == FALSE) {
+  const WindowRecord record = entry->second;
+  if (IsWindowClosed(record)) {
+    RetireWindow(windowId);
     Fail(kErrorNoSuchWindow, "Window \"" + windowId + "\" has been closed.");
   }
   DWORD processId = 0;
-  GetWindowThreadProcessId(record.window, &processId);
+  const DWORD threadId = GetWindowThreadProcessId(record.window, &processId);
   if (record.processId != 0 && processId != record.processId) {
+    RetireWindow(windowId);
     Fail(kErrorNoSuchWindow, "Window \"" + windowId + "\" now belongs to a different process.");
+  }
+  if (threadId != record.threadId || ReadWindowFingerprint(record.window).className != record.className) {
+    RetireWindow(windowId);
+    Fail(kErrorNoSuchWindow,
+         "Window \"" + windowId + "\" has been replaced by a different window that reused its handle.");
   }
   WindowInfo info;
   info.id = record.id;
@@ -1258,6 +1400,71 @@ const ApplicationLease* ApplicationManager::PrimaryLease() const {
   return nullptr;
 }
 
+bool ApplicationManager::ForegroundBelongsToLease(const ApplicationLease& lease, HWND foreground) const {
+  DWORD foregroundProcess = 0;
+  GetWindowThreadProcessId(foreground, &foregroundProcess);
+  if (foregroundProcess != 0 && foregroundProcess == lease.processId) {
+    return true;
+  }
+  for (const auto& entry : windowsById_) {
+    const WindowRecord& record = entry.second;
+    if (record.leaseId != lease.id) {
+      continue;
+    }
+    if ((foregroundProcess != 0 && foregroundProcess == record.processId) ||
+        IsInActivationContext(record.window, foreground)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool ApplicationManager::ForegroundBelongsToApplication(HWND window, HWND foreground) const {
+  if (foreground == nullptr) {
+    return false;
+  }
+  if (window == nullptr) {
+    for (const auto& entry : leases_) {
+      if (ForegroundBelongsToLease(entry.second, foreground)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  if (IsInActivationContext(window, foreground)) {
+    return true;
+  }
+  // A framework host can parent the tracked window below the foreground frame.
+  if (GetAncestor(window, GA_ROOT) == foreground) {
+    return true;
+  }
+  if (const ApplicationLease* lease = LeaseForWindow(window); lease != nullptr) {
+    return ForegroundBelongsToLease(*lease, foreground);
+  }
+  DWORD windowProcess = 0;
+  DWORD foregroundProcess = 0;
+  GetWindowThreadProcessId(window, &windowProcess);
+  GetWindowThreadProcessId(foreground, &foregroundProcess);
+  return windowProcess != 0 && windowProcess == foregroundProcess;
+}
+
+void ApplicationManager::RequireForegroundOwnedBy(HWND window, HWND foreground) const {
+  if (foreground == nullptr) {
+    Fail(kErrorWindowActivation,
+         "No window holds the foreground, so keyboard input was not sent to avoid typing into the wrong place.");
+  }
+  if (ForegroundBelongsToApplication(window, foreground)) {
+    return;
+  }
+  DWORD foregroundProcess = 0;
+  GetWindowThreadProcessId(foreground, &foregroundProcess);
+  Fail(kErrorWindowActivation,
+       "The foreground window " + DescribeWindowHandle(foreground) + " of process " + std::to_string(foregroundProcess) +
+           (window == nullptr ? " does not belong to an application this helper launched or attached to"
+                              : " does not belong to the target application") +
+           ", so keyboard input was not sent to avoid typing into it. Activate the application window first.");
+}
+
 std::vector<std::string> ApplicationManager::WindowIdsForLease(const std::string& leaseId) const {
   std::vector<std::string> ids;
   for (const auto& entry : windowsById_) {
@@ -1269,12 +1476,72 @@ std::vector<std::string> ApplicationManager::WindowIdsForLease(const std::string
 }
 
 void ApplicationManager::ForgetWindow(const std::string& windowId) {
+  windowEvents_.Forget(windowId);
   const auto entry = windowsById_.find(windowId);
   if (entry == windowsById_.end()) {
     return;
   }
   windowIdsByHandle_.erase(entry->second.window);
   windowsById_.erase(entry);
+}
+
+json::Value ApplicationManager::PublicationDiagnostic(const ApplicationLease& lease) const {
+  constexpr std::size_t kMaximumPublishedWindows = 32;
+  const std::vector<HWND> all = EnumerateAllTopLevelWindows(lease.processId);
+  const std::vector<HWND> listed = EnumerateTopLevelWindows(lease.processId);
+  json::Value windows = json::Value::Array();
+  for (std::size_t index = 0; index < all.size() && index < kMaximumPublishedWindows; index += 1) {
+    const HWND window = all[index];
+    const WindowDescriptor descriptor = DescribeWindow(window);
+    json::Value entry = json::Value::Object();
+    entry.Set("className", json::Value::String(descriptor.className));
+    entry.Set("listed", json::Value::Bool(std::find(listed.begin(), listed.end(), window) != listed.end()));
+    entry.Set("owned", json::Value::Bool(descriptor.owned));
+    if (descriptor.hasTitle) {
+      entry.Set("title", json::Value::String(descriptor.title));
+    }
+    entry.Set("tracked", json::Value::Bool(windowIdsByHandle_.count(window) > 0));
+    entry.Set("visible", json::Value::Bool(descriptor.visible));
+    windows.Append(std::move(entry));
+  }
+  json::Value publication = json::Value::Object();
+  publication.Set("processId", json::Value::Integer(static_cast<std::int64_t>(lease.processId)));
+  publication.Set("reason", json::Value::String(std::string("observation")));
+  publication.Set("windowCount", json::Value::Integer(static_cast<std::int64_t>(all.size())));
+  publication.Set("windows", std::move(windows));
+  publication.Set("windowsTruncated", json::Value::Bool(all.size() > kMaximumPublishedWindows));
+  return publication;
+}
+
+json::Value ApplicationManager::WindowEventLog(const std::string& leaseId) {
+  const auto entry = leases_.find(leaseId);
+  if (entry == leases_.end()) {
+    Fail(kErrorNoSuchLease, "The requested application lease is not held by this helper.");
+  }
+  const ApplicationLease& lease = entry->second;
+  json::Value log = windowEvents_.Diagnostic(lease.processId, WindowEventMonitor::kMaximumEvents);
+  log.Set("publication", PublicationDiagnostic(lease));
+
+  std::vector<const WindowRecord*> tracked;
+  for (const auto& record : windowsById_) {
+    if (record.second.leaseId == leaseId) {
+      tracked.push_back(&record.second);
+    }
+  }
+  std::sort(tracked.begin(), tracked.end(),
+            [](const WindowRecord* left, const WindowRecord* right) { return left->id < right->id; });
+  json::Value windows = json::Value::Array();
+  for (const WindowRecord* record : tracked) {
+    json::Value window = json::Value::Object();
+    window.Set("closed", json::Value::Bool(IsWindowClosed(*record)));
+    window.Set("element", json::Value::String(DescribeWindowHandle(record->window)));
+    window.Set("id", json::Value::String(record->id));
+    window.Set("primary", json::Value::Bool(record->primary));
+    window.Set("title", json::Value::String(BoundedText(ToUtf8(record->title), 512)));
+    windows.Append(std::move(window));
+  }
+  log.Set("trackedWindows", std::move(windows));
+  return log;
 }
 
 json::Value ApplicationManager::SerializeLease(const ApplicationLease& lease) const {

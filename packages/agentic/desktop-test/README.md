@@ -6,6 +6,10 @@ and reporting for macOS, Windows, and Win32. It uses
 `@fluentui-react-native/desktop-driver`; Storybook support is an optional
 integration in `@fluentui-react-native/storybook-desktop`.
 
+**Work in progress:** [current status](references/current-status.md) separates
+implemented capabilities from incomplete ownership/recovery guarantees and
+records consumer qualification evidence.
+
 ## Quick start
 
 Add a `desktop.config.mts` in the app workspace:
@@ -38,19 +42,25 @@ Expose the CLI in the workspace script and run a declared stage:
 yarn desktop-test --target windows build-driver
 yarn desktop-test --target windows test --suite regression --list
 yarn desktop-test --target windows test --suite regression
+yarn desktop-test --target windows --reporter json test --suite regression
 ```
 
 Read the [configuration guide](references/configuration.md) to define app
 targets or suites, then use the [command guide](references/commands.md) to run
-them. See the [reference index](references/README.md) for all topics, and
-[AGENTS.md](AGENTS.md) when working on the package.
+them. `--reporter json` emits a bounded result summary; use
+`--reporter ndjson --events progress` for machine-readable live progress. See
+[reporting](references/reporting.md) for precedence and artifact details, the
+[reference index](references/README.md) for all topics, and [AGENTS.md](AGENTS.md)
+when working on the package.
 
 ## Supported responsibilities
 
 - App targets and suites share one structural configuration schema.
 - WDIO owns suite sessions, globals, hooks, grouped execution, retries, and
   framework assertions.
-- The harness supervises services, workers, the driver, and app lifetimes.
+- The generic harness supervises services, workers, and the driver; session-owned
+  app launch and the Storybook lifecycle takeover are transitional (see
+  [lifecycle](references/lifecycle.md)).
 - Every run records structured results, command output, and evidence in its
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use

@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import type { EventContext, ReportFailure, TestStatus } from './protocol.js';
 
 export type DesktopTestAttempt = {
@@ -46,6 +48,150 @@ export type DesktopRunResult = {
   failures: ReportFailure[];
   artifacts: { path: string; description: string }[];
 };
+
+export type DesktopRunSummary = {
+  schemaVersion: 1;
+  type: 'summary';
+  runId: string;
+  kind: 'tests' | 'lifecycle';
+  status: TestStatus;
+  durationMs: number;
+  context?: Pick<EventContext, 'endpoint' | 'renderer'>;
+  counts: DesktopRunResult['counts'];
+  problems: {
+    kind: 'test' | 'infrastructure' | 'unfinished';
+    id: string;
+    title: string;
+    status: TestStatus;
+    failureId?: string;
+    message?: string;
+  }[];
+  skippedReasons: string[];
+  artifacts: {
+    root: string;
+    runJson: string;
+    eventsJsonl: string;
+    junitXml?: string;
+    commandLogs: string;
+  };
+  omissions: { problems: number; skippedReasons: number };
+};
+
+const SUMMARY_MAX_BYTES = 4 * 1024;
+const SUMMARY_MAX_PROBLEMS = 10;
+
+export function projectDesktopRunSummary(result: DesktopRunResult, root: string): DesktopRunSummary {
+  const problems: DesktopRunSummary['problems'] = [
+    ...result.failures
+      .filter(({ kind }) => kind !== 'test')
+      .map((failure) => ({
+        kind: 'infrastructure' as const,
+        id: clipText(failure.failureId, 96),
+        title: clipText(failure.kind, 64),
+        status: 'failed' as const,
+        failureId: clipText(failure.failureId, 96),
+        message: clipText(failure.error.message, 256),
+      })),
+    ...result.tests
+      .filter(({ status }) => status === 'failed' || ['cancelled', 'not-run', 'incomplete'].includes(status))
+      .map((test) => {
+        const latest = test.attempts.at(-1);
+        return {
+          kind: 'test' as const,
+          id: clipText(test.testId, 96),
+          title: clipText(test.title, 128),
+          status: test.status,
+          ...(latest?.failure ? { failureId: clipText(latest.failure.failureId, 96) } : {}),
+          ...(latest?.failure?.error.message || latest?.reason
+            ? { message: clipText(latest.failure?.error.message ?? latest.reason!, 256) }
+            : {}),
+        };
+      }),
+    ...result.work
+      .filter(({ status }) => ['not-run', 'incomplete', 'cancelled'].includes(status))
+      .map((work) => ({
+        kind: 'unfinished' as const,
+        id: clipText(work.workId, 96),
+        title: clipText(work.label, 128),
+        status: work.status,
+      })),
+  ];
+  const skippedReasons = [
+    ...new Set(
+      result.tests.flatMap((test) =>
+        test.attempts.flatMap((attempt) =>
+          attempt.reason && ['skipped', 'unsupported'].includes(attempt.status) ? [clipText(attempt.reason, 256)] : [],
+        ),
+      ),
+    ),
+  ];
+  const artifacts = {
+    root: clipText(root, 512),
+    runJson: clipText(path.join(root, 'run.json'), 512),
+    eventsJsonl: clipText(path.join(root, 'events.jsonl'), 512),
+    ...(result.artifacts.some(({ path: artifactPath }) => artifactPath === 'junit.xml')
+      ? { junitXml: clipText(path.join(root, 'junit.xml'), 512) }
+      : {}),
+    commandLogs: clipText(path.join(root, 'commands'), 512),
+  };
+  const summary: DesktopRunSummary = {
+    schemaVersion: 1,
+    type: 'summary',
+    runId: clipText(result.runId, 96),
+    kind: result.kind,
+    status: result.status,
+    durationMs: result.durationMs,
+    ...(result.context?.endpoint || result.context?.renderer
+      ? {
+          context: {
+            ...(result.context.endpoint ? { endpoint: result.context.endpoint } : {}),
+            ...(result.context.renderer ? { renderer: result.context.renderer } : {}),
+          },
+        }
+      : {}),
+    counts: result.counts,
+    problems: problems.slice(0, SUMMARY_MAX_PROBLEMS),
+    skippedReasons: skippedReasons.slice(0, SUMMARY_MAX_PROBLEMS),
+    artifacts,
+    omissions: {
+      problems: Math.max(0, problems.length - SUMMARY_MAX_PROBLEMS),
+      skippedReasons: Math.max(0, skippedReasons.length - SUMMARY_MAX_PROBLEMS),
+    },
+  };
+  while (Buffer.byteLength(JSON.stringify(summary)) > SUMMARY_MAX_BYTES && summary.problems.length > 0) {
+    summary.problems.pop();
+    summary.omissions.problems++;
+  }
+  while (Buffer.byteLength(JSON.stringify(summary)) > SUMMARY_MAX_BYTES && summary.skippedReasons.length > 0) {
+    summary.skippedReasons.pop();
+    summary.omissions.skippedReasons++;
+  }
+  if (Buffer.byteLength(JSON.stringify(summary)) > SUMMARY_MAX_BYTES) {
+    summary.context = undefined;
+    summary.artifacts = {
+      root: clipText(root, 192),
+      runJson: clipText(path.join(root, 'run.json'), 192),
+      eventsJsonl: clipText(path.join(root, 'events.jsonl'), 192),
+      commandLogs: clipText(path.join(root, 'commands'), 192),
+    };
+  }
+  if (Buffer.byteLength(JSON.stringify(summary)) > SUMMARY_MAX_BYTES) {
+    summary.problems = [];
+    summary.skippedReasons = [];
+    summary.artifacts = {
+      root: clipText(root, 64),
+      runJson: clipText(path.join(root, 'run.json'), 64),
+      eventsJsonl: clipText(path.join(root, 'events.jsonl'), 64),
+      commandLogs: clipText(path.join(root, 'commands'), 64),
+    };
+    summary.omissions.problems = problems.length;
+    summary.omissions.skippedReasons = skippedReasons.length;
+  }
+  if (Buffer.byteLength(JSON.stringify(summary)) > SUMMARY_MAX_BYTES) {
+    throw new Error('Desktop run summary cannot fit within the 4 KiB output limit.');
+  }
+  return summary;
+}
 
 export function summarizeDesktopRun(
   input: Omit<DesktopRunResult, 'status' | 'counts'> & { optional?: boolean; incomplete?: boolean },
@@ -163,4 +309,15 @@ function xml(value: string): string {
 }
 function markdown(value: string): string {
   return value.replaceAll(/[\r\n`<>]/g, ' ');
+}
+
+function clipText(value: string, maximumBytes: number): string {
+  if (Buffer.byteLength(value) <= maximumBytes) return value;
+  const marker = '…';
+  let result = '';
+  for (const character of value) {
+    if (Buffer.byteLength(result + character + marker) > maximumBytes) break;
+    result += character;
+  }
+  return `${result}${marker}`;
 }

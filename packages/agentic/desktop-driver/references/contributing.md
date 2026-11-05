@@ -27,7 +27,9 @@ change-oriented guidance.
 | `src/runner`       | Plan selection, capability checks, execution, and classification        |
 | `src/wdio`         | Sanctioned WebdriverIO connection and commands                          |
 | `src/client`       | Low-level typed W3C client                                              |
+| `src/authority`    | Grants, private discovery records, and platform ownership adapters      |
 | `src/agent`        | Bounded agent-facing operations                                         |
+| `src/operations`   | Versioned agent operations, references, release ledger, and journal     |
 | `src/artifacts`    | Evidence naming, confinement, and atomic writes                         |
 | `src/testing`      | Reusable fake harnesses, never production fallback                      |
 | `src/cli`          | CLI parsing and structured-result adaptation                            |
@@ -63,6 +65,16 @@ package.
   identity, capture geometry, or recovery changes.
 - Add or update the opt-in Node native contract when build, cache, selection,
   signing, or handshake behavior changes.
+- On Windows, extend the Win32 fixture contract
+  (`src/native/windows/win32Fixture.contract.test.ts` and `fixtures/win32`) when
+  a change needs a real application: events, popups, hung providers, tree
+  limits, or retention.
+- On Windows, change the `--private-storage`, `--service-identity`, and
+  `--application-incarnation` modes together with their native self-test cases
+  (`native/windows/src/authoritytests.cpp`) and the application-free contracts
+  `src/native/windows/privateStorage.contract.test.ts`,
+  `src/native/windows/serviceIdentity.contract.test.ts`, and
+  `src/native/windows/applicationIncarnation.contract.test.ts`.
 
 Never patch generated SwiftPM, Xcode, MSBuild output, or cached artifacts.
 

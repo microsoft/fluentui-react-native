@@ -43,6 +43,11 @@
       "import": "./lib/cli/index.js",
       "default": "./src/cli/index.ts"
     },
+    "./cli/reporter": {
+      "types": "./lib/cli/reporter.d.ts",
+      "import": "./lib/cli/reporter.js",
+      "default": "./src/cli/reporter.ts"
+    },
     "./authoring": {
       "types": "./lib/authoring/index.d.ts",
       "import": "./lib/authoring/index.js",
@@ -57,6 +62,16 @@
       "types": "./lib/artifacts/index.d.ts",
       "import": "./lib/artifacts/index.js",
       "default": "./src/artifacts/index.ts"
+    },
+    "./authority": {
+      "types": "./lib/authority/index.d.ts",
+      "import": "./lib/authority/index.js",
+      "default": "./src/authority/index.ts"
+    },
+    "./operations": {
+      "types": "./lib/operations/index.d.ts",
+      "import": "./lib/operations/index.js",
+      "default": "./src/operations/index.ts"
     },
     "./server": {
       "types": "./lib/server/index.d.ts",
@@ -94,7 +109,8 @@
   },
   "dependencies": {
     "commander": "^14.0.2",
-    "webdriverio": "catalog:"
+    "webdriverio": "catalog:",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@fluentui-react-native/scripts": "workspace:*"

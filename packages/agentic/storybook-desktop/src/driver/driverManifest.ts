@@ -10,7 +10,23 @@ import type { DesktopStorybookInstance } from '../config/instance.js';
 import type { Platforms } from '../config/platforms.js';
 import type { DesktopStorybookWdioOptions } from '../config/wdio.js';
 
+/** Asks the channel service to protect its driver with a grant authority and publish one agent's connection. */
+export type DesktopStorybookAgentManifest = {
+  /** The connection descriptor's record name, which the adapter reads with `--descriptor`. */
+  descriptor: string;
+  /** Where the channel service records that the descriptor is published; the driver command waits for it. */
+  readyPath: string;
+  /** The private storage root, which the adapter reads with `--root`. Defaults to the platform location. */
+  root?: string;
+  /**
+   * The identity an agent's attach session verifies instead of the application lease. Windows and Win32 have no lease
+   * maintainer, so the driver resolves the exact window title qualified by the app's AUMID or canonical executable.
+   */
+  application?: NativeDesktopApplicationDescriptor;
+};
+
 export type DesktopStorybookDriverManifest = {
+  agent?: DesktopStorybookAgentManifest;
   application: NativeDesktopApplicationDescriptor & {
     leaseNonce: string;
     leasePath: string;
@@ -35,6 +51,7 @@ export type DesktopStorybookDriverManifest = {
 };
 
 export type CreateDesktopStorybookDriverManifestOptions = {
+  agent?: Omit<DesktopStorybookAgentManifest, 'readyPath'>;
   bridgeNonce?: string;
   config: DesktopStorybookConfig;
   instance: DesktopStorybookInstance;
@@ -56,6 +73,7 @@ export function desktopStorybookTargetId(
 }
 
 export function createDesktopStorybookDriverManifest({
+  agent,
   bridgeNonce = randomBytes(24).toString('base64url'),
   config,
   instance,
@@ -68,8 +86,19 @@ export function createDesktopStorybookDriverManifest({
   if (nativeOptions === false) {
     throw new Error(`Native Desktop Driver is disabled for ${platform}.`);
   }
-  const leasePath = path.join(config.projectRoot, 'storybook-desktop.generated', `application-lease.${platform}.json`);
+  const generated = path.join(config.projectRoot, 'storybook-desktop.generated');
+  const leasePath = path.join(generated, `application-lease.${platform}.json`);
   return Object.freeze({
+    ...(agent
+      ? {
+          agent: Object.freeze({
+            descriptor: agent.descriptor,
+            readyPath: path.join(generated, `agent-ready.${platform}.json`),
+            ...(agent.root === undefined ? {} : { root: agent.root }),
+            ...(agent.application === undefined ? {} : { application: Object.freeze({ ...agent.application }) }),
+          }),
+        }
+      : {}),
     application: Object.freeze({
       ...nativeOptions.application,
       ...(platform === 'macos' ? { bundleIdentifier: instance.bundleIdentifier } : {}),
@@ -99,6 +128,7 @@ export function createDesktopStorybookDriverManifest({
 export function writeDesktopStorybookDriverManifest(manifest: DesktopStorybookDriverManifest, outputPath: string): void {
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.rmSync(manifest.application.leasePath, { force: true });
+  if (manifest.agent) fs.rmSync(manifest.agent.readyPath, { force: true });
   const content = `${JSON.stringify(manifest, null, 2)}\n`;
   if (!fs.existsSync(outputPath) || fs.readFileSync(outputPath, 'utf8') !== content) {
     fs.writeFileSync(outputPath, content);

@@ -6,6 +6,7 @@ import type { EventEmitter, FailureKind, ReportFailure } from './protocol.js';
 import { assertReportedWork, connectReportProducer, DESKTOP_REPORT_CONTEXT, startReportTransport } from './transport.js';
 import { desktopRunExitCode } from './results.js';
 import type { DesktopRunResult } from './results.js';
+import { resolveDesktopEventLevel, resolveDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 
 export type DesktopReportSession = {
   reporter: DesktopReportWriter;
@@ -21,13 +22,30 @@ export async function createDesktopReportSession(
   options: DesktopRunReporterOptions & { onFatal?: (error: Error) => void },
 ): Promise<DesktopReportSession> {
   const encoded = process.env[DESKTOP_REPORT_CONTEXT];
+  const reporterMode =
+    options.reporterMode ??
+    (options.structured
+      ? 'json'
+      : resolveDesktopReporterMode({
+          environment: process.env.DESKTOP_REPORTER,
+          configured: options.reporter ?? options.console,
+        }));
+  const eventLevel = resolveDesktopEventLevel({
+    flag: options.eventLevel,
+    environment: process.env.DESKTOP_EVENTS,
+    configured: options.events,
+  });
+  const reportingEnvironment = {
+    DESKTOP_REPORTER: reporterMode,
+    ...(reporterMode === 'ndjson' ? { DESKTOP_EVENTS: eventLevel } : {}),
+  };
   if (!encoded) {
-    const reporter = new DesktopRunReporter(options);
+    const reporter = new DesktopRunReporter({ ...options, reporterMode, eventLevel });
     const transport = await startReportTransport(reporter, options.onFatal);
     return {
       reporter,
       delegated: false,
-      environment: transport.environment,
+      environment: { ...transport.environment, ...reportingEnvironment },
       get result() {
         return reporter.resultSnapshot;
       },
@@ -108,7 +126,7 @@ export async function createDesktopReportSession(
   return {
     reporter,
     delegated: true,
-    environment: { [DESKTOP_REPORT_CONTEXT]: encoded },
+    environment: { [DESKTOP_REPORT_CONTEXT]: encoded, ...reportingEnvironment },
     onStop(callback) {
       stop = callback;
       if (stopping)
