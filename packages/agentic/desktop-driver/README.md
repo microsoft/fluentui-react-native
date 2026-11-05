@@ -12,6 +12,10 @@ evidence management, native-helper source and build tooling, and deterministic
 fake hosts for contract tests. It does not depend on Storybook, React, or React
 Native.
 
+**Work in progress:** see [current status](references/current-status.md) for
+implemented capabilities, incomplete lifecycle guarantees, endpoint qualification,
+and measured token/latency history.
+
 ## Supported targets
 
 | Endpoint                    | Operating system  | Architecture            | Native implementation                                       |
@@ -20,7 +24,8 @@ Native.
 | React Native Windows Fabric | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
 | React Native Win32 Paper    | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
 
-V1 permits one active WebDriver session per physical target. Native builds run
+V1 permits one active WebDriver session per registered target in one service;
+cross-service application exclusion remains work in progress. Native builds run
 only on the target operating system. Installation never compiles or downloads a
 helper.
 
@@ -103,7 +108,7 @@ lifecycle. The standalone `desktop-driver serve` command intentionally exposes
 a fake target for protocol and integration tests; it is not a native service
 shortcut.
 
-For a production native listener, application lifecycle, and standalone WDIO
+For a native listener, application lifecycle, and standalone WDIO
 suites, use `@fluentui-react-native/desktop-test` and its `README.md`. It
 composes this driver without requiring Storybook or React Native in ordinary
 applications.

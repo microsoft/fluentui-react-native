@@ -53,6 +53,7 @@ export class DesktopSupervisor {
   private artifact?: NativeDriverArtifact;
   private authority?: DesktopAuthority;
   private agentPublication?: DesktopAgentPublication;
+  private ownershipUncertain = false;
   private readonly environment: Record<string, string> = {};
   private readonly workers = new Set<RunningDesktopCommand>();
   private readonly options: DesktopSupervisorOptions;
@@ -125,6 +126,7 @@ export class DesktopSupervisor {
           try {
             await host.dispose();
           } catch (cleanup) {
+            this.ownershipUncertain = true;
             throw new AggregateError([error, cleanup], 'Desktop target startup and disposal failed.');
           }
         }
@@ -255,7 +257,7 @@ export class DesktopSupervisor {
       await close('services', () => this.services.close());
       await close('commands', () => this.runner.close());
       if (this.transport) await close('reporting', () => this.transport!.close());
-      if (this.releaseClaim) {
+      if (this.releaseClaim && failures.length === 0 && !this.ownershipUncertain) {
         try {
           this.releaseClaim();
         } catch (error) {
@@ -282,7 +284,7 @@ export type DesktopServiceOptions = {
   signal?: AbortSignal;
 };
 
-/** Storybook's channel child uses the same native composition without acquiring a second application owner. */
+/** Transitional composition for Storybook's channel child; lifecycle policy remains owned by desktop-test. */
 export async function startNativeDesktopService(options: NativeDesktopHostOptions & DesktopServiceOptions): Promise<DesktopDriverServer> {
   return startDesktopService(new NativeDesktopHost(options), options, options.artifact);
 }
@@ -359,7 +361,7 @@ export function claimDesktopWorkload(runId: string, directory?: string): () => v
     fs.writeFileSync(file, contents, { flag: 'wx', mode: 0o600 });
   } catch (error) {
     throw new Error(
-      `Another desktop workload holds ${file}. Do not run parallel physical-input suites. After a crash, verify the recorded owner has exited before removing its stale claim.`,
+      `Another desktop workload holds ${file}. Do not run parallel physical-input suites. After a crash or failed cleanup, verify the recorded owner and its resources have stopped before removing its claim.`,
       { cause: error },
     );
   }

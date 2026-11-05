@@ -1,7 +1,7 @@
 import { createHash, randomBytes } from 'node:crypto';
 
 import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
-import type { DesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
+import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
 import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver/storybook';
 import { createDesktopDriverStoryHarness, createDesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
 import type { DesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
@@ -9,7 +9,8 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
 
-import type { ConnectDesktopDriver } from './connection.js';
+import type { ConnectDesktopDriver, DesktopDriverConnection } from './connection.js';
+import { DesktopController } from './controller.js';
 import { createDesktopDriverMcpServer } from './server.js';
 
 type Fixture = { client: Client; harness: DesktopDriverTestHarness };
@@ -32,13 +33,30 @@ async function withFixture(
   progressIntervalMs?: number,
 ): Promise<void> {
   const harness = await createDesktopDriverTestHarness({ ...options, features: { ...features, ...options?.features } });
-  const client = await connectClient(async () => createDesktopDriverClient({ url: harness.server.url }), progressIntervalMs);
+  const client = await connectClient(async () => testConnection(harness), progressIntervalMs);
   try {
     await body({ client, harness });
   } finally {
+    await call(client, 'desktop_session', { action: 'close' });
     await client.close();
     await harness.close();
   }
+}
+
+function testConnection(harness: DesktopDriverTestHarness, fetcher?: typeof fetch): DesktopDriverConnection {
+  return {
+    client: createDesktopDriverClient({ url: harness.server.url, ...(fetcher ? { fetch: fetcher } : {}) }),
+    incarnation: harness.server.url,
+    principal: 'test',
+  };
+}
+
+function deferred(): { promise: Promise<void>; resolve: () => void } {
+  let resolve!: () => void;
+  const promise = new Promise<void>((complete) => {
+    resolve = complete;
+  });
+  return { promise, resolve };
 }
 
 function call(client: Client, name: string, args: Record<string, unknown> = {}, options = {}): Promise<CallToolResult> {
@@ -71,7 +89,7 @@ describe('desktop-driver-mcp', () => {
         'desktop_capture',
         'desktop_story',
       ]);
-      // The whole tool list is read into every agent's context and must remain below the operation catalog's 29 KB.
+      // This bounds serialized JavaScript characters, not tokens or UTF-8 bytes.
       expect(JSON.stringify(tools).length).toBeLessThan(22_000);
       const readOnly = Object.fromEntries(tools.map((tool) => [tool.name, tool.annotations?.readOnlyHint]));
       expect(readOnly).toEqual({
@@ -85,7 +103,9 @@ describe('desktop-driver-mcp', () => {
       expect(tools.every((tool) => tool.inputSchema.additionalProperties === false)).toBe(true);
 
       expect(json(await call(client, 'desktop_session'))).toEqual({
-        targets: [{ endpoint: 'windows', id: harness.target.id, platformName: 'windows', renderer: 'fabric' }],
+        targets: [
+          { endpoint: 'windows', id: harness.target.id, launchModes: ['launch', 'attach'], platformName: 'windows', renderer: 'fabric' },
+        ],
       });
     });
   });
@@ -190,7 +210,7 @@ describe('desktop-driver-mcp', () => {
       schemaVersion: 1,
     };
     const harness = await createDesktopDriverStoryHarness(manifest, { features });
-    const client = await connectClient(async () => createDesktopDriverClient({ url: harness.server.url }));
+    const client = await connectClient(async () => testConnection(harness));
     try {
       await open(client, harness);
       expect(json(await call(client, 'desktop_story', { list: { filter: 'checkbox' } }))).toMatchObject({
@@ -224,6 +244,7 @@ describe('desktop-driver-mcp', () => {
         expect((await call(client, 'desktop_story', args)).isError).toBe(true);
       }
     } finally {
+      await call(client, 'desktop_session', { action: 'close' });
       await client.close();
       await harness.close();
     }
@@ -315,12 +336,12 @@ describe('desktop-driver-mcp', () => {
     let harness = await createDesktopDriverTestHarness({ features });
     let connects = 0;
     let unavailable = false;
-    const client = await connectClient(async (): Promise<DesktopDriverClient> => {
+    const client = await connectClient(async () => {
       connects += 1;
       if (unavailable) {
         throw new Error('descriptor at /private/path is missing');
       }
-      return createDesktopDriverClient({ url: harness.server.url });
+      return testConnection(harness);
     });
     try {
       await open(client, harness);
@@ -347,7 +368,7 @@ describe('desktop-driver-mcp', () => {
   test('ends the open session when the MCP client goes away', async () => {
     const harness = await createDesktopDriverTestHarness({ features });
     const driver = createDesktopDriverClient({ url: harness.server.url });
-    const client = await connectClient(async () => driver);
+    const client = await connectClient(async () => ({ ...testConnection(harness), client: driver }));
     try {
       const session = await open(client, harness);
       await client.close();
@@ -362,6 +383,214 @@ describe('desktop-driver-mcp', () => {
       expect(gone).toBe(true);
     } finally {
       await harness.close();
+    }
+  });
+
+  test('recovers after a protected service is replaced on the same port without replaying the old call', async () => {
+    let authority = new DesktopAuthority();
+    let grant = authority.issue({ label: 'agent', targets: '*' });
+    let harness = await createDesktopDriverTestHarness({ features }, undefined, { authority });
+    let connects = 0;
+    const client = await connectClient(async () => {
+      connects += 1;
+      return {
+        client: createDesktopDriverClient({ grant: grant.token, url: harness.server.url }),
+        incarnation: authority.incarnation,
+        principal: grant.id,
+      };
+    });
+    try {
+      await open(client, harness);
+      const port = Number(new URL(harness.server.url).port);
+      await harness.close();
+      authority = new DesktopAuthority();
+      grant = authority.issue({ label: 'agent', targets: '*' });
+      harness = await createDesktopDriverTestHarness({ features }, undefined, { authority, port });
+      expect(json(await call(client, 'desktop_observe'))).toMatchObject({ reason: 'service-unavailable' });
+      expect(connects).toBe(1);
+      expect(json(await call(client, 'desktop_session'))).not.toHaveProperty('session');
+      expect(connects).toBe(2);
+      expect(json(await call(client, 'desktop_observe'))).toMatchObject({ reason: 'no-session' });
+      await open(client, harness);
+      authority.revoke(grant.id);
+      expect(json(await call(client, 'desktop_observe'))).toMatchObject({ reason: 'service-unavailable' });
+      grant = authority.issue({ label: 'agent', targets: '*' });
+      expect(json(await call(client, 'desktop_session'))).not.toHaveProperty('session');
+      expect(connects).toBe(3);
+    } finally {
+      await client.close();
+      await harness.close();
+    }
+  });
+
+  test('serializes acquisition and cleans up a session acquired after disposal started', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    const entered = deferred();
+    const finish = deferred();
+    let acquired: string | undefined;
+    const connection = testConnection(harness, async (input, init) => {
+      const response = await fetch(input, init);
+      if (init?.method === 'POST' && String(input).endsWith('/session')) {
+        acquired = ((await response.clone().json()) as { value: { sessionId: string } }).value.sessionId;
+        entered.resolve();
+        await finish.promise;
+      }
+      return response;
+    });
+    const controller = new DesktopController(async () => connection);
+    const request = { launch: true, target: harness.target.id };
+    try {
+      const opening = controller.open(request);
+      const opened = expect(opening).rejects.toMatchObject({ reason: 'connection-closed' });
+      await entered.promise;
+      const again = expect(controller.open(request)).rejects.toMatchObject({ reason: 'connection-closed' });
+      const disposed = controller.dispose();
+      finish.resolve();
+      await Promise.all([opened, again, disposed]);
+      await expect(connection.client.request('GET', `/session/${acquired}/window`)).rejects.toMatchObject({ code: 'invalid session id' });
+      await expect(controller.open(request)).rejects.toMatchObject({ reason: 'connection-closed' });
+    } finally {
+      finish.resolve();
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test('admits only one of concurrent opens', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    const controller = new DesktopController(async () => testConnection(harness));
+    try {
+      const results = await Promise.allSettled([
+        controller.open({ launch: true, target: harness.target.id }),
+        controller.open({ launch: true, target: 'another-target' }),
+      ]);
+      expect(results[0].status).toBe('fulfilled');
+      expect(results[1]).toMatchObject({ status: 'rejected', reason: { reason: 'session-open' } });
+    } finally {
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test('does not acquire after disposal while discovery is still pending', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    const entered = deferred();
+    const finish = deferred();
+    let creates = 0;
+    const connection = testConnection(harness, async (input, init) => {
+      if (init?.method === 'POST' && String(input).endsWith('/session')) creates += 1;
+      return fetch(input, init);
+    });
+    const controller = new DesktopController(async () => {
+      entered.resolve();
+      await finish.promise;
+      return connection;
+    });
+    try {
+      const opening = expect(controller.open({ launch: true, target: harness.target.id })).rejects.toMatchObject({
+        reason: 'connection-closed',
+      });
+      await entered.promise;
+      const disposed = controller.dispose();
+      finish.resolve();
+      await Promise.all([opening, disposed]);
+      expect(creates).toBe(0);
+    } finally {
+      finish.resolve();
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test('retains the session after a lost mutation response without replaying the mutation', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    let mutations = 0;
+    const connection = testConnection(harness, async (input, init) => {
+      const response = await fetch(input, init);
+      if (String(input).endsWith('/furn/ops/sequence')) {
+        mutations += 1;
+        await response.body?.cancel();
+        throw new Error('injected loss after dispatch');
+      }
+      return response;
+    });
+    const controller = new DesktopController(async () => connection);
+    try {
+      const session = await controller.open({ launch: true, target: harness.target.id });
+      await expect(
+        controller.run('sequence', {
+          steps: [{ act: { action: 'type', find: { automationId: 'input-name' }, text: 'Ada' } }],
+        }),
+      ).rejects.toMatchObject({ reason: 'service-unavailable' });
+      expect((await controller.status()).session?.id).toBe(session.id);
+      await expect(
+        controller.run('check', { expect: { valueContains: 'Ada' }, find: { automationId: 'input-name' } }),
+      ).resolves.toMatchObject({
+        response: { result: { status: 'passed' } },
+      });
+      expect(mutations).toBe(1);
+    } finally {
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test.each(['before', 'after'] as const)('retains deletion responsibility when transport fails %s DELETE dispatch', async (failure) => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    let failDelete = true;
+    let creates = 0;
+    const connection = testConnection(harness, async (input, init) => {
+      if (init?.method === 'POST' && String(input).endsWith('/session')) creates += 1;
+      if (init?.method === 'DELETE' && failDelete) {
+        failDelete = false;
+        if (failure === 'after') await fetch(input, init);
+        throw new Error('injected transport failure');
+      }
+      return fetch(input, init);
+    });
+    const controller = new DesktopController(async () => connection);
+    try {
+      const session = await controller.open({ launch: true, target: harness.target.id });
+      await expect(controller.close()).rejects.toMatchObject({ reason: 'service-unavailable' });
+      expect(controller.session).toBe(session.id);
+      await expect(controller.open({ launch: true, target: harness.target.id })).rejects.toMatchObject({ reason: 'session-open' });
+      expect(creates).toBe(1);
+      expect(await controller.close()).toEqual({ closed: session.id });
+      await controller.open({ launch: true, target: harness.target.id });
+      expect(creates).toBe(2);
+    } finally {
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test('fences an ambiguous acquisition instead of retrying it on the same authority', async () => {
+    const errors = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    const harness = await createDesktopDriverTestHarness({ features });
+    let creates = 0;
+    const connection = testConnection(harness, async (input, init) => {
+      const response = await fetch(input, init);
+      if (init?.method === 'POST' && String(input).endsWith('/session')) {
+        creates += 1;
+        await response.body?.cancel();
+        throw new Error('the session was created but its response was lost');
+      }
+      return response;
+    });
+    const controller = new DesktopController(async () => connection);
+    try {
+      await expect(controller.open({ launch: true, target: harness.target.id })).rejects.toMatchObject({ reason: 'service-unavailable' });
+      expect(await controller.status()).toMatchObject({ sessionState: 'uncertain' });
+      await expect(controller.open({ launch: true, target: harness.target.id })).rejects.toMatchObject({ reason: 'session-uncertain' });
+      await expect(controller.close()).rejects.toMatchObject({ reason: 'session-uncertain' });
+      expect(creates).toBe(1);
+    } finally {
+      await controller.dispose();
+      await harness.close();
+      expect(errors).toHaveBeenCalledWith(
+        'desktop-driver-mcp: session cleanup is incomplete; the service must drain or expire the session.',
+      );
+      errors.mockRestore();
     }
   });
 });

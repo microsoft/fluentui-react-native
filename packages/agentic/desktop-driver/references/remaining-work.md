@@ -41,10 +41,13 @@ Real-application qualification covers only the recorded M3 observation checks
 and Storybook agent paths.
 Planning baseline: `c84acb741`, 2026-11-02.
 
-**Delivery constraint:** Complete the shared architecture, macOS implementation,
-Windows implementation, and separate Windows Fabric/Win32 Paper qualification
-on the same branch before publishing its PR. Do not ship a macOS-only agent
-surface and leave Windows parity to another PR.
+**Delivery status:** This branch is explicitly work in progress. A draft PR and
+portable safety fixes may land before complete native qualification. Full
+submission still requires the shared architecture and separate macOS, Windows
+Fabric, and Win32 Paper evidence for the changed surfaces. Do not describe a
+macOS-only or capability-skipped result as cross-platform parity.
+The [current-status ledger](current-status.md) owns capability/measurement
+summaries; the sections below retain outstanding delivery work and prior evidence.
 
 This is the canonical open-work plan under R-PKGDOC-009. Each milestone states
 its outcome and completion condition. As implementation lands, move durable
@@ -998,8 +1001,9 @@ named action/check, hash-verified window and element resources, descriptor
 removal on the CLI stop handler, and preservation of the attached app.
 `desktop_story` lists stories and renders one through the `stories` and
 `story` operations; rendering replaces the preview region first, so earlier
-references expire, and a render that does not confirm is indeterminate without
-quarantining the target. Fake-host tests cover listing, filtering, paging,
+references expire. A render whose effects are unknown or partial now quarantines
+the target; protected args updates are refused pending governed settlement.
+Fake-host tests cover listing, filtering, paging,
 marker verification, out-of-band story changes, unknown stories, failed
 renders, and request-id replay. An imported integration serves `--agent` when
 it declares `supportsAgent`: Storybook's `driver --agent` protects the embedded

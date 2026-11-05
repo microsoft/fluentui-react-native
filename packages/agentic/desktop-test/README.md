@@ -6,6 +6,10 @@ and reporting for macOS, Windows, and Win32. It uses
 `@fluentui-react-native/desktop-driver`; Storybook support is an optional
 integration in `@fluentui-react-native/storybook-desktop`.
 
+**Work in progress:** [current status](references/current-status.md) separates
+implemented capabilities from incomplete ownership/recovery guarantees and
+records consumer qualification evidence.
+
 ## Quick start
 
 Add a `desktop.config.mts` in the app workspace:
@@ -54,7 +58,9 @@ when working on the package.
 - App targets and suites share one structural configuration schema.
 - WDIO owns suite sessions, globals, hooks, grouped execution, retries, and
   framework assertions.
-- The harness supervises services, workers, the driver, and app lifetimes.
+- The generic harness supervises services, workers, and the driver; session-owned
+  app launch and the Storybook lifecycle takeover are transitional (see
+  [lifecycle](references/lifecycle.md)).
 - Every run records structured results, command output, and evidence in its
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use

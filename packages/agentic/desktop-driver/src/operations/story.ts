@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { toWebDriverError } from '../protocol/errors.js';
 import type { WebDriverError } from '../protocol/errors.js';
-import { attachFailureEffect, attachMutationReport } from '../protocol/settlement.js';
+import { attachFailureEffect, attachMutationReport, createMutationReport } from '../protocol/settlement.js';
 import type { DesktopStoryManifestEntry } from '../storybook.js';
 import { asRejection, assertNotQuarantined, rejection } from './act.js';
 import { operationError } from './envelope.js';
@@ -134,17 +134,18 @@ export type StoryResult = z.infer<typeof storyOutput>;
 
 /**
  * A change that was dispatched and not confirmed. The preview may show the old story, the new one, or a render error,
- * so the result is indeterminate; it does not quarantine the target, because the next selection replaces the preview.
+ * so the result is indeterminate. The runtime fences uncertain context mutations with the target quarantine.
  * The words are fixed: the cause can quote a story's render error, and an agent reads errors as instructions.
  */
 function storyNotReady(runtime: OperationRuntime, error: unknown): WebDriverError {
   const failure = operationError(
     toWebDriverError(error).code === 'timeout' ? 'timeout' : 'unknown error',
     'story-not-ready',
-    'The story did not confirm that it rendered, so what the preview shows is unknown. Preview references expired; select a story again.',
+    'The story did not confirm that it rendered, so what the preview shows is unknown. Check quarantine status before further mutations.',
   );
-  attachFailureEffect(failure, 'unknown');
-  return attachMutationReport(failure, { disposition: 'indeterminate', effect: 'unknown', quarantined: runtime.quarantined() });
+  const report = createMutationReport(error, runtime.quarantined());
+  attachFailureEffect(failure, report.effect);
+  return attachMutationReport(failure, report);
 }
 
 export const storyOperation = registerOperation({

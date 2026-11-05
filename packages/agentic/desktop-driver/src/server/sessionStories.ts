@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import type { OperationCurrentStory, OperationStories } from '../operations/runtime.js';
 import { WebDriverError } from '../protocol/errors.js';
+import { attachFailureEffect, readFailureEffect } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { StoryOrchestrator, StoryReadyResult, StorySelectionRequest } from '../storybook.js';
 import type { DesktopSession, SessionManager } from './SessionManager.js';
@@ -12,8 +13,8 @@ const markerPollMs = 25;
 
 /**
  * Selects or resets a story and waits until the native story root shows it. The preview region expires first and the
- * session forgets its story until the change is confirmed, so a failure leaves no story selected. Story changes do not
- * quarantine the target: the next selection replaces the whole preview.
+ * session forgets its story until the change is confirmed. An uncertain failure quarantines the target: a delayed
+ * remote render must not race a subsequent selection or input.
  */
 export async function changeStory(
   session: DesktopSession,
@@ -22,17 +23,28 @@ export async function changeStory(
   request: StorySelectionRequest,
 ): Promise<{ result: StoryReadyResult; verified: boolean }> {
   const orchestrator = requireOrchestrator(session);
-  const deadline = Date.now() + session.desktopTimeouts.storyRender;
-  sessions.invalidatePreview(session);
-  session.story = null;
-  const result = await withCommandTimeout(
-    () => (change === 'reset' ? orchestrator.resetStory(request) : orchestrator.selectStory(request)),
-    remainingTime(deadline),
-    `${change === 'reset' ? 'Resetting' : 'Selecting'} Storybook story "${request.storyId}"`,
-  );
-  const verified = await verifyStoryMarker(session, result, deadline);
-  session.story = result;
-  return { result, verified };
+  return sessions.runMutation(session, 'Changing Storybook context', async () => {
+    const deadline = Date.now() + session.desktopTimeouts.storyRender;
+    sessions.invalidatePreview(session);
+    session.story = null;
+    try {
+      const result = await withCommandTimeout(
+        () => (change === 'reset' ? orchestrator.resetStory(request) : orchestrator.selectStory(request)),
+        remainingTime(deadline),
+        'Changing Storybook context',
+        { signal: session.commandAbortController.signal },
+      );
+      const verified = await verifyStoryMarker(session, result, deadline);
+      session.story = result;
+      return { result, verified };
+    } catch (error) {
+      // Runtime failures can contain application text; settlement records must contain only a fixed description.
+      throw attachFailureEffect(
+        new WebDriverError(error instanceof WebDriverError ? error.code : 'unknown error', 'Storybook context did not settle.'),
+        readFailureEffect(error),
+      );
+    }
+  });
 }
 
 /** The operation layer's view of the session's stories, or undefined when the target renders none. */

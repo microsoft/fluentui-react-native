@@ -293,6 +293,7 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
         return {
           endpoint: target.endpoint,
           id: target.id,
+          launchModes: target.launchModes ?? ['launch', 'attach'],
           platformName: target.platformName,
           renderer: target.renderer,
           host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
@@ -519,6 +520,11 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       return (await changeStory(session, sessions, 'reset', parseStorySelection(body))).result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'args') {
+      if (context.authority) {
+        throw new WebDriverError('unsupported operation', 'Storybook args updates are not supported on protected services.', {
+          reason: 'story-args-unsupported',
+        });
+      }
       sessions.assertMutable(session);
       if (!orchestrator.updateArgs) {
         throw new WebDriverError('unsupported operation', 'This Storybook target does not support arg updates.');

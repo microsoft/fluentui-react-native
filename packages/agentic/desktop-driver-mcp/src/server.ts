@@ -11,7 +11,7 @@ import { AdapterError, DesktopController, isWebDriverError } from './controller.
 import { errorResult, jsonResult } from './results.js';
 
 export type DesktopDriverMcpServerOptions = {
-  /** Returns a client for the running service; called again after the service goes away. */
+  /** Returns a verified client and authority identity; called again after transport failure or authority invalidation. */
   connect: ConnectDesktopDriver;
   /** How often a long call reports progress to a client that asked for it. */
   progressIntervalMs?: number;
@@ -64,7 +64,10 @@ const sessionInput = z
       .enum(['accessibility', 'auto', 'physical'])
       .optional()
       .describe('How clicks reach the application. The target decides when omitted.'),
-    launch: z.boolean().default(false).describe('Launch the application. By default open attaches to the instance already running.'),
+    launch: z
+      .boolean()
+      .default(false)
+      .describe('Launch the application. Defaults to attach; choose from the target launchModes in status.'),
     target: z.string().min(1).max(128).optional().describe('The target id from status. Required to open.'),
   })
   .refine((input) => input.action !== 'open' || input.target !== undefined, {

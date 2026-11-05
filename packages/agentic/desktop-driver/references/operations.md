@@ -51,8 +51,9 @@ A response is:
 ```
 
 `session.quarantined` appears only while the target refuses mutations (reads
-still run). `session.incarnation` changes when the application restarts;
-references never cross one.
+still run). `session.incarnation` is a session-local reference generation, not
+automatic application-restart detection or a service identity. Reopen after an
+application replacement; references never cross sessions.
 
 `DesktopSessionClient` (`/client`) wraps the routes as `operations()`,
 `operation(name, input, { requestId, signal })`, and one method per operation:
@@ -413,8 +414,8 @@ the story root to confirm the story. The result gives the new `region` and the
 `verification`: `marker`, or `none` on a target without a story root. A render
 that does not confirm fails with `story-not-ready`, coded `timeout` when the
 deadline passed, in fixed words because the cause may quote the story's own
-error, with an `indeterminate` mutation report. It does not quarantine the
-target, because the next `story` replaces the whole preview. A quarantined
+error, with a mutation report. An unknown or partial effect quarantines the
+target: replacing references cannot stop a delayed remote render. A quarantined
 target refuses `story` with `target-quarantined`, and a `requestId` makes a
 retry safe as it does for `act`. A story change waits on the session's queue
 but not the server's input turn, as the WebDriver story routes do, because a
@@ -469,42 +470,42 @@ is bounded to 300 characters with invisible characters made visible, and
 Provider data is reduced to an allowlist: `reason`, `nativeCode`, and a
 rebuilt `mutation` report.
 
-| Reason                            | Error code                  | Meaning                                                 |
-| --------------------------------- | --------------------------- | ------------------------------------------------------- |
-| `invalid-envelope`                | `invalid argument`          | Not a JSON object, or an unknown request field          |
-| `invalid-request-id`              | `invalid argument`          | `requestId` is malformed                                |
-| `unsupported-version`             | `invalid argument`          | `version` is not the catalog's                          |
-| `invalid-input`                   | `invalid argument`          | Input failed validation; names the field, not the value |
-| `unknown-operation`               | `unknown command`           | No such operation                                       |
-| `bounded-observation-unsupported` | `unsupported operation`     | The provider cannot observe                             |
-| `content-denied`                  | `unsupported operation`     | The operator denied reading displayed content           |
-| `no-window`, `window-closed`      | `no such window`            | There is no window to read, or it closed                |
-| `target-non-response`             | `unknown error`             | The application did not answer in time; retry later     |
-| `ref-…`                           | see above                   | A reference did not resolve                             |
-| `cancelled`                       | `unknown error`             | The caller left, or the command was cancelled           |
-| `request-id-reused`               | `invalid argument`          | The `requestId` already named a different request       |
-| `action-unsupported`              | `unsupported operation`     | The provider cannot perform this action                 |
-| `sample-not-unique`               | `invalid argument`          | The sample proved nothing unique, or it was forgotten   |
-| `ref-not-proven`                  | `invalid argument`          | The sample proved a different reference unique          |
-| `no-match`                        | `no such element`           | `act`'s selector matched nothing                        |
-| `selector-not-unique`             | `invalid argument`          | `act`'s selector matched more than one element          |
-| `selector-inconclusive`           | `invalid argument`          | `act`'s search could not be completed                   |
-| `fingerprint-changed`             | `stale element reference`   | The element's role, name, or automation id changed      |
-| `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                      |
-| `action-not-published`            | `element not interactable`  | The element does not publish an action by that `name`   |
-| `action-not-unique`               | `element not interactable`  | The element publishes more than one action by `name`    |
-| `action-changed`                  | `element not interactable`  | The listed action changed before it was performed       |
-| `obscured`                        | `element click intercepted` | Something else is at the element's centre               |
-| `target-quarantined`              | `unknown error`             | An earlier change may still land; reads still work      |
-| `capture-unsupported`             | `unsupported operation`     | The provider cannot capture a window                    |
-| `element-capture-unsupported`     | `unsupported operation`     | The provider cannot capture one element                 |
-| `capture-too-large`               | `unsupported operation`     | The image is larger than 16 MiB                         |
-| `artifact-expired`                | `invalid argument`          | The capture was dropped to make room for newer ones     |
-| `artifact-unknown`                | `invalid argument`          | No capture in this session has that id                  |
-| `offset-out-of-range`             | `invalid argument`          | `artifact`'s offset is past the end of the image        |
-| `stories-unsupported`             | `unsupported operation`     | The target has no story orchestrator                    |
-| `story-unknown`                   | `invalid argument`          | The catalog has no story with that id                   |
-| `story-not-ready`                 | `timeout`, `unknown error`  | The story did not confirm it rendered; select it again  |
+| Reason                            | Error code                  | Meaning                                                                      |
+| --------------------------------- | --------------------------- | ---------------------------------------------------------------------------- |
+| `invalid-envelope`                | `invalid argument`          | Not a JSON object, or an unknown request field                               |
+| `invalid-request-id`              | `invalid argument`          | `requestId` is malformed                                                     |
+| `unsupported-version`             | `invalid argument`          | `version` is not the catalog's                                               |
+| `invalid-input`                   | `invalid argument`          | Input failed validation; names the field, not the value                      |
+| `unknown-operation`               | `unknown command`           | No such operation                                                            |
+| `bounded-observation-unsupported` | `unsupported operation`     | The provider cannot observe                                                  |
+| `content-denied`                  | `unsupported operation`     | The operator denied reading displayed content                                |
+| `no-window`, `window-closed`      | `no such window`            | There is no window to read, or it closed                                     |
+| `target-non-response`             | `unknown error`             | The application did not answer in time; retry later                          |
+| `ref-…`                           | see above                   | A reference did not resolve                                                  |
+| `cancelled`                       | `unknown error`             | The caller left, or the command was cancelled                                |
+| `request-id-reused`               | `invalid argument`          | The `requestId` already named a different request                            |
+| `action-unsupported`              | `unsupported operation`     | The provider cannot perform this action                                      |
+| `sample-not-unique`               | `invalid argument`          | The sample proved nothing unique, or it was forgotten                        |
+| `ref-not-proven`                  | `invalid argument`          | The sample proved a different reference unique                               |
+| `no-match`                        | `no such element`           | `act`'s selector matched nothing                                             |
+| `selector-not-unique`             | `invalid argument`          | `act`'s selector matched more than one element                               |
+| `selector-inconclusive`           | `invalid argument`          | `act`'s search could not be completed                                        |
+| `fingerprint-changed`             | `stale element reference`   | The element's role, name, or automation id changed                           |
+| `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                                           |
+| `action-not-published`            | `element not interactable`  | The element does not publish an action by that `name`                        |
+| `action-not-unique`               | `element not interactable`  | The element publishes more than one action by `name`                         |
+| `action-changed`                  | `element not interactable`  | The listed action changed before it was performed                            |
+| `obscured`                        | `element click intercepted` | Something else is at the element's centre                                    |
+| `target-quarantined`              | `unknown error`             | An earlier change may still land; reads still work                           |
+| `capture-unsupported`             | `unsupported operation`     | The provider cannot capture a window                                         |
+| `element-capture-unsupported`     | `unsupported operation`     | The provider cannot capture one element                                      |
+| `capture-too-large`               | `unsupported operation`     | The image is larger than 16 MiB                                              |
+| `artifact-expired`                | `invalid argument`          | The capture was dropped to make room for newer ones                          |
+| `artifact-unknown`                | `invalid argument`          | No capture in this session has that id                                       |
+| `offset-out-of-range`             | `invalid argument`          | `artifact`'s offset is past the end of the image                             |
+| `stories-unsupported`             | `unsupported operation`     | The target has no story orchestrator                                         |
+| `story-unknown`                   | `invalid argument`          | The catalog has no story with that id                                        |
+| `story-not-ready`                 | `timeout`, `unknown error`  | Rendering did not confirm; check mutation/quarantine state before continuing |
 
 A provider's own failure carries its `nativeCode` and, for a command that may
 have changed the application, the settled `mutation` disposition.

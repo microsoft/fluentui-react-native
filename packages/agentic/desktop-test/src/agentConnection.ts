@@ -25,7 +25,7 @@ export type DesktopAgentConnectionOptions = {
 /** The target fields a publication reads. Without a resolved helper, the native publisher resolves `nativeDriver`. */
 export type DesktopAgentTarget = Pick<ResolvedDesktopTarget, 'endpoint' | 'id'> & Partial<Pick<ResolvedDesktopTarget, 'nativeDriver'>>;
 
-/** What a service publishes for one agent. `grant` is a bearer secret and must never be logged. */
+/** @internal What a service publishes for one agent. `grant` is a bearer secret and must never be logged. */
 export type DesktopAgentConnection = {
   descriptor: string;
   grant: string;
@@ -35,12 +35,14 @@ export type DesktopAgentConnection = {
   url: string;
 };
 
+/** @internal Supervisor publication injection, not a stable lifecycle extension API. */
 export type PublishDesktopAgentConnection = (connection: DesktopAgentConnection, signal: AbortSignal) => Promise<() => Promise<unknown>>;
 
 /**
  * Publishes the connection through the platform's owner-only storage. The service identity is described by the
  * verified native helper, which is resolved without building, so the adapter's verifier can check the live listener
  * before it sends the grant.
+ * @internal Supervisor implementation, not a stable lifecycle extension API.
  */
 export function createNativeAgentPublisher(resolveArtifact?: () => Promise<NativeDriverArtifact>): PublishDesktopAgentConnection {
   return async (connection, signal) => {

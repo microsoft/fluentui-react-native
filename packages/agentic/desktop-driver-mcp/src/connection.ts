@@ -9,8 +9,16 @@ import {
 import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
 import type { DesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
 
-/** Returns a client for a running Desktop Driver service. Called again after the service goes away. */
-export type ConnectDesktopDriver = () => Promise<DesktopDriverClient>;
+export type DesktopDriverConnection = {
+  client: DesktopDriverClient;
+  /** The verified service incarnation. Never a URL or a credential. */
+  incarnation: string;
+  /** The non-secret grant id, not its bearer token or display label. */
+  principal: string;
+};
+
+/** Revalidates private discovery and returns the client and its verified authority, without launching anything. */
+export type ConnectDesktopDriver = () => Promise<DesktopDriverConnection>;
 
 export type DescriptorConnectionOptions = {
   /** The record name the supervisor published the connection descriptor under, such as `agent-connection.json`. */
@@ -37,6 +45,10 @@ export function connectWithDescriptor(options: DescriptorConnectionOptions): Con
         : await createWindowsPrivateStorage({ artifact, ...(options.root === undefined ? {} : { root: options.root }) });
     const verify = platform === 'macos' ? createMacOSServiceVerifier({ artifact }) : createWindowsServiceVerifier({ artifact });
     const descriptor = await readConnectionDescriptor(storage, options.descriptor, verify);
-    return createDesktopDriverClient({ grant: descriptor.grant, url: descriptor.url });
+    return {
+      client: createDesktopDriverClient({ grant: descriptor.grant, url: descriptor.url }),
+      incarnation: descriptor.service.incarnation,
+      principal: descriptor.grant.split('.')[1],
+    };
   };
 }

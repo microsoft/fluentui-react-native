@@ -11,8 +11,9 @@ Six tools group the driver's agent operations. Each operation's input schema,
 result, and failure reasons are defined once in `@fluentui-react-native/desktop-driver`
 (its agent operations reference); the tools reuse those schemas, so a field the
 service rejects is rejected here first, before anything reaches the service.
-Unknown fields are refused. The whole tool list is about 20.3 KB, and a test
-bounds it at 22 KB.
+Unknown fields are refused. The historical tool list measured about 20.3 KB;
+the test bounds serialized JavaScript **characters** at 22,000, not tokens or
+UTF-8 bytes. See [measurement history](current-status.md).
 
 | Tool              | Calls                                                               | Hints                       |
 | ----------------- | ------------------------------------------------------------------- | --------------------------- |
@@ -28,13 +29,16 @@ bounds it at 22 KB.
 `action` is `status` (the default), `open`, or `close`.
 
 - `status` lists the targets the grant allows, with their endpoint, platform,
-  renderer, and whether a target is quarantined, plus the open session.
+  renderer, effective `launchModes`, and whether a target is quarantined, plus
+  the open session. `sessionState: "uncertain"` reports an acquisition whose
+  response was lost.
 - `open` needs a `target`. It attaches to the running application unless
   `launch` is true, and accepts a `clickMode` of `accessibility`, `auto`, or
   `physical`. It returns the session id, the click mode in effect, and which
   operations the target supports, with the reason for any that are unavailable.
   One session is open at a time; opening a second fails with `session-open`.
-- `close` deletes the session. Closing the MCP connection does the same.
+- `close` confirms deletion before forgetting the known session. Closing the MCP
+  connection stops admissions and attempts bounded cleanup, including late opens.
 
 ## desktop_observe
 
@@ -52,7 +56,8 @@ Takes the `sequence` input: up to eight `act` and `check` steps that run in
 order and stop at the first that fails or does not pass, with an optional
 closing `observe`. Steps that ran stay done. Name a `requestId` (1 to 64
 letters, digits, or `. _ : -`) to make a retry safe: repeating it returns the
-first outcome instead of acting again.
+first outcome instead of acting again while that outcome is retained in the
+same session. This is not a retry guarantee across session/service replacement.
 
 ## desktop_check
 
@@ -83,6 +88,9 @@ for `desktop_act`.
 The tool is always listed. On a target without Storybook, both forms fail with
 `stories-unsupported`. When `list` reports `changed: true`, another client
 rendered a story since this session's, and earlier references have expired.
+Unknown or partial story effects quarantine mutations; do not retry with a new
+request id to bypass that fence. The tool does not expose args. Protected driver
+args updates are unsupported; alternate channel ingress is not yet fully governed.
 
 ## Results
 
@@ -106,7 +114,8 @@ A tool failure is an `isError` result with one JSON text block:
 | `mutation`  | For an action, whether it was applied, rejected, or indeterminate, and whether it quarantined the target. |
 
 The adapter's own reasons are `no-session`, `session-open`,
-`service-unavailable`, `cancelled`, and `internal`. A malformed call is
+`session-uncertain`, `connection-closed`, `service-unavailable`, `cancelled`,
+and `internal`. A malformed call is
 refused with the schema's validation message.
 
 A failed resource read is a JSON-RPC error: `-32602` with a `data.reason` of

@@ -97,7 +97,8 @@ async function main() {
   const selectStory = harness.storyOrchestrator.selectStory.bind(harness.storyOrchestrator);
   harness.storyOrchestrator.selectStory = async (request) => {
     if (request.storyId === 'fixture-button--navigation-failure') {
-      throw new Error('Navigation failed: preview did not mount');
+      // This fixture rejects before touching the preview; an uncertain real render must remain quarantined.
+      throw Object.assign(new Error('Navigation refused before dispatch'), { effect: 'none' });
     }
     selections.push(request.storyId);
     return selectStory(request);

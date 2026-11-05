@@ -85,8 +85,11 @@ desktop-driver-mcp [--descriptor <name>] [--root <path>]
 | `--descriptor <name>` | The record name the supervisor published under. Defaults to `agent-connection.json`.                                                  |
 | `--root <path>`       | The private storage root, when the supervisor published somewhere other than the platform default. It must be absolute and canonical. |
 
-The adapter speaks MCP over stdio until the client closes stdin, then deletes
-the session it opened. `--help` and `--version` write to stderr so stdout
+The adapter speaks MCP over stdio until the client closes stdin, then stops
+admissions and attempts to delete its session, including late acquisition.
+Cleanup waits at most ten seconds; an unresolved attempt continues while the
+process lives and reports to stderr. Service drain/expiry is still needed when
+the adapter cannot confirm deletion. `--help` and `--version` write to stderr so stdout
 carries only protocol.
 
 The adapter resolves the native helper with source builds disabled. The helper
@@ -102,14 +105,35 @@ service then confirms its incarnation.
 The adapter connects on the first tool call, not at startup, so it can start
 before the service. When the service cannot be reached, a tool returns the
 fixed reason `service-unavailable`; the cause, which may name local paths, goes
-to stderr. When a connected service stops answering, the adapter forgets the
-client and the session, and the next call reads the descriptor again. A
-restarted service has a new incarnation and new grants, so the agent opens a
-new session and observes again.
+to stderr. Transport failure invalidates the cached connection, **not** known
+session cleanup responsibility. The next call re-verifies discovery. The same
+verified service incarnation and non-secret grant principal can rebind the
+known session. A replacement service or an authoritative invalid/revoked
+session invalidates old references; open a new session and observe again.
+Nothing automatically replays the failed operation.
+
+Operations, acquisition, close, and complete resource reads are serialized per
+MCP connection. Disposal stops admission immediately and cleans up a session
+whose acquisition completes late. A failed DELETE retains responsibility until
+confirmed deletion or authoritative invalidation. A lost create response has
+no safely known session id: `session-uncertain` fences further acquisition and
+mutation. Revoke the old grant (and drain it) or replace the service through the
+trusted supervisor; do not guess an id or acquire again under the same authority.
+
+A new principal on the same live service does not prove that the old session
+ended. The adapter first attempts cleanup with the old authority, or verifies
+its revocation. Current descriptors share one supervisor-issued agent grant,
+not isolated per-MCP-connection grants. Grant labels are not principals.
+There is no resume across different MCP connections and no crash-safe native
+recovery promise; see [current status](current-status.md).
 
 ## Embedding
 
 `createDesktopDriverMcpServer({ connect, version })` returns an SDK `McpServer`
-for any transport. `connect` returns a `DesktopDriverClient`; production callers
-pass `connectWithDescriptor({ descriptor, root })`. Closing the server deletes
-the session it opened.
+for any transport. `connect` returns `DesktopDriverConnection`:
+`{ client: DesktopDriverClient, incarnation: string, principal: string }`.
+The incarnation is the verified service identity, not its URL/port; the principal
+is the non-secret grant ID, never its label or bearer token. This is a
+work-in-progress embedding API. Production callers pass
+`connectWithDescriptor({ descriptor, root })`, which supplies these values after
+verification. Closing the server begins bounded cleanup as described above.

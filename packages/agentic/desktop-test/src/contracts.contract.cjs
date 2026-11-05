@@ -841,6 +841,27 @@ async function main() {
       assert.equal(failing.agentDescriptor, undefined);
       assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')), 'a failed publication must release the claim');
 
+      const failedCleanupLocks = path.join(root, 'failed-cleanup-locks');
+      const failedCleanup = new DesktopSupervisor({
+        target,
+        reporter: reporter({ kind: 'lifecycle' }),
+        lockDirectory: failedCleanupLocks,
+        hostFactory: async () => {
+          const host = new FakeDesktopHost({ endpoint: 'win32' });
+          const dispose = host.dispose.bind(host);
+          host.dispose = async (...args) => {
+            await dispose(...args);
+            throw new Error('injected cleanup uncertainty');
+          };
+          return host;
+        },
+      });
+      await failedCleanup.start();
+      await assert.rejects(failedCleanup.close(), /cleanup failed/);
+      assert(fs.existsSync(path.join(failedCleanupLocks, 'interactive.lock')), 'uncertain cleanup must retain the workload claim');
+      const { claimDesktopWorkload } = await import(lib('supervisor.js'));
+      assert.throws(() => claimDesktopWorkload('replacement', failedCleanupLocks), /Another desktop workload/);
+
       // The Storybook channel child's composition: one service, protected and published from the process that listens.
       const { startDesktopService } = await import(lib('supervisor.js'));
       const { publishDesktopAgent } = await import(lib('agentConnection.js'));

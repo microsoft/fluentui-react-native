@@ -68,6 +68,11 @@ in its command queue authenticates again immediately before dispatch.
   dispatch, and teardown waits behind the settled command. A draining session
   accepts only `DELETE`. A session that fails to close stays tracked, and
   shutdown retries it.
+- `authority.revoke()` schedules that drain; its synchronous return is not an
+  awaited cleanup barrier. Ordinary HTTP `DELETE` is queued behind current
+  work before drain begins. Neither revocation notification nor a ten-minute
+  idle setting proves that native work has settled; handoff must await deletion
+  or a future explicit drain barrier.
 - A grant's session that receives no request for `idleSessionTimeoutMs`
   (ten minutes by default; 0 disables) closes as `DELETE` would: input is
   released, a launched application is closed, and an attached application is
@@ -253,6 +258,9 @@ window” fallback cleanup.
 A quarantine outlives the service only when the supervisor passes
 `recovery.storage`, owner-validated private storage dedicated to that one
 service configuration. Without it, a restart forgets every quarantine.
+Neither shipped desktop-test nor Storybook supervisor currently supplies this
+configuration; durable recovery is a library capability, not a shipped lifecycle
+guarantee. See [current status](current-status.md).
 
 - Each mutation is recorded before dispatch, and a mutation that cannot be
   recorded is refused without being sent. A quarantine is recorded before the
@@ -290,12 +298,19 @@ service configuration. Without it, a restart forgets every quarantine.
 The `story` operation renders only an id from the build's story catalog and
 takes no args, so a grant cannot load code through it. A render that does not
 confirm is reported as indeterminate in fixed words, because a story's render
-error may quote its own text. It does not quarantine the target: the preview
-region changes before the render, so no reference crosses stories, and the next
-render replaces the whole preview. Storybook's own MCP server and runtime
+error may quote its own text. Unknown or partial effects quarantine the target,
+with fixed failure text in settlement records: preview invalidation alone cannot
+prevent a delayed render. A protected service refuses the separate
+`POST furn/story/args` route with `story-args-unsupported`, even for the session
+owner, until args participate in governed settlement. The legacy unprotected
+route is unchanged. Storybook's channel and runtime
 prepare messages can still change the story outside the controller; `stories`
 detects a different story, or another render of the same one, from the story
 root's marker but cannot say who changed it.
+Agent mode disables the channel's own MCP endpoint, not every alternate
+HTTP/WebSocket mutation ingress. Full exclusive context authority and runtime
+reconnection remain work in progress; protected driver routes alone do not
+establish that guarantee.
 
 ## Native protocol
 

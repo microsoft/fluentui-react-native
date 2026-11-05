@@ -26,7 +26,7 @@ export const sampleSchema = z.strictObject({
   capturedAt: z.string().describe('ISO time the provider answered.'),
   elapsedMs: z.number().describe('Provider time spent walking the tree.'),
   epoch: z.strictObject({
-    incarnation: z.number().describe('Changes when the application restarts; earlier references stop resolving.'),
+    incarnation: z.number().describe('Session-local reference generation. An application restart requires a new session.'),
     region: z.number().describe('Changes when the replaceable preview region is swapped; references into it expire.'),
   }),
   id: z.string().describe('Names this sample. Later operations that act on what it showed cite it.'),

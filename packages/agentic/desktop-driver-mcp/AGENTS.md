@@ -23,9 +23,10 @@ only maps them onto MCP.
   installed native helper before the grant is sent. Never launch or build the
   service or a helper, and never accept a URL or grant from a command line,
   environment variable, or the model.
-- Hold at most one session per MCP connection, and delete it when the
-  connection closes. A lost service forgets the client and the session, so
-  references never cross into a new service incarnation.
+- Serialize acquisition, use, close, and disposal per MCP connection. Retain
+  cleanup responsibility after transport loss; reverify discovery and never
+  replay a failed mutation. A verified replacement invalidates old references.
+  Fence a lost acquisition response; disposal also cleans up late acquisitions.
 - Tie every artifact link to its session. Artifact ids restart in each session.
 - Progress ticks come from the adapter and never reach the service, so a waiting
   model does not keep an idle session alive. Cancellation aborts the HTTP call,
