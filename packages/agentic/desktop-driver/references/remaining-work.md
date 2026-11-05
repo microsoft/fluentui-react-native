@@ -601,8 +601,10 @@ operation; the macOS provider must show the same for its permissions.
 
 ## 8. Dependency-ordered work on this branch
 
-All milestones remain open. No separate tracking issue was created by this
-planning task. Existing release/qualification work under #4345 remains
+All milestones remain open. Follow-up lifecycle, orchestration, and
+qualification work is tracked in
+[desktop driver improvements (#4435)](https://github.com/microsoft/fluentui-react-native/issues/4435)
+and its sub-issues. Existing release/qualification work under #4345 remains
 applicable; this plan does not imply that broader release gates are closed.
 
 ### M0. Freeze contracts and approve the changed trust boundary

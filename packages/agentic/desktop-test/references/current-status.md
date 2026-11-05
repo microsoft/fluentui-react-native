@@ -11,7 +11,9 @@ owner_paths:
 not full cross-platform qualification. This package is the intended neutral
 workload host; the existing Storybook lifecycle takeover is transitional.
 No new coordinator package, daemon, dynamic plugin loader, or package rename
-is required now.
+is required now. Follow-up work is tracked in
+[desktop driver improvements (#4435)](https://github.com/microsoft/fluentui-react-native/issues/4435)
+and its sub-issues.
 
 ## Capability matrix
 
@@ -68,6 +70,18 @@ did not retain a portable raw-report locator; do not imply otherwise.
 | Recovery        | Both service paths wire durable uncertainty before claiming crash-safe restart; ledger and exact-resource reconciliation precede automatic reclaim.             |
 | Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                           |
 | Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                         |
+
+Tracking: live macOS, Windows, and Win32 requalification
+[#4441](https://github.com/microsoft/fluentui-react-native/issues/4441);
+recovery [#4436](https://github.com/microsoft/fluentui-react-native/issues/4436)
+and [#4442](https://github.com/microsoft/fluentui-react-native/issues/4442);
+Storybook [#4437](https://github.com/microsoft/fluentui-react-native/issues/4437),
+[#4443](https://github.com/microsoft/fluentui-react-native/issues/4443), and
+[#4445](https://github.com/microsoft/fluentui-react-native/issues/4445);
+application ownership [#4446](https://github.com/microsoft/fluentui-react-native/issues/4446)
+(macOS) and [#4447](https://github.com/microsoft/fluentui-react-native/issues/4447)
+(Windows); reliability window
+[#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
 
 For new evidence, append the date, exact commit, app/OS/renderer, command,
 selection, passed/failed/skipped counts, cleanup outcome, and approved artifact

@@ -12,7 +12,10 @@ implementation exists, not that every native endpoint is qualified or that the
 complete orchestration product is ready for submission. Historical measurements
 remain tied to their original revision; they were not rerun by this update.
 See [architecture](architecture.md) for boundaries and
-[remaining work](remaining-work.md) for open delivery gates.
+[remaining work](remaining-work.md) for open delivery gates. Follow-up
+lifecycle, orchestration, and qualification work is tracked in
+[desktop driver improvements (#4435)](https://github.com/microsoft/fluentui-react-native/issues/4435)
+and its sub-issues, which record dependencies and parallel waves.
 
 ## Capabilities
 
@@ -55,6 +58,10 @@ Hosted Windows policy disables physical input and can reject capture with
 `0x80070057`. Capability-gated skips must stay explicit. `activate` succeeding
 does not qualify a refused physical click. Each new lifecycle/native change
 needs its own endpoint evidence; a final aggregate matrix is not a substitute.
+Live requalification of these lanes is tracked in
+[#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), and
+the repeated-run support matrix in
+[#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
 
 ## Measurement ledger
 

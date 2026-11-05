@@ -11,6 +11,11 @@ owner_paths:
 supervisor. Keep this package name until actual harness-owned management tools
 land; a later `desktop-mcp` facade must retain driver-only use and plan published
 compatibility. Done below describes implementation, not full native qualification.
+Follow-up work is tracked in
+[desktop driver improvements (#4435)](https://github.com/microsoft/fluentui-react-native/issues/4435);
+connection isolation is [#4440](https://github.com/microsoft/fluentui-react-native/issues/4440)
+and the generalized management facet is
+[#4450](https://github.com/microsoft/fluentui-react-native/issues/4450).
 
 ## Capability matrix
 
@@ -76,4 +81,5 @@ ambiguous create, and resource invalidation through the real descriptor path on
 macOS and Windows. Qualify Windows Fabric and Win32 Paper independently, with
 physical Ctrl+C and interactive input/capture cases where supported. Current
 fake-host tests validate portable controller semantics, not native ownership,
-signing, TCC, Windows ACLs, DPI, or process containment.
+signing, TCC, Windows ACLs, DPI, or process containment. This requalification is
+tracked in [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
