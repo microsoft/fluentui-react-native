@@ -20,6 +20,7 @@ constexpr std::size_t kMaximumAncestorWalk = 64;
 // bounded step that reports an explicit failure instead of wedging the helper;
 // a mutation that cannot settle also quarantines later mutations (settlement.h).
 constexpr DWORD kProviderCallTimeoutMs = 5000;
+constexpr char kTreeTooLargeMessage[] = "The native accessibility tree exceeds the 5000-node limit.";
 
 struct ActionMapping {
   const char* name;
@@ -761,6 +762,13 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   winrt::com_ptr<IUIAutomationElement> cachedRoot;
   HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
                                            cachedRoot.put());
+  // The whole-subtree cache is one provider transaction, so a tree past the node limit can outlast the transaction
+  // timeout before the walk below gets to refuse it. Count such a tree child by child so it is still refused as too
+  // large rather than reported as a provider failure or retried.
+  if (FAILED(result) && result != UIA_E_ELEMENTNOTAVAILABLE &&
+      SubtreeExceeds(root, kMaximumTreeNodes, controlViewOnly, token)) {
+    Fail(kErrorTreeTooLarge, kTreeTooLargeMessage);
+  }
   // A descendant can disappear while its subtree is cached, for example when an owned popup island closes; a closing
   // island's provider can also report a timeout or unspecified failure. Retry while the root itself remains
   // available; only an unavailable root is a stale element.
@@ -792,7 +800,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   std::size_t visited = 0;
   while (!stack.empty()) {
     if (visited >= kMaximumTreeNodes) {
-      Fail(kErrorTreeTooLarge, "The native accessibility tree exceeds the 5000-node limit.");
+      Fail(kErrorTreeTooLarge, kTreeTooLargeMessage);
     }
     if ((visited % 64) == 0) {
       token.ThrowIfCancelled();
@@ -835,6 +843,41 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
     snapshots.push_back(std::move(snapshot));
   }
   return snapshots;
+}
+
+bool Automation::SubtreeExceeds(IUIAutomationElement* root, std::size_t limit, bool controlViewOnly,
+                                const CancellationToken& token) const {
+  // Uses the walker that matches the cache request's tree filter, so it counts the nodes the cached walk would visit.
+  IUIAutomationTreeWalker* walker = controlViewOnly ? controlWalker_.get() : rawWalker_.get();
+  std::vector<winrt::com_ptr<IUIAutomationElement>> parents;
+  winrt::com_ptr<IUIAutomationElement> first;
+  first.copy_from(root);
+  parents.push_back(std::move(first));
+  std::size_t counted = 1;
+  while (!parents.empty()) {
+    const winrt::com_ptr<IUIAutomationElement> parent = std::move(parents.back());
+    parents.pop_back();
+    token.ThrowIfCancelled();
+    winrt::com_ptr<IUIAutomationElement> child;
+    if (FAILED(walker->GetFirstChildElement(parent.get(), child.put()))) {
+      return false;
+    }
+    while (child) {
+      // Counting each child as it is found bounds the provider calls by the limit, even for one very wide level.
+      counted += 1;
+      if (counted > limit) {
+        return true;
+      }
+      token.ThrowIfCancelled();
+      winrt::com_ptr<IUIAutomationElement> next;
+      if (FAILED(walker->GetNextSiblingElement(child.get(), next.put()))) {
+        return false;
+      }
+      parents.push_back(std::move(child));
+      child = std::move(next);
+    }
+  }
+  return false;
 }
 
 std::vector<ElementSnapshot> Automation::SnapshotWindowTree(const WindowContext& context,

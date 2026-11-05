@@ -127,6 +127,10 @@ class Automation {
   std::vector<ElementSnapshot> WalkCachedSubtree(IUIAutomationElement* root, const WindowContext& context,
                                                  ElementScope rootScope, const std::string& rootParentId,
                                                  const CancellationToken& token, bool controlViewOnly);
+  // Whether the subtree beneath root, including root, has more than limit nodes. Reads one child at a time and stops
+  // after limit + 1 nodes; false also means the count could not be completed.
+  bool SubtreeExceeds(IUIAutomationElement* root, std::size_t limit, bool controlViewOnly,
+                      const CancellationToken& token) const;
   ElementSnapshot ReadSnapshot(IUIAutomationElement* element, const std::string& windowId, const std::string& parentId,
                                ElementScope scope, const std::string& knownId);
   std::string RegisterElement(IUIAutomationElement* element, const std::wstring& runtimeKey,

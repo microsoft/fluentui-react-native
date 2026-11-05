@@ -307,6 +307,11 @@ that. `find` walks the same bounded subtree, so a window with more than 5,000
 nodes cannot be searched from its root; a scoped search walks only the scope's
 subtree. On the Win32 fixture a read costs about 0.4 ms per node: 4,900 nodes
 take 1.9 to 2.2 seconds, and a 10,000-item tree fails after 3.8 to 4.3 seconds.
+The walk first caches the whole subtree in one UI Automation transaction, which
+a tree past the limit can outlast on a slower machine. When that cache fails,
+the helper counts the subtree one child at a time, stopping after 5,001 nodes,
+so an oversized tree still fails with `tree-too-large`; a tree within the limit
+keeps the retry and `automation-failed` behavior above.
 `tree` and `find` are not incremental; use `observe` for a budgeted, partial
 read of a large tree.
 
