@@ -162,6 +162,9 @@ export function readControlContractFrom(read: (file: string) => string, definiti
   if (new Set(requirements.map(({ id }) => id)).size !== requirements.length || summaries.size !== requirements.length) {
     throw new Error('Component SPEC and metadata must contain the same unique requirement IDs.');
   }
+  const mappedIds = Object.keys(definition.contract.requirements);
+  if (mappedIds.length !== requirements.length || requirements.some(({ id }) => !mappedIds.includes(id)))
+    throw new Error('Assessment matrix must include every SPEC requirement exactly once, with uncovered checks retained.');
   return {
     definition,
     digest,
@@ -520,6 +523,36 @@ export function assessControl(options: AssessmentOptions) {
         }
       : null;
     const unitChecks = unitEvidence.checks.filter(({ requirements }) => requirements.includes(requirement.id));
+    const checks = (mapping?.checks ?? []).map((specific) => {
+      const tests = specific.tests.map((test) => {
+        if (test.kind === 'native')
+          return {
+            ...test,
+            recordedOutcome: observed?.status ?? 'not-run',
+            evidenceOutcome: outcome,
+            reason: observed?.reason ?? null,
+          };
+        const result = unitEvidence.checks.find(({ fullName }) => fullName === test.fullName)!;
+        return {
+          ...test,
+          recordedOutcome: result.recordedOutcome,
+          evidenceOutcome: result.evidenceOutcome,
+          reason: result.reason,
+        };
+      });
+      const outcomes = tests.map(({ evidenceOutcome }) => evidenceOutcome);
+      return {
+        ...specific,
+        tests,
+        outcome: !tests.length
+          ? 'uncovered'
+          : outcomes.includes('failed')
+            ? 'failed'
+            : outcomes.every((value) => value === 'passed')
+              ? 'passed'
+              : outcomes.find((value) => value !== 'passed')!,
+      };
+    });
     const failed = outcome === 'failed' || unitChecks.some(({ evidenceOutcome }) => evidenceOutcome === 'failed');
     const partial = outcome === 'passed' || unitChecks.some(({ evidenceOutcome }) => evidenceOutcome === 'passed');
     return {
@@ -527,6 +560,7 @@ export function assessControl(options: AssessmentOptions) {
       outcome: failed ? 'blocked-by-failure' : partial ? 'partial' : 'insufficient-evidence',
       check,
       unitChecks,
+      checks,
       remainingCoverage: mapping?.remaining ?? 'No reviewed executable mapping exists for this requirement.',
     };
   });
@@ -593,7 +627,7 @@ export function assessControl(options: AssessmentOptions) {
       'Evidence requirements follow the claim: unit/type checks can suffice for logic/API/style requirements; native tests are not mandatory duplicates for every requirement.',
       'Type/build/visual/manual result adapters are not implemented. A Jest pass of a types test would not prove type checking.',
       'Maturity gates and release approvals are not defined by this pilot. No lifecycle status is inferred or changed.',
-      'A multi-assertion native case failure blocks its mapped evidence; it does not identify which individual requirement assertion failed.',
+      'A multi-assertion test failure blocks every check linked to that test; it does not identify which individual assertion failed.',
       ...(!mappingCurrent
         ? ['Contract or story inputs changed since mapping review; review the mapping before accepting its evidence.']
         : []),
@@ -642,6 +676,19 @@ export function formatAssessmentMarkdown(report: ControlAssessment): string {
     ...report.requirements.map(
       (entry) =>
         `| ${markdown(entry.id)} | ${entry.outcome} | ${entry.check ? `${entry.check.recordedOutcome} (partial mapping; ${entry.check.evidenceOutcome})` : 'No executable mapping'} | ${entry.unitChecks.filter(({ evidenceOutcome }) => evidenceOutcome === 'passed').length} / ${entry.unitChecks.length} mapped | ${markdown(entry.remainingCoverage)} |`,
+    ),
+    '',
+    '## Test matrix',
+    '',
+    'Each row is a contract-derived acceptance check. All linked tests must qualify to pass a row; uncovered rows remain visible. Passing rows do not establish complete requirement coverage or a maturity stage.',
+    '',
+    '| SPEC requirement | Specific check | Contract source | Required evidence | Test(s) | Check outcome |',
+    '| --- | --- | --- | --- | --- | --- |',
+    ...report.requirements.flatMap((requirement) =>
+      requirement.checks.map(
+        (check) =>
+          `| ${markdown(requirement.id)} | ${markdown(check.id)}: ${markdown(check.description)} | ${markdown(check.source)} | ${check.evidence} | ${check.tests.map((test) => `${markdown(test.kind === 'unit' ? test.fullName : `${test.storyId} / ${test.testName}`)} (recorded: ${test.recordedOutcome}; evidence: ${test.evidenceOutcome})`).join('; ') || 'No reviewed test mapping'} | ${check.outcome} |`,
+      ),
     ),
     '',
     '## Execution evidence',

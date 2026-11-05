@@ -11,6 +11,7 @@ import {
   ensureCommit,
   formatCiSummary,
   formatCiSpec,
+  formatCiMapping,
   git,
   gitFile,
   inputDigest,
@@ -125,6 +126,7 @@ export type Candidate =
       reference: ReportReference;
       summary: string;
       spec: string;
+      mapping: string;
       sourceResult: 'success' | 'failure';
     };
 
@@ -179,6 +181,8 @@ export async function inspectReportUpdate(
   }
   const spec = gitFile(root, hex(head.sha, 40, 'PR head revision'), assessmentSpecPath);
   if (spec === undefined) throw new Error('Report-only update is missing its SPEC assessment snapshot.');
+  const mapping = gitFile(root, hex(head.sha, 40, 'PR head revision'), definition.mappingPath);
+  if (mapping === undefined) throw new Error('Report-only update is missing its reviewed mapping.');
   return {
     reportOnly: true,
     component: definition.component,
@@ -186,6 +190,7 @@ export async function inspectReportUpdate(
     reference,
     summary,
     spec,
+    mapping,
     sourceResult: await github.sourceValidation(reference),
   };
 }
@@ -203,6 +208,8 @@ export function verifyReportUpdate(root: string, candidate: Candidate, bundle: C
   }
   if (formatCiSpec(root, bundle) !== candidate.spec)
     throw new Error('Checked-in SPEC is not the trusted rendering of its source evidence.');
+  if (formatCiMapping(root, bundle) !== candidate.mapping)
+    throw new Error('Checked-in mapping is not the exact reviewed mapping from the tested source.');
 }
 
 export async function inspectReportUpdates(
@@ -264,8 +271,10 @@ export type Publication =
       expectedHead: string;
       summary: string;
       spec: string;
+      mapping: string;
       summaryPath: string;
       specPath: string;
+      mappingPath: string;
       sourceRunId: string;
     };
 
@@ -308,11 +317,14 @@ export async function preparePublication(
   }
   const summary = formatCiSummary(root, bundle);
   const spec = formatCiSpec(root, bundle);
+  const mapping = formatCiMapping(root, bundle);
   if (Buffer.byteLength(summary) > 100_000) throw new Error('Generated assessment summary exceeds its publication limit.');
   if (Buffer.byteLength(spec) > 100_000) throw new Error('Generated SPEC exceeds its publication limit.');
+  if (Buffer.byteLength(mapping) > 200_000) throw new Error('Reviewed mapping exceeds its publication limit.');
   if (
     gitFile(root, identity.headCommit, assessmentSummaryPath) === summary &&
-    gitFile(root, identity.headCommit, assessmentSpecPath) === spec
+    gitFile(root, identity.headCommit, assessmentSpecPath) === spec &&
+    gitFile(root, identity.headCommit, definition.mappingPath) === mapping
   ) {
     return { eligible: false, reason: 'The exact assessment is already present; no duplicate commit was made.' };
   }
@@ -323,8 +335,10 @@ export async function preparePublication(
     expectedHead: identity.headCommit,
     summary,
     spec,
+    mapping,
     summaryPath: assessmentSummaryPath,
     specPath: assessmentSpecPath,
+    mappingPath: definition.mappingPath,
     sourceRunId: identity.runId,
   };
 }
@@ -366,6 +380,7 @@ export async function publishAssessments(publications: Publication[], github: As
     additions.push(
       { path: publication.summaryPath, contents: Buffer.from(publication.summary).toString('base64') },
       { path: publication.specPath, contents: Buffer.from(publication.spec).toString('base64') },
+      { path: publication.mappingPath, contents: Buffer.from(publication.mapping).toString('base64') },
     );
   }
   if (new Set(additions.map((addition) => addition.path)).size !== additions.length)
@@ -401,7 +416,11 @@ export function readBundle(file: string): CiBundle {
 }
 
 export function readBundles(root: string, directory: string): CiBundle[] {
-  return discoverAssessments(root).map((definition) =>
-    readBundle(path.join(directory, definition.packagePath, definition.component, 'bundle.json')),
-  );
+  return discoverAssessments(root).map((definition) => {
+    const componentDirectory = path.join(directory, definition.packagePath, definition.component);
+    const bundle = readBundle(path.join(componentDirectory, 'bundle.json'));
+    if (readFileSync(path.join(componentDirectory, 'assessment.mapping.json'), 'utf8') !== formatCiMapping(root, bundle))
+      throw new Error('Artifact mapping differs from the exact reviewed mapping in the tested source.');
+    return bundle;
+  });
 }

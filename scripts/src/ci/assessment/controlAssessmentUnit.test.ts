@@ -68,13 +68,13 @@ afterEach(() => {
 });
 
 describe('Checkbox JavaScript unit evidence', () => {
-  it('rejects unsafe paths, unknown requirements and unfingerprinted or type-only runtime selections', () => {
+  it('rejects unsafe paths, unlisted contract sources and unfingerprinted or type-only runtime selections', () => {
     for (const mutate of [
       (value: typeof assessmentDefinition) => {
         value.componentPath = '../outside';
       },
       (value: typeof assessmentDefinition) => {
-        value.unit.cases[0].requirements = ['UNKNOWN-001'];
+        value.contract.requirements['CBX-001'].checks[0].source = 'unlisted.md';
       },
       (value: typeof assessmentDefinition) => {
         value.unit.testFiles = ['src/unreviewed.test.tsx'];
@@ -83,7 +83,7 @@ describe('Checkbox JavaScript unit evidence', () => {
         value.unit.testFiles = ['src/checkbox.types.test.ts'];
       },
     ]) {
-      const value = structuredClone(assessmentDefinition);
+      const value = JSON.parse(read(assessmentMappingPath));
       mutate(value);
       assert.throws(() =>
         parseAssessmentDefinition(
@@ -91,6 +91,92 @@ describe('Checkbox JavaScript unit evidence', () => {
           assessmentDefinition.packagePath,
           assessmentDefinition.packageName,
           `${assessmentDefinition.componentPath}/assessment.mapping.json`,
+        ),
+      );
+    }
+  });
+
+  it('requires the checklist to retain every SPEC requirement, including uncovered ones', () => {
+    for (const change of ['missing', 'extra'] as const) {
+      const definition = structuredClone(assessmentDefinition);
+      if (change === 'missing') delete definition.contract.requirements['CBX-006'];
+      else definition.contract.requirements['CBX-007'] = definition.contract.requirements['CBX-006'];
+      assert.throws(() => readControlContract(root, definition), /every SPEC requirement/);
+    }
+  });
+
+  it('retains the complete requirement/check set when no tests have been mapped', () => {
+    const raw = JSON.parse(read(assessmentMappingPath), (key, value) => (key === 'tests' ? [] : value));
+    const definition = parseAssessmentDefinition(
+      raw,
+      assessmentDefinition.packagePath,
+      assessmentDefinition.packageName,
+      `${assessmentDefinition.componentPath}/assessment.mapping.json`,
+    );
+    const report = assessControl({ ...options(), contract: { ...contract, definition } });
+    assert.deepEqual(
+      report.requirements.map(({ id, checks }) => ({ id, checks: checks.map(({ id }) => id) })),
+      Object.entries(assessmentDefinition.contract.requirements).map(([id, { checks }]) => ({ id, checks: checks.map(({ id }) => id) })),
+    );
+    assert.ok(
+      report.requirements.every(
+        ({ checks, outcome }) => checks.every(({ outcome }) => outcome === 'uncovered') && outcome === 'insufficient-evidence',
+      ),
+    );
+  });
+
+  it('shows precise shared checks and uncovered checks without turning partial coverage into requirement completion', () => {
+    const report = assessControl(options());
+    const find = (requirement: string, id: string) =>
+      report.requirements.find(({ id }) => id === requirement)!.checks.find((c) => c.id === id)!;
+    assert.equal(find('CBX-001', 'default-unchecked').outcome, 'passed');
+    assert.deepEqual(find('CBX-001', 'default-unchecked'), find('CBX-004', 'default-unchecked'));
+    assert.equal(find('CBX-001', 'default-standard-variant').outcome, 'uncovered');
+    assert.equal(find('CBX-001', 'reject-children').outcome, 'uncovered');
+    assert.equal(find('CBX-004', 'native-checkbox-role').outcome, 'not-run');
+    assert.equal(find('CBX-004', 'native-toggle-dispatch').outcome, 'uncovered');
+    assert.ok(report.requirements.every(({ outcome }) => outcome !== 'passed'));
+    assert.match(formatAssessmentMarkdown(report), /SPEC requirement \| Specific check/);
+    assert.match(formatAssessmentMarkdown(report), /No reviewed test mapping/);
+  });
+
+  it('requires every linked test to qualify and does not qualify a multi-test check from one passing case', () => {
+    const data = checkboxJestFixture();
+    const test = data.testResults[0].assertionResults.find(({ fullName }) => fullName.includes('falls back to the label text'))!;
+    test.status = 'pending';
+    data.numPassedTests--;
+    data.numPendingTests++;
+    const report = assessControl(options(data));
+    const check = report.requirements.find(({ id }) => id === 'CBX-003')!.checks.find(({ id }) => id === 'hidden-label')!;
+    assert.equal(check.tests.length, 2);
+    assert.deepEqual(
+      check.tests.map(({ evidenceOutcome }) => evidenceOutcome),
+      ['passed', 'skipped'],
+    );
+    assert.equal(check.outcome, 'skipped');
+  });
+
+  it('rejects conflicting shared IDs, duplicate links, and JS evidence attached to a native claim', () => {
+    for (const mutate of [
+      (value: typeof assessmentDefinition) => {
+        value.contract.requirements['CBX-004'].checks.find(({ id }) => id === 'default-unchecked')!.description = 'Conflicting definition';
+      },
+      (value: typeof assessmentDefinition) => {
+        const check = value.contract.requirements['CBX-001'].checks[0];
+        check.tests.push(check.tests[0]);
+      },
+      (value: typeof assessmentDefinition) => {
+        value.contract.requirements['CBX-001'].checks[0].evidence = 'native';
+      },
+    ]) {
+      const value = JSON.parse(read(assessmentMappingPath));
+      mutate(value);
+      assert.throws(() =>
+        parseAssessmentDefinition(
+          value,
+          assessmentDefinition.packagePath,
+          assessmentDefinition.packageName,
+          `${value.componentPath}/assessment.mapping.json`,
         ),
       );
     }
@@ -206,7 +292,7 @@ describe('Checkbox JavaScript unit evidence', () => {
     const changed = (file: string) => {
       if (file !== assessmentMappingPath) return read(file);
       const value = JSON.parse(read(file));
-      value.unit.cases[0].scope = 'Changed claim that has not been reviewed.';
+      value.contract.requirements['CBX-001'].checks[2].description = 'Changed claim that has not been reviewed.';
       return JSON.stringify(value);
     };
     assert.equal(readUnitMappingFrom(changed).current, false);
@@ -620,7 +706,18 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
     );
     second.unit.testFiles = ['src/components/synthetic-toggle/toggle.test.tsx'];
     second.unit.inputs[0] = `${assessmentDefinition.packagePath}/${second.unit.testFiles[0]}`;
-    second.unit.cases = [{ fullName: 'Synthetic Toggle changes state', requirements: ['TGL-002'], scope: 'Synthetic JS state assertion.' }];
+    for (const requirement of Object.values(second.contract.requirements) as { checks: { tests: unknown[] }[] }[])
+      for (const check of requirement.checks) check.tests = [];
+    second.contract.requirements['TGL-002'].checks = [
+      {
+        id: 'synthetic-state',
+        description: 'Synthetic JS state assertion.',
+        source: 'SPEC.md#requirements',
+        evidence: 'unit',
+        tests: [{ kind: 'unit', fullName: 'Synthetic Toggle changes state' }],
+      },
+    ];
+    second.unit.excludedCases = [];
     const secondMapping = `${assessmentDefinition.packagePath}/${second.componentPath}/assessment.mapping.json`;
     for (const file of second.contract.files) {
       let content = read(`${assessmentDefinition.packagePath}/${assessmentDefinition.componentPath}/${file}`).replaceAll('CBX-', 'TGL-');

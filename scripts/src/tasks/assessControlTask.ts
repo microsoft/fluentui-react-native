@@ -158,6 +158,8 @@ export class AssessControlCommand extends Command {
     const content = input === undefined ? undefined : readNativeEvidence(input);
     const specPath = path.join(root, assessmentSpecPath);
     const originalSpec = readFileSync(specPath, 'utf8');
+    const sourceMappingPath = path.join(root, definition.mappingPath);
+    const originalMapping = readFileSync(sourceMappingPath, 'utf8');
     const report = assessControl({
       contract: readControlContract(root, definition),
       sourceCommit,
@@ -187,16 +189,18 @@ export class AssessControlCommand extends Command {
     const directory = multiple ? path.join(baseDirectory, definition.packagePath, definition.component) : baseDirectory;
     const jsonPath = path.join(directory, 'assessment.json');
     const markdownPath = path.join(directory, 'assessment.md');
+    const mappingPath = path.join(directory, 'assessment.mapping.json');
     const localSummary = path.join(path.dirname(specPath), 'assessment', 'ASSESSMENT.md');
-    const outputs = this.updateSpec ? [jsonPath, markdownPath, specPath, localSummary] : [jsonPath, markdownPath];
+    const outputs = this.updateSpec ? [jsonPath, markdownPath, mappingPath, specPath, localSummary] : [jsonPath, markdownPath, mappingPath];
     for (const output of outputs) {
       if ([input, contextFile, unitInput, unitContextFile].some((file) => file !== undefined && sameFile(file, output))) {
         throw new Error('Assessment output must not overwrite an input report or context.');
       }
     }
     if (sameFile(jsonPath, markdownPath)) throw new Error('Assessment JSON and Markdown must be separate files.');
-    for (const output of [jsonPath, markdownPath, ...(this.updateSpec ? [localSummary] : [])]) {
+    for (const output of [jsonPath, markdownPath, mappingPath, ...(this.updateSpec ? [localSummary] : [])]) {
       if (sameFile(output, specPath)) throw new Error('Assessment output must not overwrite the specification.');
+      if (sameFile(output, sourceMappingPath)) throw new Error('Assessment output must not overwrite the reviewed source mapping.');
     }
     if (this.updateSpec && [jsonPath, markdownPath].some((output) => sameFile(output, localSummary))) {
       throw new Error('Local summary must be separate from the artifact reports.');
@@ -216,6 +220,9 @@ export class AssessControlCommand extends Command {
       }
     }
     mkdirSync(directory, { recursive: true });
+    if (readFileSync(sourceMappingPath, 'utf8') !== originalMapping)
+      throw new Error('Mapping changed during assessment; refusing an inconsistent artifact.');
+    writeFileSync(mappingPath, originalMapping);
     writeFileSync(
       jsonPath,
       `${JSON.stringify(
@@ -247,7 +254,7 @@ export class AssessControlCommand extends Command {
       writeFileSync(specPath, updatedSpec);
     }
     this.context.stdout.write(
-      `Assessment report generated: ${report.assessmentOutcome}; readiness not established (advisory).\n${jsonPath}\n${markdownPath}\n`,
+      `Assessment report generated: ${report.assessmentOutcome}; readiness not established (advisory).\n${jsonPath}\n${markdownPath}\n${mappingPath}\n`,
     );
     return unitRun?.exitCode ?? 0;
   }

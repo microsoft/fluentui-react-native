@@ -329,6 +329,18 @@ export function formatCiSpec(root: string, bundle: CiBundle): string {
   return updateSpecAssessment(spec, specAssessmentFor(report, version));
 }
 
+export function formatCiMapping(root: string, bundle: CiBundle): string {
+  const { mappingPath } = assessmentForBundle(root, bundle);
+  for (const commit of [bundle.identity.headCommit, bundle.identity.testedCommit]) {
+    if (!git(root, ['ls-tree', commit, '--', mappingPath]).startsWith('100644 blob '))
+      throw new Error('Assessment mapping must be a regular nonexecutable file.');
+  }
+  const mapping = gitFile(root, bundle.identity.testedCommit, mappingPath);
+  if (mapping === undefined || gitFile(root, bundle.identity.headCommit, mappingPath) !== mapping)
+    throw new Error('Tested mapping differs from the PR source mapping; review and reconcile it before publication.');
+  return mapping;
+}
+
 function identityFromEnvironment(root: string, env: NodeJS.ProcessEnv): CiIdentity {
   const eventPath = text(env.GITHUB_EVENT_PATH, 'GITHUB_EVENT_PATH');
   const event = object(JSON.parse(readFileSync(eventPath, 'utf8')), 'PR event');
@@ -576,6 +588,8 @@ export function combineCiEvidence(root: string, env: NodeJS.ProcessEnv, now = ne
 }
 
 function writeCiAssessment(root: string, directory: string, bundle: CiBundle, env: NodeJS.ProcessEnv): void {
+  const mapping = formatCiMapping(root, bundle);
+  writeFileSync(path.join(directory, 'assessment.mapping.json'), mapping);
   const report = assessCiBundle(root, bundle);
   const summary = formatCiSummary(root, bundle);
   writeFileSync(path.join(directory, 'bundle.json'), `${JSON.stringify(bundle, null, 2)}\n`);

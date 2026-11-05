@@ -33,6 +33,9 @@ or requirement-to-assertion policy.
 
 The mapping retains the same 42 reviewed runtime assertions and one native callback from the original pilot.
 Additional existing tests remain visible but unmapped until their actual assertions are reviewed.
+It groups specific acceptance checks under each CBX requirement, with contract section references, required evidence,
+and exact test links. Empty test arrays preserve uncovered checks. Shared check IDs use identical definitions.
+The same reviewed mapping is included in local/CI artifacts and the optional atomic publication.
 
 | Requirement                  | Current mapped evidence                                                         | Remaining limits                                                     |
 | ---------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -62,8 +65,9 @@ tests, package/shared Jest and Babel settings, test script/mock profile, capture
 Line-ending normalization is intentional; changing assertion bodies or mapping scopes invalidates review.
 The two reviewed fingerprint fields are excluded from mapping content to avoid self-referential hashes.
 
-The November 4 structural change relocates the same reviewed assertion mappings into this control-owned file and
-updates fingerprints for the new configuration and harness paths. It does not expand the 42-case or native callback coverage.
+The requirement-first matrix decomposes the SPEC and companions without changing the existing 42-case inventory,
+its requirement associations, or the one mapped native callback. It adds explicit uncovered checks rather than
+crediting unreviewed tests. The reviewed fingerprints bind this new structure and its precise claims.
 Future mapping/fingerprint changes still need review; never refresh a pin just to silence drift.
 
 For an evidence-free inventory or existing-report replay:

@@ -41,19 +41,61 @@ Controls with a SPEC but no configured mapping are reported as `not-configured`,
 An explicitly requested unconfigured control fails. Ordinary PRs currently assess all configured controls, not only
 ones affected by the diff.
 
-Each schema-v1 mapping declares:
+Each schema-v2 mapping declares:
 
 - component ID, display name, and package-relative component directory;
 - contract files, assertion-bearing native helpers, reviewed fingerprint, mapping version, exact native callback,
-  physical-input requirement, and per-requirement observations and remaining gaps;
+  physical-input requirement, and a requirement-first matrix of specific acceptance checks;
 - package-relative runtime test files, repository-relative unit fingerprint inputs, declared Jest mock platform,
-  reviewed unit fingerprint, exact assertion identities, requirement IDs, and assertion scopes;
+  reviewed unit fingerprint, and an explicitly excluded case inventory;
 - control-specific limitations.
 
 The owning package supplies its workspace name and declared test script. Shared capture and evaluation code does not
 contain a control catalog or hard-coded test filenames. Definitions are data, not executable configuration. Invalid
 paths, duplicate controls or assertion identities, unknown requirement references, and a conflicting Jest profile fail
 explicitly. A filename or a SPEC evidence reference alone never proves requirement coverage.
+
+## Requirement-first mapping
+
+The mapping describes **what must be checked and which tests check it**, not execution results:
+
+```json
+{
+  "CBX-001": {
+    "checks": [
+      {
+        "id": "default-unchecked",
+        "description": "Omitting status and defaultStatus exposes checked=false.",
+        "source": "SPEC.md#props-and-defaults",
+        "evidence": "unit",
+        "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+      }
+    ],
+    "remaining": "Additional checks and evidence remain necessary."
+  }
+}
+```
+
+This abbreviated example shows one row, not the complete requirement. Define the checklist from the SPEC and its
+companions before inspecting test coverage; do not define requirements by the tests that happen to exist.
+Every SPEC requirement must have its complete acceptance-check set, including checks with no tests. Never shrink or
+filter that set based on available tests or execution results. Completeness requires reviewing all applicable contract
+clauses; merely listing every requirement ID is not a completeness proof. `source` cites the contract file/section from which the check
+was derived. `evidence` declares whether the claim needs unit, native, type, or visual verification.
+`tests: []` keeps an uncovered check visible; it means no approved test link, not necessarily no existing test.
+Type and visual adapters are not implemented, so those checks remain uncovered.
+
+Unit links identify exact Jest full names in the configured runtime files. Native links identify the exact configured
+story/callback. Multiple tests can be linked to one check, and one test can appear under multiple checks. A shared
+check ID can appear under several requirements only with an identical definition. Every linked test must qualify
+before a check passes. A skipped, missing, stale, unverified or failed test cannot qualify a row.
+Execution-case counts deduplicate shared test links; they are not inflated by repeated rows.
+`unit.excludedCases` records reviewed tests that receive no target requirement credit and why.
+
+The pilot prepares this matrix from its reviewed premade mapping before assessing saved evidence. Automatic proposal
+generation and owner review remain future mapping-maintenance work. Generated Markdown contains the readable
+requirement/check/test matrix with evidence outcomes; generated assessment JSON contains the same rows.
+A passing row establishes only that mapped check, not complete parent coverage, native behavior from JS, or maturity.
 
 ## Existing evidence and explicit local execution
 
@@ -79,7 +121,8 @@ during execution, not reconstructed later from current files. It binds exact res
 contract/mapping fingerprints, platform, execution interval, and build identity. Native target identity is captured
 before execution. A dirty checkout or missing binding keeps observations unverified; native and unit bindings remain separate.
 
-`--output` chooses an artifact directory. A single control writes `assessment.json` and `assessment.md` there.
+`--output` chooses an artifact directory. A single control writes `assessment.json`, `assessment.md`, and an exact
+`assessment.mapping.json` copy there. The copy contains the reviewed matrix, without execution results.
 Batch local assessment uses separate package/control subdirectories. These outputs are ignored by default.
 `--update-spec` additionally writes a clearly marked local report and the managed assessment fields in the adjacent
 SPEC; it is never a bound CI publication. Input/output aliases, linked SPEC destinations, and concurrent SPEC changes
@@ -117,7 +160,9 @@ ordinary source-job failures, but not after cancellation or invalid input valida
 
 Source artifacts are `component-unit-evidence-<attempt>` and `component-native-evidence-<attempt>`.
 Final output is `component-assessments-<attempt>`, retained for 14 days. Inside it, each configured control has
-`<package-path>/<component>/bundle.json`, `assessment.json`, `ASSESSMENT.md`, proposed `SPEC.md`, and any original unit JSON/context.
+`<package-path>/<component>/bundle.json`, `assessment.json`, `ASSESSMENT.md`, `assessment.mapping.json`, proposed `SPEC.md`,
+and any original unit JSON/context. The mapping is the exact reviewed source used for that execution, not a reconstruction
+from passing test names.
 The same readable report appears in the job summary. Files are created under ignored
 `apps/storybook/artifacts/win32/assessment-ci/`, not committed by the assessment job.
 
@@ -141,20 +186,27 @@ Keep that pin aligned with the repository lockfile when upgrading the formatter.
 
 Publication remains disabled unless a maintainer separately enables it. The default-branch workflow reconstructs
 reports from original evidence with trusted code. It never checks out or executes the PR with write credentials.
-Publication validates all configured controls together and writes their generated reports and SPEC fields in one atomic
-commit. Report-only reuse requires the complete configured set from the same tested workflow attempt.
+Publication validates all configured controls together and writes their generated reports, SPEC fields, and reviewed
+mapping snapshots in one atomic commit. Report-only reuse requires the complete configured set from the same tested workflow attempt.
 
-The only allowed writes are that control's generated `assessment/ASSESSMENT.md` and the strict, canonical
-`assessment-*` front-matter block in its SPEC. Human-authored contract bytes and lifecycle remain unchanged.
+The only allowed writes are that control's generated `assessment/ASSESSMENT.md`, the strict, canonical
+`assessment-*` front-matter block in its SPEC, and the exact tested `assessment.mapping.json`.
+The publisher independently reads the mapping from the tested Git tree and rejects an altered or missing artifact copy.
+In this premade pilot the source mapping already has those bytes, so publishing it normally creates no mapping diff.
+It never invents checks, refreshes reviewed fingerprints, or silently changes test links.
+Human-authored contract bytes and lifecycle remain unchanged.
 The block records package version, source/tested identity, dirty state, Win32/Paper target, outcome, health, provenance,
 generation time, report pointer, and an undetermined stage. Only matched clean native evidence supplies the native-tested SHA.
 The later report commit is not relabeled as the tested commit.
 
 The tracked-input digest excludes configured generated summary paths and removes only validated SPEC assessment
 blocks; modes and all other source, contract, mapping, dependency, workflow and configuration bytes remain inputs.
-Reuse requires an immediate report commit changing exactly the two allowed files per control, unchanged merge-tree inputs, the matching original artifact,
+Reuse requires an immediate report commit changing exactly the report and SPEC per control, the unchanged reviewed mapping,
+unchanged merge-tree inputs, the matching original artifact,
 exact reconstructed report/SPEC, and the original **PR source validation** result. The explicit reuse limit is 168 hours.
 Old or expired evidence falls back to full CI or fails verification; it never creates current coverage.
+Any future mapping proposal that changes checks, links, or fingerprints remains a source-input change and must undergo
+review and normal CI, not report-only reuse.
 
 Activation requires trusted tooling on the default branch, a repository-scoped GitHub App with only Contents write,
 `CONTROL_ASSESSMENT_APP_CLIENT_ID`, secret `CONTROL_ASSESSMENT_APP_PRIVATE_KEY`, and

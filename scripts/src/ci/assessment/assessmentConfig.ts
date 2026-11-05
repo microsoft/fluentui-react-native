@@ -3,8 +3,16 @@ import path from 'node:path';
 
 import { hex, object, text } from './controlAssessment.ts';
 
+export type AssessmentTest = { kind: 'unit'; fullName: string } | { kind: 'native'; storyId: string; testName: string };
+export type AssessmentCheck = {
+  id: string;
+  description: string;
+  source: string;
+  evidence: 'unit' | 'native' | 'type' | 'visual';
+  tests: AssessmentTest[];
+};
 export type AssessmentDefinition = {
-  schemaVersion: 1;
+  schemaVersion: 2;
   component: string;
   displayName: string;
   componentPath: string;
@@ -19,7 +27,7 @@ export type AssessmentDefinition = {
     reviewedDigest: string;
     mappingVersion: string;
     nativeCheck: { storyId: string; testName: string; requiresPhysicalClick: boolean };
-    requirements: Record<string, { observed?: string; remaining: string }>;
+    requirements: Record<string, { checks: AssessmentCheck[]; observed?: string; remaining: string }>;
   };
   unit: {
     testFiles: string[];
@@ -104,7 +112,7 @@ export function parseAssessmentDefinition(
   mappingFile: string,
 ): AssessmentDefinition {
   const data = object(value, 'Assessment mapping');
-  if (data.schemaVersion !== 1) throw new Error('Unsupported assessment mapping schema.');
+  if (data.schemaVersion !== 2) throw new Error('Unsupported assessment mapping schema.');
   const component = text(data.component, 'Assessment component');
   if (!/^[a-z][a-z0-9-]*$/.test(component)) throw new Error('Invalid assessment component ID.');
   const componentPath = relativeFile(data.componentPath, 'Component path');
@@ -112,35 +120,81 @@ export function parseAssessmentDefinition(
   const contract = object(data.contract, 'Contract mapping');
   const nativeCheck = object(contract.nativeCheck, 'Native assertion mapping');
   if (typeof nativeCheck.requiresPhysicalClick !== 'boolean') throw new Error('Native input requirement must be explicit.');
+  const files = strings(contract.files, 'Contract files', true);
+  if (!files.includes('SPEC.md') || !files.includes('spec/source.json'))
+    throw new Error('Assessment requires its SPEC and requirement metadata.');
+  const sharedChecks = new Map<string, string>();
+  const cases = new Map<string, { fullName: string; requirements: string[]; scopes: Set<string> }>();
   const requirements = Object.fromEntries(
     Object.entries(object(contract.requirements, 'Requirement mappings')).map(([id, value]) => {
       if (!/^[A-Z][A-Z0-9]*-\d{3}$/.test(id)) throw new Error('Invalid mapped requirement ID.');
       const entry = object(value, 'Requirement coverage');
+      if (!Array.isArray(entry.checks) || !entry.checks.length) throw new Error('Each requirement needs explicit acceptance checks.');
+      const checks = entry.checks.map((value): AssessmentCheck => {
+        const check = object(value, 'Acceptance check');
+        const checkId = text(check.id, 'Acceptance check ID');
+        if (!/^[a-z][a-z0-9-]*$/.test(checkId)) throw new Error('Invalid acceptance check ID.');
+        const source = text(check.source, 'Acceptance check source');
+        const [file, anchor, extra] = source.split('#');
+        if (!files.includes(file) || (anchor !== undefined && !/^[a-z0-9-]+$/.test(anchor)) || extra !== undefined)
+          throw new Error('Acceptance checks must reference a declared contract file and optional section anchor.');
+        const evidence = check.evidence;
+        if (evidence !== 'unit' && evidence !== 'native' && evidence !== 'type' && evidence !== 'visual')
+          throw new Error('Acceptance check must declare its required evidence kind.');
+        if (!Array.isArray(check.tests)) throw new Error('Acceptance check tests must be an array, empty when uncovered.');
+        const tests = check.tests.map((value): AssessmentTest => {
+          const test = object(value, 'Acceptance test');
+          if (test.kind === 'unit' && evidence === 'unit') return { kind: 'unit', fullName: text(test.fullName, 'Unit assertion name') };
+          if (
+            test.kind === 'native' &&
+            evidence === 'native' &&
+            test.storyId === nativeCheck.storyId &&
+            test.testName === nativeCheck.testName
+          )
+            return { kind: 'native', storyId: text(test.storyId, 'Mapped story'), testName: text(test.testName, 'Mapped callback') };
+          throw new Error('Test must match the required evidence kind and supported native callback; unsupported adapters stay uncovered.');
+        });
+        if (new Set(tests.map((test) => JSON.stringify(test))).size !== tests.length) throw new Error('Duplicate acceptance test link.');
+        const result: AssessmentCheck = {
+          id: checkId,
+          description: text(check.description, 'Acceptance check description'),
+          source,
+          evidence,
+          tests,
+        };
+        const serialized = JSON.stringify(result);
+        if (sharedChecks.has(checkId) && sharedChecks.get(checkId) !== serialized)
+          throw new Error('Shared acceptance check IDs must have identical definitions under every requirement.');
+        sharedChecks.set(checkId, serialized);
+        for (const test of tests) {
+          if (test.kind !== 'unit') continue;
+          const mapped = cases.get(test.fullName) ?? { fullName: test.fullName, requirements: [], scopes: new Set<string>() };
+          if (!mapped.requirements.includes(id)) mapped.requirements.push(id);
+          mapped.scopes.add(result.description);
+          cases.set(test.fullName, mapped);
+        }
+        return result;
+      });
+      if (new Set(checks.map(({ id }) => id)).size !== checks.length) throw new Error('Duplicate acceptance check within a requirement.');
+      const observed = checks.filter((check) => check.evidence === 'native' && check.tests.length).map(({ description }) => description);
       return [
         id,
         {
-          ...(entry.observed === undefined ? {} : { observed: text(entry.observed, 'Native scope') }),
+          checks,
+          ...(observed.length ? { observed: observed.join(' ') } : {}),
           remaining: text(entry.remaining, 'Remaining coverage'),
         },
       ];
     }),
   );
   const unit = object(data.unit, 'Unit mapping');
-  if (!Array.isArray(unit.cases) || !unit.cases.length) throw new Error('Unit mapping must declare reviewed cases.');
-  const cases = unit.cases.map((value) => {
-    const entry = object(value, 'Unit case mapping');
-    if (!Array.isArray(entry.requirements) || entry.requirements.some((id) => typeof id !== 'string' || !Object.hasOwn(requirements, id)))
-      throw new Error('Unit case references an unknown requirement.');
-    return {
-      fullName: text(entry.fullName, 'Unit assertion name'),
-      requirements: entry.requirements.map((id) => text(id, 'Unit requirement')),
-      scope: text(entry.scope, 'Unit assertion scope'),
-    };
+  if (!Array.isArray(unit.excludedCases)) throw new Error('Unit mapping must declare its excluded-case inventory.');
+  const excluded = unit.excludedCases.map((value) => {
+    const entry = object(value, 'Excluded unit case');
+    return { fullName: text(entry.fullName, 'Excluded assertion name'), requirements: [], scope: text(entry.reason, 'Exclusion reason') };
   });
-  if (new Set(cases.map(({ fullName }) => fullName)).size !== cases.length) throw new Error('Duplicate mapped unit assertion.');
-  const files = strings(contract.files, 'Contract files', true);
-  if (!files.includes('SPEC.md') || !files.includes('spec/source.json'))
-    throw new Error('Assessment requires its SPEC and requirement metadata.');
+  if (new Set(excluded.map(({ fullName }) => fullName)).size !== excluded.length || excluded.some(({ fullName }) => cases.has(fullName)))
+    throw new Error('Excluded unit assertions must be unique and cannot receive requirement credit.');
   const testFiles = strings(unit.testFiles, 'Unit runtime files', true);
   const inputs = strings(unit.inputs, 'Unit mapping inputs', true);
   if (testFiles.some((file) => /\.types?\.test\./.test(file) || !inputs.includes(`${packagePath}/${file}`)))
@@ -149,7 +203,7 @@ export function parseAssessmentDefinition(
   if (!['react', 'win32', 'macos', 'ios', 'android', 'windows'].includes(platform))
     throw new Error('Unsupported assessment Jest platform.');
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     component,
     displayName: text(data.displayName, 'Component display name'),
     componentPath,
@@ -177,7 +231,7 @@ export function parseAssessmentDefinition(
       reviewedDigest: hex(unit.reviewedDigest, 64, 'Reviewed unit digest'),
       mappingVersion: text(unit.mappingVersion, 'Unit mapping version'),
       environment: text(unit.environment, 'Unit environment'),
-      cases,
+      cases: [...cases.values()].map(({ scopes, ...entry }) => ({ ...entry, scope: [...scopes].join(' ') })).concat(excluded),
     },
     limitations: strings(data.limitations, 'Component assessment limitations'),
   };

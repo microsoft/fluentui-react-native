@@ -15,6 +15,7 @@ import {
   finishCiExecution,
   formatCiSummary,
   formatCiSpec,
+  formatCiMapping,
   git,
   inputDigest,
   isReportOnlyUpdate,
@@ -49,6 +50,7 @@ import {
   publishAssessments,
   verifyReportUpdate,
   verifyReportUpdates,
+  readBundles,
 } from './controlAssessmentGithub.ts';
 import { formatAssessmentDocument } from './assessmentMarkdown.ts';
 import { discoverAssessments } from './assessmentConfig.ts';
@@ -138,7 +140,6 @@ function fixture(extraControl = false) {
     mapping.contract.requirements = Object.fromEntries(
       Object.entries(mapping.contract.requirements).map(([id, value]) => [id.replace('CBX-', 'TGL-'), value]),
     );
-    for (const entry of mapping.unit.cases) entry.requirements = entry.requirements.map((id: string) => id.replace('CBX-', 'TGL-'));
     for (const file of mapping.contract.files) {
       put(
         root,
@@ -318,6 +319,21 @@ afterEach(() => {
 });
 
 describe('CI execution binding', () => {
+  it('includes the exact reviewed requirement/check/test mapping in artifacts and rejects a substituted mapping', () => {
+    const f = fixture();
+    const bundle = execute(f);
+    const directory = path.join(f.root, 'apps', 'storybook', 'artifacts', 'win32', 'assessment-ci');
+    const mappingPath = path.join(f.root, ...reportDirectory, 'assessment.mapping.json');
+    assert.equal(readFileSync(mappingPath, 'utf8'), readFileSync(path.join(f.root, assessmentMappingPath), 'utf8'));
+    assert.deepEqual(readBundles(f.root, directory), [bundle]);
+    const mapping = JSON.parse(readFileSync(mappingPath, 'utf8'));
+    mapping.contract.requirements['CBX-001'].checks[0].description = 'Unreviewed replacement claim';
+    writeFileSync(mappingPath, JSON.stringify(mapping));
+    assert.throws(() => readBundles(f.root, directory), /Artifact mapping differs/);
+    rmSync(mappingPath);
+    assert.throws(() => readBundles(f.root, directory), /ENOENT/);
+  });
+
   it('assesses existing units when native execution is unavailable and rejects a different native attempt', () => {
     const f = fixture();
     beginCiExecution(f.root, f.env, new Date('2026-10-21T20:00:00.000Z'));
@@ -430,6 +446,10 @@ describe('CI execution binding', () => {
     assert.equal(report.requirements[5].outcome, 'insufficient-evidence');
     assert.equal(report.assessmentOutcome, 'insufficient-evidence');
     assert.equal(report.evidenceSupportedStatus, null);
+    const matrix = report.requirements.find(({ id }) => id === 'CBX-004')!.checks;
+    assert.equal(matrix.find(({ id }) => id === 'js-checkbox-role')!.outcome, 'passed');
+    assert.equal(matrix.find(({ id }) => id === 'native-checkbox-role')!.outcome, 'skipped');
+    assert.equal(matrix.find(({ id }) => id === 'native-toggle-dispatch')!.outcome, 'uncovered');
     assert.match(formatCiSummary(f.root, bundle), /Recorded unit cases: 42 passed/);
     assert.equal(splitSpecAssessment(formatCiSpec(f.root, bundle)).assessment?.testedCommit, f.testedCommit);
     const context = bundle.unit!.context!;
@@ -692,6 +712,11 @@ describe('same-PR source fingerprint and evidence reuse', () => {
     const candidate = await inspectReportUpdate(f.root, f.env, github, now);
     assert.equal(candidate.reportOnly, true);
     verifyReportUpdate(f.root, candidate, bundle, now);
+    assert.ok(candidate.reportOnly);
+    assert.throws(
+      () => verifyReportUpdate(f.root, { ...candidate, mapping: `${candidate.mapping}\n` }, bundle, now),
+      /exact reviewed mapping/,
+    );
     assert.equal(inputDigest(f.root, update.merged), bundle.identity.inputDigest);
     const tampered = {
       ...bundle,
@@ -1007,13 +1032,14 @@ describe('trusted report publication', () => {
     assert.equal(payload.variables.input.expectedHeadOid, f.headCommit);
     assert.deepEqual(
       payload.variables.input.fileChanges.additions.map((addition: { path: string }) => addition.path).sort(),
-      definitions.flatMap(({ summaryPath, specPath }) => [summaryPath, specPath]).sort(),
+      definitions.flatMap(({ summaryPath, specPath, mappingPath }) => [summaryPath, specPath, mappingPath]).sort(),
     );
     git(f.root, ['checkout', '-q', 'pilot/checkbox']);
     for (const publication of publications) {
       assert.ok(publication.eligible);
       put(f.root, publication.summaryPath, publication.summary);
       put(f.root, publication.specPath, publication.spec);
+      put(f.root, publication.mappingPath, publication.mapping);
     }
     const head = commit(f.root, 'Synthetic atomic component reports');
     const merged = merge(f.root, f.baseCommit, head);
@@ -1032,7 +1058,7 @@ describe('trusted report publication', () => {
 
   const expected = { repository: 'example/furn', runId: '456', runAttempt: 1, defaultBranch: 'main' };
 
-  it('writes exactly the allowlisted summary and SPEC paths with one atomic expected-head check', async () => {
+  it('writes exactly the summary, SPEC and reviewed mapping with one atomic expected-head check', async () => {
     const f = fixture();
     const bundle = execute(f);
     const { github, calls } = fakeApi(f);
@@ -1046,10 +1072,15 @@ describe('trusted report publication', () => {
     const payload = JSON.parse(String(mutation.options?.body));
     assert.equal(payload.variables.input.expectedHeadOid, f.headCommit);
     assert.deepEqual(payload.variables.input.branch, { repositoryNameWithOwner: 'example/furn', branchName: 'pilot/checkbox' });
-    assert.equal(payload.variables.input.fileChanges.additions.length, 2);
+    assert.equal(payload.variables.input.fileChanges.additions.length, 3);
     assert.equal(payload.variables.input.fileChanges.additions[0].path, assessmentSummaryPath);
     assert.equal(payload.variables.input.fileChanges.additions[1].path, assessmentSpecPath);
     assert.equal(Buffer.from(payload.variables.input.fileChanges.additions[1].contents, 'base64').toString(), formatCiSpec(f.root, bundle));
+    assert.equal(payload.variables.input.fileChanges.additions[2].path, assessmentMappingPath);
+    assert.equal(
+      Buffer.from(payload.variables.input.fileChanges.additions[2].contents, 'base64').toString(),
+      formatCiMapping(f.root, bundle),
+    );
     assert.equal(payload.variables.input.fileChanges.deletions, undefined);
   });
 

@@ -21,8 +21,12 @@ is documented in the owning reference, component contract, or the repository foc
 - **Open gates:**
   - inspect actual assertions and review mappings for additional existing Checkbox tests; ingest real compiler/type
     results rather than counting a Jest types-suite pass;
-  - build a mapping-maintenance phase that reads SPEC states, proposes the required test matrix, maps existing assertions,
-    and distinguishes missing tests from missing mappings; owner review must precede authoritative coverage or pin updates;
+  - automate the mapping-maintenance phase that reads SPEC states, proposes the requirement/check/test matrix, maps existing
+    assertions, and distinguishes missing tests from missing mappings; the pilot uses a premade requirement-first checklist,
+    and owner review must precede authoritative coverage or pin updates;
+  - replace the premade mapping publisher's exact-source equality rule with trusted regeneration/proposal verification
+    against the same PR inputs before accepting generated mapping changes; differences from the old checked-in mapping
+    are expected, but publication must not silently approve new coverage claims or enable report-only reuse of changed inputs;
   - select affected controls using implementation, contract, tests, mappings and shared dependency/harness/workflow
     changes; ambiguous impact must conservatively include dependents, not silently skip them;
   - add another control through its package-owned definition, then review Windows/Fabric and other target adapters using
