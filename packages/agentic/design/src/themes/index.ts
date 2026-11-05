@@ -1,3 +1,4 @@
+export { flexCoolTheme } from './flex/flexCoolTheme';
 export { flexTheme } from './flex/flexTheme';
 export { flexWarmTheme } from './flex/flexWarmTheme';
 export { fluentDarkTheme } from './fluent/fluentDarkTheme';

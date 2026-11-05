@@ -10,20 +10,20 @@ owner_paths:
 The package is `sideEffects: false` and exposes explicit subpaths so consumers load only the graph they use. Export
 public symbols by name from each entry point; do not add barrel re-exports.
 
-| Subpath                   | Contents                                                                                                                   |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `.` (root)                | Modern theming (`ThemeProvider`, `ThemedRoot`, `FlexThemeReference`, hooks), Flex token types                              |
-| `./theming`               | The complete modern and legacy theming API, including `ThemeReference` and `useTheme`                                      |
-| `./theming/legacy-source` | `ThemeReference` without the legacy consumption graph                                                                      |
-| `./theming/compat`        | `themeFromFlexTokens`, which projects Flex tokens onto the Fluent theme for the appearance                                 |
-| `./themes`                | Ready-made themes: `fluentLightTheme`, `fluentDarkTheme`, `fluentHcTheme`, `fluentTheme`, `flexTheme`, and `flexWarmTheme` |
-| `./tokens/global`         | Generated platform global token constants                                                                                  |
-| `./color-lib`             | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`                                 |
-| `./styling`               | State and color style factories; see `styling.md`                                                                          |
-| `./styling/stylesheet`    | The legacy `themedStyleSheet` helper                                                                                       |
-| `./styling/tokens`        | Legacy token-to-style builders                                                                                             |
-| `./testing`               | Test-only fixtures and validation; see `testing.md`                                                                        |
-| `./deprecated`            | Fluent 2 token JSON loaders and pipeline mappers, restricted to existing consumers; see [below](#deprecated-entry-point)   |
+| Subpath                   | Contents                                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.` (root)                | Modern theming (`ThemeProvider`, `ThemedRoot`, `FlexThemeReference`, hooks), Flex token types                                               |
+| `./theming`               | The complete modern and legacy theming API, including `ThemeReference` and `useTheme`                                                       |
+| `./theming/legacy-source` | `ThemeReference` without the legacy consumption graph                                                                                       |
+| `./theming/compat`        | `themeFromFlexTokens`, which projects Flex tokens onto the Fluent theme for the appearance                                                  |
+| `./themes`                | Ready-made themes: `fluentLightTheme`, `fluentDarkTheme`, `fluentHcTheme`, `fluentTheme`, `flexTheme`, `flexCoolTheme`, and `flexWarmTheme` |
+| `./tokens/global`         | Generated platform global token constants                                                                                                   |
+| `./color-lib`             | Raw color parsing, conversion, compositing, and interaction algorithms; see `color-lib.md`                                                  |
+| `./styling`               | State and color style factories; see `styling.md`                                                                                           |
+| `./styling/stylesheet`    | The legacy `themedStyleSheet` helper                                                                                                        |
+| `./styling/tokens`        | Legacy token-to-style builders                                                                                                              |
+| `./testing`               | Test-only fixtures and validation; see `testing.md`                                                                                         |
+| `./deprecated`            | Fluent 2 token JSON loaders and pipeline mappers, restricted to existing consumers; see [below](#deprecated-entry-point)                    |
 
 The `apps/bundle-size` `design-*` scenarios guard these boundaries. Input patterns check the import graph and output
 patterns check the modules a tree-shaken bundle retains. Every design scenario except the color-library one forbids
@@ -34,7 +34,8 @@ legacy-source scenario also forbids a retained `FlexThemeReference`. Only the le
 `color-lib/` or `flex/` module. The Fluent theme scenarios forbid `useTheme` and the compatibility modules from the
 import graph and any retained `flex/`, `color-lib/`, or Flex theme module, and a bundle that imports only
 `fluentLightTheme` retains no other theme and no `ThemeReference`, while one that imports only `fluentHcTheme` retains
-only the high-contrast themes. The Flex theme scenarios require the x3 defaults and forbid `fluent/` and
+only the high-contrast themes. The fixed Flex theme scenarios reject the other palette's generated data in retained
+output; the dynamic `flexTheme` scenario requires both palettes. The Flex theme scenarios require the x3 defaults and forbid `fluent/` and
 `color-lib/compositing`. The color-library scenario requires its algorithms, and the legacy-projection scenario requires
 the projection, the Fluent theme selection, and the generated Fluent tokens it projects onto. Every scenario also
 requires a module it is expected to load, so a moved file cannot make a forbidden pattern pass vacuously.

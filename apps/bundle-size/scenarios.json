@@ -12,18 +12,6 @@
       "namespace": true
     },
     {
-      "name": "design-theme-state",
-      "module": "@fluentui-react-native/design",
-      "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
-      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
-      "requiredInputPatterns": [
-        "/design/src/flex/flexThemeReference.",
-        "/design/src/flex/useThemeState.",
-        "/design/src/theming/ThemeProvider."
-      ],
-      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
-    },
-    {
       "name": "design-themed-root",
       "module": "@fluentui-react-native/design",
       "exports": ["ThemedRoot", "useRootSettings", "useThemeState"],
@@ -153,9 +141,34 @@
         "/design/src/test/",
         "/color-lib/compositing."
       ],
-      "requiredInputPatterns": ["/design/src/flex/defaults/defaultTokens.generated."],
-      "forbiddenOutputPatterns": ["/design/src/fluent/", "/design/src/themes/fluent/", "/design/src/themes/flex/flexWarmTheme."],
-      "requiredOutputPatterns": ["/design/src/themes/flex/flexTheme.", "/design/src/flex/defaults/defaultTokens.generated."]
+      "requiredInputPatterns": ["/design/src/flex/defaults/sharedTokens.generated."],
+      "forbiddenOutputPatterns": ["/design/src/fluent/", "/design/src/themes/fluent/"],
+      "requiredOutputPatterns": [
+        "/design/src/themes/flex/flexTheme.",
+        "/design/src/flex/defaults/coolTokens.generated.",
+        "/design/src/flex/defaults/warmTokens.generated."
+      ]
+    },
+    {
+      "name": "design-flex-cool-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["flexCoolTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/deprecated/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/",
+        "/color-lib/compositing."
+      ],
+      "requiredInputPatterns": ["/design/src/flex/defaults/sharedTokens.generated."],
+      "forbiddenOutputPatterns": [
+        "/design/src/fluent/",
+        "/design/src/themes/fluent/",
+        "/design/src/themes/flex/flexTheme.",
+        "/design/src/themes/flex/flexWarmTheme.",
+        "/design/src/flex/defaults/warmTokens.generated."
+      ],
+      "requiredOutputPatterns": ["/design/src/themes/flex/flexCoolTheme.", "/design/src/flex/defaults/coolTokens.generated."]
     },
     {
       "name": "design-flex-warm-theme",
@@ -168,9 +181,15 @@
         "/design/src/test/",
         "/color-lib/compositing."
       ],
-      "requiredInputPatterns": ["/design/src/flex/defaults/defaultTokens.generated."],
-      "forbiddenOutputPatterns": ["/design/src/fluent/", "/design/src/themes/fluent/", "/design/src/themes/flex/flexTheme."],
-      "requiredOutputPatterns": ["/design/src/themes/flex/flexWarmTheme.", "/design/src/flex/defaults/defaultTokens.generated."]
+      "requiredInputPatterns": ["/design/src/flex/defaults/sharedTokens.generated."],
+      "forbiddenOutputPatterns": [
+        "/design/src/fluent/",
+        "/design/src/themes/fluent/",
+        "/design/src/themes/flex/flexTheme.",
+        "/design/src/themes/flex/flexCoolTheme.",
+        "/design/src/flex/defaults/coolTokens.generated."
+      ],
+      "requiredOutputPatterns": ["/design/src/themes/flex/flexWarmTheme.", "/design/src/flex/defaults/warmTokens.generated."]
     }
   ]
 }

@@ -7,9 +7,10 @@ import type { FlexTokenDescription, FlexTokens } from './tokens.types';
  */
 export type FlexThemeDescription = {
   /**
-   * The complete authored token description, covering light and dark.
+   * The complete authored token description, covering light and dark, or a
+   * resolver that selects one for the resolved appearance.
    */
-  readonly tokens: FlexTokenDescription;
+  readonly tokens: FlexTokenDescription | ((appearance: Readonly<NormalizedThemeAppearance>) => FlexTokenDescription);
   /**
    * The palette tone of these tokens. A `FlexThemeReference` built on this
    * description uses it as its default requested tone, which also selects the

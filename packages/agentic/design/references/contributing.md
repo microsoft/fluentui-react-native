@@ -51,8 +51,9 @@ committed; change their inputs and regenerate rather than editing them.
 - Keep `src/themes/` a consumer of generated tokens. `src/themes/fluent/` may reach `ThemeReference`, the generated
   Fluent tokens, and the generated global tokens, but never `src/flex/`, `src/color-lib/`, `useTheme`,
   `src/fluent/compat/`, or `src/deprecated/`, and it authors no color value that the generated alias colors lack.
-  `src/themes/flex/` exposes the x3 default descriptions unchanged and never reaches `src/fluent/` or
-  `color-lib/compositing`. The tests under `src/themes/`, the import-boundary test, and the `design-fluent-*` and
+  `src/themes/flex/` exposes the fixed x3 default descriptions unchanged and an adaptive description that selects one
+  by resolved color tone. Each fixed theme must not reach the other palette's generated module. These themes never reach
+  `src/fluent/` or `color-lib/compositing`. The tests under `src/themes/`, the import-boundary test, and the `design-fluent-*` and
   `design-flex-*` bundle-size scenarios guard this.
 - Never mutate author-owned theme inputs; caches are external and keyed by source, revision, and resolved appearance.
 - Keep color resolution lazy: resolving tokens, reading rest, merging, and copying the color map must not run the
