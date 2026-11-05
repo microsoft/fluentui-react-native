@@ -549,6 +549,7 @@
     "prmt-duration-200": "200ms",
     "prmt-duration-300": "300ms",
     "prmt-duration-500": "500ms",
+    "prmt-duration-1000": "1000ms",
     "prmt-easing-immediate": "cubic-bezier(0, 0, 0, 1)",
     "prmt-easing-standard": "cubic-bezier(0.33, 0, 0, 1)",
     "prmt-easing-emphasized": "cubic-bezier(0.6, 0, 0.75, 0.4)",
@@ -581,6 +582,7 @@
     "prmt-breakpoint-1440": "1440px",
     "prmt-breakpoint-1920": "1920px",
     "prmt-font-family-segoe-sans": "'Segoe Sans', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif",
+    "prmt-font-family-segoe-serif": "'Segoe Serif', 'Georgia Pro', Georgia, 'Times New Roman', serif",
     "prmt-font-family-georgia-pro": "'Georgia Pro', Georgia, 'Times New Roman', serif",
     "prmt-font-family-consolas": "'Consolas', 'Courier New', 'Monaco', 'Lucida Console', monospace",
     "prmt-font-size-10": "0.625rem",
@@ -1494,7 +1496,7 @@
     },
     {
       "name": "--gnrc-font-family-content-editorial",
-      "primitive": "prmt-font-family-georgia-pro"
+      "primitive": "prmt-font-family-segoe-serif"
     },
     {
       "name": "--gnrc-font-family-content-code",
@@ -1988,6 +1990,10 @@
     {
       "name": "--gnrc-motion-duration-base-500",
       "primitive": "prmt-duration-500"
+    },
+    {
+      "name": "--gnrc-motion-duration-base-1000",
+      "primitive": "prmt-duration-1000"
     },
     {
       "name": "--gnrc-motion-easing-functional-enter",

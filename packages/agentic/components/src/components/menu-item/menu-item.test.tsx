@@ -5,6 +5,7 @@ import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { MenuItem } from './menu-item';
 import type { MenuItemProps } from './menu-item.types';
 import { MenuItemMenuContext } from './menuItemContext';
@@ -40,7 +41,7 @@ describe('MenuItem', () => {
     expect(component.getAllByText('Save', { includeHiddenElements: true })).toHaveLength(2);
     expect(component.getAllByText('Secondary', { includeHiddenElements: true })).toHaveLength(2);
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: '#00000000',
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralTransparent.rest,
       minHeight: 40,
     });
   });
@@ -55,7 +56,7 @@ describe('MenuItem', () => {
 
     expect(component.queryByTestId('regular-icon')).toBeNull();
     expect(component.getByTestId('selected-icon')).toBeOnTheScreen();
-    expect(getRootStyle(component).backgroundColor).toBe('#0000001a');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSoft.rest);
     expect(
       component
         .getAllByText('Favorite', { includeHiddenElements: true })
@@ -69,7 +70,7 @@ describe('MenuItem', () => {
 
     expect(getRoot(component, 'menuitemradio').props.accessibilityRole).toBe('menuitemradio');
     expect(getRoot(component, 'menuitemradio').props.accessibilityState).toMatchObject({ checked: false });
-    expect(getRootStyle(component, 'menuitemradio').backgroundColor).toBe('#00000000');
+    expect(getRootStyle(component, 'menuitemradio').backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
   });
 
   it('renders a multiselect checkbox and keeps the row background transparent', async () => {
@@ -81,7 +82,7 @@ describe('MenuItem', () => {
 
     expect(getRoot(component, 'menuitemcheckbox').props.accessibilityRole).toBe('menuitemcheckbox');
     expect(getRoot(component, 'menuitemcheckbox').props.accessibilityState).toMatchObject({ checked: true });
-    expect(getRootStyle(component, 'menuitemcheckbox').backgroundColor).toBe('#00000000');
+    expect(getRootStyle(component, 'menuitemcheckbox').backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
   });
 
   it('supports section headers, loading skeletons, and no focusability', async () => {

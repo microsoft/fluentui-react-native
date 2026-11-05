@@ -3,7 +3,12 @@ id: design.theming
 kind: instruction-reference
 owner_paths:
   - packages/agentic/design/src/theming
-  - packages/agentic/design/src/useThemeState.ts
+  - packages/agentic/design/src/types
+  - packages/agentic/design/src/flex/flexThemeReference.ts
+  - packages/agentic/design/src/flex/themeState.types.ts
+  - packages/agentic/design/src/flex/useThemeState.ts
+  - packages/agentic/design/src/fluent
+  - packages/agentic/design/src/themes
 ---
 
 # Theming
@@ -20,16 +25,30 @@ both models. Modern consumers read Flex tokens through `useThemeState`; legacy c
 | `ThemeReference`     | `legacy` | One legacy `Theme` per resolved appearance      | `@fluentui-react-native/design/theming` or `@fluentui-react-native/design/theming/legacy-source` |
 
 `FlexThemeReference` accepts `base`, `appearance`, `fallbackAppearance`, `appearanceSource`, and `legacyFallback`
-options followed by recipes. It resolves the design package's default Flex tokens, then the base input, then recipes in
-declaration order. A base or recipe may be a function of the resolved appearance. `PartialFlexTokens` is shape-aware so
-opaque React Native colors stay leaves.
+options followed by recipes. It merges the design package's x3 default Flex token description for the resolved
+`colorTone`, then the base input, then recipes in declaration order, and resolves the result once per appearance. A base
+may be a function of the resolved appearance, which always has a concrete `colorTone`. A recipe receives the accumulated
+authored description and the resolved appearance. `PartialFlexTokens` is shape-aware so opaque React Native colors stay
+leaves. `tokens.md` describes the defaults.
+
+A base may instead be a `FlexThemeDescription`: a complete `FlexTokenDescription` in `tokens` and an optional
+`colorTone`. Its tokens replace the package defaults for every appearance, and its tone becomes the reference's default
+`appearance.colorTone` when the `appearance` option sets none. A provider's `appearance` request still wins, and it
+changes only the interaction algorithm, not the description's palette. The Flex themes below are descriptions.
+
+Each color is authored as a value, a `[light, dark]` tuple, or `flexColor` options with explicit states and an
+interaction type, and replaces the previous color atomically. Each resolved color is an `InteractiveColor` with `rest`,
+`hover`, and `pressed`. Omitted states of interactive tokens are derived from rest with the `color-lib` interaction
+algorithm on first read; no import, provider setting, or registration is required. `flex-colors.md` owns the authoring,
+resolution, and merge rules and the migration from flat colors.
 
 ```ts
 import { FlexThemeReference } from '@fluentui-react-native/design';
 
-const theme = new FlexThemeReference({ appearance: { colorScheme: 'system' } }, (_parent, appearance) => ({
-  color: { surfaceNeutralNear: appearance.colorScheme === 'dark' ? '#1f1f1f' : '#ffffff' },
-}));
+const theme = new FlexThemeReference({
+  appearance: { colorScheme: 'system' },
+  base: { color: { surfaceNeutralNear: ['#ffffff', '#1f1f1f'] } },
+});
 ```
 
 `ThemeReference` keeps its constructor, one-argument recipes, `theme` accessor, `update`, `invalidate`, and listeners.
@@ -87,9 +106,14 @@ back to an appearance reuses its entry within a revision, and a revision change 
 ## Appearance
 
 A request has `colorScheme` (`light`, `dark`, or `system`), `contrast` (`standard`, `highContrast`, or `system`), and
-`interfaceLevel` (`base`, `elevated`, or `system`). The resolved appearance is always concrete. A
-`ThemeAppearanceSource` provides a stable `getSnapshot()` and a `subscribe()` that installs native listeners only while
-subscribed; create one with `createThemeAppearanceSource`.
+`interfaceLevel` (`base`, `elevated`, or `system`), plus an optional `colorTone` (`cool` or `warm`). The resolved
+appearance is always concrete. `colorTone` is a design choice rather than a platform setting, so appearance sources
+never supply it: it resolves from the provider or root request, then the source's `appearance` option, then the fallback
+appearance, then `cool`. A nested `ThemedRoot` inherits it with the other requested axes, and a raw legacy
+`ThemeContext` boundary resolves to `cool`. Caches key a warm appearance separately; cool keeps the existing
+`colorScheme|contrast|interfaceLevel` key, and the Fluent theme that backs the legacy projection does not vary by tone.
+A `ThemeAppearanceSource` provides a stable `getSnapshot()` and a `subscribe()` that installs native listeners only
+while subscribed; create one with `createThemeAppearanceSource`.
 
 | Platform       | Platform appearance source                                                                    |
 | -------------- | --------------------------------------------------------------------------------------------- |
@@ -103,19 +127,80 @@ subscribed; create one with `createThemeAppearanceSource`.
 including `darkElevated`, `highContrast`, and `dynamic`. `getCurrentAppearance`, `isHighContrast`, and
 `setIsHighContrast` remain for existing callers.
 
+## Fluent themes
+
+The `themes` entry point provides legacy `Theme` objects authored from the generated Fluent 2 tokens (`tokens.md`):
+
+| Export             | Kind             | Contents                                                               |
+| ------------------ | ---------------- | ---------------------------------------------------------------------- |
+| `fluentLightTheme` | `Theme`          | The light theme                                                        |
+| `fluentDarkTheme`  | `Theme`          | The dark theme                                                         |
+| `fluentHcTheme`    | `ThemeReference` | The high-contrast light and dark themes, chosen by the resolved scheme |
+| `fluentTheme`      | `ThemeReference` | Every Fluent theme, chosen by the resolved contrast and color scheme   |
+
+Each theme carries every platform alias color unchanged, plus the legacy palette keys (`bodyText`, `buttonBackground`,
+and so on) that existing components still read. `src/themes/fluent/legacyPalette.ts` points each legacy key at the alias
+color that plays the same role, so the palette adds no color values of its own, and its type is complete: a legacy key
+without a mapping fails to compile. Shadows and font variants are the generated Fluent shadows and font aliases; font
+families, sizes, weights, and spacing come from the global tokens. All of these are generated per platform, so each
+platform's theme carries that platform's values. Fluent 2 defines no serif or cursive family, so those slots use the base
+family. The themes carry no component token overrides.
+
+`fluentTheme` requests `system` for every appearance axis, so a `ThemeProvider` or `ThemedRoot` follows the platform
+appearance source and re-resolves when the system changes; pass `appearance` to pin a color scheme or contrast. High
+contrast selects the high-contrast theme for the color scheme. `fluentHcTheme` always requests high contrast and follows
+the system color scheme. Interface level does not select separate themes yet: elevated requests resolve by color scheme
+(`remaining-work.md`). Import `fluentLightTheme` or `fluentDarkTheme` alone to keep the other themes and `ThemeReference`
+out of a bundle, or use one as the base of your own `ThemeReference` to extend it. Flex consumers read these themes
+through `useThemeState`, which adapts their alias colors like any legacy source.
+
+```tsx
+import { ThemedRoot } from '@fluentui-react-native/design';
+import { fluentTheme } from '@fluentui-react-native/design/themes';
+
+const App = () => <ThemedRoot theme={fluentTheme}>{/* scene */}</ThemedRoot>;
+```
+
+## Flex themes
+
+The `themes` entry point also provides the x3 Flex defaults (`tokens.md`) as `FlexThemeDescription` data:
+
+| Export          | Kind                   | Contents                                           |
+| --------------- | ---------------------- | -------------------------------------------------- |
+| `flexTheme`     | `FlexThemeDescription` | The cool light and dark defaults, with tone `cool` |
+| `flexWarmTheme` | `FlexThemeDescription` | The warm light and dark defaults, with tone `warm` |
+
+Each is a theme description rather than a source: pass it as a `FlexThemeReference` base, alone or under recipes. A
+reference built on `flexTheme` or `flexWarmTheme` resolves the same tokens as a default `FlexThemeReference` requesting
+that tone. Both descriptions are the shared default objects, so treat them as read-only; author changes as recipes or a
+new description.
+
+```ts
+import { FlexThemeReference } from '@fluentui-react-native/design';
+import { flexWarmTheme } from '@fluentui-react-native/design/themes';
+
+const theme = new FlexThemeReference({ base: flexWarmTheme, appearance: { colorScheme: 'system' } });
+```
+
 ## Legacy projection and bundle boundary
 
 The package root exports only the modern authoring and consumption APIs. It reaches the forward Theme-to-Flex adapter,
-which `useThemeState` needs for legacy sources, but not `useTheme`, the reverse converter, the complete legacy
-defaults, or legacy token payloads. `entry-points.md` lists every subpath.
+which `useThemeState` needs for legacy sources, and the Flex interaction policy with the raw `color-lib` interaction
+algorithm, but not `useTheme`, the reverse converter, the Fluent themes it projects onto, or deprecated token data. The
+legacy `ThemeReference`, `useTheme`, and `ThemeProvider` graphs reach neither Flex nor `color-lib`. An app that pairs a
+legacy `ThemeReference` with `useThemeState` reaches the forward adapter and, through the default theme state, the x3
+defaults and the interaction policy with `color-lib/interaction`, but not `FlexThemeReference`, `color-lib/compositing`,
+or the compatibility projection. `entry-points.md` lists every subpath.
 
 `themeFromFlexTokens` in `theming/compat` builds a complete `Theme` in this order:
 
-1. the appearance-specific complete legacy base from `getDefaultLegacyTheme`;
+1. the generated Fluent theme for the platform and appearance, selected as `fluentTheme` selects it, which supplies
+   every value Flex cannot represent;
 2. the source's `legacyFallback`, which preserves component recipes, custom colors, and host metadata that Flex cannot
    represent;
 3. the generated Flex projection, so mapped Flex values are authoritative;
 4. `host.appearance` metadata derived from the resolved appearance.
 
 The reverse projection is intentionally lossy; `tokens.md` describes how the mapping chooses one canonical Flex value per
+legacy path. A layered shadow keeps only its first and last layers as `ambient` and `key`, and motion tokens have no
 legacy path. The `apps/bundle-size` `design-*` scenarios guard this module boundary.

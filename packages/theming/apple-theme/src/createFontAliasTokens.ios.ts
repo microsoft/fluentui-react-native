@@ -1,7 +1,7 @@
 import aliasTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-aliases.json'; // Font alias tokens should be the same for all color styles
 import { memoize } from '@fluentui-react-native/framework-base';
+import { mapFontPipelineToTheme } from '@fluentui-react-native/design/deprecated';
 import type { Variants } from '@fluentui-react-native/design/theming';
-import { mapFontPipelineToTheme } from '@fluentui-react-native/design/theming';
 
 function createFontAliasTokensWorker(): Partial<Variants> {
   return mapFontPipelineToTheme(aliasTokens);

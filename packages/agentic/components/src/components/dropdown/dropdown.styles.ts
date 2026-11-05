@@ -38,8 +38,8 @@ export const dropdownStyles = StyleSheet.create({
 export const getDropdownThemeStyles = themedStyleSheetFactory('Dropdown.listbox', ({ tokens }) =>
   StyleSheet.create({
     surface: {
-      backgroundColor: tokens.color.surfaceNeutralNearer,
-      borderColor: tokens.color.strokeNeutralSubtle,
+      backgroundColor: tokens.color.surfaceNeutralNearer.rest,
+      borderColor: tokens.color.strokeNeutralSubtle.rest,
       borderRadius: tokens.borderRadius.base400,
       borderStyle: 'solid',
       borderWidth: tokens.strokeWidth.thin,
@@ -51,10 +51,10 @@ export const getDropdownThemeStyles = themedStyleSheetFactory('Dropdown.listbox'
 /** The chevron is disabled when disabled, primary in error or while the focus indicator shows, and secondary otherwise. */
 export function getDropdownChevronColor(tokens: FlexTokens, visualState: InputVisualState, focusVisible: boolean): ColorValue {
   if (visualState === 'disabled') {
-    return tokens.color.foregroundNeutralDisabled;
+    return tokens.color.foregroundNeutralDisabled.rest;
   }
   if (visualState === 'error' || focusVisible) {
-    return tokens.color.foregroundNeutralPrimary;
+    return tokens.color.foregroundNeutralPrimary.rest;
   }
-  return tokens.color.foregroundNeutralSecondary;
+  return tokens.color.foregroundNeutralSecondary.rest;
 }

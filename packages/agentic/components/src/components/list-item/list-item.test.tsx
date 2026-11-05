@@ -49,8 +49,8 @@ describe('ListItem', () => {
     }
     expect(getRootStyle(component).backgroundColor).toBe(
       selected && selectionMode !== 'multiple'
-        ? defaultFlexTokens.color.backgroundNeutralSoft
-        : defaultFlexTokens.color.backgroundNeutralTransparent,
+        ? defaultFlexTokens.color.backgroundNeutralSoft.rest
+        : defaultFlexTokens.color.backgroundNeutralTransparent.rest,
     );
   });
 
@@ -69,7 +69,7 @@ describe('ListItem', () => {
 
   it.each(['none', 'single', 'multiple'] as const)('LIT-004 suppresses selected fill while disabled in %s mode', async (selectionMode) => {
     const component = await renderListItem({ content: 'Unavailable', selected: true, disabled: true, selectionMode });
-    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
     expect(getRoot(component).props.accessibilityState).toEqual({ disabled: true, selected: true });
   });
 
@@ -104,7 +104,7 @@ describe('ListItem', () => {
 
     await fireEvent(root, 'hoverIn', {});
     expect(onHoverIn).toHaveBeenCalledTimes(1);
-    expect(getRootStyle(component).backgroundColor).toBe(colors.hover.backgroundNeutralTransparent);
+    expect(getRootStyle(component).backgroundColor).toBe(colors.backgroundNeutralTransparent.hover);
 
     await fireEvent(root, 'pressIn', {});
     expect(onPress).toHaveBeenCalledTimes(0);
@@ -137,7 +137,7 @@ describe('ListItem', () => {
     const component = await renderListItem({ content: 'Selected', selectionMode: 'multiple', selected: true });
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralTransparent,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
     });
   });
 

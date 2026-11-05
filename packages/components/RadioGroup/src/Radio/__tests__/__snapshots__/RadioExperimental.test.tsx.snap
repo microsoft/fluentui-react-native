@@ -150,9 +150,11 @@ exports[`Radio component tests Radio default 1`] = `
       style={
         {
           "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
+          "fontFamily": "Roboto",
+          "fontSize": 16,
           "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
           "marginHorizontal": 2,
         }
@@ -314,9 +316,11 @@ exports[`Radio component tests Radio disabled 1`] = `
       style={
         {
           "color": "#bdbdbd",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
+          "fontFamily": "Roboto",
+          "fontSize": 16,
           "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 24,
           "margin": 0,
           "marginHorizontal": 2,
         }

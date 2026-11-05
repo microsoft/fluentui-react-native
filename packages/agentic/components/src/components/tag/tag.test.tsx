@@ -104,7 +104,7 @@ describe('Tag', () => {
     expect(component.getByText('Engineering')).toBeOnTheScreen();
     expect(getRootStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: '#fafafa',
+      backgroundColor: defaultFlexTokens.color.backgroundNeutralSubtle.rest,
       minHeight: 24,
       minWidth: 24,
     });
@@ -136,7 +136,7 @@ describe('Tag', () => {
     expect(root).toBeDisabled();
     expect(root.props.focusable).toBe(false);
     expect(root.props.accessibilityState).toEqual({ disabled: true });
-    expect(getRootStyle(component).backgroundColor).toBe('#f0f0f0');
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralSubtleDisabled.rest);
     await fireEvent.press(root);
     expect(onPress).not.toHaveBeenCalled();
   });
@@ -192,21 +192,21 @@ describe('Tag', () => {
     const restForeground = StyleSheet.flatten(text.props.style).color;
 
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.backgroundBrandHeavy,
+      backgroundColor: tokens.color.backgroundBrandHeavy.rest,
     });
-    expect(restForeground).toBe(tokens.color.foregroundNeutralOnloud);
+    expect(restForeground).toBe(tokens.color.foregroundNeutralOnloud.rest);
 
     await fireEvent(root, 'hoverIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.hover.backgroundBrandHeavy,
+      backgroundColor: tokens.color.backgroundBrandHeavy.hover,
     });
-    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud);
+    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud.rest);
 
     await fireEvent(root, 'pressIn', {});
     expect(getRootStyle(component)).toMatchObject({
-      backgroundColor: tokens.color.pressed.backgroundBrandHeavy,
+      backgroundColor: tokens.color.backgroundBrandHeavy.pressed,
     });
-    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud);
+    expect(StyleSheet.flatten(text.props.style).color).toBe(tokens.color.foregroundNeutralOnloud.rest);
   });
 
   it('uses native focus visuals without mounting custom rings', async () => {
@@ -220,11 +220,11 @@ describe('Tag', () => {
   });
 
   it.each([
-    ['primary', '#185abd'],
-    ['secondary', '#fafafa'],
-  ] as const)('resolves the %s appearance', async (appearance, backgroundColor) => {
+    ['primary', 'backgroundBrandHeavy'],
+    ['secondary', 'backgroundNeutralSubtle'],
+  ] as const)('resolves the %s appearance', async (appearance, backgroundToken) => {
     const component = await renderTag({ appearance, content: appearance });
-    expect(getRootStyle(component).backgroundColor).toBe(backgroundColor);
+    expect(getRootStyle(component).backgroundColor).toBe(defaultFlexTokens.color[backgroundToken].rest);
   });
 
   it.each([
@@ -247,8 +247,8 @@ describe('Tag', () => {
   });
 
   it.each([
-    ['rounded', 4],
-    ['circular', 9999],
+    ['rounded', defaultFlexTokens.borderRadius.base300],
+    ['circular', defaultFlexTokens.borderRadius.circular],
   ] as const)('resolves the %s shape', async (shape, borderRadius) => {
     const component = await renderTag({ content: shape, shape });
     expect(getRootStyle(component).borderRadius).toBe(borderRadius);

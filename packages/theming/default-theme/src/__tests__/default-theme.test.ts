@@ -1,8 +1,6 @@
-import type { ThemeOptions, AppearanceOptions } from '@fluentui-react-native/design/theming';
+import type { ThemeOptions } from '@fluentui-react-native/design/theming';
 
-import { createColorAliasTokens, createShadowAliasTokens } from '../createAliasTokens';
-import { createDefaultTheme } from '../createDefaultTheme';
-import { defaultFluentTheme, defaultFluentDarkTheme } from '../defaultTheme';
+import { createDefaultTheme, defaultFluentTheme, defaultFluentDarkTheme } from '../index';
 
 const defaultThemeOptions: ThemeOptions[][] = [
   [{ appearance: 'light', defaultAppearance: 'light' }],
@@ -11,8 +9,6 @@ const defaultThemeOptions: ThemeOptions[][] = [
   [{ appearance: undefined, defaultAppearance: 'light' }],
   [{ appearance: 'dynamic', defaultAppearance: 'light' }],
 ];
-
-const appearanceOptions: AppearanceOptions[] = ['light', 'dark', 'highContrast'];
 
 beforeAll(() => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => ({
@@ -55,17 +51,5 @@ describe('createDefaultTheme test', () => {
     reference.invalidate();
 
     expect(reference.theme.host.appearance).toBe('dark');
-  });
-});
-
-describe('createColorAliasTokens test', () => {
-  it.concurrent.each(appearanceOptions)('appearanceOptions - %s', async (appearanceOption: AppearanceOptions) => {
-    expect(createColorAliasTokens(appearanceOption)).toMatchSnapshot();
-  });
-});
-
-describe('createShadowAliasTokens test', () => {
-  it.concurrent.each(appearanceOptions)('appearanceOptions - %s', async (appearanceOption: AppearanceOptions) => {
-    expect(createShadowAliasTokens(appearanceOption)).toMatchSnapshot();
   });
 });

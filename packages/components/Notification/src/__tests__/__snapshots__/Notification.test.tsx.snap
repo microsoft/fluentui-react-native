@@ -78,6 +78,8 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "System",
             "fontSize": 15,
             "fontWeight": "400",
+            "letterSpacing": -0.23,
+            "lineHeight": 20,
             "margin": 0,
           }
         }
@@ -141,7 +143,7 @@ exports[`Notification component tests Notification default 1`] = `
           "alignItems": "center",
           "alignSelf": "center",
           "backgroundColor": "transparent",
-          "borderColor": "#ffffff",
+          "borderColor": "#00000000",
           "borderRadius": 8,
           "borderWidth": 1,
           "display": "flex",
@@ -164,8 +166,10 @@ exports[`Notification component tests Notification default 1`] = `
           {
             "color": "#0f548c",
             "fontFamily": "System",
-            "fontSize": 12,
+            "fontSize": 13,
             "fontWeight": "600",
+            "letterSpacing": -0.23,
+            "lineHeight": 20,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,

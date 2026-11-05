@@ -3,7 +3,8 @@ id: design.styling
 kind: instruction-reference
 owner_paths:
   - packages/agentic/design/src/styling
-  - packages/agentic/design/src/useThemeState.ts
+  - packages/agentic/design/src/flex/styling
+  - packages/agentic/design/src/flex/useThemeState.ts
 ---
 
 # Styling
@@ -46,8 +47,8 @@ states come from deeper levels. `getActiveState` picks the first active state in
 `interactiveStatePriority` is `disabled`, `pressed`, then `hovered`.
 
 `getThemedColorStyleFactory` and `colorStyleDef` accept semantic color keys in place of colors. They synthesize hovered
-and pressed nodes wherever those states are declared, resolving `tokens.color.hover` and `tokens.color.pressed` for the
-inherited key. An interaction branch may still select a different semantic key explicitly.
+and pressed nodes wherever those states are declared, reading the inherited key's resolved `hover` or `pressed` state
+only when that node is built. An interaction branch may still select a different semantic key explicitly.
 
 ## Value helpers
 

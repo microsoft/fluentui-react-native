@@ -65,7 +65,7 @@ export function useMenuItemStyles_unstable(state: MenuItemState) {
   if (state.checkmark) {
     attachSlotProps(state.checkmark, {
       accessible: false,
-      color: state.hasMultiselect ? state.tokens.color.foregroundBrandOnloud : labelColor,
+      color: state.hasMultiselect ? state.tokens.color.foregroundBrandOnloud.rest : labelColor,
       height: state.hasMultiselect ? 12 : 16,
       style: state.selected ? undefined : { opacity: 0 },
       width: state.hasMultiselect ? 12 : 16,
@@ -75,7 +75,7 @@ export function useMenuItemStyles_unstable(state: MenuItemState) {
   if (state.multiselectCheckbox) {
     attachSlotProps(state.multiselectCheckbox, {
       ...hiddenFromAccessibilityProps,
-      iconColor: state.tokens.color.foregroundBrandOnloud,
+      iconColor: state.tokens.color.foregroundBrandOnloud.rest,
       iconSize: 12,
       status: state.selected ? 'checked' : 'unchecked',
       style: [menuItemStyles.multiselectCheckbox, getMenuItemCheckboxStyle(state), getMenuItemTrailingStyle(state)],

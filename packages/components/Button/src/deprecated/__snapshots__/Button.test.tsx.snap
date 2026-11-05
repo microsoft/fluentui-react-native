@@ -25,8 +25,8 @@ exports[`Button default 1`] = `
     {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -62,10 +62,13 @@ exports[`Button default 1`] = `
       <Text
         style={
           {
-            "color": "#323130",
+            "color": "#242424",
+            "dynamicTypeRamp": "body",
             "fontFamily": "System",
-            "fontSize": 13,
+            "fontSize": 17,
             "fontWeight": "400",
+            "letterSpacing": -0.43,
+            "lineHeight": 22,
             "margin": 0,
             "marginEnd": 2,
             "marginStart": 2,

@@ -15,13 +15,21 @@
       "name": "design-theme-state",
       "module": "@fluentui-react-native/design",
       "exports": ["FlexThemeReference", "ThemeProvider", "useThemeState"],
-      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/color-lib/"]
+      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
+      "requiredInputPatterns": [
+        "/design/src/flex/flexThemeReference.",
+        "/design/src/flex/useThemeState.",
+        "/design/src/theming/ThemeProvider."
+      ],
+      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
     },
     {
       "name": "design-themed-root",
       "module": "@fluentui-react-native/design",
       "exports": ["ThemedRoot", "useRootSettings", "useThemeState"],
-      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/", "/color-lib/"]
+      "forbiddenInputPatterns": ["/design/src/fluent/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
+      "requiredInputPatterns": ["/design/src/flex/useThemeState.", "/design/src/theming/ThemedRoot."],
+      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
     },
     {
       "name": "design-color-lib",
@@ -41,13 +49,128 @@
           "exports": ["ThemeReference"]
         }
       ],
-      "forbiddenInputPatterns": ["/theming/compat/", "/tokens/legacy/"]
+      "forbiddenInputPatterns": ["/design/src/fluent/compat/", "/design/src/deprecated/", "/design/src/test/", "/color-lib/compositing."],
+      "requiredInputPatterns": ["/design/src/fluent/themeReference."],
+      "forbiddenOutputPatterns": ["/design/src/flex/flexThemeReference."],
+      "requiredOutputPatterns": ["/color-lib/interaction.", "/design/src/flex/colors/interactionPolicy."]
+    },
+    {
+      "name": "design-legacy-theme",
+      "module": "@fluentui-react-native/design/theming",
+      "exports": ["ThemeProvider", "ThemeReference", "useTheme"],
+      "forbiddenInputPatterns": ["/design/src/deprecated/", "/design/src/test/"],
+      "requiredInputPatterns": ["/design/src/theming/ThemeProvider."],
+      "forbiddenOutputPatterns": ["/color-lib/", "/design/src/flex/"],
+      "requiredOutputPatterns": ["/design/src/fluent/themeReference.", "/design/src/fluent/useTheme."]
     },
     {
       "name": "design-legacy-theme-from-flex",
       "module": "@fluentui-react-native/design/theming",
       "exports": ["FlexThemeReference", "ThemeProvider", "useTheme"],
-      "requiredInputPatterns": ["/theming/compat/themeFromFlexTokens.", "/tokens/legacy/"]
+      "forbiddenInputPatterns": ["/design/src/deprecated/", "/design/src/test/"],
+      "requiredInputPatterns": [
+        "/design/src/fluent/compat/themeFromFlexTokens.",
+        "/design/src/themes/fluent/selectFluentTheme.",
+        "/design/src/fluent/defaults/fluentTokens.generated.",
+        "/design/src/fluent/useTheme."
+      ]
+    },
+    {
+      "name": "design-fluent-light-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["fluentLightTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/deprecated/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/"
+      ],
+      "requiredInputPatterns": ["/design/src/themes/fluent/legacyPalette.", "/design/src/fluent/defaults/fluentTokens.generated."],
+      "forbiddenOutputPatterns": [
+        "/design/src/themes/fluent/fluentDarkTheme.",
+        "/design/src/themes/fluent/fluentTheme.",
+        "/design/src/themes/fluent/fluentHc",
+        "/design/src/fluent/themeReference.",
+        "/design/src/flex/",
+        "/design/src/themes/flex/",
+        "/color-lib/"
+      ],
+      "requiredOutputPatterns": ["/design/src/themes/fluent/fluentLightTheme.", "/design/src/themes/fluent/legacyPalette."]
+    },
+    {
+      "name": "design-fluent-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["fluentTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/deprecated/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/"
+      ],
+      "forbiddenOutputPatterns": ["/design/src/flex/", "/design/src/themes/flex/", "/color-lib/"],
+      "requiredOutputPatterns": [
+        "/design/src/themes/fluent/fluentTheme.",
+        "/design/src/themes/fluent/fluentLightTheme.",
+        "/design/src/themes/fluent/fluentDarkTheme.",
+        "/design/src/themes/fluent/fluentHcLightTheme.",
+        "/design/src/themes/fluent/fluentHcDarkTheme.",
+        "/design/src/fluent/themeReference."
+      ]
+    },
+    {
+      "name": "design-fluent-hc-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["fluentHcTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/deprecated/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/"
+      ],
+      "forbiddenOutputPatterns": [
+        "/design/src/themes/fluent/fluentLightTheme.",
+        "/design/src/themes/fluent/fluentDarkTheme.",
+        "/design/src/themes/fluent/fluentTheme.",
+        "/design/src/flex/",
+        "/design/src/themes/flex/",
+        "/color-lib/"
+      ],
+      "requiredOutputPatterns": [
+        "/design/src/themes/fluent/fluentHcTheme.",
+        "/design/src/themes/fluent/fluentHcLightTheme.",
+        "/design/src/themes/fluent/fluentHcDarkTheme.",
+        "/design/src/fluent/themeReference."
+      ]
+    },
+    {
+      "name": "design-flex-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["flexTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/deprecated/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/",
+        "/color-lib/compositing."
+      ],
+      "requiredInputPatterns": ["/design/src/flex/defaults/defaultTokens.generated."],
+      "forbiddenOutputPatterns": ["/design/src/fluent/", "/design/src/themes/fluent/", "/design/src/themes/flex/flexWarmTheme."],
+      "requiredOutputPatterns": ["/design/src/themes/flex/flexTheme.", "/design/src/flex/defaults/defaultTokens.generated."]
+    },
+    {
+      "name": "design-flex-warm-theme",
+      "module": "@fluentui-react-native/design/themes",
+      "exports": ["flexWarmTheme"],
+      "forbiddenInputPatterns": [
+        "/design/src/fluent/compat/",
+        "/design/src/deprecated/",
+        "/design/src/fluent/useTheme.",
+        "/design/src/test/",
+        "/color-lib/compositing."
+      ],
+      "requiredInputPatterns": ["/design/src/flex/defaults/defaultTokens.generated."],
+      "forbiddenOutputPatterns": ["/design/src/fluent/", "/design/src/themes/fluent/", "/design/src/themes/flex/flexTheme."],
+      "requiredOutputPatterns": ["/design/src/themes/flex/flexWarmTheme.", "/design/src/flex/defaults/defaultTokens.generated."]
     }
   ]
 }

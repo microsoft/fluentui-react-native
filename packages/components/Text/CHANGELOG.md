@@ -1,5 +1,14 @@
 # Change Log - @fluentui-react-native/text
 
+## 0.25.17
+
+### Patch Changes
+
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/design@0.5.3
+  - @uifabricshared/foundation-compose@1.16.16
+  - @fluentui-react-native/framework@0.17.10
+
 ## 0.25.16
 
 ### Patch Changes

@@ -2,7 +2,7 @@
 id: design.testing
 kind: instruction-reference
 owner_paths:
-  - packages/agentic/design/src/testing
+  - packages/agentic/design/src/test
 ---
 
 # Testing helpers
@@ -12,7 +12,7 @@ owner_paths:
 `@fluentui-react-native/design/testing` is the test-only entry point for
 fixtures and validation helpers associated with the design package. It exports:
 
-- the generated `defaultFlexTokens` fixture and default resolved appearance;
+- the x3 cool `defaultFlexTokens` and the default resolved appearance;
 - `mockTheme` for tests that need a legacy-compatible theme;
 - WCAG thresholds and canonical semantic color pairings;
 - structured contrast audits and filters for failed or unresolvable pairs.
@@ -21,9 +21,11 @@ The color validation helpers build on `color-lib`, but are not designed for
 component render paths or other production runtime code. Production consumers
 that need parsing, conversion, interaction generation, compositing, or a direct
 contrast ratio should import `@fluentui-react-native/design/color-lib`.
-Color validation policy, semantic pairings, audit helpers, and conformance
-fixtures belong under `src/testing`; export them from the `testing` entry point
-when they are generally useful to tests. Testing-only validation is
+Color validation policy, semantic pairings, and audit helpers belong under
+`src/test/color-validation`, and conformance fixtures under `src/test/fixtures`;
+export them from the `testing` entry point when they are generally useful to
+tests. `src/test/compatibility` holds the public-surface, legacy-runtime, and
+import-boundary baselines. Testing-only validation is
 intentionally omitted from production bundle-size scenarios.
 
 ```ts
@@ -33,5 +35,15 @@ const failures = getContrastFailures(validateContrastPairs(defaultFlexTokens.col
 ```
 
 The package's internal validation suite audits rest, hover, and pressed values
-for both default and Bebop Warm interaction variants. Its pinned conformance
-fixtures are implementation evidence rather than public testing exports.
+for both the cool and warm color tones. Its pinned conformance fixtures and the
+bulk `getInteractionColorOverrides` helper under `src/test/fixtures` are
+implementation evidence rather than public testing exports.
+`x3InteractionConformance` and `x3WarmInteractionConformance` record each
+tone's x3 rest, hover, and pressed values, and `x3CoolExplicitStates` records
+the cool states the interaction policy does not reproduce, with the reason each
+default authors them. The x3 default parity tests under `src/flex/defaults` are
+described in `tokens.md`.
+
+`validateContrastPairs` accepts a flat map of color values or resolved
+`InteractiveColor` envelopes, which it audits at rest. To audit an interaction
+state, pass a flat map of that state's values.

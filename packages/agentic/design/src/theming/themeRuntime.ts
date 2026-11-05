@@ -1,39 +1,29 @@
-import { defaultFlexTokens } from '../tokens/defaultTokens';
-import type { FlexTokens } from '../tokens/flex.types';
-import { flexTokensFromTheme } from '../tokens/flexTokensFromTheme';
-import { defaultResolvedThemeAppearance, themeAppearanceKey } from './appearance';
-import type { ResolvedThemeAppearance } from './appearance.types';
-import type { ThemeSource } from './themeSource';
+import { themeAppearanceKey } from './appearance';
+import type { FlexTokens } from '../flex/tokens.types';
+import type { ResolvedThemeAppearance } from '../types/appearance.types';
+import type { ThemeState } from '../flex/themeState.types';
+import type { FlexThemeSource, ThemeSource } from './themeSource';
 
-export type ThemeStyleRegistry = Record<symbol, unknown>;
-
-export interface RuntimeThemeState {
-  readonly tokens: FlexTokens;
-  readonly appearance: Readonly<ResolvedThemeAppearance>;
-  readonly highContrast: boolean;
-  readonly themeStyles: ThemeStyleRegistry;
-}
-
-type AppearanceCache = {
+/**
+ * Values derived from one source revision and one resolved appearance.
+ */
+export type ThemeAppearanceCache = {
   flexTokens?: FlexTokens;
-  themeState?: RuntimeThemeState;
+  themeState?: ThemeState;
 };
 
 type SourceCache = {
   revision: number;
-  byAppearance: Map<string, AppearanceCache>;
+  byAppearance: Map<string, ThemeAppearanceCache>;
 };
 
 const sourceCaches = new WeakMap<ThemeSource, SourceCache>();
 
-export const defaultThemeState: RuntimeThemeState = {
-  tokens: defaultFlexTokens,
-  appearance: defaultResolvedThemeAppearance,
-  highContrast: false,
-  themeStyles: {},
-};
-
-function getAppearanceCache(source: ThemeSource, appearance: ResolvedThemeAppearance): AppearanceCache {
+/**
+ * Return the revision-scoped cache for one source and appearance. A source
+ * revision change replaces every entry for that source.
+ */
+export function getThemeAppearanceCache(source: ThemeSource, appearance: ResolvedThemeAppearance): ThemeAppearanceCache {
   let sourceCache = sourceCaches.get(source);
   if (!sourceCache || sourceCache.revision !== source.revision) {
     sourceCache = { revision: source.revision, byAppearance: new Map() };
@@ -49,23 +39,14 @@ function getAppearanceCache(source: ThemeSource, appearance: ResolvedThemeAppear
   return appearanceCache;
 }
 
-export function getFlexTokens(source: ThemeSource, appearance: ResolvedThemeAppearance): FlexTokens {
-  const cache = getAppearanceCache(source, appearance);
+/**
+ * Resolve Flex tokens from a Flex-authored source. This shared helper never
+ * reaches the legacy forward adapter, so legacy-only graphs stay free of it.
+ */
+export function getFlexSourceTokens(source: FlexThemeSource, appearance: ResolvedThemeAppearance): FlexTokens {
+  const cache = getThemeAppearanceCache(source, appearance);
   if (!cache.flexTokens) {
-    cache.flexTokens = source.kind === 'flex' ? source.resolveFlexTokens(appearance) : flexTokensFromTheme(source.resolveTheme(appearance));
+    cache.flexTokens = source.resolveFlexTokens(appearance);
   }
   return cache.flexTokens;
-}
-
-export function getThemeState(source: ThemeSource, appearance: ResolvedThemeAppearance): RuntimeThemeState {
-  const cache = getAppearanceCache(source, appearance);
-  if (!cache.themeState) {
-    cache.themeState = {
-      tokens: getFlexTokens(source, appearance),
-      appearance,
-      highContrast: appearance.contrast === 'highContrast',
-      themeStyles: {},
-    };
-  }
-  return cache.themeState;
 }

@@ -143,7 +143,7 @@
   --gnrc-font-weight-content-editorial-bold: 625;
   --gnrc-font-family-functional: 'Segoe Sans', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
   --gnrc-font-family-content: 'Segoe Sans', 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif;
-  --gnrc-font-family-content-editorial: 'Georgia Pro', Georgia, 'Times New Roman', serif;
+  --gnrc-font-family-content-editorial: 'Segoe Serif', 'Georgia Pro', Georgia, 'Times New Roman', serif;
   --gnrc-font-family-content-code: 'Consolas', 'Courier New', 'Monaco', 'Lucida Console', monospace;
   --gnrc-letter-spacing-functional-display: -0.0075em;
   --gnrc-letter-spacing-functional-pagetitle: -0.0075em;
@@ -261,6 +261,7 @@
   --gnrc-motion-duration-base-200: 200ms;
   --gnrc-motion-duration-base-300: 300ms;
   --gnrc-motion-duration-base-500: 500ms;
+  --gnrc-motion-duration-base-1000: 1000ms;
   --gnrc-motion-easing-functional-enter: cubic-bezier(0, 0, 0, 1);
   --gnrc-motion-easing-functional-exit: cubic-bezier(0.6, 0, 0.75, 0.4);
   --gnrc-motion-easing-functional-transition: cubic-bezier(0.33, 0, 0, 1);

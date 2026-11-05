@@ -1,5 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
+## 1.14.11
+
+### Patch Changes
+
+- dc47e15: Refresh dependency alignment with current rnx-kit tools and remove retired depcheck configuration.
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/design@0.5.3
+  - @fluentui-react-native/badge@0.12.17
+  - @fluentui-react-native/icon@0.22.17
+  - @fluentui-react-native/framework@0.17.10
+
 ## 1.14.10
 
 ### Patch Changes
