@@ -29,13 +29,15 @@ Win32 fixture (M4). The `stories` and `story` operations list and render
 Storybook stories. The MCP adapter exposes the
 operations as six tools, exercised over stdio through `desktop-test serve
 --agent` on both OSes (M5); `desktop_story` is qualified live against the macOS
-Fabric Storybook app through `storybook driver --agent`, and Windows has not
-run it yet. Windows fixture
+Fabric Storybook app through `storybook driver --agent`, and on Windows Fabric
+and Win32 Paper, which also passed the M3 real-app observation checks. Windows
+fixture
 operation and capture checks cover 100% and 150% scale; the React Native
 renderer lanes remain. MR
 has Windows/PowerShell pipe qualification; GitHub Actions rendering and
-console-interrupt coverage remain. M0-M6 remain open unless marked below. This
-status does not claim real-application qualification.
+console-interrupt coverage remain. M0-M6 remain open unless marked below.
+Real-application qualification covers only the recorded M3 observation checks
+and Storybook agent paths.
 Planning baseline: `c84acb741`, 2026-11-02.
 
 **Delivery constraint:** Complete the shared architecture, macOS implementation,
@@ -547,7 +549,7 @@ Fabric and Win32 Paper retain distinct app/runtime behavior and qualification.
 | Work area                | Source owner                                                            | Remaining evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Incremental UIA reads    | `native/windows/src/automation.cpp` and `native/windows/src/driver.cpp` | `observe` is implemented ([contract](../native/windows/README.md#bounded-observation)): it pages siblings one call at a time, so every budget applies mid-level, and a 10,000-item fixture tree returns a 5,000-node partial sample. Remaining: `tree` and `find` still cache the whole subtree and fail `tree-too-large`, incomplete searches must never authorize unique mutation, and no React Native tree has been observed.                                                                            |
-| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)), including pinned `observe` records and `releaseElements`. Remaining: macOS token-recycling evidence (ids are never reused and actions check the pid and role; fingerprints wait on it), PID reuse against a real application, and a retention plateau measured on a real React Native session.                                                                                                                |
+| Identity and reclamation | UIA records, window/process records, SessionManager                     | Windows implemented ([contract](../native/windows/README.md#element-identity-and-retention)), including pinned `observe` records and `releaseElements`. Remaining: macOS token-recycling evidence (ids are never reused and actions check the pid and role; fingerprints wait on it), and PID reuse against a real application. Real React Native sessions on Windows Fabric and Win32 Paper reached a retention plateau ([M3](#m3-implement-bounded-native-observations-and-identities-on-both-oses)).     |
 | Actions and settlement   | UIA mutation worker and FDR1 dispatch                                   | Windows implemented ([contract](../native/windows/README.md#unsettled-mutations), [effects](../native/windows/README.md#mutation-effects)) and qualified against the stuck and hung Win32 fixture, directly and behind a protected service. Remaining: quarantine persistence and the trusted `recover` operation (M2), re-observing application effects after a late completion, a genuinely hung React Native app, and real UIA failures to confirm which provider errors are safe to classify as `none`. |
 | Input authority          | `native/windows/src/input.cpp` and application activation               | Windows implemented ([contract](../native/windows/README.md#input-authority)), and the Win32 Paper smoke passed physical pointer and keyboard actions. Remaining: live lock, RDP disconnect, and elevation transitions (the self-test injects them), a `uiAccess` decision, delivery evidence for `SendInput` beyond its return value, and foreground matching that is finer than the owning process.                                                                                                       |
 | Events                   | UIA MTA worker and bounded event dispatch                               | Windows implemented with `WinEvent` hooks ([contract](../native/windows/README.md#window-events-and-identity)): callbacks enqueue on a dedicated thread without provider calls, overflow is bounded, and `IsWindow` polling is the fallback. Remaining: event delivery across integrity levels, same-class handle recycling whose destroy event is lost, and UIA structure-change events (not used).                                                                                                        |
@@ -827,8 +829,8 @@ and 8,000 ids. `observeDelta` requires matching scope and projection bases,
 returns an explicit fresh snapshot when a base is unavailable, and suppresses
 removals if either sample is incomplete. Focused operation and MCP tests cover
 continuations, cache eviction, basis mismatch, complete removals, and
-incomplete-sample suppression. Windows real-app identity and repeated-context
-qualification remain open.
+incomplete-sample suppression. Windows real-app qualification is recorded
+below.
 
 **Post-paging live qualification (macOS):** The run used the agent-served arm64
 Fabric Storybook, attached through its connection descriptor and the
@@ -863,13 +865,26 @@ revalidates a fingerprint, and a 20,000-record LRU caps memory
 Win32 fixture, 500 observation, action, and popup cycles keep about 20 retained
 elements and grow the working set by under 8 MB after the first 100 cycles; no
 longer run was recorded. Records that `observe` emits are pinned outside the
-LRU until released or their window ends, and no real React Native session has
-been measured for a plateau.
+LRU until released or their window ends; the real-app plateau is below.
+
+**Windows real-app qualification:** the Storybook agent-served RN Windows
+Fabric (Debug, RN Test App) and Win32 Paper (REX) apps were driven over the MCP
+adapter's stdio `desktop_observe` and `desktop_act` with the same checks as
+macOS. Both passed:
+
+| Check                                | Windows Fabric                                                                                                                    | Win32 Paper                                                                      |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Identity replacement                 | region 3 to 4; old root `ref-region-changed`; new root                                                                            | same                                                                             |
+| Repeated context                     | 50 samples, 50 distinct ids, 1 root, all complete                                                                                 | same                                                                             |
+| Paging (20-node pages)               | 10 pages, 192 emitted, union 113 = single read                                                                                    | 12 pages, 230 emitted, union 116 = single read                                   |
+| Cursor eviction                      | `observation-cursor-expired`; delta `base-expired`                                                                                | same                                                                             |
+| Deltas                               | unchanged 0; click 1 `changed` checkbox; view and story switch `basis-mismatch`; `maxVisited` 40 `removalsSuppressed`, 0 removals | same, with `activate` (physical click refused by the foreground lock, no effect) |
+| Retention (budget 500 nodes, 64 KiB) | 100 warmups, 500 complete 113-element observations; working set range 168 KiB, private 36 KiB                                     | 116 elements; working set range 316 KiB, private 80 KiB                          |
 
 **Complete when:** native large-tree, duplicate, replacement, pagination/delta,
 and repeated-context tests pass on the target providers; no new bounded request
 uses a full-tree fallback. Retained memory reaches a documented plateau rather
-than growing with every observation.
+than growing with every observation. Remaining: 200% and mixed-DPI scale.
 
 ### M4. Complete action fidelity, settlement, waits, and capture
 
@@ -990,10 +1005,15 @@ observed, found, and captured with a matching hash, refused an unknown story,
 and closed; the driver refused unauthenticated `/status` and `newSession`, the
 channel's `/mcp` returned 404, and stopping removed the descriptor and ready
 file. The runtime bridge does not reconnect: an app left running across a
-driver restart reports `story-not-ready` until relaunched. Remaining: Windows
-and Win32 Storybook qualification of `--agent`, runtime-bridge reconnect, the
-CLI and attach work below, physical console interruption on Windows, real
-React Native application qualification, and clients other than the SDK's.
+driver restart reports `story-not-ready` until relaunched. On Windows Fabric
+and Win32 Paper, `driver --agent` attaches by the app's verified AUMID or REX
+executable instead of a lease, and serves Metro on the Windows Debug host's
+fixed port 8081; each passed unauthenticated `/status` refusal (401), attach,
+filtered listing (18 of 202 and 18 of 176), marker-verified renders with
+request-id replay and reset, observe and find, capture with a matching hash,
+unknown-story refusal, and the journal. Remaining: runtime-bridge reconnect, the
+CLI and attach work below, physical console interruption on Windows, and
+clients other than the SDK's.
 
 **Complete when:** the same requests produce equivalent outcomes through MCP,
 CLI, and typed clients; actual MCP clients exercise initialize/discover/call,

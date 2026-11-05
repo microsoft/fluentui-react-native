@@ -12,3 +12,4 @@ export { defineDesktopConfig, loadDesktopConfig, resolveDesktopSpecs, validateDe
 export type { DesktopConfig, DesktopTargetConfig, DesktopWdioSuite, ResolvedDesktopConfig, ResolvedDesktopTarget } from './config.js';
 export type { DesktopIntegration } from './integration.js';
 export { desktopStageCommands, resolveDesktopApplication } from './adapters.js';
+export type { ResolveDesktopApplicationOptions } from './adapters.js';

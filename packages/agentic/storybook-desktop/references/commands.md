@@ -81,7 +81,16 @@ the platform's private storage root unless `--descriptor <name>` or
 target. Agent mode disables the channel's unauthenticated MCP endpoint, so
 agents select stories through the adapter's `desktop_story`. On macOS the
 command keeps the application lease naming the one running app instance, so
-agents attach without `storybook test`. `storybook test` refuses an
+agents attach without `storybook test`. Nothing maintains a Windows or Win32
+lease, so on those platforms the agent attaches by the app's verified identity
+instead: a configured `nativeDriver.application` AUMID or executable path, or
+else the desktop target's registered package AUMID (RN Test App) or REX
+`ReactTest.exe`. Build and register the app once before `driver --agent`;
+the command fails before starting services when it cannot verify an identity.
+A platform whose smoke options declare a fixed Metro URL, such as
+`createWindowsSmokeOptions` for the RN Test App Windows Debug host, which always
+loads from port 8081, gets Metro on that port; the command fails when the port
+is in use rather than serving a bundle the app never reads. `storybook test` refuses an
 agent-served instance because WDIO holds no grant, and the fake driver
 (`STORYBOOK_NATIVE_DRIVER_FAKE=1`) refuses agent mode. NDJSON
 streams bounded report events and finishes one-shot runs with a summary.

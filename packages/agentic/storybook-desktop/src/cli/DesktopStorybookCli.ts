@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
-import { defaultAgentDescriptor, DesktopServiceScope } from '@fluentui-react-native/desktop-test';
+import { defaultAgentDescriptor, DesktopServiceScope, resolveDesktopApplication } from '@fluentui-react-native/desktop-test';
 import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import { formatDesktopReporterValue } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
@@ -11,6 +11,7 @@ import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '
 import {
   buildNativeDesktopDriver,
   resolveNativeDesktopDriver,
+  type NativeDesktopApplicationDescriptor,
   type NativeDriverArtifact,
   type NativeDriverBuildOptions,
 } from '@fluentui-react-native/desktop-driver';
@@ -74,6 +75,8 @@ export type DesktopStorybookCliOptions = {
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
+  /** Resolves a Windows or Win32 desktop target's verified application identity for `driver --agent`. */
+  resolveDesktopApplication?: typeof resolveDesktopApplication;
   writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
   maintainMacOSApplicationLease?: typeof maintainMacOSApplicationLease;
   reporter?: DesktopReportWriter;
@@ -123,6 +126,7 @@ export class DesktopStorybookCli {
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
+  private readonly resolveDesktopApplication: typeof resolveDesktopApplication;
   private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
   private readonly maintainMacOSApplicationLease: typeof maintainMacOSApplicationLease;
   private readonly reporter?: DesktopReportWriter;
@@ -162,6 +166,7 @@ export class DesktopStorybookCli {
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
+    this.resolveDesktopApplication = options.resolveDesktopApplication ?? resolveDesktopApplication;
     this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
     this.maintainMacOSApplicationLease = options.maintainMacOSApplicationLease ?? maintainMacOSApplicationLease;
   }
@@ -224,8 +229,9 @@ export class DesktopStorybookCli {
       throw unsupportedAction('server', platform);
     }
     const nativeDriver = await this.resolveDriver(platform);
+    const agentApplication = agent && platform !== 'macos' ? await this.resolveAgentApplication(platform) : undefined;
     const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
-    const metroPort = await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    const metroPort = await this.resolveDriverMetroPort(platform, storybookPort);
     const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
     const resolvedInstance: ResolvedDesktopStorybookInstance = {
       ...this.instance,
@@ -233,7 +239,12 @@ export class DesktopStorybookCli {
       metroPort,
       storybookPort,
     };
-    const driverManifest = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver, agent);
+    const driverManifest = await this.writeDriverManifest(
+      platform,
+      resolvedInstance,
+      nativeDriver,
+      agent && { ...agent, ...(agentApplication ? { application: agentApplication } : {}) },
+    );
     resolvedInstance.driverManifestPath = driverManifest.path;
     this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     const failures: unknown[] = [];
@@ -590,6 +601,25 @@ export class DesktopStorybookCli {
     }
   }
 
+  /**
+   * A native host whose development build reads Metro from a fixed port, such as React Native Test App's Windows Debug
+   * host, declares that port through its smoke Metro URL. The driver must serve Metro there, or the app never loads.
+   */
+  private async resolveDriverMetroPort(platform: Platforms, storybookPort: number): Promise<number> {
+    const smoke = this.config.getPlatformOptions(platform).smoke;
+    if (!smoke || !smoke.metroUrl) {
+      return findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    }
+    const port = portFromUrl(smoke.metroUrl);
+    if (port === storybookPort || !(await this.isPortAvailable(port))) {
+      throw new Error(
+        `The ${platform} app loads its development bundle from Metro on port ${port}, which is in use. ` +
+          `Stop the process using port ${port}, such as another Metro server, then rerun the driver.`,
+      );
+    }
+    return port;
+  }
+
   private async resolveSmokeInstance(
     platform: Platforms,
     smoke: DesktopSmokeOptions,
@@ -658,6 +688,40 @@ export class DesktopStorybookCli {
 
   private renderer(platform: Platforms): 'fabric' | 'paper' {
     return platform === 'win32' || (platform === 'macos' && this.paper) ? 'paper' : 'fabric';
+  }
+
+  /**
+   * Windows and Win32 have no lease maintainer, so an agent attaches by the exact title qualified with the app's
+   * configured or resolved AUMID or canonical executable; a title alone is never accepted as an identity.
+   */
+  private async resolveAgentApplication(platform: Platforms): Promise<NativeDesktopApplicationDescriptor> {
+    const { windowTitle, aumid, executablePath } = this.requireNativeDriverOptions(platform).application ?? {};
+    if (windowTitle && (aumid || executablePath)) {
+      return { windowTitle, ...(aumid ? { aumid } : {}), ...(executablePath ? { executablePath } : {}) };
+    }
+    const target = this.config.getDesktopTarget(platform);
+    if (!target) {
+      throw new Error(
+        `An agent attaches to ${platform} by a verified application identity; configure a ${platform} desktop target or the native driver application's aumid or executablePath.`,
+      );
+    }
+    let resolved: NativeDesktopApplicationDescriptor;
+    try {
+      resolved = await this.resolveDesktopApplication(target, this.services.controller.signal, { attach: true });
+    } catch (error) {
+      throw new Error(
+        `Could not resolve the ${platform} application identity an agent attaches to; build and register the app once before driver --agent: ${errorMessage(error)}`,
+        { cause: error },
+      );
+    }
+    if (!resolved.windowTitle || (!resolved.aumid && !resolved.executablePath)) {
+      throw new Error(`The ${platform} desktop target does not resolve an AUMID or executable identity for an agent to attach to.`);
+    }
+    return {
+      windowTitle: resolved.windowTitle,
+      ...(resolved.aumid ? { aumid: resolved.aumid } : {}),
+      ...(resolved.executablePath ? { executablePath: resolved.executablePath } : {}),
+    };
   }
 
   private async resolveDriver(platform: Platforms): Promise<NativeDriverArtifact> {

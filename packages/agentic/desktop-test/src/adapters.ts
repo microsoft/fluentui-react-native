@@ -6,9 +6,18 @@ import { promisify } from 'node:util';
 import type { NativeDesktopApplicationDescriptor } from '@fluentui-react-native/desktop-driver';
 import type { DesktopCommand, DesktopStage, ResolvedDesktopTarget } from './config.js';
 
+export type ResolveDesktopApplicationOptions = {
+  /**
+   * Resolves only the identity an attach session verifies. REX then needs neither a bundle nor launch arguments, so a
+   * service can start before the app it will attach to is bundled.
+   */
+  attach?: boolean;
+};
+
 export async function resolveDesktopApplication(
   target: ResolvedDesktopTarget,
   signal?: AbortSignal,
+  options: ResolveDesktopApplicationOptions = {},
 ): Promise<NativeDesktopApplicationDescriptor> {
   const configured = target.host.application ?? {};
   let application: NativeDesktopApplicationDescriptor;
@@ -20,28 +29,32 @@ export async function resolveDesktopApplication(
     const bundleRoot = target.host.bundleRoot ?? path.join(target.projectRoot, 'dist');
     if (!target.host.component || !target.host.windowTitle)
       throw new Error('REX targets require their canonical component and windowTitle.');
-    if (!fs.existsSync(path.join(bundleRoot, 'index.win32.bundle')))
-      throw new Error(`REX bundle is missing in ${bundleRoot}; run the bundle stage first.`);
-    application = {
-      executablePath: path.join(directory, 'ReactTest.exe'),
-      workingDirectory: directory,
-      arguments: [
-        'basePath',
-        bundleRoot,
-        'plugin',
-        'defaultplugin',
-        'bundle',
-        'index.win32',
-        'component',
-        target.host.component,
-        'windowTitle',
-        target.host.windowTitle,
-        'jsEngine',
-        'v8',
-      ],
-      windowTitle: target.host.windowTitle,
-      ...configured,
-    };
+    if (options.attach) {
+      application = { executablePath: path.join(directory, 'ReactTest.exe'), windowTitle: target.host.windowTitle, ...configured };
+    } else {
+      if (!fs.existsSync(path.join(bundleRoot, 'index.win32.bundle')))
+        throw new Error(`REX bundle is missing in ${bundleRoot}; run the bundle stage first.`);
+      application = {
+        executablePath: path.join(directory, 'ReactTest.exe'),
+        workingDirectory: directory,
+        arguments: [
+          'basePath',
+          bundleRoot,
+          'plugin',
+          'defaultplugin',
+          'bundle',
+          'index.win32',
+          'component',
+          target.host.component,
+          'windowTitle',
+          target.host.windowTitle,
+          'jsEngine',
+          'v8',
+        ],
+        windowTitle: target.host.windowTitle,
+        ...configured,
+      };
+    }
   } else {
     const app = readAppManifest(target);
     const component = app.components?.[0];

@@ -555,6 +555,123 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
+  test.each([
+    {
+      name: 'a configured AUMID',
+      platform: 'windows' as const,
+      configure: { windows: { nativeDriver: { application: { aumid: 'Fixture_abc!App' } } } },
+      expected: { aumid: 'Fixture_abc!App' },
+      resolved: false,
+    },
+    {
+      name: 'the desktop target identity without launch fields',
+      platform: 'win32' as const,
+      configure: {},
+      expected: { executablePath: 'ReactTest.exe' },
+      resolved: true,
+    },
+  ])('gives a $platform agent $name instead of a lease nothing maintains', async ({ platform, configure, expected, resolved }) => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, `driver-manifest.${platform}.json`);
+    const readyPath = path.join(generated, `agent-ready.${platform}.json`);
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const config = makeConfig(configure);
+    const target = { endpoint: platform, projectRoot: storybookRoot, host: { kind: 'rex', windowTitle: 'Fixture' } };
+    jest.spyOn(config, 'getDesktopTarget').mockReturnValue(target as unknown as ReturnType<typeof config.getDesktopTarget>);
+    const resolveDesktopApplication = jest.fn(async () => ({
+      arguments: ['basePath', 'dist'],
+      executablePath: 'ReactTest.exe',
+      windowTitle: 'Fixture',
+      workingDirectory: 'rex',
+    }));
+    const fetch: typeof globalThis.fetch = async (input) => {
+      if (String(input).endsWith('/index.json')) {
+        setTimeout(() => fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'agent.json', processId: 1, schemaVersion: 1 })), 50);
+      }
+      return new Response('{}');
+    };
+    const cli = new DesktopStorybookCli(config, {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch,
+      isPortAvailable: async () => true,
+      maintainMacOSApplicationLease: async () => {
+        throw new Error('Windows agents must not maintain a macOS lease.');
+      },
+      onReady: () => services.requestStop(),
+      output: { write: () => true },
+      resolveDesktopApplication,
+      runner,
+      services,
+    });
+    try {
+      await expect(cli.driver(platform, { agent: { descriptor: 'agent.json' } })).rejects.toThrow('Owned desktop service stop requested.');
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      expect(manifest.agent.application).toEqual({ windowTitle: expect.any(String), ...expected });
+      expect(manifest.application.leasePath).toEqual(expect.any(String));
+      expect(resolveDesktopApplication).toHaveBeenCalledTimes(resolved ? 1 : 0);
+      if (resolved) expect(resolveDesktopApplication).toHaveBeenCalledWith(target, expect.any(AbortSignal), { attach: true });
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
+    }
+  });
+
+  test('refuses a Windows agent without a verifiable application identity', async () => {
+    const config = makeConfig();
+    jest.spyOn(config, 'getDesktopTarget').mockReturnValue(undefined);
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(config, {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async () => true,
+      runner,
+    });
+    await expect(cli.driver('windows', { agent: {} })).rejects.toThrow('verified application identity');
+    expect(runner.background).toEqual([]);
+  });
+
+  // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App connects to loopback Metro
+  const fixedWindowsMetroUrl = 'http://127.0.0.1:8081/status';
+
+  test('serves Metro on the fixed port a Windows Debug host reads', async () => {
+    const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.windows.json');
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const config = makeConfig({ windows: { smoke: { metroUrl: fixedWindowsMetroUrl } } });
+    const cli = new DesktopStorybookCli(config, {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response('{}'),
+      isPortAvailable: async () => true,
+      onReady: () => services.requestStop(),
+      output: { write: () => true },
+      runner,
+      services,
+    });
+    try {
+      await expect(cli.driver('windows')).rejects.toThrow('Owned desktop service stop requested.');
+      expect(runner.background[0].args).toEqual(['start', '--no-interactive', '--port', '8081']);
+      expect(runner.background[1].env.RCT_METRO_PORT).toBe('8081');
+      expect(JSON.parse(fs.readFileSync(manifestPath, 'utf8')).metroPort).toBe(8081);
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+    }
+  });
+
+  test('refuses to move Metro off the fixed port a Windows Debug host reads', async () => {
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(makeConfig({ windows: { smoke: { metroUrl: fixedWindowsMetroUrl } } }), {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async (port) => port !== 8081,
+      runner,
+    });
+    await expect(cli.driver('windows')).rejects.toThrow('Metro on port 8081, which is in use');
+    expect(runner.background).toEqual([]);
+  });
+
   test('runs the standalone macOS app with the enlistment-specific identity', async () => {
     const runner = new RecordingRunner();
     const cli = new DesktopStorybookCli(makeConfig({ macos: { run: { command: 'launch-storybook' } } }), {

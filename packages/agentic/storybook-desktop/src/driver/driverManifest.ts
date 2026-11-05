@@ -18,6 +18,11 @@ export type DesktopStorybookAgentManifest = {
   readyPath: string;
   /** The private storage root, which the adapter reads with `--root`. Defaults to the platform location. */
   root?: string;
+  /**
+   * The identity an agent's attach session verifies instead of the application lease. Windows and Win32 have no lease
+   * maintainer, so the driver resolves the exact window title qualified by the app's AUMID or canonical executable.
+   */
+  application?: NativeDesktopApplicationDescriptor;
 };
 
 export type DesktopStorybookDriverManifest = {
@@ -90,6 +95,7 @@ export function createDesktopStorybookDriverManifest({
             descriptor: agent.descriptor,
             readyPath: path.join(generated, `agent-ready.${platform}.json`),
             ...(agent.root === undefined ? {} : { root: agent.root }),
+            ...(agent.application === undefined ? {} : { application: Object.freeze({ ...agent.application }) }),
           }),
         }
       : {}),

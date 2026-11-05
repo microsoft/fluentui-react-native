@@ -109,6 +109,20 @@ async function main() {
         { bundleIdentifier: 'com.microsoft.ReactTestApp', windowTitle: 'Fixture Window', leasePath },
         'configured identity must not require local build products',
       );
+      const rexDirectory = path.join(project, 'node_modules', '@office-iss', 'rex-win32');
+      fs.mkdirSync(rexDirectory, { recursive: true });
+      fs.writeFileSync(path.join(rexDirectory, 'rex-win32.js'), '');
+      const rexTarget = {
+        endpoint: 'win32',
+        projectRoot: project,
+        host: { kind: 'rex', renderer: 'paper', component: 'Fixture', windowTitle: 'Fixture (Win32)' },
+      };
+      await assert.rejects(resolveDesktopApplication(rexTarget), /REX bundle is missing/);
+      assert.deepEqual(
+        { ...(await resolveDesktopApplication(rexTarget, undefined, { attach: true })) },
+        { executablePath: path.join(fs.realpathSync(rexDirectory), 'ReactTest.exe'), windowTitle: 'Fixture (Win32)' },
+        'an attach identity must not require a bundle or carry launch arguments',
+      );
       if (process.platform === 'darwin') {
         const writeInfo = ({ identifier = 'com.microsoft.ReactTestApp', newArch = 'false' } = {}) =>
           fs.writeFileSync(

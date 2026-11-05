@@ -89,7 +89,12 @@ async function startDesktopStorybookServer({
         agent === null ||
         typeof agent.descriptor !== 'string' ||
         typeof agent.readyPath !== 'string' ||
-        (agent.root !== undefined && typeof agent.root !== 'string'))
+        (agent.root !== undefined && typeof agent.root !== 'string') ||
+        (agent.application !== undefined &&
+          (typeof agent.application !== 'object' ||
+            agent.application === null ||
+            typeof agent.application.windowTitle !== 'string' ||
+            (typeof agent.application.aumid !== 'string' && typeof agent.application.executablePath !== 'string'))))
     )
       throw new Error(`Invalid agent connection in the native Desktop Driver manifest at ${driverManifestPath}.`);
     if (agent && process.env.STORYBOOK_NATIVE_DRIVER_FAKE === '1')
@@ -135,7 +140,8 @@ async function startDesktopStorybookServer({
         });
       } else {
         driver = await startNativeDesktopService({
-          application: driverManifest.application,
+          // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
+          application: agent?.application ?? driverManifest.application,
           artifact: driverManifest.nativeDriver,
           endpoint: driverManifest.endpoint,
           host,
