@@ -35,13 +35,35 @@ There is no automatic stale-lock recovery.
 Cleanup failure now retains the claim, including a failure to dispose a host
 after startup failed. A timeout is not proof of settlement and must not release
 ownership. This conservative fence is not a resource ledger: late work abandoned
-by service guards, process-tree survivors, exact resource accounting, durable
-quarantine wiring, and crash reconciliation remain work in progress.
+by service guards, process-tree survivors, exact resource accounting, and crash
+reconciliation remain work in progress.
 
-The driver library can persist settlement uncertainty, but neither shipped
-service path currently supplies recovery storage/probes. Restart is therefore
-not a safe recovery procedure for uncertain native or Storybook mutations.
-Inspect exact resources and follow trusted recovery evidence requirements.
+Both native service paths use the real `driverService.ts` composition root
+(`@fluentui-react-native/desktop-test/driver-service`). It resolves prebuilt
+helpers with `buildPolicy: 'never'`, creates native hosts, loads durable
+settlement state before serving, probes the host, then publishes any protected
+agent descriptor. Shutdown withdraws the descriptor and revokes its grant
+before awaiting the driver listener, session settlement, and host disposal.
+The Storybook channel/driver remains a supervised child.
+
+Recovery uses the platform's validated owner-only private storage, with a
+bounded hashed namespace derived from the endpoint and registered target ID.
+Ports, run IDs, helper builds, service incarnations, descriptor roots and grants
+do not change that namespace. Keep the registered target ID stable across
+restarts. An explicit trusted `recovery.root` selects a separate private root;
+it must be provisioned with the platform's ownership requirements, never deleted
+as disposable run output. Tests and custom hosts can supply `recovery.storage`
+and `recovery.probeApplication`; these are operator APIs, not client inputs.
+
+An unreadable store aborts startup without publishing a descriptor. Corrupt
+records quarantine the target without application identity, even when a sibling
+record is valid. Only an exact recorded process ID/start-time probe can prove
+application exit; native exit events and service death are not proof.
+`service.recoverTarget` retains the driver's trusted exact-quarantine-ID
+operator API; no new listing, offline recovery command, or model-facing
+recovery route is exposed. Automatic stale-claim removal remains unsupported.
+Inspect exact resources before explicit operator recovery; restarting alone
+never clears uncertain native or Storybook mutations.
 
 Keep reporting runs distinct from physical workload claims, resource ownership,
 application ownership, grants, native sessions, input locks, and context epochs.

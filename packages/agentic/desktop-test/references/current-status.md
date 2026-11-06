@@ -17,23 +17,23 @@ and its sub-issues.
 
 ## Capability matrix
 
-| Capability                                               | State              | Limit or next gate                                                                                                                          |
-| -------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| App/suite configuration and standalone installed-app use | Done               | Storybook is optional; executable config is trusted operator code, not a sandbox.                                                           |
-| Native service and helper composition                    | Done               | Generic and Storybook paths still differ; shared factory/policy extraction is pending.                                                      |
-| Standalone WDIO/Jasmine execution                        | Done               | WDIO owns its session. Storybook CSF callbacks use a runner-owned session borrowed by a Node worker.                                        |
-| Required services, reporting, structured results         | Done               | One collector; bounded JSON/NDJSON summaries. Service-ready is not app/context-ready.                                                       |
-| `serve --agent` descriptor publication                   | Done               | Protects driver routes; no automatic build/launch from MCP. Normal WDIO cannot use the agent-served path yet.                               |
-| Cleanup failure fence                                    | Done, conservative | Failed cleanup retains `interactive.lock`; manual exact-owner/resource inspection is required. No automatic reclaim.                        |
-| Complete lifecycle settlement                            | Work in progress   | Guarded abandoned work, late acquisitions, exact resource ledger, and report/workload delegation separation need the shared resource model. |
-| Durable quarantine wiring                                | Work in progress   | Driver library supports it, but shipped supervisors do not pass recovery storage/probes. Restart is not recovery proof.                     |
-| Supervisor crash containment                             | Work in progress   | Child lifelines, survivor reconciliation, stale-claim protocol, status/stop/recover tooling.                                                |
-| Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.             |
-| MCP/WDIO handoff                                         | Work in progress   | Must await drain/deletion; attached-app handoff is independent of future supervisor-owned launch.                                           |
-| Supervisor-owned app lifetime                            | Work in progress   | Current session-owned launch/externally owned attach semantics remain; never silently retain or terminate another owner's app.              |
-| Cross-service/multi-target claims                        | Work in progress   | Target aliases and input mutexes are not exact-application exclusion; resolve registered-ID collisions before expanding hosts.              |
-| Bounded persisted run-query/control API                  | Work in progress   | Schemas belong here. Agents may eventually select only declared workload IDs, not commands/paths/environment.                               |
-| Automatic service reuse and per-user daemon              | Deferred           | Requires exact identity/config matching and evidence of need. Never adopt an unknown port occupant.                                         |
+| Capability                                               | State              | Limit or next gate                                                                                                                                          |
+| -------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| App/suite configuration and standalone installed-app use | Done               | Storybook is optional; executable config is trusted operator code, not a sandbox.                                                                           |
+| Native service and helper composition                    | Done               | Generic supervisor and supervised Storybook child use the same real `driverService` factory, helper policy, authority and settled close.                    |
+| Standalone WDIO/Jasmine execution                        | Done               | WDIO owns its session. Storybook CSF callbacks use a runner-owned session borrowed by a Node worker.                                                        |
+| Required services, reporting, structured results         | Done               | One collector; bounded JSON/NDJSON summaries. Service-ready is not app/context-ready.                                                                       |
+| `serve --agent` descriptor publication                   | Done               | Protects driver routes; no automatic build/launch from MCP. Normal WDIO cannot use the agent-served path yet.                                               |
+| Cleanup failure fence                                    | Done, conservative | Failed cleanup retains `interactive.lock`; manual exact-owner/resource inspection is required. No automatic reclaim.                                        |
+| Complete lifecycle settlement                            | Work in progress   | Guarded abandoned work, late acquisitions, exact resource ledger, and report/workload delegation separation need the shared resource model.                 |
+| Durable quarantine wiring                                | Done               | Both native service paths use owner-only storage and exact-incarnation probes; restart is not recovery proof. Live endpoint qualification remains separate. |
+| Supervisor crash containment                             | Work in progress   | Child lifelines, survivor reconciliation, stale-claim protocol, status/stop/recover tooling.                                                                |
+| Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.                             |
+| MCP/WDIO handoff                                         | Work in progress   | Must await drain/deletion; attached-app handoff is independent of future supervisor-owned launch.                                                           |
+| Supervisor-owned app lifetime                            | Work in progress   | Current session-owned launch/externally owned attach semantics remain; never silently retain or terminate another owner's app.                              |
+| Cross-service/multi-target claims                        | Work in progress   | Target aliases and input mutexes are not exact-application exclusion; resolve registered-ID collisions before expanding hosts.                              |
+| Bounded persisted run-query/control API                  | Work in progress   | Schemas belong here. Agents may eventually select only declared workload IDs, not commands/paths/environment.                                               |
+| Automatic service reuse and per-user daemon              | Deferred           | Requires exact identity/config matching and evidence of need. Never adopt an unknown port occupant.                                                         |
 
 See [lifecycle](lifecycle.md), [commands](commands.md), and
 `@fluentui-react-native/desktop-driver/references/current-status.md` for the
@@ -67,7 +67,7 @@ did not retain a portable raw-report locator; do not imply otherwise.
 | macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.         |
 | Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C; interactive input/capture rerun; process-tree containment and ownership checks. |
 | Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                             |
-| Recovery        | Both service paths wire durable uncertainty before claiming crash-safe restart; ledger and exact-resource reconciliation precede automatic reclaim.             |
+| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim.               |
 | Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                           |
 | Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                         |
 
