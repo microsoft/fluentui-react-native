@@ -76,7 +76,9 @@ and awaits durable driver settlement before closing the channel. The native
 helper remains owned by that service and its existing stdio transport.
 
 `driver --agent` awaits a typed `service-ready` receipt naming the descriptor,
-command incarnation, and producer PID. The generated `agent-ready.*.json` file
+command incarnation, and producer PID. The neutral resource scope validates
+and retains that receipt on the owned channel's resource generation before
+the CLI reports readiness. The generated `agent-ready.*.json` file
 is a compatibility breadcrumb only, never readiness authority. The receipt
 does not prove target acquisition, application readiness, or authenticated
 context/render readiness. Borrowed applications and external services are not

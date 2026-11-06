@@ -369,6 +369,8 @@ describe('DesktopStorybookCli', () => {
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
+    const resourceObserver = jest.fn();
+    services.setResourceObserver(resourceObserver);
     const output = { write: jest.fn() };
     const onReady = jest.fn(() => expect(output.write).toHaveBeenCalledTimes(1));
     const fetch: typeof globalThis.fetch = async () => {
@@ -540,7 +542,24 @@ describe('DesktopStorybookCli', () => {
         signal.throwIfAborted();
         throw new Error('unreachable');
       },
-      onReady: () => written.push('onReady'),
+      onReady: () => {
+        expect(resourceObserver).toHaveBeenCalledWith(
+          expect.objectContaining({
+            id: 'storybook-channel',
+            generation: expect.any(Number),
+            ownership: 'owned',
+            readiness: 'ready',
+            serviceReady: {
+              tier: 'service-ready',
+              service: 'storybook-channel',
+              descriptor: 'custom.json',
+              incarnation: 'fixture-incarnation',
+              processId: 1,
+            },
+          }),
+        );
+        written.push('onReady');
+      },
       output: { write: (chunk: string) => written.push(`${published ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
       runner,
       services,

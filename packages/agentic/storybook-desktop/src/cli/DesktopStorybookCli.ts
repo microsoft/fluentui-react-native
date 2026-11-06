@@ -248,7 +248,7 @@ export class DesktopStorybookCli {
     this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     const failures: unknown[] = [];
     try {
-      const channel = this.services.start(
+      this.services.start(
         'storybook-channel',
         this.prepareCommand(
           {
@@ -268,13 +268,10 @@ export class DesktopStorybookCli {
       ]);
       const agentManifest = driverManifest.manifest.agent;
       if (agentManifest) {
-        if (!channel.waitForReadiness) throw new Error('The owned Storybook channel does not support correlated service readiness.');
-        await this.services.guard(
-          channel.waitForReadiness(
-            { tier: 'service-ready', service: 'storybook-channel', descriptor: agentManifest.descriptor },
-            120_000,
-            this.services.controller.signal,
-          ),
+        await this.services.readyProcess(
+          'storybook-channel',
+          { tier: 'service-ready', service: 'storybook-channel', descriptor: agentManifest.descriptor },
+          120_000,
         );
       }
       if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
