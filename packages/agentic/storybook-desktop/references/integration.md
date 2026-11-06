@@ -120,7 +120,10 @@ Win32 control script when a driver manifest is supplied) opens one driver
 session, selects each story through it, and deletes that session before authored
 tests acquire their own. It never falls back to upstream selection after a
 driver failure. Only pre-dispatch `bridge-unavailable` can be retried;
-uncertain navigation and `relaunch-required` fail without replay.
+uncertain navigation and `relaunch-required` fail without replay. The first
+story's retry budget covers a cold development bundle
+(`STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS`, default 300 s); later stories
+use 30 s.
 
 Epoch/cancellation-aware providers reject stale preview mutations without
 invalidating chrome or live secondary windows. Interrupted navigation still

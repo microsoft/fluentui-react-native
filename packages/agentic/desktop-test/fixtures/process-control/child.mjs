@@ -15,6 +15,15 @@ if (mode === 'late') {
     throw error;
   });
   setInterval(() => undefined, 60_000);
+} else if (mode === 'signal') {
+  const keepAlive = setInterval(() => undefined, 60_000);
+  process.once('SIGTERM', () => {
+    setTimeout(() => {
+      fs.writeFileSync(marker, 'graceful');
+      clearInterval(keepAlive);
+    }, 30);
+  });
+  fs.writeFileSync(marker, 'started');
 } else if (mode === 'borrowed') {
   fs.writeFileSync(marker, String(process.pid));
   setInterval(() => undefined, 60_000);

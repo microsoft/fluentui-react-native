@@ -141,6 +141,20 @@ describe('owned process lifelines', () => {
     if (process.platform !== 'win32') fs.rmSync(fs.readFileSync(`${marker}.socket`, 'utf8'), { force: true });
   });
 
+  test('a stop without disposers runs the child signal handler on every platform', async () => {
+    const marker = path.join(root, 'signal');
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({ command: process.execPath, args: [fixture, 'signal', marker], cwd: root, env: {} });
+    try {
+      await waitUntil(() => fs.existsSync(marker));
+      await running.stop();
+      expect(await running.completed).toBe(0);
+      expect(fs.readFileSync(marker, 'utf8')).toBe('graceful');
+    } finally {
+      await runner.close();
+    }
+  });
+
   test('late Node spawn cannot execute its entry after parent disappearance', async () => {
     const failures: Error[] = [];
     const control = createDesktopProcessControl((error) => failures.push(error));

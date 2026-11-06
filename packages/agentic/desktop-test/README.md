@@ -73,7 +73,9 @@ when working on the package.
   uncertain effects; see [lifecycle and recovery](references/lifecycle.md).
 - Owned Node services inherit a per-command parent lifeline. Cooperative
   disposers await initialization and settlement before withdrawing descriptors;
-  Metro and command wrappers use their own SIGTERM handlers. A readiness receipt
+  Metro and command wrappers use their own SIGTERM handlers. Without a
+  disposer, the lifeline dispatches installed SIGTERM handlers directly, because
+  a Windows self-signal terminates without running them. A readiness receipt
   is correlated to that command's incarnation and producer process, not a file
   or a successful HTTP response. This proves only service readiness, not target,
   application, or context readiness. Unsettled cleanup stays fenced.

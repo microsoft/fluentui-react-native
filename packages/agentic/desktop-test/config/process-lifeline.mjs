@@ -36,7 +36,9 @@ if (encoded) {
         if (failures.length) throw new AggregateError(failures, 'Owned process disposal is incomplete; recovery remains fenced.');
       } else {
         // Metro and command wrappers keep their own signal handlers. Never kill a parent process group from a child.
-        process.kill(process.pid, 'SIGTERM');
+        // Windows terminates on a self-SIGTERM without running handlers, so dispatch installed handlers directly.
+        if (process.listenerCount('SIGTERM')) process.emit('SIGTERM', 'SIGTERM');
+        else process.kill(process.pid, 'SIGTERM');
       }
     })();
     void stopping.catch((failure) => {

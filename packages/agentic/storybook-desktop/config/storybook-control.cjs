@@ -66,12 +66,14 @@ async function smoke(traversal) {
     }
 
     const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
+    // The runtime connects only after Metro serves a cold development bundle, so the first story gets a startup budget.
+    const initialRenderMilliseconds = Number(process.env.STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
     const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
     const failures = [];
     for (const { id } of entries)
       report.reporter.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Navigate ${id}` } });
 
-    for (const { id } of entries) {
+    for (const [entryIndex, { id }] of entries.entries()) {
       const started = Date.now();
       const testId = `navigation:${id}`;
       const title = `Navigate ${id}`;
@@ -79,7 +81,7 @@ async function smoke(traversal) {
       report.reporter.emit({ kind: 'scope-start', payload: { label: title, category: 'phase' } }, testId, context, testId);
       report.reporter.emit({ kind: 'test-start', payload: { testId, title, attempt: 0 } }, testId, context);
       try {
-        if (traversal) await traversal.select(id, 30_000);
+        if (traversal) await traversal.select(id, entryIndex === 0 ? initialRenderMilliseconds : 30_000);
         else await selectStory(id);
         if (settleMilliseconds > 0) {
           await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
