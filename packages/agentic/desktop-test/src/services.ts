@@ -24,6 +24,20 @@ type ResourceEntry = {
   disposalPromise?: Promise<void>;
 };
 
+type DesktopServiceReadyExpectation = Readonly<{
+  tier: 'service-ready';
+  service: string;
+  descriptor?: string;
+}>;
+
+type ProcessReadinessCommand = RunningDesktopCommand & {
+  waitForReadiness?: (
+    expected: DesktopServiceReadyExpectation,
+    timeoutMs?: number,
+    signal?: AbortSignal,
+  ) => Promise<DesktopResourceServiceReadyRecord>;
+};
+
 export class DesktopStopRequested extends Error {
   constructor() {
     super('Owned desktop service stop requested.');
@@ -210,6 +224,49 @@ export class DesktopServiceScope {
     );
   }
 
+  async readyProcess(
+    id: string,
+    expected: DesktopServiceReadyExpectation,
+    timeoutMs = 120_000,
+  ): Promise<DesktopResourceServiceReadyRecord> {
+    validateServiceReadyExpectation(expected);
+    if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0) throw new TypeError('Invalid service readiness deadline.');
+    const service = this.running.find((entry) => entry.id === id);
+    if (!service) throw new Error(`Cannot wait for process readiness from unregistered service "${id}".`);
+    const resource = this.resources.find((entry) => entry.key === id);
+    if (!resource) throw new Error(`Service "${id}" has no registered resource record.`);
+    const waitForReadiness = (service.command as ProcessReadinessCommand).waitForReadiness;
+    if (typeof waitForReadiness !== 'function') {
+      resource.record.readiness = 'failed';
+      this.publish(resource);
+      const error = new Error(`Service "${id}" does not support correlated process readiness.`);
+      this.fail(error);
+      throw error;
+    }
+
+    return this.guard(
+      (async () => {
+        try {
+          const ready = await waitForReadiness.call(service.command, expected, timeoutMs, this.controller.signal);
+          validateDesktopResourceServiceReady(ready);
+          if (ready.service !== expected.service || ready.descriptor !== expected.descriptor) {
+            throw new Error(`Service "${id}" published readiness that does not match the configured expectation.`);
+          }
+          const record = Object.freeze({ ...ready });
+          resource.record.serviceReady = record;
+          resource.record.readiness = 'ready';
+          this.publish(resource);
+          return record;
+        } catch (error) {
+          resource.record.readiness = 'failed';
+          this.publish(resource);
+          this.fail(error instanceof Error ? error : new Error(String(error)));
+          throw error;
+        }
+      })(),
+    );
+  }
+
   close(): Promise<void> {
     return (this.closePromise ??= (async () => {
       this.closing = true;
@@ -244,6 +301,7 @@ export class DesktopServiceScope {
           this.reporter?.fail(error, 'cleanup', resource.record.id);
         }
       }
+
       await this.awaitWork(failures);
       if (failures.length) throw new AggregateError(failures, 'Owned desktop services did not shut down cleanly.');
     })());
@@ -302,5 +360,25 @@ export class DesktopServiceScope {
       }
     })();
     return entry.disposalPromise;
+  }
+}
+
+function validateServiceReadyExpectation(value: unknown): asserts value is DesktopServiceReadyExpectation {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new TypeError('Service readiness expectation must be an object.');
+  }
+  const expected = value as Record<string, unknown>;
+  if (Object.keys(expected).some((key) => !['tier', 'service', 'descriptor'].includes(key))) {
+    throw new TypeError('Service readiness expectation contains an unknown field.');
+  }
+  if (
+    expected.tier !== 'service-ready' ||
+    typeof expected.service !== 'string' ||
+    !expected.service.trim() ||
+    expected.service.includes('\0') ||
+    (expected.descriptor !== undefined &&
+      (typeof expected.descriptor !== 'string' || !expected.descriptor.trim() || expected.descriptor.includes('\0')))
+  ) {
+    throw new TypeError('Invalid service readiness expectation.');
   }
 }

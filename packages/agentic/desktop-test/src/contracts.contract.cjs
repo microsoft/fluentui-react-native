@@ -928,6 +928,113 @@ async function main() {
       claim.release();
       assert.throws(() => fs.readFileSync(path.join(claimDirectory, 'interactive.lock')), /ENOENT/);
 
+      const processReady = {
+        tier: 'service-ready',
+        service: 'storybook-channel',
+        descriptor: 'agent',
+        incarnation: 'inc_process',
+        processId: process.pid,
+      };
+      const processExpectation = { tier: 'service-ready', service: 'storybook-channel', descriptor: 'agent' };
+      let receivedExpectation;
+      let receivedSignal;
+      let processResource;
+      const neverCompletes = new Promise(() => undefined);
+      const processScope = new DesktopServiceScope(
+        {
+          start() {
+            return {
+              completed: neverCompletes,
+              waitForReadiness(expected, _timeoutMs, signal) {
+                receivedExpectation = expected;
+                receivedSignal = signal;
+                return Promise.resolve(processReady);
+              },
+              async stop() {
+                return undefined;
+              },
+            };
+          },
+          async run() {
+            return undefined;
+          },
+        },
+        undefined,
+        'process-run',
+      );
+      processScope.setResourceObserver((resource) => {
+        if (resource.id === 'process-run:storybook-channel') processResource = resource;
+      });
+      processScope.start('storybook-channel', command(''));
+      assert.deepEqual(await processScope.readyProcess('storybook-channel', processExpectation), processReady);
+      assert.deepEqual(receivedExpectation, processExpectation);
+      assert.equal(receivedSignal, processScope.controller.signal);
+      assert.equal(processResource.readiness, 'ready');
+      assert.equal(processResource.serviceReady.tier, 'service-ready');
+      assert.equal(processResource.serviceReady.incarnation, processReady.incarnation);
+      await processScope.close();
+
+      let mismatchedResource;
+      const mismatchedScope = new DesktopServiceScope(
+        {
+          start() {
+            return {
+              completed: neverCompletes,
+              async waitForReadiness() {
+                return { ...processReady, descriptor: 'unexpected' };
+              },
+              async stop() {
+                return undefined;
+              },
+            };
+          },
+          async run() {
+            return undefined;
+          },
+        },
+        undefined,
+        'mismatched-run',
+      );
+      mismatchedScope.setResourceObserver((resource) => {
+        if (resource.id === 'mismatched-run:storybook-channel') mismatchedResource = resource;
+      });
+      mismatchedScope.start('storybook-channel', command(''));
+      await assert.rejects(
+        mismatchedScope.readyProcess('storybook-channel', processExpectation),
+        /does not match the configured expectation/,
+      );
+      assert.equal(mismatchedResource.readiness, 'failed');
+      await mismatchedScope.close();
+
+      let unsupportedResource;
+      const unsupportedScope = new DesktopServiceScope(
+        {
+          start() {
+            return {
+              completed: neverCompletes,
+              async stop() {
+                return undefined;
+              },
+            };
+          },
+          async run() {
+            return undefined;
+          },
+        },
+        undefined,
+        'unsupported-run',
+      );
+      unsupportedScope.setResourceObserver((resource) => {
+        if (resource.id === 'unsupported-run:storybook-channel') unsupportedResource = resource;
+      });
+      unsupportedScope.start('storybook-channel', command(''));
+      await assert.rejects(
+        unsupportedScope.readyProcess('storybook-channel', processExpectation),
+        /does not support correlated process readiness/,
+      );
+      assert.equal(unsupportedResource.readiness, 'failed');
+      await unsupportedScope.close();
+
       const lateDirectory = path.join(root, 'late-lock');
       const lateClaim = createDesktopWorkloadClaim({
         runId: 'late-run',

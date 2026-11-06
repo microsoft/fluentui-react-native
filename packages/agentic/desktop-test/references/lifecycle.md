@@ -24,6 +24,12 @@ a driver or MCP orchestrator.
 Services report readiness and failures through the shared run lifecycle.
 Required-service failure aborts dependent work. Listener/descriptor-ready does
 not prove app-ready, runtime-connected, or story-context-ready.
+Process-backed services may use `readyProcess(id, expected)` with an explicit
+`service-ready` service and optional descriptor expectation. The runner must
+provide correlated readiness; a missing waiter or mismatched receipt fails
+closed. The recorded receipt retains its service-ready tier, incarnation, and
+producer PID. HTTP readiness remains available for services without process
+readiness publication.
 
 Process-backed contributions return the authenticated
 `DesktopServiceReadyRecord` from `/process-control`, not a readiness expectation
