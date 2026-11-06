@@ -545,7 +545,7 @@ describe('DesktopStorybookCli', () => {
       onReady: () => {
         expect(resourceObserver).toHaveBeenCalledWith(
           expect.objectContaining({
-            id: 'storybook-channel',
+            id: 'desktop:storybook-channel',
             generation: expect.any(Number),
             ownership: 'owned',
             readiness: 'ready',
