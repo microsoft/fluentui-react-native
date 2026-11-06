@@ -119,10 +119,6 @@ async function smoke(traversal) {
     }
     report.reporter.emit({ kind: 'diagnostic', payload: { level: 'info', message: `Rendered ${entries.length} stories.` } });
   }
-
-  if (smokeMode === 'stories-and-tests' && smokePhase !== 'stories') {
-    await runAuthoredTests();
-  }
 }
 
 async function runAuthoredTests() {
@@ -194,6 +190,11 @@ async function main() {
       });
     }
     await smoke(traversal);
+    if (smokeMode === 'stories-and-tests' && smokePhase !== 'stories') {
+      await traversal?.close();
+      traversal = undefined;
+      await runAuthoredTests();
+    }
   } catch (error) {
     failure = error;
   } finally {

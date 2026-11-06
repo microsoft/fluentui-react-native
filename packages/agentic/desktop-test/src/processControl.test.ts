@@ -243,6 +243,36 @@ describe('owned process lifelines', () => {
     }
   });
 
+  test('a connection reset after an intentional stop does not fail cleanup', async () => {
+    const accepted: net.Socket[] = [];
+    const createServer = net.createServer.bind(net);
+    const spy = jest.spyOn(net, 'createServer').mockImplementation(((listener: (socket: net.Socket) => void) =>
+      createServer((socket) => {
+        accepted.push(socket);
+        listener(socket);
+      })) as typeof net.createServer);
+    const failures: Error[] = [];
+    const control = createDesktopProcessControl((error) => failures.push(error));
+    spy.mockRestore();
+    const { address, nonce } = JSON.parse(control.environment().FURN_DESKTOP_PROCESS_CONTROL!) as { address: string; nonce: string };
+    const client = net.connect(address);
+    try {
+      const acceptedMessage = once(client, 'data');
+      await once(client, 'connect');
+      client.write(`${JSON.stringify({ type: 'hello', nonce, processId: process.pid })}\n`);
+      await acceptedMessage;
+      control.stop();
+      const closed = new Promise<void>((resolve) => accepted[0]!.once('close', () => resolve()));
+      accepted[0]!.destroy(Object.assign(new Error('read ECONNRESET'), { code: 'ECONNRESET' }));
+      await closed;
+      await expect(control.settled(1000)).resolves.toBeUndefined();
+      expect(failures).toEqual([]);
+    } finally {
+      client.destroy();
+      await control.close();
+    }
+  });
+
   test('stalled readiness and cancellation do not promote another readiness tier', async () => {
     const control = createDesktopProcessControl(() => undefined);
     try {

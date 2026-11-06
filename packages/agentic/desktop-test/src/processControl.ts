@@ -62,8 +62,14 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
     let processId: number | undefined;
     let disposed = false;
     let socketError: Error | undefined;
+    let socketErrorWasUnexpected = false;
     // 'close' always follows 'error'; defer so producer loss (e.g. ECONNRESET on SIGKILL) keeps its specific diagnosis.
-    socket.on('error', (error) => (socketError ??= error));
+    socket.on('error', (error) => {
+      if (!socketError) {
+        socketError = error;
+        socketErrorWasUnexpected = !stopping;
+      }
+    });
     socket.on('close', () => {
       sockets.delete(socket);
       let producerLost = false;
@@ -74,7 +80,7 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
         producerLost = true;
         fail(new Error(`Owned service "${service}" lost its readiness producer without settled disposal.`));
       }
-      if (socketError && !producerLost) fail(socketError);
+      if (socketError && socketErrorWasUnexpected && !producerLost) fail(socketError);
       for (const notify of changed) notify();
     });
     socket.on('data', (text: string) => {

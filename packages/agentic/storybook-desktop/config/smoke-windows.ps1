@@ -265,6 +265,9 @@ try {
   $env:STORYBOOK_SMOKE_FAIL_FAST = '1'
 
   $appProcess = Start-StorybookApp
+  if ($SmokeMode -eq 'stories-and-tests') {
+    $applicationLeasePath = Write-ApplicationLease -Process $appProcess -LaunchTarget $launchTarget
+  }
   Invoke-StorybookControl -Phase 'stories' -Process $appProcess
   if ($SmokeMode -eq 'stories-and-tests') {
     Stop-StorybookApp -Process $appProcess
