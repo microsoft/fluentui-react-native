@@ -40,7 +40,6 @@ import {
 import {
   desktopStorybookTargetId,
   type CreateDesktopStorybookDriverManifestOptions,
-  type DesktopStorybookAgentManifest,
   type DesktopStorybookDriverManifest,
 } from '../driver/driverManifest.js';
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
@@ -249,7 +248,7 @@ export class DesktopStorybookCli {
     this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     const failures: unknown[] = [];
     try {
-      this.services.start(
+      const channel = this.services.start(
         'storybook-channel',
         this.prepareCommand(
           {
@@ -269,7 +268,14 @@ export class DesktopStorybookCli {
       ]);
       const agentManifest = driverManifest.manifest.agent;
       if (agentManifest) {
-        await this.services.guard(waitForAgentConnection(agentManifest, 120_000, this.services.controller.signal));
+        if (!channel.waitForReadiness) throw new Error('The owned Storybook channel does not support correlated service readiness.');
+        await this.services.guard(
+          channel.waitForReadiness(
+            { tier: 'service-ready', service: 'storybook-channel', descriptor: agentManifest.descriptor },
+            120_000,
+            this.services.controller.signal,
+          ),
+        );
       }
       if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
         this.writeStructured({
@@ -1161,32 +1167,6 @@ function queryMacOSApplicationsOutput(bundleIdentifier: string): Promise<string>
     ].join('\n'),
     bundleIdentifier,
   ]);
-}
-
-/** Waits until the channel service records that it published the agent's connection descriptor. */
-async function waitForAgentConnection(agent: DesktopStorybookAgentManifest, timeoutMs: number, signal: AbortSignal): Promise<void> {
-  const deadline = Date.now() + timeoutMs;
-  let lastError: unknown;
-  while (Date.now() < deadline) {
-    try {
-      const record: unknown = JSON.parse(fs.readFileSync(agent.readyPath, 'utf8'));
-      if (
-        typeof record === 'object' &&
-        record !== null &&
-        'schemaVersion' in record &&
-        record.schemaVersion === 1 &&
-        'descriptor' in record &&
-        record.descriptor === agent.descriptor
-      ) {
-        return;
-      }
-      lastError = new Error(`The agent readiness record at ${agent.readyPath} does not name ${agent.descriptor}.`);
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') lastError = error;
-    }
-    await delay(100, signal);
-  }
-  throw new Error(`The Storybook channel service did not publish the agent connection within ${timeoutMs}ms.`, { cause: lastError });
 }
 
 export function parseMacOSRunningApplications(output: string, bundleIdentifier: string): MacOSRunningApplication[] {

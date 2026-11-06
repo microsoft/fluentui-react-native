@@ -67,6 +67,30 @@ contribute catalog/channel/context and CSF runner resources; the runtime stays
 Node-free. Do not add a separate coordinator package or move supervision into
 desktop-driver or MCP.
 
+Owned Node services inherit the neutral harness's per-command socket lifeline
+through a Node preload. Its authenticated handshake gates entry, including
+late-spawned descendants. The channel registers explicit disposal before
+acquiring resources: stop or parent loss aborts initialization, awaits late
+acquisitions, then withdraws the agent descriptor through the shared F1 service
+and awaits durable driver settlement before closing the channel. The native
+helper remains owned by that service and its existing stdio transport.
+
+`driver --agent` awaits a typed `service-ready` receipt naming the descriptor,
+command incarnation, and producer PID. The generated `agent-ready.*.json` file
+is a compatibility breadcrumb only, never readiness authority. The receipt
+does not prove target acquisition, application readiness, or authenticated
+context/render readiness. Borrowed applications and external services are not
+enrolled in the lifeline or implicitly terminated. Missing/failed withdrawal
+or stalled disposal is incomplete, not successful cleanup; automatic claim
+reclaim remains disabled. There is no fixed-time cleanup guarantee.
+
+Portable Node process contracts exercise parent/wrapper crash, late spawn,
+descriptor withdrawal failure, stalled children, and borrowed-process survival.
+Live macOS Storybook/Metro/helper survivors still need combined-branch native
+qualification; Windows descendant containment is not run on this macOS host.
+Accessibility, physical input and capture require their own granted capabilities
+and are not qualified by these process fixtures.
+
 Agent mode protects the embedded driver and disables the channel's MCP endpoint,
 but does not make all channel/runtime mutation ingress exclusively grant-owned.
 Unknown story changes now quarantine the driver target; args updates through the

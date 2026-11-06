@@ -55,6 +55,11 @@
       "import": "./lib/driverService.js",
       "default": "./src/driverService.ts"
     },
+    "./process-control": {
+      "types": "./lib/processControl.d.ts",
+      "import": "./lib/processControl.js",
+      "default": "./src/processControl.ts"
+    },
     "./wdio": {
       "types": "./lib/wdio/index.d.ts",
       "import": "./lib/wdio/index.js",

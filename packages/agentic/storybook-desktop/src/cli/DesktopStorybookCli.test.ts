@@ -191,6 +191,11 @@ class RecordingRunner implements DesktopCommandRunner {
   stopped = 0;
   failCommand?: string;
   exitService?: string;
+  readiness = jest.fn(async (expected: { tier: 'service-ready'; service: string; descriptor?: string }) => ({
+    ...expected,
+    incarnation: 'fixture-incarnation',
+    processId: 1,
+  }));
 
   async run(command: PreparedDesktopCommand): Promise<void> {
     this.foreground.push(command);
@@ -202,6 +207,7 @@ class RecordingRunner implements DesktopCommandRunner {
   start(command: PreparedDesktopCommand): RunningDesktopCommand {
     this.background.push(command);
     return {
+      waitForReadiness: this.readiness,
       completed: command.context?.service === this.exitService && this.exitService ? Promise.resolve(7) : new Promise<number>(() => {}),
       stop: async () => {
         this.stopped += 1;
@@ -501,12 +507,13 @@ describe('DesktopStorybookCli', () => {
     const services = new DesktopServiceScope(runner);
     const written: string[] = [];
     const maintained: string[] = [];
-    const fetch: typeof globalThis.fetch = async (input) => {
-      if (String(input).endsWith('/index.json')) {
-        setTimeout(() => fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'custom.json', processId: 1, schemaVersion: 1 })), 300);
-      }
-      return new Response('{}');
-    };
+    let published = false;
+    runner.readiness.mockImplementation(async (expected) => {
+      expect(written).toEqual([]);
+      published = true;
+      return { ...expected, incarnation: 'fixture-incarnation', processId: 1 };
+    });
+    const fetch: typeof globalThis.fetch = async () => new Response('{}');
     const createStoryManifest = async () => ({
       ...(await createEmptyStoryManifest(undefined, 'macos')),
       entries: [
@@ -534,7 +541,7 @@ describe('DesktopStorybookCli', () => {
         throw new Error('unreachable');
       },
       onReady: () => written.push('onReady'),
-      output: { write: (chunk: string) => written.push(`${fs.existsSync(readyPath) ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
+      output: { write: (chunk: string) => written.push(`${published ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
       runner,
       services,
     });
@@ -548,7 +555,40 @@ describe('DesktopStorybookCli', () => {
         root: path.resolve('relative-root'),
       });
       expect(maintained).toEqual([manifestPath]);
+      expect(runner.readiness).toHaveBeenCalledWith(
+        { tier: 'service-ready', service: 'storybook-channel', descriptor: 'custom.json' },
+        120_000,
+        expect.any(AbortSignal),
+      );
+      expect(fs.existsSync(readyPath)).toBe(false);
       await expect(new DesktopStorybookCli(makeConfig(), { createStoryManifest, runner }).test('macos')).rejects.toThrow('serves an agent');
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
+    }
+  });
+
+  test('does not trust an agent ready file when correlated readiness fails', async () => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, 'driver-manifest.macos.json');
+    const readyPath = path.join(generated, 'agent-ready.macos.json');
+    const runner = new RecordingRunner();
+    runner.readiness.mockImplementation(async () => {
+      fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'agent.json', processId: 1, schemaVersion: 1 }));
+      throw new Error('Uncorrelated service readiness');
+    });
+    const output = { write: jest.fn(() => true) };
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response('{}'),
+      isPortAvailable: async () => true,
+      output,
+      runner,
+    });
+    try {
+      await expect(cli.driver('macos', { agent: { descriptor: 'agent.json' } })).rejects.toThrow('Uncorrelated service readiness');
+      expect(output.write).not.toHaveBeenCalled();
     } finally {
       fs.rmSync(manifestPath, { force: true });
       fs.rmSync(readyPath, { force: true });
@@ -585,12 +625,7 @@ describe('DesktopStorybookCli', () => {
       windowTitle: 'Fixture',
       workingDirectory: 'rex',
     }));
-    const fetch: typeof globalThis.fetch = async (input) => {
-      if (String(input).endsWith('/index.json')) {
-        setTimeout(() => fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'agent.json', processId: 1, schemaVersion: 1 })), 50);
-      }
-      return new Response('{}');
-    };
+    const fetch: typeof globalThis.fetch = async () => new Response('{}');
     const cli = new DesktopStorybookCli(config, {
       ...nativeDriverTestOptions,
       createStoryManifest: createEmptyStoryManifest,

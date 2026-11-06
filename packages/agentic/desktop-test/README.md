@@ -71,6 +71,12 @@ when working on the package.
 - Generic and Storybook native services share one factory with durable
   quarantine storage and exact application-exit probes. Restart does not clear
   uncertain effects; see [lifecycle and recovery](references/lifecycle.md).
+- Owned Node services inherit a per-command parent lifeline. Cooperative
+  disposers await initialization and settlement before withdrawing descriptors;
+  Metro and command wrappers use their own SIGTERM handlers. A readiness receipt
+  is correlated to that command's incarnation and producer process, not a file
+  or a successful HTTP response. This proves only service readiness, not target,
+  application, or context readiness. Unsettled cleanup stays fenced.
 
 macOS RN Test App users must bundle before `prep`, then build: CocoaPods embeds
 only resources that exist during `pod install`. Renderer changes require a new

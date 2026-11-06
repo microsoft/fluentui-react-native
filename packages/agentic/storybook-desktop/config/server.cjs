@@ -15,6 +15,14 @@ async function startDesktopStorybookServer({
 
   const requireFromProject = createRequire(path.join(projectRoot, 'package.json'));
   const { createChannelServer } = requireFromProject('@storybook/react-native/node');
+  const { finishDesktopProcess, publishDesktopServiceReady, registerDesktopProcessDisposal } =
+    await import('@fluentui-react-native/desktop-test/process-control');
+  let initialized;
+  const initialization = new Promise((resolve) => {
+    initialized = resolve;
+  });
+  let stopping = false;
+  const controller = new AbortController();
   const [{ startNativeDesktopService }, { createDesktopReportSession }] = await Promise.all([
     import('@fluentui-react-native/desktop-test/driver-service'),
     import('@fluentui-react-native/desktop-test/reporting'),
@@ -31,7 +39,7 @@ async function startDesktopStorybookServer({
       process.off('SIGTERM', stop);
       const failures = error === undefined ? [] : [error];
       try {
-        // The parent reads readiness from this record, so it must not outlive the published descriptor.
+        // Compatibility breadcrumb only; correlated process readiness is authoritative.
         if (agentReadyPath) fs.rmSync(agentReadyPath, { force: true });
       } catch (failure) {
         report.reporter.fail(failure, 'cleanup');
@@ -56,9 +64,18 @@ async function startDesktopStorybookServer({
       process.exitCode = await report.close(
         failures.length ? new AggregateError(failures, 'Storybook channel service failed.') : undefined,
       );
+      unregisterDisposal();
+      finishDesktopProcess();
+      if (failures.length) throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
     })());
+  const settle = async (error) => {
+    stopping = true;
+    controller.abort(error ?? new Error('Storybook channel stop requested.'));
+    await initialization;
+    await close(error);
+  };
   const stop = () => {
-    void close().catch((error) => {
+    void settle().catch((error) => {
       process.stderr.write(`${error.stack ?? error}\n`);
       process.exitCode = 1;
     });
@@ -66,12 +83,17 @@ async function startDesktopStorybookServer({
   const fatal = (error) => {
     if (closing) return;
     report.reporter.emit({ kind: 'service-failed', payload: { failure: report.reporter.failure(error) } }, 'storybook-channel');
-    void close(error).catch((failure) => {
+    void settle(error).catch((failure) => {
       process.stderr.write(`${failure.stack ?? failure}\n`);
       process.exitCode = 1;
     });
   };
+  const unregisterDisposal = registerDesktopProcessDisposal(() => settle());
+  report.onStop?.(stop);
+  process.once('SIGINT', stop);
+  process.once('SIGTERM', stop);
   try {
+    controller.signal.throwIfAborted();
     const driverManifest = driverManifestPath ? JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')) : undefined;
     if (
       driverManifest &&
@@ -140,6 +162,7 @@ async function startDesktopStorybookServer({
         });
       } else {
         driver = await startNativeDesktopService({
+          signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
           application: agent?.application ?? driverManifest.application,
           artifact: driverManifest.nativeDriver,
@@ -166,20 +189,26 @@ async function startDesktopStorybookServer({
           },
         });
       }
+      controller.signal.throwIfAborted();
       if (agent) {
         agentReadyPath = agent.readyPath;
         writeAgentReady(agentReadyPath, agent.descriptor);
       }
+      if (stopping) controller.signal.throwIfAborted();
+      await publishDesktopServiceReady({
+        tier: 'service-ready',
+        service: 'storybook-channel',
+        ...(driverManifest?.agent ? { descriptor: driverManifest.agent.descriptor } : {}),
+      });
     }
     report.reporter.emit(
       { kind: 'service-ready', payload: { message: `Storybook ${loopbackUrl(host, port)}${driver ? `; WebDriver ${driver.url}` : ''}` } },
       'storybook-channel',
     );
-    report.onStop?.(stop);
-    process.once('SIGINT', stop);
-    process.once('SIGTERM', stop);
+    initialized();
     return { channelServer: server, driver, close };
   } catch (error) {
+    initialized();
     await close(error);
     throw error;
   }
