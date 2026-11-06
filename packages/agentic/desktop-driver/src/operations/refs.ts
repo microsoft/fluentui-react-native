@@ -102,7 +102,8 @@ function isDigit(code: number): boolean {
 
 /**
  * The element references one session has issued. A native id keeps one reference while the table retains it, so a
- * repeated observation reports unchanged elements under unchanged references, and a reference is never reissued.
+ * repeated observation reports unchanged elements under unchanged references within their region, and a reference
+ * is never reissued.
  */
 export class ReferenceTable {
   private readonly capacity: number;
@@ -140,11 +141,16 @@ export class ReferenceTable {
     const existing = this.referencesByNativeId.get(target.nativeId);
     if (existing !== undefined) {
       const entry = this.entries.get(existing)!;
-      entry.lastSeen = sequence;
-      entry.previewGeneration = target.previewGeneration;
-      entry.scope = target.scope;
-      entry.windowId = target.windowId;
-      return existing;
+      if (entry.scope === 'preview' && entry.previewGeneration !== target.previewGeneration) {
+        // A surviving native container does not make its expired public preview reference current again.
+        this.drop(existing);
+      } else {
+        entry.lastSeen = sequence;
+        entry.previewGeneration = target.previewGeneration;
+        entry.scope = target.scope;
+        entry.windowId = target.windowId;
+        return existing;
+      }
     }
     this.issued += 1;
     const reference = `${this.tag}${this.issued}`;

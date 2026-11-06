@@ -289,6 +289,35 @@ describe('story operations', () => {
     });
   });
 
+  test('same-session select/reset never revives old preview references when native records survive and are observed again', async () => {
+    await withStories(async ({ harness, session }) => {
+      // A native preview container can survive a React render; keep its fake native records alive too.
+      jest.spyOn(harness.host, 'resetPreview').mockImplementation(() => {});
+      const old = (await session.find({ automationId: 'button-primary' })).result;
+      const oldRef = old.matches[0].ref;
+      const native = harness.server.sessions.get(session.id).operations.refs.resolve(oldRef, old.sample.epoch.region);
+      if (!native.ok) throw new Error('The initial preview reference must resolve.');
+      for (const action of ['select', 'reset'] as const) {
+        const before = (await session.find({ automationId: 'button-primary' })).result;
+        const beforeRef = before.matches[0].ref;
+        const changed = (await session.story({ action, storyId: manifest.entries[0].id })).result;
+        expect(changed).toMatchObject({ disposition: 'applied', verification: 'marker' });
+        expect(changed.region).toBeGreaterThan(before.sample.epoch.region);
+        await expect(session.observe({ within: beforeRef })).rejects.toMatchObject({
+          code: 'stale element reference',
+          data: { reason: 'ref-region-changed' },
+        });
+        const current = (await session.find({ automationId: 'button-primary' })).result;
+        await expect(session.observe({ within: beforeRef })).rejects.toMatchObject({ code: 'stale element reference' });
+        expect(current.matches[0].ref).not.toBe(beforeRef);
+        const resolved = harness.server.sessions.get(session.id).operations.refs.resolve(current.matches[0].ref, changed.region);
+        expect(resolved).toMatchObject({ ok: true, entry: { nativeId: native.entry.nativeId } });
+        await expect(session.observe({ within: current.matches[0].ref })).resolves.toBeDefined();
+      }
+      await expect(session.observe({ within: oldRef })).rejects.toMatchObject({ code: 'stale element reference' });
+    });
+  });
+
   test('fence further mutations after a story whose completion is unknown, without recording runtime text', async () => {
     await withStories(async ({ harness, session }) => {
       const orchestrator = harness.storyOrchestrator!;
