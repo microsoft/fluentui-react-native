@@ -68,6 +68,11 @@
       "import": "./lib/authority/index.js",
       "default": "./src/authority/index.ts"
     },
+    "./native": {
+      "types": "./lib/native/nativeDriver.d.ts",
+      "import": "./lib/native/nativeDriver.js",
+      "default": "./src/native/nativeDriver.ts"
+    },
     "./operations": {
       "types": "./lib/operations/index.d.ts",
       "import": "./lib/operations/index.js",

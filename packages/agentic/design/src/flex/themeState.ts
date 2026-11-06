@@ -1,18 +1,30 @@
-import { defaultFlexTokens } from './defaults/defaultTokens';
+import { Appearance } from 'react-native';
+
+import { flexCoolTheme } from '../themes/flex/flexCoolTheme';
+import { resolveFlexTokenDescription } from './colors/interactionPolicy';
 import { flexTokensFromTheme } from './adapters/flexTokensFromTheme';
 import type { FlexTokens } from './tokens.types';
-import { defaultResolvedThemeAppearance } from '../theming/appearance';
+import { resolveThemeAppearance } from '../theming/appearance';
 import { getFlexSourceTokens, getThemeAppearanceCache } from '../theming/themeRuntime';
 import type { ThemeSource } from '../theming/themeSource';
 import type { NormalizedThemeAppearance } from '../types/appearance.types';
 import type { ThemeState } from './themeState.types';
 
-export const defaultThemeState: ThemeState = {
-  tokens: defaultFlexTokens,
-  appearance: defaultResolvedThemeAppearance,
-  highContrast: false,
-  themeStyles: {},
-};
+export const getDefaultThemeState = (() => {
+  let state: ThemeState | undefined;
+  return (): ThemeState => {
+    if (!state) {
+      const { resolved: appearance } = resolveThemeAppearance(undefined, { colorScheme: Appearance.getColorScheme() });
+      state = {
+        tokens: resolveFlexTokenDescription(flexCoolTheme.tokens, appearance),
+        appearance,
+        highContrast: false,
+        themeStyles: {},
+      };
+    }
+    return state;
+  };
+})();
 
 /**
  * Resolve Flex tokens for any source. Legacy sources use the forward adapter.

@@ -70,9 +70,12 @@ objects that the declarations spread. The emitted key order is therefore not mea
 
 ## Default tokens
 
-`src/flex/defaults/defaultTokens.generated.ts` holds the cool and warm x3 defaults, and `defaultTokens.ts` normalizes
-them. `FlexThemeReference` merges the default for the resolved `colorTone` under its base and recipes, and the `themes`
-entry point exposes the two defaults as `flexTheme` and `flexWarmTheme` (`theming.md`). The x3 sources
+`src/flex/defaults/sharedTokens.generated.ts` holds only entries identical in both palettes.
+`coolTokens.generated.ts` and `warmTokens.generated.ts` add each palette's entries without importing the other.
+`defaultTokens.ts` exposes the normalized defaults for existing internal consumers and test fixtures.
+`FlexThemeReference` merges the default for the resolved `colorTone` under its base and recipes, unless a complete
+description replaces it. The `themes` entry point exposes isolated `flexCoolTheme` and `flexWarmTheme` descriptions
+and an adaptive `flexTheme` description (`theming.md`). The x3 sources
 define no high-contrast or elevated values, so those appearances use the light or dark default. Defaults do not
 otherwise vary by contrast or interface level; see `remaining-work.md`. Tests that assert default values should read
 them from `defaultFlexTokens` in the `testing` entry point rather than repeating literals.
@@ -85,7 +88,7 @@ values, whether each interaction state is computed or explicit, and any native a
 16 density-independent pixels, durations to milliseconds, `cubic-bezier()` to tuples, variable font weights to native
 static weights, and relative `oklch` shadow alphas to `#rrggbbaa`. Opaque colors are emitted as `#rrggbb`.
 
-Regenerate both files from the pinned snapshots, or verify that they are current:
+Regenerate the token files and coverage ledger from the pinned snapshots, or verify that they are current:
 
 ```sh
 yarn workspace @fluentui-react-native/design gen:flex-defaults
