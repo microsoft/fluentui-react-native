@@ -506,6 +506,8 @@ describe('DesktopStorybookCli', () => {
     const readyPath = path.join(generated, 'agent-ready.macos.json');
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
+    const resourceObserver = jest.fn();
+    services.setResourceObserver(resourceObserver);
     const written: string[] = [];
     const maintained: string[] = [];
     let published = false;
@@ -541,7 +543,24 @@ describe('DesktopStorybookCli', () => {
         signal.throwIfAborted();
         throw new Error('unreachable');
       },
-      onReady: () => written.push('onReady'),
+      onReady: () => {
+        expect(resourceObserver).toHaveBeenCalledWith(
+          expect.objectContaining({
+            id: 'desktop:storybook-channel',
+            generation: expect.any(Number),
+            ownership: 'owned',
+            readiness: 'ready',
+            serviceReady: {
+              tier: 'service-ready',
+              service: 'storybook-channel',
+              descriptor: 'custom.json',
+              incarnation: 'fixture-incarnation',
+              processId: 1,
+            },
+          }),
+        );
+        written.push('onReady');
+      },
       output: { write: (chunk: string) => written.push(`${published ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
       runner,
       services,

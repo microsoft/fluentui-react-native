@@ -1,10 +1,6 @@
-export type DesktopResourceServiceReadyRecord = Readonly<{
-  tier: 'service-ready';
-  service: string;
-  descriptor?: string;
-  incarnation: string;
-  processId: number;
-}>;
+import type { DesktopServiceReadyRecord } from './processControl.js';
+
+export type DesktopResourceServiceReadyRecord = Readonly<DesktopServiceReadyRecord>;
 
 export type DesktopResourceOwnership = 'owned' | 'borrowed';
 
