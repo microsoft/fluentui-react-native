@@ -66,6 +66,10 @@ catalog completeness and actual execution; declaring a test does not prove
 that it ran. The Win32 Storybook app demonstrates this with separate CI lanes,
 shared callbacks in both, and explicit reporting of its existing quarantine.
 
+CLI reports record the selected endpoint and configured renderer. Smoke and
+callback runs use canonical `run.json` documents with `kind: 'tests'`; command
+lifecycles use `kind: 'lifecycle'`.
+
 ## Responsibilities
 
 This package owns Storybook-specific CLI lifecycle, static story manifests,

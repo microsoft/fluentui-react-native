@@ -108,7 +108,7 @@ export function verifyInputReport(value: unknown, selected: InputTest[], started
   const counts = object(report.counts);
   if (
     report.schemaVersion !== 1 ||
-    report.kind !== 'lifecycle' ||
+    report.kind !== 'tests' ||
     report.status !== 'passed' ||
     context.endpoint !== 'win32' ||
     context.renderer !== 'paper' ||
@@ -117,7 +117,7 @@ export function verifyInputReport(value: unknown, selected: InputTest[], started
     !Number.isFinite(Date.parse(text(report.finishedAt))) ||
     Date.parse(text(report.finishedAt)) < Date.parse(text(report.startedAt))
   ) {
-    throw new Error('Expected a fresh, successful Win32/Paper lifecycle report.');
+    throw new Error('Expected a fresh, successful Win32/Paper test report.');
   }
   if (['failed', 'unsupported', 'incomplete', 'retries', 'flaky'].some((key) => counts[key] !== 0) || array(report.failures).length) {
     throw new Error('Input coverage cannot accept failed, unsupported, unfinished, retried, or flaky execution.');

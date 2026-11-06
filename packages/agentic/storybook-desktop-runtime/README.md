@@ -9,6 +9,9 @@ Consumers normally install and invoke `storybook-desktop`; this package is
 separate so the CLI package stays peer-free and receives the runtime workspace
 locator.
 
+Win32 test generations reset the preview subtree and its scroll position while
+preserving the surrounding desktop chrome preferences.
+
 Read the [integration reference](references/integration.md) before wiring the
 runtime into an app, and the [runtime contract](references/runtime-contract.md)
 before changing bridge, Metro, theme, or chrome behavior. The

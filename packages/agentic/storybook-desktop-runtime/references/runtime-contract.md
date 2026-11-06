@@ -15,6 +15,11 @@ ready/error events correlate instance, target, request/run IDs, and preview
 generation. Each named test gets a keyed preview remount. Preserve these
 contracts and fail closed on stale or uncorrelated messages.
 
+Win32 remounts the entire preview subtree for each test generation, including
+the story viewport, so retained scroll position cannot put the next test's
+controls behind the chrome. Sidebar and addon preferences remain outside that
+remount.
+
 ## Theme and chrome
 
 One Flex `ThemedRoot` covers the app, toolbar, and chrome, so the Storybook

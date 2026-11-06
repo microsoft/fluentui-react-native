@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -7,6 +7,50 @@ import { formatDesktopStorybookError, writeDesktopStorybookFailure } from '../..
 import { normalizeLegacyTestReporter } from './createDesktopStorybookCommand';
 
 describe('pipeline failure diagnostics', () => {
+  test('persists the selected endpoint and renderer in the canonical CLI report', () => {
+    const root = fs.mkdtempSync(path.join(path.resolve(__dirname, '../..'), '.cli-report-context-'));
+    const configPath = path.join(root, 'desktop.config.mts');
+    fs.writeFileSync(
+      configPath,
+      `
+      import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
+      import { storybook } from '@fluentui-react-native/storybook-desktop/config';
+      export default defineDesktopConfig({
+        schemaVersion: 1,
+        projectRoot: new URL('.', import.meta.url),
+        targets: { win32: { host: { kind: 'rex', renderer: 'paper', component: 'Fixture', windowTitle: 'Fixture' } } },
+        suites: { stories: { kind: 'csf-wdio' } },
+        integration: storybook({
+          storyPackages: [],
+          platformOptions: { win32: { bundle: { command: process.execPath, args: ['-e', ''] } } },
+        }),
+      });
+      `,
+    );
+    try {
+      const response = spawnSync(
+        process.execPath,
+        [path.resolve(__dirname, '../../config/cli.cjs'), '--config', configPath, 'bundle', '--win32'],
+        {
+          cwd: root,
+          encoding: 'utf8',
+          timeout: 20_000,
+        },
+      );
+      if (response.status !== 0) throw new Error(response.stderr || response.stdout || String(response.error));
+      const artifacts = path.join(root, 'artifacts', 'desktop');
+      const runs = fs.readdirSync(artifacts);
+      expect(runs).toHaveLength(1);
+      expect(JSON.parse(fs.readFileSync(path.join(artifacts, runs[0], 'run.json'), 'utf8'))).toMatchObject({
+        kind: 'lifecycle',
+        status: 'passed',
+        context: { endpoint: 'win32', renderer: 'paper' },
+      });
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
   test.each(['spec', 'tap', 'dot'])('normalizes the legacy test reporter alias: %s', (reporter) => {
     expect(normalizeLegacyTestReporter(['node', 'storybook', 'test', '--reporter', reporter])).toEqual({
       argv: ['node', 'storybook', 'test', '--test-reporter', reporter],

@@ -269,10 +269,15 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       configured: options.config.desktop?.reporting?.events,
     });
     options.reporterMode = reporterMode;
+    const platformFlags = action.opts<PlatformFlags>();
+    const endpoint = selectedPlatform(platformFlags) ?? options.config.platform;
+    const renderer =
+      endpoint === 'macos' && platformFlags.paper ? 'paper' : endpoint && options.config.getDesktopTarget?.(endpoint)?.host.renderer;
     session = await createDesktopReportSession({
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
       kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+      context: { endpoint, renderer },
       reporterMode,
       eventLevel,
       // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.

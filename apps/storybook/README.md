@@ -62,7 +62,8 @@ Before smoke, `yarn input-coverage begin` checks the complete statically
 discovered Win32 callback catalog against the declarations and captures the
 source, lane, and preexisting report directories. New, removed, or renamed
 callbacks require a reviewed catalog update. After smoke,
-`yarn input-coverage verify` requires one fresh successful canonical report and
+`yarn input-coverage verify` requires one fresh successful canonical test report,
+with Win32/Paper provenance, and
 one clean passing attempt for every callback assigned to that lane. Unexpected
 skips, unsupported results, missing callbacks, duplicates, retries, and flaky
 passes fail the job. The existing Button #4373 quarantine remains selected;

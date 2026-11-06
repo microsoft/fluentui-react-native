@@ -28,7 +28,7 @@ function report(mode: 'accessibility' | 'physical') {
   const skipped = tests.filter((entry) => entry.status === 'skipped').length;
   return {
     schemaVersion: 1,
-    kind: 'lifecycle',
+    kind: 'tests',
     status: 'passed',
     context: { endpoint: 'win32', renderer: 'paper' },
     startedAt: '2026-11-05T20:00:00.000Z',
@@ -120,6 +120,8 @@ test('rejects changed quarantine reasons, stale/wrong-target reports, retry pass
   const wrongTarget = report('physical');
   wrongTarget.context.endpoint = 'windows';
   assert.throws(() => verifyInputReport(wrongTarget, selected, 0), /Win32\/Paper/);
+  assert.throws(() => verifyInputReport({ ...report('physical'), kind: 'lifecycle' }, selected, 0), /test report/);
+  assert.throws(() => verifyInputReport({ ...report('physical'), context: undefined }, selected, 0), /input-coverage object/);
   const retried = report('physical');
   retried.tests[0].attempts.push(retried.tests[0].attempts[0]);
   assert.throws(() => verifyInputReport(retried, selected, 0), /one clean attempt/);
