@@ -116,25 +116,25 @@ export class SettlementJournal {
       return undefined;
     }
     this.held.set(targetId, { ...(mutation !== undefined ? { mutation } : {}), ...(quarantine !== undefined ? { quarantine } : {}) });
-    if (quarantine !== undefined) {
-      const parsed = parseRecord(quarantineSchema, quarantine, targetId);
-      if (parsed) {
-        const { kind: _kind, version: _version, ...record } = parsed;
+    const parsedQuarantine = quarantine === undefined ? undefined : parseRecord(quarantineSchema, quarantine, targetId);
+    const parsedMutation = mutation === undefined ? undefined : parseRecord(mutationSchema, mutation, targetId);
+    // A readable sibling cannot establish which application's effects an unreadable record represents.
+    const corrupt = (quarantine !== undefined && !parsedQuarantine) || (mutation !== undefined && !parsedMutation);
+    if (!corrupt) {
+      if (parsedQuarantine) {
+        const { kind: _kind, version: _version, ...record } = parsedQuarantine;
         return record;
       }
-    }
-    if (mutation !== undefined) {
-      const parsed = parseRecord(mutationSchema, mutation, targetId);
-      if (parsed) {
+      if (parsedMutation) {
         return {
-          ...(parsed.application ? { application: parsed.application } : {}),
-          command: parsed.command,
+          ...(parsedMutation.application ? { application: parsedMutation.application } : {}),
+          command: parsedMutation.command,
           effect: 'unknown',
-          id: parsed.id,
+          id: parsedMutation.id,
           message: 'The service stopped before this mutation settled.',
           origin: 'interrupted',
-          sessionId: parsed.sessionId,
-          since: parsed.since,
+          sessionId: parsedMutation.sessionId,
+          since: parsedMutation.since,
           targetId,
         };
       }

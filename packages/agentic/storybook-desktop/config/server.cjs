@@ -16,7 +16,7 @@ async function startDesktopStorybookServer({
   const requireFromProject = createRequire(path.join(projectRoot, 'package.json'));
   const { createChannelServer } = requireFromProject('@storybook/react-native/node');
   const [{ startNativeDesktopService }, { createDesktopReportSession }] = await Promise.all([
-    import('@fluentui-react-native/desktop-test'),
+    import('@fluentui-react-native/desktop-test/driver-service'),
     import('@fluentui-react-native/desktop-test/reporting'),
   ]);
   const report = await createDesktopReportSession({ artifactsRoot: path.join(projectRoot, 'artifacts', 'desktop'), kind: 'lifecycle' });

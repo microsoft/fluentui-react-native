@@ -68,6 +68,9 @@ when working on the package.
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use
   verified prebuilt helpers only.
+- Generic and Storybook native services share one factory with durable
+  quarantine storage and exact application-exit probes. Restart does not clear
+  uncertain effects; see [lifecycle and recovery](references/lifecycle.md).
 
 macOS RN Test App users must bundle before `prep`, then build: CocoaPods embeds
 only resources that exist during `pod install`. Renderer changes require a new

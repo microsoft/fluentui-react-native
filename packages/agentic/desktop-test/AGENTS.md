@@ -25,6 +25,8 @@ and bounded structured output contract.
   coverage.
 - Keep published API changes explicit and update the owning reference with the
   implementation.
+- Keep generic and Storybook service composition in `src/driverService.ts`;
+  never bypass its durable recovery, descriptor lifetime or settled close.
 
 ## Validation
 
