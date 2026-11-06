@@ -49,6 +49,7 @@ function scene(requestId: string) {
   );
 }
 
+// Cold CI workers can take more than five seconds to initialize the real ScrollView.
 test('resets the whole Win32 preview for a new test generation without resetting chrome preferences', async () => {
   const screen = await render(scene('first'));
   await fireEvent.press(screen.getByTestId('scroll-canvas'));
@@ -61,7 +62,7 @@ test('resets the whole Win32 preview for a new test generation without resetting
 
   expect(screen.getByTestId('canvas-offset')).toHaveTextContent('0');
   expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
-});
+}, 15_000);
 
 test('allows oversized Win32 stories to grow inside the scrollable preview rather than overflow a fixed-height centered view', async () => {
   const screen = await render(
