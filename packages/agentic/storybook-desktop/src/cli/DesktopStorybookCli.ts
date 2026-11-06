@@ -48,6 +48,7 @@ import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopComman
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
 import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
+import { matchesDesktopPlatforms } from '@fluentui-react-native/desktop-driver/authoring';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -92,6 +93,7 @@ export type DesktopStorybookServerOptions = {
 };
 
 export type DesktopStorybookDriverOptions = DesktopStorybookServerOptions & {
+  input?: 'accessible' | 'physical';
   /**
    * Protects the driver with a grant authority and publishes one agent's connection descriptor, which the Desktop
    * Driver MCP adapter reads. WDIO `storybook test` cannot connect to an agent-served driver.
@@ -219,6 +221,7 @@ export class DesktopStorybookCli {
   async driver(platform: Platforms, options: DesktopStorybookDriverOptions = {}): Promise<void> {
     validateServerOptions(options);
     validateDriverHost(options.host);
+    const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
     const agent = options.agent && {
       descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
       // The channel service runs in another working directory.
@@ -244,6 +247,7 @@ export class DesktopStorybookCli {
       resolvedInstance,
       nativeDriver,
       agent && { ...agent, ...(agentApplication ? { application: agentApplication } : {}) },
+      wdio,
     );
     resolvedInstance.driverManifestPath = driverManifest.path;
     this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
@@ -329,16 +333,26 @@ export class DesktopStorybookCli {
   }
 
   async test(platform: Platforms, options: DesktopStorybookTestOptions = {}): Promise<void> {
-    const settings = resolveWdioOptions({
+    const overrides: DesktopStorybookWdioOptions = {
+      ...(options.clickMode === undefined ? {} : { clickMode: options.clickMode }),
+      ...(options.input === undefined ? {} : { input: options.input }),
+      ...(options.testReporter === undefined ? {} : { reporter: options.testReporter }),
+      ...(options.story === undefined ? {} : { story: options.story }),
+      ...(options.tag === undefined ? {} : { tag: options.tag }),
+      ...(options.test === undefined ? {} : { test: options.test }),
+      ...(options.timeoutMs === undefined ? {} : { timeoutMs: options.timeoutMs }),
+    };
+    const initialSettings = resolveWdioOptions({
       ...this.config.wdio,
-      ...Object.fromEntries(
-        Object.entries({ ...options, reporter: options.testReporter }).filter(
-          ([key, value]) => key !== 'testReporter' && value !== undefined,
-        ),
-      ),
+      ...overrides,
     });
+    const connection = options.list ? undefined : this.testConnection(platform, options);
+    const settings =
+      connection?.input && initialSettings.input === undefined
+        ? resolveWdioOptions({ ...initialSettings, input: connection.input })
+        : initialSettings;
     const manifest = await this.createStoryManifest(this.config, platform);
-    const selected = selectWdioStories(manifest, settings);
+    const selected = selectWdioStories(manifest, settings, platform);
     if (selected.length === 0) {
       throw new Error('No executable wdio story tests matched the requested selection.');
     }
@@ -346,13 +360,32 @@ export class DesktopStorybookCli {
       const value = selected.map(({ id, sourcePath, wdio }) => ({
         id,
         sourcePath,
-        ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
+        ...(wdio?.cases
+          ? {
+              tests: wdio.cases
+                .filter(
+                  ({ name, options: descriptor }) =>
+                    matchesWdioTest(name, settings.test) &&
+                    (!settings.input || descriptor.input === 'both' || descriptor.input === settings.input) &&
+                    matchesDesktopPlatforms(descriptor.platforms, platform),
+                )
+                .map(({ name, options: descriptor }) => ({
+                  name,
+                  input: descriptor.input,
+                  inputSource: descriptor.inputSource,
+                  requires: descriptor.requires ?? [],
+                  platforms: descriptor.platforms,
+                })),
+            }
+          : wdio?.testNames
+            ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) }
+            : {}),
       }));
       if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
       else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
       return;
     }
-    const connection = this.testConnection(platform, options);
+    const activeConnection = connection ?? this.testConnection(platform, options);
     if (platform === 'macos' && !options.url) {
       await this.writeMacOSApplicationLease(
         path.join(this.config.projectRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
@@ -362,13 +395,14 @@ export class DesktopStorybookCli {
     const results = await runWdioStoryTests(
       {
         ...settings,
-        ...connection,
+        ...activeConnection,
         config: this.config,
         manifest,
         platform,
         errorOutput: this.errorOutput,
         report: this.reporter,
         signal: this.services.controller.signal,
+        input: settings.input,
       },
       this.runner,
     );
@@ -378,7 +412,10 @@ export class DesktopStorybookCli {
     );
   }
 
-  private testConnection(platform: Platforms, options: DesktopStorybookTestOptions): { targetId: string; url: string } {
+  private testConnection(
+    platform: Platforms,
+    options: DesktopStorybookTestOptions,
+  ): { input?: 'accessible' | 'physical'; targetId: string; url: string } {
     if (options.url || options.target) {
       if (!options.url || !options.target) {
         throw new Error('Pass --url and --target together, or omit both to use the running Storybook driver instance.');
@@ -415,7 +452,17 @@ export class DesktopStorybookCli {
         `The Storybook driver instance at ${manifestPath} serves an agent; restart storybook driver --${platform} without --agent to run storybook test.`,
       );
     }
-    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort) };
+    const input =
+      typeof manifest === 'object' &&
+      manifest !== null &&
+      'wdio' in manifest &&
+      typeof manifest.wdio === 'object' &&
+      manifest.wdio !== null &&
+      'input' in manifest.wdio &&
+      (manifest.wdio.input === 'accessible' || manifest.wdio.input === 'physical')
+        ? manifest.wdio.input
+        : undefined;
+    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort), ...(input ? { input } : {}) };
   }
 
   printInstance(platform: Platforms): void {
@@ -478,8 +525,15 @@ export class DesktopStorybookCli {
       throw unsupportedAction('smoke', platform);
     }
     if (smoke?.command) {
-      const instance = await this.resolveSmokeInstance(platform, smoke, mode);
-      await this.executePlan(withEnvironment(smoke.command, { [STORYBOOK_SMOKE_MODE]: mode }), platform, instance);
+      const instance = await this.resolveSmokeInstance(platform, smoke, mode, options.input);
+      await this.executePlan(
+        withEnvironment(smoke.command, {
+          [STORYBOOK_SMOKE_MODE]: mode,
+          ...(options.input ? { DESKTOP_INPUT: options.input } : {}),
+        }),
+        platform,
+        instance,
+      );
       return;
     }
     if (!smoke?.stop) {
@@ -488,8 +542,8 @@ export class DesktopStorybookCli {
       );
     }
 
-    const instance = await this.resolveSmokeInstance(platform, smoke, mode);
-    await this.runSmokeLifecycle(platform, smoke, instance, mode);
+    const instance = await this.resolveSmokeInstance(platform, smoke, mode, options.input);
+    await this.runSmokeLifecycle(platform, smoke, instance, mode, options.input);
   }
 
   private async executeAction(
@@ -509,6 +563,7 @@ export class DesktopStorybookCli {
     smoke: DesktopSmokeOptions,
     instance: ResolvedDesktopStorybookInstance,
     mode: DesktopSmokeMode,
+    input?: 'accessible' | 'physical',
   ): Promise<void> {
     const failures: unknown[] = [];
     let primaryFailure: unknown;
@@ -571,6 +626,7 @@ export class DesktopStorybookCli {
             targetId: this.targetId(platform),
             report: this.reporter,
             signal: this.services.controller.signal,
+            input,
           }),
         );
         this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
@@ -624,6 +680,7 @@ export class DesktopStorybookCli {
     platform: Platforms,
     smoke: DesktopSmokeOptions,
     mode: DesktopSmokeMode,
+    input?: 'accessible' | 'physical',
   ): Promise<ResolvedDesktopStorybookInstance> {
     const storybookPort = smoke.serverUrl
       ? portFromUrl(smoke.serverUrl)
@@ -641,7 +698,10 @@ export class DesktopStorybookCli {
 
     if (mode === 'stories-and-tests') {
       const nativeDriver = await this.resolveDriver(platform);
-      resolvedInstance.driverManifestPath = (await this.writeDriverManifest(platform, resolvedInstance, nativeDriver)).path;
+      const wdio = resolveWdioOptions({ ...this.config.wdio, ...(input ? { input } : {}) });
+      resolvedInstance.driverManifestPath = (
+        await this.writeDriverManifest(platform, resolvedInstance, nativeDriver, undefined, wdio)
+      ).path;
     }
     if (platform === 'macos') {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
@@ -659,6 +719,7 @@ export class DesktopStorybookCli {
     instance: DesktopStorybookInstance,
     nativeDriver: NativeDriverArtifact,
     agent?: CreateDesktopStorybookDriverManifestOptions['agent'],
+    wdio?: CreateDesktopStorybookDriverManifestOptions['wdio'],
   ): Promise<{ manifest: DesktopStorybookDriverManifest; path: string }> {
     const storyManifest = await this.createStoryManifest(this.config, platform);
     const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
@@ -672,6 +733,7 @@ export class DesktopStorybookCli {
       platform,
       renderer,
       storyManifest,
+      ...(wdio ? { wdio } : {}),
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
     return { manifest: driverManifest, path: outputPath };

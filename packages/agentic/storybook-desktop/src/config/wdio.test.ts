@@ -24,4 +24,20 @@ describe('Storybook-owned wdio configuration', () => {
     expect(() => resolveWdioOptions({ story: '' })).toThrow('wdio.story');
     expect(() => resolveWdioOptions({ tag: ' ' })).toThrow('wdio.tag');
   });
+
+  test('resolves an explicit input lane and rejects conflicting click configuration', () => {
+    const previous = process.env.DESKTOP_INPUT;
+    delete process.env.DESKTOP_INPUT;
+    try {
+      expect(resolveWdioOptions({ input: 'accessible' })).toMatchObject({ input: 'accessible', clickMode: 'auto' });
+      expect(() => resolveWdioOptions({ input: 'physical', clickMode: 'physical' })).toThrow('cannot be combined with a click mode');
+      process.env.DESKTOP_INPUT = 'physical';
+      expect(resolveWdioOptions().input).toBe('physical');
+      expect(resolveWdioOptions({ input: 'accessible' }).input).toBe('accessible');
+      expect(() => resolveWdioOptions({ clickMode: 'physical' })).toThrow('cannot be combined');
+    } finally {
+      if (previous === undefined) delete process.env.DESKTOP_INPUT;
+      else process.env.DESKTOP_INPUT = previous;
+    }
+  });
 });

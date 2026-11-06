@@ -21,6 +21,7 @@ type DesktopStorybookSmokeSession = Pick<DesktopWebdriverSession, 'delete' | 'li
 export type DesktopStorybookSmokeConnector = (options: DesktopWebdriverOptions) => Promise<DesktopStorybookSmokeSession>;
 
 export type DesktopStorybookSmokeTestOptions = {
+  input?: 'accessible' | 'physical';
   artifactsRoot?: string;
   config: DesktopStorybookConfig;
   driverUrl: string;
@@ -52,13 +53,14 @@ export async function runDesktopStorybookSmokeTests(
   const testTag = options.testTag ?? process.env.STORYBOOK_SMOKE_TAG;
   const wdioSettings = resolveWdioOptions({
     ...config.wdio,
+    ...(options.input ? { input: options.input } : {}),
     ...(storyPattern !== undefined ? { story: storyPattern } : {}),
     ...(testTag !== undefined ? { tag: testTag } : {}),
   });
   const planStoryIds = new Set(
     selectDesktopStoryTests(manifest, platform, { story: storyPattern, tag: testTag ?? 'desktop-e2e' }).map(({ entry }) => entry.id),
   );
-  const wdioStoryIds = new Set(selectWdioStories(manifest, wdioSettings).map(({ id }) => id));
+  const wdioStoryIds = new Set(selectWdioStories(manifest, wdioSettings, platform).map(({ id }) => id));
   const storyIds = [...new Set([...planStoryIds, ...wdioStoryIds])].sort();
   if (storyIds.length === 0) {
     throw new Error('No desktop story tests matched the smoke selection.');

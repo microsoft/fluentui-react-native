@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 
 import { transformSync, type NodePath, type types } from '@babel/core';
+import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import type { ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 
 import storyTests from '../../config/transform-story-tests.cjs';
 
@@ -8,7 +10,7 @@ const { collectWdioTests, compileWdioTest } = storyTests;
 
 export type ExtractedWdioStory = {
   digest: string;
-  tests: readonly { name?: string; code: string }[];
+  tests: readonly { name?: string; code: string; options?: ResolvedDesktopCaseOptions }[];
 };
 
 export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<string, ExtractedWdioStory> {
@@ -24,9 +26,10 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
         visitor: {
           Program(program: NodePath<types.Program>) {
             for (const [exportName, { callbacks, value }] of collectWdioTests(program)) {
-              const compiled = callbacks.map(({ callback, name }) => ({
+              const compiled = callbacks.map(({ callback, name, options }) => ({
                 ...(name === undefined ? {} : { name }),
                 code: compileWdioTest(callback, sourceFile, code),
+                ...(options !== undefined ? { options: validateDesktopCaseOptions(options, `${sourceFile}.wdio`) } : {}),
               }));
               const source = code.slice(value.node.start!, value.node.end!);
               tests.set(exportName, {

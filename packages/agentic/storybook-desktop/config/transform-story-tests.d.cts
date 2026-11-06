@@ -5,12 +5,13 @@ declare function storyTests(): PluginObj;
 declare namespace storyTests {
   type Callback = {
     name?: string;
+    options?: Record<string, unknown>;
     callback: NodePath<types.FunctionExpression | types.ArrowFunctionExpression>;
   };
   type StoryTest = {
     callbacks: readonly Callback[];
     property: NodePath<types.ObjectProperty>;
-    value: NodePath<types.FunctionExpression | types.ArrowFunctionExpression | types.ObjectExpression>;
+    value: NodePath<types.FunctionExpression | types.ArrowFunctionExpression | types.ObjectExpression | types.ArrayExpression>;
   };
 
   function collectWdioTests(program: NodePath<types.Program>): ReadonlyMap<string, StoryTest>;

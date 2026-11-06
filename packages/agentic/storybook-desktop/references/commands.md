@@ -28,6 +28,7 @@ only). The mode precedence is CLI flag, `DESKTOP_REPORTER`, config, then
 | `instance --<platform>`                       | Inspect the active instance's ports and target      |
 | `test --<platform> --list`                    | Discover authored executable story-test IDs         |
 | `test --<platform> --test <glob>`             | Run matching isolated story callbacks               |
+| `test --<platform> --input accessible`        | Select accessible and `both` descriptor cases       |
 | `smoke --<platform> --mode stories`           | Build/bundle/launch, traverse stories, clean up     |
 | `smoke --<platform> --mode stories-and-tests` | Traverse stories and execute callbacks              |
 
@@ -59,6 +60,13 @@ root. The identity coordinates app bundle identity, Storybook/driver ports,
 Metro, generated runtime identity, and exact process cleanup. Windows RN Test
 App retains its required Metro port 8081; do not run concurrent Metro-backed
 Windows smokes.
+
+Storybook test and stories-and-tests smoke commands accept
+`--input accessible|physical`. The lane filters `desktopIt` cases by their
+resolved input and target platform. `driver --input` records the default lane
+for subsequent tests against that instance. Legacy callback collections are
+not eligible for input-lane runs. Input lanes cannot be combined with an
+explicit non-`auto` click mode.
 
 The TypeScript API exposes the same operations through `DesktopStorybookCli`.
 Higher-level supervisors should inject their shared reporter, runner, and

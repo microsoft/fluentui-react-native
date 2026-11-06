@@ -8,6 +8,7 @@ import {
   FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES,
   NativeDesktopHost,
   parseKeyedActions,
+  resolveDisabledInputFeatures,
   translateNativeError,
 } from './NativeDesktopHost';
 
@@ -18,6 +19,19 @@ describe('NativeDesktopHost accessibility action keys', () => {
       { key: 'k2', name: 'Toggle' },
     ]);
     expect(parseKeyedActions({ actions: [], keys: [] })).toEqual([]);
+  });
+
+  describe('NativeDesktopHost input feature policy', () => {
+    test('unions explicit masks with the operator environment mask', () => {
+      const previous = process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES];
+      process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES] = 'physicalClick,wheel';
+      try {
+        expect([...resolveDisabledInputFeatures(['keyboard'])].sort()).toEqual(['keyboard', 'physicalClick', 'wheel']);
+      } finally {
+        if (previous === undefined) delete process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES];
+        else process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES] = previous;
+      }
+    });
   });
 
   test.each([

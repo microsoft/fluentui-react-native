@@ -57,6 +57,55 @@ function resolveInitializer(value, seen = new Set(), bindings = new Set()) {
   return value;
 }
 
+function importedDesktopIt(call) {
+  const callee = call.get('callee');
+  if (!callee.isIdentifier()) fail(call, 'array tests must be direct desktopIt imports.');
+  const binding = callee.scope.getBinding(callee.node.name);
+  const specifier = binding?.path;
+  const declaration = specifier?.parentPath;
+  if (
+    !specifier?.isImportSpecifier() ||
+    (specifier.node.imported.name ?? specifier.node.imported.value) !== 'desktopIt' ||
+    !declaration?.isImportDeclaration() ||
+    declaration.node.source.value !== '@fluentui-react-native/storybook-desktop/testing' ||
+    declaration.node.importKind === 'type' ||
+    specifier.node.importKind === 'type'
+  ) {
+    fail(call, 'array tests must use the desktopIt value imported from @fluentui-react-native/storybook-desktop/testing.');
+  }
+}
+
+function staticValue(value) {
+  value = unwrap(value);
+  if (value.isStringLiteral() || value.isBooleanLiteral() || value.isNullLiteral()) return value.node.value;
+  if (value.isNumericLiteral() && Number.isFinite(value.node.value)) return value.node.value;
+  if (value.isTemplateLiteral() && value.node.expressions.length === 0 && value.node.quasis.length === 1) {
+    return value.node.quasis[0].value.cooked;
+  }
+  if (value.isUnaryExpression({ operator: '-' }) && value.get('argument').isNumericLiteral()) {
+    return -value.node.argument.value;
+  }
+  if (value.isArrayExpression()) {
+    return value.get('elements').map((element) => {
+      if (!element?.node || element.isSpreadElement()) fail(element ?? value, 'descriptor arrays must contain static values.');
+      return staticValue(element);
+    });
+  }
+  if (value.isObjectExpression()) {
+    const result = {};
+    for (const property of value.get('properties')) {
+      if (!property.isObjectProperty() || property.node.computed || property.node.shorthand) {
+        fail(property, 'descriptor objects require static key/value properties.');
+      }
+      const key = keyName(property);
+      if (!key || Object.hasOwn(result, key)) fail(property, 'descriptor objects require unique static property names.');
+      result[key] = staticValue(property.get('value'));
+    }
+    return result;
+  }
+  fail(value, 'descriptor options must be a strict JSON literal.');
+}
+
 function collectCallbacks(value) {
   const requireCallback = (callback) => {
     if ((!callback.isArrowFunctionExpression() && !callback.isFunctionExpression()) || callback.node.generator) {
@@ -64,6 +113,29 @@ function collectCallbacks(value) {
     }
     return callback;
   };
+  if (value.isArrayExpression()) {
+    const callbacks = [];
+    const names = new Set();
+    for (const item of value.get('elements')) {
+      if (!item?.node || item.isSpreadElement() || !item.isCallExpression()) {
+        fail(item ?? value, 'desktopIt arrays require direct calls and cannot contain holes or spreads.');
+      }
+      importedDesktopIt(item);
+      const args = item.get('arguments');
+      if (args.length < 2 || args.length > 3 || args.some((argument) => argument.isSpreadElement())) {
+        fail(item, 'desktopIt requires a name, optional static options, and an inline callback.');
+      }
+      const name = args[0].isStringLiteral() ? args[0].node.value : undefined;
+      if (!name?.trim()) fail(args[0], 'desktopIt requires a non-empty literal test name.');
+      if (names.has(name)) fail(args[0], `duplicate test name "${name}".`);
+      names.add(name);
+      const options = args.length === 2 ? {} : staticValue(args[1]);
+      if (!options || typeof options !== 'object' || Array.isArray(options)) fail(args[1], 'desktopIt options must be an object.');
+      callbacks.push({ name, options, callback: requireCallback(unwrap(args[args.length - 1])) });
+    }
+    if (!callbacks.length) fail(value, 'a desktopIt array must contain at least one test.');
+    return callbacks;
+  }
   if (!value.isObjectExpression()) return [{ callback: requireCallback(value) }];
   const callbacks = [];
   const names = new Set();
@@ -276,6 +348,17 @@ module.exports = () => ({
         for (const { callback } of callbacks) compileWdioTest(callback, filename, state.file.code);
       }
       for (const { property } of tests.values()) if (!property.removed) property.remove();
+      program.scope.crawl();
+      for (const statement of program.get('body')) {
+        if (!statement.isImportDeclaration() || statement.node.source.value !== '@fluentui-react-native/storybook-desktop/testing')
+          continue;
+        for (const specifier of statement.get('specifiers')) {
+          if (!specifier.isImportSpecifier() || (specifier.node.imported.name ?? specifier.node.imported.value) !== 'desktopIt') continue;
+          const binding = statement.scope.getBinding(specifier.node.local.name);
+          if (!binding?.referencePaths.length) specifier.remove();
+        }
+        if (!statement.node.specifiers.length) statement.remove();
+      }
     },
   },
 });

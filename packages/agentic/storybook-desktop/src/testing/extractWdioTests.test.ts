@@ -33,6 +33,23 @@ describe('extractWdioTests', () => {
     );
   });
 
+  test('extracts desktopIt calls and their static descriptors without executing the story', () => {
+    const result = extractWdioTests(
+      `
+      import { desktopIt as test } from '@fluentui-react-native/storybook-desktop/testing';
+      export const Example = { wdio: [
+        test('accessible action', { requires: ['click'], platforms: ['!win32'] }, async ({ browser }) => { await browser.$('~button').click(); }),
+        test('default case', async () => {}),
+      ] };
+      `,
+      sourceFile,
+    ).get('Example')!;
+    expect(result.tests.map(({ name, options }) => ({ name, input: options?.input, requires: options?.requires }))).toEqual([
+      { name: 'accessible action', input: 'both', requires: ['click'] },
+      { name: 'default case', input: 'both', requires: undefined },
+    ]);
+  });
+
   test.each([
     ['{}', /at least one/],
     ["{ '': () => {} }", /non-empty/],
@@ -44,6 +61,20 @@ describe('extractWdioTests', () => {
     ['{ named: { nested: () => {} } }', /inline/],
   ])('rejects invalid named collections %s', (value, message) => {
     expect(() => extractWdioTests(`export const Example = { wdio: ${value} };`, sourceFile)).toThrow(message);
+  });
+
+  test.each([
+    [`export const Example = { wdio: [desktopIt('case', () => {})] };`, /imported from/],
+    [
+      `import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing'; export const Example = { wdio: [desktopIt('case', { input: mode }, () => {})] };`,
+      /strict JSON literal/,
+    ],
+    [
+      `import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing'; const name = 'case'; export const Example = { wdio: [desktopIt(name, () => {})] };`,
+      /literal test name/,
+    ],
+  ])('rejects non-static desktopIt descriptors', (source, message) => {
+    expect(() => extractWdioTests(source, sourceFile)).toThrow(message);
   });
 
   test('extracts a standalone typed callback without loading the native story module', async () => {

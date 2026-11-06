@@ -59,6 +59,7 @@ export type CreateDesktopStorybookDriverManifestOptions = {
   platform: Platforms;
   renderer?: DesktopStorybookDriverManifest['renderer'];
   storyManifest: DesktopStoryManifest;
+  wdio?: DesktopStorybookWdioOptions;
 };
 
 /** Returns the WebDriver target ID the embedded Storybook driver registers for an endpoint and renderer. */
@@ -81,6 +82,7 @@ export function createDesktopStorybookDriverManifest({
   platform,
   renderer = platform === 'win32' ? 'paper' : 'fabric',
   storyManifest,
+  wdio,
 }: CreateDesktopStorybookDriverManifestOptions): DesktopStorybookDriverManifest {
   const nativeOptions = config.getNativeDriverOptions(platform);
   if (nativeOptions === false) {
@@ -121,7 +123,7 @@ export function createDesktopStorybookDriverManifest({
     storybookPort: instance.storybookPort,
     targetId: desktopStorybookTargetId(config, platform, renderer),
     testIDPrefix: config.testIDPrefix,
-    wdio: config.wdio,
+    wdio: wdio ?? config.wdio,
   });
 }
 

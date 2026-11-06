@@ -497,14 +497,14 @@ export function applyDisabledInputFeaturePolicy(
   return { ...hostInfo, features };
 }
 
-function resolveDisabledInputFeatures(configured?: readonly NativeDisabledInputFeature[]): ReadonlySet<NativeDisabledInputFeature> {
-  const values =
-    configured ??
-    process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES]
+export function resolveDisabledInputFeatures(configured?: readonly NativeDisabledInputFeature[]): ReadonlySet<NativeDisabledInputFeature> {
+  const values = [
+    ...(configured ?? []),
+    ...(process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES]
       ?.split(',')
       .map((value) => value.trim())
-      .filter(Boolean) ??
-    [];
+      .filter(Boolean) ?? []),
+  ];
   const allowed = new Set<NativeDisabledInputFeature>(['keyboard', 'physicalClick', 'wheel']);
   const resolved = new Set<NativeDisabledInputFeature>();
   for (const value of values) {

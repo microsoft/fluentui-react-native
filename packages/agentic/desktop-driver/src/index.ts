@@ -32,6 +32,15 @@ export {
   desktopStoryPlatforms,
   validateDesktopStoryTests,
 } from './authoring/storyTests.js';
+export { desktopRequirements, matchesDesktopPlatforms, resolveDesktopInput, validateDesktopCaseOptions } from './authoring/input.js';
+export type {
+  DesktopCaseOptions,
+  DesktopInput,
+  DesktopInputLane,
+  DesktopPlatforms,
+  DesktopRequirement,
+  ResolvedDesktopCaseOptions,
+} from './authoring/input.js';
 export type {
   DesktopStoryCapability,
   DesktopStoryExpectation,

@@ -4,7 +4,8 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
-import type { DesktopArtifact } from '@fluentui-react-native/desktop-driver/authoring';
+import { matchesDesktopPlatforms } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopArtifact, DesktopInputLane, ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 import { ArtifactManager, captureDesktopFailureEvidence } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
 import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
@@ -21,10 +22,11 @@ import { formatDesktopStorybookError, writeDesktopStorybookFailure, type Desktop
 export type WdioStoryTestResult = {
   storyId: string;
   testName?: string;
-  status: 'passed' | 'failed' | 'skipped';
+  status: 'passed' | 'failed' | 'skipped' | 'unsupported';
   durationMs: number;
   error?: string;
   skipReason?: string;
+  gap?: 'unsupported' | 'quarantine';
   evidenceErrors?: string[];
   artifacts?: readonly DesktopArtifact[];
 };
@@ -53,15 +55,42 @@ export class WdioStoryTestRunError extends Error {
   }
 }
 
+class MissingRequirementsError extends Error {
+  constructor(requirements: readonly string[]) {
+    super(`Missing desktop requirements: ${requirements.join(', ')}.`);
+  }
+}
+
 export function selectWdioStories(
   manifest: DesktopStoryManifest,
   options: DesktopStorybookWdioOptions,
+  platform?: Platforms,
 ): readonly DesktopStoryManifestEntry[] {
   return manifest.entries
     .filter((entry) => entry.wdio && (!options.story || path.matchesGlob(entry.id, options.story)))
     .filter((entry) => !options.tag || entry.tags.includes(options.tag))
-    .filter((entry) => (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioTest(name, options.test)))
+    .filter((entry) => {
+      if (options.input || entry.wdio?.cases) return (selectWdioCases(entry, options, platform)?.length ?? 0) > 0;
+      return (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioTest(name, options.test));
+    })
     .sort((left, right) => left.id.localeCompare(right.id));
+}
+
+export function selectWdioCases(
+  entry: DesktopStoryManifestEntry,
+  options: DesktopStorybookWdioOptions,
+  platform?: Platforms,
+): NonNullable<DesktopStoryManifestEntry['wdio']>['cases'] {
+  if (!entry.wdio?.cases?.length) {
+    if (!options.input) return undefined;
+    throw new Error(`Input lane "${options.input}" cannot run legacy wdio callback in "${entry.id}"; declare it with desktopIt.`);
+  }
+  return entry.wdio.cases.filter(
+    ({ name, options: descriptor }) =>
+      matchesWdioTest(name, options.test) &&
+      (!platform || matchesDesktopPlatforms(descriptor.platforms, platform)) &&
+      (!options.input || descriptor.input === 'both' || descriptor.input === options.input),
+  );
 }
 
 export async function runWdioStoryTests(
@@ -69,7 +98,7 @@ export async function runWdioStoryTests(
   runner?: DesktopCommandRunner,
 ): Promise<readonly WdioStoryTestResult[]> {
   const settings = resolveWdioOptions(options);
-  const stories = selectWdioStories(options.manifest, settings);
+  const stories = selectWdioStories(options.manifest, settings, options.platform);
   if (stories.length === 0) {
     throw new Error('No executable wdio story tests matched the requested selection.');
   }
@@ -79,9 +108,19 @@ export async function runWdioStoryTests(
     if (!extracted || extracted.digest !== entry.wdio!.digest) {
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
+    const selectedCases = selectWdioCases(entry, settings, options.platform);
     return extracted.tests
       .filter(({ name }) => matchesWdioTest(name ?? 'default', settings.test))
-      .map(({ name, code }) => ({ entry, code, testName: name }));
+      .map(({ name, code }) => ({
+        entry,
+        code,
+        testName: name,
+        descriptor: entry.wdio?.cases?.find((testCase) => testCase.name === name)?.options,
+      }))
+      .filter(({ testName }) => {
+        if (!selectedCases) return !settings.input;
+        return selectedCases.some(({ name }) => name === testName);
+      });
   });
   if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
   const artifacts = new ArtifactManager(
@@ -112,7 +151,7 @@ export async function runWdioStoryTests(
   try {
     fs.mkdirSync(generatedRoot, { recursive: true });
     directory = fs.mkdtempSync(path.join(generatedRoot, 'run-'));
-    for (const [index, { entry, code, testName }] of cases.entries()) {
+    for (const [index, { entry, code, testName, descriptor }] of cases.entries()) {
       options.signal?.throwIfAborted();
       const displayName = testName === undefined ? entry.id : `${entry.id} / ${testName}`;
       const artifactId =
@@ -132,9 +171,29 @@ export async function runWdioStoryTests(
       const context = { story: entry.id, test: testName ?? 'default', endpoint: options.platform };
       options.report?.emit({ kind: 'scope-start', payload: { label: displayName, category: 'worker' } }, testId, context, testId);
       options.report?.emit({ kind: 'test-start', payload: { testId, title: displayName, attempt: 0 } }, testId, context);
+      const gap = descriptor && declaredGapFor(descriptor, options.platform, settings.input);
+      if (gap) {
+        result.status = 'unsupported';
+        result.skipReason = gap.reason;
+        result.gap = gap.kind;
+        result.durationMs = Date.now() - started;
+        results.push(result);
+        options.report?.emit(
+          {
+            kind: 'test-result',
+            payload: { testId, title: displayName, attempt: 0, status: 'unsupported', durationMs: result.durationMs, reason: gap.reason },
+          },
+          testId,
+          context,
+        );
+        options.report?.emit({ kind: 'scope-end', payload: { status: 'unsupported' } }, testId);
+        activeResult = undefined;
+        continue;
+      }
+      const clickMode = resolveCaseClickMode(descriptor, settings.clickMode, settings.input);
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
       const desktop = await connectDesktopWebdriver({
-        clickMode: settings.clickMode,
+        clickMode,
         launchMode: 'attach',
         platformName: options.platform === 'macos' ? 'macos' : 'windows',
         targetId: options.targetId,
@@ -147,6 +206,8 @@ export async function runWdioStoryTests(
         if (live.endpoint !== options.platform || live.platformManifestDigest !== options.manifest.platformManifestDigest) {
           throw new Error('The running Storybook manifest is stale or targets a different platform. Restart storybook driver and the app.');
         }
+        const missing = missingRequirements(descriptor, desktop.browser.capabilities['furn:features'], clickMode);
+        if (missing.length) throw new MissingRequirementsError(missing);
         phase = 'navigation';
         await desktop.openStory(entry.id);
         const resultPath = path.join(directory, `${index}.json`);
@@ -199,27 +260,32 @@ export async function runWdioStoryTests(
           result.skipReason = outcome.skipReason;
         }
       } catch (error) {
-        failure = error;
-        executionFailures.push(error);
-        result.error = formatDesktopStorybookError(error);
-        writeDesktopStorybookFailure(`wdio "${displayName}" during ${phase}`, error, options.errorOutput);
-        const evidence = await captureDesktopFailureEvidence(desktop.session, artifacts, artifactId);
-        result.artifacts = evidence.artifacts;
-        result.evidenceErrors = evidence.errors;
-        for (const artifact of result.artifacts)
-          options.report?.emit(
-            {
-              kind: 'artifact',
-              payload: {
-                path: path.relative(options.report.root, path.join(artifacts.root, artifact.path)),
-                description: `${displayName}: ${artifact.kind}`,
+        if (error instanceof MissingRequirementsError) {
+          result.status = 'unsupported';
+          result.skipReason = error.message;
+        } else {
+          failure = error;
+          executionFailures.push(error);
+          result.error = formatDesktopStorybookError(error);
+          writeDesktopStorybookFailure(`wdio "${displayName}" during ${phase}`, error, options.errorOutput);
+          const evidence = await captureDesktopFailureEvidence(desktop.session, artifacts, artifactId);
+          result.artifacts = evidence.artifacts;
+          result.evidenceErrors = evidence.errors;
+          for (const artifact of result.artifacts)
+            options.report?.emit(
+              {
+                kind: 'artifact',
+                payload: {
+                  path: path.relative(options.report.root, path.join(artifacts.root, artifact.path)),
+                  description: `${displayName}: ${artifact.kind}`,
+                },
               },
-            },
-            testId,
-          );
-        for (const evidenceError of result.evidenceErrors) {
-          options.report?.fail(new Error(evidenceError), 'evidence', testId);
-          writeDesktopStorybookFailure(`evidence for "${displayName}"`, evidenceError, options.errorOutput);
+              testId,
+            );
+          for (const evidenceError of result.evidenceErrors) {
+            options.report?.fail(new Error(evidenceError), 'evidence', testId);
+            writeDesktopStorybookFailure(`evidence for "${displayName}"`, evidenceError, options.errorOutput);
+          }
         }
       }
       phase = 'session cleanup';
@@ -243,7 +309,7 @@ export async function runWdioStoryTests(
             attempt: 0,
             status: result.status,
             durationMs: result.durationMs,
-            ...(result.status === 'skipped' ? { reason: result.skipReason } : {}),
+            ...(['skipped', 'unsupported'].includes(result.status) ? { reason: result.skipReason } : {}),
             ...(failure !== undefined ? { failure: options.report.failure(failure, 'test') } : {}),
           },
         },
@@ -283,7 +349,11 @@ export async function runWdioStoryTests(
   const failures: unknown[] = infrastructureFailure === undefined ? [] : [infrastructureFailure];
   failures.push(...executionFailures);
   const allSkipped = results.every(({ status }) => status === 'skipped');
-  const incomplete = results.length !== cases.length || (allSkipped && !options.optional);
+  const laneIncomplete =
+    !!settings.input &&
+    (!results.some(({ status }) => status === 'passed' || status === 'failed') ||
+      results.some(({ status, gap }) => status === 'skipped' || (status === 'unsupported' && gap === undefined)));
+  const incomplete = results.length !== cases.length || (allSkipped && !options.optional) || laneIncomplete;
   if (incomplete && failures.length === 0)
     failures.push(new Error('Required executable story cohort did not execute any tests or left selected work unfinished.'));
   try {
@@ -345,6 +415,75 @@ function csfTestId(storyId: string, testName?: string): string {
   return `csf-${createHash('sha256')
     .update(JSON.stringify([storyId, testName ?? 'default']))
     .digest('hex')}`;
+}
+
+export function resolveCaseClickMode(
+  descriptor: ResolvedDesktopCaseOptions | undefined,
+  configured: 'auto' | 'physical' | 'accessibility',
+  input: DesktopInputLane | undefined,
+): 'auto' | 'physical' | 'accessibility' {
+  if (input === 'accessible') return 'accessibility';
+  if (input === 'physical') return 'physical';
+  if (descriptor?.input === 'accessible' || descriptor?.requires?.includes('accessibility-click')) return 'accessibility';
+  if (descriptor?.input === 'physical') return 'physical';
+  return configured;
+}
+
+export function missingRequirements(
+  descriptor: ResolvedDesktopCaseOptions | undefined,
+  features: Readonly<Record<string, unknown>> | undefined,
+  clickMode: 'auto' | 'physical' | 'accessibility',
+): string[] {
+  if (!descriptor?.requires?.length) return [];
+  const missing: string[] = [];
+  for (const requirement of descriptor.requires) {
+    const feature =
+      requirement === 'click'
+        ? clickMode === 'physical'
+          ? 'physicalClick'
+          : clickMode === 'accessibility'
+            ? 'accessibilityClick'
+            : undefined
+        : requirement === 'physical-click'
+          ? 'physicalClick'
+          : requirement === 'accessibility-click'
+            ? 'accessibilityClick'
+            : requirement === 'accessibility-actions'
+              ? 'accessibilityActions'
+              : requirement === 'element-screenshot'
+                ? 'elementScreenshot'
+                : requirement === 'set-window-rect'
+                  ? 'setWindowRect'
+                  : requirement;
+    if (requirement === 'click' && clickMode === 'auto') {
+      if (!features?.physicalClick && !features?.accessibilityClick) missing.push(requirement);
+    } else if (feature && features?.[feature] !== true) {
+      missing.push(requirement);
+    }
+  }
+  return missing;
+}
+
+function declaredGapFor(
+  descriptor: ResolvedDesktopCaseOptions,
+  endpoint: Platforms,
+  input: DesktopInputLane | undefined,
+): { kind: 'unsupported' | 'quarantine'; reason: string } | undefined {
+  if (descriptor.unsupported && matchesDesktopPlatforms(descriptor.unsupported.platforms, endpoint)) {
+    return { kind: 'unsupported', reason: descriptor.unsupported.reason };
+  }
+  const quarantine = descriptor.quarantine;
+  if (
+    quarantine &&
+    (!quarantine.platforms || matchesDesktopPlatforms(quarantine.platforms, endpoint)) &&
+    (!quarantine.input || quarantine.input === input)
+  ) {
+    if (Date.parse(`${quarantine.expires}T00:00:00Z`) < Date.now()) {
+      throw new Error(`Quarantine ${quarantine.issue} expired on ${quarantine.expires}.`);
+    }
+    return { kind: 'quarantine', reason: `${quarantine.issue}: ${quarantine.reason}` };
+  }
+  return undefined;
 }
 
 function errorMessage(error: unknown): string {
