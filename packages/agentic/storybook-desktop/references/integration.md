@@ -91,14 +91,40 @@ qualification; Windows descendant containment is not run on this macOS host.
 Accessibility, physical input and capture require their own granted capabilities
 and are not qualified by these process fixtures.
 
-Agent mode protects the embedded driver and disables the channel's MCP endpoint,
-but does not make all channel/runtime mutation ingress exclusively grant-owned.
-Unknown story changes now quarantine the driver target; args updates through the
-protected driver are unsupported. Epoch/cancellation-aware story providers
-reject stale preview mutations without invalidating chrome or live secondary
-windows. Interrupted navigation still quarantines when upstream work cannot
-be proven fenced. Automatic transport reconnect, durable recovery wiring, and
-channel ingress authority remain work in progress; see
+Agent mode does not construct upstream `createChannelServer`. Its public API
+has no authorization/interception hook, and its HTTP handlers and WebSocket
+relay can broadcast arbitrary mutations. Instead the controlled transport uses
+the public `buildIndex` API and an owned HTTP/WebSocket server: only
+`GET /index.json` is served, other HTTP requests (including `/send-event`,
+`/select-story-sync/*`, and `/mcp`) return 403 without reading or echoing values,
+and no client WebSocket frame is relayed to another client. Runtime hello and
+ready/error messages are consumed locally, bound to the authenticated socket
+and F4 connection epoch.
+
+Selection and reset require the session-owning driver grant. The orchestrator
+sends prepare followed by `setCurrentStory` only to that authenticated runtime,
+waits for correlated readiness, then the driver verifies the native marker.
+These mutations use the existing settlement, preview invalidation and
+quarantine path. Args remain intentionally unsupported
+(`story-args-unsupported`), even for the owning grant; the controlled
+orchestrator also refuses direct args dispatch. No argument values enter
+transport diagnostics or journals.
+
+Without an agent manifest the upstream channel is **legacy unprotected mode**,
+including its HTTP mutation handlers, WebSocket relay and MCP endpoint. It is
+not an authority boundary. Channel-only `smoke --mode stories` retains this
+legacy path. Manifest-backed traversal (`stories-and-tests`, and the Windows/
+Win32 control script when a driver manifest is supplied) opens one driver
+session, selects each story through it, and deletes that session before authored
+tests acquire their own. It never falls back to upstream selection after a
+driver failure. Only pre-dispatch `bridge-unavailable` can be retried;
+uncertain navigation and `relaunch-required` fail without replay.
+
+Epoch/cancellation-aware providers reject stale preview mutations without
+invalidating chrome or live secondary windows. Interrupted navigation still
+quarantines when dispatch cannot be proven fenced. Native endpoint
+qualification of the new ingress remains pending on macOS Paper/Fabric and
+Windows Fabric/Win32 Paper. Automatic transport reconnect remains unsupported; see
 [readiness and installed upstream limits](readiness.md).
 See `@fluentui-react-native/desktop-driver/references/current-status.md` and
 `@fluentui-react-native/desktop-test/references/current-status.md`.

@@ -319,6 +319,25 @@ describe('story operations', () => {
     try {
       const client = createDesktopDriverClient({ grant: grant.token, url: harness.server.url });
       const session = await client.newSession({ alwaysMatch: { 'furn:target': harness.target.id } });
+      const owner = harness.server.sessions.get(session.id);
+      const foreign = authority.issue({ label: 'foreign', targets: '*' });
+      const foreignClient = createDesktopDriverClient({ grant: foreign.token, url: harness.server.url });
+      const anonymous = createDesktopDriverClient({ url: harness.server.url });
+      const select = jest.spyOn(storyHarness.storyOrchestrator!, 'selectStory');
+      const before = owner.story;
+      for (const rejected of [foreignClient, anonymous]) {
+        for (const route of ['/furn/story', '/furn/story/reset', '/furn/story/args']) {
+          await expect(
+            rejected.request('POST', `/session/${session.id}${route}`, {
+              requestId: 'unauthorized',
+              runId: 'unauthorized',
+              storyId: 'components-button--default',
+              args: { label: 'private-value-never-recorded' },
+            }),
+          ).rejects.toBeDefined();
+        }
+      }
+      expect(select).not.toHaveBeenCalled();
       await expect(
         client.request('POST', `/session/${session.id}/furn/story/args`, {
           storyId: 'components-button--default',
@@ -326,6 +345,9 @@ describe('story operations', () => {
         }),
       ).rejects.toMatchObject({ code: 'unsupported operation', data: { reason: 'story-args-unsupported' } });
       expect(storyHarness.storyOrchestrator!.argUpdates).toEqual([]);
+      expect(owner.story).toEqual(before);
+      expect(JSON.stringify(await session.journal())).not.toContain('private-value-never-recorded');
+      expect(JSON.stringify(await session.journal())).not.toContain('not dispatched');
     } finally {
       await harness.close();
       await storyHarness.close();

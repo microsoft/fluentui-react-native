@@ -54,7 +54,7 @@ async function selectStory(storyId, attempts = 45) {
   throw lastError;
 }
 
-async function smoke() {
+async function smoke(traversal) {
   if (smokeMode !== 'stories' && smokeMode !== 'stories-and-tests') {
     throw new Error(`Unsupported Storybook smoke mode "${smokeMode}".`);
   }
@@ -79,7 +79,8 @@ async function smoke() {
       report.reporter.emit({ kind: 'scope-start', payload: { label: title, category: 'phase' } }, testId, context, testId);
       report.reporter.emit({ kind: 'test-start', payload: { testId, title, attempt: 0 } }, testId, context);
       try {
-        await selectStory(id);
+        if (traversal) await traversal.select(id, 30_000);
+        else await selectStory(id);
         if (settleMilliseconds > 0) {
           await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
         }
@@ -125,22 +126,7 @@ async function smoke() {
 }
 
 async function runAuthoredTests() {
-  const manifestPath = process.env.STORYBOOK_DRIVER_MANIFEST;
-  if (!manifestPath || !fs.existsSync(manifestPath)) {
-    throw new Error('STORYBOOK_DRIVER_MANIFEST must identify the generated driver manifest when running authored tests.');
-  }
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (
-    manifest.schemaVersion !== 2 ||
-    !['macos', 'win32', 'windows'].includes(manifest.endpoint) ||
-    !Number.isInteger(manifest.driverPort) ||
-    typeof manifest.targetId !== 'string' ||
-    manifest.storyManifest?.schemaVersion !== 1 ||
-    !Array.isArray(manifest.storyManifest.entries)
-  ) {
-    throw new Error(`Invalid Desktop Driver manifest at ${manifestPath}.`);
-  }
-
+  const manifest = readDriverManifest();
   const smokeTestsUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'cli', 'smokeTests.js')).href;
   const configUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'config', 'index.js')).href;
   const { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } = await import(smokeTestsUrl);
@@ -165,6 +151,26 @@ async function runAuthoredTests() {
   report.reporter.emit({ kind: 'diagnostic', payload: { level: 'info', message: formatDesktopStorybookSmokeTestSummary(result) } });
 }
 
+function readDriverManifest() {
+  const manifestPath = process.env.STORYBOOK_DRIVER_MANIFEST;
+  if (!manifestPath || !fs.existsSync(manifestPath)) {
+    throw new Error('STORYBOOK_DRIVER_MANIFEST must identify the generated driver manifest when running authored tests.');
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (
+    manifest.schemaVersion !== 2 ||
+    !['macos', 'win32', 'windows'].includes(manifest.endpoint) ||
+    !Number.isInteger(manifest.driverPort) ||
+    typeof manifest.targetId !== 'string' ||
+    manifest.storyManifest?.schemaVersion !== 1 ||
+    !Array.isArray(manifest.storyManifest.entries)
+  ) {
+    throw new Error(`Invalid Desktop Driver manifest at ${manifestPath}.`);
+  }
+
+  return manifest;
+}
+
 async function main() {
   const [{ createDesktopReportSession }, { NodeDesktopCommandRunner }] = await Promise.all([
     import('@fluentui-react-native/desktop-test/reporting'),
@@ -174,11 +180,29 @@ async function main() {
   runner = new NodeDesktopCommandRunner({ reporter: report.reporter, environment: report.environment });
   report.onStop?.(() => controller.abort(new Error('Storybook control interrupted.')));
   let failure;
+  let traversal;
   try {
-    await smoke();
+    if (smokePhase !== 'tests' && process.env.STORYBOOK_DRIVER_MANIFEST) {
+      const manifest = readDriverManifest();
+      const { connectStoryTraversal } = await import(pathToFileURL(path.join(__dirname, '..', 'lib', 'cli', 'storyTraversal.js')).href);
+      traversal = await connectStoryTraversal({
+        // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the Desktop Driver is loopback-only
+        url: `http://127.0.0.1:${manifest.driverPort}`,
+        platform: manifest.endpoint,
+        targetId: manifest.targetId,
+        signal: controller.signal,
+      });
+    }
+    await smoke(traversal);
   } catch (error) {
     failure = error;
   } finally {
+    try {
+      await traversal?.close();
+    } catch (error) {
+      report.reporter.fail(error, 'cleanup');
+      failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook traversal and cleanup failed.');
+    }
     try {
       await runner.close();
     } catch (error) {

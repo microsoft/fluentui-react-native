@@ -1,6 +1,7 @@
 const { createRequire } = require('node:module');
 const fs = require('node:fs');
 const path = require('node:path');
+const { createControlledChannelServer } = require('./controlled-channel.cjs');
 
 async function startDesktopStorybookServer({
   configPath,
@@ -14,7 +15,7 @@ async function startDesktopStorybookServer({
   }
 
   const requireFromProject = createRequire(path.join(projectRoot, 'package.json'));
-  const { createChannelServer } = requireFromProject('@storybook/react-native/node');
+  const { buildIndex, createChannelServer } = requireFromProject('@storybook/react-native/node');
   const { finishDesktopProcess, publishDesktopServiceReady, registerDesktopProcessDisposal } =
     await import('@fluentui-react-native/desktop-test/process-control');
   let initialized;
@@ -30,6 +31,7 @@ async function startDesktopStorybookServer({
   ]);
   const report = await createDesktopReportSession({ artifactsRoot: path.join(projectRoot, 'artifacts', 'desktop'), kind: 'lifecycle' });
   let server;
+  let controlledChannel;
   let driver;
   let agentReadyPath;
   let keepAlive;
@@ -53,7 +55,9 @@ async function startDesktopStorybookServer({
         failures.push(failure);
       }
       try {
-        if (server) {
+        if (controlledChannel) {
+          await controlledChannel.close();
+        } else if (server) {
           for (const client of server.clients) client.terminate();
           await new Promise((resolve, reject) => server.close((failure) => (failure ? reject(failure) : resolve())));
         }
@@ -126,9 +130,13 @@ async function startDesktopStorybookServer({
       report.reporter.addSecret(driverManifest.application.leaseNonce);
       report.reporter.addSecret(driverManifest.bridgeNonce);
     }
-    // The upstream HTTP server is unref'd and closes on beforeExit; own only our clearable keepalive. Its MCP endpoint
-    // selects stories without a grant, so an agent-served driver disables it and agents select through the driver.
-    server = createChannelServer({ host, port, configPath, websockets: true, experimental_mcp: !agent, keepNodeProcessAlive: false });
+    if (agent) {
+      controlledChannel = await createControlledChannelServer({ host, port, configPath, buildIndex, onFailure: fatal });
+      server = controlledChannel.channel;
+    } else {
+      // Deliberately unprotected legacy mode, including upstream HTTP, WebSocket relay and MCP.
+      server = createChannelServer({ host, port, configPath, websockets: true, experimental_mcp: true, keepNodeProcessAlive: false });
+    }
     if (!server) {
       throw new Error('Desktop Driver Storybook orchestration requires WebSockets.');
     }
@@ -240,6 +248,7 @@ function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, S
     driverManifest,
     serverUrl,
     recovery,
+    controlled: driverManifest.agent !== undefined,
   });
 }
 

@@ -9,6 +9,7 @@ import { matchesStoryMarker, type StorySelectionRequest } from '@fluentui-react-
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
 import { StorybookChannelOrchestrator } from './StorybookChannelOrchestrator.js';
 import type { BridgeEpochRecovery } from './BridgeEpochJournal.js';
+import { createControlledChannelServer } from '../../config/controlled-channel.cjs';
 
 class Client extends EventEmitter {
   readyState = 1;
@@ -97,6 +98,7 @@ function setup(
   timeoutMs = 100,
   recovery?: BridgeEpochRecovery,
   renderer: 'fabric' | 'paper' = 'fabric',
+  controlled = false,
 ) {
   const server = Object.assign(new EventEmitter(), { clients: new Set<Client>() });
   const client = new Client();
@@ -110,9 +112,141 @@ function setup(
     serverUrl: 'https://localhost',
     timeoutMs,
     recovery,
+    controlled,
   });
   return { client, errorOutput, fetch, orchestrator, server };
 }
+
+describe('controlled channel endpoint boundary', () => {
+  test('HTTP and foreign WebSocket selection, prepare and args never reach the authenticated runtime', async () => {
+    const errors = jest.fn();
+    const heartbeat = jest.spyOn(globalThis, 'setInterval');
+    const channel = await createControlledChannelServer({
+      host: '127.0.0.1',
+      port: 0,
+      configPath: 'unused',
+      buildIndex: async () => ({ entries: {} }),
+      onFailure: errors,
+    });
+    const port = channel.channel.address().port;
+    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- exercise the real loopback HTTP boundary
+    const serverUrl = `http://127.0.0.1:${port}`;
+    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- exercise the real loopback WebSocket boundary
+    const socketUrl = `ws://127.0.0.1:${port}`;
+    const fetch = jest.fn(async () => new Response('{}'));
+    const errorOutput = { write: jest.fn() };
+    const orchestrator = new StorybookChannelOrchestrator({
+      channelServer: channel.channel,
+      controlled: true,
+      driverManifest: manifest,
+      fetch,
+      serverUrl,
+      errorOutput,
+      timeoutMs: 2000,
+    });
+    const received: { type: string; args: Record<string, unknown>[] }[] = [];
+    const runtime = new WebSocket(socketUrl);
+    runtime.addEventListener('message', (event) => received.push(JSON.parse(String(event.data))));
+    const foreign = new WebSocket(socketUrl);
+    const replies: unknown[] = [];
+    foreign.addEventListener('message', (event) => replies.push(JSON.parse(String(event.data))));
+    const waitFor = async (predicate: () => boolean) => {
+      const end = Date.now() + 2000;
+      while (!predicate() && Date.now() < end) await new Promise((resolve) => setTimeout(resolve, 5));
+      expect(predicate()).toBe(true);
+    };
+    try {
+      await waitFor(() => received.length > 0 && replies.length > 0);
+      const epoch = received[0].args[0].connectionEpoch;
+      runtime.send(
+        JSON.stringify({
+          type: 'furn:desktop:hello',
+          args: [
+            {
+              version: 2,
+              connectionEpoch: epoch,
+              nonce: manifest.bridgeNonce,
+              endpoint: manifest.endpoint,
+              instanceId: manifest.instanceId,
+              targetId: manifest.targetId,
+              platformManifestDigest: manifest.platformManifestDigest,
+            },
+          ],
+        }),
+      );
+      runtime.send(JSON.stringify({ type: 'storyRendered', args: [request.storyId] }));
+      const secret = 'private-argument-value';
+      for (const pathname of ['/select-story-sync/button--default', '/send-event', '/mcp', '/unknown']) {
+        const response = await globalThis.fetch(`${serverUrl}${pathname}`, {
+          method: 'POST',
+          body: JSON.stringify({ type: 'updateStoryArgs', args: [{ updatedArgs: { text: secret } }] }),
+        });
+        expect(response.status).toBe(403);
+        expect(await response.text()).not.toContain(secret);
+      }
+      for (const type of [
+        'setCurrentStory',
+        'furn:desktop:prepare-story',
+        'updateStoryArgs',
+        'resetStoryArgs',
+        'furn:desktop:cancel-story',
+      ]) {
+        foreign.send(JSON.stringify({ type, args: [{ ...request, connectionEpoch: epoch, updatedArgs: { text: secret } }] }));
+      }
+      foreign.send(JSON.stringify({ type: 'furn:desktop:request-challenge', args: [] }));
+      await waitFor(() => replies.length === 2);
+      expect(received).toHaveLength(1);
+      await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+      const selection = orchestrator.selectStory(request);
+      await waitFor(() => received.length === 3);
+      expect(received.slice(1).map(({ type }) => type)).toEqual(['furn:desktop:prepare-story', 'setCurrentStory']);
+      runtime.send(
+        JSON.stringify({
+          type: 'furn:desktop:story-ready',
+          args: [
+            { ...request, connectionEpoch: epoch, markerVersion: 1, portablePlanDigest: manifest.portablePlanDigest, previewGeneration: 1 },
+          ],
+        }),
+      );
+      await expect(selection).resolves.toMatchObject({ ...request, connectionEpoch: epoch });
+      foreign.send(JSON.stringify({ type: 'updateStoryArgs', args: [{ storyId: request.storyId, updatedArgs: { text: secret } }] }));
+      foreign.send(JSON.stringify({ type: 'furn:desktop:request-challenge', args: [] }));
+      await waitFor(() => replies.length === 3);
+      await expect(orchestrator.getCurrentStory()).resolves.toMatchObject({ ...request, connectionEpoch: epoch });
+      await expect(orchestrator.updateArgs(request.storyId, { text: secret })).rejects.toMatchObject({ effect: 'none' });
+      expect(JSON.stringify(received)).not.toContain(secret);
+      expect(fetch).not.toHaveBeenCalled();
+      expect(errors).not.toHaveBeenCalled();
+      expect(errorOutput.write).not.toHaveBeenCalled();
+      expect((await globalThis.fetch(`${serverUrl}/index.json`)).status).toBe(200);
+      expect(heartbeat).toHaveBeenCalledWith(expect.any(Function), 10_000);
+      heartbeat.mock.calls[0][0]();
+      await waitFor(() => received.length === 4);
+      expect(received[3]).toEqual({ type: 'ping' });
+    } finally {
+      runtime.close();
+      foreign.close();
+      await channel.close();
+      heartbeat.mockRestore();
+    }
+  });
+
+  test('controlled cancellation fences the dispatched epoch and cannot be revived by delayed ready', async () => {
+    const { client, orchestrator, fetch } = setup(undefined, 100, undefined, 'fabric', true);
+    client.authenticate();
+    const controller = new AbortController();
+    const selection = orchestrator.selectStory(request, { lifetimeId: 'owner', signal: controller.signal });
+    controller.abort();
+    await expect(selection).rejects.toHaveProperty('effect', 'unknown');
+    client.ready();
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    await expect(orchestrator.resetStory({ ...request, requestId: 'next' })).rejects.toMatchObject({
+      data: { reason: 'relaunch-required' },
+      effect: 'none',
+    });
+    expect(fetch).not.toHaveBeenCalled();
+  });
+});
 
 describe('durable authenticated bridge epochs', () => {
   const application = { processId: 123, processStartedAt: '2026-11-06T00:00:00.000Z' };
