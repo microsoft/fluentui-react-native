@@ -46,7 +46,7 @@ import {
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
-import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
+import { matchesWdioCase, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
@@ -343,11 +343,19 @@ export class DesktopStorybookCli {
       throw new Error('No executable wdio story tests matched the requested selection.');
     }
     if (options.list) {
-      const value = selected.map(({ id, sourcePath, wdio }) => ({
-        id,
-        sourcePath,
-        ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
-      }));
+      const value = selected.map(({ id, sourcePath, wdio }) => {
+        const tests = (wdio?.testNames ?? ['default']).filter((name) =>
+          matchesWdioCase(id, name, settings, wdio?.inputModes?.[name]?.[platform]),
+        );
+        return {
+          id,
+          sourcePath,
+          ...(wdio?.testNames ? { tests } : {}),
+          ...(wdio?.inputModes
+            ? { inputModes: Object.fromEntries(Object.entries(wdio.inputModes).filter(([name]) => tests.includes(name))) }
+            : {}),
+        };
+      });
       if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
       else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
       return;

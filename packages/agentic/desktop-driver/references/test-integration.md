@@ -67,6 +67,12 @@ For Storybook targets, the connection registers:
 
 `desktopExpect(expectation)` is available without Storybook.
 
+Manifest `wdio.inputModes` optionally carries serializable endpoint-specific
+classifications keyed by exact callback name. Each endpoint value is
+`accessibility`, `physical`, or `both`. Storybook owns static extraction and
+selection; Desktop Driver transports this metadata without maintaining a
+component test inventory or changing target input permissions.
+
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.

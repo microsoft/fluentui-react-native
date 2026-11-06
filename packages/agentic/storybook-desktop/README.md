@@ -27,6 +27,14 @@ The [reference index](references/README.md) routes platform, readiness, and
 troubleshooting tasks.
 Package agents should start from [AGENTS.md](AGENTS.md).
 
+Applications can select colocated, endpoint-specific test classifications with
+`wdio.inputMode` and an explicit click policy. Static discovery validates every
+eligible annotation and exposes the metadata without a second test inventory.
+Exact story/callback selection with `wdio.testCases` remains supported.
+See [story-tests](references/story-tests.md) for authoring and
+[integration](references/integration.md#exact-callback-selection) for selection;
+capability availability and execution verification remain separate.
+
 ## Responsibilities
 
 - This package owns Storybook-specific configuration, story extraction,

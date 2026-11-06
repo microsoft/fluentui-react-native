@@ -51,6 +51,33 @@ closures over imported helpers, args, or render state fail extraction with
 source context. The older single `wdio: async (context) => ...` form remains
 supported as the `default` test.
 Use `WdioStory<StoryObj<...>>` and import `WdioStory` with `import type`.
+Named tests can colocate endpoint-specific input requirements:
+
+```tsx
+wdio: {
+  'supports activation': {
+    inputModes: { win32: 'both' },
+    run: async ({ browser, expect }) => {
+      const button = await browser.$('~save-button');
+      await button.click();
+      await expect(button).toBeEnabled();
+    },
+  },
+}
+```
+
+Descriptors require exactly `inputModes` and an inline `run` function.
+`inputModes` is a nonempty literal map of `macos`, `windows`, or `win32` to
+`accessibility`, `physical`, or `both`; dynamic values and duplicate or unknown
+fields fail extraction. An endpoint annotation applies only when that endpoint
+selects an input lane. Set `wdio.inputMode` to `accessibility` or `physical` in
+the consuming app configuration: every eligible callback must then declare that
+endpoint before any story, tag, or test filtering. `both` participates in each
+lane. Selection does not grant native input authority or replace capability
+checks. Existing bare callbacks remain supported without input-mode selection.
+`test --list` includes discovered per-test `inputModes`; the shared harness
+does not maintain an inventory of component test names.
+
 Literal dynamic imports of Node-compatible helpers inside the callback resolve
 from the original story file. The shared Babel config removes callbacks before
 Metro resolves their dependencies.

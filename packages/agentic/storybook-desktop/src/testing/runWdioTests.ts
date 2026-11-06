@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
+import type { DesktopStoryInputMode, DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
 import type { DesktopArtifact } from '@fluentui-react-native/desktop-driver/authoring';
 import { ArtifactManager, captureDesktopFailureEvidence } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
@@ -57,10 +57,31 @@ export function selectWdioStories(
   manifest: DesktopStoryManifest,
   options: DesktopStorybookWdioOptions,
 ): readonly DesktopStoryManifestEntry[] {
+  if (options.inputMode !== undefined) {
+    for (const entry of manifest.entries) {
+      if (!entry.wdio) continue;
+      for (const name of entry.wdio.testNames ?? ['default']) {
+        const mode = entry.wdio.inputModes?.[name]?.[manifest.endpoint];
+        if (!mode || !['accessibility', 'physical', 'both'].includes(mode)) {
+          throw new Error(`Unclassified ${manifest.endpoint} wdio callback: ${entry.id} / ${name}.`);
+        }
+      }
+    }
+  }
+  for (const test of options.testCases ?? []) {
+    const entry = manifest.entries.find(({ id }) => id === test.storyId);
+    if (!entry?.wdio || !(entry.wdio.testNames ?? ['default']).includes(test.testName)) {
+      throw new Error(`No executable wdio callback matches declared identity: ${test.storyId} / ${test.testName}.`);
+    }
+  }
   return manifest.entries
     .filter((entry) => entry.wdio && (!options.story || path.matchesGlob(entry.id, options.story)))
     .filter((entry) => !options.tag || entry.tags.includes(options.tag))
-    .filter((entry) => (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioTest(name, options.test)))
+    .filter((entry) =>
+      (entry.wdio?.testNames ?? ['default']).some((name) =>
+        matchesWdioCase(entry.id, name, options, entry.wdio?.inputModes?.[name]?.[manifest.endpoint]),
+      ),
+    )
     .sort((left, right) => left.id.localeCompare(right.id));
 }
 
@@ -80,7 +101,7 @@ export async function runWdioStoryTests(
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
     return extracted.tests
-      .filter(({ name }) => matchesWdioTest(name ?? 'default', settings.test))
+      .filter(({ name, inputModes }) => matchesWdioCase(entry.id, name ?? 'default', settings, inputModes?.[options.platform]))
       .map(({ name, code }) => ({ entry, code, testName: name }));
   });
   if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
@@ -339,6 +360,19 @@ function isWorkerResult(value: unknown): value is WorkerResult {
 
 export function matchesWdioTest(name: string, pattern?: string): boolean {
   return pattern === undefined || path.matchesGlob(name, pattern);
+}
+
+export function matchesWdioCase(
+  storyId: string,
+  testName: string,
+  options: DesktopStorybookWdioOptions,
+  inputMode?: DesktopStoryInputMode,
+): boolean {
+  return (
+    matchesWdioTest(testName, options.test) &&
+    (options.testCases === undefined || options.testCases.some((entry) => entry.storyId === storyId && entry.testName === testName)) &&
+    (options.inputMode === undefined || inputMode === 'both' || inputMode === options.inputMode)
+  );
 }
 
 function csfTestId(storyId: string, testName?: string): string {

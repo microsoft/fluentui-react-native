@@ -24,4 +24,20 @@ describe('Storybook-owned wdio configuration', () => {
     expect(() => resolveWdioOptions({ story: '' })).toThrow('wdio.story');
     expect(() => resolveWdioOptions({ tag: ' ' })).toThrow('wdio.tag');
   });
+
+  test('accepts explicit input lanes and rejects unknown modes', () => {
+    expect(resolveWdioOptions({ inputMode: 'physical' }).inputMode).toBe('physical');
+    // @ts-expect-error Input modes are intentionally a closed set.
+    expect(() => resolveWdioOptions({ inputMode: 'automatic' })).toThrow('wdio.inputMode');
+  });
+
+  test('snapshots exact callback identities and rejects empty or duplicate selections', () => {
+    const testCases = [{ storyId: 'button--default', testName: 'activation' }];
+    const settings = resolveWdioOptions({ testCases });
+    testCases[0].testName = 'changed';
+    expect(settings.testCases).toEqual([{ storyId: 'button--default', testName: 'activation' }]);
+    expect(() => resolveWdioOptions({ testCases: [] })).toThrow('wdio.testCases');
+    expect(() => resolveWdioOptions({ testCases: [testCases[0], testCases[0]] })).toThrow('wdio.testCases');
+    expect(() => resolveWdioOptions({ testCases: [{ storyId: '', testName: 'activation' }] })).toThrow('wdio.testCases');
+  });
 });

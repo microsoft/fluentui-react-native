@@ -131,6 +131,8 @@ export type {
   RecoveryEvidence,
 } from './server/index.js';
 export type {
+  DesktopStoryInputMode,
+  DesktopStoryInputModes,
   DesktopStoryManifest,
   DesktopStoryManifestEntry,
   StoryOrchestrator,

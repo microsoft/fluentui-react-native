@@ -120,122 +120,143 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: {
-    'DRP-011 exposes a named, empty, collapsed native combobox before input': async ({ browser, expect, platform }) => {
-      const trigger = await browser.$('~dropdown-trigger');
-      expect(await trigger.getProperty('role')).toBe('combobox');
-      expect(await trigger.getProperty('name')).toBe('Fruit');
-      expect(await trigger.getProperty('expanded')).toBe(false);
-      const renderer = 'furn:renderer' in browser.capabilities ? browser.capabilities['furn:renderer'] : undefined;
-      if (platform === 'macos') {
-        expect(['fabric', 'paper']).toContain(renderer);
-      }
-      // macOS Fabric converts empty accessibilityValue.text to nil; Paper and UIA retain the empty string.
-      expect(await trigger.getProperty('value')).toBe(platform === 'macos' && renderer === 'fabric' ? null : '');
+    'DRP-011 exposes a named, empty, collapsed native combobox before input': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect, platform }) => {
+        const trigger = await browser.$('~dropdown-trigger');
+        expect(await trigger.getProperty('role')).toBe('combobox');
+        expect(await trigger.getProperty('name')).toBe('Fruit');
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        const renderer = 'furn:renderer' in browser.capabilities ? browser.capabilities['furn:renderer'] : undefined;
+        if (platform === 'macos') {
+          expect(['fabric', 'paper']).toContain(renderer);
+        }
+        // macOS Fabric converts empty accessibilityValue.text to nil; Paper and UIA retain the empty string.
+        expect(await trigger.getProperty('value')).toBe(platform === 'macos' && renderer === 'fabric' ? null : '');
+      },
     },
-    'opens from the keyboard on the first option and commits with Enter': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      expect(await (await browser.$('~dropdown-trigger')).getProperty('expanded')).toBe(true);
-      await browser.keys('\uE015');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
-      // The disabled Cherry option is never a focus stop.
-      await browser.keys('\uE015');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Grape');
-      await browser.keys('\uE013');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Banana');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
-      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
-      expect(await (await browser.$('~dropdown-trigger')).getProperty('value')).toBe('Banana');
+    'opens from the keyboard on the first option and commits with Enter': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+        expect(await (await browser.$('~dropdown-trigger')).getProperty('expanded')).toBe(true);
+        await browser.keys('\uE015');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
+        // The disabled Cherry option is never a focus stop.
+        await browser.keys('\uE015');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Grape');
+        await browser.keys('\uE013');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Banana');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
+        await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
+        expect(await (await browser.$('~dropdown-trigger')).getProperty('value')).toBe('Banana');
+      },
     },
-    'reopens on the selected option and navigates with Home and End': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      const { openDropdownFromKeyboard } = await import('./dropdown.wdio.ts');
-      await openDropdownFromKeyboard(context, 'Apple');
-      await browser.keys('\uE010');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Mango');
-      await browser.keys('\uE00D');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Mango');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
-      await browser.keys('\uE015');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Mango');
-      await browser.keys('\uE011');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Apple');
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
-      expect(await (await browser.$('~dropdown-selection')).getText()).toBe('Mango');
+    'reopens on the selected option and navigates with Home and End': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        const { openDropdownFromKeyboard } = await import('./dropdown.wdio.ts');
+        await openDropdownFromKeyboard(context, 'Apple');
+        await browser.keys('\uE010');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Mango');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Mango');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
+        await browser.keys('\uE015');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Mango');
+        await browser.keys('\uE011');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Apple');
+        await browser.keys('\uE00C');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
+        await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
+        expect(await (await browser.$('~dropdown-selection')).getText()).toBe('Mango');
+      },
     },
-    'exposes a named list of selectable options': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { expectMenuClosed, inWindowWith } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      const trigger = await browser.$('~dropdown-trigger');
-      expect(await trigger.getProperty('expanded')).toBe(true);
-      const triggerWidth = (await browser.getElementRect(await trigger.elementId)).width;
-      await inWindowWith(context, 'dropdown-list', async () => {
-        const list = await browser.$('~dropdown-list');
-        // The list is at least as wide as the trigger and sized to its short options.
-        const { width } = await browser.getElementRect(await list.elementId);
-        expect(width).toBeGreaterThanOrEqual(triggerWidth - 1);
-        expect(width).toBeLessThan(triggerWidth * 1.5);
-        expect(await list.getProperty('name')).toBe('Fruit');
-        expect(await (await browser.$('~dropdown-cherry')).getProperty('enabled')).toBe(false);
-        expect(await (await browser.$('~dropdown-apple')).getProperty('name')).toBe('Apple');
-      });
-      // A macOS window switch makes the owner window key, so close with the trigger rather than a key.
-      await (await browser.$('~dropdown-trigger')).click();
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: trigger');
-      await expectMenuClosed(context, 'dropdown-trigger');
+    'exposes a named list of selectable options': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { expectMenuClosed, inWindowWith } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+        const trigger = await browser.$('~dropdown-trigger');
+        expect(await trigger.getProperty('expanded')).toBe(true);
+        const triggerWidth = (await browser.getElementRect(await trigger.elementId)).width;
+        await inWindowWith(context, 'dropdown-list', async () => {
+          const list = await browser.$('~dropdown-list');
+          // The list is at least as wide as the trigger and sized to its short options.
+          const { width } = await browser.getElementRect(await list.elementId);
+          expect(width).toBeGreaterThanOrEqual(triggerWidth - 1);
+          expect(width).toBeLessThan(triggerWidth * 1.5);
+          expect(await list.getProperty('name')).toBe('Fruit');
+          expect(await (await browser.$('~dropdown-cherry')).getProperty('enabled')).toBe(false);
+          expect(await (await browser.$('~dropdown-apple')).getProperty('name')).toBe('Apple');
+        });
+        // A macOS window switch makes the owner window key, so close with the trigger rather than a key.
+        await (await browser.$('~dropdown-trigger')).click();
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: trigger');
+        await expectMenuClosed(context, 'dropdown-trigger');
+      },
     },
-    'closes on Tab and moves focus past the trigger': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { expectMenuClosed } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      await browser.keys('\uE004');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
-      // The Win32 host cannot continue Tab past its owner, so focus returns to the trigger there.
-      await expectNativeState(browser, context.platform === 'win32' ? 'dropdown-trigger' : 'dropdown-after', 'focused', true);
-      await expectMenuClosed(context, 'dropdown-trigger');
+    'closes on Tab and moves focus past the trigger': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { expectMenuClosed } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+        await browser.keys('\uE004');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
+        // The Win32 host cannot continue Tab past its owner, so focus returns to the trigger there.
+        await expectNativeState(browser, context.platform === 'win32' ? 'dropdown-trigger' : 'dropdown-after', 'focused', true);
+        await expectMenuClosed(context, 'dropdown-trigger');
+      },
     },
-    'closes on Shift+Tab and returns focus to the trigger': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      await browser.keys(['\uE008', '\uE004']);
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
+    'closes on Shift+Tab and returns focus to the trigger': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+        await browser.keys(['\uE008', '\uE004']);
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
+        await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
+      },
     },
-    'opens from the pointer on the first option and selects with a click': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { expectMenuClosed, inWindowWith } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await browser.$('~dropdown-trigger')).click();
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Apple');
-      await inWindowWith(context, 'dropdown-grape', async () => {
-        await (await browser.$('~dropdown-grape')).click();
-      });
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Grape');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
-      await expectMenuClosed(context, 'dropdown-trigger');
-      await (await browser.$('~dropdown-trigger')).click();
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
-      await (await browser.$('~dropdown-trigger')).click();
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: trigger');
-      await expectMenuClosed(context, 'dropdown-trigger');
+    'opens from the pointer on the first option and selects with a click': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { expectMenuClosed, inWindowWith } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await (await browser.$('~dropdown-trigger')).click();
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Apple');
+        await inWindowWith(context, 'dropdown-grape', async () => {
+          await (await browser.$('~dropdown-grape')).click();
+        });
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Grape');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
+        await expectMenuClosed(context, 'dropdown-trigger');
+        await (await browser.$('~dropdown-trigger')).click();
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Opened: trigger');
+        await (await browser.$('~dropdown-trigger')).click();
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: trigger');
+        await expectMenuClosed(context, 'dropdown-trigger');
+      },
     },
   },
 };
@@ -247,24 +268,27 @@ export const Multiple: Story = {
     docs: { description: { story: 'Activation toggles options and keeps the list open; the trigger summarizes long selections.' } },
   },
   wdio: {
-    'toggles options and stays open until dismissed': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple');
-      await browser.keys('\uE015');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
-      await browser.keys('\uE00D');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Apple, Banana');
-      await browser.keys('\uE011');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Banana');
-      expect(await (await browser.$('~dropdown-reason')).getText()).toBe('Opened: trigger');
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
+    'toggles options and stays open until dismissed': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Apple');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Apple');
+        await browser.keys('\uE015');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Banana');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Apple, Banana');
+        await browser.keys('\uE011');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Banana');
+        expect(await (await browser.$('~dropdown-reason')).getText()).toBe('Opened: trigger');
+        await browser.keys('\uE00C');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: dismiss');
+        await expectNativeState(browser, 'dropdown-trigger', 'focused', true);
+      },
     },
   },
 };
@@ -314,26 +338,29 @@ export const LongList: Story = {
     docs: { description: { story: 'A controlled selection in a list taller than the popup, which scrolls the focused option into view.' } },
   },
   wdio: {
-    'enters on the controlled selection and reaches the end of a scrolling list': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { inWindowWith } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Kyoto');
-      await browser.keys('\uE010');
-      await expect(await browser.$('~dropdown-focus')).toHaveText('Tokyo');
-      await inWindowWith(context, 'dropdown-tokyo', async () => {
-        const rect = async (id: string) => browser.getElementRect(await (await browser.$(`~${id}`)).elementId);
-        const list = await rect('dropdown-list');
-        const option = await rect('dropdown-tokyo');
-        // The focused last option is scrolled within the list's visible bounds.
-        expect(option.y).toBeGreaterThanOrEqual(list.y - 1);
-        expect(option.y + option.height).toBeLessThanOrEqual(list.y + list.height + 1);
-        // A macOS window switch makes the owner window key, so commit with the pointer rather than a key.
-        await (await browser.$('~dropdown-tokyo')).click();
-      });
-      await expect(await browser.$('~dropdown-selection')).toHaveText('Tokyo');
-      await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
+    'enters on the controlled selection and reaches the end of a scrolling list': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { inWindowWith } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await (await import('./dropdown.wdio.ts')).openDropdownFromKeyboard(context, 'Kyoto');
+        await browser.keys('\uE010');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Tokyo');
+        await inWindowWith(context, 'dropdown-tokyo', async () => {
+          const rect = async (id: string) => browser.getElementRect(await (await browser.$(`~${id}`)).elementId);
+          const list = await rect('dropdown-list');
+          const option = await rect('dropdown-tokyo');
+          // The focused last option is scrolled within the list's visible bounds.
+          expect(option.y).toBeGreaterThanOrEqual(list.y - 1);
+          expect(option.y + option.height).toBeLessThanOrEqual(list.y + list.height + 1);
+          // A macOS window switch makes the owner window key, so commit with the pointer rather than a key.
+          await (await browser.$('~dropdown-tokyo')).click();
+        });
+        await expect(await browser.$('~dropdown-selection')).toHaveText('Tokyo');
+        await expect(await browser.$('~dropdown-reason')).toHaveText('Closed: select');
+      },
     },
   },
 };
@@ -371,12 +398,15 @@ function GalleryScene() {
 export const Appearance: Story = {
   render: () => <GalleryScene />,
   wdio: {
-    'DRP-011 exposes a nonempty selected native value without input': async ({ browser, expect }) => {
-      const trigger = await browser.$('~dropdown-selected-trigger');
-      expect(await trigger.getProperty('role')).toBe('combobox');
-      expect(await trigger.getProperty('name')).toBe('Selected');
-      expect(await trigger.getProperty('expanded')).toBe(false);
-      expect(await trigger.getProperty('value')).toBe('Banana');
+    'DRP-011 exposes a nonempty selected native value without input': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const trigger = await browser.$('~dropdown-selected-trigger');
+        expect(await trigger.getProperty('role')).toBe('combobox');
+        expect(await trigger.getProperty('name')).toBe('Selected');
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        expect(await trigger.getProperty('value')).toBe('Banana');
+      },
     },
   },
   parameters: {

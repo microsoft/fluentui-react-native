@@ -6,6 +6,8 @@ export type DesktopStorybookWdioOptions = {
   story?: string;
   tag?: string;
   test?: string;
+  testCases?: readonly { storyId: string; testName: string }[];
+  inputMode?: 'accessibility' | 'physical';
   timeoutMs?: number;
 };
 
@@ -22,10 +24,28 @@ export function resolveWdioOptions(
   if (!['auto', 'accessibility', 'physical'].includes(clickMode)) {
     throw new TypeError('wdio.clickMode must be auto, accessibility, or physical.');
   }
+  if (options.inputMode !== undefined && !['accessibility', 'physical'].includes(options.inputMode)) {
+    throw new TypeError('wdio.inputMode must be accessibility or physical.');
+  }
   for (const key of ['story', 'tag', 'test'] as const) {
     if (options[key] !== undefined && (typeof options[key] !== 'string' || !options[key].trim())) {
       throw new TypeError(`wdio.${key} must be a non-empty string.`);
     }
   }
-  return Object.freeze({ ...options, timeoutMs, reporter, clickMode });
+  const testCases = options.testCases?.map(({ storyId, testName }) => {
+    if (typeof storyId !== 'string' || !storyId.trim() || typeof testName !== 'string' || !testName.trim()) {
+      throw new TypeError('wdio.testCases must contain non-empty storyId and testName strings.');
+    }
+    return Object.freeze({ storyId, testName });
+  });
+  if (testCases && (!testCases.length || new Set(testCases.map((entry) => JSON.stringify(entry))).size !== testCases.length)) {
+    throw new TypeError('wdio.testCases must be non-empty and contain unique callback identities.');
+  }
+  return Object.freeze({
+    ...options,
+    ...(testCases ? { testCases: Object.freeze(testCases) } : {}),
+    timeoutMs,
+    reporter,
+    clickMode,
+  });
 }

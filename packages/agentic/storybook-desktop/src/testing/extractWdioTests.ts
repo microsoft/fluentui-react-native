@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 
 import { transformSync, type NodePath, type types } from '@babel/core';
+import type { DesktopStoryInputModes } from '@fluentui-react-native/desktop-driver';
 
 import storyTests from '../../config/transform-story-tests.cjs';
 
@@ -8,7 +9,7 @@ const { collectWdioTests, compileWdioTest } = storyTests;
 
 export type ExtractedWdioStory = {
   digest: string;
-  tests: readonly { name?: string; code: string }[];
+  tests: readonly { name?: string; code: string; inputModes?: DesktopStoryInputModes }[];
 };
 
 export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<string, ExtractedWdioStory> {
@@ -24,8 +25,9 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
         visitor: {
           Program(program: NodePath<types.Program>) {
             for (const [exportName, { callbacks, value }] of collectWdioTests(program)) {
-              const compiled = callbacks.map(({ callback, name }) => ({
+              const compiled = callbacks.map(({ callback, name, inputModes }) => ({
                 ...(name === undefined ? {} : { name }),
+                ...(inputModes === undefined ? {} : { inputModes }),
                 code: compileWdioTest(callback, sourceFile, code),
               }));
               const source = code.slice(value.node.start!, value.node.end!);

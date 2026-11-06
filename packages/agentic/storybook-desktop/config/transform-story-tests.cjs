@@ -65,6 +65,42 @@ function collectCallbacks(value) {
     return callback;
   };
   if (!value.isObjectExpression()) return [{ callback: requireCallback(value) }];
+  const readCallback = (declaration) => {
+    if (!declaration.isObjectExpression()) return { callback: requireCallback(declaration) };
+    const fields = new Map();
+    for (const member of declaration.get('properties')) {
+      if (!member.isObjectProperty() || member.node.computed) {
+        fail(member, 'classified tests require static inputModes and run properties.');
+      }
+      const name = keyName(member);
+      if (!['inputModes', 'run'].includes(name) || fields.has(name)) {
+        fail(member, 'classified tests require unique inputModes and run properties.');
+      }
+      fields.set(name, unwrap(member.get('value')));
+    }
+    const modes = fields.get('inputModes');
+    const callback = fields.get('run');
+    if (!modes?.isObjectExpression() || !callback) {
+      fail(declaration, 'classified tests require a literal inputModes object and an inline run function.');
+    }
+    const inputModes = {};
+    for (const member of modes.get('properties')) {
+      if (!member.isObjectProperty() || member.node.computed) {
+        fail(member, 'inputModes requires static endpoint properties.');
+      }
+      const endpoint = keyName(member);
+      const mode = unwrap(member.get('value'));
+      if (!['macos', 'windows', 'win32'].includes(endpoint) || Object.hasOwn(inputModes, endpoint)) {
+        fail(member, 'inputModes requires unique desktop endpoints: macos, windows, or win32.');
+      }
+      if (!mode.isStringLiteral() || !['accessibility', 'physical', 'both'].includes(mode.node.value)) {
+        fail(member, 'inputModes values must be accessibility, physical, or both literals.');
+      }
+      inputModes[endpoint] = mode.node.value;
+    }
+    if (!Object.keys(inputModes).length) fail(modes, 'inputModes must classify at least one endpoint.');
+    return { callback: requireCallback(callback), inputModes };
+  };
   const callbacks = [];
   const names = new Set();
   for (const member of value.get('properties')) {
@@ -75,7 +111,7 @@ function collectCallbacks(value) {
     if (!name || !name.trim()) fail(member, 'named tests require a non-empty name.');
     if (names.has(name)) fail(member, `duplicate test name "${name}".`);
     names.add(name);
-    callbacks.push({ name, callback: requireCallback(unwrap(member.get('value'))) });
+    callbacks.push({ name, ...readCallback(unwrap(member.get('value'))) });
   }
   if (!callbacks.length) fail(value, 'a named test collection must contain at least one test.');
   return callbacks;

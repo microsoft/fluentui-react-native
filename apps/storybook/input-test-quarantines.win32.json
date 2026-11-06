@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "endpoint": "win32",
+  "quarantines": [
+    {
+      "storyId": "components-button--focus-management",
+      "testName": "releases pressed feedback after an intervening key without a stale activation",
+      "reason": "Quarantined until #4373 is fixed: Win32 does not forward onPressOut after Space with an intervening key."
+    }
+  ]
+}

@@ -510,9 +510,13 @@ jobs:
           if-no-files-found: warn
 
   win32-storybook:
-    name: Win32 Storybook PR
+    name: Win32 Storybook PR (${{ matrix.input-mode }})
     runs-on: windows-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        input-mode: [accessibility, physical]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -534,17 +538,34 @@ jobs:
         uses: ./.github/actions/setup-desktop-driver
         with:
           platform: win32
-          disabled-input-features: keyboard,physicalClick,wheel
+          disabled-input-features: ${{ matrix.input-mode == 'accessibility' && 'keyboard,physicalClick,wheel' || '' }}
 
-      - name: Smoke test Win32 Storybook
-        run: yarn storybook smoke --win32 --mode stories-and-tests
+      - name: Validate and capture the complete Win32 input catalog
+        id: input-coverage
         working-directory: apps/storybook
+        env:
+          STORYBOOK_INPUT_MODE: ${{ matrix.input-mode }}
+        run: yarn input-coverage begin
+
+      - name: Smoke test Win32 Storybook (${{ matrix.input-mode }})
+        id: smoke
+        working-directory: apps/storybook
+        env:
+          STORYBOOK_INPUT_MODE: ${{ matrix.input-mode }}
+        run: yarn storybook smoke --win32 --mode stories-and-tests
+
+      - name: Verify every declared Win32 input callback
+        if: ${{ always() && !cancelled() && steps.input-coverage.outcome == 'success' }}
+        working-directory: apps/storybook
+        env:
+          STORYBOOK_INPUT_MODE: ${{ matrix.input-mode }}
+        run: yarn input-coverage verify
 
       - name: Upload Win32 Storybook artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: Storybook_win32_paper_${{ github.run_id }}_${{ github.run_attempt }}
+          name: Storybook_win32_paper_${{ matrix.input-mode }}_${{ github.run_id }}_${{ github.run_attempt }}
           path: |
             apps/storybook/artifacts/win32
             apps/storybook/artifacts/desktop
@@ -652,6 +673,7 @@ jobs:
       - ios
       - windows
       - win32
+      - win32-storybook
       - check-changesets
       - publish-dry-run-pack
       - test-links

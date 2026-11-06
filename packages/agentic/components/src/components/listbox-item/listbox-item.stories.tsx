@@ -93,36 +93,43 @@ export const NativeSelection: Story = {
     </View>
   ),
   wdio: {
-    'LBI-005 standalone unselected exposes an enabled native button': async ({ browser, expect }) => {
-      const option = await browser.$('~listbox-fix-unselected');
-      expect(await option.getTagName()).toBe('button');
-      await expect(option).toBeEnabled();
+    'LBI-005 standalone unselected exposes an enabled native button': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const option = await browser.$('~listbox-fix-unselected');
+        expect(await option.getTagName()).toBe('button');
+        await expect(option).toBeEnabled();
+      },
     },
-    'LBI-005 standalone selected exposes an enabled native button': async ({ browser, expect }) => {
-      const option = await browser.$('~listbox-fix-selected');
-      expect(await option.getTagName()).toBe('button');
-      await expect(option).toBeEnabled();
+    'LBI-005 standalone selected exposes an enabled native button': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const option = await browser.$('~listbox-fix-selected');
+        expect(await option.getTagName()).toBe('button');
+        await expect(option).toBeEnabled();
+      },
     },
-    'LBI-005 standalone disabled selection exposes a disabled native button': async ({ browser, expect }) => {
-      const option = await browser.$('~listbox-fix-disabled');
-      expect(await option.getTagName()).toBe('button');
-      await expect(option).toBeDisabled();
+    'LBI-005 standalone disabled selection exposes a disabled native button': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const option = await browser.$('~listbox-fix-disabled');
+        expect(await option.getTagName()).toBe('button');
+        await expect(option).toBeDisabled();
+      },
     },
-    'LBI-005 Windows native checked projection reflects standalone selection including disabled': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform === 'macos') {
-        skip(
-          'Native checked projection is unsupported for the retained macOS AXButton role; shared role and enabled-state checks run separately.',
-        );
-        return;
-      }
-      expect(await (await browser.$('~listbox-fix-unselected')).getProperty('checked')).toBe(false);
-      expect(await (await browser.$('~listbox-fix-selected')).getProperty('checked')).toBe(true);
-      expect(await (await browser.$('~listbox-fix-disabled')).getProperty('checked')).toBe(true);
+    'LBI-005 Windows native checked projection reflects standalone selection including disabled': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect, platform, skip }) => {
+        if (platform === 'macos') {
+          skip(
+            'Native checked projection is unsupported for the retained macOS AXButton role; shared role and enabled-state checks run separately.',
+          );
+          return;
+        }
+        expect(await (await browser.$('~listbox-fix-unselected')).getProperty('checked')).toBe(false);
+        expect(await (await browser.$('~listbox-fix-selected')).getProperty('checked')).toBe(true);
+        expect(await (await browser.$('~listbox-fix-disabled')).getProperty('checked')).toBe(true);
+      },
     },
   },
 };
@@ -138,60 +145,56 @@ export const NativeToggleActions: Story = {
     },
   },
   wdio: {
-    'LBI-005 Win32 native Toggle forwards once without a press or controlled selection change': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies the Win32 Toggle action transport; other hosts require their own action invocation.');
-        return;
-      }
-      if (!browser.capabilities['furn:features']?.accessibilityClick) {
-        skip('Native accessibility click is unavailable.');
-        return;
-      }
-      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
-      const option = await browser.$('~listbox-toggle-option');
-      const actions = await browser.$('~listbox-toggle-actions');
-      const presses = await browser.$('~listbox-toggle-presses');
-      expect(await option.getProperty('checked')).toBe(true);
-      await expect(actions).toHaveAttribute('name', '0:none');
-      await expect(presses).toHaveAttribute('name', '0');
-      await option.click();
-      await expect(actions).toHaveAttribute('name', '1:Toggle');
-      expect(await option.getProperty('checked')).toBe(true);
-      await expect(presses).toHaveAttribute('name', '0');
-      await expect(actions).toHaveAttribute('name', '1:Toggle');
+    'LBI-005 Win32 native Toggle forwards once without a press or controlled selection change': {
+      inputModes: { win32: 'accessibility' },
+      run: async ({ browser, expect, platform, skip }) => {
+        if (platform !== 'win32') {
+          skip('This case qualifies the Win32 Toggle action transport; other hosts require their own action invocation.');
+          return;
+        }
+        if (!browser.capabilities['furn:features']?.accessibilityClick) {
+          skip('Native accessibility click is unavailable.');
+          return;
+        }
+        expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+        const option = await browser.$('~listbox-toggle-option');
+        const actions = await browser.$('~listbox-toggle-actions');
+        const presses = await browser.$('~listbox-toggle-presses');
+        expect(await option.getProperty('checked')).toBe(true);
+        await expect(actions).toHaveAttribute('name', '0:none');
+        await expect(presses).toHaveAttribute('name', '0');
+        await option.click();
+        await expect(actions).toHaveAttribute('name', '1:Toggle');
+        expect(await option.getProperty('checked')).toBe(true);
+        await expect(presses).toHaveAttribute('name', '0');
+        await expect(actions).toHaveAttribute('name', '1:Toggle');
+      },
     },
-    'LBI-003 LBI-005 Win32 disabled native activation has no callbacks or selection change': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies the Win32 disabled accessibility-click route.');
-        return;
-      }
-      if (!browser.capabilities['furn:features']?.accessibilityClick) {
-        skip('Native accessibility click is unavailable.');
-        return;
-      }
-      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
-      const option = await browser.$('~listbox-toggle-disabled');
-      const actions = await browser.$('~listbox-toggle-disabled-actions');
-      const presses = await browser.$('~listbox-toggle-disabled-presses');
-      await expect(option).toBeDisabled();
-      expect(await option.getProperty('checked')).toBe(true);
-      await expect(actions).toHaveAttribute('name', '0');
-      await expect(presses).toHaveAttribute('name', '0');
-      // The public protocol command avoids WDIO's DOM-based element-error recovery.
-      await expect(browser.elementClick(await option.elementId)).rejects.toThrow('cannot be clicked');
-      expect(await option.getProperty('checked')).toBe(true);
-      await expect(actions).toHaveAttribute('name', '0');
-      await expect(presses).toHaveAttribute('name', '0');
+    'LBI-003 LBI-005 Win32 disabled native activation has no callbacks or selection change': {
+      inputModes: { win32: 'accessibility' },
+      run: async ({ browser, expect, platform, skip }) => {
+        if (platform !== 'win32') {
+          skip('This case qualifies the Win32 disabled accessibility-click route.');
+          return;
+        }
+        if (!browser.capabilities['furn:features']?.accessibilityClick) {
+          skip('Native accessibility click is unavailable.');
+          return;
+        }
+        expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+        const option = await browser.$('~listbox-toggle-disabled');
+        const actions = await browser.$('~listbox-toggle-disabled-actions');
+        const presses = await browser.$('~listbox-toggle-disabled-presses');
+        await expect(option).toBeDisabled();
+        expect(await option.getProperty('checked')).toBe(true);
+        await expect(actions).toHaveAttribute('name', '0');
+        await expect(presses).toHaveAttribute('name', '0');
+        // The public protocol command avoids WDIO's DOM-based element-error recovery.
+        await expect(browser.elementClick(await option.elementId)).rejects.toThrow('cannot be clicked');
+        expect(await option.getProperty('checked')).toBe(true);
+        await expect(actions).toHaveAttribute('name', '0');
+        await expect(presses).toHaveAttribute('name', '0');
+      },
     },
   },
 };

@@ -14,6 +14,8 @@
     "start": "rnx-cli start",
     "storybook": "storybook-desktop",
     "storybook-server": "storybook-desktop server",
+    "input-coverage": "node input-test-modes.mts",
+    "test": "node --test input-test-modes.test.mts",
     "desktop-driver": "desktop-driver",
     "desktop-test": "desktop-test",
     "prebuild": "sb-rn-get-stories --config-path src",

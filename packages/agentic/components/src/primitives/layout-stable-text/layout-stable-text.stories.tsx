@@ -159,41 +159,44 @@ export const Overview: Story = {
     },
   },
   wdio: {
-    'centers the intrinsic smaller line inside its larger reserve': async ({ browser, expect, platform }) => {
-      const assert: typeof import('node:assert') = (await import('node:assert')).default;
-      if (platform === 'macos') {
-        // Measure both Text line boxes; Paper rounds Text and wrapper View frames differently.
-        const status = await browser.$('~layout-stable-text-native-metrics');
-        await browser.waitUntil(async () => (await status.getText()).startsWith('{'));
-        const metrics: { reserve: LayoutRectangle; visible: LayoutRectangle } = JSON.parse(await status.getText());
-        assert(
-          metrics.visible.height > 0 && metrics.visible.height < metrics.reserve.height,
-          'Visible text must retain its intrinsic height.',
-        );
-        assert(
-          Math.abs(metrics.visible.y + metrics.visible.height / 2 - metrics.reserve.height / 2) <= 1,
-          'Visible text must be vertically centered within one layout pixel.',
-        );
-        assert(
-          Math.abs(metrics.visible.x) <= 1 && metrics.visible.width <= metrics.reserve.width + 1,
-          `Visible text must retain leading alignment and fit the reserved width: ${JSON.stringify(metrics)}.`,
-        );
-        return;
-      }
-      const reserve = await browser.$('~layout-stable-text-large-reserve');
-      const visible = await browser.$('~layout-stable-text-small-visible');
-      await expect(reserve).toExist();
-      await expect(visible).toExist();
-      const reservedBounds = await browser.getElementRect(await reserve.elementId);
-      const visibleBounds = await browser.getElementRect(await visible.elementId);
+    'centers the intrinsic smaller line inside its larger reserve': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect, platform }) => {
+        const assert: typeof import('node:assert') = (await import('node:assert')).default;
+        if (platform === 'macos') {
+          // Measure both Text line boxes; Paper rounds Text and wrapper View frames differently.
+          const status = await browser.$('~layout-stable-text-native-metrics');
+          await browser.waitUntil(async () => (await status.getText()).startsWith('{'));
+          const metrics: { reserve: LayoutRectangle; visible: LayoutRectangle } = JSON.parse(await status.getText());
+          assert(
+            metrics.visible.height > 0 && metrics.visible.height < metrics.reserve.height,
+            'Visible text must retain its intrinsic height.',
+          );
+          assert(
+            Math.abs(metrics.visible.y + metrics.visible.height / 2 - metrics.reserve.height / 2) <= 1,
+            'Visible text must be vertically centered within one layout pixel.',
+          );
+          assert(
+            Math.abs(metrics.visible.x) <= 1 && metrics.visible.width <= metrics.reserve.width + 1,
+            `Visible text must retain leading alignment and fit the reserved width: ${JSON.stringify(metrics)}.`,
+          );
+          return;
+        }
+        const reserve = await browser.$('~layout-stable-text-large-reserve');
+        const visible = await browser.$('~layout-stable-text-small-visible');
+        await expect(reserve).toExist();
+        await expect(visible).toExist();
+        const reservedBounds = await browser.getElementRect(await reserve.elementId);
+        const visibleBounds = await browser.getElementRect(await visible.elementId);
 
-      assert(
-        visibleBounds.height > 0 && visibleBounds.height < reservedBounds.height,
-        'Visible text must keep its smaller intrinsic height.',
-      );
-      const reservedCenter = reservedBounds.y + reservedBounds.height / 2;
-      const visibleCenter = visibleBounds.y + visibleBounds.height / 2;
-      assert(Math.abs(reservedCenter - visibleCenter) <= 1, 'Visible text must be vertically centered within one layout pixel.');
+        assert(
+          visibleBounds.height > 0 && visibleBounds.height < reservedBounds.height,
+          'Visible text must keep its smaller intrinsic height.',
+        );
+        const reservedCenter = reservedBounds.y + reservedBounds.height / 2;
+        const visibleCenter = visibleBounds.y + visibleBounds.height / 2;
+        assert(Math.abs(reservedCenter - visibleCenter) <= 1, 'Visible text must be vertically centered within one layout pixel.');
+      },
     },
   },
 };
