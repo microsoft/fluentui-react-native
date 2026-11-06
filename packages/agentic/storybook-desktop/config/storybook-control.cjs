@@ -7,6 +7,8 @@ const host = process.env.STORYBOOK_WS_HOST || '127.0.0.1';
 const port = Number(process.env.STORYBOOK_WS_PORT) || 7007;
 const smokeMode = process.env.STORYBOOK_SMOKE_MODE || 'stories';
 const smokePhase = parseSmokePhase(process.argv.slice(2));
+// The runtime connects only after Metro serves a cold development bundle, so the first story gets a startup budget.
+const initialRenderMilliseconds = Number(process.env.STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
 const controller = new AbortController();
 let report;
 let runner;
@@ -66,8 +68,6 @@ async function smoke(traversal) {
     }
 
     const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
-    // The runtime connects only after Metro serves a cold development bundle, so the first story gets a startup budget.
-    const initialRenderMilliseconds = Number(process.env.STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS) || 300_000;
     const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
     const failures = [];
     for (const { id } of entries)
@@ -180,7 +180,7 @@ async function main() {
   let failure;
   let traversal;
   try {
-    if (smokePhase !== 'tests' && process.env.STORYBOOK_DRIVER_MANIFEST) {
+    if (process.env.STORYBOOK_DRIVER_MANIFEST) {
       const manifest = readDriverManifest();
       const { connectStoryTraversal } = await import(pathToFileURL(path.join(__dirname, '..', 'lib', 'cli', 'storyTraversal.js')).href);
       traversal = await connectStoryTraversal({
@@ -190,6 +190,13 @@ async function main() {
         targetId: manifest.targetId,
         signal: controller.signal,
       });
+      if (smokePhase === 'tests') {
+        // A relaunched app has no authenticated bridge until its runtime says hello and renders its initial story.
+        // Authored-test navigation fails fast before then, so wait for one confirmed selection first.
+        const [firstStory] = manifest.storyManifest.entries;
+        if (!firstStory) throw new Error('The Desktop Driver manifest did not contain any stories.');
+        await traversal.select(firstStory.id, initialRenderMilliseconds);
+      }
     }
     await smoke(traversal);
     if (smokeMode === 'stories-and-tests' && smokePhase !== 'stories') {

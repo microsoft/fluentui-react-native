@@ -123,7 +123,10 @@ driver failure. Only pre-dispatch `bridge-unavailable` can be retried;
 uncertain navigation and `relaunch-required` fail without replay. The first
 story's retry budget covers a cold development bundle
 (`STORYBOOK_SMOKE_INITIAL_RENDER_TIMEOUT_MS`, default 300 s); later stories
-use 30 s.
+use 30 s. The Windows smoke relaunches the app between its `stories` and
+`tests` phases, so the `tests` phase first selects the first manifest story
+with the same budget and waits for authenticated readiness before authored
+tests navigate. Authored-test navigation itself does not wait for the bridge.
 
 Epoch/cancellation-aware providers reject stale preview mutations without
 invalidating chrome or live secondary windows. Interrupted navigation still
