@@ -4,6 +4,7 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
 import { once } from 'node:events';
+import net from 'node:net';
 import { createDesktopProcessControl } from './processControl.js';
 import { deadline, NodeDesktopCommandRunner } from './commands.js';
 import type { RunningDesktopCommand } from './commands.js';
@@ -208,6 +209,37 @@ describe('owned process lifelines', () => {
       expect(fs.existsSync(marker)).toBe(true);
     } finally {
       await runner.close();
+    }
+  });
+
+  test('a connection reset reports readiness producer loss instead of the transport error', async () => {
+    const accepted: net.Socket[] = [];
+    const createServer = net.createServer.bind(net);
+    const spy = jest.spyOn(net, 'createServer').mockImplementation(((listener: (socket: net.Socket) => void) =>
+      createServer((socket) => {
+        accepted.push(socket);
+        listener(socket);
+      })) as typeof net.createServer);
+    const failures: Error[] = [];
+    const control = createDesktopProcessControl((error) => failures.push(error));
+    spy.mockRestore();
+    const { address, nonce } = JSON.parse(control.environment().FURN_DESKTOP_PROCESS_CONTROL!) as { address: string; nonce: string };
+    const expected = { tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' } as const;
+    const readiness = control.waitForReadiness(expected, 5000);
+    const client = net.connect(address);
+    try {
+      await once(client, 'connect');
+      client.write(`${JSON.stringify({ type: 'hello', nonce, processId: process.pid })}\n`);
+      client.write(`${JSON.stringify({ type: 'ready', requestId: 'r1', readiness: expected })}\n`);
+      await readiness;
+      // Linux can surface a peer SIGKILL as ECONNRESET before 'close'; emulate that ordering on any platform.
+      const closed = new Promise<void>((resolve) => accepted[0]!.once('close', () => resolve()));
+      accepted[0]!.destroy(Object.assign(new Error('read ECONNRESET'), { code: 'ECONNRESET' }));
+      await closed;
+      expect(failures.map((failure) => failure.message)).toEqual([expect.stringContaining('without settled disposal')]);
+    } finally {
+      client.destroy();
+      await control.close();
     }
   });
 
