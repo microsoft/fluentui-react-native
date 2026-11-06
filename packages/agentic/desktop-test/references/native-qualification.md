@@ -11,9 +11,11 @@ owner_paths:
 # Native descriptor-path qualification
 
 Use this runbook to qualify the desktop foundation against the combined
-integration commit, not an individual track branch. The current macOS procedure
-is parameterized by renderer; Windows Fabric and Win32 Paper require their own
-machines and must remain **Not run** on macOS. Deterministic fake-host results
+integration commit, not an individual track branch. The macOS procedure is
+parameterized by renderer; Windows Fabric and Win32 Paper require a Windows
+machine and must remain **Not run** on macOS. The
+[Windows parameters](#windows-fabric-and-win32-paper) substitute the endpoint
+and identity values. Deterministic fake-host results
 and Storybook callback smoke results are supporting evidence, not proof of the
 real descriptor path.
 
@@ -157,6 +159,40 @@ The F3/F4/F5 cases are integration gates, not claims about the F15 baseline.
 Run them only on the combined source that contains those tracks. Until then,
 record them as **Not run**.
 
+## Windows Fabric and Win32 Paper
+
+The procedure is the same with these substitutions. `--paper` is invalid on
+Windows: `--windows` is always Fabric and `--win32` is always Paper.
+
+| Parameter | Windows Fabric (`--windows`)                                                                                               | Win32 Paper (`--win32`)                                                                                                     |
+| --------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `OS`      | `(Get-CimInstance Win32_OperatingSystem).Caption`, `.BuildNumber`, and `$env:PROCESSOR_ARCHITECTURE`.                      | Same.                                                                                                                       |
+| `APP`     | React Native Test App host, window title `Agentic Components Storybook`; record the resolved AUMID or executable identity. | `rex` host component `AgenticStorybook`, window title `Agentic Components Storybook (Win32)`; record the resolved identity. |
+| Bundle    | Development Metro bundle; a Metro reload replaces the bridge.                                                              | Production bundle (`bundle --dev false`); there is no Metro reload path.                                                    |
+| Prereqs   | Windows App Runtime 1.8 registered for the user (CI installs it).                                                          | None beyond the build.                                                                                                      |
+| App pass  | `yarn storybook prep --windows`, then `yarn storybook smoke --windows --mode stories-and-tests`.                           | `yarn storybook smoke --win32 --mode stories-and-tests`.                                                                    |
+
+- Run `yarn storybook build-driver --windows` (or `--win32`) and
+  `yarn desktop-driver doctor --platform windows --permissions` (or
+  `--platform win32`). The Windows permission preflight reports **Unsupported**;
+  record that, not a pass.
+- Physical pointer input needs the target window to become foreground. When the
+  machine cannot grant foreground, record the physical case as **Failed** or
+  **Skipped** and rerun the smoke with
+  `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel`,
+  reporting both runs.
+- Win32 cannot lose context through a Metro reload. Use external app
+  termination instead: kill the app between calls for the fence case and
+  during an in-flight `select` for quarantine. Record the Metro-reload variant
+  as **Unsupported** on Win32.
+- Quarantine of an attached app lifts through the application-exit probe,
+  which runs when a new session opens for the unheld target. A relaunch
+  observed inside the original session stays `target-quarantined`.
+- After a same-port service replacement, story mutations against the existing
+  app return `relaunch-required`; recovery needs an app relaunch.
+- An externally stopped `storybook run` exits nonzero and writes a failed
+  `run.json`. Record it as expected for that case; it is not a driver failure.
+
 ## Cleanup and endpoint limits
 
 After each bounded pass, stop only resources owned by that run and record:
@@ -173,7 +209,11 @@ Report a blocked question to the coordinator. Release the native lock only
 after cleanup evidence is recorded.
 
 On a macOS-only machine, record **Windows Fabric** and **Win32 Paper** as
-**Not run**, with no measurements inferred from macOS. Hosted physical-input
+**Not run**, with no measurements inferred from macOS. On Windows, also confirm
+that no `%TEMP%\furn-desktop-workload-*\interactive.lock` and no
+`%LOCALAPPDATA%\com.microsoft.fluentui-react-native.desktop-driver\agent-connection.json`
+remain, that the channel, Metro, and WebDriver ports reported by the driver
+have no listeners, and that no app process from the run survives. Hosted physical-input
 or capture skips are skips, not passes. Keep descriptor-path results separate
 from smoke/WDIO and deterministic fake-host results in all three package
 status ledgers.

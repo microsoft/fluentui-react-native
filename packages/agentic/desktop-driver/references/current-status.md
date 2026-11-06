@@ -338,3 +338,28 @@ lane and does not prove protected-ingress behavior or the no-HTTP-fallback
 instrumentation requirement. Windows Fabric and Win32 Paper measurements are
 Not run on this host. Fault injection, args refusal, ingress bypass, and F3/F4
 survivor/fault cases were not run.
+
+## 2026-11-06 Windows Fabric and Win32 Paper descriptor evidence
+
+Source: the PR branch at `1f5333e25` plus `8458bde48` and `a6b89e924`; host
+Windows 11 Enterprise build 26300, AMD64. The full 24-case matrix, counts,
+retry history, run records, and cleanup are in the "Windows Fabric and Win32
+Paper qualification — 2026-11-06" section of
+`packages/agentic/desktop-test/references/current-status.md`.
+`yarn storybook build-driver --windows|--win32` succeeded, and
+`yarn desktop-driver doctor --platform windows|win32 --permissions` reports
+`--permissions` as **Unsupported** on Windows. No text-size or operation
+latency measurements were recorded on Windows, so none are added here.
+
+Reference kinds, each from one driver session at service incarnation 1:
+
+| Endpoint       | Target                     | Preview element refs                                                       | Chrome/window ref                                  | Fresh ref after reset                    |
+| -------------- | -------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------- | ---------------------------------------- |
+| Windows Fabric | `windows-f33cce69c1a7d0ae` | `9z4z23` (story root) and `9z4z66` became `ref-region-changed` after reset | `9z4z1` survived on `window-df4a4ab9-b2` (allowed) | `9z4z102` became stale after next select |
+| Win32 Paper    | `win32-5e01f2ae23282f34`   | `okdw21` (story root) and `okdw38` became stale after reset                | `okdw1` survived on `window-9951db02-b3` (allowed) | `okdw54` became stale after next select  |
+
+After a Fabric Metro reload, the old story root `7fqk23` returned `ref-stale`
+and a new story root `7fqk101` was observable in the same session. After a Win32 app exit, observing the old preview returned
+`window-closed`. Physical input: the Windows helper rejected a physical click
+because the target window did not become the foreground window (effect none);
+the Win32 helper applied one with mechanism `physical-pointer`.

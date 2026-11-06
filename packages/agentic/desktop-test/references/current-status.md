@@ -109,6 +109,11 @@ App: Agentic Components Storybook / ReactTestApp (configured bundle ID
 | macOS Fabric             | Not run; no real descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
 | macOS Paper              | Not run; no real descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
 
+The Windows Fabric and Win32 Paper "Not run" rows above describe that macOS
+host only. They are superseded, not erased, by the Windows-host section
+"Windows Fabric and Win32 Paper qualification — 2026-11-06" at the end of this
+file.
+
 These are real native Storybook smoke runs through the non-agent WDIO path.
 They do not demonstrate descriptor publication, service restart, failed
 cleanup, or exact attached-app preservation. The `STORYBOOK_SMOKE_STORY`
@@ -292,4 +297,132 @@ blocked by the retained claim with 0 selected/executed tests.
 Windows Fabric and Win32 Paper remain **Not run** on this macOS-only host.
 Fault-injection cases remain Not run because no existing documented native
 hook was exercised. The older `3c780cfd1bccaf510ece080e4be2b516c645989a`
-ledger and its inconclusive probe remain unchanged and separate.
+ledger and its inconclusive probe remain unchanged and separate. The Windows
+results that follow were recorded later on a Windows host; they do not change
+these macOS results.
+
+## Windows Fabric and Win32 Paper qualification — 2026-11-06
+
+**Tested source:** the PR branch at `1f5333e25` plus two follow-up fixes from
+this pass: `8458bde48` (a relaunched runtime reports `bridge-unavailable`
+until its initial render) and `a6b89e924` (a reloaded runtime that
+authenticates first retires the old bridge). Windows records started before
+21:31Z predate both; `d558ed5d` includes only `8458bde48`; every later Windows
+record and every Win32 record includes both. Host: Windows 11 Enterprise build
+26300, AMD64, Node 26. Windows uses the React Native Test App host (window
+title `Agentic Components Storybook`); Win32 uses the `rex` host, component
+`AgenticStorybook` (window title `Agentic Components Storybook (Win32)`).
+Windows App Runtime 1.8 was installed. The runbook is the Windows section of
+[`native-qualification.md`](native-qualification.md).
+
+Preflight: `yarn storybook build-driver --windows` and `--win32` succeeded.
+`yarn desktop-driver doctor --platform windows --permissions` and
+`--platform win32 --permissions` report that `--permissions` is
+**Unsupported** on Windows; doctor otherwise passed. No OS privacy or input
+setting was changed.
+
+Each descriptor pass ran `yarn storybook driver --<endpoint> --agent`, then
+`yarn storybook run --<endpoint>`, then connected the MCP SDK stdio client to
+`desktop-driver-mcp` through the default private `agent-connection.json`.
+Only one interactive workload ran at a time. Manual MCP calls have no suite
+selection, so each driver and app `run.json` reports 0 selected and 0
+executed tests; the cases are manual evidence in machine-local sanitized
+records that are not committed.
+
+### Smoke runs (legacy lane, not descriptor evidence)
+
+Counts are selected / executed / passed / failed / skipped.
+
+| Endpoint       | Command                                                   | Result                                                                                                                                                                                                                   | Artifact                                                                         |
+| -------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Windows Fabric | `yarn storybook smoke --windows --mode stories-and-tests` | Failed: 202 / 202 / 202 / 0 / 0; the relaunch phase reported `relaunch-required`. This led to `8458bde48`.                                                                                                               | `apps/storybook/artifacts/desktop/2a80a82b-febc-40f8-85de-50c36f92f842/run.json` |
+| Windows Fabric | Same                                                      | Failed: 206 / 206 / 205 / 1 / 0; the one failure is the physical-input test (foreground not acquired).                                                                                                                   | `apps/storybook/artifacts/desktop/9506772a-d3f9-4f53-966e-b6c75799b463/run.json` |
+| Win32 Paper    | `yarn storybook smoke --win32 --mode stories-and-tests`   | Failed: 180 / 180 / 179 / 1 / 0; the one failure is a physical-pointer test, and 43 groups were not run.                                                                                                                 | `apps/storybook/artifacts/desktop/7a737861-c31b-4eeb-ac6d-b21b8a96739d/run.json` |
+| Win32 Paper    | Same, with physical input disabled as on hosted runners   | Passed: 266 / 214 / 214 / 0 / 52.                                                                                                                                                                                        | `apps/storybook/artifacts/desktop/4ba5a00d-40d8-4a34-86f9-e564448623e2/run.json` |
+| CI A/B         | The `win32-storybook` and `windows-storybook` job steps   | Win32 baseline failed at owned-service shutdown with 214 / 214 passed; the lifeline fix passed 266 / 214 / 214 / 0 / 52. Windows baseline failed 204 / 204 / 202 / 2; the readiness fix passed 312 / 234 / 234 / 0 / 78. | Baselines `47471c35-…` and `b7c67987-…`; fixes `047f5c3a-…` and `6cbfe8c5-…`     |
+
+### Descriptor matrix
+
+| Case                           | Windows Fabric | Win32 Paper | Evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------ | -------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Same-port replacement          | Pass           | Pass        | The old client's next status returned `service-unavailable`; old refs returned `no-session`; rediscovery, close, and a new session succeeded. No old mutation replayed. The new session's first select returned `relaunch-required` (rejected, effect none); after an app relaunch, select and reset applied with marker verification.                                                                                                                                                       |
+| Grant revocation               | Pass           | Pass        | After an external revoke (200), the next call and status returned `service-unavailable` ("authority is no longer valid"), and reopening on the same client was refused; a fresh connection opened and closed. Windows: the first attempt's post-revoke call was rejected by MCP input validation (the harness passed an unknown `budgets` key); the rerun passed.                                                                                                                            |
+| Dispose during open            | Pass           | Pass        | The client was disposed while `POST /session` was held; the traffic shows the late session deleted and the grant revoked, and a fresh connection opened. Incarnation unchanged; no target quarantined.                                                                                                                                                                                                                                                                                       |
+| Failed delete                  | Pass           | Pass        | After the injected DELETE failure (`service-unavailable`), the session was retained and an observe succeeded; the retried close matched. Windows: the first attempt recorded `sessionUsableAfterFailure: false`, and its traffic has no observe request after the failure; the rerun recorded `true`.                                                                                                                                                                                        |
+| Ambiguous create               | Pass           | Pass        | With the create response dropped, open returned `service-unavailable`, status reported the session `uncertain`, and reopen and close returned `session-uncertain`; after the grant was revoked, a fresh connection opened. Incarnation unchanged.                                                                                                                                                                                                                                            |
+| Resource invalidation          | Pass           | Pass        | See the reference evidence below. The immutable PNG resource stayed readable after reset with a matching capture digest.                                                                                                                                                                                                                                                                                                                                                                     |
+| Story quarantine and recovery  | Pass           | Pass        | Windows: a Metro reload 15 ms into a select returned `story-not-ready` (indeterminate, quarantined), and later mutations returned `target-quarantined` while reads worked. Win32: an app kill 30 ms into a select did the same; after relaunch the same session stayed quarantined. On both, a new session ran the exit probe, lifted the quarantine, and select and reset applied.                                                                                                          |
+| Protected args refusal         | Pass           | Pass        | `story-args-unsupported`; no value appeared in the response.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Failed-cleanup claim retention | Not run        | Not run     | No forced owned-resource cleanup failure was injected.                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Launch-mode discovery          | Partial        | Partial     | Attach-only targets were observed and never launched or terminated the app; no launch-capable comparison was run.                                                                                                                                                                                                                                                                                                                                                                            |
+| Live cleanup and restart       | Not run        | Not run     | Cleanup was not forced to fail. Same-port service restart and reconnection are recorded above but are not this case.                                                                                                                                                                                                                                                                                                                                                                         |
+| Attached-app preservation      | Pass           | Pass        | The externally started app process stayed running through service shutdown and was stopped only afterward. Win32 was observed by process presence.                                                                                                                                                                                                                                                                                                                                           |
+| F4 post-dispatch cancellation  | Pass           | Pass        | Aborts at 150 ms and 40 ms landed at 160/47 ms (Windows) and 156/49 ms (Win32). The journal shows the dispatch completed; replaying the request ID returned the recorded applied result, and the next mutation applied in the same session.                                                                                                                                                                                                                                                  |
+| F4 readiness/render faults     | Not run        | Not run     | No readiness or render fault was injected through the descriptor path.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| F4 lost-context fencing        | Pass           | Partial     | Windows: in the in-flight run, a fresh preview root was observed while quarantined, preview mutations returned `target-quarantined`, and a chrome check passed. A quiet reload run on `a6b89e924` let the new runtime authenticate before the mutation, so it shows recovery rather than fencing. Win32 (production bundle): Metro reload has no effect (Unsupported); after app exit, select returned `bridge-unavailable` (rejected, effect none), but no fresh preview could be observed. |
+| F4 lost-context recovery       | Pass           | Pass        | After a relaunch or reload, the old preview ref was `ref-stale`, and select and reset applied with marker verification; the old context was not resumed.                                                                                                                                                                                                                                                                                                                                     |
+| F4 secondary windows           | Not run        | Not run     | Not attempted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| F4 physical input              | Failed         | Pass        | Windows: the descriptor `act` physical click was rejected ("The target window did not become the foreground window"; effect none), and the smoke physical test failed. Win32: the descriptor click applied with mechanism `physical-pointer`; separately, smoke 1's physical-pointer test failed and is retained. A semantic activation is not counted.                                                                                                                                      |
+| F3 startup/shutdown/survivors  | Not run        | Not run     | Survivor reconciliation was not exercised.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| F5 ingress bypass              | Pass           | Pass        | HTTP `/select-story-sync`, `/send-event`, `/mcp`, and an unknown path returned 403; an anonymous WebSocket received only `furn:desktop:request-hello`; the leaf ref and region were unchanged.                                                                                                                                                                                                                                                                                               |
+| F5 owned selection/reset       | Pass           | Pass        | Select and reset applied with marker verification in one session.                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| F5 channel lifetime            | Pass           | Pass        | The session stayed usable after 21,010 ms (Windows) and 21,006 ms (Win32) idle.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| F5 manifest smoke              | Not run        | Not run     | The one-session instrumentation was not run; the smokes above are legacy-lane evidence.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| F5 legacy separation           | Not run        | Not run     | The non-agent smokes ran in separate workloads, but no legacy-channel trace labeled unprotected was retained.                                                                                                                                                                                                                                                                                                                                                                                |
+
+**Counts.** Windows Fabric: 15 Pass, 1 Partial, 1 Failed, 7 Not run.
+Win32 Paper: 15 Pass, 2 Partial, 7 Not run. `--permissions` is Unsupported
+on both. Win32 Metro-reload fencing is Unsupported (production bundle).
+
+**Reference evidence.** Each reference-sequence run used one session and
+service incarnation 1 throughout.
+
+- Windows (target `windows-f33cce69c1a7d0ae`): preview story-root `9z4z23`
+  and child `9z4z66` became `ref-region-changed` after reset; window ref
+  `9z4z1` (chrome) survived on `window-df4a4ab9-b2`; the fresh root `9z4z102`
+  became stale after the second select (region 3).
+- Win32 (target `win32-5e01f2ae23282f34`): preview refs `okdw21` and `okdw38`
+  became stale after reset; window ref `okdw1` survived on
+  `window-9951db02-b3`; the fresh root `okdw54` became stale after the second
+  select.
+- The matrix scripts' ref labeled "preview element" (`wbwm18`, `1roq21`) was
+  actually sidebar chrome. It survived select and reset, which chrome may do;
+  it is not staleness evidence.
+
+**Run records** (`apps/storybook/artifacts/desktop/<id>/run.json`):
+
+- Windows driver supervisors: `d558ed5d-4117-4afa-b69b-5fe2b7777e26`,
+  `dc41f8c6-a7d0-4741-9a94-da88e3ab8619`, and the same-port replacement
+  `102c54a5-417d-4266-acdd-eb83372292c4` (all passed). The lifecycle records
+  `6424cc6f-6ffd-4ca1-83c0-8020f7817818` (passed),
+  `a5e9d797-1bd9-4ea4-a106-2f23f75dbff0` (failed, `rnx-cli` ENOENT), and
+  `e30e6500-105c-4055-a51d-a1f88d4f7f33` (failed) are retained attempts.
+- Win32 driver supervisors: `80b2b8da-8428-4b90-a70a-d0ad9b6b5eae`,
+  `9044e1fe-d81e-4c14-b078-5542d1ad62be`, and
+  `2207ae33-ea4d-4b92-a4d8-5c3339a3faa0` (all passed). The app records
+  `3a6ee6cd-…`, `e805a6b8-…`, `380063db-…`, `acc6cd02-…`, and `1dd7cdfe-…`
+  report failed because the cases deliberately killed or externally stopped
+  the app.
+
+**Retained failures and deviations.**
+
+- Windows, before `a6b89e924`: after a quiet Metro reload, select returned
+  `story-not-ready` (indeterminate, quarantined) and later mutations returned
+  `target-quarantined`. This led to the bridge-retirement fix; the same case
+  on `a6b89e924` recovered.
+- Windows: one matrix retry returned `bridge-unavailable` (rejected, effect
+  none) for a select, and the harness then failed on its own argument error.
+  The cause of that `bridge-unavailable` is not determined.
+- Both matrix scripts requested a story list limit above 100, which schema
+  validation rejected; the reference-sequence runs used a limit of 100.
+
+**Cleanup.** After each pass, no owned app, driver, channel, or Metro process
+remained; ports 8081, 8082, 6006, 7007, 4723, 17202, 29419, and 39225 had no
+listeners; no `interactive.lock` or default `agent-connection.json` remained;
+and the grant was revoked. Pre-existing unrelated processes were left
+running.
+
+**Still Not run on Windows and Win32:** failed-cleanup claim retention, live
+cleanup and restart, F4 readiness/render faults, F4 secondary windows, F3
+survivors, F5 manifest smoke, and F5 legacy separation. Hosted CI disables
+physical input, so physical input is not qualified there.

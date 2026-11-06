@@ -200,3 +200,29 @@ Anonymous/foreign HTTP and WS bypass, protected args refusal, grant revocation,
 dispose-during-open, failed delete, ambiguous create, resource invalidation
 beyond preview elements, quarantine/recovery, F3/F4 injections, and Paper
 same-port/idle/physical-input cases are Not run on this exact SHA.
+
+## 2026-11-06 Windows Fabric and Win32 Paper descriptor evidence
+
+Source: the PR branch at `1f5333e25` plus `8458bde48` and `a6b89e924`; host
+Windows 11 Enterprise build 26300, AMD64. Commands:
+`yarn storybook driver --windows|--win32 --agent`, then
+`yarn storybook run --windows|--win32`; the MCP SDK stdio client consumed the
+default private `agent-connection.json`. No grants, descriptor data, or story
+args values are retained. Manual MCP calls are not suite selections. The full
+matrix (Windows Fabric 15 Pass, 1 Partial, 1 Failed, 7 Not run; Win32 Paper
+15 Pass, 2 Partial, 7 Not run), run records, and cleanup are in the "Windows
+Fabric and Win32 Paper qualification — 2026-11-06" section of
+`packages/agentic/desktop-test/references/current-status.md`.
+These rows supersede the macOS-host "Not run" Windows rows above for the
+Windows host only.
+
+| Area                    | Windows Fabric and Win32 Paper outcome                                                                                                                                                                                                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Same-port replacement   | Pass on both. The old client's status returned `service-unavailable` and its refs returned `no-session`; a later call rediscovered the new service, and close and a new open succeeded. The first select after replacement returned `relaunch-required` (rejected, effect none). No old mutation replayed. |
+| Authority faults        | Pass on both for grant revocation, dispose during open, failed delete, and ambiguous create (`session-uncertain` until the grant was revoked). Windows grant revocation and failed delete each passed on a rerun; the first attempts are retained in the desktop-test ledger.                              |
+| Resources and refs      | Pass on both. Preview element refs became stale after reset and after the next select; chrome/window refs kept their identity; the immutable MCP PNG resource stayed readable after reset with a matching digest. One session and incarnation 1 throughout each sequence.                                  |
+| Quarantine and recovery | Pass on both. An interrupted select returned `story-not-ready` (indeterminate, quarantined); later mutations in the same session returned `target-quarantined` while reads worked. A new session's exit probe lifted the quarantine, and select and reset applied with marker verification.                |
+| Protected args          | Pass on both: `story-args-unsupported`, with no value in the response.                                                                                                                                                                                                                                     |
+| F4 cancellation         | Pass on both. After a client abort at 150 or 40 ms, replaying the request ID returned the recorded applied result, and the next mutation applied in the same session.                                                                                                                                      |
+| F5 ingress and lifetime | Pass on both. Unauthenticated HTTP returned 403, an anonymous WebSocket received only the hello request, and the session stayed usable after about 21 s idle.                                                                                                                                              |
+| Not run                 | Failed-cleanup claim retention, live cleanup and restart, F4 readiness/render faults, F4 secondary windows, F3 survivors, F5 manifest smoke, and F5 legacy separation. No MCP discovery-size or latency measurements were recorded on Windows.                                                             |
