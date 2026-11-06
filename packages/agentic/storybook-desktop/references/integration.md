@@ -70,8 +70,12 @@ desktop-driver or MCP.
 Agent mode protects the embedded driver and disables the channel's MCP endpoint,
 but does not make all channel/runtime mutation ingress exclusively grant-owned.
 Unknown story changes now quarantine the driver target; args updates through the
-protected driver are unsupported. Runtime reconnect, complete context fencing,
-durable recovery wiring, and channel ingress authority remain work in progress.
+protected driver are unsupported. Epoch/cancellation-aware story providers
+reject stale preview mutations without invalidating chrome or live secondary
+windows. Interrupted navigation still quarantines when upstream work cannot
+be proven fenced. Automatic transport reconnect, durable recovery wiring, and
+channel ingress authority remain work in progress; see
+[readiness and installed upstream limits](readiness.md).
 See `@fluentui-react-native/desktop-driver/references/current-status.md` and
 `@fluentui-react-native/desktop-test/references/current-status.md`.
 

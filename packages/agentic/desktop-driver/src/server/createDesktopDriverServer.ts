@@ -18,7 +18,7 @@ import type { DesktopSession, ElementRecord, MutationOptions, RecoverTargetReque
 import { SettlementJournal } from './settlementJournal.js';
 import type { ProbeApplication } from './settlementJournal.js';
 import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from './sessionOperations.js';
-import { changeStory } from './sessionStories.js';
+import { assertStoryContext, changeStory, readCurrentStory } from './sessionStories.js';
 import { TargetRegistry } from './TargetRegistry.js';
 
 export type DesktopDriverServerOptions = {
@@ -477,6 +477,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
           throw invalidArgument('Action element origin is missing a valid WebDriver element reference.');
         }
         const record = sessions.resolveElement(session, elementId);
+        if (record.scope === 'preview') {
+          await assertStoryContext(session, sessions);
+          sessions.resolveElement(session, elementId);
+        }
         await hostCommand(session, `Resolving action origin element "${elementId}"`, (signal) =>
           session.target.host.snapshot(record.nativeId, signal),
         );
@@ -506,10 +510,16 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not provide Storybook orchestration.`);
     }
     if (method === 'GET' && command[0] === 'manifest' && command.length === 1) {
-      return withCommandTimeout(() => orchestrator.getManifest(), session.desktopTimeouts.nativeCommand, 'Reading the Storybook manifest');
+      return withCommandTimeout(
+        (signal) => orchestrator.getManifest({ lifetimeId: session.id, signal }),
+        session.desktopTimeouts.nativeCommand,
+        'Reading the Storybook manifest',
+        { signal: session.commandAbortController.signal },
+      );
     }
     if (method === 'GET' && command[0] === 'story' && command.length === 1) {
-      return session.story;
+      const current = await readCurrentStory(session, sessions, session.commandAbortController.signal);
+      return current.story?.verification === 'unconfirmed' ? null : session.story;
     }
     if (method === 'POST' && command[0] === 'story' && command.length === 1) {
       sessions.assertMutable(session);
@@ -537,9 +547,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       sessions.invalidatePreview(session);
       session.story = null;
       await withCommandTimeout(
-        () => orchestrator.updateArgs!(request.storyId as string, args),
+        (signal) => orchestrator.updateArgs!(request.storyId as string, args, { lifetimeId: session.id, signal }),
         session.desktopTimeouts.storyRender,
         `Updating args for Storybook story "${request.storyId}"`,
+        { signal: session.commandAbortController.signal },
       );
       return null;
     }
@@ -643,6 +654,10 @@ async function handleElementCommand(
   sessions: SessionManager,
 ): Promise<unknown> {
   const record = sessions.resolveElement(session, command[0]);
+  if (record.scope === 'preview' && method === 'POST' && ['click', 'clear', 'value'].includes(command[1])) {
+    await assertStoryContext(session, sessions);
+    sessions.resolveElement(session, command[0]);
+  }
   const snapshot = await hostCommand(session, `Reading element "${record.id}"`, (signal) =>
     session.target.host.snapshot(record.nativeId, signal),
   );

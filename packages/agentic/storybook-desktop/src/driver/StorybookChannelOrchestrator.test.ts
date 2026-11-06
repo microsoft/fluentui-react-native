@@ -1,90 +1,56 @@
-import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver';
+import { EventEmitter } from 'node:events';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { runInNewContext } from 'node:vm';
+
+import { transformSync } from '@babel/core';
+import { matchesStoryMarker, type StorySelectionRequest } from '@fluentui-react-native/desktop-driver/storybook';
 
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
 import { StorybookChannelOrchestrator } from './StorybookChannelOrchestrator.js';
-import type { StorybookChannelServer } from './StorybookChannelOrchestrator.js';
 
-class FakeChannelClient {
+class Client extends EventEmitter {
   readyState = 1;
-  readonly sent: string[] = [];
-  private readonly messageListeners: ((data: unknown) => void)[] = [];
-  private readonly closeListeners: (() => void)[] = [];
-
-  on(event: 'close', listener: () => void): void;
-  on(event: 'message', listener: (data: unknown) => void): void;
-  on(event: 'close' | 'message', listener: (() => void) | ((data: unknown) => void)): void {
-    if (event === 'close') {
-      this.closeListeners.push(listener as () => void);
-    } else {
-      this.messageListeners.push(listener as (data: unknown) => void);
-    }
-  }
-
+  sent: { type: string; args: Record<string, unknown>[] }[] = [];
   send(message: string): void {
-    this.sent.push(message);
+    this.sent.push(JSON.parse(message));
   }
-
-  receive(type: string, payload: unknown): void {
-    const message = JSON.stringify({ type, args: [payload] });
-    for (const listener of this.messageListeners) {
-      listener(message);
-    }
+  receive(type: string, payload?: unknown): void {
+    this.emit('message', JSON.stringify({ type, args: [payload] }));
   }
-
-  close(): void {
-    for (const listener of this.closeListeners) {
-      listener();
-    }
+  get epoch(): string {
+    return this.sent[0].args[0].connectionEpoch as string;
   }
-
   authenticate(): void {
-    this.receive('storyRendered', 'components-button--default');
-    this.receive('furn:desktop:hello', runtimeHello);
+    this.receive('furn:desktop:hello', {
+      connectionEpoch: this.epoch,
+      endpoint: manifest.endpoint,
+      instanceId: manifest.instanceId,
+      nonce: manifest.bridgeNonce,
+      platformManifestDigest: manifest.platformManifestDigest,
+      targetId: manifest.targetId,
+      version: 2,
+    });
+    this.receive('storyRendered', request.storyId);
+  }
+  ready(overrides: Record<string, unknown> = {}): void {
+    this.receive('furn:desktop:story-ready', {
+      ...request,
+      connectionEpoch: this.epoch,
+      markerVersion: 1,
+      portablePlanDigest: manifest.portablePlanDigest,
+      previewGeneration: 1,
+      ...overrides,
+    });
   }
 }
 
-class FakeChannelServer implements StorybookChannelServer {
-  readonly clients = new Set<FakeChannelClient>();
-  private readonly connectionListeners: ((client: FakeChannelClient) => void)[] = [];
-
-  on(_event: 'connection', listener: (client: FakeChannelClient) => void): void {
-    this.connectionListeners.push(listener);
-  }
-
-  connect(client: FakeChannelClient): void {
-    this.clients.add(client);
-    for (const listener of this.connectionListeners) {
-      listener(client);
-    }
-  }
-}
-
-const storyManifest: DesktopStoryManifest = {
-  endpoint: 'windows',
-  entries: [
-    {
-      id: 'components-button--default',
-      name: 'Default',
-      packageName: '@fluentui-react-native/components',
-      sourcePath: 'src/components/button/button.stories.tsx',
-      tags: ['story'],
-      title: 'Components/Button',
-    },
-  ],
-  platformManifestDigest: 'platform-digest',
-  portablePlanDigest: 'portable-digest',
-  schemaVersion: 1,
-};
-
-const driverManifest: DesktopStorybookDriverManifest = {
-  application: {
-    leaseNonce: 'nonce',
-    leasePath: 'application-lease.json',
-    windowTitle: 'Agentic Components Storybook',
-  },
-  appName: 'AgenticStorybook',
+const request: StorySelectionRequest = { requestId: 'request', runId: 'run', storyId: 'button--default' };
+const manifest: DesktopStorybookDriverManifest = {
+  application: { leaseNonce: 'lease', leasePath: 'application-lease.json', windowTitle: 'Storybook' },
+  appName: 'Storybook',
   bridgeNonce: 'nonce',
-  displayName: 'Agentic Components Storybook',
+  displayName: 'Storybook',
   driverPort: 4444,
   endpoint: 'windows',
   instanceId: 'instance',
@@ -107,284 +73,251 @@ const driverManifest: DesktopStorybookDriverManifest = {
     sourceDigest: 'source',
     wireProtocol: { major: 1, minor: 0 },
   },
-  platformManifestDigest: storyManifest.platformManifestDigest,
-  portablePlanDigest: storyManifest.portablePlanDigest,
+  platformManifestDigest: 'platform',
+  portablePlanDigest: 'portable',
   renderer: 'fabric',
   schemaVersion: 2,
-  storyManifest,
+  storyManifest: {
+    endpoint: 'windows',
+    entries: [
+      { id: request.storyId, name: 'Default', packageName: 'components', sourcePath: 'button.stories.tsx', tags: [], title: 'Button' },
+    ],
+    platformManifestDigest: 'platform',
+    portablePlanDigest: 'portable',
+    schemaVersion: 1,
+  },
   storybookPort: 7007,
-  targetId: 'agenticstorybook-windows',
-  testIDPrefix: 'agentic-storybook',
+  targetId: 'target',
+  testIDPrefix: 'storybook',
 };
 
-const runtimeHello = {
-  endpoint: 'windows',
-  instanceId: 'instance',
-  nonce: 'nonce',
-  platformManifestDigest: 'platform-digest',
-  targetId: 'agenticstorybook-windows',
-  version: 1,
-};
-
-describe('StorybookChannelOrchestrator', () => {
+function setup(fetch: typeof globalThis.fetch = jest.fn(async () => new Response('{}')), timeoutMs = 100) {
+  const server = Object.assign(new EventEmitter(), { clients: new Set<Client>() });
+  const client = new Client();
+  server.clients.add(client);
   const errorOutput = { write: jest.fn() };
-  const createOrchestrator = (options: ConstructorParameters<typeof StorybookChannelOrchestrator>[0]) =>
-    new StorybookChannelOrchestrator({ ...options, errorOutput });
-  beforeEach(() => errorOutput.write.mockClear());
+  const orchestrator = new StorybookChannelOrchestrator({
+    channelServer: server,
+    driverManifest: manifest,
+    errorOutput,
+    fetch,
+    serverUrl: 'https://localhost',
+    timeoutMs,
+  });
+  return { client, errorOutput, fetch, orchestrator, server };
+}
 
-  test('waits for the authenticated preview to initialize before navigating, including after an app restart', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    const unrelatedClient = new FakeChannelClient();
-    channelServer.connect(client);
-    channelServer.connect(unrelatedClient);
-    const fetch = jest.fn(async () => new Response('{}'));
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      fetch,
-      serverUrl: 'https://localhost',
-      timeoutMs: 1000,
+describe('StorybookChannelOrchestrator epochs and lifetime', () => {
+  test('absent and hello-only bridges reject before dispatch with no effect', async () => {
+    const { client, fetch, orchestrator } = setup();
+    await expect(orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { endpoint: 'windows', reason: 'bridge-unavailable', renderer: 'fabric' },
+      effect: 'none',
     });
-
-    for (const [index, runtime] of [client, new FakeChannelClient()].entries()) {
-      if (index > 0) {
-        client.close();
-        channelServer.connect(runtime);
-      }
-      runtime.receive('furn:desktop:hello', runtimeHello);
-      const request = { requestId: `request-${index}`, runId: `run-${index}`, storyId: 'components-button--default' };
-      const selection = orchestrator.selectStory(request);
-      unrelatedClient.receive('storyRendered', request.storyId);
-      await Promise.resolve();
-      expect(fetch).toHaveBeenCalledTimes(index);
-      expect(runtime.sent.some((message) => JSON.parse(message).type === 'furn:desktop:prepare-story')).toBe(false);
-
-      runtime.receive('storyRendered', request.storyId);
-      await Promise.resolve();
-      expect(fetch).toHaveBeenCalledTimes(index + 1);
-      runtime.receive('furn:desktop:story-ready', {
-        ...request,
-        portablePlanDigest: 'portable-digest',
-        previewGeneration: 1,
-      });
-      await expect(selection).resolves.toMatchObject({ runId: request.runId });
-    }
+    client.receive('furn:desktop:hello', {
+      connectionEpoch: client.epoch,
+      endpoint: manifest.endpoint,
+      instanceId: manifest.instanceId,
+      nonce: manifest.bridgeNonce,
+      platformManifestDigest: manifest.platformManifestDigest,
+      targetId: manifest.targetId,
+      version: 2,
+    });
+    await expect(orchestrator.selectStory(request)).rejects.toHaveProperty('effect', 'none');
+    expect(fetch).not.toHaveBeenCalled();
+    client.receive('storyRendered', request.storyId);
+    const selection = orchestrator.selectStory(request);
+    client.ready();
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: client.epoch, markerVersion: 1, ...request });
   });
 
-  test('reports the requested story, run and HTTP failure details to the server error output', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    channelServer.connect(client);
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      serverUrl: 'https://localhost',
-      timeoutMs: 100,
-      fetch: jest.fn(async () => new Response('preview module failed to load', { status: 500 })),
-    });
-
-    client.authenticate();
-    await expect(
-      orchestrator.selectStory({ requestId: 'failure', runId: 'pipeline-run', storyId: 'components-button--default' }),
-    ).rejects.toThrow('preview module failed to load');
-    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('navigation "components-button--default" (run pipeline-run)'));
-    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('status 500: preview module failed to load'));
+  test('requires the nonce and current epoch on the same initialized socket', async () => {
+    const { client, fetch, orchestrator, server } = setup();
+    const other = new Client();
+    server.emit('connection', other);
+    client.receive('storyRendered', request.storyId);
+    other.authenticate();
+    client.receive('furn:desktop:hello', { version: 2, connectionEpoch: client.epoch, nonce: 'wrong' });
+    const selection = orchestrator.selectStory(request);
+    client.ready();
+    other.ready({ connectionEpoch: client.epoch });
+    other.ready();
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: other.epoch });
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(client.sent).toHaveLength(1);
   });
 
-  test('reset navigates from a different page, including after manual navigation away from the last prepared story', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    channelServer.connect(client);
-    let page = 'unrelated--story';
-    let generation = 0;
-    const fetch = jest.fn(async (url: Parameters<typeof globalThis.fetch>[0]) => {
-      page = decodeURIComponent(String(url).split('/').at(-1)!);
-      const request = JSON.parse(client.sent.at(-1)!).args[0];
-      client.receive('furn:desktop:story-ready', {
-        ...request,
-        storyId: page,
-        previewGeneration: ++generation,
-        portablePlanDigest: 'portable-digest',
-      });
-      return new Response('{}');
-    });
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      fetch,
-      serverUrl: 'https://localhost',
-      timeoutMs: 100,
-    });
-    client.authenticate();
-
-    await expect(
-      orchestrator.resetStory({ requestId: 'first', runId: 'first', storyId: 'components-button--default' }),
-    ).resolves.toMatchObject({ storyId: 'components-button--default', previewGeneration: 1 });
-    expect(page).toBe('components-button--default');
-    page = 'manually-selected--story';
-    await expect(
-      orchestrator.resetStory({ requestId: 'second', runId: 'second', storyId: 'components-button--default' }),
-    ).resolves.toMatchObject({ storyId: 'components-button--default', previewGeneration: 2 });
-    expect(page).toBe('components-button--default');
-    expect(fetch).toHaveBeenCalledTimes(2);
-  });
-
-  test('bounds navigation even when the runtime is ready but the HTTP selection request never completes', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    channelServer.connect(client);
-    let signal: AbortSignal | null | undefined;
-    const fetch = jest.fn((_url: Parameters<typeof globalThis.fetch>[0], options?: RequestInit) => {
-      signal = options?.signal;
-      const request = JSON.parse(client.sent.at(-1)!).args[0];
-      client.receive('furn:desktop:story-ready', {
-        ...request,
-        portablePlanDigest: 'portable-digest',
-        previewGeneration: 1,
-      });
-      return new Promise<Response>(() => {});
-    });
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      fetch,
-      serverUrl: 'https://localhost',
-      timeoutMs: 10,
-    });
-    client.authenticate();
-    await expect(orchestrator.selectStory({ requestId: 'request', runId: 'run', storyId: 'components-button--default' })).rejects.toThrow(
-      'Timed out navigating',
+  test('ignores old ready and errors, and commits current context only after HTTP completion', async () => {
+    let finish!: (response: Response) => void;
+    const { client, orchestrator } = setup(
+      jest.fn(
+        () =>
+          new Promise((resolve) => {
+            finish = resolve;
+          }),
+      ),
     );
-    expect(signal?.aborted).toBe(true);
-  });
-
-  test('authenticates the runtime and correlates selection readiness', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    channelServer.connect(client);
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      fetch: jest.fn(async () => new Response('{}', { status: 408 })),
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback Storybook URL
-      serverUrl: 'http://127.0.0.1:7007',
-      timeoutMs: 1000,
-    });
     client.authenticate();
-    expect(JSON.parse(client.sent[0])).toEqual({ type: 'furn:desktop:request-hello', args: [] });
-    client.sent.length = 0;
-
-    const selection = orchestrator.selectStory({
-      requestId: 'request-1',
-      runId: 'run-1',
-      storyId: 'components-button--default',
-    });
-    await Promise.resolve();
-    expect(JSON.parse(client.sent[0])).toEqual({
-      type: 'furn:desktop:prepare-story',
-      args: [{ requestId: 'request-1', runId: 'run-1', storyId: 'components-button--default' }],
-    });
-    client.receive('furn:desktop:story-ready', {
-      portablePlanDigest: 'portable-digest',
-      previewGeneration: 1,
-      requestId: 'request-1',
-      runId: 'run-1',
-      storyId: 'components-button--default',
-    });
-
-    await expect(selection).resolves.toEqual({
-      previewGeneration: 1,
-      runId: 'run-1',
-      storyId: 'components-button--default',
-    });
-    await expect(orchestrator.getCurrentStory()).resolves.toMatchObject({ runId: 'run-1' });
+    const selection = orchestrator.selectStory(request);
+    client.ready({ connectionEpoch: 'old-epoch' });
+    client.receive('furn:desktop:story-error', { ...request, connectionEpoch: 'old-epoch' });
+    client.ready({ requestId: 'old-request' });
+    client.ready({ markerVersion: undefined });
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    client.ready();
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    finish(new Response('{}'));
+    await expect(selection).resolves.toMatchObject({ runId: request.runId });
+    const second = orchestrator.resetStory({ ...request, requestId: 'next', runId: 'next' });
+    client.ready();
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    client.ready({ requestId: 'next', runId: 'next', previewGeneration: 2 });
+    finish(new Response('{}', { status: 408 }));
+    await expect(second).resolves.toMatchObject({ previewGeneration: 2, requestId: 'next' });
   });
 
-  test('observes render errors while the selection request is still pending', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    const unauthenticatedClient = new FakeChannelClient();
-    channelServer.connect(client);
-    channelServer.connect(unauthenticatedClient);
-    let finishFetch: ((response: Response) => void) | undefined;
-    const fetch = jest.fn(() => new Promise<Response>((resolve) => (finishFetch = resolve)));
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      fetch,
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback Storybook URL
-      serverUrl: 'http://127.0.0.1:7007',
-      timeoutMs: 1000,
-    });
-    client.authenticate();
-
-    const selection = orchestrator.selectStory({
-      requestId: 'request-error',
-      runId: 'run-error',
-      storyId: 'components-button--default',
-    });
-    await Promise.resolve();
-    let settled = false;
-    void selection.then(
-      () => {
-        settled = true;
-      },
-      () => {
-        settled = true;
-      },
-    );
-    const errorPayload = {
-      message: 'render failed',
-      requestId: 'request-error',
-      runId: 'run-error',
-      storyId: 'components-button--default',
-    };
-    unauthenticatedClient.receive('furn:desktop:story-error', errorPayload);
-    await Promise.resolve();
-    expect(settled).toBe(false);
-    client.receive('furn:desktop:story-error', errorPayload);
-    await expect(selection).rejects.toThrow('render failed');
-    finishFetch?.(new Response('{}'));
-  });
-
-  test('rejects stories outside the exact platform manifest', async () => {
-    const orchestrator = createOrchestrator({
-      channelServer: new FakeChannelServer(),
-      driverManifest,
-      fetch: jest.fn(),
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback Storybook URL
-      serverUrl: 'http://127.0.0.1:7007',
-      timeoutMs: 10,
-    });
-
-    await expect(orchestrator.selectStory({ requestId: 'request', runId: 'run', storyId: 'missing--story' })).rejects.toThrow(
-      'not present',
-    );
-  });
-
-  test('cancels reset readiness when the authenticated bridge closes', async () => {
-    const channelServer = new FakeChannelServer();
-    const client = new FakeChannelClient();
-    channelServer.connect(client);
-    const orchestrator = createOrchestrator({
-      channelServer,
-      driverManifest,
-      fetch: jest.fn(),
-      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test-only loopback Storybook URL
-      serverUrl: 'http://127.0.0.1:7007',
-      timeoutMs: 10,
-    });
-    client.authenticate();
-    client.readyState = 3;
-
-    await expect(
-      orchestrator.resetStory({
-        requestId: 'request-reset',
-        runId: 'run-reset',
-        storyId: 'components-button--default',
+  test('disconnect promptly fails pending navigation, aborts HTTP and rejects the closed socket', async () => {
+    let signal: AbortSignal | undefined;
+    const { client, orchestrator, server } = setup(
+      jest.fn((_url, init) => {
+        signal = init?.signal ?? undefined;
+        return new Promise<Response>(() => {});
       }),
-    ).rejects.toThrow('not connected');
-    await new Promise((resolve) => setTimeout(resolve, 20));
+      10_000,
+    );
+    client.authenticate();
+    const selection = orchestrator.selectStory(request);
+    client.ready();
+    client.readyState = 3;
+    client.emit('close');
+    await expect(selection).rejects.toMatchObject({ effect: 'unknown', message: expect.stringContaining('disconnected') });
+    expect(signal?.aborted).toBe(true);
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    await expect(orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'relaunch-required', endpoint: 'windows', renderer: 'fabric' },
+      effect: 'none',
+    });
+    const replacement = new Client();
+    server.emit('connection', replacement);
+    replacement.authenticate();
+    expect(replacement.epoch).not.toBe(client.epoch);
+    // The old socket can neither authenticate again nor replace the new epoch.
+    client.authenticate();
+    client.ready();
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+  });
+
+  test('cancellation before dispatch has no effect; after dispatch fences the epoch until relaunch', async () => {
+    const controller = new AbortController();
+    const { client, fetch, orchestrator } = setup(
+      jest.fn(() => new Promise<Response>(() => {})),
+      10_000,
+    );
+    client.authenticate();
+    controller.abort();
+    await expect(orchestrator.selectStory(request, { lifetimeId: 'session', signal: controller.signal })).rejects.toHaveProperty(
+      'effect',
+      'none',
+    );
+    expect(fetch).not.toHaveBeenCalled();
+    const live = new AbortController();
+    const selection = orchestrator.selectStory(request, { lifetimeId: 'session', signal: live.signal });
+    live.abort();
+    await expect(selection).rejects.toHaveProperty('effect', 'unknown');
+    expect(client.sent.at(-1)).toMatchObject({ type: 'furn:desktop:cancel-story' });
+    client.authenticate();
+    client.ready();
+    await expect(orchestrator.selectStory({ ...request, requestId: 'new' })).rejects.toMatchObject({
+      data: { reason: 'relaunch-required' },
+      effect: 'none',
+    });
+  });
+
+  test('a ready event cannot disable the local HTTP deadline', async () => {
+    const { client, orchestrator } = setup(
+      jest.fn(() => new Promise<Response>(() => {})),
+      10,
+    );
+    client.authenticate();
+    const selection = orchestrator.selectStory(request);
+    client.ready();
+    await expect(selection).rejects.toMatchObject({ effect: 'unknown', message: expect.stringContaining('Timed out') });
+  });
+
+  test('render errors stay correlated and HTTP errors retain diagnostic detail', async () => {
+    const { client, orchestrator } = setup(jest.fn(() => new Promise<Response>(() => {})));
+    client.authenticate();
+    const selection = orchestrator.selectStory(request);
+    client.receive('furn:desktop:story-error', { ...request, connectionEpoch: client.epoch });
+    await expect(selection).rejects.toThrow('failed to render');
+    const failed = setup(jest.fn(async () => new Response('module failed to load', { status: 500 })));
+    failed.client.authenticate();
+    await expect(failed.orchestrator.selectStory(request)).rejects.toThrow('status 500: module failed to load');
+    expect(failed.errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('module failed to load'));
+  });
+
+  test('rejects unknown stories without dispatch', async () => {
+    const { fetch, orchestrator } = setup();
+    await expect(orchestrator.selectStory({ ...request, storyId: 'missing' })).rejects.toHaveProperty('effect', 'none');
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  test('malformed messages cannot crash the bridge; duplicate IDs cannot accept an earlier ready result', async () => {
+    const { client, orchestrator } = setup();
+    for (const raw of ['null', '[]', '{}', '{"args":null}', '{"args":true}', '{']) client.emit('message', raw);
+    client.authenticate();
+    const selection = orchestrator.selectStory(request);
+    client.ready();
+    await selection;
+    await expect(orchestrator.selectStory(request)).rejects.toHaveProperty('effect', 'none');
+    client.receive('furn:desktop:story-error', { ...request, connectionEpoch: client.epoch });
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    await expect(orchestrator.selectStory({ ...request, requestId: 'new' })).rejects.toMatchObject({
+      data: { reason: 'relaunch-required' },
+      effect: 'none',
+    });
+  });
+
+  test('a failing cancellation send cannot replace unknown-effect failure evidence', async () => {
+    const { client, errorOutput, orchestrator } = setup(jest.fn(() => new Promise<Response>(() => {})));
+    client.authenticate();
+    const controller = new AbortController();
+    const selection = orchestrator.selectStory(request, { lifetimeId: 'session', signal: controller.signal });
+    client.send = () => {
+      throw new Error('Socket closed during cancel.');
+    };
+    controller.abort();
+    await expect(selection).rejects.toHaveProperty('effect', 'unknown');
+    expect(errorOutput.write).toHaveBeenCalledWith(expect.stringContaining('Socket closed during cancel.'));
+  });
+
+  test('actual data-only runtime marker producer conforms to the driver verifier', () => {
+    const filename = resolve(__dirname, '../../../storybook-desktop-runtime/src/storyMarker.ts');
+    const source = readFileSync(filename, 'utf8');
+    const code = transformSync(source, {
+      babelrc: false,
+      configFile: false,
+      filename,
+      presets: ['module:@react-native/babel-preset'],
+    })?.code;
+    if (!code) throw new Error('Marker source did not compile.');
+    const exports: { createStoryMarker?: (selection: Record<string, unknown>) => Record<string, unknown> } = {};
+    // No require, Node, React, or harness globals are available to the on-device producer.
+    runInNewContext(code, { exports });
+    const expected = { ...request, connectionEpoch: 'epoch', markerVersion: 1 as const, previewGeneration: 3 };
+    const produced = exports.createStoryMarker!(expected);
+    expect(matchesStoryMarker(JSON.stringify(produced), expected)).toBe(true);
+    for (const patch of [
+      { connectionEpoch: 'old' },
+      { requestId: 'old' },
+      { runId: 'old' },
+      { storyId: 'old' },
+      { previewGeneration: 2 },
+      { markerVersion: 2 },
+    ])
+      expect(matchesStoryMarker(JSON.stringify({ ...produced, ...patch }), expected)).toBe(false);
+    expect(matchesStoryMarker(JSON.stringify(produced), { ...expected, connectionEpoch: undefined })).toBe(false);
+    expect(matchesStoryMarker(JSON.stringify(produced), { ...expected, requestId: undefined })).toBe(false);
+    expect(matchesStoryMarker(JSON.stringify(produced), { ...expected, markerVersion: undefined })).toBe(false);
   });
 });
