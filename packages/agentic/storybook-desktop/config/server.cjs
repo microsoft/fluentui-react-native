@@ -65,8 +65,8 @@ async function startDesktopStorybookServer({
         failures.length ? new AggregateError(failures, 'Storybook channel service failed.') : undefined,
       );
       unregisterDisposal();
-      finishDesktopProcess();
       if (failures.length) throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
+      finishDesktopProcess();
     })());
   const settle = async (error) => {
     stopping = true;

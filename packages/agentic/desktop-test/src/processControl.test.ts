@@ -115,6 +115,50 @@ describe('owned process lifelines', () => {
     await runner.close();
   });
 
+  test('owned service wrappers cannot certify a failed child disposal', async () => {
+    const marker = path.join(root, 'descriptor');
+    const descriptor = path.join(root, 'service.json');
+    fs.writeFileSync(
+      descriptor,
+      JSON.stringify({
+        label: 'fixture-wrapper',
+        stopPath: path.join(root, 'stop'),
+        command: { command: process.execPath, args: [fixture, 'failed', marker], cwd: root },
+      }),
+    );
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet, shutdownTimeoutMs: 15_000 });
+    const running = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../config/service.cjs'), descriptor],
+      cwd: root,
+      env: {},
+    });
+    try {
+      await waitUntil(() => fs.existsSync(marker));
+      await expect(running.stop()).rejects.toThrow();
+      expect(fs.existsSync(marker)).toBe(true);
+    } finally {
+      await runner.close();
+    }
+  });
+
+  test('producer loss invalidates readiness and cannot certify descriptor withdrawal', async () => {
+    const marker = path.join(root, 'descriptor');
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet });
+    const running = runner.start({ command: process.execPath, args: [fixture, 'service', marker], cwd: root, env: {} });
+    const expected = { tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' } as const;
+    try {
+      const record = await running.waitForReadiness!(expected, 5000);
+      process.kill(record.processId, 'SIGKILL');
+      await running.completed.catch(() => undefined);
+      await expect(running.waitForReadiness!(expected, 5000)).rejects.toThrow();
+      await expect(running.stop()).rejects.toThrow('without settled disposal');
+      expect(fs.existsSync(marker)).toBe(true);
+    } finally {
+      await runner.close();
+    }
+  });
+
   test('stalled readiness and cancellation do not promote another readiness tier', async () => {
     const control = createDesktopProcessControl(() => undefined);
     try {

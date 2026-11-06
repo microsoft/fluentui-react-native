@@ -15,9 +15,9 @@ export async function runOwnedDesktopService(descriptorPath: string): Promise<vo
   const execution = runService(descriptorPath, controller.signal);
   try {
     await execution;
+    finishDesktopProcess();
   } finally {
     unregister();
-    finishDesktopProcess();
   }
 }
 
@@ -88,4 +88,5 @@ async function runService(descriptorPath: string, signal: AbortSignal): Promise<
     }
     process.exitCode = await report.close(failure);
   }
+  if (failure !== undefined) throw failure;
 }
