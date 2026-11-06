@@ -510,9 +510,13 @@ jobs:
           if-no-files-found: warn
 
   win32-storybook:
-    name: Win32 Storybook PR
+    name: Win32 Storybook PR (${{ matrix.input-mode }})
     runs-on: windows-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        input-mode: [accessibility, physical]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -534,50 +538,34 @@ jobs:
         uses: ./.github/actions/setup-desktop-driver
         with:
           platform: win32
-          disabled-input-features: keyboard,physicalClick,wheel
+          disabled-input-features: ${{ matrix.input-mode == 'accessibility' && 'keyboard,physicalClick,wheel' || '' }}
 
-      - name: Smoke test Win32 Storybook
-        run: yarn storybook smoke --win32 --mode stories-and-tests
-        working-directory: apps/storybook
-
-      - name: Test Win32 Storybook physical input pilot
-        shell: pwsh
+      - name: Validate and capture the complete Win32 input catalog
+        id: input-coverage
         working-directory: apps/storybook
         env:
-          FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES: ''
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $requiredTests = [ordered]@{
-            'components-checkbox--default' = 'toggles native checked state in both directions'
-            'components-button--focus-management' = 'honors pointer focus policy and invokes exactly once per Enter and Space'
-          }
-          $env:STORYBOOK_SMOKE_STORY = "{$($requiredTests.Keys -join ',')}"
-          $env:STORYBOOK_SMOKE_TEST = "{$($requiredTests.Values -join ',')}"
-          $previousRuns = @(Get-ChildItem artifacts\desktop -Directory | Select-Object -ExpandProperty FullName)
+          STORYBOOK_INPUT_MODE: ${{ matrix.input-mode }}
+        run: yarn input-coverage begin
 
-          yarn storybook smoke --win32 --mode stories-and-tests
-          if ($LASTEXITCODE -ne 0) { throw 'Win32 physical input smoke failed.' }
+      - name: Smoke test Win32 Storybook (${{ matrix.input-mode }})
+        id: smoke
+        working-directory: apps/storybook
+        env:
+          STORYBOOK_INPUT_MODE: ${{ matrix.input-mode }}
+        run: yarn storybook smoke --win32 --mode stories-and-tests
 
-          $runs = @(Get-ChildItem artifacts\desktop -Directory | Where-Object { $_.FullName -notin $previousRuns })
-          if ($runs.Count -ne 1) { throw "Expected one new physical input report; found $($runs.Count)." }
-          $report = Get-Content (Join-Path $runs[0].FullName 'run.json') -Raw | ConvertFrom-Json
-          if ($report.schemaVersion -ne 1 -or $report.status -cne 'passed') {
-            throw 'The physical input run did not produce a successful canonical report.'
-          }
-          foreach ($entry in $requiredTests.GetEnumerator()) {
-            $title = "$($entry.Key) / $($entry.Value)"
-            $test = @($report.tests | Where-Object { $_.title -ceq $title })
-            if ($test.Count -ne 1 -or $test[0].status -cne 'passed') {
-              throw "Required physical input test did not execute and pass: $title"
-            }
-            Write-Host "Verified physical input test: $title"
-          }
+      - name: Verify every declared Win32 input callback
+        if: ${{ always() && !cancelled() && steps.input-coverage.outcome == 'success' }}
+        working-directory: apps/storybook
+        env:
+          STORYBOOK_INPUT_MODE: ${{ matrix.input-mode }}
+        run: yarn input-coverage verify
 
       - name: Upload Win32 Storybook artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: Storybook_win32_paper_${{ github.run_id }}_${{ github.run_attempt }}
+          name: Storybook_win32_paper_${{ matrix.input-mode }}_${{ github.run_id }}_${{ github.run_attempt }}
           path: |
             apps/storybook/artifacts/win32
             apps/storybook/artifacts/desktop
@@ -685,6 +673,7 @@ jobs:
       - ios
       - windows
       - win32
+      - win32-storybook
       - check-changesets
       - publish-dry-run-pack
       - test-links

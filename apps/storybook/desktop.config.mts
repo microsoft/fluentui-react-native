@@ -7,6 +7,7 @@ import {
 import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
 
 import appManifest from './app.json' with { type: 'json' };
+import { inputModeOptions } from './input-test-modes.mts';
 
 const win32Host = {
   component: 'AgenticStorybook',
@@ -24,7 +25,7 @@ export default defineDesktopConfig({
   reporting: { artifactsRoot: './artifacts/desktop' },
   suites: { stories: { kind: 'csf-wdio' } },
   integration: storybook({
-    wdio: { test: process.env.STORYBOOK_SMOKE_TEST },
+    wdio: { test: process.env.STORYBOOK_SMOKE_TEST, ...inputModeOptions() },
     storyPackages: [
       [
         '@fluentui-react-native/components',

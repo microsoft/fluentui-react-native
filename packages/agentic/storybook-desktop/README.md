@@ -25,6 +25,12 @@ The [reference index](references/README.md) routes platform, readiness, and
 troubleshooting tasks.
 Package agents should start from [AGENTS.md](AGENTS.md).
 
+Applications can configure exact story/callback pairs with `wdio.testCases`
+and an explicit click mode to partition accessibility and physical-input
+coverage. See [integration](references/integration.md#exact-callback-selection)
+for selection semantics; capability availability and execution verification
+remain separate from selection.
+
 ## Responsibilities
 
 - This package owns Storybook-specific configuration, story extraction,

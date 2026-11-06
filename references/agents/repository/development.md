@@ -79,8 +79,9 @@ through the `fluentui-scripts` CLI in [`scripts/`](../../../scripts/package.json
 - `yarn update-snapshots`: Jest snapshot update where declared;
 - `yarn format`: formats the package; `yarn format --check` only checks.
 
-Packages differ. Check the scripts before running them; for example, `apps/storybook` has no `build` or `test` script.
-Run a subset of a package's tests as described in [Focused test runs](#focused-test-runs).
+Packages differ. Check the scripts before running them; for example, `apps/storybook` has no `build` script, and its
+`test` script validates the input-coverage gate, not native callbacks. Run a subset of a package's tests as described
+in [Focused test runs](#focused-test-runs).
 
 ## Focused test runs
 

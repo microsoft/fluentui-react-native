@@ -38,7 +38,7 @@ import { desktopStorybookTargetId } from '../driver/driverManifest.js';
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
-import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
+import { matchesWdioCase, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
@@ -230,7 +230,7 @@ export class DesktopStorybookCli {
           selected.map(({ id, sourcePath, wdio }) => ({
             id,
             sourcePath,
-            ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
+            ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioCase(id, name, settings)) } : {}),
           })),
           null,
           2,

@@ -136,6 +136,49 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('lists exact callback pairs without a cross-product of story IDs and test names', async () => {
+    const output = { write: jest.fn() };
+    const config = makeDesktopStorybookConfig({
+      projectRoot: storybookRoot,
+      wdio: {
+        testCases: [
+          { storyId: 'button--first', testName: 'physical' },
+          { storyId: 'button--second', testName: 'accessibility' },
+        ],
+      },
+    });
+    const createStoryManifest = async () => ({
+      endpoint: 'win32' as const,
+      schemaVersion: 1 as const,
+      platformManifestDigest: 'digest',
+      portablePlanDigest: 'portable',
+      entries: ['first', 'second'].map((name) => ({
+        id: `button--${name}`,
+        name,
+        title: 'Button',
+        sourcePath: 'button.stories.tsx',
+        packageName: 'fixture',
+        tags: [],
+        wdio: { exportName: name, digest: 'callback', testNames: ['physical', 'accessibility'] },
+      })),
+    });
+    const cli = new DesktopStorybookCli(config, { createStoryManifest, output });
+    await cli.test('win32', { list: true });
+    expect(JSON.parse(output.write.mock.calls[0][0])).toEqual([
+      { id: 'button--first', sourcePath: 'button.stories.tsx', tests: ['physical'] },
+      { id: 'button--second', sourcePath: 'button.stories.tsx', tests: ['accessibility'] },
+    ]);
+    await expect(
+      cli.test('win32', {
+        list: true,
+        testCases: [
+          { storyId: 'button--first', testName: 'physical' },
+          { storyId: 'button--second', testName: 'missing' },
+        ],
+      }),
+    ).rejects.toThrow('No executable wdio callback matches declared identity');
+  });
+
   test('discovers and filters named callbacks without connecting to an app', async () => {
     const output = { write: jest.fn() };
     const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot, wdio: { test: 'semantics' } });

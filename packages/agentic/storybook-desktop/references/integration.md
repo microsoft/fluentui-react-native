@@ -50,6 +50,22 @@ or generated story lists. The app's `src/config` import graph must load before
 the TypeScript build; use explicit `.ts` relative imports so
 `rewriteRelativeImportExtensions` emits valid `.js` paths.
 
+### Exact callback selection
+
+`wdio.testCases` accepts a nonempty array of unique
+`{ storyId, testName }` pairs. It intersects the existing story, tag, and test
+filters and is applied consistently to static `test --list` discovery and
+callback execution, including grouped smoke. Omitted selections preserve the
+existing behavior; legacy single callbacks use the name `default`. Declared
+pairs that do not identify an executable callback fail selection.
+
+An app can own a reviewed input-mode catalog and select different pairs with
+explicit `wdio.clickMode: 'accessibility'` or `'physical'`. The shared runner
+does not infer supported modes from callback names. Consumers must validate
+catalog completeness and actual execution; declaring a test does not prove
+that it ran. The Win32 Storybook app demonstrates this with separate CI lanes,
+shared callbacks in both, and explicit reporting of its existing quarantine.
+
 ## Responsibilities
 
 This package owns Storybook-specific CLI lifecycle, static story manifests,

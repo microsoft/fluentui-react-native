@@ -42,6 +42,48 @@ See `agent-map.yaml` for the current command contract and paths.
 Generated projects, Pods, manifests, reports, and build products are disposable.
 Change the owning config or source instead of generated output.
 
+## Win32 input coverage
+
+Win32/Paper PR testing has independent accessibility and physical-input jobs.
+Both traverse the full platform story catalog. The app-owned
+[`input-tests.win32.json`](input-tests.win32.json) declares each authored callback
+as `accessibility`, `physical`, or `both`; `both` callbacks execute in each job.
+Declarations use exact story ID and callback-name pairs, not name-glob
+cross-products. A semantic assertion that first navigates with the keyboard
+still belongs to the physical lane.
+
+The accessibility lane masks keyboard, physical clicks, and wheel input and
+explicitly uses accessibility clicks. The physical lane enables those features
+and explicitly uses physical clicks. Windows/Fabric and macOS policies are
+unchanged. Source assertions and capability checks remain authoritative; this
+catalog does not convert unsupported actions into passes.
+
+Before smoke, `yarn input-coverage begin` checks the complete statically
+discovered Win32 callback catalog against the declarations and captures the
+source, lane, and preexisting report directories. New, removed, or renamed
+callbacks require a reviewed catalog update. After smoke,
+`yarn input-coverage verify` requires one fresh successful canonical report and
+one clean passing attempt for every callback assigned to that lane. Unexpected
+skips, unsupported results, missing callbacks, duplicates, retries, and flaky
+passes fail the job. The existing Button #4373 quarantine remains selected;
+only its exact documented skip is permitted and reported as **unvalidated**,
+not passed.
+
+From this workspace, inspect a lane without executing native input:
+
+```powershell
+$env:STORYBOOK_INPUT_MODE = 'accessibility' # Or 'physical'.
+yarn storybook test --win32 --list
+Remove-Item Env:\STORYBOOK_INPUT_MODE
+```
+
+Actual input execution requires the matching driver capability policy and an
+authorized desktop; selecting a lane alone does not grant input authority.
+Each CI lane uploads its own `Storybook_win32_paper_<mode>_<run>_<attempt>`
+artifact, including canonical native results, the classified input catalog,
+and a coverage summary. The required `PR` aggregate includes both matrix jobs.
+Run `yarn test` here for catalog and report-gate regression tests.
+
 ## Package guidance
 
 - Storybook integration, CLI, discovery, and callbacks:

@@ -3,6 +3,8 @@ purpose: Agent-optimized map of stable Storybook structure and runtime discovery
 
 sources:
   config: desktop.config.mts
+  win32_input_catalog: input-tests.win32.json
+  win32_input_coverage: input-test-modes.mts
   config_adapter: src/main.ts
   app_entry: index.js
   app_shell: src/StorybookApp.tsx
@@ -37,6 +39,7 @@ services:
     context_platform: macos-or-windows-or-win32-target-endpoint
     test_filter: --test <name-glob>
     smoke_test_filter_env: STORYBOOK_SMOKE_TEST
+    win32_input_mode_env: STORYBOOK_INPUT_MODE
     smoke_mode: stories-and-tests
     execution: navigate-and-remount-then-run-tests-grouped-by-story
 
@@ -46,6 +49,8 @@ agent_commands:
   inspect_instance: yarn storybook instance --<platform>
   list_stories: yarn desktop-driver stories list --url <driver-url> --target <target-id>
   run_story_tests: yarn storybook test --<platform> --test <test-name-glob>
+  capture_win32_input_catalog: yarn input-coverage begin
+  verify_win32_input_coverage: yarn input-coverage verify
 
 lookup_order:
   - Generate the exact platform manifest; never guess ID slugging.

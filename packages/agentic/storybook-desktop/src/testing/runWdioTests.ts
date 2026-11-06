@@ -57,10 +57,16 @@ export function selectWdioStories(
   manifest: DesktopStoryManifest,
   options: DesktopStorybookWdioOptions,
 ): readonly DesktopStoryManifestEntry[] {
+  for (const test of options.testCases ?? []) {
+    const entry = manifest.entries.find(({ id }) => id === test.storyId);
+    if (!entry?.wdio || !(entry.wdio.testNames ?? ['default']).includes(test.testName)) {
+      throw new Error(`No executable wdio callback matches declared identity: ${test.storyId} / ${test.testName}.`);
+    }
+  }
   return manifest.entries
     .filter((entry) => entry.wdio && (!options.story || path.matchesGlob(entry.id, options.story)))
     .filter((entry) => !options.tag || entry.tags.includes(options.tag))
-    .filter((entry) => (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioTest(name, options.test)))
+    .filter((entry) => (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioCase(entry.id, name, options)))
     .sort((left, right) => left.id.localeCompare(right.id));
 }
 
@@ -80,7 +86,7 @@ export async function runWdioStoryTests(
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
     return extracted.tests
-      .filter(({ name }) => matchesWdioTest(name ?? 'default', settings.test))
+      .filter(({ name }) => matchesWdioCase(entry.id, name ?? 'default', settings))
       .map(({ name, code }) => ({ entry, code, testName: name }));
   });
   if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
@@ -339,6 +345,13 @@ function isWorkerResult(value: unknown): value is WorkerResult {
 
 export function matchesWdioTest(name: string, pattern?: string): boolean {
   return pattern === undefined || path.matchesGlob(name, pattern);
+}
+
+export function matchesWdioCase(storyId: string, testName: string, options: DesktopStorybookWdioOptions): boolean {
+  return (
+    matchesWdioTest(testName, options.test) &&
+    (options.testCases === undefined || options.testCases.some((entry) => entry.storyId === storyId && entry.testName === testName))
+  );
 }
 
 function csfTestId(storyId: string, testName?: string): string {
