@@ -102,19 +102,20 @@ Perform this after the app pass, independently for Fabric and Paper. Use one
 supervisor path at a time; do not start `storybook driver --agent` and
 `desktop-test serve --agent` concurrently.
 
-For Paper, use `yarn storybook driver --macos --paper --agent` and
-`yarn storybook run --macos --paper`; omitting `--paper` defaults to Fabric.
-The generic `desktop-test` alternative uses its target's configured renderer.
-
-1. Start either `yarn storybook driver --macos --agent` or the Storybook target
-   via `yarn desktop-test --target macos serve --agent`. This owns Metro and
-   the Storybook channel; wait for its structured ready record, including the
-   private descriptor name. Do not print, copy to artifacts, or expose the
-   descriptor grant.
+1. Start either the Storybook driver or the Storybook target via
+   `yarn desktop-test --target macos serve --agent`. For the Storybook driver,
+   use `yarn storybook driver --macos --agent` for Fabric or
+   `yarn storybook driver --macos --paper --agent` for Paper. The desktop-test
+   target must likewise be configured for the selected renderer. This owns
+   Metro and the Storybook channel; wait for its structured ready record,
+   including the private descriptor name. Do not print, copy to artifacts, or
+   expose the descriptor grant.
 2. In a separate shell, launch the prepared app with
-   `yarn storybook run --macos`. Keep the driver service running. Confirm the
-   app connects to the instance from the driver's readiness record before
-   opening an MCP session.
+   `yarn storybook run --macos` for Fabric or
+   `yarn storybook run --macos --paper` for Paper. Use the same renderer
+   selection as the driver. Keep the driver service running. Confirm the app
+   connects to the instance from the driver's readiness record before opening
+   an MCP session.
 3. Connect `desktop-driver-mcp` using its default
    `agent-connection.json` descriptor. Confirm the adapter verified the native
    service identity before any grant is used. Use a real MCP client and the
