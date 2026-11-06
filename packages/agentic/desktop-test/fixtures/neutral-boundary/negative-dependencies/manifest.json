@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react": "1.0.0",
+    "react-native": "1.0.0",
+    "@storybook/react": "1.0.0"
+  }
+}

@@ -5,6 +5,7 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 
 import { useThemeBoundary } from './context';
 import { FlexThemeReference } from '../flex/flexThemeReference';
+import { flexCoolTheme } from '../themes/flex/flexCoolTheme';
 import { RootContext } from './rootContext';
 import { createRootInputController, RootInputContext } from './rootInputController';
 import { useRootInputProps } from './useRootInputProps';
@@ -20,7 +21,7 @@ export interface ThemedRootProps extends IViewProps, Pick<ThemeProviderProps, 'a
   theme?: ThemeProviderProps['theme'];
 }
 
-const defaultTheme = new FlexThemeReference();
+const defaultTheme = new FlexThemeReference({ base: flexCoolTheme });
 
 /**
  * A View that provides a theme and tracks input modality once per scene.

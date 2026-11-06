@@ -146,6 +146,7 @@ The [reference index](references/README.md) describes each package-owned guide.
 | `/wdio`         | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
 | `/client`       | Low-level typed W3C client                                                                |
 | `/authority`    | Grants, private connection descriptors, and macOS owner-validated storage                 |
+| `/native`       | Native-helper build, resolution, and verification without loading the package root        |
 | `/server`       | Embeddable remote end, session manager, and target registry                               |
 | `/agent`        | Bounded JSON-safe inspection, action, and evidence API                                    |
 | `/operations`   | Versioned agent operation catalog, executor, and result types                             |

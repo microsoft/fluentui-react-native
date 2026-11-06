@@ -100,13 +100,15 @@ process lives and reports to stderr. Service drain/expiry is still needed when
 the adapter cannot confirm deletion. `--help` and `--version` write to stderr so stdout
 carries only protocol.
 
-The adapter resolves the native helper with source builds disabled. The helper
-must already be cached by `desktop-driver resolve-driver` or `build-driver`, or
-named by `FURN_DESKTOP_DRIVER_HELPER_PATH` or
-`FURN_DESKTOP_DRIVER_INSTALL_ROOT`. The helper verifies that the process
-listening at the descriptor's URL is the one the supervisor described, on the
-same user and interactive session, before the grant leaves the adapter. The
-service then confirms its incarnation.
+The adapter imports helper resolution from the driver's `/native` entry and
+uses the driver's `/authority`, `/client`, and `/operations` entries rather
+than loading its root and WebdriverIO integration. It resolves the native
+helper with source builds disabled. The helper must already be cached by
+`desktop-driver resolve-driver` or `build-driver`, or named by
+`FURN_DESKTOP_DRIVER_HELPER_PATH` or `FURN_DESKTOP_DRIVER_INSTALL_ROOT`. The
+helper verifies that the process listening at the descriptor's URL is the one
+the supervisor described, on the same user and interactive session, before the
+grant leaves the adapter. The service then confirms its incarnation.
 
 ## Connecting lazily and reconnecting
 
