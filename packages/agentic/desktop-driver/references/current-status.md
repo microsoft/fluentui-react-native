@@ -261,3 +261,48 @@ Report p50/p90/max with sample count, retries, failures, skipped capabilities,
 and cleanup status. Compare equivalent assertions and complete scopes.
 Windows and Paper measurements need their own rows; do not extrapolate macOS
 Fabric numbers.
+
+### 2026-11-06: partial native evidence at `3c780cfd1bccaf510ece080e4be2b516c645989a`
+
+App: Agentic Components Storybook / ReactTestApp
+(`com.microsoft.fluentui.agenticstorybook`), macOS 27.2 arm64. The exact
+candidate helper was built with `yarn storybook build-driver --macos`; fresh
+nonprompting preflight was
+`yarn desktop-driver doctor --platform macos --permissions`. Accessibility,
+PostEvent, and ScreenCapture were all `true`; no prompt or permission change
+was made. The console was on and unlocked. The helper was arm64/release,
+ad-hoc signed, with designated requirement
+`cdhash H"0d2e7a81dfd4695b7fb84aa1b3242f5e1773e8b4"`. Host load was 3.25 /
+4.41 / 3.81 at 1/5/15 minutes. Detailed preflight output is kept privately as
+`f15-native-qualification-3c780cfd-20261106T0200/doctor.json`.
+
+| Renderer     | Command and selection                                                                                                                                                       | Outcome                                                                                                                                                                                                                                                           | Cleanup and artifact                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| macOS Paper  | `yarn storybook driver --macos --paper --agent`; app via `yarn storybook run --macos --paper`; MCP calls used the default descriptor. Driver run selected/executed 0 tests. | Attach-only discovery, capture, normal selection/reset, protected-args refusal, revocation, and 21-second channel check were reported. Same-port restart/rediscovery was partial because explicit old-session close was not retained.                             | Cleanup was reported; ports 21338/30029/45382 had no listeners and the lock/descriptor were absent at handoff. Paper process IDs were not retained for PID-level confirmation. Driver run: `apps/storybook/artifacts/desktop/a58d2fdd-5584-47f4-8747-5307607b4c0d/run.json`; private `paper-native-capture.png`.                                                                                                                                       |
+| macOS Fabric | `yarn storybook driver --macos --agent`; app via `yarn storybook run --macos`; MCP calls used the default descriptor. Driver run selected/executed 0 tests.                 | Attach-only discovery and capture passed. Selection/reset markers settled; F5 HTTP/WS bypass checks and 21,003 ms idle-channel check passed. The old-reference acceptance remains inconclusive; the physical-input attempt returned `physicalInputApplied:false`. | Fabric cleanup record reports the service owner exited, descriptor removed/grant revoked, and attached app preserved through service shutdown; ports had no listeners and the lock/descriptor were absent at handoff. Driver run: `apps/storybook/artifacts/desktop/c15a35b9-7b8d-4edb-adba-84e3cd5a3023/run.json`; app launch: `apps/storybook/artifacts/desktop/8fb9a576-cde8-470c-a8bb-a76b6d8fabc0/run.json`; private `fabric-native-capture.png`. |
+
+The capture operation succeeded for both renderers. Fabric's first capture
+caller attempt used the wrong argument shape and failed; the corrected
+documented `image` field succeeded. This caller error is retained and is not
+counted as a product failure. The separate Paper non-agent manifest smoke
+selected 319, executed/passed 308, failed 0, skipped 11, unsupported 0,
+incomplete 0, retries 0, flaky 0; it is not descriptor-path evidence. The
+three 319-count run artifacts do not all preserve renderer metadata, so only
+the Paper-attributed artifact is credited to Paper.
+
+Fabric's first two foreign-WebSocket bypass assertions failed, followed by a
+final attempt that passed with no observer-message delta; the cause is
+unknown. An intermediate protected-args record had a false unchanged-story
+assertion, while the final record was unchanged and value-free. The overall
+bypass/args results are therefore recorded as Partial in the harness matrix.
+The physical-input attempt returned `physicalInputApplied:false`; it was not
+retried.
+
+This is not full native qualification. Dispose-during-open, failed delete,
+ambiguous create, quarantine/recovery, failed-cleanup claim retention, faulted
+F3 survivor reconciliation, F4 cancellation/readiness/render/lost-context/
+secondary-window cases, and legacy-lane separation were not run. Physical
+input did not pass. Windows Fabric and Win32 Paper are Not run on this host.
+The F5 reference-generation fix at
+`2d8e8db001b64ebea85f0d6dce141f040fb5182d` is outside the tested SHA and needs
+a new native run; do not attribute the original inconclusive probe to it.
