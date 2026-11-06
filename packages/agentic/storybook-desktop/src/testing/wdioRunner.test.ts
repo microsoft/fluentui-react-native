@@ -43,7 +43,14 @@ test('executes isolated inline code and releases sessions after assertion failur
     smoke: {
       plans: ['fixture-button--pass', 'fixture-button--second'],
       callbacks: ['fixture-button--pass', 'fixture-button--second'],
-      selections: ['fixture-button--pass', 'fixture-button--pass', 'fixture-button--second', 'fixture-button--second'],
+      // The tests phase first waits for runtime readiness by selecting the manifest's first story.
+      selections: [
+        'fixture-button--crash',
+        'fixture-button--pass',
+        'fixture-button--pass',
+        'fixture-button--second',
+        'fixture-button--second',
+      ],
       status: 'passed',
     },
     smokeFailureLogged: true,
