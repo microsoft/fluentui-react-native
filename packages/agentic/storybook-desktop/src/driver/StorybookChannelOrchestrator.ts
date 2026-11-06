@@ -10,6 +10,7 @@ import type {
 import { StoryBridgeUnavailableError, StoryProviderError } from '@fluentui-react-native/desktop-driver/storybook';
 
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
+import { BridgeEpochJournal, type BridgeEpochRecovery } from './BridgeEpochJournal.js';
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 
 type ChannelMessage = { args?: unknown[]; type?: string };
@@ -32,6 +33,7 @@ export type StorybookChannelOrchestratorOptions = {
   serverUrl: string;
   timeoutMs?: number;
   errorOutput?: DesktopStorybookErrorOutput;
+  recovery?: BridgeEpochRecovery;
 };
 
 type PendingSelection = {
@@ -52,6 +54,9 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly usedRequests = new WeakMap<ChannelClient, Set<string>>();
   private readonly initializedClients = new WeakSet<ChannelClient>();
   private readonly fencedClients = new WeakSet<ChannelClient>();
+  private readonly recordedClients = new WeakSet<ChannelClient>();
+  private readonly recordings = new WeakMap<ChannelClient, Promise<void>>();
+  private readonly journal?: BridgeEpochJournal;
   private bridgeClient?: ChannelClient;
   private bridgeConnected = false;
   private needsRelaunch = false;
@@ -65,12 +70,20 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     serverUrl,
     timeoutMs = 30_000,
     errorOutput = process.stderr,
+    recovery,
   }: StorybookChannelOrchestratorOptions) {
     this.driverManifest = driverManifest;
     this.fetch = fetch;
     this.serverUrl = serverUrl.replace(/\/$/, '');
     this.timeoutMs = timeoutMs;
     this.errorOutput = errorOutput;
+    this.journal = recovery
+      ? new BridgeEpochJournal(recovery, {
+          endpoint: driverManifest.endpoint,
+          renderer: driverManifest.renderer,
+          targetId: driverManifest.targetId,
+        })
+      : undefined;
     channelServer.on('connection', (client) => this.attachClient(client));
     for (const client of channelServer.clients) this.attachClient(client);
   }
@@ -96,6 +109,8 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
 
   private async selectAndPrepareStory(request: StorySelectionRequest, context?: StoryProviderContext): Promise<StoryReadyResult> {
     this.requireStory(request.storyId);
+    if (context?.signal.aborted) throw new StoryProviderError('Story selection was cancelled before dispatch.', 'none');
+    if (this.journal) await this.checkBridgeRecovery();
     if (context?.signal.aborted) throw new StoryProviderError('Story selection was cancelled before dispatch.', 'none');
     const client = this.requireBridge();
     const epoch = this.epochs.get(client)!;
@@ -173,6 +188,8 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   async updateArgs(storyId: string, args: Readonly<Record<string, unknown>>, context?: StoryProviderContext): Promise<void> {
     if (context?.signal.aborted) throw new StoryProviderError('Story args update was cancelled before dispatch.', 'none');
     this.requireStory(storyId);
+    if (this.journal) await this.checkBridgeRecovery();
+    if (context?.signal.aborted) throw new StoryProviderError('Story args update was cancelled before dispatch.', 'none');
     const client = this.requireBridge();
     this.currentStory = null;
     client.send(JSON.stringify({ type: 'updateStoryArgs', args: [{ storyId, updatedArgs: args }] }));
@@ -243,11 +260,60 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     )
       return;
     this.bridgeClient = client;
+    if (this.journal) this.recordBridge(client);
     this.initializeBridge(client);
   }
 
+  private recordBridge(client: ChannelClient): Promise<void> {
+    const existing = this.recordings.get(client);
+    if (existing) return existing;
+    const epoch = this.epochs.get(client);
+    if (!this.journal || !epoch) return Promise.resolve();
+    const recording = this.journal.record(epoch).then(() => {
+      this.recordedClients.add(client);
+      this.initializeBridge(client);
+    });
+    this.recordings.set(client, recording);
+    void recording.catch((error: unknown) => {
+      this.recordings.delete(client);
+      writeDesktopStorybookFailure('recording the authenticated bridge epoch', error, this.errorOutput);
+    });
+    return recording;
+  }
+
+  private async checkBridgeRecovery(): Promise<void> {
+    const client = this.bridgeClient;
+    if (client && client.readyState === 1 && !this.fencedClients.has(client)) {
+      try {
+        await this.recordBridge(client);
+      } catch {
+        // The recording path reports the storage/identity failure; it must never enable dispatch.
+        throw new StoryBridgeUnavailableError(this.driverManifest.endpoint, this.driverManifest.renderer, 'bridge-unavailable');
+      }
+      return;
+    }
+    let relaunch = false;
+    try {
+      relaunch = await this.journal!.requiresRelaunch();
+    } catch (error) {
+      writeDesktopStorybookFailure('checking the authenticated bridge incarnation', error, this.errorOutput);
+    }
+    throw new StoryBridgeUnavailableError(
+      this.driverManifest.endpoint,
+      this.driverManifest.renderer,
+      relaunch ? 'relaunch-required' : 'bridge-unavailable',
+    );
+  }
+
   private initializeBridge(client: ChannelClient): void {
-    if (client !== this.bridgeClient || !this.initializedClients.has(client) || this.pending.size || this.fencedClients.has(client)) return;
+    if (
+      client !== this.bridgeClient ||
+      !this.initializedClients.has(client) ||
+      this.pending.size ||
+      this.fencedClients.has(client) ||
+      (this.journal && !this.recordedClients.has(client))
+    )
+      return;
     this.bridgeConnected = true;
     this.needsRelaunch = false;
   }

@@ -8,6 +8,7 @@ import { matchesStoryMarker, type StorySelectionRequest } from '@fluentui-react-
 
 import type { DesktopStorybookDriverManifest } from './driverManifest.js';
 import { StorybookChannelOrchestrator } from './StorybookChannelOrchestrator.js';
+import type { BridgeEpochRecovery } from './BridgeEpochJournal.js';
 
 class Client extends EventEmitter {
   readyState = 1;
@@ -91,21 +92,178 @@ const manifest: DesktopStorybookDriverManifest = {
   testIDPrefix: 'storybook',
 };
 
-function setup(fetch: typeof globalThis.fetch = jest.fn(async () => new Response('{}')), timeoutMs = 100) {
+function setup(
+  fetch: typeof globalThis.fetch = jest.fn(async () => new Response('{}')),
+  timeoutMs = 100,
+  recovery?: BridgeEpochRecovery,
+  renderer: 'fabric' | 'paper' = 'fabric',
+) {
   const server = Object.assign(new EventEmitter(), { clients: new Set<Client>() });
   const client = new Client();
   server.clients.add(client);
   const errorOutput = { write: jest.fn() };
   const orchestrator = new StorybookChannelOrchestrator({
     channelServer: server,
-    driverManifest: manifest,
+    driverManifest: { ...manifest, renderer },
     errorOutput,
     fetch,
     serverUrl: 'https://localhost',
     timeoutMs,
+    recovery,
   });
   return { client, errorOutput, fetch, orchestrator, server };
 }
+
+describe('durable authenticated bridge epochs', () => {
+  const application = { processId: 123, processStartedAt: '2026-11-06T00:00:00.000Z' };
+  function recovery() {
+    const records = new Map<string, string>();
+    return {
+      records,
+      resolveApplication: jest.fn(async () => application),
+      probeApplication: jest.fn<
+        ReturnType<NonNullable<BridgeEpochRecovery['probeApplication']>>,
+        Parameters<NonNullable<BridgeEpochRecovery['probeApplication']>>
+      >(async () => 'running'),
+      storage: {
+        read: async (name: string) => records.get(name),
+        publish: async (name: string, value: string) => {
+          if (records.has(name)) throw new Error('Already published');
+          records.set(name, value);
+        },
+        remove: async (name: string, value: string) => records.get(name) === value && records.delete(name),
+      },
+    };
+  }
+  async function authenticate(state: ReturnType<typeof setup>, store: ReturnType<typeof recovery>) {
+    state.client.authenticate();
+    for (let attempt = 0; attempt < 20 && !store.records.has('bridge-epoch.json'); attempt++)
+      await new Promise<void>((resolve) => setImmediate(resolve));
+    expect(store.records.has('bridge-epoch.json')).toBe(true);
+  }
+  test.each(['paper', 'fabric'] as const)(
+    'initial absence and cold start stay unavailable; %s restart requires relaunch',
+    async (renderer) => {
+      const store = recovery();
+      const before = setup(undefined, 100, store, renderer);
+      await expect(before.orchestrator.selectStory(request)).rejects.toMatchObject({
+        data: { reason: 'bridge-unavailable', renderer },
+        effect: 'none',
+      });
+      expect(store.probeApplication).not.toHaveBeenCalled();
+      await authenticate(before, store);
+      expect(JSON.parse(store.records.get('bridge-epoch.json')!)).toMatchObject({
+        application,
+        endpoint: manifest.endpoint,
+        epoch: before.client.epoch,
+        renderer,
+        targetId: manifest.targetId,
+      });
+      before.client.emit('close');
+      const restarted = setup(undefined, 100, store, renderer);
+      await expect(restarted.orchestrator.selectStory(request)).rejects.toMatchObject({
+        data: { reason: 'relaunch-required', renderer },
+        effect: 'none',
+      });
+      expect(store.probeApplication).toHaveBeenCalledWith(application);
+      expect(restarted.fetch).not.toHaveBeenCalled();
+    },
+  );
+  test.each(['exited', 'replaced', 'unknown', 'failed'] as const)('%s incarnation never requires relaunch', async (mode) => {
+    const store = recovery();
+    await authenticate(setup(undefined, 100, store), store);
+    if (mode === 'exited') store.probeApplication.mockResolvedValue('exited');
+    if (mode === 'unknown') store.probeApplication.mockResolvedValue('unknown');
+    if (mode === 'failed') store.probeApplication.mockRejectedValue(new Error('Probe failed'));
+    if (mode === 'replaced') store.resolveApplication.mockResolvedValue({ ...application, processStartedAt: '2026-11-06T01:00:00.000Z' });
+    const restarted = setup(undefined, 100, store);
+    await expect(restarted.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    expect(store.records.size).toBe(mode === 'exited' || mode === 'replaced' ? 0 : 1);
+    if (mode === 'failed') expect(restarted.errorOutput.write).toHaveBeenCalled();
+    expect(restarted.fetch).not.toHaveBeenCalled();
+  });
+  test('another target namespace and renderer are ignored; reauthentication supersedes the epoch', async () => {
+    const store = recovery();
+    const first = setup(undefined, 100, store);
+    await authenticate(first, store);
+    const contents = store.records.get('bridge-epoch.json')!;
+    for (const change of [{ targetId: 'another-target' }, { endpoint: 'macos' }, { renderer: 'paper' }]) {
+      store.records.set('bridge-epoch.json', JSON.stringify({ ...JSON.parse(contents), ...change }));
+      await expect(setup(undefined, 100, store).orchestrator.selectStory(request)).rejects.toMatchObject({
+        data: { reason: 'bridge-unavailable' },
+        effect: 'none',
+      });
+    }
+    expect(store.probeApplication).not.toHaveBeenCalled();
+    store.records.set('bridge-epoch.json', contents);
+    const next = setup(undefined, 100, store);
+    next.client.authenticate();
+    for (let attempt = 0; attempt < 20 && JSON.parse(store.records.get('bridge-epoch.json')!).epoch !== next.client.epoch; attempt++)
+      await new Promise<void>((resolve) => setImmediate(resolve));
+    expect(JSON.parse(store.records.get('bridge-epoch.json')!).epoch).toBe(next.client.epoch);
+    expect(next.client.epoch).not.toBe(first.client.epoch);
+  });
+  test('storage and verified-identity failures never enable dispatch', async () => {
+    const store = recovery();
+    store.resolveApplication.mockRejectedValue(new Error('Identity unavailable'));
+    const state = setup(undefined, 100, store);
+    state.client.authenticate();
+    await expect(state.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    expect(store.records.size).toBe(0);
+    expect(state.fetch).not.toHaveBeenCalled();
+    expect(state.errorOutput.write).toHaveBeenCalled();
+  });
+  test('a published epoch enables selection while cancellation during identity verification never dispatches', async () => {
+    const store = recovery();
+    const state = setup(undefined, 100, store);
+    await authenticate(state, store);
+    const selection = state.orchestrator.selectStory(request);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    state.client.ready();
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: state.client.epoch });
+
+    let resolveIdentity!: (value: typeof application) => void;
+    store.resolveApplication.mockImplementationOnce(() => new Promise((resolve) => (resolveIdentity = resolve)));
+    const next = setup(undefined, 100, store);
+    next.client.authenticate();
+    const controller = new AbortController();
+    const cancelled = next.orchestrator.selectStory(request, { signal: controller.signal, lifetimeId: 'cancelled' });
+    controller.abort();
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    resolveIdentity(application);
+    await expect(cancelled).rejects.toHaveProperty('effect', 'none');
+    expect(next.fetch).not.toHaveBeenCalled();
+  });
+  test('a failed publication and corrupt stored record are logged without dispatch', async () => {
+    const store = recovery();
+    store.storage.publish = async () => {
+      throw new Error('Storage write failed');
+    };
+    const state = setup(undefined, 100, store);
+    state.client.authenticate();
+    await expect(state.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    expect(state.errorOutput.write).toHaveBeenCalled();
+    expect(state.fetch).not.toHaveBeenCalled();
+    store.records.set('bridge-epoch.json', '{"kind":"bridge-epoch"}');
+    const restarted = setup(undefined, 100, store);
+    await expect(restarted.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    expect(restarted.errorOutput.write).toHaveBeenCalled();
+    expect(store.probeApplication).not.toHaveBeenCalled();
+    expect(restarted.fetch).not.toHaveBeenCalled();
+  });
+});
 
 describe('StorybookChannelOrchestrator epochs and lifetime', () => {
   test('absent and hello-only bridges reject before dispatch with no effect', async () => {

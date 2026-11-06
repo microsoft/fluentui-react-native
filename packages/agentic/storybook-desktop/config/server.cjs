@@ -15,9 +15,10 @@ async function startDesktopStorybookServer({
 
   const requireFromProject = createRequire(path.join(projectRoot, 'package.json'));
   const { createChannelServer } = requireFromProject('@storybook/react-native/node');
-  const [{ startNativeDesktopService }, { createDesktopReportSession }] = await Promise.all([
+  const [{ startNativeDesktopService }, { createDesktopReportSession }, { NativeDesktopHost }] = await Promise.all([
     import('@fluentui-react-native/desktop-test/driver-service'),
     import('@fluentui-react-native/desktop-test/reporting'),
+    import('@fluentui-react-native/desktop-driver'),
   ]);
   const report = await createDesktopReportSession({ artifactsRoot: path.join(projectRoot, 'artifacts', 'desktop'), kind: 'lifecycle' });
   let server;
@@ -155,15 +156,34 @@ async function startDesktopStorybookServer({
                 addSecret: (secret) => report.reporter.addSecret(secret),
               }
             : {}),
-          target: {
-            ...target,
+          target,
+          createTarget: async (_targetHost, recovery) => ({
             storyOrchestrator: createChannelOrchestrator({
               channelServer: server,
               driverManifest,
               serverUrl: loopbackUrl(host, port),
               StorybookChannelOrchestrator,
+              recovery: {
+                ...recovery,
+                resolveApplication: async () => {
+                  // A separate helper cannot steal window/element records from an active session's lease.
+                  const identityHost = new NativeDesktopHost({
+                    application: agent?.application ?? driverManifest.application,
+                    artifact: driverManifest.nativeDriver,
+                    endpoint: driverManifest.endpoint,
+                  });
+                  try {
+                    const lease = await identityHost.attach({ ...target, host: identityHost }, AbortSignal.timeout(10_000));
+                    if (lease.processId === undefined || lease.processStartedAt === undefined)
+                      throw new Error('The Storybook application has no verified process incarnation.');
+                    return { processId: lease.processId, processStartedAt: lease.processStartedAt };
+                  } finally {
+                    await identityHost.dispose();
+                  }
+                },
+              },
             }),
-          },
+          }),
         });
       }
       if (agent) {
@@ -185,11 +205,12 @@ async function startDesktopStorybookServer({
   }
 }
 
-function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, StorybookChannelOrchestrator }) {
+function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, StorybookChannelOrchestrator, recovery }) {
   return new StorybookChannelOrchestrator({
     channelServer,
     driverManifest,
     serverUrl,
+    recovery,
   });
 }
 

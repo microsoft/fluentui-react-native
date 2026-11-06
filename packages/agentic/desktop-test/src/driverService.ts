@@ -31,7 +31,10 @@ export type DesktopServiceOptions = {
   signal?: AbortSignal;
   guard?: <T>(work: Promise<T>) => Promise<T>;
   /** Optional application-specific target context; native authority remains in the driver. */
-  createTarget?: (host: DesktopHost) => Promise<Pick<DesktopTarget, 'storyOrchestrator' | 'storyRootTestId'> | undefined>;
+  createTarget?: (
+    host: DesktopHost,
+    recovery: { storage: PrivateStorage; probeApplication?: ProbeApplication },
+  ) => Promise<Pick<DesktopTarget, 'storyOrchestrator' | 'storyRootTestId'> | undefined>;
 };
 
 export type DesktopService = DesktopDriverServer & { readonly agentDescriptor?: string };
@@ -65,8 +68,8 @@ export async function startDesktopService(
   let server: DesktopDriverServer | undefined;
   let publication: DesktopAgentPublication | undefined;
   try {
-    const target = { ...options.target, ...(await options.createTarget?.(desktopHost)), host: desktopHost };
     const recovery = await resolveRecovery(options, artifact);
+    const target = { ...options.target, ...(await options.createTarget?.(desktopHost, recovery)), host: desktopHost };
     options.signal?.throwIfAborted();
     server = await createDesktopDriverServer({
       ...(authority ? { authority } : {}),
