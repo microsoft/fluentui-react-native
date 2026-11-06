@@ -1,5 +1,6 @@
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
 import { deadline } from './commands.js';
+import type { DesktopServiceReady } from './processControl.js';
 import type { DesktopReportWriter } from './reporting/collector.js';
 import { orderDesktopResourceContributions, validateDesktopResourcePlan, validateDesktopResourceServiceReady } from './resources.js';
 import type {
@@ -22,20 +23,6 @@ type ResourceEntry = {
   };
   dispose?: () => Promise<void>;
   disposalPromise?: Promise<void>;
-};
-
-type DesktopServiceReadyExpectation = Readonly<{
-  tier: 'service-ready';
-  service: string;
-  descriptor?: string;
-}>;
-
-type ProcessReadinessCommand = RunningDesktopCommand & {
-  waitForReadiness?: (
-    expected: DesktopServiceReadyExpectation,
-    timeoutMs?: number,
-    signal?: AbortSignal,
-  ) => Promise<DesktopResourceServiceReadyRecord>;
 };
 
 export class DesktopStopRequested extends Error {
@@ -224,18 +211,14 @@ export class DesktopServiceScope {
     );
   }
 
-  async readyProcess(
-    id: string,
-    expected: DesktopServiceReadyExpectation,
-    timeoutMs = 120_000,
-  ): Promise<DesktopResourceServiceReadyRecord> {
+  async readyProcess(id: string, expected: DesktopServiceReady, timeoutMs = 120_000): Promise<DesktopResourceServiceReadyRecord> {
     validateServiceReadyExpectation(expected);
     if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0) throw new TypeError('Invalid service readiness deadline.');
     const service = this.running.find((entry) => entry.id === id);
     if (!service) throw new Error(`Cannot wait for process readiness from unregistered service "${id}".`);
     const resource = this.resources.find((entry) => entry.key === id);
     if (!resource) throw new Error(`Service "${id}" has no registered resource record.`);
-    const waitForReadiness = (service.command as ProcessReadinessCommand).waitForReadiness;
+    const waitForReadiness = service.command.waitForReadiness;
     if (typeof waitForReadiness !== 'function') {
       resource.record.readiness = 'failed';
       this.publish(resource);
@@ -363,7 +346,7 @@ export class DesktopServiceScope {
   }
 }
 
-function validateServiceReadyExpectation(value: unknown): asserts value is DesktopServiceReadyExpectation {
+function validateServiceReadyExpectation(value: unknown): asserts value is DesktopServiceReady {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new TypeError('Service readiness expectation must be an object.');
   }
