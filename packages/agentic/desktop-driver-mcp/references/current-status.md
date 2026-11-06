@@ -157,3 +157,46 @@ ports had no listeners. The Fabric cleanup record reports owner exit,
 descriptor removal, grant revocation, and attached-app preservation. Paper
 cleanup was reported, but its process IDs were not retained for independent
 PID-level confirmation.
+
+## 2026-11-06 combined-candidate descriptor evidence at `a19fd3e1e7b3f1f443a241b1571cb029162f4ef2`
+
+App: Agentic Components Storybook / ReactTestApp,
+`com.microsoft.fluentui.agenticstorybook`; macOS 27.2 arm64. The helper was
+rebuilt for this exact source and the fresh nonprompting permission preflight
+reported Accessibility, PostEvent, and ScreenCapture granted. The MCP SDK
+stdio client consumed the default private `agent-connection.json`; no
+descriptor grants, private descriptor data, or story-args values are retained.
+The descriptor-path commands were `yarn storybook driver --macos --agent`
+and `yarn storybook driver --macos --paper --agent`, paired with
+`yarn storybook run --macos` and `yarn storybook run --macos --paper`.
+Manual MCP operation sequences are not suite selections; companion driver
+run.json counts were 0 selected/0 executed.
+
+| Renderer                     | Sanitized operation sequence and application outcomes                                                                                                                                                                                                                                                                                                                 | Result and locator                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fabric                       | `desktop_session.status` → `desktop_session.open(launch:false)` → `desktop_story.story(select)` → `desktop_observe.find` → authorized `desktop_story.story(select)` → `desktop_observe.observe(within)` → authorized `desktop_story.story(reset)` → old `observe(within)` → fresh `find` → fresh `observe(within)` → old `observe(within)` → `desktop_session.close`. | Passed. Same driver session/incarnation 1 throughout; preview-element aliases `element-ref-1` and `element-ref-2` were distinct. Select marker settled at region 2 and reset at region 3. Old ref returned `stale element reference` / `ref-region-changed` immediately after select and reset and after fresh find; fresh ref worked. Private sanitized record: `fabric-reference-sequence-retry.json`. |
+| Paper                        | Same operation sequence as Fabric.                                                                                                                                                                                                                                                                                                                                    | Passed with the same identity, marker, region, stale-old-ref, and fresh-ref outcomes. Private sanitized record: `paper-reference-sequence.json`.                                                                                                                                                                                                                                                         |
+| Fabric idle channel          | `desktop_session.status` → `open` → idle 21,002 ms → `status` → `close`.                                                                                                                                                                                                                                                                                              | Passed; status and close succeeded after idle. Private record: `fabric-idle-channel-21s.json`. No equivalent Paper interval on this SHA.                                                                                                                                                                                                                                                                 |
+| Fabric same-port replacement | Old client: `desktop_session.status` → `open` → `desktop_observe.find` (0 matches) → service stopped/replaced on the same ports → old client `desktop_session.status` → `desktop_session.close`.                                                                                                                                                                      | Failed rediscovery expectation: post-replacement status returned `mcpIsError:true`, `error:"adapter"`, `reason:"service-unavailable"`; close then succeeded. No old-reference operation was possible because find returned 0 matches, and no mutation was sent. Sanitized record: `fabric-same-port-replacement-final.json`.                                                                             |
+| Fabric physical input        | `desktop_act` physical click was sent once after one corrected request shape.                                                                                                                                                                                                                                                                                         | Partial/inconclusive: MCP returned success and sequence completed, but the client parser did not retain `result.steps[0].act` mechanism/disposition. Not a physical-input pass and not repeated. Private record: `fabric-physical-input-retry-corrected.json`.                                                                                                                                           |
+
+Separate non-agent manifest-backed smoke passed 211/211 callbacks in both
+renderers, with 0 failed, skipped, unsupported, incomplete, retries, or flaky
+results. These runs are the legacy lane, not protected-ingress evidence, and
+the recorded artifacts do not establish the requested one-session/no-HTTP-
+fallback invariant. Fabric artifact:
+`apps/storybook/artifacts/desktop/a2475e8d-7ea9-465f-8461-b8f115cfcee5/run.json`;
+Paper artifact:
+`apps/storybook/artifacts/desktop/87f0452f-5fd7-48eb-8494-a63202842521/run.json`.
+
+The initial Fabric service replacement attempt encountered a retained
+`interactive.lock`; it was not removed until its exact recorded owner exited
+and the lock showed no resources or unresolved effects. A subsequent launch
+attempt was correctly refused while that claim remained; after verified
+cleanup, the replacement service started normally. Final cleanup verified
+owned app and service PIDs exited, ports 21338/30029/45382 had no listeners,
+the descriptor and lock were absent, and no external app was stopped.
+Anonymous/foreign HTTP and WS bypass, protected args refusal, grant revocation,
+dispose-during-open, failed delete, ambiguous create, resource invalidation
+beyond preview elements, quarantine/recovery, F3/F4 injections, and Paper
+same-port/idle/physical-input cases are Not run on this exact SHA.
