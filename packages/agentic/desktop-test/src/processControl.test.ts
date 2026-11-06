@@ -26,8 +26,16 @@ describe('owned process lifelines', () => {
     root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-process-contract-'));
   });
   afterEach(async () => {
-    for (const child of children.splice(0)) if (child.exitCode === null && child.signalCode === null) child.kill('SIGKILL');
-    fs.rmSync(root, { force: true, recursive: true });
+    const exits: Promise<unknown>[] = [];
+    for (const child of children.splice(0)) {
+      if (child.exitCode === null && child.signalCode === null) {
+        exits.push(once(child, 'exit'));
+        child.kill('SIGKILL');
+      }
+    }
+    await Promise.all(exits);
+    // Windows can briefly hold files of just-terminated processes.
+    fs.rmSync(root, { force: true, recursive: true, maxRetries: 20, retryDelay: 100 });
   });
 
   test('correlates service readiness and waits for explicit descriptor withdrawal', async () => {
