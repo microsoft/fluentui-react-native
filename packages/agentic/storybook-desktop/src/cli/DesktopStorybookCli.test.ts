@@ -369,8 +369,6 @@ describe('DesktopStorybookCli', () => {
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
-    const resourceObserver = jest.fn();
-    services.setResourceObserver(resourceObserver);
     const output = { write: jest.fn() };
     const onReady = jest.fn(() => expect(output.write).toHaveBeenCalledTimes(1));
     const fetch: typeof globalThis.fetch = async () => {
@@ -507,6 +505,8 @@ describe('DesktopStorybookCli', () => {
     const readyPath = path.join(generated, 'agent-ready.macos.json');
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
+    const resourceObserver = jest.fn();
+    services.setResourceObserver(resourceObserver);
     const written: string[] = [];
     const maintained: string[] = [];
     let published = false;
