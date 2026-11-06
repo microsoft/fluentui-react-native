@@ -45,6 +45,11 @@
       "import": "./lib/commands.js",
       "default": "./src/commands.ts"
     },
+    "./driver-service": {
+      "types": "./lib/driverService.d.ts",
+      "import": "./lib/driverService.js",
+      "default": "./src/driverService.ts"
+    },
     "./wdio": {
       "types": "./lib/wdio/index.d.ts",
       "import": "./lib/wdio/index.js",

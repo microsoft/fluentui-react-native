@@ -4,6 +4,7 @@ import { resolveNativeDesktopDriver, verifyNativeDriverArtifact } from '@fluentu
 import { describeOperations } from '@fluentui-react-native/desktop-driver/operations';
 import { connectWithDescriptor } from '@fluentui-react-native/desktop-driver-mcp';
 import { defineDesktopConfig } from '@fluentui-react-native/desktop-test/config';
+import { startDesktopService, startNativeDesktopService } from '@fluentui-react-native/desktop-test/driver-service';
 
 const catalog = describeOperations({ accessibilityActions: false, boundedObservation: false });
 
@@ -14,6 +15,8 @@ if (
   typeof verifyNativeDriverArtifact !== 'function' ||
   catalog.schemaVersion !== 1 ||
   typeof defineDesktopConfig !== 'function' ||
+  typeof startDesktopService !== 'function' ||
+  typeof startNativeDesktopService !== 'function' ||
   typeof connectWithDescriptor !== 'function'
 ) {
   throw new Error('Standalone desktop consumer did not load its declared package APIs.');

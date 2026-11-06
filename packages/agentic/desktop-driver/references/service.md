@@ -336,6 +336,11 @@ does and does not cover.
 
 ## Persist quarantines
 
+The generic desktop-test supervisor and Storybook's native channel child use
+the shared `@fluentui-react-native/desktop-test/driver-service` factory, which
+wires private storage and exact application-incarnation probes by default.
+The following explicit options are required only for direct driver embedders.
+
 Pass `recovery` so a target quarantined by an unsettled mutation stays
 quarantined across a service restart:
 
@@ -362,6 +367,9 @@ await service.recoverTarget('contoso-macos', { evidence: 'operator', quarantineI
   `evidence: 'operator'` records the operator's own judgment.
 - Without a probe, an attached application's quarantine lifts only through
   `recoverTarget`.
+- Unreadable storage prevents startup. Any corrupt record, including a corrupt
+  sibling of an otherwise valid record, quarantines without trusting application
+  identity; an exit probe cannot clear it.
 - On Windows, pass `createWindowsApplicationProbe({ artifact })` and
   `await createWindowsPrivateStorage({ artifact, root })` with the verified
   Windows native driver artifact.

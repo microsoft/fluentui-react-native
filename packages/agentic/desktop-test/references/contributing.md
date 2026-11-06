@@ -9,7 +9,9 @@ owner_paths:
 
 Configuration and host adapters live in `src/config.ts` and `src/adapters.ts`;
 CLI stages are composed in `src/cli.ts`; process ownership is in
-`src/supervisor.ts`; reports are implemented in `src/reporting/`; and WDIO
+`src/supervisor.ts`; shared native service, recovery, authority, descriptor and
+settled shutdown composition lives in the real `src/driverService.ts` module
+(also used by the Storybook channel child); reports are implemented in `src/reporting/`; and WDIO
 session wiring is in `src/wdio/`.
 
 Add contract coverage for schema, lifecycle, reporting protocol, and failure
