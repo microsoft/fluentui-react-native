@@ -11,6 +11,7 @@ import type { ThemeState } from '../flex/themeState.types';
 import type { ResolvedThemeAppearance, ThemeAppearanceSource, ThemeAppearanceSourceSnapshot } from '../types/appearance.types';
 import { ThemeContext } from './context';
 import { FlexThemeReference } from '../flex/flexThemeReference';
+import { flexCoolTheme } from '../themes/flex/flexCoolTheme';
 import { useRootSettings } from './rootContext';
 import type { RootSettings } from './rootContext';
 import { ThemedRoot } from './ThemedRoot';
@@ -115,6 +116,19 @@ describe('ThemedRoot', () => {
     expect(themes).toHaveLength(1);
     expect(keyEvent.preventDefault).not.toHaveBeenCalled();
     expect(keyEvent.stopPropagation).not.toHaveBeenCalled();
+  });
+
+  it('uses the cool palette when no theme is specified, even with a warm tone request', () => {
+    const themes: ThemeState[] = [];
+    render(
+      <ThemedRoot appearance={{ colorScheme: 'dark', colorTone: 'warm' }}>
+        <Probe themes={themes} />
+      </ThemedRoot>,
+    );
+
+    const state = themes[0];
+    expect(state.appearance.colorTone).toBe('warm');
+    expect(state.tokens).toEqual(new FlexThemeReference({ base: flexCoolTheme }).resolveFlexTokens(state.appearance));
   });
 
   it('updates modality before invoking caller handlers and preserves responder ownership', () => {

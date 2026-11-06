@@ -2,7 +2,10 @@
 
 `@fluentui-react-native/desktop-test` provides application-neutral configuration,
 native service composition, process lifetimes, standalone WDIO/Jasmine suites,
-and reporting for macOS, Windows, and Win32. It uses
+and reporting for macOS, Windows, and Win32. Authorized, bounded persisted
+run/status/artifact reads are available from the direct
+`./reporting/run-queries` entry; see [reporting](references/reporting.md).
+It uses
 `@fluentui-react-native/desktop-driver`; Storybook support is an optional
 integration in `@fluentui-react-native/storybook-desktop`.
 
@@ -65,6 +68,9 @@ when working on the package.
   artifact directory.
 - Native helpers are explicitly built or provisioned; normal test runs use
   verified prebuilt helpers only.
+- Generic and Storybook native services share one factory with durable
+  quarantine storage and exact application-exit probes. Restart does not clear
+  uncertain effects; see [lifecycle and recovery](references/lifecycle.md).
 
 macOS RN Test App users must bundle before `prep`, then build: CocoaPods embeds
 only resources that exist during `pod install`. Renderer changes require a new

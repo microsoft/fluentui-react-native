@@ -323,7 +323,17 @@ const client = createDesktopDriverClient({ grant: agent.token, url: service.url 
   session that does not exist.
 - `/status` lists only the grant's targets and reports
   `service.incarnation`, which changes whenever the service restarts.
-- `authority.revoke(grant.id)` closes the sessions that grant owns.
+- `authority.revoke(grant.id)` invalidates the grant and its descendants
+  immediately. Await `authority.revokeAndDrain(grant.id)` to confirm their
+  sessions and in-flight acquisitions have settled and closed; failed drains
+  remain observable and retryable.
+- Scopes default to `driver-control`; `declared-workload` and
+  `operator-recovery` do not imply driver access or add HTTP management routes.
+  `authority.delegate(parent.id, request)` rejects target/scope expansion.
+  `client.delegateConnection()` returns a separate driver-only client;
+  `child.revokeConnection()` awaits self-cleanup and remains retryable with
+  terminal-only proof after revocation. See [security](security.md) for the
+  eight-edge depth and 4096-grant service-lifetime limits.
 - A grant's session closes after `idleSessionTimeoutMs` without a request for
   it, ten minutes by default. Every request for the session renews it, and a
   running request is never interrupted by expiry. Pass `0` to disable expiry.
@@ -335,6 +345,11 @@ Read [the security model](security.md#protected-service) for what the boundary
 does and does not cover.
 
 ## Persist quarantines
+
+The generic desktop-test supervisor and Storybook's native channel child use
+the shared `@fluentui-react-native/desktop-test/driver-service` factory, which
+wires private storage and exact application-incarnation probes by default.
+The following explicit options are required only for direct driver embedders.
 
 Pass `recovery` so a target quarantined by an unsettled mutation stays
 quarantined across a service restart:
@@ -362,6 +377,9 @@ await service.recoverTarget('contoso-macos', { evidence: 'operator', quarantineI
   `evidence: 'operator'` records the operator's own judgment.
 - Without a probe, an attached application's quarantine lifts only through
   `recoverTarget`.
+- Unreadable storage prevents startup. Any corrupt record, including a corrupt
+  sibling of an otherwise valid record, quarantines without trusting application
+  identity; an exit probe cannot clear it.
 - On Windows, pass `createWindowsApplicationProbe({ artifact })` and
   `await createWindowsPrivateStorage({ artifact, root })` with the verified
   Windows native driver artifact.

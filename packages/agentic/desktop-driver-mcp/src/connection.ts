@@ -1,4 +1,4 @@
-import { resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
+import { resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver/native';
 import {
   createMacOSPrivateStorage,
   createMacOSServiceVerifier,

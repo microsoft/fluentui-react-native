@@ -23,6 +23,13 @@ four things before an agent connects:
    connection descriptor holding the service URL, the grant, and that identity.
 4. Removes the descriptor after the service drains.
 
+The descriptor grant defaults to `driver-control`. After verification, each MCP
+controller uses `delegateConnection()` to obtain a distinct driver-only child
+client. The child credential never enters tool results or diagnostics. Older or
+unprotected services without the delegation route are explicitly unsupported by
+this adapter, not a fallback to shared session authority. The generic driver's
+unprotected mode is unchanged.
+
 The descriptor format, storage, and verifier contracts belong to
 `@fluentui-react-native/desktop-driver`
 (its service reference, "Private connection descriptors").
@@ -86,46 +93,62 @@ desktop-driver-mcp [--descriptor <name>] [--root <path>]
 | `--root <path>`       | The private storage root, when the supervisor published somewhere other than the platform default. It must be absolute and canonical. |
 
 The adapter speaks MCP over stdio until the client closes stdin, then stops
-admissions and attempts to delete its session, including late acquisition.
+admissions and attempts to revoke and drain its child, including late or
+ambiguous acquisitions.
 Cleanup waits at most ten seconds; an unresolved attempt continues while the
 process lives and reports to stderr. Service drain/expiry is still needed when
 the adapter cannot confirm deletion. `--help` and `--version` write to stderr so stdout
 carries only protocol.
 
-The adapter resolves the native helper with source builds disabled. The helper
-must already be cached by `desktop-driver resolve-driver` or `build-driver`, or
-named by `FURN_DESKTOP_DRIVER_HELPER_PATH` or
-`FURN_DESKTOP_DRIVER_INSTALL_ROOT`. The helper verifies that the process
-listening at the descriptor's URL is the one the supervisor described, on the
-same user and interactive session, before the grant leaves the adapter. The
-service then confirms its incarnation.
+The adapter imports helper resolution from the driver's `/native` entry and
+uses the driver's `/authority`, `/client`, and `/operations` entries rather
+than loading its root and WebdriverIO integration. It resolves the native
+helper with source builds disabled. The helper must already be cached by
+`desktop-driver resolve-driver` or `build-driver`, or named by
+`FURN_DESKTOP_DRIVER_HELPER_PATH` or `FURN_DESKTOP_DRIVER_INSTALL_ROOT`. The
+helper verifies that the process listening at the descriptor's URL is the one
+the supervisor described, on the same user and interactive session, before the
+grant leaves the adapter. The service then confirms its incarnation.
 
 ## Connecting lazily and reconnecting
 
 The adapter connects on the first tool call, not at startup, so it can start
 before the service. When the service cannot be reached, a tool returns the
-fixed reason `service-unavailable`; the cause, which may name local paths, goes
-to stderr. Transport failure invalidates the cached connection, **not** known
+fixed reason `service-unavailable`; stderr reports a fixed diagnostic without
+echoing discovery errors, which may contain paths or credentials.
+Transport failure invalidates the cached connection, **not** known
 session cleanup responsibility. The next call re-verifies discovery. The same
-verified service incarnation and non-secret grant principal can rebind the
-known session. A replacement service or an authoritative invalid/revoked
+verified service incarnation and descriptor principal reuse the controller's
+existing private child client, never another connection's child. This retains
+known-session cleanup responsibility rather than resuming across connections.
+A replacement service or an authoritative invalid/revoked
 session invalidates old references; open a new session and observe again.
 Nothing automatically replays the failed operation.
 
 Operations, acquisition, close, and complete resource reads are serialized per
-MCP connection. Disposal stops admission immediately and cleans up a session
-whose acquisition completes late. A failed DELETE retains responsibility until
-confirmed deletion or authoritative invalidation. A lost create response has
+MCP connection. Disposal stops admission immediately and drains the child,
+including sessions whose acquisition completes late. A failed session DELETE
+retains responsibility until confirmed deletion or authoritative invalidation.
+A lost create response has
 no safely known session id: `session-uncertain` fences further acquisition and
-mutation. Revoke the old grant (and drain it) or replace the service through the
-trusted supervisor; do not guess an id or acquire again under the same authority.
+mutation. Close the MCP connection to revoke and drain its child, or have the
+supervisor revoke and drain the parent. Do not guess an id or acquire again
+under the same child.
 
 A new principal on the same live service does not prove that the old session
-ended. The adapter first attempts cleanup with the old authority, or verifies
-its revocation. Current descriptors share one supervisor-issued agent grant,
-not isolated per-MCP-connection grants. Grant labels are not principals.
+ended. The adapter first awaits terminal cleanup with the old child before
+delegating from a replacement descriptor principal. Grant labels are not
+principals. A revoked child credential is retained solely to retry its own
+`DELETE /furn/grants/current` cleanup after a lost response or failed drain;
+unauthorized is never treated as successful cleanup. Repeated disposal can
+retry an incomplete cleanup while the process remains alive.
 There is no resume across different MCP connections and no crash-safe native
 recovery promise; see [current status](current-status.md).
+
+The authority limits delegation to eight edges and 4096 grants per service
+incarnation, including revoked roots/children. Exhaustion is explicit and
+requires an operator-controlled drain and service replacement. Cleanup proof
+is never silently evicted or reused.
 
 ## Embedding
 

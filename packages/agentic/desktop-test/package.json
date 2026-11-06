@@ -40,10 +40,20 @@
       "import": "./lib/reporting/index.js",
       "default": "./src/reporting/index.ts"
     },
+    "./reporting/run-queries": {
+      "types": "./lib/reporting/runQueries.d.ts",
+      "import": "./lib/reporting/runQueries.js",
+      "default": "./src/reporting/runQueries.ts"
+    },
     "./commands": {
       "types": "./lib/commands.d.ts",
       "import": "./lib/commands.js",
       "default": "./src/commands.ts"
+    },
+    "./driver-service": {
+      "types": "./lib/driverService.d.ts",
+      "import": "./lib/driverService.js",
+      "default": "./src/driverService.ts"
     },
     "./wdio": {
       "types": "./lib/wdio/index.d.ts",

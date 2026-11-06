@@ -3,17 +3,10 @@ import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 
-import { createDesktopDriverServer, NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
-import type {
-  DesktopDriverServer,
-  DesktopHost,
-  DesktopTarget,
-  NativeDesktopHostOptions,
-  NativeDriverArtifact,
-} from '@fluentui-react-native/desktop-driver';
-import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
-import { publishDesktopAgent } from './agentConnection.js';
-import type { DesktopAgentConnectionOptions, DesktopAgentPublication } from './agentConnection.js';
+import type { DesktopDriverServer, DesktopHost } from '@fluentui-react-native/desktop-driver';
+import type { DesktopAgentConnectionOptions } from './agentConnection.js';
+import { startDesktopService, startNativeDesktopService } from './driverService.js';
+import type { DesktopService, DesktopServiceOptions } from './driverService.js';
 import type { DesktopCommand, ResolvedDesktopTarget } from './config.js';
 import type { DesktopIntegration } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
@@ -38,6 +31,7 @@ export type DesktopSupervisorOptions = {
    * ready. Every route then requires a grant, so only clients given one, such as the Desktop Driver MCP adapter, connect.
    */
   agent?: DesktopAgentConnectionOptions;
+  recovery?: DesktopServiceOptions['recovery'];
 };
 
 export class DesktopSupervisor {
@@ -45,14 +39,11 @@ export class DesktopSupervisor {
   readonly target: ResolvedDesktopTarget;
   readonly runner: NodeDesktopCommandRunner;
   readonly services: DesktopServiceScope;
-  private serverValue?: DesktopDriverServer;
+  private serverValue?: DesktopService;
   private transport?: ReportTransport;
   private opened = false;
   private releaseClaim?: () => void;
   private closePromise?: Promise<void>;
-  private artifact?: NativeDriverArtifact;
-  private authority?: DesktopAuthority;
-  private agentPublication?: DesktopAgentPublication;
   private ownershipUncertain = false;
   private readonly environment: Record<string, string> = {};
   private readonly workers = new Set<RunningDesktopCommand>();
@@ -74,7 +65,7 @@ export class DesktopSupervisor {
 
   /** The record name of the published agent connection descriptor, once it is published. */
   get agentDescriptor(): string | undefined {
-    return this.agentPublication?.descriptor;
+    return this.serverValue?.agentDescriptor;
   }
 
   async open(interactive = true): Promise<void> {
@@ -101,44 +92,36 @@ export class DesktopSupervisor {
     await this.open();
     try {
       await this.startConfiguredServices();
-      const host = this.options.hostFactory ? await this.options.hostFactory(this.target) : await this.createHost();
-      try {
-        const extension = await this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter });
-        if (this.options.agent) this.authority = new DesktopAuthority();
-        this.serverValue = await createDesktopDriverServer({
-          ...(this.authority ? { authority: this.authority } : {}),
-          targets: [
-            {
-              endpoint: this.target.endpoint,
-              id: this.target.id,
-              platformName: this.target.endpoint === 'macos' ? 'macos' : 'windows',
-              renderer: this.target.host.renderer,
-              launchTimeoutMs: this.target.launchTimeoutMs,
-              launchModes: this.target.host.ownership === 'external' ? ['attach'] : ['launch'],
-              host,
-              ...extension,
-            },
-          ],
-        });
-        await host.probe(this.services.controller.signal);
-      } catch (error) {
-        if (!this.serverValue) {
-          try {
-            await host.dispose();
-          } catch (cleanup) {
-            this.ownershipUncertain = true;
-            throw new AggregateError([error, cleanup], 'Desktop target startup and disposal failed.');
-          }
-        }
-        throw error;
+      const options: DesktopServiceOptions = {
+        target: {
+          endpoint: this.target.endpoint,
+          id: this.target.id,
+          platformName: this.target.endpoint === 'macos' ? 'macos' : 'windows',
+          renderer: this.target.host.renderer,
+          launchTimeoutMs: this.target.launchTimeoutMs,
+          launchModes: this.target.host.ownership === 'external' ? ['attach'] : ['launch'],
+        },
+        agent: this.options.agent,
+        recovery: this.options.recovery,
+        signal: this.services.controller.signal,
+        guard: (work) => this.services.guard(work),
+        addSecret: (secret) => this.reporter.addSecret(secret),
+        createTarget: (host) =>
+          this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter }) ?? Promise.resolve(undefined),
+      };
+      if (this.options.hostFactory) {
+        const host = await this.options.hostFactory(this.target);
+        this.serverValue = await startDesktopService(host, options);
+      } else {
+        this.serverValue = await this.createService(options);
       }
       this.reporter.emit(
         { kind: 'service-ready', payload: { message: `WebDriver ${this.server.url}; target ${this.target.id}` } },
         'webdriver',
         { endpoint: this.target.endpoint, renderer: this.target.host.renderer },
       );
-      if (this.options.agent) await this.publishAgentConnection(this.options.agent);
     } catch (error) {
+      if (error instanceof AggregateError) this.ownershipUncertain = true;
       this.reporter.fail(error);
       try {
         await this.close();
@@ -149,23 +132,6 @@ export class DesktopSupervisor {
     }
   }
 
-  private async publishAgentConnection(options: DesktopAgentConnectionOptions): Promise<void> {
-    this.agentPublication = await publishDesktopAgent({
-      authority: this.authority!,
-      connection: options,
-      target: this.target,
-      url: this.server.url,
-      ...(this.artifact ? { artifact: this.artifact } : {}),
-      addSecret: (secret) => this.reporter.addSecret(secret),
-      signal: this.services.controller.signal,
-      guard: (work) => this.services.guard(work),
-    });
-    this.reporter.emit({
-      kind: 'diagnostic',
-      payload: { level: 'info', message: `Published agent connection ${this.agentPublication.descriptor} for target ${this.target.id}` },
-    });
-  }
-
   async startConfiguredServices(): Promise<void> {
     for (const service of this.target.services ?? []) {
       this.services.start(service.id, this.prepare(service.command, service.id));
@@ -173,22 +139,16 @@ export class DesktopSupervisor {
     }
   }
 
-  private async createHost(): Promise<DesktopHost> {
+  private async createService(options: DesktopServiceOptions): Promise<DesktopService> {
     const requiredOS = this.target.endpoint === 'macos' ? 'darwin' : 'win32';
     if (process.platform !== requiredOS)
       throw new Error(`Endpoint ${this.target.endpoint} requires ${requiredOS}; native helpers cannot run on ${process.platform}.`);
     const application = await resolveDesktopApplication(this.target, this.services.controller.signal);
     if (application.leaseNonce) this.reporter.addSecret(application.leaseNonce);
-    const artifact = await resolveNativeDesktopDriver({
-      ...this.target.nativeDriver,
-      platform: this.target.endpoint,
-      buildPolicy: 'never',
-      signal: this.services.controller.signal,
-    });
-    this.artifact = artifact;
-    return new NativeDesktopHost({
+    return startNativeDesktopService({
+      ...options,
       application,
-      artifact,
+      nativeDriver: this.target.nativeDriver,
       endpoint: this.target.endpoint,
       onStderr: (text) =>
         this.reporter.emit({ kind: 'output', payload: { stream: 'stderr', text } }, 'native-helper', {
@@ -250,9 +210,6 @@ export class DesktopSupervisor {
       };
       for (const worker of this.workers) await close('worker', () => worker.stop({ failed: true }));
       this.workers.clear();
-      const publication = this.agentPublication;
-      this.agentPublication = undefined;
-      if (publication) await close('agent-descriptor', () => publication.withdraw());
       if (this.serverValue) await close('webdriver', () => deadline(this.serverValue!.close(), 30_000, 'Closing desktop sessions'));
       await close('services', () => this.services.close());
       await close('commands', () => this.runner.close());
@@ -268,87 +225,6 @@ export class DesktopSupervisor {
       if (failures.length) throw new AggregateError(failures, 'Desktop supervisor cleanup failed.');
     })());
   }
-}
-
-export type DesktopServiceOptions = {
-  target: Omit<DesktopTarget, 'host'>;
-  port?: number;
-  host?: string;
-  /**
-   * Protects the service with a grant authority and publishes one agent's connection descriptor once it listens. Every
-   * route then requires a grant. Closing the service withdraws the descriptor and revokes the grant before the listener.
-   */
-  agent?: DesktopAgentConnectionOptions;
-  /** Receives secrets the service issues, such as the agent grant, so reporters redact them. */
-  addSecret?: (secret: string) => void;
-  signal?: AbortSignal;
-};
-
-/** Transitional composition for Storybook's channel child; lifecycle policy remains owned by desktop-test. */
-export async function startNativeDesktopService(options: NativeDesktopHostOptions & DesktopServiceOptions): Promise<DesktopDriverServer> {
-  return startDesktopService(new NativeDesktopHost(options), options, options.artifact);
-}
-
-/** Serves one target on the given host, and disposes the host if the service cannot start. */
-export async function startDesktopService(
-  desktopHost: DesktopHost,
-  options: DesktopServiceOptions,
-  artifact?: NativeDriverArtifact,
-): Promise<DesktopDriverServer> {
-  const authority = options.agent ? new DesktopAuthority() : undefined;
-  let server: DesktopDriverServer;
-  try {
-    server = await createDesktopDriverServer({
-      ...(authority ? { authority } : {}),
-      host: options.host,
-      port: options.port,
-      targets: [{ ...options.target, host: desktopHost }],
-    });
-  } catch (error) {
-    try {
-      await desktopHost.dispose();
-    } catch (cleanup) {
-      throw new AggregateError([error, cleanup], 'Native listener startup and disposal failed.');
-    }
-    throw error;
-  }
-  if (!options.agent) return server;
-  let publication: DesktopAgentPublication;
-  try {
-    publication = await publishDesktopAgent({
-      authority: authority!,
-      connection: options.agent,
-      target: { endpoint: options.target.endpoint, id: options.target.id },
-      url: server.url,
-      ...(artifact ? { artifact } : {}),
-      ...(options.addSecret ? { addSecret: options.addSecret } : {}),
-      ...(options.signal ? { signal: options.signal } : {}),
-    });
-  } catch (error) {
-    try {
-      await server.close();
-    } catch (cleanup) {
-      throw new AggregateError([error, cleanup], 'Agent publication and service cleanup failed.');
-    }
-    throw error;
-  }
-  let closing: Promise<void> | undefined;
-  return {
-    ...server,
-    close: () =>
-      (closing ??= (async () => {
-        const failures: unknown[] = [];
-        for (const step of [() => publication.withdraw(), () => server.close()]) {
-          try {
-            await step();
-          } catch (error) {
-            failures.push(error);
-          }
-        }
-        if (failures.length === 1) throw failures[0];
-        if (failures.length) throw new AggregateError(failures, 'Agent withdrawal and service close failed.');
-      })()),
-  };
 }
 
 export function claimDesktopWorkload(runId: string, directory?: string): () => void {

@@ -27,12 +27,16 @@ only maps them onto MCP.
   cleanup responsibility after transport loss; reverify discovery and never
   replay a failed mutation. A verified replacement invalidates old references.
   Fence a lost acquisition response; disposal also cleans up late acquisitions.
+- Delegate a distinct driver-only child after verified discovery. Retain it on
+  same-incarnation/descriptor-principal rediscovery; never share or resume another
+  connection's session. Disposal awaits child revocation, keeping terminal-only
+  cleanup proof for lost responses and failed drains; unauthorized is not cleanup.
 - Tie every artifact link to its session. Artifact ids restart in each session.
 - Progress ticks come from the adapter and never reach the service, so a waiting
   model does not keep an idle session alive. Cancellation aborts the HTTP call,
   which the service treats as the caller leaving.
-- Messages the model reads are fixed or bounded. Connection failures name no
-  paths; the details go to stderr.
+- Messages the model reads are fixed or bounded. Connection failures use fixed
+  diagnostics on stderr too; never echo discovery exceptions or descriptor contents.
 
 ## Validation
 

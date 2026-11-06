@@ -27,6 +27,24 @@ const waitFor = async (condition) => {
   }
 };
 
+function memoryRecovery() {
+  const records = new Map();
+  return {
+    storage: {
+      read: async (name) => records.get(name),
+      publish: async (name, contents) => {
+        assert(!records.has(name), 'never replace a private record');
+        records.set(name, contents);
+      },
+      remove: async (name, contents) => {
+        if (records.get(name) !== contents) return false;
+        return records.delete(name);
+      },
+    },
+    records,
+  };
+}
+
 async function main() {
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
@@ -782,6 +800,7 @@ async function main() {
       const run = reporter({ kind: 'lifecycle' });
       const supervisor = new DesktopSupervisor({
         target,
+        recovery: memoryRecovery(),
         reporter: run,
         lockDirectory: path.join(root, 'locks'),
         hostFactory: async () => new FakeDesktopHost({ endpoint: 'win32', features: { boundedObservation: true } }),
@@ -828,6 +847,7 @@ async function main() {
 
       const failing = new DesktopSupervisor({
         target,
+        recovery: memoryRecovery(),
         reporter: reporter({ kind: 'lifecycle' }),
         lockDirectory: path.join(root, 'locks'),
         hostFactory: async () => new FakeDesktopHost({ endpoint: 'win32' }),
@@ -844,6 +864,7 @@ async function main() {
       const failedCleanupLocks = path.join(root, 'failed-cleanup-locks');
       const failedCleanup = new DesktopSupervisor({
         target,
+        recovery: memoryRecovery(),
         reporter: reporter({ kind: 'lifecycle' }),
         lockDirectory: failedCleanupLocks,
         hostFactory: async () => {
@@ -863,7 +884,7 @@ async function main() {
       assert.throws(() => claimDesktopWorkload('replacement', failedCleanupLocks), /Another desktop workload/);
 
       // The Storybook channel child's composition: one service, protected and published from the process that listens.
-      const { startDesktopService } = await import(lib('supervisor.js'));
+      const { startDesktopService } = await import(lib('driverService.js'));
       const { publishDesktopAgent } = await import(lib('agentConnection.js'));
       const { DesktopAuthority } = await import('@fluentui-react-native/desktop-driver/authority');
       const serviceTarget = { endpoint: 'win32', id: 'agent-service', platformName: 'windows', renderer: 'paper', launchModes: ['launch'] };
@@ -882,6 +903,7 @@ async function main() {
       const servicePublished = [];
       const service = await startDesktopService(trackedHost(steps), {
         target: serviceTarget,
+        recovery: memoryRecovery(),
         addSecret: (secret) => secrets.push(secret),
         agent: {
           descriptor: 'service.json',
@@ -911,6 +933,7 @@ async function main() {
       await assert.rejects(
         startDesktopService(trackedHost(failedSteps), {
           target: serviceTarget,
+          recovery: memoryRecovery(),
           agent: {
             publish: async () => {
               throw new Error('original service publication failure');
@@ -946,6 +969,142 @@ async function main() {
       release(async () => void lateRemoved++);
       await new Promise((resolve) => setImmediate(resolve));
       assert.equal(lateRemoved, 1, 'a late publication is withdrawn');
+    } else if (mode === 'recovery') {
+      const { DesktopSupervisor } = await import(lib('supervisor.js'));
+      const { startDesktopService } = await import(lib('driverService.js'));
+      const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
+      const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
+      const target = {
+        endpoint: 'win32',
+        host: { kind: 'installed', ownership: 'external', application: { windowTitle: 'fake' } },
+        id: 'durable-target',
+        instanceId: 'recovery',
+        projectRoot: packageRoot,
+        configPath: path.join(root, 'desktop.config.mjs'),
+      };
+      const capabilities = { alwaysMatch: { platformName: 'windows', 'furn:target': target.id, 'furn:launchMode': 'attach' } };
+      const quarantined = (error) => error.data?.reason === 'target-quarantined';
+      const uncertain = (error) => error.data?.mutation?.quarantined === true;
+      for (const firstPath of ['supervisor', 'channel']) {
+        const recovery = memoryRecovery();
+        let state = 'running';
+        const probed = [];
+        recovery.probeApplication = async (application) => {
+          probed.push(application);
+          return state;
+        };
+        const start = async (servicePath) => {
+          const host = new FakeDesktopHost({ endpoint: 'win32' });
+          if (servicePath === 'channel') {
+            const server = await startDesktopService(host, {
+              target: { endpoint: target.endpoint, id: target.id, platformName: 'windows', launchModes: ['attach'] },
+              recovery,
+            });
+            return { server, host, close: () => server.close() };
+          }
+          const supervisor = new DesktopSupervisor({
+            target,
+            recovery,
+            reporter: reporter({ kind: 'lifecycle' }),
+            lockDirectory: path.join(root, `locks-${firstPath}`),
+            hostFactory: async () => host,
+          });
+          await supervisor.start();
+          return { server: supervisor.server, host, close: () => supervisor.close() };
+        };
+        let service = await start(firstPath);
+        const open = () => createDesktopDriverClient({ url: service.server.url }).newSession(capabilities);
+        try {
+          const session = await open();
+          const button = await session.findElement('accessibility id', 'button-primary');
+          service.host.injectFault('click', { mode: 'lost-response' });
+          service.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
+          await assert.rejects(button.click(), uncertain);
+          assert(recovery.records.size > 0, 'quarantine must be durable before responding');
+          await service.close();
+
+          service = await start(firstPath === 'supervisor' ? 'channel' : 'supervisor');
+          await assert.rejects(open(), quarantined, 'replacement composition cannot forget uncertain attached-target effects');
+          const record = service.server.sessions.getQuarantine(target.id);
+          assert.deepEqual(probed.at(-1), { processId: 1000, processStartedAt: new Date(0).toISOString() });
+          state = 'unknown';
+          await assert.rejects(
+            service.server.recoverTarget(target.id, { evidence: 'application-exited', quarantineId: record.id }),
+            /not proven/,
+          );
+          await assert.rejects(open(), quarantined);
+          state = 'exited';
+          await service.server.recoverTarget(target.id, { evidence: 'application-exited', quarantineId: record.id });
+          assert.equal(recovery.records.size, 0);
+          const recovered = await open();
+          await recovered.delete();
+          await service.close();
+
+          // A malformed journal never becomes absence, even when the probe claims exit.
+          const seed = await start(firstPath);
+          service = seed;
+          const seeded = await open();
+          const element = await seeded.findElement('accessibility id', 'button-primary');
+          seed.host.injectFault('click', { mode: 'lost-response' });
+          seed.server.sessions.get(seeded.id).desktopTimeouts.nativeCommand = 10;
+          await assert.rejects(element.click());
+          await seed.close();
+          for (const name of recovery.records.keys()) recovery.records.set(name, '{"invalid":true}');
+          service = await start(firstPath === 'supervisor' ? 'channel' : 'supervisor');
+          await assert.rejects(open(), quarantined);
+          const corrupt = service.server.sessions.getQuarantine(target.id);
+          assert.equal(corrupt.application, undefined);
+          await assert.rejects(
+            service.server.recoverTarget(target.id, { evidence: 'application-exited', quarantineId: corrupt.id }),
+            /not proven/,
+          );
+        } finally {
+          await service.close();
+        }
+      }
+
+      let disposed = 0;
+      let published = 0;
+      const host = new FakeDesktopHost({ endpoint: 'win32' });
+      host.dispose = async () => void disposed++;
+      await assert.rejects(
+        startDesktopService(host, {
+          target: { endpoint: 'win32', id: target.id, platformName: 'windows' },
+          recovery: {
+            storage: {
+              ...memoryRecovery().storage,
+              read: async () => {
+                throw new Error('inaccessible recovery');
+              },
+            },
+          },
+          agent: {
+            publish: async () => {
+              published++;
+              return async () => undefined;
+            },
+          },
+        }),
+        /inaccessible recovery/,
+      );
+      assert.equal(disposed, 1);
+      assert.equal(published, 0, 'unreadable recovery must fail before descriptor publication');
+
+      let settle;
+      const settling = new Promise((resolve) => (settle = resolve));
+      const settlingHost = new FakeDesktopHost({ endpoint: 'win32' });
+      settlingHost.dispose = () => settling;
+      const service = await startDesktopService(settlingHost, {
+        target: { endpoint: 'win32', id: target.id, platformName: 'windows' },
+        recovery: memoryRecovery(),
+      });
+      let closed = false;
+      const closing = service.close().then(() => (closed = true));
+      assert.equal(service.close(), service.close(), 'shutdown is one settled operation');
+      await new Promise((resolve) => setTimeout(resolve, 20));
+      assert.equal(closed, false, 'shutdown must await disposal, not just listener closure');
+      settle();
+      await closing;
     } else if (mode === 'agent-cli') {
       const { createDesktopReportSession } = await import(lib('reporting/session.js'));
       // serve --agent passes the agent options to an integration that serves agents, and rejects one that does not.
@@ -1086,6 +1245,7 @@ async function main() {
       };
       const supervisor = new DesktopSupervisor({
         target,
+        recovery: memoryRecovery(),
         reporter: run,
         lockDirectory: path.join(root, 'locks'),
         hostFactory: async () => host,
@@ -1127,6 +1287,7 @@ async function main() {
         await supervisor.start();
         const duplicate = new DesktopSupervisor({
           target,
+          recovery: memoryRecovery(),
           reporter: run,
           lockDirectory: path.join(root, 'locks'),
           hostFactory: async () => host,

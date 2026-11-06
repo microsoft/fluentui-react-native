@@ -1,5 +1,7 @@
-export { claimDesktopWorkload, DesktopSupervisor, startNativeDesktopService } from './supervisor.js';
-export type { DesktopServiceOptions, DesktopSupervisorOptions } from './supervisor.js';
+export { claimDesktopWorkload, DesktopSupervisor } from './supervisor.js';
+export type { DesktopSupervisorOptions } from './supervisor.js';
+export { startNativeDesktopService } from './driverService.js';
+export type { DesktopServiceOptions } from './driverService.js';
 export { createNativeAgentPublisher, defaultAgentDescriptor } from './agentConnection.js';
 export type {
   DesktopAgentConnection,

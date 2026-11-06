@@ -5862,8 +5862,8 @@ __metadata:
   linkType: soft
 
 "@fluentui/react-native-icons@npm:^2.0.322":
-  version: 2.0.341
-  resolution: "@fluentui/react-native-icons@npm:2.0.341"
+  version: 2.0.344
+  resolution: "@fluentui/react-native-icons@npm:2.0.344"
   dependencies:
     "@types/react-native": "npm:^0.68.0"
     tslib: "npm:^2.1.0"
@@ -5871,7 +5871,7 @@ __metadata:
     react: ">=16.8.0 <20.0.0"
     react-native: ">=0.68.0"
     react-native-svg: ">=12.5.0"
-  checksum: 10c0/abd60d2e74912ae646ceb973d8b2359b9389be1961dfa33c531f84193cc65ea1000360f2f6a5247e205225c202c2a1c10f588a6a3935119927e732eae6e8ef90
+  checksum: 10c0/47902efd57365ea3c49d35a45e7e324b3afad3164618f9844c28b086c6926175a4b09c25c71912840d7f365478ff93bdbdac73a55e500856cb45ff3229778b27
   languageName: node
   linkType: hard
 
@@ -18807,9 +18807,9 @@ __metadata:
   linkType: hard
 
 "p-graph@npm:^3.0.0-alpha.4":
-  version: 3.0.0-alpha.4
-  resolution: "p-graph@npm:3.0.0-alpha.4"
-  checksum: 10c0/84452847e6cb761aedcfe1d2d02faff2fd8e9155807e97e7beb90006d2e14e46c2f55c51b3578198a1d28b9c3e576bef9980a063e47b5ff681655d1433c6a03f
+  version: 3.0.0-alpha.8
+  resolution: "p-graph@npm:3.0.0-alpha.8"
+  checksum: 10c0/bffd05d9ad6ccd01b8dbe5ce99a6963e3ce9df1625931e581a7eafc9c06d3436976d9ecfddb59e7134e2c02cb32f06581bcd6f86e359ba6eda20043cf587673f
   languageName: node
   linkType: hard
 
@@ -21984,13 +21984,13 @@ __metadata:
   linkType: hard
 
 "use-subscription@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "use-subscription@npm:1.11.0"
+  version: 1.13.0
+  resolution: "use-subscription@npm:1.13.0"
   dependencies:
-    use-sync-external-store: "npm:^1.5.0"
+    use-sync-external-store: "npm:^1.7.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/6aa31e134d56e90a37f0f8232ece5ab5b74f35224e52bfd5b9a9e1af668423bba37715ee0f932f9e40dd9f8825d2efb90a1d254a7014b55a470b033acfadf4a3
+  checksum: 10c0/f2f605fff266712d04d125f48b0950854bdd53cd916fd853a6e28c1abd5d501180832f8c139828a346075f1e1a9707ad8cc6fcd9386619a50476e43ebbe29132
   languageName: node
   linkType: hard
 
@@ -22000,6 +22000,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10c0/1b8663515c0be34fa653feb724fdcce3984037c78dd4a18f68b2c8be55cc1a1084c578d5b75f158d41b5ddffc2bf5600766d1af3c19c8e329bb20af2ec6f52f4
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "use-sync-external-store@npm:1.7.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/6bae7cb778ce611131ec830c4e469fbc2872acefc25d2e4cf1c28b8628690689770742a9f2f0642c95134f9c77041fee60f0352f81ca43f96643b0ed01774726
   languageName: node
   linkType: hard
 

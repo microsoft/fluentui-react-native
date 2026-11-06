@@ -17,7 +17,10 @@ The adapter does not start anything. A trusted supervisor runs the Desktop
 Driver service with an authority, issues the agent a grant, and publishes a
 private connection descriptor. The adapter reads that descriptor, has the
 installed native helper verify the listening service's process identity, and
-only then sends the grant. See
+only then sends the grant to obtain its own driver-only child principal. Two
+connections reading the same descriptor cannot share sessions. Disposal revokes
+and drains the child, including ambiguous acquisitions; old services without
+delegation fail closed. See
 [Connection and setup](references/connection.md).
 
 ## Use it
