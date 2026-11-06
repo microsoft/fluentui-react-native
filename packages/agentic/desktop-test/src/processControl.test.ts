@@ -5,6 +5,7 @@ import { spawn } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
 import { once } from 'node:events';
 import net from 'node:net';
+import { pathToFileURL } from 'node:url';
 import { createDesktopProcessControl } from './processControl.js';
 import { deadline, NodeDesktopCommandRunner } from './commands.js';
 import type { RunningDesktopCommand } from './commands.js';
@@ -13,7 +14,8 @@ import type { DesktopResourceRecord } from './resources.js';
 
 const fixture = path.resolve(__dirname, '../fixtures/process-control/child.mjs');
 const parentFixture = path.resolve(__dirname, '../fixtures/process-control/parent.mjs');
-const preload = path.resolve(__dirname, '../config/process-lifeline.mjs');
+// --import requires a file URL for absolute Windows paths.
+const preload = pathToFileURL(path.resolve(__dirname, '../config/process-lifeline.mjs')).href;
 const quiet = { write: () => true };
 jest.setTimeout(45_000);
 
@@ -101,7 +103,9 @@ describe('owned process lifelines', () => {
     }
   });
 
-  test.each([
+  // libuv places non-detached Windows children in a kill-on-close job, so a crashed owner hard-terminates them before
+  // cooperative disposal can run. See references/current-status.md.
+  (process.platform === 'win32' ? test.skip : test).each([
     { mode: 'service', crash: 'parent' },
     { mode: 'wrapper', crash: 'parent' },
     { mode: 'wrapper', crash: 'wrapper' },
