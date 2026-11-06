@@ -28,6 +28,7 @@ describe('pipeline failure diagnostics', () => {
       `,
     );
     try {
+      fs.writeFileSync(path.join(root, 'app.json'), JSON.stringify({ name: 'Fixture' }));
       const response = spawnSync(
         process.execPath,
         [path.resolve(__dirname, '../../config/cli.cjs'), '--config', configPath, 'bundle', '--win32'],

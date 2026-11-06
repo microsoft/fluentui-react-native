@@ -20,6 +20,10 @@ the story viewport, so retained scroll position cannot put the next test's
 controls behind the chrome. Sidebar and addon preferences remain outside that
 remount.
 
+The Win32 story decorator uses a scrollable viewport with naturally sized
+content. Small stories remain centered; oversized stories start within the
+viewport and can scroll instead of overflowing behind the chrome.
+
 ## Theme and chrome
 
 One Flex `ThemedRoot` covers the app, toolbar, and chrome, so the Storybook

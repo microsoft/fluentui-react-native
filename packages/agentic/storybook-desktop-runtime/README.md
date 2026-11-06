@@ -11,6 +11,8 @@ locator.
 
 Win32 test generations reset the preview subtree and its scroll position while
 preserving the surrounding desktop chrome preferences.
+Its scrollable story viewport centers small stories without clipping the start
+of oversized stories behind the chrome.
 
 Read the [integration reference](references/integration.md) before wiring the
 runtime into an app, and the [runtime contract](references/runtime-contract.md)
