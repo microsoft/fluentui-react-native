@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
 
-import { NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
+import { NativeDesktopHost } from '@fluentui-react-native/desktop-driver';
 import type { DesktopHost, DesktopTarget, NativeDesktopHostOptions, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver/native';
 import {
   createMacOSApplicationProbe,
   createMacOSPrivateStorage,
