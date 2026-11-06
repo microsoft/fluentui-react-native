@@ -4,6 +4,7 @@ import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import type { DesktopStage, ResolvedDesktopConfig, ResolvedDesktopTarget } from './config.js';
 import type { DesktopSupervisor } from './supervisor.js';
 import type { DesktopReportWriter } from './reporting/collector.js';
+import type { DesktopResourceContribution } from './resources.js';
 
 /**
  * Trusted, explicitly imported local code; never included in capabilities or persisted manifests.
@@ -12,6 +13,7 @@ import type { DesktopReportWriter } from './reporting/collector.js';
 export type DesktopIntegration = {
   name: string;
   validate(): void;
+  resources?: readonly DesktopResourceContribution[];
   /**
    * Whether `run` serves `serve --agent`: it protects its driver with a grant authority, publishes one agent connection
    * from the process that listens, and reports the descriptor in its readiness record. `serve --agent` requires it.

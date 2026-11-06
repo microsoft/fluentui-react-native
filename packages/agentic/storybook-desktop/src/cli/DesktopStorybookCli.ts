@@ -202,7 +202,7 @@ export class DesktopStorybookCli {
         this.output.write(`Storybook server ready: ${host}:${port}\n`);
       }
       this.onReady?.();
-      await this.services.guard(new Promise<never>(() => undefined));
+      await this.services.guard(this.services.waitForStop());
     } catch (error) {
       failures.push(error);
     }
@@ -304,7 +304,7 @@ export class DesktopStorybookCli {
           ? this.maintainMacOSApplicationLease(driverManifest.path, this.services.controller.signal, {
               onWarning: (message) => this.warn(message),
             })
-          : new Promise<never>(() => undefined),
+          : this.services.waitForStop(),
       );
     } catch (error) {
       failures.push(error);

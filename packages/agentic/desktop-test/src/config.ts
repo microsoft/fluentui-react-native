@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import type { DesktopEndpoint, DesktopRenderer, NativeDesktopApplicationDescriptor } from '@fluentui-react-native/desktop-driver';
 import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
+import { orderDesktopResourceContributions } from './resources.ts';
 
 export type DesktopCommand = {
   command: string;
@@ -32,7 +33,7 @@ export type DesktopTargetConfig = {
   host: DesktopHostConfig;
   readiness?: DesktopReadiness;
   commands?: Partial<Record<DesktopStage, DesktopCommand | readonly DesktopCommand[] | false>>;
-  services?: readonly { id: string; command: DesktopCommand; readyUrl?: string }[];
+  services?: readonly { id: string; command: DesktopCommand; readyUrl?: string; dependsOn?: readonly string[] }[];
   launchTimeoutMs?: number;
   nativeDriver?: { cacheRoot?: string; helperPath?: string; installRoot?: string };
 };
@@ -73,6 +74,7 @@ export type DesktopConfig = {
 export type ResolvedDesktopTarget = DesktopTargetConfig & {
   endpoint: DesktopEndpoint;
   id: string;
+  registrationId: string;
   instanceId: string;
   projectRoot: string;
   configPath: string;
@@ -94,6 +96,10 @@ const stages = ['prep', 'bundle', 'build', 'run'] as const;
 export function defineDesktopConfig<T extends DesktopConfig>(config: T): T {
   validateDesktopConfig(config);
   return config;
+}
+
+function registeredTargetId(configPath: string, targetName: string, endpoint: DesktopEndpoint): string {
+  return `${endpoint}-${createHash('sha256').update(`${configPath}\0${targetName}`).digest('hex').slice(0, 16)}`;
 }
 
 export function validateDesktopConfig(value: unknown): asserts value is DesktopConfig {
@@ -150,7 +156,7 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
       const ids = new Set<string>();
       for (const entry of target.services) {
         const service = object(entry, `${id}.service`);
-        keys(service, ['id', 'command', 'readyUrl'], `${id}.service`);
+        keys(service, ['id', 'command', 'readyUrl', 'dependsOn'], `${id}.service`);
         text(service.id, 'service id');
         if (ids.has(service.id)) throw new TypeError(`Duplicate service ${service.id}.`);
         ids.add(service.id);
@@ -162,7 +168,39 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
             throw new TypeError('Service readiness URLs must be loopback HTTP URLs.');
           }
         }
+        if (
+          service.dependsOn !== undefined &&
+          (!Array.isArray(service.dependsOn) || !service.dependsOn.every((dependency) => typeof dependency === 'string'))
+        ) {
+          throw new TypeError(`${id}.service ${service.id} dependencies must be an array of IDs.`);
+        }
       }
+      const services = new Map(
+        (target.services as { id: string; readyUrl?: string; dependsOn?: readonly string[] }[]).map((service) => [service.id, service]),
+      );
+      for (const service of services.values()) {
+        const dependencies = service.dependsOn ?? [];
+        if (new Set(dependencies).size !== dependencies.length) {
+          throw new TypeError(`${id}.service ${service.id} has duplicate dependencies.`);
+        }
+        for (const dependency of dependencies) {
+          const required = services.get(dependency);
+          if (!required) throw new TypeError(`${id}.service ${service.id} has unknown dependency "${dependency}".`);
+          if (dependency === service.id) throw new TypeError(`${id}.service ${service.id} cannot depend on itself.`);
+          if (!required.readyUrl) throw new TypeError(`${id}.service ${service.id} depends on "${dependency}" without a readiness URL.`);
+        }
+      }
+      const visiting = new Set<string>();
+      const visited = new Set<string>();
+      const visit = (serviceId: string, ancestry: readonly string[]) => {
+        if (visited.has(serviceId)) return;
+        if (visiting.has(serviceId)) throw new TypeError(`${id}.service dependency cycle: ${[...ancestry, serviceId].join(' -> ')}.`);
+        visiting.add(serviceId);
+        for (const dependency of services.get(serviceId)?.dependsOn ?? []) visit(dependency, [...ancestry, serviceId]);
+        visiting.delete(serviceId);
+        visited.add(serviceId);
+      };
+      for (const serviceId of services.keys()) visit(serviceId, []);
     }
   }
   if (config.suites !== undefined) {
@@ -208,10 +246,17 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
   }
   if (config.integration !== undefined) {
     const integration = object(config.integration, 'integration');
+    keys(integration, ['name', 'validate', 'supportsAgent', 'createTarget', 'resources', 'run', 'configure'], 'integration');
     text(integration.name, 'integration.name');
     if (typeof integration.validate !== 'function') throw new TypeError('An integration must expose validate().');
     if (integration.supportsAgent !== undefined && typeof integration.supportsAgent !== 'boolean')
       throw new TypeError('integration.supportsAgent must be a boolean.');
+    if (integration.createTarget !== undefined && typeof integration.createTarget !== 'function')
+      throw new TypeError('integration.createTarget must be a function.');
+    if (integration.configure !== undefined && typeof integration.configure !== 'function')
+      throw new TypeError('integration.configure must be a function.');
+    if (integration.run !== undefined && typeof integration.run !== 'function') throw new TypeError('integration.run must be a function.');
+    if (integration.resources !== undefined) orderDesktopResourceContributions(integration.resources);
     integration.validate();
   }
 }
@@ -263,11 +308,13 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
         : {}),
     };
     const instanceId = targetInstanceId(root, endpoint, host.renderer);
+    const registrationId = registeredTargetId(file, id, endpoint);
     return Object.freeze({
       ...target,
       endpoint,
       host: Object.freeze(host),
-      id: `${endpoint}-${instanceId}`,
+      id: registrationId,
+      registrationId,
       instanceId,
       projectRoot: root,
       configPath: file,
@@ -277,7 +324,15 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
     });
   };
   const { config, root, file } = await read(filename);
-  const targets = Object.fromEntries(await Promise.all(Object.keys(config.targets).map(async (id) => [id, await resolve(file, id, [])])));
+  const targets = Object.fromEntries(
+    await Promise.all(
+      Object.keys(config.targets).map(async (id) => {
+        const target = await resolve(file, id, []);
+        const registrationId = registeredTargetId(file, id, target.endpoint);
+        return [id, Object.freeze({ ...target, id: registrationId, registrationId })];
+      }),
+    ),
+  );
   return {
     config,
     configPath: file,
@@ -291,11 +346,12 @@ export function selectDesktopRenderer(target: ResolvedDesktopTarget, renderer: D
   if (target.endpoint !== 'macos' || target.host.kind !== 'react-native-test-app')
     throw new Error('Renderer switching requires a macOS RN Test App target; regenerate with prep after switching.');
   const instanceId = targetInstanceId(target.projectRoot, target.endpoint, renderer);
+  const id = `${target.endpoint}-${createHash('sha256').update(`${target.registrationId}\0${renderer}`).digest('hex').slice(0, 16)}`;
   return Object.freeze({
     ...target,
     host: Object.freeze({ ...target.host, renderer }),
+    id,
     instanceId,
-    id: `${target.endpoint}-${instanceId}`,
   });
 }
 
