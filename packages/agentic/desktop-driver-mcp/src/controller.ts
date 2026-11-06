@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 
 import { DesktopSessionClient } from '@fluentui-react-native/desktop-driver/client';
-import type { OperationCallOptions } from '@fluentui-react-native/desktop-driver/client';
+import type { DesktopDriverClient, OperationCallOptions } from '@fluentui-react-native/desktop-driver/client';
 import type { ArtifactResult, OperationResponse } from '@fluentui-react-native/desktop-driver/operations';
 
 import type { ConnectDesktopDriver, DesktopDriverConnection } from './connection.js';
@@ -48,6 +48,7 @@ const maxArtifactBytes = 16 * 1024 * 1024;
 export class DesktopController {
   readonly #connect: ConnectDesktopDriver;
   #connection?: DesktopDriverConnection;
+  #binding?: { root: DesktopDriverConnection; child: DesktopDriverConnection };
   #open?: OpenSession;
   #uncertain?: DesktopDriverConnection;
   #pending: Promise<unknown> = Promise.resolve();
@@ -198,8 +199,12 @@ export class DesktopController {
     this.#disconnected.abort();
     return (this.#disposing ??= (async () => {
       const cleanup = this.#pending.then(async () => {
-        await this.closeSession();
-        this.assertCertain();
+        if (this.#binding) {
+          await this.#binding.child.client.revokeConnection();
+          this.#open = undefined;
+          this.#uncertain = undefined;
+          this.#binding = undefined;
+        }
       });
       this.#pending = cleanup.catch(() => {
         console.error('desktop-driver-mcp: session cleanup is incomplete; the service must drain or expire the session.');
@@ -218,6 +223,7 @@ export class DesktopController {
         ]);
       } finally {
         if (timer) clearTimeout(timer);
+        if (this.#binding) this.#disposing = undefined;
       }
     })());
   }
@@ -227,10 +233,34 @@ export class DesktopController {
     let connection: DesktopDriverConnection;
     try {
       connection = await this.#connect();
-    } catch (error) {
-      // The cause can name machine-local paths; the operator reads it on stderr, the model reads a fixed message.
-      console.error(`desktop-driver-mcp: connecting failed: ${error instanceof Error ? error.message : String(error)}`);
+    } catch {
+      // Discovery failures can contain descriptor credentials; neither protocol output nor diagnostics may echo them.
+      console.error('desktop-driver-mcp: connecting failed; verify private discovery and the service identity.');
       throw new AdapterError('service-unavailable', 'The Desktop Driver service is not available. Ask the operator to start it.');
+    }
+    const binding = this.#binding;
+    if (binding && binding.root.incarnation === connection.incarnation && binding.root.principal === connection.principal) {
+      connection = binding.child;
+    } else {
+      if (binding && binding.root.incarnation === connection.incarnation) {
+        await this.guard(() => binding.child.client.revokeConnection());
+        this.#open = undefined;
+        this.#uncertain = undefined;
+      }
+      const root = connection;
+      let child: DesktopDriverClient;
+      try {
+        child = await this.guard(() => root.client.delegateConnection());
+      } catch (error) {
+        if (isWebDriverError(error) && ['unknown command', 'unsupported operation'].includes(error.code)) {
+          throw new AdapterError('connection-authority-unsupported', 'The service does not support isolated connection authority.');
+        }
+        throw error;
+      }
+      const principal = child.principalId;
+      if (!principal) throw new AdapterError('service-unavailable', 'The service does not support isolated connection authority.');
+      connection = { client: child, incarnation: root.incarnation, principal };
+      this.#binding = { child: connection, root };
     }
     const previous = this.#open?.connection ?? this.#uncertain;
     if (previous && previous.incarnation !== connection.incarnation) {

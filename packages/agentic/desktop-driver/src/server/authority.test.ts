@@ -359,8 +359,14 @@ describe('Desktop Driver protected service', () => {
       async ({ agent, capabilities, harness, other }) => {
         const session = await createDesktopDriverClient({ grant: agent.token, url: harness.server.url }).newSession(capabilities);
         const element = await session.findElement('accessibility id', 'button-primary');
-        harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
-        await expect(element.click()).rejects.toMatchObject({ code: 'timeout' });
+        const timeouts = harness.server.sessions.get(session.id).desktopTimeouts;
+        const nativeCommand = timeouts.nativeCommand;
+        try {
+          timeouts.nativeCommand = 10;
+          await expect(element.click()).rejects.toMatchObject({ code: 'timeout' });
+        } finally {
+          timeouts.nativeCommand = nativeCommand;
+        }
 
         const status = await call(harness, 'GET', '/status', { authorization: bearer(other) });
         const refused = await call(harness, 'POST', '/session', { authorization: bearer(other), body: { capabilities } });
@@ -372,7 +378,8 @@ describe('Desktop Driver protected service', () => {
           expect(text).not.toContain('sessionId');
         }
       },
-      { faults: { click: { mode: 'lost-response' } } },
+      // Cleanup deliberately exceeds the click deadline; it must retain the normal command budget.
+      { closeDelayMs: 25, faults: { click: { mode: 'lost-response' } } },
     );
   });
 
@@ -608,7 +615,7 @@ describe('Desktop Driver protected service', () => {
 
 describe('Desktop Driver service without an authority', () => {
   test('keeps the documented loopback behavior, including the quarantine session id', async () => {
-    const harness = await createDesktopDriverTestHarness({ faults: { click: { mode: 'lost-response' } } });
+    const harness = await createDesktopDriverTestHarness({ closeDelayMs: 25, faults: { click: { mode: 'lost-response' } } });
     try {
       const client = createDesktopDriverClient({ url: harness.server.url });
       const session = await client.newSession({
@@ -620,8 +627,14 @@ describe('Desktop Driver service without an authority', () => {
         },
       });
       const element = await session.findElement('accessibility id', 'button-primary');
-      harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
-      await expect(element.click()).rejects.toMatchObject({ code: 'timeout' });
+      const timeouts = harness.server.sessions.get(session.id).desktopTimeouts;
+      const nativeCommand = timeouts.nativeCommand;
+      try {
+        timeouts.nativeCommand = 10;
+        await expect(element.click()).rejects.toMatchObject({ code: 'timeout' });
+      } finally {
+        timeouts.nativeCommand = nativeCommand;
+      }
 
       const status = (await client.status()) as { targets: { quarantine?: { sessionId?: string } }[] };
 
