@@ -1,9 +1,12 @@
 import * as React from 'react';
 
 export type DesktopRuntimeSelection = {
+  cancelled?: boolean;
+  connectionEpoch: string;
   previewGeneration: number;
   requestId: string;
   runId: string;
+  selectionSequence: number;
   storyId: string;
 };
 
@@ -19,6 +22,9 @@ export type DesktopStorybookRuntimeInstance = {
 };
 
 type DesktopStorybookConfig = {
+  cancelStory(requestId?: string): void;
+  connectBridge(epoch: string): void;
+  isCurrentSelection(selection: DesktopRuntimeSelection): boolean;
   prepareStory(selection: Omit<DesktopRuntimeSelection, 'previewGeneration'>): void;
   runtimeInstance?: DesktopStorybookRuntimeInstance;
   selection?: DesktopRuntimeSelection;
@@ -26,6 +32,9 @@ type DesktopStorybookConfig = {
 };
 
 const defaultConfig: DesktopStorybookConfig = {
+  cancelStory: () => undefined,
+  connectBridge: () => undefined,
+  isCurrentSelection: () => false,
   prepareStory: () => undefined,
   testIDPrefix: 'storybook-desktop',
 };
@@ -38,12 +47,37 @@ export function DesktopStorybookConfigProvider({
   testIDPrefix,
 }: React.PropsWithChildren<Pick<DesktopStorybookConfig, 'runtimeInstance' | 'testIDPrefix'>>) {
   const [selection, setSelection] = React.useState<DesktopRuntimeSelection>();
-  const prepareStory = React.useCallback((next: Omit<DesktopRuntimeSelection, 'previewGeneration'>) => {
-    setSelection((current) => ({ ...next, previewGeneration: (current?.previewGeneration ?? 0) + 1 }));
+  const currentSelection = React.useRef<DesktopRuntimeSelection | undefined>(undefined);
+  const connectionEpoch = React.useRef<string | undefined>(undefined);
+  const connectBridge = React.useCallback((epoch: string) => {
+    if (connectionEpoch.current !== epoch) {
+      connectionEpoch.current = epoch;
+      currentSelection.current = undefined;
+      setSelection(undefined);
+    }
   }, []);
+  const prepareStory = React.useCallback((next: Omit<DesktopRuntimeSelection, 'previewGeneration'>) => {
+    if (next.connectionEpoch !== connectionEpoch.current || next.selectionSequence <= (currentSelection.current?.selectionSequence ?? 0)) {
+      return;
+    }
+    const current = { ...next, previewGeneration: (currentSelection.current?.previewGeneration ?? 0) + 1 };
+    currentSelection.current = current;
+    setSelection(current);
+  }, []);
+  const cancelStory = React.useCallback((requestId?: string) => {
+    const current = currentSelection.current;
+    if (current && (requestId === undefined || current.requestId === requestId)) {
+      currentSelection.current = { ...current, cancelled: true };
+      setSelection(currentSelection.current);
+    }
+  }, []);
+  const isCurrentSelection = React.useCallback(
+    (candidate: DesktopRuntimeSelection) => currentSelection.current === candidate && !candidate.cancelled,
+    [],
+  );
   const value = React.useMemo(
-    () => ({ prepareStory, runtimeInstance, selection, testIDPrefix }),
-    [prepareStory, runtimeInstance, selection, testIDPrefix],
+    () => ({ cancelStory, connectBridge, isCurrentSelection, prepareStory, runtimeInstance, selection, testIDPrefix }),
+    [cancelStory, connectBridge, isCurrentSelection, prepareStory, runtimeInstance, selection, testIDPrefix],
   );
   return <DesktopStorybookConfigContext.Provider value={value}>{children}</DesktopStorybookConfigContext.Provider>;
 }

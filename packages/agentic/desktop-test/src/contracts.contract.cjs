@@ -974,6 +974,32 @@ async function main() {
       const { startDesktopService } = await import(lib('driverService.js'));
       const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
       const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
+      const siblingRecovery = memoryRecovery();
+      const siblingTarget = { endpoint: 'win32', id: 'bridge-target', platformName: 'windows' };
+      for (const [index, port] of [0, undefined].entries()) {
+        const service = await startDesktopService(new FakeDesktopHost({ endpoint: 'win32' }), {
+          target: siblingTarget,
+          port,
+          recovery: siblingRecovery,
+          createTarget: async (_host, recovery) => {
+            if (index === 0) await recovery.storage.publish('bridge-epoch.json', 'authenticated-epoch');
+            else assert.equal(await recovery.storage.read('bridge-epoch.json'), 'authenticated-epoch');
+            return undefined;
+          },
+        });
+        await service.close();
+      }
+      assert.equal(siblingRecovery.records.size, 1);
+      assert.match([...siblingRecovery.records.keys()][0], /^settlement-[a-f0-9]{24}-bridge-epoch\.json$/);
+      const isolated = await startDesktopService(new FakeDesktopHost({ endpoint: 'win32' }), {
+        target: { ...siblingTarget, id: 'another-target' },
+        recovery: siblingRecovery,
+        createTarget: async (_host, recovery) => {
+          assert.equal(await recovery.storage.read('bridge-epoch.json'), undefined);
+          return undefined;
+        },
+      });
+      await isolated.close();
       const target = {
         endpoint: 'win32',
         host: { kind: 'installed', ownership: 'external', application: { windowTitle: 'fake' } },

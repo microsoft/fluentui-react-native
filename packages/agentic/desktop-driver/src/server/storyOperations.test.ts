@@ -1,8 +1,11 @@
 import { DesktopAuthority } from '../authority/grants.js';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
+import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
 import type { DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import { attachFailureEffect } from '../protocol/settlement.js';
-import type { DesktopStoryManifest } from '../storybook.js';
+import type { DesktopStoryManifest, StoryProviderContext } from '../storybook.js';
+import { StoryBridgeUnavailableError, StoryProviderError } from '../storybook.js';
+import { createOperationStories } from './sessionStories.js';
 import { createDesktopDriverStoryHarness } from '../testing/protocolHarness.js';
 import type { DesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
@@ -34,8 +37,11 @@ const manifest: DesktopStoryManifest = {
 
 type Fixture = { harness: DesktopDriverTestHarness; session: DesktopSessionClient };
 
-async function withStories(body: (fixture: Fixture) => Promise<void>): Promise<void> {
-  const harness = await createDesktopDriverStoryHarness(manifest, { features: { accessibilityActions: true, boundedObservation: true } });
+async function withStories(body: (fixture: Fixture) => Promise<void>, options: FakeDesktopHostOptions = {}): Promise<void> {
+  const harness = await createDesktopDriverStoryHarness(manifest, {
+    ...options,
+    features: { accessibilityActions: true, boundedObservation: true },
+  });
   try {
     const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
       alwaysMatch: { 'furn:clickMode': 'accessibility', 'furn:target': harness.target.id, platformName: 'windows' },
@@ -47,6 +53,198 @@ async function withStories(body: (fixture: Fixture) => Promise<void>): Promise<v
 }
 
 describe('story operations', () => {
+  test('built-in manifest, current, reset and args routes all propagate local provider context', async () => {
+    await withStories(async ({ harness, session }) => {
+      const orchestrator = harness.storyOrchestrator!;
+      const seen: StoryProviderContext[] = [];
+      const save = (context?: StoryProviderContext) => {
+        expect(context?.lifetimeId).toBe(session.id);
+        expect(context?.signal).toBeInstanceOf(AbortSignal);
+        seen.push(context!);
+      };
+      const getManifest = orchestrator.getManifest.bind(orchestrator);
+      orchestrator.getManifest = (context) => {
+        save(context);
+        return getManifest(context);
+      };
+      const getCurrent = orchestrator.getCurrentStory.bind(orchestrator);
+      orchestrator.getCurrentStory = (context) => {
+        save(context);
+        return getCurrent(context);
+      };
+      const reset = orchestrator.resetStory.bind(orchestrator);
+      orchestrator.resetStory = (request, context) => {
+        save(context);
+        return reset(request, context);
+      };
+      const update = orchestrator.updateArgs.bind(orchestrator);
+      orchestrator.updateArgs = (storyId, args, context) => {
+        save(context);
+        return update(storyId, args, context);
+      };
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      await client.request('GET', `/session/${session.id}/furn/manifest`);
+      await session.story({ storyId: manifest.entries[0].id, action: 'reset' });
+      await session.getCurrentStory();
+      await client.request('POST', `/session/${session.id}/furn/story/args`, { storyId: manifest.entries[0].id, args: {} });
+      expect(seen).toHaveLength(5);
+    });
+  });
+
+  test('a missing native marker consumes the shared deadline without committing readiness or releasing quarantine', async () => {
+    await withStories(async ({ harness, session }) => {
+      const state = harness.server.sessions.get(session.id);
+      state.desktopTimeouts.storyRender = 20;
+      harness.storyOrchestrator!.selectStory = async (request) => ({
+        ...request,
+        markerVersion: 1,
+        connectionEpoch: 'epoch',
+        previewGeneration: 1,
+      });
+      await expect(session.story({ storyId: manifest.entries[0].id })).rejects.toMatchObject({
+        data: { mutation: { disposition: 'indeterminate', effect: 'unknown', quarantined: true } },
+      });
+      expect(state.story).toBeNull();
+    });
+  });
+
+  test('W3C preview mutations reject stale context while chrome and secondary-window references remain live', async () => {
+    const rect = { x: 0, y: 0, width: 100, height: 100 };
+    await withStories(
+      async ({ harness, session }) => {
+        await session.story({ storyId: manifest.entries[0].id });
+        const preview = await session.findElement('accessibility id', 'preview');
+        const chrome = await session.findElement('accessibility id', 'chrome');
+        await session.switchToWindow('secondary');
+        const secondary = await session.findElement('accessibility id', 'secondary-button');
+        await session.switchToWindow('main');
+        harness.storyOrchestrator!.getCurrentStory = async () => null;
+        await expect(preview.click()).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
+        await expect(chrome.click()).resolves.toBeNull();
+        const freshPreview = await session.findElement('accessibility id', 'preview');
+        await expect(freshPreview.click()).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
+        await session.switchToWindow('secondary');
+        await expect(secondary.click()).resolves.toBeNull();
+      },
+      {
+        windows: [
+          {
+            id: 'main',
+            title: 'Main',
+            rect,
+            elements: [
+              { id: 'story-root', automationId: 'story-root', name: '{}', role: 'group', scope: 'preview', windowId: 'main', rect },
+              { id: 'preview', automationId: 'preview', role: 'button', scope: 'preview', windowId: 'main', rect },
+              { id: 'chrome', automationId: 'chrome', role: 'button', scope: 'chrome', windowId: 'main', rect },
+            ],
+          },
+          {
+            id: 'secondary',
+            title: 'Secondary',
+            rect,
+            elements: [
+              {
+                id: 'secondary-button',
+                automationId: 'secondary-button',
+                role: 'button',
+                scope: 'secondary-window',
+                windowId: 'secondary',
+                rect,
+              },
+            ],
+          },
+        ],
+      },
+    );
+  });
+
+  test('W3C element-origin actions cannot bypass preview epoch validation', async () => {
+    await withStories(async ({ harness, session }) => {
+      await session.story({ storyId: manifest.entries[0].id });
+      const preview = await session.findElement('accessibility id', 'button-primary');
+      harness.storyOrchestrator!.getCurrentStory = async () => null;
+      await expect(
+        session.performActions([
+          {
+            type: 'pointer',
+            id: 'mouse',
+            parameters: { pointerType: 'mouse' },
+            actions: [{ type: 'pointerMove', duration: 0, x: 0, y: 0, origin: { 'element-6066-11e4-a52e-4f735466cecf': preview.id } }],
+          },
+        ]),
+      ).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
+    });
+  });
+
+  test('passes local session lifetime and deadline signal separately from serialized selection inputs', async () => {
+    await withStories(async ({ harness, session }) => {
+      const state = harness.server.sessions.get(session.id);
+      state.desktopTimeouts.storyRender = 20;
+      harness.storyOrchestrator!.selectStory = async (input, context) => {
+        expect(Object.keys(input).sort()).toEqual(['requestId', 'runId', 'storyId']);
+        expect(context?.lifetimeId).toBe(session.id);
+        return new Promise((_resolve, reject) => {
+          context!.signal.addEventListener('abort', () => reject(new StoryProviderError('Cancelled after dispatch.', 'unknown')), {
+            once: true,
+          });
+        });
+      };
+      await expect(session.story({ storyId: manifest.entries[0].id })).rejects.toMatchObject({
+        data: { mutation: { disposition: 'indeterminate', effect: 'unknown', quarantined: true } },
+      });
+    });
+  });
+
+  test('an unavailable bridge rejects without quarantining and the operation catalog excludes source/test metadata', async () => {
+    await withStories(async ({ harness, session }) => {
+      const state = harness.server.sessions.get(session.id);
+      const stories = createOperationStories(state, harness.server.sessions, new AbortController().signal)!;
+      expect(await stories.catalog(new AbortController().signal)).toEqual(
+        manifest.entries.map(({ id, name, tags, title }) => ({ id, name, tags, title })),
+      );
+      harness.storyOrchestrator!.selectStory = async () => {
+        throw new StoryBridgeUnavailableError('windows', 'fabric', 'bridge-unavailable');
+      };
+      await expect(session.story({ storyId: manifest.entries[0].id })).rejects.toMatchObject({
+        data: { mutation: { effect: 'none', quarantined: false } },
+      });
+    });
+  });
+
+  test('context-sensitive input rejects stale previews when the provider disconnects or changes epoch', async () => {
+    await withStories(async ({ harness, session }) => {
+      await session.story({ storyId: manifest.entries[0].id });
+      const found = (await session.find({ automationId: 'button-primary' })).result;
+      const getCurrent = harness.storyOrchestrator!.getCurrentStory.bind(harness.storyOrchestrator);
+      harness.storyOrchestrator!.getCurrentStory = async () => null;
+      await expect(session.act({ action: 'activate', ref: found.matches[0].ref, sample: found.sample.id })).rejects.toMatchObject({
+        code: 'stale element reference',
+        data: { reason: 'story-context-stale', mutation: { effect: 'none' } },
+      });
+      expect(harness.server.sessions.get(session.id).story).toBeNull();
+      const fresh = (await session.find({ automationId: 'button-primary' })).result;
+      await expect(session.act({ action: 'activate', ref: fresh.matches[0].ref, sample: fresh.sample.id })).rejects.toMatchObject({
+        data: { reason: 'story-context-stale', mutation: { effect: 'none' } },
+      });
+      harness.storyOrchestrator!.getCurrentStory = getCurrent;
+      await session.story({ storyId: manifest.entries[0].id });
+      const selected = (await session.find({ automationId: 'button-primary' })).result;
+      await expect(session.act({ action: 'activate', ref: selected.matches[0].ref, sample: selected.sample.id })).resolves.toBeDefined();
+    });
+  });
+
+  test('context-sensitive input rejects mismatched native markers without needing an intervening stories read', async () => {
+    await withStories(async ({ harness, session }) => {
+      await session.story({ storyId: manifest.entries[0].id });
+      const found = (await session.find({ automationId: 'button-primary' })).result;
+      harness.host.setElementName('story-root', JSON.stringify({ storyId: manifest.entries[1].id }));
+      await expect(session.act({ action: 'activate', ref: found.matches[0].ref, sample: found.sample.id })).rejects.toMatchObject({
+        code: 'stale element reference',
+        data: { reason: 'story-context-stale' },
+      });
+    });
+  });
+
   test('select a story the story root confirms, and expire references into the preview it replaced', async () => {
     await withStories(async ({ session }) => {
       expect((await session.stories()).result).toEqual({
