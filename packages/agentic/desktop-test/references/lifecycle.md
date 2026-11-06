@@ -25,6 +25,13 @@ Services report readiness and failures through the shared run lifecycle.
 Required-service failure aborts dependent work. Listener/descriptor-ready does
 not prove app-ready, runtime-connected, or story-context-ready.
 
+Process-backed contributions return the authenticated
+`DesktopServiceReadyRecord` from `/process-control`, not a readiness expectation
+or a ready-file observation. Resource records retain its service, descriptor,
+command incarnation, and producer PID alongside the resource generation.
+Only `service-ready` is accepted; target acquisition, application readiness,
+and context readiness require separate verification.
+
 Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees in reverse service order. An
 externally owned app is preserved.

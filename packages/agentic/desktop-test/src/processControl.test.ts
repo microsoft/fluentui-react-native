@@ -6,6 +6,9 @@ import type { ChildProcess } from 'node:child_process';
 import { once } from 'node:events';
 import { createDesktopProcessControl } from './processControl.js';
 import { deadline, NodeDesktopCommandRunner } from './commands.js';
+import type { RunningDesktopCommand } from './commands.js';
+import { DesktopServiceScope } from './services.js';
+import type { DesktopResourceRecord } from './resources.js';
 
 const fixture = path.resolve(__dirname, '../fixtures/process-control/child.mjs');
 const parentFixture = path.resolve(__dirname, '../fixtures/process-control/parent.mjs');
@@ -44,6 +47,55 @@ describe('owned process lifelines', () => {
       expect(fs.existsSync(marker)).toBe(false);
       expect(await running.completed).toBe(0);
     } finally {
+      await runner.close();
+    }
+  });
+
+  test('records an authenticated process receipt in an owned resource generation', async () => {
+    const marker = path.join(root, 'descriptor');
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet });
+    const scope = new DesktopServiceScope(runner);
+    const records: DesktopResourceRecord[] = [];
+    scope.setResourceObserver((record) => records.push(record));
+    let running: RunningDesktopCommand | undefined;
+    try {
+      await scope.contribute(
+        [
+          {
+            id: 'fixture',
+            ownership: 'owned',
+            prepare: () => ({
+              identity: 'fixture-service',
+              acquire: async (signal) => {
+                running = runner.start({ command: process.execPath, args: [fixture, 'service', marker], cwd: root, env: {} });
+                if (!running.waitForReadiness) throw new Error('Process readiness is required.');
+                return running.waitForReadiness({ tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' }, 5000, signal);
+              },
+              dispose: async () => running?.stop(),
+            }),
+          },
+        ],
+        { targetId: 'fixture-target', targetInstanceId: 'fixture-instance' },
+      );
+      expect(records.at(-1)).toMatchObject({
+        id: 'desktop:fixture',
+        identity: 'fixture-service',
+        generation: 1,
+        ownership: 'owned',
+        readiness: 'ready',
+        serviceReady: {
+          tier: 'service-ready',
+          service: 'fixture',
+          descriptor: 'fixture.json',
+          incarnation: expect.any(String),
+          processId: Number(fs.readFileSync(marker, 'utf8')),
+        },
+      });
+      await scope.close();
+      expect(records.at(-1)?.disposal).toBe('settled');
+      expect(fs.existsSync(marker)).toBe(false);
+    } finally {
+      await scope.close();
       await runner.close();
     }
   });
