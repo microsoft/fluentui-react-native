@@ -34,9 +34,11 @@ An old socket cannot authenticate or complete work on its replacement.
 The local provider context carries the session lifetime ID and abort signal
 separately from serializable inputs. No authenticated bridge means prompt
 `bridge-unavailable`, with endpoint/renderer and effect `none`, before dispatch.
-Selection waits for both HTTP navigation and correlated runtime readiness,
-then the driver verifies the native marker within the same render deadline.
-Disconnect promptly rejects pending work and aborts HTTP. Cancellation,
+Controlled selection sends prepare and navigation directly to the authenticated
+socket, waits for correlated runtime readiness, then the driver verifies the
+native marker within the same render deadline. Legacy unprotected selection
+additionally waits for upstream HTTP navigation. Disconnect promptly rejects
+pending work and aborts any legacy HTTP request. Cancellation,
 disconnect, or deadline after dispatch fences that socket and leaves the
 effect unknown: the driver retains target quarantine. Late ready/error events
 cannot release it. Subsequent requests return renderer-specific
@@ -54,6 +56,15 @@ transparent recovery or use HTTP completion as a render fence. Relaunch the
 app when restarting the channel/driver against that running installation.
 This is source evidence, not native endpoint qualification or a claim about
 other dependency versions.
+
+The controlled channel avoids that upstream HTTP handler and never relays
+inbound WebSocket frames. This is a separate supported adapter, not a patch to
+upstream internals or listener-order interception. Deterministic endpoint
+contracts exercise HTTP refusals, foreign WebSocket prepare/selection/args,
+direct authenticated dispatch, correlated settlement and cancellation fencing.
+They do not qualify the native transport: repeat these checks against each
+renderer, including driver-owned select/reset, a stale preview action, delayed
+ready/error after cancellation, and manifest-backed smoke traversal.
 
 Do not patch generated identity or manifests. Change the app configuration or
 manifest producer, regenerate, then validate the exact platform manifest.

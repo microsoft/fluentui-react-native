@@ -34,6 +34,8 @@ export type StorybookChannelOrchestratorOptions = {
   timeoutMs?: number;
   errorOutput?: DesktopStorybookErrorOutput;
   recovery?: BridgeEpochRecovery;
+  /** Exclusive transport: dispatch only to the authenticated runtime, never upstream HTTP. */
+  controlled?: boolean;
 };
 
 type PendingSelection = {
@@ -49,6 +51,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private readonly serverUrl: string;
   private readonly timeoutMs: number;
   private readonly errorOutput: DesktopStorybookErrorOutput;
+  private readonly controlled: boolean;
   private readonly pending = new Map<string, PendingSelection>();
   private readonly epochs = new WeakMap<ChannelClient, string>();
   private readonly usedRequests = new WeakMap<ChannelClient, Set<string>>();
@@ -71,12 +74,14 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     timeoutMs = 30_000,
     errorOutput = process.stderr,
     recovery,
+    controlled = driverManifest.agent !== undefined,
   }: StorybookChannelOrchestratorOptions) {
     this.driverManifest = driverManifest;
     this.fetch = fetch;
     this.serverUrl = serverUrl.replace(/\/$/, '');
     this.timeoutMs = timeoutMs;
     this.errorOutput = errorOutput;
+    this.controlled = driverManifest.agent !== undefined || controlled;
     this.journal = recovery
       ? new BridgeEpochJournal(recovery, {
           endpoint: driverManifest.endpoint,
@@ -145,22 +150,26 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
           args: [{ ...request, connectionEpoch: epoch, selectionSequence: ++this.selectionSequence }],
         }),
       );
-      const navigation = this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
-        method: 'POST',
-        signal: controller.signal,
-      }).then(async (response) => {
-        if (!response.ok && response.status !== 408) {
-          const detail = await response.text();
-          throw new Error(`Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`);
-        }
-      });
+      const navigation = this.controlled
+        ? Promise.resolve(client.send(JSON.stringify({ type: 'setCurrentStory', args: [{ storyId: request.storyId, viewMode: 'story' }] })))
+        : this.fetch(`${this.serverUrl}/select-story-sync/${encodeURIComponent(request.storyId)}`, {
+            method: 'POST',
+            signal: controller.signal,
+          }).then(async (response) => {
+            if (!response.ok && response.status !== 408) {
+              const detail = await response.text();
+              throw new Error(
+                `Storybook failed to select "${request.storyId}" with status ${response.status}${detail ? `: ${detail}` : '.'}`,
+              );
+            }
+          });
       const [, result] = await Promise.race([Promise.all([navigation, ready]), failure]);
       this.currentStory = result;
       return result;
     } catch (error) {
       this.currentStory = null;
       if (dispatched) {
-        // Upstream HTTP cancellation does not retract setCurrentStory or fence its eventual render.
+        // A dispatched setCurrentStory may still render after cancellation, on either transport.
         this.needsRelaunch = true;
         this.bridgeConnected = false;
         this.fencedClients.add(client);
@@ -186,6 +195,8 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   }
 
   async updateArgs(storyId: string, args: Readonly<Record<string, unknown>>, context?: StoryProviderContext): Promise<void> {
+    if (this.controlled)
+      throw new StoryProviderError('story-args-unsupported: Story args are unsupported on a controlled Storybook service.', 'none');
     if (context?.signal.aborted) throw new StoryProviderError('Story args update was cancelled before dispatch.', 'none');
     this.requireStory(storyId);
     if (this.journal) await this.checkBridgeRecovery();

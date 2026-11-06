@@ -48,6 +48,7 @@ import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopComman
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
 import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
+import { connectStoryTraversal } from './storyTraversal.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -74,6 +75,7 @@ export type DesktopStorybookCliOptions = {
   verbose?: boolean;
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
+  connectStoryTraversal?: typeof connectStoryTraversal;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
   /** Resolves a Windows or Win32 desktop target's verified application identity for `driver --agent`. */
   resolveDesktopApplication?: typeof resolveDesktopApplication;
@@ -125,6 +127,7 @@ export class DesktopStorybookCli {
   private readonly verbose: boolean;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
+  private readonly connectStoryTraversal: typeof connectStoryTraversal;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
   private readonly resolveDesktopApplication: typeof resolveDesktopApplication;
   private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
@@ -165,6 +168,7 @@ export class DesktopStorybookCli {
     this.verbose = options.verbose ?? process.env[STORYBOOK_VERBOSE] === '1';
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
+    this.connectStoryTraversal = options.connectStoryTraversal ?? connectStoryTraversal;
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
     this.resolveDesktopApplication = options.resolveDesktopApplication ?? resolveDesktopApplication;
     this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
@@ -556,9 +560,31 @@ export class DesktopStorybookCli {
         }
         await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
       }
-      await this.services.guard(
-        this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs),
-      );
+      const traversal = instance.driverManifestPath
+        ? await this.connectStoryTraversal({
+            url: loopbackUrl(instance.driverPort),
+            platform,
+            targetId: this.targetId(platform),
+            fetch: this.fetch,
+            signal: this.services.controller.signal,
+          })
+        : undefined;
+      let traversalFailure: unknown;
+      try {
+        await this.services.guard(
+          this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs, traversal?.select),
+        );
+      } catch (error) {
+        traversalFailure = error;
+      }
+      try {
+        await traversal?.close();
+      } catch (error) {
+        throw traversalFailure === undefined
+          ? error
+          : new AggregateError([traversalFailure, error], 'Storybook traversal and cleanup failed.');
+      }
+      if (traversalFailure !== undefined) throw traversalFailure;
       if (mode === 'stories-and-tests') {
         const result = await this.services.guard(
           this.runSmokeTests({
@@ -755,7 +781,12 @@ export class DesktopStorybookCli {
     };
   }
 
-  private async renderEveryStory(serverUrl: string, settleMs: number, initialRenderTimeoutMs = 300_000): Promise<void> {
+  private async renderEveryStory(
+    serverUrl: string,
+    settleMs: number,
+    initialRenderTimeoutMs = 300_000,
+    select = (storyId: string, timeoutMs: number) => this.selectStory(serverUrl, storyId, timeoutMs),
+  ): Promise<void> {
     const storyIndex = await this.getJson(new URL('/index.json', serverUrl));
     const entries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
       (entry) => entry.type === 'story' && entry.id,
@@ -775,7 +806,7 @@ export class DesktopStorybookCli {
       this.reporter?.emit({ kind: 'scope-start', payload: { label: `Render ${id}`, category: 'worker' } }, testId, { story: id }, testId);
       this.reporter?.emit({ kind: 'test-start', payload: { testId, title: `Render ${id}`, attempt: 0 } }, testId, { story: id });
       try {
-        await this.selectStory(serverUrl, id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
+        await select(id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
         consecutiveFailures = 0;
         if (settleMs > 0) {
           await delay(settleMs);

@@ -67,6 +67,7 @@ const nativeDriverTestOptions = {
   buildNativeDriver: async () => nativeDriverArtifact,
   resolveNativeDriver: async () => nativeDriverArtifact,
   writeMacOSApplicationLease: async () => undefined,
+  connectStoryTraversal: async () => ({ select: async () => undefined, close: async () => null }),
 };
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
   endpoint: platform,
@@ -939,6 +940,37 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
+  test('retains both authoritative traversal and cleanup failures without starting authored tests', async () => {
+    const navigationFailure = new Error('navigation failed');
+    const cleanupFailure = new Error('session cleanup failed');
+    const runSmokeTests = jest.fn();
+    const cli = new DesktopStorybookCli(
+      makeConfig({ macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' } } } }),
+      {
+        ...nativeDriverTestOptions,
+        createStoryManifest: createEmptyStoryManifest,
+        runner: new RecordingRunner(),
+        isPortAvailable: async () => true,
+        output: { write: () => true },
+        errorOutput: { write: () => true },
+        fetch: async () => new Response(JSON.stringify({ entries: { first: { id: 'first--story', type: 'story' } } })),
+        runSmokeTests,
+        connectStoryTraversal: async () => ({
+          select: async () => {
+            throw navigationFailure;
+          },
+          close: async () => {
+            throw cleanupFailure;
+          },
+        }),
+      },
+    );
+    await expect(cli.smoke('macos', { mode: 'stories-and-tests' })).rejects.toMatchObject({
+      errors: [{ errors: [expect.objectContaining({ cause: navigationFailure })] }, cleanupFailure],
+    });
+    expect(runSmokeTests).not.toHaveBeenCalled();
+  });
+
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
     const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
@@ -957,9 +989,6 @@ describe('DesktopStorybookCli', () => {
             },
           }),
         );
-      }
-      if (url.includes('select-story-sync')) {
-        events.push(`select:${url.split('/').at(-1)}`);
       }
       return new Response('{}');
     });
@@ -999,12 +1028,22 @@ describe('DesktopStorybookCli', () => {
         runner,
         resolveNativeDriver,
         writeMacOSApplicationLease,
+        connectStoryTraversal: async () => ({
+          select: async (id) => {
+            events.push(`select:${id}`);
+          },
+          close: async () => {
+            events.push('close');
+            return null;
+          },
+        }),
       },
     );
 
     await cli.smoke('macos', { mode: 'stories-and-tests' });
 
-    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'tests']);
+    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'close', 'tests']);
+    expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
     expect(writeMacOSApplicationLease).toHaveBeenCalledWith(
       path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
       120_000,
