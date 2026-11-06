@@ -272,7 +272,11 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
     const platformFlags = action.opts<PlatformFlags>();
     const endpoint = selectedPlatform(platformFlags) ?? options.config.platform;
     const renderer =
-      endpoint === 'macos' && platformFlags.paper ? 'paper' : endpoint && options.config.getDesktopTarget?.(endpoint)?.host.renderer;
+      endpoint === 'macos' && platformFlags.paper
+        ? 'paper'
+        : endpoint
+          ? options.config.getDesktopTarget?.(endpoint)?.host.renderer
+          : undefined;
     session = await createDesktopReportSession({
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
