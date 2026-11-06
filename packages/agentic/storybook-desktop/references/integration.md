@@ -126,7 +126,10 @@ story's retry budget covers a cold development bundle
 use 30 s. The Windows smoke relaunches the app between its `stories` and
 `tests` phases, so the `tests` phase first selects the first manifest story
 with the same budget and waits for authenticated readiness before authored
-tests navigate. Authored-test navigation itself does not wait for the bridge.
+tests navigate. A relaunched runtime that has said hello but not yet sent its
+initial `storyRendered` reports `bridge-unavailable`, not `relaunch-required`,
+so this wait keeps retrying. Authored-test navigation itself does not wait for
+the bridge.
 
 Epoch/cancellation-aware providers reject stale preview mutations without
 invalidating chrome or live secondary windows. Interrupted navigation still

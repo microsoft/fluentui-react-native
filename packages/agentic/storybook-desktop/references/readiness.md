@@ -22,8 +22,12 @@ channel events.
 
 At startup, require both an authenticated runtime hello and the initial
 `storyRendered` event on the same connection. The hello alone can precede
-Storybook's navigation handlers after an app restart. Startup render readiness
-does not replace request-correlated readiness for each requested story.
+Storybook's navigation handlers after an app restart. Until that initial render
+arrives, an open, unfenced replacement connection reports `bridge-unavailable`
+with effect `none`, even after the previous bridge closed. A fenced bridge, or
+no open bridge after a close, still reports `relaunch-required`. Startup render
+readiness does not replace request-correlated readiness for each requested
+story.
 
 Each socket receives a fresh connection epoch in a version-2 hello challenge.
 The hello must echo that epoch and the manifest identity. Ready/error events

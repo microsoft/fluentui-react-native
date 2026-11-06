@@ -382,13 +382,18 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   }
 
   private requireBridge(): ChannelClient {
-    if (!this.bridgeConnected || !this.bridgeClient || this.bridgeClient.readyState !== 1 || this.needsRelaunch) {
+    const client = this.bridgeClient;
+    if (!this.bridgeConnected || !client || client.readyState !== 1 || this.needsRelaunch) {
+      // A replacement runtime that said hello after the previous bridge closed is relaunched, not fenced: until its
+      // initial storyRendered arrives it is only unavailable, and nothing has been dispatched to it.
+      const awaitingInitialRender =
+        client !== undefined && client.readyState === 1 && !this.fencedClients.has(client) && !this.initializedClients.has(client);
       throw new StoryBridgeUnavailableError(
         this.driverManifest.endpoint,
         this.driverManifest.renderer,
-        this.needsRelaunch ? 'relaunch-required' : 'bridge-unavailable',
+        this.needsRelaunch && !awaitingInitialRender ? 'relaunch-required' : 'bridge-unavailable',
       );
     }
-    return this.bridgeClient;
+    return client;
   }
 }

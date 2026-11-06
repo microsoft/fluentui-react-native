@@ -24,6 +24,10 @@ class Client extends EventEmitter {
     return this.sent[0].args[0].connectionEpoch as string;
   }
   authenticate(): void {
+    this.hello();
+    this.receive('storyRendered', request.storyId);
+  }
+  hello(): void {
     this.receive('furn:desktop:hello', {
       connectionEpoch: this.epoch,
       endpoint: manifest.endpoint,
@@ -33,7 +37,6 @@ class Client extends EventEmitter {
       targetId: manifest.targetId,
       version: 2,
     });
-    this.receive('storyRendered', request.storyId);
   }
   ready(overrides: Record<string, unknown> = {}): void {
     this.receive('furn:desktop:story-ready', {
@@ -340,6 +343,29 @@ describe('durable authenticated bridge epochs', () => {
     expect(JSON.parse(store.records.get('bridge-epoch.json')!).epoch).toBe(next.client.epoch);
     expect(next.client.epoch).not.toBe(first.client.epoch);
   });
+  test('a relaunched runtime awaiting its initial render is unavailable until storyRendered, then selectable', async () => {
+    const store = recovery();
+    const state = setup(undefined, 100, store);
+    await authenticate(state, store);
+    state.client.readyState = 3;
+    state.client.emit('close');
+    const replacement = new Client();
+    state.server.emit('connection', replacement);
+    replacement.hello();
+    for (let attempt = 0; attempt < 20 && JSON.parse(store.records.get('bridge-epoch.json')!).epoch !== replacement.epoch; attempt++)
+      await new Promise<void>((resolve) => setImmediate(resolve));
+    expect(JSON.parse(store.records.get('bridge-epoch.json')!).epoch).toBe(replacement.epoch);
+    await expect(state.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    expect(replacement.sent).toHaveLength(1);
+    replacement.receive('storyRendered', request.storyId);
+    const selection = state.orchestrator.selectStory(request);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    replacement.ready({ connectionEpoch: replacement.epoch });
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: replacement.epoch });
+  });
   test('storage and verified-identity failures never enable dispatch', async () => {
     const store = recovery();
     store.resolveApplication.mockRejectedValue(new Error('Identity unavailable'));
@@ -491,7 +517,14 @@ describe('StorybookChannelOrchestrator epochs and lifetime', () => {
     });
     const replacement = new Client();
     server.emit('connection', replacement);
-    replacement.authenticate();
+    replacement.hello();
+    // A hello-only replacement awaits its initial render; it is unavailable rather than fenced.
+    await expect(orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable', endpoint: 'windows', renderer: 'fabric' },
+      effect: 'none',
+    });
+    expect(replacement.sent).toHaveLength(1);
+    replacement.receive('storyRendered', request.storyId);
     expect(replacement.epoch).not.toBe(client.epoch);
     // The old socket can neither authenticate again nor replace the new epoch.
     client.authenticate();
