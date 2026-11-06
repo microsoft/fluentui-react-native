@@ -17,6 +17,9 @@ machines and must remain **Not run** on macOS. Deterministic fake-host results
 and Storybook callback smoke results are supporting evidence, not proof of the
 real descriptor path.
 
+Run the `yarn storybook`, `yarn desktop-driver`, and `yarn desktop-test`
+commands below from `apps/storybook`, where their scripts are declared.
+
 ## Parameters and prerequisites
 
 Record these for every renderer run:
@@ -96,16 +99,20 @@ Perform this after the app pass, independently for Fabric and Paper. Use one
 supervisor path at a time; do not start `storybook driver --agent` and
 `desktop-test serve --agent` concurrently.
 
-1. Start the already-prepared app using the documented app workflow. Start
-   either `yarn storybook driver --macos --agent` or the Storybook target via
-   `yarn desktop-test --target macos serve --agent`. Wait for the structured
-   ready record, including the private descriptor name. Do not print, copy to
-   artifacts, or expose the descriptor grant.
-2. Connect `desktop-driver-mcp` using its default
+1. Start either `yarn storybook driver --macos --agent` or the Storybook target
+   via `yarn desktop-test --target macos serve --agent`. This owns Metro and
+   the Storybook channel; wait for its structured ready record, including the
+   private descriptor name. Do not print, copy to artifacts, or expose the
+   descriptor grant.
+2. In a separate shell, launch the prepared app with
+   `yarn storybook run --macos`. Keep the driver service running. Confirm the
+   app connects to the instance from the driver's readiness record before
+   opening an MCP session.
+3. Connect `desktop-driver-mcp` using its default
    `agent-connection.json` descriptor. Confirm the adapter verified the native
    service identity before any grant is used. Use a real MCP client and the
    public tools; do not substitute a direct unprotected driver URL.
-3. Run the following cases against the real descriptor and native service.
+4. Run the following cases against the real descriptor and native service.
    Fault-injection cases must intercept the adapter-to-service transport while
    retaining the real descriptor, verified service, and native helper. Record
    the injected dispatch point and whether a mutation was applied; never retry
