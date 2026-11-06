@@ -1,11 +1,56 @@
 import { DesktopAuthority, grantAllowsTarget } from './grants.js';
 
 describe('DesktopAuthority', () => {
+  test('awaits asynchronous cleanup after synchronous invalidation', async () => {
+    const authority = new DesktopAuthority();
+    const grant = authority.issue({ label: 'agent', targets: '*' });
+    let finish!: () => void;
+    const pending = new Promise<void>((resolve) => {
+      finish = resolve;
+    });
+    const listener = jest.fn(() => pending);
+    authority.onRevoke(listener);
+    expect(authority.revoke(grant.id)).toBe(true);
+    expect(authority.authenticate(`Bearer ${grant.token}`)).toBeUndefined();
+    let drained = false;
+    const barrier = authority.revokeAndDrain(grant.id).then(() => {
+      drained = true;
+    });
+    await Promise.resolve();
+    expect(drained).toBe(false);
+    finish();
+    await barrier;
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect(drained).toBe(true);
+  });
+
+  test('keeps drain failures observable after legacy revocation and awaits every listener', async () => {
+    const authority = new DesktopAuthority();
+    const grant = authority.issue({ label: 'agent', targets: '*' });
+    const failure = new Error('injected cleanup failure');
+    let completed = false;
+    authority.onRevoke(() => {
+      throw failure;
+    });
+    authority.onRevoke(async () => {
+      completed = true;
+    });
+    authority.revoke(grant.id);
+    await expect(authority.revokeAndDrain(grant.id)).rejects.toMatchObject({ errors: [failure] });
+    expect(completed).toBe(true);
+    await expect(authority.revokeAndDrain(grant.id)).rejects.toMatchObject({ errors: [failure] });
+  });
+
   test('issues grants whose tokens authenticate to the same grant', () => {
     const authority = new DesktopAuthority();
     const issued = authority.issue({ label: 'agent', targets: ['a', 'b'] });
 
-    expect(authority.authenticate(`Bearer ${issued.token}`)).toEqual({ id: issued.id, label: 'agent', targets: ['a', 'b'] });
+    expect(authority.authenticate(`Bearer ${issued.token}`)).toEqual({
+      id: issued.id,
+      label: 'agent',
+      scopes: ['driver-control'],
+      targets: ['a', 'b'],
+    });
     expect(authority.authenticate(`bearer ${issued.token}`)?.id).toBe(issued.id);
   });
 

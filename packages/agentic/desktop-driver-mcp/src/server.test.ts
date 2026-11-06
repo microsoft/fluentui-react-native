@@ -3,7 +3,10 @@ import { createHash, randomBytes } from 'node:crypto';
 import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
 import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
 import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver/storybook';
-import { createDesktopDriverStoryHarness, createDesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
+import {
+  createDesktopDriverStoryHarness as createStoryHarness,
+  createDesktopDriverTestHarness as createTestHarness,
+} from '@fluentui-react-native/desktop-driver/testing';
 import type { DesktopDriverTestHarness } from '@fluentui-react-native/desktop-driver/testing';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
@@ -17,6 +20,30 @@ type Fixture = { client: Client; harness: DesktopDriverTestHarness };
 
 const features = { accessibilityActions: true, boundedObservation: true };
 const onePixelPng = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+const connections = new WeakMap<DesktopDriverTestHarness, { authority: DesktopAuthority; token: string }>();
+
+async function createDesktopDriverTestHarness(
+  options: Parameters<typeof createTestHarness>[0] = {},
+  story?: Parameters<typeof createTestHarness>[1],
+  serverOptions: Parameters<typeof createTestHarness>[2] = {},
+): Promise<DesktopDriverTestHarness> {
+  const authority = serverOptions.authority ?? new DesktopAuthority();
+  const grant = authority.issue({ label: 'test', targets: '*' });
+  const harness = await createTestHarness(options, story, { ...serverOptions, authority });
+  connections.set(harness, { authority, token: grant.token });
+  return harness;
+}
+
+async function createDesktopDriverStoryHarness(
+  manifest: DesktopStoryManifest,
+  options: Parameters<typeof createStoryHarness>[1],
+): Promise<DesktopDriverTestHarness> {
+  const authority = new DesktopAuthority();
+  const grant = authority.issue({ label: 'test', targets: '*' });
+  const harness = await createStoryHarness(manifest, options, { authority });
+  connections.set(harness, { authority, token: grant.token });
+  return harness;
+}
 
 async function connectClient(connect: ConnectDesktopDriver, progressIntervalMs?: number): Promise<Client> {
   const server = createDesktopDriverMcpServer({ connect, version: '0.0.0-test', ...(progressIntervalMs ? { progressIntervalMs } : {}) });
@@ -24,6 +51,11 @@ async function connectClient(connect: ConnectDesktopDriver, progressIntervalMs?:
   await server.connect(serverTransport);
   const client = new Client({ name: 'test', version: '1.0.0' });
   await client.connect(clientTransport);
+  const close = client.close.bind(client);
+  client.close = async () => {
+    await close();
+    await server.close();
+  };
   return client;
 }
 
@@ -44,10 +76,12 @@ async function withFixture(
 }
 
 function testConnection(harness: DesktopDriverTestHarness, fetcher?: typeof fetch): DesktopDriverConnection {
+  const connection = connections.get(harness);
+  if (!connection) throw new Error('Missing fixture authority.');
   return {
-    client: createDesktopDriverClient({ url: harness.server.url, ...(fetcher ? { fetch: fetcher } : {}) }),
-    incarnation: harness.server.url,
-    principal: 'test',
+    client: createDesktopDriverClient({ grant: connection.token, url: harness.server.url, ...(fetcher ? { fetch: fetcher } : {}) }),
+    incarnation: connection.authority.incarnation,
+    principal: connection.token.split('.')[1],
   };
 }
 
@@ -78,6 +112,107 @@ async function open(client: Client, harness: DesktopDriverTestHarness): Promise<
 }
 
 describe('desktop-driver-mcp', () => {
+  test('isolates controllers sharing a descriptor principal instead of sharing sessions', async () => {
+    const harness = await createDesktopDriverTestHarness({ features });
+    const first = new DesktopController(async () => testConnection(harness));
+    const second = new DesktopController(async () => testConnection(harness));
+    try {
+      const session = await first.open({ launch: true, target: harness.target.id });
+      const owner = harness.server.sessions.get(session.id).owner?.grantId;
+      expect(owner).not.toBe(testConnection(harness).principal);
+      expect((await second.status()).session).toBeUndefined();
+      await expect(second.run('observe', {})).rejects.toMatchObject({ reason: 'no-session' });
+      await expect(second.open({ launch: true, target: harness.target.id })).rejects.toMatchObject({ code: 'session not created' });
+      await first.dispose();
+      const next = await second.open({ launch: true, target: harness.target.id });
+      expect(harness.server.sessions.get(next.id).owner?.grantId).not.toBe(owner);
+    } finally {
+      await first.dispose();
+      await second.dispose();
+      await harness.close();
+    }
+  });
+
+  test('refuses old or unprotected services rather than falling back to shared authority', async () => {
+    const harness = await createTestHarness({ features });
+    const controller = new DesktopController(async () => ({
+      client: createDesktopDriverClient({ url: harness.server.url }),
+      incarnation: 'legacy',
+      principal: 'legacy',
+    }));
+    try {
+      await expect(controller.status()).rejects.toMatchObject({ reason: 'connection-authority-unsupported' });
+    } finally {
+      await controller.dispose();
+      await harness.close();
+    }
+  });
+
+  test.each(['lost-response', 'drain-failure', 'unauthorized'] as const)(
+    'retains terminal cleanup responsibility after %s',
+    async (failure) => {
+      const errors = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+      const harness = await createDesktopDriverTestHarness({ features });
+      let revocations = 0;
+      const connection = testConnection(harness, async (input, init) => {
+        const response = await fetch(input, init);
+        if (String(input).endsWith('/furn/grants/current')) {
+          revocations += 1;
+          if (revocations === 1 && failure === 'lost-response') {
+            await response.body?.cancel();
+            throw new Error('injected revoke response loss');
+          }
+          if (revocations === 1 && failure === 'unauthorized') {
+            await response.body?.cancel();
+            return new Response(JSON.stringify({ value: { error: 'unauthorized', message: 'injected auth failure' } }), {
+              status: 401,
+              headers: { 'content-type': 'application/json' },
+            });
+          }
+        }
+        return response;
+      });
+      const controller = new DesktopController(async () => connection);
+      try {
+        const session = await controller.open({ launch: true, target: harness.target.id });
+        if (failure === 'drain-failure') {
+          jest.spyOn(harness.server.sessions, 'deleteOwnedBy').mockRejectedValueOnce(new Error('injected drain failure'));
+        }
+        await controller.dispose();
+        expect(controller.session).toBe(session.id);
+        expect(errors).toHaveBeenCalledWith(
+          'desktop-driver-mcp: session cleanup is incomplete; the service must drain or expire the session.',
+        );
+        await controller.dispose();
+        expect(controller.session).toBeUndefined();
+        expect(revocations).toBe(2);
+        expect(() => harness.server.sessions.get(session.id)).toThrow();
+      } finally {
+        await controller.dispose();
+        await harness.close();
+        errors.mockRestore();
+      }
+    },
+  );
+
+  test('never echoes discovery failure contents to diagnostics or model output', async () => {
+    const errors = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    const sensitive = 'fdg1.private-principal.private-credential';
+    const client = await connectClient(async () => {
+      throw new Error(sensitive);
+    });
+    try {
+      const result = await call(client, 'desktop_session');
+      expect(result.isError).toBe(true);
+      expect(JSON.stringify(result)).not.toContain(sensitive);
+      expect(errors).toHaveBeenCalledWith('desktop-driver-mcp: connecting failed; verify private discovery and the service identity.');
+      expect(JSON.stringify(errors.mock.calls)).not.toContain(sensitive);
+    } finally {
+      await client.close();
+      errors.mockRestore();
+    }
+  });
+
   test('offers six tools with bounded schemas, and lists the service targets', async () => {
     await withFixture({}, async ({ client, harness }) => {
       const { tools } = await client.listTools();
@@ -352,7 +487,8 @@ describe('desktop-driver-mcp', () => {
       unavailable = true;
       const refused = await call(client, 'desktop_session');
       expect(JSON.stringify(json(refused))).not.toContain('/private/path');
-      expect(errors).toHaveBeenCalledWith(expect.stringContaining('/private/path'));
+      expect(errors).toHaveBeenCalledWith('desktop-driver-mcp: connecting failed; verify private discovery and the service identity.');
+      expect(JSON.stringify(errors.mock.calls)).not.toContain('/private/path');
 
       unavailable = false;
       harness = await createDesktopDriverTestHarness({ features });
@@ -367,7 +503,7 @@ describe('desktop-driver-mcp', () => {
 
   test('ends the open session when the MCP client goes away', async () => {
     const harness = await createDesktopDriverTestHarness({ features });
-    const driver = createDesktopDriverClient({ url: harness.server.url });
+    const driver = testConnection(harness).client;
     const client = await connectClient(async () => ({ ...testConnection(harness), client: driver }));
     try {
       const session = await open(client, harness);
@@ -375,10 +511,11 @@ describe('desktop-driver-mcp', () => {
       const started = Date.now();
       let gone = false;
       while (!gone && Date.now() - started < 3000) {
-        gone = await driver.request('GET', `/session/${session}/window`).then(
-          () => false,
-          (error: { code?: string }) => error.code === 'invalid session id',
-        );
+        try {
+          harness.server.sessions.get(session);
+        } catch {
+          gone = true;
+        }
       }
       expect(gone).toBe(true);
     } finally {
@@ -505,8 +642,10 @@ describe('desktop-driver-mcp', () => {
   test('retains the session after a lost mutation response without replaying the mutation', async () => {
     const harness = await createDesktopDriverTestHarness({ features });
     let mutations = 0;
+    let delegations = 0;
     const connection = testConnection(harness, async (input, init) => {
       const response = await fetch(input, init);
+      if (String(input).endsWith('/furn/grants/connection')) delegations += 1;
       if (String(input).endsWith('/furn/ops/sequence')) {
         mutations += 1;
         await response.body?.cancel();
@@ -529,6 +668,7 @@ describe('desktop-driver-mcp', () => {
         response: { result: { status: 'passed' } },
       });
       expect(mutations).toBe(1);
+      expect(delegations).toBe(1);
     } finally {
       await controller.dispose();
       await harness.close();
@@ -587,9 +727,7 @@ describe('desktop-driver-mcp', () => {
     } finally {
       await controller.dispose();
       await harness.close();
-      expect(errors).toHaveBeenCalledWith(
-        'desktop-driver-mcp: session cleanup is incomplete; the service must drain or expire the session.',
-      );
+      expect(errors).not.toHaveBeenCalled();
       errors.mockRestore();
     }
   });

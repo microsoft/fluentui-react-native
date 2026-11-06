@@ -159,3 +159,9 @@ The [reference index](references/README.md) describes each package-owned guide.
 The service implements native application semantics rather than pretending to
 be a browser. Unsupported browser features return `unsupported operation`
 instead of fabricated success.
+
+Protected clients use `driver-control` grants. MCP connections attenuate the
+private descriptor grant into distinct child principals, with target/scope
+subset checks and awaitable, retryable descendant revocation. Workload and
+operator-recovery scopes do not expose management HTTP routes; see the
+[security model](references/security.md).

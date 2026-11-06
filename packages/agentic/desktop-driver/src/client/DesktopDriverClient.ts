@@ -74,6 +74,25 @@ export class DesktopDriverClient {
     return this.request('GET', '/status');
   }
 
+  /** Non-secret identity for connection bookkeeping; never authorizes a request. */
+  get principalId(): string | undefined {
+    return this.#grant?.split('.')[1];
+  }
+
+  /** Obtains a connection-local driver-only principal. Credentials remain private to the returned client. */
+  async delegateConnection(): Promise<DesktopDriverClient> {
+    const value = await this.request<{ token: string }>('POST', '/furn/grants/connection');
+    if (typeof value?.token !== 'string' || !/^fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}$/.test(value.token)) {
+      throw new Error('The service does not support connection authority.');
+    }
+    return new DesktopDriverClient({ fetch: this.fetch, grant: value.token, url: this.url });
+  }
+
+  /** Retryable terminal cleanup: revoked credentials authorize only their own child drain. */
+  revokeConnection(): Promise<null> {
+    return this.request('DELETE', '/furn/grants/current');
+  }
+
   async newSession(capabilities: NewSessionCapabilities): Promise<DesktopSessionClient> {
     const value = await this.request<{ capabilities: Record<string, unknown>; sessionId: string }>('POST', '/session', {
       capabilities,

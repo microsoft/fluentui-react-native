@@ -22,6 +22,11 @@ editing.
 - Bind only to loopback, reject browser-origin requests, and fail closed when a
   helper, signature, target identity, permission, or capability cannot be
   verified.
+- Keep driver-control, declared-workload, and operator-recovery authority
+  separate. Child grants may only attenuate targets/scopes. Revoke descendant
+  authority synchronously and await acquisition/session drains; revoked-child
+  proof authorizes only retrying that child's terminal cleanup, never driver
+  access. Never evict cleanup proof to reuse the finite lifetime grant budget.
 - Permit one active session per target. Serialize each session's commands and
   all physical input, including across independent helper processes.
 - Every host operation must honor its `AbortSignal`, stop side effects, settle

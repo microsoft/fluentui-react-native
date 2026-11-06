@@ -43,6 +43,7 @@ export async function createDesktopDriverTestHarness(
 export async function createDesktopDriverStoryHarness(
   manifest: DesktopStoryManifest,
   options: FakeDesktopHostOptions = {},
+  serverOptions: Omit<DesktopDriverServerOptions, 'targets'> = {},
 ): Promise<DesktopDriverTestHarness> {
   const host = new FakeDesktopHost({ ...options, storyRootTestId: 'story-root' });
   const storyOrchestrator = new FakeStoryOrchestrator(manifest, host);
@@ -56,7 +57,7 @@ export async function createDesktopDriverStoryHarness(
     storyOrchestrator,
     storyRootTestId: 'story-root',
   };
-  const server = await createDesktopDriverServer({ targets: [target] });
+  const server = await createDesktopDriverServer({ ...serverOptions, targets: [target] });
   return {
     host,
     server,

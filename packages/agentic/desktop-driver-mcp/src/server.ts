@@ -257,6 +257,11 @@ export function createDesktopDriverMcpServer(options: DesktopDriverMcpServerOpti
   server.server.onclose = () => {
     void controller.dispose();
   };
+  const close = server.close.bind(server);
+  server.close = async () => {
+    await close();
+    await controller.dispose();
+  };
   return server;
 }
 
