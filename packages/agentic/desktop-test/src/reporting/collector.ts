@@ -87,6 +87,7 @@ export class DesktopRunReporter {
   private emittedProblemEvents = 0;
   private structuredOutputError?: Error;
   private terminal?: DesktopRunResult;
+  private snapshotQueued = false;
 
   constructor(options: DesktopRunReporterOptions) {
     this.options = options;
@@ -127,6 +128,7 @@ export class DesktopRunReporter {
     this.artifacts.set('events.jsonl', 'Versioned event journal');
     this.artifacts.set('run.json', 'Canonical run result');
     if (options.junit !== false) this.artifacts.set('junit.xml', 'JUnit result');
+    this.persistSnapshot(this.result());
     if (this.reporterMode === 'ndjson') {
       const start = {
         schemaVersion: 1,
@@ -255,6 +257,20 @@ export class DesktopRunReporter {
     }
     this.reduce(event);
     this.present(event);
+    if (!this.snapshotQueued) {
+      this.snapshotQueued = true;
+      queueMicrotask(() => {
+        this.snapshotQueued = false;
+        if (this.finished) return;
+        try {
+          this.persistSnapshot(this.result());
+        } catch (error) {
+          const failure = this.failure(error, 'reporting');
+          this.failures.set(failure.failureId, failure);
+          this.logger.error(`Cannot persist desktop run snapshot: ${failure.error.message}`);
+        }
+      });
+    }
   }
 
   private reduce(event: CollectedDesktopEvent): void {
@@ -497,7 +513,18 @@ export class DesktopRunReporter {
       fs.renameSync(temporary, this.artifactPath(name));
     };
     if (this.options.junit !== false) write('junit.xml', renderJUnit(result));
-    write('run.json', JSON.stringify(result, null, 2) + '\n');
+    this.persistSnapshot(result);
+  }
+
+  private persistSnapshot(result: DesktopRunResult): void {
+    const temporary = this.artifactPath('run.json.tmp');
+    const snapshot = this.sanitize({
+      ...result,
+      terminal: result.terminal === true,
+      status: result.terminal === true || result.status === 'failed' ? result.status : 'incomplete',
+    });
+    fs.writeFileSync(temporary, JSON.stringify(snapshot) + '\n', { mode: 0o600 });
+    fs.renameSync(temporary, this.artifactPath('run.json'));
   }
 
   private async finalize(): Promise<DesktopRunResult> {
@@ -603,6 +630,8 @@ export class DesktopRunReporter {
         // A closed stderr cannot carry the reporting diagnostic.
       }
     }
+    result = { ...this.result(), terminal: true };
+    this.persist(result);
     this.finished = true;
     this.terminal = result;
     return result;
