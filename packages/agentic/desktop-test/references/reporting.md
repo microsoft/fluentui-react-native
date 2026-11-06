@@ -64,3 +64,85 @@ directory or render a duplicate summary.
 
 Story-specific readiness, authenticated channel events, and callback execution
 are owned by `@fluentui-react-native/storybook-desktop`.
+
+## Persisted read queries
+
+The direct `@fluentui-react-native/desktop-test/reporting/run-queries` entry
+exports `DesktopRunQueryService`, `DesktopRunQueryClient`, and their request and
+response contracts. This is a harness-local read API, not a management listener,
+MCP tool, or execution/recovery API. Its credentials are distinct from driver
+control grants. Connecting a reader only binds a credential; it never creates
+a workload, producer, controller session, or application.
+
+The collector atomically replaces `run.json` with an active snapshot after each
+batch of events (coalesced within a JavaScript turn). Active snapshots have
+`terminal: false` and cannot have a passing status. Only successful final
+report persistence after producer/output accounting sets `terminal: true`.
+Terminal means collection finished, not that coverage passed. A crashed
+collector leaves its last snapshot nonterminal. Legacy reports lacking the
+marker remain incomplete in queries, even if they say `passed`. Existing
+`finishedAt` is the snapshot observation time until the terminal marker is set.
+Persisted tests, work, failures, retries, and skips remain the authoritative
+source; page size and worker exit codes do not decide coverage.
+
+Trusted host code registers exact collector `{ runId, root, expiresAt }`
+records and an optional `textArtifacts` relative-path allowlist, then issues a
+read grant with exact `runIds`, an expiry, and optional `artifacts` permission:
+
+```ts
+import { DesktopRunQueryService } from '@fluentui-react-native/desktop-test/reporting/run-queries';
+
+const queries = new DesktopRunQueryService(registeredSecrets);
+queries.registerRun({
+  runId: reporter.runId,
+  root: reporter.root,
+  expiresAt: retentionDeadline,
+  textArtifacts: ['commands/build.log'],
+});
+const credential = queries.issueGrant({
+  runIds: [reporter.runId],
+  expiresAt: readerDeadline,
+  artifacts: true,
+});
+const client = queries.connect(credential);
+const status = await client.query({ operation: 'status', runId: reporter.runId });
+```
+
+Registration and grant issuance are **trusted operator/host operations**, never
+model-facing inputs. Credentials stay in the host/client binding; requests and
+persisted results contain no credentials. Host restart requires explicit
+re-registration of retained runs and fresh grants, never execution replay.
+The host must register all relevant secrets (including credentials for any
+external integration); `addSecret` can update the read redactor. The collector
+redacts before persistence, and queries redact again before clipping text.
+
+Readers submit only an opaque run ID, a declared operation, and its bounded
+parameters. `status` returns complete counts and terminal/coverage state.
+`tests`, `work`, `failures`, and `artifacts` return pages with a default limit of
+10 and maximum of 25, capped at 16 KiB. Page IDs do not expose producer IDs or
+paths. Text fields are capped at 1 KiB after redaction. `omissions.items` counts
+all items absent from that page (including preceding pages);
+`omissions.textBytes` counts redacted UTF-8 bytes clipped within returned items.
+Opaque `nextCursor` values are bound to the grant, run, collection, and exact
+snapshot; a changed snapshot requires a new first page. The last 256 cursors
+per grant are retained; older, forged, or cross-grant cursors fail explicitly.
+
+Artifact listing and content both require artifact permission. Listing exposes
+only allowlisted artifacts recorded by the collector, with opaque artifact
+IDs and descriptions, never paths. `artifact` accepts that ID, not a path,
+URL, filename, or command. Content reads return at most 4 KiB of UTF-8 text
+with explicit omitted byte counts; binary/invalid UTF-8 is rejected. Raw
+`run.json` must be queried structurally, not allowlisted as a text artifact.
+Allowlist entries use canonical forward-slash relative paths on every OS;
+aliases such as `./run.json` cannot bypass the structural-only rule.
+Inputs over 64 MiB for canonical results or 1 MiB for a text artifact fail
+explicitly rather than parsing a truncated result as passing. Symlinks, hardlinks,
+replaced roots, missing files, malformed results, unauthorized scope, and
+expired credentials or retention all fail closed.
+
+`revokeGrant` affects already connected clients. `forgetRun` immediately removes
+query authority, including old grants if the host later re-registers that ID.
+Retention expiry is checked on every read before any
+projection, even if the files remain on disk. This API never deletes collector
+files; the host/operator owns filesystem retention cleanup. No reader can
+extend retention, enumerate roots, create a grant, or restart a run.

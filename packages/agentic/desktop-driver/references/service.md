@@ -323,7 +323,17 @@ const client = createDesktopDriverClient({ grant: agent.token, url: service.url 
   session that does not exist.
 - `/status` lists only the grant's targets and reports
   `service.incarnation`, which changes whenever the service restarts.
-- `authority.revoke(grant.id)` closes the sessions that grant owns.
+- `authority.revoke(grant.id)` invalidates the grant and its descendants
+  immediately. Await `authority.revokeAndDrain(grant.id)` to confirm their
+  sessions and in-flight acquisitions have settled and closed; failed drains
+  remain observable and retryable.
+- Scopes default to `driver-control`; `declared-workload` and
+  `operator-recovery` do not imply driver access or add HTTP management routes.
+  `authority.delegate(parent.id, request)` rejects target/scope expansion.
+  `client.delegateConnection()` returns a separate driver-only client;
+  `child.revokeConnection()` awaits self-cleanup and remains retryable with
+  terminal-only proof after revocation. See [security](security.md) for the
+  eight-edge depth and 4096-grant service-lifetime limits.
 - A grant's session closes after `idleSessionTimeoutMs` without a request for
   it, ten minutes by default. Every request for the session renews it, and a
   running request is never interrupted by expiry. Pass `0` to disable expiry.

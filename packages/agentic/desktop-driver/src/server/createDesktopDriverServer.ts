@@ -129,9 +129,7 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   const port = await listen(httpServer, host, options.port ?? 0);
   // A revoked grant leaves its sessions unreachable, so they are closed rather than holding their targets. A session that
   // fails to close stays tracked, and service shutdown retries it and reports the failure.
-  const stopDrainingRevokedGrants = options.authority?.onRevoke((grant) => {
-    void sessions.deleteOwnedBy(grant.id).catch(() => undefined);
-  });
+  const stopDrainingRevokedGrants = options.authority?.onRevoke((grant) => sessions.deleteOwnedBy(grant.id));
 
   return {
     host,
@@ -262,8 +260,11 @@ function authenticateRequest(request: IncomingMessage, authority: DesktopAuthori
   if (!authority) {
     return undefined;
   }
-  const grant = authority.authenticate(request.headers.authorization);
-  if (!grant) {
+  const cleanup = request.method === 'DELETE' && request.url === '/furn/grants/current';
+  const grant =
+    authority.authenticate(request.headers.authorization) ??
+    (cleanup ? authority.authenticateRevocation(request.headers.authorization) : undefined);
+  if (!grant || !grant.scopes.includes('driver-control')) {
     // A missing, malformed, revoked, and wrong-secret grant are indistinguishable, and the stack trace stays server-side.
     const error = new WebDriverError('unauthorized', 'A valid Desktop Driver grant is required.');
     error.stack = '';
@@ -285,6 +286,28 @@ function visibleTargets(context: Pick<RouteContext, 'grant'>, targets: TargetReg
 
 async function route(context: RouteContext, sessions: SessionManager, targets: TargetRegistry): Promise<unknown> {
   const { body, method, segments } = context;
+
+  if (segments.length === 3 && segments[0] === 'furn' && segments[1] === 'grants' && context.authority && context.grant) {
+    if (method === 'POST' && segments[2] === 'connection') {
+      if (Object.keys(requireObject(body, 'Connection delegation')).length !== 0)
+        throw invalidArgument('Connection delegation accepts no input.');
+      const child = context.authority.delegate(context.grant.id, {
+        label: context.grant.label,
+        scopes: ['driver-control'],
+        targets: context.grant.targets,
+      });
+      return { token: child.token };
+    }
+    if (method === 'DELETE' && segments[2] === 'current') {
+      if (!context.grant.parentId) {
+        const error = new WebDriverError('unauthorized', 'Only a connection child can revoke itself.');
+        error.stack = '';
+        throw error;
+      }
+      await context.authority.revokeAndDrain(context.grant.id);
+      return null;
+    }
+  }
 
   if (method === 'GET' && segments.length === 1 && segments[0] === 'status') {
     const targetInfo = await Promise.all(

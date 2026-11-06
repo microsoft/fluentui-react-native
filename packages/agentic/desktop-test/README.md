@@ -2,7 +2,10 @@
 
 `@fluentui-react-native/desktop-test` provides application-neutral configuration,
 native service composition, process lifetimes, standalone WDIO/Jasmine suites,
-and reporting for macOS, Windows, and Win32. It uses
+and reporting for macOS, Windows, and Win32. Authorized, bounded persisted
+run/status/artifact reads are available from the direct
+`./reporting/run-queries` entry; see [reporting](references/reporting.md).
+It uses
 `@fluentui-react-native/desktop-driver`; Storybook support is an optional
 integration in `@fluentui-react-native/storybook-desktop`.
 

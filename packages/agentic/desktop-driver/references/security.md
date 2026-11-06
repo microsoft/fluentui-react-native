@@ -52,6 +52,22 @@ in its command queue authenticates again immediately before dispatch.
   the grant behaves as one that is not registered, in `/status` and in
   capability matching. The service refuses to start when a grant names a target
   it does not register.
+- A grant also names explicit permission scopes: `driver-control`,
+  `declared-workload`, and `operator-recovery`. Omitted scopes mean only
+  `driver-control`. Every protected driver route requires that scope; the other
+  scopes alone confer no driver access. Workload and recovery HTTP routes are
+  not implemented. Trusted in-process recovery remains an operator API.
+- `authority.delegate(parent.id, request)` creates a distinct child principal,
+  rejecting target or scope expansion (including wildcard expansion). An
+  omitted child scope inherits its parent's scopes. The fixed HTTP
+  `POST /furn/grants/connection` accepts no fields and delegates only
+  `driver-control`, with the parent's target set and label. The typed client's
+  `delegateConnection()` keeps the returned credential private. Neither a parent
+  nor a sibling can address the child's sessions.
+- Delegation is bounded to eight edges and 4096 total grants per service
+  incarnation, including roots and revoked grants. Exhaustion fails explicitly;
+  cleanup proof is never evicted or recycled to admit new connections. Operators
+  must drain and replace the service to reset this finite lifetime budget.
 - A session belongs to the grant that created it. Every other grant gets the
   answer for an id that does not exist, and that check runs before the command
   queues, so a grant can neither probe for another grant's session nor wait in,
@@ -68,11 +84,21 @@ in its command queue authenticates again immediately before dispatch.
   dispatch, and teardown waits behind the settled command. A draining session
   accepts only `DELETE`. A session that fails to close stays tracked, and
   shutdown retries it.
-- `authority.revoke()` schedules that drain; its synchronous return is not an
-  awaited cleanup barrier. Ordinary HTTP `DELETE` is queued behind current
-  work before drain begins. Neither revocation notification nor a ten-minute
-  idle setting proves that native work has settled; handoff must await deletion
-  or a future explicit drain barrier.
+- `authority.revoke()` synchronously invalidates the entire descendant tree;
+  its boolean return is not a cleanup barrier. Await
+  `authority.revokeAndDrain(id)` to join all descendant drains, including
+  already-revoked descendants and in-flight acquisitions. Listener failures are
+  retained and reported; a subsequent barrier retries a failed drain.
+- `DELETE /furn/grants/current` is child self-cleanup only, never root or
+  sibling revocation. It awaits the same drain. The authority retains a digest
+  tombstone for a revoked child: its old credential authenticates **only this
+  exact terminal route** so a lost response or failed drain can be retried.
+  It cannot authorize status, session work, delegation, or another principal's
+  cleanup. Unauthorized is not cleanup evidence. Tombstones retain no plaintext
+  secret and live until the service incarnation ends.
+- Ordinary session HTTP `DELETE` is queued behind current work before drain
+  begins. Neither revocation notification nor a ten-minute idle setting proves
+  settlement; handoff must await session deletion or the explicit grant drain.
 - A grant's session that receives no request for `idleSessionTimeoutMs`
   (ten minutes by default; 0 disables) closes as `DELETE` would: input is
   released, a launched application is closed, and an attached application is
@@ -87,9 +113,10 @@ in its command queue authenticates again immediately before dispatch.
 
 The boundary is other operating-system accounts and accidental cross-client
 access. It does not isolate mutually hostile processes of the same account and
-does not protect against administrators. The service does not publish tokens
-over HTTP. The embedding supervisor delivers each over a private channel or in
-an owner-validated connection descriptor, keeping it out of capabilities,
+does not protect against administrators. The service publishes child tokens only
+in the authenticated connection-delegation response, never status or
+driver-operation output. The embedding supervisor delivers root grants over a
+private channel or in an owner-validated connection descriptor, keeping them out of capabilities,
 command lines, logs, and test output. Private descriptors contain plaintext
 credentials; process-wide heap dumps can also contain credentials.
 

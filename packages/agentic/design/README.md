@@ -46,9 +46,9 @@ export const App = () => (
 Use `fluentLightTheme` or `fluentDarkTheme` when you need one fixed `Theme` object, or `fluentHcTheme` to always use
 high contrast.
 
-The same entry point ships the x3 Flex defaults as `flexTheme` (cool) and `flexWarmTheme` (warm). Each is a
-`FlexThemeDescription` covering light and dark; use one as a `FlexThemeReference` base to start from that palette and
-tone:
+The same entry point ships the x3 Flex defaults as `flexCoolTheme` and `flexWarmTheme`, independently bundleable
+descriptions covering light and dark. `flexTheme` includes both and switches palettes with `appearance.colorTone`.
+Use one as a `FlexThemeReference` base:
 
 ```tsx
 import { FlexThemeReference } from '@fluentui-react-native/design';
@@ -56,6 +56,8 @@ import { flexWarmTheme } from '@fluentui-react-native/design/themes';
 
 const theme = new FlexThemeReference({ base: flexWarmTheme, appearance: { colorScheme: 'system' } });
 ```
+
+Without an explicit theme or inherited boundary, `ThemedRoot` and the theme hooks use `flexCoolTheme`.
 
 ## Documentation
 

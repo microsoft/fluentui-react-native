@@ -28,6 +28,8 @@ export type DesktopRunResult = {
   runId: string;
   kind: 'tests' | 'lifecycle';
   status: TestStatus;
+  /** Only true after collector finalization; absent in legacy reports. */
+  terminal?: boolean;
   startedAt: string;
   finishedAt: string;
   durationMs: number;
