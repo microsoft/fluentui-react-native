@@ -1,5 +1,66 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.3
+
+### Patch Changes
+
+- bac8b51: Serialize MCP connection and session lifetimes, reverify authority after transport failures, and fence ambiguous acquisitions. Discover target launch modes, quarantine uncertain story changes, refuse ungoverned args updates on protected services, and retain workload claims after uncertain cleanup. Document the work-in-progress layering and package-owned capability, qualification, and measurement status.
+- bac8b51: Long-lived `serve`, `driver`, and `server` commands now write their bounded summary when they fail before readiness, instead of exiting with empty structured output. Integrations receive an `onReady` callback for `serve`. Storybook CLI tests no longer overwrite a live app's generated driver state. Records the live macOS paging and delta qualification.
+- bac8b51: Add shared CLI reporter modes with bounded JSON summaries and NDJSON progress, propagate reporter settings to delegated commands, and emit Storybook readiness records only after service checks pass.
+- cd0ede2: Share native service construction between the generic supervisor and Storybook
+  channel child, wiring private durable settlement recovery, exact application-exit
+  probes, protected descriptor lifetime and settled shutdown. Keep corrupt sibling
+  journal records fenced rather than allowing a valid record to mask uncertainty.
+- bac8b51: Treat empty reporter environment variables as unset and stop CLIs crashing when stdout closes, and make the Windows helper fail closed when a UI Automation mutation does not settle by reporting `mutation-indeterminate` and refusing later mutations with `target-quarantined`.
+- bac8b51: Add `driver --agent` (with `--descriptor` and `--root`), which protects the embedded Desktop Driver, publishes an agent connection for the Desktop Driver MCP adapter, disables the channel's unauthenticated MCP endpoint, and keeps the macOS application lease current. `desktop-test serve --agent` now works for Storybook targets and reports readiness in structured output modes.
+- bac8b51: Let `driver --agent` attach on Windows and Win32 without an application lease: the agent connection names the app's verified AUMID or REX executable, resolved through the new `resolveDesktopApplication(target, signal, { attach: true })` option, and the command fails before starting services when no identity can be verified. `driver` also serves Metro on a platform's declared fixed smoke Metro port, such as the RN Test App Windows Debug host's 8081, and fails clearly when that port is in use.
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [388a60c]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [d50b1ea]
+- Updated dependencies [0cfecf0]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [cd0ede2]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+- Updated dependencies [bac8b51]
+  - @fluentui-react-native/desktop-driver@0.5.0
+  - @fluentui-react-native/desktop-test@0.2.3
+
 ## 0.4.2
 
 ### Patch Changes

@@ -1,5 +1,21 @@
 # Change Log - @fluentui-react-native/android-theme
 
+## 0.26.17
+
+### Patch Changes
+
+- 06b458f: Import the Fluent 2 token loaders and pipeline mappers from `@fluentui-react-native/design/deprecated`. Theme values and
+  the shims' exports are unchanged.
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+  - @fluentui-react-native/design@0.6.0
+
 ## 0.26.16
 
 ### Patch Changes
