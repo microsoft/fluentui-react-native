@@ -1,10 +1,12 @@
 import type { NodePath, PluginObj, types } from '@babel/core';
+import type { DesktopStoryInputModes } from '@fluentui-react-native/desktop-driver';
 
 declare function storyTests(): PluginObj;
 
 declare namespace storyTests {
   type Callback = {
     name?: string;
+    inputModes?: DesktopStoryInputModes;
     callback: NodePath<types.FunctionExpression | types.ArrowFunctionExpression>;
   };
   type StoryTest = {

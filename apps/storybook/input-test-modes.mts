@@ -4,7 +4,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, write
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import rawCatalog from './input-tests.win32.json' with { type: 'json' };
+import quarantineCatalog from './input-test-quarantines.win32.json' with { type: 'json' };
 
 export type InputMode = 'accessibility' | 'physical';
 export type InputTest = {
@@ -16,9 +16,12 @@ export type InputTest = {
 
 const appRoot = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(appRoot, '..', '..');
-const catalogPath = path.join(appRoot, 'input-tests.win32.json');
 const artifactsRoot = path.join(appRoot, 'artifacts', 'desktop');
 const coverageRoot = path.join(appRoot, 'artifacts', 'win32');
+
+if (quarantineCatalog.schemaVersion !== 1 || quarantineCatalog.endpoint !== 'win32') {
+  throw new Error('Unsupported Win32 quarantine catalog.');
+}
 
 function object(value: unknown): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Expected an input-coverage object.');
@@ -45,26 +48,33 @@ export function readInputMode(value = process.env.STORYBOOK_INPUT_MODE): InputMo
   return value;
 }
 
-export function parseInputCatalog(value: unknown = rawCatalog): InputTest[] {
-  const catalog = object(value);
-  if (catalog.schemaVersion !== 1 || catalog.endpoint !== 'win32') throw new Error('Unsupported Win32 input-test catalog.');
-  const tests = array(catalog.stories).flatMap((entry) => {
+export function parseInputCatalog(value: unknown, quarantineDeclarations: unknown = quarantineCatalog.quarantines): InputTest[] {
+  const storyIds = new Set<string>();
+  const tests = array(value).flatMap((entry) => {
     const story = object(entry);
-    const storyId = text(story.storyId);
-    if (Object.keys(story).some((key) => !['storyId', 'accessibility', 'physical', 'both'].includes(key))) {
-      throw new Error(`Unknown input-mode declaration for ${storyId}.`);
+    const storyId = text(story.id);
+    if (storyIds.has(storyId)) throw new Error(`Duplicate discovered story: ${storyId}.`);
+    storyIds.add(storyId);
+    const modes = story.inputModes === undefined ? {} : object(story.inputModes);
+    const names = array(story.tests ?? ['default']).map(text);
+    if (!names.length) throw new Error(`No input tests discovered for ${storyId}.`);
+    if (Object.keys(modes).some((name) => !names.includes(name))) {
+      throw new Error(`Classified callback was not discovered for ${storyId}.`);
     }
-    const result = (['accessibility', 'physical', 'both'] as const).flatMap((mode) =>
-      story[mode] === undefined ? [] : array(story[mode]).map((name): InputTest => ({ storyId, testName: text(name), mode })),
-    );
-    if (!result.length) throw new Error(`No input tests declared for ${storyId}.`);
-    return result;
+    return names.map((testName): InputTest => {
+      const declaration = modes[testName];
+      const mode = declaration === undefined ? undefined : object(declaration).win32;
+      if (mode !== 'accessibility' && mode !== 'physical' && mode !== 'both') {
+        throw new Error(`Unclassified or invalid Win32 input callback: ${storyId} / ${testName}.`);
+      }
+      return { storyId, testName, mode };
+    });
   });
   if (!tests.length || new Set(tests.map(identity)).size !== tests.length) {
     throw new Error('Input-test catalog must have unique callback identities.');
   }
   const quarantines = new Set<string>();
-  for (const entry of array(catalog.quarantines)) {
+  for (const entry of array(quarantineDeclarations)) {
     const quarantine = object(entry);
     const key = identity({ storyId: text(quarantine.storyId), testName: text(quarantine.testName) });
     const test = tests.find((candidate) => identity(candidate) === key);
@@ -75,31 +85,16 @@ export function parseInputCatalog(value: unknown = rawCatalog): InputTest[] {
   return tests;
 }
 
-export function selectedInputTests(mode: InputMode, catalog = parseInputCatalog()): InputTest[] {
+export function selectedInputTests(mode: InputMode, catalog: readonly InputTest[]): InputTest[] {
   return catalog.filter((test) => test.mode === mode || test.mode === 'both');
-}
-
-export function assertCatalogMatches(discovery: unknown, catalog = parseInputCatalog()): void {
-  const actual = array(discovery).flatMap((entry) => {
-    const story = object(entry);
-    const storyId = text(story.id);
-    return array(story.tests ?? ['default']).map((name) => identity({ storyId, testName: text(name) }));
-  });
-  const declared = new Set(catalog.map(identity));
-  const actualSet = new Set(actual);
-  const missing = actual.filter((key) => !declared.has(key));
-  const stale = [...declared].filter((key) => !actualSet.has(key));
-  if (actualSet.size !== actual.length || missing.length || stale.length) {
-    throw new Error(`Win32 input catalog drift. Unclassified: ${missing.join('; ')}. Stale declarations: ${stale.join('; ')}.`);
-  }
 }
 
 export function inputModeOptions(): {
   clickMode?: InputMode;
-  testCases?: readonly { storyId: string; testName: string }[];
+  inputMode?: InputMode;
 } {
   const mode = readInputMode();
-  return mode ? { clickMode: mode, testCases: selectedInputTests(mode).map(({ storyId, testName }) => ({ storyId, testName })) } : {};
+  return mode ? { clickMode: mode, inputMode: mode } : {};
 }
 
 export function verifyInputReport(value: unknown, selected: InputTest[], startedAt: number): { passed: number; quarantined: string[] } {
@@ -166,48 +161,96 @@ function runDirectories(): string[] {
     : [];
 }
 
-function catalogDigest(): string {
-  return createHash('sha256').update(readFileSync(catalogPath)).digest('hex');
+function catalogDigest(catalog: readonly InputTest[]): string {
+  return createHash('sha256').update(JSON.stringify(catalog)).digest('hex');
 }
 
 function sourceCommit(): string {
   return execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 }
 
+function discoverInputTests(): unknown {
+  const env: NodeJS.ProcessEnv = { ...process.env, STORYBOOK_INPUT_MODE: '' };
+  delete env.STORYBOOK_SMOKE_TEST;
+  delete env.STORYBOOK_SMOKE_STORY;
+  delete env.STORYBOOK_SMOKE_TAG;
+  return JSON.parse(
+    execFileSync(
+      process.execPath,
+      [
+        path.join(root, '.yarn', 'releases', 'yarn-4.18.0.cjs'),
+        'workspace',
+        '@fluentui-react-native/agentic-components-storybook',
+        'storybook',
+        'test',
+        '--win32',
+        '--list',
+      ],
+      {
+        cwd: root,
+        encoding: 'utf8',
+        timeout: 120_000,
+        env,
+        stdio: ['ignore', 'pipe', 'inherit'],
+      },
+    ),
+  );
+}
+
+function writeGeneratedCatalog(catalog: readonly InputTest[]): void {
+  const stories = new Map<string, { storyId: string; accessibility: string[]; physical: string[]; both: string[] }>();
+  for (const test of catalog) {
+    let story = stories.get(test.storyId);
+    if (!story) {
+      story = { storyId: test.storyId, accessibility: [], physical: [], both: [] };
+      stories.set(test.storyId, story);
+    }
+    story[test.mode].push(test.testName);
+  }
+  mkdirSync(coverageRoot, { recursive: true });
+  writeFileSync(
+    path.join(coverageRoot, 'input-tests.win32.json'),
+    `${JSON.stringify(
+      {
+        schemaVersion: 1,
+        endpoint: 'win32',
+        stories: [...stories.values()],
+        quarantines: quarantineCatalog.quarantines,
+      },
+      null,
+      2,
+    )}\n`,
+  );
+}
+
 function main(): void {
+  const action = process.argv[2];
+  if (!['generate', 'begin', 'verify'].includes(action ?? '')) throw new Error('Use input-coverage generate, begin, or verify.');
   const mode = readInputMode();
-  if (!mode) throw new Error('Set STORYBOOK_INPUT_MODE before capturing or verifying input coverage.');
+  if (action !== 'generate' && !mode) throw new Error('Set STORYBOOK_INPUT_MODE before capturing or verifying input coverage.');
+  const discovery = discoverInputTests();
+  const catalog = parseInputCatalog(discovery);
+  if (action === 'generate') {
+    writeGeneratedCatalog(catalog);
+    console.log(`Generated ${catalog.length} classified Win32 callbacks from story source.`);
+    return;
+  }
+  if (!mode) throw new Error('Input coverage requires an explicit lane.');
   const snapshotPath = path.join(coverageRoot, `input-coverage-${mode}.json`);
-  if (process.argv[2] === 'begin') {
-    const discovery = JSON.parse(
-      execFileSync(
-        process.execPath,
-        [
-          path.join(root, '.yarn', 'releases', 'yarn-4.18.0.cjs'),
-          'workspace',
-          '@fluentui-react-native/agentic-components-storybook',
-          'storybook',
-          'test',
-          '--win32',
-          '--list',
-        ],
-        { cwd: root, encoding: 'utf8', env: { ...process.env, STORYBOOK_INPUT_MODE: '' }, stdio: ['ignore', 'pipe', 'inherit'] },
-      ),
-    );
-    const catalog = parseInputCatalog();
-    assertCatalogMatches(discovery, catalog);
+  if (action === 'begin') {
+    writeGeneratedCatalog(catalog);
     mkdirSync(coverageRoot, { recursive: true });
     writeFileSync(
       snapshotPath,
-      `${JSON.stringify({ schemaVersion: 1, mode, sourceCommit: sourceCommit(), catalogDigest: catalogDigest(), startedAt: Date.now(), previousRuns: runDirectories(), catalog, discovery }, null, 2)}\n`,
+      `${JSON.stringify({ schemaVersion: 1, mode, sourceCommit: sourceCommit(), catalogDigest: catalogDigest(catalog), startedAt: Date.now(), previousRuns: runDirectories(), catalog, discovery }, null, 2)}\n`,
     );
     console.log(`Declared ${selectedInputTests(mode, catalog).length} ${mode} callbacks; both-mode callbacks execute in each lane.`);
-  } else if (process.argv[2] === 'verify') {
+  } else if (action === 'verify') {
     const snapshot = object(JSON.parse(readFileSync(snapshotPath, 'utf8')));
     if (
       snapshot.mode !== mode ||
       snapshot.sourceCommit !== sourceCommit() ||
-      snapshot.catalogDigest !== catalogDigest() ||
+      snapshot.catalogDigest !== catalogDigest(catalog) ||
       typeof snapshot.startedAt !== 'number'
     ) {
       throw new Error('Input coverage snapshot does not match the current source and lane.');
@@ -217,13 +260,11 @@ function main(): void {
     if (runs.length !== 1) throw new Error(`Expected one fresh input run; found ${runs.length}.`);
     const report = JSON.parse(readFileSync(path.join(artifactsRoot, runs[0], 'run.json'), 'utf8'));
     if (object(report).runId !== runs[0]) throw new Error('Input report identity does not match its run directory.');
-    const result = verifyInputReport(report, selectedInputTests(mode), snapshot.startedAt);
+    const result = verifyInputReport(report, selectedInputTests(mode, catalog), snapshot.startedAt);
     const summary = `## Win32/Paper ${mode} input coverage\n\n${result.passed} authored callbacks executed and passed. ${result.quarantined.length} explicitly quarantined callbacks remain unvalidated.\n${result.quarantined.map((title) => `- ${title}: existing #4373 quarantine; not counted as passed.`).join('\n')}\n`;
     writeFileSync(path.join(coverageRoot, `input-coverage-${mode}.md`), summary);
     if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
     console.log(summary);
-  } else {
-    throw new Error('Use input-coverage begin or input-coverage verify.');
   }
 }
 

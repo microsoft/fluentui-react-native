@@ -1,6 +1,9 @@
 import type { DesktopStoryTests } from './authoring/storyTests.js';
 import type { DesktopEndpoint } from './protocol/types.js';
 
+export type DesktopStoryInputMode = 'accessibility' | 'physical' | 'both';
+export type DesktopStoryInputModes = Readonly<Partial<Record<DesktopEndpoint, DesktopStoryInputMode>>>;
+
 export type DesktopStoryManifestEntry = {
   id: string;
   name: string;
@@ -9,7 +12,12 @@ export type DesktopStoryManifestEntry = {
   tags: readonly string[];
   title: string;
   tests?: DesktopStoryTests;
-  wdio?: { digest: string; exportName: string; testNames?: readonly string[] };
+  wdio?: {
+    digest: string;
+    exportName: string;
+    testNames?: readonly string[];
+    inputModes?: Readonly<Record<string, DesktopStoryInputModes>>;
+  };
 };
 
 export type DesktopStoryManifest = {

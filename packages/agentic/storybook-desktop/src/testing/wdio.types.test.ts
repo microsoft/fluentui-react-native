@@ -52,9 +52,29 @@ const invalidArgs: WdioStory<{ args: { disabled: boolean } }> = {
   args: { disabled: 'false' },
 };
 
+const classified: WdioStory = {
+  wdio: {
+    'classified test': {
+      inputModes: { win32: 'both', macos: 'physical' },
+      run: async ({ browser, platform }) => {
+        await browser.$('~button');
+        const endpoint: WdioStoryContext['platform'] = platform;
+        // @ts-expect-error Classified callbacks retain the typed native browser.
+        await browser.inventedCommand(endpoint);
+      },
+    },
+    'invalid mode': {
+      // @ts-expect-error Input modes remain a closed set.
+      inputModes: { win32: 'automatic' },
+      run: () => {},
+    },
+  },
+};
+
 test('exposes a type-only inline callback contract', () => {
   expect(typeof story.wdio).toBe('function');
   expect(typeof wrapped.wdio).toBe('function');
   expect(typeof named.wdio).toBe('object');
   expect(invalidArgs.args).toBeDefined();
+  expect(typeof classified.wdio).toBe('object');
 });

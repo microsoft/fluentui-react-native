@@ -67,21 +67,24 @@ type Story = WdioStory<StoryObj<typeof Checkbox>>;
 export const Default: Story = {
   tags: ['desktop-e2e'],
   wdio: {
-    'toggles native checked state in both directions': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.physicalClick) {
-        skip('This test requires physical pointer input.');
-        return;
-      }
-      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      const checkbox = await browser.$('~agentic-storybook-checkbox');
-      expect(await checkbox.getTagName()).toBe('checkbox');
-      await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
-      await checkbox.click();
-      await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', true);
-      await checkbox.click();
-      await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
+    'toggles native checked state in both directions': {
+      inputModes: { win32: 'physical' },
+      run: async ({ browser, expect, skip }) => {
+        const features = browser.capabilities['furn:features'];
+        if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+        if (!features.physicalClick) {
+          skip('This test requires physical pointer input.');
+          return;
+        }
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const checkbox = await browser.$('~agentic-storybook-checkbox');
+        expect(await checkbox.getTagName()).toBe('checkbox');
+        await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
+        await checkbox.click();
+        await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', true);
+        await checkbox.click();
+        await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
+      },
     },
   },
 };
@@ -171,16 +174,19 @@ export const HiddenLabel: Story = {
     </StoryGroup>
   ),
   wdio: {
-    'CBX-004 preserves native explicit and fallback names without visible labels': async ({ browser, expect }) => {
-      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      const explicit = await browser.$('~checkbox-explicit-name');
-      const fallback = await browser.$('~checkbox-fallback-name');
-      expect(await explicit.getTagName()).toBe('checkbox');
-      expect(await fallback.getTagName()).toBe('checkbox');
-      expect(await explicit.getProperty('name')).toBe('Enable notifications');
-      expect(await fallback.getProperty('name')).toBe('Save drafts');
-      await expectNativeState(browser, 'checkbox-explicit-name', 'checked', false);
-      await expectNativeState(browser, 'checkbox-fallback-name', 'checked', false);
+    'CBX-004 preserves native explicit and fallback names without visible labels': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const explicit = await browser.$('~checkbox-explicit-name');
+        const fallback = await browser.$('~checkbox-fallback-name');
+        expect(await explicit.getTagName()).toBe('checkbox');
+        expect(await fallback.getTagName()).toBe('checkbox');
+        expect(await explicit.getProperty('name')).toBe('Enable notifications');
+        expect(await fallback.getProperty('name')).toBe('Save drafts');
+        await expectNativeState(browser, 'checkbox-explicit-name', 'checked', false);
+        await expectNativeState(browser, 'checkbox-fallback-name', 'checked', false);
+      },
     },
   },
   parameters: {
@@ -246,21 +252,27 @@ export const ConstrainedText: Story = {
     },
   },
   wdio: {
-    'CBX-003 wraps the label into a taller constrained row': async ({ browser, expect }) => {
-      const narrow = await browser.$('~checkbox-narrow-label');
-      const wide = await browser.$('~checkbox-wide-label');
-      const narrowRect = await browser.getElementRect(await narrow.elementId);
-      const wideRect = await browser.getElementRect(await wide.elementId);
-      expect(narrowRect.width).toBeLessThan(wideRect.width);
-      expect(narrowRect.height).toBeGreaterThan(wideRect.height);
+    'CBX-003 wraps the label into a taller constrained row': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const narrow = await browser.$('~checkbox-narrow-label');
+        const wide = await browser.$('~checkbox-wide-label');
+        const narrowRect = await browser.getElementRect(await narrow.elementId);
+        const wideRect = await browser.getElementRect(await wide.elementId);
+        expect(narrowRect.width).toBeLessThan(wideRect.width);
+        expect(narrowRect.height).toBeGreaterThan(wideRect.height);
+      },
     },
-    'CBX-003 wraps secondary text into a taller constrained row': async ({ browser, expect }) => {
-      const narrow = await browser.$('~checkbox-narrow-secondary');
-      const wide = await browser.$('~checkbox-wide-secondary');
-      const narrowRect = await browser.getElementRect(await narrow.elementId);
-      const wideRect = await browser.getElementRect(await wide.elementId);
-      expect(narrowRect.width).toBeLessThan(wideRect.width);
-      expect(narrowRect.height).toBeGreaterThan(wideRect.height);
+    'CBX-003 wraps secondary text into a taller constrained row': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const narrow = await browser.$('~checkbox-narrow-secondary');
+        const wide = await browser.$('~checkbox-wide-secondary');
+        const narrowRect = await browser.getElementRect(await narrow.elementId);
+        const wideRect = await browser.getElementRect(await wide.elementId);
+        expect(narrowRect.width).toBeLessThan(wideRect.width);
+        expect(narrowRect.height).toBeGreaterThan(wideRect.height);
+      },
     },
   },
 };

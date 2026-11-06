@@ -1,20 +1,24 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { assertCatalogMatches, parseInputCatalog, readInputMode, selectedInputTests, verifyInputReport } from './input-test-modes.mts';
+import { parseInputCatalog, readInputMode, selectedInputTests, verifyInputReport } from './input-test-modes.mts';
 
-const catalog = {
-  schemaVersion: 1,
-  endpoint: 'win32',
-  stories: [
-    { storyId: 'fixture--default', both: ['semantics'], accessibility: ['native action'], physical: ['keyboard'] },
-    { storyId: 'fixture--second', physical: ['semantics', 'quarantined'] },
-  ],
-  quarantines: [{ storyId: 'fixture--second', testName: 'quarantined', reason: 'Existing issue #4373.' }],
-};
+const discovery: { id: string; tests: string[]; inputModes: Record<string, { win32: string }> }[] = [
+  {
+    id: 'fixture--default',
+    tests: ['semantics', 'native action', 'keyboard'],
+    inputModes: { semantics: { win32: 'both' }, 'native action': { win32: 'accessibility' }, keyboard: { win32: 'physical' } },
+  },
+  {
+    id: 'fixture--second',
+    tests: ['semantics', 'quarantined'],
+    inputModes: { semantics: { win32: 'physical' }, quarantined: { win32: 'physical' } },
+  },
+];
+const quarantines = [{ storyId: 'fixture--second', testName: 'quarantined', reason: 'Existing issue #4373.' }];
 
 function report(mode: 'accessibility' | 'physical') {
-  const selected = selectedInputTests(mode, parseInputCatalog(catalog));
+  const selected = selectedInputTests(mode, parseInputCatalog(discovery, quarantines));
   const tests = selected.map((entry, index) => {
     const status = entry.quarantineReason ? 'skipped' : 'passed';
     return {
@@ -51,37 +55,49 @@ function report(mode: 'accessibility' | 'physical') {
 }
 
 test('routes exact identities into accessibility, physical, and both lanes', () => {
-  const parsed = parseInputCatalog(catalog);
+  const parsed = parseInputCatalog(discovery, quarantines);
   assert.deepEqual(
     selectedInputTests('accessibility', parsed).map(({ testName }) => testName),
-    ['native action', 'semantics'],
+    ['semantics', 'native action'],
   );
   assert.deepEqual(
     selectedInputTests('physical', parsed).map(({ testName }) => testName),
-    ['keyboard', 'semantics', 'semantics', 'quarantined'],
+    ['semantics', 'keyboard', 'semantics', 'quarantined'],
   );
   assert.throws(() => readInputMode('automatic'), /STORYBOOK_INPUT_MODE/);
 });
 
-test('rejects duplicate, unknown-mode, and unclassified or stale callback declarations', () => {
-  const duplicate = structuredClone(catalog);
-  duplicate.stories[0].physical.push('semantics');
-  assert.throws(() => parseInputCatalog(duplicate), /unique callback/);
-  assert.throws(() => parseInputCatalog({ ...catalog, stories: [{ storyId: 'fixture', accidental: ['case'] }] }), /Unknown input-mode/);
-  const discovery = [
-    { id: 'fixture--default', tests: ['semantics', 'native action', 'keyboard'] },
-    { id: 'fixture--second', tests: ['semantics', 'quarantined'] },
-  ];
-  assert.doesNotThrow(() => assertCatalogMatches(discovery, parseInputCatalog(catalog)));
-  assert.throws(
-    () => assertCatalogMatches([...discovery, { id: 'new', tests: ['unclassified'] }], parseInputCatalog(catalog)),
-    /Unclassified/,
+test('rejects duplicate, unknown-mode, missing and stale discovered classifications', () => {
+  const duplicate = structuredClone(discovery);
+  duplicate[0].tests.push('semantics');
+  assert.throws(() => parseInputCatalog(duplicate, quarantines), /unique callback/);
+  assert.throws(() => parseInputCatalog([...discovery, discovery[0]], quarantines), /Duplicate discovered story/);
+  const invalid = structuredClone(discovery);
+  invalid[0].inputModes.semantics.win32 = 'automatic';
+  assert.throws(() => parseInputCatalog(invalid, quarantines), /Unclassified or invalid/);
+  const missing = structuredClone(discovery);
+  delete missing[0].inputModes.semantics;
+  assert.throws(() => parseInputCatalog(missing, quarantines), /Unclassified/);
+  const stale = structuredClone(discovery);
+  stale[0].inputModes.removed = { win32: 'both' };
+  assert.throws(() => parseInputCatalog(stale, quarantines), /not discovered/);
+});
+
+test('derives renamed and removed tests from discovery without a second inventory', () => {
+  const changed = structuredClone(discovery);
+  changed[0].tests[0] = 'renamed semantics';
+  changed[0].inputModes['renamed semantics'] = changed[0].inputModes.semantics;
+  delete changed[0].inputModes.semantics;
+  changed[0].tests.splice(1, 1);
+  delete changed[0].inputModes['native action'];
+  assert.deepEqual(
+    selectedInputTests('accessibility', parseInputCatalog(changed, quarantines)).map(({ testName }) => testName),
+    ['renamed semantics'],
   );
-  assert.throws(() => assertCatalogMatches(discovery.slice(0, 1), parseInputCatalog(catalog)), /Stale declarations/);
 });
 
 test('accepts complete execution and reports the existing exact quarantine as unvalidated', () => {
-  const parsed = parseInputCatalog(catalog);
+  const parsed = parseInputCatalog(discovery, quarantines);
   assert.deepEqual(verifyInputReport(report('accessibility'), selectedInputTests('accessibility', parsed), 0), {
     passed: 2,
     quarantined: [],
@@ -93,7 +109,7 @@ test('accepts complete execution and reports the existing exact quarantine as un
 });
 
 test('rejects missing, duplicate, unexpected-lane, and skipped expected results', () => {
-  const selected = selectedInputTests('accessibility', parseInputCatalog(catalog));
+  const selected = selectedInputTests('accessibility', parseInputCatalog(discovery, quarantines));
   const missing = report('accessibility');
   missing.tests.pop();
   missing.counts.selected--;
@@ -112,7 +128,7 @@ test('rejects missing, duplicate, unexpected-lane, and skipped expected results'
 });
 
 test('rejects changed quarantine reasons, stale/wrong-target reports, retry passes, and unfinished work', () => {
-  const selected = selectedInputTests('physical', parseInputCatalog(catalog));
+  const selected = selectedInputTests('physical', parseInputCatalog(discovery, quarantines));
   const changed = report('physical');
   changed.tests[3].attempts[0].reason = 'Physical input unavailable.';
   assert.throws(() => verifyInputReport(changed, selected, 0), /did not execute and pass/);

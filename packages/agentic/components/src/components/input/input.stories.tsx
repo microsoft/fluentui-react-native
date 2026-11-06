@@ -78,19 +78,22 @@ type Story = WdioStory<StoryObj<typeof Input>>;
 export const Default: Story = {
   tags: ['desktop-e2e'],
   wdio: {
-    'accepts keyboard input and clears it': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.keyboard) {
-        skip('This test requires keyboard input.');
-        return;
-      }
-      const input = await browser.$('~agentic-storybook-input');
-      expect(await input.getTagName()).toBe('textbox');
-      await input.addValue('Ada');
-      await expect(input).toHaveValue('Ada');
-      await input.clearValue();
-      await expect(input).toHaveValue('');
+    'accepts keyboard input and clears it': {
+      inputModes: { win32: 'physical' },
+      run: async ({ browser, expect, skip }) => {
+        const features = browser.capabilities['furn:features'];
+        if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+        if (!features.keyboard) {
+          skip('This test requires keyboard input.');
+          return;
+        }
+        const input = await browser.$('~agentic-storybook-input');
+        expect(await input.getTagName()).toBe('textbox');
+        await input.addValue('Ada');
+        await expect(input).toHaveValue('Ada');
+        await input.clearValue();
+        await expect(input).toHaveValue('');
+      },
     },
   },
 };
@@ -105,30 +108,36 @@ export const FocusManagement: Story = {
     </View>
   ),
   wdio: {
-    'keeps editing keys in the TextInput and skips disabled fields on Tab': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      const input = await browser.$('~focus-input');
-      await input.setValue('Ada');
-      await expectNativeState(browser, 'focus-input', 'focused', true);
-      await browser.keys('\uE012');
-      await browser.keys('x');
-      await expect(input).toHaveValue('Adxa');
-      await expectNativeState(browser, 'focus-input', 'focused', true);
-      await browser.keys('\uE004');
-      await expectNativeState(browser, 'focus-input-after', 'focused', true);
-      await expectNativeState(browser, 'focus-input-disabled', 'focused', false);
+    'keeps editing keys in the TextInput and skips disabled fields on Tab': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        const input = await browser.$('~focus-input');
+        await input.setValue('Ada');
+        await expectNativeState(browser, 'focus-input', 'focused', true);
+        await browser.keys('\uE012');
+        await browser.keys('x');
+        await expect(input).toHaveValue('Adxa');
+        await expectNativeState(browser, 'focus-input', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'focus-input-after', 'focused', true);
+        await expectNativeState(browser, 'focus-input-disabled', 'focused', false);
+      },
     },
-    'takes native focus from a physical pointer click': async (context) => {
-      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser } = context;
-      await (await browser.$('~focus-input-after')).click();
-      await expectWindowsPointerFocus(context, 'focus-input-after');
-      await (await browser.$('~focus-input')).click();
-      await expectWindowsPointerFocus(context, 'focus-input');
-      await expectNativeState(browser, 'focus-input-after', 'focused', false);
+    'takes native focus from a physical pointer click': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser } = context;
+        await (await browser.$('~focus-input-after')).click();
+        await expectWindowsPointerFocus(context, 'focus-input-after');
+        await (await browser.$('~focus-input')).click();
+        await expectWindowsPointerFocus(context, 'focus-input');
+        await expectNativeState(browser, 'focus-input-after', 'focused', false);
+      },
     },
   },
 };
@@ -174,34 +183,37 @@ export const FocusTreatment: Story = {
     },
   },
   wdio: {
-    'retains native editor focus and geometry through every focus-treatment variant': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await (await browser.$('~focus-field-entry')).click();
-      await expectNativeState(browser, 'focus-field-entry', 'focused', true);
-      for (const variant of ['outline', 'underline']) {
-        for (const suffix of ['', '-error', '-readonly']) {
-          const id = `focus-field-${variant}${suffix}`;
-          const field = await browser.$(`~${id}`);
-          const before = await browser.getElementRect(await field.elementId);
-          await browser.keys('\uE004');
-          await expectNativeState(browser, id, 'focused', true);
-          await expect(await browser.$(`~${id}-indicator`)).toHaveText('true');
-          if (suffix === '-readonly') {
-            expect(await field.getTagName()).toBe('textbox');
-            await expect(field).toBeEnabled();
-            await browser.keys('x');
-            await expect(field).toHaveValue('Read only');
+    'retains native editor focus and geometry through every focus-treatment variant': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        await (await browser.$('~focus-field-entry')).click();
+        await expectNativeState(browser, 'focus-field-entry', 'focused', true);
+        for (const variant of ['outline', 'underline']) {
+          for (const suffix of ['', '-error', '-readonly']) {
+            const id = `focus-field-${variant}${suffix}`;
+            const field = await browser.$(`~${id}`);
+            const before = await browser.getElementRect(await field.elementId);
+            await browser.keys('\uE004');
             await expectNativeState(browser, id, 'focused', true);
+            await expect(await browser.$(`~${id}-indicator`)).toHaveText('true');
+            if (suffix === '-readonly') {
+              expect(await field.getTagName()).toBe('textbox');
+              await expect(field).toBeEnabled();
+              await browser.keys('x');
+              await expect(field).toHaveValue('Read only');
+              await expectNativeState(browser, id, 'focused', true);
+            }
+            const after = await browser.getElementRect(await field.elementId);
+            expect({ width: after.width, height: after.height }).toEqual({ width: before.width, height: before.height });
           }
-          const after = await browser.getElementRect(await field.elementId);
-          expect({ width: after.width, height: after.height }).toEqual({ width: before.width, height: before.height });
         }
-      }
-      await browser.keys('\uE004');
-      await expectNativeState(browser, 'focus-field-after', 'focused', true);
-      await expectNativeState(browser, 'focus-field-disabled', 'focused', false);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'focus-field-after', 'focused', true);
+        await expectNativeState(browser, 'focus-field-disabled', 'focused', false);
+      },
     },
   },
 };

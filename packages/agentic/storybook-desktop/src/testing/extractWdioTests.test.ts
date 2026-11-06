@@ -9,6 +9,35 @@ import { extractWdioTests } from './extractWdioTests.js';
 const sourceFile = path.resolve(__dirname, 'fixture.stories.tsx');
 
 describe('extractWdioTests', () => {
+  test('extracts endpoint input modes alongside unchanged callbacks and fingerprints classification changes', async () => {
+    const source = `export const Example = { wdio: {
+      named: { inputModes: { win32: 'both', macos: 'physical' }, run: async ({ expect }) => { expect(true); } },
+      legacy: async () => {},
+    } };`;
+    const extracted = extractWdioTests(source, sourceFile).get('Example')!;
+    expect(extracted.tests[0].inputModes).toEqual({ win32: 'both', macos: 'physical' });
+    expect(extracted.tests[1].inputModes).toBeUndefined();
+    const assertion = jest.fn();
+    await vm.runInNewContext(`(${extracted.tests[0].code})`)({ expect: assertion });
+    expect(assertion).toHaveBeenCalledWith(true);
+    const changed = extractWdioTests(source.replace("win32: 'both'", "win32: 'physical'"), sourceFile).get('Example')!;
+    expect(changed.tests[0].code).toBe(extracted.tests[0].code);
+    expect(changed.digest).not.toBe(extracted.digest);
+  });
+
+  test.each([
+    [`{ inputModes: {}, run: () => {} }`, /at least one endpoint/],
+    [`{ inputModes: { android: 'physical' }, run: () => {} }`, /desktop endpoints/],
+    [`{ inputModes: { win32: 'automatic' }, run: () => {} }`, /values must be/],
+    [`{ inputModes: { win32: mode }, run: () => {} }`, /values must be/],
+    [`{ inputModes: { ...shared }, run: () => {} }`, /static endpoint/],
+    [`{ inputModes: { win32: 'both', win32: 'physical' }, run: () => {} }`, /unique desktop endpoints/],
+    [`{ inputModes: { win32: 'both' }, run: helper }`, /inline/],
+    [`{ inputModes: { win32: 'both' }, run: () => {}, extra: true }`, /unique inputModes and run/],
+  ])('rejects invalid or dynamic classified test declarations %s', (declaration, message) => {
+    expect(() => extractWdioTests(`export const Example = { wdio: { named: ${declaration} } };`, sourceFile)).toThrow(message);
+  });
+
   test('extracts named test functions in declaration order with independent local scopes', async () => {
     const result = extractWdioTests(
       `
@@ -41,7 +70,7 @@ describe('extractWdioTests', () => {
     ["{ ['name']: () => {} }", /static properties/],
     ['{ named() {} }', /static properties/],
     ['{ named: helper }', /inline/],
-    ['{ named: { nested: () => {} } }', /inline/],
+    ['{ named: { nested: () => {} } }', /classified tests require/],
   ])('rejects invalid named collections %s', (value, message) => {
     expect(() => extractWdioTests(`export const Example = { wdio: ${value} };`, sourceFile)).toThrow(message);
   });

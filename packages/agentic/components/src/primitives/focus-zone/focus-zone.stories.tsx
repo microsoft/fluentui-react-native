@@ -240,31 +240,37 @@ export const Default: Story = {
   tags: ['desktop-e2e'],
   render: (args) => <FocusZoneExample {...args} />,
   wdio: {
-    'uses platform directional navigation and exits the zone on Tab': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, platform } = context;
-      await (await browser.$('~focus-zone-item-1')).click();
-      await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
-      await browser.keys('\uE014');
-      await expectNativeState(browser, 'focus-zone-item-2', 'focused', true);
-      await browser.keys('\uE015');
-      await expectNativeState(browser, platform === 'macos' ? 'focus-zone-item-5' : 'focus-zone-item-3', 'focused', true);
-      await browser.keys('\uE004');
-      await expectNativeState(browser, 'focus-zone-after', 'focused', true);
+    'uses platform directional navigation and exits the zone on Tab': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, platform } = context;
+        await (await browser.$('~focus-zone-item-1')).click();
+        await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
+        await browser.keys('\uE014');
+        await expectNativeState(browser, 'focus-zone-item-2', 'focused', true);
+        await browser.keys('\uE015');
+        await expectNativeState(browser, platform === 'macos' ? 'focus-zone-item-5' : 'focus-zone-item-3', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'focus-zone-after', 'focused', true);
+      },
     },
-    'Shift+Tab exits to a preceding sibling': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser } = context;
-      await (await browser.$('~focus-zone-item-2')).click();
-      await expectNativeState(browser, 'focus-zone-item-2', 'focused', true);
-      try {
-        await browser.keys(['\uE008', '\uE004']);
-      } finally {
-        await browser.releaseActions();
-      }
-      await expectNativeState(browser, 'focus-zone-before', 'focused', true);
+    'Shift+Tab exits to a preceding sibling': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser } = context;
+        await (await browser.$('~focus-zone-item-2')).click();
+        await expectNativeState(browser, 'focus-zone-item-2', 'focused', true);
+        try {
+          await browser.keys(['\uE008', '\uE004']);
+        } finally {
+          await browser.releaseActions();
+        }
+        await expectNativeState(browser, 'focus-zone-before', 'focused', true);
+      },
     },
   },
   parameters: {
@@ -299,14 +305,17 @@ export const TwoDimensionalNavigation: Story = {
   },
   render: (args) => <FocusZoneExample {...args} />,
   wdio: {
-    'moves geometrically between rows': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser } = context;
-      await (await browser.$('~focus-zone-item-1')).click();
-      await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
-      await browser.keys('\uE015');
-      await expectNativeState(browser, 'focus-zone-item-4', 'focused', true);
+    'moves geometrically between rows': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser } = context;
+        await (await browser.$('~focus-zone-item-1')).click();
+        await expectNativeState(browser, 'focus-zone-item-1', 'focused', true);
+        await browser.keys('\uE015');
+        await expectNativeState(browser, 'focus-zone-item-4', 'focused', true);
+      },
     },
   },
   parameters: {
@@ -354,32 +363,38 @@ export const FirstChildTabExit: Story = {
   },
   render: (args) => <FirstChildTabExitExample {...args} />,
   wdio: {
-    'Shift+Tab skips the first-child zone and later siblings while climbing ancestors': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser } = context;
-      for (const item of ['focus-zone-first-child-first', 'focus-zone-first-child-last']) {
-        await (await browser.$(`~${item}`)).click();
-        await expectNativeState(browser, item, 'focused', true);
-        try {
-          await browser.keys(['\uE008', '\uE004']);
-        } finally {
-          await browser.releaseActions();
+    'Shift+Tab skips the first-child zone and later siblings while climbing ancestors': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser } = context;
+        for (const item of ['focus-zone-first-child-first', 'focus-zone-first-child-last']) {
+          await (await browser.$(`~${item}`)).click();
+          await expectNativeState(browser, item, 'focused', true);
+          try {
+            await browser.keys(['\uE008', '\uE004']);
+          } finally {
+            await browser.releaseActions();
+          }
+          await expectNativeState(browser, 'focus-zone-previous', 'focused', true);
+          await expectNativeState(browser, item, 'focused', false);
+          await expectNativeState(browser, 'focus-zone-later-sibling', 'focused', false);
+          await expectNativeState(browser, 'focus-zone-later-ancestor-sibling', 'focused', false);
         }
-        await expectNativeState(browser, 'focus-zone-previous', 'focused', true);
-        await expectNativeState(browser, item, 'focused', false);
-        await expectNativeState(browser, 'focus-zone-later-sibling', 'focused', false);
-        await expectNativeState(browser, 'focus-zone-later-ancestor-sibling', 'focused', false);
-      }
+      },
     },
-    'Tab exits a first-child zone to its next sibling': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser } = context;
-      await (await browser.$('~focus-zone-first-child-first')).click();
-      await expectNativeState(browser, 'focus-zone-first-child-first', 'focused', true);
-      await browser.keys('\uE004');
-      await expectNativeState(browser, 'focus-zone-later-sibling', 'focused', true);
+    'Tab exits a first-child zone to its next sibling': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser } = context;
+        await (await browser.$('~focus-zone-first-child-first')).click();
+        await expectNativeState(browser, 'focus-zone-first-child-first', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'focus-zone-later-sibling', 'focused', true);
+      },
     },
   },
   parameters: {

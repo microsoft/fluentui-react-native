@@ -78,10 +78,13 @@ type Story = WdioStory<StoryObj<typeof Tag>>;
 
 export const Default: Story = {
   wdio: {
-    'TAG-004 TAG-008 exposes the whole enabled tag as a native button': async ({ browser, expect }) => {
-      const tag = await browser.$('~agentic-storybook-tag');
-      expect(await tag.getTagName()).toBe('button');
-      await expect(tag).toBeEnabled();
+    'TAG-004 TAG-008 exposes the whole enabled tag as a native button': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const tag = await browser.$('~agentic-storybook-tag');
+        expect(await tag.getTagName()).toBe('button');
+        await expect(tag).toBeEnabled();
+      },
     },
   },
 };
@@ -89,10 +92,13 @@ export const Default: Story = {
 export const NativeDisabled: Story = {
   args: { content: 'Unavailable filter', disabled: true },
   wdio: {
-    'TAG-008 exposes disabled native button semantics': async ({ browser, expect }) => {
-      const tag = await browser.$('~agentic-storybook-tag');
-      expect(await tag.getTagName()).toBe('button');
-      await expect(tag).toBeDisabled();
+    'TAG-008 exposes disabled native button semantics': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const tag = await browser.$('~agentic-storybook-tag');
+        expect(await tag.getTagName()).toBe('button');
+        await expect(tag).toBeDisabled();
+      },
     },
   },
 };

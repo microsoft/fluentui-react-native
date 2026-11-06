@@ -72,6 +72,18 @@ describe('native Storybook test stripping', () => {
     expect(output).not.toMatch(/first test|second test|node:assert|node:fs|wdio/);
   });
 
+  test.each(['macos', 'windows', 'win32'])('strips classified callbacks and metadata from the native bundle on %s', (platform) => {
+    const output = transform(
+      `import { View } from 'react-native';
+       export const Example = { render: () => <View testID="keep-native" />, wdio: {
+         'classified test': { inputModes: { win32: 'both' }, run: async () => { await import('node:fs'); } },
+       } };`,
+      platform,
+    );
+    expect(output).toContain('keep-native');
+    expect(output).not.toMatch(/classified test|inputModes|node:fs|wdio/);
+  });
+
   test('leaves non-story files untouched', () => {
     const output = transform(`export const configuration = { wdio: () => 'not-a-story' };`, 'macos', 'configuration.ts');
     expect(output).toContain('wdio');

@@ -87,56 +87,65 @@ export const FocusManagement: Story = {
   render: () => <FocusManagementScene />,
   tags: ['desktop-focus'],
   wdio: {
-    'commits selection before focus, skips disabled tabs, and supports wrap, Home, and End': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
-      await expect(await browser.$('~focus-tab-disabled')).not.toBeEnabled();
-      for (const [key, id, value] of [
-        ['\uE014', 'focus-tab-two', 'focus-panel-two'],
-        ['\uE014', 'focus-tab-one', 'focus-panel-one'],
-        ['\uE010', 'focus-tab-two', 'focus-panel-two'],
-        ['\uE011', 'focus-tab-one', 'focus-panel-one'],
-      ]) {
-        await browser.keys(key);
-        await expectNativeState(browser, id, 'focused', true);
-        await expectNativeState(browser, id, 'selected', true);
-        await expect(await browser.$('~focus-tab-selection')).toHaveText(value);
-        await expect(await browser.$('~focus-tab-selection-at-focus')).toHaveText(value);
-        await expectNativeState(browser, 'focus-tab-disabled', 'focused', false);
-      }
-    },
-    'leaves modified navigation chords to their owner': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
-      // Control+Arrow is a macOS system shortcut, not a key the app can promise to receive.
-      const modifiers =
-        platform === 'macos'
-          ? [['\uE008', 'Shift']]
-          : [
-              ['\uE009', 'Control'],
-              ['\uE008', 'Shift'],
-            ];
-      for (const [modifier, name] of modifiers) {
+    'commits selection before focus, skips disabled tabs, and supports wrap, Home, and End': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
         await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
-        await browser.keys([modifier, '\uE014']);
-        await expect(await browser.$('~focus-tab-owner-key')).toHaveText(`${name}+ArrowRight`);
-        await expectNativeState(browser, 'focus-tab-one', 'selected', true);
-        await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
-      }
+        await expect(await browser.$('~focus-tab-disabled')).not.toBeEnabled();
+        for (const [key, id, value] of [
+          ['\uE014', 'focus-tab-two', 'focus-panel-two'],
+          ['\uE014', 'focus-tab-one', 'focus-panel-one'],
+          ['\uE010', 'focus-tab-two', 'focus-panel-two'],
+          ['\uE011', 'focus-tab-one', 'focus-panel-one'],
+        ]) {
+          await browser.keys(key);
+          await expectNativeState(browser, id, 'focused', true);
+          await expectNativeState(browser, id, 'selected', true);
+          await expect(await browser.$('~focus-tab-selection')).toHaveText(value);
+          await expect(await browser.$('~focus-tab-selection-at-focus')).toHaveText(value);
+          await expectNativeState(browser, 'focus-tab-disabled', 'focused', false);
+        }
+      },
     },
-    'exposes native selected and disabled accessibility states': async (context) => {
-      const { browser, expect } = context;
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
-      await expect(await browser.$('~focus-tab-disabled')).not.toBeEnabled();
-      await expectNativeState(browser, 'focus-tab-one', 'selected', true);
-      await browser.keys('\uE014');
-      await expectNativeState(browser, 'focus-tab-one', 'selected', false);
-      await expectNativeState(browser, 'focus-tab-two', 'selected', true);
+    'leaves modified navigation chords to their owner': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect, platform } = context;
+        // Control+Arrow is a macOS system shortcut, not a key the app can promise to receive.
+        const modifiers =
+          platform === 'macos'
+            ? [['\uE008', 'Shift']]
+            : [
+                ['\uE009', 'Control'],
+                ['\uE008', 'Shift'],
+              ];
+        for (const [modifier, name] of modifiers) {
+          await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
+          await browser.keys([modifier, '\uE014']);
+          await expect(await browser.$('~focus-tab-owner-key')).toHaveText(`${name}+ArrowRight`);
+          await expectNativeState(browser, 'focus-tab-one', 'selected', true);
+          await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
+        }
+      },
+    },
+    'exposes native selected and disabled accessibility states': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { browser, expect } = context;
+        const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
+        await expect(await browser.$('~focus-tab-disabled')).not.toBeEnabled();
+        await expectNativeState(browser, 'focus-tab-one', 'selected', true);
+        await browser.keys('\uE014');
+        await expectNativeState(browser, 'focus-tab-one', 'selected', false);
+        await expectNativeState(browser, 'focus-tab-two', 'selected', true);
+      },
     },
   },
 };
@@ -145,19 +154,22 @@ export const ManualFocusManagement: Story = {
   render: () => <FocusManagementScene selectionFollowsFocus={false} />,
   tags: ['desktop-focus'],
   wdio: {
-    'keeps manual selection independent until Enter activates the focused tab': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
-      await browser.keys('\uE014');
-      await expectNativeState(browser, 'focus-tab-two', 'focused', true);
-      await expectNativeState(browser, 'focus-tab-one', 'selected', true);
-      await expectNativeState(browser, 'focus-tab-two', 'selected', false);
-      await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
-      await browser.keys('\uE007');
-      await expectNativeState(browser, 'focus-tab-two', 'selected', true);
-      await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-two');
+    'keeps manual selection independent until Enter activates the focused tab': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
+        await browser.keys('\uE014');
+        await expectNativeState(browser, 'focus-tab-two', 'focused', true);
+        await expectNativeState(browser, 'focus-tab-one', 'selected', true);
+        await expectNativeState(browser, 'focus-tab-two', 'selected', false);
+        await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
+        await browser.keys('\uE007');
+        await expectNativeState(browser, 'focus-tab-two', 'selected', true);
+        await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-two');
+      },
     },
   },
 };

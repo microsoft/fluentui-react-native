@@ -95,27 +95,30 @@ export const FocusManagement: Story = {
   render: () => <FocusManagementScene />,
   tags: ['desktop-focus'],
   wdio: {
-    'toggles exactly once per pointer, Enter, and Space activation': async (context) => {
-      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus, focusByTab } =
-        await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      const control = await browser.$('~focus-switch');
-      const count = await browser.$('~focus-switch-count');
-      await (await browser.$('~focus-switch-entry')).click();
-      await expectNativeState(browser, 'focus-switch-entry', 'focused', true);
-      await expectNativeState(browser, 'focus-switch', 'checked', false);
-      await control.click();
-      await expectWindowsPointerFocus(context, 'focus-switch');
-      await expect(count).toHaveText('1');
-      await expectNativeState(browser, 'focus-switch', 'checked', true);
-      await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
-      await browser.keys('\uE007');
-      await expect(count).toHaveText('2');
-      await expectNativeState(browser, 'focus-switch', 'checked', false);
-      await browser.keys('\uE00D');
-      await expect(count).toHaveText('3');
-      await expectNativeState(browser, 'focus-switch', 'checked', true);
+    'toggles exactly once per pointer, Enter, and Space activation': {
+      inputModes: { win32: 'physical' },
+      run: async (context) => {
+        const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus, focusByTab } =
+          await import('../../common/desktopFocus.wdio.ts');
+        if (!requireDesktopFocus(context)) return;
+        const { browser, expect } = context;
+        const control = await browser.$('~focus-switch');
+        const count = await browser.$('~focus-switch-count');
+        await (await browser.$('~focus-switch-entry')).click();
+        await expectNativeState(browser, 'focus-switch-entry', 'focused', true);
+        await expectNativeState(browser, 'focus-switch', 'checked', false);
+        await control.click();
+        await expectWindowsPointerFocus(context, 'focus-switch');
+        await expect(count).toHaveText('1');
+        await expectNativeState(browser, 'focus-switch', 'checked', true);
+        await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
+        await browser.keys('\uE007');
+        await expect(count).toHaveText('2');
+        await expectNativeState(browser, 'focus-switch', 'checked', false);
+        await browser.keys('\uE00D');
+        await expect(count).toHaveText('3');
+        await expectNativeState(browser, 'focus-switch', 'checked', true);
+      },
     },
   },
 };
@@ -197,13 +200,16 @@ export const Checked: Story = {
     },
   },
   wdio: {
-    'SWCH-001 SWCH-006 projects both initial checked values without input': async ({ browser, expect }) => {
-      const off = await browser.$('~switch-spec-off');
-      const on = await browser.$('~switch-spec-on');
-      await expect(off).toBeEnabled();
-      await expect(on).toBeEnabled();
-      expect(await off.getProperty('checked')).toBe(false);
-      expect(await on.getProperty('checked')).toBe(true);
+    'SWCH-001 SWCH-006 projects both initial checked values without input': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect }) => {
+        const off = await browser.$('~switch-spec-off');
+        const on = await browser.$('~switch-spec-on');
+        await expect(off).toBeEnabled();
+        await expect(on).toBeEnabled();
+        expect(await off.getProperty('checked')).toBe(false);
+        expect(await on.getProperty('checked')).toBe(true);
+      },
     },
   },
 };

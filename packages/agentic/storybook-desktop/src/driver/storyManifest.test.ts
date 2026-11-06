@@ -52,6 +52,10 @@ describe('createDesktopStoryManifest', () => {
     const named = await manifestForSource(`export const Default = { wdio: {
       'first case': () => console.log('hidden-body'), 'second case': () => {},
     } };`);
+    const classified = await manifestForSource(`export const Default = { wdio: {
+      'first case': { inputModes: { win32: 'both' }, run: () => console.log('hidden-body') },
+      'second case': { inputModes: { win32: 'physical' }, run: () => {} },
+    } };`);
     expect(before.entries[0]).not.toHaveProperty('wdio');
     expect(before.platformManifestDigest).toBe(
       createHash('sha256')
@@ -69,6 +73,14 @@ describe('createDesktopStoryManifest', () => {
     expect(named.entries[0].wdio).toMatchObject({ exportName: 'Default', testNames: ['first case', 'second case'] });
     expect(named.portablePlanDigest).toBe(before.portablePlanDigest);
     expect(JSON.stringify(named)).not.toContain('hidden-body');
+    expect(classified.entries[0].wdio).toMatchObject({
+      testNames: ['first case', 'second case'],
+      inputModes: { 'first case': { win32: 'both' }, 'second case': { win32: 'physical' } },
+    });
+    expect(classified.portablePlanDigest).toBe(named.portablePlanDigest);
+    expect(classified.platformManifestDigest).not.toBe(named.platformManifestDigest);
+    expect(classified.entries[0].wdio!.digest).not.toBe(named.entries[0].wdio!.digest);
+    expect(JSON.stringify(classified)).not.toContain('hidden-body');
   });
 
   test('fails instead of silently dropping callbacks from excluded or unrecognized story exports', async () => {

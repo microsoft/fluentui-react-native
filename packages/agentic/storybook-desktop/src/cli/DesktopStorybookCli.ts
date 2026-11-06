@@ -343,11 +343,19 @@ export class DesktopStorybookCli {
       throw new Error('No executable wdio story tests matched the requested selection.');
     }
     if (options.list) {
-      const value = selected.map(({ id, sourcePath, wdio }) => ({
-        id,
-        sourcePath,
-        ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioCase(id, name, settings)) } : {}),
-      }));
+      const value = selected.map(({ id, sourcePath, wdio }) => {
+        const tests = (wdio?.testNames ?? ['default']).filter((name) =>
+          matchesWdioCase(id, name, settings, wdio?.inputModes?.[name]?.[platform]),
+        );
+        return {
+          id,
+          sourcePath,
+          ...(wdio?.testNames ? { tests } : {}),
+          ...(wdio?.inputModes
+            ? { inputModes: Object.fromEntries(Object.entries(wdio.inputModes).filter(([name]) => tests.includes(name))) }
+            : {}),
+        };
+      });
       if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
       else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
       return;

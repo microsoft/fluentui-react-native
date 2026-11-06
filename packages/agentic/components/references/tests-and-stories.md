@@ -89,6 +89,15 @@ Adapt the structure to React Native. Do not copy DOM props, CSS class hooks, or 
 
 Colocate `<component>.stories.tsx`; the Storybook source glob discovers it automatically.
 
+For Win32 input coverage, classify each named `wdio` test beside its callback:
+`{ inputModes: { win32: 'physical' }, run: async (context) => { ... } }`.
+Use `accessibility` for accessibility-only actions, `physical` when keyboard,
+pointer, or wheel input is required, and `both` when the same assertions work
+with either click policy. Keep capability guards and assertions in `run`.
+The app generates its catalog from source; do not maintain a second test list.
+See `packages/agentic/storybook-desktop/references/story-tests.md` for static
+constraints and other endpoint annotations.
+
 Declare module-scoped styles and other values referenced by metadata before the `Meta` object. Storybook evaluates
 metadata while importing the module, so referencing a later `const` drops the complete story module with an
 initialization error.

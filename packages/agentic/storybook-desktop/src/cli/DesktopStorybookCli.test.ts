@@ -219,6 +219,45 @@ function makeConfig(platformOptions = {}) {
 }
 
 describe('DesktopStorybookCli', () => {
+  test('discovers classifications, selects both lanes, and rejects unclassified callbacks before filters hide them', async () => {
+    const output = { write: jest.fn() };
+    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot });
+    const inputModes = {
+      semantics: { win32: 'both' as const },
+      pointer: { win32: 'physical' as const },
+      action: { win32: 'accessibility' as const },
+    };
+    const manifest = {
+      endpoint: 'win32' as const,
+      schemaVersion: 1 as const,
+      platformManifestDigest: 'digest',
+      portablePlanDigest: 'portable',
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { exportName: 'Default', digest: 'callback', testNames: ['semantics', 'pointer', 'action'], inputModes },
+        },
+      ],
+    };
+    const cli = new DesktopStorybookCli(config, { createStoryManifest: async () => manifest, output });
+    await cli.test('win32', { list: true });
+    expect(JSON.parse(output.write.mock.calls[0][0])[0].inputModes).toEqual(inputModes);
+    for (const inputMode of ['accessibility', 'physical'] as const) {
+      output.write.mockClear();
+      await cli.test('win32', { list: true, inputMode });
+      expect(JSON.parse(output.write.mock.calls[0][0])[0].tests).toEqual(['semantics', inputMode === 'physical' ? 'pointer' : 'action']);
+    }
+    manifest.entries[0].wdio.testNames.push('unclassified');
+    await expect(cli.test('win32', { list: true, inputMode: 'physical', test: 'pointer' })).rejects.toThrow(
+      /Unclassified win32 wdio callback: button--default \/ unclassified/,
+    );
+  });
+
   test.each(['plain', 'json', 'ndjson'] as const)(
     'lists exact callback pairs without a story/name cross-product with the %s reporter',
     async (reporterMode) => {

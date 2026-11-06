@@ -25,6 +25,12 @@ describe('Storybook-owned wdio configuration', () => {
     expect(() => resolveWdioOptions({ tag: ' ' })).toThrow('wdio.tag');
   });
 
+  test('accepts explicit input lanes and rejects unknown modes', () => {
+    expect(resolveWdioOptions({ inputMode: 'physical' }).inputMode).toBe('physical');
+    // @ts-expect-error Input modes are intentionally a closed set.
+    expect(() => resolveWdioOptions({ inputMode: 'automatic' })).toThrow('wdio.inputMode');
+  });
+
   test('snapshots exact callback identities and rejects empty or duplicate selections', () => {
     const testCases = [{ storyId: 'button--default', testName: 'activation' }];
     const settings = resolveWdioOptions({ testCases });

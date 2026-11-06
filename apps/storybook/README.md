@@ -45,12 +45,15 @@ Change the owning config or source instead of generated output.
 ## Win32 input coverage
 
 Win32/Paper PR testing has independent accessibility and physical-input jobs.
-Both traverse the full platform story catalog. The app-owned
-[`input-tests.win32.json`](input-tests.win32.json) declares each authored callback
-as `accessibility`, `physical`, or `both`; `both` callbacks execute in each job.
-Declarations use exact story ID and callback-name pairs, not name-glob
-cross-products. A semantic assertion that first navigates with the keyboard
-still belongs to the physical lane.
+Both traverse the full platform story catalog. Each named test declares
+`inputModes: { win32: 'accessibility' | 'physical' | 'both' }` beside its
+`run` callback; `both` tests execute in each job. A semantic assertion that first
+navigates with the keyboard still belongs to the physical lane.
+
+`yarn input-coverage generate` discovers these declarations and writes
+`artifacts/win32/input-tests.win32.json`. This is generated output, not a second
+test inventory to maintain. The app owns only the exact exception registry,
+[`input-test-quarantines.win32.json`](input-test-quarantines.win32.json).
 
 The accessibility lane masks keyboard, physical clicks, and wheel input and
 explicitly uses accessibility clicks. The physical lane enables those features
@@ -58,10 +61,10 @@ and explicitly uses physical clicks. Windows/Fabric and macOS policies are
 unchanged. Source assertions and capability checks remain authoritative; this
 catalog does not convert unsupported actions into passes.
 
-Before smoke, `yarn input-coverage begin` checks the complete statically
-discovered Win32 callback catalog against the declarations and captures the
-source, lane, and preexisting report directories. New, removed, or renamed
-callbacks require a reviewed catalog update. After smoke,
+Before smoke, `yarn input-coverage begin` generates the complete statically
+discovered Win32 callback catalog and captures the source, lane, and preexisting
+report directories. Missing or invalid classifications fail; additions, removals,
+and renames come directly from story source. After smoke,
 `yarn input-coverage verify` requires one fresh successful canonical test report,
 with Win32/Paper provenance, and
 one clean passing attempt for every callback assigned to that lane. Unexpected

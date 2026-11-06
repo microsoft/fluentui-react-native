@@ -1,1 +1,1 @@
-export type { WdioStory, WdioStoryContext, WdioStoryTest, WdioStoryTests } from './types.js';
+export type { ClassifiedWdioStoryTest, WdioStory, WdioStoryContext, WdioStoryTest, WdioStoryTests } from './types.js';

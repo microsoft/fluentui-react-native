@@ -88,32 +88,35 @@ export const Motion: Story = {
     },
   },
   wdio: {
-    'renders changing native pixels when gradient animation is available': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.elementScreenshot) {
-        skip('This test requires native element screenshots.');
-        return;
-      }
-      const preference = await browser.$('~skeleton-motion-preference');
-      await browser.waitUntil(async () =>
-        ['Motion enabled', 'Reduced motion enabled', 'Gradient unavailable for native platform colors'].includes(
-          await preference.getText(),
-        ),
-      );
-      const skeleton = await browser.$('~skeleton-motion');
-      await expect(skeleton).toExist();
-      expect(await browser.isElementDisplayed(await skeleton.elementId)).toBe(true);
-      const frames = new Set<string>();
-      for (let index = 0; index < 5; index++) {
-        frames.add(await browser.takeElementScreenshot(await skeleton.elementId));
-        await browser.pause(117);
-      }
-      if ((await preference.getText()) === 'Motion enabled') {
-        expect(frames.size).toBeGreaterThan(1);
-      } else {
-        expect(frames.size).toBe(1);
-      }
+    'renders changing native pixels when gradient animation is available': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect, skip }) => {
+        const features = browser.capabilities['furn:features'];
+        if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+        if (!features.elementScreenshot) {
+          skip('This test requires native element screenshots.');
+          return;
+        }
+        const preference = await browser.$('~skeleton-motion-preference');
+        await browser.waitUntil(async () =>
+          ['Motion enabled', 'Reduced motion enabled', 'Gradient unavailable for native platform colors'].includes(
+            await preference.getText(),
+          ),
+        );
+        const skeleton = await browser.$('~skeleton-motion');
+        await expect(skeleton).toExist();
+        expect(await browser.isElementDisplayed(await skeleton.elementId)).toBe(true);
+        const frames = new Set<string>();
+        for (let index = 0; index < 5; index++) {
+          frames.add(await browser.takeElementScreenshot(await skeleton.elementId));
+          await browser.pause(117);
+        }
+        if ((await preference.getText()) === 'Motion enabled') {
+          expect(frames.size).toBeGreaterThan(1);
+        } else {
+          expect(frames.size).toBe(1);
+        }
+      },
     },
   },
 };

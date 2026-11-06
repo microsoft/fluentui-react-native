@@ -59,12 +59,16 @@ callback execution, including grouped smoke. Omitted selections preserve the
 existing behavior; legacy single callbacks use the name `default`. Declared
 pairs that do not identify an executable callback fail selection.
 
-An app can own a reviewed input-mode catalog and select different pairs with
-explicit `wdio.clickMode: 'accessibility'` or `'physical'`. The shared runner
-does not infer supported modes from callback names. Consumers must validate
-catalog completeness and actual execution; declaring a test does not prove
-that it ran. The Win32 Storybook app demonstrates this with separate CI lanes,
-shared callbacks in both, and explicit reporting of its existing quarantine.
+For input lanes, set `wdio.inputMode: 'accessibility'` or `'physical'` alongside
+the matching `wdio.clickMode`. The runner selects the exact per-test endpoint
+annotations extracted from story source, including `both` in each lane.
+Every eligible callback must declare the target endpoint before other filters
+are applied. Modes are never inferred from names or assertions.
+
+The Win32 app generates its catalog from complete `test --list` discovery and
+owns only the explicit quarantine registry. Consumers must still verify actual
+execution: classification does not prove a callback ran or grant input
+capabilities. Existing exact-pair selection intersects input-mode selection.
 
 CLI reports record the selected endpoint and configured renderer. Smoke and
 callback runs use canonical `run.json` documents with `kind: 'tests'`; command

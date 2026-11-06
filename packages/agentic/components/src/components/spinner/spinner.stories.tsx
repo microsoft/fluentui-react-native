@@ -94,28 +94,31 @@ export const Motion: Story = {
     },
   },
   wdio: {
-    'renders changing native pixels unless reduced motion is enabled': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.elementScreenshot) {
-        skip('This test requires native element screenshots.');
-        return;
-      }
-      const preference = await browser.$('~spinner-motion-preference');
-      await browser.waitUntil(async () => ['Motion enabled', 'Reduced motion enabled'].includes(await preference.getText()));
-      const spinner = await browser.$('~spinner-motion');
-      await expect(spinner).toExist();
-      expect(await browser.isElementDisplayed(await spinner.elementId)).toBe(true);
-      const frames = new Set<string>();
-      for (let index = 0; index < 5; index++) {
-        frames.add(await browser.takeElementScreenshot(await spinner.elementId));
-        await browser.pause(117);
-      }
-      if ((await preference.getText()) === 'Motion enabled') {
-        expect(frames.size).toBeGreaterThan(1);
-      } else {
-        expect(frames.size).toBe(1);
-      }
+    'renders changing native pixels unless reduced motion is enabled': {
+      inputModes: { win32: 'both' },
+      run: async ({ browser, expect, skip }) => {
+        const features = browser.capabilities['furn:features'];
+        if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
+        if (!features.elementScreenshot) {
+          skip('This test requires native element screenshots.');
+          return;
+        }
+        const preference = await browser.$('~spinner-motion-preference');
+        await browser.waitUntil(async () => ['Motion enabled', 'Reduced motion enabled'].includes(await preference.getText()));
+        const spinner = await browser.$('~spinner-motion');
+        await expect(spinner).toExist();
+        expect(await browser.isElementDisplayed(await spinner.elementId)).toBe(true);
+        const frames = new Set<string>();
+        for (let index = 0; index < 5; index++) {
+          frames.add(await browser.takeElementScreenshot(await spinner.elementId));
+          await browser.pause(117);
+        }
+        if ((await preference.getText()) === 'Motion enabled') {
+          expect(frames.size).toBeGreaterThan(1);
+        } else {
+          expect(frames.size).toBe(1);
+        }
+      },
     },
   },
 };

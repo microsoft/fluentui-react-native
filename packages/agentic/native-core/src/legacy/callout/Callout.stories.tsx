@@ -186,29 +186,32 @@ export const Default: Story = {
   tags: ['desktop-e2e'],
   render: (args) => <CalloutExample {...args} defaultVisible />,
   wdio: {
-    'opens, light-dismisses, and recreates a native popup': async ({ browser, expect, platform, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick) {
-        skip('Popup lifecycle qualification requires physical pointer input.');
-        return;
-      }
-      const status = await browser.$('~agentic-storybook-callout-status');
-      for (let attempt = 0; attempt < 2; attempt++) {
-        await expect(status).toHaveText('Native window: Shown');
-        // Only the AppKit provider enumerates the popup as a top-level window.
-        if (platform === 'macos') expect(await browser.getWindowHandles()).toHaveLength(2);
-        await status.click();
-        if (platform === 'macos') {
-          await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
-            timeout: 5000,
-            timeoutMsg: 'Expected dismissal to remove the native Callout window.',
-          });
+    'opens, light-dismisses, and recreates a native popup': {
+      inputModes: { win32: 'physical' },
+      run: async ({ browser, expect, platform, skip }) => {
+        const features = browser.capabilities['furn:features'];
+        if (!features?.physicalClick) {
+          skip('Popup lifecycle qualification requires physical pointer input.');
+          return;
         }
-        await expect(status).toHaveText('Native window: Dismissed');
-        if (attempt === 0) {
-          await (await browser.$('~agentic-storybook-callout-trigger')).click();
+        const status = await browser.$('~agentic-storybook-callout-status');
+        for (let attempt = 0; attempt < 2; attempt++) {
+          await expect(status).toHaveText('Native window: Shown');
+          // Only the AppKit provider enumerates the popup as a top-level window.
+          if (platform === 'macos') expect(await browser.getWindowHandles()).toHaveLength(2);
+          await status.click();
+          if (platform === 'macos') {
+            await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
+              timeout: 5000,
+              timeoutMsg: 'Expected dismissal to remove the native Callout window.',
+            });
+          }
+          await expect(status).toHaveText('Native window: Dismissed');
+          if (attempt === 0) {
+            await (await browser.$('~agentic-storybook-callout-trigger')).click();
+          }
         }
-      }
+      },
     },
   },
 };
@@ -231,16 +234,19 @@ export const WindowCommands: Story = {
   render: (args) => <CalloutExample {...args} defaultVisible showWindowCommands />,
   tags: ['desktop-e2e'],
   wdio: {
-    'dismisses initially focused content on Escape': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick || !features.keyboard) {
-        skip('Escape dismissal requires an interactive desktop with keyboard input.');
-        return;
-      }
-      const status = await browser.$('~agentic-storybook-callout-status');
-      await expect(status).toHaveText('Native window: Shown');
-      await browser.keys('\uE00C');
-      await expect(status).toHaveText('Native window: Dismissed');
+    'dismisses initially focused content on Escape': {
+      inputModes: { win32: 'physical' },
+      run: async ({ browser, expect, skip }) => {
+        const features = browser.capabilities['furn:features'];
+        if (!features?.physicalClick || !features.keyboard) {
+          skip('Escape dismissal requires an interactive desktop with keyboard input.');
+          return;
+        }
+        const status = await browser.$('~agentic-storybook-callout-status');
+        await expect(status).toHaveText('Native window: Shown');
+        await browser.keys('\uE00C');
+        await expect(status).toHaveText('Native window: Dismissed');
+      },
     },
   },
   parameters: {

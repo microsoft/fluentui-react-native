@@ -50,6 +50,13 @@ lifecycle:
 STORYBOOK_SMOKE_STORY='native-*' yarn storybook smoke --macos --mode stories-and-tests
 ```
 
+Legacy Callout's Win32 input classifications live beside each named callback
+as `{ inputModes: { win32: 'physical' }, run: async (context) => { ... } }`.
+The consuming app discovers these annotations and generates its catalog.
+Other endpoints remain unfiltered unless they explicitly select an input mode.
+Keep native capability guards and assertions in the callback; annotations are
+selection metadata, not evidence of native readiness.
+
 Use `--windows` or `--win32` for the Windows endpoints. This traverses the
 full catalog before running the selected native tests.
 Add `--paper` to run the macOS Paper lane; a successful Paper build alone does
