@@ -63,6 +63,41 @@ Live requalification of these lanes is tracked in
 [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441), and
 the repeated-run support matrix in
 [#4451](https://github.com/microsoft/fluentui-react-native/issues/4451).
+The parameterized procedure is
+`packages/agentic/desktop-test/references/native-qualification.md`.
+
+### Provisional F15 macOS evidence — 2026-11-06
+
+**Provisional; exact source revision `388a60cc803ab78202a6f64f92e3f53b779c5c39`.**
+App: Agentic Components Storybook / ReactTestApp (configured bundle ID
+`com.microsoft.fluentui.agenticstorybook`). OS: macOS 27.2, arm64.
+The helper was explicitly built and the noninteractive doctor reported
+Accessibility, PostEvent, and ScreenCapture preflight `true`, console unlocked,
+ad-hoc signing, and designated requirement
+`cdhash H"0d2e7a81dfd4695b7fb84aa1b3242f5e1773e8b4"`.
+
+| Renderer       | Command and actual selection                                                                                                            | Result                                                    | Cleanup                                                                                                        | Artifact                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| macOS Fabric   | `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook smoke --macos --mode stories-and-tests`; 211 selected/executed         | Passed 211, failed 0, skipped 0, unsupported 0; retries 0 | No owned app/driver/channel/Metro process; ports 21338/30029/45382 had no listeners; `interactive.lock` absent | `apps/storybook/artifacts/desktop/0f99740f-631b-444a-a705-76a9b4a761b7/run.json` |
+| macOS Paper    | `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook smoke --macos --paper --mode stories-and-tests`; 211 selected/executed | Passed 211, failed 0, skipped 0, unsupported 0; retries 0 | No owned app/driver/channel/Metro process; ports 21338/30029/45382 had no listeners; `interactive.lock` absent | `apps/storybook/artifacts/desktop/e82a83c2-a01d-41c0-b308-2551630e8b1e/run.json` |
+| Windows Fabric | Not run — this machine is macOS-only                                                                                                    | Not run; 0 selected                                       | Not applicable                                                                                                 | None                                                                             |
+| Win32 Paper    | Not run — this machine is macOS-only                                                                                                    | Not run; 0 selected                                       | Not applicable                                                                                                 | None                                                                             |
+
+| Descriptor-path renderer | Command / selection                                 | Passed / failed / skipped / unsupported | Cleanup                                      | Artifact |
+| ------------------------ | --------------------------------------------------- | --------------------------------------- | -------------------------------------------- | -------- |
+| macOS Fabric             | Not run; no real descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
+| macOS Paper              | Not run; no real descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
+
+The `STORYBOOK_SMOKE_STORY` value did not constrain the callbacks in these
+runs; `run.json` recorded 211 selected. An initial Fabric attempt failed before
+test selection because CocoaPods was out of sync. `yarn storybook prep --macos`
+resolved that environment prerequisite; the failed attempt is retained at
+`apps/storybook/artifacts/desktop/2e42a0aa-506d-4edb-a3ca-32e5b7c26b04/run.json`.
+These smoke runs used the non-agent WDIO path. They do **not** qualify the MCP
+descriptor lifecycle, native story quarantine/recovery, F2/F3/F4/F5 integration,
+or physical-input/capture requirements. The descriptor rows are not run on
+this baseline revision; update them on the combined integration SHA after the
+real descriptor-path pass.
 
 ### 2026-11-06: bounded F4 restart qualification
 

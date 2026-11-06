@@ -89,3 +89,32 @@ selection, passed/failed/skipped counts, cleanup outcome, and approved artifact
 locator. Distinguish tests that actually ran from build/bundle or fake-host
 checks. Keep measured text/operation costs in the driver status reference and
 MCP discovery overhead in the adapter's status reference.
+
+### Provisional F15 macOS evidence — 2026-11-06
+
+**Provisional; exact source revision `388a60cc803ab78202a6f64f92e3f53b779c5c39`.**
+App: Agentic Components Storybook / ReactTestApp (configured bundle ID
+`com.microsoft.fluentui.agenticstorybook`). OS: macOS 27.2, arm64.
+
+| Renderer       | Command and actual selection                                                                                                            | Result                                                    | Cleanup                                                                                                        | Artifact                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| macOS Fabric   | `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook smoke --macos --mode stories-and-tests`; 211 selected/executed         | Passed 211, failed 0, skipped 0, unsupported 0; retries 0 | No owned app/driver/channel/Metro process; ports 21338/30029/45382 had no listeners; `interactive.lock` absent | `apps/storybook/artifacts/desktop/0f99740f-631b-444a-a705-76a9b4a761b7/run.json` |
+| macOS Paper    | `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook smoke --macos --paper --mode stories-and-tests`; 211 selected/executed | Passed 211, failed 0, skipped 0, unsupported 0; retries 0 | No owned app/driver/channel/Metro process; ports 21338/30029/45382 had no listeners; `interactive.lock` absent | `apps/storybook/artifacts/desktop/e82a83c2-a01d-41c0-b308-2551630e8b1e/run.json` |
+| Windows Fabric | Not run — this machine is macOS-only                                                                                                    | Not run; 0 selected                                       | Not applicable                                                                                                 | None                                                                             |
+| Win32 Paper    | Not run — this machine is macOS-only                                                                                                    | Not run; 0 selected                                       | Not applicable                                                                                                 | None                                                                             |
+
+| Descriptor-path renderer | Command / selection                                 | Passed / failed / skipped / unsupported | Cleanup                                      | Artifact |
+| ------------------------ | --------------------------------------------------- | --------------------------------------- | -------------------------------------------- | -------- |
+| macOS Fabric             | Not run; no real descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
+| macOS Paper              | Not run; no real descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
+
+These are real native Storybook smoke runs through the non-agent WDIO path.
+They do not demonstrate descriptor publication, service restart, failed
+cleanup, or exact attached-app preservation. The `STORYBOOK_SMOKE_STORY`
+environment value did not constrain the selection; the artifact reports 211
+callbacks. The initial Fabric attempt failed before selection due to an
+unsynchronized CocoaPods sandbox; `yarn storybook prep --macos` repaired the
+generated project before the passing retry. See the runbook in
+[`native-qualification.md`](native-qualification.md). The authoritative
+descriptor-path and F2/F3/F4/F5 cases remain **Not run** until the combined
+integration commit is available and the native lock is granted again.

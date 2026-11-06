@@ -84,3 +84,37 @@ physical Ctrl+C and interactive input/capture cases where supported. Current
 fake-host tests validate portable controller semantics, not native ownership,
 signing, TCC, Windows ACLs, DPI, or process containment. This requalification is
 tracked in [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441).
+
+## Provisional F15 native endpoint records — 2026-11-06
+
+**Exact source revision:** `388a60cc803ab78202a6f64f92e3f53b779c5c39`.
+**App:** Agentic Components Storybook / ReactTestApp (configured bundle ID
+`com.microsoft.fluentui.agenticstorybook`).
+**OS:** macOS 27.2, arm64.
+The reusable procedure is
+`packages/agentic/desktop-test/references/native-qualification.md`.
+
+These rows document the native smoke environment only. The smoke used the
+non-agent WDIO path; no MCP descriptor was consumed, so these rows are not
+descriptor-path passes.
+
+| Renderer                       | Command and selection                                                                                                                   | Passed / failed / skipped / unsupported | Cleanup                                                                         | Artifact                                                                         |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| macOS Fabric                   | `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook smoke --macos --mode stories-and-tests`; 211 selected/executed         | 211 / 0 / 0 / 0                         | No owned processes or listeners on 21338/30029/45382; `interactive.lock` absent | `apps/storybook/artifacts/desktop/0f99740f-631b-444a-a705-76a9b4a761b7/run.json` |
+| macOS Paper                    | `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook smoke --macos --paper --mode stories-and-tests`; 211 selected/executed | 211 / 0 / 0 / 0                         | No owned processes or listeners on 21338/30029/45382; `interactive.lock` absent | `apps/storybook/artifacts/desktop/e82a83c2-a01d-41c0-b308-2551630e8b1e/run.json` |
+| Windows Fabric descriptor path | Not run — Windows is unavailable on this macOS-only machine                                                                             | Not run; 0 selected                     | Not applicable                                                                  | None                                                                             |
+| Win32 Paper descriptor path    | Not run — Win32 is unavailable on this macOS-only machine                                                                               | Not run; 0 selected                     | Not applicable                                                                  | None                                                                             |
+
+| macOS descriptor-path renderer | Command / selection                            | Passed / failed / skipped / unsupported | Cleanup                                      | Artifact |
+| ------------------------------ | ---------------------------------------------- | --------------------------------------- | -------------------------------------------- | -------- |
+| Fabric                         | Not run; no descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
+| Paper                          | Not run; no descriptor consumed; selection N/A | 0 / 0 / 0 / 0; Not run                  | N/A for descriptor path; smoke cleanup above | None     |
+
+Real-descriptor lifecycle, grant revocation, ambiguous create, resource
+invalidation, protected args, quarantine/recovery, F2/F3/F4/F5 cases, and MCP
+discovery/text/latency measurements remain **Not run** on this revision. Do not
+attribute the WDIO callback counts to MCP. The initial Fabric smoke attempt
+failed before selection because the generated CocoaPods sandbox was out of
+sync; supported `prep` resolved it before the passing run. The story
+environment selector did not constrain callback selection; the artifacts show
+211 selected.
