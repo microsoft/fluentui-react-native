@@ -119,3 +119,102 @@ generated project before the passing retry. See the runbook in
 [`native-qualification.md`](native-qualification.md). The authoritative
 descriptor-path and F2/F3/F4/F5 cases remain **Not run** until the combined
 integration commit is available and the native lock is granted again.
+
+## F15 combined-candidate macOS qualification — partial, 2026-11-06
+
+**Exact tested source:** `3c780cfd1bccaf510ece080e4be2b516c645989a`.
+App: Agentic Components Storybook / ReactTestApp, bundle identifier
+`com.microsoft.fluentui.agenticstorybook`. OS: macOS 27.2, arm64.
+This is a partial ledger for this exact candidate, not final acceptance. The
+F5 reference-generation fix at
+`2d8e8db001b64ebea85f0d6dce141f040fb5182d` is not in this tested source and
+requires a new native qualification. The original accepted-reference probe
+remains inconclusive and is not attributed to that fix.
+
+**Commands and selection:** helper build and permission preflight were
+`yarn storybook build-driver --macos` and
+`yarn desktop-driver doctor --platform macos --permissions` (no `--prompt`).
+The Paper descriptor pass used
+`yarn storybook driver --macos --paper --agent` and
+`yarn storybook run --macos --paper`; Fabric used
+`yarn storybook driver --macos --agent` and
+`yarn storybook run --macos`. Both used the MCP SDK stdio client with the
+default private `agent-connection.json`; its exact inline client launch command
+was not retained. Those app/driver `run.json` records each report zero selected
+and zero executed WDIO tests; MCP operations are manual evidence, not suite
+counts. The separate Paper legacy lane used
+`yarn storybook smoke --macos --paper --mode stories-and-tests`: 319 selected,
+308 executed/passed, 0 failed, 11 skipped, 0 unsupported/incomplete/retries/
+flaky. Its artifact is
+`apps/storybook/artifacts/desktop/a569510a-ac99-4ec9-8c78-4d8607bdaadd/run.json`.
+Two additional 319/308/11 reports
+(`8c6d031d-32e3-49c4-9e80-049202b74626` and
+`e5117371-764c-45ff-8b14-97c5b7ec5036`) do not retain renderer metadata and
+are not credited to Fabric or Paper.
+
+The 24-case matrix is recorded without promoting partial evidence to passes.
+`Not run` means no case-specific native evidence was retained; it is not a
+skip or pass.
+
+| Case                           | macOS Fabric | macOS Paper | Retained evidence / limitation                                                                                                                                                                                                                                                            |
+| ------------------------------ | ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Same-port replacement          | Not run      | Partial     | Paper restart and rediscovery succeeded; explicit confirmation of old-session close was not retained.                                                                                                                                                                                     |
+| Grant revocation               | Not run      | Pass        | Paper delegated-grant revocation and child drain were reported complete; private run record only.                                                                                                                                                                                         |
+| Dispose during open            | Not run      | Not run     | No acquisition hold was injected.                                                                                                                                                                                                                                                         |
+| Failed delete                  | Not run      | Not run     | No DELETE dispatch-loss injection was run.                                                                                                                                                                                                                                                |
+| Ambiguous create               | Not run      | Not run     | No session-create response-loss injection was run.                                                                                                                                                                                                                                        |
+| Resource invalidation          | Inconclusive | Partial     | Fabric had a separate preview-child stale-element rejection (`stale element reference`, `ref-region-changed`), but the earlier accepted handle's kind/identity was not retained. Paper's old-preview rejection lacks retained handle kind/generation.                                     |
+| Story quarantine and recovery  | Not run      | Not run     | No unknown-effect transition/recovery injection was run.                                                                                                                                                                                                                                  |
+| Protected args refusal         | Partial      | Pass        | Fabric final attempt returned `story-args-unsupported`, unchanged story, and no probe value in error/journal; an earlier recorded post-attempt unchanged-state assertion was false. Paper refusal was reported with no effect.                                                            |
+| Failed-cleanup claim retention | Not run      | Not run     | No owned-resource cleanup failure was injected.                                                                                                                                                                                                                                           |
+| Launch-mode discovery          | Partial      | Partial     | Only attach mode was discovered; no launch-capable target was exercised.                                                                                                                                                                                                                  |
+| Live cleanup and restart       | Not run      | Partial     | Paper service restart/rediscovery ran; old-session close confirmation was not retained.                                                                                                                                                                                                   |
+| Attached-app preservation      | Pass         | Pass        | The same ReactTestApp process survived agent-service shutdown; the qualification-launched app was stopped only after that check.                                                                                                                                                          |
+| F4 post-dispatch cancellation  | Not run      | Not run     | No cancellation-after-native-dispatch injection was run.                                                                                                                                                                                                                                  |
+| F4 readiness/render faults     | Not run      | Not run     | No delayed-ready, correlated error, or render-fault injection was run.                                                                                                                                                                                                                    |
+| F4 lost-context fencing        | Not run      | Not run     | No lost-context mutation-fencing case was run.                                                                                                                                                                                                                                            |
+| F4 lost-context recovery       | Not run      | Not run     | No new authenticated epoch recovery case was run.                                                                                                                                                                                                                                         |
+| F4 secondary windows           | Not run      | Not run     | No secondary-window case was run.                                                                                                                                                                                                                                                         |
+| F4 physical input              | Failed       | Not run     | Fabric returned `physicalInputApplied:false`; no retry. This is not a pass.                                                                                                                                                                                                               |
+| F3 startup/shutdown/survivors  | Partial      | Partial     | Normal bounded shutdown and cleanup completed; injected startup/shutdown survivor reconciliation was not run.                                                                                                                                                                             |
+| F5 ingress bypass              | Partial      | Partial     | Fabric anonymous/foreign HTTP select, prepare, and args returned 403 and preview stayed unchanged. The first two foreign-WS checks failed; a later attempt passed with no observer-message delta. Paper bypass checks were reported passed, but detailed status fields were not retained. |
+| F5 owned selection/reset       | Partial      | Partial     | Selection/reset markers settled. Stale preview-reference identity and generation evidence is incomplete; see the MCP ledger.                                                                                                                                                              |
+| F5 channel lifetime            | Pass         | Pass        | Fabric stayed open after 21,003 ms idle; Paper's 21-second check was reported connected.                                                                                                                                                                                                  |
+| F5 manifest smoke              | Not run      | Partial     | Paper smoke passed 308/319 with 11 skipped; one-session/no-HTTP-fallback evidence was not retained. It is not protected-ingress evidence.                                                                                                                                                 |
+| F5 legacy separation           | Not run      | Not run     | No separate legacy-channel behavior case was retained.                                                                                                                                                                                                                                    |
+
+Fabric outcome totals: 2 Pass, 5 Partial, 1 Inconclusive, 1 Failed, 15 Not
+run. Paper totals: 4 Pass, 8 Partial, 12 Not run. These are matrix-case
+statuses, not WDIO counts. Windows Fabric and Win32 Paper are Not run because
+this host is macOS-only.
+
+The fresh doctor reported Accessibility, PostEvent, and ScreenCapture
+preflight `true`, no permission prompt, console on/unlocked, and the arm64
+release helper ad-hoc signed with designated requirement
+`cdhash H"0d2e7a81dfd4695b7fb84aa1b3242f5e1773e8b4"`. Host load was 3.25 /
+4.41 / 3.81 (1/5/15-minute averages). Per-renderer driver metadata is
+`apps/storybook/artifacts/desktop/a58d2fdd-5584-47f4-8747-5307607b4c0d/run.json`
+(Paper) and
+`apps/storybook/artifacts/desktop/c15a35b9-7b8d-4edb-adba-84e3cd5a3023/run.json`
+(Fabric); Fabric app launch is
+`apps/storybook/artifacts/desktop/8fb9a576-cde8-470c-a8bb-a76b6d8fabc0/run.json`.
+All report zero selected/executed automated work, so they do not increase the
+matrix totals. Sanitized operation records and private captures are under
+`f15-native-qualification-3c780cfd-20261106T0200/` in the machine-local log
+root; they are not committed.
+
+Retained retries/failures are not erased by later successes: Fabric's first
+two foreign-WebSocket assertions failed before the final no-message-delta
+attempt passed; an intermediate protected-args attempt recorded
+`currentStoryUnchanged:false` before the final attempt recorded `true`; and the
+first capture caller shape failed before the corrected call passed. No cause
+is inferred from those retries. The Fabric physical-input attempt remained
+failed and was not repeated.
+
+At handoff, ports 21338/30029/45382 had no listeners, the workload lock and
+default descriptor were absent, and the Fabric cleanup record showed its
+service owner exited, grant revoked, descriptor removed, and attached app
+preserved through service shutdown. Paper cleanup was reported, but its
+process IDs were not retained, so PID-level Paper process exit is not
+independently asserted here. No further native workload was started. No
+product implementation was changed in this ledger update.

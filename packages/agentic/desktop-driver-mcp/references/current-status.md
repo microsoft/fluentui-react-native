@@ -118,3 +118,42 @@ failed before selection because the generated CocoaPods sandbox was out of
 sync; supported `prep` resolved it before the passing run. The story
 environment selector did not constrain callback selection; the artifacts show
 211 selected.
+
+## 2026-11-06 partial descriptor-path evidence at `3c780cfd1bccaf510ece080e4be2b516c645989a`
+
+App: Agentic Components Storybook / ReactTestApp,
+`com.microsoft.fluentui.agenticstorybook`; macOS 27.2 arm64. The MCP SDK stdio
+client used the default `agent-connection.json` descriptor against the real
+native helper. The exact inline client launch command and connection/session
+identifiers were not retained. No descriptor grants or story-args values are
+recorded here. Manual MCP operations are not suite selections; the companion
+driver `run.json` files each report 0 selected/0 executed tests.
+
+| Renderer | Tool/operation evidence                                                                                                            | Result                                                                                                                                                                                                                                                                                                                                                                                                                                | Artifact / limitation                                                                                                                                                                                      |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fabric   | `desktop_session.status/open/close`; `desktop_story.story` select/reset; `desktop_observe` find/observe; `desktop_capture.capture` | Discovery showed attach-only. Select and reset were applied with marker verification (regions 1 then 2). A separate preview-child reference was rejected with `stale element reference`, reason `ref-region-changed`. Protected args returned `unsupported operation` / `story-args-unsupported`; an intermediate unchanged-story assertion was false, the final assertion was true, and no probe value appeared in error or journal. | Private `fabric-launch-mode-discovery.json`, `fabric-mcp-markers-resources.json`, `fabric-mcp-observe-resource-invalidation.json`, `fabric-protected-args-retry.json`, `fabric-protected-args-final.json`. |
+| Fabric   | Anonymous/foreign-authority HTTP select, prepare, args; foreign WebSocket; idle channel                                            | HTTP returned 403 for all three mutation classes and native preview stayed unchanged. The first two foreign-WS assertions failed; the final attempt passed with no observer-message delta. The channel remained open after 21,003 ms idle and marker verification succeeded.                                                                                                                                                          | Private `fabric-f5-ingress-bypass.json`, `fabric-f5-ingress-bypass-retry.json`, `fabric-f5-ingress-bypass-final.json`, `fabric-f5-channel-idle.json`, `fabric-mcp-live-selection.json`.                    |
+| Paper    | `desktop_session.status/open/close`; `desktop_story.story` select/reset; protected args; bypass and idle-channel checks            | Attach-only discovery, marker-settled selection/reset, protected args refusal, revocation/drain, bypass checks, and 21-second channel lifetime were reported. A protected preview reference was reported rejected after reset, but handle kind/generation and exact operation-level fields were not retained; classify that invalidation as Partial.                                                                                  | Private Paper driver/MCP logs in `f15-native-qualification-3c780cfd-20261106T0200/`; Paper run metadata: `apps/storybook/artifacts/desktop/a58d2fdd-5584-47f4-8747-5307607b4c0d/run.json`.                 |
+
+The initial Fabric observation that a pre-reset reference was accepted after a
+later observation remains **Inconclusive**: its handle kind (preview element,
+MCP PNG resource, or chrome/window reference), stable identity relationship,
+and explicit session continuity were not retained. Do not count an immutable
+PNG resource or chrome/window reference surviving reset as a failure. The
+separate retained preview-child stale-element rejection is expected behavior,
+but does not prove the F5 same-native-ID-after-fresh-find seam. No additional
+probe of the inconclusive sequence was run. The later F5 fix at
+`2d8e8db001b64ebea85f0d6dce141f040fb5182d` is not part of this candidate; the
+original observation is not attributed to that defect.
+
+No aggregate MCP call count was retained. Dispose-during-open, failed delete,
+ambiguous create, story quarantine/recovery, failed-cleanup claim retention,
+F4 cancellation/readiness/render/lost-context/secondary-window cases, F3
+failure-survivor injection, F5 legacy separation, and exact manifest-smoke
+single-session/no-HTTP-fallback evidence remain Not run. Windows Fabric and
+Win32 Paper are Not run on this macOS-only host. At handoff, the default
+descriptor and workload lock were absent and the Storybook, Metro, and driver
+ports had no listeners. The Fabric cleanup record reports owner exit,
+descriptor removal, grant revocation, and attached-app preservation. Paper
+cleanup was reported, but its process IDs were not retained for independent
+PID-level confirmation.
