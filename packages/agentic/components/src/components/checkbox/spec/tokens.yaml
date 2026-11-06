@@ -3,9 +3,9 @@ component: checkbox
 implementation: checkbox.styles.ts
 
 # Interaction colors are declared once per status. The `hovered` and `pressed`
-# entries resolve the same semantic color key through the `color.hover` and
-# `color.pressed` sub-palettes, so no separate interaction token names appear
-# in the definitions below.
+# entries read the `hover` and `pressed` states of the same resolved semantic
+# color, so no separate interaction token names appear in the definitions
+# below.
 statePrecedence:
   - status
   - disabled

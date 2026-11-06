@@ -117,7 +117,19 @@ export {
   type WebDriverTimeouts,
 } from './protocol/types.js';
 export { createDesktopDriverServer, SessionManager, TargetRegistry } from './server/index.js';
-export type { DesktopDriverServer, DesktopDriverServerOptions, DesktopSession, ElementRecord } from './server/index.js';
+export type {
+  ApplicationIncarnation,
+  ApplicationState,
+  DesktopDriverServer,
+  DesktopDriverServerOptions,
+  DesktopSession,
+  ElementRecord,
+  ProbeApplication,
+  QuarantineRecord,
+  RecoverTargetRequest,
+  RecoverTargetResult,
+  RecoveryEvidence,
+} from './server/index.js';
 export type {
   DesktopStoryManifest,
   DesktopStoryManifestEntry,

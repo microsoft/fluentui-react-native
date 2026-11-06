@@ -28,6 +28,8 @@ contributing reference; use its `AGENTS.md` validation section and its runtime c
 1. Change the lowest package that owns the behavior; update dependent
    references when needed. Preserve exact identity, fail-closed behavior,
    cancellation, ownership-safe cleanup, and explicit unsupported/skip status.
+   Keep CLI presentation at the owning collector; use desktop-driver's shared
+   reporter primitives rather than duplicating mode resolution or framing.
    Contract fixtures that spawn Node or generate specs pass values through
    arguments, not spliced source (R-SCAN-002).
 2. For standalone Swift/C++ helpers, read the provider README and

@@ -8,6 +8,7 @@
 #include <atomic>
 #include <cstdint>
 #include <exception>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -27,6 +28,8 @@ inline constexpr char kErrorAutomationFailed[] = "automation-failed";
 inline constexpr char kErrorInputUnavailable[] = "input-unavailable";
 inline constexpr char kErrorInputBusy[] = "input-busy";
 inline constexpr char kErrorInputFailed[] = "input-failed";
+inline constexpr char kErrorMutationIndeterminate[] = "mutation-indeterminate";
+inline constexpr char kErrorTargetQuarantined[] = "target-quarantined";
 inline constexpr char kErrorLaunchFailed[] = "launch-failed";
 inline constexpr char kErrorAttachFailed[] = "attach-failed";
 inline constexpr char kErrorLeaseInvalid[] = "lease-invalid";
@@ -38,22 +41,51 @@ inline constexpr char kErrorCleanupFailed[] = "cleanup-failed";
 inline constexpr char kErrorTreeTooLarge[] = "tree-too-large";
 inline constexpr char kErrorInternal[] = "internal-error";
 
+// UIA_E_TIMEOUT: UI Automation's own client-side transaction timeout. The
+// header only defines it for UI Automation clients, so it is repeated here.
+inline constexpr HRESULT kUiaTimeoutResult = static_cast<HRESULT>(0x80131505);
+
 std::string ToUtf8(std::wstring_view value);
 std::wstring ToWide(std::string_view value);
+
+// True only for well-formed UTF-8: no overlong forms, surrogates, or code points
+// above U+10FFFF. ToWide substitutes invalid input instead of rejecting it.
+bool IsStrictUtf8(std::string_view bytes);
 std::string TrimAscii(std::string_view value);
 std::string ToLowerAscii(std::string_view value);
 std::wstring TrimWide(std::wstring_view value);
 
+// What a failed or cancelled mutating command left behind, reported as `effect`
+// on the wire (native/PROTOCOL.md, "Mutation settlement").
+enum class MutationEffect { None, Partial, Unknown };
+
+inline const char* MutationEffectName(MutationEffect effect) noexcept {
+  switch (effect) {
+    case MutationEffect::None:
+      return "none";
+    case MutationEffect::Partial:
+      return "partial";
+    default:
+      return "unknown";
+  }
+}
+
 // Structured failure that maps directly onto a protocol error response.
 class HelperError : public std::runtime_error {
  public:
-  HelperError(std::string code, const std::string& message)
-      : std::runtime_error(message), code_(std::move(code)) {}
+  HelperError(std::string code, const std::string& message, std::string reason = {})
+      : std::runtime_error(message), code_(std::move(code)), reason_(std::move(reason)) {}
 
   const std::string& code() const noexcept { return code_; }
+  const std::string& reason() const noexcept { return reason_; }
+  // Set only when a mutating command fails; reads and lifecycle commands carry none.
+  const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
+  void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
 
  private:
   std::string code_;
+  std::string reason_;
+  std::optional<MutationEffect> effect_;
 };
 
 [[noreturn]] void Fail(std::string code, std::string message);
@@ -66,6 +98,12 @@ std::string DescribeHresult(HRESULT result);
 class CancelledError : public std::exception {
  public:
   const char* what() const noexcept override { return "The native command was cancelled."; }
+  // Set only when a mutating command is cancelled.
+  const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
+  void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
+
+ private:
+  std::optional<MutationEffect> effect_;
 };
 
 class CancellationToken {

@@ -34,5 +34,33 @@ capabilities, and unfinished work. A zero worker exit cannot override failed
 assertions or incomplete work. Optional suites can be skipped without being
 labelled passed.
 
+## CLI reporters
+
+Select `--reporter auto|plain|github-actions|json|ndjson`; `--json` aliases
+`--reporter json`. The mode is resolved from the CLI flag, `DESKTOP_REPORTER`,
+the config's `reporting.reporter` (or legacy `reporting.console`), then `auto`.
+The default `auto` mode uses GitHub Actions rendering only when
+`GITHUB_ACTIONS=true`.
+
+`json` writes one compact, bounded run summary rather than the full result.
+`ndjson` writes run metadata, bounded canonical-event projections, a suppressed
+event count, and the same summary as its final record. `--events` selects
+`milestones` (default), `progress`, or `all`; `DESKTOP_EVENTS` can select the
+same level for delegated commands. Event selection is valid only with NDJSON.
+The summary is capped at 4 KiB and includes counts, up to 10 problems, omission
+counts, and links to the authoritative `run.json`, `events.jsonl`, JUnit, and
+command logs. Structured output suppresses normal human stderr. If stdout
+closes, the run continues to persist its result and records a reporting
+diagnostic.
+
+SIGINT and SIGTERM cancel owned work; one-shot structured runs finish with an
+`incomplete` summary instead of reporting cancellation as an infrastructure
+failure. Long-lived readiness commands retain their single readiness document;
+one that fails before readiness writes the summary instead.
+
+The supervisor owns rendering. Delegated producers inherit the selected mode
+and report into the parent journal; they do not create a second result
+directory or render a duplicate summary.
+
 Story-specific readiness, authenticated channel events, and callback execution
 are owned by `@fluentui-react-native/storybook-desktop`.

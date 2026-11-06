@@ -17,6 +17,9 @@ matching topic; do not copy its content here.
 | Integrate Storybook or run callbacks     | [`storybook-desktop` integration](../../../packages/agentic/storybook-desktop/references/integration.md), [commands](../../../packages/agentic/storybook-desktop/references/commands.md), and [tests](../../../packages/agentic/storybook-desktop/references/story-tests.md) |
 | Fix E2E adapters or diagnose failures    | [`desktop-test` WDIO suites](../../../packages/agentic/desktop-test/references/wdio-suites.md) and [lifecycle](../../../packages/agentic/desktop-test/references/lifecycle.md)                                                                                               |
 
+For machine-readable output, use the package command references for shared
+`--reporter` modes; use NDJSON progress only when a live event stream is useful.
+
 ## Workflow
 
 1. Identify the consumer workspace; read its config and declared scripts. For

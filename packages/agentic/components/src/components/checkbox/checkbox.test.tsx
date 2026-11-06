@@ -39,8 +39,8 @@ describe('Checkbox', () => {
     expect(component.getByText('Save drafts')).toBeOnTheScreen();
     expect(getIndicatorStyle(component)).toMatchObject({
       alignItems: 'center',
-      backgroundColor: colors.backgroundNeutralTransparent,
-      borderColor: colors.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
+      borderColor: colors.strokeNeutralHeavy.rest,
     });
     expect(getRootStyle(component)).toMatchObject({
       borderStyle: 'solid',
@@ -251,23 +251,23 @@ describe('Checkbox', () => {
     const root = getRoot(component);
 
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: colors.backgroundNeutralTransparent,
-      borderColor: colors.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.rest,
+      borderColor: colors.strokeNeutralHeavy.rest,
     });
 
     await fireEvent(root, 'hoverIn', {});
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: colors.hover.backgroundNeutralTransparent,
-      borderColor: colors.hover.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.hover,
+      borderColor: colors.strokeNeutralHeavy.hover,
     });
-    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.hover.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.foregroundNeutralSecondary.hover);
 
     await fireEvent(root, 'pressIn', {});
     expect(getIndicatorStyle(component)).toMatchObject({
-      backgroundColor: colors.pressed.backgroundNeutralTransparent,
-      borderColor: colors.pressed.strokeNeutralHeavy,
+      backgroundColor: colors.backgroundNeutralTransparent.pressed,
+      borderColor: colors.strokeNeutralHeavy.pressed,
     });
-    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.pressed.foregroundNeutralSecondary);
+    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(colors.foregroundNeutralSecondary.pressed);
   });
 
   it('uses native focus visuals without mounting custom rings', async () => {
@@ -299,14 +299,14 @@ describe('Checkbox', () => {
     const component = await renderCheckbox({ label: status, status });
     const label = component.getByTestId('checkbox-label');
     const indicator = component.getByTestId('checkbox-indicator');
-    const expectedBackground = status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundBrandHeavy;
-    const expectedLabelColor = status === 'unchecked' ? colors.foregroundNeutralSecondary : colors.foregroundNeutralPrimary;
+    const expectedBackground = status === 'unchecked' ? colors.backgroundNeutralTransparent.rest : colors.backgroundBrandHeavy.rest;
+    const expectedLabelColor = status === 'unchecked' ? colors.foregroundNeutralSecondary.rest : colors.foregroundNeutralPrimary.rest;
 
     expect(StyleSheet.flatten(indicator.props.style).backgroundColor).toBe(expectedBackground);
     expect(StyleSheet.flatten(label.props.style).color).toBe(expectedLabelColor);
     if (status !== 'unchecked') {
       const icon = component.getByText(status === 'indeterminate' ? '\u2212' : '\u2713');
-      expect(StyleSheet.flatten(icon.props.style).color).toBe(colors.foregroundBrandOnloud);
+      expect(StyleSheet.flatten(icon.props.style).color).toBe(colors.foregroundBrandOnloud.rest);
     }
   });
 
@@ -326,10 +326,10 @@ describe('Checkbox', () => {
     const tokens = defaultFlexTokens.color;
 
     expect(StyleSheet.flatten(component.getByTestId('checkbox-indicator').props.style)).toMatchObject({
-      backgroundColor: tokens.backgroundNeutralHeavyDisabled,
-      borderColor: tokens.strokeNeutralTransparent,
+      backgroundColor: tokens.backgroundNeutralHeavyDisabled.rest,
+      borderColor: tokens.strokeNeutralTransparent.rest,
     });
-    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(tokens.foregroundNeutralDisabled);
+    expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(tokens.foregroundNeutralDisabled.rest);
   });
 
   describe('SPEC regression coverage', () => {
@@ -480,26 +480,26 @@ describe('Checkbox', () => {
       async (status) => {
         const colors = defaultFlexTokens.color;
         const component = await renderCheckbox({ status, showSecondaryText: true });
-        for (const [event, palette] of [
-          ['hoverIn', colors.hover],
-          ['pressIn', colors.pressed],
-          ['pressOut', colors.hover],
-          ['hoverOut', colors],
+        for (const [event, state] of [
+          ['hoverIn', 'hover'],
+          ['pressIn', 'pressed'],
+          ['pressOut', 'hover'],
+          ['hoverOut', 'rest'],
         ] as const) {
           await fireEvent(getRoot(component), event, {});
           expect(getIndicatorStyle(component)).toMatchObject({
-            backgroundColor: status === 'unchecked' ? palette.backgroundNeutralTransparent : palette.backgroundBrandHeavy,
-            borderColor: status === 'unchecked' ? palette.strokeNeutralHeavy : palette.strokeNeutralTransparent,
+            backgroundColor: (status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundBrandHeavy)[state],
+            borderColor: (status === 'unchecked' ? colors.strokeNeutralHeavy : colors.strokeNeutralTransparent)[state],
           });
           expect(StyleSheet.flatten(component.getByTestId('checkbox-label').props.style).color).toBe(
-            status === 'unchecked' ? palette.foregroundNeutralSecondary : palette.foregroundNeutralPrimary,
+            (status === 'unchecked' ? colors.foregroundNeutralSecondary : colors.foregroundNeutralPrimary)[state],
           );
           expect(StyleSheet.flatten(component.getByTestId('checkbox-secondary', { includeHiddenElements: true }).props.style).color).toBe(
-            palette.foregroundNeutralSecondary,
+            colors.foregroundNeutralSecondary[state],
           );
           if (status !== 'unchecked') {
             expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
-              palette.foregroundBrandOnloud,
+              colors.foregroundBrandOnloud[state],
             );
           }
         }
@@ -515,17 +515,17 @@ describe('Checkbox', () => {
         await component.rerender(<Checkbox status={status} showSecondaryText disabled />);
         const colors = defaultFlexTokens.color;
         expect(getIndicatorStyle(component)).toMatchObject({
-          backgroundColor: status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundNeutralHeavyDisabled,
-          borderColor: status === 'unchecked' ? colors.strokeNeutralDisabled : colors.strokeNeutralTransparent,
+          backgroundColor: (status === 'unchecked' ? colors.backgroundNeutralTransparent : colors.backgroundNeutralHeavyDisabled).rest,
+          borderColor: (status === 'unchecked' ? colors.strokeNeutralDisabled : colors.strokeNeutralTransparent).rest,
         });
         for (const id of ['checkbox-label', 'checkbox-secondary']) {
           expect(StyleSheet.flatten(component.getByTestId(id, { includeHiddenElements: true }).props.style).color).toBe(
-            colors.foregroundNeutralDisabled,
+            colors.foregroundNeutralDisabled.rest,
           );
         }
         if (status !== 'unchecked') {
           expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
-            colors.foregroundNeutralDisabled,
+            colors.foregroundNeutralDisabled.rest,
           );
         }
       },

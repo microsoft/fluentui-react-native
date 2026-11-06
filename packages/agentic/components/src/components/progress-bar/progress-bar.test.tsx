@@ -94,9 +94,9 @@ describe('ProgressBar', () => {
     });
     const icon = component.getByTestId('validation-icon', { includeHiddenElements: true });
 
-    expect(getIndicatorStyle(component).backgroundColor).toBe(defaultFlexTokens.color[token]);
+    expect(getIndicatorStyle(component).backgroundColor).toBe(defaultFlexTokens.color[token].rest);
     expect(StyleSheet.flatten(component.getByText('★', { includeHiddenElements: true }).props.style).color).toBe(
-      defaultFlexTokens.color[token],
+      defaultFlexTokens.color[token].rest,
     );
     expect(icon.props.accessible).toBe(false);
     expect(StyleSheet.flatten(icon.props.style)).toMatchObject({ height: 16, width: 16 });
@@ -188,7 +188,10 @@ describe('ProgressBar', () => {
       nativeEvent: { layout: { height: 4, width: 200, x: 0, y: 0 } },
     });
 
-    expect(getIndicatorStyle(component)).toMatchObject({ backgroundColor: '#185abd', width: 100 });
+    expect(getIndicatorStyle(component)).toMatchObject({
+      backgroundColor: defaultFlexTokens.color.foregroundBrandPrimary.rest,
+      width: 100,
+    });
     expect(StyleSheet.flatten(getRoot(component).props.style)).toMatchObject({ backgroundColor: 'hotpink' });
     expect(component.getByText('Halfway there')).toBeOnTheScreen();
   });

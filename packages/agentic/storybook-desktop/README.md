@@ -15,12 +15,14 @@ keep native stages in declared workspace scripts.
 ```sh
 yarn storybook manifest --macos
 yarn storybook bundle --macos
-yarn storybook smoke --macos --mode stories-and-tests
+yarn storybook smoke --macos --mode stories-and-tests --reporter ndjson
 ```
 
 Read [integration](references/integration.md) for app wiring and
 [commands](references/commands.md) for stage selection. Use
 [story-tests](references/story-tests.md) to author inline `wdio` callbacks.
+Use `--reporter json` for bounded machine-readable summaries or NDJSON for
+live progress.
 The [reference index](references/README.md) routes platform, readiness, and
 troubleshooting tasks.
 Package agents should start from [AGENTS.md](AGENTS.md).

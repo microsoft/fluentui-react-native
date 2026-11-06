@@ -48,9 +48,10 @@ json::Value CreateHello() {
   hello.Set("protocol", protocol);
 
   json::Value features = json::Value::Array();
-  for (const char* feature : {"accessibilityClick", "activeElement", "capture", "elementCapture", "find", "hitTest",
-                              "keyboard", "launch", "attach", "pointer", "probe", "releaseActions", "setWindowRect",
-                              "source", "tree", "wheel"}) {
+  for (const char* feature : {"accessibilityActions", "accessibilityClick", "performAccessibilityAction",
+                              "activeElement", "boundedObservation", "capture", "elementCapture",
+                              "find", "hitTest", "keyboard", "launch", "attach", "pointer", "probe", "releaseActions",
+                              "setWindowRect", "source", "tree", "wheel", "windowEvents"}) {
     features.Append(json::Value::String(std::string(feature)));
   }
   hello.Set("features", features);
@@ -63,6 +64,28 @@ void Host::RecordWriteFailure(std::string_view operation, const char* message) n
     CancelSynchronousIo(readerThread_);
   }
   WriteFailureDiagnostic(operation, message);
+}
+
+// Runs on the window event thread. The publisher is cleared before Run ends, so
+// the writer outlives every call.
+void Host::PublishWindowClosed(const std::string& windowId) noexcept {
+  try {
+    if (writeFailed_.load(std::memory_order_acquire) || writer_ == nullptr) {
+      return;
+    }
+    json::Value payload = json::Value::Object();
+    payload.Set("windowId", json::Value::String(windowId));
+    json::Value event = json::Value::Object();
+    event.Set("type", json::Value::String(std::string("event")));
+    event.Set("event", json::Value::String(std::string("window-closed")));
+    event.Set("sequence", json::Value::Integer(static_cast<std::int64_t>(eventSequence_.fetch_add(1) + 1)));
+    event.Set("payload", std::move(payload));
+    writer_->WriteJson(event);
+  } catch (const std::exception& error) {
+    RecordWriteFailure("Native event write failed", error.what());
+  } catch (...) {
+    RecordWriteFailure("Native event write failed", "unknown error");
+  }
 }
 
 bool Host::WriteResponse(const std::string& id, const std::string& command, const CommandResult& result) noexcept {
@@ -101,14 +124,21 @@ bool Host::WriteResponse(const std::string& id, const std::string& command, cons
 }
 
 bool Host::WriteError(const std::string& id, const std::string& command, const std::string& code,
-                      const std::string& message) noexcept {
+                      const std::string& message, std::optional<MutationEffect> effect,
+                      const std::string& reason) noexcept {
   try {
     json::Value error = json::Value::Object();
     error.Set("code", json::Value::String(code));
     error.Set("message", json::Value::String(BoundedField(message, 4096)));
     json::Value data = json::Value::Object();
     data.Set("command", json::Value::String(BoundedField(command, 256)));
+    if (!reason.empty()) {
+      data.Set("reason", json::Value::String(BoundedField(reason, 128)));
+    }
     error.Set("data", data);
+    if (effect) {
+      error.Set("effect", json::Value::String(std::string(MutationEffectName(*effect))));
+    }
 
     json::Value response = json::Value::Object();
     response.Set("type", json::Value::String(std::string("response")));
@@ -125,11 +155,14 @@ bool Host::WriteError(const std::string& id, const std::string& command, const s
   }
 }
 
-bool Host::WriteCancelled(const std::string& id) noexcept {
+bool Host::WriteCancelled(const std::string& id, std::optional<MutationEffect> effect) noexcept {
   try {
     json::Value cancelled = json::Value::Object();
     cancelled.Set("type", json::Value::String(std::string("cancelled")));
     cancelled.Set("id", json::Value::String(id));
+    if (effect) {
+      cancelled.Set("effect", json::Value::String(std::string(MutationEffectName(*effect))));
+    }
     writer_->WriteJson(cancelled);
     return true;
   } catch (const std::exception& error) {
@@ -142,6 +175,7 @@ bool Host::WriteCancelled(const std::string& id) noexcept {
 }
 
 void Host::HandleCancel(const std::string& id) {
+  std::optional<MutationEffect> effect;
   {
     const std::lock_guard<std::mutex> guard(mutex_);
     if (activeId_ == id) {
@@ -152,13 +186,22 @@ void Host::HandleCancel(const std::string& id) {
     }
     const auto queued = std::find_if(queue_.begin(), queue_.end(),
                                      [&id](const PendingRequest& request) { return request.id == id; });
-    if (queued != queue_.end()) {
+    if (queued == queue_.end()) {
+      // Nothing this helper still holds can run under an unknown or settled
+      // id, and a settled mutation already reported its own effect.
+      effect = MutationEffect::None;
+    } else {
+      // A mutation that never started cannot have changed anything; read-only
+      // commands never report an effect.
+      if (IsTrackedMutation(queued->command)) {
+        effect = MutationEffect::None;
+      }
       queue_.erase(queued);
     }
   }
   // A queued or already-settled request has no running side effects, so the
   // acknowledgement can be written immediately.
-  WriteCancelled(id);
+  WriteCancelled(id, effect);
 }
 
 void Host::WorkerLoop() {
@@ -178,16 +221,21 @@ void Host::WorkerLoop() {
     }
 
     bool cancelled = false;
+    std::optional<MutationEffect> cancelledEffect;
     bool commandSucceeded = false;
     bool wroteResult = true;
     try {
+      if (beforeExecute_) {
+        beforeExecute_(request.id, request.command);
+      }
       const CommandResult result = driver_.Execute(request.command, request.params, token_);
       commandSucceeded = true;
       wroteResult = WriteResponse(request.id, request.command, result);
-    } catch (const CancelledError&) {
+    } catch (const CancelledError& error) {
       cancelled = true;
+      cancelledEffect = error.effect();
     } catch (const HelperError& error) {
-      wroteResult = WriteError(request.id, request.command, error.code(), error.what());
+      wroteResult = WriteError(request.id, request.command, error.code(), error.what(), error.effect(), error.reason());
     } catch (const winrt::hresult_error& error) {
       wroteResult = WriteError(request.id, request.command, kErrorInternal, ToUtf8(error.message().c_str()));
     } catch (const std::exception& error) {
@@ -196,7 +244,7 @@ void Host::WorkerLoop() {
 
     if (cancelled) {
       driver_.ReleaseInput();
-      wroteResult = WriteCancelled(request.id);
+      wroteResult = WriteCancelled(request.id, cancelledEffect);
     }
 
     {
@@ -209,24 +257,34 @@ void Host::WorkerLoop() {
     if (request.command == "dispose" && commandSucceeded) {
       // The session is over: flush the acknowledged response and end the
       // process instead of leaving the reader blocked on a dead stream.
-      FlushFileBuffers(GetStdHandle(STD_OUTPUT_HANDLE));
+      FlushFileBuffers(output_);
       ExitProcess(0);
     }
   }
   winrt::uninit_apartment();
 }
 
+void Host::SetBeforeExecuteForTesting(std::function<void(const std::string&, const std::string&)> hook) {
+  beforeExecute_ = std::move(hook);
+}
+
 int Host::Run() {
   _setmode(_fileno(stdin), _O_BINARY);
   _setmode(_fileno(stdout), _O_BINARY);
-  FrameWriter writer(GetStdHandle(STD_OUTPUT_HANDLE));
+  return Run(GetStdHandle(STD_INPUT_HANDLE), GetStdHandle(STD_OUTPUT_HANDLE));
+}
+
+int Host::Run(HANDLE input, HANDLE output) {
+  output_ = output;
+  FrameWriter writer(output);
   writer_ = &writer;
-  FrameReader reader(GetStdHandle(STD_INPUT_HANDLE));
+  FrameReader reader(input);
 
   writer.WriteJson(CreateHello());
   DuplicateHandle(GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &readerThread_, 0, FALSE,
                   DUPLICATE_SAME_ACCESS);
   std::thread worker(&Host::WorkerLoop, this);
+  driver_.SetWindowClosedPublisher([this](const std::string& windowId) { PublishWindowClosed(windowId); });
 
   int exitCode = 0;
   try {
@@ -291,6 +349,8 @@ int Host::Run() {
   }
   signal_.notify_all();
   worker.join();
+  // Waits for an in-flight publication, so the writer can be released below.
+  driver_.SetWindowClosedPublisher(nullptr);
   if (readerThread_ != nullptr) {
     CloseHandle(readerThread_);
     readerThread_ = nullptr;

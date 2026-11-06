@@ -1,7 +1,7 @@
 import ApplicationServices
 import Foundation
 
-private final class SelfTestRunner {
+final class SelfTestRunner {
   private(set) var checks = 0
   private(set) var failures = 0
 
@@ -28,10 +28,17 @@ private final class SelfTestRunner {
     testCoreGraphicsWindowSelection()
     testReactNativeAccessibilityFallbacks()
     testAccessibilityActionNames()
+    testAccessibilityActionKeys()
     testPermissionDiagnostic()
     testLoginSessionState()
     testWindowEventMonitor()
     testCommandJournal()
+    testEffectLedger()
+    testMutationEffects()
+    testHostQueuedCancellation()
+    testObservation()
+    testServiceIdentity()
+    testApplicationIncarnation()
     testHello()
   }
 
@@ -591,14 +598,45 @@ private final class SelfTestRunner {
     )
     monitor.forget(windowID: "window-test")
     check(!monitor.isClosed(windowID: "window-test"), "forgetting a window clears its closed state")
+
+    // A destroyed notification can arrive before the close command finishes and forgets the window.
+    monitor.track(element, windowID: "window-closing", processID: getpid())
+    monitor.beginHelperClose(windowID: "window-closing")
+    monitor.record(element: element, notification: kAXUIElementDestroyedNotification)
+    check(
+      published == ["window-test"] && monitor.isClosed(windowID: "window-closing"),
+      "a window closed through closeWindow is recorded as closed but publishes no event"
+    )
+    monitor.forget(windowID: "window-closing")
+    monitor.track(element, windowID: "window-kept", processID: getpid())
+    monitor.beginHelperClose(windowID: "window-kept")
+    monitor.cancelHelperClose(windowID: "window-kept")
+    monitor.record(element: element, notification: kAXUIElementDestroyedNotification)
+    check(
+      published == ["window-test", "window-kept"],
+      "a closeWindow that fails leaves the window's later destruction published"
+    )
+    monitor.forget(windowID: "window-kept")
     for _ in 0..<(WindowEventMonitor.maximumEvents + 10) {
       monitor.record(element: element, notification: kAXApplicationActivatedNotification)
     }
+    let boundedEvents = monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)
+    let recentEvents = boundedEvents["events"] as? [JSONObject] ?? []
     check(
-      monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)["eventsTruncated"] as? Bool == false
-        && (monitor.diagnostic(processID: getpid(), limit: WindowEventMonitor.maximumEvents)["events"] as? [JSONObject])?.count
-          == WindowEventMonitor.maximumEvents,
+      boundedEvents["eventsTruncated"] as? Bool == true
+        && recentEvents.count == WindowEventMonitor.maximumEvents
+        && recentEvents.allSatisfy { $0["notification"] as? String == kAXApplicationActivatedNotification },
       "the window event timeline stays bounded"
+    )
+    check(
+      monitor.diagnostic(processID: getpid())["eventsTruncated"] as? Bool == true,
+      "the default event tail reports older buffered events"
+    )
+    monitor.stop(processID: getpid())
+    let stopped = monitor.diagnostic(processID: getpid())
+    check(
+      (stopped["events"] as? [JSONObject])?.isEmpty == true && stopped["eventsTruncated"] as? Bool == false,
+      "stopping an application clears its event tail and truncation state"
     )
   }
 
@@ -650,6 +688,225 @@ private final class SelfTestRunner {
     )
   }
 
+  private func testEffectLedger() {
+    check(
+      MutationEffect.noEffect.rawValue == "none" && MutationEffect.partial.rawValue == "partial"
+        && MutationEffect.unknown.rawValue == "unknown",
+      "effects use the protocol spellings"
+    )
+    let ledger = EffectLedger()
+    check(ledger.effect == .noEffect, "a command that dispatched nothing has no effect")
+    ledger.delivered()
+    check(ledger.effect == .partial, "a delivered event that the command did not finish is a partial effect")
+    ledger.reset()
+    check(ledger.effect == .noEffect, "resetting the ledger starts the next command clean")
+
+    ledger.dispatching()
+    check(ledger.effect == .unknown, "an Accessibility request without a result may still be processed")
+    ledger.completed(.success)
+    check(ledger.effect == .partial, "an acknowledged request is a partial effect once the command stops")
+
+    let proofOfNoEffect: [AXError] = [
+      .actionUnsupported, .apiDisabled, .attributeUnsupported, .illegalArgument, .invalidUIElement, .noValue,
+      .notEnoughPrecision, .notImplemented,
+    ]
+    for error in proofOfNoEffect {
+      ledger.reset()
+      ledger.dispatching()
+      ledger.completed(error)
+      check(ledger.effect == .noEffect, "\(axErrorName(error)) proves the target never acted")
+    }
+    for error in [AXError.cannotComplete, .failure] {
+      ledger.reset()
+      ledger.dispatching()
+      ledger.completed(error)
+      check(ledger.effect == .unknown, "\(axErrorName(error)) leaves the outcome unknown")
+    }
+
+    ledger.reset()
+    ledger.dispatching()
+    ledger.completed(.cannotComplete)
+    ledger.delivered()
+    check(ledger.effect == .unknown, "a later success does not settle an earlier unresolved dispatch")
+    ledger.reset()
+    check(ledger.effect == .noEffect, "resetting clears an unresolved dispatch")
+  }
+
+  private func testMutationEffects() {
+    let residue = EffectLedger()
+    let driver = Driver(effects: residue)
+    let token = CancellationToken()
+    func failure(_ command: String, _ params: JSONObject = [:]) -> Error? {
+      do {
+        _ = try driver.execute(command: command, params: params, token: token)
+        return nil
+      } catch {
+        return error
+      }
+    }
+
+    residue.dispatching()
+    let click = failure("click", ["elementId": "element-missing"]) as? HelperError
+    check(
+      click?.code == ErrorCode.staleElement && click?.effect == .noEffect,
+      "a click rejected before dispatch reports no effect, whatever the previous command left in the ledger"
+    )
+    let sendKeys = failure("sendKeys", ["elementId": "element-missing"]) as? HelperError
+    check(
+      sendKeys?.code == ErrorCode.invalidParams && sendKeys?.effect == .noEffect,
+      "a malformed keyboard request reports no effect"
+    )
+    residue.dispatching()
+    let perform = failure("performAccessibilityAction", ["elementId": "element-missing", "key": "0123"]) as? HelperError
+    check(
+      perform?.code == ErrorCode.staleElement && perform?.effect == .noEffect,
+      "an accessibility action on a missing element reports no effect"
+    )
+    let unkeyed = failure("performAccessibilityAction", ["elementId": "element-missing"]) as? HelperError
+    check(
+      unkeyed?.code == ErrorCode.invalidParams && unkeyed?.effect == .noEffect,
+      "an accessibility action without a key reports no effect"
+    )
+    let actions = failure("performActions", ["actions": "not-an-array"]) as? HelperError
+    check(
+      actions?.code == ErrorCode.invalidParams && actions?.effect == .noEffect,
+      "a malformed input sequence reports no effect"
+    )
+    let read = failure("windows") as? HelperError
+    check(read != nil && read?.effect == nil, "a read-only command does not claim an effect")
+    let unsupported = failure("not-a-command") as? HelperError
+    check(unsupported?.code == ErrorCode.unsupported && unsupported?.effect == nil, "an unknown command does not claim an effect")
+
+    token.cancel()
+    check(
+      (failure("setWindowRect", ["windowId": "window-missing"]) as? CancelledError)?.effect == .noEffect,
+      "a mutation cancelled before dispatch reports no effect"
+    )
+    let cancelledRead = failure("windows") as? CancelledError
+    check(cancelledRead != nil && cancelledRead?.effect == nil, "a cancelled read-only command does not claim an effect")
+  }
+
+  /// Drives the real `Host` over in-process pipes: cancelling a request that is still queued acknowledges it with the
+  /// right effect and keeps it from ever reaching the driver, while later requests still run.
+  private func testHostQueuedCancellation() {
+    let toHost = Pipe()
+    let fromHost = Pipe()
+    let state = NSCondition()
+    var messages: [JSONObject] = []
+    var executed: [String] = []
+    let gate = DispatchSemaphore(value: 0)
+    let hostDone = DispatchSemaphore(value: 0)
+    let readerDone = DispatchSemaphore(value: 0)
+
+    func waitUntil(_ predicate: () -> Bool) -> Bool {
+      let deadline = Date().addingTimeInterval(10)
+      state.lock()
+      defer { state.unlock() }
+      while !predicate() {
+        if !state.wait(until: deadline) {
+          return predicate()
+        }
+      }
+      return true
+    }
+    // Callers hold `state`.
+    func received(_ type: String, _ id: String) -> Bool {
+      messages.contains { $0["type"] as? String == type && $0["id"] as? String == id }
+    }
+    func find(_ type: String, _ id: String) -> JSONObject? {
+      state.lock()
+      defer { state.unlock() }
+      return messages.first { $0["type"] as? String == type && $0["id"] as? String == id }
+    }
+    func ran(_ id: String) -> Bool {
+      state.lock()
+      defer { state.unlock() }
+      return executed.contains(id)
+    }
+
+    let host = Host()
+    host.beforeExecuteForTesting = { id, _ in
+      state.lock()
+      executed.append(id)
+      state.broadcast()
+      state.unlock()
+      if id == "blocker" {
+        gate.wait()
+      }
+    }
+    Thread {
+      let reader = FrameReader(fromHost.fileHandleForReading)
+      while let frame = try? reader.read() {
+        if frame.type == .json, let message = (try? parseJSON(frame.payload)) as? JSONObject {
+          state.lock()
+          messages.append(message)
+          state.broadcast()
+          state.unlock()
+        }
+      }
+      readerDone.signal()
+    }.start()
+    Thread {
+      _ = host.run(input: toHost.fileHandleForReading, output: fromHost.fileHandleForWriting)
+      hostDone.signal()
+    }.start()
+
+    let writer = FrameWriter(toHost.fileHandleForWriting)
+    func send(_ type: String, _ id: String, _ command: String? = nil, _ params: JSONObject = [:]) {
+      var message: JSONObject = ["type": type, "id": id]
+      if let command {
+        message["command"] = command
+        message["params"] = params
+      }
+      try? writer.writeJSON(message)
+    }
+
+    send("request", "blocker", "probe")
+    let blocked = waitUntil { executed.contains("blocker") }
+    check(blocked, "the host worker starts the blocking request")
+    send("request", "queued-click", "click", ["elementId": "element-never-issued"])
+    send("request", "queued-read", "windows")
+    send("request", "after", "probe")
+    send("cancel", "queued-click")
+    send("cancel", "queued-read")
+    send("cancel", "never-sent")
+
+    let acknowledged = waitUntil {
+      ["queued-click", "queued-read", "never-sent"].allSatisfy { received("cancelled", $0) }
+    }
+    check(
+      acknowledged && !ran("queued-click") && !ran("queued-read"),
+      "queued requests are acknowledged as cancelled while the worker is still busy"
+    )
+    check(
+      find("cancelled", "queued-click")?["effect"] as? String == "none",
+      "a cancelled queued mutation reports no effect"
+    )
+    let read = find("cancelled", "queued-read")
+    check(read != nil && read?["effect"] == nil, "a cancelled queued read carries no effect")
+    check(
+      find("cancelled", "never-sent")?["effect"] as? String == "none",
+      "a cancel for an id the host does not hold reports none"
+    )
+
+    gate.signal()
+    let finished = waitUntil { received("response", "blocker") && received("response", "after") }
+    check(finished, "the host runs the requests around the cancelled ones")
+    state.lock()
+    let order = executed
+    state.unlock()
+    check(order == ["blocker", "after"], "cancelled queued requests never reach the driver")
+    check(
+      find("response", "queued-click") == nil && find("response", "queued-read") == nil,
+      "cancelled queued requests never produce a response"
+    )
+
+    try? toHost.fileHandleForWriting.close()
+    check(hostDone.wait(timeout: .now() + 10) == .success, "the host stops when its input ends")
+    try? fromHost.fileHandleForWriting.close()
+    _ = readerDone.wait(timeout: .now() + 10)
+  }
+
   private func testHello() {
     let hello = createHello()
     check(hello["type"] as? String == "hello", "hello announces its type")
@@ -665,6 +922,14 @@ private final class SelfTestRunner {
     check(
       (hello["features"] as? [String])?.contains("accessibilityActions") == true,
       "hello advertises accessibility action inspection"
+    )
+    check(
+      (hello["features"] as? [String])?.contains("boundedObservation") == true,
+      "hello advertises bounded observation"
+    )
+    check(
+      (hello["features"] as? [String])?.contains("performAccessibilityAction") == true,
+      "hello advertises performing accessibility actions"
     )
   }
 
@@ -685,6 +950,23 @@ private final class SelfTestRunner {
     check(accessibilityActionName("Name:Toggle") == "Toggle", "a custom action without provider fields keeps its name")
     check(accessibilityActionName("AXPress") == "AXPress", "a standard accessibility action is listed unchanged")
     check(accessibilityActionName("") == "", "an empty action name stays empty")
+  }
+
+  private func testAccessibilityActionKeys() {
+    let keys = AccessibilityActionKeys()
+    let toggle = "Name:Toggle\nTarget:0x6190039a0880\nSelector:didActivateAccessibilityCustomAction:"
+    let key = keys.key(for: toggle)
+    check(
+      key.count == 32 && key.allSatisfy { "0123456789abcdef".contains($0) },
+      "an action key is 32 lowercase hexadecimal digits"
+    )
+    check(keys.key(for: toggle) == key, "the same native action keeps its key")
+    check(
+      keys.key(for: "Name:Toggle\nTarget:0x6190039a0990\nSelector:didActivateAccessibilityCustomAction:") != key,
+      "a custom action with the same name and another target gets another key"
+    )
+    check(!key.contains("6190039a0880"), "a key does not carry the action's target")
+    check(AccessibilityActionKeys().key(for: toggle) != key, "keys from another secret do not match")
   }
 }
 

@@ -13,12 +13,23 @@ third-party native dependency.
 | `src/host.*`                     | FDR1 request loop, cancellation, and command dispatch                     |
 | `src/application.*`              | Launch/attach leases, process and window ownership                        |
 | `src/automation.*`               | UI Automation tree, lookup, state, and opaque identities                  |
+| `src/observation.*`              | Bounded `observe` sampler, request parsing, and response shaping          |
+| `src/elementregistry.*`          | Element identity, revalidation fingerprints, and bounded retention        |
+| `src/events.*`                   | WinEvent window notifications, bounded event log, and command journal     |
+| `src/settlement.*`               | Bounded provider calls and the unsettled-mutation quarantine              |
 | `src/input.*`                    | Physical/accessibility activation, keyboard, pointer, wheel, and recovery |
+| `src/inputauthority.*`           | Desktop-session and integrity checks that gate physical input             |
 | `src/inputlock.*`                | Session-local cross-process physical-input mutex                          |
 | `src/capture.*`                  | HWND Windows Graphics Capture, D3D11, WIC PNG output                      |
 | `src/framing.*` and `src/json.*` | Bounded FDR1 framing and JSON                                             |
 | `src/driver.*`                   | Command surface and normalized provider results                           |
+| `src/privatestorage.*`           | Owner-only record storage behind the `--private-storage` mode             |
+| `src/serviceidentity.*`          | Process and loopback-listener checks behind `--service-identity`          |
+| `src/applicationincarnation.*`   | Recorded-process liveness check behind `--application-incarnation`        |
+| `src/winsecurity.*`              | Scoped handles and SID helpers shared by the authority modes              |
 | `src/selftest.*`                 | Native parsing, state, cancellation, geometry, and recovery checks        |
+| `src/authoritytests.*`           | Self-test cases for the authority modes                                   |
+| `src/observationtests.*`         | Self-test cases for bounded observation and pinned records                |
 
 The Node build coordinator is
 `../../src/native/windows/buildWindowsDriver.ts`; runtime adaptation is under
@@ -97,6 +108,7 @@ The helper provides:
 - live opaque window and element identity;
 - physical SendInput click, keyboard, pointer, and wheel actions;
 - accessibility activation where the control exposes a supported pattern;
+- named UIA actions with opaque keys and live pattern revalidation;
 - window activation and hit testing;
 - complete source/tree output;
 - occlusion-independent window capture and scaled element crops through
@@ -137,6 +149,311 @@ becomes unavailable, or if a closing popup island's provider reports a UI
 Automation timeout or an unspecified failure. Only an unavailable root is a
 stale element.
 
+### Named accessibility actions
+
+The helper advertises `accessibilityActions` and `performAccessibilityAction`.
+`accessibilityActions` reads the live element's supported UIA patterns and
+returns parallel `actions` and `keys` arrays. Names are in this provider order:
+`Invoke`, `Toggle`, `Expand`, `Collapse`, `Select`, `AddToSelection`,
+`RemoveFromSelection`, `ScrollIntoView`. Only actions of supported patterns
+are listed; an element without them returns two empty arrays. Legacy
+IAccessible default actions are not part of this named surface.
+
+Each key is an HMAC-SHA256 of the fixed pattern-and-method identity under a
+random process secret, truncated to 32 hexadecimal characters. It is not a
+display-name lookup. `performAccessibilityAction` refreshes the element and
+its available patterns, requires exactly one matching key, and resolves that
+pattern's current interface before invoking its exact method. A missing or
+ambiguous key fails with `element-not-interactable`, reason `action-changed`,
+and effect `none`; an expired element is `stale-element`. Dispatch uses the
+same bounded mutation worker, effect ledger, and lease-scoped quarantine as
+accessibility clicks. Neither names nor keys enter the native command journal.
+
+The `observe` `actions` fact uses cached pattern-availability properties, so
+listing actions adds no per-node provider calls to the bounded walk.
+
+### Window events and identity
+
+Window lifecycle comes from out-of-context `SetWinEventHook` notifications
+(foreground, menu, dialog, minimize, object create/destroy/show/hide, and name
+change) received on one dedicated message-loop thread. The callback only records
+a bounded entry and never calls UI Automation or COM. The log keeps the newest
+512 events, and `windowEvents` returns up to 512 events with the last 64 helper
+commands (128 are retained), the tracked windows, the window publication, and the
+retention counters below. A tracked window that the platform reports destroyed
+publishes `window-closed` once; `closeWindow` publishes none for the id it
+closed.
+
+Events are advisory. When a hook cannot be installed, `windowEvents` reports
+`observing: false` with `registrationFailures`, and `IsWindow` polling, which is
+authoritative for liveness, takes over. Windows reuses window handles, so a
+tracked id also records the owning thread and window class and is retired when
+either differs. A recycled handle of the same class on the same thread whose
+destroy notification was never delivered is indistinguishable. Event delivery
+across integrity levels is untested.
+
+### Input authority
+
+Before physical input the helper evaluates the desktop it would inject into and
+refuses with `input-unavailable` when the session is not active, the session is
+locked, the process is not on `WinSta0`, the input desktop is not `Default`
+(lock screen, UAC prompt, screen saver), or the input desktop cannot be opened
+and the cursor cannot be read. The message names the cause. The helper re-reads
+the environment on every operation (about 0.2 ms), so a lock or disconnect after
+an earlier success is noticed.
+
+User Interface Privilege Isolation is checked against the target's process for
+click and focus, and against the foreground window's process for keyboard
+actions. A target at a higher integrity level than the helper, or whose token
+cannot be read because access is denied, is unavailable; other read errors defer
+to the later window and element checks. A click is refused as
+`element-not-interactable` when another application's window covers the click
+point. A `SendInput` call that injects fewer events than requested fails as
+`input-failed` and names UIPI, a secure desktop, or blocked input.
+
+`click` mode `auto` falls back to accessibility activation when physical input
+is unavailable, and an explicit `physical` request reports `input-unavailable`.
+Element `sendKeys` and the physical `clear` fallback activate the target window
+and verify keyboard focus before sending, which is stricter than the macOS
+`clear`; `performActions` activates only when the foreground belongs to another
+application. The helper has no `uiAccess` manifest, and the occlusion check
+detects only windows of other applications.
+
+### Element identity and retention
+
+An element id comes from a process-wide monotonic counter and is never reused,
+so a dropped id can only fail as `stale-element`. Each retained record carries a
+fingerprint of process id, control type, `AutomationId`, and class name, and the
+helper revalidates the live element against it before every action. The name is
+excluded because it legitimately changes. A conflict exists only when a value
+known on both sides differs, and the fingerprint is a precondition, not proof:
+an element whose `AutomationId` legitimately changed is treated as replaced.
+
+Retention is a generation-based LRU capped at 20,000 elements. Exceeding the cap
+evicts the least recently used unpinned records down to 90 percent of it, never
+the observation in progress, a pinned record, or a pinned record's ancestors, so
+a retained record never loses its parent to eviction. A replaced parent erases
+its unpinned subtree. Elements without a runtime id mint a new id per
+observation and are bounded only by the cap. `windowEvents` reports a
+`retention` object with the retained count, the limit, and the helper's working
+set and private bytes. The `stale-element` message says the window closed, a
+different element reused its native identity, or the helper released it to
+bound retained memory.
+
+Records that `observe` emits are pinned: eviction never takes them, and they end
+only through `releaseElements`, a replacement that reuses their native identity,
+or their window ending (`closeWindow`, `closeApplication`, `dispose`, or a
+destroy notification). `releaseElements` drops exactly the named records and
+not their descendants, so a retained child keeps naming its released parent's
+id, which then answers `stale-element`. A `tree`, `find`, or `snapshot` that
+meets a pinned element returns its id and keeps the pin.
+
+### Bounded observation
+
+`observe` implements the
+[bounded observation contract](../PROTOCOL.md#bounded-observation) and is
+advertised as `boundedObservation` in `hello` and `probe`. It walks the control
+view breadth first from the window root, or from a tracked `rootId` of that
+window. Each family of children is paged with the cached tree walker, one
+sibling per provider call, so `maxVisited`, `maxBytes`, and `deadlineMs` take
+effect between any two siblings, and no `TreeScope_Subtree` cache is built.
+Only the root read may start after the deadline; a read that ends after it is
+abandoned without a record, and a provider call already in flight is bounded by
+the UI Automation connection and transaction timeouts (2 and 5 seconds).
+
+Nodes carry the same role, name, automation id, scope, and facts as `snapshot`,
+with `rect` window-relative. A password field (`UIA_IsPasswordPropertyId`) never
+reports `value` or `text`. Strings are cut to `maxStringLength` UTF-16 code
+units without splitting a surrogate pair and named in `clipped`. Requested
+`actions` lists the supported named UIA operations, including an empty list
+for an element without an action pattern.
+An element reachable twice (the same runtime id) is emitted once under its first
+parent; elements without a runtime id are never taken for duplicates.
+
+A pinned record needs room in the 20,000-record table. When pinned records and
+the observation in progress fill it, the sample ends with the `references`
+truncation instead of evicting an id an agent holds, and is empty when even the
+root has no room. Known deviations from the macOS provider: a `maxVisited` equal
+to the tree size reports `visited` with `unvisited` 0 because the walk stops
+before learning that nothing remains, and a root read that outlasts the deadline
+reports `unvisited` 0 because no child is paged after it.
+
+On the Win32 fixture's 10,000-item tree, a 5,000-node sample takes about 4.6
+seconds (about 0.9 ms per node, since each sibling is a separate call) and
+repeats with identical ids; a 50 ms deadline answers in about 50 ms with a
+partial sample.
+
+### Hit testing
+
+`hitTest` resolves the topmost window at a screen point. When no window owns the
+point the result is no element, and nothing is registered. A window of another
+process, or a hit element that belongs to another process, is returned as a
+synthetic `external-window` element ("External desktop window") instead of
+registering a foreign tree, so a test can tell that it landed outside the
+application.
+
+### Provider failures, hangs, and large trees
+
+Provider errors carry the named UI Automation result, for example "The UI
+Automation element is not enabled (0x80040200)". A disabled element fails as
+`element-not-interactable`. A live window whose provider does not answer fails
+as `automation-failed` ("did not respond (0x80131505)") and does not quarantine.
+Against an application whose UI thread is blocked, reads fail after about two
+seconds and an element click after about five, while `windows`, `closeWindow`,
+and `closeApplication` keep answering.
+
+A subtree walk is bounded to 5,000 nodes and fails with `tree-too-large` beyond
+that. `find` walks the same bounded subtree, so a window with more than 5,000
+nodes cannot be searched from its root; a scoped search walks only the scope's
+subtree. On the Win32 fixture a read costs about 0.4 ms per node: 4,900 nodes
+take 1.9 to 2.2 seconds, and a 10,000-item tree fails after 3.8 to 4.3 seconds.
+The walk first caches the whole subtree in one UI Automation transaction, which
+a tree past the limit can outlast on a slower machine. When that cache fails,
+the helper counts the subtree one child at a time, stopping after 5,001 nodes,
+so an oversized tree still fails with `tree-too-large`; a tree within the limit
+keeps the retry and `automation-failed` behavior above.
+`tree` and `find` are not incremental; use `observe` for a budgeted, partial
+read of a large tree.
+
+### Unsettled mutations
+
+UI Automation mutations (`SetFocus`, `Invoke`, `Toggle`, `Select`,
+`Expand`/`Collapse`, `DoDefaultAction`, and `SetValue`) run on a bounded worker
+with a five-second deadline because a suspended or busy application can stall
+its UI thread indefinitely. A deadline does not cancel the provider call: the
+application can still apply the effect later. The helper therefore reports
+`mutation-indeterminate` and quarantines its session instead of treating the
+timeout as a rejection, so nothing replays the call or interleaves new input
+with a late effect. A UI Automation or RPC timeout that the provider itself
+reports from a mutation is treated the same way, because the call reached the
+application and its effect is unknown. An explicit rejection, such as a disabled
+element, is an ordinary error and does not quarantine.
+
+Click tries `Invoke`, `Toggle`, `SelectionItem`, `ExpandCollapse`, then
+`LegacyIAccessible`. On Win32 controls `Invoke` is posted: the provider accepts
+the call and the application applies the effect afterwards, so callers poll for
+the visible result.
+
+While quarantined, `click`, `clear`, `sendKeys`, `performActions`,
+`performAccessibilityAction`, `activate`,
+and `setWindowRect` fail with `target-quarantined` before reaching the
+application, for every window the helper drives, and the physical `clear`
+fallback never runs after an unsettled `SetValue`. Observation commands,
+`releaseActions`, application and window close, and `dispose` stay available so
+the application can be re-observed and depressed input released. Reads remain
+subject to their own timeouts. A late completion is reported in the refusal but
+does not lift the quarantine, because its effect is still unverified. A stalled
+read fails as `automation-failed` and does not quarantine.
+
+The helper records each unsettled mutation against the lease of the application
+it acted on, though the refusal stays session-wide while any record exists.
+`closeApplication` ends the records of a launched application once it has
+verified that the process exited, because nothing that application left in
+flight can land any more, so the next session on the same helper can mutate. An
+attached application keeps running, so its records stay and only restarting the
+helper session ends them. A mutation whose lease cannot be resolved is recorded
+without one, and no close releases it. The refusal says so: closing the launched
+application ends the quarantine, otherwise restart the helper session once the
+application is safe.
+
+The quarantine lives in the helper process, so it ends with the helper. It does
+not yet persist across helper restarts or provide an operator `recover`
+operation; an unsettled call can still land after the helper exits. See
+[the remaining-work plan](../../references/remaining-work.md).
+
+### Mutation effects
+
+Failed and cancelled mutating commands (`activate`, `clear`, `click`,
+`closeWindow`, `performAccessibilityAction`, `performActions`, `releaseActions`,
+`sendKeys`, `setWindowRect`)
+report an FDR1 `effect`, so Node can tell a rejection from a mutation that may
+have reached the application (see [PROTOCOL.md](../PROTOCOL.md)). Reads and
+lifecycle commands carry none.
+
+The driver owns an `EffectLedger` (`src/settlement.*`) that `Driver::Execute`
+resets and scopes to each command. It counts only primary mutations, at the
+point they are dispatched:
+
+- each UI Automation pattern action and value write (`Invoke`, `Toggle`,
+  `Select`, `AddToSelection`, `RemoveFromSelection`, `ScrollIntoView`,
+  `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
+  `RecordDispatching()` and `RecordSettled()`;
+- every key, button, and wheel event that `SendInput` inserts into the input
+  stream, a posted `WM_CLOSE`, and each window restore or `SetWindowPos` that
+  succeeds, through `RecordDelivered()`. `SendInput` reports only completed
+  injection, not how the application handled the events, so any insertion,
+  even part of a refused batch, counts toward `partial`.
+
+A pattern call that succeeds counts toward `partial`. One that returns a UI
+Automation rejection (`UIA_E_ELEMENTNOTENABLED`, `UIA_E_ELEMENTNOTAVAILABLE`,
+`UIA_E_NOTSUPPORTED`, `UIA_E_INVALIDOPERATION`) or `E_INVALIDARG`, `E_NOTIMPL`,
+`E_NOINTERFACE`, or `E_ACCESSDENIED` did nothing. Any other result, including
+`E_FAIL` and RPC failures, stays unresolved, so the failure reports `unknown` and
+Node quarantines the target, and `mutation-indeterminate` is always `unknown`.
+That can quarantine a target that was not changed, but it never lets a possibly
+applied mutation be retried as a rejection. `target-quarantined` refuses before
+anything is dispatched, so it reports `none`.
+
+`partial` means part of the command reached the application, not that the
+application finished handling it. Node quarantines the target for `partial` as
+well, and only an authoritative re-observation of the application can establish
+what changed.
+
+Focus, activation (including its restore and `SetForegroundWindow`), pointer
+moves, `pointerCancel`, and the modifier and depressed-input releases that clean
+up around counted input are idempotent and not counted. A queued mutating
+request that is cancelled before it starts reports `none`, a queued read reports
+no `effect`, and neither ever runs. A cancel for an id the helper does not hold
+also reports `none` (a settled request already reported its effect). A new
+provider-side mutation must record itself in the ledger, through
+`CountedMutation` in `src/automation.cpp` or the `Record*` functions, and be
+listed in `IsTrackedMutation`.
+
+## Authority helper modes
+
+Three restricted one-shot modes of the same executable back the Node `/authority`
+adapters `createWindowsPrivateStorage`, `describeWindowsService`,
+`createWindowsServiceVerifier`, and `createWindowsApplicationProbe` (see
+[the security model](../../references/security.md#windows-private-storage-and-service-verifier)).
+They are not FDR1. Each reads one JSON request from standard input (at most
+128 KiB, a leading byte order mark ignored), writes one JSON line to standard
+output, and exits 0 exactly when the answer has `"ok":true`. A malformed request
+answers `{"ok":false,"reason":"request"}`. A failure carries a fixed `reason`
+category and optionally a `detail` and a `win32` error code, never a path or a
+record's contents. Record contents travel as canonical base64 on standard input,
+never on a command line.
+
+`--private-storage` handles `open`, `read`, `publish`, and `remove`. `open`
+names the root or defaults it to a per-user folder under the local application
+data folder, creates a missing root atomically with an owner-only protected
+DACL, validates the root and every ancestor, and answers the root's volume and
+file identity. The other operations carry that identity back and answer
+`identity` when the root was replaced or removed, so a root that was swapped for
+another valid one is never adopted. Reasons are `request`, `name`, `root`,
+`ancestor`, `owner`, `dacl`, `reparse`, `links`, `type`, `volume`, `path`,
+`identity`, `size`, `encoding`, `exists`, and `io`. Publication writes a
+temporary file under the owner-only descriptor and renames it without replacing,
+so an existing record answers `exists`. A crash between the two steps can leave a
+temporary file of at most 16 KiB.
+
+`--service-identity` handles `describe` and `verify`. `describe` answers the
+identity of a live process of the current user in the current interactive
+session, or `ok:false` with `process`, `user`, `session`, `exited`, or
+`request`. `verify` takes a claim and a loopback URL and answers `ok:true` with
+`verified:true`, or `verified:false` with the first check that failed: `url`,
+`claim`, `start`, `image`, `session`, `listener`, `exited`, `process`, or
+`user`. It holds the process open while it checks, and a listener counts only
+when every listening TCP socket that can accept a connection to the address,
+including a wildcard listener on the same port, belongs to the claimed process.
+
+`--application-incarnation` takes exactly `{"pid":...,"startedAt":...}` and
+answers `{"ok":true,"state":...}` for settlement recovery. It opens the process
+for limited query and synchronization only. `exited` needs proof: the process id
+names no process (`ERROR_INVALID_PARAMETER`), the process holding it has exited,
+or it names a process created more than one second after `startedAt`. A creation
+time within 10 ms is `running`; access denied, an earlier creation time, and
+everything else are `unknown`.
+
 ## Verification and tests
 
 Run package tests first, then the opt-in native contract:
@@ -149,12 +466,89 @@ yarn test --runInBand
 
 The contract builds and resolves the helper, validates cache reuse and
 handshakes, runs the native self-test, exercises malformed-frame recovery, and
-verifies shared Windows/Win32 selection.
+verifies shared Windows/Win32 selection. A second suite builds the test-only
+Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
+through the helper: window events, owned popups, hung and stuck providers, large
+trees, and bounded retention. `yarn test --runInBand win32Fixture` runs only
+that suite. A third suite serves the same fixture through a grant-protected
+Desktop Driver service with the helper behind it: unauthenticated requests reach
+no helper call, sessions keep their owner, a revoked grant closes its
+application, and a stuck call quarantines the target until the launched
+application is closed. `yarn test --runInBand protectedService` runs only that
+suite.
+
+`yarn test --runInBand operations.contract` exercises the agent operation
+routes against the same fixture. It activates the window and sends physical
+pointer and keyboard input, so it requires an unlocked interactive desktop.
+It covers cited and selector-based actions, ambiguity rejection, checks and
+bounded waits, sequence stop behavior, paged window and element captures,
+named Invoke/Toggle, privacy, and an unsettled named action whose late
+completion does not lift quarantine. When
+`FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` disables input, as on
+GitHub-hosted runners, this suite and the fixture suite skip the scenarios that
+need a disabled feature or window capture; hosted Windows Graphics Capture
+cannot create a capture item. Those skips are not a pass.
+
+Three more suites drive only the authority modes against the real helper. They
+need no application and never touch the per-user default root.
+`privateStorage` checks byte-exact round trips, exclusive and concurrent
+publication, a replaced or removed root, a junction root, a second hard link,
+and an ACL that grants another principal access. `serviceIdentity` uses real
+child processes and a loopback listener (IPv4 and, where the machine has it,
+IPv6) to check `describe`, claims whose start time, image, or session differ, a
+case-different image path, an address nobody serves, and an exited process.
+`applicationIncarnation` probes a real child process at its recorded start, at a
+much earlier and a later start, and after it exits. Run them with
+`yarn test --runInBand privateStorage.contract`,
+`yarn test --runInBand serviceIdentity.contract`, and
+`yarn test --runInBand applicationIncarnation.contract`.
+
+The helper self-test (`furn-desktop-driver-host.exe --self-test`) covers
+settlement, element identity, retention, input authority, and event bookkeeping
+against offscreen windows. Lock, disconnect, and integrity transitions are
+exercised through injected state, not by changing the real desktop. It also
+covers the authority modes: the record-name, base64, UTF-8, root, ancestor-ACL,
+URL, and listener rules; an owner-only store in a scratch directory with its
+tamper and race cases; and `describe` and `verify` against this process, a child
+process, and a loopback listener. A case the machine cannot host prints an
+`info` line and is skipped. Bounded observation is covered by a synthetic
+provider (each truncation reason alone, duplicates, cycles, stale and unreadable
+elements, a stalled read, cancellation, secure fields, clipping, and 300
+randomized trees), by pinned-record registry cases, and by `observe` and
+`releaseElements` against a real window. With
+`FURN_DRIVER_SELF_TEST_OBSERVATIONS` set to a file path, the self-test writes
+its synthetic samples there, and the native contract checks each one with the
+Node validator.
 
 Real qualification must run against the target React Native app. Use an
 interactive runner for physical click, keyboard, wheel, multi-window, capture,
 and 100/150/200 percent DPI checks. Hosted capability skips are not a physical
 input pass.
+
+### Qualification status
+
+This helper has passed the native self-test, the fixture contract, and a focused
+React Native Win32 Paper smoke on Windows 11 x64 in an RDP session:
+`yarn storybook smoke --win32 --mode stories-and-tests` with
+`STORYBOOK_SMOKE_STORY` selecting the button, checkbox, input, and callout
+authored tests rendered the full 176-story catalog and ran 5 authored tests (pointer activation,
+toggle, keyboard input and clear, native popup) with no failures. Not yet
+qualified: Windows Fabric (it needs a native build and packaged app
+registration), 200% and mixed-monitor DPI, live lock,
+disconnect, and integrity transitions, a hung React Native app, and menu popups.
+
+The agent operation routes have also passed against the plain Win32 fixture
+at 100% and 150% scale: hit-tested physical click, keyboard type/clear,
+semantic activation, named Invoke/Toggle, checks, sequences, and captures.
+The status crop measured 440 x 20 and 660 x 30 pixels respectively; visual
+inspection confirmed the whole status text was aligned in each crop.
+`desktop-test serve --agent` and the no-argument MCP adapter were exercised
+at both scales with an external fixture: owner-only default descriptor,
+live service verification, resolved target identity, launch refusal, attach,
+act/check, hash-verified capture resources, and descriptor removal while the
+attached app survived. Shutdown used the CLI's stop handler through a
+test-only IPC bridge, not a physical console Ctrl+C. These fixture results
+do not qualify either React Native renderer's new agent-operation path.
 
 CI must build this helper explicitly into a job-local cache, run the opt-in
 native contract once for the shared Windows/Win32 provider, verify each

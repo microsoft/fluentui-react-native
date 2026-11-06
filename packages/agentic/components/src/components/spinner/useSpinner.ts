@@ -19,8 +19,8 @@ export function useSpinner_unstable(props: SpinnerProps): SpinnerState {
 
   const themeState = useThemeState();
   const { center, diameter, radius, strokeWidth } = getSpinnerMetrics(size, themeState.tokens);
-  const trackColor = themeState.tokens.color.strokeNeutralSubtle;
-  const indicatorColor = themeState.tokens.color.strokeNeutralLoud;
+  const trackColor = themeState.tokens.color.strokeNeutralSubtle.rest;
+  const indicatorColor = themeState.tokens.color.strokeNeutralLoud.rest;
   const reduceMotionEnabled = useReducedMotion();
   const rotation = useSharedAnimatedLoop({
     channel: 'agentic-components:spinner',

@@ -1,3 +1,5 @@
+import { inspect } from 'node:util';
+
 import { attach, remote } from 'webdriverio';
 
 import type { DesktopStoryRunResult, DesktopStoryTestResult } from '../authoring/results.js';
@@ -34,6 +36,8 @@ declare global {
 
 export type DesktopWebdriverOptions = {
   clickMode?: DesktopClickMode;
+  /** Supervisor-provided credential. Never put it in capabilities, command lines, or logs. */
+  grant?: string;
   launchMode?: 'attach' | 'launch';
   logLevel?: 'debug' | 'error' | 'info' | 'silent' | 'trace' | 'warn';
   platformName: DesktopPlatformName;
@@ -50,6 +54,7 @@ export type DesktopWebdriverRunOptions = {
 
 export type DesktopWebdriverAttachment = {
   capabilities: NonNullable<Parameters<typeof attach>[0]['capabilities']>;
+  grant?: string;
   sessionId: string;
   url: string;
 };
@@ -123,10 +128,11 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
   );
   const browser = await remote({
     ...connectionOptions(options.url),
+    ...(options.grant === undefined ? {} : desktopWebdriverGrantOptions(options.grant)),
     capabilities,
     logLevel: options.logLevel ?? 'silent',
   });
-  return installDesktopWebdriverCommands(browser, options.url);
+  return installDesktopWebdriverCommands(browser, options.url, { grant: options.grant });
 }
 
 // WebdriverIO applies these defaults in remote() but not attach(). Without an interval, waitUntil and the waitFor*
@@ -139,9 +145,35 @@ export async function attachDesktopWebdriver(options: DesktopWebdriverAttachment
     ...connectionOptions(options.url),
     capabilities: options.capabilities,
     sessionId: options.sessionId,
-    options: { logLevel: 'silent', ...attachedWaitDefaults },
+    options: {
+      logLevel: 'silent',
+      ...attachedWaitDefaults,
+      ...(options.grant === undefined ? {} : desktopWebdriverGrantOptions(options.grant)),
+    },
   });
-  return installDesktopWebdriverCommands(browser, options.url);
+  return installDesktopWebdriverCommands(browser, options.url, { grant: options.grant });
+}
+
+/** Transport-only configuration for a WDIO-managed session. The token stays out of serialized WDIO options. */
+export function desktopWebdriverGrantOptions(grant: string): Pick<Parameters<typeof remote>[0], 'transformRequest'> {
+  if (typeof grant !== 'string' || !/^fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}$/.test(grant)) {
+    throw new TypeError('A valid Desktop Driver grant is required.');
+  }
+  return {
+    transformRequest(request) {
+      const headers = new Headers(request.headers);
+      headers.set('Authorization', `Bearer ${grant}`);
+      // WDIO errors retain request options. Standard inspection must not print the credential with those errors.
+      Object.defineProperty(headers, inspect.custom, {
+        value: () => {
+          const redacted = new Headers(headers);
+          redacted.set('Authorization', '[redacted]');
+          return redacted;
+        },
+      });
+      return { ...request, headers, redirect: 'error' };
+    },
+  };
 }
 
 function connectionOptions(address: string) {
@@ -162,11 +194,15 @@ const installedStoryBrowsers = new WeakSet<WebdriverIO.Browser>();
 const boundSessions = new WeakMap<WebdriverIO.Browser, DesktopWebdriverSession>();
 
 /** Bind a WDIO-managed browser without creating a competing remote session. */
-export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, url: string): DesktopWebdriverSession {
+export function installDesktopWebdriverCommands(
+  browser: WebdriverIO.Browser,
+  url: string,
+  options: { grant?: string } = {},
+): DesktopWebdriverSession {
   if (browser.capabilities.browserName !== 'furn-native-desktop') {
     throw new TypeError('Native desktop compatibility requires a Desktop Driver session.');
   }
-  const client = createDesktopDriverClient({ url });
+  const client = createDesktopDriverClient({ grant: options.grant, url });
   const session = new DesktopSessionClient(client, browser.sessionId, Object.fromEntries(Object.entries(browser.capabilities)));
   const desktop = new DesktopWebdriverSession(browser, session);
   boundSessions.set(browser, desktop);

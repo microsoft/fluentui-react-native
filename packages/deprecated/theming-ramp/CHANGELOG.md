@@ -1,5 +1,12 @@
 # Change Log - @uifabricshared/theming-ramp
 
+## 0.21.16
+
+### Patch Changes
+
+- Updated dependencies [dc47e15]
+  - @fluentui-react-native/design@0.5.3
+
 ## 0.21.15
 
 ### Patch Changes

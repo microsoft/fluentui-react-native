@@ -9,12 +9,15 @@
 
 #include <winrt/base.h>
 
+#include "applicationincarnation.h"
 #include "common.h"
 #include "host.h"
 #include "input.h"
 #include "inputlock.h"
 #include "json.h"
+#include "privatestorage.h"
 #include "selftest.h"
+#include "serviceidentity.h"
 
 namespace {
 
@@ -23,10 +26,14 @@ namespace {
 // bounded independently from ordinary framed commands.
 constexpr std::size_t kMaximumLedgerBytes = 16 * 1024 * 1024;
 
+// An authority request holds a name, a path, and at most one 16 KiB record as
+// base64, so 128 KiB leaves ample room while keeping the mode bounded.
+constexpr std::size_t kMaximumAuthorityRequestBytes = 128 * 1024;
+
 // Reads the whole standard input stream. A stream that was never redirected is
 // reported as missing so the restricted mode fails closed instead of blocking
 // on an interactive console.
-std::string ReadStandardInput(bool& redirected) {
+std::string ReadStandardInput(bool& redirected, std::size_t maximumBytes, const char* tooLarge) {
   const HANDLE input = GetStdHandle(STD_INPUT_HANDLE);
   redirected = input != nullptr && input != INVALID_HANDLE_VALUE && GetFileType(input) != FILE_TYPE_CHAR;
   if (!redirected) {
@@ -38,8 +45,8 @@ std::string ReadStandardInput(bool& redirected) {
   DWORD read = 0;
   while (ReadFile(input, buffer, sizeof(buffer), &read, nullptr) != FALSE && read > 0) {
     contents.append(buffer, read);
-    if (contents.size() > kMaximumLedgerBytes) {
-      furn::Fail(furn::kErrorInvalidRequest, "The release ledger on standard input is too large.");
+    if (contents.size() > maximumBytes) {
+      furn::Fail(furn::kErrorInvalidRequest, tooLarge);
     }
   }
   if (contents.size() >= 3 && static_cast<unsigned char>(contents[0]) == 0xEF &&
@@ -54,7 +61,8 @@ std::string ReadStandardInput(bool& redirected) {
 int ReleaseInputFromLedger() {
   try {
     bool redirected = false;
-    const std::string document = ReadStandardInput(redirected);
+    const std::string document =
+        ReadStandardInput(redirected, kMaximumLedgerBytes, "The release ledger on standard input is too large.");
     if (!redirected || furn::TrimAscii(document).empty()) {
       furn::Fail(furn::kErrorInvalidRequest,
                  "Standard input did not carry a release ledger such as {\"keys\":[],\"buttons\":[]}.");
@@ -104,12 +112,43 @@ int ReleaseInputSweep() {
   }
 }
 
+// Authority modes: one JSON request on standard input, one JSON answer on
+// standard output. A request that cannot be read is answered as malformed
+// instead of failing the process, so the adapter always receives a document.
+// The exit status is 0 exactly when the answer is `"ok":true`; a completed
+// service verification that finds a mismatch is still `"ok":true`.
+int RunAuthorityMode(furn::json::Value (*handle)(const furn::json::Value&)) {
+  furn::json::Value response = furn::json::Value::Object();
+  try {
+    bool redirected = false;
+    const std::string document = ReadStandardInput(redirected, kMaximumAuthorityRequestBytes,
+                                                   "The authority request on standard input is too large.");
+    if (!redirected || furn::TrimAscii(document).empty()) {
+      furn::Fail(furn::kErrorInvalidRequest, "Standard input did not carry an authority request.");
+    }
+    response = handle(furn::json::Value::Parse(document));
+  } catch (const furn::HelperError&) {
+    response = furn::json::Value::Object();
+    response.Set("ok", furn::json::Value::Bool(false));
+    response.Set("reason", furn::json::Value::String(std::string("request")));
+  }
+  std::cout << response.Serialize() << '\n';
+  std::cout.flush();
+  return response.BoolField("ok") ? 0 : 1;
+}
+
 int PrintUsage() {
   std::cerr << "Usage: furn-desktop-driver-host --handshake --json | --self-test | --stdio\n"
                "       furn-desktop-driver-host --release-input          "
                "(reads {\"keys\":[],\"buttons\":[]} from stdin)\n"
                "       furn-desktop-driver-host --release-input --sweep  "
-               "(diagnostics: release everything the desktop holds down)\n";
+               "(diagnostics: release everything the desktop holds down)\n"
+               "       furn-desktop-driver-host --private-storage        "
+               "(owner-only record storage: one JSON request on stdin)\n"
+               "       furn-desktop-driver-host --service-identity       "
+               "(describe or verify a local service process: one JSON request on stdin)\n"
+               "       furn-desktop-driver-host --application-incarnation "
+               "(whether a recorded application process still runs: one JSON request on stdin)\n";
   return 2;
 }
 
@@ -138,6 +177,20 @@ int wmain(int argc, wchar_t** argv) {
         return PrintUsage();
       }
       return ReleaseInputFromLedger();
+    }
+    furn::json::Value (*authority)(const furn::json::Value&) = nullptr;
+    if (mode == L"--private-storage") {
+      authority = furn::storage::HandlePrivateStorageRequest;
+    } else if (mode == L"--service-identity") {
+      authority = furn::service::HandleServiceIdentityRequest;
+    } else if (mode == L"--application-incarnation") {
+      authority = furn::incarnation::HandleApplicationIncarnationRequest;
+    }
+    if (authority != nullptr) {
+      if (argc >= 3) {
+        return PrintUsage();
+      }
+      return RunAuthorityMode(authority);
     }
     if (mode == L"--stdio") {
       furn::Host host;

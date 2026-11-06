@@ -3,6 +3,10 @@ id: design.tokens
 kind: instruction-reference
 owner_paths:
   - packages/agentic/design/src/tokens
+  - packages/agentic/design/src/flex/tokens.types.ts
+  - packages/agentic/design/src/flex/defaults
+  - packages/agentic/design/src/flex/adapters
+  - packages/agentic/design/src/deprecated
   - packages/agentic/design/scripts
 ---
 
@@ -17,18 +21,81 @@ owner_paths:
 
 | Tokens                         | Entry point                                       | Source                                                                      |
 | ------------------------------ | ------------------------------------------------- | --------------------------------------------------------------------------- |
-| Flex semantic tokens           | `FlexTokens` from `@fluentui-react-native/design` | `src/tokens/flex.types.ts`; defaults in `src/tokens/defaultTokens.ts`       |
+| Flex semantic tokens           | `FlexTokens` from `@fluentui-react-native/design` | `src/flex/tokens.types.ts`; x3 defaults in `src/flex/defaults/`             |
 | Platform global tokens         | `@fluentui-react-native/design/tokens/global`     | Generated into `src/tokens/global.generated.ts` and `src/tokens/generated/` |
-| Legacy alias and shadow tokens | `@fluentui-react-native/design/tokens/legacy`     | `src/tokens/legacy/`, for legacy themes only                                |
+| Deprecated Fluent 2 token data | `@fluentui-react-native/design/deprecated`        | `src/deprecated/`, for existing platform themes only (R-DESIGN-003)         |
 
-`FlexTokens` groups `color` (with `hover` and `pressed` overrides), `shadow`, `fontWeight`, `fontFamily`, `fontSize`,
-`lineHeight`, `borderRadius`, `spacing`, and `strokeWidth`. Components read the active values from
-`useThemeState().tokens`; `theming.md` explains how they are resolved. The defaults currently do not vary by
-appearance; see `remaining-work.md`.
+`FlexTokens` groups `color` (one `InteractiveColor` with `rest`, `hover`, and `pressed` per semantic color; see
+`flex-colors.md`), `shadow`, `fontWeight`, `fontFamily`, `fontSize`, `lineHeight`, `borderRadius`, `spacing`,
+`strokeWidth`, and `motion`. Components read the active values from `useThemeState().tokens`; `theming.md` explains how
+they are resolved.
+
+Each shadow is a `FlexShadow`: an array of `{ x, y, blur, color }` layers in CSS `box-shadow` order, from the contour
+layer to the key shadow, with offsets and blur in density-independent pixels. The tokens keep every source layer. An
+authored shadow is one layered shadow or a `[light, dark]` tuple of them; `selectShadowEntry` selects the shadow for an
+appearance. A shadow override replaces the whole entry, and an `undefined` entry keeps the base. A legacy
+`{ ambient, key }` shadow is authored as `[ambient, key]`, and the former `ambient` and `key` are the first and last
+layers. Motion durations are milliseconds, and each easing is an `[x1, y1, x2, y2]` tuple for `Easing.bezier`. Only
+colors and shadows vary by color scheme.
 
 The package's `prebuild` script (`codegen.cts`) generates the global token files from the platform
-`@fluentui-react-native/design-tokens-*` packages and regenerates both mapping projections. Do not edit generated files;
-change their inputs and rebuild.
+`@fluentui-react-native/design-tokens-*` packages and regenerates both mapping projections. It also generates
+`src/fluent/defaults/fluentTokens.generated.ts` (Win32) and its Windows, macOS, iOS, and Android variants. These modules
+contain complete Fluent alias colors, shadows, and font aliases, which the `themes` entry point consumes (`theming.md`).
+The generator applies the deprecated pipeline mappers from `src/deprecated/` at build time, so runtime code outside that
+directory reads Fluent 2 values only from these generated modules (R-DESIGN-003). Do not edit generated files; change
+their inputs and rebuild.
+
+Every generated platform module exports `light`, `dark`, `lightElevated`, `darkElevated`, `hcLight`, and `hcDark` color
+and shadow sets, plus `fontAliasTokens`. Colors satisfy `Required<AliasColorTokens>` (including deprecated red
+aliases, mapped to danger), fonts satisfy `Required<Variants>`, and shadows satisfy `BaseShadowAliasTokens`.
+The generator preserves defined runtime-mapped values and additional native color states that those mappers omit.
+Missing colors use same-platform semantic equivalents first, with absent interaction states falling back to rest.
+Remaining gaps use portable light/dark defaults assembled from the Win32 and mobile palettes, never another
+platform's system colors. Explicit equivalents live in the [Fluent token generator](../scripts/fluent-tokens.cts).
+
+An appearance without platform data inherits the nearest supported set: an elevated set uses its color scheme's
+standard set, a single high-contrast set serves both color schemes, and a platform without high-contrast data uses
+light and dark. Win32's Dark Gray palette is its elevated dark set, and its single `hc` palette of system colors is
+`hcDark`. Windows has no high-contrast palette, so it uses the Win32 `hc` palette as `SystemColor…Color` Windows
+brushes. iOS's high-contrast files contain fonts but no colors, so they inherit the matching standard colors; this is
+coverage, not a synthesized or accessibility-qualified high-contrast palette. Native shadow
+sets remain intact. Missing font aliases use native equivalents, or the platform's global typography ramp when no
+aliases exist (macOS and Windows); legacy variant names alias the completed Fluent variants. Tests compare all
+platforms against the full token interfaces and reject missing or undefined entries.
+
+Generated token modules emit their values through the scripts package's `ValuePool`, which minimizes the minified size:
+values that repeat are hoisted into constants, and entries that several declarations share are emitted once in ancestor
+objects that the declarations spread. The emitted key order is therefore not meaningful.
+
+## Default tokens
+
+`src/flex/defaults/defaultTokens.generated.ts` holds the cool and warm x3 defaults, and `defaultTokens.ts` normalizes
+them. `FlexThemeReference` merges the default for the resolved `colorTone` under its base and recipes, and the `themes`
+entry point exposes the two defaults as `flexTheme` and `flexWarmTheme` (`theming.md`). The x3 sources
+define no high-contrast or elevated values, so those appearances use the light or dark default. Defaults do not
+otherwise vary by contrast or interface level; see `remaining-work.md`. Tests that assert default values should read
+them from `defaultFlexTokens` in the `testing` entry point rather than repeating literals.
+
+The defaults are rest-first. The generator omits a hover or pressed state when the runtime interaction policy
+reproduces its source value in both schemes, and authors the state otherwise, so changing the policy can change which
+states are explicit. The coverage ledger, `coverage.generated.json` beside the generator in the package's
+`flex-defaults` scripts directory, records for every Flex destination the x3 variable, each tone's light and dark
+values, whether each interaction state is computed or explicit, and any native adaptation. Adaptations convert `rem` to
+16 density-independent pixels, durations to milliseconds, `cubic-bezier()` to tuples, variable font weights to native
+static weights, and relative `oklch` shadow alphas to `#rrggbbaa`. Opaque colors are emitted as `#rrggbb`.
+
+Regenerate both files from the pinned snapshots, or verify that they are current:
+
+```sh
+yarn workspace @fluentui-react-native/design gen:flex-defaults
+yarn workspace @fluentui-react-native/design gen:flex-defaults --check
+```
+
+The generator imports the interaction policy's TypeScript source and requires Node 22.18 or later. `--check` exits 1
+when an output is stale. `src/flex/defaults/generateDefaults.test.ts` runs the check, and `x3Defaults.test.ts`
+independently parses the pinned CSS to verify every resolved default for each tone and scheme, that each explicit state
+differs from the policy's result, and that every x3 variable has a Flex destination.
 
 ## Flex token mapping
 
@@ -40,14 +107,22 @@ canonical Flex value back to each representable legacy Theme path.
 The reverse projection is intentionally lossy. When several Flex roles share one
 legacy Theme path, `reverse.canonical` names the selected source, lists every
 omitted candidate, and records why that choice is stable. Interactive reverse
-entries fall back to their rest value when the authored hover or pressed map
-does not override that token. `reverse.transforms` owns any value conversion
+entries read the resolved color's `hover` or `pressed` state; for the
+deprecated `FlatFlexTokens` input they fall back to rest when the state map has
+no entry for that token. `reverse.transforms` owns any value conversion
 required by a target path.
 
-`nonFluentFlexTokens` supplies values for supported Flex destinations without a
-Theme source. A complete legacy Theme also requires values that Flex cannot
-represent; those values are supplied by the lazy compatibility base under
-`src/theming/compat`.
+`src/flex/adapters/fluentFallbackTokens.ts` holds the forward adapter's
+Fluent-native fallbacks, not the x3 defaults. `nonFluentFlexTokens` supplies
+values for supported Flex destinations without a Theme source, and
+`fluentFallbackFlexTokens` supplies mapped values a Theme omits. The adapter
+never derives states: a state that neither the Theme nor a fallback supplies
+equals rest. X3 default changes therefore never alter projected legacy themes.
+Legacy
+`{ ambient, key }` Theme shadows become `[ambient, key]` layers. A complete
+legacy Theme also requires values that Flex cannot represent; the Flex-to-legacy
+projection takes those values from the Fluent theme for the appearance
+(`theming.md`).
 
 ### Internal consistency
 
@@ -94,10 +169,12 @@ without changing the pin, pass `--ref <commit>`.
    yarn workspace @fluentui-react-native/design update:upstream-snapshots
    ```
 
-   The command refreshes the three snapshots and their `blobSha` values.
+   The command refreshes every snapshot listed in `files` and its `blobSha`.
 
 3. Run `gen:upstream-drift --offline` and confirm that `hasDrift` is `false` and
    every `snapshotIntegrity` entry reports `matches: true`.
-4. Run `check:mappings` and the design package test suite.
-5. Commit the pin record, all three refreshed snapshots, and a changeset
-   describing the upstream change together.
+4. Run `gen:flex-defaults`, then `check:mappings` and the design package test
+   suite. Review value changes in the coverage ledger, and update source-commit
+   citations in code comments and references.
+5. Commit the pin record, the refreshed snapshots, the regenerated defaults and
+   ledger, and a changeset describing the upstream change together.

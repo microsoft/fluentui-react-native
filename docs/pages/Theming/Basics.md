@@ -46,8 +46,11 @@ export const App = () => (
 
 An omitted `theme` inherits the nearest theme boundary, including an existing
 `ThemeProvider`. Without a boundary it uses a default `FlexThemeReference`.
-That default supplies the existing baseline Flex tokens; use an appearance-aware
-theme recipe when colors should vary with the resolved appearance.
+That default supplies the x3 Flex tokens for the resolved light or dark color
+scheme and `colorTone`; use an appearance-aware theme recipe for high-contrast or
+elevated values. Read each Flex color through its `rest`, `hover`, or `pressed`
+state, as described in the design package's
+[Flex colors reference](../../../packages/agentic/design/references/flex-colors.md).
 Nested roots can override individual `appearance` fields, `appearanceSource`,
 or `fallbackAppearance` while retaining the inherited source and other options.
 An explicit `theme` starts a new theme/appearance configuration, using that

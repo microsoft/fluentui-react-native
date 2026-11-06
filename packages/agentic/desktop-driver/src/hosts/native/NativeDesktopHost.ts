@@ -9,9 +9,12 @@ import type {
   DesktopTarget,
   DesktopWindow,
   DesktopWindowEventLog,
+  NativeAccessibilityAction,
   NativeActionSequence,
   NativeElementSnapshot,
   NativeImage,
+  NativeObservation,
+  NativeObserveRequest,
   NativeSearchRoot,
   NativeSelector,
   Rect,
@@ -20,7 +23,10 @@ import type { NativeDesktopApplicationDescriptor, NativeDriverArtifact, NativeHo
 import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
 import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
+import { describeObserveRequestViolation, describeReleaseViolation, parseNativeObservation } from '../../protocol/observation.js';
 import type { WebDriverErrorCode } from '../../protocol/errors.js';
+import { attachFailureEffect, attachProviderQuarantine, readFailureEffect } from '../../protocol/settlement.js';
+import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopEndpoint } from '../../protocol/types.js';
 import { NativeHostProcess } from './NativeHostProcess.js';
 
@@ -126,7 +132,7 @@ export class NativeDesktopHost implements DesktopHost {
         return;
       }
       if (mode === 'physical') {
-        throw new HostUnsupportedError('Physical pointer input is disabled by the registered target policy.');
+        throw rejectedBeforeDispatch(new HostUnsupportedError('Physical pointer input is disabled by the registered target policy.'));
       }
     }
     const includePointer = mode !== 'accessibility';
@@ -142,14 +148,14 @@ export class NativeDesktopHost implements DesktopHost {
 
   async clear(elementId: string, signal?: AbortSignal): Promise<void> {
     if (this.disabledInputFeatures.has('keyboard')) {
-      throw new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.');
+      throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.'));
     }
     await this.request('clear', { elementId }, signal);
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
     if (this.disabledInputFeatures.has('keyboard')) {
-      throw new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.');
+      throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.'));
     }
     this.potentialKeys = new Set([...this.depressedKeys, ...typedTextRecoveryKeys(text)]);
     try {
@@ -166,10 +172,15 @@ export class NativeDesktopHost implements DesktopHost {
         (sequence.type === 'pointer' && this.disabledInputFeatures.has('physicalClick')) ||
         (sequence.type === 'wheel' && this.disabledInputFeatures.has('wheel'))
       ) {
-        throw new HostUnsupportedError(`${sequence.type} input is disabled by the registered target policy.`);
+        throw rejectedBeforeDispatch(new HostUnsupportedError(`${sequence.type} input is disabled by the registered target policy.`));
       }
     }
-    const plan = planInputLedger(actions, this.depressedKeys, this.depressedButtons);
+    let plan: InputLedgerPlan;
+    try {
+      plan = planInputLedger(actions, this.depressedKeys, this.depressedButtons);
+    } catch (error) {
+      throw rejectedBeforeDispatch(error);
+    }
     this.potentialKeys = plan.potentialKeys;
     this.potentialButtons = plan.potentialButtons;
     try {
@@ -222,6 +233,44 @@ export class NativeDesktopHost implements DesktopHost {
   async accessibilityActions(elementId: string, signal?: AbortSignal): Promise<string[]> {
     const result = await this.request<{ actions: string[] }>('accessibilityActions', { elementId }, signal);
     return result.actions;
+  }
+
+  async listAccessibilityActions(elementId: string, signal?: AbortSignal): Promise<NativeAccessibilityAction[]> {
+    const result = await this.request<{ actions?: unknown; keys?: unknown }>('accessibilityActions', { elementId }, signal);
+    return parseKeyedActions(result);
+  }
+
+  async performAccessibilityAction(elementId: string, key: string, signal?: AbortSignal): Promise<void> {
+    await this.request('performAccessibilityAction', { elementId, key }, signal);
+  }
+
+  async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {
+    const violation = describeObserveRequestViolation(request);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', `The observation request is invalid: ${violation}`);
+    }
+    const parsed = parseNativeObservation(request, await this.request<unknown>('observe', request, signal));
+    if (parsed.status === 'rejected') {
+      throw new HostWebDriverError('unknown error', `The native helper returned an invalid observation: ${parsed.message}`, {
+        nativeCode: 'invalid-observation',
+      });
+    }
+    return parsed.observation;
+  }
+
+  async releaseElements(elementIds: readonly string[], signal?: AbortSignal): Promise<number> {
+    const violation = describeReleaseViolation(elementIds);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', `The release request is invalid: ${violation}`);
+    }
+    const result = await this.request<{ released?: unknown }>('releaseElements', { ids: elementIds }, signal);
+    const released = result?.released;
+    if (typeof released !== 'number' || !Number.isInteger(released) || released < 0 || released > elementIds.length) {
+      throw new HostWebDriverError('unknown error', 'The native helper returned an invalid release count.', {
+        nativeCode: 'invalid-release',
+      });
+    }
+    return released;
   }
 
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {
@@ -467,6 +516,27 @@ function resolveDisabledInputFeatures(configured?: readonly NativeDisabledInputF
   return resolved;
 }
 
+/** The longest action key a provider may issue. Keys are opaque, so this only bounds what Node holds. */
+const maxActionKeyLength = 128;
+
+/** Pairs each listed action with its key, refusing a response whose lists disagree or whose keys are malformed. */
+export function parseKeyedActions(result: { actions?: unknown; keys?: unknown } | undefined): NativeAccessibilityAction[] {
+  const actions = result?.actions;
+  const keys = result?.keys;
+  if (
+    !Array.isArray(actions) ||
+    !Array.isArray(keys) ||
+    actions.length !== keys.length ||
+    !actions.every((name) => typeof name === 'string') ||
+    !keys.every((key) => typeof key === 'string' && key.length > 0 && key.length <= maxActionKeyLength)
+  ) {
+    throw new HostWebDriverError('unknown error', 'The native helper returned invalid accessibility action keys.', {
+      nativeCode: 'invalid-action-keys',
+    });
+  }
+  return actions.map((name: string, index) => ({ key: keys[index] as string, name }));
+}
+
 const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = {
   'capture-failed': 'unable to capture screen',
   'element-not-interactable': 'element not interactable',
@@ -476,19 +546,44 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
   'no-such-window': 'no such window',
 };
 
+/** Marks a failure raised before any command reached the provider, so no effect can have been dispatched. */
+function rejectedBeforeDispatch<T>(error: T): T {
+  return error instanceof Error ? attachFailureEffect(error, 'none') : error;
+}
+
+/**
+ * Codes a provider raises when it bounds its own application calls and quarantines itself. Each carries its effect, so
+ * a provider that reports no `effect` is still read correctly: an unsettled mutation may have landed, while a refused
+ * one never reached the application.
+ */
+const nativeSettlementEffects: Readonly<Record<string, MutationEffect>> = {
+  'mutation-indeterminate': 'unknown',
+  'target-quarantined': 'none',
+};
+
 export function translateNativeError(error: unknown): unknown {
   if (!(error instanceof NativeDriverError)) {
     return error;
   }
+  const settlementEffect = nativeSettlementEffects[error.code];
+  if (settlementEffect) {
+    const settled = new HostWebDriverError('unknown error', error.message, { ...error.data, nativeCode: error.code });
+    return attachProviderQuarantine(attachFailureEffect(settled, settlementEffect));
+  }
+  const effect = readFailureEffect(error);
   if (error.code === 'unsupported-operation') {
-    return new HostUnsupportedError(error.message);
+    return attachFailureEffect(new HostUnsupportedError(error.message), effect);
   }
   if (error.code === 'stale-element') {
-    return new HostStaleError(error.message);
+    return attachFailureEffect(new HostStaleError(error.message), effect);
   }
   const webdriverCode = nativeWebDriverErrorCodes[error.code];
   if (webdriverCode) {
-    return new HostWebDriverError(webdriverCode, error.message, error.data);
+    return attachFailureEffect(new HostWebDriverError(webdriverCode, error.message, error.data), effect);
+  }
+  if (error.code === 'automation-failed') {
+    // It stays the generic code, but a provider's `reason` and the native code must reach the caller that branches on them.
+    return attachFailureEffect(new HostWebDriverError('unknown error', error.message, { ...error.data, nativeCode: error.code }), effect);
   }
   return error;
 }

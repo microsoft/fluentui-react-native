@@ -12,18 +12,14 @@ import {
   serializeReportError,
   validateDesktopEvent,
 } from './protocol.js';
-import type {
-  CollectedDesktopEvent,
-  DesktopEvent,
-  EventContext,
-  EventEmitter,
-  FailureKind,
-  ReportError,
-  ReportFailure,
-} from './protocol.js';
-import { renderJUnit, renderRunSummary, summarizeDesktopRun } from './results.js';
+import type { CollectedDesktopEvent, EventContext, EventEmitter, FailureKind, ReportError, ReportFailure } from './protocol.js';
+import { projectDesktopRunSummary, renderJUnit, renderRunSummary, summarizeDesktopRun } from './results.js';
 import type { DesktopRunResult, DesktopTestResult, DesktopWorkResult } from './results.js';
+import { includeDesktopEvent, projectDesktopEvent } from './structured.js';
+import type { DesktopEventLevel } from './structured.js';
 import type { DesktopReportingConfig } from '../config.js';
+import { resolveDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
+import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 
 export type ReportOutput = Pick<NodeJS.WriteStream, 'write'>;
 export type DesktopRunReporterOptions = DesktopReportingConfig & {
@@ -33,6 +29,13 @@ export type DesktopRunReporterOptions = DesktopReportingConfig & {
   optional?: boolean;
   output?: ReportOutput;
   errorOutput?: ReportOutput;
+  reporterMode?: ResolvedDesktopReporterMode;
+  eventLevel?: DesktopEventLevel;
+  /**
+   * Withholds the structured final summary. A long-lived command passes a predicate that turns true once it has written
+   * its readiness document, so a run that fails before readiness still reports its summary.
+   */
+  suppressFinalOutput?: boolean | (() => boolean);
   structured?: boolean;
   verbose?: boolean;
   secrets?: readonly string[];
@@ -69,6 +72,8 @@ export class DesktopRunReporter {
   private readonly actions: boolean;
   private readonly output: ReportOutput;
   private readonly errors: ReportOutput;
+  private readonly reporterMode: ResolvedDesktopReporterMode;
+  private readonly structured: boolean;
   private readonly logger: ReturnType<typeof createReporter>;
   private queue = Promise.resolve();
   private arrivalSequence = 0;
@@ -78,6 +83,9 @@ export class DesktopRunReporter {
   private finished = false;
   private journalFailed = false;
   private presentationFailed = false;
+  private suppressedEvents = 0;
+  private emittedProblemEvents = 0;
+  private structuredOutputError?: Error;
   private terminal?: DesktopRunResult;
 
   constructor(options: DesktopRunReporterOptions) {
@@ -86,10 +94,17 @@ export class DesktopRunReporter {
     fs.mkdirSync(root, { recursive: true, mode: 0o700 });
     // Producers report paths relative to canonical artifact roots (macOS temp directories are /var -> /private/var).
     this.root = fs.realpathSync.native(root);
-    this.actions =
-      !options.structured &&
-      (options.console === 'github-actions' || ((!options.console || options.console === 'auto') && process.env.GITHUB_ACTIONS === 'true'));
-    this.output = options.structured ? (options.errorOutput ?? process.stderr) : (options.output ?? process.stdout);
+    this.reporterMode =
+      options.reporterMode ??
+      (options.structured
+        ? 'json'
+        : resolveDesktopReporterMode({
+            environment: process.env.DESKTOP_REPORTER,
+            configured: options.reporter ?? options.console,
+          }));
+    this.structured = this.reporterMode === 'json' || this.reporterMode === 'ndjson';
+    this.actions = this.reporterMode === 'github-actions';
+    this.output = options.output ?? process.stdout;
     this.errors = options.errorOutput ?? process.stderr;
     for (const secret of options.secrets ?? []) this.addSecret(secret);
     this.emit = createEventEmitter(this.runId, 'supervisor', (event) => this.accept(event));
@@ -97,15 +112,32 @@ export class DesktopRunReporter {
       name: 'desktop-test',
       prefix: {},
       output: {
-        log: (message) => this.enqueue(() => this.writeRaw(this.output, message + '\n'), Buffer.byteLength(message)),
-        warn: (message) => this.enqueue(() => this.writeRaw(this.errors, message + '\n'), Buffer.byteLength(message)),
-        error: (message) => this.enqueue(() => this.writeRaw(this.errors, message + '\n'), Buffer.byteLength(message)),
+        log: (message) => {
+          if (!this.structured) this.enqueue(() => this.writeRaw(this.output, message + '\n'), Buffer.byteLength(message));
+        },
+        warn: (message) => {
+          if (!this.structured) this.enqueue(() => this.writeRaw(this.errors, message + '\n'), Buffer.byteLength(message));
+        },
+        error: (message) => {
+          if (!this.structured) this.enqueue(() => this.writeRaw(this.errors, message + '\n'), Buffer.byteLength(message));
+        },
       },
     });
     fs.writeFileSync(path.join(this.root, 'events.jsonl'), '', { flag: 'wx', mode: 0o600 });
     this.artifacts.set('events.jsonl', 'Versioned event journal');
     this.artifacts.set('run.json', 'Canonical run result');
     if (options.junit !== false) this.artifacts.set('junit.xml', 'JUnit result');
+    if (this.reporterMode === 'ndjson') {
+      const start = {
+        schemaVersion: 1,
+        type: 'start',
+        runId: this.runId,
+        kind: options.kind ?? 'tests',
+        ...(options.context ? { context: options.context } : {}),
+        artifactsRoot: clipStructuredText(this.root, 512),
+      };
+      this.enqueue(() => this.write(this.output, `${JSON.stringify(start)}\n`), 0);
+    }
   }
 
   source(sourceId: string): EventEmitter {
@@ -269,7 +301,23 @@ export class DesktopRunReporter {
     } else if (event.kind === 'artifact') this.artifacts.set(event.payload.path, event.payload.description);
   }
 
-  private present(event: DesktopEvent): void {
+  private present(event: CollectedDesktopEvent): void {
+    if (this.structured) {
+      if (this.reporterMode === 'ndjson') {
+        const scopeCategory = this.scopes.get(event.scopeId)?.category;
+        const eventLevel = this.options.eventLevel ?? 'milestones';
+        const problemEvent = event.kind === 'test-result' && event.payload.status !== 'passed';
+        if (eventLevel === 'milestones' && problemEvent && this.emittedProblemEvents >= 25) {
+          this.suppressedEvents++;
+        } else if (includeDesktopEvent(event, eventLevel, scopeCategory)) {
+          if (problemEvent) this.emittedProblemEvents++;
+          this.enqueue(() => this.write(this.output, `${JSON.stringify(projectDesktopEvent(event))}\n`), 0);
+        } else {
+          this.suppressedEvents++;
+        }
+      }
+      return;
+    }
     const prefix = `[${event.sourceId}${event.context?.endpoint ? ` ${event.context.endpoint}` : ''}]`;
     const failure = 'failure' in event.payload ? event.payload.failure : undefined;
     const firstFailure = !failure || !this.presentedFailures.has(failure.failureId);
@@ -350,8 +398,12 @@ export class DesktopRunReporter {
       .then(() => (this.presentationFailed ? undefined : action()))
       .catch((error: unknown) => {
         this.presentationFailed = true;
-        const failure = this.failure(error, 'reporting');
-        this.failures.set(failure.failureId, failure);
+        if (this.structured) {
+          this.structuredOutputError = error instanceof Error ? error : new Error(String(error));
+        } else {
+          const failure = this.failure(error, 'reporting');
+          this.failures.set(failure.failureId, failure);
+        }
       })
       .finally(() => {
         this.pendingBytes -= bytes;
@@ -365,15 +417,19 @@ export class DesktopRunReporter {
     }
     await new Promise<void>((resolve, reject) => {
       const timer = setTimeout(() => settle(new Error('Timed out flushing desktop report output.')), this.options.flushTimeoutMs ?? 5000);
+      let settled = false;
       const onError = (error: Error) => settle(error);
-      const settle = (error?: Error | null) => {
+      const settle = (error?: Error | null, deferListenerRemoval = false) => {
+        if (settled) return;
+        settled = true;
         clearTimeout(timer);
-        output.off('error', onError);
+        if (deferListenerRemoval) setImmediate(() => output.off('error', onError));
+        else output.off('error', onError);
         if (error) reject(error);
         else resolve();
       };
       output.once('error', onError);
-      output.write(text, settle);
+      output.write(text, (error) => settle(error, Boolean(error)));
     });
   }
 
@@ -472,7 +528,7 @@ export class DesktopRunReporter {
     );
     await this.queue;
     result = persist();
-    if (this.presentationFailed) {
+    if (this.presentationFailed && !this.structured) {
       try {
         await this.writeRaw(
           this.errors,
@@ -484,7 +540,7 @@ export class DesktopRunReporter {
         result = persist();
       }
     }
-    if (this.options.summary !== false && process.env.GITHUB_STEP_SUMMARY && !this.options.structured) {
+    if (this.options.summary !== false && process.env.GITHUB_STEP_SUMMARY && !this.structured) {
       try {
         const summary = renderRunSummary(result).slice(0, 64 * 1024);
         const size = fs.existsSync(process.env.GITHUB_STEP_SUMMARY) ? fs.statSync(process.env.GITHUB_STEP_SUMMARY).size : 0;
@@ -509,6 +565,44 @@ export class DesktopRunReporter {
       this.failures.set(failure.failureId, failure);
       result = persist();
     }
+    await this.queue;
+    result = persist();
+    const { suppressFinalOutput } = this.options;
+    const suppressed = typeof suppressFinalOutput === 'function' ? suppressFinalOutput() : suppressFinalOutput === true;
+    if (this.structured && !suppressed && !this.presentationFailed) {
+      try {
+        if (this.reporterMode === 'ndjson' && this.suppressedEvents > 0) {
+          await this.write(
+            this.output,
+            `${JSON.stringify({ schemaVersion: 1, type: 'suppressed', runId: this.runId, count: this.suppressedEvents })}\n`,
+          );
+        }
+        await this.write(this.output, `${JSON.stringify(projectDesktopRunSummary(result, this.root))}\n`);
+      } catch (error) {
+        this.structuredOutputError = error instanceof Error ? error : new Error(String(error));
+      }
+    }
+    if (this.structuredOutputError) {
+      const outputError = this.structuredOutputError;
+      try {
+        this.emit({
+          kind: 'diagnostic',
+          payload: { level: 'warning', message: `Structured output stopped: ${outputError.message}` },
+        });
+        await this.queue;
+        result = this.result();
+        persist();
+      } catch (error) {
+        const failure = this.failure(error, 'reporting');
+        this.failures.set(failure.failureId, failure);
+        result = persist();
+      }
+      try {
+        await this.writeRaw(this.errors, `[desktop] Structured output stopped: ${outputError.message}\n`);
+      } catch {
+        // A closed stderr cannot carry the reporting diagnostic.
+      }
+    }
     this.finished = true;
     this.terminal = result;
     return result;
@@ -522,6 +616,15 @@ export class DesktopRunReporter {
 function errorDiagnostic(error: ReportError): string {
   const message = `${error.name}: ${error.message}`;
   return error.stack ? (error.stack.includes(error.message) ? error.stack : `${message}\n${error.stack}`) : message;
+}
+function clipStructuredText(value: string, maximumBytes: number): string {
+  if (Buffer.byteLength(value) <= maximumBytes) return value;
+  let result = '';
+  for (const character of value) {
+    if (Buffer.byteLength(result + character + '…') > maximumBytes) break;
+    result += character;
+  }
+  return `${result}…`;
 }
 function escapeData(text: string): string {
   return text.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A');

@@ -8,55 +8,126 @@
 #include <memory>
 #include <thread>
 
+#include <bcrypt.h>
+
+#include "settlement.h"
 namespace furn {
 namespace {
 
 constexpr std::size_t kMaximumAncestorWalk = 64;
-// Provider mutations run on their application's UI thread, which a suspended or
-// busy application can stall indefinitely. Every mutation therefore runs as a
-// bounded step that reports an explicit failure instead of wedging the helper.
-constexpr DWORD kMutationTimeoutMs = 5000;
+// Provider calls run on their application's UI thread, which a suspended or
+// busy application can stall indefinitely. Every call therefore runs as a
+// bounded step that reports an explicit failure instead of wedging the helper;
+// a mutation that cannot settle also quarantines later mutations (settlement.h).
+constexpr DWORD kProviderCallTimeoutMs = 5000;
+constexpr char kTreeTooLargeMessage[] = "The native accessibility tree exceeds the 5000-node limit.";
 
-struct BoundedState {
-  std::atomic<HRESULT> result{E_PENDING};
-  HANDLE done{nullptr};
-
-  ~BoundedState() {
-    if (done != nullptr) {
-      CloseHandle(done);
-    }
-  }
+struct ActionMapping {
+  const char* name;
+  const char* identity;
+  bool ElementSnapshot::*available;
 };
 
-HRESULT RunBounded(std::function<HRESULT()> call, DWORD timeoutMs, bool& completed) {
-  const auto state = std::make_shared<BoundedState>();
-  state->done = CreateEventW(nullptr, TRUE, FALSE, nullptr);
-  if (state->done == nullptr) {
-    completed = true;
-    return call();
-  }
-  std::thread worker([state, call]() {
-    const HRESULT initialized = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-    state->result.store(call());
-    SetEvent(state->done);
-    if (SUCCEEDED(initialized)) {
-      CoUninitialize();
+constexpr ActionMapping kAccessibilityActions[] = {
+    {"Invoke", "UIA.Invoke.Invoke", &ElementSnapshot::invokePattern},
+    {"Toggle", "UIA.Toggle.Toggle", &ElementSnapshot::togglePattern},
+    {"Expand", "UIA.ExpandCollapse.Expand", &ElementSnapshot::expandCollapsePattern},
+    {"Collapse", "UIA.ExpandCollapse.Collapse", &ElementSnapshot::expandCollapsePattern},
+    {"Select", "UIA.SelectionItem.Select", &ElementSnapshot::selectionItemPattern},
+    {"AddToSelection", "UIA.SelectionItem.AddToSelection", &ElementSnapshot::selectionItemPattern},
+    {"RemoveFromSelection", "UIA.SelectionItem.RemoveFromSelection", &ElementSnapshot::selectionItemPattern},
+    {"ScrollIntoView", "UIA.ScrollItem.ScrollIntoView", &ElementSnapshot::scrollItemPattern},
+};
+
+std::string ActionKey(const ActionMapping& action) {
+  static auto secret = []() {
+    std::array<unsigned char, 32> bytes{};
+    if (BCryptGenRandom(nullptr, bytes.data(), static_cast<ULONG>(bytes.size()), BCRYPT_USE_SYSTEM_PREFERRED_RNG) < 0) {
+      Fail(kErrorInternal, "Could not initialize accessibility action keys.");
     }
-  });
-  worker.detach();
-  completed = WaitForSingleObject(state->done, timeoutMs) == WAIT_OBJECT_0;
-  return completed ? state->result.load() : E_PENDING;
+    return bytes;
+  }();
+  std::string identity(action.identity);
+  std::array<unsigned char, 32> digest{};
+  if (BCryptHash(BCRYPT_HMAC_SHA256_ALG_HANDLE, secret.data(), static_cast<ULONG>(secret.size()),
+                 reinterpret_cast<PUCHAR>(identity.data()), static_cast<ULONG>(identity.size()),
+                 digest.data(), static_cast<ULONG>(digest.size())) < 0) {
+    Fail(kErrorInternal, "Could not identify the accessibility action.");
+  }
+  constexpr char hex[] = "0123456789abcdef";
+  std::string key;
+  for (std::size_t index = 0; index < 16; ++index) {
+    key += hex[digest[index] >> 4];
+    key += hex[digest[index] & 15];
+  }
+  return key;
+}
+
+std::vector<std::string> ActionNames(const ElementSnapshot& snapshot) {
+  std::vector<std::string> names;
+  for (const auto& action : kAccessibilityActions) {
+    if (snapshot.*(action.available)) {
+      names.emplace_back(action.name);
+    }
+  }
+  return names;
+}
+
+[[noreturn]] void ActionChanged() {
+  throw HelperError(kErrorNotInteractable, "The element no longer publishes exactly one matching action.", "action-changed");
 }
 
 template <typename Fn>
-HRESULT BoundedCall(Fn&& call, std::string_view operation, std::string code) {
-  bool completed = false;
-  const HRESULT result = RunBounded(std::function<HRESULT()>(std::forward<Fn>(call)), kMutationTimeoutMs, completed);
-  if (!completed) {
-    Fail(std::move(code),
-         std::string(operation) + " did not complete within " + std::to_string(kMutationTimeoutMs) + " ms.");
-  }
+HRESULT BoundedMutation(Fn&& call, std::string_view operation) {
+  return RunBoundedProviderCall(ProviderCall::Mutation, std::function<HRESULT()>(std::forward<Fn>(call)),
+                                kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
+}
+
+// A primary mutation, recorded in the command's effect ledger: a refusal before
+// dispatch leaves no effect, and a call that never returns stays unresolved.
+template <typename Fn>
+HRESULT CountedMutation(Fn&& call, std::string_view operation) {
+  RequireMutationsAllowed();
+  RecordDispatching();
+  const HRESULT result = BoundedMutation(std::forward<Fn>(call), operation);
+  RecordSettled(result);
   return result;
+}
+
+template <typename Pattern>
+void PerformPatternAction(IUIAutomationElement* element, PATTERNID patternId, HRESULT (STDMETHODCALLTYPE Pattern::*method)(),
+                          const CancellationToken& token) {
+  winrt::com_ptr<Pattern> pattern;
+  const HRESULT query = element->GetCurrentPatternAs(patternId, IID_PPV_ARGS(pattern.put()));
+  if (query == UIA_E_ELEMENTNOTAVAILABLE) {
+    Fail(kErrorStaleElement, "The element is no longer available.");
+  }
+  if (query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL || query == E_FAIL ||
+      (SUCCEEDED(query) && !pattern)) {
+    ActionChanged();
+  }
+  CheckHresult(kErrorAutomationFailed, "Reading the accessibility action pattern", query);
+  token.ThrowIfCancelled();
+  const HRESULT result = CountedMutation([pattern, method]() { return (pattern.get()->*method)(); },
+                                         "Performing the accessibility action");
+  if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+    Fail(kErrorStaleElement, "The element is no longer available.");
+  }
+  CheckHresult(result == UIA_E_ELEMENTNOTENABLED ? kErrorNotInteractable : kErrorAutomationFailed,
+               "Performing the accessibility action", result);
+}
+
+template <typename Fn>
+HRESULT BoundedRead(Fn&& call, std::string_view operation) {
+  return RunBoundedProviderCall(ProviderCall::Read, std::function<HRESULT()>(std::forward<Fn>(call)),
+                                kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
+}
+
+// UI Automation reports a disabled element, such as a control of an owner window
+// while its modal dialog is open, as a failed pattern call. That is the element
+// refusing interaction, not an automation fault.
+void CheckClickResult(std::string_view operation, HRESULT result) {
+  CheckHresult(result == UIA_E_ELEMENTNOTENABLED ? kErrorNotInteractable : kErrorAutomationFailed, operation, result);
 }
 
 // Small RAII wrapper so every cached property read clears its VARIANT.
@@ -135,6 +206,45 @@ std::string VariantString(const VARIANT& value) {
   return BstrToUtf8(value.bstrVal);
 }
 
+std::string TakeBstr(BSTR value) {
+  const std::string text = BstrToUtf8(value);
+  SysFreeString(value);
+  return text;
+}
+
+// The cached form reads what the element's cache request already fetched; the
+// live form asks the provider, for ancestors that were never cached.
+ElementFingerprint ReadFingerprint(IUIAutomationElement* element, bool cached) {
+  ElementFingerprint fingerprint;
+  int processId = 0;
+  if (SUCCEEDED(cached ? element->get_CachedProcessId(&processId) : element->get_CurrentProcessId(&processId)) &&
+      processId > 0) {
+    fingerprint.processId = static_cast<DWORD>(processId);
+  }
+  CONTROLTYPEID controlType = 0;
+  if (SUCCEEDED(cached ? element->get_CachedControlType(&controlType) : element->get_CurrentControlType(&controlType))) {
+    fingerprint.controlType = controlType;
+  }
+  BSTR automationId = nullptr;
+  if (SUCCEEDED(cached ? element->get_CachedAutomationId(&automationId)
+                       : element->get_CurrentAutomationId(&automationId))) {
+    fingerprint.automationId = TakeBstr(automationId);
+  }
+  BSTR className = nullptr;
+  if (SUCCEEDED(cached ? element->get_CachedClassName(&className) : element->get_CurrentClassName(&className))) {
+    fingerprint.className = TakeBstr(className);
+  }
+  return fingerprint;
+}
+
+ElementFingerprint FingerprintFromCache(IUIAutomationElement* element) {
+  return ReadFingerprint(element, true);
+}
+
+ElementFingerprint FingerprintLive(IUIAutomationElement* element) {
+  return ReadFingerprint(element, false);
+}
+
 std::string EscapeXml(std::string_view value) {
   std::string output;
   output.reserve(value.size());
@@ -166,45 +276,6 @@ std::string EscapeXml(std::string_view value) {
     }
   }
   return output;
-}
-
-json::Value SerializeSupported(const SupportedBool& state) {
-  json::Value value = json::Value::Object();
-  if (state.supported) {
-    value.Set("supported", json::Value::Bool(true));
-    value.Set("value", json::Value::Bool(state.value));
-  } else {
-    value.Set("supported", json::Value::Bool(false));
-    value.Set("reason", json::Value::String(state.reason));
-  }
-  return value;
-}
-
-json::Value SerializeSupported(const SupportedString& state) {
-  json::Value value = json::Value::Object();
-  value.Set("supported", json::Value::Bool(state.supported));
-  if (state.supported) {
-    value.Set("value", json::Value::String(state.value));
-  } else {
-    value.Set("reason", json::Value::String(state.reason));
-  }
-  return value;
-}
-
-json::Value SerializeChecked(const SupportedChecked& state) {
-  json::Value value = json::Value::Object();
-  if (!state.supported) {
-    value.Set("supported", json::Value::Bool(false));
-    value.Set("reason", json::Value::String(state.reason));
-    return value;
-  }
-  value.Set("supported", json::Value::Bool(true));
-  if (state.value == CheckedValue::Mixed) {
-    value.Set("value", json::Value::String(std::string("mixed")));
-  } else {
-    value.Set("value", json::Value::Bool(state.value == CheckedValue::True));
-  }
-  return value;
 }
 
 SupportedBool Unsupported(std::string reason) {
@@ -337,6 +408,8 @@ void Automation::Initialize() {
                automation->get_RawViewCondition(rawViewCondition_.put()));
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation raw walker",
                automation->get_RawViewWalker(rawWalker_.put()));
+  CheckHresult(kErrorAutomationFailed, "Reading the UI Automation control walker",
+               automation->get_ControlViewWalker(controlWalker_.put()));
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation not-supported sentinel",
                UiaGetReservedNotSupportedValue(notSupportedValue_.put()));
   automation_ = automation;
@@ -374,6 +447,7 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_IsControlElementPropertyId,
       UIA_NativeWindowHandlePropertyId,
       UIA_ProcessIdPropertyId,
+      UIA_ClassNamePropertyId,
       UIA_ValueValuePropertyId,
       UIA_ValueIsReadOnlyPropertyId,
       UIA_LegacyIAccessibleStatePropertyId,
@@ -386,7 +460,9 @@ winrt::com_ptr<IUIAutomationCacheRequest> Automation::CreateCacheRequest(TreeSco
       UIA_IsTogglePatternAvailablePropertyId,
       UIA_IsSelectionItemPatternAvailablePropertyId,
       UIA_IsExpandCollapsePatternAvailablePropertyId,
+      UIA_IsScrollItemPatternAvailablePropertyId,
       UIA_IsValuePatternAvailablePropertyId,
+      UIA_IsPasswordPropertyId,
   };
   for (const PROPERTYID property : properties) {
     CheckHresult(kErrorAutomationFailed, "Adding a cached UI Automation property", request->AddProperty(property));
@@ -406,7 +482,9 @@ winrt::com_ptr<IUIAutomationElement> Automation::RootForWindow(HWND window) cons
   winrt::com_ptr<IUIAutomationElement> element;
   const HRESULT result = automation_->ElementFromHandle(window, element.put());
   if (FAILED(result) || !element) {
-    FailHresult(kErrorNoSuchWindow, "Reading the window automation element", result);
+    // A window that still exists but cannot be read is busy or unresponsive, not gone.
+    FailHresult(IsWindow(window) != FALSE ? kErrorAutomationFailed : kErrorNoSuchWindow,
+                "Reading the window automation element", result);
   }
   return element;
 }
@@ -462,37 +540,45 @@ std::wstring Automation::RuntimeKeyLive(IUIAutomationElement* element) const {
 
 std::string Automation::RegisterElement(IUIAutomationElement* element, const std::wstring& runtimeKey,
                                         const std::string& windowId, HWND window, const std::string& parentId,
-                                        ElementScope scope) {
-  std::string id;
-  if (!runtimeKey.empty()) {
-    const auto existing = idsByRuntimeKey_.find(runtimeKey);
-    if (existing != idsByRuntimeKey_.end()) {
-      id = existing->second;
-    }
-  }
-  if (id.empty()) {
-    id = NextIdentifier("element");
-    if (!runtimeKey.empty()) {
-      idsByRuntimeKey_.emplace(runtimeKey, id);
-    }
-  }
-  ElementRecord& record = recordsById_[id];
-  record.id = id;
-  record.element = nullptr;
-  record.element.copy_from(element);
-  record.windowId = windowId;
-  record.window = window;
-  record.parentId = parentId;
-  record.scope = scope;
-  return id;
+                                        ElementScope scope, std::uint64_t generation) {
+  ElementRecord candidate;
+  candidate.element.copy_from(element);
+  candidate.windowId = windowId;
+  candidate.window = window;
+  candidate.parentId = parentId;
+  candidate.scope = scope;
+  candidate.fingerprint = FingerprintFromCache(element);
+  candidate.runtimeKey = runtimeKey;
+  return registry_.Register(std::move(candidate), generation);
 }
 
-const ElementRecord& Automation::RequireRecord(const std::string& elementId) const {
-  const auto record = recordsById_.find(elementId);
-  if (record == recordsById_.end()) {
-    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer tracked by the native helper.");
+ElementRecord Automation::RequireRecord(const std::string& elementId) {
+  return registry_.Require(elementId);
+}
+
+ElementRecord Automation::RefreshElement(const std::string& elementId,
+                                         winrt::com_ptr<IUIAutomationElement>& refreshed) {
+  ElementRecord record = registry_.Require(elementId);
+  const HRESULT result =
+      record.element->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, true).get(), refreshed.put());
+  if (result == UIA_E_ELEMENTNOTAVAILABLE || (SUCCEEDED(result) && !refreshed)) {
+    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
   }
-  return record->second;
+  CheckHresult(kErrorAutomationFailed, "Refreshing the cached element", result);
+
+  // A refresh can succeed against a different element: a destroyed window's
+  // handle that was reused still resolves. A known property that disagrees
+  // means the id no longer addresses what it was issued for.
+  const ElementFingerprint observed = FingerprintFromCache(refreshed.get());
+  if (FingerprintsConflict(record.fingerprint, observed)) {
+    registry_.Erase(elementId);
+    Fail(kErrorStaleElement,
+         "Element \"" + elementId +
+             "\" now reports a different process, control type, automation id, or class, so a different element has "
+             "reused its native identity.");
+  }
+  registry_.Refresh(elementId, refreshed, observed);
+  return record;
 }
 
 ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const std::string& windowId,
@@ -570,6 +656,7 @@ ElementSnapshot Automation::ReadSnapshot(IUIAutomationElement* element, const st
   snapshot.togglePattern = patternAvailable(UIA_IsTogglePatternAvailablePropertyId);
   snapshot.selectionItemPattern = patternAvailable(UIA_IsSelectionItemPatternAvailablePropertyId);
   snapshot.expandCollapsePattern = patternAvailable(UIA_IsExpandCollapsePatternAvailablePropertyId);
+  snapshot.scrollItemPattern = patternAvailable(UIA_IsScrollItemPatternAvailablePropertyId);
   snapshot.valuePattern = patternAvailable(UIA_IsValuePatternAvailablePropertyId);
   if (snapshot.role == "group" && snapshot.valuePattern && snapshot.keyboardFocusable) {
     snapshot.role = "textbox";
@@ -675,6 +762,13 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   winrt::com_ptr<IUIAutomationElement> cachedRoot;
   HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
                                            cachedRoot.put());
+  // The whole-subtree cache is one provider transaction, so a tree past the node limit can outlast the transaction
+  // timeout before the walk below gets to refuse it. Count such a tree child by child so it is still refused as too
+  // large rather than reported as a provider failure or retried.
+  if (FAILED(result) && result != UIA_E_ELEMENTNOTAVAILABLE &&
+      SubtreeExceeds(root, kMaximumTreeNodes, controlViewOnly, token)) {
+    Fail(kErrorTreeTooLarge, kTreeTooLargeMessage);
+  }
   // A descendant can disappear while its subtree is cached, for example when an owned popup island closes; a closing
   // island's provider can also report a timeout or unspecified failure. Retry while the root itself remains
   // available; only an unavailable root is a stale element.
@@ -698,6 +792,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
 
   const WindowMetrics metrics = MeasureWindow(context.window);
   const std::string storyRootTestId = ToUtf8(context.storyRootTestId);
+  const std::uint64_t generation = registry_.BeginObservation();
   std::vector<PendingNode> stack;
   stack.push_back(PendingNode{cachedRoot, rootParentId, rootScope});
 
@@ -705,7 +800,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   std::size_t visited = 0;
   while (!stack.empty()) {
     if (visited >= kMaximumTreeNodes) {
-      Fail(kErrorTreeTooLarge, "The native accessibility tree exceeds the 5000-node limit.");
+      Fail(kErrorTreeTooLarge, kTreeTooLargeMessage);
     }
     if ((visited % 64) == 0) {
       token.ThrowIfCancelled();
@@ -716,8 +811,8 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
 
     ElementScope scope = node.scope;
     const std::wstring runtimeKey = RuntimeKeyFromCache(node.element.get());
-    const std::string id =
-        RegisterElement(node.element.get(), runtimeKey, context.windowId, context.window, node.parentId, scope);
+    const std::string id = RegisterElement(node.element.get(), runtimeKey, context.windowId, context.window,
+                                           node.parentId, scope, generation);
     ElementSnapshot snapshot = ReadSnapshot(node.element.get(), context.windowId, node.parentId, scope, id);
 
     ElementScope childScope = scope;
@@ -726,7 +821,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
       scope = ElementScope::Preview;
       childScope = ElementScope::Preview;
       snapshot.scope = ElementScope::Preview;
-      recordsById_[id].scope = ElementScope::Preview;
+      registry_.SetScope(id, ElementScope::Preview);
     } else if (context.primary && scope == ElementScope::Application) {
       childScope = ElementScope::Chrome;
     }
@@ -750,6 +845,41 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   return snapshots;
 }
 
+bool Automation::SubtreeExceeds(IUIAutomationElement* root, std::size_t limit, bool controlViewOnly,
+                                const CancellationToken& token) const {
+  // Uses the walker that matches the cache request's tree filter, so it counts the nodes the cached walk would visit.
+  IUIAutomationTreeWalker* walker = controlViewOnly ? controlWalker_.get() : rawWalker_.get();
+  std::vector<winrt::com_ptr<IUIAutomationElement>> parents;
+  winrt::com_ptr<IUIAutomationElement> first;
+  first.copy_from(root);
+  parents.push_back(std::move(first));
+  std::size_t counted = 1;
+  while (!parents.empty()) {
+    const winrt::com_ptr<IUIAutomationElement> parent = std::move(parents.back());
+    parents.pop_back();
+    token.ThrowIfCancelled();
+    winrt::com_ptr<IUIAutomationElement> child;
+    if (FAILED(walker->GetFirstChildElement(parent.get(), child.put()))) {
+      return false;
+    }
+    while (child) {
+      // Counting each child as it is found bounds the provider calls by the limit, even for one very wide level.
+      counted += 1;
+      if (counted > limit) {
+        return true;
+      }
+      token.ThrowIfCancelled();
+      winrt::com_ptr<IUIAutomationElement> next;
+      if (FAILED(walker->GetNextSiblingElement(child.get(), next.put()))) {
+        return false;
+      }
+      parents.push_back(std::move(child));
+      child = std::move(next);
+    }
+  }
+  return false;
+}
+
 std::vector<ElementSnapshot> Automation::SnapshotWindowTree(const WindowContext& context,
                                                             const CancellationToken& token) {
   Initialize();
@@ -769,8 +899,9 @@ std::vector<ElementSnapshot> Automation::Find(const WindowContext& context, cons
   std::string rootParentId;
   ElementScope rootScope = context.primary ? ElementScope::Application : ElementScope::SecondaryWindow;
   if (!rootElementId.empty()) {
-    const ElementRecord& record = RequireRecord(rootElementId);
-    searchRoot = record.element;
+    // The search must stay beneath the element the id was issued for, so a
+    // replaced or vanished root fails here instead of searching its successor.
+    const ElementRecord record = RefreshElement(rootElementId, searchRoot);
     rootId = record.id;
     rootParentId = record.parentId;
     rootScope = record.scope;
@@ -801,30 +932,199 @@ std::vector<ElementSnapshot> Automation::Find(const WindowContext& context, cons
   return matches;
 }
 
+// Feeds SampleObservation from UI Automation. Every element it hands out came
+// from a control-view walker call that cached the snapshot properties, so a
+// read never calls the provider; only paging does.
+class UiaObservationSource final : public ObservationSource {
+ public:
+  UiaObservationSource(Automation& automation, const WindowContext& context,
+                       winrt::com_ptr<IUIAutomationElement> root, std::optional<std::string> rootId)
+      : automation_(automation),
+        context_(context),
+        storyRootTestId_(ToUtf8(context.storyRootTestId)),
+        rootId_(std::move(rootId)),
+        metrics_(MeasureWindow(context.window)),
+        cacheRequest_(automation.CreateCacheRequest(TreeScope_Element, true)),
+        generation_(automation.registry_.BeginObservation()) {
+    elements_.push_back(std::move(root));
+  }
+
+  std::vector<ObserveFact> UnsupportedFacts() const override {
+    return {};
+  }
+
+  ObservedFacts Read(ObservationHandle handle) override {
+    IUIAutomationElement* element = elements_.at(handle).get();
+    const ElementSnapshot snapshot = automation_.ReadSnapshot(element, context_.windowId, {}, ElementScope::Chrome, {});
+    ObservedFacts facts;
+    facts.role = snapshot.role;
+    facts.name = snapshot.name;
+    facts.automationId = snapshot.automationId;
+    facts.actions = ActionNames(snapshot);
+    Variant password;
+    facts.secure = SUCCEEDED(element->GetCachedPropertyValueEx(UIA_IsPasswordPropertyId, TRUE, password.put())) &&
+                   password.type() == VT_BOOL && password.get().boolVal != VARIANT_FALSE;
+    facts.checked = snapshot.checked;
+    facts.enabled = snapshot.enabled;
+    facts.expanded = snapshot.expanded;
+    facts.focused = snapshot.focused;
+    facts.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics_);
+    facts.helpText = snapshot.helpText;
+    facts.required = snapshot.required;
+    facts.selected = snapshot.selected;
+    if (snapshot.hasText) {
+      facts.text = snapshot.text;
+    }
+    if (snapshot.hasValue) {
+      facts.value = snapshot.value;
+    }
+    facts.visible = snapshot.visible;
+    return facts;
+  }
+
+  std::unique_ptr<ObservationChildCursor> Children(ObservationHandle handle) override {
+    return std::make_unique<Cursor>(*this, elements_.at(handle));
+  }
+
+  std::wstring Key(ObservationHandle handle) const override {
+    return automation_.RuntimeKeyFromCache(elements_.at(handle).get());
+  }
+
+  // The scopes a tree walk assigns: the story root and everything beneath it
+  // are the preview; the primary window's descendants are its chrome.
+  ObservedScopes Scopes(ElementScope inherited, const ObservedFacts& facts) const override {
+    if (context_.primary && inherited != ElementScope::Preview && !storyRootTestId_.empty() &&
+        facts.automationId == storyRootTestId_) {
+      return {ElementScope::Preview, ElementScope::Preview};
+    }
+    if (context_.primary && inherited == ElementScope::Application) {
+      return {ElementScope::Application, ElementScope::Chrome};
+    }
+    return {inherited, inherited};
+  }
+
+  std::optional<std::string> Identify(ObservationHandle handle, const std::string& parentId,
+                                      ElementScope scope) override {
+    ElementRegistry& registry = automation_.registry_;
+    if (handle == 0 && rootId_) {
+      // A requested root keeps the id it was requested by, even when its
+      // provider reports no runtime identity.
+      if (!registry.Pin(*rootId_, generation_)) {
+        Fail(kErrorStaleElement, "Element \"" + *rootId_ + "\" is no longer available.");
+      }
+      registry.SetScope(*rootId_, scope);
+      return rootId_;
+    }
+    IUIAutomationElement* element = elements_.at(handle).get();
+    ElementRecord candidate;
+    candidate.element.copy_from(element);
+    candidate.windowId = context_.windowId;
+    candidate.window = context_.window;
+    candidate.parentId = parentId;
+    candidate.scope = scope;
+    candidate.fingerprint = FingerprintFromCache(element);
+    candidate.runtimeKey = automation_.RuntimeKeyFromCache(element);
+    return registry.RegisterPinned(std::move(candidate), generation_);
+  }
+
+ private:
+  class Cursor final : public ObservationChildCursor {
+   public:
+    Cursor(UiaObservationSource& source, winrt::com_ptr<IUIAutomationElement> parent)
+        : source_(source), parent_(std::move(parent)) {}
+
+    std::optional<ObservationHandle> Next() override {
+      if (done_) {
+        return std::nullopt;
+      }
+      IUIAutomationTreeWalker* walker = source_.automation_.controlWalker_.get();
+      IUIAutomationCacheRequest* cache = source_.cacheRequest_.get();
+      winrt::com_ptr<IUIAutomationElement> next;
+      const HRESULT result = current_ ? walker->GetNextSiblingElementBuildCache(current_.get(), cache, next.put())
+                                      : walker->GetFirstChildElementBuildCache(parent_.get(), cache, next.put());
+      if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+        done_ = true;
+        Fail(kErrorStaleElement, "The element whose children were being read is no longer available.");
+      }
+      if (FAILED(result)) {
+        done_ = true;
+        FailHresult(kErrorAutomationFailed, "Reading the next control-view child", result);
+      }
+      if (!next) {
+        done_ = true;
+        return std::nullopt;
+      }
+      current_ = next;
+      source_.elements_.push_back(std::move(next));
+      return source_.elements_.size() - 1;
+    }
+
+   private:
+    UiaObservationSource& source_;
+    winrt::com_ptr<IUIAutomationElement> parent_;
+    winrt::com_ptr<IUIAutomationElement> current_;
+    bool done_{false};
+  };
+
+  Automation& automation_;
+  const WindowContext& context_;
+  std::string storyRootTestId_;
+  std::optional<std::string> rootId_;
+  WindowMetrics metrics_;
+  winrt::com_ptr<IUIAutomationCacheRequest> cacheRequest_;
+  std::uint64_t generation_;
+  std::vector<winrt::com_ptr<IUIAutomationElement>> elements_;
+};
+
+ObservedSample Automation::Observe(const WindowContext& context, const ObserveRequest& request,
+                                   const CancellationToken& token) {
+  const std::int64_t startedAt = SteadyMilliseconds();
+  Initialize();
+  token.ThrowIfCancelled();
+
+  ObservationRoot root;
+  winrt::com_ptr<IUIAutomationElement> rootElement;
+  if (request.rootId) {
+    const ElementRecord known = registry_.Require(*request.rootId);
+    if (known.windowId != context.windowId) {
+      Fail(kErrorStaleElement, "Element \"" + *request.rootId + "\" does not belong to window \"" + context.windowId +
+                                   "\".");
+    }
+    const ElementRecord record = RefreshElement(*request.rootId, rootElement);
+    root.parentId = record.parentId;
+    root.scope = record.scope;
+  } else {
+    const winrt::com_ptr<IUIAutomationElement> window = RootForWindow(context.window);
+    const HRESULT result =
+        window->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, true).get(), rootElement.put());
+    if (FAILED(result) || !rootElement) {
+      FailHresult(IsWindow(context.window) != FALSE ? kErrorAutomationFailed : kErrorNoSuchWindow,
+                  "Reading the window automation element", result);
+    }
+    root.scope = context.primary ? ElementScope::Application : ElementScope::SecondaryWindow;
+  }
+
+  UiaObservationSource source(*this, context, std::move(rootElement), request.rootId);
+  return SampleObservation(source, root, request, token, SteadyMilliseconds, startedAt);
+}
+
+std::size_t Automation::ReleaseElements(const std::vector<std::string>& ids) {
+  return registry_.Release(ids);
+}
+
 ElementSnapshot Automation::SnapshotElement(const std::string& elementId, const CancellationToken& token) {
   Initialize();
   token.ThrowIfCancelled();
-  const ElementRecord& record = RequireRecord(elementId);
-  const std::string windowId = record.windowId;
-  const std::string parentId = record.parentId;
-  const ElementScope scope = record.scope;
-  HWND window = record.window;
   winrt::com_ptr<IUIAutomationElement> refreshed;
-  const HRESULT result =
-      record.element->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, true).get(), refreshed.put());
-  if (result == UIA_E_ELEMENTNOTAVAILABLE || (SUCCEEDED(result) && !refreshed)) {
-    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
-  }
-  CheckHresult(kErrorAutomationFailed, "Refreshing the cached element", result);
-
+  const ElementRecord record = RefreshElement(elementId, refreshed);
+  HWND window = record.window;
   if (window == nullptr || IsWindow(window) == FALSE) {
     UIA_HWND nativeWindow = nullptr;
     if (SUCCEEDED(refreshed->get_CachedNativeWindowHandle(&nativeWindow))) {
       window = static_cast<HWND>(nativeWindow);
     }
   }
-  ElementSnapshot snapshot = ReadSnapshot(refreshed.get(), windowId, parentId, scope, elementId);
-  recordsById_[elementId].element = refreshed;
+  ElementSnapshot snapshot = ReadSnapshot(refreshed.get(), record.windowId, record.parentId, record.scope, elementId);
 
   const WindowMetrics metrics = MeasureWindow(window);
   snapshot.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics);
@@ -861,23 +1161,51 @@ std::optional<ElementSnapshot> Automation::ActiveElement(const WindowContext& co
   const std::wstring runtimeKey = RuntimeKeyLive(focused.get());
   std::string parentId;
   ElementScope scope = context.primary ? ElementScope::Chrome : ElementScope::SecondaryWindow;
-  if (!runtimeKey.empty()) {
-    const auto existing = idsByRuntimeKey_.find(runtimeKey);
-    if (existing != idsByRuntimeKey_.end()) {
-      const auto record = recordsById_.find(existing->second);
-      if (record != recordsById_.end()) {
-        parentId = record->second.parentId;
-        scope = record->second.scope;
-      }
-    }
+  // The element inherits what is already known about it only while the known
+  // record is plausibly the same element.
+  if (const ElementRecord* known = registry_.FindByRuntimeKey(runtimeKey);
+      known != nullptr && !FingerprintsConflict(known->fingerprint, FingerprintFromCache(focused.get()))) {
+    parentId = known->parentId;
+    scope = known->scope;
   }
-  const std::string id =
-      RegisterElement(focused.get(), runtimeKey, context.windowId, context.window, parentId, scope);
+  const std::string id = RegisterElement(focused.get(), runtimeKey, context.windowId, context.window, parentId, scope,
+                                         registry_.BeginObservation());
   ElementSnapshot snapshot = ReadSnapshot(focused.get(), context.windowId, parentId, scope, id);
   const WindowMetrics metrics = MeasureWindow(context.window);
   snapshot.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics);
   return snapshot;
 }
+
+namespace {
+
+// A hit outside the target's process is described as an opaque external window
+// and never registered, so no foreign element enters the registry under a window
+// it does not belong to.
+ElementSnapshot ExternalWindowSnapshot(const WindowContext& context, const std::optional<RECT>& bounds) {
+  ElementSnapshot intercepted;
+  intercepted.id = NextIdentifier("external-window");
+  intercepted.windowId = context.windowId;
+  intercepted.scope = ElementScope::Application;
+  intercepted.role = "window";
+  intercepted.name = "External desktop window";
+  intercepted.enabled.supported = true;
+  intercepted.enabled.value = true;
+  intercepted.focused.supported = true;
+  intercepted.focused.value = false;
+  intercepted.visible.supported = true;
+  intercepted.visible.value = true;
+  intercepted.checked.supported = false;
+  intercepted.checked.reason = "An external desktop window does not expose checked state.";
+  intercepted.selected = Unsupported("An external desktop window does not expose selected state.");
+  intercepted.expanded = Unsupported("An external desktop window does not expose expanded state.");
+  if (bounds) {
+    intercepted.physicalRect = *bounds;
+    intercepted.rect = PhysicalRectToClientDips(*bounds, MeasureWindow(context.window));
+  }
+  return intercepted;
+}
+
+}  // namespace
 
 std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context, POINT screenPoint,
                                                    const CancellationToken& token) {
@@ -886,33 +1214,17 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
   DWORD targetProcessId = 0;
   GetWindowThreadProcessId(context.window, &targetProcessId);
   const HWND pointWindow = WindowFromPoint(screenPoint);
-  DWORD pointProcessId = 0;
-  if (pointWindow != nullptr) {
-    GetWindowThreadProcessId(pointWindow, &pointProcessId);
+  if (pointWindow == nullptr) {
+    // No window exists at the point, for example beyond every monitor, where
+    // UI Automation would answer with the desktop root.
+    return std::nullopt;
   }
+  DWORD pointProcessId = 0;
+  GetWindowThreadProcessId(pointWindow, &pointProcessId);
   if (pointProcessId != 0 && targetProcessId != 0 && pointProcessId != targetProcessId) {
-    ElementSnapshot intercepted;
-    intercepted.id = NextIdentifier("external-window");
-    intercepted.windowId = context.windowId;
-    intercepted.scope = ElementScope::Application;
-    intercepted.role = "window";
-    intercepted.name = "External desktop window";
-    intercepted.enabled.supported = true;
-    intercepted.enabled.value = true;
-    intercepted.focused.supported = true;
-    intercepted.focused.value = false;
-    intercepted.visible.supported = true;
-    intercepted.visible.value = true;
-    intercepted.checked.supported = false;
-    intercepted.checked.reason = "An external desktop window does not expose checked state.";
-    intercepted.selected = Unsupported("An external desktop window does not expose selected state.");
-    intercepted.expanded = Unsupported("An external desktop window does not expose expanded state.");
     RECT bounds{};
-    if (GetWindowRect(GetAncestor(pointWindow, GA_ROOT), &bounds) != FALSE) {
-      intercepted.physicalRect = bounds;
-      intercepted.rect = PhysicalRectToClientDips(bounds, MeasureWindow(context.window));
-    }
-    return intercepted;
+    const bool measured = GetWindowRect(GetAncestor(pointWindow, GA_ROOT), &bounds) != FALSE;
+    return ExternalWindowSnapshot(context, measured ? std::optional<RECT>(bounds) : std::nullopt);
   }
   winrt::com_ptr<IUIAutomationElement> hit;
   const HRESULT result =
@@ -920,6 +1232,15 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
                                               hit.put());
   if (FAILED(result) || !hit) {
     return std::nullopt;
+  }
+  // UI Automation can answer with an element of another process even when the
+  // window under the point belongs to the target, for example an overlay with
+  // its own provider.
+  const DWORD hitProcessId = FingerprintFromCache(hit.get()).processId;
+  if (hitProcessId != 0 && targetProcessId != 0 && hitProcessId != targetProcessId) {
+    RECT bounds{};
+    const bool measured = SUCCEEDED(hit->get_CachedBoundingRectangle(&bounds));
+    return ExternalWindowSnapshot(context, measured ? std::optional<RECT>(bounds) : std::nullopt);
   }
 
   // The point belongs to the deepest identity the client already knows about:
@@ -933,18 +1254,13 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
   for (std::size_t depth = 0; depth < kMaximumAncestorWalk && cursor; depth += 1) {
     token.ThrowIfCancelled();
     const std::wstring key = RuntimeKeyLive(cursor.get());
-    if (!key.empty()) {
-      const auto existing = idsByRuntimeKey_.find(key);
-      if (existing != idsByRuntimeKey_.end()) {
-        const auto record = recordsById_.find(existing->second);
-        if (record != recordsById_.end()) {
-          resolved = cursor;
-          resolvedId = existing->second;
-          parentId = record->second.parentId;
-          scope = record->second.scope;
-          break;
-        }
-      }
+    if (const ElementRecord* known = registry_.FindByRuntimeKey(key);
+        known != nullptr && !FingerprintsConflict(known->fingerprint, FingerprintLive(cursor.get()))) {
+      resolved = cursor;
+      resolvedId = known->id;
+      parentId = known->parentId;
+      scope = known->scope;
+      break;
     }
     const winrt::com_ptr<IUIAutomationElement> parent = ParentOf(cursor.get());
     if (!parent) {
@@ -960,11 +1276,13 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
     return std::nullopt;
   }
   const std::wstring runtimeKey = RuntimeKeyFromCache(cached.get());
-  const std::string id =
-      resolvedId.empty()
-          ? RegisterElement(cached.get(), runtimeKey, context.windowId, context.window, parentId, scope)
-          : resolvedId;
-  recordsById_[id].element = cached;
+  std::string id = resolvedId;
+  if (id.empty()) {
+    id = RegisterElement(cached.get(), runtimeKey, context.windowId, context.window, parentId, scope,
+                         registry_.BeginObservation());
+  } else {
+    registry_.Refresh(id, cached, FingerprintFromCache(cached.get()));
+  }
   ElementSnapshot snapshot = ReadSnapshot(cached.get(), context.windowId, parentId, scope, id);
   const WindowMetrics metrics = MeasureWindow(context.window);
   snapshot.rect = PhysicalRectToClientDips(snapshot.physicalRect, metrics);
@@ -974,8 +1292,7 @@ std::optional<ElementSnapshot> Automation::HitTest(const WindowContext& context,
 void Automation::SetFocus(const std::string& elementId) {
   const ElementRecord& record = RequireRecord(elementId);
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
-  const HRESULT result =
-      BoundedCall([element]() { return element->SetFocus(); }, "Focusing the element", kErrorAutomationFailed);
+  const HRESULT result = BoundedMutation([element]() { return element->SetFocus(); }, "Focusing the element");
   if (result == UIA_E_ELEMENTNOTAVAILABLE) {
     Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
   }
@@ -988,8 +1305,8 @@ bool Automation::HasKeyboardFocus(const std::string& elementId) {
   const ElementRecord& record = RequireRecord(elementId);
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
   const auto focused = std::make_shared<BOOL>(FALSE);
-  const HRESULT result = BoundedCall([element, focused]() { return element->get_CurrentHasKeyboardFocus(focused.get()); },
-                                     "Reading the element focus state", kErrorAutomationFailed);
+  const HRESULT result = BoundedRead([element, focused]() { return element->get_CurrentHasKeyboardFocus(focused.get()); },
+                                     "Reading the element focus state");
   return SUCCEEDED(result) && *focused != FALSE;
 }
 
@@ -1000,50 +1317,109 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
 
   winrt::com_ptr<IUIAutomationInvokePattern> invoke;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_InvokePatternId, IID_PPV_ARGS(invoke.put()))) && invoke) {
-    CheckHresult(kErrorAutomationFailed, "Invoking the element",
-                 BoundedCall([invoke]() { return invoke->Invoke(); }, "Invoking the element", kErrorAutomationFailed));
+    CheckClickResult("Invoking the element",
+                     CountedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationTogglePattern> toggle;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_TogglePatternId, IID_PPV_ARGS(toggle.put()))) && toggle) {
-    CheckHresult(kErrorAutomationFailed, "Toggling the element",
-                 BoundedCall([toggle]() { return toggle->Toggle(); }, "Toggling the element", kErrorAutomationFailed));
+    CheckClickResult("Toggling the element",
+                     CountedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationSelectionItemPattern> selection;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_SelectionItemPatternId, IID_PPV_ARGS(selection.put()))) &&
       selection) {
-    CheckHresult(
-        kErrorAutomationFailed, "Selecting the element",
-        BoundedCall([selection]() { return selection->Select(); }, "Selecting the element", kErrorAutomationFailed));
+    CheckClickResult("Selecting the element",
+                     CountedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_ExpandCollapsePatternId, IID_PPV_ARGS(expand.put()))) && expand) {
     const auto state = std::make_shared<ExpandCollapseState>(ExpandCollapseState_Collapsed);
     CheckHresult(kErrorAutomationFailed, "Reading the expand state",
-                 BoundedCall([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
-                             "Reading the expand state", kErrorAutomationFailed));
+                 BoundedRead([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
+                             "Reading the expand state"));
     if (*state == ExpandCollapseState_LeafNode) {
       Fail(kErrorUnsupported, "The element is a leaf node and cannot be activated through accessibility.");
     }
     const bool collapse = *state == ExpandCollapseState_Expanded;
-    CheckHresult(kErrorAutomationFailed, "Expanding or collapsing the element",
-                 BoundedCall([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
-                             "Expanding or collapsing the element", kErrorAutomationFailed));
+    CheckClickResult("Expanding or collapsing the element",
+                     CountedMutation([expand, collapse]() { return collapse ? expand->Collapse() : expand->Expand(); },
+                                     "Expanding or collapsing the element"));
     return;
   }
   winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy;
   if (SUCCEEDED(element->GetCurrentPatternAs(UIA_LegacyIAccessiblePatternId, IID_PPV_ARGS(legacy.put()))) && legacy) {
-    CheckHresult(
-        kErrorAutomationFailed, "Invoking the legacy accessibility default action",
-        BoundedCall([legacy]() { return legacy->DoDefaultAction(); }, "Invoking the legacy accessibility default action",
-                    kErrorAutomationFailed));
+    CheckClickResult("Invoking the legacy accessibility default action",
+                     CountedMutation([legacy]() { return legacy->DoDefaultAction(); },
+                                     "Invoking the legacy accessibility default action"));
     return;
   }
   Fail(kErrorUnsupported,
        "The element does not implement an Invoke, Toggle, SelectionItem, ExpandCollapse, or LegacyIAccessible pattern, so an "
        "accessibility click is unavailable.");
+}
+
+json::Value Automation::AccessibilityActions(const std::string& elementId, const CancellationToken& token) {
+  const ElementSnapshot snapshot = SnapshotElement(elementId, token);
+  json::Value names = json::Value::Array();
+  json::Value keys = json::Value::Array();
+  for (const auto& action : kAccessibilityActions) {
+    if (snapshot.*(action.available)) {
+      names.Append(json::Value::String(std::string(action.name)));
+      keys.Append(json::Value::String(ActionKey(action)));
+    }
+  }
+  json::Value result = json::Value::Object();
+  result.Set("actions", std::move(names));
+  result.Set("keys", std::move(keys));
+  return result;
+}
+
+void Automation::PerformAccessibilityAction(const std::string& elementId, const std::string& key,
+                                            const CancellationToken& token) {
+  const ElementSnapshot snapshot = SnapshotElement(elementId, token);
+  std::optional<std::size_t> matched;
+  for (std::size_t index = 0; index < std::size(kAccessibilityActions); ++index) {
+    const auto& action = kAccessibilityActions[index];
+    if (snapshot.*(action.available) && ActionKey(action) == key) {
+      if (matched) {
+        ActionChanged();
+      }
+      matched = index;
+    }
+  }
+  if (!matched) {
+    ActionChanged();
+  }
+  const auto element = RequireRecord(elementId).element;
+  switch (*matched) {
+    case 0:
+      PerformPatternAction(element.get(), UIA_InvokePatternId, &IUIAutomationInvokePattern::Invoke, token);
+      break;
+    case 1:
+      PerformPatternAction(element.get(), UIA_TogglePatternId, &IUIAutomationTogglePattern::Toggle, token);
+      break;
+    case 2:
+      PerformPatternAction(element.get(), UIA_ExpandCollapsePatternId, &IUIAutomationExpandCollapsePattern::Expand, token);
+      break;
+    case 3:
+      PerformPatternAction(element.get(), UIA_ExpandCollapsePatternId, &IUIAutomationExpandCollapsePattern::Collapse, token);
+      break;
+    case 4:
+      PerformPatternAction(element.get(), UIA_SelectionItemPatternId, &IUIAutomationSelectionItemPattern::Select, token);
+      break;
+    case 5:
+      PerformPatternAction(element.get(), UIA_SelectionItemPatternId, &IUIAutomationSelectionItemPattern::AddToSelection, token);
+      break;
+    case 6:
+      PerformPatternAction(element.get(), UIA_SelectionItemPatternId, &IUIAutomationSelectionItemPattern::RemoveFromSelection, token);
+      break;
+    case 7:
+      PerformPatternAction(element.get(), UIA_ScrollItemPatternId, &IUIAutomationScrollItemPattern::ScrollIntoView, token);
+      break;
+  }
 }
 
 bool Automation::TryClearValue(const std::string& elementId) {
@@ -1053,38 +1429,28 @@ bool Automation::TryClearValue(const std::string& elementId) {
     return false;
   }
   const auto readOnly = std::make_shared<BOOL>(TRUE);
-  const HRESULT state = BoundedCall([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
-                                    "Reading the element value state", kErrorAutomationFailed);
+  const HRESULT state = BoundedRead([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
+                                    "Reading the element value state");
   if (FAILED(state) || *readOnly != FALSE) {
     return false;
   }
-  const HRESULT result = BoundedCall(
+  const HRESULT result = CountedMutation(
       [value]() {
         const BSTR empty = SysAllocString(L"");
         const HRESULT assigned = value->SetValue(empty);
         SysFreeString(empty);
         return assigned;
       },
-      "Clearing the element value", kErrorAutomationFailed);
+      "Clearing the element value");
   return SUCCEEDED(result);
 }
 
 void Automation::ForgetWindow(const std::string& windowId) {
-  for (auto iterator = recordsById_.begin(); iterator != recordsById_.end();) {
-    if (iterator->second.windowId == windowId) {
-      for (auto key = idsByRuntimeKey_.begin(); key != idsByRuntimeKey_.end();) {
-        key = key->second == iterator->first ? idsByRuntimeKey_.erase(key) : std::next(key);
-      }
-      iterator = recordsById_.erase(iterator);
-      continue;
-    }
-    ++iterator;
-  }
+  registry_.ForgetWindow(windowId);
 }
 
 void Automation::Reset() {
-  recordsById_.clear();
-  idsByRuntimeKey_.clear();
+  registry_.Clear();
 }
 
 std::string Automation::SerializeSourceXml(const std::vector<ElementSnapshot>& snapshots) const {

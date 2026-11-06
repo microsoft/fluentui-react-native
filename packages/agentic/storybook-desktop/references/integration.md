@@ -74,5 +74,22 @@ configuration, WDIO sessions, service ownership, and aggregate reporting are
 owned by `@fluentui-react-native/desktop-test`. Runtime bridge and chrome are
 owned by `@fluentui-react-native/storybook-desktop-runtime`.
 
+This is the current implementation boundary, not the finished layering.
+`DesktopIntegration.run` takes over the lifecycle and readiness presentation;
+the channel child hosts both channel and driver listeners, with Metro in another
+child. The approved direction retains these processes initially and moves
+resource/workload ownership into the neutral desktop-test host. Storybook will
+contribute catalog/channel/context and CSF runner resources; the runtime stays
+Node-free. Do not add a separate coordinator package or move supervision into
+desktop-driver or MCP.
+
+Agent mode protects the embedded driver and disables the channel's MCP endpoint,
+but does not make all channel/runtime mutation ingress exclusively grant-owned.
+Unknown story changes now quarantine the driver target; args updates through the
+protected driver are unsupported. Runtime reconnect, complete context fencing,
+durable recovery wiring, and channel ingress authority remain work in progress.
+See `@fluentui-react-native/desktop-driver/references/current-status.md` and
+`@fluentui-react-native/desktop-test/references/current-status.md`.
+
 Use the consumer app's agent map for stable app paths and declared entry
 commands.

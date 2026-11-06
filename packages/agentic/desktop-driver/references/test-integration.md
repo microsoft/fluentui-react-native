@@ -70,6 +70,9 @@ For Storybook targets, the connection registers:
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
+Selectors used to read a value or perform an action must resolve to exactly one
+element. `count` and `exists` expectations intentionally allow multiple matches;
+narrow other selectors rather than relying on the first match.
 
 Pass `onTestResult(result)` to `runStoryTests` or `runDesktopStoryTests` to
 receive each settled test result before the next test starts. This supports
@@ -80,6 +83,15 @@ result formats remain unchanged.
 An external supervisor can share an existing session with an isolated Node
 worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
 This registers the same custom commands without creating a second session.
+On a protected service, include the supervisor-provided `grant` in that
+attachment and in `connectDesktopWebdriver`. For an existing WDIO-managed
+transport, configure `desktopWebdriverGrantOptions(grant)` before attaching
+and pass `{ grant }` as the third argument to
+`installDesktopWebdriverCommands`. Never put the grant in capabilities or
+worker command-line arguments. Use private IPC or a supervisor-controlled
+environment such as `FURN_DESKTOP_DRIVER_GRANT_TOKEN`; the `TOKEN` suffix
+participates in the desktop-test reporter's secret redaction. The helper does
+not automatically read process environment variables.
 The supervisor retains ownership and must call `delete()` after the worker
 exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
 `attach()` does not apply the defaults `remote()` uses, so the attached browser
@@ -289,6 +301,9 @@ yarn test --runInBand
 The native contract builds into a temporary or configured external cache,
 verifies the artifact and long-lived handshake, runs the helper self-test,
 checks cache reuse and resolution, and exercises malformed-frame recovery.
+On Windows it also builds the test-only plain Win32 fixture and drives the
+helper against it: events, owned popups, hung and stuck providers, large trees,
+and retention. `yarn test --runInBand win32Fixture` runs only that suite.
 Stable-signed macOS coverage also requires
 `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
 

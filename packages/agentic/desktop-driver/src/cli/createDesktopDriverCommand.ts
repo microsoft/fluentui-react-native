@@ -7,6 +7,15 @@ import { connectDesktopAgent } from '../agent/DesktopAgent.js';
 import { validateDesktopStoryTests } from '../authoring/storyTests.js';
 import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from '../native/nativeDriver.js';
+import {
+  desktopReporterModes,
+  formatDesktopReporterError,
+  formatDesktopReporterValue,
+  resolveDesktopReporterMode,
+  resolveDesktopReporterModeFromArgv,
+  tolerateClosedDesktopStdout,
+} from './reporter.js';
+import type { ResolvedDesktopReporterMode } from './reporter.js';
 import type {
   NativeDriverArchitecture,
   NativeDriverBuildOptions,
@@ -56,14 +65,24 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
   const program = new Command()
     .name('desktop-driver')
     .description('Drive React Native desktop applications through W3C WebDriver without Appium.')
+    .addOption(new Option('--reporter <mode>', 'output format').choices([...desktopReporterModes]))
+    .option('--json', 'alias for --reporter json')
     .configureOutput({
       writeErr: (value) => stderr.write(value),
       writeOut: (value) => stdout.write(value),
     });
+  const reporterMode = (): ResolvedDesktopReporterMode => {
+    const flags = program.opts<{ reporter?: string; json?: boolean }>();
+    return resolveDesktopReporterMode({
+      flag: flags.json ? 'json' : flags.reporter,
+      environment: process.env.DESKTOP_REPORTER,
+    });
+  };
+  const writeValue = (value: unknown) => stdout.write(formatDesktopReporterValue(reporterMode(), value));
 
-  addNativeBuildCommand(program, buildDriver, stdout);
-  addNativeResolveCommand(program, resolveDriver, stdout);
-  addNativeDoctorCommand(program, resolveDriver, permissionProbe, stdout);
+  addNativeBuildCommand(program, buildDriver, writeValue);
+  addNativeResolveCommand(program, resolveDriver, writeValue);
+  addNativeDoctorCommand(program, resolveDriver, permissionProbe, writeValue);
 
   program
     .command('serve')
@@ -98,7 +117,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
           },
         ],
       });
-      writeJson(stdout, { server: server.url, targetId: flags.target });
+      writeValue({ server: server.url, targetId: flags.target });
       try {
         await waitForSignal();
       } finally {
@@ -114,7 +133,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
       .action(async (flags: ConnectionFlags) => {
         const desktop = await connect(flags);
         try {
-          writeJson(stdout, await desktop.listStories());
+          writeValue(await desktop.listStories());
         } finally {
           await desktop.delete();
         }
@@ -132,7 +151,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
           if (!story) {
             throw new Error(`Story "${storyId}" is not present in the active manifest.`);
           }
-          writeJson(stdout, story);
+          writeValue(story);
         } finally {
           await desktop.delete();
         }
@@ -158,7 +177,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
                 test: flags.test,
               },
             });
-            writeJson(stdout, result);
+            writeValue(result);
             if (result.status !== 'passed') {
               process.exitCode = 1;
             }
@@ -187,7 +206,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
           url: flags.url,
         });
         try {
-          writeJson(stdout, await desktopAgent.describe({ depth: flags.depth, maxNodes: flags.maxNodes, scope: flags.scope }));
+          writeValue(await desktopAgent.describe({ depth: flags.depth, maxNodes: flags.maxNodes, scope: flags.scope }));
         } finally {
           await desktopAgent.delete();
         }
@@ -208,7 +227,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
           url: flags.url,
         });
         try {
-          writeJson(stdout, await desktopAgent.screenshot(flags.name));
+          writeValue(await desktopAgent.screenshot(flags.name));
         } finally {
           await desktopAgent.delete();
         }
@@ -221,7 +240,7 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
 function addNativeBuildCommand(
   program: Command,
   buildDriver: typeof buildNativeDesktopDriver,
-  stdout: Pick<NodeJS.WriteStream, 'write'>,
+  writeValue: (value: unknown) => unknown,
 ): void {
   const command = program.command('build-driver').description('Build the native desktop helper for the selected platform.');
   addNativePlatformOptions(command)
@@ -232,14 +251,14 @@ function addNativeBuildCommand(
     .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
     .action(async (flags: NativeBuildFlags) => {
       const result = await buildDriver(toBuildOptions(flags));
-      writeJson(stdout, result);
+      writeValue(result);
     });
 }
 
 function addNativeResolveCommand(
   program: Command,
   resolveDriver: typeof resolveNativeDesktopDriver,
-  stdout: Pick<NodeJS.WriteStream, 'write'>,
+  writeValue: (value: unknown) => unknown,
 ): void {
   const command = program.command('resolve-driver').description('Resolve and verify a native desktop helper.');
   addNativePlatformOptions(command)
@@ -252,7 +271,7 @@ function addNativeResolveCommand(
     .option('--macos-signing-identity <identity>', 'macOS code-signing certificate name or SHA-1 hash')
     .action(async (flags: NativeResolveFlags) => {
       const result = await resolveDriver(toResolveOptions(flags));
-      writeJson(stdout, result);
+      writeValue(result);
     });
 }
 
@@ -260,7 +279,7 @@ function addNativeDoctorCommand(
   program: Command,
   resolveDriver: typeof resolveNativeDesktopDriver,
   permissionProbe: NativePermissionProbe,
-  stdout: Pick<NodeJS.WriteStream, 'write'>,
+  writeValue: (value: unknown) => unknown,
 ): void {
   const command = program.command('doctor').description('Report the selected native helper or an actionable readiness failure.');
   addNativePlatformOptions(command)
@@ -282,9 +301,9 @@ function addNativeDoctorCommand(
         }
         const result = await resolveDriver({ ...toResolveOptions(flags), buildPolicy: 'never' });
         const permissions = flags.permissions ? await permissionProbe(result, { prompt: flags.prompt === true }) : undefined;
-        writeJson(stdout, { ...(permissions ? { permissions } : {}), ready: true, result });
+        writeValue({ ...(permissions ? { permissions } : {}), ready: true, result });
       } catch (error) {
-        writeJson(stdout, {
+        writeValue({
           error: {
             code: error instanceof Error && 'code' in error ? String(error.code) : 'unknown',
             message: error instanceof Error ? error.message : String(error),
@@ -297,7 +316,33 @@ function addNativeDoctorCommand(
 }
 
 export async function runDesktopDriverCli(argv: readonly string[] = process.argv): Promise<void> {
-  await createDesktopDriverCommand().parseAsync([...argv]);
+  tolerateClosedDesktopStdout();
+  let diagnostics = '';
+  let reporterMode: ResolvedDesktopReporterMode = 'plain';
+  let reporterResolutionError: unknown;
+  try {
+    reporterMode = resolveDesktopReporterModeFromArgv(argv, { environment: process.env.DESKTOP_REPORTER });
+  } catch (error) {
+    reporterResolutionError = error;
+    try {
+      reporterMode = resolveDesktopReporterMode({ environment: process.env.DESKTOP_REPORTER });
+    } catch {
+      reporterMode = 'plain';
+    }
+  }
+  const program = createDesktopDriverCommand({ stderr: { write: (text) => ((diagnostics += text), true) } }).exitOverride();
+  try {
+    await program.parseAsync([...argv]);
+  } catch (error) {
+    if (error && typeof error === 'object' && 'exitCode' in error && error.exitCode === 0) return;
+    const commandError = reporterResolutionError ?? error;
+    if (reporterMode === 'json' || reporterMode === 'ndjson') {
+      process.stdout.write(formatDesktopReporterError(reporterMode, commandError));
+    } else {
+      process.stderr.write(diagnostics || `${commandError instanceof Error ? commandError.message : String(commandError)}\n`);
+    }
+    process.exitCode = 1;
+  }
 }
 
 function addConnectionOptions<T extends Command>(command: T): T {
@@ -400,10 +445,6 @@ function readManifest(manifestPath: string): DesktopStoryManifest {
     }
   }
   return value;
-}
-
-function writeJson(output: Pick<NodeJS.WriteStream, 'write'>, value: unknown): void {
-  output.write(`${JSON.stringify(value, null, 2)}\n`);
 }
 
 function waitForSignal(): Promise<void> {

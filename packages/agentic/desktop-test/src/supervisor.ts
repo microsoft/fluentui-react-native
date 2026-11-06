@@ -4,7 +4,16 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 
 import { createDesktopDriverServer, NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
-import type { DesktopDriverServer, DesktopHost, DesktopTarget, NativeDesktopHostOptions } from '@fluentui-react-native/desktop-driver';
+import type {
+  DesktopDriverServer,
+  DesktopHost,
+  DesktopTarget,
+  NativeDesktopHostOptions,
+  NativeDriverArtifact,
+} from '@fluentui-react-native/desktop-driver';
+import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
+import { publishDesktopAgent } from './agentConnection.js';
+import type { DesktopAgentConnectionOptions, DesktopAgentPublication } from './agentConnection.js';
 import type { DesktopCommand, ResolvedDesktopTarget } from './config.js';
 import type { DesktopIntegration } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
@@ -24,6 +33,11 @@ export type DesktopSupervisorOptions = {
   integration?: DesktopIntegration;
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
+  /**
+   * Protects the service with a grant authority and publishes one agent's connection descriptor once the target is
+   * ready. Every route then requires a grant, so only clients given one, such as the Desktop Driver MCP adapter, connect.
+   */
+  agent?: DesktopAgentConnectionOptions;
 };
 
 export class DesktopSupervisor {
@@ -36,6 +50,10 @@ export class DesktopSupervisor {
   private opened = false;
   private releaseClaim?: () => void;
   private closePromise?: Promise<void>;
+  private artifact?: NativeDriverArtifact;
+  private authority?: DesktopAuthority;
+  private agentPublication?: DesktopAgentPublication;
+  private ownershipUncertain = false;
   private readonly environment: Record<string, string> = {};
   private readonly workers = new Set<RunningDesktopCommand>();
   private readonly options: DesktopSupervisorOptions;
@@ -52,6 +70,11 @@ export class DesktopSupervisor {
   get server(): DesktopDriverServer {
     if (!this.serverValue) throw new Error('Desktop supervisor has not started.');
     return this.serverValue;
+  }
+
+  /** The record name of the published agent connection descriptor, once it is published. */
+  get agentDescriptor(): string | undefined {
+    return this.agentPublication?.descriptor;
   }
 
   async open(interactive = true): Promise<void> {
@@ -81,7 +104,9 @@ export class DesktopSupervisor {
       const host = this.options.hostFactory ? await this.options.hostFactory(this.target) : await this.createHost();
       try {
         const extension = await this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter });
+        if (this.options.agent) this.authority = new DesktopAuthority();
         this.serverValue = await createDesktopDriverServer({
+          ...(this.authority ? { authority: this.authority } : {}),
           targets: [
             {
               endpoint: this.target.endpoint,
@@ -101,6 +126,7 @@ export class DesktopSupervisor {
           try {
             await host.dispose();
           } catch (cleanup) {
+            this.ownershipUncertain = true;
             throw new AggregateError([error, cleanup], 'Desktop target startup and disposal failed.');
           }
         }
@@ -111,6 +137,7 @@ export class DesktopSupervisor {
         'webdriver',
         { endpoint: this.target.endpoint, renderer: this.target.host.renderer },
       );
+      if (this.options.agent) await this.publishAgentConnection(this.options.agent);
     } catch (error) {
       this.reporter.fail(error);
       try {
@@ -120,6 +147,23 @@ export class DesktopSupervisor {
       }
       throw error;
     }
+  }
+
+  private async publishAgentConnection(options: DesktopAgentConnectionOptions): Promise<void> {
+    this.agentPublication = await publishDesktopAgent({
+      authority: this.authority!,
+      connection: options,
+      target: this.target,
+      url: this.server.url,
+      ...(this.artifact ? { artifact: this.artifact } : {}),
+      addSecret: (secret) => this.reporter.addSecret(secret),
+      signal: this.services.controller.signal,
+      guard: (work) => this.services.guard(work),
+    });
+    this.reporter.emit({
+      kind: 'diagnostic',
+      payload: { level: 'info', message: `Published agent connection ${this.agentPublication.descriptor} for target ${this.target.id}` },
+    });
   }
 
   async startConfiguredServices(): Promise<void> {
@@ -141,6 +185,7 @@ export class DesktopSupervisor {
       buildPolicy: 'never',
       signal: this.services.controller.signal,
     });
+    this.artifact = artifact;
     return new NativeDesktopHost({
       application,
       artifact,
@@ -205,11 +250,14 @@ export class DesktopSupervisor {
       };
       for (const worker of this.workers) await close('worker', () => worker.stop({ failed: true }));
       this.workers.clear();
+      const publication = this.agentPublication;
+      this.agentPublication = undefined;
+      if (publication) await close('agent-descriptor', () => publication.withdraw());
       if (this.serverValue) await close('webdriver', () => deadline(this.serverValue!.close(), 30_000, 'Closing desktop sessions'));
       await close('services', () => this.services.close());
       await close('commands', () => this.runner.close());
       if (this.transport) await close('reporting', () => this.transport!.close());
-      if (this.releaseClaim) {
+      if (this.releaseClaim && failures.length === 0 && !this.ownershipUncertain) {
         try {
           this.releaseClaim();
         } catch (error) {
@@ -222,25 +270,85 @@ export class DesktopSupervisor {
   }
 }
 
-/** Storybook's channel child uses the same native composition without acquiring a second application owner. */
-export async function startNativeDesktopService(
-  options: NativeDesktopHostOptions & {
-    target: Omit<DesktopTarget, 'host'>;
-    port?: number;
-    host?: string;
-  },
+export type DesktopServiceOptions = {
+  target: Omit<DesktopTarget, 'host'>;
+  port?: number;
+  host?: string;
+  /**
+   * Protects the service with a grant authority and publishes one agent's connection descriptor once it listens. Every
+   * route then requires a grant. Closing the service withdraws the descriptor and revokes the grant before the listener.
+   */
+  agent?: DesktopAgentConnectionOptions;
+  /** Receives secrets the service issues, such as the agent grant, so reporters redact them. */
+  addSecret?: (secret: string) => void;
+  signal?: AbortSignal;
+};
+
+/** Transitional composition for Storybook's channel child; lifecycle policy remains owned by desktop-test. */
+export async function startNativeDesktopService(options: NativeDesktopHostOptions & DesktopServiceOptions): Promise<DesktopDriverServer> {
+  return startDesktopService(new NativeDesktopHost(options), options, options.artifact);
+}
+
+/** Serves one target on the given host, and disposes the host if the service cannot start. */
+export async function startDesktopService(
+  desktopHost: DesktopHost,
+  options: DesktopServiceOptions,
+  artifact?: NativeDriverArtifact,
 ): Promise<DesktopDriverServer> {
-  const host = new NativeDesktopHost(options);
+  const authority = options.agent ? new DesktopAuthority() : undefined;
+  let server: DesktopDriverServer;
   try {
-    return await createDesktopDriverServer({ host: options.host, port: options.port, targets: [{ ...options.target, host }] });
+    server = await createDesktopDriverServer({
+      ...(authority ? { authority } : {}),
+      host: options.host,
+      port: options.port,
+      targets: [{ ...options.target, host: desktopHost }],
+    });
   } catch (error) {
     try {
-      await host.dispose();
+      await desktopHost.dispose();
     } catch (cleanup) {
       throw new AggregateError([error, cleanup], 'Native listener startup and disposal failed.');
     }
     throw error;
   }
+  if (!options.agent) return server;
+  let publication: DesktopAgentPublication;
+  try {
+    publication = await publishDesktopAgent({
+      authority: authority!,
+      connection: options.agent,
+      target: { endpoint: options.target.endpoint, id: options.target.id },
+      url: server.url,
+      ...(artifact ? { artifact } : {}),
+      ...(options.addSecret ? { addSecret: options.addSecret } : {}),
+      ...(options.signal ? { signal: options.signal } : {}),
+    });
+  } catch (error) {
+    try {
+      await server.close();
+    } catch (cleanup) {
+      throw new AggregateError([error, cleanup], 'Agent publication and service cleanup failed.');
+    }
+    throw error;
+  }
+  let closing: Promise<void> | undefined;
+  return {
+    ...server,
+    close: () =>
+      (closing ??= (async () => {
+        const failures: unknown[] = [];
+        for (const step of [() => publication.withdraw(), () => server.close()]) {
+          try {
+            await step();
+          } catch (error) {
+            failures.push(error);
+          }
+        }
+        if (failures.length === 1) throw failures[0];
+        if (failures.length) throw new AggregateError(failures, 'Agent withdrawal and service close failed.');
+      })()),
+  };
 }
 
 export function claimDesktopWorkload(runId: string, directory?: string): () => void {
@@ -253,7 +361,7 @@ export function claimDesktopWorkload(runId: string, directory?: string): () => v
     fs.writeFileSync(file, contents, { flag: 'wx', mode: 0o600 });
   } catch (error) {
     throw new Error(
-      `Another desktop workload holds ${file}. Do not run parallel physical-input suites. After a crash, verify the recorded owner has exited before removing its stale claim.`,
+      `Another desktop workload holds ${file}. Do not run parallel physical-input suites. After a crash or failed cleanup, verify the recorded owner and its resources have stopped before removing its claim.`,
       { cause: error },
     );
   }

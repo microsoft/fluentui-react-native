@@ -4,8 +4,11 @@ exports[`pins Chip color tokens on Win32 1`] = `
 {
   "backgroundColor": "#ebebeb",
   "brand": {
+    "backgroundColor": "#d2e0f4",
+    "color": "#1651aa",
     "selected": {
       "backgroundColor": "#D83B01",
+      "color": "#ffffff",
     },
   },
   "color": "#666666",
@@ -19,10 +22,17 @@ exports[`pins Chip color tokens on Win32 1`] = `
   },
   "disabled": {
     "backgroundColor": "#ebebeb",
+    "color": "#bdbdbd",
   },
   "searchBar": {
     "backgroundColor": "#e6e6e6",
     "brand": {
+      "backgroundColor": "#d2e0f4",
+      "color": "#ffffff",
+      "disabled": {
+        "backgroundColor": "#d2e0f4",
+        "color": "#bdbdbd",
+      },
       "selected": {
         "backgroundColor": "antiquewhite",
         "color": "#aec6eb",
@@ -31,6 +41,11 @@ exports[`pins Chip color tokens on Win32 1`] = `
     "color": "#262626",
     "disabled": {
       "backgroundColor": "#e6e6e6",
+      "color": "#bdbdbd",
+    },
+    "selected": {
+      "backgroundColor": "#616161",
+      "color": "#ffffff",
     },
   },
   "selected": {

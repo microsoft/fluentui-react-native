@@ -21,6 +21,25 @@ Triage by failure boundary:
 6. **Evidence/cleanup:** inspect the complete canonical run directory; preserve
    the primary failure if capture or cleanup also fails.
 
+For `driver --agent`, a readiness timeout means the channel service did not
+publish the connection: inspect the `storybook-channel` log. Publication needs
+the verified native helper and an owner-only storage root. A macOS lease
+warning naming more than one running application means another instance with
+the same bundle identifier is open; leases resume once only one remains. The
+app's runtime bridge does not reconnect, so after restarting the driver,
+relaunch an app left running; until then story renders report
+`story-not-ready`. Quit the app first: on macOS, `run` only reactivates an
+instance that is already open.
+
+On Windows and Win32, an agent `open` that cannot find the application means
+the agent identity names a different build: rebuild and register the app, then
+restart the driver. A Windows Debug app that shows "bundler is not running" or
+leaves stories at `story-not-ready` is not reading the driver's Metro; it loads
+from port 8081, so stop whatever else holds that port before `driver --agent`.
+Physical input to a host started from a background process can be refused with
+"The target window did not become the foreground window" (rejected, no effect);
+bring the window forward, or use the semantic `activate` action.
+
 For macOS CocoaPods codegen failures, rerun the documented `prep` stage once
 when ReactCodegen has a stale generated source list; diagnose the first
 actionable error before editing configuration.

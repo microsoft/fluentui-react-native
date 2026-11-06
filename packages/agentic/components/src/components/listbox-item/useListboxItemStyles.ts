@@ -90,7 +90,7 @@ export function useListboxItemStyles_unstable(state: ListboxItemState) {
   if (state.chevronIndicator) {
     attachSlotProps(state.chevronIndicator, {
       accessible: false,
-      color: state.tokens.color.foregroundNeutralPrimary,
+      color: state.tokens.color.foregroundNeutralPrimary.rest,
       height: getListboxItemIconSize(),
       width: getListboxItemIconSize(),
     });
@@ -99,7 +99,7 @@ export function useListboxItemStyles_unstable(state: ListboxItemState) {
   if (state.checkmarkIndicator) {
     attachSlotProps(state.checkmarkIndicator, {
       accessible: false,
-      color: state.tokens.color.foregroundNeutralPrimary,
+      color: state.tokens.color.foregroundNeutralPrimary.rest,
       height: getListboxItemCheckmarkSize(),
       width: getListboxItemCheckmarkSize(),
     });
@@ -107,14 +107,16 @@ export function useListboxItemStyles_unstable(state: ListboxItemState) {
 
   if (state.checkboxIndicator) {
     attachSlotProps(state.checkboxIndicator, {
-      iconColor: state.tokens.color.foregroundNeutralOnloud,
+      iconColor: state.tokens.color.foregroundNeutralOnloud.rest,
       iconSize: 12,
       status: state.selected ? 'checked' : 'unchecked',
       style: [
         listboxItemStyles.checkboxBox,
         {
-          backgroundColor: state.selected ? state.tokens.color.backgroundBrandHeavy : state.tokens.color.backgroundNeutralTransparent,
-          borderColor: state.selected ? state.tokens.color.backgroundBrandHeavy : state.tokens.color.foregroundNeutralSecondary,
+          backgroundColor: state.selected
+            ? state.tokens.color.backgroundBrandHeavy.rest
+            : state.tokens.color.backgroundNeutralTransparent.rest,
+          borderColor: state.selected ? state.tokens.color.backgroundBrandHeavy.rest : state.tokens.color.foregroundNeutralSecondary.rest,
           height: getListboxItemCheckmarkSize(),
           width: getListboxItemCheckmarkSize(),
         },

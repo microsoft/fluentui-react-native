@@ -125,6 +125,7 @@ not set this policy.
 ```text
 <cache-root>/v1/
   artifacts/<provider>-<architecture>/<compatibility>/<build>/<artifact>/
+  fixtures/win32/<digest>/
   selections/<compatibility>/
   locks/
   staging/
@@ -136,6 +137,9 @@ not set this policy.
   coordinator, protocol, and macOS signing identity.
 - The build fingerprint adds the actual toolchain fingerprint.
 - The artifact ID hashes the built executable.
+- `fixtures/` holds test-only executables that the opt-in native contract
+  builds, keyed by fixture source and toolchain. Resolution never selects them,
+  and they are not published.
 - Builds publish through same-volume staging and atomic rename.
 - Cross-process directory locks prevent duplicate publication.
 - Failed build logs are copied to immutable diagnostics before staging cleanup.
@@ -174,6 +178,13 @@ helper to settle before the session queue advances. If the helper dies while
 input may be depressed, Node invokes the same verified binary in restricted
 `--release-input` mode with only the recorded keys and buttons. Further
 physical input must not proceed if release cannot be proven.
+
+The Windows helper also has three restricted one-shot modes, `--private-storage`,
+`--service-identity`, and `--application-incarnation`. The `/authority` adapters
+invoke them on the verified artifact to enforce owner-only private storage, to
+verify a service's process and listener before a credential is sent, and to
+prove a quarantined application's recorded process exited. See the
+[Windows provider guide](../native/windows/README.md#authority-helper-modes).
 
 ## Diagnostics
 

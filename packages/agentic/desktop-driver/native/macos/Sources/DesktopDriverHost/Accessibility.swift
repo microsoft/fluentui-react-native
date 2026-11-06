@@ -123,11 +123,17 @@ final class ElementRecord {
 
 final class AccessibilityEngine {
   private static let maximumTreeNodes = 5_000
-  private static let maximumElementRecords = 10_000
+  static let maximumElementRecords = 10_000
   private static let maximumAncestorDepth = 64
 
   private var records: [String: ElementRecord] = [:]
   private var recordIDsByHash: [CFHashCode: [String]] = [:]
+  private let effects: EffectLedger
+  private let actionKeys = AccessibilityActionKeys()
+
+  init(effects: EffectLedger = EffectLedger()) {
+    self.effects = effects
+  }
 
   func tree(
     window: WindowRecord,
@@ -323,7 +329,9 @@ final class AccessibilityEngine {
         "The element does not expose an AXPress, AXConfirm, or AXPick action, so accessibility click is unavailable."
       )
     }
+    effects.dispatching()
     let error = AXUIElementPerformAction(record.element, action as CFString)
+    effects.completed(error)
     if error == .invalidUIElement {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
     }
@@ -332,12 +340,42 @@ final class AccessibilityEngine {
     }
   }
 
-  func accessibilityActions(_ elementID: String, token: CancellationToken) throws -> [String] {
+  /// The element's published actions by authored name, each with the key `performAccessibilityAction` takes.
+  func accessibilityActions(_ elementID: String, token: CancellationToken) throws -> (names: [String], keys: [String]) {
     try requireAccessibility("Accessibility action inspection")
     try token.throwIfCancelled()
     let record = try requireRecord(elementID)
     try validateLive(record)
-    return try copyAXActionNames(record.element).map(accessibilityActionName)
+    let raw = try copyPublishedAXActionNames(record.element)
+    return (raw.map(accessibilityActionName), raw.map(actionKeys.key))
+  }
+
+  /// Performs the one published action whose key matches. The key binds the exact native action the caller listed, so
+  /// an action renamed, removed, or re-registered with another target since then is refused rather than guessed at.
+  func performAccessibilityAction(_ elementID: String, key: String, token: CancellationToken) throws {
+    try requireAccessibility("Performing an accessibility action")
+    try token.throwIfCancelled()
+    let record = try requireRecord(elementID)
+    try validateLive(record)
+    let matches = try copyAXActionNames(record.element).filter { actionKeys.key(for: $0) == key }
+    guard matches.count == 1, let action = matches.first else {
+      try fail(
+        ErrorCode.notInteractable,
+        matches.isEmpty
+          ? "The element no longer publishes the listed action. List its actions again."
+          : "The element publishes the listed action more than once, so the key names none of them.",
+        data: ["reason": "action-changed"]
+      )
+    }
+    effects.dispatching()
+    let error = AXUIElementPerformAction(record.element, action as CFString)
+    effects.completed(error)
+    if error == .invalidUIElement {
+      try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
+    }
+    guard error == .success else {
+      try fail(ErrorCode.automationFailed, "Performing the accessibility action failed because \(describeAXError(error)).")
+    }
   }
 
   func tryClearValue(_ elementID: String) throws -> Bool {
@@ -354,7 +392,9 @@ final class AccessibilityEngine {
     guard settableError == .success else {
       return false
     }
+    effects.dispatching()
     let error = AXUIElementSetAttributeValue(record.element, kAXValueAttribute as CFString, "" as CFString)
+    effects.completed(error)
     if error == .invalidUIElement {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
     }
@@ -371,12 +411,29 @@ final class AccessibilityEngine {
   func forgetWindow(_ windowID: String) {
     let removed = records.values.filter { $0.windowID == windowID }
     for record in removed {
-      records.removeValue(forKey: record.id)
-      let hash = CFHash(record.element)
-      recordIDsByHash[hash]?.removeAll { $0 == record.id }
-      if recordIDsByHash[hash]?.isEmpty == true {
-        recordIDsByHash.removeValue(forKey: hash)
+      drop(record)
+    }
+  }
+
+  /// Drops the records for ids the caller no longer needs and returns how many it held. An id that is not tracked is
+  /// ignored, so releasing twice is harmless. Ids are never reused, so a released id stays stale.
+  func releaseRecords(_ elementIDs: [String]) -> Int {
+    var released = 0
+    for elementID in elementIDs {
+      if let record = records[elementID] {
+        drop(record)
+        released += 1
       }
+    }
+    return released
+  }
+
+  private func drop(_ record: ElementRecord) {
+    records.removeValue(forKey: record.id)
+    let hash = CFHash(record.element)
+    recordIDsByHash[hash]?.removeAll { $0 == record.id }
+    if recordIDsByHash[hash]?.isEmpty == true {
+      recordIDsByHash.removeValue(forKey: hash)
     }
   }
 
@@ -507,6 +564,30 @@ final class AccessibilityEngine {
     parentID: String?,
     scope: ElementScope
   ) throws -> ElementRecord {
+    guard let record = registerIfRoom(
+      element,
+      processID: processID,
+      windowID: windowID,
+      parentID: parentID,
+      scope: scope
+    ) else {
+      try fail(
+        ErrorCode.treeTooLarge,
+        "The native element table reached its 10000-record safety limit. Close the session and create a new one."
+      )
+    }
+    return record
+  }
+
+  /// Finds or creates the record for an element, or returns nil when a new record would exceed the table's capacity.
+  /// A bounded observation ends its sample at that point instead of failing the command.
+  func registerIfRoom(
+    _ element: AXUIElement,
+    processID: pid_t,
+    windowID: String,
+    parentID: String?,
+    scope: ElementScope
+  ) -> ElementRecord? {
     let hash = CFHash(element)
     for id in recordIDsByHash[hash] ?? [] {
       if let record = records[id], sameAXElement(record.element, element) {
@@ -518,10 +599,7 @@ final class AccessibilityEngine {
       }
     }
     guard records.count < Self.maximumElementRecords else {
-      try fail(
-        ErrorCode.treeTooLarge,
-        "The native element table reached its 10000-record safety limit. Close the session and create a new one."
-      )
+      return nil
     }
     let record = ElementRecord(
       processID: processID,
@@ -535,7 +613,7 @@ final class AccessibilityEngine {
     return record
   }
 
-  private func validateLive(_ record: ElementRecord) throws {
+  func validateLive(_ record: ElementRecord) throws {
     var pid: pid_t = 0
     guard AXUIElementGetPid(record.element, &pid) == .success, pid == record.processID, processIsAlive(pid) else {
       try fail(ErrorCode.staleElement, "Element \"\(record.id)\" is no longer available.")
@@ -680,7 +758,7 @@ final class AccessibilityEngine {
     return .unsupported("The element does not expose a Boolean or mixed accessibility value.")
   }
 
-  private func stringValue(_ value: CFTypeRef?) -> String? {
+  func stringValue(_ value: CFTypeRef?) -> String? {
     if let string = axString(value) {
       return string
     }

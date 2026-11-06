@@ -161,7 +161,7 @@ type NestedBlockStyleStateLevels = typeof nestedBlockStyleStateLevels;
 type NestedBlockStyleState = StateNames<NestedBlockStyleStateLevels>;
 
 function createNestedBlockStyleDefinition({ borderRadius, color }: FlexTokens): StyleDefinition<ViewStyle, NestedBlockStyleStateLevels> {
-  const nestedBackground: ViewStyle = { backgroundColor: color.backgroundNeutralTranslucent };
+  const nestedBackground: ViewStyle = { backgroundColor: color.backgroundNeutralTranslucent.rest };
   return {
     small: {
       default: {

@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
+## 0.9.16
+
+### Patch Changes
+
+- @fluentui-react-native/framework@0.17.10
+
 ## 0.9.15
 
 ### Patch Changes
