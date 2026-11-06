@@ -13,6 +13,7 @@ describe('neutral desktop harness contracts', () => {
     'transport',
     'delegated-cli',
     'services',
+    'resources',
     'owned-service',
     'agent',
     'recovery',

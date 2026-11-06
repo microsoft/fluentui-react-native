@@ -70,6 +70,20 @@ async function main() {
       };
       assert.throws(() => defineDesktopConfig({ ...app, unrecognized: true }), /Unknown/);
       assert.throws(
+        () =>
+          defineDesktopConfig({
+            ...app,
+            integration: {
+              name: 'fixture',
+              validate() {
+                throw new Error('Unexpected config validation.');
+              },
+              unrecognized: true,
+            },
+          }),
+        /Unknown integration field/,
+      );
+      assert.throws(
         () => defineDesktopConfig({ ...app, targets: { win32: { use: { config: 'app.mjs', target: 'win32' }, host: {} } } }),
         /ambiguous/,
       );
@@ -78,13 +92,19 @@ async function main() {
       fs.writeFileSync(path.join(root, 'app', 'desktop.config.mjs'), `export default ${JSON.stringify(app)};`);
       const suite = {
         schemaVersion: 1,
-        targets: { alias: { use: { config: '../app/desktop.config.mjs', target: 'win32' } } },
+        targets: {
+          alias: { use: { config: '../app/desktop.config.mjs', target: 'win32' } },
+          aliasTwo: { use: { config: '../app/desktop.config.mjs', target: 'win32' } },
+        },
         reporting: { artifactsRoot: 'reports' },
       };
       fs.writeFileSync(path.join(root, 'suite', 'desktop.config.mjs'), `export default ${JSON.stringify(suite)};`);
       const direct = await loadDesktopConfig(path.join(root, 'app', 'desktop.config.mjs'));
       const referred = await loadDesktopConfig(path.join(root, 'suite', 'desktop.config.mjs'));
-      assert.equal(direct.targets.win32.id, referred.targets.alias.id);
+      assert.notEqual(direct.targets.win32.id, referred.targets.alias.id);
+      assert.notEqual(referred.targets.alias.id, referred.targets.aliasTwo.id);
+      assert.equal(direct.targets.win32.instanceId, referred.targets.alias.instanceId);
+      assert.equal(referred.targets.alias.instanceId, referred.targets.aliasTwo.instanceId);
       assert.equal(referred.targets.alias.host.application.executablePath, path.join(root, 'app', 'app.exe'));
       assert.equal(referred.reporting.artifactsRoot, path.join(root, 'suite', 'reports'));
       fs.writeFileSync(
@@ -774,14 +794,432 @@ async function main() {
       const services = new DesktopServiceScope(runner, run);
       services.start('outer', command('setInterval(()=>{},1000);'));
       services.start('metro', command("process.stderr.write('original metro failure\\n'); setTimeout(()=>process.exitCode=7,20);"));
+      let settleGuardedWork;
+      const guardedWork = new Promise((resolve) => {
+        settleGuardedWork = resolve;
+      });
       try {
-        await assert.rejects(services.guard(new Promise(() => undefined)), /exited.*code 7/);
+        await assert.rejects(services.guard(guardedWork), /exited.*code 7/);
+        let closeSettled = false;
+        const closing = services.close().then(() => {
+          closeSettled = true;
+        });
+        await new Promise((resolve) => setTimeout(resolve, 30));
+        assert.equal(closeSettled, false, 'shutdown must await guarded work after required-service failure');
+        settleGuardedWork();
+        await closing;
       } finally {
+        settleGuardedWork();
         await services.close();
       }
       const result = await run.finish();
       assert.equal(result.status, 'failed');
       assert(err.text().includes('original metro failure'));
+    } else if (mode === 'resources') {
+      const { DesktopServiceScope } = await import(lib('services.js'));
+      const { createDesktopWorkloadClaim, inspectDesktopWorkloadClaim } = await import(lib('ownership.js'));
+      const { orderDesktopResourceContributions } = await import(lib('resources.js'));
+      const { DesktopSupervisor } = await import(lib('supervisor.js'));
+      assert.throws(
+        () =>
+          orderDesktopResourceContributions([
+            {
+              id: 'duplicate',
+              ownership: 'owned',
+              prepare() {
+                throw new Error('Duplicate resources must be rejected before preparation.');
+              },
+            },
+            {
+              id: 'duplicate',
+              ownership: 'owned',
+              prepare() {
+                throw new Error('Duplicate resources must be rejected before preparation.');
+              },
+            },
+          ]),
+        /Duplicate resource contribution/,
+      );
+      assert.throws(
+        () =>
+          orderDesktopResourceContributions([
+            {
+              id: 'first',
+              dependsOn: ['second'],
+              ownership: 'owned',
+              prepare() {
+                throw new Error('Cycles must be rejected before preparation.');
+              },
+            },
+            {
+              id: 'second',
+              dependsOn: ['first'],
+              ownership: 'owned',
+              prepare() {
+                throw new Error('Cycles must be rejected before preparation.');
+              },
+            },
+          ]),
+        /dependency cycle/,
+      );
+      const ready = {
+        tier: 'service-ready',
+        service: 'fixture-service',
+        descriptor: 'fixture.json',
+        incarnation: 'inc_fixture',
+        processId: process.pid,
+      };
+      const events = [];
+      const runner = {
+        start() {
+          throw new Error('No process should be started by this fixture.');
+        },
+        run() {
+          throw new Error('No process should be run by this fixture.');
+        },
+      };
+      const claimDirectory = path.join(root, 'resource-lock');
+      const claim = createDesktopWorkloadClaim({
+        runId: 'resource-run',
+        targetId: 'registered-target',
+        targetInstanceId: 'physical-target',
+        directory: claimDirectory,
+      });
+      const scope = new DesktopServiceScope(runner, undefined, 'resource-run');
+      scope.setResourceObserver((resource) => claim.updateResource(resource));
+      await scope.contribute(
+        [
+          {
+            id: 'dependent',
+            dependsOn: ['foundation'],
+            ownership: 'owned',
+            prepare: () => ({
+              identity: 'dependent-instance',
+              async acquire() {
+                events.push('acquire-dependent');
+              },
+              async dispose() {
+                events.push('dispose-dependent');
+              },
+            }),
+          },
+          {
+            id: 'foundation',
+            ownership: 'owned',
+            prepare: () => ({
+              identity: 'foundation-instance',
+              async acquire() {
+                events.push('acquire-foundation');
+                return ready;
+              },
+              async dispose() {
+                events.push('dispose-foundation');
+              },
+            }),
+          },
+        ],
+        { targetId: 'registered-target', targetInstanceId: 'physical-target' },
+      );
+      assert.deepEqual(events, ['acquire-foundation', 'acquire-dependent']);
+      assert.equal(claim.record.resources[0].serviceReady.incarnation, ready.incarnation);
+      assert.equal(claim.record.resources[0].serviceReady.processId, process.pid);
+      await scope.close();
+      assert.deepEqual(events, ['acquire-foundation', 'acquire-dependent', 'dispose-dependent', 'dispose-foundation']);
+      claim.release();
+      assert.throws(() => fs.readFileSync(path.join(claimDirectory, 'interactive.lock')), /ENOENT/);
+
+      const processReady = {
+        tier: 'service-ready',
+        service: 'storybook-channel',
+        descriptor: 'agent',
+        incarnation: 'inc_process',
+        processId: process.pid,
+      };
+      const processExpectation = { tier: 'service-ready', service: 'storybook-channel', descriptor: 'agent' };
+      let receivedExpectation;
+      let receivedSignal;
+      let processResource;
+      const neverCompletes = new Promise(() => undefined);
+      const processScope = new DesktopServiceScope(
+        {
+          start() {
+            return {
+              completed: neverCompletes,
+              waitForReadiness(expected, _timeoutMs, signal) {
+                receivedExpectation = expected;
+                receivedSignal = signal;
+                return Promise.resolve(processReady);
+              },
+              async stop() {
+                return undefined;
+              },
+            };
+          },
+          async run() {
+            return undefined;
+          },
+        },
+        undefined,
+        'process-run',
+      );
+      processScope.setResourceObserver((resource) => {
+        if (resource.id === 'process-run:storybook-channel') processResource = resource;
+      });
+      processScope.start('storybook-channel', command(''));
+      assert.deepEqual(await processScope.readyProcess('storybook-channel', processExpectation), processReady);
+      assert.deepEqual(receivedExpectation, processExpectation);
+      assert.equal(receivedSignal, processScope.controller.signal);
+      assert.equal(processResource.readiness, 'ready');
+      assert.equal(processResource.serviceReady.tier, 'service-ready');
+      assert.equal(processResource.serviceReady.incarnation, processReady.incarnation);
+      await processScope.close();
+
+      let mismatchedResource;
+      const mismatchedScope = new DesktopServiceScope(
+        {
+          start() {
+            return {
+              completed: neverCompletes,
+              async waitForReadiness() {
+                return { ...processReady, descriptor: 'unexpected' };
+              },
+              async stop() {
+                return undefined;
+              },
+            };
+          },
+          async run() {
+            return undefined;
+          },
+        },
+        undefined,
+        'mismatched-run',
+      );
+      mismatchedScope.setResourceObserver((resource) => {
+        if (resource.id === 'mismatched-run:storybook-channel') mismatchedResource = resource;
+      });
+      mismatchedScope.start('storybook-channel', command(''));
+      await assert.rejects(
+        mismatchedScope.readyProcess('storybook-channel', processExpectation),
+        /does not match the configured expectation/,
+      );
+      assert.equal(mismatchedResource.readiness, 'failed');
+      await mismatchedScope.close();
+
+      let unsupportedResource;
+      const unsupportedScope = new DesktopServiceScope(
+        {
+          start() {
+            return {
+              completed: neverCompletes,
+              async stop() {
+                return undefined;
+              },
+            };
+          },
+          async run() {
+            return undefined;
+          },
+        },
+        undefined,
+        'unsupported-run',
+      );
+      unsupportedScope.setResourceObserver((resource) => {
+        if (resource.id === 'unsupported-run:storybook-channel') unsupportedResource = resource;
+      });
+      unsupportedScope.start('storybook-channel', command(''));
+      await assert.rejects(
+        unsupportedScope.readyProcess('storybook-channel', processExpectation),
+        /does not support correlated process readiness/,
+      );
+      assert.equal(unsupportedResource.readiness, 'failed');
+      await unsupportedScope.close();
+
+      const lateDirectory = path.join(root, 'late-lock');
+      const lateClaim = createDesktopWorkloadClaim({
+        runId: 'late-run',
+        targetId: 'registered-target',
+        targetInstanceId: 'physical-target',
+        directory: lateDirectory,
+      });
+      const lateScope = new DesktopServiceScope(runner, undefined, 'late-run');
+      lateScope.setResourceObserver((resource) => lateClaim.updateResource(resource));
+      let finishAcquire;
+      let lateDisposed = false;
+      const lateAcquisition = lateScope.contribute(
+        [
+          {
+            id: 'late',
+            ownership: 'owned',
+            prepare: () => ({
+              identity: 'late-instance',
+              acquire: () =>
+                new Promise((resolve) => {
+                  finishAcquire = resolve;
+                }),
+              async dispose() {
+                lateDisposed = true;
+              },
+            }),
+          },
+        ],
+        { targetId: 'registered-target', targetInstanceId: 'physical-target' },
+      );
+      lateScope.fail(new Error('cancel during acquisition'));
+      await assert.rejects(lateAcquisition, /cancel during acquisition/);
+      const lateClose = lateScope.close();
+      await Promise.resolve();
+      assert.equal(lateDisposed, false, 'shutdown must wait for the in-flight acquisition');
+      finishAcquire(ready);
+      await lateClose;
+      assert.equal(lateDisposed, true, 'late acquisition must be disposed before shutdown settles');
+      assert.equal(lateClaim.record.resources[0].disposal, 'settled');
+      lateClaim.release();
+
+      const failedDirectory = path.join(root, 'failed-lock');
+      const failedClaim = createDesktopWorkloadClaim({
+        runId: 'failed-run',
+        targetId: 'registered-target',
+        targetInstanceId: 'physical-target',
+        directory: failedDirectory,
+      });
+      const failedScope = new DesktopServiceScope(runner, undefined, 'failed-run');
+      failedScope.setResourceObserver((resource) => failedClaim.updateResource(resource));
+      await failedScope.contribute(
+        [
+          {
+            id: 'unstoppable',
+            ownership: 'owned',
+            prepare: () => ({
+              identity: 'exact-resource-instance',
+              acquire: () => Promise.resolve(),
+              async dispose() {
+                throw new Error('dispose failed');
+              },
+            }),
+          },
+        ],
+        { targetId: 'registered-target', targetInstanceId: 'physical-target' },
+      );
+      await assert.rejects(failedScope.close(), /did not shut down cleanly/);
+      assert.equal(failedClaim.record.state, 'fenced');
+      assert.deepEqual(
+        failedClaim.record.resources.map(({ id, identity, generation, ownership, disposal }) => ({
+          id,
+          identity,
+          generation,
+          ownership,
+          disposal,
+        })),
+        [{ id: 'failed-run:unstoppable', identity: 'exact-resource-instance', generation: 1, ownership: 'owned', disposal: 'failed' }],
+      );
+      assert.equal(failedClaim.record.unresolvedEffects[0].resourceIdentity, 'exact-resource-instance');
+      assert.throws(() => failedClaim.release(), /unresolved effects/);
+      const ownerFile = path.join(failedDirectory, 'interactive.lock');
+      const live = await inspectDesktopWorkloadClaim(ownerFile, async (owner) => ({
+        state: 'alive',
+        processStartedAt: owner.processStartedAt,
+      }));
+      const unknown = await inspectDesktopWorkloadClaim(ownerFile, async () => ({ state: 'unknown' }));
+      const reused = await inspectDesktopWorkloadClaim(ownerFile, async (owner) => ({
+        state: 'alive',
+        processStartedAt: new Date(Date.parse(owner.processStartedAt) + 1000).toISOString(),
+      }));
+      assert.equal(live.state, 'live');
+      assert.equal(unknown.state, 'unknown');
+      assert.equal(reused.state, 'pid-reused');
+      assert.equal(fs.existsSync(ownerFile), true, 'inspection must never reclaim a claim');
+      assert.throws(
+        () =>
+          createDesktopWorkloadClaim({
+            runId: 'concurrent-run',
+            targetId: 'registered-target',
+            targetInstanceId: 'physical-target',
+            directory: failedDirectory,
+          }),
+        /Another desktop workload holds/,
+      );
+
+      const marker = path.join(root, 'dependent-started');
+      const serviceRun = reporter({ kind: 'lifecycle' });
+      const serviceSupervisor = new DesktopSupervisor({
+        target: {
+          endpoint: 'win32',
+          host: { kind: 'installed', application: { windowTitle: 'fixture' } },
+          id: 'service-target',
+          instanceId: 'physical-target',
+          projectRoot: root,
+          configPath: path.join(root, 'desktop.config.mjs'),
+          launchTimeoutMs: 2000,
+          services: [
+            {
+              id: 'required',
+              command: { command: process.execPath, args: ['-e', 'process.exitCode = 7'] },
+              readyUrl: 'https://127.0.0.1:1',
+            },
+            {
+              id: 'dependent',
+              command: { command: process.execPath, args: ['-e', "require('node:fs').writeFileSync(process.argv[1], 'started')", marker] },
+              readyUrl: 'https://127.0.0.1:1',
+              dependsOn: ['required'],
+            },
+          ],
+        },
+        reporter: serviceRun,
+        lockDirectory: path.join(root, 'service-lock'),
+      });
+      await serviceSupervisor.open();
+      await assert.rejects(serviceSupervisor.startConfiguredServices(), /exited.*code 7/);
+      await serviceSupervisor.close();
+      await serviceRun.finish();
+      assert.equal(fs.existsSync(marker), false, 'a dependant must not start after its required service fails');
+
+      const reportLockDirectory = path.join(root, 'report-lock');
+      const reportSupervisor = new DesktopSupervisor({
+        target: {
+          endpoint: 'win32',
+          host: { kind: 'installed', application: { windowTitle: 'fixture' } },
+          id: 'reported-target',
+          instanceId: 'physical-target',
+          projectRoot: root,
+          configPath: path.join(root, 'desktop.config.mjs'),
+        },
+        reporter: { runId: 'report-delegated-run' },
+        reportSession: { environment: {} },
+        lockDirectory: reportLockDirectory,
+      });
+      await reportSupervisor.open();
+      assert.equal(
+        JSON.parse(fs.readFileSync(path.join(reportLockDirectory, 'interactive.lock'), 'utf8')).owner.targetId,
+        'reported-target',
+        'reporting delegation must not suppress workload ownership',
+      );
+      await reportSupervisor.close();
+      const workloadDirectory = path.join(root, 'delegated-workload-lock');
+      const delegatedClaim = createDesktopWorkloadClaim({
+        runId: 'parent-run',
+        targetId: 'registered-target',
+        targetInstanceId: 'physical-target',
+        directory: workloadDirectory,
+      });
+      const workloadSupervisor = new DesktopSupervisor({
+        target: {
+          endpoint: 'win32',
+          host: { kind: 'installed', application: { windowTitle: 'fixture' } },
+          id: 'delegated-target',
+          instanceId: 'physical-target',
+          projectRoot: root,
+          configPath: path.join(root, 'desktop.config.mjs'),
+        },
+        reporter: { runId: 'child-run' },
+        reportSession: { environment: {} },
+        workload: { kind: 'delegated', claim: delegatedClaim },
+        lockDirectory: path.join(root, 'unused-child-lock'),
+      });
+      await workloadSupervisor.open();
+      await workloadSupervisor.close();
+      assert.equal(fs.existsSync(path.join(workloadDirectory, 'interactive.lock')), true);
+      delegatedClaim.release();
     } else if (mode === 'agent') {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
       const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
