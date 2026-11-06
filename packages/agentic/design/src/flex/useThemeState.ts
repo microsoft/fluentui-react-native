@@ -1,8 +1,8 @@
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
-import { defaultThemeAppearanceState } from '../theming/appearance';
+import { resolveThemeAppearance } from '../theming/appearance';
 import { useThemeBoundary } from '../theming/context';
-import { defaultThemeState, getThemeState } from './themeState';
+import { getDefaultThemeState, getThemeState } from './themeState';
 import type { ThemeAppearanceState } from '../types/appearance.types';
 import type { ThemeState } from './themeState.types';
 
@@ -20,7 +20,7 @@ export type ThemeStyleSheet = Record<string, ViewStyle | TextStyle | ImageStyle>
  */
 export function useThemeState(): ThemeState {
   const boundary = useThemeBoundary();
-  return boundary ? getThemeState(boundary.source, boundary.appearance.resolved) : defaultThemeState;
+  return boundary ? getThemeState(boundary.source, boundary.appearance.resolved) : getDefaultThemeState();
 }
 
 /**
@@ -28,7 +28,7 @@ export function useThemeState(): ThemeState {
  */
 export function useThemeAppearance(): Readonly<ThemeAppearanceState> {
   const boundary = useThemeBoundary();
-  return boundary?.appearance ?? defaultThemeAppearanceState;
+  return boundary?.appearance ?? resolveThemeAppearance(undefined, getDefaultThemeState().appearance);
 }
 
 /**

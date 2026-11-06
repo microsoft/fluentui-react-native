@@ -31,8 +31,9 @@ may be a function of the resolved appearance, which always has a concrete `color
 authored description and the resolved appearance. `PartialFlexTokens` is shape-aware so opaque React Native colors stay
 leaves. `tokens.md` describes the defaults.
 
-A base may instead be a `FlexThemeDescription`: a complete `FlexTokenDescription` in `tokens` and an optional
-`colorTone`. Its tokens replace the package defaults for every appearance, and its tone becomes the reference's default
+A base may instead be a `FlexThemeDescription`: a complete `FlexTokenDescription` in `tokens`, or a function of the
+resolved appearance returning one, and an optional `colorTone`. Its tokens replace the package defaults for every
+appearance, and its tone becomes the reference's default
 `appearance.colorTone` when the `appearance` option sets none. A provider's `appearance` request still wins, and it
 changes only the interaction algorithm, not the description's palette. The Flex themes below are descriptions.
 
@@ -73,7 +74,7 @@ resolves from the provider prop, then the source option, then the selected appea
 
 `ThemedRoot` is a `View` wrapped in a `ThemeProvider`. With no `theme`, it inherits the nearest boundary's source,
 requested appearance, appearance source, and fallback, overriding only the fields it sets; with no boundary it uses a
-default `FlexThemeReference`. An explicit `theme` starts a new configuration. The outermost root also provides
+`FlexThemeReference` based on `flexCoolTheme`. An explicit `theme` starts a new configuration. The outermost root also provides
 `RootContext` and input-modality tracking; `RootInputBoundary` attaches popup or window content to the same scene.
 User-facing examples are in the repository's
 [theming basics](https://github.com/microsoft/fluentui-react-native/blob/main/docs/pages/Theming/Basics.md).
@@ -91,6 +92,11 @@ legacy boundary for all of them, which keeps deprecated `ThemeLayer` and direct 
 | `useTheme`           | The legacy `Theme` (from the `theming` subpath)                  | `undefined`                  |
 
 `ThemeState.highContrast` is deprecated; use `appearance.contrast`.
+
+Without a boundary, the first call to either Flex hook initializes one shared default state from `flexCoolTheme`, using
+React Native `Appearance.getColorScheme()` (or light when unavailable). Its tokens, resolved appearance, and style
+registry are reused for subsequent calls; it does not subscribe to system changes. Use a provider or `ThemedRoot` for
+live appearance updates.
 
 | Active source | Provider mount                     | `useThemeState`                   | `useTheme`                             |
 | ------------- | ---------------------------------- | --------------------------------- | -------------------------------------- |
@@ -167,13 +173,16 @@ The `themes` entry point also provides the x3 Flex defaults (`tokens.md`) as `Fl
 
 | Export          | Kind                   | Contents                                           |
 | --------------- | ---------------------- | -------------------------------------------------- |
-| `flexTheme`     | `FlexThemeDescription` | The cool light and dark defaults, with tone `cool` |
+| `flexCoolTheme` | `FlexThemeDescription` | The cool light and dark defaults, with tone `cool` |
 | `flexWarmTheme` | `FlexThemeDescription` | The warm light and dark defaults, with tone `warm` |
+| `flexTheme`     | `FlexThemeDescription` | Both palettes, selected by resolved `colorTone`    |
 
 Each is a theme description rather than a source: pass it as a `FlexThemeReference` base, alone or under recipes. A
-reference built on `flexTheme` or `flexWarmTheme` resolves the same tokens as a default `FlexThemeReference` requesting
-that tone. Both descriptions are the shared default objects, so treat them as read-only; author changes as recipes or a
-new description.
+reference built on a fixed theme keeps its palette even if a provider requests another interaction tone. Each fixed
+theme loads only its own palette and the tokens both palettes share. `flexTheme.tokens` is a resolver that selects the
+cool or warm description for the resolved `appearance.colorTone`; changing that provider request changes both the
+palette and interaction tone, with normal per-appearance caching. With no tone request it selects cool. Treat these
+shared descriptions as read-only; author changes as recipes or a new description.
 
 ```ts
 import { FlexThemeReference } from '@fluentui-react-native/design';
@@ -181,6 +190,9 @@ import { flexWarmTheme } from '@fluentui-react-native/design/themes';
 
 const theme = new FlexThemeReference({ base: flexWarmTheme, appearance: { colorScheme: 'system' } });
 ```
+
+For dynamic palette switching, use `flexTheme` as the base and set
+`<ThemeProvider theme={theme} appearance={{ colorTone: 'warm' }}>` (or `'cool'`).
 
 ## Legacy projection and bundle boundary
 

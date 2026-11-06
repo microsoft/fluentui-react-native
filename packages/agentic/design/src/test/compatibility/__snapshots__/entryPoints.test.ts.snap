@@ -112,6 +112,7 @@ exports[`public entry points ./testing keeps its runtime export names 1`] = `
 
 exports[`public entry points ./themes keeps its runtime export names 1`] = `
 [
+  "flexCoolTheme: object",
   "flexTheme: object",
   "flexWarmTheme: object",
   "fluentDarkTheme: object",

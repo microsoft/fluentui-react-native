@@ -70,6 +70,26 @@ function createMutableAppearanceSource() {
 }
 
 describe('useThemeState', () => {
+  it('shares the fallback appearance between theme hooks without a boundary', () => {
+    const states: ThemeState[] = [];
+    const appearances: ReturnType<typeof useThemeAppearance>[] = [];
+    let component: ReactTestRenderer;
+    act(() => {
+      component = create(
+        React.createElement(
+          React.Fragment,
+          null,
+          React.createElement(ThemeStateProbe, { states }),
+          React.createElement(ThemeAppearanceProbe, { states: appearances }),
+        ),
+      );
+    });
+
+    expect(appearances[0].resolved).toBe(states[0].appearance);
+    expect(appearances[0].requested.colorScheme).toBe('system');
+    act(() => component!.unmount());
+  });
+
   it('shares lazily created theme style sheets between component instances', () => {
     const states: ThemeState[] = [];
     let component: ReactTestRenderer;

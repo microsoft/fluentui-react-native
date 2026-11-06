@@ -291,12 +291,28 @@ describe('runtime graph ownership', () => {
   });
 
   it('keeps the Flex themes on the generated Flex defaults, free of legacy Fluent runtime', () => {
-    for (const entry of ['themes/flex/flexTheme.ts', 'themes/flex/flexWarmTheme.ts']) {
+    for (const entry of ['themes/flex/flexTheme.ts', 'themes/flex/flexCoolTheme.ts', 'themes/flex/flexWarmTheme.ts']) {
       const graph = runtimeGraph(entry);
-      expect(graph).toContain('flex/defaults/defaultTokens.generated.ts');
+      expect(graph).toContain('flex/defaults/sharedTokens.generated.ts');
       expect([entry, reachedUnder(graph, 'fluent/')]).toEqual([entry, []]);
       expect(graph).not.toContain('color-lib/compositing.ts');
     }
+  });
+
+  it.each([
+    ['cool', 'warm', 'flexCoolTheme'],
+    ['warm', 'cool', 'flexWarmTheme'],
+  ])('keeps the fixed %s palette independent of the %s tokens', (tone, otherTone, theme) => {
+    const graph = runtimeGraph(`themes/flex/${theme}.ts`);
+    expect(graph).toContain(`flex/defaults/${tone}Tokens.generated.ts`);
+    expect(graph).not.toContain(`flex/defaults/${otherTone}Tokens.generated.ts`);
+    expect(graph).not.toContain('flex/defaults/defaultTokens.ts');
+  });
+
+  it('keeps the provider-free fallback on the cool palette only', () => {
+    const graph = runtimeGraph('flex/useThemeState.ts');
+    expect(graph).toContain('themes/flex/flexCoolTheme.ts');
+    expect(graph).not.toContain('flex/defaults/warmTokens.generated.ts');
   });
 });
 
