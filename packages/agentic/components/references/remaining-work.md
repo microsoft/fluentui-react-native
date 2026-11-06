@@ -11,6 +11,33 @@ Open work for the agentic component catalog. Completed work is removed rather th
 is documented in the owning reference, component contract, or the repository focus references (`focus.common`,
 `focus.windows-win32`, and `focus.macos`).
 
+## Advisory assessment expansion
+
+- **Outcome:** extend the [assessment workflow](assessments/README.md) using reviewed, package-owned mappings and
+  existing execution results, without silently qualifying unsupported controls or targets.
+- **Current state:** shared discovery, package/Lage commands, per-control reports, and single-invocation unit capture
+  are implemented; only [Checkbox](assessments/checkbox.md) has a configured mapping. Ordinary PRs assess all configured
+  controls. Mapping maintenance, readiness policy, and the optional publisher's hosted activation are not automatic.
+- **Open gates:**
+  - inspect actual assertions and review mappings for additional existing Checkbox tests; ingest real compiler/type
+    results rather than counting a Jest types-suite pass;
+  - automate the mapping-maintenance phase that reads SPEC states, proposes the requirement/check/test matrix, maps existing
+    assertions, and distinguishes missing tests from missing mappings; the pilot uses a premade requirement-first checklist,
+    and owner review must precede authoritative coverage or pin updates;
+  - replace the premade mapping publisher's exact-source equality rule with trusted regeneration/proposal verification
+    against the same PR inputs before accepting generated mapping changes; differences from the old checked-in mapping
+    are expected, but publication must not silently approve new coverage claims or enable report-only reuse of changed inputs;
+  - select affected controls using implementation, contract, tests, mappings and shared dependency/harness/workflow
+    changes; ambiguous impact must conservatively include dependents, not silently skip them;
+  - add another control through its package-owned definition, then review Windows/Fabric and other target adapters using
+    their existing CI results; Paper, Fabric, mock platforms and native input qualification remain separate;
+  - agree with owners on Backlog/Experimental/Beta/Production evidence gates and approval policy; until then no stage is assigned;
+  - validate optional GitHub App publication separately in hosted CI, including failed source checks, branch races, and
+    atomic publication/report-only reuse when additional controls are configured.
+- **Done when:** reviewed mappings and target-specific execution support each added control, missing or unsupported
+  evidence remains explicit, and owners approve any maturity/publication policy. No input permissions or repository rules
+  are weakened to make a report green.
+
 ## Desktop focus qualification
 
 - **Issues:** [#4274](https://github.com/microsoft/fluentui-react-native/issues/4274); popup-family restoration in

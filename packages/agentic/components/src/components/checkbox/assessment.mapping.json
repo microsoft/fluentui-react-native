@@ -1,0 +1,961 @@
+{
+  "schemaVersion": 2,
+  "component": "checkbox",
+  "displayName": "Checkbox",
+  "componentPath": "src/components/checkbox",
+  "contract": {
+    "files": [
+      "SPEC.md",
+      "spec/source.json",
+      "spec/interaction.md",
+      "spec/accessibility.md",
+      "spec/tokens.yaml",
+      "spec/usage.md",
+      "checkbox.stories.tsx"
+    ],
+    "assertionFiles": ["src/common/desktopFocus.wdio.ts"],
+    "reviewedDigest": "d6ffc5ba256c3461b801f8446fde1308ac6001c249778f67d9f72dca32ecc3f0",
+    "mappingVersion": "checkbox-win32-matrix-v2",
+    "nativeCheck": {
+      "storyId": "components-checkbox--default",
+      "testName": "toggles native checked state in both directions",
+      "requiresPhysicalClick": true
+    },
+    "requirements": {
+      "CBX-001": {
+        "checks": [
+          {
+            "id": "default-unchecked",
+            "description": "Omitting status and defaultStatus exposes checked=false.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "default-enabled",
+            "description": "Omitting disabled exposes disabled=false.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "default-standard-variant",
+            "description": "Omitting variant selects the standard indicator radius.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "default-label",
+            "description": "Omitting label resolves the label text to Label.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "default-visible-label",
+            "description": "Omitting showLabel leaves the label visible.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "default-secondary-text",
+            "description": "Omitting secondaryText resolves its value to Description.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "default-hidden-secondary-text",
+            "description": "Omitting showSecondaryText hides secondary text.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "native-root-props",
+            "description": "Supported caller Pressable root props reach the root.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "public-prop-types",
+            "description": "The public types accept the documented status/variant values, callback signature, text/visibility props, and supported Pressable root props.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "type",
+            "tests": []
+          },
+          {
+            "id": "optional-status-callback",
+            "description": "onStatusChange is absent by default; uncontrolled activation remains valid without a supplied callback.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "reject-children",
+            "description": "The public TypeScript contract rejects caller-supplied children.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "type",
+            "tests": []
+          }
+        ],
+        "remaining": "Additional defaults/root-prop assertions exist but are not yet mapped; ingest compiler/type results separately."
+      },
+      "CBX-002": {
+        "checks": [
+          {
+            "id": "uncontrolled-press",
+            "description": "An uncontrolled unchecked press applies checked and reports checked once while forwarding onPress once.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox toggles uncontrolled status on press and forwards user handlers" }]
+          },
+          {
+            "id": "controlled-press",
+            "description": "A controlled unchecked press reports checked without changing the rendered unchecked value.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox reports presses without changing state when the status is externally driven" }
+            ]
+          },
+          {
+            "id": "mixed-press",
+            "description": "An uncontrolled indeterminate press applies checked and reports checked.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox advances indeterminate status to checked on press" }]
+          },
+          {
+            "id": "checked-press",
+            "description": "A checked press reports unchecked and applies it only when internally driven.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "initial-default-status",
+            "description": "Without supplied status, each supported defaultStatus value determines the initial rendered status.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "controlled-status-updates",
+            "description": "Caller changes to supplied status are rendered without the control taking ownership.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "status-precedence",
+            "description": "Supplied status overrides defaultStatus, including when ownership changes.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "press-callback-contract",
+            "description": "Every controlled/uncontrolled press transition reports the next status once before forwarding onPress.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "disabled-press",
+            "description": "Disabled state is exposed, focusable is false, and a press does not call onPress.",
+            "source": "spec/accessibility.md#state-and-focus",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox disables interaction and exposes disabled accessibility state" }]
+          },
+          {
+            "id": "disabled-status-callback",
+            "description": "A disabled press does not call onStatusChange.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "win32-action-unchecked",
+            "description": "The simulated Win32 Toggle action changes unchecked to checked, reports once, forwards the action once afterward, and never synthesizes onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions toggles unchecked once without synthesizing a press" }
+            ]
+          },
+          {
+            "id": "win32-action-checked",
+            "description": "The simulated Win32 Toggle action changes checked to unchecked, reports once, forwards the action once afterward, and never synthesizes onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions toggles checked once without synthesizing a press" }
+            ]
+          },
+          {
+            "id": "win32-action-mixed",
+            "description": "The simulated Win32 Toggle action changes indeterminate to checked, reports once, forwards the action once afterward, and never synthesizes onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions toggles indeterminate once without synthesizing a press" }
+            ]
+          },
+          {
+            "id": "win32-action-labels",
+            "description": "The simulated Win32 action declaration preserves an already normalized caller action list and labels.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions preserves a normalized caller action list and labels" }
+            ]
+          },
+          {
+            "id": "win32-action-deduplication",
+            "description": "The simulated Win32 action declaration normalizes toggle spellings without losing the first label or custom actions.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions"
+              }
+            ]
+          },
+          {
+            "id": "win32-controlled-action",
+            "description": "The simulated controlled Win32 action reports checked once while leaving the supplied mixed state unchanged.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions reports accessibility toggles without changing externally driven status"
+              }
+            ]
+          },
+          {
+            "id": "win32-disabled-action",
+            "description": "The simulated disabled Win32 action preserves status, suppresses status/press callbacks, and forwards the original action once.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once"
+              }
+            ]
+          },
+          {
+            "id": "win32-other-actions",
+            "description": "Simulated custom, wrong-case, and activate actions are forwarded once each without changing status or calling status/press callbacks.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions forwards custom, wrong-case, and activate actions without a second activation path"
+              }
+            ]
+          },
+          {
+            "id": "native-binary-toggle",
+            "description": "Physical clicks change the uncontrolled native checked state from false to true and back to false.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "native",
+            "tests": [
+              { "kind": "native", "storyId": "components-checkbox--default", "testName": "toggles native checked state in both directions" }
+            ]
+          },
+          {
+            "id": "whole-row-target",
+            "description": "The indicator, gap, label, and secondary text activate the same native press target.",
+            "source": "spec/interaction.md#activation-and-status",
+            "evidence": "native",
+            "tests": []
+          }
+        ],
+        "remaining": "Unlinked checks may have existing tests; native clicks do not prove all ownership/callback combinations."
+      },
+      "CBX-003": {
+        "checks": [
+          {
+            "id": "anatomy-order",
+            "description": "The optional focus visual, indicator, label column, label, and secondary text have the documented order.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "indicator-box",
+            "description": "The indicator is always present as a fixed 16-by-16 box.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "indicator-glyphs",
+            "description": "Checked and indeterminate indicators render their respective 12-by-12 glyph nodes.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders checked and indeterminate indicator glyphs" }]
+          },
+          {
+            "id": "public-slot-surface",
+            "description": "Root is the only public slot; label, secondary text, indicator, and focus visual remain internal.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "type",
+            "tests": []
+          },
+          {
+            "id": "label-column-presence",
+            "description": "The label column is present when a text node is rendered and absent when neither text node is rendered.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "indicator-symbols",
+            "description": "Checked draws a checkmark and indeterminate draws a dash.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "unchecked-no-glyph",
+            "description": "The unchecked indicator renders no glyph.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "secondary-text-visible",
+            "description": "Enabling secondary text alongside a visible label renders the supplied supporting text once.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox shows secondary text and exposes it as a description" }]
+          },
+          {
+            "id": "hidden-label",
+            "description": "showLabel=false removes visible label text, with either an explicit accessible name or the label fallback.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox keeps the visible label optional while preserving an accessible name" },
+              { "kind": "unit", "fullName": "Checkbox falls back to the label text when the visible label is hidden" }
+            ]
+          },
+          {
+            "id": "secondary-text-gating",
+            "description": "Secondary text is suppressed when the visible label is hidden.",
+            "source": "SPEC.md#requirements",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "secondary-text-warning",
+            "description": "A development warning fires when secondary text is requested without a visible label.",
+            "source": "SPEC.md#requirements",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "label-shrink",
+            "description": "Constrained label text resolves flexShrink=1 rather than a truncation policy.",
+            "source": "SPEC.md#slots-and-anatomy",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox allows constrained label text to wrap" }]
+          },
+          {
+            "id": "rendered-text-wrapping",
+            "description": "Label and secondary text actually wrap when the native root width is constrained.",
+            "source": "spec/usage.md#text",
+            "evidence": "visual",
+            "tests": []
+          }
+        ],
+        "remaining": "Anatomy/order, text gating and warning assertions and native wrapping stories still need reviewed links; style props alone do not prove wrapping geometry."
+      },
+      "CBX-004": {
+        "checks": [
+          {
+            "id": "js-checkbox-role",
+            "description": "The JS root declares accessibilityRole=checkbox.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "default-unchecked",
+            "description": "Omitting status and defaultStatus exposes checked=false.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "default-enabled",
+            "description": "Omitting disabled exposes disabled=false.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "js-checked-state",
+            "description": "Supplied checked status exposes checked=true in JS accessibility state.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders checked and indeterminate indicator glyphs" }]
+          },
+          {
+            "id": "js-mixed-state",
+            "description": "Supplied indeterminate status exposes checked=mixed in JS accessibility state.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders checked and indeterminate indicator glyphs" }]
+          },
+          {
+            "id": "label-name",
+            "description": "Without an explicit accessibilityLabel, the JS accessible name uses the supplied label.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "explicit-visible-name",
+            "description": "An explicit accessibilityLabel overrides the name fallback even when the visible label is shown.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "explicit-hidden-name",
+            "description": "An explicit accessibilityLabel remains the JS accessible name when visible label text is hidden.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox keeps the visible label optional while preserving an accessible name" }]
+          },
+          {
+            "id": "fallback-hidden-name",
+            "description": "The JS accessible name still falls back to label when visible label text is hidden.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox falls back to the label text when the visible label is hidden" }]
+          },
+          {
+            "id": "secondary-hint",
+            "description": "Rendered secondary text is delivered as the JS root accessibilityHint.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox shows secondary text and exposes it as a description" }]
+          },
+          {
+            "id": "secondary-context-not-name",
+            "description": "Secondary text is supporting context rather than part of the accessible name.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "preserve-caller-hint",
+            "description": "Secondary text is appended after a caller hint using a period and space.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "decorative-inner-nodes",
+            "description": "Inner text and indicator nodes are non-accessible and secondary text is hidden from the accessibility tree.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "owned-accessibility-state",
+            "description": "Resolved role, checked and disabled values override caller values, while other caller accessibility state is preserved.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "accessible-focusable-defaults",
+            "description": "The enabled root defaults to accessible=true and focusable=true.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "disabled-press",
+            "description": "Disabled state is exposed, focusable is false, and a press does not call onPress.",
+            "source": "spec/accessibility.md#state-and-focus",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox disables interaction and exposes disabled accessibility state" }]
+          },
+          {
+            "id": "win32-action-unchecked",
+            "description": "The simulated Win32 Toggle action changes unchecked to checked, reports once, forwards the action once afterward, and never synthesizes onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions toggles unchecked once without synthesizing a press" }
+            ]
+          },
+          {
+            "id": "win32-action-checked",
+            "description": "The simulated Win32 Toggle action changes checked to unchecked, reports once, forwards the action once afterward, and never synthesizes onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions toggles checked once without synthesizing a press" }
+            ]
+          },
+          {
+            "id": "win32-action-mixed",
+            "description": "The simulated Win32 Toggle action changes indeterminate to checked, reports once, forwards the action once afterward, and never synthesizes onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions toggles indeterminate once without synthesizing a press" }
+            ]
+          },
+          {
+            "id": "win32-action-labels",
+            "description": "The simulated Win32 action declaration preserves an already normalized caller action list and labels.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox win32 accessibility actions preserves a normalized caller action list and labels" }
+            ]
+          },
+          {
+            "id": "win32-action-deduplication",
+            "description": "The simulated Win32 action declaration normalizes toggle spellings without losing the first label or custom actions.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions"
+              }
+            ]
+          },
+          {
+            "id": "win32-controlled-action",
+            "description": "The simulated controlled Win32 action reports checked once while leaving the supplied mixed state unchanged.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions reports accessibility toggles without changing externally driven status"
+              }
+            ]
+          },
+          {
+            "id": "win32-disabled-action",
+            "description": "The simulated disabled Win32 action preserves status, suppresses status/press callbacks, and forwards the original action once.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once"
+              }
+            ]
+          },
+          {
+            "id": "win32-other-actions",
+            "description": "Simulated custom, wrong-case, and activate actions are forwarded once each without changing status or calling status/press callbacks.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "unit",
+            "tests": [
+              {
+                "kind": "unit",
+                "fullName": "Checkbox win32 accessibility actions forwards custom, wrong-case, and activate actions without a second activation path"
+              }
+            ]
+          },
+          {
+            "id": "native-checkbox-role",
+            "description": "The native root exposes the checkbox role.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "native",
+            "tests": [
+              { "kind": "native", "storyId": "components-checkbox--default", "testName": "toggles native checked state in both directions" }
+            ]
+          },
+          {
+            "id": "native-three-valued-state",
+            "description": "Native accessibility exposes unchecked, checked, and mixed values.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "native-name-and-description",
+            "description": "Native accessibility exposes the resolved name and supporting context once.",
+            "source": "spec/accessibility.md#naming-and-description",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "native-toggle-dispatch",
+            "description": "Actual UIA Toggle invocation changes state and satisfies status/action callback counts without synthesizing onPress.",
+            "source": "spec/accessibility.md#native-semantics",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "native-disabled-tab",
+            "description": "A disabled Checkbox is skipped by native keyboard navigation.",
+            "source": "spec/accessibility.md#state-and-focus",
+            "evidence": "native",
+            "tests": []
+          }
+        ],
+        "remaining": "JS simulation is not native accessibility qualification; native naming/action dispatch and additional existing assertions need reviewed links."
+      },
+      "CBX-005": {
+        "checks": [
+          {
+            "id": "default-indicator-colors",
+            "description": "The default unchecked indicator resolves neutral transparent resting fill and neutral heavy resting stroke.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox renders default checkbox accessibility and secondary styling" }]
+          },
+          {
+            "id": "unchecked-status-colors",
+            "description": "Unchecked status resolves neutral transparent fill and secondary-emphasis label color.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox resolves unchecked status colors" }]
+          },
+          {
+            "id": "checked-status-colors",
+            "description": "Checked status resolves brand-heavy fill, primary label color, and on-brand glyph color.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox resolves checked status colors" }]
+          },
+          {
+            "id": "mixed-status-colors",
+            "description": "Indeterminate status resolves brand-heavy fill, primary label color, and on-brand glyph color.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox resolves indeterminate status colors" }]
+          },
+          {
+            "id": "standard-radius",
+            "description": "Explicit standard variant selects the base100 indicator radius.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox resolves the standard variant" }]
+          },
+          {
+            "id": "circular-radius",
+            "description": "Explicit circular variant selects the circular indicator radius.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox resolves the circular variant" }]
+          },
+          {
+            "id": "unchecked-hover-colors",
+            "description": "Hovering an unchecked root selects hover fill, stroke, and secondary-emphasis label colors.",
+            "source": "spec/interaction.md#state-model",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox resolves hover and pressed feedback for label, indicator, and status colors" }
+            ]
+          },
+          {
+            "id": "unchecked-pressed-colors",
+            "description": "Pressing an already hovered unchecked root selects pressed fill, stroke, and label colors ahead of hover.",
+            "source": "spec/interaction.md#state-model",
+            "evidence": "unit",
+            "tests": [
+              { "kind": "unit", "fullName": "Checkbox resolves hover and pressed feedback for label, indicator, and status colors" }
+            ]
+          },
+          {
+            "id": "checked-disabled-colors",
+            "description": "Disabled checked status resolves disabled indicator fill, transparent stroke, and disabled label color.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": [{ "kind": "unit", "fullName": "Checkbox applies disabled colors to the label and indicator" }]
+          },
+          {
+            "id": "checked-mixed-stroke",
+            "description": "Enabled checked and indeterminate status resolve the transparent indicator stroke.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "variant-only-radius",
+            "description": "Standard and circular variants differ only in indicator radius, sharing other indicator values.",
+            "source": "SPEC.md#props-and-defaults",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "unchecked-disabled-colors",
+            "description": "Disabled unchecked status resolves its declared indicator and label colors.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "mixed-disabled-colors",
+            "description": "Disabled indeterminate status resolves its declared indicator and label colors.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "disabled-glyph-colors",
+            "description": "Disabled checked and indeterminate glyphs resolve disabled foreground color.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "secondary-emphasis-colors",
+            "description": "Secondary text retains secondary emphasis for every status and uses the declared disabled color.",
+            "source": "spec/tokens.yaml",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "secondary-interaction-colors",
+            "description": "Secondary text uses its declared semantic palette under hovered and pressed state for each status.",
+            "source": "SPEC.md#requirements",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "status-interaction-precedence",
+            "description": "Checked and mixed status retain their semantic palette under hover/press, with disabled overriding both and pressed overriding hovered.",
+            "source": "spec/interaction.md#state-model",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "caller-style-last",
+            "description": "Caller root style overrides token-derived root style.",
+            "source": "spec/interaction.md#state-model",
+            "evidence": "unit",
+            "tests": []
+          }
+        ],
+        "remaining": "Additional existing state, secondary-text, precedence and caller-style assertions need reviewed links; resolved styles do not prove rendered appearance."
+      },
+      "CBX-006": {
+        "checks": [
+          {
+            "id": "win32-custom-focus-default",
+            "description": "Win32 selects the custom focus path by default rather than the system ring.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "keyboard-focus-modality",
+            "description": "The custom ring is visible only while the root is focused with keyboard modality.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "programmatic-focus-modality",
+            "description": "Programmatic focus uses the last root modality.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "disabled-noninteractive-focus",
+            "description": "Disabled and noninteractive targets never show custom focus feedback.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "focus-target-detachment",
+            "description": "Detaching or disabling a native focus target invalidates pending focus requests.",
+            "source": "spec/interaction.md#focus-target-lifetime",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "focus-override",
+            "description": "alwaysVisible selects the custom path and bypasses modality only while focused; useSystemFocusRing remains an explicit composition override.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "focus-ring-lifetime",
+            "description": "Custom rings remain mounted across focus/blur and do not intercept input.",
+            "source": "spec/interaction.md#focus-and-motion",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "focus-target-ref-composition",
+            "description": "Internal focus-target refs compose with caller refs on the actual interactive root rather than a structural or descendant target.",
+            "source": "spec/interaction.md#focus-target-lifetime",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "focus-ref-lifetime",
+            "description": "Object/callback refs, cleanup, ref replacement, and unmount/remount retain exactly one live focus target.",
+            "source": "SPEC.md#requirements",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "self-focus-not-descendant-focus",
+            "description": "Native self-focus is distinguished from bubbled descendant focus events.",
+            "source": "spec/interaction.md#focus-target-lifetime",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "focused-modality-update",
+            "description": "Changing root modality updates an already-focused custom ring without requiring blur/refocus or scene-wide rerenders.",
+            "source": "SPEC.md#requirements",
+            "evidence": "native",
+            "tests": []
+          },
+          {
+            "id": "native-custom-exclusivity",
+            "description": "The actual focus owner uses either the native ring or the custom slot, never competing rings.",
+            "source": "SPEC.md#requirements",
+            "evidence": "visual",
+            "tests": []
+          },
+          {
+            "id": "scene-focus-isolation",
+            "description": "ThemedRoot supplies root modality, with nested theme boundaries sharing the controller and independent scenes retaining separate modality.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "unit",
+            "tests": []
+          },
+          {
+            "id": "focus-visual-environments",
+            "description": "Custom ring geometry and shared theme colors remain correct under high contrast, display scaling, clipping, and active/inactive native windows.",
+            "source": "SPEC.md#requirements",
+            "evidence": "visual",
+            "tests": []
+          },
+          {
+            "id": "dual-ring-geometry",
+            "description": "The custom dual ring surrounds the whole row with the shared colors, widths, and resolved component radius.",
+            "source": "SPEC.md#focus-visuals",
+            "evidence": "visual",
+            "tests": []
+          }
+        ],
+        "remaining": "Win32 focus, target lifetime and visual geometry need qualifying evidence; the recorded macOS mock focus test receives no Win32 credit."
+      }
+    }
+  },
+  "unit": {
+    "testFiles": ["src/components/checkbox/checkbox.test.tsx"],
+    "inputs": [
+      "packages/agentic/components/src/components/checkbox/checkbox.test.tsx",
+      "packages/agentic/components/jest.config.cjs",
+      "scripts/configs/jest/jest.config.cjs",
+      "scripts/configs/jest/babel.config.cjs",
+      "scripts/src/const.mts",
+      "scripts/src/tasks/jest.ts",
+      "scripts/src/ci/assessment/controlAssessmentUnitExecution.ts"
+    ],
+    "platform": "macos",
+    "reviewedDigest": "32892707182052798c9cb0d09b8060966e9b216550ff940aa154ac4b0ccd2089",
+    "mappingVersion": "checkbox-jest-macos-mock-matrix-v2",
+    "environment": "React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch",
+    "excludedCases": [
+      {
+        "fullName": "Checkbox windows accessibility actions toggles unchecked once without synthesizing a press",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions toggles checked once without synthesizing a press",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions toggles indeterminate once without synthesizing a press",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions preserves a normalized caller action list and labels",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions reports accessibility toggles without changing externally driven status",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox windows accessibility actions forwards custom, wrong-case, and activate actions without a second activation path",
+        "reason": "Windows Platform.OS simulation under the macOS Jest mock; no Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions toggles unchecked once without synthesizing a press",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions toggles checked once without synthesizing a press",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions toggles indeterminate once without synthesizing a press",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions preserves a normalized caller action list and labels",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions deduplicates legacy and native spellings without losing the caller label or custom actions",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions reports accessibility toggles without changing externally driven status",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions blocks disabled accessibility toggles while forwarding the caller handler once",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox macos accessibility actions forwards custom, wrong-case, and activate actions without a second activation path",
+        "reason": "macOS Platform.OS simulation, not Win32 native accessibility dispatch."
+      },
+      {
+        "fullName": "Checkbox uses native focus visuals without mounting custom rings",
+        "reason": "macOS mock focus props, not Win32 custom dual-ring coverage."
+      }
+    ]
+  },
+  "limitations": [
+    "This is a premade reviewed checklist derived from SPEC requirements and companions, not an automatically generated or exhaustive maturity policy.",
+    "Empty tests arrays mean no approved mapping for that check, not necessarily that no test exists.",
+    "Only the existing named native Checkbox callback is mapped; passing it covers binary native clicks and native role, not all state or accessibility behavior.",
+    "Shared check IDs repeat identical definitions under multiple requirements; all linked tests must qualify before the check passes.",
+    "The macOS focus case and non-Win32 platform tables remain recorded without Win32 requirement credit."
+  ]
+}

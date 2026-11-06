@@ -21,6 +21,7 @@
     "spec-source-lock.json",
     "spec-source-report.json",
     "src/",
+    "!src/components/*/assessment/**",
     "tsconfig.json",
     "tsconfig.stories.json"
   ],
@@ -44,6 +45,7 @@
     }
   },
   "scripts": {
+    "assess-components": "fluentui-scripts assess-components",
     "build": "tsc -b",
     "check:spec-contracts": "node ./scripts/spec-contracts/check-spec-contracts.cjs",
     "clean": "fluentui-scripts clean",
@@ -105,7 +107,10 @@
     }
   },
   "furn": {
-    "jestPlatform": "macos"
+    "jestPlatform": "macos",
+    "assessments": [
+      "src/components/checkbox/assessment.mapping.json"
+    ]
   },
   "rnx-kit": {
     "kitType": "library",
