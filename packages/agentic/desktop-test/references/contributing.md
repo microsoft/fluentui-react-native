@@ -14,6 +14,10 @@ session wiring is in `src/wdio/`.
 
 Add contract coverage for schema, lifecycle, reporting protocol, and failure
 paths. Do not move Storybook-specific story extraction into this package.
+The package-boundary contract exercises the built public entry points with a
+loader that rejects React, React Native, and Storybook imports; keep its
+standalone consumer and negative fixtures representative of package manifests
+and runtime imports.
 
 Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` from the package.
 Run consumer suites when changing public configuration or lifecycle behavior.

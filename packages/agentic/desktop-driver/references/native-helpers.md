@@ -13,6 +13,12 @@ The package ships checked-in native source and builds one small helper on the
 target operating system. Native binaries are not published in npm, compiled
 during installation, or downloaded automatically.
 
+Applications that only need helper build, resolution, or verification can
+import those functions from
+`@fluentui-react-native/desktop-driver/native`. This entry maps directly to
+the helper implementation and avoids loading the package root and its
+WebdriverIO integration.
+
 Windows and Win32 share the C++ x64 provider. macOS uses the Swift arm64
 provider. Both implement the private
 [FDR1 framed stdio protocol](../native/PROTOCOL.md) behind the same
