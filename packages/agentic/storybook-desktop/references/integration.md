@@ -128,8 +128,9 @@ use 30 s. The Windows smoke relaunches the app between its `stories` and
 with the same budget and waits for authenticated readiness before authored
 tests navigate. A relaunched runtime that has said hello but not yet sent its
 initial `storyRendered` reports `bridge-unavailable`, not `relaunch-required`,
-so this wait keeps retrying. Authored-test navigation itself does not wait for
-the bridge.
+so this wait keeps retrying. A reloaded runtime whose new socket authenticates
+before the old socket closes retires the old bridge in the same way. Authored-test
+navigation itself does not wait for the bridge.
 
 Epoch/cancellation-aware providers reject stale preview mutations without
 invalidating chrome or live secondary windows. Interrupted navigation still

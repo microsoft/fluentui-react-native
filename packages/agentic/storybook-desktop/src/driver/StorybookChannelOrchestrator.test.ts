@@ -532,6 +532,48 @@ describe('StorybookChannelOrchestrator epochs and lifetime', () => {
     await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
   });
 
+  test('a reloaded runtime that authenticates before the old socket closes retires the old bridge', async () => {
+    const { client, fetch, orchestrator, server } = setup(
+      jest.fn(() => new Promise<Response>(() => {})),
+      10_000,
+    );
+    client.authenticate();
+    const inFlight = orchestrator.selectStory(request);
+    const replacement = new Client();
+    server.emit('connection', replacement);
+    replacement.hello();
+    await expect(inFlight).rejects.toMatchObject({ effect: 'unknown', message: expect.stringContaining('replaced') });
+    await expect(orchestrator.getCurrentStory()).resolves.toBeNull();
+    // As after a close, the replacement awaits its initial render; nothing reaches either socket meanwhile.
+    await expect(orchestrator.selectStory({ ...request, requestId: 'after' })).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(replacement.sent).toHaveLength(1);
+    expect(client.sent.filter(({ type }) => type === 'furn:desktop:prepare-story')).toHaveLength(1);
+
+    const idle = setup();
+    idle.client.authenticate();
+    const reloaded = new Client();
+    idle.server.emit('connection', reloaded);
+    reloaded.hello();
+    // Nothing was pending on the old socket: the replacement is only awaiting its initial render.
+    await expect(idle.orchestrator.selectStory(request)).rejects.toMatchObject({
+      data: { reason: 'bridge-unavailable' },
+      effect: 'none',
+    });
+    // The still-open old socket can neither reclaim the bridge nor complete work.
+    idle.client.hello();
+    reloaded.receive('storyRendered', request.storyId);
+    const selection = idle.orchestrator.selectStory(request);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    idle.client.ready({ connectionEpoch: reloaded.epoch });
+    reloaded.ready({ connectionEpoch: reloaded.epoch });
+    await expect(selection).resolves.toMatchObject({ connectionEpoch: reloaded.epoch });
+    expect(idle.client.sent).toHaveLength(1);
+  });
+
   test('cancellation before dispatch has no effect; after dispatch fences the epoch until relaunch', async () => {
     const controller = new AbortController();
     const { client, fetch, orchestrator } = setup(

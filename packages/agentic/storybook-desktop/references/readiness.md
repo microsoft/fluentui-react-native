@@ -34,6 +34,10 @@ The hello must echo that epoch and the manifest identity. Ready/error events
 bind the epoch, request, run, and story; version-1 native markers additionally
 bind the preview generation. Missing epoch or marker evidence is not readiness.
 An old socket cannot authenticate or complete work on its replacement.
+A runtime reload can authenticate its new socket before the old socket reports
+close. That valid hello retires the old bridge exactly as a close does: the old
+socket is fenced, pending work is rejected with effect `unknown`, and the
+replacement awaits its initial render before it becomes selectable.
 
 The local provider context carries the session lifetime ID and abort signal
 separately from serializable inputs. No authenticated bridge means prompt

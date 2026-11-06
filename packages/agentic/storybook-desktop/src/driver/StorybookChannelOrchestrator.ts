@@ -213,12 +213,7 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
     client.on('close', () => {
       this.epochs.delete(client);
       this.initializedClients.delete(client);
-      if (this.bridgeClient !== client) return;
-      this.bridgeClient = undefined;
-      this.bridgeConnected = false;
-      this.needsRelaunch = true;
-      this.currentStory = null;
-      for (const pending of this.pending.values()) pending.reject(new Error('The authenticated Storybook runtime bridge disconnected.'));
+      if (this.bridgeClient === client) this.retireBridge(client, 'The authenticated Storybook runtime bridge disconnected.');
     });
     if (client.readyState === 1) {
       client.send(JSON.stringify({ type: 'furn:desktop:request-hello', args: [{ connectionEpoch: epoch, version: 2 }] }));
@@ -260,19 +255,31 @@ export class StorybookChannelOrchestrator implements StoryOrchestrator {
   private acceptHello(client: ChannelClient, payload: Record<string, unknown>): void {
     const expected = this.driverManifest;
     if (
+      this.fencedClients.has(client) ||
       payload.version !== 2 ||
       payload.connectionEpoch !== this.epochs.get(client) ||
       payload.instanceId !== expected.instanceId ||
       payload.endpoint !== expected.endpoint ||
       payload.targetId !== expected.targetId ||
       payload.platformManifestDigest !== expected.platformManifestDigest ||
-      payload.nonce !== expected.bridgeNonce ||
-      (this.bridgeClient && this.bridgeClient !== client)
+      payload.nonce !== expected.bridgeNonce
     )
       return;
+    // A runtime reload can authenticate its new socket before the old socket reports close; the old context is lost either way.
+    if (this.bridgeClient && this.bridgeClient !== client)
+      this.retireBridge(this.bridgeClient, 'The authenticated Storybook runtime bridge was replaced by a new runtime connection.');
     this.bridgeClient = client;
     if (this.journal) this.recordBridge(client);
     this.initializeBridge(client);
+  }
+
+  private retireBridge(client: ChannelClient, reason: string): void {
+    this.fencedClients.add(client);
+    this.bridgeClient = undefined;
+    this.bridgeConnected = false;
+    this.needsRelaunch = true;
+    this.currentStory = null;
+    for (const pending of this.pending.values()) pending.reject(new Error(reason));
   }
 
   private recordBridge(client: ChannelClient): Promise<void> {
