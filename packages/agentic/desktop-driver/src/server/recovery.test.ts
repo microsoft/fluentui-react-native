@@ -195,6 +195,44 @@ describe('Desktop Driver settlement journal', () => {
     expect(storage.records.size).toBe(0);
   });
 
+  test.each(['mutation', 'quarantine'])('a valid sibling cannot hide a corrupt %s record from recovery', async (kind) => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    await quarantineByLostClick(service);
+    await service.harness.close();
+    // Lost-response quarantine normally retains only the quarantine record. Add its mutation sibling to exercise both.
+    const [quarantineName, contents] = [...storage.records.entries()].find(([name]) => name.startsWith('quarantine-'))!;
+    const record = JSON.parse(contents) as Record<string, unknown>;
+    const mutationName = quarantineName.replace('quarantine-', 'mutation-');
+    storage.records.set(
+      mutationName,
+      JSON.stringify({
+        application: record.application,
+        command: record.command,
+        id: record.id,
+        kind: 'mutation',
+        sessionId: record.sessionId,
+        since: record.since,
+        targetId: record.targetId,
+        version: 1,
+      }),
+    );
+    storage.records.set(kind === 'mutation' ? mutationName : quarantineName, '{"corrupt":true}');
+    const probe = jest.fn(async (): Promise<ApplicationState> => 'exited');
+    const restarted = await startService(storage, {}, probe);
+    await expect(restarted.open()).rejects.toMatchObject(quarantinedOnOpen);
+    const quarantine = restarted.harness.server.sessions.getQuarantine(restarted.harness.target.id)!;
+    expect(quarantine.application).toBeUndefined();
+    await expect(
+      restarted.harness.server.recoverTarget(restarted.harness.target.id, {
+        evidence: 'application-exited',
+        quarantineId: quarantine.id,
+      }),
+    ).rejects.toThrow(/not proven/);
+    expect(probe).not.toHaveBeenCalled();
+    expect(storage.records.size).toBe(2);
+  });
+
   test('quarantines the target when it cannot record that a mutation settled', async () => {
     const storage = new MemoryStorage();
     const service = await startService(storage);
