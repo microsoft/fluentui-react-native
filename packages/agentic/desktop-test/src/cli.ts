@@ -188,6 +188,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         });
       } else if (config.config.integration?.run && suite?.kind !== 'wdio') {
         await owner.open(['test', 'serve', 'run'].includes(action));
+        await owner.startResources();
         if (action === 'test' || action === 'serve') await owner.startConfiguredServices();
         await owner.services.guard(
           config.config.integration.run({
@@ -218,7 +219,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
               }),
             );
           markReady();
-          await owner.services.guard(new Promise<never>(() => undefined));
+          await owner.services.waitForStop();
         } else if (suite?.kind === 'wdio') await runDesktopWdioSuite(owner, config, test!.suite);
         else throw new Error('The imported integration does not implement this suite.');
       }

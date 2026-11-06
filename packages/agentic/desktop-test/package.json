@@ -55,6 +55,16 @@
       "import": "./lib/driverService.js",
       "default": "./src/driverService.ts"
     },
+    "./resources": {
+      "types": "./lib/resources.d.ts",
+      "import": "./lib/resources.js",
+      "default": "./src/resources.ts"
+    },
+    "./ownership": {
+      "types": "./lib/ownership.d.ts",
+      "import": "./lib/ownership.js",
+      "default": "./src/ownership.ts"
+    },
     "./wdio": {
       "types": "./lib/wdio/index.d.ts",
       "import": "./lib/wdio/index.js",
