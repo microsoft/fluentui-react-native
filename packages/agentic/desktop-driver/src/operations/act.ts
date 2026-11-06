@@ -210,7 +210,7 @@ export async function proveSelector(
 export async function revalidate(runtime: OperationRuntime, entry: ReferenceEntry, proof: UniquenessProof): Promise<NativeElementSnapshot> {
   if (entry.scope === 'preview' && runtime.stories) {
     const current = await runtime.stories.current(runtime.signal);
-    if (current.changed || current.story?.verification === 'unconfirmed') {
+    if (current.changed || current.unavailable || current.story?.verification === 'unconfirmed') {
       throw rejection(runtime, 'stale element reference', 'story-context-stale', 'The preview context is stale. Select the story again.');
     }
     const resolution = runtime.state.refs.resolve(entry.reference, runtime.previewGeneration());

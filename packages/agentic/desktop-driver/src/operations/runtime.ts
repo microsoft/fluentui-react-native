@@ -61,6 +61,8 @@ export type StoryVerification = 'marker' | 'none' | 'unconfirmed';
 
 /** The story this session selected, as revalidated when it was read. */
 export type OperationCurrentStory = {
+  /** A previously verified context was lost; fresh references cannot establish story readiness. */
+  unavailable?: true;
   /** The rendered story is not the one this session selected, so the session forgot it and expired the preview. */
   changed?: true;
   /** Absent when no story is selected. */

@@ -22,6 +22,8 @@ pass the local lifetime ID and abort signal separately from serialized inputs.
 Preview-scoped mutations recheck provider/native context; chrome and live
 secondary-window references do not expire with the preview. Unknown navigation
 effects still quarantine: a replacement bridge epoch is not recovery evidence.
+After losing a verified context, preview mutations remain unavailable until
+a new verified selection; finding fresh elements alone cannot restore readiness.
 
 ## Supported targets
 

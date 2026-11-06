@@ -12,6 +12,7 @@ import type { DesktopSession, SessionManager } from './SessionManager.js';
 export type StoryChange = 'reset' | 'select';
 
 const markerPollMs = 25;
+const unavailableContexts = new WeakSet<DesktopSession>();
 
 /**
  * Selects or resets a story and waits until the native story root shows it. The preview region expires first and the
@@ -44,6 +45,7 @@ export async function changeStory(
           }
           const verified = await verifyStoryMarker(session, result, signal);
           signal.throwIfAborted();
+          unavailableContexts.delete(session);
           session.story = result;
           return { result, verified };
         },
@@ -106,7 +108,7 @@ export async function readCurrentStory(
 ): Promise<OperationCurrentStory> {
   const story = session.story;
   if (!story) {
-    return {};
+    return unavailableContexts.has(session) ? { unavailable: true } : {};
   }
   const current = await withCommandTimeout(
     (signal) => requireOrchestrator(session).getCurrentStory({ lifetimeId: session.id, signal }),
@@ -115,6 +117,7 @@ export async function readCurrentStory(
     { signal },
   );
   if (!current || !matchesStoryMarker(JSON.stringify(current), story)) {
+    unavailableContexts.add(session);
     sessions.invalidatePreview(session);
     session.story = null;
     return { changed: true };
@@ -128,6 +131,7 @@ export async function readCurrentStory(
     return { story: { storyId: story.storyId, verification: 'marker' } };
   }
   if (markers.some((marker) => parseStoryMarker(marker) !== undefined) && session.story === story) {
+    unavailableContexts.add(session);
     sessions.invalidatePreview(session);
     session.story = null;
     return { changed: true };
@@ -137,7 +141,7 @@ export async function readCurrentStory(
 
 export async function assertStoryContext(session: DesktopSession, sessions: SessionManager): Promise<void> {
   const current = await readCurrentStory(session, sessions, session.commandAbortController.signal);
-  if (current.changed || current.story?.verification === 'unconfirmed') {
+  if (current.changed || current.unavailable || current.story?.verification === 'unconfirmed') {
     throw attachFailureEffect(
       new WebDriverError('stale element reference', 'The Storybook preview context is stale.', {
         reason: 'story-context-stale',

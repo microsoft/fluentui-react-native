@@ -121,6 +121,8 @@ describe('story operations', () => {
         harness.storyOrchestrator!.getCurrentStory = async () => null;
         await expect(preview.click()).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
         await expect(chrome.click()).resolves.toBeNull();
+        const freshPreview = await session.findElement('accessibility id', 'preview');
+        await expect(freshPreview.click()).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
         await session.switchToWindow('secondary');
         await expect(secondary.click()).resolves.toBeNull();
       },
@@ -213,12 +215,21 @@ describe('story operations', () => {
     await withStories(async ({ harness, session }) => {
       await session.story({ storyId: manifest.entries[0].id });
       const found = (await session.find({ automationId: 'button-primary' })).result;
+      const getCurrent = harness.storyOrchestrator!.getCurrentStory.bind(harness.storyOrchestrator);
       harness.storyOrchestrator!.getCurrentStory = async () => null;
       await expect(session.act({ action: 'activate', ref: found.matches[0].ref, sample: found.sample.id })).rejects.toMatchObject({
         code: 'stale element reference',
         data: { reason: 'story-context-stale', mutation: { effect: 'none' } },
       });
       expect(harness.server.sessions.get(session.id).story).toBeNull();
+      const fresh = (await session.find({ automationId: 'button-primary' })).result;
+      await expect(session.act({ action: 'activate', ref: fresh.matches[0].ref, sample: fresh.sample.id })).rejects.toMatchObject({
+        data: { reason: 'story-context-stale', mutation: { effect: 'none' } },
+      });
+      harness.storyOrchestrator!.getCurrentStory = getCurrent;
+      await session.story({ storyId: manifest.entries[0].id });
+      const selected = (await session.find({ automationId: 'button-primary' })).result;
+      await expect(session.act({ action: 'activate', ref: selected.matches[0].ref, sample: selected.sample.id })).resolves.toBeDefined();
     });
   });
 
