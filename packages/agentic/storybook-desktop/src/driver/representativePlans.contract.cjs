@@ -32,6 +32,9 @@ async function main() {
     if (!typedStories.includes(entry.sourcePath)) {
       throw new Error(`WDIO story is not included in test:stories: ${entry.sourcePath}`);
     }
+    if (!entry.wdio.cases?.length || entry.wdio.cases.length !== entry.wdio.testNames?.length) {
+      throw new Error(`Every component WDIO case must use desktopIt: ${entry.sourcePath} / ${entry.wdio.exportName}`);
+    }
   }
   const selectedIds = new Set(['components-button--default', 'components-checkbox--default', 'components-input--default']);
   const planned = manifest.entries.filter(({ id }) => selectedIds.has(id));

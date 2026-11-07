@@ -23,7 +23,11 @@ yarn storybook smoke --macos --mode stories-and-tests
 ```
 
 Replace `macos` with `windows` or `win32`. Use `yarn storybook test
---<platform> --list` to discover executable story-test names. Runtime IDs and
+--<platform> --list` to discover executable story-test names. Add
+`--input accessible` to `test` or `smoke --mode stories-and-tests` to exclude
+cases that need physical input, or `--input physical` on an unattended
+machine. Accessible runs avoid pointer and keyboard injection, but may still
+activate windows or change focus; keep desktop workloads exclusive. Runtime IDs and
 listener ports are available through the app's `desktop-driver` command.
 See `agent-map.yaml` for the current command contract and paths.
 
