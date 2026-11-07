@@ -4,11 +4,11 @@ module.exports = {
   "0.81": {
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.170.59"
+      "version": "0.170.60"
     },
     "@fluentui-react-native/components": {
       "name": "@fluentui-react-native/components",
-      "version": "0.8.0"
+      "version": "0.8.1"
     },
     "@fluentui-react-native/design": {
       "name": "@fluentui-react-native/design",
@@ -16,27 +16,27 @@ module.exports = {
     },
     "@fluentui-react-native/desktop-driver-mcp": {
       "name": "@fluentui-react-native/desktop-driver-mcp",
-      "version": "0.1.1"
+      "version": "0.1.2"
     },
     "@fluentui-react-native/desktop-driver": {
       "name": "@fluentui-react-native/desktop-driver",
-      "version": "0.5.0"
+      "version": "0.5.1"
     },
     "@fluentui-react-native/desktop-test": {
       "name": "@fluentui-react-native/desktop-test",
-      "version": "0.2.3"
+      "version": "0.2.4"
     },
     "@fluentui-react-native/native-core": {
       "name": "@fluentui-react-native/native-core",
-      "version": "0.2.0"
+      "version": "0.2.1"
     },
     "@fluentui-react-native/storybook-desktop-runtime": {
       "name": "@fluentui-react-native/storybook-desktop-runtime",
-      "version": "0.3.5"
+      "version": "0.3.6"
     },
     "@fluentui-react-native/storybook-desktop": {
       "name": "@fluentui-react-native/storybook-desktop",
-      "version": "0.4.3"
+      "version": "0.4.4"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -60,7 +60,7 @@ module.exports = {
     },
     "@fluentui-react-native/contextual-menu": {
       "name": "@fluentui-react-native/contextual-menu",
-      "version": "0.25.20"
+      "version": "0.25.21"
     },
     "@fluentui-react-native/divider": {
       "name": "@fluentui-react-native/divider",
@@ -84,11 +84,11 @@ module.exports = {
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.16.14"
+      "version": "1.16.15"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
-      "version": "0.15.14"
+      "version": "0.15.15"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
@@ -108,7 +108,7 @@ module.exports = {
     },
     "@fluentui-react-native/radio-group": {
       "name": "@fluentui-react-native/radio-group",
-      "version": "0.22.19"
+      "version": "0.22.20"
     },
     "@fluentui-react-native/separator": {
       "name": "@fluentui-react-native/separator",
@@ -124,7 +124,7 @@ module.exports = {
     },
     "@fluentui-react-native/tablist": {
       "name": "@fluentui-react-native/tablist",
-      "version": "0.8.19"
+      "version": "0.8.20"
     },
     "@fluentui-react-native/text": {
       "name": "@fluentui-react-native/text",
@@ -184,7 +184,7 @@ module.exports = {
     },
     "@fluentui-react-native/dropdown": {
       "name": "@fluentui-react-native/dropdown",
-      "version": "0.11.20"
+      "version": "0.11.21"
     },
     "@fluentui-react-native/experimental-expander": {
       "name": "@fluentui-react-native/experimental-expander",
@@ -192,7 +192,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
-      "version": "0.11.20"
+      "version": "0.11.21"
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",
@@ -224,7 +224,7 @@ module.exports = {
     },
     "@fluentui-react-native/tooltip": {
       "name": "@fluentui-react-native/tooltip",
-      "version": "0.5.16"
+      "version": "0.5.17"
     },
     "@fluentui-react-native/vibrancy-view": {
       "name": "@fluentui-react-native/vibrancy-view",
@@ -256,15 +256,15 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.44.13"
+      "version": "0.44.14"
     },
     "@fluentui-react-native/callout": {
       "name": "@fluentui-react-native/callout",
-      "version": "0.29.8"
+      "version": "0.29.9"
     },
     "@fluentui-react-native/focus-zone": {
       "name": "@fluentui-react-native/focus-zone",
-      "version": "0.23.8"
+      "version": "0.23.9"
     },
     "@fluentui-react-native/theme-tokens": {
       "name": "@fluentui-react-native/theme-tokens",

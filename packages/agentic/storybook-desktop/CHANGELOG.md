@@ -1,5 +1,14 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.4
+
+### Patch Changes
+
+- 8574d22: Add modality-aware desktop test descriptors: `desktopIt` and `desktopDescribe` declare `requires`, `input`, `platforms`, `scope`, and known gaps for Storybook cases and, through `desktop-test/jasmine`, WebdriverIO Jasmine specs. `--input accessible|physical` (or `DESKTOP_INPUT`) runs one input lane, selects the cases that apply, masks the host for the accessible lane, and reports the lane and what it excluded.
+- Updated dependencies [8574d22]
+  - @fluentui-react-native/desktop-driver@0.5.1
+  - @fluentui-react-native/desktop-test@0.2.4
+
 ## 0.4.3
 
 ### Patch Changes

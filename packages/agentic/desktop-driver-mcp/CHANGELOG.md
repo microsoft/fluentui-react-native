@@ -1,5 +1,12 @@
 # @fluentui-react-native/desktop-driver-mcp
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [8574d22]
+  - @fluentui-react-native/desktop-driver@0.5.1
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/dropdown
 
+## 0.11.21
+
+### Patch Changes
+
+- @fluentui-react-native/callout@0.29.9
+
 ## 0.11.20
 
 ### Patch Changes
