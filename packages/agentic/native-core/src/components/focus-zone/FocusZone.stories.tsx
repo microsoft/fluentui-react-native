@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Pressable, Text, View, StyleSheet } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { FocusZone } from './FocusZone';
@@ -150,71 +151,63 @@ export default meta;
 type Story = WdioStory<StoryObj<typeof FocusZone>>;
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  wdio: {
-    'confirms native default, edge, and specific descendant requests': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Native commands require physical input for their owner controls.');
-        return;
-      }
-      for (const [strategy, item] of [
-        ['default', 2],
-        ['first', 1],
-        ['last', 3],
-        ['default', 2],
-        ['target', 2],
-        ['first', 1],
-      ] as const) {
-        await (await browser.$(`~modern-focus-request-${strategy}`)).click();
-        await expect(await browser.$('~modern-focus-status')).toHaveText('confirmed');
-        await browser.waitUntil(async () => (await (await browser.$(`~modern-focus-item-${item}`)).getProperty('focused')) === true, {
-          timeout: 5000,
-          timeoutMsg: `Expected actual focus on item ${item}.`,
-        });
-      }
-    },
-  },
+  wdio: [
+    desktopIt(
+      'confirms native default, edge, and specific descendant requests',
+      { requires: ['physical-click'] },
+      async ({ browser, expect }) => {
+        for (const [strategy, item] of [
+          ['default', 2],
+          ['first', 1],
+          ['last', 3],
+          ['default', 2],
+          ['target', 2],
+          ['first', 1],
+        ] as const) {
+          await (await browser.$(`~modern-focus-request-${strategy}`)).click();
+          await expect(await browser.$('~modern-focus-status')).toHaveText('confirmed');
+          await browser.waitUntil(async () => (await (await browser.$(`~modern-focus-item-${item}`)).getProperty('focused')) === true, {
+            timeout: 5000,
+            timeoutMsg: `Expected actual focus on item ${item}.`,
+          });
+        }
+      },
+    ),
+  ],
 };
 export const Disabled: Story = {
   args: { disabled: true },
-  wdio: {
-    'refuses a disabled-zone request': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Physical input unavailable.');
-        return;
-      }
+  wdio: [
+    desktopIt('refuses a disabled-zone request', { requires: ['physical-click'] }, async ({ browser, expect }) => {
       await (await browser.$('~modern-focus-request-first')).click();
       await expect(await browser.$('~modern-focus-status')).toHaveText('not-focusable');
-    },
-  },
+    }),
+  ],
 };
 export const TargetLifetimes: Story = {
   render: () => <TargetLifetimesExample />,
-  wdio: {
-    'rejects unfocusable and outside live targets': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Physical input unavailable.');
-        return;
-      }
+  wdio: [
+    desktopIt('rejects unfocusable and outside live targets', { requires: ['physical-click'] }, async ({ browser, expect }) => {
       await (await browser.$('~modern-focus-request-unfocusable')).click();
       await expect(await browser.$('~modern-focus-status')).toHaveText('not-focusable');
       await (await browser.$('~modern-focus-request-outside')).click();
       await expect(await browser.$('~modern-focus-status')).toHaveText('not-mounted');
       expect(await (await browser.$('~modern-focus-outside')).getProperty('focused')).toBe(false);
-    },
-    'cancels pre-aborted requests and invalidates detached commands': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Physical input unavailable.');
-        return;
-      }
-      await (await browser.$('~modern-focus-request-cancelled')).click();
-      await expect(await browser.$('~modern-focus-status')).toHaveText('cancelled');
-      expect(await (await browser.$('~modern-focus-item-1')).getProperty('focused')).toBe(false);
-      await (await browser.$('~modern-focus-unmount')).click();
-      await expect(await browser.$('~modern-focus-zone')).not.toExist();
-      await (await browser.$('~modern-focus-request-detached')).click();
-      await expect(await browser.$('~modern-focus-status')).toHaveText('not-mounted');
-    },
-  },
+    }),
+    desktopIt(
+      'cancels pre-aborted requests and invalidates detached commands',
+      { requires: ['physical-click'] },
+      async ({ browser, expect }) => {
+        await (await browser.$('~modern-focus-request-cancelled')).click();
+        await expect(await browser.$('~modern-focus-status')).toHaveText('cancelled');
+        expect(await (await browser.$('~modern-focus-item-1')).getProperty('focused')).toBe(false);
+        await (await browser.$('~modern-focus-unmount')).click();
+        await expect(await browser.$('~modern-focus-zone')).not.toExist();
+        await (await browser.$('~modern-focus-request-detached')).click();
+        await expect(await browser.$('~modern-focus-status')).toHaveText('not-mounted');
+      },
+    ),
+  ],
 };
 const styles = StyleSheet.create({
   story: { padding: 24, gap: 16 },

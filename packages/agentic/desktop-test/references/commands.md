@@ -10,14 +10,15 @@ owner_paths:
 Expose `desktop-test` from the consumer workspace and run through that
 workspace's declared script.
 
-| Command                          | Purpose                                              |
-| -------------------------------- | ---------------------------------------------------- |
-| `build-driver`                   | Explicitly build or verify the native helper         |
-| `prep`, `bundle`, `build`, `run` | Run the selected target adapter stage                |
-| `test --suite <name> --list`     | Resolve groups without launching a target            |
-| `test --suite <name>`            | Run the selected WDIO suite                          |
-| `serve --reporter json`          | Start the real driver listener and required services |
-| `serve --agent`                  | Also require grants and publish an agent descriptor  |
+| Command                              | Purpose                                              |
+| ------------------------------------ | ---------------------------------------------------- |
+| `build-driver`                       | Explicitly build or verify the native helper         |
+| `prep`, `bundle`, `build`, `run`     | Run the selected target adapter stage                |
+| `test --suite <name> --list`         | Resolve groups without launching a target            |
+| `test --suite <name>`                | Run the selected WDIO suite                          |
+| `test --suite <name> --input <lane>` | Run one input lane (`accessible` or `physical`)      |
+| `serve --reporter json`              | Start the real driver listener and required services |
+| `serve --agent`                      | Also require grants and publish an agent descriptor  |
 
 Global reporter options are `--reporter auto|plain|github-actions|json|ndjson`
 and `--json` (an alias for `--reporter json`). Mode precedence is CLI flag,
@@ -57,6 +58,24 @@ suits an application someone else started.
 For macOS RN Test App projects, run bundle before `prep`; CocoaPods embeds only
 resources present during pod installation. Changing the renderer requires
 rerunning `prep`. See [platform setup](platforms.md).
+
+## Input lanes
+
+`test --input accessible|physical` runs one input lane. `DESKTOP_INPUT` supplies
+the lane when the flag is absent, and an empty or unknown value is an error. The
+`accessible` lane starts the native host with keyboard, physical click, and wheel
+disabled and runs the tests that need no physical input; the `physical` lane
+runs tests that need it plus those that need neither. Tests declare which with
+the [`./jasmine` helpers](wdio-suites.md#declare-input-and-scope-in-jasmine-specs).
+A lane requires a Jasmine WDIO suite (or the Storybook suite, whose integration
+applies the lane itself) and rejects `--list`, which resolves spec files without
+regard to a lane. Without a lane every declared test runs, filtered by `platforms`
+and `scope`. See [input lanes in reporting](reporting.md#input-lanes) for how a
+lane run is judged.
+
+An imported integration that serves its own driver receives the lane and owns
+masking that driver. A host supplied through `hostFactory` is not masked by the
+harness, so the suite verifies the mask before running anything.
 
 The Storybook `csf-wdio` suite does not support generic `--list`. Discover story
 IDs with the Storybook integration's manifest/CLI, then select authored tests

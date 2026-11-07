@@ -15,6 +15,12 @@ export class DesktopReportedError extends Error {
   }
 }
 export type TestStatus = 'passed' | 'failed' | 'skipped' | 'unsupported' | 'cancelled' | 'not-run' | 'incomplete';
+/** A declared gap: the producer knows the case cannot run here and says why, so it is not a silent skip. */
+export type TestGap = 'unsupported' | 'quarantine';
+export const testGaps: readonly TestGap[] = ['unsupported', 'quarantine'];
+/** Cases a producer removed from its selection before any session existed, by the reason they were removed. */
+export type SelectionExclusions = { platform: number; scope: number; input: number };
+export const selectionExclusionReasons: readonly (keyof SelectionExclusions)[] = ['platform', 'scope', 'input'];
 export type EventContext = {
   endpoint?: 'macos' | 'windows' | 'win32';
   renderer?: 'fabric' | 'paper';
@@ -43,9 +49,11 @@ export type EventData =
         status: TestStatus;
         durationMs: number;
         reason?: string;
+        gap?: TestGap;
         failure?: ReportFailure;
       };
     }
+  | { kind: 'selection'; payload: { excluded: SelectionExclusions; key?: string } }
   | { kind: 'artifact'; payload: { path: string; description: string } }
   | { kind: 'producer-finished'; payload: { status: 'passed' | 'failed' } }
   | { kind: 'run-finished'; payload: { status: TestStatus; resultPath: string } };
@@ -74,7 +82,8 @@ const payloadFields = {
   diagnostic: ['level', 'message', 'failure'],
   output: ['stream', 'text'],
   'test-start': ['testId', 'title', 'attempt'],
-  'test-result': ['testId', 'title', 'attempt', 'status', 'durationMs', 'reason', 'failure'],
+  'test-result': ['testId', 'title', 'attempt', 'status', 'durationMs', 'reason', 'gap', 'failure'],
+  selection: ['excluded', 'key'],
   artifact: ['path', 'description'],
   'producer-finished': ['status'],
   'run-finished': ['status', 'resultPath'],
@@ -178,9 +187,20 @@ export function validateDesktopEvent(value: unknown): asserts value is DesktopEv
           throw new TypeError('Non-executed test results require a reason.');
         }
         if (payload.status === 'failed' && !payload.failure) throw new TypeError('Failed test results require their original failure.');
+        if (payload.gap !== undefined) {
+          member(payload.gap, testGaps);
+          if (payload.status !== 'unsupported') throw new TypeError('A declared gap is only valid on an unsupported test result.');
+        }
         if (payload.failure !== undefined) validateFailure(payload.failure);
       }
       break;
+    case 'selection': {
+      const excluded = record(payload.excluded, 'excluded');
+      exactKeys(excluded, selectionExclusionReasons);
+      for (const reason of selectionExclusionReasons) integer(excluded[reason], `excluded.${reason}`, 0);
+      if (payload.key !== undefined) requireText(payload.key, 'selection key');
+      break;
+    }
     case 'artifact':
       requireText(payload.path, 'artifact path');
       requireText(payload.description, 'artifact description');

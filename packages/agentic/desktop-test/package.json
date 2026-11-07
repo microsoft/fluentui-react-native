@@ -55,6 +55,11 @@
       "import": "./lib/driverService.js",
       "default": "./src/driverService.ts"
     },
+    "./jasmine": {
+      "types": "./lib/jasmine/index.d.ts",
+      "import": "./lib/jasmine/index.js",
+      "default": "./src/jasmine/index.ts"
+    },
     "./wdio": {
       "types": "./lib/wdio/index.d.ts",
       "import": "./lib/wdio/index.js",

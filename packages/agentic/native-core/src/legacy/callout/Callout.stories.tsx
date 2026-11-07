@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import type { Meta, StoryObj } from '@storybook/react-native';
 
@@ -185,32 +186,31 @@ type Story = WdioStory<StoryObj<typeof Callout>>;
 export const Default: Story = {
   tags: ['desktop-e2e'],
   render: (args) => <CalloutExample {...args} defaultVisible />,
-  wdio: {
-    'opens, light-dismisses, and recreates a native popup': async ({ browser, expect, platform, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick) {
-        skip('Popup lifecycle qualification requires physical pointer input.');
-        return;
-      }
-      const status = await browser.$('~agentic-storybook-callout-status');
-      for (let attempt = 0; attempt < 2; attempt++) {
-        await expect(status).toHaveText('Native window: Shown');
-        // Only the AppKit provider enumerates the popup as a top-level window.
-        if (platform === 'macos') expect(await browser.getWindowHandles()).toHaveLength(2);
-        await status.click();
-        if (platform === 'macos') {
-          await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
-            timeout: 5000,
-            timeoutMsg: 'Expected dismissal to remove the native Callout window.',
-          });
+  wdio: [
+    desktopIt(
+      'opens, light-dismisses, and recreates a native popup',
+      { requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        const status = await browser.$('~agentic-storybook-callout-status');
+        for (let attempt = 0; attempt < 2; attempt++) {
+          await expect(status).toHaveText('Native window: Shown');
+          // Only the AppKit provider enumerates the popup as a top-level window.
+          if (platform === 'macos') expect(await browser.getWindowHandles()).toHaveLength(2);
+          await status.click();
+          if (platform === 'macos') {
+            await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, {
+              timeout: 5000,
+              timeoutMsg: 'Expected dismissal to remove the native Callout window.',
+            });
+          }
+          await expect(status).toHaveText('Native window: Dismissed');
+          if (attempt === 0) {
+            await (await browser.$('~agentic-storybook-callout-trigger')).click();
+          }
         }
-        await expect(status).toHaveText('Native window: Dismissed');
-        if (attempt === 0) {
-          await (await browser.$('~agentic-storybook-callout-trigger')).click();
-        }
-      }
-    },
-  },
+      },
+    ),
+  ],
 };
 
 export const Placement: Story = {
@@ -230,19 +230,18 @@ export const WindowCommands: Story = {
   },
   render: (args) => <CalloutExample {...args} defaultVisible showWindowCommands />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'dismisses initially focused content on Escape': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick || !features.keyboard) {
-        skip('Escape dismissal requires an interactive desktop with keyboard input.');
-        return;
-      }
-      const status = await browser.$('~agentic-storybook-callout-status');
-      await expect(status).toHaveText('Native window: Shown');
-      await browser.keys('\uE00C');
-      await expect(status).toHaveText('Native window: Dismissed');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'dismisses initially focused content on Escape',
+      { requires: ['physical-click', 'keyboard'] },
+      async ({ browser, expect }) => {
+        const status = await browser.$('~agentic-storybook-callout-status');
+        await expect(status).toHaveText('Native window: Shown');
+        await browser.keys('\uE00C');
+        await expect(status).toHaveText('Native window: Dismissed');
+      },
+    ),
+  ],
   parameters: {
     docs: {
       description: {

@@ -41,6 +41,7 @@ export function includeDesktopEvent(event: DesktopEvent, level: DesktopEventLeve
       return event.payload.status !== 'passed';
     case 'work-selected':
     case 'test-start':
+    case 'selection':
     case 'output':
       return false;
   }
@@ -88,7 +89,11 @@ export function projectDesktopEvent(event: CollectedDesktopEvent): DesktopEventR
       payload.status = event.payload.status;
       payload.durationMs = event.payload.durationMs;
       if (event.payload.reason) payload.reason = clip(event.payload.reason);
+      if (event.payload.gap) payload.gap = event.payload.gap;
       if (event.payload.failure) payload.failure = projectFailure(event.payload.failure);
+      break;
+    case 'selection':
+      payload.excluded = { ...event.payload.excluded };
       break;
     case 'artifact':
       payload.path = clip(event.payload.path);

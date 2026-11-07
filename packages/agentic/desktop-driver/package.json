@@ -53,6 +53,11 @@
       "import": "./lib/authoring/index.js",
       "default": "./src/authoring/index.ts"
     },
+    "./authoring/input": {
+      "types": "./lib/authoring/input.d.ts",
+      "import": "./lib/authoring/input.js",
+      "default": "./src/authoring/input.ts"
+    },
     "./agent": {
       "types": "./lib/agent/index.d.ts",
       "import": "./lib/agent/index.js",

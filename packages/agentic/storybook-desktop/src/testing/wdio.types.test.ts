@@ -1,4 +1,4 @@
-import type { WdioStory, WdioStoryContext } from './index.js';
+import { desktopIt, type WdioStory, type WdioStoryContext } from './index.js';
 
 const story: WdioStory = {
   wdio: async ({ browser, desktop, expect, signal, skip }) => {
@@ -38,6 +38,17 @@ const named: WdioStory = {
   },
 };
 
+const described: WdioStory = {
+  wdio: [
+    desktopIt('uses a lane-adaptive click', { requires: ['click'] }, async ({ browser }) => {
+      await (await browser.$('~button')).click();
+    }),
+    desktopIt('has the default descriptor', async ({ browser }) => {
+      await browser.$('~button');
+    }),
+  ],
+};
+
 const wrapped: WdioStory<{ args: { disabled: boolean }; wdio?: unknown }> = {
   args: { disabled: false },
   wdio: async ({ browser }) => {
@@ -56,5 +67,6 @@ test('exposes a type-only inline callback contract', () => {
   expect(typeof story.wdio).toBe('function');
   expect(typeof wrapped.wdio).toBe('function');
   expect(typeof named.wdio).toBe('object');
+  expect(Array.isArray(described.wdio)).toBe(true);
   expect(invalidArgs.args).toBeDefined();
 });

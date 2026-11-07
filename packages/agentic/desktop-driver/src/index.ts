@@ -32,6 +32,39 @@ export {
   desktopStoryPlatforms,
   validateDesktopStoryTests,
 } from './authoring/storyTests.js';
+export {
+  accessibleLaneMaskedFeatures,
+  desktopInputLanes,
+  desktopRequirements,
+  matchesDesktopPlatforms,
+  matchesDesktopScope,
+  mergeDesktopCaseOptions,
+  resolveDesktopInput,
+  resolveDesktopScopeDomains,
+  resolveDesktopScopeValues,
+  unmaskedAccessibleFeatures,
+  validateDesktopCaseOptions,
+  validateDesktopGroupOptions,
+} from './authoring/input.js';
+export type {
+  AccessibleLaneMaskedFeature,
+  DesktopCaseOptions,
+  DesktopInput,
+  DesktopInputLane,
+  DesktopPlatforms,
+  DesktopRequirement,
+  DesktopScopeDomains,
+  DesktopScopeValues,
+  ResolvedDesktopCaseOptions,
+} from './authoring/input.js';
+export { decideDesktopCase, missingDesktopRequirements, resolveDesktopClickMode } from './authoring/selection.js';
+export type {
+  DesktopCaseClickMode,
+  DesktopCaseDecision,
+  DesktopCaseTarget,
+  DesktopDeclaredGap,
+  DesktopExclusionReason,
+} from './authoring/selection.js';
 export type {
   DesktopStoryCapability,
   DesktopStoryExpectation,

@@ -55,6 +55,15 @@ full catalog before running the selected native tests.
 Add `--paper` to run the macOS Paper lane; a successful Paper build alone does
 not establish Paper runtime or input parity.
 
+Executable cases are declared with `desktopIt` and its `requires` list (see
+`@fluentui-react-native/storybook-desktop/references/story-tests.md`), not with run-time
+`skip` guards. Cases that click or type declare `physical-click` and `keyboard`, which
+derive the `physical` input lane; `focus` only asks the host to report focus support.
+Only the placement cases declare no requirement and run in both lanes. The Win32
+Tab-exit behavior (#4377) is a declared `unsupported` gap, not a skip. Add
+`--input accessible` or `--input physical` to select a lane: `accessible` selects only
+the placement cases, and `physical` selects every case.
+
 ## Apple boundary probe
 
 After building macOS Storybook, run the reproducible Apple boundary probe:

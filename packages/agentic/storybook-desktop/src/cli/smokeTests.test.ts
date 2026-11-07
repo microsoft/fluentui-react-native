@@ -4,10 +4,13 @@ import path from 'node:path';
 
 import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
 import type { DesktopStoryRunResult } from '@fluentui-react-native/desktop-driver/authoring';
+import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { runWdioStoryTests } from '../testing/runWdioTests.js';
 import { WdioStoryTestRunError } from '../testing/runWdioTests.js';
+import { csfTestId } from '../testing/selection.js';
 import {
   formatDesktopStorybookSmokeTestSummary,
   runDesktopStorybookSmokeTests,
@@ -29,6 +32,32 @@ function story(id: string, wdio = false): DesktopStoryManifestEntry {
     tests: { version: 1, tests: [{ id: 'verify', steps: [{ action: 'wait', target: { testId: id } }] }] },
     ...(wdio ? { wdio: { exportName: 'Default', digest: 'callback' } } : {}),
   };
+}
+
+function declaredStory(id: string, cases: readonly (readonly [name: string, options: unknown])[]): DesktopStoryManifestEntry {
+  return {
+    ...story(id),
+    tests: undefined,
+    wdio: {
+      exportName: 'Default',
+      digest: 'callback',
+      testNames: cases.map(([name]) => name),
+      cases: cases.map(([name, descriptor]) => ({ name, options: validateDesktopCaseOptions(descriptor) })),
+    },
+  };
+}
+
+function fakeReport(root: string) {
+  const emit = jest.fn();
+  const report = {
+    runId: 'run',
+    root,
+    emit,
+    artifactPath: (name: string) => path.join(root, name),
+    failure: jest.fn(),
+    fail: jest.fn(),
+  } as unknown as DesktopReportWriter;
+  return { report, emit };
 }
 
 const manifest: DesktopStoryManifest = {
@@ -289,5 +318,100 @@ describe('runDesktopStorybookSmokeTests', () => {
     const connect = jest.fn();
     await expect(runDesktopStorybookSmokeTests(options, connect)).rejects.toThrow('No desktop story tests');
     expect(connect).not.toHaveBeenCalled();
+  });
+
+  describe('input lanes', () => {
+    test('announces every selected case up front and runs each story against that announcement', async () => {
+      const { report, emit } = fakeReport(root);
+      options.report = report;
+      options.input = 'accessible';
+      options.scope = { domains: { 'rn.renderer': ['fabric', 'paper'] }, values: { 'rn.renderer': 'fabric' } };
+      options.manifest = {
+        ...manifest,
+        entries: [
+          declaredStory(buttonId, [
+            ['plain', {}],
+            ['typed', { requires: ['keyboard'] }],
+          ]),
+          declaredStory(inputId, [['typing', { requires: ['accessibility-click'] }]]),
+        ],
+      };
+      const runWdio: jest.MockedFunction<typeof runWdioStoryTests> = jest.fn(async ({ story }) => [
+        { storyId: story!, testName: 'ran', status: 'passed' as const, durationMs: 1 },
+      ]);
+
+      await runDesktopStorybookSmokeTests(options, jest.fn(), runWdio);
+
+      const events = emit.mock.calls.map(([event]) => event);
+      expect(events.filter(({ kind }) => kind === 'selection')).toEqual([
+        { kind: 'selection', payload: { excluded: { platform: 0, scope: 0, input: 1 } } },
+      ]);
+      expect(events.filter(({ kind }) => kind === 'work-selected').map(({ payload }) => payload.workId)).toEqual([
+        `smoke:${buttonId}`,
+        `smoke:${inputId}`,
+        csfTestId(buttonId, 'plain'),
+        csfTestId(inputId, 'typing'),
+      ]);
+      expect(runWdio).toHaveBeenCalledWith(
+        expect.objectContaining({ story: buttonId, input: 'accessible', scope: options.scope, announced: true, optional: true }),
+        undefined,
+      );
+    });
+
+    test('rejects legacy callbacks before connecting', async () => {
+      options.input = 'physical';
+      options.manifest = { ...manifest, entries: [{ ...story(buttonId, true), tests: undefined }] };
+      const connect = jest.fn();
+      await expect(runDesktopStorybookSmokeTests(options, connect)).rejects.toThrow(
+        `Input lane "physical" cannot run legacy wdio callbacks; declare them with desktopIt: ${buttonId}.`,
+      );
+      expect(connect).not.toHaveBeenCalled();
+    });
+
+    test('states a lane selection that left every case out and explains why', async () => {
+      const { report, emit } = fakeReport(root);
+      options.report = report;
+      options.input = 'accessible';
+      options.manifest = { ...manifest, entries: [declaredStory(buttonId, [['typed', { requires: ['keyboard'] }]])] };
+      await expect(runDesktopStorybookSmokeTests(options, jest.fn())).rejects.toThrow(
+        'No desktop story tests matched the smoke selection (excluded 0 by platform, 0 by scope, 1 by input).',
+      );
+      expect(emit).toHaveBeenCalledWith({ kind: 'selection', payload: { excluded: { platform: 0, scope: 0, input: 1 } } });
+    });
+
+    test('a lane that executed no wdio test is not a passing run even when static plans passed', async () => {
+      options.input = 'accessible';
+      options.manifest = { ...manifest, entries: [{ ...story(buttonId), wdio: declaredStory(buttonId, [['plain', {}]]).wdio }] };
+      const connect: DesktopStorybookSmokeConnector = async () => ({
+        delete: async () => undefined,
+        listStories: async () => options.manifest,
+        runStoryTests: async () => planResult(),
+      });
+      const runWdio = jest.fn(async () => [
+        { storyId: buttonId, testName: 'plain', status: 'unsupported' as const, gap: 'unsupported' as const, durationMs: 0 },
+      ]);
+      await expect(runDesktopStorybookSmokeTests(options, connect, runWdio)).rejects.toThrow(
+        'Input lane "accessible" executed no wdio story tests; it is not a passing run.',
+      );
+    });
+  });
+
+  test('does not pass a cohort that only skipped or was unsupported', async () => {
+    options.manifest = { ...manifest, entries: [{ ...story(buttonId, true), tests: undefined }] };
+    const runWdio = jest.fn(async () => [
+      { storyId: buttonId, status: 'unsupported' as const, gap: 'unsupported' as const, durationMs: 0 },
+    ]);
+    await expect(runDesktopStorybookSmokeTests(options, jest.fn(), runWdio)).rejects.toThrow('only skipped or unsupported');
+  });
+
+  test('breaks unsupported down in the summary only when something is unsupported', () => {
+    const wdio = [{ storyId: buttonId, status: 'passed' as const, durationMs: 1 }];
+    expect(formatDesktopStorybookSmokeTestSummary({ ...planResult(), wdio })).toBe('Ran 2 desktop story tests (2 passed, 0 skipped).');
+    expect(
+      formatDesktopStorybookSmokeTestSummary({
+        ...planResult(),
+        wdio: [...wdio, { storyId: inputId, status: 'unsupported' as const, gap: 'unsupported' as const, durationMs: 0 }],
+      }),
+    ).toBe('Ran 3 desktop story tests (2 passed, 0 skipped, 1 unsupported (1 declared, 0 quarantined)).');
   });
 });

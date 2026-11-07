@@ -2,18 +2,14 @@ import type { WdioStoryContext } from '@fluentui-react-native/storybook-desktop/
 
 /**
  * Opens the menu by pointer, enters its FocusZone, navigates by arrow with wrapping, and closes it with Escape, twice.
- * `restoresTrigger` states whether the pressed trigger took keyboard focus, which decides whether the owner window
- * returns focus to it when the menu closes.
+ * The calling case declares the physical click, keyboard and focus observation it needs. `restoresTrigger` states
+ * whether the pressed trigger took keyboard focus, which decides whether the owner window returns focus to it when the
+ * menu closes.
  */
 export async function exerciseMenuComposition(
-  { browser, expect, skip }: Pick<WdioStoryContext, 'browser' | 'expect' | 'skip'>,
+  { browser, expect }: Pick<WdioStoryContext, 'browser' | 'expect'>,
   { restoresTrigger }: { restoresTrigger: boolean },
 ): Promise<void> {
-  const features = browser.capabilities['furn:features'];
-  if (!features?.physicalClick || !features.keyboard || !features.focus) {
-    skip('Menu composition requires physical owner input, keyboard input, and focus observation.');
-    return;
-  }
   const trigger = await browser.$('~modern-menu-trigger');
   const status = await browser.$('~modern-menu-status');
   const focused = await browser.$('~modern-menu-focus');

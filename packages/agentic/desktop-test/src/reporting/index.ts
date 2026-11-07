@@ -11,11 +11,33 @@ export type {
   FailureKind,
   ReportError,
   ReportFailure,
+  SelectionExclusions,
+  TestGap,
   TestStatus,
 } from './protocol.js';
 export type { DesktopEventRecord } from './structured.js';
 export type { DesktopEventLevel } from '@fluentui-react-native/desktop-driver/cli/reporter';
-export { desktopRunExitCode, projectDesktopRunSummary, renderJUnit, renderRunSummary, summarizeDesktopRun } from './results.js';
-export type { DesktopRunResult, DesktopRunSummary, DesktopTestAttempt, DesktopTestResult } from './results.js';
+export { createDesktopInputLane, desktopInputEnvironment, parseDesktopInputLane, requestedDesktopInputLane } from './lane.js';
+export type { DesktopInputLaneName, RequestedDesktopInputLane } from './lane.js';
+export {
+  describeDesktopInputLane,
+  describeDesktopSelection,
+  describeDesktopUnsupported,
+  desktopInputLaneSources,
+  desktopRunExitCode,
+  projectDesktopRunSummary,
+  renderJUnit,
+  renderRunSummary,
+  summarizeDesktopRun,
+} from './results.js';
+export type {
+  DesktopInputLaneReport,
+  DesktopInputLaneSource,
+  DesktopRunResult,
+  DesktopRunSummary,
+  DesktopSelectionReport,
+  DesktopTestAttempt,
+  DesktopTestResult,
+} from './results.js';
 export { connectReportProducer, DESKTOP_REPORT_CONTEXT, startReportTransport } from './transport.js';
 export type { ReportProducer, ReportTransport, ReportTransportContext } from './transport.js';

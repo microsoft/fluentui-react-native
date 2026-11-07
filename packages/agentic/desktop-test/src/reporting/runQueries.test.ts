@@ -332,6 +332,95 @@ describe('persisted desktop run queries', () => {
     await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toThrow();
   });
 
+  describe('input lane runs', () => {
+    const lane = { input: 'accessible', source: 'environment', masking: 'verified-masked', policyEnforced: false } as const;
+    let laneReporter: DesktopRunReporter;
+    let laneClient: DesktopRunQueryClient;
+
+    beforeEach(async () => {
+      laneReporter = new DesktopRunReporter({
+        artifactsRoot: root,
+        output: { write: () => true },
+        reporterMode: 'json',
+        summary: false,
+        lane,
+      });
+      service.registerRun({ runId: laneReporter.runId, root: laneReporter.root, expiresAt: Date.now() + 60_000 });
+      laneClient = service.connect(service.issueGrant({ runIds: [laneReporter.runId], expiresAt: Date.now() + 60_000 }));
+      laneReporter.emit({ kind: 'selection', payload: { excluded: { platform: 1, scope: 2, input: 3 } } });
+      laneReporter.emit({ kind: 'test-result', payload: { testId: 'ok', title: 'ok', attempt: 0, status: 'passed', durationMs: 1 } });
+      laneReporter.emit({
+        kind: 'test-result',
+        payload: { testId: 'gap', title: 'gap', attempt: 0, status: 'unsupported', durationMs: 0, reason: 'Declared.', gap: 'quarantine' },
+      });
+      await laneReporter.finish();
+    });
+
+    function rewriteLane(change: (result: DesktopRunResult) => void): void {
+      const file = path.join(laneReporter.root, 'run.json');
+      const result = JSON.parse(fs.readFileSync(file, 'utf8')) as DesktopRunResult;
+      change(result);
+      fs.writeFileSync(file, JSON.stringify(result));
+    }
+
+    test('reads back the lane, the exclusions and each declared gap', async () => {
+      expect(await laneClient.query({ operation: 'status', runId: laneReporter.runId })).toMatchObject({
+        terminal: true,
+        status: 'passed',
+        lane,
+        excluded: { platform: 1, scope: 2, input: 3 },
+        counts: { unsupported: 1, quarantined: 1, declaredUnsupported: 0 },
+      });
+      expect(await laneClient.query({ operation: 'tests', runId: laneReporter.runId })).toMatchObject({
+        items: [
+          { title: 'ok', status: 'passed' },
+          { title: 'gap', status: 'unsupported', gap: 'quarantine', message: 'Declared.' },
+        ],
+      });
+    });
+
+    test('a declared gap edited out of the retained report no longer reads as a passing lane', async () => {
+      rewriteLane((result) => {
+        delete result.tests[1].attempts[0].gap;
+      });
+
+      expect(await laneClient.query({ operation: 'status', runId: laneReporter.runId })).toMatchObject({
+        status: 'incomplete',
+        counts: { unsupported: 1, quarantined: 0, declaredUnsupported: 0 },
+      });
+    });
+
+    test('reads a lane taken from the driver instance and rejects an unknown source', async () => {
+      rewriteLane((result) => {
+        Object.assign(result, { lane: { ...lane, source: 'driver' } });
+      });
+      expect(await laneClient.query({ operation: 'status', runId: laneReporter.runId })).toMatchObject({
+        lane: { ...lane, source: 'driver' },
+      });
+
+      rewriteLane((result) => {
+        Object.assign(result, { lane: { ...lane, source: 'cli' } });
+      });
+      await expect(laneClient.query({ operation: 'status', runId: laneReporter.runId })).rejects.toThrow();
+    });
+
+    test.each([
+      ['a lane that claims enforcement', (result: DesktopRunResult) => Object.assign(result, { lane: { ...lane, policyEnforced: true } })],
+      ['a physical lane with masking', (result: DesktopRunResult) => Object.assign(result, { lane: { ...lane, input: 'physical' } })],
+      [
+        'a negative exclusion count',
+        (result: DesktopRunResult) => Object.assign(result, { selection: { excluded: { platform: -1, scope: 0, input: 0 } } }),
+      ],
+      ['a gap on a passed attempt', (result: DesktopRunResult) => Object.assign(result.tests[0].attempts[0], { gap: 'unsupported' })],
+    ])('rejects %s in a retained report', async (_name, change) => {
+      rewriteLane((result) => {
+        change(result);
+      });
+
+      await expect(laneClient.query({ operation: 'status', runId: laneReporter.runId })).rejects.toThrow();
+    });
+  });
+
   test('snapshot persistence failures remain reporting failures after the writer recovers', async () => {
     const write = fs.writeFileSync;
     const injected = jest.spyOn(fs, 'writeFileSync').mockImplementation((file, ...args) => {

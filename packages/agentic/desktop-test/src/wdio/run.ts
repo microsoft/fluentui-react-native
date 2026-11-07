@@ -2,15 +2,32 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolve } from 'import-meta-resolve';
+import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
 import type { ResolvedDesktopConfig, DesktopWdioSuite } from '../config.js';
-import { resolveDesktopSpecs } from '../config.js';
+import { resolveDesktopSpecs, resolveDesktopTestScope } from '../config.js';
+import { desktopTestSelectionEnvironment, serializeDesktopTestSelection } from '../jasmine/selection.js';
 import type { DesktopSupervisor } from '../supervisor.js';
 import type { DesktopWdioSettings } from './configuration.js';
 import { wdioGroupId } from './identity.js';
 
-export async function runDesktopWdioSuite(supervisor: DesktopSupervisor, config: ResolvedDesktopConfig, suiteName: string): Promise<void> {
+/** A lane selects tests through the Jasmine adapter, so a suite on another framework cannot honor one. */
+export function assertDesktopSuiteSupportsInput(suiteName: string, suite: DesktopWdioSuite, input: DesktopInputLane | undefined): void {
+  if (input && suite.framework !== 'jasmine') {
+    throw Object.assign(new TypeError(`--input ${input} requires a jasmine suite; "${suiteName}" uses ${suite.framework}.`), {
+      code: 'config',
+    });
+  }
+}
+
+export async function runDesktopWdioSuite(
+  supervisor: DesktopSupervisor,
+  config: ResolvedDesktopConfig,
+  suiteName: string,
+  input?: DesktopInputLane,
+): Promise<void> {
   const suite = config.config.suites?.[suiteName];
   if (!suite || suite.kind !== 'wdio') throw new Error(`No standalone WDIO suite "${suiteName}" is configured.`);
+  assertDesktopSuiteSupportsInput(suiteName, suite, input);
   const specs = resolveDesktopSpecs(suite, supervisor.target.endpoint, config.projectRoot);
   const workIds: string[] = [];
   for (const selected of specs) {
@@ -58,12 +75,19 @@ export async function runDesktopWdioSuite(supervisor: DesktopSupervisor, config:
     { mode: 0o600 },
   );
   const launcher = modulePath('@wdio/cli');
+  // The selection travels as data in the environment: a worker parses it, and nothing is spliced into code that runs.
+  const selection = serializeDesktopTestSelection({
+    endpoint: supervisor.target.endpoint,
+    ...(input ? { lane: input } : {}),
+    testScopes: config.config.testScopes,
+    values: resolveDesktopTestScope(config.testScopes, supervisor.target),
+  });
   await supervisor.worker(
     {
       command: process.execPath,
       args: [fileURLToPath(new URL('../../config/launcher.cjs', import.meta.url)), pathToFileURL(launcher).href, configPath],
       cwd: config.projectRoot,
-      env: { E2ETEST_PLATFORM: supervisor.target.endpoint, NATIVE_TESTING: 'false' },
+      env: { E2ETEST_PLATFORM: supervisor.target.endpoint, NATIVE_TESTING: 'false', [desktopTestSelectionEnvironment]: selection },
       label: `WDIO ${suiteName} (${supervisor.target.endpoint})`,
     },
     suiteDeadline(suite, specs.length),

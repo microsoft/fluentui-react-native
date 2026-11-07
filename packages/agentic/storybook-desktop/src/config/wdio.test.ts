@@ -24,4 +24,25 @@ describe('Storybook-owned wdio configuration', () => {
     expect(() => resolveWdioOptions({ story: '' })).toThrow('wdio.story');
     expect(() => resolveWdioOptions({ tag: ' ' })).toThrow('wdio.tag');
   });
+
+  test('rejects a configured input lane, which is chosen per run', () => {
+    // @ts-expect-error `input` is not a configurable default.
+    expect(() => makeDesktopStorybookConfig({ wdio: { input: 'accessible' } })).toThrow('wdio.input is chosen per run');
+  });
+
+  test('resolves an explicit input lane and rejects conflicting click configuration', () => {
+    const previous = process.env.DESKTOP_INPUT;
+    delete process.env.DESKTOP_INPUT;
+    try {
+      expect(resolveWdioOptions({ input: 'accessible' })).toMatchObject({ input: 'accessible', clickMode: 'auto' });
+      expect(() => resolveWdioOptions({ input: 'physical', clickMode: 'physical' })).toThrow('cannot be combined with a click mode');
+      process.env.DESKTOP_INPUT = 'physical';
+      expect(resolveWdioOptions().input).toBe('physical');
+      expect(resolveWdioOptions({ input: 'accessible' }).input).toBe('accessible');
+      expect(() => resolveWdioOptions({ clickMode: 'physical' })).toThrow('cannot be combined');
+    } finally {
+      if (previous === undefined) delete process.env.DESKTOP_INPUT;
+      else process.env.DESKTOP_INPUT = previous;
+    }
+  });
 });

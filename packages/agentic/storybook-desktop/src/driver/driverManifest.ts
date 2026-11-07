@@ -3,12 +3,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import type { DesktopStoryManifest, NativeDesktopApplicationDescriptor, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { DesktopStorybookInstance } from '../config/instance.js';
 import type { Platforms } from '../config/platforms.js';
 import type { DesktopStorybookWdioOptions } from '../config/wdio.js';
+import type { WdioSelectionContext } from '../testing/selection.js';
 
 /** Asks the channel service to protect its driver with a grant authority and publish one agent's connection. */
 export type DesktopStorybookAgentManifest = {
@@ -43,6 +45,11 @@ export type DesktopStorybookDriverManifest = {
   portablePlanDigest: string;
   renderer: 'fabric' | 'paper';
   schemaVersion: 2;
+  /**
+   * The scope domains and the values this target holds, which declared test `scope` selection reads. The driver's
+   * CLI resolves them from the full desktop configuration, which a smoke control process does not have.
+   */
+  scope?: NonNullable<WdioSelectionContext['scope']>;
   storyManifest: DesktopStoryManifest;
   storybookPort: number;
   targetId: string;
@@ -58,7 +65,9 @@ export type CreateDesktopStorybookDriverManifestOptions = {
   nativeDriver: NativeDriverArtifact;
   platform: Platforms;
   renderer?: DesktopStorybookDriverManifest['renderer'];
+  scope?: DesktopStorybookDriverManifest['scope'];
   storyManifest: DesktopStoryManifest;
+  wdio?: DesktopStorybookWdioOptions;
 };
 
 /** Returns the WebDriver target ID the embedded Storybook driver registers for an endpoint and renderer. */
@@ -80,7 +89,9 @@ export function createDesktopStorybookDriverManifest({
   nativeDriver,
   platform,
   renderer = platform === 'win32' ? 'paper' : 'fabric',
+  scope,
   storyManifest,
+  wdio,
 }: CreateDesktopStorybookDriverManifestOptions): DesktopStorybookDriverManifest {
   const nativeOptions = config.getNativeDriverOptions(platform);
   if (nativeOptions === false) {
@@ -117,11 +128,14 @@ export function createDesktopStorybookDriverManifest({
     portablePlanDigest: storyManifest.portablePlanDigest,
     renderer,
     schemaVersion: 2,
+    ...(scope
+      ? { scope: Object.freeze({ domains: Object.freeze({ ...scope.domains }), values: Object.freeze({ ...scope.values }) }) }
+      : {}),
     storyManifest,
     storybookPort: instance.storybookPort,
     targetId: desktopStorybookTargetId(config, platform, renderer),
     testIDPrefix: config.testIDPrefix,
-    wdio: config.wdio,
+    wdio: wdio ?? config.wdio,
   });
 }
 
@@ -133,4 +147,16 @@ export function writeDesktopStorybookDriverManifest(manifest: DesktopStorybookDr
   if (!fs.existsSync(outputPath) || fs.readFileSync(outputPath, 'utf8') !== content) {
     fs.writeFileSync(outputPath, content);
   }
+}
+
+/** Where the running driver instance for an endpoint publishes its manifest. */
+export function desktopStorybookDriverManifestPath(projectRoot: string, platform: Platforms): string {
+  return path.join(projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+}
+
+/** The input lane a driver instance was started for, read from any parsed manifest; absent when it declares none. */
+export function driverManifestInput(manifest: unknown): DesktopInputLane | undefined {
+  const wdio = typeof manifest === 'object' && manifest !== null && 'wdio' in manifest ? manifest.wdio : undefined;
+  const input = typeof wdio === 'object' && wdio !== null && 'input' in wdio ? wdio.input : undefined;
+  return input === 'accessible' || input === 'physical' ? input : undefined;
 }
