@@ -1,6 +1,7 @@
 const { createRequire } = require('node:module');
 const fs = require('node:fs');
 const path = require('node:path');
+const { createControlledChannelServer } = require('./controlled-channel.cjs');
 
 async function startDesktopStorybookServer({
   configPath,
@@ -14,13 +15,23 @@ async function startDesktopStorybookServer({
   }
 
   const requireFromProject = createRequire(path.join(projectRoot, 'package.json'));
-  const { createChannelServer } = requireFromProject('@storybook/react-native/node');
-  const [{ startNativeDesktopService }, { createDesktopReportSession }] = await Promise.all([
+  const { buildIndex, createChannelServer } = requireFromProject('@storybook/react-native/node');
+  const { finishDesktopProcess, publishDesktopServiceReady, registerDesktopProcessDisposal } =
+    await import('@fluentui-react-native/desktop-test/process-control');
+  let initialized;
+  const initialization = new Promise((resolve) => {
+    initialized = resolve;
+  });
+  let stopping = false;
+  const controller = new AbortController();
+  const [{ startNativeDesktopService }, { createDesktopReportSession }, { NativeDesktopHost }] = await Promise.all([
     import('@fluentui-react-native/desktop-test/driver-service'),
     import('@fluentui-react-native/desktop-test/reporting'),
+    import('@fluentui-react-native/desktop-driver'),
   ]);
   const report = await createDesktopReportSession({ artifactsRoot: path.join(projectRoot, 'artifacts', 'desktop'), kind: 'lifecycle' });
   let server;
+  let controlledChannel;
   let driver;
   let agentReadyPath;
   let keepAlive;
@@ -31,7 +42,7 @@ async function startDesktopStorybookServer({
       process.off('SIGTERM', stop);
       const failures = error === undefined ? [] : [error];
       try {
-        // The parent reads readiness from this record, so it must not outlive the published descriptor.
+        // Compatibility breadcrumb only; correlated process readiness is authoritative.
         if (agentReadyPath) fs.rmSync(agentReadyPath, { force: true });
       } catch (failure) {
         report.reporter.fail(failure, 'cleanup');
@@ -44,7 +55,9 @@ async function startDesktopStorybookServer({
         failures.push(failure);
       }
       try {
-        if (server) {
+        if (controlledChannel) {
+          await controlledChannel.close();
+        } else if (server) {
           for (const client of server.clients) client.terminate();
           await new Promise((resolve, reject) => server.close((failure) => (failure ? reject(failure) : resolve())));
         }
@@ -56,9 +69,18 @@ async function startDesktopStorybookServer({
       process.exitCode = await report.close(
         failures.length ? new AggregateError(failures, 'Storybook channel service failed.') : undefined,
       );
+      unregisterDisposal();
+      if (failures.length) throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
+      finishDesktopProcess();
     })());
+  const settle = async (error) => {
+    stopping = true;
+    controller.abort(error ?? new Error('Storybook channel stop requested.'));
+    await initialization;
+    await close(error);
+  };
   const stop = () => {
-    void close().catch((error) => {
+    void settle().catch((error) => {
       process.stderr.write(`${error.stack ?? error}\n`);
       process.exitCode = 1;
     });
@@ -66,12 +88,17 @@ async function startDesktopStorybookServer({
   const fatal = (error) => {
     if (closing) return;
     report.reporter.emit({ kind: 'service-failed', payload: { failure: report.reporter.failure(error) } }, 'storybook-channel');
-    void close(error).catch((failure) => {
+    void settle(error).catch((failure) => {
       process.stderr.write(`${failure.stack ?? failure}\n`);
       process.exitCode = 1;
     });
   };
+  const unregisterDisposal = registerDesktopProcessDisposal(() => settle());
+  report.onStop?.(stop);
+  process.once('SIGINT', stop);
+  process.once('SIGTERM', stop);
   try {
+    controller.signal.throwIfAborted();
     const driverManifest = driverManifestPath ? JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')) : undefined;
     if (
       driverManifest &&
@@ -103,9 +130,13 @@ async function startDesktopStorybookServer({
       report.reporter.addSecret(driverManifest.application.leaseNonce);
       report.reporter.addSecret(driverManifest.bridgeNonce);
     }
-    // The upstream HTTP server is unref'd and closes on beforeExit; own only our clearable keepalive. Its MCP endpoint
-    // selects stories without a grant, so an agent-served driver disables it and agents select through the driver.
-    server = createChannelServer({ host, port, configPath, websockets: true, experimental_mcp: !agent, keepNodeProcessAlive: false });
+    if (agent) {
+      controlledChannel = await createControlledChannelServer({ host, port, configPath, buildIndex, onFailure: fatal });
+      server = controlledChannel.channel;
+    } else {
+      // Deliberately unprotected legacy mode, including upstream HTTP, WebSocket relay and MCP.
+      server = createChannelServer({ host, port, configPath, websockets: true, experimental_mcp: true, keepNodeProcessAlive: false });
+    }
     if (!server) {
       throw new Error('Desktop Driver Storybook orchestration requires WebSockets.');
     }
@@ -146,6 +177,7 @@ async function startDesktopStorybookServer({
         });
       } else {
         driver = await startNativeDesktopService({
+          signal: controller.signal,
           // Windows agents verify the app's AUMID or executable; nothing maintains a lease there.
           application: agent?.application ?? driverManifest.application,
           artifact: driverManifest.nativeDriver,
@@ -162,41 +194,68 @@ async function startDesktopStorybookServer({
                 addSecret: (secret) => report.reporter.addSecret(secret),
               }
             : {}),
-          target: {
-            ...target,
+          target,
+          createTarget: async (_targetHost, recovery) => ({
             storyOrchestrator: createChannelOrchestrator({
               channelServer: server,
               driverManifest,
               serverUrl: loopbackUrl(host, port),
               StorybookChannelOrchestrator,
+              recovery: {
+                ...recovery,
+                resolveApplication: async () => {
+                  // A separate helper cannot steal window/element records from an active session's lease.
+                  const identityHost = new NativeDesktopHost({
+                    application: agent?.application ?? driverManifest.application,
+                    artifact: driverManifest.nativeDriver,
+                    endpoint: driverManifest.endpoint,
+                  });
+                  try {
+                    const lease = await identityHost.attach({ ...target, host: identityHost }, AbortSignal.timeout(10_000));
+                    if (lease.processId === undefined || lease.processStartedAt === undefined)
+                      throw new Error('The Storybook application has no verified process incarnation.');
+                    return { processId: lease.processId, processStartedAt: lease.processStartedAt };
+                  } finally {
+                    await identityHost.dispose();
+                  }
+                },
+              },
             }),
-          },
+          }),
         });
       }
+      controller.signal.throwIfAborted();
       if (agent) {
         agentReadyPath = agent.readyPath;
         writeAgentReady(agentReadyPath, agent.descriptor);
       }
+      if (stopping) controller.signal.throwIfAborted();
+      await publishDesktopServiceReady({
+        tier: 'service-ready',
+        service: 'storybook-channel',
+        ...(driverManifest?.agent ? { descriptor: driverManifest.agent.descriptor } : {}),
+      });
     }
     report.reporter.emit(
       { kind: 'service-ready', payload: { message: `Storybook ${loopbackUrl(host, port)}${driver ? `; WebDriver ${driver.url}` : ''}` } },
       'storybook-channel',
     );
-    report.onStop?.(stop);
-    process.once('SIGINT', stop);
-    process.once('SIGTERM', stop);
+    initialized();
     return { channelServer: server, driver, close };
   } catch (error) {
+    initialized();
     await close(error);
     throw error;
   }
 }
 
-function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, StorybookChannelOrchestrator }) {
+function createChannelOrchestrator({ channelServer, driverManifest, serverUrl, StorybookChannelOrchestrator, recovery }) {
   return new StorybookChannelOrchestrator({
     channelServer,
     driverManifest,
     serverUrl,
+    recovery,
+    controlled: driverManifest.agent !== undefined,
   });
 }
 

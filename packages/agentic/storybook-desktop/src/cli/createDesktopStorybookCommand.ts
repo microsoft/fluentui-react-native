@@ -94,6 +94,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
           verbose: program.opts<{ verbose?: boolean }>().verbose ?? options.verbose,
           isPortAvailable: options.isPortAvailable,
           runSmokeTests: options.runSmokeTests,
+          connectStoryTraversal: options.connectStoryTraversal,
           resolveNativeDriver: options.resolveNativeDriver,
           writeMacOSApplicationLease: options.writeMacOSApplicationLease,
           reporter: options.reporter,

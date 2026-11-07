@@ -69,6 +69,7 @@ const nativeDriverTestOptions = {
   buildNativeDriver: async () => nativeDriverArtifact,
   resolveNativeDriver: async () => nativeDriverArtifact,
   writeMacOSApplicationLease: async () => undefined,
+  connectStoryTraversal: async () => ({ select: async () => undefined, close: async () => null }),
 };
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
   endpoint: platform,
@@ -220,6 +221,11 @@ class RecordingRunner implements DesktopCommandRunner {
   stopped = 0;
   failCommand?: string;
   exitService?: string;
+  readiness = jest.fn(async (expected: { tier: 'service-ready'; service: string; descriptor?: string }) => ({
+    ...expected,
+    incarnation: 'fixture-incarnation',
+    processId: 1,
+  }));
 
   async run(command: PreparedDesktopCommand): Promise<void> {
     this.foreground.push(command);
@@ -231,6 +237,7 @@ class RecordingRunner implements DesktopCommandRunner {
   start(command: PreparedDesktopCommand): RunningDesktopCommand {
     this.background.push(command);
     return {
+      waitForReadiness: this.readiness,
       completed: command.context?.service === this.exitService && this.exitService ? Promise.resolve(7) : new Promise<number>(() => {}),
       stop: async () => {
         this.stopped += 1;
@@ -640,14 +647,17 @@ describe('DesktopStorybookCli', () => {
     const readyPath = path.join(generated, 'agent-ready.macos.json');
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
+    const resourceObserver = jest.fn();
+    services.setResourceObserver(resourceObserver);
     const written: string[] = [];
     const maintained: string[] = [];
-    const fetch: typeof globalThis.fetch = async (input) => {
-      if (String(input).endsWith('/index.json')) {
-        setTimeout(() => fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'custom.json', processId: 1, schemaVersion: 1 })), 300);
-      }
-      return new Response('{}');
-    };
+    let published = false;
+    runner.readiness.mockImplementation(async (expected) => {
+      expect(written).toEqual([]);
+      published = true;
+      return { ...expected, incarnation: 'fixture-incarnation', processId: 1 };
+    });
+    const fetch: typeof globalThis.fetch = async () => new Response('{}');
     const createStoryManifest = async () => ({
       ...(await createEmptyStoryManifest(undefined, 'macos')),
       entries: [
@@ -674,8 +684,25 @@ describe('DesktopStorybookCli', () => {
         signal.throwIfAborted();
         throw new Error('unreachable');
       },
-      onReady: () => written.push('onReady'),
-      output: { write: (chunk: string) => written.push(`${fs.existsSync(readyPath) ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
+      onReady: () => {
+        expect(resourceObserver).toHaveBeenCalledWith(
+          expect.objectContaining({
+            id: 'desktop:storybook-channel',
+            generation: expect.any(Number),
+            ownership: 'owned',
+            readiness: 'ready',
+            serviceReady: {
+              tier: 'service-ready',
+              service: 'storybook-channel',
+              descriptor: 'custom.json',
+              incarnation: 'fixture-incarnation',
+              processId: 1,
+            },
+          }),
+        );
+        written.push('onReady');
+      },
+      output: { write: (chunk: string) => written.push(`${published ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
       runner,
       services,
     });
@@ -689,7 +716,40 @@ describe('DesktopStorybookCli', () => {
         root: path.resolve('relative-root'),
       });
       expect(maintained).toEqual([manifestPath]);
+      expect(runner.readiness).toHaveBeenCalledWith(
+        { tier: 'service-ready', service: 'storybook-channel', descriptor: 'custom.json' },
+        120_000,
+        expect.any(AbortSignal),
+      );
+      expect(fs.existsSync(readyPath)).toBe(false);
       await expect(new DesktopStorybookCli(makeConfig(), { createStoryManifest, runner }).test('macos')).rejects.toThrow('serves an agent');
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
+    }
+  });
+
+  test('does not trust an agent ready file when correlated readiness fails', async () => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, 'driver-manifest.macos.json');
+    const readyPath = path.join(generated, 'agent-ready.macos.json');
+    const runner = new RecordingRunner();
+    runner.readiness.mockImplementation(async () => {
+      fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'agent.json', processId: 1, schemaVersion: 1 }));
+      throw new Error('Uncorrelated service readiness');
+    });
+    const output = { write: jest.fn(() => true) };
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response('{}'),
+      isPortAvailable: async () => true,
+      output,
+      runner,
+    });
+    try {
+      await expect(cli.driver('macos', { agent: { descriptor: 'agent.json' } })).rejects.toThrow('Uncorrelated service readiness');
+      expect(output.write).not.toHaveBeenCalled();
     } finally {
       fs.rmSync(manifestPath, { force: true });
       fs.rmSync(readyPath, { force: true });
@@ -726,12 +786,7 @@ describe('DesktopStorybookCli', () => {
       windowTitle: 'Fixture',
       workingDirectory: 'rex',
     }));
-    const fetch: typeof globalThis.fetch = async (input) => {
-      if (String(input).endsWith('/index.json')) {
-        setTimeout(() => fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'agent.json', processId: 1, schemaVersion: 1 })), 50);
-      }
-      return new Response('{}');
-    };
+    const fetch: typeof globalThis.fetch = async () => new Response('{}');
     const cli = new DesktopStorybookCli(config, {
       ...nativeDriverTestOptions,
       createStoryManifest: createEmptyStoryManifest,
@@ -1080,6 +1135,37 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
+  test('retains both authoritative traversal and cleanup failures without starting authored tests', async () => {
+    const navigationFailure = new Error('navigation failed');
+    const cleanupFailure = new Error('session cleanup failed');
+    const runSmokeTests = jest.fn();
+    const cli = new DesktopStorybookCli(
+      makeConfig({ macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' } } } }),
+      {
+        ...nativeDriverTestOptions,
+        createStoryManifest: createEmptyStoryManifest,
+        runner: new RecordingRunner(),
+        isPortAvailable: async () => true,
+        output: { write: () => true },
+        errorOutput: { write: () => true },
+        fetch: async () => new Response(JSON.stringify({ entries: { first: { id: 'first--story', type: 'story' } } })),
+        runSmokeTests,
+        connectStoryTraversal: async () => ({
+          select: async () => {
+            throw navigationFailure;
+          },
+          close: async () => {
+            throw cleanupFailure;
+          },
+        }),
+      },
+    );
+    await expect(cli.smoke('macos', { mode: 'stories-and-tests' })).rejects.toMatchObject({
+      errors: [{ errors: [expect.objectContaining({ cause: navigationFailure })] }, cleanupFailure],
+    });
+    expect(runSmokeTests).not.toHaveBeenCalled();
+  });
+
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
     const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
@@ -1098,9 +1184,6 @@ describe('DesktopStorybookCli', () => {
             },
           }),
         );
-      }
-      if (url.includes('select-story-sync')) {
-        events.push(`select:${url.split('/').at(-1)}`);
       }
       return new Response('{}');
     });
@@ -1140,12 +1223,22 @@ describe('DesktopStorybookCli', () => {
         runner,
         resolveNativeDriver,
         writeMacOSApplicationLease,
+        connectStoryTraversal: async () => ({
+          select: async (id) => {
+            events.push(`select:${id}`);
+          },
+          close: async () => {
+            events.push('close');
+            return null;
+          },
+        }),
       },
     );
 
     await cli.smoke('macos', { mode: 'stories-and-tests' });
 
-    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'tests']);
+    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'close', 'tests']);
+    expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
     expect(writeMacOSApplicationLease).toHaveBeenCalledWith(
       path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
       120_000,

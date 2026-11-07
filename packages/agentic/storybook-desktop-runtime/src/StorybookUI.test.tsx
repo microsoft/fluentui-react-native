@@ -29,11 +29,18 @@ function Canvas() {
   );
 }
 
-function Harness({ requestId }: { requestId: string }) {
-  const { prepareStory } = useDesktopStorybookConfig();
+function Harness({ requestId, selectionSequence }: { requestId: string; selectionSequence: number }) {
+  const { connectBridge, prepareStory } = useDesktopStorybookConfig();
   React.useEffect(() => {
-    prepareStory({ requestId, runId: 'fixture-run', storyId: 'fixture--default' });
-  }, [prepareStory, requestId]);
+    connectBridge('fixture-epoch');
+    prepareStory({
+      connectionEpoch: 'fixture-epoch',
+      selectionSequence,
+      requestId,
+      runId: 'fixture-run',
+      storyId: 'fixture--default',
+    });
+  }, [connectBridge, prepareStory, requestId, selectionSequence]);
   return (
     <StorybookUIComponent setStory={setStory} storage={storage} storyHash={{}} theme={theme}>
       <Canvas />
@@ -41,24 +48,24 @@ function Harness({ requestId }: { requestId: string }) {
   );
 }
 
-function scene(requestId: string) {
+function scene(requestId: string, selectionSequence: number) {
   return (
     <DesktopStorybookConfigProvider testIDPrefix="test">
-      <Harness requestId={requestId} />
+      <Harness requestId={requestId} selectionSequence={selectionSequence} />
     </DesktopStorybookConfigProvider>
   );
 }
 
 // Cold CI workers can take more than five seconds to initialize the real ScrollView.
 test('resets the whole Win32 preview for a new test generation without resetting chrome preferences', async () => {
-  const screen = await render(scene('first'));
+  const screen = await render(scene('first', 1));
   await fireEvent.press(screen.getByTestId('scroll-canvas'));
   expect(screen.getByTestId('canvas-offset')).toHaveTextContent('99');
   await fireEvent.press(screen.getByTestId('test-win32-hide-sidebar'));
   expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
   expect(screen.getByTestId('canvas-offset')).toHaveTextContent('99');
 
-  await screen.rerender(scene('second'));
+  await screen.rerender(scene('second', 2));
 
   expect(screen.getByTestId('canvas-offset')).toHaveTextContent('0');
   expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();

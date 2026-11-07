@@ -22,6 +22,7 @@ import {
 import type { MutationEffect } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { DesktopClickMode, DesktopTimeouts, WebDriverTimeouts } from '../protocol/types.js';
+import type { StoryReadyResult } from '../storybook.js';
 import { applicationOf } from './settlementJournal.js';
 import type { ProbeApplication, QuarantineRecord, SettlementJournal } from './settlementJournal.js';
 
@@ -105,7 +106,7 @@ export type DesktopSession = {
   /** Set on a protected service; absent when the service does not authenticate callers. */
   owner?: SessionOwner;
   previewGeneration: number;
-  story: { previewGeneration: number; runId: string; storyId: string } | null;
+  story: StoryReadyResult | null;
   target: DesktopTarget;
   timeouts: WebDriverTimeouts;
   windows: DesktopWindow[];

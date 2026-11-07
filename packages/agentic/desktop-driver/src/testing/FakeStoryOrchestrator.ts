@@ -1,5 +1,11 @@
 import type { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
-import type { DesktopStoryManifest, StoryOrchestrator, StoryReadyResult, StorySelectionRequest } from '../storybook.js';
+import type {
+  DesktopStoryManifest,
+  StoryOrchestrator,
+  StoryProviderContext,
+  StoryReadyResult,
+  StorySelectionRequest,
+} from '../storybook.js';
 
 export class FakeStoryOrchestrator implements StoryOrchestrator {
   readonly argUpdates: { args: Readonly<Record<string, unknown>>; storyId: string }[] = [];
@@ -14,23 +20,28 @@ export class FakeStoryOrchestrator implements StoryOrchestrator {
     this.host = host;
   }
 
-  async getCurrentStory(): Promise<StoryReadyResult | null> {
+  async getCurrentStory(context?: StoryProviderContext): Promise<StoryReadyResult | null> {
+    context?.signal.throwIfAborted();
     return this.current;
   }
 
-  async getManifest(): Promise<DesktopStoryManifest> {
+  async getManifest(context?: StoryProviderContext): Promise<DesktopStoryManifest> {
+    context?.signal.throwIfAborted();
     return this.manifest;
   }
 
-  selectStory(request: StorySelectionRequest): Promise<StoryReadyResult> {
+  selectStory(request: StorySelectionRequest, context?: StoryProviderContext): Promise<StoryReadyResult> {
+    context?.signal.throwIfAborted();
     return this.select(request);
   }
 
-  resetStory(request: StorySelectionRequest): Promise<StoryReadyResult> {
+  resetStory(request: StorySelectionRequest, context?: StoryProviderContext): Promise<StoryReadyResult> {
+    context?.signal.throwIfAborted();
     return this.select(request);
   }
 
-  async updateArgs(storyId: string, args: Readonly<Record<string, unknown>>): Promise<void> {
+  async updateArgs(storyId: string, args: Readonly<Record<string, unknown>>, context?: StoryProviderContext): Promise<void> {
+    context?.signal.throwIfAborted();
     this.requireStory(storyId);
     this.argUpdates.push({ args, storyId });
   }

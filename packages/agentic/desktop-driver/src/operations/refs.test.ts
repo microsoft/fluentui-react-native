@@ -87,6 +87,29 @@ describe('ReferenceTable', () => {
     expect(table.resolve('k3xa3', 1)).toEqual({ failure: 'region-changed', ok: false });
   });
 
+  test('reobserving a retained preview native id cannot revive a reference from an earlier region', () => {
+    const table = new ReferenceTable('k3xa');
+    const before = table.issue(target('preview-root', { scope: 'preview' }), 1);
+    expect(table.resolve(before, 1)).toEqual({ failure: 'region-changed', ok: false });
+
+    const current = table.issue(target('preview-root', { scope: 'preview', previewGeneration: 1 }), 2);
+
+    expect(table.resolve(before, 1)).toMatchObject({ ok: false });
+    expect(current).not.toBe(before);
+    expect(table.resolve(current, 1)).toMatchObject({ entry: { nativeId: 'preview-root', previewGeneration: 1 }, ok: true });
+    expect(table.issue(target('preview-root', { scope: 'preview', previewGeneration: 1 }), 3)).toBe(current);
+  });
+
+  test.each(['application', 'chrome', 'secondary-window'] as const)(
+    'reobserving %s retains its reference across preview generations',
+    (scope) => {
+      const table = new ReferenceTable('k3xa');
+      const before = table.issue(target('retained', { scope }), 1);
+      expect(table.issue(target('retained', { scope, previewGeneration: 1 }), 2)).toBe(before);
+      expect(table.resolve(before, 1)).toMatchObject({ ok: true });
+    },
+  );
+
   test('an earlier incarnation stops resolving and is reported as earlier, not foreign', () => {
     const table = new ReferenceTable('k3xa');
     const before = table.issue(target('e1'), 1);

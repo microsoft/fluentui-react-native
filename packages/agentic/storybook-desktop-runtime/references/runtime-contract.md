@@ -15,6 +15,23 @@ ready/error events correlate instance, target, request/run IDs, and preview
 generation. Each named test gets a keyed preview remount. Preserve these
 contracts and fail closed on stale or uncorrelated messages.
 
+The version-2 challenge/hello binds a fresh connection epoch. Prepare messages
+carry that epoch and a strictly increasing selection sequence. A synchronous
+selection ref fences callbacks from superseded React trees before effects can
+commit. Version-1 ready events and native marker JSON share the data-only
+`storyMarker.ts` producer: `connectionEpoch`, `markerVersion`,
+`previewGeneration`, `requestId`, `runId`, and `storyId`. The driver tests
+the actual producer against its verifier without Node globals.
+
+Cancellation retains a canceled selection, hides its story content, and
+suppresses ready/error callbacks; old prepares cannot revive it. Channel
+disconnect cancels the current selection. A replacement epoch rejects
+previous-epoch messages, but this runtime does not add transport reconnect.
+Different-story late trees are hidden; upstream same-story navigation has no
+request identity and cannot be proven fenced. The driver therefore retains
+unknown-effect quarantine after interrupted navigation, even after a new
+hello. Keep this boundary explicit rather than claiming transparent recovery.
+
 Win32 remounts the entire preview subtree for each test generation, including
 the story viewport, so retained scroll position cannot put the next test's
 controls behind the chrome. Sidebar and addon preferences remain outside that
