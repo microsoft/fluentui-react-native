@@ -128,6 +128,15 @@ supervisor path at a time; do not start `storybook driver --agent` and
    the injected dispatch point and whether a mutation was applied; never retry
    an ambiguous mutation.
 
+   Keep the public operation request ID separate from the runtime's internal
+   selection request ID. Reusing the public ID replays its recorded outcome,
+   including a rejected `bridge-unavailable` result; it is not a new readiness
+   probe. A new ID is safe only after a rejected, effect-none result. Match
+   render-fault injections to the actual correlated runtime message and retain
+   its epoch, preview generation, and internal request ID. Write live
+   fault-control files atomically; a partially written control file is a harness
+   failure, not evidence about the service.
+
 | Case                           | Stimulus                                                                                                    | Required evidence                                                                                                                                     |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Same-port replacement          | Replace the protected service on the same port after opening a session.                                     | Old incarnation/session and references are rejected; the next call re-verifies discovery; no old mutation is replayed.                                |
@@ -192,6 +201,18 @@ Windows: `--windows` is always Fabric and `--win32` is always Paper.
   app return `relaunch-required`; recovery needs an app relaunch.
 - An externally stopped `storybook run` exits nonzero and writes a failed
   `run.json`. Record it as expected for that case; it is not a driver failure.
+- If `storybook run --windows` fails while enabling Developer Mode, do not
+  change that OS setting for qualification. An already installed, verified
+  app can instead be launched by its exact AUMID resolved from the built
+  AppxManifest and the matching registered package. Record both the failed
+  launch command and this narrower launch path.
+- Windows smoke uses separate story-traversal and post-relaunch test phases.
+  Trace session creation/deletion for each phase: one traversal session per
+  phase, its confirmed deletion before the next phase or authored session,
+  and no controller fallback to HTTP selection. The deliberately unprotected
+  orchestrator itself uses the legacy HTTP selection route; distinguish
+  those nested driver-owned calls from controller fallback. Do not mistake
+  authored-test sessions for traversal sessions.
 
 ## Cleanup and endpoint limits
 

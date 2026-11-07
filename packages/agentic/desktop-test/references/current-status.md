@@ -426,3 +426,207 @@ running.
 cleanup and restart, F4 readiness/render faults, F4 secondary windows, F3
 survivors, F5 manifest smoke, and F5 legacy separation. Hosted CI disables
 physical input, so physical input is not qualified there.
+
+## Windows follow-up qualification - 2026-11-07 UTC
+
+Source: `386f0585edae2450ab22e6d359e2fe4db3399555` with repairs to the
+package-boundary loader, link-check worker, and atomic reporting. Native/runtime
+implementation was unchanged. Same Windows 11 Enterprise build 26300, AMD64
+host; Node 26.13.0. The earlier matrix and every failed attempt above remain
+historical evidence, not erased by this follow-up.
+
+The seven previously Not run rows were exercised. All other rows retain their
+earlier outcomes: **Windows Fabric 21 Pass, 2 Partial, 1 Fail; Win32 Paper
+21 Pass, 3 Partial; neither has a Not run row.** This is not all-pass native
+qualification: launch-capable discovery and separately registered secondary
+windows remain Partial on both; fresh-preview lost-context fencing remains
+Partial on Win32; Windows physical input remains Failed. Permission preflight
+and Win32 Metro reload remain Unsupported. Hosted physical-input skips do not
+change those results.
+
+| Follow-up case                 | Windows Fabric | Win32 Paper | Evidence                                                                                                                                                                                                                                                                                                                 |
+| ------------------------------ | -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Failed-cleanup claim retention | Pass           | Pass        | Injected failure before the exact owned channel stop dispatched. The claim stayed fenced with channel generation 2 unresolved; replacement was refused before acquiring resources.                                                                                                                                       |
+| Live cleanup and restart       | Pass           | Pass        | Original recorded stop callbacks settled, exact resources exited, descriptors disappeared, then retained owners/claims were reconciled. Fresh descriptor discovery in a new service incarnation selected and reset with marker verification. Restart alone was not used as cleanup proof.                                |
+| F4 readiness/render faults     | Pass           | Pass        | Held a real correlated ready for 1,500 ms after native render and delivered a stale correlation first. Selection settled only after the real message; old preview refs expired. A correlated render error returned unknown-effect quarantine and fenced later mutations.                                                 |
+| F4 secondary windows           | Partial        | Partial     | `native-callout--default` reported `Native window: Shown`; selection back to Button cleaned up in the same session. Only the registered primary window was addressed; this does not prove selection of a separately registered secondary window.                                                                         |
+| F3 startup/shutdown/survivors  | Pass           | Pass        | Startup failed after a real typed service-ready receipt, and shutdown failed before the owned stop. Exact channel/helper survivors were reconciled through the recorded stop; Metro generation 1 settled, channel generation 2 retained the failed claim until cleanup was proved.                                       |
+| F5 manifest smoke              | Pass           | Pass        | Instrumented manifest-backed smoke used one traversal session per phase and confirmed its DELETE before the next phase/authored session. All driver sessions were paired with successful deletes, without overlapping sessions or controller HTTP fallback. Overall smoke/report failures are retained below separately. |
+| F5 legacy separation           | Pass           | Pass        | Non-agent smoke traced unprotected `/select-story-sync` requests nested inside driver-owned story calls. This is the explicitly configured legacy transport, not fallback from the controller and not protected-ingress evidence. No descriptor or grant was used by this lane.                                          |
+
+### Ownership failures and reconciliation
+
+`yarn desktop-test --target windows|win32 --reporter json serve --agent`
+acquired real Metro, channel, native helper, and private descriptor resources.
+Local instrumentation failed `running.stop` **before** dispatch for only the
+recorded `storybook-channel` resource; the startup variant also threw after
+the actual correlated `service-ready` receipt. The lock recorded
+`service:storybook-channel:2`, generation 2, `disposal: failed`, and an
+unresolved disposal effect. A second identical `serve --agent` command failed
+with the workload-held diagnostic. It did not replace or steal the service.
+
+Calling the saved original stop callback then settled the exact channel and
+helper. On the corrected startup runs and Win32 shutdown run, instrumentation
+also recorded `authority.revoke` returning true; no grant identifier or token
+was logged. The descriptor disappeared and ports 8081, 17202, and 39225 were
+free. The supervisor retained its failed claim and remained alive; only after
+that resource proof was its exact process stopped and its exact stale claim
+removed. This operator reconciliation is not an automatic recovery claim.
+External app incarnations survived throughout and were stopped separately
+only after preservation was checked.
+
+| Endpoint / phase                           | Run ID                                 | Terminal result                                                                                                   |
+| ------------------------------------------ | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Windows first secondary/fault harness      | `9adb8cc6-b2de-4e12-b833-31314c03f111` | Passed supervisor; initial harness failures retained.                                                             |
+| Windows Metro/native-launch attempt        | `d2c2d92a-c561-4f57-8d71-9109c53a04b6` | Failed; Metro watch ENOENT during native build activity, followed by exact settled-resource/owner reconciliation. |
+| Windows failed shutdown                    | `ed3d74cb-769f-4e9f-9ca6-7f00772e98c5` | Failed as injected; exact original stop subsequently settled.                                                     |
+| Windows correlated readiness/render faults | `949dde01-8fa9-46b3-b6ee-9e2082eb0b56` | Passed supervisor and corrected MCP fault probe.                                                                  |
+| Windows first startup failure              | `d729b429-89bc-44c4-9b06-13d3a00e0de6` | Failed; the local control-file reader crashed on a partial JSON write before reconciliation.                      |
+| Windows corrected startup failure          | `ea10eb32-ad0f-462d-8384-7d824357e5b2` | Failed as injected; original stop, grant revocation, and resource exit were observed.                             |
+| Win32 failed shutdown and MCP faults       | `509c46ef-d6ee-47d6-9fc5-4f9c475faa8a` | Failed as injected; original stop, grant revocation, and resource exit were observed.                             |
+| Win32 startup failure                      | `f831f9d8-7335-4b98-8dad-5e8b6dade5e1` | Failed as injected; exact survivor reconciliation completed.                                                      |
+| Windows fresh-service recovery             | `5cad63bb-2e67-4033-a3ac-84ec44f5553d` | Passed; new MCP session selected and reset with verified markers.                                                 |
+| Win32 fresh-service recovery               | `dd134838-ca66-415c-afdb-828510739ef3` | Passed; new MCP session selected and reset with verified markers.                                                 |
+
+Every artifact is `apps/storybook/artifacts/desktop/<run-id>/run.json`.
+Manual descriptor operations are not suite selections: these lifecycle runs
+have zero selected/executed tests, not passing test counts. The new Windows
+service-ready incarnation was `dd5b8e7c-cca3-4fb6-9bf5-b6838b270f97`, MCP
+session `fbbdadc4-aa0e-45a9-9862-124052bc5e4e`; Win32 used incarnation
+`28c0beaf-ffb2-4161-a230-3b9edabe1c1e`, session
+`0245de0c-c004-4c76-865d-7458b62f999f`. Their normal shutdowns removed the
+lock and descriptor, revoked authority, released all owned native resources
+and ports, and preserved the attached app.
+
+The crashed first Windows startup run was **not** graceful cleanup: its
+service and owner exited, leaving a stale descriptor and claim. Exact
+process absence, no helper/listeners, and matching dead descriptor ownership
+were established before removing those two stale files. Service-local
+authority was invalidated by process exit; explicit grant revocation was
+not observed on that attempt. The corrected probe retained the last valid
+control during a partial write and used atomic updates.
+
+### Correlated render evidence and retained harness failures
+
+Both corrected probes used a real SDK stdio MCP client, default descriptor,
+verified native service, and one uninterrupted driver session at incarnation
+
+1. Session regions were 1 -> 2 -> 3; runtime preview generation is a separate
+   identity, reported below.
+
+| Endpoint | MCP session                            | Preview / chrome refs | Window identity       | Runtime epoch; delayed/error generations      | Measured held-selection duration |
+| -------- | -------------------------------------- | --------------------- | --------------------- | --------------------------------------------- | -------------------------------- |
+| Windows  | `46a48bed-5f9c-40c6-aac7-c2929461d222` | `0yoo23` / `0yoo1`    | `window-4124f4f1-1be` | `7a4241eb-dc2c-4c9e-b6c5-bd7e7142ec74`; 2 / 3 | 1,637 ms                         |
+| Win32    | `a29dc7af-c96f-4b0a-a98f-2eae04d7f8c1` | `oyno25` / `oyno1`    | `window-5d019501-11b` | `a8a10ef6-7935-43c5-b198-79f4ced043bf`; 5 / 6 | 1,618 ms                         |
+
+The old preview returned `ref-region-changed` after the delayed transition.
+The injected correlated error returned `story-not-ready`, indeterminate,
+effect unknown, quarantined. Chrome remained present and a later reset was
+rejected `target-quarantined`, effect none. Neither faulted tree exposed a
+fresh preview root, so this stimulus's fresh-preview mutation subcase is
+Partial, not additional fencing proof. Windows retains its earlier distinct
+successful fresh-preview fence probe; Win32 remains Partial.
+
+Secondary-window probes used Windows session
+`0ad62612-8bc5-4f9f-98f3-f987f9d0b4fb`, window `window-42ae1e0b-4`,
+status ref `1kos1`, and Win32 session
+`2d5302b1-e602-40b3-8536-66fad0f7d4a2`, window `window-5d019501-2`,
+status ref `k0kf1`. Each changed region 2 -> 3 when selecting Button again.
+
+Retained harness failures are not product diagnoses: initially matching the
+public request ID against the runtime's different internal ID did not inject
+the fault; repeatedly using the same public request ID replayed a cached
+effect-none `bridge-unavailable`; a stale-ref `check` returns a failed check
+envelope rather than necessarily an MCP error; finding a fresh preview after
+render failure did not succeed; opening a new session before quarantined-app
+exit correctly failed. The corrected probe retried with a new ID only after
+proven rejected/effect-none responses and never retried an ambiguous mutation.
+
+Windows app run `1885a5a3-0ba3-4206-8f8d-7894e77dc68a` failed at rnx-cli
+Developer Mode enabling (2406); no OS setting was changed. Later Windows
+launches used the exact already registered AUMID. The earlier app run
+`cc9cebaf-9029-4a05-b234-5aaa96121886` passed. Win32 app runs
+`177d3c9d-cbee-4387-a5bf-7ed135cc6811` and
+`727752b3-427a-40e7-8cec-0e33cbef32d9` report failed because their externally
+started apps were deliberately stopped after preservation/cleanup proof.
+
+### Instrumented smoke and atomic-report follow-up
+
+These are separate, explicitly **unprotected** non-agent workloads, with
+`FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel`
+matching hosted restrictions. They do not replace the physical-input result
+or descriptor-path evidence. Counts are selected / executed / passed /
+failed / skipped; all rows have zero unsupported, incomplete, retries, flaky,
+and groups not run.
+
+| Endpoint / attempt                      | Command                                                   | Result                                                                                                     | Run ID                                 |
+| --------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Win32 instrumented                      | `yarn storybook smoke --win32 --mode stories-and-tests`   | Pass: 266 / 214 / 214 / 0 / 52.                                                                            | `670a4dea-adad-4082-b597-56160040fcf5` |
+| Windows first instrumented              | `yarn storybook smoke --windows --mode stories-and-tests` | Fail overall: 312 / 234 / 234 / 0 / 78; nine `EPERM` atomic-report rename failures.                        | `5ac696da-3ea3-47dc-ad90-1d4bf1110377` |
+| Windows retry without live report reads | Same Windows command                                      | Fail overall: 312 / 234 / 234 / 0 / 78; fifteen `EPERM` atomic-report rename failures.                     | `a67d9961-40c9-4118-95bc-0bc988599ab7` |
+| Windows with bounded reporting recovery | Same Windows command                                      | Pass: 312 / 234 / 234 / 0 / 78; one replacement recovered after one sharing retry, journaled as a warning. | `1825d9aa-2c25-4a2c-8524-ceadcf52ad68` |
+| Win32 with bounded reporting recovery   | Same Win32 command                                        | Pass: 266 / 214 / 214 / 0 / 52; no sharing retry needed.                                                   | `8c6f58e1-3591-4f1b-b008-c52a718d3ca2` |
+
+Artifacts are `apps/storybook/artifacts/desktop/<run-id>/run.json`.
+The first Windows attempt overlapped live PowerShell reads of the projection;
+the retry did not, so those reads are not an established explanation. The
+exact holder of the conflicting Windows file handle was not identified.
+Atomic replacement failed transiently while later replacements succeeded;
+the collector correctly retained those failures, making otherwise successful
+test runs fail.
+
+A deterministic real Windows reader opened `run.json` without delete sharing
+for 100 ms. The pre-fix collector failed the regression; the corrected
+collector passed. Only Windows `EPERM`/`EACCES` renames are retried, at most
+ten times with 25 ms spacing, retaining the old complete snapshot. Recovery
+is journaled, not silently discarded; persistent conflicts, other errors,
+and non-Windows failures still fail reporting. Neither native mutation nor
+producer-handshake retries were added. Tests cover both recovery and
+permanent-failure retention.
+
+Win32 paired all 91 session creates with successful deletes. Traversal
+`797fabc1-6291-4f06-9a10-87486c48d2dd` made 176 story calls; readiness
+traversal `ce2d8587-3357-4765-8174-75d5e7527868` made one, then was
+deleted before the first authored session. Both Windows attempts paired 112
+creates/deletes; their story-phase traversals were
+`3b691f62-dc41-4aef-96ab-a05e3115a47e` (233 calls) and
+`e423ef0d-4c3b-4357-bbae-8eeb7dbcfd09` (232 calls), respectively.
+Their post-relaunch readiness traversals were
+`b64ede17-91b3-40c1-9554-88bb38857359` and
+`e1b4b77a-28de-4bb4-8c2d-331d0e0cc20f` (eight calls each).
+Each was deleted before authored-test session acquisition, without
+overlapping sessions. Readiness retries are not test retries.
+
+All 266 Win32 and 313 Windows internal legacy selections per run were nested
+inside exactly one driver-owned story call. There was no controller HTTP
+fallback. The non-agent orchestrator intentionally uses the legacy transport;
+the presence of those nested requests is not evidence of protected-ingress
+bypass. After every attempt, no owned app/helper/channel/Metro or listener
+remained, the workload lock and default descriptor were absent, and no
+external app was terminated.
+
+The fixed Windows run again paired 112 creates/deletes: traversal
+`beb044e6-d9c5-4ee4-bf77-57febd117123` made 233 calls, and readiness
+traversal `690c6ae8-1bfd-49bb-8f7e-fa6253249a4e` made eight. The fixed
+Win32 run paired 91 creates/deletes: traversal
+`dccddd56-608c-4ad5-bdda-3aa4a0e2e753` made 176 calls, and readiness
+traversal `c7233695-703d-4f70-ba6b-83d9d53bf1ba` made one. Both again
+deleted the readiness traversal before acquiring an authored-test session.
+Terminal reports have no failures. The Windows journal preserves its one
+recovered write; this is reporting recovery, not a test or mutation retry.
+After both fixed runs the exact owned processes were absent, all relevant
+ports were free, and the per-user workload claim and default private
+descriptor were absent. These non-agent lanes issued no descriptor grant.
+
+A full desktop-test package test attempt during the Windows smoke failed
+the `agent-cli` serve fixture (96 passed, four skipped, one failed).
+It also acquires a workload; overlapping it was a qualification scheduling
+error. Contention is a plausible explanation, but the retained child output
+does not establish the cause. The attempt remains recorded separately from
+the subsequent serial validation.
+
+After both native workloads and their cleanup finished, `yarn test` passed
+serially in desktop-test (97 passed, four skipped), desktop-driver
+(813 passed, 72 skipped), desktop-driver-mcp (26 passed), and scripts
+(76 passed). The desktop-test `agent-cli` fixture passed without a live
+smoke workload; no product behavior was changed to suppress that failure.

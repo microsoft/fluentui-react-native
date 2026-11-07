@@ -85,6 +85,14 @@ marker remain incomplete in queries, even if they say `passed`. Existing
 Persisted tests, work, failures, retries, and skips remain the authoritative
 source; page size and worker exit codes do not decide coverage.
 
+On Windows, atomic replacement retries only `EPERM`/`EACCES` rename failures,
+up to ten times at 25 ms intervals, without deleting the previous snapshot or
+rewriting its temporary replacement. A recovered replacement records a warning
+in the event journal. Exhaustion, other errors, and errors on other platforms
+remain reporting failures even if later snapshots succeed. The same rule
+applies to JUnit replacement; it does not retry native mutations or producer
+handshakes.
+
 Trusted host code registers exact collector `{ runId, root, expiresAt }`
 records and an optional `textArtifacts` relative-path allowlist, then issues a
 read grant with exact `runIds`, an expiry, and optional `artifacts` permission:

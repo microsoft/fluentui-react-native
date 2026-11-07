@@ -363,3 +363,52 @@ and a new story root `7fqk101` was observable in the same session. After a Win32
 `window-closed`. Physical input: the Windows helper rejected a physical click
 because the target window did not become the foreground window (effect none);
 the Win32 helper applied one with mechanism `physical-pointer`.
+
+## 2026-11-07 UTC Windows follow-up
+
+Source `386f0585edae2450ab22e6d359e2fe4db3399555`; validation tests,
+tooling, atomic reporting, and guidance changed during this follow-up. The additive native
+matrix in `packages/agentic/desktop-test/references/current-status.md`
+records 21 Pass, 2 Partial, 1 Fail for Windows and 21 Pass, 3 Partial for
+Win32, with no remaining Not run rows. This does not resolve Windows
+physical input or the partial launch/secondary-window coverage.
+
+Real descriptor/MCP probes held correlated readiness for 1,500 ms after
+native render and delivered a stale correlation first. Windows settled after
+1,637 ms and Win32 after 1,618 ms. Within one uninterrupted session at
+incarnation 1, regions changed 1 -> 2 -> 3:
+
+| Endpoint | Session                                | Preview element / chrome | Exact window          | Runtime delayed/error generation |
+| -------- | -------------------------------------- | ------------------------ | --------------------- | -------------------------------- |
+| Windows  | `46a48bed-5f9c-40c6-aac7-c2929461d222` | `0yoo23` / `0yoo1`       | `window-4124f4f1-1be` | 2 / 3                            |
+| Win32    | `a29dc7af-c96f-4b0a-a98f-2eae04d7f8c1` | `oyno25` / `oyno1`       | `window-5d019501-11b` | 5 / 6                            |
+
+The preview refs returned `ref-region-changed`; chrome checks passed.
+Correlated render errors produced unknown-effect quarantine and rejected
+later story mutations. A fresh preview root was not exposed after that error,
+so that subcase is Partial, not a bypass/fencing proof. Win32's earlier
+fresh-preview fencing gap remains Partial. Native Callout probes confirmed a
+shown native window and cleanup by subsequent selection, but addressed only
+the registered primary identity: separately registered secondary-window
+selection remains Partial on both endpoints.
+
+Startup and shutdown failure probes retained exact owned-resource claims and
+refused replacement. Original stop callbacks reconciled the recorded
+generation-2 channel/helper; the retained owner and claim were removed only
+after resource cleanup proof. Fresh service incarnations then passed
+descriptor discovery, marker-verified selection/reset, normal shutdown,
+authority revocation, and attached-app preservation. The desktop-test ledger
+retains the injected failures, one local control-reader crash, operator
+reconciliation details, every supervisor run ID, and the separate unprotected
+smoke history. No new physical-input or capture capability is inferred.
+
+Final non-agent smoke with bounded atomic-report recovery passed on both
+endpoints: Windows run `1825d9aa-2c25-4a2c-8524-ceadcf52ad68`
+(234 passed, 78 skipped) and Win32 run
+`8c6f58e1-3591-4f1b-b008-c52a718d3ca2` (214 passed, 52 skipped).
+Every session had a successful delete; readiness traversal ended before
+authored tests. Windows journaled one recovered sharing conflict, Win32 none.
+Processes, listeners, per-user claim, and default descriptor were absent
+after cleanup. Artifacts remain under
+`apps/storybook/artifacts/desktop/<run-id>/run.json`; earlier reporting and
+physical-input failures are not erased.

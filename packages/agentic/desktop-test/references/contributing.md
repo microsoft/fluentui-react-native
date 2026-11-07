@@ -25,7 +25,9 @@ paths. Do not move Storybook-specific story extraction into this package.
 The package-boundary contract exercises the built public entry points with a
 loader that rejects React, React Native, and Storybook imports; keep its
 standalone consumer and negative fixtures representative of package manifests
-and runtime imports.
+and runtime imports. Pass the loader as a `pathToFileURL(...).href` URL to
+Node's `--experimental-loader`; a native Windows drive path is not a valid ESM
+loader specifier.
 
 Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` from the package.
 Run consumer suites when changing public configuration or lifecycle behavior.

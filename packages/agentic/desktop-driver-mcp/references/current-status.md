@@ -226,3 +226,43 @@ Windows host only.
 | F4 cancellation         | Pass on both. After a client abort at 150 or 40 ms, replaying the request ID returned the recorded applied result, and the next mutation applied in the same session.                                                                                                                                      |
 | F5 ingress and lifetime | Pass on both. Unauthenticated HTTP returned 403, an anonymous WebSocket received only the hello request, and the session stayed usable after about 21 s idle.                                                                                                                                              |
 | Not run                 | Failed-cleanup claim retention, live cleanup and restart, F4 readiness/render faults, F4 secondary windows, F3 survivors, F5 manifest smoke, and F5 legacy separation. No MCP discovery-size or latency measurements were recorded on Windows.                                                             |
+
+## 2026-11-07 UTC Windows follow-up
+
+Source `386f0585edae2450ab22e6d359e2fe4db3399555`, plus validation,
+atomic-report repairs, and guidance. The seven Not run rows above were exercised; the
+additive desktop-test ledger now records Windows 21 Pass, 2 Partial, 1 Fail
+and Win32 21 Pass, 3 Partial. Full run IDs, ref kinds/identities/generations,
+failure history, and operator cleanup proof are in
+`packages/agentic/desktop-test/references/current-status.md`.
+
+The real SDK stdio client continued to use only the default private
+descriptor and native-verified service. Delayed readiness rejected a stale
+correlation; correlated render faults quarantined the same session while
+chrome reads remained usable. Old preview refs expired. No fresh preview
+root was exposed after those errors, so this does not fill Win32's
+fresh-preview fence gap. Secondary Callout probes were Partial: no separately
+registered secondary target was selected.
+
+Exact failed-cleanup and startup-survivor claims blocked replacement until
+the original stop callbacks settled. After exact operator reconciliation, new
+descriptor-backed services selected/reset with marker verification in
+Windows session `fbbdadc4-aa0e-45a9-9862-124052bc5e4e` and Win32 session
+`0245de0c-c004-4c76-865d-7458b62f999f`. Normal shutdown removed discovery,
+revoked authority, freed ports/resources, and preserved attached apps.
+
+Manifest smoke/legacy traces were separate **unprotected** workloads. They
+used no descriptor or grant and provide no additional protected-ingress
+evidence. The initial local probe's cached `bridge-unavailable` loop was a
+request-ID reuse error: the corrected client issued a new ID only after
+rejected/effect-none proof, never after an indeterminate mutation. Earlier
+failed attempts and the local control-file crash remain recorded.
+
+The final separate non-agent smoke runs passed: Windows
+`1825d9aa-2c25-4a2c-8524-ceadcf52ad68` (234 passed, 78 skipped) and
+Win32 `8c6f58e1-3591-4f1b-b008-c52a718d3ca2` (214 passed, 52 skipped).
+Windows recovered one atomic-report sharing conflict with a journal warning;
+Win32 needed none. All sessions closed and cleanup removed owned processes,
+listeners, and the workload claim; no default descriptor remained. These
+runs issued no descriptor grant and do not change the descriptor matrix's
+Partial or Fail outcomes.
