@@ -107,20 +107,25 @@ This repository's current PR workflow provides examples in
 - `windows-storybook` prepares the generated app, installs the required Windows
   App Runtime for that app, runs the shared Windows native build contract,
   and asks the same setup action to verify the `windows` endpoint before
-  running Windows `stories-and-tests`;
+  running Windows `stories-and-tests` in the accessible lane
+  (`--input accessible`);
 - `win32-storybook` asks the setup action to build the same Windows provider
   into its own job-local cache, verify the `win32` endpoint, and pin later
-  resolution before running the authored plans through the prebuilt Paper
-  endpoint.
+  resolution before running the accessible lane through the prebuilt Paper
+  endpoint. `win32-storybook-physical` runs the physical lane
+  (`--input physical`) the same way with every input feature enabled. It is an
+  advisory pilot outside the aggregate `PR` check until hosted physical input
+  is qualified.
 
-Both Windows jobs upload their doctor report, successful native build log, and
-preserved failed-build diagnostics with the Storybook artifacts. Neither
-`prep` nor `smoke` may compile a helper after the explicit build step.
-Because GitHub-hosted Windows does not provide authoritative global input,
-both jobs disable keyboard, physical-click, and wheel capabilities through the
-registered host policy. The authored input plans therefore report explicit
-capability skips, and so do the Windows native contract's physical-input and
-window-capture fixture scenarios, because hosted Windows Graphics Capture cannot
+The Windows Storybook jobs upload their doctor report, successful native build
+log, and preserved failed-build diagnostics with the Storybook artifacts.
+Neither `prep` nor `smoke` may compile a helper after the explicit build step.
+Because GitHub-hosted Windows is not qualified to provide authoritative global
+input, the accessible jobs disable keyboard, physical-click, and wheel
+capabilities through the registered host policy, and their lanes exclude the
+cases that declare those requirements instead of skipping them. The Windows
+native contract's physical-input and window-capture fixture scenarios still
+report explicit capability skips, because hosted Windows Graphics Capture cannot
 create a capture item. Interactive self-hosted qualification must leave those
 features enabled.
 

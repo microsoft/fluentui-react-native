@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import type { AccessibilityActionEvent } from 'react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -92,56 +93,51 @@ export const NativeSelectionSemantics: Story = {
     };
     return <Scene />;
   },
-  wdio: {
-    'RAD-003 RAD-005 Win32 exposes native RadioButton selection, names and disabled state': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies Win32 UI Automation SelectionItem projection.');
-        return;
-      }
-      for (const [id, name, selected] of [
-        ['radio-native-off', 'Unselected option', false],
-        ['radio-native-on', 'Selected option', true],
-        ['radio-native-disabled', 'Disabled option', true],
-      ] as const) {
-        const radio = await browser.$(`~${id}`);
-        expect(await radio.getTagName()).toBe('radio');
-        expect(await radio.getProperty('name')).toBe(name);
-        expect(await radio.getProperty('selected')).toBe(selected);
-      }
-      await expect(await browser.$('~radio-native-disabled')).toBeDisabled();
-    },
-    'RAD-003 Win32 Select forwards once without self-selection or presses and disabled public activation rejects': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies Win32 UI Automation Select transport.');
-        return;
-      }
-      const radio = await browser.$('~radio-native-off');
-      const disabled = await browser.$('~radio-native-disabled');
-      const actions = await browser.$('~radio-native-actions');
-      const presses = await browser.$('~radio-native-presses');
-      await expect(actions).toHaveAttribute('name', '0');
-      await radio.click();
-      await expect(actions).toHaveAttribute('name', '1');
-      await expect(await browser.$('~radio-native-last-action')).toHaveAttribute('name', 'Select');
-      await expect(presses).toHaveAttribute('name', '0');
-      expect(await radio.getProperty('selected')).toBe(false);
-      let rejection: unknown;
-      try {
-        await disabled.click();
-      } catch (error) {
-        rejection = error;
-      }
-      expect(rejection).toBeDefined();
-      await expect(actions).toHaveAttribute('name', '1');
-      await expect(presses).toHaveAttribute('name', '0');
-      expect(await disabled.getProperty('selected')).toBe(true);
-    },
-  },
+  wdio: [
+    desktopIt(
+      'RAD-003 RAD-005 Win32 exposes native RadioButton selection, names and disabled state',
+      { platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        for (const [id, name, selected] of [
+          ['radio-native-off', 'Unselected option', false],
+          ['radio-native-on', 'Selected option', true],
+          ['radio-native-disabled', 'Disabled option', true],
+        ] as const) {
+          const radio = await browser.$(`~${id}`);
+          expect(await radio.getTagName()).toBe('radio');
+          expect(await radio.getProperty('name')).toBe(name);
+          expect(await radio.getProperty('selected')).toBe(selected);
+        }
+        await expect(await browser.$('~radio-native-disabled')).toBeDisabled();
+      },
+    ),
+    desktopIt(
+      'RAD-003 Win32 Select forwards once without self-selection or presses and disabled public activation rejects',
+      { requires: ['accessibility-click'], platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        const radio = await browser.$('~radio-native-off');
+        const disabled = await browser.$('~radio-native-disabled');
+        const actions = await browser.$('~radio-native-actions');
+        const presses = await browser.$('~radio-native-presses');
+        await expect(actions).toHaveAttribute('name', '0');
+        await radio.click();
+        await expect(actions).toHaveAttribute('name', '1');
+        await expect(await browser.$('~radio-native-last-action')).toHaveAttribute('name', 'Select');
+        await expect(presses).toHaveAttribute('name', '0');
+        expect(await radio.getProperty('selected')).toBe(false);
+        let rejection: unknown;
+        try {
+          await disabled.click();
+        } catch (error) {
+          rejection = error;
+        }
+        expect(rejection).toBeDefined();
+        await expect(actions).toHaveAttribute('name', '1');
+        await expect(presses).toHaveAttribute('name', '0');
+        expect(await disabled.getProperty('selected')).toBe(true);
+      },
+    ),
+  ],
 };
 
 export const Overview: Story = {

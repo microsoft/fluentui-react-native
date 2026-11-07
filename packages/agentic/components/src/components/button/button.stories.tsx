@@ -8,6 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { ThemedRoot, useRootInputModality } from '@fluentui-react-native/design';
 import { resolveAccessibilityAction } from '@fluentui-react-native/framework-base';
 import type { FocusKeyboardEvent, FocusRequest } from '@fluentui-react-native/framework-base';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Button } from './button';
@@ -96,28 +97,26 @@ type Story = WdioStory<StoryObj<typeof Button>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  wdio: {
-    'exposes enabled button semantics': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('exposes enabled button semantics', async ({ browser, expect }) => {
       const assert: typeof import('node:assert') = (await import('node:assert')).default;
       const button = await browser.$('~agentic-storybook-button');
       await expect(button).toExist();
       await expect(button).toBeEnabled();
       assert.strictEqual(await button.getTagName(), 'button');
-    },
-    'supports native pointer activation': async ({ browser, expect, platform, skip }) => {
-      const { expectWindowsPointerFocus } = await import('../../common/desktopFocus.wdio.ts');
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.physicalClick || !features.elementScreenshot || (platform !== 'macos' && !features.focus)) {
-        skip('This test requires physical clicks, element screenshots, and focus on Windows/Win32.');
-        return;
-      }
-      const button = await browser.$('~agentic-storybook-button');
-      await button.click();
-      await expectWindowsPointerFocus({ browser, platform }, 'agentic-storybook-button');
-      expect(await browser.takeElementScreenshot(await button.elementId)).toMatch(/^iVBORw0KGgo/);
-    },
-  },
+    }),
+    desktopIt(
+      'supports native pointer activation',
+      { requires: ['physical-click', 'element-screenshot', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { expectWindowsPointerFocus } = await import('../../common/desktopFocus.wdio.ts');
+        const button = await browser.$('~agentic-storybook-button');
+        await button.click();
+        await expectWindowsPointerFocus({ browser, platform }, 'agentic-storybook-button');
+        expect(await browser.takeElementScreenshot(await button.elementId)).toMatch(/^iVBORw0KGgo/);
+      },
+    ),
+  ],
 };
 
 function ModalityProbe({ testID = 'focus-input-modality' }: { testID?: string }) {
@@ -168,149 +167,165 @@ function FocusManagementScene() {
 export const FocusManagement: Story = {
   render: () => <FocusManagementScene />,
   tags: ['desktop-focus'],
-  wdio: {
-    'honors pointer focus policy and invokes exactly once per Enter and Space': async (context) => {
-      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus, focusByTab } =
-        await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      const button = await browser.$('~focus-probe-button');
-      const count = await browser.$('~focus-probe-count');
-      await (await browser.$('~focus-probe-entry')).click();
-      await expectNativeState(browser, 'focus-probe-entry', 'focused', true);
-      await button.click();
-      await expectWindowsPointerFocus(context, 'focus-probe-button');
-      await expect(count).toHaveText('1');
-      await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
-      await expect(await browser.$('~focus-probe-state')).toHaveText('focused');
-      await browser.keys('\uE007');
-      await expect(count).toHaveText('2');
-      await expect(await browser.$('~focus-input-modality')).toHaveText('keyboard');
-      await browser.keys('\uE00D');
-      await expect(count).toHaveText('3');
-      await button.click();
-      await expect(count).toHaveText('4');
-      await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
-    },
-    'updates same-target modality without refocusing and shares it with nested themes': async (context) => {
-      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus, focusByTab } =
-        await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      const button = await browser.$('~focus-probe-button');
-      await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
-      await button.click();
-      await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
-      await expect(await browser.$('~focus-probe-focus-count')).toHaveText('1');
-      await browser.keys('x');
-      await expect(await browser.$('~focus-input-modality')).toHaveText('keyboard');
-      await expect(await browser.$('~focus-nested-modality')).toHaveText('keyboard');
-      await expect(await browser.$('~focus-probe-count')).toHaveText('1');
-      await button.click();
-      await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
-      await expect(await browser.$('~focus-probe-focus-count')).toHaveText('1');
-      await (await browser.$('~focus-probe-nested')).click();
-      await expectWindowsPointerFocus(context, 'focus-probe-nested');
-      await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
-      await browser.keys('\uE004');
-      await expectNativeState(browser, 'focus-probe-next', 'focused', true);
-      await browser.keys('\uE004');
-      await expectNativeState(browser, 'focus-probe-nested', 'focused', true);
-      await browser.keys('x');
-      await expect(await browser.$('~focus-input-modality')).toHaveText('keyboard');
-      await expect(await browser.$('~focus-nested-modality')).toHaveText('keyboard');
-      await expect(await browser.$('~focus-probe-state')).toHaveText('blurred');
-    },
-    'skips disabled stops and does not activate the new owner on a stale key-up': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
-      await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
-      try {
-        await browser.performActions([
-          {
-            type: 'key',
-            id: 'focus-keyboard',
-            actions: [
-              { type: 'keyDown', value: '\uE007' },
-              { type: 'keyDown', value: '\uE004' },
-              { type: 'keyUp', value: '\uE004' },
-              { type: 'keyUp', value: '\uE007' },
-            ],
-          },
-        ]);
-      } finally {
-        await browser.releaseActions();
-      }
-      await expectNativeState(browser, 'focus-probe-next', 'focused', true);
-      await expectNativeState(browser, 'focus-probe-disabled', 'focused', false);
-      await expect(await browser.$('~focus-probe-state')).toHaveText('blurred');
-      await expect(await browser.$('~focus-probe-count')).toHaveText(platform === 'macos' ? '1' : '0');
-      await expect(await browser.$('~focus-probe-pressed')).toHaveText('false');
-      await expect(await browser.$('~focus-probe-next-count')).toHaveText('0');
-      await browser.keys(['\uE008', '\uE004']);
-      await expectNativeState(browser, 'focus-probe-button', 'focused', true);
-    },
-    'suppresses repeats and activates at the native platform key phase': async (context) => {
-      const { requireDesktopFocus, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
-      await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
-      try {
-        await browser.performActions([
-          {
-            type: 'key',
-            id: 'focus-keyboard',
-            actions: [
-              { type: 'keyDown', value: '\uE00D' },
-              { type: 'keyDown', value: '\uE00D' },
-              { type: 'keyDown', value: '\uE00D' },
-            ],
-          },
-        ]);
-        await expect(await browser.$('~focus-probe-count')).toHaveText(platform === 'macos' ? '1' : '0');
-        await browser.performActions([{ type: 'key', id: 'focus-keyboard', actions: [{ type: 'keyUp', value: '\uE00D' }] }]);
+  wdio: [
+    desktopIt(
+      'honors pointer focus policy and invokes exactly once per Enter and Space',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, expectWindowsPointerFocus, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect } = context;
+        const button = await browser.$('~focus-probe-button');
+        const count = await browser.$('~focus-probe-count');
+        await (await browser.$('~focus-probe-entry')).click();
+        await expectNativeState(browser, 'focus-probe-entry', 'focused', true);
+        await button.click();
+        await expectWindowsPointerFocus(context, 'focus-probe-button');
+        await expect(count).toHaveText('1');
+        await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
+        await expect(await browser.$('~focus-probe-state')).toHaveText('focused');
+        await browser.keys('\uE007');
+        await expect(count).toHaveText('2');
+        await expect(await browser.$('~focus-input-modality')).toHaveText('keyboard');
+        await browser.keys('\uE00D');
+        await expect(count).toHaveText('3');
+        await button.click();
+        await expect(count).toHaveText('4');
+        await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
+      },
+    ),
+    desktopIt(
+      'updates same-target modality without refocusing and shares it with nested themes',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, expectWindowsPointerFocus, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect } = context;
+        const button = await browser.$('~focus-probe-button');
+        await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
+        await button.click();
+        await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
+        await expect(await browser.$('~focus-probe-focus-count')).toHaveText('1');
+        await browser.keys('x');
+        await expect(await browser.$('~focus-input-modality')).toHaveText('keyboard');
+        await expect(await browser.$('~focus-nested-modality')).toHaveText('keyboard');
         await expect(await browser.$('~focus-probe-count')).toHaveText('1');
-        await expect(await browser.$('~focus-probe-pressed')).toHaveText('false');
-      } finally {
-        await browser.releaseActions();
-      }
-    },
-    'releases pressed feedback after an intervening key without a stale activation': async (context) => {
-      if (context.platform === 'win32') {
-        context.skip('Quarantined until #4373 is fixed: Win32 does not forward onPressOut after Space with an intervening key.');
-        return;
-      }
-      const { requireDesktopFocus, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
-      await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
-      try {
-        await browser.performActions([
-          {
-            type: 'key',
-            id: 'focus-keyboard',
-            actions: [
-              { type: 'keyDown', value: '\uE00D' },
-              { type: 'keyDown', value: 'x' },
-              { type: 'keyUp', value: 'x' },
-              { type: 'keyUp', value: '\uE00D' },
-            ],
-          },
-        ]);
+        await button.click();
+        await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
+        await expect(await browser.$('~focus-probe-focus-count')).toHaveText('1');
+        await (await browser.$('~focus-probe-nested')).click();
+        await expectWindowsPointerFocus(context, 'focus-probe-nested');
+        await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'focus-probe-next', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'focus-probe-nested', 'focused', true);
+        await browser.keys('x');
+        await expect(await browser.$('~focus-input-modality')).toHaveText('keyboard');
+        await expect(await browser.$('~focus-nested-modality')).toHaveText('keyboard');
+        await expect(await browser.$('~focus-probe-state')).toHaveText('blurred');
+      },
+    ),
+    desktopIt(
+      'skips disabled stops and does not activate the new owner on a stale key-up',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect, platform } = context;
+        await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'focus-keyboard',
+              actions: [
+                { type: 'keyDown', value: '\uE007' },
+                { type: 'keyDown', value: '\uE004' },
+                { type: 'keyUp', value: '\uE004' },
+                { type: 'keyUp', value: '\uE007' },
+              ],
+            },
+          ]);
+        } finally {
+          await browser.releaseActions();
+        }
+        await expectNativeState(browser, 'focus-probe-next', 'focused', true);
+        await expectNativeState(browser, 'focus-probe-disabled', 'focused', false);
+        await expect(await browser.$('~focus-probe-state')).toHaveText('blurred');
         await expect(await browser.$('~focus-probe-count')).toHaveText(platform === 'macos' ? '1' : '0');
         await expect(await browser.$('~focus-probe-pressed')).toHaveText('false');
-        await expect(await browser.$('~focus-probe-release-count')).toHaveText('1');
-      } finally {
-        await browser.releaseActions();
-      }
-    },
-    'exposes the native disabled accessibility state': async ({ browser, expect }) => {
+        await expect(await browser.$('~focus-probe-next-count')).toHaveText('0');
+        await browser.keys(['\uE008', '\uE004']);
+        await expectNativeState(browser, 'focus-probe-button', 'focused', true);
+      },
+    ),
+    desktopIt(
+      'suppresses repeats and activates at the native platform key phase',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect, platform } = context;
+        await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'focus-keyboard',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expect(await browser.$('~focus-probe-count')).toHaveText(platform === 'macos' ? '1' : '0');
+          await browser.performActions([{ type: 'key', id: 'focus-keyboard', actions: [{ type: 'keyUp', value: '\uE00D' }] }]);
+          await expect(await browser.$('~focus-probe-count')).toHaveText('1');
+          await expect(await browser.$('~focus-probe-pressed')).toHaveText('false');
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
+    desktopIt(
+      'releases pressed feedback after an intervening key without a stale activation',
+      {
+        requires: ['physical-click', 'keyboard', 'focus'],
+        quarantine: {
+          issue: '#4373',
+          reason: 'Win32 does not forward onPressOut after Space with an intervening key.',
+          expires: '2027-01-31',
+          platforms: ['win32'],
+        },
+      },
+      async (context) => {
+        const { focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect, platform } = context;
+        await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'focus-keyboard',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: 'x' },
+                { type: 'keyUp', value: 'x' },
+                { type: 'keyUp', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expect(await browser.$('~focus-probe-count')).toHaveText(platform === 'macos' ? '1' : '0');
+          await expect(await browser.$('~focus-probe-pressed')).toHaveText('false');
+          await expect(await browser.$('~focus-probe-release-count')).toHaveText('1');
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
+    desktopIt('exposes the native disabled accessibility state', async ({ browser, expect }) => {
       await expect(await browser.$('~focus-probe-disabled')).not.toBeEnabled();
-    },
-    'releases repeated modifiers before the next Tab': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
+    }),
+    desktopIt('releases repeated modifiers before the next Tab', { requires: ['physical-click', 'keyboard', 'focus'] }, async (context) => {
+      const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
       const { browser } = context;
       await focusByTab(browser, 'focus-probe-entry', 'focus-probe-button');
       try {
@@ -331,8 +346,8 @@ export const FocusManagement: Story = {
       } finally {
         await browser.releaseActions();
       }
-    },
-  },
+    }),
+  ],
 };
 
 function FocusRequestsScene() {
@@ -361,32 +376,35 @@ function FocusRequestsScene() {
 export const FocusRequests: Story = {
   render: () => <FocusRequestsScene />,
   tags: ['desktop-focus'],
-  wdio: {
-    'confirms native requests without changing modality and rejects disabled or detached targets': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect, platform } = context;
-      const command = await browser.$('~focus-request-command');
-      const status = await browser.$('~focus-request-status');
-      await command.click();
-      await expectNativeState(browser, 'focus-request-target', 'focused', true);
-      await expect(status).toHaveText('confirmed');
-      await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
-      await (await browser.$('~focus-request-entry')).click();
-      await expectNativeState(browser, 'focus-request-entry', 'focused', true);
-      await (await browser.$('~focus-request-disable')).click();
-      await expectNativeState(browser, 'focus-request-target', 'focused', false);
-      if (platform !== 'macos') {
-        await expect(await browser.$('~focus-request-target')).not.toBeEnabled();
-      }
-      await command.click();
-      await expect(status).toHaveText('not-focusable');
-      await (await browser.$('~focus-request-mount')).click();
-      await expect(await browser.$('~focus-request-target')).not.toExist();
-      await command.click();
-      await expect(status).toHaveText('not-mounted');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'confirms native requests without changing modality and rejects disabled or detached targets',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect, platform } = context;
+        const command = await browser.$('~focus-request-command');
+        const status = await browser.$('~focus-request-status');
+        await command.click();
+        await expectNativeState(browser, 'focus-request-target', 'focused', true);
+        await expect(status).toHaveText('confirmed');
+        await expect(await browser.$('~focus-input-modality')).toHaveText('pointer');
+        await (await browser.$('~focus-request-entry')).click();
+        await expectNativeState(browser, 'focus-request-entry', 'focused', true);
+        await (await browser.$('~focus-request-disable')).click();
+        await expectNativeState(browser, 'focus-request-target', 'focused', false);
+        if (platform !== 'macos') {
+          await expect(await browser.$('~focus-request-target')).not.toBeEnabled();
+        }
+        await command.click();
+        await expect(status).toHaveText('not-focusable');
+        await (await browser.$('~focus-request-mount')).click();
+        await expect(await browser.$('~focus-request-target')).not.toExist();
+        await command.click();
+        await expect(status).toHaveText('not-mounted');
+      },
+    ),
+  ],
 };
 
 export const Overview: Story = {
@@ -518,41 +536,35 @@ export const Selected: Story = {
 };
 
 export const ExternallyDrivenSelection: Story = {
-  wdio: {
-    'starts unselected': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('starts unselected', async ({ browser, expect }) => {
       await expect(await browser.$('~agentic-storybook-button-selection-state')).toHaveText('Not selected');
-    },
-    'updates and resets caller-owned selection': async ({ browser, expect, platform, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (platform === 'macos' && !features.physicalClick) {
-        skip('macOS caller-owned selection requires physical pointer input; the custom Toggle action is not an AXPress route.');
-        return;
-      }
-      if (!features.physicalClick && !features.accessibilityClick) {
-        skip('This test requires native accessibility activation or physical pointer input.');
-        return;
-      }
-      const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
+    }),
+    desktopIt('updates and resets caller-owned selection', { requires: ['click'], platforms: ['!macos'] }, async ({ browser, expect }) => {
       const favorite = await browser.$('~agentic-storybook-button-favorite');
-      const reset = await browser.$('~agentic-storybook-button-reset');
       const status = await browser.$('~agentic-storybook-button-selection-state');
       await expect(favorite).toBeEnabled();
       await expect(status).toHaveText('Not selected');
-      if (platform === 'macos') {
-        await clickPhysical(browser, 'agentic-storybook-button-favorite');
-      } else {
-        await favorite.click();
-      }
+      await favorite.click();
       await expect(status).toHaveText('Selected');
-      if (platform === 'macos') {
-        await clickPhysical(browser, 'agentic-storybook-button-reset');
-      } else {
-        await reset.click();
-      }
+      await (await browser.$('~agentic-storybook-button-reset')).click();
       await expect(status).toHaveText('Not selected');
-    },
-  },
+    }),
+    desktopIt(
+      'updates and resets caller-owned selection with a physical pointer',
+      { requires: ['physical-click'], platforms: ['macos'] },
+      async ({ browser, expect }) => {
+        const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
+        const status = await browser.$('~agentic-storybook-button-selection-state');
+        await expect(await browser.$('~agentic-storybook-button-favorite')).toBeEnabled();
+        await expect(status).toHaveText('Not selected');
+        await clickPhysical(browser, 'agentic-storybook-button-favorite');
+        await expect(status).toHaveText('Selected');
+        await clickPhysical(browser, 'agentic-storybook-button-reset');
+        await expect(status).toHaveText('Not selected');
+      },
+    ),
+  ],
   render: () => {
     const ToggleGroup = () => {
       const [selected, setSelected] = useState(false);
@@ -624,8 +636,8 @@ export const NativeNames: Story = {
       <Button content="Save" aria-label="ARIA action" testID="button-name-aria" />
     </View>
   ),
-  wdio: {
-    'BTN-004 exposes plain, slot and numeric native names while preserving caller names': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('BTN-004 exposes plain, slot and numeric native names while preserving caller names', async ({ browser, expect }) => {
       for (const [id, name] of [
         ['button-name-plain', 'Save'],
         ['button-name-slot', 'Slot label'],
@@ -637,8 +649,8 @@ export const NativeNames: Story = {
         expect(await button.getTagName()).toBe('button');
         expect(await button.getProperty('name')).toBe(name);
       }
-    },
-  },
+    }),
+  ],
 };
 
 export const NativeToggleSemantics: Story = {
@@ -677,8 +689,8 @@ export const NativeToggleSemantics: Story = {
     };
     return <Scene />;
   },
-  wdio: {
-    'BTN-004 BTN-005 exposes native button roles and enabled or disabled state': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('BTN-004 BTN-005 exposes native button roles and enabled or disabled state', async ({ browser, expect }) => {
       const off = await browser.$('~button-native-toggle-off');
       const on = await browser.$('~button-native-toggle-on');
       const disabled = await browser.$('~button-native-toggle-disabled');
@@ -688,71 +700,57 @@ export const NativeToggleSemantics: Story = {
       await expect(off).toBeEnabled();
       await expect(on).toBeEnabled();
       await expect(disabled).toBeDisabled();
-    },
-    'BTN-005 Windows native checked projection reflects caller selection including disabled': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform === 'macos') {
-        skip(
-          'Native checked projection is unsupported for the retained macOS AXButton role; shared role and enabled-state checks run separately.',
-        );
-        return;
-      }
-      const off = await browser.$('~button-native-toggle-off');
-      const on = await browser.$('~button-native-toggle-on');
-      const disabled = await browser.$('~button-native-toggle-disabled');
-      expect(await off.getProperty('checked')).toBe(false);
-      expect(await on.getProperty('checked')).toBe(true);
-      expect(await disabled.getProperty('checked')).toBe(true);
-    },
-    'BTN-005 Win32 Toggle forwards once without a press or a controlled selection change': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies Win32 native Toggle transport.');
-        return;
-      }
-      if (!browser.capabilities['furn:features']?.accessibilityClick) {
-        skip('Native accessibility click is unavailable.');
-        return;
-      }
-      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
-      const button = await browser.$('~button-native-toggle-on');
-      const actions = await browser.$('~button-native-toggle-actions');
-      const presses = await browser.$('~button-native-toggle-presses');
-      await expect(actions).toHaveAttribute('name', '0:none');
-      await expect(presses).toHaveAttribute('name', '0');
-      expect(await button.getProperty('checked')).toBe(true);
-      await button.click();
-      await expect(actions).toHaveAttribute('name', '1:Toggle');
-      await expect(presses).toHaveAttribute('name', '0');
-      expect(await button.getProperty('checked')).toBe(true);
-    },
-    'BTN-004 Win32 disabled public activation rejects without callbacks or a checked-state change': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies the Win32 disabled accessibility-click route, not disabled-provider dispatch.');
-        return;
-      }
-      if (!browser.capabilities['furn:features']?.accessibilityClick) {
-        skip('Native accessibility click is unavailable.');
-        return;
-      }
-      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
-      const button = await browser.$('~button-native-toggle-disabled');
-      await expect(button).toBeDisabled();
-      expect(await button.getProperty('checked')).toBe(true);
-      await expect(button.click()).rejects.toThrow();
-      await expect(await browser.$('~button-native-toggle-actions')).toHaveAttribute('name', '0:none');
-      await expect(await browser.$('~button-native-toggle-presses')).toHaveAttribute('name', '0');
-      expect(await button.getProperty('checked')).toBe(true);
-    },
-  },
+    }),
+    desktopIt(
+      'BTN-005 Windows native checked projection reflects caller selection including disabled',
+      {
+        unsupported: {
+          platforms: ['macos'],
+          reason:
+            'Native checked projection is unsupported for the retained macOS AXButton role (C-A11Y-005); shared role and enabled-state checks run separately.',
+        },
+      },
+      async ({ browser, expect }) => {
+        const off = await browser.$('~button-native-toggle-off');
+        const on = await browser.$('~button-native-toggle-on');
+        const disabled = await browser.$('~button-native-toggle-disabled');
+        expect(await off.getProperty('checked')).toBe(false);
+        expect(await on.getProperty('checked')).toBe(true);
+        expect(await disabled.getProperty('checked')).toBe(true);
+      },
+    ),
+    desktopIt(
+      'BTN-005 Win32 Toggle forwards once without a press or a controlled selection change',
+      { requires: ['accessibility-click'], platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+        const button = await browser.$('~button-native-toggle-on');
+        const actions = await browser.$('~button-native-toggle-actions');
+        const presses = await browser.$('~button-native-toggle-presses');
+        await expect(actions).toHaveAttribute('name', '0:none');
+        await expect(presses).toHaveAttribute('name', '0');
+        expect(await button.getProperty('checked')).toBe(true);
+        await button.click();
+        await expect(actions).toHaveAttribute('name', '1:Toggle');
+        await expect(presses).toHaveAttribute('name', '0');
+        expect(await button.getProperty('checked')).toBe(true);
+      },
+    ),
+    desktopIt(
+      'BTN-004 Win32 disabled public activation rejects without callbacks or a checked-state change',
+      { requires: ['accessibility-click'], platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+        const button = await browser.$('~button-native-toggle-disabled');
+        await expect(button).toBeDisabled();
+        expect(await button.getProperty('checked')).toBe(true);
+        await expect(button.click()).rejects.toThrow();
+        await expect(await browser.$('~button-native-toggle-actions')).toHaveAttribute('name', '0:none');
+        await expect(await browser.$('~button-native-toggle-presses')).toHaveAttribute('name', '0');
+        expect(await button.getProperty('checked')).toBe(true);
+      },
+    ),
+  ],
   parameters: {
     docs: {
       description: {
@@ -795,49 +793,40 @@ export const NativeToggleSelection: Story = {
     };
     return <Scene />;
   },
-  wdio: {
-    'BTN-002 BTN-005 Win32 native Toggle updates caller selection without reflow or duplicate presses': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies caller handling of Win32 native Toggle events.');
-        return;
-      }
-      if (!browser.capabilities['furn:features']?.accessibilityClick) {
-        skip('Native accessibility click is unavailable.');
-        return;
-      }
-      expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
-      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      const button = await browser.$('~button-native-selection');
-      const state = await browser.$('~button-native-selection-state');
-      const actions = await browser.$('~button-native-selection-actions');
-      const presses = await browser.$('~button-native-selection-presses');
-      await expect(state).toHaveAttribute('name', 'false');
-      await expect(actions).toHaveAttribute('name', '0');
-      await expect(presses).toHaveAttribute('name', '0');
-      await expectNativeState(browser, 'button-native-selection', 'checked', false);
-      const before = await browser.getElementRect(await button.elementId);
-      await button.click();
-      await expect(state).toHaveAttribute('name', 'true');
-      await expect(actions).toHaveAttribute('name', '1');
-      await expectNativeState(browser, 'button-native-selection', 'checked', true);
-      const selected = await browser.getElementRect(await button.elementId);
-      expect(selected.width).toBe(before.width);
-      expect(selected.height).toBe(before.height);
-      await button.click();
-      await expect(state).toHaveAttribute('name', 'false');
-      await expect(actions).toHaveAttribute('name', '2');
-      await expect(presses).toHaveAttribute('name', '0');
-      await expectNativeState(browser, 'button-native-selection', 'checked', false);
-      const reset = await browser.getElementRect(await button.elementId);
-      expect(reset.width).toBe(before.width);
-      expect(reset.height).toBe(before.height);
-    },
-  },
+  wdio: [
+    desktopIt(
+      'BTN-002 BTN-005 Win32 native Toggle updates caller selection without reflow or duplicate presses',
+      { requires: ['accessibility-click'], platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        expect(browser.capabilities['furn:clickMode']).toBe('accessibility');
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const button = await browser.$('~button-native-selection');
+        const state = await browser.$('~button-native-selection-state');
+        const actions = await browser.$('~button-native-selection-actions');
+        const presses = await browser.$('~button-native-selection-presses');
+        await expect(state).toHaveAttribute('name', 'false');
+        await expect(actions).toHaveAttribute('name', '0');
+        await expect(presses).toHaveAttribute('name', '0');
+        await expectNativeState(browser, 'button-native-selection', 'checked', false);
+        const before = await browser.getElementRect(await button.elementId);
+        await button.click();
+        await expect(state).toHaveAttribute('name', 'true');
+        await expect(actions).toHaveAttribute('name', '1');
+        await expectNativeState(browser, 'button-native-selection', 'checked', true);
+        const selected = await browser.getElementRect(await button.elementId);
+        expect(selected.width).toBe(before.width);
+        expect(selected.height).toBe(before.height);
+        await button.click();
+        await expect(state).toHaveAttribute('name', 'false');
+        await expect(actions).toHaveAttribute('name', '2');
+        await expect(presses).toHaveAttribute('name', '0');
+        await expectNativeState(browser, 'button-native-selection', 'checked', false);
+        const reset = await browser.getElementRect(await button.elementId);
+        expect(reset.width).toBe(before.width);
+        expect(reset.height).toBe(before.height);
+      },
+    ),
+  ],
   parameters: {
     docs: {
       description: {

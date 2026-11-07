@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import type { AccessibilityActionEvent } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 import { FocusZone } from '@fluentui-react-native/native-core/legacy';
 
@@ -97,60 +98,55 @@ export const NativeIndicatorSemantics: Story = {
     };
     return <Scene />;
   },
-  wdio: {
-    'MNI-003 Win32 exposes checked native indicator roles, names and availability': async ({ browser, expect, platform, skip }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies Win32 UI Automation indicator-state projection.');
-        return;
-      }
-      for (const [id, name, checked] of [
-        ['menu-item-native-single-off', 'Single choice off', false],
-        ['menu-item-native-single-on', 'Single choice on', true],
-        ['menu-item-native-multi-off', 'Multiple choice off', false],
-        ['menu-item-native-multi-on', 'Multiple choice on', true],
-        ['menu-item-native-disabled', 'Disabled choice', true],
-      ] as const) {
-        const row = await browser.$(`~${id}`);
-        expect(await row.getTagName()).toBe('menuitem');
-        expect(await row.getProperty('name')).toBe(name);
-        expect(await row.getProperty('checked')).toBe(checked);
-      }
-      expect(await (await browser.$('~menu-item-native-single-off')).getProperty('selected')).toBe(false);
-      expect(await (await browser.$('~menu-item-native-single-on')).getProperty('selected')).toBe(true);
-      await expect(await browser.$('~menu-item-native-disabled')).toBeDisabled();
-    },
-    'MNI-003 Win32 Toggle forwards once without changing selection or pressing and disabled public activation rejects': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      if (platform !== 'win32') {
-        skip('This case qualifies Win32 UI Automation Toggle transport.');
-        return;
-      }
-      const row = await browser.$('~menu-item-native-multi-off');
-      const disabled = await browser.$('~menu-item-native-disabled');
-      const actions = await browser.$('~menu-item-native-actions');
-      const presses = await browser.$('~menu-item-native-presses');
-      await expect(actions).toHaveAttribute('name', '0');
-      await row.click();
-      await expect(actions).toHaveAttribute('name', '1');
-      await expect(await browser.$('~menu-item-native-last-action')).toHaveAttribute('name', 'Toggle');
-      await expect(presses).toHaveAttribute('name', '0');
-      expect(await row.getProperty('checked')).toBe(false);
-      let rejection: unknown;
-      try {
-        await disabled.click();
-      } catch (error) {
-        rejection = error;
-      }
-      expect(rejection).toBeDefined();
-      await expect(actions).toHaveAttribute('name', '1');
-      await expect(presses).toHaveAttribute('name', '0');
-      expect(await disabled.getProperty('checked')).toBe(true);
-    },
-  },
+  wdio: [
+    desktopIt(
+      'MNI-003 Win32 exposes checked native indicator roles, names and availability',
+      { platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        for (const [id, name, checked] of [
+          ['menu-item-native-single-off', 'Single choice off', false],
+          ['menu-item-native-single-on', 'Single choice on', true],
+          ['menu-item-native-multi-off', 'Multiple choice off', false],
+          ['menu-item-native-multi-on', 'Multiple choice on', true],
+          ['menu-item-native-disabled', 'Disabled choice', true],
+        ] as const) {
+          const row = await browser.$(`~${id}`);
+          expect(await row.getTagName()).toBe('menuitem');
+          expect(await row.getProperty('name')).toBe(name);
+          expect(await row.getProperty('checked')).toBe(checked);
+        }
+        expect(await (await browser.$('~menu-item-native-single-off')).getProperty('selected')).toBe(false);
+        expect(await (await browser.$('~menu-item-native-single-on')).getProperty('selected')).toBe(true);
+        await expect(await browser.$('~menu-item-native-disabled')).toBeDisabled();
+      },
+    ),
+    desktopIt(
+      'MNI-003 Win32 Toggle forwards once without changing selection or pressing and disabled public activation rejects',
+      { requires: ['accessibility-click'], platforms: ['win32'] },
+      async ({ browser, expect }) => {
+        const row = await browser.$('~menu-item-native-multi-off');
+        const disabled = await browser.$('~menu-item-native-disabled');
+        const actions = await browser.$('~menu-item-native-actions');
+        const presses = await browser.$('~menu-item-native-presses');
+        await expect(actions).toHaveAttribute('name', '0');
+        await row.click();
+        await expect(actions).toHaveAttribute('name', '1');
+        await expect(await browser.$('~menu-item-native-last-action')).toHaveAttribute('name', 'Toggle');
+        await expect(presses).toHaveAttribute('name', '0');
+        expect(await row.getProperty('checked')).toBe(false);
+        let rejection: unknown;
+        try {
+          await disabled.click();
+        } catch (error) {
+          rejection = error;
+        }
+        expect(rejection).toBeDefined();
+        await expect(actions).toHaveAttribute('name', '1');
+        await expect(presses).toHaveAttribute('name', '0');
+        expect(await disabled.getProperty('checked')).toBe(true);
+      },
+    ),
+  ],
 };
 
 export const Overview: Story = {
@@ -274,48 +270,51 @@ export const DisabledFocusable: Story = {
   parameters: {
     docs: { description: { story: 'An opted-in disabled row remains a focus stop, announces disabled, and cannot activate.' } },
   },
-  wdio: {
-    'exposes disabled native menu-item semantics': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('exposes disabled native menu-item semantics', async ({ browser, expect }) => {
       const row = await browser.$('~disabled-menu-command');
       expect(await row.getTagName()).toBe('menuitem');
       await expect(row).toBeDisabled();
       await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
-    },
-    'navigates onto a disabled row without activating it': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab, clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await focusByTab(browser, 'disabled-menu-entry', 'disabled-menu-before');
-      await browser.keys('\uE015');
-      await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
-      await expect(await browser.$('~disabled-menu-command')).toBeDisabled();
-      await browser.keys('\uE007');
-      await browser.keys('\uE00D');
-      await clickPhysical(browser, 'disabled-menu-command');
-      await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
-      await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
-      await browser.keys('\uE015');
-      await expectNativeState(browser, 'disabled-menu-after', 'focused', true);
-    },
-    'updates native disabled state without replacing the command': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Changing availability requires physical pointer input.');
-        return;
-      }
-      const row = await browser.$('~disabled-menu-command');
-      const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
-      await expect(row).toBeDisabled();
-      await (await browser.$('~disabled-menu-toggle')).click();
-      await expect(row).toBeEnabled();
-      expect(await row.getTagName()).toBe('menuitem');
-      await clickPhysical(browser, 'disabled-menu-command');
-      await expect(await browser.$('~disabled-menu-count')).toHaveText('1');
-      await (await browser.$('~disabled-menu-toggle')).click();
-      await expect(row).toBeDisabled();
-      await clickPhysical(browser, 'disabled-menu-command');
-      await expect(await browser.$('~disabled-menu-count')).toHaveText('1');
-    },
-  },
+    }),
+    desktopIt(
+      'navigates onto a disabled row without activating it',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, focusByTab, clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect } = context;
+        await focusByTab(browser, 'disabled-menu-entry', 'disabled-menu-before');
+        await browser.keys('\uE015');
+        await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
+        await expect(await browser.$('~disabled-menu-command')).toBeDisabled();
+        await browser.keys('\uE007');
+        await browser.keys('\uE00D');
+        await clickPhysical(browser, 'disabled-menu-command');
+        await expect(await browser.$('~disabled-menu-count')).toHaveText('0');
+        await expectNativeState(browser, 'disabled-menu-command', 'focused', true);
+        await browser.keys('\uE015');
+        await expectNativeState(browser, 'disabled-menu-after', 'focused', true);
+      },
+    ),
+    desktopIt(
+      'updates native disabled state without replacing the command',
+      { requires: ['physical-click'] },
+      async ({ browser, expect }) => {
+        const row = await browser.$('~disabled-menu-command');
+        const { clickPhysical } = await import('../../common/desktopFocus.wdio.ts');
+        await expect(row).toBeDisabled();
+        await (await browser.$('~disabled-menu-toggle')).click();
+        await expect(row).toBeEnabled();
+        expect(await row.getTagName()).toBe('menuitem');
+        await clickPhysical(browser, 'disabled-menu-command');
+        await expect(await browser.$('~disabled-menu-count')).toHaveText('1');
+        await (await browser.$('~disabled-menu-toggle')).click();
+        await expect(row).toBeDisabled();
+        await clickPhysical(browser, 'disabled-menu-command');
+        await expect(await browser.$('~disabled-menu-count')).toHaveText('1');
+      },
+    ),
+  ],
 };
 
 const styles = StyleSheet.create({

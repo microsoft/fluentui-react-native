@@ -31,11 +31,12 @@ services:
   executable_tests:
     command: yarn storybook test --<platform>
     discovery: yarn storybook test --<platform> --list
-    authoring: top-level wdio callbacks or named callback collections in CSF3 stories
+    authoring: desktopIt cases with input, platform, and gap descriptors in CSF3 story wdio arrays
     config: desktop.config.mts Storybook integration wdio settings
     lifecycle: attached-session-per-test-with-isolated-node-worker
     context_platform: macos-or-windows-or-win32-target-endpoint
     test_filter: --test <name-glob>
+    input_lane: --input accessible|physical
     smoke_mode: stories-and-tests
     execution: navigate-and-remount-then-run-tests-grouped-by-story
 

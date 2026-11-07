@@ -1,17 +1,5 @@
 import type { WdioStoryContext } from '@fluentui-react-native/storybook-desktop/testing';
 
-export function requireDesktopFocus({ browser, skip }: Pick<WdioStoryContext, 'browser' | 'skip'>): boolean {
-  const features = browser.capabilities['furn:features'];
-  if (!features) {
-    throw new Error('Desktop Driver did not provide feature capabilities.');
-  }
-  if (!features.physicalClick || !features.keyboard || !features.focus) {
-    skip('Native focus qualification requires physical pointer input, keyboard input, and focus observation.');
-    return false;
-  }
-  return true;
-}
-
 /** Click-to-focus is Windows-specific; ordinary AppKit controls need not take focus on click. */
 export async function expectWindowsPointerFocus(
   { browser, platform }: Pick<WdioStoryContext, 'browser' | 'platform'>,

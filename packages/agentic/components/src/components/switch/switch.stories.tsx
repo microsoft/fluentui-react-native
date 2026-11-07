@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Switch } from './switch';
@@ -94,30 +95,32 @@ function FocusManagementScene() {
 export const FocusManagement: Story = {
   render: () => <FocusManagementScene />,
   tags: ['desktop-focus'],
-  wdio: {
-    'toggles exactly once per pointer, Enter, and Space activation': async (context) => {
-      const { requireDesktopFocus, expectNativeState, expectWindowsPointerFocus, focusByTab } =
-        await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      const control = await browser.$('~focus-switch');
-      const count = await browser.$('~focus-switch-count');
-      await (await browser.$('~focus-switch-entry')).click();
-      await expectNativeState(browser, 'focus-switch-entry', 'focused', true);
-      await expectNativeState(browser, 'focus-switch', 'checked', false);
-      await control.click();
-      await expectWindowsPointerFocus(context, 'focus-switch');
-      await expect(count).toHaveText('1');
-      await expectNativeState(browser, 'focus-switch', 'checked', true);
-      await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
-      await browser.keys('\uE007');
-      await expect(count).toHaveText('2');
-      await expectNativeState(browser, 'focus-switch', 'checked', false);
-      await browser.keys('\uE00D');
-      await expect(count).toHaveText('3');
-      await expectNativeState(browser, 'focus-switch', 'checked', true);
-    },
-  },
+  wdio: [
+    desktopIt(
+      'toggles exactly once per pointer, Enter, and Space activation',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, expectWindowsPointerFocus, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect } = context;
+        const control = await browser.$('~focus-switch');
+        const count = await browser.$('~focus-switch-count');
+        await (await browser.$('~focus-switch-entry')).click();
+        await expectNativeState(browser, 'focus-switch-entry', 'focused', true);
+        await expectNativeState(browser, 'focus-switch', 'checked', false);
+        await control.click();
+        await expectWindowsPointerFocus(context, 'focus-switch');
+        await expect(count).toHaveText('1');
+        await expectNativeState(browser, 'focus-switch', 'checked', true);
+        await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
+        await browser.keys('\uE007');
+        await expect(count).toHaveText('2');
+        await expectNativeState(browser, 'focus-switch', 'checked', false);
+        await browser.keys('\uE00D');
+        await expect(count).toHaveText('3');
+        await expectNativeState(browser, 'focus-switch', 'checked', true);
+      },
+    ),
+  ],
 };
 
 export const Overview: Story = {
@@ -196,16 +199,16 @@ export const Checked: Story = {
       },
     },
   },
-  wdio: {
-    'SWCH-001 SWCH-006 projects both initial checked values without input': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('SWCH-001 SWCH-006 projects both initial checked values without input', async ({ browser, expect }) => {
       const off = await browser.$('~switch-spec-off');
       const on = await browser.$('~switch-spec-on');
       await expect(off).toBeEnabled();
       await expect(on).toBeEnabled();
       expect(await off.getProperty('checked')).toBe(false);
       expect(await on.getProperty('checked')).toBe(true);
-    },
-  },
+    }),
+  ],
 };
 
 export const ExternallyDrivenChecked: Story = {

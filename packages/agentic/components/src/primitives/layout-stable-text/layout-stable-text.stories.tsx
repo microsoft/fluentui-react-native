@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import type { LayoutRectangle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { LayoutStableText } from './layout-stable-text';
@@ -158,8 +159,8 @@ export const Overview: Story = {
       },
     },
   },
-  wdio: {
-    'centers the intrinsic smaller line inside its larger reserve': async ({ browser, expect, platform }) => {
+  wdio: [
+    desktopIt('centers the intrinsic smaller line inside its larger reserve', async ({ browser, expect, platform }) => {
       const assert: typeof import('node:assert') = (await import('node:assert')).default;
       if (platform === 'macos') {
         // Measure both Text line boxes; Paper rounds Text and wrapper View frames differently.
@@ -194,8 +195,8 @@ export const Overview: Story = {
       const reservedCenter = reservedBounds.y + reservedBounds.height / 2;
       const visibleCenter = visibleBounds.y + visibleBounds.height / 2;
       assert(Math.abs(reservedCenter - visibleCenter) <= 1, 'Visible text must be vertically centered within one layout pixel.');
-    },
-  },
+    }),
+  ],
 };
 
 export const WeightReservation: Story = {

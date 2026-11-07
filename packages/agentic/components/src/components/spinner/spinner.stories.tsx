@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
@@ -93,31 +94,29 @@ export const Motion: Story = {
       },
     },
   },
-  wdio: {
-    'renders changing native pixels unless reduced motion is enabled': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.elementScreenshot) {
-        skip('This test requires native element screenshots.');
-        return;
-      }
-      const preference = await browser.$('~spinner-motion-preference');
-      await browser.waitUntil(async () => ['Motion enabled', 'Reduced motion enabled'].includes(await preference.getText()));
-      const spinner = await browser.$('~spinner-motion');
-      await expect(spinner).toExist();
-      expect(await browser.isElementDisplayed(await spinner.elementId)).toBe(true);
-      const frames = new Set<string>();
-      for (let index = 0; index < 5; index++) {
-        frames.add(await browser.takeElementScreenshot(await spinner.elementId));
-        await browser.pause(117);
-      }
-      if ((await preference.getText()) === 'Motion enabled') {
-        expect(frames.size).toBeGreaterThan(1);
-      } else {
-        expect(frames.size).toBe(1);
-      }
-    },
-  },
+  wdio: [
+    desktopIt(
+      'renders changing native pixels unless reduced motion is enabled',
+      { requires: ['element-screenshot'] },
+      async ({ browser, expect }) => {
+        const preference = await browser.$('~spinner-motion-preference');
+        await browser.waitUntil(async () => ['Motion enabled', 'Reduced motion enabled'].includes(await preference.getText()));
+        const spinner = await browser.$('~spinner-motion');
+        await expect(spinner).toExist();
+        expect(await browser.isElementDisplayed(await spinner.elementId)).toBe(true);
+        const frames = new Set<string>();
+        for (let index = 0; index < 5; index++) {
+          frames.add(await browser.takeElementScreenshot(await spinner.elementId));
+          await browser.pause(117);
+        }
+        if ((await preference.getText()) === 'Motion enabled') {
+          expect(frames.size).toBeGreaterThan(1);
+        } else {
+          expect(frames.size).toBe(1);
+        }
+      },
+    ),
+  ],
 };
 
 export const Overview: Story = {

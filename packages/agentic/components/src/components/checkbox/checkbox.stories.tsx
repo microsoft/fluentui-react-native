@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Checkbox } from './checkbox';
@@ -66,14 +67,8 @@ type Story = WdioStory<StoryObj<typeof Checkbox>>;
 
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  wdio: {
-    'toggles native checked state in both directions': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features) throw new Error('Desktop Driver did not provide feature capabilities.');
-      if (!features.physicalClick) {
-        skip('This test requires physical pointer input.');
-        return;
-      }
+  wdio: [
+    desktopIt('toggles native checked state in both directions', { requires: ['physical-click'] }, async ({ browser, expect }) => {
       const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       const checkbox = await browser.$('~agentic-storybook-checkbox');
       expect(await checkbox.getTagName()).toBe('checkbox');
@@ -82,8 +77,8 @@ export const Default: Story = {
       await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', true);
       await checkbox.click();
       await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
-    },
-  },
+    }),
+  ],
 };
 
 export const Overview: Story = {
@@ -170,8 +165,8 @@ export const HiddenLabel: Story = {
       <Checkbox label="Save drafts" showLabel={false} testID="checkbox-fallback-name" />
     </StoryGroup>
   ),
-  wdio: {
-    'CBX-004 preserves native explicit and fallback names without visible labels': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('CBX-004 preserves native explicit and fallback names without visible labels', async ({ browser, expect }) => {
       const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       const explicit = await browser.$('~checkbox-explicit-name');
       const fallback = await browser.$('~checkbox-fallback-name');
@@ -181,8 +176,8 @@ export const HiddenLabel: Story = {
       expect(await fallback.getProperty('name')).toBe('Save drafts');
       await expectNativeState(browser, 'checkbox-explicit-name', 'checked', false);
       await expectNativeState(browser, 'checkbox-fallback-name', 'checked', false);
-    },
-  },
+    }),
+  ],
   parameters: {
     docs: {
       description: {
@@ -245,24 +240,24 @@ export const ConstrainedText: Story = {
       },
     },
   },
-  wdio: {
-    'CBX-003 wraps the label into a taller constrained row': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('CBX-003 wraps the label into a taller constrained row', async ({ browser, expect }) => {
       const narrow = await browser.$('~checkbox-narrow-label');
       const wide = await browser.$('~checkbox-wide-label');
       const narrowRect = await browser.getElementRect(await narrow.elementId);
       const wideRect = await browser.getElementRect(await wide.elementId);
       expect(narrowRect.width).toBeLessThan(wideRect.width);
       expect(narrowRect.height).toBeGreaterThan(wideRect.height);
-    },
-    'CBX-003 wraps secondary text into a taller constrained row': async ({ browser, expect }) => {
+    }),
+    desktopIt('CBX-003 wraps secondary text into a taller constrained row', async ({ browser, expect }) => {
       const narrow = await browser.$('~checkbox-narrow-secondary');
       const wide = await browser.$('~checkbox-wide-secondary');
       const narrowRect = await browser.getElementRect(await narrow.elementId);
       const wideRect = await browser.getElementRect(await wide.elementId);
       expect(narrowRect.width).toBeLessThan(wideRect.width);
       expect(narrowRect.height).toBeGreaterThan(wideRect.height);
-    },
-  },
+    }),
+  ],
 };
 
 const styles = StyleSheet.create({
