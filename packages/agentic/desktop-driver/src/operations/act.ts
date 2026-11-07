@@ -208,6 +208,16 @@ export async function proveSelector(
 
 /** Reads the element again, immediately before acting: the provider's liveness check and the fingerprint precondition. */
 export async function revalidate(runtime: OperationRuntime, entry: ReferenceEntry, proof: UniquenessProof): Promise<NativeElementSnapshot> {
+  if (entry.scope === 'preview' && runtime.stories) {
+    const current = await runtime.stories.current(runtime.signal);
+    if (current.changed || current.unavailable || current.story?.verification === 'unconfirmed') {
+      throw rejection(runtime, 'stale element reference', 'story-context-stale', 'The preview context is stale. Select the story again.');
+    }
+    const resolution = runtime.state.refs.resolve(entry.reference, runtime.previewGeneration());
+    if (resolution.ok === false) {
+      throw asRejection(runtime, referenceFailureError(resolution.failure, entry.reference));
+    }
+  }
   let snapshot: NativeElementSnapshot;
   try {
     snapshot = await runtime.command('Reading the element before acting', (signal) => runtime.host.snapshot(entry.nativeId, signal));

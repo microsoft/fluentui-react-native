@@ -22,8 +22,57 @@ channel events.
 
 At startup, require both an authenticated runtime hello and the initial
 `storyRendered` event on the same connection. The hello alone can precede
-Storybook's navigation handlers after an app restart. Startup render readiness
-does not replace request-correlated readiness for each requested story.
+Storybook's navigation handlers after an app restart. Until that initial render
+arrives, an open, unfenced replacement connection reports `bridge-unavailable`
+with effect `none`, even after the previous bridge closed. A fenced bridge, or
+no open bridge after a close, still reports `relaunch-required`. Startup render
+readiness does not replace request-correlated readiness for each requested
+story.
+
+Each socket receives a fresh connection epoch in a version-2 hello challenge.
+The hello must echo that epoch and the manifest identity. Ready/error events
+bind the epoch, request, run, and story; version-1 native markers additionally
+bind the preview generation. Missing epoch or marker evidence is not readiness.
+An old socket cannot authenticate or complete work on its replacement.
+A runtime reload can authenticate its new socket before the old socket reports
+close. That valid hello retires the old bridge exactly as a close does: the old
+socket is fenced, pending work is rejected with effect `unknown`, and the
+replacement awaits its initial render before it becomes selectable.
+
+The local provider context carries the session lifetime ID and abort signal
+separately from serializable inputs. No authenticated bridge means prompt
+`bridge-unavailable`, with endpoint/renderer and effect `none`, before dispatch.
+Controlled selection sends prepare and navigation directly to the authenticated
+socket, waits for correlated runtime readiness, then the driver verifies the
+native marker within the same render deadline. Legacy unprotected selection
+additionally waits for upstream HTTP navigation. Disconnect promptly rejects
+pending work and aborts any legacy HTTP request. Cancellation,
+disconnect, or deadline after dispatch fences that socket and leaves the
+effect unknown: the driver retains target quarantine. Late ready/error events
+cannot release it. Subsequent requests return renderer-specific
+`relaunch-required`; reauthentication is not quarantine recovery.
+
+The app and runtime resolve `@storybook/react-native` **10.5.4**, with
+`storybook` **10.6.3**, in the inspected installation. In those exact sources,
+`dist/index.js` installs the server channel while constructing Storybook UI; Storybook's
+`dist/channels/index.js` creates one WebSocket, emits `channelWSDisconnect`
+on close, marks it closed, and drops later sends without reconnecting.
+The React Native `dist/channelServer-D-IaG_dn.js` HTTP selection handler
+broadcasts uncorrelated navigation and accepts story-ID render events;
+aborting its HTTP client cannot retract the broadcast. Do not promise
+transparent recovery or use HTTP completion as a render fence. Relaunch the
+app when restarting the channel/driver against that running installation.
+This is source evidence, not native endpoint qualification or a claim about
+other dependency versions.
+
+The controlled channel avoids that upstream HTTP handler and never relays
+inbound WebSocket frames. This is a separate supported adapter, not a patch to
+upstream internals or listener-order interception. Deterministic endpoint
+contracts exercise HTTP refusals, foreign WebSocket prepare/selection/args,
+direct authenticated dispatch, correlated settlement and cancellation fencing.
+They do not qualify the native transport: repeat these checks against each
+renderer, including driver-owned select/reset, a stale preview action, delayed
+ready/error after cancellation, and manifest-backed smoke traversal.
 
 Do not patch generated identity or manifests. Change the app configuration or
 manifest producer, regenerate, then validate the exact platform manifest.

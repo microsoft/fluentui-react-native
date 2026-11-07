@@ -1,7 +1,8 @@
 import type { WorkerRunnerFunction } from 'lage';
 
-import { $, fs, glob } from 'zx';
+import { fs, glob } from 'zx';
 import { dirname, join, relative, resolve } from 'node:path';
+import { runScript } from '../utils/runScript.ts';
 
 /**
  * Lage worker that runs `markdown-link-check` for a single package directory.
@@ -94,8 +95,8 @@ export const run: WorkerRunnerFunction = async ({ target }) => {
   const failures: string[] = [];
   for (const file of files) {
     const relPath = relative(repoRoot, file);
-    const result = await $({ cwd: repoRoot, nothrow: true, verbose: true })`yarn markdown-link-check -c ${configPath} ${file}`;
-    if (result.exitCode !== 0) {
+    const code = await runScript('markdown-link-check', ['-c', configPath, file], { cwd: repoRoot });
+    if (code !== 0) {
       failures.push(relPath);
     }
   }

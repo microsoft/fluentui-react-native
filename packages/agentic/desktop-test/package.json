@@ -55,6 +55,21 @@
       "import": "./lib/driverService.js",
       "default": "./src/driverService.ts"
     },
+    "./process-control": {
+      "types": "./lib/processControl.d.ts",
+      "import": "./lib/processControl.js",
+      "default": "./src/processControl.ts"
+    },
+    "./resources": {
+      "types": "./lib/resources.d.ts",
+      "import": "./lib/resources.js",
+      "default": "./src/resources.ts"
+    },
+    "./ownership": {
+      "types": "./lib/ownership.d.ts",
+      "import": "./lib/ownership.js",
+      "default": "./src/ownership.ts"
+    },
     "./jasmine": {
       "types": "./lib/jasmine/index.d.ts",
       "import": "./lib/jasmine/index.js",

@@ -8,7 +8,6 @@ import type {
   NativeObservation,
   NativeObserveRequest,
 } from '../host/types.js';
-import type { DesktopStoryManifestEntry } from '../storybook.js';
 import type { JournalScalar } from './journal.js';
 import type { OperationSessionState } from './sessionState.js';
 
@@ -62,6 +61,8 @@ export type StoryVerification = 'marker' | 'none' | 'unconfirmed';
 
 /** The story this session selected, as revalidated when it was read. */
 export type OperationCurrentStory = {
+  /** A previously verified context was lost; fresh references cannot establish story readiness. */
+  unavailable?: true;
   /** The rendered story is not the one this session selected, so the session forgot it and expired the preview. */
   changed?: true;
   /** Absent when no story is selected. */
@@ -71,7 +72,7 @@ export type OperationCurrentStory = {
 /** The session's Storybook catalog and selection. Present only when `capabilities.stories` is true. */
 export type OperationStories = {
   /** The target's story catalog. */
-  catalog(signal: AbortSignal): Promise<readonly DesktopStoryManifestEntry[]>;
+  catalog(signal: AbortSignal): Promise<readonly OperationStoryEntry[]>;
   /** The selected story, checked against the rendered story root so a change made by another client is noticed. */
   current(signal: AbortSignal): Promise<OperationCurrentStory>;
   /**
@@ -79,6 +80,13 @@ export type OperationStories = {
    * and the call runs to settlement once dispatched. A failure leaves no story selected.
    */
   change(action: 'reset' | 'select', storyId: string): Promise<{ storyId: string; verification: 'marker' | 'none' }>;
+};
+
+export type OperationStoryEntry = {
+  id: string;
+  name: string;
+  tags: readonly string[];
+  title: string;
 };
 
 /**

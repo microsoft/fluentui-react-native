@@ -52,6 +52,12 @@ describe('desktop Storybook server integration', () => {
     });
 
     try {
+      await expect(child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000)).resolves.toEqual({
+        tier: 'service-ready',
+        service: 'storybook-channel',
+        incarnation: expect.any(String),
+        processId: expect.any(Number),
+      });
       const [indexResponse, driverResponse] = await Promise.all([
         waitForResponse(loopbackUrl(storybookPort, '/index.json')),
         waitForResponse(loopbackUrl(driverPort, '/status')),

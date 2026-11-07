@@ -3,9 +3,25 @@ import path from 'node:path';
 import { validateCommand } from './config.js';
 import { NodeDesktopCommandRunner } from './commands.js';
 import { createDesktopReportSession } from './reporting/session.js';
+import { finishDesktopProcess, registerDesktopProcessDisposal } from './processControl.js';
 
 /** Bridges a generated PowerShell service descriptor into the parent's resource/reporting scope. */
 export async function runOwnedDesktopService(descriptorPath: string): Promise<void> {
+  const controller = new AbortController();
+  const unregister = registerDesktopProcessDisposal(async () => {
+    controller.abort();
+    await execution;
+  });
+  const execution = runService(descriptorPath, controller.signal);
+  try {
+    await execution;
+    finishDesktopProcess();
+  } finally {
+    unregister();
+  }
+}
+
+async function runService(descriptorPath: string, signal: AbortSignal): Promise<void> {
   const value: unknown = JSON.parse(fs.readFileSync(descriptorPath, 'utf8'));
   if (
     !value ||
@@ -30,6 +46,8 @@ export async function runOwnedDesktopService(descriptorPath: string): Promise<vo
   const stopped = new Promise<void>((resolve) => {
     stop = resolve;
   });
+  signal.addEventListener('abort', stop, { once: true });
+  if (signal.aborted) stop();
   const interval = setInterval(() => {
     if (fs.existsSync(stopPath)) stop();
   }, 100);
@@ -38,6 +56,7 @@ export async function runOwnedDesktopService(descriptorPath: string): Promise<vo
   process.once('SIGTERM', stop);
   let failure: unknown;
   try {
+    signal.throwIfAborted();
     const running = runner.start({
       ...command,
       cwd,
@@ -60,6 +79,7 @@ export async function runOwnedDesktopService(descriptorPath: string): Promise<vo
     clearInterval(interval);
     process.off('SIGINT', stop);
     process.off('SIGTERM', stop);
+    signal.removeEventListener('abort', stop);
     try {
       await runner.close();
     } catch (error) {
@@ -68,4 +88,5 @@ export async function runOwnedDesktopService(descriptorPath: string): Promise<vo
     }
     process.exitCode = await report.close(failure);
   }
+  if (failure !== undefined) throw failure;
 }

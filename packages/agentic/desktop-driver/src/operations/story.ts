@@ -3,11 +3,10 @@ import { z } from 'zod';
 import { toWebDriverError } from '../protocol/errors.js';
 import type { WebDriverError } from '../protocol/errors.js';
 import { attachFailureEffect, attachMutationReport, createMutationReport } from '../protocol/settlement.js';
-import type { DesktopStoryManifestEntry } from '../storybook.js';
 import { asRejection, assertNotQuarantined, rejection } from './act.js';
 import { operationError } from './envelope.js';
 import { storyPage, storyTextLimits } from './limits.js';
-import type { OperationAvailability, OperationCapabilities, OperationRuntime, OperationStories } from './runtime.js';
+import type { OperationAvailability, OperationCapabilities, OperationRuntime, OperationStories, OperationStoryEntry } from './runtime.js';
 import { registerOperation } from './runtime.js';
 import { budgetField } from './shapes.js';
 import { clipText, neutralizeText, safeToken } from './text.js';
@@ -65,7 +64,7 @@ function catalogText(text: string, maxLength: number): string {
   return clipped ? `${kept}…` : kept;
 }
 
-function describeEntry(entry: DesktopStoryManifestEntry): StoriesResult['entries'][number] {
+function describeEntry(entry: OperationStoryEntry): StoriesResult['entries'][number] {
   const tags = entry.tags.slice(0, storyTextLimits.tags).map((tag) => catalogText(tag, storyTextLimits.tag));
   return {
     id: catalogText(entry.id, storyTextLimits.id),
@@ -75,7 +74,7 @@ function describeEntry(entry: DesktopStoryManifestEntry): StoriesResult['entries
   };
 }
 
-function matchesFilter(entry: DesktopStoryManifestEntry, needle: string): boolean {
+function matchesFilter(entry: OperationStoryEntry, needle: string): boolean {
   return [entry.id, entry.title, entry.name].some((text) => text.toLowerCase().includes(needle));
 }
 
@@ -138,6 +137,12 @@ export type StoryResult = z.infer<typeof storyOutput>;
  * The words are fixed: the cause can quote a story's render error, and an agent reads errors as instructions.
  */
 function storyNotReady(runtime: OperationRuntime, error: unknown): WebDriverError {
+  const converted = toWebDriverError(error);
+  if (converted.data?.reason === 'bridge-unavailable' || converted.data?.reason === 'relaunch-required') {
+    const report = createMutationReport(error, runtime.quarantined());
+    attachFailureEffect(converted, report.effect);
+    return attachMutationReport(converted, report);
+  }
   const failure = operationError(
     toWebDriverError(error).code === 'timeout' ? 'timeout' : 'unknown error',
     'story-not-ready',

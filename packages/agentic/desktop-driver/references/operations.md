@@ -409,7 +409,7 @@ region, so references into the old render expire.
 or `reset`, which renders it again from its initial state. An id the catalog
 lacks fails with `story-unknown` before anything changes. Rendering replaces
 the preview region first, so every earlier preview reference fails with
-`ref-region-changed`, then waits up to the target's story render deadline for
+`ref-region-changed` (or `ref-expired` once its table entry is dropped), then waits up to the target's story render deadline for
 the story root to confirm the story. The result gives the new `region` and the
 `verification`: `marker`, or `none` on a target without a story root. A render
 that does not confirm fails with `story-not-ready`, coded `timeout` when the
@@ -426,8 +426,14 @@ render may take far longer than an input.
 A reference is an opaque `<tag><serial>` string. The tag is random per session
 and per incarnation and never reused in the process, so a reference from
 another session or server cannot resolve here. Each element keeps one
-reference while the table retains it, so repeated observations report unchanged
-elements under unchanged references. A reference pins its window and keeps
+reference while the table retains it in the same region, so repeated observations report unchanged
+elements under unchanged references. After a preview region changes, observing a
+surviving native element issues a new reference; it never revives the old one.
+Application, chrome, and secondary-window references survive preview changes.
+A whole-window observation without `within` reads the current window rather than
+asserting an earlier preview's lifetime. Immutable captures remain readable until
+artifact eviction or session end; they are not live preview references.
+A reference pins its window and keeps
 working while another window is current. The table holds at most 2,000
 references per session. Beyond that it drops references into a replaced preview
 region first, then the least recently returned; the references an observation

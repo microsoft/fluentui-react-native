@@ -7,17 +7,36 @@ owner_paths:
 
 # Lifecycle and ownership
 
-The generic supervisor owns required services, WDIO workers, and the WebDriver
-listener. A launched application's lifetime is currently session-owned; attached
+The generic supervisor owns required services, WDIO workers, the WebDriver
+listener, and static typed resource contributions. A contribution has a stable
+ID, dependencies, ownership mode, and a side-effect-free plan whose acquisition
+and disposal are tracked as one resource generation. Dependencies are validated
+and topologically ordered before acquisition. Owned resources are disposed in
+reverse order; borrowed resources are recorded but never disposed.
+
+A launched application's lifetime is currently session-owned; attached
 applications have an external owner. Storybook still takes over the CLI lifecycle,
 with channel and embedded driver listeners in a child process. This exception is
-transitional, not a unified resource graph. The intended boundary is one neutral
-`desktop-test` workload host with optional Storybook contributions, not a driver
-or MCP orchestrator.
+transitional, not a fully migrated resource graph. The intended boundary is one
+neutral `desktop-test` workload host with optional Storybook contributions, not
+a driver or MCP orchestrator.
 
 Services report readiness and failures through the shared run lifecycle.
 Required-service failure aborts dependent work. Listener/descriptor-ready does
 not prove app-ready, runtime-connected, or story-context-ready.
+Process-backed services may use `readyProcess(id, expected)` with an explicit
+`service-ready` service and optional descriptor expectation. The runner must
+provide correlated readiness; a missing waiter or mismatched receipt fails
+closed. The recorded receipt retains its service-ready tier, incarnation, and
+producer PID. HTTP readiness remains available for services without process
+readiness publication.
+
+Process-backed contributions return the authenticated
+`DesktopServiceReadyRecord` from `/process-control`, not a readiness expectation
+or a ready-file observation. Resource records retain its service, descriptor,
+command incarnation, and producer PID alongside the resource generation.
+Only `service-ready` is accepted; target acquisition, application readiness,
+and context readiness require separate verification.
 
 Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees in reverse service order. An
@@ -32,11 +51,19 @@ fail closed. If a crash leaves a lock, inspect its recorded owner and verify
 that process and its resources have stopped before removing that exact lock.
 There is no automatic stale-lock recovery.
 
-Cleanup failure now retains the claim, including a failure to dispose a host
-after startup failed. A timeout is not proof of settlement and must not release
-ownership. This conservative fence is not a resource ledger: late work abandoned
-by service guards, process-tree survivors, exact resource accounting, and crash
-reconciliation remain work in progress.
+The supervisor registers each owned resource before acquisition starts. If
+cancellation wins while acquisition is in flight, shutdown waits for that work;
+a resource that arrives late is disposed before a successful shutdown settles.
+Guarded work is also drained before close completes. A failed or timed-out
+disposal remains unsettled and retains the claim.
+
+The versioned workload record stores a random owner ID, process ID and recorded
+start timestamp, run ID, registered target ID, physical target instance ID, and each
+resource's identity, generation, ownership, readiness, and disposal state.
+Unresolved effects fence the claim. Claim inspection distinguishes a live owner,
+an exited owner, an unknown probe, and a reused PID; inspection never reclaims a
+claim, and uncertain or unsettled resources prevent release. Reporting-session
+inheritance is separate from explicit workload-claim delegation.
 
 Both native service paths use the real `driverService.ts` composition root
 (`@fluentui-react-native/desktop-test/driver-service`). It resolves prebuilt
@@ -67,10 +94,15 @@ never clears uncertain native or Storybook mutations.
 
 Keep reporting runs distinct from physical workload claims, resource ownership,
 application ownership, grants, native sessions, input locks, and context epochs.
-Future integrations should contribute typed resources/workloads rather than
-take over CLI output and supervision. Management/run API schemas belong here.
+Integrations contribute through the public
+`@fluentui-react-native/desktop-test/resources` and `/ownership` subpaths rather
+than taking over CLI output and supervision. Management/run API schemas belong here.
 Attached-app MCP/WDIO handoff can be developed independently of supervisor-owned
 native launch, but both must wait for session drain and preserve external apps.
+
+Configured target aliases receive distinct registered IDs while retaining the
+same physical `instanceId` when they resolve to the same application identity.
+Do not use an alias as proof that two targets are physically distinct.
 
 See [current status](current-status.md) for remaining gates and recorded evidence.
 

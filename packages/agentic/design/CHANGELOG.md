@@ -25,9 +25,9 @@
   color scheme. Elevated appearances resolve by color scheme for now.
 - 06b458f: Rework Flex tokens around the current x3 defaults. Legacy `ThemeReference` themes, `ThemeProvider`, `useTheme`, and
   Flex tokens projected from legacy themes keep their values.
-  
+
   Breaking changes for Flex consumers and theme authors:
-  
+
   - Every Flex semantic color is a resolved `InteractiveColor` with `rest`, `hover`, and `pressed`. Read
     `tokens.color.x.rest` instead of `tokens.color.x`, and `.hover` or `.pressed` instead of the removed `color.hover`
     and `color.pressed` maps. Omitted interactive states derive lazily from rest with no configuration.
@@ -45,7 +45,7 @@
   - The `color-lib` interaction functions no longer take a token; their `variant` option is replaced by `colorTone`,
     `direction`, and `compositing`. `isInverseInteractionToken` moves from `color-lib` to the package root, alongside the
     new `INTERACTIVE_COLOR_TOKENS` and `isInteractiveColorToken`.
-  
+
   Root `useThemeState` consumers now bundle the interaction algorithm and generated defaults, about 23 KB raw and 8 KB
   gzip in the measured scenarios. Package sources move under `src/flex`, `src/fluent`, `src/types`, and `src/test`; export
   keys and conditions are unchanged.

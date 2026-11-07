@@ -4,6 +4,7 @@ import { addons } from 'storybook/preview-api';
 
 import { desktopStoryErrorEvent, desktopStoryReadyEvent } from './DesktopDriverBridge';
 import { useDesktopStorybookConfig, useDesktopStorybookTestID } from './DesktopStorybookConfig';
+import { createStoryMarker } from './storyMarker';
 
 type DesktopStoryRootProps = {
   children: React.ReactNode;
@@ -11,41 +12,44 @@ type DesktopStoryRootProps = {
 };
 
 export function DesktopStoryRoot({ children, storyId }: DesktopStoryRootProps) {
-  const { runtimeInstance, selection } = useDesktopStorybookConfig();
+  const { isCurrentSelection, runtimeInstance, selection } = useDesktopStorybookConfig();
   const testID = useDesktopStorybookTestID('story-root');
   const exposeNativeMarker = Platform.OS === 'macos' || Platform.OS === 'windows' || Platform.OS === ('win32' as any);
-  const activeSelection = selection?.storyId === storyId ? selection : undefined;
+  const activeSelection = selection?.storyId === storyId && !selection.cancelled ? selection : undefined;
 
   React.useEffect(() => {
-    if (!activeSelection || !runtimeInstance?.portablePlanDigest) {
+    if (!activeSelection || !isCurrentSelection(activeSelection) || !runtimeInstance?.portablePlanDigest) {
       return;
     }
     addons.getChannel().emit(desktopStoryReadyEvent, {
       portablePlanDigest: runtimeInstance.portablePlanDigest,
-      previewGeneration: activeSelection.previewGeneration,
-      requestId: activeSelection.requestId,
-      runId: activeSelection.runId,
-      storyId,
+      ...createStoryMarker(activeSelection),
     });
-  }, [activeSelection, runtimeInstance?.portablePlanDigest, storyId]);
+  }, [activeSelection, isCurrentSelection, runtimeInstance?.portablePlanDigest]);
 
-  const marker = JSON.stringify({
-    previewGeneration: activeSelection?.previewGeneration ?? 0,
-    runId: activeSelection?.runId,
-    storyId,
-  });
+  const marker = JSON.stringify(
+    activeSelection
+      ? createStoryMarker(activeSelection)
+      : {
+          previewGeneration: activeSelection?.previewGeneration ?? 0,
+          runId: activeSelection?.runId,
+          storyId,
+        },
+  );
   const key = activeSelection ? `${activeSelection.runId}:${activeSelection.previewGeneration}` : storyId;
+
+  if (selection && !activeSelection) {
+    return null;
+  }
 
   return (
     <StoryRenderErrorBoundary
       key={key}
       onError={(message) => {
-        if (activeSelection) {
+        if (activeSelection && isCurrentSelection(activeSelection)) {
           addons.getChannel().emit(desktopStoryErrorEvent, {
             message,
-            requestId: activeSelection.requestId,
-            runId: activeSelection.runId,
-            storyId,
+            ...createStoryMarker(activeSelection),
           });
         }
       }}

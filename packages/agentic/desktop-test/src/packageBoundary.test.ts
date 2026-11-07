@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const packageRoot = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(packageRoot, '../../..');
@@ -41,7 +42,7 @@ function declaredForbiddenPackages(manifest: PackageManifest): string[] {
 }
 
 function runNode(entry: string): ReturnType<typeof spawnSync> {
-  return spawnSync(process.execPath, ['--experimental-loader', loaderPath, entry], {
+  return spawnSync(process.execPath, ['--experimental-loader', pathToFileURL(loaderPath).href, entry], {
     cwd: fixtureRoot,
     encoding: 'utf8',
   });
