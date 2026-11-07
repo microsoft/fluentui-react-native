@@ -39,6 +39,7 @@ describe('desktop supervisor input lane', () => {
     const target: ResolvedDesktopTarget = {
       endpoint: 'macos',
       id: 'fixture',
+      registrationId: 'fixture',
       instanceId: 'fixture-1',
       projectRoot: artifactsRoot,
       configPath: path.join(artifactsRoot, 'desktop.config.mts'),

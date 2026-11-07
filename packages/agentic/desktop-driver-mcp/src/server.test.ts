@@ -345,6 +345,8 @@ describe('desktop-driver-mcp', () => {
       schemaVersion: 1,
     };
     const harness = await createDesktopDriverStoryHarness(manifest, { features });
+    // Model a preview container whose native identity survives both selection and reset.
+    jest.spyOn(harness.host, 'resetPreview').mockImplementation(() => {});
     const client = await connectClient(async () => testConnection(harness));
     try {
       await open(client, harness);
@@ -372,6 +374,33 @@ describe('desktop-driver-mcp', () => {
         error: 'stale element reference',
         reason: 'ref-region-changed',
       });
+      const current = json(await call(client, 'desktop_observe', { find: { automationId: 'button-primary' } })) as {
+        result: { matches: { ref: string }[] };
+      };
+      expect(json(await call(client, 'desktop_observe', { observe: { within: found.result.matches[0].ref } }))).toMatchObject({
+        error: 'stale element reference',
+      });
+      expect(
+        json(
+          await call(client, 'desktop_story', {
+            requestId: 'reset-1',
+            story: { action: 'reset', storyId: 'components-checkbox--default' },
+          }),
+        ),
+      ).toMatchObject({
+        operation: 'story',
+        result: { disposition: 'applied', verification: 'marker' },
+      });
+      expect(json(await call(client, 'desktop_observe', { observe: { within: current.result.matches[0].ref } }))).toMatchObject({
+        error: 'stale element reference',
+        reason: 'ref-region-changed',
+      });
+      await call(client, 'desktop_observe', { find: { automationId: 'button-primary' } });
+      for (const ref of [found.result.matches[0].ref, current.result.matches[0].ref]) {
+        expect(json(await call(client, 'desktop_observe', { observe: { within: ref } }))).toMatchObject({
+          error: 'stale element reference',
+        });
+      }
       for (const args of [
         { list: {}, story: { storyId: 'components-button--default' } },
         { list: {}, requestId: 'r' },

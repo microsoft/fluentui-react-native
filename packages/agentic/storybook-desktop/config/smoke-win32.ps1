@@ -229,9 +229,9 @@ try {
         Stop-Process -Id $ownedProcessId -ErrorAction Continue
       }
     }
-    if ($cleanupFailure) {
-      if ($smokeFailure) { throw [System.AggregateException]::new('Smoke execution and service cleanup failed.', [System.Exception[]]@($smokeFailure, $cleanupFailure)) }
-      throw $cleanupFailure
-    }
+  }
+  if ($cleanupFailure) {
+    if ($smokeFailure) { throw [System.AggregateException]::new('Smoke execution and service cleanup failed.', [System.Exception[]]@($smokeFailure, $cleanupFailure)) }
+    throw $cleanupFailure
   }
 }

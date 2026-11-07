@@ -17,6 +17,13 @@ The channel child in `config/server.cjs` constructs its native driver through
 helper policy, authority, descriptor publication and settled driver shutdown
 in that shared harness implementation, not a parallel Storybook copy.
 
+Agent manifests use `config/controlled-channel.cjs`, not upstream
+`createChannelServer`: only public index generation is reused. Do not add a
+WebSocket relay or an HTTP mutation route to this adapter. Runtime events must
+remain socket/epoch authenticated, navigation uses driver-owned settlement,
+and protected args stay refused. Manifest-backed smoke traversal must acquire
+and release its driver session before authored test sessions start.
+
 Input lanes cross these areas. The descriptor schema, merge, and per-case
 decision belong to `@fluentui-react-native/desktop-driver/authoring`; do not
 copy them here. `src/cli/inputLane.ts` resolves the requested lane,
@@ -30,6 +37,21 @@ only, because the Metro transform has no validated descriptor to judge by.
 Keep story callbacks statically extractable and authentication checks
 fail-closed. Update references when commands, supported config, outputs, or
 readiness contracts change.
+
+Authenticated bridge epochs are recorded by `BridgeEpochJournal` in the
+service factory's private endpoint/target namespace, separately from settlement
+and quarantine. The record binds renderer and epoch to a native-verified PID
+and process start time. Identity resolution uses a temporary attached helper,
+disposed without closing the app or altering an active session's window records.
+Readiness remains disabled until the record is published; a missing startup
+lease can be retried on the next story command, never assumed verified.
+After a service restart, only a matching record, a `running` exact-incarnation
+probe, and a matching current native attachment justify `relaunch-required`.
+Initial absence, an unknown/failed probe, or a replaced process stays
+`bridge-unavailable`, with no navigation dispatched. Proven exited/replaced
+records are removed; reauthentication replaces the old epoch. Neither record
+nor relaunch guidance clears settlement quarantine or promises transparent
+upstream reconnection.
 
 Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` from this
 package. Validate static manifests and the affected app's bundle/native smoke

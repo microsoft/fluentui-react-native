@@ -531,24 +531,49 @@ export class DesktopRunReporter {
   }
 
   private persist(result: DesktopRunResult): void {
-    const write = (name: string, data: string) => {
-      const temporary = this.artifactPath(`${name}.tmp`);
-      fs.writeFileSync(temporary, data, { mode: 0o600 });
-      fs.renameSync(temporary, this.artifactPath(name));
-    };
-    if (this.options.junit !== false) write('junit.xml', renderJUnit(result));
+    if (this.options.junit !== false) this.writeReport('junit.xml', renderJUnit(result));
     this.persistSnapshot(result);
   }
 
   private persistSnapshot(result: DesktopRunResult): void {
-    const temporary = this.artifactPath('run.json.tmp');
     const snapshot = this.sanitize({
       ...result,
       terminal: result.terminal === true,
       status: result.terminal === true || result.status === 'failed' ? result.status : 'incomplete',
     });
-    fs.writeFileSync(temporary, JSON.stringify(snapshot) + '\n', { mode: 0o600 });
-    fs.renameSync(temporary, this.artifactPath('run.json'));
+    this.writeReport('run.json', JSON.stringify(snapshot) + '\n');
+  }
+
+  private writeReport(name: string, data: string): void {
+    const temporary = this.artifactPath(`${name}.tmp`);
+    const destination = this.artifactPath(name);
+    fs.writeFileSync(temporary, data, { mode: 0o600 });
+    let retries = 0;
+    for (;;) {
+      try {
+        fs.renameSync(temporary, destination);
+        break;
+      } catch (error) {
+        if (
+          process.platform !== 'win32' ||
+          retries === 10 ||
+          typeof error !== 'object' ||
+          error === null ||
+          !('code' in error) ||
+          (error.code !== 'EPERM' && error.code !== 'EACCES')
+        )
+          throw error;
+        // Windows readers can briefly deny delete sharing. Keep the old snapshot intact while retrying the same rename.
+        retries++;
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
+      }
+    }
+    if (retries > 0) {
+      this.emit({
+        kind: 'diagnostic',
+        payload: { level: 'warning', message: `Atomic report replacement for ${name} recovered after ${retries} Windows sharing retries.` },
+      });
+    }
   }
 
   private async finalize(): Promise<DesktopRunResult> {
