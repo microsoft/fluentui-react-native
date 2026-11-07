@@ -1,5 +1,69 @@
 # @fluentui-react-native/design
 
+## 0.6.0
+
+### Minor Changes
+
+- 06b458f: Breaking: move every module that loads the Fluent 2 token JSON into a new `@fluentui-react-native/design/deprecated`
+  entry point, reserved for tests and the existing platform themes. It exports `getAliasTokens`, `getShadowTokens`,
+  `globalTokens`, `hcAliasTokens`, `mapPipelineToTheme`, `mapFontPipelineToTheme`, and `mapPipelineToShadow`. The
+  `theming` entry point no longer exports the pipeline mappers, and the `tokens/legacy` and `theming/compat/defaults`
+  entry points and `getDefaultLegacyTheme` are removed; use the Fluent themes from `@fluentui-react-native/design/themes`
+  for complete default themes. `themeFromFlexTokens` now fills the values Flex cannot represent from the generated Fluent
+  theme for the appearance instead of the removed legacy defaults, so the `theming` entry point no longer bundles the
+  token JSON.
+- 06b458f: Add `flexTheme` and `flexWarmTheme` to the `@fluentui-react-native/design/themes` entry point. Each is a new
+  `FlexThemeDescription`, which pairs a complete Flex token description with an optional `ColorTone`, holding the cool or
+  warm x3 defaults. `FlexThemeReference` now accepts a `FlexThemeDescription` as its `base`: the description replaces the
+  package defaults, and its tone becomes the reference's default `appearance.colorTone` unless the `appearance` option or
+  a provider request sets one. The `ThemeState` types now live with the Flex model; their exports are unchanged.
+- 06b458f: Add the `@fluentui-react-native/design/themes` entry point with `fluentLightTheme`, `fluentDarkTheme`, `fluentHcTheme`,
+  and `fluentTheme`. The themes are built from the generated Fluent 2 alias colors, shadows, font aliases, and global
+  tokens rather than hand-authored values, and each legacy palette color points at the alias color that plays its role.
+  `fluentTheme` is a `ThemeReference` that follows the system appearance, including high contrast, and the `appearance`
+  prop of `ThemeProvider` or `ThemedRoot` overrides it. `fluentHcTheme` always resolves the high-contrast theme for the
+  color scheme. Elevated appearances resolve by color scheme for now.
+- 06b458f: Rework Flex tokens around the current x3 defaults. Legacy `ThemeReference` themes, `ThemeProvider`, `useTheme`, and
+  Flex tokens projected from legacy themes keep their values.
+  
+  Breaking changes for Flex consumers and theme authors:
+  
+  - Every Flex semantic color is a resolved `InteractiveColor` with `rest`, `hover`, and `pressed`. Read
+    `tokens.color.x.rest` instead of `tokens.color.x`, and `.hover` or `.pressed` instead of the removed `color.hover`
+    and `color.pressed` maps. Omitted interactive states derive lazily from rest with no configuration.
+  - Author a color as a value, a `[light, dark]` tuple, or `flexColor` options with explicit states and a `standard`,
+    `inverted`, or `fixed` interaction type. Each color override replaces the previous color atomically. Recipes receive
+    the authored description; `selectColorEntry` reads an entry for an appearance.
+  - Appearances accept an optional `colorTone` (`cool` or `warm`) that selects the default tokens and interaction
+    algorithm.
+  - The default tokens follow x3-design/fluent-design@206e890b for both tones, including an achromatic brand,
+    translucent neutral backgrounds, and larger corner radii. Tests should read defaults from `defaultFlexTokens` in the
+    `testing` entry point.
+  - Shadows are arrays of `{ x, y, blur, color }` layers and may vary by color scheme; author a former `{ ambient, key }`
+    shadow as `[ambient, key]`, and use `selectShadowEntry` to read an authored entry. Motion tokens and
+    `spacing.componentBase800` are new.
+  - The `color-lib` interaction functions no longer take a token; their `variant` option is replaced by `colorTone`,
+    `direction`, and `compositing`. `isInverseInteractionToken` moves from `color-lib` to the package root, alongside the
+    new `INTERACTIVE_COLOR_TOKENS` and `isInteractiveColorToken`.
+  
+  Root `useThemeState` consumers now bundle the interaction algorithm and generated defaults, about 23 KB raw and 8 KB
+  gzip in the measured scenarios. Package sources move under `src/flex`, `src/fluent`, `src/types`, and `src/test`; export
+  keys and conditions are unchanged.
+
+### Patch Changes
+
+- 06b458f: Generate complete Fluent color, shadow, font, and appearance token sets for Win32, Windows, macOS, iOS, and Android.
+  Every platform provides light, dark, light elevated, dark elevated, high-contrast light, and high-contrast dark sets.
+  Elevated sets fall back to their color scheme, high-contrast light falls back to high-contrast dark, and platforms
+  without high-contrast data use light and dark. Windows high contrast uses the Win32 high-contrast set with Windows
+  system color brushes. Preserve native values and fill missing tokens with same-platform equivalents, then portable
+  same-scheme defaults. Use platform global typography when font aliases are absent and enforce required generated token
+  types.
+- ccb458e: Add independently bundleable flexCoolTheme and flexWarmTheme descriptions, let flexTheme select its palette from appearance.colorTone, and use flexCoolTheme for no-theme fallbacks.
+- 06b458f: Shrink the generated Flex defaults by about 6 KB minified: values that repeat are emitted once, and the entries both
+  tones share are emitted once in a common object. The default token values are unchanged.
+- ccb458e: Lazily initialize the fallback Flex theme state once using the current system light or dark appearance, and keep the fallback appearance hooks consistent.
+
 ## 0.5.3
 
 ### Patch Changes

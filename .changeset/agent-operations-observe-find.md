@@ -1,5 +1,0 @@
----
-'@fluentui-react-native/desktop-driver': patch
----
-
-Add versioned agent operations to the driver service. `GET /session/{id}/furn/ops` lists a catalog of operations with JSON Schemas, and `POST /session/{id}/furn/ops/{name}` runs `observe`, `find`, or `journal` on the session's command queue. `observe` returns a bounded outline or node list of a window or element subtree under explicit budgets and names why it stopped. `find` reports whether a match is unique, none, multiple, or inconclusive and never proves uniqueness or absence from an incomplete search. Both issue session-scoped element references and release the provider records they do not return. Each session keeps a bounded journal that never holds typed text or displayed content, and operators can deny reading displayed content with `createDesktopDriverServer({ operations: { content: 'deny' } })`. The typed client gains `operations()`, `operation()`, `observe()`, `find()`, and `journal()`, and `./operations` exports the catalog and executor. Operations need a helper that negotiates `boundedObservation`, which today is the macOS helper and the fake host.
