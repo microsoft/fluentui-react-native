@@ -38,6 +38,7 @@ import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/w
 
 const desktop = await connectDesktopWebdriver({
   clickMode: 'auto',
+  inputMode: 'accessible',
   launchMode: 'attach',
   platformName: 'macos',
   targetId: 'component-storybook-macos',
@@ -52,6 +53,21 @@ try {
   await desktop.delete();
 }
 ```
+
+`inputMode` defaults to `compatibility`. Use `accessible` to refuse keyboard,
+pointer, and wheel input before dispatch, or `physical` to require physical
+clears and clicks while still permitting accessibility actions. The selected
+mode is fixed in the session's returned `furn:inputMode` capability. Read
+`desktop.input()` (or `desktop.browser.desktopInput()`) for that mode and the
+session's delivery counts. A declared test runner compares those receipts with
+the case's `requires`; an undeclared mechanism fails the test, while an unused
+requirement is reported without failing it.
+
+WDIO's `element.desktopPerformAccessibilityAction(name)` invokes a uniquely
+published accessibility action without pointer or keyboard input. Declare
+`perform-accessibility-action` on the case that uses it. In an accessible
+session, `setValue` is rejected before WDIO's client-side clear step; `clear`
+remains available as a semantic clear.
 
 Use standard WebdriverIO APIs only where the
 [implemented protocol](protocol.md) supports them. Browser navigation, cookies,
@@ -111,11 +127,12 @@ package. Static plans below are unchanged.
 
 The descriptor that `desktopIt` accepts (`requires`, `input`, `platforms`,
 `scope`, and declared gaps) is defined and decided in `./authoring`, so Storybook
-and `desktop-test` share one implementation. A runner that executes one input lane
-pins `furn:clickMode` with `resolveDesktopClickMode`: `element.click()` is then an
-accessibility click in the accessible lane and a physical click in the physical
-lane. `missingDesktopRequirements` judges a case's `requires` against the
-session's `furn:features`, and judges a `click` requirement by the pinned mode.
+and `desktop-test` share one implementation. A runner that executes one input
+lane requests and verifies the matching `furn:inputMode`; the policy pins
+`furn:clickMode`, so `element.click()` is an accessibility click in the
+accessible lane and a physical click in the physical lane.
+`missingDesktopRequirements` judges a case's `requires` against the session's
+`furn:features`, and judges a `click` requirement by the pinned mode.
 
 ## Author portable story plans
 

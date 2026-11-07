@@ -18,17 +18,18 @@ describe('requested desktop input lane', () => {
 });
 
 describe('createDesktopInputLane', () => {
-  test('an accessible lane says how it was masked, and neither lane claims enforcement yet', () => {
-    expect(createDesktopInputLane('accessible', 'option')).toEqual({
+  test('every lane is policy-enforced, and only an accessible lane records host masks', () => {
+    expect(createDesktopInputLane('accessible', 'option', 'host-masked')).toEqual({
       input: 'accessible',
       source: 'option',
       masking: 'host-masked',
-      policyEnforced: false,
+      policyEnforced: true,
     });
-    expect(createDesktopInputLane('accessible', 'driver', 'verified-masked')).toMatchObject({
-      masking: 'verified-masked',
-      source: 'driver',
+    expect(createDesktopInputLane('accessible', 'driver')).toEqual({ input: 'accessible', source: 'driver', policyEnforced: true });
+    expect(createDesktopInputLane('physical', 'environment', 'host-masked')).toEqual({
+      input: 'physical',
+      source: 'environment',
+      policyEnforced: true,
     });
-    expect(createDesktopInputLane('physical', 'environment')).toEqual({ input: 'physical', source: 'environment', policyEnforced: false });
   });
 });

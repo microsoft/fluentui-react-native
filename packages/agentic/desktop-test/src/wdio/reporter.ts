@@ -116,6 +116,8 @@ export default class DesktopWdioReporter extends WDIOReporter {
     const gap = notExecuted && entry?.kind === 'gap' ? entry.gap : undefined;
     const missing = notExecuted && entry?.kind === 'run' ? entry.missing : undefined;
     const status = gap || missing?.length ? 'unsupported' : test.state === 'pending' ? 'skipped' : test.state;
+    // A body that called pending() also delivered input, but only an executed test is judged by it.
+    const input = entry?.kind === 'run' && (status === 'passed' || status === 'failed') ? entry.input : undefined;
     this.report(
       {
         kind: 'test-result',
@@ -127,6 +129,7 @@ export default class DesktopWdioReporter extends WDIOReporter {
           durationMs: test.duration,
           ...(gap ? { gap: gap.kind, reason: gap.reason } : {}),
           ...(missing?.length ? { reason: `Missing desktop requirements: ${missing.join(', ')}.` } : {}),
+          ...(input ? { input } : {}),
           ...(status === 'skipped' ? { reason: test.pendingReason || 'Skipped by the test framework.' } : {}),
           ...(status === 'failed'
             ? { failure: this.failure(`${key}/failure`, test.error ?? new AggregateError(test.errors ?? [], 'WDIO test failed.'), 'test') }

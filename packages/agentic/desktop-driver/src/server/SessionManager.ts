@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
+import type { DesktopInputMechanism, DesktopInputMode } from '../authoring/input.js';
 import type {
   ApplicationLease,
   DesktopHostInfo,
@@ -97,6 +98,10 @@ export type DesktopSession = {
   elementIdsByNativeId: Map<string, string>;
   hostInfo: DesktopHostInfo;
   id: string;
+  /** The input policy fixed at creation (`furn:inputMode`). It never changes for the life of the session. */
+  readonly inputMode: DesktopInputMode;
+  /** How many times the session delivered input by each mechanism, including deliveries whose outcome was not observed. */
+  inputReceipts: Map<DesktopInputMechanism, number>;
   inputState: WebDriverInputState;
   issuedElementIds: Set<string>;
   lease: ApplicationLease;
@@ -249,6 +254,7 @@ export class SessionManager {
     clickMode: DesktopClickMode,
     launchMode: 'attach' | 'launch',
     owner?: SessionOwner,
+    inputMode: DesktopInputMode = 'compatibility',
   ): Promise<DesktopSession> {
     if (this.closing) {
       return Promise.reject(new WebDriverError('session not created', 'Desktop Driver is shutting down.'));
@@ -259,7 +265,7 @@ export class SessionManager {
       return Promise.reject(new WebDriverError('session not created', 'The grant for this request was revoked.'));
     }
     const controller = new AbortController();
-    const result = this.createSession(target, hostInfo, clickMode, launchMode, owner, controller.signal);
+    const result = this.createSession(target, hostInfo, clickMode, launchMode, inputMode, owner, controller.signal);
     const settled = result.then(
       () => undefined,
       () => undefined,
@@ -300,6 +306,7 @@ export class SessionManager {
     hostInfo: DesktopHostInfo,
     clickMode: DesktopClickMode,
     launchMode: 'attach' | 'launch',
+    inputMode: DesktopInputMode,
     owner?: SessionOwner,
     signal?: AbortSignal,
   ): Promise<DesktopSession> {
@@ -375,6 +382,8 @@ export class SessionManager {
         elementIdsByNativeId: new Map(),
         hostInfo,
         id: randomUUID(),
+        inputMode,
+        inputReceipts: new Map(),
         inputState: createInputState(),
         issuedElementIds: new Set(),
         lease,

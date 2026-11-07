@@ -1748,18 +1748,18 @@ async function main() {
         input: 'accessible',
         source: 'option',
         masking: 'host-masked',
-        policyEnforced: false,
+        policyEnforced: true,
       });
       ran(invoke(['test', '--suite', 'csf'], { DESKTOP_INPUT: 'physical' }), 'physical', {
         input: 'physical',
         source: 'environment',
-        policyEnforced: false,
+        policyEnforced: true,
       });
       ran(invoke(['test', '--suite', 'csf', '--input', 'accessible'], { DESKTOP_INPUT: 'physical' }), 'accessible', {
         input: 'accessible',
         source: 'option',
         masking: 'host-masked',
-        policyEnforced: false,
+        policyEnforced: true,
       });
       const unlaned = invoke(['test', '--suite', 'csf']);
       assert.equal(unlaned.status, 0, unlaned.diagnostics);
@@ -1789,7 +1789,14 @@ async function main() {
       const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
       const laneMode = mode.startsWith('lane-');
       const retried = mode === 'retry' || mode === 'lane-physical';
-      const lane = laneMode ? createDesktopInputLane(mode === 'lane-physical' ? 'physical' : 'accessible', 'option') : undefined;
+      // Like the CLI, the fixture starts the host itself, masked for the accessible lane.
+      const lane = laneMode
+        ? createDesktopInputLane(
+            mode === 'lane-physical' ? 'physical' : 'accessible',
+            'option',
+            mode === 'lane-accessible' ? 'host-masked' : undefined,
+          )
+        : undefined;
       // The lane fixtures import the Jasmine adapter by file URL from the environment, so no value is spliced into source.
       if (laneMode) process.env.DESKTOP_JASMINE_URL = lib('jasmine/index.js');
       const run = reporter({ context: { endpoint: 'win32', renderer: 'paper' }, ...(lane ? { lane } : {}) });
@@ -1844,6 +1851,7 @@ async function main() {
           "  desktopIt('runs when nothing is declared', () => {});",
           "  desktopIt('clicks as the lane does', { requires: ['click'] }, async () => { await (await browser.$('~button-primary')).click(); });",
           "  desktopIt('clicks accessibly', { requires: ['accessibility-click'] }, async () => { await (await browser.$('~button-primary')).click(); });",
+          "  desktopIt('clicks without declaring it', async () => { await (await browser.$('~button-primary')).click(); });",
           "  desktopIt('physical only', { requires: ['keyboard'] }, mustNotRun('an input-excluded case'));",
           "  desktopIt('needs what the host lacks', { requires: ['accessibility-actions'] }, mustNotRun('a case the host cannot support'));",
           '});',
@@ -1983,18 +1991,24 @@ async function main() {
         }
       } else if (mode === 'lane-accessible') {
         const text = JSON.stringify(result);
-        // The host cannot support one case. A lane run holds that against the run instead of quietly skipping it.
-        assert(failure && /incomplete/.test(failure.message), `${failure?.stack}\n${text}\n${err.text()}`);
-        assert.notEqual(result.status, 'passed', text);
+        // One case delivered input it never declared, and the host cannot support another, which a lane run also holds
+        // against the run instead of quietly skipping it.
+        assert(failure, `${text}\n${err.text()}`);
+        assert.equal(result.status, 'failed', text);
         assert.equal(launches, 1);
         assert.equal(result.counts.passed, 3, text);
-        assert.equal(result.counts.failed, 0, text);
+        // The policy allowed the click, and its receipt failed the case that never declared it.
+        assert.equal(result.counts.failed, 1, text);
+        const undeclared = attemptOf(result, 'clicks without declaring it');
+        assert.deepEqual(undeclared.input, { receipts: { 'accessibility-click': 1 }, undeclared: ['accessibility-click'] }, text);
+        assert.match(undeclared.failure.error.message, /delivered input it does not declare: accessibility-click/, text);
+        assert.deepEqual(attemptOf(result, 'clicks as the lane does').input, { receipts: { 'accessibility-click': 1 } }, text);
         assert.equal(result.counts.unsupported, 1, text);
         assert.equal(result.counts.declaredUnsupported, 0, text);
         assert.deepEqual(result.selection.excluded, { platform: 0, scope: 0, input: 1 }, text);
-        assert.deepEqual(result.lane, { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: false });
+        assert.deepEqual(result.lane, { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: true });
         const clicks = host.actions.filter((action) => action.type === 'click');
-        assert(clicks.length === 2 && clicks.every((action) => action.mode === 'accessibility'), JSON.stringify(host.actions));
+        assert(clicks.length === 3 && clicks.every((action) => action.mode === 'accessibility'), JSON.stringify(host.actions));
       } else {
         assert.equal(failure, undefined, `${failure?.stack}\n${err.text()}\n${out.text()}`);
         assert.equal(result.status, 'passed', JSON.stringify(result));
@@ -2011,7 +2025,9 @@ async function main() {
           assert.equal(result.counts.declaredUnsupported, 1, text);
           // Both attempts announced the same exclusions, and a retried group still counts them once.
           assert.deepEqual(result.selection.excluded, { platform: 2, scope: 1, input: 1 }, text);
-          assert.deepEqual(result.lane, { input: 'physical', source: 'option', policyEnforced: false });
+          assert.deepEqual(result.lane, { input: 'physical', source: 'option', policyEnforced: true });
+          assert.deepEqual(attemptOf(result, 'clicks as the lane does').input, { receipts: { 'physical-click': 1 } }, text);
+          assert.deepEqual(attemptOf(result, 'needs the keyboard').input, { receipts: {}, unused: ['keyboard'] }, text);
           const clicks = host.actions.filter((action) => action.type === 'click');
           assert(clicks.length > 0 && clicks.every((action) => action.mode === 'physical'), JSON.stringify(host.actions));
         }
@@ -2023,6 +2039,13 @@ async function main() {
     // Windows can hold WDIO worker handles briefly after exit, which surfaces as transient EPERM/EBUSY.
     fs.rmSync(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
   }
+}
+
+/** The last attempt of the one test whose title ends with `title`. */
+function attemptOf(result, title) {
+  const matches = result.tests.filter((test) => test.title.endsWith(title));
+  assert.equal(matches.length, 1, `expected one test titled "${title}"\n${JSON.stringify(result.tests)}`);
+  return matches[0].attempts.at(-1);
 }
 
 main().catch((error) => {

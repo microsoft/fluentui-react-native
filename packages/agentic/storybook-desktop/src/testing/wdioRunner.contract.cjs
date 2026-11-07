@@ -1,5 +1,7 @@
+const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
+const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
@@ -98,6 +100,22 @@ async function main() {
       }),
       desktopIt('physical only', { requires: ['physical-click'] }, async ({ browser, expect }) => {
         await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+    ]};
+    export const Receipts = { wdio: [
+      desktopIt('declared click', { requires: ['click'] }, async ({ browser }) => {
+        await (await browser.$('~button-primary')).click();
+      }),
+      desktopIt('undeclared click', async ({ browser }) => {
+        await (await browser.$('~button-primary')).click();
+      }),
+      desktopIt('unused keyboard', { requires: ['keyboard'] }, async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+      // An alias hides the keyboard from the authoring check, so only the run-time policy and receipts can catch it.
+      desktopIt('typing', { requires: ['click'] }, async ({ browser }) => {
+        const driver = browser;
+        await driver.keys(['Tab']);
       }),
     ]};
   `,
@@ -339,22 +357,55 @@ async function main() {
       await restrictedButtonHarness.close();
     }
     const laneResults = (results) => results.map(({ testName, status }) => ({ testName, status }));
-    // The accessible lane trusts the driver's own report, so a driver that does not show physical input disabled fails closed.
-    const unmaskedReport = new DesktopRunReporter({
+    // The driver enforces the lane's policy itself, so an accessible lane holds on a driver with physical input enabled.
+    const unmaskedLane = laneResults(await run('lane', { input: 'accessible' }));
+    // A driver that does not confirm the policy fails closed: it could neither hold the lane nor attribute its input.
+    const unconfirmedProxy = await createUnconfirmingProxy(harness.server.url);
+    const unconfirmedReport = new DesktopRunReporter({
       artifactsRoot: path.join(root, 'lane-reports'),
-      lane: { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: false },
+      lane: { input: 'accessible', source: 'option', policyEnforced: true },
       summary: false,
     });
-    let unmaskedLane;
+    let unconfirmedLane;
     try {
-      await run('lane', { input: 'accessible', report: unmaskedReport });
-      throw new Error('An accessible lane must not run against a driver that reports physical input enabled.');
+      await run('lane', { input: 'accessible', report: unconfirmedReport, url: unconfirmedProxy.url });
+      throw new Error('An accessible lane must not run against a driver that does not confirm its input policy.');
     } catch (error) {
       if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
         throw error;
-      unmaskedLane = { results: laneResults(error.results), message: error.message };
+      unconfirmedLane = { results: laneResults(error.results), message: error.message };
+    } finally {
+      await unconfirmedProxy.close();
     }
-    const unmaskedLaneResult = await unmaskedReport.finish();
+    const unconfirmedLaneResult = await unconfirmedReport.finish();
+    // Receipts hold every declared case to what it says, in compatibility mode as in a lane, and the report keeps them.
+    const receiptResults = async (input) => {
+      const report = new DesktopRunReporter({
+        artifactsRoot: path.join(root, 'receipt-reports'),
+        ...(input ? { lane: { input, source: 'option', policyEnforced: true } } : {}),
+        summary: false,
+      });
+      let results;
+      try {
+        await run('receipts', { report, ...(input ? { input } : {}) });
+        throw new Error('Expected undeclared input to fail.');
+      } catch (error) {
+        if (
+          !(error instanceof Error) ||
+          !(error instanceof WdioStoryTestRunError) ||
+          !('results' in error) ||
+          !Array.isArray(error.results)
+        )
+          throw error;
+        results = error.results;
+      }
+      const reported = await report.finish();
+      return results.map(({ testName, status, input: delivered, error }) => {
+        assert.deepEqual(reported.tests.find(({ title }) => title.endsWith(` / ${testName}`))?.attempts[0].input, delivered);
+        return { testName, status, input: delivered, ...(error ? { error } : {}) };
+      });
+    };
+    const receipts = { compatibility: await receiptResults(), accessible: await receiptResults('accessible') };
     const maskedHarness = await createDesktopDriverStoryHarness(manifest, {
       features: { keyboard: false, physicalClick: false, wheel: false },
     });
@@ -394,14 +445,16 @@ async function main() {
             accessible: accessibleLane,
             physical: physicalLane,
             compatibility: compatibilityLane,
-            unmasked: {
-              ...unmaskedLane,
-              status: unmaskedLaneResult.status,
-              failed: unmaskedLaneResult.counts.failed,
-              excluded: unmaskedLaneResult.selection?.excluded,
-              reported: unmaskedLaneResult.failures.map(({ error }) => error.message),
+            unmasked: unmaskedLane,
+            unconfirmed: {
+              ...unconfirmedLane,
+              status: unconfirmedLaneResult.status,
+              failed: unconfirmedLaneResult.counts.failed,
+              excluded: unconfirmedLaneResult.selection?.excluded,
+              reported: unconfirmedLaneResult.failures.map(({ error }) => error.message),
             },
           },
+          receipts,
           platforms,
           namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
           namedTimeout,
@@ -416,6 +469,39 @@ async function main() {
     await harness.close();
     fs.rmSync(root, { recursive: true, force: true });
   }
+}
+
+/** Forwards to a driver but drops the input policy from each new session, as a driver from before enforcement would. */
+async function createUnconfirmingProxy(url) {
+  const server = http.createServer(async (request, response) => {
+    const chunks = [];
+    for await (const chunk of request) chunks.push(chunk);
+    const body = Buffer.concat(chunks);
+    const reply = await fetch(new URL(request.url, url), {
+      method: request.method,
+      headers: { 'content-type': 'application/json' },
+      ...(body.length ? { body } : {}),
+    });
+    let text = await reply.text();
+    if (request.method === 'POST' && request.url === '/session' && reply.ok) {
+      const created = JSON.parse(text);
+      delete created.value.capabilities['furn:inputMode'];
+      text = JSON.stringify(created);
+    }
+    response.writeHead(reply.status, { 'content-type': 'application/json' });
+    response.end(text);
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(undefined)));
+  const { port } = /** @type {import('node:net').AddressInfo} */ (server.address());
+  return {
+    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test proxy only binds to loopback
+    url: `http://127.0.0.1:${port}`,
+    close: () =>
+      new Promise((resolve) => {
+        server.closeAllConnections();
+        server.close(resolve);
+      }),
+  };
 }
 
 /** @returns {Promise<{code: number | null, stdout: string, stderr: string}>} */

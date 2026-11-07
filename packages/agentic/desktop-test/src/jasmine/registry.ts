@@ -4,14 +4,17 @@ import type {
   DesktopRequirement,
   ResolvedDesktopCaseOptions,
 } from '@fluentui-react-native/desktop-driver/authoring';
-import type { SelectionExclusions } from '../reporting/protocol.js';
+import type { SelectionExclusions, TestInputReport } from '../reporting/protocol.js';
 import { desktopTestSelectionEnvironment, parseDesktopTestSelection } from './selection.js';
 import type { DesktopTestSelection } from './selection.js';
 
 /** What the adapter decided for a spec it registered. */
 export type DesktopSpecEntry =
-  /** Executes, unless a preflight found that the host cannot meet what it requires. */
-  | { kind: 'run'; descriptor: ResolvedDesktopCaseOptions; missing?: readonly DesktopRequirement[] }
+  /**
+   * Executes, unless a preflight found that the host cannot meet what it requires. `input` is what its body delivered,
+   * once it ran in a session that reports receipts.
+   */
+  | { kind: 'run'; descriptor: ResolvedDesktopCaseOptions; missing?: readonly DesktopRequirement[]; input?: TestInputReport }
   /** Registered as a placeholder that never runs and is counted, not reported as a test. */
   | { kind: 'excluded'; reason: DesktopExclusionReason }
   /** Registered as a placeholder that is reported as unsupported, with the reason its author gave. */

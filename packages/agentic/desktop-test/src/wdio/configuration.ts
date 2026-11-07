@@ -95,6 +95,8 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
         'furn:target': settings.targetId,
         'furn:launchMode': settings.ownership === 'external' ? 'attach' : 'launch',
         'furn:clickMode': resolveDesktopClickMode(undefined, 'auto', selection?.lane),
+        // A lane's session refuses input its lane never delivers; without one, every mechanism stays available.
+        'furn:inputMode': selection?.lane ?? 'compatibility',
       },
     ],
     beforeSession: async (...args: unknown[]) => {
@@ -105,7 +107,12 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
       installDesktopWebdriverCommands(browser, settings.url);
       // Before the application is touched: a lane that cannot vouch for its tests must stop here.
       if (settings.framework === 'jasmine') {
-        selectDesktopSpecs(desktopJasmineRegistry(), currentDesktopJasmineEnvironment(), browser.capabilities['furn:features']);
+        selectDesktopSpecs(
+          desktopJasmineRegistry(),
+          currentDesktopJasmineEnvironment(),
+          browser.capabilities['furn:features'],
+          browser.capabilities['furn:inputMode'],
+        );
       }
       if ((await browser.getWindowHandles()).length === 0) throw new Error('Native application did not expose a window.');
       if (readiness?.testId) {

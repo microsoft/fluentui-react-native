@@ -397,6 +397,9 @@ export class DesktopRunReporter {
         this.logger.log(
           `${prefix} ${event.payload.status.toUpperCase()} ${event.payload.title}${event.payload.reason ? `: ${event.payload.reason}` : ''}`,
         );
+        // Reported, never failed: a declaration may cover a path this attempt did not take.
+        if (event.payload.input?.unused)
+          this.logger.log(`${prefix} declared input this attempt did not deliver: ${event.payload.input.unused.join(', ')}`);
         if (failure && firstFailure) this.logger.error(`${prefix} ${errorDiagnostic(failure.error)}`);
         break;
       case 'artifact':

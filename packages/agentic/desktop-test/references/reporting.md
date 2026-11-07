@@ -78,9 +78,16 @@ holds every selected test to its declared outcome. `run.json` carries the lane a
 - `masking` (accessible only): `host-masked` when this command started the host
   with keyboard, physical click, and wheel disabled, or `verified-masked` when it
   attached to a host and verified that mask before running anything.
-- `policyEnforced`: always `false`. The report records what was requested and how
-  the host was masked; it never claims what input a test delivered, so a physical
-  lane is labelled a pilot.
+- `policyEnforced`: `true` when each worker session confirms its requested
+  `furn:inputMode`; older reports may record `false`. The session refuses input
+  outside the lane before dispatch. `masking` is an additional host-level
+  safeguard, not the policy enforcement mechanism.
+
+Each executed test attempt may include `input` in `run.json`: `receipts` counts
+the mechanisms the session delivered, `undeclared` lists mechanisms the case
+did not declare and therefore failed on, and `unused` lists declared input
+requirements not exercised. These receipts describe deliveries, not whether an
+application changed state or whether a platform/lane is qualified.
 
 Tests that a lane, a `platforms` list, or a `scope` leaves out are not tests, so
 they are never reported as skipped. A producer announces them in `selection`
@@ -105,12 +112,12 @@ A lane run promised to execute its whole selection, so its verdict is stricter:
 its existing verdict.
 
 The plain and GitHub summaries show the lane and exclusions on one line, such as
-`Selection: input accessible (host-masked) from --input; excluded 4 by platform, 0 by scope, 12 by input`.
+`Selection: input accessible (policy-enforced, host-masked) from --input; excluded 4 by platform, 0 by scope, 12 by input`.
 The JUnit file records the lane as the properties `desktop.input`,
 `desktop.input.label`, and `desktop.input.source`, the exclusions as
 `desktop.excluded.platform`, `desktop.excluded.scope`, and `desktop.excluded.input`,
-and `desktop.declaredUnsupported` and `desktop.quarantined` when present. The label
-is `accessible (host-masked)`, `accessible (verified-masked)`, or `physical pilot`.
+and `desktop.declaredUnsupported` and `desktop.quarantined` when present. The label includes `policy-enforced` when the session confirmed that mode;
+`physical pilot` still does not claim qualification.
 
 A delegated command, which inherits its parent's collector, sends its exclusions to
 the parent but not its lane, so the parent's `run.json` has no `lane`. The command

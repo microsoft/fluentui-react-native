@@ -25,13 +25,16 @@ export function requestedDesktopInputLane(request: { flag?: string; environment?
 }
 
 /**
- * How an accessible lane was masked. `host-masked` means this command started the host with keyboard, physical click and
- * wheel disabled. `verified-masked` means it attached to a host and checked the mask before running anything.
+ * The lane a run holds its tests to. Every runner verifies that each session confirmed the lane's `furn:inputMode` and
+ * stops otherwise, so a lane is always policy-enforced. Pass `host-masked` when this command also started the host with
+ * keyboard, physical click and wheel disabled for an accessible lane.
  */
 export function createDesktopInputLane(
   input: DesktopInputLaneName,
   source: DesktopInputLaneSource,
-  masking: 'host-masked' | 'verified-masked' = 'host-masked',
+  masking?: 'host-masked',
 ): DesktopInputLaneReport {
-  return input === 'physical' ? { input, source, policyEnforced: false } : { input, source, masking, policyEnforced: false };
+  return input === 'physical'
+    ? { input, source, policyEnforced: true }
+    : { input, source, ...(masking ? { masking } : {}), policyEnforced: true };
 }

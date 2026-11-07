@@ -1,13 +1,18 @@
 import {
+  compareDesktopInputReceipts,
   decideDesktopCase,
+  describeUndeclaredDesktopInput,
   mergeDesktopCaseOptions,
+  resolveDesktopClickMode,
+  subtractDesktopInputReceipts,
   validateDesktopCaseOptions,
   validateDesktopGroupOptions,
 } from '@fluentui-react-native/desktop-driver/authoring';
-import type { DesktopCaseOptions, ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopCaseOptions, DesktopInputReceipts, ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 import { desktopSpecIdentifier } from './registry.js';
 import type { DesktopJasmineRegistry, DesktopSpecEntry } from './registry.js';
 
+/** WDIO calls a spec body without Jasmine's `done`, so a body finishes by returning, or by settling the promise it returns. */
 export type DesktopSpecBody = (done: (error?: unknown) => void) => unknown;
 export type DesktopGroupBody = (this: unknown) => void;
 /** A group scopes the cases inside it. A gap describes one case, so a group cannot declare one. */
@@ -20,13 +25,21 @@ export type DesktopJasmineApi = {
   xit(name: string): unknown;
 };
 
+/** Reads the receipts of the session the specs drive, or nothing when the session cannot report them. */
+export type DesktopInputReader = () => Promise<DesktopInputReceipts | undefined>;
+
+type RunEntry = Extract<DesktopSpecEntry, { kind: 'run' }>;
+
 /**
  * Declares tests with their input modality and the places they run, and registers them with Jasmine.
  *
  * `desktopIt` and `desktopDescribe` never throw for a bad declaration: Jasmine only warns when a spec file fails to load,
  * so a throw would silently drop every test after it. A bad declaration becomes a failing spec that reports the problem.
+ *
+ * With `readInput`, each executed body is attributed: the input its session delivered while the body ran is compared with
+ * the declaration, and a mechanism nothing declares fails the test.
  */
-export function createDesktopJasmine(api: DesktopJasmineApi, registry: DesktopJasmineRegistry) {
+export function createDesktopJasmine(api: DesktopJasmineApi, registry: DesktopJasmineRegistry, readInput?: DesktopInputReader) {
   function record(spec: unknown, name: string, entry: DesktopSpecEntry): void {
     const identifier = desktopSpecIdentifier(spec as { description?: unknown; id?: unknown } | undefined);
     if (identifier === undefined) {
@@ -44,6 +57,35 @@ export function createDesktopJasmine(api: DesktopJasmineApi, registry: DesktopJa
       name,
       { kind: 'invalid' },
     );
+  }
+
+  function attributed(body: DesktopSpecBody, entry: RunEntry, read: DesktopInputReader): DesktopSpecBody {
+    return async function (this: unknown, ...args: unknown[]) {
+      delete entry.input;
+      const before = await read();
+      if (!before) return body.apply(this, args as Parameters<DesktopSpecBody>);
+      let failure: { error: unknown } | undefined;
+      try {
+        await body.apply(this, args as Parameters<DesktopSpecBody>);
+      } catch (error) {
+        failure = { error };
+      }
+      try {
+        const after = await read();
+        if (after) {
+          const receipts = subtractDesktopInputReceipts(after, before);
+          // The session's click mode is the lane's, so a click the host chose is judged the way it was delivered.
+          const clickMode = resolveDesktopClickMode(undefined, 'auto', registry.selection?.lane);
+          const { undeclared, unused } = compareDesktopInputReceipts(entry.descriptor, receipts, clickMode);
+          entry.input = { receipts, ...(undeclared.length ? { undeclared } : {}), ...(!failure && unused.length ? { unused } : {}) };
+        }
+      } catch (error) {
+        // A failed test keeps its own error; the receipts were only evidence for it.
+        if (!failure) throw error;
+      }
+      if (failure) throw failure.error;
+      if (entry.input?.undeclared) throw new Error(describeUndeclaredDesktopInput(entry.input.undeclared));
+    };
   }
 
   function desktopIt(name: string, optionsOrBody: DesktopCaseOptions | DesktopSpecBody, maybeBody?: DesktopSpecBody): void {
@@ -64,7 +106,8 @@ export function createDesktopJasmine(api: DesktopJasmineApi, registry: DesktopJa
       return;
     }
     if (decision.kind === 'run') {
-      record(api.it(name, body), name, { kind: 'run', descriptor });
+      const entry: RunEntry = { kind: 'run', descriptor };
+      record(api.it(name, readInput ? attributed(body, entry, readInput) : body), name, entry);
       return;
     }
     // A placeholder keeps the spec out of Jasmine's hooks and body without reporting it as a skipped test.

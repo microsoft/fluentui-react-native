@@ -1,9 +1,7 @@
-import { EventEmitter } from 'node:events';
-import { PassThrough } from 'node:stream';
-
 import type { NativeObserveRequest } from '../../host/types';
-import type { NativeDriverArtifact, NativeHostJsonMessage } from '../../native/types';
-import { encodeJsonFrame, NativeFrameDecoder } from './framing';
+import type { NativeDriverArtifact } from '../../native/types';
+import { scriptNativeHelper } from '../../testing/scriptedNativeHelper';
+import type { ScriptedNativeRequest, ScriptedNativeSend } from '../../testing/scriptedNativeHelper';
 import { NativeDesktopHost } from './NativeDesktopHost';
 
 const mockSpawn = jest.fn();
@@ -42,62 +40,9 @@ const sample = {
   unsupportedFacts: [],
 };
 
-class FakeChild extends EventEmitter {
-  readonly stdin = new PassThrough();
-  readonly stdout = new PassThrough();
-  readonly stderr = new PassThrough();
-  exitCode: number | null = null;
-  signalCode: NodeJS.Signals | null = null;
-
-  kill(): boolean {
-    this.finish();
-    return true;
-  }
-
-  finish(): void {
-    this.exitCode = 0;
-    setImmediate(() => {
-      this.emit('exit', 0, null);
-      this.emit('close', 0, null);
-    });
-  }
-}
-
-type Send = (message: NativeHostJsonMessage) => void;
-
 /** A host whose helper answers each request through `handler`; the helper acknowledges `dispose` and exits. */
-function createHost(handler: (message: Extract<NativeHostJsonMessage, { type: 'request' }>, send: Send) => void) {
-  const child = new FakeChild();
-  const decoder = new NativeFrameDecoder();
-  const received: Extract<NativeHostJsonMessage, { type: 'request' }>[] = [];
-  const send: Send = (message) => void child.stdout.write(encodeJsonFrame(message));
-  child.stdin.on('data', (chunk: Buffer) => decoder.write(chunk));
-  decoder.on('json', (message) => {
-    if (message.type !== 'request') {
-      return;
-    }
-    if (message.command === 'dispose') {
-      send({ id: message.id, result: {}, type: 'response' });
-      child.finish();
-      return;
-    }
-    received.push(message);
-    handler(message, send);
-  });
-  mockSpawn.mockImplementationOnce(() => {
-    setImmediate(() =>
-      send({
-        architecture: 'arm64',
-        buildId: 'build',
-        features: ['boundedObservation'],
-        protocol: { major: 1, minor: 0 },
-        provider: 'macos',
-        sourceDigest: 'source',
-        type: 'hello',
-      }),
-    );
-    return child;
-  });
+function createHost(handler: (message: ScriptedNativeRequest, send: ScriptedNativeSend) => void) {
+  const received = scriptNativeHelper(mockSpawn, handler, ['boundedObservation']);
   return { host: new NativeDesktopHost({ application: { windowTitle: 'Test App' }, artifact, endpoint: 'macos' }), received };
 }
 

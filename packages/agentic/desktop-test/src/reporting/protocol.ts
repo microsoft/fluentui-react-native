@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto';
+import { desktopInputMechanisms, desktopRequirements, validateDesktopInputReceipts } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopInputMechanism, DesktopInputReceipts, DesktopRequirement } from '@fluentui-react-native/desktop-driver/authoring';
 
 export type FailureKind = 'test' | 'infrastructure' | 'cleanup' | 'evidence' | 'reporting';
 export type ReportError = { name: string; message: string; stack?: string; cause?: ReportError; errors?: ReportError[] };
@@ -21,6 +23,15 @@ export const testGaps: readonly TestGap[] = ['unsupported', 'quarantine'];
 /** Cases a producer removed from its selection before any session existed, by the reason they were removed. */
 export type SelectionExclusions = { platform: number; scope: number; input: number };
 export const selectionExclusionReasons: readonly (keyof SelectionExclusions)[] = ['platform', 'scope', 'input'];
+/**
+ * The input one test attempt delivered, read from its session's receipts, and how it compares with the declaration.
+ * `undeclared` mechanisms failed the attempt; `unused` declarations are reported only.
+ */
+export type TestInputReport = {
+  receipts: DesktopInputReceipts;
+  undeclared?: DesktopInputMechanism[];
+  unused?: DesktopRequirement[];
+};
 export type EventContext = {
   endpoint?: 'macos' | 'windows' | 'win32';
   renderer?: 'fabric' | 'paper';
@@ -50,6 +61,7 @@ export type EventData =
         durationMs: number;
         reason?: string;
         gap?: TestGap;
+        input?: TestInputReport;
         failure?: ReportFailure;
       };
     }
@@ -82,7 +94,7 @@ const payloadFields = {
   diagnostic: ['level', 'message', 'failure'],
   output: ['stream', 'text'],
   'test-start': ['testId', 'title', 'attempt'],
-  'test-result': ['testId', 'title', 'attempt', 'status', 'durationMs', 'reason', 'gap', 'failure'],
+  'test-result': ['testId', 'title', 'attempt', 'status', 'durationMs', 'reason', 'gap', 'input', 'failure'],
   selection: ['excluded', 'key'],
   artifact: ['path', 'description'],
   'producer-finished': ['status'],
@@ -191,6 +203,11 @@ export function validateDesktopEvent(value: unknown): asserts value is DesktopEv
           member(payload.gap, testGaps);
           if (payload.status !== 'unsupported') throw new TypeError('A declared gap is only valid on an unsupported test result.');
         }
+        if (payload.input !== undefined) {
+          validateTestInputReport(payload.input);
+          if (payload.input.undeclared?.length && payload.status !== 'failed')
+            throw new TypeError('A test that delivered undeclared input must fail.');
+        }
         if (payload.failure !== undefined) validateFailure(payload.failure);
       }
       break;
@@ -266,6 +283,22 @@ function validateFailure(value: unknown): asserts value is ReportFailure {
     }
   };
   checkError(failure.error, 0);
+}
+
+/** Checks the input an attempt reported, in an event or a persisted run, so a malformed one is never shown as evidence. */
+export function validateTestInputReport(value: unknown): asserts value is TestInputReport {
+  const input = record(value, 'input');
+  exactKeys(input, ['receipts', 'undeclared', 'unused']);
+  validateDesktopInputReceipts(input.receipts, 'input.receipts');
+  for (const [field, values] of [
+    ['undeclared', desktopInputMechanisms],
+    ['unused', desktopRequirements],
+  ] as const) {
+    const list = input[field];
+    if (list === undefined) continue;
+    if (!Array.isArray(list) || list.length === 0) throw new TypeError(`input.${field} must be a nonempty array.`);
+    for (const item of list) member(item, values);
+  }
 }
 
 function record(value: unknown, label: string): Record<string, unknown> {

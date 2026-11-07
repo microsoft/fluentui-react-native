@@ -18,7 +18,13 @@ declare namespace storyTests {
   function compileWdioTest(callback: Callback['callback'], sourceFile: string, source: string): string;
   function rejectDirectInput(
     callback: Callback['callback'],
-    descriptor: { name?: string; input: 'accessible' | 'physical' | 'both'; inputSource: 'declared' | 'derived' },
+    descriptor: {
+      name?: string;
+      input: 'accessible' | 'physical' | 'both';
+      inputSource: 'declared' | 'derived';
+      /** The story file, so helpers imported from relative modules are followed. */
+      sourceFile?: string;
+    },
   ): void;
 }
 

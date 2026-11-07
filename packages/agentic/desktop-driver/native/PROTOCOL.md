@@ -283,6 +283,39 @@ one input turn and refuses a display name the element does not publish
 exactly once, so a key never reaches a different action than the one the
 agent named.
 
+### Clear mechanisms
+
+The mutating `clear` command takes `{ "elementId": "<id>" }`. Helpers that
+advertise `strictClear` in `hello.features` and in the `features` map of the
+`probe` result also accept an optional `mechanism` of `"semantic"` or
+`"keyboard"`, and answer every successful clear with
+`{ "mechanism": "semantic" | "keyboard" }`, naming the mechanism that cleared
+the element:
+
+- Without `mechanism`, the helper writes an empty value through the platform
+  accessibility value (macOS `AXValue`, the Windows UI Automation Value
+  pattern) and, when the element has no writable value or the write is
+  refused, falls back to focusing the element and pressing select-all and
+  Delete.
+- `semantic` uses only the value write and never falls back to the keyboard.
+  An element without a writable value fails `element-not-interactable` with
+  effect `none` before anything is dispatched, and a broken element is
+  `stale-element`. A write that was dispatched and failed settles as any other
+  mutation does: a refusal that proves the write never acted is `none`, any
+  other failure is `unknown`, and a write that never settles is
+  `mutation-indeterminate`.
+- `keyboard` skips the value write and clears only with the keyboard, behind
+  the same input authority, session, focus, and physical input lock checks as
+  the fallback. A check that refuses, such as `input-unavailable`, dispatches
+  nothing and is `none`.
+
+Any other `mechanism`, including one that is not a string, fails
+`invalid-params` with effect `none`. Node never sends `mechanism` unless the
+feature is negotiated, and treats a result without a recognized `mechanism`,
+such as the `null` an older helper returns, as not saying which mechanism
+cleared. The parameter, result, and feature are additive and do not change the
+wire version.
+
 ### Bounded observation
 
 Helpers that advertise `boundedObservation` in `hello.features` and in the

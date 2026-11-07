@@ -11,6 +11,9 @@ export type Rect = {
 
 export type SupportedValue<T> = { supported: true; value: T } | { supported: false; reason: string };
 
+/** How a host clears a value: by setting it through the accessibility tree, or by selecting and deleting with keys. */
+export type DesktopClearMechanism = 'keyboard' | 'semantic';
+
 export type DesktopHostFeatures = {
   /** The host lists an element's accessibility actions, including authored custom actions such as `Select` and `Toggle`. */
   accessibilityActions?: boolean;
@@ -28,6 +31,11 @@ export type DesktopHostFeatures = {
   physicalClick: boolean;
   screenshot: boolean;
   setWindowRect: boolean;
+  /**
+   * The host clears with the mechanism it is asked for: `semantic` only sets the value through the accessibility tree,
+   * `keyboard` only selects and deletes with synthesized keys, and either fails without falling back to the other.
+   */
+  strictClear?: boolean;
   wheel: boolean;
   /** The host records a native window-event timeline for diagnostics. */
   windowEvents?: boolean;
@@ -277,7 +285,12 @@ export interface DesktopHost {
   hitTest(windowId: string, x: number, y: number, signal?: AbortSignal): Promise<NativeElementSnapshot | null>;
 
   click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void>;
-  clear(elementId: string, signal?: AbortSignal): Promise<void>;
+  /**
+   * Clears an element's value. Without a mechanism the host chooses, preferring a semantic clear; with one, a host that
+   * advertises `features.strictClear` uses only that mechanism. Resolves with the mechanism used, or nothing when the host
+   * cannot say, which counts as possible keyboard input.
+   */
+  clear(elementId: string, signal?: AbortSignal, mechanism?: DesktopClearMechanism): Promise<DesktopClearMechanism | void>;
   sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void>;
   performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void>;
   releaseActions(signal?: AbortSignal): Promise<void>;

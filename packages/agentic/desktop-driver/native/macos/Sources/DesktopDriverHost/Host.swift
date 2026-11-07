@@ -31,6 +31,7 @@ func createHello() -> JSONObject {
       "releaseActions",
       "setWindowRect",
       "source",
+      "strictClear",
       "tree",
       "wheel",
       "windowEvents",

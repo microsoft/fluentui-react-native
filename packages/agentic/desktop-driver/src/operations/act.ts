@@ -27,8 +27,8 @@ export type ActionName = (typeof actionNames)[number];
 /**
  * How the provider carried the action out. `physical-pointer` is a synthesized click at a hit-tested point,
  * `accessibility` is an accessibility action (the element's default one for `activate`, the named one for `perform`),
- * `keyboard` is synthesized key input to the focused element, and `provider` means the provider chose and did not say,
- * as `clear` does when it can set a value directly.
+ * `keyboard` is synthesized key input to the focused element, and `provider` means the provider chose and did not say.
+ * A `clear` reports `accessibility` when it set the value directly and `keyboard` when it typed, when the provider says.
  */
 export const actionMechanisms = ['physical-pointer', 'accessibility', 'keyboard', 'provider'] as const;
 export type ActionMechanism = (typeof actionMechanisms)[number];
@@ -333,25 +333,34 @@ async function performNamedAction(runtime: OperationRuntime, entry: ReferenceEnt
   );
 }
 
-/** Dispatches one action on a revalidated element. Runs inside the physical input turn. */
+/**
+ * Dispatches one action on a revalidated element. Runs inside the physical input turn. Resolves with the mechanism when
+ * the provider decided it, as it does for `clear`.
+ */
 export async function dispatchAction(
   runtime: OperationRuntime,
   options: { action: ActionName; name?: string; text?: string },
   entry: ReferenceEntry,
   snapshot: NativeElementSnapshot,
-): Promise<void> {
+): Promise<ActionMechanism | undefined> {
   const { host } = runtime;
   switch (options.action) {
     case 'click':
-      return physicalClick(runtime, entry, snapshot);
+      await physicalClick(runtime, entry, snapshot);
+      return undefined;
     case 'activate':
-      return runtime.mutate(`Activating reference ${entry.reference}`, (signal) => host.click(entry.nativeId, 'accessibility', signal));
+      await runtime.mutate(`Activating reference ${entry.reference}`, (signal) => host.click(entry.nativeId, 'accessibility', signal));
+      return undefined;
     case 'perform':
-      return performNamedAction(runtime, entry, options.name!);
+      await performNamedAction(runtime, entry, options.name!);
+      return undefined;
     case 'type':
-      return runtime.mutate(`Typing into reference ${entry.reference}`, (signal) => host.sendKeys(entry.nativeId, options.text!, signal));
-    case 'clear':
-      return runtime.mutate(`Clearing reference ${entry.reference}`, (signal) => host.clear(entry.nativeId, signal));
+      await runtime.mutate(`Typing into reference ${entry.reference}`, (signal) => host.sendKeys(entry.nativeId, options.text!, signal));
+      return undefined;
+    case 'clear': {
+      const used = await runtime.mutate(`Clearing reference ${entry.reference}`, (signal) => host.clear(entry.nativeId, signal));
+      return used === 'semantic' ? 'accessibility' : used;
+    }
   }
 }
 
@@ -363,6 +372,7 @@ export async function performAction(runtime: OperationRuntime, input: ActOptions
   assertNotQuarantined(runtime);
   assertActionSupported(runtime, input.action);
   const { entry, proof } = input.find ? await proveSelector(runtime, input.find) : resolveProven(runtime, input.ref!, input.sample!);
+  let delivered: ActionMechanism | undefined;
   try {
     await runtime.input(async () => {
       if (runtime.signal.aborted) {
@@ -373,7 +383,7 @@ export async function performAction(runtime: OperationRuntime, input: ActOptions
       }
       const snapshot = await revalidate(runtime, entry, proof);
       requireInteractable(runtime, input.action, input.ref, snapshot);
-      await dispatchAction(runtime, input, entry, snapshot);
+      delivered = await dispatchAction(runtime, input, entry, snapshot);
     });
   } catch (error) {
     // Every primary mutation settles through `runtime.mutate`, which reports what it did; a failure without a report
@@ -384,7 +394,7 @@ export async function performAction(runtime: OperationRuntime, input: ActOptions
   return {
     action: input.action,
     disposition: 'applied',
-    mechanism: mechanismOf[input.action],
+    mechanism: delivered ?? mechanismOf[input.action],
     ref: entry.reference,
     sample: proof.sample,
     ...(warnings.length > 0 ? { warnings } : {}),

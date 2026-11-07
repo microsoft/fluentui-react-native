@@ -39,11 +39,20 @@ Supported extension capabilities:
 - `furn:renderer`;
 - `furn:launchMode`: `launch` or `attach`;
 - `furn:clickMode`: `physical`, `accessibility`, or `auto`;
+- `furn:inputMode`: `accessible`, `physical`, or `compatibility` (the default);
 - returned `furn:features`.
 
 Capability matching implements W3C `alwaysMatch` and ordered `firstMatch`,
 rejects duplicate merge keys, and returns `session not created` when no
 registered target can satisfy a candidate.
+
+`furn:inputMode` is fixed for the session and returned in its capabilities.
+`accessible` permits accessibility clicks, named accessibility actions, and
+semantic clears, and rejects keyboard, pointer, and wheel input before
+dispatch. `physical` permits physical and accessibility input, but clears only
+with keyboard input. `compatibility` preserves the previous behavior and leaves
+mechanism choice to the host. A strict mode pins `furn:clickMode`; a conflicting
+explicit click mode prevents session creation.
 
 ## W3C routes
 
@@ -63,6 +72,10 @@ Implemented standard behavior:
 
 Implemented `furn` extensions:
 
+- `GET /session/{id}/furn/input`, returning the fixed input mode and counts of
+  input deliveries by mechanism;
+- `POST /session/{id}/element/{element-id}/furn/accessibility-action`, invoking
+  one uniquely named action published by that element;
 - `GET /session/{id}/furn/manifest`;
 - `GET|POST /session/{id}/furn/story`;
 - `POST /session/{id}/furn/story/reset`;
@@ -150,7 +163,9 @@ reads `AXUIElementCopyActionNames` and lists an authored custom action, such as
 `Toggle` or `Select`, by name without any provider handle, alongside any standard
 actions the element publishes. An element that publishes none returns `[]`; hosts
 without the feature, including Windows and Win32, return `unsupported operation`
-rather than `[]`. The property only lists actions; it does not invoke them.
+rather than `[]`. The property only lists actions; it does not invoke them. The named-action
+extension invokes one action by its unique published name; its request is
+serialized with input and obeys the session's `furn:inputMode`.
 What an element publishes depends on the renderer: React Native macOS Fabric
 publishes every declared `accessibilityActions` entry by `name`, while Paper
 publishes only entries that declare a `label` and lists them by that label

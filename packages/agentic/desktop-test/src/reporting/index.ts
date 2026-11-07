@@ -13,6 +13,7 @@ export type {
   ReportFailure,
   SelectionExclusions,
   TestGap,
+  TestInputReport,
   TestStatus,
 } from './protocol.js';
 export type { DesktopEventRecord } from './structured.js';
@@ -31,6 +32,7 @@ export {
   summarizeDesktopRun,
 } from './results.js';
 export type {
+  DesktopInputLaneMasking,
   DesktopInputLaneReport,
   DesktopInputLaneSource,
   DesktopRunResult,

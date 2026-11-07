@@ -70,6 +70,8 @@ describe('click mode and requirement preflight', () => {
       'accessibility',
     );
     expect(resolveDesktopClickMode(validateDesktopCaseOptions({ input: 'accessible' }), 'physical', undefined)).toBe('accessibility');
+    const mixed = validateDesktopCaseOptions({ input: 'physical', requires: ['physical-click', 'accessibility-click'] });
+    expect(resolveDesktopClickMode(mixed, 'auto', undefined)).toBe('auto');
     // A physical case must not pin physical click, or a host that masks it fails the session instead of reporting unsupported.
     expect(resolveDesktopClickMode(validateDesktopCaseOptions({ requires: ['physical-click'] }), 'auto', undefined)).toBe('auto');
     expect(resolveDesktopClickMode(validateDesktopCaseOptions({ requires: ['keyboard'] }), 'auto', undefined)).toBe('auto');

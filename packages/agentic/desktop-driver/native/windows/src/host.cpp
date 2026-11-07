@@ -51,7 +51,7 @@ json::Value CreateHello() {
   for (const char* feature : {"accessibilityActions", "accessibilityClick", "performAccessibilityAction",
                               "activeElement", "boundedObservation", "capture", "elementCapture",
                               "find", "hitTest", "keyboard", "launch", "attach", "pointer", "probe", "releaseActions",
-                              "setWindowRect", "source", "tree", "wheel", "windowEvents"}) {
+                              "setWindowRect", "source", "strictClear", "tree", "wheel", "windowEvents"}) {
     features.Append(json::Value::String(std::string(feature)));
   }
   hello.Set("features", features);

@@ -103,7 +103,13 @@ class Automation {
   void AccessibilityClick(const std::string& elementId, const CancellationToken& token);
   json::Value AccessibilityActions(const std::string& elementId, const CancellationToken& token);
   void PerformAccessibilityAction(const std::string& elementId, const std::string& key, const CancellationToken& token);
-  bool TryClearValue(const std::string& elementId);
+  // Writes an empty value through the Value pattern and reports whether that
+  // cleared the element. Without `strict`, an element without a writable value
+  // or a refused write returns false so the caller can clear with the
+  // keyboard. With it, the method never returns false: such an element fails
+  // as not interactable before anything is dispatched, and a failed write
+  // fails with the effect the ledger recorded.
+  bool TryClearValue(const std::string& elementId, bool strict = false);
   bool HasKeyboardFocus(const std::string& elementId);
 
   void ForgetWindow(const std::string& windowId);

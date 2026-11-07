@@ -41,6 +41,19 @@ std::string RequireString(const json::Value& params, std::string_view key) {
   return value->AsString();
 }
 
+// The clear mechanism a request names, or empty when the helper may choose.
+// Anything else is refused before dispatch.
+std::string RequireClearMechanism(const json::Value& params) {
+  const json::Value* mechanism = params.Find("mechanism");
+  if (mechanism == nullptr) {
+    return {};
+  }
+  if (!mechanism->IsString() || (mechanism->AsString() != "semantic" && mechanism->AsString() != "keyboard")) {
+    Fail(kErrorInvalidParams, "The clear mechanism must be \"semantic\" or \"keyboard\".");
+  }
+  return mechanism->AsString();
+}
+
 int ActionButton(const json::Value& action) {
   const json::Value* button = action.Find("button");
   if (button == nullptr || !button->IsNumber()) {
@@ -274,6 +287,7 @@ json::Value Driver::ProbeResult(const json::Value& params) {
   features.Set("physicalClick", json::Value::Bool(physical));
   features.Set("screenshot", json::Value::Bool(screenshot));
   features.Set("setWindowRect", json::Value::Bool(true));
+  features.Set("strictClear", json::Value::Bool(true));
   features.Set("wheel", json::Value::Bool(physical));
   features.Set("windowEvents", json::Value::Bool(true));
 
@@ -769,9 +783,14 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
   }
   if (command == "clear") {
     const std::string elementId = RequireString(params, "elementId");
+    const std::string mechanism = RequireClearMechanism(params);
     RequireLiveElement(elementId, token);
     const MutationScope scope(LeaseIdForElement(elementId));
-    if (!automation_.TryClearValue(elementId)) {
+    const bool semantic = mechanism != "keyboard" && automation_.TryClearValue(elementId, mechanism == "semantic");
+    if (!semantic && mechanism == "semantic") {
+      Fail(kErrorInternal, "The semantic clear ended without clearing or failing.");
+    }
+    if (!semantic) {
       RunPhysical(token, [&]() {
         const HWND window = FocusForKeyboard(elementId, token);
         const KeyboardGuardScope guard(input_, KeyboardGuardFor(window));
@@ -779,7 +798,8 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
         input_.PressChord({VK_DELETE}, token);
       });
     }
-    result.result = json::Value::Null();
+    result.result = json::Value::Object();
+    result.result.Set("mechanism", json::Value::String(std::string(semantic ? "semantic" : "keyboard")));
     return result;
   }
   if (command == "sendKeys") {

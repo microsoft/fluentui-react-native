@@ -180,15 +180,19 @@ non-default `--click-mode`. `test --list` shows, for each story, the cases the
 lane runs with their resolved input, requirements, platforms, and scope, and the
 cases it excludes with the reason; add `--input` to preview a lane.
 
-The accessible lane holds a case to accessible input by masking the host, not by
-trusting the case: the driver reports keyboard, physical click, and wheel as
-unavailable, so a case that tries them fails instead of silently moving the
-pointer. `smoke` and `driver --input accessible` start the driver already
-masked. `test --input accessible` attaches to a running driver and verifies the
-mask from the session's reported features before it runs anything. A driver that
-does not report all three as unavailable stops the run as an infrastructure
-failure rather than running unmasked, so attach the lane to a driver started
-with `driver --input accessible`.
+Each case session confirms its `furn:inputMode` before the callback runs. The
+accessible mode refuses keyboard, pointer, and wheel input before dispatch; the
+physical mode pins clicks to the pointer while allowing accessibility actions.
+`smoke` and `driver --input accessible` also mask the host as defense in depth,
+but `test --input accessible` can safely attach to an unmasked driver because
+the session policy is enforced independently. Before teardown, the runner reads
+the session's delivery receipts and fails a case if it delivered a mechanism
+not covered by its `requires`; unused requirements are reported, not failed.
+
+In an accessible session, `browser.$(...).setValue(...)` is rejected before
+WDIO's client-side clear step, which could otherwise change the field before
+keyboard input is refused. `clearValue()` remains available and uses a semantic
+clear.
 
 A lane that executes no case is not a passing run, and neither is a lane run
 that leaves a case unsupported or skipped without a declared gap. Excluded cases

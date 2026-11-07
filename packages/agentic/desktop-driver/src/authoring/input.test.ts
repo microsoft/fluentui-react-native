@@ -1,14 +1,19 @@
 import {
   accessibleLaneMaskedFeatures,
+  compareDesktopInputReceipts,
+  describeUndeclaredDesktopInput,
+  desktopInputModeAllows,
   matchesDesktopPlatforms,
   matchesDesktopScope,
   mergeDesktopCaseOptions,
   resolveDesktopInput,
   resolveDesktopScopeDomains,
   resolveDesktopScopeValues,
+  subtractDesktopInputReceipts,
   unmaskedAccessibleFeatures,
   validateDesktopCaseOptions,
   validateDesktopGroupOptions,
+  validateDesktopSessionInput,
 } from './input.js';
 
 describe('accessible lane masks', () => {
@@ -98,8 +103,15 @@ describe('desktop input descriptors', () => {
 
   test('rejects mixed transports and explicit widening', () => {
     expect(() => resolveDesktopInput(undefined, ['keyboard', 'accessibility-click'])).toThrow('split the case');
+    expect(() => resolveDesktopInput('both', ['physical-click', 'perform-accessibility-action'])).toThrow('split the case');
     expect(() => resolveDesktopInput('both', ['physical-click'])).toThrow('cannot widen');
     expect(() => resolveDesktopInput('physical', ['accessibility-click'])).toThrow('cannot widen');
+  });
+
+  test('runs a case that needs both transports only in a declared physical lane', () => {
+    expect(resolveDesktopInput('physical', ['physical-click', 'perform-accessibility-action'])).toBe('physical');
+    expect(resolveDesktopInput('physical', ['keyboard', 'accessibility-click'])).toBe('physical');
+    expect(resolveDesktopInput(undefined, ['perform-accessibility-action'])).toBe('accessible');
   });
 
   test('validates platform filters and negation', () => {
@@ -151,5 +163,63 @@ describe('desktop scope domains', () => {
     expect(() => matchesDesktopScope({ flavor: ['stable'] }, resolveDesktopScopeValues({}, domains), domains)).toThrow('not supplied');
     const inherited: Record<string, [string, ...string[]]> = JSON.parse('{"constructor":["a"]}');
     expect(() => matchesDesktopScope(inherited, supplied, domains)).toThrow('unknown scope key');
+  });
+});
+
+describe('desktop input receipts', () => {
+  const kase = (options: object) => validateDesktopCaseOptions(options);
+
+  test('fails a mechanism nothing declared and reports a declared transport left unused', () => {
+    expect(compareDesktopInputReceipts(kase({ requires: ['click'] }), { 'accessibility-click': 2 })).toEqual({
+      undeclared: [],
+      unused: [],
+    });
+    expect(compareDesktopInputReceipts(kase({ requires: ['physical-click', 'keyboard'] }), { pointer: 1 })).toEqual({
+      undeclared: [],
+      unused: ['keyboard'],
+    });
+    expect(compareDesktopInputReceipts(kase({ requires: ['accessibility-click'] }), { 'physical-click': 1, 'semantic-clear': 1 })).toEqual({
+      undeclared: ['physical-click'],
+      unused: ['accessibility-click'],
+    });
+    expect(compareDesktopInputReceipts(undefined, { 'unattributed-clear': 1, wheel: 1 })).toEqual({
+      undeclared: ['unattributed-clear', 'wheel'],
+      unused: [],
+    });
+    expect(compareDesktopInputReceipts(kase({ requires: ['focus'] }), {})).toEqual({ undeclared: [], unused: [] });
+  });
+
+  test('lets any click declaration account for the transport an auto session chose', () => {
+    const physical = kase({ requires: ['accessibility-click', 'keyboard'], input: 'physical' });
+    expect(compareDesktopInputReceipts(physical, { 'physical-click': 1, keyboard: 1 }, 'auto')).toEqual({ undeclared: [], unused: [] });
+    expect(compareDesktopInputReceipts(physical, { 'physical-click': 1, keyboard: 1 }, 'physical')).toEqual({
+      undeclared: ['physical-click'],
+      unused: ['accessibility-click'],
+    });
+    // A pointer action is physical whatever the click mode, so only physical-click declares it.
+    expect(compareDesktopInputReceipts(kase({ requires: ['click'] }), { pointer: 1 }, 'auto').undeclared).toEqual(['pointer']);
+    expect(describeUndeclaredDesktopInput(['keyboard', 'accessibility-click'])).toBe(
+      'The test delivered input it does not declare: keyboard (declare keyboard), accessibility-click (declare accessibility-click or click).',
+    );
+  });
+
+  test('takes per-case deltas from a shared session and rejects malformed reports', () => {
+    expect(subtractDesktopInputReceipts({ keyboard: 3, 'physical-click': 1 }, { keyboard: 1, 'physical-click': 1 })).toEqual({
+      keyboard: 2,
+    });
+    expect(() => compareDesktopInputReceipts(undefined, { typing: 1 })).toThrow('unknown mechanism');
+    expect(() => compareDesktopInputReceipts(undefined, { keyboard: 0 })).toThrow('positive integer');
+    expect(validateDesktopSessionInput({ mode: 'accessible', receipts: {} })).toEqual({ mode: 'accessible', receipts: {} });
+    expect(() => validateDesktopSessionInput({ receipts: {} })).toThrow('mode');
+  });
+
+  test('lets each policy deliver only its own mechanisms', () => {
+    expect(desktopInputModeAllows('accessible', 'accessibility-action')).toBe(true);
+    expect(desktopInputModeAllows('accessible', 'semantic-clear')).toBe(true);
+    expect(desktopInputModeAllows('accessible', 'pointer')).toBe(false);
+    expect(desktopInputModeAllows('accessible', 'unattributed-clear')).toBe(false);
+    expect(desktopInputModeAllows('physical', 'accessibility-click')).toBe(true);
+    expect(desktopInputModeAllows('physical', 'semantic-clear')).toBe(false);
+    expect(desktopInputModeAllows('compatibility', 'unattributed-clear')).toBe(true);
   });
 });

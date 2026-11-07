@@ -2,7 +2,15 @@ import { Buffer } from 'node:buffer';
 import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 
-import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
+import type {
+  DesktopTarget,
+  DesktopTreeNode,
+  NativeAccessibilityAction,
+  NativeActionSequence,
+  NativeElementSnapshot,
+  NativeSelector,
+  Rect,
+} from '../host/types.js';
 import { DesktopAuthority, grantAllowsTarget } from '../authority/grants.js';
 import type { DesktopGrant } from '../authority/grants.js';
 import type { PrivateStorage } from '../authority/privateStorage.js';
@@ -15,6 +23,15 @@ import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
 import type { DesktopSession, ElementRecord, MutationOptions, RecoverTargetRequest, RecoverTargetResult } from './SessionManager.js';
+import {
+  actionMechanisms,
+  assertInputAllowed,
+  clickMechanism,
+  deliverClear,
+  deliverInput,
+  describeSessionInput,
+  strictClearMechanism,
+} from './sessionInput.js';
 import { SettlementJournal } from './settlementJournal.js';
 import type { ProbeApplication } from './settlementJournal.js';
 import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from './sessionOperations.js';
@@ -342,7 +359,14 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     const matched = await matchCapabilities(request.capabilities, visibleTargets(context, targets));
     try {
       const owner = context.grant ? { grantId: context.grant.id, label: context.grant.label } : undefined;
-      const session = await sessions.create(matched.target, matched.hostInfo, matched.clickMode, matched.launchMode, owner);
+      const session = await sessions.create(
+        matched.target,
+        matched.hostInfo,
+        matched.clickMode,
+        matched.launchMode,
+        owner,
+        matched.inputMode,
+      );
       return {
         sessionId: session.id,
         capabilities: createReturnedCapabilities(matched, matched.hostInfo, session.timeouts),
@@ -390,12 +414,16 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     if (method === 'POST') {
       const { actions, nextState } = parseActionSequences(requireObject(body, 'actions request').actions, session.inputState);
       const resolvedActions = await resolveActionOrigins(actions, session, sessions);
+      const mechanisms = actionMechanisms(resolvedActions);
+      for (const mechanism of mechanisms) {
+        assertInputAllowed(session, mechanism, 'Performing input actions');
+      }
       await sessions.runInputCommand(async () => {
         sessions.assertMutable(session);
         session.inputState = nextState;
         try {
           await mutationCommand(sessions, session, 'Performing input actions', (signal) =>
-            session.target.host.performActions(resolvedActions, signal),
+            deliverInput(session, mechanisms, () => session.target.host.performActions(resolvedActions, signal)),
           );
         } catch (error) {
           await mutationCommand(
@@ -433,6 +461,9 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     );
   }
   if (command[0] === 'furn') {
+    if (method === 'GET' && command[1] === 'input' && command.length === 2) {
+      return describeSessionInput(session);
+    }
     if (method === 'GET' && command[1] === 'tree' && command.length === 2) {
       const snapshots = await hostCommand(session, 'Reading the compact accessibility tree', (signal) =>
         session.target.host.tree(session.currentWindowId, signal),
@@ -729,6 +760,9 @@ async function handleElementCommand(
     if (!requireSupported(snapshot.enabled, 'enabled') || !requireSupported(snapshot.visible, 'visible')) {
       throw new WebDriverError('element not interactable', `Element "${record.id}" cannot be clicked.`);
     }
+    const mechanism = clickMechanism(session.clickMode);
+    // Checked before the window is activated, so a refused click changes nothing.
+    assertInputAllowed(session, mechanism, `Clicking element "${record.id}"`);
     await sessions.runInputCommand(async () => {
       if (session.clickMode !== 'accessibility') {
         await mutationCommand(sessions, session, `Activating window "${snapshot.windowId}"`, (signal) =>
@@ -749,14 +783,18 @@ async function handleElementCommand(
         }
       }
       await mutationCommand(sessions, session, `Clicking element "${record.id}"`, (signal) =>
-        session.target.host.click(record.nativeId, session.clickMode, signal),
+        deliverInput(session, [mechanism], () => session.target.host.click(record.nativeId, session.clickMode, signal)),
       );
     });
     return null;
   }
   if (method === 'POST' && operation[0] === 'clear') {
+    const description = `Clearing element "${record.id}"`;
+    const requested = strictClearMechanism(session, description);
     await sessions.runInputCommand(() =>
-      mutationCommand(sessions, session, `Clearing element "${record.id}"`, (signal) => session.target.host.clear(record.nativeId, signal)),
+      mutationCommand(sessions, session, description, (signal) =>
+        deliverClear(session, requested, description, (mechanism) => session.target.host.clear(record.nativeId, signal, mechanism)),
+      ),
     );
     return null;
   }
@@ -771,12 +809,16 @@ async function handleElementCommand(
     if (text === undefined) {
       throw invalidArgument('Send Keys requires a string "text" or string-array "value".');
     }
+    assertInputAllowed(session, 'keyboard', `Sending keys to element "${record.id}"`);
     await sessions.runInputCommand(() =>
       mutationCommand(sessions, session, `Sending keys to element "${record.id}"`, (signal) =>
-        session.target.host.sendKeys(record.nativeId, text, signal),
+        deliverInput(session, ['keyboard'], () => session.target.host.sendKeys(record.nativeId, text, signal)),
       ),
     );
     return null;
+  }
+  if (method === 'POST' && operation[0] === 'furn' && operation[1] === 'accessibility-action' && operation.length === 2) {
+    return performNamedAccessibilityAction(body, record, session, sessions);
   }
   if (method === 'GET' && operation[0] === 'screenshot') {
     const image = await hostCommand(session, `Capturing element "${record.id}"`, (signal) =>
@@ -786,6 +828,53 @@ async function handleElementCommand(
   }
 
   throw new WebDriverError('unknown command', `Unknown element command "${operation.join('/')}".`);
+}
+
+/**
+ * Performs the one accessibility action an element publishes under a name, such as a custom `Toggle`. The action is
+ * listed and performed in the same input turn, and a name the element publishes twice names neither action.
+ */
+async function performNamedAccessibilityAction(
+  body: unknown,
+  record: ElementRecord,
+  session: DesktopSession,
+  sessions: SessionManager,
+): Promise<null> {
+  const request = requireObject(body, 'accessibility action request');
+  if (typeof request.name !== 'string' || request.name.length === 0) {
+    throw invalidArgument('An accessibility action request requires a non-empty string "name".');
+  }
+  const name = request.name;
+  const host = session.target.host;
+  const list = host.listAccessibilityActions?.bind(host);
+  const perform = host.performAccessibilityAction?.bind(host);
+  if (!list || !perform || session.hostInfo.features.performAccessibilityAction !== true) {
+    throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not perform accessibility actions.`);
+  }
+  const description = `Performing an accessibility action on element "${record.id}"`;
+  assertInputAllowed(session, 'accessibility-action', description);
+  await sessions.runInputCommand(async () => {
+    const actions: NativeAccessibilityAction[] = await hostCommand(
+      session,
+      `Listing the accessibility actions of element "${record.id}"`,
+      (signal) => list(record.nativeId, signal),
+    );
+    const matches = actions.filter((action) => action.name === name);
+    if (matches.length !== 1) {
+      throw new WebDriverError(
+        'element not interactable',
+        matches.length === 0
+          ? `Element "${record.id}" publishes no accessibility action by that name.`
+          : `Element "${record.id}" publishes ${matches.length} accessibility actions by that name, so the name names none of them.`,
+        { reason: matches.length === 0 ? 'action-not-published' : 'action-not-unique' },
+      );
+    }
+    const [{ key }] = matches;
+    await mutationCommand(sessions, session, description, (signal) =>
+      deliverInput(session, ['accessibility-action'], () => perform(record.nativeId, key, signal)),
+    );
+  });
+  return null;
 }
 
 async function isElementOrDescendant(session: DesktopSession, targetNativeId: string, hit: NativeElementSnapshot): Promise<boolean> {

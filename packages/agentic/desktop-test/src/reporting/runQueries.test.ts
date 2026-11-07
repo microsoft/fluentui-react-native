@@ -333,7 +333,8 @@ describe('persisted desktop run queries', () => {
   });
 
   describe('input lane runs', () => {
-    const lane = { input: 'accessible', source: 'environment', masking: 'verified-masked', policyEnforced: false } as const;
+    const lane = { input: 'accessible', source: 'environment', policyEnforced: true } as const;
+    const receipts = { 'accessibility-click': 2 };
     let laneReporter: DesktopRunReporter;
     let laneClient: DesktopRunQueryClient;
 
@@ -348,7 +349,10 @@ describe('persisted desktop run queries', () => {
       service.registerRun({ runId: laneReporter.runId, root: laneReporter.root, expiresAt: Date.now() + 60_000 });
       laneClient = service.connect(service.issueGrant({ runIds: [laneReporter.runId], expiresAt: Date.now() + 60_000 }));
       laneReporter.emit({ kind: 'selection', payload: { excluded: { platform: 1, scope: 2, input: 3 } } });
-      laneReporter.emit({ kind: 'test-result', payload: { testId: 'ok', title: 'ok', attempt: 0, status: 'passed', durationMs: 1 } });
+      laneReporter.emit({
+        kind: 'test-result',
+        payload: { testId: 'ok', title: 'ok', attempt: 0, status: 'passed', durationMs: 1, input: { receipts, unused: ['keyboard'] } },
+      });
       laneReporter.emit({
         kind: 'test-result',
         payload: { testId: 'gap', title: 'gap', attempt: 0, status: 'unsupported', durationMs: 0, reason: 'Declared.', gap: 'quarantine' },
@@ -377,6 +381,8 @@ describe('persisted desktop run queries', () => {
           { title: 'gap', status: 'unsupported', gap: 'quarantine', message: 'Declared.' },
         ],
       });
+      const persisted = JSON.parse(fs.readFileSync(path.join(laneReporter.root, 'run.json'), 'utf8')) as DesktopRunResult;
+      expect(persisted.tests[0].attempts[0].input).toEqual({ receipts, unused: ['keyboard'] });
     });
 
     test('a declared gap edited out of the retained report no longer reads as a passing lane', async () => {
@@ -405,8 +411,23 @@ describe('persisted desktop run queries', () => {
     });
 
     test.each([
-      ['a lane that claims enforcement', (result: DesktopRunResult) => Object.assign(result, { lane: { ...lane, policyEnforced: true } })],
-      ['a physical lane with masking', (result: DesktopRunResult) => Object.assign(result, { lane: { ...lane, input: 'physical' } })],
+      [
+        'an accessible lane with neither masks nor enforcement',
+        (result: DesktopRunResult) => Object.assign(result, { lane: { ...lane, policyEnforced: false } }),
+      ],
+      [
+        'a physical lane with masking',
+        (result: DesktopRunResult) => Object.assign(result, { lane: { ...lane, input: 'physical', masking: 'host-masked' } }),
+      ],
+      [
+        'undeclared input on a passed attempt',
+        (result: DesktopRunResult) =>
+          Object.assign(result.tests[0].attempts[0], { input: { receipts, undeclared: ['accessibility-click'] } }),
+      ],
+      [
+        'an unknown input field',
+        (result: DesktopRunResult) => Object.assign(result.tests[0].attempts[0], { input: { receipts, extra: 1 } }),
+      ],
       [
         'a negative exclusion count',
         (result: DesktopRunResult) => Object.assign(result, { selection: { excluded: { platform: -1, scope: 0, input: 0 } } }),

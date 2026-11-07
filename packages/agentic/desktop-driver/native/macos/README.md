@@ -289,6 +289,17 @@ responsible process and an unlocked interactive Aqua session. Missing authority
 returns `input-unavailable`; the provider never substitutes unrelated
 accessibility activation and reports physical success.
 
+The helper advertises `strictClear`. `clear` writes an empty `AXValue` when
+`AXUIElementIsAttributeSettable` reports the value settable, and otherwise
+activates the application, focuses the element, and presses Command-A and
+Delete under the physical input lock. A request may name `mechanism`:
+`semantic` only writes `AXValue` and fails `element-not-interactable` with
+effect `none` when the value is not settable, and `keyboard` skips the write
+and needs the same physical input authority as the fallback. Every successful
+clear returns `{ "mechanism": "semantic" | "keyboard" }`. The `probe` feature
+is `true` even without Accessibility trust, because each mechanism reports its
+own refusal.
+
 A locked screen or a login session that is not the active console prevents
 applications from publishing complete accessibility windows and from receiving
 physical input. Launch, attach, window discovery, and new pointer, keyboard,

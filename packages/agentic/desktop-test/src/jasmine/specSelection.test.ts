@@ -70,7 +70,7 @@ describe('selectDesktopSpecs preflight', () => {
     desktopIt('needs click', { requires: ['physical-click'] }, body);
     desktopIt('needs nothing', body);
 
-    selectDesktopSpecs(registry, environment, { keyboard: false, physicalClick: true });
+    selectDesktopSpecs(registry, environment, { keyboard: false, physicalClick: true }, 'physical');
 
     expect([runs('needs keyboard'), runs('needs click'), runs('needs nothing')]).toEqual([false, true, true]);
     expect(registry.entries.get('needs keyboardspec0')).toMatchObject({ kind: 'run', missing: ['keyboard'] });
@@ -83,7 +83,7 @@ describe('selectDesktopSpecs preflight', () => {
     desktopIt('needs keyboard', { requires: ['keyboard'] }, body);
     desktopIt('kept', body);
 
-    selectDesktopSpecs(registry, environment, { keyboard: false });
+    selectDesktopSpecs(registry, environment, { keyboard: false }, 'physical');
 
     expect([runs('user filtered'), runs('needs keyboard'), runs('kept')]).toEqual([false, false, true]);
   });
@@ -92,7 +92,7 @@ describe('selectDesktopSpecs preflight', () => {
     const { configure, desktopIt, environment, registry } = setup('physical');
     desktopIt('needs keyboard', { requires: ['keyboard'] }, body);
 
-    selectDesktopSpecs(registry, environment, { keyboard: true });
+    selectDesktopSpecs(registry, environment, { keyboard: true }, 'physical');
 
     expect(configure).not.toHaveBeenCalled();
   });
@@ -100,12 +100,12 @@ describe('selectDesktopSpecs preflight', () => {
   test('judges a click requirement by what the lane clicks with', () => {
     const physical = setup('physical');
     physical.desktopIt('clicks', { requires: ['click'] }, body);
-    selectDesktopSpecs(physical.registry, physical.environment, { physicalClick: false, accessibilityClick: true });
+    selectDesktopSpecs(physical.registry, physical.environment, { physicalClick: false, accessibilityClick: true }, 'physical');
     expect(physical.runs('clicks')).toBe(false);
 
     const accessible = setup('accessible');
     accessible.desktopIt('clicks', { requires: ['click'] }, body);
-    selectDesktopSpecs(accessible.registry, accessible.environment, { ...masked, accessibilityClick: true });
+    selectDesktopSpecs(accessible.registry, accessible.environment, { ...masked, accessibilityClick: true }, 'accessible');
     expect(accessible.runs('clicks')).toBe(true);
   });
 });
@@ -115,24 +115,39 @@ describe('selectDesktopSpecs fail-closed checks', () => {
     const { desktopIt, environment, registry, runs } = setup('accessible');
     desktopIt('fine', body);
 
-    expect(() => selectDesktopSpecs(registry, environment, { keyboard: true, physicalClick: false })).toThrow(
+    expect(() => selectDesktopSpecs(registry, environment, { keyboard: true, physicalClick: false }, 'accessible')).toThrow(
       'The accessible input lane needs a host that reports keyboard, wheel disabled, and this one does not.',
     );
     expect(registry.blocked).toBe(true);
     expect(runs('fine')).toBe(false);
   });
 
-  test('an absent feature report counts as unmasked', () => {
-    const { environment, registry } = setup('accessible');
+  test('a lane whose session did not confirm its input policy disables every spec and says why', () => {
+    const { desktopIt, environment, registry, runs } = setup('accessible');
+    desktopIt('fine', body);
 
-    expect(() => selectDesktopSpecs(registry, environment, undefined)).toThrow(/keyboard, physicalClick, wheel disabled/);
+    expect(() => selectDesktopSpecs(registry, environment, masked, 'compatibility')).toThrow(
+      'The accessible input lane needs a session that enforces the accessible input policy, and the driver reported compatibility.',
+    );
+    expect(registry.blocked).toBe(true);
+    expect(runs('fine')).toBe(false);
+    expect(() => selectDesktopSpecs(setup('physical').registry, environment, {})).toThrow(
+      /physical input policy, and the driver reported none\./,
+    );
+  });
+
+  test('an absent feature report counts as unmasked', () => {
+    const { desktopIt, environment, registry } = setup('accessible');
+    desktopIt('fine', body);
+
+    expect(() => selectDesktopSpecs(registry, environment, undefined, 'accessible')).toThrow(/keyboard, physicalClick, wheel disabled/);
   });
 
   test('an accessible lane on a masked host runs', () => {
     const { desktopIt, environment, registry, runs } = setup('accessible');
     desktopIt('fine', body);
 
-    selectDesktopSpecs(registry, environment, masked);
+    selectDesktopSpecs(registry, environment, masked, 'accessible');
 
     expect(registry.blocked).toBe(false);
     expect(runs('fine')).toBe(true);
@@ -142,7 +157,7 @@ describe('selectDesktopSpecs fail-closed checks', () => {
     const { desktopIt, environment, registry } = setup('physical');
     desktopIt('fine', body);
 
-    expect(() => selectDesktopSpecs(registry, environment, { keyboard: true })).not.toThrow();
+    expect(() => selectDesktopSpecs(registry, environment, { keyboard: true }, 'physical')).not.toThrow();
   });
 
   test('a lane refuses specs that were not declared with desktopIt, however many', () => {
@@ -152,7 +167,7 @@ describe('selectDesktopSpecs fail-closed checks', () => {
       for (let index = 0; index < 12; index++) api.it(`spec ${index}`, body);
     });
 
-    expect(() => selectDesktopSpecs(registry, environment, {})).toThrow(
+    expect(() => selectDesktopSpecs(registry, environment, {}, 'physical')).toThrow(
       /12 specs were not declared with desktopIt or desktopDescribe: "legacy spec 0", .*"legacy spec 9" and 2 more\./,
     );
     expect(registry.blocked).toBe(true);
@@ -177,7 +192,7 @@ describe('selectDesktopSpecs fail-closed checks', () => {
     const { environment, registry } = setup('accessible');
     registry.errors.push('Jasmine did not identify the spec registered for "ghost", so its selection cannot be verified.');
 
-    expect(() => selectDesktopSpecs(registry, environment, {})).toThrow(/ghost[\s\S]*accessible input lane/);
+    expect(() => selectDesktopSpecs(registry, environment, {}, 'accessible')).toThrow(/ghost[\s\S]*accessible input lane/);
     expect(registry.blocked).toBe(true);
   });
 });

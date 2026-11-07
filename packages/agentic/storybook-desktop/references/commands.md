@@ -69,9 +69,10 @@ resolved input, target platform, and scope. Without a flag the lane comes from
 `DESKTOP_INPUT`, then from the driver instance a `test` attaches to; none of them
 means compatibility mode, which runs every case as before. `driver --input`
 starts the driver for that lane and records it for subsequent tests against the
-instance. An `accessible` driver masks keyboard, physical click, and wheel, and
-`test --input accessible` verifies the mask before running anything: a driver
-that is not masked fails the run rather than letting a case move the pointer.
+instance. Each test session confirms its strict input policy before running;
+the accessible policy rejects keyboard, pointer, and wheel input before
+dispatch. An accessible driver also masks those host features as defense in
+depth, but a test can attach to an unmasked driver.
 Legacy callback collections are not eligible for input-lane runs. Input lanes
 cannot be combined with an explicit non-`auto` click mode. See
 [story tests](story-tests.md#run-an-input-lane).

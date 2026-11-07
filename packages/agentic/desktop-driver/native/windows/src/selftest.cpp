@@ -404,6 +404,11 @@ void TestHello() {
       std::any_of(features->Items().begin(), features->Items().end(),
                   [](const json::Value& feature) { return feature.AsString() == "boundedObservation"; });
   Check(announcesObservation, "hello announces bounded observation");
+  const bool announcesStrictClear =
+      features != nullptr &&
+      std::any_of(features->Items().begin(), features->Items().end(),
+                  [](const json::Value& feature) { return feature.AsString() == "strictClear"; });
+  Check(announcesStrictClear, "hello announces strict clear");
 }
 
 void TestReleaseLedger() {
@@ -2816,6 +2821,50 @@ void TestDriverMutationEffects() {
   Sleep(100);
   Check(recordedInputs.empty() && buttonClicks.load() == 0 && IsWindow(window) != FALSE,
         "rejected and cancelled mutations reach nothing");
+
+  // A clear that names its mechanism uses only that mechanism.
+  const auto clearWith = [](const std::string& elementId, const char* mechanism) {
+    json::Value request = StringFields({{"elementId", elementId}});
+    if (mechanism != nullptr) {
+      request.Set("mechanism", json::Value::String(std::string(mechanism)));
+    }
+    return request;
+  };
+  json::Value numericMechanism = StringFields({{"elementId", editId}});
+  numericMechanism.Set("mechanism", json::Value::Integer(1));
+  bool unknownMechanismsRefused = true;
+  for (const json::Value& params : std::vector<json::Value>{clearWith(editId, "pointer"), clearWith(editId, ""),
+                                                            numericMechanism}) {
+    unknownMechanismsRefused =
+        unknownMechanismsRefused && effectOf("clear", params, token, &code) == "none" && code == kErrorInvalidParams;
+  }
+  Check(unknownMechanismsRefused, "a clear naming an unknown mechanism is refused before dispatch");
+  SetWindowTextW(edit, L"abc");
+  Check(effectOf("clear", clearWith(buttonId, "semantic"), token, &code) == "none" && code == kErrorNotInteractable,
+        "a semantic clear of an element without a value is refused before dispatch");
+  SendMessageW(edit, EM_SETREADONLY, TRUE, 0);
+  Check(effectOf("clear", clearWith(editId, "semantic"), token, &code) == "none" && code == kErrorNotInteractable &&
+            GetWindowTextLengthW(edit) == 3,
+        "a semantic clear of a read-only value is refused before dispatch");
+  SendMessageW(edit, EM_SETREADONLY, FALSE, 0);
+  driver.InputForTesting().UseTestEnvironment([]() {
+    return InteractiveWith([](InputEnvironment& environment) { environment.lock = SessionLock::Locked; });
+  });
+  Check(effectOf("clear", clearWith(editId, "keyboard"), token, &code) == "none" && code == kErrorInputUnavailable &&
+            GetWindowTextLengthW(edit) == 3,
+        "a keyboard clear honors the input gates instead of writing the value");
+  driver.InputForTesting().UseTestEnvironment([]() { return InteractiveEnvironmentForTesting(); });
+  const CommandResult semanticClear = driver.Execute("clear", clearWith(editId, "semantic"), token);
+  Check(semanticClear.result.StringField("mechanism") == "semantic" && GetWindowTextLengthW(edit) == 0,
+        "a semantic clear writes the value and reports it");
+  SetWindowTextW(edit, L"abc");
+  const CommandResult chosenClear = driver.Execute("clear", clearWith(editId, nullptr), token);
+  Check(chosenClear.result.StringField("mechanism") == "semantic" && GetWindowTextLengthW(edit) == 0 &&
+            recordedInputs.empty(),
+        "a clear that names no mechanism reports the value write it chose");
+  const CommandResult probe = driver.Execute("probe", empty, token);
+  const json::Value* features = probe.result.Find("features");
+  Check(features != nullptr && features->BoolField("strictClear"), "the probe reports strict clear");
 
   // Stopped after part of the command reached the application.
   recordedInputs.clear();
