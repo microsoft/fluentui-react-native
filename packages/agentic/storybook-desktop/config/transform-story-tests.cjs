@@ -242,6 +242,136 @@ function collectWdioTests(program) {
   return tests;
 }
 
+// The physical requirement each WebDriver action source type implies, in the order messages list them.
+const actionSourceRequirements = { key: 'keyboard', pointer: 'physical-click', wheel: 'wheel' };
+const requirementInputKinds = { keyboard: 'keyboard', 'physical-click': 'pointer', wheel: 'wheel' };
+const valueCommands = new Set(['setValue', 'addValue', 'clearValue']);
+
+function memberName(callee) {
+  const property = callee.node.property;
+  if (!callee.node.computed) return types.isIdentifier(property) ? property.name : undefined;
+  if (types.isStringLiteral(property)) return property.value;
+  return types.isTemplateLiteral(property) && property.expressions.length === 0 ? property.quasis[0].value.cooked : undefined;
+}
+
+function isBrowser(object) {
+  object = unwrap(object);
+  if (object.isIdentifier({ name: 'browser' })) return true;
+  return (object.isMemberExpression() || object.isOptionalMemberExpression()) && memberName(object) === 'browser';
+}
+
+/** Follows a constant to the value it holds, so a payload declared above the call is still read. */
+function readConstant(value, seen = new Set()) {
+  value = unwrap(value);
+  if (value.isIdentifier()) {
+    const binding = value.scope.getBinding(value.node.name);
+    const declarator = binding?.path;
+    if (
+      binding?.constant &&
+      declarator?.isVariableDeclarator() &&
+      declarator.node.init &&
+      declarator.get('id').isIdentifier() &&
+      !seen.has(binding)
+    ) {
+      seen.add(binding);
+      return readConstant(declarator.get('init'), seen);
+    }
+  }
+  return value;
+}
+
+function readString(value) {
+  value = readConstant(value);
+  if (value.isStringLiteral()) return value.node.value;
+  return value.isTemplateLiteral() && value.node.expressions.length === 0 ? value.node.quasis[0].value.cooked : undefined;
+}
+
+function actionSourceType(source) {
+  source = readConstant(source);
+  if (!source.isObjectExpression()) return undefined;
+  let type;
+  for (const property of source.get('properties')) {
+    // A spread or a computed key could supply or replace the type.
+    if (!property.isObjectProperty() || property.node.computed) return undefined;
+    if (keyName(property) === 'type') type = readString(property.get('value'));
+  }
+  return type;
+}
+
+/** The physical requirements of a WebDriver action payload, and whether every source in it could be read. */
+function readActionSources(payload) {
+  payload = readConstant(payload);
+  if (!payload.isArrayExpression()) return undefined;
+  const requires = new Set();
+  let readable = true;
+  for (const element of payload.get('elements')) {
+    const type = element?.node && !element.isSpreadElement() ? actionSourceType(element) : undefined;
+    if (type === undefined) readable = false;
+    else if (Object.hasOwn(actionSourceRequirements, type)) requires.add(actionSourceRequirements[type]);
+  }
+  return { requires: Object.values(actionSourceRequirements).filter((requirement) => requires.has(requirement)), readable };
+}
+
+/** A call that sends physical input, with the requirements that input implies. Those are undefined when the call cannot be read. */
+function directInputCall(call) {
+  const callee = call.get('callee');
+  if (!callee.isMemberExpression() && !callee.isOptionalMemberExpression()) return undefined;
+  const name = memberName(callee);
+  const argument = call.node.arguments[0] ? call.get('arguments.0') : undefined;
+  if (valueCommands.has(name)) return { call: name, requires: ['keyboard'] };
+  if (name === 'keys' && isBrowser(callee.get('object'))) return { call: 'browser.keys', requires: ['keyboard'] };
+  if (name === 'action' && isBrowser(callee.get('object'))) {
+    const type = argument && readString(argument);
+    if (type === undefined) return { call: 'browser.action', requires: undefined };
+    return Object.hasOwn(actionSourceRequirements, type)
+      ? { call: 'browser.action', requires: [actionSourceRequirements[type]] }
+      : undefined;
+  }
+  if (name === 'performActions') {
+    const sources = argument && readActionSources(argument);
+    if (!sources) return { call: 'performActions', requires: undefined };
+    if (sources.requires.length) return { call: 'performActions', requires: sources.requires };
+    return sources.readable ? undefined : { call: 'performActions', requires: undefined };
+  }
+  return undefined;
+}
+
+/**
+ * Rejects a case that also runs in the accessible input lane but sends physical input itself: the keyboard commands, the value
+ * commands that may type, and WebDriver actions with key, pointer or wheel sources. The check reads literals only. Input sent
+ * through a helper or an alias is stopped by the accessible lane's host masks when the case runs.
+ */
+function rejectDirectInput(callback, { name, input, inputSource }) {
+  if (input === 'physical') return;
+  let finding;
+  callback.traverse({
+    'CallExpression|OptionalCallExpression'(call) {
+      const found = finding ? undefined : directInputCall(call);
+      if (found) finding = { ...found, path: call };
+    },
+  });
+  if (!finding) return;
+  const subject = name ? `"${name}"` : 'This case';
+  const declared = inputSource === 'declared';
+  if (finding.requires === undefined) {
+    const declaration = declared ? "input: 'physical'" : 'requires for the physical input it sends (keyboard, physical-click or wheel)';
+    fail(
+      finding.path,
+      `${subject} runs in the accessible input lane, but calls ${finding.call} with an argument this check cannot read. ` +
+        `Pass a literal list of input sources, or declare ${declaration}.`,
+    );
+  }
+  const kinds = finding.requires.map((requirement) => requirementInputKinds[requirement]).join(' and ');
+  const declaration = declared
+    ? "input: 'physical'"
+    : `requires: [${finding.requires.map((requirement) => `'${requirement}'`).join(', ')}]`;
+  fail(
+    finding.path,
+    `${subject} runs in the accessible input lane, but ${finding.call} sends physical ${kinds} input. ` +
+      `Declare ${declaration} so it runs only in the physical lane, or remove the call.`,
+  );
+}
+
 function compileWdioTest(callback, sourceFile, source) {
   const file = types.file(types.program([types.expressionStatement(types.cloneNode(callback.node, true))]));
   const result = transformFromAstSync(file, source, {
@@ -365,3 +495,4 @@ module.exports = () => ({
 
 module.exports.collectWdioTests = collectWdioTests;
 module.exports.compileWdioTest = compileWdioTest;
+module.exports.rejectDirectInput = rejectDirectInput;

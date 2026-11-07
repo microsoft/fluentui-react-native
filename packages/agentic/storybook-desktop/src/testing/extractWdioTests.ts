@@ -6,7 +6,7 @@ import type { ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-
 
 import storyTests from '../../config/transform-story-tests.cjs';
 
-const { collectWdioTests, compileWdioTest } = storyTests;
+const { collectWdioTests, compileWdioTest, rejectDirectInput } = storyTests;
 
 export type ExtractedWdioStory = {
   digest: string;
@@ -26,11 +26,18 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
         visitor: {
           Program(program: NodePath<types.Program>) {
             for (const [exportName, { callbacks, value }] of collectWdioTests(program)) {
-              const compiled = callbacks.map(({ callback, name, options }) => ({
-                ...(name === undefined ? {} : { name }),
-                code: compileWdioTest(callback, sourceFile, code),
-                ...(options !== undefined ? { options: validateDesktopCaseOptions(options, `${sourceFile}.wdio`) } : {}),
-              }));
+              const compiled = callbacks.map(({ callback, name, options }) => {
+                const compiledCode = compileWdioTest(callback, sourceFile, code);
+                const descriptor = options === undefined ? undefined : validateDesktopCaseOptions(options, `${sourceFile}.wdio`);
+                if (descriptor !== undefined) {
+                  rejectDirectInput(callback, { name, input: descriptor.input, inputSource: descriptor.inputSource });
+                }
+                return {
+                  ...(name === undefined ? {} : { name }),
+                  code: compiledCode,
+                  ...(descriptor === undefined ? {} : { options: descriptor }),
+                };
+              });
               const source = code.slice(value.node.start!, value.node.end!);
               tests.set(exportName, {
                 tests: compiled,

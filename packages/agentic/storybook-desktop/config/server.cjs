@@ -113,6 +113,11 @@ async function startDesktopStorybookServer({
     keepAlive = setInterval(() => undefined, 60_000);
     if (driverManifest) {
       const { StorybookChannelOrchestrator } = await import('../lib/driver/index.js');
+      // An accessible driver cannot perform physical input, so every test that attaches to it runs the accessible lane.
+      const maskedFeatures =
+        driverManifest.wdio?.input === 'accessible'
+          ? (await import('@fluentui-react-native/desktop-driver/authoring')).accessibleLaneMaskedFeatures
+          : undefined;
       const target = {
         endpoint: driverManifest.endpoint,
         id: driverManifest.targetId,
@@ -130,6 +135,7 @@ async function startDesktopStorybookServer({
           platformName: target.platformName,
           storyRootTestId: target.storyRootTestId,
           windows: createFakeStoryWindows(driverManifest.storyManifest, target.storyRootTestId),
+          ...(maskedFeatures ? { features: Object.fromEntries(maskedFeatures.map((feature) => [feature, false])) } : {}),
         });
         driver = await createDesktopDriverServer({
           host,
@@ -149,6 +155,7 @@ async function startDesktopStorybookServer({
           onStderr: (text) =>
             report.reporter.emit({ kind: 'output', payload: { stream: 'stderr', text } }, 'native-helper', { service: 'native-helper' }),
           onFailure: fatal,
+          ...(maskedFeatures ? { disabledInputFeatures: maskedFeatures } : {}),
           ...(agent
             ? {
                 agent: { descriptor: agent.descriptor, ...(agent.root === undefined ? {} : { root: agent.root }) },

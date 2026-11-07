@@ -26,6 +26,7 @@ import type {
   DesktopStorybookTestOptions,
 } from './DesktopStorybookCli.js';
 import { DesktopStorybookCli } from './DesktopStorybookCli.js';
+import { resolveCommandInputLane, readDriverInstanceInput } from './inputLane.js';
 import { loadDesktopStorybookConfig } from './loadConfig.js';
 
 type PlatformFlags = {
@@ -276,10 +277,27 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       configured: options.config.desktop?.reporting?.events,
     });
     options.reporterMode = reporterMode;
+    const actionOptions = action.opts<PlatformFlags & { input?: string; mode?: string; target?: string; url?: string }>();
+    const platform = selectedPlatform(actionOptions) ?? options.config.platform;
+    const { projectRoot } = options.config;
+    const lane =
+      action.name() === 'test' || action.name() === 'smoke'
+        ? resolveCommandInputLane({
+            command: action.name() as 'test' | 'smoke',
+            runsTests: action.name() === 'test' || actionOptions.mode === 'stories-and-tests',
+            flag: actionOptions.input,
+            environment: process.env.DESKTOP_INPUT,
+            driverInput:
+              action.name() === 'test' && platform && !actionOptions.url && !actionOptions.target
+                ? () => readDriverInstanceInput(projectRoot, platform)
+                : undefined,
+          })
+        : undefined;
     session = await createDesktopReportSession({
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
       kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+      ...(lane ? { lane } : {}),
       reporterMode,
       eventLevel,
       // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.

@@ -7,63 +7,123 @@ owner_paths:
 
 # Author story tests
 
-Story tests are statically extracted CSF `wdio` callbacks. Use `desktopIt`
-descriptors when declaring input requirements or endpoint scope. Top-level
-functions or named callback collections remain supported for compatibility,
-but cannot be selected by an input lane. Callbacks must not close over
-module-local values. Import Node-only helpers through literal dynamic
-`import()` inside the callback. Keep test code out of the native bundle.
+Story tests are statically extracted CSF `wdio` callbacks. Declare each case
+with `desktopIt`: its descriptor says which input the case needs and where it
+runs, so a run can select it for the input lane, platform, and scope it
+exercises. Callbacks must not close over module-local values. Import Node-only
+helpers through literal dynamic `import()` inside the callback. Keep test code
+out of the native bundle.
 
 ```tsx
 import type { StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 type Story = WdioStory<StoryObj<typeof Button>>;
 
 export const Default: Story = {
   args: { testID: 'save-button' },
-  wdio: {
-    'is enabled': async ({ browser, expect }) => {
-      await expect(await browser.$('~save-button')).toBeEnabled();
-    },
-    'supports activation': async ({ browser, platform, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick) {
-        skip('Physical pointer input is unavailable.');
-        return;
-      }
-      await (await browser.$('~save-button')).click();
-    },
-  },
-};
-```
-
-For modality-aware tests, import the value helper and use an array of cases:
-
-```tsx
-import { desktopIt, type WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
-
-export const Default: WdioStory<StoryObj<typeof Button>> = {
-  args: { testID: 'save-button' },
   wdio: [
-    desktopIt('activates in either input lane', { requires: ['click'] }, async ({ browser, expect }) => {
+    desktopIt('is enabled', async ({ browser, expect }) => {
+      await expect(await browser.$('~save-button')).toBeEnabled();
+    }),
+    desktopIt('activates', { requires: ['click'] }, async ({ browser, expect }) => {
       await (await browser.$('~save-button')).click();
       await expect(await browser.$('~saved-message')).toBeDisplayed();
     }),
-    desktopIt('uses a physical pointer', { requires: ['physical-click'], platforms: ['win32'] }, async ({ browser }) => {
-      await (await browser.$('~save-button')).click();
+    desktopIt('activates with Enter', { requires: ['keyboard'], platforms: ['!macos'] }, async ({ browser, expect }) => {
+      await browser.keys('\uE007');
+      await expect(await browser.$('~saved-message')).toBeDisplayed();
     }),
   ],
 };
 ```
 
-`requires: ['click']` derives to `both` and adapts `element.click()` to the
-selected lane: accessibility click in the accessible lane and physical click
-in the physical lane. Explicit physical or accessibility requirements derive
-their matching lane. `input` may narrow a `both` case but cannot widen a
-transport-specific requirement. `platforms` is an allowlist by default;
-`['!win32']` excludes that endpoint. Platform selection uses the target
-endpoint, so Win32 remains distinct from Windows.
+`desktopIt(name, run)` declares a case with no restrictions, so it runs in every
+lane on every platform. `desktopIt(name, options, run)` adds a descriptor. The
+older object of named callbacks and the single `wdio: async (context) => ...`
+form remain supported for compatibility, but a legacy callback has no
+descriptor, so an input lane rejects it, listing the story IDs to migrate,
+instead of treating it as `both`.
+
+## Declare how a case runs
+
+The descriptor is a strict static JSON literal; an unknown field, a computed
+value, or an invalid combination fails extraction with source context.
+
+| Field         | Meaning                                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------- |
+| `requires`    | Host capabilities the case needs. They also derive the input lane (below).                           |
+| `input`       | `accessible`, `physical`, or `both`. Defaults to what `requires` derives, else `both`.               |
+| `platforms`   | Endpoints the case runs on: `macos`, `windows`, `win32`. Omitted means every endpoint.               |
+| `scope`       | Custom scope values, such as `{ 'rn.renderer': ['fabric'] }`. Omitted means every value.             |
+| `unsupported` | A known gap: `{ platforms, reason, issue? }`. The case is reported unsupported instead of executing. |
+| `quarantine`  | A temporary gap: `{ issue, reason, expires, platforms?, input? }`, with `expires` as `YYYY-MM-DD`.   |
+
+### Input and requirements
+
+Most cases need no `input`: their `requires` already says what they send.
+
+| Requirement                                                                             | Derived input | Meaning                                                                |
+| --------------------------------------------------------------------------------------- | ------------- | ---------------------------------------------------------------------- |
+| `keyboard`, `physical-click`, `wheel`                                                   | `physical`    | Operating-system input that moves the real pointer or sends key events |
+| `accessibility-click`                                                                   | `accessible`  | The element's accessibility action                                     |
+| `click`                                                                                 | `both`        | `element.click()`, which follows the lane (below)                      |
+| `accessibility-actions`, `element-screenshot`, `focus`, `screenshot`, `set-window-rect` | `both`        | The host must offer the feature                                        |
+
+A case with no requirements is `both` and runs in every lane. Requiring both a
+physical and an accessibility transport is an error; split the case. An explicit
+`input` may narrow a `both` case but cannot widen a transport requirement.
+
+`requires: ['click']` makes `element.click()` follow the lane: an accessibility
+click in the accessible lane and a physical click in the physical lane. Without
+a lane, an accessible case still uses accessibility clicks and every other case
+follows the configured `--click-mode`, so a physical case on a host that masks
+physical click is reported unsupported instead of failing its session. Before
+a case runs, the host's reported features must meet each requirement. A case it
+cannot meet is reported unsupported, never passed, and makes a lane run
+incomplete unless the case declares the gap.
+
+### Platforms and scope
+
+`platforms` is an allowlist: `['win32']` runs only on Win32. Negate with
+`['!win32']` to run everywhere else; a list holds either allowed or negated
+endpoints, never both. Platform selection uses the target endpoint, so Win32
+remains distinct from Windows.
+
+`scope` narrows by values the target holds. Values within a key are alternatives
+and keys combine. `rn.renderer` (`fabric` or `paper`) is built in and the
+`rn.*` keys are reserved for the framework. A consumer declares its own keys in
+the desktop config's `testScopes`, such as `{ flavor: ['stable', 'preview'] }`,
+and each target sets its value in `testScope`. A key or value outside the declared
+domains, or a key the target does not supply, is a configuration error rather
+than a silent exclusion, so a typo cannot drop a case.
+
+A case that does not match the target is excluded, not skipped: it is not a test
+and is counted only in the run's selection totals.
+
+### Known gaps
+
+Declare a gap instead of calling `skip` at run time. `unsupported` lists the
+endpoints where the behavior does not work yet, with a reason and ideally an
+issue. `quarantine` suspends a flaky case until its `expires` date, optionally for
+one endpoint or lane. An expired quarantine fails the run before anything
+executes. Declared gaps are reported as unsupported with their reason and do not
+make a lane run incomplete; a run-time `skip(reason)` does, so reserve it for
+conditions no descriptor can state.
+
+```tsx
+desktopIt(
+  'closes on Tab and continues past the anchor',
+  {
+    requires: ['physical-click', 'keyboard', 'focus'],
+    unsupported: { platforms: ['win32'], reason: 'Win32 hosts keep the cycle behavior.', issue: '#4377' },
+  },
+  async ({ browser, expect }) => {
+    // ...
+  },
+);
+```
 
 The callback receives the real WebdriverIO `browser`, `expect-webdriverio`
 `expect`, typed `desktop` assertions/story commands, target `platform` (`macos`,
@@ -85,10 +145,10 @@ Metro resolves their dependencies.
 
 Use native selectors and WebDriver operations; the app has no DOM or JavaScript
 execution surface. Read native properties through `getProperty()` rather than
-ordinary object matchers. Feature-check native actions and explicitly skip
-unsupported cases; never turn unsupported state into false. For example,
-`getProperty('accessibilityActions')` lists the action names an element
-publishes (such as `Toggle` or `Select`) when
+ordinary object matchers. Declare the capabilities a case needs in `requires`
+rather than feature-checking inside the callback, and never turn unsupported
+state into false. For example, `getProperty('accessibilityActions')` lists the
+action names an element publishes (such as `Toggle` or `Select`) when
 `browser.capabilities['furn:features']?.accessibilityActions` is true.
 
 Tests in one story run in declaration order, each in its own Node process and
@@ -101,12 +161,62 @@ editing callbacks because their digest participates in manifest freshness.
 filters names. `test` operates against an already running app/driver; smoke
 owns the complete app lifecycle.
 
+## Run an input lane
+
+A lane runs only the cases that apply to one way of driving the app. The
+`accessible` lane runs `accessible` and `both` cases through accessibility
+actions, so it never moves the pointer or sends key events and is safe on a
+machine someone is using. The `physical` lane runs `physical` and `both` cases
+with real pointer, keyboard, and wheel input, so it needs a machine nobody is
+using. Without a lane, every case runs as before (compatibility mode) and click
+behavior follows `--click-mode`.
+
 Use `storybook test --input accessible|physical` or
-`storybook smoke --mode stories-and-tests --input accessible|physical` to
-select declared cases. `storybook driver --input ...` supplies the default
-lane to a later `storybook test` invocation. `--input` cannot be combined
-with a non-default `--click-mode`. A lane requires descriptor cases and rejects
-legacy callback collections rather than silently treating them as `both`.
+`storybook smoke --mode stories-and-tests --input accessible|physical` to run
+one lane. `DESKTOP_INPUT` supplies the lane when no flag is given.
+`storybook driver --input ...` records the default lane for a later
+`storybook test` against that driver. `--input` cannot be combined with a
+non-default `--click-mode`. `test --list` shows, for each story, the cases the
+lane runs with their resolved input, requirements, platforms, and scope, and the
+cases it excludes with the reason; add `--input` to preview a lane.
+
+The accessible lane holds a case to accessible input by masking the host, not by
+trusting the case: the driver reports keyboard, physical click, and wheel as
+unavailable, so a case that tries them fails instead of silently moving the
+pointer. `smoke` and `driver --input accessible` start the driver already
+masked. `test --input accessible` attaches to a running driver and verifies the
+mask from the session's reported features before it runs anything. A driver that
+does not report all three as unavailable stops the run as an infrastructure
+failure rather than running unmasked, so attach the lane to a driver started
+with `driver --input accessible`.
+
+A lane that executes no case is not a passing run, and neither is a lane run
+that leaves a case unsupported or skipped without a declared gap. Excluded cases
+never count against a run: they are not tests.
+
+## Keep physical input out of accessible cases
+
+Extraction checks every `desktopIt` case that can run in the accessible lane
+(any case that is not `physical`) and fails with a source-context error when its
+callback calls an API that sends physical input without declaring it:
+
+- `browser.keys(...)`, which sends key events (`keyboard`);
+- `setValue`, `addValue`, or `clearValue` on any object (`keyboard`);
+- `browser.action('key' | 'pointer' | 'wheel')` and `performActions` with `key`,
+  `pointer`, or `wheel` sources (`keyboard`, `physical-click`, or `wheel`).
+
+Declare the matching `requires`, or `input: 'physical'` when the case already
+declares its input, so it runs only in the physical lane, or remove the call. A
+call whose arguments the check cannot read, such as a computed action list,
+fails the same way, because it cannot tell what the call sends. The message
+names the call and the requirement to declare.
+
+The check reads the callback only. It does not follow helper functions or aliases,
+and `setValue`, `addValue`, and `clearValue` are matched by name, so a method you
+define with one of those names is flagged too. Input hidden behind a helper is
+instead caught at run time by the accessible lane's host mask. Legacy callbacks
+are not checked, and the Metro transform does not run the check; extraction
+(`storybook manifest`, `test`, `smoke`) does.
 
 Use the component authoring contract for component-specific test assertions.
 Legacy `parameters.desktopDriver` static plans remain for compatibility and

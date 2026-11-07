@@ -16,6 +16,10 @@ declare namespace storyTests {
 
   function collectWdioTests(program: NodePath<types.Program>): ReadonlyMap<string, StoryTest>;
   function compileWdioTest(callback: Callback['callback'], sourceFile: string, source: string): string;
+  function rejectDirectInput(
+    callback: Callback['callback'],
+    descriptor: { name?: string; input: 'accessible' | 'physical' | 'both'; inputSource: 'declared' | 'derived' },
+  ): void;
 }
 
 export = storyTests;

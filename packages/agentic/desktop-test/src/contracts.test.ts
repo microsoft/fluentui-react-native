@@ -25,6 +25,10 @@ describe('neutral desktop harness contracts', () => {
     'config-load-failure',
     'crash',
     'bail',
+    'lane-physical',
+    'lane-accessible',
+    'lane-blocked',
+    'lane-cli',
   ])(
     '%s contract',
     async (mode) => {

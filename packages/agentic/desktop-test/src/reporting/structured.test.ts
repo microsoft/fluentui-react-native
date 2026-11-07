@@ -20,6 +20,24 @@ describe('structured desktop events', () => {
     expect(includeDesktopEvent(event, 'milestones', 'service')).toBe(true);
   });
 
+  test('exclusion counts are progress detail and project as plain numbers', () => {
+    const event = makeEvent({ kind: 'selection', payload: { excluded: { platform: 1, scope: 0, input: 2 } } });
+
+    expect(includeDesktopEvent(event, 'milestones')).toBe(false);
+    expect(includeDesktopEvent(event, 'progress')).toBe(true);
+    expect(projectDesktopEvent(event).payload).toEqual({ excluded: { platform: 1, scope: 0, input: 2 } });
+  });
+
+  test('a declared gap stays visible at every level and projects with its reason', () => {
+    const event = makeEvent({
+      kind: 'test-result',
+      payload: { testId: 'test', title: 'gap', attempt: 0, status: 'unsupported', durationMs: 0, reason: 'Declared.', gap: 'quarantine' },
+    });
+
+    expect(includeDesktopEvent(event, 'milestones')).toBe(true);
+    expect(projectDesktopEvent(event).payload).toMatchObject({ status: 'unsupported', gap: 'quarantine', reason: 'Declared.' });
+  });
+
   test('projects and bounds large event text while retaining canonical IDs', () => {
     const event = makeEvent({
       kind: 'output',

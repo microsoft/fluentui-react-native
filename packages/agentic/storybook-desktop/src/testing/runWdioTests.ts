@@ -3,9 +3,13 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
-import { matchesDesktopPlatforms } from '@fluentui-react-native/desktop-driver/authoring';
-import type { DesktopArtifact, DesktopInputLane, ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver';
+import {
+  missingDesktopRequirements,
+  resolveDesktopClickMode,
+  unmaskedAccessibleFeatures,
+  type DesktopArtifact,
+} from '@fluentui-react-native/desktop-driver/authoring';
 import { ArtifactManager, captureDesktopFailureEvidence } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
 import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
@@ -16,6 +20,15 @@ import type { Platforms } from '../config/platforms.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
 import { NodeDesktopCommandRunner, type DesktopCommandRunner, type PreparedDesktopCommand } from '../cli/commandRunner.js';
 import { extractWdioTests } from './extractWdioTests.js';
+import { assessWdioCohort } from './laneVerdict.js';
+import {
+  csfTestId,
+  decideWdioSelection,
+  describeWdioExclusions,
+  matchesWdioTest,
+  plannedWdioWork,
+  type WdioSelectionContext,
+} from './selection.js';
 import type { WdioWorkerOptions } from './worker.js';
 import { formatDesktopStorybookError, writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 
@@ -35,6 +48,8 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   config: DesktopStorybookConfig;
   manifest: DesktopStoryManifest;
   platform: Platforms;
+  /** The scope domains and values of this target, for case `scope` selection. */
+  scope?: WdioSelectionContext['scope'];
   targetId: string;
   url: string;
   artifactsRoot?: string;
@@ -42,6 +57,8 @@ export type RunWdioStoryTestsOptions = DesktopStorybookWdioOptions & {
   report?: DesktopReportWriter;
   signal?: AbortSignal;
   optional?: boolean;
+  /** The caller already reported the selection and announced the planned work, so this call must not repeat it. */
+  announced?: boolean;
 };
 
 export class WdioStoryTestRunError extends Error {
@@ -61,36 +78,13 @@ class MissingRequirementsError extends Error {
   }
 }
 
-export function selectWdioStories(
-  manifest: DesktopStoryManifest,
-  options: DesktopStorybookWdioOptions,
-  platform?: Platforms,
-): readonly DesktopStoryManifestEntry[] {
-  return manifest.entries
-    .filter((entry) => entry.wdio && (!options.story || path.matchesGlob(entry.id, options.story)))
-    .filter((entry) => !options.tag || entry.tags.includes(options.tag))
-    .filter((entry) => {
-      if (options.input || entry.wdio?.cases) return (selectWdioCases(entry, options, platform)?.length ?? 0) > 0;
-      return (entry.wdio?.testNames ?? ['default']).some((name) => matchesWdioTest(name, options.test));
-    })
-    .sort((left, right) => left.id.localeCompare(right.id));
-}
-
-export function selectWdioCases(
-  entry: DesktopStoryManifestEntry,
-  options: DesktopStorybookWdioOptions,
-  platform?: Platforms,
-): NonNullable<DesktopStoryManifestEntry['wdio']>['cases'] {
-  if (!entry.wdio?.cases?.length) {
-    if (!options.input) return undefined;
-    throw new Error(`Input lane "${options.input}" cannot run legacy wdio callback in "${entry.id}"; declare it with desktopIt.`);
+/** The driver cannot show it disabled physical input, so an accessible lane could not keep its guarantee. */
+class UnmaskedLaneError extends Error {
+  constructor(unmasked: readonly string[]) {
+    super(
+      `The accessible input lane needs a driver that reports ${unmasked.join(', ')} disabled, and this one does not. Start it with "driver --input accessible".`,
+    );
   }
-  return entry.wdio.cases.filter(
-    ({ name, options: descriptor }) =>
-      matchesWdioTest(name, options.test) &&
-      (!platform || matchesDesktopPlatforms(descriptor.platforms, platform)) &&
-      (!options.input || descriptor.input === 'both' || descriptor.input === options.input),
-  );
 }
 
 export async function runWdioStoryTests(
@@ -98,31 +92,37 @@ export async function runWdioStoryTests(
   runner?: DesktopCommandRunner,
 ): Promise<readonly WdioStoryTestResult[]> {
   const settings = resolveWdioOptions(options);
-  const stories = selectWdioStories(options.manifest, settings, options.platform);
-  if (stories.length === 0) {
-    throw new Error('No executable wdio story tests matched the requested selection.');
+  const selection = decideWdioSelection(options.manifest, settings, { platform: options.platform, scope: options.scope });
+  const planned = plannedWdioWork(selection, settings);
+  const { platform: byPlatform, scope: byScope, input: byInput } = selection.excluded;
+  // Reported before any empty-selection error so the exclusions are accounted for. A lane always states them,
+  // even when nothing was excluded; compatibility mode only when it excluded something.
+  if (!options.announced && options.report && (settings.input || byPlatform + byScope + byInput > 0)) {
+    options.report.emit({ kind: 'selection', payload: { excluded: selection.excluded } });
   }
-  const cases = stories.flatMap((entry) => {
+  if (selection.stories.length === 0) {
+    throw new Error(`No executable wdio story tests matched the requested selection${describeWdioExclusions(selection)}.`);
+  }
+  const cases = selection.stories.flatMap((entry) => {
     const sourceFile = path.join(options.config.resolvePackage(entry.packageName).root, entry.sourcePath);
     const extracted = extractWdioTests(fs.readFileSync(sourceFile, 'utf8'), sourceFile).get(entry.wdio!.exportName);
     if (!extracted || extracted.digest !== entry.wdio!.digest) {
       throw new Error(`Executable test source changed for ${entry.id}; regenerate the Storybook manifest.`);
     }
-    const selectedCases = selectWdioCases(entry, settings, options.platform);
+    const declared = selection.selected.get(entry.id);
     return extracted.tests
       .filter(({ name }) => matchesWdioTest(name ?? 'default', settings.test))
-      .map(({ name, code }) => ({
-        entry,
-        code,
-        testName: name,
-        descriptor: entry.wdio?.cases?.find((testCase) => testCase.name === name)?.options,
-      }))
-      .filter(({ testName }) => {
-        if (!selectedCases) return !settings.input;
-        return selectedCases.some(({ name }) => name === testName);
+      .flatMap(({ name, code }) => {
+        const decision = name === undefined ? undefined : declared?.get(name);
+        if (declared && !decision) return [];
+        return [{ entry, code, testName: name, descriptor: decision?.descriptor, gap: decision?.gap }];
       });
   });
   if (cases.length === 0) throw new Error('No executable wdio tests matched the requested selection.');
+  const plannedIds = new Set(planned.map(({ workId }) => workId));
+  if (cases.length !== plannedIds.size || cases.some(({ entry, testName }) => !plannedIds.has(csfTestId(entry.id, testName)))) {
+    throw new Error('The executable tests differ from the selected manifest cases; regenerate the Storybook manifest.');
+  }
   const artifacts = new ArtifactManager(
     options.artifactsRoot ??
       (options.report
@@ -135,11 +135,7 @@ export async function runWdioStoryTests(
   ).href;
   const results: WdioStoryTestResult[] = [];
   const executionFailures: unknown[] = [];
-  for (const { entry, testName } of cases)
-    options.report?.emit({
-      kind: 'work-selected',
-      payload: { workId: csfTestId(entry.id, testName), label: `${entry.id} / ${testName ?? 'default'}` },
-    });
+  if (!options.announced) for (const payload of planned) options.report?.emit({ kind: 'work-selected', payload });
   const ownedRunner = runner ? undefined : new NodeDesktopCommandRunner({ reporter: options.report });
   const commands = runner ?? ownedRunner!;
   let directory: string | undefined;
@@ -151,7 +147,7 @@ export async function runWdioStoryTests(
   try {
     fs.mkdirSync(generatedRoot, { recursive: true });
     directory = fs.mkdtempSync(path.join(generatedRoot, 'run-'));
-    for (const [index, { entry, code, testName, descriptor }] of cases.entries()) {
+    for (const [index, { entry, code, testName, descriptor, gap }] of cases.entries()) {
       options.signal?.throwIfAborted();
       const displayName = testName === undefined ? entry.id : `${entry.id} / ${testName}`;
       const artifactId =
@@ -171,7 +167,6 @@ export async function runWdioStoryTests(
       const context = { story: entry.id, test: testName ?? 'default', endpoint: options.platform };
       options.report?.emit({ kind: 'scope-start', payload: { label: displayName, category: 'worker' } }, testId, context, testId);
       options.report?.emit({ kind: 'test-start', payload: { testId, title: displayName, attempt: 0 } }, testId, context);
-      const gap = descriptor && declaredGapFor(descriptor, options.platform, settings.input);
       if (gap) {
         result.status = 'unsupported';
         result.skipReason = gap.reason;
@@ -181,7 +176,15 @@ export async function runWdioStoryTests(
         options.report?.emit(
           {
             kind: 'test-result',
-            payload: { testId, title: displayName, attempt: 0, status: 'unsupported', durationMs: result.durationMs, reason: gap.reason },
+            payload: {
+              testId,
+              title: displayName,
+              attempt: 0,
+              status: 'unsupported',
+              durationMs: result.durationMs,
+              reason: gap.reason,
+              gap: gap.kind,
+            },
           },
           testId,
           context,
@@ -190,7 +193,7 @@ export async function runWdioStoryTests(
         activeResult = undefined;
         continue;
       }
-      const clickMode = resolveCaseClickMode(descriptor, settings.clickMode, settings.input);
+      const clickMode = resolveDesktopClickMode(descriptor, settings.clickMode, settings.input);
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
       const desktop = await connectDesktopWebdriver({
         clickMode,
@@ -206,7 +209,13 @@ export async function runWdioStoryTests(
         if (live.endpoint !== options.platform || live.platformManifestDigest !== options.manifest.platformManifestDigest) {
           throw new Error('The running Storybook manifest is stale or targets a different platform. Restart storybook driver and the app.');
         }
-        const missing = missingRequirements(descriptor, desktop.browser.capabilities['furn:features'], clickMode);
+        if (settings.input === 'accessible') {
+          // A driver that cannot report its physical input disabled fails closed rather than silently running unmasked.
+          phase = 'lane verification';
+          const unmasked = unmaskedAccessibleFeatures(desktop.browser.capabilities['furn:features']);
+          if (unmasked.length) throw new UnmaskedLaneError(unmasked);
+        }
+        const missing = missingDesktopRequirements(descriptor, desktop.browser.capabilities['furn:features'], clickMode);
         if (missing.length) throw new MissingRequirementsError(missing);
         phase = 'navigation';
         await desktop.openStory(entry.id);
@@ -263,6 +272,8 @@ export async function runWdioStoryTests(
         if (error instanceof MissingRequirementsError) {
           result.status = 'unsupported';
           result.skipReason = error.message;
+        } else if (error instanceof UnmaskedLaneError) {
+          failure = error;
         } else {
           failure = error;
           executionFailures.push(error);
@@ -297,6 +308,11 @@ export async function runWdioStoryTests(
           failure === undefined ? [cleanupError] : [failure, cleanupError],
           `Could not release the wdio session for ${displayName}; stopping before another test starts.`,
         );
+      }
+      // Every case would fail the same way, so stop here and let the run report it once, against this case.
+      if (failure instanceof UnmaskedLaneError) {
+        phase = 'lane verification';
+        throw failure;
       }
       result.durationMs = Date.now() - started;
       results.push(result);
@@ -348,14 +364,9 @@ export async function runWdioStoryTests(
   }
   const failures: unknown[] = infrastructureFailure === undefined ? [] : [infrastructureFailure];
   failures.push(...executionFailures);
-  const allSkipped = results.every(({ status }) => status === 'skipped');
-  const laneIncomplete =
-    !!settings.input &&
-    (!results.some(({ status }) => status === 'passed' || status === 'failed') ||
-      results.some(({ status, gap }) => status === 'skipped' || (status === 'unsupported' && gap === undefined)));
-  const incomplete = results.length !== cases.length || (allSkipped && !options.optional) || laneIncomplete;
-  if (incomplete && failures.length === 0)
-    failures.push(new Error('Required executable story cohort did not execute any tests or left selected work unfinished.'));
+  const verdict = assessWdioCohort({ results, selected: cases.length, lane: settings.input, optional: options.optional });
+  const incomplete = verdict.incomplete;
+  if (incomplete && failures.length === 0) failures.push(new Error(verdict.message));
   try {
     const reportPath = artifacts.writeMetadata('run', {
       endpoint: options.platform,
@@ -364,9 +375,9 @@ export async function runWdioStoryTests(
         ? incomplete && executionFailures.length === 0 && infrastructureFailure === undefined
           ? 'incomplete'
           : 'failed'
-        : allSkipped
-          ? 'skipped'
-          : 'passed',
+        : verdict.executed
+          ? 'passed'
+          : 'skipped',
       ...(infrastructureFailure === undefined ? {} : { error: errorMessage(infrastructureFailure) }),
       tests: results,
     });
@@ -405,85 +416,6 @@ function isWorkerResult(value: unknown): value is WorkerResult {
     'status' in value &&
     (value.status === 'passed' || (value.status === 'skipped' && 'skipReason' in value && typeof value.skipReason === 'string'))
   );
-}
-
-export function matchesWdioTest(name: string, pattern?: string): boolean {
-  return pattern === undefined || path.matchesGlob(name, pattern);
-}
-
-function csfTestId(storyId: string, testName?: string): string {
-  return `csf-${createHash('sha256')
-    .update(JSON.stringify([storyId, testName ?? 'default']))
-    .digest('hex')}`;
-}
-
-export function resolveCaseClickMode(
-  descriptor: ResolvedDesktopCaseOptions | undefined,
-  configured: 'auto' | 'physical' | 'accessibility',
-  input: DesktopInputLane | undefined,
-): 'auto' | 'physical' | 'accessibility' {
-  if (input === 'accessible') return 'accessibility';
-  if (input === 'physical') return 'physical';
-  if (descriptor?.input === 'accessible' || descriptor?.requires?.includes('accessibility-click')) return 'accessibility';
-  if (descriptor?.input === 'physical') return 'physical';
-  return configured;
-}
-
-export function missingRequirements(
-  descriptor: ResolvedDesktopCaseOptions | undefined,
-  features: Readonly<Record<string, unknown>> | undefined,
-  clickMode: 'auto' | 'physical' | 'accessibility',
-): string[] {
-  if (!descriptor?.requires?.length) return [];
-  const missing: string[] = [];
-  for (const requirement of descriptor.requires) {
-    const feature =
-      requirement === 'click'
-        ? clickMode === 'physical'
-          ? 'physicalClick'
-          : clickMode === 'accessibility'
-            ? 'accessibilityClick'
-            : undefined
-        : requirement === 'physical-click'
-          ? 'physicalClick'
-          : requirement === 'accessibility-click'
-            ? 'accessibilityClick'
-            : requirement === 'accessibility-actions'
-              ? 'accessibilityActions'
-              : requirement === 'element-screenshot'
-                ? 'elementScreenshot'
-                : requirement === 'set-window-rect'
-                  ? 'setWindowRect'
-                  : requirement;
-    if (requirement === 'click' && clickMode === 'auto') {
-      if (!features?.physicalClick && !features?.accessibilityClick) missing.push(requirement);
-    } else if (feature && features?.[feature] !== true) {
-      missing.push(requirement);
-    }
-  }
-  return missing;
-}
-
-function declaredGapFor(
-  descriptor: ResolvedDesktopCaseOptions,
-  endpoint: Platforms,
-  input: DesktopInputLane | undefined,
-): { kind: 'unsupported' | 'quarantine'; reason: string } | undefined {
-  if (descriptor.unsupported && matchesDesktopPlatforms(descriptor.unsupported.platforms, endpoint)) {
-    return { kind: 'unsupported', reason: descriptor.unsupported.reason };
-  }
-  const quarantine = descriptor.quarantine;
-  if (
-    quarantine &&
-    (!quarantine.platforms || matchesDesktopPlatforms(quarantine.platforms, endpoint)) &&
-    (!quarantine.input || quarantine.input === input)
-  ) {
-    if (Date.parse(`${quarantine.expires}T00:00:00Z`) < Date.now()) {
-      throw new Error(`Quarantine ${quarantine.issue} expired on ${quarantine.expires}.`);
-    }
-    return { kind: 'quarantine', reason: `${quarantine.issue}: ${quarantine.reason}` };
-  }
-  return undefined;
 }
 
 function errorMessage(error: unknown): string {

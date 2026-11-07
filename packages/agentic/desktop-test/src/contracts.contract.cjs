@@ -49,7 +49,7 @@ async function main() {
   const { DesktopRunReporter } = await import(lib('reporting/collector.js'));
   const { NodeDesktopCommandRunner } = await import(lib('commands.js'));
   const { DesktopServiceScope, DesktopStopRequested } = await import(lib('services.js'));
-  const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs } = await import(lib('config.js'));
+  const { loadDesktopConfig, defineDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope } = await import(lib('config.js'));
   // Config resolution canonicalizes paths; macOS temporary directories are symlinked (/var -> /private/var).
   const root = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-harness-contract-')));
   const out = capture();
@@ -92,6 +92,43 @@ async function main() {
         'export default {schemaVersion:1, targets:{win32:{use:{config:"cycle.mjs",target:"win32"}}}}',
       );
       await assert.rejects(loadDesktopConfig(path.join(root, 'cycle.mjs')), /cycle/);
+      const flavored = (testScopes, testScope, host = app.targets.win32.host) => ({
+        ...app,
+        ...(testScopes ? { testScopes } : {}),
+        targets: { win32: { host, ...(testScope ? { testScope } : {}) } },
+      });
+      const flavors = { 'product.flavor': ['alpha', 'beta'] };
+      defineDesktopConfig(flavored(flavors, { 'product.flavor': 'beta' }));
+      assert.throws(() => defineDesktopConfig(flavored({ 'rn.renderer': ['x'] })), /reserved/);
+      assert.throws(() => defineDesktopConfig(flavored(flavors, { 'product.flavor': 'gamma' })), /must be one of: alpha, beta/);
+      assert.throws(() => defineDesktopConfig(flavored(flavors, { unknown: 'x' })), /unknown scope key "unknown"/);
+      assert.throws(() => defineDesktopConfig(flavored(flavors, { 'rn.renderer': 'paper' })), /cannot set "rn.renderer"/);
+      fs.mkdirSync(path.join(root, 'flavor'));
+      const paperHost = { ...app.targets.win32.host, renderer: 'paper' };
+      fs.writeFileSync(
+        path.join(root, 'flavor', 'desktop.config.mjs'),
+        `export default ${JSON.stringify(flavored(flavors, { 'product.flavor': 'beta' }, paperHost))};`,
+      );
+      const flavor = await loadDesktopConfig(path.join(root, 'flavor', 'desktop.config.mjs'));
+      assert.deepEqual({ ...flavor.testScopes }, { 'rn.renderer': ['fabric', 'paper'], ...flavors });
+      assert.deepEqual(
+        { ...resolveDesktopTestScope(flavor.testScopes, flavor.targets.win32) },
+        { 'product.flavor': 'beta', 'rn.renderer': 'paper' },
+      );
+      assert.deepEqual(
+        { ...resolveDesktopTestScope(flavor.testScopes, flavor.targets.win32, 'fabric') },
+        { 'product.flavor': 'beta', 'rn.renderer': 'fabric' },
+      );
+      assert.deepEqual(
+        { ...resolveDesktopTestScope(direct.testScopes, direct.targets.win32) },
+        {},
+        'no renderer is derived without a host renderer',
+      );
+      fs.writeFileSync(
+        path.join(root, 'flavor', 'consumer.mjs'),
+        `export default ${JSON.stringify({ schemaVersion: 1, targets: { win32: { use: { config: './desktop.config.mjs', target: 'win32' } } } })};`,
+      );
+      await assert.rejects(loadDesktopConfig(path.join(root, 'flavor', 'consumer.mjs')), /unknown scope key "product.flavor"/);
       fs.writeFileSync(path.join(root, 'one.spec.mjs'), '');
       fs.writeFileSync(path.join(root, 'two.spec.mjs'), '');
       assert.deepEqual(resolveDesktopSpecs({ kind: 'wdio', framework: 'jasmine', specs: [['*.spec.mjs']] }, 'win32', root), [
@@ -1188,11 +1225,110 @@ async function main() {
         logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
         logs.join('\n'),
       );
+    } else if (mode === 'lane-cli') {
+      // Each invocation is its own process with no inherited collector, so its run result records the lane it was given.
+      const configPath = path.join(root, 'desktop.config.mjs');
+      fs.writeFileSync(path.join(root, 'spec.mjs'), 'export {};\n');
+      fs.writeFileSync(
+        configPath,
+        [
+          "import fs from 'node:fs';",
+          'export default {',
+          '  schemaVersion: 1,',
+          "  targets: { win32: { host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } } } },",
+          '  suites: {',
+          "    csf: { kind: 'csf-wdio' },",
+          "    jasmine: { kind: 'wdio', framework: 'jasmine', specs: ['spec.mjs'] },",
+          "    mocha: { kind: 'wdio', framework: 'mocha', specs: ['spec.mjs'] },",
+          '  },',
+          '  reporting: { artifactsRoot: process.env.FIXTURE_ARTIFACTS },',
+          '  integration: {',
+          "    name: 'fixture',",
+          '    validate() {},',
+          '    async run({ action, suite, input, supervisor }) {',
+          '      fs.writeFileSync(process.env.FIXTURE_MARKER, JSON.stringify({ action, suite, input: input ?? null }));',
+          "      supervisor.reporter.emit({ kind: 'test-result', payload: { testId: 'fixture', title: 'fixture', attempt: 0, status: 'passed', durationMs: 1 } });",
+          '    },',
+          '  },',
+          '};',
+          '',
+        ].join('\n'),
+      );
+      const inherited = { ...process.env };
+      for (const name of ['DESKTOP_REPORT_CONTEXT', 'DESKTOP_INPUT', 'DESKTOP_REPORTER', 'DESKTOP_EVENTS']) delete inherited[name];
+      let invocations = 0;
+      const invoke = (args, environment = {}) => {
+        const index = invocations++;
+        const marker = path.join(root, `marker-${index}.json`);
+        const artifacts = path.join(root, `artifacts-${index}`);
+        const child = spawnSync(
+          process.execPath,
+          [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', '--reporter', 'json', ...args],
+          { cwd: root, encoding: 'utf8', env: { ...inherited, FIXTURE_MARKER: marker, FIXTURE_ARTIFACTS: artifacts, ...environment } },
+        );
+        const runs = fs.existsSync(artifacts) ? fs.readdirSync(artifacts) : [];
+        return {
+          status: child.status,
+          diagnostics: `${child.stdout}\n${child.stderr}`,
+          marker: fs.existsSync(marker) ? JSON.parse(fs.readFileSync(marker, 'utf8')) : undefined,
+          result: runs.length ? JSON.parse(fs.readFileSync(path.join(artifacts, runs[0], 'run.json'), 'utf8')) : undefined,
+          error: child.stdout.startsWith('{') ? JSON.parse(child.stdout.split('\n')[0]).error : undefined,
+        };
+      };
+      const ran = (run, input, lane) => {
+        assert.equal(run.status, 0, run.diagnostics);
+        assert.deepEqual(run.marker, { action: 'test', suite: 'csf', input });
+        assert.deepEqual(run.result.lane, lane);
+      };
+      ran(invoke(['test', '--suite', 'csf', '--input', 'accessible']), 'accessible', {
+        input: 'accessible',
+        source: 'option',
+        masking: 'host-masked',
+        policyEnforced: false,
+      });
+      ran(invoke(['test', '--suite', 'csf'], { DESKTOP_INPUT: 'physical' }), 'physical', {
+        input: 'physical',
+        source: 'environment',
+        policyEnforced: false,
+      });
+      ran(invoke(['test', '--suite', 'csf', '--input', 'accessible'], { DESKTOP_INPUT: 'physical' }), 'accessible', {
+        input: 'accessible',
+        source: 'option',
+        masking: 'host-masked',
+        policyEnforced: false,
+      });
+      const unlaned = invoke(['test', '--suite', 'csf']);
+      assert.equal(unlaned.status, 0, unlaned.diagnostics);
+      assert.deepEqual(unlaned.marker, { action: 'test', suite: 'csf', input: null });
+      assert.equal('lane' in unlaned.result, false, 'a run with no lane must not claim one');
+      const refused = (run, pattern) => {
+        assert.equal(run.status, 1, run.diagnostics);
+        assert.equal(run.marker, undefined, 'a refused lane must not start the run');
+        assert.equal(run.result, undefined, 'a refused lane must not open a result');
+        assert.equal(run.error?.code, 'config', run.diagnostics);
+        assert.match(run.error.message, pattern);
+      };
+      refused(invoke(['test', '--suite', 'jasmine', '--list', '--input', 'accessible']), /--list resolves spec files/);
+      refused(
+        invoke(['test', '--suite', 'mocha', '--input', 'accessible']),
+        /--input accessible requires a jasmine suite; "mocha" uses mocha/,
+      );
+      refused(invoke(['test', '--suite', 'mocha'], { DESKTOP_INPUT: 'physical' }), /--input physical requires a jasmine suite/);
+      refused(invoke(['test', '--suite', 'csf'], { DESKTOP_INPUT: 'fast' }), /DESKTOP_INPUT must be accessible or physical/);
+      const listed = invoke(['test', '--suite', 'jasmine', '--list'], { DESKTOP_INPUT: 'accessible' });
+      assert.equal(listed.status, 0, `--list resolves files and ignores the environment lane\n${listed.diagnostics}`);
     } else {
       const { DesktopSupervisor } = await import(lib('supervisor.js'));
       const { runDesktopWdioSuite } = await import(lib('wdio/run.js'));
+      const { createDesktopInputLane } = await import(lib('reporting/lane.js'));
+      const { resolveDesktopScopeDomains } = await import('@fluentui-react-native/desktop-driver/authoring');
       const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
-      const run = reporter({ context: { endpoint: 'win32', renderer: 'paper' } });
+      const laneMode = mode.startsWith('lane-');
+      const retried = mode === 'retry' || mode === 'lane-physical';
+      const lane = laneMode ? createDesktopInputLane(mode === 'lane-physical' ? 'physical' : 'accessible', 'option') : undefined;
+      // The lane fixtures import the Jasmine adapter by file URL from the environment, so no value is spliced into source.
+      if (laneMode) process.env.DESKTOP_JASMINE_URL = lib('jasmine/index.js');
+      const run = reporter({ context: { endpoint: 'win32', renderer: 'paper' }, ...(lane ? { lane } : {}) });
       const fixture = path.join(root, mode === 'typescript' ? 'spec.ts' : 'spec.mjs');
       const second = path.join(root, 'second.mjs');
       let source;
@@ -1213,6 +1349,51 @@ async function main() {
           "describe('hook fixture',()=>{beforeAll(()=>{throw new Error('original setup failure');});it('does not execute',()=>{throw new Error('body must not run');});});";
       } else if (mode === 'crash') {
         source = 'process.exit(17);';
+      } else if (mode === 'lane-physical') {
+        source = [
+          "import fs from 'node:fs';",
+          'const { desktopIt, desktopDescribe } = await import(process.env.DESKTOP_JASMINE_URL);',
+          "const marker = new URL('./attempt', import.meta.url);",
+          'const mustNotRun = (what) => () => { throw new Error(`${what} must not run`); };',
+          "describe('physical lane fixture', () => {",
+          "  beforeAll(() => { globalThis.sharedHook = 'ran'; });",
+          "  desktopIt('runs when nothing is declared', () => { expect(globalThis.sharedHook).toBe('ran'); });",
+          "  desktopIt('clicks as the lane does', { requires: ['click'] }, async () => { await (await browser.$('~button-primary')).click(); });",
+          "  desktopIt('needs the keyboard', { requires: ['keyboard'] }, () => {});",
+          "  desktopIt('fails once, then retries', () => { if (!fs.existsSync(marker)) { fs.writeFileSync(marker, 'attempt'); throw new Error('first attempt'); } });",
+          "  desktopIt('accessible only', { requires: ['accessibility-click'] }, mustNotRun('an input-excluded case'));",
+          "  desktopIt('macOS only', { platforms: ['macos'] }, mustNotRun('a platform-excluded case'));",
+          "  desktopIt('fabric only', { scope: { 'rn.renderer': ['fabric'] } }, mustNotRun('a scope-excluded case'));",
+          "  desktopIt('declared gap', { unsupported: { platforms: ['win32'], reason: 'Declared gap.' } }, mustNotRun('a declared gap'));",
+          '});',
+          "desktopDescribe('excluded group', { platforms: ['macos'] }, () => {",
+          "  beforeAll(mustNotRun('the hook of an excluded group'));",
+          "  beforeEach(mustNotRun('the hook of an excluded group'));",
+          "  desktopIt('inside an excluded group', mustNotRun('a platform-excluded case'));",
+          '});',
+        ].join('\n');
+      } else if (mode === 'lane-accessible') {
+        source = [
+          'const { desktopIt } = await import(process.env.DESKTOP_JASMINE_URL);',
+          'const mustNotRun = (what) => () => { throw new Error(`${what} must not run`); };',
+          "describe('accessible lane fixture', () => {",
+          "  desktopIt('runs when nothing is declared', () => {});",
+          "  desktopIt('clicks as the lane does', { requires: ['click'] }, async () => { await (await browser.$('~button-primary')).click(); });",
+          "  desktopIt('clicks accessibly', { requires: ['accessibility-click'] }, async () => { await (await browser.$('~button-primary')).click(); });",
+          "  desktopIt('physical only', { requires: ['keyboard'] }, mustNotRun('an input-excluded case'));",
+          "  desktopIt('needs what the host lacks', { requires: ['accessibility-actions'] }, mustNotRun('a case the host cannot support'));",
+          '});',
+        ].join('\n');
+      } else if (mode === 'lane-blocked') {
+        source = [
+          "import fs from 'node:fs';",
+          'const { desktopIt } = await import(process.env.DESKTOP_JASMINE_URL);',
+          "const ran = new URL('./ran', import.meta.url);",
+          "describe('blocked lane fixture', () => {",
+          "  desktopIt('declared', () => { fs.writeFileSync(ran, 'ran'); });",
+          "  it('undeclared', () => { fs.writeFileSync(ran, 'ran'); });",
+          '});',
+        ].join('\n');
       } else if (mode === 'bail') {
         source = "describe('bail fixture',()=>{it('fails first',()=>{throw new Error('original bail failure');});});";
         fs.writeFileSync(
@@ -1236,7 +1417,11 @@ async function main() {
         projectRoot: packageRoot,
         configPath: path.join(root, 'desktop.config.mjs'),
       };
-      const host = new FakeDesktopHost({ endpoint: 'win32' });
+      // The accessible lane masks keyboard, physical click and wheel on the host. Only `lane-blocked` leaves them on.
+      const host = new FakeDesktopHost({
+        endpoint: 'win32',
+        ...(mode === 'lane-accessible' ? { features: { keyboard: false, physicalClick: false, wheel: false } } : {}),
+      });
       let launches = 0;
       const launch = host.launch.bind(host);
       host.launch = (...args) => {
@@ -1259,7 +1444,7 @@ async function main() {
               kind: 'wdio',
               framework: 'jasmine',
               specs: mode === 'bail' ? [fixture, second] : [[fixture, ...(mode === 'wdio' ? [second] : [])]],
-              specFileRetries: mode === 'retry' ? 1 : 0,
+              specFileRetries: retried ? 1 : 0,
             },
           },
         },
@@ -1267,6 +1452,7 @@ async function main() {
         configPath: target.configPath,
         targets: { win32: target },
         reporting: { artifactsRoot: root },
+        testScopes: resolveDesktopScopeDomains(),
       };
       if (mode === 'config-hook-failure')
         config.config.suites.fixture.readiness = { kind: 'native', testId: 'missing-readiness-marker', timeoutMs: 50 };
@@ -1294,7 +1480,7 @@ async function main() {
         });
         await assert.rejects(duplicate.start(), /Another desktop workload/);
         try {
-          await runDesktopWdioSuite(supervisor, config, 'fixture');
+          await runDesktopWdioSuite(supervisor, config, 'fixture', lane?.input);
         } catch (error) {
           failure = error;
           run.fail(error);
@@ -1303,7 +1489,7 @@ async function main() {
         await supervisor.close();
       }
       const result = await run.finish();
-      if (['hook-failure', 'config-hook-failure', 'config-load-failure', 'crash', 'bail'].includes(mode)) {
+      if (['hook-failure', 'config-hook-failure', 'config-load-failure', 'crash', 'bail', 'lane-blocked'].includes(mode)) {
         assert(failure, `hook failure must fail launcher\n${JSON.stringify(result)}\n${err.text()}\n${out.text()}`);
         assert.equal(result.status, 'failed');
         assert(!out.text().includes('PASSED WDIO fixture'), out.text());
@@ -1322,14 +1508,48 @@ async function main() {
             result.work.some(({ status }) => status === 'not-run'),
             JSON.stringify(result),
           );
+        if (mode === 'lane-blocked') {
+          // An unmasked accessible host and an undeclared spec are both reported, and neither spec ran.
+          const text = JSON.stringify(result);
+          assert(text.includes('needs a host that reports keyboard, physicalClick, wheel disabled'), text);
+          assert(text.includes('not declared with desktopIt or desktopDescribe'), text);
+          assert(!fs.existsSync(path.join(root, 'ran')), 'a blocked lane must not run any spec');
+          assert.equal(result.counts.executed, 0, text);
+          assert.equal(result.counts.skipped, 0, 'a blocked lane reports its fault, not every spec it disabled');
+        }
+      } else if (mode === 'lane-accessible') {
+        const text = JSON.stringify(result);
+        // The host cannot support one case. A lane run holds that against the run instead of quietly skipping it.
+        assert(failure && /incomplete/.test(failure.message), `${failure?.stack}\n${text}\n${err.text()}`);
+        assert.notEqual(result.status, 'passed', text);
+        assert.equal(launches, 1);
+        assert.equal(result.counts.passed, 3, text);
+        assert.equal(result.counts.failed, 0, text);
+        assert.equal(result.counts.unsupported, 1, text);
+        assert.equal(result.counts.declaredUnsupported, 0, text);
+        assert.deepEqual(result.selection.excluded, { platform: 0, scope: 0, input: 1 }, text);
+        assert.deepEqual(result.lane, { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: false });
+        const clicks = host.actions.filter((action) => action.type === 'click');
+        assert(clicks.length === 2 && clicks.every((action) => action.mode === 'accessibility'), JSON.stringify(host.actions));
       } else {
         assert.equal(failure, undefined, `${failure?.stack}\n${err.text()}\n${out.text()}`);
         assert.equal(result.status, 'passed', JSON.stringify(result));
-        assert.equal(launches, mode === 'retry' ? 2 : 1, 'WDIO must own exactly one session per grouped attempt');
-        assert.equal(result.counts.flaky, mode === 'retry' ? 1 : 0, JSON.stringify(result));
+        assert.equal(launches, retried ? 2 : 1, 'WDIO must own exactly one session per grouped attempt');
+        assert.equal(result.counts.flaky, retried ? 1 : 0, JSON.stringify(result));
         if (mode === 'wdio') {
           assert.equal(result.counts.passed, 2);
           assert.equal(result.counts.skipped, 1);
+        }
+        if (mode === 'lane-physical') {
+          const text = JSON.stringify(result);
+          assert.equal(result.counts.passed, 4, text);
+          assert.equal(result.counts.unsupported, 1, text);
+          assert.equal(result.counts.declaredUnsupported, 1, text);
+          // Both attempts announced the same exclusions, and a retried group still counts them once.
+          assert.deepEqual(result.selection.excluded, { platform: 2, scope: 1, input: 1 }, text);
+          assert.deepEqual(result.lane, { input: 'physical', source: 'option', policyEnforced: false });
+          const clicks = host.actions.filter((action) => action.type === 'click');
+          assert(clicks.length > 0 && clicks.every((action) => action.mode === 'physical'), JSON.stringify(host.actions));
         }
       }
       assert(!fs.existsSync(path.join(root, 'locks', 'interactive.lock')));

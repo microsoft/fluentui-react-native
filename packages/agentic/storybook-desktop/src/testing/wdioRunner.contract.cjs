@@ -25,6 +25,7 @@ async function main() {
     path.join(root, 'fixture.stories.ts'),
     `
     import 'react-native-must-never-load-in-node';
+    import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
     export default { title: 'Fixture/Button' };
     export const Pass = {
       tags: ['grouped', 'desktop-e2e'],
@@ -88,6 +89,17 @@ async function main() {
         await expect(await browser.$('~button-primary')).toBeEnabled();
       },
     }};
+    export const Lane = { tags: ['desktop-e2e'], wdio: [
+      desktopIt('accessible only', { requires: ['accessibility-click'] }, async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+      desktopIt('either lane', async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+      desktopIt('physical only', { requires: ['physical-click'] }, async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+    ]};
   `,
   );
   const storyPackage = { name: 'inline-fixture', root, manifest: { name: 'inline-fixture' }, storyPatterns: ['*.stories.ts'] };
@@ -326,6 +338,46 @@ async function main() {
     } finally {
       await restrictedButtonHarness.close();
     }
+    const laneResults = (results) => results.map(({ testName, status }) => ({ testName, status }));
+    // The accessible lane trusts the driver's own report, so a driver that does not show physical input disabled fails closed.
+    const unmaskedReport = new DesktopRunReporter({
+      artifactsRoot: path.join(root, 'lane-reports'),
+      lane: { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: false },
+      summary: false,
+    });
+    let unmaskedLane;
+    try {
+      await run('lane', { input: 'accessible', report: unmaskedReport });
+      throw new Error('An accessible lane must not run against a driver that reports physical input enabled.');
+    } catch (error) {
+      if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
+        throw error;
+      unmaskedLane = { results: laneResults(error.results), message: error.message };
+    }
+    const unmaskedLaneResult = await unmaskedReport.finish();
+    const maskedHarness = await createDesktopDriverStoryHarness(manifest, {
+      features: { keyboard: false, physicalClick: false, wheel: false },
+    });
+    let accessibleLane;
+    try {
+      accessibleLane = laneResults(
+        await run('lane', { input: 'accessible', targetId: maskedHarness.target.id, url: maskedHarness.server.url }),
+      );
+    } finally {
+      await maskedHarness.close();
+    }
+    const physicalLane = laneResults(await run('lane', { input: 'physical' }));
+    // Without a lane a declared physical case must not pin physical click: a host that masks it reports the case unsupported
+    // rather than failing to create the session, as the skip it replaces did not fail.
+    const unmaskedPhysicalHarness = await createDesktopDriverStoryHarness(manifest, { features: { physicalClick: false } });
+    let compatibilityLane;
+    try {
+      compatibilityLane = laneResults(
+        await run('lane', { targetId: unmaskedPhysicalHarness.target.id, url: unmaskedPhysicalHarness.server.url }),
+      );
+    } finally {
+      await unmaskedPhysicalHarness.close();
+    }
     process.stdout.write(
       '\nWDIO_RESULT ' +
         JSON.stringify({
@@ -338,6 +390,18 @@ async function main() {
           smokeFailureLogged,
           button: button.map(({ testName, status }) => ({ testName, status })),
           restrictedButton: restrictedButton.map(({ testName, status }) => ({ testName, status })),
+          lane: {
+            accessible: accessibleLane,
+            physical: physicalLane,
+            compatibility: compatibilityLane,
+            unmasked: {
+              ...unmaskedLane,
+              status: unmaskedLaneResult.status,
+              failed: unmaskedLaneResult.counts.failed,
+              excluded: unmaskedLaneResult.selection?.excluded,
+              reported: unmaskedLaneResult.failures.map(({ error }) => error.message),
+            },
+          },
           platforms,
           namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
           namedTimeout,

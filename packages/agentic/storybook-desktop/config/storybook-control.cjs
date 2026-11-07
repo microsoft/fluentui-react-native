@@ -145,8 +145,12 @@ async function runAuthoredTests() {
   const configUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'config', 'index.js')).href;
   const { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } = await import(smokeTestsUrl);
   const { makeDesktopStorybookConfig } = await import(configUrl);
+  // The driver instance's lane is a per-run choice the CLI resolved, so it travels as an option, not as configuration.
+  const { input, ...wdio } = manifest.wdio ?? {};
   const result = await runDesktopStorybookSmokeTests({
-    config: makeDesktopStorybookConfig({ projectRoot: process.cwd(), wdio: manifest.wdio }),
+    config: makeDesktopStorybookConfig({ projectRoot: process.cwd(), wdio }),
+    ...(input ? { input } : {}),
+    ...(manifest.scope ? { scope: manifest.scope } : {}),
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- the Desktop Driver is loopback-only
     driverUrl: `http://127.0.0.1:${manifest.driverPort}`,
     manifest: manifest.storyManifest,

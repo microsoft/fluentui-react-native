@@ -120,25 +120,25 @@ handoff are still work in progress; see [current status](current-status.md).
 
 ## Module ownership
 
-| Module             | Responsibility                                                     |
-| ------------------ | ------------------------------------------------------------------ |
-| `src/protocol`     | W3C parsing, actions, capabilities, timeouts, and errors           |
-| `src/server`       | HTTP routing, target registry, sessions, windows, and elements     |
-| `src/host`         | Platform-neutral `DesktopHost` and target contracts                |
-| `src/hosts/fake`   | Deterministic in-memory provider                                   |
-| `src/hosts/native` | Long-lived helper process and `DesktopHost` adapter                |
-| `src/native`       | Build, cache, resolution, verification, manifests, and wire types  |
-| `native/macos`     | Swift operating-system implementation                              |
-| `native/windows`   | Shared C++ Windows and Win32 implementation                        |
-| `src/client`       | Low-level typed W3C client                                         |
-| `src/wdio`         | Sanctioned WebdriverIO integration and custom commands             |
-| `src/authoring`    | Serializable story plans, selectors, capabilities, and results     |
-| `src/runner`       | Filtering, sharding, execution, and result classification          |
-| `src/artifacts`    | Confined atomic evidence                                           |
-| `src/agent`        | Bounded JSON-safe operations                                       |
-| `src/operations`   | Agent operation catalog, executor, references, ledger, and journal |
-| `src/testing`      | Fake harnesses and Storybook test doubles                          |
-| `src/cli`          | Commander parsing, JSON output, and process exit adaptation        |
+| Module             | Responsibility                                                                   |
+| ------------------ | -------------------------------------------------------------------------------- |
+| `src/protocol`     | W3C parsing, actions, capabilities, timeouts, and errors                         |
+| `src/server`       | HTTP routing, target registry, sessions, windows, and elements                   |
+| `src/host`         | Platform-neutral `DesktopHost` and target contracts                              |
+| `src/hosts/fake`   | Deterministic in-memory provider                                                 |
+| `src/hosts/native` | Long-lived helper process and `DesktopHost` adapter                              |
+| `src/native`       | Build, cache, resolution, verification, manifests, and wire types                |
+| `native/macos`     | Swift operating-system implementation                                            |
+| `native/windows`   | Shared C++ Windows and Win32 implementation                                      |
+| `src/client`       | Low-level typed W3C client                                                       |
+| `src/wdio`         | Sanctioned WebdriverIO integration and custom commands                           |
+| `src/authoring`    | Serializable story plans, selectors, capabilities, results, and case descriptors |
+| `src/runner`       | Filtering, sharding, execution, and result classification                        |
+| `src/artifacts`    | Confined atomic evidence                                                         |
+| `src/agent`        | Bounded JSON-safe operations                                                     |
+| `src/operations`   | Agent operation catalog, executor, references, ledger, and journal               |
+| `src/testing`      | Fake harnesses and Storybook test doubles                                        |
+| `src/cli`          | Commander parsing, JSON output, and process exit adaptation                      |
 
 ## Deliberate boundaries
 

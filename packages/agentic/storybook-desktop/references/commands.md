@@ -29,6 +29,8 @@ only). The mode precedence is CLI flag, `DESKTOP_REPORTER`, config, then
 | `test --<platform> --list`                    | Discover authored executable story-test IDs         |
 | `test --<platform> --test <glob>`             | Run matching isolated story callbacks               |
 | `test --<platform> --input accessible`        | Select accessible and `both` descriptor cases       |
+| `test --<platform> --list --input physical`   | Preview a lane's selection and exclusions           |
+| `driver --<platform> --input accessible`      | Start a driver that masks physical input            |
 | `smoke --<platform> --mode stories`           | Build/bundle/launch, traverse stories, clean up     |
 | `smoke --<platform> --mode stories-and-tests` | Traverse stories and execute callbacks              |
 
@@ -63,10 +65,16 @@ Windows smokes.
 
 Storybook test and stories-and-tests smoke commands accept
 `--input accessible|physical`. The lane filters `desktopIt` cases by their
-resolved input and target platform. `driver --input` records the default lane
-for subsequent tests against that instance. Legacy callback collections are
-not eligible for input-lane runs. Input lanes cannot be combined with an
-explicit non-`auto` click mode.
+resolved input, target platform, and scope. Without a flag the lane comes from
+`DESKTOP_INPUT`, then from the driver instance a `test` attaches to; none of them
+means compatibility mode, which runs every case as before. `driver --input`
+starts the driver for that lane and records it for subsequent tests against the
+instance. An `accessible` driver masks keyboard, physical click, and wheel, and
+`test --input accessible` verifies the mask before running anything: a driver
+that is not masked fails the run rather than letting a case move the pointer.
+Legacy callback collections are not eligible for input-lane runs. Input lanes
+cannot be combined with an explicit non-`auto` click mode. See
+[story tests](story-tests.md#run-an-input-lane).
 
 The TypeScript API exposes the same operations through `DesktopStorybookCli`.
 Higher-level supervisors should inject their shared reporter, runner, and

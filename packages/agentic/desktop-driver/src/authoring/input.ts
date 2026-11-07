@@ -16,6 +16,21 @@ export const desktopRequirements = [
 export type DesktopRequirement = (typeof desktopRequirements)[number];
 export type DesktopInput = 'accessible' | 'physical' | 'both';
 export type DesktopInputLane = Exclude<DesktopInput, 'both'>;
+export const desktopInputLanes = ['accessible', 'physical'] as const satisfies readonly DesktopInputLane[];
+
+/**
+ * The input an accessible lane keeps from reaching the application. A host that reports any of these as anything other
+ * than `false` cannot back the lane, because a case could then deliver physical input without anyone noticing.
+ */
+export const accessibleLaneMaskedFeatures = ['keyboard', 'physicalClick', 'wheel'] as const;
+export type AccessibleLaneMaskedFeature = (typeof accessibleLaneMaskedFeatures)[number];
+
+/** The masked features a host still offers. A missing report counts as unmasked, so the check fails closed. */
+export function unmaskedAccessibleFeatures(features: unknown): readonly AccessibleLaneMaskedFeature[] {
+  const reported = typeof features === 'object' && features !== null ? (features as Readonly<Record<string, unknown>>) : {};
+  return accessibleLaneMaskedFeatures.filter((feature) => reported[feature] !== false);
+}
+
 export type DesktopPlatforms =
   | readonly [DesktopEndpoint, ...DesktopEndpoint[]]
   | readonly [`!${DesktopEndpoint}`, ...`!${DesktopEndpoint}`[]];
@@ -112,11 +127,144 @@ export function validateDesktopCaseOptions(value: unknown, source = 'desktop tes
   };
 }
 
+/**
+ * Validates the options of a group. A group scopes the cases inside it, so it can narrow where they run and add what they
+ * require, but a gap describes one case and cannot be declared on a group.
+ */
+export function validateDesktopGroupOptions(value: unknown, source = 'desktop group options'): ResolvedDesktopCaseOptions {
+  const options = validateDesktopCaseOptions(value, source);
+  if (options.unsupported || options.quarantine) {
+    throw new TypeError(`${source} cannot declare unsupported or quarantine; declare the gap on the case.`);
+  }
+  return options;
+}
+
+/**
+ * Composes the options of an enclosing group with those of a nested group or case. Requirements add up, platforms and
+ * scope values intersect, and `input` can only narrow, so nothing inside a group can claim less than the group's own setup
+ * needs. A combination that could never run is an error rather than a silent exclusion.
+ */
+export function mergeDesktopCaseOptions(
+  parent: ResolvedDesktopCaseOptions | undefined,
+  child: ResolvedDesktopCaseOptions,
+  source = 'desktop test options',
+): ResolvedDesktopCaseOptions {
+  if (!parent) return child;
+  const platforms = endpoints.filter(
+    (endpoint) => matchesDesktopPlatforms(parent.platforms, endpoint) && matchesDesktopPlatforms(child.platforms, endpoint),
+  );
+  if (platforms.length === 0) throw new TypeError(`${source}.platforms do not overlap the enclosing group's, so it could never run.`);
+  const scope = intersectScope(parent.scope, child.scope, source);
+  const input = mergeDeclaredInput(parent, child, source);
+  return validateDesktopCaseOptions(
+    {
+      ...(input ? { input } : {}),
+      requires: [...new Set([...(parent.requires ?? []), ...(child.requires ?? [])])],
+      ...(platforms.length < endpoints.length ? { platforms } : {}),
+      ...(scope ? { scope } : {}),
+      ...(child.unsupported ? { unsupported: child.unsupported } : {}),
+      ...(child.quarantine ? { quarantine: child.quarantine } : {}),
+    },
+    source,
+  );
+}
+
+function mergeDeclaredInput(
+  parent: ResolvedDesktopCaseOptions,
+  child: ResolvedDesktopCaseOptions,
+  source: string,
+): DesktopInput | undefined {
+  // An explicit `both` narrows nothing, so it must not stop a nested case from deriving a transport.
+  const enclosing = parent.inputSource === 'declared' && parent.input !== 'both' ? parent.input : undefined;
+  if (child.inputSource !== 'declared') return enclosing;
+  if (enclosing && child.input !== enclosing)
+    throw new TypeError(`${source}.input "${child.input}" cannot change the enclosing group's "${enclosing}".`);
+  return child.input;
+}
+
+function intersectScope(
+  parent: DesktopCaseOptions['scope'],
+  child: DesktopCaseOptions['scope'],
+  source: string,
+): Record<string, string[]> | undefined {
+  if (!parent && !child) return undefined;
+  const merged: Record<string, string[]> = {};
+  for (const key of new Set([...Object.keys(parent ?? {}), ...Object.keys(child ?? {})])) {
+    const left = parent?.[key];
+    const right = child?.[key];
+    const values = left && right ? left.filter((value) => right.includes(value)) : [...(left ?? right ?? [])];
+    if (values.length === 0) throw new TypeError(`${source}.scope.${key} does not overlap the enclosing group's, so it could never run.`);
+    merged[key] = values;
+  }
+  return merged;
+}
+
 export function matchesDesktopPlatforms(platforms: DesktopPlatforms | undefined, endpoint: DesktopEndpoint): boolean {
   if (platforms === undefined) return true;
   const negative = platforms[0].startsWith('!');
   const values = platforms.map((platform) => (negative ? platform.slice(1) : platform));
   return negative ? !values.includes(endpoint) : values.includes(endpoint);
+}
+
+/** Allowed values per scope key. */
+export type DesktopScopeDomains = Readonly<Record<string, readonly string[]>>;
+/** The one value a target holds for each scope key it supplies. */
+export type DesktopScopeValues = Readonly<Record<string, string>>;
+
+const builtInScopeDomains: DesktopScopeDomains = Object.freeze({ 'rn.renderer': Object.freeze(['fabric', 'paper']) });
+
+/**
+ * The built-in domains plus any custom ones. A consumer adds its own keys, such as a product flavor, but `rn.*` belongs to
+ * the framework so a test written for `rn.renderer` means the same thing everywhere.
+ */
+export function resolveDesktopScopeDomains(custom?: unknown, source = 'testScopes'): DesktopScopeDomains {
+  if (custom === undefined) return builtInScopeDomains;
+  const resolved: Record<string, readonly string[]> = { ...builtInScopeDomains };
+  for (const [key, values] of Object.entries(object(custom, source))) {
+    if (key.startsWith('rn.')) throw new TypeError(`${source} cannot declare "${key}"; the rn.* scope keys are reserved.`);
+    resolved[key] = Object.freeze([...scopeEntry(key, values, source)]);
+  }
+  return Object.freeze(resolved);
+}
+
+/** Checks that every key a target supplies is a known domain and that its value belongs to it. */
+export function resolveDesktopScopeValues(supplied: unknown, domains: DesktopScopeDomains, source = 'testScope'): DesktopScopeValues {
+  const resolved: Record<string, string> = {};
+  for (const [key, value] of Object.entries(object(supplied, source))) {
+    const domain = ownDomain(domains, key);
+    if (!domain) throw new TypeError(`${source} uses unknown scope key "${key}".`);
+    if (typeof value !== 'string' || !domain.includes(value)) throw new TypeError(`${source}.${key} must be one of: ${domain.join(', ')}.`);
+    resolved[key] = value;
+  }
+  return Object.freeze(resolved);
+}
+
+/**
+ * Values OR within a key and keys AND. An undeclared key or value, or a key the target does not supply, is a
+ * configuration error rather than an exclusion, so a typo cannot silently drop a case. Every key is checked before the
+ * result is returned.
+ */
+export function matchesDesktopScope(
+  scope: DesktopCaseOptions['scope'],
+  supplied: DesktopScopeValues,
+  domains: DesktopScopeDomains,
+  source = 'desktop test scope',
+): boolean {
+  let matches = true;
+  for (const [key, values] of Object.entries(scope ?? {})) {
+    const domain = ownDomain(domains, key);
+    if (!domain) throw new TypeError(`${source} uses unknown scope key "${key}".`);
+    const unknown = values.find((value) => !domain.includes(value));
+    if (unknown !== undefined) throw new TypeError(`${source}.${key} uses "${unknown}", which is not one of: ${domain.join(', ')}.`);
+    const actual = Object.hasOwn(supplied, key) ? supplied[key] : undefined;
+    if (actual === undefined) throw new TypeError(`${source}.${key} is not supplied by this target.`);
+    if (!values.includes(actual)) matches = false;
+  }
+  return matches;
+}
+
+function ownDomain(domains: DesktopScopeDomains, key: string): readonly string[] | undefined {
+  return Object.hasOwn(domains, key) ? domains[key] : undefined;
 }
 
 function validatePlatforms(value: unknown, source: string, required = false): void {
@@ -138,19 +286,21 @@ function validatePlatforms(value: unknown, source: string, required = false): vo
 
 function validateScope(value: unknown, source: string): void {
   if (value === undefined) return;
-  const scope = object(value, source);
-  for (const [key, values] of Object.entries(scope)) {
-    if (!/^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/.test(key)) throw new TypeError(`${source} contains invalid key "${key}".`);
-    if (!Array.isArray(values) || values.length === 0) throw new TypeError(`${source}.${key} must be a non-empty value list.`);
-    const seen = new Set<string>();
-    for (const item of values) {
-      if (typeof item !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(item)) {
-        throw new TypeError(`${source}.${key} contains an invalid value.`);
-      }
-      if (seen.has(item)) throw new TypeError(`${source}.${key} contains duplicate "${item}".`);
-      seen.add(item);
+  for (const [key, values] of Object.entries(object(value, source))) scopeEntry(key, values, source);
+}
+
+function scopeEntry(key: string, values: unknown, source: string): readonly string[] {
+  if (!/^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/.test(key)) throw new TypeError(`${source} contains invalid key "${key}".`);
+  if (!Array.isArray(values) || values.length === 0) throw new TypeError(`${source}.${key} must be a non-empty value list.`);
+  const seen = new Set<string>();
+  for (const item of values) {
+    if (typeof item !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(item)) {
+      throw new TypeError(`${source}.${key} contains an invalid value.`);
     }
+    if (seen.has(item)) throw new TypeError(`${source}.${key} contains duplicate "${item}".`);
+    seen.add(item);
   }
+  return values as readonly string[];
 }
 
 function object(value: unknown, source: string): Record<string, unknown> {

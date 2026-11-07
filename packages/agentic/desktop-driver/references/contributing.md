@@ -23,7 +23,7 @@ change-oriented guidance.
 | `src/native`       | Source build, cache, selection, verification, and native artifact types |
 | `native/macos`     | Swift implementation and self-test                                      |
 | `native/windows`   | Shared C++ Windows/Win32 implementation and self-test                   |
-| `src/authoring`    | Static JSON plan and result schemas                                     |
+| `src/authoring`    | Static JSON plan and result schemas, and the case descriptor            |
 | `src/runner`       | Plan selection, capability checks, execution, and classification        |
 | `src/wdio`         | Sanctioned WebdriverIO connection and commands                          |
 | `src/client`       | Low-level typed W3C client                                              |
@@ -37,6 +37,39 @@ change-oriented guidance.
 Do not duplicate native build, cache, or verification logic in Storybook
 consumers. Do not move Storybook manifest generation or app lifecycle into this
 package.
+
+## Case descriptors and input lanes
+
+`src/authoring/input.ts` and `src/authoring/selection.ts` are the one
+implementation of the test case descriptor (`requires`, `input`, `platforms`,
+`scope`, and declared gaps). Storybook extraction and its runner, and the
+desktop-test Jasmine adapter, all call them; do not reimplement validation,
+merging, or a decision in a consumer. Keep both files pure data and functions,
+with no Node, React, or WebdriverIO imports, because stories and workers load
+them. `input.ts` also has no runtime imports at all (its one import is a type),
+and the `./authoring/input` subpath exports it directly: desktop-test's config
+loader reads scope domains from it, and a config file is loaded from source
+through a CommonJS fallback that cannot resolve this package's `.js`
+specifiers, so keep it that way.
+
+- Add a requirement to `desktopRequirements`, to the physical or accessible
+  requirement set in `input.ts` when it implies an input, and to the
+  `requirementFeature` map in `selection.ts` for the host feature that backs it,
+  together. A requirement whose feature a host did not report is unmet.
+- `mergeDesktopCaseOptions` only narrows: requirements union, `platforms` and
+  `scope` intersect, and a nested declaration can never widen or change its
+  group's input. An overlap that is empty is an error because the case could
+  never run. A group cannot carry a gap.
+- `decideDesktopCase` judges platform, then scope, then the lane, so a case is
+  excluded for one reason. It resolves a declared gap too, so an expired
+  quarantine stops a run before anything executes.
+- `resolveDesktopClickMode` lets a lane decide the click mode outright. That is
+  how one `click` requirement is an accessibility click in the accessible lane
+  and a physical click in the physical lane.
+- `accessibleLaneMaskedFeatures` (`keyboard`, `physicalClick`, `wheel`) is what
+  an accessible lane disables through the native host's `disabledInputFeatures`,
+  and `unmaskedAccessibleFeatures` fails closed when a host reports any of them
+  as still available. Change the set together with the hosts that apply it.
 
 ## Behavioral rules
 

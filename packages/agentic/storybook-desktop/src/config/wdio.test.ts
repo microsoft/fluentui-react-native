@@ -25,6 +25,11 @@ describe('Storybook-owned wdio configuration', () => {
     expect(() => resolveWdioOptions({ tag: ' ' })).toThrow('wdio.tag');
   });
 
+  test('rejects a configured input lane, which is chosen per run', () => {
+    // @ts-expect-error `input` is not a configurable default.
+    expect(() => makeDesktopStorybookConfig({ wdio: { input: 'accessible' } })).toThrow('wdio.input is chosen per run');
+  });
+
   test('resolves an explicit input lane and rejects conflicting click configuration', () => {
     const previous = process.env.DESKTOP_INPUT;
     delete process.env.DESKTOP_INPUT;

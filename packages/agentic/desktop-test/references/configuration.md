@@ -37,6 +37,34 @@ The config schema rejects unknown fields, cycles, and unmatched spec patterns.
 Spec paths resolve against the suite project's root; target references and
 hooks resolve against their declaring config.
 
+## Scope domains
+
+A test can declare `scope` values so it runs only on some targets, such as one
+renderer or product flavor. Domains are declared in config. `rn.renderer`
+(`fabric`, `paper`) is built in and comes from the target's React Native host;
+the `rn.*` keys are reserved for the framework. A consumer that is not React
+Native, or that needs another dimension, lists its own keys in `testScopes`, each
+with a non-empty list of allowed values, and each target sets its own value in
+`testScope`:
+
+```ts
+export default defineDesktopConfig({
+  schemaVersion: 1,
+  projectRoot: new URL('.', import.meta.url),
+  testScopes: { flavor: ['stable', 'preview'] },
+  targets: {
+    windows: {
+      host: { kind: 'installed', application: { executablePath: 'C:\\apps\\Sample.exe', windowTitle: 'Sample' } },
+      testScope: { flavor: 'preview' },
+    },
+  },
+});
+```
+
+A `testScope` key that is not declared, a value outside its domain, or an attempt
+to set an `rn.*` key is a configuration error. So is a test scoped on a key its
+target does not supply: a typo or a missing value must not silently drop tests.
+
 ## Helper policy
 
 `nativeDriver` accepts only `cacheRoot`, `helperPath`, and `installRoot`.
