@@ -4,6 +4,7 @@ import { Pressable, Text, View, StyleSheet } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { useFocusablePressable } from '@fluentui-react-native/framework-base';
 import type { PointerFocusMode } from '@fluentui-react-native/framework-base';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Callout } from './Callout';
@@ -344,83 +345,78 @@ export default meta;
 type Story = WdioStory<StoryObj<ExampleProps>>;
 export const Default: Story = {
   tags: ['desktop-e2e'],
-  wdio: {
-    'light-dismisses on an outside owner click and explicitly rearms': async ({ browser, expect, platform, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Light dismissal requires physical owner input.');
-        return;
-      }
-      const status = await browser.$('~modern-callout-status');
-      const dismissal = await browser.$('~modern-callout-dismissal');
-      // The App SDK notification itself has no cause; its unclassified path can win the outside-pointer race.
-      const expected = platform === 'windows' ? /^Dismissed: (outside-pointer|native-light-dismiss)$/ : 'Dismissed: outside-pointer';
-      for (let attempt = 0; attempt < 2; attempt++) {
+  wdio: [
+    desktopIt(
+      'light-dismisses on an outside owner click and explicitly rearms',
+      { requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        const status = await browser.$('~modern-callout-status');
+        const dismissal = await browser.$('~modern-callout-dismissal');
+        // The App SDK notification itself has no cause; its unclassified path can win the outside-pointer race.
+        const expected = platform === 'windows' ? /^Dismissed: (outside-pointer|native-light-dismiss)$/ : 'Dismissed: outside-pointer';
+        for (let attempt = 0; attempt < 2; attempt++) {
+          await expect(status).toHaveText('Ready');
+          await expect(dismissal).toHaveText('Open');
+          await status.click();
+          await expect(dismissal).toHaveText(expected);
+          // A latched presentation must not reopen merely because open remains true; readiness would reset the label.
+          await browser.pause(500);
+          await expect(dismissal).toHaveText(expected);
+          await (await browser.$('~modern-callout-reopen')).click();
+        }
         await expect(status).toHaveText('Ready');
         await expect(dismissal).toHaveText('Open');
-        await status.click();
-        await expect(dismissal).toHaveText(expected);
-        // A latched presentation must not reopen merely because open remains true; readiness would reset the label.
+      },
+    ),
+    desktopIt(
+      'keeps the presentation open for pointer input on its view anchor',
+      { requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
+        const dismissal = await browser.$('~modern-callout-dismissal');
+        await expect(dismissal).toHaveText('Open');
+        await (await browser.$('~modern-callout-anchor')).click();
         await browser.pause(500);
-        await expect(dismissal).toHaveText(expected);
-        await (await browser.$('~modern-callout-reopen')).click();
-      }
-      await expect(status).toHaveText('Ready');
-      await expect(dismissal).toHaveText('Open');
-    },
-    'keeps the presentation open for pointer input on its view anchor': async ({ browser, expect, platform, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Anchor input requires physical owner input.');
-        return;
-      }
-      await expect(await browser.$('~modern-callout-status')).toHaveText('Ready');
-      const dismissal = await browser.$('~modern-callout-dismissal');
-      await expect(dismissal).toHaveText('Open');
-      await (await browser.$('~modern-callout-anchor')).click();
-      await browser.pause(500);
-      await expect(dismissal).toHaveText('Open');
-      await (await browser.$('~modern-callout-status')).click();
-      await expect(dismissal).toHaveText(
-        platform === 'windows' ? /^Dismissed: (outside-pointer|native-light-dismiss)$/ : 'Dismissed: outside-pointer',
-      );
-    },
-    'places content below the view anchor with the requested gap': async (context) => {
+        await expect(dismissal).toHaveText('Open');
+        await (await browser.$('~modern-callout-status')).click();
+        await expect(dismissal).toHaveText(
+          platform === 'windows' ? /^Dismissed: (outside-pointer|native-light-dismiss)$/ : 'Dismissed: outside-pointer',
+        );
+      },
+    ),
+    desktopIt('places content below the view anchor with the requested gap', async (context) => {
       const { expectCalloutPlacement } = await import('./placement.wdio.ts');
       await expectCalloutPlacement(context);
-    },
-  },
+    }),
+  ],
 };
 export const NativeOperations: Story = {
   args: { exercise: 'commands' },
   tags: ['desktop-e2e'],
-  wdio: {
-    'readies, confirms descendant focus, closes, and explicitly rearms': async ({ browser, expect, platform, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Physical owner input unavailable.');
-        return;
-      }
-      const status = await browser.$('~modern-callout-status');
-      const operations = await browser.$('~modern-callout-operations');
-      await expect(status).toHaveText('Ready');
-      for (let attempt = 0; attempt < 2; attempt++) {
-        await (await browser.$('~modern-callout-reopen')).click();
-        await expect(operations).toHaveText('confirmed/confirmed/confirmed');
-        await expect(await browser.$('~modern-callout-dismissal')).toHaveText('Dismissed: programmatic');
-        await expect(await browser.$('~modern-callout-focus-status')).toHaveText('Child focused');
-        // Windows popups are owned tool windows that the driver does not enumerate as top-level windows.
-        if (platform === 'macos') await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, { timeout: 5000 });
-      }
-    },
-  },
+  wdio: [
+    desktopIt(
+      'readies, confirms descendant focus, closes, and explicitly rearms',
+      { requires: ['physical-click'] },
+      async ({ browser, expect, platform }) => {
+        const status = await browser.$('~modern-callout-status');
+        const operations = await browser.$('~modern-callout-operations');
+        await expect(status).toHaveText('Ready');
+        for (let attempt = 0; attempt < 2; attempt++) {
+          await (await browser.$('~modern-callout-reopen')).click();
+          await expect(operations).toHaveText('confirmed/confirmed/confirmed');
+          await expect(await browser.$('~modern-callout-dismissal')).toHaveText('Dismissed: programmatic');
+          await expect(await browser.$('~modern-callout-focus-status')).toHaveText('Child focused');
+          // Windows popups are owned tool windows that the driver does not enumerate as top-level windows.
+          if (platform === 'macos') await browser.waitUntil(async () => (await browser.getWindowHandles()).length === 1, { timeout: 5000 });
+        }
+      },
+    ),
+  ],
 };
 export const KeyboardDismissal: Story = {
   args: { exercise: 'focus' },
-  wdio: {
-    'dismisses focused content on Escape': async ({ browser, expect, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (!features?.physicalClick || !features.keyboard) {
-        skip('Escape dismissal requires physical owner and keyboard input.');
-        return;
-      }
+  wdio: [
+    desktopIt('dismisses focused content on Escape', { requires: ['physical-click', 'keyboard'] }, async ({ browser, expect }) => {
       const status = await browser.$('~modern-callout-status');
       await expect(status).toHaveText('Ready');
       await (await browser.$('~modern-callout-reopen')).click();
@@ -430,195 +426,186 @@ export const KeyboardDismissal: Story = {
       await expect(dismissal).toHaveText('Open');
       await browser.keys('\uE00C');
       await expect(dismissal).toHaveText('Dismissed: escape');
-    },
-  },
+    }),
+  ],
 };
 export const FirstFocusable: Story = {
   render: () => <EntryFocusExample strategy="first" />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'confirms the first eligible content without a FocusZone': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Entry focus requires physical owner activation.');
-        return;
-      }
+  wdio: [
+    desktopIt('confirms the first eligible content without a FocusZone', { requires: ['physical-click'] }, async ({ browser, expect }) => {
       await (await browser.$('~entry-callout-open')).click();
       await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
       await expect(await browser.$('~entry-callout-focused')).toHaveText('First');
-    },
-  },
+    }),
+  ],
 };
 export const LastFocusable: Story = {
   render: () => <EntryFocusExample strategy="last" />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'confirms the last eligible nested content without a FocusZone': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Entry focus requires physical owner activation.');
-        return;
-      }
-      await (await browser.$('~entry-callout-open')).click();
-      await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
-      await expect(await browser.$('~entry-callout-focused')).toHaveText('Last');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'confirms the last eligible nested content without a FocusZone',
+      { requires: ['physical-click'] },
+      async ({ browser, expect }) => {
+        await (await browser.$('~entry-callout-open')).click();
+        await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
+        await expect(await browser.$('~entry-callout-focused')).toHaveText('Last');
+      },
+    ),
+  ],
 };
 export const EmptyFocus: Story = {
   render: () => <EntryFocusExample strategy="first" empty />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'reports missing eligible content instead of manufacturing focus confirmation': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Entry focus requires physical owner activation.');
-        return;
-      }
-      await (await browser.$('~entry-callout-open')).click();
-      await expect(await browser.$('~entry-callout-status')).toHaveText('not-mounted');
-      await expect(await browser.$('~entry-callout-focused')).toHaveText('None');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'reports missing eligible content instead of manufacturing focus confirmation',
+      { requires: ['physical-click'] },
+      async ({ browser, expect }) => {
+        await (await browser.$('~entry-callout-open')).click();
+        await expect(await browser.$('~entry-callout-status')).toHaveText('not-mounted');
+        await expect(await browser.$('~entry-callout-focused')).toHaveText('None');
+      },
+    ),
+  ],
 };
 export const ContainerFocus: Story = {
   render: () => <EntryFocusExample strategy="first" empty container />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'confirms an explicitly focusable empty content container': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Container focus requires physical owner activation.');
-        return;
-      }
+  wdio: [
+    desktopIt('confirms an explicitly focusable empty content container', { requires: ['physical-click'] }, async ({ browser, expect }) => {
       await (await browser.$('~entry-callout-open')).click();
       await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
       await expect(await browser.$('~entry-callout-focused')).toHaveText('Container');
-    },
-  },
+    }),
+  ],
 };
 export const DeferredContainerFocus: Story = {
   render: () => <EntryFocusExample strategy="first" empty container="deferred" />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'orders a focus request after the content update committed before it': async ({ browser, expect, skip }) => {
-      if (!browser.capabilities['furn:features']?.physicalClick) {
-        skip('Container focus requires physical owner activation.');
-        return;
-      }
-      await (await browser.$('~entry-callout-open')).click();
-      await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
-      await expect(await browser.$('~entry-callout-focused')).toHaveText('Container');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'orders a focus request after the content update committed before it',
+      { requires: ['physical-click'] },
+      async ({ browser, expect }) => {
+        await (await browser.$('~entry-callout-open')).click();
+        await expect(await browser.$('~entry-callout-status')).toHaveText('confirmed');
+        await expect(await browser.$('~entry-callout-focused')).toHaveText('Container');
+      },
+    ),
+  ],
 };
 export const LocalRectangle: Story = {
   args: { anchorKind: 'rect' },
-  wdio: {
-    'places content below the local rectangle with the requested gap': async (context) => {
+  wdio: [
+    desktopIt('places content below the local rectangle with the requested gap', async (context) => {
       const { expectCalloutPlacement } = await import('./placement.wdio.ts');
       await expectCalloutPlacement(context, { x: 40, y: 30, height: 30 });
-    },
-  },
+    }),
+  ],
 };
 export const LocalPoint: Story = {
   args: { anchorKind: 'point' },
-  wdio: {
-    'places content below the local point with the requested gap': async (context) => {
+  wdio: [
+    desktopIt('places content below the local point with the requested gap', async (context) => {
       const { expectCalloutPlacement } = await import('./placement.wdio.ts');
       await expectCalloutPlacement(context, { x: 40, y: 60, height: 0 });
-    },
-  },
+    }),
+  ],
 };
 export const MenuComposition: Story = {
   render: ({ pointerFocus }) => <MenuCompositionExample pointerFocus={pointerFocus} />,
   args: { pointerFocus: 'platform' },
   argTypes: { pointerFocus: { control: 'select', options: ['platform', 'always', 'never'] } },
   tags: ['desktop-e2e'],
-  wdio: {
-    'enters a FocusZone, navigates by arrow, and follows the platform focus convention on Escape': async ({
-      browser,
-      expect,
-      platform,
-      skip,
-    }) => {
-      const { exerciseMenuComposition } = await import('./menuComposition.wdio.ts');
-      // Windows and Win32 focus a pressed trigger, so closing the menu restores it. AppKit leaves keyboard focus where
-      // it was on click, so macOS restores the owner window's previous first responder instead.
-      await exerciseMenuComposition({ browser, expect, skip }, { restoresTrigger: platform !== 'macos' });
-    },
-  },
+  wdio: [
+    desktopIt(
+      'enters a FocusZone, navigates by arrow, and follows the platform focus convention on Escape',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { exerciseMenuComposition } = await import('./menuComposition.wdio.ts');
+        // Windows and Win32 focus a pressed trigger, so closing the menu restores it. AppKit leaves keyboard focus where
+        // it was on click, so macOS restores the owner window's previous first responder instead.
+        await exerciseMenuComposition({ browser, expect }, { restoresTrigger: platform !== 'macos' });
+      },
+    ),
+  ],
 };
 export const TabContinuation: Story = {
   render: () => <MenuCompositionExample pointerFocus="always" tabNavigation="continue" />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'closes on Tab and continues past the anchor, and on Shift+Tab returns to it': async ({ browser, expect, platform, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (platform === 'win32') {
-        skip('Win32 hosts keep the cycle behavior (#4377).');
-        return;
-      }
-      if (!features?.physicalClick || !features.keyboard || !features.focus) {
-        skip('Tab exit requires physical owner input, keyboard input, and focus observation.');
-        return;
-      }
-      const trigger = await browser.$('~modern-menu-trigger');
-      const status = await browser.$('~modern-menu-status');
-      await trigger.click();
-      await expect(status).toHaveText('Ready: confirmed');
-      await browser.keys('\uE004');
-      await expect(status).toHaveText('Dismissed: tab-forward');
-      await browser.waitUntil(async () => (await (await browser.$('~modern-menu-after')).getProperty('focused')) === true, {
-        timeout: 5000,
-        timeoutMsg: 'Expected Tab to continue to the view after the anchor.',
-      });
-      await trigger.click();
-      await expect(status).toHaveText('Ready: confirmed');
-      await browser.keys(['\uE008', '\uE004']);
-      await expect(status).toHaveText('Dismissed: tab-backward');
-      await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
-        timeout: 5000,
-        timeoutMsg: 'Expected Shift+Tab to focus the anchor.',
-      });
-    },
-  },
+  wdio: [
+    desktopIt(
+      'closes on Tab and continues past the anchor, and on Shift+Tab returns to it',
+      {
+        requires: ['physical-click', 'keyboard', 'focus'],
+        unsupported: { platforms: ['win32'], reason: 'Win32 hosts keep the cycle behavior.', issue: '#4377' },
+      },
+      async ({ browser, expect }) => {
+        const trigger = await browser.$('~modern-menu-trigger');
+        const status = await browser.$('~modern-menu-status');
+        await trigger.click();
+        await expect(status).toHaveText('Ready: confirmed');
+        await browser.keys('\uE004');
+        await expect(status).toHaveText('Dismissed: tab-forward');
+        await browser.waitUntil(async () => (await (await browser.$('~modern-menu-after')).getProperty('focused')) === true, {
+          timeout: 5000,
+          timeoutMsg: 'Expected Tab to continue to the view after the anchor.',
+        });
+        await trigger.click();
+        await expect(status).toHaveText('Ready: confirmed');
+        await browser.keys(['\uE008', '\uE004']);
+        await expect(status).toHaveText('Dismissed: tab-backward');
+        await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
+          timeout: 5000,
+          timeoutMsg: 'Expected Shift+Tab to focus the anchor.',
+        });
+      },
+    ),
+  ],
 };
 export const TabDismissal: Story = {
   render: () => <MenuCompositionExample pointerFocus="always" tabNavigation="dismiss" />,
   tags: ['desktop-e2e'],
-  wdio: {
-    'closes on Tab and leaves the owner window its retained focus': async ({ browser, expect, platform, skip }) => {
-      const features = browser.capabilities['furn:features'];
-      if (platform === 'win32') {
-        skip('Win32 hosts keep the cycle behavior (#4377).');
-        return;
-      }
-      if (!features?.physicalClick || !features.keyboard || !features.focus) {
-        skip('Tab exit requires physical owner input, keyboard input, and focus observation.');
-        return;
-      }
-      const trigger = await browser.$('~modern-menu-trigger');
-      const status = await browser.$('~modern-menu-status');
-      await trigger.click();
-      await expect(status).toHaveText('Ready: confirmed');
-      await browser.keys('\uE004');
-      await expect(status).toHaveText('Dismissed: tab-forward');
-      await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
-        timeout: 5000,
-        timeoutMsg: 'Expected the owner window to keep the focused trigger.',
-      });
-      expect(await (await browser.$('~modern-menu-after')).getProperty('focused')).toBe(false);
-    },
-  },
+  wdio: [
+    desktopIt(
+      'closes on Tab and leaves the owner window its retained focus',
+      {
+        requires: ['physical-click', 'keyboard', 'focus'],
+        unsupported: { platforms: ['win32'], reason: 'Win32 hosts keep the cycle behavior.', issue: '#4377' },
+      },
+      async ({ browser, expect }) => {
+        const trigger = await browser.$('~modern-menu-trigger');
+        const status = await browser.$('~modern-menu-status');
+        await trigger.click();
+        await expect(status).toHaveText('Ready: confirmed');
+        await browser.keys('\uE004');
+        await expect(status).toHaveText('Dismissed: tab-forward');
+        await browser.waitUntil(async () => (await trigger.getProperty('focused')) === true, {
+          timeout: 5000,
+          timeoutMsg: 'Expected the owner window to keep the focused trigger.',
+        });
+        expect(await (await browser.$('~modern-menu-after')).getProperty('focused')).toBe(false);
+      },
+    ),
+  ],
 };
 export const MenuCompositionFocusingTrigger: Story = {
   render: ({ pointerFocus }) => <MenuCompositionExample pointerFocus={pointerFocus} />,
   args: { pointerFocus: 'always' },
   argTypes: MenuComposition.argTypes,
   tags: ['desktop-e2e'],
-  wdio: {
-    'restores keyboard focus to a trigger focused on press': async ({ browser, expect, skip }) => {
-      const { exerciseMenuComposition } = await import('./menuComposition.wdio.ts');
-      await exerciseMenuComposition({ browser, expect, skip }, { restoresTrigger: true });
-    },
-  },
+  wdio: [
+    desktopIt(
+      'restores keyboard focus to a trigger focused on press',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { exerciseMenuComposition } = await import('./menuComposition.wdio.ts');
+        await exerciseMenuComposition({ browser, expect }, { restoresTrigger: true });
+      },
+    ),
+  ],
 };
 const styles = StyleSheet.create({
   story: { padding: 24, gap: 16 },

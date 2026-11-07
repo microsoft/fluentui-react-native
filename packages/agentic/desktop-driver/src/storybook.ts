@@ -1,4 +1,5 @@
 import type { DesktopStoryTests } from './authoring/storyTests.js';
+import type { ResolvedDesktopCaseOptions } from './authoring/input.js';
 import type { DesktopEndpoint } from './protocol/types.js';
 import { WebDriverError } from './protocol/errors.js';
 import { attachFailureEffect } from './protocol/settlement.js';
@@ -11,7 +12,12 @@ export type DesktopStoryManifestEntry = {
   tags: readonly string[];
   title: string;
   tests?: DesktopStoryTests;
-  wdio?: { digest: string; exportName: string; testNames?: readonly string[] };
+  wdio?: {
+    digest: string;
+    exportName: string;
+    testNames?: readonly string[];
+    cases?: readonly { name: string; options: ResolvedDesktopCaseOptions }[];
+  };
 };
 
 export type DesktopStoryManifest = {

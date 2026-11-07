@@ -65,6 +65,58 @@ directory or render a duplicate summary.
 Story-specific readiness, authenticated channel events, and callback execution
 are owned by `@fluentui-react-native/storybook-desktop`.
 
+## Input lanes
+
+A `test` run can execute one input lane (see [commands](commands.md#input-lanes)).
+Its report records the lane, counts what the run left out before executing, and
+holds every selected test to its declared outcome. `run.json` carries the lane as
+`{ input, source, masking?, policyEnforced }`:
+
+- `input`: `accessible` or `physical`.
+- `source`: `option` for `--input`, `environment` for `DESKTOP_INPUT`, or `driver`
+  when the lane was read from the driver instance a `test` attached to.
+- `masking` (accessible only): `host-masked` when this command started the host
+  with keyboard, physical click, and wheel disabled, or `verified-masked` when it
+  attached to a host and verified that mask before running anything.
+- `policyEnforced`: always `false`. The report records what was requested and how
+  the host was masked; it never claims what input a test delivered, so a physical
+  lane is labelled a pilot.
+
+Tests that a lane, a `platforms` list, or a `scope` leaves out are not tests, so
+they are never reported as skipped. A producer announces them in `selection`
+events, and `run.json` sums them as `selection.excluded: { platform, scope, input }`.
+A case counts once, under the first reason that applies in that order, and only if
+it matched the user's own filters, such as a story filter. A `selection` event
+with a `key` is counted once, so a retried worker that announces the same
+exclusions again does not double them. A run whose producers reported none has no
+`selection`.
+
+A lane run promised to execute its whole selection, so its verdict is stricter:
+
+- `failed`: a failed test or an infrastructure failure, as in any run.
+- `incomplete`: a selected test was skipped at run time, was `unsupported` with no
+  declaration (the host did not meet a `requires`), or no test executed. `optional`
+  never excuses these, so a lane that runs nothing is not reported `skipped`.
+- `passed`: otherwise. A test declared `unsupported` or `quarantine` is reported
+  unsupported without making the run incomplete. Summaries count them as
+  `N unsupported (N declared, N quarantined)` so an undeclared gap stands out.
+
+`failed` outranks `incomplete`, which outranks `passed`. A run without a lane keeps
+its existing verdict.
+
+The plain and GitHub summaries show the lane and exclusions on one line, such as
+`Selection: input accessible (host-masked) from --input; excluded 4 by platform, 0 by scope, 12 by input`.
+The JUnit file records the lane as the properties `desktop.input`,
+`desktop.input.label`, and `desktop.input.source`, the exclusions as
+`desktop.excluded.platform`, `desktop.excluded.scope`, and `desktop.excluded.input`,
+and `desktop.declaredUnsupported` and `desktop.quarantined` when present. The label
+is `accessible (host-masked)`, `accessible (verified-masked)`, or `physical pilot`.
+
+A delegated command, which inherits its parent's collector, sends its exclusions to
+the parent but not its lane, so the parent's `run.json` has no `lane`. The command
+still holds its own cohort to the lane: a Storybook `test` reports an incomplete
+cohort to the parent when a selected test has no declared gap and did not run.
+
 ## Persisted read queries
 
 The direct `@fluentui-react-native/desktop-test/reporting/run-queries` entry
@@ -125,7 +177,8 @@ external integration); `addSecret` can update the read redactor. The collector
 redacts before persistence, and queries redact again before clipping text.
 
 Readers submit only an opaque run ID, a declared operation, and its bounded
-parameters. `status` returns complete counts and terminal/coverage state.
+parameters. `status` returns complete counts, terminal/coverage state, and the
+run's input `lane` and `excluded` counts when it has them.
 `tests`, `work`, `failures`, and `artifacts` return pages with a default limit of
 10 and maximum of 25, capped at 16 KiB. Page IDs do not expose producer IDs or
 paths. Text fields are capped at 1 KiB after redaction. `omissions.items` counts

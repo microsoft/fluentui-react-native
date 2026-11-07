@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-driver",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "W3C WebDriver-compatible automation for React Native desktop applications",
   "license": "MIT",
   "author": "",
@@ -52,6 +52,11 @@
       "types": "./lib/authoring/index.d.ts",
       "import": "./lib/authoring/index.js",
       "default": "./src/authoring/index.ts"
+    },
+    "./authoring/input": {
+      "types": "./lib/authoring/input.d.ts",
+      "import": "./lib/authoring/input.js",
+      "default": "./src/authoring/input.ts"
     },
     "./agent": {
       "types": "./lib/agent/index.d.ts",

@@ -9,12 +9,20 @@ import {
   DesktopReportedError,
   redactDesktopSecrets,
   sanitizeDesktopReport,
+  selectionExclusionReasons,
   serializeReportError,
   validateDesktopEvent,
 } from './protocol.js';
 import type { CollectedDesktopEvent, EventContext, EventEmitter, FailureKind, ReportError, ReportFailure } from './protocol.js';
-import { projectDesktopRunSummary, renderJUnit, renderRunSummary, summarizeDesktopRun } from './results.js';
-import type { DesktopRunResult, DesktopTestResult, DesktopWorkResult } from './results.js';
+import {
+  describeDesktopSelection,
+  describeDesktopUnsupported,
+  projectDesktopRunSummary,
+  renderJUnit,
+  renderRunSummary,
+  summarizeDesktopRun,
+} from './results.js';
+import type { DesktopInputLaneReport, DesktopRunResult, DesktopTestResult, DesktopWorkResult } from './results.js';
 import { includeDesktopEvent, projectDesktopEvent } from './structured.js';
 import type { DesktopEventLevel } from './structured.js';
 import type { DesktopReportingConfig } from '../config.js';
@@ -25,6 +33,8 @@ export type ReportOutput = Pick<NodeJS.WriteStream, 'write'>;
 export type DesktopRunReporterOptions = DesktopReportingConfig & {
   artifactsRoot: string;
   context?: EventContext;
+  /** The input lane this run executes. Lane runs hold every selected case to its declared outcome. */
+  lane?: DesktopInputLaneReport;
   kind?: 'tests' | 'lifecycle';
   optional?: boolean;
   output?: ReportOutput;
@@ -68,6 +78,9 @@ export class DesktopRunReporter {
   private readonly presentedFailures = new Set<string>();
   private readonly secrets = new Set<string>();
   private readonly artifacts = new Map<string, string>();
+  private readonly excluded = { platform: 0, scope: 0, input: 0 };
+  private readonly selectionKeys = new Set<string>();
+  private excludedReported = false;
   private readonly options: DesktopRunReporterOptions;
   private readonly actions: boolean;
   private readonly output: ReportOutput;
@@ -136,6 +149,7 @@ export class DesktopRunReporter {
         runId: this.runId,
         kind: options.kind ?? 'tests',
         ...(options.context ? { context: options.context } : {}),
+        ...(options.lane ? { lane: options.lane } : {}),
         artifactsRoot: clipStructuredText(this.root, 512),
       };
       this.enqueue(() => this.write(this.output, `${JSON.stringify(start)}\n`), 0);
@@ -314,6 +328,14 @@ export class DesktopRunReporter {
       test.status = test.attempts[test.attempts.length - 1].status;
       test.flaky = test.status === 'passed' && test.attempts.some(({ status }) => status === 'failed');
       this.tests.set(p.testId, test);
+    } else if (event.kind === 'selection') {
+      this.excludedReported = true;
+      // A keyed event is idempotent: a retried worker announces the same exclusions again.
+      if (event.payload.key !== undefined) {
+        if (this.selectionKeys.has(event.payload.key)) return;
+        this.selectionKeys.add(event.payload.key);
+      }
+      for (const reason of selectionExclusionReasons) this.excluded[reason] += event.payload.excluded[reason];
     } else if (event.kind === 'artifact') this.artifacts.set(event.payload.path, event.payload.description);
   }
 
@@ -495,6 +517,8 @@ export class DesktopRunReporter {
       finishedAt: new Date().toISOString(),
       durationMs: Date.now() - this.startedAt.getTime(),
       context: this.options.context,
+      ...(this.options.lane ? { lane: this.options.lane } : {}),
+      ...(this.excludedReported ? { selection: { excluded: { ...this.excluded } } } : {}),
       optional: this.options.optional,
       incomplete:
         [...this.scopes.values()].some(({ finished }) => !finished) ||
@@ -576,8 +600,10 @@ export class DesktopRunReporter {
     let result = persist();
     const c = result.counts;
     this.logger.log(
-      `[desktop] ${result.status.toUpperCase()}: ${c.selected} selected, ${c.executed} executed, ${c.passed} passed, ${c.failed} failed, ${c.skipped} skipped, ${c.unsupported} unsupported, ${c.incomplete} incomplete, ${c.retries} retries, ${c.flaky} flaky; ${result.work.filter(({ status }) => status === 'not-run').length} groups not run; ${path.join(this.root, 'run.json')}`,
+      `[desktop] ${result.status.toUpperCase()}: ${c.selected} selected, ${c.executed} executed, ${c.passed} passed, ${c.failed} failed, ${c.skipped} skipped, ${describeDesktopUnsupported(c)}, ${c.incomplete} incomplete, ${c.retries} retries, ${c.flaky} flaky; ${result.work.filter(({ status }) => status === 'not-run').length} groups not run; ${path.join(this.root, 'run.json')}`,
     );
+    const selection = describeDesktopSelection(result);
+    if (selection) this.logger.log(`[desktop] ${selection}`);
     await this.queue;
     result = persist();
     if (this.presentationFailed && !this.structured) {

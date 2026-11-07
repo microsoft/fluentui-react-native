@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import type { DesktopStoryManifestEntry, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
 import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
@@ -11,6 +12,7 @@ import { STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
+import { desktopStorybookTargetId } from '../driver/driverManifest';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
 import {
@@ -76,6 +78,33 @@ const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'w
   portablePlanDigest: 'portable-digest',
   schemaVersion: 1 as const,
 });
+
+function declaredStoryEntry(id: string, cases: readonly (readonly [name: string, options: unknown])[]): DesktopStoryManifestEntry {
+  return {
+    id,
+    name: 'Default',
+    title: 'Button',
+    sourcePath: 'button.stories.tsx',
+    packageName: 'fixture',
+    tags: [],
+    wdio: {
+      exportName: 'Default',
+      digest: 'declared',
+      testNames: cases.map(([name]) => name),
+      cases: cases.map(([name, options]) => ({ name, options: validateDesktopCaseOptions(options) })),
+    },
+  };
+}
+
+function storyManifestOf(...entries: DesktopStoryManifestEntry[]) {
+  return async () => ({
+    endpoint: 'macos' as const,
+    schemaVersion: 1 as const,
+    platformManifestDigest: 'digest',
+    portablePlanDigest: 'portable',
+    entries,
+  });
+}
 
 describe('macOS application leases', () => {
   test('validates exact running application records and rejects ambiguity', () => {
@@ -367,6 +396,115 @@ describe('DesktopStorybookCli', () => {
     await expect(cli.test('macos', { timeoutMs: 0 })).rejects.toThrow('wdio.timeoutMs');
   });
 
+  describe('input lane selection', () => {
+    const cases = [
+      ['adaptive', { requires: ['click'] }],
+      ['typing', { requires: ['keyboard'] }],
+      ['win32-only', { platforms: ['win32'] }],
+      ['paper-only', { scope: { 'rn.renderer': ['paper'] } }],
+      ['fabric-only', { scope: { 'rn.renderer': ['fabric'] } }],
+    ] as const;
+    const config = () => makeDesktopStorybookConfig({ projectRoot: storybookRoot, storyPackages: [] });
+    const list = async (flags: string[], ...entries: DesktopStoryManifestEntry[]) => {
+      const output = { write: jest.fn() };
+      await createDesktopStorybookCommand({ config: config(), createStoryManifest: storyManifestOf(...entries), output }).parseAsync([
+        'node',
+        'storybook',
+        'test',
+        '--macos',
+        '--list',
+        ...flags,
+      ]);
+      return JSON.parse(output.write.mock.calls[0][0]);
+    };
+    // An explicit URL and target stand in for a running driver, so selection is what these runs exercise.
+    const connection = { url: 'https://127.0.0.1:1234', target: 'fixture' };
+    const run = (options: Parameters<DesktopStorybookCli['test']>[1], ...entries: DesktopStoryManifestEntry[]) =>
+      new DesktopStorybookCli(config(), { createStoryManifest: storyManifestOf(...entries), output: { write: jest.fn() } }).test('macos', {
+        ...connection,
+        ...options,
+      });
+    const legacyEntry = (id: string): DesktopStoryManifestEntry => ({
+      ...declaredStoryEntry(id, []),
+      wdio: { exportName: 'Default', digest: 'legacy' },
+    });
+
+    test.each([
+      [
+        'accessible',
+        ['adaptive', 'fabric-only'],
+        [
+          ['typing', 'input'],
+          ['win32-only', 'platform'],
+          ['paper-only', 'scope'],
+        ],
+      ],
+      [
+        'physical',
+        ['adaptive', 'typing', 'fabric-only'],
+        [
+          ['win32-only', 'platform'],
+          ['paper-only', 'scope'],
+        ],
+      ],
+    ])('lists what the %s lane runs and why each other matching case is left out', async (input, selected, excluded) => {
+      const [story] = await list(['--input', input], declaredStoryEntry('button--default', cases));
+      expect(story.tests.map(({ name }: { name: string }) => name)).toEqual(selected);
+      expect(story.excluded.map(({ name, reason }: { name: string; reason: string }) => [name, reason])).toEqual(excluded);
+      expect(story.tests[0]).toEqual({ name: 'adaptive', input: 'both', inputSource: 'derived', requires: ['click'] });
+    });
+
+    test('lists every declared case that targets the platform when no lane is selected', async () => {
+      const [story] = await list([], declaredStoryEntry('button--default', cases));
+      expect(story.tests.map(({ name }: { name: string }) => name)).toEqual(['adaptive', 'typing', 'fabric-only']);
+      expect(story.excluded.map(({ reason }: { reason: string }) => reason)).toEqual(['platform', 'scope']);
+    });
+
+    test('names every legacy callback a lane cannot run, so they migrate in one pass', async () => {
+      await expect(run({ input: 'accessible' }, legacyEntry('a--default'), legacyEntry('b--default'))).rejects.toThrow(
+        'Input lane "accessible" cannot run legacy wdio callbacks; declare them with desktopIt: a--default, b--default.',
+      );
+    });
+
+    test('explains an empty selection by what the target and lane excluded', async () => {
+      await expect(run({ input: 'accessible' }, declaredStoryEntry('button--default', cases.slice(1, 3)))).rejects.toThrow(
+        'No executable wdio story tests matched the requested selection (excluded 1 by platform, 0 by scope, 1 by input).',
+      );
+    });
+
+    test('does not blame a narrow filter for cases it never asked for', async () => {
+      await expect(run({ input: 'accessible', test: 'typing' }, declaredStoryEntry('button--default', cases))).rejects.toThrow(
+        'No executable wdio story tests matched the requested selection (excluded 0 by platform, 0 by scope, 1 by input).',
+      );
+    });
+
+    test('takes the lane of the running driver instance unless a flag or the environment names one', async () => {
+      const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json');
+      const cli = new DesktopStorybookCli(config(), {
+        createStoryManifest: storyManifestOf(declaredStoryEntry('button--default', cases.slice(1, 2))),
+        output: { write: jest.fn() },
+      });
+      fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+      fs.writeFileSync(
+        manifestPath,
+        JSON.stringify({
+          endpoint: 'macos',
+          instanceId: cli.instance.id,
+          renderer: 'fabric',
+          driverPort: 7100,
+          targetId: desktopStorybookTargetId(config(), 'macos', 'fabric'),
+          wdio: { input: 'accessible' },
+        }),
+      );
+      try {
+        // The only case needs a physical keyboard, so only the inherited accessible lane can leave it out.
+        await expect(cli.test('macos', {})).rejects.toThrow('excluded 0 by platform, 0 by scope, 1 by input');
+      } finally {
+        fs.rmSync(manifestPath, { force: true });
+      }
+    });
+  });
+
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
     const services = new DesktopServiceScope(runner);
@@ -493,6 +631,9 @@ describe('DesktopStorybookCli', () => {
 
       expect(fabricManifest.renderer).toBe('fabric');
       expect(paperManifest.renderer).toBe('paper');
+      // The control process that runs smoke tests has no desktop configuration, so the manifest carries the scope values.
+      expect(fabricManifest.scope.values).toMatchObject({ 'rn.renderer': 'fabric' });
+      expect(paperManifest.scope.values).toMatchObject({ 'rn.renderer': 'paper' });
       expect(paperManifest.bridgeNonce).not.toBe(fabricManifest.bridgeNonce);
       expect(repeatedPaperManifest.bridgeNonce).toBe(paperManifest.bridgeNonce);
     } finally {
@@ -1111,6 +1252,7 @@ describe('DesktopStorybookCli', () => {
       manifest: await createEmptyStoryManifest(cli.config, 'macos'),
       platform: 'macos',
       report: undefined,
+      scope: { domains: { 'rn.renderer': ['fabric', 'paper'] }, values: { 'rn.renderer': 'fabric' } },
       signal: expect.any(AbortSignal),
       targetId: 'agenticstorybook-macos',
     });

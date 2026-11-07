@@ -23,6 +23,7 @@ test('executes isolated inline code and releases sessions after assertion failur
           !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
           !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
           !diagnostics.includes('Storybook context did not settle.') ||
+          !diagnostics.includes('wdio "fixture-button--lane / accessible only" during lane verification') ||
           diagnostics.includes('Navigation refused before dispatch') ||
           output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
         ) {
@@ -62,6 +63,30 @@ test('executes isolated inline code and releases sessions after assertion failur
       { testName: 'exposes enabled button semantics', status: 'passed' },
       { testName: 'supports native pointer activation', status: 'skipped' },
     ],
+    lane: {
+      accessible: [
+        { testName: 'accessible only', status: 'passed' },
+        { testName: 'either lane', status: 'passed' },
+      ],
+      physical: [
+        { testName: 'either lane', status: 'passed' },
+        { testName: 'physical only', status: 'passed' },
+      ],
+      // No lane, and a host that masks physical click: the physical case is unsupported, not a failed session.
+      compatibility: [
+        { testName: 'accessible only', status: 'passed' },
+        { testName: 'either lane', status: 'passed' },
+        { testName: 'physical only', status: 'unsupported' },
+      ],
+      // A driver that does not report physical input disabled stops the lane at its first case, reported once.
+      unmasked: {
+        results: [{ testName: 'accessible only', status: 'failed' }],
+        status: 'failed',
+        failed: 1,
+        excluded: { platform: 0, scope: 0, input: 1 },
+        reported: [expect.stringContaining('driver --input accessible')],
+      },
+    },
     platforms: Object.fromEntries(
       ['macos', 'windows', 'win32'].map((platform) => [
         platform,

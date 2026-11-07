@@ -26,6 +26,7 @@ import type {
   DesktopStorybookTestOptions,
 } from './DesktopStorybookCli.js';
 import { DesktopStorybookCli } from './DesktopStorybookCli.js';
+import { resolveCommandInputLane, readDriverInstanceInput } from './inputLane.js';
 import { loadDesktopStorybookConfig } from './loadConfig.js';
 
 type PlatformFlags = {
@@ -36,9 +37,9 @@ type PlatformFlags = {
 };
 
 type ServerFlags = PlatformFlags & DesktopStorybookServerOptions;
-type DriverFlags = ServerFlags & { agent?: boolean; descriptor?: string; root?: string };
+type DriverFlags = ServerFlags & { agent?: boolean; descriptor?: string; root?: string; input?: 'accessible' | 'physical' };
 type ManifestFlags = PlatformFlags & { out?: string };
-type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode };
+type SmokeFlags = PlatformFlags & { mode: DesktopSmokeMode; input?: 'accessible' | 'physical' };
 type BuildDriverFlags = PlatformFlags & DesktopStorybookBuildDriverOptions;
 type PrepFlags = PlatformFlags & { driver: DesktopStorybookPrepOptions['driver'] };
 type GetApi = (flags: PlatformFlags) => Promise<DesktopStorybookCli>;
@@ -128,14 +129,19 @@ function addTestCommand(program: Command, getApi: GetApi): void {
     .option('--tag <tag>', 'filter story tags')
     .option('--url <url>', 'Desktop Driver URL (requires --target)')
     .option('--target <id>', 'registered target ID (requires --url)')
+    .addOption(new Option('--input <mode>', 'select accessible or physical input tests').choices(['accessible', 'physical']))
     .option('--timeout-ms <milliseconds>', 'timeout per executable test', Number)
     .addOption(new Option('--test-reporter <reporter>', 'Node test reporter').choices(['spec', 'tap', 'dot']))
     .addOption(new Option('--click-mode <mode>', 'native click semantics').choices(['auto', 'physical', 'accessibility']));
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags & DesktopStorybookTestOptions) => {
+    if (flags.input !== undefined && flags.clickMode !== undefined) {
+      throw new TypeError('--input cannot be combined with --click-mode.');
+    }
     const api = await getApi(flags);
     await api.test(resolvePlatform(flags, api), {
       clickMode: flags.clickMode,
+      input: flags.input,
       list: flags.list,
       testReporter: flags.testReporter,
       story: flags.story,
@@ -179,6 +185,7 @@ function addDriverCommand(program: Command, getApi: GetApi): void {
     .option('--agent', 'require a grant on every driver route and publish one agent connection descriptor')
     .option('--descriptor <name>', 'agent connection descriptor record name (default agent-connection.json)')
     .option('--root <path>', 'private storage root for the agent descriptor; defaults to the platform location');
+  command.addOption(new Option('--input <mode>', 'default input lane for Storybook tests').choices(['accessible', 'physical']));
   addPlatformOptions(command);
   command.action(async (flags: DriverFlags) => {
     if (!flags.agent && (flags.descriptor !== undefined || flags.root !== undefined)) {
@@ -188,6 +195,7 @@ function addDriverCommand(program: Command, getApi: GetApi): void {
     await api.driver(resolvePlatform(flags, api), {
       host: flags.host,
       port: flags.port,
+      input: flags.input,
       ...(flags.agent
         ? {
             agent: {
@@ -270,10 +278,27 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       configured: options.config.desktop?.reporting?.events,
     });
     options.reporterMode = reporterMode;
+    const actionOptions = action.opts<PlatformFlags & { input?: string; mode?: string; target?: string; url?: string }>();
+    const platform = selectedPlatform(actionOptions) ?? options.config.platform;
+    const { projectRoot } = options.config;
+    const lane =
+      action.name() === 'test' || action.name() === 'smoke'
+        ? resolveCommandInputLane({
+            command: action.name() as 'test' | 'smoke',
+            runsTests: action.name() === 'test' || actionOptions.mode === 'stories-and-tests',
+            flag: actionOptions.input,
+            environment: process.env.DESKTOP_INPUT,
+            driverInput:
+              action.name() === 'test' && platform && !actionOptions.url && !actionOptions.target
+                ? () => readDriverInstanceInput(projectRoot, platform)
+                : undefined,
+          })
+        : undefined;
     session = await createDesktopReportSession({
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
       kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+      ...(lane ? { lane } : {}),
       reporterMode,
       eventLevel,
       // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.
@@ -388,10 +413,14 @@ function addSmokeCommand(program: Command, getApi: GetApi): void {
         .choices([...desktopSmokeModes])
         .default('stories'),
     );
+  command.addOption(new Option('--input <mode>', 'select accessible or physical input tests').choices(['accessible', 'physical']));
   addPlatformOptions(command);
   command.action(async (flags: SmokeFlags) => {
+    if (flags.input !== undefined && flags.mode !== 'stories-and-tests') {
+      throw new TypeError('--input requires --mode stories-and-tests.');
+    }
     const api = await getApi(flags);
-    await api.smoke(resolvePlatform(flags, api), { mode: flags.mode });
+    await api.smoke(resolvePlatform(flags, api), { mode: flags.mode, input: flags.input });
   });
 }
 

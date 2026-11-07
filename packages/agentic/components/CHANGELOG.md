@@ -1,5 +1,26 @@
 # @fluentui-react-native/components
 
+## 0.8.0
+
+### Minor Changes
+
+- 06b458f: Read Flex colors through the design package's interactive color envelope and adopt the current x3 default tokens.
+  Components rendered with the default theme change appearance, including an achromatic brand, translucent neutral
+  backgrounds, and larger corner radii. Component token contracts reference the per-state color paths.
+
+### Patch Changes
+
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+  - @fluentui-react-native/design@0.6.0
+  - @fluentui-react-native/native-core@0.2.0
+
 ## 0.7.1
 
 ### Patch Changes

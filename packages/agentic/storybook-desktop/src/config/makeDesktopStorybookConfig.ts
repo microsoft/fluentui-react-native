@@ -116,8 +116,11 @@ export type DesktopStorybookConfigOptions = StorySettings & {
    */
   platformOptions?: DesktopPlatformOptionsMap;
 
-  /** Defaults for executable story callbacks, run by `storybook-desktop test`. */
-  wdio?: DesktopStorybookWdioOptions;
+  /**
+   * Defaults for executable story callbacks, run by `storybook-desktop test`. The input lane is chosen per run with
+   * `--input` or `DESKTOP_INPUT`, so it cannot be configured here.
+   */
+  wdio?: Omit<DesktopStorybookWdioOptions, 'input'>;
 };
 
 export type ResolvedPackage = {
@@ -532,6 +535,10 @@ function defaultSmokeOptions(config: DesktopStorybookConfig, platform: Platforms
 }
 
 function normalizeConfig(config: DesktopStorybookConfigOptions, projectRoot: string): DesktopStorybookConfigOptions {
+  // A configured lane would run tests the report session never holds to a lane, so the lane has one per-run source.
+  if (config.wdio && 'input' in config.wdio) {
+    throw new TypeError('wdio.input is chosen per run with --input or DESKTOP_INPUT; it cannot be configured.');
+  }
   const wdio = resolveWdioOptions(config.wdio);
   validatePlatforms(config.platforms, 'config');
   validatePlatformSettings(config.platformSettings, 'config');

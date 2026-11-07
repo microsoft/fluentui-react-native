@@ -4,10 +4,10 @@ import { createHash, randomUUID } from 'node:crypto';
 import { isNativeError } from 'node:util/types';
 
 import { desktopArtifactPath } from './collector.js';
-import { DesktopReportedError, reportStatuses, redactDesktopSecrets } from './protocol.js';
-import type { TestStatus } from './protocol.js';
-import { summarizeDesktopRun } from './results.js';
-import type { DesktopRunResult } from './results.js';
+import { DesktopReportedError, reportStatuses, redactDesktopSecrets, selectionExclusionReasons, testGaps } from './protocol.js';
+import type { SelectionExclusions, TestGap, TestStatus } from './protocol.js';
+import { desktopInputLaneSources, summarizeDesktopRun } from './results.js';
+import type { DesktopInputLaneReport, DesktopRunResult, DesktopSelectionReport } from './results.js';
 
 export type DesktopRunQuery =
   | { operation: 'status'; runId: string }
@@ -20,11 +20,15 @@ export type DesktopRunStatus = {
   terminal: boolean;
   status: TestStatus;
   counts: DesktopRunResult['counts'];
+  lane?: DesktopInputLaneReport;
+  excluded?: SelectionExclusions;
 };
 export type DesktopRunQueryItem = {
   id: string;
   title: string;
   status?: TestStatus;
+  /** Set on an `unsupported` test whose gap was declared in advance. */
+  gap?: TestGap;
   message?: string;
 };
 export type DesktopRunPage = {
@@ -176,7 +180,15 @@ export class DesktopRunQueryService {
     });
     if (result.status === 'failed') canonical.status = 'failed';
     if (input.operation === 'status')
-      return { schemaVersion: 1, runId: run.runId, terminal, status: canonical.status, counts: canonical.counts };
+      return {
+        schemaVersion: 1,
+        runId: run.runId,
+        terminal,
+        status: canonical.status,
+        counts: canonical.counts,
+        ...(canonical.lane ? { lane: canonical.lane } : {}),
+        ...(canonical.selection ? { excluded: canonical.selection.excluded } : {}),
+      };
     let offset = 0;
     if (input.cursor) {
       const cursor = grant.cursors.get(input.cursor);
@@ -225,6 +237,7 @@ export class DesktopRunQueryService {
         id: item.id,
         title: title.text,
         ...(item.status ? { status: item.status } : {}),
+        ...(item.gap ? { gap: item.gap } : {}),
         ...(message ? { message: message.text } : {}),
       },
       omitted: title.omitted + (message?.omitted ?? 0),
@@ -239,6 +252,7 @@ export class DesktopRunQueryService {
           id: id('test', test.testId),
           title: test.title,
           status: test.status,
+          ...(test.attempts.at(-1)?.gap ? { gap: test.attempts.at(-1)!.gap } : {}),
           message: test.attempts.at(-1)?.failure?.error.message ?? test.attempts.at(-1)?.reason,
         }));
       case 'work':
@@ -346,11 +360,15 @@ function parseResult(text: string, runId: string): DesktopRunResult & { terminal
         throw new TypeError('Invalid persisted desktop attempt duration.');
       const reason = attempt.reason;
       if (reason !== undefined) textField(reason);
+      const gap = attempt.gap;
+      if (gap !== undefined && (!testGaps.includes(gap as TestGap) || attempt.status !== 'unsupported'))
+        throw new TypeError('Invalid persisted desktop test gap.');
       return {
         attempt: attempt.attempt,
         durationMs: attempt.durationMs,
         status: attempt.status,
         ...(typeof reason === 'string' ? { reason } : {}),
+        ...(gap !== undefined ? { gap: gap as TestGap } : {}),
         ...(attempt.failure !== undefined ? { failure: new DesktopReportedError(attempt.failure).failure } : {}),
       };
     });
@@ -375,6 +393,8 @@ function parseResult(text: string, runId: string): DesktopRunResult & { terminal
   textField(value.finishedAt);
   if (typeof value.durationMs !== 'number' || !Number.isFinite(value.durationMs) || value.durationMs < 0)
     throw new TypeError('Invalid persisted desktop run duration.');
+  const lane = laneField(value.lane);
+  const selection = selectionField(value.selection);
   const result = summarizeDesktopRun({
     schemaVersion: 1,
     runId,
@@ -382,12 +402,38 @@ function parseResult(text: string, runId: string): DesktopRunResult & { terminal
     startedAt: value.startedAt,
     finishedAt: value.finishedAt,
     durationMs: value.durationMs,
+    ...(lane ? { lane } : {}),
+    ...(selection ? { selection } : {}),
     tests,
     work,
     failures,
     artifacts,
   });
   return { ...result, status: value.status, ...(typeof value.terminal === 'boolean' ? { terminal: value.terminal } : {}) };
+}
+
+function laneField(value: unknown): DesktopInputLaneReport | undefined {
+  if (value === undefined) return undefined;
+  const lane = record(value);
+  const source = desktopInputLaneSources.find((candidate) => candidate === lane.source);
+  if (lane.policyEnforced !== false || source === undefined) throw new TypeError('Invalid persisted desktop input lane.');
+  if (lane.input === 'physical' && lane.masking === undefined) return { input: 'physical', source, policyEnforced: false };
+  if (lane.input === 'accessible' && (lane.masking === 'host-masked' || lane.masking === 'verified-masked'))
+    return { input: 'accessible', source, masking: lane.masking, policyEnforced: false };
+  throw new TypeError('Invalid persisted desktop input lane.');
+}
+
+function selectionField(value: unknown): DesktopSelectionReport | undefined {
+  if (value === undefined) return undefined;
+  const excluded = record(record(value).excluded);
+  const counts = {} as SelectionExclusions;
+  for (const reason of selectionExclusionReasons) {
+    const count = excluded[reason];
+    if (typeof count !== 'number' || !Number.isSafeInteger(count) || count < 0)
+      throw new TypeError('Invalid persisted desktop exclusion count.');
+    counts[reason] = count;
+  }
+  return { excluded: counts };
 }
 
 function record(value: unknown): Record<string, unknown> {

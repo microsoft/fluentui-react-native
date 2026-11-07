@@ -24,6 +24,7 @@ export type DesktopSmokeRunOptions = {
    * @default "stories"
    */
   mode?: DesktopSmokeMode;
+  input?: 'accessible' | 'physical';
 };
 
 export const STORYBOOK_SMOKE_MODE = 'STORYBOOK_SMOKE_MODE';

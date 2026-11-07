@@ -1,4 +1,5 @@
 import type { DesktopHost, DesktopTarget } from '@fluentui-react-native/desktop-driver';
+import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import type { DesktopStage, ResolvedDesktopConfig, ResolvedDesktopTarget } from './config.js';
@@ -32,6 +33,8 @@ export type DesktopIntegration = {
     supervisor: DesktopSupervisor;
     action: DesktopStage | 'test' | 'serve';
     suite?: string;
+    /** Set only for `test`, when the run executes one input lane. The integration owns masking its own driver. */
+    input?: DesktopInputLane;
     /** Set only for `serve --agent`, and only for an integration that `supportsAgent`. */
     agent?: Pick<DesktopAgentConnectionOptions, 'descriptor' | 'root'>;
     /**

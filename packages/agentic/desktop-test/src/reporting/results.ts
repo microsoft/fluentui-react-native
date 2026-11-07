@@ -1,15 +1,28 @@
 import path from 'node:path';
 
-import type { EventContext, ReportFailure, TestStatus } from './protocol.js';
+import type { EventContext, ReportFailure, SelectionExclusions, TestGap, TestStatus } from './protocol.js';
 
 export type DesktopTestAttempt = {
   attempt: number;
   status: TestStatus;
   durationMs: number;
   reason?: string;
+  /** Present only on an `unsupported` attempt the producer declared in advance, never on a missing requirement. */
+  gap?: TestGap;
   failure?: ReportFailure;
   context?: EventContext;
 };
+/**
+ * The input lane a run was asked to execute. It records the request and how the host was masked; it never claims what
+ * input a session delivered or enforced, hence the literal `policyEnforced: false`.
+ */
+export const desktopInputLaneSources = ['option', 'environment', 'driver'] as const;
+/** `driver` means the lane was read from the attached driver instance's manifest instead of being requested here. */
+export type DesktopInputLaneSource = (typeof desktopInputLaneSources)[number];
+export type DesktopInputLaneReport =
+  | { input: 'accessible'; source: DesktopInputLaneSource; masking: 'host-masked' | 'verified-masked'; policyEnforced: false }
+  | { input: 'physical'; source: DesktopInputLaneSource; policyEnforced: false };
+export type DesktopSelectionReport = { excluded: SelectionExclusions };
 export type DesktopTestResult = {
   testId: string;
   title: string;
@@ -34,13 +47,22 @@ export type DesktopRunResult = {
   finishedAt: string;
   durationMs: number;
   context?: EventContext;
+  /** Set when the run executes one input lane. Lane runs treat undeclared skips and unsupported cases as non-success. */
+  lane?: DesktopInputLaneReport;
+  /** What producers removed from their selection before execution. Excluded cases are not tests. */
+  selection?: DesktopSelectionReport;
   counts: {
     selected: number;
     executed: number;
     passed: number;
     failed: number;
     skipped: number;
+    /** Every test whose final status is `unsupported`, declared or not. */
     unsupported: number;
+    /** The subset of `unsupported` that carries a declared `unsupported` gap. */
+    declaredUnsupported: number;
+    /** The subset of `unsupported` that carries a declared `quarantine` gap. */
+    quarantined: number;
     incomplete: number;
     retries: number;
     flaky: number;
@@ -59,6 +81,8 @@ export type DesktopRunSummary = {
   status: TestStatus;
   durationMs: number;
   context?: Pick<EventContext, 'endpoint' | 'renderer'>;
+  lane?: DesktopInputLaneReport;
+  excluded?: SelectionExclusions;
   counts: DesktopRunResult['counts'];
   problems: {
     kind: 'test' | 'infrastructure' | 'unfinished';
@@ -122,7 +146,7 @@ export function projectDesktopRunSummary(result: DesktopRunResult, root: string)
     ...new Set(
       result.tests.flatMap((test) =>
         test.attempts.flatMap((attempt) =>
-          attempt.reason && ['skipped', 'unsupported'].includes(attempt.status) ? [clipText(attempt.reason, 256)] : [],
+          attempt.reason && ['skipped', 'unsupported'].includes(attempt.status) ? [clipText(describeReason(attempt), 256)] : [],
         ),
       ),
     ),
@@ -152,6 +176,8 @@ export function projectDesktopRunSummary(result: DesktopRunResult, root: string)
         }
       : {}),
     counts: result.counts,
+    ...(result.lane ? { lane: result.lane } : {}),
+    ...(result.selection ? { excluded: result.selection.excluded } : {}),
     problems: problems.slice(0, SUMMARY_MAX_PROBLEMS),
     skippedReasons: skippedReasons.slice(0, SUMMARY_MAX_PROBLEMS),
     artifacts,
@@ -205,6 +231,8 @@ export function summarizeDesktopRun(
     failed: 0,
     skipped: 0,
     unsupported: 0,
+    declaredUnsupported: 0,
+    quarantined: 0,
     incomplete: 0,
     retries: 0,
     flaky: 0,
@@ -217,23 +245,71 @@ export function summarizeDesktopRun(
     else if (test.status === 'passed') counts.passed++;
     else if (test.status === 'failed') counts.failed++;
     else if (test.status === 'skipped') counts.skipped++;
-    else if (test.status === 'unsupported') counts.unsupported++;
+    else if (test.status === 'unsupported') {
+      counts.unsupported++;
+      const gap = test.attempts.at(-1)?.gap;
+      if (gap === 'unsupported') counts.declaredUnsupported++;
+      else if (gap === 'quarantine') counts.quarantined++;
+    }
   }
   const infrastructureFailed = input.failures.some(({ kind }) => kind !== 'test') || input.work.some(({ status }) => status === 'failed');
   const unfinishedWork = input.work.some(({ status }) => ['not-run', 'incomplete', 'cancelled'].includes(status));
   const noExecution = input.kind === 'tests' && counts.executed === 0;
+  // A lane run promised to execute its whole selection. Only a declared gap may leave a selected case unexecuted, and a
+  // run that executed nothing is never optional.
+  const laneUnmet = input.kind === 'tests' && input.lane !== undefined && counts.skipped + undeclaredUnsupported(counts) > 0;
   const status =
     infrastructureFailed || counts.failed > 0
       ? 'failed'
-      : input.incomplete || unfinishedWork || counts.incomplete > 0 || (input.kind === 'tests' && counts.selected === 0)
+      : input.incomplete || unfinishedWork || counts.incomplete > 0 || laneUnmet || (input.kind === 'tests' && counts.selected === 0)
         ? 'incomplete'
         : noExecution
-          ? input.optional
+          ? input.optional && input.lane === undefined
             ? 'skipped'
             : 'incomplete'
           : 'passed';
   const { optional: _optional, incomplete: _incomplete, ...result } = input;
   return { ...result, status, counts };
+}
+
+/** Unsupported cases nothing declared in advance: a requirement the target did not meet. */
+function undeclaredUnsupported(counts: Pick<DesktopRunResult['counts'], 'unsupported' | 'declaredUnsupported' | 'quarantined'>): number {
+  return counts.unsupported - counts.declaredUnsupported - counts.quarantined;
+}
+
+const gapLabels = { unsupported: 'declared unsupported', quarantine: 'quarantined' } as const;
+
+/** A reason with its declared-gap label, so a declared gap never reads like a missing requirement. */
+function describeReason(attempt: Pick<DesktopTestAttempt, 'gap' | 'reason'>): string {
+  const reason = attempt.reason ?? '';
+  return attempt.gap ? `${gapLabels[attempt.gap]}: ${reason}` : reason;
+}
+
+/** `accessible (host-masked)`, `accessible (verified-masked)` or `physical pilot`; never a claim of enforced input. */
+export function describeDesktopInputLane(lane: DesktopInputLaneReport): string {
+  return lane.input === 'physical' ? 'physical pilot' : `accessible (${lane.masking})`;
+}
+
+function describeLaneSource(lane: DesktopInputLaneReport): string {
+  return lane.source === 'option' ? '--input' : lane.source === 'environment' ? 'DESKTOP_INPUT' : 'the driver instance';
+}
+
+/** One line naming the lane and what each producer excluded before execution, or `undefined` when neither applies. */
+export function describeDesktopSelection(result: Pick<DesktopRunResult, 'lane' | 'selection'>): string | undefined {
+  const parts: string[] = [];
+  if (result.lane) parts.push(`input ${describeDesktopInputLane(result.lane)} from ${describeLaneSource(result.lane)}`);
+  if (result.selection) {
+    const { platform, scope, input } = result.selection.excluded;
+    parts.push(`excluded ${platform} by platform, ${scope} by scope, ${input} by input`);
+  }
+  return parts.length ? parts.join('; ') : undefined;
+}
+
+/** The unsupported count with its declared and quarantined subsets, so undeclared gaps stand out. */
+export function describeDesktopUnsupported(
+  counts: Pick<DesktopRunResult['counts'], 'unsupported' | 'declaredUnsupported' | 'quarantined'>,
+): string {
+  return `${counts.unsupported} unsupported (${counts.declaredUnsupported} declared, ${counts.quarantined} quarantined)`;
 }
 
 export function desktopRunExitCode(result: DesktopRunResult): number {
@@ -253,7 +329,7 @@ export function renderJUnit(result: DesktopRunResult): string {
         : test.status === 'passed'
           ? ''
           : ['skipped', 'unsupported'].includes(test.status)
-            ? `<skipped message="${xml(latest.reason ?? test.status)}"/>`
+            ? `<skipped message="${xml(latest.reason === undefined ? test.status : describeReason(latest))}"/>`
             : `<error type="${test.status}" message="${xml(latest.reason ?? 'Missing terminal test result')}"/>`;
     return `<testcase name="${xml(test.title)}" classname="${xml(test.testId)}" time="${latest.durationMs / 1000}">${body}<system-out>${xml(history)}</system-out></testcase>`;
   });
@@ -270,18 +346,34 @@ export function renderJUnit(result: DesktopRunResult): string {
     cases.push(
       '<testcase name="required cohort" classname="desktop.infrastructure"><error type="incomplete" message="No required tests executed or a producer did not finish."/></testcase>',
     );
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites><testsuite name="${xml(result.runId)}" tests="${cases.length}" failures="${result.counts.failed}" errors="${infrastructure.length + unfinishedWork.length + result.counts.incomplete + Number(incomplete)}" skipped="${result.counts.skipped + result.counts.unsupported}" time="${result.durationMs / 1000}">${cases.join('')}</testsuite></testsuites>\n`;
+  const properties: [string, string][] = [];
+  if (result.lane)
+    properties.push(
+      ['desktop.input', result.lane.input],
+      ['desktop.input.label', describeDesktopInputLane(result.lane)],
+      ['desktop.input.source', result.lane.source],
+    );
+  if (result.selection)
+    for (const [reason, count] of Object.entries(result.selection.excluded)) properties.push([`desktop.excluded.${reason}`, String(count)]);
+  if (result.counts.declaredUnsupported) properties.push(['desktop.declaredUnsupported', String(result.counts.declaredUnsupported)]);
+  if (result.counts.quarantined) properties.push(['desktop.quarantined', String(result.counts.quarantined)]);
+  const propertyXml = properties.length
+    ? `<properties>${properties.map(([name, value]) => `<property name="${xml(name)}" value="${xml(value)}"/>`).join('')}</properties>`
+    : '';
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites><testsuite name="${xml(result.runId)}" tests="${cases.length}" failures="${result.counts.failed}" errors="${infrastructure.length + unfinishedWork.length + result.counts.incomplete + Number(incomplete)}" skipped="${result.counts.skipped + result.counts.unsupported}" time="${result.durationMs / 1000}">${propertyXml}${cases.join('')}</testsuite></testsuites>\n`;
 }
 
 export function renderRunSummary(result: DesktopRunResult): string {
   const c = result.counts;
   const reasons = [
-    ...new Set(result.tests.flatMap((test) => test.attempts.flatMap((attempt) => (attempt.reason ? [attempt.reason] : [])))),
+    ...new Set(result.tests.flatMap((test) => test.attempts.flatMap((attempt) => (attempt.reason ? [describeReason(attempt)] : [])))),
   ];
+  const selection = describeDesktopSelection(result);
   return (
     `## Desktop tests: ${result.status}\n\n` +
     `Run: \`${result.runId}\`; endpoint: ${result.context?.endpoint ?? 'native'}; renderer: ${result.context?.renderer ?? 'not applicable'}.\n\n` +
-    `Selected ${c.selected}; executed ${c.executed}; passed ${c.passed}; failed ${c.failed}; skipped ${c.skipped}; unsupported ${c.unsupported}; incomplete ${c.incomplete}; retries ${c.retries}; flaky ${c.flaky}.\n\n` +
+    (selection ? `Selection: ${selection}.\n\n` : '') +
+    `Selected ${c.selected}; executed ${c.executed}; passed ${c.passed}; failed ${c.failed}; skipped ${c.skipped}; ${describeDesktopUnsupported(c)}; incomplete ${c.incomplete}; retries ${c.retries}; flaky ${c.flaky}.\n\n` +
     `Selected groups ${result.work.length}; not run ${result.work.filter(({ status }) => status === 'not-run').length}; incomplete ${result.work.filter(({ status }) => status === 'incomplete').length}.\n\n` +
     `Infrastructure/evidence/cleanup failures: ${result.failures.filter(({ kind }) => kind !== 'test').length}.\n\n` +
     (reasons.length

@@ -100,6 +100,64 @@ describe('desktop Storybook server integration', () => {
     expect(output.join('')).toContain('WebDriver ');
   });
 
+  test.each([
+    ['accessible', { keyboard: false, physicalClick: false, wheel: false }],
+    ['physical', { keyboard: true, physicalClick: true, wheel: true }],
+  ] as const)('starts a driver for the %s input lane with matching physical input features', async (input, expected) => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(
+      manifestPath,
+      JSON.stringify({ ...createIntegrationManifest(temporaryDirectory, storybookPort, driverPort), wdio: { input } }),
+    );
+    const sink = { write: () => true };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    const child = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+      cwd: projectRoot,
+      env: {
+        STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+        STORYBOOK_DRIVER_MANIFEST: manifestPath,
+        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+        STORYBOOK_PROJECT_ROOT: projectRoot,
+        STORYBOOK_SMOKE_MODE: 'stories-and-tests',
+        STORYBOOK_WS_PORT: String(storybookPort),
+      },
+    });
+
+    try {
+      await waitForResponse(loopbackUrl(driverPort, '/status'));
+      const client = createDesktopDriverClient({ url: loopbackUrl(driverPort, '') });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': 'integration-windows', 'furn:launchMode': 'attach' },
+      });
+      // The accessible lane trusts this report, so the driver itself must show physical input disabled.
+      expect(session.capabilities['furn:features']).toMatchObject(expected);
+      await session.delete();
+    } finally {
+      try {
+        await child.stop();
+        await child.completed;
+        await runner.close();
+        await transport.close();
+        await reporter.finish();
+      } finally {
+        fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      }
+    }
+  });
+
   test('refuses an agent connection from the fake driver', async () => {
     const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));

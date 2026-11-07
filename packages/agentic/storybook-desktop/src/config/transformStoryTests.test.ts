@@ -86,6 +86,16 @@ describe('native Storybook test stripping', () => {
     expect(output).toContain('Two');
   });
 
+  test('strips desktopIt calls and their unused import from the native story module', () => {
+    const output = transform(`
+      import { desktopIt, type WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
+      export const Example: WdioStory = { render: () => <View />, wdio: [desktopIt('case', () => console.log('node-only'))] };
+    `);
+    expect(output).not.toContain('desktopIt');
+    expect(output).not.toContain('node-only');
+    expect(output).toContain('render');
+  });
+
   test.each([
     [`export const Example = { wdio: importedCallback };`, /inline/],
     [`export const Example = { ...shared };`, /spread/],

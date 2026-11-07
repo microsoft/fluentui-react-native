@@ -12,7 +12,9 @@ import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
 import { resolveWdioOptions } from '../config/wdio.js';
-import { runWdioStoryTests, selectWdioStories, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
+import { describeWdioCounts, hasExecutedWdioCase } from '../testing/laneVerdict.js';
+import { runWdioStoryTests, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
+import { decideWdioSelection, describeWdioExclusions, plannedWdioWork, type WdioSelectionContext } from '../testing/selection.js';
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import type { DesktopCommandRunner } from './commandRunner.js';
 
@@ -21,6 +23,9 @@ type DesktopStorybookSmokeSession = Pick<DesktopWebdriverSession, 'delete' | 'li
 export type DesktopStorybookSmokeConnector = (options: DesktopWebdriverOptions) => Promise<DesktopStorybookSmokeSession>;
 
 export type DesktopStorybookSmokeTestOptions = {
+  input?: 'accessible' | 'physical';
+  /** The scope domains and values of this target, for case `scope` selection. */
+  scope?: WdioSelectionContext['scope'];
   artifactsRoot?: string;
   config: DesktopStorybookConfig;
   driverUrl: string;
@@ -52,16 +57,23 @@ export async function runDesktopStorybookSmokeTests(
   const testTag = options.testTag ?? process.env.STORYBOOK_SMOKE_TAG;
   const wdioSettings = resolveWdioOptions({
     ...config.wdio,
+    ...(options.input ? { input: options.input } : {}),
     ...(storyPattern !== undefined ? { story: storyPattern } : {}),
     ...(testTag !== undefined ? { tag: testTag } : {}),
   });
   const planStoryIds = new Set(
     selectDesktopStoryTests(manifest, platform, { story: storyPattern, tag: testTag ?? 'desktop-e2e' }).map(({ entry }) => entry.id),
   );
-  const wdioStoryIds = new Set(selectWdioStories(manifest, wdioSettings).map(({ id }) => id));
+  const wdioSelection = decideWdioSelection(manifest, wdioSettings, { platform, scope: options.scope });
+  const wdioStoryIds = new Set(wdioSelection.stories.map(({ id }) => id));
+  const { platform: byPlatform, scope: byScope, input: byInput } = wdioSelection.excluded;
+  // A lane always states what it excluded, even when nothing; compatibility mode only when something was excluded.
+  if (options.report && (wdioSettings.input || byPlatform + byScope + byInput > 0)) {
+    options.report.emit({ kind: 'selection', payload: { excluded: wdioSelection.excluded } });
+  }
   const storyIds = [...new Set([...planStoryIds, ...wdioStoryIds])].sort();
   if (storyIds.length === 0) {
-    throw new Error('No desktop story tests matched the smoke selection.');
+    throw new Error(`No desktop story tests matched the smoke selection${describeWdioExclusions(wdioSelection)}.`);
   }
   const artifacts = new ArtifactManager(
     options.artifactsRoot ??
@@ -75,6 +87,8 @@ export async function runDesktopStorybookSmokeTests(
   const failures: unknown[] = [];
   const staticFailures = new Map<string, Error>();
   for (const storyId of storyIds) options.report?.emit({ kind: 'work-selected', payload: { workId: `smoke:${storyId}`, label: storyId } });
+  // Every selected case is announced up front, so a fail-fast stop leaves the remaining cases accounted for as not run.
+  for (const payload of plannedWdioWork(wdioSelection, wdioSettings)) options.report?.emit({ kind: 'work-selected', payload });
 
   for (const storyId of storyIds) {
     const scope = `smoke:${storyId}`;
@@ -104,6 +118,7 @@ export async function runDesktopStorybookSmokeTests(
                 config,
                 manifest,
                 platform,
+                scope: options.scope,
                 story: storyId,
                 targetId: options.targetId,
                 url: options.driverUrl,
@@ -111,6 +126,7 @@ export async function runDesktopStorybookSmokeTests(
                 report: options.report,
                 signal: options.signal,
                 optional: true,
+                announced: true,
               },
               options.commandRunner,
             )),
@@ -152,9 +168,18 @@ export async function runDesktopStorybookSmokeTests(
     }
     failures.push(new Error('Executable smoke tests reported failures.'));
   }
-  const allSkipped = tests.length + wdio.length > 0 && [...tests, ...wdio].every(({ status }) => status === 'skipped');
+  const allSkipped =
+    tests.length + wdio.length > 0 && [...tests, ...wdio].every(({ status }) => status === 'skipped' || status === 'unsupported');
   if (allSkipped && failures.length === 0)
-    failures.push(new Error('Required desktop smoke cohort only skipped tests; it is not a passing run.'));
+    failures.push(new Error('Required desktop smoke cohort only skipped or unsupported tests; it is not a passing run.'));
+  // Smoke runs one story at a time as optional, so the lane's requirement to execute something is judged for the cohort here.
+  if (wdioSettings.input && failures.length === 0 && !hasExecutedWdioCase(wdio)) {
+    failures.push(
+      new Error(
+        `Input lane "${wdioSettings.input}" executed no wdio story tests${describeWdioExclusions(wdioSelection)}; it is not a passing run.`,
+      ),
+    );
+  }
   const result: DesktopStorybookSmokeTestResult = {
     endpoint: platform,
     finishedAt: new Date().toISOString(),
@@ -287,9 +312,7 @@ async function runStoryPlans(
 
 export function formatDesktopStorybookSmokeTestSummary(result: DesktopStorybookSmokeTestResult): string {
   const results = [...result.tests, ...(result.wdio ?? [])];
-  const passed = results.filter(({ status }) => status === 'passed').length;
-  const skipped = results.filter(({ status }) => status === 'skipped').length;
-  return `Ran ${results.length} desktop story tests (${passed} passed, ${skipped} skipped).`;
+  return `Ran ${results.length} desktop story tests (${describeWdioCounts(results)}).`;
 }
 
 function errorMessage(error: unknown): string {

@@ -24,6 +24,16 @@ remain socket/epoch authenticated, navigation uses driver-owned settlement,
 and protected args stay refused. Manifest-backed smoke traversal must acquire
 and release its driver session before authored test sessions start.
 
+Input lanes cross these areas. The descriptor schema, merge, and per-case
+decision belong to `@fluentui-react-native/desktop-driver/authoring`; do not
+copy them here. `src/cli/inputLane.ts` resolves the requested lane,
+`src/testing/selection.ts` decides every case before launch and renders
+`test --list`, `src/testing/laneVerdict.ts` judges a lane run's accounting, and
+`config/server.cjs` masks the accessible lane's physical input on the driver.
+`config/transform-story-tests.cjs` is both the Metro Babel plugin and the shared
+AST library: its `rejectDirectInput` check runs from `src/testing/extractWdioTests.ts`
+only, because the Metro transform has no validated descriptor to judge by.
+
 Keep story callbacks statically extractable and authentication checks
 fail-closed. Update references when commands, supported config, outputs, or
 readiness contracts change.

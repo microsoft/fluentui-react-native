@@ -11,15 +11,17 @@ import {
   tolerateClosedDesktopStdout,
 } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
+import { desktopInputLanes } from '@fluentui-react-native/desktop-driver/authoring';
 import { desktopStageCommands } from './adapters.js';
 import { defaultAgentDescriptor } from './agentConnection.js';
 import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import { loadDesktopConfig, resolveDesktopSpecs, selectDesktopRenderer } from './config.js';
 import type { DesktopStage } from './config.js';
+import { createDesktopInputLane, desktopInputEnvironment, requestedDesktopInputLane } from './reporting/lane.js';
 import { createDesktopReportSession } from './reporting/session.js';
 import { DesktopStopRequested } from './services.js';
 import { DesktopSupervisor } from './supervisor.js';
-import { runDesktopWdioSuite } from './wdio/run.js';
+import { assertDesktopSuiteSupportsInput, runDesktopWdioSuite } from './wdio/run.js';
 
 type AgentFlags = { agent?: boolean; descriptor?: string; root?: string };
 
@@ -53,7 +55,13 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     .command('test')
     .requiredOption('--suite <name>', 'configured suite')
     .option('--list', 'resolve exact spec groups without launching')
-    .action((options: { suite: string; list?: boolean }) => execute('test', options));
+    .addOption(
+      new Option(
+        '--input <lane>',
+        `run one input lane: accessible (keyboard, physical click and wheel masked) or physical; falls back to ${desktopInputEnvironment}`,
+      ).choices([...desktopInputLanes]),
+    )
+    .action((options: { suite: string; list?: boolean; input?: string }) => execute('test', options));
   let reporterMode: ResolvedDesktopReporterMode = 'plain';
   let reporterResolutionError: unknown;
   try {
@@ -82,7 +90,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
 
   async function execute(
     action: DesktopStage | 'build-driver' | 'serve' | 'test',
-    test?: { suite: string; list?: boolean },
+    test?: { suite: string; list?: boolean; input?: string },
     agentFlags: AgentFlags = {},
   ): Promise<void> {
     const options = program.opts<{
@@ -118,6 +126,11 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     if (options.paper) target = selectDesktopRenderer(target, 'paper');
     const suite = test ? config.config.suites?.[test.suite] : undefined;
     if (test && !suite) throw Object.assign(new Error(`Unknown suite "${test.suite}".`), { code: 'config' });
+    if (test?.list && test.input !== undefined) {
+      throw Object.assign(new TypeError('--list resolves spec files, which do not depend on the input lane; omit --input.'), {
+        code: 'config',
+      });
+    }
     if (suite?.kind === 'wdio') {
       const specs = resolveDesktopSpecs(suite, target.endpoint, config.projectRoot);
       if (test?.list) {
@@ -131,6 +144,12 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         return;
       }
     } else if (test?.list) throw Object.assign(new Error('--list currently requires a standalone WDIO suite.'), { code: 'config' });
+    // Only `test` has a lane. The environment stands in for the flag, but never for `--list`, which returned above.
+    const requestedLane = test
+      ? requestedDesktopInputLane({ flag: test.input, environment: process.env[desktopInputEnvironment] })
+      : undefined;
+    const input = requestedLane?.input;
+    if (suite?.kind === 'wdio') assertDesktopSuiteSupportsInput(test!.suite, suite, input);
     if (!agentFlags.agent && (agentFlags.descriptor !== undefined || agentFlags.root !== undefined))
       throw Object.assign(new TypeError('--descriptor and --root require --agent.'), { code: 'config' });
     // An integration serves through its own lifecycle, so it must publish the agent connection itself.
@@ -156,6 +175,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       kind: action === 'test' ? 'tests' : 'lifecycle',
       optional: suite?.kind === 'wdio' && suite.optional,
       context: { endpoint: target.endpoint, renderer: target.host.renderer },
+      ...(requestedLane ? { lane: createDesktopInputLane(requestedLane.input, requestedLane.source) } : {}),
       reporterMode,
       eventLevel,
       suppressFinalOutput: action === 'serve' ? () => ready : false,
@@ -169,6 +189,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       reportSession: session,
       integration: config.config.integration,
       ...(agent ? { agent } : {}),
+      ...(input ? { input } : {}),
     });
     session.onStop?.(() => owner.services.requestStop());
     const interrupt = () => owner.services.requestStop();
@@ -197,6 +218,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
             supervisor: owner,
             action,
             suite: test?.suite,
+            ...(input ? { input } : {}),
             ...(agent ? { agent } : {}),
             ...(action === 'serve' ? { reporterMode, onReady: markReady } : {}),
           }),
@@ -220,7 +242,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
             );
           markReady();
           await owner.services.waitForStop();
-        } else if (suite?.kind === 'wdio') await runDesktopWdioSuite(owner, config, test!.suite);
+        } else if (suite?.kind === 'wdio') await runDesktopWdioSuite(owner, config, test!.suite, input);
         else throw new Error('The imported integration does not implement this suite.');
       }
     } catch (error) {

@@ -1,6 +1,8 @@
 import path from 'node:path';
 
 import type { DesktopDriverServer, DesktopHost } from '@fluentui-react-native/desktop-driver';
+import { accessibleLaneMaskedFeatures } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
 import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import { startDesktopService, startNativeDesktopService } from './driverService.js';
 import type { DesktopService, DesktopServiceOptions } from './driverService.js';
@@ -32,6 +34,11 @@ export type DesktopSupervisorOptions = {
    */
   agent?: DesktopAgentConnectionOptions;
   recovery?: DesktopServiceOptions['recovery'];
+  /**
+   * The input lane of a `test` run. An accessible lane starts the native host with keyboard, physical click and wheel
+   * disabled. A host supplied through `hostFactory` is not masked here, so the suite verifies it before running anything.
+   */
+  input?: DesktopInputLane;
 };
 
 export class DesktopSupervisor {
@@ -203,6 +210,7 @@ export class DesktopSupervisor {
     if (application.leaseNonce) this.reporter.addSecret(application.leaseNonce);
     return startNativeDesktopService({
       ...options,
+      ...(this.options.input === 'accessible' ? { disabledInputFeatures: accessibleLaneMaskedFeatures } : {}),
       application,
       nativeDriver: this.target.nativeDriver,
       endpoint: this.target.endpoint,

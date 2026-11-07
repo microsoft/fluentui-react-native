@@ -98,15 +98,24 @@ exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
 sets `waitforInterval` (100 ms) and `waitforTimeout` (5 s) explicitly; without
 an interval, `waitUntil` and `waitFor*` stop after their first unsatisfied poll.
 
-Storybook's preferred top-level `wdio` functions and named function collections
-use this pattern with Node's built-in test runner. Each function receives the
-target `platform` (`macos`, `windows`, or `win32`), and each named case gets an
-independent worker/session. Native feature flags are typed on the WebdriverIO
-browser's `furn:features` capability. Button now uses this authoring pattern
-instead of serializable plans. Extraction, native-bundle stripping, runner
-configuration, and source freshness belong to
-`@fluentui-react-native/storybook-desktop`,
-not this Storybook-independent package. Static plans below are unchanged.
+Storybook's preferred top-level `wdio` export is an array of `desktopIt` cases,
+which declare the input and platforms they need. Its older functions and named
+function collections use the same pattern with Node's built-in test runner.
+Each function receives the target `platform` (`macos`, `windows`, or `win32`),
+and each named case gets an independent worker/session. Native feature flags are
+typed on the WebdriverIO browser's `furn:features` capability. Button now uses
+this authoring pattern instead of serializable plans. Extraction, native-bundle
+stripping, runner configuration, and source freshness belong to
+`@fluentui-react-native/storybook-desktop`, not this Storybook-independent
+package. Static plans below are unchanged.
+
+The descriptor that `desktopIt` accepts (`requires`, `input`, `platforms`,
+`scope`, and declared gaps) is defined and decided in `./authoring`, so Storybook
+and `desktop-test` share one implementation. A runner that executes one input lane
+pins `furn:clickMode` with `resolveDesktopClickMode`: `element.click()` is then an
+accessibility click in the accessible lane and a physical click in the physical
+lane. `missingDesktopRequirements` judges a case's `requires` against the
+session's `furn:features`, and judges a `click` requirement by the pinned mode.
 
 ## Author portable story plans
 
