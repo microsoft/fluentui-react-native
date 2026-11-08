@@ -93,8 +93,10 @@ meet is excluded the same way and reported unsupported.
   click in the physical lane. A `click` requirement follows it. Without a lane the
   session uses `auto`, which lets the host choose.
 - **Untrustworthy selections fail closed.** A malformed selection, an unverifiable
-  Jasmine environment, or an accessible lane on a host that does not report keyboard,
-  physical click, and wheel disabled disables every test and fails the run.
+  Jasmine environment, or a worker session that does not confirm the requested
+  `furn:inputMode` disables every test and fails the run. An accessible lane also
+  requires its host to report keyboard, physical click, and wheel disabled; the
+  supervisor applies these masks to its own native host.
 - **A bad declaration never throws.** Jasmine only warns when a spec file fails to
   load, so a throw would silently drop every test after it. An invalid declaration
   registers a failing test that reports the problem.
@@ -103,5 +105,6 @@ meet is excluded the same way and reported unsupported.
 - `desktopIt` takes no timeout argument; the suite's `timeoutMs` applies.
 
 The input-call lint of Storybook cases does not apply here. Page objects and helpers
-hide the input a test sends, so the accessible lane's host mask is the safeguard that
-fails a test that reaches for physical input.
+hide the input a test sends, so the host mask and session policy reject
+undeclared physical input. The reporter records mechanism receipts and fails a
+declared case if it delivered input outside its `requires`.

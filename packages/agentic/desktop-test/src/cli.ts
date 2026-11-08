@@ -175,7 +175,8 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       kind: action === 'test' ? 'tests' : 'lifecycle',
       optional: suite?.kind === 'wdio' && suite.optional,
       context: { endpoint: target.endpoint, renderer: target.host.renderer },
-      ...(requestedLane ? { lane: createDesktopInputLane(requestedLane.input, requestedLane.source) } : {}),
+      // The supervisor starts the driver, and starts it masked for an accessible lane.
+      ...(requestedLane ? { lane: createDesktopInputLane(requestedLane.input, requestedLane.source, 'host-masked') } : {}),
       reporterMode,
       eventLevel,
       suppressFinalOutput: action === 'serve' ? () => ready : false,

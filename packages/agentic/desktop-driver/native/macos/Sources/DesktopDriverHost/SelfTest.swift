@@ -772,6 +772,26 @@ final class SelfTestRunner {
       actions?.code == ErrorCode.invalidParams && actions?.effect == .noEffect,
       "a malformed input sequence reports no effect"
     )
+    for mechanism: Any in ["pointer", "", 1, NSNull()] {
+      residue.dispatching()
+      let clear = failure("clear", ["elementId": "element-missing", "mechanism": mechanism]) as? HelperError
+      check(
+        clear?.code == ErrorCode.invalidParams && clear?.effect == .noEffect,
+        "a clear naming an unknown mechanism (\(mechanism)) is refused before dispatch"
+      )
+    }
+    for mechanism in ["semantic", "keyboard"] {
+      let clear = failure("clear", ["elementId": "element-missing", "mechanism": mechanism]) as? HelperError
+      check(
+        clear?.code == ErrorCode.staleElement && clear?.effect == .noEffect,
+        "a \(mechanism) clear of a missing element reports no effect"
+      )
+    }
+    let probe = try? driver.execute(command: "probe", params: [:], token: token).result as? JSONObject
+    check(
+      (probe?["features"] as? JSONObject)?["strictClear"] as? Bool == true,
+      "probe reports that clear honors a requested mechanism"
+    )
     let read = failure("windows") as? HelperError
     check(read != nil && read?.effect == nil, "a read-only command does not claim an effect")
     let unsupported = failure("not-a-command") as? HelperError
@@ -931,6 +951,7 @@ final class SelfTestRunner {
       (hello["features"] as? [String])?.contains("performAccessibilityAction") == true,
       "hello advertises performing accessibility actions"
     )
+    check((hello["features"] as? [String])?.contains("strictClear") == true, "hello advertises strict clear")
   }
 
   private func testAccessibilityActionNames() {

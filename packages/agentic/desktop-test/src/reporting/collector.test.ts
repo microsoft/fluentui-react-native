@@ -8,7 +8,7 @@ import { DesktopRunReporter } from './collector.js';
 import type { DesktopInputLaneReport } from './results.js';
 
 describe('desktop run reporter input lanes', () => {
-  const accessible: DesktopInputLaneReport = { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: false };
+  const accessible: DesktopInputLaneReport = { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: true };
   let artifactsRoot: string;
 
   beforeEach(() => {
@@ -104,7 +104,9 @@ describe('desktop run reporter input lanes', () => {
 
     expect(result.status).toBe('incomplete');
     expect(output()).toContain('2 unsupported (1 declared, 0 quarantined)');
-    expect(output()).toContain('[desktop] input accessible (host-masked) from --input; excluded 0 by platform, 0 by scope, 3 by input');
+    expect(output()).toContain(
+      '[desktop] input accessible (policy-enforced, host-masked) from --input; excluded 0 by platform, 0 by scope, 3 by input',
+    );
   });
 
   test('the same unsupported case does not fail a compatibility run', async () => {

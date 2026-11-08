@@ -1,3 +1,5 @@
+import { desktopInputModes } from '../authoring/input.js';
+import type { DesktopInputMode } from '../authoring/input.js';
 import type { DesktopHostInfo, DesktopTarget } from '../host/types.js';
 import { invalidArgument, toWebDriverError, WebDriverError } from './errors.js';
 import { withCommandTimeout } from './timeouts.js';
@@ -20,6 +22,7 @@ const standardCapabilities = new Set([
 export type MatchedCapabilities = {
   clickMode: DesktopClickMode;
   hostInfo: DesktopHostInfo;
+  inputMode: DesktopInputMode;
   launchMode: 'attach' | 'launch';
   requested: Record<string, unknown>;
   target: DesktopTarget;
@@ -54,6 +57,7 @@ export async function matchCapabilities(
   for (const requested of candidates) {
     validateCapabilityNames(requested);
     const requestedClickMode = validateClickMode(requested['furn:clickMode']);
+    const inputMode = validateInputMode(requested['furn:inputMode']);
     const launchMode = validateLaunchMode(requested['furn:launchMode']);
     const targetId = requested['furn:target'];
     const candidatesForTarget =
@@ -80,8 +84,8 @@ export async function matchCapabilities(
         const webdriverError = toWebDriverError(error);
         throw new WebDriverError('session not created', webdriverError.message, webdriverError.data);
       }
-      const clickMode = resolveClickMode(requestedClickMode, host);
-      return { clickMode, hostInfo: host, launchMode, requested, target };
+      const clickMode = resolveClickMode(requestedClickMode, host, inputMode);
+      return { clickMode, hostInfo: host, inputMode, launchMode, requested, target };
     }
   }
 
@@ -101,6 +105,7 @@ export function createReturnedCapabilities(
     'furn:clickMode': matched.clickMode,
     'furn:endpoint': matched.target.endpoint,
     'furn:features': host.features,
+    'furn:inputMode': matched.inputMode,
     ...(matched.target.renderer ? { 'furn:renderer': matched.target.renderer } : {}),
     'furn:storybook': Boolean(matched.target.storyOrchestrator),
     'furn:target': matched.target.id,
@@ -130,6 +135,14 @@ function validateClickMode(requested: unknown): DesktopClickMode | 'auto' {
   return clickMode;
 }
 
+function validateInputMode(requested: unknown): DesktopInputMode {
+  const inputMode = requested ?? 'compatibility';
+  if (!(desktopInputModes as readonly unknown[]).includes(inputMode)) {
+    throw invalidArgument(`"furn:inputMode" must be one of: ${desktopInputModes.join(', ')}.`);
+  }
+  return inputMode as DesktopInputMode;
+}
+
 function validateLaunchMode(requested: unknown): 'attach' | 'launch' {
   const launchMode = requested ?? 'launch';
   if (launchMode !== 'attach' && launchMode !== 'launch') {
@@ -138,7 +151,18 @@ function validateLaunchMode(requested: unknown): 'attach' | 'launch' {
   return launchMode;
 }
 
-function resolveClickMode(clickMode: DesktopClickMode | 'auto', host: DesktopHostInfo): DesktopClickMode {
+/**
+ * A strict input mode decides the click transport, so a conflicting request fails. It does not require the host to
+ * click at all, because a session may only type or clear; a click the host cannot deliver is refused when it is sent.
+ */
+function resolveClickMode(clickMode: DesktopClickMode | 'auto', host: DesktopHostInfo, inputMode: DesktopInputMode): DesktopClickMode {
+  if (inputMode !== 'compatibility') {
+    const pinned: DesktopClickMode = inputMode === 'accessible' ? 'accessibility' : 'physical';
+    if (clickMode !== 'auto' && clickMode !== pinned) {
+      throw new WebDriverError('session not created', `"furn:clickMode" "${clickMode}" conflicts with "furn:inputMode" "${inputMode}".`);
+    }
+    return pinned;
+  }
   if (clickMode === 'physical' && !host.features.physicalClick) {
     throw new WebDriverError('session not created', 'The target does not support physical click input.');
   }

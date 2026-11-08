@@ -172,6 +172,19 @@ accessibility clicks. Neither names nor keys enter the native command journal.
 The `observe` `actions` fact uses cached pattern-availability properties, so
 listing actions adds no per-node provider calls to the bounded walk.
 
+### Clear mechanisms
+
+The helper advertises `strictClear`. `clear` writes an empty value through the
+UIA Value pattern when the element exposes one that is not read-only, and
+otherwise presses Ctrl+A and Delete after focusing the element. A request may
+name `mechanism`: `semantic` only writes the value and fails
+`element-not-interactable` with effect `none` when the pattern is missing or
+read-only, and `keyboard` skips the write and takes the same input authority,
+focus check, and physical input lock as the fallback. The value write uses the
+bounded mutation worker, effect ledger, and lease-scoped quarantine, so a
+`semantic` write that never settles is `mutation-indeterminate`. Every
+successful clear returns `{ "mechanism": "semantic" | "keyboard" }`.
+
 ### Window events and identity
 
 Window lifecycle comes from out-of-context `SetWinEventHook` notifications
@@ -213,7 +226,8 @@ point. A `SendInput` call that injects fewer events than requested fails as
 
 `click` mode `auto` falls back to accessibility activation when physical input
 is unavailable, and an explicit `physical` request reports `input-unavailable`.
-Element `sendKeys` and the physical `clear` fallback activate the target window
+Element `sendKeys` and the keyboard `clear` (the fallback, or a `keyboard`
+mechanism) activate the target window
 and verify keyboard focus before sending, which is stricter than the macOS
 `clear`; `performActions` activates only when the foreground belongs to another
 application. The helper has no `uiAccess` manifest, and the occlusion check

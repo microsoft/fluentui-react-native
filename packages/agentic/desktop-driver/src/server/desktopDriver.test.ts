@@ -245,6 +245,7 @@ describe('Desktop Driver W3C remote end', () => {
 
   test.each([
     ['furn:clickMode', 'not-a-click-mode'],
+    ['furn:inputMode', 'strict'],
     ['furn:launchMode', 'not-a-launch-mode'],
   ])('rejects invalid %s before probing the target', async (capability, value) => {
     const harness = await createDesktopDriverTestHarness();

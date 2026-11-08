@@ -206,3 +206,66 @@ describe('desktopDescribe', () => {
     expect(registered.filter(({ kind }) => kind === 'it' || kind === 'xit').map(({ kind }) => kind)).toEqual(['it']);
   });
 });
+
+describe('desktopIt input attribution', () => {
+  function attributed(lane?: 'accessible' | 'physical') {
+    const registry = createDesktopJasmineRegistry(laneEnvironment(lane));
+    const jasmine = fakeJasmine();
+    const session = { receipts: { keyboard: 3 } as Record<string, number> | undefined };
+    const deliver = (mechanism: string, count = 1) => {
+      session.receipts = { ...session.receipts, [mechanism]: (session.receipts?.[mechanism] ?? 0) + count };
+    };
+    const { desktopIt } = createDesktopJasmine(jasmine.api, registry, async () => session.receipts);
+    const run = (name: string, context: object = {}) => jasmine.registered.find((spec) => spec.name === name)!.body!.call(context);
+    return { registry, session, deliver, desktopIt, run };
+  }
+
+  test('records only what the body delivered, and the declared input it never used', async () => {
+    const { deliver, desktopIt, registry, run } = attributed('physical');
+    desktopIt('types', { requires: ['keyboard', 'physical-click'] }, () => deliver('keyboard', 2));
+
+    await run('types');
+
+    expect(registry.entries.get('typesspec0')).toMatchObject({ input: { receipts: { keyboard: 2 }, unused: ['physical-click'] } });
+  });
+
+  test('fails a body that delivered input nothing declares, once it has run', async () => {
+    const { deliver, desktopIt, registry, run } = attributed();
+    desktopIt('sneaks', async () => deliver('wheel'));
+
+    await expect(run('sneaks')).rejects.toThrow(/The test delivered input it does not declare: wheel \(declare wheel\)\./);
+    expect(registry.entries.get('sneaksspec0')).toMatchObject({ input: { receipts: { wheel: 1 }, undeclared: ['wheel'] } });
+  });
+
+  test('a failed body keeps its own error and its receipts, and reports nothing unused', async () => {
+    const { deliver, desktopIt, registry, run } = attributed('physical');
+    desktopIt('breaks', { requires: ['keyboard', 'wheel'] }, async () => {
+      deliver('keyboard');
+      throw new Error('assertion');
+    });
+
+    await expect(run('breaks')).rejects.toThrow('assertion');
+    expect(registry.entries.get('breaksspec0')).toMatchObject({ input: { receipts: { keyboard: 1 } } });
+    expect(registry.entries.get('breaksspec0')).not.toHaveProperty('input.unused');
+  });
+
+  test('outside a lane, a click declaration accounts for whichever click the host chose', async () => {
+    const { deliver, desktopIt, run } = attributed();
+    desktopIt('clicks', { requires: ['click'] }, () => deliver('physical-click'));
+
+    await expect(run('clicks')).resolves.toBeUndefined();
+  });
+
+  test('runs the body as it is, with its context, when the session reports no receipts', async () => {
+    const { desktopIt, registry, run, session } = attributed();
+    session.receipts = undefined;
+    const context = { shared: true };
+    desktopIt('plain', function (this: unknown) {
+      expect(this).toBe(context);
+    });
+
+    await run('plain', context);
+
+    expect(registry.entries.get('plainspec0')).not.toHaveProperty('input');
+  });
+});

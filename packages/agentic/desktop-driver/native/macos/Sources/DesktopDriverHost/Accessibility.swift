@@ -378,11 +378,27 @@ final class AccessibilityEngine {
     }
   }
 
-  func tryClearValue(_ elementID: String) throws -> Bool {
+  /// Writes an empty `AXValue` and reports whether that cleared the element. Without `strict`, an element whose value
+  /// cannot be written answers false so the caller can clear with the keyboard. With it, the method never answers
+  /// false: such an element fails `element-not-interactable` before anything is dispatched, and a failed check or
+  /// write fails with the effect the ledger recorded.
+  func tryClearValue(_ elementID: String, strict: Bool = false) throws -> Bool {
     let record = try requireRecord(elementID)
     try validateLive(record)
     var settable: DarwinBoolean = false
     let settableError = AXUIElementIsAttributeSettable(record.element, kAXValueAttribute as CFString, &settable)
+    if strict {
+      if settableError == .attributeUnsupported || settableError == .noValue
+        || (settableError == .success && !settable.boolValue)
+      {
+        try fail(ErrorCode.notInteractable, "The element does not expose a writable value to clear.")
+      }
+      try throwAX(
+        settableError,
+        operation: "Checking whether the element value can be set",
+        staleMessage: "Element \"\(elementID)\" is no longer available."
+      )
+    }
     if settableError == .attributeUnsupported || settableError == .noValue || !settable.boolValue {
       return false
     }
@@ -397,6 +413,9 @@ final class AccessibilityEngine {
     effects.completed(error)
     if error == .invalidUIElement {
       try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
+    }
+    if strict {
+      try throwAX(error, operation: "Clearing the element value")
     }
     return error == .success
   }

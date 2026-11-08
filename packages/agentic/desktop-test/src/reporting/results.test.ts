@@ -11,7 +11,7 @@ import {
 } from './results.js';
 import type { DesktopInputLaneReport, DesktopRunResult, DesktopTestResult } from './results.js';
 
-const accessible: DesktopInputLaneReport = { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: false };
+const accessible: DesktopInputLaneReport = { input: 'accessible', source: 'option', masking: 'host-masked', policyEnforced: true };
 
 function outcome(
   status: DesktopTestResult['status'],
@@ -120,14 +120,21 @@ describe('input lane and exclusion reporting', () => {
 
   test('names the lane, its source and each exclusion on one line', () => {
     expect(describeDesktopSelection(result())).toBe(
-      'input accessible (host-masked) from --input; excluded 2 by platform, 1 by scope, 7 by input',
+      'input accessible (policy-enforced, host-masked) from --input; excluded 2 by platform, 1 by scope, 7 by input',
     );
-    expect(describeDesktopSelection({ lane: { input: 'physical', source: 'environment', policyEnforced: false } })).toBe(
-      'input physical pilot from DESKTOP_INPUT',
+    expect(describeDesktopSelection({ lane: { input: 'physical', source: 'environment', policyEnforced: true } })).toBe(
+      'input physical pilot (policy-enforced) from DESKTOP_INPUT',
     );
+    expect(describeDesktopSelection({ lane: { input: 'accessible', source: 'driver', policyEnforced: true } })).toBe(
+      'input accessible (policy-enforced) from the driver instance',
+    );
+    // A report written before enforcement still reads as what it was.
     expect(
       describeDesktopSelection({ lane: { input: 'accessible', source: 'driver', masking: 'verified-masked', policyEnforced: false } }),
     ).toBe('input accessible (verified-masked) from the driver instance');
+    expect(describeDesktopSelection({ lane: { input: 'physical', source: 'environment', policyEnforced: false } })).toBe(
+      'input physical pilot from DESKTOP_INPUT',
+    );
     expect(describeDesktopSelection({})).toBeUndefined();
   });
 
@@ -139,7 +146,7 @@ describe('input lane and exclusion reporting', () => {
     const xml = renderJUnit(result());
 
     expect(xml).toContain('<property name="desktop.input" value="accessible"/>');
-    expect(xml).toContain('<property name="desktop.input.label" value="accessible (host-masked)"/>');
+    expect(xml).toContain('<property name="desktop.input.label" value="accessible (policy-enforced, host-masked)"/>');
     expect(xml).toContain('<property name="desktop.input.source" value="option"/>');
     expect(xml).toContain('<property name="desktop.excluded.platform" value="2"/>');
     expect(xml).toContain('<property name="desktop.excluded.input" value="7"/>');
@@ -155,7 +162,9 @@ describe('input lane and exclusion reporting', () => {
   test('the Markdown summary leads with the selection and splits unsupported counts', () => {
     const markdown = renderRunSummary(result());
 
-    expect(markdown).toContain('Selection: input accessible (host-masked) from --input; excluded 2 by platform, 1 by scope, 7 by input.');
+    expect(markdown).toContain(
+      'Selection: input accessible (policy-enforced, host-masked) from --input; excluded 2 by platform, 1 by scope, 7 by input.',
+    );
     expect(markdown).toContain('2 unsupported (1 declared, 1 quarantined)');
     expect(markdown).toContain('declared unsupported: Not executed.');
   });

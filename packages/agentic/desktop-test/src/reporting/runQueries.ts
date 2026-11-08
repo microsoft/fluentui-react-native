@@ -4,8 +4,15 @@ import { createHash, randomUUID } from 'node:crypto';
 import { isNativeError } from 'node:util/types';
 
 import { desktopArtifactPath } from './collector.js';
-import { DesktopReportedError, reportStatuses, redactDesktopSecrets, selectionExclusionReasons, testGaps } from './protocol.js';
-import type { SelectionExclusions, TestGap, TestStatus } from './protocol.js';
+import {
+  DesktopReportedError,
+  reportStatuses,
+  redactDesktopSecrets,
+  selectionExclusionReasons,
+  testGaps,
+  validateTestInputReport,
+} from './protocol.js';
+import type { SelectionExclusions, TestGap, TestInputReport, TestStatus } from './protocol.js';
 import { desktopInputLaneSources, summarizeDesktopRun } from './results.js';
 import type { DesktopInputLaneReport, DesktopRunResult, DesktopSelectionReport } from './results.js';
 
@@ -363,12 +370,19 @@ function parseResult(text: string, runId: string): DesktopRunResult & { terminal
       const gap = attempt.gap;
       if (gap !== undefined && (!testGaps.includes(gap as TestGap) || attempt.status !== 'unsupported'))
         throw new TypeError('Invalid persisted desktop test gap.');
+      let input: TestInputReport | undefined;
+      if (attempt.input !== undefined) {
+        validateTestInputReport(attempt.input);
+        if (attempt.input.undeclared && attempt.status !== 'failed') throw new TypeError('Invalid persisted desktop test input.');
+        input = attempt.input;
+      }
       return {
         attempt: attempt.attempt,
         durationMs: attempt.durationMs,
         status: attempt.status,
         ...(typeof reason === 'string' ? { reason } : {}),
         ...(gap !== undefined ? { gap: gap as TestGap } : {}),
+        ...(input !== undefined ? { input } : {}),
         ...(attempt.failure !== undefined ? { failure: new DesktopReportedError(attempt.failure).failure } : {}),
       };
     });
@@ -416,10 +430,13 @@ function laneField(value: unknown): DesktopInputLaneReport | undefined {
   if (value === undefined) return undefined;
   const lane = record(value);
   const source = desktopInputLaneSources.find((candidate) => candidate === lane.source);
-  if (lane.policyEnforced !== false || source === undefined) throw new TypeError('Invalid persisted desktop input lane.');
-  if (lane.input === 'physical' && lane.masking === undefined) return { input: 'physical', source, policyEnforced: false };
+  const policyEnforced = lane.policyEnforced;
+  if (typeof policyEnforced !== 'boolean' || source === undefined) throw new TypeError('Invalid persisted desktop input lane.');
+  if (lane.input === 'physical' && lane.masking === undefined) return { input: 'physical', source, policyEnforced };
+  // A run recorded before the driver enforced a policy always named its masking, because the masks alone held its lane.
+  if (lane.input === 'accessible' && lane.masking === undefined && policyEnforced) return { input: 'accessible', source, policyEnforced };
   if (lane.input === 'accessible' && (lane.masking === 'host-masked' || lane.masking === 'verified-masked'))
-    return { input: 'accessible', source, masking: lane.masking, policyEnforced: false };
+    return { input: 'accessible', source, masking: lane.masking, policyEnforced };
   throw new TypeError('Invalid persisted desktop input lane.');
 }
 

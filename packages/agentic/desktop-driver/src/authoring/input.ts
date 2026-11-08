@@ -7,6 +7,7 @@ export const desktopRequirements = [
   'element-screenshot',
   'focus',
   'keyboard',
+  'perform-accessibility-action',
   'physical-click',
   'screenshot',
   'set-window-rect',
@@ -17,6 +18,142 @@ export type DesktopRequirement = (typeof desktopRequirements)[number];
 export type DesktopInput = 'accessible' | 'physical' | 'both';
 export type DesktopInputLane = Exclude<DesktopInput, 'both'>;
 export const desktopInputLanes = ['accessible', 'physical'] as const satisfies readonly DesktopInputLane[];
+
+/**
+ * The input policy a Desktop Driver session enforces, fixed when the session is created (`furn:inputMode`). `accessible`
+ * delivers only semantic input, `physical` clicks physically and clears with the keyboard, and `compatibility`, the
+ * default, enforces nothing beyond the host's own masks.
+ */
+export const desktopInputModes = ['accessible', 'compatibility', 'physical'] as const;
+export type DesktopInputMode = (typeof desktopInputModes)[number];
+
+/**
+ * How a session delivered input, as it records it when it dispatches. `unattributed-clear` is a clear whose host did not
+ * say whether it set the value or typed, so it counts as possible keyboard input.
+ */
+export const desktopInputMechanisms = [
+  'accessibility-action',
+  'accessibility-click',
+  'keyboard',
+  'physical-click',
+  'pointer',
+  'semantic-clear',
+  'unattributed-clear',
+  'wheel',
+] as const;
+export type DesktopInputMechanism = (typeof desktopInputMechanisms)[number];
+
+/** How many times a session delivered input by each mechanism. A mechanism it never used is absent. */
+export type DesktopInputReceipts = Readonly<Partial<Record<DesktopInputMechanism, number>>>;
+
+/** What `GET /session/:id/furn/input` returns: the session's policy and the input it delivered. */
+export type DesktopSessionInput = {
+  mode: DesktopInputMode;
+  receipts: DesktopInputReceipts;
+};
+
+/**
+ * Whether a session's input policy lets it deliver a mechanism. An accessible session delivers only semantic input; a
+ * physical session clicks physically or semantically but clears only with the keyboard. A strict session never makes an
+ * unattributed clear, because it always says how to clear.
+ */
+export function desktopInputModeAllows(mode: DesktopInputMode, mechanism: DesktopInputMechanism): boolean {
+  switch (mode) {
+    case 'accessible':
+      return mechanism === 'accessibility-action' || mechanism === 'accessibility-click' || mechanism === 'semantic-clear';
+    case 'physical':
+      return mechanism !== 'semantic-clear' && mechanism !== 'unattributed-clear';
+    default:
+      return true;
+  }
+}
+
+/**
+ * The declarations that account for each mechanism. A semantic clear needs none: it is not physical input, and a case
+ * that clears declares the keyboard its physical variant types with.
+ */
+const mechanismRequirements: Readonly<Record<DesktopInputMechanism, readonly DesktopRequirement[]>> = {
+  'accessibility-action': ['perform-accessibility-action'],
+  'accessibility-click': ['accessibility-click', 'click'],
+  keyboard: ['keyboard'],
+  'physical-click': ['physical-click', 'click'],
+  pointer: ['physical-click'],
+  'semantic-clear': [],
+  'unattributed-clear': ['keyboard'],
+  wheel: ['wheel'],
+};
+
+/** What one case delivered, judged against what it declared. */
+export type DesktopInputComparison = {
+  /** Mechanisms the case delivered that none of its declarations accounts for. Any entry fails the case. */
+  undeclared: DesktopInputMechanism[];
+  /** Transport requirements the case declared and never exercised. Reported, never failed. */
+  unused: DesktopRequirement[];
+};
+
+/** Subtracts one receipt snapshot from a later one of the same session, for a runner that shares a session across cases. */
+export function subtractDesktopInputReceipts(after: DesktopInputReceipts, before: DesktopInputReceipts): DesktopInputReceipts {
+  const delta: Partial<Record<DesktopInputMechanism, number>> = {};
+  for (const mechanism of desktopInputMechanisms) {
+    const count = (after[mechanism] ?? 0) - (before[mechanism] ?? 0);
+    if (count > 0) delta[mechanism] = count;
+  }
+  return delta;
+}
+
+/**
+ * Compares the input a case delivered with its declaration. Receipts are the authority: a declaration only promises, so
+ * a mechanism nothing declared fails the case, while a declared transport the case did not use is only reported. Pass the
+ * session's click mode: under `auto` the host, not the case, chose how to click, so any click declaration accounts for
+ * either click transport.
+ */
+export function compareDesktopInputReceipts(
+  descriptor: Pick<DesktopCaseOptions, 'requires'> | undefined,
+  receipts: unknown,
+  clickMode?: 'accessibility' | 'auto' | 'physical',
+): DesktopInputComparison {
+  const delivered = validateDesktopInputReceipts(receipts);
+  const used = desktopInputMechanisms.filter((mechanism) => delivered[mechanism] !== undefined);
+  const declared = descriptor?.requires ?? [];
+  const hostClicks = clickMode === 'auto' && declared.some((requirement) => clickRequirements.has(requirement));
+  const accounts = (mechanism: DesktopInputMechanism): readonly DesktopRequirement[] =>
+    hostClicks && clickMechanisms.has(mechanism)
+      ? [...mechanismRequirements[mechanism], ...clickRequirements]
+      : mechanismRequirements[mechanism];
+  const undeclared = used.filter(
+    (mechanism) => accounts(mechanism).length > 0 && !accounts(mechanism).some((requirement) => declared.includes(requirement)),
+  );
+  const unused = declared.filter(
+    (requirement) => inputRequirements.has(requirement) && !used.some((mechanism) => accounts(mechanism).includes(requirement)),
+  );
+  return { undeclared, unused };
+}
+
+/** Names each undeclared mechanism with the requirements that would declare it, for the failure of a case that delivered it. */
+export function describeUndeclaredDesktopInput(undeclared: readonly DesktopInputMechanism[]): string {
+  const named = undeclared.map((mechanism) => `${mechanism} (declare ${mechanismRequirements[mechanism].join(' or ')})`);
+  return `The test delivered input it does not declare: ${named.join(', ')}.`;
+}
+
+/** Checks a receipt report read from a driver, so a malformed one is an error rather than an empty record. */
+export function validateDesktopInputReceipts(value: unknown, source = 'input receipts'): DesktopInputReceipts {
+  const receipts = object(value, source);
+  for (const [mechanism, count] of Object.entries(receipts)) {
+    if (!(desktopInputMechanisms as readonly string[]).includes(mechanism))
+      throw new TypeError(`${source} has unknown mechanism "${mechanism}".`);
+    if (!Number.isSafeInteger(count) || (count as number) < 1) throw new TypeError(`${source}.${mechanism} must be a positive integer.`);
+  }
+  return receipts as DesktopInputReceipts;
+}
+
+/** Checks a session's input report, so a driver that omits its policy is never mistaken for one that enforces it. */
+export function validateDesktopSessionInput(value: unknown, source = 'session input'): DesktopSessionInput {
+  const report = object(value, source);
+  exactKeys(report, ['mode', 'receipts'], source);
+  if (!(desktopInputModes as readonly unknown[]).includes(report.mode))
+    throw new TypeError(`${source}.mode must be one of: ${desktopInputModes.join(', ')}.`);
+  return { mode: report.mode as DesktopInputMode, receipts: validateDesktopInputReceipts(report.receipts, `${source}.receipts`) };
+}
 
 /**
  * The input an accessible lane keeps from reaching the application. A host that reports any of these as anything other
@@ -56,15 +193,26 @@ export type ResolvedDesktopCaseOptions = DesktopCaseOptions & {
 };
 
 const physicalRequirements = new Set<DesktopRequirement>(['physical-click', 'keyboard', 'wheel']);
-const accessibleRequirements = new Set<DesktopRequirement>(['accessibility-click']);
+const accessibleRequirements = new Set<DesktopRequirement>(['accessibility-click', 'perform-accessibility-action']);
+/** Requirements that promise input, so receipts can show one went unused. */
+const inputRequirements = new Set<DesktopRequirement>(['click', ...physicalRequirements, ...accessibleRequirements]);
+const clickRequirements = new Set<DesktopRequirement>(['accessibility-click', 'click', 'physical-click']);
+const clickMechanisms = new Set<DesktopInputMechanism>(['accessibility-click', 'physical-click']);
 const endpoints = ['macos', 'windows', 'win32'] as const;
 const requirementSet = new Set<string>(desktopRequirements);
 
+/**
+ * Derives a case's input lane from what it requires. A case that needs both transports runs only in the physical lane,
+ * whose sessions also deliver declared accessible input, and must say so with an explicit `input: 'physical'`.
+ */
 export function resolveDesktopInput(input?: DesktopInput, requires: readonly DesktopRequirement[] = []): DesktopInput {
   const physical = requires.some((requirement) => physicalRequirements.has(requirement));
   const accessible = requires.some((requirement) => accessibleRequirements.has(requirement));
   if (physical && accessible) {
-    throw new TypeError('A desktop test cannot require both physical and accessible input; split the case.');
+    if (input === 'physical') return input;
+    throw new TypeError(
+      'A desktop test that requires both physical and accessible input must declare input: "physical", whose sessions deliver both; otherwise split the case.',
+    );
   }
   const derived = physical ? 'physical' : accessible ? 'accessible' : 'both';
   if (input !== undefined && derived !== 'both' && input !== derived) {

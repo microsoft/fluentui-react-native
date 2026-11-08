@@ -5,14 +5,15 @@ import { pathToFileURL } from 'node:url';
 
 import type { DesktopStoryManifest } from '@fluentui-react-native/desktop-driver';
 import {
+  compareDesktopInputReceipts,
+  describeUndeclaredDesktopInput,
   missingDesktopRequirements,
   resolveDesktopClickMode,
-  unmaskedAccessibleFeatures,
   type DesktopArtifact,
 } from '@fluentui-react-native/desktop-driver/authoring';
 import { ArtifactManager, captureDesktopFailureEvidence } from '@fluentui-react-native/desktop-driver/artifacts';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
-import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import type { DesktopReportWriter, TestInputReport } from '@fluentui-react-native/desktop-test/reporting';
 import { DesktopReportedError } from '@fluentui-react-native/desktop-test/reporting';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
@@ -40,6 +41,8 @@ export type WdioStoryTestResult = {
   error?: string;
   skipReason?: string;
   gap?: 'unsupported' | 'quarantine';
+  /** The input the case's session delivered, judged against its declaration when it has one. */
+  input?: TestInputReport;
   evidenceErrors?: string[];
   artifacts?: readonly DesktopArtifact[];
 };
@@ -78,13 +81,32 @@ class MissingRequirementsError extends Error {
   }
 }
 
-/** The driver cannot show it disabled physical input, so an accessible lane could not keep its guarantee. */
-class UnmaskedLaneError extends Error {
-  constructor(unmasked: readonly string[]) {
+/** The session did not confirm the input policy it was created with, so no case it runs can be held to that policy. */
+class InputPolicyError extends Error {
+  constructor(requested: string, confirmed: unknown) {
     super(
-      `The accessible input lane needs a driver that reports ${unmasked.join(', ')} disabled, and this one does not. Start it with "driver --input accessible".`,
+      `The driver did not confirm the ${requested} input policy (it reported ${typeof confirmed === 'string' ? confirmed : 'none'}). Restart "storybook driver" from this version of storybook-desktop.`,
     );
   }
+}
+
+/** The case delivered input its declaration does not account for. */
+class UndeclaredInputError extends Error {}
+
+/**
+ * Reads what the case's session delivered and judges it against the declaration; a legacy callback declares nothing to
+ * judge. Only a case that ran to completion reports declarations it did not use, since one that stopped early could not.
+ */
+async function readDeliveredInput(
+  desktop: Awaited<ReturnType<typeof connectDesktopWebdriver>>,
+  descriptor: Parameters<typeof compareDesktopInputReceipts>[0],
+  clickMode: ReturnType<typeof resolveDesktopClickMode>,
+  completed: boolean,
+): Promise<TestInputReport> {
+  const { receipts } = await desktop.input();
+  if (!descriptor) return { receipts };
+  const { undeclared, unused } = compareDesktopInputReceipts(descriptor, receipts, clickMode);
+  return { receipts, ...(undeclared.length ? { undeclared } : {}), ...(completed && unused.length ? { unused } : {}) };
 }
 
 export async function runWdioStoryTests(
@@ -194,9 +216,11 @@ export async function runWdioStoryTests(
         continue;
       }
       const clickMode = resolveDesktopClickMode(descriptor, settings.clickMode, settings.input);
+      const inputMode = settings.input ?? 'compatibility';
       // The supervisor owns the session, so even a crashed or timed-out Node worker cannot strand it.
       const desktop = await connectDesktopWebdriver({
         clickMode,
+        inputMode,
         launchMode: 'attach',
         platformName: options.platform === 'macos' ? 'macos' : 'windows',
         targetId: options.targetId,
@@ -209,12 +233,11 @@ export async function runWdioStoryTests(
         if (live.endpoint !== options.platform || live.platformManifestDigest !== options.manifest.platformManifestDigest) {
           throw new Error('The running Storybook manifest is stale or targets a different platform. Restart storybook driver and the app.');
         }
-        if (settings.input === 'accessible') {
-          // A driver that cannot report its physical input disabled fails closed rather than silently running unmasked.
-          phase = 'lane verification';
-          const unmasked = unmaskedAccessibleFeatures(desktop.browser.capabilities['furn:features']);
-          if (unmasked.length) throw new UnmaskedLaneError(unmasked);
-        }
+        // The driver refuses input outside the policy before dispatch, so a lane holds even on a host with no masks. A
+        // driver that does not confirm the policy fails closed rather than running cases it cannot hold or attribute.
+        phase = 'input policy verification';
+        const confirmed = desktop.browser.capabilities['furn:inputMode'];
+        if (confirmed !== inputMode) throw new InputPolicyError(inputMode, confirmed);
         const missing = missingDesktopRequirements(descriptor, desktop.browser.capabilities['furn:features'], clickMode);
         if (missing.length) throw new MissingRequirementsError(missing);
         phase = 'navigation';
@@ -268,12 +291,23 @@ export async function runWdioStoryTests(
         if (outcome.status === 'skipped') {
           result.skipReason = outcome.skipReason;
         }
+        // Read before teardown: the receipts belong to the session and end with it.
+        phase = 'input verification';
+        result.input = await readDeliveredInput(desktop, descriptor, clickMode, outcome.status === 'passed');
+        if (result.input.undeclared) throw new UndeclaredInputError(describeUndeclaredDesktopInput(result.input.undeclared));
       } catch (error) {
         if (error instanceof MissingRequirementsError) {
           result.status = 'unsupported';
           result.skipReason = error.message;
-        } else if (error instanceof UnmaskedLaneError) {
+        } else if (error instanceof InputPolicyError) {
           failure = error;
+        } else if (error instanceof UndeclaredInputError) {
+          // The case ran as written, so there is no application state to capture; the declaration is what is wrong.
+          failure = error;
+          result.status = 'failed';
+          executionFailures.push(error);
+          result.error = error.message;
+          writeDesktopStorybookFailure(`wdio "${displayName}" during ${phase}`, error, options.errorOutput);
         } else {
           failure = error;
           executionFailures.push(error);
@@ -297,6 +331,8 @@ export async function runWdioStoryTests(
             options.report?.fail(new Error(evidenceError), 'evidence', testId);
             writeDesktopStorybookFailure(`evidence for "${displayName}"`, evidenceError, options.errorOutput);
           }
+          // What a failed case delivered attributes the failure. A session that cannot answer leaves it unknown.
+          if (phase === 'execution') result.input = await readDeliveredInput(desktop, descriptor, clickMode, false).catch(() => undefined);
         }
       }
       phase = 'session cleanup';
@@ -310,8 +346,8 @@ export async function runWdioStoryTests(
         );
       }
       // Every case would fail the same way, so stop here and let the run report it once, against this case.
-      if (failure instanceof UnmaskedLaneError) {
-        phase = 'lane verification';
+      if (failure instanceof InputPolicyError) {
+        phase = 'input policy verification';
         throw failure;
       }
       result.durationMs = Date.now() - started;
@@ -326,6 +362,7 @@ export async function runWdioStoryTests(
             status: result.status,
             durationMs: result.durationMs,
             ...(['skipped', 'unsupported'].includes(result.status) ? { reason: result.skipReason } : {}),
+            ...(result.input ? { input: result.input } : {}),
             ...(failure !== undefined ? { failure: options.report.failure(failure, 'test') } : {}),
           },
         },

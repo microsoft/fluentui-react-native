@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process';
 
 import type {
   ApplicationLease,
+  DesktopClearMechanism,
   DesktopHost,
   DesktopHostEvent,
   DesktopHostFeatures,
@@ -59,6 +60,8 @@ export class NativeDesktopHost implements DesktopHost {
   private potentialKeys = new Set<string>();
   private failure?: Error;
   private processPromise?: Promise<NativeHostProcess>;
+  /** What the helper last reported it supports. Every session is created after a probe. */
+  private probedFeatures?: DesktopHostFeatures;
 
   constructor({ application, artifact, disabledInputFeatures, endpoint, onStderr, onFailure }: NativeDesktopHostOptions) {
     if (!artifact.endpoints.includes(endpoint)) {
@@ -74,7 +77,9 @@ export class NativeDesktopHost implements DesktopHost {
 
   async probe(signal?: AbortSignal): Promise<DesktopHostInfo> {
     const hostInfo = await this.request<DesktopHostInfo>('probe', { endpoint: this.endpoint }, signal);
-    return applyDisabledInputFeaturePolicy(hostInfo, this.disabledInputFeatures);
+    const masked = applyDisabledInputFeaturePolicy(hostInfo, this.disabledInputFeatures);
+    this.probedFeatures = masked.features;
+    return masked;
   }
 
   async launch(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease> {
@@ -146,11 +151,27 @@ export class NativeDesktopHost implements DesktopHost {
     }
   }
 
-  async clear(elementId: string, signal?: AbortSignal): Promise<void> {
-    if (this.disabledInputFeatures.has('keyboard')) {
-      throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard fallback is disabled by the registered target policy.'));
+  /**
+   * A target that masks the keyboard may still clear semantically, so an unspecified clear is narrowed to the semantic
+   * mechanism there rather than refused, when the probed helper clears strictly. Without a mechanism a helper that
+   * predates strict clear reports none, and the clear stays unattributed.
+   */
+  async clear(elementId: string, signal?: AbortSignal, mechanism?: DesktopClearMechanism): Promise<DesktopClearMechanism | void> {
+    if (mechanism === 'keyboard' && this.disabledInputFeatures.has('keyboard')) {
+      throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.'));
     }
-    await this.request('clear', { elementId }, signal);
+    const requested = mechanism ?? (this.disabledInputFeatures.has('keyboard') ? 'semantic' : undefined);
+    if (requested && this.probedFeatures?.strictClear !== true) {
+      throw rejectedBeforeDispatch(
+        new HostUnsupportedError(
+          mechanism
+            ? `The native helper cannot clear with only the ${mechanism} mechanism.`
+            : 'Physical keyboard fallback is disabled by the registered target policy, and the native helper cannot clear only semantically.',
+        ),
+      );
+    }
+    const result = await this.request<unknown>('clear', { elementId, ...(requested ? { mechanism: requested } : {}) }, signal);
+    return parseClearMechanism(result);
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
@@ -167,6 +188,8 @@ export class NativeDesktopHost implements DesktopHost {
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
     for (const sequence of actions) {
+      // A source that only pauses delivers nothing, so a masked target may still wait with one.
+      if (sequence.actions.every((action) => action.type === 'pause')) continue;
       if (
         (sequence.type === 'key' && this.disabledInputFeatures.has('keyboard')) ||
         (sequence.type === 'pointer' && this.disabledInputFeatures.has('physicalClick')) ||
@@ -547,6 +570,12 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
 };
 
 /** Marks a failure raised before any command reached the provider, so no effect can have been dispatched. */
+/** The mechanism a helper reports it cleared with. A helper that predates strict clear reports none. */
+function parseClearMechanism(result: unknown): DesktopClearMechanism | undefined {
+  const mechanism = typeof result === 'object' && result !== null ? (result as { mechanism?: unknown }).mechanism : undefined;
+  return mechanism === 'keyboard' || mechanism === 'semantic' ? mechanism : undefined;
+}
+
 function rejectedBeforeDispatch<T>(error: T): T {
   return error instanceof Error ? attachFailureEffect(error, 'none') : error;
 }

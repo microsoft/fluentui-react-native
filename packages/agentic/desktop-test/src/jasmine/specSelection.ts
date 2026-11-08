@@ -34,9 +34,16 @@ export function selectDesktopSpecs(
   registry: DesktopJasmineRegistry,
   environment: DesktopJasmineEnvironment | undefined,
   features: unknown,
+  inputMode?: unknown,
 ): void {
   const lane = registry.selection?.lane;
   const problems = [...registry.errors];
+  // The driver refuses what the lane's policy forbids only when the session confirmed that policy.
+  if (lane && inputMode !== lane) {
+    problems.push(
+      `The ${lane} input lane needs a session that enforces the ${lane} input policy, and the driver reported ${typeof inputMode === 'string' ? inputMode : 'none'}.`,
+    );
+  }
   if (lane === 'accessible') {
     const unmasked = unmaskedAccessibleFeatures(features);
     if (unmasked.length > 0) {

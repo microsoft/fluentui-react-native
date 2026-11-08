@@ -1,7 +1,7 @@
 import { createDesktopJasmine } from './adapter.js';
-import type { DesktopGroupBody, DesktopGroupOptions, DesktopJasmineApi, DesktopSpecBody } from './adapter.js';
+import type { DesktopGroupBody, DesktopGroupOptions, DesktopInputReader, DesktopJasmineApi, DesktopSpecBody } from './adapter.js';
 import { desktopJasmineRegistry } from './registry.js';
-import type { DesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopCaseOptions, DesktopSessionInput } from '@fluentui-react-native/desktop-driver/authoring';
 
 export type {
   DesktopCaseOptions,
@@ -18,7 +18,12 @@ const jasmineApi: DesktopJasmineApi = {
   it: (name, body) => globals().it(name, body),
   xit: (name) => globals().xit(name),
 };
-const adapter = () => createDesktopJasmine(jasmineApi, desktopJasmineRegistry());
+// The desktop commands are installed on the session before any spec runs, so a body is attributed whenever they exist.
+const readInput: DesktopInputReader = async () => {
+  const browser = (globalThis as { browser?: { desktopInput?: () => Promise<DesktopSessionInput> } }).browser;
+  return browser?.desktopInput ? (await browser.desktopInput()).receipts : undefined;
+};
+const adapter = () => createDesktopJasmine(jasmineApi, desktopJasmineRegistry(), readInput);
 
 /**
  * Declares a Jasmine test with the input it needs and where it runs. The descriptor decides whether the test is part of a

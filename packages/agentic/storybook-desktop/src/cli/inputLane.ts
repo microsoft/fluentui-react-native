@@ -20,12 +20,12 @@ export type CommandInputLaneRequest = {
 /**
  * The lane a `test` or `smoke` run holds its tests to, and where it came from: `--input`, then `DESKTOP_INPUT`, then
  * the driver instance `test` attaches to. No lane is compatibility mode, which keeps the behavior from before lanes.
- * An accessible lane's masking depends on who owns the driver: `smoke` starts it masked, while `test` attaches to one
- * and verifies the mask before it runs anything.
+ * Every session confirms the lane's input policy. `smoke` also starts its driver masked for an accessible lane, while
+ * `test` attaches to whatever driver is running and relies on the policy alone.
  */
 export function resolveCommandInputLane(request: CommandInputLaneRequest): DesktopInputLaneReport | undefined {
   if (!request.runsTests) return undefined;
-  const masking = request.command === 'smoke' ? 'host-masked' : 'verified-masked';
+  const masking = request.command === 'smoke' ? 'host-masked' : undefined;
   const requested = requestedDesktopInputLane({ flag: request.flag, environment: request.environment });
   if (requested) return createDesktopInputLane(requested.input, requested.source, masking);
   const input = request.driverInput?.();

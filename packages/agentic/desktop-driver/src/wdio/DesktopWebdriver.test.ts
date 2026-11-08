@@ -106,6 +106,26 @@ describe('sanctioned WebdriverIO API', () => {
       fs.rmSync(artifactsRoot, { force: true, recursive: true });
     }
   }, 60_000);
+
+  test('opens a session with an input mode, and performs a named accessibility action through an element command', async () => {
+    const harness = await createDesktopDriverTestHarness({ features: { accessibilityActions: true, performAccessibilityAction: true } });
+    harness.host.setElementActions('button', ['Increment', 'Decrement']);
+    try {
+      const response = await runContract(harness.server.url, harness.target.id, os.tmpdir(), 'input.contract.cjs');
+      expect(response).toEqual({
+        attachedInputMode: 'accessible',
+        input: { mode: 'accessible', receipts: { 'accessibility-action': 1, 'semantic-clear': 1 } },
+        inputMode: 'accessible',
+        typed: expect.stringContaining('never delivers'),
+      });
+      expect(harness.host.actions).toContainEqual({ elementId: 'button', name: 'Increment', type: 'accessibility-action' });
+      expect(harness.host.actions).toContainEqual({ elementId: 'input', type: 'clear', mechanism: 'semantic' });
+      expect(harness.host.actions.some((action) => action.type === 'send-keys')).toBe(false);
+      expect(harness.host.actions.filter((action) => action.type === 'clear')).toHaveLength(1);
+    } finally {
+      await harness.close();
+    }
+  }, 60_000);
 });
 
 function runContract(

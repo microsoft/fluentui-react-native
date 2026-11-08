@@ -2,6 +2,7 @@ import { createHash, randomUUID } from 'node:crypto';
 
 import type {
   ApplicationLease,
+  DesktopClearMechanism,
   DesktopHost,
   DesktopHostEvent,
   DesktopHostFeatures,
@@ -120,6 +121,7 @@ const defaultFeatures: DesktopHostFeatures = {
   physicalClick: true,
   screenshot: true,
   setWindowRect: true,
+  strictClear: true,
   wheel: true,
 };
 
@@ -535,13 +537,23 @@ export class FakeDesktopHost implements DesktopHost {
     });
   }
 
-  async clear(elementId: string, signal?: AbortSignal): Promise<void> {
+  /** Clears semantically when the element has a value to set, and otherwise with the keyboard, unless told which. */
+  async clear(elementId: string, signal?: AbortSignal, mechanism?: DesktopClearMechanism): Promise<DesktopClearMechanism> {
     return this.mutate('clear', signal, (observed) => {
       throwIfAborted(observed);
       const element = this.requireElement(elementId);
+      const settable = element.value !== undefined;
+      const used = mechanism ?? (settable ? 'semantic' : 'keyboard');
+      if (used === 'semantic' && !settable) {
+        throw reportEffect(new HostWebDriverError('element not interactable', `Element "${elementId}" has no value to set.`), 'none');
+      }
+      if (used === 'keyboard' && !this.features.keyboard) {
+        throw reportEffect(new HostUnsupportedError('The fake target does not type.'), 'none');
+      }
       element.value = '';
       element.text = '';
-      this.actions.push({ type: 'clear', elementId });
+      this.actions.push({ type: 'clear', elementId, mechanism: used });
+      return used;
     });
   }
 

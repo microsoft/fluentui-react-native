@@ -43,7 +43,7 @@ export type DesktopCaseClickMode = 'auto' | 'physical' | 'accessibility';
 /**
  * The click mode a case runs under. A lane decides it outright, so a `click` requirement is an accessible click in the
  * accessible lane and a physical click in the physical lane. Without a lane only an accessible case pins its transport,
- * so it never moves the pointer. Any other case keeps the configured mode: a physical case on a host that masks physical
+ * so it never moves the pointer; a case that also requires physical input is a physical case. Any other case keeps the configured mode: a physical case on a host that masks physical
  * click is then reported unsupported by the requirement preflight, as the skip it replaces was, instead of failing to
  * create its session.
  */
@@ -54,7 +54,7 @@ export function resolveDesktopClickMode(
 ): DesktopCaseClickMode {
   if (lane === 'accessible') return 'accessibility';
   if (lane === 'physical') return 'physical';
-  if (descriptor?.input === 'accessible' || descriptor?.requires?.includes('accessibility-click')) return 'accessibility';
+  if (descriptor?.input === 'accessible') return 'accessibility';
   return configured;
 }
 
@@ -89,6 +89,7 @@ const requirementFeature: Record<Exclude<DesktopRequirement, 'click'>, string> =
   'element-screenshot': 'elementScreenshot',
   focus: 'focus',
   keyboard: 'keyboard',
+  'perform-accessibility-action': 'performAccessibilityAction',
   'physical-click': 'physicalClick',
   screenshot: 'screenshot',
   'set-window-rect': 'setWindowRect',

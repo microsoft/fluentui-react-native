@@ -6,6 +6,7 @@ import { safeToken } from '../operations/text.js';
 import { HostUnsupportedError, WebDriverError } from '../protocol/errors.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { DesktopSession, SessionManager } from './SessionManager.js';
+import { assertInputAllowed, clickMechanism, deliverClear, deliverInput, strictClearMechanism } from './sessionInput.js';
 import { createOperationStories } from './sessionStories.js';
 
 export type SessionOperationOptions = {
@@ -40,12 +41,22 @@ export function createOperationRuntime(
   const listAccessibilityActions = nativeHost.listAccessibilityActions?.bind(nativeHost);
   const performAccessibilityAction = nativeHost.performAccessibilityAction?.bind(nativeHost);
   const features = session.hostInfo.features;
+  // An accessible session offers no operation that types or moves the pointer, so `act` refuses them before it proves
+  // anything; the host below enforces the policy again when input is dispatched.
+  const accessible = session.inputMode === 'accessible';
   const host: OperationHost = {
     activate: (windowId, signal) => nativeHost.activate(windowId, signal),
     captureElement: (nativeId, signal) => nativeHost.captureElement(nativeId, signal),
     captureWindow: (windowId, signal) => nativeHost.captureWindow(windowId, signal),
-    clear: (nativeId, signal) => nativeHost.clear(nativeId, signal),
-    click: (nativeId, mode, signal) => nativeHost.click(nativeId, mode, signal),
+    async clear(nativeId, signal) {
+      const requested = strictClearMechanism(session, 'Clearing an element');
+      return deliverClear(session, requested, 'Clearing an element', (mechanism) => nativeHost.clear(nativeId, signal, mechanism));
+    },
+    async click(nativeId, mode, signal) {
+      const mechanism = clickMechanism(mode);
+      assertInputAllowed(session, mechanism, 'Clicking an element');
+      return deliverInput(session, [mechanism], () => nativeHost.click(nativeId, mode, signal));
+    },
     hitTest: (windowId, x, y, signal) => nativeHost.hitTest(windowId, x, y, signal),
     listAccessibilityActions(nativeId, signal) {
       if (!listAccessibilityActions) {
@@ -65,13 +76,17 @@ export function createOperationRuntime(
       }
       return releaseElements(nativeIds, signal);
     },
-    performAccessibilityAction(nativeId, key, signal) {
+    async performAccessibilityAction(nativeId, key, signal) {
       if (!performAccessibilityAction) {
         throw new HostUnsupportedError(`Target "${session.target.id}" does not perform accessibility actions.`);
       }
-      return performAccessibilityAction(nativeId, key, signal);
+      assertInputAllowed(session, 'accessibility-action', 'Performing an accessibility action');
+      return deliverInput(session, ['accessibility-action'], () => performAccessibilityAction(nativeId, key, signal));
     },
-    sendKeys: (nativeId, text, signal) => nativeHost.sendKeys(nativeId, text, signal),
+    async sendKeys(nativeId, text, signal) {
+      assertInputAllowed(session, 'keyboard', 'Typing into an element');
+      return deliverInput(session, ['keyboard'], () => nativeHost.sendKeys(nativeId, text, signal));
+    },
     snapshot: (nativeId, signal) => nativeHost.snapshot(nativeId, signal),
     ...(subscribe ? { subscribe } : {}),
   };
@@ -87,8 +102,8 @@ export function createOperationRuntime(
       accessibilityClick: features.accessibilityClick,
       boundedObservation: features.boundedObservation === true && !!observe && !!releaseElements,
       elementCapture: features.elementScreenshot,
-      keyboard: features.keyboard,
-      physicalClick: features.physicalClick,
+      keyboard: features.keyboard && !accessible,
+      physicalClick: features.physicalClick && !accessible,
       stories: !!session.target.storyOrchestrator,
       windowCapture: features.screenshot,
     },

@@ -28,6 +28,34 @@ describe('declared gaps and selection events', () => {
     expect(() => validateDesktopEvent(event('test-result', { ...result, status: 'unsupported', gap: 'flaky' }))).toThrow();
   });
 
+  test('accepts delivered input, and undeclared input only on a failed result', () => {
+    const receipts = { 'accessibility-click': 1, keyboard: 2 };
+    const failed = {
+      ...result,
+      status: 'failed',
+      failure: { failureId: 'failure', kind: 'test', error: { name: 'Error', message: 'Undeclared input.' } },
+    };
+    expect(() => validateDesktopEvent(event('test-result', { ...result, status: 'passed', input: { receipts } }))).not.toThrow();
+    expect(() =>
+      validateDesktopEvent(event('test-result', { ...result, status: 'passed', input: { receipts, unused: ['wheel'] } })),
+    ).not.toThrow();
+    expect(() => validateDesktopEvent(event('test-result', { ...failed, input: { receipts, undeclared: ['keyboard'] } }))).not.toThrow();
+    expect(() =>
+      validateDesktopEvent(event('test-result', { ...result, status: 'passed', input: { receipts, undeclared: ['keyboard'] } })),
+    ).toThrow('must fail');
+  });
+
+  test.each([
+    ['an unknown mechanism', { receipts: { typing: 1 } }],
+    ['a negative count', { receipts: { keyboard: -1 } }],
+    ['an empty undeclared list', { receipts: {}, undeclared: [] }],
+    ['an unknown requirement', { receipts: {}, unused: ['typing'] }],
+    ['an unknown field', { receipts: {}, typed: 'secret' }],
+  ])('rejects input with %s', (_name, input) => {
+    // A passed result needs nothing else, so the input is what fails it.
+    expect(() => validateDesktopEvent(event('test-result', { ...result, status: 'passed', input }))).toThrow();
+  });
+
   test('accepts exactly the three non-negative integer exclusion counts', () => {
     expect(() => validateDesktopEvent(event('selection', { excluded: { platform: 1, scope: 0, input: 12 } }))).not.toThrow();
   });

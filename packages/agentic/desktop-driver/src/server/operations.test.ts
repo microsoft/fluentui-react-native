@@ -505,7 +505,7 @@ describe('Desktop Driver agent operations', () => {
         await expect(session.act({ action: 'type', text: 'secret words', ...field })).resolves.toMatchObject({
           result: { mechanism: 'keyboard' },
         });
-        await expect(session.act({ action: 'clear', ...field })).resolves.toMatchObject({ result: { mechanism: 'provider' } });
+        await expect(session.act({ action: 'clear', ...field })).resolves.toMatchObject({ result: { mechanism: 'accessibility' } });
 
         const dispatched = harness.host.actions.map(({ elementId, ...action }) =>
           // The fake issues a fresh record id, such as `save~2`, each time an element is observed again.
@@ -517,7 +517,7 @@ describe('Desktop Driver agent operations', () => {
             { elementId: 'agree', mode: 'physical', type: 'click' },
             { elementId: 'save', mode: 'accessibility', type: 'click' },
             { elementId: 'field', text: 'secret words', type: 'send-keys' },
-            { elementId: 'field', type: 'clear' },
+            { elementId: 'field', mechanism: 'semantic', type: 'clear' },
           ]),
         );
         const journal = await session.journal();
@@ -525,7 +525,7 @@ describe('Desktop Driver agent operations', () => {
           { effect: 'mutate', outcome: 'ok', summary: { action: 'click', mechanism: 'physical-pointer' } },
           { summary: { action: 'activate', mechanism: 'accessibility' } },
           { summary: { action: 'type', mechanism: 'keyboard' } },
-          { summary: { action: 'clear', mechanism: 'provider' } },
+          { summary: { action: 'clear', mechanism: 'accessibility' } },
         ]);
         expect(JSON.stringify(journal.result)).not.toContain('secret words');
       });

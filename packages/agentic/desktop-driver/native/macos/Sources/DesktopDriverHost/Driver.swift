@@ -198,8 +198,9 @@ final class Driver {
       )
       return CommandResult()
     case "clear":
-      try clear(elementID: try requireString(params, "elementId"), token: token)
-      return CommandResult()
+      let elementID = try requireString(params, "elementId")
+      let mechanism = try clearMechanism(params)
+      return CommandResult(result: ["mechanism": try clear(elementID: elementID, mechanism: mechanism, token: token)])
     case "sendKeys":
       guard let text = params["text"] as? String else {
         try fail(ErrorCode.invalidParams, "The sendKeys request requires a string \"text\".")
@@ -296,6 +297,7 @@ final class Driver {
         "physicalClick": trusted,
         "screenshot": screenshot,
         "setWindowRect": trusted,
+        "strictClear": true,
         "wheel": trusted,
         "windowEvents": trusted,
       ],
@@ -520,16 +522,34 @@ final class Driver {
     }
   }
 
-  private func clear(elementID: String, token: CancellationToken) throws {
+  /// The clear mechanism a request names, or nil when the helper may choose. Anything else is refused before dispatch.
+  private func clearMechanism(_ params: JSONObject) throws -> String? {
+    guard let value = params["mechanism"] else {
+      return nil
+    }
+    guard let mechanism = value as? String, mechanism == "semantic" || mechanism == "keyboard" else {
+      try fail(ErrorCode.invalidParams, "The clear mechanism must be \"semantic\" or \"keyboard\".")
+    }
+    return mechanism
+  }
+
+  /// Clears the element and returns the mechanism that did. Without a requested mechanism the value write comes first
+  /// and the keyboard is its fallback; a requested mechanism is the only one used.
+  private func clear(elementID: String, mechanism: String?, token: CancellationToken) throws -> String {
     let window = try windowForElement(elementID)
     _ = try accessibility.snapshot(elementID: elementID, window: window, token: token)
-    if try accessibility.tryClearValue(elementID) {
-      return
+    if mechanism != "keyboard", try accessibility.tryClearValue(elementID, strict: mechanism == "semantic") {
+      return "semantic"
+    }
+    guard mechanism != "semantic" else {
+      try fail(ErrorCode.internalError, "The semantic clear ended without clearing or failing.")
     }
     guard input.physicalInputAvailable() else {
       try fail(
         ErrorCode.inputUnavailable,
-        "The element does not expose a writable value and physical input requires Accessibility permission."
+        mechanism == "keyboard"
+          ? "Physical keyboard input requires Accessibility permission in System Settings > Privacy & Security > Accessibility."
+          : "The element does not expose a writable value and physical input requires Accessibility permission."
       )
     }
     try withPhysicalInput(token: token) {
@@ -538,6 +558,7 @@ final class Driver {
       try token.wait(milliseconds: 16)
       try input.pressCommandADelete(token: token)
     }
+    return "keyboard"
   }
 
   private func sendKeys(elementID: String, text: String, token: CancellationToken) throws {

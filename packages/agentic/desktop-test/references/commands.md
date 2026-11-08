@@ -64,8 +64,9 @@ rerunning `prep`. See [platform setup](platforms.md).
 `test --input accessible|physical` runs one input lane. `DESKTOP_INPUT` supplies
 the lane when the flag is absent, and an empty or unknown value is an error. The
 `accessible` lane starts the native host with keyboard, physical click, and wheel
-disabled and runs the tests that need no physical input; the `physical` lane
-runs tests that need it plus those that need neither. Tests declare which with
+disabled and requests a matching session policy; the `physical` lane requests a
+physical session policy and runs tests that need physical input plus those that
+need neither. Tests declare which with
 the [`./jasmine` helpers](wdio-suites.md#declare-input-and-scope-in-jasmine-specs).
 A lane requires a Jasmine WDIO suite (or the Storybook suite, whose integration
 applies the lane itself) and rejects `--list`, which resolves spec files without
@@ -75,7 +76,8 @@ lane run is judged.
 
 An imported integration that serves its own driver receives the lane and owns
 masking that driver. A host supplied through `hostFactory` is not masked by the
-harness, so the suite verifies the mask before running anything.
+harness, so the suite verifies the mask before running anything. The strict
+session policy independently refuses input outside the selected lane.
 
 The Storybook `csf-wdio` suite does not support generic `--list`. Discover story
 IDs with the Storybook integration's manifest/CLI, then select authored tests

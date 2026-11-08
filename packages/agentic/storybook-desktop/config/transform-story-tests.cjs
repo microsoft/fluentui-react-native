@@ -1,8 +1,9 @@
+const fs = require('node:fs');
 const { isBuiltin, createRequire } = require('node:module');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
-const { transformFromAstSync, traverse, types } = require('@babel/core');
+const { parseSync, transformFromAstSync, traverse, types } = require('@babel/core');
 const transformTypescript = require('@babel/plugin-transform-typescript');
 
 const nodeGlobals = new Set(
@@ -336,28 +337,184 @@ function directInputCall(call) {
   return undefined;
 }
 
-/**
- * Rejects a case that also runs in the accessible input lane but sends physical input itself: the keyboard commands, the value
- * commands that may type, and WebDriver actions with key, pointer or wheel sources. The check reads literals only. Input sent
- * through a helper or an alias is stopped by the accessible lane's host masks when the case runs.
- */
-function rejectDirectInput(callback, { name, input, inputSource }) {
-  if (input === 'physical') return;
+/** The string a literal `import()`, awaited or not, loads; undefined for anything else. */
+function dynamicImportSource(expression) {
+  expression = unwrap(expression);
+  if (expression?.isAwaitExpression()) expression = unwrap(expression.get('argument'));
+  if (expression?.isImportExpression?.()) {
+    const source = expression.get('source');
+    return source.isStringLiteral() ? source.node.value : undefined;
+  }
+  if (!expression?.isCallExpression() || !types.isImport(expression.node.callee) || expression.node.arguments.length !== 1)
+    return undefined;
+  const source = expression.get('arguments.0');
+  return source.isStringLiteral() ? source.node.value : undefined;
+}
+
+const helperExtensions = /\.(?:[cm]?[jt]s)$/;
+
+/** A relative helper module this check can read, or undefined for a package, a builtin or a file it cannot find. */
+function resolveHelper(specifier, fromFile) {
+  if (!specifier.startsWith('.')) return undefined;
+  try {
+    const resolved = createRequire(path.resolve(fromFile)).resolve(specifier);
+    return helperExtensions.test(resolved) ? resolved : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** The module and export a callee names when it is a helper loaded from a relative module, by static or literal dynamic import. */
+function importedHelper(callee, fromFile) {
+  callee = unwrap(callee);
+  if (callee.isIdentifier()) {
+    const binding = callee.scope.getBinding(callee.node.name);
+    if (binding?.path.isImportSpecifier()) {
+      const imported = binding.path.node.imported;
+      const file = resolveHelper(binding.path.parentPath.node.source.value, fromFile);
+      return file && { file, name: types.isIdentifier(imported) ? imported.name : imported.value };
+    }
+    // const { helper } = await import('./helpers.ts');
+    if (!binding?.path.isVariableDeclarator() || !binding.path.get('id').isObjectPattern()) return undefined;
+    const source = dynamicImportSource(binding.path.get('init'));
+    const file = source && resolveHelper(source, fromFile);
+    if (!file) return undefined;
+    for (const property of binding.path.get('id.properties')) {
+      if (!property.isObjectProperty() || property.node.computed) continue;
+      if (types.isIdentifier(property.node.value, { name: callee.node.name })) return { file, name: keyName(property) };
+    }
+    return undefined;
+  }
+  if (!callee.isMemberExpression() && !callee.isOptionalMemberExpression()) return undefined;
+  const name = memberName(callee);
+  const object = unwrap(callee.get('object'));
+  // (await import('./helpers.ts')).helper(), helpers.helper() after `const helpers = await import(...)`, or a namespace import.
+  let source = dynamicImportSource(object);
+  if (source === undefined && object.isIdentifier()) {
+    const binding = object.scope.getBinding(object.node.name);
+    if (binding?.path.isVariableDeclarator() && binding.path.get('id').isIdentifier())
+      source = dynamicImportSource(binding.path.get('init'));
+    else if (binding?.path.isImportNamespaceSpecifier()) source = binding.path.parentPath.node.source.value;
+  }
+  const file = name && source !== undefined ? resolveHelper(source, fromFile) : undefined;
+  return file && { file, name };
+}
+
+/** Reads a helper module once per check: its top-level functions, and the exports that name them. */
+function readHelperModule(file, context) {
+  if (context.modules.has(file)) return context.modules.get(file);
+  let helper = null;
+  try {
+    const ast = parseSync(fs.readFileSync(file, 'utf8'), {
+      babelrc: false,
+      configFile: false,
+      filename: file,
+      sourceType: 'module',
+      parserOpts: { plugins: ['typescript'] },
+    });
+    let program;
+    traverse(ast, {
+      Program(found) {
+        program = found;
+        found.stop();
+      },
+    });
+    helper = { file, program, functions: new Map(), exports: new Map() };
+    for (const statement of program.get('body')) {
+      const exported = statement.isExportNamedDeclaration();
+      const declaration = exported ? statement.get('declaration') : statement;
+      if (declaration.isFunctionDeclaration() && declaration.node.id) {
+        helper.functions.set(declaration.node.id.name, declaration);
+        if (exported) helper.exports.set(declaration.node.id.name, declaration.node.id.name);
+      } else if (declaration.isVariableDeclaration()) {
+        for (const declarator of declaration.get('declarations')) {
+          const init = declarator.node.init ? unwrap(declarator.get('init')) : undefined;
+          if (!declarator.get('id').isIdentifier() || !(init?.isFunctionExpression() || init?.isArrowFunctionExpression())) continue;
+          helper.functions.set(declarator.node.id.name, init);
+          if (exported) helper.exports.set(declarator.node.id.name, declarator.node.id.name);
+        }
+      }
+      if (exported && !statement.node.source) {
+        for (const specifier of statement.get('specifiers')) {
+          if (!specifier.isExportSpecifier()) continue;
+          const exportedName = types.isIdentifier(specifier.node.exported) ? specifier.node.exported.name : specifier.node.exported.value;
+          helper.exports.set(exportedName, specifier.node.local.name);
+        }
+      }
+    }
+  } catch {
+    // A helper this check cannot parse is left to the run-time policy, like any other input it cannot see.
+    helper = null;
+  }
+  context.modules.set(file, helper);
+  return helper;
+}
+
+/** The first physical input a helper function sends, directly or through the helpers it calls. Cycles end at the first visit. */
+function helperFunctionInput(helper, name, context) {
+  const key = `${helper.file}#${name}`;
+  if (!helper.functions.has(name)) return undefined;
+  if (context.functions.has(key)) return context.functions.get(key);
+  context.functions.set(key, undefined);
+  const found = findPhysicalInput(helper.functions.get(name), helper.file, context, helper);
+  context.functions.set(key, found);
+  return found;
+}
+
+/** A call to a helper that sends physical input, as the chain of helpers that leads to the call that sends it. */
+function helperInputCall(call, fromFile, context, helper) {
+  const callee = unwrap(call.get('callee'));
+  let target = importedHelper(callee, fromFile);
+  let local;
+  if (target) {
+    const imported = readHelperModule(target.file, context);
+    local = imported && { helper: imported, name: imported.exports.get(target.name) };
+  } else if (helper && callee.isIdentifier() && helper.functions.has(callee.node.name)) {
+    // Another function in the same helper module, unless a local binding shadows it.
+    if (callee.scope.getBinding(callee.node.name)?.scope !== helper.program.scope) return undefined;
+    target = { name: callee.node.name };
+    local = { helper, name: callee.node.name };
+  }
+  if (!local?.name) return undefined;
+  const found = helperFunctionInput(local.helper, local.name, context);
+  return found && { call: found.call, requires: found.requires, via: [target.name, ...(found.via ?? [])] };
+}
+
+/** The first call under `root` that sends physical input, directly or through a relative helper module. */
+function findPhysicalInput(root, file, context, helper) {
   let finding;
-  callback.traverse({
+  root.traverse({
     'CallExpression|OptionalCallExpression'(call) {
-      const found = finding ? undefined : directInputCall(call);
-      if (found) finding = { ...found, path: call };
+      if (finding) return;
+      const found = directInputCall(call) ?? (file ? helperInputCall(call, file, context, helper) : undefined);
+      if (found) {
+        finding = { ...found, path: call };
+        call.stop();
+      }
     },
   });
+  return finding;
+}
+
+/**
+ * Rejects a case that also runs in the accessible input lane but sends physical input: the keyboard commands, the value
+ * commands that may type, and WebDriver actions with key, pointer or wheel sources, called directly or through a helper
+ * imported from a relative module. The check reads literals only. Input sent through an alias or a package helper is
+ * refused by the accessible lane's input policy when the case runs, and the case's receipts are checked against its
+ * declaration in every lane.
+ */
+function rejectDirectInput(callback, { name, input, inputSource, sourceFile }) {
+  if (input === 'physical') return;
+  const finding = findPhysicalInput(callback, sourceFile, { modules: new Map(), functions: new Map() });
   if (!finding) return;
   const subject = name ? `"${name}"` : 'This case';
   const declared = inputSource === 'declared';
+  const caller = finding.via ? `helper ${finding.via.join(' > ')} calls ${finding.call}` : `calls ${finding.call}`;
   if (finding.requires === undefined) {
     const declaration = declared ? "input: 'physical'" : 'requires for the physical input it sends (keyboard, physical-click or wheel)';
     fail(
       finding.path,
-      `${subject} runs in the accessible input lane, but calls ${finding.call} with an argument this check cannot read. ` +
+      `${subject} runs in the accessible input lane, but ${caller} with an argument this check cannot read. ` +
         `Pass a literal list of input sources, or declare ${declaration}.`,
     );
   }
@@ -365,9 +522,12 @@ function rejectDirectInput(callback, { name, input, inputSource }) {
   const declaration = declared
     ? "input: 'physical'"
     : `requires: [${finding.requires.map((requirement) => `'${requirement}'`).join(', ')}]`;
+  const sender = finding.via
+    ? `helper ${finding.via.join(' > ')} sends physical ${kinds} input with ${finding.call}`
+    : `${finding.call} sends physical ${kinds} input`;
   fail(
     finding.path,
-    `${subject} runs in the accessible input lane, but ${finding.call} sends physical ${kinds} input. ` +
+    `${subject} runs in the accessible input lane, but ${sender}. ` +
       `Declare ${declaration} so it runs only in the physical lane, or remove the call.`,
   );
 }

@@ -1,5 +1,7 @@
 import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import { createRequire } from 'node:module';
+import os from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
@@ -388,6 +390,101 @@ describe('extractWdioTests', () => {
         await (await browser.$('~button')).click();
       `;
       expect(() => extractWdioTests(desktopCase(body), sourceFile)).not.toThrow();
+    });
+
+    describe('through relative helpers', () => {
+      let root: string;
+      let story: string;
+
+      beforeAll(() => {
+        root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-wdio-helpers-'));
+        story = path.join(root, 'components', 'example.stories.tsx');
+        fs.mkdirSync(path.join(root, 'common'));
+        fs.mkdirSync(path.join(root, 'components'));
+        fs.writeFileSync(
+          path.join(root, 'common', 'focus.wdio.ts'),
+          `import type { Browser } from 'webdriverio';
+          export async function expectFocused(browser: Browser, id: string): Promise<void> { await browser.$(id); }
+          export async function focusByTab(browser: Browser, id: string): Promise<void> {
+            await expectFocused(browser, id);
+            await browser.keys('\\uE004');
+          }
+          export async function tabTwice(browser: Browser): Promise<void> { await focusByTab(browser, 'a'); }
+          export async function perform(browser: Browser, actions: never[]): Promise<void> { await browser.performActions(actions); }
+          export const clickPhysical = async (browser: Browser) => {
+            await browser.performActions([${pointer}]);
+          };
+          async function loop(browser: Browser): Promise<void> { await again(browser); }
+          async function again(browser: Browser): Promise<void> { await loop(browser); }
+          export { loop as cycle };
+          export const label = 'not a function';`,
+        );
+        fs.writeFileSync(
+          path.join(root, 'components', 'menu.wdio.ts'),
+          `export async function openFromKeyboard(context: { browser: unknown }): Promise<void> {
+            const { focusByTab } = await import('../common/focus.wdio.ts');
+            await focusByTab(context.browser as never, 'entry');
+          }
+          export { expectFocused } from '../common/focus.wdio.ts';`,
+        );
+      });
+
+      afterAll(() => fs.rmSync(root, { recursive: true, force: true }));
+
+      test.each([
+        [
+          'a destructured helper',
+          `const { focusByTab } = await import('../common/focus.wdio.ts'); await focusByTab(browser, 'entry');`,
+          /helper focusByTab sends physical keyboard input with browser\.keys.*requires: \['keyboard'\]/,
+        ],
+        [
+          'a helper called on the awaited module',
+          `await (await import('../common/focus.wdio.ts')).clickPhysical(browser);`,
+          /helper clickPhysical sends physical pointer input with performActions.*requires: \['physical-click'\]/,
+        ],
+        [
+          'a helper called on a module binding',
+          `const focus = await import('../common/focus.wdio.ts'); await focus.focusByTab(browser, 'entry');`,
+          /helper focusByTab sends physical keyboard input/,
+        ],
+        [
+          'a helper that calls another helper in its module',
+          `const { tabTwice } = await import('../common/focus.wdio.ts'); await tabTwice(browser);`,
+          /helper tabTwice > focusByTab sends physical keyboard input/,
+        ],
+        [
+          'a helper whose actions it cannot read',
+          `const { perform } = await import('../common/focus.wdio.ts'); await perform(browser, []);`,
+          /helper perform calls performActions with an argument this check cannot read/,
+        ],
+        [
+          'a helper that imports another helper',
+          `const { openFromKeyboard } = await import('./menu.wdio.ts'); await openFromKeyboard(context);`,
+          /helper openFromKeyboard > focusByTab sends physical keyboard input with browser\.keys/,
+        ],
+      ])('rejects %s that sends physical input', (_name, body, message) => {
+        expect(() => extractWdioTests(desktopCase(body), story)).toThrow(message);
+      });
+
+      test.each([
+        [
+          'a helper that sends no input',
+          `const { expectFocused } = await import('../common/focus.wdio.ts'); await expectFocused(browser, 'a');`,
+        ],
+        ['helpers that call each other in a cycle', `const { cycle } = await import('../common/focus.wdio.ts'); await cycle(browser);`],
+        [
+          'a re-exported helper, which the check does not follow',
+          `const { expectFocused } = await import('./menu.wdio.ts'); await expectFocused(browser, 'a');`,
+        ],
+        ['a package helper', `const { join } = await import('node:path'); join('a');`],
+      ])('allows %s', (_name, body) => {
+        expect(() => extractWdioTests(desktopCase(body), story)).not.toThrow();
+      });
+
+      test('allows a helper that sends input in a case that declares it', () => {
+        const body = `const { focusByTab } = await import('../common/focus.wdio.ts'); await focusByTab(browser, 'entry');`;
+        expect(() => extractWdioTests(desktopCase(body, `{ requires: ['keyboard'] }`), story)).not.toThrow();
+      });
     });
 
     test('does not read legacy callbacks, which declare no input', () => {

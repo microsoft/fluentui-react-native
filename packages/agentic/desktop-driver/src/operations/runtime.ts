@@ -16,7 +16,8 @@ export type OperationHost = {
   activate(windowId: string, signal: AbortSignal): Promise<void>;
   captureElement(nativeId: string, signal: AbortSignal): Promise<NativeImage>;
   captureWindow(windowId: string, signal: AbortSignal): Promise<NativeImage>;
-  clear(nativeId: string, signal: AbortSignal): Promise<void>;
+  /** Resolves with how the value was cleared, or nothing when the provider did not say. */
+  clear(nativeId: string, signal: AbortSignal): Promise<'keyboard' | 'semantic' | undefined>;
   click(nativeId: string, mode: 'accessibility' | 'physical', signal: AbortSignal): Promise<void>;
   hitTest(windowId: string, x: number, y: number, signal: AbortSignal): Promise<NativeElementSnapshot | null>;
   /** The element's published actions with their keys. Called only when `capabilities.accessibilityActions` is true. */

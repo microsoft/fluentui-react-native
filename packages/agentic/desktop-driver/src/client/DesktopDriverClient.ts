@@ -1,5 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
+import { validateDesktopSessionInput } from '../authoring/input.js';
+import type { DesktopSessionInput } from '../authoring/input.js';
 import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
@@ -198,6 +200,11 @@ export class DesktopSessionClient {
     return this.command('GET', '/furn/window-events');
   }
 
+  /** The session's input policy, and how many times it has delivered input through each mechanism. */
+  async getInput(): Promise<DesktopSessionInput> {
+    return validateDesktopSessionInput(await this.command('GET', '/furn/input'));
+  }
+
   /** The agent operations this session offers, with the JSON Schema of each one's input and result. */
   operations(): Promise<OperationCatalog> {
     return this.command('GET', '/furn/ops');
@@ -336,6 +343,11 @@ export class DesktopElementClient {
 
   sendKeys(text: string): Promise<null> {
     return this.command('POST', '/value', { text });
+  }
+
+  /** Performs the one accessibility action the element publishes under this name, such as `increment`. */
+  performAccessibilityAction(name: string): Promise<null> {
+    return this.command('POST', '/furn/accessibility-action', { name });
   }
 
   getText(): Promise<string> {

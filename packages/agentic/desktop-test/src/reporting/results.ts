@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import type { EventContext, ReportFailure, SelectionExclusions, TestGap, TestStatus } from './protocol.js';
+import type { EventContext, ReportFailure, SelectionExclusions, TestGap, TestInputReport, TestStatus } from './protocol.js';
 
 export type DesktopTestAttempt = {
   attempt: number;
@@ -9,19 +9,24 @@ export type DesktopTestAttempt = {
   reason?: string;
   /** Present only on an `unsupported` attempt the producer declared in advance, never on a missing requirement. */
   gap?: TestGap;
+  /** The input the attempt's session delivered, when the producer read its receipts. */
+  input?: TestInputReport;
   failure?: ReportFailure;
   context?: EventContext;
 };
 /**
- * The input lane a run was asked to execute. It records the request and how the host was masked; it never claims what
- * input a session delivered or enforced, hence the literal `policyEnforced: false`.
+ * The input lane a run was asked to execute: the request, where it came from, and how it was held. `policyEnforced` means
+ * every session confirmed the lane's `furn:inputMode`, so the driver refused input outside the lane; runs recorded before
+ * the driver enforced a policy carry `false`. `masking` names host masks that also applied. Neither qualifies a lane.
  */
 export const desktopInputLaneSources = ['option', 'environment', 'driver'] as const;
 /** `driver` means the lane was read from the attached driver instance's manifest instead of being requested here. */
 export type DesktopInputLaneSource = (typeof desktopInputLaneSources)[number];
+/** `host-masked`: this command started the host with the lane's masks. `verified-masked`: a pre-enforcement run checked them. */
+export type DesktopInputLaneMasking = 'host-masked' | 'verified-masked';
 export type DesktopInputLaneReport =
-  | { input: 'accessible'; source: DesktopInputLaneSource; masking: 'host-masked' | 'verified-masked'; policyEnforced: false }
-  | { input: 'physical'; source: DesktopInputLaneSource; policyEnforced: false };
+  | { input: 'accessible'; source: DesktopInputLaneSource; masking?: DesktopInputLaneMasking; policyEnforced: boolean }
+  | { input: 'physical'; source: DesktopInputLaneSource; policyEnforced: boolean };
 export type DesktopSelectionReport = { excluded: SelectionExclusions };
 export type DesktopTestResult = {
   testId: string;
@@ -285,9 +290,14 @@ function describeReason(attempt: Pick<DesktopTestAttempt, 'gap' | 'reason'>): st
   return attempt.gap ? `${gapLabels[attempt.gap]}: ${reason}` : reason;
 }
 
-/** `accessible (host-masked)`, `accessible (verified-masked)` or `physical pilot`; never a claim of enforced input. */
+/** Names the enforced input policy and any extra host mask; physical remains a pilot, not a qualification claim. */
 export function describeDesktopInputLane(lane: DesktopInputLaneReport): string {
-  return lane.input === 'physical' ? 'physical pilot' : `accessible (${lane.masking})`;
+  const held = [
+    ...(lane.policyEnforced ? ['policy-enforced'] : []),
+    ...(lane.input === 'accessible' && lane.masking ? [lane.masking] : []),
+  ];
+  const name = lane.input === 'physical' ? 'physical pilot' : 'accessible';
+  return held.length ? `${name} (${held.join(', ')})` : name;
 }
 
 function describeLaneSource(lane: DesktopInputLaneReport): string {

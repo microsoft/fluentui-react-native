@@ -30,7 +30,7 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
                 const compiledCode = compileWdioTest(callback, sourceFile, code);
                 const descriptor = options === undefined ? undefined : validateDesktopCaseOptions(options, `${sourceFile}.wdio`);
                 if (descriptor !== undefined) {
-                  rejectDirectInput(callback, { name, input: descriptor.input, inputSource: descriptor.inputSource });
+                  rejectDirectInput(callback, { name, input: descriptor.input, inputSource: descriptor.inputSource, sourceFile });
                 }
                 return {
                   ...(name === undefined ? {} : { name }),

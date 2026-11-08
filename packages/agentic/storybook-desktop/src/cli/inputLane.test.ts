@@ -37,23 +37,22 @@ describe('command input lane', () => {
     expect(driverInput).not.toHaveBeenCalled();
   });
 
-  test('labels how an accessible lane is masked by who owns the driver, and never a physical lane', () => {
+  test('enforces every lane by policy, and records host masks only where smoke started the driver', () => {
     expect(resolveCommandInputLane({ command: 'smoke', runsTests: true, flag: 'accessible' })).toEqual({
       input: 'accessible',
       source: 'option',
       masking: 'host-masked',
-      policyEnforced: false,
+      policyEnforced: true,
     });
     expect(resolveCommandInputLane({ command: 'test', runsTests: true, flag: 'accessible' })).toEqual({
       input: 'accessible',
       source: 'option',
-      masking: 'verified-masked',
-      policyEnforced: false,
+      policyEnforced: true,
     });
     expect(resolveCommandInputLane({ command: 'smoke', runsTests: true, flag: 'physical' })).toEqual({
       input: 'physical',
       source: 'option',
-      policyEnforced: false,
+      policyEnforced: true,
     });
   });
 

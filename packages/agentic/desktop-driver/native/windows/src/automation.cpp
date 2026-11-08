@@ -1422,17 +1422,35 @@ void Automation::PerformAccessibilityAction(const std::string& elementId, const 
   }
 }
 
-bool Automation::TryClearValue(const std::string& elementId) {
+bool Automation::TryClearValue(const std::string& elementId, bool strict) {
   const ElementRecord& record = RequireRecord(elementId);
   winrt::com_ptr<IUIAutomationValuePattern> value;
-  if (FAILED(record.element->GetCurrentPatternAs(UIA_ValuePatternId, IID_PPV_ARGS(value.put()))) || !value) {
-    return false;
+  const HRESULT query = record.element->GetCurrentPatternAs(UIA_ValuePatternId, IID_PPV_ARGS(value.put()));
+  if (FAILED(query) || !value) {
+    if (!strict) {
+      return false;
+    }
+    if (query == UIA_E_ELEMENTNOTAVAILABLE) {
+      Fail(kErrorStaleElement, "The element is no longer available.");
+    }
+    if (SUCCEEDED(query) || query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL ||
+        query == E_FAIL) {
+      Fail(kErrorNotInteractable, "The element does not expose a writable value to clear.");
+    }
+    FailHresult(kErrorAutomationFailed, "Reading the element value pattern", query);
   }
   const auto readOnly = std::make_shared<BOOL>(TRUE);
   const HRESULT state = BoundedRead([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
                                     "Reading the element value state");
   if (FAILED(state) || *readOnly != FALSE) {
-    return false;
+    if (!strict) {
+      return false;
+    }
+    if (state == UIA_E_ELEMENTNOTAVAILABLE) {
+      Fail(kErrorStaleElement, "The element is no longer available.");
+    }
+    CheckHresult(kErrorAutomationFailed, "Reading the element value state", state);
+    Fail(kErrorNotInteractable, "The element's value is read-only, so it cannot be cleared.");
   }
   const HRESULT result = CountedMutation(
       [value]() {
@@ -1442,6 +1460,13 @@ bool Automation::TryClearValue(const std::string& elementId) {
         return assigned;
       },
       "Clearing the element value");
+  if (strict) {
+    if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+      Fail(kErrorStaleElement, "The element is no longer available.");
+    }
+    CheckHresult(result == UIA_E_ELEMENTNOTENABLED ? kErrorNotInteractable : kErrorAutomationFailed,
+                 "Clearing the element value", result);
+  }
   return SUCCEEDED(result);
 }
 
