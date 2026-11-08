@@ -3,7 +3,7 @@ import type { NativeDriverArtifact } from '../../native/types';
 import { readFailureEffect } from '../../protocol/settlement';
 import { scriptNativeHelper } from '../../testing/scriptedNativeHelper';
 import type { ScriptedNativeRequest } from '../../testing/scriptedNativeHelper';
-import { NativeDesktopHost } from './NativeDesktopHost';
+import { FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES, NativeDesktopHost } from './NativeDesktopHost';
 import type { NativeDisabledInputFeature } from './NativeDesktopHost';
 
 const mockSpawn = jest.fn();
@@ -65,7 +65,12 @@ async function probedHost(strictClear: boolean, disabledInputFeatures: readonly 
 
 describe('NativeDesktopHost input delivery', () => {
   beforeEach(() => {
+    jest.replaceProperty(process, 'env', { ...process.env, [FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES]: '' });
     mockSpawn.mockReset();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   test('asks a strict helper for the mechanism, and returns the one it used', async () => {
