@@ -1242,6 +1242,37 @@ void TestWindowCloseWithoutEvents() {
         "a window this helper never issued is reported as untracked");
 }
 
+void TestLeaseRegistrationFailure() {
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestLeaseFailure", L"Lease failure window");
+  ApplicationManager applications;
+  HANDLE attemptedProcess = nullptr;
+  applications.UseLeaseRegistrationHookForTesting([&](HANDLE process, HANDLE) {
+    attemptedProcess = process;
+    throw std::runtime_error("Injected lease registration failure.");
+  });
+  bool failed = false;
+  try {
+    applications.AdoptWindowForTesting(window, L"Lease failure window");
+  } catch (const std::runtime_error&) {
+    failed = true;
+  }
+  DWORD flags = 0;
+  SetLastError(ERROR_SUCCESS);
+  Check(failed && attemptedProcess != nullptr && GetHandleInformation(attemptedProcess, &flags) == FALSE &&
+            GetLastError() == ERROR_INVALID_HANDLE,
+        "failed lease registration closes the process handle");
+  Check(applications.PrimaryLease() == nullptr &&
+            !applications.WindowEventsForTesting().IsObserving(GetCurrentProcessId()),
+        "failed lease registration removes the lease and its event observation");
+
+  applications.UseLeaseRegistrationHookForTesting({});
+  const std::string leaseId = applications.AdoptWindowForTesting(window, L"Lease failure window").id;
+  Check(applications.WindowIdsForLease(leaseId).size() == 1,
+        "a new lease can register the window after a failed registration");
+  applications.CloseApplication(leaseId, CancellationToken{});
+}
+
 void TestAttachedCloseKeepsQuarantine() {
   ResetMutationQuarantineForTesting();
   WindowThread windows;
@@ -1637,6 +1668,86 @@ void TestInjectionIntegrity() {
             std::string(DescribeIntegrityLevel(SECURITY_MANDATORY_HIGH_RID)) == "high" &&
             std::string(DescribeIntegrityLevel(SECURITY_MANDATORY_SYSTEM_RID)) == "system",
         "integrity levels are named for the messages that report them");
+}
+
+void TestActivationRefusal() {
+  const auto level = [](DWORD value) {
+    ProcessIntegrity integrity;
+    integrity.known = true;
+    integrity.level = value;
+    return integrity;
+  };
+  ActivationRefusal held;
+  held.sawForeground = true;
+  held.foreground = "hwnd:0000002a";
+  held.foregroundProcess = 4242;
+  held.helperIntegrity = level(SECURITY_MANDATORY_MEDIUM_RID);
+  held.foregroundIntegrity = level(SECURITY_MANDATORY_MEDIUM_RID);
+
+  ActivationRefusal desktopless;
+  Check(Contains(DescribeActivationRefusal(desktopless), "no interactive foreground desktop"),
+        "a session without any foreground window reports that there is no interactive desktop");
+
+  ActivationRefusal lost = held;
+  lost.foreground.clear();
+  Check(Contains(DescribeActivationRefusal(lost), "secure desktop"),
+        "a foreground lost during activation names locking, disconnection, or a secure desktop");
+
+  ActivationRefusal sibling = held;
+  sibling.foregroundInTargetProcess = true;
+  sibling.foregroundIntegrity = level(SECURITY_MANDATORY_HIGH_RID);
+  Check(Contains(DescribeActivationRefusal(sibling), "another window of the target application"),
+        "a foreground window of the target's own process is reported before integrity");
+
+  ActivationRefusal elevated = held;
+  elevated.foregroundIntegrity = level(SECURITY_MANDATORY_HIGH_RID);
+  elevated.attachError = ERROR_ACCESS_DENIED;
+  const std::string elevatedMessage = DescribeActivationRefusal(elevated);
+  Check(Contains(elevatedMessage, "runs at high integrity and this helper at medium") &&
+            Contains(elevatedMessage, "hwnd:0000002a of process 4242"),
+        "an elevated foreground holder names both integrity levels and the opaque window and process");
+
+  ActivationRefusal unreadable = held;
+  unreadable.foregroundIntegrity = ProcessIntegrity{};
+  unreadable.foregroundIntegrity.error = ERROR_ACCESS_DENIED;
+  Check(Contains(DescribeActivationRefusal(unreadable), "probably elevated"),
+        "a foreground holder whose token cannot be read is reported as probably elevated");
+
+  ActivationRefusal hung = held;
+  hung.foregroundHung = true;
+  hung.attachError = ERROR_ACCESS_DENIED;
+  Check(Contains(DescribeActivationRefusal(hung), "is not responding"),
+        "a hung foreground holder is reported before a refused attachment");
+
+  ActivationRefusal refused = held;
+  refused.attachError = ERROR_ACCESS_DENIED;
+  Check(Contains(DescribeActivationRefusal(refused), "input queue") &&
+            Contains(DescribeActivationRefusal(refused), "Windows error 5"),
+        "a refused input-queue attachment names its Windows error");
+
+  const std::string reclaimed = DescribeActivationRefusal(held);
+  Check(Contains(reclaimed, "taking the foreground back") &&
+            Contains(reclaimed, "did not become the foreground window"),
+        "a refusal with a shared input queue reports that the holder may take the foreground back");
+}
+
+void TestHelperSessionCheck() {
+  bool accepted = true;
+  try {
+    RequireProcessInHelperSession(GetCurrentProcessId(), kErrorAttachFailed);
+  } catch (const HelperError&) {
+    accepted = false;
+  }
+  Check(accepted, "the helper's own process runs in the helper's session");
+
+  std::string refusedCode;
+  try {
+    RequireProcessInHelperSession(0xFFFFFFF0u, kErrorLeaseInvalid);
+  } catch (const HelperError& error) {
+    refusedCode = error.code();
+  }
+  Check(refusedCode == kErrorLeaseInvalid,
+        "a process whose session cannot be read is refused with the caller's failure code");
 }
 
 void TestInputAuthorityOnThisMachine() {
@@ -3324,11 +3435,14 @@ int RunSelfTest() {
   TestWindowEventPublisher();
   TestWindowEventRegistration();
   TestWindowCloseWithoutEvents();
+  TestLeaseRegistrationFailure();
   TestAttachedCloseKeepsQuarantine();
   TestWindowEventHooks();
   TestDriverWindowEvents();
   TestInputEnvironment();
   TestInjectionIntegrity();
+  TestActivationRefusal();
+  TestHelperSessionCheck();
   TestInputAuthorityOnThisMachine();
   TestInputReevaluation();
   TestKeyboardGuard();

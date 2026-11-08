@@ -114,6 +114,17 @@ application descriptors may include an existing absolute `workingDirectory`
 for unpackaged process launch; packaged activation rejects that override.
 These fields are trusted supervisor configuration, not WebDriver capabilities.
 
+A `launch` or `attach` result is the application lease `{ id, ownership,
+processId, processStartedAt }`. The Windows provider adds `containment`, which
+states how far its ownership reaches: `job-object` for an unpackaged launch it
+started suspended inside a Job Object of its own, so closing the lease or the
+helper exiting ends the application and every descendant; `uncontained` for a
+packaged activation, where it owns only the identity-verified process whose
+window it leased (the activated process or a verified descendant) and no job;
+and `external` for an attached application it never ends. A provider that omits
+`containment` makes no containment claim. The field is additive and does not
+change the wire version.
+
 Element snapshots can additionally include `required` as a supported Boolean
 or an unsupported value with its reason. Older or non-supporting providers may
 omit it; the Node boundary treats absence as unsupported. This is additive

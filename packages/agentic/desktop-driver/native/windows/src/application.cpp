@@ -54,6 +54,9 @@ constexpr DWORD kLaunchCleanupForcedMs = 1000;
 constexpr unsigned int kDisposeGraceMs = 3000;
 constexpr unsigned int kDisposeForcedMs = 3000;
 constexpr DWORD kOwnedProcessAccess = PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE | PROCESS_TERMINATE;
+// Bounds how long closing an owned launch waits for its contained descendants
+// to exit after the helper ends its Job Object.
+constexpr unsigned int kJobDrainMs = 3000;
 // PowerShell writes the lease with 100-nanosecond precision; allow a small
 // tolerance so rounding never rejects the correct process.
 constexpr std::uint64_t kStartTimeToleranceTicks = 100000;  // 10 milliseconds
@@ -233,6 +236,34 @@ bool ProcessMatchesLaunchIdentity(HANDLE process, const std::wstring& aumid,
   return !actualPath.empty() && _wcsicmp(actualPath.c_str(), executablePath.c_str()) == 0;
 }
 
+enum class IdentityEvidence { Matches, Differs, Unreadable };
+
+// Like ProcessMatchesLaunchIdentity, but tells a process that is provably some
+// other application apart from one whose identity could not be read.
+IdentityEvidence ReadIdentityEvidence(HANDLE process, const std::wstring& aumid,
+                                      const std::wstring& executablePath) {
+  if (!aumid.empty()) {
+    UINT32 length = 0;
+    const LONG measured = GetApplicationUserModelId(process, &length, nullptr);
+    if (measured == APPMODEL_ERROR_NO_APPLICATION) {
+      return IdentityEvidence::Differs;
+    }
+    const std::wstring actualAumid =
+        measured == ERROR_INSUFFICIENT_BUFFER ? ReadProcessApplicationUserModelId(process) : std::wstring();
+    if (actualAumid.empty()) {
+      return IdentityEvidence::Unreadable;
+    }
+    return _wcsicmp(actualAumid.c_str(), aumid.c_str()) == 0 ? IdentityEvidence::Matches
+                                                              : IdentityEvidence::Differs;
+  }
+  const std::wstring actualPath = NormalizeExecutablePath(ReadProcessImagePath(process));
+  if (actualPath.empty()) {
+    return IdentityEvidence::Unreadable;
+  }
+  return _wcsicmp(actualPath.c_str(), executablePath.c_str()) == 0 ? IdentityEvidence::Matches
+                                                                   : IdentityEvidence::Differs;
+}
+
 winrt::handle DuplicateProcessHandle(HANDLE process) {
   HANDLE duplicated = nullptr;
   if (DuplicateHandle(GetCurrentProcess(), process, GetCurrentProcess(), &duplicated, 0,
@@ -242,6 +273,91 @@ winrt::handle DuplicateProcessHandle(HANDLE process) {
   winrt::handle result;
   result.attach(duplicated);
   return result;
+}
+
+bool ProcessInHelperSession(DWORD processId) {
+  DWORD helperSession = 0;
+  DWORD processSession = 0;
+  return ProcessIdToSessionId(GetCurrentProcessId(), &helperSession) != FALSE &&
+         ProcessIdToSessionId(processId, &processSession) != FALSE &&
+         processSession == helperSession;
+}
+
+// A helper on a service or other non-interactive window station cannot see or
+// drive desktop windows, so owning or attaching to an application there fails.
+void RequireInteractiveWindowStation(std::string_view failureCode) {
+  const HWINSTA station = GetProcessWindowStation();
+  USEROBJECTFLAGS flags{};
+  if (station == nullptr ||
+      GetUserObjectInformationW(station, UOI_FLAGS, &flags, sizeof(flags), nullptr) == FALSE) {
+    FailLastError(std::string(failureCode), "Reading the helper's window station", GetLastError());
+  }
+  if ((flags.dwFlags & WSF_VISIBLE) == 0) {
+    Fail(std::string(failureCode),
+         "The helper does not run on an interactive window station, so it cannot own or drive "
+         "desktop applications.");
+  }
+}
+
+// The Job Object that contains an unpackaged launch. It grants no breakaway, so
+// every descendant stays inside, and it ends its processes when its last handle
+// closes, so an owned launch cannot outlive a helper that exits or crashes.
+winrt::handle CreateContainmentJob() {
+  winrt::handle job{CreateJobObjectW(nullptr, nullptr)};
+  if (!job) {
+    FailLastError(kErrorLaunchFailed, "Creating the launch containment Job Object", GetLastError());
+  }
+  JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits{};
+  limits.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
+  if (SetInformationJobObject(job.get(), JobObjectExtendedLimitInformation, &limits,
+                              sizeof(limits)) == FALSE) {
+    FailLastError(kErrorLaunchFailed, "Configuring the launch containment Job Object", GetLastError());
+  }
+  return job;
+}
+
+std::optional<DWORD> ReadActiveJobProcesses(HANDLE job) {
+  JOBOBJECT_BASIC_ACCOUNTING_INFORMATION accounting{};
+  if (QueryInformationJobObject(job, JobObjectBasicAccountingInformation, &accounting,
+                                sizeof(accounting), nullptr) == FALSE) {
+    return std::nullopt;
+  }
+  return accounting.ActiveProcesses;
+}
+
+bool ProcessIsInJob(HANDLE process, HANDLE job) {
+  BOOL member = FALSE;
+  return IsProcessInJob(process, job, &member) != FALSE && member != FALSE;
+}
+
+// Ends every process in a containment job and waits, bounded, until the job
+// reports none still active. Returns why that could not be verified, or empty.
+std::string EndContainedProcesses(HANDLE job, unsigned int timeoutMs, const CancellationToken& token) {
+  token.ThrowIfCancelled();
+  if (TerminateJobObject(job, 1) == FALSE) {
+    const DWORD error = GetLastError();
+    const std::optional<DWORD> active = ReadActiveJobProcesses(job);
+    if (!active || *active != 0) {
+      return "Ending the containment Job Object failed: " + DescribeHresult(HRESULT_FROM_WIN32(error));
+    }
+    return {};
+  }
+  const Deadline deadline(timeoutMs);
+  for (;;) {
+    token.ThrowIfCancelled();
+    const std::optional<DWORD> active = ReadActiveJobProcesses(job);
+    if (!active) {
+      return "The containment Job Object could not report its remaining processes: " +
+             DescribeHresult(HRESULT_FROM_WIN32(GetLastError()));
+    }
+    if (*active == 0) {
+      return {};
+    }
+    if (deadline.Expired()) {
+      return std::to_string(*active) + " contained process(es) did not exit after the containment Job Object ended.";
+    }
+    token.Wait(25);
+  }
 }
 
 void PostCloseToExactProcessWindows(DWORD processId, const FILETIME& expectedStartTime) {
@@ -505,34 +621,48 @@ void TrackRelatedLaunchProcesses(const LaunchRootIdentity& root,
 struct ActivationOutcome {
   bool activated{false};
   bool sawForeground{false};
+  // The Windows error of the latest refused input-queue attachment, or 0.
+  DWORD attachError{0};
 };
 
 class ForegroundInputAttachment {
  public:
   explicit ForegroundInputAttachment(DWORD selfThread) noexcept : selfThread_(selfThread) {}
 
-  ~ForegroundInputAttachment() {
-    if (otherThread_ != 0) {
-      AttachThreadInput(selfThread_, otherThread_, FALSE);
-    }
-  }
+  ~ForegroundInputAttachment() { Detach(); }
 
-  bool Attach(DWORD otherThread) {
-    if (otherThread_ != 0 || otherThread == 0 || otherThread == selfThread_) {
-      return otherThread_ != 0;
+  // Shares the input queue of `otherThread`, first releasing a queue shared with
+  // a thread that no longer owns the foreground.
+  void AttachTo(DWORD otherThread) {
+    if (otherThread == otherThread_) {
+      return;
+    }
+    Detach();
+    if (otherThread == 0 || otherThread == selfThread_) {
+      return;
     }
     if (AttachThreadInput(selfThread_, otherThread, TRUE) == FALSE) {
-      return false;
+      error_ = GetLastError();
+      return;
     }
+    error_ = 0;
     otherThread_ = otherThread;
-    return true;
   }
 
-  bool attached() const noexcept { return otherThread_ != 0; }
+  DWORD thread() const noexcept { return otherThread_; }
+  DWORD error() const noexcept { return error_; }
 
  private:
+  void Detach() noexcept {
+    if (otherThread_ != 0) {
+      AttachThreadInput(selfThread_, otherThread_, FALSE);
+      otherThread_ = 0;
+    }
+  }
+
   DWORD selfThread_{0};
   DWORD otherThread_{0};
+  DWORD error_{0};
 };
 
 // Like application activation on macOS, a foreground popup that the window owns keeps the window's activation
@@ -570,18 +700,35 @@ ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& t
     if (deadline.Expired()) {
       break;
     }
-    if (!inputAttachment.attached()) {
-      // Foreground ownership only transfers between threads that share an
-      // input queue, so borrow the current foreground thread's queue.
-      const DWORD candidate = GetWindowThreadProcessId(foreground != nullptr ? foreground : window, nullptr);
-      inputAttachment.Attach(candidate);
-    }
+    // Foreground ownership only transfers between threads that share an input
+    // queue, so borrow the queue of whichever thread holds the foreground now.
+    inputAttachment.AttachTo(GetWindowThreadProcessId(foreground != nullptr ? foreground : window, nullptr));
     BringWindowToTop(window);
     SetForegroundWindow(window);
     SetActiveWindow(window);
     token.Wait(50);
   }
+  outcome.attachError = inputAttachment.thread() == 0 ? inputAttachment.error() : 0;
   return outcome;
+}
+
+ActivationRefusal ReadActivationRefusal(HWND window, const ActivationOutcome& outcome) {
+  ActivationRefusal refusal;
+  refusal.sawForeground = outcome.sawForeground;
+  refusal.attachError = outcome.attachError;
+  refusal.helperIntegrity = HelperIntegrity();
+  const HWND foreground = GetForegroundWindow();
+  if (foreground == nullptr) {
+    return refusal;
+  }
+  refusal.foreground = DescribeWindowHandle(foreground);
+  GetWindowThreadProcessId(foreground, &refusal.foregroundProcess);
+  DWORD windowProcess = 0;
+  GetWindowThreadProcessId(window, &windowProcess);
+  refusal.foregroundInTargetProcess = windowProcess != 0 && windowProcess == refusal.foregroundProcess;
+  refusal.foregroundHung = IsHungAppWindow(foreground) != FALSE;
+  refusal.foregroundIntegrity = ReadProcessIntegrity(refusal.foregroundProcess);
+  return refusal;
 }
 
 }  // namespace
@@ -640,16 +787,58 @@ bool TryActivateWindow(HWND window, const CancellationToken& token) {
   return ActivateWindowInternal(window, token).activated;
 }
 
+std::string DescribeActivationRefusal(const ActivationRefusal& refusal) {
+  if (!refusal.sawForeground) {
+    return "The session has no interactive foreground desktop, so the window could not be activated.";
+  }
+  const std::string prefix = "The target window did not become the foreground window: ";
+  if (refusal.foreground.empty()) {
+    return prefix +
+           "no window held the foreground when activation stopped, so the session may have been locked, "
+           "disconnected, or switched to a secure desktop.";
+  }
+  const std::string holder = "window " + refusal.foreground + " of process " + std::to_string(refusal.foregroundProcess);
+  if (refusal.foregroundInTargetProcess) {
+    return prefix + "the foreground stayed with " + holder +
+           ", another window of the target application that the target window does not own. Address that window, "
+           "then retry.";
+  }
+  const ProcessIntegrity& holderIntegrity = refusal.foregroundIntegrity;
+  if (holderIntegrity.known && refusal.helperIntegrity.known && holderIntegrity.level > refusal.helperIntegrity.level) {
+    return prefix + holder + " runs at " + DescribeIntegrityLevel(holderIntegrity.level) +
+           " integrity and this helper at " + DescribeIntegrityLevel(refusal.helperIntegrity.level) +
+           ", so Windows does not let the helper take the foreground from it. Bring a window that is not elevated "
+           "forward, then retry.";
+  }
+  if (!holderIntegrity.known && holderIntegrity.error == ERROR_ACCESS_DENIED) {
+    return prefix + "Windows denied reading the security token of " + holder +
+           ", so it is probably elevated, protected, or owned by another account, and Windows does not let the helper "
+           "take the foreground from it. Bring a window that is not elevated forward, then retry.";
+  }
+  if (refusal.foregroundHung) {
+    return prefix + holder + " is not responding, so Windows kept the foreground with it.";
+  }
+  if (refusal.attachError != 0) {
+    return prefix + "Windows refused to let this helper share the input queue of " + holder + " (Windows error " +
+           std::to_string(refusal.attachError) + "), so the foreground lock kept that window in front.";
+  }
+  return prefix + "Windows kept the foreground with " + holder +
+         " although this helper shared its input queue; that application may be taking the foreground back.";
+}
+
+void RequireProcessInHelperSession(DWORD processId, std::string_view failureCode) {
+  if (!ProcessInHelperSession(processId)) {
+    Fail(std::string(failureCode),
+         "The application does not run in the helper's Windows session, so the helper cannot drive it.");
+  }
+}
+
 void ActivateWindow(HWND window, const CancellationToken& token) {
   const ActivationOutcome outcome = ActivateWindowInternal(window, token);
   if (outcome.activated) {
     return;
   }
-  if (!outcome.sawForeground) {
-    Fail(kErrorWindowActivation,
-         "The session has no interactive foreground desktop, so the window could not be activated.");
-  }
-  Fail(kErrorWindowActivation, "The target window did not become the foreground window.");
+  Fail(kErrorWindowActivation, DescribeActivationRefusal(ReadActivationRefusal(window, outcome)));
 }
 
 ApplicationManager::~ApplicationManager() {
@@ -666,6 +855,11 @@ ApplicationManager::~ApplicationManager() {
     if (entry.second.process != nullptr) {
       CloseHandle(entry.second.process);
       entry.second.process = nullptr;
+    }
+    // Closing the last handle to a containment job ends whatever it still holds.
+    if (entry.second.job != nullptr) {
+      CloseHandle(entry.second.job);
+      entry.second.job = nullptr;
     }
   }
   for (PendingCleanupProcess& pending : pendingCleanupProcesses_) {
@@ -781,23 +975,27 @@ void ApplicationManager::SetWindowClosedPublisher(std::function<void(const std::
 
 const ApplicationLease& ApplicationManager::AdoptWindowForTesting(HWND window, const std::wstring& title) {
   const DWORD processId = GetCurrentProcessId();
-  HANDLE process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE, FALSE, processId);
-  if (process == nullptr) {
+  winrt::handle process{OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE, FALSE, processId)};
+  if (!process) {
     FailLastError(kErrorAttachFailed, "Opening the self-test process", GetLastError());
   }
-  return CreateLease("attached", processId, process, window, title, json::Value::Object());
+  const ApplicationLease& lease = CreateLease("attached", processId, process.get(), window, title,
+                                               json::Value::Object(), kContainmentExternal);
+  process.detach();
+  return lease;
 }
 
 ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD processId, HANDLE process,
                                                   HWND primaryWindow, const std::wstring& title,
-                                                  const json::Value& params) {
+                                                  const json::Value& params, std::string containment,
+                                                  HANDLE job) {
   ApplicationLease lease;
   lease.id = NextIdentifier("lease");
   lease.ownership = std::move(ownership);
+  lease.containment = std::move(containment);
   lease.endpoint = params.StringField("endpoint", "windows");
   lease.storyRootTestId = params.StringField("storyRootTestId");
   lease.processId = processId;
-  lease.process = process;
   lease.primaryWindow = primaryWindow;
   lease.windowTitle = title;
   if (process != nullptr) {
@@ -805,14 +1003,52 @@ ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD p
   }
   const std::string id = lease.id;
   leases_.emplace(id, std::move(lease));
-  leaseOrder_.push_back(id);
   ApplicationLease& stored = leases_[id];
-  // Observation starts before the first window is registered so a window that
-  // closes right after the lease exists is still seen.
-  windowEvents_.Observe(processId);
-  if (primaryWindow != nullptr) {
-    RegisterWindow(primaryWindow, processId, id, true, title);
+  try {
+    leaseOrder_.push_back(id);
+    // Observation starts before the first window is registered so a window that
+    // closes right after the lease exists is still seen.
+    windowEvents_.Observe(processId);
+    if (primaryWindow != nullptr) {
+      RegisterWindow(primaryWindow, processId, id, true, title);
+    }
+    if (leaseRegistrationHookForTesting_) {
+      leaseRegistrationHookForTesting_(process, job);
+    }
+  } catch (...) {
+    leaseOrder_.erase(std::remove(leaseOrder_.begin(), leaseOrder_.end(), id), leaseOrder_.end());
+    leases_.erase(id);
+    for (auto iterator = windowsById_.begin(); iterator != windowsById_.end();) {
+      if (iterator->second.leaseId != id) {
+        ++iterator;
+        continue;
+      }
+      windowEvents_.Forget(iterator->first);
+      const auto byHandle = windowIdsByHandle_.find(iterator->second.window);
+      if (byHandle != windowIdsByHandle_.end() && byHandle->second == iterator->first) {
+        windowIdsByHandle_.erase(byHandle);
+      }
+      iterator = windowsById_.erase(iterator);
+    }
+    const auto byHandle = windowIdsByHandle_.find(primaryWindow);
+    if (byHandle != windowIdsByHandle_.end() && windowsById_.find(byHandle->second) == windowsById_.end()) {
+      windowEvents_.Forget(byHandle->second);
+      windowIdsByHandle_.erase(byHandle);
+    }
+    const bool processStillLeased =
+        std::any_of(leases_.begin(), leases_.end(), [processId](const auto& other) {
+          return other.second.processId == processId;
+        });
+    if (!processStillLeased) {
+      try {
+        windowEvents_.Stop(processId);
+      } catch (...) {
+      }
+    }
+    throw;
   }
+  stored.process = process;
+  stored.job = job;
   return stored;
 }
 
@@ -864,11 +1100,15 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
     }
   }
 
+  RequireInteractiveWindowStation(kErrorUnsupported);
   const std::vector<HWND> preexisting = FindWindowsWithTitle(windowTitle);
   FILETIME launchStartedAt{};
   GetSystemTimeAsFileTime(&launchStartedAt);
   LaunchProcessGuard launchProcesses;
   LaunchRootIdentity launchRoot;
+  // Null for packaged activation: Windows creates that process, so the helper
+  // owns only the exact activated process and never claims its descendants.
+  winrt::handle containmentJob;
   try {
     if (!aumid.empty()) {
       winrt::com_ptr<IApplicationActivationManager> manager;
@@ -909,15 +1149,20 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       if (!arguments.empty()) {
         commandLine += L' ' + arguments;
       }
+      containmentJob = CreateContainmentJob();
       STARTUPINFOW startup{};
       startup.cb = sizeof(startup);
       PROCESS_INFORMATION information{};
-      if (CreateProcessW(executablePath.c_str(), commandLine.data(), nullptr, nullptr, FALSE, 0, nullptr,
+      // The process starts suspended so it joins the Job Object before it can
+      // run code or start a descendant outside it.
+      if (CreateProcessW(executablePath.c_str(), commandLine.data(), nullptr, nullptr, FALSE,
+                         CREATE_SUSPENDED, nullptr,
                          workingDirectory.empty() ? nullptr : workingDirectory.c_str(),
                          &startup, &information) == FALSE) {
         FailLastError(kErrorLaunchFailed, "Starting the unpackaged application", GetLastError());
       }
-      CloseHandle(information.hThread);
+      winrt::handle mainThread;
+      mainThread.attach(information.hThread);
       winrt::handle created;
       created.attach(information.hProcess);
       launchRoot.processId = information.dwProcessId;
@@ -925,13 +1170,28 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       const DWORD duplicateError = launchRoot.process ? ERROR_SUCCESS : GetLastError();
       launchProcesses.Track(launchRoot.processId, std::move(created));
       if (!launchRoot.process) {
+        TerminateProcess(launchProcesses.Find(launchRoot.processId), 1);
         FailLastError(kErrorLaunchFailed,
                       "Duplicating the created process handle for identity tracking",
                       duplicateError);
       }
+      if (AssignProcessToJobObject(containmentJob.get(), launchRoot.process.get()) == FALSE) {
+        const DWORD error = GetLastError();
+        TerminateProcess(launchRoot.process.get(), 1);
+        // The helper never breaks away from, or works around, a job it runs in.
+        FailLastError(kErrorUnsupported,
+                      "Placing the unpackaged application in the helper's containment Job Object "
+                      "(a job the helper runs in may forbid it), so the helper cannot own its "
+                      "process tree",
+                      error);
+      }
       if (!TryReadProcessStartTime(launchRoot.process.get(), launchRoot.startTime)) {
         Fail(kErrorLaunchFailed,
              "The created application process identity could not be read.");
+      }
+      if (ResumeThread(mainThread.get()) == static_cast<DWORD>(-1)) {
+        FailLastError(kErrorLaunchFailed, "Resuming the contained unpackaged application",
+                      GetLastError());
       }
       launchRoot.trusted = true;
     }
@@ -945,7 +1205,10 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
     while (matched == nullptr) {
       token.ThrowIfCancelled();
       std::vector<std::pair<HWND, DWORD>> candidates;
-      const std::unordered_map<DWORD, DWORD> parents = CaptureParentProcessIds();
+      // A contained launch proves descent by job membership; packaged activation
+      // has no job, so it falls back to the start-time-ordered parent chain.
+      const std::unordered_map<DWORD, DWORD> parents =
+          containmentJob ? std::unordered_map<DWORD, DWORD>{} : CaptureParentProcessIds();
       for (const HWND window : FindWindowsWithTitle(windowTitle)) {
         if (std::find(preexisting.begin(), preexisting.end(), window) != preexisting.end()) {
           continue;
@@ -957,7 +1220,10 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
         if (!candidate ||
             !TryReadProcessStartTime(candidate.get(), candidateStartTime) ||
             !ProcessStartedForLaunch(candidate.get(), launchStartedAt) ||
-            !IsCausallyRelatedProcess(owner, candidateStartTime, launchRoot, parents) ||
+            !ProcessInHelperSession(owner) ||
+            !(containmentJob
+                  ? ProcessIsInJob(candidate.get(), containmentJob.get())
+                  : IsCausallyRelatedProcess(owner, candidateStartTime, launchRoot, parents)) ||
             !ProcessMatchesLaunchIdentity(candidate.get(), aumid, executablePath)) {
           continue;
         }
@@ -1003,12 +1269,28 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       launchProcesses.Track(matchedProcessId, std::move(owned));
       Fail(kErrorCleanupFailed, "A secondary launch process could not be cleaned up: " + extraCleanupFailure);
     }
-    return CreateLease("launched", matchedProcessId, owned.detach(), matched, windowTitle, params);
+    const char* containment = containmentJob ? kContainmentJobObject : kContainmentUncontained;
+    const ApplicationLease& lease = CreateLease("launched", matchedProcessId, owned.get(), matched,
+                                                 windowTitle, params, containment, containmentJob.get());
+    owned.detach();
+    containmentJob.detach();
+    return lease;
   } catch (...) {
     const std::exception_ptr original = std::current_exception();
-    TrackRelatedLaunchProcesses(launchRoot, aumid, executablePath, launchStartedAt,
-                                launchProcesses);
-    const std::string cleanupFailure = launchProcesses.Cleanup();
+    std::string cleanupFailure;
+    if (containmentJob) {
+      // Ending the job reaches every contained descendant, not only the
+      // processes this launch saw.
+      const CancellationToken idle;
+      cleanupFailure = EndContainedProcesses(containmentJob.get(), kJobDrainMs, idle);
+    } else {
+      TrackRelatedLaunchProcesses(launchRoot, aumid, executablePath, launchStartedAt,
+                                  launchProcesses);
+    }
+    const std::string trackedFailure = launchProcesses.Cleanup();
+    if (!trackedFailure.empty()) {
+      cleanupFailure += (cleanupFailure.empty() ? "" : "; ") + trackedFailure;
+    }
     for (TrackedLaunchProcess& tracked : launchProcesses.ReleaseRemaining()) {
       TrackPendingCleanupProcess(tracked.processId, tracked.process.detach());
     }
@@ -1024,6 +1306,7 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
   const std::string endpoint = params.StringField("endpoint", "windows");
   const std::wstring leasePath = application->WideField("leasePath");
   std::wstring windowTitle = application->WideField("windowTitle");
+  RequireInteractiveWindowStation(kErrorUnsupported);
 
   if (!leasePath.empty()) {
     const std::string contents = ReadFileWithRetry(leasePath, token);
@@ -1067,11 +1350,28 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
     if (difference > kStartTimeToleranceTicks) {
       Fail(kErrorLeaseInvalid, "The leased process identifier was reused by a different process.");
     }
-    const std::wstring leaseImage = lease.WideField("executablePath");
+    RequireProcessInHelperSession(processId, kErrorLeaseInvalid);
+    // Identity the lease names must be proven, so evidence that cannot be read
+    // refuses the attach instead of passing it.
+    const std::wstring leaseImage = NormalizeExecutablePath(lease.WideField("executablePath"));
     if (!leaseImage.empty()) {
-      const std::wstring actualImage = ReadProcessImagePath(process.get());
-      if (!actualImage.empty() && _wcsicmp(actualImage.c_str(), leaseImage.c_str()) != 0) {
+      const std::wstring actualImage = NormalizeExecutablePath(ReadProcessImagePath(process.get()));
+      if (actualImage.empty()) {
+        Fail(kErrorLeaseInvalid, "The leased process executable could not be read to verify the lease.");
+      }
+      if (_wcsicmp(actualImage.c_str(), leaseImage.c_str()) != 0) {
         Fail(kErrorLeaseInvalid, "The leased process does not run the expected executable.");
+      }
+    }
+    const std::wstring leaseAumid = lease.WideField("aumid");
+    if (!leaseAumid.empty()) {
+      const std::wstring actualAumid = ReadProcessApplicationUserModelId(process.get());
+      if (actualAumid.empty()) {
+        Fail(kErrorLeaseInvalid,
+             "The leased process application identity could not be read to verify the lease.");
+      }
+      if (_wcsicmp(actualAumid.c_str(), leaseAumid.c_str()) != 0) {
+        Fail(kErrorLeaseInvalid, "The leased process is not the expected packaged application.");
       }
     }
     const std::wstring leaseTitle = lease.WideField("windowTitle");
@@ -1100,7 +1400,10 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
            "The leased application shows " + std::to_string(matches.size()) + " windows titled \"" +
                ToUtf8(windowTitle) + "\".");
     }
-    return CreateLease("attached", processId, process.detach(), matches.front(), windowTitle, params);
+    const ApplicationLease& attached = CreateLease("attached", processId, process.get(), matches.front(),
+                                                    windowTitle, params, kContainmentExternal);
+    process.detach();
+    return attached;
   }
 
   if (windowTitle.empty()) {
@@ -1117,19 +1420,43 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
   std::vector<HWND> matches;
   winrt::handle matchedProcess;
   DWORD matchedProcessId = 0;
+  // A same-titled window whose owner cannot be identified might be the target
+  // or an impostor, so it makes the target ambiguous rather than being skipped.
+  std::size_t unverifiable = 0;
   for (const HWND window : FindWindowsWithTitle(windowTitle)) {
     token.ThrowIfCancelled();
     DWORD candidateId = 0;
     GetWindowThreadProcessId(window, &candidateId);
+    if (candidateId == 0) {
+      continue;
+    }
     winrt::handle candidate(OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE, FALSE, candidateId));
-    if (candidate && IsProcessAlive(candidate.get()) &&
-        ProcessMatchesLaunchIdentity(candidate.get(), aumid, executablePath)) {
+    if (!candidate) {
+      if (GetLastError() != ERROR_INVALID_PARAMETER) {
+        unverifiable += 1;
+      }
+      continue;
+    }
+    if (!IsProcessAlive(candidate.get())) {
+      continue;
+    }
+    const IdentityEvidence evidence = ReadIdentityEvidence(candidate.get(), aumid, executablePath);
+    if (evidence == IdentityEvidence::Unreadable) {
+      unverifiable += 1;
+      continue;
+    }
+    if (evidence == IdentityEvidence::Matches) {
       if (matches.empty()) {
         matchedProcessId = candidateId;
         matchedProcess = std::move(candidate);
       }
       matches.push_back(window);
     }
+  }
+  if (unverifiable > 0) {
+    Fail(kErrorAmbiguousTarget,
+         std::to_string(unverifiable) + " window(s) titled \"" + ToUtf8(windowTitle) +
+             "\" belong to a process whose identity cannot be read, so the target cannot be proven unique.");
   }
   if (matches.empty()) {
     Fail(kErrorAttachFailed, "No window titled \"" + ToUtf8(windowTitle) + "\" is currently open.");
@@ -1145,7 +1472,10 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
       !ProcessMatchesLaunchIdentity(matchedProcess.get(), aumid, executablePath)) {
     Fail(kErrorAttachFailed, "The application identity changed while attaching.");
   }
-  return CreateLease("attached", processId, matchedProcess.detach(), matches.front(), windowTitle, params);
+  const ApplicationLease& attached = CreateLease("attached", processId, matchedProcess.get(), matches.front(),
+                                                  windowTitle, params, kContainmentExternal);
+  matchedProcess.detach();
+  return attached;
 }
 
 std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, const CancellationToken& token) {
@@ -1203,7 +1533,9 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
     while (IsProcessAlive(lease.process) && !deadline.Expired()) {
       token.Wait(50);
     }
-    if (IsProcessAlive(lease.process)) {
+    // A contained root is ended with its job below, so a root that cannot be
+    // ended alone never leaves its descendants running.
+    if (lease.job == nullptr && IsProcessAlive(lease.process)) {
       if (TerminateProcess(lease.process, 0) == FALSE && IsProcessAlive(lease.process)) {
         FailLastError(kErrorCleanupFailed, "Terminating the owned application process", GetLastError());
       }
@@ -1215,6 +1547,17 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
         Fail(kErrorCleanupFailed, "The owned application process did not exit after forced termination.");
       }
     }
+  }
+  // Descendants of a contained launch, and a root that ignored the close
+  // request, are ended with the job rather than one by one, and the lease
+  // survives until the job reports none still running.
+  if (lease.job != nullptr) {
+    const std::string failure = EndContainedProcesses(lease.job, kJobDrainMs, token);
+    if (!failure.empty()) {
+      Fail(kErrorCleanupFailed, "Closing the owned application left contained processes running: " + failure);
+    }
+    CloseHandle(lease.job);
+    lease.job = nullptr;
   }
 
   // A mutation abandoned against an application this helper launched can no
@@ -1293,6 +1636,12 @@ void ApplicationManager::Dispose(const CancellationToken& token) {
       terminationErrors.emplace(process, GetLastError());
     }
   }
+  for (const std::string& leaseId : leaseIds) {
+    const auto entry = leases_.find(leaseId);
+    if (entry != leases_.end() && entry->second.job != nullptr) {
+      TerminateJobObject(entry->second.job, 1);
+    }
+  }
   waitForOwnedProcesses(kDisposeForcedMs);
 
   for (auto iterator = pendingCleanupProcesses_.begin();
@@ -1333,7 +1682,15 @@ void ApplicationManager::Dispose(const CancellationToken& token) {
                             DescribeHresult(HRESULT_FROM_WIN32(terminationError->second));
       continue;
     }
-    CloseApplication(leaseId, token);
+    // One lease whose contained processes outlive it must not keep the others open.
+    try {
+      CloseApplication(leaseId, token);
+    } catch (const HelperError& error) {
+      if (!failures.empty()) {
+        failures += "; ";
+      }
+      failures += error.what();
+    }
   }
   if (!failures.empty()) {
     Fail(kErrorCleanupFailed, "Disposing native application leases failed: " + failures);
@@ -1548,6 +1905,7 @@ json::Value ApplicationManager::SerializeLease(const ApplicationLease& lease) co
   json::Value value = json::Value::Object();
   value.Set("id", json::Value::String(lease.id));
   value.Set("ownership", json::Value::String(lease.ownership));
+  value.Set("containment", json::Value::String(lease.containment));
   value.Set("processId", json::Value::Integer(static_cast<std::int64_t>(lease.processId)));
   const std::string started = FormatFileTimeIso8601(lease.startTime);
   if (!started.empty()) {

@@ -4,6 +4,11 @@
 // desktop: yarn test --runInBand win32Fixture. Only the first two scenarios show a window (topmost, non-activating, for
 // about a second each); the others keep it off every monitor, and none of them steals the foreground. A runner that
 // disables input through the host policy skips the capture scenario (see windowsContractTest).
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+
 import { NativeHostProcess } from '../../hosts/native/NativeHostProcess';
 import type { NativeHostRequestResult } from '../../hosts/native/NativeHostProcess';
 import type { NativeObserveRequest } from '../../host/types';
@@ -20,7 +25,7 @@ const captureTest = windowsContractTest('capture');
 const megabyte = 1024 * 1024;
 
 type Rect = { height: number; width: number; x: number; y: number };
-type Lease = { id: string; processId: number };
+type Lease = { containment?: string; id: string; ownership?: string; processId: number };
 type WindowInfo = { id: string; rect: Rect; title: string };
 type ElementInfo = { automationId?: string; id: string; name?: string; rect: Rect; role: string };
 type Retention = { privateBytes: number; retainedElementLimit: number; retainedElements: number; workingSetBytes: number };
@@ -442,4 +447,99 @@ describe('Windows helper against a plain Win32 application', () => {
       await session.dispose();
     }
   });
+
+  windowsTest('contains an unpackaged launch with its descendants and ends them all when it closes', async () => {
+    const pidFile = path.join(os.tmpdir(), `furn-fixture-descendant-${process.pid}-${Date.now()}.txt`);
+    const session = await FixtureSession.start('contained', { args: ['--child-pid-file', pidFile] });
+    let descendant: number | undefined;
+    try {
+      expect(session.lease).toMatchObject({ containment: 'job-object', ownership: 'launched' });
+      ({ descendant } = await readDescendant(pidFile));
+      expect(isRunning(descendant)).toBe(true);
+
+      await session.call('closeApplication', { lease: session.lease });
+      expect(isRunning(session.lease.processId)).toBe(false);
+      expect(isRunning(descendant)).toBe(false);
+    } finally {
+      await session.dispose();
+      endStray(descendant);
+      fs.rmSync(pidFile, { force: true });
+    }
+  });
+
+  windowsTest('ends a contained launch and its descendants when the helper exits without closing them', async () => {
+    const pidFile = path.join(os.tmpdir(), `furn-fixture-orphan-${process.pid}-${Date.now()}.txt`);
+    const session = await FixtureSession.start('orphan', { args: ['--child-pid-file', pidFile] });
+    let descendant: number | undefined;
+    try {
+      const published = await readDescendant(pidFile);
+      descendant = published.descendant;
+      const helper = required((session.host as unknown as { child: { pid?: number } }).child.pid, 'the helper process id');
+      expect(published.parent).toBe(helper);
+
+      process.kill(helper);
+      await waitFor(
+        'the contained processes to end with the helper',
+        async () => !isRunning(session.lease.processId) && !isRunning(published.descendant),
+        {
+          timeoutMs: 10_000,
+        },
+      );
+    } finally {
+      await session.dispose();
+      endStray(session.lease.processId);
+      endStray(descendant);
+      fs.rmSync(pidFile, { force: true });
+    }
+  });
+
+  windowsTest('attaches to an application it did not launch without containing, closing, or disposing it', async () => {
+    const title = `furn-fixture-external-${process.pid}-${Date.now()}`;
+    const executablePath = await fixtureExecutable();
+    const external = spawn(executablePath, ['--title', title, '--offscreen', '1', '--lifetime-ms', '120000'], { stdio: 'ignore' });
+    const host = await NativeHostProcess.start({ artifact: await helperArtifact() });
+    try {
+      const lease = await waitFor(
+        'the external fixture to accept an attach',
+        async () =>
+          (await host.request<Lease>('attach', { application: { executablePath, windowTitle: title } }).catch(() => undefined))?.result,
+        { intervalMs: 100, timeoutMs: 20_000 },
+      );
+      expect(lease).toMatchObject({ containment: 'external', ownership: 'attached', processId: external.pid });
+
+      await host.request('closeApplication', { lease });
+      await host.dispose();
+      expect(isRunning(required(external.pid, 'the external fixture process id'))).toBe(true);
+    } finally {
+      await host.dispose().catch(() => undefined);
+      external.kill();
+    }
+  });
 });
+
+function isRunning(processId: number): boolean {
+  try {
+    process.kill(processId, 0);
+    return true;
+  } catch (error) {
+    return (error as NodeJS.ErrnoException).code === 'EPERM';
+  }
+}
+
+// Ends a process a failed scenario left behind; the scenarios themselves prove that cleanup.
+function endStray(processId: number | undefined): void {
+  if (processId !== undefined && isRunning(processId)) {
+    process.kill(processId);
+  }
+}
+
+function readDescendant(file: string): Promise<{ descendant: number; parent: number }> {
+  return waitFor(
+    'the fixture to publish its descendant',
+    async () => {
+      const [descendant, parent] = fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim().split(' ').map(Number) : [];
+      return descendant > 0 && parent > 0 ? { descendant, parent } : undefined;
+    },
+    { timeoutMs: 10_000 },
+  );
+}

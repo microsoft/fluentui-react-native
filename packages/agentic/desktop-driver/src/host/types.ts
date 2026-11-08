@@ -80,6 +80,12 @@ export type DesktopHostInfo = {
 };
 
 export type ApplicationLease = {
+  /**
+   * How far the provider's ownership reaches, when it reports it: `job-object` contains an unpackaged Windows launch
+   * and its descendants, `uncontained` owns only the identity-verified process whose window it leased, and `external`
+   * is an attached application the provider never ends. Absent from providers that make no containment claim.
+   */
+  containment?: 'external' | 'job-object' | 'uncontained';
   id: string;
   ownership: 'attached' | 'launched';
   processId?: number;
