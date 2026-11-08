@@ -368,6 +368,21 @@ async function main() {
     });
     let unconfirmedLane;
     try {
+      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- rejected request targets use loopback only
+      for (const requestTarget of ['http://127.0.0.1:1/session', '//127.0.0.1:1/session']) {
+        const status = await new Promise((resolve, reject) => {
+          const request = http.request(
+            { hostname: '127.0.0.1', port: new URL(unconfirmedProxy.url).port, path: requestTarget },
+            (response) => {
+              response.resume();
+              resolve(response.statusCode);
+            },
+          );
+          request.once('error', reject);
+          request.end();
+        });
+        assert.equal(status, 400);
+      }
       await run('lane', { input: 'accessible', report: unconfirmedReport, url: unconfirmedProxy.url });
       throw new Error('An accessible lane must not run against a driver that does not confirm its input policy.');
     } catch (error) {
@@ -473,22 +488,44 @@ async function main() {
 
 /** Forwards to a driver but drops the input policy from each new session, as a driver from before enforcement would. */
 async function createUnconfirmingProxy(url) {
+  const upstream = new URL(url);
+  if (upstream.protocol !== 'http:' || upstream.hostname !== '127.0.0.1') {
+    throw new Error('The test proxy requires a loopback HTTP driver.');
+  }
   const server = http.createServer(async (request, response) => {
+    if (!request.url?.startsWith('/') || request.url.startsWith('//')) {
+      request.resume();
+      response.writeHead(400);
+      response.end();
+      return;
+    }
     const chunks = [];
     for await (const chunk of request) chunks.push(chunk);
     const body = Buffer.concat(chunks);
-    const reply = await fetch(new URL(request.url, url), {
-      method: request.method,
-      headers: { 'content-type': 'application/json' },
-      ...(body.length ? { body } : {}),
+    const reply = await new Promise((resolve, reject) => {
+      const forwarded = http.request(
+        {
+          hostname: '127.0.0.1',
+          port: upstream.port,
+          path: request.url,
+          method: request.method,
+          headers: { 'content-type': 'application/json' },
+        },
+        resolve,
+      );
+      forwarded.once('error', reject);
+      forwarded.end(body);
     });
-    let text = await reply.text();
-    if (request.method === 'POST' && request.url === '/session' && reply.ok) {
+    const replyChunks = [];
+    for await (const chunk of reply) replyChunks.push(chunk);
+    let text = Buffer.concat(replyChunks).toString('utf8');
+    const status = reply.statusCode ?? 502;
+    if (request.method === 'POST' && request.url === '/session' && status >= 200 && status < 300) {
       const created = JSON.parse(text);
       delete created.value.capabilities['furn:inputMode'];
       text = JSON.stringify(created);
     }
-    response.writeHead(reply.status, { 'content-type': 'application/json' });
+    response.writeHead(status, { 'content-type': 'application/json' });
     response.end(text);
   });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(undefined)));
