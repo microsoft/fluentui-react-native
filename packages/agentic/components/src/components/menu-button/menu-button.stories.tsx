@@ -3,6 +3,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
@@ -102,42 +103,44 @@ export default meta;
 type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
-  wdio: {
-    'MNB-006 exposes a named, collapsed native button before input': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('MNB-006 exposes a named, collapsed native button before input', async ({ browser, expect }) => {
       const trigger = await browser.$('~menu-button-trigger');
       expect(await trigger.getProperty('role')).toBe('button');
       expect(await trigger.getProperty('name')).toBe('New');
       expect(await trigger.getProperty('expanded')).toBe(false);
       await expect(trigger).toBeEnabled();
-    },
-    'opens on Down to the first row and on Up to the last row': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { inWindowWith } = await import('../menu/menu.wdio.ts');
-      const { browser, expect } = context;
-      await (await import('../../common/desktopFocus.wdio.ts')).focusByTab(context.browser, 'menu-button-entry', 'menu-button-trigger');
-      expect(await (await browser.$('~menu-button-trigger')).getProperty('role')).toBe('button');
-      await browser.keys('\uE015');
-      await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
-      expect(await (await browser.$('~menu-button-trigger')).getProperty('expanded')).toBe(true);
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~menu-button-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
-      await browser.keys('\uE013');
-      await expect(await browser.$('~menu-button-focus')).toHaveText('Folder');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~menu-button-action')).toHaveText('Folder');
-      await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
-      await browser.keys('\uE015');
-      await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
-      await inWindowWith(context, 'menu-button-menu', async () => {
-        expect(await (await browser.$('~menu-button-menu')).getProperty('role')).toBe('menu');
-        expect(await (await browser.$('~menu-button-menu')).getProperty('name')).toBe('New');
-      });
-    },
-    'closes on Tab and moves focus past the trigger': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
+    }),
+    desktopIt(
+      'opens on Down to the first row and on Up to the last row',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const { inWindowWith } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await (await import('../../common/desktopFocus.wdio.ts')).focusByTab(context.browser, 'menu-button-entry', 'menu-button-trigger');
+        expect(await (await browser.$('~menu-button-trigger')).getProperty('role')).toBe('button');
+        await browser.keys('\uE015');
+        await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
+        expect(await (await browser.$('~menu-button-trigger')).getProperty('expanded')).toBe(true);
+        await browser.keys('\uE00C');
+        await expect(await browser.$('~menu-button-reason')).toHaveText('Closed: dismiss');
+        await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
+        await browser.keys('\uE013');
+        await expect(await browser.$('~menu-button-focus')).toHaveText('Folder');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~menu-button-action')).toHaveText('Folder');
+        await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
+        await browser.keys('\uE015');
+        await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
+        await inWindowWith(context, 'menu-button-menu', async () => {
+          expect(await (await browser.$('~menu-button-menu')).getProperty('role')).toBe('menu');
+          expect(await (await browser.$('~menu-button-menu')).getProperty('name')).toBe('New');
+        });
+      },
+    ),
+    desktopIt('closes on Tab and moves focus past the trigger', { requires: ['physical-click', 'keyboard', 'focus'] }, async (context) => {
+      const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
       const { expectMenuClosed } = await import('../menu/menu.wdio.ts');
       const { browser, expect } = context;
       await (await import('../../common/desktopFocus.wdio.ts')).focusByTab(context.browser, 'menu-button-entry', 'menu-button-trigger');
@@ -148,21 +151,22 @@ export const Default: Story = {
       // The Win32 host cannot continue Tab past its owner, so focus returns to the trigger there.
       await expectNativeState(browser, context.platform === 'win32' ? 'menu-button-trigger' : 'menu-button-after', 'focused', true);
       await expectMenuClosed(context, 'menu-button-trigger');
-    },
-    'closes on Shift+Tab and returns focus to the trigger': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await (await import('../../common/desktopFocus.wdio.ts')).focusByTab(context.browser, 'menu-button-entry', 'menu-button-trigger');
-      await browser.keys('\uE015');
-      await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
-      await browser.keys(['\uE008', '\uE004']);
-      await expect(await browser.$('~menu-button-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
-    },
-    'toggles from the pointer without reopening': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
+    }),
+    desktopIt(
+      'closes on Shift+Tab and returns focus to the trigger',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect } = context;
+        await (await import('../../common/desktopFocus.wdio.ts')).focusByTab(context.browser, 'menu-button-entry', 'menu-button-trigger');
+        await browser.keys('\uE015');
+        await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
+        await browser.keys(['\uE008', '\uE004']);
+        await expect(await browser.$('~menu-button-reason')).toHaveText('Closed: dismiss');
+        await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
+      },
+    ),
+    desktopIt('toggles from the pointer without reopening', { requires: ['physical-click', 'keyboard', 'focus'] }, async (context) => {
       const { expectMenuClosed } = await import('../menu/menu.wdio.ts');
       const { browser, expect } = context;
       const trigger = await browser.$('~menu-button-trigger');
@@ -171,8 +175,8 @@ export const Default: Story = {
       await trigger.click();
       await expect(await browser.$('~menu-button-reason')).toHaveText('Closed: trigger');
       await expectMenuClosed(context, 'menu-button-trigger');
-    },
-  },
+    }),
+  ],
 };
 
 export const Variants: Story = {
@@ -199,14 +203,14 @@ export const AccessibleNames: Story = {
       </MenuButton>
     </View>
   ),
-  wdio: {
-    'MNB-006 exposes slot, numeric and explicit native names without input': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('MNB-006 exposes slot, numeric and explicit native names without input', async ({ browser, expect }) => {
       expect(await (await browser.$('~menu-button-slot-name')).getProperty('name')).toBe('Create');
       expect(await (await browser.$('~menu-button-numeric-name')).getProperty('name')).toBe('0');
       expect(await (await browser.$('~menu-button-explicit-name')).getProperty('name')).toBe('Create document');
       expect(await (await browser.$('~menu-button-alias-name')).getProperty('name')).toBe('More actions');
-    },
-  },
+    }),
+  ],
   parameters: {
     docs: {
       description: {

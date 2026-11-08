@@ -137,23 +137,41 @@ validate.
 Prefer executable WebdriverIO tests under `wdio`, typed with
 `WdioStory<StoryObj<typeof Component>>` from
 `@fluentui-react-native/storybook-desktop/testing` using `import type`.
-The story is the suite (`describe`), and named functions are its cases (`it`):
+The story is the suite (`describe`). Declare each case (`it`) with `desktopIt`
+from the same entry point, adding a descriptor when the case needs host input
+or applies only to some endpoints:
 
 ```tsx
 export const Default: Story = {
-  wdio: {
-    'is enabled': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('is enabled', async ({ browser, expect }) => {
       await expect(await browser.$('~story-button')).toBeEnabled();
-    },
-  },
+    }),
+    desktopIt('moves focus with Tab', { requires: ['physical-click', 'keyboard', 'focus'] }, async ({ browser, expect }) => {
+      // ...
+    }),
+  ],
 };
 ```
 
 Each callback receives `browser`, `expect`, `platform`, `desktop`, `signal`,
 and `skip`. The typed target `platform` is `macos`, `windows`, or `win32`;
 Win32 is distinct from its WebDriver `platformName` of `windows`. Branch
-inside callbacks for genuine platform differences and use explicit skip
-reasons for unsupported `browser.capabilities['furn:features']`.
+inside callbacks for genuine platform differences in one assertion. Do not
+call `skip` or feature-check `browser.capabilities['furn:features']` for a
+condition the descriptor can state:
+
+- `requires` lists the host capabilities the case uses, and its physical
+  entries put the case in the physical input lane. Focus and keyboard cases
+  declare `['physical-click', 'keyboard', 'focus']`. A case that reads only
+  native state declares nothing and runs in both lanes. Use `click` when either
+  click transport proves the behavior, `physical-click` for pointer-specific
+  behavior, and `accessibility-click` for UIA or AX action dispatch.
+- `platforms` scopes the case to endpoints, such as `['win32']` or `['!macos']`.
+  Split a case when endpoints need different transports rather than branching
+  on the click mode.
+- `unsupported` records a known product gap on named endpoints with a reason,
+  and `quarantine` suspends a flaky case with an issue and an `expires` date.
 
 All catalog tests use WDIO; custom `desktopDriver` plans remain only in runner
 compatibility fixtures. Keep names static and callbacks self-contained. Node helpers may be
@@ -162,11 +180,13 @@ story-module bindings. The shared Babel config strips all test functions
 before native dependency collection. Named cases get independent previews,
 sessions, workers, deadlines, results, and failure evidence.
 
-The single-function `wdio` form remains supported. Run with
-`yarn storybook test --<platform>` and optionally `--test <name-glob>`.
-`--list` discovers names without executing code. The `stories-and-tests`
+Run with `yarn storybook test --<platform>`, optionally with `--test <name-glob>`
+and `--input accessible|physical` to select one input lane. `--list` discovers
+cases and their resolved input without executing code. The `stories-and-tests`
 smoke mode runs these functions alongside remaining legacy plans, grouped by
-story. See the executable test contract (`@fluentui-react-native/storybook-desktop/references/story-tests.md`).
+story. See the executable test contract
+(`@fluentui-react-native/storybook-desktop/references/story-tests.md`) for the
+full descriptor, lane, and reporting rules.
 
 The components package's `test:stories` project checks every test-bearing story
 without emitting it into the component library. Add new test-bearing files to
@@ -191,9 +211,12 @@ timing.
 ### Desktop focus test scope
 
 Keep shared requirements executable on Windows Fabric, Office Win32, and macOS.
-`requireDesktopFocus` checks native capabilities, not an operating-system
-allowlist. A missing capability skips the case with a reason; a platform
-difference usually changes one assertion rather than skipping the entire case.
+Focus cases declare `requires: ['physical-click', 'keyboard', 'focus']`, which
+describes native capabilities, not an operating-system allowlist. The physical
+lane runs them, the accessible lane excludes them, and a run without a lane
+reports a case whose capability the host lacks as unsupported, with its reason,
+instead of executing it. A platform difference
+usually changes one assertion rather than excluding the entire case.
 
 | Behavior                                                                                                       | Scope and expected result                                                                                                                                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -225,13 +248,15 @@ resolved-style coverage without incidental scene rerenders, plus native visual
 evidence for renderer appearance. Likewise, a checked/selected state read after
 a physical click does not exercise UIA/AX action dispatch.
 
-Report passed, failed, and skipped counts together. A zero-exit smoke traversal
-with platform-skipped focus cases is not cross-platform focus qualification.
+Report passed, failed, skipped, unsupported, and excluded counts together. A
+zero-exit accessible-lane run excludes every focus case and is not
+cross-platform focus qualification.
 
 The macOS Fabric View does not project disabled or selected accessibility state
 to AXEnabled/AXSelected (C-A11Y-005 in the
 repository evidence reference `accessibility.action-transport-evidence`). Those native
-announcement assertions are isolated in explicitly skipped cases; shared
+announcement assertions are isolated in cases declaring
+`unsupported: { platforms: ['macos'], reason }`; shared
 focus, activation, and selection-callback cases still run. Do not substitute
 rendered state for an AX result or describe these skips as intended macOS
 semantics. Track the native projection gap and revisit the cases when the

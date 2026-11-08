@@ -6,7 +6,7 @@ import { StorageProvider } from '@storybook/react-native-ui-common';
 import type { SBUI, Selection } from '@storybook/react-native-ui-common';
 import { Sidebar } from '@storybook/react-native-ui-lite';
 
-import { useDesktopStorybookTestID } from './DesktopStorybookConfig';
+import { useDesktopStorybookConfig, useDesktopStorybookTestID } from './DesktopStorybookConfig';
 import { Win32AddonsPanel } from './Win32AddonsPanel';
 import { Win32CalloutPortal } from './Win32CalloutPortal';
 import { Win32ResizeHandle } from './Win32ResizeHandle';
@@ -15,6 +15,8 @@ const emptyRefs = {};
 const emptyStatus = {};
 
 export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story, storyHash, storyBackgroundColor, theme }) => {
+  const { selection } = useDesktopStorybookConfig();
+  const previewKey = selection ? `${story?.id ?? ''}:${selection.runId}:${selection.previewGeneration}` : story?.id;
   const storiesAnchorRef = React.useRef<View>(null);
   const addonsAnchorRef = React.useRef<View>(null);
   const [sidebarVisible, setSidebarVisible] = React.useState(true);
@@ -174,7 +176,11 @@ export const StorybookUIComponent: SBUI = ({ children, setStory, storage, story,
                 </Text>
               </View>
             ) : null}
-            <View style={[styles.preview, { backgroundColor: storyBackgroundColor ?? theme.background.preview }]} testID={previewTestID}>
+            <View
+              key={previewKey}
+              style={[styles.preview, { backgroundColor: storyBackgroundColor ?? theme.background.preview }]}
+              testID={previewTestID}
+            >
               {children}
             </View>
             {addonsVisible ? (

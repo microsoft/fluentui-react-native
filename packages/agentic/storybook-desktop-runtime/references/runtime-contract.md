@@ -32,6 +32,15 @@ request identity and cannot be proven fenced. The driver therefore retains
 unknown-effect quarantine after interrupted navigation, even after a new
 hello. Keep this boundary explicit rather than claiming transparent recovery.
 
+Win32 remounts the entire preview subtree for each test generation, including
+the story viewport, so retained scroll position cannot put the next test's
+controls behind the chrome. Sidebar and addon preferences remain outside that
+remount.
+
+The Win32 story decorator uses a scrollable viewport with naturally sized
+content. Small stories remain centered; oversized stories start within the
+viewport and can scroll instead of overflowing behind the chrome.
+
 ## Theme and chrome
 
 One Flex `ThemedRoot` covers the app, toolbar, and chrome, so the Storybook

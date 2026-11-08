@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Avatar } from './avatar';
@@ -108,32 +109,35 @@ export const ActivityRing: Story = {
       },
     },
   },
-  wdio: {
-    'AVT-004 exposes the informative identity as a named native image': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('AVT-004 exposes the informative identity as a named native image', async ({ browser, expect }) => {
       const avatar = await browser.$('~agentic-storybook-avatar-activity-ring');
       await expect(avatar).toExist();
       expect(await avatar.getTagName()).toBe('image');
       expect(await avatar.getProperty('name')).toBe('Lydia Mitchelson');
-    },
-    'toggles the activity ring at every size without crashing or changing avatar bounds': async ({ browser, desktop, expect }) => {
-      const assert: typeof import('node:assert') = (await import('node:assert')).default;
-      for (const size of [16, 20, 24, 28, 32, 40, 56, 120]) {
-        for (const activityRing of [false, true]) {
-          await desktop.session.updateStoryArgs('components-avatar--activity-ring', { activityRing, size });
-          await expect(await browser.$('~agentic-storybook-avatar-ring-state')).toHaveText(
-            `Activity ring ${activityRing ? 'on' : 'off'}, size ${size}`,
-          );
-          const avatar = await browser.$('~agentic-storybook-avatar-activity-ring');
-          await expect(avatar).toExist();
-          const bounds = await browser.getElementRect(await avatar.elementId);
-          assert(
-            Math.abs(bounds.width - size) <= 1 && Math.abs(bounds.height - size) <= 1,
-            'The activity ring must not resize the avatar.',
-          );
+    }),
+    desktopIt(
+      'toggles the activity ring at every size without crashing or changing avatar bounds',
+      async ({ browser, desktop, expect }) => {
+        const assert: typeof import('node:assert') = (await import('node:assert')).default;
+        for (const size of [16, 20, 24, 28, 32, 40, 56, 120]) {
+          for (const activityRing of [false, true]) {
+            await desktop.session.updateStoryArgs('components-avatar--activity-ring', { activityRing, size });
+            await expect(await browser.$('~agentic-storybook-avatar-ring-state')).toHaveText(
+              `Activity ring ${activityRing ? 'on' : 'off'}, size ${size}`,
+            );
+            const avatar = await browser.$('~agentic-storybook-avatar-activity-ring');
+            await expect(avatar).toExist();
+            const bounds = await browser.getElementRect(await avatar.elementId);
+            assert(
+              Math.abs(bounds.width - size) <= 1 && Math.abs(bounds.height - size) <= 1,
+              'The activity ring must not resize the avatar.',
+            );
+          }
         }
-      }
-    },
-  },
+      },
+    ),
+  ],
 };
 
 const styles = StyleSheet.create({

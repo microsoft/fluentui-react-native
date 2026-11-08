@@ -59,9 +59,10 @@ test('executes isolated inline code and releases sessions after assertion failur
       { testName: 'exposes enabled button semantics', status: 'passed' },
       { testName: 'supports native pointer activation', status: 'passed' },
     ],
+    // The migrated case declares physical-click, so a host without it reports the case unsupported before execution.
     restrictedButton: [
       { testName: 'exposes enabled button semantics', status: 'passed' },
-      { testName: 'supports native pointer activation', status: 'skipped' },
+      { testName: 'supports native pointer activation', status: 'unsupported' },
     ],
     lane: {
       accessible: [

@@ -60,6 +60,13 @@ async function startDesktopStorybookServer({
         } else if (server) {
           for (const client of server.clients) client.terminate();
           await new Promise((resolve, reject) => server.close((failure) => (failure ? reject(failure) : resolve())));
+          // Upstream only unrefs its HTTP listener; accepted keep-alive and reconnect sockets would keep the process alive.
+          const httpServer = server.options?.server;
+          if (httpServer?.listening) {
+            const closed = new Promise((resolve, reject) => httpServer.close((failure) => (failure ? reject(failure) : resolve())));
+            httpServer.closeAllConnections?.();
+            await closed;
+          }
         }
       } catch (failure) {
         report.reporter.fail(failure, 'cleanup');

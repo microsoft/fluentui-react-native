@@ -3,6 +3,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
@@ -127,64 +128,71 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 
 export const Default: Story = {
   tags: ['desktop-focus'],
-  wdio: {
-    'opens below the trigger as a named group and enters its first content': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { inPopupWindow, ownerScreenRect, surfaceScreenRect } = await import('./popover.wdio.ts');
-      const { browser, expect } = context;
-      const trigger = await browser.$('~popover-trigger');
-      expect(await trigger.getProperty('expanded')).toBe(false);
-      await trigger.click();
-      await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~popover-focus')).toHaveText('First');
-      expect(await trigger.getProperty('expanded')).toBe(true);
-      await inPopupWindow(context, async () => {
-        const surface = await browser.$('~popover-surface');
-        expect(await surface.getProperty('role')).toBe('group');
-        expect(await surface.getProperty('name')).toBe('File details');
-      });
-      const anchor = await ownerScreenRect(context, 'popover-trigger');
-      const popup = await surfaceScreenRect(context, 'popover-surface');
-      // The Win32 host ignores the placement gap and places the popup flush against the trigger.
-      const gap = context.platform === 'win32' ? 0 : 4;
-      expect(Math.abs(popup.x + popup.width / 2 - (anchor.x + anchor.width / 2))).toBeLessThanOrEqual(1);
-      expect(Math.abs(popup.y - (anchor.y + anchor.height + gap))).toBeLessThanOrEqual(1);
-    },
-    'keeps Tab inside the popup and returns focus to the trigger on Escape': async (context) => {
-      const { requireDesktopFocus, expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await focusByTab(browser, 'popover-entry', 'popover-trigger');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~popover-focus')).toHaveText('First');
-      await browser.keys('\uE004');
-      await expect(await browser.$('~popover-focus')).toHaveText('Second');
-      await browser.keys('\uE004');
-      await expect(await browser.$('~popover-focus')).toHaveText('First');
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~popover-reason')).toHaveText('Closed: dismiss');
-      await expectNativeState(browser, 'popover-trigger', 'focused', true);
-    },
-    'closes on outside input and on a trigger press without reopening': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { expectClosed } = await import('./popover.wdio.ts');
-      const { browser, expect } = context;
-      const trigger = await browser.$('~popover-trigger');
-      await trigger.click();
-      await expect(await browser.$('~popover-focus')).toHaveText('First');
-      await (await browser.$('~popover-entry')).click();
-      await expect(await browser.$('~popover-reason')).toHaveText('Closed: dismiss');
-      await expectClosed(context, 'popover-trigger');
-      await trigger.click();
-      await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~popover-focus')).toHaveText('First');
-      await trigger.click();
-      await expect(await browser.$('~popover-reason')).toHaveText('Closed: trigger');
-      await expectClosed(context, 'popover-trigger');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'opens below the trigger as a named group and enters its first content',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { inPopupWindow, ownerScreenRect, surfaceScreenRect } = await import('./popover.wdio.ts');
+        const { browser, expect } = context;
+        const trigger = await browser.$('~popover-trigger');
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        await trigger.click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
+        await expect(await browser.$('~popover-focus')).toHaveText('First');
+        expect(await trigger.getProperty('expanded')).toBe(true);
+        await inPopupWindow(context, async () => {
+          const surface = await browser.$('~popover-surface');
+          expect(await surface.getProperty('role')).toBe('group');
+          expect(await surface.getProperty('name')).toBe('File details');
+        });
+        const anchor = await ownerScreenRect(context, 'popover-trigger');
+        const popup = await surfaceScreenRect(context, 'popover-surface');
+        // The Win32 host ignores the placement gap and places the popup flush against the trigger.
+        const gap = context.platform === 'win32' ? 0 : 4;
+        expect(Math.abs(popup.x + popup.width / 2 - (anchor.x + anchor.width / 2))).toBeLessThanOrEqual(1);
+        expect(Math.abs(popup.y - (anchor.y + anchor.height + gap))).toBeLessThanOrEqual(1);
+      },
+    ),
+    desktopIt(
+      'keeps Tab inside the popup and returns focus to the trigger on Escape',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { browser, expect } = context;
+        await focusByTab(browser, 'popover-entry', 'popover-trigger');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~popover-focus')).toHaveText('First');
+        await browser.keys('\uE004');
+        await expect(await browser.$('~popover-focus')).toHaveText('Second');
+        await browser.keys('\uE004');
+        await expect(await browser.$('~popover-focus')).toHaveText('First');
+        await browser.keys('\uE00C');
+        await expect(await browser.$('~popover-reason')).toHaveText('Closed: dismiss');
+        await expectNativeState(browser, 'popover-trigger', 'focused', true);
+      },
+    ),
+    desktopIt(
+      'closes on outside input and on a trigger press without reopening',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectClosed } = await import('./popover.wdio.ts');
+        const { browser, expect } = context;
+        const trigger = await browser.$('~popover-trigger');
+        await trigger.click();
+        await expect(await browser.$('~popover-focus')).toHaveText('First');
+        await (await browser.$('~popover-entry')).click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Closed: dismiss');
+        await expectClosed(context, 'popover-trigger');
+        await trigger.click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
+        await expect(await browser.$('~popover-focus')).toHaveText('First');
+        await trigger.click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Closed: trigger');
+        await expectClosed(context, 'popover-trigger');
+      },
+    ),
+  ],
 };
 
 export const Placement: Story = {
@@ -200,18 +208,20 @@ export const StaticContent: Story = {
   parameters: {
     docs: { description: { story: 'Without focusable content, the surface itself becomes the entry focus stop.' } },
   },
-  wdio: {
-    'focuses the surface when no content can take focus': async (context) => {
-      const { requireDesktopFocus } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { browser, expect } = context;
-      await (await browser.$('~popover-trigger')).click();
-      await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~popover-focus')).toHaveText('Surface');
-      await browser.keys('\uE00C');
-      await expect(await browser.$('~popover-reason')).toHaveText('Closed: dismiss');
-    },
-  },
+  wdio: [
+    desktopIt(
+      'focuses the surface when no content can take focus',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { browser, expect } = context;
+        await (await browser.$('~popover-trigger')).click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
+        await expect(await browser.$('~popover-focus')).toHaveText('Surface');
+        await browser.keys('\uE00C');
+        await expect(await browser.$('~popover-reason')).toHaveText('Closed: dismiss');
+      },
+    ),
+  ],
 };
 
 export const Controlled: Story = {
@@ -220,21 +230,24 @@ export const Controlled: Story = {
   parameters: {
     docs: { description: { story: 'Content closes a controlled Popover; focus returns to its trigger.' } },
   },
-  wdio: {
-    'returns focus to the trigger when content closes the popup': async (context) => {
-      const { requireDesktopFocus, expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
-      if (!requireDesktopFocus(context)) return;
-      const { expectClosed } = await import('./popover.wdio.ts');
-      const { browser, expect } = context;
-      await (await browser.$('~popover-trigger')).click();
-      await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
-      await expect(await browser.$('~popover-focus')).toHaveText('Save');
-      await browser.keys('\uE007');
-      await expect(await browser.$('~popover-name')).toHaveText('Quarterly report (renamed)');
-      await expectClosed(context, 'popover-trigger');
-      await expectNativeState(browser, 'popover-trigger', 'focused', true);
-    },
-  },
+  wdio: [
+    desktopIt(
+      'returns focus to the trigger when content closes the popup',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        const { expectClosed } = await import('./popover.wdio.ts');
+        const { browser, expect } = context;
+        await (await browser.$('~popover-trigger')).click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
+        await expect(await browser.$('~popover-focus')).toHaveText('Save');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~popover-name')).toHaveText('Quarterly report (renamed)');
+        await expectClosed(context, 'popover-trigger');
+        await expectNativeState(browser, 'popover-trigger', 'focused', true);
+      },
+    ),
+  ],
 };
 
 const styles = StyleSheet.create({

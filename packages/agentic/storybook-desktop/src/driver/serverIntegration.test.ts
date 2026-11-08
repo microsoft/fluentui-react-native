@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { createServer } from 'node:net';
+import { createServer, Socket } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -152,6 +152,61 @@ describe('desktop Storybook server integration', () => {
         await runner.close();
         await transport.close();
         await reporter.finish();
+      } finally {
+        fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      }
+    }
+  });
+
+  test('closes lingering upstream HTTP connections when the legacy channel stops', async () => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(manifestPath, JSON.stringify(createIntegrationManifest(temporaryDirectory, storybookPort, driverPort)));
+    const sink = { write: () => true };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    const child = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+      cwd: projectRoot,
+      env: {
+        STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+        STORYBOOK_DRIVER_MANIFEST: manifestPath,
+        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+        STORYBOOK_PROJECT_ROOT: projectRoot,
+        STORYBOOK_WS_PORT: String(storybookPort),
+      },
+    });
+    const idle = new Socket();
+    try {
+      await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000);
+      // An accepted connection that never sends a request stays referenced until the listener closes it.
+      await new Promise<void>((resolve, reject) => {
+        idle.once('error', reject);
+        idle.connect(storybookPort, '127.0.0.1', resolve);
+      });
+      const closed = new Promise<void>((resolve) => idle.once('close', () => resolve()));
+      const started = Date.now();
+      await child.stop();
+      expect(await child.completed).toBe(0);
+      expect(Date.now() - started).toBeLessThan(8_000);
+      await closed;
+    } finally {
+      try {
+        idle.destroy();
+        await child.stop();
+        await runner.close();
+        await transport.close();
+        expect((await reporter.finish()).status).toBe('passed');
       } finally {
         fs.rmSync(temporaryDirectory, { force: true, recursive: true });
       }
