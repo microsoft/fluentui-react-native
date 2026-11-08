@@ -7,7 +7,7 @@ owner_paths:
 
 # Current lifecycle and qualification status
 
-**Work in progress, updated 2026-11-06.** Done means the listed implementation,
+**Work in progress, updated 2026-11-08.** Done means the listed implementation,
 not full cross-platform qualification. This package is the intended neutral
 workload host; the existing Storybook lifecycle takeover is transitional.
 No new coordinator package, daemon, dynamic plugin loader, or package rename
@@ -695,3 +695,50 @@ console Ctrl+C case is otherwise out of scope for this pass.
 by hand only after its owner was proved dead and its resources were proved
 settled, or after the fenced launch probe's survivor was ended. Nothing
 reclaims a claim automatically.
+
+## Connected Windows physical-input follow-up - 2026-11-08 UTC
+
+Source `fec94cec4995c7372b798877c5412ddcb156523b`; Windows 11 Enterprise
+build 26300, AMD64, Node 26.13.0. With the console connected, the following
+separate, non-agent smokes ran from `apps/storybook` with
+`yarn storybook smoke --<endpoint> --mode stories-and-tests --input physical
+--reporter json` and `STORYBOOK_SMOKE_STORY` set to the listed story.
+Each had zero failures, skips, unsupported cases, incomplete work, retries,
+or flaky cases. The totals include navigation work, not just authored tests.
+
+| Endpoint       | Story and authored assertion                                      | Selected / executed / passed | Physical-click receipts | Run ID                                 |
+| -------------- | ----------------------------------------------------------------- | ---------------------------- | ----------------------- | -------------------------------------- |
+| Windows Fabric | `components-checkbox--default`: unchecked -> checked -> unchecked | 203 / 203 / 203              | 2                       | `ef1ed966-3be3-4cc1-b940-ac0afbb02155` |
+| Win32 Paper    | `components-checkbox--default`: unchecked -> checked -> unchecked | 177 / 177 / 177              | 2                       | `54e6a815-21a4-418c-bfda-848e28549ffe` |
+| Windows Fabric | `native-callout--default`: open, light-dismiss, recreate          | 203 / 203 / 203              | 3                       | `1e521138-f529-45a1-974e-74f90edd42ac` |
+| Win32 Paper    | `native-callout--default`: open, light-dismiss, recreate          | 177 / 177 / 177              | 3                       | `44d9dd17-7132-4ebd-8b1e-18fa923ee355` |
+
+Artifacts are `apps/storybook/artifacts/desktop/<run-id>/run.json`. The
+Windows totals contain 202 navigation cases and one authored case; Win32
+contains 176 and one. Popup interaction does not establish F4's separately
+registered Storybook secondary-window identity.
+
+The connected native fixture contract passed 11 tests under the per-user
+claim; its retained-element counts were 20 and 23 at cycles 100 and 500.
+The separate generic fixture probe passed exact secondary-handle switching
+and minimized-capture refusal as described in the driver status reference.
+Windows `doctor --permissions` remains Unsupported.
+
+The real MCP descriptor path independently passed physical checkbox
+transitions and target capture on both endpoints. Standalone agent driver
+runs `af97fdb3-68de-4ce9-836e-935331528c8e` (Windows) and
+`3294d66d-9332-4639-95fe-8d3047f47e46` (Win32) each ended with a
+terminal passed lifecycle report and zero selected tests; the manual MCP
+operations are not suite selections. The first Windows probe exhausted its
+30 safe `bridge-unavailable`/effect-none attempts while the cold Metro bundle
+was still building; the later probe passed after the app connected.
+
+After MCP session close, Windows accepted an exact-app window close. On
+Win32 the window closed but its exact REX process remained; it was stopped
+only after identity verification. Both deliberately stopped Win32 app runs,
+`665e6e85-f0ce-4612-a34d-f140d2bab433` and
+`fc71d8fd-ffa4-464e-96ea-616d88d49e0e`, report failed, not graceful cleanup.
+The standalone drivers were stopped by a session-local injected SIGTERM,
+not physical Ctrl+C. Both owned app/service processes exited, the recorded
+ports were free, and the per-user claim and default descriptor were absent.
+The separate `serve --agent` interrupt limitation above remains open.

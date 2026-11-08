@@ -7,7 +7,7 @@ owner_paths:
 
 # Current adapter and measurement status
 
-**Work in progress, updated 2026-11-05.** The adapter is a thin client, not a
+**Work in progress, updated 2026-11-08.** The adapter is a thin client, not a
 supervisor. Keep this package name until actual harness-owned management tools
 land; a later `desktop-mcp` facade must retain driver-only use and plan published
 compatibility. Done below describes implementation, not full native qualification.
@@ -310,3 +310,31 @@ Win32 needed none. All sessions closed and cleanup removed owned processes,
 listeners, and the workload claim; no default descriptor remained. These
 runs issued no descriptor grant and do not change the descriptor matrix's
 Partial or Fail outcomes.
+
+## 2026-11-08 UTC connected descriptor-path checks
+
+Source `fec94cec4995c7372b798877c5412ddcb156523b`, Windows 11 Enterprise
+build 26300, AMD64. An MCP SDK stdio client used the default private
+descriptor and attached to the real, instance-matched Storybook app under an
+exclusive claim. These are manual operations, not selected suite tests.
+
+| Endpoint       | Driver run / MCP session                                                        | Physical checkbox                                                             | Target PNG                                    |
+| -------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------- |
+| Windows Fabric | `af97fdb3-68de-4ce9-836e-935331528c8e` / `6ab236be-dc25-4b53-97f9-4e6ce8875ab2` | Pass: 2 applied `physical-pointer` actions, unchecked -> checked -> unchecked | Pass: 42,436 bytes, resource SHA-256 verified |
+| Win32 Paper    | `3294d66d-9332-4639-95fe-8d3047f47e46` / `8d75052d-ddae-48f9-a1c1-2c8abcf8a019` | Pass: 2 applied `physical-pointer` actions, unchecked -> checked -> unchecked | Pass: 31,639 bytes, resource SHA-256 verified |
+
+Each session selected `components-checkbox--default`, checked every state,
+read the PNG through its MCP resource, verified its signature and digest,
+and closed. The Windows case supersedes the earlier failed physical-click
+attempt for this bounded descriptor-path operation. The first Windows
+readiness attempt ended after 30 rejected, effect-none retries while Metro
+was still building; a later attempt passed.
+
+On Win32, a session-local injection closed the authenticated bridge after
+selection. A newly observed preview checkbox was unavailable (`find: none`)
+while the chrome root remained present; fresh-preview mutation fencing and
+chrome mutation remain Partial, not passes. An initial 10-second wait timed
+out before the observed bridge retirement; the subsequent attempt waited for
+retirement. No raw image or grant is retained in this reference. Driver
+shutdown, app cleanup, and the failed Win32 app-run reports are
+recorded in `packages/agentic/desktop-test/references/current-status.md`.

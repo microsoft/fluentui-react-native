@@ -7,7 +7,7 @@ owner_paths:
 
 # Current capability and qualification status
 
-**Work in progress, updated 2026-11-06.** "Done" below means the stated
+**Work in progress, updated 2026-11-08.** "Done" below means the stated
 implementation exists, not that every native endpoint is qualified or that the
 complete orchestration product is ready for submission. Historical measurements
 remain tied to their original revision; they were not rerun by this update.
@@ -437,7 +437,38 @@ Same host, with the console session disconnected throughout.
   `packages/agentic/desktop-driver-mcp/references/current-status.md`. On
   Windows Fabric three React Native Test App menu-bar items get new
   references on every read, so an idle `delta` is never empty.
-- **Connected fixture rerun.** All 11 `win32Fixture` cases passed, including
-  window capture and 500-cycle retention (20 retained elements at cycles 100
-  and 500). Separately registered secondary windows and Win32 fresh-preview
-  fencing remain unqualified.
+
+## 2026-11-08 UTC connected Windows qualification
+
+Source `fec94cec4995c7372b798877c5412ddcb156523b`, Windows 11 Enterprise
+build 26300, AMD64, with the console connected. The opt-in `nativeDriver`
+contract passed 6 tests with 2 skipped. Under an exclusive workload claim,
+`FURN_NATIVE_DRIVER_TEST=1 yarn test win32Fixture --runInBand` passed all
+11 tests; retained elements were 20 at cycle 100 and 23 at cycle 500.
+The full `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand` suite then passed
+909 tests with 31 skipped across 65 passed and 2 skipped suites. Its separate
+fixture run retained 20 elements at both cycles 100 and 500; the exclusive
+claim was released.
+
+A separate generic Win32 fixture probe (`dfb100b1-94b2-4007-946e-9172c1f97d54`)
+switched between the exact main and secondary dialog handles, read controls
+in each, and verified the dialog closed. Capture of the minimized main
+window returned `unsupported operation` without restoring it; an explicitly
+restored window produced a valid PNG. This is not the Storybook F4
+separately registered secondary-window case, which remains Partial.
+
+Connected physical-input Storybook smokes passed on both endpoints, including
+the checkbox and popup cases. The separate real MCP descriptor path also
+passed two physical checkbox clicks and checked-state assertions on each
+endpoint, and returned hash-verified target PNGs. This replaces the earlier
+Windows physical-click failure for that bounded case, not for the full
+native matrix. Run IDs, selection counts, receipts, and cleanup are in
+`packages/agentic/desktop-test/references/current-status.md`; MCP session
+evidence is in `packages/agentic/desktop-driver-mcp/references/current-status.md`.
+
+The Win32 authenticated bridge was disconnected after a settled story.
+Chrome remained observable, but a fresh preview reference was not exposed
+after the disconnect, so fresh-preview fencing remains Partial. The first
+probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
+after injection. A later attempt waited for retirement and retained the
+same Partial result. Physical Ctrl+C and DPI changes were not exercised.
