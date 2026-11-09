@@ -31,6 +31,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -116,6 +117,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -168,6 +170,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -236,6 +239,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -347,6 +351,7 @@ describe('PowerShell owned service integration', () => {
       const reporter = new DesktopRunReporter({
         artifactsRoot: temporaryDirectory,
         kind: 'lifecycle',
+        reporterMode: 'plain',
         output: sink,
         errorOutput: sink,
         summary: false,

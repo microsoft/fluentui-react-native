@@ -5,11 +5,25 @@ import { NodeDesktopCommandRunner as SharedRunner } from '@fluentui-react-native
 import { NodeDesktopCommandRunner, type PreparedDesktopCommand } from './commandRunner.js';
 
 describe('shared command output', () => {
+  // These cases check local console output; on a GitHub Actions runner the owned reporter would otherwise group it.
+  const consoleEnvironment = ['GITHUB_ACTIONS', 'DESKTOP_REPORTER'] as const;
+  let savedEnvironment: Partial<Record<(typeof consoleEnvironment)[number], string>>;
   let root: string;
   beforeEach(() => {
+    savedEnvironment = {};
+    for (const name of consoleEnvironment) {
+      savedEnvironment[name] = process.env[name];
+      delete process.env[name];
+    }
     root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-command-output-'));
   });
-  afterEach(() => fs.rmSync(root, { recursive: true, force: true }));
+  afterEach(() => {
+    for (const name of consoleEnvironment) {
+      if (savedEnvironment[name] === undefined) delete process.env[name];
+      else process.env[name] = savedEnvironment[name];
+    }
+    fs.rmSync(root, { recursive: true, force: true });
+  });
 
   function command(source: string): PreparedDesktopCommand {
     return { command: process.execPath, args: ['-e', source], cwd: root, env: {}, label: 'fixture command' };
