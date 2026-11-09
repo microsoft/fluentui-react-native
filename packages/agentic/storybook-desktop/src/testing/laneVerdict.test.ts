@@ -62,7 +62,7 @@ describe('WDIO cohort verdict', () => {
   });
 
   test('summarizes counts and breaks unsupported down only when present', () => {
-    expect(describeWdioCounts([result('a', 'passed'), result('b', 'skipped')])).toBe('1 passed, 1 skipped');
+    expect(describeWdioCounts([result('a', 'passed'), result('b', 'skipped')])).toBe('1 passed, 0 failed, 1 skipped');
     expect(
       describeWdioCounts([
         result('a', 'passed'),
@@ -70,6 +70,18 @@ describe('WDIO cohort verdict', () => {
         result('c', 'unsupported', 'quarantine'),
         result('d', 'unsupported'),
       ]),
-    ).toBe('1 passed, 0 skipped, 3 unsupported (1 declared, 1 quarantined)');
+    ).toBe('1 passed, 0 failed, 0 skipped, 3 unsupported (1 declared, 1 quarantined)');
+  });
+
+  test('counts every status that is not a pass, a skip or unsupported as failed', () => {
+    expect(
+      describeWdioCounts([
+        { status: 'passed' },
+        { status: 'failed' },
+        { status: 'timed-out' },
+        { status: 'cancelled' },
+        { status: 'infrastructure-error' },
+      ]),
+    ).toBe('1 passed, 4 failed, 0 skipped');
   });
 });

@@ -3340,7 +3340,6 @@ __metadata:
   dependencies:
     "@fluentui-react-native/desktop-driver": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
-    "@rnx-kit/reporter": "catalog:"
     "@types/cross-spawn": "npm:6.0.6"
     "@wdio/cli": "catalog:"
     "@wdio/jasmine-framework": "catalog:"

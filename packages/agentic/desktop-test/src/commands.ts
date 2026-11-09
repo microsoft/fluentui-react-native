@@ -66,9 +66,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     try {
       const code = await running.completed;
       if (code !== 0)
-        throw (
-          running.failure ?? new Error(`Command "${command.label ?? command.command}" exited with code ${code}. Log: ${running.logPath}`)
-        );
+        throw running.failure ?? new Error(`Command "${commandLabel(command)}" exited with code ${code}. Log: ${running.logPath}`);
     } catch (error) {
       failure = error;
     }
@@ -96,6 +94,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
         reporter.addSecret(value);
     }
     const id = `command-${randomUUID()}`;
+    const label = commandLabel(command);
     const emit = reporter.source(id);
     const relativeLog = `commands/${id}.log`;
     const logPath = reporter.artifactPath(relativeLog);
@@ -104,12 +103,8 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       flag: 'wx',
       mode: 0o600,
     });
-    emit(
-      { kind: 'scope-start', payload: { label: command.label ?? command.command, category: command.category ?? 'service' } },
-      id,
-      command.context,
-    );
-    emit({ kind: 'artifact', payload: { path: relativeLog, description: command.label ?? command.command } }, id, command.context);
+    emit({ kind: 'scope-start', payload: { label, category: command.category ?? 'service' } }, id, command.context);
+    emit({ kind: 'artifact', payload: { path: relativeLog, description: label } }, id, command.context);
     let failed: unknown;
     const processControl = createDesktopProcessControl((error) => {
       failed ??= error;
@@ -132,6 +127,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     let stopped = false;
     let closed = false;
     let exitFailure: Error | undefined;
+    let exitSummary: string | undefined;
     let stopPromise: Promise<void> | undefined;
     let closeDeadline: ReturnType<typeof setTimeout> | undefined;
     let logBytes = fs.statSync(logPath).size;
@@ -190,9 +186,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       child.once('exit', () => {
         processControl.stop();
         closeDeadline = setTimeout(() => {
-          failed ??= new Error(
-            `Child exited but inherited output streams did not close within the drain deadline: ${command.label ?? command.command}`,
-          );
+          failed ??= new Error(`Child exited but inherited output streams did not close within the drain deadline: ${label}`);
           child.stdout.destroy();
           child.stderr.destroy();
         }, this.options.shutdownTimeoutMs ?? 10_000);
@@ -200,8 +194,10 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       child.once('close', (code, signal) => {
         clearTimeout(closeDeadline);
         closed = true;
-        if (code !== 0 && !stopped)
-          exitFailure = new Error(`Command "${command.label ?? command.command}" exited with code ${code ?? signal}. Log: ${logPath}`);
+        if (code !== 0 && !stopped) {
+          exitSummary = code === null ? `terminated by ${signal}` : `exit code ${code}`;
+          exitFailure = new Error(`Command "${label}" exited with code ${code ?? signal}. Log: ${logPath}`);
+        }
         if (failed !== undefined) reject(failed);
         else resolve(code ?? (signal ? 1 : 0));
       });
@@ -264,7 +260,12 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
           }
           const status =
             options.failed || failed !== undefined || cleanupError !== undefined || (!wasRunning && code !== 0) ? 'failed' : 'passed';
-          emit({ kind: 'scope-end', payload: { status, logPath: relativeLog } }, id, command.context);
+          const reason = status === 'failed' ? (describeFailure(failed ?? cleanupError) ?? exitSummary) : undefined;
+          emit(
+            { kind: 'scope-end', payload: { status, logPath: relativeLog, ...(reason ? { summary: reason } : {}) } },
+            id,
+            command.context,
+          );
           emit({ kind: 'producer-finished', payload: { status } }, id, command.context);
           this.active.delete(running);
           await processControl.close();
@@ -281,6 +282,21 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     const failures = results.flatMap((result) => (result.status === 'rejected' ? [result.reason as unknown] : []));
     if (failures.length) throw new AggregateError(failures, 'Owned commands did not stop cleanly.');
   }
+}
+
+// A first argument such as `install` in `pod install` or `lage` in `yarn lage` names the work. Flags, paths and other values do not.
+const subcommandPattern = /^[a-z][a-z0-9-]{0,31}$/i;
+
+function commandLabel(command: PreparedDesktopCommand): string {
+  if (command.label) return command.label;
+  const name = path.basename(command.command);
+  const [first] = command.args;
+  return first !== undefined && subcommandPattern.test(first) ? `${name} ${first}` : name;
+}
+
+function describeFailure(error: unknown): string | undefined {
+  if (error === undefined) return undefined;
+  return (error instanceof Error ? error.message : String(error)).split('\n', 1)[0];
 }
 
 function needsWindowsCommandShim(command: string): boolean {

@@ -24,15 +24,63 @@ are flags, not credentials, and redacting them would rewrite machine-readable
 output. Register a shorter credential explicitly with the reporter's
 `addSecret`.
 
-Stderr and test progress are live without verbose mode. Failed commands replay
-the collected output. GitHub Actions grouping and annotations are rendered by
-the supervisor; child output cannot issue workflow commands. Upload the full
-run directory in an always-run artifact step.
+Command output goes to these logs, not to the console; see
+[console output](#console-output) for what the console shows and when. Upload
+the full run directory in an always-run artifact step.
 
 Statuses preserve failures, retries, flaky tests, skips, unsupported
 capabilities, and unfinished work. A zero worker exit cannot override failed
 assertions or incomplete work. Optional suites can be skipped without being
 labelled passed.
+
+## Console output
+
+A command, or a step such as a story test run, is an operation. When it ends the
+reporter prints one header with its outcome and duration, and a summary when the
+operation has one:
+
+```text
+✔ pod install (42s)
+✔ Render stories (1m 08s): 209 stories rendered
+✔ Story tests (3m 12s): 101 of 101 story tests executed: 101 passed, 0 failed, 0 skipped
+✖ rnx-cli build (4m 03s): exit code 65
+```
+
+The operation's output stays in its log, and the console shows it only when it
+helps:
+
+- **Default.** A passing operation prints its header on stdout. A failing one
+  prints its header on stderr, the last 200 lines of its log indented beneath
+  it, and `Full log: <path>`.
+- **GitHub Actions.** A passing operation that has a log prints a collapsed
+  `::group::` titled with the header, holding the last 1000 lines of the log and
+  `Full log: <path>`. A failing operation prints as it does by default, so an
+  error is never folded away, and each failure also gets an `::error`
+  annotation.
+- **`--verbose`.** The operation's output streams live as `[label] stdout: text`
+  and `[label] stderr: text`, after a `▶ label` start line and an `artifact:`
+  line naming its log. The header follows, and a failing operation adds
+  `Full log: <path>`.
+
+Without `--verbose` a passing, skipped, or unsupported test appears only in the
+final counts, so a run that executes nothing shows as `0 executed` instead of
+disappearing into a long list. Failed tests, retries, and diagnostics always
+print, and the root supervisor's stderr is always live. Every run finishes with a
+`[desktop] PASSED: …` or `[desktop] FAILED: …` line carrying the counts.
+
+Output is untrusted text. The reporter neutralizes each line it prints that it
+did not build as a workflow command, so a command cannot start, stop, or forge
+one: `::` at the start of a line (after any white space) becomes `: :`, and `##[`
+becomes `# #[`. Only text that would have been a command changes, and the logs
+keep the original. The console has no `::stop-commands::` fence, per-message
+token lines, or command identifiers; agents that need complete output read the
+logs and `run.json`.
+
+Delegated producers and the Storybook CLI report operations the same way through
+`runDesktopOperation` from `@fluentui-react-native/desktop-test/reporting`. Its
+`summarize` sets the header's summary. Its `log` records a line of detail that is
+live only with `--verbose`; it is not kept in a log, so it is not replayed when
+the operation fails.
 
 ## CLI reporters
 

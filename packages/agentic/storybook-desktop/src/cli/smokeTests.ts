@@ -6,7 +6,7 @@ import type { DesktopStoryRunResult, DesktopStoryTestResult } from '@fluentui-re
 import { ArtifactManager } from '@fluentui-react-native/desktop-driver/artifacts';
 import { selectDesktopStoryTests } from '@fluentui-react-native/desktop-driver/runner';
 import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/wdio';
-import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import { runDesktopOperation, type DesktopOperation, type DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import type { DesktopWebdriverOptions, DesktopWebdriverSession } from '@fluentui-react-native/desktop-driver/wdio';
 
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
@@ -44,10 +44,23 @@ export type DesktopStorybookSmokeTestResult = DesktopStoryRunResult & {
   wdio?: readonly WdioStoryTestResult[];
 };
 
-export async function runDesktopStorybookSmokeTests(
+/**
+ * Runs the story tests as one reported operation, so the run ends with a single header that says how many tests ran
+ * and how many of them passed, whether the run passed or failed.
+ */
+export function runDesktopStorybookSmokeTests(
   options: DesktopStorybookSmokeTestOptions,
   connect: DesktopStorybookSmokeConnector = connectDesktopWebdriver,
   runWdio: typeof runWdioStoryTests = runWdioStoryTests,
+): Promise<DesktopStorybookSmokeTestResult> {
+  return runDesktopOperation(options.report, { label: 'Story tests' }, (operation) => runSmokeTests(options, connect, runWdio, operation));
+}
+
+async function runSmokeTests(
+  options: DesktopStorybookSmokeTestOptions,
+  connect: DesktopStorybookSmokeConnector,
+  runWdio: typeof runWdioStoryTests,
+  operation: DesktopOperation,
 ): Promise<DesktopStorybookSmokeTestResult> {
   const { config, manifest, platform } = options;
   if (manifest.endpoint !== platform) {
@@ -90,7 +103,9 @@ export async function runDesktopStorybookSmokeTests(
   // Every selected case is announced up front, so a fail-fast stop leaves the remaining cases accounted for as not run.
   for (const payload of plannedWdioWork(wdioSelection, wdioSettings)) options.report?.emit({ kind: 'work-selected', payload });
 
+  let attempted = 0;
   for (const storyId of storyIds) {
+    attempted++;
     const scope = `smoke:${storyId}`;
     options.report?.emit(
       { kind: 'scope-start', payload: { label: storyId, category: 'phase' } },
@@ -193,6 +208,10 @@ export async function runDesktopStorybookSmokeTests(
     tests,
     wdio,
   };
+  const notReached = storyIds.length - attempted;
+  operation.summarize(
+    `${formatDesktopStorybookSmokeTestSummary(result)}${notReached > 0 ? ` (stopped early; ${notReached} of ${storyIds.length} stories not run)` : ''}`,
+  );
   try {
     const reportPath = artifacts.writeMetadata('run', {
       ...result,
@@ -310,9 +329,17 @@ async function runStoryPlans(
   return result;
 }
 
-export function formatDesktopStorybookSmokeTestSummary(result: DesktopStorybookSmokeTestResult): string {
+/**
+ * The count that tells a reader whether tests actually ran: how many of the selected story tests executed, and how they
+ * ended. A skipped or unsupported test is selected but never runs, so a run of only those reads as `no story tests executed`.
+ */
+export function formatDesktopStorybookSmokeTestSummary(result: Pick<DesktopStorybookSmokeTestResult, 'tests' | 'wdio'>): string {
   const results = [...result.tests, ...(result.wdio ?? [])];
-  return `Ran ${results.length} desktop story tests (${describeWdioCounts(results)}).`;
+  const executed = results.filter(({ status }) => status !== 'skipped' && status !== 'unsupported').length;
+  const counts = describeWdioCounts(results);
+  return executed === 0
+    ? `no story tests executed (0 of ${results.length}): ${counts}`
+    : `${executed} of ${results.length} story tests executed: ${counts}`;
 }
 
 function errorMessage(error: unknown): string {

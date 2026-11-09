@@ -25,6 +25,11 @@ and `--json` (an alias for `--reporter json`). Mode precedence is CLI flag,
 `DESKTOP_REPORTER`, config, then `auto`. `auto` selects GitHub Actions rendering
 when `GITHUB_ACTIONS=true`, otherwise plain output.
 
+Plain and GitHub Actions output reports each command as one header with its
+outcome and duration, and shows the end of its log only when it fails. Pass
+`--verbose` to stream every command's output live, with start markers and log
+paths. See [console output](reporting.md#console-output).
+
 One-shot JSON commands emit a bounded summary; `--json` no longer prints the
 complete `run.json`. NDJSON starts with run metadata, emits milestone records
 by default, then ends with the same summary. Use `--events progress|all` for

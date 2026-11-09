@@ -21,6 +21,16 @@ Triage by failure boundary:
 6. **Evidence/cleanup:** inspect the complete canonical run directory; preserve
    the primary failure if capture or cleanup also fails.
 
+Console output summarizes each step as one header, such as `✔ pod install (42s)`
+or `✖ rnx-cli build (4m 03s): exit code 65`. A failed step prints the end of its
+log and a `Full log:` path; the complete output of every step is under the run's
+`commands/` directory, and `--verbose` streams it live. In a smoke run, read the
+`Story tests` header: `N of M story tests executed` says how many of the M
+tests reached ran, and the counts after the colon account for the rest as
+skipped or unsupported. A run that stops at its first failure adds
+`(stopped early; K of S stories not run)`. `no story tests executed (0 of M)`
+means none ran, even if nothing failed.
+
 For `driver --agent`, a readiness timeout means the channel service did not
 publish the connection: inspect the `storybook-channel` log. Publication needs
 the verified native helper and an owner-only storage root. A macOS lease

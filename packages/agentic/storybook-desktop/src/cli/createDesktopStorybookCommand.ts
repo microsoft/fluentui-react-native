@@ -57,7 +57,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
     .addOption(new Option('--reporter <mode>', 'output format').choices([...desktopReporterModes]))
     .option('--json', 'alias for --reporter json')
     .addOption(new Option('--events <level>', 'NDJSON event detail').choices([...desktopEventLevels]))
-    .option('-v, --verbose', 'stream informational output as well as live errors and test progress');
+    .option('-v, --verbose', 'stream command output live, with start markers and log paths, instead of only the outcome of each step');
   let apiPromise: Promise<DesktopStorybookCli> | undefined;
 
   const getApi = (flags: PlatformFlags) =>

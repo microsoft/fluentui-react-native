@@ -8,7 +8,7 @@ import {
   resolveDesktopApplication,
   resolveDesktopTestScope,
 } from '@fluentui-react-native/desktop-test';
-import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import { runDesktopOperation, type DesktopOperation, type DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 import { resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
 import { formatDesktopReporterValue } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
@@ -53,8 +53,7 @@ import {
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
-import { runWdioStoryTests } from '../testing/runWdioTests.js';
-import { describeWdioCounts } from '../testing/laneVerdict.js';
+import { runWdioStoryTests, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
 import { decideWdioSelection, describeWdioExclusions, listWdioSelection } from '../testing/selection.js';
 import type { WdioSelectionContext } from '../testing/selection.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
@@ -384,22 +383,52 @@ export class DesktopStorybookCli {
     if (platform === 'macos' && !options.url) {
       await this.writeMacOSApplicationLease(desktopStorybookDriverManifestPath(this.config.projectRoot, 'macos'), settings.timeoutMs);
     }
-    const results = await runWdioStoryTests(
-      {
-        ...settings,
-        ...activeConnection,
-        config: this.config,
-        manifest,
-        platform,
-        scope,
-        errorOutput: this.errorOutput,
-        report: this.reporter,
-        signal: this.services.controller.signal,
-        input: settings.input,
-      },
-      this.runner,
-    );
-    this.output.write(`Ran ${results.length} executable wdio tests (${describeWdioCounts(results)}).\n`);
+    const summarize = (operation: DesktopOperation, wdio: readonly WdioStoryTestResult[]) =>
+      operation.summarize(formatDesktopStorybookSmokeTestSummary({ tests: [], wdio }));
+    await this.operation('Story tests', async (operation) => {
+      try {
+        const results = await runWdioStoryTests(
+          {
+            ...settings,
+            ...activeConnection,
+            config: this.config,
+            manifest,
+            platform,
+            scope,
+            errorOutput: this.errorOutput,
+            report: this.reporter,
+            signal: this.services.controller.signal,
+            input: settings.input,
+          },
+          this.runner,
+        );
+        summarize(operation, results);
+      } catch (error) {
+        if (error instanceof WdioStoryTestRunError) summarize(operation, error.results);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Runs `work` as one reported operation, which ends with an outcome header. Without a reporter, which only a library
+   * caller can lack, the summary is written as a line and detail is written only in verbose mode.
+   */
+  private async operation<T>(label: string, work: (operation: DesktopOperation) => T | Promise<T>): Promise<T> {
+    if (this.reporter) return runDesktopOperation(this.reporter, { label }, work);
+    let summary: string | undefined;
+    try {
+      return await work({
+        summarize: (text) => {
+          summary = text;
+        },
+        log: (text) => {
+          if (this.verbose) this.output.write(`${text}\n`);
+        },
+      });
+    } finally {
+      if (summary) this.output.write(`${summary}\n`);
+    }
   }
 
   /** The scope domains and the values this endpoint's target holds, which declared case `scope` selection reads. */
@@ -611,7 +640,15 @@ export class DesktopStorybookCli {
       let traversalFailure: unknown;
       try {
         await this.services.guard(
-          this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs, traversal?.select),
+          this.operation('Render stories', (operation) =>
+            this.renderEveryStory(
+              operation,
+              serverUrl,
+              smoke.settleMs ?? 0,
+              smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs,
+              traversal?.select,
+            ),
+          ),
         );
       } catch (error) {
         traversalFailure = error;
@@ -640,7 +677,8 @@ export class DesktopStorybookCli {
             input,
           }),
         );
-        this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
+        // With a reporter the story tests operation's header already carries the summary.
+        if (!this.reporter) this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
       }
     } catch (error) {
       primaryFailure = error;
@@ -830,6 +868,7 @@ export class DesktopStorybookCli {
   }
 
   private async renderEveryStory(
+    operation: DesktopOperation,
     serverUrl: string,
     settleMs: number,
     initialRenderTimeoutMs = 300_000,
@@ -846,9 +885,11 @@ export class DesktopStorybookCli {
     const failures: Error[] = [];
     for (const { id } of entries)
       this.reporter?.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Render ${id}` } });
+    let attempted = 0;
     let consecutiveFailures = 0;
     for (const [entryIndex, { id }] of entries.entries()) {
       this.services.controller.signal.throwIfAborted();
+      attempted += 1;
       const started = Date.now();
       const testId = `navigation:${id}`;
       this.reporter?.emit({ kind: 'scope-start', payload: { label: `Render ${id}`, category: 'worker' } }, testId, { story: id }, testId);
@@ -859,7 +900,7 @@ export class DesktopStorybookCli {
         if (settleMs > 0) {
           await delay(settleMs);
         }
-        this.output.write(`rendered ${id}\n`);
+        operation.log(`rendered ${id}`);
         this.reporter?.emit(
           {
             kind: 'test-result',
@@ -896,9 +937,13 @@ export class DesktopStorybookCli {
     }
 
     if (failures.length > 0) {
+      const notAttempted = entries.length - attempted;
+      operation.summarize(
+        `${failures.length} of ${entries.length} stories failed to render${notAttempted > 0 ? ` (stopped early; ${notAttempted} not attempted)` : ''}`,
+      );
       throw new AggregateError(failures, `${failures.length} stories failed to render:\n${failures.map(errorMessage).join('\n')}`);
     }
-    this.output.write(`Rendered ${entries.length} stories.\n`);
+    operation.summarize(`${entries.length} ${entries.length === 1 ? 'story' : 'stories'} rendered`);
   }
 
   private async selectStory(serverUrl: string, storyId: string, timeoutMs: number): Promise<void> {

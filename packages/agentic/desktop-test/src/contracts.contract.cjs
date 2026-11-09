@@ -380,7 +380,17 @@ async function main() {
       const journal = fs.readFileSync(path.join(run.root, 'events.jsonl'), 'utf8');
       assert(!journal.includes('secret-value'));
       assert(journal.includes('root cause'));
-      assert(err.text().includes('::stop-commands::'));
+      assert(
+        !err.text().includes('::stop-commands::') && !out.text().includes('::stop-commands::'),
+        'text is defused in place, not fenced',
+      );
+      assert(err.text().includes(': :error::untrusted [REDACTED]'), 'root stderr is shown with its workflow command defused');
+      assert(
+        !err
+          .text()
+          .split('\n')
+          .some((line) => line.trimStart().startsWith('::error::untrusted')),
+      );
       assert.equal((err.text().match(/::error title=/g) || []).length, 1);
       const junit = fs.readFileSync(path.join(run.root, 'junit.xml'), 'utf8');
       assert(junit.includes('attempt'));
@@ -523,16 +533,37 @@ async function main() {
         error: { code: 'unknown-target', message: 'Unknown target "missing".' },
       });
     } else if (mode === 'commands') {
-      const run = reporter({ kind: 'lifecycle', console: 'github-actions' });
-      const runner = new NodeDesktopCommandRunner({ reporter: run });
-      const running = runner.start(
+      const liveOut = capture();
+      const liveErr = capture();
+      const live = reporter({ kind: 'lifecycle', verbose: true, output: liveOut, errorOutput: liveErr });
+      const liveRunner = new NodeDesktopCommandRunner({ reporter: live });
+      const liveCommand = liveRunner.start(
         command(
           "process.stdout.write('ready\\n'); setTimeout(()=>process.stderr.write('live diagnostic\\n'),30); setInterval(()=>{},1000);",
         ),
       );
       try {
-        await waitFor(() => err.text().includes('live diagnostic'));
-        assert(!run.resultSnapshot, 'diagnostic must arrive before shutdown');
+        await waitFor(() => liveErr.text().includes('live diagnostic'));
+        assert(!live.resultSnapshot, 'diagnostic must arrive before shutdown');
+      } finally {
+        await liveCommand.stop();
+      }
+      assert((await live.finish()).status === 'passed');
+      assert(liveOut.text().includes('[fixture] stdout: ready'), 'verbose child stdout is live and stays on stdout');
+      assert(liveErr.text().includes('[fixture] stderr: live diagnostic'));
+      assert(!(liveOut.text() + liveErr.text()).includes('[command-'), 'source identifiers do not leak into the display');
+
+      const quietOut = capture();
+      const quietErr = capture();
+      const run = reporter({ kind: 'lifecycle', console: 'github-actions', output: quietOut, errorOutput: quietErr });
+      const runner = new NodeDesktopCommandRunner({ reporter: run });
+      const running = runner.start(
+        command(
+          "process.stdout.write('ready\\n'); setTimeout(()=>process.stderr.write('quiet diagnostic\\n'),30); setInterval(()=>{},1000);",
+        ),
+      );
+      try {
+        await waitFor(() => fs.readFileSync(running.logPath, 'utf8').includes('[stderr] quiet diagnostic'));
       } finally {
         await running.stop();
       }
@@ -554,14 +585,16 @@ async function main() {
         .map((file) => fs.readFileSync(path.join(run.root, 'commands', file), 'utf8'))
         .join('');
       assert(logs.includes('\u20ac'));
-      assert(logs.includes('[stderr] live diagnostic'));
-      assert.equal((out.text().match(/::group::/g) || []).length, 2);
-      assert.equal((out.text().match(/::endgroup::/g) || []).length, 2);
-      const groupOne = out
-        .text()
-        .slice(out.text().indexOf('::group::one'), out.text().indexOf('::endgroup::', out.text().indexOf('::group::one')));
-      assert(groupOne.includes('::stop-commands::'));
+      assert(logs.includes('[stderr] quiet diagnostic'));
+      assert(!quietErr.text().includes('quiet diagnostic'), 'child output is not live without verbose');
+      const quiet = quietOut.text();
+      assert.equal((quiet.match(/::group::/g) || []).length, 3, 'each passed operation is one collapsed group');
+      assert.equal((quiet.match(/::endgroup::/g) || []).length, 3);
+      assert(!quiet.includes('::stop-commands::'));
+      const groupOne = quiet.slice(quiet.indexOf('::group::✔ one '), quiet.indexOf('::endgroup::', quiet.indexOf('::group::✔ one ')));
+      assert(groupOne.includes('[stdout] ::warning::one'));
       assert(!groupOne.includes('::warning::two'));
+      assert(!quiet.split('\n').some((line) => line.startsWith('::warning::')), 'child output cannot start a workflow command');
     } else if (mode === 'command-secrets') {
       const run = reporter({ kind: 'lifecycle' });
       const runner = new NodeDesktopCommandRunner({ reporter: run });
@@ -756,7 +789,7 @@ async function main() {
       );
     } else if (mode === 'owned-service') {
       const { startReportTransport } = await import(lib('reporting/transport.js'));
-      const run = reporter({ kind: 'lifecycle' });
+      const run = reporter({ kind: 'lifecycle', verbose: true });
       const transport = await startReportTransport(run);
       const runner = new NodeDesktopCommandRunner({ reporter: run, environment: transport.environment, shutdownTimeoutMs: 10_000 });
       const descriptor = path.join(root, 'service.json');

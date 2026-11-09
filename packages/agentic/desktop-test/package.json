@@ -92,7 +92,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/desktop-driver": "workspace:*",
-    "@rnx-kit/reporter": "catalog:",
     "@wdio/reporter": "catalog:",
     "commander": "^14.0.2",
     "cross-spawn": "7.0.6",

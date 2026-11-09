@@ -45,7 +45,18 @@ export type EventContext = {
 export type EventData =
   | { kind: 'work-selected'; payload: { workId: string; label: string } }
   | { kind: 'scope-start'; payload: { label: string; category: 'service' | 'worker' | 'phase' } }
-  | { kind: 'scope-end'; payload: { status: 'passed' | 'failed' | 'cancelled' | 'skipped' | 'unsupported'; logPath?: string } }
+  | {
+      kind: 'scope-end';
+      payload: {
+        status: 'passed' | 'failed' | 'cancelled' | 'skipped' | 'unsupported';
+        logPath?: string;
+        /**
+         * One line naming the outcome, such as `exit code 1` or `30 of 101 story tests executed`. A scope that ends with a
+         * summary, even an empty one, or with a log is an operation: the reporter always prints its outcome.
+         */
+        summary?: string;
+      };
+    }
   | { kind: 'service-ready'; payload: { message: string } }
   | { kind: 'service-failed'; payload: { failure: ReportFailure } }
   | { kind: 'diagnostic'; payload: { level: 'info' | 'warning' | 'error'; message: string; failure?: ReportFailure } }
@@ -88,7 +99,7 @@ export const reportStatuses: readonly TestStatus[] = ['passed', 'failed', 'skipp
 const payloadFields = {
   'work-selected': ['workId', 'label'],
   'scope-start': ['label', 'category'],
-  'scope-end': ['status', 'logPath'],
+  'scope-end': ['status', 'logPath', 'summary'],
   'service-ready': ['message'],
   'service-failed': ['failure'],
   diagnostic: ['level', 'message', 'failure'],
@@ -165,6 +176,7 @@ export function validateDesktopEvent(value: unknown): asserts value is DesktopEv
       break;
     case 'scope-end':
       if (payload.logPath !== undefined) requireText(payload.logPath, 'logPath');
+      if (payload.summary !== undefined && typeof payload.summary !== 'string') throw new TypeError('summary must be text.');
       member(payload.status, ['passed', 'failed', 'cancelled', 'skipped', 'unsupported']);
       break;
     case 'producer-finished':

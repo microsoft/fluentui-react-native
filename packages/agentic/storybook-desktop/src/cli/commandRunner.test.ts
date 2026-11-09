@@ -19,10 +19,11 @@ describe('shared command output', () => {
     expect(NodeDesktopCommandRunner).toBe(SharedRunner);
   });
 
-  test('retains attributed logs and forwards stderr without verbose', async () => {
+  function collect(options: { verbose?: boolean } = {}) {
     const stdout: string[] = [];
     const stderr: string[] = [];
     const runner = new NodeDesktopCommandRunner({
+      ...options,
       output: {
         write: (text) => {
           stdout.push(String(text));
@@ -36,19 +37,54 @@ describe('shared command output', () => {
         },
       },
     });
+    return { runner, stdout: () => stdout.join(''), stderr: () => stderr.join('') };
+  }
+
+  function onlyRun() {
+    const runs = path.join(root, 'artifacts', 'desktop-commands');
+    return path.join(runs, fs.readdirSync(runs)[0]);
+  }
+
+  test('retains attributed logs and reports only the outcome of a passing command without verbose', async () => {
+    const { runner, stdout, stderr } = collect();
     try {
       await runner.run(command("process.stdout.write('information\\n');process.stderr.write('diagnostic\\n');"));
     } finally {
       await runner.close();
     }
-    expect(stderr.join('')).toContain('stderr: diagnostic');
-    expect(stdout.join('')).not.toContain('stdout: information');
-    const runs = path.join(root, 'artifacts', 'desktop-commands');
-    const run = path.join(runs, fs.readdirSync(runs)[0]);
+    expect(stdout()).toContain('✔ fixture command');
+    expect(stdout()).not.toContain('information');
+    expect(stderr()).not.toContain('diagnostic');
+    const run = onlyRun();
     const log = path.join(run, 'commands', fs.readdirSync(path.join(run, 'commands'))[0]);
     expect(fs.readFileSync(log, 'utf8')).toContain('[stdout] information');
     expect(fs.readFileSync(log, 'utf8')).toContain('[stderr] diagnostic');
     expect(JSON.parse(fs.readFileSync(path.join(run, 'run.json'), 'utf8')).status).toBe('passed');
+  });
+
+  test('streams command output live under the command name with verbose', async () => {
+    const { runner, stdout, stderr } = collect({ verbose: true });
+    try {
+      await runner.run(command("process.stdout.write('information\\n');process.stderr.write('diagnostic\\n');"));
+    } finally {
+      await runner.close();
+    }
+    expect(stdout()).toContain('[fixture command] stdout: information');
+    expect(stderr()).toContain('[fixture command] stderr: diagnostic');
+  });
+
+  test('shows the end of the log under the header of a failed command', async () => {
+    const { runner, stdout, stderr } = collect();
+    try {
+      await expect(runner.run(command("process.stderr.write('diagnostic\\n');process.exitCode=7;"))).rejects.toThrow('exited with code 7');
+    } finally {
+      await runner.close();
+    }
+    expect(stderr()).toContain('✖ fixture command');
+    expect(stderr()).toContain('exit code 7');
+    expect(stderr()).toContain('[stderr] diagnostic');
+    expect(stderr()).toContain('Full log:');
+    expect(stdout()).not.toContain('diagnostic');
   });
 
   test('keeps the original command failure in the shared result', async () => {

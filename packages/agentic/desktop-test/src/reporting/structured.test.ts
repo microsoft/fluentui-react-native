@@ -20,6 +20,14 @@ describe('structured desktop events', () => {
     expect(includeDesktopEvent(event, 'milestones', 'service')).toBe(true);
   });
 
+  test('a scope end projects its summary only when there is one', () => {
+    const summarized = makeEvent({ kind: 'scope-end', payload: { status: 'passed', summary: '30 of 101 story tests executed' } });
+    const plain = makeEvent({ kind: 'scope-end', payload: { status: 'passed', summary: '' } });
+
+    expect(projectDesktopEvent(summarized).payload).toEqual({ status: 'passed', summary: '30 of 101 story tests executed' });
+    expect(projectDesktopEvent(plain).payload).toEqual({ status: 'passed' });
+  });
+
   test('exclusion counts are progress detail and project as plain numbers', () => {
     const event = makeEvent({ kind: 'selection', payload: { excluded: { platform: 1, scope: 0, input: 2 } } });
 

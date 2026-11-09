@@ -35,7 +35,7 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
     .option('--json', 'alias for --reporter json')
     .addOption(new Option('--events <level>', 'NDJSON event detail').choices([...desktopEventLevels]))
     .option('--paper', 'select macOS Paper (run prep after switching renderers)')
-    .option('--verbose', 'show informational service output');
+    .option('--verbose', 'stream command output live, with start markers and log paths, instead of only the outcome of each step');
   let parseDiagnostics = '';
   program.exitOverride().configureOutput({
     writeErr: (message) => {

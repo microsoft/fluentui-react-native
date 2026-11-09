@@ -20,6 +20,16 @@ Global output options are `--reporter auto|plain|github-actions|json|ndjson`,
 only). The mode precedence is CLI flag, `DESKTOP_REPORTER`, config, then
 `auto`. Global options may appear before or after a subcommand.
 
+Plain and GitHub Actions output reports each step as one header with its
+outcome and duration, and shows the end of a step's log only when it fails. The
+`Render stories` and `Story tests` steps of a smoke run carry the counts in
+their headers, such as `209 stories rendered` and
+`101 of 101 story tests executed: 101 passed, 0 failed, 0 skipped`. A run that
+executes no story tests says `no story tests executed (0 of N)`. Pass
+`-v`/`--verbose` to stream command output live, with start markers and log
+paths. The console format is described in
+`@fluentui-react-native/desktop-test/references/reporting.md`.
+
 | Command                                       | Purpose                                             |
 | --------------------------------------------- | --------------------------------------------------- |
 | `manifest --<platform>`                       | Validate static story-plan extraction               |

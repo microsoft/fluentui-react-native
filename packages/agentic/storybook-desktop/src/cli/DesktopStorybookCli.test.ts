@@ -7,12 +7,14 @@ import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-drive
 import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
 import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
+import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 
 import { STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
 import { desktopStorybookTargetId } from '../driver/driverManifest';
+import * as wdioTests from '../testing/runWdioTests';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
 import {
@@ -978,7 +980,7 @@ describe('DesktopStorybookCli', () => {
       `${serverUrl}/select-story-sync/first--story`,
       `${serverUrl}/select-story-sync/second--story`,
     ]);
-    expect(output.at(-1)).toBe('Rendered 2 stories.\n');
+    expect(output.at(-1)).toBe('2 stories rendered\n');
     expect(runner.background[1].args).toEqual(['start', '--no-interactive', '--port', String(cli.instance.metroPort + 1)]);
     expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
     expect(runner.stopped).toBe(2);
@@ -1066,7 +1068,7 @@ describe('DesktopStorybookCli', () => {
         const result = cli.smoke('macos').catch((error: unknown) => error);
         await jest.advanceTimersByTimeAsync(131_000);
         expect(await result).toBeUndefined();
-        expect(output.write).toHaveBeenCalledWith('Rendered 1 stories.\n');
+        expect(output.write).toHaveBeenCalledWith('1 story rendered\n');
         expect(runner.stopped).toBe(2);
       } finally {
         jest.useRealTimers();
@@ -1271,6 +1273,144 @@ describe('DesktopStorybookCli', () => {
       installRoot: undefined,
       macosSigningIdentity: undefined,
       platform: 'macos',
+    });
+  });
+
+  describe('outcome headers', () => {
+    const stories = { entries: { first: { id: 'first--story', type: 'story' }, second: { id: 'second--story', type: 'story' } } };
+    const connection = { url: 'https://127.0.0.1:1234', target: 'fixture' };
+    const quiet = { write: () => true };
+
+    const fakeReporter = () => {
+      const emit = jest.fn();
+      const reporter = { runId: 'run', root: storybookRoot, emit, failure: jest.fn(), fail: jest.fn() } as unknown as DesktopReportWriter;
+      return { reporter, emit };
+    };
+    const events = (emit: jest.Mock) => emit.mock.calls.map(([event]) => event);
+    const outcomes = (emit: jest.Mock) => events(emit).filter(({ kind, payload }) => kind === 'scope-end' && payload.summary !== undefined);
+    const details = (emit: jest.Mock) => events(emit).flatMap(({ kind, payload }) => (kind === 'output' ? [payload.text] : []));
+    const renderingFetch =
+      (select: () => Response): typeof globalThis.fetch =>
+      async (input) =>
+        String(input).includes('select-story-sync') ? select() : new Response(JSON.stringify(stories));
+    const smokeCli = (fetch: typeof globalThis.fetch, options: object) =>
+      new DesktopStorybookCli(
+        makeConfig({
+          macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' }, startupTimeoutMs: 100 } },
+        }),
+        {
+          ...nativeDriverTestOptions,
+          createStoryManifest: createEmptyStoryManifest,
+          runner: new RecordingRunner(),
+          fetch,
+          isPortAvailable: async () => true,
+          errorOutput: quiet,
+          ...options,
+        },
+      );
+    const wdioResult = (
+      testName: string,
+      status: wdioTests.WdioStoryTestResult['status'],
+      gap?: 'unsupported',
+    ): wdioTests.WdioStoryTestResult => ({
+      storyId: 'button--default',
+      testName,
+      status,
+      durationMs: 1,
+      ...(gap ? { gap } : {}),
+    });
+    const testCli = (options: object) =>
+      new DesktopStorybookCli(makeDesktopStorybookConfig({ projectRoot: storybookRoot, storyPackages: [] }), {
+        createStoryManifest: storyManifestOf(declaredStoryEntry('button--default', [['adaptive', { requires: ['click'] }]])),
+        errorOutput: quiet,
+        ...options,
+      });
+
+    afterEach(() => jest.restoreAllMocks());
+
+    test('summarizes the rendered stories as the outcome of the render step and keeps each story as verbose-only detail', async () => {
+      const { reporter, emit } = fakeReporter();
+      const output = { write: jest.fn() };
+      await smokeCli(
+        renderingFetch(() => new Response('{}')),
+        { reporter, output },
+      ).smoke('macos');
+      expect(outcomes(emit)).toEqual([{ kind: 'scope-end', payload: { status: 'passed', summary: '2 stories rendered' } }]);
+      expect(details(emit)).toEqual(['rendered first--story\n', 'rendered second--story\n']);
+      expect(output.write).not.toHaveBeenCalledWith(expect.stringContaining('rendered first--story'));
+    });
+
+    test('names how many stories failed to render, and that the run stopped early, in the failed outcome', async () => {
+      const { reporter, emit } = fakeReporter();
+      const fetch = renderingFetch(() => new Response(JSON.stringify({ error: 'render failed' }), { status: 500 }));
+      await expect(smokeCli(fetch, { reporter, output: quiet }).smoke('macos')).rejects.toThrow('first--story');
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'failed', summary: '1 of 2 stories failed to render (stopped early; 1 not attempted)' } },
+      ]);
+    });
+
+    test('prints the render outcome as a line, also when it failed, when there is no reporter', async () => {
+      const output: string[] = [];
+      const sink = { write: (text: string | Uint8Array) => !!output.push(String(text)) };
+      await expect(
+        smokeCli(
+          renderingFetch(() => new Response(JSON.stringify({ error: 'render failed' }), { status: 500 })),
+          { output: sink },
+        ).smoke('macos'),
+      ).rejects.toThrow('first--story');
+      expect(output).toContain('1 of 2 stories failed to render (stopped early; 1 not attempted)\n');
+    });
+
+    test.each([false, true])(
+      'writes a line for each rendered story only in verbose mode without a reporter (verbose: %s)',
+      async (verbose) => {
+        const output: string[] = [];
+        const sink = { write: (text: string | Uint8Array) => !!output.push(String(text)) };
+        await smokeCli(
+          renderingFetch(() => new Response('{}')),
+          { output: sink, verbose },
+        ).smoke('macos');
+        expect(output.includes('rendered first--story\n')).toBe(verbose);
+        expect(output).toContain('2 stories rendered\n');
+      },
+    );
+
+    test('summarizes how many story tests executed and passed as the outcome of the test step', async () => {
+      const { reporter, emit } = fakeReporter();
+      jest
+        .spyOn(wdioTests, 'runWdioStoryTests')
+        .mockResolvedValueOnce([wdioResult('adaptive', 'passed'), wdioResult('typing', 'unsupported', 'unsupported')]);
+      await testCli({ reporter, output: quiet }).test('macos', connection);
+      expect(outcomes(emit)).toEqual([
+        {
+          kind: 'scope-end',
+          payload: {
+            status: 'passed',
+            summary: '1 of 2 story tests executed: 1 passed, 0 failed, 0 skipped, 1 unsupported (1 declared, 0 quarantined)',
+          },
+        },
+      ]);
+    });
+
+    test('summarizes the counts a failed test run left, not only the error', async () => {
+      const { reporter, emit } = fakeReporter();
+      const failure = new wdioTests.WdioStoryTestRunError(
+        [wdioResult('adaptive', 'passed'), wdioResult('typing', 'failed')],
+        [new Error('typing failed')],
+      );
+      jest.spyOn(wdioTests, 'runWdioStoryTests').mockRejectedValueOnce(failure);
+      await expect(testCli({ reporter, output: quiet }).test('macos', connection)).rejects.toBe(failure);
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'failed', summary: '2 of 2 story tests executed: 1 passed, 1 failed, 0 skipped' } },
+      ]);
+    });
+
+    test('prints the test outcome as a line when there is no reporter', async () => {
+      const output: string[] = [];
+      const sink = { write: (text: string | Uint8Array) => !!output.push(String(text)) };
+      jest.spyOn(wdioTests, 'runWdioStoryTests').mockResolvedValueOnce([wdioResult('adaptive', 'passed')]);
+      await testCli({ output: sink }).test('macos', connection);
+      expect(output).toEqual(['1 of 1 story tests executed: 1 passed, 0 failed, 0 skipped\n']);
     });
   });
 });

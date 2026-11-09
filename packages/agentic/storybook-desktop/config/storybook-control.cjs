@@ -12,6 +12,7 @@ const initialRenderMilliseconds = Number(process.env.STORYBOOK_SMOKE_INITIAL_REN
 const controller = new AbortController();
 let report;
 let runner;
+let runOperation;
 
 function parseSmokePhase(args) {
   if (args.length === 0) {
@@ -61,77 +62,88 @@ async function smoke(traversal) {
     throw new Error(`Unsupported Storybook smoke mode "${smokeMode}".`);
   }
   if (smokePhase !== 'tests') {
-    const index = await request('/index.json');
-    const entries = Object.values(index.entries || {}).filter(({ type }) => type === 'story');
-    if (entries.length === 0) {
-      throw new Error('The Storybook index did not contain any stories.');
-    }
+    await runOperation(report.reporter, { label: 'Render stories' }, (operation) => renderStories(traversal, operation));
+  }
+}
 
-    const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
-    const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
-    const failures = [];
-    for (const { id } of entries)
-      report.reporter.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Navigate ${id}` } });
+async function renderStories(traversal, operation) {
+  const index = await request('/index.json');
+  const entries = Object.values(index.entries || {}).filter(({ type }) => type === 'story');
+  if (entries.length === 0) {
+    throw new Error('The Storybook index did not contain any stories.');
+  }
 
-    for (const [entryIndex, { id }] of entries.entries()) {
-      const started = Date.now();
-      const testId = `navigation:${id}`;
-      const title = `Navigate ${id}`;
-      const context = { story: id };
-      report.reporter.emit({ kind: 'scope-start', payload: { label: title, category: 'phase' } }, testId, context, testId);
-      report.reporter.emit({ kind: 'test-start', payload: { testId, title, attempt: 0 } }, testId, context);
-      try {
-        if (traversal) await traversal.select(id, entryIndex === 0 ? initialRenderMilliseconds : 30_000);
-        else await selectStory(id);
-        if (settleMilliseconds > 0) {
-          await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
-        }
-        report.reporter.emit(
-          { kind: 'test-result', payload: { testId, title, attempt: 0, status: 'passed', durationMs: Date.now() - started } },
-          testId,
-          context,
-        );
-        report.reporter.emit({ kind: 'scope-end', payload: { status: 'passed' } }, testId);
-      } catch (error) {
-        failures.push(error);
-        report.reporter.emit(
-          {
-            kind: 'test-result',
-            payload: {
-              testId,
-              title,
-              attempt: 0,
-              status: 'failed',
-              durationMs: Date.now() - started,
-              failure: report.reporter.failure(error, 'test'),
-            },
+  const settleMilliseconds = Number(process.env.STORYBOOK_SMOKE_SETTLE_MS) || 0;
+  const failFast = process.env.STORYBOOK_SMOKE_FAIL_FAST === '1';
+  const failures = [];
+  for (const { id } of entries)
+    report.reporter.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Navigate ${id}` } });
+
+  let attempted = 0;
+  for (const [entryIndex, { id }] of entries.entries()) {
+    attempted += 1;
+    const started = Date.now();
+    const testId = `navigation:${id}`;
+    const title = `Navigate ${id}`;
+    const context = { story: id };
+    report.reporter.emit({ kind: 'scope-start', payload: { label: title, category: 'phase' } }, testId, context, testId);
+    report.reporter.emit({ kind: 'test-start', payload: { testId, title, attempt: 0 } }, testId, context);
+    try {
+      if (traversal) await traversal.select(id, entryIndex === 0 ? initialRenderMilliseconds : 30_000);
+      else await selectStory(id);
+      if (settleMilliseconds > 0) {
+        await new Promise((resolve) => setTimeout(resolve, settleMilliseconds));
+      }
+      report.reporter.emit(
+        { kind: 'test-result', payload: { testId, title, attempt: 0, status: 'passed', durationMs: Date.now() - started } },
+        testId,
+        context,
+      );
+      report.reporter.emit({ kind: 'scope-end', payload: { status: 'passed' } }, testId);
+    } catch (error) {
+      failures.push(error);
+      report.reporter.emit(
+        {
+          kind: 'test-result',
+          payload: {
+            testId,
+            title,
+            attempt: 0,
+            status: 'failed',
+            durationMs: Date.now() - started,
+            failure: report.reporter.failure(error, 'test'),
           },
-          testId,
-          context,
-        );
-        report.reporter.emit({ kind: 'scope-end', payload: { status: 'failed' } }, testId);
-        if (failFast) {
-          break;
-        }
+        },
+        testId,
+        context,
+      );
+      report.reporter.emit({ kind: 'scope-end', payload: { status: 'failed' } }, testId);
+      if (failFast) {
+        break;
       }
     }
-
-    if (failures.length > 0) {
-      throw new AggregateError(failures, `${failures.length} of ${entries.length} stories failed to render.`);
-    }
-    report.reporter.emit({ kind: 'diagnostic', payload: { level: 'info', message: `Rendered ${entries.length} stories.` } });
   }
+
+  if (failures.length > 0) {
+    const notAttempted = entries.length - attempted;
+    operation.summarize(
+      `${failures.length} of ${entries.length} stories failed to render${notAttempted > 0 ? ` (stopped early; ${notAttempted} not attempted)` : ''}`,
+    );
+    throw new AggregateError(failures, `${failures.length} of ${entries.length} stories failed to render.`);
+  }
+  operation.summarize(`${entries.length} ${entries.length === 1 ? 'story' : 'stories'} rendered`);
 }
 
 async function runAuthoredTests() {
   const manifest = readDriverManifest();
   const smokeTestsUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'cli', 'smokeTests.js')).href;
   const configUrl = pathToFileURL(path.join(__dirname, '..', 'lib', 'config', 'index.js')).href;
-  const { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } = await import(smokeTestsUrl);
+  const { runDesktopStorybookSmokeTests } = await import(smokeTestsUrl);
   const { makeDesktopStorybookConfig } = await import(configUrl);
   // The driver instance's lane is a per-run choice the CLI resolved, so it travels as an option, not as configuration.
   const { input, ...wdio } = manifest.wdio ?? {};
-  const result = await runDesktopStorybookSmokeTests({
+  // The story tests report their own outcome header, with the counts, through `report`.
+  await runDesktopStorybookSmokeTests({
     config: makeDesktopStorybookConfig({ projectRoot: process.cwd(), wdio }),
     ...(input ? { input } : {}),
     ...(manifest.scope ? { scope: manifest.scope } : {}),
@@ -150,7 +162,6 @@ async function runAuthoredTests() {
       },
     },
   });
-  report.reporter.emit({ kind: 'diagnostic', payload: { level: 'info', message: formatDesktopStorybookSmokeTestSummary(result) } });
 }
 
 function readDriverManifest() {
@@ -174,10 +185,11 @@ function readDriverManifest() {
 }
 
 async function main() {
-  const [{ createDesktopReportSession }, { NodeDesktopCommandRunner }] = await Promise.all([
+  const [{ createDesktopReportSession, runDesktopOperation }, { NodeDesktopCommandRunner }] = await Promise.all([
     import('@fluentui-react-native/desktop-test/reporting'),
     import('@fluentui-react-native/desktop-test/commands'),
   ]);
+  runOperation = runDesktopOperation;
   report = await createDesktopReportSession({ artifactsRoot: path.join(process.cwd(), 'artifacts', 'desktop'), kind: 'tests' });
   runner = new NodeDesktopCommandRunner({ reporter: report.reporter, environment: report.environment });
   report.onStop?.(() => controller.abort(new Error('Storybook control interrupted.')));

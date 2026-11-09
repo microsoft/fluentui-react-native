@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { Writable } from 'node:stream';
-import { createReporter } from '@rnx-kit/reporter';
 
+import { formatOperationHeader, neutralizeWorkflowCommands, readLogExcerpt, singleLine, trimTrailingLineBreaks } from './presentation.js';
 import {
   createEventEmitter,
   DesktopReportedError,
@@ -13,7 +13,7 @@ import {
   serializeReportError,
   validateDesktopEvent,
 } from './protocol.js';
-import type { CollectedDesktopEvent, EventContext, EventEmitter, FailureKind, ReportError, ReportFailure } from './protocol.js';
+import type { CollectedDesktopEvent, EventContext, EventEmitter, FailureKind, ReportError, ReportFailure, TestStatus } from './protocol.js';
 import {
   describeDesktopSelection,
   describeDesktopUnsupported,
@@ -28,6 +28,14 @@ import type { DesktopEventLevel } from './structured.js';
 import type { DesktopReportingConfig } from '../config.js';
 import { resolveDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
+
+const ROOT_SOURCE = 'supervisor';
+// A failed operation shows the end of its log expanded. A passing one only collapses a longer excerpt into an Actions group.
+const expandedExcerpt = { lines: 200, bytes: 64 * 1024 };
+const collapsedExcerpt = { lines: 1000, bytes: 256 * 1024 };
+// These results are progress detail; the final counts account for them.
+const quietTestStatuses: ReadonlySet<TestStatus> = new Set(['passed', 'skipped', 'unsupported']);
+const sourceSuffix = /-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export type ReportOutput = Pick<NodeJS.WriteStream, 'write'>;
 export type DesktopRunReporterOptions = DesktopReportingConfig & {
@@ -67,8 +75,10 @@ export class DesktopRunReporter {
   private readonly sources = new Map<string, { sequence: number; finished: boolean }>();
   private readonly scopes = new Map<
     string,
-    { label: string; category: string; finished: boolean; context?: EventContext; workId?: string }
+    { label: string; category: string; finished: boolean; sourceId: string; startedAt: number; context?: EventContext; workId?: string }
   >();
+  // Commands name their own scope, so the label is the most useful name for the lines that command's output produces.
+  private readonly sourceNames = new Map<string, string>();
   private readonly work = new Map<string, DesktopWorkResult>();
   private readonly tests = new Map<string, DesktopTestResult>();
   private readonly testWork = new Map<string, string>();
@@ -87,7 +97,6 @@ export class DesktopRunReporter {
   private readonly errors: ReportOutput;
   private readonly reporterMode: ResolvedDesktopReporterMode;
   private readonly structured: boolean;
-  private readonly logger: ReturnType<typeof createReporter>;
   private queue = Promise.resolve();
   private arrivalSequence = 0;
   private journalBytes = 0;
@@ -121,22 +130,7 @@ export class DesktopRunReporter {
     this.output = options.output ?? process.stdout;
     this.errors = options.errorOutput ?? process.stderr;
     for (const secret of options.secrets ?? []) this.addSecret(secret);
-    this.emit = createEventEmitter(this.runId, 'supervisor', (event) => this.accept(event));
-    this.logger = createReporter({
-      name: 'desktop-test',
-      prefix: {},
-      output: {
-        log: (message) => {
-          if (!this.structured) this.enqueue(() => this.writeRaw(this.output, message + '\n'), Buffer.byteLength(message));
-        },
-        warn: (message) => {
-          if (!this.structured) this.enqueue(() => this.writeRaw(this.errors, message + '\n'), Buffer.byteLength(message));
-        },
-        error: (message) => {
-          if (!this.structured) this.enqueue(() => this.writeRaw(this.errors, message + '\n'), Buffer.byteLength(message));
-        },
-      },
-    });
+    this.emit = createEventEmitter(this.runId, ROOT_SOURCE, (event) => this.accept(event));
     fs.writeFileSync(path.join(this.root, 'events.jsonl'), '', { flag: 'wx', mode: 0o600 });
     this.artifacts.set('events.jsonl', 'Versioned event journal');
     this.artifacts.set('run.json', 'Canonical run result');
@@ -157,7 +151,7 @@ export class DesktopRunReporter {
   }
 
   source(sourceId: string): EventEmitter {
-    if (sourceId === 'supervisor' || this.sources.has(sourceId)) throw new Error(`Report source "${sourceId}" is already registered.`);
+    if (sourceId === ROOT_SOURCE || this.sources.has(sourceId)) throw new Error(`Report source "${sourceId}" is already registered.`);
     this.sources.set(sourceId, { sequence: 0, finished: false });
     return createEventEmitter(this.runId, sourceId, (event) => this.accept(event));
   }
@@ -202,7 +196,8 @@ export class DesktopRunReporter {
     } catch (reportingError) {
       const reportingFailure = this.failure(reportingError, 'reporting');
       this.failures.set(reportingFailure.failureId, reportingFailure);
-      this.logger.error(
+      this.print(
+        this.errors,
         `Desktop reporting failed: ${reportingFailure.error.message}. Original failure: ${failure.error.message}. Reports: ${this.root}`,
       );
     }
@@ -281,7 +276,7 @@ export class DesktopRunReporter {
         } catch (error) {
           const failure = this.failure(error, 'reporting');
           this.failures.set(failure.failureId, failure);
-          this.logger.error(`Cannot persist desktop run snapshot: ${failure.error.message}`);
+          this.print(this.errors, `Cannot persist desktop run snapshot: ${failure.error.message}`);
         }
       });
     }
@@ -296,7 +291,15 @@ export class DesktopRunReporter {
       if (this.scopes.has(event.scopeId)) throw new Error(`Scope ${event.scopeId} was started twice.`);
       const work = event.parentScopeId ? this.work.get(event.parentScopeId) : undefined;
       if (work) work.status = 'incomplete';
-      this.scopes.set(event.scopeId, { ...event.payload, finished: false, context: event.context, workId: work?.workId });
+      this.scopes.set(event.scopeId, {
+        ...event.payload,
+        finished: false,
+        sourceId: event.sourceId,
+        startedAt: Date.parse(event.timestamp),
+        context: event.context,
+        workId: work?.workId,
+      });
+      if (event.scopeId === event.sourceId) this.sourceNames.set(event.sourceId, singleLine(event.payload.label, 48));
     } else if (event.kind === 'scope-end') {
       const scope = this.scopes.get(event.scopeId);
       if (!scope || scope.finished) throw new Error(`Scope ${event.scopeId} has no outstanding start.`);
@@ -356,54 +359,57 @@ export class DesktopRunReporter {
       }
       return;
     }
-    const prefix = `[${event.sourceId}${event.context?.endpoint ? ` ${event.context.endpoint}` : ''}]`;
+    const verbose = this.options.verbose === true;
+    const tag = this.tag(event);
     const failure = 'failure' in event.payload ? event.payload.failure : undefined;
     const firstFailure = !failure || !this.presentedFailures.has(failure.failureId);
     if (failure) this.presentedFailures.add(failure.failureId);
     switch (event.kind) {
       case 'scope-start':
-        this.logger.log(`${prefix} START ${event.payload.label}`);
+        if (verbose) this.print(this.output, `▶ ${singleLine(event.payload.label, 200)}`);
         break;
-      case 'scope-end': {
-        const scope = this.scopes.get(event.scopeId)!;
-        if (event.payload.logPath && (event.payload.status === 'failed' || this.options.verbose || scope.category === 'worker')) {
-          this.enqueue(() => this.replay(scope.label, event.payload.logPath!, event.payload.status === 'failed'), 0);
-        }
-        this.logger.log(`${prefix} ${event.payload.status.toUpperCase()} ${scope.label}`);
+      case 'scope-end':
+        this.presentScopeEnd(event, verbose);
         break;
-      }
       case 'service-ready':
-        this.logger.log(`${prefix} READY ${event.payload.message}`);
+        this.print(this.output, `${tag}READY ${event.payload.message}`);
         break;
       case 'output':
-        if (event.payload.stream === 'stderr' || this.options.verbose)
-          this.logger.warn(`${prefix} ${event.payload.stream}: ${event.payload.text.replace(/\n$/, '')}`);
+        // A command's output is kept in its log and replayed if it fails, so it is live only in verbose mode.
+        if ((verbose || (event.payload.stream === 'stderr' && event.sourceId === ROOT_SOURCE)) && event.payload.text.trim()) {
+          this.print(
+            event.payload.stream === 'stderr' ? this.errors : this.output,
+            tag ? `${tag}${event.payload.stream}: ${event.payload.text}` : event.payload.text,
+          );
+        }
         break;
       case 'diagnostic':
         if (!firstFailure) break;
-        if (event.payload.level === 'info') this.logger.log(`${prefix} ${event.payload.message}`);
-        else this.logger.warn(`${prefix} ${event.payload.level}: ${event.payload.message}`);
+        if (event.payload.level === 'info') this.print(this.output, `${tag}${event.payload.message}`);
+        else this.print(this.errors, `${tag}${event.payload.level}: ${event.payload.message}`);
         break;
       case 'service-failed':
-        if (firstFailure) this.logger.error(`${prefix} FAILED ${event.payload.failure.error.message}`);
+        if (firstFailure) this.print(this.errors, `${tag}FAILED ${event.payload.failure.error.message}`);
         break;
       case 'test-start': {
-        // Producers may encode attempts sparsely (WDIO combines spec-file and test retries), so label the observed ordinal.
-        const ordinal = this.tests.get(event.payload.testId)!.attempts.findIndex(({ attempt }) => attempt === event.payload.attempt) + 1;
-        this.logger.log(`${prefix} TEST ${event.payload.title} (attempt ${ordinal})`);
+        const ordinal = this.attemptOrdinal(event.payload.testId, event.payload.attempt);
+        // The first attempt is progress detail; a retry is worth marking.
+        if (verbose || ordinal > 1) this.print(this.output, `${tag}TEST ${event.payload.title} (attempt ${ordinal})`);
         break;
       }
-      case 'test-result':
-        this.logger.log(
-          `${prefix} ${event.payload.status.toUpperCase()} ${event.payload.title}${event.payload.reason ? `: ${event.payload.reason}` : ''}`,
-        );
+      case 'test-result': {
+        const { status, title, reason } = event.payload;
+        const ordinal = this.attemptOrdinal(event.payload.testId, event.payload.attempt);
+        if (verbose || !quietTestStatuses.has(status) || ordinal > 1)
+          this.print(this.output, `${tag}${status.toUpperCase()} ${title}${reason ? `: ${reason}` : ''}`);
         // Reported, never failed: a declaration may cover a path this attempt did not take.
-        if (event.payload.input?.unused)
-          this.logger.log(`${prefix} declared input this attempt did not deliver: ${event.payload.input.unused.join(', ')}`);
-        if (failure && firstFailure) this.logger.error(`${prefix} ${errorDiagnostic(failure.error)}`);
+        if (verbose && event.payload.input?.unused)
+          this.print(this.output, `${tag}declared input this attempt did not deliver: ${event.payload.input.unused.join(', ')}`);
+        if (failure && firstFailure) this.print(this.errors, `${tag}${errorDiagnostic(failure.error)}`);
         break;
+      }
       case 'artifact':
-        this.logger.log(`${prefix} artifact: ${path.join(this.root, event.payload.path)}`);
+        if (verbose) this.print(this.output, `${tag}artifact: ${path.join(this.root, event.payload.path)}`);
         break;
     }
     if ('failure' in event.payload && event.payload.failure) {
@@ -414,7 +420,7 @@ export class DesktopRunReporter {
           () =>
             this.write(
               this.errors,
-              `::error title=${escapeProperty(`${event.sourceId}: ${failure.kind}`)}::${escapeData(errorDiagnostic(failure.error))}\n`,
+              `::error title=${escapeProperty(`${this.sourceName(event.sourceId) ?? 'desktop'}: ${failure.kind}`)}::${escapeData(errorDiagnostic(failure.error))}\n`,
             ),
           0,
         );
@@ -474,36 +480,74 @@ export class DesktopRunReporter {
     });
   }
 
-  private async writeRaw(output: ReportOutput, text: string): Promise<void> {
-    if (!this.actions) {
-      await this.write(output, text);
-      return;
-    }
-    const token = randomUUID();
-    await this.write(output, `::stop-commands::${token}\n`);
-    try {
-      await this.write(output, text.endsWith('\n') ? text : text + '\n');
-    } finally {
-      await this.write(output, `::${token}::\n`);
+  private print(output: ReportOutput, text: string): void {
+    if (this.structured) return;
+    this.enqueue(() => this.writeLine(output, text), Buffer.byteLength(text));
+  }
+
+  // Everything the reporter prints, except the commands it builds itself, passes through here so output cannot issue workflow commands.
+  private writeLine(output: ReportOutput, text: string): Promise<void> {
+    return this.write(output, neutralizeWorkflowCommands(trimTrailingLineBreaks(text)) + '\n');
+  }
+
+  private sourceName(sourceId: string): string | undefined {
+    if (sourceId === ROOT_SOURCE) return undefined;
+    return (
+      this.sourceNames.get(sourceId) ??
+      sourceId
+        .split('/')
+        .map((segment) => segment.replace(sourceSuffix, ''))
+        .join('/')
+    );
+  }
+
+  /** `[name endpoint] ` for lines from a command or producer, and for supervisor lines about a service or endpoint. */
+  private tag(event: CollectedDesktopEvent): string {
+    const name = this.sourceName(event.sourceId) ?? event.context?.service;
+    const endpoint = event.context?.endpoint;
+    const parts = [name, endpoint && !name?.includes(endpoint) ? endpoint : undefined].filter(Boolean);
+    return parts.length ? `[${parts.join(' ')}] ` : '';
+  }
+
+  // Producers may encode attempts sparsely (WDIO combines spec-file and test retries), so label the observed ordinal.
+  private attemptOrdinal(testId: string, attempt: number): number {
+    return this.tests.get(testId)!.attempts.findIndex((candidate) => candidate.attempt === attempt) + 1;
+  }
+
+  private presentScopeEnd(event: Extract<CollectedDesktopEvent, { kind: 'scope-end' }>, verbose: boolean): void {
+    const scope = this.scopes.get(event.scopeId)!;
+    const { status, logPath, summary } = event.payload;
+    const attention = status === 'failed' || status === 'cancelled';
+    // A scope with a log or a summary is an operation and always reports its outcome. Other scopes are progress detail.
+    if (logPath === undefined && summary === undefined && !attention && !verbose) return;
+    const header = formatOperationHeader({
+      status,
+      label: scope.label,
+      durationMs: Date.parse(event.timestamp) - scope.startedAt,
+      detail: summary,
+    });
+    const output = attention ? this.errors : this.output;
+    const file = logPath === undefined ? undefined : this.artifactPath(logPath);
+    if (file !== undefined && !verbose && (attention || this.actions)) {
+      this.enqueue(() => this.writeOperation(output, header, file, attention), 0);
+    } else {
+      // Verbose mode streamed the output as it arrived, and a plain run keeps a passing operation's output in its log.
+      this.print(output, attention && file !== undefined ? `${header}\n  Full log: ${file}` : header);
     }
   }
 
-  private async replay(label: string, relative: string, failed: boolean): Promise<void> {
-    const output = failed ? this.errors : this.output;
-    await this.write(output, this.actions ? `::group::${escapeData(label)}\n` : `[desktop] BEGIN ${label}\n`);
-    const token = randomUUID();
+  /** A failed operation prints the end of its log under its header. In Actions a passing one folds it into a collapsed group. */
+  private async writeOperation(output: ReportOutput, header: string, file: string, expanded: boolean): Promise<void> {
+    let lines: string[];
     try {
-      if (this.actions) await this.write(output, `::stop-commands::${token}\n`);
-      try {
-        for await (const chunk of fs.createReadStream(this.artifactPath(relative), { encoding: 'utf8' }))
-          await this.write(output, this.redact(chunk));
-        await this.write(output, '\n');
-      } finally {
-        if (this.actions) await this.write(output, `::${token}::\n`);
-      }
-    } finally {
-      await this.write(output, this.actions ? '::endgroup::\n' : `[desktop] END ${label}\n`);
+      const excerpt = await readLogExcerpt(file, expanded ? expandedExcerpt : collapsedExcerpt, 'earlier output omitted');
+      lines = excerpt.map((line) => this.redact(line));
+    } catch (error) {
+      lines = [`log unavailable: ${error instanceof Error ? error.message : String(error)}`];
     }
+    lines.push(`Full log: ${file}`);
+    if (expanded) await this.writeLine(output, [header, ...lines.map((line) => `  ${line}`)].join('\n'));
+    else await this.write(output, `::group::${escapeData(header)}\n${neutralizeWorkflowCommands(lines.join('\n'))}\n::endgroup::\n`);
   }
 
   finish(): Promise<DesktopRunResult> {
@@ -525,7 +569,7 @@ export class DesktopRunReporter {
       optional: this.options.optional,
       incomplete:
         [...this.scopes.values()].some(({ finished }) => !finished) ||
-        [...this.sources.entries()].some(([id, source]) => id !== 'supervisor' && !source.finished),
+        [...this.sources.entries()].some(([id, source]) => id !== ROOT_SOURCE && !source.finished),
       tests: [...this.tests.values()],
       work: [...this.work.values()],
       failures: [...this.failures.values()],
@@ -602,19 +646,20 @@ export class DesktopRunReporter {
     };
     let result = persist();
     const c = result.counts;
-    this.logger.log(
-      `[desktop] ${result.status.toUpperCase()}: ${c.selected} selected, ${c.executed} executed, ${c.passed} passed, ${c.failed} failed, ${c.skipped} skipped, ${describeDesktopUnsupported(c)}, ${c.incomplete} incomplete, ${c.retries} retries, ${c.flaky} flaky; ${result.work.filter(({ status }) => status === 'not-run').length} groups not run; ${path.join(this.root, 'run.json')}`,
+    const runResult = path.join(this.root, 'run.json');
+    this.print(
+      this.output,
+      result.kind === 'lifecycle' && c.selected === 0
+        ? `[desktop] ${result.status.toUpperCase()}: lifecycle (no tests); ${runResult}`
+        : `[desktop] ${result.status.toUpperCase()}: ${c.selected} selected, ${c.executed} executed, ${c.passed} passed, ${c.failed} failed, ${c.skipped} skipped, ${describeDesktopUnsupported(c)}, ${c.incomplete} incomplete, ${c.retries} retries, ${c.flaky} flaky; ${result.work.filter(({ status }) => status === 'not-run').length} groups not run; ${runResult}`,
     );
     const selection = describeDesktopSelection(result);
-    if (selection) this.logger.log(`[desktop] ${selection}`);
+    if (selection) this.print(this.output, `[desktop] ${selection}`);
     await this.queue;
     result = persist();
     if (this.presentationFailed && !this.structured) {
       try {
-        await this.writeRaw(
-          this.errors,
-          `[desktop] FAILED: presentation could not be flushed; authoritative result: ${path.join(this.root, 'run.json')}\n`,
-        );
+        await this.writeLine(this.errors, `[desktop] FAILED: presentation could not be flushed; authoritative result: ${runResult}`);
       } catch (error) {
         const failure = this.failure(error, 'reporting');
         this.failures.set(failure.failureId, failure);
@@ -679,7 +724,7 @@ export class DesktopRunReporter {
         result = persist();
       }
       try {
-        await this.writeRaw(this.errors, `[desktop] Structured output stopped: ${outputError.message}\n`);
+        await this.writeLine(this.errors, `[desktop] Structured output stopped: ${outputError.message}`);
       } catch {
         // A closed stderr cannot carry the reporting diagnostic.
       }
