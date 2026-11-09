@@ -9565,15 +9565,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-native-theming@npm:10.5.4":
-  version: 10.5.4
-  resolution: "@storybook/react-native-theming@npm:10.5.4"
+"@storybook/react-native-theming@npm:10.7.1":
+  version: 10.7.1
+  resolution: "@storybook/react-native-theming@npm:10.7.1"
   dependencies:
     polished: "npm:^4.3.1"
   peerDependencies:
     react: "*"
     react-native: ">=0.57.0"
-  checksum: 10c0/da1d153288315406885a647d6397fb02166e2cb621f059aabed37b8dd439d6a6ec5bf9ba3aa4779e9b5fa03c209aff64d6af6bcc4771a21278a2aeaeac0c2f04
+  checksum: 10c0/e45e9921b5ba31f3b1f755bf54a881d3f8011a47cee229e6b9b7d0450afb6ddd4ad708bafd7fe3ebd96c32f9048e227cdbea21b801173f8178ddd060b5dcf71d
   languageName: node
   linkType: hard
 
