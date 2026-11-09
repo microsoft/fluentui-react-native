@@ -7,7 +7,7 @@ owner_paths:
 
 # Current adapter and measurement status
 
-**Work in progress, updated 2026-11-05.** The adapter is a thin client, not a
+**Work in progress, updated 2026-11-08.** The adapter is a thin client, not a
 supervisor. Keep this package name until actual harness-owned management tools
 land; a later `desktop-mcp` facade must retain driver-only use and plan published
 compatibility. Done below describes implementation, not full native qualification.
@@ -73,7 +73,51 @@ tokenizer/version, serialized UTF-8 bytes and characters, text tokens,
 instructions overhead, projection/budgets, sample count, cold/warm timing,
 success/retry/cancellation/cleanup counts, and approved artifact locator.
 Do not claim token reductions from reducing information scope or omitting
-discovery. Windows and Paper measurements are currently **not recorded here**.
+discovery. macOS Paper measurements are currently **not recorded here**.
+
+### Windows Fabric and Win32 Paper - 2026-11-08 UTC
+
+Revision `9d3e11516` plus the uncommitted Windows ownership and foreground
+helper changes, which do not alter tool text. MCP SDK 1.32.2 stdio client
+through the default descriptor; `gpt-tokenizer` 4.1.0 with `o200k_base` over
+every text block. Windows 11 build 26300, AMD64; Storybook served by
+`yarn desktop-test --target windows|win32 --reporter json serve --agent`. The
+console session was disconnected, so `click` was not measured; the toggle
+row uses `activate`. Each endpoint made 139 calls with no errors or retries,
+then closed its session. Runs `caba9e12-d9da-42a0-8b06-7300940e8318`
+(Windows) and `5f75aac2-d74c-4969-aba3-bd8c925d5725` (Win32), each with its
+`run.json` under `apps/storybook/artifacts/desktop/<run-id>/`.
+
+| Measurement                                             | Windows Fabric                      | Win32 Paper                         |
+| ------------------------------------------------------- | ----------------------------------- | ----------------------------------- |
+| Six-tool `tools/list`                                   | 4,691 tokens; 20,277 bytes (chars)  | Same                                |
+| Server instructions                                     | 120 tokens; 591 bytes               | Same                                |
+| `open` (attach)                                         | 45 ms                               | 31-40 ms                            |
+| Checkbox `activate` + `checked` check + default observe | 1,923 tokens; 5,346 bytes; 2,288 ms | 1,645 tokens; 5,187 bytes; 2,302 ms |
+| Of which `activate`                                     | 2,190 ms                            | 2,196 ms                            |
+| Observe default (100 of about 113 nodes, 20 calls)      | 66.7-73.7 ms median, max 93.1 ms    | 81.1-85.8 ms median, max 97.3 ms    |
+| Observe text per call                                   | 1,801-1,843 tokens                  | 1,594-1,633 tokens                  |
+| Delta (20 calls, idle)                                  | 72.7-77.5 ms median, max 98.4 ms    | 83.3-88.3 ms median, max 106.4 ms   |
+| Delta text per call                                     | 368 tokens                          | 220 tokens                          |
+
+Ranges span the Button, Checkbox, and Menu stories (`components-button--appearance`,
+`components-checkbox--constrained-text`, `components-menu--default`); the
+toggle row used `components-checkbox--default`. Observe used the default
+budget, which emitted 100 nodes. On Windows an idle delta is never empty:
+the React Native Test App's React, Debug, and System menu-bar items get new
+references on every read (three removed, three added). The helper reuses a
+reference only when the UI Automation runtime identity matches; whether these
+items lack stable runtime identities is unconfirmed. Without those changes
+the envelope is about 151 tokens. The Win32
+idle delta was not decomposed. The first Win32 toggle attempt chose the
+wrapping-label checkbox in `constrained-text` and returned a `stopped`
+sequence; it is retained here, not diagnosed, and the default story was used
+instead.
+
+Discovery grew by 3 tokens and 8 bytes since `41fc7473f` from tool-text
+changes. The Windows toggle rows are not comparable with the 386-token macOS
+row: they target a different story and their closing observe is an unscoped
+default observe, which accounts for most of their text.
 
 ## Before full submission
 
@@ -266,3 +310,31 @@ Win32 needed none. All sessions closed and cleanup removed owned processes,
 listeners, and the workload claim; no default descriptor remained. These
 runs issued no descriptor grant and do not change the descriptor matrix's
 Partial or Fail outcomes.
+
+## 2026-11-08 UTC connected descriptor-path checks
+
+Source `fec94cec4995c7372b798877c5412ddcb156523b`, Windows 11 Enterprise
+build 26300, AMD64. An MCP SDK stdio client used the default private
+descriptor and attached to the real, instance-matched Storybook app under an
+exclusive claim. These are manual operations, not selected suite tests.
+
+| Endpoint       | Driver run / MCP session                                                        | Physical checkbox                                                             | Target PNG                                    |
+| -------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | --------------------------------------------- |
+| Windows Fabric | `af97fdb3-68de-4ce9-836e-935331528c8e` / `6ab236be-dc25-4b53-97f9-4e6ce8875ab2` | Pass: 2 applied `physical-pointer` actions, unchecked -> checked -> unchecked | Pass: 42,436 bytes, resource SHA-256 verified |
+| Win32 Paper    | `3294d66d-9332-4639-95fe-8d3047f47e46` / `8d75052d-ddae-48f9-a1c1-2c8abcf8a019` | Pass: 2 applied `physical-pointer` actions, unchecked -> checked -> unchecked | Pass: 31,639 bytes, resource SHA-256 verified |
+
+Each session selected `components-checkbox--default`, checked every state,
+read the PNG through its MCP resource, verified its signature and digest,
+and closed. The Windows case supersedes the earlier failed physical-click
+attempt for this bounded descriptor-path operation. The first Windows
+readiness attempt ended after 30 rejected, effect-none retries while Metro
+was still building; a later attempt passed.
+
+On Win32, a session-local injection closed the authenticated bridge after
+selection. A newly observed preview checkbox was unavailable (`find: none`)
+while the chrome root remained present; fresh-preview mutation fencing and
+chrome mutation remain Partial, not passes. An initial 10-second wait timed
+out before the observed bridge retirement; the subsequent attempt waited for
+retirement. No raw image or grant is retained in this reference. Driver
+shutdown, app cleanup, and the failed Win32 app-run reports are
+recorded in `packages/agentic/desktop-test/references/current-status.md`.

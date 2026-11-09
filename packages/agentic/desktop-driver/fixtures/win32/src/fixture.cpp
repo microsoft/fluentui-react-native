@@ -10,6 +10,9 @@
 //   --offscreen <0|1>  place the main window off every monitor (default 0)
 //   --lifetime-ms <count> exit the process after this long even when the UI thread is
 //                      blocked, so an abandoned run cannot linger (default 600000, 0: never)
+//   --child-pid-file <path> start one offscreen descendant copy of this fixture and
+//                      write "<descendant pid> <parent pid>" to this file, so a
+//                      contract can prove which processes an owned launch reaches
 #define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -19,6 +22,7 @@
 
 #include <commctrl.h>
 #include <shellapi.h>
+#include <tlhelp32.h>
 #include <uiautomation.h>
 
 #include <algorithm>
@@ -57,6 +61,7 @@ struct Options {
   DWORD stuckMilliseconds = 0;
   DWORD lifetimeMilliseconds = 600000;
   bool offscreen = false;
+  std::wstring childPidFile;
 };
 
 Options options;
@@ -89,6 +94,8 @@ Options ParseOptions() {
       parsed.lifetimeMilliseconds = static_cast<DWORD>(std::max(0, _wtoi(value)));
     } else if (name == L"--offscreen") {
       parsed.offscreen = _wtoi(value) != 0;
+    } else if (name == L"--child-pid-file") {
+      parsed.childPidFile = value;
     }
   }
   LocalFree(arguments);
@@ -397,6 +404,65 @@ void StartWatchdog() {
   }).detach();
 }
 
+DWORD ReadParentProcessId() {
+  const HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  if (snapshot == INVALID_HANDLE_VALUE) {
+    return 0;
+  }
+  DWORD parent = 0;
+  PROCESSENTRY32W entry{};
+  entry.dwSize = sizeof(entry);
+  for (BOOL more = Process32FirstW(snapshot, &entry); more != FALSE; more = Process32NextW(snapshot, &entry)) {
+    if (entry.th32ProcessID == GetCurrentProcessId()) {
+      parent = entry.th32ParentProcessID;
+      break;
+    }
+  }
+  CloseHandle(snapshot);
+  return parent;
+}
+
+// Starts one offscreen copy of this fixture with the default title, then
+// publishes its process id and this process's parent id through a rename, so a
+// reader never sees a partial file. Returns false when either step fails.
+bool StartDescendant() {
+  if (options.childPidFile.empty()) {
+    return true;
+  }
+  wchar_t modulePath[MAX_PATH * 4] = {};
+  const DWORD length = GetModuleFileNameW(nullptr, modulePath, static_cast<DWORD>(std::size(modulePath)));
+  if (length == 0 || length >= std::size(modulePath)) {
+    return false;
+  }
+  std::wstring commandLine = L"\"" + std::wstring(modulePath, length) +
+                             L"\" --offscreen 1 --lifetime-ms " + std::to_wstring(options.lifetimeMilliseconds);
+  STARTUPINFOW startup{};
+  startup.cb = sizeof(startup);
+  PROCESS_INFORMATION information{};
+  if (CreateProcessW(modulePath, commandLine.data(), nullptr, nullptr, FALSE, 0, nullptr, nullptr, &startup,
+                     &information) == FALSE) {
+    return false;
+  }
+  CloseHandle(information.hThread);
+  CloseHandle(information.hProcess);
+
+  const std::string contents =
+      std::to_string(information.dwProcessId) + " " + std::to_string(ReadParentProcessId()) + "\n";
+  const std::wstring temporary = options.childPidFile + L".tmp";
+  const HANDLE file = CreateFileW(temporary.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS,
+                                  FILE_ATTRIBUTE_NORMAL, nullptr);
+  if (file == INVALID_HANDLE_VALUE) {
+    return false;
+  }
+  DWORD written = 0;
+  const bool complete = WriteFile(file, contents.data(), static_cast<DWORD>(contents.size()), &written, nullptr) !=
+                            FALSE &&
+                        written == contents.size();
+  CloseHandle(file);
+  return complete &&
+         MoveFileExW(temporary.c_str(), options.childPidFile.c_str(), MOVEFILE_REPLACE_EXISTING) != FALSE;
+}
+
 }  // namespace
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int) {
@@ -417,6 +483,9 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int) {
     return 1;
   }
   ShowWindow(window, SW_SHOWNOACTIVATE);
+  if (!StartDescendant()) {
+    return 3;
+  }
 
   MSG message{};
   while (GetMessageW(&message, nullptr, 0, 0) > 0) {

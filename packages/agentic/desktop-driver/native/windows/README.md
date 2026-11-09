@@ -86,18 +86,41 @@ remain unsupported.
 
 Attach accepts an owner-generated nonce-bound lease, or an exact title
 qualified by the canonical executable or AUMID. Title-only attach, zero
-matches, and multiple qualified matches fail.
-Leases record ownership, PID, process start, executable, and the primary window.
-Attached apps survive WebDriver deletion; launched apps are closed only by
-their exact recorded process identity.
+matches, and multiple qualified matches fail. Attach fails closed: a lease's
+process must be in the helper's session and match the lease's executable or
+AUMID, and an unleased attach fails as ambiguous when any titled candidate's
+identity cannot be read rather than skipping it.
+Leases record ownership, PID, process start, executable, the primary window,
+and `containment`. Attached apps survive WebDriver deletion and helper
+disposal (`external`); launched apps are closed only by their exact recorded
+process identity.
 
 Unpackaged arguments use the standard `CommandLineToArgvW` quoting rules.
 Launch ownership requires a non-preexisting window from the exact created
 process or a verified descendant, plus a matching canonical executable or
 AUMID and a process start after the launch request. Reused packaged processes
 fail with guidance to use attach mode. Cancellation, launch failure, session
-cleanup, and helper disposal close only causally owned processes and retain
-the lease when forced termination cannot be proven.
+cleanup, and helper disposal close only owned processes and retain the lease
+when forced termination cannot be proven.
+
+Launch and attach require the helper's window station to be interactive. An
+unpackaged launch is containment `job-object`: the helper creates the process
+suspended, assigns it to a Job Object of its own with
+`JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE` and no breakaway, and only then resumes
+it, so every descendant starts inside the job. A failed assignment ends the
+suspended process and fails the launch as unsupported instead of running it
+uncontained. Window discovery then accepts only windows of job members in the
+helper's session. Closing the lease asks the root window to close, then ends
+the job and waits up to 3 seconds for it to drain; an undrained job fails
+`cleanup-failed` and keeps the lease so the close can be retried. If the helper
+exits without closing, the operating system ends the job. Descendants are ended
+by the job, not asked to close, and an application that starts children with
+`CREATE_BREAKAWAY_FROM_JOB` fails inside the job. A packaged activation is
+containment `uncontained`: the Application Activation Manager starts it outside
+any job the helper owns, so closing the lease ends only the identity-verified
+process whose window the helper leased (the activated process or a verified
+descendant); other processes the application starts are not ended.
+The helper never places an attached application in a job.
 
 ## Automation behavior
 
@@ -143,6 +166,14 @@ Window activation treats a foreground window owned by the target window as
 already active, as macOS does for application activation. Reactivating the
 owner would light-dismiss an open popup with input that no user produced. A
 physical press on the owner still activates it.
+
+Activation shares the input queue of whichever thread holds the foreground,
+moving to the new holder when the foreground changes during the attempt. When
+Windows still keeps the foreground away, `window-activation-failed` names the
+holder by opaque window handle and process id, never by title or class, and the
+first matching cause: no foreground window, another window of the target
+application, an elevated or unreadable holder, a holder that is not responding,
+a refused input-queue attachment, or a holder that took the foreground back.
 
 A subtree walk retries while its root remains available if a descendant
 becomes unavailable, or if a closing popup island's provider reports a UI
@@ -483,7 +514,9 @@ handshakes, runs the native self-test, exercises malformed-frame recovery, and
 verifies shared Windows/Win32 selection. A second suite builds the test-only
 Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
 through the helper: window events, owned popups, hung and stuck providers, large
-trees, and bounded retention. `yarn test --runInBand win32Fixture` runs only
+trees, bounded retention, and application containment (a contained launch whose
+descendant ends on close and when the helper is killed, and an external fixture
+that survives attach, close, and disposal). `yarn test --runInBand win32Fixture` runs only
 that suite. A third suite serves the same fixture through a grant-protected
 Desktop Driver service with the helper behind it: unauthenticated requests reach
 no helper call, sessions keep their owner, a revoked grant closes its
@@ -563,6 +596,13 @@ act/check, hash-verified capture resources, and descriptor removal while the
 attached app survived. Shutdown used the CLI's stop handler through a
 test-only IPC bridge, not a physical console Ctrl+C. These fixture results
 do not qualify either React Native renderer's new agent-operation path.
+
+Application containment passed the fixture contract and two launch probes
+through `desktop-test serve --agent`: when the helper was killed, a REX
+FluentTester launch on Win32 Paper (`job-object`) ended with it, and the
+packaged Storybook app on Windows Fabric (`uncontained`) survived. The
+foreground-refusal causes are self-tested only; a live Windows Fabric
+physical click has not been rerun.
 
 CI must build this helper explicitly into a job-local cache, run the opt-in
 native contract once for the shared Windows/Win32 provider, verify each

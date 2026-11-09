@@ -36,9 +36,19 @@ the agent identity names a different build: rebuild and register the app, then
 restart the driver. A Windows Debug app that shows "bundler is not running" or
 leaves stories at `story-not-ready` is not reading the driver's Metro; it loads
 from port 8081, so stop whatever else holds that port before `driver --agent`.
-Physical input to a host started from a background process can be refused with
-"The target window did not become the foreground window" (rejected, no effect);
-bring the window forward, or use the semantic `activate` action.
+Physical input can be refused with `window-activation-failed`, "The target
+window did not become the foreground window: …" (rejected, no effect). The
+message names the foreground holder by opaque handle and process id and the
+cause: an elevated window, a window that is not responding, another window of
+the app, or a lost foreground (lock, disconnect, or secure desktop). Address
+that window and retry, or use the semantic `activate` action. A physical click
+is not retried automatically.
+
+On Windows Fabric, only `smoke` writes the application lease that WDIO sessions
+verify, so `storybook test --windows` fails with "Opening the application lease
+file failed" against a separately launched app. Run
+`STORYBOOK_SMOKE_STORY=<story-id> yarn storybook smoke --windows --mode
+stories-and-tests` and read the selected callbacks in its `run.json`.
 
 For macOS CocoaPods codegen failures, rerun the documented `prep` stage once
 when ReactCodegen has a stale generated source list; diagnose the first

@@ -201,6 +201,15 @@ Windows: `--windows` is always Fabric and `--win32` is always Paper.
   app return `relaunch-required`; recovery needs an app relaunch.
 - An externally stopped `storybook run` exits nonzero and writes a failed
   `run.json`. Record it as expected for that case; it is not a driver failure.
+- Win32's production bundle embeds the instance it connects to. Before
+  `run --win32` against an agent-served instance, rebundle with that
+  instance's environment as described in
+  `@fluentui-react-native/storybook-desktop/references/platforms/win32.md`;
+  a stale bundle never reaches the channel.
+- A console Ctrl+C to `desktop-test serve --agent` has left the CLI idle after
+  every resource settled, with its claim still `active` and `run.json`
+  `incomplete`. Record that, prove the owner and resources as in
+  [cleanup](#cleanup-and-endpoint-limits), and end only that process.
 - If `storybook run --windows` fails while enabling Developer Mode, do not
   change that OS setting for qualification. An already installed, verified
   app can instead be launched by its exact AUMID resolved from the built

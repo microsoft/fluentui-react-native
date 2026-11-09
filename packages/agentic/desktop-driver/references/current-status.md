@@ -7,7 +7,7 @@ owner_paths:
 
 # Current capability and qualification status
 
-**Work in progress, updated 2026-11-06.** "Done" below means the stated
+**Work in progress, updated 2026-11-08.** "Done" below means the stated
 implementation exists, not that every native endpoint is qualified or that the
 complete orchestration product is ready for submission. Historical measurements
 remain tied to their original revision; they were not rerun by this update.
@@ -35,7 +35,7 @@ and its sub-issues, which record dependencies and parallel waves.
 | Story catalog/select/reset                                 | Done, experimental integration         | Local lifetime/signal context, authenticated epochs persisted per native-verified app incarnation, versioned marker conformance, prompt disconnect failure, and stale preview rejection. Bounded macOS Paper/Fabric marker and stale-reference checks passed at `6fca14788`; native cancellation/fault injection remain unqualified. Unknown navigation effects still quarantine.                                                                               |
 | Story args on protected driver                             | Intentionally unsupported              | `story-args-unsupported`, including the session-owning grant and controlled orchestrator. HTTP and foreign WebSocket args are refused/not relayed without logging values; legacy unprotected args remain separate.                                                                                                                                                                                                                                              |
 | Exclusive Storybook control                                | Work in progress: native qualification | Deterministic endpoint evidence: controlled HTTP mutations return 403; foreign WS selection/prepare/args never reach the runtime; authenticated driver prepare/select uses F4 settlement and fencing. Non-agent channel remains legacy unprotected. Native endpoint evidence not yet run: macOS Paper/Fabric, Windows Fabric/Win32 Paper. Preview context checks preserve chrome/secondary references.                                                          |
-| Supervisor crash containment and automatic reclaim         | Work in progress outside driver        | Exact ownership ledger, surviving-resource reconciliation, and lifelines belong to desktop-test.                                                                                                                                                                                                                                                                                                                                                                |
+| Supervisor crash containment and automatic reclaim         | Work in progress outside driver        | Exact ownership ledger, surviving-resource reconciliation, and lifelines belong to desktop-test. The Windows helper's Job Object ends an unpackaged application it launched when the helper dies; packaged launches are `uncontained`.                                                                                                                                                                                                                          |
 | Application-exit/reconnect continuity                      | Work in progress                       | Bounded macOS Paper/Fabric full-service restart checks passed at `6fca14788`: private authenticated-epoch record plus exact live-incarnation proof yields renderer-specific relaunch-required, effect none. Initial absence and exited/replaced apps stay bridge-unavailable; failed/unknown probes are contract-tested only. No transparent restoration or quarantine recovery; inspected RN Storybook 10.5.4 / Storybook 10.6.3 transport does not reconnect. |
 | Recording/replay export, event-tail API, visual comparison | Work in progress/deferred              | No agent-session-to-WDIO export; window-events still returns its full bounded ring.                                                                                                                                                                                                                                                                                                                                                                             |
 | Intel macOS and distributed/remote control                 | Unsupported                            | Current macOS helper is arm64; service is loopback-only.                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -412,3 +412,63 @@ Processes, listeners, per-user claim, and default descriptor were absent
 after cleanup. Artifacts remain under
 `apps/storybook/artifacts/desktop/<run-id>/run.json`; earlier reporting and
 physical-input failures are not erased.
+
+## 2026-11-08 UTC Windows application ownership and foreground diagnosis
+
+Source `9d3e11516` plus the Windows helper changes for
+[#4441](https://github.com/microsoft/fluentui-react-native/issues/4441) and
+F10-W ([#4447](https://github.com/microsoft/fluentui-react-native/issues/4447)).
+Same host, with the console session disconnected throughout.
+
+- **Foreground diagnosis (#4441).** Activation now re-attaches to the
+  foreground holder when it changes during an attempt, and
+  `window-activation-failed` names the holder by opaque handle and process id
+  with its cause. The helper self-test covers each cause; a live physical
+  click on Windows Fabric was not rerun, so that row stays Fail.
+- **Application ownership (F10-W).** Leases report `containment`. Unpackaged
+  launches run in a helper-owned Job Object and end with the helper;
+  packaged launches are `uncontained` and survive it in a fenced claim;
+  attach is `external` and fails closed. The fixture contracts and live REX
+  and packaged-Storybook launch probes passed, which moves launch-capable
+  discovery to Pass on both endpoints. Runs and survivor handling are in
+  `packages/agentic/desktop-test/references/current-status.md`.
+- **Measurements.** Windows Fabric and Win32 Paper discovery, observe, delta,
+  and toggle text and latency are now recorded in
+  `packages/agentic/desktop-driver-mcp/references/current-status.md`. On
+  Windows Fabric three React Native Test App menu-bar items get new
+  references on every read, so an idle `delta` is never empty.
+
+## 2026-11-08 UTC connected Windows qualification
+
+Source `fec94cec4995c7372b798877c5412ddcb156523b`, Windows 11 Enterprise
+build 26300, AMD64, with the console connected. The opt-in `nativeDriver`
+contract passed 6 tests with 2 skipped. Under an exclusive workload claim,
+`FURN_NATIVE_DRIVER_TEST=1 yarn test win32Fixture --runInBand` passed all
+11 tests; retained elements were 20 at cycle 100 and 23 at cycle 500.
+The full `FURN_NATIVE_DRIVER_TEST=1 yarn test --runInBand` suite then passed
+909 tests with 31 skipped across 65 passed and 2 skipped suites. Its separate
+fixture run retained 20 elements at both cycles 100 and 500; the exclusive
+claim was released.
+
+A separate generic Win32 fixture probe (`dfb100b1-94b2-4007-946e-9172c1f97d54`)
+switched between the exact main and secondary dialog handles, read controls
+in each, and verified the dialog closed. Capture of the minimized main
+window returned `unsupported operation` without restoring it; an explicitly
+restored window produced a valid PNG. This is not the Storybook F4
+separately registered secondary-window case, which remains Partial.
+
+Connected physical-input Storybook smokes passed on both endpoints, including
+the checkbox and popup cases. The separate real MCP descriptor path also
+passed two physical checkbox clicks and checked-state assertions on each
+endpoint, and returned hash-verified target PNGs. This replaces the earlier
+Windows physical-click failure for that bounded case, not for the full
+native matrix. Run IDs, selection counts, receipts, and cleanup are in
+`packages/agentic/desktop-test/references/current-status.md`; MCP session
+evidence is in `packages/agentic/desktop-driver-mcp/references/current-status.md`.
+
+The Win32 authenticated bridge was disconnected after a settled story.
+Chrome remained observable, but a fresh preview reference was not exposed
+after the disconnect, so fresh-preview fencing remains Partial. The first
+probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
+after injection. A later attempt waited for retirement and retained the
+same Partial result. Physical Ctrl+C and DPI changes were not exercised.

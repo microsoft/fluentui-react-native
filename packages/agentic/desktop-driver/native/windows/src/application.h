@@ -8,10 +8,12 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 #include "common.h"
 #include "events.h"
+#include "inputauthority.h"
 #include "json.h"
 
 namespace furn {
@@ -24,21 +26,36 @@ struct WindowInfo {
   bool primary{false};
 };
 
+// How far the helper's ownership of a leased application reaches.
+//   kContainmentJobObject: an unpackaged launch and every descendant run in a
+//     Job Object this helper created, which ends them on close or helper exit.
+//   kContainmentUncontained: a packaged activation. Windows creates the process,
+//     so only the activated process or verified descendant whose window is
+//     leased is owned, without a containment job.
+//   kContainmentExternal: an attached application this helper never owns.
+inline constexpr char kContainmentJobObject[] = "job-object";
+inline constexpr char kContainmentUncontained[] = "uncontained";
+inline constexpr char kContainmentExternal[] = "external";
+
 struct ApplicationLease {
   std::string id;
   std::string ownership;  // "attached" or "launched"
+  std::string containment;
   std::string endpoint;
   std::string storyRootTestId;
   DWORD processId{0};
   FILETIME startTime{};
   std::wstring windowTitle;
   HANDLE process{nullptr};
+  // The containment Job Object of a kContainmentJobObject launch, else null.
+  HANDLE job{nullptr};
   HWND primaryWindow{nullptr};
 };
 
 // Owns application identity, launch/attach leases, and the opaque window table.
-// Attached applications are never terminated; owned launches close only the
-// exact windows and process that this helper created.
+// Attached applications are never terminated or placed in a Job Object; owned
+// launches close only the exact windows, process, and contained descendants
+// that this helper created.
 class ApplicationManager {
  public:
   ~ApplicationManager();
@@ -81,6 +98,9 @@ class ApplicationManager {
   // monitor to inject notifications.
   const ApplicationLease& AdoptWindowForTesting(HWND window, const std::wstring& title);
   WindowEventMonitor& WindowEventsForTesting() { return windowEvents_; }
+  void UseLeaseRegistrationHookForTesting(std::function<void(HANDLE, HANDLE)> hook) {
+    leaseRegistrationHookForTesting_ = std::move(hook);
+  }
 
  private:
   static constexpr std::size_t kMaximumRetiredWindowIds = 256;
@@ -107,7 +127,8 @@ class ApplicationManager {
   bool ForegroundBelongsToLease(const ApplicationLease& lease, HWND foreground) const;
   json::Value PublicationDiagnostic(const ApplicationLease& lease) const;
   ApplicationLease& CreateLease(std::string ownership, DWORD processId, HANDLE process, HWND primaryWindow,
-                                const std::wstring& title, const json::Value& params);
+                                const std::wstring& title, const json::Value& params,
+                                std::string containment, HANDLE job = nullptr);
   void TrackPendingCleanupProcess(DWORD processId, HANDLE process);
 
   struct PendingCleanupProcess {
@@ -127,6 +148,7 @@ class ApplicationManager {
   std::unordered_set<std::string> retiredIds_;
   std::vector<std::string> pendingRetirements_;
   WindowEventMonitor windowEvents_;
+  std::function<void(HANDLE, HANDLE)> leaseRegistrationHookForTesting_;
 };
 
 std::vector<HWND> EnumerateTopLevelWindows(DWORD processId);
@@ -135,7 +157,28 @@ std::wstring ReadWindowTitle(HWND window);
 bool TryReadProcessStartTime(HANDLE process, FILETIME& startTime);
 std::wstring ReadProcessImagePath(HANDLE process);
 std::wstring QuoteWindowsCommandLineArgument(std::wstring_view value);
+// Fails with `failureCode` unless `processId` runs in this helper's Windows
+// session. An unreadable session is refused rather than assumed.
+void RequireProcessInHelperSession(DWORD processId, std::string_view failureCode);
 void ActivateWindow(HWND window, const CancellationToken& token);
 bool TryActivateWindow(HWND window, const CancellationToken& token);
+
+// What the helper saw when Windows kept the foreground away from a window it
+// tried to activate. Foreign windows are named only by an opaque handle and
+// their process id, never by title or class.
+struct ActivationRefusal {
+  bool sawForeground{false};
+  // Empty when no window held the foreground at the end of the attempt.
+  std::string foreground;
+  DWORD foregroundProcess{0};
+  bool foregroundInTargetProcess{false};
+  bool foregroundHung{false};
+  ProcessIntegrity foregroundIntegrity;
+  ProcessIntegrity helperIntegrity;
+  // The Windows error of the latest refused input-queue attachment, or 0.
+  DWORD attachError{0};
+};
+
+std::string DescribeActivationRefusal(const ActivationRefusal& refusal);
 
 }  // namespace furn

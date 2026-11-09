@@ -7,7 +7,7 @@ owner_paths:
 
 # Current lifecycle and qualification status
 
-**Work in progress, updated 2026-11-06.** Done means the listed implementation,
+**Work in progress, updated 2026-11-08.** Done means the listed implementation,
 not full cross-platform qualification. This package is the intended neutral
 workload host; the existing Storybook lifecycle takeover is transitional.
 No new coordinator package, daemon, dynamic plugin loader, or package rename
@@ -17,25 +17,25 @@ and its sub-issues.
 
 ## Capability matrix
 
-| Capability                                               | State              | Limit or next gate                                                                                                                                                                                                                                                                                                                                                                                                 |
-| -------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| App/suite configuration and standalone installed-app use | Done               | Storybook is optional; runtime boundary and standalone-consumer contracts reject React, React Native, and Storybook imports/dependencies. Executable config is trusted operator code, not a sandbox.                                                                                                                                                                                                               |
-| Native service and helper composition                    | Done               | Generic supervisor and supervised Storybook child use the same real `driverService` factory, helper policy, authority and settled close.                                                                                                                                                                                                                                                                           |
-| Standalone WDIO/Jasmine execution                        | Done               | WDIO owns its session. Storybook CSF callbacks use a runner-owned session borrowed by a Node worker.                                                                                                                                                                                                                                                                                                               |
-| Required services, reporting, structured results         | Done               | One collector; bounded JSON/NDJSON summaries. Service-ready is not app/context-ready.                                                                                                                                                                                                                                                                                                                              |
-| `serve --agent` descriptor publication                   | Done               | Protects driver routes; no automatic build/launch from MCP. Normal WDIO cannot use the agent-served path yet.                                                                                                                                                                                                                                                                                                      |
-| Cleanup failure fence                                    | Done, conservative | Failed or timed-out disposal retains the claim with an exact resource generation and unresolved effect; manual inspection is required. No automatic reclaim.                                                                                                                                                                                                                                                       |
-| Complete lifecycle settlement                            | Done, conservative | Guarded work settles before successful close; late acquisitions are disposed; required-service failures stop dependants; owned resources dispose in reverse order.                                                                                                                                                                                                                                                 |
-| Typed generic resource contributions                     | Done               | Static contribution plans validate IDs/dependencies and record readiness, generation, identity, ownership, and settled disposal through public `resources` and `ownership` subpaths.                                                                                                                                                                                                                               |
-| Durable quarantine wiring                                | Done               | Both native service paths use owner-only storage and exact-incarnation probes; restart is not recovery proof. Live endpoint qualification remains separate.                                                                                                                                                                                                                                                        |
-| Supervisor crash containment                             | Work in progress   | Cooperative Node service lifelines and correlated service readiness implemented; portable parent/wrapper crash, late-spawn, failed-withdrawal and stalled-child contracts. Live macOS survivors and Windows containment remain unqualified; no automatic reclaim. Windows: non-detached children are hard-terminated with a crashed owner (observed A/B), so the three crash-disposal contracts are skipped there. |
-| Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.                                                                                                                                                                                                                                                                                    |
-| MCP/WDIO handoff                                         | Work in progress   | Must await drain/deletion; attached-app handoff is independent of future supervisor-owned launch.                                                                                                                                                                                                                                                                                                                  |
-| Supervisor-owned app lifetime                            | Work in progress   | Current session-owned launch/externally owned attach semantics remain; never silently retain or terminate another owner's app.                                                                                                                                                                                                                                                                                     |
-| Cross-service/multi-target claims                        | Work in progress   | Configured aliases now have distinct registered IDs while retaining physical identity; exact-application exclusion and input-mutex qualification remain open.                                                                                                                                                                                                                                                      |
-| Bounded persisted run/status/artifact queries            | Done               | Harness-local read service/client; atomic snapshots, terminal evidence, scoped expiring grants, bounded pages and allowlisted opaque artifact IDs. No management transport.                                                                                                                                                                                                                                        |
-| Workload management/control API                          | Work in progress   | Future management selects only declared workload IDs, not commands/paths/environment; lifecycle/handoff gates still apply.                                                                                                                                                                                                                                                                                         |
-| Automatic service reuse and per-user daemon              | Deferred           | Requires exact identity/config matching and evidence of need. Never adopt an unknown port occupant.                                                                                                                                                                                                                                                                                                                |
+| Capability                                               | State              | Limit or next gate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| App/suite configuration and standalone installed-app use | Done               | Storybook is optional; runtime boundary and standalone-consumer contracts reject React, React Native, and Storybook imports/dependencies. Executable config is trusted operator code, not a sandbox.                                                                                                                                                                                                                                                                                                                                                                |
+| Native service and helper composition                    | Done               | Generic supervisor and supervised Storybook child use the same real `driverService` factory, helper policy, authority and settled close.                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Standalone WDIO/Jasmine execution                        | Done               | WDIO owns its session. Storybook CSF callbacks use a runner-owned session borrowed by a Node worker.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Required services, reporting, structured results         | Done               | One collector; bounded JSON/NDJSON summaries. Service-ready is not app/context-ready.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `serve --agent` descriptor publication                   | Done               | Protects driver routes; no automatic build/launch from MCP. Normal WDIO cannot use the agent-served path yet.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Cleanup failure fence                                    | Done, conservative | Failed or timed-out disposal retains the claim with an exact resource generation and unresolved effect; manual inspection is required. No automatic reclaim.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Complete lifecycle settlement                            | Done, conservative | Guarded work settles before successful close; late acquisitions are disposed; required-service failures stop dependants; owned resources dispose in reverse order.                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Typed generic resource contributions                     | Done               | Static contribution plans validate IDs/dependencies and record readiness, generation, identity, ownership, and settled disposal through public `resources` and `ownership` subpaths.                                                                                                                                                                                                                                                                                                                                                                                |
+| Durable quarantine wiring                                | Done               | Both native service paths use owner-only storage and exact-incarnation probes; restart is not recovery proof. Live endpoint qualification remains separate.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Supervisor crash containment                             | Work in progress   | Cooperative Node service lifelines and correlated service readiness implemented; portable parent/wrapper crash, late-spawn, failed-withdrawal and stalled-child contracts. Live macOS survivors remain unqualified; no automatic reclaim. Windows: the helper's Job Object ends an unpackaged app it launched when the helper dies (qualified with REX); packaged launches are `uncontained` and survive in a fenced claim. Non-detached children are hard-terminated with a crashed owner (observed A/B), so the three crash-disposal contracts are skipped there. |
+| Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| MCP/WDIO handoff                                         | Work in progress   | Must await drain/deletion; attached-app handoff is independent of future supervisor-owned launch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Supervisor-owned app lifetime                            | Work in progress   | Current session-owned launch/externally owned attach semantics remain; never silently retain or terminate another owner's app.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Cross-service/multi-target claims                        | Work in progress   | Configured aliases now have distinct registered IDs while retaining physical identity; exact-application exclusion and input-mutex qualification remain open.                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Bounded persisted run/status/artifact queries            | Done               | Harness-local read service/client; atomic snapshots, terminal evidence, scoped expiring grants, bounded pages and allowlisted opaque artifact IDs. No management transport.                                                                                                                                                                                                                                                                                                                                                                                         |
+| Workload management/control API                          | Work in progress   | Future management selects only declared workload IDs, not commands/paths/environment; lifecycle/handoff gates still apply.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Automatic service reuse and per-user daemon              | Deferred           | Requires exact identity/config matching and evidence of need. Never adopt an unknown port occupant.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 See [lifecycle](lifecycle.md), [commands](commands.md), and
 `@fluentui-react-native/desktop-driver/references/current-status.md` for the
@@ -64,14 +64,14 @@ did not retain a portable raw-report locator; do not imply otherwise.
 
 ## Full-submission checklist
 
-| Area            | Remaining evidence/work                                                                                                                                         |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.         |
-| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C; interactive input/capture rerun; process-tree containment and ownership checks. |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                             |
-| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim.               |
-| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                           |
-| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                         |
+| Area            | Remaining evidence/work                                                                                                                                                                                                            |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                            |
+| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C and the idle `serve --agent` after interrupt; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim. |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                                                                                                |
+| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim.                                                                                  |
+| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                              |
+| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                            |
 
 Tracking: live macOS, Windows, and Win32 requalification
 [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441);
@@ -630,3 +630,115 @@ serially in desktop-test (97 passed, four skipped), desktop-driver
 (813 passed, 72 skipped), desktop-driver-mcp (26 passed), and scripts
 (76 passed). The desktop-test `agent-cli` fixture passed without a live
 smoke workload; no product behavior was changed to suppress that failure.
+
+## Windows application ownership and foreground follow-up - 2026-11-08 UTC
+
+Source: `9d3e11516` (F16, stacked on
+[#4468](https://github.com/microsoft/fluentui-react-native/pull/4468)) plus
+the Windows application-ownership (F10-W,
+[#4447](https://github.com/microsoft/fluentui-react-native/issues/4447)) and
+foreground-diagnosis
+([#4441](https://github.com/microsoft/fluentui-react-native/issues/4441))
+helper changes. Same Windows 11 Enterprise build 26300, AMD64 host; Node
+26.13.0. The console session was **disconnected** (RDP, `LogonUI` in the
+session) for the launch and measurement cases below. Foreground, physical input,
+Windows Graphics Capture, and retention require separate connected-session
+evidence.
+
+**Updated matrix: Windows Fabric 22 Pass, 1 Partial, 1 Fail; Win32 Paper
+22 Pass, 2 Partial.** Launch-capable discovery moves from Partial to Pass on
+both endpoints. Separately registered secondary windows (both), Win32
+fresh-preview fencing, and Windows physical input keep their earlier results;
+they need a connected, unlocked session.
+
+| Case                      | Windows Fabric                                                                                                                                                                                                                  | Win32 Paper                                                                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Launch-capable discovery  | Pass. `desktop_session` status listed `launchModes: ['launch']`; `open` launched the packaged app in 341 ms and `close` ended `ReactApp.exe`. Run `0876d93b-f689-47e5-8379-4c09d95d6cc9`.                                       | Pass. REX FluentTester (`apps/win32`) listed `['launch']`; `open` launched in 625 ms and `close` ended `ReactTest.exe`. Run `101c5916-027d-40cf-a26a-163535df4c03`. |
+| Attach-only refusal       | Unchanged: Storybook targets are always attach-only and advertise only `attach`.                                                                                                                                                | Pass: the Storybook Win32 target refused `launch` before acquiring resources (run `411c5218`).                                                                      |
+| Helper death after launch | Expected `uncontained`: killing the helper left the packaged `ReactApp.exe` running. The claim was fenced (`webdriver` disposal failed, one unresolved effect). The survivor was ended manually after its identity was checked. | Pass, `job-object`: killing the helper ended `ReactTest.exe` within 5 s. The claim was fenced the same way.                                                         |
+| Agent MCP measurements    | Recorded in the adapter's status reference (run `caba9e12-d9da-42a0-8b06-7300940e8318`).                                                                                                                                        | Recorded there (run `5f75aac2-d74c-4969-aba3-bd8c925d5725`).                                                                                                        |
+
+The launch-capable targets are not Storybook targets. Win32 used
+`apps/win32/desktop.config.mts`. Windows used a temporary, uncommitted
+`installed` host naming the registered Storybook package AUMID; the
+committed Storybook targets are attach-only. Each probe used the SDK stdio
+client and the default descriptor. In both crash variants the service exited
+with code 1 and wrote a failed `run.json` naming the helper's unexpected
+exit. Neither the claim nor the settlement journal names the surviving
+uncontained application, because the journal records applications only for
+mutations and quarantines. Recording a launched application as a claim
+resource belongs to F11's retained-application handoff
+([#4448](https://github.com/microsoft/fluentui-react-native/issues/4448)).
+
+**Native contracts.** With `FURN_NATIVE_DRIVER_TEST=1`, `nativeDriver`
+passed. While the session was still connected, `win32Fixture` passed 17 with
+2 skipped, before review fixes. While disconnected, the three new
+containment cases passed, but window capture and the 500-cycle retention
+case failed. The retention case grew from 316 to 1,516 retained elements,
+exactly three per cycle. A control run of the same case on the unchanged
+helper failed identically while disconnected. After reconnection,
+`FURN_NATIVE_DRIVER_TEST=1 yarn test win32Fixture --runInBand` passed all
+11 cases, including capture and retention: retained elements stayed at 20
+from cycle 100 through cycle 500.
+
+**`serve --agent` interrupt.** Interrupting a Storybook `serve --agent` with
+a console Ctrl+C three times (Win32 runs `411c5218` and `5f75aac2`, Windows
+run `caba9e12`) settled every owned
+resource. Metro, the channel, the helper, and the descriptor were gone, and
+the ports were free. The claim then stayed `active` with no unsettled
+resource or unresolved effect, `run.json` stayed `incomplete`, and the CLI
+process stayed idle without exiting. Each time, the exact owner was ended
+only after that proof, and then its stale claim was removed. The physical
+console Ctrl+C case is otherwise out of scope for this pass.
+
+**Reconciled claims.** Every stale or fenced claim in this pass was removed
+by hand only after its owner was proved dead and its resources were proved
+settled, or after the fenced launch probe's survivor was ended. Nothing
+reclaims a claim automatically.
+
+## Connected Windows physical-input follow-up - 2026-11-08 UTC
+
+Source `fec94cec4995c7372b798877c5412ddcb156523b`; Windows 11 Enterprise
+build 26300, AMD64, Node 26.13.0. With the console connected, the following
+separate, non-agent smokes ran from `apps/storybook` with
+`yarn storybook smoke --<endpoint> --mode stories-and-tests --input physical
+--reporter json` and `STORYBOOK_SMOKE_STORY` set to the listed story.
+Each had zero failures, skips, unsupported cases, incomplete work, retries,
+or flaky cases. The totals include navigation work, not just authored tests.
+
+| Endpoint       | Story and authored assertion                                      | Selected / executed / passed | Physical-click receipts | Run ID                                 |
+| -------------- | ----------------------------------------------------------------- | ---------------------------- | ----------------------- | -------------------------------------- |
+| Windows Fabric | `components-checkbox--default`: unchecked -> checked -> unchecked | 203 / 203 / 203              | 2                       | `ef1ed966-3be3-4cc1-b940-ac0afbb02155` |
+| Win32 Paper    | `components-checkbox--default`: unchecked -> checked -> unchecked | 177 / 177 / 177              | 2                       | `54e6a815-21a4-418c-bfda-848e28549ffe` |
+| Windows Fabric | `native-callout--default`: open, light-dismiss, recreate          | 203 / 203 / 203              | 3                       | `1e521138-f529-45a1-974e-74f90edd42ac` |
+| Win32 Paper    | `native-callout--default`: open, light-dismiss, recreate          | 177 / 177 / 177              | 3                       | `44d9dd17-7132-4ebd-8b1e-18fa923ee355` |
+
+Artifacts are `apps/storybook/artifacts/desktop/<run-id>/run.json`. The
+Windows totals contain 202 navigation cases and one authored case; Win32
+contains 176 and one. Popup interaction does not establish F4's separately
+registered Storybook secondary-window identity.
+
+The connected native fixture contract passed 11 tests under the per-user
+claim; its retained-element counts were 20 and 23 at cycles 100 and 500.
+The separate generic fixture probe passed exact secondary-handle switching
+and minimized-capture refusal as described in the driver status reference.
+Windows `doctor --permissions` remains Unsupported.
+
+The real MCP descriptor path independently passed physical checkbox
+transitions and target capture on both endpoints. Standalone agent driver
+runs `af97fdb3-68de-4ce9-836e-935331528c8e` (Windows) and
+`3294d66d-9332-4639-95fe-8d3047f47e46` (Win32) each ended with a
+terminal passed lifecycle report and zero selected tests; the manual MCP
+operations are not suite selections. The first Windows probe exhausted its
+30 safe `bridge-unavailable`/effect-none attempts while the cold Metro bundle
+was still building; the later probe passed after the app connected.
+
+After MCP session close, Windows accepted an exact-app window close. On
+Win32 the window closed but its exact REX process remained; it was stopped
+only after identity verification. Both deliberately stopped Win32 app runs,
+`665e6e85-f0ce-4612-a34d-f140d2bab433` and
+`fc71d8fd-ffa4-464e-96ea-616d88d49e0e`, report failed, not graceful cleanup.
+The standalone drivers were stopped by a session-local injected SIGTERM,
+not physical Ctrl+C. Both owned app/service processes exited, the recorded
+ports were free, and the per-user claim and default descriptor were absent.
+The separate `serve --agent` interrupt limitation above remains open.
