@@ -1,5 +1,13 @@
 # @fluentui-react-native/components
 
+## 0.8.1
+
+### Patch Changes
+
+- da2b62c: Declare every component and primitive story test with `desktopIt`, so each case states the input it needs, the endpoints it runs on, and its known gaps instead of skipping at run time, and remove the internal `requireDesktopFocus` story helper.
+- Updated dependencies [8574d22]
+  - @fluentui-react-native/native-core@0.2.1
+
 ## 0.8.0
 
 ### Minor Changes

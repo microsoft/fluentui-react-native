@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-driver-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Model Context Protocol server that exposes Desktop Driver agent operations to coding agents",
   "license": "MIT",
   "repository": {
