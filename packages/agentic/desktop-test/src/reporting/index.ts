@@ -2,6 +2,8 @@ export { DesktopRunReporter } from './collector.js';
 export type { DesktopReportWriter, DesktopRunReporterOptions, ReportOutput } from './collector.js';
 export { createDesktopReportSession } from './session.js';
 export type { DesktopReportSession } from './session.js';
+export { runDesktopOperation } from './operation.js';
+export type { DesktopOperation, DesktopOperationOptions } from './operation.js';
 export { createEventEmitter, DesktopReportedError, serializeReportError, validateDesktopEvent } from './protocol.js';
 export type {
   DesktopEvent,

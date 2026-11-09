@@ -91,7 +91,12 @@ export class DesktopServiceScope {
     });
     let running: RunningDesktopCommand;
     try {
-      running = this.runner.start({ ...command, category: 'service', context: { ...command.context, service: id } });
+      running = this.runner.start({
+        ...command,
+        label: command.label ?? id,
+        category: 'service',
+        context: { ...command.context, service: id },
+      });
       resource.dispose = () => running.stop({ failed: true });
     } catch (error) {
       resource.record.readiness = 'failed';

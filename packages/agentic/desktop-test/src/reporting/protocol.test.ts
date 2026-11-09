@@ -60,6 +60,12 @@ describe('declared gaps and selection events', () => {
     expect(() => validateDesktopEvent(event('selection', { excluded: { platform: 1, scope: 0, input: 12 } }))).not.toThrow();
   });
 
+  test('accepts a scope end summary, even an empty one, and rejects one that is not text', () => {
+    expect(() => validateDesktopEvent(event('scope-end', { status: 'passed', summary: '30 of 101 story tests executed' }))).not.toThrow();
+    expect(() => validateDesktopEvent(event('scope-end', { status: 'passed', summary: '' }))).not.toThrow();
+    expect(() => validateDesktopEvent(event('scope-end', { status: 'passed', summary: 3 }))).toThrow('summary must be text');
+  });
+
   test('accepts an optional idempotency key and rejects an empty one', () => {
     const excluded = { platform: 1, scope: 0, input: 0 };
     expect(() => validateDesktopEvent(event('selection', { excluded, key: 'wdio-group' }))).not.toThrow();

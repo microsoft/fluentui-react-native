@@ -123,7 +123,7 @@ describe('runDesktopStorybookSmokeTests', () => {
     });
     expect(deleteSession).toHaveBeenCalledTimes(1);
     expect(result.tests).toEqual(planResult().tests);
-    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 1 desktop story tests (1 passed, 0 skipped).');
+    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('1 of 1 story tests executed: 1 passed, 0 failed, 0 skipped');
     expect(JSON.parse(fs.readFileSync(path.join(root, 'artifacts/windows/desktop-driver/run.json'), 'utf8'))).toMatchObject({
       status: 'passed',
       tests: [{ storyId: buttonId }],
@@ -168,7 +168,7 @@ describe('runDesktopStorybookSmokeTests', () => {
     );
     expect(result.tests.map(({ storyId }) => storyId)).toEqual([buttonId, inputId]);
     expect(result.wdio?.map(({ storyId }) => storyId)).toEqual([buttonId, inputId]);
-    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('Ran 4 desktop story tests (4 passed, 0 skipped).');
+    expect(formatDesktopStorybookSmokeTestSummary(result)).toBe('4 of 4 story tests executed: 4 passed, 0 failed, 0 skipped');
   });
 
   test('applies focused smoke selectors to both plans and WDIO while preserving owned sessions', async () => {
@@ -404,14 +404,84 @@ describe('runDesktopStorybookSmokeTests', () => {
     await expect(runDesktopStorybookSmokeTests(options, jest.fn(), runWdio)).rejects.toThrow('only skipped or unsupported');
   });
 
-  test('breaks unsupported down in the summary only when something is unsupported', () => {
+  test('counts what executed against what was selected, and says so when nothing executed', () => {
     const wdio = [{ storyId: buttonId, status: 'passed' as const, durationMs: 1 }];
-    expect(formatDesktopStorybookSmokeTestSummary({ ...planResult(), wdio })).toBe('Ran 2 desktop story tests (2 passed, 0 skipped).');
+    expect(formatDesktopStorybookSmokeTestSummary({ ...planResult(), wdio })).toBe(
+      '2 of 2 story tests executed: 2 passed, 0 failed, 0 skipped',
+    );
     expect(
       formatDesktopStorybookSmokeTestSummary({
         ...planResult(),
         wdio: [...wdio, { storyId: inputId, status: 'unsupported' as const, gap: 'unsupported' as const, durationMs: 0 }],
       }),
-    ).toBe('Ran 3 desktop story tests (2 passed, 0 skipped, 1 unsupported (1 declared, 0 quarantined)).');
+    ).toBe('2 of 3 story tests executed: 2 passed, 0 failed, 0 skipped, 1 unsupported (1 declared, 0 quarantined)');
+    expect(
+      formatDesktopStorybookSmokeTestSummary({
+        ...planResult(),
+        tests: [],
+        wdio: [{ storyId: inputId, status: 'unsupported' as const, gap: 'quarantine' as const, durationMs: 0 }],
+      }),
+    ).toBe('no story tests executed (0 of 1): 0 passed, 0 failed, 0 skipped, 1 unsupported (0 declared, 1 quarantined)');
+  });
+
+  describe('outcome header', () => {
+    const outcomes = (emit: jest.Mock) =>
+      emit.mock.calls.map(([event]) => event).filter(({ kind, payload }) => kind === 'scope-end' && payload.summary !== undefined);
+
+    test('summarizes a passing run with the count of tests that executed', async () => {
+      const { report, emit } = fakeReport(root);
+      options.report = report;
+      const connect: DesktopStorybookSmokeConnector = async () => ({
+        delete: async () => undefined,
+        listStories: async () => manifest,
+        runStoryTests: async () => planResult(),
+      });
+      await runDesktopStorybookSmokeTests(options, connect);
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'passed', summary: '1 of 1 story tests executed: 1 passed, 0 failed, 0 skipped' } },
+      ]);
+    });
+
+    test('summarizes a failing run with the counts the failure left, not only the error', async () => {
+      const { report, emit } = fakeReport(root);
+      options.report = report;
+      options.manifest = { ...manifest, entries: [{ ...story(buttonId, true), tests: undefined }] };
+      const runWdio = jest.fn(async () => {
+        throw new Error('callback failed');
+      });
+      await expect(runDesktopStorybookSmokeTests(options, jest.fn(), runWdio)).rejects.toThrow('callback failed');
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'failed', summary: '1 of 1 story tests executed: 0 passed, 1 failed, 0 skipped' } },
+      ]);
+    });
+
+    test('says how many stories were not run when a failure stops the run early', async () => {
+      const { report, emit } = fakeReport(root);
+      options.report = report;
+      options.manifest = { ...manifest, entries: [buttonId, inputId].map((id) => ({ ...story(id, true), tests: undefined })) };
+      const runWdio = jest.fn(async () => {
+        throw new Error('callback failed');
+      });
+      await expect(runDesktopStorybookSmokeTests(options, jest.fn(), runWdio)).rejects.toThrow('callback failed');
+      expect(outcomes(emit)).toEqual([
+        {
+          kind: 'scope-end',
+          payload: {
+            status: 'failed',
+            summary: '1 of 1 story tests executed: 0 passed, 1 failed, 0 skipped (stopped early; 1 of 2 stories not run)',
+          },
+        },
+      ]);
+    });
+
+    test('names the error when the run fails before any test is counted', async () => {
+      const { report, emit } = fakeReport(root);
+      options.report = report;
+      options.manifest = { ...manifest, entries: [] };
+      await expect(runDesktopStorybookSmokeTests(options, jest.fn())).rejects.toThrow('No desktop story tests');
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'failed', summary: expect.stringContaining('No desktop story tests') } },
+      ]);
+    });
   });
 });

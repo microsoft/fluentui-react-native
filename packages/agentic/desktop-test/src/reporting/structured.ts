@@ -61,6 +61,7 @@ export function projectDesktopEvent(event: CollectedDesktopEvent): DesktopEventR
     case 'scope-end':
       payload.status = event.payload.status;
       if (event.payload.logPath) payload.logPath = clip(event.payload.logPath);
+      if (event.payload.summary) payload.summary = clip(event.payload.summary);
       break;
     case 'service-ready':
       payload.message = clip(event.payload.message);

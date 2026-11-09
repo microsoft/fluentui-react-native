@@ -20,10 +20,16 @@ export function hasExecutedWdioCase(results: readonly Pick<WdioCaseOutcome, 'sta
   return results.some(({ status }) => status === 'passed' || status === 'failed');
 }
 
-/** Counts for a summary line. The unsupported breakdown appears only when something is unsupported, so other summaries are unchanged. */
-export function describeWdioCounts(results: readonly { status: string; gap?: WdioCaseOutcome['gap'] }[]): string {
+type CountedResult = { status: string; gap?: WdioCaseOutcome['gap'] };
+
+// Static plans report several kinds of failure, such as `timed-out`, so a failure is anything that is not one of these.
+const notFailures = new Set(['passed', 'skipped', 'unsupported']);
+
+/** Counts for a summary line. The unsupported breakdown appears only when something is unsupported. */
+export function describeWdioCounts(results: readonly CountedResult[]): string {
   const count = (status: string) => results.filter((result) => result.status === status).length;
-  const parts = [`${count('passed')} passed`, `${count('skipped')} skipped`];
+  const failed = results.filter(({ status }) => !notFailures.has(status)).length;
+  const parts = [`${count('passed')} passed`, `${failed} failed`, `${count('skipped')} skipped`];
   const unsupported = results.filter(({ status }) => status === 'unsupported');
   if (unsupported.length) {
     parts.push(

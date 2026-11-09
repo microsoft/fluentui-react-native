@@ -31,6 +31,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -116,6 +117,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -168,6 +170,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -236,6 +239,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -327,9 +331,14 @@ function createIntegrationManifest(temporaryDirectory: string, storybookPort: nu
 
 describe('PowerShell owned service integration', () => {
   const windowsTest = process.platform === 'win32' ? test : test.skip;
-  windowsTest.each([false, true])(
-    'forwards live grandchild diagnostics and drains services (failure=%s)',
-    async (failService) => {
+  windowsTest.each([
+    { verbose: true, failService: false },
+    { verbose: true, failService: true },
+    { verbose: false, failService: false },
+    { verbose: false, failService: true },
+  ])(
+    'streams grandchild diagnostics live only with verbose, keeps them in the log, and drains services (%j)',
+    async ({ verbose, failService }) => {
       const port = await getAvailablePort();
       const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-powershell-services-'));
       const output: string[] = [];
@@ -342,9 +351,11 @@ describe('PowerShell owned service integration', () => {
       const reporter = new DesktopRunReporter({
         artifactsRoot: temporaryDirectory,
         kind: 'lifecycle',
+        reporterMode: 'plain',
         output: sink,
         errorOutput: sink,
         summary: false,
+        verbose,
       });
       const transport = await startReportTransport(reporter);
       const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
@@ -384,17 +395,19 @@ describe('PowerShell owned service integration', () => {
         completed = true;
       });
       try {
-        await deadline(
-          (async () => {
-            while (!output.join('').includes('live PowerShell grandchild diagnostic')) {
-              if (completed) throw new Error(output.join(''));
-              await new Promise((resolve) => setTimeout(resolve, 50));
-            }
-          })(),
-          15_000,
-          'PowerShell diagnostic',
-        );
-        expect(completed).toBe(false);
+        if (verbose) {
+          await deadline(
+            (async () => {
+              while (!output.join('').includes('live PowerShell grandchild diagnostic')) {
+                if (completed) throw new Error(output.join(''));
+                await new Promise((resolve) => setTimeout(resolve, 50));
+              }
+            })(),
+            15_000,
+            'PowerShell diagnostic',
+          );
+          expect(completed).toBe(false);
+        }
         expect(await running.completed).toBe(failService ? 1 : 0);
       } finally {
         try {
@@ -403,7 +416,10 @@ describe('PowerShell owned service integration', () => {
           await transport.close();
           const result = await reporter.finish();
           expect(result.status).toBe(failService ? 'failed' : 'passed');
-          if (failService) expect(output.join('')).toContain('original nested service failure');
+          const text = output.join('');
+          if (failService) expect(text).toContain('original nested service failure');
+          // Without verbose the diagnostic stays in the log, so only a failed command shows it.
+          expect(text.includes('live PowerShell grandchild diagnostic')).toBe(verbose || failService);
           const pid: number = JSON.parse(fs.readFileSync(marker, 'utf8'));
           expect(() => process.kill(pid, 0)).toThrow();
         } finally {

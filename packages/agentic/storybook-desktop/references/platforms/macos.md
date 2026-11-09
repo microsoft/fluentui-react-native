@@ -14,8 +14,9 @@ project.
 Run the application bundle before `prep` when CocoaPods must embed a JavaScript
 bundle or other resource. CocoaPods includes only resources present during
 `pod install`. Use `yarn storybook prep --macos`, `bundle --macos`,
-`build --macos`, and `smoke --macos`; use `--verbose` to capture actionable
-native diagnostics. Do not patch generated Pod sources or workspace files.
+`build --macos`, and `smoke --macos`. A failed step prints the end of its log and
+the log's path; use `--verbose` to stream native diagnostics live instead. Do
+not patch generated Pod sources or workspace files.
 
 Storybook app diagnostics and native permissions are documented in the
 consumer's agent entry point and the repository permissions reference. Only
