@@ -21,6 +21,8 @@ import { discoverAssessments, unconfiguredControls } from '../ci/assessment/asse
 import type { AssessmentDefinition } from '../ci/assessment/assessmentConfig.ts';
 import { combineCiEvidence, git } from '../ci/assessment/controlAssessmentCi.ts';
 import { formatAssessmentDocument } from '../ci/assessment/assessmentMarkdown.ts';
+import { discoverReadinessControls } from '../ci/assessment/readinessModel.ts';
+import { runReadinessAssessment } from '../ci/readinessCiTask.ts';
 
 function sameFile(first: string, second: string): boolean {
   if (path.relative(first, second) === '') return true;
@@ -34,9 +36,9 @@ export class AssessControlCommand extends Command {
   static override paths = [['assess-components'], ['assess-control']];
 
   static override usage = Command.Usage({
-    description: 'Assess configured package components from existing native and JavaScript unit evidence',
+    description: 'Assess component and primitive requirements, platform evidence, and provisional readiness',
     details:
-      'Discovers package-owned assessment mappings and reads existing reports. --run-unit-tests explicitly runs configured runtime tests locally; CI only combines existing evidence. Unconfigured controls are listed, never treated as passes. No maturity stage is assigned. See @fluentui-react-native/components/references/assessments/README.md.',
+      'Discovers package-owned SPEC and CONTRACT files and retains uncovered requirements. Default assessment reads saved evidence without running tests. Evidence-supported maturity is provisional and separate from owner approval. Explicit legacy replay options retain schema-v2 compatibility. See @fluentui-react-native/components/references/assessments/README.md.',
     examples: [
       [
         'Assess an existing native report',
@@ -45,9 +47,9 @@ export class AssessControlCommand extends Command {
     ],
   });
 
-  component = Option.String('--component', { description: 'Select one configured component; otherwise assess all configured controls' });
+  component = Option.String('--component', { description: 'Select one component or primitive; otherwise assess the complete inventory' });
   packageDirectory = Option.String('--package', { description: 'Owning package directory; defaults to the current package' });
-  list = Option.Boolean('--list', false, { description: 'List configured and unconfigured package controls without assessing them' });
+  list = Option.Boolean('--list', false, { description: 'List contracts and mapping review status without assessing execution evidence' });
   ci = Option.Boolean('--ci', false, { description: 'Combine existing CI evidence without running tests or editing tracked files' });
   evidence = Option.String('--evidence', {
     description: 'Canonical desktop-test run.json with its Storybook companion, or a historical WDIO/smoke report',
@@ -64,19 +66,84 @@ export class AssessControlCommand extends Command {
   buildId = Option.String('--build-id', { description: 'Expected test build ID; required to accept bound evidence' });
   targetId = Option.String('--target-id', { description: 'Expected native target instance; required for bound desktop-test evidence' });
   maxAgeHours = Option.String('--max-age-hours', { description: 'Explicit positive evidence-age limit; no default readiness policy' });
-  output = Option.String('--output', { description: 'Report directory; defaults to apps/storybook/artifacts/win32/assessment' });
+  output = Option.String('--output', {
+    description: 'Ignored report directory; full-inventory default is apps/storybook/artifacts/readiness/report',
+  });
+  evidenceDirectories = Option.Array('--evidence-directory', {
+    description: 'Read execution receipts or authenticated reviewed observations from this directory; repeatable',
+  });
   updateSpec = Option.Boolean('--update-spec', false, {
     description: 'Also write the generated SPEC assessment snapshot and local report',
   });
 
   async execute() {
-    const root = git(process.cwd(), ['rev-parse', '--show-toplevel']);
+    const root = realpathSync.native(git(process.cwd(), ['rev-parse', '--show-toplevel']));
     const packageRoot =
       this.packageDirectory === undefined
         ? this.path[0] === 'assess-components'
-          ? process.cwd()
+          ? realpathSync.native(process.cwd())
           : undefined
-        : path.resolve(this.packageDirectory);
+        : realpathSync.native(path.resolve(this.packageDirectory));
+    const ci = this.ci || process.env.FURN_ASSESSMENT_CI === 'true';
+    const readinessPackageRoot = packageRoot && path.relative(root, packageRoot) !== '' ? packageRoot : undefined;
+    const legacyReplay =
+      this.evidence !== undefined ||
+      this.contextFile !== undefined ||
+      this.unitEvidence !== undefined ||
+      this.unitContextFile !== undefined ||
+      this.unitBuildId !== undefined ||
+      this.buildId !== undefined ||
+      this.targetId !== undefined ||
+      this.maxAgeHours !== undefined ||
+      this.runUnitTests ||
+      this.updateSpec;
+    if (this.evidenceDirectories !== undefined && (legacyReplay || this.path[0] === 'assess-control'))
+      throw new Error('--evidence-directory belongs to full-inventory assess-components, not legacy replay.');
+    const readiness = this.path[0] === 'assess-components' && !legacyReplay ? discoverReadinessControls(root, readinessPackageRoot) : [];
+    if (readiness.length) {
+      const selected = readiness.filter(({ component }) => this.component === undefined || component === this.component);
+      if (!selected.length || (this.component !== undefined && selected.length !== 1))
+        throw new Error('Expected one unambiguous contract for the requested component and package.');
+      if (this.list) {
+        this.context.stdout.write(
+          `${JSON.stringify(
+            selected.map(({ id, component, kind, contractPath, contractDigest, reviewDigest, mappingDigest, mapping, mappingCurrent }) => ({
+              id,
+              component,
+              kind,
+              contractPath,
+              contractDigest,
+              reviewDigest,
+              mappingDigest,
+              mappingStatus: mapping === null ? 'missing' : mappingCurrent ? 'current' : 'stale',
+            })),
+            null,
+            2,
+          )}\n`,
+        );
+        return 0;
+      }
+      if (ci && (this.output !== undefined || this.evidenceDirectories !== undefined))
+        throw new Error('CI assessment consumes only captured same-attempt evidence and writes ignored report artifacts.');
+      if (ci) {
+        for (const definition of discoverAssessments(root, readinessPackageRoot))
+          if (this.component === undefined || definition.component === this.component)
+            combineCiEvidence(root, process.env, new Date(), definition);
+      }
+      const ciEvidenceDirectory = path.join(root, 'apps', 'storybook', 'artifacts', 'readiness', 'evidence');
+      const hasCiEvidence = ci && existsSync(ciEvidenceDirectory);
+      if (ci && !hasCiEvidence)
+        this.context.stdout.write('Readiness evidence artifacts are missing; the report will retain missing evidence, not passes.\n');
+      const result = await runReadinessAssessment(root, {
+        packageRoot: readinessPackageRoot,
+        component: this.component,
+        evidenceDirectories: ci ? (hasCiEvidence ? [ciEvidenceDirectory] : []) : this.evidenceDirectories,
+        outputDirectory: this.output ? path.resolve(this.output) : path.join(root, 'apps', 'storybook', 'artifacts', 'readiness', 'report'),
+        ci,
+      });
+      this.context.stdout.write(`${result.markdown}\n`);
+      return result.exitCode;
+    }
     const configured = discoverAssessments(root, packageRoot);
     const definitions = configured.filter((definition) => this.component === undefined || definition.component === this.component);
     if (!definitions.length) throw new Error('No approved assessment mapping is configured for the requested component/package.');

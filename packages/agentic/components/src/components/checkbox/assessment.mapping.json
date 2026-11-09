@@ -14,7 +14,7 @@
       "checkbox.stories.tsx"
     ],
     "assertionFiles": ["src/common/desktopFocus.wdio.ts"],
-    "reviewedDigest": "d6ffc5ba256c3461b801f8446fde1308ac6001c249778f67d9f72dca32ecc3f0",
+    "reviewedDigest": "04b3edc402a745ba85bfa9790529ec8efc3a40c18ccb5f40a728c110d0ca2cba",
     "mappingVersion": "checkbox-win32-matrix-v2",
     "nativeCheck": {
       "storyId": "components-checkbox--default",
@@ -877,7 +877,7 @@
       "scripts/src/ci/assessment/controlAssessmentUnitExecution.ts"
     ],
     "platform": "macos",
-    "reviewedDigest": "32892707182052798c9cb0d09b8060966e9b216550ff940aa154ac4b0ccd2089",
+    "reviewedDigest": "b5d8267f6fe05361db2f7137728f26661cf9d32ca7050b3090b84369a92e634a",
     "mappingVersion": "checkbox-jest-macos-mock-matrix-v2",
     "environment": "React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch",
     "excludedCases": [

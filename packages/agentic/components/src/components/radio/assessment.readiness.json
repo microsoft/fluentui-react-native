@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "74364b5c9de8e6a40612d68458029d98cc52ce596127195c519eecc73eb4b799",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "RAD-001": {
+      "checks": [
+        {
+          "id": "radio-defaults",
+          "description": "Default Label, no visible Description, enabled/unselected/checked=false/selected=false and focusable true.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Radio renders the default label and accessibility state" }]
+        },
+        {
+          "id": "radio-root-types",
+          "description": "Only root slot/native Pressable props/ref are public; caller children/extra content slots rejected, root style remains final.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "RAD-002": {
+      "checks": [
+        {
+          "id": "radio-fixed-anatomy",
+          "description": "Optional FocusRing then16px indicator/10px dot then label container; showSecondaryText alone controls supporting text; unselected dot stays mounted at opacity0.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "radio-secondary-hint",
+          "description": "Visible supporting text is rendered and becomes default hint beside supplied label.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Radio shows secondary text and uses it as accessibility hint when visible" }]
+        }
+      ]
+    },
+    "RAD-003": {
+      "checks": [
+        {
+          "id": "radio-controlled",
+          "description": "Synthetic press reports once without selecting itself.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Radio renders selection without changing it on press" }]
+        },
+        {
+          "id": "radio-owned-selection",
+          "description": "Owner true/false rerenders drive checked and selected; conflicting ARIA checked/selected cannot override; native Select declarations dedupe and preserve caller labels/actions.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "radio-native-select",
+          "description": "Real UIA SelectionItem Select and other qualified endpoint actions forward original event once without press synthesis or local selection; disabled route refuses activation.",
+          "source": "spec/accessibility.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "RAD-004": {
+      "checks": [
+        {
+          "id": "radio-selected-tokens",
+          "description": "Selected true exposes checked/selected and maps indicator brand border, opaque brand dot and primary label foreground.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Radio resolves selected colors and exposes checked accessibility state" }]
+        },
+        {
+          "id": "radio-precedence-matrix",
+          "description": "Selected/unselected crossed disabled/hover/pressed resolves documented border/dot/label/secondary colors; disabled overrides interaction and pressed wins hover; radii/margins/gaps/body typography match bindings.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "radio-style-last",
+          "description": "Caller root background overrides component and constrained label keeps shrink behavior.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Radio applies user styles last and allows constrained labels to shrink" }]
+        },
+        {
+          "id": "radio-native-layout",
+          "description": "Review native indicator/dot alignment, constrained wrapping and scaling with optional description and both selection states.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "RAD-005": {
+      "checks": [
+        {
+          "id": "radio-hidden-descendants",
+          "description": "Indicator and label container explicitly hide decorative descendants from platform accessibility.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Radio explicitly hides decorative descendants from accessibility" }]
+        },
+        {
+          "id": "radio-accessibility-state",
+          "description": "Accessible radio root uses label/default hint unless caller overrides, retains unrelated caller state, owns disabled/checked/selected; disabled is unfocusable and cannot activate.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "radio-native-focus",
+          "description": "Native Pressable pointer/keyboard activation and confirmed root ref focus work, disabled skips Tab; system rings Windows/macOS versus persistent keyboard-modality Win32 custom ring obey shared policy/lifetime.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "radio-screen-reader",
+          "description": "Narrator/VoiceOver announces one named radio with availability and owned selection, not decorative descendants; group name/peer navigation remain owner responsibilities.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Public-contract paragraph says descendants rely on root grouping, but platform section and resolved divergence require explicit hiding; mapping follows the resolved requirement.",
+    "UIA radio uses SelectionItem rather than Toggle; checked prop alone does not establish native Select transport.",
+    "No group navigation, cross-endpoint action projection or screen-reader qualification is inferred from standalone unit tests."
+  ]
+}

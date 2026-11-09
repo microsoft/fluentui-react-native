@@ -1,12 +1,19 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { randomUUID } from 'node:crypto';
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { afterEach, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import { assessControl, formatAssessmentMarkdown, parseNativeReport, readControlContract, reportDigest } from './controlAssessment.ts';
+import {
+  assessControl,
+  formatAssessmentMarkdown,
+  object,
+  parseNativeReport,
+  readControlContract,
+  reportDigest,
+} from './controlAssessment.ts';
 import type { AssessmentOptions } from './controlAssessment.ts';
 import {
   assessmentDefinition,
@@ -25,6 +32,11 @@ import { parseUnitContext } from './controlAssessmentUnit.ts';
 import { runUnitTests, runJestWithUnitCapture } from './controlAssessmentUnitExecution.ts';
 import { parseAssessmentDefinition, readPackageAssessments, unitCaptureDirectory } from './assessmentConfig.ts';
 import { readUnitMappingFrom as readConfiguredMapping } from './controlAssessmentUnit.ts';
+import { inputDigest } from './controlAssessmentCi.ts';
+import { assessUnitCollection, parseUnitCollection, sourceState } from './readinessEvidence.ts';
+import type { EvidenceEnvironment } from './readinessEvidence.ts';
+import { discoverReadinessControls } from './readinessModel.ts';
+import { collectReadinessUnits } from '../readinessCiTask.ts';
 
 const root = fileURLToPath(new URL('../../../../', import.meta.url));
 const read = (file: string) => readFileSync(path.join(root, file), 'utf8');
@@ -631,7 +643,8 @@ describe('unit execution capture', () => {
   });
 
   function fixture(mode = 'passed') {
-    const directory = mkdtempSync(path.join(tmpdir(), 'furn-unit-capture-'));
+    const directory = path.join(root, 'reports', `furn-unit-capture-${randomUUID()}`);
+    mkdirSync(directory, { recursive: true });
     directories.push(directory);
     const put = (file: string, content: string) => {
       mkdirSync(path.dirname(path.join(directory, file)), { recursive: true });
@@ -673,6 +686,13 @@ if (data.fixtureMode === 'changed') fs.writeFileSync('source.ts', 'changed\\n');
 if (data.fixtureMode === 'failed') process.exitCode = 1;
 `,
     );
+    const definition = readPackageAssessments(directory, path.join(directory, assessmentDefinition.packagePath))[0];
+    const metadata = object(JSON.parse(readFileSync(path.join(directory, assessmentMappingPath), 'utf8')), 'Fixture mapping');
+    object(metadata.unit, 'Fixture unit inputs').reviewedDigest = readConfiguredMapping(
+      (file) => readFileSync(path.join(directory, file), 'utf8'),
+      definition,
+    ).digest;
+    put(assessmentMappingPath, JSON.stringify(metadata));
     const git = (...args: string[]) => execFileSync('git', args, { cwd: directory, encoding: 'utf8' }).trim();
     git('init', '-q');
     git('config', 'user.name', 'Fixture');
@@ -683,6 +703,242 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
     git('commit', '-qm', 'Synthetic unit capture inputs');
     return { directory, output: path.join(directory, 'apps', 'storybook', 'artifacts', 'unit') };
   }
+
+  function ciFixture() {
+    const f = fixture();
+    const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: f.directory, encoding: 'utf8' }).trim();
+    const identity = {
+      repository: 'fixture/repo',
+      pullRequest: 1,
+      headRepository: 'fixture/repo',
+      headRef: 'fixture',
+      headCommit: 'd'.repeat(40),
+      baseCommit: 'e'.repeat(40),
+      testedCommit: commit,
+      runId: '123',
+      runAttempt: 2,
+      inputDigest: inputDigest(f.directory, commit),
+    };
+    const buildId = 'fixture/repo/actions/runs/123/attempts/2';
+    const start = { schemaVersion: 1, identity, buildId, startedAt: new Date().toISOString() };
+    mkdirSync(f.output, { recursive: true });
+    writeFileSync(path.join(f.output, 'unit-collection-start.json'), JSON.stringify(start));
+    const env = {
+      FURN_ASSESSMENT_UNIT_CAPTURE: f.output,
+      GITHUB_ACTIONS: 'true',
+      GITHUB_REPOSITORY: identity.repository,
+      GITHUB_SHA: commit,
+      GITHUB_RUN_ID: '123',
+      GITHUB_RUN_ATTEMPT: '2',
+      GITHUB_JOB: 'javascript',
+      GITHUB_WORKFLOW_REF: 'fixture/repo/.github/workflows/pr.yml@refs/pull/1/merge',
+    };
+    return { ...f, identity, buildId, start, env };
+  }
+
+  async function localFixture() {
+    const f = fixture();
+    const packageRoot = path.join(f.directory, assessmentDefinition.packagePath);
+    let calls = 0;
+    let originalStartPath = '';
+    const code = await runJestWithUnitCapture(
+      packageRoot,
+      assessmentDefinition.unit.platform,
+      [],
+      async (args) => {
+        calls++;
+        const start = object(JSON.parse(readFileSync(path.join(f.output, 'unit-collection-start.json'), 'utf8')), 'Local collection start');
+        assert.equal(start.scope, 'local');
+        assert.equal(start.identity, null);
+        assert.match(String(start.buildId), /^local-unit\//);
+        const reportPath = args[args.indexOf('--outputFile') + 1];
+        originalStartPath = path.join(path.dirname(reportPath), 'execution-start.json');
+        const original = object(JSON.parse(readFileSync(originalStartPath, 'utf8')), 'Local invocation start');
+        assert.equal(original.executionIdentity, null);
+        assert.equal(original.scope, 'local');
+        const report = checkboxJestFixture();
+        const time = Date.now();
+        report.startTime = time;
+        Object.assign(report.testResults[0], { startTime: time, endTime: time });
+        writeFileSync(reportPath, JSON.stringify(report));
+        return 0;
+      },
+      { FURN_ASSESSMENT_UNIT_CAPTURE: f.output },
+    );
+    assert.equal(code, 0);
+    assert.equal(calls, 1);
+    const destination = path.join(f.directory, 'apps', 'storybook', 'artifacts', 'readiness', 'local');
+    assert.equal(collectReadinessUnits(f.directory, f.output, destination), 0);
+    const collected = parseUnitCollection(JSON.parse(readFileSync(path.join(destination, 'unit-0', 'unit-collection.json'), 'utf8')));
+    assert.equal(collected.executionStart, readFileSync(originalStartPath, 'utf8'));
+    const environment: EvidenceEnvironment = {
+      source: sourceState(f.directory),
+      identity: null,
+      now: new Date(),
+      ci: false,
+      sourceJobs: new Map(),
+    };
+    return { ...f, destination, originalStartPath, collected, environment, controls: discoverReadinessControls(f.directory, packageRoot) };
+  }
+
+  it('captures one genuine local invocation without GitHub identity and never promotes it to CI proof', async () => {
+    const f = await localFixture();
+    const evidence = assessUnitCollection(f.directory, f.controls, f.collected, f.environment);
+    assert.ok(evidence.observations.length > 0);
+    assert.ok(
+      evidence.observations.every(({ outcome, scope }) => outcome === 'passed' && scope === 'local'),
+      evidence.limitations.join('\n'),
+    );
+    assert.ok(evidence.limitations.some((reason) => reason.includes('no GitHub job')));
+    const ci = assessUnitCollection(f.directory, f.controls, f.collected, { ...f.environment, ci: true });
+    assert.ok(ci.observations.every(({ outcome, scope }) => outcome !== 'passed' && scope === 'local'));
+    assert.ok(ci.limitations.some((reason) => reason.includes('not same-attempt CI proof')));
+  });
+
+  it('rejects tampered original local start bytes and prevents stale or missing local receipts from qualifying', async () => {
+    const f = await localFixture();
+    const capture = object(JSON.parse(f.collected.capture), 'Local capture');
+    const start = object(JSON.parse(f.collected.collectionStart), 'Local collection');
+    const stale = new Date(Date.now() - 169 * 3_600_000).toISOString();
+    const collectionStart = JSON.stringify({ ...start, startedAt: stale });
+    const collectionStartSha256 = reportDigest(collectionStart);
+    const executionStart = JSON.stringify({
+      ...object(JSON.parse(f.collected.executionStart!), 'Original invocation'),
+      collectionStartSha256,
+    });
+    const executionStartSha256 = reportDigest(executionStart);
+    const expired = assessUnitCollection(
+      f.directory,
+      f.controls,
+      {
+        ...f.collected,
+        collectionStart,
+        executionStart,
+        execution: JSON.stringify({
+          ...object(JSON.parse(f.collected.execution), 'Original execution'),
+          collectionStartSha256,
+          executionStartSha256,
+        }),
+        capture: JSON.stringify({ ...capture, collectionStartedAt: stale, collectionStartSha256, executionStartSha256 }),
+      },
+      f.environment,
+    );
+    assert.ok(expired.observations.every(({ outcome }) => outcome !== 'passed'));
+    assert.ok(expired.limitations.some((reason) => reason.includes('stale')));
+    const missing = assessUnitCollection(f.directory, f.controls, { ...f.collected, executionStart: undefined }, f.environment);
+    assert.ok(missing.observations.every(({ outcome }) => outcome !== 'passed'));
+    writeFileSync(f.originalStartPath, `${readFileSync(f.originalStartPath, 'utf8')}\n`);
+    assert.throws(() => collectReadinessUnits(f.directory, f.output, f.destination), /ORIGINAL invocation start bytes/);
+  });
+
+  it('records the original CI receipt before the one runner and qualifies its collected runtime suites', async () => {
+    const f = ciFixture();
+    const packageRoot = path.join(f.directory, assessmentDefinition.packagePath);
+    const expected = {
+      repository: f.identity.repository,
+      workflow: f.env.GITHUB_WORKFLOW_REF,
+      runId: '123',
+      runAttempt: 2,
+      job: 'javascript',
+      buildId: f.buildId,
+      sourceCommit: f.identity.testedCommit,
+      inputDigest: f.identity.inputDigest,
+    };
+    let calls = 0;
+    const args = ['--runInBand'];
+    const code = await runJestWithUnitCapture(
+      packageRoot,
+      assessmentDefinition.unit.platform,
+      args,
+      async (forwarded) => {
+        calls++;
+        assert.deepEqual(forwarded.slice(0, args.length), args);
+        const reportPath = forwarded[forwarded.indexOf('--outputFile') + 1];
+        const originalStart = object(
+          JSON.parse(readFileSync(path.join(path.dirname(reportPath), 'execution-start.json'), 'utf8')),
+          'Original pre-execution receipt',
+        );
+        assert.deepEqual(originalStart.executionIdentity, expected);
+        const report = checkboxJestFixture();
+        const time = Date.now();
+        report.startTime = time;
+        Object.assign(report.testResults[0], { startTime: time, endTime: time });
+        writeFileSync(reportPath, JSON.stringify(report));
+        f.env.GITHUB_JOB = 'changed-after-start';
+        f.env.GITHUB_RUN_ATTEMPT = '99';
+        return 0;
+      },
+      f.env,
+    );
+    assert.equal(code, 0);
+    assert.equal(calls, 1);
+    const definition = readPackageAssessments(f.directory, packageRoot)[0];
+    const captured = object(
+      JSON.parse(readFileSync(path.join(unitCaptureDirectory(f.output, definition), 'unit-execution.json'), 'utf8')),
+      'Completed capture',
+    );
+    assert.deepEqual(captured.executionIdentity, expected);
+    assert.equal(object(captured.context, 'Legacy unit context').schemaVersion, 1);
+    const destination = path.join(f.directory, 'apps', 'storybook', 'artifacts', 'readiness', 'unit');
+    assert.equal(collectReadinessUnits(f.directory, f.output, destination), 0);
+    const collected = parseUnitCollection(JSON.parse(readFileSync(path.join(destination, 'unit-0', 'unit-collection.json'), 'utf8')));
+    const controls = discoverReadinessControls(f.directory, packageRoot);
+    const evidence = assessUnitCollection(f.directory, controls, collected, {
+      source: sourceState(f.directory),
+      now: new Date(),
+      ci: true,
+      identity: { ...expected, job: 'assessment' },
+      sourceJobs: new Map([['javascript', 'success']]),
+    });
+    assert.ok(evidence.observations.length > 0);
+    assert.ok(
+      evidence.observations.every(({ outcome }) => outcome === 'passed'),
+      evidence.limitations.join('\n'),
+    );
+    const failed = assessUnitCollection(f.directory, controls, collected, {
+      source: sourceState(f.directory),
+      now: new Date(),
+      ci: true,
+      identity: { ...expected, job: 'assessment' },
+      sourceJobs: new Map([['javascript', 'failure']]),
+    });
+    assert.ok(failed.observations.every(({ outcome }) => outcome !== 'passed'));
+  });
+
+  it('rejects mismatched original CI run, attempt, checkout and global inputs before invoking Jest', async () => {
+    const f = ciFixture();
+    let calls = 0;
+    const run = async () => {
+      calls++;
+      return 0;
+    };
+    for (const change of [
+      { GITHUB_RUN_ID: '999' },
+      { GITHUB_RUN_ATTEMPT: '3' },
+      { GITHUB_SHA: 'f'.repeat(40) },
+      { GITHUB_REPOSITORY: 'other/repo' },
+    ]) {
+      await assert.rejects(
+        runJestWithUnitCapture(path.join(f.directory, assessmentDefinition.packagePath), assessmentDefinition.unit.platform, [], run, {
+          ...f.env,
+          ...change,
+        }),
+        /pre-execution/,
+      );
+    }
+    writeFileSync(
+      path.join(f.output, 'unit-collection-start.json'),
+      JSON.stringify({
+        ...f.start,
+        identity: { ...f.identity, inputDigest: 'f'.repeat(64) },
+      }),
+    );
+    await assert.rejects(
+      runJestWithUnitCapture(path.join(f.directory, assessmentDefinition.packagePath), assessmentDefinition.unit.platform, [], run, f.env),
+      /pre-execution/,
+    );
+    assert.equal(calls, 0);
+  });
 
   it('discovers a second control from package data and binds both to one unchanged Jest invocation', async () => {
     const f = fixture();

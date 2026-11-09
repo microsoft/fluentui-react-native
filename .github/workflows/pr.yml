@@ -107,7 +107,7 @@ jobs:
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1c99dd2947a77097bf937701e3dcc90aa109d17e # 5.4.15
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: yarn
@@ -122,9 +122,29 @@ jobs:
       # Keep the existing build and tests; capture their component Jest results for the
       # assessor rather than launching a second unit-test run.
       - name: Build CI
+        id: build-ci
         env:
           FURN_ASSESSMENT_UNIT_CAPTURE: ${{ github.workspace }}/apps/storybook/artifacts/assessment-unit-ci
         run: yarn lage buildci
+
+      - name: Collect existing runtime evidence for the full control inventory
+        if: ${{ always() && !cancelled() }}
+        env:
+          UNIT_OUTCOME: ${{ steps.build-ci.outcome }}
+        run: node scripts/src/ci/readinessCiTask.ts collect-unit --input apps/storybook/artifacts/assessment-unit-ci --output apps/storybook/artifacts/readiness/unit
+
+      - name: Capture actual component compiler execution
+        if: ${{ !cancelled() && steps.build-ci.outcome == 'success' }}
+        run: node scripts/src/ci/readinessCiTask.ts run --kind type --output apps/storybook/artifacts/readiness/type -- node .yarn/releases/yarn-4.18.0.cjs workspace @fluentui-react-native/components build --force
+
+      - name: Upload runtime and compiler readiness evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-js-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness
+          if-no-files-found: warn
+          retention-days: 14
 
       # Save captured evidence after failures too, unless cancelled. Attempt-scoped
       # names keep reruns separate; missing files warn, but do not count as passing tests.
@@ -294,12 +314,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1c99dd2947a77097bf937701e3dcc90aa109d17e # 5.4.15
         with:
           platform: macos
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: yarn
@@ -325,10 +347,19 @@ jobs:
         working-directory: apps/storybook
 
       - name: Run through storybook smoke tests
-        run: yarn storybook smoke --macos --mode stories-and-tests
+        run: node ../../scripts/src/ci/readinessCiTask.ts run --kind native --target macos-fabric --input all --report-root artifacts/desktop --output artifacts/readiness/macos-fabric -- node ../../.yarn/releases/yarn-4.18.0.cjs storybook smoke --macos --mode stories-and-tests
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
+
+      - name: Upload macOS Fabric readiness evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-macos-fabric-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload macOS Storybook artifacts
         if: ${{ always() }}
@@ -349,12 +380,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1c99dd2947a77097bf937701e3dcc90aa109d17e # 5.4.15
         with:
           platform: macos
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: yarn
@@ -378,10 +411,19 @@ jobs:
         working-directory: apps/storybook
 
       - name: Run through Paper storybook smoke tests
-        run: yarn storybook smoke --macos --paper --mode stories-and-tests
+        run: node ../../scripts/src/ci/readinessCiTask.ts run --kind native --target macos-paper --input all --report-root artifacts/desktop --output artifacts/readiness/macos-paper -- node ../../.yarn/releases/yarn-4.18.0.cjs storybook smoke --macos --paper --mode stories-and-tests
         working-directory: apps/storybook
         env:
           CCACHE_DISABLE: 1
+
+      - name: Upload macOS Paper readiness evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-macos-paper-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload macOS Paper Storybook artifacts
         if: ${{ always() }}
@@ -520,13 +562,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 5
+          fetch-depth: 0
 
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1c99dd2947a77097bf937701e3dcc90aa109d17e # 5.4.15
         with:
           platform: windows
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: yarn
@@ -562,8 +604,17 @@ jobs:
           }
 
       - name: Smoke test Windows Storybook
-        run: yarn storybook smoke --windows --mode stories-and-tests --input accessible
+        run: node ../../scripts/src/ci/readinessCiTask.ts run --kind native --target windows-fabric --input accessible --report-root artifacts/desktop --output artifacts/readiness/windows-fabric-accessible -- node ../../.yarn/releases/yarn-4.18.0.cjs storybook smoke --windows --mode stories-and-tests --input accessible
         working-directory: apps/storybook
+
+      - name: Upload Windows Fabric readiness evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-windows-fabric-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload Windows Storybook artifacts
         if: ${{ always() }}
@@ -676,8 +727,17 @@ jobs:
       - name: Smoke test Win32 Storybook
         id: smoke
         if: ${{ !cancelled() && steps.assessment-inputs.outcome == 'success' }}
-        run: yarn storybook smoke --win32 --mode stories-and-tests --input accessible
+        run: node ../../scripts/src/ci/readinessCiTask.ts run --kind native --target win32-paper --input accessible --report-root artifacts/desktop --output artifacts/readiness/win32-paper-accessible -- node ../../.yarn/releases/yarn-4.18.0.cjs storybook smoke --win32 --mode stories-and-tests --input accessible
         working-directory: apps/storybook
+
+      - name: Upload Win32 accessible readiness evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-win32-accessible-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness
+          if-no-files-found: warn
+          retention-days: 14
 
       # Collect available reports and the smoke outcome even after a failure, unless cancelled.
       - name: Collect configured component native evidence
@@ -719,12 +779,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
       - name: Set up toolchain
         uses: microsoft/react-native-test-app/.github/actions/setup-toolchain@1c99dd2947a77097bf937701e3dcc90aa109d17e # 5.4.15
         with:
           platform: windows
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: yarn
@@ -739,8 +801,17 @@ jobs:
           platform: win32
 
       - name: Smoke test Win32 Storybook
-        run: yarn storybook smoke --win32 --mode stories-and-tests --input physical
+        run: node ../../scripts/src/ci/readinessCiTask.ts run --kind native --target win32-paper --input physical --report-root artifacts/desktop --output artifacts/readiness/win32-paper-physical -- node ../../.yarn/releases/yarn-4.18.0.cjs storybook smoke --win32 --mode stories-and-tests --input physical
         working-directory: apps/storybook
+
+      - name: Upload Win32 physical readiness evidence
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-win32-physical-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload Win32 Storybook artifacts
         if: ${{ always() }}
@@ -757,10 +828,10 @@ jobs:
 
   # Wait for the evidence jobs, but still assess what is available if they failed.
   # Skip cancellations, invalid assessment inputs and verified report-only follow-ups.
-  # This advisory job reads existing results; it does not rerun tests or assign a stage.
+  # This advisory job reads existing results; provisional ceilings are not owner approvals.
   control-assessment:
     name: Assess component evidence
-    needs: [assessment-inputs, js, win32-storybook]
+    needs: [assessment-inputs, js, win32-storybook, win32-storybook-physical, windows-storybook, macos-storybook, macos-paper-storybook]
     if: ${{ always() && !cancelled() && needs.assessment-inputs.result == 'success' && needs.assessment-inputs.outputs.report-only != 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -797,6 +868,13 @@ jobs:
           name: component-unit-evidence-${{ github.run_attempt }}
           path: apps/storybook/artifacts/assessment-unit-ci
 
+      - name: Download this attempt's cross-platform readiness evidence
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: component-readiness-*-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness/evidence
+          merge-multiple: true
+
       # Combine the saved results and both jobs' outcomes into coverage and gap findings.
       # The readable report goes into the job summary; this does not rerun component tests.
       - name: Assess existing results without rerunning tests
@@ -804,6 +882,7 @@ jobs:
           UNIT_OUTCOME: ${{ needs.js.result }}
           NATIVE_OUTCOME: ${{ needs.win32-storybook.result }}
           FURN_ASSESSMENT_CI: 'true'
+          READINESS_JOB_OUTCOMES: ${{ toJSON(needs) }}
         run: node .yarn/releases/yarn-4.18.0.cjs lage assess-components
 
       # Keep per-control reports for 14 days, even after failures unless cancelled.
@@ -814,6 +893,15 @@ jobs:
         with:
           name: component-assessments-${{ github.run_attempt }}
           path: apps/storybook/artifacts/win32/assessment-ci
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload full-inventory readiness reports
+        if: ${{ always() && !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: component-readiness-report-${{ github.run_attempt }}
+          path: apps/storybook/artifacts/readiness/report
           if-no-files-found: error
           retention-days: 14
 

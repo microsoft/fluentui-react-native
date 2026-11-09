@@ -114,8 +114,8 @@ export function reportDigest(content: string): string {
 
 export function win32StorybookTargetId(root: string): string {
   // Mirror desktop-test's target identity protocol without loading PR configuration in the trusted publisher.
-  const appRoot = realpathSync(path.join(root, 'apps', 'storybook'));
-  return `win32-${reportDigest(`${appRoot}\0win32\0paper`).slice(0, 16)}`;
+  const configPath = realpathSync(path.join(root, 'apps', 'storybook', 'desktop.config.mts'));
+  return `win32-${reportDigest(`${configPath}\0win32`).slice(0, 16)}`;
 }
 
 function isWin32StorybookTarget(value: string): boolean {
@@ -251,13 +251,16 @@ export function parseNativeReport(value: unknown): NativeReport {
 }
 
 const desktopStatuses = ['passed', 'failed', 'skipped', 'unsupported', 'cancelled', 'not-run', 'incomplete'] as const;
-const smokeArtifact = 'evidence/win32/static/run.json';
+
+function storybookArtifacts(run: Record<string, unknown>): string[] {
+  if (!Array.isArray(run.artifacts)) throw new Error('Desktop supervisor report has no artifact inventory.');
+  return run.artifacts
+    .map((value) => text(object(value, 'Desktop artifact').path, 'Artifact path').replaceAll('\\', '/'))
+    .filter((file) => /^evidence\/(?:win32|windows|macos)\/static\/run\.json$/.test(file));
+}
 
 export function hasStorybookArtifact(run: Record<string, unknown>): boolean {
-  if (!Array.isArray(run.artifacts)) throw new Error('Desktop supervisor report has no artifact inventory.');
-  return run.artifacts.some(
-    (value) => text(object(value, 'Desktop artifact').path, 'Artifact path').replaceAll('\\', '/') === smokeArtifact,
-  );
+  return storybookArtifacts(run).length > 0;
 }
 
 /** Keep the canonical supervisor result and its Storybook assertions together, including their exact bytes. */
@@ -266,7 +269,9 @@ export function readNativeEvidence(file: string): string {
   const data = object(JSON.parse(content), 'Native evidence');
   if (data.kind !== 'tests' && data.kind !== 'lifecycle') return content;
   const root = realpathSync(path.dirname(file));
-  const companion = realpathSync(path.join(root, ...smokeArtifact.split('/')));
+  const artifacts = storybookArtifacts(data);
+  if (artifacts.length !== 1) throw new Error('Native evidence requires exactly one declared Storybook companion.');
+  const companion = realpathSync(path.join(root, ...artifacts[0].split('/')));
   const relative = path.relative(root, companion);
   if (relative.startsWith('..') || path.isAbsolute(relative)) throw new Error('Storybook evidence must remain inside its desktop run.');
   return JSON.stringify({ schemaVersion: 1, format: 'desktop-test', desktopRun: content, storyReport: readFileSync(companion, 'utf8') });
@@ -284,14 +289,13 @@ function parseDesktopEvidence(data: Record<string, unknown>): NativeReport {
   if (!Array.isArray(run.tests) || !Array.isArray(run.work) || !Array.isArray(run.failures) || !Array.isArray(run.artifacts)) {
     throw new Error('Desktop run requires tests, work, failures and artifacts arrays.');
   }
-  const artifactMatches = run.artifacts.filter(
-    (value) => text(object(value, 'Desktop artifact').path, 'Artifact path').replaceAll('\\', '/') === smokeArtifact,
-  );
-  if (artifactMatches.length !== 1) throw new Error('Desktop run must declare exactly one Win32 Storybook smoke artifact.');
   const storyData = object(JSON.parse(text(data.storyReport, 'Storybook report bytes')), 'Storybook smoke evidence');
   if (!('manifest' in storyData) || storyData.format === 'desktop-test') throw new Error('Expected a Storybook smoke companion.');
   const report = parseNativeReport(storyData);
-  if (report.format !== 'storybook-smoke' || report.endpoint !== 'win32') throw new Error('Expected Win32 Storybook smoke evidence.');
+  if (report.format !== 'storybook-smoke') throw new Error('Expected Storybook smoke evidence.');
+  const artifacts = storybookArtifacts(run);
+  if (artifacts.length !== 1 || artifacts[0] !== `evidence/${report.endpoint}/static/run.json`)
+    throw new Error('Desktop run must declare exactly one matching endpoint Storybook smoke artifact.');
   if (Date.parse(report.startedAt!) < Date.parse(startedAt) || Date.parse(report.finishedAt!) > Date.parse(finishedAt)) {
     throw new Error('Storybook evidence is outside its enclosing desktop execution.');
   }

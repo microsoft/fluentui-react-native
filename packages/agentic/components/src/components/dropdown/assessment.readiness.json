@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "3ac250f8dfb55d84f23f7658b561a329f9736496390fcb371bb5c908f997772b",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "DRP-001": {
+      "checks": [
+        {
+          "id": "dropdown-default-scene",
+          "description": "Collapsed named combobox defaults to empty value/placeholder with no list surface and forwards structural root ref.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            { "kind": "unit", "name": "Dropdown renders an inaccessible root around a collapsed combobox trigger showing the placeholder" }
+          ]
+        },
+        {
+          "id": "dropdown-defaults-props",
+          "description": "Default outline/medium/enabled/no error/single/empty selection/closed; structural root holds trigger and zero-space popup host, owns root ref/style last.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-prop-lifting",
+          "description": "All documented naming/identity/interaction props lift to trigger, direct trigger values win except root state merges over trigger before owned expanded/disabled; unnamed trigger warns.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-public-types",
+          "description": "Required children, readonly selection arrays, typed change reasons and ordinary root/trigger/listbox refs compile; listbox ref is null closed.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-002": {
+      "checks": [
+        {
+          "id": "dropdown-chrome",
+          "description": "Both variants and three sizes inherit Input metrics; disabled > error > focused > pressed > hovered > rest, actual focus or presented list keeps focused chrome.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-focus-indicator",
+          "description": "Input's outline dual-ring/underline inset shows only with keyboard modality, preserves error boundary and suppresses competing native ring while popup owns focus.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-003": {
+      "checks": [
+        {
+          "id": "dropdown-chevron",
+          "description": "Chevron follows value and measures 16/20/24; closed down versus actual presented up, disabled color wins over error/focus primary, otherwise secondary.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-004": {
+      "checks": [
+        {
+          "id": "dropdown-label-summary",
+          "description": "Display matched selected labels in option order joined by commas; unknown values stay selected but hidden; empty matches use placeholder color; single line tail truncation.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-overflow-count",
+          "description": "Multiple mode measures available width and switches to localized formatSelectedCount of displayed options only when labels do not fit; updates while open/closed and on resize.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-005": {
+      "checks": [
+        {
+          "id": "dropdown-option-discovery",
+          "description": "Direct/Fragment string-valued children discover labels by content string, content children, accessibilityLabel, then value; headers excluded; missing/duplicate values warn and first duplicate wins.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-selection-single",
+          "description": "Single mode commits enabled option, notifies once only if changed, closes with select even when controlled and unchanged; extra selected values warn and first matching value counts.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-selection-multiple",
+          "description": "Multiple mode toggles without closing; controlled display awaits owner, default seeds once, caller changes do not notify; callback includes changed value and exact next array.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-native-selection",
+          "description": "Physical pointer/Enter/Space commit/toggle exactly once and disabled options refuse; accessible selection actions are qualified separately.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-006": {
+      "checks": [
+        {
+          "id": "dropdown-presence-latch",
+          "description": "Controlled/uncontrolled open and close reconcile native dismiss latch: staying true cannot reopen until false/true or trigger open; trigger press while open closes without reopening.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-disabled-presence",
+          "description": "Disabled never presents even open=true; disabling presented popup closes; closed options leave native accessibility tree and tab order.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-007": {
+      "checks": [
+        {
+          "id": "dropdown-open-inputs",
+          "description": "Press/Enter/Space/Down/Up/Expand request open with trigger reason; caller open does not notify and uses Enter entry; readiness precedes confirmed native focus.",
+          "source": "spec/interaction.md#closed",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "dropdown-entry-focus",
+          "description": "Single picks enabled selected; multiple picks most-recent still-selected enabled then first enabled selected; otherwise first enabled (last for Up), or list surface if none.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-008": {
+      "checks": [
+        {
+          "id": "dropdown-navigation",
+          "description": "Down/Up skip disabled and stop at ends, Home/End reach enabled extremes, keyboard activates focused option; no typeahead/filter behavior is added.",
+          "source": "spec/interaction.md#open",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "dropdown-hover-focus",
+          "description": "Hover focuses enabled option only while list owns focus; disabled never focuses or activates.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-009": {
+      "checks": [
+        {
+          "id": "dropdown-focus-return",
+          "description": "Single commit/Escape/Shift+Tab/caller close while list focused return trigger; Escape retains multiple toggles; Tab continues after trigger except Win32 returns trigger.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "dropdown-dismiss-destinations",
+          "description": "Outside pointer returns trigger unless another control gained focus; second Dropdown can open; app deactivation/anchor loss close without focus movement.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-010": {
+      "checks": [
+        {
+          "id": "dropdown-surface-tokens",
+          "description": "List resolves nearer fill/subtle thin border/base400 radius/base100 padding and gap; listbox style overrides last; native elevation rather than token shadow.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-placement",
+          "description": "Below/start/gap placement flips, RTL mirrors and clamps; width is at least trigger and widest option, options cap at 320 with focused item scrolling into view.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "dropdown-renderer-visual",
+          "description": "Review all sizes/variants, popup clipping, overflow, chevrons and focus indicators; Win32 host owns fill/radius and ignores gap; macOS never reserves horizontal scroller and vertical only on overflow.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-011": {
+      "checks": [
+        {
+          "id": "dropdown-a11y-structure",
+          "description": "Combobox exposes actual expanded/disabled and full selected-label value even with count summary; list role/name defaults/multiselectable/required=false and option position/count exclude headers.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-selection-actions",
+          "description": "Single Select commits/closes, Add commits only if empty, Remove refuses; multiple Select replaces/Add adds/Remove removes and stays open; disabled refuses; platform case names, apply-before-caller event once and no press synthesis.",
+          "source": "spec/accessibility.md#options",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "dropdown-expand-collapse",
+          "description": "Actual ExpandCollapse transport opens/closes with trigger reason; Win32 explicitly declared patterns operate independently of physical pointer results.",
+          "source": "spec/accessibility.md#trigger",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "dropdown-screen-reader",
+          "description": "Narrator/VoiceOver qualifies trigger/list/options names, full values, expanded/selected/position and focus return; no fabricated invalid/has-popup/active-descendant projection.",
+          "source": "spec/accessibility.md#qualification",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "DRP-012": {
+      "checks": [
+        {
+          "id": "dropdown-host-routing",
+          "description": "macOS Paper/Fabric and Windows Fabric use modern Callout/FocusZone, Win32 adapters own popup; unsupported hosts throw descriptive error.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "dropdown-all-endpoints",
+          "description": "Qualify real popup readiness, focus/navigation, selection and dismissal separately on all four endpoints before public export.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Native command mocks in unit tests cannot establish native focus, accessibility dispatch or popup continuation.",
+    "Win32 ignores popup gap and returns trigger on Tab (R1); these are local platform adaptations, not cross-platform continuation proof.",
+    "Native story execution and assistive-technology qualification claims in prose are not treated as current evidence records.",
+    "Label reference support is Windows/Win32-specific; error is visual-only and no unsupported native relationship is invented."
+  ]
+}

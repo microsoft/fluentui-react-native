@@ -85,6 +85,14 @@ export function parseUnitContext(value: unknown): UnitContext {
 }
 
 export function parseComponentJest(content: string, definition: AssessmentDefinition) {
+  return parseJestFiles(
+    content,
+    definition.unit.testFiles.map((file) => `${definition.packagePath}/${file}`),
+  );
+}
+
+export function parseJestFiles(content: string, testFiles: readonly string[]) {
+  if (!testFiles.length) throw new Error('Unit assessment requires an explicit runtime-suite selection.');
   if (Buffer.byteLength(content) > 1_000_000) throw new Error('Unit report exceeds its size limit.');
   const data = object(JSON.parse(content), 'Jest report');
   if (typeof data.success !== 'boolean' || typeof data.wasInterrupted !== 'boolean') throw new Error('Invalid Jest execution flags.');
@@ -92,8 +100,7 @@ export function parseComponentJest(content: string, definition: AssessmentDefini
   const startTime = count(data.startTime, 'Jest start time');
   const parsed = data.testResults.map((value) => parseJestSuite(value, startTime));
   if (new Set(parsed.map(({ name }) => name)).size !== parsed.length) throw new Error('Duplicate Jest suite identity.');
-  const selected = definition.unit.testFiles.map((file) => {
-    const expected = `${definition.packagePath}/${file}`;
+  const selected = testFiles.map((expected) => {
     const matches = parsed.filter(({ name }) => name === expected || name.endsWith(`/${expected}`));
     if (matches.length !== 1)
       throw new Error('Unit report must contain each configured runtime suite exactly once; type tests cannot substitute.');

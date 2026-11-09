@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "4ed395c31ba55e62a7140a751e530ff0ea27fbdb78ef4f550b23fe2e5f4f4efb",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "SWCH-001": {
+      "checks": [
+        {
+          "id": "switch-defaults",
+          "description": "Default unchecked/enabled/Label/horizontal with both label flags true; checked presence including false controls value and overrides defaultChecked, while uncontrolled default seeds once.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "switch-types",
+          "description": "Boolean state, three layouts, root/track/thumb/label slots and ordinary native root ref compile without indeterminate/error/group axes.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-002": {
+      "checks": [
+        {
+          "id": "switch-controlled-order",
+          "description": "Controlled true ignores default false; repeated press requests false then forwards onPress, once each, without internal mutation.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Switch SWCH-001 SWCH-002 ignores defaultChecked while controlled and reports change before forwarding each press"
+            }
+          ]
+        },
+        {
+          "id": "switch-uncontrolled",
+          "description": "Uncontrolled false press becomes true and calls onChange.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Switch toggles on press and calls onChange" }]
+        },
+        {
+          "id": "switch-native-exact-once",
+          "description": "Physical pointer/Enter/Space toggle exactly once with key-up Windows/Win32 and key-down macOS; repeated/stale/overlapping keys and blur/disable do not double-toggle; label presses do not toggle.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "switch-semantic-action",
+          "description": "Actual resolved Toggle action toggles before original caller event once, no onPress; controlled waits for owner, disabled/custom/activate only forward without toggle; declarations normalize/dedupe preserving first label/order.",
+          "source": "spec/accessibility.md#accessibility-actions",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-003": {
+      "checks": [
+        {
+          "id": "switch-layout-order",
+          "description": "switch renders only hit area; horizontal before/root/after per both flag axes; vertical above/root; null label slots disappear, defaults copy label; root contains ring then track/thumb.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "switch-custom-slots",
+          "description": "Track/thumb/label replacements preserve native props and unreplaceable container remains structural; user style applies hit area, not container.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-004": {
+      "checks": [
+        {
+          "id": "switch-color-precedence",
+          "description": "Checked chooses family then disabled/pressed/hovered precedence refines track border/fill and thumb; both colors and position derive same progress value, labels dim when disabled.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "switch-root-metrics",
+          "description": "Horizontal/vertical gaps/padding, hit minimum36x56/padding8, track40x20/thin border, circular radii and label bodyMedium typography match bindings with user style final.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-005": {
+      "checks": [
+        {
+          "id": "switch-focus-policy",
+          "description": "Only hit-area root owns self-focus and ref; Windows/macOS system ring versus Win32 persistent custom dual-ring uses root radius, focus/keyboard gating, disabled suppression and shared detach/disable lifetime.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "switch-ring-visual",
+          "description": "Review system/custom ring geometry and pointer/keyboard same-target visibility without treating modality counters as pixels.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-006": {
+      "checks": [
+        {
+          "id": "switch-a11y-default",
+          "description": "Labeled enabled switch publishes checked=false/disabled=false, focusable true and no generated unresolved labelled-by aliases.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Switch renders a labeled switch with default unchecked semantics" }]
+        },
+        {
+          "id": "switch-owned-state-name",
+          "description": "Caller state merges beneath checked/disabled and Windows checked prop; explicit label/reference wins, otherwise label text fallback survives all layout/slot omissions; default placeholder without visible label warns; track/thumb/labels decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "switch-screen-reader",
+          "description": "Narrator/VoiceOver announces one switch with setting name, availability and on/off changes including actual custom action invocation; disabled remains discoverable.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-007": {
+      "checks": [
+        {
+          "id": "switch-travel-formula",
+          "description": "Travel equals trackWidth minus two border widths minus two inset offsets minus14px thumb; both endpoints stay inside track including nondefault theme stroke widths.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "switch-native-endpoints",
+          "description": "Review native on/off thumb endpoints, no clipping and track/thumb contrast at scale on every renderer.",
+          "source": "spec/interaction.md#state-transition",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "SWCH-008": {
+      "checks": [
+        {
+          "id": "switch-animation-policy",
+          "description": "First mount snaps checked endpoint; subsequent checked changes animate one progress value150ms ease-in-out with JS driver; reduced-motion on snaps, controlled ignored request never moves.",
+          "source": "spec/interaction.md#state-transition",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "switch-native-transition",
+          "description": "Actual thumb and colors transition together in both directions and remain motionless on first mount/OS reduced motion, including preference changes mid-transition.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "SWCH-002 and accessibility companion retain older explicit/key-up wording; resolved keyboard-activation-path and interaction contract specify one shared path with platform-specific phase.",
+    "Synthetic key/action events cannot establish actual native dispatch or exact activation phase.",
+    "No native motion, UIA/AX action execution, ring pixels or screen-reader review record is linked."
+  ]
+}

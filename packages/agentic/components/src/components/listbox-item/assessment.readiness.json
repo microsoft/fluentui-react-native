@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "c68190f6b043b466624821dee2058f63392663c95817c939a44e6dcd42acaf36",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LBI-001": {
+      "checks": [
+        {
+          "id": "listbox-item-defaults",
+          "description": "Default listItem, all state booleans false, secondary right, Listbox item content and default icons/secondary; sectionHeader excludes icon/secondary defaults.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-types",
+          "description": "Public root/content/secondary/icon/selectedIcon/avatar slots, optional string value, both variants and secondary positions compile with ordinary native root ref.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "LBI-002": {
+      "checks": [
+        {
+          "id": "listbox-item-order",
+          "description": "Option orders FocusRing, layout leading avatar/active icon, stable primary, secondary, chevron/checkmark/checkbox; absent slots omitted, selectedIcon replaces regular with fallback.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-loading-header",
+          "description": "Loading sectionHeader exposes nonfocusable header with skeletons instead of label, no button or checked state.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "ListboxItem renders a section header and loading skeleton state" }]
+        },
+        {
+          "id": "listbox-item-custom-slots",
+          "description": "Custom public slots retain children/props; nonloading header renders content without interactive affordances.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LBI-003": {
+      "checks": [
+        {
+          "id": "listbox-item-controlled",
+          "description": "Standalone press forwards once without changing owner selection; owner rerenders are authoritative for true/false and disabled selection.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-multiple",
+          "description": "Selected multiselect suppresses fill and semibold reservation while showing checkbox visual with regular label weight.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "ListboxItem suppresses selected styling for multiselect rows and shows a checkbox visual" }]
+        },
+        {
+          "id": "listbox-item-checkmark",
+          "description": "checkmark appears only for checkmark=true and selected=true; single selection has soft fill/semibold reserve, multiple mode keeps independent indicator state.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LBI-004": {
+      "checks": [
+        {
+          "id": "listbox-item-token-states",
+          "description": "Disabled then pressed then hovered resolve documented root/label/secondary/indicator colors, 40 minHeight/base300 radius, spacing, 20 icon/16 check/32 avatar and final caller style.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-native-focus",
+          "description": "Enabled native pointer/Enter/Space activation, disabled rejection, self-focus/ref lifetime, system rings on Windows/macOS and persistent keyboard-modality custom ring on Win32 retain shared policy.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-rendered-geometry",
+          "description": "Review right/under secondary text, stable label width, loading placeholders and native focus-ring appearance without inferring pixels from props.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "LBI-005": {
+      "checks": [
+        {
+          "id": "listbox-item-owned-aliases",
+          "description": "Standalone owned role/checked/disabled override contradictory native/ARIA caller aliases while busy survives.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListboxItem LBI-005 owns checked, disabled and role over caller state and ARIA aliases without losing busy"
+            }
+          ]
+        },
+        {
+          "id": "listbox-item-action-forwarding",
+          "description": "Standalone Toggle declaration preserves caller labels/custom actions; synthetic original action reaches owner unchanged without press or selection mutation.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListboxItem LBI-005 declares the native toggle action and forwards the original owner event without synthesizing a press"
+            }
+          ]
+        },
+        {
+          "id": "listbox-item-native-toggle",
+          "description": "Windows native checked projection and actual Win32 accessibility Toggle route emit one owner event/no press/no state change; disabled public route rejects without callbacks.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-a11y-variants",
+          "description": "Standalone button owns checked not pressed, header is nonfocusable header without option state; icons/avatar/trailing indicators remain decorative; supplied naming is honored.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-screen-reader",
+          "description": "Review UIA/AX role/name/disabled and Windows checked announcements; report macOS unsupported AXButton checked read rather than defaulting false.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "LBI-006": {
+      "checks": [
+        {
+          "id": "listbox-item-option-registration",
+          "description": "Only in-list string value binds/registers native focus target with cleanup; standalone or missing value stays unchanged and no Dropdown/native-core import is introduced.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-option-owned-state",
+          "description": "Bound item exposes listitem selected/disabled/position/count, owner overrides selected/checkmark/multiselect and conflicting aliases; single gets check, multiple checkbox.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-option-content",
+          "description": "Missing content uses accessibilityLabel then value; icon/selectedIcon/secondary render only if supplied, unlike standalone defaults.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-option-events",
+          "description": "Focus/hover/key/press run caller handlers before list handlers; handled keys declared; accessibility action is applied by list before original event reaches caller exactly once.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "listbox-item-option-native-actions",
+          "description": "Real Select/AddToSelection/RemoveFromSelection use lowercase Windows Fabric and title case elsewhere; list selection/navigation/dismissal outcomes and disabled refusals follow Dropdown contract.",
+          "source": "spec/accessibility.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "macOS Toggle is custom rather than AXPress and checked read for retained AXButton is unsupported.",
+    "Bound-option integration is distinct from standalone Toggle behavior; no standalone test is linked as proof of SelectionItem actions.",
+    "Unit accessibilityAction fireEvent does not establish native accessibility transport or disabled dispatch."
+  ]
+}

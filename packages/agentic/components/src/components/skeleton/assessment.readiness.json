@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "c412b33647e4acbfa2c0dc1530530bc37963e986edfa80c31ad2a77a697de165",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "SKEL-001": {
+      "checks": [
+        {
+          "id": "skeleton-public-props",
+          "description": "Broad ViewProps/ref forward, children and invented variants rejected, no intrinsic size; caller width/height/radius/style override component.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "skeleton-style-last",
+          "description": "Caller root background overrides resolved background.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Skeleton uses the user style after the component style" }]
+        },
+        {
+          "id": "skeleton-owned-hidden",
+          "description": "Caller accessible/hidden/importantForAccessibility cannot expose owned hidden root/descendants.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Skeleton SKEL-001 retains owned hidden accessibility props even when caller root props request exposure"
+            }
+          ]
+        },
+        {
+          "id": "skeleton-pointer-override",
+          "description": "Explicit pointerEvents override is retained rather than replaced by default none.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Skeleton preserves an explicit pointer-events override" }]
+        }
+      ]
+    },
+    "SKEL-002": {
+      "checks": [
+        {
+          "id": "skeleton-overlay-gate",
+          "description": "Root has exactly one skeleton-shimmer SVG overlay only when sweep eligible, none before positive layout/reduced motion/opaque color; overlay always pointer-transparent.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-native-inert",
+          "description": "Default root does not intercept native pointer input, add Tab stop or announce loading; region owns busy announcement and mount lifecycle.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "SKEL-003": {
+      "checks": [
+        {
+          "id": "skeleton-layout-order",
+          "description": "Caller onLayout receives original event before rectangle recorded; handler does not disable internal measurement; only positive width AND height starts sweep and resize recomputes geometry.",
+          "source": "spec/interaction.md#measurement",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-shared-timeline",
+          "description": "Late-mounted instances share phase, resizing does not allocate new clock and last active subscriber stops/resets shared loop.",
+          "source": "spec/interaction.md#sweep",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "SKEL-004": {
+      "checks": [
+        {
+          "id": "skeleton-token-bindings",
+          "description": "Soft neutral base/base100 radius, subtle neutral highlight, relative clipped root and final user style; opaque highlight uses loud neutral thin outline and static native View rather than invented RGB or moving solid strip.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-platform-color-warning",
+          "description": "Opaque PlatformColor/high-contrast cannot form SVG gradient: omit sweep, retain token silhouette/outline and issue development warning.",
+          "source": "SPEC.md#gradient-compatibility",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-static-visible",
+          "description": "Review static silhouette on subtle surfaces and high-contrast palette with user rounded/circular shapes on every renderer.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "SKEL-005": {
+      "checks": [
+        {
+          "id": "skeleton-motion-toggle",
+          "description": "Mock reduced-motion on removes running overlay/stops animation while soft base remains; off restarts sweep.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Skeleton SKEL-005 removes a running sweep when reduced motion changes and resumes after it is disabled"
+            }
+          ]
+        },
+        {
+          "id": "skeleton-os-reduced-motion",
+          "description": "Actual OS reduced-motion on/unknown never animates, on resets clock/unmounts overlay, off restarts without substitute animation; lifecycle unsubscribes safely.",
+          "source": "spec/interaction.md#motion-and-lifecycle",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "SKEL-006": {
+      "checks": [
+        {
+          "id": "skeleton-gradient-geometry",
+          "description": "Band width max(round(width*.45),24), viewport band+height, user-space x/y preserve45deg across thin/wide/tall/circle shapes; transparent/.64/transparent stops and per-instance gradient IDs avoid collisions.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-sweep-ends",
+          "description": "1700ms linear shared loop translates from negative viewportWidth to rootWidth (reversed RTL), fully clearing both clipped edges; macOS Fabric JS driver, other renderers native driver.",
+          "source": "spec/interaction.md#sweep",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-native-wave",
+          "description": "Repeated native captures establish actual soft diagonal motion, RTL direction, edge clearance, synchronized phases and no solid strip, including macOS Fabric.",
+          "source": "SPEC.md#gradient-compatibility",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Accessibility companion says never focusable while SPEC/interaction explicitly forward caller focusable; default inertness is assessed and forwarded opt-in remains a recorded divergence.",
+    "SPEC mentions per-instance animation clock but resolved instance-timeline/shared-channel prose governs synchronized phase.",
+    "Animation mocks and SVG props do not establish visible motion; native screenshots and OS-preference execution remain missing."
+  ]
+}

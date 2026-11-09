@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "95c0cd868734c472ee39e22705086d287af36924abd3be70aae01f8a748cefda",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "TAB-001": {
+      "checks": [
+        {
+          "id": "tab-public-types",
+          "description": "controls required; selected/disabled false and layout iconAndText defaults; iconOnly requires icon plus accessibilityLabel and rejects content; value defaults controls, ordinary native root ref compiles.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "tab-runtime-defaults",
+          "description": "Default content Tab, unselected enabled anatomy; runtime malformed unnamed iconOnly warns unless supported reference names it.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-002": {
+      "checks": [
+        {
+          "id": "tab-standalone-selection",
+          "description": "Standalone press invokes caller once without changing selected=false.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Tab renders selection without changing it on press" }]
+        },
+        {
+          "id": "tab-context",
+          "description": "Grouped selection/focusability/set-position and set-size come from TabList context.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Tab takes selection, disabled state, and set metadata from TabList context" }]
+        },
+        {
+          "id": "tab-group-events",
+          "description": "Group press requests selection before preserving caller press; accessibility Select requests same owner then forwards original event once without onPress, disabled/custom/activate do not select.",
+          "source": "spec/accessibility.md#accessibility-actions",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-native-select",
+          "description": "Invoke native UIA SelectionItem.Select or AX declared Select and assert selection/callback counts separately from physical clicks and default AXPress.",
+          "source": "spec/accessibility.md#accessibility-actions",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-003": {
+      "checks": [
+        {
+          "id": "tab-slot-order",
+          "description": "Root orders optional FocusRing, active icon then content; selectedIcon only replaces regular when selected and supplied, otherwise regular persists; iconOnly forces text absent.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-slot-replacements",
+          "description": "Supplied icon/content props and custom renderers retain forwarding, decorative icons stay inaccessible in both layouts.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-004": {
+      "checks": [
+        {
+          "id": "tab-label-reservation",
+          "description": "Semibold invisible inaccessible duplicate reserves width at every selection state with absolute centered visible overlay; visible regular/selected semibold changes only foreground/weight.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-native-no-reflow",
+          "description": "Native selection toggles do not resize tab or move neighbors, including constrained wrapping and scaled fonts.",
+          "source": "spec/interaction.md#selection-appearance",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-005": {
+      "checks": [
+        {
+          "id": "tab-state-colors",
+          "description": "Selected family then disabled/pressed/hovered precedence resolves background and common foreground for active icon/visible/hidden labels, with selected disabled still selected-looking.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-typography-style",
+          "description": "Functional bodyMedium typography/regular or semibold, centered shrinkable content and final caller root style apply without animated selection transition.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-006": {
+      "checks": [
+        {
+          "id": "tab-layout-metrics",
+          "description": "iconAndText uses base300 radius/base100 gap/base300xbase150 padding; iconOnly circular equal base150 padding; both use fixed20px icon and layout metrics never vary by interaction.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-native-visual",
+          "description": "Review icon/text alignment, iconOnly square target, typography and native ring appearance across selected/disabled/hover/pressed on each renderer.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-007": {
+      "checks": [
+        {
+          "id": "tab-a11y-props",
+          "description": "Accessible tab owns selected/disabled over caller state, preserves busy, forwards controls relationship and name, disabled stays readable but unfocusable; hidden reserve/icons never announce twice.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-native-tab-order",
+          "description": "Standalone enabled receives native Tab/Shift+Tab, disabled skipped; grouped exactly one entry and disabled skip respect TabList; no duplicate Enter/Space activation.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "tab-screen-reader",
+          "description": "UIA/AX announces tab name/selected/disabled and controlled panel, including iconOnly names and set metadata; owner supplies existing distinct panel IDs.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "TAB-008": {
+      "checks": [
+        {
+          "id": "tab-ref-composition",
+          "description": "Consumer ordinary root ref receives a nonnull instance when rendered inside TabList.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Tab composes its ref prop with the internal TabList focus ref" }]
+        },
+        {
+          "id": "tab-ref-independent-registration",
+          "description": "Consumer ref presence/replacement/clearing does not disrupt internal group registration or later focus requests; detach clears both owners.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tab-native-focus-policy",
+          "description": "System ring Windows/macOS versus persistent Win32 dual ring uses active-layout radius, self-focus/keyboard modality, disabled suppression, nested roots and pending-request invalidation on detach/disable.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Native controls relationship and default AXPress are not established by forwarded props or custom Select invocation.",
+    "Shared control delegates grouped navigation to TabList; standalone selection test is not group-focus evidence.",
+    "No native measured no-reflow, ring pixels or screen-reader execution record is linked."
+  ]
+}

@@ -177,6 +177,27 @@ describe('Checkbox advisory assessment', () => {
       assert.equal(parseNativeReport(JSON.parse(content)).format, 'desktop-test');
     });
 
+    for (const endpoint of ['windows', 'macos']) {
+      it(`loads ${endpoint} supervisor evidence without borrowing the Win32 companion`, () => {
+        const directory = fixture();
+        const story = JSON.stringify({ ...aggregate, endpoint, targetId: `${endpoint}-test-target`, wdio: [nativeCase] });
+        const { canonical } = desktopEvidenceFixture(story, { artifacts: [{ path: `evidence/${endpoint}/static/run.json` }] });
+        const companion = path.join(directory, 'evidence', endpoint, 'static');
+        mkdirSync(companion, { recursive: true });
+        writeFileSync(path.join(directory, 'run.json'), canonical);
+        writeFileSync(path.join(companion, 'run.json'), story);
+        const content = readNativeEvidence(path.join(directory, 'run.json'));
+        const parsed = parseNativeReport(JSON.parse(content));
+        assert.equal(parsed.endpoint, endpoint);
+        assert.equal(parsed.cases[0].status, 'passed');
+        const wrong = JSON.parse(content);
+        const supervisor = JSON.parse(wrong.desktopRun);
+        supervisor.artifacts = [{ path: 'evidence/win32/static/run.json' }];
+        wrong.desktopRun = JSON.stringify(supervisor);
+        assert.throws(() => parseNativeReport(wrong), /matching endpoint/);
+      });
+    }
+
     it('rejects a missing companion instead of silently accepting supervisor success', () => {
       const directory = fixture();
       writeFileSync(path.join(directory, 'run.json'), desktopEvidenceFixture(smoke).canonical);

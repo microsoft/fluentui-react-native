@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "51fcfe2383e78a047f7e828d1ee91fb421331452fe0c64346bf7c6359950d610",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "CRD-001": {
+      "checks": [
+        {
+          "id": "card-axes",
+          "description": "Defaults small/default padding/default layout/vertical/enabled; two sizes, two paddings, three layouts and two directions retain valid public types.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "card-interactive-presence",
+          "description": "onPress or presence of selected (including false) enables overlay; absent both remains static; disabled does not remove structure.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "card-responsive",
+          "description": "Horizontal direction resolves vertical below 480 window layout units, remains horizontal at/above 480 and refreshes on resize; vertical stays vertical.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "CRD-002": {
+      "checks": [
+        {
+          "id": "card-layout-order",
+          "description": "Overlay comes first when interactive; default renders content, nested content/content02, structured header/content/optional content02/footer; omitted slots do not render.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "card-slot-contract",
+          "description": "Required root/content and optional View slots accept custom content without injected typography/schema and preserve supplied props.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "CRD-003": {
+      "checks": [
+        {
+          "id": "card-token-matrix",
+          "description": "Small/large radii, thin border, 720 maxWidth, default/none padding, section gaps and nested inset radii match tokens; selection then disabled then pressed/hover determine colors and caller root style is final.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "card-selected-feedback",
+          "description": "Selected overlay reports selected and resolves selected rest/hover/pressed surface colors; system focus request remains on overlay.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Card renders selected colors and hover, press, and focus feedback" }]
+        },
+        {
+          "id": "card-focus-policy",
+          "description": "Windows/macOS overlay requests native ring; Win32 custom ring stays mounted, keyboard/self-focus gated, hidden when disabled and retains surface radius; root never owns focus visual.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "card-rendered-geometry",
+          "description": "Review nested/structured/edge-to-edge layouts, responsive stacking and overlay ring clipping on every renderer.",
+          "source": "spec/usage.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "CRD-004": {
+      "checks": [
+        {
+          "id": "card-static-group",
+          "description": "Explicit accessible static card exposes supplied label with group role.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Card exposes static group semantics when explicitly requested" }]
+        },
+        {
+          "id": "card-overlay-disabled",
+          "description": "Disabled selected overlay is disabled/unfocusable, preserves selected and blocks press without disabling nested Help action.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Card CRD-004 CRD-005 disables the overlay without disabling a nested action" }]
+        },
+        {
+          "id": "card-static-accessibility",
+          "description": "Default static root is nonfocusable/inaccessible but slot controls remain accessible; interactive structural root is hidden and named overlay carries button/disabled/optional selected with caller state preserved.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "card-activation-focus",
+          "description": "Native pointer/touch/Enter/Space activate named overlay once; disabled rejects focus/activation; pending ref requests invalidate on detach/disable and root ref remains structural.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "card-screen-reader",
+          "description": "UIA/AX exposes overlay name/button/state or opted-in static group without concealing independently accessible slot controls.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "CRD-005": {
+      "checks": [
+        {
+          "id": "card-controlled-selection",
+          "description": "Press forwards once without changing externally supplied selected=false.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Card renders selection without changing it on press" }]
+        },
+        {
+          "id": "card-nested-native",
+          "description": "Nested controls activate independently of overlay for pointer and keyboard; card adds no focus trap, collection navigation, destination or timed animation.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The responsive threshold is window width, not measured card width; boundary checks must use the contract's window metric.",
+    "Structural root hiding must not be interpreted as hiding slot controls; actual UIA/AX traversal needs manual qualification.",
+    "Synthetic overlay presses and style assertions do not prove native hit testing, nested focus, ring pixels or selected projection."
+  ]
+}

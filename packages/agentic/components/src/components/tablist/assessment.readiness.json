@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "f9bfcef31f165ddee3325674627a33012acd4ce87978ed8d1d206bcb2f1156dd",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "TBL-001": {
+      "checks": [
+        {
+          "id": "tablist-controlled",
+          "description": "Controlled press requests activity without mutating selected overview, while active entry moves to requested Tab.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "TabList reports controlled selection requests without mutating the selected value" }]
+        },
+        {
+          "id": "tablist-uncontrolled",
+          "description": "Uncontrolled activation updates selected and roving entry and preserves child press exactly once.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "TabList updates uncontrolled selection and preserves the Tab press handler" }]
+        },
+        {
+          "id": "tablist-selection-lifecycle",
+          "description": "default seeds once, controlled rerender wins without user notification, each requested value reports including automatic/manual/native Select; recovery does not mutate controlled value.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-002": {
+      "checks": [
+        {
+          "id": "tablist-inventory",
+          "description": "Stable caller order uses explicit value else controls, warns duplicate values, defaults first enabled even if leading disabled, updates inventory on insert/remove/reorder.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tablist-public-types",
+          "description": "Required children, two orientations, controlled/default value callbacks, policy flags and ordinary structural View ref compile without panel/overflow APIs.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-003": {
+      "checks": [
+        {
+          "id": "tablist-context-composition",
+          "description": "Children retain caller order/visual slots/styles, context owns group selection/disabled/position/roving handlers without cloning their visuals or redirecting structural ref.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-004": {
+      "checks": [
+        {
+          "id": "tablist-roving-recovery",
+          "description": "Exactly one enabled selected or fallback-first Tab tabbable; active disable/remove recovers once, all disabled/group disabled has none, reenabling recovers, controlled selection is not silently rewritten.",
+          "source": "spec/accessibility.md#focus",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tablist-confirmed-focus",
+          "description": "Target registrations are stable/ref-backed, eligibility/selection commit before request; actual focus events confirm focused value, replaced/removed/superseded targets cancel stale work.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-005": {
+      "checks": [
+        {
+          "id": "tablist-auto-horizontal-policy",
+          "description": "Synthetic horizontal ArrowRight skips disabled, updates automatic selection/entry, prevents default once and wraps.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "TabList moves automatic selection on the orientation axis and skips disabled Tabs" }]
+        },
+        {
+          "id": "tablist-key-matrix",
+          "description": "Horizontal Left/Right and vertical Up/Down navigate enabled items; Home/End hit endpoints in both, circular true wraps/false stops, handled default prevented; inactive axis/unhandled/modifier keys forwarded untouched.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tablist-native-navigation",
+          "description": "Physical navigation moves confirmed native focus with disabled skipping/wrap/Home/End; Tab/Shift+Tab enter/leave through one tab stop, modifier shortcuts reach parent without selection changes.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-006": {
+      "checks": [
+        {
+          "id": "tablist-manual-policy",
+          "description": "Manual navigation updates roving entry without selection until synthetic activation selects focused Tab.",
+          "source": "spec/interaction.md#selection",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "TabList keeps selection independent from roving focus in manual activation mode" }]
+        },
+        {
+          "id": "tablist-activation-transports",
+          "description": "Automatic focus requests selection; manual Enter/Space/pointer requests once preserving child handlers; native Select uses same selection owner and original event without onPress synthesis.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "tablist-pointer-focus-policy",
+          "description": "Pointer updates active entry and selection; Windows/Win32 request committed target focus, macOS is not forced into Windows click-focus policy.",
+          "source": "spec/interaction.md#pointer",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-007": {
+      "checks": [
+        {
+          "id": "tablist-semantic-defaults",
+          "description": "Default structural root exposes list name/disabled false/nonfocusable, first enabled selected/tabbable; all children including disabled contribute one-based position and total size.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "TabList defaults to the first enabled Tab and exposes the list semantics" }]
+        },
+        {
+          "id": "tablist-a11y-context",
+          "description": "Native list/tab roles preserve independent child accessibility with selected/disabled/controls and caller group naming; no panel creation/hiding is implied.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "TBL-008": {
+      "checks": [
+        {
+          "id": "tablist-layout-tokens",
+          "description": "Horizontal row/vertical column, alignItems/alignSelf flex-start and componentBase100 gap resolve with caller style last; no separate selection indicator or motion.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tablist-native-layout",
+          "description": "Review both orientations, caller styles, stable neighbor geometry and scaled-label spacing across native renderers.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Root is accessible in unit assertions although prose calls it structural; only native tree traversal can prove children are not collapsed.",
+    "Active tab stop and mocked focus invocation are not confirmed native focus; those claims remain native checks.",
+    "No native modified-chord, custom Select, screen-reader or geometry execution record is linked."
+  ]
+}

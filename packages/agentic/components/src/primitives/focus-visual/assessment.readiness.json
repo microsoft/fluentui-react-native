@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "931c0f52530adbc8dd958fb16e6d55e0d7c6ddc716cfdb784e19735712b1d62e",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LOCAL-001": {
+      "checks": [
+        {
+          "id": "focus-visual-meaning",
+          "description": "Unstyled ring consumes caller visibility/geometry; does not infer focus, activity meaning, modality or theme tokens.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LOCAL-002": {
+      "checks": [
+        {
+          "id": "focus-visual-single",
+          "description": "Outer ring renders with no inner ring requested.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "FocusVisual renders a single ring when no inner ring is requested" }]
+        },
+        {
+          "id": "focus-visual-configured-hidden",
+          "description": "Initially hidden dual-ring configuration retains outer and inner borders; becoming visible removes hidden opacity without losing inner ring.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "FocusVisual keeps both rings mounted while visibility changes" }]
+        },
+        {
+          "id": "focus-visual-node-identity",
+          "description": "Visible/hidden/visible transitions retain exactly the same configured native outer/inner nodes, changing opacity rather than mounting.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "focus-visual-geometry-helper",
+          "description": "createFocusVisualProps_unstable converts outer/inner colors, widths, radius, offsets and visibility correctly for single/dual rings without choosing product values.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "focus-visual-forwarding",
+          "description": "Unowned root ref/native/test props forward while both rings remain inaccessible, nonfocusable and pointerEvents none in all visibility states.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "focus-visual-types",
+          "description": "Compiled SlotProp accepts single/dual ring shapes and rejects owned children.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": [{ "kind": "type", "name": "packages/agentic/components/src/primitives/focus-visual/focus-visual.types.test.ts" }]
+        },
+        {
+          "id": "focus-visual-native-hit-test",
+          "description": "Native ring never intercepts clicks or creates focus/accessibility stops, both hidden and visible.",
+          "source": "CONTRACT.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "focus-visual-native-pixels",
+          "description": "Review single/dual ring geometry and opacity transitions on every renderer, independent of consumer focus-policy assertions.",
+          "source": "CONTRACT.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The existing keeps-both-rings test checks continued presence, not strict node identity; the stronger persistence check remains unlinked.",
+    "Geometry-helper coverage is partial; no assertion for every geometry input is claimed.",
+    "Native hit testing and ring pixels require evidence beyond unit props."
+  ]
+}

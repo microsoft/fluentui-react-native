@@ -108,6 +108,12 @@
   },
   "furn": {
     "jestPlatform": "macos",
+    "readiness": {
+      "contracts": [
+        "src/components/*/SPEC.md",
+        "src/primitives/*/CONTRACT.md"
+      ]
+    },
     "assessments": [
       "src/components/checkbox/assessment.mapping.json"
     ]

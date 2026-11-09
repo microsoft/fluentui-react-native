@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "4251-provisional-v1",
+  "proposal": "#4251",
+  "provisional": true,
+  "ownerAdoption": false,
+  "levels": ["experimental", "preview", "beta", "stable"],
+  "terminalStatus": "deprecated",
+  "dimensions": ["fidelity", "contractCoverage", "accessibility", "platformValidation", "apiStability", "tokenCompleteness"],
+  "supportedTargets": ["win32-paper", "windows-fabric", "macos-fabric", "macos-paper"],
+  "trustedKeys": [],
+  "limitations": [
+    "This is an advisory interpretation of proposal #4251, not an adopted owner policy.",
+    "No owner trust keys or real endorsements are configured.",
+    "Accessible or physical input lanes do not establish keyboard or screen-reader conformance.",
+    "Missing targets and unresolved upstream pin changes are blockers, never averaged scores."
+  ]
+}

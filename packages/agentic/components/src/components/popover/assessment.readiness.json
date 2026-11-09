@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "cbbc14c1db917e9a62b095f9e20589b55f305010a890e8c91f8036d8d7460a87",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "POP-001": {
+      "checks": [
+        {
+          "id": "popover-public-props",
+          "description": "Default uncontrolled closed/bottom/center; required Button trigger/content, structural inaccessible root with stable ordinary ref, composed trigger handlers/refs, surface/content refs null closed and caller styles last.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "popover-closed-trigger",
+          "description": "Closed Button reports collapsed and Opens a popover hint, root ref exists and no surface renders.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Popover renders a collapsed Button trigger with a popup hint and no surface while closed" }]
+        },
+        {
+          "id": "popover-trigger-composition",
+          "description": "Caller trigger hint remains and synthetic trigger onPress runs once while opening surface.",
+          "source": "spec/interaction.md#trigger",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Popover keeps a caller trigger hint and composes caller trigger handlers" }]
+        }
+      ]
+    },
+    "POP-002": {
+      "checks": [
+        {
+          "id": "popover-presence-latch",
+          "description": "Controlled/uncontrolled both directions, default seeded once, false distinct from absent; native dismissal latches true request closed until false/true or trigger rearm; open-at-press-start closes without reopening.",
+          "source": "spec/interaction.md#presence-and-state",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-notifications",
+          "description": "User trigger/dismiss callbacks fire once with reason, caller changes never notify and disabled trigger cannot open but permits native closing cleanup.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "POP-003": {
+      "checks": [
+        {
+          "id": "popover-placement",
+          "description": "Live native trigger anchors four logical sides and three alignments plus token gap; native flip/RTL/work-area clamp operates on both axes with no arrow.",
+          "source": "spec/interaction.md#placement",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "popover-anchor-lifetime",
+          "description": "Trigger moves/resizes update native placement and detach closes without stale native anchor use.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "POP-004": {
+      "checks": [
+        {
+          "id": "popover-focus-policy-unit",
+          "description": "No entry request precedes readiness; confirmed first-content result avoids fallback surface stop.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Popover enters the first eligible content after native readiness" }]
+        },
+        {
+          "id": "popover-native-entry",
+          "description": "Every pointer/keyboard/accessibility/caller open enters first eligible content after readiness, or makes/focuses surface if none; stale/refused/cancelled outcomes are not confirmed or retried by timer.",
+          "source": "spec/interaction.md#focus",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "POP-005": {
+      "checks": [
+        {
+          "id": "popover-native-dismiss",
+          "description": "Escape/outside/deactivation/anchor loss close; Escape and caller close of focused popup return live eligible trigger with native confirmation, outside preserves pointer destination, deactivate/detach never move focus.",
+          "source": "spec/interaction.md#dismissal-and-focus-return",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "popover-tab-wrap",
+          "description": "Native Tab/Shift+Tab wrap inside popup, content owns navigation and Escape remains keyboard exit; presentation never focused does not move focus when closed.",
+          "source": "spec/interaction.md#focus",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "popover-win32-dismiss-race",
+          "description": "Win32 unclassified host dismissal waits 250ms; trigger press within window closes via trigger without reopen or duplicate notification.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "POP-006": {
+      "checks": [
+        {
+          "id": "popover-accessibility-props",
+          "description": "Trigger actual expanded merges caller state, default hint is overridable; surface is named group with missing-name warning, not dialog; closed content absent and refs null; empty surface focusable only when needed.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-expand-collapse",
+          "description": "Windows/Win32 actual ExpandCollapse actions operate; Win32 prepends declarations while retaining caller actions/events.",
+          "source": "spec/accessibility.md#trigger",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "popover-screen-reader",
+          "description": "Narrator/VoiceOver qualifies trigger expanded, named group, individually reachable content and native entry/return on each renderer.",
+          "source": "spec/accessibility.md#qualification",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "POP-007": {
+      "checks": [
+        {
+          "id": "popover-token-exact",
+          "description": "Surface nearer fill/subtle thin stroke/base400 radius/base400 padding and base100 gap match tokens, native shadow not clipped View shadow, caller surface styles last.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-user-padding",
+          "description": "Caller padding overrides component padding while surface retains border structure and defined fill/radius.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Popover styles the surface from tokens with the caller style last" }]
+        },
+        {
+          "id": "popover-native-silhouette",
+          "description": "Review fill/radius/shadow/clamping on each renderer; Win32 host owns fill/radius and ignores gap, others draw per-pixel surface silhouette.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "POP-008": {
+      "checks": [
+        {
+          "id": "popover-nesting-warning",
+          "description": "Nested Popover in another surface warns in development without silently treating it as supported modal or nested popup policy.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "POP-009": {
+      "checks": [
+        {
+          "id": "popover-host-routing",
+          "description": "Modern Callout routes macOS Paper/Fabric and Windows Fabric; Win32 uses adapter; unsupported iOS/Android/other hosts throw descriptive error.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-endpoint-release",
+          "description": "Qualify real popup ownership, readiness/focus/dismissal and placement on all four desktop endpoints before public export.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Usage says does not trap focus while normative focus sections explicitly require Tab wrapping; assess nonmodal popup-local containment, not modal trapping.",
+    "Unit command/operationResult mocks prove policy only, not actual native focus confirmation.",
+    "Arrow/motion/work-area margin and natural Tab continuation are deferred; Win32 has host-owned silhouette/gap/initial-focus differences."
+  ]
+}

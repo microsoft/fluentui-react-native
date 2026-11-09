@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "b6af03cfc523aa7e210a1d9afbba4a9cbe9b43cddd6234e02266c5dff491465e",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LOCAL-001": {
+      "checks": [
+        {
+          "id": "layout-stable-text-stability",
+          "description": "Changing visible labels inside a sufficient reserve does not move surrounding native layout or resize the reserve.",
+          "source": "CONTRACT.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "LOCAL-002": {
+      "checks": [
+        {
+          "id": "layout-stable-text-reserve-overlay",
+          "description": "Hidden inaccessible reserve remains in layout; visible text sits in an absolute-fill vertically centered overlay without absolute positioning its own Text.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "LayoutStableText reserves layout with hidden text and overlays the visible text" }]
+        },
+        {
+          "id": "layout-stable-text-style-width",
+          "description": "Caller width and distinct visible typography/numberOfLines survive while overlay shares available width and structural flexShrink is retained.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "LayoutStableText centers smaller visible text without replacing its typography or wrapping constraints"
+            }
+          ]
+        },
+        {
+          "id": "layout-stable-text-native-linebox",
+          "description": "Measured visible line height is positive and smaller than large reserve; vertical centers agree within one layout pixel, without stretching visible Text.",
+          "source": "CONTRACT.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "layout-stable-text-wrapping",
+          "description": "Both labels wrap/truncate in the same available width; sufficient reserve handles every visible state without geometry shift.",
+          "source": "CONTRACT.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "layout-stable-text-input-props",
+          "description": "Visible label preserves accessible name and synthetic press while overlay is inaccessible with box-none hit testing.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "LayoutStableText preserves visible text semantics and interaction through the overlay" }]
+        },
+        {
+          "id": "layout-stable-text-root-forwarding",
+          "description": "Root remains inaccessible and forwards unowned native root/ref/test props; native overlay does not intercept owning control or visible Text input.",
+          "source": "CONTRACT.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "layout-stable-text-required-types",
+          "description": "Compiled types require actual reserve/visible text elements and reject caller children.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "layout-stable-text-optical",
+          "description": "Review native glyph ink and caret placement with small visible line in large reserve and different text weights/scaling.",
+          "source": "CONTRACT.md",
+          "evidence": "visual",
+          "tests": []
+        },
+        {
+          "id": "layout-stable-text-screen-reader",
+          "description": "Only visible label supplies native semantics; reserve and root are absent from screen-reader traversal.",
+          "source": "CONTRACT.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The type fixture uses null as never, so it does not prove valid required element shapes or independently reject missing reserve/visible.",
+    "Synthetic layout-event forwarding is not measured native geometry and is not linked as such.",
+    "Overview has an intrinsic-height native callback, but no catalog-verified exact identity or execution record is linked here; native geometry remains an explicit gap."
+  ]
+}

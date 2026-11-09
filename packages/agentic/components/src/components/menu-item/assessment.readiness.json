@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "beecce961fcae36737a05ce116dc59981044749e40dde9732a51671c12452571",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "MNI-001": {
+      "checks": [
+        {
+          "id": "menu-item-defaults",
+          "description": "Defaults list-item/right and all documented booleans false; missing text uses Menu item/Secondary, null or empty secondary hides; public visual slots and ordinary native ref compile.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "menu-item-style-handlers",
+          "description": "Caller background wins last and synthetic onPress forwards once.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "MenuItem forwards user styles last and preserves handlers" }]
+        }
+      ]
+    },
+    "MNI-002": {
+      "checks": [
+        {
+          "id": "menu-item-anatomy",
+          "description": "List root renders optional ring then CompoundItemLayout; avatar precedes selectedIcon/icon; trailing order chevron/checkmark/checkbox; absent visuals omitted and text reservations preserve primary/secondary width.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-selected-icon",
+          "description": "Selected true replaces regular icon and uses soft selected fill with semibold text.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "MenuItem uses the selected icon, selected background, and semibold text when selected" }]
+        },
+        {
+          "id": "menu-item-variant-structure",
+          "description": "Nonloading header renders text without interactive row visuals, loading header substitutes skeletons; custom visual slots preserve props.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "MNI-003": {
+      "checks": [
+        {
+          "id": "menu-item-controlled",
+          "description": "Checkbox-menu press invokes owner once without changing checked=false.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "MenuItem renders selection without changing it on press" }]
+        },
+        {
+          "id": "menu-item-role-state-matrix",
+          "description": "Default menuitem uses selected; checkmark uses menuitemradio checked plus selected; multiselect uses menuitemcheckbox checked without fill/semibold; both indicators warn and multiselect wins.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-action-declarations",
+          "description": "Indicator rows dedupe Toggle preserving caller labels/custom actions; single-choice also Select/selected; owned checked/selected beat ARIA aliases; ordinary/header have no owned actions.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-native-actions",
+          "description": "Native Toggle/Select projection forwards original event once with no synthesized press or internal selection change, distinguishing enabled and disabled routes.",
+          "source": "spec/accessibility.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "MNI-004": {
+      "checks": [
+        {
+          "id": "menu-item-loading",
+          "description": "Loading section header has role none, cannot focus and replaces normal label.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "MenuItem supports section headers, loading skeletons, and no focusability" }]
+        },
+        {
+          "id": "menu-item-header-inert",
+          "description": "Headers stay disabled/inert for press/long-press/keyboard/a11y, no ring even disabledFocusable; loading list-item never becomes header/skeleton.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "MNI-005": {
+      "checks": [
+        {
+          "id": "menu-item-token-states",
+          "description": "menuStyle/selectedVisual/disabled/pressed/hovered precedence resolves root min40/gap16/padding12x10, typography and 20 icon/16 check/avatar/checkbox tokens; consumer handlers survive.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-focus-policy",
+          "description": "Windows/macOS system ring versus Win32 persistent keyboard-modality custom dual ring; self-focus/ref lifetime and disabledFocusable eligibility preserve focus without scene rerenders.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "menu-item-native-visual",
+          "description": "Review stable selected text reservation, under/right secondary layout, indicators and system/custom rings on each renderer.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        },
+        {
+          "id": "menu-item-screen-reader",
+          "description": "Narrator/VoiceOver qualifies menu row roles/name/state, disabled-focusable availability and hidden decorative visuals.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "MNI-006": {
+      "checks": [
+        {
+          "id": "menu-item-disabled-focus-default",
+          "description": "Standalone disabled defaults unfocusable; disabledFocusable never opts header into focus.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "MenuItem keeps disabled rows nonfocusable by default and never opts headers into focus" }]
+        },
+        {
+          "id": "menu-item-disabled-focusable",
+          "description": "Opted-in disabled row keeps native focus/ring but refuses pointer/keyboard/long-press/accessibility tap; custom accessibility event still forwards without making action enabled.",
+          "source": "spec/accessibility.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "menu-item-macos-disabled",
+          "description": "macOS omits native disabled while retaining accessibility disabled; Windows/Win32 retain native disabled and focusable independently; loss of eligibility invalidates pending focus, simple disable does not when opted in.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "MNI-007": {
+      "checks": [
+        {
+          "id": "menu-item-registration",
+          "description": "In Menu register identity/label/focus target with cleanup, inherit platform disabledFocusable unless row overrides; focus/hover/key/activation notify Menu after caller handlers without importing Menu/native-core.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-submenu-binding",
+          "description": "submenu View/ref/children always forces chevron, expanded follows actual submenu presence, row opens submenu rather than ending family.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-standalone-submenu",
+          "description": "Standalone submenu prop warns and renders no popup while all other standalone behavior is unchanged.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-native-submenu",
+          "description": "Actual submenu row keyboard/pointer/focus behavior interoperates with Menu family and disabled refusal on every endpoint.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Contract says native indicator projection beyond Win32 remains unqualified; no cross-renderer approval is inferred.",
+    "macOS disabled-focusable uses accessibility disabled rather than native Pressable disabled; AX projection needs separate manual evidence.",
+    "Screen-reader qualification is explicitly unrecorded in MNI-006 amendment; synthetic disabled tests do not fill it."
+  ]
+}

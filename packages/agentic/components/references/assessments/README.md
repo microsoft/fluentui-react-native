@@ -8,16 +8,145 @@ owner_paths:
 # Advisory component assessment
 
 Assessment explains what existing test results establish against reviewed requirements, and what remains unproven.
-It is not a new test framework, release gate, or automatic maturity decision. A successful command means that reports
-were generated, not that a control is ready. Lifecycle metadata and Backlog/Experimental/Beta/Production decisions
-are not changed.
+It is not a new test framework or release gate. A successful command means that reports were generated, not that a
+control is ready. The assessor calculates an **advisory evidence-supported level** under a provisional versioned
+policy; it does not change component lifecycle metadata or establish production qualification.
 
 The shared implementation lives in `@fluentui-react-native/scripts/src/ci/assessment/`; its workflow entrypoint is
 `@fluentui-react-native/scripts/src/ci/controlAssessmentCiTask.ts`. Normal developer commands remain in
 `@fluentui-react-native/scripts/src/tasks/assessControlTask.ts`. This package owns its control definitions and guidance.
-See [Checkbox](checkbox.md) for the pilot's reviewed coverage and [remaining work](../remaining-work.md) for deferred work.
+See [Checkbox](checkbox.md) for the original pilot's coverage and [remaining work](../remaining-work.md) for open work.
 
-## Package command and discovery
+## Skill-led workflow
+
+The `assess-agentic-component` skill is the primary assessment workflow. It runs on explicit assessment requests and
+after implementation validation in the component-authoring workflow. Existing CI runs tests and captures evidence;
+it does not replace the skill's semantic review or independently prove checklist completeness. CI may publish the
+deterministic evidence projection even when no agent has refreshed a stale mapping.
+
+1. Select the requested contract through discovery. Assess higher-order components and public primitives explicitly;
+   never silently omit a missing contract, unconfigured control, or unsupported endpoint.
+2. Read the entire local contract and its normative companions before examining coverage. For a higher-order component,
+   include the public API/defaults, finite variant/state axes, anatomy, interaction, accessibility, focus, token bindings,
+   divergences, and source metadata. A primitive uses its local `CONTRACT.md`; do not invent an upstream Flex source.
+3. Derive or reconcile a complete requirement-first acceptance checklist independently of the tests that happen to
+   exist. Split distinct acceptance claims, including negative cases, precedence, ownership, platform differences,
+   and native/visual obligations. Keep `tests: []` for unproven checks. Listing each requirement ID is not a semantic
+   completeness proof.
+4. Read the actual assertion bodies and assertion-bearing helpers before linking evidence. Unit links use exact Jest
+   full names. Native identities are `storyId::callbackName` and preserve target and input-lane scope. Compiler links
+   identify the actual compiled type-test file. A source filename, snapshot count, mocked platform branch, or native
+   capability declaration alone proves no behavior.
+5. When maintaining a mapping, record every additional reviewed helper in `reviewInputs`. Update the reviewed digest
+   only after completing the semantic review, using the discovery tool's current digest. Never refresh hashes merely
+   to suppress stale findings. Checkbox's schema-v2 matrix retains its separately reviewed native and unit bindings.
+6. Reuse fresh, correctly scoped execution evidence. Run the package assessment command below to validate bindings and
+   project test results onto the reviewed checklist. Default assessment runs no tests. If evidence is missing, state
+   that gap; run a needed suite only when authorized by the task, using its owning declared commands and desktop-testing
+   workflow. Do not repair unrelated tests, change host exclusions, alter privacy settings, or enable unavailable inputs
+   as part of assessment.
+7. Evaluate the six readiness dimensions under the versioned provisional policy. Resolve current upstream drift from
+   fresh source observations, not local hashes. Distinguish machine-verifiable assertions from visual/manual review,
+   actual platform keyboard/screen-reader observations, API commitments, and token-gap decisions. Preserve unresolved
+   contract ambiguities rather than awarding complete coverage.
+8. Return the advisory evidence-supported level or insufficient-evidence result, limiting dimensions, exact source/build
+   and target scope, covered and uncovered checks, observed failures/skips, and next missing evidence. There is no
+   mandatory owner approval step for this report. Optional declared/approved status is separate; neither authorizes
+   the skill to ratify policy, approve its own manual observations, or claim production qualification.
+
+The skill may maintain assessment metadata and ignored reports. Changes to component behavior, tests, contracts, CI
+permissions, policy adoption, and official consumer maturity markers require their separate task/workflow. Reassessment
+does not restart component implementation or make native jobs required checks.
+
+## Full-inventory assessment
+
+```powershell
+yarn workspace @fluentui-react-native/components assess-components --list
+yarn workspace @fluentui-react-native/components assess-components
+yarn workspace @fluentui-react-native/components assess-components --component switch
+yarn workspace @fluentui-react-native/components assess-components --evidence-directory "C:\evidence"
+```
+
+Default execution reads evidence; it does not rerun tests. Reports are written to ignored
+`apps/storybook/artifacts/readiness/report/` artifacts. `--evidence-directory` is repeatable for local execution receipts
+and reviewed observations. CI instead consumes only its captured workflow evidence and prohibits local replay/output
+overrides. `yarn lage assess-components` invokes this command from participating workspaces.
+
+Ordinary local `yarn test` output is not a qualified execution receipt. Enable capture before the already-needed
+test invocation to retain its original source, input, and build identity. From the repository root:
+
+```powershell
+$capture = Join-Path $PWD ("apps\storybook\artifacts\readiness\unit-local-" + [guid]::NewGuid())
+$previousCapture = $env:FURN_ASSESSMENT_UNIT_CAPTURE
+try {
+  $env:FURN_ASSESSMENT_UNIT_CAPTURE = $capture
+  yarn workspace @fluentui-react-native/components test
+} finally {
+  if ($null -eq $previousCapture) {
+    Remove-Item Env:\FURN_ASSESSMENT_UNIT_CAPTURE
+  } else {
+    $env:FURN_ASSESSMENT_UNIT_CAPTURE = $previousCapture
+  }
+}
+node scripts\src\ci\readinessCiTask.ts collect-unit --input $capture --output "$capture-collected"
+yarn workspace @fluentui-react-native/components assess-components --evidence-directory "$capture-collected"
+```
+
+Use this around the existing authoring test step, not as a second run after validation. Local receipts are explicitly
+local, never fabricated GitHub runs, and cannot satisfy same-attempt CI proof. Dirty or changed inputs remain
+non-qualifying. If capture did not run before execution, retain the gap; the legacy replay commands can inspect
+local Jest JSON, but retrospective provenance does not establish readiness.
+
+The owning package's `furn.readiness.contracts` patterns discover every higher-order `SPEC.md` and primitive
+`CONTRACT.md`. Both paragraph and bullet requirement formats are supported. Local primitives have stable,
+contract-ordered `LOCAL-001`-style paragraph identifiers; they do not need invented upstream provenance. Missing
+mappings remain visible and cannot earn coverage.
+
+`assessment.readiness.json` lives beside each contract. It records a requirement-first acceptance checklist, normative
+references, exact evidence links, reviewed input digest, additional shared assertion helpers, and limitations.
+`agent-reviewed` records the review's origin, **not an owner endorsement**. Empty test-link arrays deliberately retain
+uncovered acceptance checks. A test file, implementation filename, or planned-evidence hint alone proves nothing.
+Changes to reviewed clauses, assertions, helpers, or snapshots invalidate the mapping. Checkbox's existing schema-v2
+matrix is adapted directly, retaining both original reviewed fingerprints and its limited approved-link scope.
+
+Native evidence is separated into **Win32/Paper, Windows/Fabric, macOS/Fabric, and macOS/Paper** targets. Accessibility
+and physical input remain separate evidence scopes, including when a source run contains both. Existing catalog
+exclusions and unavailable physical capabilities stay gaps. Jest's macOS mock profile is not native macOS evidence;
+an accessibility-input pass is not screen-reader conformance.
+
+The PR workflow wraps the existing five native Storybook invocations rather than launching duplicate suites. It
+collects the existing package Jest execution once and captures a separate, forced project-reference compiler build;
+a Jest type-test pass or cached aggregate build is not compiler proof. Same-attempt artifacts are combined after all
+source jobs finish, including failures. Native source jobs and the assessor remain advisory, not newly required
+promotion gates. Original schema-v2 artifacts and trusted publication remain available independently.
+
+## Provisional maturity workflow
+
+The [versioned policy](readiness-policy.json) implements #4251's proposed
+`experimental → preview → beta → stable` ladder; `deprecated` is an explicit terminal decision, not a failed-test
+classification. It evaluates fidelity, contract coverage, accessibility, platform validation, API stability, and token
+completeness. Missing required evidence limits the computed ceiling; new failures or expiry can lower it.
+
+The normal loop is **component change → existing builds/tests → evidence validation → automatic level and gap report**.
+There is no separate approval step required to calculate or publish an advisory level. The policy itself is provisional,
+not an already adopted project standard.
+
+`declaredStatus`, `evidenceSupportedStatus`, and optional `approvedStatus` remain distinct. An owner-approved designation
+is an optional additional publication, not approval of every test run. No owner approvals are supplied by this change.
+Reviewed manual observations, such as actual keyboard or screen-reader evaluation, are evidence rather than approval
+of the overall verdict. Authentication and expiry protect those records from being treated as fresh facts merely
+because a JSON file names a reviewer.
+
+Visual comparisons and reviewed manual evidence must identify the tested control, source/build, target, observation,
+and artifact hashes. API commitments, token-gap decisions, platform sign-offs, and upstream-source observations need
+their own scoped evidence. Local fingerprints establish changed local inputs, not that a pinned external specification
+is still current. Absent or unresolved upstream drift therefore remains a fidelity blocker.
+
+## Legacy compatibility commands and discovery
+
+The sections below describe the schema-v2 replay and trusted publication path. Explicit native/unit replay options,
+`--run-unit-tests`, `--update-spec`, and the `assess-control` alias retain that behavior; they do not assign maturity
+or borrow wider-platform evidence from the new readiness report.
 
 From the repository root:
 
@@ -32,7 +161,7 @@ Assessment is not part of `buildci`, because its final CI execution must wait fo
 To list this package's configured and unconfigured controls without assessing them:
 
 ```powershell
-yarn workspace @fluentui-react-native/components assess-components --list
+yarn workspace @fluentui-react-native/components exec fluentui-scripts assess-control --list
 ```
 
 The command discovers the package's `furn.assessments` entries, rather than assuming a particular control name.
@@ -83,7 +212,8 @@ filter that set based on available tests or execution results. Completeness requ
 clauses; merely listing every requirement ID is not a completeness proof. `source` cites the contract file/section from which the check
 was derived. `evidence` declares whether the claim needs unit, native, type, or visual verification.
 `tests: []` keeps an uncovered check visible; it means no approved test link, not necessarily no existing test.
-Type and visual adapters are not implemented, so those checks remain uncovered.
+The legacy schema-v2 path has no type or visual adapters, so those checks remain uncovered there; the full-inventory
+path above has separate compiler and authenticated reviewed-observation adapters.
 
 Unit links identify exact Jest full names in the configured runtime files. Native links identify the exact configured
 story/callback. Multiple tests can be linked to one check, and one test can appear under multiple checks. A shared

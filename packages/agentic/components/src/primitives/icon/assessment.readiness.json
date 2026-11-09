@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "1c85b0c319c868957323105c31f3305af3aea604a41c90c210e155e9707c9250",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LOCAL-001": {
+      "checks": [
+        {
+          "id": "icon-direct",
+          "description": "Icon renders directly without a styled component boundary.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Icon is directly renderable" }]
+        }
+      ]
+    },
+    "LOCAL-002": {
+      "checks": [
+        {
+          "id": "icon-source-types",
+          "description": "Compiled SlotProp accepts image/font/SVG and as replacement; existing fixture rejects its supplied conflicting-source combination.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": [{ "kind": "type", "name": "packages/agentic/components/src/primitives/icon/icon.types.test.ts" }]
+        },
+        {
+          "id": "icon-source-exclusivity-matrix",
+          "description": "All image/font/SVG source pairs and the triple combination are rejected while supported empty/custom-renderer branches remain accepted.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "icon-image",
+          "description": "Image renderer forwards source, dimensions and tint color directly.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Icon renders an image with dimensions and color" }]
+        },
+        {
+          "id": "icon-svg",
+          "description": "SVG renderer receives dimensions, color, testID and default image role directly.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Icon forwards shared props to an SVG component" }]
+        },
+        {
+          "id": "icon-font-frame",
+          "description": "Dimensioned font renderer centers decorative intrinsic Text in sized nonshrinking frame; glyph receives family/color/min dimension fontSize, absolute position without forced height/lineHeight, no font padding or scaling.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Icon renders a font codepoint with dimensions and color" }]
+        },
+        {
+          "id": "icon-font-dimension-matrix",
+          "description": "Square/non-square, height-only, width-only and no dimensions choose min/sole/native default font size; only both dimensions use absolute child with no edge offsets, undimensioned enables native scaling.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "icon-font-a11y",
+          "description": "Only font frame owns name/hint/image role/test props; explicit accessible=false and role none win; glyph is decorative.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Icon keeps font icon semantics on one frame and preserves caller accessibility" }]
+        },
+        {
+          "id": "icon-other-renderer-a11y",
+          "description": "Image and SVG preserve caller accessibility/name/test props, including custom role, without adding wrappers.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "icon-empty-no-ref",
+          "description": "Missing source renders no native element; public type exposes no shared imperative component ref across image/frame/SVG/empty branches.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "icon-no-product-style",
+          "description": "No glyph/token/product styling is selected by the primitive beyond renderer structure.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "icon-native-glyph",
+          "description": "Review glyph ink and intrinsic centering across ascent/descent families and frames smaller than linebox, including Android no-padding behavior and native scaling of undimensioned glyphs.",
+          "source": "CONTRACT.md",
+          "evidence": "visual",
+          "tests": []
+        },
+        {
+          "id": "icon-screen-reader",
+          "description": "Informative renderer announces supplied identity once; decorative override removes it on native accessibility trees.",
+          "source": "CONTRACT.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The existing type fixture rejects one conflicting source combination, not every pair or ref shape; those broader checks remain separate.",
+    "Font style assertions do not prove glyph ink centering or absence of native clipping.",
+    "No visual, Android or screen-reader execution record is linked."
+  ]
+}

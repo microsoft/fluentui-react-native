@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "95a8b589e1935bbc48f0108c7145828e6150389b26d4e23b68b9ad61278eb3d5",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "PGB-001": {
+      "checks": [
+        {
+          "id": "progress-bar-defaults",
+          "description": "Default determinate/neutral/0 with Label and 0% publishes bounded zero without busy state.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "ProgressBar renders the default label, value text, and determinate accessibility state" }]
+        },
+        {
+          "id": "progress-bar-numeric-bounds",
+          "description": "Missing/non-numeric/NaN resolves zero, below zero and above100 clamp, finite fractional values persist for determinate/static; supported root props/ref forward.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-public-types",
+          "description": "Three types/statuses and validation Icon slot plus owned native View props/ref compile without interactive/track replacement APIs.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "PGB-002": {
+      "checks": [
+        {
+          "id": "progress-bar-anatomy",
+          "description": "Always label/header then track/indicator; trailing group only when resolved icon exists or value visible; icon before value, show flags/null/default/custom icons cover neutral/error/success without empty trailing container.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-layout",
+          "description": "Label grows/shrinks/wraps while trailing group stays nonshrinking at opposite header edge with no invented header-track gap.",
+          "source": "spec/tokens.yaml",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "PGB-003": {
+      "checks": [
+        {
+          "id": "progress-bar-value-text",
+          "description": "Explicit valueText (including empty) wins error Progress failed, success Complete, indeterminate Working…, then resolved percent in each type/status combination; showValueText gates visibility only.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "PGB-004": {
+      "checks": [
+        {
+          "id": "progress-bar-measured-width",
+          "description": "Measured 200px track at 50 percent resolves 100px fill, while caller background wins and explicit value text renders.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            { "kind": "unit", "name": "ProgressBar resolves the determinate indicator width from progress and preserves user styles last" }
+          ]
+        },
+        {
+          "id": "progress-bar-width-matrix",
+          "description": "Before measurement fill zero; resizing recomputes percentage for 0/fractional/100 and indeterminate fixed segment/floor; determinate/static accept both increases and decreases and mode switches immediately.",
+          "source": "spec/interaction.md#measurement",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "PGB-005": {
+      "checks": [
+        {
+          "id": "progress-bar-loop-policy",
+          "description": "Only measured indeterminate with reduced motion off runs 2000ms linear JS loop; zero track, static/determinate, reduced motion and unmount stop/reset offset; busy remains while static segment rests.",
+          "source": "spec/interaction.md#motion",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-native-motion",
+          "description": "Actual native segment moves smoothly only when eligible, resets at leading edge and stays still with reduced motion; determinate/static width changes snap without transition.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "PGB-006": {
+      "checks": [
+        {
+          "id": "progress-bar-a11y-name",
+          "description": "Generated visible label ID is stable and appended to string/array caller labelledBy without mutation; root progressbar nonfocusable, every child decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-a11y-value",
+          "description": "Determinate/static expose min0/max100/current; contextual text only when differing from plain percent; indeterminate busy with no range value even reduced-motion on.",
+          "source": "spec/accessibility.md#value",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-inert",
+          "description": "No native Tab stop, focus visual, pointer/keyboard activation or outcome announcement is added; external cancel/retry remains separate.",
+          "source": "spec/interaction.md#keyboard-and-pointer",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-screen-reader",
+          "description": "UIA/AX announces task name and bounded/contextual value or indeterminate busy once, omits decorative validation and does not fabricate status live region.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "PGB-007": {
+      "checks": [
+        {
+          "id": "progress-bar-token-matrix",
+          "description": "Neutral/error/success share brand/danger/success indicator and 16px icon foreground; soft pill track at componentBase100 height, functional label/bodySmall value typography and gaps match tokens, root style final.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "progress-bar-native-visual",
+          "description": "Review status colors/icons, thin track clipping, wrapping label/trailing alignment and scaled text across all renderers.",
+          "source": "spec/tokens.yaml",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Anatomy table permits empty trailing group but PGB-002 and resolved divergence explicitly prohibit it; the requirement/resolved disposition governs.",
+    "Determinate transition uses ignored web-only keys and is not qualified as native animation.",
+    "Reduced-motion and animation mocks do not establish native movement or OS preference subscription; no screen-reader or pixel evidence is linked."
+  ]
+}

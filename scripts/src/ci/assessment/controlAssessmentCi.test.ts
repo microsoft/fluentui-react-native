@@ -95,12 +95,18 @@ function fixture(extraControl = false) {
   const root = path.join(directory, 'repo');
   mkdirSync(root);
   mkdirSync(path.join(root, 'apps', 'storybook'), { recursive: true });
+  copyFileSync(
+    path.join(repositoryRoot, 'apps', 'storybook', 'desktop.config.mts'),
+    path.join(root, 'apps', 'storybook', 'desktop.config.mts'),
+  );
   git(root, ['init', '-q', '-b', 'main']);
   git(root, ['config', 'user.name', 'Fixture']);
   git(root, ['config', 'user.email', 'fixture@example.invalid']);
   git(root, ['config', 'core.autocrlf', 'false']);
   git(root, ['config', 'commit.gpgsign', 'false']);
   put(root, '.gitignore', 'apps/storybook/artifacts/\n');
+  const policyPath = 'packages/agentic/components/references/assessments/readiness-policy.json';
+  put(root, policyPath, readFileSync(path.join(repositoryRoot, policyPath), 'utf8'));
   const originalManifest = JSON.parse(readFileSync(path.join(repositoryRoot, assessmentPackagePath), 'utf8'));
   put(
     root,
@@ -175,11 +181,16 @@ function fixture(extraControl = false) {
   });
   writeFileSync(event, JSON.stringify(payload()));
   const env: NodeJS.ProcessEnv = {
+    GITHUB_ACTIONS: 'true',
     GITHUB_EVENT_PATH: event,
     GITHUB_REPOSITORY: 'example/furn',
     GITHUB_SHA: testedCommit,
     GITHUB_RUN_ID: '456',
     GITHUB_RUN_ATTEMPT: '1',
+    GITHUB_WORKFLOW: 'PR',
+    GITHUB_WORKFLOW_REF: 'example/furn/.github/workflows/pr.yml@refs/pull/123/merge',
+    GITHUB_JOB: 'control-assessment',
+    GITHUB_TOKEN: '',
     FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES: 'keyboard,physicalClick,wheel',
     SMOKE_OUTCOME: 'success',
   };
@@ -427,6 +438,12 @@ describe('CI execution binding', () => {
       assert.equal(report.unitEvidence.packageSuites, 2);
       assert.equal(report.unitEvidence.packageCounts.passed, 43);
       assert.equal(report.unitEvidence.outcome, mode === 'passed' ? 'passed' : 'execution-failed');
+      const readiness = JSON.parse(
+        readFileSync(path.join(f.root, 'apps', 'storybook', 'artifacts', 'readiness', 'report', 'readiness.json'), 'utf8'),
+      );
+      assert.equal(readiness.controls.length, 1);
+      assert.equal(readiness.controls[0].component, 'checkbox');
+      assert.equal(readiness.controls[0].evidenceSupportedStatus, null);
       assert.equal(invocations, 1, 'Assessment must never invoke Jest again.');
     });
   }
@@ -1184,7 +1201,17 @@ describe('CI input schema and workflow wiring', () => {
     assert.match(js, /FURN_ASSESSMENT_UNIT_CAPTURE:/);
     assert.equal(js.match(/run: yarn lage buildci/g)?.length, 1);
     assert.doesNotMatch(workflow, /--run-unit-tests|controlAssessmentCiTask\.ts unit(?:\s|$)/);
-    assert.match(workflow, /needs: \[assessment-inputs, js, win32-storybook\]/);
+    assert.match(
+      workflow,
+      /needs: \[assessment-inputs, js, win32-storybook, win32-storybook-physical, windows-storybook, macos-storybook, macos-paper-storybook\]/,
+    );
+    assert.equal(workflow.match(/readinessCiTask\.ts run --kind native/g)?.length, 5);
+    for (const target of ['win32-paper', 'windows-fabric', 'macos-fabric', 'macos-paper'])
+      assert.match(workflow, new RegExp(`--target ${target} --input (?:accessible|physical|all)`));
+    assert.match(workflow, /readinessCiTask\.ts collect-unit/);
+    assert.match(workflow, /readinessCiTask\.ts run --kind type .* build --force/);
+    assert.match(workflow, /pattern: component-readiness-\*-\$\{\{ github.run_attempt \}\}/);
+    assert.match(workflow, /READINESS_JOB_OUTCOMES: \$\{\{ toJSON\(needs\) \}\}/);
     assert.match(workflow, /FURN_ASSESSMENT_CI: 'true'/);
     assert.match(workflow, /run: node \.yarn\/releases\/yarn-4\.18\.0\.cjs lage assess-components/);
     const jest = readFileSync(path.join(repositoryRoot, 'scripts', 'src', 'tasks', 'jest.ts'), 'utf8');

@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "b4fb631b72ab55b5d0b6d677e879a8eabf921fd99a92b6924baf5e464fd825a9",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "AVT-001": {
+      "checks": [
+        {
+          "id": "avatar-defaults-axes",
+          "description": "Default size 40 and inactive ring; accept exactly 16,20,24,28,32,40,56,120 and reject other sizes in compiled types.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "avatar-precedence",
+          "description": "Image wins over initials and icon; initials wins over icon; ambiguous supplied modes warn once per render policy while rendering only the winner.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-initials",
+          "description": "Trim/uppercase strings and numbers, truncate to one character at 16 and two otherwise; empty initials default to AB.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-icon-fallback",
+          "description": "Absent image and initials render the default person icon, with decorative default root semantics.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Avatar renders the default icon fallback as a decorative image avatar" }]
+        }
+      ]
+    },
+    "AVT-002": {
+      "checks": [
+        {
+          "id": "avatar-anatomy",
+          "description": "Circular root retains ring plus exactly the selected image, icon or initials; user style follows every component style and root ref targets the View.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-image",
+          "description": "Image uses cover resizing, absolute fill and zero root padding with transparent background at size 56.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Avatar renders the image full bleed without avatar padding" }]
+        }
+      ]
+    },
+    "AVT-003": {
+      "checks": [
+        {
+          "id": "avatar-token-matrix",
+          "description": "All eight sizes resolve documented diameter/padding, icon 12/16/16/16/20/24/32/48 dimensions, initials font sizes and functional regular foreground without inherited body lineHeight.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-intrinsic-linebox",
+          "description": "Initials remain absolutely centered without edge offsets; native scaling and explicit caller line metrics survive at smallest/largest sizes without clipping.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "avatar-optical",
+          "description": "Review glyph ink, image crop and circular/ring geometry at all sizes with scaling on Windows, Win32 and macOS.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "AVT-004": {
+      "checks": [
+        {
+          "id": "avatar-informative",
+          "description": "Labeled initials avatar exposes one accessible image with the supplied identity.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Avatar renders informative avatars with the image role and label" }]
+        },
+        {
+          "id": "avatar-hidden",
+          "description": "Unlabeled root hides descendants; explicit accessible override is honored; image/icon/initials and activity ring stay decorative in every mode.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-screen-reader",
+          "description": "UIA/AX reads informative identity once, omits decorative avatars and never announces ring visibility as status or focus.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "AVT-005": {
+      "checks": [
+        {
+          "id": "avatar-pass-through",
+          "description": "Forward broad ViewProps, native ref and caller focusable without adding hover, press, disabled, selected or focus state.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-noninteractive",
+          "description": "Default identity adds no Tab stop or ring; containing control owns pointer/keyboard activation and status meaning; content changes have no animation.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "AVT-006": {
+      "checks": [
+        {
+          "id": "avatar-persistent-ring",
+          "description": "For every size and content mode, ring exists initially with border color/width/gap and pointerEvents none; false/true/false changes only opacity and preserves native View identity, root dimensions and absence of outline properties.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "avatar-ring-120",
+          "description": "At size 120 active ring uses thick gap plus thicker stroke outside unchanged 120px root bounds.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Avatar renders the active ring without changing layout size" }]
+        },
+        {
+          "id": "avatar-fabric-safety",
+          "description": "Initially active and toggled rings render without Fabric outline fail-fast, hit-target growth or accessibility/focus changes.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Focusable is deliberately forwarded although identity-only usage should remain unfocusable; the contract records this as deferred.",
+    "Parameterized assertions were read but no expanded Jest identities are guessed; unlinked matrix checks remain visible.",
+    "Native line metrics, Fabric safety, optical alignment and UIA/AX announcements require renderer-specific evidence, not flattened unit styles."
+  ]
+}

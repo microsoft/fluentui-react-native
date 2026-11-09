@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "7c15914e9e8931ac14c27689272ff09b2f1edfd9c449ba66d831d9b4d00b1c26",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "DIV-001": {
+      "checks": [
+        {
+          "id": "divider-defaults",
+          "description": "Default center/horizontal renders Text label, separator role, nonfocusable centered stretching row.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Divider renders a labeled separator by default" }]
+        },
+        {
+          "id": "divider-public-props",
+          "description": "Owned ViewProps and ordinary native root ref compile while role/focusable overrides and unsupported size axis are rejected.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "DIV-002": {
+      "checks": [
+        {
+          "id": "divider-anatomy",
+          "description": "Always render leading/trailing lines; content contains icon before label; null/absent icon and explicit null label remove only corresponding slots, both absent remove container.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "divider-icon-only",
+          "description": "Removing label preserves supplied icon container and leaves accessible name absent.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Divider DIV-002 preserves an icon-only content container when the label is removed" }]
+        },
+        {
+          "id": "divider-replacements",
+          "description": "Label and icon as replacements preserve child/prop forwarding and decorative attributes.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "DIV-003": {
+      "checks": [
+        {
+          "id": "divider-stubs",
+          "description": "center grows both segments equally; start fixes only leading stub; end fixes only trailing stub to componentBase100, with grow 0 versus 1 in both orientations.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "divider-writing-direction",
+          "description": "Start/end follow writing direction in native LTR/RTL without changing midpoint or content order.",
+          "source": "spec/interaction.md#layout-behavior",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DIV-004": {
+      "checks": [
+        {
+          "id": "divider-axes",
+          "description": "Vertical uses column, thin line width and vertical padding while content remains row/horizontally written.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Divider switches to vertical layout and uses vertical padding" }]
+        },
+        {
+          "id": "divider-axis-exclusion",
+          "description": "Horizontal fixes only line height/paddingHorizontal; vertical fixes only width/paddingVertical for center/start/end without stale opposite-axis dimensions.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "divider-constrained-layout",
+          "description": "Constrained native layout shrinks content and wraps label without clipping/collapsing line segments; vertical parent supplies usable extent.",
+          "source": "spec/interaction.md#layout-behavior",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "DIV-005": {
+      "checks": [
+        {
+          "id": "divider-name",
+          "description": "Explicit caller name wins; shorthand/object string or numeric label supplies fallback; null label leaves unnamed; accessible=false opts out; icon/label/container remain decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "divider-no-interaction",
+          "description": "No Tab stop, focus feedback, press/hover callbacks, animation or reduced-motion branch is added.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "divider-screen-reader",
+          "description": "UIA separator and AX splitter/separator announce root name once without descendants; vertical does not fabricate unavailable orientation semantics.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": []
+        }
+      ]
+    },
+    "DIV-006": {
+      "checks": [
+        {
+          "id": "divider-tokens",
+          "description": "Thin filled stroke uses subtle neutral color; content gap/padding, 20px icons, secondary foreground and functional bodySmall label typography match bindings for both axes.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "divider-style-last",
+          "description": "Caller root alignment/direction overrides component style while replacement label receives decorative props.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "Divider DIV-002/DIV-006 honors a label replacement and applies caller root styles last" }]
+        },
+        {
+          "id": "divider-visual",
+          "description": "Review native line thickness, centering, constrained wrapping and RTL start/end geometry in both orientations.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Native separator orientation is unavailable; this mapping does not require fabricated orientation projection.",
+    "No native layout, screenshot or screen-reader records were linked. Unit layout styles do not prove measured geometry.",
+    "The broad root prop surface and prose claiming no callbacks need care when caller-supplied native handlers are present; component-added interaction is the assessed obligation."
+  ]
+}

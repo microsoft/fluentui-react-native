@@ -52,6 +52,7 @@ Classify the change with the [classification guide](references/agents/components
 | Agentic contract-only or contract-feasibility work                                  | [agentic-component-contract-authoring](.github/skills/agentic-component-contract-authoring/SKILL.md) |
 | Fix or maintain an existing v0 or v1 component (not native-core `/legacy`)          | [maintain-v0-v1-component](.github/skills/maintain-v0-v1-component/SKILL.md)                         |
 | Review a component change of any generation                                         | [review-component](.github/skills/review-component/SKILL.md)                                         |
+| Assess agentic component or primitive readiness, evidence, or acceptance mappings   | [assess-agentic-component](.github/skills/assess-agentic-component/SKILL.md)                         |
 | Native component, TurboModule, service, codegen, or a native-core `/legacy` wrapper | [implement-native-component](.github/skills/implement-native-component/SKILL.md)                     |
 | Cross-component agentic extraction or dependency direction                          | [agentic-component-optimization](.github/skills/agentic-component-optimization/SKILL.md)             |
 | Desktop test configuration, execution, reporting, helpers, or CI                    | [desktop-testing](.github/skills/desktop-testing/SKILL.md)                                           |
