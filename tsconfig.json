@@ -32,6 +32,9 @@
       "path": "packages/agentic/desktop-driver/tsconfig.json"
     },
     {
+      "path": "packages/agentic/desktop-driver-mcp/tsconfig.json"
+    },
+    {
       "path": "packages/agentic/desktop-test/tsconfig.json"
     },
     {

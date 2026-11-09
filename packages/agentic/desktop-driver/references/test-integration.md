@@ -38,6 +38,7 @@ import { connectDesktopWebdriver } from '@fluentui-react-native/desktop-driver/w
 
 const desktop = await connectDesktopWebdriver({
   clickMode: 'auto',
+  inputMode: 'accessible',
   launchMode: 'attach',
   platformName: 'macos',
   targetId: 'component-storybook-macos',
@@ -52,6 +53,21 @@ try {
   await desktop.delete();
 }
 ```
+
+`inputMode` defaults to `compatibility`. Use `accessible` to refuse keyboard,
+pointer, and wheel input before dispatch, or `physical` to require physical
+clears and clicks while still permitting accessibility actions. The selected
+mode is fixed in the session's returned `furn:inputMode` capability. Read
+`desktop.input()` (or `desktop.browser.desktopInput()`) for that mode and the
+session's delivery counts. A declared test runner compares those receipts with
+the case's `requires`; an undeclared mechanism fails the test, while an unused
+requirement is reported without failing it.
+
+WDIO's `element.desktopPerformAccessibilityAction(name)` invokes a uniquely
+published accessibility action without pointer or keyboard input. Declare
+`perform-accessibility-action` on the case that uses it. In an accessible
+session, `setValue` is rejected before WDIO's client-side clear step; `clear`
+remains available as a semantic clear.
 
 Use standard WebdriverIO APIs only where the
 [implemented protocol](protocol.md) supports them. Browser navigation, cookies,
@@ -70,6 +86,9 @@ For Storybook targets, the connection registers:
 The runner resets the preview for each test, filters and shards a stable
 `storyId/testId` ordering, checks required capabilities, and classifies
 assertion, timeout, cancellation, skip, and infrastructure outcomes.
+Selectors used to read a value or perform an action must resolve to exactly one
+element. `count` and `exists` expectations intentionally allow multiple matches;
+narrow other selectors rather than relying on the first match.
 
 Pass `onTestResult(result)` to `runStoryTests` or `runDesktopStoryTests` to
 receive each settled test result before the next test starts. This supports
@@ -80,21 +99,40 @@ result formats remain unchanged.
 An external supervisor can share an existing session with an isolated Node
 worker using `attachDesktopWebdriver({ url, sessionId, capabilities })`.
 This registers the same custom commands without creating a second session.
+On a protected service, include the supervisor-provided `grant` in that
+attachment and in `connectDesktopWebdriver`. For an existing WDIO-managed
+transport, configure `desktopWebdriverGrantOptions(grant)` before attaching
+and pass `{ grant }` as the third argument to
+`installDesktopWebdriverCommands`. Never put the grant in capabilities or
+worker command-line arguments. Use private IPC or a supervisor-controlled
+environment such as `FURN_DESKTOP_DRIVER_GRANT_TOKEN`; the `TOKEN` suffix
+participates in the desktop-test reporter's secret redaction. The helper does
+not automatically read process environment variables.
 The supervisor retains ownership and must call `delete()` after the worker
 exits, including on assertion failures, timeouts, or crashes. WebdriverIO's
 `attach()` does not apply the defaults `remote()` uses, so the attached browser
 sets `waitforInterval` (100 ms) and `waitforTimeout` (5 s) explicitly; without
 an interval, `waitUntil` and `waitFor*` stop after their first unsatisfied poll.
 
-Storybook's preferred top-level `wdio` functions and named function collections
-use this pattern with Node's built-in test runner. Each function receives the
-target `platform` (`macos`, `windows`, or `win32`), and each named case gets an
-independent worker/session. Native feature flags are typed on the WebdriverIO
-browser's `furn:features` capability. Button now uses this authoring pattern
-instead of serializable plans. Extraction, native-bundle stripping, runner
-configuration, and source freshness belong to
-`@fluentui-react-native/storybook-desktop`,
-not this Storybook-independent package. Static plans below are unchanged.
+Storybook's preferred top-level `wdio` export is an array of `desktopIt` cases,
+which declare the input and platforms they need. Its older functions and named
+function collections use the same pattern with Node's built-in test runner.
+Each function receives the target `platform` (`macos`, `windows`, or `win32`),
+and each named case gets an independent worker/session. Native feature flags are
+typed on the WebdriverIO browser's `furn:features` capability. Button now uses
+this authoring pattern instead of serializable plans. Extraction, native-bundle
+stripping, runner configuration, and source freshness belong to
+`@fluentui-react-native/storybook-desktop`, not this Storybook-independent
+package. Static plans below are unchanged.
+
+The descriptor that `desktopIt` accepts (`requires`, `input`, `platforms`,
+`scope`, and declared gaps) is defined and decided in `./authoring`, so Storybook
+and `desktop-test` share one implementation. A runner that executes one input
+lane requests and verifies the matching `furn:inputMode`; the policy pins
+`furn:clickMode`, so `element.click()` is an accessibility click in the
+accessible lane and a physical click in the physical lane.
+`missingDesktopRequirements` judges a case's `requires` against the session's
+`furn:features`, and judges a `click` requirement by the pinned mode.
 
 ## Author portable story plans
 
@@ -289,6 +327,9 @@ yarn test --runInBand
 The native contract builds into a temporary or configured external cache,
 verifies the artifact and long-lived handshake, runs the helper self-test,
 checks cache reuse and resolution, and exercises malformed-frame recovery.
+On Windows it also builds the test-only plain Win32 fixture and drives the
+helper against it: events, owned popups, hung and stuck providers, large trees,
+and retention. `yarn test --runInBand win32Fixture` runs only that suite.
 Stable-signed macOS coverage also requires
 `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
 

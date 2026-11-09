@@ -2,7 +2,11 @@ import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { installDesktopWebdriverCommands } from '@fluentui-react-native/desktop-driver/wdio';
 import type { DesktopEndpoint, DesktopRenderer } from '@fluentui-react-native/desktop-driver';
+import { resolveDesktopClickMode } from '@fluentui-react-native/desktop-driver/authoring';
 import type { DesktopReadiness } from '../config.js';
+import { desktopJasmineRegistry } from '../jasmine/registry.js';
+import { desktopTestSelectionFromEnvironment } from '../jasmine/selection.js';
+import { currentDesktopJasmineEnvironment, selectDesktopSpecs } from '../jasmine/specSelection.js';
 import { connectReportProducer } from '../reporting/transport.js';
 import { DesktopReportedError, serializeReportError } from '../reporting/protocol.js';
 
@@ -56,6 +60,8 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
   }
   const address = new URL(settings.url);
   const readiness = settings.readiness;
+  // The launcher read the selection too, so a malformed one fails the run before any worker starts.
+  const selection = desktopTestSelectionFromEnvironment();
   const configuration = {
     ...hooks,
     runner: 'local',
@@ -88,7 +94,9 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
         platformName: settings.endpoint === 'macos' ? 'macos' : 'windows',
         'furn:target': settings.targetId,
         'furn:launchMode': settings.ownership === 'external' ? 'attach' : 'launch',
-        'furn:clickMode': 'auto',
+        'furn:clickMode': resolveDesktopClickMode(undefined, 'auto', selection?.lane),
+        // A lane's session refuses input its lane never delivers; without one, every mechanism stays available.
+        'furn:inputMode': selection?.lane ?? 'compatibility',
       },
     ],
     beforeSession: async (...args: unknown[]) => {
@@ -97,6 +105,15 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
     },
     before: async (capabilities: unknown, specs: unknown, browser: WebdriverIO.Browser) => {
       installDesktopWebdriverCommands(browser, settings.url);
+      // Before the application is touched: a lane that cannot vouch for its tests must stop here.
+      if (settings.framework === 'jasmine') {
+        selectDesktopSpecs(
+          desktopJasmineRegistry(),
+          currentDesktopJasmineEnvironment(),
+          browser.capabilities['furn:features'],
+          browser.capabilities['furn:inputMode'],
+        );
+      }
       if ((await browser.getWindowHandles()).length === 0) throw new Error('Native application did not expose a window.');
       if (readiness?.testId) {
         await browser.$(`~${readiness.testId}`).waitForDisplayed({

@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Button } from '../button/button';
@@ -175,8 +176,8 @@ export const NativeStructure: Story = {
       },
     },
   },
-  wdio: {
-    'CRD-002 renders structured sections in reading order': async ({ browser, expect }) => {
+  wdio: [
+    desktopIt('CRD-002 renders structured sections in reading order', async ({ browser, expect }) => {
       expect(browser.capabilities.setWindowRect).toBe(true);
       const originalWindow = await browser.getWindowRect();
       const requestedWindow = {
@@ -249,13 +250,13 @@ export const NativeStructure: Story = {
       } finally {
         await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
       }
-    },
-    'CRD-005 keeps a nested action enabled inside a disabled selectable surface': async ({ browser, expect }) => {
+    }),
+    desktopIt('CRD-005 keeps a nested action enabled inside a disabled selectable surface', async ({ browser, expect }) => {
       const help = await browser.$('~card-spec-help');
       expect(await help.getTagName()).toBe('button');
       await expect(help).toBeEnabled();
-    },
-  },
+    }),
+  ],
 };
 
 export const Overview: Story = {

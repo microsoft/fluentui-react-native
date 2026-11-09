@@ -19,6 +19,7 @@ let package = Package(
         .linkedFramework("ImageIO"),
         .linkedFramework("ScreenCaptureKit"),
         .linkedFramework("UniformTypeIdentifiers"),
+        .linkedLibrary("bsm"),
       ]
     ),
   ]

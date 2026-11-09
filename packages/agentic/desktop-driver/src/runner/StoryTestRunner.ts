@@ -343,10 +343,7 @@ export async function assertDesktopExpectation(session: DesktopSessionClient, ex
     assertEqual(elements.length > 0, expectation.value ?? true, 'exists');
     return;
   }
-  const element = elements[0];
-  if (!element) {
-    throw new DesktopAssertionError('Expected element does not exist.');
-  }
+  const element = requireUniqueDesktopElement(elements, expectation.target);
   let actual: unknown;
   switch (expectation.state) {
     case 'accessibleName':
@@ -418,10 +415,21 @@ async function waitFor(
 
 export async function findDesktopElement(session: DesktopSessionClient, selector: DesktopStorySelector): Promise<DesktopElementClient> {
   const elements = await findDesktopElements(session, selector);
-  if (!elements[0]) {
+  return requireUniqueDesktopElement(elements, selector);
+}
+
+function requireUniqueDesktopElement(elements: readonly DesktopElementClient[], selector: DesktopStorySelector): DesktopElementClient {
+  const element = elements[0];
+  if (!element) {
     throw new WebDriverError('no such element', `No element matched ${JSON.stringify(selector)}.`);
   }
-  return elements[0];
+  if (elements.length > 1) {
+    throw new WebDriverError(
+      'invalid selector',
+      `Selector ${JSON.stringify(selector)} matched ${elements.length} elements; narrow it to one element.`,
+    );
+  }
+  return element;
 }
 
 export async function findDesktopElements(session: DesktopSessionClient, selector: DesktopStorySelector): Promise<DesktopElementClient[]> {

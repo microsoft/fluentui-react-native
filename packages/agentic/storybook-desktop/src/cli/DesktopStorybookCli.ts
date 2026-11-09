@@ -2,13 +2,22 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
-import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
-import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import {
+  defaultAgentDescriptor,
+  DesktopServiceScope,
+  resolveDesktopApplication,
+  resolveDesktopTestScope,
+} from '@fluentui-react-native/desktop-test';
+import { runDesktopOperation, type DesktopOperation, type DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
+import { resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
+import { formatDesktopReporterValue } from '@fluentui-react-native/desktop-driver/cli/reporter';
+import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 
 import { writeDesktopStorybookFailure, type DesktopStorybookErrorOutput } from '../../config/diagnostics.cjs';
 import {
   buildNativeDesktopDriver,
   resolveNativeDesktopDriver,
+  type NativeDesktopApplicationDescriptor,
   type NativeDriverArtifact,
   type NativeDriverBuildOptions,
 } from '@fluentui-react-native/desktop-driver';
@@ -34,12 +43,21 @@ import {
   writeDesktopStorybookDriverManifest,
   writeDesktopStoryManifest,
 } from '../driver/index.js';
-import { desktopStorybookTargetId } from '../driver/driverManifest.js';
+import {
+  desktopStorybookDriverManifestPath,
+  desktopStorybookTargetId,
+  driverManifestInput,
+  type CreateDesktopStorybookDriverManifestOptions,
+  type DesktopStorybookDriverManifest,
+} from '../driver/driverManifest.js';
 import { NodeDesktopCommandRunner, STORYBOOK_VERBOSE } from './commandRunner.js';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner.js';
 import { formatDesktopStorybookSmokeTestSummary, runDesktopStorybookSmokeTests } from './smokeTests.js';
-import { matchesWdioTest, runWdioStoryTests, selectWdioStories } from '../testing/runWdioTests.js';
+import { runWdioStoryTests, WdioStoryTestRunError, type WdioStoryTestResult } from '../testing/runWdioTests.js';
+import { decideWdioSelection, describeWdioExclusions, listWdioSelection } from '../testing/selection.js';
+import type { WdioSelectionContext } from '../testing/selection.js';
 import { resolveWdioOptions, type DesktopStorybookWdioOptions } from '../config/wdio.js';
+import { connectStoryTraversal } from './storyTraversal.js';
 
 type ResolvedDesktopStorybookInstance = DesktopStorybookInstance & {
   driverManifestPath?: string;
@@ -66,10 +84,17 @@ export type DesktopStorybookCliOptions = {
   verbose?: boolean;
   isPortAvailable?: (port: number) => Promise<boolean>;
   runSmokeTests?: typeof runDesktopStorybookSmokeTests;
+  connectStoryTraversal?: typeof connectStoryTraversal;
   resolveNativeDriver?: typeof resolveNativeDesktopDriver;
+  /** Resolves a Windows or Win32 desktop target's verified application identity for `driver --agent`. */
+  resolveDesktopApplication?: typeof resolveDesktopApplication;
   writeMacOSApplicationLease?: typeof writeMacOSApplicationLease;
+  maintainMacOSApplicationLease?: typeof maintainMacOSApplicationLease;
   reporter?: DesktopReportWriter;
+  reporterMode?: ResolvedDesktopReporterMode;
   services?: DesktopServiceScope;
+  /** Called once `server` or `driver` has written its readiness record. */
+  onReady?: () => void;
 };
 
 export type DesktopStorybookServerOptions = {
@@ -77,8 +102,23 @@ export type DesktopStorybookServerOptions = {
   port?: number;
 };
 
-export type DesktopStorybookTestOptions = DesktopStorybookWdioOptions & {
+export type DesktopStorybookDriverOptions = DesktopStorybookServerOptions & {
+  input?: 'accessible' | 'physical';
+  /**
+   * Protects the driver with a grant authority and publishes one agent's connection descriptor, which the Desktop
+   * Driver MCP adapter reads. WDIO `storybook test` cannot connect to an agent-served driver.
+   */
+  agent?: {
+    /** The descriptor record name. Defaults to `agent-connection.json`. */
+    descriptor?: string;
+    /** The private storage root. Defaults to the platform location. */
+    root?: string;
+  };
+};
+
+export type DesktopStorybookTestOptions = Omit<DesktopStorybookWdioOptions, 'reporter'> & {
   list?: boolean;
+  testReporter?: DesktopStorybookWdioOptions['reporter'];
   url?: string;
   target?: string;
 };
@@ -97,14 +137,22 @@ export class DesktopStorybookCli {
   private readonly verbose: boolean;
   private readonly isPortAvailable: (port: number) => Promise<boolean>;
   private readonly runSmokeTests: typeof runDesktopStorybookSmokeTests;
+  private readonly connectStoryTraversal: typeof connectStoryTraversal;
   private readonly resolveNativeDriver: typeof resolveNativeDesktopDriver;
+  private readonly resolveDesktopApplication: typeof resolveDesktopApplication;
   private readonly writeMacOSApplicationLease: typeof writeMacOSApplicationLease;
+  private readonly maintainMacOSApplicationLease: typeof maintainMacOSApplicationLease;
   private readonly reporter?: DesktopReportWriter;
+  private readonly reporterMode?: ResolvedDesktopReporterMode;
+  private readonly structuredOutput: Pick<NodeJS.WriteStream, 'write'>;
   private readonly services: DesktopServiceScope;
+  private readonly onReady?: () => void;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
     this.config = config;
     this.reporter = options.reporter;
+    this.reporterMode = options.reporterMode;
+    this.onReady = options.onReady;
     this.paper = options.paper ?? config.getDesktopTarget?.('macos')?.host.renderer === 'paper';
     this.instance = createDesktopStorybookInstance({
       projectRoot: config.projectRoot,
@@ -122,13 +170,19 @@ export class DesktopStorybookCli {
     this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
-    this.output = options.output ?? reportOutput(this.reporter, 'info', process.stdout);
-    this.errorOutput = options.errorOutput ?? reportOutput(this.reporter, 'warning', process.stderr);
+    const structured = this.reporterMode === 'json' || this.reporterMode === 'ndjson';
+    const silentOutput = { write: () => true };
+    this.output = options.output ?? (structured ? silentOutput : reportOutput(this.reporter, 'info', process.stdout));
+    this.errorOutput = options.errorOutput ?? (structured ? silentOutput : reportOutput(this.reporter, 'warning', process.stderr));
+    this.structuredOutput = options.output ?? process.stdout;
     this.verbose = options.verbose ?? process.env[STORYBOOK_VERBOSE] === '1';
     this.isPortAvailable = options.isPortAvailable ?? isLoopbackPortAvailable;
     this.runSmokeTests = options.runSmokeTests ?? runDesktopStorybookSmokeTests;
+    this.connectStoryTraversal = options.connectStoryTraversal ?? connectStoryTraversal;
     this.resolveNativeDriver = options.resolveNativeDriver ?? resolveNativeDesktopDriver;
+    this.resolveDesktopApplication = options.resolveDesktopApplication ?? resolveDesktopApplication;
     this.writeMacOSApplicationLease = options.writeMacOSApplicationLease ?? writeMacOSApplicationLease;
+    this.maintainMacOSApplicationLease = options.maintainMacOSApplicationLease ?? maintainMacOSApplicationLease;
   }
 
   async server(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
@@ -137,29 +191,62 @@ export class DesktopStorybookCli {
     if (command === false || command === undefined) {
       throw unsupportedAction('server', platform);
     }
-    await this.executePlan(
-      {
-        ...command,
-        env: {
-          ...command.env,
-          ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
-          ...(options.port ? { STORYBOOK_WS_PORT: String(options.port) } : {}),
-        },
-      },
-      platform,
-    );
+    const host = options.host ?? command.env?.STORYBOOK_WS_HOST ?? process.env.STORYBOOK_WS_HOST ?? '127.0.0.1';
+    const port = options.port ?? Number(command.env?.STORYBOOK_WS_PORT ?? process.env.STORYBOOK_WS_PORT ?? 7007);
+    validateServerOptions({ host, port });
+    const failures: unknown[] = [];
+    try {
+      this.services.start(
+        'storybook-channel',
+        this.prepareCommand(
+          {
+            ...command,
+            env: {
+              ...command.env,
+              ...(options.host ? { STORYBOOK_WS_HOST: options.host } : {}),
+              ...(options.port ? { STORYBOOK_WS_PORT: String(options.port) } : {}),
+            },
+          },
+          platform,
+        ),
+      );
+      await this.services.ready('storybook-channel', loopbackUrl(port, '/index.json'), 120_000, this.fetch);
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
+        this.writeStructured({ type: 'ready', host, port, runId: this.reporter?.runId });
+      } else {
+        this.output.write(`Storybook server ready: ${host}:${port}\n`);
+      }
+      this.onReady?.();
+      await this.services.guard(this.services.waitForStop());
+    } catch (error) {
+      failures.push(error);
+    }
+    try {
+      await this.services.close();
+    } catch (error) {
+      failures.push(error);
+    }
+    if (failures.length === 1) throw failures[0];
+    if (failures.length > 1) throw new AggregateError(failures, 'Storybook server execution and cleanup failed.');
   }
 
-  async driver(platform: Platforms, options: DesktopStorybookServerOptions = {}): Promise<void> {
+  async driver(platform: Platforms, options: DesktopStorybookDriverOptions = {}): Promise<void> {
     validateServerOptions(options);
     validateDriverHost(options.host);
+    const wdio = resolveWdioOptions({ ...this.config.wdio, ...(options.input ? { input: options.input } : {}) });
+    const agent = options.agent && {
+      descriptor: options.agent.descriptor ?? defaultAgentDescriptor,
+      // The channel service runs in another working directory.
+      ...(options.agent.root === undefined ? {} : { root: path.resolve(options.agent.root) }),
+    };
     const command = this.config.getPlatformOptions(platform).server;
     if (command === false || command === undefined) {
       throw unsupportedAction('server', platform);
     }
     const nativeDriver = await this.resolveDriver(platform);
+    const agentApplication = agent && platform !== 'macos' ? await this.resolveAgentApplication(platform) : undefined;
     const storybookPort = options.port ?? (await findAvailablePort(this.instance.storybookPort, this.isPortAvailable));
-    const metroPort = await findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    const metroPort = await this.resolveDriverMetroPort(platform, storybookPort);
     const driverPort = await findAvailablePort(this.instance.driverPort, this.isPortAvailable, new Set([storybookPort, metroPort]));
     const resolvedInstance: ResolvedDesktopStorybookInstance = {
       ...this.instance,
@@ -167,8 +254,14 @@ export class DesktopStorybookCli {
       metroPort,
       storybookPort,
     };
-    resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
-    this.output.write(`Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}\n`);
+    const driverManifest = await this.writeDriverManifest(
+      platform,
+      resolvedInstance,
+      nativeDriver,
+      agent && { ...agent, ...(agentApplication ? { application: agentApplication } : {}) },
+      wdio,
+    );
+    resolvedInstance.driverManifestPath = driverManifest.path;
     this.services.start('metro', this.prepareCommand(defaultMetroCommand(resolvedInstance), platform, resolvedInstance));
     const failures: unknown[] = [];
     try {
@@ -186,7 +279,47 @@ export class DesktopStorybookCli {
           resolvedInstance,
         ),
       );
-      await this.services.guard(new Promise<never>(() => undefined));
+      await Promise.all([
+        this.services.ready('metro', loopbackUrl(metroPort, '/status'), 120_000, this.fetch),
+        this.services.ready('storybook-channel', loopbackUrl(storybookPort, '/index.json'), 120_000, this.fetch),
+      ]);
+      const agentManifest = driverManifest.manifest.agent;
+      if (agentManifest) {
+        await this.services.readyProcess(
+          'storybook-channel',
+          { tier: 'service-ready', service: 'storybook-channel', descriptor: agentManifest.descriptor },
+          120_000,
+        );
+      }
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') {
+        this.writeStructured({
+          type: 'ready',
+          ...(agentManifest ? { agentDescriptor: agentManifest.descriptor } : {}),
+          services: ['metro', 'storybook-channel'],
+          instanceId: resolvedInstance.id,
+          endpoint: platform,
+          renderer: this.renderer(platform),
+          storybookPort,
+          metroPort,
+          driverPort,
+          targetId: this.targetId(platform),
+          runId: this.reporter?.runId,
+        });
+      } else {
+        this.output.write(
+          `Storybook instance ${resolvedInstance.id}: channel=${storybookPort}, metro=${metroPort}, driver=${driverPort}` +
+            `${agentManifest ? `, agent=${agentManifest.descriptor}` : ''}\n`,
+        );
+      }
+      this.onReady?.();
+      // No WDIO run writes the lease an agent's attach session verifies, so the driver keeps it current.
+      await this.services.guard(
+        agentManifest && platform === 'macos'
+          ? this.maintainMacOSApplicationLease(driverManifest.path, this.services.controller.signal, {
+              onWarning: (message) => this.warn(message),
+            })
+          : this.services.waitForStop(),
+      );
     } catch (error) {
       failures.push(error);
     }
@@ -210,68 +343,112 @@ export class DesktopStorybookCli {
       outputPath ?? path.join('storybook-desktop.generated', `story-manifest.${platform}.json`),
     );
     writeDesktopStoryManifest(manifest, resolvedOutput);
-    this.output.write(`${resolvedOutput}\n`);
+    if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured({ path: resolvedOutput });
+    else this.output.write(`${resolvedOutput}\n`);
     return resolvedOutput;
   }
 
   async test(platform: Platforms, options: DesktopStorybookTestOptions = {}): Promise<void> {
-    const settings = resolveWdioOptions({
+    const overrides: DesktopStorybookWdioOptions = {
+      ...(options.clickMode === undefined ? {} : { clickMode: options.clickMode }),
+      ...(options.input === undefined ? {} : { input: options.input }),
+      ...(options.testReporter === undefined ? {} : { reporter: options.testReporter }),
+      ...(options.story === undefined ? {} : { story: options.story }),
+      ...(options.tag === undefined ? {} : { tag: options.tag }),
+      ...(options.test === undefined ? {} : { test: options.test }),
+      ...(options.timeoutMs === undefined ? {} : { timeoutMs: options.timeoutMs }),
+    };
+    const initialSettings = resolveWdioOptions({
       ...this.config.wdio,
-      ...Object.fromEntries(Object.entries(options).filter(([, value]) => value !== undefined)),
+      ...overrides,
     });
+    const connection = options.list ? undefined : this.testConnection(platform, options);
+    const settings =
+      connection?.input && initialSettings.input === undefined
+        ? resolveWdioOptions({ ...initialSettings, input: connection.input })
+        : initialSettings;
     const manifest = await this.createStoryManifest(this.config, platform);
-    const selected = selectWdioStories(manifest, settings);
-    if (selected.length === 0) {
-      throw new Error('No executable wdio story tests matched the requested selection.');
+    const scope = this.scopeContext(platform);
+    const selection = decideWdioSelection(manifest, settings, { platform, scope });
+    if (selection.stories.length === 0) {
+      throw new Error(`No executable wdio story tests matched the requested selection${describeWdioExclusions(selection)}.`);
     }
     if (options.list) {
-      this.output.write(
-        `${JSON.stringify(
-          selected.map(({ id, sourcePath, wdio }) => ({
-            id,
-            sourcePath,
-            ...(wdio?.testNames ? { tests: wdio.testNames.filter((name) => matchesWdioTest(name, settings.test)) } : {}),
-          })),
-          null,
-          2,
-        )}\n`,
-      );
+      const value = listWdioSelection(selection, settings);
+      if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
+      else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
       return;
     }
-    const connection = this.testConnection(platform, options);
+    const activeConnection = connection ?? this.testConnection(platform, options);
     if (platform === 'macos' && !options.url) {
-      await this.writeMacOSApplicationLease(
-        path.join(this.config.projectRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
-        settings.timeoutMs,
-      );
+      await this.writeMacOSApplicationLease(desktopStorybookDriverManifestPath(this.config.projectRoot, 'macos'), settings.timeoutMs);
     }
-    const results = await runWdioStoryTests(
-      {
-        ...settings,
-        ...connection,
-        config: this.config,
-        manifest,
-        platform,
-        errorOutput: this.errorOutput,
-        report: this.reporter,
-        signal: this.services.controller.signal,
-      },
-      this.runner,
-    );
-    this.output.write(
-      `Ran ${results.length} executable wdio tests (${results.filter(({ status }) => status === 'passed').length} passed, ` +
-        `${results.filter(({ status }) => status === 'skipped').length} skipped).\n`,
-    );
+    const summarize = (operation: DesktopOperation, wdio: readonly WdioStoryTestResult[]) =>
+      operation.summarize(formatDesktopStorybookSmokeTestSummary({ tests: [], wdio }));
+    await this.operation('Story tests', async (operation) => {
+      try {
+        const results = await runWdioStoryTests(
+          {
+            ...settings,
+            ...activeConnection,
+            config: this.config,
+            manifest,
+            platform,
+            scope,
+            errorOutput: this.errorOutput,
+            report: this.reporter,
+            signal: this.services.controller.signal,
+            input: settings.input,
+          },
+          this.runner,
+        );
+        summarize(operation, results);
+      } catch (error) {
+        if (error instanceof WdioStoryTestRunError) summarize(operation, error.results);
+        throw error;
+      }
+    });
   }
 
-  private testConnection(platform: Platforms, options: DesktopStorybookTestOptions): { targetId: string; url: string } {
+  /**
+   * Runs `work` as one reported operation, which ends with an outcome header. Without a reporter, which only a library
+   * caller can lack, the summary is written as a line and detail is written only in verbose mode.
+   */
+  private async operation<T>(label: string, work: (operation: DesktopOperation) => T | Promise<T>): Promise<T> {
+    if (this.reporter) return runDesktopOperation(this.reporter, { label }, work);
+    let summary: string | undefined;
+    try {
+      return await work({
+        summarize: (text) => {
+          summary = text;
+        },
+        log: (text) => {
+          if (this.verbose) this.output.write(`${text}\n`);
+        },
+      });
+    } finally {
+      if (summary) this.output.write(`${summary}\n`);
+    }
+  }
+
+  /** The scope domains and the values this endpoint's target holds, which declared case `scope` selection reads. */
+  private scopeContext(platform: Platforms): NonNullable<WdioSelectionContext['scope']> {
+    const domains = this.config.desktop?.testScopes ?? resolveDesktopScopeDomains();
+    // This run's renderer wins over the host configuration, since `--paper` switches it.
+    return { domains, values: resolveDesktopTestScope(domains, this.config.getDesktopTarget(platform), this.renderer(platform)) };
+  }
+
+  private testConnection(
+    platform: Platforms,
+    options: DesktopStorybookTestOptions,
+  ): { input?: 'accessible' | 'physical'; targetId: string; url: string } {
     if (options.url || options.target) {
       if (!options.url || !options.target) {
         throw new Error('Pass --url and --target together, or omit both to use the running Storybook driver instance.');
       }
       return { targetId: options.target, url: options.url };
     }
-    const manifestPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+    const manifestPath = desktopStorybookDriverManifestPath(this.config.projectRoot, platform);
     if (!fs.existsSync(manifestPath)) {
       throw new Error(`Start storybook driver --${platform} and launch the app before running storybook test.`);
     }
@@ -295,23 +472,26 @@ export class DesktopStorybookCli {
     ) {
       throw new Error(`Invalid Storybook driver instance at ${manifestPath}; restart storybook driver --${platform}.`);
     }
-    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort) };
+    if ('agent' in manifest && manifest.agent !== undefined) {
+      // Every route of an agent-served driver requires a grant, and WDIO holds none.
+      throw new Error(
+        `The Storybook driver instance at ${manifestPath} serves an agent; restart storybook driver --${platform} without --agent to run storybook test.`,
+      );
+    }
+    const input = driverManifestInput(manifest);
+    return { targetId: manifest.targetId, url: loopbackUrl(manifest.driverPort), ...(input ? { input } : {}) };
   }
 
   printInstance(platform: Platforms): void {
-    this.output.write(
-      `${JSON.stringify(
-        {
-          ...this.instance,
-          endpoint: platform,
-          renderer: this.renderer(platform),
-          targetId: this.targetId(platform),
-          testIDPrefix: this.config.testIDPrefix,
-        },
-        null,
-        2,
-      )}\n`,
-    );
+    const value = {
+      ...this.instance,
+      endpoint: platform,
+      renderer: this.renderer(platform),
+      targetId: this.targetId(platform),
+      testIDPrefix: this.config.testIDPrefix,
+    };
+    if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(value);
+    else this.output.write(`${JSON.stringify(value, null, 2)}\n`);
   }
 
   async buildDriver(platform: Platforms, options: DesktopStorybookBuildDriverOptions = {}): Promise<NativeDriverArtifact> {
@@ -320,8 +500,13 @@ export class DesktopStorybookCli {
       ...this.toBuildOptions(platform, nativeOptions),
       force: options.force,
     });
-    this.output.write(`${JSON.stringify(artifact, null, 2)}\n`);
+    if (this.reporterMode === 'json' || this.reporterMode === 'ndjson') this.writeStructured(artifact);
+    else this.output.write(`${JSON.stringify(artifact, null, 2)}\n`);
     return artifact;
+  }
+
+  private writeStructured(value: unknown): void {
+    if (this.reporterMode) this.structuredOutput.write(formatDesktopReporterValue(this.reporterMode, value));
   }
 
   async prep(platform: Platforms, options: DesktopStorybookPrepOptions = {}): Promise<void> {
@@ -357,8 +542,15 @@ export class DesktopStorybookCli {
       throw unsupportedAction('smoke', platform);
     }
     if (smoke?.command) {
-      const instance = await this.resolveSmokeInstance(platform, smoke, mode);
-      await this.executePlan(withEnvironment(smoke.command, { [STORYBOOK_SMOKE_MODE]: mode }), platform, instance);
+      const instance = await this.resolveSmokeInstance(platform, smoke, mode, options.input);
+      await this.executePlan(
+        withEnvironment(smoke.command, {
+          [STORYBOOK_SMOKE_MODE]: mode,
+          ...(options.input ? { DESKTOP_INPUT: options.input } : {}),
+        }),
+        platform,
+        instance,
+      );
       return;
     }
     if (!smoke?.stop) {
@@ -367,8 +559,8 @@ export class DesktopStorybookCli {
       );
     }
 
-    const instance = await this.resolveSmokeInstance(platform, smoke, mode);
-    await this.runSmokeLifecycle(platform, smoke, instance, mode);
+    const instance = await this.resolveSmokeInstance(platform, smoke, mode, options.input);
+    await this.runSmokeLifecycle(platform, smoke, instance, mode, options.input);
   }
 
   private async executeAction(
@@ -388,6 +580,7 @@ export class DesktopStorybookCli {
     smoke: DesktopSmokeOptions,
     instance: ResolvedDesktopStorybookInstance,
     mode: DesktopSmokeMode,
+    input?: 'accessible' | 'physical',
   ): Promise<void> {
     const failures: unknown[] = [];
     let primaryFailure: unknown;
@@ -435,9 +628,39 @@ export class DesktopStorybookCli {
         }
         await this.writeMacOSApplicationLease(instance.driverManifestPath, smoke.startupTimeoutMs ?? 120_000);
       }
-      await this.services.guard(
-        this.renderEveryStory(serverUrl, smoke.settleMs ?? 0, smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs),
-      );
+      const traversal = instance.driverManifestPath
+        ? await this.connectStoryTraversal({
+            url: loopbackUrl(instance.driverPort),
+            platform,
+            targetId: this.targetId(platform),
+            fetch: this.fetch,
+            signal: this.services.controller.signal,
+          })
+        : undefined;
+      let traversalFailure: unknown;
+      try {
+        await this.services.guard(
+          this.operation('Render stories', (operation) =>
+            this.renderEveryStory(
+              operation,
+              serverUrl,
+              smoke.settleMs ?? 0,
+              smoke.initialRenderTimeoutMs ?? smoke.startupTimeoutMs,
+              traversal?.select,
+            ),
+          ),
+        );
+      } catch (error) {
+        traversalFailure = error;
+      }
+      try {
+        await traversal?.close();
+      } catch (error) {
+        throw traversalFailure === undefined
+          ? error
+          : new AggregateError([traversalFailure, error], 'Storybook traversal and cleanup failed.');
+      }
+      if (traversalFailure !== undefined) throw traversalFailure;
       if (mode === 'stories-and-tests') {
         const result = await this.services.guard(
           this.runSmokeTests({
@@ -447,12 +670,15 @@ export class DesktopStorybookCli {
             driverUrl: loopbackUrl(instance.driverPort),
             manifest: await this.createStoryManifest(this.config, platform),
             platform,
+            scope: this.scopeContext(platform),
             targetId: this.targetId(platform),
             report: this.reporter,
             signal: this.services.controller.signal,
+            input,
           }),
         );
-        this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
+        // With a reporter the story tests operation's header already carries the summary.
+        if (!this.reporter) this.output.write(`${formatDesktopStorybookSmokeTestSummary(result)}\n`);
       }
     } catch (error) {
       primaryFailure = error;
@@ -480,10 +706,30 @@ export class DesktopStorybookCli {
     }
   }
 
+  /**
+   * A native host whose development build reads Metro from a fixed port, such as React Native Test App's Windows Debug
+   * host, declares that port through its smoke Metro URL. The driver must serve Metro there, or the app never loads.
+   */
+  private async resolveDriverMetroPort(platform: Platforms, storybookPort: number): Promise<number> {
+    const smoke = this.config.getPlatformOptions(platform).smoke;
+    if (!smoke || !smoke.metroUrl) {
+      return findAvailablePort(this.instance.metroPort, this.isPortAvailable, new Set([storybookPort]));
+    }
+    const port = portFromUrl(smoke.metroUrl);
+    if (port === storybookPort || !(await this.isPortAvailable(port))) {
+      throw new Error(
+        `The ${platform} app loads its development bundle from Metro on port ${port}, which is in use. ` +
+          `Stop the process using port ${port}, such as another Metro server, then rerun the driver.`,
+      );
+    }
+    return port;
+  }
+
   private async resolveSmokeInstance(
     platform: Platforms,
     smoke: DesktopSmokeOptions,
     mode: DesktopSmokeMode,
+    input?: 'accessible' | 'physical',
   ): Promise<ResolvedDesktopStorybookInstance> {
     const storybookPort = smoke.serverUrl
       ? portFromUrl(smoke.serverUrl)
@@ -501,7 +747,10 @@ export class DesktopStorybookCli {
 
     if (mode === 'stories-and-tests') {
       const nativeDriver = await this.resolveDriver(platform);
-      resolvedInstance.driverManifestPath = await this.writeDriverManifest(platform, resolvedInstance, nativeDriver);
+      const wdio = resolveWdioOptions({ ...this.config.wdio, ...(input ? { input } : {}) });
+      resolvedInstance.driverManifestPath = (
+        await this.writeDriverManifest(platform, resolvedInstance, nativeDriver, undefined, wdio)
+      ).path;
     }
     if (platform === 'macos') {
       resolvedInstance.macosXcconfigPath = writeMacOSInstanceConfig(this.config.projectRoot, resolvedInstance);
@@ -518,21 +767,31 @@ export class DesktopStorybookCli {
     platform: Platforms,
     instance: DesktopStorybookInstance,
     nativeDriver: NativeDriverArtifact,
-  ): Promise<string> {
+    agent?: CreateDesktopStorybookDriverManifestOptions['agent'],
+    wdio?: CreateDesktopStorybookDriverManifestOptions['wdio'],
+  ): Promise<{ manifest: DesktopStorybookDriverManifest; path: string }> {
     const storyManifest = await this.createStoryManifest(this.config, platform);
-    const outputPath = path.join(this.config.projectRoot, 'storybook-desktop.generated', `driver-manifest.${platform}.json`);
+    const outputPath = desktopStorybookDriverManifestPath(this.config.projectRoot, platform);
     const renderer = this.renderer(platform);
     const driverManifest = createDesktopStorybookDriverManifest({
+      ...(agent ? { agent } : {}),
       bridgeNonce: readReusableBridgeNonce(outputPath, instance, storyManifest.platformManifestDigest, renderer),
       config: this.config,
       instance,
       nativeDriver,
       platform,
       renderer,
+      scope: this.scopeContext(platform),
       storyManifest,
+      ...(wdio ? { wdio } : {}),
     });
     writeDesktopStorybookDriverManifest(driverManifest, outputPath);
-    return outputPath;
+    return { manifest: driverManifest, path: outputPath };
+  }
+
+  private warn(message: string): void {
+    if (this.reporter) this.reporter.emit({ kind: 'diagnostic', payload: { level: 'warning', message } }, 'storybook');
+    else this.errorOutput.write(`Warning: ${message}\n`);
   }
 
   private targetId(platform: Platforms): string {
@@ -541,6 +800,40 @@ export class DesktopStorybookCli {
 
   private renderer(platform: Platforms): 'fabric' | 'paper' {
     return platform === 'win32' || (platform === 'macos' && this.paper) ? 'paper' : 'fabric';
+  }
+
+  /**
+   * Windows and Win32 have no lease maintainer, so an agent attaches by the exact title qualified with the app's
+   * configured or resolved AUMID or canonical executable; a title alone is never accepted as an identity.
+   */
+  private async resolveAgentApplication(platform: Platforms): Promise<NativeDesktopApplicationDescriptor> {
+    const { windowTitle, aumid, executablePath } = this.requireNativeDriverOptions(platform).application ?? {};
+    if (windowTitle && (aumid || executablePath)) {
+      return { windowTitle, ...(aumid ? { aumid } : {}), ...(executablePath ? { executablePath } : {}) };
+    }
+    const target = this.config.getDesktopTarget(platform);
+    if (!target) {
+      throw new Error(
+        `An agent attaches to ${platform} by a verified application identity; configure a ${platform} desktop target or the native driver application's aumid or executablePath.`,
+      );
+    }
+    let resolved: NativeDesktopApplicationDescriptor;
+    try {
+      resolved = await this.resolveDesktopApplication(target, this.services.controller.signal, { attach: true });
+    } catch (error) {
+      throw new Error(
+        `Could not resolve the ${platform} application identity an agent attaches to; build and register the app once before driver --agent: ${errorMessage(error)}`,
+        { cause: error },
+      );
+    }
+    if (!resolved.windowTitle || (!resolved.aumid && !resolved.executablePath)) {
+      throw new Error(`The ${platform} desktop target does not resolve an AUMID or executable identity for an agent to attach to.`);
+    }
+    return {
+      windowTitle: resolved.windowTitle,
+      ...(resolved.aumid ? { aumid: resolved.aumid } : {}),
+      ...(resolved.executablePath ? { executablePath: resolved.executablePath } : {}),
+    };
   }
 
   private async resolveDriver(platform: Platforms): Promise<NativeDriverArtifact> {
@@ -574,7 +867,13 @@ export class DesktopStorybookCli {
     };
   }
 
-  private async renderEveryStory(serverUrl: string, settleMs: number, initialRenderTimeoutMs = 300_000): Promise<void> {
+  private async renderEveryStory(
+    operation: DesktopOperation,
+    serverUrl: string,
+    settleMs: number,
+    initialRenderTimeoutMs = 300_000,
+    select = (storyId: string, timeoutMs: number) => this.selectStory(serverUrl, storyId, timeoutMs),
+  ): Promise<void> {
     const storyIndex = await this.getJson(new URL('/index.json', serverUrl));
     const entries = Object.values((storyIndex.entries ?? {}) as Record<string, { id?: string; type?: string }>).filter(
       (entry) => entry.type === 'story' && entry.id,
@@ -586,20 +885,22 @@ export class DesktopStorybookCli {
     const failures: Error[] = [];
     for (const { id } of entries)
       this.reporter?.emit({ kind: 'work-selected', payload: { workId: `navigation:${id}`, label: `Render ${id}` } });
+    let attempted = 0;
     let consecutiveFailures = 0;
     for (const [entryIndex, { id }] of entries.entries()) {
       this.services.controller.signal.throwIfAborted();
+      attempted += 1;
       const started = Date.now();
       const testId = `navigation:${id}`;
       this.reporter?.emit({ kind: 'scope-start', payload: { label: `Render ${id}`, category: 'worker' } }, testId, { story: id }, testId);
       this.reporter?.emit({ kind: 'test-start', payload: { testId, title: `Render ${id}`, attempt: 0 } }, testId, { story: id });
       try {
-        await this.selectStory(serverUrl, id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
+        await select(id!, entryIndex === 0 ? initialRenderTimeoutMs : 15_000);
         consecutiveFailures = 0;
         if (settleMs > 0) {
           await delay(settleMs);
         }
-        this.output.write(`rendered ${id}\n`);
+        operation.log(`rendered ${id}`);
         this.reporter?.emit(
           {
             kind: 'test-result',
@@ -636,9 +937,13 @@ export class DesktopStorybookCli {
     }
 
     if (failures.length > 0) {
+      const notAttempted = entries.length - attempted;
+      operation.summarize(
+        `${failures.length} of ${entries.length} stories failed to render${notAttempted > 0 ? ` (stopped early; ${notAttempted} not attempted)` : ''}`,
+      );
       throw new AggregateError(failures, `${failures.length} stories failed to render:\n${failures.map(errorMessage).join('\n')}`);
     }
-    this.output.write(`Rendered ${entries.length} stories.\n`);
+    operation.summarize(`${entries.length} ${entries.length === 1 ? 'story' : 'stories'} rendered`);
   }
 
   private async selectStory(serverUrl: string, storyId: string, timeoutMs: number): Promise<void> {
@@ -817,7 +1122,7 @@ function writeMacOSInstanceConfig(projectRoot: string, instance: DesktopStoryboo
   return xcconfigPath;
 }
 
-type MacOSRunningApplication = {
+export type MacOSRunningApplication = {
   executablePath: string;
   processId: number;
   processStartedAt: number;
@@ -827,6 +1132,62 @@ export async function writeMacOSApplicationLease(manifestPath: string, timeoutMs
   if (process.platform !== 'darwin') {
     throw new Error('A macOS application lease can only be written on macOS.');
   }
+  const application = readMacOSLeaseApplication(manifestPath);
+  const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
+  writeMacOSApplicationLeaseFile(application, runningApplication);
+}
+
+export type MaintainMacOSApplicationLeaseOptions = {
+  intervalMs?: number;
+  /** Replaces the AppKit query; tests supply it. */
+  queryApplications?: (bundleIdentifier: string) => Promise<MacOSRunningApplication[]>;
+  /** Receives each distinct query failure once, such as more than one running instance. */
+  onWarning?: (message: string) => void;
+};
+
+/**
+ * Keeps the manifest's application lease naming the one running instance, rewriting it whenever that process changes
+ * or the lease disappears. A failed or ambiguous query leaves the lease unchanged. Runs until the signal aborts and then
+ * rejects with its reason.
+ */
+export async function maintainMacOSApplicationLease(
+  manifestPath: string,
+  signal: AbortSignal,
+  { intervalMs = 2000, queryApplications, onWarning }: MaintainMacOSApplicationLeaseOptions = {},
+): Promise<never> {
+  if (!queryApplications && process.platform !== 'darwin') {
+    throw new Error('A macOS application lease can only be written on macOS.');
+  }
+  const query = queryApplications ?? queryMacOSApplications;
+  const application = readMacOSLeaseApplication(manifestPath);
+  let leased: string | undefined;
+  let warned: string | undefined;
+  for (;;) {
+    signal.throwIfAborted();
+    try {
+      const applications = await query(application.bundleIdentifier);
+      if (applications.length > 1) {
+        throw new Error(`More than one running application has bundle identifier "${application.bundleIdentifier}".`);
+      }
+      const [running] = applications;
+      if (running) {
+        const identity = `${running.processId}:${running.processStartedAt}`;
+        if (identity !== leased || !fs.existsSync(application.leasePath)) {
+          writeMacOSApplicationLeaseFile(application, running);
+          leased = identity;
+        }
+      }
+      warned = undefined;
+    } catch (error) {
+      const message = errorMessage(error);
+      if (message !== warned) onWarning?.(message);
+      warned = message;
+    }
+    await delay(intervalMs, signal);
+  }
+}
+
+function readMacOSLeaseApplication(manifestPath: string): { bundleIdentifier: string; leaseNonce: string; leasePath: string } {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as {
     application?: {
       bundleIdentifier?: string;
@@ -838,16 +1199,7 @@ export async function writeMacOSApplicationLease(manifestPath: string, timeoutMs
   if (!application?.bundleIdentifier || !application.leaseNonce || !application.leasePath) {
     throw new Error(`The Desktop Driver manifest at "${manifestPath}" does not contain a complete macOS application descriptor.`);
   }
-
-  const runningApplication = await waitForMacOSApplication(application.bundleIdentifier, timeoutMs);
-  writeMacOSApplicationLeaseFile(
-    {
-      bundleIdentifier: application.bundleIdentifier,
-      leaseNonce: application.leaseNonce,
-      leasePath: application.leasePath,
-    },
-    runningApplication,
-  );
+  return { bundleIdentifier: application.bundleIdentifier, leaseNonce: application.leaseNonce, leasePath: application.leasePath };
 }
 
 export function writeMacOSApplicationLeaseFile(
@@ -889,30 +1241,7 @@ async function waitForMacOSApplication(bundleIdentifier: string, timeoutMs: numb
   do {
     let output: string;
     try {
-      output = await runProcess('/usr/bin/osascript', [
-        '-l',
-        'JavaScript',
-        '-e',
-        [
-          "ObjC.import('AppKit');",
-          'function run(argv) {',
-          '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
-          '  const result = [];',
-          '  for (let index = 0; index < applications.count; index += 1) {',
-          '    const application = applications.objectAtIndex(index);',
-          '    const executableURL = application.executableURL;',
-          '    const launchDate = application.launchDate;',
-          '    result.push({',
-          '      executablePath: executableURL ? ObjC.unwrap(executableURL.path) : null,',
-          '      processId: Number(application.processIdentifier),',
-          '      processStartedAt: launchDate ? Number(launchDate.timeIntervalSince1970) : null,',
-          '    });',
-          '  }',
-          '  return JSON.stringify(result);',
-          '}',
-        ].join('\n'),
-        bundleIdentifier,
-      ]);
+      output = await queryMacOSApplicationsOutput(bundleIdentifier);
     } catch (error) {
       lastError = error;
       await delay(250);
@@ -925,6 +1254,37 @@ async function waitForMacOSApplication(bundleIdentifier: string, timeoutMs: numb
     await delay(250);
   } while (Date.now() < deadline);
   throw new Error(`Timed out waiting for the macOS application "${bundleIdentifier}"${lastError ? `: ${errorMessage(lastError)}` : '.'}`);
+}
+
+async function queryMacOSApplications(bundleIdentifier: string): Promise<MacOSRunningApplication[]> {
+  return parseMacOSRunningApplications(await queryMacOSApplicationsOutput(bundleIdentifier), bundleIdentifier);
+}
+
+function queryMacOSApplicationsOutput(bundleIdentifier: string): Promise<string> {
+  return runProcess('/usr/bin/osascript', [
+    '-l',
+    'JavaScript',
+    '-e',
+    [
+      "ObjC.import('AppKit');",
+      'function run(argv) {',
+      '  const applications = $.NSRunningApplication.runningApplicationsWithBundleIdentifier(argv[0]);',
+      '  const result = [];',
+      '  for (let index = 0; index < applications.count; index += 1) {',
+      '    const application = applications.objectAtIndex(index);',
+      '    const executableURL = application.executableURL;',
+      '    const launchDate = application.launchDate;',
+      '    result.push({',
+      '      executablePath: executableURL ? ObjC.unwrap(executableURL.path) : null,',
+      '      processId: Number(application.processIdentifier),',
+      '      processStartedAt: launchDate ? Number(launchDate.timeIntervalSince1970) : null,',
+      '    });',
+      '  }',
+      '  return JSON.stringify(result);',
+      '}',
+    ].join('\n'),
+    bundleIdentifier,
+  ]);
 }
 
 export function parseMacOSRunningApplications(output: string, bundleIdentifier: string): MacOSRunningApplication[] {
@@ -1071,6 +1431,20 @@ function withEnvironment(plan: DesktopCommandPlan, environment: Readonly<Record<
   return Array.isArray(plan) ? prepared : prepared[0];
 }
 
-function delay(milliseconds: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+function delay(milliseconds: number, signal?: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason);
+      return;
+    }
+    const abort = () => {
+      clearTimeout(timer);
+      reject(signal?.reason);
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', abort);
+      resolve();
+    }, milliseconds);
+    signal?.addEventListener('abort', abort, { once: true });
+  });
 }

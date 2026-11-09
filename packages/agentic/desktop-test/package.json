@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-test",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Application-neutral lifecycle and reporting for native desktop tests",
   "license": "MIT",
   "repository": {
@@ -40,10 +40,40 @@
       "import": "./lib/reporting/index.js",
       "default": "./src/reporting/index.ts"
     },
+    "./reporting/run-queries": {
+      "types": "./lib/reporting/runQueries.d.ts",
+      "import": "./lib/reporting/runQueries.js",
+      "default": "./src/reporting/runQueries.ts"
+    },
     "./commands": {
       "types": "./lib/commands.d.ts",
       "import": "./lib/commands.js",
       "default": "./src/commands.ts"
+    },
+    "./driver-service": {
+      "types": "./lib/driverService.d.ts",
+      "import": "./lib/driverService.js",
+      "default": "./src/driverService.ts"
+    },
+    "./process-control": {
+      "types": "./lib/processControl.d.ts",
+      "import": "./lib/processControl.js",
+      "default": "./src/processControl.ts"
+    },
+    "./resources": {
+      "types": "./lib/resources.d.ts",
+      "import": "./lib/resources.js",
+      "default": "./src/resources.ts"
+    },
+    "./ownership": {
+      "types": "./lib/ownership.d.ts",
+      "import": "./lib/ownership.js",
+      "default": "./src/ownership.ts"
+    },
+    "./jasmine": {
+      "types": "./lib/jasmine/index.d.ts",
+      "import": "./lib/jasmine/index.js",
+      "default": "./src/jasmine/index.ts"
     },
     "./wdio": {
       "types": "./lib/wdio/index.d.ts",
@@ -62,7 +92,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/desktop-driver": "workspace:*",
-    "@rnx-kit/reporter": "catalog:",
     "@wdio/reporter": "catalog:",
     "commander": "^14.0.2",
     "cross-spawn": "7.0.6",

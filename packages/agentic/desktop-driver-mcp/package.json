@@ -1,0 +1,58 @@
+{
+  "name": "@fluentui-react-native/desktop-driver-mcp",
+  "version": "0.1.1",
+  "description": "Model Context Protocol server that exposes Desktop Driver agent operations to coding agents",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/agentic/desktop-driver-mcp"
+  },
+  "bin": "./config/cli.cjs",
+  "files": [
+    "AGENTS.md",
+    "README.md",
+    "config/",
+    "lib/",
+    "package.json",
+    "references/",
+    "src/",
+    "!src/**/*.test.ts",
+    "!lib/**/*.test.*"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "fluentui-scripts clean",
+    "format": "fluentui-scripts format",
+    "lint": "fluentui-scripts lint",
+    "test": "fluentui-scripts jest"
+  },
+  "dependencies": {
+    "@fluentui-react-native/desktop-driver": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "commander": "^14.0.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/scripts": "workspace:*"
+  },
+  "furn": {
+    "jestPlatform": "react"
+  },
+  "rnx-kit": {
+    "kitType": "library",
+    "extends": "@fluentui-react-native/scripts/kit-config"
+  }
+}

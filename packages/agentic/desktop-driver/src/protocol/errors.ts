@@ -1,3 +1,4 @@
+import { readMutationReport } from './settlement.js';
 import type { WebDriverErrorValue } from './types.js';
 
 const errorStatuses = {
@@ -13,6 +14,7 @@ const errorStatuses = {
   'stale element reference': 404,
   timeout: 500,
   'unable to capture screen': 500,
+  unauthorized: 401,
   'unknown command': 404,
   'unknown error': 500,
   'unknown method': 405,
@@ -48,7 +50,22 @@ export function invalidArgument(message: string): WebDriverError {
   return new WebDriverError('invalid argument', message);
 }
 
+/**
+ * Converts any failure into the WebDriver error returned to callers. A failed mutating operation reports its settled
+ * disposition under `data.mutation`, so a caller can tell a rejected command from one that may have taken effect.
+ */
 export function toWebDriverError(error: unknown): WebDriverError {
+  const converted = convertToWebDriverError(error);
+  const report = readMutationReport(error);
+  if (!report) {
+    return converted;
+  }
+  const withReport = new WebDriverError(converted.code, converted.message, { ...converted.data, mutation: report });
+  withReport.stack = converted.stack;
+  return withReport;
+}
+
+function convertToWebDriverError(error: unknown): WebDriverError {
   if (error instanceof WebDriverError) {
     return error;
   }

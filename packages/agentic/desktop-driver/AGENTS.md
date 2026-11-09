@@ -22,6 +22,11 @@ editing.
 - Bind only to loopback, reject browser-origin requests, and fail closed when a
   helper, signature, target identity, permission, or capability cannot be
   verified.
+- Keep driver-control, declared-workload, and operator-recovery authority
+  separate. Child grants may only attenuate targets/scopes. Revoke descendant
+  authority synchronously and await acquisition/session drains; revoked-child
+  proof authorizes only retrying that child's terminal cleanup, never driver
+  access. Never evict cleanup proof to reuse the finite lifetime grant budget.
 - Permit one active session per target. Serialize each session's commands and
   all physical input, including across independent helper processes.
 - Every host operation must honor its `AbortSignal`, stop side effects, settle
@@ -34,8 +39,17 @@ editing.
   artifacts only to the configured native store.
 - Keep plans, manifests, results, CLI output, and agent output serializable.
   Reject unknown or dynamic plan fields instead of silently dropping them.
+- Shared CLI reporter selection and framing live in `src/cli/reporter.ts`;
+  preserve compact JSON/NDJSON framing and the auto-mode compatibility default.
 - Never translate an unsupported native state into `false`. Capability-check it
   and return an explicit skip or unsupported result.
+- Agent operations (`src/operations`) depend only on their `OperationRuntime`,
+  never on `src/server`. Text an application displays or a caller types never
+  enters the journal, an error message, or a log; failures are branched on
+  `data.reason`, and provider error data is reduced to an allowlist.
+- Every agent-operation budget is rejected outside its range, never clamped,
+  and every new operation's results stay bounded and carry `complete` and
+  `truncation`.
 - Confine artifacts beneath the configured root, preserve the original failure
   when evidence capture also fails, and never expose native handles or
   unrestricted commands through agent APIs.
@@ -58,8 +72,8 @@ yarn test
 
 Set `FURN_NATIVE_DRIVER_TEST=1` only on the matching target operating system to
 exercise the real native build, handshake, self-test, cache, and resolution
-contract. Stable-signed macOS coverage additionally needs
-`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
+contract (on Windows, also the Win32 fixture contract). Stable-signed macOS
+coverage additionally needs `FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY`.
 
 Use [CI integration](references/ci-integration.md) and
 [Test integration](references/test-integration.md) for native and consuming-app

@@ -1,5 +1,27 @@
 # Change Log - @fluentui-react-native/default-theme
 
+## 0.28.0
+
+### Minor Changes
+
+- 06b458f: Use the design package's Fluent themes instead of building default tokens locally. `defaultFluentTheme` and
+  `defaultFluentDarkTheme` are now the design package's `fluentLightTheme` and `fluentDarkTheme`, and `createDefaultTheme`
+  resolves its `fluentTheme`, so each platform uses its own generated Fluent tokens (macOS previously used the Windows
+  set) and high contrast follows the color scheme. Breaking: `createAliasTokens` is removed; read alias colors from
+  `theme.colors` instead.
+
+### Patch Changes
+
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+  - @fluentui-react-native/design@0.6.0
+
 ## 0.27.16
 
 ### Patch Changes

@@ -4,7 +4,13 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 
 import type { DesktopEndpoint, DesktopRenderer, NativeDesktopApplicationDescriptor } from '@fluentui-react-native/desktop-driver';
+// The leaf subpath, not `/authoring`: a config file is also loaded from source through the CommonJS prebuild fallback,
+// which cannot resolve the `.js` specifiers inside the authoring index.
+import { resolveDesktopScopeDomains, resolveDesktopScopeValues } from '@fluentui-react-native/desktop-driver/authoring/input';
+import type { DesktopScopeDomains, DesktopScopeValues } from '@fluentui-react-native/desktop-driver/authoring/input';
+import type { DesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { DesktopIntegration } from './integration.ts';
+import { orderDesktopResourceContributions } from './resources.ts';
 
 export type DesktopCommand = {
   command: string;
@@ -31,9 +37,14 @@ export type DesktopTargetConfig = {
   host: DesktopHostConfig;
   readiness?: DesktopReadiness;
   commands?: Partial<Record<DesktopStage, DesktopCommand | readonly DesktopCommand[] | false>>;
-  services?: readonly { id: string; command: DesktopCommand; readyUrl?: string }[];
+  services?: readonly { id: string; command: DesktopCommand; readyUrl?: string; dependsOn?: readonly string[] }[];
   launchTimeoutMs?: number;
   nativeDriver?: { cacheRoot?: string; helperPath?: string; installRoot?: string };
+  /**
+   * The value this target holds for each custom `testScopes` key a test may scope on, such as a product flavor.
+   * `rn.renderer` is not set here; it comes from `host.renderer`.
+   */
+  testScope?: Readonly<Record<string, string>>;
 };
 
 export type DesktopTargetReference = { use: { config: string; target: string } };
@@ -54,8 +65,10 @@ export type DesktopWdioSuite = {
 export type DesktopReportingConfig = {
   artifactsRoot?: string;
   console?: 'auto' | 'plain' | 'github-actions';
+  reporter?: DesktopReporterMode;
   junit?: boolean;
   summary?: 'auto' | false;
+  events?: 'milestones' | 'progress' | 'all';
 };
 
 export type DesktopConfig = {
@@ -65,11 +78,17 @@ export type DesktopConfig = {
   suites?: Readonly<Record<string, DesktopWdioSuite | { kind: 'csf-wdio' }>>;
   integration?: DesktopIntegration;
   reporting?: DesktopReportingConfig;
+  /**
+   * Custom scope domains: each key lists the values a test may scope on, and every target sets its own in `testScope`.
+   * The `rn.*` keys belong to the framework, so a consumer that is not React Native simply declares its own.
+   */
+  testScopes?: Readonly<Record<string, readonly [string, ...string[]]>>;
 };
 
 export type ResolvedDesktopTarget = DesktopTargetConfig & {
   endpoint: DesktopEndpoint;
   id: string;
+  registrationId: string;
   instanceId: string;
   projectRoot: string;
   configPath: string;
@@ -81,6 +100,8 @@ export type ResolvedDesktopConfig = {
   projectRoot: string;
   targets: Readonly<Record<string, ResolvedDesktopTarget>>;
   reporting: DesktopReportingConfig & { artifactsRoot: string };
+  /** The built-in scope domains plus this config's own. */
+  testScopes: DesktopScopeDomains;
 };
 
 const configNames = ['desktop.config.mts', 'desktop.config.ts', 'desktop.config.mjs', 'desktop.config.js', 'desktop.config.cjs'];
@@ -93,11 +114,16 @@ export function defineDesktopConfig<T extends DesktopConfig>(config: T): T {
   return config;
 }
 
+function registeredTargetId(configPath: string, targetName: string, endpoint: DesktopEndpoint): string {
+  return `${endpoint}-${createHash('sha256').update(`${configPath}\0${targetName}`).digest('hex').slice(0, 16)}`;
+}
+
 export function validateDesktopConfig(value: unknown): asserts value is DesktopConfig {
   const config = object(value, 'desktop config');
-  keys(config, ['schemaVersion', 'projectRoot', 'targets', 'suites', 'integration', 'reporting'], 'desktop config');
+  keys(config, ['schemaVersion', 'projectRoot', 'targets', 'suites', 'integration', 'reporting', 'testScopes'], 'desktop config');
   if (config.schemaVersion !== 1) throw new TypeError('Desktop config schemaVersion must be 1.');
   if (config.projectRoot !== undefined && !(config.projectRoot instanceof URL)) text(config.projectRoot, 'projectRoot');
+  const scopeDomains = resolveDesktopScopeDomains(config.testScopes);
   const targets = object(config.targets, 'targets');
   if (Object.keys(targets).length === 0) throw new TypeError('Desktop config must declare at least one target.');
   for (const [id, entry] of Object.entries(targets)) {
@@ -111,8 +137,9 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
       text(reference.target, `${id}.use.target`);
       continue;
     }
-    keys(target, ['endpoint', 'host', 'readiness', 'commands', 'services', 'launchTimeoutMs', 'nativeDriver'], `target ${id}`);
+    keys(target, ['endpoint', 'host', 'readiness', 'commands', 'services', 'launchTimeoutMs', 'nativeDriver', 'testScope'], `target ${id}`);
     oneOf(target.endpoint ?? id, endpoints, `${id}.endpoint`);
+    if (target.testScope !== undefined) validateTestScope(target.testScope, scopeDomains, id);
     const host = object(target.host, `${id}.host`);
     keys(host, ['kind', 'application', 'ownership', 'renderer', 'appConfigPath', 'component', 'windowTitle', 'bundleRoot'], `${id}.host`);
     oneOf(host.kind, ['installed', 'react-native-test-app', 'rex'], `${id}.host.kind`);
@@ -147,7 +174,7 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
       const ids = new Set<string>();
       for (const entry of target.services) {
         const service = object(entry, `${id}.service`);
-        keys(service, ['id', 'command', 'readyUrl'], `${id}.service`);
+        keys(service, ['id', 'command', 'readyUrl', 'dependsOn'], `${id}.service`);
         text(service.id, 'service id');
         if (ids.has(service.id)) throw new TypeError(`Duplicate service ${service.id}.`);
         ids.add(service.id);
@@ -159,7 +186,39 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
             throw new TypeError('Service readiness URLs must be loopback HTTP URLs.');
           }
         }
+        if (
+          service.dependsOn !== undefined &&
+          (!Array.isArray(service.dependsOn) || !service.dependsOn.every((dependency) => typeof dependency === 'string'))
+        ) {
+          throw new TypeError(`${id}.service ${service.id} dependencies must be an array of IDs.`);
+        }
       }
+      const services = new Map(
+        (target.services as { id: string; readyUrl?: string; dependsOn?: readonly string[] }[]).map((service) => [service.id, service]),
+      );
+      for (const service of services.values()) {
+        const dependencies = service.dependsOn ?? [];
+        if (new Set(dependencies).size !== dependencies.length) {
+          throw new TypeError(`${id}.service ${service.id} has duplicate dependencies.`);
+        }
+        for (const dependency of dependencies) {
+          const required = services.get(dependency);
+          if (!required) throw new TypeError(`${id}.service ${service.id} has unknown dependency "${dependency}".`);
+          if (dependency === service.id) throw new TypeError(`${id}.service ${service.id} cannot depend on itself.`);
+          if (!required.readyUrl) throw new TypeError(`${id}.service ${service.id} depends on "${dependency}" without a readiness URL.`);
+        }
+      }
+      const visiting = new Set<string>();
+      const visited = new Set<string>();
+      const visit = (serviceId: string, ancestry: readonly string[]) => {
+        if (visited.has(serviceId)) return;
+        if (visiting.has(serviceId)) throw new TypeError(`${id}.service dependency cycle: ${[...ancestry, serviceId].join(' -> ')}.`);
+        visiting.add(serviceId);
+        for (const dependency of services.get(serviceId)?.dependsOn ?? []) visit(dependency, [...ancestry, serviceId]);
+        visiting.delete(serviceId);
+        visited.add(serviceId);
+      };
+      for (const serviceId of services.keys()) visit(serviceId, []);
     }
   }
   if (config.suites !== undefined) {
@@ -193,9 +252,11 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
   }
   if (config.reporting !== undefined) {
     const reporting = object(config.reporting, 'reporting');
-    keys(reporting, ['artifactsRoot', 'console', 'junit', 'summary'], 'reporting');
+    keys(reporting, ['artifactsRoot', 'console', 'reporter', 'junit', 'summary', 'events'], 'reporting');
     if (reporting.artifactsRoot !== undefined) text(reporting.artifactsRoot, 'reporting.artifactsRoot');
     optionalEnum(reporting.console, ['auto', 'plain', 'github-actions'], 'reporting.console');
+    optionalEnum(reporting.reporter, ['auto', 'plain', 'github-actions', 'json', 'ndjson'], 'reporting.reporter');
+    optionalEnum(reporting.events, ['milestones', 'progress', 'all'], 'reporting.events');
     if (reporting.junit !== undefined && typeof reporting.junit !== 'boolean') throw new TypeError('reporting.junit must be boolean.');
     if (reporting.summary !== undefined && reporting.summary !== false && reporting.summary !== 'auto') {
       throw new TypeError('reporting.summary must be auto or false.');
@@ -203,8 +264,17 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
   }
   if (config.integration !== undefined) {
     const integration = object(config.integration, 'integration');
+    keys(integration, ['name', 'validate', 'supportsAgent', 'createTarget', 'resources', 'run', 'configure'], 'integration');
     text(integration.name, 'integration.name');
     if (typeof integration.validate !== 'function') throw new TypeError('An integration must expose validate().');
+    if (integration.supportsAgent !== undefined && typeof integration.supportsAgent !== 'boolean')
+      throw new TypeError('integration.supportsAgent must be a boolean.');
+    if (integration.createTarget !== undefined && typeof integration.createTarget !== 'function')
+      throw new TypeError('integration.createTarget must be a function.');
+    if (integration.configure !== undefined && typeof integration.configure !== 'function')
+      throw new TypeError('integration.configure must be a function.');
+    if (integration.run !== undefined && typeof integration.run !== 'function') throw new TypeError('integration.run must be a function.');
+    if (integration.resources !== undefined) orderDesktopResourceContributions(integration.resources);
     integration.validate();
   }
 }
@@ -234,6 +304,8 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
     }
     return pending;
   };
+  const entry = await read(filename);
+  const testScopes = resolveDesktopScopeDomains(entry.config.testScopes);
   const resolve = async (filename: string, id: string, ancestry: readonly string[]): Promise<ResolvedDesktopTarget> => {
     const { config, root, file } = await read(filename);
     const key = `${file}#${id}`;
@@ -241,6 +313,8 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
     const target = config.targets[id];
     if (!target) throw new Error(`Unknown desktop target "${id}" in ${file}.`);
     if ('use' in target) return resolve(path.resolve(path.dirname(file), target.use.config), target.use.target, [...ancestry, key]);
+    // A referenced target was checked against its own config's domains; the config that uses it must declare them too.
+    if (target.testScope) resolveDesktopScopeValues(target.testScope, testScopes, `${id}.testScope`);
     const endpoint = target.endpoint ?? (id as DesktopEndpoint);
     const host = {
       ...target.host,
@@ -256,11 +330,13 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
         : {}),
     };
     const instanceId = targetInstanceId(root, endpoint, host.renderer);
+    const registrationId = registeredTargetId(file, id, endpoint);
     return Object.freeze({
       ...target,
       endpoint,
       host: Object.freeze(host),
-      id: `${endpoint}-${instanceId}`,
+      id: registrationId,
+      registrationId,
       instanceId,
       projectRoot: root,
       configPath: file,
@@ -269,26 +345,54 @@ export async function loadDesktopConfig(configPath?: string, cwd = process.cwd()
         : undefined,
     });
   };
-  const { config, root, file } = await read(filename);
-  const targets = Object.fromEntries(await Promise.all(Object.keys(config.targets).map(async (id) => [id, await resolve(file, id, [])])));
+  const targets = Object.fromEntries(
+    await Promise.all(
+      Object.keys(entry.config.targets).map(async (id) => {
+        const target = await resolve(entry.file, id, []);
+        const registrationId = registeredTargetId(entry.file, id, target.endpoint);
+        return [id, Object.freeze({ ...target, id: registrationId, registrationId })];
+      }),
+    ),
+  );
   return {
-    config,
-    configPath: file,
-    projectRoot: root,
+    config: entry.config,
+    configPath: entry.file,
+    projectRoot: entry.root,
     targets: Object.freeze(targets),
-    reporting: { ...config.reporting, artifactsRoot: path.resolve(root, config.reporting?.artifactsRoot ?? 'artifacts/desktop') },
+    reporting: {
+      ...entry.config.reporting,
+      artifactsRoot: path.resolve(entry.root, entry.config.reporting?.artifactsRoot ?? 'artifacts/desktop'),
+    },
+    testScopes,
   };
+}
+
+/**
+ * The values a target holds for the scope domains: its own `testScope` plus the renderer its host runs. A caller that
+ * knows the renderer better than the host configuration, such as a Storybook run switched to Paper, passes it.
+ */
+export function resolveDesktopTestScope(
+  domains: DesktopScopeDomains,
+  target?: Pick<ResolvedDesktopTarget, 'host' | 'id' | 'testScope'>,
+  renderer: DesktopRenderer | undefined = target?.host.renderer,
+): DesktopScopeValues {
+  return resolveDesktopScopeValues(
+    { ...target?.testScope, ...(renderer ? { 'rn.renderer': renderer } : {}) },
+    domains,
+    target ? `${target.id}.testScope` : 'testScope',
+  );
 }
 
 export function selectDesktopRenderer(target: ResolvedDesktopTarget, renderer: DesktopRenderer): ResolvedDesktopTarget {
   if (target.endpoint !== 'macos' || target.host.kind !== 'react-native-test-app')
     throw new Error('Renderer switching requires a macOS RN Test App target; regenerate with prep after switching.');
   const instanceId = targetInstanceId(target.projectRoot, target.endpoint, renderer);
+  const id = `${target.endpoint}-${createHash('sha256').update(`${target.registrationId}\0${renderer}`).digest('hex').slice(0, 16)}`;
   return Object.freeze({
     ...target,
     host: Object.freeze({ ...target.host, renderer }),
+    id,
     instanceId,
-    id: `${target.endpoint}-${instanceId}`,
   });
 }
 
@@ -318,6 +422,14 @@ function resolvePaths(root: string, settings: object, fields: readonly string[])
       .filter(([key, value]) => fields.includes(key) && typeof value === 'string')
       .map(([key, value]) => [key, path.resolve(root, value)]),
   );
+}
+
+function validateTestScope(value: unknown, domains: DesktopScopeDomains, id: string): void {
+  const scope = object(value, `${id}.testScope`);
+  for (const key of Object.keys(scope)) {
+    if (key.startsWith('rn.')) throw new TypeError(`${id}.testScope cannot set "${key}"; the rn.* values come from ${id}.host.`);
+  }
+  resolveDesktopScopeValues(scope, domains, `${id}.testScope`);
 }
 
 function validateApplication(value: unknown, context: string): void {

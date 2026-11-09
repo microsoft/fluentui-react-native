@@ -2,19 +2,53 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import type { DesktopStoryManifestEntry, NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import { DesktopServiceScope } from '@fluentui-react-native/desktop-test';
 import type { ResolvedDesktopConfig, ResolvedDesktopTarget } from '@fluentui-react-native/desktop-test';
 import { selectDesktopRenderer } from '@fluentui-react-native/desktop-test/config';
+import type { DesktopReportWriter } from '@fluentui-react-native/desktop-test/reporting';
 
 import { STORYBOOK_SMOKE_MODE } from '../config/commands';
 import { DesktopStorybookConfig, makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { FURN_STORYBOOK_BUNDLE_IDENTIFIER, FURN_STORYBOOK_INSTANCE_ID } from '../config/instance';
 import { FURN_STORYBOOK_PLATFORM } from '../config/platforms';
+import { desktopStorybookTargetId } from '../driver/driverManifest';
+import * as wdioTests from '../testing/runWdioTests';
 import type { DesktopCommandRunner, PreparedDesktopCommand, RunningDesktopCommand } from './commandRunner';
 import { createDesktopStorybookCommand } from './createDesktopStorybookCommand';
-import { DesktopStorybookCli, parseMacOSRunningApplications, writeMacOSApplicationLeaseFile } from './DesktopStorybookCli';
+import {
+  DesktopStorybookCli,
+  maintainMacOSApplicationLease,
+  parseMacOSRunningApplications,
+  writeMacOSApplicationLeaseFile,
+  type MacOSRunningApplication,
+} from './DesktopStorybookCli';
 
-const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+const appRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+const linkedAppDirectories = ['node_modules', 'src'];
+// CLI commands replace driver manifests, leases, and agent readiness records under the project root, so they run
+// against a copy that cannot disturb a live Storybook instance of the real app.
+const storybookRoot = createIsolatedStorybookRoot();
+afterAll(() => removeIsolatedStorybookRoot(storybookRoot));
+
+function createIsolatedStorybookRoot(): string {
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-cli-')));
+  for (const file of ['app.json', 'package.json']) fs.copyFileSync(path.join(appRoot, file), path.join(root, file));
+  for (const directory of linkedAppDirectories) fs.symlinkSync(path.join(appRoot, directory), path.join(root, directory), 'junction');
+  return root;
+}
+
+function removeIsolatedStorybookRoot(root: string): void {
+  // Remove the links themselves first so cleanup can never recurse into the real app.
+  for (const directory of linkedAppDirectories) {
+    const link = path.join(root, directory);
+    if (process.platform === 'win32') fs.rmdirSync(link);
+    else fs.unlinkSync(link);
+  }
+  fs.rmSync(root, { force: true, recursive: true });
+}
+
 const nativeDriverArtifact: NativeDriverArtifact = {
   architecture: 'x64',
   artifactId: 'artifact',
@@ -37,6 +71,7 @@ const nativeDriverTestOptions = {
   buildNativeDriver: async () => nativeDriverArtifact,
   resolveNativeDriver: async () => nativeDriverArtifact,
   writeMacOSApplicationLease: async () => undefined,
+  connectStoryTraversal: async () => ({ select: async () => undefined, close: async () => null }),
 };
 const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'windows' | 'win32') => ({
   endpoint: platform,
@@ -45,6 +80,33 @@ const createEmptyStoryManifest = async (_config: unknown, platform: 'macos' | 'w
   portablePlanDigest: 'portable-digest',
   schemaVersion: 1 as const,
 });
+
+function declaredStoryEntry(id: string, cases: readonly (readonly [name: string, options: unknown])[]): DesktopStoryManifestEntry {
+  return {
+    id,
+    name: 'Default',
+    title: 'Button',
+    sourcePath: 'button.stories.tsx',
+    packageName: 'fixture',
+    tags: [],
+    wdio: {
+      exportName: 'Default',
+      digest: 'declared',
+      testNames: cases.map(([name]) => name),
+      cases: cases.map(([name, options]) => ({ name, options: validateDesktopCaseOptions(options) })),
+    },
+  };
+}
+
+function storyManifestOf(...entries: DesktopStoryManifestEntry[]) {
+  return async () => ({
+    endpoint: 'macos' as const,
+    schemaVersion: 1 as const,
+    platformManifestDigest: 'digest',
+    portablePlanDigest: 'portable',
+    entries,
+  });
+}
 
 describe('macOS application leases', () => {
   test('validates exact running application records and rejects ambiguity', () => {
@@ -100,6 +162,59 @@ describe('macOS application leases', () => {
       fs.rmSync(root, { force: true, recursive: true });
     }
   });
+
+  test('keeps the lease naming the one running application', async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-macos-lease-'));
+    const leasePath = path.join(root, 'application.json');
+    const manifestPath = path.join(root, 'driver-manifest.json');
+    fs.writeFileSync(
+      manifestPath,
+      JSON.stringify({ application: { bundleIdentifier: 'com.example.storybook', leaseNonce: 'nonce', leasePath } }),
+    );
+    const running = (processId: number): MacOSRunningApplication => ({
+      executablePath: '/Applications/Storybook.app/Contents/MacOS/Storybook',
+      processId,
+      processStartedAt: processId,
+    });
+    const answers: (() => MacOSRunningApplication[])[] = [
+      () => [],
+      () => [running(42)],
+      () => {
+        fs.rmSync(leasePath);
+        return [running(42)];
+      },
+      () => {
+        throw new Error('query failed');
+      },
+      () => {
+        throw new Error('query failed');
+      },
+      () => [running(42), running(43)],
+      () => [running(43)],
+    ];
+    const leased: (number | undefined)[] = [];
+    const warnings: string[] = [];
+    const controller = new AbortController();
+    try {
+      await expect(
+        maintainMacOSApplicationLease(manifestPath, controller.signal, {
+          intervalMs: 1,
+          onWarning: (message) => warnings.push(message),
+          queryApplications: async (bundleIdentifier) => {
+            expect(bundleIdentifier).toBe('com.example.storybook');
+            leased.push(fs.existsSync(leasePath) ? JSON.parse(fs.readFileSync(leasePath, 'utf8')).processId : undefined);
+            const answer = answers.shift();
+            if (!answer) controller.abort(new Error('maintenance stopped'));
+            return answer?.() ?? [];
+          },
+        }),
+      ).rejects.toThrow('maintenance stopped');
+      expect(leased).toEqual([undefined, undefined, 42, 42, 42, 42, 42, 43]);
+      expect(warnings).toEqual(['query failed', 'More than one running application has bundle identifier "com.example.storybook".']);
+    } finally {
+      fs.rmSync(root, { force: true, recursive: true });
+    }
+  });
 });
 
 class RecordingRunner implements DesktopCommandRunner {
@@ -108,6 +223,11 @@ class RecordingRunner implements DesktopCommandRunner {
   stopped = 0;
   failCommand?: string;
   exitService?: string;
+  readiness = jest.fn(async (expected: { tier: 'service-ready'; service: string; descriptor?: string }) => ({
+    ...expected,
+    incarnation: 'fixture-incarnation',
+    processId: 1,
+  }));
 
   async run(command: PreparedDesktopCommand): Promise<void> {
     this.foreground.push(command);
@@ -119,6 +239,7 @@ class RecordingRunner implements DesktopCommandRunner {
   start(command: PreparedDesktopCommand): RunningDesktopCommand {
     this.background.push(command);
     return {
+      waitForReadiness: this.readiness,
       completed: command.context?.service === this.exitService && this.exitService ? Promise.resolve(7) : new Promise<number>(() => {}),
       stop: async () => {
         this.stopped += 1;
@@ -163,6 +284,51 @@ describe('DesktopStorybookCli', () => {
     ]);
     const cli = new DesktopStorybookCli(config, { createStoryManifest, output });
     await expect(cli.test('macos', { list: true, test: 'missing' })).rejects.toThrow('No executable');
+  });
+
+  test('supports structured reporter output and rejects event levels outside NDJSON mode', async () => {
+    const output = { write: jest.fn() };
+    const config = makeDesktopStorybookConfig({ projectRoot: storybookRoot, storyPackages: [] });
+    const createStoryManifest = async () => ({
+      endpoint: 'macos' as const,
+      schemaVersion: 1 as const,
+      platformManifestDigest: 'digest',
+      portablePlanDigest: 'portable',
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { exportName: 'Default', digest: 'callback' },
+        },
+      ],
+    });
+
+    await createDesktopStorybookCommand({ config, createStoryManifest, output }).parseAsync([
+      'node',
+      'storybook',
+      'test',
+      '--macos',
+      '--list',
+      '--reporter',
+      'json',
+    ]);
+    expect(JSON.parse(output.write.mock.calls[0][0])).toEqual([{ id: 'button--default', sourcePath: 'button.stories.tsx' }]);
+
+    await expect(
+      createDesktopStorybookCommand({ config, createStoryManifest, output }).parseAsync([
+        'node',
+        'storybook',
+        'test',
+        '--macos',
+        '--list',
+        '--events',
+        'progress',
+      ]),
+    ).rejects.toThrow('--events requires --reporter ndjson.');
   });
 
   test('prints story navigation failures before throwing the smoke summary', async () => {
@@ -232,15 +398,139 @@ describe('DesktopStorybookCli', () => {
     await expect(cli.test('macos', { timeoutMs: 0 })).rejects.toThrow('wdio.timeoutMs');
   });
 
+  describe('input lane selection', () => {
+    const cases = [
+      ['adaptive', { requires: ['click'] }],
+      ['typing', { requires: ['keyboard'] }],
+      ['win32-only', { platforms: ['win32'] }],
+      ['paper-only', { scope: { 'rn.renderer': ['paper'] } }],
+      ['fabric-only', { scope: { 'rn.renderer': ['fabric'] } }],
+    ] as const;
+    const config = () => makeDesktopStorybookConfig({ projectRoot: storybookRoot, storyPackages: [] });
+    const list = async (flags: string[], ...entries: DesktopStoryManifestEntry[]) => {
+      const output = { write: jest.fn() };
+      await createDesktopStorybookCommand({ config: config(), createStoryManifest: storyManifestOf(...entries), output }).parseAsync([
+        'node',
+        'storybook',
+        'test',
+        '--macos',
+        '--list',
+        ...flags,
+      ]);
+      return JSON.parse(output.write.mock.calls[0][0]);
+    };
+    // An explicit URL and target stand in for a running driver, so selection is what these runs exercise.
+    const connection = { url: 'https://127.0.0.1:1234', target: 'fixture' };
+    const run = (options: Parameters<DesktopStorybookCli['test']>[1], ...entries: DesktopStoryManifestEntry[]) =>
+      new DesktopStorybookCli(config(), { createStoryManifest: storyManifestOf(...entries), output: { write: jest.fn() } }).test('macos', {
+        ...connection,
+        ...options,
+      });
+    const legacyEntry = (id: string): DesktopStoryManifestEntry => ({
+      ...declaredStoryEntry(id, []),
+      wdio: { exportName: 'Default', digest: 'legacy' },
+    });
+
+    test.each([
+      [
+        'accessible',
+        ['adaptive', 'fabric-only'],
+        [
+          ['typing', 'input'],
+          ['win32-only', 'platform'],
+          ['paper-only', 'scope'],
+        ],
+      ],
+      [
+        'physical',
+        ['adaptive', 'typing', 'fabric-only'],
+        [
+          ['win32-only', 'platform'],
+          ['paper-only', 'scope'],
+        ],
+      ],
+    ])('lists what the %s lane runs and why each other matching case is left out', async (input, selected, excluded) => {
+      const [story] = await list(['--input', input], declaredStoryEntry('button--default', cases));
+      expect(story.tests.map(({ name }: { name: string }) => name)).toEqual(selected);
+      expect(story.excluded.map(({ name, reason }: { name: string; reason: string }) => [name, reason])).toEqual(excluded);
+      expect(story.tests[0]).toEqual({ name: 'adaptive', input: 'both', inputSource: 'derived', requires: ['click'] });
+    });
+
+    test('lists every declared case that targets the platform when no lane is selected', async () => {
+      const [story] = await list([], declaredStoryEntry('button--default', cases));
+      expect(story.tests.map(({ name }: { name: string }) => name)).toEqual(['adaptive', 'typing', 'fabric-only']);
+      expect(story.excluded.map(({ reason }: { reason: string }) => reason)).toEqual(['platform', 'scope']);
+    });
+
+    test('names every legacy callback a lane cannot run, so they migrate in one pass', async () => {
+      await expect(run({ input: 'accessible' }, legacyEntry('a--default'), legacyEntry('b--default'))).rejects.toThrow(
+        'Input lane "accessible" cannot run legacy wdio callbacks; declare them with desktopIt: a--default, b--default.',
+      );
+    });
+
+    test('explains an empty selection by what the target and lane excluded', async () => {
+      await expect(run({ input: 'accessible' }, declaredStoryEntry('button--default', cases.slice(1, 3)))).rejects.toThrow(
+        'No executable wdio story tests matched the requested selection (excluded 1 by platform, 0 by scope, 1 by input).',
+      );
+    });
+
+    test('does not blame a narrow filter for cases it never asked for', async () => {
+      await expect(run({ input: 'accessible', test: 'typing' }, declaredStoryEntry('button--default', cases))).rejects.toThrow(
+        'No executable wdio story tests matched the requested selection (excluded 0 by platform, 0 by scope, 1 by input).',
+      );
+    });
+
+    test('takes the lane of the running driver instance unless a flag or the environment names one', async () => {
+      const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json');
+      const cli = new DesktopStorybookCli(config(), {
+        createStoryManifest: storyManifestOf(declaredStoryEntry('button--default', cases.slice(1, 2))),
+        output: { write: jest.fn() },
+      });
+      fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+      fs.writeFileSync(
+        manifestPath,
+        JSON.stringify({
+          endpoint: 'macos',
+          instanceId: cli.instance.id,
+          renderer: 'fabric',
+          driverPort: 7100,
+          targetId: desktopStorybookTargetId(config(), 'macos', 'fabric'),
+          wdio: { input: 'accessible' },
+        }),
+      );
+      try {
+        // The only case needs a physical keyboard, so only the inherited accessible lane can leave it out.
+        await expect(cli.test('macos', {})).rejects.toThrow('excluded 0 by platform, 0 by scope, 1 by input');
+      } finally {
+        fs.rmSync(manifestPath, { force: true });
+      }
+    });
+  });
+
   test('starts the config-owned server with platform and connection options', async () => {
     const runner = new RecordingRunner();
-    const cli = new DesktopStorybookCli(makeConfig(), { ...nativeDriverTestOptions, runner });
+    const services = new DesktopServiceScope(runner);
+    const output = { write: jest.fn() };
+    const onReady = jest.fn(() => expect(output.write).toHaveBeenCalledTimes(1));
+    const fetch: typeof globalThis.fetch = async () => {
+      setTimeout(() => services.requestStop(), 0);
+      return new Response('{}');
+    };
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      fetch,
+      onReady,
+      output,
+      reporterMode: 'json',
+      runner,
+      services,
+    });
 
-    await cli.server('win32', { host: '0.0.0.0', port: 7100 });
+    await expect(cli.server('win32', { host: '0.0.0.0', port: 7100 })).rejects.toThrow('Owned desktop service stop requested.');
 
-    expect(runner.foreground[0]).toMatchObject({
+    expect(runner.background[0]).toMatchObject({
       command: process.execPath,
-      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
       cwd: storybookRoot,
       env: {
         [FURN_STORYBOOK_PLATFORM]: 'win32',
@@ -249,6 +539,8 @@ describe('DesktopStorybookCli', () => {
         STORYBOOK_WS_PORT: '7100',
       },
     });
+    expect(output.write).toHaveBeenCalledWith('{"type":"ready","host":"0.0.0.0","port":7100}\n');
+    expect(onReady).toHaveBeenCalledTimes(1);
   });
 
   test('uses shared preparation and rnx-cli bundle defaults', async () => {
@@ -341,11 +633,241 @@ describe('DesktopStorybookCli', () => {
 
       expect(fabricManifest.renderer).toBe('fabric');
       expect(paperManifest.renderer).toBe('paper');
+      // The control process that runs smoke tests has no desktop configuration, so the manifest carries the scope values.
+      expect(fabricManifest.scope.values).toMatchObject({ 'rn.renderer': 'fabric' });
+      expect(paperManifest.scope.values).toMatchObject({ 'rn.renderer': 'paper' });
       expect(paperManifest.bridgeNonce).not.toBe(fabricManifest.bridgeNonce);
       expect(repeatedPaperManifest.bridgeNonce).toBe(paperManifest.bridgeNonce);
     } finally {
       fs.rmSync(manifestPath, { force: true });
     }
+  });
+
+  test('reports readiness only after the agent connection is published, then keeps the macOS lease', async () => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, 'driver-manifest.macos.json');
+    const readyPath = path.join(generated, 'agent-ready.macos.json');
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const resourceObserver = jest.fn();
+    services.setResourceObserver(resourceObserver);
+    const written: string[] = [];
+    const maintained: string[] = [];
+    let published = false;
+    runner.readiness.mockImplementation(async (expected) => {
+      expect(written).toEqual([]);
+      published = true;
+      return { ...expected, incarnation: 'fixture-incarnation', processId: 1 };
+    });
+    const fetch: typeof globalThis.fetch = async () => new Response('{}');
+    const createStoryManifest = async () => ({
+      ...(await createEmptyStoryManifest(undefined, 'macos')),
+      entries: [
+        {
+          id: 'button--default',
+          name: 'Default',
+          title: 'Button',
+          sourcePath: 'button.stories.tsx',
+          packageName: 'fixture',
+          tags: [],
+          wdio: { digest: 'callback', exportName: 'Default' },
+        },
+      ],
+    });
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      createStoryManifest,
+      fetch,
+      isPortAvailable: async () => true,
+      maintainMacOSApplicationLease: async (leaseManifestPath, signal) => {
+        expect(written).toEqual([expect.stringMatching(/^published: Storybook instance .*, agent=custom\.json\n$/), 'onReady']);
+        maintained.push(leaseManifestPath);
+        services.requestStop();
+        signal.throwIfAborted();
+        throw new Error('unreachable');
+      },
+      onReady: () => {
+        expect(resourceObserver).toHaveBeenCalledWith(
+          expect.objectContaining({
+            id: 'desktop:storybook-channel',
+            generation: expect.any(Number),
+            ownership: 'owned',
+            readiness: 'ready',
+            serviceReady: {
+              tier: 'service-ready',
+              service: 'storybook-channel',
+              descriptor: 'custom.json',
+              incarnation: 'fixture-incarnation',
+              processId: 1,
+            },
+          }),
+        );
+        written.push('onReady');
+      },
+      output: { write: (chunk: string) => written.push(`${published ? 'published' : 'unpublished'}: ${chunk}`) > 0 },
+      runner,
+      services,
+    });
+    try {
+      await expect(cli.driver('macos', { agent: { descriptor: 'custom.json', root: 'relative-root' } })).rejects.toThrow(
+        'Owned desktop service stop requested.',
+      );
+      expect(JSON.parse(fs.readFileSync(manifestPath, 'utf8')).agent).toEqual({
+        descriptor: 'custom.json',
+        readyPath,
+        root: path.resolve('relative-root'),
+      });
+      expect(maintained).toEqual([manifestPath]);
+      expect(runner.readiness).toHaveBeenCalledWith(
+        { tier: 'service-ready', service: 'storybook-channel', descriptor: 'custom.json' },
+        120_000,
+        expect.any(AbortSignal),
+      );
+      expect(fs.existsSync(readyPath)).toBe(false);
+      await expect(new DesktopStorybookCli(makeConfig(), { createStoryManifest, runner }).test('macos')).rejects.toThrow('serves an agent');
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
+    }
+  });
+
+  test('does not trust an agent ready file when correlated readiness fails', async () => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, 'driver-manifest.macos.json');
+    const readyPath = path.join(generated, 'agent-ready.macos.json');
+    const runner = new RecordingRunner();
+    runner.readiness.mockImplementation(async () => {
+      fs.writeFileSync(readyPath, JSON.stringify({ descriptor: 'agent.json', processId: 1, schemaVersion: 1 }));
+      throw new Error('Uncorrelated service readiness');
+    });
+    const output = { write: jest.fn(() => true) };
+    const cli = new DesktopStorybookCli(makeConfig(), {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response('{}'),
+      isPortAvailable: async () => true,
+      output,
+      runner,
+    });
+    try {
+      await expect(cli.driver('macos', { agent: { descriptor: 'agent.json' } })).rejects.toThrow('Uncorrelated service readiness');
+      expect(output.write).not.toHaveBeenCalled();
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
+    }
+  });
+
+  test.each([
+    {
+      name: 'a configured AUMID',
+      platform: 'windows' as const,
+      configure: { windows: { nativeDriver: { application: { aumid: 'Fixture_abc!App' } } } },
+      expected: { aumid: 'Fixture_abc!App' },
+      resolved: false,
+    },
+    {
+      name: 'the desktop target identity without launch fields',
+      platform: 'win32' as const,
+      configure: {},
+      expected: { executablePath: 'ReactTest.exe' },
+      resolved: true,
+    },
+  ])('gives a $platform agent $name instead of a lease nothing maintains', async ({ platform, configure, expected, resolved }) => {
+    const generated = path.join(storybookRoot, 'storybook-desktop.generated');
+    const manifestPath = path.join(generated, `driver-manifest.${platform}.json`);
+    const readyPath = path.join(generated, `agent-ready.${platform}.json`);
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const config = makeConfig(configure);
+    const target = { endpoint: platform, projectRoot: storybookRoot, host: { kind: 'rex', windowTitle: 'Fixture' } };
+    jest.spyOn(config, 'getDesktopTarget').mockReturnValue(target as unknown as ReturnType<typeof config.getDesktopTarget>);
+    const resolveDesktopApplication = jest.fn(async () => ({
+      arguments: ['basePath', 'dist'],
+      executablePath: 'ReactTest.exe',
+      windowTitle: 'Fixture',
+      workingDirectory: 'rex',
+    }));
+    const fetch: typeof globalThis.fetch = async () => new Response('{}');
+    const cli = new DesktopStorybookCli(config, {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch,
+      isPortAvailable: async () => true,
+      maintainMacOSApplicationLease: async () => {
+        throw new Error('Windows agents must not maintain a macOS lease.');
+      },
+      onReady: () => services.requestStop(),
+      output: { write: () => true },
+      resolveDesktopApplication,
+      runner,
+      services,
+    });
+    try {
+      await expect(cli.driver(platform, { agent: { descriptor: 'agent.json' } })).rejects.toThrow('Owned desktop service stop requested.');
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      expect(manifest.agent.application).toEqual({ windowTitle: expect.any(String), ...expected });
+      expect(manifest.application.leasePath).toEqual(expect.any(String));
+      expect(resolveDesktopApplication).toHaveBeenCalledTimes(resolved ? 1 : 0);
+      if (resolved) expect(resolveDesktopApplication).toHaveBeenCalledWith(target, expect.any(AbortSignal), { attach: true });
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+      fs.rmSync(readyPath, { force: true });
+    }
+  });
+
+  test('refuses a Windows agent without a verifiable application identity', async () => {
+    const config = makeConfig();
+    jest.spyOn(config, 'getDesktopTarget').mockReturnValue(undefined);
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(config, {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async () => true,
+      runner,
+    });
+    await expect(cli.driver('windows', { agent: {} })).rejects.toThrow('verified application identity');
+    expect(runner.background).toEqual([]);
+  });
+
+  // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App connects to loopback Metro
+  const fixedWindowsMetroUrl = 'http://127.0.0.1:8081/status';
+
+  test('serves Metro on the fixed port a Windows Debug host reads', async () => {
+    const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.windows.json');
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const config = makeConfig({ windows: { smoke: { metroUrl: fixedWindowsMetroUrl } } });
+    const cli = new DesktopStorybookCli(config, {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response('{}'),
+      isPortAvailable: async () => true,
+      onReady: () => services.requestStop(),
+      output: { write: () => true },
+      runner,
+      services,
+    });
+    try {
+      await expect(cli.driver('windows')).rejects.toThrow('Owned desktop service stop requested.');
+      expect(runner.background[0].args).toEqual(['start', '--no-interactive', '--port', '8081']);
+      expect(runner.background[1].env.RCT_METRO_PORT).toBe('8081');
+      expect(JSON.parse(fs.readFileSync(manifestPath, 'utf8')).metroPort).toBe(8081);
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+    }
+  });
+
+  test('refuses to move Metro off the fixed port a Windows Debug host reads', async () => {
+    const runner = new RecordingRunner();
+    const cli = new DesktopStorybookCli(makeConfig({ windows: { smoke: { metroUrl: fixedWindowsMetroUrl } } }), {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      isPortAvailable: async (port) => port !== 8081,
+      runner,
+    });
+    await expect(cli.driver('windows')).rejects.toThrow('Metro on port 8081, which is in use');
+    expect(runner.background).toEqual([]);
   });
 
   test('runs the standalone macOS app with the enlistment-specific identity', async () => {
@@ -458,7 +980,7 @@ describe('DesktopStorybookCli', () => {
       `${serverUrl}/select-story-sync/first--story`,
       `${serverUrl}/select-story-sync/second--story`,
     ]);
-    expect(output.at(-1)).toBe('Rendered 2 stories.\n');
+    expect(output.at(-1)).toBe('2 stories rendered\n');
     expect(runner.background[1].args).toEqual(['start', '--no-interactive', '--port', String(cli.instance.metroPort + 1)]);
     expect(runner.foreground.at(-1)?.command).toBe('stop-storybook');
     expect(runner.stopped).toBe(2);
@@ -546,7 +1068,7 @@ describe('DesktopStorybookCli', () => {
         const result = cli.smoke('macos').catch((error: unknown) => error);
         await jest.advanceTimersByTimeAsync(131_000);
         expect(await result).toBeUndefined();
-        expect(output.write).toHaveBeenCalledWith('Rendered 1 stories.\n');
+        expect(output.write).toHaveBeenCalledWith('1 story rendered\n');
         expect(runner.stopped).toBe(2);
       } finally {
         jest.useRealTimers();
@@ -615,6 +1137,37 @@ describe('DesktopStorybookCli', () => {
     }
   });
 
+  test('retains both authoritative traversal and cleanup failures without starting authored tests', async () => {
+    const navigationFailure = new Error('navigation failed');
+    const cleanupFailure = new Error('session cleanup failed');
+    const runSmokeTests = jest.fn();
+    const cli = new DesktopStorybookCli(
+      makeConfig({ macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' } } } }),
+      {
+        ...nativeDriverTestOptions,
+        createStoryManifest: createEmptyStoryManifest,
+        runner: new RecordingRunner(),
+        isPortAvailable: async () => true,
+        output: { write: () => true },
+        errorOutput: { write: () => true },
+        fetch: async () => new Response(JSON.stringify({ entries: { first: { id: 'first--story', type: 'story' } } })),
+        runSmokeTests,
+        connectStoryTraversal: async () => ({
+          select: async () => {
+            throw navigationFailure;
+          },
+          close: async () => {
+            throw cleanupFailure;
+          },
+        }),
+      },
+    );
+    await expect(cli.smoke('macos', { mode: 'stories-and-tests' })).rejects.toMatchObject({
+      errors: [{ errors: [expect.objectContaining({ cause: navigationFailure })] }, cleanupFailure],
+    });
+    expect(runSmokeTests).not.toHaveBeenCalled();
+  });
+
   test('runs authored tests after traversing the complete story index', async () => {
     const runner = new RecordingRunner();
     const resolveNativeDriver = jest.fn(async () => nativeDriverArtifact);
@@ -633,9 +1186,6 @@ describe('DesktopStorybookCli', () => {
             },
           }),
         );
-      }
-      if (url.includes('select-story-sync')) {
-        events.push(`select:${url.split('/').at(-1)}`);
       }
       return new Response('{}');
     });
@@ -675,12 +1225,22 @@ describe('DesktopStorybookCli', () => {
         runner,
         resolveNativeDriver,
         writeMacOSApplicationLease,
+        connectStoryTraversal: async () => ({
+          select: async (id) => {
+            events.push(`select:${id}`);
+          },
+          close: async () => {
+            events.push('close');
+            return null;
+          },
+        }),
       },
     );
 
     await cli.smoke('macos', { mode: 'stories-and-tests' });
 
-    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'tests']);
+    expect(events).toEqual(['lease', 'select:first--story', 'select:second--story', 'close', 'tests']);
+    expect(fetch.mock.calls.some(([input]) => input.toString().includes('select-story-sync'))).toBe(false);
     expect(writeMacOSApplicationLease).toHaveBeenCalledWith(
       path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.macos.json'),
       120_000,
@@ -694,6 +1254,7 @@ describe('DesktopStorybookCli', () => {
       manifest: await createEmptyStoryManifest(cli.config, 'macos'),
       platform: 'macos',
       report: undefined,
+      scope: { domains: { 'rn.renderer': ['fabric', 'paper'] }, values: { 'rn.renderer': 'fabric' } },
       signal: expect.any(AbortSignal),
       targetId: 'agenticstorybook-macos',
     });
@@ -712,6 +1273,144 @@ describe('DesktopStorybookCli', () => {
       installRoot: undefined,
       macosSigningIdentity: undefined,
       platform: 'macos',
+    });
+  });
+
+  describe('outcome headers', () => {
+    const stories = { entries: { first: { id: 'first--story', type: 'story' }, second: { id: 'second--story', type: 'story' } } };
+    const connection = { url: 'https://127.0.0.1:1234', target: 'fixture' };
+    const quiet = { write: () => true };
+
+    const fakeReporter = () => {
+      const emit = jest.fn();
+      const reporter = { runId: 'run', root: storybookRoot, emit, failure: jest.fn(), fail: jest.fn() } as unknown as DesktopReportWriter;
+      return { reporter, emit };
+    };
+    const events = (emit: jest.Mock) => emit.mock.calls.map(([event]) => event);
+    const outcomes = (emit: jest.Mock) => events(emit).filter(({ kind, payload }) => kind === 'scope-end' && payload.summary !== undefined);
+    const details = (emit: jest.Mock) => events(emit).flatMap(({ kind, payload }) => (kind === 'output' ? [payload.text] : []));
+    const renderingFetch =
+      (select: () => Response): typeof globalThis.fetch =>
+      async (input) =>
+        String(input).includes('select-story-sync') ? select() : new Response(JSON.stringify(stories));
+    const smokeCli = (fetch: typeof globalThis.fetch, options: object) =>
+      new DesktopStorybookCli(
+        makeConfig({
+          macos: { run: { command: 'launch-storybook' }, smoke: { stop: { command: 'stop-storybook' }, startupTimeoutMs: 100 } },
+        }),
+        {
+          ...nativeDriverTestOptions,
+          createStoryManifest: createEmptyStoryManifest,
+          runner: new RecordingRunner(),
+          fetch,
+          isPortAvailable: async () => true,
+          errorOutput: quiet,
+          ...options,
+        },
+      );
+    const wdioResult = (
+      testName: string,
+      status: wdioTests.WdioStoryTestResult['status'],
+      gap?: 'unsupported',
+    ): wdioTests.WdioStoryTestResult => ({
+      storyId: 'button--default',
+      testName,
+      status,
+      durationMs: 1,
+      ...(gap ? { gap } : {}),
+    });
+    const testCli = (options: object) =>
+      new DesktopStorybookCli(makeDesktopStorybookConfig({ projectRoot: storybookRoot, storyPackages: [] }), {
+        createStoryManifest: storyManifestOf(declaredStoryEntry('button--default', [['adaptive', { requires: ['click'] }]])),
+        errorOutput: quiet,
+        ...options,
+      });
+
+    afterEach(() => jest.restoreAllMocks());
+
+    test('summarizes the rendered stories as the outcome of the render step and keeps each story as verbose-only detail', async () => {
+      const { reporter, emit } = fakeReporter();
+      const output = { write: jest.fn() };
+      await smokeCli(
+        renderingFetch(() => new Response('{}')),
+        { reporter, output },
+      ).smoke('macos');
+      expect(outcomes(emit)).toEqual([{ kind: 'scope-end', payload: { status: 'passed', summary: '2 stories rendered' } }]);
+      expect(details(emit)).toEqual(['rendered first--story\n', 'rendered second--story\n']);
+      expect(output.write).not.toHaveBeenCalledWith(expect.stringContaining('rendered first--story'));
+    });
+
+    test('names how many stories failed to render, and that the run stopped early, in the failed outcome', async () => {
+      const { reporter, emit } = fakeReporter();
+      const fetch = renderingFetch(() => new Response(JSON.stringify({ error: 'render failed' }), { status: 500 }));
+      await expect(smokeCli(fetch, { reporter, output: quiet }).smoke('macos')).rejects.toThrow('first--story');
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'failed', summary: '1 of 2 stories failed to render (stopped early; 1 not attempted)' } },
+      ]);
+    });
+
+    test('prints the render outcome as a line, also when it failed, when there is no reporter', async () => {
+      const output: string[] = [];
+      const sink = { write: (text: string | Uint8Array) => !!output.push(String(text)) };
+      await expect(
+        smokeCli(
+          renderingFetch(() => new Response(JSON.stringify({ error: 'render failed' }), { status: 500 })),
+          { output: sink },
+        ).smoke('macos'),
+      ).rejects.toThrow('first--story');
+      expect(output).toContain('1 of 2 stories failed to render (stopped early; 1 not attempted)\n');
+    });
+
+    test.each([false, true])(
+      'writes a line for each rendered story only in verbose mode without a reporter (verbose: %s)',
+      async (verbose) => {
+        const output: string[] = [];
+        const sink = { write: (text: string | Uint8Array) => !!output.push(String(text)) };
+        await smokeCli(
+          renderingFetch(() => new Response('{}')),
+          { output: sink, verbose },
+        ).smoke('macos');
+        expect(output.includes('rendered first--story\n')).toBe(verbose);
+        expect(output).toContain('2 stories rendered\n');
+      },
+    );
+
+    test('summarizes how many story tests executed and passed as the outcome of the test step', async () => {
+      const { reporter, emit } = fakeReporter();
+      jest
+        .spyOn(wdioTests, 'runWdioStoryTests')
+        .mockResolvedValueOnce([wdioResult('adaptive', 'passed'), wdioResult('typing', 'unsupported', 'unsupported')]);
+      await testCli({ reporter, output: quiet }).test('macos', connection);
+      expect(outcomes(emit)).toEqual([
+        {
+          kind: 'scope-end',
+          payload: {
+            status: 'passed',
+            summary: '1 of 2 story tests executed: 1 passed, 0 failed, 0 skipped, 1 unsupported (1 declared, 0 quarantined)',
+          },
+        },
+      ]);
+    });
+
+    test('summarizes the counts a failed test run left, not only the error', async () => {
+      const { reporter, emit } = fakeReporter();
+      const failure = new wdioTests.WdioStoryTestRunError(
+        [wdioResult('adaptive', 'passed'), wdioResult('typing', 'failed')],
+        [new Error('typing failed')],
+      );
+      jest.spyOn(wdioTests, 'runWdioStoryTests').mockRejectedValueOnce(failure);
+      await expect(testCli({ reporter, output: quiet }).test('macos', connection)).rejects.toBe(failure);
+      expect(outcomes(emit)).toEqual([
+        { kind: 'scope-end', payload: { status: 'failed', summary: '2 of 2 story tests executed: 1 passed, 1 failed, 0 skipped' } },
+      ]);
+    });
+
+    test('prints the test outcome as a line when there is no reporter', async () => {
+      const output: string[] = [];
+      const sink = { write: (text: string | Uint8Array) => !!output.push(String(text)) };
+      jest.spyOn(wdioTests, 'runWdioStoryTests').mockResolvedValueOnce([wdioResult('adaptive', 'passed')]);
+      await testCli({ output: sink }).test('macos', connection);
+      expect(output).toEqual(['1 of 1 story tests executed: 1 passed, 0 failed, 0 skipped\n']);
     });
   });
 });
@@ -933,7 +1632,7 @@ describe('createDesktopStorybookCommand', () => {
       );
 
       expect(runner.background[1]).toMatchObject({
-        args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+        args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
         env: {
           [FURN_STORYBOOK_PLATFORM]: 'win32',
           STORYBOOK_DRIVER_MANIFEST: manifestPath,
@@ -975,18 +1674,46 @@ describe('createDesktopStorybookCommand', () => {
 
   test('forwards server platform and connection options', async () => {
     const runner = new RecordingRunner();
-    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), runner });
+    const services = new DesktopServiceScope(runner);
+    const fetch: typeof globalThis.fetch = async () => {
+      setTimeout(() => services.requestStop(), 0);
+      return new Response('{}');
+    };
+    const program = createDesktopStorybookCommand({ ...nativeDriverTestOptions, config: makeConfig(), fetch, runner, services });
 
-    await program.parseAsync(['node', 'test', 'server', '--win32', '--host', 'localhost', '--port', '7101']);
+    await expect(program.parseAsync(['node', 'test', 'server', '--win32', '--host', 'localhost', '--port', '7101'])).rejects.toThrow(
+      'Owned desktop service stop requested.',
+    );
 
-    expect(runner.foreground[0]).toMatchObject({
-      args: [path.resolve(storybookRoot, '../../packages/agentic/storybook-desktop/config/server-runner.cjs')],
+    expect(runner.background[0]).toMatchObject({
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
       env: {
         [FURN_STORYBOOK_PLATFORM]: 'win32',
         STORYBOOK_WS_HOST: 'localhost',
         STORYBOOK_WS_PORT: '7101',
       },
     });
+  });
+
+  test('forwards agent options to the driver and requires --agent for its options', async () => {
+    const driver = jest.spyOn(DesktopStorybookCli.prototype, 'driver').mockResolvedValue(undefined);
+    try {
+      const program = () => createDesktopStorybookCommand({ config: makeConfig(), runner: new RecordingRunner() });
+      await program().parseAsync(['node', 'test', 'driver', '--win32', '--agent', '--descriptor', 'custom.json', '--root', 'state']);
+      await program().parseAsync(['node', 'test', 'driver', '--win32', '--agent']);
+      await program().parseAsync(['node', 'test', 'driver', '--win32']);
+      expect(driver.mock.calls.map(([, options]) => options)).toEqual([
+        { host: undefined, port: undefined, agent: { descriptor: 'custom.json', root: 'state' } },
+        { host: undefined, port: undefined, agent: {} },
+        { host: undefined, port: undefined },
+      ]);
+      await expect(program().parseAsync(['node', 'test', 'driver', '--win32', '--descriptor', 'custom.json'])).rejects.toThrow(
+        '--descriptor and --root require --agent.',
+      );
+      expect(driver).toHaveBeenCalledTimes(3);
+    } finally {
+      driver.mockRestore();
+    }
   });
 
   test('honors an explicit platform flag', async () => {

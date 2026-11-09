@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/win32-theme",
-  "version": "0.39.16",
+  "version": "0.39.17",
   "description": "Win32 office theme that works with the theming native module",
   "keywords": [],
   "license": "MIT",

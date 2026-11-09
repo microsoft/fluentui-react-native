@@ -165,7 +165,7 @@ export class FlexThemeReference implements FlexThemeSource {
       return this.base.resolveDescription(appearance, key);
     }
     if (isFlexThemeDescription(this.base)) {
-      return this.base.tokens;
+      return typeof this.base.tokens === 'function' ? this.base.tokens(appearance) : this.base.tokens;
     }
     const base = typeof this.base === 'function' ? this.base(appearance) : this.base;
     return mergeFlexTokenDescription(getDefaultFlexTokenDescription(appearance.colorTone), base);

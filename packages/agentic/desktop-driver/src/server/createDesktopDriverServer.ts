@@ -2,7 +2,19 @@ import { Buffer } from 'node:buffer';
 import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 
-import type { DesktopTarget, DesktopTreeNode, NativeActionSequence, NativeElementSnapshot, NativeSelector, Rect } from '../host/types.js';
+import type {
+  DesktopTarget,
+  DesktopTreeNode,
+  NativeAccessibilityAction,
+  NativeActionSequence,
+  NativeElementSnapshot,
+  NativeSelector,
+  Rect,
+} from '../host/types.js';
+import { DesktopAuthority, grantAllowsTarget } from '../authority/grants.js';
+import type { DesktopGrant } from '../authority/grants.js';
+import type { PrivateStorage } from '../authority/privateStorage.js';
+import type { ContentPolicy } from '../operations/runtime.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
 import { createReturnedCapabilities, matchCapabilities } from '../protocol/capabilities.js';
 import { webElementIdentifier } from '../protocol/constants.js';
@@ -10,13 +22,57 @@ import { invalidArgument, toWebDriverError, WebDriverError } from '../protocol/e
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
-import type { DesktopSession, ElementRecord } from './SessionManager.js';
+import type { DesktopSession, ElementRecord, MutationOptions, RecoverTargetRequest, RecoverTargetResult } from './SessionManager.js';
+import {
+  actionMechanisms,
+  assertInputAllowed,
+  clickMechanism,
+  deliverClear,
+  deliverInput,
+  describeSessionInput,
+  strictClearMechanism,
+} from './sessionInput.js';
+import { SettlementJournal } from './settlementJournal.js';
+import type { ProbeApplication } from './settlementJournal.js';
+import { createOperationRuntime, handleOperationRoute, requestBodyLimit } from './sessionOperations.js';
+import { assertStoryContext, changeStory, readCurrentStory } from './sessionStories.js';
 import { TargetRegistry } from './TargetRegistry.js';
 
 export type DesktopDriverServerOptions = {
+  /**
+   * Makes this a protected service. Every request, including ordinary WebDriver routes and `/status`, must carry a grant
+   * from this authority as `Authorization: Bearer <token>`. A session belongs to the grant that created it, and a grant
+   * can open only the targets it names. Without an authority the service keeps its documented loopback model, so one
+   * service never serves both modes.
+   */
+  authority?: DesktopAuthority;
   host?: string;
+  /**
+   * How long, in milliseconds, a grant's session may go without a request before the service closes it as DELETE would.
+   * The clock runs only while none of the session's requests is queued or running, and every request for the session
+   * renews it. Defaults to ten minutes; 0 disables expiry. Only a protected service, one with an `authority`, accepts it.
+   */
+  idleSessionTimeoutMs?: number;
   maxBodyBytes?: number;
+  /** Policy for the agent operations (`furn/ops`), which the server operator controls rather than the caller. */
+  operations?: {
+    /**
+     * Whether operations may read what applications display (values, text, help). `deny` withholds it for every
+     * session. Element names and automation ids stay readable. Defaults to `allow`.
+     */
+    content?: ContentPolicy;
+  };
   port?: number;
+  /**
+   * Durable settlement state, supplied by the trusted supervisor. Each mutation is recorded in `storage` before it is
+   * dispatched and each quarantine when it is raised, so a restarted service still refuses a target whose mutation
+   * never settled. The storage must belong to this one service configuration. `probeApplication` lifts a quarantine
+   * once the exact application incarnation it was raised against has exited; without it only the operator can.
+   */
+  recovery?: {
+    probeApplication?: ProbeApplication;
+    storage: PrivateStorage;
+  };
   targets?: readonly DesktopTarget[];
 };
 
@@ -27,12 +83,30 @@ export type DesktopDriverServer = {
   targets: TargetRegistry;
   url: string;
   close(): Promise<void>;
+  /**
+   * Lifts a target's quarantine. For the trusted operator only: no grant or WebDriver route can reach it. The request
+   * names the quarantine the operator inspected in `/status`, and `application-exited` requires the probe to prove the
+   * recorded application incarnation has exited.
+   */
+  recoverTarget(targetId: string, request: RecoverTargetRequest): Promise<RecoverTargetResult>;
 };
 
 type RouteContext = {
+  authority?: DesktopAuthority;
   body: unknown;
+  contentPolicy: ContentPolicy;
+  /** The authenticated caller on a protected service. */
+  grant?: DesktopGrant;
   method: string;
   segments: string[];
+  /** Aborts when the client disconnects before the response is complete. */
+  signal: AbortSignal;
+};
+
+type RequestSettings = {
+  authority?: DesktopAuthority;
+  contentPolicy: ContentPolicy;
+  maxBodyBytes: number;
 };
 
 export async function createDesktopDriverServer(options: DesktopDriverServerOptions = {}): Promise<DesktopDriverServer> {
@@ -41,8 +115,19 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     throw new Error(`Desktop Driver binds to loopback by default; "${host}" is not a supported loopback host.`);
   }
 
+  if (options.authority !== undefined && !(options.authority instanceof DesktopAuthority)) {
+    throw new TypeError('The authority option must be a DesktopAuthority; a missing authority is undefined, never null.');
+  }
   const targets = new TargetRegistry(options.targets);
-  const sessions = new SessionManager();
+  options.authority?.assertTargetsRegistered(new Set(targets.list().map(({ id }) => id)));
+  const sessions = new SessionManager({
+    idleTimeoutMs: resolveIdleSessionTimeout(options),
+    ...(options.recovery ? { journal: new SettlementJournal(options.recovery.storage) } : {}),
+    ...(options.recovery?.probeApplication ? { probeApplication: options.recovery.probeApplication } : {}),
+    redactSessionIds: options.authority !== undefined,
+  });
+  // A target recorded as quarantined must refuse from the first request, so a journal that cannot be read stops startup.
+  await Promise.all(targets.list().map(({ id }) => sessions.loadTarget(id)));
   let closing = false;
   let listenerClosePromise: Promise<void> | undefined;
   let cleanupQueue: Promise<void> = Promise.resolve();
@@ -52,9 +137,16 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
       writeJson(response, error.status, { value: error.toJSON() });
       return;
     }
-    void handleRequest(request, response, sessions, targets, options.maxBodyBytes ?? 1024 * 1024);
+    void handleRequest(request, response, sessions, targets, {
+      authority: options.authority,
+      contentPolicy: options.operations?.content ?? 'allow',
+      maxBodyBytes: options.maxBodyBytes ?? 1024 * 1024,
+    });
   });
   const port = await listen(httpServer, host, options.port ?? 0);
+  // A revoked grant leaves its sessions unreachable, so they are closed rather than holding their targets. A session that
+  // fails to close stays tracked, and service shutdown retries it and reports the failure.
+  const stopDrainingRevokedGrants = options.authority?.onRevoke((grant) => sessions.deleteOwnedBy(grant.id));
 
   return {
     host,
@@ -65,6 +157,7 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
     url: `http://${formatHost(host)}:${port}`,
     close() {
       closing = true;
+      stopDrainingRevokedGrants?.();
       sessions.beginClose();
       const attempt = cleanupQueue.then(runCleanup, runCleanup);
       cleanupQueue = attempt.then(
@@ -72,6 +165,12 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
         () => undefined,
       );
       return attempt;
+    },
+    recoverTarget(targetId, request) {
+      if (!targets.list().some(({ id }) => id === targetId)) {
+        return Promise.reject(new Error(`Target "${targetId}" is not registered.`));
+      }
+      return sessions.recoverTarget(targetId, request);
     },
   };
 
@@ -103,40 +202,152 @@ async function handleRequest(
   response: ServerResponse,
   sessions: SessionManager,
   targets: TargetRegistry,
-  maxBodyBytes: number,
+  settings: RequestSettings,
 ): Promise<void> {
+  const disconnected = new AbortController();
+  response.once('close', () => {
+    if (!response.writableFinished) {
+      disconnected.abort();
+    }
+  });
   try {
     if (request.headers.origin) {
       throw new WebDriverError('unknown error', 'Browser-origin requests are not accepted by Desktop Driver.');
     }
+    // Authentication precedes everything that reads or parses the request, so an unauthenticated caller reaches no route
+    // logic, learns nothing about sessions or targets, and cannot make the service buffer a body.
+    const grant = authenticateRequest(request, settings.authority);
     // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- This base URL only parses a loopback listener path.
     const url = new URL(request.url ?? '/', 'http://127.0.0.1');
     const segments = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
     const method = request.method ?? 'GET';
-    const body = method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, maxBodyBytes);
-    const operation = () => route({ body, method, segments }, sessions, targets);
-    const value = segments[0] === 'session' && segments[1] ? await sessions.runCommand(segments[1], operation) : await operation();
+    const sessionId = segments[0] === 'session' ? segments[1] : undefined;
+    if (sessionId) {
+      // Checked before the command queues, so a caller never waits in, or delays, another grant's session queue.
+      sessions.getFor(sessionId, grant?.id);
+    }
+    const body =
+      method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, requestBodyLimit(segments, settings.maxBodyBytes));
+    const operation = () => {
+      // Session requests may wait in a queue after their initial authentication. Revalidate before allowing
+      // a queued request to run under a grant that has since been revoked.
+      authenticateRequest(request, settings.authority);
+      return route(
+        {
+          authority: settings.authority,
+          body,
+          contentPolicy: settings.contentPolicy,
+          grant,
+          method,
+          segments,
+          signal: disconnected.signal,
+        },
+        sessions,
+        targets,
+      );
+    };
+    const value = sessionId ? await sessions.runCommand(sessionId, operation) : await operation();
     writeJson(response, 200, { value });
   } catch (error) {
     const webdriverError = toWebDriverError(error);
-    writeJson(response, webdriverError.status, { value: webdriverError.toJSON() });
+    writeJson(response, webdriverError.status, { value: webdriverError.toJSON() }, errorHeaders(webdriverError));
   }
+}
+
+const defaultIdleSessionTimeoutMs = 10 * 60 * 1000;
+// The largest delay a Node timer honors; a larger value would fire at once.
+const maxIdleSessionTimeoutMs = 2_147_483_647;
+
+function resolveIdleSessionTimeout(options: DesktopDriverServerOptions): number {
+  const value = options.idleSessionTimeoutMs;
+  if (value === undefined) {
+    return options.authority ? defaultIdleSessionTimeoutMs : 0;
+  }
+  if (!options.authority) {
+    throw new TypeError('The idleSessionTimeoutMs option applies only to a protected service, which needs an authority.');
+  }
+  if (!Number.isSafeInteger(value) || value < 0 || value > maxIdleSessionTimeoutMs) {
+    throw new RangeError(`The idleSessionTimeoutMs option must be an integer from 0 to ${maxIdleSessionTimeoutMs}.`);
+  }
+  return value;
+}
+
+/** Returns the caller's grant on a protected service, and undefined on a service that does not authenticate. */
+function authenticateRequest(request: IncomingMessage, authority: DesktopAuthority | undefined): DesktopGrant | undefined {
+  if (!authority) {
+    return undefined;
+  }
+  const cleanup = request.method === 'DELETE' && request.url === '/furn/grants/current';
+  const grant =
+    authority.authenticate(request.headers.authorization) ??
+    (cleanup ? authority.authenticateRevocation(request.headers.authorization) : undefined);
+  if (!grant || !grant.scopes.includes('driver-control')) {
+    // A missing, malformed, revoked, and wrong-secret grant are indistinguishable, and the stack trace stays server-side.
+    const error = new WebDriverError('unauthorized', 'A valid Desktop Driver grant is required.');
+    error.stack = '';
+    throw error;
+  }
+  return grant;
+}
+
+function errorHeaders(error: WebDriverError): Record<string, string> | undefined {
+  // The connection closes after a rejection so an unauthenticated caller cannot hold it open and keep streaming a body.
+  return error.code === 'unauthorized' ? { Connection: 'close', 'WWW-Authenticate': 'Bearer realm="furn-desktop-driver"' } : undefined;
+}
+
+/** The targets a caller may open: every registered target for the legacy service, and the grant's targets otherwise. */
+function visibleTargets(context: Pick<RouteContext, 'grant'>, targets: TargetRegistry): readonly DesktopTarget[] {
+  const { grant } = context;
+  return grant ? targets.list().filter(({ id }) => grantAllowsTarget(grant, id)) : targets.list();
 }
 
 async function route(context: RouteContext, sessions: SessionManager, targets: TargetRegistry): Promise<unknown> {
   const { body, method, segments } = context;
 
+  if (segments.length === 3 && segments[0] === 'furn' && segments[1] === 'grants' && context.authority && context.grant) {
+    if (method === 'POST' && segments[2] === 'connection') {
+      if (Object.keys(requireObject(body, 'Connection delegation')).length !== 0)
+        throw invalidArgument('Connection delegation accepts no input.');
+      const child = context.authority.delegate(context.grant.id, {
+        label: context.grant.label,
+        scopes: ['driver-control'],
+        targets: context.grant.targets,
+      });
+      return { token: child.token };
+    }
+    if (method === 'DELETE' && segments[2] === 'current') {
+      if (!context.grant.parentId) {
+        const error = new WebDriverError('unauthorized', 'Only a connection child can revoke itself.');
+        error.stack = '';
+        throw error;
+      }
+      await context.authority.revokeAndDrain(context.grant.id);
+      return null;
+    }
+  }
+
   if (method === 'GET' && segments.length === 1 && segments[0] === 'status') {
     const targetInfo = await Promise.all(
-      targets.list().map(async (target) => ({
-        endpoint: target.endpoint,
-        id: target.id,
-        platformName: target.platformName,
-        renderer: target.renderer,
-        host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
-      })),
+      visibleTargets(context, targets).map(async (target) => {
+        const quarantine = sessions.getQuarantine(target.id);
+        return {
+          endpoint: target.endpoint,
+          id: target.id,
+          launchModes: target.launchModes ?? ['launch', 'attach'],
+          platformName: target.platformName,
+          renderer: target.renderer,
+          host: await withCommandTimeout((signal) => target.host.probe(signal), 10_000, `Probing target "${target.id}"`),
+          ...(quarantine ? { quarantine: sessions.describeQuarantine(quarantine) } : {}),
+        };
+      }),
     );
-    return { message: 'Desktop Driver is ready.', ready: true, targets: targetInfo };
+    return {
+      message: 'Desktop Driver is ready.',
+      ready: true,
+      // A client that remembers the incarnation can tell a restarted service from the one it was using.
+      ...(context.authority ? { service: { incarnation: context.authority.incarnation } } : {}),
+      targets: targetInfo,
+    };
   }
 
   if (method === 'POST' && segments.length === 1 && segments[0] === 'session') {
@@ -144,9 +355,18 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     if (!request.capabilities) {
       throw invalidArgument('New Session requires "capabilities".');
     }
-    const matched = await matchCapabilities(request.capabilities, targets.list());
+    // A target outside the grant matches as if it were not registered, so a grant cannot discover what it may not use.
+    const matched = await matchCapabilities(request.capabilities, visibleTargets(context, targets));
     try {
-      const session = await sessions.create(matched.target, matched.hostInfo, matched.clickMode, matched.launchMode);
+      const owner = context.grant ? { grantId: context.grant.id, label: context.grant.label } : undefined;
+      const session = await sessions.create(
+        matched.target,
+        matched.hostInfo,
+        matched.clickMode,
+        matched.launchMode,
+        owner,
+        matched.inputMode,
+      );
       return {
         sessionId: session.id,
         capabilities: createReturnedCapabilities(matched, matched.hostInfo, session.timeouts),
@@ -164,13 +384,14 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     throw new WebDriverError('unknown command', `No WebDriver command matches ${method} /${segments.join('/')}.`);
   }
 
-  const session = sessions.get(segments[1]);
+  const session = sessions.getFor(segments[1], context.grant?.id);
   const command = segments.slice(2);
 
   if (method === 'DELETE' && command.length === 0) {
     await sessions.delete(session.id);
     return null;
   }
+  sessions.assertActive(session);
   if (command[0] === 'timeouts') {
     return handleTimeouts(method, body, session);
   }
@@ -193,14 +414,25 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     if (method === 'POST') {
       const { actions, nextState } = parseActionSequences(requireObject(body, 'actions request').actions, session.inputState);
       const resolvedActions = await resolveActionOrigins(actions, session, sessions);
+      const mechanisms = actionMechanisms(resolvedActions);
+      for (const mechanism of mechanisms) {
+        assertInputAllowed(session, mechanism, 'Performing input actions');
+      }
       await sessions.runInputCommand(async () => {
+        sessions.assertMutable(session);
         session.inputState = nextState;
         try {
-          await hostCommand(session, 'Performing input actions', (signal) => session.target.host.performActions(resolvedActions, signal));
-        } catch (error) {
-          await hostCommand(session, 'Releasing failed input actions', (signal) => session.target.host.releaseActions(signal)).catch(
-            () => undefined,
+          await mutationCommand(sessions, session, 'Performing input actions', (signal) =>
+            deliverInput(session, mechanisms, () => session.target.host.performActions(resolvedActions, signal)),
           );
+        } catch (error) {
+          await mutationCommand(
+            sessions,
+            session,
+            'Releasing failed input actions',
+            (signal) => session.target.host.releaseActions(signal),
+            { recovery: true },
+          ).catch(() => undefined);
           session.inputState = createInputState();
           throw error;
         }
@@ -209,7 +441,9 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     }
     if (method === 'DELETE') {
       await sessions.runInputCommand(() =>
-        hostCommand(session, 'Releasing input actions', (signal) => session.target.host.releaseActions(signal)),
+        mutationCommand(sessions, session, 'Releasing input actions', (signal) => session.target.host.releaseActions(signal), {
+          recovery: true,
+        }),
       );
       session.inputState = createInputState();
       return null;
@@ -227,6 +461,9 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     );
   }
   if (command[0] === 'furn') {
+    if (method === 'GET' && command[1] === 'input' && command.length === 2) {
+      return describeSessionInput(session);
+    }
     if (method === 'GET' && command[1] === 'tree' && command.length === 2) {
       const snapshots = await hostCommand(session, 'Reading the compact accessibility tree', (signal) =>
         session.target.host.tree(session.currentWindowId, signal),
@@ -239,6 +476,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
         throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not record native window events.`);
       }
       return hostCommand(session, 'Reading native window events', (signal) => windowEvents(session.lease, signal));
+    }
+    if (command[1] === 'ops') {
+      const runtime = createOperationRuntime(session, sessions, { contentPolicy: context.contentPolicy, signal: context.signal });
+      return handleOperationRoute(method, command.slice(2), body, runtime);
     }
     return handleStorybookCommand(method, command.slice(1), body, session, sessions);
   }
@@ -290,6 +531,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
           throw invalidArgument('Action element origin is missing a valid WebDriver element reference.');
         }
         const record = sessions.resolveElement(session, elementId);
+        if (record.scope === 'preview') {
+          await assertStoryContext(session, sessions);
+          sessions.resolveElement(session, elementId);
+        }
         await hostCommand(session, `Resolving action origin element "${elementId}"`, (signal) =>
           session.target.host.snapshot(record.nativeId, signal),
         );
@@ -319,78 +564,32 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not provide Storybook orchestration.`);
     }
     if (method === 'GET' && command[0] === 'manifest' && command.length === 1) {
-      return withCommandTimeout(() => orchestrator.getManifest(), session.desktopTimeouts.nativeCommand, 'Reading the Storybook manifest');
+      return withCommandTimeout(
+        (signal) => orchestrator.getManifest({ lifetimeId: session.id, signal }),
+        session.desktopTimeouts.nativeCommand,
+        'Reading the Storybook manifest',
+        { signal: session.commandAbortController.signal },
+      );
     }
     if (method === 'GET' && command[0] === 'story' && command.length === 1) {
-      return session.story;
+      const current = await readCurrentStory(session, sessions, session.commandAbortController.signal);
+      return current.story?.verification === 'unconfirmed' ? null : session.story;
     }
     if (method === 'POST' && command[0] === 'story' && command.length === 1) {
-      const request = parseStorySelection(body);
-      const deadline = Date.now() + session.desktopTimeouts.storyRender;
-      sessions.invalidatePreview(session);
-      session.story = null;
-      const result = await withCommandTimeout(
-        () => orchestrator.selectStory(request),
-        remainingTime(deadline),
-        `Selecting Storybook story "${request.storyId}"`,
-      );
-      await verifyStoryMarker(session, result, deadline);
-      session.story = result;
-      return result;
+      sessions.assertMutable(session);
+      return (await changeStory(session, sessions, 'select', parseStorySelection(body))).result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'reset') {
-      const request = parseStorySelection(body);
-      const deadline = Date.now() + session.desktopTimeouts.storyRender;
-      sessions.invalidatePreview(session);
-      session.story = null;
-      const result = await withCommandTimeout(
-        () => orchestrator.resetStory(request),
-        remainingTime(deadline),
-        `Resetting Storybook story "${request.storyId}"`,
-      );
-      await verifyStoryMarker(session, result, deadline);
-      session.story = result;
-      return result;
-    }
-
-    async function verifyStoryMarker(
-      session: DesktopSession,
-      expected: { previewGeneration: number; runId: string; storyId: string },
-      deadline: number,
-    ): Promise<void> {
-      const testId = session.target.storyRootTestId;
-      if (!testId) {
-        return;
-      }
-      do {
-        const matches = await hostCommand(session, 'Finding the native Storybook story marker', (signal) =>
-          session.target.host.find({ windowId: session.currentWindowId }, { strategy: 'accessibility id', value: testId }, signal),
-        );
-        for (const marker of matches) {
-          const value = marker.name ?? marker.value ?? marker.text;
-          if (value && matchesStoryMarker(value, expected)) {
-            return;
-          }
-        }
-        await delay(25);
-      } while (Date.now() <= deadline);
-      throw new WebDriverError(
-        'timeout',
-        `The native Storybook marker did not confirm story "${expected.storyId}" run "${expected.runId}".`,
-      );
-    }
-
-    function matchesStoryMarker(value: string, expected: { previewGeneration: number; runId: string; storyId: string }): boolean {
-      try {
-        const marker = JSON.parse(value) as Record<string, unknown>;
-        return (
-          marker.storyId === expected.storyId && marker.runId === expected.runId && marker.previewGeneration === expected.previewGeneration
-        );
-      } catch {
-        return false;
-      }
+      sessions.assertMutable(session);
+      return (await changeStory(session, sessions, 'reset', parseStorySelection(body))).result;
     }
     if (method === 'POST' && command[0] === 'story' && command[1] === 'args') {
+      if (context.authority) {
+        throw new WebDriverError('unsupported operation', 'Storybook args updates are not supported on protected services.', {
+          reason: 'story-args-unsupported',
+        });
+      }
+      sessions.assertMutable(session);
       if (!orchestrator.updateArgs) {
         throw new WebDriverError('unsupported operation', 'This Storybook target does not support arg updates.');
       }
@@ -402,9 +601,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       sessions.invalidatePreview(session);
       session.story = null;
       await withCommandTimeout(
-        () => orchestrator.updateArgs!(request.storyId as string, args),
+        (signal) => orchestrator.updateArgs!(request.storyId as string, args, { lifetimeId: session.id, signal }),
         session.desktopTimeouts.storyRender,
         `Updating args for Storybook story "${request.storyId}"`,
+        { signal: session.commandAbortController.signal },
       );
       return null;
     }
@@ -464,14 +664,18 @@ async function handleWindowCommand(
     if (typeof handle !== 'string' || !session.windows.some(({ id }) => id === handle)) {
       throw new WebDriverError('no such window', `Window "${String(handle)}" does not exist in this session.`);
     }
-    await sessions.runInputCommand(() => hostCommand(session, `Activating window "${handle}"`, (signal) => host.activate(handle, signal)));
+    await sessions.runInputCommand(() =>
+      mutationCommand(sessions, session, `Activating window "${handle}"`, (signal) => host.activate(handle, signal)),
+    );
     session.currentWindowId = handle;
     return null;
   }
   if (command.length === 0 && method === 'DELETE') {
     ensureCurrentWindow(session);
     await sessions.runInputCommand(() =>
-      hostCommand(session, `Closing window "${session.currentWindowId}"`, (signal) => host.closeWindow(session.currentWindowId, signal)),
+      mutationCommand(sessions, session, `Closing window "${session.currentWindowId}"`, (signal) =>
+        host.closeWindow(session.currentWindowId, signal),
+      ),
     );
     session.windows = await hostCommand(session, 'Reading application windows', (signal) => host.windows(session.lease, signal));
     session.currentWindowId = session.windows[0]?.id ?? '';
@@ -488,7 +692,7 @@ async function handleWindowCommand(
     }
     if (method === 'POST') {
       const rect = validatePartialRect(requireObject(body, 'window rectangle'));
-      return hostCommand(session, 'Setting the current window rectangle', (signal) =>
+      return mutationCommand(sessions, session, 'Setting the current window rectangle', (signal) =>
         host.setWindowRect(session.currentWindowId, rect, signal),
       );
     }
@@ -504,6 +708,10 @@ async function handleElementCommand(
   sessions: SessionManager,
 ): Promise<unknown> {
   const record = sessions.resolveElement(session, command[0]);
+  if (record.scope === 'preview' && method === 'POST' && ['click', 'clear', 'value'].includes(command[1])) {
+    await assertStoryContext(session, sessions);
+    sessions.resolveElement(session, command[0]);
+  }
   const snapshot = await hostCommand(session, `Reading element "${record.id}"`, (signal) =>
     session.target.host.snapshot(record.nativeId, signal),
   );
@@ -552,9 +760,12 @@ async function handleElementCommand(
     if (!requireSupported(snapshot.enabled, 'enabled') || !requireSupported(snapshot.visible, 'visible')) {
       throw new WebDriverError('element not interactable', `Element "${record.id}" cannot be clicked.`);
     }
+    const mechanism = clickMechanism(session.clickMode);
+    // Checked before the window is activated, so a refused click changes nothing.
+    assertInputAllowed(session, mechanism, `Clicking element "${record.id}"`);
     await sessions.runInputCommand(async () => {
       if (session.clickMode !== 'accessibility') {
-        await hostCommand(session, `Activating window "${snapshot.windowId}"`, (signal) =>
+        await mutationCommand(sessions, session, `Activating window "${snapshot.windowId}"`, (signal) =>
           session.target.host.activate(snapshot.windowId, signal),
         );
         const point = {
@@ -571,15 +782,19 @@ async function handleElementCommand(
           );
         }
       }
-      await hostCommand(session, `Clicking element "${record.id}"`, (signal) =>
-        session.target.host.click(record.nativeId, session.clickMode, signal),
+      await mutationCommand(sessions, session, `Clicking element "${record.id}"`, (signal) =>
+        deliverInput(session, [mechanism], () => session.target.host.click(record.nativeId, session.clickMode, signal)),
       );
     });
     return null;
   }
   if (method === 'POST' && operation[0] === 'clear') {
+    const description = `Clearing element "${record.id}"`;
+    const requested = strictClearMechanism(session, description);
     await sessions.runInputCommand(() =>
-      hostCommand(session, `Clearing element "${record.id}"`, (signal) => session.target.host.clear(record.nativeId, signal)),
+      mutationCommand(sessions, session, description, (signal) =>
+        deliverClear(session, requested, description, (mechanism) => session.target.host.clear(record.nativeId, signal, mechanism)),
+      ),
     );
     return null;
   }
@@ -594,12 +809,16 @@ async function handleElementCommand(
     if (text === undefined) {
       throw invalidArgument('Send Keys requires a string "text" or string-array "value".');
     }
+    assertInputAllowed(session, 'keyboard', `Sending keys to element "${record.id}"`);
     await sessions.runInputCommand(() =>
-      hostCommand(session, `Sending keys to element "${record.id}"`, (signal) =>
-        session.target.host.sendKeys(record.nativeId, text, signal),
+      mutationCommand(sessions, session, `Sending keys to element "${record.id}"`, (signal) =>
+        deliverInput(session, ['keyboard'], () => session.target.host.sendKeys(record.nativeId, text, signal)),
       ),
     );
     return null;
+  }
+  if (method === 'POST' && operation[0] === 'furn' && operation[1] === 'accessibility-action' && operation.length === 2) {
+    return performNamedAccessibilityAction(body, record, session, sessions);
   }
   if (method === 'GET' && operation[0] === 'screenshot') {
     const image = await hostCommand(session, `Capturing element "${record.id}"`, (signal) =>
@@ -609,6 +828,53 @@ async function handleElementCommand(
   }
 
   throw new WebDriverError('unknown command', `Unknown element command "${operation.join('/')}".`);
+}
+
+/**
+ * Performs the one accessibility action an element publishes under a name, such as a custom `Toggle`. The action is
+ * listed and performed in the same input turn, and a name the element publishes twice names neither action.
+ */
+async function performNamedAccessibilityAction(
+  body: unknown,
+  record: ElementRecord,
+  session: DesktopSession,
+  sessions: SessionManager,
+): Promise<null> {
+  const request = requireObject(body, 'accessibility action request');
+  if (typeof request.name !== 'string' || request.name.length === 0) {
+    throw invalidArgument('An accessibility action request requires a non-empty string "name".');
+  }
+  const name = request.name;
+  const host = session.target.host;
+  const list = host.listAccessibilityActions?.bind(host);
+  const perform = host.performAccessibilityAction?.bind(host);
+  if (!list || !perform || session.hostInfo.features.performAccessibilityAction !== true) {
+    throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not perform accessibility actions.`);
+  }
+  const description = `Performing an accessibility action on element "${record.id}"`;
+  assertInputAllowed(session, 'accessibility-action', description);
+  await sessions.runInputCommand(async () => {
+    const actions: NativeAccessibilityAction[] = await hostCommand(
+      session,
+      `Listing the accessibility actions of element "${record.id}"`,
+      (signal) => list(record.nativeId, signal),
+    );
+    const matches = actions.filter((action) => action.name === name);
+    if (matches.length !== 1) {
+      throw new WebDriverError(
+        'element not interactable',
+        matches.length === 0
+          ? `Element "${record.id}" publishes no accessibility action by that name.`
+          : `Element "${record.id}" publishes ${matches.length} accessibility actions by that name, so the name names none of them.`,
+        { reason: matches.length === 0 ? 'action-not-published' : 'action-not-unique' },
+      );
+    }
+    const [{ key }] = matches;
+    await mutationCommand(sessions, session, description, (signal) =>
+      deliverInput(session, ['accessibility-action'], () => perform(record.nativeId, key, signal)),
+    );
+  });
+  return null;
 }
 
 async function isElementOrDescendant(session: DesktopSession, targetNativeId: string, hit: NativeElementSnapshot): Promise<boolean> {
@@ -747,7 +1013,20 @@ function ensureCurrentWindow(session: DesktopSession): void {
 }
 
 function hostCommand<T>(session: DesktopSession, description: string, operation: (signal: AbortSignal) => Promise<T>): Promise<T> {
-  return withCommandTimeout(operation, session.desktopTimeouts.nativeCommand, description);
+  return withCommandTimeout(operation, session.desktopTimeouts.nativeCommand, description, {
+    signal: session.commandAbortController.signal,
+  });
+}
+
+/** Runs a mutating host command behind the target quarantine guard and settles its failure into a disposition. */
+function mutationCommand<T>(
+  sessions: SessionManager,
+  session: DesktopSession,
+  description: string,
+  operation: (signal: AbortSignal) => Promise<T>,
+  options?: MutationOptions,
+): Promise<T> {
+  return sessions.runMutation(session, description, () => hostCommand(session, description, operation), options);
 }
 
 function requireObject(value: unknown, name: string): Record<string, unknown> {
@@ -782,12 +1061,13 @@ async function readJsonBody(request: IncomingMessage, maxBytes: number): Promise
   }
 }
 
-function writeJson(response: ServerResponse, status: number, body: WebDriverResponse): void {
+function writeJson(response: ServerResponse, status: number, body: WebDriverResponse, headers?: Record<string, string>): void {
   const json = JSON.stringify(body);
   response.writeHead(status, {
     'Cache-Control': 'no-cache',
     'Content-Length': Buffer.byteLength(json),
     'Content-Type': 'application/json; charset=utf-8',
+    ...headers,
   });
   response.end(json);
 }
@@ -824,8 +1104,4 @@ function closeServer(server: Server): Promise<void> {
 
 function delay(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
-function remainingTime(deadline: number): number {
-  return Math.max(1, deadline - Date.now());
 }

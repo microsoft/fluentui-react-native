@@ -3,9 +3,15 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { DesktopAuthority } from '../authority/grants';
+import { createDesktopDriverClient } from '../client/DesktopDriverClient';
+import type { NativeObserveRequest } from '../host/types';
 import { encodeJsonFrame, NativeFrameDecoder } from '../hosts/native/framing';
+import { NativeDesktopHost } from '../hosts/native/NativeDesktopHost';
 import { NativeHostProcess } from '../hosts/native/NativeHostProcess';
-import type { NativeHostJsonMessage } from './types';
+import { parseNativeObservation } from '../protocol/observation';
+import { createDesktopDriverServer } from '../server/createDesktopDriverServer';
+import type { NativeDriverArtifact, NativeHostJsonMessage } from './types';
 import {
   hashMacOSDriverSources,
   macOSCertificateExtractionArguments,
@@ -13,6 +19,44 @@ import {
   parseMacOSSigningIdentities,
 } from './macos/buildMacOSDriver';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDriver';
+
+async function expectProtectedNativeService(artifact: NativeDriverArtifact): Promise<void> {
+  const endpoint = artifact.provider;
+  const authority = new DesktopAuthority();
+  const grant = authority.issue({ label: 'native-contract', targets: ['native-contract'] });
+  const host = new NativeDesktopHost({ application: {}, artifact, endpoint });
+  const probe = jest.spyOn(host, 'probe');
+  const launch = jest.spyOn(host, 'launch');
+  const service = await createDesktopDriverServer({
+    authority,
+    targets: [{ endpoint, host, id: 'native-contract', platformName: endpoint, renderer: 'fabric' }],
+  });
+  try {
+    const unauthenticated = createDesktopDriverClient({ url: service.url });
+    await expect(unauthenticated.status()).rejects.toMatchObject({ code: 'unauthorized' });
+    await expect(unauthenticated.newSession({ alwaysMatch: {} })).rejects.toMatchObject({ code: 'unauthorized' });
+    expect(probe).not.toHaveBeenCalled();
+    expect(launch).not.toHaveBeenCalled();
+
+    const hidden = authority.issue({ label: 'out-of-scope', targets: ['not-registered'] });
+    await expect(createDesktopDriverClient({ grant: hidden.token, url: service.url }).status()).resolves.toMatchObject({
+      targets: [],
+    });
+    expect(probe).not.toHaveBeenCalled();
+
+    const authenticated = createDesktopDriverClient({ grant: grant.token, url: service.url });
+    await expect(authenticated.status()).resolves.toMatchObject({
+      service: { incarnation: authority.incarnation },
+      targets: [{ id: 'native-contract', host: { endpoint, platformName: endpoint, protocolVersion: 1 } }],
+    });
+    expect(probe).toHaveBeenCalledTimes(1);
+    authority.revoke(grant.id);
+    await expect(authenticated.status()).rejects.toMatchObject({ code: 'unauthorized' });
+    expect(probe).toHaveBeenCalledTimes(1);
+  } finally {
+    await service.close();
+  }
+}
 
 jest.setTimeout(240_000);
 
@@ -108,13 +152,20 @@ describe('native driver build and resolution', () => {
         },
       });
       await helper.dispose();
+      await expectProtectedNativeService(resolved);
+      await expectEffectReporting(resolved.executablePath);
+      await expectBoundedObservation(resolved.executablePath, 'macos');
+      await expectMacosRequestMemoryStable(resolved.executablePath);
 
+      const observationDump = path.join(cacheRoot, 'self-test-observations.json');
       const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
         encoding: 'utf8',
+        env: { ...process.env, FURN_DRIVER_SELF_TEST_OBSERVATIONS: observationDump },
         timeout: 120_000,
       });
       expect(selfTest.status).toBe(0);
       expect(selfTest.stdout).toContain('ok ');
+      expectSelfTestObservationsToConform(observationDump);
     } finally {
       emitWarning.mockRestore();
       fs.rmSync(cacheRoot, { force: true, maxRetries: 10, recursive: true, retryDelay: 100 });
@@ -298,13 +349,19 @@ describe('native driver build and resolution', () => {
           },
         });
         await helper.dispose();
+        await expectProtectedNativeService(resolved);
+        await expectEffectReporting(resolved.executablePath);
+        await expectBoundedObservation(resolved.executablePath, 'windows');
 
+        const observationDump = path.join(cacheRoot, 'self-test-observations.json');
         const selfTest = spawnSync(resolved.executablePath, ['--self-test'], {
           encoding: 'utf8',
+          env: { ...process.env, FURN_DRIVER_SELF_TEST_OBSERVATIONS: observationDump },
           timeout: 120_000,
         });
         expect(selfTest.status).toBe(0);
         expect(selfTest.stdout).toContain('self-test passed');
+        expectSelfTestObservationsToConform(observationDump);
 
         fs.writeFileSync(resolved.executablePath, 'corrupt');
         await expect(resolveNativeDesktopDriver({ buildPolicy: 'never', cacheRoot, platform: 'windows' })).rejects.toMatchObject({
@@ -403,6 +460,149 @@ describe('native driver build and resolution', () => {
         await closed;
       }
     }
+  }
+
+  // The effect is what lets the driver tell a rejected mutation from one that may have reached the application.
+  async function expectEffectReporting(executablePath: string): Promise<void> {
+    const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const decoder = new NativeFrameDecoder();
+    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
+    child.stderr.resume();
+    const request = (id: string, command: string, params: Record<string, unknown>) => {
+      const response = waitForMessage(decoder, (message) => message.type === 'response' && message.id === id);
+      child.stdin.write(encodeJsonFrame({ command, id, params, type: 'request' }));
+      return response;
+    };
+    try {
+      await waitForMessage(decoder, (message) => message.type === 'hello');
+
+      await expect(request('click-unknown-element', 'click', { elementId: 'element-never-issued' })).resolves.toMatchObject({
+        error: { code: 'stale-element', effect: 'none' },
+      });
+      await expect(request('send-keys-without-text', 'sendKeys', { elementId: 'element-never-issued' })).resolves.toMatchObject({
+        error: { code: 'invalid-params', effect: 'none' },
+      });
+      const read = await request('windows-without-lease', 'windows', {});
+      expect(read).toHaveProperty('error.code');
+      expect(read).not.toHaveProperty('error.effect');
+
+      const cancelled = waitForMessage(decoder, (message) => message.type === 'cancelled' && message.id === 'never-dispatched');
+      child.stdin.write(encodeJsonFrame({ id: 'never-dispatched', type: 'cancel' }));
+      await expect(cancelled).resolves.toMatchObject({ effect: 'none' });
+
+      await request('dispose-after-effects', 'dispose', {});
+      await closed;
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+        await closed;
+      }
+    }
+  }
+
+  // These commands run before any application is leased, so they hold on any machine, trusted for Accessibility or not.
+  async function expectBoundedObservation(executablePath: string, endpoint: 'macos' | 'windows'): Promise<void> {
+    const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const decoder = new NativeFrameDecoder();
+    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
+    child.stderr.resume();
+    const request = (id: string, command: string, params: Record<string, unknown>) => {
+      const response = waitForMessage(decoder, (message) => message.type === 'response' && message.id === id);
+      child.stdin.write(encodeJsonFrame({ command, id, params, type: 'request' }));
+      return response;
+    };
+    const budget = { deadlineMs: 1000, maxBytes: 65_536, maxDepth: 4, maxStringLength: 64, maxVisited: 50 };
+    try {
+      await expect(waitForMessage(decoder, (message) => message.type === 'hello')).resolves.toMatchObject({
+        features: expect.arrayContaining(['boundedObservation']),
+      });
+      await expect(request('probe-observation', 'probe', { endpoint })).resolves.toMatchObject({
+        result: { features: { boundedObservation: expect.any(Boolean) } },
+      });
+
+      const malformed = await request('observe-without-budget', 'observe', { facts: [], windowId: 'window-never-issued' });
+      expect(malformed).toMatchObject({ error: { code: 'invalid-params' } });
+      expect(malformed).not.toHaveProperty('error.effect');
+      const unknownWindow = await request('observe-unknown-window', 'observe', {
+        budget,
+        facts: ['enabled'],
+        windowId: 'window-never-issued',
+      });
+      expect(unknownWindow).toMatchObject({ error: { code: 'no-such-window' } });
+      expect(unknownWindow).not.toHaveProperty('error.effect');
+
+      await expect(request('release-nothing', 'releaseElements', { ids: ['element-never-issued'] })).resolves.toMatchObject({
+        result: { released: 0 },
+      });
+      await expect(request('release-malformed', 'releaseElements', { ids: 'element-never-issued' })).resolves.toMatchObject({
+        error: { code: 'invalid-params' },
+      });
+
+      await request('dispose-after-observation', 'dispose', {});
+      await closed;
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+        await closed;
+      }
+    }
+  }
+
+  // The helper serves one session for a long time from threads that run no run loop, so anything autoreleased per request
+  // that is not drained there accumulates; before the fix a probe round trip cost the helper about 25 KB for good.
+  async function expectMacosRequestMemoryStable(executablePath: string): Promise<void> {
+    const child = spawn(executablePath, ['--stdio'], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const decoder = new NativeFrameDecoder();
+    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
+    child.stderr.resume();
+    const residentKilobytes = (): number =>
+      Number(spawnSync('ps', ['-o', 'rss=', '-p', String(child.pid)], { encoding: 'utf8' }).stdout.trim());
+    const roundTrip = async (id: string, command: string, params: Record<string, unknown>) => {
+      const response = waitForMessage(decoder, (message) => message.type === 'response' && message.id === id);
+      child.stdin.write(encodeJsonFrame({ command, id, params, type: 'request' }));
+      await response;
+    };
+    try {
+      await waitForMessage(decoder, (message) => message.type === 'hello');
+      for (let index = 0; index < 200; index += 1) {
+        await roundTrip(`warm-${index}`, 'probe', { endpoint: 'macos' });
+      }
+      const before = residentKilobytes();
+      expect(before).toBeGreaterThan(0);
+      for (let index = 0; index < 1000; index += 1) {
+        await roundTrip(`probe-${index}`, 'probe', { endpoint: 'macos' });
+      }
+      expect(residentKilobytes() - before).toBeLessThan(8 * 1024);
+
+      await roundTrip('dispose-after-memory-check', 'dispose', {});
+      await closed;
+    } finally {
+      if (child.exitCode === null && child.signalCode === null) {
+        child.kill();
+        await closed;
+      }
+    }
+  }
+
+  // The self-test builds samples from synthetic trees; the Node validator is the independent judge of their conformance.
+  function expectSelfTestObservationsToConform(dumpPath: string): void {
+    const entries = JSON.parse(fs.readFileSync(dumpPath, 'utf8')) as {
+      name: string;
+      request: NativeObserveRequest;
+      result: unknown;
+    }[];
+    expect(entries.length).toBeGreaterThan(100);
+    const rejected = entries.flatMap((entry) => {
+      const parsed = parseNativeObservation(entry.request, entry.result);
+      return parsed.status === 'rejected' ? [`${entry.name}: ${parsed.message}`] : [];
+    });
+    expect(rejected).toEqual([]);
+    const complete = entries.filter((entry) => (entry.result as { complete: boolean }).complete);
+    expect(complete.length).toBeGreaterThan(0);
+    expect(complete.length).toBeLessThan(entries.length);
   }
 
   function encodeMalformedJsonFrame(): Buffer {

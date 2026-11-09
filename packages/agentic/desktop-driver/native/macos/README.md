@@ -14,19 +14,24 @@ Accessibility.
 
 | Source                                 | Responsibility                                                              |
 | -------------------------------------- | --------------------------------------------------------------------------- |
-| `Package.swift`                        | macOS 14 executable target and framework links                              |
+| `Package.swift`                        | macOS 14 executable target, framework links, and `libbsm`                   |
 | `Sources/DesktopDriverHost/main.swift` | Helper modes and top-level error handling                                   |
 | `Host.swift`                           | FDR1 hello, request queue, framing, cancellation, and disposal              |
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `Accessibility.swift`                  | AX tree walking, lookup, snapshots, focus, hit testing, actions, and source |
+| `Observation.swift`                    | Provider-neutral bounded sampler: request rules, budgets, and BFS result    |
+| `AccessibilityObservation.swift`       | AX source for `observe`: multi-attribute reads, shared ids, `observe` run   |
 | `Input.swift`                          | Quartz pointer, keyboard, text, wheel, ledger, and recovery behavior        |
 | `InputLock.swift`                      | Per-user cross-process physical-input lock and abandoned-owner recovery     |
 | `Capture.swift`                        | ScreenCaptureKit window capture, element crop, scale, and PNG encoding      |
 | `Permissions.swift`                    | TCC preflight/prompt diagnostics and Security.framework signing evidence    |
 | `Session.swift`                        | Login-session lock and console diagnostics                                  |
-| `Support.swift`                        | Errors, cancellation, JSON helpers, deadlines, and AX utilities             |
+| `ServiceIdentity.swift`                | One-shot `--service-identity`: process identity and exclusive listeners     |
+| `Support.swift`                        | Errors, cancellation, mutation effect ledger, JSON helpers, deadlines, AX   |
 | `SelfTest.swift`                       | Provider-local framing, identity, AX, input, capture, and permission checks |
+| `ObservationSelfTest.swift`            | Synthetic-tree, randomized differential, and command checks for `observe`   |
+| `ServiceIdentitySelfTest.swift`        | URL, claim, listener-policy, and live describe/verify checks                |
 
 The Node build coordinator is
 `../../src/native/macos/buildMacOSDriver.ts`; runtime adaptation is under
@@ -135,6 +140,7 @@ furn-desktop-driver-host --stdio
 furn-desktop-driver-host --self-test
 furn-desktop-driver-host --permissions [--prompt]
 furn-desktop-driver-host --release-input [--sweep]
+furn-desktop-driver-host --service-identity
 ```
 
 The long-lived `--stdio` process:
@@ -151,6 +157,18 @@ The input lock lives beneath
 helpers started through different Aqua bootstrap namespaces still serialize
 physical input. Restricted `--release-input` accepts only the Node-owned ledger.
 `--sweep` is an operator recovery diagnostic, not normal cleanup.
+The one-shot `--service-identity` mode describes a service process or verifies a
+service claim for `describeMacOSService` and `createMacOSServiceVerifier`; it
+uses only public process and socket information APIs and links `libbsm` for the
+audit session. See [the macOS service verifier](../../references/security.md#macos-service-verifier).
+
+Neither the stdin reader nor the worker thread runs a run loop, so nothing
+drains their autorelease pools between requests. The reader runs each frame, and
+the worker each request, inside its own `autoreleasepool`; without that, every
+frame read, JSON parse, tree read, and observation added to the helper's
+resident memory for the life of the session (about 25 KB for a `probe`, 80 KB
+for a `tree`, and 250 KB for a 500-element `observe`). A new thread that serves
+requests must drain a pool per request too.
 
 ## Application and window identity
 
@@ -206,7 +224,15 @@ description, identifier, title, frame, parent, child count, and the matching
 WindowServer window's number, layer, alpha, on-screen state, and name.
 Activation events record which application owns system-wide keyboard focus.
 Destroyed notifications for tracked windows close them and publish the FDR1
-`window-closed` event.
+`window-closed` event once. A window closed through `closeWindow` publishes none:
+the helper marks the window before it presses the close button, because the
+destroyed notification can reach the observer thread before the command returns
+and forgets the window. A `closeWindow` that fails removes the mark, so the
+window's later destruction is published. The 512-event ring is shared by the
+helper's observed applications; `eventsTruncated` remains true for an
+application whose older events were evicted, even when a diagnostic requests
+the entire retained ring. Stopping observation clears that application's
+events and truncation state.
 
 A 128-entry command journal records each helper command's start, duration,
 outcome, and window or element identifiers on the same monotonic clock. It
@@ -245,14 +271,34 @@ only `<name>` and no process address or selector leaves the helper. Standard
 actions pass through unchanged. React Native macOS Fabric publishes each declared
 action by `name` (`Toggle`, `Select`), whereas Paper publishes only actions that
 declare a `label` and names them by it (`C-A11Y-007` in
-`accessibility.action-transport-evidence`). The command lists actions only and
-never performs one.
+`accessibility.action-transport-evidence`). The command itself never performs
+an action.
+
+The `performAccessibilityAction` feature pairs each listed action with a key:
+HMAC-SHA256 of the raw action string under a secret generated when the helper
+starts, truncated to 32 hex characters. The key therefore distinguishes custom
+actions that share a name without revealing their target address, and stops
+matching if the application replaces an action. `performAccessibilityAction`
+re-reads `AXUIElementCopyActionNames`, refuses unless exactly one raw action
+has the key (`action-changed`), and calls `AXUIElementPerformAction` with it.
+Like `activate`, it moves no pointer and takes no physical input lock.
 
 Quartz Event Services supplies physical pointer, keyboard, text, and wheel
 input. Physical input requires Accessibility/PostEvent authority for the
 responsible process and an unlocked interactive Aqua session. Missing authority
 returns `input-unavailable`; the provider never substitutes unrelated
 accessibility activation and reports physical success.
+
+The helper advertises `strictClear`. `clear` writes an empty `AXValue` when
+`AXUIElementIsAttributeSettable` reports the value settable, and otherwise
+activates the application, focuses the element, and presses Command-A and
+Delete under the physical input lock. A request may name `mechanism`:
+`semantic` only writes `AXValue` and fails `element-not-interactable` with
+effect `none` when the value is not settable, and `keyboard` skips the write
+and needs the same physical input authority as the fallback. Every successful
+clear returns `{ "mechanism": "semantic" | "keyboard" }`. The `probe` feature
+is `true` even without Accessibility trust, because each mechanism reports its
+own refusal.
 
 A locked screen or a login session that is not the active console prevents
 applications from publishing complete accessibility windows and from receiving
@@ -267,7 +313,11 @@ client applies immediately, and falls back to `NSRunningApplication.activate`
 only if that fails. Cooperative workspace activation was observed to wait about
 a second for the active application to yield. Activation completes when the
 application reports `AXFrontmost` and the primary window reports `AXMain`;
-a timeout names the application that kept keyboard focus.
+a timeout names the application that kept keyboard focus. The window is also
+raised with `AXRaise`, but only as a hint: SwiftUI windows, such as Calculator's
+on macOS 27, refuse it with `attributeUnsupported`, so that refusal and
+`actionUnsupported` are recorded in the journal entry and the frontmost and
+main checks decide.
 
 A physical click first hit-tests its target. When another element owns the
 point, `element click intercepted` names the occluding element, or the external
@@ -286,6 +336,89 @@ Repeated keydowns are still posted but do not add another held physical key.
 Aliases for the same key share one entry; left and right modifiers remain
 independent. One release must remove that physical key from later keyboard and
 pointer flags.
+
+## Bounded observation
+
+The helper advertises `boundedObservation` in `hello.features` and in the
+`features` map of `probe`, where it is `trusted` when Accessibility access is
+granted, as for `tree`. `observe` returns one budgeted, breadth-first sample of
+a window's accessibility tree and `releaseElements` drops the helper's records
+for ids Node no longer needs (see [PROTOCOL.md](../PROTOCOL.md)). Both are reads:
+they report no `effect` and never quarantine a target.
+
+`Observation.swift` is provider-neutral. It parses and validates the request,
+shapes facts, and runs the sampler against an `ObservationSource`, so the
+self-test drives the same code with a synthetic tree and a controllable clock.
+`AccessibilityObservation.swift` supplies the AX source:
+
+- **One round trip per element.** `AXUIElementCopyMultipleAttributeValues` reads
+  role, subrole, identifier, title, description, help, and children, plus only the
+  attributes the requested facts need (value, enabled, focused, expanded,
+  selected, position, and size). Per-slot errors keep the semantics of snapshots:
+  an unsupported or empty attribute is an absent fact, `invalidUIElement` is a
+  stale element, and any other slot error makes that one element `unreadable` for
+  the sample instead of failing the call.
+- **Shared ids.** `observe`, `tree`, `find`, and `snapshot` register elements in
+  one record table that dedupes by `CFEqual`, so an element keeps one id across
+  commands until it is released. The table holds 10,000 records. At capacity
+  `observe` ends the sample with the `references` truncation, where `tree` fails
+  with `tree-too-large`.
+- **Observe-only facts.** `helpText` (`AXHelp`) and `required` (`AXRequired`)
+  exist only through `observe`; snapshots never report them. Secure text fields
+  never report `value` or `text` through `observe`, whereas the snapshot path has
+  no secure-field rule and reports whatever `AXValue` returns.
+- **Actions.** The `actions` fact and `accessibilityActions` publish an empty
+  list when the action query answers that the element has no list. AppKit split
+  dividers answer `kAXErrorFailure`, and one of them must not drop the element
+  from a sample. `click` keeps its strict handling of the same errors.
+- **Deadline.** The sampler checks the deadline and cancellation between
+  Accessibility calls and never sets a messaging timeout, so a deadline cannot
+  interrupt one call to an application that has stopped responding. Measured
+  against a stopped Calculator on macOS 27.2, the system fails such a call after
+  about 1.5 seconds whatever the deadline: a failed root read ends the command as
+  `automation-failed` with the reason `target-non-response`, and a failure later
+  in the walk marks the affected element or its children `unreadable` instead.
+  The next command succeeds as soon as the application resumes, with no helper
+  restart. A walk can overrun its deadline by one such call.
+
+A sample is not one instant. AppKit creates some accessibility elements lazily,
+so the first read of a just-launched application can see one element fewer than
+later reads: Calculator and Font Book each gained a depth-3 group on the second
+read, through both `observe` and `tree`.
+
+## Mutation effects
+
+Failed and cancelled mutating commands (`activate`, `clear`, `click`,
+`closeWindow`, `performActions`, `releaseActions`, `sendKeys`, `setWindowRect`)
+report an FDR1 `effect`, so Node can tell a rejection from a mutation that may
+have reached the application (see [PROTOCOL.md](../PROTOCOL.md)). Reads and
+lifecycle commands carry none.
+
+The worker owns an `EffectLedger` that `Driver.execute` resets at the start of
+each command. It counts only primary mutations, at the point they are
+dispatched:
+
+- an `AXPress`, an `AXValue` write, the close-button press, and each window
+  position or size set, bracketed by `dispatching()` and `completed(_:)`;
+- every posted key, button, and wheel event, through `delivered()`.
+
+An AX call that succeeds is applied. One that returns an error the platform
+documents as a rejection (`actionUnsupported`, `attributeUnsupported`,
+`illegalArgument`, `invalidUIElement`, `noValue`, `notImplemented`, `apiDisabled`,
+`notEnoughPrecision`) did nothing. Any other result, including `cannotComplete`
+from a busy or modal target, stays unresolved, so a failure reports `unknown` and
+Node quarantines the target. That can quarantine a target that was not changed,
+but it never lets a possibly applied mutation be retried as a rejection.
+
+Focus, window raise and activation, pointer moves, and key or button releases that
+clean up counted input are idempotent and not counted. `setWindowRect` checks that
+both position and size are settable before it sets either, so a non-resizable
+window rejects without moving. A queued mutating request that is cancelled before
+it starts reports `none`, a queued read or lifecycle command reports no `effect`,
+and neither ever runs. A cancel for an id the helper does not hold also reports
+`none` (a settled request already reported its effect). A new provider-side
+mutation must bracket its platform call with the ledger and be listed in
+`Driver.trackedMutations`.
 
 ## Capture
 
@@ -397,9 +530,16 @@ FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="<identity>" \
 
 The Swift self-test covers framing, JSON, input ledger and lock recovery,
 capture scaling, snapshot normalization, AX diagnostics, CoreGraphics fallback
-classification, custom AX action name parsing, permission and login-session diagnostics, and hello identity. The Node native
+classification, custom AX action name parsing, permission and login-session diagnostics, hello identity, and
+bounded observation: request validation, each truncation reason, a randomized
+differential check against a reference model, record release and reuse, and the
+`observe` and `releaseElements` commands. The Node native
 contract additionally builds, verifies, reuses, and directly resolves the app;
-starts the actual long-lived process; and exercises malformed-frame recovery.
+starts the actual long-lived process; exercises malformed-frame recovery;
+requires a run of 1,000 `probe` round trips to leave the process's resident
+memory within 8 MiB (it grew by about 25 MiB before the autorelease pools); and
+replays the self-test's observation samples through the protocol oracle that
+checks every `observe` result.
 
 Native contract tests do not prove TCC authority against a real app. Real
 qualification must attach to a built React Native macOS application and cover

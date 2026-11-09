@@ -1,6 +1,8 @@
 import { createHash, randomUUID } from 'node:crypto';
 import WDIOReporter from '@wdio/reporter';
 import type { HookStats, RunnerStats, TestStats } from '@wdio/reporter';
+import { desktopJasmineRegistry, excludedSpecCounts } from '../jasmine/registry.js';
+import type { DesktopSpecEntry } from '../jasmine/registry.js';
 import { connectReportProducer } from '../reporting/transport.js';
 import type { ReportProducer } from '../reporting/transport.js';
 import { serializeReportError } from '../reporting/protocol.js';
@@ -71,6 +73,7 @@ export default class DesktopWdioReporter extends WDIOReporter {
   }
 
   override onTestStart(test: TestStats): void {
+    if (this.hidden(test)) return;
     this.report(
       { kind: 'test-start', payload: { testId: this.testId(test), title: test.fullTitle, attempt: this.attempt(test) } },
       { ...this.context, test: test.uid },
@@ -90,13 +93,31 @@ export default class DesktopWdioReporter extends WDIOReporter {
     this.testResult(test);
   }
 
+  /** The spec the Jasmine adapter registered for a test, when `desktopIt` declared it. */
+  private entry(test: TestStats): DesktopSpecEntry | undefined {
+    return desktopJasmineRegistry().entries.get(test.uid);
+  }
+
+  /** An excluded case is not a test, and a blocked run reports its fault rather than every spec it disabled. */
+  private hidden(test: TestStats): boolean {
+    return desktopJasmineRegistry().blocked || this.entry(test)?.kind === 'excluded';
+  }
+
   private testResult(test: TestStats): void {
+    if (this.hidden(test)) return;
     const testId = this.testId(test);
     const attempt = this.attempt(test);
     const key = `${testId}/${attempt}`;
     if (this.endedTests.has(key)) return;
     this.endedTests.add(key);
-    const status = test.state === 'pending' ? 'skipped' : test.state;
+    const entry = this.entry(test);
+    // A spec the adapter replaced or filtered out finishes as skipped or pending and never ran, whichever the framework calls it.
+    const notExecuted = test.state === 'pending' || test.state === 'skipped';
+    const gap = notExecuted && entry?.kind === 'gap' ? entry.gap : undefined;
+    const missing = notExecuted && entry?.kind === 'run' ? entry.missing : undefined;
+    const status = gap || missing?.length ? 'unsupported' : test.state === 'pending' ? 'skipped' : test.state;
+    // A body that called pending() also delivered input, but only an executed test is judged by it.
+    const input = entry?.kind === 'run' && (status === 'passed' || status === 'failed') ? entry.input : undefined;
     this.report(
       {
         kind: 'test-result',
@@ -106,6 +127,9 @@ export default class DesktopWdioReporter extends WDIOReporter {
           attempt,
           status,
           durationMs: test.duration,
+          ...(gap ? { gap: gap.kind, reason: gap.reason } : {}),
+          ...(missing?.length ? { reason: `Missing desktop requirements: ${missing.join(', ')}.` } : {}),
+          ...(input ? { input } : {}),
           ...(status === 'skipped' ? { reason: test.pendingReason || 'Skipped by the test framework.' } : {}),
           ...(status === 'failed'
             ? { failure: this.failure(`${key}/failure`, test.error ?? new AggregateError(test.errors ?? [], 'WDIO test failed.'), 'test') }
@@ -143,6 +167,11 @@ export default class DesktopWdioReporter extends WDIOReporter {
           failure: this.failure(`${this.scopeId}/runner`, new Error(runner.error), 'infrastructure'),
         },
       });
+    const excluded = excludedSpecCounts(desktopJasmineRegistry());
+    // Keyed by the spec group, so a retried attempt that announces the same exclusions again is counted once.
+    if (excluded.platform + excluded.scope + excluded.input > 0) {
+      this.report({ kind: 'selection', payload: { excluded, key: this.groupId } });
+    }
     this.report({ kind: 'scope-end', payload: { status: runner.failures || runner.error ? 'failed' : 'passed' } });
     this.schedule((producer) => producer.finish(runner.failures || runner.error ? 'failed' : 'passed'));
   }

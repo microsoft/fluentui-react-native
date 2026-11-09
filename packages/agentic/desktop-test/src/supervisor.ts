@@ -1,15 +1,18 @@
-import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
-import { createHash } from 'node:crypto';
 
-import { createDesktopDriverServer, NativeDesktopHost, resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
-import type { DesktopDriverServer, DesktopHost, DesktopTarget, NativeDesktopHostOptions } from '@fluentui-react-native/desktop-driver';
+import type { DesktopDriverServer, DesktopHost } from '@fluentui-react-native/desktop-driver';
+import { accessibleLaneMaskedFeatures } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopInputLane } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopAgentConnectionOptions } from './agentConnection.js';
+import { startDesktopService, startNativeDesktopService } from './driverService.js';
+import type { DesktopService, DesktopServiceOptions } from './driverService.js';
 import type { DesktopCommand, ResolvedDesktopTarget } from './config.js';
 import type { DesktopIntegration } from './integration.js';
 import { NodeDesktopCommandRunner, deadline } from './commands.js';
 import type { PreparedDesktopCommand, RunningDesktopCommand } from './commands.js';
 import { DesktopServiceScope } from './services.js';
+import { createDesktopWorkloadClaim } from './ownership.js';
+import type { DesktopWorkloadClaim } from './ownership.js';
 import { resolveDesktopApplication } from './adapters.js';
 import { DesktopRunReporter } from './reporting/collector.js';
 import type { DesktopReportWriter } from './reporting/collector.js';
@@ -22,8 +25,20 @@ export type DesktopSupervisorOptions = {
   reporter: DesktopReportWriter;
   reportSession?: DesktopReportSession;
   integration?: DesktopIntegration;
+  workload?: { kind: 'delegated'; claim: DesktopWorkloadClaim };
   hostFactory?: (target: ResolvedDesktopTarget) => Promise<DesktopHost>;
   lockDirectory?: string;
+  /**
+   * Protects the service with a grant authority and publishes one agent's connection descriptor once the target is
+   * ready. Every route then requires a grant, so only clients given one, such as the Desktop Driver MCP adapter, connect.
+   */
+  agent?: DesktopAgentConnectionOptions;
+  recovery?: DesktopServiceOptions['recovery'];
+  /**
+   * The input lane of a `test` run. An accessible lane starts the native host with keyboard, physical click and wheel
+   * disabled. A host supplied through `hostFactory` is not masked here, so the suite verifies it before running anything.
+   */
+  input?: DesktopInputLane;
 };
 
 export class DesktopSupervisor {
@@ -31,11 +46,14 @@ export class DesktopSupervisor {
   readonly target: ResolvedDesktopTarget;
   readonly runner: NodeDesktopCommandRunner;
   readonly services: DesktopServiceScope;
-  private serverValue?: DesktopDriverServer;
+  private serverValue?: DesktopService;
   private transport?: ReportTransport;
   private opened = false;
-  private releaseClaim?: () => void;
+  private workloadClaim?: DesktopWorkloadClaim;
+  private ownsWorkloadClaim = false;
+  private resourceStartPromise?: Promise<void>;
   private closePromise?: Promise<void>;
+  private ownershipUncertain = false;
   private readonly environment: Record<string, string> = {};
   private readonly workers = new Set<RunningDesktopCommand>();
   private readonly options: DesktopSupervisorOptions;
@@ -46,7 +64,7 @@ export class DesktopSupervisor {
     this.reporter = options.reporter;
     Object.assign(this.environment, options.reportSession?.environment);
     this.runner = new NodeDesktopCommandRunner({ reporter: this.reporter, environment: this.environment });
-    this.services = new DesktopServiceScope(this.runner, this.reporter);
+    this.services = new DesktopServiceScope(this.runner, this.reporter, this.reporter.runId);
   }
 
   get server(): DesktopDriverServer {
@@ -54,11 +72,28 @@ export class DesktopSupervisor {
     return this.serverValue;
   }
 
+  /** The record name of the published agent connection descriptor, once it is published. */
+  get agentDescriptor(): string | undefined {
+    return this.serverValue?.agentDescriptor;
+  }
+
   async open(interactive = true): Promise<void> {
     if (this.closePromise) throw new Error('Desktop supervisor is closing.');
     if (this.opened) return;
-    if (interactive && !this.options.reportSession?.delegated)
-      this.releaseClaim = claimDesktopWorkload(this.reporter.runId, this.options.lockDirectory);
+    if (interactive) {
+      if (this.options.workload?.kind === 'delegated') {
+        this.workloadClaim = this.options.workload.claim;
+      } else {
+        this.workloadClaim = createDesktopWorkloadClaim({
+          runId: this.reporter.runId,
+          targetId: this.target.id,
+          targetInstanceId: this.target.instanceId,
+          directory: this.options.lockDirectory,
+        });
+        this.ownsWorkloadClaim = true;
+      }
+      this.services.setResourceObserver((resource) => this.workloadClaim?.updateResource(resource));
+    }
     try {
       if (!this.options.reportSession) {
         if (!(this.reporter instanceof DesktopRunReporter)) throw new Error('A delegated supervisor requires its inherited reportSession.');
@@ -67,10 +102,31 @@ export class DesktopSupervisor {
       }
       this.opened = true;
     } catch (error) {
-      this.releaseClaim?.();
-      this.releaseClaim = undefined;
+      try {
+        if (this.ownsWorkloadClaim) this.workloadClaim?.release();
+      } catch (cleanup) {
+        throw new AggregateError([error, cleanup], 'Desktop supervisor opening and claim cleanup failed.');
+      }
+      this.workloadClaim = undefined;
+      this.ownsWorkloadClaim = false;
       throw error;
     }
+  }
+
+  startResources(): Promise<void> {
+    return (this.resourceStartPromise ??= (() => {
+      const contributions = this.options.integration?.resources ?? [];
+      const serviceIds = new Set(['webdriver', ...(this.target.services ?? []).map(({ id }) => id)]);
+      for (const contribution of contributions) {
+        if (serviceIds.has(contribution.id)) {
+          throw new TypeError(`Resource contribution ID "${contribution.id}" conflicts with a configured service ID.`);
+        }
+      }
+      return this.services.contribute(contributions, {
+        targetId: this.target.id,
+        targetInstanceId: this.target.instanceId,
+      });
+    })());
   }
 
   async start(): Promise<void> {
@@ -78,40 +134,56 @@ export class DesktopSupervisor {
     await this.open();
     try {
       await this.startConfiguredServices();
-      const host = this.options.hostFactory ? await this.options.hostFactory(this.target) : await this.createHost();
-      try {
-        const extension = await this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter });
-        this.serverValue = await createDesktopDriverServer({
-          targets: [
-            {
-              endpoint: this.target.endpoint,
-              id: this.target.id,
-              platformName: this.target.endpoint === 'macos' ? 'macos' : 'windows',
-              renderer: this.target.host.renderer,
-              launchTimeoutMs: this.target.launchTimeoutMs,
-              launchModes: this.target.host.ownership === 'external' ? ['attach'] : ['launch'],
-              host,
-              ...extension,
-            },
-          ],
-        });
-        await host.probe(this.services.controller.signal);
-      } catch (error) {
-        if (!this.serverValue) {
-          try {
-            await host.dispose();
-          } catch (cleanup) {
-            throw new AggregateError([error, cleanup], 'Desktop target startup and disposal failed.');
-          }
-        }
-        throw error;
-      }
+      const options: DesktopServiceOptions = {
+        target: {
+          endpoint: this.target.endpoint,
+          id: this.target.id,
+          platformName: this.target.endpoint === 'macos' ? 'macos' : 'windows',
+          renderer: this.target.host.renderer,
+          launchTimeoutMs: this.target.launchTimeoutMs,
+          launchModes: this.target.host.ownership === 'external' ? ['attach'] : ['launch'],
+        },
+        agent: this.options.agent,
+        recovery: this.options.recovery,
+        signal: this.services.controller.signal,
+        guard: (work) => this.services.guard(work),
+        addSecret: (secret) => this.reporter.addSecret(secret),
+        createTarget: (host) =>
+          this.options.integration?.createTarget?.({ host, target: this.target, reporter: this.reporter }) ?? Promise.resolve(undefined),
+      };
+      let service: DesktopService | undefined;
+      await this.services.contribute(
+        [
+          {
+            id: 'webdriver',
+            ownership: 'owned',
+            prepare: () => ({
+              identity: `driver-service:${this.target.id}:${this.target.instanceId}`,
+              acquire: async () => {
+                if (this.options.hostFactory) {
+                  const host = await this.options.hostFactory(this.target);
+                  service = await startDesktopService(host, options);
+                } else {
+                  service = await this.createService(options);
+                }
+              },
+              dispose: async () => {
+                await service?.close();
+              },
+            }),
+          },
+        ],
+        { targetId: this.target.id, targetInstanceId: this.target.instanceId },
+      );
+      if (!service) throw new Error('WebDriver resource acquisition completed without a service.');
+      this.serverValue = service;
       this.reporter.emit(
         { kind: 'service-ready', payload: { message: `WebDriver ${this.server.url}; target ${this.target.id}` } },
         'webdriver',
         { endpoint: this.target.endpoint, renderer: this.target.host.renderer },
       );
     } catch (error) {
+      if (error instanceof AggregateError) this.ownershipUncertain = true;
       this.reporter.fail(error);
       try {
         await this.close();
@@ -123,27 +195,24 @@ export class DesktopSupervisor {
   }
 
   async startConfiguredServices(): Promise<void> {
-    for (const service of this.target.services ?? []) {
+    await this.startResources();
+    for (const service of orderServices(this.target.services ?? [])) {
       this.services.start(service.id, this.prepare(service.command, service.id));
       if (service.readyUrl) await this.services.ready(service.id, service.readyUrl, this.target.launchTimeoutMs);
     }
   }
 
-  private async createHost(): Promise<DesktopHost> {
+  private async createService(options: DesktopServiceOptions): Promise<DesktopService> {
     const requiredOS = this.target.endpoint === 'macos' ? 'darwin' : 'win32';
     if (process.platform !== requiredOS)
       throw new Error(`Endpoint ${this.target.endpoint} requires ${requiredOS}; native helpers cannot run on ${process.platform}.`);
     const application = await resolveDesktopApplication(this.target, this.services.controller.signal);
     if (application.leaseNonce) this.reporter.addSecret(application.leaseNonce);
-    const artifact = await resolveNativeDesktopDriver({
-      ...this.target.nativeDriver,
-      platform: this.target.endpoint,
-      buildPolicy: 'never',
-      signal: this.services.controller.signal,
-    });
-    return new NativeDesktopHost({
+    return startNativeDesktopService({
+      ...options,
+      ...(this.options.input === 'accessible' ? { disabledInputFeatures: accessibleLaneMaskedFeatures } : {}),
       application,
-      artifact,
+      nativeDriver: this.target.nativeDriver,
       endpoint: this.target.endpoint,
       onStderr: (text) =>
         this.reporter.emit({ kind: 'output', payload: { stream: 'stderr', text } }, 'native-helper', {
@@ -205,13 +274,14 @@ export class DesktopSupervisor {
       };
       for (const worker of this.workers) await close('worker', () => worker.stop({ failed: true }));
       this.workers.clear();
-      if (this.serverValue) await close('webdriver', () => deadline(this.serverValue!.close(), 30_000, 'Closing desktop sessions'));
       await close('services', () => this.services.close());
       await close('commands', () => this.runner.close());
       if (this.transport) await close('reporting', () => this.transport!.close());
-      if (this.releaseClaim) {
+      if (this.ownsWorkloadClaim && this.workloadClaim && failures.length === 0 && !this.ownershipUncertain) {
         try {
-          this.releaseClaim();
+          this.workloadClaim.release();
+          this.workloadClaim = undefined;
+          this.ownsWorkloadClaim = false;
         } catch (error) {
           failures.push(error);
           this.reporter.fail(error, 'cleanup', 'desktop-claim');
@@ -222,43 +292,32 @@ export class DesktopSupervisor {
   }
 }
 
-/** Storybook's channel child uses the same native composition without acquiring a second application owner. */
-export async function startNativeDesktopService(
-  options: NativeDesktopHostOptions & {
-    target: Omit<DesktopTarget, 'host'>;
-    port?: number;
-    host?: string;
-  },
-): Promise<DesktopDriverServer> {
-  const host = new NativeDesktopHost(options);
-  try {
-    return await createDesktopDriverServer({ host: options.host, port: options.port, targets: [{ ...options.target, host }] });
-  } catch (error) {
-    try {
-      await host.dispose();
-    } catch (cleanup) {
-      throw new AggregateError([error, cleanup], 'Native listener startup and disposal failed.');
-    }
-    throw error;
-  }
+export function claimDesktopWorkload(runId: string, directory?: string): () => void {
+  const claim = createDesktopWorkloadClaim({
+    runId,
+    targetId: 'unregistered',
+    targetInstanceId: 'unregistered',
+    directory,
+  });
+  return () => claim.release();
 }
 
-export function claimDesktopWorkload(runId: string, directory?: string): () => void {
-  const user = createHash('sha256').update(os.homedir()).digest('hex').slice(0, 16);
-  const root = directory ?? path.join(os.tmpdir(), `furn-desktop-workload-${user}`);
-  fs.mkdirSync(root, { recursive: true, mode: 0o700 });
-  const file = path.join(root, 'interactive.lock');
-  const contents = JSON.stringify({ schemaVersion: 1, processId: process.pid, runId });
-  try {
-    fs.writeFileSync(file, contents, { flag: 'wx', mode: 0o600 });
-  } catch (error) {
-    throw new Error(
-      `Another desktop workload holds ${file}. Do not run parallel physical-input suites. After a crash, verify the recorded owner has exited before removing its stale claim.`,
-      { cause: error },
-    );
-  }
-  return () => {
-    if (fs.readFileSync(file, 'utf8') !== contents) throw new Error('Desktop claim ownership changed; refusing to remove another owner.');
-    fs.unlinkSync(file);
+function orderServices<T extends { id: string; dependsOn?: readonly string[] }>(services: readonly T[]): readonly T[] {
+  const byId = new Map(services.map((service) => [service.id, service]));
+  const ordered: T[] = [];
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+  const visit = (id: string, ancestry: readonly string[]) => {
+    if (visited.has(id)) return;
+    if (visiting.has(id)) throw new TypeError(`Desktop service dependency cycle: ${[...ancestry, id].join(' -> ')}.`);
+    const service = byId.get(id);
+    if (!service) throw new TypeError(`Unknown desktop service "${id}".`);
+    visiting.add(id);
+    for (const dependency of service.dependsOn ?? []) visit(dependency, [...ancestry, id]);
+    visiting.delete(id);
+    visited.add(id);
+    ordered.push(service);
   };
+  for (const service of services) visit(service.id, []);
+  return ordered;
 }

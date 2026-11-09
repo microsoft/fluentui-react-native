@@ -7,7 +7,7 @@ import { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import { createDesktopDriverStoryHarness } from '../testing/protocolHarness.js';
 import type { DesktopStoryManifest } from '../storybook.js';
-import { runDesktopStoryTests, selectDesktopStoryTests } from './StoryTestRunner.js';
+import { assertDesktopExpectation, findDesktopElement, runDesktopStoryTests, selectDesktopStoryTests } from './StoryTestRunner.js';
 import { findDesktopElements } from './StoryTestRunner.js';
 
 const passingPlan: DesktopStoryTests = {
@@ -246,6 +246,59 @@ describe('runDesktopStoryTests', () => {
         alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
       });
       await expect(findDesktopElements(session, { text: 'Visible' })).resolves.toHaveLength(1);
+      await session.delete();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('allows count and existence checks but rejects ambiguous element reads and actions', async () => {
+    const harness = await createDesktopDriverStoryHarness(makeManifest(passingPlan), {
+      windows: [
+        {
+          id: 'window-1',
+          title: 'Ambiguous selectors',
+          elements: [
+            {
+              id: 'first',
+              automationId: 'duplicate',
+              name: 'Save',
+              rect: { height: 20, width: 100, x: 0, y: 0 },
+              role: 'button',
+              scope: 'application',
+              windowId: 'window-1',
+            },
+            {
+              id: 'second',
+              automationId: 'duplicate',
+              name: 'Save',
+              rect: { height: 20, width: 100, x: 0, y: 30 },
+              role: 'button',
+              scope: 'application',
+              windowId: 'window-1',
+            },
+          ],
+        },
+      ],
+    });
+    try {
+      const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+      });
+
+      await expect(
+        assertDesktopExpectation(session, { state: 'count', target: { testId: 'duplicate' }, value: 2 }),
+      ).resolves.toBeUndefined();
+      await expect(
+        assertDesktopExpectation(session, { state: 'exists', target: { testId: 'duplicate' }, value: true }),
+      ).resolves.toBeUndefined();
+      await expect(
+        assertDesktopExpectation(session, { state: 'enabled', target: { testId: 'duplicate' }, value: true }),
+      ).rejects.toMatchObject({
+        code: 'invalid selector',
+        message: expect.stringContaining('matched 2 elements'),
+      });
+      await expect(findDesktopElement(session, { testId: 'duplicate' })).rejects.toMatchObject({ code: 'invalid selector' });
       await session.delete();
     } finally {
       await harness.close();

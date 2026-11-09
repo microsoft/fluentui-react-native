@@ -101,6 +101,18 @@ The command prints a JSON `NativeDriverArtifact`, including the verified
 executable path, artifact and source identities, provider, endpoints, features,
 origin, and signing metadata.
 
+Use the shared CLI reporter options to select compact output:
+
+```sh
+desktop-driver build-driver --platform windows --reporter json
+desktop-driver stories list --platform windows --url http://127.0.0.1:7007 --target my-app --reporter ndjson
+```
+
+`--reporter auto|plain|github-actions|json|ndjson` is also configurable with
+`DESKTOP_REPORTER`; `--json` aliases `--reporter json`. In `auto`, existing
+indented JSON is retained. One-shot commands write one result, while `serve`
+emits one readiness result and then waits for shutdown.
+
 ## Resolve and diagnose
 
 Normal service startup can resolve a compatible cache artifact or build one if

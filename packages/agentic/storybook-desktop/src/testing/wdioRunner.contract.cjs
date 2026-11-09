@@ -1,5 +1,7 @@
+const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
+const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
@@ -25,6 +27,7 @@ async function main() {
     path.join(root, 'fixture.stories.ts'),
     `
     import 'react-native-must-never-load-in-node';
+    import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
     export default { title: 'Fixture/Button' };
     export const Pass = {
       tags: ['grouped', 'desktop-e2e'],
@@ -88,6 +91,33 @@ async function main() {
         await expect(await browser.$('~button-primary')).toBeEnabled();
       },
     }};
+    export const Lane = { tags: ['desktop-e2e'], wdio: [
+      desktopIt('accessible only', { requires: ['accessibility-click'] }, async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+      desktopIt('either lane', async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+      desktopIt('physical only', { requires: ['physical-click'] }, async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+    ]};
+    export const Receipts = { wdio: [
+      desktopIt('declared click', { requires: ['click'] }, async ({ browser }) => {
+        await (await browser.$('~button-primary')).click();
+      }),
+      desktopIt('undeclared click', async ({ browser }) => {
+        await (await browser.$('~button-primary')).click();
+      }),
+      desktopIt('unused keyboard', { requires: ['keyboard'] }, async ({ browser, expect }) => {
+        await expect(await browser.$('~button-primary')).toBeEnabled();
+      }),
+      // An alias hides the keyboard from the authoring check, so only the run-time policy and receipts can catch it.
+      desktopIt('typing', { requires: ['click'] }, async ({ browser }) => {
+        const driver = browser;
+        await driver.keys(['Tab']);
+      }),
+    ]};
   `,
   );
   const storyPackage = { name: 'inline-fixture', root, manifest: { name: 'inline-fixture' }, storyPatterns: ['*.stories.ts'] };
@@ -97,7 +127,8 @@ async function main() {
   const selectStory = harness.storyOrchestrator.selectStory.bind(harness.storyOrchestrator);
   harness.storyOrchestrator.selectStory = async (request) => {
     if (request.storyId === 'fixture-button--navigation-failure') {
-      throw new Error('Navigation failed: preview did not mount');
+      // This fixture rejects before touching the preview; an uncertain real render must remain quarantined.
+      throw Object.assign(new Error('Navigation refused before dispatch'), { effect: 'none' });
     }
     selections.push(request.storyId);
     return selectStory(request);
@@ -325,6 +356,94 @@ async function main() {
     } finally {
       await restrictedButtonHarness.close();
     }
+    const laneResults = (results) => results.map(({ testName, status }) => ({ testName, status }));
+    // The driver enforces the lane's policy itself, so an accessible lane holds on a driver with physical input enabled.
+    const unmaskedLane = laneResults(await run('lane', { input: 'accessible' }));
+    // A driver that does not confirm the policy fails closed: it could neither hold the lane nor attribute its input.
+    const unconfirmedProxy = await createUnconfirmingProxy(harness.server.url);
+    const unconfirmedReport = new DesktopRunReporter({
+      artifactsRoot: path.join(root, 'lane-reports'),
+      lane: { input: 'accessible', source: 'option', policyEnforced: true },
+      summary: false,
+    });
+    let unconfirmedLane;
+    try {
+      // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- rejected request targets use loopback only
+      for (const requestTarget of ['http://127.0.0.1:1/session', '//127.0.0.1:1/session']) {
+        const status = await new Promise((resolve, reject) => {
+          const request = http.request(
+            { hostname: '127.0.0.1', port: new URL(unconfirmedProxy.url).port, path: requestTarget },
+            (response) => {
+              response.resume();
+              resolve(response.statusCode);
+            },
+          );
+          request.once('error', reject);
+          request.end();
+        });
+        assert.equal(status, 400);
+      }
+      await run('lane', { input: 'accessible', report: unconfirmedReport, url: unconfirmedProxy.url });
+      throw new Error('An accessible lane must not run against a driver that does not confirm its input policy.');
+    } catch (error) {
+      if (!(error instanceof Error) || !(error instanceof WdioStoryTestRunError) || !('results' in error) || !Array.isArray(error.results))
+        throw error;
+      unconfirmedLane = { results: laneResults(error.results), message: error.message };
+    } finally {
+      await unconfirmedProxy.close();
+    }
+    const unconfirmedLaneResult = await unconfirmedReport.finish();
+    // Receipts hold every declared case to what it says, in compatibility mode as in a lane, and the report keeps them.
+    const receiptResults = async (input) => {
+      const report = new DesktopRunReporter({
+        artifactsRoot: path.join(root, 'receipt-reports'),
+        ...(input ? { lane: { input, source: 'option', policyEnforced: true } } : {}),
+        summary: false,
+      });
+      let results;
+      try {
+        await run('receipts', { report, ...(input ? { input } : {}) });
+        throw new Error('Expected undeclared input to fail.');
+      } catch (error) {
+        if (
+          !(error instanceof Error) ||
+          !(error instanceof WdioStoryTestRunError) ||
+          !('results' in error) ||
+          !Array.isArray(error.results)
+        )
+          throw error;
+        results = error.results;
+      }
+      const reported = await report.finish();
+      return results.map(({ testName, status, input: delivered, error }) => {
+        assert.deepEqual(reported.tests.find(({ title }) => title.endsWith(` / ${testName}`))?.attempts[0].input, delivered);
+        return { testName, status, input: delivered, ...(error ? { error } : {}) };
+      });
+    };
+    const receipts = { compatibility: await receiptResults(), accessible: await receiptResults('accessible') };
+    const maskedHarness = await createDesktopDriverStoryHarness(manifest, {
+      features: { keyboard: false, physicalClick: false, wheel: false },
+    });
+    let accessibleLane;
+    try {
+      accessibleLane = laneResults(
+        await run('lane', { input: 'accessible', targetId: maskedHarness.target.id, url: maskedHarness.server.url }),
+      );
+    } finally {
+      await maskedHarness.close();
+    }
+    const physicalLane = laneResults(await run('lane', { input: 'physical' }));
+    // Without a lane a declared physical case must not pin physical click: a host that masks it reports the case unsupported
+    // rather than failing to create the session, as the skip it replaces did not fail.
+    const unmaskedPhysicalHarness = await createDesktopDriverStoryHarness(manifest, { features: { physicalClick: false } });
+    let compatibilityLane;
+    try {
+      compatibilityLane = laneResults(
+        await run('lane', { targetId: unmaskedPhysicalHarness.target.id, url: unmaskedPhysicalHarness.server.url }),
+      );
+    } finally {
+      await unmaskedPhysicalHarness.close();
+    }
     process.stdout.write(
       '\nWDIO_RESULT ' +
         JSON.stringify({
@@ -337,6 +456,20 @@ async function main() {
           smokeFailureLogged,
           button: button.map(({ testName, status }) => ({ testName, status })),
           restrictedButton: restrictedButton.map(({ testName, status }) => ({ testName, status })),
+          lane: {
+            accessible: accessibleLane,
+            physical: physicalLane,
+            compatibility: compatibilityLane,
+            unmasked: unmaskedLane,
+            unconfirmed: {
+              ...unconfirmedLane,
+              status: unconfirmedLaneResult.status,
+              failed: unconfirmedLaneResult.counts.failed,
+              excluded: unconfirmedLaneResult.selection?.excluded,
+              reported: unconfirmedLaneResult.failures.map(({ error }) => error.message),
+            },
+          },
+          receipts,
           platforms,
           namedFailureResults: namedFailureResults.map(({ testName, status }) => ({ testName, status })),
           namedTimeout,
@@ -351,6 +484,61 @@ async function main() {
     await harness.close();
     fs.rmSync(root, { recursive: true, force: true });
   }
+}
+
+/** Forwards to a driver but drops the input policy from each new session, as a driver from before enforcement would. */
+async function createUnconfirmingProxy(url) {
+  const upstream = new URL(url);
+  if (upstream.protocol !== 'http:' || upstream.hostname !== '127.0.0.1') {
+    throw new Error('The test proxy requires a loopback HTTP driver.');
+  }
+  const server = http.createServer(async (request, response) => {
+    if (!request.url?.startsWith('/') || request.url.startsWith('//')) {
+      request.resume();
+      response.writeHead(400);
+      response.end();
+      return;
+    }
+    const chunks = [];
+    for await (const chunk of request) chunks.push(chunk);
+    const body = Buffer.concat(chunks);
+    const reply = await new Promise((resolve, reject) => {
+      const forwarded = http.request(
+        {
+          hostname: '127.0.0.1',
+          port: upstream.port,
+          path: request.url,
+          method: request.method,
+          headers: { 'content-type': 'application/json' },
+        },
+        resolve,
+      );
+      forwarded.once('error', reject);
+      forwarded.end(body);
+    });
+    const replyChunks = [];
+    for await (const chunk of reply) replyChunks.push(chunk);
+    let text = Buffer.concat(replyChunks).toString('utf8');
+    const status = reply.statusCode ?? 502;
+    if (request.method === 'POST' && request.url === '/session' && status >= 200 && status < 300) {
+      const created = JSON.parse(text);
+      delete created.value.capabilities['furn:inputMode'];
+      text = JSON.stringify(created);
+    }
+    response.writeHead(status, { 'content-type': 'application/json' });
+    response.end(text);
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(undefined)));
+  const { port } = /** @type {import('node:net').AddressInfo} */ (server.address());
+  return {
+    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- test proxy only binds to loopback
+    url: `http://127.0.0.1:${port}`,
+    close: () =>
+      new Promise((resolve) => {
+        server.closeAllConnections();
+        server.close(resolve);
+      }),
+  };
 }
 
 /** @returns {Promise<{code: number | null, stdout: string, stderr: string}>} */

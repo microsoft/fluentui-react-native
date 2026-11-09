@@ -2,12 +2,14 @@
 
 #include <windows.h>
 
+#include <functional>
 #include <string>
 #include <string_view>
 #include <utility>
 #include <vector>
 
 #include "common.h"
+#include "inputauthority.h"
 #include "json.h"
 
 namespace furn {
@@ -45,7 +47,25 @@ ReleaseLedger ParseReleaseLedger(const json::Value& document);
 // cancellation, or an explicit release request.
 class InputController {
  public:
-  bool PhysicalInputAvailable();
+  // Whether injected input can reach applications right now. The session,
+  // lock, and input desktop are re-read on every call and on every physical
+  // operation, so a success never outlives the state it observed.
+  InputVerdict Availability();
+  bool PhysicalInputAvailable() { return Availability().available; }
+  // Whether Windows lets this helper inject into windows that `processId`
+  // owns; it does not read the session.
+  InputVerdict IntegrityFor(DWORD processId);
+  void RequireIntegrityFor(DWORD processId);
+  // Availability plus IntegrityFor.
+  InputVerdict AvailabilityFor(DWORD processId);
+  void RequireInputFor(DWORD processId);
+
+  // Runs before each key press this helper injects (a key down, a typed
+  // character, or a chord) and never before a release, so it can refuse to type
+  // into the wrong application while releases of what is already down always
+  // go through.
+  using KeyboardGuard = std::function<void()>;
+  void SetKeyboardGuard(KeyboardGuard guard) { keyboardGuard_ = std::move(guard); }
 
   POINT pointer() const noexcept { return pointer_; }
   void SyncPointerFromCursor();
@@ -74,26 +94,55 @@ class InputController {
   std::size_t DepressedButtonCount() const noexcept { return pressedButtons_.size(); }
 
   // Redirects injection so the built-in self-test can exercise the ledger
-  // without touching the real input desktop.
+  // without touching the real input desktop. Unless a test installed its own
+  // environment, the redirected controller sees an interactive one.
   void UseTestSender(InputSender sender) {
     sender_ = sender;
-    physicalInput_ = 1;
+    if (!environmentReader_) {
+      environmentReader_ = &InteractiveEnvironmentForTesting;
+    }
   }
+  using EnvironmentReader = std::function<InputEnvironment()>;
+  using IntegrityReader = std::function<ProcessIntegrity(DWORD)>;
+  void UseTestEnvironment(EnvironmentReader reader) { environmentReader_ = std::move(reader); }
+  void UseTestIntegrity(IntegrityReader reader) { integrityReader_ = std::move(reader); }
 
  private:
   void RequirePhysicalInput();
+  // Runs the keyboard guard. Called before a press is recorded in the ledger,
+  // so a refused press leaves nothing to release.
+  void GuardKeyPress();
   void PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
                        const CancellationToken& token);
-  void Send(std::vector<INPUT>& inputs);
-  void SendStroke(const KeyStroke& stroke, bool down);
+  // Counted sends are primary mutations in the command's effect ledger. Pointer
+  // placement and releases that clean up input pass `counted = false`, so
+  // cleanup after a failure cannot turn a rejection into a partial effect.
+  void Send(std::vector<INPUT>& inputs, bool counted = true);
+  void SendStroke(const KeyStroke& stroke, bool down, bool counted = true);
   std::vector<KeyStroke> StrokesForValue(std::wstring_view value) const;
 
   std::vector<std::pair<std::wstring, std::vector<KeyStroke>>> pressedKeys_;
   std::vector<int> pressedButtons_;
   POINT pointer_{};
   bool pointerInitialized_{false};
-  int physicalInput_{-1};
   InputSender sender_{nullptr};
+  KeyboardGuard keyboardGuard_;
+  EnvironmentReader environmentReader_;
+  IntegrityReader integrityReader_;
+};
+
+// Installs a keyboard guard for one scope, and always removes it.
+class KeyboardGuardScope {
+ public:
+  KeyboardGuardScope(InputController& input, InputController::KeyboardGuard guard) : input_(input) {
+    input_.SetKeyboardGuard(std::move(guard));
+  }
+  ~KeyboardGuardScope() { input_.SetKeyboardGuard(nullptr); }
+  KeyboardGuardScope(const KeyboardGuardScope&) = delete;
+  KeyboardGuardScope& operator=(const KeyboardGuardScope&) = delete;
+
+ private:
+  InputController& input_;
 };
 
 bool TryMapWebDriverKey(std::wstring_view value, WORD& virtualKey, bool& extended);

@@ -1,7 +1,8 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 
 import type {
   ApplicationLease,
+  DesktopClearMechanism,
   DesktopHost,
   DesktopHostEvent,
   DesktopHostFeatures,
@@ -9,15 +10,23 @@ import type {
   DesktopTarget,
   DesktopWindow,
   DesktopWindowEventLog,
+  NativeAccessibilityAction,
   NativeElementSnapshot,
   NativeImage,
   NativeActionSequence,
+  NativeObservation,
+  NativeObserveFact,
+  NativeObserveRequest,
   NativeSearchRoot,
   NativeSelector,
   Rect,
 } from '../../host/types.js';
-import { HostStaleError, HostUnsupportedError } from '../../protocol/errors.js';
+import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
+import { describeObserveRequestViolation, describeReleaseViolation } from '../../protocol/observation.js';
+import { attachFailureEffect, attachProviderQuarantine } from '../../protocol/settlement.js';
+import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopClickMode, DesktopEndpoint, DesktopPlatformName } from '../../protocol/types.js';
+import { sampleTree } from './observeTree.js';
 
 export type FakeDesktopElement = Omit<
   NativeElementSnapshot,
@@ -30,6 +39,8 @@ export type FakeDesktopElement = Omit<
   expanded?: boolean;
   focused?: boolean;
   required?: boolean;
+  /** A password or secure field: bounded observation never reports its value or text. */
+  secure?: boolean;
   selected?: boolean;
   visible?: boolean;
 };
@@ -39,16 +50,62 @@ export type FakeDesktopWindow = Omit<DesktopWindow, 'rect'> & {
   rect?: Rect;
 };
 
+/** Host commands that change application or input state and so settle into a mutation effect. */
+export type FakeMutation =
+  | 'activate'
+  | 'clear'
+  | 'click'
+  | 'closeWindow'
+  | 'performAccessibilityAction'
+  | 'performActions'
+  | 'releaseActions'
+  | 'sendKeys'
+  | 'setWindowRect';
+
+/**
+ * A scripted provider failure for a mutating command. Modes:
+ *
+ * - `reject`: fails at dispatch without changing anything. The reported effect defaults to `none`.
+ * - `hang`: changes nothing and never answers until the driver aborts it. The reported effect defaults to `unknown`.
+ * - `lost-response`: applies the change, then never answers until the driver aborts it. The reported effect defaults to
+ *   `unknown`, which models a provider that cannot tell whether the change landed.
+ * - `late-success`: ignores the abort and applies the change after `delayMs`, so the driver sees a timeout for a command
+ *   that took effect.
+ *
+ * `effect: 'unreported'` models a provider that attaches no effect to its failure. `providerQuarantined` models a
+ * provider that quarantined itself earlier and reports that on this failure, as a refusal that dispatched nothing.
+ */
+export type FakeFault = {
+  delayMs?: number;
+  effect?: MutationEffect | 'unreported';
+  mode: 'hang' | 'late-success' | 'lost-response' | 'reject';
+  providerQuarantined?: boolean;
+  /** How many calls the fault applies to before the command behaves normally again. Defaults to 1. */
+  times?: number;
+};
+
 export type FakeDesktopHostOptions = {
   actionDelayMs?: number;
   closeDelayMs?: number;
   endpoint?: DesktopEndpoint;
+  faults?: Partial<Record<FakeMutation, FakeFault>>;
   features?: Partial<DesktopHostFeatures>;
   launchDelayMs?: number;
+  /** Tunables for the bounded-observation model, used when `features.boundedObservation` is on. */
+  observation?: FakeObservationOptions;
   platformName?: DesktopPlatformName;
   screenshot?: Uint8Array;
   storyRootTestId?: string;
   windows?: readonly FakeDesktopWindow[];
+};
+
+export type FakeObservationOptions = {
+  /** How many element records the fake keeps before an observation stops with `references`. Defaults to 10,000. */
+  maxElementRecords?: number;
+  /** Time each element read takes, modelling a slow accessibility provider. */
+  readDelayMs?: number;
+  /** Elements whose children the provider cannot read, so a sample reports them `unknown`. */
+  unreadableChildrenOf?: readonly string[];
 };
 
 const onePixelPng = Uint8Array.from(
@@ -64,6 +121,7 @@ const defaultFeatures: DesktopHostFeatures = {
   physicalClick: true,
   screenshot: true,
   setWindowRect: true,
+  strictClear: true,
   wheel: true,
 };
 
@@ -76,12 +134,21 @@ export class FakeDesktopHost implements DesktopHost {
   private readonly closeDelayMs: number;
   private readonly features: DesktopHostFeatures;
   private readonly launchDelayMs: number;
+  private readonly observation: Required<FakeObservationOptions>;
   private readonly screenshot: Uint8Array;
   private readonly windowsById = new Map<string, DesktopWindow>();
   private readonly elements = new Map<string, NativeElementSnapshot>();
   private readonly initialElements = new Map<string, NativeElementSnapshot>();
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
+  private readonly faults = new Map<FakeMutation, { fault: FakeFault; remaining: number }>();
   private readonly windowEventLog: { at: number; notification: string; sequence: number; windowId: string }[] = [];
+  // Element ids the fake has issued. A released or forgotten id stays dead and is never issued again, as in a helper.
+  private readonly recordTargets = new Map<string, string>();
+  private readonly recordsByElement = new Map<string, string>();
+  private readonly releasedRecords = new Set<string>();
+  private recordSequence = 0;
+  // Action keys bind an element, an action's position, and its name under a secret only this host knows, as a helper's do.
+  private readonly actionKeySecret = randomUUID();
 
   constructor(options: FakeDesktopHostOptions = {}) {
     this.endpoint = options.endpoint ?? 'windows';
@@ -90,7 +157,11 @@ export class FakeDesktopHost implements DesktopHost {
     this.platformName = options.platformName ?? (this.endpoint === 'macos' ? 'macos' : 'windows');
     this.features = { ...defaultFeatures, ...options.features };
     this.launchDelayMs = options.launchDelayMs ?? 0;
+    this.observation = { maxElementRecords: 10_000, readDelayMs: 0, unreadableChildrenOf: [], ...options.observation };
     this.screenshot = options.screenshot ?? onePixelPng;
+    for (const [command, fault] of Object.entries(options.faults ?? {}) as [FakeMutation, FakeFault][]) {
+      this.injectFault(command, fault);
+    }
 
     const windows = options.windows ?? [createDefaultWindow(options.storyRootTestId)];
     for (const window of windows) {
@@ -108,8 +179,60 @@ export class FakeDesktopHost implements DesktopHost {
     }
   }
 
+  /** Renames an element, as the application would. Accepts the element's own id even after its records were released. */
   setElementName(elementId: string, name: string): void {
-    this.requireElement(elementId).name = name;
+    (this.elements.get(elementId) ?? this.requireElement(elementId)).name = name;
+  }
+
+  /** Replaces the actions an element publishes, as the application would. */
+  setElementActions(elementId: string, actions: readonly string[]): void {
+    const element = (this.elements.get(elementId) ?? this.requireElement(elementId)) as Pick<FakeDesktopElement, 'accessibilityActions'>;
+    element.accessibilityActions = [...actions];
+  }
+
+  /** Scripts a provider failure for the next `fault.times` calls (default 1) of a mutating command. */
+  injectFault(command: FakeMutation, fault: FakeFault): void {
+    this.faults.set(command, { fault, remaining: fault.times ?? 1 });
+  }
+
+  clearFaults(): void {
+    this.faults.clear();
+  }
+
+  /**
+   * Runs a mutating command. A scripted fault replaces the normal outcome; otherwise `apply` runs and any rejection it
+   * raises is a definitive pre-dispatch rejection, as a well-behaved provider would report. `apply` receives the abort
+   * signal the command should honor, which a late success deliberately lacks.
+   */
+  private async mutate<T>(
+    command: FakeMutation,
+    signal: AbortSignal | undefined,
+    apply: (observed: AbortSignal | undefined) => T | Promise<T>,
+  ): Promise<T> {
+    const scripted = this.faults.get(command);
+    if (!scripted) {
+      return apply(signal);
+    }
+    const { fault } = scripted;
+    scripted.remaining -= 1;
+    if (scripted.remaining <= 0) {
+      this.faults.delete(command);
+    }
+    this.actions.push({ type: 'fault', command, mode: fault.mode });
+    switch (fault.mode) {
+      case 'reject': {
+        const failure = reportEffect(new Error(`Injected ${command} failure.`), fault.effect ?? 'none');
+        throw fault.providerQuarantined ? attachProviderQuarantine(failure) : failure;
+      }
+      case 'hang':
+        return untilAborted(signal, fault.effect ?? 'unknown');
+      case 'lost-response':
+        await apply(signal);
+        return untilAborted(signal, fault.effect ?? 'unknown');
+      case 'late-success':
+        await new Promise<void>((resolve) => setTimeout(resolve, fault.delayMs ?? 0));
+        return apply(undefined);
+    }
   }
 
   setElementStateUnsupported(
@@ -182,19 +305,20 @@ export class FakeDesktopHost implements DesktopHost {
     return [...this.windowsById.values()].map(cloneWindow);
   }
 
-  async closeWindow(windowId: string): Promise<void> {
-    if (!this.windowsById.delete(windowId)) {
-      throw new HostStaleError(`Window "${windowId}" is no longer available.`);
-    }
-    for (const [id, element] of this.elements) {
-      if (element.windowId === windowId) {
-        this.elements.delete(id);
+  async closeWindow(windowId: string, signal?: AbortSignal): Promise<void> {
+    return this.mutate('closeWindow', signal, () => {
+      if (!this.windowsById.delete(windowId)) {
+        throw reportEffect(new HostStaleError(`Window "${windowId}" is no longer available.`), 'none');
       }
-    }
-    this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
-    for (const listener of this.listeners) {
-      listener({ type: 'window-closed', windowId });
-    }
+      for (const [id, element] of this.elements) {
+        if (element.windowId === windowId) {
+          this.deleteElement(id);
+        }
+      }
+      // The log records the destruction as a native provider would, but no event is published for a window the caller
+      // closed: the native protocol reserves `window-closed` events for windows the platform reports destroyed.
+      this.windowEventLog.push({ at: Date.now(), notification: 'window-closed', sequence: this.windowEventLog.length + 1, windowId });
+    });
   }
 
   async windowEvents(_lease: ApplicationLease): Promise<DesktopWindowEventLog> {
@@ -224,39 +348,139 @@ export class FakeDesktopHost implements DesktopHost {
     return [...(element.accessibilityActions ?? [])];
   }
 
-  async activate(windowId: string): Promise<void> {
-    this.requireWindow(windowId);
-    this.actions.push({ type: 'activate', windowId });
+  async listAccessibilityActions(elementId: string): Promise<NativeAccessibilityAction[]> {
+    if (!this.features.accessibilityActions || !this.features.performAccessibilityAction) {
+      throw new HostUnsupportedError('The fake host is not configured to perform accessibility actions.');
+    }
+    return this.keyedActions(this.requireElement(elementId));
+  }
+
+  async performAccessibilityAction(elementId: string, key: string, signal?: AbortSignal): Promise<void> {
+    return this.mutate('performAccessibilityAction', signal, (observed) => {
+      throwIfAborted(observed);
+      if (!this.features.accessibilityActions || !this.features.performAccessibilityAction) {
+        throw reportEffect(new HostUnsupportedError('The fake host is not configured to perform accessibility actions.'), 'none');
+      }
+      const element = this.requireElement(elementId);
+      const matches = this.keyedActions(element).filter((action) => action.key === key);
+      if (matches.length !== 1) {
+        throw reportEffect(
+          new HostWebDriverError('element not interactable', 'The element no longer publishes the listed action. List its actions again.', {
+            reason: 'action-changed',
+          }),
+          'none',
+        );
+      }
+      this.actions.push({ type: 'accessibility-action', elementId, name: matches[0].name });
+    });
+  }
+
+  private keyedActions(element: NativeElementSnapshot): NativeAccessibilityAction[] {
+    const names = (element as Pick<FakeDesktopElement, 'accessibilityActions'>).accessibilityActions ?? [];
+    return names.map((name, index) => ({
+      key: createHash('sha256').update(`${this.actionKeySecret}\0${element.id}\0${index}\0${name}`).digest('hex').slice(0, 32),
+      name,
+    }));
+  }
+
+  async observe(request: NativeObserveRequest, signal?: AbortSignal): Promise<NativeObservation> {
+    if (!this.features.boundedObservation) {
+      throw new HostUnsupportedError('The fake host is not configured for bounded observation.');
+    }
+    throwIfAborted(signal);
+    const violation = describeObserveRequestViolation(request);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', violation);
+    }
+    this.requireWindow(request.windowId);
+    const root = request.rootId ? this.requireElement(request.rootId) : this.windowRoot(request.windowId);
+    if (!root || root.windowId !== request.windowId) {
+      throw new HostStaleError(`Element "${request.rootId ?? request.windowId}" is no longer available in this window.`);
+    }
+    const childrenByParent = new Map<string, NativeElementSnapshot[]>();
+    for (const element of this.elements.values()) {
+      if (element.parentId !== undefined) {
+        childrenByParent.set(element.parentId, [...(childrenByParent.get(element.parentId) ?? []), element]);
+      }
+    }
+    const unsupportedFacts = new Set<NativeObserveFact>(this.features.accessibilityActions ? [] : ['actions']);
+    return sampleTree(
+      root,
+      request,
+      {
+        childrenOf: (elementId) => childrenByParent.get(elementId) ?? [],
+        extras: (elementId) => {
+          const element = this.elements.get(elementId) as Pick<FakeDesktopElement, 'accessibilityActions' | 'secure'> | undefined;
+          return { actions: element?.accessibilityActions, secure: element?.secure };
+        },
+        recordFor: (elementId) => this.recordFor(elementId, true),
+      },
+      {
+        beforeRead: () => {
+          if (this.observation.readDelayMs > 0) {
+            return delay(this.observation.readDelayMs, signal);
+          }
+          throwIfAborted(signal);
+          return Promise.resolve();
+        },
+        unreadableChildrenOf: new Set(this.observation.unreadableChildrenOf),
+        unsupportedFacts,
+      },
+    );
+  }
+
+  async releaseElements(elementIds: readonly string[], signal?: AbortSignal): Promise<number> {
+    if (!this.features.boundedObservation) {
+      throw new HostUnsupportedError('The fake host is not configured for bounded observation.');
+    }
+    throwIfAborted(signal);
+    const violation = describeReleaseViolation(elementIds);
+    if (violation) {
+      throw new HostWebDriverError('invalid argument', violation);
+    }
+    return elementIds.filter((id) => this.releaseRecord(id)).length;
+  }
+
+  /** The number of element ids the fake currently tracks, for asserting that retention reaches a plateau. */
+  get trackedElementCount(): number {
+    return this.recordTargets.size;
+  }
+
+  async activate(windowId: string, signal?: AbortSignal): Promise<void> {
+    return this.mutate('activate', signal, () => {
+      this.requireWindow(windowId);
+      this.actions.push({ type: 'activate', windowId });
+    });
   }
 
   async getWindowRect(windowId: string): Promise<Rect> {
     return { ...this.requireWindow(windowId).rect };
   }
 
-  async setWindowRect(windowId: string, rect: Partial<Rect>): Promise<Rect> {
-    if (!this.features.setWindowRect) {
-      throw new HostUnsupportedError('The fake target does not support setting the window rectangle.');
-    }
-    const window = this.requireWindow(windowId);
-    window.rect = { ...window.rect, ...rect };
-    return { ...window.rect };
+  async setWindowRect(windowId: string, rect: Partial<Rect>, signal?: AbortSignal): Promise<Rect> {
+    return this.mutate('setWindowRect', signal, () => {
+      if (!this.features.setWindowRect) {
+        throw reportEffect(new HostUnsupportedError('The fake target does not support setting the window rectangle.'), 'none');
+      }
+      const window = this.requireWindow(windowId);
+      window.rect = { ...window.rect, ...rect };
+      return { ...window.rect };
+    });
   }
 
   async find(root: NativeSearchRoot, selector: NativeSelector): Promise<NativeElementSnapshot[]> {
     this.requireWindow(root.windowId);
-    if (root.elementId) {
-      this.requireElement(root.elementId);
-    }
+    const rootElement = root.elementId ? this.requireElement(root.elementId) : undefined;
 
     return [...this.elements.values()]
       .filter((element) => element.windowId === root.windowId)
-      .filter((element) => !root.elementId || isDescendantOf(element, root.elementId, this.elements))
+      .filter((element) => !rootElement || isDescendantOf(element, rootElement.id, this.elements))
       .filter((element) => matches(element, selector))
-      .map(cloneElement);
+      .map((element) => this.expose(element));
   }
 
   async snapshot(elementId: string): Promise<NativeElementSnapshot> {
-    return cloneElement(this.requireElement(elementId));
+    return this.expose(this.requireElement(elementId));
   }
 
   async activeElement(windowId: string): Promise<NativeElementSnapshot | null> {
@@ -264,7 +488,7 @@ export class FakeDesktopHost implements DesktopHost {
     const focused = [...this.elements.values()].find(
       (element) => element.windowId === windowId && element.focused.supported && element.focused.value,
     );
-    return focused ? cloneElement(focused) : null;
+    return focused ? this.expose(focused) : null;
   }
 
   async hitTest(windowId: string, x: number, y: number): Promise<NativeElementSnapshot | null> {
@@ -279,57 +503,83 @@ export class FakeDesktopHost implements DesktopHost {
         y <= element.rect.y + element.rect.height,
     );
     const element = matchesPoint.at(-1);
-    return element ? cloneElement(element) : null;
+    return element ? this.expose(element) : null;
   }
 
   async click(elementId: string, mode: DesktopClickMode, signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    const element = this.requireElement(elementId);
-    const resolvedMode =
-      mode === 'auto' ? (this.features.physicalClick ? 'physical' : this.features.accessibilityClick ? 'accessibility' : undefined) : mode;
-    if (
-      !resolvedMode ||
-      (resolvedMode === 'physical' && !this.features.physicalClick) ||
-      (resolvedMode === 'accessibility' && !this.features.accessibilityClick)
-    ) {
-      throw new HostUnsupportedError(`Click mode "${mode}" is unavailable.`);
-    }
-    for (const current of this.elements.values()) {
-      if (current.windowId === element.windowId && current.focused.supported) {
-        current.focused = { supported: true, value: current.id === element.id };
+    return this.mutate('click', signal, (observed) => {
+      throwIfAborted(observed);
+      const element = this.requireElement(elementId);
+      const resolvedMode =
+        mode === 'auto'
+          ? this.features.physicalClick
+            ? 'physical'
+            : this.features.accessibilityClick
+              ? 'accessibility'
+              : undefined
+          : mode;
+      if (
+        !resolvedMode ||
+        (resolvedMode === 'physical' && !this.features.physicalClick) ||
+        (resolvedMode === 'accessibility' && !this.features.accessibilityClick)
+      ) {
+        throw reportEffect(new HostUnsupportedError(`Click mode "${mode}" is unavailable.`), 'none');
       }
-    }
-    if (element.role === 'checkbox' && element.checked.supported) {
-      element.checked = { supported: true, value: element.checked.value === true ? false : true };
-    }
-    this.actions.push({ type: 'click', elementId, mode: resolvedMode });
+      for (const current of this.elements.values()) {
+        if (current.windowId === element.windowId && current.focused.supported) {
+          current.focused = { supported: true, value: current.id === element.id };
+        }
+      }
+      if (element.role === 'checkbox' && element.checked.supported) {
+        element.checked = { supported: true, value: element.checked.value === true ? false : true };
+      }
+      this.actions.push({ type: 'click', elementId, mode: resolvedMode });
+    });
   }
 
-  async clear(elementId: string, signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    const element = this.requireElement(elementId);
-    element.value = '';
-    element.text = '';
-    this.actions.push({ type: 'clear', elementId });
+  /** Clears semantically when the element has a value to set, and otherwise with the keyboard, unless told which. */
+  async clear(elementId: string, signal?: AbortSignal, mechanism?: DesktopClearMechanism): Promise<DesktopClearMechanism> {
+    return this.mutate('clear', signal, (observed) => {
+      throwIfAborted(observed);
+      const element = this.requireElement(elementId);
+      const settable = element.value !== undefined;
+      const used = mechanism ?? (settable ? 'semantic' : 'keyboard');
+      if (used === 'semantic' && !settable) {
+        throw reportEffect(new HostWebDriverError('element not interactable', `Element "${elementId}" has no value to set.`), 'none');
+      }
+      if (used === 'keyboard' && !this.features.keyboard) {
+        throw reportEffect(new HostUnsupportedError('The fake target does not type.'), 'none');
+      }
+      element.value = '';
+      element.text = '';
+      this.actions.push({ type: 'clear', elementId, mechanism: used });
+      return used;
+    });
   }
 
   async sendKeys(elementId: string, text: string, signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    const element = this.requireElement(elementId);
-    element.value = `${element.value ?? ''}${text}`;
-    element.text = element.value;
-    this.actions.push({ type: 'send-keys', elementId, text });
+    return this.mutate('sendKeys', signal, (observed) => {
+      throwIfAborted(observed);
+      const element = this.requireElement(elementId);
+      element.value = `${element.value ?? ''}${text}`;
+      element.text = element.value;
+      this.actions.push({ type: 'send-keys', elementId, text });
+    });
   }
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
-    this.actions.push({ type: 'actions-start' });
-    await delay(this.actionDelayMs, signal);
-    this.actions.push({ type: 'actions', actions });
+    return this.mutate('performActions', signal, async (observed) => {
+      this.actions.push({ type: 'actions-start' });
+      await delay(this.actionDelayMs, observed);
+      this.actions.push({ type: 'actions', actions });
+    });
   }
 
   async releaseActions(signal?: AbortSignal): Promise<void> {
-    throwIfAborted(signal);
-    this.actions.push({ type: 'release-actions' });
+    return this.mutate('releaseActions', signal, (observed) => {
+      throwIfAborted(observed);
+      this.actions.push({ type: 'release-actions' });
+    });
   }
 
   async captureWindow(windowId: string): Promise<NativeImage> {
@@ -356,7 +606,7 @@ export class FakeDesktopHost implements DesktopHost {
 
   async tree(windowId: string): Promise<NativeElementSnapshot[]> {
     this.requireWindow(windowId);
-    return [...this.elements.values()].filter((element) => element.windowId === windowId).map(cloneElement);
+    return [...this.elements.values()].filter((element) => element.windowId === windowId).map((element) => this.expose(element));
   }
 
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {
@@ -370,8 +620,13 @@ export class FakeDesktopHost implements DesktopHost {
     this.actions.push({ type: 'dispose' });
   }
 
+  /** Adds an element after construction, as when an app renders new content. */
+  addElement(element: FakeDesktopElement): void {
+    this.elements.set(element.id, toSnapshot(element));
+  }
+
   removeElement(elementId: string): void {
-    if (this.elements.delete(elementId)) {
+    if (this.deleteElement(elementId)) {
       for (const [id, element] of this.elements) {
         if (element.parentId === elementId) {
           this.removeElement(id);
@@ -383,7 +638,7 @@ export class FakeDesktopHost implements DesktopHost {
   replacePreview(elements: readonly FakeDesktopElement[]): void {
     for (const [id, element] of this.elements) {
       if (element.scope === 'preview') {
-        this.elements.delete(id);
+        this.deleteElement(id);
       }
     }
     for (const element of elements) {
@@ -399,7 +654,7 @@ export class FakeDesktopHost implements DesktopHost {
   resetPreview(): void {
     for (const [id, element] of this.elements) {
       if (element.scope === 'preview') {
-        this.elements.delete(id);
+        this.deleteElement(id);
       }
     }
     for (const [id, element] of this.initialElements) {
@@ -412,17 +667,90 @@ export class FakeDesktopHost implements DesktopHost {
   private requireWindow(windowId: string): DesktopWindow {
     const window = this.windowsById.get(windowId);
     if (!window) {
-      throw new HostStaleError(`Window "${windowId}" is no longer available.`);
+      throw reportEffect(new HostStaleError(`Window "${windowId}" is no longer available.`), 'none');
     }
     return window;
   }
 
   private requireElement(elementId: string): NativeElementSnapshot {
-    const element = this.elements.get(elementId);
+    const element = this.resolveElement(elementId);
     if (!element) {
-      throw new HostStaleError(`Element "${elementId}" is no longer available.`);
+      throw reportEffect(new HostStaleError(`Element "${elementId}" is no longer available.`), 'none');
     }
     return element;
+  }
+
+  /**
+   * Resolves an id a client holds. With bounded observation on, an id the fake issued stays bound to the element it
+   * named: once released, or once its element is deleted, it is stale for good even if an element with the same
+   * authored id returns, which then gets a fresh id.
+   */
+  private resolveElement(id: string): NativeElementSnapshot | undefined {
+    if (!this.features.boundedObservation) {
+      return this.elements.get(id);
+    }
+    if (this.releasedRecords.has(id)) {
+      return undefined;
+    }
+    return this.elements.get(this.recordTargets.get(id) ?? id);
+  }
+
+  private windowRoot(windowId: string): NativeElementSnapshot | undefined {
+    return [...this.elements.values()].find((element) => element.windowId === windowId && element.parentId === undefined);
+  }
+
+  /** A copy of an element carrying the ids the fake issued, which `observe` shares so every command agrees on identity. */
+  private expose(element: NativeElementSnapshot): NativeElementSnapshot {
+    const snapshot = cloneElement(element);
+    if (!this.features.boundedObservation) {
+      return snapshot;
+    }
+    snapshot.id = this.recordFor(element.id, false);
+    if (element.parentId !== undefined && this.elements.has(element.parentId)) {
+      snapshot.parentId = this.recordFor(element.parentId, false);
+    }
+    return snapshot;
+  }
+
+  /**
+   * The id issued for an element: its authored id the first time, then a fresh alias once an earlier id was released.
+   * Returns `undefined` when `enforceCapacity` is set and the element table is full.
+   */
+  private recordFor(elementId: string, enforceCapacity: boolean): string | undefined {
+    const live = this.recordsByElement.get(elementId);
+    if (live !== undefined) {
+      return live;
+    }
+    if (enforceCapacity && this.recordTargets.size >= this.observation.maxElementRecords) {
+      return undefined;
+    }
+    let recordId = elementId;
+    while (this.releasedRecords.has(recordId) || this.recordTargets.has(recordId)) {
+      this.recordSequence += 1;
+      recordId = `${elementId}~${this.recordSequence}`;
+    }
+    this.recordTargets.set(recordId, elementId);
+    this.recordsByElement.set(elementId, recordId);
+    return recordId;
+  }
+
+  private releaseRecord(recordId: string): boolean {
+    const elementId = this.recordTargets.get(recordId);
+    if (elementId === undefined) {
+      return false;
+    }
+    this.recordTargets.delete(recordId);
+    this.recordsByElement.delete(elementId);
+    this.releasedRecords.add(recordId);
+    return true;
+  }
+
+  private deleteElement(elementId: string): boolean {
+    const recordId = this.recordsByElement.get(elementId);
+    if (recordId !== undefined) {
+      this.releaseRecord(recordId);
+    }
+    return this.elements.delete(elementId);
   }
 }
 
@@ -574,9 +902,34 @@ function escapeXml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 }
 
+function reportEffect<T extends Error>(error: T, effect: MutationEffect | 'unreported'): T {
+  return effect === 'unreported' ? error : attachFailureEffect(error, effect);
+}
+
+function createAbortError(signal: AbortSignal | undefined, effect: MutationEffect | 'unreported'): Error {
+  const error = new Error('Fake desktop host operation was aborted.', { cause: signal?.reason });
+  error.name = 'AbortError';
+  return reportEffect(error, effect);
+}
+
+/** Never settles until the driver aborts the command, then fails with the effect a provider would report. */
+function untilAborted(signal: AbortSignal | undefined, effect: MutationEffect | 'unreported'): Promise<never> {
+  return new Promise<never>((_resolve, reject) => {
+    if (!signal) {
+      return;
+    }
+    if (signal.aborted) {
+      reject(createAbortError(signal, effect));
+      return;
+    }
+    signal.addEventListener('abort', () => reject(createAbortError(signal, effect)), { once: true });
+  });
+}
+
+// An abort observed before the fake records a change leaves nothing behind.
 function throwIfAborted(signal: AbortSignal | undefined): void {
   if (signal?.aborted) {
-    throw signal.reason instanceof Error ? signal.reason : new Error('Fake desktop host operation was aborted.');
+    throw createAbortError(signal, 'none');
   }
 }
 
@@ -592,7 +945,7 @@ function delay(milliseconds: number, signal?: AbortSignal): Promise<void> {
     }, milliseconds);
     const onAbort = () => {
       clearTimeout(timer);
-      reject(signal.reason instanceof Error ? signal.reason : new Error('Fake desktop host operation was aborted.'));
+      reject(createAbortError(signal, 'none'));
     };
     signal.addEventListener('abort', onAbort, { once: true });
   });

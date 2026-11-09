@@ -32,6 +32,52 @@ export {
   desktopStoryPlatforms,
   validateDesktopStoryTests,
 } from './authoring/storyTests.js';
+export {
+  accessibleLaneMaskedFeatures,
+  compareDesktopInputReceipts,
+  desktopInputMechanisms,
+  desktopInputModeAllows,
+  desktopInputModes,
+  desktopInputLanes,
+  desktopRequirements,
+  describeUndeclaredDesktopInput,
+  matchesDesktopPlatforms,
+  matchesDesktopScope,
+  mergeDesktopCaseOptions,
+  resolveDesktopInput,
+  resolveDesktopScopeDomains,
+  resolveDesktopScopeValues,
+  subtractDesktopInputReceipts,
+  unmaskedAccessibleFeatures,
+  validateDesktopCaseOptions,
+  validateDesktopGroupOptions,
+  validateDesktopInputReceipts,
+  validateDesktopSessionInput,
+} from './authoring/input.js';
+export type {
+  AccessibleLaneMaskedFeature,
+  DesktopCaseOptions,
+  DesktopInput,
+  DesktopInputComparison,
+  DesktopInputLane,
+  DesktopInputMechanism,
+  DesktopInputMode,
+  DesktopInputReceipts,
+  DesktopPlatforms,
+  DesktopRequirement,
+  DesktopScopeDomains,
+  DesktopScopeValues,
+  DesktopSessionInput,
+  ResolvedDesktopCaseOptions,
+} from './authoring/input.js';
+export { decideDesktopCase, missingDesktopRequirements, resolveDesktopClickMode } from './authoring/selection.js';
+export type {
+  DesktopCaseClickMode,
+  DesktopCaseDecision,
+  DesktopCaseTarget,
+  DesktopDeclaredGap,
+  DesktopExclusionReason,
+} from './authoring/selection.js';
 export type {
   DesktopStoryCapability,
   DesktopStoryExpectation,
@@ -117,7 +163,19 @@ export {
   type WebDriverTimeouts,
 } from './protocol/types.js';
 export { createDesktopDriverServer, SessionManager, TargetRegistry } from './server/index.js';
-export type { DesktopDriverServer, DesktopDriverServerOptions, DesktopSession, ElementRecord } from './server/index.js';
+export type {
+  ApplicationIncarnation,
+  ApplicationState,
+  DesktopDriverServer,
+  DesktopDriverServerOptions,
+  DesktopSession,
+  ElementRecord,
+  ProbeApplication,
+  QuarantineRecord,
+  RecoverTargetRequest,
+  RecoverTargetResult,
+  RecoveryEvidence,
+} from './server/index.js';
 export type {
   DesktopStoryManifest,
   DesktopStoryManifestEntry,

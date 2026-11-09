@@ -90,6 +90,88 @@ Do not derive a target from incoming capabilities. Executable paths, app
 arguments, environment variables, helper paths, lease paths, and artifact roots
 are server-owned configuration.
 
+## Private connection descriptors
+
+Trusted supervisors can distribute a grant through `/authority` without
+putting it in a command line or WebDriver capabilities:
+
+```ts
+import { createMacOSPrivateStorage, publishConnectionDescriptor } from '@fluentui-react-native/desktop-driver/authority';
+
+const storage = await createMacOSPrivateStorage();
+const removeDescriptor = await publishConnectionDescriptor(storage, 'agent-connection.json', {
+  version: 1,
+  url: service.url,
+  grant: grant.token,
+  service: {
+    ...verifiedServiceIdentity,
+    incarnation: authority.incarnation,
+  },
+});
+// After the service is drained, removes only this exact published record.
+await removeDescriptor();
+```
+
+`verifiedServiceIdentity` is supervisor-owned: `platform` (`macos` or
+`windows`), `pid`, `startedAt` (the exact platform process-start identity),
+`executablePath`, and `interactiveSession`. It is not application metadata or
+client-supplied capabilities. `createMacOSPrivateStorage` defaults to the
+owner's Application Support state root; an override must be absolute,
+canonical, and have existing safe ancestors.
+
+On Windows the verified helper supplies the storage, the identity, and the
+verifier. `artifact` is the helper from `resolveNativeDesktopDriver`;
+`describeWindowsService` reports the identity of a running process without its
+`incarnation`, and `createWindowsServiceVerifier` is the trusted `verifyService`
+callback for `readConnectionDescriptor`:
+
+```ts
+import {
+  createWindowsPrivateStorage,
+  createWindowsServiceVerifier,
+  describeWindowsService,
+  publishConnectionDescriptor,
+  readConnectionDescriptor,
+} from '@fluentui-react-native/desktop-driver/authority';
+
+const storage = await createWindowsPrivateStorage({ artifact });
+const verifiedServiceIdentity = await describeWindowsService({ artifact, pid: process.pid });
+const removeDescriptor = await publishConnectionDescriptor(storage, 'agent-connection.json', {
+  version: 1,
+  url: service.url,
+  grant: grant.token,
+  service: { ...verifiedServiceIdentity, incarnation: authority.incarnation },
+});
+
+// A client on the same desktop session reads it back.
+const descriptor = await readConnectionDescriptor(storage, 'agent-connection.json', createWindowsServiceVerifier({ artifact }));
+```
+
+`createWindowsPrivateStorage` defaults to a per-user folder under the local
+application data folder; an override must be a canonical absolute local-drive
+path whose parent exists. Each Windows adapter throws on a host that is not
+Windows.
+
+Consumers call
+`readConnectionDescriptor(storage, name, verifyService)`. The required trusted
+verifier must establish the live listener's process identity, ownership, and
+interactive session before this function transmits the grant. The function
+then checks the authenticated service incarnation. There is no permissive
+default verifier, automatic lookup, or Node-only filesystem fallback. See
+[private discovery](security.md#private-discovery) and the
+[Windows storage and verifier](security.md#windows-private-storage-and-service-verifier)
+for the boundary and the remaining native/supervisor integration.
+
+The `PrivateStorage` contract has bounded single-component record names, which
+on every platform may not end in `.` or use a Windows device name such as `NUL`
+or `com1.json`, and
+UTF-8 contents (16 KiB maximum):
+`read(name)` returns undefined only when absent,
+`publish(name, contents)` atomically creates without replacing, and
+`remove(name, expectedContents)` deletes only a matching validated record.
+Permission failures, unsafe links, malformed data, and inaccessible state are
+errors, not cache misses. Do not log descriptors or grants.
+
 ## Describe the application
 
 `NativeDesktopHost` receives one immutable
@@ -156,6 +238,18 @@ implemented W3C subset. Visibility and focus use native queries, including
 re-querying initially absent elements during waits; they never execute DOM
 JavaScript. `installDesktopWebdriverCommands(browser, url)` installs the same
 binding on a WDIO-managed browser without opening another session.
+For a protected service, pass `grant` to `connectDesktopWebdriver` or
+`attachDesktopWebdriver`. Both the ordinary W3C transport and custom typed
+commands use that grant; it is not added to capabilities. Protected transports
+reject redirects.
+
+For WDIO-managed sessions, spread `desktopWebdriverGrantOptions(grant)` into
+the transport configuration before creating or attaching the browser, then
+call `installDesktopWebdriverCommands(browser, url, { grant })`. Installing
+commands alone does not retrofit authentication into WDIO's existing
+transport. The helper keeps the credential in a request-transform closure,
+not serialized WDIO options, and redacts standard inspection of request
+headers. Custom request tracing must still treat headers as sensitive.
 The following story commands are registered only when a Storybook orchestrator is
 registered:
 
@@ -196,6 +290,102 @@ try {
 Use `./agent` for bounded inspection and evidence operations. It deliberately
 does not expose native handles, arbitrary commands, or unrestricted paths.
 
+Agents that drive a session through the service use the versioned operations
+under `furn/ops` (`session.observe()`, `session.find()`, `session.journal()`);
+see [Agent operations](operations.md). Operators choose whether applications'
+displayed content may be read when constructing the server:
+`createDesktopDriverServer({ targets, operations: { content: 'deny' } })`.
+
+## Protect the service with grants
+
+Pass a `DesktopAuthority` to require a grant on every request, including
+ordinary WebDriver routes and `/status`. Without one, the service keeps its
+loopback model and an unauthenticated client works as before. One service never
+serves both modes.
+
+```ts
+import { DesktopAuthority } from '@fluentui-react-native/desktop-driver/authority';
+import { createDesktopDriverClient } from '@fluentui-react-native/desktop-driver/client';
+import { createDesktopDriverServer } from '@fluentui-react-native/desktop-driver/server';
+
+const authority = new DesktopAuthority();
+const agent = authority.issue({ label: 'agent', targets: ['contoso-windows'] });
+const service = await createDesktopDriverServer({ authority, targets }); // The targets registered above.
+
+// Deliver agent.token to the client over a private channel; it is returned once.
+const client = createDesktopDriverClient({ grant: agent.token, url: service.url });
+```
+
+- `issue({ label, targets })` returns the grant's `token` once. `targets` is a
+  list of registered target IDs or `'*'`, and startup fails if a listed ID is
+  not registered.
+- A session belongs to the grant that created it; other grants see it as a
+  session that does not exist.
+- `/status` lists only the grant's targets and reports
+  `service.incarnation`, which changes whenever the service restarts.
+- `authority.revoke(grant.id)` invalidates the grant and its descendants
+  immediately. Await `authority.revokeAndDrain(grant.id)` to confirm their
+  sessions and in-flight acquisitions have settled and closed; failed drains
+  remain observable and retryable.
+- Scopes default to `driver-control`; `declared-workload` and
+  `operator-recovery` do not imply driver access or add HTTP management routes.
+  `authority.delegate(parent.id, request)` rejects target/scope expansion.
+  `client.delegateConnection()` returns a separate driver-only client;
+  `child.revokeConnection()` awaits self-cleanup and remains retryable with
+  terminal-only proof after revocation. See [security](security.md) for the
+  eight-edge depth and 4096-grant service-lifetime limits.
+- A grant's session closes after `idleSessionTimeoutMs` without a request for
+  it, ten minutes by default. Every request for the session renews it, and a
+  running request is never interrupted by expiry. Pass `0` to disable expiry.
+  Only a protected service accepts the option.
+- A rejected request returns HTTP 401 `unauthorized`; see
+  [the WebDriver contract](protocol.md#errors).
+
+Read [the security model](security.md#protected-service) for what the boundary
+does and does not cover.
+
+## Persist quarantines
+
+The generic desktop-test supervisor and Storybook's native channel child use
+the shared `@fluentui-react-native/desktop-test/driver-service` factory, which
+wires private storage and exact application-incarnation probes by default.
+The following explicit options are required only for direct driver embedders.
+
+Pass `recovery` so a target quarantined by an unsettled mutation stays
+quarantined across a service restart:
+
+```ts
+import { createMacOSApplicationProbe, createMacOSPrivateStorage } from '@fluentui-react-native/desktop-driver/authority';
+
+const service = await createDesktopDriverServer({
+  recovery: {
+    probeApplication: createMacOSApplicationProbe({ artifact }), // The verified macOS native driver artifact.
+    storage: await createMacOSPrivateStorage(settlementDirectory), // Dedicated to this service configuration.
+  },
+  targets,
+});
+
+// The operator inspected `quarantine.id` in /status and decided the target is safe.
+await service.recoverTarget('contoso-macos', { evidence: 'operator', quarantineId });
+```
+
+- Mutations are recorded before dispatch; one that cannot be recorded fails
+  with `journal-unavailable` and is not sent.
+- A quarantine lifts when its launched application closes, when the probe
+  proves the recorded application has exited, or when the operator calls
+  `recoverTarget`. `evidence: 'application-exited'` requires the probe's proof;
+  `evidence: 'operator'` records the operator's own judgment.
+- Without a probe, an attached application's quarantine lifts only through
+  `recoverTarget`.
+- Unreadable storage prevents startup. Any corrupt record, including a corrupt
+  sibling of an otherwise valid record, quarantines without trusting application
+  identity; an exit probe cannot clear it.
+- On Windows, pass `createWindowsApplicationProbe({ artifact })` and
+  `await createWindowsPrivateStorage({ artifact, root })` with the verified
+  Windows native driver artifact.
+
+See [the security model](security.md#settlement-journal-and-recovery).
+
 ## Fake service CLI
 
 `desktop-driver serve` starts a deterministic fake target:
@@ -224,8 +414,8 @@ must resolve a verified helper and embed the service.
 - Commands are serialized per session. Input is serialized globally.
 - Browser-origin requests are rejected.
 - Non-loopback hosts are rejected even when passed explicitly.
-- There is no network authentication or TLS. Do not proxy or expose the service
-  beyond the local trusted process boundary.
+- There is no TLS, and a service without an `authority` has no authentication.
+  Do not proxy or expose the service beyond the local trusted process boundary.
 
 See [the WebDriver contract](protocol.md) for routes and errors and
 [the security model](security.md) before adding a new service surface.

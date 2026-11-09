@@ -1,5 +1,26 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.5
+
+### Patch Changes
+
+- 06b458f: Keep the Storybook chrome and story canvas on the Flex theme. The Theme selector now applies Flex or Fluent only to
+  story content, while scheme, contrast, and tone still apply to the chrome.
+- 06b458f: Read Storybook chrome colors through the design package's interactive color envelope.
+- 06b458f: Replace the fixed Storybook theme buttons with Theme (Flex or Fluent), Scheme (light, dark, or system), Contrast, and Tone dropdowns. The toolbar now defaults to Flex light, standard contrast, and cool tone, independent of the host appearance.
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+  - @fluentui-react-native/default-theme@0.28.0
+  - @fluentui-react-native/design@0.6.0
+  - @fluentui-react-native/native-core@0.2.0
+
 ## 0.3.4
 
 ### Patch Changes

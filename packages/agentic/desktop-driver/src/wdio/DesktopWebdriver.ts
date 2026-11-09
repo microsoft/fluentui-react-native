@@ -1,10 +1,13 @@
+import { inspect } from 'node:util';
+
 import { attach, remote } from 'webdriverio';
 
+import type { DesktopInputMode, DesktopSessionInput } from '../authoring/input.js';
 import type { DesktopStoryRunResult, DesktopStoryTestResult } from '../authoring/results.js';
 import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
 import type { DesktopHostFeatures } from '../host/types.js';
 import { ArtifactManager } from '../artifacts/ArtifactManager.js';
-import { createDesktopDriverClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
+import { createDesktopDriverClient, DesktopElementClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import type { DesktopClickMode, DesktopPlatformName } from '../protocol/types.js';
 import { assertDesktopExpectation, runDesktopStoryTests } from '../runner/StoryTestRunner.js';
 import type { DesktopStoryTestSelection } from '../runner/StoryTestRunner.js';
@@ -17,23 +20,38 @@ declare global {
       'furn:clickMode'?: 'accessibility' | 'auto' | 'physical';
       'furn:endpoint'?: 'macos' | 'win32' | 'windows';
       'furn:features'?: Readonly<DesktopHostFeatures>;
+      'furn:inputMode'?: 'accessible' | 'compatibility' | 'physical';
       'furn:launchMode'?: 'attach' | 'launch';
       'furn:storybook'?: boolean;
       'furn:target'?: string;
     }
 
     interface Browser {
+      /** The session's input policy and the input it has delivered so far, by mechanism. */
+      desktopInput(): Promise<DesktopSessionInput>;
       desktopListStories(): Promise<DesktopStoryManifest>;
       desktopOpenStory(storyId: string, runId?: string): Promise<StoryReadyResult>;
       desktopResetStory(storyId: string, runId?: string): Promise<StoryReadyResult>;
       desktopExpect(expectation: DesktopStoryExpectation): Promise<void>;
       desktopRunStoryTests(options?: DesktopWebdriverRunOptions): Promise<DesktopStoryRunResult>;
     }
+
+    interface Element {
+      /**
+       * Performs the one accessibility action the element publishes under this name, such as `increment`, without
+       * moving the pointer or pressing a key. Declare `perform-accessibility-action` in a case that calls it.
+       */
+      desktopPerformAccessibilityAction(name: string): Promise<void>;
+    }
   }
 }
 
 export type DesktopWebdriverOptions = {
   clickMode?: DesktopClickMode;
+  /** Supervisor-provided credential. Never put it in capabilities, command lines, or logs. */
+  grant?: string;
+  /** The input the session may deliver. A strict mode pins the click mode. Defaults to `compatibility`. */
+  inputMode?: DesktopInputMode;
   launchMode?: 'attach' | 'launch';
   logLevel?: 'debug' | 'error' | 'info' | 'silent' | 'trace' | 'warn';
   platformName: DesktopPlatformName;
@@ -50,6 +68,7 @@ export type DesktopWebdriverRunOptions = {
 
 export type DesktopWebdriverAttachment = {
   capabilities: NonNullable<Parameters<typeof attach>[0]['capabilities']>;
+  grant?: string;
   sessionId: string;
   url: string;
 };
@@ -77,6 +96,11 @@ export class DesktopWebdriverSession {
 
   expect(expectation: DesktopStoryExpectation): Promise<void> {
     return assertDesktopExpectation(this.session, expectation);
+  }
+
+  /** The session's input policy and what it has delivered so far. */
+  input(): Promise<DesktopSessionInput> {
+    return this.session.getInput();
   }
 
   async runStoryTests(options: DesktopWebdriverRunOptions = {}): Promise<DesktopStoryRunResult> {
@@ -117,16 +141,18 @@ export async function connectDesktopWebdriver(options: DesktopWebdriverOptions):
     },
     {
       'furn:clickMode': options.clickMode ?? 'auto',
+      ...(options.inputMode === undefined ? {} : { 'furn:inputMode': options.inputMode }),
       'furn:launchMode': options.launchMode ?? 'launch',
       'furn:target': options.targetId,
     },
   );
   const browser = await remote({
     ...connectionOptions(options.url),
+    ...(options.grant === undefined ? {} : desktopWebdriverGrantOptions(options.grant)),
     capabilities,
     logLevel: options.logLevel ?? 'silent',
   });
-  return installDesktopWebdriverCommands(browser, options.url);
+  return installDesktopWebdriverCommands(browser, options.url, { grant: options.grant });
 }
 
 // WebdriverIO applies these defaults in remote() but not attach(). Without an interval, waitUntil and the waitFor*
@@ -139,9 +165,35 @@ export async function attachDesktopWebdriver(options: DesktopWebdriverAttachment
     ...connectionOptions(options.url),
     capabilities: options.capabilities,
     sessionId: options.sessionId,
-    options: { logLevel: 'silent', ...attachedWaitDefaults },
+    options: {
+      logLevel: 'silent',
+      ...attachedWaitDefaults,
+      ...(options.grant === undefined ? {} : desktopWebdriverGrantOptions(options.grant)),
+    },
   });
-  return installDesktopWebdriverCommands(browser, options.url);
+  return installDesktopWebdriverCommands(browser, options.url, { grant: options.grant });
+}
+
+/** Transport-only configuration for a WDIO-managed session. The token stays out of serialized WDIO options. */
+export function desktopWebdriverGrantOptions(grant: string): Pick<Parameters<typeof remote>[0], 'transformRequest'> {
+  if (typeof grant !== 'string' || !/^fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}$/.test(grant)) {
+    throw new TypeError('A valid Desktop Driver grant is required.');
+  }
+  return {
+    transformRequest(request) {
+      const headers = new Headers(request.headers);
+      headers.set('Authorization', `Bearer ${grant}`);
+      // WDIO errors retain request options. Standard inspection must not print the credential with those errors.
+      Object.defineProperty(headers, inspect.custom, {
+        value: () => {
+          const redacted = new Headers(headers);
+          redacted.set('Authorization', '[redacted]');
+          return redacted;
+        },
+      });
+      return { ...request, headers, redirect: 'error' };
+    },
+  };
 }
 
 function connectionOptions(address: string) {
@@ -162,11 +214,15 @@ const installedStoryBrowsers = new WeakSet<WebdriverIO.Browser>();
 const boundSessions = new WeakMap<WebdriverIO.Browser, DesktopWebdriverSession>();
 
 /** Bind a WDIO-managed browser without creating a competing remote session. */
-export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, url: string): DesktopWebdriverSession {
+export function installDesktopWebdriverCommands(
+  browser: WebdriverIO.Browser,
+  url: string,
+  options: { grant?: string } = {},
+): DesktopWebdriverSession {
   if (browser.capabilities.browserName !== 'furn-native-desktop') {
     throw new TypeError('Native desktop compatibility requires a Desktop Driver session.');
   }
-  const client = createDesktopDriverClient({ url });
+  const client = createDesktopDriverClient({ grant: options.grant, url });
   const session = new DesktopSessionClient(client, browser.sessionId, Object.fromEntries(Object.entries(browser.capabilities)));
   const desktop = new DesktopWebdriverSession(browser, session);
   boundSessions.set(browser, desktop);
@@ -199,7 +255,28 @@ export function installDesktopWebdriverCommands(browser: WebdriverIO.Browser, ur
       },
       { attachToElement: true },
     );
+    browser.overwriteCommand(
+      'setValue',
+      async function (this: WebdriverIO.Element, originalCommand, value: string | number) {
+        const inputMode = boundSessions.get(browser)!.session.capabilities['furn:inputMode'];
+        if (inputMode === 'accessible') {
+          throw new Error(`setValue would deliver keyboard input, which a session with input mode "${inputMode}" never delivers.`);
+        }
+        return originalCommand(value);
+      },
+      { attachToElement: true },
+    );
+    browser.addCommand(
+      'desktopPerformAccessibilityAction',
+      async function (this: WebdriverIO.Element, name: string) {
+        const id = await nativeElementId(this);
+        if (!id) throw new Error('The element was not found, so it has no accessibility action to perform.');
+        await new DesktopElementClient(boundSessions.get(browser)!.session, id).performAccessibilityAction(name);
+      },
+      { attachToElement: true },
+    );
     browser.addCommand('desktopExpect', (expectation: DesktopStoryExpectation) => boundSessions.get(browser)!.expect(expectation));
+    browser.addCommand('desktopInput', () => boundSessions.get(browser)!.input());
     installedBrowsers.add(browser);
   }
   if (browser.capabilities['furn:storybook'] && !installedStoryBrowsers.has(browser)) {

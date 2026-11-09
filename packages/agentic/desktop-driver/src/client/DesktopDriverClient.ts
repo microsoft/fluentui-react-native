@@ -1,8 +1,38 @@
 import { randomUUID } from 'node:crypto';
 
+import { validateDesktopSessionInput } from '../authoring/input.js';
+import type { DesktopSessionInput } from '../authoring/input.js';
 import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
+import type {
+  ActInput,
+  ActResult,
+  ArtifactInput,
+  ArtifactResult,
+  CaptureInput,
+  CaptureResult,
+  CheckInput,
+  CheckResult,
+  FindInput,
+  FindResult,
+  JournalInput,
+  JournalResult,
+  ObserveDeltaInput,
+  ObserveDeltaResult,
+  ObserveInput,
+  ObservePageInput,
+  ObservePageResult,
+  ObserveResult,
+  OperationCatalog,
+  OperationResponse,
+  SequenceInput,
+  SequenceResult,
+  StoriesInput,
+  StoriesResult,
+  StoryInput,
+  StoryResult,
+} from '../operations/index.js';
 import type {
   NewSessionCapabilities,
   WebDriverActionSequence,
@@ -15,20 +45,54 @@ import type { DesktopStoryManifest, StoryReadyResult } from '../storybook.js';
 
 export type DesktopDriverClientOptions = {
   fetch?: typeof globalThis.fetch;
+  /**
+   * The bearer token of a grant, for a service that requires one. It is sent on every request, so a client cannot reach
+   * a protected service by accident without it. Never log it or persist it outside owner-validated private storage.
+   */
+  grant?: string;
   url: string;
+};
+
+/** Options for one operation call. */
+export type OperationCallOptions = {
+  /** Names the call in the journal and, for an operation that changes the application, makes a retry return the first outcome. */
+  requestId?: string;
+  /** Abandons the call. The service treats it as the caller leaving: work not yet dispatched is cancelled. */
+  signal?: AbortSignal;
 };
 
 export class DesktopDriverClient {
   private readonly fetch: typeof globalThis.fetch;
+  readonly #grant?: string;
   private readonly url: string;
 
-  constructor({ fetch = globalThis.fetch, url }: DesktopDriverClientOptions) {
+  constructor({ fetch = globalThis.fetch, grant, url }: DesktopDriverClientOptions) {
     this.fetch = fetch;
+    this.#grant = grant;
     this.url = url.replace(/\/$/, '');
   }
 
   status(): Promise<Record<string, unknown>> {
     return this.request('GET', '/status');
+  }
+
+  /** Non-secret identity for connection bookkeeping; never authorizes a request. */
+  get principalId(): string | undefined {
+    return this.#grant?.split('.')[1];
+  }
+
+  /** Obtains a connection-local driver-only principal. Credentials remain private to the returned client. */
+  async delegateConnection(): Promise<DesktopDriverClient> {
+    const value = await this.request<{ token: string }>('POST', '/furn/grants/connection');
+    if (typeof value?.token !== 'string' || !/^fdg1\.[0-9a-f]{32}\.[A-Za-z0-9_-]{43}$/.test(value.token)) {
+      throw new Error('The service does not support connection authority.');
+    }
+    return new DesktopDriverClient({ fetch: this.fetch, grant: value.token, url: this.url });
+  }
+
+  /** Retryable terminal cleanup: revoked credentials authorize only their own child drain. */
+  revokeConnection(): Promise<null> {
+    return this.request('DELETE', '/furn/grants/current');
   }
 
   async newSession(capabilities: NewSessionCapabilities): Promise<DesktopSessionClient> {
@@ -38,15 +102,17 @@ export class DesktopDriverClient {
     return new DesktopSessionClient(this, value.sessionId, value.capabilities);
   }
 
-  async request<T>(method: string, path: string, body?: unknown): Promise<T> {
+  async request<T>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    const headers: Record<string, string> = {
+      ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+      ...(this.#grant ? { Authorization: `Bearer ${this.#grant}` } : {}),
+    };
     const response = await this.fetch(`${this.url}${path}`, {
       method,
-      ...(body === undefined
-        ? {}
-        : {
-            body: JSON.stringify(body),
-            headers: { 'Content-Type': 'application/json' },
-          }),
+      ...(this.#grant ? { redirect: 'error' as const } : {}),
+      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+      ...(Object.keys(headers).length > 0 ? { headers } : {}),
+      ...(signal ? { signal } : {}),
     });
     const payload = (await response.json()) as WebDriverResponse<T> | WebDriverErrorResponse;
     if (!response.ok) {
@@ -134,6 +200,99 @@ export class DesktopSessionClient {
     return this.command('GET', '/furn/window-events');
   }
 
+  /** The session's input policy, and how many times it has delivered input through each mechanism. */
+  async getInput(): Promise<DesktopSessionInput> {
+    return validateDesktopSessionInput(await this.command('GET', '/furn/input'));
+  }
+
+  /** The agent operations this session offers, with the JSON Schema of each one's input and result. */
+  operations(): Promise<OperationCatalog> {
+    return this.command('GET', '/furn/ops');
+  }
+
+  /**
+   * Runs one agent operation by name. Name your own `requestId` to find the call in the journal; otherwise the server
+   * assigns one and returns it.
+   */
+  operation<Result = unknown>(name: string, input: object = {}, options: OperationCallOptions = {}): Promise<OperationResponse<Result>> {
+    return this.command(
+      'POST',
+      `/furn/ops/${encodeURIComponent(name)}`,
+      { input, ...(options.requestId === undefined ? {} : { requestId: options.requestId }) },
+      options.signal,
+    );
+  }
+
+  /** Reads a bounded outline of the current window, or of the subtree under a reference an earlier call returned. */
+  observe(input: ObserveInput = {}, options?: OperationCallOptions): Promise<OperationResponse<ObserveResult>> {
+    return this.operation('observe', input, options);
+  }
+
+  /** Compares a fresh observation with a retained sample; incomplete samples never report removals. */
+  observeDelta(input: ObserveDeltaInput, options?: OperationCallOptions): Promise<OperationResponse<ObserveDeltaResult>> {
+    return this.operation('observeDelta', input, options);
+  }
+
+  /** Reads another page from an immutable observation or delta without sampling the application again. */
+  observePage(input: ObservePageInput, options?: OperationCallOptions): Promise<OperationResponse<ObservePageResult>> {
+    return this.operation('observePage', input, options);
+  }
+
+  /** Finds elements by role, name, automation id, or text, and says whether the match is unique. */
+  find(input: FindInput, options?: OperationCallOptions): Promise<OperationResponse<FindResult>> {
+    return this.operation('find', input, options);
+  }
+
+  /**
+   * Clicks, activates, types into, or clears one element: one a `find` proved unique, citing that find's sample, or one
+   * a selector proves unique now. Name a `requestId` to make a retry safe: repeating it returns the first outcome
+   * instead of acting again.
+   */
+  act(input: ActInput, options?: OperationCallOptions): Promise<OperationResponse<ActResult>> {
+    return this.operation('act', input, options);
+  }
+
+  /** Captures the window, or one element, as a PNG artifact with its provenance; the image comes inline only when asked. */
+  capture(input: CaptureInput = {}, options?: OperationCallOptions): Promise<OperationResponse<CaptureResult>> {
+    return this.operation('capture', input, options);
+  }
+
+  /** Reads a captured image in base64 pages. */
+  artifact(input: ArtifactInput, options?: OperationCallOptions): Promise<OperationResponse<ArtifactResult>> {
+    return this.operation('artifact', input, options);
+  }
+
+  /** Checks an element's state, name, value, or text, or how many elements a selector matches, optionally waiting. */
+  check(input: CheckInput, options?: OperationCallOptions): Promise<OperationResponse<CheckResult>> {
+    return this.operation('check', input, options);
+  }
+
+  /**
+   * Runs act and check steps in order in one turn, stopping at the first that fails or does not pass, then optionally
+   * observes. Steps that ran stay done.
+   */
+  sequence(input: SequenceInput, options?: OperationCallOptions): Promise<OperationResponse<SequenceResult>> {
+    return this.operation('sequence', input, options);
+  }
+
+  /** Lists the target's Storybook stories and the story this session selected, checked against what is rendered. */
+  stories(input: StoriesInput = {}, options?: OperationCallOptions): Promise<OperationResponse<StoriesResult>> {
+    return this.operation('stories', input, options);
+  }
+
+  /**
+   * Selects or resets a Storybook story and waits until it renders; earlier references into the preview expire. Name a
+   * `requestId` to make a retry safe.
+   */
+  story(input: StoryInput, options?: OperationCallOptions): Promise<OperationResponse<StoryResult>> {
+    return this.operation('story', input, options);
+  }
+
+  /** Reads what the operation layer ran in this session: the operation, its outcome, and its timing. */
+  journal(input: JournalInput = {}, options?: OperationCallOptions): Promise<OperationResponse<JournalResult>> {
+    return this.operation('journal', input, options);
+  }
+
   /** True when the target advertises a native window-event timeline for diagnostics. */
   recordsWindowEvents(): boolean {
     const features = this.capabilities['furn:features'];
@@ -160,8 +319,8 @@ export class DesktopSessionClient {
     return this.command('POST', '/furn/story/args', { args, storyId });
   }
 
-  command<T>(method: string, path: string, body?: unknown): Promise<T> {
-    return this.driver.request(method, `/session/${this.id}${path}`, body);
+  command<T>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+    return this.driver.request(method, `/session/${this.id}${path}`, body, signal);
   }
 }
 
@@ -184,6 +343,11 @@ export class DesktopElementClient {
 
   sendKeys(text: string): Promise<null> {
     return this.command('POST', '/value', { text });
+  }
+
+  /** Performs the one accessibility action the element publishes under this name, such as `increment`. */
+  performAccessibilityAction(name: string): Promise<null> {
+    return this.command('POST', '/furn/accessibility-action', { name });
   }
 
   getText(): Promise<string> {

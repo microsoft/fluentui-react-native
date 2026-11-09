@@ -22,7 +22,9 @@ test('executes isolated inline code and releases sessions after assertion failur
           !diagnostics.includes('intentional inline assertion') ||
           !diagnostics.includes('wdio "fixture-button--fail" during execution') ||
           !diagnostics.includes('wdio "fixture-button--navigation-failure" during navigation') ||
-          !diagnostics.includes('Navigation failed: preview did not mount') ||
+          !diagnostics.includes('Storybook context did not settle.') ||
+          !diagnostics.includes('wdio "fixture-button--lane / accessible only" during input policy verification') ||
+          diagnostics.includes('Navigation refused before dispatch') ||
           output.includes('[storybook] OK wdio "fixture-button--exit-zero"')
         ) {
           reject(new Error('Assertion diagnostics were lost.'));
@@ -42,7 +44,14 @@ test('executes isolated inline code and releases sessions after assertion failur
     smoke: {
       plans: ['fixture-button--pass', 'fixture-button--second'],
       callbacks: ['fixture-button--pass', 'fixture-button--second'],
-      selections: ['fixture-button--pass', 'fixture-button--pass', 'fixture-button--second', 'fixture-button--second'],
+      // The tests phase first waits for runtime readiness by selecting the manifest's first story.
+      selections: [
+        'fixture-button--crash',
+        'fixture-button--pass',
+        'fixture-button--pass',
+        'fixture-button--second',
+        'fixture-button--second',
+      ],
       status: 'passed',
     },
     smokeFailureLogged: true,
@@ -50,10 +59,74 @@ test('executes isolated inline code and releases sessions after assertion failur
       { testName: 'exposes enabled button semantics', status: 'passed' },
       { testName: 'supports native pointer activation', status: 'passed' },
     ],
+    // The migrated case declares physical-click, so a host without it reports the case unsupported before execution.
     restrictedButton: [
       { testName: 'exposes enabled button semantics', status: 'passed' },
-      { testName: 'supports native pointer activation', status: 'skipped' },
+      { testName: 'supports native pointer activation', status: 'unsupported' },
     ],
+    lane: {
+      accessible: [
+        { testName: 'accessible only', status: 'passed' },
+        { testName: 'either lane', status: 'passed' },
+      ],
+      physical: [
+        { testName: 'either lane', status: 'passed' },
+        { testName: 'physical only', status: 'passed' },
+      ],
+      // No lane, and a host that masks physical click: the physical case is unsupported, not a failed session.
+      compatibility: [
+        { testName: 'accessible only', status: 'passed' },
+        { testName: 'either lane', status: 'passed' },
+        { testName: 'physical only', status: 'unsupported' },
+      ],
+      // The driver holds the policy, so an accessible lane runs on a driver with physical input enabled.
+      unmasked: [
+        { testName: 'accessible only', status: 'passed' },
+        { testName: 'either lane', status: 'passed' },
+      ],
+      // A driver that does not confirm the policy stops the lane at its first case, reported once.
+      unconfirmed: {
+        results: [{ testName: 'accessible only', status: 'failed' }],
+        status: 'failed',
+        failed: 1,
+        excluded: { platform: 0, scope: 0, input: 1 },
+        reported: [expect.stringContaining('did not confirm the accessible input policy (it reported none)')],
+      },
+    },
+    receipts: {
+      // Compatibility mode delivers what the host has, and still holds each declared case to its declaration.
+      compatibility: [
+        { testName: 'declared click', status: 'passed', input: { receipts: { 'physical-click': 1 } } },
+        {
+          testName: 'undeclared click',
+          status: 'failed',
+          input: { receipts: { 'physical-click': 1 }, undeclared: ['physical-click'] },
+          error: 'The test delivered input it does not declare: physical-click (declare physical-click or click).',
+        },
+        { testName: 'unused keyboard', status: 'passed', input: { receipts: {}, unused: ['keyboard'] } },
+        {
+          testName: 'typing',
+          status: 'failed',
+          input: { receipts: { keyboard: 1 }, undeclared: ['keyboard'] },
+          error: 'The test delivered input it does not declare: keyboard (declare keyboard).',
+        },
+      ],
+      // The accessible lane clicks semantically and refuses typing before it is delivered, so nothing is attributed to it.
+      accessible: [
+        { testName: 'declared click', status: 'passed', input: { receipts: { 'accessibility-click': 1 } } },
+        {
+          testName: 'undeclared click',
+          status: 'failed',
+          input: { receipts: { 'accessibility-click': 1 }, undeclared: ['accessibility-click'] },
+        },
+        {
+          testName: 'typing',
+          status: 'failed',
+          input: { receipts: {} },
+          error: expect.stringContaining('never delivers'),
+        },
+      ],
+    },
     platforms: Object.fromEntries(
       ['macos', 'windows', 'win32'].map((platform) => [
         platform,

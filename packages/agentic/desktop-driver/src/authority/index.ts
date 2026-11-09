@@ -1,0 +1,16 @@
+export { DesktopAuthority, grantAllowsTarget } from './grants.js';
+export type { DesktopGrant, GrantRequest, GrantScope, GrantTargets, IssuedDesktopGrant } from './grants.js';
+export { publishConnectionDescriptor, readConnectionDescriptor } from './connectionDescriptor.js';
+export type { DesktopConnectionDescriptor, DesktopServiceIdentity, VerifyDesktopService } from './connectionDescriptor.js';
+export { createMacOSPrivateStorage } from './macosPrivateStorage.js';
+export type { PrivateStorage } from './privateStorage.js';
+export { createWindowsPrivateStorage } from './windowsPrivateStorage.js';
+export type { WindowsPrivateStorageOptions } from './windowsPrivateStorage.js';
+export { createWindowsServiceVerifier, describeWindowsService } from './windowsServiceIdentity.js';
+export type { DescribeWindowsServiceOptions, WindowsServiceVerifierOptions } from './windowsServiceIdentity.js';
+export { createMacOSServiceVerifier, describeMacOSService } from './macosServiceIdentity.js';
+export type { DescribeMacOSServiceOptions, MacOSServiceVerifierOptions } from './macosServiceIdentity.js';
+export { createMacOSApplicationProbe } from './macosApplicationProbe.js';
+export type { MacOSApplicationProbeOptions } from './macosApplicationProbe.js';
+export { createWindowsApplicationProbe } from './windowsApplicationProbe.js';
+export type { WindowsApplicationProbeOptions } from './windowsApplicationProbe.js';

@@ -14,6 +14,52 @@ export {
   desktopStoryPlatforms,
   validateDesktopStoryTests,
 } from './storyTests.js';
+export {
+  accessibleLaneMaskedFeatures,
+  compareDesktopInputReceipts,
+  desktopInputMechanisms,
+  desktopInputModeAllows,
+  desktopInputModes,
+  desktopInputLanes,
+  desktopRequirements,
+  describeUndeclaredDesktopInput,
+  matchesDesktopPlatforms,
+  matchesDesktopScope,
+  mergeDesktopCaseOptions,
+  resolveDesktopInput,
+  resolveDesktopScopeDomains,
+  resolveDesktopScopeValues,
+  subtractDesktopInputReceipts,
+  unmaskedAccessibleFeatures,
+  validateDesktopCaseOptions,
+  validateDesktopGroupOptions,
+  validateDesktopInputReceipts,
+  validateDesktopSessionInput,
+} from './input.js';
+export type {
+  AccessibleLaneMaskedFeature,
+  DesktopCaseOptions,
+  DesktopInput,
+  DesktopInputComparison,
+  DesktopInputLane,
+  DesktopInputMechanism,
+  DesktopInputMode,
+  DesktopInputReceipts,
+  DesktopPlatforms,
+  DesktopRequirement,
+  DesktopScopeDomains,
+  DesktopScopeValues,
+  DesktopSessionInput,
+  ResolvedDesktopCaseOptions,
+} from './input.js';
+export { decideDesktopCase, missingDesktopRequirements, resolveDesktopClickMode } from './selection.js';
+export type {
+  DesktopCaseClickMode,
+  DesktopCaseDecision,
+  DesktopCaseTarget,
+  DesktopDeclaredGap,
+  DesktopExclusionReason,
+} from './selection.js';
 export type {
   DesktopStoryCapability,
   DesktopStoryExpectation,

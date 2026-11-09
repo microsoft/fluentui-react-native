@@ -12,6 +12,19 @@ evidence management, native-helper source and build tooling, and deterministic
 fake hosts for contract tests. It does not depend on Storybook, React, or React
 Native.
 
+**Work in progress:** see [current status](references/current-status.md) for
+implemented capabilities, incomplete lifecycle guarantees, endpoint qualification,
+and measured token/latency history.
+
+Story providers use the existing `/storybook` subpath for `StoryProviderContext`,
+`StoryBridgeUnavailableError`, and the versioned marker verifier. Built-in routes
+pass the local lifetime ID and abort signal separately from serialized inputs.
+Preview-scoped mutations recheck provider/native context; chrome and live
+secondary-window references do not expire with the preview. Unknown navigation
+effects still quarantine: a replacement bridge epoch is not recovery evidence.
+After losing a verified context, preview mutations remain unavailable until
+a new verified selection; finding fresh elements alone cannot restore readiness.
+
 ## Supported targets
 
 | Endpoint                    | Operating system  | Architecture            | Native implementation                                       |
@@ -20,7 +33,8 @@ Native.
 | React Native Windows Fabric | Windows 11        | `x64`                   | C++20, UI Automation, SendInput, Windows Graphics Capture   |
 | React Native Win32 Paper    | Windows 11        | `x64`                   | Same Windows helper and protocol                            |
 
-V1 permits one active WebDriver session per physical target. Native builds run
+V1 permits one active WebDriver session per registered target in one service;
+cross-service application exclusion remains work in progress. Native builds run
 only on the target operating system. Installation never compiles or downloads a
 helper.
 
@@ -103,7 +117,7 @@ lifecycle. The standalone `desktop-driver serve` command intentionally exposes
 a fake target for protocol and integration tests; it is not a native service
 shortcut.
 
-For a production native listener, application lifecycle, and standalone WDIO
+For a native listener, application lifecycle, and standalone WDIO
 suites, use `@fluentui-react-native/desktop-test` and its `README.md`. It
 composes this driver without requiring Storybook or React Native in ordinary
 applications.
@@ -125,6 +139,7 @@ toolchains, first builds, and diagnostic commands.
 | [CI integration](references/ci-integration.md)      | Package gates, native jobs, real-app smoke, signing, and artifacts                             |
 | [Security model](references/security.md)            | Loopback boundary, registered targets, helper trust, process ownership, and sensitive evidence |
 | [WebDriver contract](references/protocol.md)        | Supported W3C routes, capabilities, elements, errors, and Storybook extensions                 |
+| [Agent operations](references/operations.md)        | Bounded observe, find, and journal operations, references, budgets, and privacy                |
 | [Native wire protocol](native/PROTOCOL.md)          | Private framed stdio protocol between Node and the native helper                               |
 | [Changelog](CHANGELOG.md)                           | Versioned package changes                                                                      |
 
@@ -133,20 +148,31 @@ The [reference index](references/README.md) describes each package-owned guide.
 
 ## Public entry points
 
-| Export       | Purpose                                                                                   |
-| ------------ | ----------------------------------------------------------------------------------------- |
-| Package root | Native-helper build/resolution, `DesktopHost`, server, low-level client, and common types |
-| `/authoring` | Serializable story plans, selectors, capabilities, and result types                       |
-| `/wdio`      | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
-| `/client`    | Low-level typed W3C client                                                                |
-| `/server`    | Embeddable remote end, session manager, and target registry                               |
-| `/agent`     | Bounded JSON-safe inspection, action, and evidence API                                    |
-| `/artifacts` | Confined, atomic evidence persistence                                                     |
-| `/runner`    | Plan selection, sharding, execution, and result classification                            |
-| `/storybook` | Story manifest and orchestration contracts, without a Storybook dependency                |
-| `/testing`   | Fake host, fake Storybook orchestrator, and protocol harnesses                            |
-| `/cli`       | Embeddable Commander command and CLI runner                                               |
+| Export             | Purpose                                                                                   |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| Package root       | Native-helper build/resolution, `DesktopHost`, server, low-level client, and common types |
+| `/authoring`       | Serializable story plans, selectors, capabilities, result types, and case descriptors     |
+| `/wdio`            | WebdriverIO connection, custom commands, assertions, and story-plan runner                |
+| `/client`          | Low-level typed W3C client                                                                |
+| `/authority`       | Grants, private connection descriptors, and macOS owner-validated storage                 |
+| `/native`          | Native-helper build, resolution, and verification without loading the package root        |
+| `/server`          | Embeddable remote end, session manager, and target registry                               |
+| `/agent`           | Bounded JSON-safe inspection, action, and evidence API                                    |
+| `/operations`      | Versioned agent operation catalog, executor, and result types                             |
+| `/artifacts`       | Confined, atomic evidence persistence                                                     |
+| `/runner`          | Plan selection, sharding, execution, and result classification                            |
+| `/storybook`       | Story manifest and orchestration contracts, without a Storybook dependency                |
+| `/testing`         | Fake host, fake Storybook orchestrator, and protocol harnesses                            |
+| `/cli`             | Embeddable Commander command and CLI runner                                               |
+| `/cli/reporter`    | Shared reporter mode resolution and structured output framing                             |
+| `/authoring/input` | Descriptor vocabulary and scope rules with no runtime imports (loads from source)         |
 
 The service implements native application semantics rather than pretending to
 be a browser. Unsupported browser features return `unsupported operation`
 instead of fabricated success.
+
+Protected clients use `driver-control` grants. MCP connections attenuate the
+private descriptor grant into distinct child principals, with target/scope
+subset checks and awaitable, retryable descendant revocation. Workload and
+operator-recovery scopes do not expose management HTTP routes; see the
+[security model](references/security.md).

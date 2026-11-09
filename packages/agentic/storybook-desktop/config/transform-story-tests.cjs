@@ -1,8 +1,9 @@
+const fs = require('node:fs');
 const { isBuiltin, createRequire } = require('node:module');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
-const { transformFromAstSync, traverse, types } = require('@babel/core');
+const { parseSync, transformFromAstSync, traverse, types } = require('@babel/core');
 const transformTypescript = require('@babel/plugin-transform-typescript');
 
 const nodeGlobals = new Set(
@@ -57,6 +58,55 @@ function resolveInitializer(value, seen = new Set(), bindings = new Set()) {
   return value;
 }
 
+function importedDesktopIt(call) {
+  const callee = call.get('callee');
+  if (!callee.isIdentifier()) fail(call, 'array tests must be direct desktopIt imports.');
+  const binding = callee.scope.getBinding(callee.node.name);
+  const specifier = binding?.path;
+  const declaration = specifier?.parentPath;
+  if (
+    !specifier?.isImportSpecifier() ||
+    (specifier.node.imported.name ?? specifier.node.imported.value) !== 'desktopIt' ||
+    !declaration?.isImportDeclaration() ||
+    declaration.node.source.value !== '@fluentui-react-native/storybook-desktop/testing' ||
+    declaration.node.importKind === 'type' ||
+    specifier.node.importKind === 'type'
+  ) {
+    fail(call, 'array tests must use the desktopIt value imported from @fluentui-react-native/storybook-desktop/testing.');
+  }
+}
+
+function staticValue(value) {
+  value = unwrap(value);
+  if (value.isStringLiteral() || value.isBooleanLiteral() || value.isNullLiteral()) return value.node.value;
+  if (value.isNumericLiteral() && Number.isFinite(value.node.value)) return value.node.value;
+  if (value.isTemplateLiteral() && value.node.expressions.length === 0 && value.node.quasis.length === 1) {
+    return value.node.quasis[0].value.cooked;
+  }
+  if (value.isUnaryExpression({ operator: '-' }) && value.get('argument').isNumericLiteral()) {
+    return -value.node.argument.value;
+  }
+  if (value.isArrayExpression()) {
+    return value.get('elements').map((element) => {
+      if (!element?.node || element.isSpreadElement()) fail(element ?? value, 'descriptor arrays must contain static values.');
+      return staticValue(element);
+    });
+  }
+  if (value.isObjectExpression()) {
+    const result = {};
+    for (const property of value.get('properties')) {
+      if (!property.isObjectProperty() || property.node.computed || property.node.shorthand) {
+        fail(property, 'descriptor objects require static key/value properties.');
+      }
+      const key = keyName(property);
+      if (!key || Object.hasOwn(result, key)) fail(property, 'descriptor objects require unique static property names.');
+      result[key] = staticValue(property.get('value'));
+    }
+    return result;
+  }
+  fail(value, 'descriptor options must be a strict JSON literal.');
+}
+
 function collectCallbacks(value) {
   const requireCallback = (callback) => {
     if ((!callback.isArrowFunctionExpression() && !callback.isFunctionExpression()) || callback.node.generator) {
@@ -64,6 +114,29 @@ function collectCallbacks(value) {
     }
     return callback;
   };
+  if (value.isArrayExpression()) {
+    const callbacks = [];
+    const names = new Set();
+    for (const item of value.get('elements')) {
+      if (!item?.node || item.isSpreadElement() || !item.isCallExpression()) {
+        fail(item ?? value, 'desktopIt arrays require direct calls and cannot contain holes or spreads.');
+      }
+      importedDesktopIt(item);
+      const args = item.get('arguments');
+      if (args.length < 2 || args.length > 3 || args.some((argument) => argument.isSpreadElement())) {
+        fail(item, 'desktopIt requires a name, optional static options, and an inline callback.');
+      }
+      const name = args[0].isStringLiteral() ? args[0].node.value : undefined;
+      if (!name?.trim()) fail(args[0], 'desktopIt requires a non-empty literal test name.');
+      if (names.has(name)) fail(args[0], `duplicate test name "${name}".`);
+      names.add(name);
+      const options = args.length === 2 ? {} : staticValue(args[1]);
+      if (!options || typeof options !== 'object' || Array.isArray(options)) fail(args[1], 'desktopIt options must be an object.');
+      callbacks.push({ name, options, callback: requireCallback(unwrap(args[args.length - 1])) });
+    }
+    if (!callbacks.length) fail(value, 'a desktopIt array must contain at least one test.');
+    return callbacks;
+  }
   if (!value.isObjectExpression()) return [{ callback: requireCallback(value) }];
   const callbacks = [];
   const names = new Set();
@@ -168,6 +241,295 @@ function collectWdioTests(program) {
     },
   });
   return tests;
+}
+
+// The physical requirement each WebDriver action source type implies, in the order messages list them.
+const actionSourceRequirements = { key: 'keyboard', pointer: 'physical-click', wheel: 'wheel' };
+const requirementInputKinds = { keyboard: 'keyboard', 'physical-click': 'pointer', wheel: 'wheel' };
+const valueCommands = new Set(['setValue', 'addValue', 'clearValue']);
+
+function memberName(callee) {
+  const property = callee.node.property;
+  if (!callee.node.computed) return types.isIdentifier(property) ? property.name : undefined;
+  if (types.isStringLiteral(property)) return property.value;
+  return types.isTemplateLiteral(property) && property.expressions.length === 0 ? property.quasis[0].value.cooked : undefined;
+}
+
+function isBrowser(object) {
+  object = unwrap(object);
+  if (object.isIdentifier({ name: 'browser' })) return true;
+  return (object.isMemberExpression() || object.isOptionalMemberExpression()) && memberName(object) === 'browser';
+}
+
+/** Follows a constant to the value it holds, so a payload declared above the call is still read. */
+function readConstant(value, seen = new Set()) {
+  value = unwrap(value);
+  if (value.isIdentifier()) {
+    const binding = value.scope.getBinding(value.node.name);
+    const declarator = binding?.path;
+    if (
+      binding?.constant &&
+      declarator?.isVariableDeclarator() &&
+      declarator.node.init &&
+      declarator.get('id').isIdentifier() &&
+      !seen.has(binding)
+    ) {
+      seen.add(binding);
+      return readConstant(declarator.get('init'), seen);
+    }
+  }
+  return value;
+}
+
+function readString(value) {
+  value = readConstant(value);
+  if (value.isStringLiteral()) return value.node.value;
+  return value.isTemplateLiteral() && value.node.expressions.length === 0 ? value.node.quasis[0].value.cooked : undefined;
+}
+
+function actionSourceType(source) {
+  source = readConstant(source);
+  if (!source.isObjectExpression()) return undefined;
+  let type;
+  for (const property of source.get('properties')) {
+    // A spread or a computed key could supply or replace the type.
+    if (!property.isObjectProperty() || property.node.computed) return undefined;
+    if (keyName(property) === 'type') type = readString(property.get('value'));
+  }
+  return type;
+}
+
+/** The physical requirements of a WebDriver action payload, and whether every source in it could be read. */
+function readActionSources(payload) {
+  payload = readConstant(payload);
+  if (!payload.isArrayExpression()) return undefined;
+  const requires = new Set();
+  let readable = true;
+  for (const element of payload.get('elements')) {
+    const type = element?.node && !element.isSpreadElement() ? actionSourceType(element) : undefined;
+    if (type === undefined) readable = false;
+    else if (Object.hasOwn(actionSourceRequirements, type)) requires.add(actionSourceRequirements[type]);
+  }
+  return { requires: Object.values(actionSourceRequirements).filter((requirement) => requires.has(requirement)), readable };
+}
+
+/** A call that sends physical input, with the requirements that input implies. Those are undefined when the call cannot be read. */
+function directInputCall(call) {
+  const callee = call.get('callee');
+  if (!callee.isMemberExpression() && !callee.isOptionalMemberExpression()) return undefined;
+  const name = memberName(callee);
+  const argument = call.node.arguments[0] ? call.get('arguments.0') : undefined;
+  if (valueCommands.has(name)) return { call: name, requires: ['keyboard'] };
+  if (name === 'keys' && isBrowser(callee.get('object'))) return { call: 'browser.keys', requires: ['keyboard'] };
+  if (name === 'action' && isBrowser(callee.get('object'))) {
+    const type = argument && readString(argument);
+    if (type === undefined) return { call: 'browser.action', requires: undefined };
+    return Object.hasOwn(actionSourceRequirements, type)
+      ? { call: 'browser.action', requires: [actionSourceRequirements[type]] }
+      : undefined;
+  }
+  if (name === 'performActions') {
+    const sources = argument && readActionSources(argument);
+    if (!sources) return { call: 'performActions', requires: undefined };
+    if (sources.requires.length) return { call: 'performActions', requires: sources.requires };
+    return sources.readable ? undefined : { call: 'performActions', requires: undefined };
+  }
+  return undefined;
+}
+
+/** The string a literal `import()`, awaited or not, loads; undefined for anything else. */
+function dynamicImportSource(expression) {
+  expression = unwrap(expression);
+  if (expression?.isAwaitExpression()) expression = unwrap(expression.get('argument'));
+  if (expression?.isImportExpression?.()) {
+    const source = expression.get('source');
+    return source.isStringLiteral() ? source.node.value : undefined;
+  }
+  if (!expression?.isCallExpression() || !types.isImport(expression.node.callee) || expression.node.arguments.length !== 1)
+    return undefined;
+  const source = expression.get('arguments.0');
+  return source.isStringLiteral() ? source.node.value : undefined;
+}
+
+const helperExtensions = /\.(?:[cm]?[jt]s)$/;
+
+/** A relative helper module this check can read, or undefined for a package, a builtin or a file it cannot find. */
+function resolveHelper(specifier, fromFile) {
+  if (!specifier.startsWith('.')) return undefined;
+  try {
+    const resolved = createRequire(path.resolve(fromFile)).resolve(specifier);
+    return helperExtensions.test(resolved) ? resolved : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** The module and export a callee names when it is a helper loaded from a relative module, by static or literal dynamic import. */
+function importedHelper(callee, fromFile) {
+  callee = unwrap(callee);
+  if (callee.isIdentifier()) {
+    const binding = callee.scope.getBinding(callee.node.name);
+    if (binding?.path.isImportSpecifier()) {
+      const imported = binding.path.node.imported;
+      const file = resolveHelper(binding.path.parentPath.node.source.value, fromFile);
+      return file && { file, name: types.isIdentifier(imported) ? imported.name : imported.value };
+    }
+    // const { helper } = await import('./helpers.ts');
+    if (!binding?.path.isVariableDeclarator() || !binding.path.get('id').isObjectPattern()) return undefined;
+    const source = dynamicImportSource(binding.path.get('init'));
+    const file = source && resolveHelper(source, fromFile);
+    if (!file) return undefined;
+    for (const property of binding.path.get('id.properties')) {
+      if (!property.isObjectProperty() || property.node.computed) continue;
+      if (types.isIdentifier(property.node.value, { name: callee.node.name })) return { file, name: keyName(property) };
+    }
+    return undefined;
+  }
+  if (!callee.isMemberExpression() && !callee.isOptionalMemberExpression()) return undefined;
+  const name = memberName(callee);
+  const object = unwrap(callee.get('object'));
+  // (await import('./helpers.ts')).helper(), helpers.helper() after `const helpers = await import(...)`, or a namespace import.
+  let source = dynamicImportSource(object);
+  if (source === undefined && object.isIdentifier()) {
+    const binding = object.scope.getBinding(object.node.name);
+    if (binding?.path.isVariableDeclarator() && binding.path.get('id').isIdentifier())
+      source = dynamicImportSource(binding.path.get('init'));
+    else if (binding?.path.isImportNamespaceSpecifier()) source = binding.path.parentPath.node.source.value;
+  }
+  const file = name && source !== undefined ? resolveHelper(source, fromFile) : undefined;
+  return file && { file, name };
+}
+
+/** Reads a helper module once per check: its top-level functions, and the exports that name them. */
+function readHelperModule(file, context) {
+  if (context.modules.has(file)) return context.modules.get(file);
+  let helper = null;
+  try {
+    const ast = parseSync(fs.readFileSync(file, 'utf8'), {
+      babelrc: false,
+      configFile: false,
+      filename: file,
+      sourceType: 'module',
+      parserOpts: { plugins: ['typescript'] },
+    });
+    let program;
+    traverse(ast, {
+      Program(found) {
+        program = found;
+        found.stop();
+      },
+    });
+    helper = { file, program, functions: new Map(), exports: new Map() };
+    for (const statement of program.get('body')) {
+      const exported = statement.isExportNamedDeclaration();
+      const declaration = exported ? statement.get('declaration') : statement;
+      if (declaration.isFunctionDeclaration() && declaration.node.id) {
+        helper.functions.set(declaration.node.id.name, declaration);
+        if (exported) helper.exports.set(declaration.node.id.name, declaration.node.id.name);
+      } else if (declaration.isVariableDeclaration()) {
+        for (const declarator of declaration.get('declarations')) {
+          const init = declarator.node.init ? unwrap(declarator.get('init')) : undefined;
+          if (!declarator.get('id').isIdentifier() || !(init?.isFunctionExpression() || init?.isArrowFunctionExpression())) continue;
+          helper.functions.set(declarator.node.id.name, init);
+          if (exported) helper.exports.set(declarator.node.id.name, declarator.node.id.name);
+        }
+      }
+      if (exported && !statement.node.source) {
+        for (const specifier of statement.get('specifiers')) {
+          if (!specifier.isExportSpecifier()) continue;
+          const exportedName = types.isIdentifier(specifier.node.exported) ? specifier.node.exported.name : specifier.node.exported.value;
+          helper.exports.set(exportedName, specifier.node.local.name);
+        }
+      }
+    }
+  } catch {
+    // A helper this check cannot parse is left to the run-time policy, like any other input it cannot see.
+    helper = null;
+  }
+  context.modules.set(file, helper);
+  return helper;
+}
+
+/** The first physical input a helper function sends, directly or through the helpers it calls. Cycles end at the first visit. */
+function helperFunctionInput(helper, name, context) {
+  const key = `${helper.file}#${name}`;
+  if (!helper.functions.has(name)) return undefined;
+  if (context.functions.has(key)) return context.functions.get(key);
+  context.functions.set(key, undefined);
+  const found = findPhysicalInput(helper.functions.get(name), helper.file, context, helper);
+  context.functions.set(key, found);
+  return found;
+}
+
+/** A call to a helper that sends physical input, as the chain of helpers that leads to the call that sends it. */
+function helperInputCall(call, fromFile, context, helper) {
+  const callee = unwrap(call.get('callee'));
+  let target = importedHelper(callee, fromFile);
+  let local;
+  if (target) {
+    const imported = readHelperModule(target.file, context);
+    local = imported && { helper: imported, name: imported.exports.get(target.name) };
+  } else if (helper && callee.isIdentifier() && helper.functions.has(callee.node.name)) {
+    // Another function in the same helper module, unless a local binding shadows it.
+    if (callee.scope.getBinding(callee.node.name)?.scope !== helper.program.scope) return undefined;
+    target = { name: callee.node.name };
+    local = { helper, name: callee.node.name };
+  }
+  if (!local?.name) return undefined;
+  const found = helperFunctionInput(local.helper, local.name, context);
+  return found && { call: found.call, requires: found.requires, via: [target.name, ...(found.via ?? [])] };
+}
+
+/** The first call under `root` that sends physical input, directly or through a relative helper module. */
+function findPhysicalInput(root, file, context, helper) {
+  let finding;
+  root.traverse({
+    'CallExpression|OptionalCallExpression'(call) {
+      if (finding) return;
+      const found = directInputCall(call) ?? (file ? helperInputCall(call, file, context, helper) : undefined);
+      if (found) {
+        finding = { ...found, path: call };
+        call.stop();
+      }
+    },
+  });
+  return finding;
+}
+
+/**
+ * Rejects a case that also runs in the accessible input lane but sends physical input: the keyboard commands, the value
+ * commands that may type, and WebDriver actions with key, pointer or wheel sources, called directly or through a helper
+ * imported from a relative module. The check reads literals only. Input sent through an alias or a package helper is
+ * refused by the accessible lane's input policy when the case runs, and the case's receipts are checked against its
+ * declaration in every lane.
+ */
+function rejectDirectInput(callback, { name, input, inputSource, sourceFile }) {
+  if (input === 'physical') return;
+  const finding = findPhysicalInput(callback, sourceFile, { modules: new Map(), functions: new Map() });
+  if (!finding) return;
+  const subject = name ? `"${name}"` : 'This case';
+  const declared = inputSource === 'declared';
+  const caller = finding.via ? `helper ${finding.via.join(' > ')} calls ${finding.call}` : `calls ${finding.call}`;
+  if (finding.requires === undefined) {
+    const declaration = declared ? "input: 'physical'" : 'requires for the physical input it sends (keyboard, physical-click or wheel)';
+    fail(
+      finding.path,
+      `${subject} runs in the accessible input lane, but ${caller} with an argument this check cannot read. ` +
+        `Pass a literal list of input sources, or declare ${declaration}.`,
+    );
+  }
+  const kinds = finding.requires.map((requirement) => requirementInputKinds[requirement]).join(' and ');
+  const declaration = declared
+    ? "input: 'physical'"
+    : `requires: [${finding.requires.map((requirement) => `'${requirement}'`).join(', ')}]`;
+  const sender = finding.via
+    ? `helper ${finding.via.join(' > ')} sends physical ${kinds} input with ${finding.call}`
+    : `${finding.call} sends physical ${kinds} input`;
+  fail(
+    finding.path,
+    `${subject} runs in the accessible input lane, but ${sender}. ` +
+      `Declare ${declaration} so it runs only in the physical lane, or remove the call.`,
+  );
 }
 
 function compileWdioTest(callback, sourceFile, source) {
@@ -276,9 +638,21 @@ module.exports = () => ({
         for (const { callback } of callbacks) compileWdioTest(callback, filename, state.file.code);
       }
       for (const { property } of tests.values()) if (!property.removed) property.remove();
+      program.scope.crawl();
+      for (const statement of program.get('body')) {
+        if (!statement.isImportDeclaration() || statement.node.source.value !== '@fluentui-react-native/storybook-desktop/testing')
+          continue;
+        for (const specifier of statement.get('specifiers')) {
+          if (!specifier.isImportSpecifier() || (specifier.node.imported.name ?? specifier.node.imported.value) !== 'desktopIt') continue;
+          const binding = statement.scope.getBinding(specifier.node.local.name);
+          if (!binding?.referencePaths.length) specifier.remove();
+        }
+        if (!statement.node.specifiers.length) statement.remove();
+      }
     },
   },
 });
 
 module.exports.collectWdioTests = collectWdioTests;
 module.exports.compileWdioTest = compileWdioTest;
+module.exports.rejectDirectInput = rejectDirectInput;

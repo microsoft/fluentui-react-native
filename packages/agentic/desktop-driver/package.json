@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/desktop-driver",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "W3C WebDriver-compatible automation for React Native desktop applications",
   "license": "MIT",
   "author": "",
@@ -43,10 +43,20 @@
       "import": "./lib/cli/index.js",
       "default": "./src/cli/index.ts"
     },
+    "./cli/reporter": {
+      "types": "./lib/cli/reporter.d.ts",
+      "import": "./lib/cli/reporter.js",
+      "default": "./src/cli/reporter.ts"
+    },
     "./authoring": {
       "types": "./lib/authoring/index.d.ts",
       "import": "./lib/authoring/index.js",
       "default": "./src/authoring/index.ts"
+    },
+    "./authoring/input": {
+      "types": "./lib/authoring/input.d.ts",
+      "import": "./lib/authoring/input.js",
+      "default": "./src/authoring/input.ts"
     },
     "./agent": {
       "types": "./lib/agent/index.d.ts",
@@ -57,6 +67,21 @@
       "types": "./lib/artifacts/index.d.ts",
       "import": "./lib/artifacts/index.js",
       "default": "./src/artifacts/index.ts"
+    },
+    "./authority": {
+      "types": "./lib/authority/index.d.ts",
+      "import": "./lib/authority/index.js",
+      "default": "./src/authority/index.ts"
+    },
+    "./native": {
+      "types": "./lib/native/nativeDriver.d.ts",
+      "import": "./lib/native/nativeDriver.js",
+      "default": "./src/native/nativeDriver.ts"
+    },
+    "./operations": {
+      "types": "./lib/operations/index.d.ts",
+      "import": "./lib/operations/index.js",
+      "default": "./src/operations/index.ts"
     },
     "./server": {
       "types": "./lib/server/index.d.ts",
@@ -94,7 +119,8 @@
   },
   "dependencies": {
     "commander": "^14.0.2",
-    "webdriverio": "catalog:"
+    "webdriverio": "catalog:",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@fluentui-react-native/scripts": "workspace:*"

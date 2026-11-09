@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto';
+import { desktopInputMechanisms, desktopRequirements, validateDesktopInputReceipts } from '@fluentui-react-native/desktop-driver/authoring';
+import type { DesktopInputMechanism, DesktopInputReceipts, DesktopRequirement } from '@fluentui-react-native/desktop-driver/authoring';
 
 export type FailureKind = 'test' | 'infrastructure' | 'cleanup' | 'evidence' | 'reporting';
 export type ReportError = { name: string; message: string; stack?: string; cause?: ReportError; errors?: ReportError[] };
@@ -15,6 +17,21 @@ export class DesktopReportedError extends Error {
   }
 }
 export type TestStatus = 'passed' | 'failed' | 'skipped' | 'unsupported' | 'cancelled' | 'not-run' | 'incomplete';
+/** A declared gap: the producer knows the case cannot run here and says why, so it is not a silent skip. */
+export type TestGap = 'unsupported' | 'quarantine';
+export const testGaps: readonly TestGap[] = ['unsupported', 'quarantine'];
+/** Cases a producer removed from its selection before any session existed, by the reason they were removed. */
+export type SelectionExclusions = { platform: number; scope: number; input: number };
+export const selectionExclusionReasons: readonly (keyof SelectionExclusions)[] = ['platform', 'scope', 'input'];
+/**
+ * The input one test attempt delivered, read from its session's receipts, and how it compares with the declaration.
+ * `undeclared` mechanisms failed the attempt; `unused` declarations are reported only.
+ */
+export type TestInputReport = {
+  receipts: DesktopInputReceipts;
+  undeclared?: DesktopInputMechanism[];
+  unused?: DesktopRequirement[];
+};
 export type EventContext = {
   endpoint?: 'macos' | 'windows' | 'win32';
   renderer?: 'fabric' | 'paper';
@@ -28,7 +45,18 @@ export type EventContext = {
 export type EventData =
   | { kind: 'work-selected'; payload: { workId: string; label: string } }
   | { kind: 'scope-start'; payload: { label: string; category: 'service' | 'worker' | 'phase' } }
-  | { kind: 'scope-end'; payload: { status: 'passed' | 'failed' | 'cancelled' | 'skipped' | 'unsupported'; logPath?: string } }
+  | {
+      kind: 'scope-end';
+      payload: {
+        status: 'passed' | 'failed' | 'cancelled' | 'skipped' | 'unsupported';
+        logPath?: string;
+        /**
+         * One line naming the outcome, such as `exit code 1` or `30 of 101 story tests executed`. A scope that ends with a
+         * summary, even an empty one, or with a log is an operation: the reporter always prints its outcome.
+         */
+        summary?: string;
+      };
+    }
   | { kind: 'service-ready'; payload: { message: string } }
   | { kind: 'service-failed'; payload: { failure: ReportFailure } }
   | { kind: 'diagnostic'; payload: { level: 'info' | 'warning' | 'error'; message: string; failure?: ReportFailure } }
@@ -43,9 +71,12 @@ export type EventData =
         status: TestStatus;
         durationMs: number;
         reason?: string;
+        gap?: TestGap;
+        input?: TestInputReport;
         failure?: ReportFailure;
       };
     }
+  | { kind: 'selection'; payload: { excluded: SelectionExclusions; key?: string } }
   | { kind: 'artifact'; payload: { path: string; description: string } }
   | { kind: 'producer-finished'; payload: { status: 'passed' | 'failed' } }
   | { kind: 'run-finished'; payload: { status: TestStatus; resultPath: string } };
@@ -68,13 +99,14 @@ export const reportStatuses: readonly TestStatus[] = ['passed', 'failed', 'skipp
 const payloadFields = {
   'work-selected': ['workId', 'label'],
   'scope-start': ['label', 'category'],
-  'scope-end': ['status', 'logPath'],
+  'scope-end': ['status', 'logPath', 'summary'],
   'service-ready': ['message'],
   'service-failed': ['failure'],
   diagnostic: ['level', 'message', 'failure'],
   output: ['stream', 'text'],
   'test-start': ['testId', 'title', 'attempt'],
-  'test-result': ['testId', 'title', 'attempt', 'status', 'durationMs', 'reason', 'failure'],
+  'test-result': ['testId', 'title', 'attempt', 'status', 'durationMs', 'reason', 'gap', 'input', 'failure'],
+  selection: ['excluded', 'key'],
   artifact: ['path', 'description'],
   'producer-finished': ['status'],
   'run-finished': ['status', 'resultPath'],
@@ -144,6 +176,7 @@ export function validateDesktopEvent(value: unknown): asserts value is DesktopEv
       break;
     case 'scope-end':
       if (payload.logPath !== undefined) requireText(payload.logPath, 'logPath');
+      if (payload.summary !== undefined && typeof payload.summary !== 'string') throw new TypeError('summary must be text.');
       member(payload.status, ['passed', 'failed', 'cancelled', 'skipped', 'unsupported']);
       break;
     case 'producer-finished':
@@ -178,9 +211,25 @@ export function validateDesktopEvent(value: unknown): asserts value is DesktopEv
           throw new TypeError('Non-executed test results require a reason.');
         }
         if (payload.status === 'failed' && !payload.failure) throw new TypeError('Failed test results require their original failure.');
+        if (payload.gap !== undefined) {
+          member(payload.gap, testGaps);
+          if (payload.status !== 'unsupported') throw new TypeError('A declared gap is only valid on an unsupported test result.');
+        }
+        if (payload.input !== undefined) {
+          validateTestInputReport(payload.input);
+          if (payload.input.undeclared?.length && payload.status !== 'failed')
+            throw new TypeError('A test that delivered undeclared input must fail.');
+        }
         if (payload.failure !== undefined) validateFailure(payload.failure);
       }
       break;
+    case 'selection': {
+      const excluded = record(payload.excluded, 'excluded');
+      exactKeys(excluded, selectionExclusionReasons);
+      for (const reason of selectionExclusionReasons) integer(excluded[reason], `excluded.${reason}`, 0);
+      if (payload.key !== undefined) requireText(payload.key, 'selection key');
+      break;
+    }
     case 'artifact':
       requireText(payload.path, 'artifact path');
       requireText(payload.description, 'artifact description');
@@ -246,6 +295,22 @@ function validateFailure(value: unknown): asserts value is ReportFailure {
     }
   };
   checkError(failure.error, 0);
+}
+
+/** Checks the input an attempt reported, in an event or a persisted run, so a malformed one is never shown as evidence. */
+export function validateTestInputReport(value: unknown): asserts value is TestInputReport {
+  const input = record(value, 'input');
+  exactKeys(input, ['receipts', 'undeclared', 'unused']);
+  validateDesktopInputReceipts(input.receipts, 'input.receipts');
+  for (const [field, values] of [
+    ['undeclared', desktopInputMechanisms],
+    ['unused', desktopRequirements],
+  ] as const) {
+    const list = input[field];
+    if (list === undefined) continue;
+    if (!Array.isArray(list) || list.length === 0) throw new TypeError(`input.${field} must be a nonempty array.`);
+    for (const item of list) member(item, values);
+  }
 }
 
 function record(value: unknown, label: string): Record<string, unknown> {

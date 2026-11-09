@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { createServer } from 'node:net';
+import { createServer, Socket } from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -18,61 +18,7 @@ describe('desktop Storybook server integration', () => {
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
     const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
     const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
-    const driverManifest: DesktopStorybookDriverManifest = {
-      application: {
-        leaseNonce: 'integration-nonce',
-        leasePath: path.join(temporaryDirectory, 'application-lease.json'),
-        windowTitle: 'Agentic Components Storybook',
-      },
-      appName: 'AgenticStorybook',
-      bridgeNonce: 'integration-nonce',
-      displayName: 'Agentic Components Storybook',
-      driverPort,
-      endpoint: 'windows',
-      instanceId: 'integration',
-      metroPort: 8081,
-      nativeDriver: {
-        architecture: 'x64',
-        artifactId: 'artifact',
-        artifactRoot: temporaryDirectory,
-        buildFingerprint: 'build',
-        buildId: 'build-id',
-        compatibilityKey: 'compatibility',
-        configuration: 'release',
-        endpoints: ['windows', 'win32'],
-        executablePath: path.join(temporaryDirectory, 'driver.exe'),
-        features: ['probe'],
-        origin: 'cache',
-        provider: 'windows',
-        schemaVersion: 1,
-        signing: { mode: 'none' },
-        sourceDigest: 'source',
-        wireProtocol: { major: 1, minor: 0 },
-      },
-      platformManifestDigest: 'platform-digest',
-      portablePlanDigest: 'portable-digest',
-      renderer: 'fabric',
-      schemaVersion: 2,
-      storyManifest: {
-        endpoint: 'windows',
-        entries: [
-          {
-            id: 'components-button--default',
-            name: 'Default',
-            packageName: '@fluentui-react-native/components',
-            sourcePath: 'src/components/button/button.stories.tsx',
-            tags: ['desktop-e2e'],
-            title: 'Components/Button',
-          },
-        ],
-        platformManifestDigest: 'platform-digest',
-        portablePlanDigest: 'portable-digest',
-        schemaVersion: 1,
-      },
-      storybookPort,
-      targetId: 'integration-windows',
-      testIDPrefix: 'integration-storybook',
-    };
+    const driverManifest = createIntegrationManifest(temporaryDirectory, storybookPort, driverPort);
     fs.writeFileSync(manifestPath, JSON.stringify(driverManifest));
 
     const output: string[] = [];
@@ -85,6 +31,7 @@ describe('desktop Storybook server integration', () => {
     const reporter = new DesktopRunReporter({
       artifactsRoot: temporaryDirectory,
       kind: 'lifecycle',
+      reporterMode: 'plain',
       output: sink,
       errorOutput: sink,
       summary: false,
@@ -106,6 +53,12 @@ describe('desktop Storybook server integration', () => {
     });
 
     try {
+      await expect(child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000)).resolves.toEqual({
+        tier: 'service-ready',
+        service: 'storybook-channel',
+        incarnation: expect.any(String),
+        processId: expect.any(Number),
+      });
       const [indexResponse, driverResponse] = await Promise.all([
         waitForResponse(loopbackUrl(storybookPort, '/index.json')),
         waitForResponse(loopbackUrl(driverPort, '/status')),
@@ -147,13 +100,245 @@ describe('desktop Storybook server integration', () => {
 
     expect(output.join('')).toContain('WebDriver ');
   });
+
+  test.each([
+    ['accessible', { keyboard: false, physicalClick: false, wheel: false }],
+    ['physical', { keyboard: true, physicalClick: true, wheel: true }],
+  ] as const)('starts a driver for the %s input lane with matching physical input features', async (input, expected) => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(
+      manifestPath,
+      JSON.stringify({ ...createIntegrationManifest(temporaryDirectory, storybookPort, driverPort), wdio: { input } }),
+    );
+    const sink = { write: () => true };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      reporterMode: 'plain',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    const child = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+      cwd: projectRoot,
+      env: {
+        STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+        STORYBOOK_DRIVER_MANIFEST: manifestPath,
+        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+        STORYBOOK_PROJECT_ROOT: projectRoot,
+        STORYBOOK_SMOKE_MODE: 'stories-and-tests',
+        STORYBOOK_WS_PORT: String(storybookPort),
+      },
+    });
+
+    try {
+      await waitForResponse(loopbackUrl(driverPort, '/status'));
+      const client = createDesktopDriverClient({ url: loopbackUrl(driverPort, '') });
+      const session = await client.newSession({
+        alwaysMatch: { platformName: 'windows', 'furn:target': 'integration-windows', 'furn:launchMode': 'attach' },
+      });
+      // The accessible lane trusts this report, so the driver itself must show physical input disabled.
+      expect(session.capabilities['furn:features']).toMatchObject(expected);
+      await session.delete();
+    } finally {
+      try {
+        await child.stop();
+        await child.completed;
+        await runner.close();
+        await transport.close();
+        await reporter.finish();
+      } finally {
+        fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      }
+    }
+  });
+
+  test('closes lingering upstream HTTP connections when the legacy channel stops', async () => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(manifestPath, JSON.stringify(createIntegrationManifest(temporaryDirectory, storybookPort, driverPort)));
+    const sink = { write: () => true };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      reporterMode: 'plain',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    const child = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+      cwd: projectRoot,
+      env: {
+        STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+        STORYBOOK_DRIVER_MANIFEST: manifestPath,
+        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+        STORYBOOK_PROJECT_ROOT: projectRoot,
+        STORYBOOK_WS_PORT: String(storybookPort),
+      },
+    });
+    const idle = new Socket();
+    try {
+      await child.waitForReadiness!({ tier: 'service-ready', service: 'storybook-channel' }, 20_000);
+      // An accepted connection that never sends a request stays referenced until the listener closes it.
+      await new Promise<void>((resolve, reject) => {
+        idle.once('error', reject);
+        idle.connect(storybookPort, '127.0.0.1', resolve);
+      });
+      const closed = new Promise<void>((resolve) => idle.once('close', () => resolve()));
+      const started = Date.now();
+      await child.stop();
+      expect(await child.completed).toBe(0);
+      expect(Date.now() - started).toBeLessThan(8_000);
+      await closed;
+    } finally {
+      try {
+        idle.destroy();
+        await child.stop();
+        await runner.close();
+        await transport.close();
+        expect((await reporter.finish()).status).toBe('passed');
+      } finally {
+        fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      }
+    }
+  });
+
+  test('refuses an agent connection from the fake driver', async () => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const readyPath = path.join(temporaryDirectory, 'agent-ready.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(
+      manifestPath,
+      JSON.stringify({
+        ...createIntegrationManifest(temporaryDirectory, storybookPort, driverPort),
+        agent: { descriptor: 'agent.json', readyPath },
+      }),
+    );
+    const output: string[] = [];
+    const sink = {
+      write: (text: string) => {
+        output.push(text);
+        return true;
+      },
+    };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      reporterMode: 'plain',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
+    try {
+      const child = runner.start({
+        command: process.execPath,
+        args: [path.resolve(__dirname, '../../config/server-runner.cjs')],
+        cwd: projectRoot,
+        env: {
+          STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+          STORYBOOK_DRIVER_MANIFEST: manifestPath,
+          STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+          STORYBOOK_PROJECT_ROOT: projectRoot,
+          STORYBOOK_WS_PORT: String(storybookPort),
+        },
+      });
+      expect(await child.completed).not.toBe(0);
+      expect(fs.existsSync(readyPath)).toBe(false);
+      await runner.close();
+      await transport.close();
+      await reporter.finish();
+      expect(output.join('')).toContain('An agent connection requires the native Desktop Driver');
+    } finally {
+      fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+    }
+  });
 });
+
+function createIntegrationManifest(temporaryDirectory: string, storybookPort: number, driverPort: number): DesktopStorybookDriverManifest {
+  return {
+    application: {
+      leaseNonce: 'integration-nonce',
+      leasePath: path.join(temporaryDirectory, 'application-lease.json'),
+      windowTitle: 'Agentic Components Storybook',
+    },
+    appName: 'AgenticStorybook',
+    bridgeNonce: 'integration-nonce',
+    displayName: 'Agentic Components Storybook',
+    driverPort,
+    endpoint: 'windows',
+    instanceId: 'integration',
+    metroPort: 8081,
+    nativeDriver: {
+      architecture: 'x64',
+      artifactId: 'artifact',
+      artifactRoot: temporaryDirectory,
+      buildFingerprint: 'build',
+      buildId: 'build-id',
+      compatibilityKey: 'compatibility',
+      configuration: 'release',
+      endpoints: ['windows', 'win32'],
+      executablePath: path.join(temporaryDirectory, 'driver.exe'),
+      features: ['probe'],
+      origin: 'cache',
+      provider: 'windows',
+      schemaVersion: 1,
+      signing: { mode: 'none' },
+      sourceDigest: 'source',
+      wireProtocol: { major: 1, minor: 0 },
+    },
+    platformManifestDigest: 'platform-digest',
+    portablePlanDigest: 'portable-digest',
+    renderer: 'fabric',
+    schemaVersion: 2,
+    storyManifest: {
+      endpoint: 'windows',
+      entries: [
+        {
+          id: 'components-button--default',
+          name: 'Default',
+          packageName: '@fluentui-react-native/components',
+          sourcePath: 'src/components/button/button.stories.tsx',
+          tags: ['desktop-e2e'],
+          title: 'Components/Button',
+        },
+      ],
+      platformManifestDigest: 'platform-digest',
+      portablePlanDigest: 'portable-digest',
+      schemaVersion: 1,
+    },
+    storybookPort,
+    targetId: 'integration-windows',
+    testIDPrefix: 'integration-storybook',
+  };
+}
 
 describe('PowerShell owned service integration', () => {
   const windowsTest = process.platform === 'win32' ? test : test.skip;
-  windowsTest.each([false, true])(
-    'forwards live grandchild diagnostics and drains services (failure=%s)',
-    async (failService) => {
+  windowsTest.each([
+    { verbose: true, failService: false },
+    { verbose: true, failService: true },
+    { verbose: false, failService: false },
+    { verbose: false, failService: true },
+  ])(
+    'streams grandchild diagnostics live only with verbose, keeps them in the log, and drains services (%j)',
+    async ({ verbose, failService }) => {
       const port = await getAvailablePort();
       const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-powershell-services-'));
       const output: string[] = [];
@@ -166,9 +351,11 @@ describe('PowerShell owned service integration', () => {
       const reporter = new DesktopRunReporter({
         artifactsRoot: temporaryDirectory,
         kind: 'lifecycle',
+        reporterMode: 'plain',
         output: sink,
         errorOutput: sink,
         summary: false,
+        verbose,
       });
       const transport = await startReportTransport(reporter);
       const runner = new NodeDesktopCommandRunner({ reporter, environment: transport.environment });
@@ -208,17 +395,19 @@ describe('PowerShell owned service integration', () => {
         completed = true;
       });
       try {
-        await deadline(
-          (async () => {
-            while (!output.join('').includes('live PowerShell grandchild diagnostic')) {
-              if (completed) throw new Error(output.join(''));
-              await new Promise((resolve) => setTimeout(resolve, 50));
-            }
-          })(),
-          15_000,
-          'PowerShell diagnostic',
-        );
-        expect(completed).toBe(false);
+        if (verbose) {
+          await deadline(
+            (async () => {
+              while (!output.join('').includes('live PowerShell grandchild diagnostic')) {
+                if (completed) throw new Error(output.join(''));
+                await new Promise((resolve) => setTimeout(resolve, 50));
+              }
+            })(),
+            15_000,
+            'PowerShell diagnostic',
+          );
+          expect(completed).toBe(false);
+        }
         expect(await running.completed).toBe(failService ? 1 : 0);
       } finally {
         try {
@@ -227,7 +416,10 @@ describe('PowerShell owned service integration', () => {
           await transport.close();
           const result = await reporter.finish();
           expect(result.status).toBe(failService ? 'failed' : 'passed');
-          if (failService) expect(output.join('')).toContain('original nested service failure');
+          const text = output.join('');
+          if (failService) expect(text).toContain('original nested service failure');
+          // Without verbose the diagnostic stays in the log, so only a failed command shows it.
+          expect(text.includes('live PowerShell grandchild diagnostic')).toBe(verbose || failService);
           const pid: number = JSON.parse(fs.readFileSync(marker, 'utf8'));
           expect(() => process.kill(pid, 0)).toThrow();
         } finally {

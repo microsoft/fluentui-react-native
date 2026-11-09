@@ -1,14 +1,16 @@
 import { createHash } from 'node:crypto';
 
 import { transformSync, type NodePath, type types } from '@babel/core';
+import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
+import type { ResolvedDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 
 import storyTests from '../../config/transform-story-tests.cjs';
 
-const { collectWdioTests, compileWdioTest } = storyTests;
+const { collectWdioTests, compileWdioTest, rejectDirectInput } = storyTests;
 
 export type ExtractedWdioStory = {
   digest: string;
-  tests: readonly { name?: string; code: string }[];
+  tests: readonly { name?: string; code: string; options?: ResolvedDesktopCaseOptions }[];
 };
 
 export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<string, ExtractedWdioStory> {
@@ -24,10 +26,18 @@ export function extractWdioTests(code: string, sourceFile: string): ReadonlyMap<
         visitor: {
           Program(program: NodePath<types.Program>) {
             for (const [exportName, { callbacks, value }] of collectWdioTests(program)) {
-              const compiled = callbacks.map(({ callback, name }) => ({
-                ...(name === undefined ? {} : { name }),
-                code: compileWdioTest(callback, sourceFile, code),
-              }));
+              const compiled = callbacks.map(({ callback, name, options }) => {
+                const compiledCode = compileWdioTest(callback, sourceFile, code);
+                const descriptor = options === undefined ? undefined : validateDesktopCaseOptions(options, `${sourceFile}.wdio`);
+                if (descriptor !== undefined) {
+                  rejectDirectInput(callback, { name, input: descriptor.input, inputSource: descriptor.inputSource, sourceFile });
+                }
+                return {
+                  ...(name === undefined ? {} : { name }),
+                  code: compiledCode,
+                  ...(descriptor === undefined ? {} : { options: descriptor }),
+                };
+              });
               const source = code.slice(value.node.start!, value.node.end!);
               tests.set(exportName, {
                 tests: compiled,

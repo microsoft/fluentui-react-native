@@ -37,7 +37,7 @@ component story -- type-only --> desktop-driver/authoring
 
 storybook-desktop
   |- generates static story manifests and plan digests
-  |- owns the channel/MCP server, Metro, and app lifecycle
+  |- currently owns the channel/MCP server, Metro, and app lifecycle through a transitional CLI takeover
   |- implements StoryOrchestrator
   `- embeds the Desktop Driver listener and registers a native target
 
@@ -63,10 +63,18 @@ its startup hello against the resolved artifact, and exchanges correlated FDR1
 frames. Binary frames carry PNG data; bounded human-readable diagnostics use
 stderr.
 
-A Storybook integration keeps the Storybook HTTP/WebSocket/MCP listener and W3C
-listener on separate loopback ports because they are distinct protocols, but
-runs both listeners in the same supervisor process. Metro remains a separate
-child process.
+A Storybook integration keeps the Storybook HTTP/WebSocket listener and W3C
+listener on separate loopback ports in the same **channel child process**,
+not the top-level CLI supervisor. The channel's MCP endpoint is disabled in
+agent mode. Metro is another child. Process co-location is not package ownership.
+
+The approved direction strengthens `desktop-test` as the application-neutral
+workload host. Storybook contributes domain resources/context; desktop-driver
+remains the native/session authority; desktop-driver-mcp remains a client.
+Future lifecycle/test-run schemas belong to the harness. Keep existing package
+names and the channel child now; do not introduce an empty coordinator package,
+daemon, or arbitrary plugin loader. The current CLI takeover and child service
+composition are transitional, not a finished resource-provider contract.
 
 ## Request lifecycle
 
@@ -92,7 +100,7 @@ child process.
 The service maintains:
 
 - registered target identity and provider policy;
-- one active session reservation per target;
+- one active session reservation per registered target in this service;
 - application ownership (`launched` or `attached`);
 - current window and opaque window IDs;
 - session-generated W3C element UUIDs;
@@ -104,26 +112,33 @@ A retained element becomes stale when its native object disappears or when a
 Storybook preview reset advances its generation. The service does not
 reconstruct a replacement element from an index or path.
 
+Do not conflate the workload claim, owned process/resource record, app ownership,
+service incarnation/grant, session reservation, cross-process input mutex,
+preview generation, and quarantine. They have different lifetimes. Exact
+cross-service application exclusion, durable recovery wiring, and lifecycle
+handoff are still work in progress; see [current status](current-status.md).
+
 ## Module ownership
 
-| Module             | Responsibility                                                    |
-| ------------------ | ----------------------------------------------------------------- |
-| `src/protocol`     | W3C parsing, actions, capabilities, timeouts, and errors          |
-| `src/server`       | HTTP routing, target registry, sessions, windows, and elements    |
-| `src/host`         | Platform-neutral `DesktopHost` and target contracts               |
-| `src/hosts/fake`   | Deterministic in-memory provider                                  |
-| `src/hosts/native` | Long-lived helper process and `DesktopHost` adapter               |
-| `src/native`       | Build, cache, resolution, verification, manifests, and wire types |
-| `native/macos`     | Swift operating-system implementation                             |
-| `native/windows`   | Shared C++ Windows and Win32 implementation                       |
-| `src/client`       | Low-level typed W3C client                                        |
-| `src/wdio`         | Sanctioned WebdriverIO integration and custom commands            |
-| `src/authoring`    | Serializable story plans, selectors, capabilities, and results    |
-| `src/runner`       | Filtering, sharding, execution, and result classification         |
-| `src/artifacts`    | Confined atomic evidence                                          |
-| `src/agent`        | Bounded JSON-safe operations                                      |
-| `src/testing`      | Fake harnesses and Storybook test doubles                         |
-| `src/cli`          | Commander parsing, JSON output, and process exit adaptation       |
+| Module             | Responsibility                                                                   |
+| ------------------ | -------------------------------------------------------------------------------- |
+| `src/protocol`     | W3C parsing, actions, capabilities, timeouts, and errors                         |
+| `src/server`       | HTTP routing, target registry, sessions, windows, and elements                   |
+| `src/host`         | Platform-neutral `DesktopHost` and target contracts                              |
+| `src/hosts/fake`   | Deterministic in-memory provider                                                 |
+| `src/hosts/native` | Long-lived helper process and `DesktopHost` adapter                              |
+| `src/native`       | Build, cache, resolution, verification, manifests, and wire types                |
+| `native/macos`     | Swift operating-system implementation                                            |
+| `native/windows`   | Shared C++ Windows and Win32 implementation                                      |
+| `src/client`       | Low-level typed W3C client                                                       |
+| `src/wdio`         | Sanctioned WebdriverIO integration and custom commands                           |
+| `src/authoring`    | Serializable story plans, selectors, capabilities, results, and case descriptors |
+| `src/runner`       | Filtering, sharding, execution, and result classification                        |
+| `src/artifacts`    | Confined atomic evidence                                                         |
+| `src/agent`        | Bounded JSON-safe operations                                                     |
+| `src/operations`   | Agent operation catalog, executor, references, ledger, and journal               |
+| `src/testing`      | Fake harnesses and Storybook test doubles                                        |
+| `src/cli`          | Commander parsing, JSON output, and process exit adaptation                      |
 
 ## Deliberate boundaries
 
@@ -136,6 +151,9 @@ reconstruct a replacement element from an index or path.
   failure classification.
 - Screenshots are evidence, not a visual-baseline comparison system.
 - The fake host is a protocol and runner test double, not a native fallback.
+- `src/operations` depends only on the `OperationRuntime` it is given and never
+  imports `src/server`; the server supplies one per session in
+  `src/server/sessionOperations.ts`. See [Agent operations](operations.md).
 
 See [Service integration](service.md), [Native helpers](native-helpers.md), and
 [Security](security.md) for the operational contracts behind these boundaries.

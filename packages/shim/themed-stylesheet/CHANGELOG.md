@@ -1,5 +1,19 @@
 # Change Log - @fluentui-react-native/themed-stylesheet
 
+## 1.10.11
+
+### Patch Changes
+
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [06b458f]
+- Updated dependencies [ccb458e]
+- Updated dependencies [06b458f]
+  - @fluentui-react-native/design@0.6.0
+
 ## 1.10.10
 
 ### Patch Changes

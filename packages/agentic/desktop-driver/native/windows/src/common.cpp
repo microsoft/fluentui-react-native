@@ -25,6 +25,27 @@ const std::string& SessionSalt() {
   return salt;
 }
 
+// The system message table has no text for UI Automation's own failures, which
+// would otherwise reach callers as a bare number.
+const char* DescribeUiaHresult(HRESULT result) {
+  switch (static_cast<std::uint32_t>(result)) {
+    case 0x80040200:
+      return "The UI Automation element is not enabled";
+    case 0x80040201:
+      return "The UI Automation element is no longer available";
+    case 0x80040202:
+      return "The UI Automation element has no clickable point";
+    case 0x80040204:
+      return "The UI Automation operation is not supported by the element";
+    case 0x80131505:
+      return "The UI Automation request timed out because the application did not respond";
+    case 0x80131509:
+      return "The UI Automation element is not in a state that allows the operation";
+    default:
+      return nullptr;
+  }
+}
+
 }  // namespace
 
 std::string ToUtf8(std::wstring_view value) {
@@ -53,6 +74,50 @@ std::wstring ToWide(std::string_view value) {
   std::wstring output(static_cast<std::size_t>(length), L'\0');
   MultiByteToWideChar(CP_UTF8, 0, value.data(), static_cast<int>(value.size()), output.data(), length);
   return output;
+}
+
+bool IsStrictUtf8(std::string_view bytes) {
+  std::size_t index = 0;
+  while (index < bytes.size()) {
+    const unsigned char lead = static_cast<unsigned char>(bytes[index]);
+    if (lead < 0x80) {
+      index += 1;
+      continue;
+    }
+    std::size_t continuation = 0;
+    std::uint32_t codepoint = 0;
+    std::uint32_t minimum = 0;
+    if ((lead & 0xE0) == 0xC0) {
+      continuation = 1;
+      codepoint = lead & 0x1F;
+      minimum = 0x80;
+    } else if ((lead & 0xF0) == 0xE0) {
+      continuation = 2;
+      codepoint = lead & 0x0F;
+      minimum = 0x800;
+    } else if ((lead & 0xF8) == 0xF0) {
+      continuation = 3;
+      codepoint = lead & 0x07;
+      minimum = 0x10000;
+    } else {
+      return false;
+    }
+    if (index + continuation >= bytes.size()) {
+      return false;
+    }
+    for (std::size_t offset = 1; offset <= continuation; offset += 1) {
+      const unsigned char next = static_cast<unsigned char>(bytes[index + offset]);
+      if ((next & 0xC0) != 0x80) {
+        return false;
+      }
+      codepoint = (codepoint << 6) | (next & 0x3F);
+    }
+    if (codepoint < minimum || codepoint > 0x10FFFF || (codepoint >= 0xD800 && codepoint <= 0xDFFF)) {
+      return false;
+    }
+    index += continuation + 1;
+  }
+  return true;
 }
 
 std::string TrimAscii(std::string_view value) {
@@ -93,6 +158,11 @@ void Fail(std::string code, std::string message) {
 }
 
 std::string DescribeHresult(HRESULT result) {
+  std::array<char, 32> hex{};
+  std::snprintf(hex.data(), hex.size(), "0x%08X", static_cast<unsigned>(result));
+  if (const char* known = DescribeUiaHresult(result)) {
+    return std::string(known) + " (" + hex.data() + ")";
+  }
   wchar_t* text = nullptr;
   const DWORD length = FormatMessageW(
       FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, nullptr,
@@ -105,9 +175,7 @@ std::string DescribeHresult(HRESULT result) {
   if (text != nullptr) {
     LocalFree(text);
   }
-  std::array<char, 32> code{};
-  std::snprintf(code.data(), code.size(), "0x%08X", static_cast<unsigned>(result));
-  return description.empty() ? std::string(code.data()) : description + " (" + code.data() + ")";
+  return description.empty() ? std::string(hex.data()) : description + " (" + hex.data() + ")";
 }
 
 void FailHresult(std::string code, std::string_view operation, HRESULT result) {

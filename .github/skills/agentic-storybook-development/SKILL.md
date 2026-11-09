@@ -29,3 +29,7 @@ For test configuration, helper provisioning, test runs, smoke reports, or CI
 lanes, use `desktop-testing`. For package source changes, use
 `maintain-desktop-testing`. Component API and assertion work stays with
 `agentic-component-authoring`.
+
+The Storybook desktop CLI supports shared `--reporter` modes; see its
+[command reference](../../../packages/agentic/storybook-desktop/references/commands.md)
+when choosing between a bounded JSON result and streamed NDJSON progress.

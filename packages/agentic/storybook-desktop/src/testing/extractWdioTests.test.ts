@@ -1,5 +1,7 @@
 import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import { createRequire } from 'node:module';
+import os from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import vm from 'node:vm';
@@ -33,6 +35,23 @@ describe('extractWdioTests', () => {
     );
   });
 
+  test('extracts desktopIt calls and their static descriptors without executing the story', () => {
+    const result = extractWdioTests(
+      `
+      import { desktopIt as test } from '@fluentui-react-native/storybook-desktop/testing';
+      export const Example = { wdio: [
+        test('accessible action', { requires: ['click'], platforms: ['!win32'] }, async ({ browser }) => { await browser.$('~button').click(); }),
+        test('default case', async () => {}),
+      ] };
+      `,
+      sourceFile,
+    ).get('Example')!;
+    expect(result.tests.map(({ name, options }) => ({ name, input: options?.input, requires: options?.requires }))).toEqual([
+      { name: 'accessible action', input: 'both', requires: ['click'] },
+      { name: 'default case', input: 'both', requires: undefined },
+    ]);
+  });
+
   test.each([
     ['{}', /at least one/],
     ["{ '': () => {} }", /non-empty/],
@@ -44,6 +63,20 @@ describe('extractWdioTests', () => {
     ['{ named: { nested: () => {} } }', /inline/],
   ])('rejects invalid named collections %s', (value, message) => {
     expect(() => extractWdioTests(`export const Example = { wdio: ${value} };`, sourceFile)).toThrow(message);
+  });
+
+  test.each([
+    [`export const Example = { wdio: [desktopIt('case', () => {})] };`, /imported from/],
+    [
+      `import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing'; export const Example = { wdio: [desktopIt('case', { input: mode }, () => {})] };`,
+      /strict JSON literal/,
+    ],
+    [
+      `import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing'; const name = 'case'; export const Example = { wdio: [desktopIt(name, () => {})] };`,
+      /literal test name/,
+    ],
+  ])('rejects non-static desktopIt descriptors', (source, message) => {
+    expect(() => extractWdioTests(source, sourceFile)).toThrow(message);
   });
 
   test('extracts a standalone typed callback without loading the native story module', async () => {
@@ -253,5 +286,211 @@ describe('extractWdioTests', () => {
     expect(digest(source.replace('count: 1', 'count: 2'))).toBe(digest(source));
     expect(digest(source.replace("'test'", "'changed'"))).not.toBe(digest(source));
     expect(digest(source.replace('console.log', '/* source change */ console.log'))).not.toBe(digest(source));
+  });
+
+  describe('direct physical input', () => {
+    const desktopCase = (body: string, options?: string) =>
+      `import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+      export const Example = { wdio: [desktopIt('case', ${options === undefined ? '' : `${options}, `}async (context) => { const { browser } = context; ${body} })] };`;
+    const key = `{ type: 'key', id: 'keyboard', actions: [{ type: 'keyDown', value: 'a' }] }`;
+    const pointer = `{ type: 'pointer', id: 'mouse', actions: [{ type: 'pointerMove', x: 1, y: 1 }] }`;
+    const wheel = `{ type: 'wheel', id: 'wheel', actions: [{ type: 'scroll', deltaY: 10 }] }`;
+    const pause = `{ type: 'none', id: 'pause', actions: [{ type: 'pause', duration: 100 }] }`;
+
+    test.each([
+      ['browser.keys', `await browser.keys('a');`, /browser\.keys sends physical keyboard input.*requires: \['keyboard'\]/],
+      ['an optional browser.keys', `await browser?.keys('a');`, /browser\.keys sends physical keyboard input/],
+      ['a computed browser.keys', `await browser['keys']('a');`, /browser\.keys sends physical keyboard input/],
+      ['a keys call through the context', `await context.browser.keys('a');`, /browser\.keys sends physical keyboard input/],
+      ['setValue', `await (await browser.$('~input')).setValue('a');`, /setValue sends physical keyboard input/],
+      ['addValue', `await (await browser.$('~input')).addValue('a');`, /addValue sends physical keyboard input/],
+      ['clearValue', `await (await browser.$('~input')).clearValue();`, /clearValue sends physical keyboard input/],
+      ['key actions', `await browser.performActions([${key}]);`, /performActions sends physical keyboard input/],
+      ['pointer actions', `await browser.performActions([${pointer}]);`, /sends physical pointer input.*requires: \['physical-click'\]/],
+      ['wheel actions', `await browser.performActions([${wheel}]);`, /sends physical wheel input.*requires: \['wheel'\]/],
+      [
+        'actions with several physical sources',
+        `await browser.performActions([${wheel}, ${pause}, ${key}]);`,
+        /sends physical keyboard and wheel input.*requires: \['keyboard', 'wheel'\]/,
+      ],
+      [
+        'actions held in a constant',
+        `const actions = [${pointer}]; await browser.performActions(actions);`,
+        /sends physical pointer input/,
+      ],
+      ['an action builder', `await browser.action('key').down('a').perform();`, /browser\.action sends physical keyboard input/],
+      [
+        'a call inside a nested function',
+        `await browser.waitUntil(async () => { await browser.keys('a'); return true; });`,
+        /browser\.keys sends physical keyboard input/,
+      ],
+      [
+        'actions built elsewhere',
+        `const buildActions = () => []; await browser.performActions(buildActions());`,
+        /performActions with an argument this check cannot read/,
+      ],
+      ['actions held in a variable that changes', `let actions = []; actions = [1]; await browser.performActions(actions);`, /cannot read/],
+      ['actions with a spread source', `const sources = []; await browser.performActions([...sources]);`, /cannot read/],
+      [
+        'actions with a source that has a spread',
+        `const source = {}; await browser.performActions([{ ...source, id: 'a' }]);`,
+        /cannot read/,
+      ],
+      ['actions without an argument', `await browser.performActions();`, /cannot read/],
+      [
+        'an action builder with a variable type',
+        `await browser.action(context.type).perform();`,
+        /browser\.action with an argument this check cannot read/,
+      ],
+    ])('rejects %s in a case that also runs in the accessible lane', (_name, body, message) => {
+      expect(() => extractWdioTests(desktopCase(body), sourceFile)).toThrow(message);
+    });
+
+    test.each([
+      ['an explicit both', `{ input: 'both' }`],
+      ['an explicit accessible case', `{ input: 'accessible' }`],
+      ['an accessibility click', `{ requires: ['accessibility-click'] }`],
+      ['neutral requirements', `{ requires: ['click', 'focus'] }`],
+    ])('rejects the keyboard in %s with the case name and source location', (_name, options) => {
+      let error: Error | undefined;
+      try {
+        extractWdioTests(desktopCase(`await browser.keys('a');`, options), sourceFile);
+      } catch (caught) {
+        error = caught as Error;
+      }
+      expect(error?.message).toContain('"case" runs in the accessible input lane');
+      expect(error?.message).toContain(sourceFile);
+    });
+
+    test('suggests the declaration that matches how the case chose its input', () => {
+      expect(() => extractWdioTests(desktopCase(`await browser.keys('a');`, `{ input: 'both' }`), sourceFile)).toThrow(
+        /Declare input: 'physical'/,
+      );
+      expect(() => extractWdioTests(desktopCase(`await browser.keys('a');`), sourceFile)).toThrow(/Declare requires: \['keyboard'\]/);
+    });
+
+    test.each([
+      ['derives physical from keyboard', `{ requires: ['keyboard'] }`],
+      ['derives physical from a physical click', `{ requires: ['physical-click', 'wheel'] }`],
+      ['declares physical', `{ input: 'physical' }`],
+    ])('allows direct input in a case that %s', (_name, options) => {
+      const body = `await browser.keys('a'); await (await browser.$('~input')).setValue('a'); await browser.performActions([${key}, ${pointer}, ${wheel}]);`;
+      expect(() => extractWdioTests(desktopCase(body, options), sourceFile)).not.toThrow();
+    });
+
+    test('allows calls that do not send physical input', () => {
+      const body = `
+        const names = Object.keys({ a: 1 });
+        const map = new Map([[1, 2]]);
+        for (const entry of map.keys()) names.push(String(entry));
+        await browser.performActions([${pause}]);
+        await browser.performActions([]);
+        const store = { setValueLater: () => {} };
+        store.setValueLater();
+        await (await browser.$('~button')).click();
+      `;
+      expect(() => extractWdioTests(desktopCase(body), sourceFile)).not.toThrow();
+    });
+
+    describe('through relative helpers', () => {
+      let root: string;
+      let story: string;
+
+      beforeAll(() => {
+        root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-wdio-helpers-'));
+        story = path.join(root, 'components', 'example.stories.tsx');
+        fs.mkdirSync(path.join(root, 'common'));
+        fs.mkdirSync(path.join(root, 'components'));
+        fs.writeFileSync(
+          path.join(root, 'common', 'focus.wdio.ts'),
+          `import type { Browser } from 'webdriverio';
+          export async function expectFocused(browser: Browser, id: string): Promise<void> { await browser.$(id); }
+          export async function focusByTab(browser: Browser, id: string): Promise<void> {
+            await expectFocused(browser, id);
+            await browser.keys('\\uE004');
+          }
+          export async function tabTwice(browser: Browser): Promise<void> { await focusByTab(browser, 'a'); }
+          export async function perform(browser: Browser, actions: never[]): Promise<void> { await browser.performActions(actions); }
+          export const clickPhysical = async (browser: Browser) => {
+            await browser.performActions([${pointer}]);
+          };
+          async function loop(browser: Browser): Promise<void> { await again(browser); }
+          async function again(browser: Browser): Promise<void> { await loop(browser); }
+          export { loop as cycle };
+          export const label = 'not a function';`,
+        );
+        fs.writeFileSync(
+          path.join(root, 'components', 'menu.wdio.ts'),
+          `export async function openFromKeyboard(context: { browser: unknown }): Promise<void> {
+            const { focusByTab } = await import('../common/focus.wdio.ts');
+            await focusByTab(context.browser as never, 'entry');
+          }
+          export { expectFocused } from '../common/focus.wdio.ts';`,
+        );
+      });
+
+      afterAll(() => fs.rmSync(root, { recursive: true, force: true }));
+
+      test.each([
+        [
+          'a destructured helper',
+          `const { focusByTab } = await import('../common/focus.wdio.ts'); await focusByTab(browser, 'entry');`,
+          /helper focusByTab sends physical keyboard input with browser\.keys.*requires: \['keyboard'\]/,
+        ],
+        [
+          'a helper called on the awaited module',
+          `await (await import('../common/focus.wdio.ts')).clickPhysical(browser);`,
+          /helper clickPhysical sends physical pointer input with performActions.*requires: \['physical-click'\]/,
+        ],
+        [
+          'a helper called on a module binding',
+          `const focus = await import('../common/focus.wdio.ts'); await focus.focusByTab(browser, 'entry');`,
+          /helper focusByTab sends physical keyboard input/,
+        ],
+        [
+          'a helper that calls another helper in its module',
+          `const { tabTwice } = await import('../common/focus.wdio.ts'); await tabTwice(browser);`,
+          /helper tabTwice > focusByTab sends physical keyboard input/,
+        ],
+        [
+          'a helper whose actions it cannot read',
+          `const { perform } = await import('../common/focus.wdio.ts'); await perform(browser, []);`,
+          /helper perform calls performActions with an argument this check cannot read/,
+        ],
+        [
+          'a helper that imports another helper',
+          `const { openFromKeyboard } = await import('./menu.wdio.ts'); await openFromKeyboard(context);`,
+          /helper openFromKeyboard > focusByTab sends physical keyboard input with browser\.keys/,
+        ],
+      ])('rejects %s that sends physical input', (_name, body, message) => {
+        expect(() => extractWdioTests(desktopCase(body), story)).toThrow(message);
+      });
+
+      test.each([
+        [
+          'a helper that sends no input',
+          `const { expectFocused } = await import('../common/focus.wdio.ts'); await expectFocused(browser, 'a');`,
+        ],
+        ['helpers that call each other in a cycle', `const { cycle } = await import('../common/focus.wdio.ts'); await cycle(browser);`],
+        [
+          'a re-exported helper, which the check does not follow',
+          `const { expectFocused } = await import('./menu.wdio.ts'); await expectFocused(browser, 'a');`,
+        ],
+        ['a package helper', `const { join } = await import('node:path'); join('a');`],
+      ])('allows %s', (_name, body) => {
+        expect(() => extractWdioTests(desktopCase(body), story)).not.toThrow();
+      });
+
+      test('allows a helper that sends input in a case that declares it', () => {
+        const body = `const { focusByTab } = await import('../common/focus.wdio.ts'); await focusByTab(browser, 'entry');`;
+        expect(() => extractWdioTests(desktopCase(body, `{ requires: ['keyboard'] }`), story)).not.toThrow();
+      });
+    });
+
+    test('does not read legacy callbacks, which declare no input', () => {
+      expect(() =>
+        extractWdioTests(`export const Example = { wdio: { legacy: async ({ browser }) => { await browser.keys('a'); } } };`, sourceFile),
+      ).not.toThrow();
+    });
   });
 });
