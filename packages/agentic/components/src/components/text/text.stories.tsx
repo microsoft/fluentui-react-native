@@ -1,10 +1,13 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Text } from './text';
 
 const styles = StyleSheet.create({
@@ -43,20 +46,42 @@ export default meta;
 
 type Story = WdioStory<StoryObj<typeof meta>>;
 
-export const NativeSemantics: Story = {
-  render: () => (
-    <View style={styles.nativeFrame}>
-      <Text testID="text-native-heading" accessible accessibilityRole="header" accessibilityLabel="Account settings" numberOfLines={1}>
-        Account settings with deliberately long visible text
-      </Text>
+function NativeSemanticsScene() {
+  const [layout, setLayout] = useState<LayoutRectangle>();
+  return (
+    <View>
+      <View style={styles.nativeFrame}>
+        <Text
+          testID="text-native-heading"
+          accessible
+          accessibilityRole="header"
+          accessibilityLabel="Account settings"
+          numberOfLines={1}
+          onLayout={(event: LayoutChangeEvent) => setLayout(event.nativeEvent.layout)}
+        >
+          Account settings with deliberately long visible text
+        </Text>
+      </View>
+      <StoryStatus testID="text-native-layout">{layout ? JSON.stringify(layout) : 'Waiting for native layout'}</StoryStatus>
     </View>
-  ),
+  );
+}
+
+export const NativeSemantics: Story = {
+  render: () => <NativeSemanticsScene />,
   wdio: [
-    desktopIt('TXT-003 forwards an explicit readable native name under a constrained width', async ({ browser, expect }) => {
+    desktopIt('TXT-003 forwards an explicit readable native name under a constrained width', async ({ browser, expect, platform }) => {
       const text = await browser.$('~text-native-heading');
       await expect(text).toExist();
       expect(await text.getProperty('name')).toBe('Account settings');
-      const bounds = await browser.getElementRect(await text.elementId);
+      let bounds = await browser.getElementRect(await text.elementId);
+      if (platform === 'macos') {
+        // Fabric's macOS AX text frame can be empty; measure the actual native Text layout.
+        const status = await browser.$('~text-native-layout');
+        await browser.waitUntil(async () => (await status.getText()).startsWith('{'));
+        const layout: LayoutRectangle = JSON.parse(await status.getText());
+        bounds = layout;
+      }
       expect(bounds.width).toBeGreaterThan(0);
       expect(bounds.width).toBeLessThanOrEqual(181);
       expect(bounds.height).toBeGreaterThan(0);

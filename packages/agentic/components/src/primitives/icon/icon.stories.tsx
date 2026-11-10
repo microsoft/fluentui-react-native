@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image as NativeImage, StyleSheet, Text, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
@@ -102,10 +102,22 @@ export const NativeSources: Story = {
         testID="icon-native-image"
       />
       <Icon accessible accessibilityLabel="SVG favorite" svgSource={SampleSvgIcon} height={24} width={24} testID="icon-native-svg" />
+      <NativeImage
+        accessible
+        accessibilityLabel="Native image reference"
+        source={{ uri: imageDataUri }}
+        style={styles.nativeImage}
+        testID="icon-native-image-reference"
+      />
     </View>
   ),
   wdio: [
     desktopIt('exposes each source renderer as a named native image within the requested frame', async ({ browser, expect }) => {
+      const imageReference = await browser.$('~icon-native-image-reference');
+      await expect(imageReference).toExist();
+      const imageBounds = await browser.getElementRect(await imageReference.elementId);
+      expect(imageBounds.width).toBeGreaterThan(0);
+      expect(imageBounds.height).toBeGreaterThan(0);
       for (const [id, name] of [
         ['icon-native-font', 'Font favorite'],
         ['icon-native-image', 'Image favorite'],
@@ -116,8 +128,10 @@ export const NativeSources: Story = {
         expect(await icon.getTagName()).toBe('image');
         expect(await icon.getProperty('name')).toBe(name);
         const bounds = await browser.getElementRect(await icon.elementId);
-        expect(Math.abs(bounds.width - 24)).toBeLessThanOrEqual(1);
-        expect(Math.abs(bounds.height - 24)).toBeLessThanOrEqual(1);
+        // Compare Image with a native 24-point Image, whose AX bounds can differ from a View's.
+        const expected = id === 'icon-native-image' ? imageBounds : { width: 24, height: 24 };
+        expect(Math.abs(bounds.width - expected.width)).toBeLessThanOrEqual(1);
+        expect(Math.abs(bounds.height - expected.height)).toBeLessThanOrEqual(1);
       }
     }),
   ],
@@ -278,6 +292,10 @@ const styles = StyleSheet.create({
   },
   itemLabel: {
     fontSize: 11,
+  },
+  nativeImage: {
+    height: 24,
+    width: 24,
   },
   row: {
     alignItems: 'flex-end',

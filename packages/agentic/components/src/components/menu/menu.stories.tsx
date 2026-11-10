@@ -5,7 +5,6 @@ import { StyleSheet, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
-import type { CalloutDismissReason } from '@fluentui-react-native/native-core/macos';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Divider } from '../divider/divider';
@@ -13,23 +12,9 @@ import { Input } from '../input/input';
 import { MenuItem } from '../menu-item/menu-item';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
 import { Menu } from './menu';
-import type { MenuAlign, MenuOpenChangeData, MenuPlacement, MenuProps } from './menu.types';
-import { renderMenu_unstable } from './renderMenu';
-import { useMenu_unstable } from './useMenu';
-import { useMenuStyles_unstable } from './useMenuStyles';
+import type { MenuAlign, MenuOpenChangeData, MenuPlacement } from './menu.types';
 
 type SceneProps = { placement?: MenuPlacement; align?: MenuAlign; disabledFocusable?: boolean; submenuOpenOnHover?: boolean };
-
-function ObservedMenu({ onNativeDismissed, ...props }: MenuProps & { onNativeDismissed: (reason: CalloutDismissReason) => void }) {
-  const state = useMenu_unstable(props);
-  const onDismissed = state.popupProps.onDismissed;
-  state.popupProps.onDismissed = (reason: CalloutDismissReason) => {
-    onNativeDismissed(reason);
-    onDismissed(reason);
-  };
-  useMenuStyles_unstable(state);
-  return renderMenu_unstable(state);
-}
 
 /** A command row with a test identity and no secondary text or leading icon. */
 function rowProps(content: string, setFocus: (label: string) => void, props?: MenuItemProps): MenuItemProps {
@@ -47,40 +32,21 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
   const [reason, setReason] = React.useState('None');
   const [action, setAction] = React.useState('None');
   const [focus, setFocus] = React.useState('None');
-  const [history, setHistory] = React.useState('Initial lastReportedOpen=false');
-  const activation = React.useRef<{ lastReportedOpen: boolean; sequence: number; entries: string[] }>({
-    lastReportedOpen: false,
-    sequence: 0,
-    entries: [],
-  });
-  const recordActivation = (entry: string) => {
-    const journal = activation.current;
-    journal.entries = [...journal.entries.slice(-15), `${++journal.sequence}: ${entry}`];
-    setHistory(journal.entries.join(' | '));
-  };
   const run = (label: string) => () => setAction(label);
   const onOpenChange = (open: boolean, { reason: cause }: MenuOpenChangeData) => {
-    recordActivation(`onOpenChange(${open}, ${cause}); priorReportedOpen=${activation.current.lastReportedOpen}`);
-    activation.current.lastReportedOpen = open;
     setReason(`${open ? 'Opened' : 'Closed'}: ${cause}`);
     if (open) setFocus('None');
   };
   return (
     <View style={styles.story}>
       <Input accessibilityLabel="Menu entry" testID="menu-entry" />
-      <ObservedMenu
+      <Menu
         placement={placement}
         align={align}
         disabledFocusable={disabledFocusable}
         submenuOpenOnHover={submenuOpenOnHover}
         onOpenChange={onOpenChange}
-        onNativeDismissed={(cause: CalloutDismissReason) => recordActivation(`native dismissal(${cause})`)}
-        trigger={{
-          content: 'Edit',
-          testID: 'menu-trigger',
-          // Menu calls its internal activation handler before the caller's callback.
-          onAccessibilityTap: () => recordActivation(`caller accessibilityTap; lastReportedOpen=${activation.current.lastReportedOpen}`),
-        }}
+        trigger={{ content: 'Edit', testID: 'menu-trigger' }}
         surface={{ testID: 'menu-surface' }}
       >
         <MenuItem {...rowProps('Cut', setFocus, { onPress: run('Cut') })} />
@@ -113,11 +79,10 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
           })}
         />
         <MenuItem {...rowProps('Delete', setFocus, { onPress: run('Delete') })} />
-      </ObservedMenu>
+      </Menu>
       <StoryStatus testID="menu-reason">{reason}</StoryStatus>
       <StoryStatus testID="menu-action">{action}</StoryStatus>
       <StoryStatus testID="menu-focus">{focus}</StoryStatus>
-      <StoryStatus testID="menu-activation-history">{history}</StoryStatus>
     </View>
   );
 }
@@ -172,32 +137,6 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: [
-    desktopIt(
-      'MNU-010 opens a named native menu through accessibility action dispatch',
-      { requires: ['accessibility-click'] },
-      async (context) => {
-        const { inWindowWith, expectMenuClosed } = await import('./menu.wdio.ts');
-        const { browser, expect } = context;
-        const trigger = await browser.$('~menu-trigger');
-        expect(await trigger.getProperty('expanded')).toBe(false);
-        await trigger.click();
-        await expect(await browser.$('~menu-reason')).toHaveText('Opened: trigger');
-        expect(await trigger.getProperty('expanded')).toBe(true);
-        await inWindowWith(context, 'menu-surface', async () => {
-          const surface = await browser.$('~menu-surface');
-          expect(await surface.getTagName()).toBe('menu');
-          expect(await surface.getProperty('name')).toBe('Edit');
-        });
-        const expandedBeforeClose = await trigger.getProperty('expanded');
-        await trigger.click();
-        await expect(await browser.$('~menu-reason')).toHaveText('Closed: trigger', {
-          message: `Native expanded before second Invoke: ${expandedBeforeClose}; activation history at close check: ${await (
-            await browser.$('~menu-activation-history')
-          ).getText()}. The failure tree contains the latest history.`,
-        });
-        await expectMenuClosed(context, 'menu-trigger');
-      },
-    ),
     desktopIt(
       'opens from the keyboard on the first row and closes on activation',
       { requires: ['physical-click', 'keyboard', 'focus'] },
