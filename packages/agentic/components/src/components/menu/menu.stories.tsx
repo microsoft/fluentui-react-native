@@ -32,8 +32,21 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
   const [reason, setReason] = React.useState('None');
   const [action, setAction] = React.useState('None');
   const [focus, setFocus] = React.useState('None');
+  const [history, setHistory] = React.useState('Initial lastReportedOpen=false');
+  const activation = React.useRef<{ lastReportedOpen: boolean; sequence: number; entries: string[] }>({
+    lastReportedOpen: false,
+    sequence: 0,
+    entries: [],
+  });
+  const recordActivation = (entry: string) => {
+    const journal = activation.current;
+    journal.entries = [...journal.entries.slice(-15), `${++journal.sequence}: ${entry}`];
+    setHistory(journal.entries.join(' | '));
+  };
   const run = (label: string) => () => setAction(label);
   const onOpenChange = (open: boolean, { reason: cause }: MenuOpenChangeData) => {
+    recordActivation(`onOpenChange(${open}, ${cause}); priorReportedOpen=${activation.current.lastReportedOpen}`);
+    activation.current.lastReportedOpen = open;
     setReason(`${open ? 'Opened' : 'Closed'}: ${cause}`);
     if (open) setFocus('None');
   };
@@ -46,7 +59,12 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
         disabledFocusable={disabledFocusable}
         submenuOpenOnHover={submenuOpenOnHover}
         onOpenChange={onOpenChange}
-        trigger={{ content: 'Edit', testID: 'menu-trigger' }}
+        trigger={{
+          content: 'Edit',
+          testID: 'menu-trigger',
+          // Menu calls its internal activation handler before the caller's callback.
+          onAccessibilityTap: () => recordActivation(`caller accessibilityTap; lastReportedOpen=${activation.current.lastReportedOpen}`),
+        }}
         surface={{ testID: 'menu-surface' }}
       >
         <MenuItem {...rowProps('Cut', setFocus, { onPress: run('Cut') })} />
@@ -83,6 +101,7 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
       <StoryStatus testID="menu-reason">{reason}</StoryStatus>
       <StoryStatus testID="menu-action">{action}</StoryStatus>
       <StoryStatus testID="menu-focus">{focus}</StoryStatus>
+      <StoryStatus testID="menu-activation-history">{history}</StoryStatus>
     </View>
   );
 }
@@ -153,8 +172,13 @@ export const Default: Story = {
           expect(await surface.getTagName()).toBe('menu');
           expect(await surface.getProperty('name')).toBe('Edit');
         });
+        const expandedBeforeClose = await trigger.getProperty('expanded');
         await trigger.click();
-        await expect(await browser.$('~menu-reason')).toHaveText('Closed: trigger');
+        await expect(await browser.$('~menu-reason')).toHaveText('Closed: trigger', {
+          message: `Native expanded before second Invoke: ${expandedBeforeClose}; activation history at close check: ${await (
+            await browser.$('~menu-activation-history')
+          ).getText()}. The failure tree contains the latest history.`,
+        });
         await expectMenuClosed(context, 'menu-trigger');
       },
     ),

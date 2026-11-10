@@ -104,10 +104,10 @@ function ActivationProbe() {
   const [presses, setPresses] = useState(0);
   return (
     <View style={styles.story}>
-      <TextInput accessibilityLabel="Tag keyboard entry" testID="tag-keyboard-entry" />
+      <TextInput accessibilityLabel="Tag keyboard entry" style={styles.keyboardInput} testID="tag-keyboard-entry" />
       <Tag content="Engineering" onPress={() => setPresses((count) => count + 1)} testID="tag-keyboard-target" />
       <Tag content="Locked filter" disabled onPress={() => setPresses((count) => count + 100)} testID="tag-keyboard-disabled" />
-      <TextInput accessibilityLabel="Tag keyboard exit" testID="tag-keyboard-exit" />
+      <TextInput accessibilityLabel="Tag keyboard exit" style={styles.keyboardInput} testID="tag-keyboard-exit" />
       <StoryStatus testID="tag-keyboard-count">{`Presses: ${presses}`}</StoryStatus>
     </View>
   );
@@ -118,7 +118,8 @@ export const NativeActivation: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The caller records whole-tag activation without removing it; native keyboard navigation skips the disabled tag.',
+        story:
+          'The caller records whole-tag activation without removing it; native keyboard navigation skips the disabled tag. Sized entry and exit editors provide physical focus targets.',
       },
     },
   },
@@ -128,6 +129,13 @@ export const NativeActivation: Story = {
       { requires: ['physical-click', 'keyboard', 'focus'] },
       async ({ browser, expect }) => {
         const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        for (const testId of ['tag-keyboard-entry', 'tag-keyboard-exit']) {
+          const input = await browser.$(`~${testId}`);
+          await expect(input).toBeDisplayed();
+          const rect = await browser.getElementRect(await input.elementId);
+          expect(rect.width).toBeGreaterThan(0);
+          expect(rect.height).toBeGreaterThan(0);
+        }
         await focusByTab(browser, 'tag-keyboard-entry', 'tag-keyboard-target');
         const count = await browser.$('~tag-keyboard-count');
         await browser.keys('\uE007');
@@ -323,6 +331,10 @@ const styles = StyleSheet.create({
   group: {
     alignItems: 'flex-start',
     gap: 8,
+  },
+  keyboardInput: {
+    height: 40,
+    width: 240,
   },
   label: {
     fontSize: 12,
