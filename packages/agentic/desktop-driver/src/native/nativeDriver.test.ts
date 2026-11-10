@@ -415,7 +415,7 @@ describe('native driver build and resolution', () => {
         await expect(NativeHostProcess.start({ artifact: { ...resolved, buildId: 'mismatched-build' } })).rejects.toMatchObject({
           code: 'handshake-failed',
         });
-        await expectMalformedJsonRecovery(resolved.executablePath);
+        await expectMalformedJsonFailsTransport(resolved.executablePath);
 
         const helper = await NativeHostProcess.start({ artifact: resolved });
         await expect(helper.request('probe', { padding: 'x'.repeat(8 * 1024 * 1024) })).rejects.toThrow('exceeds');
@@ -482,29 +482,28 @@ describe('native driver build and resolution', () => {
     }
   });
 
-  async function expectMalformedJsonRecovery(executablePath: string): Promise<void> {
+  // PROTOCOL.md: invalid JSON fails the transport, because the frame may have
+  // carried a request or cancel the helper cannot correlate.
+  async function expectMalformedJsonFailsTransport(executablePath: string): Promise<void> {
     const child = spawn(executablePath, ['--stdio'], {
       stdio: ['pipe', 'pipe', 'pipe'],
       windowsHide: true,
     });
-    const closed = new Promise<void>((resolve) => child.once('close', () => resolve()));
+    const closed = new Promise<number | null>((resolve) => child.once('close', (code) => resolve(code)));
     const decoder = new NativeFrameDecoder();
+    const responses: string[] = [];
+    decoder.on('json', (message: NativeHostJsonMessage) => {
+      if (message.type === 'response' && typeof message.id === 'string') {
+        responses.push(message.id);
+      }
+    });
     child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
     child.stderr.resume();
+    // The helper may exit before it reads the frames written after the malformed one.
+    child.stdin.on('error', () => undefined);
     try {
       await waitForMessage(decoder, (message) => message.type === 'hello');
       child.stdin.write(encodeMalformedJsonFrame());
-      child.stdin.write(
-        encodeJsonFrame({
-          command: 'probe',
-          id: 'x'.repeat(1024),
-          params: { endpoint: 'windows' },
-          type: 'request',
-        }),
-      );
-      child.stdin.write(encodeJsonFrame({ id: 'x'.repeat(1024), type: 'cancel' }));
-
-      const probe = waitForMessage(decoder, (message) => message.type === 'response' && message.id === 'probe-after-malformed');
       child.stdin.write(
         encodeJsonFrame({
           command: 'probe',
@@ -513,25 +512,12 @@ describe('native driver build and resolution', () => {
           type: 'request',
         }),
       );
-      await expect(probe).resolves.toMatchObject({
-        result: {
-          endpoint: 'windows',
-          platformName: 'windows',
-          protocolVersion: 1,
-        },
-      });
-
-      const disposed = waitForMessage(decoder, (message) => message.type === 'response' && message.id === 'dispose-after-malformed');
-      child.stdin.write(
-        encodeJsonFrame({
-          command: 'dispose',
-          id: 'dispose-after-malformed',
-          params: {},
-          type: 'request',
-        }),
-      );
-      await disposed;
-      await closed;
+      const exit = await Promise.race([
+        closed,
+        new Promise<'still-running'>((resolve) => setTimeout(() => resolve('still-running'), 10_000).unref()),
+      ]);
+      expect(exit).toBe(1);
+      expect(responses).not.toContain('probe-after-malformed');
     } finally {
       if (child.exitCode === null && child.signalCode === null) {
         child.kill();
