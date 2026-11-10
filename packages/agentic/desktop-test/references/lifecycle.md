@@ -88,9 +88,12 @@ The versioned workload record stores a random owner ID, process ID and recorded
 start timestamp, run ID, registered target ID, physical target instance ID, and each
 resource's identity, generation, ownership, readiness, and disposal state.
 Unresolved effects fence the claim. Claim inspection distinguishes a live owner,
-an exited owner, an unknown probe, and a reused PID, which is a live process whose
-start time differs from the recorded one by a second or more; inspection never reclaims a
-claim, and uncertain or unsettled resources prevent release. Reporting-session
+an exited owner, an unknown probe, and a reused PID; inspection never reclaims a
+claim, and uncertain or unsettled resources prevent release. The recorded start
+timestamp comes from the Node.js clock, not from the operating system, and
+inspection compares it exactly, so a probe that reports the operating-system start
+time classifies a live owner as a reused PID. Treat `pid-reused` as unproven until
+the claim records a helper-described start time. Reporting-session
 inheritance is separate from explicit workload-claim delegation.
 
 Both native service paths use the real `driverService.ts` composition root

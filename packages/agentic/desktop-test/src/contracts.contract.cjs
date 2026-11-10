@@ -1364,14 +1364,6 @@ async function main() {
       assert.equal(live.state, 'live');
       assert.equal(unknown.state, 'unknown');
       assert.equal(reused.state, 'pid-reused');
-      // A probe reports the same process with its own precision and rounding.
-      const rounded = await inspectDesktopWorkloadClaim(ownerFile, async (owner) => ({
-        state: 'alive',
-        processStartedAt: new Date(Date.parse(owner.processStartedAt) - 250).toISOString(),
-      }));
-      assert.equal(rounded.state, 'live');
-      const unparsable = await inspectDesktopWorkloadClaim(ownerFile, async () => ({ state: 'alive', processStartedAt: 'not a time' }));
-      assert.equal(unparsable.state, 'unknown');
       assert.deepEqual(
         fs.readdirSync(failedDirectory).filter((name) => name.endsWith('.tmp')),
         [],

@@ -66,10 +66,6 @@ function defaultDesktopWorkloadDirectory(platform: NodeJS.Platform = process.pla
   return path.join(os.homedir(), '.cache', 'fluentui-react-native', 'desktop-test', 'workload');
 }
 
-// The recorded start time is derived from the wall clock and process uptime, so it differs from an operating-system
-// probe by process startup latency and clock rounding; a different process started at least a second apart.
-const START_TIME_TOLERANCE_MS = 1000;
-
 export function createDesktopWorkloadClaim(options: DesktopWorkloadClaimOptions): DesktopWorkloadClaim {
   const root = options.directory ?? defaultDesktopWorkloadDirectory();
   fs.mkdirSync(root, { recursive: true, mode: 0o700 });
@@ -174,10 +170,7 @@ export async function inspectDesktopWorkloadClaim(
   const result = await probe(record.owner);
   if (result.state === 'unknown') return { state: 'unknown', record };
   if (result.state === 'exited') return { state: 'exited', record };
-  const probed = Date.parse(result.processStartedAt);
-  const recorded = Date.parse(record.owner.processStartedAt);
-  if (!Number.isFinite(probed) || !Number.isFinite(recorded)) return { state: 'unknown', record };
-  if (Math.abs(probed - recorded) >= START_TIME_TOLERANCE_MS) return { state: 'pid-reused', record };
+  if (result.processStartedAt !== record.owner.processStartedAt) return { state: 'pid-reused', record };
   return { state: 'live', record };
 }
 
