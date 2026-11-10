@@ -170,10 +170,12 @@ CommonJS and ESM entry points, not just the patch text.
   [upstream commit 4682e8c](https://github.com/isaacs/node-glob/commit/4682e8c9babee1b385202ede36389634e12076d7)
   (GHSA-3g3m-2fjr-6pw4). Route package entry points to the patched unbundled
   modules, so the bundled copy cannot bypass either this fix or the minimatch
-  patch. The in-major fix 13.0.7 was published on 2026-11-06; replace the
-  backport with it once that publication passes the seven-day age gate. Fixed
-  14.x releases exist, but validate major-version compatibility before forcing
-  them on the 13.x consumers.
+  patch. The 13.0.7 release (2026-11-06) includes the cancellation fix, but its
+  bundled entry points still contain unbounded minimatch optimization and its
+  version remains in the glob advisory range. After it passes the age gate,
+  preserve the entry-point routing and validate both advisories before changing
+  the backport. Fixed 14.x releases exist, but validate major-version
+  compatibility before forcing them on the 13.x consumers.
 - `minimatch` 9.0.9 and 10.2.6: backport pattern expansion and pairwise
   comparison bounds from
   [upstream commit 77a0f5c](https://github.com/isaacs/minimatch/commit/77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8)
