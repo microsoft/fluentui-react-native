@@ -6,7 +6,7 @@ import type { NativeDriverArtifact } from '../../native/types';
 import { readFailureEffect } from '../../protocol/settlement';
 import { scriptNativeHelperSession } from '../../testing/scriptedNativeHelper';
 import { encodeJsonFrame } from './framing';
-import { NativeDesktopHost } from './NativeDesktopHost';
+import { FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES, NativeDesktopHost } from './NativeDesktopHost';
 import { nativeHelperSpawnOptions } from './NativeHostProcess';
 
 const mockSpawn = jest.fn();
@@ -226,11 +226,16 @@ describe('NativeDesktopHost lifecycle', () => {
 describe('NativeDesktopHost input recovery', () => {
   const pressKeyA = [{ actions: [{ type: 'keyDown' as const, value: 'a' }], id: 'keys', type: 'key' as const }];
 
+  // The operator's input mask (hosted CI sets it) would refuse the key press before it reaches the scripted helper.
+  let environment: ReturnType<typeof jest.replaceProperty>;
+
   beforeEach(() => {
+    environment = jest.replaceProperty(process, 'env', { ...process.env, [FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES]: '' });
     mockSpawn.mockReset();
   });
 
   afterEach(() => {
+    environment.restore();
     jest.useRealTimers();
   });
 
