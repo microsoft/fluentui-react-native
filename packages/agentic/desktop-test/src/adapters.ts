@@ -95,9 +95,10 @@ export async function resolveDesktopApplication(
             '-NoProfile',
             '-NonInteractive',
             '-Command',
-            `$ErrorActionPreference='Stop'; $p=@(Get-AppxPackage -Name '${name}'); if ($p.Count -ne 1) { throw 'Expected one registered app package; install the generated application first.' }; $p[0].PackageFamilyName`,
+            // The package name is passed as data in the environment, never spliced into the script.
+            "$ErrorActionPreference='Stop'; $p=@(Get-AppxPackage -Name $env:FURN_APPX_NAME); if ($p.Count -ne 1) { throw 'Expected one registered app package; install the generated application first.' }; $p[0].PackageFamilyName",
           ],
-          { timeout: 10_000, signal, maxBuffer: 64 * 1024, windowsHide: true },
+          { timeout: 10_000, signal, maxBuffer: 64 * 1024, windowsHide: true, env: { ...process.env, FURN_APPX_NAME: name } },
         );
         const family = stdout.trim();
         if (!/^[\w.-]+_[\w]+$/.test(family)) throw new Error('Could not verify the registered Windows package family.');

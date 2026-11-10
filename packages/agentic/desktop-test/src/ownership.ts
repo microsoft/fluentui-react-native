@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 
 import type { DesktopResourceRecord } from './resources.js';
 
@@ -51,9 +51,27 @@ type DesktopWorkloadClaimOptions = {
   directory?: string;
 };
 
+/**
+ * The per-user claim directory. It is independent of TMPDIR, so workloads started with different temporary directories,
+ * and from different checkouts, contend for the same claim.
+ */
+function defaultDesktopWorkloadDirectory(platform: NodeJS.Platform = process.platform): string {
+  if (platform === 'win32') {
+    const localAppData = process.env.LOCALAPPDATA;
+    if (!localAppData) throw new Error('LOCALAPPDATA is required to resolve the per-user desktop workload claim directory.');
+    return path.join(localAppData, 'Microsoft', 'FluentUIReactNative', 'desktop-test', 'workload');
+  }
+  if (platform === 'darwin')
+    return path.join(os.homedir(), 'Library', 'Caches', 'com.microsoft.fluentui-react-native.desktop-test', 'workload');
+  return path.join(os.homedir(), '.cache', 'fluentui-react-native', 'desktop-test', 'workload');
+}
+
+// The recorded start time is derived from the wall clock and process uptime, so it differs from an operating-system
+// probe by process startup latency and clock rounding; a different process started at least a second apart.
+const START_TIME_TOLERANCE_MS = 1000;
+
 export function createDesktopWorkloadClaim(options: DesktopWorkloadClaimOptions): DesktopWorkloadClaim {
-  const user = createHash('sha256').update(os.homedir()).digest('hex').slice(0, 16);
-  const root = options.directory ?? path.join(os.tmpdir(), `furn-desktop-workload-${user}`);
+  const root = options.directory ?? defaultDesktopWorkloadDirectory();
   fs.mkdirSync(root, { recursive: true, mode: 0o700 });
   const filename = path.join(root, 'interactive.lock');
   const owner: DesktopWorkloadOwnerIdentity = Object.freeze({
@@ -85,7 +103,8 @@ export function createDesktopWorkloadClaim(options: DesktopWorkloadClaimOptions)
     if (fs.readFileSync(filename, 'utf8') !== contents)
       throw new Error('Desktop claim ownership changed; refusing to update another owner.');
     const nextContents = JSON.stringify(next);
-    fs.writeFileSync(filename, nextContents, { mode: 0o600 });
+    // A crash mid-write must leave the previous complete record, never a truncated one.
+    replaceFileAtomically(filename, nextContents);
     contents = nextContents;
     current = Object.freeze(next);
   };
@@ -155,8 +174,32 @@ export async function inspectDesktopWorkloadClaim(
   const result = await probe(record.owner);
   if (result.state === 'unknown') return { state: 'unknown', record };
   if (result.state === 'exited') return { state: 'exited', record };
-  if (result.processStartedAt !== record.owner.processStartedAt) return { state: 'pid-reused', record };
+  const probed = Date.parse(result.processStartedAt);
+  const recorded = Date.parse(record.owner.processStartedAt);
+  if (!Number.isFinite(probed) || !Number.isFinite(recorded)) return { state: 'unknown', record };
+  if (Math.abs(probed - recorded) >= START_TIME_TOLERANCE_MS) return { state: 'pid-reused', record };
   return { state: 'live', record };
+}
+
+function replaceFileAtomically(filename: string, contents: string): void {
+  const temporary = `${filename}.${randomUUID()}.tmp`;
+  fs.writeFileSync(temporary, contents, { flag: 'wx', mode: 0o600 });
+  try {
+    for (let retries = 0; ; retries++) {
+      try {
+        fs.renameSync(temporary, filename);
+        return;
+      } catch (error) {
+        const code = typeof error === 'object' && error !== null && 'code' in error ? error.code : undefined;
+        if (process.platform !== 'win32' || retries === 10 || (code !== 'EPERM' && code !== 'EACCES' && code !== 'EBUSY')) throw error;
+        // Windows readers can briefly deny delete sharing; the previous record stays intact while the rename is retried.
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25);
+      }
+    }
+  } catch (error) {
+    fs.rmSync(temporary, { force: true });
+    throw error;
+  }
 }
 
 function parseOwnershipRecord(contents: string): DesktopWorkloadOwnershipRecord {

@@ -1,9 +1,8 @@
 import net from 'node:net';
-import os from 'node:os';
-import path from 'node:path';
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { once } from 'node:events';
 import { processLifelineUrl } from '../config/process-path.cjs';
+import { createLocalSocketAddress } from './localSocket.js';
 
 export type DesktopServiceReady = {
   tier: 'service-ready';
@@ -42,8 +41,8 @@ export function finishDesktopProcess(): void {
 export function createDesktopProcessControl(onFailure: (error: Error) => void) {
   const incarnation = randomUUID();
   const nonce = randomUUID();
-  const address =
-    process.platform === 'win32' ? `\\\\.\\pipe\\furn-process-${incarnation}` : path.join(os.tmpdir(), `furn-process-${incarnation}.sock`);
+  const endpoint = createLocalSocketAddress('process', incarnation);
+  const address = endpoint.address;
   const sockets = new Set<net.Socket>();
   const records = new Map<string, DesktopServiceReadyRecord>();
   const changed = new Set<() => void>();
@@ -200,9 +199,13 @@ export function createDesktopProcessControl(onFailure: (error: Error) => void) {
       return (closePromise ??= (async () => {
         stopping = true;
         for (const notify of changed) notify();
-        await listening;
-        for (const socket of sockets) socket.destroy();
-        await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
+        try {
+          await listening;
+          for (const socket of sockets) socket.destroy();
+          await new Promise<void>((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
+        } finally {
+          endpoint.dispose();
+        }
       })());
     },
   };

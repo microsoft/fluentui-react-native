@@ -833,6 +833,31 @@ describe('DesktopStorybookCli', () => {
   // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- React Native Test App connects to loopback Metro
   const fixedWindowsMetroUrl = 'http://127.0.0.1:8081/status';
 
+  test('leaves a borrowed scope to the integration that tracks the run in it', async () => {
+    const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.windows.json');
+    const runner = new RecordingRunner();
+    const services = new DesktopServiceScope(runner);
+    const close = jest.spyOn(services, 'close');
+    const cli = new DesktopStorybookCli(makeConfig({ windows: { smoke: { metroUrl: fixedWindowsMetroUrl } } }), {
+      ...nativeDriverTestOptions,
+      createStoryManifest: createEmptyStoryManifest,
+      fetch: async () => new Response('{}'),
+      isPortAvailable: async () => true,
+      onReady: () => services.requestStop(),
+      output: { write: () => true },
+      runner,
+      services,
+    });
+    try {
+      // desktop-test integrations guard their run in the scope they lend; closing it from inside would wait on itself.
+      await expect(services.guard(cli.driver('windows'))).rejects.toThrow('Owned desktop service stop requested.');
+      expect(close).not.toHaveBeenCalled();
+      await expect(services.close()).resolves.toBeUndefined();
+    } finally {
+      fs.rmSync(manifestPath, { force: true });
+    }
+  });
+
   test('serves Metro on the fixed port a Windows Debug host reads', async () => {
     const manifestPath = path.join(storybookRoot, 'storybook-desktop.generated', 'driver-manifest.windows.json');
     const runner = new RecordingRunner();

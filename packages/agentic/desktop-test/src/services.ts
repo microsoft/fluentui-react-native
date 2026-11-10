@@ -25,6 +25,14 @@ type ResourceEntry = {
   disposalPromise?: Promise<void>;
 };
 
+export type DesktopServiceScopeOptions = {
+  /**
+   * How long close() waits for tracked work (resource acquisitions and guarded operations) to settle after the scope is
+   * aborted, before each disposal pass. Work still running then is reported as a cleanup failure and abandoned.
+   */
+  drainTimeoutMs?: number;
+};
+
 export class DesktopStopRequested extends Error {
   constructor() {
     super('Owned desktop service stop requested.');
@@ -44,14 +52,26 @@ export class DesktopServiceScope {
   private closePromise?: Promise<void>;
   private generation = 0;
   private onResource?: (resource: DesktopResourceRecord) => void;
+  private observerFailure?: Error;
+  private stopFailed = false;
   private readonly runner: DesktopCommandRunner;
   private readonly reporter?: DesktopReportWriter;
   private readonly resourcePrefix: string;
+  private readonly drainTimeoutMs: number;
 
-  constructor(runner: DesktopCommandRunner, reporter?: DesktopReportWriter, resourcePrefix = 'desktop') {
+  constructor(
+    runner: DesktopCommandRunner,
+    reporter?: DesktopReportWriter,
+    resourcePrefix = 'desktop',
+    options: DesktopServiceScopeOptions = {},
+  ) {
+    const { drainTimeoutMs = 60_000 } = options;
+    if (!Number.isSafeInteger(drainTimeoutMs) || drainTimeoutMs <= 0 || drainTimeoutMs > 2_147_483_647)
+      throw new RangeError('Desktop service scope drainTimeoutMs must be a positive integer number of milliseconds.');
     this.runner = runner;
     this.reporter = reporter;
     this.resourcePrefix = resourcePrefix;
+    this.drainTimeoutMs = drainTimeoutMs;
     this.failed = new Promise<never>((_resolve, reject) => {
       this.rejectFailure = reject;
     });
@@ -61,7 +81,7 @@ export class DesktopServiceScope {
 
   setResourceObserver(observer?: (resource: DesktopResourceRecord) => void): void {
     this.onResource = observer;
-    if (observer) for (const resource of this.resources) observer(this.snapshot(resource));
+    if (observer) for (const resource of this.resources) this.publish(resource);
   }
 
   fail(error: Error): void {
@@ -91,13 +111,16 @@ export class DesktopServiceScope {
     });
     let running: RunningDesktopCommand;
     try {
+      // A resource observer that failed while recording this service aborts the scope; do not start the process.
+      this.controller.signal.throwIfAborted();
+      // Services are stopped in reverse acquisition order by close(), not by the scope signal.
       running = this.runner.start({
         ...command,
         label: command.label ?? id,
         category: 'service',
         context: { ...command.context, service: id },
       });
-      resource.dispose = () => running.stop({ failed: true });
+      resource.dispose = () => running.stop({ failed: this.stopFailed });
     } catch (error) {
       resource.record.readiness = 'failed';
       resource.record.disposal = 'settled';
@@ -255,30 +278,19 @@ export class DesktopServiceScope {
     );
   }
 
+  /**
+   * Aborts the scope, waits (bounded) for tracked work, then disposes owned services and resources in reverse acquisition
+   * order. Never call it from work the scope tracks: close() waits for that work.
+   */
   close(): Promise<void> {
     return (this.closePromise ??= (async () => {
       this.closing = true;
-      const failed = this.controller.signal.aborted && !(this.controller.signal.reason instanceof DesktopStopRequested);
-      this.controller.abort(new Error('Desktop service scope is closing.'));
+      this.stopFailed = this.controller.signal.aborted && !(this.controller.signal.reason instanceof DesktopStopRequested);
+      const closingReason = new Error('Desktop service scope is closing.');
+      this.controller.abort(closingReason);
+      // Work waiting for a stop request (waitForStop) settles too.
+      this.rejectFailure(closingReason);
       const failures: unknown[] = [];
-      for (const { id, command } of [...this.running].reverse()) {
-        try {
-          await deadline(command.stop({ failed }), 45_000, `Stopping ${id}`);
-          const resource = this.resources.find((entry) => entry.key === id);
-          if (resource) {
-            resource.record.disposal = 'settled';
-            this.publish(resource);
-          }
-        } catch (error) {
-          failures.push(error);
-          this.reporter?.fail(error, 'cleanup', id);
-          const resource = this.resources.find((entry) => entry.key === id);
-          if (resource) {
-            resource.record.disposal = 'failed';
-            this.publish(resource);
-          }
-        }
-      }
       await this.awaitWork(failures);
       for (const resource of [...this.resources].reverse()) {
         if (resource.record.ownership !== 'owned' || resource.record.disposal !== 'pending') continue;
@@ -289,8 +301,8 @@ export class DesktopServiceScope {
           this.reporter?.fail(error, 'cleanup', resource.record.id);
         }
       }
-
       await this.awaitWork(failures);
+      if (this.observerFailure) failures.push(this.observerFailure);
       if (failures.length) throw new AggregateError(failures, 'Owned desktop services did not shut down cleanly.');
     })());
   }
@@ -309,8 +321,18 @@ export class DesktopServiceScope {
     return Object.freeze({ ...entry.record });
   }
 
+  // The observer records ownership (the workload claim); a failure there must not interrupt acquisition or disposal.
   private publish(entry: ResourceEntry): void {
-    this.onResource?.(this.snapshot(entry));
+    if (!this.onResource) return;
+    try {
+      this.onResource(this.snapshot(entry));
+    } catch (error) {
+      const failure = error instanceof Error ? error : new Error(String(error));
+      if (this.observerFailure) return;
+      this.observerFailure = failure;
+      if (this.closing || this.controller.signal.aborted) this.reporter?.fail(failure, 'cleanup', entry.record.id);
+      else this.fail(failure);
+    }
   }
 
   private track<T>(work: Promise<T>): Promise<T> {
@@ -323,8 +345,21 @@ export class DesktopServiceScope {
   }
 
   private async awaitWork(failures: unknown[]): Promise<void> {
+    const until = Date.now() + this.drainTimeoutMs;
     while (this.work.size > 0) {
-      const results = await Promise.allSettled(this.work);
+      let results: PromiseSettledResult<unknown>[];
+      try {
+        results = await deadline(Promise.allSettled(this.work), Math.max(0, until - Date.now()), 'Draining desktop scope work');
+      } catch {
+        const error = new Error(
+          `${this.work.size} tracked desktop operation(s) did not settle within ${this.drainTimeoutMs}ms after the scope closed; abandoning them.`,
+        );
+        // Abandoned work keeps its settlement handlers, so a late rejection is still observed.
+        this.work.clear();
+        failures.push(error);
+        this.reporter?.fail(error, 'cleanup');
+        return;
+      }
       for (const result of results) {
         if (result.status === 'rejected' && result.reason !== this.controller.signal.reason) failures.push(result.reason);
       }

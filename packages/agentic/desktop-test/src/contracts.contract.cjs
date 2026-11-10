@@ -885,6 +885,145 @@ async function main() {
       const result = await run.finish();
       assert.equal(result.status, 'failed');
       assert(err.text().includes('original metro failure'));
+    } else if (mode === 'lifecycle') {
+      const { createDesktopWorkloadClaim } = await import(lib('ownership.js'));
+      const alive = (pid) => {
+        try {
+          process.kill(pid, 0);
+          return true;
+        } catch (error) {
+          if (error && typeof error === 'object' && 'code' in error && error.code === 'ESRCH') return false;
+          throw error;
+        }
+      };
+      const sleeper = (marker, label) =>
+        script("require('node:fs').writeFileSync(process.argv[1], String(process.pid)); setInterval(()=>{},1000);", [marker], label);
+
+      // In-flight cancellation: a stop request ends a running stage promptly and the stage is not reported as passed.
+      const cancelRun = reporter({ kind: 'lifecycle' });
+      const cancelRunner = new NodeDesktopCommandRunner({ reporter: cancelRun, shutdownTimeoutMs: 2000 });
+      const cancelScope = new DesktopServiceScope(cancelRunner, cancelRun);
+      const stageMarker = path.join(root, 'stage.pid');
+      const stage = cancelScope.guard(
+        cancelRunner.run({ ...sleeper(stageMarker, 'stage'), category: 'phase' }, { signal: cancelScope.controller.signal }),
+      );
+      await waitFor(() => fs.existsSync(stageMarker) && fs.readFileSync(stageMarker, 'utf8').length > 0);
+      const started = Date.now();
+      cancelScope.requestStop();
+      await assert.rejects(stage, DesktopStopRequested);
+      await cancelScope.close();
+      assert(Date.now() - started < 5000, 'cancellation must not wait for the stage to finish');
+      await waitFor(() => !alive(Number(fs.readFileSync(stageMarker, 'utf8'))));
+      await cancelRunner.close();
+      await cancelRun.finish();
+      const stageEnd = fs
+        .readFileSync(path.join(cancelRun.root, 'events.jsonl'), 'utf8')
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line))
+        .find((event) => event.kind === 'scope-end');
+      assert.equal(stageEnd.payload.status, 'failed', JSON.stringify(stageEnd));
+      // A spawn cannot follow the abort.
+      assert.throws(() => cancelRunner.start(command('', 'late'), { signal: cancelScope.controller.signal }), DesktopStopRequested);
+
+      // Spawn failure: a service that never started settles its resource, so the workload claim releases.
+      const spawnRunner = new NodeDesktopCommandRunner({ reporter: reporter({ kind: 'lifecycle' }), shutdownTimeoutMs: 2000 });
+      const spawnScope = new DesktopServiceScope(spawnRunner);
+      const spawnLocks = path.join(root, 'spawn-locks');
+      const spawnClaim = createDesktopWorkloadClaim({
+        runId: 'spawn',
+        targetId: 'target',
+        targetInstanceId: 'instance',
+        directory: spawnLocks,
+      });
+      spawnScope.setResourceObserver((resource) => spawnClaim.updateResource(resource));
+      const missing = spawnScope.start('missing', {
+        command: path.join(root, process.platform === 'win32' ? 'missing.exe' : 'missing'),
+        args: [],
+        cwd: root,
+        env: {},
+      });
+      await assert.rejects(missing.completed, { code: 'ENOENT' });
+      await assert.rejects(spawnScope.waitForStop(), { code: 'ENOENT' });
+      await spawnScope.close();
+      await spawnRunner.close();
+      assert.deepEqual(
+        spawnClaim.record.resources.map(({ disposal }) => disposal),
+        ['settled'],
+      );
+      spawnClaim.release();
+      assert(!fs.existsSync(path.join(spawnLocks, 'interactive.lock')));
+
+      // Observer failure during close: every service is still stopped and the close reports the failure.
+      const observerRunner = new NodeDesktopCommandRunner({ reporter: reporter({ kind: 'lifecycle' }), shutdownTimeoutMs: 2000 });
+      const observerScope = new DesktopServiceScope(observerRunner);
+      const first = path.join(root, 'first.pid');
+      const second = path.join(root, 'second.pid');
+      observerScope.start('first', sleeper(first, 'first'));
+      observerScope.start('second', sleeper(second, 'second'));
+      await waitFor(() => [first, second].every((file) => fs.existsSync(file) && fs.readFileSync(file, 'utf8').length > 0));
+      observerScope.setResourceObserver((resource) => {
+        if (resource.disposal === 'pending' && observerScope.controller.signal.aborted) throw new Error('claim volume unavailable');
+      });
+      await assert.rejects(
+        observerScope.close(),
+        (error) => error instanceof AggregateError && error.errors.some(({ message }) => message === 'claim volume unavailable'),
+      );
+      for (const file of [first, second]) assert(!alive(Number(fs.readFileSync(file, 'utf8'))), `${file} must be stopped`);
+      await observerRunner.close();
+    } else if (mode === 'interrupt-cli') {
+      // Windows has no deliverable SIGINT for a child process; the in-process contract covers cancellation there.
+      if (process.platform !== 'win32') {
+        const { spawn } = require('node:child_process');
+        const marker = path.join(root, 'stage.pid');
+        const reports = path.join(root, 'reports');
+        const configPath = path.join(root, 'desktop.config.mjs');
+        fs.writeFileSync(
+          configPath,
+          `export default ${JSON.stringify({
+            schemaVersion: 1,
+            targets: {
+              win32: {
+                host: { kind: 'installed', application: { executablePath: 'not-launched.exe' } },
+                commands: {
+                  prep: {
+                    command: process.execPath,
+                    args: [
+                      '-e',
+                      "require('node:fs').writeFileSync(process.argv[1], String(process.pid)); setInterval(()=>{},1000);",
+                      marker,
+                    ],
+                  },
+                },
+              },
+            },
+            reporting: { artifactsRoot: reports },
+          })}`,
+        );
+        const cli = spawn(
+          process.execPath,
+          [path.join(packageRoot, 'config', 'cli.cjs'), '--config', configPath, '--target', 'win32', 'prep'],
+          {
+            cwd: root,
+            env: { ...process.env, DESKTOP_REPORTER: 'plain' },
+            stdio: ['ignore', 'pipe', 'pipe'],
+          },
+        );
+        let output = '';
+        cli.stdout.on('data', (chunk) => (output += chunk));
+        cli.stderr.on('data', (chunk) => (output += chunk));
+        const exited = new Promise((resolve) => cli.once('exit', (code, signal) => resolve({ code, signal })));
+        await waitFor(() => fs.existsSync(marker) && fs.readFileSync(marker, 'utf8').length > 0);
+        const started = Date.now();
+        cli.kill('SIGINT');
+        const exit = await exited;
+        assert(Date.now() - started < 10_000, 'an interrupted stage must not run to completion');
+        assert.deepEqual(exit, { code: 1, signal: null }, output);
+        assert.throws(() => process.kill(Number(fs.readFileSync(marker, 'utf8')), 0), { code: 'ESRCH' });
+        const [runDirectory] = fs.readdirSync(reports);
+        const result = JSON.parse(fs.readFileSync(path.join(reports, runDirectory, 'run.json'), 'utf8'));
+        assert.equal(result.status, 'incomplete', JSON.stringify(result));
+      }
     } else if (mode === 'resources') {
       const { DesktopServiceScope } = await import(lib('services.js'));
       const { createDesktopWorkloadClaim, inspectDesktopWorkloadClaim } = await import(lib('ownership.js'));
@@ -932,6 +1071,29 @@ async function main() {
           ]),
         /dependency cycle/,
       );
+      // Without a directory, the claim lives in the per-user cache rather than the shared temporary directory.
+      const home = path.join(root, 'home');
+      fs.mkdirSync(home);
+      const savedEnvironment = { HOME: process.env.HOME, LOCALAPPDATA: process.env.LOCALAPPDATA };
+      process.env.HOME = home;
+      process.env.LOCALAPPDATA = home;
+      try {
+        const defaultClaim = createDesktopWorkloadClaim({ runId: 'default-run', targetId: 'target', targetInstanceId: 'instance' });
+        const defaultDirectory =
+          process.platform === 'win32'
+            ? path.join(home, 'Microsoft', 'FluentUIReactNative', 'desktop-test', 'workload')
+            : process.platform === 'darwin'
+              ? path.join(home, 'Library', 'Caches', 'com.microsoft.fluentui-react-native.desktop-test', 'workload')
+              : path.join(home, '.cache', 'fluentui-react-native', 'desktop-test', 'workload');
+        assert(fs.existsSync(path.join(defaultDirectory, 'interactive.lock')));
+        defaultClaim.release();
+        assert(!fs.existsSync(path.join(defaultDirectory, 'interactive.lock')));
+      } finally {
+        for (const [key, value] of Object.entries(savedEnvironment)) {
+          if (value === undefined) delete process.env[key];
+          else process.env[key] = value;
+        }
+      }
       const ready = {
         tier: 'service-ready',
         service: 'fixture-service',
@@ -1198,6 +1360,19 @@ async function main() {
       assert.equal(live.state, 'live');
       assert.equal(unknown.state, 'unknown');
       assert.equal(reused.state, 'pid-reused');
+      // A probe reports the same process with its own precision and rounding.
+      const rounded = await inspectDesktopWorkloadClaim(ownerFile, async (owner) => ({
+        state: 'alive',
+        processStartedAt: new Date(Date.parse(owner.processStartedAt) - 250).toISOString(),
+      }));
+      assert.equal(rounded.state, 'live');
+      const unparsable = await inspectDesktopWorkloadClaim(ownerFile, async () => ({ state: 'alive', processStartedAt: 'not a time' }));
+      assert.equal(unparsable.state, 'unknown');
+      assert.deepEqual(
+        fs.readdirSync(failedDirectory).filter((name) => name.endsWith('.tmp')),
+        [],
+        'claim updates replace the record atomically',
+      );
       assert.equal(fs.existsSync(ownerFile), true, 'inspection must never reclaim a claim');
       assert.throws(
         () =>

@@ -28,9 +28,11 @@ export type RunningDesktopCommand = {
   waitForReadiness?(expected: DesktopServiceReady, timeoutMs?: number, signal?: AbortSignal): Promise<DesktopServiceReadyRecord>;
   stop(options?: { failed?: boolean }): Promise<void>;
 };
+/** Cancellation for one command: an abort stops its process tree and reports the command failed. */
+export type DesktopCommandRunOptions = { signal?: AbortSignal };
 export interface DesktopCommandRunner {
-  run(command: PreparedDesktopCommand): Promise<void>;
-  start(command: PreparedDesktopCommand): RunningDesktopCommand;
+  run(command: PreparedDesktopCommand, options?: DesktopCommandRunOptions): Promise<void>;
+  start(command: PreparedDesktopCommand, options?: DesktopCommandRunOptions): RunningDesktopCommand;
 }
 export type NodeDesktopCommandRunnerOptions = {
   reporter?: DesktopReportWriter;
@@ -50,7 +52,7 @@ const MIN_ENVIRONMENT_SECRET_LENGTH = 8;
 export class NodeDesktopCommandRunner implements DesktopCommandRunner {
   private reporterValue?: DesktopReportWriter;
   private ownedReporter?: DesktopRunReporter;
-  private readonly active = new Set<RunningDesktopCommand>();
+  private readonly active = new Map<RunningDesktopCommand, () => void>();
   private readonly options: NodeDesktopCommandRunnerOptions;
   constructor(options: NodeDesktopCommandRunnerOptions = {}) {
     this.options = options;
@@ -60,15 +62,16 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     return this.reporterValue;
   }
 
-  async run(command: PreparedDesktopCommand): Promise<void> {
-    const running = this.start({ ...command, category: command.category ?? 'phase' });
+  async run(command: PreparedDesktopCommand, options: DesktopCommandRunOptions = {}): Promise<void> {
+    const running = this.start({ ...command, category: command.category ?? 'phase' }, options);
     let failure: unknown;
     try {
       const code = await running.completed;
+      if (options.signal?.aborted) throw options.signal.reason;
       if (code !== 0)
         throw running.failure ?? new Error(`Command "${commandLabel(command)}" exited with code ${code}. Log: ${running.logPath}`);
     } catch (error) {
-      failure = error;
+      failure = options.signal?.aborted ? options.signal.reason : error;
     }
     try {
       await running.stop({ failed: failure !== undefined });
@@ -78,7 +81,10 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     if (failure !== undefined) throw failure;
   }
 
-  start(command: PreparedDesktopCommand): RunningDesktopCommand {
+  start(command: PreparedDesktopCommand, options: DesktopCommandRunOptions = {}): RunningDesktopCommand {
+    const { signal } = options;
+    signal?.throwIfAborted();
+    validatePreparedCommand(command);
     const reporter =
       (this.reporterValue ??=
       this.ownedReporter =
@@ -93,6 +99,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       if (/nonce|token|password|secret|authorization/i.test(key) && value && value.length >= MIN_ENVIRONMENT_SECRET_LENGTH)
         reporter.addSecret(value);
     }
+    const timeoutMs = this.options.shutdownTimeoutMs ?? 10_000;
     const id = `command-${randomUUID()}`;
     const label = commandLabel(command);
     const emit = reporter.source(id);
@@ -106,31 +113,59 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
     emit({ kind: 'scope-start', payload: { label, category: command.category ?? 'service' } }, id, command.context);
     emit({ kind: 'artifact', payload: { path: relativeLog, description: label } }, id, command.context);
     let failed: unknown;
-    const processControl = createDesktopProcessControl((error) => {
-      failed ??= error;
-      reporter.fail(error, 'infrastructure', id);
-    });
-    reporter.addSecret(processControl.nonce);
+    // Only services publish readiness or cooperate in disposal; one-shot phases and workers need no control channel.
+    const processControl =
+      command.category === undefined || command.category === 'service'
+        ? createDesktopProcessControl((error) => {
+            failed ??= error;
+            reporter.fail(error, 'infrastructure', id);
+          })
+        : undefined;
+    if (processControl) reporter.addSecret(processControl.nonce);
     const environment = { ...process.env, ...command.env, ...this.options.environment };
     const spawnCommand = needsWindowsCommandShim(command.command) ? spawn : spawnNative;
-    const child = spawnCommand(command.command, [...command.args], {
-      cwd: command.cwd,
-      env: {
-        ...environment,
-        ...(command.category === undefined || command.category === 'service' ? processControl.environment(environment.NODE_OPTIONS) : {}),
-        [DESKTOP_REPORT_SCOPE]: id,
-      },
-      detached: process.platform !== 'win32',
-      stdio: ['ignore', 'pipe', 'pipe'],
-      windowsHide: true,
-    });
+    const child = (() => {
+      try {
+        return spawnCommand(command.command, [...command.args], {
+          cwd: command.cwd,
+          env: {
+            ...environment,
+            ...(processControl ? processControl.environment(environment.NODE_OPTIONS) : {}),
+            [DESKTOP_REPORT_SCOPE]: id,
+          },
+          detached: process.platform !== 'win32',
+          stdio: ['ignore', 'pipe', 'pipe'],
+          windowsHide: true,
+        });
+      } catch (error) {
+        // A synchronous spawn failure leaves no process to own: close the scope and the control channel here.
+        const summary = describeFailure(error);
+        emit(
+          { kind: 'scope-end', payload: { status: 'failed', logPath: relativeLog, ...(summary ? { summary } : {}) } },
+          id,
+          command.context,
+        );
+        emit({ kind: 'producer-finished', payload: { status: 'failed' } }, id, command.context);
+        void processControl?.close().catch(() => undefined);
+        throw error;
+      }
+    })();
     let stopped = false;
+    let exited = false;
     let closed = false;
+    let drainExpired = false;
+    let captureFailed = false;
     let exitFailure: Error | undefined;
     let exitSummary: string | undefined;
     let stopPromise: Promise<void> | undefined;
+    let treeStopPromise: Promise<void> | undefined;
     let closeDeadline: ReturnType<typeof setTimeout> | undefined;
     let logBytes = fs.statSync(logPath).size;
+    // A POSIX group outlives its leader while descendants remain, and its ID cannot be reused while any member exists.
+    // A Windows process ID may be reused once the leader is reaped, so a tree is only addressed while it runs.
+    const treeRunning = () => child.pid !== undefined && (process.platform === 'win32' ? !exited : !closed || drainExpired);
+    const stopTree = () =>
+      (treeStopPromise ??= treeRunning() ? stopProcessTree(child.pid!, settledCompletion, timeoutMs) : Promise.resolve());
     const capture = (stream: 'stdout' | 'stderr') => {
       const decoder = new StringDecoder('utf8');
       let buffered = '';
@@ -156,12 +191,17 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
           buffered = '';
         }
       };
+      // The first capture failure is the diagnosis; later output is drained without recording so the child cannot block.
       const onFailure = (error: unknown) => {
+        if (captureFailed) return;
+        captureFailed = true;
+        buffered = '';
         failed ??= error;
         reporter.fail(error, 'reporting', id);
-        child.kill();
+        void stopTree().catch(() => undefined);
       };
       child[stream].on('data', (chunk: Buffer) => {
+        if (captureFailed) return;
         try {
           consume(decoder.write(chunk), false);
         } catch (error) {
@@ -169,6 +209,7 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
         }
       });
       child[stream].on('end', () => {
+        if (captureFailed) return;
         try {
           consume(decoder.end(), true);
         } catch (error) {
@@ -184,12 +225,14 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
         failed ??= error;
       });
       child.once('exit', () => {
-        processControl.stop();
+        exited = true;
+        processControl?.stop();
         closeDeadline = setTimeout(() => {
+          drainExpired = true;
           failed ??= new Error(`Child exited but inherited output streams did not close within the drain deadline: ${label}`);
           child.stdout.destroy();
           child.stderr.destroy();
-        }, this.options.shutdownTimeoutMs ?? 10_000);
+        }, timeoutMs);
       });
       child.once('close', (code, signal) => {
         clearTimeout(closeDeadline);
@@ -202,6 +245,11 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
         else resolve(code ?? (signal ? 1 : 0));
       });
     });
+    // Waiting for the process does not consume its failure; owners observe that through completed.
+    const settledCompletion = completion.then(
+      (code) => code,
+      () => 1,
+    );
     // Owners observe completed; this branch only makes unexpected failures visible immediately.
     void completion.then(
       (code) => {
@@ -209,58 +257,67 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
       },
       (error: unknown) => reporter.fail(error, 'infrastructure', id),
     );
+    const onAbort = () => {
+      void running.stop({ failed: true }).catch(() => undefined);
+    };
     const running: RunningDesktopCommand = {
       completed: completion,
       logPath,
-      waitForReadiness: (expected, timeoutMs, signal) =>
-        Promise.race([
-          processControl.waitForReadiness(expected, timeoutMs, signal),
-          completion.then(() => {
-            throw failed ?? exitFailure ?? new Error('Owned command exited before service readiness.');
-          }),
-        ]),
+      ...(processControl
+        ? {
+            waitForReadiness: (expected: DesktopServiceReady, readinessTimeoutMs?: number, readinessSignal?: AbortSignal) =>
+              Promise.race([
+                processControl.waitForReadiness(expected, readinessTimeoutMs, readinessSignal),
+                completion.then(() => {
+                  throw failed ?? exitFailure ?? new Error('Owned command exited before service readiness.');
+                }),
+              ]),
+          }
+        : {}),
       get failure() {
         return failed ?? exitFailure;
       },
-      stop: (options = {}) =>
+      stop: (stopOptions = {}) =>
         (stopPromise ??= (async () => {
           stopped = true;
+          signal?.removeEventListener('abort', onAbort);
           let cleanupError: unknown;
+          const recordCleanup = (error: unknown) => {
+            cleanupError ??= error;
+            reporter.fail(error, 'cleanup', id);
+          };
           const wasRunning = !closed;
-          const cooperative = processControl.stop();
+          const cooperative = processControl?.stop() ?? 0;
           try {
             const encoded =
               this.options.environment?.[DESKTOP_REPORT_CONTEXT] ??
               command.env[DESKTOP_REPORT_CONTEXT] ??
               process.env[DESKTOP_REPORT_CONTEXT];
-            const controlled = await requestReportStop(id, encoded, this.options.shutdownTimeoutMs ?? 10_000);
-            await processControl.settled(this.options.shutdownTimeoutMs ?? 10_000);
+            const controlled = await requestReportStop(id, encoded, timeoutMs);
+            await processControl?.settled(timeoutMs);
             if ((controlled || cooperative) && !closed)
-              await deadline(completion, this.options.shutdownTimeoutMs ?? 10_000, 'Gracefully stopping owned Node services');
+              await deadline(settledCompletion, timeoutMs, 'Gracefully stopping owned Node services');
           } catch (error) {
-            cleanupError = error;
-            reporter.fail(error, 'cleanup', id);
+            recordCleanup(error);
           }
-          if (wasRunning && child.pid) {
-            if (!closed) {
-              try {
-                await stopProcessTree(child.pid, completion, this.options.shutdownTimeoutMs ?? 10_000);
-              } catch (error) {
-                cleanupError ??= error;
-                reporter.fail(error, 'cleanup', id);
-              }
-            }
+          try {
+            await stopTree();
+          } catch (error) {
+            recordCleanup(error);
           }
           let code = 1;
           try {
-            code = await deadline(completion, this.options.shutdownTimeoutMs ?? 10_000, 'Draining command output');
+            code = await deadline(settledCompletion, timeoutMs, 'Draining command output');
           } catch (error) {
             failed ??= error;
             cleanupError ??= error;
           }
           const status =
-            options.failed || failed !== undefined || cleanupError !== undefined || (!wasRunning && code !== 0) ? 'failed' : 'passed';
-          const reason = status === 'failed' ? (describeFailure(failed ?? cleanupError) ?? exitSummary) : undefined;
+            stopOptions.failed || failed !== undefined || cleanupError !== undefined || (!wasRunning && code !== 0) ? 'failed' : 'passed';
+          const reason =
+            status === 'failed'
+              ? (describeFailure(failed ?? cleanupError) ?? exitSummary ?? (wasRunning ? 'Stopped before it finished.' : undefined))
+              : undefined;
           emit(
             { kind: 'scope-end', payload: { status, logPath: relativeLog, ...(reason ? { summary: reason } : {}) } },
             id,
@@ -268,16 +325,32 @@ export class NodeDesktopCommandRunner implements DesktopCommandRunner {
           );
           emit({ kind: 'producer-finished', payload: { status } }, id, command.context);
           this.active.delete(running);
-          await processControl.close();
+          try {
+            await processControl?.close();
+          } catch (error) {
+            recordCleanup(error);
+          }
           if (cleanupError !== undefined) throw cleanupError;
         })()),
     };
-    this.active.add(running);
+    this.active.set(running, () => {
+      if (treeRunning()) forceStopProcessTree(child.pid!);
+    });
+    signal?.addEventListener('abort', onAbort, { once: true });
     return running;
   }
 
+  /**
+   * Force-kills every active command's process tree without waiting. Owners still observe completion and stop their
+   * commands; this only shortens a graceful shutdown that a repeated interrupt asked to abandon.
+   */
+  terminate(): void {
+    for (const kill of this.active.values()) kill();
+  }
+
   async close(): Promise<void> {
-    const results = await Promise.allSettled([...this.active].map((command) => command.stop()));
+    // A command still active here was abandoned by its owner, so its outcome is not a success.
+    const results = await Promise.allSettled([...this.active.keys()].map((command) => command.stop({ failed: true })));
     await this.ownedReporter?.finish();
     const failures = results.flatMap((result) => (result.status === 'rejected' ? [result.reason as unknown] : []));
     if (failures.length) throw new AggregateError(failures, 'Owned commands did not stop cleanly.');
@@ -294,6 +367,14 @@ function commandLabel(command: PreparedDesktopCommand): string {
   return first !== undefined && subcommandPattern.test(first) ? `${name} ${first}` : name;
 }
 
+function validatePreparedCommand(command: PreparedDesktopCommand): void {
+  const values = [command.command, command.cwd, ...command.args, ...Object.entries(command.env).flat()];
+  if (values.some((value) => typeof value !== 'string' || value.includes('\0')))
+    throw new TypeError(
+      `Command "${commandLabel(command)}" has a missing or NUL-containing command, argument, directory, or environment value.`,
+    );
+}
+
 function describeFailure(error: unknown): string | undefined {
   if (error === undefined) return undefined;
   return (error instanceof Error ? error.message : String(error)).split('\n', 1)[0];
@@ -307,7 +388,7 @@ function needsWindowsCommandShim(command: string): boolean {
   );
 }
 
-async function stopProcessTree(pid: number, completed: Promise<number>, timeoutMs: number): Promise<void> {
+async function stopProcessTree(pid: number, completed: Promise<unknown>, timeoutMs: number): Promise<void> {
   if (process.platform === 'win32') {
     const killer = spawnNative('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
     let diagnostic = '';
@@ -334,27 +415,60 @@ async function stopProcessTree(pid: number, completed: Promise<number>, timeoutM
       }
       throw new Error(`Could not stop owned process tree ${pid}: ${diagnostic}`);
     }
-  } else {
-    try {
-      process.kill(-pid, 'SIGTERM');
-    } catch (error) {
-      if (!isMissingProcess(error)) throw error;
-    }
-    try {
-      await deadline(completed, timeoutMs, `Stopping owned process group ${pid}`);
-    } catch (error) {
-      try {
-        process.kill(-pid, 'SIGKILL');
-      } catch (killError) {
-        if (!isMissingProcess(killError)) throw new AggregateError([error, killError], 'Owned process group did not stop.');
-      }
-    }
+    await deadline(completed, timeoutMs, `Waiting for owned process tree ${pid}`);
+    return;
   }
-  await deadline(completed, timeoutMs, `Waiting for owned process tree ${pid}`);
+  // The group is gone only when its leader was reaped and no descendant remains in it.
+  const stoppedWithin = async (limitMs: number) => {
+    const until = Date.now() + limitMs;
+    for (;;) {
+      if (!processGroupExists(pid)) return true;
+      if (Date.now() >= until) return false;
+      await new Promise<void>((resolve) => setTimeout(resolve, 50));
+    }
+  };
+  if (!signalProcessGroup(pid, 'SIGTERM') || (await stoppedWithin(timeoutMs))) return;
+  if (!signalProcessGroup(pid, 'SIGKILL') || (await stoppedWithin(timeoutMs))) return;
+  throw new Error(`Owned process group ${pid} survived SIGKILL.`);
+}
+
+function forceStopProcessTree(pid: number): void {
+  if (process.platform === 'win32') {
+    const killer = spawnNative('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true });
+    killer.once('error', () => undefined);
+    return;
+  }
+  try {
+    signalProcessGroup(pid, 'SIGKILL');
+  } catch {
+    // The owner's graceful stop reports a group it cannot signal.
+  }
+}
+
+function signalProcessGroup(pid: number, signal: NodeJS.Signals): boolean {
+  try {
+    process.kill(-pid, signal);
+    return true;
+  } catch (error) {
+    if (isMissingProcess(error)) return false;
+    throw error;
+  }
+}
+
+function processGroupExists(pid: number): boolean {
+  try {
+    process.kill(-pid, 0);
+    return true;
+  } catch (error) {
+    if (isMissingProcess(error)) return false;
+    // A group this user cannot signal is not ours to declare stopped.
+    return true;
+  }
 }
 
 function isMissingProcess(error: unknown): boolean {
-  return error instanceof Error && 'code' in error && error.code === 'ESRCH';
+  // Not instanceof: a system error may come from another realm, such as a test sandbox.
+  return typeof error === 'object' && error !== null && 'code' in error && error.code === 'ESRCH';
 }
 
 export async function deadline<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {

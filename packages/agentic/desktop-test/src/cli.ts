@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { Command, Option } from 'commander';
 import { buildNativeDesktopDriver } from '@fluentui-react-native/desktop-driver';
 import {
@@ -18,12 +19,17 @@ import type { DesktopAgentConnectionOptions } from './agentConnection.js';
 import { loadDesktopConfig, resolveDesktopSpecs, selectDesktopRenderer } from './config.js';
 import type { DesktopStage } from './config.js';
 import { createDesktopInputLane, desktopInputEnvironment, requestedDesktopInputLane } from './reporting/lane.js';
+import { deadline } from './commands.js';
 import { createDesktopReportSession } from './reporting/session.js';
 import { DesktopStopRequested } from './services.js';
+import { handleDesktopInterrupts } from './signals.js';
 import { DesktopSupervisor } from './supervisor.js';
 import { assertDesktopSuiteSupportsInput, runDesktopWdioSuite } from './wdio/run.js';
 
 type AgentFlags = { agent?: boolean; descriptor?: string; root?: string };
+
+// How long an integration may take to unwind after a stop request or scope failure before the scope is closed anyway.
+const INTEGRATION_STOP_TIMEOUT_MS = 60_000;
 
 export async function runDesktopTestCli(argv = process.argv): Promise<void> {
   tolerateClosedDesktopStdout();
@@ -193,9 +199,19 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       ...(input ? { input } : {}),
     });
     session.onStop?.(() => owner.services.requestStop());
-    const interrupt = () => owner.services.requestStop();
-    process.once('SIGINT', interrupt);
-    process.once('SIGTERM', interrupt);
+    const releaseInterrupts = handleDesktopInterrupts({
+      stop: () => owner.services.requestStop(),
+      terminate: (signal) => {
+        reporter.emit({
+          kind: 'diagnostic',
+          payload: {
+            level: 'warning',
+            message: `Received ${signal} during shutdown; force-stopping owned commands. Interrupt again to exit without cleanup.`,
+          },
+        });
+        owner.runner.terminate();
+      },
+    });
     let failure: unknown;
     try {
       if (action === 'build-driver') {
@@ -212,7 +228,10 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         await owner.open(['test', 'serve', 'run'].includes(action));
         await owner.startResources();
         if (action === 'test' || action === 'serve') await owner.startConfiguredServices();
-        await owner.services.guard(
+        owner.services.controller.signal.throwIfAborted();
+        // The integration borrows this scope, and close() waits for the work the scope tracks, so the run is not tracked:
+        // it observes the scope signal and is awaited here, bounded, before the owner closes the scope.
+        const run = Promise.resolve(
           config.config.integration.run({
             config,
             target,
@@ -224,10 +243,34 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
             ...(action === 'serve' ? { reporterMode, onReady: markReady } : {}),
           }),
         );
+        const outcome = run.then(
+          () => undefined,
+          (error: unknown) => ({ error }),
+        );
+        try {
+          await Promise.race([run, owner.services.waitForStop()]);
+        } catch (error) {
+          const late = await deadline(outcome, INTEGRATION_STOP_TIMEOUT_MS, 'Waiting for the integration to stop').catch(
+            (timeout: unknown) => ({ error: timeout }),
+          );
+          const lateError = late?.error;
+          if (
+            lateError === undefined ||
+            lateError === error ||
+            lateError instanceof DesktopStopRequested ||
+            lateError === owner.services.controller.signal.reason
+          )
+            throw error;
+          throw error instanceof DesktopStopRequested
+            ? lateError
+            : new AggregateError([error, lateError], 'The integration failed while stopping.');
+        }
       } else if (action !== 'test' && action !== 'serve') {
         await owner.open(action === 'run');
         for (const command of desktopStageCommands(target, action)) {
-          await owner.services.guard(owner.runner.run(owner.prepare(command, `${action} ${target.endpoint}`)));
+          await owner.services.guard(
+            owner.runner.run(owner.prepare(command, `${action} ${target.endpoint}`), { signal: owner.services.controller.signal }),
+          );
         }
       } else {
         await owner.start();
@@ -250,10 +293,14 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
       if (!(error instanceof DesktopStopRequested)) {
         failure = error;
         reporter.fail(error);
+      } else if (action !== 'serve') {
+        // An interrupted one-shot action did not finish: leave its scope open so the run reports incomplete, not passed.
+        reporter.emit(
+          { kind: 'scope-start', payload: { label: `${action} ${target.endpoint} (interrupted)`, category: 'phase' } },
+          `interrupted-${randomUUID()}`,
+        );
       }
     } finally {
-      process.off('SIGINT', interrupt);
-      process.off('SIGTERM', interrupt);
       try {
         await owner.close();
       } catch (error) {
@@ -261,7 +308,11 @@ export async function runDesktopTestCli(argv = process.argv): Promise<void> {
         failure = failure === undefined ? error : new AggregateError([failure, error], 'Desktop execution and cleanup failed.');
       }
     }
-    process.exitCode = await session.close(failure);
+    try {
+      process.exitCode = await session.close(failure);
+    } finally {
+      releaseInterrupts();
+    }
     if (session.delegated && action !== 'serve' && (reporterMode === 'json' || reporterMode === 'ndjson')) {
       process.stdout.write(
         formatDesktopReporterValue(reporterMode, { runId: reporter.runId, delegated: true, exitCode: process.exitCode }),
