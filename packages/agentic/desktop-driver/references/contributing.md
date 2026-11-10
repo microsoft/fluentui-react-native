@@ -28,7 +28,7 @@ change-oriented guidance.
 | `src/wdio`         | Sanctioned WebdriverIO connection and commands                          |
 | `src/client`       | Low-level typed W3C client                                              |
 | `src/authority`    | Grants, private discovery records, and platform ownership adapters      |
-| `src/agent`        | Bounded agent-facing operations                                         |
+| `src/agent`        | JSON-safe agent API; `describe` trims an unbounded tree read            |
 | `src/operations`   | Versioned agent operations, references, release ledger, and journal     |
 | `src/artifacts`    | Evidence naming, confinement, and atomic writes                         |
 | `src/testing`      | Reusable fake harnesses, never production fallback                      |

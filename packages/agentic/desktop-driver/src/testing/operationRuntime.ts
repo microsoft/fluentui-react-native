@@ -81,6 +81,7 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
       accessibilityActions: false,
       accessibilityClick: false,
       boundedObservation: true,
+      clear: true,
       elementCapture: false,
       keyboard: false,
       physicalClick: false,

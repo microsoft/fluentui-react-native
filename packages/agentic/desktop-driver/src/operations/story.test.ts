@@ -69,8 +69,7 @@ describe('stories', () => {
       matched: 2,
     });
     expect(second.result).not.toHaveProperty('next');
-    expect(second.result).not.toHaveProperty('complete');
-    expect(second.result).not.toHaveProperty('truncation');
+    expect(second.result).toMatchObject({ complete: true, truncation: [] });
     expect((second.result as { entries: object[] }).entries[0]).not.toHaveProperty('tags');
   });
 

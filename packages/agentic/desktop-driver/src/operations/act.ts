@@ -137,7 +137,7 @@ export function assertNotQuarantined(runtime: OperationRuntime): void {
 
 export function assertActionSupported(runtime: OperationRuntime, action: ActionName): void {
   const capability = requiredCapability[action];
-  if ((capability !== undefined && !runtime.capabilities[capability]) || (action === 'clear' && runtime.capabilities.clear === false)) {
+  if ((capability !== undefined && !runtime.capabilities[capability]) || (action === 'clear' && !runtime.capabilities.clear)) {
     throw rejection(runtime, 'unsupported operation', 'action-unsupported', `This provider does not support the ${action} action.`);
   }
 }

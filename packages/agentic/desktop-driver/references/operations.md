@@ -292,12 +292,14 @@ A session's `furn:inputMode` ([protocol](protocol.md#sessions-and-targets)) limi
 mechanisms `act` may use. In an `accessible` session the runtime reports no
 `physicalClick` or `keyboard`, so `click` and `type` fail with
 `action-unsupported`. A strict session (`accessible` or `physical`) also needs
-`clear` to use one mechanism, semantic or keyboard respectively. When the
-runtime reports its `clear` capability false, because the host cannot clear with
-only that mechanism, `clear` fails with `action-unsupported` before anything is
-dispatched, and `sequence` refuses the whole request up front. A mechanism the
-policy forbids or the host does not deliver fails with `input-policy` or
-`input-unsupported`, and a host that cleared by another mechanism than the one
+`clear` to use one mechanism, semantic or keyboard respectively. The service
+always reports its `clear` capability from the session's mode and the target's
+features: it is false when the mode forbids that mechanism or the target cannot
+clear with only that mechanism, and never left permissive by omission. Then
+`clear` fails with `action-unsupported` before anything is dispatched, and
+`sequence` refuses the whole request up front. A mechanism the policy forbids or
+the host does not deliver fails with `input-policy` or `input-unsupported` if it
+reaches the host, and a host that cleared by another mechanism than the one
 required fails with `input-mechanism-mismatch` after the clear applied.
 
 `perform` names an action by what `observe`'s `actions` fact shows, such as
@@ -440,12 +442,14 @@ the catalog the build recorded: `entries` of `id`, `title`, `name`, and
 `tags`, filtered by `filter` (any case, over id, title, and name), `limit` per
 page (default 25, at most 100), from `offset`, with `next` naming the following
 page. `matched` counts the stories the filter matches and `total` the catalog.
-When stories after `offset` do not fit the page, `complete` is `false` and
-`truncation` lists a `limit` entry; both are absent when the page reaches the
-end. Ids are clipped to 256 characters, titles and names to 200, and tags to 16 of
-64, with invisible characters made visible. An entry whose text was cut lists
-those fields in `clipped`; a clipped `id` is not one `story` accepts. Any other target reports both
-operations as unavailable with `stories-unsupported`.
+`complete` and `truncation` are always present: when matching stories after
+`offset` do not fit the page, `complete` is `false` and `truncation` lists a
+`limit` entry; when the page reaches the end, `complete` is `true` and
+`truncation` is empty. Stories skipped by `offset` do not count. Ids are
+clipped to 256 characters, titles and names to 200, and tags to 16 of 64, with
+invisible characters made visible. An entry whose text was cut lists those
+fields in `clipped`; a clipped `id` is not one `story` accepts. Any other target
+reports both operations as unavailable with `stories-unsupported`.
 
 `current` names the story this session selected and how it was confirmed:
 `marker` when the story root's marker in the current window names it,

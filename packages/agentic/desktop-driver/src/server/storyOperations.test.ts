@@ -311,12 +311,14 @@ describe('story operations', () => {
   test('select a story the story root confirms, and expire references into the preview it replaced', async () => {
     await withStories(async ({ session }) => {
       expect((await session.stories()).result).toEqual({
+        complete: true,
         entries: [
           { id: 'components-button--default', name: 'Default', title: 'Components/Button' },
           { id: 'components-checkbox--default', name: 'Default', title: 'Components/Checkbox' },
         ],
         matched: 2,
         total: 2,
+        truncation: [],
       });
       const found = (await session.find({ automationId: 'button-primary' })).result;
       expect(found.outcome).toBe('unique');

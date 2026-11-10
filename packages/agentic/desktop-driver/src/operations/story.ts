@@ -43,7 +43,7 @@ const currentStorySchema = z.strictObject({
 const storiesOutput = z.strictObject({
   changed: z.literal(true).optional().describe('Another client changed the rendered story, so preview references expired.'),
   current: currentStorySchema.optional().describe('The story this session selected.'),
-  complete: z.literal(false).optional().describe('Present when matching stories after offset were left out; see truncation and next.'),
+  complete: z.boolean().describe('True when no matching story after offset was left out; when false, see truncation and next.'),
   entries: z.array(
     z.strictObject({
       clipped: z
@@ -59,7 +59,7 @@ const storiesOutput = z.strictObject({
   matched: z.number().describe('Stories that match the filter.'),
   next: z.number().optional().describe('Pass as offset to read the stories that follow.'),
   total: z.number().describe('Stories in the catalog.'),
-  truncation: z.array(truncationSchema).optional().describe('Why stories were left out, when complete is false.'),
+  truncation: z.array(truncationSchema).describe('Why matching stories after offset were left out; empty when complete is true.'),
 });
 
 export type StoriesInput = z.input<typeof storiesInput>;
@@ -116,13 +116,13 @@ export const storiesOperation = registerOperation({
     const more = page.length > 0 && end < matching.length;
     return {
       ...(current.changed ? { changed: true as const } : {}),
-      ...(more ? { complete: false as const } : {}),
+      complete: !more,
       ...(current.story ? { current: current.story } : {}),
       entries: page.map(describeEntry),
       matched: matching.length,
       ...(more ? { next: end } : {}),
       total: catalog.length,
-      ...(more ? { truncation: [{ limit: input.limit, omitted: matching.length - end, reason: 'limit' as const }] } : {}),
+      truncation: more ? [{ limit: input.limit, omitted: matching.length - end, reason: 'limit' as const }] : [],
     };
   },
   summarize(input, output) {

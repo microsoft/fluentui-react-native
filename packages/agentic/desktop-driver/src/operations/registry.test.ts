@@ -5,6 +5,7 @@ import { describeOperations, lookupOperation } from './registry';
 const readOnly = {
   accessibilityActions: false,
   accessibilityClick: false,
+  clear: false,
   elementCapture: false,
   keyboard: false,
   physicalClick: false,
@@ -16,6 +17,7 @@ const everything = {
   accessibilityActions: true,
   accessibilityClick: true,
   boundedObservation: true,
+  clear: true,
   elementCapture: true,
   keyboard: true,
   physicalClick: true,
