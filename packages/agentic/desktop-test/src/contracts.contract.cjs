@@ -2183,6 +2183,7 @@ async function main() {
             ['failed'],
             JSON.stringify(result),
           );
+          assert(result.work[0].label.endsWith('spec.mjs'), JSON.stringify(result));
           const log = result.artifacts.find((artifact) => artifact.path.startsWith('commands/'));
           assert(
             log && fs.readFileSync(path.join(run.root, log.path), 'utf8').includes('original spec load failure'),
