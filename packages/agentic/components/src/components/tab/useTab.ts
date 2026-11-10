@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Platform, Pressable } from 'react-native';
 
 import {
+  type FocusKeyboardEvent,
   type PropsWithRefOf,
   resolveAccessibilityAction,
   useAccessibilityLabelWarning,
@@ -17,6 +18,10 @@ import type { TabProps, TabState } from './tab.types';
 import { Icon } from '../../primitives/icon/icon';
 import { TabListContext } from '../tablist/TabListContext';
 import { Text } from '../text/text';
+
+type Win32KeyboardProps = {
+  keyDownEvents?: ({ key: string } & Pick<FocusKeyboardEvent['nativeEvent'], 'altKey' | 'ctrlKey' | 'metaKey' | 'shiftKey'>)[];
+};
 
 /**
  * Hook to create the state for a Tab component.
@@ -44,6 +49,8 @@ export function useTab_unstable(props: TabProps): TabState {
   const listSelected = tabList ? tabList.selectedValue === value : selected;
   const listFocusable = tabList ? tabList.activeValue === value && !listDisabled : (rest.focusable ?? !disabled);
   const { onFocus, onBlur, onKeyDown, onPress, onAccessibilityAction, ...nativeRest } = rest;
+  const nativeKeyboardProps: typeof nativeRest & Win32KeyboardProps = nativeRest;
+  const platform: string = Platform.OS;
   const registerTab = tabList?.registerTab;
 
   useAccessibilityLabelWarning({
@@ -59,6 +66,17 @@ export function useTab_unstable(props: TabProps): TabState {
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable(
     {
       ...nativeRest,
+      // Win32 native navigation runs before JS cancellation, including at a non-wrapping edge.
+      ...(platform === 'win32' &&
+        tabList &&
+        !listDisabled && {
+          keyDownEvents: [
+            ...(nativeKeyboardProps.keyDownEvents ?? []),
+            ...[...(tabList.orientation === 'vertical' ? ['ArrowUp', 'ArrowDown'] : ['ArrowLeft', 'ArrowRight']), 'Home', 'End'].map(
+              (key) => ({ key, altKey: false, ctrlKey: false, metaKey: false, shiftKey: false }),
+            ),
+          ],
+        }),
       accessibilityPosInSet: tabList?.getPosition(value),
       accessibilitySetSize: tabList?.setSize,
       accessibilityRole: 'tab',

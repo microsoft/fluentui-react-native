@@ -286,6 +286,63 @@ describe('Menu', () => {
     expect(focusStrategies()).toEqual(['target']);
   });
 
+  it('MNU-004 MNU-010 toggles through accessibility tap once and enters the first row', async () => {
+    const onPress = jest.fn();
+    const onAccessibilityAction = jest.fn();
+    const onOpenChange = jest.fn();
+    await render(<Scene onOpenChange={onOpenChange} trigger={{ content: 'Edit', testID: 'trigger', onPress, onAccessibilityAction }} />);
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityTap', pointerPress);
+    expect(onPress.mock.calls).toEqual([[pointerPress]]);
+    expect(screen.getByTestId('surface').props.focusable).toBe(false);
+    await ready();
+    expect(focusStrategies()).toEqual(['first']);
+
+    const action = { nativeEvent: { actionName: 'activate' } };
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityAction', action);
+    expect(onAccessibilityAction.mock.calls).toEqual([[action]]);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId('trigger').props.accessibilityState.expanded).toBe(true);
+
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityTap', pointerPress);
+    expect(onPress.mock.calls).toEqual([[pointerPress], [pointerPress]]);
+    expect(onOpenChange.mock.calls).toEqual([
+      [true, { reason: 'trigger' }],
+      [false, { reason: 'trigger' }],
+    ]);
+    expect(screen.queryByTestId('surface')).toBeNull();
+  });
+
+  it('preserves an explicit trigger accessibility callback without also forwarding press', async () => {
+    const onAccessibilityTap = jest.fn();
+    const onPress = jest.fn();
+    await render(<Scene trigger={{ content: 'Edit', testID: 'trigger', onAccessibilityTap, onPress }} />);
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityTap', pointerPress);
+    expect(onAccessibilityTap.mock.calls).toEqual([[pointerPress]]);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(screen.getByTestId('trigger').props.accessibilityState.expanded).toBe(true);
+  });
+
+  it('rejects native accessibility tap on a disabled trigger', async () => {
+    const onAccessibilityTap = jest.fn();
+    const onOpenChange = jest.fn();
+    await render(
+      <Scene onOpenChange={onOpenChange} trigger={{ content: 'Edit', testID: 'trigger', disabled: true, onAccessibilityTap }} />,
+    );
+    await act(async () => screen.getByTestId('trigger').props.onAccessibilityTap(pointerPress));
+    expect(onAccessibilityTap).not.toHaveBeenCalled();
+    expect(onOpenChange).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('surface')).toBeNull();
+  });
+
+  it.each([false, true])('reports accessibility requests without changing caller-owned open=%s', async (open) => {
+    const onOpenChange = jest.fn();
+    await render(<Scene open={open} onOpenChange={onOpenChange} />);
+    await fireEvent(screen.getByTestId('trigger'), 'accessibilityTap', pointerPress);
+    expect(onOpenChange.mock.calls).toEqual([[!open, { reason: 'trigger' }]]);
+    expect(screen.getByTestId('trigger').props.accessibilityState.expanded).toBe(open);
+    expect(screen.queryByTestId('surface') !== null).toBe(open);
+  });
+
   it('runs an activated row once, closes the menu, and reports the action', async () => {
     const onCut = jest.fn();
     const onOpenChange = jest.fn();

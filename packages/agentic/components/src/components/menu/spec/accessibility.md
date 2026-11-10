@@ -10,6 +10,13 @@ has no typed has-popup or controls property on Windows or macOS; the hint
 describes the behavior but is not a programmatic relationship
 (`menu-semantics`).
 
+Menu registers native accessibility-tap activation on the trigger. It toggles
+presence with reason `trigger` and enters the first row, independently of
+pointer modality. An explicit caller accessibility-tap handler receives the
+original arguments; otherwise a supplied native event reaches the caller's
+`onPress`. Invoke's additional action notifications do not toggle presence again.
+Disabled triggers refuse activation, and controlled presence remains caller-owned.
+
 ## Surfaces
 
 Each popup surface is accessible with the `menu` role. The root surface takes
