@@ -19,7 +19,7 @@ const tagLetters = 'abcdefghijklmnopqrstuvwxyz';
 const minTagLength = 4;
 const maxTagLength = 8;
 const maxSerialDigits = 9;
-const maxReferenceLength = 32;
+export const maxReferenceLength = 32;
 const attemptsPerLength = 8;
 const rememberedEarlierTags = 16;
 
@@ -249,10 +249,14 @@ const failureErrors: Record<ReferenceFailure, { code: WebDriverErrorCode; detail
   unknown: { code: 'no such element', detail: 'has not been issued in this session' },
 };
 
-/** The error for a reference that failed to resolve. It names the reference but never echoes anything else. */
+/**
+ * The error for a reference that failed to resolve. A well-formed reference is short and drawn from a closed alphabet,
+ * so naming it is safe. A malformed one is the caller's own text, which an agent would read back as an instruction.
+ */
 export function referenceFailureError(failure: ReferenceFailure, reference: string): WebDriverError {
   const { code, detail } = failureErrors[failure];
-  return new WebDriverError(code, `Reference "${printable(reference)}" ${detail}.`, { reason: `ref-${failure}` });
+  const subject = failure === 'malformed' ? 'The reference' : `Reference "${printable(reference)}"`;
+  return new WebDriverError(code, `${subject} ${detail}.`, { reason: `ref-${failure}` });
 }
 
 /** The error for a reference whose element the provider no longer tracks. */

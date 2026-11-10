@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import type { OperationBudget } from './limits.js';
 import { observeFacts } from './projection.js';
+import { maxReferenceLength, parseReference } from './refs.js';
 
 /** An integer budget with its range and default, so the schema and the service read the same limits. */
 export function budgetField(budget: OperationBudget) {
@@ -10,14 +11,30 @@ export function budgetField(budget: OperationBudget) {
 
 /**
  * Output shapes that more than one operation returns. Outputs are strict here so tests catch a stray field, and the
- * catalog opens them (`catalog.ts`): a result may gain optional fields within a schema version, so consumers must
+ * catalog opens them (`registry.ts`): a result may gain optional fields within a schema version, so consumers must
  * ignore fields they do not know.
  */
 
 export const factSchema = z.enum(observeFacts);
 
-/** An element reference as callers send it. The reference table owns the grammar; this only bounds the input. */
-export const referenceSchema = z.string().min(1).max(32);
+/**
+ * An element reference as callers send it. The grammar is checked here, so text that is not a reference never reaches
+ * an operation, its journal entry, or an error message. The failure keeps the reason `ref-malformed`, which an agent
+ * can tell apart from a reference that was well formed and has expired.
+ */
+export const referenceSchema = z
+  .string()
+  .min(1)
+  .max(maxReferenceLength)
+  .superRefine((value, context) => {
+    if (parseReference(value) === undefined) {
+      context.addIssue({
+        code: 'custom',
+        message: 'Not an element reference. Pass one exactly as a result showed it.',
+        params: { reason: 'ref-malformed' },
+      });
+    }
+  });
 
 /** A sample id as callers cite it: `o` and the sample's sequence number. */
 export const sampleIdSchema = z.string().regex(/^o[1-9][0-9]{0,9}$/, 'A sample id is "o" followed by a number, as a result showed it.');
