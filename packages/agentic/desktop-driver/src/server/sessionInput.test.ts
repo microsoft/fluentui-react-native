@@ -1,5 +1,6 @@
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
 import type { DesktopSessionClient } from '../client/DesktopDriverClient.js';
+import type { SequenceInput } from '../operations/index.js';
 import { compareDesktopInputReceipts, validateDesktopCaseOptions } from '../authoring/input.js';
 import type { DesktopInputMode } from '../authoring/input.js';
 import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
@@ -167,6 +168,68 @@ describe('Desktop Driver session input policy', () => {
       },
       { features: { accessibilityClick: false, physicalClick: false } },
     );
+  });
+
+  describe('sequence preflight of a strict clear', () => {
+    const clearStep = { act: { action: 'clear', find: { automationId: 'field' } } } as const;
+    const typeStep = { act: { action: 'type', find: { automationId: 'field' }, text: 'typed' } } as const;
+    const activateStep = { act: { action: 'activate', find: { automationId: 'save' } } } as const;
+    const effects = (harness: DesktopDriverTestHarness) =>
+      harness.host.actions.filter((action) => ['clear', 'click', 'sendKeys'].includes(String(action.type)));
+    const unsupportedClear = { code: 'unsupported operation', data: expect.objectContaining({ reason: 'action-unsupported' }) };
+
+    test.each([
+      ['accessible', [activateStep, clearStep]],
+      ['physical', [typeStep, clearStep]],
+    ] satisfies [DesktopInputMode, SequenceInput['steps']][])(
+      'refuses a %s session whose target cannot clear with one mechanism before an earlier step acts',
+      async (mode, steps) => {
+        await withSession(
+          mode,
+          async ({ harness, session }) => {
+            await expect(session.sequence({ steps })).rejects.toMatchObject(unsupportedClear);
+            await expect(session.act({ action: 'clear', find: { automationId: 'field' } })).rejects.toMatchObject(unsupportedClear);
+            expect(effects(harness)).toEqual([]);
+            await expect(session.getInput()).resolves.toEqual({ mode, receipts: {} });
+          },
+          { features: { strictClear: false } },
+        );
+      },
+    );
+
+    test('refuses an omitted strictClear the same way, never leaving a strict clear permissive', async () => {
+      await withSession(
+        'accessible',
+        async ({ harness, session }) => {
+          await expect(session.sequence({ steps: [activateStep, clearStep] })).rejects.toMatchObject(unsupportedClear);
+          expect(effects(harness)).toEqual([]);
+        },
+        { features: { strictClear: undefined } },
+      );
+    });
+
+    test('runs the same sequence when the target clears with the mode’s mechanism', async () => {
+      await withSession('accessible', async ({ harness, session }) => {
+        const { result } = await session.sequence({ steps: [activateStep, clearStep] });
+        expect(result).toMatchObject({ status: 'completed' });
+        expect(effects(harness)).toMatchObject([
+          { mode: 'accessibility', type: 'click' },
+          { mechanism: 'semantic', type: 'clear' },
+        ]);
+      });
+    });
+
+    test('leaves a compatibility session to the host, which decides at dispatch', async () => {
+      await withSession(
+        undefined,
+        async ({ harness, session }) => {
+          const { result } = await session.sequence({ steps: [activateStep, clearStep] });
+          expect(result).toMatchObject({ status: 'completed' });
+          expect(effects(harness)).toHaveLength(2);
+        },
+        { features: { strictClear: false } },
+      );
+    });
   });
 
   test('fails a strict clear that the host made another way, after recording what it delivered', async () => {

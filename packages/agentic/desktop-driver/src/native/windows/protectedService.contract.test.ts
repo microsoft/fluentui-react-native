@@ -1,11 +1,19 @@
 // Native contract for a protected Desktop Driver service that serves the real Windows helper. A DesktopAuthority guards
 // every route, and the one target is the plain Win32 fixture in fixtures/win32, which win32FixtureSupport builds on
 // demand. It proves that grants, session ownership, contention, revocation, and quarantine hold with a native provider
-// behind them, which the fake host in src/server cannot show. Opt in with FURN_NATIVE_DRIVER_TEST=1 and run it serially
-// on an interactive desktop: yarn test --runInBand protectedService. The fixture stays off every monitor and never takes
-// the foreground.
+// behind them, which the fake host in src/server cannot show. Lifting a launched application's quarantine takes proof of
+// its exit, so the case that closes the application serves with the helper's incarnation probe and private storage, as a
+// Windows supervisor does; without them nothing proves the exit and the quarantine stays. Opt in with
+// FURN_NATIVE_DRIVER_TEST=1 and run it serially on an interactive desktop: yarn test --runInBand protectedService. The
+// fixture stays off every monitor and never takes the foreground.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+
 import { DesktopAuthority } from '../../authority/grants';
 import type { IssuedDesktopGrant } from '../../authority/grants';
+import { createWindowsApplicationProbe } from '../../authority/windowsApplicationProbe';
+import { createWindowsPrivateStorage } from '../../authority/windowsPrivateStorage';
 import { createDesktopDriverClient } from '../../client/DesktopDriverClient';
 import type { DesktopDriverClient, DesktopSessionClient } from '../../client/DesktopDriverClient';
 import type { DesktopHost, DesktopTarget } from '../../host/types';
@@ -40,15 +48,25 @@ type Service = {
   clientFor(grant: IssuedDesktopGrant): DesktopDriverClient;
 };
 
-async function withService(fixtureArguments: string[], body: (service: Service) => Promise<void>): Promise<void> {
+type ServiceOptions = {
+  /** Serves with durable settlement state and the helper's application-incarnation probe, as a Windows supervisor does. */
+  recovery?: boolean;
+};
+
+async function withService(
+  fixtureArguments: string[],
+  body: (service: Service) => Promise<void>,
+  options: ServiceOptions = {},
+): Promise<void> {
   const title = `furn-protected-${process.pid}-${Date.now()}`;
+  const artifact = await helperArtifact();
   const host = new NativeDesktopHost({
     application: {
       arguments: ['--title', title, '--offscreen', '1', ...fixtureArguments],
       executablePath: await fixtureExecutable(),
       windowTitle: title,
     },
-    artifact: await helperArtifact(),
+    artifact,
     endpoint: 'win32',
   });
   const hostCalls: string[] = [];
@@ -64,19 +82,39 @@ async function withService(fixtureArguments: string[], body: (service: Service) 
   const authority = new DesktopAuthority();
   const agent = authority.issue({ label: 'agent', targets: [targetId] });
   const other = authority.issue({ label: 'wdio', targets: [targetId] });
-  const server = await createDesktopDriverServer({ authority, targets: [target] });
+  const scratch = options.recovery ? fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), 'furn-protected-state-'))) : undefined;
   try {
-    await body({
-      agent,
-      authority,
-      clientFor: (grant) => createDesktopDriverClient({ grant: grant.token, url: server.url }),
-      hostCalls,
-      other,
-      server,
-    });
+    const recovery =
+      scratch === undefined
+        ? {}
+        : {
+            recovery: {
+              probeApplication: createWindowsApplicationProbe({ artifact }),
+              storage: await createWindowsPrivateStorage({ artifact, root: path.join(scratch, 'state') }),
+            },
+          };
+    const server = await createDesktopDriverServer({ authority, targets: [target], ...recovery });
+    try {
+      await body({
+        agent,
+        authority,
+        clientFor: (grant) => createDesktopDriverClient({ grant: grant.token, url: server.url }),
+        hostCalls,
+        other,
+        server,
+      });
+    } finally {
+      await server.close();
+    }
   } finally {
-    await server.close();
+    if (scratch !== undefined) {
+      fs.rmSync(scratch, { force: true, recursive: true });
+    }
   }
+}
+
+function withRecoveringService(fixtureArguments: string[], body: (service: Service) => Promise<void>): Promise<void> {
+  return withService(fixtureArguments, body, { recovery: true });
 }
 
 function recordCalls(host: NativeDesktopHost, calls: string[]): DesktopHost {
@@ -201,7 +239,7 @@ describe('Protected Desktop Driver service against the Windows helper', () => {
   });
 
   windowsTest('quarantines the target for every grant when the provider cannot settle, until the application is closed', async () => {
-    await withService(['--stuck-ms', '8000'], async ({ agent, clientFor, other, server }) => {
+    await withRecoveringService(['--stuck-ms', '8000'], async ({ agent, clientFor, other, server }) => {
       const session = await clientFor(agent).newSession(capabilities);
       const stuck = await session.findElement('accessibility id', '1009');
       const activate = await session.findElement('accessibility id', '1001');
@@ -228,12 +266,30 @@ describe('Protected Desktop Driver service against the Windows helper', () => {
         expect(text).not.toContain('sessionId');
       }
 
-      // Closing the launched application verifies its exit, which ends the quarantine for the next grant.
+      // Closing the application is no proof that it exited. The service lifts the quarantine for the next grant only
+      // when the helper's incarnation probe reports the exact process the quarantine was raised against gone.
       await session.delete();
       const next = await clientFor(other).newSession(capabilities);
       await expect((await next.findElement('accessibility id', '1001')).click()).resolves.toBeNull();
       await waitFor('the click to reach the new application', async () => (await statusText(next)) === 'Activated 1 times');
       await next.delete();
+    });
+  });
+
+  windowsTest('keeps the quarantine after the application is closed when nothing can prove it exited', async () => {
+    await withService(['--stuck-ms', '8000'], async ({ agent, clientFor, other, server }) => {
+      const session = await clientFor(agent).newSession(capabilities);
+      await expect((await session.findElement('accessibility id', '1009')).click()).rejects.toMatchObject({
+        data: { mutation: { disposition: 'indeterminate', effect: 'unknown', quarantined: true } },
+      });
+
+      // Without a probe, closing the application never ends the quarantine; only the operator can.
+      await session.delete();
+      const refused = await call(server, 'POST', '/session', { body: { capabilities }, grant: other });
+      expect(refused.body.value).toMatchObject({
+        data: { quarantine: { effect: 'unknown' }, reason: 'target-quarantined' },
+        error: 'session not created',
+      });
     });
   });
 });

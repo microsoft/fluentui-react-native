@@ -21,10 +21,10 @@ import {
   readProviderQuarantine,
 } from '../protocol/settlement.js';
 import type { MutationEffect } from '../protocol/settlement.js';
-import { withCommandTimeout } from '../protocol/timeouts.js';
+import { withCommandTimeout, withDeadline } from '../protocol/timeouts.js';
 import type { DesktopClickMode, DesktopTimeouts, WebDriverTimeouts } from '../protocol/types.js';
 import type { StoryReadyResult } from '../storybook.js';
-import { applicationOf } from './settlementJournal.js';
+import { applicationOf, defaultStorageDeadlineMs } from './settlementJournal.js';
 import type { ProbeApplication, QuarantineRecord, SettlementJournal } from './settlementJournal.js';
 
 export type ElementRecord = {
@@ -72,6 +72,8 @@ export type SessionManagerOptions = {
   journal?: SettlementJournal;
   /** Proves that a quarantined application incarnation has exited, which lifts its quarantine. */
   probeApplication?: ProbeApplication;
+  /** Bounds one probe, in milliseconds. A probe that misses it answers `unknown`. Defaults to 10 seconds. */
+  probeDeadlineMs?: number;
 };
 
 /** The evidence an operator gives for lifting a quarantine. */
@@ -90,6 +92,11 @@ export type RecoverTargetResult = {
 
 export type DesktopSession = {
   commandAbortController: AbortController;
+  /**
+   * Aborts when a DELETE for the session arrives, before it reaches the front of the session's queue. It ends waits the
+   * client sized itself, such as the implicit wait, so they cannot hold the delete up.
+   */
+  closeRequested: AbortController;
   clickMode: DesktopClickMode;
   createdAt: string;
   currentWindowId: string;
@@ -135,12 +142,14 @@ export class SessionManager {
   private readonly idleTimeoutMs: number;
   private readonly journal: SettlementJournal | undefined;
   private readonly probeApplication: ProbeApplication | undefined;
+  private readonly probeDeadlineMs: number;
   private readonly redactSessionIds: boolean;
 
   constructor(options: SessionManagerOptions = {}) {
     this.idleTimeoutMs = options.idleTimeoutMs ?? 0;
     this.journal = options.journal;
     this.probeApplication = options.probeApplication;
+    this.probeDeadlineMs = options.probeDeadlineMs ?? defaultStorageDeadlineMs;
     this.redactSessionIds = options.redactSessionIds === true;
   }
 
@@ -204,11 +213,18 @@ export class SessionManager {
   }
 
   private async probe(application: NonNullable<QuarantineRecord['application']>): Promise<'exited' | 'running' | 'unknown'> {
-    if (!this.probeApplication) {
+    const probe = this.probeApplication;
+    if (!probe) {
       return 'unknown';
     }
     try {
-      return await this.probeApplication({ processId: application.processId, processStartedAt: application.processStartedAt });
+      // The probe cannot be cancelled, and a hung one must not hold the input queue or a create; a verdict that misses its
+      // deadline is no proof.
+      return await withDeadline(
+        () => probe({ processId: application.processId, processStartedAt: application.processStartedAt }),
+        this.probeDeadlineMs,
+        'Probing the quarantined application',
+      );
     } catch {
       return 'unknown';
     }
@@ -369,6 +385,7 @@ export class SessionManager {
       }
       const session: DesktopSession = {
         clickMode,
+        closeRequested: new AbortController(),
         commandAbortController: new AbortController(),
         createdAt: new Date().toISOString(),
         currentWindowId: windows[0].id,
@@ -609,15 +626,20 @@ export class SessionManager {
     const journal = this.journal;
     // A mutation record left by an earlier failure already keeps the target quarantined across a restart; only recovery
     // commands get past the quarantine, and they need no record of their own.
-    const journaled = journal !== undefined && !journal.hasMutation(targetId);
+    let journaled = journal !== undefined && !journal.hasMutation(targetId);
     // Marked before the record is written, so recovery can never interleave with a mutation that is being recorded.
     this.mutatingTargets.add(targetId);
     try {
-      if (journaled) {
+      if (journaled && journal) {
         try {
           await journal.beginMutation({ application: applicationOf(session.lease), command: description, sessionId: session.id, targetId });
         } catch (error) {
-          throw createJournalRefusal(error);
+          if (!options.recovery) {
+            throw createJournalRefusal(error);
+          }
+          // Refusing a recovery command, such as releasing held input, would leave the damage it repairs in place. It
+          // runs without a record, and a failure that leaves its effect unknown quarantines the target in memory.
+          journaled = false;
         }
       }
       let result: T;
@@ -711,6 +733,9 @@ export class SessionManager {
     });
     const failures: unknown[] = [];
     try {
+      // Whether the release reached the host. A release that never ran leaves input held, so the application stays open
+      // and the delete can be retried.
+      let releaseRan = false;
       try {
         // The quarantine record keeps this description and the failure text, and other callers can read both, so
         // neither names the session.
@@ -718,26 +743,30 @@ export class SessionManager {
           this.runMutation(
             session,
             'Releasing input while closing the session',
-            () =>
-              withCommandTimeout(
+            () => {
+              releaseRan = true;
+              return withCommandTimeout(
                 (signal) => session.target.host.releaseActions(signal),
                 session.desktopTimeouts.nativeCommand,
                 'Releasing input while closing the session',
-              ),
+              );
+            },
             { recovery: true },
           ),
         );
       } catch (error) {
         failures.push(error);
       }
-      try {
-        await withCommandTimeout(
-          (signal) => session.target.host.closeApplication(session.lease, signal),
-          session.desktopTimeouts.nativeCommand,
-          `Closing application for session "${id}"`,
-        );
-      } catch (error) {
-        failures.push(error);
+      if (releaseRan) {
+        try {
+          await withCommandTimeout(
+            (signal) => session.target.host.closeApplication(session.lease, signal),
+            session.desktopTimeouts.nativeCommand,
+            `Closing application for session "${id}"`,
+          );
+        } catch (error) {
+          failures.push(error);
+        }
       }
       if (failures.length === 1) {
         throw failures[0];
@@ -748,14 +777,17 @@ export class SessionManager {
       session.lifecycle = 'closed';
       this.sessions.delete(id);
       this.sessionsByTarget.delete(session.target.id);
-      // Closing a launched application verifies the exit of the exact incarnation the quarantine was raised against.
-      // An attached application is left running, so its quarantine stays until it is explicitly recovered.
-      // Its durable records go first, so a target whose records remain stays quarantined until a probe or the operator
-      // lifts it.
-      if (session.lease.ownership === 'launched' && this.quarantines.has(session.target.id)) {
+      // `closeApplication` resolving does not promise that the process exited, so a launched application's quarantine is
+      // lifted only when the probe proves the exact incarnation it was raised against has exited. Without that proof,
+      // or for an attached application that is left running, the quarantine stays until the next session's probe or
+      // the operator lifts it. Its durable records go first, so a target whose records remain stays quarantined.
+      const quarantine = this.quarantines.get(session.target.id);
+      if (session.lease.ownership === 'launched' && quarantine?.application && (await this.probe(quarantine.application)) === 'exited') {
         try {
           await this.journal?.clear(session.target.id);
-          this.quarantines.delete(session.target.id);
+          if (this.quarantines.get(session.target.id) === quarantine) {
+            this.quarantines.delete(session.target.id);
+          }
         } catch {
           // The application has exited, so the next session for this target can prove that and lift the quarantine.
         }

@@ -2,11 +2,17 @@ import type { DesktopTarget } from '../host/types.js';
 
 export class TargetRegistry {
   private readonly targets = new Map<string, DesktopTarget>();
+  private readonly listeners: ((target: DesktopTarget) => void)[] = [];
 
   constructor(targets: readonly DesktopTarget[] = []) {
     for (const target of targets) {
       this.register(target);
     }
+  }
+
+  /** Calls `listener` for every target registered from now on, so a service can prepare a target that arrives late. */
+  onRegister(listener: (target: DesktopTarget) => void): void {
+    this.listeners.push(listener);
   }
 
   register(target: DesktopTarget): void {
@@ -26,6 +32,9 @@ export class TargetRegistry {
       throw new TypeError('Target launchModes must contain attach and/or launch.');
     }
     this.targets.set(target.id, target);
+    for (const listener of this.listeners) {
+      listener(target);
+    }
   }
 
   get(id: string): DesktopTarget | undefined {

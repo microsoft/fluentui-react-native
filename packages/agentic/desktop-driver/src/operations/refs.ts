@@ -3,7 +3,7 @@ import { randomInt } from 'node:crypto';
 import type { NativeElementScope } from '../host/types.js';
 import { WebDriverError } from '../protocol/errors.js';
 import type { WebDriverErrorCode } from '../protocol/errors.js';
-import { referenceCapacity } from './limits.js';
+import { referenceCapacity, requireCapacity } from './limits.js';
 
 /**
  * Element references are opaque to callers: `<tag><serial>`, a lowercase base-36 tag that ends in a letter followed by
@@ -19,7 +19,7 @@ const tagLetters = 'abcdefghijklmnopqrstuvwxyz';
 const minTagLength = 4;
 const maxTagLength = 8;
 const maxSerialDigits = 9;
-const maxReferenceLength = 32;
+export const maxReferenceLength = 32;
 const attemptsPerLength = 8;
 const rememberedEarlierTags = 16;
 
@@ -115,7 +115,7 @@ export class ReferenceTable {
 
   constructor(tag: string, capacity: number = referenceCapacity.default) {
     this.tag = tag;
-    this.capacity = Math.max(referenceCapacity.floor, Math.floor(capacity));
+    this.capacity = requireCapacity('referenceCapacity', capacity, referenceCapacity);
   }
 
   get size(): number {
@@ -249,10 +249,14 @@ const failureErrors: Record<ReferenceFailure, { code: WebDriverErrorCode; detail
   unknown: { code: 'no such element', detail: 'has not been issued in this session' },
 };
 
-/** The error for a reference that failed to resolve. It names the reference but never echoes anything else. */
+/**
+ * The error for a reference that failed to resolve. A well-formed reference is short and drawn from a closed alphabet,
+ * so naming it is safe. A malformed one is the caller's own text, which an agent would read back as an instruction.
+ */
 export function referenceFailureError(failure: ReferenceFailure, reference: string): WebDriverError {
   const { code, detail } = failureErrors[failure];
-  return new WebDriverError(code, `Reference "${printable(reference)}" ${detail}.`, { reason: `ref-${failure}` });
+  const subject = failure === 'malformed' ? 'The reference' : `Reference "${printable(reference)}"`;
+  return new WebDriverError(code, `${subject} ${detail}.`, { reason: `ref-${failure}` });
 }
 
 /** The error for a reference whose element the provider no longer tracks. */

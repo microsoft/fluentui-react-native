@@ -19,6 +19,17 @@ const standardCapabilities = new Set([
   'webSocketUrl',
 ]);
 
+// The `furn:` capabilities a request may carry. The driver returns others (`furn:features`, `furn:storybook`), but a
+// request never sets them, so a misspelled name fails instead of silently selecting a default.
+const requestedFurnCapabilities = new Set([
+  'furn:clickMode',
+  'furn:endpoint',
+  'furn:inputMode',
+  'furn:launchMode',
+  'furn:renderer',
+  'furn:target',
+]);
+
 export type MatchedCapabilities = {
   clickMode: DesktopClickMode;
   hostInfo: DesktopHostInfo;
@@ -59,9 +70,11 @@ export async function matchCapabilities(
     const requestedClickMode = validateClickMode(requested['furn:clickMode']);
     const inputMode = validateInputMode(requested['furn:inputMode']);
     const launchMode = validateLaunchMode(requested['furn:launchMode']);
-    const targetId = requested['furn:target'];
+    const targetId = validateOptionalText(requested, 'furn:target');
+    validateOptionalText(requested, 'furn:endpoint');
+    validateOptionalText(requested, 'furn:renderer');
     const candidatesForTarget =
-      typeof targetId === 'string' ? targets.filter((target) => target.id === targetId) : targets.length === 1 ? targets : [];
+      targetId !== undefined ? targets.filter((target) => target.id === targetId) : targets.length === 1 ? targets : [];
 
     for (const target of candidatesForTarget) {
       if (requested.browserName !== undefined && requested.browserName !== 'furn-native-desktop') {
@@ -95,7 +108,7 @@ export async function matchCapabilities(
 export function createReturnedCapabilities(
   matched: MatchedCapabilities,
   host: DesktopHostInfo,
-  timeouts: Record<string, number>,
+  timeouts: Record<string, number | null>,
 ): Record<string, unknown> {
   return {
     browserName: 'furn-native-desktop',
@@ -106,6 +119,7 @@ export function createReturnedCapabilities(
     'furn:endpoint': matched.target.endpoint,
     'furn:features': host.features,
     'furn:inputMode': matched.inputMode,
+    'furn:launchMode': matched.launchMode,
     ...(matched.target.renderer ? { 'furn:renderer': matched.target.renderer } : {}),
     'furn:storybook': Boolean(matched.target.storyOrchestrator),
     'furn:target': matched.target.id,
@@ -124,7 +138,21 @@ function validateCapabilityNames(capabilities: Record<string, unknown>): void {
     if (!standardCapabilities.has(name) && !name.includes(':')) {
       throw invalidArgument(`Extension capability "${name}" must contain a vendor prefix followed by ":".`);
     }
+    if (name.startsWith('furn:') && !requestedFurnCapabilities.has(name)) {
+      throw invalidArgument(`Capability "${name}" is not a "furn:" capability a request can set.`);
+    }
   }
+}
+
+function validateOptionalText(capabilities: Record<string, unknown>, name: string): string | undefined {
+  const value = capabilities[name];
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value !== 'string' || value.length === 0) {
+    throw invalidArgument(`"${name}" must be a non-empty string.`);
+  }
+  return value;
 }
 
 function validateClickMode(requested: unknown): DesktopClickMode | 'auto' {

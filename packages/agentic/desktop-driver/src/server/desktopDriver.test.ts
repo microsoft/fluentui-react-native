@@ -247,6 +247,11 @@ describe('Desktop Driver W3C remote end', () => {
     ['furn:clickMode', 'not-a-click-mode'],
     ['furn:inputMode', 'strict'],
     ['furn:launchMode', 'not-a-launch-mode'],
+    ['furn:inputmode', 'accessible'],
+    ['furn:features', {}],
+    ['furn:target', 7],
+    ['furn:endpoint', ''],
+    ['furn:renderer', false],
   ])('rejects invalid %s before probing the target', async (capability, value) => {
     const harness = await createDesktopDriverTestHarness();
     const probe = jest.spyOn(harness.host, 'probe');
@@ -262,6 +267,18 @@ describe('Desktop Driver W3C remote end', () => {
         }),
       ).rejects.toMatchObject({ code: 'invalid argument' });
       expect(probe).not.toHaveBeenCalled();
+    } finally {
+      await harness.close();
+    }
+  });
+
+  test('returns the launch mode the session was created with', async () => {
+    const harness = await createDesktopDriverTestHarness();
+    try {
+      const client = createDesktopDriverClient({ url: harness.server.url });
+      const session = await client.newSession({ alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id } });
+      expect(session.capabilities['furn:launchMode']).toBe('launch');
+      await session.delete();
     } finally {
       await harness.close();
     }
@@ -616,6 +633,100 @@ describe('Desktop Driver W3C remote end', () => {
     } finally {
       await harness.close();
     }
+  });
+
+  describe('timeouts', () => {
+    async function withSession(
+      run: (session: Awaited<ReturnType<ReturnType<typeof createDesktopDriverClient>['newSession']>>) => Promise<void>,
+    ) {
+      const harness = await createDesktopDriverTestHarness();
+      try {
+        const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+          alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+        });
+        await run(session);
+        await session.delete().catch((error: { code?: string }) => {
+          if (error.code !== 'invalid session id') {
+            throw error;
+          }
+        });
+      } finally {
+        await harness.close();
+      }
+    }
+
+    test('applies nothing when any one value is invalid', async () => {
+      await withSession(async (session) => {
+        const before = await session.getTimeouts();
+        await expect(session.setTimeouts({ implicit: 5, pageLoad: -1 })).rejects.toMatchObject({ code: 'invalid argument' });
+        await expect(session.setTimeouts({ implicit: 5, script: 1.5 })).rejects.toMatchObject({ code: 'invalid argument' });
+        expect(await session.getTimeouts()).toEqual(before);
+      });
+    });
+
+    test.each([1e300, Number.MAX_SAFE_INTEGER + 2, 0.5, '5', true])('rejects the timeout %j', async (value) => {
+      await withSession(async (session) => {
+        await expect(session.setTimeouts({ implicit: value as number })).rejects.toMatchObject({ code: 'invalid argument' });
+      });
+    });
+
+    test('accepts a null script timeout and keeps the others', async () => {
+      await withSession(async (session) => {
+        await session.setTimeouts({ implicit: 7, script: null });
+        expect(await session.getTimeouts()).toMatchObject({ implicit: 7, script: null });
+      });
+    });
+
+    test('ends an implicit wait as soon as the session is deleted', async () => {
+      await withSession(async (session) => {
+        await session.setTimeouts({ implicit: 60_000 });
+        const started = Date.now();
+        const search = session.findElement('accessibility id', 'never-present');
+        const settled = search.then(
+          () => 'found',
+          (error: { code?: string }) => error.code,
+        );
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        await session.delete();
+
+        expect(await settled).toBe('unknown error');
+        expect(Date.now() - started).toBeLessThan(5000);
+      });
+    });
+  });
+
+  describe('routing', () => {
+    test('answers an unknown driver-control route with unknown command', async () => {
+      const harness = await createDesktopDriverTestHarness();
+      try {
+        const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+          alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+        });
+        const body = await getJson(`${harness.server.url}/session/${session.id}/furn/nonexistent`, { expectStatus: 404 });
+        expect(body.value.error).toBe('unknown command');
+        await session.delete();
+      } finally {
+        await harness.close();
+      }
+    });
+
+    test('answers /window/new with the documented unsupported operation', async () => {
+      const harness = await createDesktopDriverTestHarness();
+      try {
+        const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
+          alwaysMatch: { platformName: 'windows', 'furn:target': harness.target.id },
+        });
+        const body = await getJson(`${harness.server.url}/session/${session.id}/window/new`, {
+          body: JSON.stringify({ type: 'tab' }),
+          expectStatus: 500,
+          method: 'POST',
+        });
+        expect(body.value.error).toBe('unsupported operation');
+        await session.delete();
+      } finally {
+        await harness.close();
+      }
+    });
   });
 });
 

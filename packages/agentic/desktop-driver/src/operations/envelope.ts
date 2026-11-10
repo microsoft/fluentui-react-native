@@ -106,15 +106,22 @@ export function parseOperationRequest(body: unknown): OperationRequest {
   return typeof requestId === 'string' ? { input, requestId } : { input };
 }
 
-/** Describes why input failed validation in a few short lines that name the field and the rule, never the value. */
+/**
+ * Describes why input failed validation in a few short lines that name the field and the rule, never the value. An
+ * unknown key is the caller's own text, so the message says a key is unknown and names where, not which. A schema may
+ * give the rule that fails first a reason, so a caller can tell a malformed reference from other invalid input.
+ */
 export function invalidInputError(error: z.ZodError): WebDriverError {
   const described = error.issues.slice(0, maxIssues).map((issue) => {
     const path = issue.path.map(String).join('.');
-    return path.length > 0 ? `${path}: ${issue.message}` : issue.message;
+    const message = issue.code === 'unrecognized_keys' ? 'Unrecognized key.' : issue.message;
+    return path.length > 0 ? `${path}: ${message}` : message;
   });
   const more = error.issues.length - described.length;
   const suffix = more > 0 ? `; and ${more} more` : '';
-  return operationError('invalid argument', 'invalid-input', `Invalid input. ${described.join('; ')}${suffix}`);
+  const [first] = error.issues;
+  const reason = first?.code === 'custom' && typeof first.params?.reason === 'string' ? first.params.reason : 'invalid-input';
+  return operationError('invalid argument', reason, `Invalid input. ${described.join('; ')}${suffix}`);
 }
 
 function readToken(value: unknown): string | undefined {

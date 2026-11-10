@@ -157,7 +157,7 @@ The [reference index](references/README.md) describes each package-owned guide.
 | `/authority`       | Grants, private connection descriptors, and macOS owner-validated storage                 |
 | `/native`          | Native-helper build, resolution, and verification without loading the package root        |
 | `/server`          | Embeddable remote end, session manager, and target registry                               |
-| `/agent`           | Bounded JSON-safe inspection, action, and evidence API                                    |
+| `/agent`           | JSON-safe API; `describe` and `agent describe` trim an unbounded whole-tree read          |
 | `/operations`      | Versioned agent operation catalog, executor, and result types                             |
 | `/artifacts`       | Confined, atomic evidence persistence                                                     |
 | `/runner`          | Plan selection, sharding, execution, and result classification                            |
