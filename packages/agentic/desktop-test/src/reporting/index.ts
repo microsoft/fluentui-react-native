@@ -4,7 +4,14 @@ export { createDesktopReportSession } from './session.js';
 export type { DesktopReportSession } from './session.js';
 export { runDesktopOperation } from './operation.js';
 export type { DesktopOperation, DesktopOperationOptions } from './operation.js';
-export { createEventEmitter, DesktopReportedError, serializeReportError, validateDesktopEvent } from './protocol.js';
+export {
+  createEventEmitter,
+  DesktopIncompleteError,
+  DesktopReportedError,
+  isDesktopIncompleteError,
+  serializeReportError,
+  validateDesktopEvent,
+} from './protocol.js';
 export type {
   DesktopEvent,
   EventContext,
@@ -23,7 +30,10 @@ export type { DesktopEventLevel } from '@fluentui-react-native/desktop-driver/cl
 export { createDesktopInputLane, desktopInputEnvironment, parseDesktopInputLane, requestedDesktopInputLane } from './lane.js';
 export type { DesktopInputLaneName, RequestedDesktopInputLane } from './lane.js';
 export {
+  decideDesktopTestStatus,
+  decisiveDesktopAttempt,
   describeDesktopInputLane,
+  describeDesktopIncompleteRun,
   describeDesktopSelection,
   describeDesktopUnsupported,
   desktopInputLaneSources,

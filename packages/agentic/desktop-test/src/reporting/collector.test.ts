@@ -4,8 +4,10 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
+import { Writable } from 'node:stream';
 
 import { DesktopRunReporter } from './collector.js';
+import { DesktopIncompleteError, DesktopReportedError } from './protocol.js';
 import type { DesktopInputLaneReport } from './results.js';
 
 describe('desktop run reporter input lanes', () => {
@@ -537,5 +539,431 @@ describe('desktop run reporter operation output', () => {
     await reporter.finish();
 
     expect(out).toBe(`[desktop] PASSED: lifecycle (no tests); ${path.join(reporter.root, 'run.json')}\n`);
+  });
+});
+
+describe('desktop run reporter verdicts', () => {
+  let artifactsRoot: string;
+  let out: string;
+  let err: string;
+
+  beforeEach(() => {
+    artifactsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-verdicts-'));
+    out = '';
+    err = '';
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    delete process.env.GITHUB_STEP_SUMMARY;
+    fs.rmSync(artifactsRoot, { force: true, recursive: true });
+  });
+
+  type Options = Partial<ConstructorParameters<typeof DesktopRunReporter>[0]>;
+
+  function start(options: Options = {}): DesktopRunReporter {
+    return new DesktopRunReporter({
+      artifactsRoot,
+      output: { write: (chunk: string) => ((out += chunk), true) },
+      errorOutput: { write: (chunk: string) => ((err += chunk), true) },
+      reporterMode: 'plain',
+      summary: false,
+      ...options,
+    });
+  }
+
+  function result(
+    reporter: DesktopRunReporter,
+    testId: string,
+    status: 'passed' | 'failed' | 'skipped' | 'unsupported' | 'incomplete',
+    attempt = 0,
+    parent?: string,
+    scope?: string,
+  ): void {
+    reporter.emit(
+      {
+        kind: 'test-result',
+        payload: {
+          testId,
+          title: testId,
+          attempt,
+          status,
+          durationMs: 1,
+          ...(status === 'failed' ? { failure: reporter.failure(new Error(`${testId} failed`), 'test') } : {}),
+          ...(status === 'passed' ? {} : { reason: `${testId} ${status}` }),
+        },
+      },
+      scope,
+      undefined,
+      parent,
+    );
+  }
+
+  /** A WDIO-style producer: selected work whose worker scope reports its tests (or none). */
+  function worker(reporter: DesktopRunReporter, workId: string, testIds: string[] = []): void {
+    const source = `wdio-${randomUUID()}`;
+    const emit = reporter.source(source);
+    reporter.emit({ kind: 'work-selected', payload: { workId, label: workId } });
+    emit({ kind: 'scope-start', payload: { label: `${workId} worker`, category: 'worker' } }, source, undefined, workId);
+    for (const testId of testIds) {
+      emit({ kind: 'test-result', payload: { testId, title: testId, attempt: 0, status: 'passed', durationMs: 1 } }, source);
+    }
+    emit({ kind: 'scope-end', payload: { status: 'passed' } }, source, undefined, workId);
+    emit({ kind: 'producer-finished', payload: { status: 'passed' } }, source);
+  }
+
+  describe('retried tests', () => {
+    test.each(['skipped', 'unsupported', 'incomplete'] as const)(
+      'a failed attempt followed only by a %s one stays failed',
+      async (status) => {
+        const reporter = start({ kind: 'tests' });
+        result(reporter, 'one', 'passed');
+        result(reporter, 'masked', 'failed', 0);
+        result(reporter, 'masked', status, 1);
+        const final = await reporter.finish();
+
+        expect(final.tests.find(({ testId }) => testId === 'masked')).toMatchObject({ status: 'failed', flaky: false });
+        expect(final.status).toBe('failed');
+        expect(final.counts).toMatchObject({ failed: 1, passed: 1, skipped: 0 });
+        expect(fs.readFileSync(path.join(reporter.root, 'junit.xml'), 'utf8')).toContain('<failure message="masked failed">');
+      },
+    );
+
+    test('a retry that passes makes the test flaky and a skipped retry after a pass cannot undo it', async () => {
+      const reporter = start({ kind: 'tests' });
+      result(reporter, 'flaky', 'failed', 0);
+      result(reporter, 'flaky', 'passed', 1);
+      const final = await reporter.finish();
+
+      expect(final.tests[0]).toMatchObject({ status: 'passed', flaky: true });
+      expect(final.status).toBe('passed');
+    });
+
+    test('attempts keep their arrival order whatever numbers the producer gives them', async () => {
+      const reporter = start({ kind: 'tests' });
+      result(reporter, 'case', 'failed', 3_000_000);
+      result(reporter, 'case', 'failed', 1_000_000);
+      result(reporter, 'case', 'passed', 2_000_000);
+      const final = await reporter.finish();
+
+      expect(final.tests[0].attempts.map(({ attempt }) => attempt)).toEqual([3_000_000, 1_000_000, 2_000_000]);
+      expect(final.tests[0]).toMatchObject({ status: 'passed', flaky: true });
+    });
+  });
+
+  describe('selected work that produced no tests', () => {
+    test('an empty worker group is incomplete, with the reason, and cannot be asserted as covered', async () => {
+      const reporter = start({ kind: 'tests' });
+      worker(reporter, 'covered', ['real-test']);
+      worker(reporter, 'empty');
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('incomplete');
+      expect(final.work.find(({ workId }) => workId === 'empty')).toMatchObject({
+        status: 'incomplete',
+        reason: 'No tests were reported for this work.',
+      });
+      expect(final.work.find(({ workId }) => workId === 'covered')).toMatchObject({ status: 'passed' });
+      expect(() => reporter.assertSuccessful(['empty'])).toThrow(DesktopIncompleteError);
+      expect(() => reporter.assertSuccessful(['covered'])).not.toThrow();
+      expect(fs.readFileSync(path.join(reporter.root, 'junit.xml'), 'utf8')).toContain('No tests were reported for this work.');
+    });
+
+    test('selected work that never started is a fault, not a coverage gap', async () => {
+      const reporter = start({ kind: 'tests' });
+      reporter.emit({ kind: 'work-selected', payload: { workId: 'never', label: 'never ran' } });
+      worker(reporter, 'covered', ['real-test']);
+      await reporter.finish();
+
+      expect(() => reporter.assertSuccessful(['never'])).toThrow('never ran: work is not-run');
+      expect(() => reporter.assertSuccessful(['never'])).not.toThrow(DesktopIncompleteError);
+    });
+
+    test('a group that declared its exclusions ran what it was asked to, and phase work needs no tests', async () => {
+      const reporter = start({ kind: 'tests' });
+      worker(reporter, 'covered', ['real-test']);
+      worker(reporter, 'filtered');
+      reporter.emit({ kind: 'selection', payload: { excluded: { platform: 3, scope: 0, input: 0 }, key: 'filtered' } });
+      reporter.emit({ kind: 'work-selected', payload: { workId: 'smoke', label: 'smoke' } });
+      const phase = reporter.source('phase');
+      phase({ kind: 'scope-start', payload: { label: 'smoke', category: 'phase' } }, 'phase', undefined, 'smoke');
+      phase({ kind: 'scope-end', payload: { status: 'passed' } }, 'phase', undefined, 'smoke');
+      phase({ kind: 'producer-finished', payload: { status: 'passed' } }, 'phase');
+      const final = await reporter.finish();
+
+      expect(final.work.map(({ workId, status }) => [workId, status])).toEqual([
+        ['covered', 'passed'],
+        ['filtered', 'passed'],
+        ['smoke', 'passed'],
+      ]);
+      expect(final.status).toBe('passed');
+    });
+  });
+
+  describe('typed incomplete errors', () => {
+    test('are the run verdict, not an infrastructure failure, when the run is already incomplete', async () => {
+      const reporter = start({ kind: 'tests' });
+      worker(reporter, 'empty');
+      const error = new DesktopIncompleteError('selected work produced no tests');
+      reporter.fail(error);
+      reporter.fail(error);
+      const final = await reporter.finish();
+
+      expect(final.failures).toEqual([]);
+      expect(final.status).toBe('incomplete');
+      expect(fs.readFileSync(path.join(reporter.root, 'events.jsonl'), 'utf8')).toContain('selected work produced no tests');
+    });
+
+    test('become a failure when nothing else would stop the run from passing', async () => {
+      const reporter = start({ kind: 'lifecycle' });
+      reporter.fail(new DesktopIncompleteError('a gap nothing else recorded'));
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('failed');
+      expect(final.failures).toHaveLength(1);
+    });
+
+    test('raised while other work is still running do not vanish when that work later passes', async () => {
+      const reporter = start({ kind: 'lifecycle' });
+      const busy = reporter.source('busy');
+      reporter.fail(new DesktopIncompleteError('a gap nothing else recorded'));
+      busy({ kind: 'producer-finished', payload: { status: 'passed' } });
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('failed');
+      expect(final.failures).toHaveLength(1);
+    });
+
+    test('are relayed from a delegated reporter by name', async () => {
+      const reporter = start({ kind: 'tests' });
+      worker(reporter, 'empty');
+      const relayed = new DesktopReportedError({
+        failureId: randomUUID(),
+        kind: 'infrastructure',
+        error: { name: 'DesktopIncompleteError', message: 'relayed incomplete' },
+      });
+      reporter.fail(relayed);
+      expect((await reporter.finish()).failures).toEqual([]);
+    });
+
+    test('reported by a producer as a failure are a warning only when the run already carries the verdict', async () => {
+      const incomplete = (reporter: DesktopRunReporter) => {
+        const emit = reporter.source('delegate');
+        emit({
+          kind: 'diagnostic',
+          payload: {
+            level: 'error',
+            message: 'no coverage',
+            failure: { failureId: randomUUID(), kind: 'infrastructure', error: { name: 'DesktopIncompleteError', message: 'no coverage' } },
+          },
+        });
+        emit({ kind: 'producer-finished', payload: { status: 'failed' } });
+      };
+      const carried = start({ kind: 'tests' });
+      worker(carried, 'empty');
+      incomplete(carried);
+      expect(await carried.finish()).toMatchObject({ status: 'incomplete', failures: [] });
+
+      const alone = start({ kind: 'lifecycle' });
+      incomplete(alone);
+      expect(await alone.finish()).toMatchObject({ status: 'failed', failures: [{ error: { name: 'DesktopIncompleteError' } }] });
+    });
+  });
+
+  describe('presentation errors', () => {
+    const closedPipe = () =>
+      new Writable({
+        write(_chunk, _encoding, callback) {
+          callback(Object.assign(new Error('write EPIPE'), { code: 'EPIPE' }));
+        },
+      });
+    const stalled = () =>
+      new Writable({
+        write(_chunk, _encoding, callback) {
+          setTimeout(callback, 300);
+        },
+      });
+
+    test.each(['plain', 'github-actions'] as const)(
+      'a %s consumer that closes the pipe cannot fail a passing run',
+      async (reporterMode) => {
+        const reporter = start({ kind: 'tests', reporterMode, output: closedPipe(), verbose: true });
+        result(reporter, 'case', 'passed');
+        const final = await reporter.finish();
+
+        expect(final.status).toBe('passed');
+        expect(final.failures).toEqual([]);
+        expect(JSON.parse(fs.readFileSync(path.join(reporter.root, 'run.json'), 'utf8'))).toMatchObject({
+          terminal: true,
+          status: 'passed',
+        });
+        expect(err).toContain('[desktop] WARNING: Console output stopped: the consumer closed the stream (write EPIPE)');
+        expect(err).toContain(`authoritative result: ${path.join(reporter.root, 'run.json')}`);
+        expect(err).not.toContain('FAILED');
+      },
+    );
+
+    test.each(['plain', 'github-actions'] as const)('a %s consumer that stalls cannot fail a passing run', async (reporterMode) => {
+      const reporter = start({ kind: 'tests', reporterMode, output: stalled(), flushTimeoutMs: 50, verbose: true });
+      result(reporter, 'case', 'passed');
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('passed');
+      expect(final.failures).toEqual([]);
+      expect(err).toContain('[desktop] WARNING: Console output stopped: Timed out flushing desktop report output.');
+    });
+
+    test('a stall cannot hide a failure from the verdict or the retained report', async () => {
+      const reporter = start({ kind: 'tests', output: stalled(), flushTimeoutMs: 50, verbose: true });
+      result(reporter, 'case', 'failed');
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('failed');
+      expect(final.failures.map(({ kind }) => kind)).toEqual(['test']);
+      expect(JSON.parse(fs.readFileSync(path.join(reporter.root, 'run.json'), 'utf8'))).toMatchObject({ status: 'failed' });
+    });
+
+    test('output past the queue bound is dropped with a warning and never changes the verdict', async () => {
+      const reporter = start({ kind: 'lifecycle', output: stalled(), flushTimeoutMs: 1_000, verbose: true });
+      const source = reporter.source('noisy');
+      const text = 'x'.repeat(256 * 1024) + '\n';
+      for (let index = 0; index < 24; index++) source({ kind: 'output', payload: { stream: 'stdout', text } }, 'noisy');
+      source({ kind: 'producer-finished', payload: { status: 'passed' } }, 'noisy');
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('passed');
+      expect(final.failures).toEqual([]);
+      expect(err).toMatch(/\[desktop\] WARNING: \d+ console output items were dropped because the output queue exceeded 4 MiB/);
+    });
+
+    test('the final line comes from the terminal result, not from presentation state', async () => {
+      const reporter = start({ kind: 'tests' });
+      result(reporter, 'case', 'passed');
+      const final = await reporter.finish();
+
+      expect(final.status).toBe('passed');
+      expect(out.split('\n').find((line) => line.startsWith('[desktop] PASSED:'))).toContain(
+        `${final.counts.selected} selected, ${final.counts.executed} executed, ${final.counts.passed} passed`,
+      );
+      expect(out).not.toContain('FAILED');
+    });
+  });
+
+  describe('milestone events', () => {
+    function milestones(): { reporter: DesktopRunReporter; events: () => Record<string, unknown>[] } {
+      const reporter = start({ kind: 'tests', reporterMode: 'ndjson', eventLevel: 'milestones' });
+      return {
+        reporter,
+        events: () =>
+          out
+            .split('\n')
+            .filter(Boolean)
+            .map((line) => JSON.parse(line) as Record<string, unknown>),
+      };
+    }
+    const results = (events: Record<string, unknown>[], status: string) =>
+      events.filter(({ kind, payload }) => kind === 'test-result' && (payload as { status: string }).status === status);
+
+    test('a flood of skips never suppresses a later failure, incomplete result, or cancellation', async () => {
+      const { reporter, events } = milestones();
+      for (let index = 0; index < 40; index++) result(reporter, `skip-${index}`, 'skipped');
+      for (let index = 0; index < 5; index++) result(reporter, `gap-${index}`, 'unsupported');
+      result(reporter, 'broken', 'failed');
+      result(reporter, 'unfinished', 'incomplete');
+      await reporter.finish();
+
+      expect(results(events(), 'skipped')).toHaveLength(25);
+      expect(results(events(), 'failed')).toHaveLength(1);
+      expect(results(events(), 'incomplete')).toHaveLength(1);
+      expect(events().at(-1)).toMatchObject({ type: 'summary', status: 'failed' });
+    });
+  });
+
+  describe('retained reports', () => {
+    function runJsonWrites(): () => number {
+      const rename = fs.renameSync;
+      let writes = 0;
+      jest.spyOn(fs, 'renameSync').mockImplementation((source, destination) => {
+        if (String(destination).endsWith('run.json')) writes++;
+        return rename(source, destination);
+      });
+      return () => writes;
+    }
+
+    test('events that cannot change the result do not rewrite run.json', async () => {
+      const reporter = start({ kind: 'tests' });
+      const writes = runJsonWrites();
+      const source = reporter.source('noise');
+      for (let index = 0; index < 30; index++) {
+        source({ kind: 'output', payload: { stream: 'stdout', text: `line ${index}\n` } }, 'noise');
+        source({ kind: 'diagnostic', payload: { level: 'info', message: 'progress' } }, 'noise');
+        await new Promise((resolve) => setImmediate(resolve));
+      }
+      await reporter.flush();
+
+      expect(writes()).toBeLessThanOrEqual(1);
+    });
+
+    test('a burst of results is throttled, and flush and finish always write the current state', async () => {
+      const reporter = start({ kind: 'tests' });
+      const writes = runJsonWrites();
+      for (let index = 0; index < 40; index++) {
+        result(reporter, `case-${index}`, 'passed');
+        await new Promise((resolve) => setImmediate(resolve));
+      }
+      await reporter.flush();
+
+      expect(writes()).toBeLessThanOrEqual(3);
+      expect(JSON.parse(fs.readFileSync(path.join(reporter.root, 'run.json'), 'utf8'))).toMatchObject({
+        terminal: false,
+        counts: { selected: 40 },
+      });
+      const final = await reporter.finish();
+      expect(JSON.parse(fs.readFileSync(path.join(reporter.root, 'run.json'), 'utf8'))).toMatchObject({
+        terminal: true,
+        counts: { selected: 40 },
+      });
+      expect(final.status).toBe('passed');
+    });
+
+    test('a secret registered after its text was reported is redacted from every retained report', async () => {
+      const summary = path.join(artifactsRoot, 'summary.md');
+      fs.writeFileSync(summary, '');
+      process.env.GITHUB_STEP_SUMMARY = summary;
+      const reporter = start({ kind: 'tests', summary: 'auto' });
+      reporter.emit({
+        kind: 'test-result',
+        payload: { testId: 'case', title: 'logs in as late-secret-value', attempt: 0, status: 'passed', durationMs: 1 },
+      });
+      reporter.fail(new Error('token late-secret-value rejected'), 'test');
+      reporter.addSecret('late-secret-value');
+      await reporter.finish();
+
+      for (const file of ['run.json', 'junit.xml']) {
+        const text = fs.readFileSync(path.join(reporter.root, file), 'utf8');
+        expect(text).not.toContain('late-secret-value');
+        expect(text).toContain('[REDACTED]');
+      }
+      expect(fs.readFileSync(summary, 'utf8')).not.toContain('late-secret-value');
+    });
+  });
+
+  describe('collector-only events', () => {
+    test('a producer cannot finish the run for the collector', () => {
+      const reporter = start({ kind: 'lifecycle' });
+      expect(() =>
+        reporter.accept({
+          schemaVersion: 1,
+          runId: reporter.runId,
+          eventId: randomUUID(),
+          sourceId: 'rogue',
+          sourceSequence: 1,
+          scopeId: 'rogue',
+          timestamp: new Date().toISOString(),
+          kind: 'run-finished',
+          payload: { status: 'passed', resultPath: 'run.json' },
+        }),
+      ).toThrow('A producer cannot report "run-finished".');
+    });
   });
 });

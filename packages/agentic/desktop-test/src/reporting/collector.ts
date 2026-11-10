@@ -4,17 +4,31 @@ import { randomUUID } from 'node:crypto';
 import { Writable } from 'node:stream';
 
 import { formatOperationHeader, neutralizeWorkflowCommands, readLogExcerpt, singleLine, trimTrailingLineBreaks } from './presentation.js';
+import { DesktopFailureRegistry } from './failures.js';
 import {
   createEventEmitter,
+  DesktopIncompleteError,
   DesktopReportedError,
+  isDesktopIncompleteFailure,
   redactDesktopSecrets,
   sanitizeDesktopReport,
   selectionExclusionReasons,
-  serializeReportError,
   validateDesktopEvent,
 } from './protocol.js';
-import type { CollectedDesktopEvent, EventContext, EventEmitter, FailureKind, ReportError, ReportFailure, TestStatus } from './protocol.js';
+import type {
+  CollectedDesktopEvent,
+  DesktopEvent,
+  EventContext,
+  EventEmitter,
+  FailureKind,
+  ReportError,
+  ReportFailure,
+  TestStatus,
+} from './protocol.js';
 import {
+  decideDesktopTestStatus,
+  decisiveDesktopAttempt,
+  describeDesktopIncompleteRun,
   describeDesktopSelection,
   describeDesktopUnsupported,
   projectDesktopRunSummary,
@@ -26,10 +40,29 @@ import type { DesktopInputLaneReport, DesktopRunResult, DesktopTestResult, Deskt
 import { includeDesktopEvent, projectDesktopEvent } from './structured.js';
 import type { DesktopEventLevel } from './structured.js';
 import type { DesktopReportingConfig } from '../config.js';
-import { resolveDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
+import { isClosedDesktopStreamError, resolveDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 import type { ResolvedDesktopReporterMode } from '@fluentui-react-native/desktop-driver/cli/reporter';
 
 const ROOT_SOURCE = 'supervisor';
+// The bound on console output waiting for a slow consumer. Past it, output is dropped with a warning; the run's result never changes.
+const maximumPendingPresentationBytes = 4 * 1024 * 1024;
+// A live run.json lags the run by at most this long; finalization and flush() always write the current state.
+const snapshotIntervalMs = 250;
+// Skips and declared gaps are progress detail in a milestones stream. A failed, incomplete, or cancelled result never is.
+const maximumGapMilestones = 25;
+const noTestsReason = 'No tests were reported for this work.';
+// Only events that can change the result need a new run.json; output and informational diagnostics cannot.
+const snapshotKinds: ReadonlySet<CollectedDesktopEvent['kind']> = new Set([
+  'work-selected',
+  'scope-start',
+  'scope-end',
+  'test-start',
+  'test-result',
+  'selection',
+  'artifact',
+  'producer-finished',
+  'service-failed',
+]);
 // A failed operation shows the end of its log expanded. A passing one only collapses a longer excerpt into an Actions group.
 const expandedExcerpt = { lines: 200, bytes: 64 * 1024 };
 const collapsedExcerpt = { lines: 1000, bytes: 256 * 1024 };
@@ -82,8 +115,15 @@ export class DesktopRunReporter {
   private readonly work = new Map<string, DesktopWorkResult>();
   private readonly tests = new Map<string, DesktopTestResult>();
   private readonly testWork = new Map<string, string>();
+  // Work whose producer reports its tests through worker scopes, and the tests attributed to each. A worker group that
+  // ended without reporting any test (and without declaring exclusions) executed nothing, so it cannot count as covered.
+  private readonly workerWork = new Set<string>();
+  private readonly workTests = new Map<string, Set<string>>();
+  private readonly excludedWork = new Set<string>();
   private readonly failures = new Map<string, ReportFailure>();
-  private readonly failureIds = new WeakMap<object, string>();
+  /** Incomplete-run errors, which the run's status carries unless nothing else does. */
+  private readonly verdicts = new Map<string, ReportFailure>();
+  private readonly registry: DesktopFailureRegistry;
   private readonly annotations = new Set<string>();
   private readonly presentedFailures = new Set<string>();
   private readonly secrets = new Set<string>();
@@ -104,12 +144,17 @@ export class DesktopRunReporter {
   private finishing?: Promise<DesktopRunResult>;
   private finished = false;
   private journalFailed = false;
+  // Presentation is best effort: a stalled, closed, or overloaded console is a warning and never changes the verdict.
   private presentationFailed = false;
+  private presenting = true;
+  private readonly presentationWarnings: string[] = [];
+  private droppedPresentation = 0;
   private suppressedEvents = 0;
-  private emittedProblemEvents = 0;
-  private structuredOutputError?: Error;
+  private emittedGapEvents = 0;
   private terminal?: DesktopRunResult;
-  private snapshotQueued = false;
+  private snapshotDirty = false;
+  private snapshotTimer?: NodeJS.Timeout;
+  private lastSnapshotAt = 0;
 
   constructor(options: DesktopRunReporterOptions) {
     this.options = options;
@@ -130,7 +175,8 @@ export class DesktopRunReporter {
     this.output = options.output ?? process.stdout;
     this.errors = options.errorOutput ?? process.stderr;
     for (const secret of options.secrets ?? []) this.addSecret(secret);
-    this.emit = createEventEmitter(this.runId, ROOT_SOURCE, (event) => this.accept(event));
+    this.registry = new DesktopFailureRegistry((value) => this.sanitize(value), this.failures);
+    this.emit = createEventEmitter(this.runId, ROOT_SOURCE, (event) => this.receive(event, true));
     fs.writeFileSync(path.join(this.root, 'events.jsonl'), '', { flag: 'wx', mode: 0o600 });
     this.artifacts.set('events.jsonl', 'Versioned event journal');
     this.artifacts.set('run.json', 'Canonical run result');
@@ -146,14 +192,15 @@ export class DesktopRunReporter {
         ...(options.lane ? { lane: options.lane } : {}),
         artifactsRoot: clipStructuredText(this.root, 512),
       };
-      this.enqueue(() => this.write(this.output, `${JSON.stringify(start)}\n`), 0);
+      const line = `${JSON.stringify(start)}\n`;
+      this.enqueue(() => this.write(this.output, line), Buffer.byteLength(line));
     }
   }
 
   source(sourceId: string): EventEmitter {
     if (sourceId === ROOT_SOURCE || this.sources.has(sourceId)) throw new Error(`Report source "${sourceId}" is already registered.`);
     this.sources.set(sourceId, { sequence: 0, finished: false });
-    return createEventEmitter(this.runId, sourceId, (event) => this.accept(event));
+    return createEventEmitter(this.runId, sourceId, (event) => this.receive(event, false));
   }
 
   addSecret(secret: string): void {
@@ -165,42 +212,43 @@ export class DesktopRunReporter {
   }
 
   failure(error: unknown, kind: FailureKind = 'infrastructure'): ReportFailure {
-    if (error instanceof DesktopReportedError) return this.sanitize(error.failure);
-    let failureId = typeof error === 'object' && error !== null ? this.failureIds.get(error) : undefined;
-    if (!failureId && error instanceof Error && error.cause instanceof DesktopReportedError) return this.sanitize(error.cause.failure);
-    if (!failureId && error instanceof Error && error.cause && typeof error.cause === 'object')
-      failureId = this.failureIds.get(error.cause);
-    if (!failureId) {
-      failureId = randomUUID();
-      if (typeof error === 'object' && error !== null) this.failureIds.set(error, failureId);
-    }
-    const recorded = this.failures.get(failureId);
-    if (recorded) return recorded;
-    return this.sanitize({ failureId, kind, error: serializeReportError(error) });
+    return this.registry.failure(error, kind);
   }
 
   fail(error: unknown, kind: FailureKind = 'infrastructure', scopeId = 'run'): ReportFailure {
-    if (error instanceof AggregateError && error.errors.length) {
-      const children: unknown[] = error.errors;
-      return children.map((child) => this.fail(child, kind, scopeId))[0];
-    }
-    if (error instanceof Error && error.cause instanceof AggregateError) return this.fail(error.cause, kind, scopeId);
+    return this.registry.fail(
+      error,
+      kind,
+      (failure) => {
+        try {
+          this.emit(
+            { kind: 'diagnostic', payload: { level: 'error', message: failure.error.message || failure.error.name, failure } },
+            scopeId,
+          );
+        } catch (reportingError) {
+          const reportingFailure = this.recordFailure(reportingError, 'reporting');
+          this.print(
+            this.errors,
+            `Desktop reporting failed: ${reportingFailure.error.message}. Original failure: ${failure.error.message}. Reports: ${this.root}`,
+          );
+        }
+      },
+      (failure) => {
+        // The run's status carries an incomplete verdict, unless nothing else in the run does: then it is a failure.
+        this.verdicts.set(failure.failureId, failure);
+        try {
+          this.emit({ kind: 'diagnostic', payload: { level: 'warning', message: failure.error.message || failure.error.name } }, scopeId);
+        } catch (reportingError) {
+          this.recordFailure(reportingError, 'reporting');
+        }
+        return true;
+      },
+    );
+  }
+
+  private recordFailure(error: unknown, kind: FailureKind): ReportFailure {
     const failure = this.failure(error, kind);
-    if (this.failures.has(failure.failureId)) return failure;
     this.failures.set(failure.failureId, failure);
-    try {
-      this.emit(
-        { kind: 'diagnostic', payload: { level: 'error', message: failure.error.message || failure.error.name, failure } },
-        scopeId,
-      );
-    } catch (reportingError) {
-      const reportingFailure = this.failure(reportingError, 'reporting');
-      this.failures.set(reportingFailure.failureId, reportingFailure);
-      this.print(
-        this.errors,
-        `Desktop reporting failed: ${reportingFailure.error.message}. Original failure: ${failure.error.message}. Reports: ${this.root}`,
-      );
-    }
     return failure;
   }
 
@@ -220,9 +268,14 @@ export class DesktopRunReporter {
     if (result.status === 'passed' || result.status === 'skipped') return;
     const failure =
       result.failures.find(({ kind }) => kind !== 'test') ??
-      result.tests.find(({ status }) => status === 'failed')?.attempts.at(-1)?.failure;
+      decisiveDesktopAttempt(result.tests.find(({ status }) => status === 'failed')?.attempts ?? [])?.failure;
     if (failure) throw new DesktopReportedError(failure);
-    throw new Error(`Desktop run is ${result.status}; selected work did not produce complete executable results.`);
+    if (result.status !== 'incomplete')
+      throw new Error(`Desktop run is ${result.status}; selected work did not produce complete executable results.`);
+    const message = describeDesktopIncompleteRun(result);
+    // Selected work that never started means its producer did not deliver it, which is a fault rather than a coverage gap.
+    if (result.work.some(({ status }) => status === 'not-run')) throw new Error(message);
+    throw new DesktopIncompleteError(message);
   }
 
   artifactPath(relative: string): string {
@@ -231,12 +284,19 @@ export class DesktopRunReporter {
 
   async flush(): Promise<void> {
     await this.queue;
+    if (!this.finished) this.writePendingSnapshot();
   }
 
+  /** Accepts an event from an external producer, which may never report a collector-only kind such as `run-finished`. */
   accept(value: unknown): void {
+    this.receive(value, false);
+  }
+
+  private receive(value: unknown, collector: boolean): void {
     if (this.finished) throw new Error('Cannot report after run finalization.');
-    validateDesktopEvent(value);
+    validateDesktopEvent(value, collector ? 'collector' : 'producer');
     if (value.runId !== this.runId) throw new Error('Report producer belongs to another run.');
+    const knownSource = this.sources.has(value.sourceId);
     const source = this.sources.get(value.sourceId) ?? { sequence: 0, finished: false };
     if (value.sourceSequence <= source.sequence) return;
     if (source.finished) throw new Error(`Producer ${value.sourceId} emitted after its terminal event.`);
@@ -247,7 +307,7 @@ export class DesktopRunReporter {
     source.sequence = value.sourceSequence;
     source.finished = value.kind === 'producer-finished';
     this.sources.set(value.sourceId, source);
-    const event: CollectedDesktopEvent = { ...this.sanitize(value), arrivalSequence: ++this.arrivalSequence };
+    const event: CollectedDesktopEvent = { ...this.carryIncompleteVerdict(this.sanitize(value)), arrivalSequence: ++this.arrivalSequence };
     if (event.kind === 'artifact') this.artifactPath(event.payload.path);
     if (event.kind === 'scope-end' && event.payload.logPath) this.artifactPath(event.payload.logPath);
     const line = JSON.stringify(event) + '\n';
@@ -259,26 +319,51 @@ export class DesktopRunReporter {
         fs.appendFileSync(path.join(this.root, 'events.jsonl'), line, { mode: 0o600 });
       } catch (error) {
         this.journalFailed = true;
-        const failure = this.failure(error, 'reporting');
-        this.failures.set(failure.failureId, failure);
+        this.recordFailure(error, 'reporting');
         throw error;
       }
     }
     this.reduce(event);
     this.present(event);
-    if (!this.snapshotQueued) {
-      this.snapshotQueued = true;
-      queueMicrotask(() => {
-        this.snapshotQueued = false;
-        if (this.finished) return;
-        try {
-          this.persistSnapshot(this.result());
-        } catch (error) {
-          const failure = this.failure(error, 'reporting');
-          this.failures.set(failure.failureId, failure);
-          this.print(this.errors, `Cannot persist desktop run snapshot: ${failure.error.message}`);
-        }
-      });
+    if (!knownSource || snapshotKinds.has(event.kind) || (event.kind === 'diagnostic' && event.payload.failure)) this.scheduleSnapshot();
+  }
+
+  /**
+   * A delegated process cannot see the run's status, so it reports an incomplete-run error as a failure. It is kept as a
+   * verdict instead: the final result counts it as a failure only if nothing else in the run carries the gap.
+   */
+  private carryIncompleteVerdict(event: DesktopEvent): DesktopEvent {
+    if (event.kind !== 'diagnostic') return event;
+    const { failure, ...payload } = event.payload;
+    if (!failure || !isDesktopIncompleteFailure(failure)) return event;
+    this.verdicts.set(failure.failureId, failure);
+    return { ...event, payload: { ...payload, level: 'warning' } };
+  }
+
+  private scheduleSnapshot(): void {
+    this.snapshotDirty = true;
+    if (this.snapshotTimer) return;
+    this.snapshotTimer = setTimeout(
+      () => {
+        this.snapshotTimer = undefined;
+        if (!this.finished) this.writePendingSnapshot();
+      },
+      Math.max(0, this.lastSnapshotAt + snapshotIntervalMs - Date.now()),
+    );
+    this.snapshotTimer.unref();
+  }
+
+  private writePendingSnapshot(): void {
+    if (this.snapshotTimer) clearTimeout(this.snapshotTimer);
+    this.snapshotTimer = undefined;
+    if (!this.snapshotDirty) return;
+    this.snapshotDirty = false;
+    this.lastSnapshotAt = Date.now();
+    try {
+      this.persistSnapshot(this.result());
+    } catch (error) {
+      const failure = this.recordFailure(error, 'reporting');
+      this.print(this.errors, `Cannot persist desktop run snapshot: ${failure.error.message}`);
     }
   }
 
@@ -290,7 +375,10 @@ export class DesktopRunReporter {
     } else if (event.kind === 'scope-start') {
       if (this.scopes.has(event.scopeId)) throw new Error(`Scope ${event.scopeId} was started twice.`);
       const work = event.parentScopeId ? this.work.get(event.parentScopeId) : undefined;
-      if (work) work.status = 'incomplete';
+      if (work) {
+        work.status = 'incomplete';
+        if (event.payload.category === 'worker') this.workerWork.add(work.workId);
+      }
       this.scopes.set(event.scopeId, {
         ...event.payload,
         finished: false,
@@ -308,7 +396,12 @@ export class DesktopRunReporter {
     } else if (event.kind === 'test-start' || event.kind === 'test-result') {
       const p = event.payload;
       const workId = this.scopes.get(event.scopeId)?.workId ?? event.parentScopeId;
-      if (workId && this.work.has(workId)) this.testWork.set(p.testId, workId);
+      if (workId && this.work.has(workId)) {
+        this.testWork.set(p.testId, workId);
+        const attributed = this.workTests.get(workId) ?? new Set<string>();
+        attributed.add(p.testId);
+        this.workTests.set(workId, attributed);
+      }
       const test = this.tests.get(p.testId) ?? { testId: p.testId, title: p.title, status: 'incomplete', flaky: false, attempts: [] };
       const index = test.attempts.findIndex(({ attempt }) => attempt === p.attempt);
       const result =
@@ -327,14 +420,16 @@ export class DesktopRunReporter {
           throw new Error(`Duplicate terminal result for ${p.testId}, attempt ${p.attempt}.`);
         test.attempts[index] = result;
       }
-      test.attempts.sort((a, b) => a.attempt - b.attempt);
-      test.status = test.attempts[test.attempts.length - 1].status;
+      // Attempts stay in arrival order and the producer's attempt number is only a key, so a producer is free to number
+      // retries however it likes. The decisive attempt, not the last one, decides the test.
+      test.status = decideDesktopTestStatus(test.attempts);
       test.flaky = test.status === 'passed' && test.attempts.some(({ status }) => status === 'failed');
       this.tests.set(p.testId, test);
     } else if (event.kind === 'selection') {
       this.excludedReported = true;
-      // A keyed event is idempotent: a retried worker announces the same exclusions again.
+      // A keyed event is idempotent: a retried worker announces the same exclusions again. The key names the work it covers.
       if (event.payload.key !== undefined) {
+        this.excludedWork.add(event.payload.key);
         if (this.selectionKeys.has(event.payload.key)) return;
         this.selectionKeys.add(event.payload.key);
       }
@@ -343,16 +438,25 @@ export class DesktopRunReporter {
   }
 
   private present(event: CollectedDesktopEvent): void {
+    if (!this.presenting) return;
     if (this.structured) {
       if (this.reporterMode === 'ndjson') {
         const scopeCategory = this.scopes.get(event.scopeId)?.category;
         const eventLevel = this.options.eventLevel ?? 'milestones';
-        const problemEvent = event.kind === 'test-result' && event.payload.status !== 'passed';
-        if (eventLevel === 'milestones' && problemEvent && this.emittedProblemEvents >= 25) {
+        const gapEvent = event.kind === 'test-result' && (event.payload.status === 'skipped' || event.payload.status === 'unsupported');
+        if (eventLevel === 'milestones' && gapEvent && this.emittedGapEvents >= maximumGapMilestones) {
           this.suppressedEvents++;
         } else if (includeDesktopEvent(event, eventLevel, scopeCategory)) {
-          if (problemEvent) this.emittedProblemEvents++;
-          this.enqueue(() => this.write(this.output, `${JSON.stringify(projectDesktopEvent(event))}\n`), 0);
+          if (gapEvent) this.emittedGapEvents++;
+          let line: string;
+          try {
+            line = `${JSON.stringify(projectDesktopEvent(event))}\n`;
+          } catch (error) {
+            this.suppressedEvents++;
+            this.warnPresentation(`An event could not be projected to NDJSON: ${describePresentationError(error)}`);
+            return;
+          }
+          if (!this.enqueue(() => this.write(this.output, line), Buffer.byteLength(line))) this.suppressedEvents++;
         } else {
           this.suppressedEvents++;
         }
@@ -432,29 +536,28 @@ export class DesktopRunReporter {
     return sanitizeDesktopReport(value, (text) => this.redact(text));
   }
 
-  private enqueue(action: () => Promise<void>, bytes: number): void {
-    if (this.presentationFailed) return;
-    this.pendingBytes += bytes;
-    if (this.pendingBytes > 4 * 1024 * 1024) {
-      this.presentationFailed = true;
-      const failure = this.failure(new Error('Presentation queue exceeded 4 MiB; retained journal is authoritative.'), 'reporting');
-      this.failures.set(failure.failureId, failure);
-      return;
+  /** Returns false when the output was dropped: the console is already failed, or the consumer is too far behind. */
+  private enqueue(action: () => Promise<void>, bytes: number): boolean {
+    if (this.presentationFailed) return false;
+    if (this.pendingBytes > 0 && this.pendingBytes + bytes > maximumPendingPresentationBytes) {
+      this.droppedPresentation++;
+      return false;
     }
+    this.pendingBytes += bytes;
     this.queue = this.queue
       .then(() => (this.presentationFailed ? undefined : action()))
       .catch((error: unknown) => {
         this.presentationFailed = true;
-        if (this.structured) {
-          this.structuredOutputError = error instanceof Error ? error : new Error(String(error));
-        } else {
-          const failure = this.failure(error, 'reporting');
-          this.failures.set(failure.failureId, failure);
-        }
+        this.warnPresentation(`${this.structured ? 'Structured' : 'Console'} output stopped: ${describePresentationError(error)}`);
       })
       .finally(() => {
         this.pendingBytes -= bytes;
       });
+    return true;
+  }
+
+  private warnPresentation(message: string): void {
+    if (!this.presentationWarnings.includes(message)) this.presentationWarnings.push(message);
   }
 
   private async write(output: ReportOutput, text: string): Promise<void> {
@@ -556,6 +659,13 @@ export class DesktopRunReporter {
   }
 
   private result(): DesktopRunResult {
+    const result = this.build([...this.failures.values()]);
+    if (!this.verdicts.size || (result.status !== 'passed' && result.status !== 'skipped')) return result;
+    // Nothing else in the run carries the gap, so the error that reported it is the only record of it.
+    return this.build([...this.failures.values(), ...this.verdicts.values()]);
+  }
+
+  private build(failures: ReportFailure[]): DesktopRunResult {
     return summarizeDesktopRun({
       schemaVersion: 1,
       runId: this.runId,
@@ -571,24 +681,46 @@ export class DesktopRunReporter {
         [...this.scopes.values()].some(({ finished }) => !finished) ||
         [...this.sources.entries()].some(([id, source]) => id !== ROOT_SOURCE && !source.finished),
       tests: [...this.tests.values()],
-      work: [...this.work.values()],
-      failures: [...this.failures.values()],
+      work: [...this.work.values()].map(
+        (work): DesktopWorkResult => (this.reportedNoTests(work) ? { ...work, status: 'incomplete', reason: noTestsReason } : work),
+      ),
+      failures,
       artifacts: [...this.artifacts].map(([path, description]) => ({ path, description })),
     });
   }
 
-  private persist(result: DesktopRunResult): void {
-    if (this.options.junit !== false) this.writeReport('junit.xml', renderJUnit(result));
-    this.persistSnapshot(result);
+  // A finished worker group that attributed no test and declared no exclusions ran nothing: WDIO, for one, reports a spec
+  // that fails to load, or that defines no tests, as passed.
+  private reportedNoTests({ workId, status }: DesktopWorkResult): boolean {
+    return (
+      this.workerWork.has(workId) &&
+      (status === 'passed' || status === 'skipped' || status === 'unsupported') &&
+      !this.workTests.get(workId)?.size &&
+      !this.excludedWork.has(workId)
+    );
+  }
+
+  private persist(result: DesktopRunResult): DesktopRunResult {
+    // Secrets can be registered after an event is journaled, so the final reports redact against the complete set.
+    const safe = this.sanitize(result);
+    if (this.options.junit !== false) this.writeReport('junit.xml', renderJUnit(safe));
+    this.writeSnapshot(safe);
+    return safe;
   }
 
   private persistSnapshot(result: DesktopRunResult): void {
-    const snapshot = this.sanitize({
-      ...result,
-      terminal: result.terminal === true,
-      status: result.terminal === true || result.status === 'failed' ? result.status : 'incomplete',
-    });
-    this.writeReport('run.json', JSON.stringify(snapshot) + '\n');
+    this.writeSnapshot(this.sanitize(result));
+  }
+
+  private writeSnapshot(safe: DesktopRunResult): void {
+    this.writeReport(
+      'run.json',
+      JSON.stringify({
+        ...safe,
+        terminal: safe.terminal === true,
+        status: safe.terminal === true || safe.status === 'failed' ? safe.status : 'incomplete',
+      }) + '\n',
+    );
   }
 
   private writeReport(name: string, data: string): void {
@@ -624,17 +756,20 @@ export class DesktopRunReporter {
   }
 
   private async finalize(): Promise<DesktopRunResult> {
+    if (this.snapshotTimer) clearTimeout(this.snapshotTimer);
+    this.snapshotTimer = undefined;
+    this.snapshotDirty = false;
     await this.queue;
-    const persist = () => {
-      let result = this.result();
+    // Writes the reports for the result `build` returns. A failed write is a reporting failure, which changes the result, so it is built again.
+    const persist = (build: () => DesktopRunResult): DesktopRunResult => {
+      let result = build();
       try {
-        this.persist(result);
+        return this.persist(result);
       } catch (error) {
-        const failure = this.failure(error, 'reporting');
-        this.failures.set(failure.failureId, failure);
-        result = this.result();
+        this.recordFailure(error, 'reporting');
+        result = build();
         try {
-          this.persist(result);
+          return this.persist(result);
         } catch (retryError) {
           throw new AggregateError(
             [error, retryError, ...result.failures.map((failure) => new DesktopReportedError(failure))],
@@ -642,9 +777,16 @@ export class DesktopRunReporter {
           );
         }
       }
-      return result;
     };
-    let result = persist();
+    let result = persist(() => this.result());
+    try {
+      this.emit({ kind: 'run-finished', payload: { status: result.status, resultPath: 'run.json' } });
+    } catch (error) {
+      this.recordFailure(error, 'reporting');
+    }
+    await this.queue;
+    // Nothing after this point can change the verdict: console output is best effort, so every line below describes this result.
+    result = persist(() => ({ ...this.result(), terminal: true }));
     const c = result.counts;
     const runResult = path.join(this.root, 'run.json');
     this.print(
@@ -655,17 +797,6 @@ export class DesktopRunReporter {
     );
     const selection = describeDesktopSelection(result);
     if (selection) this.print(this.output, `[desktop] ${selection}`);
-    await this.queue;
-    result = persist();
-    if (this.presentationFailed && !this.structured) {
-      try {
-        await this.writeLine(this.errors, `[desktop] FAILED: presentation could not be flushed; authoritative result: ${runResult}`);
-      } catch (error) {
-        const failure = this.failure(error, 'reporting');
-        this.failures.set(failure.failureId, failure);
-        result = persist();
-      }
-    }
     if (this.options.summary !== false && process.env.GITHUB_STEP_SUMMARY && !this.structured) {
       try {
         const summary = renderRunSummary(result).slice(0, 64 * 1024);
@@ -673,26 +804,10 @@ export class DesktopRunReporter {
         if (size + Buffer.byteLength(summary) > 1024 * 1024) throw new Error('GitHub step summary would exceed 1 MiB.');
         fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
       } catch (error) {
-        this.emit({
-          kind: 'diagnostic',
-          payload: {
-            level: 'warning',
-            message: `Optional Actions summary failed: ${String(error)}; result retained at ${path.join(this.root, 'run.json')}.`,
-          },
-        });
+        this.warnPresentation(`Optional Actions summary failed: ${String(error)}`);
       }
     }
     await this.queue;
-    result = persist();
-    try {
-      this.emit({ kind: 'run-finished', payload: { status: result.status, resultPath: 'run.json' } });
-    } catch (error) {
-      const failure = this.failure(error, 'reporting');
-      this.failures.set(failure.failureId, failure);
-      result = persist();
-    }
-    await this.queue;
-    result = persist();
     const { suppressFinalOutput } = this.options;
     const suppressed = typeof suppressFinalOutput === 'function' ? suppressFinalOutput() : suppressFinalOutput === true;
     if (this.structured && !suppressed && !this.presentationFailed) {
@@ -705,35 +820,43 @@ export class DesktopRunReporter {
         }
         await this.write(this.output, `${JSON.stringify(projectDesktopRunSummary(result, this.root))}\n`);
       } catch (error) {
-        this.structuredOutputError = error instanceof Error ? error : new Error(String(error));
+        this.presentationFailed = true;
+        this.warnPresentation(`Structured output stopped: ${describePresentationError(error)}`);
       }
     }
-    if (this.structuredOutputError) {
-      const outputError = this.structuredOutputError;
-      try {
-        this.emit({
-          kind: 'diagnostic',
-          payload: { level: 'warning', message: `Structured output stopped: ${outputError.message}` },
-        });
-        await this.queue;
-        result = this.result();
-        persist();
-      } catch (error) {
-        const failure = this.failure(error, 'reporting');
-        this.failures.set(failure.failureId, failure);
-        result = persist();
-      }
-      try {
-        await this.writeLine(this.errors, `[desktop] Structured output stopped: ${outputError.message}`);
-      } catch {
-        // A closed stderr cannot carry the reporting diagnostic.
-      }
-    }
-    result = { ...this.result(), terminal: true };
-    this.persist(result);
+    await this.reportPresentationWarnings(runResult);
     this.finished = true;
     this.terminal = result;
     return result;
+  }
+
+  // Presentation problems reach the journal and stderr as warnings that point at the authoritative result. The journal
+  // write is best effort here: the terminal reports are already final, so a failure to record a warning cannot change them.
+  private async reportPresentationWarnings(runResult: string): Promise<void> {
+    for (const message of this.presentationMessages()) {
+      this.presenting = false;
+      try {
+        this.emit({ kind: 'diagnostic', payload: { level: 'warning', message } });
+      } catch {
+        // The warning also goes to stderr below.
+      } finally {
+        this.presenting = true;
+      }
+      try {
+        await this.writeLine(this.errors, `[desktop] WARNING: ${message}; authoritative result: ${runResult}`);
+      } catch {
+        // A closed stderr cannot carry the warning.
+      }
+    }
+  }
+
+  private presentationMessages(): string[] {
+    return [
+      ...this.presentationWarnings,
+      ...(this.droppedPresentation > 0
+        ? [`${this.droppedPresentation} console output items were dropped because the output queue exceeded 4 MiB.`]
+        : []),
+    ];
   }
 
   get resultSnapshot(): DesktopRunResult | undefined {
@@ -741,6 +864,10 @@ export class DesktopRunReporter {
   }
 }
 
+function describePresentationError(error: unknown): string {
+  const message = error instanceof Error ? error.message : String(error);
+  return isClosedDesktopStreamError(error) ? `the consumer closed the stream (${message})` : message;
+}
 function errorDiagnostic(error: ReportError): string {
   const message = `${error.name}: ${error.message}`;
   return error.stack ? (error.stack.includes(error.message) ? error.stack : `${message}\n${error.stack}`) : message;

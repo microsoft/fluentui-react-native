@@ -15,10 +15,16 @@ export type DesktopEventRecord = {
   parentScopeId?: string;
   context?: DesktopEvent['context'];
   payload: Record<string, unknown>;
+  /** Set when the record is the reduced form of an event that could not fit its size limit; the journal holds the whole event. */
+  truncated?: true;
 };
 
 const maximumRecordBytes = 4 * 1024;
 const maximumTextBytes = 300;
+// Identifiers are how a consumer finds the event, test, or failure again, so only an absurd one is ever shortened.
+const maximumIdBytes = 1024;
+const fallbackIdBytes = 128;
+const payloadIdFields = ['testId', 'workId'];
 
 export function includeDesktopEvent(event: DesktopEvent, level: DesktopEventLevel, scopeCategory?: string): boolean {
   if (level === 'all') return true;
@@ -51,7 +57,7 @@ export function projectDesktopEvent(event: CollectedDesktopEvent): DesktopEventR
   const payload: Record<string, unknown> = {};
   switch (event.kind) {
     case 'work-selected':
-      payload.workId = clip(event.payload.workId);
+      payload.workId = id(event.payload.workId);
       payload.label = clip(event.payload.label);
       break;
     case 'scope-start':
@@ -79,12 +85,12 @@ export function projectDesktopEvent(event: CollectedDesktopEvent): DesktopEventR
       payload.text = clip(event.payload.text);
       break;
     case 'test-start':
-      payload.testId = clip(event.payload.testId);
+      payload.testId = id(event.payload.testId);
       payload.title = clip(event.payload.title);
       payload.attempt = event.payload.attempt;
       break;
     case 'test-result':
-      payload.testId = clip(event.payload.testId);
+      payload.testId = id(event.payload.testId);
       payload.title = clip(event.payload.title);
       payload.attempt = event.payload.attempt;
       payload.status = event.payload.status;
@@ -111,14 +117,14 @@ export function projectDesktopEvent(event: CollectedDesktopEvent): DesktopEventR
   const record: DesktopEventRecord = {
     schemaVersion: 1,
     type: 'event',
-    runId: clip(event.runId),
-    eventId: clip(event.eventId),
-    sourceId: clip(event.sourceId),
+    runId: id(event.runId),
+    eventId: id(event.eventId),
+    sourceId: id(event.sourceId),
     sourceSequence: event.sourceSequence,
     arrivalSequence: event.arrivalSequence,
     kind: event.kind,
-    scopeId: clip(event.scopeId),
-    ...(event.parentScopeId ? { parentScopeId: clip(event.parentScopeId) } : {}),
+    scopeId: id(event.scopeId),
+    ...(event.parentScopeId ? { parentScopeId: id(event.parentScopeId) } : {}),
     ...(event.context
       ? {
           context: {
@@ -135,20 +141,81 @@ export function projectDesktopEvent(event: CollectedDesktopEvent): DesktopEventR
       : {}),
     payload,
   };
-  while (Buffer.byteLength(JSON.stringify(record)) > maximumRecordBytes) {
-    const key = Object.keys(payload).find((field) => typeof payload[field] === 'string' && (payload[field] as string).length > 32);
-    if (!key) throw new Error('Desktop event projection cannot fit within the 4 KiB record limit.');
-    payload[key] = clip(payload[key] as string, 32);
+  return fitRecord(record);
+}
+
+function byteLength(value: unknown): number {
+  return Buffer.byteLength(JSON.stringify(value));
+}
+
+type TextSlot = { holder: Record<string, unknown>; key: string };
+
+// Every free-text field a record carries. Identifiers are excluded: they are never shrunk to make room.
+function textSlots(record: DesktopEventRecord): TextSlot[] {
+  const slots: TextSlot[] = [];
+  const collect = (holder: Record<string, unknown> | undefined, skip: readonly string[] = []) => {
+    if (!holder) return;
+    for (const key of Object.keys(holder)) if (typeof holder[key] === 'string' && !skip.includes(key)) slots.push({ holder, key });
+  };
+  collect(record.payload, [...payloadIdFields, 'failureId']);
+  collect(record.context as Record<string, unknown> | undefined);
+  const failure = record.payload.failure as { error?: Record<string, unknown> } | undefined;
+  collect(failure?.error);
+  return slots;
+}
+
+// Shrinks free text, longest first, until the record fits; if the identifiers and enums alone cannot fit, returns a
+// minimal record rather than throwing, so one oversized event can never drop the run's terminal summary.
+function fitRecord(record: DesktopEventRecord): DesktopEventRecord {
+  const slots = textSlots(record).sort(
+    (a, b) => Buffer.byteLength(b.holder[b.key] as string) - Buffer.byteLength(a.holder[a.key] as string),
+  );
+  for (const { holder, key } of slots) {
+    if (byteLength(record) <= maximumRecordBytes) return record;
+    if (Buffer.byteLength(holder[key] as string) > 32) holder[key] = clip(holder[key] as string, 32);
   }
-  return record;
+  if (byteLength(record) <= maximumRecordBytes) return record;
+  const payload: Record<string, unknown> = {};
+  for (const key of [...payloadIdFields, 'attempt', 'status', 'durationMs', 'level', 'category', 'stream', 'gap', 'excluded'])
+    if (record.payload[key] !== undefined) payload[key] = record.payload[key];
+  const failure = record.payload.failure as { failureId: string; kind: string } | undefined;
+  if (failure) payload.failure = { failureId: failure.failureId, kind: failure.kind };
+  const reduced: DesktopEventRecord = {
+    schemaVersion: 1,
+    type: 'event',
+    runId: record.runId,
+    eventId: record.eventId,
+    sourceId: record.sourceId,
+    sourceSequence: record.sourceSequence,
+    arrivalSequence: record.arrivalSequence,
+    kind: record.kind,
+    scopeId: record.scopeId,
+    ...(record.parentScopeId ? { parentScopeId: record.parentScopeId } : {}),
+    payload,
+    truncated: true,
+  };
+  if (byteLength(reduced) <= maximumRecordBytes) return reduced;
+  const shorten = (value: string) => clip(value, fallbackIdBytes);
+  reduced.runId = shorten(reduced.runId);
+  reduced.eventId = shorten(reduced.eventId);
+  reduced.sourceId = shorten(reduced.sourceId);
+  reduced.scopeId = shorten(reduced.scopeId);
+  if (reduced.parentScopeId) reduced.parentScopeId = shorten(reduced.parentScopeId);
+  for (const key of payloadIdFields) if (typeof payload[key] === 'string') payload[key] = shorten(payload[key]);
+  if (failure) payload.failure = { failureId: shorten(failure.failureId), kind: failure.kind };
+  return reduced;
 }
 
 function projectFailure(failure: { failureId: string; kind: string; error: { name: string; message: string } }) {
   return {
-    failureId: clip(failure.failureId),
+    failureId: id(failure.failureId),
     kind: failure.kind,
     error: { name: clip(failure.error.name), message: clip(failure.error.message) },
   };
+}
+
+function id(value: string): string {
+  return clip(value, maximumIdBytes);
 }
 
 function clip(value: string, maximumBytes = maximumTextBytes): string {

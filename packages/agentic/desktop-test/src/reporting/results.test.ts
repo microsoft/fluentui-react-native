@@ -2,6 +2,9 @@ import os from 'node:os';
 import path from 'node:path';
 
 import {
+  decideDesktopTestStatus,
+  decisiveDesktopAttempt,
+  describeDesktopIncompleteRun,
   describeDesktopSelection,
   describeDesktopUnsupported,
   projectDesktopRunSummary,
@@ -223,5 +226,111 @@ describe('bounded desktop run summary', () => {
     expect(summary.omissions.problems).toBeGreaterThan(0);
     expect(Buffer.byteLength(JSON.stringify(summary))).toBeLessThanOrEqual(4 * 1024);
     expect(summary.artifacts.runJson).toBe(path.join(root, 'run.json'));
+  });
+});
+
+describe('the attempt that decides a test', () => {
+  const attempt = (status: DesktopTestResult['status'], index: number, reason = `${status} ${index}`) => ({
+    attempt: index,
+    status,
+    durationMs: 1,
+    reason,
+    ...(status === 'failed'
+      ? { failure: { failureId: `failure-${index}`, kind: 'test' as const, error: { name: 'Error', message: reason } } }
+      : {}),
+  });
+
+  test.each([
+    [['passed'], 'passed'],
+    [['failed', 'passed'], 'passed'],
+    [['failed', 'skipped'], 'failed'],
+    [['failed', 'unsupported'], 'failed'],
+    [['failed', 'incomplete'], 'failed'],
+    [['failed', 'cancelled'], 'failed'],
+    [['failed', 'skipped', 'passed'], 'passed'],
+    [['skipped', 'unsupported'], 'unsupported'],
+    [['incomplete', 'skipped'], 'skipped'],
+    [[], 'incomplete'],
+  ] as const)('attempts %j decide %s', (statuses, expected) => {
+    expect(decideDesktopTestStatus(statuses.map((status) => ({ status })))).toBe(expected);
+  });
+
+  test('reports a failed-then-skipped test with the failed attempt in every rendering', () => {
+    const test: DesktopTestResult = {
+      testId: 'masked',
+      title: 'masked',
+      status: 'failed',
+      flaky: false,
+      attempts: [attempt('failed', 0, 'first attempt broke'), attempt('skipped', 1, 'retry was skipped')],
+    };
+    expect(decisiveDesktopAttempt(test.attempts)).toBe(test.attempts[0]);
+    const result = summarize([outcome('passed'), test]);
+    expect(result.status).toBe('failed');
+    expect(renderJUnit(result)).toContain('<failure message="first attempt broke">');
+    expect(projectDesktopRunSummary(result, '/run')).toMatchObject({
+      problems: [{ kind: 'test', id: 'masked', status: 'failed', message: 'first attempt broke' }],
+    });
+  });
+
+  test('a declared gap is read from the attempt that decided the test', () => {
+    const test: DesktopTestResult = {
+      testId: 'gap',
+      title: 'gap',
+      status: 'unsupported',
+      flaky: false,
+      attempts: [
+        { ...attempt('skipped', 0), status: 'skipped' },
+        { ...attempt('unsupported', 1), gap: 'unsupported' },
+      ],
+    };
+    expect(summarize([outcome('passed'), test], { lane: accessible }).counts).toMatchObject({ declaredUnsupported: 1 });
+  });
+});
+
+describe('incomplete runs explain themselves', () => {
+  test('a lane run names each skipped and undeclared case and gives JUnit the real reason', () => {
+    const result = summarize([outcome('passed', undefined, 'ran'), outcome('skipped', undefined, 'skipped-case'), outcome('unsupported')], {
+      lane: accessible,
+    });
+    expect(result.status).toBe('incomplete');
+    const summary = projectDesktopRunSummary(result, '/run');
+    expect(summary.problems.map(({ id, status }) => [id, status])).toEqual([
+      ['skipped-case', 'skipped'],
+      ['unsupported-plain', 'unsupported'],
+    ]);
+    expect(summary.problems[0].message).toContain('Not executed.');
+    const xml = renderJUnit(result);
+    expect(xml).toContain('2 selected tests did not execute in the accessible lane');
+    expect(xml).not.toContain('No required tests executed or a producer did not finish.');
+    expect(renderRunSummary(result)).toContain('Desktop run is incomplete; 2 selected tests did not execute in the accessible lane');
+  });
+
+  test('a run that reported nothing says so rather than blaming a producer', () => {
+    const result = summarize([], { lane: accessible });
+    expect(projectDesktopRunSummary(result, '/run').problems).toEqual([
+      expect.objectContaining({ kind: 'unfinished', id: 'run', status: 'incomplete', message: 'No tests were reported.' }),
+    ]);
+    expect(renderJUnit(result)).toContain('message="No tests were reported."');
+  });
+
+  test('unfinished work carries the reason its producer was overruled', () => {
+    const result = summarizeDesktopRun({
+      schemaVersion: 1,
+      runId: 'run-id',
+      kind: 'tests',
+      startedAt: new Date(0).toISOString(),
+      finishedAt: new Date(1).toISOString(),
+      durationMs: 1,
+      tests: [outcome('passed')],
+      work: [{ workId: 'work', label: 'empty spec', status: 'incomplete', reason: 'No tests were reported for this work.' }],
+      failures: [],
+      artifacts: [],
+    });
+    expect(result.status).toBe('incomplete');
+    expect(projectDesktopRunSummary(result, '/run').problems).toEqual([
+      expect.objectContaining({ kind: 'unfinished', id: 'work', message: 'No tests were reported for this work.' }),
+    ]);
+    expect(renderJUnit(result)).toContain('message="No tests were reported for this work."');
+    expect(describeDesktopIncompleteRun(result)).toBe('Desktop run is incomplete; empty spec: No tests were reported for this work.');
   });
 });
