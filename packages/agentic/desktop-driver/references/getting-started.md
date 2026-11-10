@@ -111,7 +111,10 @@ desktop-driver stories list --platform windows --url http://127.0.0.1:7007 --tar
 `--reporter auto|plain|github-actions|json|ndjson` is also configurable with
 `DESKTOP_REPORTER`; `--json` aliases `--reporter json`. In `auto`, existing
 indented JSON is retained. One-shot commands write one result, while `serve`
-emits one readiness result and then waits for shutdown.
+emits one readiness result and then waits for shutdown. A usage or
+configuration error in `json` or `ndjson` writes one `error` record
+(`{"schemaVersion":1,"type":"error","error":{"code","message"}}`) to stdout and
+exits 1; `plain` writes the message to stderr.
 
 ## Resolve and diagnose
 

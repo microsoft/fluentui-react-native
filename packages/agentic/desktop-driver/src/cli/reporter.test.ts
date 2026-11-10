@@ -1,6 +1,10 @@
 import { PassThrough } from 'node:stream';
 
+import { Command } from 'commander';
+
 import {
+  configureDesktopCliCommandTree,
+  describeDesktopCliError,
   formatDesktopReporterError,
   formatDesktopReporterValue,
   projectDesktopCliError,
@@ -77,5 +81,50 @@ describe('desktop reporter modes', () => {
       type: 'error',
       error: { code: 'internal', message: 'invalid' },
     });
+  });
+
+  test('reports NDJSON errors as the same record as JSON, without a terminal wrapper', () => {
+    const error = Object.assign(new Error('bad input'), { code: 'commander.invalidArgument' });
+    expect(formatDesktopReporterError('ndjson', error)).toBe(formatDesktopReporterError('json', error));
+    expect(JSON.parse(formatDesktopReporterError('ndjson', error))).toEqual({
+      schemaVersion: 1,
+      type: 'error',
+      error: { code: 'usage', message: 'bad input' },
+    });
+  });
+
+  test.each([
+    { label: 'invalid argument', fields: { code: 'invalid argument' }, kind: 'usage' },
+    { label: 'invalid selector', fields: { code: 'invalid selector' }, kind: 'usage' },
+    { label: 'unsupported operation', fields: { code: 'unsupported operation' }, kind: 'unsupported' },
+    { label: 'webdriver client name', fields: { name: 'unsupported operation' }, kind: 'unsupported' },
+    { label: 'target-busy session', fields: { code: 'session not created', data: { reason: 'target-busy' } }, kind: 'busy' },
+    { label: 'session not created', fields: { code: 'session not created' }, kind: 'internal' },
+    { label: 'no such element', fields: { code: 'no such element' }, kind: 'internal' },
+  ])('maps WebDriver $label errors to $kind', ({ fields, kind }) => {
+    expect(projectDesktopCliError(Object.assign(new Error('x'), fields)).error.code).toBe(kind);
+  });
+
+  test('routes usage errors from nested subcommands to the reporter', async () => {
+    const root = new Command('root');
+    root
+      .command('group')
+      .command('leaf')
+      .requiredOption('--url <url>')
+      .action(() => undefined);
+    const stderr: string[] = [];
+    configureDesktopCliCommandTree(root, { writeErr: (text) => stderr.push(text), writeOut: () => undefined });
+
+    const error: unknown = await root.parseAsync(['group', 'leaf'], { from: 'user' }).catch((caught: unknown) => caught);
+
+    expect(error).toMatchObject({ code: 'commander.missingMandatoryOptionValue', exitCode: 1 });
+    expect(projectDesktopCliError(error).error.code).toBe('usage');
+    expect(stderr.join('')).toContain("required option '--url <url>' not specified");
+  });
+
+  test('clips messages to the byte limit at a character boundary', () => {
+    const message = describeDesktopCliError(new Error('é'.repeat(2_000)));
+    expect(Buffer.byteLength(message)).toBeLessThanOrEqual(1024);
+    expect(message.endsWith('…')).toBe(true);
   });
 });
