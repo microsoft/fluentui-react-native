@@ -959,6 +959,21 @@ class WindowThread {
     Run([window]() { DestroyWindow(window); });
   }
 
+  // Blocks the thread until `gate` opens, so its windows stop answering, and
+  // returns once the thread is blocked.
+  void Stall(const std::shared_ptr<Gate>& gate) {
+    const auto blocked = std::make_shared<Gate>();
+    {
+      const std::lock_guard<std::mutex> guard(mutex_);
+      tasks_.push_back([gate, blocked]() {
+        blocked->Open();
+        gate->Hold();
+      });
+    }
+    PostThreadMessageW(threadId_.load(), kWindowTask, 0, 0);
+    blocked->Hold();
+  }
+
  private:
   void Run(std::function<void()> task) {
     const auto finished = std::make_shared<Gate>();
@@ -1729,6 +1744,57 @@ void TestActivationRefusal() {
   Check(Contains(reclaimed, "taking the foreground back") &&
             Contains(reclaimed, "did not become the foreground window"),
         "a refusal with a shared input queue reports that the holder may take the foreground back");
+}
+
+// A window whose thread stops pumping messages fails window management with
+// target-non-response within the probe's bound instead of blocking the command,
+// and a cancelled command stops waiting for it.
+void TestHungWindowProbe() {
+  const CancellationToken token;
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestHung", L"Hung window");
+  Check(window != nullptr, "the hung-window fixture creates a window");
+  if (window == nullptr) {
+    return;
+  }
+  Check(FailureCode([&]() { RequireWindowResponds(window, token); }) == "none",
+        "a window whose thread pumps messages responds");
+
+  const auto stall = std::make_shared<Gate>();
+  windows.Stall(stall);
+  std::string reason = "responded";
+  std::string message;
+  const ULONGLONG started = GetTickCount64();
+  try {
+    RequireWindowResponds(window, token);
+  } catch (const HelperError& error) {
+    reason = error.reason();
+    message = error.what();
+  }
+  Check(reason == "target-non-response" && Contains(message, "did not answer window messages") &&
+            GetTickCount64() - started < 4000,
+        "a window that stops answering fails as target-non-response within the probe's bound");
+
+  CancellationToken cancelled;
+  std::thread canceller([&cancelled]() {
+    Sleep(200);
+    cancelled.Cancel();
+  });
+  const ULONGLONG cancelStarted = GetTickCount64();
+  std::string outcome = "none";
+  try {
+    RequireWindowResponds(window, cancelled);
+  } catch (const CancelledError&) {
+    outcome = "cancelled";
+  } catch (const HelperError& error) {
+    outcome = error.code();
+  }
+  canceller.join();
+  Check(outcome == "cancelled" && GetTickCount64() - cancelStarted < 1000,
+        "a cancelled command stops waiting for a window that does not answer");
+  stall->Open();
+  Check(WaitFor([&]() { return FailureCode([&]() { RequireWindowResponds(window, token); }) == "none"; }),
+        "the window answers again once its thread resumes");
 }
 
 void TestHelperSessionCheck() {
@@ -3478,6 +3544,7 @@ int RunSelfTest() {
   TestInputEnvironment();
   TestInjectionIntegrity();
   TestActivationRefusal();
+  TestHungWindowProbe();
   TestHelperSessionCheck();
   TestInputAuthorityOnThisMachine();
   TestInputReevaluation();

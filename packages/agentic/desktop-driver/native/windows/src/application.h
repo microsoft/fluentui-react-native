@@ -162,6 +162,13 @@ std::wstring QuoteWindowsCommandLineArgument(std::wstring_view value);
 void RequireProcessInHelperSession(DWORD processId, std::string_view failureCode);
 void ActivateWindow(HWND window, const CancellationToken& token);
 bool TryActivateWindow(HWND window, const CancellationToken& token);
+// Fails with automation-failed and reason `target-non-response` when the
+// thread that owns `window` does not answer window messages within a bound.
+// A probe that Windows refuses for another reason, such as UIPI, passes.
+void RequireWindowResponds(HWND window, const CancellationToken& token);
+// Posts SW_RESTORE so a hung window cannot block the helper, then waits a
+// bounded time for it. Returns false when the window did not restore in time.
+bool RestoreWindow(HWND window, const CancellationToken& token);
 
 // What the helper saw when Windows kept the foreground away from a window it
 // tried to activate. Foreign windows are named only by an opaque handle and

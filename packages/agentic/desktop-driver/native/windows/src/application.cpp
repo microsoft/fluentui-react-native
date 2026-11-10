@@ -625,6 +625,8 @@ void TrackRelatedLaunchProcesses(const LaunchRootIdentity& root,
 struct ActivationOutcome {
   bool activated{false};
   bool sawForeground{false};
+  // The window's thread stopped answering messages, so activation stopped.
+  bool notResponding{false};
   // The Windows error of the latest refused input-queue attachment, or 0.
   DWORD attachError{0};
 };
@@ -669,6 +671,45 @@ class ForegroundInputAttachment {
   DWORD error_{0};
 };
 
+enum class WindowResponse { Responds, Undetermined, NotResponding };
+
+// Restoring, moving, and activating a window wait on the thread that owns it,
+// so a thread that stops pumping messages would hold the helper, and with it
+// the input lock, until it recovers. SMTO_ABORTIFHUNG returns at once for a
+// thread Windows already considers hung; a busy one gets a short wait per try.
+WindowResponse ProbeWindowResponse(HWND window, const CancellationToken& token) {
+  const Deadline deadline(kWindowResponseTimeoutMs);
+  while (true) {
+    token.ThrowIfCancelled();
+    DWORD_PTR reply = 0;
+    SetLastError(ERROR_SUCCESS);
+    if (SendMessageTimeoutW(window, WM_NULL, 0, 0, SMTO_ABORTIFHUNG, kWindowProbeMessageTimeoutMs, &reply) != 0) {
+      return WindowResponse::Responds;
+    }
+    const DWORD error = GetLastError();
+    if (IsWindow(window) == FALSE) {
+      Fail(kErrorNoSuchWindow, "The requested window is no longer available.");
+    }
+    // Refused for another reason, such as UIPI in front of an elevated
+    // window, so the probe cannot judge the window and leaves it to the
+    // bounded steps that follow.
+    if (error != ERROR_TIMEOUT && IsHungAppWindow(window) == FALSE) {
+      return WindowResponse::Undetermined;
+    }
+    if (deadline.Expired()) {
+      return WindowResponse::NotResponding;
+    }
+    token.Wait(50);
+  }
+}
+
+[[noreturn]] void FailWindowNotResponding() {
+  throw HelperError(kErrorAutomationFailed,
+                    "The target window did not answer window messages in time, so the helper did not wait on it; the "
+                    "application may be hung or busy.",
+                    "target-non-response");
+}
+
 // Like application activation on macOS, a foreground popup that the window owns keeps the window's activation
 // context. Re-activating the owner would dismiss that popup with input no user produced; a physical press on the owner
 // activates it as the user's own press would.
@@ -685,14 +726,24 @@ ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& t
   if (window == nullptr || IsWindow(window) == FALSE) {
     Fail(kErrorNoSuchWindow, "The requested window is no longer available.");
   }
-  if (IsIconic(window) != FALSE) {
-    ShowWindow(window, SW_RESTORE);
+  ActivationOutcome outcome;
+  if (ProbeWindowResponse(window, token) == WindowResponse::NotResponding) {
+    outcome.notResponding = true;
+    return outcome;
   }
-  AllowSetForegroundWindow(ASFW_ANY);
+  if (IsIconic(window) != FALSE) {
+    RestoreWindow(window, token);
+  }
+  // Only the target may take the foreground itself, such as for a popup it
+  // opens on activation; every other process keeps the usual restrictions.
+  DWORD windowProcess = 0;
+  GetWindowThreadProcessId(window, &windowProcess);
+  if (windowProcess != 0) {
+    AllowSetForegroundWindow(windowProcess);
+  }
   const DWORD currentThread = GetCurrentThreadId();
   ForegroundInputAttachment inputAttachment(currentThread);
   const Deadline deadline(kActivationTimeoutMs);
-  ActivationOutcome outcome;
   while (true) {
     token.ThrowIfCancelled();
     const HWND foreground = GetForegroundWindow();
@@ -704,9 +755,15 @@ ActivationOutcome ActivateWindowInternal(HWND window, const CancellationToken& t
     if (deadline.Expired()) {
       break;
     }
+    if (ProbeWindowResponse(window, token) == WindowResponse::NotResponding) {
+      outcome.notResponding = true;
+      break;
+    }
     // Foreground ownership only transfers between threads that share an input
     // queue, so borrow the queue of whichever thread holds the foreground now.
-    inputAttachment.AttachTo(GetWindowThreadProcessId(foreground != nullptr ? foreground : window, nullptr));
+    // A hung holder would block the calls below once its queue is shared.
+    const HWND holder = foreground != nullptr ? foreground : window;
+    inputAttachment.AttachTo(IsHungAppWindow(holder) != FALSE ? 0 : GetWindowThreadProcessId(holder, nullptr));
     BringWindowToTop(window);
     SetForegroundWindow(window);
     SetActiveWindow(window);
@@ -842,7 +899,35 @@ void ActivateWindow(HWND window, const CancellationToken& token) {
   if (outcome.activated) {
     return;
   }
+  if (outcome.notResponding) {
+    FailWindowNotResponding();
+  }
   Fail(kErrorWindowActivation, DescribeActivationRefusal(ReadActivationRefusal(window, outcome)));
+}
+
+void RequireWindowResponds(HWND window, const CancellationToken& token) {
+  if (ProbeWindowResponse(window, token) == WindowResponse::NotResponding) {
+    FailWindowNotResponding();
+  }
+}
+
+bool RestoreWindow(HWND window, const CancellationToken& token) {
+  // SW_RESTORE returns a maximized window to its normal size, but takes a
+  // minimized one back to the state it had before, which may be maximized.
+  const bool wasZoomed = IsZoomed(window) != FALSE;
+  if (ShowWindowAsync(window, SW_RESTORE) == FALSE) {
+    return false;
+  }
+  const Deadline deadline(kWindowRestoreTimeoutMs);
+  while (true) {
+    if (IsIconic(window) == FALSE && !(wasZoomed && IsZoomed(window) != FALSE)) {
+      return true;
+    }
+    if (deadline.Expired()) {
+      return false;
+    }
+    token.Wait(16);
+  }
 }
 
 ApplicationManager::~ApplicationManager() {

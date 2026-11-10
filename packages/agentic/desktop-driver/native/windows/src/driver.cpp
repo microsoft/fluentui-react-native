@@ -33,6 +33,26 @@ json::Value SerializeRect(const RectD& rect) {
   return value;
 }
 
+constexpr unsigned int kPostedMoveSettleMs = 250;
+
+// Waits until a move posted with SWP_ASYNCWINDOWPOS changes the window frame.
+// A window may clamp or refuse a move, so a frame that stays put is accepted
+// once the window answers messages; one that stops answering fails instead.
+void AwaitPostedMove(HWND window, const RECT& before, const CancellationToken& token) {
+  const Deadline deadline(kPostedMoveSettleMs);
+  while (true) {
+    RECT now{};
+    if (GetWindowRect(window, &now) == FALSE || EqualRect(&now, &before) == FALSE) {
+      return;
+    }
+    if (deadline.Expired()) {
+      RequireWindowResponds(window, token);
+      return;
+    }
+    token.Wait(16);
+  }
+}
+
 std::string RequireString(const json::Value& params, std::string_view key) {
   const json::Value* value = params.Find(key);
   if (value == nullptr || !value->IsString() || value->AsString().empty()) {
@@ -633,9 +653,16 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     if (rect == nullptr || !rect->IsObject()) {
       Fail(kErrorInvalidParams, "The setWindowRect request is missing its rectangle.");
     }
+    // Every change below is posted to the window's thread, so a window that
+    // stops answering leaves the effect unknown instead of blocking the helper.
+    RequireWindowResponds(window, token);
     if (IsZoomed(window) != FALSE || IsIconic(window) != FALSE) {
-      ShowWindow(window, SW_RESTORE);
-      RecordDelivered();
+      RecordDispatching();
+      const bool restored = RestoreWindow(window, token);
+      RecordSettled(S_OK);
+      if (!restored) {
+        RequireWindowResponds(window, token);
+      }
     }
     WindowMetrics metrics = MeasureWindow(window);
     const RectD current = ClientRectInScreenDips(metrics);
@@ -656,12 +683,16 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     // frame an estimate, so converge on the requested client area by measuring.
     for (int attempt = 0; attempt < 4; attempt += 1) {
       token.ThrowIfCancelled();
-      if (SetWindowPos(window, nullptr, frame.left, frame.top, frame.right - frame.left, frame.bottom - frame.top,
-                       SWP_NOZORDER | SWP_NOACTIVATE) == FALSE) {
-        FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
+      RECT before{};
+      if (GetWindowRect(window, &before) == FALSE || EqualRect(&before, &frame) == FALSE) {
+        if (SetWindowPos(window, nullptr, frame.left, frame.top, frame.right - frame.left, frame.bottom - frame.top,
+                         SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS) == FALSE) {
+          FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
+        }
+        RecordDispatching();
+        AwaitPostedMove(window, before, token);
+        RecordSettled(S_OK);
       }
-      RecordDelivered();
-      token.Wait(16);
       metrics = MeasureWindow(window);
       const long deltaX = target.left - metrics.clientOrigin.x;
       const long deltaY = target.top - metrics.clientOrigin.y;
