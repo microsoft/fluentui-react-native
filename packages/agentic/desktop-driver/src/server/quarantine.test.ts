@@ -188,7 +188,7 @@ describe('Desktop Driver mutation settlement', () => {
     );
   });
 
-  test('lifts the quarantine when a launched application closes with its session', async () => {
+  test('keeps the quarantine of a launched application whose exit the service cannot prove when its session ends', async () => {
     await withFixture(
       { faults: { click: { mode: 'lost-response' } } },
       async ({ capabilities, client, element: findElement, harness, session, withShortDeadline }) => {
@@ -198,10 +198,11 @@ describe('Desktop Driver mutation settlement', () => {
 
         await session.delete();
 
-        await expect(readQuarantine(harness)).resolves.toBeUndefined();
-        const replacement = await client.newSession(capabilities);
-        await expect(replacement.releaseActions()).resolves.toBeNull();
-        await replacement.delete();
+        await expect(readQuarantine(harness)).resolves.toMatchObject({ effect: 'unknown', targetId: harness.target.id });
+        await expect(client.newSession(capabilities)).rejects.toMatchObject({
+          code: 'session not created',
+          data: { reason: 'target-quarantined' },
+        });
       },
     );
   });

@@ -9,6 +9,7 @@ import { z } from 'zod';
 import type { PrivateStorage } from '../authority/privateStorage.js';
 import type { ApplicationLease } from '../host/types.js';
 import type { MutationEffect } from '../protocol/settlement.js';
+import { withDeadline } from '../protocol/timeouts.js';
 
 /** The exact process an application lease named, so its exit can be proven later. */
 export type ApplicationIncarnation = {
@@ -89,6 +90,14 @@ const quarantineSchema = z.strictObject({
 
 type HeldRecords = { mutation?: string; quarantine?: string };
 
+/** How long one call to private storage may take before the journal treats its outcome as unknown. */
+export const defaultStorageDeadlineMs = 10_000;
+
+export type SettlementJournalOptions = {
+  /** Bounds each storage call. Defaults to `defaultStorageDeadlineMs`. */
+  storageDeadlineMs?: number;
+};
+
 export class SettlementJournal {
   // The exact contents this service holds in storage for each target, since storage removes only an exact match.
   private readonly held = new Map<string, HeldRecords>();
@@ -96,9 +105,39 @@ export class SettlementJournal {
   private readonly queues = new Map<string, Promise<unknown>>();
 
   private readonly storage: PrivateStorage;
+  private readonly deadlineMs: number;
 
-  constructor(storage: PrivateStorage) {
+  constructor(storage: PrivateStorage, options: SettlementJournalOptions = {}) {
     this.storage = storage;
+    this.deadlineMs = options.storageDeadlineMs ?? defaultStorageDeadlineMs;
+  }
+
+  private read(name: string): Promise<string | undefined> {
+    return withDeadline(() => this.storage.read(name), this.deadlineMs, 'Reading a settlement journal record');
+  }
+
+  private publish(name: string, contents: string): Promise<void> {
+    return withDeadline(() => this.storage.publish(name, contents), this.deadlineMs, 'Publishing a settlement journal record');
+  }
+
+  private removeStored(name: string, contents: string): Promise<boolean> {
+    return withDeadline(() => this.storage.remove(name, contents), this.deadlineMs, 'Removing a settlement journal record');
+  }
+
+  /**
+   * Publishes a record and proves it is stored. Storage can fail after it created the record, so a failure is settled by
+   * reading the record back: exactly these contents mean the record is stored and complete, and anything else means the
+   * record was not stored by this call and the failure stands.
+   */
+  private async publishAndConfirm(name: string, contents: string): Promise<void> {
+    try {
+      await this.publish(name, contents);
+    } catch (error) {
+      const stored = await this.read(name).catch(() => undefined);
+      if (stored !== contents) {
+        throw error;
+      }
+    }
   }
 
   /**
@@ -111,7 +150,7 @@ export class SettlementJournal {
 
   private async loadNow(targetId: string): Promise<QuarantineRecord | undefined> {
     const names = recordNames(targetId);
-    const [mutation, quarantine] = await Promise.all([this.storage.read(names.mutation), this.storage.read(names.quarantine)]);
+    const [mutation, quarantine] = await Promise.all([this.read(names.mutation), this.read(names.quarantine)]);
     if (mutation === undefined && quarantine === undefined) {
       return undefined;
     }
@@ -170,7 +209,7 @@ export class SettlementJournal {
       targetId: pending.targetId,
       version: 1,
     } satisfies z.infer<typeof mutationSchema>);
-    await this.storage.publish(recordNames(pending.targetId).mutation, contents);
+    await this.publishAndConfirm(recordNames(pending.targetId).mutation, contents);
     this.held.set(pending.targetId, { ...held, mutation: contents });
   }
 
@@ -190,7 +229,7 @@ export class SettlementJournal {
       return;
     }
     const contents = JSON.stringify({ ...record, kind: 'quarantine', version: 1 } satisfies z.infer<typeof quarantineSchema>);
-    await this.storage.publish(recordNames(record.targetId).quarantine, contents);
+    await this.publishAndConfirm(recordNames(record.targetId).quarantine, contents);
     this.held.set(record.targetId, { ...held, quarantine: contents });
   }
 
@@ -232,8 +271,16 @@ export class SettlementJournal {
     if (!held || contents === undefined) {
       return;
     }
-    if (!(await this.storage.remove(recordNames(targetId)[kind], contents))) {
-      throw new Error('The settlement journal record was missing or changed.');
+    const name = recordNames(targetId)[kind];
+    // Storage answers false for a record that is absent as well as for one that changed, and can fail after removing
+    // the record. Only a record that is still stored, or one that cannot be read, means this one was not removed.
+    let failure: unknown;
+    const removed = await this.removeStored(name, contents).catch((error: unknown) => {
+      failure = error;
+      return false;
+    });
+    if (!removed && (await this.read(name).then((stored) => stored !== undefined, () => true))) {
+      throw failure ?? new Error('The settlement journal record was missing or changed.');
     }
     const rest: HeldRecords = { ...held };
     delete rest[kind];

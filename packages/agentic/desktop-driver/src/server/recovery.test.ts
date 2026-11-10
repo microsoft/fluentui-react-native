@@ -4,6 +4,7 @@ import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import { SessionManager } from './SessionManager.js';
+import { SettlementJournal } from './settlementJournal.js';
 import type { ApplicationState } from './settlementJournal.js';
 
 /** In-memory private storage with the same never-overwrite and exact-removal rules, and scriptable failures. */
@@ -11,6 +12,12 @@ class MemoryStorage implements PrivateStorage {
   readonly records = new Map<string, string>();
   failPublish = false;
   failRemove = false;
+  /** Creates the record and then fails, as storage can when it loses its answer. */
+  failPublishAfterCreate = false;
+  /** Removes the record and then fails. */
+  failRemoveAfterDelete = false;
+  /** Loses every record right after it is published, as an operator cleanup would. */
+  dropAfterPublish = false;
   /** Holds every storage write until it resolves. */
   gate: Promise<void> | undefined;
 
@@ -27,6 +34,12 @@ class MemoryStorage implements PrivateStorage {
       throw new Error('The record already exists.');
     }
     this.records.set(name, contents);
+    if (this.failPublishAfterCreate) {
+      throw new Error('Storage lost its answer.');
+    }
+    if (this.dropAfterPublish) {
+      this.records.delete(name);
+    }
   }
 
   async remove(name: string, expectedContents: string): Promise<boolean> {
@@ -38,6 +51,9 @@ class MemoryStorage implements PrivateStorage {
       return false;
     }
     this.records.delete(name);
+    if (this.failRemoveAfterDelete) {
+      throw new Error('Storage lost its answer.');
+    }
     return true;
   }
 
@@ -306,15 +322,185 @@ describe('Desktop Driver settlement journal', () => {
     expect(storage.records.size).toBe(0);
   });
 
-  test('clears the records when a launched application is closed', async () => {
+  test('clears the records when a launched application is closed and the probe proves it exited', async () => {
     const storage = new MemoryStorage();
-    const service = await startService(storage, {}, undefined, 'launch');
+    const probe = jest.fn(async (): Promise<ApplicationState> => 'exited');
+    const service = await startService(storage, {}, probe, 'launch');
     await quarantineByLostClick(service);
     expect(storage.records.size).toBeGreaterThan(0);
 
     await service.harness.server.sessions.deleteAll();
+    expect(probe).toHaveBeenCalledWith({ processId: expect.any(Number), processStartedAt: expect.any(String) });
     expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toBeUndefined();
     expect(storage.records.size).toBe(0);
+  });
+
+  test.each([
+    ['still running', async (): Promise<ApplicationState> => 'running'],
+    ['unknown', async (): Promise<ApplicationState> => 'unknown'],
+    ['failing', async (): Promise<ApplicationState> => Promise.reject(new Error('The probe failed.'))],
+  ])('keeps the records of a launched application whose exit the %s probe does not prove', async (_name, answer) => {
+    const storage = new MemoryStorage();
+    let state = answer;
+    const service = await startService(storage, {}, () => state(), 'launch');
+    await quarantineByLostClick(service);
+
+    await service.harness.server.sessions.deleteAll();
+    expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toBeDefined();
+    expect(storage.records.size).toBeGreaterThan(0);
+    await expect(service.open()).rejects.toMatchObject(quarantinedOnOpen);
+
+    // Opening the target again lifts the quarantine once the probe does prove the exit.
+    state = async () => 'exited';
+    await expect(service.open()).resolves.toBeDefined();
+    expect(storage.records.size).toBe(0);
+  });
+
+  test('keeps the records of a launched application without a probe, for the operator to lift', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage, {}, undefined, 'launch');
+    await quarantineByLostClick(service);
+
+    await service.harness.server.sessions.deleteAll();
+    const record = service.harness.server.sessions.getQuarantine(service.harness.target.id)!;
+    expect(record).toBeDefined();
+    await expect(
+      service.harness.server.recoverTarget(service.harness.target.id, { evidence: 'operator', quarantineId: record.id }),
+    ).resolves.toBeDefined();
+    expect(storage.records.size).toBe(0);
+  });
+
+  test('does not wait on a probe that never answers', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    await quarantineByLostClick(service);
+    await service.harness.close();
+    const sessions = new SessionManager({
+      journal: new SettlementJournal(storage),
+      probeApplication: () => new Promise<ApplicationState>(() => undefined),
+      probeDeadlineMs: 20,
+    });
+    await sessions.loadTarget(service.harness.target.id);
+    const quarantine = sessions.getQuarantine(service.harness.target.id)!;
+
+    await expect(
+      sessions.recoverTarget(service.harness.target.id, { evidence: 'application-exited', quarantineId: quarantine.id }),
+    ).rejects.toThrow(/not proven to have exited \(unknown\)/);
+  });
+
+  test('releases held input and closes the session when the journal cannot record the release', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    const session = await service.open();
+    await session.performActions([{ id: 'key', type: 'key', actions: [{ type: 'keyDown', value: 'A' }] }]);
+    storage.failPublish = true;
+    const releases = () => service.harness.host.actions.filter(({ type }) => type === 'release-actions').length;
+    const before = releases();
+
+    await expect(session.delete()).resolves.toBeNull();
+
+    expect(releases()).toBe(before + 1);
+    expect(service.harness.host.actions).toContainEqual(expect.objectContaining({ type: 'close-application' }));
+    expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toBeUndefined();
+    storage.failPublish = false;
+    await expect(service.open()).resolves.toBeDefined();
+  });
+
+  test('quarantines the target in memory when an unrecorded release does not settle', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    const session = await service.open();
+    storage.failPublish = true;
+    service.harness.host.injectFault('releaseActions', { mode: 'lost-response' });
+    service.harness.server.sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
+
+    await expect(session.delete()).rejects.toMatchObject({ code: 'timeout' });
+
+    expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toMatchObject({
+      effect: 'unknown',
+      origin: 'command',
+    });
+    expect(storage.records.size).toBe(0);
+  });
+
+  test('keeps the application open when the release of a closing session never ran', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    const session = await service.open();
+    const element = await session.findElement('accessibility id', 'button-primary');
+    service.harness.host.injectFault('click', { mode: 'lost-response' });
+    const { sessions } = service.harness.server;
+    sessions.get(session.id).desktopTimeouts.nativeCommand = 10;
+    await expect(element.click()).rejects.toMatchObject({ data: { mutation: { quarantined: true } } });
+    const targetId = service.harness.target.id;
+    const record = sessions.getQuarantine(targetId)!;
+    let open!: () => void;
+    storage.gate = new Promise((resolve) => (open = resolve));
+    const recovering = service.harness.server.recoverTarget(targetId, { evidence: 'operator', quarantineId: record.id });
+    // Let recovery reach its storage write.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    await expect(session.delete()).rejects.toMatchObject({ data: { reason: 'target-quarantined' } });
+
+    expect(service.harness.host.actions.some(({ type }) => type === 'close-application')).toBe(false);
+    open();
+    await recovering;
+    storage.gate = undefined;
+    await sessions.deleteAll();
+    expect(service.harness.host.actions).toContainEqual(expect.objectContaining({ type: 'close-application' }));
+  });
+
+  test('adopts a record that storage created before it failed, and removes it when the mutation settles', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    const session = await service.open();
+    const element = await session.findElement('accessibility id', 'button-primary');
+    storage.failPublishAfterCreate = true;
+
+    await expect(element.click()).resolves.toBeNull();
+    expect(service.harness.host.actions.some(({ type }) => type === 'click')).toBe(true);
+    expect(storage.records.size).toBe(0);
+    expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toBeUndefined();
+  });
+
+  test('treats a record that is already absent as settled, and a failure that removed it as success', async () => {
+    const storage = new MemoryStorage();
+    const service = await startService(storage);
+    const session = await service.open();
+    const element = await session.findElement('accessibility id', 'button-primary');
+
+    storage.dropAfterPublish = true;
+    await expect(element.click()).resolves.toBeNull();
+    storage.dropAfterPublish = false;
+    storage.failRemoveAfterDelete = true;
+    await expect(element.click()).resolves.toBeNull();
+
+    expect(service.harness.server.sessions.getQuarantine(service.harness.target.id)).toBeUndefined();
+    expect(storage.records.size).toBe(0);
+  });
+
+  test('bounds every storage call, so storage that never answers cannot hold the service', async () => {
+    const hang = new Promise<never>(() => undefined);
+    const storage: PrivateStorage = { publish: () => hang, read: () => hang, remove: () => hang };
+    const journal = new SettlementJournal(storage, { storageDeadlineMs: 20 });
+    const pending = { command: 'Clicking', sessionId: 'session', targetId: 'target' };
+
+    await expect(journal.load('target')).rejects.toMatchObject({ code: 'timeout' });
+    await expect(journal.beginMutation(pending)).rejects.toMatchObject({ code: 'timeout' });
+    expect(journal.hasMutation('target')).toBe(false);
+  });
+
+  test('refuses to dispatch when the stored record is not the one it wrote', async () => {
+    const storage = new MemoryStorage();
+    const journal = new SettlementJournal(storage);
+    const pending = { command: 'Clicking', sessionId: 'session', targetId: 'target' };
+    await journal.beginMutation(pending);
+    const [[name]] = [...storage.records.entries()];
+    const other = new SettlementJournal(storage);
+
+    await expect(other.beginMutation(pending)).rejects.toThrow('The record already exists.');
+    expect(other.hasMutation('target')).toBe(false);
+    expect(storage.records.has(name)).toBe(true);
   });
 
   test('redacts the application identity with the session id', () => {

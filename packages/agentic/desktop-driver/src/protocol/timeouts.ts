@@ -11,6 +11,28 @@ function cancelledError(description: string): WebDriverError {
 }
 
 /**
+ * Bounds a call that cannot be cancelled, such as supervisor storage or an application probe. Unlike
+ * `withCommandTimeout`, it does not wait for the call to settle, because such a call may never settle; the caller must
+ * treat the outcome of a call that missed its deadline as unknown.
+ */
+export async function withDeadline<T>(call: () => Promise<T>, timeoutMs: number, description: string): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const pending = Promise.resolve().then(call);
+  // A call that fails after its deadline has nobody left to report to.
+  pending.catch(() => undefined);
+  try {
+    return await Promise.race([
+      pending,
+      new Promise<never>((_resolve, reject) => {
+        timer = setTimeout(() => reject(new WebDriverError('timeout', `${description} exceeded ${timeoutMs}ms.`)), timeoutMs);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
  * Aborts `operation` at the deadline, or when `options.signal` aborts, and waits for it to settle before reporting the
  * failure, so callers never advance their queues while native work may still be running. The failure carries what the
  * settled operation revealed: a command that completed after the abort had its effect applied, and a failure keeps the

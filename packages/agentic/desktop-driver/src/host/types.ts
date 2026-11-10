@@ -277,6 +277,12 @@ export interface DesktopHost {
   probe(signal?: AbortSignal): Promise<DesktopHostInfo>;
   launch(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease>;
   attach(target: DesktopTarget, signal?: AbortSignal): Promise<ApplicationLease>;
+  /**
+   * Closes the application a lease names; an attached application is left running. Resolving does not promise that the
+   * process has exited, so the service never takes it as proof: it lifts a launched application's quarantine only when
+   * the operator's `probeApplication` reports the exact incarnation `exited`. A host that could not close the
+   * application should fail rather than resolve.
+   */
   closeApplication(lease: ApplicationLease, signal?: AbortSignal): Promise<void>;
 
   windows(lease: ApplicationLease, signal?: AbortSignal): Promise<DesktopWindow[]>;
