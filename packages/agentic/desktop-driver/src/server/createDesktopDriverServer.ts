@@ -20,7 +20,13 @@ import { createReturnedCapabilities, matchCapabilities } from '../protocol/capab
 import { webElementIdentifier } from '../protocol/constants.js';
 import { invalidArgument, toWebDriverError, WebDriverError } from '../protocol/errors.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
-import type { NewSessionRequest, WebDriverActionSequence, WebDriverElement, WebDriverResponse } from '../protocol/types.js';
+import type {
+  NewSessionRequest,
+  WebDriverActionSequence,
+  WebDriverElement,
+  WebDriverResponse,
+  WebDriverTimeouts,
+} from '../protocol/types.js';
 import { SessionManager } from './SessionManager.js';
 import type { DesktopSession, ElementRecord, MutationOptions, RecoverTargetRequest, RecoverTargetResult } from './SessionManager.js';
 import {
@@ -57,8 +63,11 @@ export type DesktopDriverServerOptions = {
   /** Policy for the agent operations (`furn/ops`), which the server operator controls rather than the caller. */
   operations?: {
     /**
-     * Whether operations may read what applications display (values, text, help). `deny` withholds it for every
-     * session. Element names and automation ids stay readable. Defaults to `allow`.
+     * Whether operations may read what applications display (values, text, help). `deny` withholds it from every
+     * operation of every session. Element names and automation ids stay readable. Defaults to `allow`. It governs
+     * `furn/ops` only: a caller with a driver grant can still read the same content through the W3C routes (element
+     * text, attributes and properties, source, screenshots, `furn/tree`), so it limits what the agent operations
+     * return, not what a driver-control session can reach.
      */
     content?: ContentPolicy;
   };
@@ -67,7 +76,10 @@ export type DesktopDriverServerOptions = {
    * Durable settlement state, supplied by the trusted supervisor. Each mutation is recorded in `storage` before it is
    * dispatched and each quarantine when it is raised, so a restarted service still refuses a target whose mutation
    * never settled. The storage must belong to this one service configuration. `probeApplication` lifts a quarantine
-   * once the exact application incarnation it was raised against has exited; without it only the operator can.
+   * once the exact application incarnation it was raised against has exited; without it only the operator can. A
+   * quarantine of a launched application is lifted when its session is closed only if the probe then reports the
+   * application exited, because closing the application does not prove it is gone. Each storage and probe call has a
+   * deadline, and a call that does not settle in time counts as a failure.
    */
   recovery?: {
     probeApplication?: ProbeApplication;
@@ -110,10 +122,7 @@ type RequestSettings = {
 };
 
 export async function createDesktopDriverServer(options: DesktopDriverServerOptions = {}): Promise<DesktopDriverServer> {
-  const host = options.host ?? '127.0.0.1';
-  if (!isLoopbackHost(host)) {
-    throw new Error(`Desktop Driver binds to loopback by default; "${host}" is not a supported loopback host.`);
-  }
+  const { contentPolicy, host, maxBodyBytes, port: requestedPort } = resolveStartupOptions(options);
 
   if (options.authority !== undefined && !(options.authority instanceof DesktopAuthority)) {
     throw new TypeError('The authority option must be a DesktopAuthority; a missing authority is undefined, never null.');
@@ -128,6 +137,9 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   });
   // A target recorded as quarantined must refuse from the first request, so a journal that cannot be read stops startup.
   await Promise.all(targets.list().map(({ id }) => sessions.loadTarget(id)));
+  // A target registered after startup is read as it arrives. A read that fails is retried, and fails closed, when a
+  // session is created or `/status` is read.
+  targets.onRegister(({ id }) => void sessions.loadTarget(id).catch(() => undefined));
   let closing = false;
   let listenerClosePromise: Promise<void> | undefined;
   let cleanupQueue: Promise<void> = Promise.resolve();
@@ -137,13 +149,12 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
       writeJson(response, error.status, { value: error.toJSON() });
       return;
     }
-    void handleRequest(request, response, sessions, targets, {
-      authority: options.authority,
-      contentPolicy: options.operations?.content ?? 'allow',
-      maxBodyBytes: options.maxBodyBytes ?? 1024 * 1024,
-    });
+    void handleRequest(request, response, sessions, targets, { authority: options.authority, contentPolicy, maxBodyBytes });
   });
-  const port = await listen(httpServer, host, options.port ?? 0);
+  // `listen` drops its own error listener once it succeeds. A later accept failure, such as descriptor exhaustion, must
+  // not become an uncaught exception that takes down the supervisor; the listener keeps accepting connections.
+  httpServer.on('error', () => undefined);
+  const port = await listen(httpServer, host, requestedPort);
   // A revoked grant leaves its sessions unreachable, so they are closed rather than holding their targets. A session that
   // fails to close stays tracked, and service shutdown retries it and reports the failure.
   const stopDrainingRevokedGrants = options.authority?.onRevoke((grant) => sessions.deleteOwnedBy(grant.id));
@@ -211,20 +222,20 @@ async function handleRequest(
     }
   });
   try {
-    if (request.headers.origin) {
-      throw new WebDriverError('unknown error', 'Browser-origin requests are not accepted by Desktop Driver.');
-    }
+    assertLocalRequest(request);
     // Authentication precedes everything that reads or parses the request, so an unauthenticated caller reaches no route
     // logic, learns nothing about sessions or targets, and cannot make the service buffer a body.
     const grant = authenticateRequest(request, settings.authority);
-    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- This base URL only parses a loopback listener path.
-    const url = new URL(request.url ?? '/', 'http://127.0.0.1');
-    const segments = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);
+    const segments = parseRequestPath(request.url);
     const method = request.method ?? 'GET';
     const sessionId = segments[0] === 'session' ? segments[1] : undefined;
     if (sessionId) {
       // Checked before the command queues, so a caller never waits in, or delays, another grant's session queue.
-      sessions.getFor(sessionId, grant?.id);
+      const session = sessions.getFor(sessionId, grant?.id);
+      if (method === 'DELETE' && segments.length === 2) {
+        // The delete queues behind the running command, so a wait the client sized must end now rather than hold it up.
+        session.closeRequested.abort();
+      }
     }
     const body =
       method === 'GET' || method === 'DELETE' ? undefined : await readJsonBody(request, requestBodyLimit(segments, settings.maxBodyBytes));
@@ -257,6 +268,75 @@ async function handleRequest(
 const defaultIdleSessionTimeoutMs = 10 * 60 * 1000;
 // The largest delay a Node timer honors; a larger value would fire at once.
 const maxIdleSessionTimeoutMs = 2_147_483_647;
+const defaultMaxBodyBytes = 1024 * 1024;
+
+// Exhaustive, so an option added to the type cannot be rejected as unknown here.
+const serverOptionKeys = {
+  authority: true,
+  host: true,
+  idleSessionTimeoutMs: true,
+  maxBodyBytes: true,
+  operations: true,
+  port: true,
+  recovery: true,
+  targets: true,
+} satisfies Record<keyof DesktopDriverServerOptions, true>;
+
+type StartupOptions = { contentPolicy: ContentPolicy; host: string; maxBodyBytes: number; port: number };
+
+/**
+ * Startup options come from the operator, and a value the service cannot honor must stop it rather than fall back: a
+ * misspelled `content` policy would read as `allow`, and a `NaN` body limit as no limit. Only `undefined` means absent.
+ */
+function resolveStartupOptions(options: DesktopDriverServerOptions): StartupOptions {
+  requirePlainObject(options, 'The Desktop Driver options');
+  rejectUnknownKeys(options, serverOptionKeys, 'Desktop Driver option');
+  const host = options.host === undefined ? '127.0.0.1' : options.host;
+  if (typeof host !== 'string' || !isLoopbackHost(host)) {
+    throw new Error(`Desktop Driver binds to loopback by default; "${String(host)}" is not a supported loopback host.`);
+  }
+  const port = options.port === undefined ? 0 : options.port;
+  if (!Number.isInteger(port) || port < 0 || port > 65_535) {
+    throw new RangeError('The port option must be an integer from 0 to 65535.');
+  }
+  const maxBodyBytes = options.maxBodyBytes === undefined ? defaultMaxBodyBytes : options.maxBodyBytes;
+  if (!Number.isSafeInteger(maxBodyBytes) || maxBodyBytes < 1) {
+    throw new RangeError('The maxBodyBytes option must be a positive safe integer.');
+  }
+  const { operations, recovery } = options;
+  if (operations !== undefined) {
+    requirePlainObject(operations, 'The operations option');
+    rejectUnknownKeys(operations, { content: true }, 'operations option');
+  }
+  const contentPolicy = operations?.content === undefined ? 'allow' : operations.content;
+  if (contentPolicy !== 'allow' && contentPolicy !== 'deny') {
+    throw new TypeError('The operations.content option must be "allow" or "deny".');
+  }
+  if (recovery !== undefined) {
+    requirePlainObject(recovery, 'The recovery option');
+    rejectUnknownKeys(recovery, { probeApplication: true, storage: true }, 'recovery option');
+    if (typeof recovery.storage !== 'object' || recovery.storage === null) {
+      throw new TypeError('The recovery.storage option must be the private storage of this service configuration.');
+    }
+    if (recovery.probeApplication !== undefined && typeof recovery.probeApplication !== 'function') {
+      throw new TypeError('The recovery.probeApplication option must be a function.');
+    }
+  }
+  return { contentPolicy, host, maxBodyBytes, port };
+}
+
+function requirePlainObject(value: unknown, name: string): void {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+    throw new TypeError(`${name} must be an object; a missing value is undefined, never null.`);
+  }
+}
+
+function rejectUnknownKeys(value: object, known: Record<string, true>, description: string): void {
+  const unknown = Object.keys(value).find((key) => !Object.hasOwn(known, key));
+  if (unknown !== undefined) {
+    throw new TypeError(`Unknown ${description} "${unknown}".`);
+  }
+}
 
 function resolveIdleSessionTimeout(options: DesktopDriverServerOptions): number {
   const value = options.idleSessionTimeoutMs;
@@ -329,6 +409,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
   if (method === 'GET' && segments.length === 1 && segments[0] === 'status') {
     const targetInfo = await Promise.all(
       visibleTargets(context, targets).map(async (target) => {
+        // A target registered after startup may not have its journal read yet; an unread journal is not "no quarantine".
+        await sessions.loadTarget(target.id).catch(() => {
+          throw new WebDriverError('unknown error', `The settlement journal of target "${target.id}" could not be read.`);
+        });
         const quarantine = sessions.getQuarantine(target.id);
         return {
           endpoint: target.endpoint,
@@ -559,6 +643,10 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     session: DesktopSession,
     sessions: SessionManager,
   ): Promise<unknown> {
+    // A path that names no Storybook command is unknown whatever the target offers; only a known one can be unsupported.
+    if (!isStorybookCommand(method, command)) {
+      throw new WebDriverError('unknown command', `Unknown Desktop Driver extension command "furn/${command.join('/')}".`);
+    }
     const orchestrator = session.target.storyOrchestrator;
     if (!orchestrator) {
       throw new WebDriverError('unsupported operation', `Target "${session.target.id}" does not provide Storybook orchestration.`);
@@ -627,6 +715,8 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
   throw new WebDriverError('unknown command', `No WebDriver command matches ${method} /session/${session.id}/${command.join('/')}.`);
 }
 
+const timeoutNames = ['implicit', 'pageLoad', 'script'] as const;
+
 function handleTimeouts(method: string, body: unknown, session: DesktopSession): unknown {
   if (method === 'GET') {
     return { ...session.timeouts };
@@ -635,15 +725,26 @@ function handleTimeouts(method: string, body: unknown, session: DesktopSession):
     throw new WebDriverError('unknown method', `Method ${method} is not allowed for timeouts.`);
   }
   const updates = requireObject(body, 'timeouts');
-  for (const name of ['implicit', 'pageLoad', 'script'] as const) {
-    if (updates[name] !== undefined) {
-      const value = updates[name];
-      if (!Number.isInteger(value) || (value as number) < 0) {
-        throw invalidArgument(`Timeout "${name}" must be a non-negative integer.`);
-      }
-      session.timeouts[name] = value as number;
+  // Every value is checked before any is applied, so a rejected request changes nothing.
+  const parsed: Partial<WebDriverTimeouts> = {};
+  for (const name of timeoutNames) {
+    const value = updates[name];
+    if (value === undefined) {
+      continue;
+    }
+    if (value === null && name === 'script') {
+      parsed.script = null;
+    } else if (typeof value === 'number' && Number.isSafeInteger(value) && value >= 0) {
+      parsed[name] = value;
+    } else {
+      throw invalidArgument(
+        name === 'script'
+          ? 'Timeout "script" must be null or a non-negative safe integer.'
+          : `Timeout "${name}" must be a non-negative safe integer.`,
+      );
     }
   }
+  Object.assign(session.timeouts, parsed);
   return null;
 }
 
@@ -680,6 +781,9 @@ async function handleWindowCommand(
     session.windows = await hostCommand(session, 'Reading application windows', (signal) => host.windows(session.lease, signal));
     session.currentWindowId = session.windows[0]?.id ?? '';
     return session.windows.map(({ id }) => id);
+  }
+  if (command[0] === 'new' && command.length === 1 && method === 'POST') {
+    throw new WebDriverError('unsupported operation', 'Creating a new window is not supported for native desktop applications.');
   }
   if (command[0] === 'handles' && command.length === 1 && method === 'GET') {
     session.windows = await hostCommand(session, 'Reading application windows', (signal) => host.windows(session.lease, signal));
@@ -909,6 +1013,8 @@ async function findElements(
 ): Promise<WebDriverElement | WebDriverElement[]> {
   const selector = parseSelector(body);
   const deadline = Date.now() + session.timeouts.implicit;
+  // A DELETE queued behind this lookup, or a draining session, ends the wait instead of letting it run to its deadline.
+  const stop = AbortSignal.any([session.closeRequested.signal, session.commandAbortController.signal]);
   let matches: NativeElementSnapshot[] = [];
   do {
     matches = await hostCommand(session, `Finding elements by ${selector.strategy}`, (signal) =>
@@ -917,7 +1023,7 @@ async function findElements(
     if (matches.length > 0 || Date.now() >= deadline) {
       break;
     }
-    await delay(25);
+    await pause(25, stop, `Finding elements by ${selector.strategy}`);
   } while (Date.now() <= deadline);
 
   if (single) {
@@ -1048,6 +1154,20 @@ function isUnsupportedBrowserCommand(command: readonly string[]): boolean {
   return ['url', 'back', 'forward', 'refresh', 'cookie', 'frame', 'alert', 'execute', 'print'].includes(command[0]);
 }
 
+/** The Storybook extension routes, which `handleStorybookCommand` serves. */
+function isStorybookCommand(method: string, command: readonly string[]): boolean {
+  if (command[0] === 'manifest') {
+    return method === 'GET' && command.length === 1;
+  }
+  if (command[0] === 'story') {
+    return (
+      (method === 'GET' && command.length === 1) ||
+      (method === 'POST' && (command.length === 1 || command[1] === 'reset' || command[1] === 'args'))
+    );
+  }
+  return false;
+}
+
 async function readJsonBody(request: IncomingMessage, maxBytes: number): Promise<unknown> {
   const chunks: Buffer[] = [];
   let size = 0;
@@ -1084,6 +1204,54 @@ function isLoopbackHost(host: string): boolean {
   return host === '127.0.0.1' || host === '::1' || host === 'localhost';
 }
 
+function isLoopbackAddress(address: string): boolean {
+  return address === '127.0.0.1' || address === '::1';
+}
+
+const loopbackAuthorityHosts = new Set(['127.0.0.1', '[::1]', 'localhost']);
+
+/**
+ * The service is for local processes. A browser page can still reach a loopback port, either with its own `Origin` and
+ * Fetch Metadata or, after a DNS rebinding, with a foreign name in `Host`; every such request is refused before
+ * authentication or routing. Node's own `fetch`, which the client uses, sends only `Sec-Fetch-Mode: cors`, and a
+ * browser always adds `Sec-Fetch-Site` and `Sec-Fetch-Dest` to its requests and can neither omit nor set them.
+ */
+function assertLocalRequest(request: IncomingMessage): void {
+  const { headers } = request;
+  const mode = headers['sec-fetch-mode'];
+  if (
+    headers.origin !== undefined ||
+    headers['sec-fetch-site'] !== undefined ||
+    headers['sec-fetch-dest'] !== undefined ||
+    headers['sec-fetch-user'] !== undefined ||
+    (mode !== undefined && mode !== 'cors')
+  ) {
+    throw new WebDriverError('unknown error', 'Browser-origin requests are not accepted by Desktop Driver.');
+  }
+  const authority = headers.host;
+  const port = request.socket.localPort;
+  const separator = authority?.lastIndexOf(':') ?? -1;
+  if (
+    authority === undefined ||
+    port === undefined ||
+    separator < 0 ||
+    authority.slice(separator + 1) !== String(port) ||
+    !loopbackAuthorityHosts.has(authority.slice(0, separator).toLowerCase())
+  ) {
+    throw new WebDriverError('unknown error', 'Desktop Driver accepts only requests addressed to its own loopback host and port.');
+  }
+}
+
+function parseRequestPath(rawUrl: string | undefined): string[] {
+  try {
+    // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- This base URL only parses a loopback listener path.
+    const { pathname } = new URL(rawUrl ?? '/', 'http://127.0.0.1');
+    return pathname.split('/').filter(Boolean).map(decodeURIComponent);
+  } catch {
+    throw invalidArgument('The request path is not a valid URL path.');
+  }
+}
+
 function formatHost(host: string): string {
   return host.includes(':') ? `[${host}]` : host;
 }
@@ -1096,7 +1264,14 @@ function listen(server: Server, host: string, port: number): Promise<number> {
       server.off('error', onError);
       const address = server.address();
       if (!address || typeof address === 'string') {
+        server.close();
         reject(new Error('Desktop Driver did not receive a TCP address.'));
+        return;
+      }
+      // A resolved name or an unexpected interface must never leave the control surface on the network.
+      if (!isLoopbackAddress(address.address)) {
+        server.close();
+        reject(new Error('Desktop Driver did not bind to a loopback address.'));
         return;
       }
       resolve(address.port);
@@ -1110,6 +1285,21 @@ function closeServer(server: Server): Promise<void> {
   });
 }
 
-function delay(milliseconds: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+function pause(milliseconds: number, signal: AbortSignal, description: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const cancelled = () => new WebDriverError('unknown error', `${description} was cancelled.`, { reason: 'cancelled' });
+    if (signal.aborted) {
+      reject(cancelled());
+      return;
+    }
+    const onAbort = () => {
+      clearTimeout(timer);
+      reject(cancelled());
+    };
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, milliseconds);
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
 }

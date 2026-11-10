@@ -92,6 +92,11 @@ export type RecoverTargetResult = {
 
 export type DesktopSession = {
   commandAbortController: AbortController;
+  /**
+   * Aborts when a DELETE for the session arrives, before it reaches the front of the session's queue. It ends waits the
+   * client sized itself, such as the implicit wait, so they cannot hold the delete up.
+   */
+  closeRequested: AbortController;
   clickMode: DesktopClickMode;
   createdAt: string;
   currentWindowId: string;
@@ -380,6 +385,7 @@ export class SessionManager {
       }
       const session: DesktopSession = {
         clickMode,
+        closeRequested: new AbortController(),
         commandAbortController: new AbortController(),
         createdAt: new Date().toISOString(),
         currentWindowId: windows[0].id,

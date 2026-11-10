@@ -1,8 +1,10 @@
 import type { PrivateStorage } from '../authority/privateStorage.js';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient.js';
+import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import type { FakeDesktopHostOptions } from '../hosts/fake/FakeDesktopHost.js';
 import { createDesktopDriverTestHarness } from '../testing/protocolHarness.js';
 import type { DesktopDriverTestHarness } from '../testing/protocolHarness.js';
+import { createDesktopDriverServer } from './createDesktopDriverServer.js';
 import { SessionManager } from './SessionManager.js';
 import { SettlementJournal } from './settlementJournal.js';
 import type { ApplicationState } from './settlementJournal.js';
@@ -18,10 +20,14 @@ class MemoryStorage implements PrivateStorage {
   failRemoveAfterDelete = false;
   /** Loses every record right after it is published, as an operator cleanup would. */
   dropAfterPublish = false;
+  failRead = false;
   /** Holds every storage write until it resolves. */
   gate: Promise<void> | undefined;
 
   async read(name: string): Promise<string | undefined> {
+    if (this.failRead) {
+      throw new Error('Storage is unavailable.');
+    }
     return this.records.get(name);
   }
 
@@ -501,6 +507,35 @@ describe('Desktop Driver settlement journal', () => {
     await expect(other.beginMutation(pending)).rejects.toThrow('The record already exists.');
     expect(other.hasMutation('target')).toBe(false);
     expect(storage.records.has(name)).toBe(true);
+  });
+
+  test('reads the journal of a target registered after startup before reporting or opening it', async () => {
+    const storage = new MemoryStorage();
+    await quarantineByLostClick(await startService(storage));
+    await services[0].close();
+
+    const late = await createDesktopDriverServer({ recovery: { storage } });
+    try {
+      storage.failRead = true;
+      late.targets.register({
+        endpoint: 'windows',
+        host: new FakeDesktopHost(),
+        id: 'fake-windows',
+        platformName: 'windows',
+        renderer: 'fabric',
+      });
+      const client = createDesktopDriverClient({ url: late.url });
+      await expect(client.status()).rejects.toMatchObject({ code: 'unknown error', message: /journal.*could not be read/ });
+      await expect(client.newSession({ alwaysMatch: { 'furn:target': 'fake-windows' } })).rejects.toMatchObject({
+        code: 'session not created',
+      });
+
+      storage.failRead = false;
+      await expect(client.status()).resolves.toMatchObject({ targets: [{ id: 'fake-windows', quarantine: { origin: 'command' } }] });
+      await expect(client.newSession({ alwaysMatch: { 'furn:target': 'fake-windows' } })).rejects.toMatchObject(quarantinedOnOpen);
+    } finally {
+      await late.close();
+    }
   });
 
   test('redacts the application identity with the session id', () => {

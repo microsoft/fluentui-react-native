@@ -179,7 +179,9 @@ describe('story operations', () => {
             id: 'main',
             title: 'Main',
             rect,
-            elements: [{ id: 'story-root', automationId: 'story-root', name: '{}', role: 'group', scope: 'preview', windowId: 'main', rect }],
+            elements: [
+              { id: 'story-root', automationId: 'story-root', name: '{}', role: 'group', scope: 'preview', windowId: 'main', rect },
+            ],
           },
           {
             id: 'popup',
@@ -223,6 +225,18 @@ describe('story operations', () => {
       },
       { features: { performAccessibilityAction: true } },
     );
+  });
+
+  test('an unknown driver-control route is an unknown command on a target with a story orchestrator too', async () => {
+    await withStories(async ({ harness, session }) => {
+      const response = await fetch(`${harness.server.url}/session/${session.id}/furn/story/nonexistent`, {
+        method: 'POST',
+        body: '{}',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      expect(response.status).toBe(404);
+      expect(((await response.json()) as { value: { error: string } }).value.error).toBe('unknown command');
+    });
   });
 
   test('passes local session lifetime and deadline signal separately from serialized selection inputs', async () => {

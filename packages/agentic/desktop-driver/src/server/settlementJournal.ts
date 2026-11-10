@@ -279,7 +279,13 @@ export class SettlementJournal {
       failure = error;
       return false;
     });
-    if (!removed && (await this.read(name).then((stored) => stored !== undefined, () => true))) {
+    if (
+      !removed &&
+      (await this.read(name).then(
+        (stored) => stored !== undefined,
+        () => true,
+      ))
+    ) {
       throw failure ?? new Error('The settlement journal record was missing or changed.');
     }
     const rest: HeldRecords = { ...held };
