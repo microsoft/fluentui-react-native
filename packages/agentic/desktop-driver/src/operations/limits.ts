@@ -57,10 +57,18 @@ export const journalCapacity = { ceiling: 5_000, default: 500, floor: 16 } as co
 export const journalPage = { ceiling: 200, default: 50, floor: 1 } as const satisfies OperationBudget;
 
 /** The most uniqueness proofs one session keeps; an action must cite one, so older proofs need a fresh `find`. */
-export const proofCapacity = 64;
+export const proofCapacity = { ceiling: 1_024, default: 64, floor: 1 } as const satisfies OperationBudget;
 
 /** The most caller-chosen mutating request ids whose outcomes one session remembers for idempotent retries. */
-export const outcomeCapacity = 256;
+export const outcomeCapacity = { ceiling: 4_096, default: 256, floor: 1 } as const satisfies OperationBudget;
+
+/** A session capacity: an integer inside its budget. Like every budget it is rejected when outside, never clamped. */
+export function requireCapacity(name: string, capacity: number, budget: OperationBudget): number {
+  if (!Number.isSafeInteger(capacity) || capacity < budget.floor || capacity > budget.ceiling) {
+    throw new RangeError(`${name} must be an integer from ${budget.floor} to ${budget.ceiling}.`);
+  }
+  return capacity;
+}
 
 /** The longest text one `type` action sends. */
 export const maxTypedTextLength = 4_096;

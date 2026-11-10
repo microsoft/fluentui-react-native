@@ -3,7 +3,7 @@ import { randomInt } from 'node:crypto';
 import type { NativeElementScope } from '../host/types.js';
 import { WebDriverError } from '../protocol/errors.js';
 import type { WebDriverErrorCode } from '../protocol/errors.js';
-import { referenceCapacity } from './limits.js';
+import { referenceCapacity, requireCapacity } from './limits.js';
 
 /**
  * Element references are opaque to callers: `<tag><serial>`, a lowercase base-36 tag that ends in a letter followed by
@@ -115,7 +115,7 @@ export class ReferenceTable {
 
   constructor(tag: string, capacity: number = referenceCapacity.default) {
     this.tag = tag;
-    this.capacity = Math.max(referenceCapacity.floor, Math.floor(capacity));
+    this.capacity = requireCapacity('referenceCapacity', capacity, referenceCapacity);
   }
 
   get size(): number {

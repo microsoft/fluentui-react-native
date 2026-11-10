@@ -15,7 +15,7 @@ function record(overrides: Partial<JournalRecord> = {}): JournalRecord {
 
 describe('OperationJournal', () => {
   test('numbers entries and pages them by cursor', () => {
-    const journal = new OperationJournal(10);
+    const journal = new OperationJournal(16);
     for (let index = 0; index < 5; index += 1) {
       journal.record(record({ requestId: `r${index}` }));
     }
@@ -30,13 +30,13 @@ describe('OperationJournal', () => {
   });
 
   test('drops the oldest entries at capacity and reports them to a reader that fell behind', () => {
-    const journal = new OperationJournal(3);
-    for (let index = 0; index < 7; index += 1) {
+    const journal = new OperationJournal(16);
+    for (let index = 0; index < 20; index += 1) {
       journal.record(record());
     }
 
-    expect(journal.size).toBe(3);
-    const page = journal.read({ after: 2, limit: 10 });
+    expect(journal.size).toBe(16);
+    const page = journal.read({ after: 2, limit: 3 });
     expect(page.entries.map((entry) => entry.sequence)).toEqual([5, 6, 7]);
     expect(page.dropped).toBe(2);
     expect(journal.read({ after: 4, limit: 10 }).dropped).toBe(0);
