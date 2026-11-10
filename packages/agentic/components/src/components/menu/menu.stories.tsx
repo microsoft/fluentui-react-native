@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
+import type { CalloutDismissReason } from '@fluentui-react-native/native-core/macos';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Divider } from '../divider/divider';
@@ -12,9 +13,23 @@ import { Input } from '../input/input';
 import { MenuItem } from '../menu-item/menu-item';
 import type { MenuItemProps } from '../menu-item/menu-item.types';
 import { Menu } from './menu';
-import type { MenuAlign, MenuOpenChangeData, MenuPlacement } from './menu.types';
+import type { MenuAlign, MenuOpenChangeData, MenuPlacement, MenuProps } from './menu.types';
+import { renderMenu_unstable } from './renderMenu';
+import { useMenu_unstable } from './useMenu';
+import { useMenuStyles_unstable } from './useMenuStyles';
 
 type SceneProps = { placement?: MenuPlacement; align?: MenuAlign; disabledFocusable?: boolean; submenuOpenOnHover?: boolean };
+
+function ObservedMenu({ onNativeDismissed, ...props }: MenuProps & { onNativeDismissed: (reason: CalloutDismissReason) => void }) {
+  const state = useMenu_unstable(props);
+  const onDismissed = state.popupProps.onDismissed;
+  state.popupProps.onDismissed = (reason: CalloutDismissReason) => {
+    onNativeDismissed(reason);
+    onDismissed(reason);
+  };
+  useMenuStyles_unstable(state);
+  return renderMenu_unstable(state);
+}
 
 /** A command row with a test identity and no secondary text or leading icon. */
 function rowProps(content: string, setFocus: (label: string) => void, props?: MenuItemProps): MenuItemProps {
@@ -53,12 +68,13 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
   return (
     <View style={styles.story}>
       <Input accessibilityLabel="Menu entry" testID="menu-entry" />
-      <Menu
+      <ObservedMenu
         placement={placement}
         align={align}
         disabledFocusable={disabledFocusable}
         submenuOpenOnHover={submenuOpenOnHover}
         onOpenChange={onOpenChange}
+        onNativeDismissed={(cause: CalloutDismissReason) => recordActivation(`native dismissal(${cause})`)}
         trigger={{
           content: 'Edit',
           testID: 'menu-trigger',
@@ -97,7 +113,7 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
           })}
         />
         <MenuItem {...rowProps('Delete', setFocus, { onPress: run('Delete') })} />
-      </Menu>
+      </ObservedMenu>
       <StoryStatus testID="menu-reason">{reason}</StoryStatus>
       <StoryStatus testID="menu-action">{action}</StoryStatus>
       <StoryStatus testID="menu-focus">{focus}</StoryStatus>
