@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import type { ChildProcessWithoutNullStreams } from 'node:child_process';
+import type { ChildProcessWithoutNullStreams, SpawnOptionsWithoutStdio } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { EventEmitter } from 'node:events';
 
@@ -15,12 +15,17 @@ import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { attachFailureEffect, parseMutationEffect } from '../../protocol/settlement.js';
 import { encodeJsonFrame, NativeFrameDecoder } from './framing.js';
 import type { NativeBinaryFrame } from './framing.js';
+import { validateHelperMessage } from './helperMessage.js';
+import { StderrLineDecoder } from './stderrLines.js';
 
 export type NativeHostProcessOptions = {
   artifact: NativeDriverArtifact;
+  /** How long a cancelled command may take to settle before the helper is killed. Defaults to 2000. */
   cancellationTimeoutMs?: number;
   onStderr?: (message: string) => void;
   recoverInput?: () => Promise<void>;
+  /** Cancels startup: the helper is killed and `start` rejects with an `AbortError`. */
+  signal?: AbortSignal;
   startupTimeoutMs?: number;
 };
 
@@ -39,89 +44,215 @@ type PendingRequest = {
   response?: NativeHostResponse;
 };
 
-class NativeHostResponseError extends NativeDriverError {}
+/**
+ * `starting` until the validated hello arrives, then `running`. `disposing` covers the orderly shutdown request,
+ * `failing` the single terminal path every failure takes, and `closed` a helper that is gone and reaped.
+ */
+type Lifecycle = 'closed' | 'disposing' | 'failing' | 'running' | 'starting';
+
+export const defaultCancellationTimeoutMs = 2000;
+export const minimumCancellationTimeoutMs = 100;
+export const maximumCancellationTimeoutMs = 60_000;
+
+/** How long stdio may stay open after the helper exits, for a grandchild that inherited the pipes. */
+const pipeCloseGraceMs = 500;
+/** How long a helper that acknowledged disposal may take to exit before it is killed. */
+const disposeExitGraceMs = 2000;
+/** How long a helper may take to die after each termination signal. */
+const killGraceMs = 2000;
+const maximumEarlyEvents = 64;
+
+/** Returns the validated cancellation deadline, or `fallback` when none is given. Out-of-range values are rejected, never clamped. */
+export function resolveCancellationTimeoutMs(value: number | undefined, fallback: number): number {
+  if (value === undefined) {
+    return fallback;
+  }
+  if (!Number.isInteger(value) || value < minimumCancellationTimeoutMs || value > maximumCancellationTimeoutMs) {
+    throw new RangeError(
+      `The cancellationTimeoutMs option must be an integer from ${minimumCancellationTimeoutMs} to ${maximumCancellationTimeoutMs}.`,
+    );
+  }
+  return value;
+}
+
+/**
+ * Spawn options shared by every helper process. On POSIX the helper leads its own process group, so Ctrl+C in the
+ * terminal reaches Node, which cancels and disposes in order, instead of killing the helper mid-command. Lifetime
+ * stays with Node: the helper ends on stdin EOF, and it is never unref'd.
+ */
+export function nativeHelperSpawnOptions(): SpawnOptionsWithoutStdio {
+  return { detached: process.platform !== 'win32', stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true };
+}
 
 export class NativeHostProcess extends EventEmitter<{
   event: [NativeHostEventMessage];
   exit: [Error];
 }> {
   readonly artifact: NativeDriverArtifact;
-  readonly hello: NativeHostHello;
 
-  private readonly child: ChildProcessWithoutNullStreams;
-  private readonly completed: Promise<void>;
-  private readonly recoverInput?: () => Promise<void>;
   private readonly cancellationTimeoutMs: number;
+  private readonly child: ChildProcessWithoutNullStreams;
+  private readonly closed: Promise<void>;
+  private readonly decoder = new NativeFrameDecoder();
   private readonly pending = new Map<string, PendingRequest>();
   private readonly pendingBinaryIds = new Map<string, string>();
-  private closed = false;
-  private closing = false;
-  private failurePromise?: Promise<void>;
+  private readonly recoverInput?: () => Promise<void>;
+  private readonly started: Promise<NativeHostProcess>;
+  private readonly stderrLines: StderrLineDecoder;
+  private activated = false;
+  private disposeAcknowledged = false;
+  private disposeController?: AbortController;
+  private disposePromise?: Promise<void>;
+  private earlyEvents: NativeHostEventMessage[] = [];
+  private exitDescription = 'an unknown status';
+  private helloMessage?: NativeHostHello;
+  private lifecycle: Lifecycle = 'starting';
+  private rejectStarted: (error: Error) => void = () => undefined;
+  private resolveStarted: (process: NativeHostProcess) => void = () => undefined;
+  private startupCleanup: () => void = () => undefined;
+  private terminal?: Promise<Error>;
 
-  private constructor(
-    child: ChildProcessWithoutNullStreams,
-    artifact: NativeDriverArtifact,
-    hello: NativeHostHello,
-    cancellationTimeoutMs: number,
-    recoverInput?: () => Promise<void>,
-  ) {
+  private constructor(options: NativeHostProcessOptions, cancellationTimeoutMs: number) {
     super();
-    this.child = child;
-    this.completed = new Promise((resolve) => child.once('close', () => resolve()));
-    this.artifact = artifact;
-    this.hello = hello;
+    this.artifact = options.artifact;
     this.cancellationTimeoutMs = cancellationTimeoutMs;
-    this.recoverInput = recoverInput;
+    this.recoverInput = options.recoverInput;
+    this.stderrLines = new StderrLineDecoder((line) => {
+      try {
+        options.onStderr?.(line);
+      } catch {
+        // A throwing diagnostic sink must not take down the transport.
+      }
+    });
+    this.started = new Promise<NativeHostProcess>((resolve, reject) => {
+      this.resolveStarted = resolve;
+      this.rejectStarted = reject;
+    });
+
+    const child = spawn(options.artifact.executablePath, ['--stdio'], nativeHelperSpawnOptions()) as ChildProcessWithoutNullStreams;
+    this.child = child;
+    this.closed = new Promise<void>((resolve) => {
+      let graceTimer: NodeJS.Timeout | undefined;
+      child.once('close', () => {
+        clearTimeout(graceTimer);
+        this.stderrLines.end();
+        resolve();
+      });
+      child.once('exit', (code, signal) => {
+        this.exitDescription = code === null ? `signal ${String(signal)}` : `code ${code}`;
+        // Stdio normally closes with the helper. A grandchild that inherited the pipes holds `close` back, so
+        // after a bounded wait the pipes are released and failure handling proceeds.
+        graceTimer = setTimeout(() => {
+          this.releasePipes();
+          this.stderrLines.end();
+          resolve();
+        }, pipeCloseGraceMs);
+      });
+    });
+    void this.closed.then(() => this.onHelperGone());
+
+    this.decoder.on('json', (message) => this.onJson(message));
+    this.decoder.on('binary', (frame) => this.onBinary(frame));
+    this.decoder.on('error', (error) => void this.fail(error));
+    child.stdout.on('data', (chunk: Buffer) => this.onStdout(chunk));
+    child.stdout.on('error', (error) => void this.fail(error));
+    child.stderr.on('data', (chunk: Buffer) => this.stderrLines.write(chunk));
+    child.stderr.on('error', (error) => void this.fail(error));
+    child.stdin.on('error', (error) => void this.fail(error));
+    child.on('error', (error) => void this.fail(error));
+
+    const startupTimeoutMs = options.startupTimeoutMs ?? 10_000;
+    const timeout = setTimeout(
+      () =>
+        void this.fail(
+          new NativeDriverError('handshake-timeout', `Native driver helper did not send hello within ${startupTimeoutMs} ms.`),
+        ),
+      startupTimeoutMs,
+    );
+    const signal = options.signal;
+    const onAbort = () => void this.fail(abortError('Native driver helper startup was cancelled.'));
+    signal?.addEventListener('abort', onAbort, { once: true });
+    this.startupCleanup = () => {
+      clearTimeout(timeout);
+      signal?.removeEventListener('abort', onAbort);
+    };
   }
 
   static async start(options: NativeHostProcessOptions): Promise<NativeHostProcess> {
-    const child = spawn(options.artifact.executablePath, ['--stdio'], {
-      stdio: ['pipe', 'pipe', 'pipe'],
-      windowsHide: true,
-    });
-    const completed = new Promise<void>((resolve) => child.once('close', () => resolve()));
-    const decoder = new NativeFrameDecoder();
-    child.stdout.on('data', (chunk: Buffer) => decoder.write(chunk));
-    child.stderr.on('data', (chunk: Buffer) => options.onStderr?.(chunk.toString('utf8')));
-
-    let hello: NativeHostHello;
-    try {
-      hello = await waitForHello(child, decoder, options.startupTimeoutMs ?? 10_000);
-      validateHello(hello, options.artifact);
-    } catch (error) {
-      if (child.exitCode === null && child.signalCode === null) {
-        child.kill();
-      }
-      await completed;
-      throw error;
+    const cancellationTimeoutMs = resolveCancellationTimeoutMs(options.cancellationTimeoutMs, defaultCancellationTimeoutMs);
+    if (options.signal?.aborted) {
+      throw attachFailureEffect(abortError('Native driver helper startup was cancelled before it began.'), 'none');
     }
-    const process = new NativeHostProcess(child, options.artifact, hello, options.cancellationTimeoutMs ?? 2000, options.recoverInput);
-    decoder.on('json', (message) => process.onJson(message));
-    decoder.on('binary', (frame) => process.onBinary(frame));
-    decoder.on('error', (error) => process.fail(error));
-    child.once('error', (error) => process.fail(error));
-    child.stdin.on('error', (error) => process.fail(error));
-    child.once('exit', (code, signal) => {
-      if (!process.closed && !process.closing) {
-        process.fail(
-          new NativeDriverError(
-            'host-exited',
-            `Native driver helper exited unexpectedly with ${code === null ? `signal ${String(signal)}` : `code ${code}`}.`,
-          ),
-        );
-      }
-    });
-    return process;
+    return new NativeHostProcess(options, cancellationTimeoutMs).started;
+  }
+
+  /** The helper's validated handshake. Available once `start` has resolved. */
+  get hello(): NativeHostHello {
+    return this.helloMessage as NativeHostHello;
   }
 
   request<T>(command: string, params?: unknown, signal?: AbortSignal): Promise<NativeHostRequestResult<T>> {
-    if (this.closed) {
+    if (this.lifecycle !== 'running') {
       return Promise.reject(attachFailureEffect(new NativeDriverError('host-closed', 'Native driver helper is closed.'), 'none'));
     }
+    return this.send<T>(command, params, signal);
+  }
+
+  /**
+   * Asks the helper to shut down and reaps it. Disposal is terminal: when the helper cannot acknowledge, it is
+   * killed, input is recovered and the original failure is rethrown. Concurrent calls share one disposal, and an
+   * abort from any caller cancels it.
+   */
+  dispose(signal?: AbortSignal): Promise<void> {
+    if (!this.disposePromise) {
+      if (this.terminal) {
+        return this.terminal.then(() => undefined);
+      }
+      if (this.lifecycle === 'closed') {
+        return Promise.resolve();
+      }
+      const controller = new AbortController();
+      this.disposeController = controller;
+      this.disposePromise = this.runDispose(controller.signal).finally(() => {
+        this.disposePromise = undefined;
+      });
+    }
+    const disposal = this.disposePromise;
+    if (signal) {
+      const controller = this.disposeController as AbortController;
+      const abort = () => controller.abort();
+      if (signal.aborted) {
+        abort();
+      } else {
+        signal.addEventListener('abort', abort, { once: true });
+        const release = () => signal.removeEventListener('abort', abort);
+        disposal.then(release, release);
+      }
+    }
+    return disposal;
+  }
+
+  private async runDispose(signal: AbortSignal): Promise<void> {
+    this.lifecycle = 'disposing';
+    try {
+      await this.send('dispose', undefined, signal);
+    } catch (error) {
+      await this.fail(asError(error));
+      throw error;
+    }
+    this.disposeAcknowledged = true;
+    if (!(await settlesWithin(this.closed, disposeExitGraceMs))) {
+      await this.reap();
+    }
+    this.lifecycle = 'closed';
+    for (const [id] of this.pending) {
+      this.rejectPending(id, new NativeDriverError('host-closed', 'Native driver helper closed.'));
+    }
+  }
+
+  private send<T>(command: string, params: unknown, signal?: AbortSignal): Promise<NativeHostRequestResult<T>> {
     if (signal?.aborted) {
-      const error = new Error(`Native driver command "${command}" was cancelled before dispatch.`);
-      error.name = 'AbortError';
-      return Promise.reject(attachFailureEffect(error, 'none'));
+      return Promise.reject(attachFailureEffect(abortError(`Native driver command "${command}" was cancelled before dispatch.`), 'none'));
     }
     const id = randomUUID();
     let requestFrame: Buffer;
@@ -138,16 +269,13 @@ export class NativeHostProcess extends EventEmitter<{
         resolve: resolve as (value: NativeHostRequestResult<unknown>) => void,
       };
       this.pending.set(id, pending);
-      const dispatched = this.writeFrame(requestFrame);
+      void this.writeFrame(requestFrame).catch((error) => this.fail(asError(error)));
       if (signal) {
         const onAbort = () => {
           pending.aborted = true;
-          void this.write({ id, type: 'cancel' }).catch((error) => {
-            this.rejectPending(id, error);
-            this.fail(asError(error));
-          });
+          void this.write({ id, type: 'cancel' }).catch((error) => this.fail(asError(error)));
           const timeout = setTimeout(() => {
-            void this.failAfterRecovery(
+            void this.fail(
               new NativeDriverError(
                 'cancellation-timeout',
                 `Native driver helper did not settle cancelled command "${command}" within ${this.cancellationTimeoutMs} ms.`,
@@ -168,69 +296,39 @@ export class NativeHostProcess extends EventEmitter<{
           pending.abortCleanup = () => signal.removeEventListener('abort', onAbort);
         }
       }
-      void dispatched.catch((error) => {
-        this.rejectPending(id, error);
-        this.fail(asError(error));
-      });
     });
   }
 
-  async dispose(signal?: AbortSignal): Promise<void> {
-    if (this.closed || this.closing) {
+  private onStdout(chunk: Buffer): void {
+    if (this.terminal) {
       return;
     }
-    this.closing = true;
     try {
-      const disposeResult = await Promise.race([
-        this.request('dispose', undefined, signal).then(() => 'response' as const),
-        this.completed.then(() => 'closed' as const),
-      ]);
-      if (disposeResult === 'closed') {
-        this.closed = true;
-        for (const [id] of this.pending) {
-          this.rejectPending(id, new NativeDriverError('host-closed', 'Native driver helper closed.'));
-        }
-        throw new NativeDriverError('host-exited', 'Native driver helper exited before acknowledging disposal.');
-      }
-      let graceTimer: NodeJS.Timeout | undefined;
-      const exited = await Promise.race([
-        this.completed.then(() => true),
-        new Promise<false>((resolve) => {
-          graceTimer = setTimeout(() => resolve(false), 2000);
-        }),
-      ]).finally(() => clearTimeout(graceTimer));
-      if (!exited && this.child.exitCode === null && this.child.signalCode === null) {
-        this.child.kill();
-        await this.completed;
-      }
-      this.closed = true;
-      for (const [id] of this.pending) {
-        this.rejectPending(id, new NativeDriverError('host-closed', 'Native driver helper closed.'));
-      }
+      this.decoder.write(chunk);
     } catch (error) {
-      if (
-        (error instanceof NativeHostResponseError || (error instanceof Error && error.name === 'AbortError')) &&
-        !this.closed &&
-        this.child.exitCode === null &&
-        this.child.signalCode === null
-      ) {
-        this.closing = false;
-      } else if (!this.closed) {
-        this.closing = false;
-        this.failurePromise = undefined;
-        await this.failAfterRecovery(asError(error));
-      }
-      throw error;
-    } finally {
-      if (this.closed) {
-        this.closing = false;
-      }
+      // A listener threw, so the stream's state is unknown. Stop decoding before failing the transport.
+      this.decoder.end();
+      void this.fail(asError(error));
     }
   }
 
-  private onJson(message: NativeHostJsonMessage): void {
+  private onJson(value: NativeHostJsonMessage): void {
+    if (this.terminal) {
+      return;
+    }
+    let message: NativeHostJsonMessage;
+    try {
+      message = validateHelperMessage(value);
+    } catch (error) {
+      void this.fail(asError(error));
+      return;
+    }
+    if (this.lifecycle === 'starting') {
+      this.onHello(message);
+      return;
+    }
     if (message.type === 'event') {
-      this.emit('event', message);
+      this.onEvent(message);
       return;
     }
     if (message.type === 'cancelled') {
@@ -241,25 +339,74 @@ export class NativeHostProcess extends EventEmitter<{
       return;
     }
     if (message.type !== 'response') {
-      this.fail(new Error(`Native driver helper emitted unexpected "${message.type}" message after startup.`));
+      void this.fail(new Error(`Native driver helper emitted unexpected "${message.type}" message after startup.`));
       return;
     }
     const pending = this.pending.get(message.id);
     if (!pending) {
       return;
     }
+    if (pending.response) {
+      void this.fail(new NativeDriverError('invalid-message', 'Native driver helper answered one request twice.'));
+      return;
+    }
+    const binaryId = message.binary?.id;
+    if (binaryId !== undefined && this.pendingBinaryIds.has(binaryId)) {
+      void this.fail(new NativeDriverError('invalid-message', 'Native driver helper reused a binary payload identifier.'));
+      return;
+    }
     pending.response = message;
-    pending.binaryId = message.binary?.id;
-    if (pending.binaryId) {
-      this.pendingBinaryIds.set(pending.binaryId, message.id);
+    pending.binaryId = binaryId;
+    if (binaryId !== undefined) {
+      this.pendingBinaryIds.set(binaryId, message.id);
     }
     this.completePending(message.id);
   }
 
+  private onHello(message: NativeHostJsonMessage): void {
+    if (message.type !== 'hello') {
+      void this.fail(new NativeDriverError('handshake-failed', `Expected native helper hello, received "${message.type}".`));
+      return;
+    }
+    try {
+      validateHello(message, this.artifact);
+    } catch (error) {
+      void this.fail(asError(error));
+      return;
+    }
+    this.helloMessage = message;
+    this.lifecycle = 'running';
+    this.startupCleanup();
+    this.resolveStarted(this);
+    // Frames that follow the hello in the same chunk are already being routed. Events among them wait one turn, so
+    // the caller of `start` can attach its listener first.
+    setImmediate(() => {
+      this.activated = true;
+      const early = this.earlyEvents;
+      this.earlyEvents = [];
+      for (const event of early) {
+        this.emit('event', event);
+      }
+    });
+  }
+
+  private onEvent(message: NativeHostEventMessage): void {
+    if (this.activated) {
+      this.emit('event', message);
+    } else if (this.earlyEvents.length < maximumEarlyEvents) {
+      this.earlyEvents.push(message);
+    }
+  }
+
   private onBinary(frame: NativeBinaryFrame): void {
+    if (this.terminal) {
+      return;
+    }
     const requestId = this.pendingBinaryIds.get(frame.id);
     if (!requestId) {
-      this.fail(new Error(`Native driver helper emitted binary payload "${frame.id}" before declaring it in a response.`));
+      void this.fail(
+        new NativeDriverError('invalid-message', 'Native driver helper emitted a binary payload before declaring it in a response.'),
+      );
       return;
     }
     const pending = this.pending.get(requestId);
@@ -268,6 +415,19 @@ export class NativeHostProcess extends EventEmitter<{
     }
     pending.binary = frame.data;
     this.completePending(requestId);
+  }
+
+  private onHelperGone(): void {
+    if (this.terminal || this.disposeAcknowledged || this.lifecycle === 'closed') {
+      return;
+    }
+    if (this.lifecycle === 'starting') {
+      void this.fail(new NativeDriverError('handshake-failed', `Native helper exited before hello with ${this.exitDescription}.`));
+    } else if (this.lifecycle === 'disposing') {
+      void this.fail(new NativeDriverError('host-exited', 'Native driver helper exited before acknowledging disposal.'));
+    } else {
+      void this.fail(new NativeDriverError('host-exited', `Native driver helper exited unexpectedly with ${this.exitDescription}.`));
+    }
   }
 
   private completePending(id: string): void {
@@ -284,7 +444,7 @@ export class NativeHostProcess extends EventEmitter<{
     if (response.error) {
       pending.reject(
         attachFailureEffect(
-          new NativeHostResponseError(response.error.code, response.error.message, response.error.data),
+          new NativeDriverError(response.error.code, response.error.message, response.error.data),
           parseMutationEffect(response.error.effect),
         ),
       );
@@ -348,83 +508,84 @@ export class NativeHostProcess extends EventEmitter<{
     });
   }
 
-  private fail(error: Error): void {
-    void this.failAfterRecovery(error);
+  /**
+   * The one terminal path: kill the helper, wait for it, recover input it may have left pressed, then reject every
+   * pending request once. Every failure joins the first one, and after an acknowledged disposal there is nothing
+   * left to fail. Resolves to the failure the pending requests were given.
+   */
+  private fail(error: Error): Promise<Error> {
+    if (this.terminal) {
+      return this.terminal;
+    }
+    if (this.lifecycle === 'closed' || this.disposeAcknowledged) {
+      return Promise.resolve(error);
+    }
+    this.lifecycle = 'failing';
+    // Deferred a turn so `terminal` is set before the terminal path can re-enter `fail`.
+    return (this.terminal = Promise.resolve().then(() => this.terminate(error)));
   }
 
-  private failAfterRecovery(error: Error): Promise<void> {
-    return (this.failurePromise ??= this.recoverAndFail(error));
-  }
-
-  private async recoverAndFail(error: Error): Promise<void> {
-    if (this.closed || this.closing) {
-      return;
-    }
-    this.closed = true;
-    if (this.child.exitCode === null && this.child.signalCode === null) {
-      this.child.kill();
-    }
-    await this.completed;
+  private async terminate(error: Error): Promise<Error> {
+    await this.reap();
+    this.startupCleanup();
     let failure = error;
-    try {
-      await this.recoverInput?.();
-    } catch (recoveryError) {
-      failure = new AggregateError([error, recoveryError], `${error.message} Native input recovery also failed.`);
+    if (this.helloMessage) {
+      try {
+        await this.recoverInput?.();
+      } catch (recoveryError) {
+        failure = new AggregateError([error, recoveryError], `${error.message} Native input recovery also failed.`);
+      }
     }
+    this.lifecycle = 'closed';
     for (const [id] of this.pending) {
       this.rejectPending(id, failure);
     }
-    this.emit('exit', failure);
+    if (this.helloMessage) {
+      try {
+        this.emit('exit', failure);
+      } catch {
+        // The failure is already delivered to every pending request; a throwing listener must not leave the terminal path rejected.
+      }
+    } else {
+      this.rejectStarted(error);
+    }
+    return failure;
+  }
+
+  /** Stops the helper if it still runs, escalating to SIGKILL, and waits a bounded time for its stdio to close. */
+  private async reap(): Promise<void> {
+    if (this.isRunning()) {
+      this.child.kill();
+      if (!(await settlesWithin(this.closed, killGraceMs))) {
+        if (this.isRunning()) {
+          this.child.kill('SIGKILL');
+        }
+        await settlesWithin(this.closed, killGraceMs);
+      }
+      return;
+    }
+    await this.closed;
+  }
+
+  private isRunning(): boolean {
+    return this.child.exitCode === null && this.child.signalCode === null;
+  }
+
+  private releasePipes(): void {
+    this.child.stdout.destroy();
+    this.child.stderr.destroy();
+    this.child.stdin.destroy();
   }
 }
 
-function waitForHello(child: ChildProcessWithoutNullStreams, decoder: NativeFrameDecoder, timeoutMs: number): Promise<NativeHostHello> {
-  return new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      cleanup();
-      child.kill();
-      reject(new NativeDriverError('handshake-timeout', `Native driver helper did not send hello within ${timeoutMs} ms.`));
-    }, timeoutMs);
-    const onJson = (message: NativeHostJsonMessage) => {
-      if (message.type !== 'hello') {
-        cleanup();
-        child.kill();
-        reject(new NativeDriverError('handshake-failed', `Expected native helper hello, received "${message.type}".`));
-        return;
-      }
-      cleanup();
-      resolve(message);
-    };
-    const onError = (error: Error) => {
-      cleanup();
-      child.kill();
-      reject(error);
-    };
-    const onExit = (code: number | null, signal: NodeJS.Signals | null) => {
-      cleanup();
-      reject(
-        new NativeDriverError(
-          'handshake-failed',
-          `Native helper exited before hello with ${code === null ? `signal ${String(signal)}` : `code ${code}`}.`,
-        ),
-      );
-    };
-    const onChildError = (error: Error) => {
-      cleanup();
-      reject(error);
-    };
-    const cleanup = () => {
-      clearTimeout(timeout);
-      decoder.off('json', onJson);
-      decoder.off('error', onError);
-      child.off('error', onChildError);
-      child.off('exit', onExit);
-    };
-    decoder.once('json', onJson);
-    decoder.once('error', onError);
-    child.once('error', onChildError);
-    child.once('exit', onExit);
-  });
+function settlesWithin(promise: Promise<void>, timeoutMs: number): Promise<boolean> {
+  let timer: NodeJS.Timeout | undefined;
+  return Promise.race([
+    promise.then(() => true),
+    new Promise<false>((resolve) => {
+      timer = setTimeout(() => resolve(false), timeoutMs);
+    }),
+  ]).finally(() => clearTimeout(timer));
 }
 
 function validateHello(hello: NativeHostHello, artifact: NativeDriverArtifact): void {
@@ -438,6 +599,12 @@ function validateHello(hello: NativeHostHello, artifact: NativeDriverArtifact): 
   ) {
     throw new NativeDriverError('handshake-failed', 'Native helper hello does not match the selected artifact.');
   }
+}
+
+function abortError(message: string): Error {
+  const error = new Error(message);
+  error.name = 'AbortError';
+  return error;
 }
 
 function asError(error: unknown): Error {

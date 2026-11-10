@@ -20,7 +20,12 @@ import type {
   NativeSelector,
   Rect,
 } from '../../host/types.js';
-import type { NativeDesktopApplicationDescriptor, NativeDriverArtifact, NativeHostEventMessage } from '../../native/types.js';
+import type {
+  NativeDesktopApplicationDescriptor,
+  NativeDriverArtifact,
+  NativeDriverProvider,
+  NativeHostEventMessage,
+} from '../../native/types.js';
 import { NativeDriverError } from '../../native/NativeDriverError.js';
 import { isSingleWebDriverKeyValue } from '../../protocol/actions.js';
 import { HostStaleError, HostUnsupportedError, HostWebDriverError } from '../../protocol/errors.js';
@@ -29,11 +34,17 @@ import type { WebDriverErrorCode } from '../../protocol/errors.js';
 import { attachFailureEffect, attachProviderQuarantine, readFailureEffect } from '../../protocol/settlement.js';
 import type { MutationEffect } from '../../protocol/settlement.js';
 import type { DesktopEndpoint } from '../../protocol/types.js';
-import { NativeHostProcess } from './NativeHostProcess.js';
+import { nativeHelperSpawnOptions, NativeHostProcess, resolveCancellationTimeoutMs } from './NativeHostProcess.js';
 
 export type NativeDesktopHostOptions = {
   application: NativeDesktopApplicationDescriptor;
   artifact: NativeDriverArtifact;
+  /**
+   * How long the helper may take to settle a cancelled command before it is killed, in whole milliseconds from 100 to
+   * 60000. Defaults to 2000 on macOS and 10000 on Windows, where a helper step can legitimately run for seconds
+   * before it can acknowledge cancellation. Killing the Windows helper also ends the application under test.
+   */
+  cancellationTimeoutMs?: number;
   disabledInputFeatures?: readonly NativeDisabledInputFeature[];
   endpoint: DesktopEndpoint;
   onStderr?: (message: string) => void;
@@ -44,14 +55,22 @@ export type NativeDisabledInputFeature = 'keyboard' | 'physicalClick' | 'wheel';
 
 export const FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES = 'FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES';
 
+const defaultCancellationTimeoutMs: Readonly<Record<NativeDriverProvider, number>> = { macos: 2000, windows: 10_000 };
+
+/** The most stderr text or output kept from the input recovery process. */
+const maximumRecoveryOutputBytes = 16 * 1024;
+
 export class NativeDesktopHost implements DesktopHost {
   readonly endpoint: DesktopEndpoint;
 
   private readonly application: NativeDesktopApplicationDescriptor;
   private readonly artifact: NativeDriverArtifact;
+  private readonly cancellationTimeoutMs: number;
   private readonly disabledInputFeatures: ReadonlySet<NativeDisabledInputFeature>;
   private readonly onStderr?: (message: string) => void;
   private readonly onFailure?: (error: Error) => void;
+  /** Aborted by `dispose`, so a helper still starting up is killed instead of outliving the host. */
+  private readonly lifetime = new AbortController();
   private disposing = false;
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
   private readonly depressedButtons = new Set<number>();
@@ -63,12 +82,21 @@ export class NativeDesktopHost implements DesktopHost {
   /** What the helper last reported it supports. Every session is created after a probe. */
   private probedFeatures?: DesktopHostFeatures;
 
-  constructor({ application, artifact, disabledInputFeatures, endpoint, onStderr, onFailure }: NativeDesktopHostOptions) {
+  constructor({
+    application,
+    artifact,
+    cancellationTimeoutMs,
+    disabledInputFeatures,
+    endpoint,
+    onStderr,
+    onFailure,
+  }: NativeDesktopHostOptions) {
     if (!artifact.endpoints.includes(endpoint)) {
       throw new TypeError(`Native helper ${artifact.provider} does not support endpoint "${endpoint}".`);
     }
     this.application = Object.freeze({ ...application });
     this.artifact = artifact;
+    this.cancellationTimeoutMs = resolveCancellationTimeoutMs(cancellationTimeoutMs, defaultCancellationTimeoutMs[artifact.provider]);
     this.disabledInputFeatures = resolveDisabledInputFeatures(disabledInputFeatures);
     this.endpoint = endpoint;
     this.onStderr = onStderr;
@@ -297,14 +325,23 @@ export class NativeDesktopHost implements DesktopHost {
   }
 
   subscribe(listener: (event: DesktopHostEvent) => void): () => void {
+    if (this.disposing) {
+      return () => undefined;
+    }
     this.listeners.add(listener);
     void this.getProcess().catch(() => undefined);
     return () => this.listeners.delete(listener);
   }
 
+  /** Stops the helper. A helper that failed to start is already gone, so that failure is not reported here. */
   async dispose(signal?: AbortSignal): Promise<void> {
     this.disposing = true;
-    const process = await this.processPromise;
+    this.lifetime.abort();
+    const startup = this.processPromise?.then(
+      (started) => started,
+      () => undefined,
+    );
+    const process = startup && (await waitForStartup(startup, signal));
     await process?.dispose(signal);
   }
 
@@ -321,7 +358,7 @@ export class NativeDesktopHost implements DesktopHost {
 
   private async request<T>(command: string, params?: unknown, signal?: AbortSignal): Promise<T> {
     try {
-      const process = await this.getProcess();
+      const process = await this.getProcess(signal);
       const response = await process.request<T>(command, params, signal);
       return response.result;
     } catch (error) {
@@ -331,7 +368,7 @@ export class NativeDesktopHost implements DesktopHost {
 
   private async requestImage(command: string, params?: unknown, signal?: AbortSignal): Promise<NativeImage> {
     try {
-      const process = await this.getProcess();
+      const process = await this.getProcess(signal);
       const response = await process.request<Omit<NativeImage, 'data'>>(command, params, signal);
       if (!response.binary) {
         throw new Error(`Native helper did not return binary data for "${command}".`);
@@ -342,23 +379,32 @@ export class NativeDesktopHost implements DesktopHost {
     }
   }
 
-  private getProcess(): Promise<NativeHostProcess> {
+  private getProcess(signal?: AbortSignal): Promise<NativeHostProcess> {
     if (this.failure) {
       return Promise.reject(this.failure);
     }
-    return (this.processPromise ??= NativeHostProcess.start({
-      artifact: this.artifact,
-      onStderr: this.onStderr,
-      recoverInput: () => this.recoverInput(),
-    }).then((process) => {
-      process.on('event', (message) => this.onEvent(message));
-      process.on('exit', (error) => {
-        this.failure = error;
-        this.processPromise = undefined;
-        if (!this.disposing) this.onFailure?.(error);
+    if (this.disposing) {
+      return Promise.reject(attachFailureEffect(new NativeDriverError('host-closed', 'Native driver helper is closed.'), 'none'));
+    }
+    if (!this.processPromise) {
+      this.processPromise = NativeHostProcess.start({
+        artifact: this.artifact,
+        cancellationTimeoutMs: this.cancellationTimeoutMs,
+        onStderr: this.onStderr,
+        recoverInput: () => this.recoverInput(),
+        signal: this.lifetime.signal,
+      }).then((process) => {
+        process.on('event', (message) => this.onEvent(message));
+        process.on('exit', (error) => {
+          this.failure = error;
+          this.processPromise = undefined;
+          if (!this.disposing) this.onFailure?.(error);
+        });
+        return process;
       });
-      return process;
-    }));
+      this.processPromise.catch(() => undefined);
+    }
+    return waitForStartup(this.processPromise, signal);
   }
 
   private recoverInput(): Promise<void> {
@@ -368,12 +414,9 @@ export class NativeDesktopHost implements DesktopHost {
       return Promise.resolve();
     }
     return new Promise((resolve, reject) => {
-      const child = spawn(this.artifact.executablePath, ['--release-input'], {
-        stdio: ['pipe', 'pipe', 'pipe'],
-        windowsHide: true,
-      });
-      const stdout: Buffer[] = [];
-      const stderr: Buffer[] = [];
+      const child = spawn(this.artifact.executablePath, ['--release-input'], nativeHelperSpawnOptions());
+      const stdout = new BoundedOutput(maximumRecoveryOutputBytes);
+      const stderr = new BoundedOutput(maximumRecoveryOutputBytes);
       let settled = false;
       let stdinError: Error | undefined;
       let timeoutError: NativeDriverError | undefined;
@@ -393,6 +436,14 @@ export class NativeDesktopHost implements DesktopHost {
       child.stdin.once('error', (error) => {
         stdinError = error;
       });
+      child.once('exit', () => {
+        // A grandchild that inherited the pipes would hold `close` back indefinitely.
+        setTimeout(() => {
+          child.stdout.destroy();
+          child.stderr.destroy();
+          child.stdin.destroy();
+        }, 500).unref();
+      });
       child.once('close', (code) => {
         if (settled) {
           return;
@@ -407,13 +458,13 @@ export class NativeDesktopHost implements DesktopHost {
           reject(
             new NativeDriverError(
               'input-recovery-failed',
-              Buffer.concat(stderr).toString('utf8') || stdinError?.message || `Native input recovery exited with code ${String(code)}.`,
+              stderr.text() || stdinError?.message || `Native input recovery exited with code ${String(code)}.`,
             ),
           );
           return;
         }
         try {
-          JSON.parse(Buffer.concat(stdout).toString('utf8'));
+          JSON.parse(stdout.text());
           this.depressedKeys.clear();
           this.depressedButtons.clear();
           this.potentialKeys.clear();
@@ -539,6 +590,60 @@ export function resolveDisabledInputFeatures(configured?: readonly NativeDisable
   return resolved;
 }
 
+/** Collects at most a fixed number of bytes and drops the rest, so a noisy child cannot grow Node's memory. */
+class BoundedOutput {
+  private readonly chunks: Buffer[] = [];
+  private readonly limit: number;
+  private bytes = 0;
+
+  constructor(limit: number) {
+    this.limit = limit;
+  }
+
+  push(chunk: Buffer): void {
+    const room = this.limit - this.bytes;
+    if (room <= 0) {
+      return;
+    }
+    const kept = chunk.length > room ? chunk.subarray(0, room) : chunk;
+    this.chunks.push(kept);
+    this.bytes += kept.length;
+  }
+
+  text(): string {
+    return Buffer.concat(this.chunks).toString('utf8');
+  }
+}
+
+/** Waits for a shared startup on behalf of one caller: that caller's abort stops its wait, not the startup. */
+function waitForStartup<T>(startup: Promise<T>, signal: AbortSignal | undefined): Promise<T> {
+  if (!signal) {
+    return startup;
+  }
+  return new Promise<T>((resolve, reject) => {
+    const onAbort = () => {
+      const error = new Error('The native driver command was cancelled while the helper was starting.');
+      error.name = 'AbortError';
+      reject(attachFailureEffect(error, 'none'));
+    };
+    if (signal.aborted) {
+      onAbort();
+      return;
+    }
+    signal.addEventListener('abort', onAbort, { once: true });
+    startup.then(
+      (value) => {
+        signal.removeEventListener('abort', onAbort);
+        resolve(value);
+      },
+      (error: unknown) => {
+        signal.removeEventListener('abort', onAbort);
+        reject(error);
+      },
+    );
+  });
+}
+
 /** The longest action key a provider may issue. Keys are opaque, so this only bounds what Node holds. */
 const maxActionKeyLength = 128;
 
@@ -569,13 +674,13 @@ const nativeWebDriverErrorCodes: Readonly<Record<string, WebDriverErrorCode>> = 
   'no-such-window': 'no such window',
 };
 
-/** Marks a failure raised before any command reached the provider, so no effect can have been dispatched. */
 /** The mechanism a helper reports it cleared with. A helper that predates strict clear reports none. */
 function parseClearMechanism(result: unknown): DesktopClearMechanism | undefined {
   const mechanism = typeof result === 'object' && result !== null ? (result as { mechanism?: unknown }).mechanism : undefined;
   return mechanism === 'keyboard' || mechanism === 'semantic' ? mechanism : undefined;
 }
 
+/** Marks a failure raised before any command reached the provider, so no effect can have been dispatched. */
 function rejectedBeforeDispatch<T>(error: T): T {
   return error instanceof Error ? attachFailureEffect(error, 'none') : error;
 }
