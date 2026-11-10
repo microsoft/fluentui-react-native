@@ -103,7 +103,7 @@
     "@react-native-windows/cli": "^0.81.0",
     "@react-native/babel-preset": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
-    "@storybook/react-native": "^10.4.7",
+    "@storybook/react-native": "^10.7.1",
     "@testing-library/react-native": "catalog:",
     "@types/react": "~19.1.4",
     "@types/react-test-renderer": "^19.1.0",
@@ -112,7 +112,7 @@
     "react-native-macos": "^0.81.0",
     "react-native-windows": "^0.81.0",
     "react-test-renderer": "19.1.4",
-    "storybook": "^10.4.0",
+    "storybook": "^10.6.5",
     "test-renderer": "catalog:"
   },
   "peerDependencies": {

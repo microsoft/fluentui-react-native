@@ -42,6 +42,11 @@ Cleanup drains worker reporting and stdio, closes sessions, releases owned
 input, and stops exact owned process trees in reverse service order. An
 externally owned app is preserved.
 
+The generated-descriptor service bridge allows 60 seconds per command shutdown
+phase so a nested scope can use its 45-second disposal budget and flush reporting
+and stdio before the bridge exits. A missed deadline or failed terminal handshake
+still fails cleanup; a passing test result never overrides it.
+
 Commands keep their arguments as separate values. Windows executable lookup and
 command-shim escaping use `cross-spawn`, without Node's deprecated
 `spawn` argument array plus `shell: true` combination.

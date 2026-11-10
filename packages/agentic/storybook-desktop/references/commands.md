@@ -73,6 +73,10 @@ Metro, generated runtime identity, and exact process cleanup. Windows RN Test
 App retains its required Metro port 8081; do not run concurrent Metro-backed
 Windows smokes.
 
+Windows and Win32 PowerShell smoke owners wait up to 75 seconds for each service
+bridge to exit, allowing its 60-second cooperative shutdown budget to complete.
+Nonzero exits and expired deadlines remain cleanup failures.
+
 Storybook test and stories-and-tests smoke commands accept
 `--input accessible|physical`. The lane filters `desktopIt` cases by their
 resolved input, target platform, and scope. Without a flag the lane comes from
