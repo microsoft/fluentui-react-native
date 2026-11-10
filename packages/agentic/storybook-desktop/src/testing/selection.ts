@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 import type { DesktopStoryManifest, DesktopStoryManifestEntry } from '@fluentui-react-native/desktop-driver';
-import { decideDesktopCase, resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
+import { compareDesktopCodePoints, decideDesktopCase, resolveDesktopScopeDomains } from '@fluentui-react-native/desktop-driver/authoring';
 import type {
   DesktopCaseTarget,
   DesktopDeclaredGap,
@@ -73,7 +73,7 @@ export function decideWdioSelection(
   const entries = manifest.entries
     .filter((entry) => entry.wdio && (!options.story || path.matchesGlob(entry.id, options.story)))
     .filter((entry) => !options.tag || entry.tags.includes(options.tag))
-    .sort((left, right) => left.id.localeCompare(right.id));
+    .sort((left, right) => compareDesktopCodePoints(left.id, right.id));
   for (const entry of entries) {
     const cases = entry.wdio!.cases;
     if (!cases?.length) {
