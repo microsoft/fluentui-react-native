@@ -369,6 +369,30 @@ describe('project: limits', () => {
       }
     }
   });
+
+  test('projects a full-size sample in time linear in its size', () => {
+    // Quadratic page filling took seconds at this size; the bound is loose enough for a loaded CI machine.
+    const children: SampleSpec[] = Array.from({ length: 800 }, (_, group) => ({
+      children: Array.from({ length: 5 }, (_unused, leaf) => ({ name: `Leaf ${group}.${leaf}`, role: 'button' })),
+      name: `Group ${group}`,
+      role: 'group',
+    }));
+    const observation = buildSample({ children, name: 'Big', role: 'window' });
+    expect(observation.nodes).toHaveLength(4_801);
+    const started = performance.now();
+    const projection = project({
+      budgets: { maxBytes: 16 * 1024 * 1024, maxNodes: 5_000 },
+      format: 'nodes',
+      observation,
+      refs: { assign: (nodes) => nodes.map((node) => node.id), maxLength: () => 1 },
+      shown: shownFacts('all', defaultObservedFacts),
+      view: 'all',
+    });
+    expect(performance.now() - started).toBeLessThan(1_000);
+    expect(projection).toMatchObject({ complete: true, counts: { emitted: 4_801, matched: 4_801 } });
+    expect(projection.nodes?.[0]).toMatchObject({ depth: 0, role: 'window' });
+    expect(projection.nodes?.at(-1)).toMatchObject({ depth: 2, role: 'button' });
+  });
 });
 
 describe('project: native truncation', () => {

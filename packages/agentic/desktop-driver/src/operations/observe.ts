@@ -99,7 +99,9 @@ export const observeOutput = z.strictObject({
 
 const deltaChangeSchema = z.strictObject({
   change: z.enum(['added', 'changed', 'removed']),
-  element: elementSchema,
+  element: elementSchema.extend({
+    ref: z.string().optional().describe('Absent for a removed element the session holds no reference to.'),
+  }),
 });
 
 const deltaResultSchema = z.strictObject({
@@ -166,20 +168,29 @@ export function observeNeedsContent(input: ObserveOptions): boolean {
 }
 
 type CapturedObservation = {
-  result: ObserveResult;
+  /** The first page of the sample. Absent when the sample was compared with its delta base, which pages its own changes. */
+  result?: ObserveResult;
+  /** The reference of the sample's root, issued even when no page of the sample was projected. */
+  root?: string;
   snapshot: ObservationSnapshot;
   stored: boolean;
 };
 
 /** Reads one bounded observation and stores its immutable native sample when the session cache can retain it. */
 export async function observeWindow(runtime: OperationRuntime, input: ObserveOptions): Promise<ObserveResult> {
-  return (await captureObservation(runtime, input)).result;
+  return (await captureObservation(runtime, input)).result!;
 }
 
+/**
+ * Reads and stores one sample. With a delta base the sample is projected, and so issues references, only when it
+ * cannot be compared with the base: a delta names the references of its own changes, and a projection nobody reads
+ * would issue references the caller is never told and evict the ones it holds.
+ */
 async function captureObservation(
   runtime: OperationRuntime,
   input: ObserveOptions,
   preserve: readonly string[] = [],
+  base?: ObservationSnapshot,
 ): Promise<CapturedObservation> {
   const { budget, format, view } = input;
   const shown = shownFacts(view, input.facts ?? defaultObservedFacts);
@@ -196,15 +207,7 @@ async function captureObservation(
       },
       within: input.within,
     },
-    ({ deadlineMs, observation, refs, sample, rootId, windowId }) => {
-      const projection = project({
-        budgets: { maxBytes: budget.maxBytes, maxNodes: budget.maxNodes },
-        format,
-        observation,
-        refs,
-        shown,
-        view,
-      });
+    ({ deadlineMs, issue, observation, refs, sample, rootId, windowId }) => {
       const snapshot: ObservationSnapshot = {
         observation,
         projection: {
@@ -224,19 +227,46 @@ async function captureObservation(
         scopeKey: scopeKey(sample, rootId, windowId, input, shown),
         windowId,
       };
+      const comparable = base !== undefined && base.scopeKey === snapshot.scopeKey;
+      const projection = comparable
+        ? undefined
+        : project({
+            budgets: { maxBytes: budget.maxBytes, maxNodes: budget.maxNodes },
+            format,
+            observation,
+            refs,
+            shown,
+            view,
+          });
+      const root = projection ? projection.root : observation.nodes[0] && issue(observation.nodes[0]);
       const retained = runtime.state.observations.add(snapshot, preserve);
       runtime.state.ledger.queue(retained.evicted);
       return {
         projection,
+        root,
         snapshot,
         stored: retained.stored,
         unsupportedFacts: observation.unsupportedFacts.filter((fact) => shown.includes(fact)),
       };
     },
   );
-  const { projection, snapshot, stored, unsupportedFacts } = sampled.value;
+  const { projection, root, snapshot, stored, unsupportedFacts } = sampled.value;
   return {
-    result: snapshotResult(runtime, snapshot, projection, unsupportedFacts, sampled.warnings, budget.maxBytes, budget.maxNodes, stored),
+    ...(projection
+      ? {
+          result: snapshotResult(
+            runtime,
+            snapshot,
+            projection,
+            unsupportedFacts,
+            sampled.warnings,
+            budget.maxBytes,
+            budget.maxNodes,
+            stored,
+          ),
+        }
+      : {}),
+    ...(root === undefined ? {} : { root }),
     snapshot,
     stored,
   };
@@ -310,33 +340,35 @@ export const observeDeltaOperation = registerOperation({
   async run(input, runtime) {
     const base = runtime.state.observations.get(input.since);
     const { since, ...options } = input;
-    const captured = await captureObservation(runtime, options, base ? [since] : []);
+    const captured = await captureObservation(runtime, options, base ? [since] : [], base);
     if (!base) {
       return {
         mode: 'fresh',
-        snapshot: captured.result,
+        snapshot: captured.result!,
         reset: { baseSample: since, reason: 'base-expired' },
       };
     }
-    if (base.scopeKey !== captured.snapshot.scopeKey) {
-      return {
-        mode: 'fresh',
-        snapshot: captured.result,
-        reset: { baseSample: since, reason: 'basis-mismatch' },
-      };
+    if (!captured.result) {
+      const sequence = Number(captured.snapshot.sample.id.slice(1));
+      // The stored copy is the one a continuation reads, so projecting it once serves every page.
+      const current = (captured.stored && runtime.state.observations.get(captured.snapshot.sample.id)) || captured.snapshot;
+      return await deltaPage(
+        runtime,
+        base,
+        current,
+        input.budget.maxNodes,
+        input.budget.maxBytes,
+        0,
+        sequence,
+        captured.root,
+        captured.stored,
+      );
     }
-    const sequence = Number(captured.snapshot.sample.id.slice(1));
-    return await deltaPage(
-      runtime,
-      base,
-      captured.snapshot,
-      input.budget.maxNodes,
-      input.budget.maxBytes,
-      0,
-      sequence,
-      captured.result.sample.root,
-      captured.stored,
-    );
+    return {
+      mode: 'fresh',
+      snapshot: captured.result,
+      reset: { baseSample: since, reason: 'basis-mismatch' },
+    };
   },
   summarize(input, output) {
     const result = observeDeltaOutput.safeParse(output);
@@ -432,6 +464,23 @@ type DeltaCandidate = {
   source: ObservationSnapshot;
 };
 
+/**
+ * A change names its element by reference. A removed element is gone, so it gets no new reference: it keeps the one the
+ * session already holds, and has none otherwise. Issuing one would spend table capacity and evict held references.
+ */
+function deltaElement(
+  runtime: OperationRuntime,
+  candidate: DeltaCandidate,
+  sequence: number,
+): z.infer<typeof deltaChangeSchema>['element'] {
+  const { ref: _canonical, ...element } = candidate.element;
+  const ref =
+    candidate.kind === 'removed'
+      ? runtime.state.refs.peek(candidate.node.id)
+      : issueForSnapshot(runtime, candidate.source, candidate.node, sequence);
+  return { ...(ref === undefined ? {} : { ref }), ...element };
+}
+
 async function deltaPage(
   runtime: OperationRuntime,
   base: ObservationSnapshot,
@@ -474,10 +523,7 @@ async function deltaPage(
       break;
     }
     const candidate = candidates[index];
-    const change = {
-      change: candidate.kind,
-      element: { ...candidate.element, ref: issueForSnapshot(runtime, candidate.source, candidate.node, sequence) },
-    };
+    const change = { change: candidate.kind, element: deltaElement(runtime, candidate, sequence) };
     const size = Buffer.byteLength(JSON.stringify(change), 'utf8') + 1;
     if (bytes + size > maxBytes) {
       stop = 'maxBytes';
@@ -533,10 +579,19 @@ async function deltaPage(
   return result;
 }
 
-function canonicalProjection(snapshot: ObservationSnapshot): {
+type CanonicalProjection = {
   complete: boolean;
   items: { element: ProjectedElement; id: string; node: NativeObservedNode; signature: string }[];
-} {
+};
+
+// Snapshots are immutable, so one projection serves every page of every delta that reads the snapshot.
+const canonicalProjections = new WeakMap<ObservationSnapshot, CanonicalProjection>();
+
+function canonicalProjection(snapshot: ObservationSnapshot): CanonicalProjection {
+  const cached = canonicalProjections.get(snapshot);
+  if (cached) {
+    return cached;
+  }
   const nodeById = new Map(snapshot.observation.nodes.map((node) => [node.id, node]));
   const projection = project({
     budgets: { maxBytes: 16 * 1024 * 1024, maxNodes: 5_000 },
@@ -558,7 +613,9 @@ function canonicalProjection(snapshot: ObservationSnapshot): {
     const signature = JSON.stringify({ ...visible, parentId: node.parentId, scope: node.scope });
     return [{ element, id: node.id, node, signature }];
   });
-  return { complete: projection.complete && new Set(items.map((item) => item.id)).size === items.length, items };
+  const canonical = { complete: projection.complete && new Set(items.map((item) => item.id)).size === items.length, items };
+  canonicalProjections.set(snapshot, canonical);
+  return canonical;
 }
 
 function scopeKey(
