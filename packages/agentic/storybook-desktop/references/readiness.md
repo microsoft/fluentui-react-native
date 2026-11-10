@@ -52,8 +52,8 @@ effect unknown: the driver retains target quarantine. Late ready/error events
 cannot release it. Subsequent requests return renderer-specific
 `relaunch-required`; reauthentication is not quarantine recovery.
 
-The app and runtime resolve `@storybook/react-native` **10.5.4**, with
-`storybook` **10.6.3**, in the inspected installation. In those exact sources,
+The app and runtime resolve `@storybook/react-native` **10.7.1**, with
+`storybook` **10.6.5**, in the inspected installation. In those exact sources,
 `dist/index.js` installs the server channel while constructing Storybook UI; Storybook's
 `dist/channels/index.js` creates one WebSocket, emits `channelWSDisconnect`
 on close, marks it closed, and drops later sends without reconnecting.

@@ -166,22 +166,25 @@ CommonJS and ESM entry points, not just the patch text.
   [upstream issue 273](https://github.com/TehShrike/deepmerge/issues/273)
   (GHSA-gcqx-w48m-w2h4). There is no published fixed release. Regressions cover
   null-prototype targets, own malicious keys, and nested null placeholders.
-- `joi` 17.13.8: backport the linear-time email separator expression from
-  [upstream commit 807858d](https://github.com/hapijs/joi/commit/807858d7480f5075b0610817e3e44230890fb18e)
-  (GHSA-4528-x5fx-h6hg). Replace with 17.13.9 once its 2026-10-28
-  publication passes the seven-day age gate.
 - `glob` 13.0.6: backport cancellation returns and resume handling from
   [upstream commit 4682e8c](https://github.com/isaacs/node-glob/commit/4682e8c9babee1b385202ede36389634e12076d7)
   (GHSA-3g3m-2fjr-6pw4). Route package entry points to the patched unbundled
   modules, so the bundled copy cannot bypass either this fix or the minimatch
-  patch. Fixed 14.x releases were published on 2026-10-27 and 2026-10-28;
-  validate major-version compatibility before replacing the backport.
+  patch. The in-major fix 13.0.7 was published on 2026-11-06; replace the
+  backport with it once that publication passes the seven-day age gate. Fixed
+  14.x releases exist, but validate major-version compatibility before forcing
+  them on the 13.x consumers.
 - `minimatch` 9.0.9 and 10.2.6: backport pattern expansion and pairwise
   comparison bounds from
   [upstream commit 77a0f5c](https://github.com/isaacs/minimatch/commit/77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8)
-  (GHSA-g3hv-75wg-m249). Keep each consumer on its existing major. Fixed
-  11.x releases were first published on 2026-10-27; do not force the new
-  object API into callers that require the callable 3.x API.
+  (GHSA-g3hv-75wg-m249). Keep each consumer on its existing major; no fixed
+  9.x or 10.x release exists. Fixed 11.x releases were first published on
+  2026-10-27; do not force the new object API into callers that require the
+  callable 3.x API.
+
+The `joi` 17.13.9 release carries the GHSA-4528-x5fx-h6hg fix, so the earlier
+17.13.8 backport is retired; the regression suite still checks the installed
+release.
 
 Version-based audits still report these patched versions. Do not exclude the
 advisories or describe the audit as clean. The remaining minimatch 3.1.5 report
