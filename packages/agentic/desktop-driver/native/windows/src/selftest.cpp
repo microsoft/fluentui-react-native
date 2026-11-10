@@ -3285,15 +3285,16 @@ void TestHostQueuedCancellation() {
   CloseHandle(testInput);
 }
 
-// The protocol fails the transport on a frame that is not valid JSON: the host
-// stops reading, never runs what follows, and exits with a failure.
-void TestHostMalformedJson() {
+// The protocol fails the transport on a frame that is not valid JSON or not a
+// JSON object: the host stops reading, never runs what follows, and exits with
+// a failure.
+void TestHostRejectsFrame(std::string_view rejected, const std::string& subject) {
   HANDLE hostInput = nullptr;
   HANDLE testOutput = nullptr;
   HANDLE testInput = nullptr;
   HANDLE hostOutput = nullptr;
   if (!CreatePipe(&hostInput, &testOutput, nullptr, 0) || !CreatePipe(&testInput, &hostOutput, nullptr, 0)) {
-    Check(false, "the malformed-frame test creates its pipes");
+    Check(false, "the " + subject + " test creates its pipes");
     return;
   }
 
@@ -3337,13 +3338,13 @@ void TestHostMalformedJson() {
   };
 
   request("blocker");
-  Check(WaitFor([&]() { return ran("blocker"); }), "the host worker starts the request sent before the bad frame");
-  writer.WriteJson(std::string_view(R"({"type":"request","id":"truncated")"));
+  Check(WaitFor([&]() { return ran("blocker"); }), "the host worker starts the request sent before the " + subject);
+  writer.WriteJson(rejected);
   request("after");
   blocker->Open();
   const bool returned = WaitFor([&]() { return exitCode.load() != -1; }, 5000);
-  Check(returned && exitCode.load() == 1, "a malformed frame fails the transport and the host exits with a failure");
-  Check(!ran("after"), "a request after the malformed frame is never run");
+  Check(returned && exitCode.load() == 1, "a " + subject + " fails the transport and the host exits with a failure");
+  Check(!ran("after"), "a request after the " + subject + " is never run");
 
   // Ends a host that kept reading, so a failed check cannot hang the run.
   CloseHandle(testOutput);
@@ -3687,7 +3688,8 @@ int RunSelfTest() {
   TestEffectLedger();
   TestDriverMutationEffects();
   TestHostQueuedCancellation();
-  TestHostMalformedJson();
+  TestHostRejectsFrame(R"({"type":"request","id":"truncated")", "malformed frame");
+  TestHostRejectsFrame("[]", "non-object frame");
   TestDriverHitTestBeyondScreens();
   TestAccessibilityActions();
   TestDriverObservation();

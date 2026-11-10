@@ -313,6 +313,11 @@ int Host::Run(HANDLE input, HANDLE output) {
         exitCode = 1;
         break;
       }
+      if (!message.IsObject()) {
+        WriteDiagnostic("The native helper received a JSON frame that is not an object, which fails the transport.");
+        exitCode = 1;
+        break;
+      }
       const std::string type = message.StringField("type");
       const std::string id = message.StringField("id");
       if ((type == "cancel" || type == "request") &&
