@@ -49,6 +49,8 @@ describe('desktop supervisor input lane', () => {
       target,
       reporter,
       reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
+      // Never contend for the real per-user workload claim.
+      lockDirectory: path.join(artifactsRoot, 'locks'),
       ...(input ? { input } : {}),
     });
     try {

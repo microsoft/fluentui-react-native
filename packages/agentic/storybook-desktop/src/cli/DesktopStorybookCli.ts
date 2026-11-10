@@ -146,6 +146,9 @@ export class DesktopStorybookCli {
   private readonly reporterMode?: ResolvedDesktopReporterMode;
   private readonly structuredOutput: Pick<NodeJS.WriteStream, 'write'>;
   private readonly services: DesktopServiceScope;
+  // A borrowed scope belongs to its caller, which may be awaiting this command inside the scope's tracked work; closing
+  // it here would wait on that work. The caller closes it.
+  private readonly ownsServices: boolean;
   private readonly onReady?: () => void;
 
   constructor(config: DesktopStorybookConfig, options: DesktopStorybookCliOptions = {}) {
@@ -167,6 +170,7 @@ export class DesktopStorybookCli {
         verbose: options.verbose,
       });
     this.services = options.services ?? new DesktopServiceScope(this.runner, this.reporter);
+    this.ownsServices = options.services === undefined;
     this.buildNativeDriver = options.buildNativeDriver ?? buildNativeDesktopDriver;
     this.createStoryManifest = options.createStoryManifest ?? createDesktopStoryManifest;
     this.fetch = options.fetch ?? globalThis.fetch;
@@ -222,7 +226,7 @@ export class DesktopStorybookCli {
       failures.push(error);
     }
     try {
-      await this.services.close();
+      if (this.ownsServices) await this.services.close();
     } catch (error) {
       failures.push(error);
     }
@@ -324,7 +328,7 @@ export class DesktopStorybookCli {
       failures.push(error);
     }
     try {
-      await this.services.close();
+      if (this.ownsServices) await this.services.close();
     } catch (error) {
       failures.push(error);
     }
@@ -689,7 +693,7 @@ export class DesktopStorybookCli {
         failures.push(error);
       }
       try {
-        await this.services.close();
+        if (this.ownsServices) await this.services.close();
       } catch (error) {
         failures.push(error);
       }
@@ -1024,9 +1028,12 @@ export class DesktopStorybookCli {
     cleanup = false,
   ): Promise<void> {
     for (const command of Array.isArray(plan) ? plan : [plan]) {
-      const work = this.runner.run(this.prepareCommand(command, platform, instance));
-      if (cleanup) await work;
-      else await this.services.guard(work);
+      // Cleanup runs after the scope has stopped, so only regular steps are cancelled with it.
+      if (cleanup) await this.runner.run(this.prepareCommand(command, platform, instance));
+      else
+        await this.services.guard(
+          this.runner.run(this.prepareCommand(command, platform, instance), { signal: this.services.controller.signal }),
+        );
     }
   }
 

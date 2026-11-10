@@ -206,9 +206,10 @@ Windows: `--windows` is always Fabric and `--win32` is always Paper.
   instance's environment as described in
   `@fluentui-react-native/storybook-desktop/references/platforms/win32.md`;
   a stale bundle never reaches the channel.
-- A console Ctrl+C to `desktop-test serve --agent` has left the CLI idle after
-  every resource settled, with its claim still `active` and `run.json`
-  `incomplete`. Record that, prove the owner and resources as in
+- A console Ctrl+C to `desktop-test serve --agent` used to leave the CLI idle
+  after every resource settled, with its claim still `active` and `run.json`
+  `incomplete`. That is fixed; record whether the CLI now exits by itself. If
+  it stays idle, prove the owner and resources as in
   [cleanup](#cleanup-and-endpoint-limits), and end only that process.
 - If `storybook run --windows` fails while enabling Developer Mode, do not
   change that OS setting for qualification. An already installed, verified
@@ -240,7 +241,7 @@ after cleanup evidence is recorded.
 
 On a macOS-only machine, record **Windows Fabric** and **Win32 Paper** as
 **Not run**, with no measurements inferred from macOS. On Windows, also confirm
-that no `%TEMP%\furn-desktop-workload-*\interactive.lock` and no
+that no `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-test\workload\interactive.lock` and no
 `%LOCALAPPDATA%\com.microsoft.fluentui-react-native.desktop-driver\agent-connection.json`
 remain, that the channel, Metro, and WebDriver ports reported by the driver
 have no listeners, and that no app process from the run survives. Hosted physical-input

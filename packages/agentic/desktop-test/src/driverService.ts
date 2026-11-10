@@ -70,7 +70,14 @@ export async function startDesktopService(
   let publication: DesktopAgentPublication | undefined;
   try {
     const recovery = await resolveRecovery(options, artifact);
-    const target = { ...options.target, ...(await options.createTarget?.(desktopHost, recovery)), host: desktopHost };
+    // Only the declared story context is taken: an integration cannot replace the target's identity or launch modes.
+    const added = await options.createTarget?.(desktopHost, recovery);
+    const target = {
+      ...options.target,
+      ...(added?.storyOrchestrator === undefined ? {} : { storyOrchestrator: added.storyOrchestrator }),
+      ...(added?.storyRootTestId === undefined ? {} : { storyRootTestId: added.storyRootTestId }),
+      host: desktopHost,
+    };
     options.signal?.throwIfAborted();
     server = await createDesktopDriverServer({
       ...(authority ? { authority } : {}),

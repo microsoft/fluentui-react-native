@@ -1,4 +1,10 @@
-import { redactDesktopSecrets, validateDesktopEvent } from './protocol';
+import {
+  DesktopIncompleteError,
+  DesktopReportedError,
+  isDesktopIncompleteError,
+  redactDesktopSecrets,
+  validateDesktopEvent,
+} from './protocol';
 
 describe('declared gaps and selection events', () => {
   function event(kind: string, payload: Record<string, unknown>): unknown {
@@ -79,6 +85,32 @@ describe('declared gaps and selection events', () => {
     ['a fractional count', { platform: 0.5, scope: 0, input: 0 }],
   ])('rejects a selection with %s', (_name, excluded) => {
     expect(() => validateDesktopEvent(event('selection', { excluded }))).toThrow();
+  });
+
+  test('a producer cannot report the collector-only run-finished event', () => {
+    const finished = event('run-finished', { status: 'passed', resultPath: 'run.json' });
+    expect(() => validateDesktopEvent(finished)).toThrow('A producer cannot report "run-finished".');
+    expect(() => validateDesktopEvent(finished, 'collector')).not.toThrow();
+  });
+});
+
+describe('incomplete verdict errors', () => {
+  const relayed = (name: string) =>
+    new DesktopReportedError({ failureId: 'failure', kind: 'infrastructure', error: { name, message: 'relayed' } });
+
+  test('recognizes the typed error, its relayed form, and an aggregate of only such errors', () => {
+    expect(isDesktopIncompleteError(new DesktopIncompleteError('nothing executed'))).toBe(true);
+    expect(isDesktopIncompleteError(relayed('DesktopIncompleteError'))).toBe(true);
+    expect(isDesktopIncompleteError(new AggregateError([new DesktopIncompleteError('a'), relayed('DesktopIncompleteError')]))).toBe(true);
+  });
+
+  test('never recognizes a fault, an aggregate that contains one, or an error that merely wraps the verdict', () => {
+    expect(isDesktopIncompleteError(new Error('boom'))).toBe(false);
+    expect(isDesktopIncompleteError(relayed('Error'))).toBe(false);
+    expect(isDesktopIncompleteError(new AggregateError([new DesktopIncompleteError('a'), new Error('b')]))).toBe(false);
+    expect(isDesktopIncompleteError(new Error('wrapped', { cause: new DesktopIncompleteError('a') }))).toBe(false);
+    expect(isDesktopIncompleteError(new AggregateError([]))).toBe(false);
+    expect(isDesktopIncompleteError('DesktopIncompleteError')).toBe(false);
   });
 });
 

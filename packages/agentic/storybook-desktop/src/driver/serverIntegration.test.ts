@@ -1,3 +1,4 @@
+import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { createServer, Socket } from 'node:net';
 import os from 'node:os';
@@ -208,6 +209,66 @@ describe('desktop Storybook server integration', () => {
         idle.destroy();
         await child.stop();
         await runner.close();
+        await transport.close();
+        expect((await reporter.finish()).status).toBe('passed');
+      } finally {
+        fs.rmSync(temporaryDirectory, { force: true, recursive: true });
+      }
+    }
+  });
+
+  // An owned channel is disposed by its parent; a standalone one must still clean up on a terminal hangup.
+  (process.platform === 'win32' ? test.skip : test)('closes a standalone channel cleanly on SIGHUP', async () => {
+    const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+    const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
+    const manifestPath = path.join(temporaryDirectory, 'driver-manifest.json');
+    const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+    fs.writeFileSync(manifestPath, JSON.stringify(createIntegrationManifest(temporaryDirectory, storybookPort, driverPort)));
+    const output: string[] = [];
+    const sink = {
+      write: (text: string) => {
+        output.push(text);
+        return true;
+      },
+    };
+    const reporter = new DesktopRunReporter({
+      artifactsRoot: temporaryDirectory,
+      kind: 'lifecycle',
+      reporterMode: 'plain',
+      output: sink,
+      errorOutput: sink,
+      summary: false,
+    });
+    const transport = await startReportTransport(reporter);
+    const child = spawn(process.execPath, [path.resolve(__dirname, '../../config/server-runner.cjs')], {
+      cwd: projectRoot,
+      env: {
+        ...process.env,
+        ...transport.environment,
+        STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+        STORYBOOK_DRIVER_MANIFEST: manifestPath,
+        STORYBOOK_NATIVE_DRIVER_FAKE: '1',
+        STORYBOOK_PROJECT_ROOT: projectRoot,
+        STORYBOOK_WS_PORT: String(storybookPort),
+      },
+      stdio: 'ignore',
+    });
+    const exited = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>((resolve) =>
+      child.once('exit', (code, signal) => resolve({ code, signal })),
+    );
+    try {
+      await deadline(
+        (async () => {
+          while (!output.join('').includes('READY Storybook')) await new Promise((resolve) => setTimeout(resolve, 50));
+        })(),
+        20_000,
+        'Waiting for the standalone channel',
+      );
+      child.kill('SIGHUP');
+      expect(await exited).toEqual({ code: 0, signal: null });
+    } finally {
+      try {
+        if (child.exitCode === null && child.signalCode === null) child.kill('SIGKILL');
         await transport.close();
         expect((await reporter.finish()).status).toBe('passed');
       } finally {

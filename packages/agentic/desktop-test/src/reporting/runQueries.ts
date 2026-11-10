@@ -1,8 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
-import { isNativeError } from 'node:util/types';
-
 import { desktopArtifactPath } from './collector.js';
 import {
   DesktopReportedError,
@@ -13,7 +11,7 @@ import {
   validateTestInputReport,
 } from './protocol.js';
 import type { SelectionExclusions, TestGap, TestInputReport, TestStatus } from './protocol.js';
-import { desktopInputLaneSources, summarizeDesktopRun } from './results.js';
+import { decideDesktopTestStatus, decisiveDesktopAttempt, desktopInputLaneSources, summarizeDesktopRun } from './results.js';
 import type { DesktopInputLaneReport, DesktopRunResult, DesktopSelectionReport } from './results.js';
 
 export type DesktopRunQuery =
@@ -73,6 +71,9 @@ type RegisteredRun = DesktopRunRegistration & {
   device: number;
   inode: number;
   artifacts: Map<string, string>;
+  /** Every spelling of the run directory, and of its parent, that a producer's text can contain. Longest first. */
+  roots: readonly string[];
+  parents: readonly string[];
 };
 type Grant = DesktopRunReadGrant & {
   cursors: Map<string, { runId: string; operation: string; digest: string; offset: number }>;
@@ -83,7 +84,41 @@ const maxArtifactBytes = 1024 * 1024;
 const maxResponseBytes = 16 * 1024;
 const maxTextBytes = 1024;
 const maxCursors = 256;
-const unavailable = () => new Error('Desktop run query is unavailable or unauthorized.');
+
+/**
+ * The only failures a query can report. Each has a fixed message: a native error, which can carry an absolute path or an
+ * operating-system detail, never reaches a reader.
+ */
+export const desktopRunQueryErrorCodes = [
+  'unavailable',
+  'invalid-request',
+  'stale-cursor',
+  'report-unreadable',
+  'report-changed',
+  'report-invalid',
+  'internal',
+] as const;
+export type DesktopRunQueryErrorCode = (typeof desktopRunQueryErrorCodes)[number];
+const queryErrorMessages: Record<Exclude<DesktopRunQueryErrorCode, 'invalid-request'>, string> = {
+  unavailable: 'Desktop run query is unavailable or unauthorized.',
+  'stale-cursor': 'Desktop run cursor is stale or unauthorized; request a new first page.',
+  'report-unreadable': 'Retained desktop report is missing, not a private regular file, or exceeds its read limit.',
+  'report-changed': 'Retained desktop report changed during reading; retry the query.',
+  'report-invalid': 'Retained desktop report is not a valid desktop run: its encoded data or contents are invalid.',
+  internal: 'Desktop run query failed.',
+};
+
+export class DesktopRunQueryError extends Error {
+  readonly code: DesktopRunQueryErrorCode;
+
+  /** `message` is accepted only for `invalid-request`, whose text comes from the request validator and names no path. */
+  constructor(code: DesktopRunQueryErrorCode, message?: string) {
+    super(code === 'invalid-request' ? (message ?? 'Invalid desktop run query.') : queryErrorMessages[code]);
+    this.name = 'DesktopRunQueryError';
+    this.code = code;
+  }
+}
+const unavailable = () => new DesktopRunQueryError('unavailable');
 
 /**
  * Trusted host composition owns registrations and credentials. Readers cannot start work, discover roots,
@@ -116,7 +151,17 @@ export class DesktopRunQueryService {
         throw new Error('Text artifact paths must be canonical relative paths other than run.json.');
       artifacts.set(randomUUID(), relative);
     }
-    this.runs.set(registration.runId, { ...registration, root, device: stat.dev, inode: stat.ino, artifacts });
+    const spellings = (candidates: readonly string[]) =>
+      [...new Set(candidates)].filter((candidate) => candidate.length > 1).sort((a, b) => b.length - a.length);
+    this.runs.set(registration.runId, {
+      ...registration,
+      root,
+      device: stat.dev,
+      inode: stat.ino,
+      artifacts,
+      roots: spellings([root, registration.root, path.resolve(registration.root)]),
+      parents: spellings([path.dirname(root), path.dirname(registration.root), path.dirname(path.resolve(registration.root))]),
+    });
   }
 
   forgetRun(runId: string): void {
@@ -149,17 +194,26 @@ export class DesktopRunQueryService {
     try {
       return this.read(token, input);
     } catch (error) {
-      throw new Error(this.redact(isNativeError(error) ? error.message : 'Desktop run query failed.'));
+      throw error instanceof DesktopRunQueryError ? error : new DesktopRunQueryError('internal');
     }
   }
 
   private read(token: string, input: unknown): DesktopRunQueryResponse {
-    validateDesktopRunQuery(input);
+    try {
+      validateDesktopRunQuery(input);
+    } catch (error) {
+      throw new DesktopRunQueryError('invalid-request', error instanceof TypeError ? error.message : undefined);
+    }
     const grant = this.grants.get(token);
     const run = this.runs.get(input.runId);
     if (!grant || !run || !grant.runIds.includes(input.runId) || grant.expiresAt <= Date.now() || run.expiresAt <= Date.now())
       throw unavailable();
-    const rootStat = fs.lstatSync(run.root);
+    let rootStat: fs.Stats;
+    try {
+      rootStat = fs.lstatSync(run.root);
+    } catch {
+      throw unavailable();
+    }
     if (!rootStat.isDirectory() || rootStat.dev !== run.device || rootStat.ino !== run.inode) throw unavailable();
     if ((input.operation === 'artifact' || input.operation === 'artifacts') && !grant.artifacts) throw unavailable();
     const retained = readRetainedText(run.root, 'run.json', maxResultBytes);
@@ -168,7 +222,7 @@ export class DesktopRunQueryService {
     if (input.operation === 'artifact') {
       const relative = run.artifacts.get(input.artifactId);
       if (!relative || !result.artifacts.some((artifact) => artifact.path === relative)) throw unavailable();
-      const text = this.redact(readRetainedText(run.root, relative, maxArtifactBytes));
+      const text = this.present(run, readRetainedText(run.root, relative, maxArtifactBytes));
       const clipped = clip(text, 4 * 1024);
       return {
         schemaVersion: 1,
@@ -200,7 +254,7 @@ export class DesktopRunQueryService {
     if (input.cursor) {
       const cursor = grant.cursors.get(input.cursor);
       if (!cursor || cursor.runId !== run.runId || cursor.operation !== input.operation || cursor.digest !== digest)
-        throw new Error('Desktop run cursor is stale or unauthorized; request a new first page.');
+        throw new DesktopRunQueryError('stale-cursor');
       offset = cursor.offset;
     }
     const items = this.items(input.operation, canonical, run);
@@ -214,7 +268,7 @@ export class DesktopRunQueryService {
       omissions: { items: items.length - offset, textBytes: 0 },
     };
     for (const item of items.slice(offset, offset + (input.limit ?? 10))) {
-      const clipped = this.clipItem(item);
+      const clipped = this.clipItem(item, run);
       page.items.push(clipped.item);
       if (Buffer.byteLength(JSON.stringify(page)) > maxResponseBytes - 128) {
         page.items.pop();
@@ -236,9 +290,17 @@ export class DesktopRunQueryService {
     return redactDesktopSecrets(text, this.secrets);
   }
 
-  private clipItem(item: DesktopRunQueryItem): { item: DesktopRunQueryItem; omitted: number } {
-    const title = clip(this.redact(item.title), maxTextBytes);
-    const message = item.message === undefined ? undefined : clip(this.redact(item.message), maxTextBytes);
+  // Projected text is for a reader that must not learn where the run lives, so the run's own directories become placeholders.
+  private present(run: RegisteredRun, text: string): string {
+    let result = this.redact(text);
+    for (const root of run.roots) result = result.split(root).join('<run>');
+    for (const parent of run.parents) result = result.split(parent).join('<artifacts>');
+    return result;
+  }
+
+  private clipItem(item: DesktopRunQueryItem, run: RegisteredRun): { item: DesktopRunQueryItem; omitted: number } {
+    const title = clip(this.present(run, item.title), maxTextBytes);
+    const message = item.message === undefined ? undefined : clip(this.present(run, item.message), maxTextBytes);
     return {
       item: {
         id: item.id,
@@ -255,15 +317,18 @@ export class DesktopRunQueryService {
     const id = (category: string, value: string) => createHash('sha256').update(`${run.runId}:${category}:${value}`).digest('hex');
     switch (operation) {
       case 'tests':
-        return result.tests.map((test) => ({
-          id: id('test', test.testId),
-          title: test.title,
-          status: test.status,
-          ...(test.attempts.at(-1)?.gap ? { gap: test.attempts.at(-1)!.gap } : {}),
-          message: test.attempts.at(-1)?.failure?.error.message ?? test.attempts.at(-1)?.reason,
-        }));
+        return result.tests.map((test) => {
+          const decisive = decisiveDesktopAttempt(test.attempts);
+          return {
+            id: id('test', test.testId),
+            title: test.title,
+            status: test.status,
+            ...(decisive?.gap ? { gap: decisive.gap } : {}),
+            message: decisive?.failure?.error.message ?? decisive?.reason,
+          };
+        });
       case 'work':
-        return result.work.map((work) => ({ id: id('work', work.workId), title: work.label, status: work.status }));
+        return result.work.map((work) => ({ id: id('work', work.workId), title: work.label, status: work.status, message: work.reason }));
       case 'failures':
         return result.failures.map((failure) => ({
           id: id('failure', failure.failureId),
@@ -290,7 +355,11 @@ export class DesktopRunQueryClient {
   }
 
   async query(query: DesktopRunQuery): Promise<DesktopRunQueryResponse> {
-    validateDesktopRunQuery(query);
+    try {
+      validateDesktopRunQuery(query);
+    } catch (error) {
+      throw new DesktopRunQueryError('invalid-request', error instanceof TypeError ? error.message : undefined);
+    }
     return this.request(query);
   }
 }
@@ -317,22 +386,41 @@ export function validateDesktopRunQuery(value: unknown): asserts value is Deskto
 }
 
 function readRetainedText(root: string, relative: string, maximum: number): string {
-  const file = desktopArtifactPath(root, relative);
-  const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK);
+  let file: string;
+  let fd: number;
+  try {
+    file = desktopArtifactPath(root, relative);
+    fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK);
+  } catch {
+    throw new DesktopRunQueryError('report-unreadable');
+  }
   try {
     const stat = fs.fstatSync(fd);
-    if (!stat.isFile() || stat.nlink !== 1 || stat.size > maximum)
-      throw new Error('Retained desktop report exceeds its read limit or is not a private regular file.');
+    if (!stat.isFile() || stat.nlink !== 1 || stat.size > maximum) throw new DesktopRunQueryError('report-unreadable');
     const buffer = Buffer.alloc(Math.min(stat.size + 1, maximum + 1));
     const length = fs.readSync(fd, buffer, 0, buffer.length, 0);
-    if (length !== stat.size || length > maximum) throw new Error('Retained desktop report changed during reading; retry the query.');
-    return new TextDecoder('utf-8', { fatal: true }).decode(buffer.subarray(0, length));
+    if (length !== stat.size || length > maximum) throw new DesktopRunQueryError('report-changed');
+    try {
+      return new TextDecoder('utf-8', { fatal: true }).decode(buffer.subarray(0, length));
+    } catch {
+      throw new DesktopRunQueryError('report-invalid');
+    }
+  } catch (error) {
+    throw error instanceof DesktopRunQueryError ? error : new DesktopRunQueryError('report-unreadable');
   } finally {
     fs.closeSync(fd);
   }
 }
 
 function parseResult(text: string, runId: string): DesktopRunResult & { terminal?: boolean } {
+  try {
+    return parsePersistedResult(text, runId);
+  } catch {
+    throw new DesktopRunQueryError('report-invalid');
+  }
+}
+
+function parsePersistedResult(text: string, runId: string): DesktopRunResult & { terminal?: boolean } {
   let input: unknown;
   try {
     input = JSON.parse(text);
@@ -386,7 +474,8 @@ function parseResult(text: string, runId: string): DesktopRunResult & { terminal
         ...(attempt.failure !== undefined ? { failure: new DesktopReportedError(attempt.failure).failure } : {}),
       };
     });
-    if (attempts.at(-1)!.status !== test.status) throw new TypeError('Persisted desktop test status disagrees with its latest attempt.');
+    if (decideDesktopTestStatus(attempts) !== test.status)
+      throw new TypeError('Persisted desktop test status disagrees with the status its attempts decide.');
     return { testId: test.testId, title: test.title, status: test.status, flaky: test.flaky, attempts };
   });
   const work = (value.work as unknown[]).map((entry) => {
@@ -394,7 +483,13 @@ function parseResult(text: string, runId: string): DesktopRunResult & { terminal
     textField(item.workId);
     textField(item.label);
     statusField(item.status);
-    return { workId: item.workId, label: item.label, status: item.status };
+    if (item.reason !== undefined) textField(item.reason);
+    return {
+      workId: item.workId,
+      label: item.label,
+      status: item.status,
+      ...(typeof item.reason === 'string' ? { reason: item.reason } : {}),
+    };
   });
   const failures = (value.failures as unknown[]).map((entry) => new DesktopReportedError(entry).failure);
   const artifacts = (value.artifacts as unknown[]).map((entry) => {

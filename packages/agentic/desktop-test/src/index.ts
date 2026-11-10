@@ -30,6 +30,8 @@ export type {
   PublishDesktopAgentConnection,
 } from './agentConnection.js';
 export { DesktopServiceScope, DesktopStopRequested } from './services.js';
+export { handleDesktopInterrupts } from './signals.js';
+export type { DesktopInterruptHandlers } from './signals.js';
 export { defineDesktopConfig, loadDesktopConfig, resolveDesktopSpecs, resolveDesktopTestScope, validateDesktopConfig } from './config.js';
 export type { DesktopConfig, DesktopTargetConfig, DesktopWdioSuite, ResolvedDesktopConfig, ResolvedDesktopTarget } from './config.js';
 export type { DesktopIntegration } from './integration.js';

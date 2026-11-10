@@ -1,13 +1,15 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 
-import { Command, Option } from 'commander';
+import { Command, InvalidArgumentError, Option } from 'commander';
 
 import { connectDesktopAgent } from '../agent/DesktopAgent.js';
 import { validateDesktopStoryTests } from '../authoring/storyTests.js';
 import { FakeDesktopHost } from '../hosts/fake/FakeDesktopHost.js';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from '../native/nativeDriver.js';
 import {
+  configureDesktopCliCommandTree,
+  describeDesktopCliError,
   desktopReporterModes,
   formatDesktopReporterError,
   formatDesktopReporterValue,
@@ -66,18 +68,22 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
     .name('desktop-driver')
     .description('Drive React Native desktop applications through W3C WebDriver without Appium.')
     .addOption(new Option('--reporter <mode>', 'output format').choices([...desktopReporterModes]))
-    .option('--json', 'alias for --reporter json')
-    .configureOutput({
-      writeErr: (value) => stderr.write(value),
-      writeOut: (value) => stdout.write(value),
-    });
+    .option('--json', 'alias for --reporter json');
+  let resolvedReporterMode: ResolvedDesktopReporterMode | undefined;
   const reporterMode = (): ResolvedDesktopReporterMode => {
-    const flags = program.opts<{ reporter?: string; json?: boolean }>();
-    return resolveDesktopReporterMode({
-      flag: flags.json ? 'json' : flags.reporter,
-      environment: process.env.DESKTOP_REPORTER,
-    });
+    if (!resolvedReporterMode) {
+      const flags = program.opts<{ reporter?: string; json?: boolean }>();
+      resolvedReporterMode = resolveDesktopReporterMode({
+        flag: flags.json ? 'json' : flags.reporter,
+        environment: process.env.DESKTOP_REPORTER,
+      });
+    }
+    return resolvedReporterMode;
   };
+  // Resolving before any action keeps an invalid DESKTOP_REPORTER from running a command such as serve.
+  program.hook('preAction', () => {
+    reporterMode();
+  });
   const writeValue = (value: unknown) => stdout.write(formatDesktopReporterValue(reporterMode(), value));
 
   addNativeBuildCommand(program, buildDriver, writeValue);
@@ -117,8 +123,8 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
           },
         ],
       });
-      writeValue({ server: server.url, targetId: flags.target });
       try {
+        writeValue({ server: server.url, targetId: flags.target });
         await waitForSignal();
       } finally {
         await server.close();
@@ -234,6 +240,10 @@ export function createDesktopDriverCommand(options: CreateDesktopDriverCommandOp
       }),
   );
 
+  configureDesktopCliCommandTree(program, {
+    writeErr: (value) => stderr.write(value),
+    writeOut: (value) => stdout.write(value),
+  });
   return program;
 }
 
@@ -306,7 +316,7 @@ function addNativeDoctorCommand(
         writeValue({
           error: {
             code: error instanceof Error && 'code' in error ? String(error.code) : 'unknown',
-            message: error instanceof Error ? error.message : String(error),
+            message: describeDesktopCliError(error),
           },
           ready: false,
         });
@@ -330,7 +340,7 @@ export async function runDesktopDriverCli(argv: readonly string[] = process.argv
       reporterMode = 'plain';
     }
   }
-  const program = createDesktopDriverCommand({ stderr: { write: (text) => ((diagnostics += text), true) } }).exitOverride();
+  const program = createDesktopDriverCommand({ stderr: { write: (text) => ((diagnostics += text), true) } });
   try {
     await program.parseAsync([...argv]);
   } catch (error) {
@@ -403,7 +413,7 @@ function toResolveOptions(flags: NativeResolveFlags): NativeDriverResolveOptions
 
 function parseChoice<T extends string>(value: string, choices: readonly T[], name: string): T {
   if (!choices.includes(value as T)) {
-    throw new TypeError(`${name} must be one of ${choices.join(', ')}. Received "${value}".`);
+    throw new InvalidArgumentError(`${name} must be one of ${choices.join(', ')}. Received "${value}".`);
   }
   return value as T;
 }
@@ -457,7 +467,7 @@ function waitForSignal(): Promise<void> {
 function parsePort(value: string): number {
   const port = Number(value);
   if (!Number.isInteger(port) || port < 0 || port > 65_535) {
-    throw new TypeError(`Port must be an integer between 0 and 65535. Received "${value}".`);
+    throw new InvalidArgumentError(`Port must be an integer between 0 and 65535. Received "${value}".`);
   }
 
   return port;
@@ -465,7 +475,7 @@ function parsePort(value: string): number {
 
 function requireOption(value: string | undefined, name: string): string {
   if (!value) {
-    throw new TypeError(`${name} requires a non-empty value.`);
+    throw new InvalidArgumentError(`${name} requires a non-empty value.`);
   }
   return value;
 }
@@ -473,7 +483,7 @@ function requireOption(value: string | undefined, name: string): string {
 function parseNonNegativeInteger(value: string): number {
   const parsed = Number(value);
   if (!Number.isInteger(parsed) || parsed < 0) {
-    throw new TypeError(`Expected a non-negative integer. Received "${value}".`);
+    throw new InvalidArgumentError(`Expected a non-negative integer. Received "${value}".`);
   }
   return parsed;
 }
@@ -481,7 +491,7 @@ function parseNonNegativeInteger(value: string): number {
 function parsePositiveInteger(value: string): number {
   const parsed = Number(value);
   if (!Number.isInteger(parsed) || parsed < 1) {
-    throw new TypeError(`Expected a positive integer. Received "${value}".`);
+    throw new InvalidArgumentError(`Expected a positive integer. Received "${value}".`);
   }
   return parsed;
 }

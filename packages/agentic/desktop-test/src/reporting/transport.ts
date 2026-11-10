@@ -1,9 +1,8 @@
 import net from 'node:net';
-import os from 'node:os';
-import path from 'node:path';
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { once } from 'node:events';
 
+import { createLocalSocketAddress } from '../localSocket.js';
 import { createEventEmitter, DesktopReportedError, validateDesktopEvent } from './protocol.js';
 import type { DesktopEvent, EventEmitter } from './protocol.js';
 import type { DesktopRunReporter } from './collector.js';
@@ -18,10 +17,8 @@ const maxFrame = 1024 * 1024;
 export async function startReportTransport(reporter: DesktopRunReporter, onFatal?: (error: Error) => void): Promise<ReportTransport> {
   const nonce = randomUUID();
   reporter.addSecret(nonce);
-  const address =
-    process.platform === 'win32'
-      ? `\\\\.\\pipe\\furn-desktop-${reporter.runId}`
-      : path.join(os.tmpdir(), `furn-desktop-${reporter.runId}.sock`);
+  const endpoint = createLocalSocketAddress('desktop', reporter.runId);
+  const address = endpoint.address;
   const context: ReportTransportContext = { schemaVersion: 1, address, nonce, runId: reporter.runId, artifactsRoot: reporter.root };
   const sockets = new Set<net.Socket>();
   const controls = new Map<net.Socket, string>();
@@ -133,8 +130,13 @@ export async function startReportTransport(reporter: DesktopRunReporter, onFatal
       }
     });
   });
-  server.listen(address);
-  await once(server, 'listening');
+  try {
+    server.listen(address);
+    await once(server, 'listening');
+  } catch (error) {
+    endpoint.dispose();
+    throw error;
+  }
   return {
     environment: { [DESKTOP_REPORT_CONTEXT]: JSON.stringify(context) },
     async close() {
@@ -147,6 +149,7 @@ export async function startReportTransport(reporter: DesktopRunReporter, onFatal
         await closed;
       } finally {
         clearTimeout(timer);
+        endpoint.dispose();
       }
     },
   };

@@ -10,6 +10,18 @@ import type { DesktopSupervisor } from '../supervisor.js';
 import type { DesktopWdioSettings } from './configuration.js';
 import { wdioGroupId } from './identity.js';
 
+const desktopWdioSettingsEnvironment = 'DESKTOP_WDIO_SETTINGS';
+
+// WDIO loads this configuration in the launcher and in every worker. It is constant: the run's settings and the
+// configuration module travel as data in a JSON file named by the environment, so nothing is spliced into code that runs.
+const generatedConfiguration = `import fs from 'node:fs';
+const settingsPath = process.env.DESKTOP_WDIO_SETTINGS;
+if (!settingsPath) throw new Error('DESKTOP_WDIO_SETTINGS must name the desktop WDIO settings file.');
+const { configurationModule, settings } = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+const { createDesktopWdioConfiguration } = await import(configurationModule);
+export const config = await createDesktopWdioConfiguration(settings);
+`;
+
 /** A lane selects tests through the Jasmine adapter, so a suite on another framework cannot honor one. */
 export function assertDesktopSuiteSupportsInput(suiteName: string, suite: DesktopWdioSuite, input: DesktopInputLane | undefined): void {
   if (input && suite.framework !== 'jasmine') {
@@ -66,14 +78,13 @@ export async function runDesktopWdioSuite(
     launchTimeoutMs: supervisor.target.launchTimeoutMs ?? 180_000,
     readiness: suite.readiness ?? supervisor.target.readiness,
   };
+  const settingsPath = supervisor.reporter.artifactPath('wdio.settings.json');
+  fs.writeFileSync(settingsPath, JSON.stringify({ configurationModule: new URL('./configuration.js', import.meta.url).href, settings }), {
+    mode: 0o600,
+  });
   // WDIO initializes its TypeScript loader before evaluating TypeScript configurations and their hooks.
   const configPath = supervisor.reporter.artifactPath('wdio.generated.mts');
-  fs.writeFileSync(
-    configPath,
-    `import { createDesktopWdioConfiguration } from ${JSON.stringify(new URL('./configuration.js', import.meta.url).href)};\n` +
-      `export const config = await createDesktopWdioConfiguration(${JSON.stringify(settings)});\n`,
-    { mode: 0o600 },
-  );
+  fs.writeFileSync(configPath, generatedConfiguration, { mode: 0o600 });
   const launcher = modulePath('@wdio/cli');
   // The selection travels as data in the environment: a worker parses it, and nothing is spliced into code that runs.
   const selection = serializeDesktopTestSelection({
@@ -87,7 +98,12 @@ export async function runDesktopWdioSuite(
       command: process.execPath,
       args: [fileURLToPath(new URL('../../config/launcher.cjs', import.meta.url)), pathToFileURL(launcher).href, configPath],
       cwd: config.projectRoot,
-      env: { E2ETEST_PLATFORM: supervisor.target.endpoint, NATIVE_TESTING: 'false', [desktopTestSelectionEnvironment]: selection },
+      env: {
+        E2ETEST_PLATFORM: supervisor.target.endpoint,
+        NATIVE_TESTING: 'false',
+        [desktopTestSelectionEnvironment]: selection,
+        [desktopWdioSettingsEnvironment]: settingsPath,
+      },
       label: `WDIO ${suiteName} (${supervisor.target.endpoint})`,
     },
     suiteDeadline(suite, specs.length),
@@ -103,5 +119,6 @@ export async function runDesktopWdioSuite(
 
 function suiteDeadline(suite: DesktopWdioSuite, groups: number): number {
   // A suite deadline bounds a wedged launcher; Jasmine still enforces its independent per-test timeout.
+  if (suite.suiteTimeoutMs !== undefined) return suite.suiteTimeoutMs;
   return Math.min(2_147_483_647, Math.max(300_000, (suite.timeoutMs ?? 60_000) * 100 * groups * ((suite.specFileRetries ?? 0) + 1)));
 }

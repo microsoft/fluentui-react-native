@@ -2,8 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { validateCommand } from './config.js';
 import { NodeDesktopCommandRunner } from './commands.js';
+import type { RunningDesktopCommand } from './commands.js';
 import { createDesktopReportSession } from './reporting/session.js';
 import { finishDesktopProcess, registerDesktopProcessDisposal } from './processControl.js';
+import { handleDesktopInterrupts } from './signals.js';
 
 /** Bridges a generated PowerShell service descriptor into the parent's resource/reporting scope. */
 export async function runOwnedDesktopService(descriptorPath: string): Promise<void> {
@@ -53,12 +55,12 @@ async function runService(descriptorPath: string, signal: AbortSignal): Promise<
     if (fs.existsSync(stopPath)) stop();
   }, 100);
   report.onStop?.(stop);
-  process.once('SIGINT', stop);
-  process.once('SIGTERM', stop);
+  const releaseInterrupts = handleDesktopInterrupts({ stop, terminate: () => runner.terminate() });
   let failure: unknown;
+  let running: RunningDesktopCommand | undefined;
   try {
     signal.throwIfAborted();
-    const running = runner.start({
+    running = runner.start({
       ...command,
       cwd,
       args: command.args ?? [],
@@ -67,10 +69,11 @@ async function runService(descriptorPath: string, signal: AbortSignal): Promise<
       label: value.label,
       context: { service: value.label },
     });
+    const service = running;
     await Promise.race([
       stopped,
-      running.completed.then((code) => {
-        throw running.failure ?? new Error(`Required service "${value.label}" exited unexpectedly with code ${code}.`);
+      service.completed.then((code) => {
+        throw service.failure ?? new Error(`Required service "${value.label}" exited unexpectedly with code ${code}.`);
       }),
     ]);
   } catch (error) {
@@ -78,16 +81,22 @@ async function runService(descriptorPath: string, signal: AbortSignal): Promise<
     report.reporter.emit({ kind: 'service-failed', payload: { failure: report.reporter.failure(error) } }, value.label);
   } finally {
     clearInterval(interval);
-    process.off('SIGINT', stop);
-    process.off('SIGTERM', stop);
     signal.removeEventListener('abort', stop);
-    try {
-      await runner.close();
-    } catch (error) {
-      report.reporter.fail(error, 'cleanup');
-      failure = failure === undefined ? error : new AggregateError([failure, error], 'Service execution and cleanup failed.');
+    // A requested stop is this service's normal end; runner.close() would report it as abandoned.
+    const failed = failure !== undefined;
+    for (const cleanup of [() => running?.stop({ failed }), () => runner.close()]) {
+      try {
+        await cleanup();
+      } catch (error) {
+        report.reporter.fail(error, 'cleanup');
+        failure = failure === undefined ? error : new AggregateError([failure, error], 'Service execution and cleanup failed.');
+      }
     }
-    process.exitCode = await report.close(failure);
+    try {
+      process.exitCode = await report.close(failure);
+    } finally {
+      releaseInterrupts();
+    }
   }
   if (failure !== undefined) throw failure;
 }
