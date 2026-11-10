@@ -157,33 +157,93 @@ publish a new immutable selection.
 
 ## Verification
 
-Every artifact is verified before use:
+Every artifact is checked before use:
 
 - supported provider and architecture;
 - real path and managed-path confinement;
-- source, compatibility, build, and executable identities;
+- source, compatibility, build, and executable identities for cached artifacts;
 - macOS signature and recorded signing policy;
-- FDR1 major/minor compatibility and helper identity;
+- FDR1 major/minor compatibility and the helper's provider, architecture,
+  build ID, and source digest;
 - one-shot handshake before selection;
 - the same handshake from the actual long-lived process before it receives
   native commands.
 
-Explicit paths are trusted only as an operator selection; they still undergo
-hash, platform, signature-policy, and handshake verification. An optional
-organization-managed prebuilt must use the same artifact layout and be
-provisioned out of band. The package does not define a downloader.
+The handshake `features` list is recorded on the artifact for diagnostics.
+Node does not verify it against an expected value.
+
+Explicit paths are trusted only as an operator selection. Their platform,
+macOS signature policy, protocol, and handshake are checked. The executable's
+hash is recorded as the artifact identity and is not compared with an expected
+value, and the build ID and source digest come from the helper's own
+handshake, so they identify the helper without proving that it was built from
+a particular source tree. An optional organization-managed prebuilt must use
+the same artifact layout and be provisioned out of band. The package does not
+define a downloader.
 
 ## Runtime
 
 `NativeHostProcess` starts the verified executable with `--stdio`. Requests,
 responses, binary payloads, events, cancellation, and cancellation
-acknowledgements are correlated. Stderr is bounded diagnostic output.
+acknowledgements are correlated. Node checks the shape of every decoded helper
+message before routing it. Malformed or unexpected output, such as a corrupt
+frame, a response of the wrong shape, an answer sent twice, or a binary payload
+identifier reused while the first is still pending, fails the transport. After
+the first malformed frame the decoder drops its buffer and ignores later
+output.
+
+### Shutdown and cancellation
+
+Every failure takes one terminal path: Node stops the helper, recovers input
+the helper may have left depressed, and then rejects each pending request
+once. This holds for a crash, a write failure, a malformed frame, a
+cancellation timeout, and a crash while disposing.
 
 If a command deadline expires, Node requests cancellation and waits for the
-helper to settle before the session queue advances. If the helper dies while
-input may be depressed, Node invokes the same verified binary in restricted
-`--release-input` mode with only the recorded keys and buttons. Further
-physical input must not proceed if release cannot be proven.
+helper to settle before the session queue advances. The wait is bounded by
+`cancellationTimeoutMs`, a whole number of milliseconds from 100 to 60000.
+Values outside that range, or that are not integers, are rejected when the host
+is created and are never clamped.
+
+| Helper  | Default `cancellationTimeoutMs` | Why                                                                              |
+| ------- | ------------------------------- | -------------------------------------------------------------------------------- |
+| macOS   | 2000                            | The helper acknowledges cancellation promptly.                                   |
+| Windows | 10000                           | A helper step can run for seconds before it reaches a point where it can unwind. |
+
+A helper that does not settle in time is stopped with SIGTERM, then SIGKILL
+after 2 seconds if it is still running, and every pending request is rejected.
+On Windows, stopping the helper also ends the application under test, which is
+why its default deadline is longer. Set the option on `NativeDesktopHost`, or
+on the desktop-test service options that are passed to it.
+
+`dispose` asks the helper to shut down and waits for it to acknowledge and
+exit. When the caller's `AbortSignal` aborts a disposal the helper has not
+acknowledged, the disposal is cancelled like any command and the helper is then
+stopped: at once if it acknowledges the cancellation, otherwise when
+`cancellationTimeoutMs` expires. Concurrent calls share one disposal, and an
+abort from any of them cancels it. A helper that acknowledged but then lingers
+for 2 seconds is stopped. Calling `dispose` on a host whose helper failed to
+start, or that is already closed, resolves. After `dispose` starts, the host
+starts no helper and aborts one that is still starting.
+
+Node does not wait for stdio to close once the helper has exited. A grandchild
+that inherited the pipes can hold them open indefinitely, so after the helper
+exits Node waits at most 500 ms for the pipes to close and then destroys them.
+
+On macOS and Linux the helper runs in its own process group, so Ctrl+C in the
+terminal reaches Node, which cancels and disposes in order, instead of killing
+the helper in the middle of a command. Node still owns the helper's lifetime:
+it ends when stdin closes, and `dispose` and the failure path stop it.
+Windows spawn behavior is unchanged.
+
+Helper stderr is forwarded one line at a time. Bytes are decoded as UTF-8
+across reads, each line is limited to 4096 characters, and at most 1 MiB is
+forwarded over the life of the helper.
+
+If the helper dies while input may be depressed, Node invokes the same verified
+binary in restricted `--release-input` mode with only the recorded keys and
+buttons, bounded to 5 seconds and 16 KiB of output. Further physical input must
+not proceed if release cannot be proven.
 
 The Windows helper also has three restricted one-shot modes, `--private-storage`,
 `--service-identity`, and `--application-incarnation`. The `/authority` adapters

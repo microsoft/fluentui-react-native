@@ -1,0 +1,290 @@
+import { EventEmitter } from 'node:events';
+import { PassThrough } from 'node:stream';
+
+import type { DesktopHostEvent } from '../../host/types';
+import type { NativeDriverArtifact } from '../../native/types';
+import { readFailureEffect } from '../../protocol/settlement';
+import { scriptNativeHelperSession } from '../../testing/scriptedNativeHelper';
+import { encodeJsonFrame } from './framing';
+import { NativeDesktopHost } from './NativeDesktopHost';
+import { nativeHelperSpawnOptions } from './NativeHostProcess';
+
+const mockSpawn = jest.fn();
+jest.mock('node:child_process', () => ({ spawn: (...args: unknown[]) => mockSpawn(...args) }));
+
+const macArtifact: NativeDriverArtifact = {
+  architecture: 'arm64',
+  artifactId: 'artifact',
+  artifactRoot: 'artifact-root',
+  buildFingerprint: 'build',
+  buildId: 'build',
+  compatibilityKey: 'compatibility',
+  configuration: 'release',
+  endpoints: ['macos'],
+  executablePath: 'driver',
+  features: [],
+  origin: 'cache',
+  provider: 'macos',
+  schemaVersion: 1,
+  signing: { mode: 'none' },
+  sourceDigest: 'source',
+  wireProtocol: { major: 1, minor: 0 },
+};
+
+const windowsArtifact: NativeDriverArtifact = { ...macArtifact, endpoints: ['windows'], provider: 'windows' };
+
+const windowsGreeting = () =>
+  encodeJsonFrame({
+    architecture: 'arm64',
+    buildId: 'build',
+    features: [],
+    protocol: { major: 1, minor: 0 },
+    provider: 'windows',
+    sourceDigest: 'source',
+    type: 'hello',
+  });
+
+const realIo: Parameters<typeof jest.useFakeTimers>[0] = { doNotFake: ['setImmediate', 'nextTick', 'queueMicrotask'] };
+
+/** Lets scripted I/O that is scheduled with `setImmediate` or `process.nextTick` run, under fake timers that leave both real. */
+async function settleIo(): Promise<void> {
+  for (let turn = 0; turn < 5; turn += 1) {
+    await new Promise<void>((resolve) => setImmediate(resolve));
+  }
+}
+
+function macHost(options: { cancellationTimeoutMs?: number } = {}) {
+  return new NativeDesktopHost({ application: { windowTitle: 'Test App' }, artifact: macArtifact, endpoint: 'macos', ...options });
+}
+
+type ReleaseInputOptions = { code?: number; hold?: boolean; stderr?: string; stdout?: string };
+
+/** Scripts the next `--release-input` process: it reads the pressed inputs from stdin, answers, and exits. */
+function scriptReleaseInput(options: ReleaseInputOptions = {}): { input: () => string } {
+  const code = options.code ?? 0;
+  const child = Object.assign(new EventEmitter(), {
+    kill: jest.fn(),
+    stderr: new PassThrough(),
+    stdin: new PassThrough(),
+    stdout: new PassThrough(),
+  });
+  const chunks: Buffer[] = [];
+  let exited = false;
+  let closed = 0;
+  for (const stream of [child.stdin, child.stdout, child.stderr]) {
+    stream.once('close', () => {
+      closed += 1;
+      if (exited && closed === 3) {
+        child.emit('close', code, null);
+      }
+    });
+  }
+  child.stdin.on('data', (chunk: Buffer) => chunks.push(chunk));
+  child.stdin.once('end', () => {
+    setImmediate(() => {
+      exited = true;
+      child.emit('exit', code, null);
+      if (options.hold) {
+        // A grandchild that inherited the pipes keeps them open after the helper exits.
+        child.stdout.write(options.stdout ?? '{}');
+        return;
+      }
+      child.stdout.end(options.stdout ?? '{}');
+      child.stderr.end(options.stderr ?? '');
+    });
+  });
+  mockSpawn.mockImplementationOnce(() => child);
+  return { input: () => Buffer.concat(chunks).toString('utf8') };
+}
+
+describe('NativeDesktopHost cancellationTimeoutMs', () => {
+  beforeEach(() => {
+    mockSpawn.mockReset();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  test.each([0, 99, 60_001, 1.5, Number.NaN, -1])('rejects %p when the host is created, instead of clamping it', (value) => {
+    expect(() => macHost({ cancellationTimeoutMs: value })).toThrow(RangeError);
+  });
+
+  test.each([
+    ['macOS', macArtifact, undefined, undefined, 2000],
+    ['Windows', windowsArtifact, windowsGreeting, undefined, 10_000],
+    ['macOS with an explicit deadline', macArtifact, undefined, 300, 300],
+    ['Windows with an explicit deadline', windowsArtifact, windowsGreeting, 5000, 5000],
+  ])('kills a helper that ignores cancel after the %s deadline', async (_, artifact, greeting, cancellationTimeoutMs, expectedMs) => {
+    jest.useFakeTimers(realIo);
+    const { control, received } = scriptNativeHelperSession(mockSpawn, () => undefined, [], { greeting });
+    const host = new NativeDesktopHost({
+      application: { windowTitle: 'Test App' },
+      artifact,
+      cancellationTimeoutMs,
+      endpoint: artifact.endpoints[0] as 'macos' | 'windows',
+    });
+    const abort = new AbortController();
+
+    const probing = host.probe(abort.signal).catch((error: unknown) => error);
+    await settleIo();
+    expect(received).toHaveLength(1);
+    abort.abort();
+    await jest.advanceTimersByTimeAsync(expectedMs - 1);
+    await settleIo();
+    expect(control.signals).toEqual([]);
+    await jest.advanceTimersByTimeAsync(1);
+    await settleIo();
+    expect(control.signals).toEqual(['SIGTERM']);
+
+    await jest.advanceTimersByTimeAsync(1000);
+    expect(await probing).toMatchObject({ code: 'cancellation-timeout' });
+  });
+});
+
+describe('NativeDesktopHost lifecycle', () => {
+  beforeEach(() => {
+    mockSpawn.mockReset();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  test('disposes cleanly after a helper that failed to start', async () => {
+    scriptNativeHelperSession(mockSpawn, () => undefined, [], { greeting: () => Buffer.from('this is not a native helper frame') });
+    const host = macHost();
+
+    await expect(host.probe()).rejects.toThrow('invalid frame magic');
+
+    await expect(host.dispose()).resolves.toBeUndefined();
+  });
+
+  test('starts no helper once disposed, for a request or a subscription', async () => {
+    const host = macHost();
+    await host.dispose();
+
+    const failure = await host.probe().then(
+      () => undefined,
+      (error: unknown) => error,
+    );
+    const unsubscribe = host.subscribe(() => undefined);
+
+    expect(failure).toMatchObject({ code: 'host-closed' });
+    expect(readFailureEffect(failure)).toBe('none');
+    expect(() => unsubscribe()).not.toThrow();
+    expect(mockSpawn).not.toHaveBeenCalled();
+  });
+
+  test('kills a helper that is still starting when the host is disposed', async () => {
+    const { control } = scriptNativeHelperSession(mockSpawn, () => undefined, [], { greeting: () => undefined });
+    const host = macHost();
+
+    const probing = host.probe().catch((error: unknown) => error);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    await expect(host.dispose()).resolves.toBeUndefined();
+
+    expect(await probing).toMatchObject({ name: 'AbortError' });
+    expect(control.signals).toEqual(['SIGTERM']);
+  });
+
+  test('stops one caller waiting for startup without stopping the helper', async () => {
+    const { control } = scriptNativeHelperSession(mockSpawn, () => undefined, [], { greeting: () => undefined });
+    const host = macHost();
+    const abort = new AbortController();
+
+    const probing = host.probe(abort.signal).then(
+      () => undefined,
+      (error: unknown) => error,
+    );
+    abort.abort();
+    const failure = await probing;
+
+    expect(failure).toMatchObject({ name: 'AbortError' });
+    expect(readFailureEffect(failure)).toBe('none');
+    expect(control.signals).toEqual([]);
+    await host.dispose();
+  });
+
+  test('delivers helper events to subscribers, including one that arrives with the hello', async () => {
+    scriptNativeHelperSession(mockSpawn, () => undefined, [], {
+      greeting: (hello) => Buffer.concat([hello, encodeJsonFrame({ event: 'window-opened', payload: { windowId: 'w1' }, type: 'event' })]),
+    });
+    const host = macHost();
+    const events: DesktopHostEvent[] = [];
+    host.subscribe((event) => events.push(event));
+
+    await new Promise<void>((resolve) => setTimeout(resolve, 20));
+
+    expect(events).toEqual([{ type: 'window-opened', windowId: 'w1' }]);
+    await host.dispose();
+    host.subscribe(() => undefined);
+    expect(mockSpawn).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('NativeDesktopHost input recovery', () => {
+  const pressKeyA = [{ actions: [{ type: 'keyDown' as const, value: 'a' }], id: 'keys', type: 'key' as const }];
+
+  beforeEach(() => {
+    mockSpawn.mockReset();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  test('releases pressed input in its own process group before the failing command is rejected', async () => {
+    scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1), [], {});
+    const release = scriptReleaseInput();
+    const host = macHost();
+    const order: string[] = [];
+
+    await host.performActions(pressKeyA).catch(() => order.push('reject'));
+
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: ['a'] });
+    expect(mockSpawn).toHaveBeenNthCalledWith(2, 'driver', ['--release-input'], nativeHelperSpawnOptions());
+    expect(order).toEqual(['reject']);
+  });
+
+  test('keeps only a bounded amount of a failed recovery’s stderr', async () => {
+    scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1), [], {});
+    scriptReleaseInput({ code: 1, stderr: 'x'.repeat(1024 * 1024) });
+    const host = macHost();
+
+    const failure = await host.performActions(pressKeyA).then(
+      () => undefined,
+      (error: unknown) => error,
+    );
+
+    const recovery = (failure as AggregateError).errors.find(
+      (error: Error) => (error as { code?: string }).code === 'input-recovery-failed',
+    );
+    expect(recovery.message.length).toBe(16 * 1024);
+  });
+
+  test('does not wait on a grandchild that holds the recovery process’s pipes', async () => {
+    jest.useFakeTimers(realIo);
+    scriptNativeHelperSession(mockSpawn, (_, __, control) => control.exit(1), [], {});
+    scriptReleaseInput({ hold: true });
+    const host = macHost();
+
+    let settled = false;
+    const performing = host
+      .performActions(pressKeyA)
+      .catch(() => undefined)
+      .then(() => {
+        settled = true;
+      });
+    await settleIo();
+    await jest.advanceTimersByTimeAsync(499);
+    await settleIo();
+    expect(settled).toBe(false);
+    await jest.advanceTimersByTimeAsync(2);
+    await settleIo();
+    await jest.advanceTimersByTimeAsync(1000);
+    await performing;
+
+    expect(settled).toBe(true);
+  });
+});
