@@ -64,14 +64,14 @@ did not retain a portable raw-report locator; do not imply otherwise.
 
 ## Full-submission checklist
 
-| Area            | Remaining evidence/work                                                                                                                                                                                                            |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                            |
-| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C and the idle `serve --agent` after interrupt; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim. |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                                                                                                |
-| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim.                                                                                  |
-| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                              |
-| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                            |
+| Area            | Remaining evidence/work                                                                                                                                                                                                                         |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                                         |
+| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent` after the idle-CLI fix; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim. |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                                                                                                             |
+| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim.                                                                                               |
+| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                           |
+| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                         |
 
 Tracking: live macOS, Windows, and Win32 requalification
 [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441);
@@ -691,6 +691,15 @@ process stayed idle without exiting. Each time, the exact owner was ended
 only after that proof, and then its stale claim was removed. The physical
 console Ctrl+C case is otherwise out of scope for this pass.
 
+The idle CLI had one cause on every platform: the CLI tracked the Storybook
+integration's run in the service scope it lent to that run, and the run closed
+the scope, so closing waited on itself. On macOS, a Storybook-integration
+`serve` was still running 90 seconds after SIGINT, with its claim `active`.
+Integrations now leave the borrowed scope to the CLI, the CLI waits for the run
+outside the scope with a bound, and scope draining is bounded. With that fix the
+same macOS `serve` exits promptly after SIGINT and leaves no owned process or
+claim. A physical console Ctrl+C on Windows and Win32 still needs requalification.
+
 **Reconciled claims.** Every stale or fenced claim in this pass was removed
 by hand only after its owner was proved dead and its resources were proved
 settled, or after the fenced launch probe's survivor was ended. Nothing
@@ -741,4 +750,5 @@ only after identity verification. Both deliberately stopped Win32 app runs,
 The standalone drivers were stopped by a session-local injected SIGTERM,
 not physical Ctrl+C. Both owned app/service processes exited, the recorded
 ports were free, and the per-user claim and default descriptor were absent.
-The separate `serve --agent` interrupt limitation above remains open.
+The separate `serve --agent` interrupt limitation above is fixed but not yet
+requalified on Windows.

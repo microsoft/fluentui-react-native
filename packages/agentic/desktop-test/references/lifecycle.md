@@ -17,7 +17,10 @@ reverse order; borrowed resources are recorded but never disposed.
 A launched application's lifetime is currently session-owned; attached
 applications have an external owner. Storybook still takes over the CLI lifecycle,
 with channel and embedded driver listeners in a child process. This exception is
-transitional, not a fully migrated resource graph. The intended boundary is one
+transitional, not a fully migrated resource graph. An integration's `run` borrows
+the supervisor's service scope: it observes the scope signal and must never close
+the scope, which the CLI closes after the run settles. Once a stop is requested,
+the CLI waits at most 60 seconds for the run before it closes the scope anyway. The intended boundary is one
 neutral `desktop-test` workload host with optional Storybook contributions, not
 a driver or MCP orchestrator.
 
@@ -39,29 +42,54 @@ Only `service-ready` is accepted; target acquisition, application readiness,
 and context readiness require separate verification.
 
 Cleanup drains worker reporting and stdio, closes sessions, releases owned
-input, and stops exact owned process trees in reverse service order. An
-externally owned app is preserved.
+input, and stops exact owned process trees. Services and resources are disposed
+together in reverse acquisition order. An externally owned app is preserved.
+
+Cancellation reaches running commands. Stage commands and WDIO suites receive
+the scope signal; when it aborts, the command's process tree is stopped and the
+command reports failed with "Stopped before it finished.", never passed. Services
+are stopped by close, in the same reverse order. On macOS and Linux each command
+leads its own process group, and stopping it signals the whole group, including
+descendants whose parent already exited: SIGTERM, then SIGKILL if the group
+outlives the shutdown timeout. A process that leaves the group, such as an app
+started through LaunchServices, needs its own owned resource. A command never
+starts after its signal has aborted, and a spawn that throws synchronously
+leaves no tracked process behind.
+
+Interrupts stay handled until cleanup completes. The first SIGINT, SIGTERM, or
+SIGHUP requests a graceful stop; the second force-kills owned process trees
+while cleanup continues; the third exits immediately with status 128 plus the
+signal number and leaves the claim for inspection. An interrupted one-shot run
+reports `incomplete`.
 
 Commands keep their arguments as separate values. Windows executable lookup and
 command-shim escaping use `cross-spawn`, without Node's deprecated
 `spawn` argument array plus `shell: true` combination.
 
 Interactive runs acquire a per-user `interactive.lock`; concurrent workloads
-fail closed. If a crash leaves a lock, inspect its recorded owner and verify
+fail closed. The claim lives in `~/Library/Caches/com.microsoft.fluentui-react-native.desktop-test/workload`
+on macOS, `%LOCALAPPDATA%\Microsoft\FluentUIReactNative\desktop-test\workload`
+on Windows, and `~/.cache/fluentui-react-native/desktop-test/workload` elsewhere,
+independent of `TMPDIR`, so every checkout contends for the same claim. Claim
+records are replaced atomically. If a crash leaves a lock, inspect its recorded owner and verify
 that process and its resources have stopped before removing that exact lock.
 There is no automatic stale-lock recovery.
 
 The supervisor registers each owned resource before acquisition starts. If
 cancellation wins while acquisition is in flight, shutdown waits for that work;
 a resource that arrives late is disposed before a successful shutdown settles.
-Guarded work is also drained before close completes. A failed or timed-out
-disposal remains unsettled and retains the claim.
+Guarded work is also drained before close completes, for at most the scope's
+`drainTimeoutMs` (60 seconds by default); work that is still running then is
+reported as a cleanup failure, and disposal proceeds. A resource observer that
+throws does not stop disposal; its failure is reported after cleanup. A failed or
+timed-out disposal remains unsettled and retains the claim.
 
 The versioned workload record stores a random owner ID, process ID and recorded
 start timestamp, run ID, registered target ID, physical target instance ID, and each
 resource's identity, generation, ownership, readiness, and disposal state.
 Unresolved effects fence the claim. Claim inspection distinguishes a live owner,
-an exited owner, an unknown probe, and a reused PID; inspection never reclaims a
+an exited owner, an unknown probe, and a reused PID, which is a live process whose
+start time differs from the recorded one by a second or more; inspection never reclaims a
 claim, and uncertain or unsettled resources prevent release. Reporting-session
 inheritance is separate from explicit workload-claim delegation.
 

@@ -89,7 +89,11 @@ cannot be combined with an explicit non-`auto` click mode. See
 
 The TypeScript API exposes the same operations through `DesktopStorybookCli`.
 Higher-level supervisors should inject their shared reporter, runner, and
-services so runs join one owned lifecycle.
+services so runs join one owned lifecycle. Injected services are borrowed: the
+CLI stops its work through the scope signal but never closes that scope, which
+stays with the supervisor that created it. A `DesktopStorybookCli` that creates
+its own scope closes it when the command ends. Stage commands receive the scope
+signal, so a stop or interrupt ends a running stage instead of waiting for it.
 
 JSON mode emits one compact command result, or one readiness record for the
 long-running `driver` and `server` commands. Their readiness records are

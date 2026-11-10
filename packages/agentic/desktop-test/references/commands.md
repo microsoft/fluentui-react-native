@@ -44,6 +44,13 @@ target served by an imported integration, `run` receives the output format,
 writes its own readiness document, and calls `onReady` once it has.
 Clients create sessions explicitly.
 
+Stop any command with Ctrl+C, SIGTERM, or SIGHUP. The first interrupt stops the
+running stage or suite and every owned service, and the command exits once
+cleanup completes, including a `serve` whose target is served by an imported
+integration. A second interrupt force-kills owned process trees; a third exits
+at once and may leave the workload claim behind. See
+[lifecycle](lifecycle.md#lifecycle-and-ownership).
+
 `serve --agent` makes the service require a grant on every route, issues one
 grant for the target, and publishes it with the service URL and the helper's
 description of this process as a private connection descriptor, which the
