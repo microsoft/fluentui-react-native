@@ -708,14 +708,14 @@ async function handleElementCommand(
   sessions: SessionManager,
 ): Promise<unknown> {
   const record = sessions.resolveElement(session, command[0]);
-  if (record.scope === 'preview' && method === 'POST' && ['click', 'clear', 'value'].includes(command[1])) {
+  const operation = command.slice(1);
+  if (record.scope === 'preview' && isElementMutation(method, operation)) {
     await assertStoryContext(session, sessions);
     sessions.resolveElement(session, command[0]);
   }
   const snapshot = await hostCommand(session, `Reading element "${record.id}"`, (signal) =>
     session.target.host.snapshot(record.nativeId, signal),
   );
-  const operation = command.slice(1);
 
   if (operation[0] === 'shadow') {
     throw new WebDriverError('unsupported operation', 'Shadow roots are not supported for native desktop applications.');
@@ -828,6 +828,14 @@ async function handleElementCommand(
   }
 
   throw new WebDriverError('unknown command', `Unknown element command "${operation.join('/')}".`);
+}
+
+/** Element commands that change the application, so a preview element may only receive them in the story it was found in. */
+function isElementMutation(method: string, operation: string[]): boolean {
+  if (method !== 'POST') {
+    return false;
+  }
+  return ['click', 'clear', 'value'].includes(operation[0]) || (operation[0] === 'furn' && operation[1] === 'accessibility-action');
 }
 
 /**

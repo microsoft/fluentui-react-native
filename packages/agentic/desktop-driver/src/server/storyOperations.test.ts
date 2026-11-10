@@ -40,7 +40,7 @@ type Fixture = { harness: DesktopDriverTestHarness; session: DesktopSessionClien
 async function withStories(body: (fixture: Fixture) => Promise<void>, options: FakeDesktopHostOptions = {}): Promise<void> {
   const harness = await createDesktopDriverStoryHarness(manifest, {
     ...options,
-    features: { accessibilityActions: true, boundedObservation: true },
+    features: { accessibilityActions: true, boundedObservation: true, ...options.features },
   });
   try {
     const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
@@ -158,6 +158,40 @@ describe('story operations', () => {
     );
   });
 
+  test('verifies a story from a popup window by finding the root in the window that owns it', async () => {
+    const rect = { x: 0, y: 0, width: 100, height: 100 };
+    await withStories(
+      async ({ harness, session }) => {
+        await session.switchToWindow('popup');
+        harness.server.sessions.get(session.id).desktopTimeouts.storyRender = 500;
+
+        const selected = (await session.story({ storyId: manifest.entries[0].id })).result;
+
+        expect(selected).toMatchObject({ disposition: 'applied', verification: 'marker' });
+        expect(harness.server.sessions.getQuarantine(harness.target.id)).toBeUndefined();
+        await expect(session.stories()).resolves.toMatchObject({
+          result: { current: { storyId: manifest.entries[0].id, verification: 'marker' } },
+        });
+      },
+      {
+        windows: [
+          {
+            id: 'main',
+            title: 'Main',
+            rect,
+            elements: [{ id: 'story-root', automationId: 'story-root', name: '{}', role: 'group', scope: 'preview', windowId: 'main', rect }],
+          },
+          {
+            id: 'popup',
+            title: 'Popup',
+            rect,
+            elements: [{ id: 'item', automationId: 'item', role: 'button', scope: 'secondary-window', windowId: 'popup', rect }],
+          },
+        ],
+      },
+    );
+  });
+
   test('W3C element-origin actions cannot bypass preview epoch validation', async () => {
     await withStories(async ({ harness, session }) => {
       await session.story({ storyId: manifest.entries[0].id });
@@ -174,6 +208,21 @@ describe('story operations', () => {
         ]),
       ).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
     });
+  });
+
+  test('a named accessibility action on a preview element is fenced like click, clear and value', async () => {
+    await withStories(
+      async ({ harness, session }) => {
+        await session.story({ storyId: manifest.entries[0].id });
+        const preview = await session.findElement('accessibility id', 'button-primary');
+        harness.host.setElementActions('button', ['Increment']);
+        harness.storyOrchestrator!.getCurrentStory = async () => null;
+
+        await expect(preview.performAccessibilityAction('Increment')).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
+        expect(harness.host.actions.some(({ type }) => type === 'accessibility-action')).toBe(false);
+      },
+      { features: { performAccessibilityAction: true } },
+    );
   });
 
   test('passes local session lifetime and deadline signal separately from serialized selection inputs', async () => {
