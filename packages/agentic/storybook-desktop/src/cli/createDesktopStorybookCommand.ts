@@ -1,4 +1,4 @@
-import { Command, Option } from 'commander';
+import { Command, InvalidArgumentError, Option } from 'commander';
 import path from 'node:path';
 import { claimDesktopWorkload, DesktopServiceScope, DesktopStopRequested } from '@fluentui-react-native/desktop-test';
 import {
@@ -136,7 +136,7 @@ function addTestCommand(program: Command, getApi: GetApi): void {
   addPlatformOptions(command);
   command.action(async (flags: PlatformFlags & DesktopStorybookTestOptions) => {
     if (flags.input !== undefined && flags.clickMode !== undefined) {
-      throw new TypeError('--input cannot be combined with --click-mode.');
+      throw new InvalidArgumentError('--input cannot be combined with --click-mode.');
     }
     const api = await getApi(flags);
     await api.test(resolvePlatform(flags, api), {
@@ -189,7 +189,7 @@ function addDriverCommand(program: Command, getApi: GetApi): void {
   addPlatformOptions(command);
   command.action(async (flags: DriverFlags) => {
     if (!flags.agent && (flags.descriptor !== undefined || flags.root !== undefined)) {
-      throw new TypeError('--descriptor and --root require --agent.');
+      throw new InvalidArgumentError('--descriptor and --root require --agent.');
     }
     const api = await getApi(flags);
     await api.driver(resolvePlatform(flags, api), {
@@ -417,7 +417,7 @@ function addSmokeCommand(program: Command, getApi: GetApi): void {
   addPlatformOptions(command);
   command.action(async (flags: SmokeFlags) => {
     if (flags.input !== undefined && flags.mode !== 'stories-and-tests') {
-      throw new TypeError('--input requires --mode stories-and-tests.');
+      throw new InvalidArgumentError('--input requires --mode stories-and-tests.');
     }
     const api = await getApi(flags);
     await api.smoke(resolvePlatform(flags, api), { mode: flags.mode, input: flags.input });
@@ -475,7 +475,7 @@ function resolvePlatform(flags: PlatformFlags, api: DesktopStorybookCli): Platfo
 function parsePort(value: string): number {
   const port = Number(value);
   if (!Number.isInteger(port) || port < 1 || port > 65535) {
-    throw new TypeError(`Server port must be an integer between 1 and 65535. Received "${value}".`);
+    throw new InvalidArgumentError(`Server port must be an integer between 1 and 65535. Received "${value}".`);
   }
   return port;
 }

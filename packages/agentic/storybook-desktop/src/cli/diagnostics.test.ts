@@ -87,9 +87,14 @@ describe('pipeline failure diagnostics', () => {
   });
 
   test.each([
-    ['usage', ['test', '--macos', '--reporter', 'json', '--unknown']],
-    ['config', ['--reporter', 'json', '--config', 'missing-storybook.config.mjs', 'manifest', '--macos']],
-  ])('emits one structured %s error without stderr', async (_kind, args) => {
+    { label: 'unknown test option', kind: 'usage', args: ['test', '--macos', '--reporter', 'json', '--unknown'] },
+    { label: 'subcommand option value', kind: 'usage', args: ['--reporter', 'ndjson', 'server', '--port', 'abc'] },
+    {
+      label: 'config file',
+      kind: 'config',
+      args: ['--reporter', 'json', '--config', 'missing-storybook.config.mjs', 'manifest', '--macos'],
+    },
+  ])('emits one structured $kind error without stderr for $label', async ({ kind, args }) => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-cli-structured-error-'));
     try {
       const response = await new Promise<{ code: number | null; stdout: string; stderr: string }>((resolve, reject) => {
@@ -111,7 +116,7 @@ describe('pipeline failure diagnostics', () => {
       expect(JSON.parse(response.stdout)).toMatchObject({
         schemaVersion: 1,
         type: 'error',
-        error: { code: _kind },
+        error: { code: kind },
       });
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
