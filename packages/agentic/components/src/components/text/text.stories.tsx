@@ -71,20 +71,34 @@ export const NativeSemantics: Story = {
   render: () => <NativeSemanticsScene />,
   wdio: [
     desktopIt('TXT-003 forwards an explicit readable native name under a constrained width', async ({ browser, expect, platform }) => {
-      const text = await browser.$('~text-native-heading');
-      await expect(text).toExist();
-      expect(await text.getProperty('name')).toBe('Account settings');
-      let bounds = await browser.getElementRect(await text.elementId);
-      if (platform === 'macos') {
-        // Fabric's macOS AX text frame can be empty; measure the actual native Text layout.
-        const status = await browser.$('~text-native-layout');
-        await browser.waitUntil(async () => (await status.getText()).startsWith('{'));
-        const layout: LayoutRectangle = JSON.parse(await status.getText());
-        bounds = layout;
+      const originalWindow = await browser.getWindowRect();
+      try {
+        // The small native startup window can leave no preview height above the addons panel.
+        await browser.setWindowRect(0, 0, Math.max(originalWindow.width, 1024), Math.max(originalWindow.height, 768));
+        const text = await browser.$('~text-native-heading');
+        await expect(text).toExist();
+        expect(await text.getProperty('name')).toBe('Account settings');
+        let bounds = await browser.getElementRect(await text.elementId);
+        if (platform === 'macos') {
+          const status = await browser.$('~text-native-layout');
+          await browser.waitUntil(
+            async () => {
+              const value = await status.getText();
+              if (!value.startsWith('{')) return false;
+              const layout: LayoutRectangle = JSON.parse(value);
+              return layout.height > 0;
+            },
+            { timeoutMsg: 'Expected Text to have positive native layout height after resizing the preview window.' },
+          );
+          const layout: LayoutRectangle = JSON.parse(await status.getText());
+          bounds = layout;
+        }
+        expect(bounds.width).toBeGreaterThan(0);
+        expect(bounds.width).toBeLessThanOrEqual(181);
+        expect(bounds.height).toBeGreaterThan(0);
+      } finally {
+        await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
       }
-      expect(bounds.width).toBeGreaterThan(0);
-      expect(bounds.width).toBeLessThanOrEqual(181);
-      expect(bounds.height).toBeGreaterThan(0);
     }),
   ],
 };
