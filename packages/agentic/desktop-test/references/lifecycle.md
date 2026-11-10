@@ -52,9 +52,16 @@ are stopped by close, in the same reverse order. On macOS and Linux each command
 leads its own process group, and stopping it signals the whole group, including
 descendants whose parent already exited: SIGTERM, then SIGKILL if the group
 outlives the shutdown timeout. A process that leaves the group, such as an app
-started through LaunchServices, needs its own owned resource. A command never
-starts after its signal has aborted, and a spawn that throws synchronously
-leaves no tracked process behind.
+started through LaunchServices, needs its own owned resource. On Windows,
+`taskkill /T /F` stops the tree only while the command's exit is unrecorded,
+and runs synchronously: Windows reuses a process ID only after every handle to
+the process closes, and Node closes its handle while processing the exit on the
+same event loop, so the ID cannot name another process. A failed `taskkill` is
+judged by the recorded exit, never by probing the ID. This is not containment:
+`/T` follows parent process IDs, so a descendant whose parent already exited
+escapes until Job Object containment exists. A command never starts after its
+signal has aborted, and a spawn that throws synchronously leaves no tracked
+process behind.
 
 Interrupts stay handled until cleanup completes. The first SIGINT, SIGTERM, or
 SIGHUP requests a graceful stop; the second force-kills owned process trees

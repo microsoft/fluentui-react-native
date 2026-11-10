@@ -1,3 +1,5 @@
+import { spawnSync } from 'node:child_process';
+import type { SpawnSyncReturns } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -5,6 +7,11 @@ import path from 'node:path';
 import { deadline, NodeDesktopCommandRunner } from './commands.js';
 import type { PreparedDesktopCommand } from './commands.js';
 import { DesktopRunReporter } from './reporting/collector.js';
+
+jest.mock('node:child_process', () => {
+  const actual = jest.requireActual<typeof import('node:child_process')>('node:child_process');
+  return { ...actual, spawnSync: jest.fn(actual.spawnSync) };
+});
 
 const quiet = { write: () => true };
 jest.setTimeout(30_000);
@@ -124,6 +131,88 @@ describe('desktop command cancellation and failure', () => {
       'Force-stopping the fixture',
     );
     await running.stop({ failed: true });
+  });
+
+  describe('on Windows', () => {
+    // Emulated: the POSIX fixture starts normally, then stops through the Windows path against a mocked taskkill.
+    let restorePlatform: (() => void) | undefined;
+    const taskkill = jest.mocked(spawnSync);
+    const taskkillCalls = () => taskkill.mock.calls.filter(([command]) => command === 'taskkill.exe');
+    const emulateWindows = () => {
+      const descriptor = Object.getOwnPropertyDescriptor(process, 'platform')!;
+      Object.defineProperty(process, 'platform', { ...descriptor, value: 'win32' });
+      restorePlatform = () => Object.defineProperty(process, 'platform', descriptor);
+    };
+    const respond = (status: number, stderr = ''): SpawnSyncReturns<string> =>
+      ({ pid: 0, output: [], stdout: '', stderr, status, signal: null }) as SpawnSyncReturns<string>;
+    const worker = (source: string, ...values: string[]) => runner.start({ ...node(source, ...values), category: 'worker' });
+    const leader = async () => {
+      const marker = path.join(root, 'leader.pid');
+      const running = worker(
+        "require('node:fs').writeFileSync(process.argv[1], String(process.pid)); setInterval(() => {}, 1000);",
+        marker,
+      );
+      await waitUntil(() => fs.existsSync(marker) && fs.readFileSync(marker, 'utf8').length > 0);
+      return { running, pid: Number(fs.readFileSync(marker, 'utf8')) };
+    };
+    afterEach(() => {
+      restorePlatform?.();
+      restorePlatform = undefined;
+      taskkill.mockReset().mockImplementation(jest.requireActual<typeof import('node:child_process')>('node:child_process').spawnSync);
+    });
+
+    test('never addresses a process ID after the leader exit is recorded, even while a descendant holds its output open', async () => {
+      const marker = path.join(root, 'pids.json');
+      const running = worker(
+        "const { spawn } = require('node:child_process');" +
+          "const grandchild = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], { stdio: 'inherit' });" +
+          'grandchild.unref();' +
+          "require('node:fs').writeFileSync(process.argv[1], JSON.stringify([process.pid, grandchild.pid]));",
+        marker,
+      );
+      await waitUntil(() => fs.existsSync(marker) && fs.readFileSync(marker, 'utf8').length > 0);
+      const [leaderPid, grandchildPid] = JSON.parse(fs.readFileSync(marker, 'utf8')) as [number, number];
+      try {
+        // Once the leader is reaped, its exit is recorded while the grandchild still holds the output pipes open.
+        await waitUntil(() => !alive(leaderPid));
+        emulateWindows();
+        runner.terminate();
+        await running.stop({ failed: true }).catch(() => undefined);
+        expect(taskkillCalls()).toEqual([]);
+      } finally {
+        restorePlatform?.();
+        if (alive(grandchildPid)) process.kill(grandchildPid, 'SIGKILL');
+      }
+    });
+
+    test('resolves the leader before this loop can record its exit, and trusts that record over a failed taskkill', async () => {
+      const { running, pid } = await leader();
+      emulateWindows();
+      // The leader exits just before taskkill resolves it, so taskkill reports that it found nothing.
+      taskkill.mockImplementation(((command: string) => {
+        if (command !== 'taskkill.exe') throw new Error(`Unexpected synchronous spawn: ${command}`);
+        if (alive(pid)) process.kill(pid, 'SIGKILL');
+        return respond(128, 'ERROR: The process was not found.');
+      }) as unknown as typeof spawnSync);
+      runner.terminate();
+      // Synchronous: the exit could not have been recorded, so the process ID was still bound to the owned leader.
+      expect(taskkillCalls()).toEqual([
+        ['taskkill.exe', ['/PID', String(pid), '/T', '/F'], expect.objectContaining({ windowsHide: true })],
+      ]);
+      await running.stop({ failed: true });
+    });
+
+    test('a failed taskkill for a leader that keeps running fails the stop with its diagnostic', async () => {
+      const { running, pid } = await leader();
+      emulateWindows();
+      taskkill.mockImplementation((() => respond(1, 'ERROR: Access is denied.')) as unknown as typeof spawnSync);
+      try {
+        await expect(running.stop()).rejects.toThrow(`Could not stop owned process tree ${pid}: ERROR: Access is denied.`);
+      } finally {
+        restorePlatform?.();
+        process.kill(-pid, 'SIGKILL');
+      }
+    });
   });
 });
 

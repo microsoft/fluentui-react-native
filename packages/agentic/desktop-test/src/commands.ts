@@ -1,4 +1,4 @@
-import { spawn as spawnNative } from 'node:child_process';
+import { spawn as spawnNative, spawnSync } from 'node:child_process';
 import spawn from 'cross-spawn';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -390,32 +390,15 @@ function needsWindowsCommandShim(command: string): boolean {
 
 async function stopProcessTree(pid: number, completed: Promise<unknown>, timeoutMs: number): Promise<void> {
   if (process.platform === 'win32') {
-    const killer = spawnNative('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
-    let diagnostic = '';
-    killer.stdout.on('data', (data: Buffer) => {
-      diagnostic += data.toString();
-    });
-    killer.stderr.on('data', (data: Buffer) => {
-      diagnostic += data.toString();
-    });
-    const code = await deadline(
-      new Promise<number | null>((resolve, reject) => {
-        killer.once('error', reject);
-        killer.once('close', resolve);
-      }),
-      timeoutMs,
-      `Stopping owned process tree ${pid}`,
-    );
-    if (code !== 0) {
-      try {
-        process.kill(pid, 0);
-      } catch (error) {
-        if (isMissingProcess(error)) return;
-        throw error;
-      }
-      throw new Error(`Could not stop owned process tree ${pid}: ${diagnostic}`);
+    const { status, diagnostic } = killWindowsProcessTree(pid, timeoutMs);
+    // A failed taskkill usually means the leader exited before taskkill resolved it. The recorded completion decides,
+    // never a probe of a process ID that may since have been reused.
+    try {
+      await deadline(completed, timeoutMs, `Waiting for owned process tree ${pid}`);
+    } catch (error) {
+      if (status !== 0) throw new Error(`Could not stop owned process tree ${pid}: ${diagnostic}`, { cause: error });
+      throw error;
     }
-    await deadline(completed, timeoutMs, `Waiting for owned process tree ${pid}`);
     return;
   }
   // The group is gone only when its leader was reaped and no descendant remains in it.
@@ -434,8 +417,11 @@ async function stopProcessTree(pid: number, completed: Promise<unknown>, timeout
 
 function forceStopProcessTree(pid: number): void {
   if (process.platform === 'win32') {
-    const killer = spawnNative('taskkill.exe', ['/PID', String(pid), '/T', '/F'], { stdio: 'ignore', windowsHide: true });
-    killer.once('error', () => undefined);
+    try {
+      killWindowsProcessTree(pid, 10_000);
+    } catch {
+      // The owner's graceful stop reports a tree it cannot stop.
+    }
     return;
   }
   try {
@@ -443,6 +429,24 @@ function forceStopProcessTree(pid: number): void {
   } catch {
     // The owner's graceful stop reports a group it cannot signal.
   }
+}
+
+/**
+ * Callers address a Windows tree only before its leader's exit is recorded. Windows reuses a process ID only after every
+ * handle to the process closes, and Node closes its child handle while processing the exit on this event loop, so a
+ * synchronous taskkill keeps the ID bound to the owned leader, even one that has just exited, until taskkill resolves it.
+ * This is not containment: taskkill /T finds descendants only through parent process IDs, so a descendant whose parent
+ * already exited escapes. Only a Job Object would contain it.
+ */
+function killWindowsProcessTree(pid: number, timeoutMs: number): { status: number | null; diagnostic: string } {
+  const result = spawnSync('taskkill.exe', ['/PID', String(pid), '/T', '/F'], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: timeoutMs,
+    windowsHide: true,
+  });
+  if (result.error) throw result.error;
+  return { status: result.status, diagnostic: `${result.stdout}${result.stderr}`.trim() };
 }
 
 function signalProcessGroup(pid: number, signal: NodeJS.Signals): boolean {
