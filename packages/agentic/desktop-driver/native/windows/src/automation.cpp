@@ -20,6 +20,10 @@ constexpr std::size_t kMaximumAncestorWalk = 64;
 // bounded step that reports an explicit failure instead of wedging the helper;
 // a mutation that cannot settle also quarantines later mutations (settlement.h).
 constexpr DWORD kProviderCallTimeoutMs = 5000;
+// The UI Automation client's own bounds on reaching a provider and on one
+// cross-process transaction.
+constexpr DWORD kConnectionTimeoutMs = 2000;
+constexpr DWORD kTransactionTimeoutMs = 5000;
 constexpr char kTreeTooLargeMessage[] = "The native accessibility tree exceeds the 5000-node limit.";
 
 struct ActionMapping {
@@ -121,6 +125,23 @@ template <typename Fn>
 HRESULT BoundedRead(Fn&& call, std::string_view operation) {
   return RunBoundedProviderCall(ProviderCall::Read, std::function<HRESULT()>(std::forward<Fn>(call)),
                                 kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
+}
+
+// A whole-subtree cache is one provider transaction that a busy application can
+// hold for the full transaction timeout, so it runs on a bounded worker that a
+// cancelled command stops waiting for. The bound only backs up the client's
+// own timeouts, which still decide how a slow provider fails.
+HRESULT BuildCacheAbandonably(IUIAutomationElement* element, const winrt::com_ptr<IUIAutomationCacheRequest>& request,
+                              winrt::com_ptr<IUIAutomationElement>& cached) {
+  winrt::com_ptr<IUIAutomationElement> source;
+  source.copy_from(element);
+  const auto output = std::make_shared<winrt::com_ptr<IUIAutomationElement>>();
+  const HRESULT result = RunBoundedProviderCall(
+      ProviderCall::Read, [source, request, output]() { return source->BuildUpdatedCache(request.get(), output->put()); },
+      kConnectionTimeoutMs + kTransactionTimeoutMs + 1000, "Reading the cached automation subtree",
+      kErrorAutomationFailed);
+  cached = *output;
+  return result;
 }
 
 // UI Automation reports a disabled element, such as a control of an owner window
@@ -398,8 +419,8 @@ void Automation::Initialize() {
   if (SUCCEEDED(automation->QueryInterface(IID_PPV_ARGS(automation2.put())))) {
     // Bound every cross-process transaction so a hung provider cannot stall the
     // command worker indefinitely.
-    automation2->put_ConnectionTimeout(2000);
-    automation2->put_TransactionTimeout(5000);
+    automation2->put_ConnectionTimeout(kConnectionTimeoutMs);
+    automation2->put_TransactionTimeout(kTransactionTimeoutMs);
   }
 
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation control view",
@@ -760,8 +781,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   };
 
   winrt::com_ptr<IUIAutomationElement> cachedRoot;
-  HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
-                                           cachedRoot.put());
+  HRESULT result = BuildCacheAbandonably(root, CreateCacheRequest(TreeScope_Subtree, controlViewOnly), cachedRoot);
   // The whole-subtree cache is one provider transaction, so a tree past the node limit can outlast the transaction
   // timeout before the walk below gets to refuse it. Count such a tree child by child so it is still refused as too
   // large rather than reported as a provider failure or retried.
@@ -777,13 +797,11 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   };
   for (int attempt = 0; isTransient(result) && attempt < 5; attempt += 1) {
     winrt::com_ptr<IUIAutomationElement> probe;
-    if (FAILED(root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, controlViewOnly).get(), probe.put())) ||
-        !probe) {
+    if (FAILED(BuildCacheAbandonably(root, CreateCacheRequest(TreeScope_Element, controlViewOnly), probe)) || !probe) {
       break;
     }
     token.Wait(20);
-    cachedRoot = nullptr;
-    result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(), cachedRoot.put());
+    result = BuildCacheAbandonably(root, CreateCacheRequest(TreeScope_Subtree, controlViewOnly), cachedRoot);
   }
   if (result == UIA_E_ELEMENTNOTAVAILABLE) {
     Fail(kErrorStaleElement, "The native element is no longer available.");

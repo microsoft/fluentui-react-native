@@ -490,6 +490,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
   const bool tracked = IsTrackedMutation(command);
   effects_.Reset();
   const EffectScope effectScope(effects_);
+  const CancellationScope cancellationScope(token);
   // A provider deadline that passed is always unknown, whatever the ledger
   // recorded before it.
   const auto effectOf = [this](const std::string& code) {

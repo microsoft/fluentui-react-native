@@ -48,7 +48,11 @@ namespace {
 constexpr unsigned int kLaunchTimeoutMs = 90000;
 constexpr unsigned int kLaunchGraceMs = 15000;
 constexpr unsigned int kCloseTimeoutMs = 5000;
+constexpr unsigned int kTerminateWaitMs = 2000;
 constexpr unsigned int kActivationTimeoutMs = 2000;
+constexpr unsigned int kWindowResponseTimeoutMs = 2000;
+constexpr UINT kWindowProbeMessageTimeoutMs = 200;
+constexpr unsigned int kWindowRestoreTimeoutMs = 500;
 constexpr DWORD kLaunchCleanupGraceMs = 250;
 constexpr DWORD kLaunchCleanupForcedMs = 1000;
 constexpr unsigned int kDisposeGraceMs = 3000;
@@ -1539,7 +1543,14 @@ void ApplicationManager::CloseApplication(const std::string& leaseId, const Canc
       if (TerminateProcess(lease.process, 0) == FALSE && IsProcessAlive(lease.process)) {
         FailLastError(kErrorCleanupFailed, "Terminating the owned application process", GetLastError());
       }
-      const DWORD waited = WaitForSingleObject(lease.process, 2000);
+      // Waits in slices so a cancelled close is acknowledged promptly and the
+      // lease stays for a retry.
+      const Deadline terminated(kTerminateWaitMs);
+      DWORD waited = WaitForSingleObject(lease.process, 0);
+      while (waited == WAIT_TIMEOUT && !terminated.Expired()) {
+        token.Wait(50);
+        waited = WaitForSingleObject(lease.process, 0);
+      }
       if (waited == WAIT_FAILED && IsProcessAlive(lease.process)) {
         FailLastError(kErrorCleanupFailed, "Waiting for the owned application process", GetLastError());
       }

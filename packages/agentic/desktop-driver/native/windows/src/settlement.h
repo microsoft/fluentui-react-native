@@ -25,9 +25,28 @@ enum class ProviderCall { Read, Mutation };
 // (UI Automation or RPC timeout), fails with `mutation-indeterminate` and
 // quarantines the session; a timeout reported by a read is an ordinary
 // failure. A mutation requested while quarantined fails with
-// `target-quarantined` before the provider is called.
+// `target-quarantined` before the provider is called. The wait observes the
+// token of the active CancellationScope in short slices: a cancelled read is
+// abandoned, and a cancelled mutation is abandoned and quarantined like one
+// that timed out, leaving the command's effect unknown; both throw
+// CancelledError.
 HRESULT RunBoundedProviderCall(ProviderCall kind, std::function<HRESULT()> call, DWORD timeoutMs,
                                std::string_view operation, const std::string& timeoutCode);
+
+// Names the cancellation token of the command running on this thread, so
+// bounded provider calls stop waiting once it is cancelled. Without an active
+// scope they wait for their full bound. The previous scope returns when the
+// guard ends.
+class CancellationScope {
+ public:
+  explicit CancellationScope(const CancellationToken& token) noexcept;
+  ~CancellationScope();
+  CancellationScope(const CancellationScope&) = delete;
+  CancellationScope& operator=(const CancellationScope&) = delete;
+
+ private:
+  const CancellationToken* previous_;
+};
 
 // Fails with `target-quarantined` while an abandoned mutation exists. Call it
 // before any non-provider mutation, such as physical input or window changes.

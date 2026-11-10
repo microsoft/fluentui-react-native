@@ -2807,6 +2807,42 @@ void TestEffectLedger() {
     return Contains(refusal, "completed late");
   });
   ResetMutationQuarantineForTesting();
+
+  // A cancelled command stops waiting for a stalled provider call well before
+  // the call's own bound, and a mutation it abandons leaves the effect unknown.
+  CancellationToken cancelled;
+  cancelled.Cancel();
+  const auto cancelledCall = [&cancelled](ProviderCall kind, const std::shared_ptr<Gate>& stalled,
+                                          EffectLedger& ledger) {
+    const CancellationScope cancellationScope(cancelled);
+    const EffectScope effectScope(ledger);
+    const ULONGLONG started = GetTickCount64();
+    std::string outcome = "none";
+    try {
+      RunBoundedProviderCall(kind, [stalled]() { return stalled->Hold(); }, 5000, "Testing the provider",
+                             kErrorAutomationFailed);
+    } catch (const CancelledError&) {
+      outcome = "cancelled";
+    } catch (const HelperError& error) {
+      outcome = error.code();
+    }
+    return GetTickCount64() - started < 1000 ? outcome : outcome + " late";
+  };
+  EffectLedger readLedger;
+  const auto stalledRead = std::make_shared<Gate>();
+  Check(cancelledCall(ProviderCall::Read, stalledRead, readLedger) == "cancelled" &&
+            readLedger.Effect() == MutationEffect::None && !MutationsQuarantined(),
+        "a cancelled command stops waiting for a stalled read without quarantining the session");
+  stalledRead->Open();
+  EffectLedger mutationLedger;
+  const auto stalledMutation = std::make_shared<Gate>();
+  Check(cancelledCall(ProviderCall::Mutation, stalledMutation, mutationLedger) == "cancelled" &&
+            mutationLedger.Effect() == MutationEffect::Unknown && MutationsQuarantined(),
+        "a cancelled command stops waiting for a stalled mutation, leaving its effect unknown and quarantined");
+  FailureCode([]() { RequireMutationsAllowed(); }, &refusal);
+  Check(Contains(refusal, "cancelled before it settled"), "the quarantine names the cancelled mutation");
+  stalledMutation->Open();
+  ResetMutationQuarantineForTesting();
 }
 
 // Every mutating command reports what it handed to the application when it
