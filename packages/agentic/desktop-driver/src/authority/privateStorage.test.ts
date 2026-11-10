@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { chmod, link, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, symlink, writeFile } from 'node:fs/promises';
+import { chmod, link, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, symlink, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -57,6 +57,39 @@ macosDescribe('owner-validated macOS private storage', () => {
     expect(results.filter(({ status }) => status === 'fulfilled')).toHaveLength(1);
     expect(['one', 'two']).toContain(await storage.read('record'));
     expect(await readdir(root)).toEqual(['record']);
+  });
+
+  test('round-trips a leading byte order mark instead of stripping it', async () => {
+    const storage = await createMacOSPrivateStorage(root);
+    await storage.publish('record', '\ufeff{"label":"agent"}');
+    expect(await storage.read('record')).toBe('\ufeff{"label":"agent"}');
+    expect(await storage.remove('record', '\ufeff{"label":"agent"}')).toBe(true);
+  });
+
+  test('never leaves a temporary link after publishing', async () => {
+    const storage = await createMacOSPrivateStorage(root);
+    await storage.publish('record', 'contents');
+    expect((await lstat(path.join(root, 'record'))).nlink).toBe(1);
+    expect(await readdir(root)).toEqual(['record']);
+  });
+
+  test('sweeps only stale publication links left by a crashed publisher when the storage opens', async () => {
+    const storage = await createMacOSPrivateStorage(root);
+    await storage.publish('record', 'contents');
+    const stale = path.join(root, '.publish-00000000-0000-4000-8000-000000000001');
+    const fresh = path.join(root, '.publish-00000000-0000-4000-8000-000000000002');
+    const unrelated = path.join(root, '.publish-not-a-uuid');
+    await link(path.join(root, 'record'), stale);
+    await writeFile(fresh, 'in flight', { mode: 0o600 });
+    await writeFile(unrelated, 'unrelated', { mode: 0o600 });
+    const old = new Date(Date.now() - 10 * 60_000);
+    await utimes(stale, old, old);
+    await utimes(unrelated, old, old);
+    await expect(storage.read('record')).rejects.toThrow();
+
+    const reopened = await createMacOSPrivateStorage(root);
+    expect(await reopened.read('record')).toBe('contents');
+    expect((await readdir(root)).sort()).toEqual(['.publish-00000000-0000-4000-8000-000000000002', '.publish-not-a-uuid', 'record']);
   });
 
   test('does not repair an unsafe root and revalidates root identity on every operation', async () => {

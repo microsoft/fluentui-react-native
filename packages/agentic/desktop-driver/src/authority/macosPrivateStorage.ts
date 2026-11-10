@@ -2,7 +2,7 @@ import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { constants } from 'node:fs';
 import type { Stats } from 'node:fs';
-import { link, lstat, mkdir, open, unlink } from 'node:fs/promises';
+import { link, lstat, mkdir, open, readdir, unlink } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -33,6 +33,7 @@ export async function createMacOSPrivateStorage(
     if (!hasCode(error, 'EEXIST')) throw unsafeStorage();
   }
   const identity = await validateRoot(root, uid);
+  await sweepStalePublications(root, uid);
 
   const checkRoot = async () => {
     await validateAncestors(path.dirname(root), uid);
@@ -67,7 +68,7 @@ export async function createMacOSPrivateStorage(
       validateFile(after, uid);
       if (length > privateRecordMaxBytes || length !== before.size || before.mtimeMs !== after.mtimeMs) throw unsafeStorage();
       await checkRoot();
-      return { contents: new TextDecoder('utf-8', { fatal: true }).decode(buffer.subarray(0, length)), identity: after };
+      return { contents: new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(buffer.subarray(0, length)), identity: after };
     } catch {
       throw unsafeStorage();
     } finally {
@@ -96,8 +97,12 @@ export async function createMacOSPrivateStorage(
       } catch {
         throw new Error('Private record publication failed; unsafe storage or an existing record cannot be replaced.');
       } finally {
-        await handle.close();
-        await unlink(temporary);
+        // Unlink at once: while both names exist the record has two links, and readers reject it.
+        try {
+          await unlink(temporary);
+        } finally {
+          await handle.close();
+        }
       }
     },
     async remove(name, expectedContents) {
@@ -111,6 +116,33 @@ export async function createMacOSPrivateStorage(
       return true;
     },
   };
+}
+
+const stalePublicationAgeMs = 60_000;
+
+/**
+ * A publisher that crashes between linking its record and unlinking its temporary file leaves the record with two
+ * links, which every reader rejects. Removing temporaries that no live publisher can still be using restores it.
+ */
+async function sweepStalePublications(root: string, uid: number): Promise<void> {
+  let names: string[];
+  try {
+    names = await readdir(root);
+  } catch {
+    return;
+  }
+  for (const name of names) {
+    if (!/^\.publish-[0-9a-f-]{36}$/.test(name)) continue;
+    const filename = path.join(root, name);
+    try {
+      const info = await lstat(filename);
+      if (info.isFile() && info.uid === uid && (info.mode & 0o7777) === 0o600 && Date.now() - info.mtimeMs > stalePublicationAgeMs) {
+        await unlink(filename);
+      }
+    } catch {
+      // Best effort: another process may have removed it first, and a leftover only affects its own record.
+    }
+  }
 }
 
 async function validateRoot(root: string, uid: number): Promise<Stats> {
