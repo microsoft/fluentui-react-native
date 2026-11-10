@@ -297,13 +297,26 @@ final class AccessibilityEngine {
     try validateLive(record)
     var settable: DarwinBoolean = false
     let settableError = AXUIElementIsAttributeSettable(record.element, kAXFocusedAttribute as CFString, &settable)
-    try throwAX(settableError, operation: "Checking element focusability")
+    if settableError == .attributeUnsupported || settableError == .noValue {
+      try fail(ErrorCode.notInteractable, "The element does not expose writable keyboard focus.")
+    }
+    try throwAX(
+      settableError,
+      operation: "Checking element focusability",
+      staleMessage: "Element \"\(elementID)\" is no longer available."
+    )
     guard settable.boolValue else {
       try fail(ErrorCode.notInteractable, "The element does not expose writable keyboard focus.")
     }
     let error = AXUIElementSetAttributeValue(record.element, kAXFocusedAttribute as CFString, kCFBooleanTrue)
-    if error == .invalidUIElement {
-      try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
+    // An element that refuses focus is not interactable. A target that cannot answer, a revoked permission, or a
+    // vanished element is a different failure, and calling it "not interactable" would hide that a retry can succeed.
+    if error == .invalidUIElement || error == .cannotComplete || error == .apiDisabled {
+      try throwAX(
+        error,
+        operation: "Focusing the element",
+        staleMessage: "Element \"\(elementID)\" is no longer available."
+      )
     }
     guard error == .success else {
       try fail(ErrorCode.notInteractable, "Focusing the element failed because \(describeAXError(error)).")
@@ -399,11 +412,17 @@ final class AccessibilityEngine {
         staleMessage: "Element \"\(elementID)\" is no longer available."
       )
     }
+    // Only an element that cannot take the write falls back to the keyboard. A target that cannot answer, a revoked
+    // permission, or a vanished element is not "no writable value", and a fallback would type into an unanswered app.
+    if settableError == .invalidUIElement || settableError == .cannotComplete || settableError == .apiDisabled {
+      try throwAX(
+        settableError,
+        operation: "Checking whether the element value can be set",
+        staleMessage: "Element \"\(elementID)\" is no longer available."
+      )
+    }
     if settableError == .attributeUnsupported || settableError == .noValue || !settable.boolValue {
       return false
-    }
-    if settableError == .invalidUIElement {
-      try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
     }
     guard settableError == .success else {
       return false
@@ -411,8 +430,12 @@ final class AccessibilityEngine {
     effects.dispatching()
     let error = AXUIElementSetAttributeValue(record.element, kAXValueAttribute as CFString, "" as CFString)
     effects.completed(error)
-    if error == .invalidUIElement {
-      try fail(ErrorCode.staleElement, "Element \"\(elementID)\" is no longer available.")
+    if error == .invalidUIElement || error == .cannotComplete || error == .apiDisabled {
+      try throwAX(
+        error,
+        operation: "Clearing the element value",
+        staleMessage: "Element \"\(elementID)\" is no longer available."
+      )
     }
     if strict {
       try throwAX(error, operation: "Clearing the element value")
@@ -533,9 +556,8 @@ final class AccessibilityEngine {
       guard visited < Self.maximumTreeNodes else {
         try fail(ErrorCode.treeTooLarge, "The native accessibility tree exceeds the 5000-node limit.")
       }
-      if visited % 64 == 0 {
-        try token.throwIfCancelled()
-      }
+      // Every element is a cancellation point: a read of one element can block for the target's full AX timeout.
+      try token.throwIfCancelled()
       visited += 1
 
       var scope = item.scope
@@ -567,7 +589,9 @@ final class AccessibilityEngine {
         childScope = .chrome
       }
 
-      let children = axElements(try copyOptionalAXAttribute(item.element, kAXChildrenAttribute))
+      // An element with no children attribute is a leaf, but one whose children fail to read is unreadable: treating it
+      // as a leaf would let `find` report an element it never saw as absent.
+      let children = axElements(try copyAXAttribute(item.element, kAXChildrenAttribute))
       for child in children.reversed() {
         pending.append(Pending(element: child, parentID: record.id, scope: childScope))
       }
@@ -649,7 +673,8 @@ final class AccessibilityEngine {
     windowFrame resolvedWindowFrame: CGRect? = nil
   ) throws -> ElementSnapshot {
     let element = record.element
-    let screenRect = try axOptionalFrame(element)
+    let readableFrame = try axReadableFrame(element)
+    let screenRect = readableFrame ?? .zero
     let windowFrame = try resolvedWindowFrame ?? window.currentFrame()
     let rect = CGRect(
       x: screenRect.minX - windowFrame.minX,
@@ -692,7 +717,7 @@ final class AccessibilityEngine {
       reason: "The element does not expose selected state."
     )
     let hidden = try optionalBool(element, attribute: "AXHidden")
-    let visible = SupportedBool.supported(hidden != true && screenRect.width > 0 && screenRect.height > 0)
+    let visible = visibleState(hidden: hidden, frame: readableFrame)
     let checked = checkedValue(role: role, value: valueObject)
 
     return ElementSnapshot(
@@ -924,9 +949,11 @@ final class AccessibilityEngine {
       Float(point.y),
       &element
     )
-    if error == .noValue || error == .cannotComplete {
+    if error == .noValue {
       return nil
     }
+    // A target that cannot answer is not the same as a point with nothing under it: `throwAX` reports it as
+    // `target-non-response` so the caller retries instead of concluding the point is empty.
     try throwAX(error, operation: "Hit testing the desktop")
     return element
   }

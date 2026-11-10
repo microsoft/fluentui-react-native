@@ -19,6 +19,71 @@ func matchingBackingScaleFactor(
   max(1, screens.first(where: { $0.displayID == displayID })?.scaleFactor ?? 1)
 }
 
+/// How far each edge of a ScreenCaptureKit window frame may sit from the tracked window's frame and still be the same
+/// window. Accessibility and the window server round differently, so this absorbs rounding but not a different window.
+let captureFrameTolerance: CGFloat = 2
+
+struct CaptureWindowCandidate: Equatable {
+  let frame: CGRect
+  let layer: Int
+  let title: String?
+}
+
+enum CaptureWindowSelection: Equatable {
+  /// An index into the candidates that were offered.
+  case selected(Int)
+  case noWindow
+  case uncorrelated
+  case ambiguous
+}
+
+/// Chooses the ScreenCaptureKit window that is the tracked window, or says why none can be trusted. Only ordinary
+/// windows (layer 0) qualify, a title match narrows the field when one exists, and the frame must agree with the
+/// tracked window's frame within `captureFrameTolerance` on every edge. Capturing the nearest window without that bound
+/// would hand back an unrelated window of the same application, such as a panel or a different document.
+func selectCaptureWindow(
+  candidates: [CaptureWindowCandidate],
+  title: String,
+  windowFrame: CGRect
+) -> CaptureWindowSelection {
+  let ordinary = candidates.enumerated().filter { $0.element.layer == 0 }
+  guard !ordinary.isEmpty else {
+    return .noWindow
+  }
+  let titled = title.isEmpty ? [] : ordinary.filter { $0.element.title == title }
+  let pool = titled.isEmpty ? ordinary : titled
+  let correlated = pool
+    .filter { frameEdgeDelta($0.element.frame, windowFrame) <= captureFrameTolerance }
+    .sorted { frameDistance($0.element.frame, windowFrame) < frameDistance($1.element.frame, windowFrame) }
+  guard let best = correlated.first else {
+    return .uncorrelated
+  }
+  if correlated.count > 1
+    && abs(
+      frameDistance(correlated[0].element.frame, windowFrame) - frameDistance(correlated[1].element.frame, windowFrame)
+    ) < 0.5
+  {
+    return .ambiguous
+  }
+  return .selected(best.offset)
+}
+
+private func frameEdgeDelta(_ left: CGRect, _ right: CGRect) -> CGFloat {
+  max(
+    abs(left.minX - right.minX),
+    abs(left.minY - right.minY),
+    abs(left.maxX - right.maxX),
+    abs(left.maxY - right.maxY)
+  )
+}
+
+private func frameDistance(_ left: CGRect, _ right: CGRect) -> CGFloat {
+  abs(left.minX - right.minX)
+    + abs(left.minY - right.minY)
+    + abs(left.width - right.width)
+    + abs(left.height - right.height)
+}
+
 private final class ShareableContentBox: @unchecked Sendable {
   let lock = NSLock()
   var content: SCShareableContent?
@@ -33,10 +98,7 @@ private final class ScreenshotBox: @unchecked Sendable {
 
 final class CaptureEngine {
   var available: Bool {
-    if #available(macOS 14.0, *) {
-      return CGPreflightScreenCaptureAccess()
-    }
-    return false
+    CGPreflightScreenCaptureAccess()
   }
 
   func captureWindow(
@@ -81,9 +143,6 @@ final class CaptureEngine {
     token: CancellationToken
   ) throws -> EncodedImage {
     guard available else {
-      try fail(ErrorCode.unsupported, "SCScreenshotManager is unavailable on this version of macOS.")
-    }
-    guard CGPreflightScreenCaptureAccess() else {
       try fail(
         ErrorCode.captureFailed,
         "Screen Recording permission is required. Enable Furn Desktop Driver Host in System Settings > Privacy & Security > Screen & System Audio Recording, then restart the helper."
@@ -94,41 +153,44 @@ final class CaptureEngine {
     let processCandidates = content.windows.filter { candidate in
       candidate.owningApplication?.processID == window.processID
     }
-    let titleCandidates = title.isEmpty ? [] : processCandidates.filter { $0.title == title }
-    let candidates = titleCandidates.isEmpty ? processCandidates : titleCandidates
-    guard !candidates.isEmpty else {
+    let selection = selectCaptureWindow(
+      candidates: processCandidates.map {
+        CaptureWindowCandidate(frame: $0.frame, layer: $0.windowLayer, title: $0.title)
+      },
+      title: title,
+      windowFrame: windowFrame
+    )
+    var diagnostics: JSONObject = [
+      "processCandidateCount": processCandidates.count,
+      "processId": Int(window.processID),
+      "requestedTitle": bounded(title, bytes: 512),
+      "windowFrame": rectJSON(windowFrame),
+    ]
+    let selected: SCWindow
+    switch selection {
+    case .selected(let index):
+      selected = processCandidates[index]
+    case .noWindow:
+      diagnostics["reason"] = "no-process-window"
       try fail(
         ErrorCode.captureFailed,
         "ScreenCaptureKit could not find any window owned by the tracked application process.",
-        data: [
-          "processCandidateCount": processCandidates.count,
-          "processId": Int(window.processID),
-          "reason": "no-process-window",
-          "requestedTitle": bounded(title, bytes: 512),
-        ]
+        data: diagnostics
       )
-    }
-    let selected = candidates.min {
-      frameDistance($0.frame, windowFrame) < frameDistance($1.frame, windowFrame)
-    }!
-    if candidates.count > 1 {
-      let sorted = candidates.sorted { frameDistance($0.frame, windowFrame) < frameDistance($1.frame, windowFrame) }
-      if sorted.count > 1
-        && abs(frameDistance(sorted[0].frame, windowFrame) - frameDistance(sorted[1].frame, windowFrame)) < 0.5
-      {
-        try fail(
-          ErrorCode.captureFailed,
-          "ScreenCaptureKit found multiple indistinguishable windows for the target.",
-          data: [
-            "candidateCount": candidates.count,
-            "processCandidateCount": processCandidates.count,
-            "reason": "ambiguous-window-geometry",
-            "requestedTitle": bounded(title, bytes: 512),
-            "titleCandidateCount": titleCandidates.count,
-            "windowFrame": rectJSON(windowFrame),
-          ]
-        )
-      }
+    case .uncorrelated:
+      diagnostics["reason"] = "uncorrelated-window-geometry"
+      try fail(
+        ErrorCode.captureFailed,
+        "ScreenCaptureKit has no window whose frame matches the tracked window, so none is captured.",
+        data: diagnostics
+      )
+    case .ambiguous:
+      diagnostics["reason"] = "ambiguous-window-geometry"
+      try fail(
+        ErrorCode.captureFailed,
+        "ScreenCaptureKit found multiple indistinguishable windows for the target.",
+        data: diagnostics
+      )
     }
     guard selected.isOnScreen else {
       try fail(
@@ -256,13 +318,6 @@ final class CaptureEngine {
       return matchingBackingScaleFactor(displayID: display.displayID, screens: screens)
     }
     return 1
-  }
-
-  private func frameDistance(_ left: CGRect, _ right: CGRect) -> CGFloat {
-    abs(left.minX - right.minX)
-      + abs(left.minY - right.minY)
-      + abs(left.width - right.width)
-      + abs(left.height - right.height)
   }
 
   private func encodePNG(_ image: CGImage) throws -> Data {

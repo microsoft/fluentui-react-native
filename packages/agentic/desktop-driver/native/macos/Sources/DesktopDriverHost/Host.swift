@@ -57,20 +57,34 @@ private struct PendingRequest {
   let params: JSONObject
 }
 
+/// A frame that no conforming client sends. The transport cannot be trusted afterwards, so the helper stops.
+private struct TransportViolation: Error, CustomStringConvertible {
+  let description: String
+}
+
 final class Host {
   private let condition = NSCondition()
   private let token = CancellationToken()
-  private let driver = Driver()
+  private let driver: Driver
   private var queue: [PendingRequest] = []
   private var activeID: String?
   private var stopping = false
+  private var transportFailed = false
+  private var workerThread: Thread?
   private var writer: FrameWriter?
   private var output: FileHandle?
   private let workerDone = DispatchSemaphore(value: 0)
   /// Called on the worker with each request's id and command just before the driver executes it. Set before `run`;
   /// self-tests use it to hold the worker and record dispatch.
   var beforeExecuteForTesting: ((String, String) -> Void)?
+  /// Replaces the process exit after the worker finds the transport broken. Set before `run`; self-tests use it to
+  /// observe the exit instead of ending the test process.
+  var exitForTesting: ((Int32) -> Void)?
 
+  /// Self-tests pass a driver with recording input and a private input lock.
+  init(driver: Driver = Driver()) {
+    self.driver = driver
+  }
   /// Serves FDR1 on the process's standard input and output.
   func run() -> Int32 {
     run(input: .standardInput, output: .standardOutput)
@@ -78,6 +92,8 @@ final class Host {
 
   /// Serves FDR1 on the given handles until the input ends. Self-tests drive the host in process through pipes.
   func run(input: FileHandle, output: FileHandle) -> Int32 {
+    // A client that disappears must surface as a failed write that releases input, not as a signal that kills the helper.
+    signal(SIGPIPE, SIG_IGN)
     let writer = FrameWriter(output)
     self.writer = writer
     self.output = output
@@ -106,6 +122,7 @@ final class Host {
       self?.workerLoop()
     }
     worker.name = "furn-desktop-driver-worker"
+    workerThread = worker
     worker.start()
 
     var exitCode: Int32 = 0
@@ -118,27 +135,39 @@ final class Host {
           guard let frame = try reader.read() else {
             return false
           }
-          accept(frame)
-          return true
+          try accept(frame)
+          return !isTransportFailed()
         }
       }
     } catch {
       writeDiagnostic("furn-desktop-driver-host: \(error)")
       exitCode = 1
     }
+    if isTransportFailed() {
+      exitCode = 1
+    }
 
     condition.lock()
     stopping = true
+    queue.removeAll()
     token.cancel()
     condition.broadcast()
     condition.unlock()
     workerDone.wait()
+    // The client is gone, so nothing will ever release the keys or buttons a cancelled or abandoned command held.
+    driver.releaseInput()
     self.writer = nil
     return exitCode
   }
 
+  private func isTransportFailed() -> Bool {
+    condition.lock()
+    defer { condition.unlock() }
+    return transportFailed
+  }
+
   /// Validates one inbound frame, then cancels the request it names or queues it for the worker.
-  private func accept(_ frame: Frame) {
+  private func accept(_ frame: Frame) throws {
     if frame.type != .json {
       writeDiagnostic("The native helper ignored an unexpected binary frame on stdin.")
       return
@@ -147,12 +176,10 @@ final class Host {
     do {
       value = try parseJSON(frame.payload)
     } catch {
-      writeDiagnostic("The native helper ignored malformed JSON: \(error)")
-      return
+      throw TransportViolation(description: "A JSON frame on stdin did not contain valid JSON.")
     }
     guard let message = value as? JSONObject else {
-      writeDiagnostic("The native helper ignored a JSON message that is not an object.")
-      return
+      throw TransportViolation(description: "A JSON frame on stdin did not contain a JSON object.")
     }
     let type = message["type"] as? String ?? ""
     let id = message["id"] as? String ?? ""
@@ -205,7 +232,10 @@ final class Host {
       while queue.isEmpty && !stopping {
         condition.wait()
       }
-      if stopping && queue.isEmpty {
+      // Once the transport is stopping, queued work has no client left to answer and must not start: it could press
+      // keys or buttons nobody will release.
+      if stopping {
+        queue.removeAll()
         condition.unlock()
         return
       }
@@ -217,22 +247,26 @@ final class Host {
       // This thread lives as long as the helper and runs no run loop, so nothing drains its autorelease pool between
       // requests. Draining one per request frees what Accessibility and Foundation autoreleased while serving it;
       // without it every tree read and observation adds to the helper's memory for the life of the session.
-      let wasCancelled = autoreleasepool { process(request) }
+      let succeeded = autoreleasepool { process(request) }
 
-      if request.command == "dispose" && !wasCancelled {
+      // The helper exits once a dispose has released everything. A dispose that failed or was cancelled left a
+      // launched application running under a lease, which only this process can still close, so it must stay up.
+      if request.command == "dispose" && succeeded {
         try? output?.synchronize()
         Darwin.exit(EXIT_SUCCESS)
       }
     }
   }
 
-  /// Runs one request to its response, error, or cancellation, and reports whether it was cancelled.
+  /// Runs one request to its response, error, or cancellation, and reports whether it answered with a result.
   private func process(_ request: PendingRequest) -> Bool {
     var cancellation: CancelledError?
+    var succeeded = false
     do {
       beforeExecuteForTesting?(request.id, request.command)
       let result = try driver.execute(command: request.command, params: request.params, token: token)
       try writeResponse(id: request.id, command: request.command, result: result)
+      succeeded = true
     } catch let error as CancelledError {
       cancellation = error
     } catch let error as HelperError {
@@ -260,7 +294,7 @@ final class Host {
     condition.lock()
     activeID = nil
     condition.unlock()
-    return cancellation != nil
+    return succeeded
   }
 
   private func writeResponse(id: String, command: String, result: CommandResult) throws {
@@ -333,8 +367,7 @@ final class Host {
       }
       try writer?.writeJSON(response)
     } catch {
-      writeDiagnostic("Native error write failed: \(error)")
-      Darwin.exit(EXIT_FAILURE)
+      transportWriteFailed("Native error write failed: \(error)")
     }
   }
 
@@ -349,8 +382,29 @@ final class Host {
     do {
       try writer?.writeJSON(message)
     } catch {
-      writeDiagnostic("Native cancellation write failed: \(error)")
-      Darwin.exit(EXIT_FAILURE)
+      transportWriteFailed("Native cancellation write failed: \(error)")
+    }
+  }
+
+  /// A response can no longer reach the client. The worker releases whatever input its command still holds and exits;
+  /// the reader thread cannot touch input the worker may be using, so it stops the host through the shutdown path.
+  private func transportWriteFailed(_ diagnostic: String) {
+    writeDiagnostic(diagnostic)
+    condition.lock()
+    transportFailed = true
+    stopping = true
+    queue.removeAll()
+    token.cancel()
+    condition.broadcast()
+    let onWorker = Thread.current === workerThread
+    condition.unlock()
+    if onWorker {
+      driver.releaseInput()
+      if let exitForTesting {
+        exitForTesting(EXIT_FAILURE)
+      } else {
+        Darwin.exit(EXIT_FAILURE)
+      }
     }
   }
 }

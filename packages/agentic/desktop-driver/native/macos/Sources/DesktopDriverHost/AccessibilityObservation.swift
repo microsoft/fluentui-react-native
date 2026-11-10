@@ -248,7 +248,7 @@ struct AXObservationSource: ObservationSource {
       }
     }
     if !requested.isDisjoint(with: [.visible, .geometry]) {
-      var screenRect = CGRect.zero
+      var screenRect: CGRect?
       if let position = axPoint(try slots.optional(kAXPositionAttribute)),
         let size = axSize(try slots.optional(kAXSizeAttribute))
       {
@@ -256,9 +256,10 @@ struct AXObservationSource: ObservationSource {
       }
       if requested.contains(.visible) {
         let hidden = axNumber(try slots.optional("AXHidden"))?.boolValue
-        facts.visible = .supported(hidden != true && screenRect.width > 0 && screenRect.height > 0)
+        facts.visible = visibleState(hidden: hidden, frame: screenRect)
       }
-      if requested.contains(.geometry) {
+      // An element that publishes no geometry omits the fact; a zero rectangle would claim it sits at the origin.
+      if requested.contains(.geometry), let screenRect {
         facts.geometry = CGRect(
           x: screenRect.minX - windowFrame.minX,
           y: screenRect.minY - windowFrame.minY,
