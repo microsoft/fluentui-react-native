@@ -11,13 +11,13 @@ import {
 } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
-import { semanticIconSources } from '../../common/iconSources';
+import { semanticIconSources, withDefaultIconSource } from '../../common/iconSources';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 import type { AccordionProps, AccordionState } from './accordion.types';
 
 const defaultTitle = 'Section title';
-const defaultLeadingIconSource = semanticIconSources.selectedCircle;
+const defaultLeadingIconTransform = withDefaultIconSource(semanticIconSources.selectedCircle);
 const defaultChevronSource = semanticIconSources.chevron;
 
 /**
@@ -93,12 +93,12 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   const leadingIcon = useOptionalSlot(Icon, leadingIconProp, {
     defaultProps: {
       accessible: false,
-      fontSource: defaultLeadingIconSource,
       height: 16,
       testID: 'accordion-leading-icon',
       width: 16,
     },
     renderByDefault: true,
+    transform: defaultLeadingIconTransform,
   });
   const bodyContent = useOptionalSlot(View, bodyContentProp);
   const body = useSlot(View, {
@@ -114,8 +114,8 @@ export function useAccordion_unstable(props: AccordionProps): AccordionState {
   });
   const chevron = useSlot(Icon, {
     accessible: false,
-    fontSource: defaultChevronSource,
     height: 16,
+    svgSource: defaultChevronSource,
     testID: 'accordion-chevron-icon',
     width: 16,
   });

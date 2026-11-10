@@ -67,10 +67,35 @@ describe('Avatar', () => {
   });
 
   it('renders the default icon fallback as a decorative image avatar', async () => {
-    const component = await renderAvatar({});
+    const component = await renderAvatar({ icon: { testID: 'default-icon' } });
 
     expect(component.queryByRole('image')).toBeNull();
-    expect(component.getByText(String.fromCodePoint(0x1f464), { includeHiddenElements: true })).toBeOnTheScreen();
+    expect(component.getByTestId('default-icon', { includeHiddenElements: true }).props).toMatchObject({
+      accessible: false,
+      accessibilityElementsHidden: true,
+      color: defaultFlexTokens.color.foregroundNeutralPrimary.rest,
+      importantForAccessibility: 'no-hide-descendants',
+    });
+  });
+
+  it.each([
+    [16, 12],
+    [20, 16],
+    [24, 16],
+    [28, 16],
+    [32, 20],
+    [40, 24],
+    [56, 32],
+    [120, 48],
+  ] as const)('draws the default icon of a %s avatar with the %s optical size glyph', async (size, glyphSize) => {
+    const component = await renderAvatar({ icon: { testID: 'default-icon' }, size });
+
+    expect(component.getByTestId('default-icon', { includeHiddenElements: true }).props).toMatchObject({
+      height: glyphSize,
+      vbHeight: glyphSize,
+      vbWidth: glyphSize,
+      width: glyphSize,
+    });
   });
 
   it('renders informative avatars with the image role and label', async () => {

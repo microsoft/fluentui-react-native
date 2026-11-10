@@ -28,17 +28,6 @@ export function useListItemStyles_unstable(state: ListItemState) {
     getListItemSecondaryForegroundStyle(state),
     state.secondaryContentPosition === 'right' ? listItemStyles.secondaryRight : { marginTop: state.metrics.contentGap },
   ];
-  const selectionIndicatorStyle: StyleProp<TextStyle> = [
-    listItemStyles.selectionIndicator,
-    getListItemPrimaryForegroundStyle(state),
-    {
-      height: state.metrics.selectionIndicatorSize,
-      width: state.metrics.selectionIndicatorSize,
-      fontSize: state.metrics.selectionIndicatorSize,
-      lineHeight: state.metrics.selectionIndicatorSize,
-      marginEnd: state.metrics.selectionIndicatorMargin,
-    },
-  ];
   const trailingStyle: StyleProp<ViewStyle> = [
     listItemStyles.trailingContainer,
     {
@@ -103,7 +92,9 @@ export function useListItemStyles_unstable(state: ListItemState) {
   if (state.selectionIndicator) {
     attachSlotProps(state.selectionIndicator, {
       ...hiddenFromAccessibilityProps,
-      style: selectionIndicatorStyle,
+      color: getListItemPrimaryForegroundStyle(state).color,
+      height: state.metrics.selectionIndicatorSize,
+      width: state.metrics.selectionIndicatorSize,
     });
   }
   attachSlotProps(state.root, { style: rootStyle });

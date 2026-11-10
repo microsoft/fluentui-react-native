@@ -17,7 +17,7 @@ Read the [user guide](README.md), then select the narrowest topic in the [refere
 | Styles, tokens, theme caching, or state precedence                      | [Styles and tokens](references/styles-and-tokens.md)                                         |
 | Render functions and assembly                                           | [Rendering and assembly](references/rendering.md)                                            |
 | Tests, stories, or native `wdio` story tests                            | [Tests and stories](references/tests-and-stories.md)                                         |
-| Shared helpers, dependencies, or cross-component extraction             | [Source boundaries](references/source-boundaries.md)                                         |
+| Shared helpers, icons, dependencies, or cross-component extraction      | [Source boundaries](references/source-boundaries.md)                                         |
 | Commands, source ownership, or open work                                | [Contributing](references/contributing.md) or [remaining work](references/remaining-work.md) |
 
 Implementation and planning use the `agentic-component-authoring` skill, contracts use the
@@ -40,6 +40,10 @@ Metro, bundle, or CocoaPods work follows `apps/storybook/AGENTS.md`.
 - Read the component `SPEC.md`, `spec/source.json`, and all referenced companions before changing its contract.
 - Use `src/components/button` and `src/primitives/icon` as the canonical implementations, and keep public props and
   slots small, typed, and contract-driven.
+- Default icons are generated Fluent SVG components reached through `semanticIconSources`. Map a new component's glyphs
+  to a Fluent icon where one exists, add it to the [icon manifest](scripts/icons/icon-manifest.mts), run
+  `yarn gen:icons`, and never hand-edit `src/common/icons/fluentIcons.generated.tsx`
+  ([icons](references/source-boundaries.md#icons)).
 - Export higher-order components explicitly from `src/index.ts` and primitives from `src/primitives/index.ts`; never use
   wildcard exports (R-REPO-001).
 - Colocate runtime tests, type tests, and stories, include every test-bearing story in `tsconfig.stories.json`, and keep

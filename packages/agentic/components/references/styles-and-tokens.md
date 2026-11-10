@@ -171,12 +171,16 @@ Treat the component frame, the native text line box, and the glyph's visible ink
 and `justifyContent` align Yoga boxes; they do not move a glyph inside a stretched Text or editor. A font's `fontSize`
 is not its measured ascent plus descent. Platform font fallback can make the difference particularly visible on Win32.
 
-- Use `Icon` for font glyphs. Its sized View centers an intrinsic, non-shrinking Text child. With a fully specified frame,
-  the Text is absolute with no edge offsets so Yoga measures its natural height instead of clamping it to the frame.
-  Without a complete frame, normal flow retains intrinsic dimensions. Do not put the icon's
-  `height` or `lineHeight` on that Text, use a negative margin or transform to nudge one glyph, or depend on
-  `textAlignVertical` as a cross-platform centering mechanism. Icon dimensions own scaling, just as they do for images
-  and SVGs; dimensioned font icons do not independently follow text scaling.
+- Use `Icon` for icons. The default Fluent icons are SVGs that draw at the requested width and height, and their
+  `currentColor` fill resolves natively from `color`. A caller-supplied font glyph has a sized View that centers an
+  intrinsic, non-shrinking Text child. With a fully specified frame, the Text is absolute with no edge offsets so Yoga
+  measures its natural height instead of clamping it to the frame. Without a complete frame, normal flow retains
+  intrinsic dimensions. Do not put the icon's `height` or `lineHeight` on that Text, use a negative margin or transform
+  to nudge one glyph, or depend on `textAlignVertical` as a cross-platform centering mechanism. Icon dimensions own
+  scaling, just as they do for images and SVGs; dimensioned font icons do not independently follow text scaling.
+- Fluent icons are drawn per optical size. `createSizedIconSource` picks the nearest available size to the smaller
+  requested dimension, preferring the larger size on a tie, and the chosen glyph still draws at the requested width and
+  height.
 - Retain typography line-height tokens for ordinary labels and paragraphs. Do not globally remove line height to fix
   one renderer, and do not replace a typography line height with a control's height or the font's em size.
 - Centered initials follow the same intrinsic-metrics rule. Avatar owns all typography and uses native Text to avoid

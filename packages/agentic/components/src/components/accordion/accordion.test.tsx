@@ -87,8 +87,8 @@ describe('Accordion', () => {
     expect(header.props.accessibilityRole).toBe('button');
     expect(header.props.accessibilityState).toEqual({ expanded: false });
     expect(component.getByText('Section title')).toBeOnTheScreen();
-    expect(component.getByTestId('accordion-leading-icon').props.style).toMatchObject({ height: 16, width: 16 });
-    expect(component.getByTestId('accordion-chevron-icon').props.style).toMatchObject({ height: 16, width: 16 });
+    expect(component.getByTestId('accordion-leading-icon').props).toMatchObject({ height: 16, width: 16 });
+    expect(component.getByTestId('accordion-chevron-icon').props).toMatchObject({ height: 16, width: 16 });
     expect(StyleSheet.flatten(body.props.style)).toMatchObject({ height: 0, opacity: 0, overflow: 'hidden' });
     expect(body.props.id).toEqual(expect.any(String));
   });

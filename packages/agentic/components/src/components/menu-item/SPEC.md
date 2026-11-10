@@ -32,8 +32,10 @@ The public slots are `root`, `icon`, `selectedIcon`, `avatar`, `chevron`,
 the `content` and `secondaryContent` properties. A list-item root renders
 optional `FocusRing` and CompoundItemLayout. Its leading visual is avatar or the
 selected replacement icon or icon. Its trailing order is chevron, checkmark,
-then the multiselect checkbox. List item labels and secondary text use
-state-only reservations to avoid a size change when selected. A section header
+then the multiselect checkbox. Slots the caller does not supply draw Fluent
+icons: a regular circle for `icon`, a filled circle for `selectedIcon`,
+ChevronRight for `chevron`, and Checkmark for `checkmark`. List item labels and
+secondary text use state-only reservations to avoid a size change when selected. A section header
 is disabled and nonfocusable; when loading, its normal row content is replaced
 by skeletons.
 

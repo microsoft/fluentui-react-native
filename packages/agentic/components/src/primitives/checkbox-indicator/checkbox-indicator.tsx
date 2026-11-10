@@ -22,8 +22,8 @@ export const CheckboxIndicator = directComponent<CheckboxIndicatorProps>(
         <Icon
           accessible={false}
           color={iconColor}
-          fontSource={status === 'indeterminate' ? indeterminateIconSource : checkedIconSource}
           height={iconSize}
+          svgSource={status === 'indeterminate' ? indeterminateIconSource : checkedIconSource}
           testID={status === 'indeterminate' ? 'checkbox-dash-icon' : 'checkbox-check-icon'}
           width={iconSize}
         />

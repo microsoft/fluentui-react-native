@@ -40,7 +40,7 @@ pointer or keyboard input. It is not a spinner, a step indicator, or a slider.
 | `valueText`          | `string`                                 | derived                | Overrides the derived value text.                                                                                                              |
 | `showValueText`      | `boolean`                                | `true`                 | Controls whether the value text renders.                                                                                                       |
 | `showValidationIcon` | `boolean`                                | `status !== 'neutral'` | Controls whether the validation icon renders.                                                                                                  |
-| `validationIcon`     | slot for `Icon`                          | derived from `status`  | Replaces the default icon. `null` removes it.                                                                                                  |
+| `validationIcon`     | slot for `Icon`                          | derived from `status`  | Replaces the default icon, which is the Fluent error circle for `error` and the Fluent checkmark circle for `success`. `null` removes it.      |
 
 The root accepts the owned `ViewProps` surface. A caller `style` is applied
 after the token-derived root style. `accessibilityLabelledBy` supplied by a

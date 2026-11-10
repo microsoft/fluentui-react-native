@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { act, fireEvent, screen } from '@testing-library/react-native';
 
+import { ChevronDown20Regular, ChevronUp20Regular } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { render } from '../../common/renderWithTheme';
 import { ListboxItem } from '../listbox-item/listbox-item';
 import { Dropdown } from './dropdown';
@@ -255,6 +257,16 @@ describe('Dropdown', () => {
     expect(screen.queryByTestId('listbox')).toBeNull();
     await fireEvent(screen.getByTestId('trigger'), 'keyDown', { nativeEvent: { key: 'ArrowDown' } });
     expect(screen.getByTestId('listbox')).toBeTruthy();
+  });
+
+  it('draws the Fluent chevron down while closed and up while the list is presented', async () => {
+    await render(<Scene />);
+    const chevron = () => getRenderedIconPaths(screen.getByTestId('trigger'));
+    expect(chevron()).toEqual(getGeneratedIconPaths(ChevronDown20Regular));
+    await fireEvent(screen.getByTestId('trigger'), 'press', keyboardPress);
+    expect(chevron()).toEqual(getGeneratedIconPaths(ChevronUp20Regular));
+    await dismiss('escape');
+    expect(chevron()).toEqual(getGeneratedIconPaths(ChevronDown20Regular));
   });
 
   it('exposes bound options with list-item semantics, positions, and selection actions', async () => {

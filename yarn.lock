@@ -2843,6 +2843,7 @@ __metadata:
     "@fluentui-react-native/native-core": "workspace:*"
     "@fluentui-react-native/scripts": "workspace:*"
     "@fluentui-react-native/storybook-desktop": "workspace:*"
+    "@fluentui/svg-icons": "npm:^1.1.345"
     "@office-iss/react-native-win32": "npm:^0.81.0"
     "@react-native-community/cli": "npm:^20.0.0"
     "@react-native-community/cli-platform-android": "npm:^20.0.0"
@@ -2850,6 +2851,8 @@ __metadata:
     "@react-native/babel-preset": "npm:^0.81.0"
     "@react-native/metro-config": "npm:^0.81.0"
     "@storybook/react-native": "npm:^10.4.7"
+    "@svgr/core": "npm:^8.1.0"
+    "@svgr/plugin-jsx": "npm:^8.1.0"
     "@testing-library/react-native": "catalog:"
     "@types/react": "npm:~19.1.4"
     react: "npm:19.1.4"
@@ -5928,6 +5931,13 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
+
+"@fluentui/svg-icons@npm:^1.1.345":
+  version: 1.1.345
+  resolution: "@fluentui/svg-icons@npm:1.1.345"
+  checksum: 10c0/084bcb65ad826ce36769e633babdccb3685f97b67f26cd6d14928d87e2ff10b12bf270580be62f1280b153b41efd573488e411d77db816c77c6e532c68d41769
+  languageName: node
+  linkType: hard
 
 "@fortawesome/fontawesome-common-types@npm:6.7.2":
   version: 6.7.2

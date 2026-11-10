@@ -5,11 +5,11 @@ merges caller-supplied accessibility state with `disabled` and `selected`.
 Disabled rows are unavailable and not focusable. The visible `content` is the
 normal accessible name unless a caller supplies React Native naming props.
 
-Leading and selected icons, avatar, trailing container, and selection glyph
-are inaccessible presentation. The row is the only control announced for
-those visual affordances. On Windows this exposes the root through UIA; on
-macOS it exposes the root through AX with the resolved role, name, selected
-state, and disabled state.
+Leading and selected icons, avatar, trailing container, and the selection
+indicator icon are inaccessible presentation. The row is the only control
+announced for those visual affordances. On Windows this exposes the root
+through UIA; on macOS it exposes the root through AX with the resolved role,
+name, selected state, and disabled state.
 
 Callers that change the root role or embed the row in a collection own
 any additional container semantics and position information.

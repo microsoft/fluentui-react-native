@@ -3,6 +3,8 @@ import * as React from 'react';
 import type { View } from 'react-native';
 import { render } from '../../common/renderWithTheme';
 
+import { Checkmark12Filled, Subtract12Filled } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { CheckboxIndicator } from './checkbox-indicator';
 
 describe('CheckboxIndicator', () => {
@@ -29,5 +31,22 @@ describe('CheckboxIndicator', () => {
     const unchecked = await render(<CheckboxIndicator status="unchecked" testID="indicator" />);
     expect(unchecked.queryByTestId('checkbox-check-icon')).toBeNull();
     expect(unchecked.queryByTestId('checkbox-dash-icon')).toBeNull();
+  });
+
+  it.each([
+    ['checked', 'checkbox-check-icon', Checkmark12Filled],
+    ['indeterminate', 'checkbox-dash-icon', Subtract12Filled],
+  ] as const)('draws the default %s glyph, in the SVG default fill without an icon color', async (status, testID, expected) => {
+    const component = await render(<CheckboxIndicator status={status} />);
+    const icon = component.getByTestId(testID);
+
+    expect(getRenderedIconPaths(icon)).toEqual(getGeneratedIconPaths(expected));
+    expect(icon.props.fill).toBeUndefined();
+  });
+
+  it('draws the glyph in the icon color', async () => {
+    const component = await render(<CheckboxIndicator iconColor="red" status="checked" />);
+
+    expect(component.getByTestId('checkbox-check-icon').props).toMatchObject({ color: 'red', fill: 'currentColor' });
   });
 });

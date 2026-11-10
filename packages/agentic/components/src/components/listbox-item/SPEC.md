@@ -132,14 +132,16 @@ navigation, selection, dismissal, and focus return.
   accessibility attribute. A bound option continues to use `selected`
   (LBI-006).
 - `listbox-item-default-icon` (**accepted**): FURN creates the normal and
-  selected icon slots by default; the pinned Flex reference requires an
-  explicit icon opt-in. A bound option requires the opt-in (LBI-006).
+  selected icon slots by default, drawing the Fluent regular and filled circle
+  icons; the pinned Flex reference requires an explicit icon opt-in. A bound
+  option requires the opt-in (LBI-006).
 - `listbox-item-native-focus-model` (**accepted**): FURN gives each option a
   directly focusable Pressable root and local platform focus treatment instead
   of retaining focus at a parent selection controller.
 - `listbox-item-native-indicators` (**accepted**): The multiselect visual is
   the internal `CheckboxIndicator`, and the checkmark and chevron are
-  inaccessible Icon slots rather than browser control composition.
+  inaccessible Icon slots drawing the Fluent Checkmark and ChevronRight icons
+  rather than browser control composition.
 
 ## Conformance
 

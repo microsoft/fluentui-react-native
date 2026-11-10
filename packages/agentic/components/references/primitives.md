@@ -43,6 +43,9 @@ Each primitive is extracted for a reusable behavioral or structural contract. Pa
   not have one stable imperative instance type must omit `ref` and document that exception in its `CONTRACT.md`.
 - Forward accessibility and test props without replacing consumer values.
 - Keep alternative source or renderer props mutually exclusive.
+- `CheckboxIndicator` accepts only `SvgIconSource` values for `checkedIconSource` and `indeterminateIconSource`; the
+  defaults are the Fluent Checkmark and Subtract icons from `semanticIconSources`. Wrap a font glyph in a small
+  `SvgIconSource` that renders `<Icon fontSource={...} />` when one is needed.
 - Add compile-time `SlotProp` coverage and runtime coverage for every renderer branch.
 - Demonstrate the primitive in Storybook without adding component-level styling.
 - `FocusVisual` mounts configured ring Views eagerly, owns accessibility and hit testing, and changes only opacity when

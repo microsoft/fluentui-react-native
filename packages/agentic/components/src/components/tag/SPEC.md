@@ -49,14 +49,14 @@ props on the root.
 | `root`        | `Pressable` | always                      | The single hit area and the only accessible element.                                                 |
 | `leadingIcon` | `Icon`      | only when supplied          | Categorical glyph before the label.                                                                  |
 | `content`     | `Text`      | by default in `iconAndText` | Defaults to the text `Tag text`; pass `null` to suppress it; never rendered in the icon-only layout. |
-| `dismissIcon` | `Icon`      | by default                  | Defaults to the shared dismiss glyph; suppressed when `dismiss` is `false` or the slot is `null`.    |
+| `dismissIcon` | `Icon`      | by default                  | Defaults to the Fluent Dismiss icon; suppressed when `dismiss` is `false` or the slot is `null`.     |
 
 Render order inside the root is: optional `FocusRing`, leading icon, content, dismiss
 icon.
 
 **TAG-002:** Render the label by default with the placeholder text, drop it in
 the icon-only layout, render the leading icon only when one is supplied, and
-render the default dismiss glyph unless `dismiss` is `false` or the slot is
+render the default Fluent dismiss icon unless `dismiss` is `false` or the slot is
 suppressed.
 
 **TAG-003:** Render the optional `FocusRing`, the leading icon, the content, and the
@@ -83,7 +83,7 @@ of `shape`.
 
 **TAG-007:** Size the leading and dismiss icons from `size`, keeping the dismiss
 glyph one step smaller than the leading glyph, and paint both with the resolved
-foreground.
+foreground. The default dismiss icon draws at 12 for small and 16 for medium.
 
 **TAG-008:** Expose the root as a button with the disabled state merged over
 caller-supplied state, keep a disabled tag out of the tab order, and require an

@@ -17,7 +17,7 @@ Avatar is a non-interactive identity marker. It renders exactly one image, icon,
 
 ## Public contract
 
-`size` defaults to `40` and accepts `16`, `20`, `24`, `28`, `32`, `40`, `56`, or `120`. `activityRing` defaults to `false`. `root` is required; `image`, `icon`, and `initials` are optional slots. The resolved content mode uses image first, then initials, then icon. Icon mode renders a person icon by default. Initials mode defaults to `AB`, uppercases string or numeric content, trims whitespace, and limits output to one character at size `16` or two characters otherwise.
+`size` defaults to `40` and accepts `16`, `20`, `24`, `28`, `32`, `40`, `56`, or `120`. `activityRing` defaults to `false`. `root` is required; `image`, `icon`, and `initials` are optional slots. The resolved content mode uses image first, then initials, then icon. Icon mode renders the Fluent Person icon by default. Initials mode defaults to `AB`, uppercases string or numeric content, trims whitespace, and limits output to one character at size `16` or two characters otherwise.
 
 The root contains a persistent decorative activity-ring visual and only the active content slot. Images are absolute-fill and use cover resizing. Icon and initials slots are centered; all content slots are decorative because the root owns any accessible identity. Supplying more than one content slot is accepted for compatibility, resolves through the documented priority, and issues a development warning.
 

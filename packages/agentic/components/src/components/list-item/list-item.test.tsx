@@ -7,6 +7,15 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import {
+  CheckboxChecked16Filled,
+  CheckboxChecked20Filled,
+  CheckboxChecked24Filled,
+  CheckboxUnchecked20Regular,
+  RadioButton20Filled,
+  RadioButton20Regular,
+} from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { Button } from '../button/button';
 import { ListItem } from './list-item';
 
@@ -22,36 +31,68 @@ function getRootStyle(component: RenderResult): ViewStyle {
   return StyleSheet.flatten(getRoot(component).props.style);
 }
 
+const selectionIndicatorTestIDs = [
+  'list-item-radio-unselected',
+  'list-item-radio-selected',
+  'list-item-checkbox-unchecked',
+  'list-item-checkbox-checked',
+] as const;
+
+// The glyph each indicator draws in the default, medium row.
+const selectionIndicatorIcons = {
+  'list-item-radio-unselected': RadioButton20Regular,
+  'list-item-radio-selected': RadioButton20Filled,
+  'list-item-checkbox-unchecked': CheckboxUnchecked20Regular,
+  'list-item-checkbox-checked': CheckboxChecked20Filled,
+} as const;
+
+function getRenderedSelectionIndicators(component: RenderResult): string[] {
+  return selectionIndicatorTestIDs.filter((testID) => component.queryByTestId(testID, { includeHiddenElements: true }));
+}
+
 describe('ListItem', () => {
   it.each([
     ['none', false, undefined],
     ['none', true, undefined],
-    ['single', false, '○'],
-    ['single', true, '◉'],
-    ['multiple', false, '☐'],
-    ['multiple', true, '☑'],
-  ] as const)('LIT-003 keeps %s selection=%s caller-owned and presents only its glyph', async (selectionMode, selected, glyph) => {
-    const onPress = jest.fn();
-    const component = await renderListItem({ content: 'Choice', selectionMode, selected, onPress });
-    await fireEvent.press(getRoot(component));
-    expect(onPress).toHaveBeenCalledTimes(1);
-    expect(getRoot(component).props.accessibilityState.selected).toBe(selected);
-    for (const candidate of ['○', '◉', '☐', '☑']) {
-      if (candidate === glyph) {
-        expect(component.getByText(candidate, { includeHiddenElements: true }).props).toMatchObject({
+    ['single', false, 'list-item-radio-unselected'],
+    ['single', true, 'list-item-radio-selected'],
+    ['multiple', false, 'list-item-checkbox-unchecked'],
+    ['multiple', true, 'list-item-checkbox-checked'],
+  ] as const)(
+    'LIT-003 keeps %s selection=%s caller-owned and presents only its indicator',
+    async (selectionMode, selected, indicatorTestID) => {
+      const onPress = jest.fn();
+      const component = await renderListItem({ content: 'Choice', selectionMode, selected, onPress });
+      await fireEvent.press(getRoot(component));
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(getRoot(component).props.accessibilityState.selected).toBe(selected);
+      expect(getRenderedSelectionIndicators(component)).toEqual(indicatorTestID ? [indicatorTestID] : []);
+      if (indicatorTestID) {
+        const indicator = component.getByTestId(indicatorTestID, { includeHiddenElements: true });
+        expect(indicator.props).toMatchObject({
           accessible: false,
           accessibilityElementsHidden: true,
           importantForAccessibility: 'no-hide-descendants',
         });
-      } else {
-        expect(component.queryByText(candidate, { includeHiddenElements: true })).toBeNull();
+        expect(getRenderedIconPaths(indicator)).toEqual(getGeneratedIconPaths(selectionIndicatorIcons[indicatorTestID]));
       }
-    }
-    expect(getRootStyle(component).backgroundColor).toBe(
-      selected && selectionMode !== 'multiple'
-        ? defaultFlexTokens.color.backgroundNeutralSoft.rest
-        : defaultFlexTokens.color.backgroundNeutralTransparent.rest,
-    );
+      expect(getRootStyle(component).backgroundColor).toBe(
+        selected && selectionMode !== 'multiple'
+          ? defaultFlexTokens.color.backgroundNeutralSoft.rest
+          : defaultFlexTokens.color.backgroundNeutralTransparent.rest,
+      );
+    },
+  );
+
+  it.each([
+    ['small', CheckboxChecked16Filled],
+    ['medium', CheckboxChecked20Filled],
+    ['large', CheckboxChecked24Filled],
+  ] as const)('draws the %s row selection indicator at its nearest optical size', async (size, expected) => {
+    const component = await renderListItem({ content: 'Choice', selectionMode: 'multiple', selected: true, size });
+    const indicator = component.getByTestId('list-item-checkbox-checked', { includeHiddenElements: true });
+
+    expect(getRenderedIconPaths(indicator)).toEqual(getGeneratedIconPaths(expected));
   });
 
   it.each([false, true])('LIT-002 gives avatar precedence over both icons when selected=%s', async (selected) => {
@@ -92,7 +133,7 @@ describe('ListItem', () => {
     expect(root.props.focusable).toBe(true);
     expect(component.getAllByText('Inbox', { includeHiddenElements: true })).toHaveLength(2);
     expect(getRootStyle(component)).toMatchSnapshot();
-    expect(component.queryByText('☐')).toBeNull();
+    expect(getRenderedSelectionIndicators(component)).toEqual([]);
   });
 
   it('forwards press and interaction handlers while updating visual state', async () => {
@@ -124,12 +165,37 @@ describe('ListItem', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('renders selection indicators for single and multiple selection modes', async () => {
-    const single = await renderListItem({ content: 'Single', selectionMode: 'single', selected: true });
-    expect(single.getByText('◉', { includeHiddenElements: true })).toBeOnTheScreen();
+  it.each([
+    ['small', 16],
+    ['medium', 20],
+    ['large', 24],
+  ] as const)('draws the %s selection indicator with the %d optical size icon in the foreground color', async (size, glyphSize) => {
+    const component = await renderListItem({ content: 'Single', selectionMode: 'single', selected: true, size });
 
-    const multiple = await renderListItem({ content: 'Multiple', selectionMode: 'multiple', selected: true });
-    expect(multiple.getByText('☑', { includeHiddenElements: true })).toBeOnTheScreen();
+    expect(component.getByTestId('list-item-radio-selected', { includeHiddenElements: true }).props).toMatchObject({
+      color: defaultFlexTokens.color.foregroundNeutralPrimary.rest,
+      height: glyphSize,
+      vbHeight: glyphSize,
+      vbWidth: glyphSize,
+      width: glyphSize,
+    });
+  });
+
+  it('keeps a gap between the selection indicator and the content only when an indicator is drawn', async () => {
+    const getLayoutStyle = (component: RenderResult): ViewStyle => {
+      const children = getRoot(component).children;
+      const layout = children[children.length - 1];
+      if (typeof layout === 'string') {
+        throw new Error('Expected the compound layout as the last child of the row.');
+      }
+      return StyleSheet.flatten(layout.props.style);
+    };
+
+    const withIndicator = await renderListItem({ content: 'Single', selectionMode: 'single' });
+    const withoutIndicator = await renderListItem({ content: 'Plain' });
+
+    expect(getLayoutStyle(withIndicator).marginStart).toBe(defaultFlexTokens.spacing.componentBase200);
+    expect(getLayoutStyle(withoutIndicator).marginStart).toBeUndefined();
   });
 
   it('suppresses the selected fill in multiple selection mode', async () => {

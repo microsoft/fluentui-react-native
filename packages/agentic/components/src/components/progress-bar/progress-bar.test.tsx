@@ -6,6 +6,8 @@ import { render } from '../../common/renderWithTheme';
 import { useReducedMotion } from '@fluentui-react-native/framework-base';
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
+import { CheckmarkCircle16Filled, ErrorCircle16Filled } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { ProgressBar } from './progress-bar';
 
 jest.mock('@fluentui-react-native/framework-base', () => ({
@@ -100,6 +102,21 @@ describe('ProgressBar', () => {
     );
     expect(icon.props.accessible).toBe(false);
     expect(StyleSheet.flatten(icon.props.style)).toMatchObject({ height: 16, width: 16 });
+  });
+
+  it.each([
+    ['error', ErrorCircle16Filled],
+    ['success', CheckmarkCircle16Filled],
+  ] as const)('PGB-002 draws the default Fluent %s validation icon', async (status, ValidationIcon) => {
+    const component = await renderProgressBar({ status });
+
+    expect(getRenderedIconPaths(getRoot(component))).toEqual(getGeneratedIconPaths(ValidationIcon));
+  });
+
+  it('PGB-002 draws no default validation icon for the neutral status', async () => {
+    const component = await renderProgressBar({ showValidationIcon: true, status: 'neutral' });
+
+    expect(getRenderedIconPaths(getRoot(component))).toEqual([]);
   });
 
   it.each(['determinate', 'static'] as const)(

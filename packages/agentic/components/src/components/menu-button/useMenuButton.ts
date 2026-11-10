@@ -16,7 +16,7 @@ import { useMenuChildrenWarning } from '../menu/useMenu';
 import type { MenuButtonProps, MenuButtonState } from './menu-button.types';
 
 const defaultHint = 'Opens a menu';
-const chevronProps = { fontSource: semanticIconSources.chevronDown };
+const chevronProps = { svgSource: semanticIconSources.chevronDown };
 const triggerKeys = [{ key: 'ArrowDown' }, { key: 'ArrowUp' }];
 const unmounted: FocusRequest = { status: 'not-mounted', cancel: () => undefined };
 

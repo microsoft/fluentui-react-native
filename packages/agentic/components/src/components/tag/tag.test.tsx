@@ -8,6 +8,8 @@ import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
+import { Dismiss12Regular, Dismiss16Regular } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { Tag } from './tag';
 
 function renderTag(props: React.ComponentProps<typeof Tag>): Promise<RenderResult> {
@@ -84,6 +86,20 @@ describe('Tag', () => {
     expect(getRoot(component).children).toHaveLength(1);
     expect(getRoot(component).props.accessibilityLabel).toBe('Remove filter');
   });
+
+  it.each([
+    { size: 'small', Dismiss: Dismiss12Regular, dimension: 12 },
+    { size: 'medium', Dismiss: Dismiss16Regular, dimension: 16 },
+  ] as const)(
+    'TAG-002 TAG-007 draws the default Fluent dismiss icon at $dimension for the $size tag',
+    async ({ size, Dismiss, dimension }) => {
+      const component = await renderTag({ content: 'Engineering', dismissIcon: { testID: 'tag-spec-dismiss' }, size });
+      const icon = component.getByTestId('tag-spec-dismiss', { includeHiddenElements: true });
+
+      expect(getRenderedIconPaths(getRoot(component))).toEqual(getGeneratedIconPaths(Dismiss));
+      expect(icon.props).toMatchObject({ accessible: false, height: dimension, width: dimension });
+    },
+  );
 
   it.each([false, true])('TAG-008 owned disabled=%s overrides contradictory caller state while preserving busy', async (disabled) => {
     const component = await renderTag({

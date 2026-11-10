@@ -77,12 +77,12 @@ describe('ListboxItem', () => {
     const onPress = jest.fn();
     const component = await renderListboxItem({ content: 'Inbox', multiselect: true, onPress, selected: false });
 
-    expect(component.queryByText('✓')).toBeNull();
+    expect(component.queryByTestId('checkbox-check-icon', { includeHiddenElements: true })).toBeNull();
 
     await fireEvent.press(component.getByRole('button'));
 
     expect(onPress).toHaveBeenCalledTimes(1);
-    expect(component.queryByText('✓')).toBeNull();
+    expect(component.queryByTestId('checkbox-check-icon', { includeHiddenElements: true })).toBeNull();
   });
 
   it('is directly renderable through the component boundary', () => {
@@ -96,7 +96,14 @@ describe('ListboxItem', () => {
     expect(component.getByRole('button').props.accessibilityActions).toContainEqual({ name: 'Toggle' });
     expect(component.getByText('Choice')).toBeOnTheScreen();
     expect(component.getByText('Secondary')).toBeOnTheScreen();
-    expect(component.getByText('○')).toBeOnTheScreen();
+    expect(component.getByTestId('listbox-item-default-icon').props).toMatchObject({
+      accessible: false,
+      height: 20,
+      vbHeight: 20,
+      vbWidth: 20,
+      width: 20,
+    });
+    expect(component.queryByTestId('listbox-item-default-selected-icon')).toBeNull();
   });
 
   it('applies selected visual state, swaps the icon, and preserves the label width', async () => {
@@ -119,7 +126,7 @@ describe('ListboxItem', () => {
 
     expect(StyleSheet.flatten(root.props.style).backgroundColor).toBe(defaultFlexTokens.color.backgroundNeutralTransparent.rest);
     expect(StyleSheet.flatten(component.getByText('Choice').props.style).fontWeight).toBe(defaultFlexTokens.fontWeight.functionalRegular);
-    expect(component.getByText('✓')).toBeOnTheScreen();
+    expect(component.getByTestId('checkbox-check-icon')).toBeOnTheScreen();
   });
 
   it('renders secondary content under the label when requested', async () => {
@@ -231,7 +238,13 @@ describe('ListboxItem bound to a list (LBI-006)', () => {
       expect.arrayContaining(['Select', 'AddToSelection', 'RemoveFromSelection']),
     );
     expect(option.props.keyDownEvents).toEqual(expect.arrayContaining([{ key: 'Home' }, { key: 'End' }]));
-    expect(component.getByText('✓', { includeHiddenElements: true })).toBeTruthy();
+    expect(component.getByTestId('listbox-item-checkmark-icon', { includeHiddenElements: true }).props).toMatchObject({
+      accessible: false,
+      height: 16,
+      vbHeight: 16,
+      vbWidth: 16,
+      width: 16,
+    });
     expect(registrations).toHaveLength(1);
     expect(registrations[0]).toMatchObject({ value: 'b', disabled: false, nativeTarget: 'native' });
   });
@@ -279,7 +292,13 @@ describe('ListboxItem bound to a list (LBI-006)', () => {
   it('shows the checkbox indicator in multiple mode', async () => {
     const { binding } = createBinding({ multiselect: true });
     const component = await renderBound(binding, { value: 'b', content: 'Bravo', testID: 'b' });
-    expect(component.getByText('✓', { includeHiddenElements: true }).props.style).toMatchObject({ position: 'absolute' });
+    expect(component.getByTestId('checkbox-check-icon', { includeHiddenElements: true }).props).toMatchObject({
+      accessible: false,
+      color: defaultFlexTokens.color.foregroundNeutralOnloud.rest,
+      height: 12,
+      width: 12,
+    });
+    expect(component.queryByTestId('listbox-item-checkmark-icon', { includeHiddenElements: true })).toBeNull();
     expect(component.getByTestId('b').props.accessibilityState).toMatchObject({ selected: true });
   });
 

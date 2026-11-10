@@ -15,7 +15,7 @@ import type { FocusablePressableProps, FocusKeyboardEvent } from '@fluentui-reac
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { composeRefs } from '../../common/composeRefs';
-import { semanticIconSources } from '../../common/iconSources';
+import { semanticIconSources, withDefaultIconSource } from '../../common/iconSources';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
 import { Icon } from '../../primitives/icon/icon';
@@ -24,8 +24,10 @@ import type { ListboxItemProps, ListboxItemState } from './listbox-item.types';
 import type { ListboxItemOptionAction } from './listboxItemOptionContext';
 import { getListboxItemOptionLabel, ListboxItemOptionContext } from './listboxItemOptionContext';
 
-const defaultRegularIcon = { fontSource: semanticIconSources.unselectedCircle, testID: 'listbox-item-default-icon' } as const;
-const defaultFilledIcon = { fontSource: semanticIconSources.selectedCircle, testID: 'listbox-item-default-selected-icon' } as const;
+const defaultRegularIcon = { testID: 'listbox-item-default-icon' } as const;
+const defaultFilledIcon = { testID: 'listbox-item-default-selected-icon' } as const;
+const defaultRegularIconTransform = withDefaultIconSource(semanticIconSources.unselectedCircle);
+const defaultFilledIconTransform = withDefaultIconSource(semanticIconSources.selectedCircle);
 
 // Keys an owning list handles for its options; declaring them stops the native view from also handling them.
 const optionKeys = [{ key: 'Home' }, { key: 'End' }];
@@ -104,10 +106,15 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
   const iconSlotProp = iconProp === null ? null : iconProp;
   const selectedIconSlotProp = selectedIconProp === null ? null : selectedIconProp;
   // A bound option renders the icon, selected icon, and secondary content only when they are supplied.
-  const icon = useOptionalSlot(Icon, isListItem ? iconSlotProp : null, { defaultProps: defaultRegularIcon, renderByDefault: !bound });
+  const icon = useOptionalSlot(Icon, isListItem ? iconSlotProp : null, {
+    defaultProps: defaultRegularIcon,
+    renderByDefault: !bound,
+    transform: defaultRegularIconTransform,
+  });
   const selectedIcon = useOptionalSlot(Icon, isListItem ? selectedIconSlotProp : null, {
     defaultProps: defaultFilledIcon,
     renderByDefault: !bound,
+    transform: defaultFilledIconTransform,
   });
   const avatar = useOptionalSlot(View, isListItem ? avatarProp : null);
   const secondaryContent = useOptionalSlot(
@@ -210,8 +217,14 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
 
   const root = useSlot(Pressable, { ...rootProps, ...nativeFocusProps, ref: rootRef });
   const header = useSlot(View, headerProps);
-  const chevronIndicator = useOptionalSlot(Icon, chevron ? { fontSource: semanticIconSources.chevron } : null);
-  const checkmarkIndicator = useOptionalSlot(Icon, checkmark && selected ? { fontSource: semanticIconSources.checkmark } : null);
+  const chevronIndicator = useOptionalSlot(
+    Icon,
+    chevron ? { svgSource: semanticIconSources.chevron, testID: 'listbox-item-chevron-icon' } : null,
+  );
+  const checkmarkIndicator = useOptionalSlot(
+    Icon,
+    checkmark && selected ? { svgSource: semanticIconSources.checkmark, testID: 'listbox-item-checkmark-icon' } : null,
+  );
   const checkboxIndicator = useOptionalSlot(CheckboxIndicator, multiselect ? {} : null);
 
   return {

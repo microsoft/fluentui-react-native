@@ -29,6 +29,7 @@ export function renderListItem_unstable(state: ListItemState) {
         primary={<LayoutStableText reserve={<state.contentHidden />} visible={<state.content />} />}
         secondary={state.secondaryContent ? <state.secondaryContent /> : undefined}
         secondaryPosition={state.secondaryContentPosition}
+        style={state.selectionIndicator ? { marginStart: state.metrics.selectionIndicatorMargin } : undefined}
         trailing={state.trailing ? <state.trailing /> : undefined}
       />
     </state.root>

@@ -6,6 +6,8 @@ import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
+import { Circle12Filled, Circle16Filled } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { Badge } from './badge';
 
 const badgeIcon = { fontSource: { codepoint: 0x2022, fontFamily: 'Arial' } } as const;
@@ -85,6 +87,15 @@ describe('Badge', () => {
     expect(StyleSheet.flatten(component.getByText(String.fromCodePoint(badgeIcon.fontSource.codepoint)).props.style)).toMatchObject({
       color: tokens.color.foregroundBrandPrimary.rest,
     });
+  });
+
+  it.each([
+    ['small', Circle12Filled],
+    ['medium', Circle16Filled],
+  ] as const)('BDG-002 draws the default Fluent circle in the %s leading slot when no icon is supplied', async (size, Circle) => {
+    const component = await renderBadge({ accessibilityLabel: 'Status', content: 'Status', size });
+
+    expect(getRenderedIconPaths(getRoot(component))).toEqual(getGeneratedIconPaths(Circle));
   });
 
   it('renders icon-only badges with an accessible image role and ignores the label slot', async () => {

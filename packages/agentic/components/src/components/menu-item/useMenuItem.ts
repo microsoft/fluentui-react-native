@@ -7,7 +7,7 @@ import type { FocusablePressableProps, FocusKeyboardEvent } from '@fluentui-reac
 import { useThemeState } from '@fluentui-react-native/design';
 
 import { isKeyboardPress } from '../../common/eventHandlers';
-import { semanticIconSources } from '../../common/iconSources';
+import { semanticIconSources, withDefaultIconSource } from '../../common/iconSources';
 import { withTriggerExpandActions } from '../../common/triggerExpandActions';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { CheckboxIndicator } from '../../primitives/checkbox-indicator/checkbox-indicator';
@@ -15,10 +15,10 @@ import { Icon } from '../../primitives/icon/icon';
 import type { MenuItemProps, MenuItemState } from './menu-item.types';
 import { MenuItemMenuContext } from './menuItemContext';
 
-const defaultRegularIcon = { fontSource: semanticIconSources.unselectedCircle };
-const defaultSelectedIcon = { fontSource: semanticIconSources.selectedCircle };
-const defaultChevron = { fontSource: semanticIconSources.chevron };
-const defaultCheckmark = { fontSource: semanticIconSources.checkmark };
+const defaultRegularIconTransform = withDefaultIconSource(semanticIconSources.unselectedCircle);
+const defaultSelectedIconTransform = withDefaultIconSource(semanticIconSources.selectedCircle);
+const defaultChevronTransform = withDefaultIconSource(semanticIconSources.chevron);
+const defaultCheckmarkTransform = withDefaultIconSource(semanticIconSources.checkmark);
 
 // Keys a Menu handles for its rows; declaring them stops the native view from also handling them.
 const menuRowKeys = [{ key: 'ArrowLeft' }, { key: 'ArrowRight' }, { key: 'Home' }, { key: 'End' }];
@@ -154,10 +154,10 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
   });
 
   const root = useSlot(Pressable, { ...pressableProps, ...nativeFocusProps, ref: rootRef });
-  const icon = useOptionalSlot(Icon, iconProp, { defaultProps: defaultRegularIcon, renderByDefault: true });
-  const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { defaultProps: defaultSelectedIcon, renderByDefault: selected });
+  const icon = useOptionalSlot(Icon, iconProp, { renderByDefault: true, transform: defaultRegularIconTransform });
+  const selectedIcon = useOptionalSlot(Icon, selectedIconProp, { renderByDefault: selected, transform: defaultSelectedIconTransform });
   const avatar = useOptionalSlot(View, avatarProp);
-  const chevronSlot = useOptionalSlot(Icon, chevronProp, { defaultProps: defaultChevron, renderByDefault: showChevron });
+  const chevronSlot = useOptionalSlot(Icon, chevronProp, { renderByDefault: showChevron, transform: defaultChevronTransform });
 
   const { focusTarget } = focusBinding;
   const register = inMenu ? menu.register : undefined;
@@ -175,7 +175,7 @@ export function useMenuItem_unstable(props: MenuItemProps): MenuItemState {
       },
     });
   }, [contentText, focusTarget, hasSubmenu, menuRowId, register, rowFocusable]);
-  const checkmarkSlot = useOptionalSlot(Icon, checkmarkProp, { defaultProps: defaultCheckmark, renderByDefault: hasCheckmark });
+  const checkmarkSlot = useOptionalSlot(Icon, checkmarkProp, { renderByDefault: hasCheckmark, transform: defaultCheckmarkTransform });
   const multiselectCheckbox = useOptionalSlot(CheckboxIndicator, multiselectCheckboxProp, { renderByDefault: hasMultiselect });
 
   const styleState: MenuItemState = {

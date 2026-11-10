@@ -40,11 +40,6 @@ export const listItemStyles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
   },
-  selectionIndicator: {
-    flexShrink: 0,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
   secondaryRight: {
     flexShrink: 0,
     marginStart: 'auto',
@@ -302,11 +297,4 @@ export function getListItemIconSize(size: ListItemState['size']): number {
 
 export function getListItemAvatarSize(size: ListItemState['size']): number {
   return sizeToAvatarSize[size];
-}
-
-export function getListItemSelectionIndicatorGlyph(selected: boolean, selectionMode: ListItemState['selectionMode']): string {
-  if (selectionMode === 'single') {
-    return selected ? '◉' : '○';
-  }
-  return selected ? '☑' : '☐';
 }

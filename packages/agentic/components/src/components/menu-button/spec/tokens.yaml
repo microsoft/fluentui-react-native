@@ -14,6 +14,7 @@ bindings:
 
   chevron:
     color: root foreground
+    icon: Fluent ChevronDown Regular at the available optical size nearest the resolved size
     size:
       small: size160
       medium: size200
@@ -28,9 +29,5 @@ bindings:
     notes: Menu's reviewed surface and row bindings apply unchanged.
 
 tokenGaps:
-  - binding: chevron.icon
-    detail: >-
-      The Fluent ChevronDown asset is unavailable; the package's shared down-chevron glyph is used
-      (menu-button-chevron-glyph).
   - binding: motion
     detail: Flex motion is pending; presentation and trigger color changes are instant (menu-button-motion).

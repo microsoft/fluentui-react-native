@@ -11,7 +11,7 @@ owner_paths:
 | -------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | `components.higher-order-components`                     | [Higher-order components](higher-order-components.md)        | Adding or changing a component under `src/components`, or its focus visuals     |
 | `components.primitives`                                  | [Primitives](primitives.md)                                  | Adding, changing, or consuming a public primitive                               |
-| `components.source-boundaries`                           | [Source boundaries](source-boundaries.md)                    | Adding shared code, dependencies, or extractions across components              |
+| `components.source-boundaries`                           | [Source boundaries](source-boundaries.md)                    | Adding shared code, icons, dependencies, or extractions across components       |
 | `components.contracts`                                   | [Contracts](contracts.md)                                    | Creating or reviewing `SPEC.md`, `spec/source.json`, lifecycle, or source drift |
 | `components.agentic.contract-sources.flex-x3`            | [Flex and X3](contract-sources/flex-x3.md)                   | Contract evidence from the pinned Flex catalog                                  |
 | `components.agentic.contract-sources.fluent-v9`          | [Fluent v9](contract-sources/fluent-v9.md)                   | Contract evidence from Fluent UI v9 source or specifications                    |

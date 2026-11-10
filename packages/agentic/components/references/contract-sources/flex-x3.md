@@ -52,3 +52,16 @@ Translate web concepts deliberately:
 Do not copy Flex prose or token tables into the public package. A mutable
 Marketplace or X3 HEAD change is candidate drift and does not invalidate a
 contract ratified against the pinned release.
+
+## Map icons
+
+In the pinned catalog, Flex and X3 name an icon by its Fluent Iconography
+Figma-library display name, a size, and a Regular or Filled style. They carry no
+path data, codepoints, URLs, or package names. Map each name to the matching
+`@fluentui/svg-icons` file, `<name>_<size>_<style>`, add it to the
+[icon manifest](../../scripts/icons/icon-manifest.mts), run `yarn gen:icons`, and
+reach it through `semanticIconSources` (see [icons](../source-boundaries.md#icons)).
+
+Record a divergence when the library has no matching size or style; for example,
+it ships no 12px Image icon. Cite an icon in a contract by name, size, and style,
+and never copy path data into a contract.

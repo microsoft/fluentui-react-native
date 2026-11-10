@@ -50,6 +50,14 @@ Button coverage demonstrates:
 Use table-driven tests for complete finite axes. When fixing one state regression, add a focused assertion even if a
 snapshot also changes.
 
+Test a component's default icons by their rendered output. The helpers in `src/common/icons/iconTestUtils.ts` read the
+`d` attribute of every rendered `RNSVGPath` (`getRenderedIconPaths`) and of a generated icon (`getGeneratedIconPaths`), so
+a test can assert which Fluent icon a slot drew. `getGeneratedIconPaths` calls the hook-free generated function directly
+because every `render` replaces the global `screen`; never render a second tree to read the expected paths. Query hidden
+icons with `{ includeHiddenElements: true }`, and isolate a menu item's checkmark with `icon: null, selectedIcon: null`
+because a selected item otherwise also draws the default selected circle. Jest does not render native SVG, so it cannot
+verify `currentColor` resolution or the pixels of a glyph.
+
 ## Type tests and primitives
 
 Add committed `*.types.test.ts` coverage for compile-time slot acceptance, mutually exclusive props, and public type

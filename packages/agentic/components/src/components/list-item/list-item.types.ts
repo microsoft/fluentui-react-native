@@ -13,6 +13,7 @@ import type {
 } from '@fluentui-react-native/framework-base';
 
 import type { Icon } from '../../primitives/icon/icon';
+import type { SvgIconSource } from '../../primitives/icon/icon.types';
 import type { FocusVisualsSlots } from '../../common/useFocusVisuals';
 import type { ItemSecondaryContentPosition } from '../../common/item.types';
 import type { Text } from '../text/text';
@@ -32,7 +33,7 @@ export type ListItemSlots = {
 };
 
 export type ListItemStateSlots = ListItemSlots & {
-  selectionIndicator: OptionalSlot<typeof NativeText>;
+  selectionIndicator: OptionalSlot<typeof Icon>;
   contentHidden: Slot<typeof NativeText>;
 };
 
@@ -72,6 +73,7 @@ export type ListItemState = ComponentState<ListItemStateSlots & FocusVisualsSlot
   PressableState & {
     metrics: ListItemMetrics;
     selectedFill: boolean;
-    selectionGlyph?: string;
+    /** Fluent icon drawn for the current selection mode and state; absent when `selectionMode` is `none`. */
+    selectionIndicatorSource?: SvgIconSource;
     userStyle?: StyleProp<ViewStyle>;
   };

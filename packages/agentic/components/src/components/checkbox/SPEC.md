@@ -55,13 +55,13 @@ The render order inside the root is the optional `FocusRing`, the indicator,
 and then the label column when either text node is present. The label column
 renders the label first and secondary text second.
 
-| Element        | Rendered when                          | Contract                                                                                                                                             |
-| -------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Focus visual   | custom path only                       | A private optional `FocusRing`; mounted while the custom path is selected and visible only for focused keyboard input.                               |
-| Indicator      | always                                 | A fixed 16 by 16 box carrying fill, stroke, and radius. It draws a checkmark for `checked`, a dash for `indeterminate`, and nothing for `unchecked`. |
-| Label column   | `showLabel`, or secondary text renders | A non-accessible column that holds the visible text nodes.                                                                                           |
-| Label          | `showLabel`                            | Wraps rather than truncates when the root width is constrained.                                                                                      |
-| Secondary text | `showLabel` and `showSecondaryText`    | Stays at secondary emphasis for every status.                                                                                                        |
+| Element        | Rendered when                          | Contract                                                                                                                                                                                      |
+| -------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Focus visual   | custom path only                       | A private optional `FocusRing`; mounted while the custom path is selected and visible only for focused keyboard input.                                                                        |
+| Indicator      | always                                 | A fixed 16 by 16 box carrying fill, stroke, and radius. It draws the Fluent Checkmark icon for `checked`, the Fluent Subtract icon (a dash) for `indeterminate`, and nothing for `unchecked`. |
+| Label column   | `showLabel`, or secondary text renders | A non-accessible column that holds the visible text nodes.                                                                                                                                    |
+| Label          | `showLabel`                            | Wraps rather than truncates when the root width is constrained.                                                                                                                               |
+| Secondary text | `showLabel` and `showSecondaryText`    | Stays at secondary emphasis for every status.                                                                                                                                                 |
 
 ### Requirements
 

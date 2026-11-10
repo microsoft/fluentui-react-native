@@ -2,7 +2,7 @@
 
 Use ListItem for a pressable row whose owner supplies its selected value. Use
 `selectionMode="single"` or `"multiple"` only to choose the row's visual
-glyph; coordinate selected rows in the surrounding component.
+indicator icon; coordinate selected rows in the surrounding component.
 
 ```tsx
 <ListItem

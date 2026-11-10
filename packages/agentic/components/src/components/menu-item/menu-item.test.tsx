@@ -6,6 +6,8 @@ import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
+import { Checkmark16Filled, ChevronRight20Regular, Circle20Filled, Circle20Regular } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { MenuItem } from './menu-item';
 import type { MenuItemProps } from './menu-item.types';
 import { MenuItemMenuContext } from './menuItemContext';
@@ -44,6 +46,33 @@ describe('MenuItem', () => {
       backgroundColor: defaultFlexTokens.color.backgroundNeutralTransparent.rest,
       minHeight: 40,
     });
+  });
+
+  it.each([
+    { state: 'rest', props: {}, Circle: Circle20Regular },
+    { state: 'selected', props: { selected: true }, Circle: Circle20Filled },
+  ])('draws the Fluent circle for the $state default icon', async ({ props, Circle }) => {
+    const component = await renderMenuItem({ content: 'Save', ...props });
+
+    expect(getRenderedIconPaths(getRoot(component))).toEqual(getGeneratedIconPaths(Circle));
+  });
+
+  it('draws the Fluent right chevron on a submenu row', async () => {
+    const component = await renderMenuItem({ content: 'Share', hasChevron: true, icon: null });
+
+    expect(getRenderedIconPaths(getRoot(component))).toEqual(getGeneratedIconPaths(ChevronRight20Regular));
+  });
+
+  it('draws the Fluent checkmark on a single-select row', async () => {
+    const component = await renderMenuItem({
+      content: 'Single select',
+      hasCheckmark: true,
+      icon: null,
+      selected: true,
+      selectedIcon: null,
+    });
+
+    expect(getRenderedIconPaths(getRoot(component, 'menuitemradio'))).toEqual(getGeneratedIconPaths(Checkmark16Filled));
   });
 
   it('uses the selected icon, selected background, and semibold text when selected', async () => {

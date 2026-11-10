@@ -4,13 +4,11 @@ import { Image, Text, View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
-import { semanticIconSources } from '../../common/iconSources';
+import { semanticIconSources, withDefaultIconSource } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import type { AvatarProps, AvatarState } from './avatar.types';
 
-const defaultAvatarIcon = {
-  fontSource: semanticIconSources.person,
-} as const;
+const defaultAvatarIconTransform = withDefaultIconSource(semanticIconSources.person);
 
 function normalizeInitialsChildren(children: React.ReactNode, size: number): React.ReactNode {
   if (typeof children !== 'string' && typeof children !== 'number') {
@@ -65,8 +63,8 @@ export function useAvatar_unstable(props: AvatarProps): AvatarState {
 
   const image = useOptionalSlot(Image, contentMode === 'image' ? imageProp : null);
   const icon = useOptionalSlot(Icon, contentMode === 'icon' ? iconProp : null, {
-    defaultProps: defaultAvatarIcon,
     renderByDefault: true,
+    transform: defaultAvatarIconTransform,
   });
   const initials = useOptionalSlot(Text, contentMode === 'initials' ? initialsProp : null, {
     defaultProps: { children: 'AB' },

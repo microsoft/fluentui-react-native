@@ -94,7 +94,7 @@
     },
     {
       "id": "LIT-003",
-      "evidence": ["useListItem.ts", "list-item.styles.ts", "list-item.test.tsx"]
+      "evidence": ["useListItem.ts", "useListItemStyles.ts", "list-item.styles.ts", "list-item.test.tsx"]
     },
     {
       "id": "LIT-004",

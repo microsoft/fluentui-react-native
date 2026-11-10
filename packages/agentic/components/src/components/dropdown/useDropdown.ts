@@ -295,7 +295,7 @@ export function useDropdown_unstable(props: DropdownProps): DropdownState {
     typeof Pressable
   >);
   const iconStart = useOptionalSlot(Icon, iconStartProp);
-  const chevron = useSlot(Icon, { fontSource: controller.presented ? semanticIconSources.chevronUp : semanticIconSources.chevronDown });
+  const chevron = useSlot(Icon, { svgSource: controller.presented ? semanticIconSources.chevronUp : semanticIconSources.chevronDown });
   const value = useSlot(NativeText, { children: valueText, numberOfLines: 1 });
   const underline = useOptionalSlot(View, variant === 'underline' ? {} : null);
   const underlineFocus = useOptionalSlot(View, variant === 'underline' ? {} : null);

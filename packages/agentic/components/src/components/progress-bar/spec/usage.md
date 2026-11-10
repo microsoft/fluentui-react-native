@@ -52,7 +52,7 @@ nothing.
 ## Validation icon
 
 The icon defaults on for the error and success statuses and off for neutral.
-Override with `showValidationIcon`, replace the glyph through the
+Override with `showValidationIcon`, replace the icon through the
 `validationIcon` slot, or pass `null` to remove it while keeping the status
 color.
 

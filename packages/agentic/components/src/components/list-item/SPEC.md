@@ -27,18 +27,20 @@ props; its caller style is applied last.
 
 The public slots are `root`, required `content`, and optional
 `secondaryContent`, `icon`, `selectedIcon`, `avatar`, and `trailing`.
-`selectionIndicator` and the hidden content reservation are state-only slots.
-The rendered root contains the optional `FocusRing`, the selection glyph,
-then CompoundItemLayout. The layout renders avatar before the active icon,
-the layout-stable content, optional secondary content, and optional trailing
-content. A selected `selectedIcon` replaces `icon`; avatar takes precedence
-over either icon.
+`selectionIndicator`, an `Icon` slot, and the hidden content reservation are
+state-only slots. The rendered root contains the optional `FocusRing`, the
+selection indicator icon, then CompoundItemLayout. The layout renders avatar
+before the active icon, the layout-stable content, optional secondary content,
+and optional trailing content. A selected `selectedIcon` replaces `icon`;
+avatar takes precedence over either icon.
 
 `selected` is externally owned. Pressing the root forwards `onPress` but never
-changes it. `selectionMode` chooses no glyph, a radio-like glyph, or a
-checkbox-like glyph. A selected multiple-selection row deliberately omits its
-row fill. Disabled rows also omit selection fill; other selected rows reserve
-semibold content width and show the selected fill.
+changes it. `selectionMode` chooses no indicator, a Fluent radio icon, or a
+Fluent checkbox icon, drawn in its regular style while unselected and its
+filled style while selected. The indicator is hidden from the accessibility
+tree. A selected multiple-selection row deliberately omits its row fill.
+Disabled rows also omit selection fill; other selected rows reserve semibold
+content width and show the selected fill.
 
 ### Requirements
 
@@ -85,18 +87,18 @@ those behaviors through its own React Native composition.
 - `native-system-focus-visuals` (**accepted**): Apply the [shared native adaptation](../../../references/higher-order-components.md#focus-visual-policy).
 
 - `list-item-native-selection-indicators` (**accepted**): FURN renders the
-  single- and multi-select indicators as inaccessible text glyphs rather than
-  composing Radio or Checkbox controls.
+  single- and multi-select indicators as inaccessible Fluent radio and
+  checkbox icons rather than composing Radio or Checkbox controls.
 - `list-item-native-role` (**accepted**): FURN gives the standalone row a
   button role by default and publishes `accessibilityState.selected`; it does
   not derive container-specific item semantics.
 
 ## Conformance
 
-| Requirement | Evidence                                                             |
-| ----------- | -------------------------------------------------------------------- |
-| LIT-001     | `list-item.types.ts`, `useListItem.ts`, `list-item.types.test.ts`    |
-| LIT-002     | `renderListItem.tsx`, `useListItem.ts`, `list-item.test.tsx`         |
-| LIT-003     | `useListItem.ts`, `list-item.styles.ts`, `list-item.test.tsx`        |
-| LIT-004     | `useListItem.ts`, `useListItemStyles.ts`, `list-item.test.tsx`       |
-| LIT-005     | `list-item.styles.ts`, `list-item.stories.tsx`, `list-item.test.tsx` |
+| Requirement | Evidence                                                                              |
+| ----------- | ------------------------------------------------------------------------------------- |
+| LIT-001     | `list-item.types.ts`, `useListItem.ts`, `list-item.types.test.ts`                     |
+| LIT-002     | `renderListItem.tsx`, `useListItem.ts`, `list-item.test.tsx`                          |
+| LIT-003     | `useListItem.ts`, `useListItemStyles.ts`, `list-item.styles.ts`, `list-item.test.tsx` |
+| LIT-004     | `useListItem.ts`, `useListItemStyles.ts`, `list-item.test.tsx`                        |
+| LIT-005     | `list-item.styles.ts`, `list-item.stories.tsx`, `list-item.test.tsx`                  |

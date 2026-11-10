@@ -3,6 +3,8 @@ import * as React from 'react';
 import type { View } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
 
+import { ChevronDown16Regular, ChevronDown20Regular } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { render } from '../../common/renderWithTheme';
 import { MenuItem } from '../menu-item/menu-item';
 import { MenuButton } from './menu-button';
@@ -118,6 +120,15 @@ describe('MenuButton', () => {
     await fireEvent(screen.getByTestId('trigger'), 'press', { nativeEvent: { key: 'Enter' } });
     expect(screen.getByTestId('trigger').props.accessibilityState).toMatchObject({ expanded: true });
     expect(backgroundColor(screen.getByTestId('trigger'))).not.toEqual(rest);
+  });
+
+  it.each([
+    { size: 'small', Chevron: ChevronDown16Regular },
+    { size: 'medium', Chevron: ChevronDown20Regular },
+    { size: 'large', Chevron: ChevronDown20Regular },
+  ] as const)('draws the Fluent chevron down for the $size button', async ({ size, Chevron }) => {
+    await render(<Scene size={size} />);
+    expect(getRenderedIconPaths(screen.getByTestId('trigger'))).toEqual(getGeneratedIconPaths(Chevron));
   });
 
   it('never opens while disabled', async () => {

@@ -3,14 +3,12 @@ import { View } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useSlot } from '@fluentui-react-native/framework-base';
 
-import { semanticIconSources } from '../../common/iconSources';
+import { semanticIconSources, withDefaultIconSource } from '../../common/iconSources';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
 import type { BadgeProps, BadgeState } from './badge.types';
 
-const defaultBadgeIcon = {
-  fontSource: semanticIconSources.selectedCircle,
-} as const;
+const defaultBadgeIconTransform = withDefaultIconSource(semanticIconSources.selectedCircle);
 
 /**
  * Creates the resolved state for Badge.
@@ -76,8 +74,8 @@ export function useBadge_unstable(props: BadgeProps): BadgeState {
     renderByDefault: true,
   });
   const leadingIcon = useOptionalSlot(Icon, leadingIconVisible ? leadingIconProp : null, {
-    defaultProps: defaultBadgeIcon,
     renderByDefault: true,
+    transform: defaultBadgeIconTransform,
   });
   const trailingIcon = useOptionalSlot(Icon, trailingIconVisible ? trailingIconProp : null);
 

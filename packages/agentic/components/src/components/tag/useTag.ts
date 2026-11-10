@@ -3,15 +3,13 @@ import { Pressable } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
-import { semanticIconSources } from '../../common/iconSources';
+import { semanticIconSources, withDefaultIconSource } from '../../common/iconSources';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Icon } from '../../primitives/icon/icon';
 import { Text } from '../text/text';
 import type { TagProps, TagState } from './tag.types';
 
-const defaultDismissIcon = {
-  fontSource: semanticIconSources.dismiss,
-};
+const defaultDismissIconTransform = withDefaultIconSource(semanticIconSources.dismiss);
 
 export function useTag_unstable(props: TagProps): TagState {
   const {
@@ -73,8 +71,8 @@ export function useTag_unstable(props: TagProps): TagState {
     renderByDefault: false,
   });
   const dismissIcon = useOptionalSlot(Icon, showDismissIcon ? dismissIconProp : null, {
-    defaultProps: defaultDismissIcon,
     renderByDefault: true,
+    transform: defaultDismissIconTransform,
   });
 
   return {

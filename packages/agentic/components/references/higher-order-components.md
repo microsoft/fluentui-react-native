@@ -46,6 +46,9 @@ audit.
   from `framework-base`. Externally driven selection exposes only `selected`, never changes it, and reports the
   interaction through `onPress`.
 - Use Flex tokens first and document genuine token gaps.
+- Map the component's glyphs to Fluent icons where one exists. Default icons come from `semanticIconSources`, which wraps
+  the generated Fluent SVG icons, rather than from Unicode characters or font glyphs; see
+  [icons](source-boundaries.md#icons).
 - Create style factories only at module scope and cache theme-only styles.
 - Declare state precedence explicitly; disabled wins over pressed, which wins over hovered.
 - Apply user styles after component styles.

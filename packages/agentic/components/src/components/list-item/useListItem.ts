@@ -4,12 +4,24 @@ import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
 import { Icon } from '../../primitives/icon/icon';
-import { hideSlotProps } from '../../common/accessibility';
+import { semanticIconSources } from '../../common/iconSources';
 import { useFocusVisuals } from '../../common/useFocusVisuals';
 import { Text } from '../text/text';
 
-import { getListItemAvatarSize, getListItemIconSize, getListItemSelectionIndicatorGlyph } from './list-item.styles';
+import { getListItemAvatarSize, getListItemIconSize } from './list-item.styles';
 import type { ListItemMetrics, ListItemProps, ListItemState } from './list-item.types';
+
+// Module-level so each selection state keeps one stable set of slot props. The test IDs name the drawn state.
+const selectionIndicators = {
+  multiple: {
+    selected: { svgSource: semanticIconSources.checkboxChecked, testID: 'list-item-checkbox-checked' },
+    unselected: { svgSource: semanticIconSources.checkboxUnchecked, testID: 'list-item-checkbox-unchecked' },
+  },
+  single: {
+    selected: { svgSource: semanticIconSources.radioSelected, testID: 'list-item-radio-selected' },
+    unselected: { svgSource: semanticIconSources.radioUnselected, testID: 'list-item-radio-unselected' },
+  },
+} as const;
 
 function getMetrics(size: ListItemState['size'], tokens: ListItemState['tokens']): ListItemMetrics {
   const { spacing } = tokens;
@@ -82,7 +94,8 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const themeState = useThemeState();
   const metrics = getMetrics(size, themeState.tokens);
   const selectedFill = selected && selectionMode !== 'multiple' && !disabled;
-  const selectionGlyph = selectionMode === 'none' ? undefined : getListItemSelectionIndicatorGlyph(selected, selectionMode);
+  const selectionIndicatorProps =
+    selectionMode === 'none' ? null : selectionIndicators[selectionMode][selected ? 'selected' : 'unselected'];
 
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
@@ -107,7 +120,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const selectedIcon = useOptionalSlot(Icon, selectedIconProp);
   const avatar = useOptionalSlot(View, avatarProp);
   const trailing = useOptionalSlot(View, trailingProp);
-  const selectionIndicator = useOptionalSlot(NativeText, selectionGlyph, { transform: hideSlotProps });
+  const selectionIndicator = useOptionalSlot(Icon, selectionIndicatorProps);
 
   return {
     FocusRing,
@@ -127,7 +140,7 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
     size,
     metrics,
     selectedFill,
-    selectionGlyph,
+    selectionIndicatorSource: selectionIndicatorProps?.svgSource,
     userStyle,
     ...themeState,
     ...pressableState,

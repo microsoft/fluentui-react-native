@@ -50,8 +50,8 @@ is documented in the owning reference, component contract, or the repository foc
 These components had staged specs that were removed under
 [#4252](https://github.com/microsoft/fluentui-react-native/issues/4252) (see
 [legacy staged specs](contracts.md#legacy-staged-specs)). Their feasibility and blockers were recorded on 2026-08-28.
-Several dependencies have landed since, including Popover, Menu, MenuItem, Divider, Tab, and Radio, so re-evaluate each
-row against the current package before drafting its contract.
+Several dependencies have landed since, including Popover, Menu, MenuItem, Divider, Tab, Radio, and the generated Fluent
+SVG icons, so re-evaluate each row against the current package before drafting its contract.
 
 | Component       | Issue                                                                   | Recorded RN feasibility        | Recorded blocker or dependency                                                   | Re-evaluation decision                                                     |
 | --------------- | ----------------------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -62,7 +62,7 @@ row against the current package before drafting its contract.
 | Label           | [#4228](https://github.com/microsoft/fluentui-react-native/issues/4228) | Blocked as authored            | HTML label/control association has no pure RN equivalent                         | Choose an RN association or visual-only contract                           |
 | Link            | [#4229](https://github.com/microsoft/fluentui-react-native/issues/4229) | Partial; blocked as authored   | Web navigation semantics and unsupported underline geometry                      | Explicitly accept an RN text-link approximation or retarget                |
 | List            | [#4230](https://github.com/microsoft/fluentui-react-native/issues/4230) | Feasible in principle; blocked | ListItem row, focus, and accessibility contract                                  | Reuse implemented ListItem and define collection focus and accessibility   |
-| MessageBar      | [#4233](https://github.com/microsoft/fluentui-react-native/issues/4233) | Partial; blocked               | Cross-platform Fluent status-icon source                                         | Provide canonical status-icon assets                                       |
+| MessageBar      | [#4233](https://github.com/microsoft/fluentui-react-native/issues/4233) | Partial; blocked               | Cross-platform Fluent status-icon source                                         | Choose the status icons and add them to the icon manifest                  |
 | RadioGroup      | [#4237](https://github.com/microsoft/fluentui-react-native/issues/4237) | Feasible in principle; blocked | Radio child and label/legend composition                                         | Reuse implemented Radio and decide group labeling and navigation           |
 | Scrollbar       | [#4238](https://github.com/microsoft/fluentui-react-native/issues/4238) | Blocked                        | Scroll metrics, tokenized thumb control, and drag interaction need a native host | Define a scroll-source API and platform scrollbar bridge                   |
 | Textarea        | [#4245](https://github.com/microsoft/fluentui-react-native/issues/4245) | Blocked as authored            | HTML textarea semantics and CSS resize behavior                                  | Make the product/API choice described below                                |
@@ -79,3 +79,40 @@ provide it.
 - **Current state:** CSS `resize` and HTML `<textarea>` semantics do not map to a pure React Native `TextInput`.
 - **Done when:** the issue chooses between a platform-native React Native approximation, with no resize-handle parity
   with the documented Windows and macOS behavior, and a web or CSS-specific component.
+
+## Switch to the published icon codegen
+
+- **Pull request:** [microsoft/fluentui-system-icons#1292](https://github.com/microsoft/fluentui-system-icons/pull/1292)
+- **Outcome:** the generated Fluent icons come from the published `@fluentui/react-native-icons/codegen` entry point
+  instead of a local copy of its generator.
+- **Current state:** the pull request is open and unpublished. [`codegen/index.ts`](../scripts/icons/codegen/index.ts)
+  and its sibling modules are a temporary local copy of the generator, kept faithful so both produce identical output.
+  [`generate-icons.mts`](../scripts/icons/generate-icons.mts) runs it over
+  [`icon-manifest.mts`](../scripts/icons/icon-manifest.mts) and the `@fluentui/svg-icons` assets to write
+  `src/common/icons/fluentIcons.generated.tsx`.
+- **Steps:** add `@fluentui/react-native-icons` as a development dependency. Keep `@fluentui/svg-icons`, `@svgr/core`, and
+  `@svgr/plugin-jsx` for as long as the package declares them as peers of its codegen. Import the generator from the
+  package in `generate-icons.mts` and delete the `codegen/` folder beside it. Keep `src/common/icons/fluentSvg.tsx` and
+  pass `utilPath: './fluentSvg'`: as of the pull request, the published utility marks icons without a `title`,
+  `aria-label`, or `aria-labelledby` as hidden from accessibility, but components here label icons through
+  `accessibilityLabel`. Then delete this section and the temporary-codegen wording in
+  [source boundaries](source-boundaries.md#icons) and [contributing](contributing.md).
+- **Done when:** the published package version has cleared the repository's dependency age gate and `yarn check:icons`
+  reports no change to the generated file.
+
+## Windows Storybook host and SVG icons
+
+- **Outcome:** the Windows Storybook host draws the SVG icons the components use by default.
+- **Current state:** the Storybook app turns off Windows autolinking for `react-native-svg` in its React Native config, so
+  that host does not link the library's native views. Spinner and Skeleton already draw through `react-native-svg`; the
+  generated Fluent icons extend that to the default icons of Accordion, Avatar, Badge, Checkbox, Dropdown, ListItem,
+  ListboxItem, MenuButton, MenuItem, ProgressBar, and Tag. Applications that autolink `react-native-svg`, an existing
+  peer dependency, are unaffected. No Windows or Win32 Storybook run has drawn an SVG icon, so how those hosts present one
+  is unverified; React Native Windows is expected to draw an unimplemented-component placeholder for a native view that is
+  not registered. The Win32 host is a prebuilt application, and whether it supports `react-native-svg` has not been
+  determined.
+- **Steps:** turn Windows autolinking for `react-native-svg` back on in the Storybook app's React Native config, pin one
+  Windows SDK through `WindowsTargetPlatformVersion` as the FluentTester desktop config does, then run
+  `yarn storybook build --windows` and `yarn storybook smoke --windows --mode stories-and-tests` in the Storybook app.
+- **Done when:** the Windows Storybook build links `react-native-svg` and the smoke run shows the icons drawn with no
+  skipped stories or tests.

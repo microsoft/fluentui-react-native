@@ -14,9 +14,11 @@ owner_paths:
 | `src/components/<name>/`  | One higher-order component, its `SPEC.md` contract and `spec/` companions; see `higher-order-components.md` |
 | `src/primitives/<name>/`  | One public primitive and its `CONTRACT.md`; see `primitives.md`                                             |
 | `src/common/`             | Package-private helpers shared by components; see `source-boundaries.md`                                    |
+| `src/common/icons/`       | Generated Fluent SVG icons (do not hand-edit) and their helpers; see `source-boundaries.md`                 |
 | `src/index.ts`            | Root exports: higher-order components, public types, and `_unstable` pipeline stages                        |
 | `src/primitives/index.ts` | The `./primitives` entry point                                                                              |
 | `spec-contracts/` scripts | The contract checker and the Flex source drift reporter; see `contracts.md`                                 |
+| `icons/` scripts          | The icon manifest, the generator runner, and a temporary local codegen copy; see `remaining-work.md`        |
 | `spec-source-lock.json`   | The pinned Flex catalog, X3 lineage, and legacy staged-spec records                                         |
 | `spec-source-report.json` | The generated contract and drift report                                                                     |
 | `tsconfig.stories.json`   | Type coverage for every test-bearing story                                                                  |
@@ -25,9 +27,10 @@ The canonical implementations are `src/components/button` and `src/primitives/ic
 
 ## Tests
 
-`yarn test` runs the contract checker, the story type check, and Jest with the macOS platform preset declared in
-`package.json`. While iterating, run only the affected component's Jest tests with `yarn test <component>` or
-`yarn test --findRelatedTests <source>` (R-VALID-004), and run `yarn check:spec-contracts` after contract changes.
+`yarn test` runs the contract checker, the generated-icon freshness check (`yarn check:icons`), the story type check, and
+Jest with the macOS platform preset declared in `package.json`. While iterating, run only the affected component's Jest
+tests with `yarn test <component>` or `yarn test --findRelatedTests <source>` (R-VALID-004), run
+`yarn check:spec-contracts` after contract changes, and run `yarn gen:icons` after editing the icon manifest.
 `tests-and-stories.md` covers runtime, type, snapshot, and Storybook coverage, including native `wdio` story tests,
 which run from the Storybook app with `yarn storybook test --<platform>`.
 

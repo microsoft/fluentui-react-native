@@ -1,9 +1,12 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Circle, Path, Svg } from 'react-native-svg';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { directComponent } from '@fluentui-react-native/framework-base';
 
+import type { IconElementProps } from '../icon/icon.types';
 import { CheckboxIndicator } from './checkbox-indicator';
 import type { CheckboxIndicatorStatus } from './checkbox-indicator.types';
 
@@ -18,6 +21,18 @@ const StoryItem = ({ children, label }: StoryItemProps) => (
     <Text style={styles.label}>{label}</Text>
   </View>
 );
+
+const StarGlyph = directComponent<IconElementProps>(({ color, height, width, ...props }) => (
+  <Svg {...props} color={color} fill="currentColor" height={height} viewBox="0 0 24 24" width={width}>
+    <Path d="M12 2 14.47 8.6 21.51 8.91 16 13.3 17.88 20.09 12 16.2 6.12 20.09 8 13.3 2.49 8.91 9.53 8.6Z" />
+  </Svg>
+));
+
+const DotGlyph = directComponent<IconElementProps>(({ color, height, width, ...props }) => (
+  <Svg {...props} color={color} fill="currentColor" height={height} viewBox="0 0 24 24" width={width}>
+    <Circle cx="12" cy="12" r="5" />
+  </Svg>
+));
 
 const statuses: readonly CheckboxIndicatorStatus[] = ['unchecked', 'checked', 'indeterminate'];
 
@@ -107,7 +122,7 @@ export const CustomGlyphs: Story = {
     <View style={styles.row}>
       <StoryItem label="Checked">
         <CheckboxIndicator
-          checkedIconSource={{ codepoint: 0x2605, fontFamily: 'Arial' }}
+          checkedIconSource={StarGlyph}
           iconColor={iconColor}
           iconSize={iconSize}
           status="checked"
@@ -118,7 +133,7 @@ export const CustomGlyphs: Story = {
         <CheckboxIndicator
           iconColor={iconColor}
           iconSize={iconSize}
-          indeterminateIconSource={{ codepoint: 0x2022, fontFamily: 'Arial' }}
+          indeterminateIconSource={DotGlyph}
           status="indeterminate"
           style={[styles.indicator, styles.active]}
         />
@@ -128,7 +143,7 @@ export const CustomGlyphs: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Consumers can replace the checked and indeterminate font glyph sources.',
+        story: 'Consumers can replace the checked and indeterminate glyphs with their own SVG icon components.',
       },
     },
   },

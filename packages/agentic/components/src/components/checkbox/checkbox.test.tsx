@@ -8,6 +8,8 @@ import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
+import { Checkmark12Filled, Subtract12Filled } from '../../common/icons/fluentIcons.generated';
+import { getGeneratedIconPaths, getRenderedIconPaths } from '../../common/icons/iconTestUtils';
 import { Checkbox } from './checkbox';
 import type { CheckboxStatus } from './checkbox.types';
 
@@ -25,6 +27,10 @@ function getRootStyle(component: RenderResult): ViewStyle {
 
 function getIndicatorStyle(component: RenderResult): ViewStyle {
   return StyleSheet.flatten(component.getByTestId('checkbox-indicator').props.style);
+}
+
+function getIndicatorGlyphColor(component: RenderResult, status: 'checked' | 'indeterminate') {
+  return component.getByTestId(status === 'indeterminate' ? 'checkbox-dash-icon' : 'checkbox-check-icon').props.color;
 }
 
 describe('Checkbox', () => {
@@ -203,6 +209,7 @@ describe('Checkbox', () => {
       height: 12,
       width: 12,
     });
+    expect(getRenderedIconPaths(checked.getByTestId('checkbox-check-icon'))).toEqual(getGeneratedIconPaths(Checkmark12Filled));
     expect(getRoot(checked).props.accessibilityState).toEqual({ checked: true, disabled: false });
 
     const indeterminate = await renderCheckbox({ label: 'Mixed', status: 'indeterminate' });
@@ -210,6 +217,7 @@ describe('Checkbox', () => {
       height: 12,
       width: 12,
     });
+    expect(getRenderedIconPaths(indeterminate.getByTestId('checkbox-dash-icon'))).toEqual(getGeneratedIconPaths(Subtract12Filled));
     expect(getRoot(indeterminate).props.accessibilityState).toEqual({ checked: 'mixed', disabled: false });
   });
 
@@ -305,8 +313,7 @@ describe('Checkbox', () => {
     expect(StyleSheet.flatten(indicator.props.style).backgroundColor).toBe(expectedBackground);
     expect(StyleSheet.flatten(label.props.style).color).toBe(expectedLabelColor);
     if (status !== 'unchecked') {
-      const icon = component.getByText(status === 'indeterminate' ? '\u2212' : '\u2713');
-      expect(StyleSheet.flatten(icon.props.style).color).toBe(colors.foregroundBrandOnloud.rest);
+      expect(getIndicatorGlyphColor(component, status)).toBe(colors.foregroundBrandOnloud.rest);
     }
   });
 
@@ -498,9 +505,7 @@ describe('Checkbox', () => {
             colors.foregroundNeutralSecondary[state],
           );
           if (status !== 'unchecked') {
-            expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
-              colors.foregroundBrandOnloud[state],
-            );
+            expect(getIndicatorGlyphColor(component, status)).toBe(colors.foregroundBrandOnloud[state]);
           }
         }
       },
@@ -524,9 +529,7 @@ describe('Checkbox', () => {
           );
         }
         if (status !== 'unchecked') {
-          expect(StyleSheet.flatten(component.getByText(status === 'checked' ? '\u2713' : '\u2212').props.style).color).toBe(
-            colors.foregroundNeutralDisabled.rest,
-          );
+          expect(getIndicatorGlyphColor(component, status)).toBe(colors.foregroundNeutralDisabled.rest);
         }
       },
     );

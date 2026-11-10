@@ -42,11 +42,11 @@ function getDefaultIcon(status: ProgressBarStatus) {
   switch (status) {
     case 'error':
       return {
-        fontSource: semanticIconSources.error,
+        svgSource: semanticIconSources.error,
       } as const;
     case 'success':
       return {
-        fontSource: semanticIconSources.checkmark,
+        svgSource: semanticIconSources.success,
       } as const;
     default:
       return undefined;

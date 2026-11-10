@@ -24,12 +24,13 @@ bindings:
       small: size160
       medium: size200
       large: size240
+    icon: Fluent ChevronDown Regular at the available optical size nearest the resolved size
     color:
       disabled: color.foregroundNeutralDisabled
       error: color.foregroundNeutralPrimary
       focused: color.foregroundNeutralPrimary
       rest: color.foregroundNeutralSecondary
-    open-behavior: up glyph while the list is presented
+    open-behavior: Fluent ChevronUp Regular while the list is presented
 
   listbox:
     backgroundColor: color.surfaceNeutralNearer
@@ -55,10 +56,6 @@ bindings:
     gap: spacing.componentBase100
 
 tokenGaps:
-  - binding: chevron.icon
-    detail: >-
-      The Fluent ChevronDown and ChevronUp assets are unavailable; the package's shared chevron glyphs are used
-      (dropdown-chevron-glyph).
   - binding: listbox.maxHeight
     detail: Flex sets no token for the row cap; the option area is capped at 320, about eight rows.
   - binding: listbox.elevation
