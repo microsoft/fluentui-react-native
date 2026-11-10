@@ -211,7 +211,10 @@ void Host::WorkerLoop() {
     {
       std::unique_lock<std::mutex> guard(mutex_);
       signal_.wait(guard, [this] { return stopping_ || !queue_.empty(); });
-      if (stopping_ && queue_.empty()) {
+      if (stopping_) {
+        // The transport is gone, so nothing can observe queued commands; they
+        // must not run under a token re-armed after shutdown began.
+        queue_.clear();
         break;
       }
       request = std::move(queue_.front());
@@ -261,6 +264,9 @@ void Host::WorkerLoop() {
       ExitProcess(0);
     }
   }
+  // The physical input lock belongs to this thread, so it is released here
+  // rather than abandoned when the thread exits.
+  driver_.ReleaseInput();
   winrt::uninit_apartment();
 }
 

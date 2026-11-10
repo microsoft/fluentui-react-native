@@ -3099,6 +3099,38 @@ void TestDriverMutationEffects() {
   driver.InputForTesting().UseTestSender(&RecordInput);
   driver.ReleaseInput();
 
+  // A key left down keeps the cross-process physical input lock until it is
+  // released, so another helper cannot interleave input with the held key.
+  const auto acquireElsewhere = []() {
+    std::string outcome = "unknown";
+    std::thread worker([&outcome]() {
+      const CancellationToken idle;
+      try {
+        const PhysicalInputScope scope(idle, 200);
+        outcome = scope.owns() ? "acquired" : "unowned";
+      } catch (const HelperError& error) {
+        outcome = error.code();
+      } catch (const CancelledError&) {
+        outcome = "cancelled";
+      }
+    });
+    worker.join();
+    return outcome;
+  };
+  const json::Value holdA = actions(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyDown","value":"a"}]}])");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdA, token); }) == "none" &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "a key left down keeps the physical input lock after its command");
+  Check(FailureCode([&]() { driver.Execute("releaseActions", empty, token); }) == "none" &&
+            !driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "releasing the held key releases the physical input lock");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdA, token); }) == "none" &&
+            driver.HasDepressedInput(),
+        "a key is held again for the release recovery");
+  driver.ReleaseInput();
+  Check(!driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "the release recovery frees the held key and the physical input lock");
+
   // Abandoned: the provider never returns from the value write.
   ResetMutationQuarantineForTesting();
   const auto gate = std::make_shared<Gate>();

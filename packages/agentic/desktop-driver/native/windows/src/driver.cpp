@@ -470,21 +470,24 @@ CommandResult Driver::EncodeCapture(HWND window, const RECT& cropScreen, bool cr
 
 void Driver::ReleaseInput() noexcept {
   try {
-    if (!input_.HasDepressedInput()) {
-      return;
-    }
-    const CancellationToken idle;
-    try {
-      const PhysicalInputScope scope(idle, kPhysicalInputCleanupWaitMs, AbandonPolicy::Adopt);
-      input_.ReleaseAll();
-      return;
-    } catch (const HelperError&) {
-      // Depressed input must never outlive a cancelled command, so recovery
-      // proceeds even when the cross-process lock could not be acquired.
-      input_.ReleaseAll();
+    if (input_.HasDepressedInput()) {
+      const CancellationToken idle;
+      try {
+        const PhysicalInputScope scope(idle, kPhysicalInputCleanupWaitMs, AbandonPolicy::Adopt);
+        input_.ReleaseAll();
+      } catch (const HelperError&) {
+        // Depressed input must never outlive a cancelled command, so recovery
+        // proceeds even when the cross-process lock could not be acquired.
+        input_.ReleaseAll();
+      }
     }
   } catch (...) {
     // Releasing input must never mask the original failure.
+  }
+  // Input that could not be released keeps the lock, so the thread's exit
+  // abandons it and the next helper reports the depressed input.
+  if (!input_.HasDepressedInput()) {
+    heldInput_.Release();
   }
 }
 

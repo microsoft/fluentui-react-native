@@ -57,6 +57,8 @@ class Driver {
  public:
   CommandResult Execute(const std::string& command, const json::Value& params, const CancellationToken& token);
 
+  // Releases depressed input and, once nothing stays down, the physical input
+  // lock held between commands. Call it on the thread that runs commands.
   void ReleaseInput() noexcept;
   bool HasDepressedInput() const noexcept { return input_.HasDepressedInput(); }
 
@@ -80,16 +82,19 @@ class Driver {
     foregroundReader_ = std::move(reader);
     activator_ = std::move(activator);
   }
+  // Replaces the hit test that checks where a pointer press or scroll lands.
+  void UseTestHitTester(ClickHitTester hitTest) { hitTester_ = hitTest; }
 
  private:
   CommandResult ExecuteCommand(const std::string& command, const json::Value& params, const CancellationToken& token);
   void ForgetRetiredWindows() noexcept;
   // Holds the cross-process physical input mutex for a whole action chain and
   // guarantees that a failed or cancelled chain releases its depressed input
-  // before the next owner acquires the lock.
+  // before the next owner acquires the lock. Keys or buttons a chain leaves
+  // down keep the lock held across commands until they are released.
   template <typename Fn>
   void RunPhysical(const CancellationToken& token, Fn&& body) {
-    const PhysicalInputScope scope(token);
+    PhysicalInputScope scope(token);
     input_.SyncPointerFromCursor();
     try {
       body();
@@ -101,7 +106,19 @@ class Driver {
           // Preserve the original failure.
         }
       }
+      HoldInputWhileDepressed(scope);
       throw;
+    }
+    HoldInputWhileDepressed(scope);
+  }
+  // Called on the thread that runs commands, which owns the mutex.
+  void HoldInputWhileDepressed(PhysicalInputScope& scope) noexcept {
+    if (!input_.HasDepressedInput()) {
+      heldInput_.Release();
+      return;
+    }
+    if (!heldInput_.owns()) {
+      heldInput_ = std::move(scope);
     }
   }
 
@@ -137,8 +154,11 @@ class Driver {
   CommandJournal journal_;
   // What the running mutating command has handed to the application.
   EffectLedger effects_;
+  // Physical input held between commands while keys or buttons stay down.
+  PhysicalInputScope heldInput_;
   ForegroundReader foregroundReader_;
   WindowActivator activator_;
+  ClickHitTester hitTester_{&WindowFromPoint};
 };
 
 }  // namespace furn
