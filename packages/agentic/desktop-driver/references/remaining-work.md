@@ -758,10 +758,10 @@ channel relay still needs grant protection.
 
 Quarantine persistence and operator recovery are implemented: an optional
 `recovery` server option writes each mutation ahead of dispatch and each
-quarantine to private storage, restores them before the service listens, lifts
-a quarantine only when its launched application closes, a probe proves the
-recorded application incarnation exited, or the operator calls
-`recoverTarget`. The macOS and Windows `--application-incarnation` helper modes
+quarantine to private storage, restores them before the service listens, and
+lifts a quarantine only when a probe proves the recorded application
+incarnation exited (also right after its launched application closes) or the
+operator calls `recoverTarget`. The macOS and Windows `--application-incarnation` helper modes
 and `createMacOSApplicationProbe` and `createWindowsApplicationProbe` are
 implemented. See
 [settlement journal and recovery](security.md#settlement-journal-and-recovery).

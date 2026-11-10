@@ -295,6 +295,11 @@ under `furn/ops` (`session.observe()`, `session.find()`, `session.journal()`);
 see [Agent operations](operations.md). Operators choose whether applications'
 displayed content may be read when constructing the server:
 `createDesktopDriverServer({ targets, operations: { content: 'deny' } })`.
+The policy governs `furn/ops` only. A client with a driver grant reads the same
+content through the W3C routes (element text, attributes and properties, page
+source, screenshots, and `furn/tree`), so `deny` limits what agent operations
+return, not what a driver-control session can reach. Grants have no scope that
+separates the two.
 
 ## Protect the service with grants
 
@@ -370,13 +375,19 @@ await service.recoverTarget('contoso-macos', { evidence: 'operator', quarantineI
 ```
 
 - Mutations are recorded before dispatch; one that cannot be recorded fails
-  with `journal-unavailable` and is not sent.
-- A quarantine lifts when its launched application closes, when the probe
-  proves the recorded application has exited, or when the operator calls
-  `recoverTarget`. `evidence: 'application-exited'` requires the probe's proof;
-  `evidence: 'operator'` records the operator's own judgment.
-- Without a probe, an attached application's quarantine lifts only through
-  `recoverTarget`.
+  with `journal-unavailable` and is not sent. Closing a session is the
+  exception: the release of held input is dispatched without a record and
+  raises an in-memory quarantine if its outcome is unknown, so a journal
+  outage cannot leave keys held.
+- A quarantine lifts when the probe proves the recorded application has exited
+  (including right after a launched application is closed), or when the
+  operator calls `recoverTarget`. `evidence: 'application-exited'` requires the
+  probe's proof; `evidence: 'operator'` records the operator's own judgment.
+- Closing a launched application does not by itself lift its quarantine, because
+  a host's close does not promise the process exited. Without a probe, every
+  quarantine lifts only through `recoverTarget`.
+- Storage and probe calls have a 10 second deadline. A call that does not settle
+  counts as a failure.
 - Unreadable storage prevents startup. Any corrupt record, including a corrupt
   sibling of an otherwise valid record, quarantines without trusting application
   identity; an exit probe cannot clear it.
@@ -412,8 +423,18 @@ must resolve a verified helper and embed the service.
   `maxBodyBytes` only for a measured local integration need.
 - Each target has at most one active session.
 - Commands are serialized per session. Input is serialized globally.
-- Browser-origin requests are rejected.
-- Non-loopback hosts are rejected even when passed explicitly.
+- Browser-origin requests are rejected: an `Origin` header, Fetch Metadata that
+  marks a browser request, or a `Host` that is not the service's own loopback
+  address and port.
+- Non-loopback hosts are rejected even when passed explicitly, and the service
+  refuses to start when its listener does not bind a loopback address.
+- Startup options are validated strictly: an unknown option, a `content` policy
+  other than `allow` or `deny`, an invalid `port`, a `maxBodyBytes` that is not a
+  positive safe integer, or a malformed `recovery` stops startup.
+- Session timeouts (`implicit`, `pageLoad`, `script`) are validated together
+  before any is applied, must be safe integers of at least zero (`script` may
+  be `null`), and an implicit-wait element search ends as soon as the session
+  is deleted.
 - There is no TLS, and a service without an `authority` has no authentication.
   Do not proxy or expose the service beyond the local trusted process boundary.
 
