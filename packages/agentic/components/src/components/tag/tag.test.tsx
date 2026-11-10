@@ -28,20 +28,23 @@ describe('Tag', () => {
     jest.restoreAllMocks();
   });
 
-  it('TAG-004 TAG-008 forwards one Win32 native accessibility tap to onPress without removing the tag', async () => {
-    jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
-    const onPress = jest.fn();
-    const component = await renderTag({ content: 'Engineering', onPress });
-    const event = { nativeEvent: { target: 1 }, target: 1, currentTarget: 1 };
-    await fireEvent(getRoot(component), 'accessibilityTap', event);
-    expect(onPress).toHaveBeenCalledTimes(1);
-    expect(onPress).toHaveBeenCalledWith(event);
-    expect(component.getByText('Engineering')).toBeOnTheScreen();
-    expect(component.getAllByRole('button')).toHaveLength(1);
-    await component.rerender(<Tag content="Engineering" disabled onPress={onPress} />);
-    await fireEvent(getRoot(component), 'accessibilityTap', event);
-    expect(onPress).toHaveBeenCalledTimes(1);
-  });
+  it.each(['win32', 'windows', 'macos'] as const)(
+    'TAG-004 TAG-008 forwards one %s native accessibility tap to onPress without removing the tag',
+    async (platform) => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+      const onPress = jest.fn();
+      const component = await renderTag({ content: 'Engineering', onPress });
+      const event = { nativeEvent: { target: 1 }, target: 1, currentTarget: 1 };
+      await fireEvent(getRoot(component), 'accessibilityTap', event);
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(onPress).toHaveBeenCalledWith(event);
+      expect(component.getByText('Engineering')).toBeOnTheScreen();
+      expect(component.getAllByRole('button')).toHaveLength(1);
+      await component.rerender(<Tag content="Engineering" disabled onPress={onPress} />);
+      await fireEvent(getRoot(component), 'accessibilityTap', event);
+      expect(onPress).toHaveBeenCalledTimes(1);
+    },
+  );
 
   it('TAG-001 TAG-008 retains the forwarded native target across disabled changes and preserves unrelated accessibility state', async () => {
     const ref = React.createRef<React.ComponentRef<typeof View>>();

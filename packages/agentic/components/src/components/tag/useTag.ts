@@ -52,11 +52,11 @@ export function useTag_unstable(props: TagProps): TagState {
 
   const themeState = useThemeState();
   const platform: string = Platform.OS;
-  // The Office Win32 button invoke path uses accessibility-tap, as in V1
-  // Button. Forward its original event rather than inventing a pointer press.
+  // Native desktop button actions need an accessibility-tap callback.
+  // Forward its original event rather than inventing a pointer press.
   const onAccessibilityTap =
     rest.onAccessibilityTap ??
-    (platform === 'win32' && rest.onPress
+    ((platform === 'win32' || platform === 'windows' || platform === 'macos') && rest.onPress
       ? (event?: GestureResponderEvent) => {
           if (event) rest.onPress?.(event);
         }
