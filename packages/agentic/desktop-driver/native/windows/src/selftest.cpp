@@ -358,6 +358,7 @@ void TestLeaseIdentity() {
   FILETIME parsed{};
   Check(TryParseIso8601("2026-08-31T21:59:59.1234567Z", parsed), "lease timestamps parse");
   Check(FormatFileTimeIso8601(parsed) == "2026-08-31T21:59:59.1234567Z", "lease timestamps round trip");
+  Check(FormatFileTimeIso8601(FILETIME{}).empty(), "an unknown start time serializes as empty, not as 1601");
   FILETIME offset{};
   Check(TryParseIso8601("2026-08-31T23:59:59.0000000+02:00", offset), "offset timestamps parse");
   Check(FileTimeTicks(offset) == FileTimeTicks(parsed) - 1234567, "offset timestamps normalize to UTC");

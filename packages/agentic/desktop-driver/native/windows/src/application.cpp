@@ -1087,8 +1087,11 @@ ApplicationLease& ApplicationManager::CreateLease(std::string ownership, DWORD p
   lease.processId = processId;
   lease.primaryWindow = primaryWindow;
   lease.windowTitle = title;
-  if (process != nullptr) {
-    TryReadProcessStartTime(process, lease.startTime);
+  // The start time proves which incarnation of the process the lease names; a
+  // lease without it would later read as a process that already exited.
+  if (process != nullptr && !TryReadProcessStartTime(process, lease.startTime)) {
+    Fail(lease.ownership == "launched" ? kErrorLaunchFailed : kErrorAttachFailed,
+         "The leased application process start time could not be read.");
   }
   const std::string id = lease.id;
   leases_.emplace(id, std::move(lease));
@@ -1207,7 +1210,7 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       CoAllowSetForegroundWindow(manager.get(), nullptr);
       CheckHresult(kErrorLaunchFailed, "Activating the packaged application",
                    manager->ActivateApplication(aumid.c_str(), arguments.empty() ? nullptr : arguments.c_str(),
-                                                AO_NONE, &launchRoot.processId));
+                                                AO_NOERRORUI, &launchRoot.processId));
       launchRoot.process.attach(
           OpenProcess(kOwnedProcessAccess, FALSE, launchRoot.processId));
       if (!launchRoot.process) {
@@ -1221,6 +1224,14 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
       if (!ProcessStartedForLaunch(launchRoot.process.get(), launchStartedAt)) {
         Fail(kErrorLaunchFailed,
              "Packaged activation reused a pre-existing process. Use attach mode instead.");
+      }
+      // The root anchors ancestry and is ended on failure, so a process that
+      // does not prove the requested identity, such as one that reused the
+      // activated process id, is never trusted, tracked, or terminated.
+      if (!ProcessMatchesLaunchIdentity(launchRoot.process.get(), aumid, executablePath)) {
+        Fail(kErrorLaunchFailed,
+             "The activated process does not report the requested application identity, so the helper left "
+             "it running and did not lease it.");
       }
       launchRoot.trusted = true;
       winrt::handle cleanupProcess = DuplicateProcessHandle(launchRoot.process.get());
@@ -1353,10 +1364,17 @@ const ApplicationLease& ApplicationManager::Launch(const json::Value& params, co
     if (!owned || !IsProcessAlive(owned.get())) {
       Fail(kErrorLaunchFailed, "The launched application process exited before its lease was created.");
     }
-    const std::string extraCleanupFailure = launchProcesses.Cleanup();
-    if (!extraCleanupFailure.empty()) {
-      launchProcesses.Track(matchedProcessId, std::move(owned));
-      Fail(kErrorCleanupFailed, "A secondary launch process could not be cleaned up: " + extraCleanupFailure);
+    if (containmentJob) {
+      // The job already owns a launch root that differs from the matched
+      // process and ends it with the lease, so it is neither closed nor
+      // terminated here.
+      launchProcesses.ReleaseRemaining();
+    } else {
+      const std::string extraCleanupFailure = launchProcesses.Cleanup();
+      if (!extraCleanupFailure.empty()) {
+        launchProcesses.Track(matchedProcessId, std::move(owned));
+        Fail(kErrorCleanupFailed, "A secondary launch process could not be cleaned up: " + extraCleanupFailure);
+      }
     }
     const char* containment = containmentJob ? kContainmentJobObject : kContainmentUncontained;
     const ApplicationLease& lease = CreateLease("launched", matchedProcessId, owned.get(), matched,
