@@ -1,8 +1,8 @@
-import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { atomicWriteJson, sha256, throwIfAborted } from '../filesystem.js';
+import { runBuildCommand } from '../boundedCommand.js';
+import { atomicWriteJson, compareOrdinal, hashFiles, sha256, throwIfAborted } from '../filesystem.js';
 import { NativeDriverError } from '../NativeDriverError.js';
 import type { NativeDriverConfiguration } from '../types.js';
 
@@ -93,6 +93,64 @@ export async function probeWindowsToolchain(signal?: AbortSignal): Promise<Windo
   };
 }
 
+const windowsProjectFile = 'DesktopDriverHost.vcxproj';
+
+/**
+ * Lists the declared Windows driver inputs as source-root-relative POSIX paths in code-point order: the project and the
+ * files its items include. Documentation and anything the project does not name never affect the digest or the build.
+ */
+export function windowsDriverSourceFiles(sourceRoot: string): string[] {
+  const projectPath = path.join(sourceRoot, windowsProjectFile);
+  if (!fs.existsSync(projectPath) || !fs.statSync(projectPath).isFile()) {
+    throw new NativeDriverError('build-source-missing', `Windows native driver project does not exist at "${projectPath}".`);
+  }
+  const declared = new Set<string>([windowsProjectFile]);
+  for (const include of readProjectItemIncludes(fs.readFileSync(projectPath, 'utf8'))) {
+    if (/[$%*?;@&]/.test(include)) {
+      throw new NativeDriverError(
+        'build-source-missing',
+        `Windows native driver project item "${include}" must be a plain relative file path.`,
+      );
+    }
+    const relativePath = path.posix.normalize(include.replaceAll('\\', '/'));
+    if (path.posix.isAbsolute(relativePath) || /^[A-Za-z]:/.test(relativePath) || relativePath === '..' || relativePath.startsWith('../')) {
+      throw new NativeDriverError('build-source-missing', `Windows native driver project item "${include}" escapes the source root.`);
+    }
+    const sourcePath = path.join(sourceRoot, relativePath);
+    if (!fs.existsSync(sourcePath) || !fs.statSync(sourcePath).isFile()) {
+      throw new NativeDriverError('build-source-missing', `Windows native driver source "${sourcePath}" does not exist.`);
+    }
+    declared.add(relativePath);
+  }
+  return [...declared].sort(compareOrdinal);
+}
+
+export function hashWindowsDriverSources(sourceRoot: string): string {
+  return hashFiles(sourceRoot, windowsDriverSourceFiles(sourceRoot));
+}
+
+/** Reads the `Include` of every project item (compile units, headers, manifests), skipping configurations and comments. */
+function readProjectItemIncludes(projectXml: string): string[] {
+  let uncommented = '';
+  for (let cursor = 0; cursor < projectXml.length;) {
+    const commentStart = projectXml.indexOf('<!--', cursor);
+    if (commentStart === -1) {
+      uncommented += projectXml.slice(cursor);
+      break;
+    }
+    uncommented += projectXml.slice(cursor, commentStart);
+    const commentEnd = projectXml.indexOf('-->', commentStart + 4);
+    cursor = commentEnd === -1 ? projectXml.length : commentEnd + 3;
+  }
+  const includes: string[] = [];
+  for (const match of uncommented.matchAll(/<([A-Za-z][\w.]*)\s[^<>]*?\bInclude="([^"<>]*)"/g)) {
+    if (match[1] !== 'ProjectConfiguration') {
+      includes.push(match[2]);
+    }
+  }
+  return includes;
+}
+
 export async function buildWindowsDriver({
   buildId,
   configuration,
@@ -103,10 +161,15 @@ export async function buildWindowsDriver({
   toolchain,
 }: BuildWindowsDriverOptions): Promise<BuildWindowsDriverResult> {
   throwIfAborted(signal);
-  const projectPath = path.join(packageRoot, 'native', 'windows', 'DesktopDriverHost.vcxproj');
-  if (!fs.existsSync(projectPath)) {
-    throw new NativeDriverError('build-source-missing', `Windows native driver project does not exist at "${projectPath}".`);
+  const sourceRoot = path.join(packageRoot, 'native', 'windows');
+  // Building from a staged copy keeps MSBuild from writing anything beneath the package, and keeps undeclared files out.
+  const stagedSourceRoot = path.join(stagingRoot, 'source');
+  for (const relativePath of windowsDriverSourceFiles(sourceRoot)) {
+    const destination = path.join(stagedSourceRoot, relativePath);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.copyFileSync(path.join(sourceRoot, relativePath), destination);
   }
+  const projectPath = path.join(stagedSourceRoot, windowsProjectFile);
 
   const buildRoot = path.join(stagingRoot, 'build');
   const outputRoot = path.join(stagingRoot, 'output');
@@ -125,7 +188,7 @@ export async function buildWindowsDriver({
 
   const buildLogPath = path.join(stagingRoot, 'build.log');
   const nativeConfiguration = configuration === 'debug' ? 'Debug' : 'Release';
-  const output = await runCommand(
+  await runCommand(
     toolchain.msbuildPath,
     [
       projectPath,
@@ -141,6 +204,7 @@ export async function buildWindowsDriver({
       `/p:WindowsTargetPlatformVersion=${toolchain.sdkVersion}`,
     ],
     signal,
+    buildLogPath,
   ).catch((error) => {
     atomicWriteJson(path.join(stagingRoot, 'build-error.json'), {
       message: error instanceof Error ? error.message : String(error),
@@ -148,7 +212,6 @@ export async function buildWindowsDriver({
     });
     throw error;
   });
-  fs.writeFileSync(buildLogPath, output);
 
   const executablePath = path.join(outputRoot, 'furn-desktop-driver-host.exe');
   if (!fs.existsSync(executablePath)) {
@@ -157,59 +220,9 @@ export async function buildWindowsDriver({
   return { buildLogPath, executablePath };
 }
 
-async function runCommand(command: string, args: readonly string[], signal?: AbortSignal): Promise<string> {
-  throwIfAborted(signal);
-  return new Promise((resolve, reject) => {
-    let settled = false;
-    const child = spawn(command, [...args], {
-      signal,
-      stdio: ['ignore', 'pipe', 'pipe'],
-      windowsHide: true,
-    });
-    const stdout: Buffer[] = [];
-    const stderr: Buffer[] = [];
-    let timedOut = false;
-    const timeout = setTimeout(
-      () => {
-        timedOut = true;
-        child.kill();
-      },
-      30 * 60 * 1000,
-    );
-    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-    child.once('error', (error) => {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timeout);
-        reject(error);
-      }
-    });
-    child.once('close', (code) => {
-      if (settled) {
-        return;
-      }
-      settled = true;
-      clearTimeout(timeout);
-      const output = Buffer.concat(stdout).toString('utf8');
-      const errorOutput = Buffer.concat(stderr).toString('utf8');
-      if (timedOut) {
-        reject(new NativeDriverError('build-timeout', `${path.basename(command)} exceeded the 30-minute build deadline.`));
-        return;
-      }
-      if (code !== 0) {
-        const details = `${output}${errorOutput}`.trim();
-        reject(
-          new NativeDriverError(
-            'build-failed',
-            `${path.basename(command)} exited with code ${String(code)}.${details ? `\n${details}` : ''}`,
-          ),
-        );
-        return;
-      }
-      resolve(`${output}${errorOutput}`);
-    });
-  });
+async function runCommand(command: string, args: readonly string[], signal?: AbortSignal, logPath?: string): Promise<string> {
+  const { stderr, stdout } = await runBuildCommand(command, args, { logPath, signal });
+  return `${stdout}${stderr}`;
 }
 
 function compareVersions(left: string, right: string): number {

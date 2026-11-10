@@ -1,10 +1,10 @@
-import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { atomicWriteJson, canonicalJson, listFiles, sha256, throwIfAborted } from '../filesystem.js';
+import { clipDiagnostic, runBuildCommand } from '../boundedCommand.js';
+import { atomicWriteJson, canonicalJson, compareOrdinal, hashFiles, listFiles, sha256, throwIfAborted } from '../filesystem.js';
 import { NativeDriverError } from '../NativeDriverError.js';
 import type { NativeDriverConfiguration, NativeDriverSigning } from '../types.js';
 
@@ -50,6 +50,7 @@ type CommandResult = {
   stdout: string;
 };
 
+/** Lists the declared Swift package inputs as root-relative POSIX paths in code-point order. */
 export function macOSDriverSourceFiles(sourceRoot: string): string[] {
   const packageManifest = path.join(sourceRoot, 'Package.swift');
   const sourcesRoot = path.join(sourceRoot, 'Sources');
@@ -59,18 +60,18 @@ export function macOSDriverSourceFiles(sourceRoot: string): string[] {
   return [
     packageManifest,
     ...(fs.existsSync(path.join(sourceRoot, 'Package.resolved')) ? [path.join(sourceRoot, 'Package.resolved')] : []),
-    ...listFiles(sourcesRoot).filter((filePath) => path.extname(filePath) === '.swift'),
+    ...listFiles(sourcesRoot, { rejectSymbolicLink: isSwiftSource }).filter(isSwiftSource),
   ]
-    .map((filePath) => path.relative(sourceRoot, filePath))
-    .sort((left, right) => left.localeCompare(right));
+    .map((filePath) => path.relative(sourceRoot, filePath).replaceAll(path.sep, '/'))
+    .sort(compareOrdinal);
 }
 
 export function hashMacOSDriverSources(sourceRoot: string): string {
-  const entries = macOSDriverSourceFiles(sourceRoot).map((relativePath) => ({
-    path: relativePath.replaceAll(path.sep, '/'),
-    sha256: sha256(fs.readFileSync(path.join(sourceRoot, relativePath))),
-  }));
-  return sha256(canonicalJson(entries));
+  return hashFiles(sourceRoot, macOSDriverSourceFiles(sourceRoot));
+}
+
+function isSwiftSource(filePath: string): boolean {
+  return path.extname(filePath) === '.swift';
 }
 
 export function macOSCodeSignArguments(toolchain: Pick<MacOSToolchain, 'codesignIdentity' | 'signing'>, bundlePath: string): string[] {
@@ -194,22 +195,19 @@ export async function buildMacOSDriver({
     `${scratchRoot}=/furn-desktop-driver/build`,
   ];
   const buildLogPath = path.join(stagingRoot, 'build.log');
-  const output = await runCommand(toolchain.swiftPath, buildArguments, signal).catch((error) => {
+  await runCommand(toolchain.swiftPath, buildArguments, signal, buildLogPath).catch((error) => {
     atomicWriteJson(path.join(stagingRoot, 'build-error.json'), {
       message: error instanceof Error ? error.message : String(error),
       toolchain,
     });
     throw error;
   });
-  fs.writeFileSync(buildLogPath, combinedOutput(output));
 
   const binPathResult = await runCommand(toolchain.swiftPath, [...buildArguments, '--show-bin-path'], signal);
   const binPath = binPathResult.stdout.trim();
   if (!binPath) {
-    throw new NativeDriverError(
-      'build-failed',
-      `SwiftPM did not report its binary output path.${binPathResult.stderr.trim() ? `\n${binPathResult.stderr.trim()}` : ''}`,
-    );
+    const details = clipDiagnostic(binPathResult.stderr);
+    throw new NativeDriverError('build-failed', `SwiftPM did not report its binary output path.${details ? `\n${details}` : ''}`);
   }
   const builtExecutable = path.join(binPath, executableName);
   if (!fs.existsSync(builtExecutable)) {
@@ -380,58 +378,8 @@ function combinedOutput(result: CommandResult): string {
   return `${result.stdout}${result.stderr}`;
 }
 
-async function runCommand(command: string, args: readonly string[], signal?: AbortSignal): Promise<CommandResult> {
-  throwIfAborted(signal);
-  return new Promise((resolve, reject) => {
-    let settled = false;
-    const child = spawn(command, [...args], {
-      signal,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    const stdout: Buffer[] = [];
-    const stderr: Buffer[] = [];
-    let timedOut = false;
-    const timeout = setTimeout(
-      () => {
-        timedOut = true;
-        child.kill();
-      },
-      30 * 60 * 1000,
-    );
-    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-    child.once('error', (error) => {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timeout);
-        reject(error);
-      }
-    });
-    child.once('close', (code) => {
-      if (settled) {
-        return;
-      }
-      settled = true;
-      clearTimeout(timeout);
-      const output = Buffer.concat(stdout).toString('utf8');
-      const errorOutput = Buffer.concat(stderr).toString('utf8');
-      if (timedOut) {
-        reject(new NativeDriverError('build-timeout', `${path.basename(command)} exceeded the 30-minute build deadline.`));
-        return;
-      }
-      if (code !== 0) {
-        const details = `${output}${errorOutput}`.trim();
-        reject(
-          new NativeDriverError(
-            command === 'codesign' ? 'signing-failed' : 'build-failed',
-            `${path.basename(command)} exited with code ${String(code)}.${details ? `\n${details}` : ''}`,
-          ),
-        );
-        return;
-      }
-      resolve({ stderr: errorOutput, stdout: output });
-    });
-  });
+function runCommand(command: string, args: readonly string[], signal?: AbortSignal, logPath?: string): Promise<CommandResult> {
+  return runBuildCommand(command, args, { exitFailureCode: command === 'codesign' ? 'signing-failed' : 'build-failed', logPath, signal });
 }
 
 function makeInfoPlist(): string {
