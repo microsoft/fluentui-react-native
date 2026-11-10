@@ -22,6 +22,21 @@ function getRoot(component: Awaited<ReturnType<typeof renderDivider>>) {
 }
 
 describe('Divider', () => {
+  it('DIV-005 owns modern separator semantics while retaining the legacy native role', async () => {
+    const component = await renderDivider({ role: 'button', accessibilityLabel: 'End of details', label: 'Details' });
+    const root = getRoot(component);
+
+    expect(root.props).toMatchObject({
+      role: 'separator',
+      accessibilityRole: 'separator',
+      accessibilityLabel: 'End of details',
+      accessible: true,
+      focusable: false,
+    });
+    expect(component.queryByRole('button')).toBeNull();
+    expect(component.getByText('Details')).toBeOnTheScreen();
+  });
+
   it('DIV-001 DIV-005 forwards the root ref and caller accessibility opt-out without removing the label', async () => {
     const ref = React.createRef<React.ComponentRef<typeof View>>();
     const component = await renderDivider({ ref, accessible: false, label: 'Section', testID: 'decorative-divider' });

@@ -812,6 +812,7 @@ final class AccessibilityEngine {
       kAXScrollBarRole: "scrollbar",
       kAXSheetRole: "dialog",
       kAXSliderRole: "slider",
+      kAXSplitterRole: "separator",
       kAXStaticTextRole: "text",
       kAXTabGroupRole: "tablist",
       kAXTableRole: "table",

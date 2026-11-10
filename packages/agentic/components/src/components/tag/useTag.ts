@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Platform, Pressable } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 import { useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
 
@@ -50,8 +51,19 @@ export function useTag_unstable(props: TagProps): TagState {
   }, [hasLeadingIcon, iconOnly]);
 
   const themeState = useThemeState();
+  const platform: string = Platform.OS;
+  // The Office Win32 button invoke path uses accessibility-tap, as in V1
+  // Button. Forward its original event rather than inventing a pointer press.
+  const onAccessibilityTap =
+    rest.onAccessibilityTap ??
+    (platform === 'win32' && rest.onPress
+      ? (event?: GestureResponderEvent) => {
+          if (event) rest.onPress?.(event);
+        }
+      : undefined);
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
+    onAccessibilityTap,
     accessibilityRole: 'button',
     accessibilityState: {
       ...accessibilityState,

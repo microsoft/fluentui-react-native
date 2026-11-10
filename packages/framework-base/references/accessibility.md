@@ -56,6 +56,24 @@ Other custom names retain their case and identity; inputs are not mutated.
 An already normalized, duplicate-free array is returned unchanged. Incoming
 events are not rewritten or matched case-insensitively.
 
+## Native pressable callbacks
+
+`useFocusablePressable` guards a disabled accessibility tap without discarding
+the native arguments of an enabled callback. Activation remains component-owned.
+For example, Tag connects the Office Win32 button's accessibility-tap transport
+to its existing press callback, following the shipped V1 Button bridge. It
+forwards the original native event, not a constructed pointer or keyboard event,
+and preserves an explicitly supplied accessibility-tap handler. This Win32
+button bridge is not a toggle/select action mapping or evidence for a macOS
+renderer.
+
+The Win32 unidentified-code keyboard fallback also owns press feedback: one
+press-in on keydown, one release before keyup activation, and release-only
+cleanup on cancellation. It retains the actual key event as Win32 Pressability
+does, without filling in touch fields. Recognized native key sequences remain
+owned by Pressability. Shared-hook unit tests cover callback ownership and
+cleanup; native UIA and physical-key stories must separately qualify delivery.
+
 ## Future authoring requirements
 
 - Read the component contract and source-check the installed renderer's action
