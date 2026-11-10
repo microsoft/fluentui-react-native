@@ -39,6 +39,11 @@ export function predicatesOf(input: FindPredicates): FindPredicates {
   };
 }
 
+/** True when the selector compares text an application displays, which the operator's content policy governs. */
+export function selectorNeedsContent(selector: FindPredicates): boolean {
+  return requestsContent(factsNeeded(predicatesOf(selector)));
+}
+
 /**
  * Names the predicates a selector gives, for a journal summary. Predicate values can quote what an application
  * displayed or what a caller typed, so only their names are kept.

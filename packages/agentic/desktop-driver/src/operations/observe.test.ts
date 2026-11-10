@@ -199,6 +199,47 @@ describe('observe', () => {
     expect(runtime.observed).toHaveLength(2);
   });
 
+  test('issues references only to the changes a delta returns', async () => {
+    const buttons = Array.from({ length: 40 }, (_, index) => ({ id: `b${index}`, name: `Button ${index}`, role: 'button' }));
+    const runtime = stubRuntime({ observation: buildSample({ children: buttons, id: 'win', role: 'window' }) });
+    const base = await observe(runtime, { budget: { maxNodes: 3 } });
+    const held = runtime.state.refs.size;
+
+    const delta = await observeDelta(runtime, { since: base.sample.id, budget: { maxNodes: 50 } });
+
+    expect(delta).toMatchObject({ mode: 'delta', changes: [], counts: { added: 0, changed: 0, removed: 0 } });
+    expect(runtime.state.refs.size).toBe(held);
+    expect(delta.mode === 'delta' && delta.sample.root).toBe(ref(runtime, 'win'));
+  });
+
+  test('names a removed element by the reference the session holds and issues none for it', async () => {
+    const first = buildSample({
+      children: [
+        { id: 'seen', name: 'Seen', role: 'button' },
+        { id: 'unseen', name: 'Unseen', role: 'button' },
+      ],
+      id: 'win',
+      role: 'window',
+    });
+    const runtime = stubRuntime({
+      observe: (_request, _signal, call) => (call === 1 ? first : buildSample({ id: 'win', role: 'window' })),
+    });
+    const base = await observe(runtime, { budget: { maxNodes: 2 } });
+    const held = runtime.state.refs.size;
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    if (delta.mode !== 'delta') {
+      throw new Error('Expected a delta result.');
+    }
+    expect(delta.changes).toMatchObject([
+      { change: 'removed', element: { name: 'Seen', ref: ref(runtime, 'seen') } },
+      { change: 'removed', element: { name: 'Unseen' } },
+    ]);
+    expect(delta.changes[1].element).not.toHaveProperty('ref');
+    expect(runtime.state.refs.size).toBe(held);
+  });
+
   test('returns a fresh snapshot when the projection basis does not match', async () => {
     const runtime = stub();
     const base = await observe(runtime);
@@ -237,6 +278,20 @@ describe('observe', () => {
       throw new Error('Expected a delta result.');
     }
     expect(delta.changes).toEqual([]);
+  });
+
+  test('says which budget left a delta basis incomplete', async () => {
+    const buttons = (count: number) =>
+      Array.from({ length: count }, (_, index) => ({ id: `b${index}`, name: `Button ${index}`, role: 'button' }));
+    const first = buildSample({ children: buttons(5_001), id: 'win', role: 'window' });
+    const second = buildSample({ children: buttons(5_002), id: 'win', role: 'window' });
+    const runtime = stubRuntime({ observe: (_request, _signal, call) => (call === 1 ? first : second) });
+    const base = await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    expect(delta).toMatchObject({ mode: 'delta', complete: false, removalsSuppressed: true });
+    expect(delta.mode === 'delta' && delta.truncation).toContainEqual({ limit: 5_000, omitted: 2, reason: 'maxNodes' });
   });
 
   test('returns an explicit fresh snapshot when the delta base was evicted', async () => {

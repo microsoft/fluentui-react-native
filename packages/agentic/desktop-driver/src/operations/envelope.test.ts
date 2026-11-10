@@ -113,6 +113,11 @@ describe('invalidInputError', () => {
     expect(error.message).not.toContain('SECRET');
   });
 
+  test('says a key is unknown without quoting it', () => {
+    const error = issuesFor({ count: 1, name: 'abc', nested: { id: 'x', IGNORE: 1 }, SECRET: 1 });
+    expect(error.message).toBe('Invalid input. nested: Unrecognized key.; Unrecognized key.');
+  });
+
   test('lists at most three issues and counts the rest', () => {
     const parts = issuesFor({ count: 'a', name: 1, nested: { id: 2 }, other: 3 })
       .message.replace('Invalid input. ', '')

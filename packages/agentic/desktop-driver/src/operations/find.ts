@@ -56,7 +56,7 @@ const findOutput = z.strictObject({
     possible: z.number(),
     visited: z.number().describe('Elements read from the application.'),
   }),
-  complete: z.boolean().describe('True when the search read everything it could reach.'),
+  complete: z.boolean().describe('True when the search read everything it could reach and every match was returned.'),
   truncation: z.array(truncationSchema),
   more: z.number().optional().describe('Candidates beyond limit that were not returned.'),
   warnings: z.array(warningSchema).optional(),
@@ -154,13 +154,14 @@ export const findElementsOperation = registerOperation({
     if (proof) {
       runtime.state.proofs.record(proof);
     }
-    const { matches, more, truncation } = extra!;
+    const { matches, more, truncation: cut } = extra!;
+    const truncation: FindResult['truncation'] = more > 0 ? [...cut, { limit: input.limit, omitted: more, reason: 'limit' }] : cut;
     return {
       sample: sampled.sample,
       outcome: classification.outcome,
       ...(classification.reasons.length > 0 ? { reasons: classification.reasons } : {}),
       counts: { definite: classification.definite.length, possible: classification.possible.length, visited },
-      complete,
+      complete: complete && more === 0,
       truncation,
       ...(more > 0 ? { more } : {}),
       ...(sampled.warnings.length > 0 ? { warnings: sampled.warnings } : {}),

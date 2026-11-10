@@ -1,4 +1,4 @@
-import { journalCapacity } from './limits.js';
+import { journalCapacity, requireCapacity } from './limits.js';
 
 export type JournalScalar = boolean | number | string | null;
 
@@ -49,7 +49,7 @@ export class OperationJournal {
   private nextSequence = 1;
 
   constructor(capacity: number = journalCapacity.default) {
-    this.capacity = Math.max(1, Math.floor(capacity));
+    this.capacity = requireCapacity('journalCapacity', capacity, journalCapacity);
   }
 
   record(record: JournalRecord): JournalEntry {

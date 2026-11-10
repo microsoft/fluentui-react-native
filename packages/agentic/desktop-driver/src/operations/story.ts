@@ -8,7 +8,7 @@ import { operationError } from './envelope.js';
 import { storyPage, storyTextLimits } from './limits.js';
 import type { OperationAvailability, OperationCapabilities, OperationRuntime, OperationStories, OperationStoryEntry } from './runtime.js';
 import { registerOperation } from './runtime.js';
-import { budgetField } from './shapes.js';
+import { budgetField, truncationSchema } from './shapes.js';
 import { clipText, neutralizeText, safeToken } from './text.js';
 
 function requireStoryCapability(capabilities: OperationCapabilities): OperationAvailability {
@@ -43,8 +43,13 @@ const currentStorySchema = z.strictObject({
 const storiesOutput = z.strictObject({
   changed: z.literal(true).optional().describe('Another client changed the rendered story, so preview references expired.'),
   current: currentStorySchema.optional().describe('The story this session selected.'),
+  complete: z.literal(false).optional().describe('Present when matching stories after offset were left out; see truncation and next.'),
   entries: z.array(
     z.strictObject({
+      clipped: z
+        .array(z.enum(['id', 'name', 'tags', 'title']))
+        .optional()
+        .describe('Fields shown cut. A cut id is not one story accepts.'),
       id: z.string().describe('Pass to story.'),
       name: z.string(),
       tags: z.array(z.string()).optional(),
@@ -54,23 +59,34 @@ const storiesOutput = z.strictObject({
   matched: z.number().describe('Stories that match the filter.'),
   next: z.number().optional().describe('Pass as offset to read the stories that follow.'),
   total: z.number().describe('Stories in the catalog.'),
+  truncation: z.array(truncationSchema).optional().describe('Why stories were left out, when complete is false.'),
 });
 
 export type StoriesInput = z.input<typeof storiesInput>;
 export type StoriesResult = z.infer<typeof storiesOutput>;
 
-function catalogText(text: string, maxLength: number): string {
-  const { clipped, text: kept } = clipText(neutralizeText(text), maxLength);
-  return clipped ? `${kept}…` : kept;
+function catalogText(text: string, maxLength: number): { clipped: boolean; text: string } {
+  const cut = clipText(neutralizeText(text), maxLength);
+  return { clipped: cut.clipped, text: cut.clipped ? `${cut.text}…` : cut.text };
 }
 
 function describeEntry(entry: OperationStoryEntry): StoriesResult['entries'][number] {
+  const id = catalogText(entry.id, storyTextLimits.id);
+  const name = catalogText(entry.name, storyTextLimits.name);
+  const title = catalogText(entry.title, storyTextLimits.name);
   const tags = entry.tags.slice(0, storyTextLimits.tags).map((tag) => catalogText(tag, storyTextLimits.tag));
+  const clipped = [
+    ...(id.clipped ? (['id'] as const) : []),
+    ...(name.clipped ? (['name'] as const) : []),
+    ...(tags.some((tag) => tag.clipped) || entry.tags.length > tags.length ? (['tags'] as const) : []),
+    ...(title.clipped ? (['title'] as const) : []),
+  ];
   return {
-    id: catalogText(entry.id, storyTextLimits.id),
-    name: catalogText(entry.name, storyTextLimits.name),
-    ...(tags.length > 0 ? { tags } : {}),
-    title: catalogText(entry.title, storyTextLimits.name),
+    ...(clipped.length > 0 ? { clipped } : {}),
+    id: id.text,
+    name: name.text,
+    ...(tags.length > 0 ? { tags: tags.map((tag) => tag.text) } : {}),
+    title: title.text,
   };
 }
 
@@ -97,13 +113,16 @@ export const storiesOperation = registerOperation({
     const matching = needle === undefined ? catalog : catalog.filter((entry) => matchesFilter(entry, needle));
     const page = matching.slice(input.offset, input.offset + input.limit);
     const end = input.offset + page.length;
+    const more = page.length > 0 && end < matching.length;
     return {
       ...(current.changed ? { changed: true as const } : {}),
+      ...(more ? { complete: false as const } : {}),
       ...(current.story ? { current: current.story } : {}),
       entries: page.map(describeEntry),
       matched: matching.length,
-      ...(page.length > 0 && end < matching.length ? { next: end } : {}),
+      ...(more ? { next: end } : {}),
       total: catalog.length,
+      ...(more ? { truncation: [{ limit: input.limit, omitted: matching.length - end, reason: 'limit' as const }] } : {}),
     };
   },
   summarize(input, output) {

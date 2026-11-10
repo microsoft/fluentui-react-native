@@ -169,6 +169,7 @@ describe('referenceFailureError', () => {
     expect(referenceFailureError('expired', 'k3xa1')).toMatchObject({ code: 'stale element reference', data: { reason: 'ref-expired' } });
     expect(referenceFailureError('foreign', 'k3xa1')).toMatchObject({ code: 'no such element', data: { reason: 'ref-foreign' } });
     expect(referenceFailureError('malformed', 'x')).toMatchObject({ code: 'invalid argument', data: { reason: 'ref-malformed' } });
-    expect(referenceFailureError('malformed', 'bad\nline\u0007').message).toBe('Reference "bad?line?" is not an element reference.');
+    expect(referenceFailureError('malformed', 'bad\nline\u0007').message).toBe('The reference is not an element reference.');
+    expect(referenceFailureError('expired', 'k3xa1').message).toContain('"k3xa1"');
   });
 });

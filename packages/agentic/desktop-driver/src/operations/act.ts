@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 import type { NativeElementSnapshot } from '../host/types.js';
-import { toWebDriverError } from '../protocol/errors.js';
-import type { WebDriverError, WebDriverErrorCode } from '../protocol/errors.js';
-import { attachFailureEffect, attachMutationReport, readMutationReport } from '../protocol/settlement.js';
+import { toWebDriverError, WebDriverError } from '../protocol/errors.js';
+import type { WebDriverErrorCode } from '../protocol/errors.js';
+import { attachFailureEffect, attachMutationReport, readFailureEffect, readMutationReport } from '../protocol/settlement.js';
 import { operationError } from './envelope.js';
 import { maxActionNameLength, maxTypedTextLength } from './limits.js';
 import { requireBoundedObservation } from './policy.js';
@@ -137,7 +137,7 @@ export function assertNotQuarantined(runtime: OperationRuntime): void {
 
 export function assertActionSupported(runtime: OperationRuntime, action: ActionName): void {
   const capability = requiredCapability[action];
-  if (capability !== undefined && !runtime.capabilities[capability]) {
+  if ((capability !== undefined && !runtime.capabilities[capability]) || (action === 'clear' && runtime.capabilities.clear === false)) {
     throw rejection(runtime, 'unsupported operation', 'action-unsupported', `This provider does not support the ${action} action.`);
   }
 }
@@ -222,7 +222,7 @@ export async function revalidate(runtime: OperationRuntime, entry: ReferenceEntr
   try {
     snapshot = await runtime.command('Reading the element before acting', (signal) => runtime.host.snapshot(entry.nativeId, signal));
   } catch (error) {
-    throw asRejection(runtime, interpretFailure(runtime, { windowId: entry.windowId, within: entry.reference }, error));
+    throw asRejection(runtime, readableFailure(runtime, entry, error));
   }
   if (!matchesFingerprint(proof.fingerprint, snapshot)) {
     throw rejection(
@@ -235,25 +235,47 @@ export async function revalidate(runtime: OperationRuntime, entry: ReferenceEntr
   return snapshot;
 }
 
-function isTrue(value: { supported: boolean; value?: unknown }): boolean {
-  return value.supported && value.value === true;
+/** Requires a state fact to be true. A provider that cannot read it neither allows nor forbids the action, so it is refused apart. */
+function requireState(
+  runtime: OperationRuntime,
+  fact: { supported: boolean; value?: unknown },
+  refused: { message: string; reason: string },
+  ref: string,
+  name: string,
+): void {
+  if (!fact.supported) {
+    throw rejection(
+      runtime,
+      'element not interactable',
+      'state-unsupported',
+      `The provider cannot report whether reference "${ref}" is ${name}, so the action is refused.`,
+    );
+  }
+  if (fact.value !== true) {
+    throw rejection(runtime, 'element not interactable', refused.reason, refused.message);
+  }
 }
 
 function requireInteractable(runtime: OperationRuntime, action: ActionName, ref: string, snapshot: NativeElementSnapshot): void {
   if (action === 'clear') {
     return;
   }
-  if (!isTrue(snapshot.enabled)) {
-    throw rejection(runtime, 'element not interactable', 'not-enabled', `Reference "${ref}" is not enabled.`);
-  }
-  if (action === 'click' && !isTrue(snapshot.visible)) {
-    throw rejection(runtime, 'element not interactable', 'not-visible', `Reference "${ref}" is not visible, so it cannot be clicked.`);
+  requireState(runtime, snapshot.enabled, { message: `Reference "${ref}" is not enabled.`, reason: 'not-enabled' }, ref, 'enabled');
+  if (action === 'click') {
+    requireState(
+      runtime,
+      snapshot.visible,
+      { message: `Reference "${ref}" is not visible, so it cannot be clicked.`, reason: 'not-visible' },
+      ref,
+      'visible',
+    );
   }
 }
 
 /**
  * Whether the hit-tested element is the target or inside it. Every element id the walk learns is returned so the
- * caller can release the provider records it created.
+ * caller can release the provider records it created. An ancestor the provider no longer has ends the walk; any other
+ * failure, a timeout or the caller leaving among them, propagates rather than reading as a covered element.
  */
 async function ownsHit(runtime: OperationRuntime, targetId: string, hit: NativeElementSnapshot, learned: string[]): Promise<boolean> {
   let current: NativeElementSnapshot | undefined = hit;
@@ -264,34 +286,90 @@ async function ownsHit(runtime: OperationRuntime, targetId: string, hit: NativeE
     }
     const parentId: string | undefined = current.parentId;
     current = parentId
-      ? await runtime.command('Resolving the hit-test ancestor', (signal) => runtime.host.snapshot(parentId, signal)).catch(() => undefined)
+      ? await runtime
+          .command('Resolving the hit-test ancestor', (signal) => runtime.host.snapshot(parentId, signal))
+          .catch((error: unknown) => {
+            const { code } = toWebDriverError(error);
+            if (code === 'stale element reference' || code === 'no such element') {
+              return undefined;
+            }
+            throw error;
+          })
       : undefined;
   }
   return false;
 }
 
-async function physicalClick(runtime: OperationRuntime, entry: ReferenceEntry, snapshot: NativeElementSnapshot): Promise<void> {
-  const { host } = runtime;
-  await runtime.mutate(`Activating the window of reference ${entry.reference}`, (signal) => host.activate(snapshot.windowId, signal));
+/** What a hit test at the element's centre found: whether the element owns the point, and the window of what does. */
+async function hitVerdict(
+  runtime: OperationRuntime,
+  entry: ReferenceEntry,
+  snapshot: NativeElementSnapshot,
+): Promise<{ hitWindowId: string | undefined; owned: boolean }> {
   const x = snapshot.rect.x + snapshot.rect.width / 2;
   const y = snapshot.rect.y + snapshot.rect.height / 2;
   const learned: string[] = [];
-  let owned = false;
   try {
-    const hit = await runtime.command('Hit testing the element', (signal) => host.hitTest(snapshot.windowId, x, y, signal));
-    owned = hit !== null && (await ownsHit(runtime, entry.nativeId, hit, learned));
+    const hit = await runtime.command('Hit testing the element', (signal) => runtime.host.hitTest(snapshot.windowId, x, y, signal));
+    return { hitWindowId: hit?.windowId, owned: hit !== null && (await ownsHit(runtime, entry.nativeId, hit, learned)) };
   } finally {
     runtime.state.ledger.queue(learned);
   }
-  if (!owned) {
-    throw rejection(
-      runtime,
-      'element click intercepted',
-      'obscured',
-      `Something else is at the centre of reference "${entry.reference}", so a physical click would land elsewhere. Use activate, or bring the element into view.`,
-    );
+}
+
+function obscuredRejection(runtime: OperationRuntime, entry: ReferenceEntry): WebDriverError {
+  return rejection(
+    runtime,
+    'element click intercepted',
+    'obscured',
+    `Something else is at the centre of reference "${entry.reference}", so a physical click would land elsewhere. Use activate, or bring the element into view.`,
+  );
+}
+
+/**
+ * Marks a failure that came after the window was activated and before the click was delivered: the change is partial,
+ * not rejected, because activating the window raised it above others. A failure that already reports a dispatched or
+ * unknown effect keeps it.
+ */
+function afterActivation(runtime: OperationRuntime, error: unknown, reads: boolean): unknown {
+  const reported = readMutationReport(error)?.effect ?? readFailureEffect(error);
+  if (!reads && reported !== undefined && reported !== 'none') {
+    return error;
   }
-  await runtime.mutate(`Clicking reference ${entry.reference}`, (signal) => host.click(entry.nativeId, 'physical', signal));
+  const failure = error instanceof Error ? error : new Error(String(error));
+  attachFailureEffect(failure, 'partial');
+  return attachMutationReport(failure, {
+    disposition: 'indeterminate',
+    effect: 'partial',
+    quarantined: readMutationReport(error)?.quarantined ?? runtime.quarantined(),
+  });
+}
+
+/**
+ * A pointer click needs the element to own its centre. A point covered inside the element's own window is refused
+ * before anything is dispatched, because raising the window cannot uncover it. A point covered by another window may
+ * clear once the window is raised, so the window is activated and the hit test run again; whatever fails after that
+ * reports the activation it could not undo.
+ */
+async function physicalClick(runtime: OperationRuntime, entry: ReferenceEntry, snapshot: NativeElementSnapshot): Promise<void> {
+  const { host } = runtime;
+  const before = await hitVerdict(runtime, entry, snapshot);
+  if (!before.owned && before.hitWindowId === snapshot.windowId) {
+    throw obscuredRejection(runtime, entry);
+  }
+  await runtime.mutate(`Activating the window of reference ${entry.reference}`, (signal) => host.activate(snapshot.windowId, signal));
+  try {
+    if (!(await hitVerdict(runtime, entry, snapshot)).owned) {
+      throw obscuredRejection(runtime, entry);
+    }
+  } catch (error) {
+    throw afterActivation(runtime, error, true);
+  }
+  try {
+    await runtime.mutate(`Clicking reference ${entry.reference}`, (signal) => host.click(entry.nativeId, 'physical', signal));
+  } catch (error) {
+    throw afterActivation(runtime, error, false);
+  }
 }
 
 /**
@@ -308,7 +386,7 @@ async function performNamedAction(runtime: OperationRuntime, entry: ReferenceEnt
       host.listAccessibilityActions(entry.nativeId, signal),
     );
   } catch (error) {
-    throw asRejection(runtime, interpretFailure(runtime, { windowId: entry.windowId, within: entry.reference }, error));
+    throw asRejection(runtime, readableFailure(runtime, entry, error));
   }
   const matches = actions.filter((action) => action.name === name);
   if (matches.length === 0) {
@@ -331,6 +409,42 @@ async function performNamedAction(runtime: OperationRuntime, entry: ReferenceEnt
   await runtime.mutate(`Performing an accessibility action on reference ${entry.reference}`, (signal) =>
     host.performAccessibilityAction(entry.nativeId, key, signal),
   );
+}
+
+/** What an agent may be told of a provider's failure. Provider messages quote titles and element ids, so only the code speaks. */
+const providerFailureText: Partial<Record<WebDriverErrorCode, string>> = {
+  'element click intercepted': 'The provider reported that another element would receive the click.',
+  'element not interactable': 'The provider reported that the element cannot be interacted with.',
+  'invalid argument': 'The provider refused the action as invalid.',
+  timeout: 'The provider did not finish the action in time.',
+  'unsupported operation': 'The provider does not support this action on this element.',
+};
+const providerFailureFallback = 'The provider failed to carry out the action.';
+
+/** A provider's failure in fixed words for its code, keeping only the machine reason and native code it gave. */
+function providerFailure(error: unknown): WebDriverError {
+  const { code, data } = toWebDriverError(error);
+  return new WebDriverError(code, providerFailureText[code] ?? providerFailureFallback, {
+    ...(typeof data?.reason === 'string' ? { reason: data.reason } : {}),
+    ...(typeof data?.nativeCode === 'string' ? { nativeCode: data.nativeCode } : {}),
+  });
+}
+
+const isAuthored = (error: unknown): error is WebDriverError => error instanceof WebDriverError && typeof error.data?.reason === 'string';
+
+/**
+ * The failure an agent reads for one that happened while acting on `entry`. What this layer authored carries a reason
+ * and stays as written. What a provider said is replaced by fixed words for its code, and a provider that no longer has
+ * the element or window drops it, as it does for a read. The settled outcome of the failed change rides along.
+ */
+function readableFailure(runtime: OperationRuntime, entry: ReferenceEntry, error: unknown): unknown {
+  if (isAuthored(error)) {
+    return error;
+  }
+  const interpreted = interpretFailure(runtime, { windowId: entry.windowId, within: entry.reference }, error);
+  const failure = attachFailureEffect(isAuthored(interpreted) ? interpreted : providerFailure(interpreted), readFailureEffect(error));
+  const report = readMutationReport(error);
+  return report ? attachMutationReport(failure, report) : failure;
 }
 
 /**
@@ -382,13 +496,14 @@ export async function performAction(runtime: OperationRuntime, input: ActOptions
         throw quarantinedError(runtime);
       }
       const snapshot = await revalidate(runtime, entry, proof);
-      requireInteractable(runtime, input.action, input.ref, snapshot);
+      requireInteractable(runtime, input.action, entry.reference, snapshot);
       delivered = await dispatchAction(runtime, input, entry, snapshot);
     });
   } catch (error) {
     // Every primary mutation settles through `runtime.mutate`, which reports what it did; a failure without a report
     // dispatched nothing.
-    throw sanitizeQuarantine(runtime, readMutationReport(error) ? error : asRejection(runtime, error));
+    const failure = readableFailure(runtime, entry, error);
+    throw sanitizeQuarantine(runtime, readMutationReport(failure) ? failure : asRejection(runtime, failure));
   }
   const warnings = await flushLedger(runtime);
   return {
