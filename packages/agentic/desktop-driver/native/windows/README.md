@@ -563,7 +563,9 @@ yarn test --runInBand
 The contract builds and resolves the helper, validates cache reuse and
 handshakes, runs the native self-test, checks that a malformed frame fails the
 transport (the self-test also covers a non-object frame), and verifies shared
-Windows/Win32 selection. A second suite builds the test-only Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
+Windows/Win32 selection. The self-test also checks that a window which stalls
+after its initial probe leaves a posted restore's effect unknown. A second
+suite builds the test-only Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
 through the helper: window events, owned popups, hung and stuck providers, large
 trees, bounded retention, and application containment (a contained launch whose
 descendant ends on close and when the helper is killed, and an external fixture

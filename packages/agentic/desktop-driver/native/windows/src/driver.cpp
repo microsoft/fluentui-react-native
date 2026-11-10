@@ -687,10 +687,10 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     if (IsZoomed(window) != FALSE || IsIconic(window) != FALSE) {
       RecordDispatching();
       const bool restored = RestoreWindow(window, token);
-      RecordSettled(S_OK);
       if (!restored) {
         RequireWindowResponds(window, token);
       }
+      RecordSettled(S_OK);
     }
     WindowMetrics metrics = MeasureWindow(window);
     const RectD current = ClientRectInScreenDips(metrics);

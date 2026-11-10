@@ -877,6 +877,38 @@ LRESULT CALLBACK CountingWindowProc(HWND window, UINT message, WPARAM wparam, LP
   return DefWindowProcW(window, message, wparam, lparam);
 }
 
+struct RestoreStall {
+  std::atomic<bool> armed{true};
+  Gate entered;
+  Gate release;
+};
+
+std::mutex restoreStallMutex;
+std::shared_ptr<RestoreStall> restoreStall;
+constexpr UINT kStallAfterProbe = WM_APP + 71;
+
+void SetRestoreStall(std::shared_ptr<RestoreStall> stall) {
+  const std::lock_guard<std::mutex> guard(restoreStallMutex);
+  restoreStall = std::move(stall);
+}
+
+LRESULT CALLBACK StalledRestoreProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
+  std::shared_ptr<RestoreStall> stall;
+  {
+    const std::lock_guard<std::mutex> guard(restoreStallMutex);
+    stall = restoreStall;
+  }
+  // The successful probe queues the stall before the helper can post a restore.
+  if (stall != nullptr && message == WM_NULL && stall->armed.exchange(false)) {
+    PostMessageW(window, kStallAfterProbe, 0, 0);
+  } else if (stall != nullptr && message == kStallAfterProbe) {
+    stall->entered.Open();
+    stall->release.Hold();
+    return 0;
+  }
+  return DefWindowProcW(window, message, wparam, lparam);
+}
+
 // While a gate is set, writing an edit control's text holds its window thread,
 // so a value write through UI Automation never settles.
 std::mutex editGateMutex;
@@ -1796,6 +1828,49 @@ void TestHungWindowProbe() {
   stall->Open();
   Check(WaitFor([&]() { return FailureCode([&]() { RequireWindowResponds(window, token); }) == "none"; }),
         "the window answers again once its thread resumes");
+}
+
+void TestStalledRestoreEffect() {
+  const CancellationToken token;
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestRestore", L"Restore window", &StalledRestoreProc);
+  Check(window != nullptr, "the restore fixture creates a window");
+  if (window == nullptr) {
+    return;
+  }
+  Driver driver;
+  json::Value lease = json::Value::Object();
+  lease.Set("lease", driver.AdoptWindowForTesting(window, L"Restore window"));
+  const CommandResult listed = driver.Execute("windows", lease, token);
+  const std::string windowId = listed.result.IsArray() && listed.result.Items().size() == 1
+                                   ? listed.result.Items().front().StringField("id")
+                                   : std::string();
+  Check(!windowId.empty(), "the restore fixture is registered");
+  if (windowId.empty()) {
+    return;
+  }
+  ShowWindowAsync(window, SW_SHOWMINNOACTIVE);
+  const bool minimized = WaitFor([window]() { return IsIconic(window) != FALSE; });
+  Check(minimized, "the restore fixture is minimized without activation");
+  if (!minimized) {
+    return;
+  }
+
+  json::Value resize = json::Value::Object();
+  resize.Set("windowId", json::Value::String(windowId));
+  resize.Set("rect", json::Value::Parse(R"({"x":-32000,"y":-32000,"width":40,"height":40})"));
+  const auto stall = std::make_shared<RestoreStall>();
+  SetRestoreStall(stall);
+  std::string code;
+  const std::string effect = FailureEffect([&]() { driver.Execute("setWindowRect", resize, token); }, &code);
+  const bool entered = WaitForSingleObject(stall->entered.event, 0) == WAIT_OBJECT_0;
+  SetRestoreStall(nullptr);
+  stall->release.Open();
+  Check(entered, "the restore fixture stalls after its initial probe");
+  Check(code == kErrorAutomationFailed, "the stalled restore reports an automation failure");
+  Check(effect == "unknown", "a stalled restore reports an unknown effect (reported " + effect + ")");
+  Check(WaitFor([window]() { return IsIconic(window) == FALSE; }),
+        "the posted restore can take effect after the failure");
 }
 
 void TestHelperSessionCheck() {
@@ -3668,6 +3743,7 @@ int RunSelfTest() {
   TestInjectionIntegrity();
   TestActivationRefusal();
   TestHungWindowProbe();
+  TestStalledRestoreEffect();
   TestHelperSessionCheck();
   TestInputAuthorityOnThisMachine();
   TestInputReevaluation();
