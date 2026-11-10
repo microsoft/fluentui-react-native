@@ -11,6 +11,8 @@ import { deadline, NodeDesktopCommandRunner } from './commands.js';
 import type { RunningDesktopCommand } from './commands.js';
 import { DesktopServiceScope } from './services.js';
 import type { DesktopResourceRecord } from './resources.js';
+import { DesktopRunReporter } from './reporting/collector.js';
+import { startReportTransport } from './reporting/transport.js';
 
 const fixture = path.resolve(__dirname, '../fixtures/process-control/child.mjs');
 const parentFixture = path.resolve(__dirname, '../fixtures/process-control/parent.mjs');
@@ -219,6 +221,42 @@ describe('owned process lifelines', () => {
     } finally {
       await runner.close();
     }
+  });
+
+  test('owned service wrappers allow nested cleanup to outlast a single producer handshake', async () => {
+    const marker = path.join(root, 'descriptor');
+    const descriptor = path.join(root, 'service.json');
+    fs.writeFileSync(
+      descriptor,
+      JSON.stringify({
+        label: 'slow-reporting-service',
+        stopPath: path.join(root, 'stop'),
+        command: { command: process.execPath, args: [fixture, 'reported-slow', marker], cwd: root },
+      }),
+    );
+    const reporter = new DesktopRunReporter({ artifactsRoot: root, kind: 'lifecycle', output: quiet, errorOutput: quiet, summary: false });
+    const transport = await startReportTransport(reporter);
+    const runner = new NodeDesktopCommandRunner({
+      reporter,
+      environment: transport.environment,
+      shutdownTimeoutMs: 60_000,
+    });
+    const running = runner.start({
+      command: process.execPath,
+      args: [path.resolve(__dirname, '../config/service.cjs'), descriptor],
+      cwd: root,
+      env: {},
+    });
+    try {
+      await waitUntil(() => fs.existsSync(marker));
+      await running.stop();
+      expect(await running.completed).toBe(0);
+      expect(fs.existsSync(marker)).toBe(false);
+    } finally {
+      await runner.close();
+      await transport.close();
+    }
+    expect((await reporter.finish()).status).toBe('passed');
   });
 
   test('producer loss invalidates readiness and cannot certify descriptor withdrawal', async () => {

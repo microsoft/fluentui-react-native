@@ -41,7 +41,8 @@ async function runService(descriptorPath: string, signal: AbortSignal): Promise<
   const cwd = path.resolve(command.cwd ?? process.cwd());
   const stopPath = value.stopPath;
   const report = await createDesktopReportSession({ artifactsRoot: path.join(cwd, 'artifacts', 'desktop'), kind: 'lifecycle' });
-  const runner = new NodeDesktopCommandRunner({ reporter: report.reporter, environment: report.environment });
+  // Nested service scopes allow 45 seconds for disposal, followed by their reporting/stdio flush.
+  const runner = new NodeDesktopCommandRunner({ reporter: report.reporter, environment: report.environment, shutdownTimeoutMs: 60_000 });
   let stop!: () => void;
   const stopped = new Promise<void>((resolve) => {
     stop = resolve;
