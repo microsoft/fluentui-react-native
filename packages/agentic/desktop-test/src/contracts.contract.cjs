@@ -5,6 +5,7 @@ const os = require('node:os');
 const { pathToFileURL } = require('node:url');
 const { Writable } = require('node:stream');
 const { spawnSync } = require('node:child_process');
+const { inspect } = require('node:util');
 
 const mode = process.argv[2];
 const packageRoot = path.resolve(__dirname, '..');
@@ -2271,6 +2272,7 @@ function attemptOf(result, title) {
 }
 
 main().catch((error) => {
-  process.stderr.write(error.stack ?? String(error));
+  // Includes AggregateError members and causes, such as the cleanup failure behind a disposal error.
+  process.stderr.write(inspect(error, { depth: 8 }));
   process.exitCode = 1;
 });
