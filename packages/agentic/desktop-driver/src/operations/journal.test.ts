@@ -1,4 +1,7 @@
+import { stubRuntime } from '../testing/operationRuntime';
+import { executeOperation } from './executor';
 import { OperationJournal } from './journal';
+import { journalCapacity } from './limits';
 import type { JournalRecord } from './journal';
 
 function record(overrides: Partial<JournalRecord> = {}): JournalRecord {
@@ -96,5 +99,36 @@ describe('OperationJournal', () => {
 
     expect(journal.record(record({ durationMs: 12.6 })).durationMs).toBe(13);
     expect(journal.record(record({ durationMs: -5 })).durationMs).toBe(0);
+  });
+});
+
+describe('journal operation', () => {
+  async function readJournal(runtime: ReturnType<typeof stubRuntime>, input: Record<string, unknown> = {}) {
+    return (await executeOperation(runtime.runtime, 'journal', { input })).result;
+  }
+
+  test('says when the page, or entries the journal no longer holds, left entries out', async () => {
+    const runtime = stubRuntime();
+    expect(await readJournal(runtime)).toMatchObject({ complete: true, dropped: 0, entries: [], truncation: [] });
+
+    for (let index = 0; index < 4; index += 1) {
+      runtime.state.journal.record(record({ requestId: `r${index}` }));
+    }
+    expect(await readJournal(runtime, { limit: 2 })).toMatchObject({
+      complete: false,
+      next: 2,
+      truncation: [{ limit: 2, reason: 'limit' }],
+    });
+    expect(await readJournal(runtime, { after: 2, limit: 10 })).toMatchObject({ complete: true, truncation: [] });
+  });
+
+  test('reports entries dropped to stay within capacity', async () => {
+    const runtime = stubRuntime();
+    for (let index = 0; index < journalCapacity.default + 3; index += 1) {
+      runtime.state.journal.record(record({ requestId: `r${index}` }));
+    }
+    const result = (await readJournal(runtime, { after: 1, limit: 200 })) as { complete: boolean; truncation: unknown[] };
+    expect(result.complete).toBe(false);
+    expect(result.truncation).toContainEqual({ omitted: 2, reason: 'dropped' });
   });
 });

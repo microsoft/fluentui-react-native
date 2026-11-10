@@ -54,8 +54,8 @@ export const sampleSchema = z.strictObject({
 
 export const truncationSchema = z.strictObject({
   limit: z.number().optional(),
-  omitted: z.number().optional().describe('Matching elements the size limits left out.'),
-  reason: z.enum(['bytes', 'deadline', 'depth', 'maxBytes', 'maxNodes', 'references', 'unreadable', 'visited']),
+  omitted: z.number().optional().describe('Items the size or page limits left out, or the journal no longer holds.'),
+  reason: z.enum(['bytes', 'deadline', 'depth', 'dropped', 'limit', 'maxBytes', 'maxNodes', 'references', 'unreadable', 'visited']),
   unvisited: z.number().optional().describe('At least this many elements exist that were not visited.'),
 });
 

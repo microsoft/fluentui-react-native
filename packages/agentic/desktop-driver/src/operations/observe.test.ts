@@ -280,6 +280,20 @@ describe('observe', () => {
     expect(delta.changes).toEqual([]);
   });
 
+  test('says which budget left a delta basis incomplete', async () => {
+    const buttons = (count: number) =>
+      Array.from({ length: count }, (_, index) => ({ id: `b${index}`, name: `Button ${index}`, role: 'button' }));
+    const first = buildSample({ children: buttons(5_001), id: 'win', role: 'window' });
+    const second = buildSample({ children: buttons(5_002), id: 'win', role: 'window' });
+    const runtime = stubRuntime({ observe: (_request, _signal, call) => (call === 1 ? first : second) });
+    const base = await observe(runtime);
+
+    const delta = await observeDelta(runtime, { since: base.sample.id });
+
+    expect(delta).toMatchObject({ mode: 'delta', complete: false, removalsSuppressed: true });
+    expect(delta.mode === 'delta' && delta.truncation).toContainEqual({ limit: 5_000, omitted: 2, reason: 'maxNodes' });
+  });
+
   test('returns an explicit fresh snapshot when the delta base was evicted', async () => {
     const runtime = stub();
     const base = await observe(runtime);

@@ -56,10 +56,12 @@ describe('stories', () => {
     const first = await executeOperation(runtime, 'stories', { input: { filter: 'BUTTON', limit: 1 } });
     expect(first.result).toEqual({
       current: { storyId: 'components-button--default', verification: 'marker' },
+      complete: false,
       entries: [{ id: 'components-button--default', name: 'Default', tags: ['story', 'test'], title: 'Components/Button' }],
       matched: 2,
       next: 1,
       total: 3,
+      truncation: [{ limit: 1, omitted: 1, reason: 'limit' }],
     });
     const second = await executeOperation(runtime, 'stories', { input: { filter: 'button', limit: 1, offset: 1 } });
     expect(second.result).toMatchObject({
@@ -67,7 +69,23 @@ describe('stories', () => {
       matched: 2,
     });
     expect(second.result).not.toHaveProperty('next');
+    expect(second.result).not.toHaveProperty('complete');
+    expect(second.result).not.toHaveProperty('truncation');
     expect((second.result as { entries: object[] }).entries[0]).not.toHaveProperty('tags');
+  });
+
+  test('marks the fields of an entry that were cut short', async () => {
+    const long = entry(
+      'a'.repeat(300),
+      'T'.repeat(250),
+      'Plain',
+      Array.from({ length: 20 }, (_, index) => `tag${index}`),
+    );
+    const { runtime } = stubRuntime({ stories: fakeStories([long, entry('short--id', 'Short', 'Short')]).stories });
+    const response = await executeOperation(runtime, 'stories', {});
+    const { entries } = response.result as { entries: { clipped?: string[] }[] };
+    expect(entries[0].clipped).toEqual(['id', 'tags', 'title']);
+    expect(entries[1]).not.toHaveProperty('clipped');
   });
 
   test('makes hidden characters in catalog text visible', async () => {

@@ -196,9 +196,11 @@ describe('find', () => {
     const buttons = Array.from({ length: 5 }, (_, index) => ({ id: `b${index}`, name: `Button ${index}`, role: 'button' }));
     const runtime = stubRuntime({ observation: buildSample({ children: buttons, id: 'win', role: 'window' }) });
     const result = await find(runtime, { limit: 2, role: 'button' });
-    expect(result).toMatchObject({ counts: { definite: 5 }, more: 3, outcome: 'multiple' });
+    expect(result).toMatchObject({ complete: false, counts: { definite: 5 }, more: 3, outcome: 'multiple' });
+    expect(result.truncation).toEqual([{ limit: 2, omitted: 3, reason: 'limit' }]);
     expect(result.matches.map((match) => match.name)).toEqual(['Button 0', 'Button 1']);
     expect(runtime.state.refs.size).toBe(2);
+    expect(await find(runtime, { limit: 5, role: 'button' })).toMatchObject({ complete: true, truncation: [] });
   });
 
   describe('what an application displays', () => {

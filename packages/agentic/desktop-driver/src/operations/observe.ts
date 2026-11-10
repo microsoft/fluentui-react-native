@@ -5,7 +5,7 @@ import { operationError } from './envelope.js';
 import { observationBudgets } from './limits.js';
 import { assertContentAllowed, requestsContent, requireBoundedObservation } from './policy.js';
 import { defaultObservedFacts, nativeFacts, observeFacts, project, shownFacts } from './projection.js';
-import type { ProjectedElement, Projection, ProjectionRefs } from './projection.js';
+import type { ProjectedElement, Projection, ProjectionRefs, ProjectionTruncation } from './projection.js';
 import type { ObservationSnapshot } from './observations.js';
 import { registerOperation } from './runtime.js';
 import type { OperationRuntime } from './runtime.js';
@@ -533,7 +533,7 @@ async function deltaPage(
     page.push(change);
   }
   const nextOffset = offset + page.length;
-  const truncation: z.infer<typeof truncationSchema>[] = [...base.observation.truncation, ...current.observation.truncation];
+  const truncation: z.infer<typeof truncationSchema>[] = [...previous.truncation, ...next.truncation];
   if (stop) {
     truncation.push({
       limit: stop === 'maxNodes' ? maxNodes : maxBytes,
@@ -581,6 +581,8 @@ async function deltaPage(
 
 type CanonicalProjection = {
   complete: boolean;
+  /** Why the projection is incomplete: the provider's own cuts, and the canonical budget when it left elements out. */
+  truncation: ProjectionTruncation[];
   items: { element: ProjectedElement; id: string; node: NativeObservedNode; signature: string }[];
 };
 
@@ -613,7 +615,11 @@ function canonicalProjection(snapshot: ObservationSnapshot): CanonicalProjection
     const signature = JSON.stringify({ ...visible, parentId: node.parentId, scope: node.scope });
     return [{ element, id: node.id, node, signature }];
   });
-  const canonical = { complete: projection.complete && new Set(items.map((item) => item.id)).size === items.length, items };
+  const canonical = {
+    complete: projection.complete && new Set(items.map((item) => item.id)).size === items.length,
+    items,
+    truncation: projection.truncation,
+  };
   canonicalProjections.set(snapshot, canonical);
   return canonical;
 }
