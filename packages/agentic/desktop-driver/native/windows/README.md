@@ -567,7 +567,10 @@ Windows/Win32 selection. A second suite builds the test-only Win32 fixture (`fix
 through the helper: window events, owned popups, hung and stuck providers, large
 trees, bounded retention, and application containment (a contained launch whose
 descendant ends on close and when the helper is killed, and an external fixture
-that survives attach, close, and disposal). `yarn test --runInBand win32Fixture` runs only
+that survives attach, close, and disposal). The hung-window case checks cancelled
+and refused window management; an in-flight provider cancellation checks the
+unknown effect, quarantine, and survival of the owned application.
+`yarn test --runInBand win32Fixture` runs only
 that suite. A third suite serves the same fixture through a grant-protected
 Desktop Driver service with the helper behind it: unauthenticated requests reach
 no helper call, sessions keep their owner, a revoked grant closes its
