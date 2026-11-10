@@ -10,6 +10,7 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 import { Switch } from './switch';
 import type { SwitchLayout } from './switch.types';
 import { Input } from '../input/input';
+import { Button } from '../button/button';
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
@@ -87,6 +88,8 @@ function FocusManagementScene() {
         testID="focus-switch"
         onChange={() => setChanges((count) => count + 1)}
       />
+      <Switch layout="switch" accessibilityLabel="Unavailable" disabled testID="focus-switch-disabled" />
+      <Button content="After switch" testID="focus-switch-after" />
       <StoryStatus testID="focus-switch-count">{String(changes)}</StoryStatus>
     </View>
   );
@@ -96,6 +99,65 @@ export const FocusManagement: Story = {
   render: () => <FocusManagementScene />,
   tags: ['desktop-focus'],
   wdio: [
+    desktopIt(
+      'SWCH-002 suppresses repeated Space keydown and skips disabled stops in both Tab directions',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'switch-key',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expect(await browser.$('~focus-switch-count')).toHaveText(platform === 'macos' ? '1' : '0');
+          await expectNativeState(browser, 'focus-switch', 'checked', platform === 'macos');
+          await browser.performActions([{ type: 'key', id: 'switch-key', actions: [{ type: 'keyUp', value: '\uE00D' }] }]);
+          await expect(await browser.$('~focus-switch-count')).toHaveText('1');
+          await expectNativeState(browser, 'focus-switch', 'checked', true);
+          await browser.keys('\uE004');
+          await expectNativeState(browser, 'focus-switch-after', 'focused', true);
+          await browser.keys(['\uE008', '\uE004']);
+          await expectNativeState(browser, 'focus-switch', 'focused', true);
+          await expect(await browser.$('~focus-switch-count')).toHaveText('1');
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
+    desktopIt(
+      'SWCH-002 cancels a held Space on blur without activating on stale release',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'focus-switch-entry', 'focus-switch');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'switch-key',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE004' },
+                { type: 'keyUp', value: '\uE004' },
+                { type: 'keyUp', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expectNativeState(browser, 'focus-switch-after', 'focused', true);
+          await expectNativeState(browser, 'focus-switch', 'checked', platform === 'macos');
+          await expect(await browser.$('~focus-switch-count')).toHaveText(platform === 'macos' ? '1' : '0');
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
     desktopIt(
       'toggles exactly once per pointer, Enter, and Space activation',
       { requires: ['physical-click', 'keyboard', 'focus'] },

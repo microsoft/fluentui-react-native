@@ -130,6 +130,27 @@ export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: [
     desktopIt(
+      'POP-006 opens and closes a named native group through accessibility action dispatch',
+      { requires: ['accessibility-click'] },
+      async (context) => {
+        const { inPopupWindow, expectClosed } = await import('./popover.wdio.ts');
+        const { browser, expect } = context;
+        const trigger = await browser.$('~popover-trigger');
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        await trigger.click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Opened: trigger');
+        expect(await trigger.getProperty('expanded')).toBe(true);
+        await inPopupWindow(context, async () => {
+          const surface = await browser.$('~popover-surface');
+          expect(await surface.getTagName()).toBe('group');
+          expect(await surface.getProperty('name')).toBe('File details');
+        });
+        await trigger.click();
+        await expect(await browser.$('~popover-reason')).toHaveText('Closed: trigger');
+        await expectClosed(context, 'popover-trigger');
+      },
+    ),
+    desktopIt(
       'opens below the trigger as a named group and enters its first content',
       { requires: ['physical-click', 'keyboard', 'focus'] },
       async (context) => {

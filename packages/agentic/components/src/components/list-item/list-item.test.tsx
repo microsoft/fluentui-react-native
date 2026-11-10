@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, type View } from 'react-native';
 import type { PressableProps, ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -23,6 +24,32 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('ListItem', () => {
+  it('LIT-001 LIT-004 retains the forwarded focus-target ref while caller props and disabled state change', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const component = await renderListItem({ ref, content: 'Inbox', accessibilityHint: 'Open inbox', testID: 'row' });
+    const target = ref.current;
+    expect(target).not.toBeNull();
+    expect(getRoot(component).props.accessibilityHint).toBe('Open inbox');
+    await component.rerender(
+      <ListItem
+        ref={ref}
+        content="Unavailable inbox"
+        disabled
+        accessibilityState={{ disabled: false, busy: true }}
+        accessibilityHint="Inbox unavailable"
+        testID="row"
+      />,
+    );
+    expect(ref.current).toBe(target);
+    expect(getRoot(component).props).toMatchObject({
+      accessibilityHint: 'Inbox unavailable',
+      accessibilityState: { disabled: true, busy: true },
+      focusable: false,
+    });
+    await component.unmount();
+    expect(ref.current).toBeNull();
+  });
+
   it.each([
     ['none', false, undefined],
     ['none', true, undefined],

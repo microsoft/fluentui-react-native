@@ -1,11 +1,49 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, type View } from 'react-native';
 
 import { render } from '../../common/renderWithTheme';
 
 import { FocusVisual, createFocusVisualProps_unstable } from './focus-visual';
 
 describe('FocusVisual', () => {
+  it('forwards both native refs and ring styles while retaining decorative hit-testing policy', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const innerRef = React.createRef<React.ComponentRef<typeof View>>();
+    const component = await render(
+      <FocusVisual
+        ref={ref}
+        inner={{ ref: innerRef, style: { borderWidth: 1, borderRadius: 5 } }}
+        style={{ borderWidth: 3, borderRadius: 7, opacity: 0.6 }}
+        testID="ring"
+      />,
+    );
+    expect(ref.current).not.toBeNull();
+    expect(innerRef.current).not.toBeNull();
+    expect(innerRef.current).not.toBe(ref.current);
+    for (const testID of ['ring', 'ring-inner']) {
+      expect(component.getByTestId(testID, { includeHiddenElements: true }).props).toMatchObject({
+        accessible: false,
+        accessibilityElementsHidden: true,
+        importantForAccessibility: 'no-hide-descendants',
+        focusable: false,
+        pointerEvents: 'none',
+        collapsable: false,
+      });
+    }
+    expect(StyleSheet.flatten(component.getByTestId('ring', { includeHiddenElements: true }).props.style)).toMatchObject({
+      borderWidth: 3,
+      borderRadius: 7,
+      opacity: 0,
+    });
+    await component.rerender(<FocusVisual inner={{ style: { borderWidth: 1 } }} style={{ opacity: 0.6 }} testID="ring" visible />);
+    expect(StyleSheet.flatten(component.getByTestId('ring', { includeHiddenElements: true }).props.style).opacity).toBe(0.6);
+  });
+
+  it.each([{ innerColor: 'white' }, { innerWidth: 1 }, {}])('does not create a partially configured inner ring: %j', (inner) => {
+    expect(createFocusVisualProps_unstable({ ...inner, outerColor: 'black', outerWidth: 2, visible: true }).inner).toBeUndefined();
+  });
+
   it('keeps both rings mounted while visibility changes', async () => {
     const props = createFocusVisualProps_unstable({
       borderRadius: 4,

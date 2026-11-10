@@ -4,9 +4,14 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Accordion } from './accordion';
 import type { AccordionLayout } from './accordion.types';
+import { Input } from '../input/input';
+import { Button } from '../button/button';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -49,7 +54,88 @@ const meta: Meta<typeof Accordion> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Accordion>;
+type Story = WdioStory<StoryObj<typeof Accordion>>;
+
+function KeyboardDisclosureScene() {
+  const [changes, setChanges] = useState(0);
+  return (
+    <View>
+      <Input accessibilityLabel="Disclosure entry" testID="accordion-keyboard-entry" />
+      <Accordion
+        accessibilityLabel="Supporting details"
+        title="Supporting details"
+        onExpandedChange={() => setChanges((count) => count + 1)}
+        bodyContent={{ children: <Button content="Body action" testID="accordion-keyboard-body-action" /> }}
+      />
+      <Button content="After disclosure" testID="accordion-keyboard-after" />
+      <StoryStatus testID="accordion-keyboard-count">{String(changes)}</StoryStatus>
+    </View>
+  );
+}
+
+export const KeyboardDisclosure: Story = {
+  render: () => <KeyboardDisclosureScene />,
+  tags: ['desktop-focus'],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Activation retains header focus; an explicit Tab enters the expanded body and Shift+Tab returns to the header.',
+      },
+    },
+  },
+  wdio: [
+    desktopIt(
+      'ACC-001 ACC-004 expands and collapses once per keyboard activation without transferring header focus',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const header = await browser.$('~accordion-header');
+        await focusByTab(browser, 'accordion-keyboard-entry', 'accordion-header');
+        expect(await header.getTagName()).toBe('button');
+        expect(await header.getProperty('name')).toBe('Supporting details');
+        expect(await header.getProperty('expanded')).toBe(false);
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~accordion-keyboard-count')).toHaveText('1');
+        expect(await header.getProperty('expanded')).toBe(true);
+        await expectNativeState(browser, 'accordion-header', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'accordion-keyboard-body-action', 'focused', true);
+        await browser.keys(['\uE008', '\uE004']);
+        await expectNativeState(browser, 'accordion-header', 'focused', true);
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~accordion-keyboard-count')).toHaveText('2');
+        expect(await header.getProperty('expanded')).toBe(false);
+        await expectNativeState(browser, 'accordion-header', 'focused', true);
+      },
+    ),
+    desktopIt(
+      'ACC-001 suppresses repeated Space keydown and preserves native activation phase',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'accordion-keyboard-entry', 'accordion-header');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'accordion-keyboard',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expect(await browser.$('~accordion-keyboard-count')).toHaveText(platform === 'macos' ? '1' : '0');
+          await browser.performActions([{ type: 'key', id: 'accordion-keyboard', actions: [{ type: 'keyUp', value: '\uE00D' }] }]);
+          await expect(await browser.$('~accordion-keyboard-count')).toHaveText('1');
+          expect(await (await browser.$('~accordion-header')).getProperty('expanded')).toBe(true);
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
+  ],
+};
 
 export const Default: Story = {
   parameters: {
@@ -136,7 +222,7 @@ export const ExternallyDrivenExpansion: Story = {
             <Accordion
               key={name}
               expanded={open === name}
-              onExpandedChange={(expanded) => setOpen(expanded ? name : null)}
+              onExpandedChange={(expanded: boolean) => setOpen(expanded ? name : null)}
               title={{ children: name }}
             />
           ))}

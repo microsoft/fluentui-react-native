@@ -31,6 +31,26 @@ function getTestId(component: RenderResult, testID: string) {
 }
 
 describe('Radio', () => {
+  it.each([false, true])('RAD-004 disabled colors override an active selected=%s press and prevent activation', async (selected) => {
+    const onPress = jest.fn();
+    const component = await renderRadio({ selected, label: 'Option', showSecondaryText: true, onPress });
+    await fireEvent(getRoot(component), 'hoverIn', {});
+    await fireEvent(getRoot(component), 'pressIn', {});
+    await component.rerender(<Radio selected={selected} label="Option" showSecondaryText disabled onPress={onPress} />);
+
+    const colors = defaultFlexTokens.color;
+    expect(StyleSheet.flatten(getTestId(component, 'radio-indicator').props.style).borderColor).toBe(colors.strokeNeutralDisabled.rest);
+    expect(StyleSheet.flatten(getTestId(component, 'radio-dot').props.style)).toMatchObject({
+      backgroundColor: colors.foregroundNeutralDisabled.rest,
+      opacity: selected ? 1 : 0,
+    });
+    for (const text of ['Option', 'Description']) {
+      expect(StyleSheet.flatten(getText(component, text).props.style).color).toBe(colors.foregroundNeutralDisabled.rest);
+    }
+    await fireEvent.press(getRoot(component));
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
     const component = await renderRadio({ onPress, selected: false });

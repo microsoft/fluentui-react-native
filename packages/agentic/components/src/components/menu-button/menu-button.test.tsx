@@ -1,7 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import type { View } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
+import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 
 import { render } from '../../common/renderWithTheme';
 import { MenuItem } from '../menu-item/menu-item';
@@ -45,6 +47,63 @@ function backgroundColor(node: ReactTestInstance): unknown {
 
 describe('MenuButton', () => {
   beforeEach(() => dispatchCommand.mockClear());
+
+  it.each((['small', 'medium', 'large'] as const).flatMap((size) => [false, true].map((iconOnly) => ({ size, iconOnly }))))(
+    'MNB-002 preserves rounded content-layout metrics at $size with iconOnly=$iconOnly',
+    async ({ size, iconOnly }) => {
+      await render(
+        <Scene
+          size={size}
+          content={iconOnly ? null : 'New'}
+          accessibilityLabel="New"
+          icon={{ imageSource: { uri: 'new.png' }, testID: 'leading-icon' }}
+        />,
+      );
+      const { borderRadius, spacing } = defaultFlexTokens;
+      expect(StyleSheet.flatten(screen.getByTestId('trigger').props.style)).toMatchObject({
+        borderRadius: size === 'small' ? borderRadius.base200 : size === 'medium' ? borderRadius.base300 : borderRadius.base400,
+        paddingHorizontal:
+          size === 'small' ? spacing.componentBase200 : size === 'medium' ? spacing.componentBase250 : spacing.componentBase300,
+        paddingVertical:
+          size === 'small' ? spacing.componentBase100 : size === 'medium' ? spacing.componentBase150 : spacing.componentBase200,
+      });
+      const icon = screen.getByTestId('leading-icon');
+      expect(icon.props.accessible).toBe(false);
+      expect(StyleSheet.flatten(icon.props.style)).toMatchObject({ height: size === 'small' ? 16 : 20, width: size === 'small' ? 16 : 20 });
+    },
+  );
+
+  it.each(['altKey', 'ctrlKey', 'metaKey', 'shiftKey'] as const)(
+    'MNB-004 ignores modified opening keys with %s without presenting a menu',
+    async (modifier) => {
+      const onOpenChange = jest.fn();
+      await render(<Scene onOpenChange={onOpenChange} />);
+      for (const key of ['ArrowDown', 'ArrowUp']) {
+        const event = { nativeEvent: { key, [modifier]: true } };
+        await fireEvent(screen.getByTestId('trigger'), 'keyDown', event);
+        expect(screen.queryByTestId('menu')).toBeNull();
+      }
+      expect(onOpenChange).not.toHaveBeenCalled();
+    },
+  );
+
+  it('MNB-004 preserves the caller press event and controlled open ownership', async () => {
+    const onPress = jest.fn();
+    const onOpenChange = jest.fn();
+    const { rerender } = await render(<Scene open={false} onPress={onPress} onOpenChange={onOpenChange} />);
+    const event = { nativeEvent: { key: 'Enter' } };
+    await fireEvent(screen.getByTestId('trigger'), 'press', event);
+    expect(onPress.mock.calls).toEqual([[event]]);
+    expect(onOpenChange.mock.calls).toEqual([[true, { reason: 'trigger' }]]);
+    expect(screen.queryByTestId('menu')).toBeNull();
+    expect(screen.getByTestId('trigger').props.accessibilityState.expanded).toBe(false);
+
+    await rerender(<Scene open onPress={onPress} onOpenChange={onOpenChange} />);
+    expect(screen.getByTestId('menu')).toBeOnTheScreen();
+    expect(screen.getByTestId('trigger').props.accessibilityState.expanded).toBe(true);
+    expect(onOpenChange).toHaveBeenCalledTimes(1);
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
 
   it('renders one button Pressable with the menu hint, expanded state, and a decorative chevron', async () => {
     const ref = React.createRef<View>();

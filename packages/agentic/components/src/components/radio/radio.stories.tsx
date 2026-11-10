@@ -11,6 +11,8 @@ import type { Meta, StoryObj } from '@storybook/react-native';
 import { Radio } from './radio';
 import type { RadioProps } from './radio.types';
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
+import { Input } from '../input/input';
+import { Button } from '../button/button';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -56,6 +58,45 @@ export default meta;
 type Story = WdioStory<StoryObj<typeof Radio>>;
 
 export const Default: Story = {};
+
+function KeyboardActivationScene() {
+  const [presses, setPresses] = useState(0);
+  return (
+    <View>
+      <Input accessibilityLabel="Radio entry" testID="radio-keyboard-entry" />
+      <Radio label="Caller-owned option" selected={false} testID="radio-keyboard-target" onPress={() => setPresses((count) => count + 1)} />
+      <Radio disabled label="Unavailable option" testID="radio-keyboard-disabled" />
+      <Button content="After radio" testID="radio-keyboard-after" />
+      <StoryStatus testID="radio-keyboard-presses">{String(presses)}</StoryStatus>
+    </View>
+  );
+}
+
+export const KeyboardActivation: Story = {
+  render: () => <KeyboardActivationScene />,
+  tags: ['desktop-focus'],
+  wdio: [
+    desktopIt(
+      'RAD-003 RAD-005 activates once per Space and traverses disabled radios without claiming group navigation',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'radio-keyboard-entry', 'radio-keyboard-target');
+        expect(await (await browser.$('~radio-keyboard-target')).getTagName()).toBe('radio');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~radio-keyboard-presses')).toHaveText('1');
+        await expectNativeState(browser, 'radio-keyboard-target', 'focused', true);
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~radio-keyboard-presses')).toHaveText('2');
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'radio-keyboard-after', 'focused', true);
+        await expectNativeState(browser, 'radio-keyboard-disabled', 'focused', false);
+        await browser.keys(['\uE008', '\uE004']);
+        await expectNativeState(browser, 'radio-keyboard-target', 'focused', true);
+      },
+    ),
+  ],
+};
 
 export const NativeSelectionSemantics: Story = {
   render: () => {

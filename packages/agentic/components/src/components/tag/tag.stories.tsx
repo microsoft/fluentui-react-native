@@ -1,12 +1,14 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
 import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Tag } from './tag';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import type { TagAppearance, TagLayout, TagShape, TagSize } from './tag.types';
 
 type StoryGroupProps = {
@@ -95,6 +97,63 @@ export const NativeDisabled: Story = {
       expect(await tag.getTagName()).toBe('button');
       await expect(tag).toBeDisabled();
     }),
+  ],
+};
+
+function ActivationProbe() {
+  const [presses, setPresses] = useState(0);
+  return (
+    <View style={styles.story}>
+      <TextInput accessibilityLabel="Tag keyboard entry" testID="tag-keyboard-entry" />
+      <Tag content="Engineering" onPress={() => setPresses((count) => count + 1)} testID="tag-keyboard-target" />
+      <Tag content="Locked filter" disabled onPress={() => setPresses((count) => count + 100)} testID="tag-keyboard-disabled" />
+      <TextInput accessibilityLabel="Tag keyboard exit" testID="tag-keyboard-exit" />
+      <StoryStatus testID="tag-keyboard-count">{`Presses: ${presses}`}</StoryStatus>
+    </View>
+  );
+}
+
+export const NativeActivation: Story = {
+  render: () => <ActivationProbe />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'The caller records whole-tag activation without removing it; native keyboard navigation skips the disabled tag.',
+      },
+    },
+  },
+  wdio: [
+    desktopIt(
+      'TAG-004 TAG-008 activates once per Enter and Space, ignores deletion keys, and skips disabled tags',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'tag-keyboard-entry', 'tag-keyboard-target');
+        const count = await browser.$('~tag-keyboard-count');
+        await browser.keys('\uE007');
+        await expect(count).toHaveText('Presses: 1');
+        await browser.keys('\uE00D');
+        await expect(count).toHaveText('Presses: 2');
+        await browser.keys('\uE017');
+        await browser.keys('\uE003');
+        await expect(count).toHaveText('Presses: 2');
+        await expect(await browser.$('~tag-keyboard-target')).toExist();
+        await expectNativeState(browser, 'tag-keyboard-target', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'tag-keyboard-exit', 'focused', true);
+        await expect(count).toHaveText('Presses: 2');
+      },
+    ),
+    desktopIt(
+      'TAG-004 reports a native accessibility action once without removing itself',
+      { requires: ['accessibility-click'] },
+      async ({ browser, expect }) => {
+        const tag = await browser.$('~tag-keyboard-target');
+        await tag.click();
+        await expect(await browser.$('~tag-keyboard-count')).toHaveText('Presses: 1');
+        await expect(tag).toExist();
+      },
+    ),
   ],
 };
 

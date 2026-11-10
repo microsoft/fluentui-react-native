@@ -2,10 +2,15 @@
 import { StyleSheet, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Text } from './text';
 
 const styles = StyleSheet.create({
+  nativeFrame: {
+    width: 180,
+  },
   stack: {
     gap: 12,
   },
@@ -36,7 +41,28 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = WdioStory<StoryObj<typeof meta>>;
+
+export const NativeSemantics: Story = {
+  render: () => (
+    <View style={styles.nativeFrame}>
+      <Text testID="text-native-heading" accessible accessibilityRole="header" accessibilityLabel="Account settings" numberOfLines={1}>
+        Account settings with deliberately long visible text
+      </Text>
+    </View>
+  ),
+  wdio: [
+    desktopIt('TXT-003 forwards an explicit readable native name under a constrained width', async ({ browser, expect }) => {
+      const text = await browser.$('~text-native-heading');
+      await expect(text).toExist();
+      expect(await text.getProperty('name')).toBe('Account settings');
+      const bounds = await browser.getElementRect(await text.elementId);
+      expect(bounds.width).toBeGreaterThan(0);
+      expect(bounds.width).toBeLessThanOrEqual(181);
+      expect(bounds.height).toBeGreaterThan(0);
+    }),
+  ],
+};
 
 export const Default: Story = {
   parameters: {

@@ -61,6 +61,35 @@ function Scene(props: Partial<PopoverProps>) {
 }
 
 describe('Popover', () => {
+  it('POP-001 POP-006 retains the structural ref but detaches and reattaches the presented surface ref', async () => {
+    const rootRef = React.createRef<View>();
+    const surfaceRef = React.createRef<View>();
+    await render(<Scene ref={rootRef} surface={{ accessibilityLabel: 'Details', testID: 'surface', ref: surfaceRef }} />);
+    const root = rootRef.current;
+    expect(root).not.toBeNull();
+    expect(surfaceRef.current).toBeNull();
+    await fireEvent.press(trigger());
+    expect(surfaceRef.current).not.toBeNull();
+    expect(surfaceRef.current).not.toBe(root);
+    await fireEvent.press(trigger());
+    expect(surfaceRef.current).toBeNull();
+    expect(rootRef.current).toBe(root);
+    await fireEvent.press(trigger());
+    expect(surfaceRef.current).not.toBeNull();
+    expect(rootRef.current).toBe(root);
+  });
+
+  it.each(['refused', 'cancelled', 'stale', 'unsupported'])(
+    'POP-004 does not invent fallback focus for a %s native result',
+    async (status) => {
+      await render(<Scene defaultOpen />);
+      const host = await ready();
+      await settle(host, focusCommands()[0], status);
+      expect(focusCommands()).toHaveLength(1);
+      expect(screen.getByTestId('surface').props.focusable).toBe(false);
+    },
+  );
+
   beforeEach(() => dispatchCommand.mockClear());
 
   it('renders a collapsed Button trigger with a popup hint and no surface while closed', async () => {

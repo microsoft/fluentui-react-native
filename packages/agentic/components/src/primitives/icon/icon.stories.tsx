@@ -5,9 +5,11 @@ import type { ViewStyle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
 import { directComponent } from '@fluentui-react-native/framework-base';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Icon } from './icon';
-import type { IconElementProps } from './icon.types';
+import type { IconElementProps, IconProps } from './icon.types';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -37,7 +39,7 @@ const imageDataUri = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQA
 const starIcon = { codepoint: 0x2605, fontFamily: 'Arial' } as const;
 const checkIcon = { codepoint: 0x2713, fontFamily: 'Arial' } as const;
 
-const SampleSvgIcon = directComponent<IconElementProps>(({ color, height, width, ...props }) => {
+const SampleSvgIcon = directComponent<IconElementProps>(({ color, height, width, ...props }: IconElementProps) => {
   const rootStyle: ViewStyle = {
     alignItems: 'center',
     height,
@@ -58,7 +60,7 @@ const SampleSvgIcon = directComponent<IconElementProps>(({ color, height, width,
   );
 });
 
-const meta: Meta<typeof Icon> = {
+const meta: Meta<IconProps> = {
   title: 'Primitives/Icon',
   component: Icon,
   args: {
@@ -85,7 +87,41 @@ const meta: Meta<typeof Icon> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Icon>;
+type Story = WdioStory<StoryObj<IconProps>>;
+
+export const NativeSources: Story = {
+  render: () => (
+    <View style={styles.row}>
+      <Icon accessible accessibilityLabel="Font favorite" fontSource={starIcon} height={24} width={24} testID="icon-native-font" />
+      <Icon
+        accessible
+        accessibilityLabel="Image favorite"
+        imageSource={{ uri: imageDataUri }}
+        height={24}
+        width={24}
+        testID="icon-native-image"
+      />
+      <Icon accessible accessibilityLabel="SVG favorite" svgSource={SampleSvgIcon} height={24} width={24} testID="icon-native-svg" />
+    </View>
+  ),
+  wdio: [
+    desktopIt('exposes each source renderer as a named native image within the requested frame', async ({ browser, expect }) => {
+      for (const [id, name] of [
+        ['icon-native-font', 'Font favorite'],
+        ['icon-native-image', 'Image favorite'],
+        ['icon-native-svg', 'SVG favorite'],
+      ]) {
+        const icon = await browser.$(`~${id}`);
+        await expect(icon).toExist();
+        expect(await icon.getTagName()).toBe('image');
+        expect(await icon.getProperty('name')).toBe(name);
+        const bounds = await browser.getElementRect(await icon.elementId);
+        expect(Math.abs(bounds.width - 24)).toBeLessThanOrEqual(1);
+        expect(Math.abs(bounds.height - 24)).toBeLessThanOrEqual(1);
+      }
+    }),
+  ],
+};
 
 export const Default: Story = {
   args: {
@@ -94,7 +130,7 @@ export const Default: Story = {
 };
 
 export const Overview: Story = {
-  render: ({ color, height, width }) => (
+  render: ({ color, height, width }: IconProps) => (
     <View style={styles.story}>
       <StoryGroup label="Source">
         <StoryItem label="Font">
@@ -168,7 +204,7 @@ export const SvgComponent: Story = {
 };
 
 export const Size: Story = {
-  render: ({ color }) => (
+  render: ({ color }: IconProps) => (
     <StoryGroup label="Size">
       {[12, 16, 20, 24, 32, 40].map((size) => (
         <StoryItem key={size} label={`${size}`}>
@@ -187,7 +223,7 @@ export const Size: Story = {
 };
 
 export const Color: Story = {
-  render: ({ height, width }) => (
+  render: ({ height, width }: IconProps) => (
     <StoryGroup label="Color">
       {[
         { label: 'Brand', value: '#185abd' },

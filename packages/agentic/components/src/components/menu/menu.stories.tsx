@@ -115,6 +115,27 @@ export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: [
     desktopIt(
+      'MNU-010 opens a named native menu through accessibility action dispatch',
+      { requires: ['accessibility-click'] },
+      async (context) => {
+        const { inWindowWith, expectMenuClosed } = await import('./menu.wdio.ts');
+        const { browser, expect } = context;
+        const trigger = await browser.$('~menu-trigger');
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        await trigger.click();
+        await expect(await browser.$('~menu-reason')).toHaveText('Opened: trigger');
+        expect(await trigger.getProperty('expanded')).toBe(true);
+        await inWindowWith(context, 'menu-surface', async () => {
+          const surface = await browser.$('~menu-surface');
+          expect(await surface.getTagName()).toBe('menu');
+          expect(await surface.getProperty('name')).toBe('Edit');
+        });
+        await trigger.click();
+        await expect(await browser.$('~menu-reason')).toHaveText('Closed: trigger');
+        await expectMenuClosed(context, 'menu-trigger');
+      },
+    ),
+    desktopIt(
       'opens from the keyboard on the first row and closes on activation',
       { requires: ['physical-click', 'keyboard', 'focus'] },
       async (context) => {
