@@ -7,6 +7,7 @@ export type {
   DesktopStoryTestResult,
   DesktopTestStatus,
 } from './results.js';
+export { compareDesktopCodePoints } from './order.js';
 export {
   defineDesktopStoryTests,
   desktopBy,

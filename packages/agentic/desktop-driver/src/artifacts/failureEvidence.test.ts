@@ -5,6 +5,7 @@ import path from 'node:path';
 import type { DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import { ArtifactManager } from './ArtifactManager.js';
 import { captureDesktopFailureEvidence, maximumSecondaryWindowEvidence } from './failureEvidence.js';
+import { testArtifactDirectory } from './segments.js';
 
 type StubOptions = {
   closed?: readonly string[];
@@ -74,6 +75,20 @@ describe('captureDesktopFailureEvidence', () => {
     expect(stub.calls).toContain('source:popup');
     expect(evidence.errors).toEqual([expect.stringContaining('failure-window-2 (popup-closed): Window popup-closed closed.')]);
     expect(stub.current()).toBe('main');
+  });
+
+  test('keeps evidence in the failure directory, so it never overwrites an authored artifact of the same name', async () => {
+    const stub = createStubSession({ handles: ['main'] });
+    const manager = new ArtifactManager(root);
+    const directory = testArtifactDirectory('story', 'test');
+    const authored = manager.writeSource(directory, 'failure-source', '<authored />');
+    const evidence = await captureDesktopFailureEvidence(stub.session, manager, directory);
+
+    const source = evidence.artifacts.find(({ name }) => name === 'failure-source')!;
+    expect(authored.path).toMatch(/^tests\/story\/test-[0-9a-f]{12}\/failure-source\.xml$/);
+    expect(source.path).toMatch(/^tests\/story\/test-[0-9a-f]{12}\/failure\/failure-source\.xml$/);
+    expect(fs.readFileSync(path.join(manager.root, ...authored.path.split('/')), 'utf8')).toBe('<authored />');
+    expect(fs.readFileSync(path.join(manager.root, ...source.path.split('/')), 'utf8')).toBe('<window id="main"/>');
   });
 
   test('omits unsupported evidence and bounds secondary windows', async () => {

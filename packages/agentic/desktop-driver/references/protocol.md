@@ -147,7 +147,7 @@ Portable lookup strategies:
 | `tag name`          | Normalized accessibility role                      |
 | `link text`         | Exact accessible name                              |
 | `partial link text` | Partial accessible name                            |
-| `-furn:text`        | Normalized visible/value text                      |
+| `-furn:text`        | Exact visible text, value, or accessible name      |
 
 CSS and XPath are not redefined for non-DOM trees.
 

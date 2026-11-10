@@ -630,7 +630,10 @@ it is not a request to reopen the architectural choice of MCP.
 Implement one validated catalog, service executors, typed client, supported-state
 results, strict selection, queues/deadlines, and a bounded canonical journal.
 Add realistic fake-host states and model timeout, truncation, stale refs,
-duplicate selectors, request correlation, and indeterminate effects.
+duplicate selectors, request correlation, and indeterminate effects. The fake
+host already resolves selectors as the native helpers do, reports `checked`,
+`expanded`, and `selected` as unsupported unless an element declares them, and
+enforces the input masks; the remaining models are still open.
 
 **Settlement is the first implementation dependency, not late hardening:**
 correct the existing Node timeout boundary and both providers' ambiguous

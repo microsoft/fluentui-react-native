@@ -51,6 +51,18 @@ describe('decideDesktopCase', () => {
       'Quarantine #9 expired on 2026-06-01.',
     );
   });
+
+  test('expires a quarantine the moment its date begins in UTC, and names the case that carries it', () => {
+    const quarantine = { issue: '#9', reason: 'Flaky.', expires: '2026-06-01' };
+    expect(decide({ quarantine }, { now: Date.parse('2026-05-31T23:59:59.999Z') })).toMatchObject({ kind: 'gap' });
+    expect(() => decide({ quarantine }, { now: Date.parse('2026-06-01T00:00:00Z') })).toThrow(/expired on 2026-06-01\. .*story \/ case/);
+  });
+
+  test('fails an expiry that is not a calendar date instead of treating it as never expiring', () => {
+    const resolved = validateDesktopCaseOptions({ quarantine: { issue: '#9', reason: 'Flaky.', expires: '2099-01-01' } });
+    const forged = { ...resolved, quarantine: { ...resolved.quarantine!, expires: '2026-13-01' } };
+    expect(() => decideDesktopCase(forged, target(), 'story / case')).toThrow('invalid expiry "2026-13-01"');
+  });
 });
 
 describe('click mode and requirement preflight', () => {

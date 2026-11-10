@@ -1,6 +1,8 @@
 import type { DesktopArtifact } from '../authoring/results.js';
 import type { DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import type { ArtifactManager } from './ArtifactManager.js';
+import { artifactDirectorySegments, failureEvidenceDirectory } from './segments.js';
+import type { ArtifactDirectory } from './segments.js';
 
 export type DesktopFailureEvidence = {
   artifacts: DesktopArtifact[];
@@ -11,7 +13,8 @@ export type DesktopFailureEvidence = {
 export const maximumSecondaryWindowEvidence = 4;
 
 /**
- * Captures failure evidence for a live session.
+ * Captures failure evidence for a live session into the `failure` directory of the test's evidence directory, which no
+ * authored artifact writes to, so evidence never overwrites a named screenshot or source.
  *
  * Window events are read first because tree traversal is slow enough for transient windows to change state. The
  * current window is captured next, then each other open window, so popups, sheets, and error overlays are visible
@@ -20,8 +23,9 @@ export const maximumSecondaryWindowEvidence = 4;
 export async function captureDesktopFailureEvidence(
   session: DesktopSessionClient,
   artifacts: ArtifactManager,
-  directory: string,
+  testDirectory: ArtifactDirectory,
 ): Promise<DesktopFailureEvidence> {
+  const directory = [...artifactDirectorySegments(testDirectory), failureEvidenceDirectory];
   const captured: DesktopArtifact[] = [];
   const errors: string[] = [];
   const attempt = async (label: string, capture: () => Promise<DesktopArtifact>): Promise<void> => {
