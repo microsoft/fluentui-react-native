@@ -7,7 +7,7 @@ import path from 'node:path';
 import { NativeDriverError } from '../native/NativeDriverError';
 import type { NativeDriverArtifact } from '../native/types';
 import type { DesktopStoryManifest } from '../storybook.js';
-import { createDesktopDriverCommand } from './createDesktopDriverCommand';
+import { createDesktopDriverCommand, runDesktopDriverCli } from './createDesktopDriverCommand';
 
 jest.setTimeout(30_000);
 
@@ -132,6 +132,84 @@ describe('desktop-driver CLI', () => {
     } finally {
       fs.rmSync(root, { force: true, recursive: true });
     }
+  });
+
+  test('reports subcommand usage errors on stderr in plain mode', async () => {
+    const result = await runInProcessCli(['stories', 'list']);
+
+    expect(result.stdout).toBe('');
+    expect(result.stderr).toContain("required option '--url <url>' not specified");
+    expect(result.exitCode).toBe(1);
+  });
+
+  test('reports subcommand usage errors as one structured record in JSON and NDJSON modes', async () => {
+    const json = await runInProcessCli(['--reporter', 'json', 'stories', 'list']);
+    const ndjson = await runInProcessCli(['--reporter', 'ndjson', 'stories', 'list']);
+
+    for (const result of [json, ndjson]) {
+      expect(result.stderr).toBe('');
+      expect(result.exitCode).toBe(1);
+      expect(JSON.parse(result.stdout)).toMatchObject({
+        schemaVersion: 1,
+        type: 'error',
+        error: { code: 'usage', message: expect.stringContaining("required option '--url <url>' not specified") },
+      });
+    }
+    expect(ndjson.stdout).toBe(json.stdout);
+  });
+
+  test('reports bad choices and invalid option values as usage errors', async () => {
+    const choice = await runInProcessCli([
+      '--reporter',
+      'ndjson',
+      'stories',
+      'list',
+      '--platform',
+      'linux',
+      '--url',
+      'https://127.0.0.1:1',
+      '--target',
+      'target',
+    ]);
+    const port = await runInProcessCli(['--reporter', 'json', 'serve', '--port', 'abc']);
+
+    expect(JSON.parse(choice.stdout)).toMatchObject({
+      type: 'error',
+      error: { code: 'usage', message: expect.stringContaining('Allowed choices are macos, windows') },
+    });
+    expect(JSON.parse(port.stdout)).toMatchObject({
+      type: 'error',
+      error: { code: 'usage', message: expect.stringContaining('Port must be an integer between 0 and 65535') },
+    });
+  });
+
+  test('does not start serve when DESKTOP_REPORTER is invalid', async () => {
+    const result = await runInProcessCli(['serve', '--port', '0'], 'xml');
+
+    expect(result.stdout).toBe('');
+    expect(result.stderr).toContain('Reporter must be one of auto, plain, github-actions, json, ndjson. Received "xml".');
+    expect(result.exitCode).toBe(1);
+  });
+
+  test('clips long doctor failure messages', async () => {
+    const output: string[] = [];
+    const program = createDesktopDriverCommand({
+      resolveDriver: jest.fn(async () => {
+        throw new Error('native helper failure '.repeat(200));
+      }),
+      stdout: {
+        write(value) {
+          output.push(String(value));
+          return true;
+        },
+      },
+    });
+
+    await program.parseAsync(['node', 'test', 'doctor', '--platform', 'macos']);
+
+    const message = JSON.parse(output.join('')).error.message as string;
+    expect(Buffer.byteLength(message)).toBeLessThanOrEqual(1024);
+    expect(message.endsWith('…')).toBe(true);
   });
 
   test('does not crash when the consumer closes stdout before a structured error is written', async () => {
@@ -416,6 +494,32 @@ describe('desktop-driver CLI', () => {
     };
   }
 });
+
+async function runInProcessCli(argv: readonly string[], reporterEnvironment?: string) {
+  const previousReporter = process.env.DESKTOP_REPORTER;
+  const stdout: string[] = [];
+  const stderr: string[] = [];
+  const writeOut = jest.spyOn(process.stdout, 'write').mockImplementation((chunk: string | Uint8Array) => {
+    stdout.push(String(chunk));
+    return true;
+  });
+  const writeErr = jest.spyOn(process.stderr, 'write').mockImplementation((chunk: string | Uint8Array) => {
+    stderr.push(String(chunk));
+    return true;
+  });
+  try {
+    if (reporterEnvironment === undefined) delete process.env.DESKTOP_REPORTER;
+    else process.env.DESKTOP_REPORTER = reporterEnvironment;
+    process.exitCode = undefined;
+    await runDesktopDriverCli(['node', 'desktop-driver', ...argv]);
+    return { stdout: stdout.join(''), stderr: stderr.join(''), exitCode: process.exitCode };
+  } finally {
+    writeOut.mockRestore();
+    writeErr.mockRestore();
+    if (previousReporter === undefined) delete process.env.DESKTOP_REPORTER;
+    else process.env.DESKTOP_REPORTER = previousReporter;
+  }
+}
 
 function spawnCli(args: readonly string[]) {
   return spawn(process.execPath, [path.resolve(__dirname, '../../config/cli.cjs'), ...args], {
