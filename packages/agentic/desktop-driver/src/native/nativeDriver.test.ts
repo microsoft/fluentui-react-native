@@ -15,10 +15,12 @@ import type { NativeDriverArtifact, NativeHostJsonMessage } from './types';
 import {
   hashMacOSDriverSources,
   macOSCertificateExtractionArguments,
+  macOSDriverSourceFiles,
   macOSCodeSignArguments,
   parseMacOSSigningIdentities,
 } from './macos/buildMacOSDriver';
 import { buildNativeDesktopDriver, resolveNativeDesktopDriver } from './nativeDriver';
+import { hashWindowsDriverSources, windowsDriverSourceFiles } from './windows/buildWindowsDriver';
 
 async function expectProtectedNativeService(artifact: NativeDriverArtifact): Promise<void> {
   const endpoint = artifact.provider;
@@ -216,6 +218,82 @@ describe('native driver build and resolution', () => {
       expect(hashMacOSDriverSources(sourceRoot)).toBe(digest);
     } finally {
       fs.rmSync(sourceRoot, { force: true, recursive: true });
+    }
+  });
+
+  test('orders macOS Swift package sources by code point and rejects a symbolic link to a declared source', () => {
+    const sourceRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-macos-order-'));
+    try {
+      fs.mkdirSync(path.join(sourceRoot, 'Sources', 'DesktopDriverHost'), { recursive: true });
+      fs.writeFileSync(path.join(sourceRoot, 'Package.swift'), '// package');
+      for (const name of ['b.swift', 'Z.swift', 'a.swift']) {
+        fs.writeFileSync(path.join(sourceRoot, 'Sources', 'DesktopDriverHost', name), name);
+      }
+      expect(macOSDriverSourceFiles(sourceRoot)).toEqual([
+        'Package.swift',
+        'Sources/DesktopDriverHost/Z.swift',
+        'Sources/DesktopDriverHost/a.swift',
+        'Sources/DesktopDriverHost/b.swift',
+      ]);
+
+      fs.symlinkSync(path.join(sourceRoot, 'Package.swift'), path.join(sourceRoot, 'Sources', 'linked.swift'));
+      expect(() => macOSDriverSourceFiles(sourceRoot)).toThrow(/symbolic link/);
+    } finally {
+      fs.rmSync(sourceRoot, { force: true, recursive: true });
+    }
+  });
+
+  test('hashes and stages only the sources the Windows project declares', () => {
+    const sourceRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-desktop-driver-windows-sources-'));
+    const writeProject = (items: string) =>
+      fs.writeFileSync(
+        path.join(sourceRoot, 'DesktopDriverHost.vcxproj'),
+        [
+          '<Project>',
+          '  <ItemGroup><ProjectConfiguration Include="Release|x64"><Platform>x64</Platform></ProjectConfiguration></ItemGroup>',
+          '  <!-- <ClCompile Include="src\\commented.cpp" /> -->',
+          `  <ItemGroup>${items}</ItemGroup>`,
+          '</Project>',
+        ].join('\n'),
+      );
+    try {
+      fs.mkdirSync(path.join(sourceRoot, 'src'));
+      for (const name of ['main.cpp', 'main.h', 'app.manifest']) {
+        fs.writeFileSync(path.join(sourceRoot, 'src', name), name);
+      }
+      writeProject('<ClCompile Include="src\\main.cpp" /><ClInclude Include="src\\main.h" /><Manifest Include="src\\app.manifest" />');
+      const digest = hashWindowsDriverSources(sourceRoot);
+      expect(windowsDriverSourceFiles(sourceRoot)).toEqual(['DesktopDriverHost.vcxproj', 'src/app.manifest', 'src/main.cpp', 'src/main.h']);
+
+      fs.writeFileSync(path.join(sourceRoot, 'README.md'), 'documentation');
+      fs.writeFileSync(path.join(sourceRoot, 'src', 'notes.txt'), 'notes');
+      fs.mkdirSync(path.join(sourceRoot, '.vs'));
+      fs.writeFileSync(path.join(sourceRoot, '.vs', 'cache.db'), 'editor');
+      expect(hashWindowsDriverSources(sourceRoot)).toBe(digest);
+
+      fs.writeFileSync(path.join(sourceRoot, 'src', 'main.cpp'), 'changed');
+      expect(hashWindowsDriverSources(sourceRoot)).not.toBe(digest);
+
+      writeProject('<ClCompile Include="src\\missing.cpp" />');
+      expect(() => windowsDriverSourceFiles(sourceRoot)).toThrow(/does not exist/);
+      writeProject('<ClCompile Include="..\\outside.cpp" />');
+      expect(() => windowsDriverSourceFiles(sourceRoot)).toThrow(/escapes the source root/);
+      writeProject('<ClCompile Include="src\\*.cpp" />');
+      expect(() => windowsDriverSourceFiles(sourceRoot)).toThrow(/plain relative file path/);
+    } finally {
+      fs.rmSync(sourceRoot, { force: true, recursive: true });
+    }
+  });
+
+  test('declares every shipped Windows source in the project so the staged build is complete', () => {
+    const sourceRoot = path.resolve(__dirname, '../../native/windows');
+    const declared = new Set(windowsDriverSourceFiles(sourceRoot));
+    const onDisk = fs.readdirSync(path.join(sourceRoot, 'src'), { recursive: true, withFileTypes: true }).filter((entry) => entry.isFile());
+
+    expect(onDisk.length).toBeGreaterThan(0);
+    for (const entry of onDisk) {
+      const relativePath = path.relative(sourceRoot, path.join(entry.parentPath, entry.name)).replaceAll(path.sep, '/');
+      expect(declared.has(relativePath)).toBe(true);
     }
   });
 

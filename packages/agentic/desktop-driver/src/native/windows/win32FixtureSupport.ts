@@ -5,10 +5,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import { FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES } from '../../hosts/native/NativeDesktopHost';
+import { resolveDisabledInputFeatures } from '../../hosts/native/NativeDesktopHost';
 import type { NativeDisabledInputFeature } from '../../hosts/native/NativeDesktopHost';
-import { acquireDirectoryLock, defaultNativeDriverCacheRoot, delay, hashTree, sha256 } from '../filesystem';
+import { acquireDirectoryLock, delay, hashTree, resolveNativeDriverCacheRoot, sha256 } from '../filesystem';
 import { buildNativeDesktopDriver, FURN_DESKTOP_DRIVER_CACHE_ROOT } from '../nativeDriver';
+import { nativeDriverPackageRoot } from '../packageRoot.cjs';
 import type { NativeDriverArtifact } from '../types';
 import { probeWindowsToolchain } from './buildWindowsDriver';
 
@@ -19,12 +20,7 @@ const megabyte = 1024 * 1024;
 let helperArtifactPromise: Promise<NativeDriverArtifact> | undefined;
 let fixtureExecutablePromise: Promise<string> | undefined;
 
-const disabledInputFeatures = new Set(
-  (process.env[FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES] ?? '')
-    .split(',')
-    .map((feature) => feature.trim())
-    .filter(Boolean),
-);
+const disabledInputFeatures = resolveDisabledInputFeatures();
 
 /**
  * Selects `test` for a Windows native contract scenario, or `test.skip` when this runner cannot host it. Scenarios run
@@ -54,7 +50,7 @@ export function fixtureExecutable(): Promise<string> {
 
 async function buildFixture(): Promise<string> {
   const toolchain = await probeWindowsToolchain();
-  const cacheRoot = path.resolve(process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT] ?? defaultNativeDriverCacheRoot());
+  const cacheRoot = resolveNativeDriverCacheRoot(process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT], nativeDriverPackageRoot);
   const digest = sha256(`${hashTree(fixtureRoot)}:${toolchain.fingerprint}`).slice(0, 20);
   const publishedRoot = path.join(cacheRoot, 'v1', 'fixtures', 'win32', digest);
   const executable = path.join(publishedRoot, 'furn-win32-fixture.exe');

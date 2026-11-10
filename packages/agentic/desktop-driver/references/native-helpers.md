@@ -102,7 +102,8 @@ macOS:   ~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver/nat
 
 CI may use a job-local cache root, but should restore only artifacts built for
 the matching provider, architecture, source, toolchain, configuration, and
-signing identity.
+signing identity. A cache root inside the driver package, `node_modules`, or a
+pnpm store is rejected with `invalid-configuration`.
 
 GitHub Actions examples:
 
@@ -118,7 +119,9 @@ smoke so later phases cannot compile implicitly.
 Source resolution is anchored in the driver's own package, not the caller's
 working directory or direct dependencies. Windows staging paths use a short
 unique directory name to stay within MSBuild's path-length limits; immutable
-artifact identities and the shared cache layout are unchanged.
+artifact identities and the shared cache layout are unchanged. The Windows
+source digest covers the project and the items it declares, and the build runs
+from those sources staged there, never in the package.
 
 Hosted runners that cannot provide authoritative global input may set
 `FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES=keyboard,physicalClick,wheel`.
@@ -147,10 +150,13 @@ not set this policy.
   builds, keyed by fixture source and toolchain. Resolution never selects them,
   and they are not published.
 - Builds publish through same-volume staging and atomic rename.
-- Cross-process directory locks prevent duplicate publication.
+- Cross-process directory locks prevent duplicate publication. A lock is stale
+  when its heartbeat stops; waiters reclaim it, and keep waiting for up to 60
+  minutes while the heartbeat is fresh.
 - Failed build logs are copied to immutable diagnostics before staging cleanup.
-- Corrupt cache selections and artifact collisions are quarantined under
-  `trash`; in-use artifacts are never replaced.
+- A cache selection or artifact collision is quarantined under `trash` only
+  when it fails an integrity check. A transient verification failure keeps it
+  and is retryable, so an artifact that may be in use is never replaced.
 
 Never edit an artifact or selection in place. Rebuild and allow the resolver to
 publish a new immutable selection.

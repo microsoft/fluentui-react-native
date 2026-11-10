@@ -71,7 +71,9 @@ FURN_DESKTOP_DRIVER_CACHE_ROOT=<job-specific restored path>
 Then run `desktop-driver doctor --platform <endpoint>` before app startup.
 Restore only cache content produced for the same OS, architecture, source,
 toolchain, configuration, and macOS signer. Never cache runtime leases or
-borrow another logged-in user's native store.
+borrow another logged-in user's native store. The cache root must be outside
+the desktop-driver package, `node_modules`, and any pnpm store; the driver
+rejects such a root with `invalid-configuration`.
 
 ## Gate 3: real application
 
