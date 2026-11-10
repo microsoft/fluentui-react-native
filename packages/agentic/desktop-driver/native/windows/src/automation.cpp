@@ -98,19 +98,55 @@ HRESULT CountedMutation(Fn&& call, std::string_view operation) {
   return result;
 }
 
+enum class PatternStatus { Available, Absent, Stale, Failed };
+
+template <typename Pattern>
+struct PatternQuery {
+  PatternStatus status{PatternStatus::Absent};
+  HRESULT result{S_OK};
+  winrt::com_ptr<Pattern> pattern;
+};
+
+// Only a pattern the element does not implement is a missing capability; an
+// element that went away or a provider that failed must not be reported as one.
+template <typename Pattern>
+PatternQuery<Pattern> QueryPattern(IUIAutomationElement* element, PATTERNID patternId) {
+  PatternQuery<Pattern> query;
+  query.result = element->GetCurrentPatternAs(patternId, IID_PPV_ARGS(query.pattern.put()));
+  if (query.result == UIA_E_ELEMENTNOTAVAILABLE) {
+    query.status = PatternStatus::Stale;
+  } else if (SUCCEEDED(query.result)) {
+    query.status = query.pattern ? PatternStatus::Available : PatternStatus::Absent;
+  } else if (query.result == UIA_E_NOTSUPPORTED || query.result == E_NOINTERFACE || query.result == E_NOTIMPL ||
+             query.result == E_FAIL) {
+    query.status = PatternStatus::Absent;
+  } else {
+    query.status = PatternStatus::Failed;
+  }
+  return query;
+}
+
+// Returns whether the element implements the pattern, and fails for a stale
+// element or a failed query.
+template <typename Pattern>
+bool RequirePatternQuery(const PatternQuery<Pattern>& query, std::string_view operation) {
+  if (query.status == PatternStatus::Stale) {
+    Fail(kErrorStaleElement, "The element is no longer available.");
+  }
+  if (query.status == PatternStatus::Failed) {
+    FailHresult(kErrorAutomationFailed, operation, query.result);
+  }
+  return query.status == PatternStatus::Available;
+}
+
 template <typename Pattern>
 void PerformPatternAction(IUIAutomationElement* element, PATTERNID patternId, HRESULT (STDMETHODCALLTYPE Pattern::*method)(),
                           const CancellationToken& token) {
-  winrt::com_ptr<Pattern> pattern;
-  const HRESULT query = element->GetCurrentPatternAs(patternId, IID_PPV_ARGS(pattern.put()));
-  if (query == UIA_E_ELEMENTNOTAVAILABLE) {
-    Fail(kErrorStaleElement, "The element is no longer available.");
-  }
-  if (query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL || query == E_FAIL ||
-      (SUCCEEDED(query) && !pattern)) {
+  const PatternQuery<Pattern> query = QueryPattern<Pattern>(element, patternId);
+  if (!RequirePatternQuery(query, "Reading the accessibility action pattern")) {
     ActionChanged();
   }
-  CheckHresult(kErrorAutomationFailed, "Reading the accessibility action pattern", query);
+  const winrt::com_ptr<Pattern> pattern = query.pattern;
   token.ThrowIfCancelled();
   const HRESULT result = CountedMutation([pattern, method]() { return (pattern.get()->*method)(); },
                                          "Performing the accessibility action");
@@ -1319,12 +1355,16 @@ void Automation::SetFocus(const std::string& elementId) {
   }
 }
 
-bool Automation::HasKeyboardFocus(const std::string& elementId) {
+bool Automation::HasKeyboardFocus(const std::string& elementId, HRESULT& failure) {
   const ElementRecord& record = RequireRecord(elementId);
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
   const auto focused = std::make_shared<BOOL>(FALSE);
   const HRESULT result = BoundedRead([element, focused]() { return element->get_CurrentHasKeyboardFocus(focused.get()); },
                                      "Reading the element focus state");
+  if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
+  }
+  failure = FAILED(result) ? result : S_OK;
   return SUCCEEDED(result) && *focused != FALSE;
 }
 
@@ -1333,27 +1373,30 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
   token.ThrowIfCancelled();
 
-  winrt::com_ptr<IUIAutomationInvokePattern> invoke;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_InvokePatternId, IID_PPV_ARGS(invoke.put()))) && invoke) {
+  const auto invoke = QueryPattern<IUIAutomationInvokePattern>(element.get(), UIA_InvokePatternId);
+  if (RequirePatternQuery(invoke, "Reading the element's Invoke pattern")) {
+    const winrt::com_ptr<IUIAutomationInvokePattern> pattern = invoke.pattern;
     CheckClickResult("Invoking the element",
-                     CountedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
+                     CountedMutation([pattern]() { return pattern->Invoke(); }, "Invoking the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationTogglePattern> toggle;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_TogglePatternId, IID_PPV_ARGS(toggle.put()))) && toggle) {
+  const auto toggle = QueryPattern<IUIAutomationTogglePattern>(element.get(), UIA_TogglePatternId);
+  if (RequirePatternQuery(toggle, "Reading the element's Toggle pattern")) {
+    const winrt::com_ptr<IUIAutomationTogglePattern> pattern = toggle.pattern;
     CheckClickResult("Toggling the element",
-                     CountedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
+                     CountedMutation([pattern]() { return pattern->Toggle(); }, "Toggling the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationSelectionItemPattern> selection;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_SelectionItemPatternId, IID_PPV_ARGS(selection.put()))) &&
-      selection) {
+  const auto selection = QueryPattern<IUIAutomationSelectionItemPattern>(element.get(), UIA_SelectionItemPatternId);
+  if (RequirePatternQuery(selection, "Reading the element's SelectionItem pattern")) {
+    const winrt::com_ptr<IUIAutomationSelectionItemPattern> pattern = selection.pattern;
     CheckClickResult("Selecting the element",
-                     CountedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
+                     CountedMutation([pattern]() { return pattern->Select(); }, "Selecting the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_ExpandCollapsePatternId, IID_PPV_ARGS(expand.put()))) && expand) {
+  const auto expandQuery = QueryPattern<IUIAutomationExpandCollapsePattern>(element.get(), UIA_ExpandCollapsePatternId);
+  if (RequirePatternQuery(expandQuery, "Reading the element's ExpandCollapse pattern")) {
+    const winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand = expandQuery.pattern;
     const auto state = std::make_shared<ExpandCollapseState>(ExpandCollapseState_Collapsed);
     CheckHresult(kErrorAutomationFailed, "Reading the expand state",
                  BoundedRead([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
@@ -1367,8 +1410,10 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
                                      "Expanding or collapsing the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_LegacyIAccessiblePatternId, IID_PPV_ARGS(legacy.put()))) && legacy) {
+  const auto legacyQuery =
+      QueryPattern<IUIAutomationLegacyIAccessiblePattern>(element.get(), UIA_LegacyIAccessiblePatternId);
+  if (RequirePatternQuery(legacyQuery, "Reading the element's LegacyIAccessible pattern")) {
+    const winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy = legacyQuery.pattern;
     CheckClickResult("Invoking the legacy accessibility default action",
                      CountedMutation([legacy]() { return legacy->DoDefaultAction(); },
                                      "Invoking the legacy accessibility default action"));
@@ -1442,21 +1487,18 @@ void Automation::PerformAccessibilityAction(const std::string& elementId, const 
 
 bool Automation::TryClearValue(const std::string& elementId, bool strict) {
   const ElementRecord& record = RequireRecord(elementId);
-  winrt::com_ptr<IUIAutomationValuePattern> value;
-  const HRESULT query = record.element->GetCurrentPatternAs(UIA_ValuePatternId, IID_PPV_ARGS(value.put()));
-  if (FAILED(query) || !value) {
+  const auto query = QueryPattern<IUIAutomationValuePattern>(record.element.get(), UIA_ValuePatternId);
+  if (query.status != PatternStatus::Available) {
+    // Without a strict request the keyboard clear is the fallback, and it
+    // reports a stale element itself.
     if (!strict) {
       return false;
     }
-    if (query == UIA_E_ELEMENTNOTAVAILABLE) {
-      Fail(kErrorStaleElement, "The element is no longer available.");
-    }
-    if (SUCCEEDED(query) || query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL ||
-        query == E_FAIL) {
+    if (!RequirePatternQuery(query, "Reading the element value pattern")) {
       Fail(kErrorNotInteractable, "The element does not expose a writable value to clear.");
     }
-    FailHresult(kErrorAutomationFailed, "Reading the element value pattern", query);
   }
+  const winrt::com_ptr<IUIAutomationValuePattern> value = query.pattern;
   const auto readOnly = std::make_shared<BOOL>(TRUE);
   const HRESULT state = BoundedRead([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
                                     "Reading the element value state");

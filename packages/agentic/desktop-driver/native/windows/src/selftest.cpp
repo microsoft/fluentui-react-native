@@ -2650,7 +2650,10 @@ void TestAutomationElementIdentity() {
 
   const std::vector<ElementSnapshot> fifth = automation.SnapshotWindowTree(context, token);
   const std::string lastEditId = idOfRole(fifth, "textbox");
+  const std::string lastButtonId = idOfRole(fifth, "button");
   windows.Destroy(window);
+  Check(FailureCode([&]() { automation.AccessibilityClick(lastButtonId, token); }) == kErrorStaleElement,
+        "an accessibility click on an element of a destroyed window answers stale-element, not unsupported");
   Check(FailureCode([&]() { automation.SnapshotElement(lastEditId, token); }, &message) == kErrorStaleElement,
         "an element of a destroyed window answers stale-element");
   automation.ForgetWindow(context.windowId);

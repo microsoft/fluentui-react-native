@@ -259,10 +259,14 @@ HWND Driver::FocusForKeyboard(const std::string& elementId, const CancellationTo
   // foreground fails here instead of typing into whatever is.
   ActivateWindow(window, token);
   automation_.SetFocus(elementId);
-  for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId); attempt += 1) {
+  HRESULT focusFailure = S_OK;
+  for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId, focusFailure); attempt += 1) {
     token.Wait(20);
   }
-  if (!automation_.HasKeyboardFocus(elementId)) {
+  if (!automation_.HasKeyboardFocus(elementId, focusFailure)) {
+    if (FAILED(focusFailure)) {
+      FailHresult(kErrorAutomationFailed, "Reading the element focus state", focusFailure);
+    }
     Fail(kErrorNotInteractable, "The element did not take keyboard focus, so keys were not sent.");
   }
   return window;
