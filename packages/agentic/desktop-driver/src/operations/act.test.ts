@@ -1,5 +1,6 @@
 import type { NativeElementSnapshot } from '../host/types';
-import { HostStaleError, HostWebDriverError, WebDriverError } from '../protocol/errors';
+import { HostStaleError, HostWebDriverError } from '../protocol/errors';
+import type { WebDriverError } from '../protocol/errors';
 import { buildSample, supportedFact, unsupportedFact } from '../testing/observationSample';
 import { stubRuntime } from '../testing/operationRuntime';
 import type { StubRuntime, StubRuntimeOptions } from '../testing/operationRuntime';
