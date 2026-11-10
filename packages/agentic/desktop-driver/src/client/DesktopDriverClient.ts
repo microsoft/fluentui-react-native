@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { validateDesktopSessionInput } from '../authoring/input.js';
 import type { DesktopSessionInput } from '../authoring/input.js';
 import { WebDriverError } from '../protocol/errors.js';
+import type { WebDriverErrorCode } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
 import type { DesktopTreeNode, DesktopWindowEventLog } from '../host/types.js';
 import type {
@@ -33,14 +34,7 @@ import type {
   StoryInput,
   StoryResult,
 } from '../operations/index.js';
-import type {
-  NewSessionCapabilities,
-  WebDriverActionSequence,
-  WebDriverElement,
-  WebDriverErrorResponse,
-  WebDriverResponse,
-  WebDriverTimeouts,
-} from '../protocol/types.js';
+import type { NewSessionCapabilities, WebDriverActionSequence, WebDriverElement, WebDriverTimeouts } from '../protocol/types.js';
 import type { DesktopStoryManifest, StoryReadyResult } from '../storybook.js';
 
 export type DesktopDriverClientOptions = {
@@ -51,6 +45,12 @@ export type DesktopDriverClientOptions = {
    */
   grant?: string;
   url: string;
+};
+
+/** Options for one session or element call that is not an agent operation. */
+export type DesktopClientCallOptions = {
+  /** Abandons the call: the request is aborted and the caller sees the abort, not a transport failure. */
+  signal?: AbortSignal;
 };
 
 /** Options for one operation call. */
@@ -107,20 +107,94 @@ export class DesktopDriverClient {
       ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
       ...(this.#grant ? { Authorization: `Bearer ${this.#grant}` } : {}),
     };
-    const response = await this.fetch(`${this.url}${path}`, {
-      method,
-      ...(this.#grant ? { redirect: 'error' as const } : {}),
-      ...(body === undefined ? {} : { body: JSON.stringify(body) }),
-      ...(Object.keys(headers).length > 0 ? { headers } : {}),
-      ...(signal ? { signal } : {}),
-    });
-    const payload = (await response.json()) as WebDriverResponse<T> | WebDriverErrorResponse;
-    if (!response.ok) {
-      const error = payload.value as WebDriverErrorResponse['value'];
-      throw new WebDriverError(error.error as ConstructorParameters<typeof WebDriverError>[0], error.message, error.data);
+    let status: number;
+    let ok: boolean;
+    let text: string;
+    try {
+      const response = await this.fetch(`${this.url}${path}`, {
+        method,
+        ...(this.#grant ? { redirect: 'error' as const } : {}),
+        ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+        ...(Object.keys(headers).length > 0 ? { headers } : {}),
+        ...(signal ? { signal } : {}),
+      });
+      status = response.status;
+      ok = response.ok;
+      text = await response.text();
+    } catch (error) {
+      // A caller who cancelled gets its own abort back, not a transport failure.
+      if (signal?.aborted || (typeof error === 'object' && error !== null && (error as { name?: unknown }).name === 'AbortError')) {
+        throw error;
+      }
+      const reason = error instanceof Error && error.message ? `: ${error.message}` : '';
+      throw new DesktopDriverClientError('transport', `The Desktop Driver service could not be reached for ${method}${reason}.`, {
+        cause: error,
+      });
     }
-    return payload.value as T;
+    return readResponse<T>(method, ok, status, text);
   }
+}
+
+/** Why a request produced no WebDriver answer: the service was unreachable, or what it sent was not a WebDriver response. */
+export type DesktopDriverClientErrorReason = 'invalid-response' | 'transport';
+
+/**
+ * A failure of the client's own transport, as opposed to a WebDriver error the service reported. The message never holds
+ * the response body or the request values; `cause` keeps the underlying error for diagnosis.
+ */
+export class DesktopDriverClientError extends Error {
+  readonly reason: DesktopDriverClientErrorReason;
+  /** The HTTP status of an `invalid-response`. A `transport` failure never received one. */
+  readonly status?: number;
+
+  constructor(reason: DesktopDriverClientErrorReason, message: string, options: { cause?: unknown; status?: number } = {}) {
+    super(message, options.cause === undefined ? undefined : { cause: options.cause });
+    this.name = 'DesktopDriverClientError';
+    this.reason = reason;
+    if (options.status !== undefined) this.status = options.status;
+  }
+}
+
+function readResponse<T>(method: string, ok: boolean, status: number, text: string): T {
+  let payload: unknown;
+  try {
+    payload = JSON.parse(text);
+  } catch (error) {
+    throw new DesktopDriverClientError(
+      'invalid-response',
+      `The Desktop Driver service answered ${method} with HTTP ${status} and a body that is not JSON.`,
+      {
+        cause: error,
+        status,
+      },
+    );
+  }
+  if (!isRecord(payload) || !('value' in payload)) {
+    throw new DesktopDriverClientError(
+      'invalid-response',
+      `The Desktop Driver service answered ${method} with HTTP ${status} and no WebDriver value.`,
+      { status },
+    );
+  }
+  const value = payload.value;
+  if (ok) {
+    return value as T;
+  }
+  if (!isRecord(value) || typeof value.error !== 'string' || typeof value.message !== 'string') {
+    throw new DesktopDriverClientError(
+      'invalid-response',
+      `The Desktop Driver service answered ${method} with HTTP ${status} and a malformed error.`,
+      { status },
+    );
+  }
+  const data = isRecord(value.data) ? value.data : undefined;
+  const error = new WebDriverError(value.error as WebDriverErrorCode, value.message, data);
+  // A code this client does not know still has to classify, so it becomes an unknown error that keeps the code.
+  throw error.status === undefined ? new WebDriverError('unknown error', value.message, { ...data, code: value.error }) : error;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 export class DesktopSessionClient {
@@ -134,80 +208,92 @@ export class DesktopSessionClient {
     this.capabilities = capabilities;
   }
 
-  delete(): Promise<null> {
-    return this.command('DELETE', '');
+  /** A client for another session on the same service and credential, such as the one a WebdriverIO reload created. */
+  rebind(id: string, capabilities: Readonly<Record<string, unknown>>): DesktopSessionClient {
+    return new DesktopSessionClient(this.driver, id, capabilities);
   }
 
-  getTimeouts(): Promise<WebDriverTimeouts> {
-    return this.command('GET', '/timeouts');
+  delete(options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('DELETE', '', undefined, options?.signal);
   }
 
-  setTimeouts(timeouts: Partial<WebDriverTimeouts>): Promise<null> {
-    return this.command('POST', '/timeouts', timeouts);
+  getTimeouts(options?: DesktopClientCallOptions): Promise<WebDriverTimeouts> {
+    return this.command('GET', '/timeouts', undefined, options?.signal);
   }
 
-  getWindowHandle(): Promise<string> {
-    return this.command('GET', '/window');
+  setTimeouts(timeouts: Partial<WebDriverTimeouts>, options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/timeouts', timeouts, options?.signal);
   }
 
-  getWindowHandles(): Promise<string[]> {
-    return this.command('GET', '/window/handles');
+  getWindowHandle(options?: DesktopClientCallOptions): Promise<string> {
+    return this.command('GET', '/window', undefined, options?.signal);
   }
 
-  switchToWindow(handle: string): Promise<null> {
-    return this.command('POST', '/window', { handle });
+  getWindowHandles(options?: DesktopClientCallOptions): Promise<string[]> {
+    return this.command('GET', '/window/handles', undefined, options?.signal);
   }
 
-  findElement(using: string, value: string): Promise<DesktopElementClient> {
-    return this.command<WebDriverElement>('POST', '/element', { using, value }).then(
-      (element) => new DesktopElementClient(this, element[webElementIdentifier]),
-    );
+  switchToWindow(handle: string, options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/window', { handle }, options?.signal);
   }
 
-  findElements(using: string, value: string): Promise<DesktopElementClient[]> {
-    return this.command<WebDriverElement[]>('POST', '/elements', { using, value }).then((elements) =>
-      elements.map((element) => new DesktopElementClient(this, element[webElementIdentifier])),
-    );
+  async findElement(using: string, value: string, options?: DesktopClientCallOptions): Promise<DesktopElementClient> {
+    return this.elementFrom(await this.command<WebDriverElement>('POST', '/element', { using, value }, options?.signal));
   }
 
-  getActiveElement(): Promise<DesktopElementClient | null> {
-    return this.command<WebDriverElement | null>('GET', '/element/active').then((element) =>
-      element ? new DesktopElementClient(this, element[webElementIdentifier]) : null,
-    );
+  async findElements(using: string, value: string, options?: DesktopClientCallOptions): Promise<DesktopElementClient[]> {
+    const elements = await this.command<unknown>('POST', '/elements', { using, value }, options?.signal);
+    if (!Array.isArray(elements)) {
+      throw malformedElementList();
+    }
+    return elements.map((element) => this.elementFrom(element));
   }
 
-  performActions(actions: readonly WebDriverActionSequence[]): Promise<null> {
-    return this.command('POST', '/actions', { actions });
+  async getActiveElement(options?: DesktopClientCallOptions): Promise<DesktopElementClient | null> {
+    const element = await this.command<unknown>('GET', '/element/active', undefined, options?.signal);
+    return element ? this.elementFrom(element) : null;
   }
 
-  releaseActions(): Promise<null> {
-    return this.command('DELETE', '/actions');
+  performActions(actions: readonly WebDriverActionSequence[], options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/actions', { actions }, options?.signal);
   }
 
-  takeScreenshot(): Promise<string> {
-    return this.command('GET', '/screenshot');
+  releaseActions(options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('DELETE', '/actions', undefined, options?.signal);
   }
 
-  getPageSource(): Promise<string> {
-    return this.command('GET', '/source');
+  takeScreenshot(options?: DesktopClientCallOptions): Promise<string> {
+    return this.command('GET', '/screenshot', undefined, options?.signal);
   }
 
-  getTree(): Promise<DesktopTreeNode[]> {
-    return this.command('GET', '/furn/tree');
+  getPageSource(options?: DesktopClientCallOptions): Promise<string> {
+    return this.command('GET', '/source', undefined, options?.signal);
   }
 
-  getWindowEvents(): Promise<DesktopWindowEventLog> {
-    return this.command('GET', '/furn/window-events');
+  getTree(options?: DesktopClientCallOptions): Promise<DesktopTreeNode[]> {
+    return this.command('GET', '/furn/tree', undefined, options?.signal);
+  }
+
+  getWindowEvents(options?: DesktopClientCallOptions): Promise<DesktopWindowEventLog> {
+    return this.command('GET', '/furn/window-events', undefined, options?.signal);
   }
 
   /** The session's input policy, and how many times it has delivered input through each mechanism. */
-  async getInput(): Promise<DesktopSessionInput> {
-    return validateDesktopSessionInput(await this.command('GET', '/furn/input'));
+  async getInput(options?: DesktopClientCallOptions): Promise<DesktopSessionInput> {
+    return validateDesktopSessionInput(await this.command('GET', '/furn/input', undefined, options?.signal));
   }
 
   /** The agent operations this session offers, with the JSON Schema of each one's input and result. */
-  operations(): Promise<OperationCatalog> {
-    return this.command('GET', '/furn/ops');
+  operations(options?: DesktopClientCallOptions): Promise<OperationCatalog> {
+    return this.command('GET', '/furn/ops', undefined, options?.signal);
+  }
+
+  private elementFrom(value: unknown): DesktopElementClient {
+    const id = isRecord(value) ? value[webElementIdentifier] : undefined;
+    if (typeof id !== 'string') {
+      throw new DesktopDriverClientError('invalid-response', 'The Desktop Driver service returned an element reference that is not valid.');
+    }
+    return new DesktopElementClient(this, id);
   }
 
   /**
@@ -299,24 +385,24 @@ export class DesktopSessionClient {
     return typeof features === 'object' && features !== null && (features as { windowEvents?: unknown }).windowEvents === true;
   }
 
-  getStoryManifest(): Promise<DesktopStoryManifest> {
-    return this.command('GET', '/furn/manifest');
+  getStoryManifest(options?: DesktopClientCallOptions): Promise<DesktopStoryManifest> {
+    return this.command('GET', '/furn/manifest', undefined, options?.signal);
   }
 
-  getCurrentStory(): Promise<StoryReadyResult | null> {
-    return this.command('GET', '/furn/story');
+  getCurrentStory(options?: DesktopClientCallOptions): Promise<StoryReadyResult | null> {
+    return this.command('GET', '/furn/story', undefined, options?.signal);
   }
 
-  selectStory(storyId: string, runId: string = randomUUID()): Promise<StoryReadyResult> {
-    return this.command('POST', '/furn/story', { requestId: randomUUID(), runId, storyId });
+  selectStory(storyId: string, runId: string = randomUUID(), options?: DesktopClientCallOptions): Promise<StoryReadyResult> {
+    return this.command('POST', '/furn/story', { requestId: randomUUID(), runId, storyId }, options?.signal);
   }
 
-  resetStory(storyId: string, runId: string = randomUUID()): Promise<StoryReadyResult> {
-    return this.command('POST', '/furn/story/reset', { requestId: randomUUID(), runId, storyId });
+  resetStory(storyId: string, runId: string = randomUUID(), options?: DesktopClientCallOptions): Promise<StoryReadyResult> {
+    return this.command('POST', '/furn/story/reset', { requestId: randomUUID(), runId, storyId }, options?.signal);
   }
 
-  updateStoryArgs(storyId: string, args: Readonly<Record<string, unknown>>): Promise<null> {
-    return this.command('POST', '/furn/story/args', { args, storyId });
+  updateStoryArgs(storyId: string, args: Readonly<Record<string, unknown>>, options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/furn/story/args', { args, storyId }, options?.signal);
   }
 
   command<T>(method: string, path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
@@ -333,58 +419,62 @@ export class DesktopElementClient {
     this.id = id;
   }
 
-  click(): Promise<null> {
-    return this.command('POST', '/click', {});
+  click(options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/click', {}, options);
   }
 
-  clear(): Promise<null> {
-    return this.command('POST', '/clear', {});
+  clear(options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/clear', {}, options);
   }
 
-  sendKeys(text: string): Promise<null> {
-    return this.command('POST', '/value', { text });
+  sendKeys(text: string, options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/value', { text }, options);
   }
 
   /** Performs the one accessibility action the element publishes under this name, such as `increment`. */
-  performAccessibilityAction(name: string): Promise<null> {
-    return this.command('POST', '/furn/accessibility-action', { name });
+  performAccessibilityAction(name: string, options?: DesktopClientCallOptions): Promise<null> {
+    return this.command('POST', '/furn/accessibility-action', { name }, options);
   }
 
-  getText(): Promise<string> {
-    return this.command('GET', '/text');
+  getText(options?: DesktopClientCallOptions): Promise<string> {
+    return this.command('GET', '/text', undefined, options);
   }
 
-  getTagName(): Promise<string> {
-    return this.command('GET', '/name');
+  getTagName(options?: DesktopClientCallOptions): Promise<string> {
+    return this.command('GET', '/name', undefined, options);
   }
 
-  isEnabled(): Promise<boolean> {
-    return this.command('GET', '/enabled');
+  isEnabled(options?: DesktopClientCallOptions): Promise<boolean> {
+    return this.command('GET', '/enabled', undefined, options);
   }
 
-  isDisplayed(): Promise<boolean> {
-    return this.command('GET', '/displayed');
+  isDisplayed(options?: DesktopClientCallOptions): Promise<boolean> {
+    return this.command('GET', '/displayed', undefined, options);
   }
 
-  isSelected(): Promise<boolean> {
-    return this.command('GET', '/selected');
+  isSelected(options?: DesktopClientCallOptions): Promise<boolean> {
+    return this.command('GET', '/selected', undefined, options);
   }
 
-  getAttribute(name: string): Promise<unknown> {
-    return this.command('GET', `/attribute/${encodeURIComponent(name)}`);
+  getAttribute(name: string, options?: DesktopClientCallOptions): Promise<unknown> {
+    return this.command('GET', `/attribute/${encodeURIComponent(name)}`, undefined, options);
   }
 
-  getProperty(name: string): Promise<unknown> {
-    return this.command('GET', `/property/${encodeURIComponent(name)}`);
+  getProperty(name: string, options?: DesktopClientCallOptions): Promise<unknown> {
+    return this.command('GET', `/property/${encodeURIComponent(name)}`, undefined, options);
   }
 
-  takeScreenshot(): Promise<string> {
-    return this.command('GET', '/screenshot');
+  takeScreenshot(options?: DesktopClientCallOptions): Promise<string> {
+    return this.command('GET', '/screenshot', undefined, options);
   }
 
-  private command<T>(method: string, path: string, body?: unknown): Promise<T> {
-    return this.session.command(method, `/element/${this.id}${path}`, body);
+  private command<T>(method: string, path: string, body?: unknown, options?: DesktopClientCallOptions): Promise<T> {
+    return this.session.command(method, `/element/${this.id}${path}`, body, options?.signal);
   }
+}
+
+function malformedElementList(): DesktopDriverClientError {
+  return new DesktopDriverClientError('invalid-response', 'The Desktop Driver service returned an element list that is not valid.');
 }
 
 export function createDesktopDriverClient(options: DesktopDriverClientOptions): DesktopDriverClient {
