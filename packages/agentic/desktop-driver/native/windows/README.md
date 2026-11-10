@@ -196,10 +196,13 @@ owns it. Before each, the helper sends the window `WM_NULL` through
 within 2 seconds fails as `automation-failed` with reason `target-non-response`
 instead of holding the helper and the physical input lock. The restore and move
 themselves are posted (`ShowWindowAsync`, `SWP_ASYNCWINDOWPOS`), activation does
-not share the input queue of a thread that Windows reports as hung, and every
-wait observes cancellation. A probe that Windows refuses for another reason,
-such as User Interface Privilege Isolation, does not judge the window and leaves
-it to the bounded steps that follow.
+not share the input queue of a thread that Windows reports as hung, and the
+helper's own polling for these steps checks cancellation between polls. The
+probe does not cover a window that stops answering after it: activation's
+`SetForegroundWindow`, `SetActiveWindow`, and `BringWindowToTop` can then still
+block. A probe that Windows refuses for another reason, such as User Interface
+Privilege Isolation, does not judge the window and leaves it to the steps that
+follow.
 
 A subtree walk retries while its root remains available if a descendant
 becomes unavailable, or if a closing popup island's provider reports a UI
@@ -407,9 +410,12 @@ reports from a mutation is treated the same way, because the call reached the
 application and its effect is unknown. An explicit rejection, such as a disabled
 element, is an ordinary error and does not quarantine.
 
-The bounded wait observes the command's cancellation every 50 ms, as does the
-wait for a whole-subtree cache, so a cancelled command is acknowledged promptly
-even against a hung provider. A cancelled read simply stops waiting. A cancelled
+The bounded wait checks the command's cancellation every 50 ms, as does the wait
+for a whole-subtree cache, so these waits stop soon after a cancel even when the
+provider hangs. UI Automation calls made directly, outside the bounded wait,
+such as pattern queries, `ElementFromHandle`, `observe` paging, and the tree
+walker, are bounded only by the client's 2-second connection and 5-second
+transaction timeouts. A cancelled read simply stops waiting. A cancelled
 mutation is abandoned and quarantined exactly like one that timed out, so its
 effect is `unknown` and the refusal says it was cancelled before it settled.
 

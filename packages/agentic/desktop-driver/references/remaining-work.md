@@ -594,13 +594,15 @@ the 5,000-node cap: about 0.4 ms per node, so a 4,900-node tree reads in about 2
 seconds and a 10,000-node tree fails after about 4. Section 11 records the
 evidence and what did not run.
 
-**Windows cancellation progress:** a cancelled command stops waiting within a
-quarter of a second in bounded UI Automation calls and the whole-subtree cache
-(50 ms slices), window response probes (200 ms messages), posted restores and
-moves, activation, and `closeApplication`, and a cancelled mutation reports
-`unknown`. The physical input lock stays held
-across commands only while keys or buttons stay down, so the cancel path does
-not wait for it. Remaining: direct UI Automation calls outside the bounded worker
+**Windows cancellation progress (not yet run on Windows):** the helper's waits
+for bounded UI Automation calls and the whole-subtree cache check cancellation
+every 50 ms, window response probes send 200 ms messages and check between
+them, and the waits for posted restores and moves, activation retries, and
+`closeApplication` termination check between polls. These are implementation
+bounds on the wrapped waits, not measured end-to-end cancellation times. A
+cancelled mutation reports `unknown`. The physical input lock stays held across
+commands only while keys or buttons stay down, so the cancel path does not wait
+for it. Remaining: direct UI Automation calls outside the bounded worker
 (pattern queries, `ElementFromHandle`, `observe` paging, the tree walker) are
 bounded only by the client's connection and transaction timeouts;
 `SetForegroundWindow`, `SetActiveWindow`, and `BringWindowToTop` can still block
