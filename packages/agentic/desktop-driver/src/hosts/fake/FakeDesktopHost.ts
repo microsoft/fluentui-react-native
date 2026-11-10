@@ -125,6 +125,12 @@ const defaultFeatures: DesktopHostFeatures = {
   wheel: true,
 };
 
+const sequenceFeatures: Partial<Record<NativeActionSequence['type'], 'keyboard' | 'physicalClick' | 'wheel'>> = {
+  key: 'keyboard',
+  pointer: 'physicalClick',
+  wheel: 'wheel',
+};
+
 export class FakeDesktopHost implements DesktopHost {
   readonly endpoint: DesktopEndpoint;
   readonly actions: Record<string, unknown>[] = [];
@@ -561,6 +567,9 @@ export class FakeDesktopHost implements DesktopHost {
     return this.mutate('sendKeys', signal, (observed) => {
       throwIfAborted(observed);
       const element = this.requireElement(elementId);
+      if (!this.features.keyboard) {
+        throw reportEffect(new HostUnsupportedError('Physical keyboard input is disabled by the fake target policy.'), 'none');
+      }
       element.value = `${element.value ?? ''}${text}`;
       element.text = element.value;
       this.actions.push({ type: 'send-keys', elementId, text });
@@ -569,6 +578,14 @@ export class FakeDesktopHost implements DesktopHost {
 
   async performActions(actions: readonly NativeActionSequence[], signal?: AbortSignal): Promise<void> {
     return this.mutate('performActions', signal, async (observed) => {
+      for (const sequence of actions) {
+        // A source that only pauses delivers nothing, so a masked target may still wait with one.
+        if (sequence.actions.every((action) => action.type === 'pause')) continue;
+        const feature = sequenceFeatures[sequence.type];
+        if (feature && !this.features[feature]) {
+          throw reportEffect(new HostUnsupportedError(`${sequence.type} input is disabled by the fake target policy.`), 'none');
+        }
+      }
       this.actions.push({ type: 'actions-start' });
       await delay(this.actionDelayMs, observed);
       this.actions.push({ type: 'actions', actions });
@@ -767,7 +784,6 @@ function createDefaultWindow(storyRootTestId = 'story-root'): FakeDesktopWindow 
         rect: defaultRect,
         role: 'application',
         scope: 'application',
-        selected: false,
         visible: true,
         windowId: 'window-1',
       },
@@ -781,7 +797,6 @@ function createDefaultWindow(storyRootTestId = 'story-root'): FakeDesktopWindow 
         rect: defaultRect,
         role: 'group',
         scope: 'preview',
-        selected: false,
         visible: true,
         windowId: 'window-1',
       },
@@ -795,7 +810,6 @@ function createDefaultWindow(storyRootTestId = 'story-root'): FakeDesktopWindow 
         rect: { x: 10, y: 10, width: 120, height: 40 },
         role: 'button',
         scope: 'preview',
-        selected: false,
         text: 'Primary',
         visible: true,
         windowId: 'window-1',
@@ -810,7 +824,6 @@ function createDefaultWindow(storyRootTestId = 'story-root'): FakeDesktopWindow 
         rect: { x: 10, y: 60, width: 200, height: 40 },
         role: 'textbox',
         scope: 'preview',
-        selected: false,
         value: '',
         visible: true,
         windowId: 'window-1',
@@ -819,16 +832,26 @@ function createDefaultWindow(storyRootTestId = 'story-root'): FakeDesktopWindow 
   };
 }
 
+/** An element reports a state only when its author declares it, as a native element reports only the states its role has. */
 function toSnapshot(element: FakeDesktopElement): NativeElementSnapshot {
   return {
     ...element,
     rect: { ...element.rect },
-    checked: { supported: true, value: element.checked ?? false },
+    checked:
+      element.checked === undefined
+        ? { supported: false, reason: 'The element does not report a checked state.' }
+        : { supported: true, value: element.checked },
     enabled: { supported: true, value: element.enabled ?? true },
-    expanded: { supported: true, value: element.expanded ?? false },
+    expanded:
+      element.expanded === undefined
+        ? { supported: false, reason: 'The element does not report an expanded state.' }
+        : { supported: true, value: element.expanded },
     focused: { supported: true, value: element.focused ?? false },
     required: element.required === undefined ? undefined : { supported: true, value: element.required },
-    selected: { supported: true, value: element.selected ?? false },
+    selected:
+      element.selected === undefined
+        ? { supported: false, reason: 'The element does not report a selected state.' }
+        : { supported: true, value: element.selected },
     visible: { supported: true, value: element.visible ?? true },
   };
 }
@@ -862,19 +885,44 @@ function isDescendantOf(element: NativeElementSnapshot, ancestorId: string, elem
   return false;
 }
 
+/**
+ * Matches an element the way the native helpers do, so a test that passes against the fake selects the same elements on
+ * a desktop. `tag name` compares the role after `normalizeRoleQuery`, `link text` and `-furn:text` compare exactly (text
+ * also matches the value or the accessible name), and the partial strategy refuses an empty value.
+ */
 function matches(element: NativeElementSnapshot, selector: NativeSelector): boolean {
   switch (selector.strategy) {
     case '-furn:text':
-      return element.text?.includes(selector.value) ?? element.value?.includes(selector.value) ?? false;
+      return element.text === selector.value || element.value === selector.value || element.name === selector.value;
     case 'accessibility id':
-      return element.automationId === selector.value;
+      return !!element.automationId && element.automationId === selector.value;
     case 'tag name':
-      return element.role === selector.value;
+      return element.role === normalizeRoleQuery(selector.value);
     case 'link text':
       return element.name === selector.value;
     case 'partial link text':
-      return element.name?.includes(selector.value) ?? false;
+      return selector.value !== '' && (element.name?.includes(selector.value) ?? false);
   }
+}
+
+// The Windows helper also maps `application` to `window`. The fake keeps `application` because its default root is one.
+const roleAliases: Readonly<Record<string, string>> = {
+  edit: 'textbox',
+  input: 'textbox',
+  textfield: 'textbox',
+  hyperlink: 'link',
+  radiobutton: 'radio',
+  'combo box': 'combobox',
+  listbox: 'list',
+  statusbar: 'status',
+  tabitem: 'tab',
+  progress: 'progressbar',
+  spinner: 'spinbutton',
+};
+
+function normalizeRoleQuery(value: string): string {
+  const normalized = value.trim().toLowerCase();
+  return Object.hasOwn(roleAliases, normalized) ? roleAliases[normalized] : normalized;
 }
 
 function isSupportedTrue(value: NativeElementSnapshot['visible']): boolean {

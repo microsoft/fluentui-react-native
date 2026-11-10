@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 
 import type {
   DesktopArtifact,
+  DesktopRunStatus,
   DesktopStoryRunResult,
   DesktopStoryStepResult,
   DesktopStoryTestResult,
@@ -14,8 +15,15 @@ import type {
   DesktopStoryStep,
   DesktopStoryTest,
 } from '../authoring/storyTests.js';
+import { validateDesktopExpectation } from '../authoring/storyTests.js';
+import { desktopInputModeAllows, desktopInputModes } from '../authoring/input.js';
+import type { DesktopInputMechanism } from '../authoring/input.js';
+import { compareDesktopCodePoints } from '../authoring/order.js';
 import type { ArtifactManager } from '../artifacts/ArtifactManager.js';
 import { captureDesktopFailureEvidence } from '../artifacts/failureEvidence.js';
+import { authoredArtifactKey, isReservedArtifactName, testArtifactDirectory } from '../artifacts/segments.js';
+import type { ArtifactDirectory } from '../artifacts/segments.js';
+import { DesktopDriverClientError } from '../client/DesktopDriverClient.js';
 import type { DesktopElementClient, DesktopSessionClient } from '../client/DesktopDriverClient.js';
 import { WebDriverError } from '../protocol/errors.js';
 import { webElementIdentifier } from '../protocol/constants.js';
@@ -98,16 +106,31 @@ export async function runDesktopStoryTests({
     runId,
     schemaVersion: 1,
     startedAt: startedAt.toISOString(),
-    status: results.every(({ status }) => status === 'skipped')
-      ? 'incomplete'
-      : results.every(({ status }) => status === 'passed' || status === 'skipped')
-        ? 'passed'
-        : 'failed',
+    status: summarizeRun(results, inputLane(session.capabilities)),
     targetId,
     tests: results,
   };
   artifacts?.writeRunResult(result);
   return result;
+}
+
+/**
+ * A run passes when nothing failed and something ran. A run whose session enforces an input lane promised to run its whole
+ * selection, so a skipped test makes it incomplete, as it does for the desktop-test lane verdict. Without a lane, skips
+ * next to passes keep the run `passed`, and a run that skipped everything is `incomplete`.
+ */
+function summarizeRun(results: readonly DesktopStoryTestResult[], lane: boolean): DesktopRunStatus {
+  if (results.some(({ status }) => status !== 'passed' && status !== 'skipped')) {
+    return 'failed';
+  }
+  const skipped = results.filter(({ status }) => status === 'skipped').length;
+  return skipped === results.length || (lane && skipped > 0) ? 'incomplete' : 'passed';
+}
+
+/** Whether the session enforces an accessible or physical lane. A compatibility session, or one that does not say, runs without one. */
+function inputLane(capabilities: Readonly<Record<string, unknown>>): boolean {
+  const mode = capabilities['furn:inputMode'];
+  return mode === 'accessible' || mode === 'physical';
 }
 
 export function selectDesktopStoryTests(
@@ -125,7 +148,7 @@ export function selectDesktopStoryTests(
         .filter((test) => !selection.test || matchesPattern(test.id, selection.test))
         .map((test) => ({ entry, test })),
     )
-    .sort((left, right) => `${left.entry.id}/${left.test.id}`.localeCompare(`${right.entry.id}/${right.test.id}`));
+    .sort((left, right) => compareDesktopCodePoints(`${left.entry.id}/${left.test.id}`, `${right.entry.id}/${right.test.id}`));
 
   const shardCount = selection.shardCount;
   const shardIndex = selection.shardIndex;
@@ -166,6 +189,8 @@ async function runTest({
 
   const steps: DesktopStoryStepResult[] = [];
   const testArtifacts: DesktopArtifact[] = [];
+  const testDirectory = testArtifactDirectory(item.entry.id, item.test.id);
+  const authoredNames = new Set<string>();
   let status: DesktopTestStatus = 'passed';
   let errorMessage: string | undefined;
   try {
@@ -173,7 +198,7 @@ async function runTest({
     await withAbort(session.selectStory(item.entry.id, runId), signal);
     for (const [index, step] of item.test.steps.entries()) {
       throwIfAborted(signal);
-      const result = await runStep(session, step, index, artifacts, `${item.entry.id}-${item.test.id}`, signal);
+      const result = await runStep(session, step, index, artifacts, testDirectory, authoredNames, signal);
       steps.push(result);
       testArtifacts.push(...result.artifacts);
       if (result.status === 'failed') {
@@ -203,7 +228,7 @@ async function runTest({
   }
 
   if (status !== 'passed' && artifacts) {
-    const captured = await captureDesktopFailureEvidence(session, artifacts, `${item.entry.id}-${item.test.id}`);
+    const captured = await captureDesktopFailureEvidence(session, artifacts, testDirectory);
     testArtifacts.push(...captured.artifacts);
     if (captured.errors.length > 0) {
       errorMessage = `${errorMessage ?? 'Test failed.'} Evidence capture failed: ${captured.errors.join('; ')}`;
@@ -231,7 +256,8 @@ async function runStep(
   step: DesktopStoryStep,
   index: number,
   artifacts: ArtifactManager | undefined,
-  testDirectory: string,
+  testDirectory: ArtifactDirectory,
+  authoredNames: Set<string>,
   signal?: AbortSignal,
 ): Promise<InternalStepResult> {
   const started = Date.now();
@@ -241,7 +267,7 @@ async function runStep(
     if ('expect' in step) {
       await withAbort(assertDesktopExpectation(session, step.expect), signal);
     } else {
-      await withAbort(performAction(session, step, artifacts, testDirectory, stepArtifacts, signal), signal);
+      await withAbort(performAction(session, step, artifacts, testDirectory, authoredNames, stepArtifacts, signal), signal);
     }
     throwIfAborted(signal);
     return { artifacts: stepArtifacts, durationMs: Date.now() - started, index, status: 'passed' };
@@ -261,7 +287,8 @@ async function performAction(
   session: DesktopSessionClient,
   step: Exclude<DesktopStoryStep, { expect: DesktopStoryExpectation }>,
   artifacts: ArtifactManager | undefined,
-  testDirectory: string,
+  testDirectory: ArtifactDirectory,
+  authoredNames: Set<string>,
   stepArtifacts: DesktopArtifact[],
   signal?: AbortSignal,
 ): Promise<void> {
@@ -289,6 +316,7 @@ async function performAction(
     case 'screenshot': {
       const image = step.target ? await (await findDesktopElement(session, step.target)).takeScreenshot() : await session.takeScreenshot();
       if (artifacts) {
+        claimAuthoredName(authoredNames, 'screenshot', step.name);
         stepArtifacts.push(artifacts.writeScreenshot(testDirectory, step.name, image));
       }
       return;
@@ -320,6 +348,7 @@ async function performAction(
     case 'source': {
       const source = await session.getPageSource();
       if (artifacts) {
+        claimAuthoredName(authoredNames, 'source', step.name);
         stepArtifacts.push(artifacts.writeSource(testDirectory, step.name, source));
       }
       return;
@@ -334,6 +363,7 @@ async function performAction(
 }
 
 export async function assertDesktopExpectation(session: DesktopSessionClient, expectation: DesktopStoryExpectation): Promise<void> {
+  validateDesktopExpectation(expectation);
   const elements = await findDesktopElements(session, expectation.target);
   if (expectation.state === 'count') {
     assertEqual(elements.length, expectation.value, 'count');
@@ -403,7 +433,8 @@ async function waitFor(
       throwIfAborted(signal);
       return;
     } catch (error) {
-      if (error instanceof DesktopRunCancelledError) {
+      // Retrying cannot repair a session that is gone, a transport that failed, or an expectation that is malformed.
+      if (error instanceof DesktopRunCancelledError || isInfrastructureError(error) || error instanceof TypeError) {
         throw error;
       }
       lastError = error;
@@ -459,17 +490,28 @@ function classifyError(error: unknown): DesktopTestStatus {
   if (error instanceof DesktopRunCancelledError) {
     return 'cancelled';
   }
-  if (error instanceof WebDriverError) {
-    if (error.code === 'timeout') {
-      return 'timed-out';
-    }
-    if (error.code === 'invalid session id' || error.code === 'session not created' || error.code === 'unknown error') {
-      return 'infrastructure-error';
-    }
+  if (error instanceof WebDriverError && error.code === 'timeout') {
+    return 'timed-out';
   }
-  return error instanceof DesktopAssertionError ? 'failed' : 'failed';
+  return isInfrastructureError(error) ? 'infrastructure-error' : 'failed';
 }
 
+/** A failure of the driver, its session or the connection to it, as opposed to a result the test produced. */
+function isInfrastructureError(error: unknown): boolean {
+  if (error instanceof DesktopDriverClientError) {
+    return true;
+  }
+  return (
+    error instanceof WebDriverError &&
+    (error.code === 'invalid session id' || error.code === 'session not created' || error.code === 'unknown error')
+  );
+}
+
+/**
+ * The capabilities a test requires that the session cannot deliver. A feature must be advertised, and a session whose
+ * input mode masks the transport the capability uses cannot deliver it either, so the test is skipped instead of failing
+ * when the host refuses.
+ */
 function missingCapabilities(
   capabilities: Readonly<Record<string, unknown>>,
   required: readonly DesktopStoryCapability[],
@@ -479,17 +521,34 @@ function missingCapabilities(
     return [...required];
   }
   const values = features as Record<string, unknown>;
-  const mappings: Record<DesktopStoryCapability, string> = {
-    'accessibility-click': 'accessibilityClick',
-    'element-screenshot': 'elementScreenshot',
-    focus: 'focus',
-    keyboard: 'keyboard',
-    'physical-click': 'physicalClick',
-    screenshot: 'screenshot',
-    wheel: 'wheel',
-  };
-  return required.filter((capability) => values[mappings[capability]] !== true);
+  const mode = capabilities['furn:inputMode'];
+  const inputMode = desktopInputModes.find((candidate) => candidate === mode);
+  return required.filter((capability) => {
+    if (values[capabilityFeatures[capability]] !== true) {
+      return true;
+    }
+    const mechanism = capabilityMechanisms[capability];
+    return inputMode !== undefined && mechanism !== undefined && !desktopInputModeAllows(inputMode, mechanism);
+  });
 }
+
+const capabilityFeatures: Record<DesktopStoryCapability, string> = {
+  'accessibility-click': 'accessibilityClick',
+  'element-screenshot': 'elementScreenshot',
+  focus: 'focus',
+  keyboard: 'keyboard',
+  'physical-click': 'physicalClick',
+  screenshot: 'screenshot',
+  wheel: 'wheel',
+};
+
+/** The input mechanism a capability delivers through. Capabilities that deliver no input are not masked by the input mode. */
+const capabilityMechanisms: Partial<Record<DesktopStoryCapability, DesktopInputMechanism>> = {
+  'accessibility-click': 'accessibility-click',
+  keyboard: 'keyboard',
+  'physical-click': 'physical-click',
+  wheel: 'wheel',
+};
 
 function validateShard(selection: DesktopStoryTestSelection): void {
   if (selection.shardCount === undefined && selection.shardIndex === undefined) {
@@ -510,13 +569,48 @@ function validateShard(selection: DesktopStoryTestSelection): void {
   }
 }
 
+/**
+ * Matches `value` against a pattern in which `*` stands for any run of characters and everything else is literal. It
+ * runs in O(value x pattern) time at worst, and in linear time for the usual patterns, because it remembers only the
+ * latest `*` instead of backtracking through every split like a regular expression would.
+ */
 function matchesPattern(value: string, pattern: string): boolean {
-  const expression = new RegExp(`^${pattern.split('*').map(escapeRegExp).join('.*')}$`);
-  return expression.test(value);
+  let valueIndex = 0;
+  let patternIndex = 0;
+  let starIndex = -1;
+  let starValueIndex = 0;
+  while (valueIndex < value.length) {
+    if (patternIndex < pattern.length && pattern[patternIndex] === '*') {
+      starIndex = patternIndex;
+      starValueIndex = valueIndex;
+      patternIndex += 1;
+    } else if (patternIndex < pattern.length && pattern[patternIndex] === value[valueIndex]) {
+      patternIndex += 1;
+      valueIndex += 1;
+    } else if (starIndex >= 0) {
+      patternIndex = starIndex + 1;
+      starValueIndex += 1;
+      valueIndex = starValueIndex;
+    } else {
+      return false;
+    }
+  }
+  while (pattern[patternIndex] === '*') {
+    patternIndex += 1;
+  }
+  return patternIndex === pattern.length;
 }
 
-function escapeRegExp(value: string): string {
-  return value.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** Fails the test when two authored artifacts would write to the same file or into the namespace failure evidence owns. */
+function claimAuthoredName(claimed: Set<string>, kind: 'screenshot' | 'source', name: string): void {
+  if (isReservedArtifactName(name)) {
+    throw new Error(`The ${kind} name "${name}" is reserved for failure evidence.`);
+  }
+  const key = authoredArtifactKey(kind, name);
+  if (claimed.has(key)) {
+    throw new Error(`The ${kind} name "${name}" is used by more than one step in this test.`);
+  }
+  claimed.add(key);
 }
 
 function keySequences(keys: readonly string[]): WebDriverActionSequence[] {
