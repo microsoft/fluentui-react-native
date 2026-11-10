@@ -594,6 +594,23 @@ the 5,000-node cap: about 0.4 ms per node, so a 4,900-node tree reads in about 2
 seconds and a 10,000-node tree fails after about 4. Section 11 records the
 evidence and what did not run.
 
+**Windows cancellation progress:** a cancelled command stops waiting within a
+quarter of a second in bounded UI Automation calls and the whole-subtree cache
+(50 ms slices), window response probes (200 ms messages), posted restores and
+moves, activation, and `closeApplication`, and a cancelled mutation reports
+`unknown`. The physical input lock stays held
+across commands only while keys or buttons stay down, so the cancel path does
+not wait for it. Remaining: direct UI Automation calls outside the bounded worker
+(pattern queries, `ElementFromHandle`, `observe` paging, the tree walker) are
+bounded only by the client's connection and transaction timeouts;
+`SetForegroundWindow`, `SetActiveWindow`, and `BringWindowToTop` can still block
+on a target that hangs after its probe; packaged `ActivateApplication` is
+synchronous; an abandoned physical input lock is reported to one acquirer only,
+not until `--release-input` clears it; `performActions` names no window, so its
+pointer hit check accepts any leased application; and Caps Lock state and the
+keyboard layout for injected keys come from the helper thread, not the
+foreground thread.
+
 Operation-time permission and capability changes must be surfaced truthfully
 even if session-start feature negotiation previously succeeded. The Windows
 input authority rechecks session, foreground, and integrity for every physical
@@ -1426,8 +1443,9 @@ Settlement effect items **not run** on Windows: the delivered effect of
 `closeWindow` and `setWindowRect` after a later
 failure, a `click` abandoned on a genuinely hung provider (a Win32 button's UI
 Automation `Invoke` is posted and never blocks), and real-application UI
-Automation failures, so the rejection list is unqualified. `SetWindowPos` on a
-hung window owned by another thread is still not bounded.
+Automation failures, so the rejection list is unqualified. `setWindowRect` now
+probes the window and posts its restore and move, but only an in-process stalled
+window thread is self-tested; a hung window of another process is not run.
 
 Queued cancellation check on macOS (matching the Windows Host follow-up): the
 macOS helper used to report `none` when a queued read or lifecycle command was
