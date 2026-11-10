@@ -56,14 +56,22 @@ export const NativeSemantics: Story = {
   ),
   wdio: [
     desktopIt('DIV-005 exposes the caller-named native separator within its constrained container', async ({ browser, expect }) => {
-      const divider = await browser.$('~divider-native-section');
-      await expect(divider).toExist();
-      expect(await divider.getTagName()).toBe('separator');
-      expect(await divider.getProperty('name')).toBe('End of details');
-      const bounds = await browser.getElementRect(await divider.elementId);
-      expect(bounds.width).toBeGreaterThan(0);
-      expect(bounds.width).toBeLessThanOrEqual(241);
-      expect(bounds.height).toBeGreaterThan(0);
+      const originalWindow = await browser.getWindowRect();
+      try {
+        // The small native startup window can leave no preview height above the addons panel.
+        await browser.setWindowRect(0, 0, Math.max(originalWindow.width, 1024), Math.max(originalWindow.height, 768));
+        const divider = await browser.$('~divider-native-section');
+        await expect(divider).toExist();
+        expect(await divider.getTagName()).toBe('separator');
+        expect(await divider.getProperty('name')).toBe('End of details');
+        await browser.waitUntil(async () => (await browser.getElementRect(await divider.elementId)).height > 0);
+        const bounds = await browser.getElementRect(await divider.elementId);
+        expect(bounds.width).toBeGreaterThan(0);
+        expect(bounds.width).toBeLessThanOrEqual(241);
+        expect(bounds.height).toBeGreaterThan(0);
+      } finally {
+        await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
+      }
     }),
   ],
 };

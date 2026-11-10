@@ -4,4 +4,4 @@
 "@fluentui-react-native/framework-base": patch
 ---
 
-Fix native Divider separator semantics and Win32 Tag accessibility activation and keyboard press lifecycle exposed by expanded agentic component tests.
+Fix native Divider separator semantics, button accessibility activation, Win32 keyboard press lifecycle, and standalone ListboxItem accessible names exposed by expanded agentic component tests.

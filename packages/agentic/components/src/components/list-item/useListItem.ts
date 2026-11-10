@@ -1,4 +1,5 @@
-import { Pressable, Text as NativeText, View } from 'react-native';
+import { Platform, Pressable, Text as NativeText, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 import { useThemeState } from '@fluentui-react-native/design';
 import { useOptionalSlot, useFocusablePressable, useSlot } from '@fluentui-react-native/framework-base';
@@ -83,9 +84,21 @@ export function useListItem_unstable(props: ListItemProps): ListItemState {
   const metrics = getMetrics(size, themeState.tokens);
   const selectedFill = selected && selectionMode !== 'multiple' && !disabled;
   const selectionGlyph = selectionMode === 'none' ? undefined : getListItemSelectionIndicatorGlyph(selected, selectionMode);
+  const platform: string = Platform.OS;
+  const role = rest.role ?? rest.accessibilityRole ?? 'button';
+  // Fabric exposes Invoke only when accessibility-tap is registered.
+  // Keep button activation separate from selection/action notifications.
+  const onAccessibilityTap =
+    rest.onAccessibilityTap ??
+    ((platform === 'windows' || platform === 'win32') && role === 'button' && rest.onPress
+      ? (event?: GestureResponderEvent) => {
+          if (event) rest.onPress?.(event);
+        }
+      : undefined);
 
   const [pressableProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
+    onAccessibilityTap,
     accessibilityRole: rest.accessibilityRole ?? 'button',
     accessibilityState: {
       ...accessibilityState,
