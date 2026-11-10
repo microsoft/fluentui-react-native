@@ -39,6 +39,8 @@ export type DesktopWorkResult = {
   workId: string;
   label: string;
   status: TestStatus;
+  /** Why the collector reports this work as `incomplete` although its producer finished, such as a group that reported no tests. */
+  reason?: string;
   context?: EventContext;
 };
 export type DesktopRunResult = {
@@ -111,6 +113,75 @@ export type DesktopRunSummary = {
 const SUMMARY_MAX_BYTES = 4 * 1024;
 const SUMMARY_MAX_PROBLEMS = 10;
 
+/**
+ * The status a test reports across its attempts, in the order they arrived. A passing final attempt passes the test, and
+ * it is flaky when an earlier attempt failed. Otherwise any failed attempt decides: a retry that was skipped, unsupported,
+ * or never finished cannot erase a failure. With no failed attempt the last attempt decides.
+ */
+export function decideDesktopTestStatus(attempts: readonly Pick<DesktopTestAttempt, 'status'>[]): TestStatus {
+  const last = attempts.at(-1);
+  if (!last) return 'incomplete';
+  if (last.status === 'passed') return 'passed';
+  return attempts.some(({ status }) => status === 'failed') ? 'failed' : last.status;
+}
+
+/** The latest attempt whose status is the test's decided status: the one a failure message or reason must come from. */
+export function decisiveDesktopAttempt<T extends Pick<DesktopTestAttempt, 'status'>>(attempts: readonly T[]): T | undefined {
+  const status = decideDesktopTestStatus(attempts);
+  for (let index = attempts.length - 1; index >= 0; index--) if (attempts[index].status === status) return attempts[index];
+  return undefined;
+}
+
+const unfinishedStatuses: readonly TestStatus[] = ['not-run', 'incomplete', 'cancelled'];
+
+/**
+ * Selected cases that stopped an `incomplete` run from passing although none failed: every skipped case and every
+ * unsupported one nothing declared in a lane run, or all of them when nothing executed.
+ */
+function unmetTests(result: Pick<DesktopRunResult, 'kind' | 'lane' | 'status' | 'counts' | 'tests'>): DesktopTestResult[] {
+  if (result.status !== 'incomplete' || result.kind !== 'tests') return [];
+  const nothingExecuted = result.counts.executed === 0;
+  if (!nothingExecuted && result.lane === undefined) return [];
+  return result.tests.filter(
+    (test) =>
+      test.status === 'skipped' ||
+      (test.status === 'unsupported' && (nothingExecuted || decisiveDesktopAttempt(test.attempts)?.gap === undefined)),
+  );
+}
+
+/**
+ * Why an `incomplete` run is incomplete when no failed, unfinished, or unmet item says so on its own: nothing was
+ * reported, a lane left cases unexecuted, or nothing executed.
+ */
+function incompleteRunReason(result: Pick<DesktopRunResult, 'kind' | 'lane' | 'status' | 'counts' | 'work'>): string | undefined {
+  if (
+    result.status !== 'incomplete' ||
+    result.counts.incomplete > 0 ||
+    result.work.some(({ status }) => unfinishedStatuses.includes(status))
+  )
+    return undefined;
+  if (result.kind === 'tests' && result.counts.selected === 0) return 'No tests were reported.';
+  const unmet = result.counts.skipped + undeclaredUnsupported(result.counts);
+  if (result.lane && unmet > 0)
+    return `${unmet} selected ${unmet === 1 ? 'test' : 'tests'} did not execute in the ${result.lane.input} lane: skipped, or unsupported without a declaration.`;
+  if (result.kind === 'tests' && result.counts.executed === 0) return 'No required tests executed.';
+  return 'A producer did not finish.';
+}
+
+/** One line saying why the run is not passing coverage, for the error that a selected-work check throws. */
+export function describeDesktopIncompleteRun(result: DesktopRunResult): string {
+  const parts = [
+    ...result.work
+      .filter(({ status }) => unfinishedStatuses.includes(status))
+      .slice(0, 3)
+      .map((work) => `${work.label}: ${work.reason ?? `work is ${work.status}`}`),
+    ...(result.counts.incomplete > 0 ? [`${result.counts.incomplete} tests did not finish`] : []),
+    ...(incompleteRunReason(result) ? [incompleteRunReason(result)!] : []),
+  ];
+  const detail = parts.join('; ') || 'selected work did not produce complete executable results';
+  return `Desktop run is ${result.status}; ${detail}${detail.endsWith('.') ? '' : '.'}`;
+}
+
 export function projectDesktopRunSummary(result: DesktopRunResult, root: string): DesktopRunSummary {
   const problems: DesktopRunSummary['problems'] = [
     ...result.failures
@@ -126,26 +197,48 @@ export function projectDesktopRunSummary(result: DesktopRunResult, root: string)
     ...result.tests
       .filter(({ status }) => status === 'failed' || ['cancelled', 'not-run', 'incomplete'].includes(status))
       .map((test) => {
-        const latest = test.attempts.at(-1);
+        const decisive = decisiveDesktopAttempt(test.attempts);
         return {
           kind: 'test' as const,
           id: clipText(test.testId, 96),
           title: clipText(test.title, 128),
           status: test.status,
-          ...(latest?.failure ? { failureId: clipText(latest.failure.failureId, 96) } : {}),
-          ...(latest?.failure?.error.message || latest?.reason
-            ? { message: clipText(latest.failure?.error.message ?? latest.reason!, 256) }
+          ...(decisive?.failure ? { failureId: clipText(decisive.failure.failureId, 96) } : {}),
+          ...(decisive?.failure?.error.message || decisive?.reason
+            ? { message: clipText(decisive.failure?.error.message ?? decisive.reason!, 256) }
             : {}),
         };
       }),
+    ...unmetTests(result).map((test) => {
+      const decisive = decisiveDesktopAttempt(test.attempts);
+      return {
+        kind: 'test' as const,
+        id: clipText(test.testId, 96),
+        title: clipText(test.title, 128),
+        status: test.status,
+        ...(decisive?.reason ? { message: clipText(describeReason(decisive), 256) } : {}),
+      };
+    }),
     ...result.work
-      .filter(({ status }) => ['not-run', 'incomplete', 'cancelled'].includes(status))
+      .filter(({ status }) => unfinishedStatuses.includes(status))
       .map((work) => ({
         kind: 'unfinished' as const,
         id: clipText(work.workId, 96),
         title: clipText(work.label, 128),
         status: work.status,
+        ...(work.reason ? { message: clipText(work.reason, 256) } : {}),
       })),
+    ...(incompleteRunReason(result) && unmetTests(result).length === 0
+      ? [
+          {
+            kind: 'unfinished' as const,
+            id: 'run',
+            title: 'Run',
+            status: result.status,
+            message: clipText(incompleteRunReason(result)!, 256),
+          },
+        ]
+      : []),
   ];
   const skippedReasons = [
     ...new Set(
@@ -252,13 +345,13 @@ export function summarizeDesktopRun(
     else if (test.status === 'skipped') counts.skipped++;
     else if (test.status === 'unsupported') {
       counts.unsupported++;
-      const gap = test.attempts.at(-1)?.gap;
+      const gap = decisiveDesktopAttempt(test.attempts)?.gap;
       if (gap === 'unsupported') counts.declaredUnsupported++;
       else if (gap === 'quarantine') counts.quarantined++;
     }
   }
   const infrastructureFailed = input.failures.some(({ kind }) => kind !== 'test') || input.work.some(({ status }) => status === 'failed');
-  const unfinishedWork = input.work.some(({ status }) => ['not-run', 'incomplete', 'cancelled'].includes(status));
+  const unfinishedWork = input.work.some(({ status }) => unfinishedStatuses.includes(status));
   const noExecution = input.kind === 'tests' && counts.executed === 0;
   // A lane run promised to execute its whole selection. Only a declared gap may leave a selected case unexecuted, and a
   // run that executed nothing is never optional.
@@ -328,20 +421,21 @@ export function desktopRunExitCode(result: DesktopRunResult): number {
 
 export function renderJUnit(result: DesktopRunResult): string {
   const infrastructure = result.failures.filter(({ kind }) => kind !== 'test');
-  const unfinishedWork = result.work.filter(({ status }) => ['not-run', 'incomplete', 'cancelled'].includes(status));
-  const incomplete = result.status === 'incomplete' && result.counts.incomplete === 0;
+  const unfinishedWork = result.work.filter(({ status }) => unfinishedStatuses.includes(status));
+  const incompleteReason = incompleteRunReason(result);
   const cases = result.tests.map((test) => {
     const latest = test.attempts[test.attempts.length - 1];
+    const decisive = decisiveDesktopAttempt(test.attempts) ?? latest;
     const history = JSON.stringify(test.attempts);
     const body =
       test.status === 'failed'
-        ? `<failure message="${xml(latest.failure?.error.message ?? 'Test failed')}">${xml(JSON.stringify(latest.failure))}</failure>`
+        ? `<failure message="${xml(decisive.failure?.error.message ?? 'Test failed')}">${xml(JSON.stringify(decisive.failure))}</failure>`
         : test.status === 'passed'
           ? ''
           : ['skipped', 'unsupported'].includes(test.status)
-            ? `<skipped message="${xml(latest.reason === undefined ? test.status : describeReason(latest))}"/>`
-            : `<error type="${test.status}" message="${xml(latest.reason ?? 'Missing terminal test result')}"/>`;
-    return `<testcase name="${xml(test.title)}" classname="${xml(test.testId)}" time="${latest.durationMs / 1000}">${body}<system-out>${xml(history)}</system-out></testcase>`;
+            ? `<skipped message="${xml(decisive.reason === undefined ? test.status : describeReason(decisive))}"/>`
+            : `<error type="${test.status}" message="${xml(decisive.reason ?? 'Missing terminal test result')}"/>`;
+    return `<testcase name="${xml(test.title)}" classname="${xml(test.testId)}" time="${decisive.durationMs / 1000}">${body}<system-out>${xml(history)}</system-out></testcase>`;
   });
   for (const failure of infrastructure) {
     cases.push(
@@ -350,11 +444,11 @@ export function renderJUnit(result: DesktopRunResult): string {
   }
   for (const work of unfinishedWork)
     cases.push(
-      `<testcase name="${xml(work.label)}" classname="desktop.selection"><error type="${work.status}" message="Selected work did not finish."/></testcase>`,
+      `<testcase name="${xml(work.label)}" classname="desktop.selection"><error type="${work.status}" message="${xml(work.reason ?? 'Selected work did not finish.')}"/></testcase>`,
     );
-  if (incomplete)
+  if (incompleteReason !== undefined)
     cases.push(
-      '<testcase name="required cohort" classname="desktop.infrastructure"><error type="incomplete" message="No required tests executed or a producer did not finish."/></testcase>',
+      `<testcase name="required cohort" classname="desktop.infrastructure"><error type="incomplete" message="${xml(incompleteReason)}"/></testcase>`,
     );
   const properties: [string, string][] = [];
   if (result.lane)
@@ -370,7 +464,7 @@ export function renderJUnit(result: DesktopRunResult): string {
   const propertyXml = properties.length
     ? `<properties>${properties.map(([name, value]) => `<property name="${xml(name)}" value="${xml(value)}"/>`).join('')}</properties>`
     : '';
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites><testsuite name="${xml(result.runId)}" tests="${cases.length}" failures="${result.counts.failed}" errors="${infrastructure.length + unfinishedWork.length + result.counts.incomplete + Number(incomplete)}" skipped="${result.counts.skipped + result.counts.unsupported}" time="${result.durationMs / 1000}">${propertyXml}${cases.join('')}</testsuite></testsuites>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites><testsuite name="${xml(result.runId)}" tests="${cases.length}" failures="${result.counts.failed}" errors="${infrastructure.length + unfinishedWork.length + result.counts.incomplete + Number(incompleteReason !== undefined)}" skipped="${result.counts.skipped + result.counts.unsupported}" time="${result.durationMs / 1000}">${propertyXml}${cases.join('')}</testsuite></testsuites>\n`;
 }
 
 export function renderRunSummary(result: DesktopRunResult): string {
@@ -381,6 +475,7 @@ export function renderRunSummary(result: DesktopRunResult): string {
   const selection = describeDesktopSelection(result);
   return (
     `## Desktop tests: ${result.status}\n\n` +
+    (result.status === 'incomplete' ? `${markdown(describeDesktopIncompleteRun(result))}\n\n` : '') +
     `Run: \`${result.runId}\`; endpoint: ${result.context?.endpoint ?? 'native'}; renderer: ${result.context?.renderer ?? 'not applicable'}.\n\n` +
     (selection ? `Selection: ${selection}.\n\n` : '') +
     `Selected ${c.selected}; executed ${c.executed}; passed ${c.passed}; failed ${c.failed}; skipped ${c.skipped}; ${describeDesktopUnsupported(c)}; incomplete ${c.incomplete}; retries ${c.retries}; flaky ${c.flaky}.\n\n` +

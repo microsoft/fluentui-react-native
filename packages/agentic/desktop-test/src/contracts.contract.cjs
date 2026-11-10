@@ -465,7 +465,8 @@ async function main() {
       });
       const slow = reporter({ kind: 'lifecycle', output: stuck, flushTimeoutMs: 20 });
       slow.emit({ kind: 'diagnostic', payload: { level: 'info', message: 'slow sink' } });
-      assert.equal((await slow.finish()).status, 'failed');
+      // A stalled console is a presentation warning; it never changes the verdict.
+      assert.equal((await slow.finish()).status, 'passed');
       stuck.destroy();
       const failedWrite = reporter({ kind: 'lifecycle' });
       const rename = fs.renameSync;
@@ -497,16 +498,19 @@ async function main() {
       });
       try {
         const final = await late.finish();
-        assert.equal(final.status, 'failed');
+        assert.equal(final.status, 'passed');
         assert.equal(JSON.parse(fs.readFileSync(path.join(late.root, 'run.json'), 'utf8')).status, final.status);
         const events = fs
           .readFileSync(path.join(late.root, 'events.jsonl'), 'utf8')
           .trim()
           .split('\n')
           .map((line) => JSON.parse(line));
-        assert.equal(events.at(-1).payload.status, final.status);
-        assert(fs.readFileSync(summaryPath, 'utf8').includes('failed'));
-        assert(fs.readFileSync(path.join(late.root, 'junit.xml'), 'utf8').includes('late terminal fixture'));
+        // The final console line is written after the verdict, so its failure is journaled after run-finished.
+        assert.equal(events.filter(({ kind }) => kind === 'run-finished').at(-1).payload.status, final.status);
+        assert.deepEqual(events.at(-1).payload, { level: 'warning', message: 'Console output stopped: late terminal fixture' });
+        assert(fs.readFileSync(summaryPath, 'utf8').includes('passed'));
+        assert(!fs.readFileSync(path.join(late.root, 'junit.xml'), 'utf8').includes('late terminal fixture'));
+        assert(err.text().includes('[desktop] WARNING: Console output stopped'));
       } finally {
         if (priorSummary === undefined) delete process.env.GITHUB_STEP_SUMMARY;
         else process.env.GITHUB_STEP_SUMMARY = priorSummary;
@@ -2028,6 +2032,8 @@ async function main() {
           "describe('hook fixture',()=>{beforeAll(()=>{throw new Error('original setup failure');});it('does not execute',()=>{throw new Error('body must not run');});});";
       } else if (mode === 'crash') {
         source = 'process.exit(17);';
+      } else if (mode === 'spec-load-failure') {
+        source = "throw new Error('original spec load failure');";
       } else if (mode === 'lane-physical') {
         source = [
           "import fs from 'node:fs';",
@@ -2169,13 +2175,28 @@ async function main() {
         await supervisor.close();
       }
       const result = await run.finish();
-      if (['hook-failure', 'config-hook-failure', 'config-load-failure', 'crash', 'bail', 'lane-blocked'].includes(mode)) {
+      if (
+        ['hook-failure', 'config-hook-failure', 'config-load-failure', 'crash', 'spec-load-failure', 'bail', 'lane-blocked'].includes(mode)
+      ) {
         assert(failure, `hook failure must fail launcher\n${JSON.stringify(result)}\n${err.text()}\n${out.text()}`);
         assert.equal(result.status, 'failed');
         assert(!out.text().includes('PASSED WDIO fixture'), out.text());
         if (mode !== 'crash')
           assert(!result.failures.some(({ kind }) => kind === 'cleanup' || kind === 'reporting'), JSON.stringify(result));
         if (mode === 'hook-failure') assert(JSON.stringify(result).includes('original setup failure'), JSON.stringify(result));
+        if (mode === 'spec-load-failure') {
+          // A spec that throws while loading reports no tests, yet it failed rather than being merely incomplete.
+          assert.deepEqual(
+            result.work.map(({ status }) => status),
+            ['failed'],
+            JSON.stringify(result),
+          );
+          const log = result.artifacts.find((artifact) => artifact.path.startsWith('commands/'));
+          assert(
+            log && fs.readFileSync(path.join(run.root, log.path), 'utf8').includes('original spec load failure'),
+            JSON.stringify(result),
+          );
+        }
         if (mode === 'config-hook-failure') assert(JSON.stringify(result).includes('missing-readiness-marker'), JSON.stringify(result));
         if (mode === 'config-load-failure') {
           assert(JSON.stringify(result).includes('original config import failure'), JSON.stringify(result));

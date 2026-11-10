@@ -27,6 +27,7 @@ describe('neutral desktop harness contracts', () => {
     'config-hook-failure',
     'config-load-failure',
     'crash',
+    'spec-load-failure',
     'bail',
     'lane-physical',
     'lane-accessible',

@@ -4,7 +4,7 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 
 import { DesktopRunReporter } from './collector.js';
-import { DesktopRunQueryService, validateDesktopRunQuery } from './runQueries.js';
+import { DesktopRunQueryError, DesktopRunQueryService, desktopRunQueryErrorCodes, validateDesktopRunQuery } from './runQueries.js';
 import type { DesktopRunPage, DesktopRunQueryClient } from './runQueries.js';
 import type { DesktopRunResult } from './results.js';
 
@@ -288,7 +288,7 @@ describe('persisted desktop run queries', () => {
       const retained = path.join(root, 'retained.json');
       fs.renameSync(file, retained);
       fs.symlinkSync(retained, file);
-      await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toThrow('symlink');
+      await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toMatchObject({ code: 'report-unreadable' });
       fs.unlinkSync(file);
       fs.renameSync(retained, file);
     },
@@ -300,10 +300,10 @@ describe('persisted desktop run queries', () => {
     const file = path.join(reporter.root, 'run.json');
     const linked = path.join(root, 'linked.json');
     fs.linkSync(file, linked);
-    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toThrow('private regular file');
+    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toMatchObject({ code: 'report-unreadable' });
     fs.unlinkSync(linked);
     fs.truncateSync(file, 64 * 1024 * 1024 + 1);
-    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toThrow('limit');
+    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toMatchObject({ code: 'report-unreadable' });
   });
 
   test('artifact limits, invalid UTF-8, and missing content fail explicitly', async () => {
@@ -312,12 +312,57 @@ describe('persisted desktop run queries', () => {
     await reporter.flush();
     const page = (await client.query({ operation: 'artifacts', runId: reporter.runId })) as DesktopRunPage;
     const query = { operation: 'artifact' as const, runId: reporter.runId, artifactId: page.items[0].id };
-    await expect(client.query(query)).rejects.toThrow();
+    await expect(client.query(query)).rejects.toMatchObject({ code: 'report-unreadable' });
     const file = path.join(reporter.root, 'commands/output.log');
     fs.writeFileSync(file, Buffer.from([0xff]));
-    await expect(client.query(query)).rejects.toThrow('encoded data');
+    await expect(client.query(query)).rejects.toMatchObject({ code: 'report-invalid' });
     fs.truncateSync(file, 1024 * 1024 + 1);
-    await expect(client.query(query)).rejects.toThrow('limit');
+    await expect(client.query(query)).rejects.toMatchObject({ code: 'report-unreadable' });
+  });
+
+  test('query errors carry a closed code and never expose a filesystem path', async () => {
+    testResult('passed');
+    await reporter.finish();
+    const file = path.join(reporter.root, 'run.json');
+    const status = { operation: 'status' as const, runId: reporter.runId };
+    const failures: unknown[] = [];
+    const attempt = async (query: Parameters<DesktopRunQueryClient['query']>[0]) => {
+      try {
+        await client.query(query);
+      } catch (error) {
+        failures.push(error);
+      }
+    };
+    fs.writeFileSync(file, '{');
+    await attempt(status);
+    fs.rmSync(file);
+    await attempt(status);
+    fs.rmSync(reporter.root, { force: true, recursive: true });
+    await attempt(status);
+    await attempt({ operation: 'tests', runId: reporter.runId, cursor: 'not-a-cursor' });
+    expect(failures).toHaveLength(4);
+    for (const failure of failures) {
+      expect(failure).toBeInstanceOf(DesktopRunQueryError);
+      expect(desktopRunQueryErrorCodes).toContain((failure as DesktopRunQueryError).code);
+      expect((failure as Error).message).not.toContain(root);
+      expect((failure as Error).message).not.toContain(path.basename(root));
+    }
+    expect(failures.map((failure) => (failure as DesktopRunQueryError).code)).toEqual([
+      'report-invalid',
+      'report-unreadable',
+      'unavailable',
+      'invalid-request',
+    ]);
+  });
+
+  test('projected text replaces the run directory instead of exposing it', async () => {
+    reporter.fail(
+      new Error(`Cannot write ${path.join(reporter.root, 'commands', 'output.log')} under ${path.dirname(reporter.root)}`),
+      'test',
+    );
+    await reporter.finish();
+    const page = (await client.query({ operation: 'failures', runId: reporter.runId })) as DesktopRunPage;
+    expect(page.items[0].message).toBe('Cannot write <run>/commands/output.log under <artifacts>');
   });
 
   test('malformed/inconsistent persisted data never returns a success-shaped fallback', async () => {
@@ -327,9 +372,31 @@ describe('persisted desktop run queries', () => {
       result.tests[0].status = 'failed';
     });
 
-    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toThrow('disagrees');
+    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toMatchObject({ code: 'report-invalid' });
     fs.writeFileSync(path.join(reporter.root, 'run.json'), '{');
-    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toThrow();
+    await expect(client.query({ operation: 'status', runId: reporter.runId })).rejects.toMatchObject({ code: 'report-invalid' });
+  });
+
+  test('a test that failed and then only skipped is queried as failed with its failure message', async () => {
+    const id = randomUUID();
+    reporter.emit({
+      kind: 'test-result',
+      payload: {
+        testId: id,
+        title: 'masked',
+        status: 'failed',
+        attempt: 0,
+        durationMs: 1,
+        failure: reporter.failure(new Error('first attempt broke'), 'test'),
+      },
+    });
+    reporter.emit({
+      kind: 'test-result',
+      payload: { testId: id, title: 'masked', status: 'skipped', attempt: 1, durationMs: 1, reason: 'retry skipped' },
+    });
+    await reporter.finish();
+    const tests = (await client.query({ operation: 'tests', runId: reporter.runId })) as DesktopRunPage;
+    expect(tests.items).toEqual([expect.objectContaining({ title: 'masked', status: 'failed', message: 'first attempt broke' })]);
   });
 
   describe('input lane runs', () => {

@@ -57,6 +57,49 @@ describe('structured desktop events', () => {
     expect(record.payload.text).toContain('[truncated]');
     expect(Buffer.byteLength(JSON.stringify(record))).toBeLessThan(4 * 1024);
   });
+
+  test('keeps identifiers whole while shrinking free text to fit the record limit', () => {
+    const testId = 'test-'.repeat(120);
+    const event = makeEvent({
+      kind: 'test-result',
+      payload: {
+        testId,
+        title: 'title '.repeat(2_000),
+        attempt: 0,
+        status: 'failed',
+        durationMs: 1,
+        failure: { failureId: 'f'.repeat(400), kind: 'test', error: { name: 'Error', message: 'message '.repeat(2_000) } },
+      },
+    });
+    const record = projectDesktopEvent(event);
+
+    expect(record.payload.testId).toBe(testId);
+    expect((record.payload.failure as { failureId: string }).failureId).toBe('f'.repeat(400));
+    expect(record.truncated).toBeUndefined();
+    expect(Buffer.byteLength(JSON.stringify(record))).toBeLessThanOrEqual(4 * 1024);
+  });
+
+  test('an event that cannot fit even with short text becomes a marked minimal record instead of throwing', () => {
+    const long = (prefix: string) => `${prefix}-`.padEnd(1_000, 'x');
+    const event = makeEvent({
+      kind: 'test-result',
+      payload: {
+        testId: long('test'),
+        title: 'title',
+        attempt: 2,
+        status: 'failed',
+        durationMs: 1,
+        failure: { failureId: long('failure'), kind: 'test', error: { name: 'Error', message: 'message' } },
+      },
+    });
+    const record = { ...event, runId: long('run'), eventId: long('event'), sourceId: long('source'), scopeId: long('scope') };
+
+    const projected = projectDesktopEvent(record as CollectedDesktopEvent);
+
+    expect(projected.truncated).toBe(true);
+    expect(projected).toMatchObject({ kind: 'test-result', payload: { attempt: 2, status: 'failed' } });
+    expect(Buffer.byteLength(JSON.stringify(projected))).toBeLessThanOrEqual(4 * 1024);
+  });
 });
 
 function makeEvent(data: Pick<CollectedDesktopEvent, 'kind' | 'payload'>): CollectedDesktopEvent {
