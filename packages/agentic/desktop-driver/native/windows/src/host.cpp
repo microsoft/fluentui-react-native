@@ -305,8 +305,13 @@ int Host::Run(HANDLE input, HANDLE output) {
         message = json::Value::Parse(
             std::string_view(reinterpret_cast<const char*>(frame.payload.data()), frame.payload.size()));
       } catch (const HelperError& error) {
-        WriteDiagnostic(std::string("The native helper ignored malformed JSON: ") + error.what());
-        continue;
+        // The protocol fails the transport on invalid JSON: a frame that does
+        // not parse may have carried a request or cancel the helper cannot
+        // correlate, so continuing would leave Node waiting on it.
+        WriteDiagnostic(std::string("The native helper received malformed JSON, which fails the transport: ") +
+                        error.what());
+        exitCode = 1;
+        break;
       }
       const std::string type = message.StringField("type");
       const std::string id = message.StringField("id");

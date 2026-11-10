@@ -3285,6 +3285,75 @@ void TestHostQueuedCancellation() {
   CloseHandle(testInput);
 }
 
+// The protocol fails the transport on a frame that is not valid JSON: the host
+// stops reading, never runs what follows, and exits with a failure.
+void TestHostMalformedJson() {
+  HANDLE hostInput = nullptr;
+  HANDLE testOutput = nullptr;
+  HANDLE testInput = nullptr;
+  HANDLE hostOutput = nullptr;
+  if (!CreatePipe(&hostInput, &testOutput, nullptr, 0) || !CreatePipe(&testInput, &hostOutput, nullptr, 0)) {
+    Check(false, "the malformed-frame test creates its pipes");
+    return;
+  }
+
+  std::mutex mutex;
+  std::vector<std::string> executed;
+  const auto blocker = std::make_shared<Gate>();
+  Host host;
+  host.SetBeforeExecuteForTesting([&](const std::string& id, const std::string&) {
+    {
+      const std::lock_guard<std::mutex> guard(mutex);
+      executed.push_back(id);
+    }
+    if (id == "blocker") {
+      blocker->Hold();
+    }
+  });
+  std::thread reader([&]() {
+    try {
+      FrameReader frames(testInput);
+      Frame frame;
+      while (frames.Read(frame)) {
+      }
+    } catch (...) {
+    }
+  });
+  std::atomic<int> exitCode{-1};
+  std::thread server([&]() { exitCode.store(host.Run(hostInput, hostOutput)); });
+
+  FrameWriter writer(testOutput);
+  const auto request = [&writer](const std::string& id) {
+    json::Value message = json::Value::Object();
+    message.Set("type", json::Value::String(std::string("request")));
+    message.Set("id", json::Value::String(id));
+    message.Set("command", json::Value::String(std::string("probe")));
+    message.Set("params", json::Value::Object());
+    writer.WriteJson(message);
+  };
+  const auto ran = [&](const std::string& id) {
+    const std::lock_guard<std::mutex> guard(mutex);
+    return std::find(executed.begin(), executed.end(), id) != executed.end();
+  };
+
+  request("blocker");
+  Check(WaitFor([&]() { return ran("blocker"); }), "the host worker starts the request sent before the bad frame");
+  writer.WriteJson(std::string_view(R"({"type":"request","id":"truncated")"));
+  request("after");
+  blocker->Open();
+  const bool returned = WaitFor([&]() { return exitCode.load() != -1; }, 5000);
+  Check(returned && exitCode.load() == 1, "a malformed frame fails the transport and the host exits with a failure");
+  Check(!ran("after"), "a request after the malformed frame is never run");
+
+  // Ends a host that kept reading, so a failed check cannot hang the run.
+  CloseHandle(testOutput);
+  server.join();
+  CloseHandle(hostOutput);
+  reader.join();
+  CloseHandle(hostInput);
+  CloseHandle(testInput);
+}
+
 void TestDriverHitTestBeyondScreens() {
   const CancellationToken token;
   WindowThread windows;
@@ -3618,6 +3687,7 @@ int RunSelfTest() {
   TestEffectLedger();
   TestDriverMutationEffects();
   TestHostQueuedCancellation();
+  TestHostMalformedJson();
   TestDriverHitTestBeyondScreens();
   TestAccessibilityActions();
   TestDriverObservation();
