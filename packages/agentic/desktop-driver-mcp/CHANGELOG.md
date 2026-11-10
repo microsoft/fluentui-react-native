@@ -1,5 +1,33 @@
 # @fluentui-react-native/desktop-driver-mcp
 
+## 0.1.2
+
+### Patch Changes
+
+- 26cc577: Record partial combined-candidate macOS native qualification evidence.
+- 26cc577: Document the provisional macOS native qualification evidence and integrated
+  descriptor-path requalification procedure.
+- 26cc577: Repair Windows package-boundary validation, tolerate bounded atomic-report
+  sharing conflicts without hiding persistent failures, and record descriptor-path cleanup,
+  correlated render faults, recovery, and separate legacy smoke evidence, retaining
+  earlier failures and partial native coverage.
+- 319d38c: Record Windows Fabric and Win32 Paper launch, containment, and MCP measurement evidence, and document the Win32 agent-mode bundle, the Windows foreground refusal, and the `serve --agent` interrupt behavior.
+- 26cc577: Record Windows Fabric and Win32 Paper native qualification results in the
+  status ledgers and add Windows parameters to the native qualification runbook.
+- Updated dependencies [26cc577]
+- Updated dependencies [da2b62c]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [8574d22]
+- Updated dependencies [ac20660]
+- Updated dependencies [26cc577]
+- Updated dependencies [319d38c]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+  - @fluentui-react-native/desktop-driver@0.5.1
+
 ## 0.1.1
 
 ### Patch Changes

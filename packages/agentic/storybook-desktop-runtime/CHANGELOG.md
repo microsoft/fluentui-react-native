@@ -1,5 +1,18 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.6
+
+### Patch Changes
+
+- 26cc577: Add local story-provider lifetime/cancellation context, authenticated connection
+  epochs, versioned native marker conformance, prompt disconnect failure, and stale
+  preview mutation rejection. Fence interrupted navigation conservatively and
+  report renderer-specific bridge/relaunch failures without claiming transparent
+  upstream reconnect or clearing unknown-effect quarantine.
+- da2b62c: Scroll the Win32 story preview inside its viewport and remount the preview for each navigation generation, so story tests start from a fresh, reachable preview.
+- Updated dependencies [8574d22]
+  - @fluentui-react-native/native-core@0.2.1
+
 ## 0.3.5
 
 ### Patch Changes

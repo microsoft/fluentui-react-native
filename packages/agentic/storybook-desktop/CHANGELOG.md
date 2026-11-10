@@ -1,5 +1,65 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.4
+
+### Patch Changes
+
+- 26cc577: Add typed resource contributions, settled shutdown, and exact fenced workload ownership records. Keep Storybook service waiters abortable so shutdown can drain them.
+- 26cc577: Add cooperative owned Node service parent lifelines, explicit settled disposal,
+  and per-command correlated typed service readiness. Storybook agent startup no
+  longer treats a generated ready file as authoritative. Incomplete withdrawal or
+  stalled disposal stays failed and fenced; native survivor qualification remains
+  separate.
+- 26cc577: Add local story-provider lifetime/cancellation context, authenticated connection
+  epochs, versioned native marker conformance, prompt disconnect failure, and stale
+  preview mutation rejection. Fence interrupted navigation conservatively and
+  report renderer-specific bridge/relaunch failures without claiming transparent
+  upstream reconnect or clearing unknown-effect quarantine.
+- 26cc577: Disable alternate HTTP and WebSocket mutation ingress on agent-served Storybook
+  channels, dispatch authorized selections only to the authenticated runtime, and
+  retain explicit protected args refusal. Route manifest-backed smoke traversal
+  through driver sessions and cover foreign-authority selection and args refusal.
+- 8574d22: Add modality-aware desktop test descriptors: `desktopIt` and `desktopDescribe` declare `requires`, `input`, `platforms`, `scope`, and known gaps for Storybook cases and, through `desktop-test/jasmine`, WebdriverIO Jasmine specs. `--input accessible|physical` (or `DESKTOP_INPUT`) runs one input lane, selects the cases that apply, masks the host for the accessible lane, and reports the lane and what it excluded.
+- ac20660: Enforce input policy per WebDriver session and report case-level input mechanism receipts.
+- da2b62c: Close the upstream Storybook HTTP listener and its open connections when the legacy channel service stops, so lingering keep-alive or reconnect sockets cannot keep the channel process alive past its shutdown budget.
+- 138aed4: Run story rendering and story tests as reported operations, so a smoke run shows one header with counts such as `209 stories rendered` and `101 of 101 story tests executed: 101 passed, 0 failed, 0 skipped`, and says `no story tests executed` when none ran. `--verbose` streams command output live; other runs keep it in the logs and show the end of a failing step's log.
+- 26cc577: Persist authenticated Storybook epochs beside settlement records in stable private target storage. Verify the exact live application incarnation before returning renderer-specific relaunch-required after a service restart; initial absence, replaced applications, and indeterminate probes remain bridge-unavailable.
+- 26cc577: Retire the old authenticated bridge when a reloaded runtime authenticates its
+  new socket before the old socket closes. Pending work on the old socket is
+  rejected with effect `unknown`, and the old socket cannot reclaim the bridge,
+  instead of the new hello being dropped and selections reaching the stale socket.
+- 26cc577: Run installed SIGTERM handlers when a parent lifeline stops a child without
+  disposers, so Windows children flush their report terminal before exiting.
+  Give the first manifest-backed smoke story a cold-bundle render budget, wait
+  for authenticated runtime readiness before authored tests run in a relaunched
+  smoke `tests` phase, and stop every owned smoke process before reporting a
+  service cleanup failure.
+- 319d38c: Record Windows Fabric and Win32 Paper launch, containment, and MCP measurement evidence, and document the Win32 agent-mode bundle, the Windows foreground refusal, and the `serve --agent` interrupt behavior.
+- 26cc577: Report `bridge-unavailable`, not `relaunch-required`, while a relaunched
+  runtime that has said hello awaits its initial `storyRendered`, so manifest
+  smoke readiness waits keep retrying instead of failing before any dispatch.
+- 26cc577: Write the Windows Storybook application lease before the manifest-backed stories phase, and release the traversal session before authored tests create their own session for the target.
+- Updated dependencies [26cc577]
+- Updated dependencies [da2b62c]
+- Updated dependencies [138aed4]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [8574d22]
+- Updated dependencies [ac20660]
+- Updated dependencies [26cc577]
+- Updated dependencies [319d38c]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [319d38c]
+- Updated dependencies [26cc577]
+  - @fluentui-react-native/desktop-test@0.2.4
+  - @fluentui-react-native/desktop-driver@0.5.1
+
 ## 0.4.3
 
 ### Patch Changes

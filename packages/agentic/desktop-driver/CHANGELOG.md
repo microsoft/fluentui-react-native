@@ -1,5 +1,34 @@
 # @fluentui-react-native/desktop-driver
 
+## 0.5.1
+
+### Patch Changes
+
+- 26cc577: Record partial combined-candidate macOS native qualification evidence.
+- da2b62c: Describe the Storybook CI input lanes: the hosted Windows and Win32 jobs run the accessible lane, and an advisory Win32 job runs the physical lane.
+- 26cc577: Document the provisional macOS native qualification evidence and integrated
+  descriptor-path requalification procedure.
+- 26cc577: Add local story-provider lifetime/cancellation context, authenticated connection
+  epochs, versioned native marker conformance, prompt disconnect failure, and stale
+  preview mutation rejection. Fence interrupted navigation conservatively and
+  report renderer-specific bridge/relaunch failures without claiming transparent
+  upstream reconnect or clearing unknown-effect quarantine.
+- 26cc577: Disable alternate HTTP and WebSocket mutation ingress on agent-served Storybook
+  channels, dispatch authorized selections only to the authenticated runtime, and
+  retain explicit protected args refusal. Route manifest-backed smoke traversal
+  through driver sessions and cover foreign-authority selection and args refusal.
+- 26cc577: Prevent reobserving a surviving native preview element from reviving a reference issued before Storybook selection or reset.
+- 8574d22: Add modality-aware desktop test descriptors: `desktopIt` and `desktopDescribe` declare `requires`, `input`, `platforms`, `scope`, and known gaps for Storybook cases and, through `desktop-test/jasmine`, WebdriverIO Jasmine specs. `--input accessible|physical` (or `DESKTOP_INPUT`) runs one input lane, selects the cases that apply, masks the host for the accessible lane, and reports the lane and what it excluded.
+- ac20660: Enforce input policy per WebDriver session and report case-level input mechanism receipts.
+- 26cc577: Persist authenticated Storybook epochs beside settlement records in stable private target storage. Verify the exact live application incarnation before returning renderer-specific relaunch-required after a service restart; initial absence, replaced applications, and indeterminate probes remain bridge-unavailable.
+- 319d38c: Contain unpackaged Windows launches in a helper-owned Job Object so the application and its descendants end with the lease or the helper, report each lease's `containment` (`job-object`, `uncontained`, or `external`), and fail attach closed on unreadable or cross-session identity. A refused foreground activation now re-attaches to a changed foreground holder and names the holder and its cause.
+- 26cc577: Repair Windows package-boundary validation, tolerate bounded atomic-report
+  sharing conflicts without hiding persistent failures, and record descriptor-path cleanup,
+  correlated render faults, recovery, and separate legacy smoke evidence, retaining
+  earlier failures and partial native coverage.
+- 26cc577: Record Windows Fabric and Win32 Paper native qualification results in the
+  status ledgers and add Windows parameters to the native qualification runbook.
+
 ## 0.5.0
 
 ### Minor Changes
