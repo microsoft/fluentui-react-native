@@ -1,6 +1,12 @@
 import { Command, Option } from 'commander';
+import { randomUUID } from 'node:crypto';
 import path from 'node:path';
-import { claimDesktopWorkload, DesktopServiceScope, DesktopStopRequested } from '@fluentui-react-native/desktop-test';
+import {
+  claimDesktopWorkload,
+  DesktopServiceScope,
+  DesktopStopRequested,
+  handleDesktopInterrupts,
+} from '@fluentui-react-native/desktop-test';
 import {
   desktopEventLevels,
   desktopReporterModes,
@@ -237,9 +243,11 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
   let session: DesktopReportSession | undefined;
   let runner: NodeDesktopCommandRunner | undefined;
   let releaseClaim: (() => void) | undefined;
+  let releaseInterrupts: (() => void) | undefined;
+  let actionName = '';
+  let longLived = false;
   let failure: unknown;
   let parseDiagnostics = '';
-  const interrupt = () => options.services?.requestStop();
   const normalized = normalizeLegacyTestReporter(argv);
   let reporterResolutionError: unknown;
   try {
@@ -294,6 +302,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
                 : undefined,
           })
         : undefined;
+    actionName = action.name();
+    longLived = ['driver', 'server'].includes(actionName);
     session = await createDesktopReportSession({
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
@@ -302,7 +312,7 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       reporterMode,
       eventLevel,
       // A long-lived command's readiness record is its only output; before readiness, a failure reports its summary.
-      suppressFinalOutput: ['driver', 'server'].includes(action.name()) ? () => ready : false,
+      suppressFinalOutput: longLived ? () => ready : false,
       verbose: program.opts<{ verbose?: boolean }>().verbose,
       onFatal: (error) => options.services?.fail(error),
     });
@@ -322,31 +332,52 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
     options.runner = runner;
     options.services = new DesktopServiceScope(runner, session.reporter);
     session.onStop?.(() => options.services!.requestStop());
-    process.once('SIGINT', interrupt);
-    process.once('SIGTERM', interrupt);
+    const reporter = session.reporter;
+    releaseInterrupts = handleDesktopInterrupts({
+      stop: () => options.services?.requestStop(),
+      terminate: (signal) => {
+        reporter.emit({
+          kind: 'diagnostic',
+          payload: {
+            level: 'warning',
+            message: `Received ${signal} during shutdown; force-stopping owned commands. Interrupt again to exit without cleanup.`,
+          },
+        });
+        runner?.terminate();
+      },
+    });
   });
   try {
     await program.parseAsync([...normalized.argv]);
   } catch (error) {
     if (error && typeof error === 'object' && 'exitCode' in error && error.exitCode === 0) return;
     if (!(error instanceof DesktopStopRequested)) failure = reporterResolutionError ?? error;
+    else if (session && !longLived)
+      // An interrupted one-shot command did not finish: leave its scope open so the run reports incomplete, not passed.
+      session.reporter.emit(
+        { kind: 'scope-start', payload: { label: `${actionName} (interrupted)`, category: 'phase' } },
+        `interrupted-${randomUUID()}`,
+      );
   } finally {
-    process.off('SIGINT', interrupt);
-    process.off('SIGTERM', interrupt);
+    // Interrupt handlers stay installed until cleanup completes, so a repeated signal escalates instead of killing the CLI.
     try {
-      await options.services?.close();
-      await runner?.close();
-    } catch (error) {
-      options.reporter?.fail(error, 'cleanup');
-      failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook execution and cleanup failed.');
+      try {
+        await options.services?.close();
+        await runner?.close();
+      } catch (error) {
+        options.reporter?.fail(error, 'cleanup');
+        failure = failure === undefined ? error : new AggregateError([failure, error], 'Storybook execution and cleanup failed.');
+      }
+      try {
+        releaseClaim?.();
+      } catch (error) {
+        options.reporter?.fail(error, 'cleanup');
+        failure ??= error;
+      }
+      if (session) process.exitCode = await session.close(failure);
+    } finally {
+      releaseInterrupts?.();
     }
-    try {
-      releaseClaim?.();
-    } catch (error) {
-      options.reporter?.fail(error, 'cleanup');
-      failure ??= error;
-    }
-    if (session) process.exitCode = await session.close(failure);
   }
   if (failure !== undefined) {
     if (options.reporterMode === 'json' || options.reporterMode === 'ndjson') {

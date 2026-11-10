@@ -130,9 +130,11 @@ Structured modes keep normal stderr empty.
 The Node worker reporter is named `--test-reporter spec|tap|dot`. The former
 `test --reporter spec|tap|dot` spelling remains as a deprecated one-cycle
 alias; use the global `--reporter` for CLI output format.
-SIGINT and SIGTERM stop owned work; one-shot structured runs end with an
+The first SIGINT, SIGTERM, or SIGHUP stops owned work; a second one during
+cleanup force-stops owned commands, and a third exits without cleanup.
+Interrupted one-shot commands, such as a stage or story test, end with an
 `incomplete` summary, while long-lived commands keep their single readiness
-record.
+record. A standalone Storybook channel closes cleanly on the same signals.
 
 Use `desktop-driver stories list` for runtime story IDs. Static manifest
 discovery is not a replacement for querying the running catalog. Generic

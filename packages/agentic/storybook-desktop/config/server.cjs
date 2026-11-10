@@ -24,11 +24,13 @@ async function startDesktopStorybookServer({
   });
   let stopping = false;
   const controller = new AbortController();
-  const [{ startNativeDesktopService }, { createDesktopReportSession }, { NativeDesktopHost }] = await Promise.all([
-    import('@fluentui-react-native/desktop-test/driver-service'),
-    import('@fluentui-react-native/desktop-test/reporting'),
-    import('@fluentui-react-native/desktop-driver'),
-  ]);
+  const [{ handleDesktopInterrupts }, { startNativeDesktopService }, { createDesktopReportSession }, { NativeDesktopHost }] =
+    await Promise.all([
+      import('@fluentui-react-native/desktop-test'),
+      import('@fluentui-react-native/desktop-test/driver-service'),
+      import('@fluentui-react-native/desktop-test/reporting'),
+      import('@fluentui-react-native/desktop-driver'),
+    ]);
   const report = await createDesktopReportSession({ artifactsRoot: path.join(projectRoot, 'artifacts', 'desktop'), kind: 'lifecycle' });
   let server;
   let controlledChannel;
@@ -38,8 +40,6 @@ async function startDesktopStorybookServer({
   let closing;
   const close = (error) =>
     (closing ??= (async () => {
-      process.off('SIGINT', stop);
-      process.off('SIGTERM', stop);
       const failures = error === undefined ? [] : [error];
       try {
         // Compatibility breadcrumb only; correlated process readiness is authoritative.
@@ -79,7 +79,7 @@ async function startDesktopStorybookServer({
       unregisterDisposal();
       if (failures.length) throw new AggregateError(failures, 'Storybook channel disposal is incomplete.');
       finishDesktopProcess();
-    })());
+    })().finally(() => releaseInterrupts?.()));
   const settle = async (error) => {
     stopping = true;
     controller.abort(error ?? new Error('Storybook channel stop requested.'));
@@ -102,8 +102,18 @@ async function startDesktopStorybookServer({
   };
   const unregisterDisposal = registerDesktopProcessDisposal(() => settle());
   report.onStop?.(stop);
-  process.once('SIGINT', stop);
-  process.once('SIGTERM', stop);
+  // Handlers stay installed until close completes; nothing can be forced, so a repeated signal only warns before exiting.
+  const releaseInterrupts = handleDesktopInterrupts({
+    stop,
+    terminate: (signal) =>
+      report.reporter.emit({
+        kind: 'diagnostic',
+        payload: {
+          level: 'warning',
+          message: `Received ${signal} while the Storybook channel is closing. Interrupt again to exit without cleanup.`,
+        },
+      }),
+  });
   try {
     controller.signal.throwIfAborted();
     const driverManifest = driverManifestPath ? JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')) : undefined;
