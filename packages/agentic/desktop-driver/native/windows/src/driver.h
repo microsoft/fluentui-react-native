@@ -140,6 +140,10 @@ class Driver {
   // `window`, or to any leased application when `window` is null.
   InputController::KeyboardGuard KeyboardGuardFor(HWND window);
   void ClickPhysically(const std::string& elementId, const CancellationToken& token);
+  // Refuses a pointer press or scroll whose point a window of an application
+  // this helper did not launch or attach to covers. Without a lease the
+  // pointer has no application to stay within, so nothing is checked.
+  void RequirePointerOverLeasedApplication(POINT point) const;
   json::Value ProbeResult(const json::Value& params);
   json::Value WindowSummary(const WindowInfo& info);
   void PerformActions(const json::Value& actions, const CancellationToken& token);

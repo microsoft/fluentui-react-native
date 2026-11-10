@@ -2269,10 +2269,27 @@ void TestDriverKeyRouting() {
 
   reset();
   foreground = nullptr;
+  driver.UseTestHitTester(&HitConfiguredWindow);
+  clickHitResult = window;
   Check(perform(R"([{"type":"pointer","id":"mouse","parameters":{"pointerType":"mouse"},"actions":[{"type":"pointerDown","button":0},{"type":"pointerUp","button":0}]}])") ==
                 "none" &&
             recordedInputs.size() == 2 && foregroundReads == 0 && activations.empty(),
         "pointer input neither reads nor changes the foreground");
+  if (foreign != nullptr) {
+    clickHitResult = foreign;
+    reset();
+    std::string covered;
+    Check(perform(R"([{"type":"pointer","id":"mouse","parameters":{"pointerType":"mouse"},"actions":[{"type":"pointerDown","button":0},{"type":"pointerUp","button":0}]}])",
+                  &covered) == kErrorNotInteractable &&
+              recordedInputs.empty() && !driver.HasDepressedInput() && Contains(covered, "another application"),
+          "a pointer press over another application's window is refused before it is sent");
+    reset();
+    Check(perform(R"([{"type":"wheel","id":"wheel","actions":[{"type":"scroll","x":1,"y":1,"deltaX":0,"deltaY":10}]}])") ==
+                  kErrorNotInteractable &&
+              recordedInputs.empty(),
+          "a scroll over another application's window is refused before the pointer moves");
+    clickHitResult = window;
+  }
   reset();
   Check(perform(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyUp","value":"a"}]}])") == "none" &&
             recordedInputs.size() == 1 && foregroundReads == 0,

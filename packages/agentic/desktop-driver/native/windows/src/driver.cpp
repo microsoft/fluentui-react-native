@@ -291,6 +291,24 @@ void Driver::ClickPhysically(const std::string& elementId, const CancellationTok
   input_.ClickAt(center, token);
 }
 
+void Driver::RequirePointerOverLeasedApplication(POINT point) const {
+  if (applications_.PrimaryLease() == nullptr) {
+    return;
+  }
+  const HWND hit = hitTester_(point);
+  if (hit == nullptr || applications_.ForegroundBelongsToApplication(nullptr, hit)) {
+    return;
+  }
+  // A frame host, such as the one around a packaged application, can own the
+  // top-level window above the application's own content.
+  const HWND root = GetAncestor(hit, GA_ROOT);
+  if (root != nullptr && root != hit && applications_.ForegroundBelongsToApplication(nullptr, root)) {
+    return;
+  }
+  Fail(kErrorNotInteractable, "A window of another application, " + DescribeWindowHandle(hit) +
+                                  ", covers the pointer position, so the pointer input was not sent.");
+}
+
 json::Value Driver::ProbeResult(const json::Value& params) {
   // Re-read on every probe: a session that is locked now can be unlocked when
   // the next probe runs.
@@ -409,6 +427,7 @@ void Driver::PerformActions(const json::Value& actions, const CancellationToken&
         if (type == "pointerMove") {
           input_.MovePointer(ResolveActionPoint(action, token), ActionDuration(action), token);
         } else if (type == "pointerDown") {
+          RequirePointerOverLeasedApplication(input_.pointer());
           input_.PointerDown(ActionButton(action), token);
         } else if (type == "pointerUp") {
           input_.PointerUp(ActionButton(action), token);
@@ -423,7 +442,9 @@ void Driver::PerformActions(const json::Value& actions, const CancellationToken&
         if (type != "scroll") {
           Fail(kErrorInvalidParams, "Wheel input sources support only scroll and pause.");
         }
-        input_.MovePointer(ResolveActionPoint(action, token), 0, token);
+        const POINT scrollPoint = ResolveActionPoint(action, token);
+        RequirePointerOverLeasedApplication(scrollPoint);
+        input_.MovePointer(scrollPoint, 0, token);
         input_.Wheel(action.NumberField("deltaX", 0.0), action.NumberField("deltaY", 0.0), token);
         continue;
       }
