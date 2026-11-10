@@ -1,5 +1,9 @@
 import type { WebDriverActionSequence } from '../protocol/types.js';
 import { createInputState, parseActionSequences } from '../protocol/actions.js';
+import { authoredArtifactKey, isReservedArtifactName } from '../artifacts/segments.js';
+
+/** The longest a `wait` step may poll. A larger value is an error rather than being cut down. */
+export const maximumDesktopStoryWaitMs = 120_000;
 
 export const desktopStoryPlatforms = ['macos', 'windows', 'win32'] as const;
 export const desktopStoryCapabilities = [
@@ -115,12 +119,33 @@ function validateTest(value: unknown, source: string, ids: Set<string>): void {
   if (!Array.isArray(test.steps) || test.steps.length === 0) {
     throw new TypeError(`${source}.steps must be a non-empty array.`);
   }
+  const artifactKeys = new Set<string>();
   for (const [index, step] of test.steps.entries()) {
-    validateStep(step, `${source}.steps[${index}]`);
+    validateStep(step, `${source}.steps[${index}]`, artifactKeys);
   }
 }
 
-function validateStep(value: unknown, source: string): void {
+/** Authored artifacts share one directory per test, so a name that lands on a file another step wrote would overwrite it. */
+function validateArtifactName(kind: 'screenshot' | 'source', name: unknown, source: string, artifactKeys: Set<string>): void {
+  requireNonEmptyString(name, source);
+  let key: string;
+  let reserved: boolean;
+  try {
+    key = authoredArtifactKey(kind, name);
+    reserved = isReservedArtifactName(name);
+  } catch {
+    throw new TypeError(`${source} must contain at least one letter or digit.`);
+  }
+  if (reserved) {
+    throw new TypeError(`${source} cannot be "${name}"; names that start with "failure" belong to failure evidence.`);
+  }
+  if (artifactKeys.has(key)) {
+    throw new TypeError(`${source} repeats the ${kind} name "${name}", which another step in this test already writes.`);
+  }
+  artifactKeys.add(key);
+}
+
+function validateStep(value: unknown, source: string, artifactKeys: Set<string>): void {
   const step = requireObject(value, source);
   if ('expect' in step) {
     requireExactKeys(step, ['expect'], source);
@@ -150,7 +175,7 @@ function validateStep(value: unknown, source: string): void {
       return;
     case 'keys':
       requireExactKeys(step, ['action', 'value'], source);
-      if (!Array.isArray(step.value) || !step.value.every((key) => typeof key === 'string' && key.length > 0)) {
+      if (!Array.isArray(step.value) || step.value.length === 0 || !step.value.every((key) => typeof key === 'string' && key.length > 0)) {
         throw new TypeError(`${source}.value must be a non-empty string array.`);
       }
       return;
@@ -160,7 +185,7 @@ function validateStep(value: unknown, source: string): void {
       return;
     case 'screenshot':
       requireExactKeys(step, ['action', 'name', 'target'], source);
-      requireNonEmptyString(step.name, `${source}.name`);
+      validateArtifactName('screenshot', step.name, `${source}.name`, artifactKeys);
       if (step.target !== undefined) {
         validateSelector(step.target, `${source}.target`);
       }
@@ -181,7 +206,7 @@ function validateStep(value: unknown, source: string): void {
       return;
     case 'source':
       requireExactKeys(step, ['action', 'name'], source);
-      requireNonEmptyString(step.name, `${source}.name`);
+      validateArtifactName('source', step.name, `${source}.name`, artifactKeys);
       return;
     case 'type':
       requireExactKeys(step, ['action', 'target', 'text'], source);
@@ -201,13 +226,21 @@ function validateStep(value: unknown, source: string): void {
       if (step.target === undefined && step.until === undefined) {
         throw new TypeError(`${source} requires "target" or "until".`);
       }
-      if (step.timeoutMs !== undefined && (!Number.isInteger(step.timeoutMs) || (step.timeoutMs as number) < 0)) {
-        throw new TypeError(`${source}.timeoutMs must be a non-negative integer.`);
+      if (step.timeoutMs !== undefined) {
+        if (!Number.isInteger(step.timeoutMs) || (step.timeoutMs as number) < 0 || (step.timeoutMs as number) > maximumDesktopStoryWaitMs) {
+          throw new TypeError(`${source}.timeoutMs must be an integer from 0 to ${maximumDesktopStoryWaitMs} milliseconds.`);
+        }
       }
       return;
     default:
       throw new TypeError(`${source}.action "${step.action}" is not supported.`);
   }
+}
+
+/** Checks one expectation, for callers that build it at run time instead of reading it from a validated plan. */
+export function validateDesktopExpectation(value: unknown, source = 'expectation'): DesktopStoryExpectation {
+  validateExpectation(value, source);
+  return value as DesktopStoryExpectation;
 }
 
 function validateExpectation(value: unknown, source: string): void {
@@ -295,6 +328,13 @@ function validateEnumArray<T extends string>(value: unknown, allowed: readonly T
   }
   if (!Array.isArray(value) || !value.every((item) => typeof item === 'string' && allowed.includes(item as T))) {
     throw new TypeError(`${source} contains an unsupported value.`);
+  }
+  if (value.length === 0) {
+    throw new TypeError(`${source} must not be empty; omit it to apply everywhere.`);
+  }
+  const duplicate = value.find((item, index) => value.indexOf(item) !== index);
+  if (duplicate !== undefined) {
+    throw new TypeError(`${source} contains duplicate "${duplicate}".`);
   }
 }
 

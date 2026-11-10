@@ -192,6 +192,17 @@ export type ResolvedDesktopCaseOptions = DesktopCaseOptions & {
   inputSource: 'declared' | 'derived';
 };
 
+/**
+ * The instant a quarantine date begins, in UTC milliseconds, or `undefined` for text that is not a real calendar date.
+ * The date is parsed and printed back, so `2026-13-01` and `2026-02-30` are rejected instead of becoming `NaN` or rolling
+ * over into the next month.
+ */
+export function parseDesktopQuarantineDate(value: unknown): number | undefined {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
+  const instant = Date.parse(`${value}T00:00:00Z`);
+  return Number.isFinite(instant) && new Date(instant).toISOString().startsWith(value) ? instant : undefined;
+}
+
 const physicalRequirements = new Set<DesktopRequirement>(['physical-click', 'keyboard', 'wheel']);
 const accessibleRequirements = new Set<DesktopRequirement>(['accessibility-click', 'perform-accessibility-action']);
 /** Requirements that promise input, so receipts can show one went unused. */
@@ -203,20 +214,28 @@ const requirementSet = new Set<string>(desktopRequirements);
 
 /**
  * Derives a case's input lane from what it requires. A case that needs both transports runs only in the physical lane,
- * whose sessions also deliver declared accessible input, and must say so with an explicit `input: 'physical'`.
+ * whose sessions also deliver declared accessible input, and must say so with an explicit `input: 'physical'`. Requirements
+ * add up across enclosing groups, so the ones named in an error may come from a group rather than the case itself.
  */
-export function resolveDesktopInput(input?: DesktopInput, requires: readonly DesktopRequirement[] = []): DesktopInput {
-  const physical = requires.some((requirement) => physicalRequirements.has(requirement));
-  const accessible = requires.some((requirement) => accessibleRequirements.has(requirement));
-  if (physical && accessible) {
+export function resolveDesktopInput(
+  input?: DesktopInput,
+  requires: readonly DesktopRequirement[] = [],
+  source = 'desktop test options',
+): DesktopInput {
+  const physicalNames = requires.filter((requirement) => physicalRequirements.has(requirement));
+  const accessibleNames = requires.filter((requirement) => accessibleRequirements.has(requirement));
+  if (physicalNames.length > 0 && accessibleNames.length > 0) {
     if (input === 'physical') return input;
     throw new TypeError(
-      'A desktop test that requires both physical and accessible input must declare input: "physical", whose sessions deliver both; otherwise split the case.',
+      `${source} requires physical input (${physicalNames.join(', ')}) and accessible input (${accessibleNames.join(', ')}), so it must declare input: "physical", whose sessions deliver both; otherwise split the case.`,
     );
   }
-  const derived = physical ? 'physical' : accessible ? 'accessible' : 'both';
+  const derived = physicalNames.length > 0 ? 'physical' : accessibleNames.length > 0 ? 'accessible' : 'both';
   if (input !== undefined && derived !== 'both' && input !== derived) {
-    throw new TypeError(`input "${input}" cannot widen the modality derived from requires ("${derived}").`);
+    const implied = derived === 'physical' ? physicalNames : accessibleNames;
+    throw new TypeError(
+      `${source}.input "${input}" conflicts with the "${derived}" input that its requirements imply (${implied.join(', ')}); remove the declaration or the requirement.`,
+    );
   }
   return input ?? derived;
 }
@@ -254,15 +273,28 @@ export function validateDesktopCaseOptions(value: unknown, source = 'desktop tes
     exactKeys(quarantine, ['issue', 'reason', 'expires', 'platforms', 'input'], `${source}.quarantine`);
     nonEmptyString(quarantine.issue, `${source}.quarantine.issue`);
     nonEmptyString(quarantine.reason, `${source}.quarantine.reason`);
-    if (typeof quarantine.expires !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(quarantine.expires)) {
-      throw new TypeError(`${source}.quarantine.expires must be an ISO date.`);
+    if (parseDesktopQuarantineDate(quarantine.expires) === undefined) {
+      throw new TypeError(`${source}.quarantine.expires must be a real calendar date written as YYYY-MM-DD.`);
     }
     if (quarantine.input !== undefined && !['accessible', 'physical'].includes(quarantine.input as string)) {
       throw new TypeError(`${source}.quarantine.input must be accessible or physical.`);
     }
     validatePlatforms(quarantine.platforms, `${source}.quarantine.platforms`);
   }
-  const resolvedInput = resolveDesktopInput(options.input as DesktopInput | undefined, requires);
+  const resolvedInput = resolveDesktopInput(options.input as DesktopInput | undefined, requires, source);
+  const casePlatforms = options.platforms as DesktopPlatforms | undefined;
+  if (options.unsupported !== undefined) {
+    assertGapCanApply(casePlatforms, (options.unsupported as { platforms: DesktopPlatforms }).platforms, `${source}.unsupported.platforms`);
+  }
+  if (options.quarantine !== undefined) {
+    const quarantine = options.quarantine as NonNullable<DesktopCaseOptions['quarantine']>;
+    if (quarantine.platforms) assertGapCanApply(casePlatforms, quarantine.platforms, `${source}.quarantine.platforms`);
+    if (quarantine.input && resolvedInput !== 'both' && resolvedInput !== quarantine.input) {
+      throw new TypeError(
+        `${source}.quarantine.input "${quarantine.input}" never overlaps the case's "${resolvedInput}" input, so the quarantine could never apply.`,
+      );
+    }
+  }
   return {
     ...(options.input === undefined ? {} : { input: options.input as DesktopInput }),
     ...(options.requires === undefined ? {} : { requires }),
@@ -326,8 +358,18 @@ function mergeDeclaredInput(
   const enclosing = parent.inputSource === 'declared' && parent.input !== 'both' ? parent.input : undefined;
   if (child.inputSource !== 'declared') return enclosing;
   if (enclosing && child.input !== enclosing)
-    throw new TypeError(`${source}.input "${child.input}" cannot change the enclosing group's "${enclosing}".`);
+    throw new TypeError(
+      `${source}.input "${child.input}" cannot change the enclosing group's declared input "${enclosing}"; a nested declaration can only repeat it.`,
+    );
   return child.input;
+}
+
+/** A gap on platforms the case never runs on would never apply, which is almost always a typo or a stale group. */
+function assertGapCanApply(casePlatforms: DesktopPlatforms | undefined, gapPlatforms: DesktopPlatforms, source: string): void {
+  const overlaps = endpoints.some(
+    (endpoint) => matchesDesktopPlatforms(casePlatforms, endpoint) && matchesDesktopPlatforms(gapPlatforms, endpoint),
+  );
+  if (!overlaps) throw new TypeError(`${source} never overlaps the platforms the case runs on, so the gap could never apply.`);
 }
 
 function intersectScope(

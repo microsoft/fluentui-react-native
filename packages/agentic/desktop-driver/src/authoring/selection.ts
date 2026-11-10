@@ -1,5 +1,5 @@
 import type { DesktopEndpoint } from '../protocol/types.js';
-import { matchesDesktopPlatforms, matchesDesktopScope } from './input.js';
+import { matchesDesktopPlatforms, matchesDesktopScope, parseDesktopQuarantineDate } from './input.js';
 import type { DesktopInputLane, DesktopRequirement, DesktopScopeDomains, DesktopScopeValues, ResolvedDesktopCaseOptions } from './input.js';
 
 /** Why a declared case is not part of a run. Excluded cases are not tests, so they are counted and never reported as skipped. */
@@ -26,14 +26,15 @@ export type DesktopCaseDecision =
 /**
  * Decides one declared case before it executes. The first applicable reason wins, in platform, scope, input order, so a
  * case never counts against two exclusions. A declared gap is resolved here too, which is why an expired quarantine
- * stops the run before anything executes.
+ * stops the run before anything executes. A quarantine stops applying at 00:00:00 UTC on its `expires` date: the run
+ * on that date, and every later one, fails, so the date is the first day without the quarantine.
  */
 export function decideDesktopCase(descriptor: ResolvedDesktopCaseOptions, target: DesktopCaseTarget, source: string): DesktopCaseDecision {
   if (!matchesDesktopPlatforms(descriptor.platforms, target.endpoint)) return { kind: 'excluded', reason: 'platform' };
   if (!matchesDesktopScope(descriptor.scope, target.values, target.domains, `${source} scope`))
     return { kind: 'excluded', reason: 'scope' };
   if (target.lane && descriptor.input !== 'both' && descriptor.input !== target.lane) return { kind: 'excluded', reason: 'input' };
-  const gap = declaredGap(descriptor, target);
+  const gap = declaredGap(descriptor, target, source);
   return gap ? { kind: 'gap', gap } : { kind: 'run' };
 }
 
@@ -99,6 +100,7 @@ const requirementFeature: Record<Exclude<DesktopRequirement, 'click'>, string> =
 function declaredGap(
   descriptor: ResolvedDesktopCaseOptions,
   { endpoint, lane, now = Date.now() }: DesktopCaseTarget,
+  source: string,
 ): DesktopDeclaredGap | undefined {
   if (descriptor.unsupported && matchesDesktopPlatforms(descriptor.unsupported.platforms, endpoint)) {
     return { kind: 'unsupported', reason: descriptor.unsupported.reason };
@@ -109,8 +111,10 @@ function declaredGap(
     (!quarantine.platforms || matchesDesktopPlatforms(quarantine.platforms, endpoint)) &&
     (!quarantine.input || quarantine.input === lane)
   ) {
-    if (Date.parse(`${quarantine.expires}T00:00:00Z`) < now)
-      throw new Error(`Quarantine ${quarantine.issue} expired on ${quarantine.expires}.`);
+    // A date that does not parse must not read as "not yet expired", so it fails the same way an expired one does.
+    const expiry = parseDesktopQuarantineDate(quarantine.expires);
+    if (expiry === undefined) throw new Error(`Quarantine ${quarantine.issue} has an invalid expiry "${quarantine.expires}" on ${source}.`);
+    if (expiry <= now) throw new Error(`Quarantine ${quarantine.issue} expired on ${quarantine.expires}. Fix or remove it on ${source}.`);
     return { kind: 'quarantine', reason: `${quarantine.issue}: ${quarantine.reason}` };
   }
   return undefined;
