@@ -100,8 +100,12 @@ export const artifactPageBytes = { ceiling: 1024 * 1024, default: 1024 * 1024, f
 /** The most steps one `sequence` runs. Its checks share one `checkWaitMs` ceiling, so it holds the queue no longer. */
 export const maxSequenceSteps = 8;
 
-/** The first and the longest pause between a waiting check's evaluations. Host events end a pause early. */
-export const checkPollMs = { first: 100, longest: 1_000 } as const;
+/**
+ * The first and the longest pause between a waiting check's evaluations, and the least an event leaves of one. Host
+ * events end a pause early, but not before `minimum` or the time the last evaluation took, whichever is longer, so a
+ * burst of events cannot run walks of the application back to back.
+ */
+export const checkPollMs = { first: 100, longest: 1_000, minimum: 100 } as const;
 
 /** The longest exact name, value, or text a check compares. */
 export const maxExpectedTextLength = 1_024;

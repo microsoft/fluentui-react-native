@@ -45,6 +45,11 @@ export type OperationCapabilities = {
   /** Performing one named accessibility action an element publishes, such as a custom `Toggle` or `AXShowMenu`. */
   readonly accessibilityActions: boolean;
   readonly boundedObservation: boolean;
+  /**
+   * False when the session's input mode requires a clear by one mechanism that the target cannot perform. Absent means
+   * nothing is known to prevent it; the host still refuses at dispatch.
+   */
+  readonly clear?: boolean;
   readonly elementCapture: boolean;
   readonly keyboard: boolean;
   /** A synthesized pointer click at the element's hit-tested centre. */

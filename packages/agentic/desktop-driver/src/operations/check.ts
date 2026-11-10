@@ -10,7 +10,7 @@ import { referenceFailureError } from './refs.js';
 import { registerOperation } from './runtime.js';
 import type { OperationRuntime } from './runtime.js';
 import { flushLedger, interpretFailure } from './sampling.js';
-import { searchSelector, selectorKeys, selectorSchema } from './selector.js';
+import { searchSelector, selectorKeys, selectorNeedsContent, selectorSchema } from './selector.js';
 import type { Selector, SelectorSearch } from './selector.js';
 import { budgetField, referenceSchema, warningSchema } from './shapes.js';
 import { clipText, neutralizeText } from './text.js';
@@ -254,6 +254,10 @@ async function evaluateSelector(runtime: OperationRuntime, input: CheckOptions &
   const sampled = await searchSelector(runtime, input.find, { issueUnique: input.expect !== undefined || input.matches === 'unique' });
   const search = sampled.value;
   const base = { search, window: sampled.sample.window };
+  // A fact the provider does not read at all is not one a later search will find.
+  if (search.classification.reasons.includes('unsupported-fact')) {
+    return { ...base, status: 'unsupported', terminal: true };
+  }
   if (input.matches !== undefined) {
     const status = countStatus(search, input.matches);
     return { ...base, ...(search.proof ? { proof: search.proof } : {}), status, terminal: status === 'passed' };
@@ -294,12 +298,10 @@ function watchHost(runtime: OperationRuntime, window: () => string | undefined) 
     dispose(): void {
       unsubscribe?.();
     },
-    pause(ms: number): Promise<void> {
-      if (changed) {
-        changed = false;
-        return Promise.resolve();
-      }
+    pause(ms: number, minimumMs: number): Promise<void> {
+      const earliest = Date.now() + Math.min(ms, minimumMs);
       return new Promise((resolve) => {
+        let timer: ReturnType<typeof setTimeout> | undefined;
         const done = () => {
           clearTimeout(timer);
           runtime.signal.removeEventListener('abort', done);
@@ -307,8 +309,16 @@ function watchHost(runtime: OperationRuntime, window: () => string | undefined) 
           changed = false;
           resolve();
         };
-        const timer = setTimeout(done, ms);
-        wake = done;
+        // A change ends the pause, but not before the minimum has passed since the evaluation that came before it.
+        const early = () => {
+          clearTimeout(timer);
+          timer = setTimeout(done, Math.max(0, earliest - Date.now()));
+        };
+        timer = setTimeout(done, ms);
+        wake = early;
+        if (changed) {
+          early();
+        }
         runtime.signal.addEventListener('abort', done, { once: true });
       });
     },
@@ -323,9 +333,12 @@ function evaluate(runtime: OperationRuntime, input: CheckOptions): Promise<Evalu
   return input.find ? evaluateSelector(runtime, { ...input, find: input.find }) : evaluateReference(runtime, input.ref!, input.expect!);
 }
 
-/** True when the check compares displayed content, which the operator's content policy governs. */
+/** True when the check searches or compares displayed content, which the operator's content policy governs. */
 export function checkNeedsContent(input: CheckOptions): boolean {
-  return expectationKeys.some((key) => contentKeys.has(key) && input.expect?.[key] !== undefined);
+  return (
+    (input.find !== undefined && selectorNeedsContent(input.find)) ||
+    expectationKeys.some((key) => contentKeys.has(key) && input.expect?.[key] !== undefined)
+  );
 }
 
 /** Evaluates one check, waiting as asked. Shared by `check` and by the check steps of `sequence`. */
@@ -340,7 +353,9 @@ export async function runCheck(runtime: OperationRuntime, input: CheckOptions): 
   try {
     for (let pauseMs: number = checkPollMs.first; ; pauseMs = Math.min(checkPollMs.longest, pauseMs * 2)) {
       attempts += 1;
+      const evaluationStartedAt = Date.now();
       evaluation = await evaluate(runtime, input);
+      const evaluationMs = Date.now() - evaluationStartedAt;
       if (evaluation.terminal || input.waitMs === 0) {
         break;
       }
@@ -349,7 +364,7 @@ export async function runCheck(runtime: OperationRuntime, input: CheckOptions): 
         timedOut = true;
         break;
       }
-      await watcher.pause(Math.min(pauseMs, remaining));
+      await watcher.pause(Math.min(pauseMs, remaining), Math.max(checkPollMs.minimum, evaluationMs));
       if (runtime.signal.aborted) {
         throw cancelledError();
       }

@@ -12,6 +12,7 @@ import { assertContentAllowed, requireBoundedObservation } from './policy.js';
 import { registerOperation } from './runtime.js';
 import type { OperationRuntime } from './runtime.js';
 import { operationSchemaReference } from './schemaReferences.js';
+import { selectorNeedsContent } from './selector.js';
 
 const step = z.union([
   z.strictObject({ act: operationSchemaReference(actInput, 'act', 'input') }),
@@ -98,11 +99,9 @@ function preflight(runtime: OperationRuntime, input: SequenceOptions): void {
     assertNotQuarantined(runtime);
     actions.forEach((action) => assertActionSupported(runtime, action));
   }
-  assertContentAllowed(
-    runtime,
-    input.steps.some((entry) => 'check' in entry && checkNeedsContent(entry.check)) ||
-      (input.observe !== undefined && observeNeedsContent(input.observe)),
-  );
+  const stepNeedsContent = (entry: Step) =>
+    'check' in entry ? checkNeedsContent(entry.check) : entry.act.find !== undefined && selectorNeedsContent(entry.act.find);
+  assertContentAllowed(runtime, input.steps.some(stepNeedsContent) || (input.observe !== undefined && observeNeedsContent(input.observe)));
 }
 
 async function runStep(runtime: OperationRuntime, entry: Step): Promise<{ outcome: StepOutcome; passed: boolean }> {
