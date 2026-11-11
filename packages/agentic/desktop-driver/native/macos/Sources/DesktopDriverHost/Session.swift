@@ -46,6 +46,14 @@ struct LoginSessionState {
     return nil
   }
 
+  /// Physical input fails closed: a session that cannot be read cannot be shown to be unlocked and on the console.
+  var inputUnavailableReason: String? {
+    guard available else {
+      return "The macOS login session could not be read, so the helper cannot tell whether the screen is locked or this is the active console session. Unlock the login session and retry from the user's session."
+    }
+    return unavailableReason
+  }
+
   var json: JSONObject {
     guard available else {
       return [
@@ -75,10 +83,15 @@ struct LoginSessionState {
   }
 }
 
-/// Fails with an explicit session diagnosis when the login session explains an automation failure.
-func failIfSessionUnavailable(_ operation: String, data: JSONObject = [:]) throws {
-  let session = LoginSessionState.current()
-  guard let reason = session.unavailableReason else {
+/// Fails with an explicit session diagnosis when the login session explains an automation failure. `requireReadable`
+/// also refuses a session the helper cannot read, for operations that must not run against a locked screen.
+func failIfSessionUnavailable(
+  _ operation: String,
+  data: JSONObject = [:],
+  session: LoginSessionState = LoginSessionState.current(),
+  requireReadable: Bool = false
+) throws {
+  guard let reason = requireReadable ? session.inputUnavailableReason : session.unavailableReason else {
     return
   }
   var diagnostic = data

@@ -25,15 +25,22 @@ final class Driver {
   private let accessibility: AccessibilityEngine
   private let input: InputController
   private let capture = CaptureEngine()
-  private let inputLock = PhysicalInputLock.shared
+  private let inputLock: PhysicalInputLock
   private var persistentInputLock = false
   // Commands execute serially on the worker thread, so one current journal entry is sufficient.
   private var journalEntry: Int?
 
-  init(effects: EffectLedger = EffectLedger()) {
+  /// `input` and `inputLock` are replaceable so self-tests drive the real command paths without posting events or
+  /// holding the machine's input lock.
+  init(
+    effects: EffectLedger = EffectLedger(),
+    input: InputController? = nil,
+    inputLock: PhysicalInputLock = .shared
+  ) {
     self.effects = effects
+    self.inputLock = inputLock
     accessibility = AccessibilityEngine(effects: effects)
-    input = InputController(effects: effects)
+    self.input = input ?? InputController(effects: effects)
   }
 
   /// Publishes advisory `window-closed` events for tracked windows that Accessibility reports destroyed.
@@ -103,10 +110,11 @@ final class Driver {
     case "closeApplication":
       let lease = try requireObject(params["lease"], "The closeApplication request is missing its lease.")
       let leaseID = try requireString(lease, "id")
-      for windowID in applications.windowIDs(for: leaseID) {
+      // Element records go only once the application is proven gone: a failed close keeps the lease, and the caller
+      // still needs the records to retry.
+      for windowID in try applications.closeApplication(leaseID, token: token) {
         accessibility.forgetWindow(windowID)
       }
-      _ = try applications.closeApplication(leaseID, token: token)
       return CommandResult()
     case "windows":
       let lease = try requireObject(params["lease"], "The windows request is missing its lease.")
@@ -118,18 +126,23 @@ final class Driver {
     case "closeWindow":
       let windowID = try requireString(params, "windowId")
       let window = try applications.requireWindow(windowID)
-      applications.windowEvents.beginHelperClose(windowID: windowID)
-      do {
-        try closeWindow(window)
-      } catch {
-        applications.windowEvents.cancelHelperClose(windowID: windowID)
-        throw error
+      try withFocusLock(token: token) {
+        applications.windowEvents.beginHelperClose(windowID: windowID)
+        do {
+          try closeWindow(window)
+        } catch {
+          applications.windowEvents.cancelHelperClose(windowID: windowID)
+          throw error
+        }
       }
       accessibility.forgetWindow(windowID)
       applications.forgetWindow(windowID)
       return CommandResult()
     case "activate":
-      try activate(try applications.requireWindow(try requireString(params, "windowId")), token: token)
+      let window = try applications.requireWindow(try requireString(params, "windowId"))
+      try withFocusLock(token: token) {
+        try activate(window, token: token)
+      }
       return CommandResult()
     case "getWindowRect":
       let window = try applications.requireWindow(try requireString(params, "windowId"))
@@ -137,7 +150,10 @@ final class Driver {
     case "setWindowRect":
       let window = try applications.requireWindow(try requireString(params, "windowId"))
       let rect = try requireObject(params["rect"], "The setWindowRect request is missing its rectangle.")
-      return CommandResult(result: rectJSON(try setWindowRect(window, requested: rect, token: token)))
+      let frame = try withFocusLock(token: token) {
+        try setWindowRect(window, requested: rect, token: token)
+      }
+      return CommandResult(result: rectJSON(frame))
     case "find":
       let root = try requireObject(params["root"], "The find request requires a root and a selector.")
       let selector = try requireObject(params["selector"], "The find request requires a root and a selector.")
@@ -216,6 +232,11 @@ final class Driver {
       }
       return CommandResult()
     case "releaseActions":
+      // With nothing pressed there is nothing to release, so an idle helper must not queue behind another helper's
+      // physical input for a release that cannot do anything.
+      guard persistentInputLock || input.hasDepressedInput else {
+        return CommandResult()
+      }
       try withPhysicalInput(token: token) {
         input.releaseAll()
       }
@@ -253,7 +274,11 @@ final class Driver {
       )
     case "dispose":
       releaseInput()
-      applications.dispose(token: token)
+      try applications.dispose(token: token) { windowIDs in
+        for windowID in windowIDs {
+          accessibility.forgetWindow(windowID)
+        }
+      }
       accessibility.reset()
       return CommandResult()
     default:
@@ -581,6 +606,12 @@ final class Driver {
       }
       try input.typeText(text, token: token)
     }
+  }
+
+  /// Focus and geometry changes move keyboard focus and windows another helper may be typing into, so they wait for
+  /// the same cross-process lock as physical input. Unlike `withPhysicalInput` they never release input already held.
+  private func withFocusLock<T>(token: CancellationToken, _ body: () throws -> T) throws -> T {
+    try inputLock.withLock(token: token, timeoutMilliseconds: 30_000, policy: .fail, body)
   }
 
   private func withPhysicalInput<T>(

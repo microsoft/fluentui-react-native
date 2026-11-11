@@ -633,13 +633,23 @@ func axFrame(_ element: AXUIElement) throws -> CGRect {
   return CGRect(origin: position, size: size)
 }
 
-func axOptionalFrame(_ element: AXUIElement) throws -> CGRect {
+/// The element's screen frame, or nil when it does not publish both a position and a size. Callers that report a
+/// measurement must not turn nil into an empty frame: an element whose geometry cannot be read is not known to be hidden.
+func axReadableFrame(_ element: AXUIElement) throws -> CGRect? {
   let position = axPoint(try copyOptionalAXAttribute(element, kAXPositionAttribute))
   let size = axSize(try copyOptionalAXAttribute(element, kAXSizeAttribute))
   guard let position, let size else {
-    return .zero
+    return nil
   }
   return CGRect(origin: position, size: size)
+}
+
+/// Whether an element is visible given the geometry that could be read: unsupported without geometry, never false.
+func visibleState(hidden: Bool?, frame: CGRect?) -> SupportedBool {
+  guard let frame else {
+    return .unsupported("The element does not publish readable geometry.")
+  }
+  return .supported(hidden != true && frame.width > 0 && frame.height > 0)
 }
 
 struct CoreGraphicsWindowCandidate {

@@ -48,16 +48,34 @@ struct ReleaseLedger {
   let buttons: [Int]
 }
 
+/// What the input controller needs from the operating system. Self-tests replace it to record posted events and to
+/// simulate permission, session and pointer state without moving the real pointer.
+struct InputEnvironment {
+  var post: (CGEvent) -> Void
+  var isTrusted: () -> Bool
+  var session: () -> LoginSessionState
+  var pointerLocation: () -> CGPoint?
+
+  static let system = InputEnvironment(
+    post: { $0.post(tap: .cghidEventTap) },
+    isTrusted: { AXIsProcessTrusted() },
+    session: { LoginSessionState.current() },
+    pointerLocation: { CGEvent(source: nil)?.location }
+  )
+}
+
 final class InputController {
   private let source = CGEventSource(stateID: .hidSystemState)
   private let effects: EffectLedger
+  private let environment: InputEnvironment
   private var pressedKeys: [PressedKey] = []
   private var pressedButtons: [Int] = []
   private(set) var pointer: CGPoint = .zero
   private var pointerInitialized = false
 
-  init(effects: EffectLedger = EffectLedger()) {
+  init(effects: EffectLedger = EffectLedger(), environment: InputEnvironment = .system) {
     self.effects = effects
+    self.environment = environment
   }
 
   var hasDepressedInput: Bool {
@@ -68,11 +86,11 @@ final class InputController {
   var depressedButtonCount: Int { pressedButtons.count }
 
   func physicalInputAvailable() -> Bool {
-    AXIsProcessTrusted()
+    environment.isTrusted()
   }
 
   func syncPointer() {
-    if let position = CGEvent(source: nil)?.location {
+    if let position = environment.pointerLocation() {
       pointer = position
       pointerInitialized = true
     }
@@ -93,7 +111,8 @@ final class InputController {
         x: start.x + (target.x - start.x) * progress,
         y: start.y + (target.y - start.y) * progress
       )
-      try postMouse(type: moveEventType(), point: position, button: pressedButtons.last ?? 0, counted: false)
+      // Moving with a button held is a drag the application can act on; a bare move only places the pointer.
+      try postMouse(type: moveEventType(), point: position, button: pressedButtons.last ?? 0, counted: !pressedButtons.isEmpty)
       pointer = position
       if step < steps {
         try token.wait(milliseconds: max(1, duration / steps))
@@ -101,9 +120,10 @@ final class InputController {
     }
     pointer = target
     try token.wait(milliseconds: 16)
-    if let observed = CGEvent(source: nil)?.location,
-      abs(observed.x - target.x) > 2 || abs(observed.y - target.y) > 2
-    {
+    guard let observed = environment.pointerLocation() else {
+      try fail(ErrorCode.inputFailed, "macOS did not report the pointer position, so the move to the requested native element coordinate is unverified.")
+    }
+    if abs(observed.x - target.x) > 2 || abs(observed.y - target.y) > 2 {
       try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
     }
   }
@@ -152,13 +172,14 @@ final class InputController {
       scrollWheelEvent2Source: source,
       units: .pixel,
       wheelCount: 2,
+      // Quartz scrolls up and left with positive values, while the protocol scrolls down and right with positive deltas.
       wheel1: Int32(clamping: Int((-deltaY).rounded())),
-      wheel2: Int32(clamping: Int(deltaX.rounded())),
+      wheel2: Int32(clamping: Int((-deltaX).rounded())),
       wheel3: 0
     ) else {
       try fail(ErrorCode.inputFailed, "Creating the macOS wheel event failed.")
     }
-    event.post(tap: .cghidEventTap)
+    environment.post(event)
     effects.delivered()
   }
 
@@ -285,11 +306,12 @@ final class InputController {
   // Starting new interaction also needs an unlocked console session; releases must remain possible while locked.
   private func requireInteractiveInput() throws {
     try requirePhysicalInput()
-    try failIfSessionUnavailable("Physical input")
+    try failIfSessionUnavailable("Physical input", session: environment.session(), requireReadable: true)
   }
 
-  // Counted posts are primary mutations. Pointer placement and the release of input an earlier command already counted
-  // pass `counted: false`, so cleanup after a failure cannot turn a rejected command into a partial one.
+  // Counted posts are primary mutations: key and button transitions, wheel ticks and drags. Pointer placement and the
+  // release of input an earlier command already counted pass `counted: false`, so cleanup after a failure cannot turn
+  // a rejected command into a partial one.
   private func postKey(_ stroke: KeyStroke, down: Bool, counted: Bool = true) throws {
     let event: CGEvent?
     switch stroke {
@@ -313,7 +335,7 @@ final class InputController {
     flags.subtract([.maskShift, .maskControl, .maskAlternate, .maskCommand])
     flags.formUnion(modifierFlagsAfterKey(stroke, down: down, held: pressedKeys.map(\.stroke)))
     event.flags = flags
-    event.post(tap: .cghidEventTap)
+    environment.post(event)
     if counted {
       effects.delivered()
     }
@@ -334,7 +356,10 @@ final class InputController {
     flags.subtract([.maskShift, .maskControl, .maskAlternate, .maskCommand])
     flags.formUnion(modifierFlags(for: pressedKeys.map(\.stroke)))
     event.flags = flags
-    event.post(tap: .cghidEventTap)
+    environment.post(event)
+    if counted {
+      effects.delivered()
+    }
   }
 
   private func moveEventType() -> CGEventType {
