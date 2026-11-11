@@ -689,6 +689,7 @@ export function assessUnitCollection(
         });
   if (!matching.length) reasons.push('Original reviewed unit source-input/mocking fingerprint is not current.');
   const observations: TestObservation[] = [];
+  const limitations = [...reasons];
   const raw = object(JSON.parse(report), 'Original Jest report');
   if (!Array.isArray(raw.testResults)) throw new Error('Original Jest report has no suite inventory.');
   const suiteNames = raw.testResults.map((suite) => text(object(suite, 'Jest suite').name, 'Suite path').replaceAll('\\', '/'));
@@ -696,28 +697,39 @@ export function assessUnitCollection(
     const files = control.unitFiles.filter((file) => suiteNames.some((suite) => suite === file || suite.endsWith(`/${file}`)));
     if (!files.length) continue;
     const parsed = parseJestFiles(report, files);
+    const ambiguousNames = new Set(parsed.ambiguousNames);
+    if (ambiguousNames.size)
+      limitations.push(
+        `Ambiguous Jest assertion identities for ${control.id} cannot qualify evidence: ${parsed.ambiguousNames.join('; ')}.`,
+      );
     const controlReasons = [...reasons];
     if (parsed.failed || parsed.packageRetryCounts.retries || !parsed.counts.passed || parsed.counts.skipped)
       controlReasons.push('Whole-package Jest failed, retried, or selected no passing runtime assertions.');
     if (parsed.startTime < Date.parse(context.startedAt) || parsed.endTime > Date.parse(context.finishedAt))
       controlReasons.push('Jest interval differs from ORIGINAL execution.');
-    for (const entry of parsed.entries)
+    for (const entry of parsed.entries) {
+      const entryReasons = [
+        ...controlReasons,
+        ...(ambiguousNames.has(entry.fullName) ? [`Jest assertion identity is ambiguous: ${entry.fullName}.`] : []),
+        ...(entry.reason ? [entry.reason] : []),
+      ];
       observations.push({
         scope: local ? 'local' : 'ci',
         kind: 'unit',
         controlId: control.id,
         name: entry.fullName,
         recordedOutcome: entry.status,
-        outcome: entry.status === 'passed' && controlReasons.length ? 'unverified' : entry.status,
-        reasons: [...controlReasons, ...(entry.reason ? [entry.reason] : [])],
+        outcome: entry.status === 'passed' && (controlReasons.length || ambiguousNames.has(entry.fullName)) ? 'unverified' : entry.status,
+        reasons: entryReasons,
         reportSha256: context.reportSha256,
         buildId,
       });
+    }
   }
   return {
     observations,
     limitations: [
-      ...reasons,
+      ...limitations,
       ...(local ? ['Local unit receipt has no GitHub job or same-attempt CI attestation.'] : []),
       'Jest executes a mocked React Native environment; it never qualifies native, keyboard, or screen-reader behavior.',
     ],

@@ -562,6 +562,8 @@ describe('Checkbox JavaScript unit evidence', () => {
       },
       (data: ReturnType<typeof checkboxJestFixture>) => {
         data.testResults[0].assertionResults.push(data.testResults[0].assertionResults[0]);
+        data.numTotalTests++;
+        data.numPassedTests++;
       },
       (data: ReturnType<typeof checkboxJestFixture>) => {
         data.numPassedTests = 900;
@@ -736,7 +738,7 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
     return { ...f, identity, buildId, start, env };
   }
 
-  async function localFixture() {
+  async function localFixture(prepareReport?: (report: ReturnType<typeof checkboxJestFixture>) => void) {
     const f = fixture();
     const packageRoot = path.join(f.directory, assessmentDefinition.packagePath);
     let calls = 0;
@@ -760,6 +762,7 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
         const time = Date.now();
         report.startTime = time;
         Object.assign(report.testResults[0], { startTime: time, endTime: time });
+        prepareReport?.(report);
         writeFileSync(reportPath, JSON.stringify(report));
         return 0;
       },
@@ -793,6 +796,55 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
     const ci = assessUnitCollection(f.directory, f.controls, f.collected, { ...f.environment, ci: true });
     assert.ok(ci.observations.every(({ outcome, scope }) => outcome !== 'passed' && scope === 'local'));
     assert.ok(ci.limitations.some((reason) => reason.includes('not same-attempt CI proof')));
+  });
+
+  it('reports ambiguous Jest identities without crediting duplicates or aborting other unit evidence', async () => {
+    for (const crossSuite of [false, true]) {
+      const testFile = path.posix.join(path.posix.dirname(checkboxUnitTestPath), 'ambiguous.test.tsx');
+      const companionFile = path.posix.join(path.posix.dirname(checkboxUnitTestPath), 'companion.test.tsx');
+      const repeated = {
+        fullName: 'Synthetic repeated label 0',
+        ancestorTitles: ['Synthetic'],
+        title: 'repeated label 0',
+        status: 'passed',
+        failureMessages: [],
+      };
+      const unique = { ...repeated, fullName: 'Synthetic unique assertion', title: 'unique assertion' };
+      const f = await localFixture((report) => {
+        const suite = {
+          ...report.testResults[0],
+          name: testFile,
+          assertionResults: crossSuite ? [repeated, unique] : [repeated, repeated, unique],
+        };
+        report.testResults.push(suite);
+        if (crossSuite) report.testResults.push({ ...suite, name: companionFile, assertionResults: [repeated] });
+        report.numTotalTestSuites += crossSuite ? 2 : 1;
+        report.numPassedTestSuites += crossSuite ? 2 : 1;
+        report.numTotalTests += 3;
+        report.numPassedTests += 3;
+      });
+      const selected = {
+        ...f.controls[0],
+        id: 'synthetic-control',
+        unitFiles: crossSuite ? [testFile, companionFile] : [testFile],
+      };
+      const evidence = assessUnitCollection(f.directory, [...f.controls, selected], f.collected, f.environment);
+      const duplicates = evidence.observations.filter(({ controlId, name }) => controlId === selected.id && name === repeated.fullName);
+      assert.equal(duplicates.length, 2);
+      assert.ok(
+        duplicates.every(
+          ({ recordedOutcome, outcome, reasons }) =>
+            recordedOutcome === 'passed' && outcome === 'unverified' && reasons.some((reason) => reason.includes('ambiguous')),
+        ),
+      );
+      assert.ok(evidence.limitations.some((reason) => reason.includes(selected.id) && reason.includes(repeated.fullName)));
+      const unaffected = evidence.observations.filter(({ controlId, name }) => controlId !== selected.id || name === unique.fullName);
+      assert.ok(unaffected.length > 1);
+      assert.ok(
+        unaffected.every(({ outcome }) => outcome === 'passed'),
+        evidence.limitations.join('\n'),
+      );
+    }
   });
 
   it('rejects tampered original local start bytes and prevents stale or missing local receipts from qualifying', async () => {

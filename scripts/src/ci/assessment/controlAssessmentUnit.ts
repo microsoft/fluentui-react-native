@@ -85,10 +85,12 @@ export function parseUnitContext(value: unknown): UnitContext {
 }
 
 export function parseComponentJest(content: string, definition: AssessmentDefinition) {
-  return parseJestFiles(
+  const parsed = parseJestFiles(
     content,
     definition.unit.testFiles.map((file) => `${definition.packagePath}/${file}`),
   );
+  if (parsed.ambiguousNames.length) throw new Error('Duplicate Jest assertion identity.');
+  return parsed;
 }
 
 export function parseJestFiles(content: string, testFiles: readonly string[]) {
@@ -107,8 +109,11 @@ export function parseJestFiles(content: string, testFiles: readonly string[]) {
     return matches[0];
   });
   const entries = selected.flatMap(({ entries }) => entries);
-  if (new Set(entries.map(({ fullName }) => fullName)).size !== entries.length) {
-    throw new Error('Duplicate Jest assertion identity.');
+  const names = new Set<string>();
+  const ambiguousNames = new Set<string>();
+  for (const { fullName } of entries) {
+    if (names.has(fullName)) ambiguousNames.add(fullName);
+    names.add(fullName);
   }
   const counts = { passed: 0, failed: 0, skipped: 0 };
   const suites = { passed: 0, failed: 0, skipped: 0 };
@@ -139,6 +144,7 @@ export function parseJestFiles(content: string, testFiles: readonly string[]) {
   });
   return {
     entries,
+    ambiguousNames: [...ambiguousNames],
     counts: selected.reduce(
       (counts, suite) => ({
         passed: counts.passed + suite.counts.passed,
