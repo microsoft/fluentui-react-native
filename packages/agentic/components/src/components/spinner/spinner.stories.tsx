@@ -70,7 +70,20 @@ export default meta;
 
 type Story = WdioStory<StoryObj<typeof Spinner>>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: { accessibilityLabel: 'Loading', testID: 'spinner-native-default' },
+  wdio: [
+    desktopIt(
+      'SPIN-005 exposes the native progress role and caller name independently of screenshot support',
+      async ({ browser, expect }) => {
+        const spinner = await browser.$('~spinner-native-default');
+        await expect(spinner).toExist();
+        expect(await spinner.getTagName()).toBe('progressbar');
+        expect(await spinner.getProperty('name')).toBe('Loading');
+      },
+    ),
+  ],
+};
 
 function MotionExample() {
   const reduceMotion = useReducedMotion();

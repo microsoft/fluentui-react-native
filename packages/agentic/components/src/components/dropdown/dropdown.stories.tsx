@@ -121,6 +121,30 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: [
+    desktopIt(
+      'DRP-005 enters the last option with Up and stops native focus at both list edges',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { inWindowWith } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await focusByTab(browser, 'dropdown-entry', 'dropdown-trigger');
+        await browser.keys('\uE013');
+        await expect(await browser.$('~dropdown-focus')).toHaveText('Mango');
+        await inWindowWith(context, 'dropdown-mango', async () => {
+          await expectNativeState(browser, 'dropdown-mango', 'focused', true);
+          await browser.keys('\uE015');
+          await expectNativeState(browser, 'dropdown-mango', 'focused', true);
+          await browser.keys('\uE011');
+          await expectNativeState(browser, 'dropdown-apple', 'focused', true);
+          await browser.keys('\uE013');
+          await expectNativeState(browser, 'dropdown-apple', 'focused', true);
+          await expectNativeState(browser, 'dropdown-cherry', 'focused', false);
+        });
+        await expect(await browser.$('~dropdown-selection')).toHaveText('None');
+        expect(await (await browser.$('~dropdown-trigger')).getProperty('expanded')).toBe(true);
+      },
+    ),
     desktopIt('DRP-011 exposes a named, empty, collapsed native combobox before input', async ({ browser, expect, platform }) => {
       const trigger = await browser.$('~dropdown-trigger');
       expect(await trigger.getProperty('role')).toBe('combobox');

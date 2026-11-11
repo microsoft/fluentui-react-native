@@ -2,9 +2,11 @@
 
 ## Native semantics
 
-The root is a `View` with `accessibilityRole="separator"` and defaults to
-`accessible={true}`. The role is owned by the component and is not part of the
-public root prop surface.
+The root is a `View` with `role="separator"` and defaults to
+`accessible={true}`. It also retains `accessibilityRole="separator"` for legacy
+native hosts. The ARIA `role` selects the separator mapping on Windows Fabric
+and both macOS renderers; their legacy role converters do not provide that
+mapping. Both role encodings are owned by the component.
 
 On Windows, UI Automation reports the element as a separator. On macOS,
 VoiceOver announces it as a splitter or separator with its name. Neither

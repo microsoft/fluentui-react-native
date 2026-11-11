@@ -8,6 +8,13 @@ reflects whether the popup is actually presented rather than the requested
 `open` value, so a natively dismissed popup reads as collapsed. Caller
 accessibility state merges with it.
 
+Popover registers native accessibility-tap activation on the trigger, toggling
+presence with reason `trigger`. An explicit caller accessibility-tap handler
+receives the original arguments; otherwise a supplied native event reaches
+the caller's `onPress`. Invoke's additional action notifications do not toggle
+presence again. Disabled triggers refuse activation, and controlled presence
+remains caller-owned.
+
 Win32 UI Automation projects the ExpandCollapse pattern, which carries the
 expanded state, only for an element that declares `Expand` and `Collapse`
 accessibility actions. On Win32 the trigger therefore prepends those actions

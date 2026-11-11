@@ -1,8 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { Platform, StyleSheet, type View } from 'react-native';
 import type { PressableProps, ViewStyle } from 'react-native';
 
-import { fireEvent } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
@@ -23,6 +24,93 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('ListItem', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it.each([
+    ['windows', false],
+    ['windows', true],
+    ['win32', false],
+    ['win32', true],
+  ] as const)(
+    'LIT-003 LIT-004 activates one %s native button invoke with selected=%s without owning selection',
+    async (platform, selected) => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+      const onPress = jest.fn();
+      const onAccessibilityAction = jest.fn();
+      const props = {
+        content: 'Inbox',
+        selected,
+        selectionMode: 'single',
+        onPress,
+        onAccessibilityAction,
+        accessibilityActions: [{ name: 'select' }, { name: 'invoke' }, { name: 'activate' }],
+      } as const;
+      const component = await renderListItem(props);
+      const select = { nativeEvent: { actionName: 'select' } };
+      await fireEvent(getRoot(component), 'accessibilityAction', select);
+      expect(onPress).not.toHaveBeenCalled();
+      expect(getRoot(component).props.accessibilityState.selected).toBe(selected);
+      const event = { nativeEvent: { target: 1 }, target: 1, currentTarget: 1 };
+      await fireEvent(getRoot(component), 'accessibilityTap', event);
+      const invoke = { nativeEvent: { actionName: 'invoke' } };
+      const activate = { nativeEvent: { actionName: 'activate' } };
+      await fireEvent(getRoot(component), 'accessibilityAction', invoke);
+      await fireEvent(getRoot(component), 'accessibilityAction', activate);
+      expect(onPress.mock.calls).toEqual([[event]]);
+      expect(onAccessibilityAction.mock.calls).toEqual([[select], [invoke], [activate]]);
+      expect(getRoot(component).props.accessibilityState.selected).toBe(selected);
+      await component.rerender(<ListItem {...props} disabled />);
+      await act(async () => getRoot(component).props.onAccessibilityTap(event));
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(getRoot(component).props.accessibilityState).toMatchObject({ disabled: true, selected });
+    },
+  );
+
+  it('LIT-001 retains the explicitly supplied Windows accessibility-tap handler and native event', async () => {
+    jest.replaceProperty(Platform, 'OS', 'windows');
+    const onAccessibilityTap = jest.fn();
+    const onPress = jest.fn();
+    const component = await renderListItem({ content: 'Inbox', onAccessibilityTap, onPress });
+    const event = { nativeEvent: { target: 1 }, target: 1, currentTarget: 1 };
+    await fireEvent(getRoot(component), 'accessibilityTap', event);
+    expect(onAccessibilityTap.mock.calls).toEqual([[event]]);
+    expect(getRoot(component).props.onAccessibilityTap).toBe(onAccessibilityTap);
+  });
+
+  it('LIT-001 does not invent an invoke bridge for a caller-owned non-button role', async () => {
+    jest.replaceProperty(Platform, 'OS', 'windows');
+    const component = await renderListItem({ content: 'Inbox', accessibilityRole: 'link', onPress: jest.fn() });
+    expect(component.getByRole('link').props.onAccessibilityTap).toBeUndefined();
+  });
+
+  it('LIT-001 LIT-004 retains the forwarded focus-target ref while caller props and disabled state change', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const component = await renderListItem({ ref, content: 'Inbox', accessibilityHint: 'Open inbox', testID: 'row' });
+    const target = ref.current;
+    expect(target).not.toBeNull();
+    expect(getRoot(component).props.accessibilityHint).toBe('Open inbox');
+    await component.rerender(
+      <ListItem
+        ref={ref}
+        content="Unavailable inbox"
+        disabled
+        accessibilityState={{ disabled: false, busy: true }}
+        accessibilityHint="Inbox unavailable"
+        testID="row"
+      />,
+    );
+    expect(ref.current).toBe(target);
+    expect(getRoot(component).props).toMatchObject({
+      accessibilityHint: 'Inbox unavailable',
+      accessibilityState: { disabled: true, busy: true },
+      focusable: false,
+    });
+    await component.unmount();
+    expect(ref.current).toBeNull();
+  });
+
   it.each([
     ['none', false, undefined],
     ['none', true, undefined],

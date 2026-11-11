@@ -10,6 +10,7 @@ import { Tab } from '../tab/tab';
 import { TabList } from './tablist';
 import type { TabKeyEvent, TabListProps } from './tablist.types';
 import { Input } from '../input/input';
+import { Button } from '../button/button';
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 const meta: Meta<typeof TabList> = {
@@ -52,8 +53,17 @@ export const Default: Story = {
   },
 };
 
-function FocusManagementScene({ selectionFollowsFocus = true }: { selectionFollowsFocus?: boolean }) {
+function FocusManagementScene({
+  selectionFollowsFocus = true,
+  orientation = 'horizontal',
+  circularNavigation = true,
+}: {
+  selectionFollowsFocus?: boolean;
+  orientation?: 'horizontal' | 'vertical';
+  circularNavigation?: boolean;
+}) {
   const [selectedValue, setSelectedValue] = useState('focus-panel-one');
+  const [changes, setChanges] = useState(0);
   const [selectionAtFocus, setSelectionAtFocus] = useState('none');
   const [ownerKey, setOwnerKey] = useState('none');
   const recordFocus = () => setSelectionAtFocus(selectedValue);
@@ -69,15 +79,22 @@ function FocusManagementScene({ selectionFollowsFocus = true }: { selectionFollo
       <TabList
         accessibilityLabel="Focus navigation"
         selectedValue={selectedValue}
-        onSelectionChange={setSelectedValue}
+        onSelectionChange={(value: string) => {
+          setSelectedValue(value);
+          setChanges((count) => count + 1);
+        }}
         onKeyDown={recordOwnerKey}
         selectionFollowsFocus={selectionFollowsFocus}
+        orientation={orientation}
+        circularNavigation={circularNavigation}
       >
         <Tab controls="focus-panel-one" content="One" onFocus={recordFocus} testID="focus-tab-one" />
         <Tab controls="focus-panel-disabled" content="Disabled" disabled testID="focus-tab-disabled" />
         <Tab controls="focus-panel-two" content="Two" onFocus={recordFocus} testID="focus-tab-two" />
       </TabList>
+      <Button content="After tab list" testID="focus-tab-after" />
       <StoryStatus testID="focus-tab-selection">{selectedValue}</StoryStatus>
+      <StoryStatus testID="focus-tab-changes">{String(changes)}</StoryStatus>
       <StoryStatus testID="focus-tab-selection-at-focus">{selectionAtFocus}</StoryStatus>
       <StoryStatus testID="focus-tab-owner-key">{ownerKey}</StoryStatus>
     </View>
@@ -170,6 +187,56 @@ export const ManualFocusManagement: Story = {
         await browser.keys('\uE007');
         await expectNativeState(browser, 'focus-tab-two', 'selected', true);
         await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-two');
+      },
+    ),
+  ],
+};
+
+export const VerticalKeyboardTraversal: Story = {
+  render: () => <FocusManagementScene orientation="vertical" circularNavigation={false} selectionFollowsFocus={false} />,
+  tags: ['desktop-focus'],
+  wdio: [
+    desktopIt(
+      'TBL-005 TBL-006 stops vertical focus at each edge and activates manual selection once with held Space',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'focus-tab-entry', 'focus-tab-one');
+        await browser.keys('\uE013');
+        await expectNativeState(browser, 'focus-tab-one', 'focused', true);
+        await browser.keys('\uE015');
+        await expectNativeState(browser, 'focus-tab-two', 'focused', true);
+        await browser.keys('\uE015');
+        await expectNativeState(browser, 'focus-tab-two', 'focused', true);
+        await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-one');
+        await expect(await browser.$('~focus-tab-changes')).toHaveText('0');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'tablist-space',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expect(await browser.$('~focus-tab-changes')).toHaveText(platform === 'macos' ? '1' : '0');
+          await browser.performActions([{ type: 'key', id: 'tablist-space', actions: [{ type: 'keyUp', value: '\uE00D' }] }]);
+          await expect(await browser.$('~focus-tab-changes')).toHaveText('1');
+          await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-two');
+          await expectNativeState(browser, 'focus-tab-two', 'focused', true);
+          await browser.keys('\uE004');
+          await expectNativeState(browser, 'focus-tab-after', 'focused', true);
+          await browser.keys(['\uE008', '\uE004']);
+          await expectNativeState(browser, 'focus-tab-two', 'focused', true);
+          await browser.keys('\uE011');
+          await expectNativeState(browser, 'focus-tab-one', 'focused', true);
+          await expect(await browser.$('~focus-tab-selection')).toHaveText('focus-panel-two');
+          await expect(await browser.$('~focus-tab-changes')).toHaveText('1');
+        } finally {
+          await browser.releaseActions();
+        }
       },
     ),
   ],

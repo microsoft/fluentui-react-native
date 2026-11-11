@@ -1,8 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { AccessibilityInfo, Animated, Easing, StyleSheet, processColor } from 'react-native';
+import * as React from 'react';
+import { AccessibilityInfo, Animated, Easing, StyleSheet, type View, processColor } from 'react-native';
 import type { ColorValue, ViewStyle } from 'react-native';
 
-import { waitFor } from '@testing-library/react-native';
+import { act, waitFor } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -10,6 +11,14 @@ import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
 import { Spinner } from './spinner';
 
 const reduceMotionSubscription = { remove: jest.fn() };
+
+// Keep Jest's overload inference on the boolean motion event rather than announcementFinished.
+const motionEvents: {
+  addEventListener(
+    event: 'reduceMotionChanged',
+    handler: (enabled: boolean) => void,
+  ): ReturnType<typeof AccessibilityInfo.addEventListener>;
+} = AccessibilityInfo;
 
 function renderSpinner(props: React.ComponentProps<typeof Spinner>) {
   return render(<Spinner {...props} />);
@@ -44,9 +53,60 @@ function normalizeColor(value: ColorValue) {
 }
 
 describe('Spinner', () => {
+  it('SPIN-006 stays static while the motion preference is pending and stops and resets when it changes', async () => {
+    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockReturnValue(new Promise(() => undefined));
+    const animation = { start: jest.fn(), stop: jest.fn(), reset: jest.fn() };
+    const loop = jest.spyOn(Animated, 'loop').mockReturnValue(animation);
+    const resetValue = jest.spyOn(Animated.Value.prototype, 'setValue');
+    const component = await renderSpinner({ accessibilityLabel: 'Loading messages' });
+    expect(loop).not.toHaveBeenCalled();
+    expect(StyleSheet.flatten(getSvg(component).props.style).transform).toBeUndefined();
+    const listener = jest.mocked(motionEvents.addEventListener).mock.calls.find(([event]) => event === 'reduceMotionChanged')?.[1];
+    if (!listener) throw new Error('Spinner must subscribe to the native reduced-motion setting.');
+    await act(async () => listener(false));
+    expect(animation.start).toHaveBeenCalledTimes(1);
+    expect(StyleSheet.flatten(getSvg(component).props.style).transform).toBeDefined();
+    await act(async () => listener(true));
+    expect(animation.stop).toHaveBeenCalledTimes(1);
+    expect(resetValue).toHaveBeenLastCalledWith(0);
+    expect(StyleSheet.flatten(getSvg(component).props.style).transform).toBeUndefined();
+    expect(getRoot(component).props.accessibilityState.busy).toBe(true);
+    await component.unmount();
+    expect(reduceMotionSubscription.remove).toHaveBeenCalled();
+  });
+
+  it('SPIN-002 SPIN-004 preserves caller root props and styles but owns busy state', async () => {
+    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const component = await renderSpinner({
+      ref,
+      accessibilityLabel: 'Loading messages',
+      accessibilityState: { busy: false, selected: true },
+      pointerEvents: 'box-only',
+      style: { width: 80, backgroundColor: 'purple' },
+    });
+    expect(ref.current).not.toBeNull();
+    expect(getRoot(component).props).toMatchObject({
+      accessibilityState: { busy: true, selected: true },
+      pointerEvents: 'box-only',
+      focusable: false,
+    });
+    expect(getRootStyle(component)).toMatchObject({ width: 80, height: 32, backgroundColor: 'purple' });
+    expect(getSvg(component).props.accessible).toBe(false);
+  });
+
+  it('SPIN-005 suppresses missing-name warnings only when the root is explicitly decorative', async () => {
+    jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(true);
+    const warn = jest.spyOn(console, 'warn').mockImplementation();
+    const component = await renderSpinner({ accessible: false, testID: 'decorative-spinner' });
+    expect(component.queryByRole('progressbar')).toBeNull();
+    expect(warn).not.toHaveBeenCalled();
+    expect(component.getByTestId('decorative-spinner').props.accessible).toBe(false);
+  });
+
   beforeEach(() => {
     jest.restoreAllMocks();
-    jest.spyOn(AccessibilityInfo, 'addEventListener').mockReturnValue(reduceMotionSubscription as never);
+    jest.spyOn(motionEvents, 'addEventListener').mockReturnValue(reduceMotionSubscription as never);
   });
 
   afterEach(() => {

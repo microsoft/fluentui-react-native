@@ -21,6 +21,33 @@ function IconSlotConsumer({ icon }: IconSlotConsumerProps) {
 }
 
 describe('Icon', () => {
+  it('renders no native element without a source and removes a previously selected renderer', async () => {
+    const component = await render(<Icon testID="icon" />);
+    expect(component.queryByTestId('icon')).toBeNull();
+    await component.rerender(<Icon imageSource={{ uri: 'icon.png' }} testID="icon" />);
+    expect(component.getByTestId('icon')).toBeOnTheScreen();
+    await component.rerender(<Icon testID="icon" />);
+    expect(component.queryByTestId('icon')).toBeNull();
+    expect(component.queryByRole('image')).toBeNull();
+  });
+
+  it.each(['image', 'svg'])('preserves caller accessibility on the direct %s renderer', async (source) => {
+    const semantics: IconElementProps = {
+      accessible: true,
+      accessibilityRole: 'button',
+      accessibilityLabel: 'Custom renderer',
+      accessibilityHint: 'Caller hint',
+    };
+    const component = await render(
+      source === 'image' ? <Icon {...semantics} imageSource={{ uri: 'icon.png' }} /> : <Icon {...semantics} svgSource={TestSvg} />,
+    );
+    expect(component.getByRole('button', { name: 'Custom renderer' }).props).toMatchObject({
+      accessibilityHint: 'Caller hint',
+      accessible: true,
+    });
+    expect(component.queryByRole('image')).toBeNull();
+  });
+
   it('is directly renderable', () => {
     expect(isDirectComponent(Icon)).toBe(true);
   });

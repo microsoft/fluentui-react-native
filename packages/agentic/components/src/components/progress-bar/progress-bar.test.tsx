@@ -34,6 +34,39 @@ function getIndicatorStyle(component: RenderResult) {
 }
 
 describe('ProgressBar', () => {
+  it('PGB-005 replaces the running loop on resize and stops the replacement when unmounted', async () => {
+    const first = { start: jest.fn(), stop: jest.fn(), reset: jest.fn() };
+    const second = { start: jest.fn(), stop: jest.fn(), reset: jest.fn() };
+    // Stub animation work without replacing the async renderer's microtask clock.
+    jest.spyOn(Animated, 'timing').mockReturnValue({ start: jest.fn(), stop: jest.fn(), reset: jest.fn() });
+    const loop = jest.spyOn(Animated, 'loop').mockReturnValueOnce(first).mockReturnValueOnce(second);
+    const component = await renderProgressBar({ type: 'indeterminate' });
+    await fireEvent(getTrack(component), 'layout', { nativeEvent: { layout: { width: 200, height: 4, x: 0, y: 0 } } });
+    expect(first.start).toHaveBeenCalledTimes(1);
+    await fireEvent(getTrack(component), 'layout', { nativeEvent: { layout: { width: 300, height: 4, x: 0, y: 0 } } });
+    expect(first.stop).toHaveBeenCalled();
+    expect(loop).toHaveBeenCalledTimes(2);
+    expect(second.start).toHaveBeenCalledTimes(1);
+    expect(getIndicatorStyle(component).width).toBe(105);
+    await component.unmount();
+    expect(second.stop).toHaveBeenCalled();
+  });
+
+  it('PGB-006 owns bounded values and indeterminate busy state while preserving unrelated caller state', async () => {
+    const component = await renderProgressBar({
+      progress: 35,
+      accessibilityValue: { min: -10, max: 200, now: 90, text: 'Caller value' },
+      accessibilityState: { selected: true, busy: false },
+    });
+    expect(getRoot(component).props.accessibilityValue).toEqual({ min: 0, max: 100, now: 35, text: 'Caller value' });
+    await component.rerender(
+      <ProgressBar type="indeterminate" accessibilityState={{ selected: true, busy: false }} accessibilityValue={{ now: 90 }} />,
+    );
+    expect(getRoot(component).props.accessibilityValue).toBeUndefined();
+    expect(getRoot(component).props.accessibilityState).toEqual({ selected: true, busy: true });
+    expect(getRoot(component).props.focusable).toBe(false);
+  });
+
   beforeEach(() => {
     mockUseReducedMotion.mockReturnValue(false);
   });

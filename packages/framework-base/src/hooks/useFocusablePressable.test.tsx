@@ -197,6 +197,18 @@ describe('focusable pressable', () => {
     expect(onAccessibilityTap).toHaveBeenCalledTimes(1);
   });
 
+  it('preserves the native accessibility-tap event for the owning activation handler', () => {
+    const onAccessibilityTap = jest.fn();
+    const subject = render({ onAccessibilityTap });
+    const event = { nativeEvent: { target: 1 }, target: 1, currentTarget: 1 };
+    act(() => subject.props().onAccessibilityTap(event));
+    expect(onAccessibilityTap).toHaveBeenCalledTimes(1);
+    expect(onAccessibilityTap).toHaveBeenCalledWith(event);
+    subject.update({ disabled: true, onAccessibilityTap });
+    act(() => subject.props().onAccessibilityTap(event));
+    expect(onAccessibilityTap).toHaveBeenCalledTimes(1);
+  });
+
   it('does not add native activation handlers or disabled state that the caller omitted', () => {
     const subject = render();
     expect(subject.props().disabled).toBeUndefined();
@@ -283,6 +295,114 @@ describe('focusable pressable', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it.each(['Enter', ' '])('owns one complete Win32 fallback lifecycle for held %p without manufacturing a touch event', (key) => {
+    jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+    const calls: string[] = [];
+    const onPressIn = jest.fn(() => calls.push('in'));
+    const onPressOut = jest.fn(() => calls.push('out'));
+    const onPress = jest.fn(() => calls.push('press'));
+    const subject = render({ onPressIn, onPressOut, onPress });
+    const down = { ...keyboardEvent(key, { code: 'Unidentified' }), persist: jest.fn() };
+    act(() => subject.props().onKeyDown(down));
+    expect(subject.isPressed()).toBe(true);
+    expect(down.persist).toHaveBeenCalledTimes(1);
+    expect(onPressIn).toHaveBeenCalledWith(down);
+    const repeat = keyboardEvent(key, { code: 'Unidentified' });
+    act(() => subject.props().onKeyDown(repeat));
+    expect(repeat.defaultPrevented).toBe(true);
+    expect(calls).toEqual(['in']);
+    const up = keyboardEvent(key, { code: 'Unidentified' });
+    act(() => subject.props().onKeyUp(up));
+    expect(up.defaultPrevented).toBe(true);
+    expect(subject.isPressed()).toBe(false);
+    expect(calls).toEqual(['in', 'out', 'press']);
+    expect(onPressOut).toHaveBeenCalledWith(up);
+    expect(onPress).toHaveBeenCalledWith(up);
+    act(() => {
+      subject.props().onPressOut(up);
+      subject.props().onKeyUp(keyboardEvent(key, { code: 'Unidentified' }));
+    });
+    expect(calls).toEqual(['in', 'out', 'press']);
+  });
+
+  it('retains the Win32 fallback owner when the release code becomes recognized', () => {
+    jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+    const onPressIn = jest.fn();
+    const onPressOut = jest.fn();
+    const onPress = jest.fn();
+    const subject = render({ onPressIn, onPressOut, onPress });
+    act(() => subject.props().onKeyDown(keyboardEvent(' ', { code: 'Unidentified' })));
+    const up = keyboardEvent(' ');
+    act(() => subject.props().onKeyUp(up));
+    expect(up.defaultPrevented).toBe(true);
+    expect(onPressIn).toHaveBeenCalledTimes(1);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPressOut).toHaveBeenCalledWith(up);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(subject.isPressed()).toBe(false);
+  });
+
+  it('leaves recognized Win32 press-in, release and activation to native Pressability', () => {
+    jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+    const onPressIn = jest.fn();
+    const onPressOut = jest.fn();
+    const onPress = jest.fn();
+    const subject = render({ onPressIn, onPressOut, onPress });
+    const down = keyboardEvent(' ');
+    act(() => subject.props().onKeyDown(down));
+    expect(onPressIn).not.toHaveBeenCalled();
+    act(() => subject.props().onPressIn(down));
+    const up = keyboardEvent(' ');
+    act(() => subject.props().onKeyUp(up));
+    expect(up.defaultPrevented).toBe(false);
+    expect(onPressOut).not.toHaveBeenCalled();
+    expect(onPress).not.toHaveBeenCalled();
+    act(() => {
+      subject.props().onPressOut(up);
+      subject.props().onPress(up);
+    });
+    expect(onPressIn).toHaveBeenCalledTimes(1);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(subject.isPressed()).toBe(false);
+  });
+
+  it.each(['blur', 'disable', 'intervening key', 'cancelled release'] as const)(
+    'cleans up a Win32 fallback press once after %s without a stale activation',
+    (cancellation) => {
+      jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+      const onPressIn = jest.fn();
+      const onPressOut = jest.fn();
+      const onPress = jest.fn();
+      const props = { onPressIn, onPressOut, onPress };
+      const subject = render(props);
+      act(() => subject.props().onKeyDown(keyboardEvent(' ', { code: 'Unidentified' })));
+      expect(subject.isPressed()).toBe(true);
+      if (cancellation === 'blur') {
+        act(() => subject.props().onBlur({ target: 1, currentTarget: 1 }));
+      } else if (cancellation === 'disable') {
+        subject.update({ ...props, disabled: true });
+        subject.update(props);
+      } else if (cancellation === 'intervening key') {
+        act(() => subject.props().onKeyDown(keyboardEvent('x')));
+      }
+      const up = keyboardEvent(' ', { code: 'Unidentified' });
+      if (cancellation === 'cancelled release') up.preventDefault();
+      act(() => subject.props().onKeyUp(up));
+      expect(up.defaultPrevented).toBe(true);
+      expect(onPressIn).toHaveBeenCalledTimes(1);
+      expect(onPressOut).toHaveBeenCalledTimes(1);
+      expect(onPress).not.toHaveBeenCalled();
+      expect(subject.isPressed()).toBe(false);
+      act(() => {
+        subject.props().onPressOut(up);
+        subject.props().onKeyUp(keyboardEvent(' ', { code: 'Unidentified' }));
+      });
+      expect(onPressOut).toHaveBeenCalledTimes(1);
+      expect(onPress).not.toHaveBeenCalled();
+    },
+  );
+
   it.each(['windows', 'win32'])('ends a cancelled %s native keyboard press without activating it', (platform) => {
     jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
     const onPress = jest.fn();
@@ -324,8 +444,11 @@ describe('focusable pressable', () => {
   it('rejects a stale Win32 activation before deferred detach notification', async () => {
     jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
     const onPress = jest.fn();
-    const subject = render({ onPress });
-    act(() => subject.props().onKeyDown(keyboardEvent('Enter', { code: 'Unidentified' })));
+    const onPressOut = jest.fn();
+    const subject = render({ onPress, onPressOut });
+    const down = keyboardEvent('Enter', { code: 'Unidentified' });
+    act(() => subject.props().onKeyDown(down));
+    expect(subject.isPressed()).toBe(true);
     await act(async () => {
       subject.bindings[0].focusTargetRef(null);
       const up = keyboardEvent('Enter', { code: 'Unidentified' });
@@ -333,6 +456,9 @@ describe('focusable pressable', () => {
       expect(up.defaultPrevented).toBe(true);
       expect(onPress).not.toHaveBeenCalled();
     });
+    expect(subject.isPressed()).toBe(false);
+    expect(onPressOut).toHaveBeenCalledTimes(1);
+    expect(onPressOut).toHaveBeenCalledWith(down);
   });
 
   it.each(['windows', 'win32', 'macos'])('preserves a %s keyboard press through same-instance inline-ref handoffs', (platform) => {

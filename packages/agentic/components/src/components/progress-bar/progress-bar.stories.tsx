@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { ProgressBar } from './progress-bar';
 
@@ -47,7 +49,43 @@ const meta: Meta<typeof ProgressBar> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ProgressBar>;
+type Story = WdioStory<StoryObj<typeof ProgressBar>>;
+
+export const NativeSemantics: Story = {
+  render: () => (
+    <View style={styles.nativeFrame}>
+      <ProgressBar testID="progress-native-determinate" accessibilityLabel="Uploading photos" label="Uploading photos" progress={42} />
+      <ProgressBar testID="progress-native-static" accessibilityLabel="Storage used" label="Storage used" progress={66} type="static" />
+      <ProgressBar testID="progress-native-indeterminate" accessibilityLabel="Searching" label="Searching" type="indeterminate" />
+    </View>
+  ),
+  wdio: [
+    desktopIt('PGB-006 exposes all three modes as named native progress indicators', async ({ browser, expect }) => {
+      const originalWindow = await browser.getWindowRect();
+      try {
+        // The small native startup window can leave no preview height above the addons panel.
+        await browser.setWindowRect(0, 0, Math.max(originalWindow.width, 1024), Math.max(originalWindow.height, 768));
+        for (const [id, name] of [
+          ['progress-native-determinate', 'Uploading photos'],
+          ['progress-native-static', 'Storage used'],
+          ['progress-native-indeterminate', 'Searching'],
+        ]) {
+          const progress = await browser.$(`~${id}`);
+          await expect(progress).toExist();
+          expect(await progress.getTagName()).toBe('progressbar');
+          expect(await progress.getProperty('name')).toBe(name);
+          await browser.waitUntil(async () => (await browser.getElementRect(await progress.elementId)).height > 0);
+          const bounds = await browser.getElementRect(await progress.elementId);
+          expect(bounds.width).toBeGreaterThan(0);
+          expect(bounds.width).toBeLessThanOrEqual(241);
+          expect(bounds.height).toBeGreaterThan(0);
+        }
+      } finally {
+        await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
+      }
+    }),
+  ],
+};
 
 export const Default: Story = {};
 
@@ -123,6 +161,9 @@ export const ConstrainedLayout: Story = {
 };
 
 const styles = StyleSheet.create({
+  nativeFrame: {
+    width: 240,
+  },
   constrained: {
     width: 220,
   },

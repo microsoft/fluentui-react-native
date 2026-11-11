@@ -1,11 +1,14 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import { useState } from 'react';
 import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Button } from '../button/button';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { ListItem } from './list-item';
 import type { ListItemSecondaryContentPosition, ListItemSelectionMode, ListItemSize } from './list-item.types';
 
@@ -72,9 +75,72 @@ const meta: Meta<typeof ListItem> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ListItem>;
+type Story = WdioStory<StoryObj<typeof ListItem>>;
 
 export const Default: Story = {};
+
+function ActivationProbe() {
+  const [presses, setPresses] = useState(0);
+  return (
+    <View style={styles.story}>
+      <TextInput accessibilityLabel="Row keyboard entry" testID="list-item-keyboard-entry" />
+      <ListItem
+        content="Inbox"
+        selected={false}
+        selectionMode="single"
+        onPress={() => setPresses((count) => count + 1)}
+        testID="list-item-keyboard-target"
+      />
+      <ListItem content="Unavailable" disabled onPress={() => setPresses((count) => count + 100)} />
+      <TextInput accessibilityLabel="Row keyboard exit" testID="list-item-keyboard-exit" />
+      <StoryStatus testID="list-item-keyboard-count">{`Presses: ${presses}`}</StoryStatus>
+    </View>
+  );
+}
+
+export const NativeActivation: Story = {
+  render: () => <ActivationProbe />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Activation reports to the caller without selecting the row. Disabled rows are not keyboard stops.',
+      },
+    },
+  },
+  wdio: [
+    desktopIt(
+      'LIT-003 LIT-004 activates by keyboard exactly once and skips disabled rows',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'list-item-keyboard-entry', 'list-item-keyboard-target');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~list-item-keyboard-count')).toHaveText('Presses: 1');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~list-item-keyboard-count')).toHaveText('Presses: 2');
+        await expectNativeState(browser, 'list-item-keyboard-target', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'list-item-keyboard-exit', 'focused', true);
+      },
+    ),
+    desktopIt(
+      'LIT-003 preserves unselected native state after activation',
+      {
+        requires: ['click'],
+        unsupported: {
+          platforms: ['macos'],
+          reason: 'macOS View does not project accessibilityState.selected to AXSelected (C-A11Y-005).',
+        },
+      },
+      async ({ browser, expect }) => {
+        const { expectNativeState } = await import('../../common/desktopFocus.wdio.ts');
+        await (await browser.$('~list-item-keyboard-target')).click();
+        await expect(await browser.$('~list-item-keyboard-count')).toHaveText('Presses: 1');
+        await expectNativeState(browser, 'list-item-keyboard-target', 'selected', false);
+      },
+    ),
+  ],
+};
 
 export const Overview: Story = {
   render: () => (

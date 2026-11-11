@@ -16,6 +16,11 @@ reached on its own.
 A user therefore hears one control per tag. There is no way to move to the
 dismiss glyph separately, which is intentional: the whole tag is the target.
 
+Desktop native button actions register an accessibility-tap callback. Unless
+the caller supplies its own callback, the original native event is forwarded
+to `onPress` once. Disabled tags do not activate, and activation never removes
+the tag itself.
+
 ## Naming
 
 In the default layout the label text is the accessible name. That name should

@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { Platform, Text, View } from 'react-native';
+import { Animated, Platform, Text, View } from 'react-native';
 import type { TextProps, ViewProps } from 'react-native';
 import type { ComponentProps } from 'react';
 
@@ -7,11 +7,19 @@ import { act, fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 
 import { defaultFlexTokens, defaultResolvedThemeAppearance } from '@fluentui-react-native/design/testing';
-import { directComponent } from '@fluentui-react-native/framework-base';
+import { directComponent, useReducedMotion } from '@fluentui-react-native/framework-base';
 
 import { Switch } from './switch';
 import { getSwitchThumbTranslateDistance, getSwitchThumbColorStyle, getSwitchTrackColorStyle } from './switch.styles';
 import type { SwitchState } from './switch.types';
+import { useSwitch_unstable } from './useSwitch';
+import { useSwitchStyles_unstable } from './useSwitchStyles';
+import { renderSwitch_unstable } from './renderSwitch';
+
+jest.mock('@fluentui-react-native/framework-base', () => ({
+  ...jest.requireActual('@fluentui-react-native/framework-base'),
+  useReducedMotion: jest.fn(),
+}));
 
 const ReplacementTrack = directComponent<ViewProps>((props) => <View {...props} testID={props.testID ?? 'replacement-track'} />);
 const ReplacementLabel = directComponent<TextProps>((props) => <Text {...props} testID={props.testID ?? 'replacement-label'} />);
@@ -27,6 +35,65 @@ async function flushAnimationFrame() {
 }
 
 describe('Switch', () => {
+  it('SWCH-008 skips first-mount animation and starts one eased JS transition for each later controlled change', async () => {
+    const animation = { start: jest.fn(), stop: jest.fn(), reset: jest.fn() };
+    const timing = jest.spyOn(Animated, 'timing').mockReturnValue(animation);
+    jest.mocked(useReducedMotion).mockReturnValue(false);
+    try {
+      const component = await renderSwitch({ checked: true });
+      expect(timing).not.toHaveBeenCalled();
+
+      await component.rerender(<Switch checked={false} />);
+      expect(timing).toHaveBeenCalledTimes(1);
+      const progress = timing.mock.calls[0][0];
+      expect(timing).toHaveBeenLastCalledWith(progress, {
+        toValue: 0,
+        duration: 150,
+        easing: expect.any(Function),
+        useNativeDriver: false,
+      });
+      await component.rerender(<Switch checked />);
+      expect(timing).toHaveBeenCalledTimes(2);
+      expect(timing).toHaveBeenLastCalledWith(progress, expect.objectContaining({ toValue: 1 }));
+      expect(animation.start).toHaveBeenCalledTimes(2);
+    } finally {
+      timing.mockRestore();
+      jest.mocked(useReducedMotion).mockReset();
+    }
+  });
+
+  it('SWCH-008 snaps the same progress value at both ends while reduced motion is enabled', async () => {
+    let state: SwitchState | undefined;
+    function Harness({ checked }: { checked: boolean }) {
+      state = useSwitch_unstable({ checked });
+      useSwitchStyles_unstable(state);
+      return renderSwitch_unstable(state);
+    }
+    const timing = jest.spyOn(Animated, 'timing');
+    jest.mocked(useReducedMotion).mockReturnValue(true);
+    try {
+      const component = await render(<Harness checked />);
+      expect(timing).not.toHaveBeenCalled();
+      const progress = state!.checkedProgress;
+      const setValue = jest.spyOn(progress, 'setValue');
+      try {
+        await component.rerender(<Harness checked={false} />);
+        expect(state!.checkedProgress).toBe(progress);
+        expect(setValue.mock.calls).toEqual([[0]]);
+        await component.rerender(<Harness checked />);
+        expect(state!.checkedProgress).toBe(progress);
+        expect(setValue.mock.calls).toEqual([[0], [1]]);
+        expect(timing).not.toHaveBeenCalled();
+        expect(component.getByRole('switch').props.accessibilityState.checked).toBe(true);
+      } finally {
+        setValue.mockRestore();
+      }
+    } finally {
+      timing.mockRestore();
+      jest.mocked(useReducedMotion).mockReset();
+    }
+  });
+
   it.each([
     ['switch', ['switch-spec-control']],
     ['horizontal', ['switch-spec-before', 'switch-spec-control', 'switch-spec-after']],

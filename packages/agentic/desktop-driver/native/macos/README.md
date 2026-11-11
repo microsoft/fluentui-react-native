@@ -5,6 +5,9 @@ Apple Silicon. It implements the private FDR1 protocol over stdio and uses
 public macOS APIs for application identity, accessibility, physical input, and
 capture.
 
+Native `AXSplitter` elements expose the portable `separator` role, matching
+Windows UI Automation separators.
+
 The helper is a minimal `LSUIElement` agent app with bundle identifier
 `com.microsoft.fluentui-react-native.desktop-driver`. It is unsandboxed because
 App Sandbox is incompatible with automating arbitrary applications through

@@ -4,10 +4,15 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Tab } from './tab';
 import type { TabLayout } from './tab.types';
 import { TabList } from '../tablist/tablist';
+import { Input } from '../input/input';
+import { Button } from '../button/button';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -59,9 +64,62 @@ const meta: Meta<typeof Tab> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Tab>;
+type Story = WdioStory<StoryObj<typeof Tab>>;
 
 export const Default: Story = {};
+
+function StandaloneKeyboardScene() {
+  const [presses, setPresses] = useState(0);
+  return (
+    <View style={styles.story}>
+      <Input accessibilityLabel="Standalone tab entry" testID="standalone-tab-entry" />
+      <Tab
+        controls="standalone-tab-panel"
+        accessibilityLabel="Files"
+        content="Files"
+        selected={false}
+        testID="standalone-tab"
+        onPress={() => setPresses((value) => value + 1)}
+      />
+      <Tab controls="standalone-unavailable-panel" content="Unavailable" disabled />
+      <Button content="After tab" testID="standalone-tab-after" />
+      <View nativeID="standalone-tab-panel">
+        <Text>Files panel</Text>
+      </View>
+      <View nativeID="standalone-unavailable-panel">
+        <Text>Unavailable panel</Text>
+      </View>
+      <StoryStatus testID="standalone-tab-presses">{String(presses)}</StoryStatus>
+    </View>
+  );
+}
+
+export const StandaloneKeyboard: Story = {
+  render: () => <StandaloneKeyboardScene />,
+  tags: ['desktop-focus'],
+  wdio: [
+    desktopIt(
+      'TAB-002 TAB-007 activates once per key and traverses disabled standalone tabs in both directions',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'standalone-tab-entry', 'standalone-tab');
+        const tab = await browser.$('~standalone-tab');
+        expect(await tab.getProperty('name')).toBe('Files');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~standalone-tab-presses')).toHaveText('1');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~standalone-tab-presses')).toHaveText('2');
+        await expectNativeState(browser, 'standalone-tab', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'standalone-tab-after', 'focused', true);
+        await browser.keys(['\uE008', '\uE004']);
+        await expectNativeState(browser, 'standalone-tab', 'focused', true);
+        await expect(await browser.$('~standalone-tab-presses')).toHaveText('2');
+      },
+    ),
+  ],
+};
 
 export const Overview: Story = {
   render: () => (

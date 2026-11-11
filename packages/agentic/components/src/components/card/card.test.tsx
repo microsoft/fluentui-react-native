@@ -1,9 +1,9 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
-import { fireEvent } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
 import type { RenderResult } from '@testing-library/react-native';
 
@@ -25,6 +25,61 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Card', () => {
+  it.each([
+    [479, 'column'],
+    [480, 'row'],
+    [1000, 'row'],
+  ] as const)(
+    'CRD-001 resolves horizontal flow at viewport width %s independently of a narrow caller width',
+    async (width, flexDirection) => {
+      const previousWindow = Dimensions.get('window');
+      const previousScreen = Dimensions.get('screen');
+      await act(async () => Dimensions.set({ window: { ...previousWindow, width }, screen: previousScreen }));
+      try {
+        const component = await renderCard({ direction: 'horizontal', style: { width: 120 }, testID: 'card-root' });
+        expect(getRootStyle(component)).toMatchObject({ flexDirection, width: 120, maxWidth: 720, minWidth: 0, flexShrink: 1 });
+        await component.rerender(<Card direction="vertical" style={{ width: 120 }} testID="card-root" />);
+        expect(getRootStyle(component).flexDirection).toBe('column');
+      } finally {
+        await act(async () => Dimensions.set({ window: previousWindow, screen: previousScreen }));
+      }
+    },
+  );
+
+  it.each([
+    ['small', 'default', 'base600', 'base300'],
+    ['small', 'none', 'base600', 'base600'],
+    ['large', 'default', 'base700', 'base400'],
+    ['large', 'none', 'base700', 'base700'],
+  ] as const)(
+    'CRD-003 resolves %s size and %s padding for the shell and additional nested block',
+    async (size, padding, shellRadius, nestedRadius) => {
+      const component = await renderCard({
+        size,
+        padding,
+        layout: 'nested',
+        testID: 'card-root',
+        content: { testID: 'content' },
+        content02: { testID: 'content02' },
+      });
+      expect(getRootStyle(component)).toMatchObject({
+        borderRadius: defaultFlexTokens.borderRadius[shellRadius],
+        padding: padding === 'none' ? 0 : defaultFlexTokens.spacing.componentBase300,
+        borderWidth: defaultFlexTokens.strokeWidth.thin,
+      });
+      const primary = StyleSheet.flatten(component.getByTestId('content').props.style);
+      expect(primary).toMatchObject({ flexShrink: 1, minWidth: 0, alignSelf: 'stretch' });
+      expect(primary.borderRadius).toBeUndefined();
+      expect(primary.overflow).toBeUndefined();
+      expect(StyleSheet.flatten(component.getByTestId('content02').props.style)).toMatchObject({
+        borderRadius: defaultFlexTokens.borderRadius[nestedRadius],
+        backgroundColor: defaultFlexTokens.color.backgroundNeutralTranslucent.rest,
+        flexShrink: 1,
+        overflow: 'hidden',
+      });
+    },
+  );
+
   it.each([
     [undefined, false],
     [false, true],

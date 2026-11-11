@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, type View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { render } from '../../common/renderWithTheme';
@@ -24,6 +25,23 @@ function getRootStyle(component: Awaited<ReturnType<typeof renderBadge>>): ViewS
 }
 
 describe('Badge', () => {
+  it('BDG-002 forwards the root ref and permits a deliberately empty badge without restoring default content', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const component = await renderBadge({
+      accessibilityLabel: 'Status',
+      content: null,
+      leadingIconVisible: false,
+      ref,
+      testID: 'empty-badge',
+    });
+    expect(ref.current).not.toBeNull();
+    expect(component.getByTestId('empty-badge').children).toHaveLength(0);
+    expect(component.queryByText('Badge')).toBeNull();
+    expect(getRoot(component).props).toMatchObject({ accessibilityLabel: 'Status', focusable: false });
+    await component.unmount();
+    expect(ref.current).toBeNull();
+  });
+
   it('BDG-002/BDG-004 hides an unnamed default badge and renders no unsupplied trailing icon', async () => {
     const component = await renderBadge({ testID: 'badge', trailingIconVisible: true });
 

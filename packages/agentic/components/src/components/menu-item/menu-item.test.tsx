@@ -24,6 +24,33 @@ function getRootStyle(component: RenderResult, role: 'menuitem' | 'menuitemcheck
 }
 
 describe('MenuItem', () => {
+  it.each([false, true])('MNI-002 avatar wins over both icon paths when selected is %s', async (selected) => {
+    const component = await renderMenuItem({
+      content: 'Avatar command',
+      selected,
+      avatar: { as: View, testID: 'avatar' },
+      icon: { imageSource: { uri: 'regular.png' }, testID: 'regular' },
+      selectedIcon: { imageSource: { uri: 'selected.png' }, testID: 'selected' },
+    });
+    expect(component.getByTestId('avatar').props.accessible).toBe(false);
+    expect(component.queryByTestId('regular')).toBeNull();
+    expect(component.queryByTestId('selected')).toBeNull();
+  });
+
+  it('MNI-004 ignores loading on an interactive list row and never activates a loading header', async () => {
+    const onPress = jest.fn();
+    const component = await renderMenuItem({ content: 'Command', loading: true, onPress });
+    expect(component.getByText('Command')).toBeOnTheScreen();
+    await fireEvent.press(getRoot(component));
+    expect(onPress).toHaveBeenCalledTimes(1);
+
+    await component.rerender(<MenuItem content="Command" menuStyle="section-header" loading onPress={onPress} />);
+    expect(component.queryByText('Command')).toBeNull();
+    expect(getRoot(component, 'none').props.focusable).toBe(false);
+    await fireEvent.press(getRoot(component, 'none'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
   it('renders selection without changing it on press', async () => {
     const onPress = jest.fn();
     const component = await renderMenuItem({ content: 'Inbox', hasMultiselect: true, onPress, selected: false });
@@ -189,6 +216,53 @@ describe('MenuItem inside a Menu (MNI-007)', () => {
       ...overrides,
     };
   }
+
+  it('MNI-007 reports focus, blur, hover, and keys after each original caller event', async () => {
+    const calls: string[] = [];
+    const menu = binding({
+      onRowFocus: jest.fn(() => calls.push('menu-focus')),
+      onRowBlur: jest.fn(() => calls.push('menu-blur')),
+      onRowHoverIn: jest.fn(() => calls.push('menu-hoverIn')),
+      onRowHoverOut: jest.fn(() => calls.push('menu-hoverOut')),
+      onRowKeyDown: jest.fn(() => calls.push('menu-keyDown')),
+    });
+    const handlers = {
+      onFocus: jest.fn(() => calls.push('caller-focus')),
+      onBlur: jest.fn(() => calls.push('caller-blur')),
+      onHoverIn: jest.fn(() => calls.push('caller-hoverIn')),
+      onHoverOut: jest.fn(() => calls.push('caller-hoverOut')),
+      onKeyDown: jest.fn(() => calls.push('caller-keyDown')),
+    };
+    const component = await render(
+      <MenuItemMenuContext.Provider value={menu}>
+        <MenuItem content="Command" {...handlers} />
+      </MenuItemMenuContext.Provider>,
+    );
+    const event = { nativeEvent: { key: 'Home' } };
+    for (const [name, handler] of [
+      ['focus', handlers.onFocus],
+      ['blur', handlers.onBlur],
+      ['hoverIn', handlers.onHoverIn],
+      ['hoverOut', handlers.onHoverOut],
+      ['keyDown', handlers.onKeyDown],
+    ] as const) {
+      await fireEvent(getRoot(component), name, event);
+      expect(handler.mock.calls).toEqual([[event]]);
+    }
+    expect(calls).toEqual([
+      'caller-focus',
+      'menu-focus',
+      'caller-blur',
+      'menu-blur',
+      'caller-hoverIn',
+      'menu-hoverIn',
+      'caller-hoverOut',
+      'menu-hoverOut',
+      'caller-keyDown',
+      'menu-keyDown',
+    ]);
+    expect(menu.onRowKeyDown).toHaveBeenCalledWith(menu.rows[0].id, event);
+  });
 
   it('registers its label, inherits the disabled-focusable default, and reports input after caller handlers', async () => {
     const menu = binding();

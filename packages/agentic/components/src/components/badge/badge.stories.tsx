@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
 import { Badge } from './badge';
 import type { BadgeAppearance, BadgeColor, BadgeLayout, BadgeShape, BadgeSize } from './badge.types';
@@ -88,7 +90,26 @@ const meta: Meta<typeof Badge> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Badge>;
+type Story = WdioStory<StoryObj<typeof Badge>>;
+
+export const NativeSemantics: Story = {
+  render: () => (
+    <Badge
+      testID="badge-native-status"
+      accessibilityLabel="Three unread notifications"
+      content="3"
+      leadingIcon={{ fontSource: { codepoint: 0x2022, fontFamily: 'Arial' } }}
+    />
+  ),
+  wdio: [
+    desktopIt('BDG-005 exposes one named native image for an informative status', async ({ browser, expect }) => {
+      const badge = await browser.$('~badge-native-status');
+      await expect(badge).toExist();
+      expect(await badge.getTagName()).toBe('image');
+      expect(await badge.getProperty('name')).toBe('Three unread notifications');
+    }),
+  ],
+};
 
 export const Default: Story = {};
 

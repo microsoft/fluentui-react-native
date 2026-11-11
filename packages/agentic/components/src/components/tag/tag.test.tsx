@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { Platform, StyleSheet, type View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -23,6 +24,41 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Tag', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it.each(['win32', 'windows', 'macos'] as const)(
+    'TAG-004 TAG-008 forwards one %s native accessibility tap to onPress without removing the tag',
+    async (platform) => {
+      jest.replaceProperty(Platform, 'OS', platform as typeof Platform.OS);
+      const onPress = jest.fn();
+      const component = await renderTag({ content: 'Engineering', onPress });
+      const event = { nativeEvent: { target: 1 }, target: 1, currentTarget: 1 };
+      await fireEvent(getRoot(component), 'accessibilityTap', event);
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(onPress).toHaveBeenCalledWith(event);
+      expect(component.getByText('Engineering')).toBeOnTheScreen();
+      expect(component.getAllByRole('button')).toHaveLength(1);
+      await component.rerender(<Tag content="Engineering" disabled onPress={onPress} />);
+      await fireEvent(getRoot(component), 'accessibilityTap', event);
+      expect(onPress).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it('TAG-001 TAG-008 retains the forwarded native target across disabled changes and preserves unrelated accessibility state', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const component = await renderTag({ ref, content: 'Engineering', accessibilityHint: 'Remove filter' });
+    const target = ref.current;
+    expect(target).not.toBeNull();
+    expect(getRoot(component).props.accessibilityHint).toBe('Remove filter');
+    await component.rerender(<Tag ref={ref} content="Engineering" disabled accessibilityState={{ busy: true, disabled: false }} />);
+    expect(ref.current).toBe(target);
+    expect(getRoot(component).props).toMatchObject({ accessibilityState: { busy: true, disabled: true }, focusable: false });
+    await component.unmount();
+    expect(ref.current).toBeNull();
+  });
+
   it('TAG-004 leaves removal to the caller after repeated whole-tag activation', async () => {
     const onPress = jest.fn();
     const component = await renderTag({ content: 'Engineering', onPress });

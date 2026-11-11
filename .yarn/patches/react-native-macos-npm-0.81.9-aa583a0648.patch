@@ -107,7 +107,7 @@ index e7254907271b70783e886d378c7824df46e04e93..fbe1d5d7e834afb4553adb03253e34f6
    if (newTextInputProps.multiline &&
        newTextInputProps.traits.dataDetectorTypes != oldTextInputProps.traits.dataDetectorTypes) {
 diff --git a/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm b/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
-index 6e20d03f64385e3729a7517c6fb8b31f6177d52d..6710864c9e9252556f7fad00caf1bbea2e80192b 100644
+index 6e20d03f64385e3729a7517c6fb8b31f6177d52d..c45606ad4215a21ff7312c1fc35ac27dd56dd51e 100644
 --- a/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
 +++ b/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm
 @@ -35,6 +35,7 @@
@@ -162,3 +162,32 @@ index 6e20d03f64385e3729a7517c6fb8b31f6177d52d..6710864c9e9252556f7fad00caf1bbea
  #if !TARGET_OS_OSX // [macOS]
    // `accessibilityState`
    if (oldViewProps.accessibilityState != newViewProps.accessibilityState) {
+@@ -1661,8 +1687,28 @@ static NSString *RCTRecursiveAccessibilityLabel(RCTUIView *view) // [macOS]
+   return [customActions copy];
+ }
+ 
++#if TARGET_OS_OSX // [macOS
++- (BOOL)isAccessibilitySelectorAllowed:(SEL)selector
++{
++  if (selector == @selector(accessibilityPerformPress)) {
++    return _props && _eventEmitter && _props->onAccessibilityTap &&
++        [self.accessibilityElement isAccessibilityEnabled];
++  }
++  return [super isAccessibilitySelectorAllowed:selector];
++}
++#endif // macOS]
++
++#if !TARGET_OS_OSX // [macOS]
+ - (BOOL)accessibilityActivate
++#else // [macOS
++- (BOOL)accessibilityPerformPress
++#endif // macOS]
+ {
++#if TARGET_OS_OSX // [macOS
++  if (![self isAccessibilitySelectorAllowed:_cmd]) {
++    return NO;
++  }
++#endif // macOS]
+   if (_eventEmitter && _props->onAccessibilityTap) {
+     _eventEmitter->onAccessibilityTap();
+     return YES;

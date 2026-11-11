@@ -532,6 +532,8 @@ final class SelfTestRunner {
   private func testReactNativeAccessibilityFallbacks() {
     let engine = AccessibilityEngine()
     do {
+      let separatorRole = try engine.normalizeRole(kAXSplitterRole, subrole: nil)
+      check(separatorRole == "separator", "Native AX splitters expose the portable separator role")
       let checkboxRole = try engine.normalizeRole("AXUnknown", subrole: nil, value: "checkbox, unchecked")
       check(
         checkboxRole == "checkbox",
