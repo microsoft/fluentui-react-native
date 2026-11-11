@@ -22,7 +22,12 @@
           "description": "Hidden inaccessible reserve remains in layout; visible text sits in an absolute-fill vertically centered overlay without absolute positioning its own Text.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "LayoutStableText reserves layout with hidden text and overlays the visible text" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "LayoutStableText reserves layout with hidden text and overlays the visible text"
+            }
+          ]
         },
         {
           "id": "layout-stable-text-style-width",
@@ -55,7 +60,12 @@
           "description": "Visible label preserves accessible name and synthetic press while overlay is inaccessible with box-none hit testing.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "LayoutStableText preserves visible text semantics and interaction through the overlay" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "LayoutStableText preserves visible text semantics and interaction through the overlay"
+            }
+          ]
         },
         {
           "id": "layout-stable-text-root-forwarding",
@@ -83,7 +93,8 @@
           "description": "Only visible label supplies native semantics; reserve and root are absent from screen-reader traversal.",
           "source": "CONTRACT.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     }

@@ -41,14 +41,20 @@
           "description": "Uncontrolled false press becomes true and calls onChange.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Switch toggles on press and calls onChange" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Switch toggles on press and calls onChange"
+            }
+          ]
         },
         {
           "id": "switch-native-exact-once",
           "description": "Physical pointer/Enter/Space toggle exactly once with key-up Windows/Win32 and key-down macOS; repeated/stale/overlapping keys and blur/disable do not double-toggle; label presses do not toggle.",
           "source": "spec/interaction.md#keyboard",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "switch-semantic-action",
@@ -120,7 +126,12 @@
           "description": "Labeled enabled switch publishes checked=false/disabled=false, focusable true and no generated unresolved labelled-by aliases.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Switch renders a labeled switch with default unchecked semantics" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Switch renders a labeled switch with default unchecked semantics"
+            }
+          ]
         },
         {
           "id": "switch-owned-state-name",
@@ -134,7 +145,8 @@
           "description": "Narrator/VoiceOver announces one switch with setting name, availability and on/off changes including actual custom action invocation; disabled remains discoverable.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

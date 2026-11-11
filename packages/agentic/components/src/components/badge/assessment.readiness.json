@@ -73,7 +73,12 @@
           "description": "Caller background overrides component background while requested trailing icon remains present.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Badge uses the trailing icon only when requested and applies user styles last" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Badge uses the trailing icon only when requested and applies user styles last"
+            }
+          ]
         },
         {
           "id": "badge-native-visual",
@@ -92,7 +97,10 @@
           "source": "spec/accessibility.md",
           "evidence": "unit",
           "tests": [
-            { "kind": "unit", "name": "Badge BDG-002/BDG-004 hides an unnamed default badge and renders no unsupplied trailing icon" }
+            {
+              "kind": "unit",
+              "name": "Badge BDG-002/BDG-004 hides an unnamed default badge and renders no unsupplied trailing icon"
+            }
           ]
         },
         {
@@ -107,14 +115,20 @@
           "description": "An icon-only badge missing an accessible label produces its development warning.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Badge warns when an icon-only badge is missing an accessibility label" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Badge warns when an icon-only badge is missing an accessibility label"
+            }
+          ]
         },
         {
           "id": "badge-screen-reader",
           "description": "UIA/AX reads informative image/name once and omits unnamed badges; status meaning is available outside color alone.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

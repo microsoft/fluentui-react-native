@@ -31,7 +31,10 @@
           "source": "spec/interaction.md#focus-target-lifetime",
           "evidence": "unit",
           "tests": [
-            { "kind": "unit", "name": "Input composes the focus target with the inner text ref without redirecting the structural ref" }
+            {
+              "kind": "unit",
+              "name": "Input composes the focus target with the inner text ref without redirecting the structural ref"
+            }
           ]
         },
         {
@@ -128,14 +131,16 @@
           "description": "Native caret movement, selection, IME, clipboard and Tab pass through with no custom key interception; disabled skips Tab and readOnly remains readable/copyable.",
           "source": "spec/interaction.md#keyboard",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "input-screen-reader",
           "description": "UIA/AX announces editor name/value, disabled/readOnly/invalid and referenced error reason once; placeholder is not treated as a stable name.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

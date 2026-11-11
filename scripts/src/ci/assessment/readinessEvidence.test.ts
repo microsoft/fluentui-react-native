@@ -17,7 +17,7 @@ import {
   realCompiler,
 } from './readinessEvidence.ts';
 import type { EvidenceEnvironment, ExecutionCapture, ReadinessEvidence } from './readinessEvidence.ts';
-import { discoverReadinessControls } from './readinessModel.ts';
+import { discoverReadinessControls, readinessTargets } from './readinessModel.ts';
 import type { ReadinessControl } from './readinessModel.ts';
 import {
   assessReadinessControl,
@@ -28,7 +28,7 @@ import {
   upstreamCurrency,
 } from './readinessPolicy.ts';
 import type { OwnerRecord } from './readinessPolicy.ts';
-import { guardReadinessOutput, runReadinessCapture } from '../readinessCiTask.ts';
+import { formatReadinessMarkdown, guardReadinessOutput, runReadinessCapture } from '../readinessCiTask.ts';
 
 const root = fileURLToPath(new URL('../../../../', import.meta.url));
 const policyBytes = readFileSync(
@@ -217,7 +217,7 @@ function ownerRecord(kind: OwnerRecord['kind'] = 'approval'): OwnerRecord {
   const env = environment();
   return {
     schemaVersion: 1,
-    policyVersion: '4251-provisional-v1',
+    policyVersion: '4251-provisional-v2',
     kind,
     owner: 'test-owner',
     controlId: selected.id,
@@ -237,7 +237,7 @@ function ownerRecord(kind: OwnerRecord['kind'] = 'approval'): OwnerRecord {
   };
 }
 
-function signingFixture() {
+function signingFixture(kinds: OwnerRecord['kind'][] = ['approval', 'maturity-declaration']) {
   const directory = fixture();
   writeFileSync(path.join(directory, 'report.json'), '{}');
   const pair = generateKeyPairSync('ed25519');
@@ -252,7 +252,7 @@ function signingFixture() {
         publicKey,
         expiresAt: new Date(Date.now() + 120_000).toISOString(),
         controls: [control().id],
-        kinds: ['approval', 'maturity-declaration'],
+        kinds,
       },
     ],
   });
@@ -592,6 +592,254 @@ test('source outputs and cached/noncompiler substitutes are rejected', () => {
   );
   assert.equal(realCompiler(root, [...compiler, '--noCheck']), false);
   assert.equal(realCompiler(root, [process.execPath, 'jest', '-b', '--force', '--listFiles']), false);
+});
+
+test('stage-specific cumulative coverage preserves preview while exposing failed beta and missing stable checks', () => {
+  const directory = fixture();
+  const selected = control();
+  const exported = path.join(directory, 'packages', 'sample', 'src');
+  mkdirSync(exported, { recursive: true });
+  writeFileSync(path.join(exported, 'index.ts'), "export { Sample } from './components/sample/sample';");
+  assert.ok(selected.mapping);
+  selected.mapping.requirements['SMP-001'].checks.push(
+    {
+      id: 'types',
+      description: 'Public types compile',
+      source: 'SPEC.md',
+      evidence: 'type',
+      tests: [{ kind: 'type', name: selected.typeFiles[0] }],
+    },
+    {
+      id: 'native',
+      description: 'Actual native action',
+      source: 'SPEC.md',
+      evidence: 'native',
+      tests: [{ kind: 'native', name: 'sample::acts' }],
+    },
+    { id: 'visual', description: 'Actual appearance', source: 'SPEC.md', evidence: 'visual', tests: [] },
+    { id: 'reader', description: 'Actual announcement', source: 'SPEC.md', evidence: 'manual', qualification: 'screen-reader', tests: [] },
+  );
+  const evidence: ReadinessEvidence = {
+    observations: [
+      { kind: 'unit', name: 'Sample acts', recordedOutcome: 'passed', outcome: 'passed', reasons: [], reportSha256: null, buildId: null },
+      {
+        kind: 'type',
+        name: selected.typeFiles[0],
+        recordedOutcome: 'passed',
+        outcome: 'passed',
+        reasons: [],
+        reportSha256: null,
+        buildId: null,
+      },
+      {
+        kind: 'native',
+        name: 'sample::acts',
+        target: 'win32-paper',
+        input: 'physical',
+        recordedOutcome: 'failed',
+        outcome: 'failed',
+        reasons: ['Synthetic failure'],
+        reportSha256: null,
+        buildId: null,
+      },
+    ],
+    nativeSelections: [],
+    limitations: [],
+  };
+  const assess = () =>
+    assessReadinessControl({
+      root: directory,
+      control: selected,
+      policy: parseReadinessPolicy(JSON.parse(policyBytes)),
+      environment: environment(),
+      evidence,
+    });
+  const report = assess();
+  assert.equal(report.evidenceSupportedStatus, 'preview');
+  assert.equal(report.stageCoverage.find(({ level }) => level === 'preview')?.complete, true);
+  assert.equal(report.stageCoverage.find(({ level }) => level === 'beta')?.complete, false);
+  assert.ok(
+    report.missingEvidence.some(
+      ({ check, outcome, requiredFrom }) => check === 'native' && outcome === 'failed' && requiredFrom === 'beta',
+    ),
+  );
+  assert.ok(report.missingEvidence.some(({ check, requiredFrom }) => check === 'reader' && requiredFrom === 'stable'));
+  assert.equal(report.approvedStatus, null);
+  const markdown = formatReadinessMarkdown([report]);
+  assert.match(markdown, /\| preview \| true \| 0 \|/);
+  assert.match(markdown, /\| reader \| stable \| missing \|/);
+  for (const check of selected.mapping.requirements['SMP-001'].checks)
+    if (check.evidence === 'native' || check.evidence === 'visual') check.requiredFrom = 'stable';
+  assert.equal(assess().evidenceSupportedStatus, 'beta');
+  evidence.observations[0].outcome = 'failed';
+  assert.equal(assess().evidenceSupportedStatus, null);
+});
+
+test('target applicability excludes justified gaps without turning them into passes and unsupported still blocks', () => {
+  const selected = control();
+  assert.ok(selected.mapping);
+  const check = {
+    id: 'host-action',
+    description: 'Win32-specific native action',
+    source: 'SPEC.md',
+    evidence: 'native' as const,
+    tests: [{ kind: 'native' as const, name: 'sample::acts', input: 'physical' as const }],
+    applicability: Object.fromEntries(
+      readinessTargets
+        .filter((target) => target !== 'win32-paper')
+        .map((target) => [
+          target,
+          { status: 'not-applicable' as const, source: 'SPEC.md#platform-behavior', reason: 'This action is owned by Win32.' },
+        ]),
+    ),
+  };
+  selected.mapping.requirements['SMP-001'].checks = [check];
+  const evidence: ReadinessEvidence = {
+    observations: [
+      {
+        kind: 'native',
+        name: 'sample::acts',
+        target: 'win32-paper',
+        input: 'physical',
+        recordedOutcome: 'passed',
+        outcome: 'passed',
+        reasons: [],
+        reportSha256: null,
+        buildId: null,
+      },
+    ],
+    nativeSelections: [],
+    limitations: [],
+  };
+  const directory = fixture();
+  const assess = () =>
+    assessReadinessControl({
+      root: directory,
+      control: selected,
+      policy: parseReadinessPolicy(JSON.parse(policyBytes)),
+      environment: environment(),
+      evidence,
+    });
+  let report = assess();
+  assert.equal(report.requirements[0].checks[0].outcome, 'passed');
+  assert.equal(report.requirements[0].checks[0].targetResults.filter(({ outcome }) => outcome === 'not-applicable').length, 3);
+  assert.match(formatReadinessMarkdown([report]), /not-applicable \(This action is owned by Win32.; SPEC.md#platform-behavior\)/);
+  evidence.observations[0].input = 'accessible';
+  assert.equal(assess().requirements[0].checks[0].outcome, 'missing');
+  evidence.observations[0].input = 'physical';
+  selected.mapping.requirements['SMP-001'].checks[0].applicability!['win32-paper'] = {
+    status: 'unsupported',
+    source: 'SPEC.md',
+    reason: 'Host cannot provide the required action.',
+  };
+  report = assess();
+  assert.equal(report.requirements[0].checks[0].outcome, 'unsupported');
+  assert.equal(report.nativeQualification, 'incomplete');
+  selected.mapping.requirements['SMP-001'].checks[0].applicability!['win32-paper'] = {
+    status: 'not-applicable',
+    source: 'SPEC.md',
+    reason: 'No native action is owned by this contract.',
+  };
+  report = assess();
+  assert.equal(report.requirements[0].checks[0].outcome, 'not-applicable');
+  assert.equal(report.nativeQualification, 'not-applicable');
+  assert.deepEqual(report.missingEvidence, []);
+});
+
+test('qualification ownership does not impose consumer keyboard or token decisions on static primitives', () => {
+  const selected = control();
+  selected.kind = 'primitive';
+  const report = assessReadinessControl({
+    root: fixture(),
+    control: selected,
+    policy: parseReadinessPolicy(JSON.parse(policyBytes)),
+    environment: environment(),
+    evidence: { observations: [], nativeSelections: [], limitations: [] },
+  });
+  assert.deepEqual(
+    report.qualifications.map(({ outcome }) => outcome),
+    ['not-applicable', 'not-applicable'],
+  );
+  assert.equal(report.tokenDecisionRequired, false);
+  assert.equal(report.nativeQualification, 'not-applicable');
+  assert.equal(report.dimensions.find(({ dimension }) => dimension === 'tokenCompleteness')?.gates.stable, true);
+  assert.ok(selected.mapping);
+  selected.mapping.requirements['SMP-001'].checks.push({
+    id: 'reader',
+    description: 'Informative primitive announcement',
+    source: 'CONTRACT.md',
+    evidence: 'manual',
+    qualification: 'screen-reader',
+    tests: [{ kind: 'manual', name: 'sample::announcement' }],
+  });
+  const observations: ReadinessEvidence['observations'] = readinessTargets.map((target) => ({
+    kind: 'manual',
+    name: 'sample::announcement',
+    target,
+    recordedOutcome: 'passed',
+    outcome: 'passed',
+    reasons: [],
+    reportSha256: null,
+    buildId: null,
+  }));
+  const scoped = assessReadinessControl({
+    root: fixture(),
+    control: selected,
+    policy: parseReadinessPolicy(JSON.parse(policyBytes)),
+    environment: environment(),
+    evidence: { observations, nativeSelections: [], limitations: [] },
+  });
+  assert.equal(scoped.requirements[0].checks[1].outcome, 'missing');
+  assert.deepEqual(scoped.qualifications[1].requiredTargets, [...readinessTargets]);
+});
+
+test('qualification ownership requires exact contract assertions in authenticated target records', () => {
+  const f = signingFixture(['keyboard', 'screen-reader']);
+  for (const kind of ['keyboard', 'screen-reader'] as const) {
+    const selected = control();
+    assert.ok(selected.mapping);
+    const evidence = kind === 'keyboard' ? 'native' : 'manual';
+    selected.mapping.requirements['SMP-001'].checks = [
+      {
+        id: 'qualified-action',
+        description: 'Contract-owned qualified action',
+        source: 'SPEC.md',
+        evidence,
+        qualification: kind,
+        tests: [{ kind: evidence, name: 'sample::acts' }],
+      },
+    ];
+    const assess = (name: string) =>
+      assessReadinessControl({
+        root: f.directory,
+        control: selected,
+        policy: f.policy,
+        environment: environment(),
+        evidence: { observations: [], nativeSelections: [], limitations: [] },
+        records: readinessTargets.map((target) =>
+          authenticateOwnerRecord(
+            f.envelope({
+              ...ownerRecord(kind),
+              target,
+              details: {
+                result: 'passed',
+                assertionNames: [name],
+                scenarios: ['Synthetic contract qualification'],
+                assistiveTechnology: 'Synthetic keyboard or screen-reader environment',
+              },
+            }),
+            f.directory,
+            f.policy,
+            selected,
+            environment(),
+          ),
+        ),
+      });
+    assert.equal(assess('unrelated::acts').qualifications.find((entry) => entry.kind === kind)?.outcome, 'missing');
+    const qualified = assess('sample::acts');
+    assert.equal(qualified.qualifications.find((entry) => entry.kind === kind)?.outcome, 'passed');
+    assert.equal(qualified.requirements[0].checks[0].outcome, kind === 'keyboard' ? 'missing' : 'passed');
+  }
 });
 
 test('generic native links require the exact callback separately in each target and lane row', () => {

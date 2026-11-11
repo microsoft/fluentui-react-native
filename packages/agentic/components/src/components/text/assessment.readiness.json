@@ -11,14 +11,24 @@
           "description": "Theme supplies functional family/bodyMedium size/lineHeight, regular weight and primary foreground.",
           "source": "spec/tokens.yaml",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Text applies theme typography and foreground defaults" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text applies theme typography and foreground defaults"
+            }
+          ]
         },
         {
           "id": "text-nearest-theme",
           "description": "Nearest nested theme wins and rerendering that boundary updates color/size without changing the outer boundary.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Text TXT-001 resolves the nearest theme and refreshes defaults when that boundary changes" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text TXT-001 resolves the nearest theme and refreshes defaults when that boundary changes"
+            }
+          ]
         }
       ]
     },
@@ -29,7 +39,12 @@
           "description": "Registered/nested caller style arrays override every default typography field with native last-entry precedence.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Text TXT-002 preserves native style-array precedence for every default typography field" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text TXT-002 preserves native style-array precedence for every default typography field"
+            }
+          ]
         },
         {
           "id": "text-component-owned-style",
@@ -73,7 +88,8 @@
           "description": "Review supplied language, accessibility semantics, scaling and selection with screen readers on each target.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         },
         {
           "id": "text-native-layout",
@@ -91,14 +107,24 @@
           "description": "Phased state returns the same native root continuation across rerenders.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Text keeps the returned root slot identity stable across renders" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text keeps the returned root slot identity stable across renders"
+            }
+          ]
         },
         {
           "id": "text-slot-children",
           "description": "Required/optional slots preserve shorthand and default children.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Text resolves as both a required and optional slot without losing shorthand children" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text resolves as both a required and optional slot without losing shorthand children"
+            }
+          ]
         },
         {
           "id": "text-no-wrapper",
@@ -116,7 +142,12 @@
           "description": "Ordinary React ref receives a native Text instance while selectable and onPress pass through.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Text delegates native Text behavior and forwards the native ref prop" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text delegates native Text behavior and forwards the native ref prop"
+            }
+          ]
         },
         {
           "id": "text-ref-type",

@@ -36,7 +36,12 @@
           "description": "Loading sectionHeader exposes nonfocusable header with skeletons instead of label, no button or checked state.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "ListboxItem renders a section header and loading skeleton state" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListboxItem renders a section header and loading skeleton state"
+            }
+          ]
         },
         {
           "id": "listbox-item-custom-slots",
@@ -61,7 +66,12 @@
           "description": "Selected multiselect suppresses fill and semibold reservation while showing checkbox visual with regular label weight.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "ListboxItem suppresses selected styling for multiselect rows and shows a checkbox visual" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListboxItem suppresses selected styling for multiselect rows and shows a checkbox visual"
+            }
+          ]
         },
         {
           "id": "listbox-item-checkmark",
@@ -86,7 +96,8 @@
           "description": "Enabled native pointer/Enter/Space activation, disabled rejection, self-focus/ref lifetime, system rings on Windows/macOS and persistent keyboard-modality custom ring on Win32 retain shared policy.",
           "source": "spec/interaction.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "listbox-item-rendered-geometry",
@@ -125,10 +136,65 @@
         },
         {
           "id": "listbox-item-native-toggle",
-          "description": "Windows native checked projection and actual Win32 accessibility Toggle route emit one owner event/no press/no state change; disabled public route rejects without callbacks.",
+          "description": "Actual Win32 accessibility Toggle emits one owner event without press or internal selection change; the disabled native route refuses activation.",
           "source": "SPEC.md#platform-behavior",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "applicability": {
+            "windows-fabric": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "This check isolates Win32 action transport, not Windows Fabric checked projection."
+            },
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "macOS Toggle is a custom action, qualified separately from Win32 transport."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "macOS Toggle is a custom action, qualified separately from Win32 transport."
+            }
+          }
+        },
+        {
+          "id": "listbox-item-native-checked-projection",
+          "description": "A standalone button's actual native checked value follows owner selection, including false and disabled selection.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": [],
+          "applicability": {
+            "macos-fabric": {
+              "status": "unsupported",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The pinned renderer/provider cannot read native checked state on the retained AXButton role."
+            },
+            "macos-paper": {
+              "status": "unsupported",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The pinned renderer/provider cannot read native checked state on the retained AXButton role."
+            }
+          }
+        },
+        {
+          "id": "listbox-item-macos-toggle-action",
+          "description": "Invoke the macOS Toggle custom action and verify unchanged caller-event forwarding without press synthesis or internal selection changes; AXPress is not a substitute.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": [],
+          "applicability": {
+            "win32-paper": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The AX custom-action contract belongs to macOS."
+            },
+            "windows-fabric": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The AX custom-action contract belongs to macOS."
+            }
+          }
         },
         {
           "id": "listbox-item-a11y-variants",
@@ -142,7 +208,8 @@
           "description": "Review UIA/AX role/name/disabled and Windows checked announcements; report macOS unsupported AXButton checked read rather than defaulting false.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

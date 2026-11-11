@@ -22,7 +22,12 @@
           "description": "Checked renders check, indeterminate renders dash, unchecked renders neither; root remains inaccessible.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "CheckboxIndicator renders checked and indeterminate glyphs as decorative content" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "CheckboxIndicator renders checked and indeterminate glyphs as decorative content"
+            }
+          ]
         },
         {
           "id": "checkbox-indicator-sources",
@@ -36,7 +41,12 @@
           "description": "Ordinary native View ref prop receives the root.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "CheckboxIndicator forwards its ref prop to the native root" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "CheckboxIndicator forwards its ref prop to the native root"
+            }
+          ]
         },
         {
           "id": "checkbox-indicator-forwarding",
@@ -51,7 +61,10 @@
           "source": "CONTRACT.md",
           "evidence": "type",
           "tests": [
-            { "kind": "type", "name": "packages/agentic/components/src/primitives/checkbox-indicator/checkbox-indicator.types.test.ts" }
+            {
+              "kind": "type",
+              "name": "packages/agentic/components/src/primitives/checkbox-indicator/checkbox-indicator.types.test.ts"
+            }
           ]
         },
         {
@@ -59,7 +72,8 @@
           "description": "Native owner announces checkbox status once while indicator glyphs remain decorative in every state.",
           "source": "CONTRACT.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     }

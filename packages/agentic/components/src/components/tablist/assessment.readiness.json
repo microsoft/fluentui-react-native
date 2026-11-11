@@ -11,14 +11,24 @@
           "description": "Controlled press requests activity without mutating selected overview, while active entry moves to requested Tab.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "TabList reports controlled selection requests without mutating the selected value" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "TabList reports controlled selection requests without mutating the selected value"
+            }
+          ]
         },
         {
           "id": "tablist-uncontrolled",
           "description": "Uncontrolled activation updates selected and roving entry and preserves child press exactly once.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "TabList updates uncontrolled selection and preserves the Tab press handler" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "TabList updates uncontrolled selection and preserves the Tab press handler"
+            }
+          ]
         },
         {
           "id": "tablist-selection-lifecycle",
@@ -83,7 +93,12 @@
           "description": "Synthetic horizontal ArrowRight skips disabled, updates automatic selection/entry, prevents default once and wraps.",
           "source": "spec/interaction.md#keyboard",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "TabList moves automatic selection on the orientation axis and skips disabled Tabs" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "TabList moves automatic selection on the orientation axis and skips disabled Tabs"
+            }
+          ]
         },
         {
           "id": "tablist-key-matrix",
@@ -97,7 +112,8 @@
           "description": "Physical navigation moves confirmed native focus with disabled skipping/wrap/Home/End; Tab/Shift+Tab enter/leave through one tab stop, modifier shortcuts reach parent without selection changes.",
           "source": "SPEC.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         }
       ]
     },
@@ -108,7 +124,12 @@
           "description": "Manual navigation updates roving entry without selection until synthetic activation selects focused Tab.",
           "source": "spec/interaction.md#selection",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "TabList keeps selection independent from roving focus in manual activation mode" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "TabList keeps selection independent from roving focus in manual activation mode"
+            }
+          ]
         },
         {
           "id": "tablist-activation-transports",
@@ -133,14 +154,20 @@
           "description": "Default structural root exposes list name/disabled false/nonfocusable, first enabled selected/tabbable; all children including disabled contribute one-based position and total size.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "TabList defaults to the first enabled Tab and exposes the list semantics" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "TabList defaults to the first enabled Tab and exposes the list semantics"
+            }
+          ]
         },
         {
           "id": "tablist-a11y-context",
           "description": "Native list/tab roles preserve independent child accessibility with selected/disabled/controls and caller group naming; no panel creation/hiding is implied.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

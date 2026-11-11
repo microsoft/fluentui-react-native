@@ -167,6 +167,65 @@ test('readiness rejects unsupported evidence, contradictory shared checks and du
   );
 });
 
+test('readiness stage rules reject lowered evidence thresholds and false qualification kinds', (t) => {
+  const { mapping } = fixture(t);
+  const check = mapping.requirements['SAMPLE-001'].checks[0];
+  const parse = (changes: object) =>
+    readReadinessMapping({
+      ...mapping,
+      requirements: { 'SAMPLE-001': { checks: [{ ...check, ...changes }] } },
+    }).requirements['SAMPLE-001'].checks[0];
+  for (const [evidence, expected] of [
+    ['unit', 'preview'],
+    ['type', 'preview'],
+    ['native', 'beta'],
+    ['visual', 'beta'],
+    ['manual', 'stable'],
+  ])
+    assert.equal(parse({ evidence }).requiredFrom, expected);
+  assert.equal(parse({ requiredFrom: 'stable' }).requiredFrom, 'stable');
+  assert.throws(() => parse({ evidence: 'native', requiredFrom: 'preview' }), /cannot lower/);
+  assert.throws(() => parse({ evidence: 'manual', requiredFrom: 'beta' }), /cannot lower/);
+  assert.throws(() => parse({ qualification: 'screen-reader' }), /reviewed manual/);
+  assert.throws(() => parse({ evidence: 'type', qualification: 'keyboard' }), /native or reviewed manual/);
+  assert.throws(
+    () => parse({ applicability: { 'win32-paper': { status: 'not-applicable', source: 'SPEC.md', reason: 'No obligation.' } } }),
+    /platform-neutral/,
+  );
+  assert.throws(
+    () => parse({ evidence: 'native', applicability: { 'win32-paper': { status: 'not-applicable', source: 'SPEC.md', reason: '' } } }),
+    /reason/,
+  );
+  assert.throws(
+    () =>
+      parse({ evidence: 'native', applicability: { 'windows-paper': { status: 'unsupported', source: 'SPEC.md', reason: 'No host.' } } }),
+    /applicability target/,
+  );
+});
+
+test('readiness stage applicability must cite a normative contract rather than a passing test', (t) => {
+  const { root, component, write, mapping } = fixture(t);
+  const check = mapping.requirements['SAMPLE-001'].checks[0];
+  write(`${component}/assessment.readiness.json`, {
+    ...mapping,
+    requirements: {
+      ...mapping.requirements,
+      'SAMPLE-001': {
+        checks: [
+          {
+            ...check,
+            evidence: 'native',
+            applicability: {
+              'win32-paper': { status: 'not-applicable', source: 'sample.test.tsx', reason: 'A mock is not contract authority.' },
+            },
+          },
+        ],
+      },
+    },
+  });
+  assert.throws(() => discoverReadinessControls(root), /normative contract file/);
+});
+
 test('readiness guards review inputs and discovery against traversal and linked files', (t) => {
   const { root, packagePath, component, write, mapping } = fixture(t);
   assert.throws(() => repositoryFile(root, '../outside'), /repository-relative/);

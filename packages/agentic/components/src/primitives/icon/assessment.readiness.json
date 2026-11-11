@@ -11,7 +11,12 @@
           "description": "Icon renders directly without a styled component boundary.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Icon is directly renderable" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Icon is directly renderable"
+            }
+          ]
         }
       ]
     },
@@ -22,7 +27,12 @@
           "description": "Compiled SlotProp accepts image/font/SVG and as replacement; existing fixture rejects its supplied conflicting-source combination.",
           "source": "CONTRACT.md",
           "evidence": "type",
-          "tests": [{ "kind": "type", "name": "packages/agentic/components/src/primitives/icon/icon.types.test.ts" }]
+          "tests": [
+            {
+              "kind": "type",
+              "name": "packages/agentic/components/src/primitives/icon/icon.types.test.ts"
+            }
+          ]
         },
         {
           "id": "icon-source-exclusivity-matrix",
@@ -36,21 +46,36 @@
           "description": "Image renderer forwards source, dimensions and tint color directly.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Icon renders an image with dimensions and color" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Icon renders an image with dimensions and color"
+            }
+          ]
         },
         {
           "id": "icon-svg",
           "description": "SVG renderer receives dimensions, color, testID and default image role directly.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Icon forwards shared props to an SVG component" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Icon forwards shared props to an SVG component"
+            }
+          ]
         },
         {
           "id": "icon-font-frame",
           "description": "Dimensioned font renderer centers decorative intrinsic Text in sized nonshrinking frame; glyph receives family/color/min dimension fontSize, absolute position without forced height/lineHeight, no font padding or scaling.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Icon renders a font codepoint with dimensions and color" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Icon renders a font codepoint with dimensions and color"
+            }
+          ]
         },
         {
           "id": "icon-font-dimension-matrix",
@@ -64,7 +89,12 @@
           "description": "Only font frame owns name/hint/image role/test props; explicit accessible=false and role none win; glyph is decorative.",
           "source": "CONTRACT.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Icon keeps font icon semantics on one frame and preserves caller accessibility" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Icon keeps font icon semantics on one frame and preserves caller accessibility"
+            }
+          ]
         },
         {
           "id": "icon-other-renderer-a11y",
@@ -75,9 +105,16 @@
         },
         {
           "id": "icon-empty-no-ref",
-          "description": "Missing source renders no native element; public type exposes no shared imperative component ref across image/frame/SVG/empty branches.",
+          "description": "The public type exposes no shared imperative component ref across image/frame/SVG/empty branches.",
           "source": "CONTRACT.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "icon-empty-render",
+          "description": "A missing source renders no native element.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -99,7 +136,8 @@
           "description": "Informative renderer announces supplied identity once; decorative override removes it on native accessibility trees.",
           "source": "CONTRACT.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     }

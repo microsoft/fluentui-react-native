@@ -8,9 +8,16 @@
       "checks": [
         {
           "id": "tab-public-types",
-          "description": "controls required; selected/disabled false and layout iconAndText defaults; iconOnly requires icon plus accessibilityLabel and rejects content; value defaults controls, ordinary native root ref compiles.",
+          "description": "Compiled types require controls, accept the native root ref, and require icon plus accessibilityLabel while rejecting content in the iconOnly branch.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "tab-default-values",
+          "description": "Omitted selected and disabled resolve to false, layout resolves to iconAndText, and value defaults to controls.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -29,14 +36,24 @@
           "description": "Standalone press invokes caller once without changing selected=false.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Tab renders selection without changing it on press" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tab renders selection without changing it on press"
+            }
+          ]
         },
         {
           "id": "tab-context",
           "description": "Grouped selection/focusability/set-position and set-size come from TabList context.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Tab takes selection, disabled state, and set metadata from TabList context" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tab takes selection, disabled state, and set metadata from TabList context"
+            }
+          ]
         },
         {
           "id": "tab-group-events",
@@ -140,14 +157,16 @@
           "description": "Standalone enabled receives native Tab/Shift+Tab, disabled skipped; grouped exactly one entry and disabled skip respect TabList; no duplicate Enter/Space activation.",
           "source": "spec/interaction.md#keyboard",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "tab-screen-reader",
           "description": "UIA/AX announces tab name/selected/disabled and controlled panel, including iconOnly names and set metadata; owner supplies existing distinct panel IDs.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -158,7 +177,12 @@
           "description": "Consumer ordinary root ref receives a nonnull instance when rendered inside TabList.",
           "source": "spec/interaction.md#focus-target-lifetime",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Tab composes its ref prop with the internal TabList focus ref" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tab composes its ref prop with the internal TabList focus ref"
+            }
+          ]
         },
         {
           "id": "tab-ref-independent-registration",

@@ -162,10 +162,38 @@ export function formatReadinessMarkdown(controls: ReadinessControlReport[]): str
       lines.push(
         `| ${dimension.dimension} | ${dimension.gates.experimental} | ${dimension.gates.preview} | ${dimension.gates.beta} | ${dimension.gates.stable} |`,
       );
-    lines.push('', '### Requirement/check outcomes', '', '| Requirement | Acceptance check | Outcome |', '| --- | --- | --- |');
+    lines.push(
+      '',
+      '### Cumulative acceptance coverage',
+      '',
+      '| Level | Complete | Unresolved checks |',
+      '| --- | --- | --- |',
+      ...control.stageCoverage
+        .filter(({ level }) => level !== 'experimental')
+        .map(({ level, complete, unresolved }) => `| ${level} | ${complete} | ${unresolved.length} |`),
+      '',
+      `Native contract qualification: ${control.nativeQualification}. Not-applicable is not a native pass.`,
+      '',
+      ...control.qualifications.map(
+        ({ kind, requiredTargets, outcome }) =>
+          `${kind}: ${outcome}; required targets: ${requiredTargets.join(', ') || 'none owned by this contract'}.`,
+      ),
+      '',
+      '### Requirement/check outcomes',
+      '',
+      '| Requirement | Acceptance check | Required from | Outcome | Target scope |',
+      '| --- | --- | --- | --- | --- |',
+    );
     for (const requirement of control.requirements) {
-      if (!requirement.checks.length) lines.push(`| ${requirement.id} | missing mapping | missing |`);
-      for (const check of requirement.checks) lines.push(`| ${requirement.id} | ${markdownCell(check.id)} | ${check.outcome} |`);
+      if (!requirement.checks.length) lines.push(`| ${requirement.id} | missing mapping | unknown | missing | unknown |`);
+      for (const check of requirement.checks)
+        lines.push(
+          `| ${requirement.id} | ${markdownCell(check.id)} | ${check.requiredFrom} | ${check.outcome} | ${markdownCell(
+            check.targetResults
+              .map(({ target, outcome, reason, source }) => `${target}: ${outcome}${reason ? ` (${reason}; ${source})` : ''}`)
+              .join('; ') || 'platform-neutral',
+          )} |`,
+        );
     }
     lines.push(
       '',

@@ -109,6 +109,25 @@ uncovered acceptance checks. A test file, implementation filename, or planned-ev
 Changes to reviewed clauses, assertions, helpers, or snapshots invalidate the mapping. Checkbox's existing schema-v2
 matrix is adapted directly, retaining both original reviewed fingerprints and its limited approved-link scope.
 
+Each acceptance check has a cumulative `requiredFrom` level. Defaults are `preview` for unit/compiler evidence,
+`beta` for native/visual evidence, and `stable` for reviewed manual evidence. An explicit level can defer a check,
+but cannot move its evidence kind below that minimum. Preview needs its applicable preview checks, not every future
+beta/stable check; all future gaps and failures remain in the report. Compilation proves public type contracts,
+not runtime defaults, ref lifetimes, handler composition, or style precedence; those are separate checks.
+
+Native, visual, and manual checks are evaluated separately for every supported target. An unscoped link must match
+its exact assertion on every applicable target, preserving any declared input lane. Per-target `applicability` may
+record `not-applicable` or `unsupported`, with a normative contract `source` and explicit `reason`. Not-applicable
+stays visible and is excluded from required coverage, never turned into a pass. Unsupported remains a blocker even
+when a passing observation exists. A check with no native obligations does not acquire a native pass.
+
+Use `qualification: "keyboard"` on contract-owned native/manual keyboard checks and
+`qualification: "screen-reader"` on actual reviewed manual screen-reader checks. Stable qualification records must
+name the exact reviewed assertions, target, scenarios, and keyboard/assistive-technology environment. Accessible
+automation cannot replace screen-reader evaluation. Static/unstyled primitives do not inherit consumer-owned
+keyboard or token decisions. The legacy Checkbox mapping conservatively retains keyboard and screen-reader
+qualification requirements on all targets until migrated through a full semantic mapping review.
+
 Native evidence is separated into **Win32/Paper, Windows/Fabric, macOS/Fabric, and macOS/Paper** targets. Accessibility
 and physical input remain separate evidence scopes, including when a source run contains both. Existing catalog
 exclusions and unavailable physical capabilities stay gaps. Jest's macOS mock profile is not native macOS evidence;
@@ -126,6 +145,7 @@ The [versioned policy](readiness-policy.json) implements #4251's proposed
 `experimental → preview → beta → stable` ladder; `deprecated` is an explicit terminal decision, not a failed-test
 classification. It evaluates fidelity, contract coverage, accessibility, platform validation, API stability, and token
 completeness. Missing required evidence limits the computed ceiling; new failures or expiry can lower it.
+Version `4251-provisional-v2` applies stage-specific cumulative checks and contract-backed target/qualification ownership.
 
 The normal loop is **component change → existing builds/tests → evidence validation → automatic level and gap report**.
 There is no separate approval step required to calculate or publish an advisory level. The policy itself is provisional,

@@ -12,7 +12,10 @@
           "source": "SPEC.md",
           "evidence": "unit",
           "tests": [
-            { "kind": "unit", "name": "Dropdown renders an inaccessible root around a collapsed combobox trigger showing the placeholder" }
+            {
+              "kind": "unit",
+              "name": "Dropdown renders an inaccessible root around a collapsed combobox trigger showing the placeholder"
+            }
           ]
         },
         {
@@ -31,9 +34,16 @@
         },
         {
           "id": "dropdown-public-types",
-          "description": "Required children, readonly selection arrays, typed change reasons and ordinary root/trigger/listbox refs compile; listbox ref is null closed.",
+          "description": "Required children, readonly selection arrays, typed change reasons and ordinary root/trigger/listbox refs compile.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "dropdown-closed-listbox-ref",
+          "description": "The listbox ref is null while the list is closed.",
+          "source": "SPEC.md#slots-and-anatomy",
+          "evidence": "unit",
           "tests": []
         }
       ]
@@ -160,7 +170,8 @@
           "description": "Down/Up skip disabled and stop at ends, Home/End reach enabled extremes, keyboard activates focused option; no typeahead/filter behavior is added.",
           "source": "spec/interaction.md#open",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "dropdown-hover-focus",
@@ -178,7 +189,8 @@
           "description": "Single commit/Escape/Shift+Tab/caller close while list focused return trigger; Escape retains multiple toggles; Tab continues after trigger except Win32 returns trigger.",
           "source": "SPEC.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "dropdown-dismiss-destinations",
@@ -232,6 +244,18 @@
         },
         {
           "id": "dropdown-expand-collapse",
+          "applicability": {
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#trigger",
+              "reason": "This check invokes Windows UIA ExpandCollapse; macOS combobox actions and announcements are qualified separately."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#trigger",
+              "reason": "This check invokes Windows UIA ExpandCollapse; macOS combobox actions and announcements are qualified separately."
+            }
+          },
           "description": "Actual ExpandCollapse transport opens/closes with trigger reason; Win32 explicitly declared patterns operate independently of physical pointer results.",
           "source": "spec/accessibility.md#trigger",
           "evidence": "native",
@@ -242,7 +266,8 @@
           "description": "Narrator/VoiceOver qualifies trigger/list/options names, full values, expanded/selected/position and focus return; no fabricated invalid/has-popup/active-descendant projection.",
           "source": "spec/accessibility.md#qualification",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

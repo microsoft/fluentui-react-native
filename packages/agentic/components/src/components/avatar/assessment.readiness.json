@@ -8,9 +8,16 @@
       "checks": [
         {
           "id": "avatar-defaults-axes",
-          "description": "Default size 40 and inactive ring; accept exactly 16,20,24,28,32,40,56,120 and reject other sizes in compiled types.",
+          "description": "Compiled size types accept exactly 16,20,24,28,32,40,56,120 and reject other sizes.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "avatar-default-values",
+          "description": "Omitted size resolves to 40 and omitted activityRing resolves to false.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -32,7 +39,12 @@
           "description": "Absent image and initials render the default person icon, with decorative default root semantics.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Avatar renders the default icon fallback as a decorative image avatar" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Avatar renders the default icon fallback as a decorative image avatar"
+            }
+          ]
         }
       ]
     },
@@ -50,7 +62,12 @@
           "description": "Image uses cover resizing, absolute fill and zero root padding with transparent background at size 56.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Avatar renders the image full bleed without avatar padding" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Avatar renders the image full bleed without avatar padding"
+            }
+          ]
         }
       ]
     },
@@ -86,7 +103,12 @@
           "description": "Labeled initials avatar exposes one accessible image with the supplied identity.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Avatar renders informative avatars with the image role and label" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Avatar renders informative avatars with the image role and label"
+            }
+          ]
         },
         {
           "id": "avatar-hidden",
@@ -100,7 +122,8 @@
           "description": "UIA/AX reads informative identity once, omits decorative avatars and never announces ring visibility as status or focus.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -136,7 +159,12 @@
           "description": "At size 120 active ring uses thick gap plus thicker stroke outside unchanged 120px root bounds.",
           "source": "spec/tokens.yaml",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Avatar renders the active ring without changing layout size" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Avatar renders the active ring without changing layout size"
+            }
+          ]
         },
         {
           "id": "avatar-fabric-safety",

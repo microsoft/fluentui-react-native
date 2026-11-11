@@ -54,6 +54,7 @@ export type TestObservation = {
   scope?: 'local' | 'ci';
   controlId?: string;
   kind: ReadinessKind;
+  qualification?: 'keyboard' | 'screen-reader';
   name: string;
   target?: ReadinessTarget;
   input?: InputLane;

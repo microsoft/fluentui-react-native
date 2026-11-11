@@ -8,9 +8,23 @@
       "checks": [
         {
           "id": "menu-item-defaults",
-          "description": "Defaults list-item/right and all documented booleans false; missing text uses Menu item/Secondary, null or empty secondary hides; public visual slots and ordinary native ref compile.",
+          "description": "Compiled public types accept the documented visual slots and ordinary native root ref.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "menu-item-default-values",
+          "description": "Omitted variants resolve to list-item and right secondary position; documented boolean props default to false.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-item-text-fallbacks",
+          "description": "Omitted text resolves to Menu item and Secondary; null or empty secondary content hides that text.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -18,7 +32,12 @@
           "description": "Caller background wins last and synthetic onPress forwards once.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuItem forwards user styles last and preserves handlers" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuItem forwards user styles last and preserves handlers"
+            }
+          ]
         }
       ]
     },
@@ -36,7 +55,12 @@
           "description": "Selected true replaces regular icon and uses soft selected fill with semibold text.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuItem uses the selected icon, selected background, and semibold text when selected" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuItem uses the selected icon, selected background, and semibold text when selected"
+            }
+          ]
         },
         {
           "id": "menu-item-variant-structure",
@@ -54,7 +78,12 @@
           "description": "Checkbox-menu press invokes owner once without changing checked=false.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuItem renders selection without changing it on press" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuItem renders selection without changing it on press"
+            }
+          ]
         },
         {
           "id": "menu-item-role-state-matrix",
@@ -86,7 +115,12 @@
           "description": "Loading section header has role none, cannot focus and replaces normal label.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuItem supports section headers, loading skeletons, and no focusability" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuItem supports section headers, loading skeletons, and no focusability"
+            }
+          ]
         },
         {
           "id": "menu-item-header-inert",
@@ -125,7 +159,8 @@
           "description": "Narrator/VoiceOver qualifies menu row roles/name/state, disabled-focusable availability and hidden decorative visuals.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -136,14 +171,20 @@
           "description": "Standalone disabled defaults unfocusable; disabledFocusable never opts header into focus.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuItem keeps disabled rows nonfocusable by default and never opts headers into focus" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuItem keeps disabled rows nonfocusable by default and never opts headers into focus"
+            }
+          ]
         },
         {
           "id": "menu-item-disabled-focusable",
           "description": "Opted-in disabled row keeps native focus/ring but refuses pointer/keyboard/long-press/accessibility tap; custom accessibility event still forwards without making action enabled.",
           "source": "spec/accessibility.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "menu-item-macos-disabled",
@@ -182,7 +223,8 @@
           "description": "Actual submenu row keyboard/pointer/focus behavior interoperates with Menu family and disabled refusal on every endpoint.",
           "source": "SPEC.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         }
       ]
     }

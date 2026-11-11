@@ -30,7 +30,8 @@
           "description": "Pointer, touch, Enter and Space request expansion once and preserve consumer handlers on Windows, Win32 and macOS.",
           "source": "spec/interaction.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         }
       ]
     },
@@ -48,14 +49,24 @@
           "description": "chevronStart orders chevron, leading icon, title; chevronEnd orders leading icon, title, chevron.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Accordion places the chevron at the leading or trailing edge according to layout" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion places the chevron at the leading or trailing edge according to layout"
+            }
+          ]
         },
         {
           "id": "accordion-custom-slots",
           "description": "Custom title and body components retain props and supplied children.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Accordion renders custom title and body slots" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion renders custom title and body slots"
+            }
+          ]
         },
         {
           "id": "accordion-types-ref",
@@ -73,7 +84,12 @@
           "description": "Header background and title foreground resolve rest, hover and pressed with pressed winning simultaneous hover.",
           "source": "spec/tokens.yaml",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Accordion renders hover and pressed header feedback with the resolved foreground color" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion renders hover and pressed header feedback with the resolved foreground color"
+            }
+          ]
         },
         {
           "id": "accordion-token-geometry",
@@ -87,7 +103,12 @@
           "description": "Caller root width overrides structural width.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Accordion applies user root styles after the component styles" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion applies user root styles after the component styles"
+            }
+          ]
         },
         {
           "id": "accordion-focus-policy",
@@ -112,7 +133,12 @@
           "description": "Body ID and controls relationship stay stable; collapsed descendants are hidden but mounted and expansion restores access.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Accordion ACC-004 retains the body identity and hides descendants only while collapsed" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Accordion ACC-004 retains the body identity and hides descendants only while collapsed"
+            }
+          ]
         },
         {
           "id": "accordion-header-name",
@@ -133,7 +159,8 @@
           "description": "UIA/AX announces header name, expanded state, body relationship and expanded content without decorative icons or collapsed descendants.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

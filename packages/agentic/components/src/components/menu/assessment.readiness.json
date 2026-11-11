@@ -8,9 +8,37 @@
       "checks": [
         {
           "id": "menu-defaults-props",
-          "description": "Default closed/bottom/center/hover-open with platform disabledFocusable/delays; required trigger/children, structural root ref, composed trigger handlers/anchor refs, closed-null surface ref and caller styles last.",
+          "description": "Compiled public types require trigger and children and accept the documented root, trigger and surface prop/ref shapes.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "menu-default-values",
+          "description": "Omitted props resolve to closed/bottom/center/hover-open and the documented platform disabledFocusable and hover delays.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-root-ref-style",
+          "description": "The structural inaccessible root preserves its ref across presentations and applies caller style last.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-trigger-ref-composition",
+          "description": "The trigger composes the caller and anchor refs without replacing either.",
+          "source": "SPEC.md#slots-and-anatomy",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-closed-surface-ref",
+          "description": "The surface ref is null while closed.",
+          "source": "SPEC.md#slots-and-anatomy",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -18,7 +46,12 @@
           "description": "Closed Button trigger exposes menu hint/collapsed state and root ref, with no surface.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Menu renders a collapsed Button trigger with a menu hint and no surface while closed" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Menu renders a collapsed Button trigger with a menu hint and no surface while closed"
+            }
+          ]
         },
         {
           "id": "menu-child-warnings",
@@ -43,7 +76,12 @@
           "description": "Synthetic enabled leaf activation invokes owner once, closes family and reports action.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Menu runs an activated row once, closes the menu, and reports the action" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Menu runs an activated row once, closes the menu, and reports the action"
+            }
+          ]
         },
         {
           "id": "menu-change-reasons",
@@ -72,7 +110,8 @@
           "description": "After readiness keyboard/accessibility opens focus first focusable row with native-confirmed result, not command invocation alone.",
           "source": "spec/interaction.md#entry-focus",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "menu-entry-pointer",
@@ -126,14 +165,20 @@
           "description": "Two submenu levels open; third warns and stays closed without collapsing ancestors or changing root open state.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Menu MNU-007 permits two submenu levels but warns and refuses a third" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Menu MNU-007 permits two submenu levels but warns and refuses a third"
+            }
+          ]
         },
         {
           "id": "menu-submenu-keyboard",
           "description": "Enter/Space/inline-end open submenu to first row, inline-start/Escape close to parent row; RTL reverses inline arrows; keyboard activation does not end family.",
           "source": "spec/interaction.md#navigation",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "menu-submenu-pointer",
@@ -184,6 +229,18 @@
         },
         {
           "id": "menu-native-expand-collapse",
+          "applicability": {
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "The contract assigns ExpandCollapse projection to Windows; macOS menu semantics are qualified separately."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "The contract assigns ExpandCollapse projection to Windows; macOS menu semantics are qualified separately."
+            }
+          },
           "description": "Invoke Windows ExpandCollapse projection instead of inferring it from synthetic press; states track native dismissal.",
           "source": "spec/accessibility.md#qualification",
           "evidence": "native",
@@ -194,7 +251,8 @@
           "description": "Narrator/VoiceOver qualifies menu/row names and roles, checked/disabled/expanded state, entry/return focus and closed-tree absence on every renderer.",
           "source": "spec/accessibility.md#qualification",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

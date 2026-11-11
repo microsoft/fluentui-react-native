@@ -8,9 +8,23 @@
       "checks": [
         {
           "id": "skeleton-public-props",
-          "description": "Broad ViewProps/ref forward, children and invented variants rejected, no intrinsic size; caller width/height/radius/style override component.",
+          "description": "Compiled public types accept the documented ViewProps and ref, rejecting children and invented variants.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "skeleton-root-forwarding",
+          "description": "Documented ViewProps and the caller ref reach the root.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "skeleton-caller-geometry",
+          "description": "No intrinsic size is applied and caller width, height and radius override component styles.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -18,7 +32,12 @@
           "description": "Caller root background overrides resolved background.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Skeleton uses the user style after the component style" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Skeleton uses the user style after the component style"
+            }
+          ]
         },
         {
           "id": "skeleton-owned-hidden",
@@ -37,7 +56,12 @@
           "description": "Explicit pointerEvents override is retained rather than replaced by default none.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Skeleton preserves an explicit pointer-events override" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Skeleton preserves an explicit pointer-events override"
+            }
+          ]
         }
       ]
     },
@@ -52,9 +76,24 @@
         },
         {
           "id": "skeleton-native-inert",
-          "description": "Default root does not intercept native pointer input, add Tab stop or announce loading; region owns busy announcement and mount lifecycle.",
+          "description": "The placeholder is not announced as a separate loading element; the containing region owns its busy announcement.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        },
+        {
+          "id": "skeleton-native-pointer-transparency",
+          "description": "The default placeholder does not intercept native pointer input intended for covered controls.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "skeleton-default-tab-order",
+          "description": "The default placeholder adds no native Tab stop; caller focusable opt-in remains the documented divergence.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
           "tests": []
         }
       ]

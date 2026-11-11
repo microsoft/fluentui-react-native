@@ -11,7 +11,12 @@
           "description": "Default determinate/neutral/0 with Label and 0% publishes bounded zero without busy state.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "ProgressBar renders the default label, value text, and determinate accessibility state" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ProgressBar renders the default label, value text, and determinate accessibility state"
+            }
+          ]
         },
         {
           "id": "progress-bar-numeric-bounds",
@@ -66,7 +71,10 @@
           "source": "SPEC.md",
           "evidence": "unit",
           "tests": [
-            { "kind": "unit", "name": "ProgressBar resolves the determinate indicator width from progress and preserves user styles last" }
+            {
+              "kind": "unit",
+              "name": "ProgressBar resolves the determinate indicator width from progress and preserves user styles last"
+            }
           ]
         },
         {
@@ -124,7 +132,8 @@
           "description": "UIA/AX announces task name and bounded/contextual value or indeterminate busy once, omits decorative validation and does not fabricate status live region.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

@@ -24,9 +24,18 @@ export type ReadinessCheck = {
   source: string;
   evidence: ReadinessKind;
   tests: ReadinessLink[];
+  requiredFrom?: ReadinessLevel;
+  qualification?: 'keyboard' | 'screen-reader';
+  applicability?: Partial<Record<ReadinessTarget, { status: 'not-applicable' | 'unsupported'; source: string; reason: string }>>;
 };
+export function checkReadinessLevel(check: Pick<ReadinessCheck, 'evidence' | 'requiredFrom'>): ReadinessLevel {
+  return (
+    check.requiredFrom ?? ({ unit: 'preview', type: 'preview', native: 'beta', visual: 'beta', manual: 'stable' } as const)[check.evidence]
+  );
+}
 export type ReadinessMapping = {
   schemaVersion: 1;
+  legacy?: true;
   reviewedDigest: string;
   reviewKind: 'agent-reviewed' | 'owner-reviewed';
   reviewInputs: string[];
@@ -94,6 +103,43 @@ export function readReadinessMapping(value: unknown): ReadinessMapping {
       const checks = list(object(value, 'Requirement mapping').checks, 'Acceptance checks').map((value): ReadinessCheck => {
         const check = object(value, 'Readiness acceptance check');
         const evidence = member(check.evidence, readinessKinds, 'evidence kind');
+        const requiredFrom =
+          check.requiredFrom === undefined
+            ? checkReadinessLevel({ evidence })
+            : member(check.requiredFrom, readinessLevels, 'first required level');
+        if (readinessLevels.indexOf(requiredFrom) < readinessLevels.indexOf(checkReadinessLevel({ evidence })))
+          throw new Error('Acceptance checks cannot lower the minimum level for their evidence kind.');
+        const qualification =
+          check.qualification === undefined
+            ? undefined
+            : member<'keyboard' | 'screen-reader'>(check.qualification, ['keyboard', 'screen-reader'], 'native qualification');
+        if (qualification === 'screen-reader' && evidence !== 'manual')
+          throw new Error('Screen-reader qualification requires actual reviewed manual evidence.');
+        if (qualification === 'keyboard' && evidence !== 'native' && evidence !== 'manual')
+          throw new Error('Keyboard qualification requires native or reviewed manual evidence.');
+        const applicability =
+          check.applicability === undefined
+            ? undefined
+            : Object.fromEntries(
+                Object.entries(object(check.applicability, 'Target applicability')).map(([target, value]) => {
+                  member(target, readinessTargets, 'applicability target');
+                  const scope = object(value, 'Target applicability decision');
+                  return [
+                    target,
+                    {
+                      status: member<'not-applicable' | 'unsupported'>(
+                        scope.status,
+                        ['not-applicable', 'unsupported'],
+                        'applicability status',
+                      ),
+                      source: text(scope.source, 'Applicability contract source'),
+                      reason: text(scope.reason, 'Applicability reason'),
+                    },
+                  ];
+                }),
+              );
+        if (applicability && (evidence === 'unit' || evidence === 'type'))
+          throw new Error('Target applicability belongs to native, visual, or manual checks, not platform-neutral test execution.');
         const tests = list(check.tests, 'Acceptance test links').map((value): ReadinessLink => {
           const link = object(value, 'Readiness test link');
           const kind = member(link.kind, readinessKinds, 'test kind');
@@ -114,6 +160,9 @@ export function readReadinessMapping(value: unknown): ReadinessMapping {
           source: text(check.source, 'Normative source reference'),
           evidence,
           tests,
+          requiredFrom,
+          ...(qualification === undefined ? {} : { qualification }),
+          ...(applicability === undefined ? {} : { applicability }),
         };
         const previous = shared.get(result.id);
         const serialized = JSON.stringify(result);
@@ -234,6 +283,7 @@ export function discoverReadinessControls(root: string, packageRoot?: string): R
         legacyContract && legacy
           ? {
               schemaVersion: 1,
+              legacy: true,
               reviewedDigest: readinessHash(`${legacy.contract.reviewedDigest}\0${legacy.unit.reviewedDigest}`),
               reviewKind: 'agent-reviewed',
               reviewInputs: [
@@ -296,9 +346,11 @@ export function discoverReadinessControls(root: string, packageRoot?: string): R
           throw new Error(`Readiness mapping must retain every contract requirement: ${contractPath}`);
         for (const { checks } of Object.values(mapping.requirements))
           for (const check of checks) {
-            const file = check.source.split('#')[0];
-            if (!normative.includes(`${directory}/${file}`))
-              throw new Error(`Acceptance check must cite a normative contract file: ${check.source}`);
+            for (const source of [check.source, ...Object.values(check.applicability ?? {}).map(({ source }) => source)]) {
+              const file = source.split('#')[0];
+              if (!normative.includes(`${directory}/${file}`))
+                throw new Error(`Acceptance check must cite a normative contract file: ${source}`);
+            }
           }
       }
       const sources = source?.sources === undefined ? [] : list(source.sources, 'Contract sources');

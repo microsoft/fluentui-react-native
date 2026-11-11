@@ -8,9 +8,23 @@
       "checks": [
         {
           "id": "menu-button-public-props",
-          "description": "Secondary/medium/enabled defaults and Button props/ref reach one Pressable with style last; reject selected/shape/iconPosition/selectedIcon and require children.",
+          "description": "Compiled types accept the forwarded Button props and native ref, require children and reject selected/shape/iconPosition/selectedIcon.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "menu-button-default-values",
+          "description": "Omitted appearance, size and disabled resolve to secondary, medium and false.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "menu-button-root-forwarding",
+          "description": "Forwarded root props and ref reach the one actual trigger Pressable and caller style is final.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -18,7 +32,12 @@
           "description": "Neither label nor icon warns and section-header composition warns.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuButton warns for a missing label and icon and for section-header rows" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton warns for a missing label and icon and for section-header rows"
+            }
+          ]
         },
         {
           "id": "menu-button-icon-name",
@@ -43,7 +62,12 @@
           "description": "Presented menu changes root background from rest while expanded state is true.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuButton draws the pressed chrome while the menu is presented" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton draws the pressed chrome while the menu is presented"
+            }
+          ]
         },
         {
           "id": "menu-button-static-chevron",
@@ -75,7 +99,12 @@
           "description": "Disabled defaultOpen and opening Down key do not present menu or notify.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "MenuButton never opens while disabled" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "MenuButton never opens while disabled"
+            }
+          ]
         },
         {
           "id": "menu-button-family",
@@ -107,7 +136,8 @@
           "description": "Opening Enter/Space key is not repeated into newly opened menu and never invokes first action accidentally.",
           "source": "SPEC.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         }
       ]
     },
@@ -125,7 +155,8 @@
           "description": "Tab from any popup closes family and focuses next owner-window view; Win32 approved R1 returns trigger instead.",
           "source": "SPEC.md#platform-behavior",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         }
       ]
     },
@@ -159,6 +190,18 @@
         },
         {
           "id": "menu-button-expand-collapse",
+          "applicability": {
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "The contract assigns ExpandCollapse projection to Windows; macOS trigger semantics are qualified separately."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "The contract assigns ExpandCollapse projection to Windows; macOS trigger semantics are qualified separately."
+            }
+          },
           "description": "Actual Windows ExpandCollapse route projects expanded and operates opening/closing independently from pointer dispatch.",
           "source": "spec/accessibility.md#qualification",
           "evidence": "native",
@@ -169,7 +212,8 @@
           "description": "Narrator/VoiceOver qualifies trigger name/role/expanded, menu name, entry/return and Tab continuation on each renderer.",
           "source": "spec/accessibility.md#qualification",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },

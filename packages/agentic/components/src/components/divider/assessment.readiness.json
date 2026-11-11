@@ -11,7 +11,12 @@
           "description": "Default center/horizontal renders Text label, separator role, nonfocusable centered stretching row.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Divider renders a labeled separator by default" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Divider renders a labeled separator by default"
+            }
+          ]
         },
         {
           "id": "divider-public-props",
@@ -36,7 +41,12 @@
           "description": "Removing label preserves supplied icon container and leaves accessible name absent.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Divider DIV-002 preserves an icon-only content container when the label is removed" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Divider DIV-002 preserves an icon-only content container when the label is removed"
+            }
+          ]
         },
         {
           "id": "divider-replacements",
@@ -72,7 +82,12 @@
           "description": "Vertical uses column, thin line width and vertical padding while content remains row/horizontally written.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Divider switches to vertical layout and uses vertical padding" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Divider switches to vertical layout and uses vertical padding"
+            }
+          ]
         },
         {
           "id": "divider-axis-exclusion",
@@ -111,7 +126,8 @@
           "description": "UIA separator and AX splitter/separator announce root name once without descendants; vertical does not fabricate unavailable orientation semantics.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -129,7 +145,12 @@
           "description": "Caller root alignment/direction overrides component style while replacement label receives decorative props.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Divider DIV-002/DIV-006 honors a label replacement and applies caller root styles last" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Divider DIV-002/DIV-006 honors a label replacement and applies caller root styles last"
+            }
+          ]
         },
         {
           "id": "divider-visual",

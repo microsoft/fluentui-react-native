@@ -11,13 +11,25 @@
           "description": "Default Label, no visible Description, enabled/unselected/checked=false/selected=false and focusable true.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Radio renders the default label and accessibility state" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Radio renders the default label and accessibility state"
+            }
+          ]
         },
         {
           "id": "radio-root-types",
-          "description": "Only root slot/native Pressable props/ref are public; caller children/extra content slots rejected, root style remains final.",
+          "description": "Compiled public types expose only the root slot and native Pressable props/ref, rejecting caller children and extra content slots.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "radio-caller-style",
+          "description": "Caller root style is applied after component styles.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         }
       ]
@@ -36,7 +48,12 @@
           "description": "Visible supporting text is rendered and becomes default hint beside supplied label.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Radio shows secondary text and uses it as accessibility hint when visible" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Radio shows secondary text and uses it as accessibility hint when visible"
+            }
+          ]
         }
       ]
     },
@@ -47,7 +64,12 @@
           "description": "Synthetic press reports once without selecting itself.",
           "source": "spec/interaction.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Radio renders selection without changing it on press" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Radio renders selection without changing it on press"
+            }
+          ]
         },
         {
           "id": "radio-owned-selection",
@@ -72,7 +94,12 @@
           "description": "Selected true exposes checked/selected and maps indicator brand border, opaque brand dot and primary label foreground.",
           "source": "spec/tokens.yaml",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Radio resolves selected colors and exposes checked accessibility state" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Radio resolves selected colors and exposes checked accessibility state"
+            }
+          ]
         },
         {
           "id": "radio-precedence-matrix",
@@ -86,7 +113,12 @@
           "description": "Caller root background overrides component and constrained label keeps shrink behavior.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Radio applies user styles last and allows constrained labels to shrink" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Radio applies user styles last and allows constrained labels to shrink"
+            }
+          ]
         },
         {
           "id": "radio-native-layout",
@@ -104,7 +136,12 @@
           "description": "Indicator and label container explicitly hide decorative descendants from platform accessibility.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Radio explicitly hides decorative descendants from accessibility" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Radio explicitly hides decorative descendants from accessibility"
+            }
+          ]
         },
         {
           "id": "radio-accessibility-state",
@@ -118,14 +155,16 @@
           "description": "Native Pressable pointer/keyboard activation and confirmed root ref focus work, disabled skips Tab; system rings Windows/macOS versus persistent keyboard-modality Win32 custom ring obey shared policy/lifetime.",
           "source": "SPEC.md#focus-visuals",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "radio-screen-reader",
           "description": "Narrator/VoiceOver announces one named radio with availability and owned selection, not decorative descendants; group name/peer navigation remain owner responsibilities.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     }

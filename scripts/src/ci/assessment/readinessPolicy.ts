@@ -7,7 +7,7 @@ import { createScanner } from 'typescript/unstable/ast/scanner';
 import { hex, object, text, timestamp } from './controlAssessment.ts';
 import { member, safeArtifactFile, strings } from './readinessEvidence.ts';
 import type { EvidenceEnvironment, EvidenceOutcome, ReadinessEvidence, TestObservation } from './readinessEvidence.ts';
-import { readinessLevels, readinessTargets, repositoryFile } from './readinessModel.ts';
+import { checkReadinessLevel, readinessLevels, readinessTargets, repositoryFile } from './readinessModel.ts';
 import type { ReadinessControl, ReadinessLevel, ReadinessTarget } from './readinessModel.ts';
 
 export const readinessDimensions = [
@@ -441,7 +441,7 @@ export function assessReadinessControl(options: {
     return matches[0];
   };
   const reviewedObservations: TestObservation[] = authenticated
-    .filter((record) => ['visual', 'manual'].includes(record.kind))
+    .filter((record) => ['visual', 'manual', 'keyboard', 'screen-reader'].includes(record.kind))
     .flatMap((record) => {
       const names = strings(record.details.assertionNames, 'Reviewed exact observation identities');
       const passed = record.details.result === 'passed';
@@ -456,7 +456,8 @@ export function assessReadinessControl(options: {
       }
       return names.map(
         (name): TestObservation => ({
-          kind: member(record.kind, ['visual', 'manual'], 'Observation adapter'),
+          kind: record.kind === 'visual' ? 'visual' : 'manual',
+          ...(record.kind === 'keyboard' || record.kind === 'screen-reader' ? { qualification: record.kind } : {}),
           name,
           ...(record.target === null ? {} : { target: record.target }),
           recordedOutcome: member(record.details.result, ['passed', 'failed', 'skipped', 'unsupported'], 'Reviewed result'),
@@ -478,29 +479,71 @@ export function assessReadinessControl(options: {
           (entry) =>
             entry.kind === link.kind &&
             entry.name === link.name &&
+            (check.evidence !== 'manual' || check.qualification === undefined || entry.qualification === check.qualification) &&
             (link.target === undefined || entry.target === link.target) &&
             (link.input === undefined || entry.input === link.input),
         );
         const outcome: EvidenceOutcome = !control.mappingCurrent ? 'stale' : matches.length ? checkedOutcome(matches) : 'missing';
         return { ...link, outcome, observations: matches };
       });
-      return { ...check, tests, outcome: control.mappingCurrent ? checkedOutcome(tests) : 'stale' };
+      const targetResults =
+        check.evidence === 'unit' || check.evidence === 'type'
+          ? []
+          : policy.supportedTargets.map((target) => {
+              const decision = check.applicability?.[target];
+              if (decision) return { target, outcome: decision.status, reason: decision.reason, source: decision.source };
+              const links = tests.filter((link) => link.target === undefined || link.target === target);
+              const outcome: EvidenceOutcome = !control.mappingCurrent
+                ? 'stale'
+                : checkedOutcome(
+                    links.map((link) => ({
+                      outcome: checkedOutcome(link.observations.filter((entry) => entry.target === target)),
+                    })),
+                  );
+              return { target, outcome, reason: null, source: check.source };
+            });
+      const applicable = targetResults.filter(({ outcome }) => outcome !== 'not-applicable');
+      const outcome: EvidenceOutcome | 'not-applicable' = !control.mappingCurrent
+        ? 'stale'
+        : targetResults.length
+          ? applicable.length
+            ? checkedOutcome(applicable.flatMap(({ outcome }) => (outcome === 'not-applicable' ? [] : [{ outcome }])))
+            : 'not-applicable'
+          : checkedOutcome(tests);
+      return { ...check, requiredFrom: checkReadinessLevel(check), tests, targetResults, outcome };
     });
     return {
       ...requirement,
       checks,
-      outcome: control.mappingCurrent ? checkedOutcome(checks) : control.mapping === null ? 'missing' : 'stale',
+      outcome: control.mappingCurrent
+        ? checks.length && checks.every(({ outcome }) => outcome === 'not-applicable')
+          ? 'not-applicable'
+          : checkedOutcome(checks.flatMap(({ outcome }) => (outcome === 'not-applicable' ? [] : [{ outcome }])))
+        : control.mapping === null
+          ? 'missing'
+          : 'stale',
     };
   });
   const checks = requirements.flatMap(({ checks }) => checks);
   const checkIds = [...new Set(checks.map(({ id }) => id))];
   const requirementIds = control.requirements.map(({ id }) => id);
   const mappingReview = get('mapping-completeness');
-  const coverageComplete =
-    control.mappingCurrent &&
-    checks.length > 0 &&
-    requirements.every(({ checks }) => checks.length > 0) &&
-    checks.every(({ outcome }) => outcome === 'passed');
+  const stageCoverage = readinessLevels.map((level) => {
+    const required = checks.filter((check) => readinessLevels.indexOf(check.requiredFrom) <= readinessLevels.indexOf(level));
+    const applicable = required.filter(({ outcome }) => outcome !== 'not-applicable');
+    return {
+      level,
+      complete:
+        control.mappingCurrent &&
+        requirements.every(({ checks }) => checks.length > 0) &&
+        applicable.length > 0 &&
+        applicable.every(({ outcome }) => outcome === 'passed'),
+      requiredChecks: [...new Set(required.map(({ id }) => id))],
+      notApplicableChecks: [...new Set(required.filter(({ outcome }) => outcome === 'not-applicable').map(({ id }) => id))],
+      unresolved: applicable.filter(({ outcome }) => outcome !== 'passed').map(({ id, outcome }) => ({ check: id, outcome })),
+    };
+  });
+  const coverageAt = (level: ReadinessLevel) => stageCoverage.find((entry) => entry.level === level)!.complete;
   const supplementalMappingReview = mappingReview
     ? {
         owner: mappingReview.owner,
@@ -529,7 +572,7 @@ export function assessReadinessControl(options: {
       passingAssertions(fidelity, observations, 'axisAssertions') &&
       passingAssertions(fidelity, observations, 'accessibilityAssertions')
     : false;
-  const assertions = coverageComplete && ((axisChecks.length > 0 && accessibilityChecks.length > 0) || reviewedFidelityAssertions);
+  const assertions = coverageAt('preview');
   const currency = upstreamCurrency(control, get('upstream-currency'));
   const pinned = control.sources.every(({ lock, fingerprint }) => lock !== null && fingerprint !== null);
   const implemented = implementationExported(root, control);
@@ -569,24 +612,52 @@ export function assessReadinessControl(options: {
       };
     }),
   }));
-  const native = targets.every(
-    ({ supported, lanes }) =>
-      !supported || lanes.some(({ outcome, requirementCoverage }) => outcome === 'passed' && requirementCoverage === 'passed'),
-  );
-  const targetRecords = (kind: OwnerRecordKind) =>
-    policy.supportedTargets.every((target) =>
-      authenticated.some(
+  const nativeChecks = checks.filter(({ evidence }) => evidence === 'native');
+  const kindCoverageAt = (kind: 'native' | 'visual', level: ReadinessLevel) =>
+    checks
+      .filter((check) => check.evidence === kind && readinessLevels.indexOf(check.requiredFrom) <= readinessLevels.indexOf(level))
+      .every(({ outcome }) => outcome === 'passed' || outcome === 'not-applicable');
+  const native = kindCoverageAt('native', 'beta');
+  const nativeQualification = nativeChecks.every(({ outcome }) => outcome === 'not-applicable')
+    ? 'not-applicable'
+    : kindCoverageAt('native', 'stable')
+      ? 'passed'
+      : 'incomplete';
+  const qualificationTargets = (kind: 'keyboard' | 'screen-reader') =>
+    policy.supportedTargets.filter(
+      (target) =>
+        control.mapping?.legacy ||
+        checks.some((check) => check.qualification === kind && check.applicability?.[target]?.status !== 'not-applicable'),
+    );
+  const targetRecords = (kind: 'keyboard' | 'screen-reader') =>
+    qualificationTargets(kind).every((target) => {
+      const records = authenticated.filter(
         (record) =>
           record.kind === kind &&
           record.target === target &&
           record.details.result === 'passed' &&
           strings(record.details.scenarios, 'Manual conformance scenarios').length > 0 &&
           text(record.details.assistiveTechnology, 'Keyboard or screen-reader environment'),
-      ),
-    );
-  const visual = policy.supportedTargets.every((target) =>
-    reviewedObservations.some((entry) => entry.kind === 'visual' && entry.target === target && entry.outcome === 'passed'),
-  );
+      );
+      const names = records.flatMap((record) => strings(record.details.assertionNames, 'Reviewed exact observation identities'));
+      return (
+        records.length > 0 &&
+        checks
+          .filter((check) => check.qualification === kind && check.applicability?.[target]?.status !== 'not-applicable')
+          .every((check) => {
+            const links = check.tests.filter((link) => link.target === undefined || link.target === target);
+            return links.length > 0 && links.every(({ name }) => names.includes(name));
+          })
+      );
+    });
+  const visual = kindCoverageAt('visual', 'beta');
+  const tokenChecks = checks.filter((check) => check.source.split('#')[0] === 'spec/tokens.yaml');
+  const tokenDecisionRequired = tokenChecks.length > 0;
+  const qualifications = (['keyboard', 'screen-reader'] as const).map((kind) => ({
+    kind,
+    requiredTargets: qualificationTargets(kind),
+    outcome: targetRecords(kind) ? (qualificationTargets(kind).length ? 'passed' : 'not-applicable') : 'missing',
+  }));
   const api = get('api-stability');
   const apiCommitted = Boolean(
     api && text(api.details.commitment, 'API stability commitment') && text(api.details.compatibilityWindow, 'API compatibility window'),
@@ -615,25 +686,31 @@ export function assessReadinessControl(options: {
       experimental: implemented && story,
       preview: assertions && pinned,
       beta: visual && currency.current,
-      stable: visual && currency.current,
+      stable: kindCoverageAt('visual', 'stable') && currency.current,
     },
-    contractCoverage: { experimental: implemented, preview: coverageComplete, beta: coverageComplete, stable: coverageComplete },
+    contractCoverage: { experimental: implemented, preview: coverageAt('preview'), beta: coverageAt('beta'), stable: coverageAt('stable') },
     accessibility: {
       experimental: unit,
       preview: assertions,
       beta: assertions && native,
       stable: targetRecords('keyboard') && targetRecords('screen-reader'),
     },
-    platformValidation: { experimental: unit && story, preview: types, beta: native, stable: native && enforced },
+    platformValidation: {
+      experimental: unit && story,
+      preview: types,
+      beta: native,
+      stable: kindCoverageAt('native', 'stable') && enforced,
+    },
     apiStability: { experimental: implemented, preview: types, beta: types, stable: apiCommitted },
-    tokenCompleteness: { experimental: implemented, preview: pinned, beta: visual, stable: tokenDecided },
+    tokenCompleteness: { experimental: implemented, preview: pinned, beta: visual, stable: !tokenDecisionRequired || tokenDecided },
   };
   const explanations = {
     fidelity:
       'Needs exported implementation/story, reviewed SPEC/axis assertions, recorded pins, then visual comparisons and current upstream observations.',
-    contractCoverage: 'Needs complete requirement-first reviewed mapping, a current review digest, and every acceptance check passing.',
+    contractCoverage:
+      'Needs a current requirement-first mapping and every applicable check required at this level passing; later-level gaps remain visible.',
     accessibility:
-      'Needs runtime accessibility assertions and native evidence; stable additionally needs per-target keyboard and screen-reader signoffs.',
+      'Needs runtime accessibility assertions and native evidence; stable additionally needs contract-owned keyboard and screen-reader qualification.',
     platformValidation: 'Needs actual runtime/type execution, all supported target evidence, and actual required-check enforcement.',
     apiStability: 'Needs real compiler/type-test execution, then an authenticated API-stability commitment.',
     tokenCompleteness: 'Needs recorded source pins, visual evidence, then an authenticated explicit token-gap decision.',
@@ -697,6 +774,10 @@ export function assessReadinessControl(options: {
         ),
     ),
     targets,
+    stageCoverage,
+    qualifications,
+    nativeQualification,
+    tokenDecisionRequired,
     dimensions,
     declaredStatus,
     terminalDeprecated,
@@ -720,7 +801,9 @@ export function assessReadinessControl(options: {
     reviewedRecords: records,
     upstreamCurrency: currency,
     blockers,
-    missingEvidence: checks.filter(({ outcome }) => outcome !== 'passed').map(({ id, outcome }) => ({ check: id, outcome })),
+    missingEvidence: checks
+      .filter(({ outcome }) => outcome !== 'passed' && outcome !== 'not-applicable')
+      .map(({ id, outcome, requiredFrom }) => ({ check: id, outcome, requiredFrom })),
     limitations: [
       ...policy.limitations,
       ...evidence.limitations,

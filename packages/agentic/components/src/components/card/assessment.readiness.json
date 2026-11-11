@@ -8,9 +8,16 @@
       "checks": [
         {
           "id": "card-axes",
-          "description": "Defaults small/default padding/default layout/vertical/enabled; two sizes, two paddings, three layouts and two directions retain valid public types.",
+          "description": "Compiled public types accept the two sizes, two paddings, three layouts and two directions and reject unsupported values.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "card-default-values",
+          "description": "Omitted variants resolve to small size, default padding and layout, vertical direction, and enabled state.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -40,9 +47,16 @@
         },
         {
           "id": "card-slot-contract",
-          "description": "Required root/content and optional View slots accept custom content without injected typography/schema and preserve supplied props.",
+          "description": "Compiled public types require root/content and accept the optional View slots.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "card-slot-prop-forwarding",
+          "description": "Supplied View slot props and content are preserved without injecting typography or a content schema.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         }
       ]
@@ -61,7 +75,12 @@
           "description": "Selected overlay reports selected and resolves selected rest/hover/pressed surface colors; system focus request remains on overlay.",
           "source": "spec/tokens.yaml",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Card renders selected colors and hover, press, and focus feedback" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Card renders selected colors and hover, press, and focus feedback"
+            }
+          ]
         },
         {
           "id": "card-focus-policy",
@@ -86,14 +105,24 @@
           "description": "Explicit accessible static card exposes supplied label with group role.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Card exposes static group semantics when explicitly requested" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Card exposes static group semantics when explicitly requested"
+            }
+          ]
         },
         {
           "id": "card-overlay-disabled",
           "description": "Disabled selected overlay is disabled/unfocusable, preserves selected and blocks press without disabling nested Help action.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Card CRD-004 CRD-005 disables the overlay without disabling a nested action" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Card CRD-004 CRD-005 disables the overlay without disabling a nested action"
+            }
+          ]
         },
         {
           "id": "card-static-accessibility",
@@ -114,7 +143,8 @@
           "description": "UIA/AX exposes overlay name/button/state or opted-in static group without concealing independently accessible slot controls.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -125,14 +155,20 @@
           "description": "Press forwards once without changing externally supplied selected=false.",
           "source": "spec/interaction.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Card renders selection without changing it on press" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Card renders selection without changing it on press"
+            }
+          ]
         },
         {
           "id": "card-nested-native",
           "description": "Nested controls activate independently of overlay for pointer and keyboard; card adds no focus trap, collection navigation, destination or timed animation.",
           "source": "spec/interaction.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         }
       ]
     }

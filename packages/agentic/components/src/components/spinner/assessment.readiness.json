@@ -11,7 +11,12 @@
           "description": "Default medium root/SVG32px, thick stroke, subtle track/loud quarter arc; root progressbar busy/nonfocusable/pointer none.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Spinner renders as an accessible progressbar with default medium sizing" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner renders as an accessible progressbar with default medium sizing"
+            }
+          ]
         },
         {
           "id": "spinner-size-matrix",
@@ -50,7 +55,8 @@
           "description": "Named spinner announces task/busy once when encountered, not every rotation or completion; decorative root opt-out produces no duplicate announcement.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -90,14 +96,24 @@
           "description": "Exposed unnamed spinner emits its required-name development warning.",
           "source": "spec/accessibility.md#naming",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Spinner warns when no accessible name is supplied" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner warns when no accessible name is supplied"
+            }
+          ]
         },
         {
           "id": "spinner-name-reference",
           "description": "Caller label reference survives forwarding.",
           "source": "spec/accessibility.md#naming",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Spinner preserves consumer accessibility label-by references" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner preserves consumer accessibility label-by references"
+            }
+          ]
         },
         {
           "id": "spinner-warning-policy",
@@ -116,7 +132,10 @@
           "source": "spec/interaction.md#rotation",
           "evidence": "unit",
           "tests": [
-            { "kind": "unit", "name": "Spinner shares continuous rotation through the macOS Fabric driver when reduce motion is disabled" }
+            {
+              "kind": "unit",
+              "name": "Spinner shares continuous rotation through the macOS Fabric driver when reduce motion is disabled"
+            }
           ]
         },
         {

@@ -8,9 +8,37 @@
       "checks": [
         {
           "id": "popover-public-props",
-          "description": "Default uncontrolled closed/bottom/center; required Button trigger/content, structural inaccessible root with stable ordinary ref, composed trigger handlers/refs, surface/content refs null closed and caller styles last.",
+          "description": "Compiled public types require the Button trigger and content and accept the documented root, trigger and surface prop/ref shapes.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "popover-default-values",
+          "description": "Omitted props resolve to uncontrolled closed presence, bottom placement and center alignment.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-root-ref-style",
+          "description": "The structural inaccessible root preserves its ref across presentations and applies caller style last.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-trigger-ref-composition",
+          "description": "The trigger composes the caller and anchor refs without replacing either.",
+          "source": "SPEC.md#slots-and-anatomy",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "popover-closed-content-refs",
+          "description": "The surface and content refs are null while closed and attach only during presentation.",
+          "source": "SPEC.md#slots-and-anatomy",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -18,14 +46,24 @@
           "description": "Closed Button reports collapsed and Opens a popover hint, root ref exists and no surface renders.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Popover renders a collapsed Button trigger with a popup hint and no surface while closed" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Popover renders a collapsed Button trigger with a popup hint and no surface while closed"
+            }
+          ]
         },
         {
           "id": "popover-trigger-composition",
           "description": "Caller trigger hint remains and synthetic trigger onPress runs once while opening surface.",
           "source": "spec/interaction.md#trigger",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Popover keeps a caller trigger hint and composes caller trigger handlers" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Popover keeps a caller trigger hint and composes caller trigger handlers"
+            }
+          ]
         }
       ]
     },
@@ -72,7 +110,12 @@
           "description": "No entry request precedes readiness; confirmed first-content result avoids fallback surface stop.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Popover enters the first eligible content after native readiness" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Popover enters the first eligible content after native readiness"
+            }
+          ]
         },
         {
           "id": "popover-native-entry",
@@ -94,6 +137,7 @@
         },
         {
           "id": "popover-tab-wrap",
+          "qualification": "keyboard",
           "description": "Native Tab/Shift+Tab wrap inside popup, content owns navigation and Escape remains keyboard exit; presentation never focused does not move focus when closed.",
           "source": "spec/interaction.md#focus",
           "evidence": "native",
@@ -101,6 +145,23 @@
         },
         {
           "id": "popover-win32-dismiss-race",
+          "applicability": {
+            "windows-fabric": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The delayed unclassified dismissal belongs to the Office Win32 host."
+            },
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The delayed unclassified dismissal belongs to the Office Win32 host."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "SPEC.md#platform-behavior",
+              "reason": "The delayed unclassified dismissal belongs to the Office Win32 host."
+            }
+          },
           "description": "Win32 unclassified host dismissal waits 250ms; trigger press within window closes via trigger without reopen or duplicate notification.",
           "source": "SPEC.md#platform-behavior",
           "evidence": "native",
@@ -119,6 +180,18 @@
         },
         {
           "id": "popover-expand-collapse",
+          "applicability": {
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "This check invokes Windows and Win32 UIA ExpandCollapse; macOS trigger semantics are qualified separately."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#qualification",
+              "reason": "This check invokes Windows and Win32 UIA ExpandCollapse; macOS trigger semantics are qualified separately."
+            }
+          },
           "description": "Windows/Win32 actual ExpandCollapse actions operate; Win32 prepends declarations while retaining caller actions/events.",
           "source": "spec/accessibility.md#trigger",
           "evidence": "native",
@@ -129,7 +202,8 @@
           "description": "Narrator/VoiceOver qualifies trigger expanded, named group, individually reachable content and native entry/return on each renderer.",
           "source": "spec/accessibility.md#qualification",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
@@ -147,7 +221,12 @@
           "description": "Caller padding overrides component padding while surface retains border structure and defined fill/radius.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "Popover styles the surface from tokens with the caller style last" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Popover styles the surface from tokens with the caller style last"
+            }
+          ]
         },
         {
           "id": "popover-native-silhouette",

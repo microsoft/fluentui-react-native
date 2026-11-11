@@ -8,9 +8,16 @@
       "checks": [
         {
           "id": "list-item-defaults",
-          "description": "Defaults List item/medium/none/right/enabled/unselected; root/content required, secondary/icon/selectedIcon/avatar/trailing optional with owned Pressable/ref surface.",
+          "description": "Compiled types require root/content, accept the optional visual slots and expose the owned Pressable props and native ref.",
           "source": "SPEC.md",
           "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "list-item-default-values",
+          "description": "Omitted props resolve to List item content, medium size, no selection indicator, right secondary content, enabled and unselected.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
           "tests": []
         },
         {
@@ -36,7 +43,12 @@
           "description": "Selected true swaps to selectedIcon, hides regular icon and uses invisible semibold reservation beneath selected visible text.",
           "source": "SPEC.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "ListItem uses selected semantics, selected icon, and a ghost label to prevent reflow" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListItem uses selected semantics, selected icon, and a ghost label to prevent reflow"
+            }
+          ]
         },
         {
           "id": "list-item-icon-fallback",
@@ -54,7 +66,12 @@
           "description": "Press forwards once without changing externally owned selected=false.",
           "source": "spec/interaction.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "ListItem renders selection without changing it on press" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListItem renders selection without changing it on press"
+            }
+          ]
         },
         {
           "id": "list-item-indicators",
@@ -86,7 +103,12 @@
           "description": "Disabled is unfocusable, exposes disabled/selected false and ignores synthetic press.",
           "source": "spec/accessibility.md",
           "evidence": "unit",
-          "tests": [{ "kind": "unit", "name": "ListItem disables interaction and exposes disabled accessibility state" }]
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListItem disables interaction and exposes disabled accessibility state"
+            }
+          ]
         },
         {
           "id": "list-item-state-style",
@@ -107,14 +129,16 @@
           "description": "Native Enter/Space/pointer activate once; Windows/macOS system ring versus Win32 persistent keyboard-modality custom ring; ref self-focus and detach/disable obey shared lifetime.",
           "source": "spec/interaction.md",
           "evidence": "native",
-          "tests": []
+          "tests": [],
+          "qualification": "keyboard"
         },
         {
           "id": "list-item-screen-reader",
           "description": "UIA/AX announces resolved role/name/selected/disabled once without glyph/visual duplication; collection semantics remain caller-owned.",
           "source": "spec/accessibility.md",
           "evidence": "manual",
-          "tests": []
+          "tests": [],
+          "qualification": "screen-reader"
         }
       ]
     },
