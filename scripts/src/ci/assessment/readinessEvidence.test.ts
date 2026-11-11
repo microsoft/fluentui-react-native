@@ -509,7 +509,7 @@ test('local primitive foundations require no fake external pin; changed normativ
   assert.equal(upstreamCurrency(external, observation).current, false);
 });
 
-test('a qualifying automated preview ceiling does not require owner adoption, endorsement or approval', () => {
+test('a qualifying automated ceiling does not require owner adoption, endorsement or approval', () => {
   const directory = fixture();
   const selected = control();
   const exported = path.join(directory, 'packages', 'sample', 'src');
@@ -572,7 +572,7 @@ test('a qualifying automated preview ceiling does not require owner adoption, en
     environment: environment(),
     evidence,
   });
-  assert.equal(report.evidenceSupportedStatus, 'preview');
+  assert.equal(report.evidenceSupportedStatus, 'beta');
   assert.equal(report.approvedStatus, null);
   assert.equal(report.approvalState.ownerAdoption, false);
   assert.equal(report.declaredStatus, null);
@@ -1068,7 +1068,8 @@ test('a successful offline Yarn workspace forced build qualifies actual type fil
   put('yarn.lock', readFileSync(path.join(root, 'yarn.lock'), 'utf8'));
   put(
     '.readiness-yarnrc.yml',
-    'nodeLinker: node-modules\nenableNetwork: false\nenableGlobalCache: false\nenableMirror: false\nenableTelemetry: false\n',
+    // This generated offline fixture reuses the already-installed compiler; repository install protections are unchanged.
+    'nodeLinker: node-modules\nenableNetwork: false\nenableGlobalCache: false\nenableMirror: false\nenableTelemetry: false\nenableHardenedMode: false\nenableImmutableInstalls: false\n',
   );
   put('.gitignore', 'node_modules/\nreports/\n.yarn/cache/\n.yarn/install-state.gz\n');
   put(
