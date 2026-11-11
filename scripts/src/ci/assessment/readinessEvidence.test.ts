@@ -1043,7 +1043,7 @@ test('declared forced Yarn workspace build executes the actual compiler and bind
   assert.equal(realCompiler(root, [capture.command[0], path.join(root, 'scripts', 'src', 'cli.ts'), ...capture.command.slice(2)]), false);
 });
 
-test('a successful offline Yarn workspace forced build qualifies actual type files from its original receipt', async () => {
+test('a successful offline Yarn workspace forced build qualifies actual type files through the workflow CLI', () => {
   const directory = fixture();
   const packageRoot = path.join(directory, 'packages', 'components');
   const compiler = realpathSync(path.join(root, 'scripts', 'node_modules', 'typescript'));
@@ -1120,17 +1120,24 @@ test('a successful offline Yarn workspace forced build qualifies actual type fil
       cwd: directory,
     });
     const output = path.join(directory, 'reports', 'type');
-    assert.equal(
-      await runReadinessCapture(directory, {
-        kind: 'type',
-        target: 'win32-paper',
-        input: 'all',
-        output,
-        cwd: directory,
-        command: ['node', path.relative(directory, yarn), 'workspace', '@fluentui-react-native/components', 'build', '--force'],
-      }),
-      0,
-    );
+    const prefix = 'run: node scripts/src/ci/readinessCiTask.ts ';
+    const invocation = readFileSync(path.join(root, '.github', 'workflows', 'pr.yml'), 'utf8')
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .find((line) => line.startsWith(`${prefix}run --kind type `));
+    assert.ok(invocation, 'The workflow must declare its compiler capture invocation.');
+    const args = invocation.slice(prefix.length).split(' ');
+    const outputIndex = args.indexOf('--output');
+    assert.ok(outputIndex >= 0, 'Compiler capture must declare an output directory.');
+    args[outputIndex + 1] = output;
+    const result = spawnSync(process.execPath, [path.join(root, 'scripts', 'src', 'ci', 'readinessCiTask.ts'), ...args], {
+      cwd: directory,
+      env: process.env,
+      encoding: 'utf8',
+      timeout: 60_000,
+    });
+    if (result.error) throw result.error;
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
     const capture = parseExecutionCapture(JSON.parse(readFileSync(path.join(output, 'execution.json'), 'utf8')));
     assert.equal(capture.before.dirty, false);
     assert.equal(capture.after.dirty, false);
@@ -1141,6 +1148,9 @@ test('a successful offline Yarn workspace forced build qualifies actual type fil
     assert.equal(evidence.observations.length, 1);
     assert.equal(evidence.observations[0].name, selected.typeFiles[0]);
     assert.equal(evidence.observations[0].outcome, 'passed', evidence.limitations.join('\n'));
+    assert.equal(evidence.observations[0].kind, 'type');
+    assert.equal(evidence.observations[0].target, undefined);
+    assert.equal(evidence.nativeSelections.length, 0);
   } finally {
     if (previousRc === undefined) delete process.env.YARN_RC_FILENAME;
     else process.env.YARN_RC_FILENAME = previousRc;

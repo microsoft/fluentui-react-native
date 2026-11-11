@@ -135,7 +135,7 @@ jobs:
 
       - name: Capture actual component compiler execution
         if: ${{ !cancelled() && steps.build-ci.outcome == 'success' }}
-        run: node scripts/src/ci/readinessCiTask.ts run --kind type --output apps/storybook/artifacts/readiness/type -- node .yarn/releases/yarn-4.18.0.cjs workspace @fluentui-react-native/components build --force
+        run: node scripts/src/ci/readinessCiTask.ts run --kind type --target win32-paper --input all --output apps/storybook/artifacts/readiness/type -- node .yarn/releases/yarn-4.18.0.cjs workspace @fluentui-react-native/components build --force
 
       - name: Upload runtime and compiler readiness evidence
         if: ${{ always() && !cancelled() }}
