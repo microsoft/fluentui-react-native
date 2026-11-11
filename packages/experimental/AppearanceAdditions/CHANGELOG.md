@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/experimental-appearance-additions
 
+## 0.8.13
+
+### Patch Changes
+
+- Updated dependencies [6b644ce]
+  - @fluentui-react-native/framework-base@0.9.1
+
 ## 0.8.12
 
 ### Patch Changes

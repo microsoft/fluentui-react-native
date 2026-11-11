@@ -1,5 +1,0 @@
----
-'@fluentui-react-native/desktop-test': patch
----
-
-Fix shutdown hangs and cancellation. An integration's run is no longer tracked in the scope it borrows, so a Storybook `serve` or story test exits after SIGINT instead of idling, and scope draining is bounded. Cancellation stops running stage and suite commands, including their POSIX process groups, reports them failed, and refuses late spawns. A second interrupt force-stops owned process trees, SIGHUP is handled, and handlers stay installed until cleanup completes; `handleDesktopInterrupts` exports that policy for integrations. On Windows, `taskkill` runs synchronously and only before the command's exit is recorded, so it cannot address a reused process ID. Close disposes services and resources in one reverse order even when an observer throws. Workload claims move to a per-user directory independent of TMPDIR and are replaced atomically; local sockets use short private paths. Generated WDIO configs read settings from a file, suites accept `suiteTimeoutMs`, and command arguments and environment reject NUL.

@@ -1,5 +1,14 @@
 # @fluentui-react-native/storybook-desktop-runtime
 
+## 0.3.7
+
+### Patch Changes
+
+- c5ea4df: Update Storybook React Native packages to 10.7.1 and Storybook to 10.6.5.
+- @fluentui-react-native/native-core@0.2.2
+  - @fluentui-react-native/design@0.6.1
+  - @fluentui-react-native/default-theme@0.28.1
+
 ## 0.3.6
 
 ### Patch Changes
