@@ -9,6 +9,20 @@ packages already route focus to ordinary views. Upstream command declarations ar
 Declaration presence is not all-backend support. Extend those emerging commands with outcomes rather than
 replacing them without compatibility analysis.
 
+## Status in core 0.88.1
+
+Ordinary-View focus remains behind the `enableImperativeFocus` flag, which defaults to false with no OSS Stable or
+Canary override. It is a native flag, so each host must enable it natively; JavaScript overrides cannot set it. Without it, [`ReactNativeElement.focus()`](https://github.com/facebook/react-native/blob/v0.88.1/packages/react-native/src/private/webapis/dom/nodes/ReactNativeElement.js)
+focuses only text inputs. With it, Android requests native focus and iOS Views become first responder. iOS Views accept
+first responder unconditionally in 0.83.0 through 0.85.x; from 0.86.0 they accept only when the flag is on. Android also
+defers focus until attachment (0.83.0). The commands still return void, so callers cannot distinguish confirmed
+focus, refusal or a detached target. Default DOM refs add `isConnected` and `contains`, which can check liveness
+and containment before a request but cannot confirm its outcome.
+
+RNW 0.85.0 enables the flag in its host. RNmacOS 0.83.0 implements an unconditional AppKit command but routes
+Fabric `ref.focus()` to it only when the flag is on, an inferred upgrade risk for FURN's current focus path.
+See [core API evolution](core-api-evolution.md).
+
 ## Options and ownership
 
 1. Complete ordinary View focus/blur across backends and separate non-text focus from text-input bookkeeping.

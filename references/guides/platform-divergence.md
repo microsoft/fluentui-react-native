@@ -7,7 +7,8 @@ make an unsupported native operation real simply by giving every platform the sa
 
 This human-facing research guide separates those layers and identifies portable contracts worth investigating
 upstream. It is **not an implementation plan, approved API, or native qualification report**.
-Research date: **November 11, 2026**; FURN baseline: `ae22f89ce6bfa4e56b1f1eccdc6dbe73837cf9f3`.
+Research date: **November 11, 2026**; FURN baseline: `ae22f89ce6bfa4e56b1f1eccdc6dbe73837cf9f3`; latest stable
+core compared: **React Native 0.88.1**.
 See [evidence and provenance](references/platform-divergence/evidence.md) for revisions, limitations, and the
 dual-model review.
 
@@ -41,17 +42,27 @@ The [platform article](references/platform-divergence/platform-capabilities.md) 
 ## Divergence from core
 
 The comparison below describes source-inspected FURN dependencies, not universal support or execution evidence.
-Core is **0.81.6**, macOS **0.81.9 plus FURN's patch**, RNW **0.81.35**, and Win32 **0.81.9**.
-Newer upstream research is kept separately; a feature in upstream `main` is not automatically in these releases.
+FURN pins core **0.81.6**, macOS **0.81.9 plus FURN's patch**, RNW **0.81.35**, and Win32 **0.81.9**; the
+platform columns describe those releases. The **Core 0.88.1** column shows the latest stable core release on the
+research date. Many of its additions are flag-gated, Canary-only, or implemented only for Android or iOS.
+A core API reaches FURN only after FURN adopts a fork built on that version and the backend implements it.
+Core also requires the New Architecture on iOS and Android from 0.82 and stops shipping the Paper JavaScript
+renderer in 0.86, so FURN's macOS Paper and Win32 Paper lanes depend on forks keeping legacy paths.
+Newer forks exist: RNmacOS 0.83.0, RNW 0.85.0, and Win32 0.85.0.
 
-| Area                   | Core baseline                                                 | macOS                                                            | Windows / RNW Fabric                                                     | Office Win32 Paper                                                 |
-| ---------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| Focus                  | Text-centric JS bookkeeping; platform-qualified focus props   | AppKit responders, key windows, rings                            | Focus reasons, island entry, native focus search                         | Host focus commands; constrained FURN adapters                     |
-| Keyboard               | No generic View key-down/up in inspected 0.81.6 contract      | Handled-key declarations before responder defaults               | Routed events and native handled-key declarations                        | JS declarations over host-owned handling                           |
-| Accessibility          | Shared roles, state, actions; projection is platform-specific | AX; FURN patch repairs specific Fabric state/text gaps           | UIA patterns, collection metadata, action dispatch                       | UIA host contract; different action names and some prop spellings  |
-| Presentation           | Modal and native host/surface seams already exist             | AppKit child windows; inspected Fabric Modal unavailable         | Window/island/portal hosting; legacy Popup/Flyout are not Fabric support | Baked host Callout, not a general public window manager            |
-| Metrics and appearance | Global metrics and platform appearance APIs                   | Window/root distinction, Increase Contrast, AppKit effects       | Island scale/layout, high-contrast resources                             | Host metrics and theming; window dimensions may be unavailable     |
-| Editing and services   | Mobile-oriented shared surface                                | Desktop editing, paste/drop, dialogs, app activation adaptations | Desktop keyboard/editing, window chrome and host services                | Host controls and restrictions; exports do not prove functionality |
+| Area                   | Core 0.81.6 (FURN)                                            | Core 0.88.1 (latest stable)                                                                                            | macOS                                                            | Windows / RNW Fabric                                                     | Office Win32 Paper                                                 |
+| ---------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Focus                  | Text-centric JS bookkeeping; platform-qualified focus props   | View `focus`/`blur` commands (0.83) behind default-off `enableImperativeFocus`; void result                            | AppKit responders, key windows, rings                            | Focus reasons, island entry, native focus search                         | Host focus commands; constrained FURN adapters                     |
+| Keyboard               | No generic View key-down/up in inspected 0.81.6 contract      | View `onKeyDown`/`onKeyUp` (0.84) behind default-off `enableKeyEvents`; Android only; no consumption                   | Handled-key declarations before responder defaults               | Routed events and native handled-key declarations                        | JS declarations over host-owned handling                           |
+| Accessibility          | Shared roles, state, actions; projection is platform-specific | Android `windowStateChange`; iOS announcement priority, action labels and Full Keyboard Access roles; Canary order     | AX; FURN patch repairs specific Fabric state/text gaps           | UIA patterns, collection metadata, action dispatch                       | UIA host contract; different action names and some prop spellings  |
+| Presentation           | Modal and native host/surface seams already exist             | DOM geometry on Fabric refs by default (0.82); Modal `animated` removed; no Popover or anchored surface                | AppKit child windows; inspected Fabric Modal unavailable         | Window/island/portal hosting; legacy Popup/Flyout are not Fabric support | Baked host Callout, not a general public window manager            |
+| Metrics and appearance | Global metrics and platform appearance APIs                   | `'auto'` color-scheme override; `PlatformColor` fallback; contrast queries stay iOS/Android-specific; no forced colors | Window/root distinction, Increase Contrast, AppKit effects       | Island scale/layout, high-contrast resources                             | Host metrics and theming; window dimensions may be unavailable     |
+| Editing and services   | Mobile-oriented shared surface                                | TextInput `onChange` selection (0.85); focused input blurs before unmount (0.88)                                       | Desktop editing, paste/drop, dialogs, app activation adaptations | Desktop keyboard/editing, window chrome and host services                | Host controls and restrictions; exports do not prove functionality |
+
+The [core API evolution article](references/platform-divergence/core-api-evolution.md) lists each post-0.81 API
+with its first stable release, availability, platform implementation, remaining gap, and newer fork status.
+It also identifies an inferred macOS 0.83 change to ordinary-View `ref.focus()` that needs execution before an
+upgrade.
 
 The [detailed comparison](references/platform-divergence/platform-capabilities.md) retains the broader pointer,
 text, scrolling, appearance, service, and module-resolution topics from the original studies.
@@ -83,14 +94,15 @@ questions separately from confirmed defects.
 
 The useful upstream boundary is an observable capability, not a Fluent component or Office-specific host.
 Each proposal below includes API options, unsupported behavior, and a core validation contract.
+Core 0.88.1 narrows several gaps but closes none of them.
 
-| Candidate                        | Portable boundary                                                   | Detailed research                                                                                          |
-| -------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Confirmed focus and navigation   | Live mounted targets, refusal, cancellation; optional native groups | [Focus](references/platform-divergence/focus-proposal.md)                                                  |
-| Keyboard ownership               | Which native default a committed key declaration consumes           | [Keyboard](references/platform-divergence/keyboard-proposal.md)                                            |
-| Accessibility semantics/actions  | Consistent declarations, native projection and actual invocation    | [Accessibility](references/platform-divergence/accessibility-proposal.md)                                  |
-| Anchored presentation            | Owner-scoped anchors, readiness, closure, stale-event handling      | [Surfaces and hosts](references/platform-divergence/surfaces-proposal.md)                                  |
-| Surface capabilities and metrics | Root-scoped bounds/activity, explicit unsupported capabilities      | [Surfaces and hosts](references/platform-divergence/surfaces-proposal.md#surface-context-and-capabilities) |
+| Candidate                        | Portable boundary                                                   | Core 0.88.1 building blocks                                                                          | Detailed research                                                                                          |
+| -------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Confirmed focus and navigation   | Live mounted targets, refusal, cancellation; optional native groups | Flag-gated void View focus commands; DOM `isConnected` and `contains`                                | [Focus](references/platform-divergence/focus-proposal.md)                                                  |
+| Keyboard ownership               | Which native default a committed key declaration consumes           | Flag-gated Android key payloads; no native-default consumption                                       | [Keyboard](references/platform-divergence/keyboard-proposal.md)                                            |
+| Accessibility semantics/actions  | Consistent declarations, native projection and actual invocation    | Platform-specific announcements, roles and iOS action labels; Canary order; no typed collection seen | [Accessibility](references/platform-divergence/accessibility-proposal.md)                                  |
+| Anchored presentation            | Owner-scoped anchors, readiness, closure, stale-event handling      | Fabric `getBoundingClientRect`; no anchored surface or popover                                       | [Surfaces and hosts](references/platform-divergence/surfaces-proposal.md)                                  |
+| Surface capabilities and metrics | Root-scoped bounds/activity, explicit unsupported capabilities      | Android window listener, iOS SceneDelegate lifecycle and C++ viewport; no JavaScript surface context | [Surfaces and hosts](references/platform-divergence/surfaces-proposal.md#surface-context-and-capabilities) |
 
 **Research direction, not an accepted roadmap:** establish versioned focus, keyboard, and semantic conformance
 fixtures before standardizing a large popup API. Keep application selection/restoration policy, Fluent tokens,

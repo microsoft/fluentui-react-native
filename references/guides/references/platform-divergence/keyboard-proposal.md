@@ -8,6 +8,15 @@ the release changelog reports Android implementation. That is not proof of iOS o
 These events reduce the event-payload gap relative to FURN's core 0.81.6, but an event callback is
 not the same contract as claiming a native default before AppKit or Windows routes it further.
 
+In 0.88.1, the latest stable release, the events remain behind the default-off `enableKeyEvents` flag.
+Android root views pass hardware keys to a
+[key dispatcher](https://github.com/facebook/react-native/blob/v0.88.1/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/uimanager/JSKeyDispatcher.kt)
+that sends `key`, `code`, modifiers, `repeat` and `isComposing` to the focused view. The
+[root](https://github.com/facebook/react-native/blob/v0.88.1/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactRootView.java)
+then always continues native dispatch, so no handler can claim a native default. No iOS implementation was found.
+RNW 0.85.0 and RNmacOS 0.83.0 keep their own handled-key declarations, and Win32 keeps `ViewWin32` declarations.
+The ownership gap below therefore remains open; see [core API evolution](core-api-evolution.md).
+
 ## API options
 
 One option is a committed declaration scoped to a native target or group:

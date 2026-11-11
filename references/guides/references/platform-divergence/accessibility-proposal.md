@@ -5,6 +5,21 @@
 **Hypothetical API research.** Shared role names and event handlers are insufficient if the native tree, provider
 pattern or action dispatch disagrees. A declaration's presence is not proof of implementation.
 
+## Status in core 0.88.1
+
+Core 0.88.1 adds platform-specific accessibility pieces but not the typed collection metadata, relationships or
+standard action names this proposal describes. iOS gains announcement priority (0.84.0), VoiceOver custom-action names
+from action `label`s on Fabric (0.84.0) and Full Keyboard Access reachability for composite-control roles such as option, tab and treeitem (0.88.0). Android gains
+`windowStateChange` announcements (0.85.0). Pressable Text without an explicit role defaults to `link` (0.84.0).
+`experimental_accessibilityOrder`, declared in 0.81.6, is enabled only by the Canary release level from 0.87.0.
+`AccessibilityInfo.setAccessibilityFocus` is deprecated in favor of `sendAccessibilityEvent(ref, 'focus')`
+(0.85.0), which still moves accessibility focus rather than keyboard focus.
+
+The [0.89.0-rc.1](https://github.com/facebook/react-native/releases/tag/v0.89.0-rc.1) release candidate maps
+`aria-modal` to iOS modal isolation and announces collapsed state; treat those as unreleased until a stable release.
+None of these changes reach FURN's macOS, Windows or Win32 backends without fork work. See
+[core API evolution](core-api-evolution.md).
+
 ## Options and contract
 
 Extend core's existing semantic props with missing collection metadata and relationships, or introduce a versioned

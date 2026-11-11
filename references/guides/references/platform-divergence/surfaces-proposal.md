@@ -5,6 +5,21 @@
 These are **two hypothetical capability families**, not an accepted all-in-one window-management API.
 Core already has hosts, surfaces and Modal; build on their lifecycle seams rather than claiming they are absent.
 
+## Status in core 0.88.1
+
+Core 0.88.1 adds building blocks but no anchored presentation, Popover, Portal or JavaScript surface context.
+Fabric host refs are DOM elements by default from 0.82.0, so `getBoundingClientRect` can supply anchor geometry
+within the layout tree; Paper refs, including Win32's, lack these methods. From 0.87.0, backported to 0.86.3,
+`parentNode` and `parentElement` cross Modal and other nested roots, so capture and bubble
+events reach ancestors. The Canary release level adds `IntersectionObserver` (0.83.0) and ref `EventTarget`
+listeners (0.88.0). Android native modules can observe window creation and destruction through
+`ExtraWindowEventListener` (0.86.0), and the C++ renderer's `LayoutContext` carries a viewport size (0.86.0). iOS
+hosts gain SceneDelegate lifecycle support (0.88.0) after 0.87.0 removes `SceneTracker`; this is native host
+lifecycle, not a JavaScript surface API.
+Modal drops its deprecated `animated` prop (0.87.0). Appearance gains an `'auto'` override (0.87.0). Contrast stays in the
+platform-specific iOS `isDarkerSystemColorsEnabled` and Android `isHighTextContrastEnabled` queries, and there is no
+forced-colors or cross-platform contrast signal. See [core API evolution](core-api-evolution.md).
+
 ## Anchored secondary presentation
 
 Options are an unstyled `AnchoredSurface`, a lower-level portal/owner protocol implemented by platform popups,

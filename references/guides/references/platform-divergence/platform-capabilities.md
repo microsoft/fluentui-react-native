@@ -26,15 +26,23 @@ Their "current" claims belong to those revisions, not to FURN's dependencies.
 | Legacy/export boundary | Fabric Modal presentation excluded in the inspected implementation despite JS export                  | Popup/Flyout exports do not imply Fabric implementation; Glyph belongs to legacy XAML | Alert prompt throws; SafeArea fallback and View-inside-Text restriction matter                         |
 
 Core 0.81.6 has focus events and text-input focus, but no View `focus`/`blur` command. All three inspected desktop
-packages route `focus()` to ordinary views through platform-specific command/bookkeeping changes. Upstream View
-command declarations are present from the inspected v0.83.0 release; generic `onKeyDown`/`onKeyUp` declarations
-follow in v0.84.0, whose changelog reports Android support, not all-platform implementation.
-Therefore both imperative focus and keyboard events need version and backend qualifiers. Core also declares
-experimental pointer events (marked not yet ready in 0.81.6), accessibility, native embedding, and surfaces. Desktop divergence is frequently
-implementation, ownership, or platform scope rather than invention of an entirely new API.
+packages route `focus()` to ordinary views through platform-specific command/bookkeeping changes. Core declares
+View commands from v0.83.0, but `ref.focus()` uses them only when the default-off `enableImperativeFocus` flag is
+enabled. Generic `onKeyDown`/`onKeyUp` declarations follow in v0.84.0 behind the default-off `enableKeyEvents`
+flag, with an Android-only implementation. Both remain flag-gated in 0.88.1, the latest stable release.
+Therefore both imperative focus and keyboard events need version, flag and backend qualifiers. Core also declares
+experimental pointer events (still marked not ready in 0.88.1), accessibility, native embedding, and surfaces.
+Desktop divergence is frequently implementation, ownership, or platform scope rather than invention of an entirely
+new API.
+
+Newer desktop forks adopt these additions unevenly. RNW 0.85.0 enables `enableImperativeFocus` in its host and
+keeps its own handled-key declarations. RNmacOS 0.83.0 keeps an AppKit focus command but gates JavaScript routing
+to it and forces the New Architecture under CocoaPods. Win32 0.85.0 still ships the Paper renderer that REX and
+Office hosts use, although core stopped shipping it in 0.86.0. See [core API evolution](core-api-evolution.md) for the complete post-0.81
+matrix, fork sources and the inferred macOS upgrade risk.
 
 Evidence: [core 0.81.6 View props](https://github.com/facebook/react-native/blob/v0.81.6/packages/react-native/Libraries/Components/View/ViewPropTypes.js),
-[newer core View props](https://github.com/facebook/react-native/blob/cd2de187e8878119896159371225acbb9dfa5d9c/packages/react-native/Libraries/Components/View/ViewPropTypes.js),
+[core 0.88.1 View props](https://github.com/facebook/react-native/blob/v0.88.1/packages/react-native/Libraries/Components/View/ViewPropTypes.js),
 [focus evidence](../../../agents/focus/platform-evidence.md),
 [accessibility evidence](../../../agents/accessibility/action-transport-evidence.md), and the retained source studies.
 These are static observations; action declaration is not action execution.
