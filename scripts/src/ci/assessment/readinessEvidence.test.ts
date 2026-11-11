@@ -967,6 +967,71 @@ test('capture wraps the existing command once, preserves caller cwd, and returns
   assert.equal(capture.report, null);
 });
 
+for (const phase of ['preparation', 'finalization'] as const) {
+  for (const result of [0, 7]) {
+    test(`advisory native capture ${phase} failure preserves the original command exit ${result}`, async (t) => {
+      const directory = fixture();
+      const warnings = t.mock.method(console, 'warn', () => {});
+      const marker = path.join(directory, 'invocations.txt');
+      const output = path.join(directory, phase === 'preparation' ? 'src' : 'reports', 'capture');
+      const final = path.join(output, 'execution.json');
+      const code = await runReadinessCapture(root, {
+        kind: 'native',
+        target: 'win32-paper',
+        input: 'accessible',
+        output,
+        reportRoot: directory,
+        cwd: directory,
+        advisory: true,
+        command: [
+          process.execPath,
+          '-e',
+          `const fs = require('node:fs');
+          fs.appendFileSync(process.argv[1], 'called\\n');
+          if (process.argv[3]) fs.mkdirSync(process.argv[3]);
+          process.exit(Number(process.argv[2]));`,
+          marker,
+          String(result),
+          phase === 'finalization' ? final : '',
+        ],
+      });
+      assert.equal(code, result);
+      assert.equal(readFileSync(marker, 'utf8'), 'called\n');
+      assert.ok(warnings.mock.calls.some(({ arguments: messages }) => /Readiness capture unavailable/.test(messages[0])));
+      assert.throws(() => readFileSync(final, 'utf8'), 'Failed capture must not produce qualifying native evidence.');
+    });
+  }
+}
+
+test('the workflow CLI honors advisory capture without turning a failed native command green', () => {
+  const directory = fixture();
+  const marker = path.join(directory, 'invocations.txt');
+  const command = spawnSync(
+    process.execPath,
+    [
+      path.join(root, 'scripts', 'src', 'ci', 'readinessCiTask.ts'),
+      'run',
+      '--kind',
+      'native',
+      '--target',
+      'win32-paper',
+      '--input',
+      'accessible',
+      '--output',
+      path.join(directory, 'src', 'capture'),
+      '--',
+      process.execPath,
+      '-e',
+      "require('node:fs').appendFileSync(process.argv[1], 'called\\n'); process.exit(7);",
+      marker,
+    ],
+    { cwd: root, env: { ...process.env, FURN_ASSESSMENT_ADVISORY: 'true' }, encoding: 'utf8' },
+  );
+  assert.equal(command.status, 7, command.stderr);
+  assert.equal(readFileSync(marker, 'utf8'), 'called\n');
+  assert.match(command.stderr, /Readiness capture unavailable/);
+});
+
 test('real forced compiler output selects actual type-test files; ignored custom projects never qualify clean-source claims', async () => {
   const directory = fixture();
   const typeFile = path.join(directory, 'sample.types.test.ts');

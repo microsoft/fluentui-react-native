@@ -322,18 +322,18 @@ function runInventory(directory: string): string[] {
     .sort();
 }
 
-export async function runReadinessCapture(
-  root: string,
-  options: {
-    kind: 'native' | 'type';
-    target: (typeof readinessTargets)[number];
-    input: 'accessible' | 'physical' | 'all';
-    output: string;
-    reportRoot?: string;
-    command: string[];
-    cwd?: string;
-  },
-): Promise<number> {
+type ReadinessCaptureOptions = {
+  kind: 'native' | 'type';
+  target: (typeof readinessTargets)[number];
+  input: 'accessible' | 'physical' | 'all';
+  output: string;
+  reportRoot?: string;
+  command: string[];
+  cwd?: string;
+  advisory?: boolean;
+};
+
+function prepareReadinessCapture(root: string, options: ReadinessCaptureOptions) {
   root = realpathSync(root);
   const cwd = realpathSync(options.cwd ?? process.cwd());
   if (cwd !== root) inside(root, cwd);
@@ -363,6 +363,24 @@ export async function runReadinessCapture(
     'execution-start.json',
     `${JSON.stringify({ schemaVersion: 1, before, identity, startedAt, existingRunIds, command, commandSha256, target: options.target, input: options.input }, null, 2)}\n`,
   );
+  return { root, cwd, output, command, reportRoot, before, identity, startedAt, existingRunIds, commandSha256 };
+}
+
+export async function runReadinessCapture(root: string, options: ReadinessCaptureOptions): Promise<number> {
+  const unavailable = (error: unknown) => {
+    if (!options.advisory) throw error;
+    console.warn(
+      `Readiness capture unavailable: ${error instanceof Error ? error.message : String(error)}. The original command result remains authoritative; missing evidence cannot qualify.`,
+    );
+  };
+  let capture: ReturnType<typeof prepareReadinessCapture> | undefined;
+  try {
+    capture = prepareReadinessCapture(root, options);
+  } catch (error) {
+    unavailable(error);
+  }
+  const command = capture?.command ?? options.command;
+  const cwd = capture?.cwd ?? options.cwd ?? process.cwd();
   const outputChunks: Buffer[] = [];
   let outputBytes = 0;
   let outputOverflow = false;
@@ -384,6 +402,23 @@ export async function runReadinessCapture(
     child.on('error', reject);
     child.on('close', (code, signal) => resolve({ code, signal }));
   });
+  try {
+    if (capture) finishReadinessCapture(capture, options, status.code, outputChunks, outputBytes, outputOverflow);
+  } catch (error) {
+    unavailable(error);
+  }
+  return status.code ?? (status.signal ? 128 + (constants.signals[status.signal] ?? 0) : 1);
+}
+
+function finishReadinessCapture(
+  prepared: ReturnType<typeof prepareReadinessCapture>,
+  options: ReadinessCaptureOptions,
+  exitCode: number | null,
+  outputChunks: Buffer[],
+  outputBytes: number,
+  outputOverflow: boolean,
+): void {
+  const { root, output, command, reportRoot, before, identity, startedAt, existingRunIds, commandSha256 } = prepared;
   const finishedAt = new Date().toISOString();
   const after = sourceState(root);
   let report: string | null = null;
@@ -423,7 +458,7 @@ export async function runReadinessCapture(
     identity,
     startedAt,
     finishedAt,
-    exitCode: status.code,
+    exitCode,
     command,
     commandSha256,
     report,
@@ -433,7 +468,6 @@ export async function runReadinessCapture(
     collectionFailure,
   };
   writeArtifact(output, 'execution.json', `${JSON.stringify(capture, null, 2)}\n`);
-  return status.code ?? (status.signal ? 128 + (constants.signals[status.signal] ?? 0) : 1);
 }
 
 export function collectReadinessUnits(root: string, input: string, destination: string): number {
@@ -519,6 +553,7 @@ export async function readinessMain(args: string[]): Promise<number> {
       reportRoot: values.has('--report-root') ? path.resolve(cwd, values.get('--report-root')![0]) : undefined,
       command: args.slice(separator + 1),
       cwd,
+      advisory: process.env.FURN_ASSESSMENT_ADVISORY === 'true',
     });
   }
   if (separator !== -1) throw new Error('Only capture mode accepts a child invocation.');

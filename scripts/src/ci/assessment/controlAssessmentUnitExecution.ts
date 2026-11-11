@@ -208,21 +208,14 @@ export function runUnitTests(
   return finishUnitExecution(capture, result.status, result.error?.message);
 }
 
-/** Decorates the existing package invocation; the supplied runner is called exactly once. */
-export async function runJestWithUnitCapture(
-  packageRoot: string,
-  platform: string,
-  args: string[],
-  run: (args: string[]) => Promise<number>,
-  env: NodeJS.ProcessEnv = process.env,
-): Promise<number> {
+function prepareUnitCapture(packageRoot: string, platform: string, args: string[], env: NodeJS.ProcessEnv) {
   const directory = env.FURN_ASSESSMENT_UNIT_CAPTURE;
-  if (!directory) return run(args);
+  if (!directory) return;
   const root = execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: packageRoot, encoding: 'utf8' }).trim();
   const definitions = readPackageAssessments(realpathSync.native(root), realpathSync.native(packageRoot)).filter(
     (definition) => definition.unit.platform === platform,
   );
-  if (!definitions.length) return run(args);
+  if (!definitions.length) return;
   if (env[PLATFORM_ENV_VAR] !== undefined && env[PLATFORM_ENV_VAR] !== platform)
     throw new Error('Unit capture requires the declared package Jest mock.');
   if (args.some((arg) => arg === '--outputFile' || arg.startsWith('--outputFile=') || arg === '--listTests')) {
@@ -304,26 +297,58 @@ export async function runJestWithUnitCapture(
     return capture;
   });
   const reportPath = captures[0].reportPath;
+  return {
+    args: [...args, '--json', '--outputFile', reportPath],
+    finish(exitCode: number | null) {
+      for (const capture of captures) {
+        const execution = finishUnitExecution({ ...capture, reportPath }, exitCode);
+        writeFileSync(
+          path.join(unitCaptureDirectory(destination, capture.definition), 'unit-execution.json'),
+          `${JSON.stringify(
+            {
+              ...execution,
+              identity,
+              ...(local ? { scope: 'local', source: localSource } : {}),
+              collectionStartedAt: began,
+            },
+            null,
+            2,
+          )}\n`,
+        );
+      }
+    },
+  };
+}
+
+/** Decorates the existing package invocation; the supplied runner is called exactly once. */
+export async function runJestWithUnitCapture(
+  packageRoot: string,
+  platform: string,
+  args: string[],
+  run: (args: string[]) => Promise<number>,
+  env: NodeJS.ProcessEnv = process.env,
+): Promise<number> {
+  const unavailable = (error: unknown) => {
+    if (env.FURN_ASSESSMENT_ADVISORY !== 'true') throw error;
+    console.warn(
+      `Unit assessment capture unavailable: ${error instanceof Error ? error.message : String(error)}. The original Jest result remains authoritative; missing evidence cannot qualify.`,
+    );
+  };
+  let capture: ReturnType<typeof prepareUnitCapture>;
+  try {
+    capture = prepareUnitCapture(packageRoot, platform, args, env);
+  } catch (error) {
+    unavailable(error);
+  }
   let exitCode: number | null = null;
   try {
-    exitCode = await run([...args, '--json', '--outputFile', reportPath]);
+    exitCode = await run(capture?.args ?? args);
     return exitCode;
   } finally {
-    for (const capture of captures) {
-      const execution = finishUnitExecution({ ...capture, reportPath }, exitCode);
-      writeFileSync(
-        path.join(unitCaptureDirectory(destination, capture.definition), 'unit-execution.json'),
-        `${JSON.stringify(
-          {
-            ...execution,
-            identity,
-            ...(local ? { scope: 'local', source: localSource } : {}),
-            collectionStartedAt: began,
-          },
-          null,
-          2,
-        )}\n`,
-      );
+    try {
+      capture?.finish(exitCode);
+    } catch (error) {
+      unavailable(error);
     }
   }
 }

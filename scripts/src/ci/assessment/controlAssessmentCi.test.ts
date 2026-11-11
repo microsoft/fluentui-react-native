@@ -1191,6 +1191,7 @@ describe('CI input schema and workflow wiring', () => {
     assert.match(workflow, /name: PR\non: pull_request/);
     assert.doesNotMatch(workflow, /paths-ignore:/);
     assert.match(workflow, / {2}pr:\n {4}name: PR\n {4}if: always\(\)/);
+    assert.match(workflow, /FURN_ASSESSMENT_ADVISORY: 'true'/);
     assert.match(workflow, /The original source validation did not pass/);
     const win32 = workflow.slice(workflow.indexOf('  win32-storybook:'), workflow.indexOf('  check-changesets:'));
     assert.ok(win32.indexOf('controlAssessmentCiTask.ts begin') < win32.indexOf('name: Smoke test Win32 Storybook'));
@@ -1199,6 +1200,8 @@ describe('CI input schema and workflow wiring', () => {
     assert.match(win32, /component-native-evidence-\$\{\{ github.run_attempt \}\}/);
     const js = workflow.slice(workflow.indexOf('  js:'), workflow.indexOf('  bundle-size:'));
     assert.match(js, /FURN_ASSESSMENT_UNIT_CAPTURE:/);
+    assert.match(js, /steps\.unit-inputs\.outcome == 'success'/);
+    assert.match(js, /name: Capture existing component test inputs\n {8}id: unit-inputs\n {8}continue-on-error: true/);
     assert.equal(js.match(/run: yarn lage buildci/g)?.length, 1);
     assert.doesNotMatch(workflow, /--run-unit-tests|controlAssessmentCiTask\.ts unit(?:\s|$)/);
     assert.match(
@@ -1226,6 +1229,58 @@ describe('CI input schema and workflow wiring', () => {
     );
     assert.match(publisher, /permission-contents: write/);
     assert.doesNotMatch(publisher, /permission-workflows:|permission-administration:|skip-token-revoke:/);
+  });
+
+  it('falls back to normal source CI on invalid advisory inputs without ignoring real build or smoke failures', () => {
+    const workflow = readFileSync(path.join(repositoryRoot, '.github', 'workflows', 'pr.yml'), 'utf8');
+    const jobs = [...workflow.matchAll(/^ {2}([a-z][a-z-]+):\n([\s\S]*?)(?=^ {2}[a-z][a-z-]+:\n|(?![\s\S]))/gm)];
+    for (const [, id, body] of jobs) {
+      if (id === 'assessment-inputs' || id === 'pr-source' || !body.includes('needs: assessment-inputs')) continue;
+      assert.match(
+        body,
+        /if: \$\{\{ !cancelled\(\) && \(needs\.assessment-inputs\.result != 'success' \|\| needs\.assessment-inputs\.outputs\.report-only != 'true'\)/,
+        `${id} must run full CI unless reuse was successfully verified.`,
+      );
+    }
+    const steps = [...workflow.matchAll(/^ {6}- name: ([^\n]+)\n([\s\S]*?)(?=^ {6}- name:|^ {2}[a-z]|(?![\s\S]))/gm)];
+    const sourceCommands = steps.filter(([, , body]) => /run: (?:yarn lage buildci|.*readinessCiTask\.ts run --kind native)/.test(body));
+    assert.equal(sourceCommands.length, 6);
+    for (const [, name, body] of sourceCommands) {
+      assert.doesNotMatch(body, /continue-on-error: true/, `${name} must preserve genuine source failures.`);
+      assert.doesNotMatch(body, /if:.*steps\.assessment-inputs/, `${name} cannot depend on advisory capture success.`);
+    }
+    const required = workflow.slice(workflow.indexOf('  pr:\n'));
+    assert.match(required, /needs: \[pr-source\]/);
+    assert.doesNotMatch(required, /CONTROL_ASSESSMENT_PUBLISH|needs\.assessment-inputs/);
+    assert.match(
+      workflow,
+      /name: Preserve reused source result\n {8}if: \$\{\{ needs\.assessment-inputs\.result == 'success' && needs\.assessment-inputs\.outputs\.report-only == 'true' && needs\.assessment-inputs\.outputs\.source-result != 'success'/,
+    );
+  });
+
+  it('excludes advisory inspection from the source aggregate but retains every real source failure and cancellation', () => {
+    const workflow = readFileSync(path.join(repositoryRoot, '.github', 'workflows', 'pr.yml'), 'utf8');
+    const aggregate = workflow.slice(workflow.indexOf('  pr-source:\n'), workflow.indexOf('  pr:\n'));
+    const script = /node --input-type=module <<'NODE'\n([\s\S]*?)\n {10}NODE/.exec(aggregate)?.[1];
+    assert.ok(script, 'Exercise the actual required source-aggregation script.');
+    const sourceJobs = ['js', 'android', 'macos', 'ios', 'windows', 'win32', 'check-changesets', 'publish-dry-run-pack', 'test-links'];
+    const passing = Object.fromEntries(sourceJobs.map((job) => [job, { result: 'success' }]));
+    const run = (results: Record<string, { result: string }>) =>
+      spawnSync(process.execPath, ['--input-type=module', '-e', script], {
+        encoding: 'utf8',
+        env: { ...process.env, SOURCE_RESULTS: JSON.stringify(results) },
+      });
+    for (const advisory of ['failure', 'cancelled']) {
+      assert.equal(run({ ...passing, 'assessment-inputs': { result: advisory } }).status, 0);
+      for (const job of sourceJobs) {
+        for (const failure of ['failure', 'cancelled']) {
+          const checked = run({ ...passing, 'assessment-inputs': { result: advisory }, [job]: { result: failure } });
+          assert.equal(checked.status, 1);
+          assert.match(checked.stderr, new RegExp(job));
+        }
+      }
+    }
+    assert.equal(run(Object.fromEntries(sourceJobs.map((job) => [job, { result: 'skipped' }]))).status, 0);
   });
 });
 

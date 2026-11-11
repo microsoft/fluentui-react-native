@@ -7,6 +7,7 @@ permissions:
 env:
   VisualStudioVersion: '18.0'
   WindowsTargetPlatformVersion: '10.0.26100.0'
+  FURN_ASSESSMENT_ADVISORY: 'true'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -43,7 +44,8 @@ jobs:
           node-version: '24'
 
       # Until the validator lands on the base branch, run all normal source checks.
-      # An inspection error must fail this job, not silently approve report-only reuse.
+      # An inspection error fails this advisory job and falls back to full source CI;
+      # it must never approve unverified report-only reuse.
       - name: Inspect report-only candidate
         id: inspect
         env:
@@ -92,7 +94,7 @@ jobs:
   js:
     name: JS PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     # Tell the assessor whether this job actually saved an evidence artifact.
@@ -117,6 +119,8 @@ jobs:
 
       # Record the inputs before testing so results can be tied to the tested version.
       - name: Capture existing component test inputs
+        id: unit-inputs
+        continue-on-error: true
         run: node scripts/src/ci/controlAssessmentCiTask.ts begin-unit
 
       # Keep the existing build and tests; capture their component Jest results for the
@@ -124,21 +128,24 @@ jobs:
       - name: Build CI
         id: build-ci
         env:
-          FURN_ASSESSMENT_UNIT_CAPTURE: ${{ github.workspace }}/apps/storybook/artifacts/assessment-unit-ci
+          FURN_ASSESSMENT_UNIT_CAPTURE: ${{ steps.unit-inputs.outcome == 'success' && format('{0}/apps/storybook/artifacts/assessment-unit-ci', github.workspace) || '' }}
         run: yarn lage buildci
 
       - name: Collect existing runtime evidence for the full control inventory
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         env:
           UNIT_OUTCOME: ${{ steps.build-ci.outcome }}
         run: node scripts/src/ci/readinessCiTask.ts collect-unit --input apps/storybook/artifacts/assessment-unit-ci --output apps/storybook/artifacts/readiness/unit
 
       - name: Capture actual component compiler execution
         if: ${{ !cancelled() && steps.build-ci.outcome == 'success' }}
+        continue-on-error: true
         run: node scripts/src/ci/readinessCiTask.ts run --kind type --target win32-paper --input all --output apps/storybook/artifacts/readiness/type -- node .yarn/releases/yarn-4.18.0.cjs workspace @fluentui-react-native/components build --force
 
       - name: Upload runtime and compiler readiness evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: component-readiness-js-${{ github.run_attempt }}
@@ -151,6 +158,7 @@ jobs:
       - name: Upload existing component unit evidence
         id: unit-evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: component-unit-evidence-${{ github.run_attempt }}
@@ -161,7 +169,7 @@ jobs:
   bundle-size:
     name: Bundle Size PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: windows-latest
     timeout-minutes: 30
     permissions:
@@ -232,7 +240,7 @@ jobs:
   android:
     name: Android PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -258,7 +266,7 @@ jobs:
   macos:
     name: macOS PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: macos-26
     timeout-minutes: 60
     steps:
@@ -308,7 +316,7 @@ jobs:
   macos-storybook:
     name: macOS Storybook PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: macos-26
     timeout-minutes: 40
     steps:
@@ -354,6 +362,7 @@ jobs:
 
       - name: Upload macOS Fabric readiness evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: component-readiness-macos-fabric-${{ github.run_attempt }}
@@ -374,7 +383,7 @@ jobs:
   macos-paper-storybook:
     name: macOS Paper Storybook PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: macos-26
     timeout-minutes: 40
     steps:
@@ -418,6 +427,7 @@ jobs:
 
       - name: Upload macOS Paper readiness evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: component-readiness-macos-paper-${{ github.run_attempt }}
@@ -438,7 +448,7 @@ jobs:
   ios:
     name: iOS PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: macos-26
     timeout-minutes: 60
     steps:
@@ -477,7 +487,7 @@ jobs:
   windows:
     name: Windows PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -555,7 +565,7 @@ jobs:
   windows-storybook:
     name: Windows Storybook PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -609,6 +619,7 @@ jobs:
 
       - name: Upload Windows Fabric readiness evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: component-readiness-windows-fabric-${{ github.run_attempt }}
@@ -632,7 +643,7 @@ jobs:
   win32:
     name: Win32 PR
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -682,7 +693,7 @@ jobs:
   win32-storybook:
     name: Win32 Storybook PR (accessible)
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: windows-latest
     timeout-minutes: 60
     # Tell the assessor whether this job actually saved a native evidence artifact.
@@ -720,18 +731,18 @@ jobs:
       # Record source and assessment inputs before running the existing Storybook tests.
       - name: Capture configured component execution inputs
         id: assessment-inputs
+        continue-on-error: true
         run: node scripts/src/ci/controlAssessmentCiTask.ts begin
 
-      # Run only if input capture succeeded and this run was not cancelled.
-      # Keep the step ID so evidence collection can record the smoke outcome.
+      # Capture is advisory. Keep the actual smoke result authoritative.
       - name: Smoke test Win32 Storybook
         id: smoke
-        if: ${{ !cancelled() && steps.assessment-inputs.outcome == 'success' }}
         run: node ../../scripts/src/ci/readinessCiTask.ts run --kind native --target win32-paper --input accessible --report-root artifacts/desktop --output artifacts/readiness/win32-paper-accessible -- node ../../.yarn/releases/yarn-4.18.0.cjs storybook smoke --win32 --mode stories-and-tests --input accessible
         working-directory: apps/storybook
 
       - name: Upload Win32 accessible readiness evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: component-readiness-win32-accessible-${{ github.run_attempt }}
@@ -742,15 +753,16 @@ jobs:
       # Collect available reports and the smoke outcome even after a failure, unless cancelled.
       - name: Collect configured component native evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         env:
           SMOKE_OUTCOME: ${{ steps.smoke.outcome }}
         run: node scripts/src/ci/controlAssessmentCiTask.ts finish
 
-      # Preserve this attempt's native evidence after failures too. Unlike the unit
-      # upload, missing native evidence files fail this step.
+      # Preserve this attempt's evidence without making collection a source gate.
       - name: Upload component native evidence
         id: native-evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: component-native-evidence-${{ github.run_attempt }}
@@ -806,6 +818,7 @@ jobs:
 
       - name: Upload Win32 physical readiness evidence
         if: ${{ always() && !cancelled() }}
+        continue-on-error: true
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: component-readiness-win32-physical-${{ github.run_attempt }}
@@ -827,12 +840,12 @@ jobs:
           if-no-files-found: warn
 
   # Wait for the evidence jobs, but still assess what is available if they failed.
-  # Skip cancellations, invalid assessment inputs and verified report-only follow-ups.
+  # Skip cancellations and verified report-only follow-ups.
   # This advisory job reads existing results; provisional ceilings are not owner approvals.
   control-assessment:
     name: Assess component evidence
     needs: [assessment-inputs, js, win32-storybook, win32-storybook-physical, windows-storybook, macos-storybook, macos-paper-storybook]
-    if: ${{ always() && !cancelled() && needs.assessment-inputs.result == 'success' && needs.assessment-inputs.outputs.report-only != 'true' }}
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -911,7 +924,7 @@ jobs:
     runs-on: ubuntu-latest
     # Keep the release-PR exception and also skip verified report-only follow-ups:
     # adding generated assessment metadata is not another product change needing release notes.
-    if: ${{ needs.assessment-inputs.outputs.report-only != 'true' && github.head_ref != 'changeset-release/main' }}
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') && github.head_ref != 'changeset-release/main' }}
 
     steps:
       - name: Checkout
@@ -938,7 +951,7 @@ jobs:
   publish-dry-run-pack:
     name: NPM Publish Dry Run — Pack
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     outputs:
@@ -981,7 +994,7 @@ jobs:
   test-links:
     name: Test repo links
     needs: assessment-inputs
-    if: needs.assessment-inputs.outputs.report-only != 'true'
+    if: ${{ !cancelled() && (needs.assessment-inputs.result != 'success' || needs.assessment-inputs.outputs.report-only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -1018,40 +1031,37 @@ jobs:
     steps:
       # A report-only commit cannot erase a failed original source-validation result.
       - name: Preserve reused source result
-        if: ${{ needs.assessment-inputs.outputs.report-only == 'true' && needs.assessment-inputs.outputs.source-result != 'success' }}
+        if: ${{ needs.assessment-inputs.result == 'success' && needs.assessment-inputs.outputs.report-only == 'true' && needs.assessment-inputs.outputs.source-result != 'success' }}
         run: |
           echo "The original source validation did not pass. A report-only commit cannot turn it green."
           exit 1
       - name: Check for failures or cancellations
-        if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+        env:
+          SOURCE_RESULTS: ${{ toJSON(needs) }}
         run: |
-          echo "One or more required jobs failed or were cancelled."
-          exit 1
+          node --input-type=module <<'NODE'
+          const results = JSON.parse(process.env.SOURCE_RESULTS);
+          const failed = Object.entries(results).filter(([job, { result }]) =>
+            job !== 'assessment-inputs' && ['failure', 'cancelled'].includes(result));
+          if (failed.length) {
+            console.error(`Required source jobs failed or were cancelled: ${failed.map(([job]) => job).join(', ')}`);
+            process.exitCode = 1;
+          }
+          NODE
       - name: All required jobs passed
         run: echo "All required jobs completed successfully."
 
-  # Keep the existing required status named PR. It checks source validation and,
-  # when enabled, the verified same-PR assessment-publication follow-up.
+  # Keep the existing required status named PR. Assessment and publication are advisory.
   pr:
     name: PR
     if: always()
     runs-on: ubuntu-latest
-    needs: [assessment-inputs, pr-source]
+    needs: [pr-source]
     steps:
-      # Both the initial input validation and source-validation result must pass.
       - name: Require successful source validation
-        if: ${{ needs.assessment-inputs.result != 'success' || needs.pr-source.result != 'success' }}
+        if: ${{ needs.pr-source.result != 'success' }}
         run: |
-          echo "Source validation or assessment-input validation failed."
-          exit 1
-      # Only same-repository PRs into the default branch participate when publishing is on.
-      # Fail this source run rather than wait: the separate trusted publisher must add the
-      # report, and the report-only follow-up must verify it before this check can pass.
-      - name: Require same-PR assessment when publishing is enabled
-        if: ${{ vars.CONTROL_ASSESSMENT_PUBLISH == 'true' && github.event.pull_request.head.repo.full_name == github.repository && github.base_ref == github.event.repository.default_branch && needs.assessment-inputs.outputs.report-only != 'true' }}
-        run: |
-          echo "Source CI completed. Waiting for the trusted publisher to commit the component assessment to this PR."
-          echo "The report-only follow-up run must verify that report before this required check can pass."
+          echo "Source validation failed or did not complete."
           exit 1
       - name: Required PR validation passed
-        run: echo "Source checks and the applicable assessment-publication requirements passed."
+        run: echo "Required source checks passed. Assessment and publication do not gate this result."

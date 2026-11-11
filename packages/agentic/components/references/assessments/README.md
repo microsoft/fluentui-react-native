@@ -303,10 +303,19 @@ is called exactly once with its existing selection, arguments, platform, and exi
 One package execution can supply separately bound evidence for multiple configured controls. Other packages and
 platform invocations are unchanged.
 
+Assessment is advisory, including its capture infrastructure. The PR workflow sets `FURN_ASSESSMENT_ADVISORY=true`:
+capture preparation or finalization errors are logged as unavailable evidence, while the original Jest or native
+command still runs exactly once and keeps its real exit status. Evidence-only preparation, collection, extra compiler
+capture, and uploads cannot fail ordinary source jobs. Actual builds, tests, and smoke commands are not marked
+`continue-on-error`. Outside advisory mode, explicit capture commands retain strict error behavior.
+
 JS and native jobs remain parallel. The later **Assess component evidence** job downloads same-attempt artifacts,
 installs the tools needed for Lage, and runs the same package command with `FURN_ASSESSMENT_CI=true`. That mode combines
 saved evidence only: local replay flags, test execution, and tracked-file writes are prohibited. It still runs after
-ordinary source-job failures, but not after cancellation or invalid input validation.
+ordinary source-job failures, but not after cancellation or successfully verified report-only reuse.
+Failed input inspection or reuse verification triggers full source CI rather than skipping it. The required **PR**
+check depends only on source validation; assessment infrastructure failures remain visible in advisory jobs and logs,
+and missing or rejected evidence remains unavailable, never a passing readiness claim.
 
 Source artifacts are `component-unit-evidence-<attempt>` and `component-native-evidence-<attempt>`.
 Final output is `component-assessments-<attempt>`, retained for 14 days. Inside it, each configured control has
@@ -354,7 +363,7 @@ blocks; modes and all other source, contract, mapping, dependency, workflow and 
 Reuse requires an immediate report commit changing exactly the report and SPEC per control, the unchanged reviewed mapping,
 unchanged merge-tree inputs, the matching original artifact,
 exact reconstructed report/SPEC, and the original **PR source validation** result. The explicit reuse limit is 168 hours.
-Old or expired evidence falls back to full CI or fails verification; it never creates current coverage.
+Old, expired, or unverifiable evidence falls back to full source CI; it never creates current coverage.
 Any future mapping proposal that changes checks, links, or fingerprints remains a source-input change and must undergo
 review and normal CI, not report-only reuse.
 
@@ -363,8 +372,8 @@ Activation requires trusted tooling on the default branch, a repository-scoped G
 `CONTROL_ASSESSMENT_PUBLISH=true`. A maintainer must verify organization policy and validate the full hosted flow first.
 No token or key belongs in source, reports, or logs. Forks and non-default-target PRs retain artifacts without branch writes.
 
-For eligible opt-in runs, the required **PR** check waits for publication and exact report-only verification.
+Publication never blocks the required **PR** check, even for eligible opt-in runs.
 API failures, changed heads, ambiguous evidence, and invalid generated fields are not successful publication.
 The commit API's expected-head check prevents races; there is no force push, merge, approval, or protection bypass.
-Disable the opt-in and rerun CI to return to artifact-only operation. Resolve real merge conflicts before regenerating
+Disable the opt-in to return to artifact-only operation. Resolve real merge conflicts before regenerating
 reports; do not merge assessment prose as if it were current execution evidence.

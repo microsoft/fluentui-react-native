@@ -738,6 +738,44 @@ if (data.fixtureMode === 'failed') process.exitCode = 1;
     return { ...f, identity, buildId, start, env };
   }
 
+  for (const phase of ['preparation', 'finalization'] as const) {
+    for (const result of [0, 7, 'exception'] as const) {
+      it(`keeps the original Jest result ${result} when advisory capture ${phase} fails`, async (t) => {
+        const f = ciFixture();
+        const warnings = t.mock.method(console, 'warn', () => {});
+        const args = ['--runTestsByPath', 'existing.test.ts'];
+        const failure = new Error('Original Jest runner failed.');
+        let calls = 0;
+        const final = path.join(unitCaptureDirectory(f.output, assessmentDefinition), 'unit-execution.json');
+        const execution = runJestWithUnitCapture(
+          path.join(f.directory, assessmentDefinition.packagePath),
+          assessmentDefinition.unit.platform,
+          args,
+          async (forwarded) => {
+            calls++;
+            if (phase === 'preparation') assert.deepEqual(forwarded, args);
+            else {
+              assert.deepEqual(forwarded.slice(0, args.length), args);
+              mkdirSync(final);
+            }
+            if (result === 'exception') throw failure;
+            return result;
+          },
+          {
+            ...f.env,
+            FURN_ASSESSMENT_ADVISORY: 'true',
+            ...(phase === 'preparation' ? { GITHUB_RUN_ID: '999' } : {}),
+          },
+        );
+        if (result === 'exception') await assert.rejects(execution, (error) => error === failure);
+        else assert.equal(await execution, result);
+        assert.equal(calls, 1);
+        assert.ok(warnings.mock.calls.some(({ arguments: messages }) => /Unit assessment capture unavailable/.test(messages[0])));
+        assert.throws(() => readFileSync(final, 'utf8'), 'Failed capture must not produce qualifying unit evidence.');
+      });
+    }
+  }
+
   async function localFixture(prepareReport?: (report: ReturnType<typeof checkboxJestFixture>) => void) {
     const f = fixture();
     const packageRoot = path.join(f.directory, assessmentDefinition.packagePath);
