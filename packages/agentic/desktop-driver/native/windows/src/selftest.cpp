@@ -1551,6 +1551,37 @@ UINT WINAPI AcceptFirstInputOnly(UINT, LPINPUT, int) {
   return 1;
 }
 
+UINT WINAPI RejectSelectedReleases(UINT count, LPINPUT inputs, int size) {
+  if (size != sizeof(INPUT)) {
+    return 0;
+  }
+  for (UINT index = 0; index < count; index += 1) {
+    const INPUT& input = inputs[index];
+    if (input.type == INPUT_KEYBOARD && (input.ki.dwFlags & KEYEVENTF_KEYUP) != 0 &&
+        (input.ki.wVk == VK_SHIFT ||
+         ((input.ki.dwFlags & KEYEVENTF_UNICODE) != 0 && input.ki.wScan == 0xd83d))) {
+      return 0;
+    }
+    if (input.type == INPUT_MOUSE && (input.mi.dwFlags & MOUSEEVENTF_LEFTUP) != 0) {
+      return 0;
+    }
+  }
+  return RecordInput(count, inputs, size);
+}
+
+UINT WINAPI RejectLowSurrogatePress(UINT count, LPINPUT inputs, int size) {
+  if (size != sizeof(INPUT)) {
+    return 0;
+  }
+  for (UINT index = 0; index < count; index += 1) {
+    if (inputs[index].type == INPUT_KEYBOARD && (inputs[index].ki.dwFlags & KEYEVENTF_UNICODE) != 0 &&
+        (inputs[index].ki.dwFlags & KEYEVENTF_KEYUP) == 0 && inputs[index].ki.wScan == 0xde00) {
+      return 0;
+    }
+  }
+  return RecordInput(count, inputs, size);
+}
+
 // Records input and then cancels the command that sent it, once a key press
 // reaches the application; the modifier releases before it do not count.
 CancellationToken* cancelOnInput = nullptr;
@@ -2101,6 +2132,53 @@ void TestInputSendFailures() {
                   message) == kErrorInputFailed &&
             Contains(message, "accepted 1 of 2"),
         "a partly accepted batch reports how much of it Windows accepted");
+
+  InputController cleanup;
+  cleanup.UseTestSender(&RecordInput);
+  cleanup.KeyDown(L"\uE008", token);
+  cleanup.KeyDown(L"\uE009", token);
+  cleanup.KeyDown(L"\U0001F600", token);
+  cleanup.PointerDown(0, token);
+  cleanup.PointerDown(2, token);
+  cleanup.UseTestSender(&RejectSelectedReleases);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { cleanup.ReleaseAll(); }) == kErrorInputFailed &&
+            cleanup.DepressedKeyCount() == 2 && cleanup.DepressedButtonCount() == 1,
+        "failed cleanup reports the failure and retains only keys and buttons not released");
+  Check(recordedInputs.size() == 3 && recordedInputs[0].ki.wScan == 0xde00 &&
+            recordedInputs[1].ki.wVk == VK_CONTROL && (recordedInputs[2].mi.dwFlags & MOUSEEVENTF_RIGHTUP) != 0,
+        "cleanup still releases the other strokes and buttons after a failure");
+
+  cleanup.UseTestSender(&RecordInput);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { cleanup.ReleaseAll(); }) == "none" && !cleanup.HasDepressedInput() &&
+            recordedInputs.size() == 3 && recordedInputs[0].ki.wScan == 0xd83d &&
+            recordedInputs[1].ki.wVk == VK_SHIFT && (recordedInputs[2].mi.dwFlags & MOUSEEVENTF_LEFTUP) != 0,
+        "a later cleanup retries only the failed strokes and buttons");
+
+  InputController partial;
+  partial.UseTestSender(&RejectLowSurrogatePress);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { partial.KeyDown(L"\U0001F600", token); }) == kErrorInputFailed &&
+            partial.DepressedKeyCount() == 1 && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xd83d,
+        "a partially accepted key press records the stroke Windows accepted");
+  partial.UseTestSender(&RecordInput);
+  recordedInputs.clear();
+  partial.ReleaseAll();
+  Check(!partial.HasDepressedInput() && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xd83d,
+        "cleanup does not release a stroke Windows never accepted");
+
+  partial.KeyDown(L"\U0001F600", token);
+  partial.UseTestSender(&RejectSelectedReleases);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { partial.KeyUp(L"\U0001F600", token); }) == kErrorInputFailed &&
+            partial.DepressedKeyCount() == 1 && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xde00,
+        "an explicit partial key release retains its unreleased stroke");
+  partial.UseTestSender(&RecordInput);
+  recordedInputs.clear();
+  partial.ReleaseAll();
+  Check(!partial.HasDepressedInput() && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xd83d,
+        "cleanup does not repeat the successful part of a key release");
 }
 
 void TestForegroundOwnership() {
@@ -2240,8 +2318,13 @@ void TestClickRouting() {
   Check(coveredBy(nullptr) == "none", "a point that hits no window passes");
   Check(coveredBy(window) == "none", "a point on the target window passes");
   Check(coveredBy(sibling) == "none", "a point on another window of the same application passes");
-  Check(FailureCode([&]() { RequireClickPointOwnedBy(window, POINT{-32000 + 20, -32000 + 20}); }) == "none",
-        "the real hit test never refuses an offscreen window of the same process");
+  // Other applications can also have windows at the fixture's offscreen coordinates.
+  const POINT offscreenPoint{-32000 + 20, -32000 + 20};
+  clickHitResult = WindowFromPoint(offscreenPoint);
+  const std::string expected =
+      FailureCode([&]() { RequireClickPointOwnedBy(window, offscreenPoint, &HitConfiguredWindow); });
+  Check(FailureCode([&]() { RequireClickPointOwnedBy(window, offscreenPoint); }) == expected,
+        "the real hit test agrees with the window Windows reports at the offscreen point");
   const HWND foreign = ForeignWindow();
   clickHitResult = foreign;
   Check(FailureCode([&]() { RequireClickPointOwnedBy(nullptr, point, &HitConfiguredWindow); }) == "none",
@@ -3226,6 +3309,56 @@ void TestDriverMutationEffects() {
   driver.ReleaseInput();
   Check(!driver.HasDepressedInput() && acquireElsewhere() == "acquired",
         "the release recovery frees the held key and the physical input lock");
+
+  const json::Value holdShift =
+      actions(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyDown","value":"\uE008"}]}])");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdShift, token); }) == "none" &&
+            driver.HasDepressedInput(),
+        "a modifier is held for failed-release recovery");
+  driver.InputForTesting().UseTestSender(&RejectSelectedReleases);
+  driver.ReleaseInput();
+  Check(driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "failed shutdown cleanup keeps the key and the physical input lock");
+  Check(FailureCode([&]() { driver.Execute("dispose", empty, token); }) == kErrorInputFailed &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "dispose refuses to acknowledge while input cannot be released");
+  int environmentChecks = 0;
+  driver.InputForTesting().UseTestEnvironment([&environmentChecks]() {
+    return environmentChecks++ == 0
+               ? InteractiveEnvironmentForTesting()
+               : InteractiveWith([](InputEnvironment& environment) { environment.lock = SessionLock::Locked; });
+  });
+  driver.UseTestHitTester(&HitConfiguredWindow);
+  clickHitResult = window;
+  const int clicksBefore = buttonClicks.load();
+  Check(effectOf("click", StringFields({{"elementId", buttonId}, {"mode", "auto"}}), token, &code) == "unknown" &&
+            code == kErrorInputUnavailable && driver.HasDepressedInput() && buttonClicks.load() == clicksBefore &&
+            acquireElsewhere() == kErrorInputBusy,
+        "automatic click does not hide failed input cleanup behind accessibility fallback");
+  driver.InputForTesting().UseTestEnvironment([]() { return InteractiveEnvironmentForTesting(); });
+  Check(effectOf("releaseActions", empty, token, &code) == "unknown" && code == kErrorInputFailed &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "a failed key release retains the lock and reports an unknown effect");
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  Check(FailureCode([&]() { driver.Execute("releaseActions", empty, token); }) == "none" &&
+            !driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "a successful key-release retry frees the physical input lock");
+
+  driver.UseTestHitTester(&HitConfiguredWindow);
+  clickHitResult = window;
+  const json::Value holdButton = actions(
+      R"([{"type":"pointer","id":"mouse","parameters":{"pointerType":"mouse"},"actions":[{"type":"pointerDown","button":0}]}])");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdButton, token); }) == "none" &&
+            driver.HasDepressedInput(),
+        "a pointer button is held for failed-release recovery");
+  driver.InputForTesting().UseTestSender(&RejectSelectedReleases);
+  Check(effectOf("releaseActions", empty, token, &code) == "unknown" && code == kErrorInputFailed &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "a failed pointer release retains the lock and reports an unknown effect");
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  Check(FailureCode([&]() { driver.Execute("releaseActions", empty, token); }) == "none" &&
+            !driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "a successful pointer-release retry frees the physical input lock");
 
   // Abandoned: the provider never returns from the value write.
   ResetMutationQuarantineForTesting();

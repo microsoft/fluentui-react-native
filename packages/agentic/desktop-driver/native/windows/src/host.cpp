@@ -264,8 +264,8 @@ void Host::WorkerLoop() {
       ExitProcess(0);
     }
   }
-  // The physical input lock belongs to this thread, so it is released here
-  // rather than abandoned when the thread exits.
+  // The physical input lock belongs to this thread; unresolved input retains
+  // it until this worker exits.
   driver_.ReleaseInput();
   winrt::uninit_apartment();
 }

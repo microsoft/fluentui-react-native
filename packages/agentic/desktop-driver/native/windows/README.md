@@ -284,11 +284,14 @@ to the later window and element checks. A click is refused as
 point, and so is a `performActions` `pointerDown` or `scroll` whose point is
 covered by a window that neither belongs to a leased application nor is the
 top-level window around one. Keys or buttons that `performActions` leaves down
-keep the session's physical input lock until they are released, by
-`releaseActions`, a later command, cancellation, or the helper's exit, so
-another helper cannot interleave its input with them. A `SendInput` call that
-injects fewer events than requested fails as `input-failed` and names UIPI, a
-secure desktop, or blocked input.
+keep the session's physical input lock while the helper runs, until
+`releaseActions`, a later command, cancellation, or shutdown releases them.
+If cleanup fails, the helper retains the unreleased input and lock for a later
+retry; a failed physical mutation reports effect `unknown`, and `dispose`
+refuses to acknowledge while input remains down. If the worker exits first,
+an abandoned mutex can warn one waiting helper, but is not a persistent
+recovery barrier. A `SendInput` call that injects fewer events than requested
+fails as `input-failed` and names UIPI, a secure desktop, or blocked input.
 
 `click` mode `auto` falls back to accessibility activation when physical input
 is unavailable, and an explicit `physical` request reports `input-unavailable`.

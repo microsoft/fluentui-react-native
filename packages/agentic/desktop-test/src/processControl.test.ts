@@ -188,12 +188,22 @@ describe('owned process lifelines', () => {
 
   test.each(['failed', 'stalled'])('%s disposal is incomplete, never a successful cleanup', async (mode) => {
     const marker = path.join(root, 'descriptor');
-    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet, shutdownTimeoutMs: 200 });
+    // Windows taskkill needs time to start after the cooperative disposal deadline.
+    const shutdownTimeoutMs = process.platform === 'win32' ? 5000 : 200;
+    const runner = new NodeDesktopCommandRunner({ logDirectory: root, output: quiet, errorOutput: quiet, shutdownTimeoutMs });
     const running = runner.start({ command: process.execPath, args: [fixture, mode, marker], cwd: root, env: {} });
-    await running.waitForReadiness!({ tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' }, 5000);
-    await expect(running.stop()).rejects.toThrow(/disposal|settle/);
-    expect(fs.existsSync(marker)).toBe(true);
-    await runner.close();
+    try {
+      await running.waitForReadiness!({ tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' }, 5000);
+      await expect(running.stop()).rejects.toThrow(/disposal|settle/);
+      await deadline(
+        running.completed.catch(() => undefined),
+        5000,
+        'Reaping the fixture after failed disposal',
+      );
+      expect(fs.existsSync(marker)).toBe(true);
+    } finally {
+      await runner.close();
+    }
   });
 
   test('owned service wrappers cannot certify a failed child disposal', async () => {

@@ -88,10 +88,9 @@ class Driver {
  private:
   CommandResult ExecuteCommand(const std::string& command, const json::Value& params, const CancellationToken& token);
   void ForgetRetiredWindows() noexcept;
-  // Holds the cross-process physical input mutex for a whole action chain and
-  // guarantees that a failed or cancelled chain releases its depressed input
-  // before the next owner acquires the lock. Keys or buttons a chain leaves
-  // down keep the lock held across commands until they are released.
+  // Holds the cross-process physical input mutex for a whole action chain.
+  // Failed cleanup retains both the unreleased input and lock while this
+  // worker lives; successful cleanup releases the lock.
   template <typename Fn>
   void RunPhysical(const CancellationToken& token, Fn&& body) {
     PhysicalInputScope scope(token);
@@ -105,6 +104,10 @@ class Driver {
         } catch (...) {
           // Preserve the original failure.
         }
+      }
+      if (input_.HasDepressedInput()) {
+        // A failed cleanup leaves the command's physical-input state uncertain.
+        RecordDispatching();
       }
       HoldInputWhileDepressed(scope);
       throw;

@@ -194,6 +194,11 @@ and `setWindowRect`. Reads and
 lifecycle commands (`launch`, `attach`, `closeApplication`, `dispose`) carry no
 `effect`.
 
+On Windows, a failed physical-input mutation whose cleanup leaves a key stroke
+or button depressed reports `unknown` and retains the input and lock while the
+helper remains alive. A later release can retry it; `dispose` refuses to
+acknowledge if cleanup still fails.
+
 Node fails closed: an absent `effect` on a failed or cancelled mutation is
 `unknown`. `none` is a rejection and leaves the target usable; `partial` and
 `unknown` are indeterminate, and Node quarantines the target until it is

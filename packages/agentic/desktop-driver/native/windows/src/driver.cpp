@@ -291,7 +291,7 @@ void Driver::ClickPhysically(const std::string& elementId, const CancellationTok
   POINT center{};
   center.x = (snapshot.physicalRect.left + snapshot.physicalRect.right) / 2;
   center.y = (snapshot.physicalRect.top + snapshot.physicalRect.bottom) / 2;
-  RequireClickPointOwnedBy(window, center);
+  RequireClickPointOwnedBy(window, center, hitTester_);
   input_.ClickAt(center, token);
 }
 
@@ -501,16 +501,15 @@ void Driver::ReleaseInput() noexcept {
         const PhysicalInputScope scope(idle, kPhysicalInputCleanupWaitMs, AbandonPolicy::Adopt);
         input_.ReleaseAll();
       } catch (const HelperError&) {
-        // Depressed input must never outlive a cancelled command, so recovery
-        // proceeds even when the cross-process lock could not be acquired.
+        // Continue attempting cleanup even if the cross-process lock could not
+        // be acquired.
         input_.ReleaseAll();
       }
     }
   } catch (...) {
     // Releasing input must never mask the original failure.
   }
-  // Input that could not be released keeps the lock, so the thread's exit
-  // abandons it and the next helper reports the depressed input.
+  // Input that could not be released keeps the lock while the worker lives.
   if (!input_.HasDepressedInput()) {
     heldInput_.Release();
   }
@@ -815,7 +814,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
           // The environment can change between the check and the click. When
           // it refused before any click was delivered, automatic mode still
           // has the accessibility click.
-          if (mode != "auto" || error.code() != kErrorInputUnavailable) {
+          if (mode != "auto" || error.code() != kErrorInputUnavailable || input_.HasDepressedInput()) {
             throw;
           }
           automation_.AccessibilityClick(elementId, token);
@@ -944,6 +943,9 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
   }
   if (command == "dispose") {
     ReleaseInput();
+    if (input_.HasDepressedInput()) {
+      Fail(kErrorInputFailed, "The helper could not release all held physical input during disposal.");
+    }
     applications_.Dispose(token);
     automation_.Reset();
     result.result = json::Value::Null();

@@ -437,7 +437,15 @@ describe('native driver build and resolution', () => {
           env: { ...process.env, FURN_DRIVER_SELF_TEST_OBSERVATIONS: observationDump },
           timeout: 120_000,
         });
-        expect(selfTest.status).toBe(0);
+        if (selfTest.status !== 0) {
+          const failures = (selfTest.stdout ?? '')
+            .split('\n')
+            .filter((line) => line.startsWith('not ok'))
+            .join('\n');
+          throw new Error(
+            `Windows helper self-test exited ${String(selfTest.status)}: ${failures || selfTest.stderr || selfTest.error?.message || 'no diagnostic output'}`,
+          );
+        }
         expect(selfTest.stdout).toContain('self-test passed');
         expectSelfTestObservationsToConform(observationDump);
 

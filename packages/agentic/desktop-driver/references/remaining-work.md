@@ -613,6 +613,10 @@ pointer hit check accepts any leased application; and Caps Lock state and the
 keyboard layout for injected keys come from the helper thread, not the
 foreground thread.
 
+The Node crash-recovery mirror also omits keyboard clear's synthetic shortcut
+keys and cannot always reconstruct the exact Windows stroke. Durable,
+cross-process recovery of those inputs remains unproven.
+
 Operation-time permission and capability changes must be surfaced truthfully
 even if session-start feature negotiation previously succeeded. The Windows
 input authority rechecks session, foreground, and integrity for every physical

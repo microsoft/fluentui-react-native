@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import type { SpawnSyncReturns } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -10,7 +10,7 @@ import { DesktopRunReporter } from './reporting/collector.js';
 
 jest.mock('node:child_process', () => {
   const actual = jest.requireActual<typeof import('node:child_process')>('node:child_process');
-  return { ...actual, spawnSync: jest.fn(actual.spawnSync) };
+  return { ...actual, spawn: jest.fn(actual.spawn), spawnSync: jest.fn(actual.spawnSync) };
 });
 
 const quiet = { write: () => true };
@@ -172,16 +172,22 @@ describe('desktop command cancellation and failure', () => {
       );
       await waitUntil(() => fs.existsSync(marker) && fs.readFileSync(marker, 'utf8').length > 0);
       const [leaderPid, grandchildPid] = JSON.parse(fs.readFileSync(marker, 'utf8')) as [number, number];
+      const child = jest.mocked(spawn).mock.results.at(-1)?.value;
+      if (!child || child.pid !== leaderPid) throw new Error('The runner did not spawn the expected fixture leader.');
       try {
         // Once the leader is reaped, its exit is recorded while the grandchild still holds the output pipes open.
-        await waitUntil(() => !alive(leaderPid));
+        await waitUntil(() => child.exitCode !== null || child.signalCode !== null);
+        taskkill.mockImplementation((() => respond(0)) as unknown as typeof spawnSync);
         emulateWindows();
         runner.terminate();
         await running.stop({ failed: true }).catch(() => undefined);
         expect(taskkillCalls()).toEqual([]);
       } finally {
         restorePlatform?.();
-        if (alive(grandchildPid)) process.kill(grandchildPid, 'SIGKILL');
+        if (alive(grandchildPid)) {
+          process.kill(grandchildPid, 'SIGKILL');
+          await waitUntil(() => !alive(grandchildPid));
+        }
       }
     });
 
@@ -210,7 +216,10 @@ describe('desktop command cancellation and failure', () => {
         await expect(running.stop()).rejects.toThrow(`Could not stop owned process tree ${pid}: ERROR: Access is denied.`);
       } finally {
         restorePlatform?.();
-        process.kill(-pid, 'SIGKILL');
+        if (alive(pid)) {
+          process.kill(process.platform === 'win32' ? pid : -pid, 'SIGKILL');
+          await waitUntil(() => !alive(pid));
+        }
       }
     });
   });
