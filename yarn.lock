@@ -5862,16 +5862,15 @@ __metadata:
   linkType: soft
 
 "@fluentui/react-native-icons@npm:^2.0.322":
-  version: 2.0.344
-  resolution: "@fluentui/react-native-icons@npm:2.0.344"
+  version: 2.0.345
+  resolution: "@fluentui/react-native-icons@npm:2.0.345"
   dependencies:
-    "@types/react-native": "npm:^0.68.0"
     tslib: "npm:^2.1.0"
   peerDependencies:
-    react: ">=16.8.0 <20.0.0"
-    react-native: ">=0.68.0"
+    react: ">=18.2.0 <20.0.0"
+    react-native: ">=0.73.0"
     react-native-svg: ">=12.5.0"
-  checksum: 10c0/47902efd57365ea3c49d35a45e7e324b3afad3164618f9844c28b086c6926175a4b09c25c71912840d7f365478ff93bdbdac73a55e500856cb45ff3229778b27
+  checksum: 10c0/4cb541f47736f00167f2b2689f474ccb595138a584323b265d7f8c471c6383ec2474a4dbf509eb431bd86190055f2103cef0ddbc93a8b6e38b2d059ac34a01cd
   languageName: node
   linkType: hard
 
@@ -10174,12 +10173,6 @@ __metadata:
   checksum: 10c0/8344b6c7acba4e4e5a8d542f56f53c297685fa92f9b0c085d7532cc7e1b661432cecfc1c75c76cdb0d161c95679b6ecfe0573d9fef7c836962aacf604150a984
   languageName: node
   linkType: hard
-
-"@types/react-native@ignore:":
-  version: 0.0.0-use.local
-  resolution: "@types/react-native@ignore:"
-  languageName: node
-  linkType: soft
 
 "@types/react-reconciler@npm:~0.32.0":
   version: 0.32.3
