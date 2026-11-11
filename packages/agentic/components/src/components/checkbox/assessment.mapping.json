@@ -877,7 +877,7 @@
       "scripts/src/ci/assessment/controlAssessmentUnitExecution.ts"
     ],
     "platform": "macos",
-    "reviewedDigest": "b5d8267f6fe05361db2f7137728f26661cf9d32ca7050b3090b84369a92e634a",
+    "reviewedDigest": "c013e92e786fe46f08d234e15db5e33296f335beac25ae78b8a5f55161371dad",
     "mappingVersion": "checkbox-jest-macos-mock-matrix-v2",
     "environment": "React Native macOS Jest mock; explicit platform tables simulate OS values, not native dispatch",
     "excludedCases": [
