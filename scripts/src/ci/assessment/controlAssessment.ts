@@ -17,7 +17,7 @@ export type ControlContract = {
   conformance: string;
   requirements: Requirement[];
 };
-type CaseStatus = 'passed' | 'failed' | 'skipped';
+type CaseStatus = 'passed' | 'failed' | 'skipped' | 'unsupported';
 type NativeCase = { storyId: string; testName: string; status: CaseStatus; durationMs: number; reason?: string };
 export type NativeReport = {
   endpoint: 'win32' | 'windows' | 'macos';
@@ -215,7 +215,11 @@ export function parseNativeReport(value: unknown): NativeReport {
     const identity = JSON.stringify([id, name]);
     if (identities.has(identity)) throw new Error(`Duplicate native case: ${id} / ${name}.`);
     identities.add(identity);
-    const caseStatus = choice(entry.status, ['passed', 'failed', 'skipped'], 'Case status');
+    const caseStatus = choice(
+      entry.status,
+      format === 'storybook-smoke' ? ['passed', 'failed', 'skipped', 'unsupported'] : ['passed', 'failed', 'skipped'],
+      'Case status',
+    );
     if (typeof entry.durationMs !== 'number' || !Number.isFinite(entry.durationMs) || entry.durationMs < 0) {
       throw new Error(`Invalid durationMs for ${id} / ${name}.`);
     }
@@ -234,7 +238,10 @@ export function parseNativeReport(value: unknown): NativeReport {
       testName: name,
       status: caseStatus,
       durationMs: entry.durationMs,
-      reason: caseStatus === 'skipped' ? text(entry.skipReason, 'Skipped case reason') : caseError,
+      reason:
+        caseStatus === 'skipped' || caseStatus === 'unsupported'
+          ? text(entry.skipReason, `${caseStatus === 'skipped' ? 'Skipped' : 'Unsupported'} case reason`)
+          : caseError,
     };
   });
   return {
@@ -621,6 +628,7 @@ export function assessControl(options: AssessmentOptions) {
         passed: options.report?.cases.filter(({ status }) => status === 'passed').length ?? 0,
         failed: options.report?.cases.filter(({ status }) => status === 'failed').length ?? 0,
         skipped: options.report?.cases.filter(({ status }) => status === 'skipped').length ?? 0,
+        unsupported: options.report?.cases.filter(({ status }) => status === 'unsupported').length ?? 0,
       },
     },
     unitEvidence,
@@ -658,7 +666,7 @@ export function formatAssessmentMarkdown(report: ControlAssessment): string {
     `Assessment health: ${report.assessmentHealth}. Outcome: ${report.assessmentOutcome}.`,
     `Target source: \`${report.target.sourceCommit}\`. Working tree dirty: ${report.target.workingTreeDirty}.`,
     `Native execution provenance: ${report.evidence.status}. Mapping current: ${report.contract.mappingCurrent}.`,
-    `Recorded native cases across the input report: ${report.evidence.caseCounts.passed} passed, ${report.evidence.caseCounts.failed} failed, ${report.evidence.caseCounts.skipped} skipped.`,
+    `Recorded native cases across the input report: ${report.evidence.caseCounts.passed} passed, ${report.evidence.caseCounts.failed} failed, ${report.evidence.caseCounts.skipped} skipped, ${report.evidence.caseCounts.unsupported} unsupported.`,
     ...(report.evidence.harness
       ? [
           `Desktop supervisor: ${report.evidence.harness.status}; retries: ${report.evidence.harness.retries}; flaky: ${report.evidence.harness.flaky}; unsupported: ${report.evidence.harness.unsupported}; incomplete: ${report.evidence.harness.incomplete}; failures: ${report.evidence.harness.failureCount}.`,

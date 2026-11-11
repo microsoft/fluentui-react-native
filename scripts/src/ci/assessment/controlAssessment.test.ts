@@ -519,10 +519,36 @@ describe('Checkbox advisory assessment', () => {
 });
 
 describe('native evidence validation', () => {
+  it('retains declared Storybook unsupported cases and reconciles their canonical desktop status', () => {
+    const story = {
+      ...aggregate,
+      wdio: [{ ...nativeCase, status: 'unsupported', skipReason: 'Missing desktop requirements: physical-click.' }],
+    };
+    const parsed = parseNativeReport(story);
+    assert.equal(parsed.cases[0].status, 'unsupported');
+    assert.equal(parsed.cases[0].reason, story.wdio[0].skipReason);
+    const { run } = desktopEvidenceFixture(JSON.stringify(story));
+    run.counts.unsupported = 1;
+    const envelope = {
+      schemaVersion: 1,
+      format: 'desktop-test',
+      desktopRun: JSON.stringify(run),
+      storyReport: JSON.stringify(story),
+    };
+    const canonical = parseNativeReport(envelope);
+    assert.equal(canonical.cases[0].status, 'unsupported');
+    assert.equal(canonical.harness?.unsupported, 1);
+    run.tests[1].status = 'passed';
+    assert.throws(() => parseNativeReport({ ...envelope, desktopRun: JSON.stringify(run) }), /last attempt/);
+    assert.throws(() => parseNativeReport({ ...story, wdio: [{ ...story.wdio[0], skipReason: undefined }] }), /Unsupported case reason/);
+  });
+
   const malformed: [string, unknown][] = [
     ['non-object input', null],
     ['missing case array', { ...direct, tests: undefined }],
     ['unknown case status', { ...direct, tests: [{ ...nativeCase, status: 'pending' }] }],
+    ['unsupported legacy case status', { ...direct, tests: [{ ...nativeCase, status: 'unsupported', skipReason: 'Not available.' }] }],
+    ['unknown smoke case status', { ...aggregate, wdio: [{ ...nativeCase, status: 'cancelled' }] }],
     ['unknown root status', { ...direct, status: 'success' }],
     ['bad platform digest', { ...direct, platformManifestDigest: 'bad' }],
     ['negative duration', { ...direct, tests: [{ ...nativeCase, durationMs: -1 }] }],

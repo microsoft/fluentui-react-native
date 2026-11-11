@@ -285,6 +285,46 @@ test('mixed native cohorts stay mixed and do not silently become accessible', ()
   assert.equal(assessNativeCapture(nativeCapture({ mixed: true }), environment()).observations[0].outcome, 'unverified');
 });
 
+test('unsupported Storybook callbacks remain explicit gaps after native ingestion', () => {
+  const capture = nativeCapture();
+  const envelope = object(JSON.parse(capture.report!), 'Envelope');
+  const run = object(JSON.parse(String(envelope.desktopRun)), 'Supervisor');
+  const story = object(JSON.parse(String(envelope.storyReport)), 'Storybook');
+  const storyId = 'sample--unsupported';
+  const testName = 'needs physical input';
+  const reason = 'Missing desktop requirements: physical-click.';
+  assert.ok(Array.isArray(run.tests) && Array.isArray(story.wdio));
+  run.tests.push({
+    testId: `csf-${reportDigest(JSON.stringify([storyId, testName]))}`,
+    title: 'unsupported callback',
+    status: 'unsupported',
+    flaky: false,
+    attempts: [
+      { attempt: 0, status: 'unsupported', durationMs: 1, reason, context: { endpoint: 'win32', story: storyId, test: testName } },
+    ],
+  });
+  Object.assign(object(run.counts, 'Counts'), { selected: 2, unsupported: 1 });
+  story.wdio.push({ storyId, testName, status: 'unsupported', durationMs: 1, skipReason: reason });
+  const report = JSON.stringify({ ...envelope, desktopRun: JSON.stringify(run), storyReport: JSON.stringify(story) });
+  const result = assessNativeCapture({ ...capture, report, reportSha256: reportDigest(report) }, environment());
+  assert.equal(result.observations[0].outcome, 'unverified');
+  assert.equal(result.observations[1].recordedOutcome, 'unsupported');
+  assert.equal(result.observations[1].outcome, 'unsupported');
+  assert.ok(result.observations[1].reasons.includes(reason));
+  assert.equal(result.nativeSelections[0].outcome, 'unsupported');
+});
+
+test('older supervisor reports without endpoint and renderer context remain unverified', () => {
+  const capture = nativeCapture();
+  const envelope = object(JSON.parse(capture.report!), 'Envelope');
+  const run = object(JSON.parse(String(envelope.desktopRun)), 'Supervisor');
+  delete run.context;
+  const report = JSON.stringify({ ...envelope, desktopRun: JSON.stringify(run) });
+  const result = assessNativeCapture({ ...capture, report, reportSha256: reportDigest(report) }, environment());
+  assert.equal(result.observations[0].outcome, 'unverified');
+  assert.ok(result.limitations.includes('Actual endpoint or renderer does not attest the requested target.'));
+});
+
 test('native adapter consumes actual config registration identities, including explicit macOS Paper selection', () => {
   const directory = fixture();
   const config = path.join(directory, 'desktop.config.mts');

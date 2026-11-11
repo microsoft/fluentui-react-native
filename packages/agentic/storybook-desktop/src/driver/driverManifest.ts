@@ -70,6 +70,14 @@ export type CreateDesktopStorybookDriverManifestOptions = {
   wdio?: DesktopStorybookWdioOptions;
 };
 
+export function desktopStorybookRenderer(
+  config: Pick<DesktopStorybookConfig, 'getDesktopTarget'>,
+  platform: Platforms,
+  paper = config.getDesktopTarget?.('macos')?.host.renderer === 'paper',
+): DesktopStorybookDriverManifest['renderer'] {
+  return platform === 'win32' || (platform === 'macos' && paper) ? 'paper' : 'fabric';
+}
+
 /** Returns the WebDriver target ID the embedded Storybook driver registers for an endpoint and renderer. */
 export function desktopStorybookTargetId(
   config: Pick<DesktopStorybookConfig, 'appName' | 'getDesktopTarget'>,

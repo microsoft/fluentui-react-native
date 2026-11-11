@@ -24,6 +24,7 @@ import type { DesktopReportSession } from '@fluentui-react-native/desktop-test/r
 import { desktopSmokeModes, type DesktopSmokeMode } from '../config/commands.js';
 import type { DesktopStorybookConfig } from '../config/makeDesktopStorybookConfig.js';
 import type { Platforms } from '../config/platforms.js';
+import { desktopStorybookRenderer } from '../driver/driverManifest.js';
 import type {
   DesktopStorybookBuildDriverOptions,
   DesktopStorybookCliOptions,
@@ -308,6 +309,9 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       ...options.config.desktop?.reporting,
       artifactsRoot: options.config.desktop?.reporting.artifactsRoot ?? path.join(options.config.projectRoot, 'artifacts', 'desktop'),
       kind: ['test', 'smoke'].includes(action.name()) ? 'tests' : 'lifecycle',
+      ...(platform
+        ? { context: { endpoint: platform, renderer: desktopStorybookRenderer(options.config, platform, actionOptions.paper) } }
+        : {}),
       ...(lane ? { lane } : {}),
       reporterMode,
       eventLevel,
