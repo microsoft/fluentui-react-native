@@ -66,7 +66,7 @@ function Stop-OwnedServices {
     try {
       if (-not $service.Process.HasExited) {
         Set-Content -LiteralPath $service.StopPath -Value 'stop' -Encoding utf8NoBOM
-        if (-not $service.Process.WaitForExit(15000)) {
+        if (-not $service.Process.WaitForExit(75000)) {
           Stop-Process -Id $service.Process.Id -ErrorAction Stop
           throw "Owned service '$($service.Label)' did not complete its graceful reporting flush."
         }

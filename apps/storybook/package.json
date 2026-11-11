@@ -47,13 +47,13 @@
     "@react-native/metro-babel-transformer": "^0.81.0",
     "@react-native/metro-config": "^0.81.0",
     "@rnx-kit/cli": "catalog:",
-    "@storybook/addon-ondevice-actions": "^10.4.7",
-    "@storybook/addon-ondevice-controls": "^10.4.7",
-    "@storybook/react-native": "^10.4.7",
+    "@storybook/addon-ondevice-actions": "^10.7.1",
+    "@storybook/addon-ondevice-controls": "^10.7.1",
+    "@storybook/react-native": "^10.7.1",
     "cross-env": "catalog:",
     "metro": "^0.83.8",
     "react-native-test-app": "catalog:",
-    "storybook": "^10.4.0"
+    "storybook": "^10.6.5"
   },
   "furn": {
     "knip": {

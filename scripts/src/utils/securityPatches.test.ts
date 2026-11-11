@@ -49,7 +49,7 @@ it('deepmerge cannot poison a result through either input or nested placeholders
 });
 
 it('Joi multiple-email splitting is bounded and preserves separator behavior', () => {
-  const { module: Joi } = installedPackage('joi', '17.13.8');
+  const { module: Joi } = installedPackage('joi', '17.13.9', false);
   const spaces = ' '.repeat(100_000);
   for (const separator of [undefined, ';', ', ']) {
     const schema = Joi.string().email({ multiple: true, separator });

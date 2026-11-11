@@ -33,6 +33,40 @@ capabilities, and unfinished work. A zero worker exit cannot override failed
 assertions or incomplete work. Optional suites can be skipped without being
 labelled passed.
 
+## Verdicts
+
+A run is `failed`, `incomplete`, `skipped`, or `passed`, in that order of
+precedence. Skipped capabilities, empty work, and incomplete work are never
+passing coverage.
+
+- **Decisive attempt.** A test with retries takes the status of its decisive
+  attempt, not of its last one: a passing last attempt passes the test (it is
+  `flaky` if an earlier attempt failed); otherwise any failed attempt fails the
+  test; otherwise the last attempt's status stands. A failed attempt followed
+  only by `skipped`, `unsupported`, or `incomplete` retries therefore stays
+  `failed`, and JUnit and the summaries report that failure.
+- **Attempt order.** Attempts keep the order in which they arrive. A producer's
+  attempt number only identifies the attempt (WDIO numbers a spec file's retries
+  `N+1, 1, 2, …`), so the collector never sorts by it.
+- **Empty work.** Selected worker work (such as a WDIO spec group) that reports
+  no tests is `incomplete` with the reason "No tests were reported for this
+  work.", unless the producer declared exclusions for it. WDIO reports a spec
+  that defines no tests, or fails to import, as passed, so the reporter also
+  emits a warning diagnostic naming the specs. The generated WDIO configuration
+  keeps `logLevel: 'error'` but raises the jasmine and mocha framework loggers to
+  `warn`, so a spec import failure is visible. A run of kind `tests` that
+  executes no test is incomplete as well.
+- **Incomplete runs.** An `incomplete` run lists each unmet item as a problem in
+  the JSON and NDJSON summaries (the work and its reason, tests that did not
+  finish, producers that never finished), and JUnit and the Actions summary
+  state the same reason. Result checks such as `assertSuccessful` throw a
+  `DesktopIncompleteError`, which a collector or delegated reporter recognizes by
+  name: `fail()` records it as the run's `incomplete` verdict, not as an
+  `infrastructure` failure. If nothing else in the run is incomplete, the same
+  error is a failure so the gap cannot disappear.
+- **Collector-only events.** Only the collector emits `run-finished`; a producer
+  that sends it is rejected.
+
 ## Console output
 
 A command, or a step such as a story test run, is an operation. When it ends the
@@ -66,7 +100,22 @@ Without `--verbose` a passing, skipped, or unsupported test appears only in the
 final counts, so a run that executes nothing shows as `0 executed` instead of
 disappearing into a long list. Failed tests, retries, and diagnostics always
 print, and the root supervisor's stderr is always live. Every run finishes with a
-`[desktop] PASSED: …` or `[desktop] FAILED: …` line carrying the counts.
+`[desktop] <STATUS>: …` line carrying the counts, where the status is `PASSED`,
+`FAILED`, `INCOMPLETE`, or `SKIPPED`, read from the final result.
+
+Console output is presentation, so its errors never change the verdict. A
+consumer that closes the pipe (`EPIPE`), stalls past the flush timeout, or falls
+more than 4 MiB behind (the queue counts structured NDJSON bytes too) stops
+console output, and the reporter writes
+`[desktop] WARNING: <reason>; authoritative result: <run.json>` to stderr and a
+warning diagnostic to the journal, after the final result is written. The result
+and its retained reports are unaffected.
+
+Sensitive text is sanitized once, when the reports are written: the collector and
+delegated reporters redact decoded failure values with one registry, never JSON
+text, so a secret registered after its text was reported is still removed from
+`run.json`, `junit.xml`, and the summaries. `events.jsonl` keeps the text it
+journaled when it was reported.
 
 Output is untrusted text. The reporter neutralizes each line it prints that it
 did not build as a workflow command, so a command cannot start, stop, or forge
@@ -97,14 +146,19 @@ event count, and the same summary as its final record. `--events` selects
 same level for delegated commands. Event selection is valid only with NDJSON.
 The summary is capped at 4 KiB and includes counts, up to 10 problems, omission
 counts, and links to the authoritative `run.json`, `events.jsonl`, JUnit, and
-command logs. Structured output suppresses normal human stderr. If stdout
-closes, the run continues to persist its result and records a reporting
-diagnostic.
+command logs. Record IDs are never clipped: text fields shrink first, then the
+record falls back to a minimal one marked `truncated: true`, so the summary
+always arrives. Under `milestones`, `skipped` and `unsupported` test results
+(including declared gaps) share a separate cap of 25 events; a `failed`,
+`incomplete`, or `cancelled` result is never suppressed. Structured output suppresses normal
+human stderr. If stdout closes, the run continues to persist its result and
+reports a warning, as for [console output](#console-output).
 
-SIGINT and SIGTERM cancel owned work; one-shot structured runs finish with an
+SIGINT, SIGTERM, and SIGHUP cancel owned work; one-shot runs finish with an
 `incomplete` summary instead of reporting cancellation as an infrastructure
-failure. Long-lived readiness commands retain their single readiness document;
-one that fails before readiness writes the summary instead.
+failure, and a stage stopped before it finished is never reported as passed.
+Long-lived readiness commands retain their single readiness document; one that
+fails before readiness writes the summary instead.
 
 The supervisor owns rendering. Delegated producers inherit the selected mode
 and report into the parent journal; they do not create a second result
@@ -181,8 +235,10 @@ MCP tool, or execution/recovery API. Its credentials are distinct from driver
 control grants. Connecting a reader only binds a credential; it never creates
 a workload, producer, controller session, or application.
 
-The collector atomically replaces `run.json` with an active snapshot after each
-batch of events (coalesced within a JavaScript turn). Active snapshots have
+The collector atomically replaces `run.json` with an active snapshot after events
+that can change the result (not output or progress diagnostics), at most every
+250 ms. `flush()` and finalization always write the current state, so a reader
+may see a snapshot up to 250 ms behind. Active snapshots have
 `terminal: false` and cannot have a passing status. Only successful final
 report persistence after producer/output accounting sets `terminal: true`.
 Terminal means collection finished, not that coverage passed. A crashed
@@ -230,6 +286,13 @@ re-registration of retained runs and fresh grants, never execution replay.
 The host must register all relevant secrets (including credentials for any
 external integration); `addSecret` can update the read redactor. The collector
 redacts before persistence, and queries redact again before clipping text.
+
+Query errors carry one code from a closed set: `unavailable`, `invalid-request`,
+`stale-cursor`, `report-unreadable`, `report-changed`, `report-invalid`, or
+`internal`. Messages are fixed text, so an error never exposes a path or the
+reason a filesystem or parser call failed. Text returned from a retained report
+replaces the run directory with `<run>` and its parent directory with
+`<artifacts>`.
 
 Readers submit only an opaque run ID, a declared operation, and its bounded
 parameters. `status` returns complete counts, terminal/coverage state, and the

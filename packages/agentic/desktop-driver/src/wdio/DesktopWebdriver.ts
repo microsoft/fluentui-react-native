@@ -1,7 +1,9 @@
 import { inspect } from 'node:util';
 
 import { attach, remote } from 'webdriverio';
+import type { InputOptions } from 'webdriverio';
 
+import { desktopInputModeAllows } from '../authoring/input.js';
 import type { DesktopInputMode, DesktopSessionInput } from '../authoring/input.js';
 import type { DesktopStoryRunResult, DesktopStoryTestResult } from '../authoring/results.js';
 import type { DesktopStoryExpectation } from '../authoring/storyTests.js';
@@ -75,11 +77,44 @@ export type DesktopWebdriverAttachment = {
 
 export class DesktopWebdriverSession {
   readonly browser: WebdriverIO.Browser;
-  readonly session: DesktopSessionClient;
+  #session: DesktopSessionClient;
+  readonly #inputModes = new Map<string, Promise<DesktopInputMode>>();
 
   constructor(browser: WebdriverIO.Browser, session: DesktopSessionClient) {
     this.browser = browser;
-    this.session = session;
+    this.#session = session;
+  }
+
+  /** The client for the browser's current session. It follows `reloadSession()`, which gives the browser a new session id. */
+  get session(): DesktopSessionClient {
+    const { sessionId } = this.browser;
+    if (sessionId && sessionId !== this.#session.id) {
+      this.#session = this.#session.rebind(sessionId, Object.fromEntries(Object.entries(this.browser.capabilities)));
+    }
+    return this.#session;
+  }
+
+  /**
+   * The input policy the service enforces for the current session. A capability only reports what the client was told at
+   * attach, and an attach may carry none, so the session itself is asked once and the answer is kept.
+   */
+  inputMode(): Promise<DesktopInputMode> {
+    const session = this.session;
+    let mode = this.#inputModes.get(session.id);
+    if (!mode) {
+      mode = session.getInput().then((input) => input.mode);
+      this.#inputModes.set(session.id, mode);
+      mode.catch(() => this.#inputModes.delete(session.id));
+    }
+    return mode;
+  }
+
+  /** Refuses before anything is cleared or typed when the session's input policy never delivers keyboard input. */
+  async assertKeyboardInput(command: string): Promise<void> {
+    const mode = await this.inputMode();
+    if (!desktopInputModeAllows(mode, 'keyboard')) {
+      throw new Error(`${command} would deliver keyboard input, which a session with input mode "${mode}" never delivers.`);
+    }
   }
 
   listStories(): Promise<DesktopStoryManifest> {
@@ -255,14 +290,14 @@ export function installDesktopWebdriverCommands(
       },
       { attachToElement: true },
     );
+    // The override never calls WDIO's setValue: it detects stubborn values and date inputs with `execute`, which a native
+    // desktop session rejects, after the field was already cleared. The native sequence is the two commands it ends with.
     browser.overwriteCommand(
       'setValue',
-      async function (this: WebdriverIO.Element, originalCommand, value: string | number) {
-        const inputMode = boundSessions.get(browser)!.session.capabilities['furn:inputMode'];
-        if (inputMode === 'accessible') {
-          throw new Error(`setValue would deliver keyboard input, which a session with input mode "${inputMode}" never delivers.`);
-        }
-        return originalCommand(value);
+      async function (this: WebdriverIO.Element, _originalCommand, value: string | number, options?: InputOptions) {
+        await boundSessions.get(browser)!.assertKeyboardInput('setValue');
+        await this.clearValue();
+        return this.addValue(value, options);
       },
       { attachToElement: true },
     );

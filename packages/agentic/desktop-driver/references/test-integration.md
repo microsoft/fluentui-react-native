@@ -65,9 +65,19 @@ requirement is reported without failing it.
 
 WDIO's `element.desktopPerformAccessibilityAction(name)` invokes a uniquely
 published accessibility action without pointer or keyboard input. Declare
-`perform-accessibility-action` on the case that uses it. In an accessible
-session, `setValue` is rejected before WDIO's client-side clear step; `clear`
-remains available as a semantic clear.
+`perform-accessibility-action` on the case that uses it.
+
+`setValue(value, options)` is native here: it checks that the session's input
+mode permits the keyboard, then clears with `clearValue` and types with
+`addValue(value, options)`. It never reaches WDIO's own `setValue`, whose
+client-side `execute` probes a native session rejects after the field was
+cleared. It reads the mode from the session's current `furn:inputMode`, so an
+attached session that omitted the capability still gets the mode the service
+reports, and a `setValue` in an accessible session is rejected before anything is
+cleared. After `reloadSession()` the bound commands follow the new session id.
+`clear` remains available in an accessible session as a semantic clear. WDIO
+options pass through unchanged, so `setValue(secret, { mask: true })` keeps the
+value out of WDIO's logs.
 
 Use standard WebdriverIO APIs only where the
 [implemented protocol](protocol.md) supports them. Browser navigation, cookies,
@@ -207,6 +217,19 @@ Requirements can declare `accessibility-click`, `element-screenshot`, `focus`,
 produces an explicit skip. Platform differences belong in `platforms` and
 `requires`, not imperative branches.
 
+Authored cases (`desktopIt`) can declare `unsupported` or `quarantine`. A
+quarantine names an `issue`, a `reason`, and an `expires` date written as a real
+calendar date, `YYYY-MM-DD`; `2026-13-01` and `2026-02-30` are rejected rather
+than read as a date that never arrives. It stops applying at 00:00:00 UTC on its
+`expires` date, so the date is the first day without the quarantine, and a run on
+or after it fails before any case executes. Its optional `platforms` and `input`
+must overlap the platforms and input the case runs on, and a group's platforms
+and scope must overlap its children's; a gap that could never apply is rejected.
+Artifact names in a plan (`screenshot`, `source`) are unique per test and may not
+use the reserved `failure` or `failure-*` names, and `wait` timeouts are integers
+of 0 to 120000 milliseconds. A plan is rejected when a `keys` step has an empty
+list, or a test's `platforms` or `requires` is empty or repeats an entry.
+
 ## Run plans
 
 ```sh
@@ -228,10 +251,35 @@ desktop-driver stories run \
 ```
 
 Selectors can filter by story glob, test glob, tag, and deterministic shard.
-The CLI emits JSON and exits nonzero when the run status is not `passed`.
-An all-skipped static run is `incomplete`, not a passing run. The neutral
-harness's explicitly optional cohorts may finish skipped without claiming
-that the underlying capabilities were qualified.
+A glob matches `*` as any run of characters and every other character
+literally, in linear time. Shards are cut from the selection ordered by Unicode
+code point of `<story>/<test>`, so every machine and locale builds the same
+shards. The CLI emits JSON and exits nonzero when the run status is not
+`passed`.
+
+Run status follows the same rule as the neutral harness's lane verdict:
+
+- any test that is not `passed` or `skipped` makes the run `failed`;
+- a run that skipped everything is `incomplete`;
+- a run whose session enforces an input lane (`furn:inputMode` is `accessible`
+  or `physical`) is `incomplete` when any test was skipped, because the lane
+  promised to run its whole selection;
+- otherwise a run with passes and skips is `passed`, and the skips stay visible
+  on their tests.
+
+The neutral harness's explicitly optional cohorts may finish skipped without
+claiming that the underlying capabilities were qualified.
+
+A test requires a capability only when the session can deliver it. The runner
+skips a test whose requirement the host does not advertise, and also one whose
+requirement the session's input mode masks: `keyboard`, `physical-click`, and
+`wheel` in an `accessible` session.
+
+A transport failure (`DesktopDriverClientError`), `invalid session id`,
+`session not created`, and `unknown error` make a test `infrastructure-error`, and
+`wait` stops on them instead of retrying until its timeout. Element lookups,
+assertions, and malformed input are `failed`, and an expired `wait` is
+`timed-out`. A `wait` timeout is an integer of 0 to 120000 milliseconds.
 
 ## Evidence
 
@@ -242,18 +290,29 @@ artifactsRoot/
   host.json
   run.json
   tests/
-    <story>-<test>/
-      <named screenshots and source>
-      failure-window-events.json
-      failure.png
-      failure-source.xml
-      failure-tree.json
-      failure-window-<n>.png
-      failure-window-<n>-source.xml
+    <story>/
+      <test>-<hash>/
+        <named screenshots and source>
+        failure/
+          failure-window-events.json
+          failure.png
+          failure-source.xml
+          failure-tree.json
+          failure-window-<n>.png
+          failure-window-<n>-source.xml
 ```
 
+`<story>` and `<test>` are sanitized and cut to 64 characters, and `<hash>` is a
+12-character hash of the exact story and test ids. Ids that sanitize to the same
+text, or that differ only in where a hyphen falls, still get separate
+directories.
+
 `captureDesktopFailureEvidence` from `./artifacts` produces the `failure-*`
-files for both story plans and Storybook `wdio` callbacks. It reads the window
+files for both story plans and Storybook `wdio` callbacks, in the test's
+`failure/` directory. A plan cannot overwrite them: the names `failure` and
+`failure-*` are reserved for authored screenshots and source, and a name that
+sanitizes to the same file as another in one test (case-insensitively) is
+rejected, at validation and again at run time. It reads the window
 event log first, when the `windowEvents` feature is available, because tree
 traversal is slow enough for transient popups and sheets to change state. It
 then captures the current window's screenshot (when `screenshot` is available),
@@ -261,10 +320,12 @@ source, and tree, followed by the screenshot and source of up to four other open
 windows, and restores the current window. Windows that close during capture are
 recorded as evidence errors.
 
-Names are sanitized and confined. Failure evidence is best effort and never
-replaces the original test error. Trees and screenshots may contain sensitive
-application information; apply the retention and access policy described in
-[Security](security.md).
+Names are sanitized and confined. The manager resolves the deepest existing
+ancestor of every path and refuses one whose real location leaves the root,
+including through a symbolic link, before it creates a directory. Failure
+evidence is best effort and never replaces the original test error. Trees and
+screenshots may contain sensitive application information; apply the retention
+and access policy described in [Security](security.md).
 
 ## Fake-host contract tests
 
@@ -293,10 +354,32 @@ try {
 }
 ```
 
-`createDesktopDriverStoryHarness` adds a fake Storybook orchestrator and
-manifest-derived elements. The fake provider is appropriate for protocol,
+`createDesktopDriverStoryHarness` adds a fake Storybook orchestrator to the
+default window. The orchestrator selects stories and records argument updates, but
+it adds no elements: a test supplies the elements it asserts on through the
+host's `windows` option. Only `desktop-driver serve --manifest` builds
+manifest-derived windows. The fake provider is appropriate for protocol,
 queueing, cancellation, runner, CLI, and consumer contract tests. It is not
 evidence that native accessibility, input, window, or capture behavior works.
+
+The typed client throws `DesktopDriverClientError` (from `./client`) for a
+failure that is not a WebDriver error the service reported: `reason: 'transport'`
+when the service could not be reached, and `reason: 'invalid-response'` (with the
+HTTP `status`) for a body that is not JSON or lacks a WebDriver `value`. Neither
+message holds a response body or a request value. Every session, element, and
+action method accepts an optional `{ signal }` options argument; an aborted
+request rejects with the abort, not a transport error. The story runner treats
+both client error reasons as infrastructure failures.
+
+The fake host resolves selectors the way the native helpers do, so a test that
+passes against it selects the same elements on a desktop: `-furn:text` compares
+exactly against an element's text, value, or accessible name, `tag name` applies
+the helpers' role aliases (`edit` is `textbox`, `hyperlink` is `link`), and an
+empty `accessibility id` or partial link text matches nothing. It reports
+`checked`, `expanded`, and `selected` as unsupported unless the element declares
+them, and it enforces the input masks in `features` (`keyboard`, `physicalClick`,
+`wheel`) on `sendKeys` and `performActions` as the native host enforces a
+target's disabled input.
 
 ## Package tests
 

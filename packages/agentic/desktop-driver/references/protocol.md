@@ -32,19 +32,22 @@ V1 platform names are `macos` and `windows`. Endpoint names are `macos`,
   every other grant sees it as nonexistent; see
   [the security model](security.md#protected-service).
 
-Supported extension capabilities:
+Supported extension capabilities a request can set:
 
-- `furn:target`;
-- `furn:endpoint`;
-- `furn:renderer`;
+- `furn:target`: a non-empty string;
+- `furn:endpoint`: a non-empty string;
+- `furn:renderer`: a non-empty string;
 - `furn:launchMode`: `launch` or `attach`;
 - `furn:clickMode`: `physical`, `accessibility`, or `auto`;
-- `furn:inputMode`: `accessible`, `physical`, or `compatibility` (the default);
-- returned `furn:features`.
+- `furn:inputMode`: `accessible`, `physical`, or `compatibility` (the default).
+
+The session returns `furn:clickMode`, `furn:endpoint`, `furn:features`, `furn:inputMode`,
+`furn:launchMode`, `furn:renderer` (when the target has one), `furn:storybook`, and `furn:target`.
 
 Capability matching implements W3C `alwaysMatch` and ordered `firstMatch`,
-rejects duplicate merge keys, and returns `session not created` when no
-registered target can satisfy a candidate.
+rejects duplicate merge keys, rejects an unknown or mistyped `furn:` capability with
+`invalid argument` (a misspelled name never selects a default), and returns
+`session not created` when no registered target can satisfy a candidate.
 
 `furn:inputMode` is fixed for the session and returned in its capabilities.
 `accessible` permits accessibility clicks, named accessibility actions, and
@@ -102,8 +105,11 @@ return `unsupported operation`.
 ## Timeouts
 
 Standard implicit, page-load, and script timeout values are accepted by the
-session contract. Native and Storybook operations use driver-owned bounded
-deadlines rather than repurposing page-load semantics.
+session contract. A request is validated as a whole before any value is
+applied: each value must be a safe integer of at least zero, and `script` may
+also be `null`. A request with any invalid value changes nothing. An implicit-wait element search stops when the session is
+deleted rather than running to its deadline. Native and Storybook operations
+use driver-owned bounded deadlines rather than repurposing page-load semantics.
 
 `DesktopTarget.launchTimeoutMs` is a positive bounded integer. The server's
 deadline defaults to 120 seconds; an explicitly configured value is also
@@ -141,7 +147,7 @@ Portable lookup strategies:
 | `tag name`          | Normalized accessibility role                      |
 | `link text`         | Exact accessible name                              |
 | `partial link text` | Partial accessible name                            |
-| `-furn:text`        | Normalized visible/value text                      |
+| `-furn:text`        | Exact visible text, value, or accessible name      |
 
 CSS and XPath are not redefined for non-DOM trees.
 
@@ -187,6 +193,13 @@ publishes only entries that declare a `label` and lists them by that label
 | Capture backend fails                             | `unable to capture screen`  |
 | Deadline expires                                  | `timeout`                   |
 | Capability, property, or operation is unavailable | `unsupported operation`     |
+| Malformed percent-encoding in a path              | `invalid argument`          |
+| Unknown `/furn/*` route                           | `unknown command`           |
+
+New-window creation (`POST /window/new`) is `unsupported operation`. A request
+the service refuses as a browser request, because of its `Origin`, Fetch
+Metadata or `Host`, is HTTP 500 `unknown error` with a fixed message that does
+not echo the header.
 
 An intercepted click names the occluding element's role, name, and ID; an
 external occluder names its owning application and process ID.

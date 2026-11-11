@@ -54,6 +54,12 @@ const button = declared('button', [
 ]);
 
 describe('WDIO selection', () => {
+  test('orders stories by code point, so every machine builds the same shards', () => {
+    const manifest = manifestOf(...['z', 'é', 'b', 'B', 'a', 'Z'].map((id) => legacy(id)));
+    const { stories } = decideWdioSelection(manifest, {}, { platform: 'win32' });
+    expect(stories.map(({ id }) => id)).toEqual(['B', 'Z', 'a', 'b', 'z', 'é']);
+  });
+
   test('selects by input lane and target platform', () => {
     const manifest = manifestOf(button);
     expect(selectedNames(decideWdioSelection(manifest, { input: 'accessible' }, { platform: 'win32' }))).toEqual([

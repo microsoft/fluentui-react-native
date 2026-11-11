@@ -6,7 +6,8 @@ export type DesktopClickMode = 'physical' | 'accessibility' | 'auto';
 export type WebDriverTimeouts = {
   implicit: number;
   pageLoad: number;
-  script: number;
+  /** `null` means no script deadline, as W3C allows. */
+  script: number | null;
 };
 
 export type DesktopTimeouts = {

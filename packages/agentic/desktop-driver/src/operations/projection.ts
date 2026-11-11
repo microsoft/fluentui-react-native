@@ -145,55 +145,66 @@ export function project(request: ProjectionRequest): Projection {
   }
 
   const offset = Math.min(request.offset ?? 0, order.length);
-  const pageTargets: number[] = [];
-  let pageIndices: number[] = [];
-  let pageUnselectedKids = Array.from({ length: nodes.length }, () => 0);
   let stop: 'maxBytes' | 'maxNodes' | undefined;
 
-  const indicesWithAncestors = (targets: readonly number[]) => {
-    const included = new Set<number>();
-    for (const target of targets) {
-      for (let index = target; index >= 0; index = kept.parent[index]) {
-        included.add(index);
-      }
+  // Candidate children each node has that the page has not taken. A node with any carries `more`.
+  const omitted = Array.from({ length: nodes.length }, () => 0);
+  for (const index of order) {
+    if (kept.parent[index] >= 0) {
+      omitted[kept.parent[index]] += 1;
     }
-    return inDocumentOrder([...included], parents);
-  };
-  const omittedChildren = (included: readonly number[]) => {
-    const includedSet = new Set(included);
-    const counts = Array.from({ length: nodes.length }, () => 0);
-    for (const index of order) {
-      if (!includedSet.has(index) && kept.parent[index] >= 0) {
-        counts[kept.parent[index]] += 1;
-      }
+  }
+  // A line's size with a one-character reference. A longer reference adds the same bytes to every line.
+  const unitBytes = new Map<number, number>();
+  const unit = (index: number, more: boolean) => {
+    const key = more ? -1 - index : index;
+    let bytes = unitBytes.get(key);
+    if (bytes === undefined) {
+      bytes = measure(format, assemble(base.get(index), kept.depth[index], 'x', more));
+      unitBytes.set(key, bytes);
     }
-    return counts;
-  };
-  const measurePage = (indices: readonly number[], unselectedKids: readonly number[]) => {
-    const placeholder = 'x'.repeat(refs.maxLength(indices.length));
-    return indices.reduce(
-      (total, index) =>
-        total + measure(format, assemble(base.get(index), kept.depth[index], placeholder, nativeMore[index] || unselectedKids[index] > 0)),
-      -1,
-    );
+    return bytes;
   };
 
+  // Each candidate adds itself and the kept ancestors the page lacks, so the page grows by that chain and one cost
+  // changes: its parent, which has one fewer child left out, and may lose `more`.
+  const included = new Set<number>();
+  const pageTargets: number[] = [];
+  let lineBytes = 0;
   for (let position = offset; position < order.length; position += 1) {
-    const targets = [...pageTargets, order[position]];
-    const indices = indicesWithAncestors(targets);
-    if (indices.length > budgets.maxNodes) {
+    const target = order[position];
+    const chain: number[] = [];
+    for (let index = target; index >= 0 && !included.has(index); index = kept.parent[index]) {
+      chain.push(index);
+    }
+    const count = included.size + chain.length;
+    if (count > budgets.maxNodes) {
       stop = 'maxNodes';
       break;
     }
-    const unselectedKids = omittedChildren(indices);
-    if (measurePage(indices, unselectedKids) > budgets.maxBytes) {
+    let trial = lineBytes;
+    for (const [at, index] of chain.entries()) {
+      trial += unit(index, nativeMore[index] || omitted[index] - (at === 0 ? 0 : 1) > 0);
+    }
+    const top = chain.length > 0 ? kept.parent[chain[chain.length - 1]] : -1;
+    if (top >= 0) {
+      trial += unit(top, nativeMore[top] || omitted[top] - 1 > 0) - unit(top, nativeMore[top] || omitted[top] > 0);
+    }
+    if (trial + count * (refs.maxLength(count) - 1) - 1 > budgets.maxBytes) {
       stop = 'maxBytes';
       break;
     }
-    pageTargets.push(order[position]);
-    pageIndices = indices;
-    pageUnselectedKids = unselectedKids;
+    lineBytes = trial;
+    for (const index of chain) {
+      included.add(index);
+      if (kept.parent[index] >= 0) {
+        omitted[kept.parent[index]] -= 1;
+      }
+    }
+    pageTargets.push(target);
   }
+  const pageIndices = inDocumentOrder([...included], parents);
+  const pageUnselectedKids = omitted;
 
   const nextOffset = offset + pageTargets.length;
   const pageIndexSet = new Set(pageIndices);

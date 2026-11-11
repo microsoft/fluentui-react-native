@@ -101,6 +101,7 @@ export function createOperationRuntime(
         !!performAccessibilityAction,
       accessibilityClick: features.accessibilityClick,
       boundedObservation: features.boundedObservation === true && !!observe && !!releaseElements,
+      clear: canClear(session),
       elementCapture: features.elementScreenshot,
       keyboard: features.keyboard && !accessible,
       physicalClick: features.physicalClick && !accessible,
@@ -127,6 +128,19 @@ export function createOperationRuntime(
     state: session.operations,
     ...(stories ? { stories } : {}),
   };
+}
+
+/**
+ * Whether a clear would be dispatched. The strict-mode rule has one source, `strictClearMechanism`, so the answer
+ * cannot drift from what the host call enforces: a refusal there is `false` here.
+ */
+function canClear(session: DesktopSession): boolean {
+  try {
+    strictClearMechanism(session, 'Clearing an element');
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /** `GET furn/ops` lists what the session can do; `POST furn/ops/<name>` runs one operation. */

@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { setTimeout as delay } from 'node:timers/promises';
 
 import type { OperationCurrentStory, OperationStories } from '../operations/runtime.js';
-import { WebDriverError } from '../protocol/errors.js';
+import { HostStaleError, WebDriverError } from '../protocol/errors.js';
 import { attachFailureEffect, readFailureEffect } from '../protocol/settlement.js';
 import { withCommandTimeout } from '../protocol/timeouts.js';
 import type { StoryOrchestrator, StoryReadyResult, StorySelectionRequest } from '../storybook.js';
@@ -170,18 +170,49 @@ async function verifyStoryMarker(session: DesktopSession, expected: StoryReadyRe
   }
 }
 
+/**
+ * Reads the story-root markers of the session. The root normally lives in the main window, and a session can be
+ * working in another one, so the current window is searched first and then every other window the application has.
+ */
 async function readMarkers(session: DesktopSession, testId: string, signal: AbortSignal): Promise<string[]> {
-  const matches = await withCommandTimeout(
-    (commandSignal) =>
-      session.target.host.find({ windowId: session.currentWindowId }, { strategy: 'accessibility id', value: testId }, commandSignal),
+  const findIn = async (windowId: string): Promise<string[]> => {
+    const matches = await withCommandTimeout(
+      (commandSignal) => session.target.host.find({ windowId }, { strategy: 'accessibility id', value: testId }, commandSignal),
+      session.desktopTimeouts.nativeCommand,
+      'Finding the native Storybook story marker',
+      { signal },
+    );
+    return matches.flatMap((marker) => {
+      const value = marker.name ?? marker.value ?? marker.text;
+      return value ? [value] : [];
+    });
+  };
+  const current = session.currentWindowId ? await findIn(session.currentWindowId) : [];
+  if (current.length > 0) {
+    return current;
+  }
+  const windows = await withCommandTimeout(
+    (commandSignal) => session.target.host.windows(session.lease, commandSignal),
     session.desktopTimeouts.nativeCommand,
-    'Finding the native Storybook story marker',
+    'Reading application windows for the native Storybook story marker',
     { signal },
   );
-  return matches.flatMap((marker) => {
-    const value = marker.name ?? marker.value ?? marker.text;
-    return value ? [value] : [];
-  });
+  for (const { id } of windows) {
+    if (id === session.currentWindowId) {
+      continue;
+    }
+    // A window that closed while the others were searched has no marker to contribute.
+    const markers = await findIn(id).catch((error: unknown) => {
+      if (error instanceof HostStaleError) {
+        return [];
+      }
+      throw error;
+    });
+    if (markers.length > 0) {
+      return markers;
+    }
+  }
+  return [];
 }
 
 function requireOrchestrator(session: DesktopSession): StoryOrchestrator {

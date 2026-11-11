@@ -59,8 +59,7 @@ export default class DesktopWdioReporter extends WDIOReporter {
 
   override onRunnerStart(runner: RunnerStats): void {
     this.groupId = wdioGroupId(runner.specs);
-    // WDIO reports the remaining spec attempts (including the current worker), not an increasing attempt index.
-    this.workerAttempt = this.specFileRetries + 1 - (runner.retry ?? 1);
+    this.workerAttempt = this.workerAttemptOf(runner.retry);
     this.scopeId = `${this.groupId}-${this.workerAttempt}`;
     this.context = { ...this.context, worker: runner.cid, spec: runner.specs.join(' + '), attempt: this.workerAttempt };
     this.report({
@@ -168,14 +167,32 @@ export default class DesktopWdioReporter extends WDIOReporter {
         },
       });
     const excluded = excludedSpecCounts(desktopJasmineRegistry());
+    const excludedCount = excluded.platform + excluded.scope + excluded.input;
+    // WDIO runs a spec that failed to import with zero tests and reports it as passed; the collector then marks this work incomplete.
+    if (!runner.error && this.endedTests.size === 0 && excludedCount === 0 && !desktopJasmineRegistry().blocked)
+      this.report({
+        kind: 'diagnostic',
+        payload: {
+          level: 'warning',
+          message: `No tests ran for ${runner.specs.join(' + ')}; the spec file is empty or failed to load.`,
+        },
+      });
     // Keyed by the spec group, so a retried attempt that announces the same exclusions again is counted once.
-    if (excluded.platform + excluded.scope + excluded.input > 0) {
+    if (excludedCount > 0) {
       this.report({ kind: 'selection', payload: { excluded, key: this.groupId } });
     }
     this.report({ kind: 'scope-end', payload: { status: runner.failures || runner.error ? 'failed' : 'passed' } });
     this.schedule((producer) => producer.finish(runner.failures || runner.error ? 'failed' : 'passed'));
   }
 
+  /**
+   * The producer's attempt number is opaque: WDIO 10 reports `specFileRetries + 1` for the first worker and `1..specFileRetries`
+   * for its retries. The first worker is attempt 0 and a retry keeps its own number, so each worker attempt is unique and
+   * the collector orders attempts by arrival rather than by this number.
+   */
+  private workerAttemptOf(retry: number | undefined): number {
+    return retry === undefined || !Number.isInteger(retry) || retry < 0 || retry > this.specFileRetries ? 0 : retry;
+  }
   private testId(test: TestStats): string {
     return createHash('sha256')
       .update(JSON.stringify([this.groupId, test.uid, test.fullTitle]))

@@ -45,6 +45,12 @@ export type OperationCapabilities = {
   /** Performing one named accessibility action an element publishes, such as a custom `Toggle` or `AXShowMenu`. */
   readonly accessibilityActions: boolean;
   readonly boundedObservation: boolean;
+  /**
+   * Whether the session can clear a value in the way its input mode requires. A strict mode clears by exactly one
+   * mechanism, so this is false when the mode forbids it or the target cannot clear with only that mechanism. Required,
+   * so a runtime cannot leave a strict clear permissive by leaving it out.
+   */
+  readonly clear: boolean;
   readonly elementCapture: boolean;
   readonly keyboard: boolean;
   /** A synthesized pointer click at the element's hit-tested centre. */

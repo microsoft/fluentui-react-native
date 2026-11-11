@@ -1,3 +1,5 @@
+import type { Command } from 'commander';
+
 export const desktopReporterModes = ['auto', 'plain', 'github-actions', 'json', 'ndjson'] as const;
 export const desktopEventLevels = ['milestones', 'progress', 'all'] as const;
 
@@ -16,6 +18,20 @@ export type DesktopReporterModeOptions = {
   environment?: string;
   configured?: string;
   githubActions?: boolean;
+};
+
+export type DesktopCliOutput = {
+  writeErr: (text: string) => void;
+  writeOut: (text: string) => void;
+};
+
+const maximumDesktopCliMessageBytes = 1024;
+
+// W3C WebDriver error names that describe a caller's input or an unsupported capability rather than a server fault.
+const webDriverErrorKinds: Partial<Record<string, DesktopCliErrorCode>> = {
+  'invalid argument': 'usage',
+  'invalid selector': 'usage',
+  'unsupported operation': 'unsupported',
 };
 
 // CI templates and Windows shells commonly export an empty variable for an unset value.
@@ -88,19 +104,46 @@ export function tolerateClosedDesktopStdout(stream: NodeJS.WriteStream = process
   });
 }
 
-export function projectDesktopCliError(error: unknown): DesktopCliError {
-  const candidate = error && typeof error === 'object' && 'code' in error ? String(error.code) : undefined;
-  const code: DesktopCliErrorCode = candidate?.startsWith('commander.')
-    ? 'usage'
-    : isDesktopCliErrorCode(candidate)
-      ? candidate
-      : 'internal';
-  const message = error instanceof Error ? error.message : String(error);
-  return { schemaVersion: 1, type: 'error', error: { code, message: clipReporterText(message, 1024) } };
+/**
+ * Routes commander usage errors and help to the reporter instead of the process. Commander copies these settings only
+ * into commands created after they are set, so they are applied to every command already in the tree.
+ */
+export function configureDesktopCliCommandTree(command: Command, output: DesktopCliOutput): void {
+  command.exitOverride().configureOutput(output);
+  for (const child of command.commands) configureDesktopCliCommandTree(child, output);
 }
 
+export function describeDesktopCliError(error: unknown): string {
+  return clipReporterText(error instanceof Error ? error.message : String(error), maximumDesktopCliMessageBytes);
+}
+
+export function projectDesktopCliError(error: unknown): DesktopCliError {
+  return {
+    schemaVersion: 1,
+    type: 'error',
+    error: { code: desktopCliErrorCode(error), message: describeDesktopCliError(error) },
+  };
+}
+
+/** Compact NDJSON carries the error record as its single terminal record, so it matches the JSON document. */
 export function formatDesktopReporterError(mode: ResolvedDesktopReporterMode, error: unknown): string {
-  return formatDesktopReporterValue(mode, projectDesktopCliError(error));
+  return formatDesktopReporterValue(mode === 'ndjson' ? 'json' : mode, projectDesktopCliError(error));
+}
+
+function desktopCliErrorCode(error: unknown): DesktopCliErrorCode {
+  const record = error && typeof error === 'object' ? (error as { code?: unknown; name?: unknown; data?: unknown }) : undefined;
+  const code = typeof record?.code === 'string' ? record.code : undefined;
+  if (code?.startsWith('commander.')) return 'usage';
+  if (isDesktopCliErrorCode(code)) return code;
+
+  // WebDriver errors carry the W3C code in `code` (DD) or `name` (webdriver client errors).
+  const webDriverCode = code ?? (typeof record?.name === 'string' ? record.name : undefined);
+  if (webDriverCode === 'session not created' && hasTargetBusyReason(record?.data)) return 'busy';
+  return (webDriverCode === undefined ? undefined : webDriverErrorKinds[webDriverCode]) ?? 'internal';
+}
+
+function hasTargetBusyReason(data: unknown): boolean {
+  return Boolean(data && typeof data === 'object' && 'reason' in data && data.reason === 'target-busy');
 }
 
 function isDesktopCliErrorCode(value: string | undefined): value is DesktopCliErrorCode {

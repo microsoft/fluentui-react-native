@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
+## 0.25.21
+
+### Patch Changes
+
+- @fluentui-react-native/callout@0.29.9
+  - @fluentui-react-native/focus-zone@0.23.9
+
 ## 0.25.20
 
 ### Patch Changes

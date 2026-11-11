@@ -1,0 +1,5 @@
+---
+'@fluentui-react-native/desktop-driver': patch
+---
+
+Harden the native helper artifact cache and build locks. Only integrity failures quarantine a cached helper, so a handshake timeout or file-descriptor exhaustion no longer wedges consumers that resolve with `buildPolicy: 'never'`, and a publication collision never trashes an artifact that may be in use. Build-lock waiters keep waiting while the builder's heartbeat is fresh, and stale or ownerless locks are reclaimed. Source digests sort by code point instead of locale and the Windows digest covers only the sources the project declares, so cached helpers rebuild once. The Windows helper builds from staged sources instead of in the package. A cache root inside the package, `node_modules`, or a pnpm store is rejected. Helper build and handshake processes report bounded, clipped diagnostics and are killed if they hang. The macOS private store unlinks its temporary file immediately after publishing, sweeps stale temporaries, and decodes records without stripping a byte order mark.

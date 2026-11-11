@@ -8,6 +8,23 @@ import { startDesktopService, startNativeDesktopService } from '@fluentui-react-
 
 const catalog = describeOperations({ accessibilityActions: false, boundedObservation: false });
 
+// Every public library entry loads on its own, without Storybook or a running WDIO session.
+const entries = {
+  '.': await import('@fluentui-react-native/desktop-test'),
+  './config': await import('@fluentui-react-native/desktop-test/config'),
+  './reporting': await import('@fluentui-react-native/desktop-test/reporting'),
+  './reporting/run-queries': await import('@fluentui-react-native/desktop-test/reporting/run-queries'),
+  './commands': await import('@fluentui-react-native/desktop-test/commands'),
+  './driver-service': await import('@fluentui-react-native/desktop-test/driver-service'),
+  './process-control': await import('@fluentui-react-native/desktop-test/process-control'),
+  './resources': await import('@fluentui-react-native/desktop-test/resources'),
+  './ownership': await import('@fluentui-react-native/desktop-test/ownership'),
+  './jasmine': await import('@fluentui-react-native/desktop-test/jasmine'),
+  './wdio': await import('@fluentui-react-native/desktop-test/wdio'),
+};
+const empty = Object.entries(entries).filter(([, module]) => Object.keys(module).length === 0);
+if (empty.length) throw new Error(`Public desktop-test entries exported nothing: ${empty.map(([entry]) => entry).join(', ')}`);
+
 if (
   typeof createDesktopDriverClient !== 'function' ||
   typeof DesktopAuthority !== 'function' ||

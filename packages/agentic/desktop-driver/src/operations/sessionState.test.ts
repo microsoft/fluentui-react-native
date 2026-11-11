@@ -1,4 +1,7 @@
-import { parseReference } from './refs';
+import { OperationJournal } from './journal';
+import { OutcomeLedger } from './outcomes';
+import { UniquenessProofs } from './proofs';
+import { parseReference, ReferenceTable } from './refs';
 import { OperationSessionState } from './sessionState';
 
 const target = { nativeId: 'n1', previewGeneration: 1, scope: 'application' as const, windowId: 'w1' };
@@ -87,5 +90,20 @@ describe('OperationSessionState', () => {
       });
     }
     expect(state.journal.size).toBe(16);
+  });
+
+  test.each([
+    ['a journal capacity below its floor', () => new OperationSessionState({ journalCapacity: 15 })],
+    ['a journal capacity above its ceiling', () => new OperationSessionState({ journalCapacity: 5_001 })],
+    ['a fractional journal capacity', () => new OperationSessionState({ journalCapacity: 16.5 })],
+    ['a reference capacity below its floor', () => new OperationSessionState({ referenceCapacity: 511 })],
+    ['a reference capacity above its ceiling', () => new OperationSessionState({ referenceCapacity: 4_001 })],
+    ['a reference capacity that is not a number', () => new OperationSessionState({ referenceCapacity: Number.NaN })],
+    ['an unbounded journal', () => new OperationJournal(Number.POSITIVE_INFINITY)],
+    ['an outcome ledger that holds nothing', () => new OutcomeLedger(0)],
+    ['a proof table that is not a number', () => new UniquenessProofs(Number.NaN)],
+    ['a reference table of a fraction', () => new ReferenceTable('k3xa', 600.5)],
+  ])('rejects %s instead of clamping it', (_name, create) => {
+    expect(create).toThrow(RangeError);
   });
 });

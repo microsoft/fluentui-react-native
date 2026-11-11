@@ -59,6 +59,8 @@ export type DesktopWdioSuite = {
   specFileRetries?: number;
   bail?: number;
   timeoutMs?: number;
+  /** Bounds the whole WDIO launcher run; by default it scales with timeoutMs, spec groups and retries. */
+  suiteTimeoutMs?: number;
   optional?: boolean;
 };
 
@@ -232,7 +234,19 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
       }
       keys(
         suite,
-        ['kind', 'framework', 'specs', 'hooks', 'readiness', 'maxInstances', 'specFileRetries', 'bail', 'timeoutMs', 'optional'],
+        [
+          'kind',
+          'framework',
+          'specs',
+          'hooks',
+          'readiness',
+          'maxInstances',
+          'specFileRetries',
+          'bail',
+          'timeoutMs',
+          'suiteTimeoutMs',
+          'optional',
+        ],
         `suite ${id}`,
       );
       oneOf(suite.framework, ['jasmine', 'mocha', 'cucumber'], `${id}.framework`);
@@ -245,6 +259,7 @@ export function validateDesktopConfig(value: unknown): asserts value is DesktopC
       if (suite.maxInstances !== undefined && suite.maxInstances !== 1) throw new TypeError('Desktop suites require maxInstances: 1.');
       for (const field of ['specFileRetries', 'bail']) positive(suite[field], `${id}.${field}`, true);
       positive(suite.timeoutMs, `${id}.timeoutMs`);
+      positive(suite.suiteTimeoutMs, `${id}.suiteTimeoutMs`);
       if (suite.hooks !== undefined) text(suite.hooks, `${id}.hooks`);
       if (suite.readiness !== undefined) validateReadiness(suite.readiness);
       if (suite.optional !== undefined && typeof suite.optional !== 'boolean') throw new TypeError(`${id}.optional must be boolean.`);
@@ -462,12 +477,17 @@ export function validateCommand(value: unknown): asserts value is DesktopCommand
   keys(command, ['command', 'args', 'cwd', 'env'], 'command');
   text(command.command, 'command.command');
   if (command.cwd !== undefined) text(command.cwd, 'command.cwd');
-  if (command.args !== undefined && (!Array.isArray(command.args) || !command.args.every((arg) => typeof arg === 'string'))) {
-    throw new TypeError('command.args must be strings.');
+  // A NUL cannot reach a process: spawn rejects it, so it is a configuration error, not a launch failure.
+  if (
+    command.args !== undefined &&
+    (!Array.isArray(command.args) || !command.args.every((arg) => typeof arg === 'string' && !arg.includes('\0')))
+  ) {
+    throw new TypeError('command.args must be strings without NUL.');
   }
   if (command.env !== undefined)
     for (const [key, value] of Object.entries(object(command.env, 'command.env'))) {
-      if (typeof value !== 'string') throw new TypeError(`command.env.${key} must be a string.`);
+      if (key.includes('\0') || typeof value !== 'string' || value.includes('\0'))
+        throw new TypeError(`command.env.${key.replaceAll('\0', '\\0')} must be a string without NUL.`);
     }
 }
 

@@ -57,10 +57,18 @@ export const journalCapacity = { ceiling: 5_000, default: 500, floor: 16 } as co
 export const journalPage = { ceiling: 200, default: 50, floor: 1 } as const satisfies OperationBudget;
 
 /** The most uniqueness proofs one session keeps; an action must cite one, so older proofs need a fresh `find`. */
-export const proofCapacity = 64;
+export const proofCapacity = { ceiling: 1_024, default: 64, floor: 1 } as const satisfies OperationBudget;
 
 /** The most caller-chosen mutating request ids whose outcomes one session remembers for idempotent retries. */
-export const outcomeCapacity = 256;
+export const outcomeCapacity = { ceiling: 4_096, default: 256, floor: 1 } as const satisfies OperationBudget;
+
+/** A session capacity: an integer inside its budget. Like every budget it is rejected when outside, never clamped. */
+export function requireCapacity(name: string, capacity: number, budget: OperationBudget): number {
+  if (!Number.isSafeInteger(capacity) || capacity < budget.floor || capacity > budget.ceiling) {
+    throw new RangeError(`${name} must be an integer from ${budget.floor} to ${budget.ceiling}.`);
+  }
+  return capacity;
+}
 
 /** The longest text one `type` action sends. */
 export const maxTypedTextLength = 4_096;
@@ -92,8 +100,12 @@ export const artifactPageBytes = { ceiling: 1024 * 1024, default: 1024 * 1024, f
 /** The most steps one `sequence` runs. Its checks share one `checkWaitMs` ceiling, so it holds the queue no longer. */
 export const maxSequenceSteps = 8;
 
-/** The first and the longest pause between a waiting check's evaluations. Host events end a pause early. */
-export const checkPollMs = { first: 100, longest: 1_000 } as const;
+/**
+ * The first and the longest pause between a waiting check's evaluations, and the least an event leaves of one. Host
+ * events end a pause early, but not before `minimum` or the time the last evaluation took, whichever is longer, so a
+ * burst of events cannot run walks of the application back to back.
+ */
+export const checkPollMs = { first: 100, longest: 1_000, minimum: 100 } as const;
 
 /** The longest exact name, value, or text a check compares. */
 export const maxExpectedTextLength = 1_024;

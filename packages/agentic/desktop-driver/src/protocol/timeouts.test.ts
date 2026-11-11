@@ -1,7 +1,7 @@
 import { getEventListeners } from 'node:events';
 
 import { attachFailureEffect, readFailureEffect } from './settlement';
-import { withCommandTimeout } from './timeouts';
+import { withCommandTimeout, withDeadline } from './timeouts';
 import { SessionManager } from '../server/SessionManager';
 
 describe('withCommandTimeout', () => {
@@ -208,5 +208,31 @@ describe('withCommandTimeout', () => {
       expect(failure).toMatchObject({ code: 'timeout' });
       expect(readFailureEffect(failure)).toBeUndefined();
     });
+  });
+});
+
+describe('withDeadline', () => {
+  test('stops waiting for a call that never settles, and ignores its late failure', async () => {
+    let rejectLate!: (error: Error) => void;
+    const late = new Promise<never>((_resolve, reject) => {
+      rejectLate = reject;
+    });
+
+    await expect(withDeadline(() => late, 10, 'Native storage')).rejects.toMatchObject({ code: 'timeout' });
+    rejectLate(new Error('late'));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
+
+  test('returns what the call returns, and rethrows a failure of its own', async () => {
+    await expect(withDeadline(async () => 'done', 1000, 'Native storage')).resolves.toBe('done');
+    await expect(
+      withDeadline(
+        () => {
+          throw new Error('refused');
+        },
+        1000,
+        'Native storage',
+      ),
+    ).rejects.toThrow('refused');
   });
 });

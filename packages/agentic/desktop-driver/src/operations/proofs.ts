@@ -1,5 +1,5 @@
 import type { NativeElementSnapshot, NativeObservedNode } from '../host/types.js';
-import { proofCapacity } from './limits.js';
+import { proofCapacity, requireCapacity } from './limits.js';
 
 /** One identifying field as a sample showed it. A clipped field holds only the first part of the provider's string. */
 export type FingerprintField = { clipped: boolean; text: string };
@@ -59,8 +59,8 @@ export class UniquenessProofs {
   private readonly capacity: number;
   private readonly proofs = new Map<string, UniquenessProof>();
 
-  constructor(capacity: number = proofCapacity) {
-    this.capacity = Math.max(1, Math.floor(capacity));
+  constructor(capacity: number = proofCapacity.default) {
+    this.capacity = requireCapacity('proofCapacity', capacity, proofCapacity);
   }
 
   get size(): number {

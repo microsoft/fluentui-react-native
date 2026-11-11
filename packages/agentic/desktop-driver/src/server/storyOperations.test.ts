@@ -40,7 +40,7 @@ type Fixture = { harness: DesktopDriverTestHarness; session: DesktopSessionClien
 async function withStories(body: (fixture: Fixture) => Promise<void>, options: FakeDesktopHostOptions = {}): Promise<void> {
   const harness = await createDesktopDriverStoryHarness(manifest, {
     ...options,
-    features: { accessibilityActions: true, boundedObservation: true },
+    features: { accessibilityActions: true, boundedObservation: true, ...options.features },
   });
   try {
     const session = await createDesktopDriverClient({ url: harness.server.url }).newSession({
@@ -158,6 +158,42 @@ describe('story operations', () => {
     );
   });
 
+  test('verifies a story from a popup window by finding the root in the window that owns it', async () => {
+    const rect = { x: 0, y: 0, width: 100, height: 100 };
+    await withStories(
+      async ({ harness, session }) => {
+        await session.switchToWindow('popup');
+        harness.server.sessions.get(session.id).desktopTimeouts.storyRender = 500;
+
+        const selected = (await session.story({ storyId: manifest.entries[0].id })).result;
+
+        expect(selected).toMatchObject({ disposition: 'applied', verification: 'marker' });
+        expect(harness.server.sessions.getQuarantine(harness.target.id)).toBeUndefined();
+        await expect(session.stories()).resolves.toMatchObject({
+          result: { current: { storyId: manifest.entries[0].id, verification: 'marker' } },
+        });
+      },
+      {
+        windows: [
+          {
+            id: 'main',
+            title: 'Main',
+            rect,
+            elements: [
+              { id: 'story-root', automationId: 'story-root', name: '{}', role: 'group', scope: 'preview', windowId: 'main', rect },
+            ],
+          },
+          {
+            id: 'popup',
+            title: 'Popup',
+            rect,
+            elements: [{ id: 'item', automationId: 'item', role: 'button', scope: 'secondary-window', windowId: 'popup', rect }],
+          },
+        ],
+      },
+    );
+  });
+
   test('W3C element-origin actions cannot bypass preview epoch validation', async () => {
     await withStories(async ({ harness, session }) => {
       await session.story({ storyId: manifest.entries[0].id });
@@ -173,6 +209,33 @@ describe('story operations', () => {
           },
         ]),
       ).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
+    });
+  });
+
+  test('a named accessibility action on a preview element is fenced like click, clear and value', async () => {
+    await withStories(
+      async ({ harness, session }) => {
+        await session.story({ storyId: manifest.entries[0].id });
+        const preview = await session.findElement('accessibility id', 'button-primary');
+        harness.host.setElementActions('button', ['Increment']);
+        harness.storyOrchestrator!.getCurrentStory = async () => null;
+
+        await expect(preview.performAccessibilityAction('Increment')).rejects.toMatchObject({ data: { reason: 'story-context-stale' } });
+        expect(harness.host.actions.some(({ type }) => type === 'accessibility-action')).toBe(false);
+      },
+      { features: { performAccessibilityAction: true } },
+    );
+  });
+
+  test('an unknown driver-control route is an unknown command on a target with a story orchestrator too', async () => {
+    await withStories(async ({ harness, session }) => {
+      const response = await fetch(`${harness.server.url}/session/${session.id}/furn/story/nonexistent`, {
+        method: 'POST',
+        body: '{}',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      expect(response.status).toBe(404);
+      expect(((await response.json()) as { value: { error: string } }).value.error).toBe('unknown command');
     });
   });
 
@@ -248,12 +311,14 @@ describe('story operations', () => {
   test('select a story the story root confirms, and expire references into the preview it replaced', async () => {
     await withStories(async ({ session }) => {
       expect((await session.stories()).result).toEqual({
+        complete: true,
         entries: [
           { id: 'components-button--default', name: 'Default', title: 'Components/Button' },
           { id: 'components-checkbox--default', name: 'Default', title: 'Components/Checkbox' },
         ],
         matched: 2,
         total: 2,
+        truncation: [],
       });
       const found = (await session.find({ automationId: 'button-primary' })).result;
       expect(found.outcome).toBe('unique');

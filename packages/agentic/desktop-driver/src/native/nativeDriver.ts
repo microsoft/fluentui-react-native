@@ -1,16 +1,16 @@
-import { spawn } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { clipDiagnostic, runBoundedCommand } from './boundedCommand.js';
 import {
   acquireDirectoryLock,
   atomicWriteJson,
   canonicalJson,
-  defaultNativeDriverCacheRoot,
-  hashTree,
+  compareOrdinal,
   listFiles,
   readJsonFile,
+  resolveNativeDriverCacheRoot,
   sha256,
   throwIfAborted,
 } from './filesystem.js';
@@ -38,7 +38,7 @@ import {
   verifyMacOSDriver,
 } from './macos/buildMacOSDriver.js';
 import type { BuildMacOSDriverResult, MacOSSigningIdentity } from './macos/buildMacOSDriver.js';
-import { buildWindowsDriver, probeWindowsToolchain } from './windows/buildWindowsDriver.js';
+import { buildWindowsDriver, hashWindowsDriverSources, probeWindowsToolchain } from './windows/buildWindowsDriver.js';
 import type { BuildWindowsDriverResult } from './windows/buildWindowsDriver.js';
 
 export const FURN_DESKTOP_DRIVER_BUILD_POLICY = 'FURN_DESKTOP_DRIVER_BUILD_POLICY';
@@ -115,7 +115,7 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
   const lock = await acquireDirectoryLock(path.join(lockRoot, shortKey(buildFingerprint)), options.signal);
   try {
     if (!options.force) {
-      const cached = await resolveCachedArtifact(context, 'cache');
+      const cached = await resolveCachedArtifact(context, 'cache', options.signal);
       if (cached?.buildFingerprint === buildFingerprint) {
         return cached;
       }
@@ -146,52 +146,48 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
         shortKey(artifactId),
       );
       const publicationRoot = path.join(context.cacheRoot, 'v1', 'staging', `publish-${artifactId}-${randomUUID()}`);
-      const publicationBin = path.join(publicationRoot, 'bin');
-      fs.mkdirSync(publicationBin, { recursive: true });
-      let publishedExecutable: string;
-      if ('bundlePath' in built) {
-        const publishedBundle = path.join(publicationBin, path.basename(built.bundlePath));
-        fs.cpSync(built.bundlePath, publishedBundle, { recursive: true });
-        publishedExecutable = path.join(publishedBundle, path.relative(built.bundlePath, built.executablePath));
-      } else {
-        publishedExecutable = path.join(publicationBin, path.basename(built.executablePath));
-        fs.copyFileSync(built.executablePath, publishedExecutable);
-      }
-      fs.copyFileSync(built.buildLogPath, path.join(publicationRoot, 'build.log'));
-      const manifest: NativeArtifactManifest = {
-        architecture: context.architecture,
-        artifactId,
-        buildFingerprint,
-        buildId,
-        compatibilityKey: context.compatibilityKey,
-        configuration: context.configuration,
-        endpoints: context.endpoints,
-        executable: path.relative(publicationRoot, publishedExecutable),
-        features: handshake.features,
-        provider: context.provider,
-        schemaVersion: 1,
-        signing: 'signing' in built ? built.signing : { mode: 'none' },
-        sourceDigest: context.sourceDigest,
-        wireProtocol: handshake.protocol,
-      };
-      atomicWriteJson(path.join(publicationRoot, 'artifact.json'), manifest);
-      fs.mkdirSync(path.dirname(artifactRoot), { recursive: true });
       try {
-        fs.renameSync(publicationRoot, artifactRoot);
-      } catch (error) {
-        const code = (error as NodeJS.ErrnoException).code;
-        if (code !== 'EEXIST' && code !== 'ENOTEMPTY') {
-          throw error;
+        const publicationBin = path.join(publicationRoot, 'bin');
+        fs.mkdirSync(publicationBin, { recursive: true });
+        let publishedExecutable: string;
+        if ('bundlePath' in built) {
+          const publishedBundle = path.join(publicationBin, path.basename(built.bundlePath));
+          fs.cpSync(built.bundlePath, publishedBundle, { recursive: true });
+          publishedExecutable = path.join(publishedBundle, path.relative(built.bundlePath, built.executablePath));
+        } else {
+          publishedExecutable = path.join(publicationBin, path.basename(built.executablePath));
+          fs.copyFileSync(built.executablePath, publishedExecutable);
         }
+        fs.copyFileSync(built.buildLogPath, path.join(publicationRoot, 'build.log'));
+        const manifest: NativeArtifactManifest = {
+          architecture: context.architecture,
+          artifactId,
+          buildFingerprint,
+          buildId,
+          compatibilityKey: context.compatibilityKey,
+          configuration: context.configuration,
+          endpoints: context.endpoints,
+          executable: path.relative(publicationRoot, publishedExecutable),
+          features: handshake.features,
+          provider: context.provider,
+          schemaVersion: 1,
+          signing: 'signing' in built ? built.signing : { mode: 'none' },
+          sourceDigest: context.sourceDigest,
+          wireProtocol: handshake.protocol,
+        };
+        atomicWriteJson(path.join(publicationRoot, 'artifact.json'), manifest);
+        fs.mkdirSync(path.dirname(artifactRoot), { recursive: true });
         try {
-          const existing = readArtifact(artifactRoot, 'built');
-          validateCachedArtifactContext(existing, context);
-          await verifyNativeDriverArtifact(existing, options.signal);
-          fs.rmSync(publicationRoot, { force: true, recursive: true });
-        } catch (collisionError) {
-          quarantinePublishedArtifact(context.cacheRoot, artifactRoot, collisionError);
           fs.renameSync(publicationRoot, artifactRoot);
+        } catch (error) {
+          const code = (error as NodeJS.ErrnoException).code;
+          if (code !== 'EEXIST' && code !== 'ENOTEMPTY') {
+            throw error;
+          }
+          await resolvePublishCollision(context, artifactRoot, publicationRoot, options.signal);
         }
+      } finally {
+        removeStagingDirectory(publicationRoot);
       }
       writeSelection(context.cacheRoot, context.compatibilityKey, artifactRoot);
       assertManagedPath(artifactCompatibilityRoot(context), artifactRoot, 'directory');
@@ -209,20 +205,70 @@ export async function buildNativeDesktopDriver(options: NativeDriverBuildOptions
       }
       throw error;
     } finally {
-      try {
-        fs.rmSync(stagingRoot, { force: true, recursive: true });
-      } catch (cleanupError) {
-        process.emitWarning(
-          `Could not clean native build staging directory "${stagingRoot}": ${
-            cleanupError instanceof Error ? cleanupError.message : String(cleanupError)
-          }`,
-          { code: 'FURN_NATIVE_DRIVER_STAGING_CLEANUP_FAILED' },
-        );
-      }
+      removeStagingDirectory(stagingRoot);
     }
   } finally {
     lock.release();
   }
+}
+
+function removeStagingDirectory(directory: string): void {
+  try {
+    fs.rmSync(directory, { force: true, recursive: true });
+  } catch (cleanupError) {
+    process.emitWarning(
+      `Could not clean native build staging directory "${directory}": ${
+        cleanupError instanceof Error ? cleanupError.message : String(cleanupError)
+      }`,
+      { code: 'FURN_NATIVE_DRIVER_STAGING_CLEANUP_FAILED' },
+    );
+  }
+}
+
+/**
+ * Another build published the same artifact first. A published artifact that still verifies is kept and the new copy is
+ * dropped. Only one that fails an integrity check is quarantined and replaced. A transient failure while verifying it
+ * (an exhausted descriptor table, a slow handshake) leaves it in place, because it may be valid and in use.
+ */
+async function resolvePublishCollision(
+  context: NativeBuildContext,
+  artifactRoot: string,
+  publicationRoot: string,
+  signal?: AbortSignal,
+): Promise<void> {
+  try {
+    const existing = readArtifact(artifactRoot, 'built');
+    validateCachedArtifactContext(existing, context);
+    await verifyNativeDriverArtifact(existing, signal);
+  } catch (collisionError) {
+    if (!isIntegrityFailure(collisionError)) {
+      throw collisionError;
+    }
+    quarantinePublishedArtifact(context.cacheRoot, artifactRoot, collisionError);
+    fs.renameSync(publicationRoot, artifactRoot);
+  }
+}
+
+const integrityFailureCodes: ReadonlySet<string> = new Set([
+  'integrity-mismatch',
+  'protocol-mismatch',
+  'signature-mismatch',
+  'signing-failed',
+]);
+
+/**
+ * Separates a cache entry that is wrong from one that could not be checked right now. Only the former may be
+ * quarantined; a handshake timeout, descriptor exhaustion, a permission error, or an abort says nothing about the entry.
+ */
+function isIntegrityFailure(error: unknown): boolean {
+  if (error instanceof NativeDriverError) {
+    return integrityFailureCodes.has(error.code);
+  }
+  if (error instanceof SyntaxError) {
+    return true;
+  }
+  const code = (error as NodeJS.ErrnoException | undefined)?.code;
+  return code === 'ENOENT' || code === 'ENOTDIR' || code === 'ELOOP';
 }
 
 function preserveBuildDiagnostics(context: NativeBuildContext, stagingRoot: string, error: unknown): void {
@@ -272,7 +318,7 @@ export async function resolveNativeDesktopDriver(options: NativeDriverResolveOpt
   }
   const installRoot = options.installRoot ?? process.env[FURN_DESKTOP_DRIVER_INSTALL_ROOT];
   if (installRoot) {
-    const installed = await resolveCachedArtifact({ ...context, cacheRoot: path.resolve(installRoot) }, 'install-root');
+    const installed = await resolveCachedArtifact({ ...context, cacheRoot: path.resolve(installRoot) }, 'install-root', options.signal);
     if (!installed) {
       throw new NativeDriverError(
         'no-verified-prebuilt',
@@ -281,7 +327,7 @@ export async function resolveNativeDesktopDriver(options: NativeDriverResolveOpt
     }
     return installed;
   }
-  const cached = await resolveCachedArtifact(context, 'cache');
+  const cached = await resolveCachedArtifact(context, 'cache', options.signal);
   if (cached) {
     return cached;
   }
@@ -325,11 +371,12 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
   if (!fs.existsSync(providerRoot)) {
     throw new NativeDriverError('build-source-missing', `Native driver source does not exist at "${providerRoot}".`);
   }
+  const cacheRoot = resolveNativeDriverCacheRoot(options.cacheRoot ?? process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT], packageRoot);
   const sourceDigest = sha256(
     canonicalJson({
       coordinatorVersion: buildCoordinatorVersion,
       protocol: sha256(fs.readFileSync(path.join(nativeRoot, 'protocol.json'))),
-      provider: provider === 'macos' ? hashMacOSDriverSources(providerRoot) : hashTree(providerRoot),
+      provider: provider === 'macos' ? hashMacOSDriverSources(providerRoot) : hashWindowsDriverSources(providerRoot),
     }),
   );
   const configuredSigningIdentity =
@@ -349,7 +396,6 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
       sourceDigest,
     }),
   );
-  const cacheRoot = path.resolve(options.cacheRoot ?? process.env[FURN_DESKTOP_DRIVER_CACHE_ROOT] ?? defaultNativeDriverCacheRoot());
   return {
     architecture,
     cacheRoot,
@@ -366,6 +412,7 @@ async function resolveBuildContext(options: NativeDriverBuildOptions): Promise<N
 async function resolveCachedArtifact(
   context: NativeBuildContext,
   origin: Extract<NativeDriverArtifactOrigin, 'cache' | 'install-root'>,
+  signal?: AbortSignal,
 ): Promise<NativeDriverArtifact | undefined> {
   const selectionRoot = path.join(context.cacheRoot, 'v1', 'selections', shortKey(context.compatibilityKey));
   if (!fs.existsSync(selectionRoot)) {
@@ -374,7 +421,7 @@ async function resolveCachedArtifact(
   assertManagedPath(context.cacheRoot, selectionRoot, 'directory');
   const selections = listFiles(selectionRoot)
     .filter((filePath) => filePath.endsWith('.json'))
-    .sort((left, right) => right.localeCompare(left));
+    .sort((left, right) => compareOrdinal(right, left));
   for (const selectionPath of selections) {
     try {
       assertManagedPath(selectionRoot, selectionPath, 'file');
@@ -391,9 +438,9 @@ async function resolveCachedArtifact(
       assertManagedPath(compatibilityRoot, artifactRoot, 'directory');
       const artifact = readArtifact(artifactRoot, origin);
       validateCachedArtifactContext(artifact, context);
-      return await verifyNativeDriverArtifact(artifact);
+      return await verifyNativeDriverArtifact(artifact, signal);
     } catch (error) {
-      if (origin === 'install-root') {
+      if (origin === 'install-root' || !isIntegrityFailure(error)) {
         throw error;
       }
       quarantineCachedSelection(context.cacheRoot, selectionRoot, selectionPath, error);
@@ -545,61 +592,39 @@ function writeSelection(cacheRoot: string, compatibilityKey: string, artifactRoo
   } satisfies NativeArtifactSelection);
 }
 
+const handshakeTimeoutMs = 10_000;
+const handshakeOutputLimit = 1024 * 1024;
+
 async function readOneShotHandshake(executablePath: string, signal?: AbortSignal): Promise<NativeHostHello> {
-  throwIfAborted(signal);
-  return new Promise((resolve, reject) => {
-    let settled = false;
-    const child = spawn(executablePath, ['--handshake', '--json'], {
-      signal,
-      stdio: ['ignore', 'pipe', 'pipe'],
-      windowsHide: true,
-    });
-    const stdout: Buffer[] = [];
-    const stderr: Buffer[] = [];
-    let timedOut = false;
-    const timeout = setTimeout(() => {
-      timedOut = true;
-      child.kill();
-    }, 10_000);
-    child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
-    child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
-    child.once('error', (error) => {
-      if (!settled) {
-        settled = true;
-        clearTimeout(timeout);
-        reject(error);
-      }
-    });
-    child.once('close', (code) => {
-      if (settled) {
-        return;
-      }
-      settled = true;
-      clearTimeout(timeout);
-      if (timedOut) {
-        reject(new NativeDriverError('handshake-timeout', 'Native driver helper did not complete its handshake within 10 seconds.'));
-        return;
-      }
-      if (code !== 0) {
-        reject(
-          new NativeDriverError(
-            'handshake-failed',
-            `Native driver helper exited with code ${String(code)} during handshake: ${Buffer.concat(stderr).toString('utf8')}`,
-          ),
-        );
-        return;
-      }
-      try {
-        const hello = JSON.parse(Buffer.concat(stdout).toString('utf8')) as NativeHostHello;
-        if (hello.type !== 'hello') {
-          throw new Error('Handshake response is not a hello message.');
-        }
-        resolve(hello);
-      } catch (error) {
-        reject(new NativeDriverError('handshake-failed', error instanceof Error ? error.message : String(error)));
-      }
-    });
+  const result = await runBoundedCommand(executablePath, ['--handshake', '--json'], {
+    maxOutputBytes: handshakeOutputLimit,
+    signal,
+    timeoutMs: handshakeTimeoutMs,
   });
+  if (result.timedOut) {
+    throw new NativeDriverError('handshake-timeout', 'Native driver helper did not complete its handshake within 10 seconds.');
+  }
+  if (result.code !== 0) {
+    const details = clipDiagnostic(result.stderr);
+    throw new NativeDriverError(
+      'handshake-failed',
+      `Native driver helper ${
+        result.code === null ? `was terminated by ${String(result.terminationSignal)}` : `exited with code ${result.code}`
+      } during handshake.${details ? `\n${details}` : ''}`,
+    );
+  }
+  if (result.stdoutTruncated) {
+    throw new NativeDriverError('handshake-failed', 'Native driver helper handshake response exceeded 1 MiB.');
+  }
+  try {
+    const hello = JSON.parse(result.stdout) as NativeHostHello;
+    if (hello.type !== 'hello') {
+      throw new Error('Handshake response is not a hello message.');
+    }
+    return hello;
+  } catch (error) {
+    throw new NativeDriverError('handshake-failed', error instanceof Error ? error.message : String(error));
+  }
 }
 
 function validateHandshake(

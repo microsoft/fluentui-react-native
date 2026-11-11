@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 
 import type { OperationResponse } from './envelope.js';
-import { outcomeCapacity } from './limits.js';
+import { outcomeCapacity, requireCapacity } from './limits.js';
 
 /** A mutating request as the ledger remembers it: what was asked, and how it ended or will end. */
 export type RecordedOutcome = {
@@ -45,8 +45,8 @@ export class OutcomeLedger {
   private readonly capacity: number;
   private readonly outcomes = new Map<string, RecordedOutcome>();
 
-  constructor(capacity: number = outcomeCapacity) {
-    this.capacity = Math.max(1, Math.floor(capacity));
+  constructor(capacity: number = outcomeCapacity.default) {
+    this.capacity = requireCapacity('outcomeCapacity', capacity, outcomeCapacity);
   }
 
   lookup(requestId: string): RecordedOutcome | undefined {

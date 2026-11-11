@@ -126,6 +126,68 @@ describe('sanctioned WebdriverIO API', () => {
       await harness.close();
     }
   }, 60_000);
+
+  describe('setValue', () => {
+    const secret = 'hunter2-masked-value';
+    const run = (harness: Awaited<ReturnType<typeof createDesktopDriverTestHarness>>, scenario: string) =>
+      runContract(harness.server.url, harness.target.id, os.tmpdir(), 'setValue.contract.cjs', undefined, { scenario, secret });
+
+    test('keeps a masked value out of the output, and the value still reaches the field', async () => {
+      const harness = await createDesktopDriverTestHarness();
+      try {
+        // Without the mask the same run does log the value, so the absence below is a property of the mask.
+        expect(await run(harness, 'unmasked')).toMatchObject({ result: 'ok', logged: true });
+        expect(await run(harness, 'masked')).toEqual({ result: 'ok', logged: false });
+        expect(harness.host.actions.filter((action) => action.type === 'send-keys')).toHaveLength(2);
+      } finally {
+        await harness.close();
+      }
+    }, 60_000);
+
+    test('asks the session for its input mode when an attach carries no capability, before anything is cleared', async () => {
+      const harness = await createDesktopDriverTestHarness();
+      try {
+        const response = await run(harness, 'partial-attach');
+        expect(response).toEqual({ capabilityMode: null, typed: expect.stringContaining('never delivers'), logged: false });
+        expect(harness.host.actions.filter((action) => action.type === 'clear' || action.type === 'send-keys')).toEqual([]);
+      } finally {
+        await harness.close();
+      }
+    }, 60_000);
+
+    test('follows the browser to its new session after reloadSession', async () => {
+      const harness = await createDesktopDriverTestHarness();
+      try {
+        const response = await run(harness, 'reload');
+        expect(response).toMatchObject({
+          boundToReloaded: true,
+          changed: true,
+          input: { mode: 'compatibility' },
+          typed: 'ok',
+        });
+        expect(harness.host.actions).toContainEqual({ elementId: 'input', text: 'after reload', type: 'send-keys' });
+      } finally {
+        await harness.close();
+      }
+    }, 60_000);
+
+    test('does not run the web-only stubborn-value path, which the driver rejects after the field was cleared', async () => {
+      const harness = await createDesktopDriverTestHarness();
+      const clear = harness.host.clear.bind(harness.host);
+      const sendKeys = harness.host.sendKeys.bind(harness.host);
+      harness.host.clear = async (id, signal, mechanism) => {
+        const used = await clear(id, signal, mechanism);
+        if (id === 'input') await sendKeys(id, '0');
+        return used;
+      };
+      try {
+        expect(await run(harness, 'stubborn')).toMatchObject({ typed: 'ok' });
+        expect(harness.host.actions.filter((action) => action.type === 'clear')).toHaveLength(1);
+      } finally {
+        await harness.close();
+      }
+    }, 60_000);
+  });
 });
 
 function runContract(
@@ -134,27 +196,44 @@ function runContract(
   artifactsRoot: string,
   fixture = 'wdioRunner.contract.cjs',
   grant?: string,
+  extra: { scenario?: string; secret?: string } = {},
 ): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [path.join(__dirname, fixture), url, targetId, artifactsRoot], {
-      stdio: ['ignore', 'pipe', 'pipe'],
-      env: { ...process.env, FURN_DESKTOP_DRIVER_GRANT_TOKEN: grant ?? '' },
-    });
+    const child = spawn(
+      process.execPath,
+      [path.join(__dirname, fixture), url, targetId, artifactsRoot, ...(extra.scenario ? [extra.scenario] : [])],
+      {
+        stdio: ['ignore', 'pipe', 'pipe'],
+        env: { ...process.env, FURN_DESKTOP_DRIVER_GRANT_TOKEN: grant ?? '' },
+      },
+    );
     const stdout: Buffer[] = [];
     const stderr: Buffer[] = [];
     child.stdout.on('data', (chunk: Buffer) => stdout.push(chunk));
     child.stderr.on('data', (chunk: Buffer) => stderr.push(chunk));
     child.once('error', reject);
     child.once('exit', (code) => {
-      if (grant && (Buffer.concat(stdout).includes(grant) || Buffer.concat(stderr).includes(grant))) {
+      const output = Buffer.concat([...stdout, ...stderr]);
+      if (grant && output.includes(grant)) {
         reject(new Error('The WebdriverIO contract exposed a grant in its output.'));
+        return;
+      }
+      if (extra.secret && output.includes(extra.secret) && extra.scenario !== 'unmasked') {
+        reject(new Error('The WebdriverIO contract exposed a masked value in its output.'));
         return;
       }
       if (code !== 0) {
         reject(new Error(Buffer.concat(stderr).toString('utf8') || `WebdriverIO runner exited with code ${code}.`));
         return;
       }
-      resolve(JSON.parse(Buffer.concat(stdout).toString('utf8')) as Record<string, unknown>);
+      const lines = Buffer.concat(stdout).toString('utf8').trim().split('\n');
+      const marked = lines.findLast((line) => line.startsWith('FURN_RESULT '));
+      try {
+        const result = JSON.parse(marked ? marked.slice('FURN_RESULT '.length) : lines.at(-1)!) as Record<string, unknown>;
+        resolve(extra.secret ? { ...result, logged: output.includes(extra.secret) } : result);
+      } catch (error) {
+        reject(error);
+      }
     });
   });
 }

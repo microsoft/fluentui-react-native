@@ -72,6 +72,8 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
     bail: settings.bail,
     specFileRetries: settings.specFileRetries,
     logLevel: 'error',
+    // The framework adapters report a spec file that fails to import only as a warning and then run zero tests; keep that one visible.
+    logLevels: { '@wdio/jasmine-framework': 'warn', '@wdio/mocha-framework': 'warn' },
     hostname: address.hostname,
     port: Number(address.port),
     path: address.pathname,

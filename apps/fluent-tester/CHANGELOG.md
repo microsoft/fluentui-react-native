@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/tester
 
+## 0.170.60
+
+### Patch Changes
+
+- Updated dependencies [8574d22]
+  - @fluentui-react-native/native-core@0.2.1
+
 ## 0.170.59
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import { validateDesktopStoryTests } from './storyTests.js';
+import { validateDesktopExpectation, validateDesktopStoryTests } from './storyTests.js';
 
 describe('validateDesktopStoryTests', () => {
   test('requires boolean values for required-form assertions', () => {
@@ -70,5 +70,76 @@ describe('validateDesktopStoryTests', () => {
         ],
       }),
     ).toThrow('sequences are invalid');
+  });
+
+  const planOf = (...steps: object[]) => ({ version: 1, tests: [{ id: 'case', steps }] });
+  const noteStep = { action: 'note', message: 'x' };
+
+  test('rejects empty and duplicated key lists, platform filters and requirement lists', () => {
+    expect(() => validateDesktopStoryTests(planOf({ action: 'keys', value: [] }))).toThrow('non-empty string array');
+    expect(() => validateDesktopStoryTests({ version: 1, tests: [{ id: 'a', platforms: [], steps: [noteStep] }] })).toThrow(
+      'platforms must not be empty',
+    );
+    expect(() => validateDesktopStoryTests({ version: 1, tests: [{ id: 'a', requires: [], steps: [noteStep] }] })).toThrow(
+      'requires must not be empty',
+    );
+    expect(() => validateDesktopStoryTests({ version: 1, tests: [{ id: 'a', platforms: ['macos', 'macos'], steps: [noteStep] }] })).toThrow(
+      'duplicate "macos"',
+    );
+    expect(() => validateDesktopStoryTests({ version: 1, tests: [{ id: 'a', requires: ['focus', 'focus'], steps: [noteStep] }] })).toThrow(
+      'duplicate "focus"',
+    );
+  });
+
+  test.each([-1, 1.5, 120_001, Number.POSITIVE_INFINITY, '5000'])('rejects the wait timeout %p instead of clamping it', (timeoutMs) => {
+    expect(() => validateDesktopStoryTests(planOf({ action: 'wait', target: { testId: 'x' }, timeoutMs }))).toThrow(
+      'integer from 0 to 120000',
+    );
+  });
+
+  test('accepts the largest wait timeout and a zero one', () => {
+    for (const timeoutMs of [0, 120_000]) {
+      expect(() => validateDesktopStoryTests(planOf({ action: 'wait', target: { testId: 'x' }, timeoutMs }))).not.toThrow();
+    }
+  });
+
+  test('rejects an artifact name another step in the test already writes, ignoring case and sanitized characters', () => {
+    expect(() =>
+      validateDesktopStoryTests(planOf({ action: 'screenshot', name: 'Shot 1' }, { action: 'screenshot', name: 'shot-1' })),
+    ).toThrow('repeats the screenshot name "shot-1"');
+    expect(() => validateDesktopStoryTests(planOf({ action: 'source', name: 'a/b' }, { action: 'source', name: 'a:b' }))).toThrow(
+      'repeats the source name',
+    );
+    expect(() =>
+      validateDesktopStoryTests(planOf({ action: 'screenshot', name: 'same' }, { action: 'source', name: 'same' })),
+    ).not.toThrow();
+    expect(() =>
+      validateDesktopStoryTests({
+        version: 1,
+        tests: [
+          { id: 'one', steps: [{ action: 'screenshot', name: 'same' }] },
+          { id: 'two', steps: [{ action: 'screenshot', name: 'same' }] },
+        ],
+      }),
+    ).not.toThrow();
+  });
+
+  test('keeps the failure namespace for evidence and rejects names with nothing to name a file', () => {
+    for (const name of ['failure', 'Failure-source', 'failure window']) {
+      expect(() => validateDesktopStoryTests(planOf({ action: 'screenshot', name }))).toThrow('belong to failure evidence');
+    }
+    expect(() => validateDesktopStoryTests(planOf({ action: 'screenshot', name: 'failures' }))).not.toThrow();
+    expect(() => validateDesktopStoryTests(planOf({ action: 'source', name: '..' }))).toThrow('at least one letter or digit');
+  });
+
+  test('checks a run-time expectation with the same rules as a planned one', () => {
+    expect(validateDesktopExpectation({ state: 'text', target: { testId: 'x' }, value: 'ok' })).toEqual({
+      state: 'text',
+      target: { testId: 'x' },
+      value: 'ok',
+    });
+    expect(() => validateDesktopExpectation({ state: 'text', target: { testId: 'x' }, value: 3 })).toThrow('must be a string');
+    expect(() => validateDesktopExpectation({ state: 'count', target: { role: 'button' } })).toThrow('must be a number');
+    expect(() => validateDesktopExpectation({ state: 'enabled', target: { testId: 'x' }, extra: 1 })).toThrow('unknown field');
   });
 });

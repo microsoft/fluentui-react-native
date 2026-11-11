@@ -1,5 +1,50 @@
 # @fluentui-react-native/desktop-test
 
+## 0.2.4
+
+### Patch Changes
+
+- 26cc577: Record partial combined-candidate macOS native qualification evidence.
+- 138aed4: Report each command and step as a one-line outcome header with its duration and summary. Command output stays in its log and shows only when the step fails, in a verbose run, or inside a collapsed GitHub Actions group, and `runDesktopOperation` exposes the same headers to other producers. Neutralize workflow commands per line instead of wrapping every message in `::stop-commands::` fences, drop the per-message command identifiers, and remove the unused `@rnx-kit/reporter` dependency.
+- 26cc577: Add typed resource contributions, settled shutdown, and exact fenced workload ownership records. Keep Storybook service waiters abortable so shutdown can drain them.
+- 26cc577: Treat process-control socket resets after an intentional stop as expected shutdown while preserving unexpected transport failures.
+- 26cc577: Document the provisional macOS native qualification evidence and integrated
+  descriptor-path requalification procedure.
+- 26cc577: Add cooperative owned Node service parent lifelines, explicit settled disposal,
+  and per-command correlated typed service readiness. Storybook agent startup no
+  longer treats a generated ready file as authoritative. Incomplete withdrawal or
+  stalled disposal stays failed and fenced; native survivor qualification remains
+  separate.
+- 8574d22: Add modality-aware desktop test descriptors: `desktopIt` and `desktopDescribe` declare `requires`, `input`, `platforms`, `scope`, and known gaps for Storybook cases and, through `desktop-test/jasmine`, WebdriverIO Jasmine specs. `--input accessible|physical` (or `DESKTOP_INPUT`) runs one input lane, selects the cases that apply, masks the host for the accessible lane, and reports the lane and what it excluded.
+- ac20660: Enforce input policy per WebDriver session and report case-level input mechanism receipts.
+- 26cc577: Persist authenticated Storybook epochs beside settlement records in stable private target storage. Verify the exact live application incarnation before returning renderer-specific relaunch-required after a service restart; initial absence, replaced applications, and indeterminate probes remain bridge-unavailable.
+- 26cc577: Run installed SIGTERM handlers when a parent lifeline stops a child without
+  disposers, so Windows children flush their report terminal before exiting.
+  Give the first manifest-backed smoke story a cold-bundle render budget, wait
+  for authenticated runtime readiness before authored tests run in a relaunched
+  smoke `tests` phase, and stop every owned smoke process before reporting a
+  service cleanup failure.
+- 26cc577: Repair Windows package-boundary validation, tolerate bounded atomic-report
+  sharing conflicts without hiding persistent failures, and record descriptor-path cleanup,
+  correlated render faults, recovery, and separate legacy smoke evidence, retaining
+  earlier failures and partial native coverage.
+- 319d38c: Record Windows Fabric and Win32 Paper launch, containment, and MCP measurement evidence, and document the Win32 agent-mode bundle, the Windows foreground refusal, and the `serve --agent` interrupt behavior.
+- 26cc577: Record Windows Fabric and Win32 Paper native qualification results in the
+  status ledgers and add Windows parameters to the native qualification runbook.
+- Updated dependencies [26cc577]
+- Updated dependencies [da2b62c]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+- Updated dependencies [8574d22]
+- Updated dependencies [ac20660]
+- Updated dependencies [26cc577]
+- Updated dependencies [319d38c]
+- Updated dependencies [26cc577]
+- Updated dependencies [26cc577]
+  - @fluentui-react-native/desktop-driver@0.5.1
+
 ## 0.2.3
 
 ### Patch Changes

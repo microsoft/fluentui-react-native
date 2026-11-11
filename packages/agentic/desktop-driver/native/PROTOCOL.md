@@ -28,8 +28,8 @@ furn-desktop-driver-host --handshake --json
 ```
 
 That one-shot process writes an unframed JSON `hello` document and exits. Node
-verifies provider, architecture, build ID, source digest, features, and
-protocol.
+verifies provider, architecture, build ID, source digest, and protocol. The
+`features` list is recorded, not verified.
 
 For service operation, Node invokes:
 

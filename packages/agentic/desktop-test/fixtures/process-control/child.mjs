@@ -27,6 +27,23 @@ if (mode === 'late') {
 } else if (mode === 'borrowed') {
   fs.writeFileSync(marker, String(process.pid));
   setInterval(() => undefined, 60_000);
+} else if (mode === 'reported-slow') {
+  const { createDesktopReportSession } = await import('../../lib/reporting/index.js');
+  const report = await createDesktopReportSession({ artifactsRoot: '.', kind: 'lifecycle' });
+  const keepAlive = setInterval(() => undefined, 60_000);
+  let disposal;
+  const dispose = () =>
+    (disposal ??= (async () => {
+      await new Promise((resolve) => setTimeout(resolve, 11_000));
+      fs.rmSync(marker);
+      clearInterval(keepAlive);
+      await report.close();
+      control.finish();
+    })());
+  control.register(dispose);
+  report.onStop(dispose);
+  await control.ready({ tier: 'service-ready', service: 'fixture', descriptor: 'fixture.json' });
+  fs.writeFileSync(marker, String(process.pid));
 } else {
   const keepAlive = setInterval(() => undefined, 60_000);
   fs.writeFileSync(`${marker}.socket`, JSON.parse(process.env.FURN_DESKTOP_PROCESS_CONTROL).address);

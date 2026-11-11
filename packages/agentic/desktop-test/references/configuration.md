@@ -22,14 +22,18 @@ identity. External ownership permits attach only and preserves the app.
 
 `commands` overrides individual `prep`, `bundle`, `build`, or `run` stages.
 Each command has an executable and argument array; no shell-like string parsing
-is performed. Required services are declared in config and a service exit is a
+is performed. Arguments and environment entries must not contain NUL, which no
+process can receive. Required services are declared in config and a service exit is a
 failure even after readiness.
 
 ## Add a suite workspace
 
 A separate suite references the app's canonical target using `use: { config,
 target }`, and declares grouped spec globs, framework, hooks, retry policy, and
-instance limits. Install WDIO CLI, local runner, and the selected framework in
+instance limits. `timeoutMs` bounds each test. `suiteTimeoutMs` bounds the whole
+WDIO run, so a wedged launcher fails instead of hanging; by default it is
+`timeoutMs` (60 seconds when unset) times 100, times the number of spec groups
+and attempts, and at least five minutes. Install WDIO CLI, local runner, and the selected framework in
 the suite workspace; the harness does not install test frameworks into app
 workspaces.
 

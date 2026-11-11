@@ -425,12 +425,12 @@ alias for `--reporter json`. Resolve the mode from the flag, then
 `DESKTOP_REPORTER`, then configuration, then `auto`. Do not try to detect
 whether the caller is an agent.
 
-| Mode                      | stdout                                                                                                                                                           | stderr                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `auto` (default)          | `github-actions` when `GITHUB_ACTIONS=true`; otherwise `plain`. A future interactive renderer may be selected only for a TTY.                                    | Current diagnostics                                                 |
-| `plain`, `github-actions` | Existing human renderers. `reporting.console` remains a compatible configuration source.                                                                         | Current diagnostics                                                 |
-| `json`                    | Exactly one compact document at exit. Long-lived commands (`serve`, Storybook `driver` and `server`) print one readiness document instead and nothing afterward. | Empty, except for failures before mode resolution or loss of stdout |
-| `ndjson`                  | Compact LF-terminated records ending with exactly one terminal record, identical to the `json` document. One-shot commands emit one record.                      | Same as `json`                                                      |
+| Mode                      | stdout                                                                                                                                                                                            | stderr                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `auto` (default)          | `github-actions` when `GITHUB_ACTIONS=true`; otherwise `plain`. A future interactive renderer may be selected only for a TTY.                                                                     | Current diagnostics                                                 |
+| `plain`, `github-actions` | Existing human renderers. `reporting.console` remains a compatible configuration source.                                                                                                          | Current diagnostics                                                 |
+| `json`                    | Exactly one compact document at exit. Long-lived commands (`serve`, Storybook `driver` and `server`) print one readiness document instead and nothing afterward.                                  | Empty, except for failures before mode resolution or loss of stdout |
+| `ndjson`                  | Compact LF-terminated records. A run ends with exactly one `terminal` record, identical to the `json` document. A failure before a run starts emits only its `error` record, identical to `json`. | Same as `json`                                                      |
 
 `--events <milestones|progress|all>` applies to `ndjson`; the default is
 `milestones`:
@@ -630,7 +630,10 @@ it is not a request to reopen the architectural choice of MCP.
 Implement one validated catalog, service executors, typed client, supported-state
 results, strict selection, queues/deadlines, and a bounded canonical journal.
 Add realistic fake-host states and model timeout, truncation, stale refs,
-duplicate selectors, request correlation, and indeterminate effects.
+duplicate selectors, request correlation, and indeterminate effects. The fake
+host already resolves selectors as the native helpers do, reports `checked`,
+`expanded`, and `selected` as unsupported unless an element declares them, and
+enforces the input masks; the remaining models are still open.
 
 **Settlement is the first implementation dependency, not late hardening:**
 correct the existing Node timeout boundary and both providers' ambiguous
@@ -714,7 +717,7 @@ exit-path gaps.
 **Complete when:** every reporter mode is tested on every exit path: pass,
 test failure, infrastructure failure, usage or configuration error,
 interruption, and closed stdout. Structured stdout must parse as exactly one
-document or as valid NDJSON ending in one terminal record, and structured
+document or as valid NDJSON ending in one terminal or error record, and structured
 stderr must be empty on normal paths. Documents and default streams stay within
 limits for synthetic runs with at least 10,000 tests, 1,000 failures, and
 1 MiB messages. Secrets remain redacted, and delegated runs render once.
@@ -758,10 +761,10 @@ channel relay still needs grant protection.
 
 Quarantine persistence and operator recovery are implemented: an optional
 `recovery` server option writes each mutation ahead of dispatch and each
-quarantine to private storage, restores them before the service listens, lifts
-a quarantine only when its launched application closes, a probe proves the
-recorded application incarnation exited, or the operator calls
-`recoverTarget`. The macOS and Windows `--application-incarnation` helper modes
+quarantine to private storage, restores them before the service listens, and
+lifts a quarantine only when a probe proves the recorded application
+incarnation exited (also right after its launched application closes) or the
+operator calls `recoverTarget`. The macOS and Windows `--application-incarnation` helper modes
 and `createMacOSApplicationProbe` and `createWindowsApplicationProbe` are
 implemented. See
 [settlement journal and recovery](security.md#settlement-journal-and-recovery).

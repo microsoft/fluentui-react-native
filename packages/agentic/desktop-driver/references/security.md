@@ -14,8 +14,23 @@ service.
 
 ## Service boundary
 
-- `createDesktopDriverServer` accepts only loopback hosts.
-- Browser-origin requests are rejected.
+- `createDesktopDriverServer` accepts only loopback hosts, and it closes the
+  listener and fails when the address it actually bound is not loopback.
+- Startup options fail closed. Only an omitted (`undefined`) option takes its
+  default. An unknown option name, a `content` policy other than `allow` or
+  `deny`, a `port` outside 0 to 65535, a `maxBodyBytes` that is not a positive
+  safe integer, or a malformed `recovery` stops startup instead of being
+  ignored.
+- Browser-origin requests are rejected. A request is refused before it is
+  authenticated or read when it carries an `Origin` header, any `Sec-Fetch-Site`,
+  `Sec-Fetch-Dest` or `Sec-Fetch-User` header, or a `Sec-Fetch-Mode` other than
+  `cors` (Node's `fetch` always sends `cors`, a browser always sends the others
+  and page script cannot omit or change them), or when its `Host` is not
+  `127.0.0.1`, `[::1]` or `localhost` with the port the connection arrived on.
+  The `Host` rule stops a DNS-rebinding page, which keeps its own name in
+  `Host`, from reaching the service. The rejection never echoes the header.
+  A permanent `error` handler on the listener keeps a later accept error from
+  ending the process.
 - A service started without an `authority` has no authentication and relies on
   the loopback binding and its trusted supervisor. A service started with a
   `DesktopAuthority` is protected (below). One service never serves both modes.
@@ -34,8 +49,8 @@ transport and target authorization model.
 A service created with a `DesktopAuthority` requires a grant on **every**
 route, including ordinary WebDriver routes, routes that do not exist, and
 `/status`. Protecting only new endpoints would leave an ordinary-route bypass,
-so authentication runs once in the request handler, after the `Origin` check
-and before the body, route, or any session is read. A session request that waits
+so authentication runs once in the request handler, after the browser-request
+checks and before the body, route, or any session is read. A session request that waits
 in its command queue authenticates again immediately before dispatch.
 
 - A grant is a bearer token `fdg1.<id>.<secret>`: a 128-bit id that names the
@@ -285,9 +300,11 @@ window” fallback cleanup.
 A quarantine outlives the service only when the supervisor passes
 `recovery.storage`, owner-validated private storage dedicated to that one
 service configuration. Without it, a restart forgets every quarantine.
-Neither shipped desktop-test nor Storybook supervisor currently supplies this
-configuration; durable recovery is a library capability, not a shipped lifecycle
-guarantee. See [current status](current-status.md).
+The shipped desktop-test supervisor and Storybook's native channel child supply
+this configuration through the shared `driver-service` factory, which creates
+the platform's private storage and exact-incarnation probe. A direct library
+embedder must pass `recovery` itself; restart is not proof. See
+[current status](current-status.md).
 
 - Each mutation is recorded before dispatch, and a mutation that cannot be
   recorded is refused without being sent. A quarantine is recorded before the
@@ -296,15 +313,30 @@ guarantee. See [current status](current-status.md).
   `interrupted` quarantine, and a record that cannot be read becomes one
   without an application. A record that cannot be removed after a mutation
   settled quarantines the target as `journal`.
+- Storage that creates a record and then fails is read back: the record is
+  adopted when its contents are exactly what was written and the mutation
+  proceeds, and a foreign or missing record refuses the mutation. A record that
+  is already absent when it is removed counts as removed. Every storage and
+  probe call has a 10 second deadline; a call that does not settle counts as a
+  failure, so storage that never answers cannot hold the service.
+- Closing a session releases held input and then closes the application. The
+  release is a recovery mutation: it is dispatched even when the journal is
+  down, without a record, and raises an in-memory quarantine when its outcome
+  is unknown. The application is left open when the release never ran, so a
+  held key cannot outlive its session.
 - Records hold the target id, the static command description, the session id,
   the failure text, and the application's process id and start time. They never
   hold typed text, grants, or element content.
 - The service reads every registered target's records before it listens, and
-  startup fails when it cannot.
+  startup fails when it cannot. A target registered later reads its records on
+  registration and before it is reported or opened, and `/status` fails rather
+  than report a target whose records could not be read.
 - A quarantine lifts only with evidence. Closing a launched application lifts
-  it once its records are removed. `recovery.probeApplication` lifts it when
-  the exact recorded process id and start time are proven to have exited,
-  checked when a session for an unheld target opens. Otherwise only the
+  it only when `recovery.probeApplication` then reports that exact process id
+  and start time exited, because the host closing the application does not
+  prove it is gone; without a probe the quarantine stays. The probe also lifts
+  a quarantine of any application it proves exited, checked when a session for
+  an unheld target opens. Otherwise only the
   operator's `server.recoverTarget(targetId, { quarantineId, evidence })`
   lifts it. That API is for the trusted supervisor; no grant and no HTTP route
   can reach it. It names the quarantine the operator inspected, refuses while a

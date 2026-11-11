@@ -61,13 +61,19 @@ describe('desktop option groups', () => {
     expect(mergeDesktopCaseOptions(physical, kase({ input: 'physical' }))).toMatchObject({ input: 'physical' });
     expect(() => mergeDesktopCaseOptions(physical, kase({ input: 'both' }))).toThrow('cannot change the enclosing group');
     expect(() => mergeDesktopCaseOptions(physical, kase({ input: 'accessible' }))).toThrow('cannot change the enclosing group');
-    expect(() => mergeDesktopCaseOptions(physical, kase({ requires: ['accessibility-click'] }))).toThrow('cannot widen');
+    expect(() => mergeDesktopCaseOptions(physical, kase({ requires: ['accessibility-click'] }), 'story / case')).toThrow(
+      'story / case.input "physical" conflicts with the "accessible" input that its requirements imply (accessibility-click)',
+    );
   });
 
-  test('keeps a group that requires a transport from being widened or mixed by a case', () => {
+  test('keeps a group that requires a transport from being overridden or mixed by a case', () => {
     const keyboard = group({ requires: ['keyboard'] });
-    expect(() => mergeDesktopCaseOptions(keyboard, kase({ input: 'both' }))).toThrow('cannot widen');
-    expect(() => mergeDesktopCaseOptions(keyboard, kase({ requires: ['accessibility-click'] }))).toThrow('split the case');
+    expect(() => mergeDesktopCaseOptions(keyboard, kase({ input: 'both' }), 'story / case')).toThrow(
+      'story / case.input "both" conflicts with the "physical" input that its requirements imply (keyboard)',
+    );
+    expect(() => mergeDesktopCaseOptions(keyboard, kase({ requires: ['accessibility-click'] }), 'story / case')).toThrow(
+      /story \/ case requires physical input \(keyboard\) and accessible input \(accessibility-click\).*split the case/,
+    );
   });
 
   test('an explicit both on a group narrows nothing', () => {
@@ -87,6 +93,23 @@ describe('desktop option groups', () => {
     const unsupported = { platforms: ['win32'], reason: 'Win32 keeps the cycle behavior.', issue: '#4377' } as const;
     expect(mergeDesktopCaseOptions(group({ requires: ['keyboard'] }), kase({ unsupported }))).toMatchObject({ unsupported });
   });
+
+  test('rejects a gap that its group leaves nowhere to apply', () => {
+    const quarantine = { issue: '#9', reason: 'Flaky.', expires: '2099-01-01' };
+    expect(() =>
+      mergeDesktopCaseOptions(
+        group({ platforms: ['windows'] }),
+        kase({ unsupported: { platforms: ['macos'], reason: 'No.' } }),
+        'story / case',
+      ),
+    ).toThrow('story / case.unsupported.platforms never overlaps the platforms the case runs on');
+    expect(() =>
+      mergeDesktopCaseOptions(group({ platforms: ['!win32'] }), kase({ quarantine: { ...quarantine, platforms: ['win32'] } })),
+    ).toThrow('quarantine.platforms never overlaps');
+    expect(() =>
+      mergeDesktopCaseOptions(group({ input: 'physical' }), kase({ quarantine: { ...quarantine, input: 'accessible' } })),
+    ).toThrow('quarantine.input "accessible" never overlaps the case\'s "physical" input');
+  });
 });
 
 describe('desktop input descriptors', () => {
@@ -104,8 +127,8 @@ describe('desktop input descriptors', () => {
   test('rejects mixed transports and explicit widening', () => {
     expect(() => resolveDesktopInput(undefined, ['keyboard', 'accessibility-click'])).toThrow('split the case');
     expect(() => resolveDesktopInput('both', ['physical-click', 'perform-accessibility-action'])).toThrow('split the case');
-    expect(() => resolveDesktopInput('both', ['physical-click'])).toThrow('cannot widen');
-    expect(() => resolveDesktopInput('physical', ['accessibility-click'])).toThrow('cannot widen');
+    expect(() => resolveDesktopInput('both', ['physical-click'])).toThrow('conflicts with the "physical" input');
+    expect(() => resolveDesktopInput('physical', ['accessibility-click'])).toThrow('conflicts with the "accessible" input');
   });
 
   test('runs a case that needs both transports only in a declared physical lane', () => {
@@ -124,6 +147,19 @@ describe('desktop input descriptors', () => {
   test('rejects duplicate and unknown requirements', () => {
     expect(() => validateDesktopCaseOptions({ requires: ['click', 'click'] })).toThrow('duplicate');
     expect(() => validateDesktopCaseOptions({ requires: ['input'] })).toThrow('unsupported requirement');
+  });
+
+  test.each(['2026-13-01', '2026-02-30', '2026-00-10', '2026-06-31', '2026-1-01', '2026-06-01T00:00:00Z', ' 2026-06-01'])(
+    'rejects the quarantine expiry %s, which is not a calendar date',
+    (expires) => {
+      expect(() => validateDesktopCaseOptions({ quarantine: { issue: '#1', reason: 'Flaky.', expires } })).toThrow('real calendar date');
+    },
+  );
+
+  test('accepts a leap day only in a leap year', () => {
+    const quarantine = (expires: string) => validateDesktopCaseOptions({ quarantine: { issue: '#1', reason: 'Flaky.', expires } });
+    expect(quarantine('2028-02-29').quarantine?.expires).toBe('2028-02-29');
+    expect(() => quarantine('2027-02-29')).toThrow('real calendar date');
   });
 });
 

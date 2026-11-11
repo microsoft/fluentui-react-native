@@ -175,7 +175,12 @@ new sample as a continuation of an old one.
 A matching base returns `mode: "delta"` with added, changed, and removed
 projected elements. Removals are reported only when both provider samples and
 their projections are complete. Otherwise `removalsSuppressed` is true, so an
-omitted or truncated node is never called deleted. Delta pages carry `next`;
+omitted or truncated node is never called deleted. `truncation` says why a basis was incomplete: the provider's own
+cuts, or the 5,000-element budget a delta compares within. A delta names a
+changed or added element by a reference it issues, and only for the changes it
+returns, so a delta of nothing issues none. A removed element is gone, so it
+keeps the reference the session already holds and has none otherwise; it never
+spends table capacity or evicts a reference the caller holds. Delta pages carry `next`;
 pass it to `observePage`, which reads the retained base and fresh sample without
 sampling again. Page cursors are opaque, session-bound, and fail explicitly
 when their bases are evicted.
@@ -203,7 +208,14 @@ A cut search can prove `multiple` but never `unique` or `none`. A `possible`
 match is one whose name or text was cut so that the cut part could still decide
 it. Matches are definite first, then possible, each in document order, and carry
 `ref`, `role`, `name`, `automationId`, `path` (the nearest named ancestors), and
-`clipped`. `more` counts candidates beyond `limit`.
+`clipped`. `more` counts candidates beyond `limit`; when it is present,
+`complete` is false and `truncation` lists a `limit` entry, so a result that left
+matches out never reads as whole.
+
+`complete` means the same on every result that can leave things out (`observe`,
+`observeDelta`, `find`, `journal`, and `stories`): nothing reachable was left out
+by a provider cut, a size limit, or a page. Text cut short does not clear it; it
+is marked on the item instead, as `clipped` on a `find` match or a story entry.
 
 ## act
 
@@ -254,10 +266,41 @@ Then, inside the target's input turn, so no other input interleaves, it reads
 the element again and requires its role, name, and automation id to match what
 the sample showed (a clipped field matches by prefix). That fingerprint is a
 precondition, not an identity: the provider's liveness check is what says the
-element is still the one referenced. `click`, `activate`, and `type` need the
-element enabled; `click` needs it visible and the element at its centre to be
-it or inside it. A covered element fails with `obscured`, which `activate` does
-not check.
+element is still the one referenced. Every action but `clear` needs the element enabled, and `click`
+needs it visible and the element at its centre to be it or inside it. A state
+the provider cannot report is not false: it fails with `state-unsupported`, and
+a reported `false` with `not-enabled` or `not-visible`. Both name the reference
+the selector or the sample proved. A covered element fails with `obscured`,
+which `activate` does not check.
+
+A `click` hit-tests before it raises the window. A point covered by something in
+the element's own window fails with `obscured` and nothing dispatched, because
+raising the window cannot uncover it. Otherwise the window is activated, the
+point is tested again, and the pointer clicks. If activation succeeded and the
+second test fails, finds the point still covered, or the click itself reports
+nothing applied, the failure carries effect `partial` and disposition
+`indeterminate`: the window was raised even though no click landed. A hit test
+that times out or is cancelled is reported as that, never as `obscured`.
+
+A provider's own failure while acting is reported in fixed words for its error
+code, keeping only the machine `reason` and `nativeCode` and the settled
+mutation. Provider messages quote window titles and element ids, so they are not
+passed on. A provider that no longer has the element or window drops the
+reference, as it does for a read.
+
+A session's `furn:inputMode` ([protocol](protocol.md#sessions-and-targets)) limits the
+mechanisms `act` may use. In an `accessible` session the runtime reports no
+`physicalClick` or `keyboard`, so `click` and `type` fail with
+`action-unsupported`. A strict session (`accessible` or `physical`) also needs
+`clear` to use one mechanism, semantic or keyboard respectively. The service
+always reports its `clear` capability from the session's mode and the target's
+features: it is false when the mode forbids that mechanism or the target cannot
+clear with only that mechanism, and never left permissive by omission. Then
+`clear` fails with `action-unsupported` before anything is dispatched, and
+`sequence` refuses the whole request up front. A mechanism the policy forbids or
+the host does not deliver fails with `input-policy` or `input-unsupported` if it
+reaches the host, and a host that cleared by another mechanism than the one
+required fails with `input-mechanism-mismatch` after the clear applied.
 
 `perform` names an action by what `observe`'s `actions` fact shows, such as
 `AXPress`, an application's custom action, or Windows UIA `Invoke` and
@@ -326,7 +369,11 @@ Waiting re-evaluates on the provider's change events for the window, on a new
 window, or on the application exiting, and otherwise polls from 100 ms backing
 off to 1 second. Only `failed` and `inconclusive` are retried: an element the
 provider says is gone stays gone, so a `ref` check that expects anything other
-than its absence fails at once. The result reports `attempts` and `elapsedMs`.
+than its absence fails at once, and a fact the provider does not report at all
+ends the wait as `unsupported` after one attempt. An event shortens a pause
+only after at least 100 ms, or as long as the last evaluation took if that is
+longer, so a burst of events cannot run walks of the application back to back.
+The result reports `attempts` and `elapsedMs`.
 Only the final search's proof is recorded, so a long wait does not evict the
 proofs the caller holds.
 
@@ -357,8 +404,10 @@ Each act takes its own input turn and releases it once its input settles, so a
 check waits for the application without holding input. The checks share one
 30-second wait ceiling. Before the first step, the request is refused as a
 whole if the target is quarantined and a step acts, a step's action is
-unsupported, or a check or the closing observation reads content the operator
-denies, so such a refusal never lands halfway. A `requestId` makes the whole
+unsupported (including a `clear` the session's strict input mode cannot perform
+with one mechanism), or any act step's selector, check step, or the closing
+observation reads content the operator denies, so such a refusal never lands
+halfway. A `requestId` makes the whole
 sequence one recorded outcome, as for `act`. The journal keeps the step kinds
 and the stopping index, never their selectors' values or typed text.
 
@@ -393,9 +442,14 @@ the catalog the build recorded: `entries` of `id`, `title`, `name`, and
 `tags`, filtered by `filter` (any case, over id, title, and name), `limit` per
 page (default 25, at most 100), from `offset`, with `next` naming the following
 page. `matched` counts the stories the filter matches and `total` the catalog.
-Ids are clipped to 256 characters, titles and names to 200, and tags to 16 of
-64, with invisible characters made visible. Any other target reports both
-operations as unavailable with `stories-unsupported`.
+`complete` and `truncation` are always present: when matching stories after
+`offset` do not fit the page, `complete` is `false` and `truncation` lists a
+`limit` entry; when the page reaches the end, `complete` is `true` and
+`truncation` is empty. Stories skipped by `offset` do not count. Ids are
+clipped to 256 characters, titles and names to 200, and tags to 16 of 64, with
+invisible characters made visible. An entry whose text was cut lists those
+fields in `clipped`; a clipped `id` is not one `story` accepts. Any other target
+reports both operations as unavailable with `stories-unsupported`.
 
 `current` names the story this session selected and how it was confirmed:
 `marker` when the story root's marker in the current window names it,
@@ -443,7 +497,7 @@ A reference that does not resolve fails with a reason:
 
 | Reason                    | Error code                | Meaning                                                          |
 | ------------------------- | ------------------------- | ---------------------------------------------------------------- |
-| `ref-malformed`           | `invalid argument`        | Not a reference                                                  |
+| `ref-malformed`           | `invalid argument`        | Not a reference; the text is never echoed                        |
 | `ref-unknown`             | `no such element`         | Never issued in this session                                     |
 | `ref-foreign`             | `no such element`         | Issued by another session or server                              |
 | `ref-expired`             | `stale element reference` | Issued here, since dropped                                       |
@@ -481,7 +535,7 @@ rebuilt `mutation` report.
 | `invalid-envelope`                | `invalid argument`          | Not a JSON object, or an unknown request field                               |
 | `invalid-request-id`              | `invalid argument`          | `requestId` is malformed                                                     |
 | `unsupported-version`             | `invalid argument`          | `version` is not the catalog's                                               |
-| `invalid-input`                   | `invalid argument`          | Input failed validation; names the field, not the value                      |
+| `invalid-input`                   | `invalid argument`          | Input failed validation; names the field, never the value or an unknown key  |
 | `unknown-operation`               | `unknown command`           | No such operation                                                            |
 | `bounded-observation-unsupported` | `unsupported operation`     | The provider cannot observe                                                  |
 | `content-denied`                  | `unsupported operation`     | The operator denied reading displayed content                                |
@@ -490,7 +544,10 @@ rebuilt `mutation` report.
 | `ref-…`                           | see above                   | A reference did not resolve                                                  |
 | `cancelled`                       | `unknown error`             | The caller left, or the command was cancelled                                |
 | `request-id-reused`               | `invalid argument`          | The `requestId` already named a different request                            |
-| `action-unsupported`              | `unsupported operation`     | The provider cannot perform this action                                      |
+| `action-unsupported`              | `unsupported operation`     | The provider, or the session's input mode, cannot perform this action        |
+| `input-policy`                    | `unsupported operation`     | The session's input mode never delivers that mechanism; nothing dispatched   |
+| `input-unsupported`               | `unsupported operation`     | The target does not deliver that mechanism, or cannot clear with only one    |
+| `input-mechanism-mismatch`        | `unknown error`             | A strict clear was applied by another mechanism than the mode requires       |
 | `sample-not-unique`               | `invalid argument`          | The sample proved nothing unique, or it was forgotten                        |
 | `ref-not-proven`                  | `invalid argument`          | The sample proved a different reference unique                               |
 | `no-match`                        | `no such element`           | `act`'s selector matched nothing                                             |
@@ -498,6 +555,7 @@ rebuilt `mutation` report.
 | `selector-inconclusive`           | `invalid argument`          | `act`'s search could not be completed                                        |
 | `fingerprint-changed`             | `stale element reference`   | The element's role, name, or automation id changed                           |
 | `not-enabled`, `not-visible`      | `element not interactable`  | The element cannot take the action                                           |
+| `state-unsupported`               | `element not interactable`  | The provider cannot report the enabled or visible state the action needs     |
 | `action-not-published`            | `element not interactable`  | The element does not publish an action by that `name`                        |
 | `action-not-unique`               | `element not interactable`  | The element publishes more than one action by `name`                         |
 | `action-changed`                  | `element not interactable`  | The listed action changed before it was performed                            |
@@ -511,6 +569,10 @@ rebuilt `mutation` report.
 | `offset-out-of-range`             | `invalid argument`          | `artifact`'s offset is past the end of the image                             |
 | `stories-unsupported`             | `unsupported operation`     | The target has no story orchestrator                                         |
 | `story-unknown`                   | `invalid argument`          | The catalog has no story with that id                                        |
+| `story-context-stale`             | `stale element reference`   | Another client changed the story, or it cannot be confirmed; select it again |
+| `bridge-unavailable`              | `unknown error`             | The authenticated Storybook bridge is not connected; nothing was dispatched  |
+| `relaunch-required`               | `unknown error`             | The launch has no usable bridge; relaunch the application, then select again |
+| `observation-cursor-expired`      | `invalid argument`          | An `observePage` cursor's sample was evicted; take a fresh observation       |
 | `story-not-ready`                 | `timeout`, `unknown error`  | Rendering did not confirm; check mutation/quarantine state before continuing |
 
 A provider's own failure carries its `nativeCode` and, for a command that may
@@ -542,8 +604,11 @@ Each session keeps a bounded journal of 500 entries: operation, request id,
 outcome, effect, timing, an error code and reason, and scalar summary fields the
 operation declared safe (for `find` and `check`, the names of the predicates
 and expectations, never their values; for `stories`, whether a filter was
-used, never its text). Typed text, expected text, displayed content, and error
-messages never enter it. The
+used, never its text; for an action, a `ref` only when it is a well-formed
+reference). Typed text, expected text, displayed content, unknown request keys,
+malformed references, provider messages, and error messages never enter it. An
+unknown key is reported as `Unrecognized key.` at its parent path, and a
+malformed `ref` as `ref-malformed` without its text. The
 `journal` operation reads it in pages (default 50, at most 200) with `after` and
 `next` cursors and reports `dropped` entries; it is not itself journaled.
 

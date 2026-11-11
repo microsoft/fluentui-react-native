@@ -1,0 +1,5 @@
+---
+'@fluentui-react-native/desktop-driver': patch
+---
+
+Keep WebdriverIO `setValue` options (so `{ mask: true }` hides the value from logs), type with the session's authoritative input mode, and follow `reloadSession()`. Reject quarantine dates that are not real calendar dates or could never apply instead of letting them never expire. Classify a lost connection, `invalid session id`, and a lane's skipped tests correctly in the story runner, and stop `wait` retrying infrastructure errors. Give each test its own nested, hashed evidence directory with a reserved `failure/` folder, reject duplicate artifact names, and confine artifact paths before creating directories. Order shards by code point and filter globs in linear time. Make the fake host match native selectors, report unsupported `checked`, `expanded`, and `selected` states, and enforce input masks. Add contextual client errors, `DesktopDriverClientError`, and optional `signal` support, and bound `wait` timeouts in authored plans.

@@ -16,6 +16,38 @@ export class DesktopReportedError extends Error {
     this.failure = failure;
   }
 }
+
+const DESKTOP_INCOMPLETE_ERROR = 'DesktopIncompleteError';
+
+/**
+ * Selected work finished without producing complete executable coverage: a skipped or unsupported case, a group that
+ * reported no tests, or a producer that did not finish. It is a verdict, not a fault, so reporters record it as an
+ * `incomplete` run instead of an infrastructure failure.
+ */
+export class DesktopIncompleteError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = DESKTOP_INCOMPLETE_ERROR;
+  }
+}
+
+/**
+ * True for a {@link DesktopIncompleteError} thrown here or relayed by name over IPC, or an aggregate of only such errors.
+ * A different error that merely wraps one is a fault, so it is not recognized.
+ */
+export function isDesktopIncompleteError(error: unknown): boolean {
+  if (error instanceof DesktopIncompleteError) return true;
+  if (error instanceof DesktopReportedError) return isDesktopIncompleteFailure(error.failure);
+  if (error instanceof AggregateError && error.errors.length > 0)
+    return error.errors.every((child: unknown) => isDesktopIncompleteError(child));
+  return false;
+}
+
+/** True for a failure that is an incomplete-run verdict, which crosses a process boundary by error name. */
+export function isDesktopIncompleteFailure(failure: ReportFailure): boolean {
+  return failure.error.name === DESKTOP_INCOMPLETE_ERROR;
+}
+
 export type TestStatus = 'passed' | 'failed' | 'skipped' | 'unsupported' | 'cancelled' | 'not-run' | 'incomplete';
 /** A declared gap: the producer knows the case cannot run here and says why, so it is not a silent skip. */
 export type TestGap = 'unsupported' | 'quarantine';
@@ -129,7 +161,11 @@ export function createEventEmitter(runId: string, sourceId: string, receive: (ev
     });
 }
 
-export function validateDesktopEvent(value: unknown): asserts value is DesktopEvent {
+/** Events only the collector may originate; a producer that sends one is misreporting the run's outcome. */
+export const collectorOnlyEventKinds: readonly DesktopEvent['kind'][] = ['run-finished'];
+
+/** `origin: 'collector'` admits {@link collectorOnlyEventKinds}; every other caller validates a producer's event. */
+export function validateDesktopEvent(value: unknown, origin: 'producer' | 'collector' = 'producer'): asserts value is DesktopEvent {
   const event = record(value, 'report event');
   exactKeys(event, [
     'schemaVersion',
@@ -152,6 +188,7 @@ export function validateDesktopEvent(value: unknown): asserts value is DesktopEv
   if (typeof event.kind !== 'string' || !Object.hasOwn(payloadFields, event.kind))
     throw new TypeError('Unknown desktop report event kind.');
   const kind = event.kind as keyof typeof payloadFields;
+  if (origin === 'producer' && collectorOnlyEventKinds.includes(kind)) throw new TypeError(`A producer cannot report "${kind}".`);
   const payload = record(event.payload, 'event payload');
   exactKeys(payload, payloadFields[kind]);
   if (event.context !== undefined) {

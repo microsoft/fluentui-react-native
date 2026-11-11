@@ -9,6 +9,8 @@ import { buildSample } from './observationSample.js';
 export type StubRuntimeOptions = {
   capabilities?: Partial<OperationCapabilities>;
   contentPolicy?: ContentPolicy;
+  /** Replaces host commands, such as `click`, that the stub otherwise refuses. */
+  host?: Partial<OperationHost>;
   nativeTimeoutMs?: number;
   /** The sample every `observe` returns. Use `observe` for one that depends on the request or the call. */
   observation?: NativeObservation;
@@ -72,12 +74,14 @@ export function stubRuntime(options: StubRuntimeOptions = {}): StubRuntime {
       }
       return nativeIds.length;
     },
+    ...options.host,
   };
   const runtime: OperationRuntime = {
     capabilities: {
       accessibilityActions: false,
       accessibilityClick: false,
       boundedObservation: true,
+      clear: true,
       elementCapture: false,
       keyboard: false,
       physicalClick: false,

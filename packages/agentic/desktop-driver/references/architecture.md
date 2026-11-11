@@ -135,7 +135,7 @@ handoff are still work in progress; see [current status](current-status.md).
 | `src/authoring`    | Serializable story plans, selectors, capabilities, results, and case descriptors |
 | `src/runner`       | Filtering, sharding, execution, and result classification                        |
 | `src/artifacts`    | Confined atomic evidence                                                         |
-| `src/agent`        | Bounded JSON-safe operations                                                     |
+| `src/agent`        | JSON-safe agent API; `describe` trims an unbounded whole-tree read               |
 | `src/operations`   | Agent operation catalog, executor, references, ledger, and journal               |
 | `src/testing`      | Fake harnesses and Storybook test doubles                                        |
 | `src/cli`          | Commander parsing, JSON output, and process exit adaptation                      |

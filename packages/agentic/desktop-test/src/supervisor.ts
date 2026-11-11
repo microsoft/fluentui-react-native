@@ -240,7 +240,8 @@ export class DesktopSupervisor {
   }
 
   async worker(command: PreparedDesktopCommand, timeoutMs: number, verify?: (code: number) => Promise<void>): Promise<number> {
-    const worker = this.runner.start({ ...command, category: 'worker' });
+    // An abort stops the worker's process tree at once instead of waiting for the guard to notice.
+    const worker = this.runner.start({ ...command, category: 'worker' }, { signal: this.services.controller.signal });
     this.workers.add(worker);
     let failure: unknown;
     let code = 1;

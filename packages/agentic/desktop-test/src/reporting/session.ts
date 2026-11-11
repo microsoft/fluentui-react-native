@@ -1,8 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import { DesktopRunReporter, desktopArtifactPath } from './collector.js';
 import type { DesktopReportWriter, DesktopRunReporterOptions } from './collector.js';
-import { DesktopReportedError, redactDesktopSecrets, sanitizeDesktopReport, serializeReportError } from './protocol.js';
-import type { EventEmitter, FailureKind, ReportFailure } from './protocol.js';
+import { redactDesktopSecrets, sanitizeDesktopReport } from './protocol.js';
+import type { EventEmitter, FailureKind } from './protocol.js';
+import { DesktopFailureRegistry } from './failures.js';
 import { assertReportedWork, connectReportProducer, DESKTOP_REPORT_CONTEXT, startReportTransport } from './transport.js';
 import { desktopRunExitCode } from './results.js';
 import type { DesktopRunResult } from './results.js';
@@ -69,16 +70,17 @@ export async function createDesktopReportSession(
   // connectReportProducer has already validated this inherited context.
   const context = JSON.parse(encoded) as { runId: string; artifactsRoot: string; nonce: string };
   const secrets = new Set([context.nonce]);
-  const failures = new WeakMap<object, ReportFailure>();
   const redact = (text: string) => redactDesktopSecrets(text, secrets);
   const protect =
     (emit: EventEmitter): EventEmitter =>
     (event, scope, context, parent) =>
       emit(sanitizeDesktopReport(event, redact), scope, sanitizeDesktopReport(context ?? {}, redact), parent);
+  const emit = protect(producer.emit);
+  const registry = new DesktopFailureRegistry((value) => sanitizeDesktopReport(value, redact));
   const reporter: DesktopReportWriter = {
     runId: context.runId,
     root: context.artifactsRoot,
-    emit: protect(producer.emit),
+    emit,
     source: (id) => protect(producer.source(id)),
     addSecret(secret) {
       if (secret) secrets.add(secret);
@@ -94,33 +96,17 @@ export async function createDesktopReportSession(
       await assertReportedWork(workIds, optional, encoded);
     },
     failure(error, kind: FailureKind = 'infrastructure') {
-      if (error instanceof DesktopReportedError) return sanitizeDesktopReport(error.failure, redact);
-      if (error instanceof Error && error.cause instanceof DesktopReportedError) return sanitizeDesktopReport(error.cause.failure, redact);
-      const object = error !== null && typeof error === 'object' ? error : undefined;
-      const prior =
-        (object && failures.get(object)) ||
-        (error instanceof Error && error.cause && typeof error.cause === 'object' ? failures.get(error.cause) : undefined);
-      if (prior) return prior;
-      const failure = {
-        failureId: randomUUID(),
-        kind,
-        error: JSON.parse(redact(JSON.stringify(serializeReportError(error)))) as ReportFailure['error'],
-      };
-      if (object) failures.set(object, failure);
-      return failure;
+      return registry.failure(error, kind);
     },
-    fail(error, kind, scopeId) {
-      if (error instanceof AggregateError && error.errors.length) {
-        const children: unknown[] = error.errors;
-        return children.map((child) => reporter.fail(child, kind, scopeId))[0];
-      }
-      if (error instanceof Error && error.cause instanceof AggregateError) return reporter.fail(error.cause, kind, scopeId);
-      const failure = reporter.failure(error, kind);
-      producer.emit(
-        { kind: 'diagnostic', payload: { level: 'error', message: failure.error.message || failure.error.name, failure } },
-        scopeId,
+    fail(error, kind = 'infrastructure', scopeId) {
+      return registry.fail(
+        error,
+        kind,
+        (failure) =>
+          emit({ kind: 'diagnostic', payload: { level: 'error', message: failure.error.message || failure.error.name, failure } }, scopeId),
+        // The collector, which sees the run's status, decides whether an incomplete-run error is a failure or a warning.
+        () => false,
       );
-      return failure;
     },
   };
   return {
