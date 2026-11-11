@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/storybook-desktop-runtime",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "React Native runtime and Metro services for desktop Storybook applications",
   "license": "MIT",
   "author": "",

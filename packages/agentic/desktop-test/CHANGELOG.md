@@ -1,5 +1,24 @@
 # @fluentui-react-native/desktop-test
 
+## 0.2.5
+
+### Patch Changes
+
+- c5ea4df: Allow nested desktop services to finish cooperative disposal and reporting before their outer service owners time out.
+- 3b2787e: Make the desktop-test lifecycle and reporting contracts portable to Windows, including process cleanup and path projection.
+- 586e4c3: Fix shutdown hangs and cancellation. An integration's run is no longer tracked in the scope it borrows, so a Storybook `serve` or story test exits after SIGINT instead of idling, and scope draining is bounded. Cancellation stops running stage and suite commands, including their POSIX process groups, reports them failed, and refuses late spawns. A second interrupt force-stops owned process trees, SIGHUP is handled, and handlers stay installed until cleanup completes; `handleDesktopInterrupts` exports that policy for integrations. On Windows, `taskkill` runs synchronously and only before the command's exit is recorded, so it cannot address a reused process ID. Close disposes services and resources in one reverse order even when an observer throws. Workload claims move to a per-user directory independent of TMPDIR and are replaced atomically; local sockets use short private paths. Generated WDIO configs read settings from a file, suites accept `suiteTimeoutMs`, and command arguments and environment reject NUL.
+- 586e4c3: Fix verdicts that passed without coverage. A test takes the status of its decisive attempt, so a failed attempt followed only by skipped or unsupported retries stays failed. Selected worker work that reports no tests is `incomplete`, and the WDIO reporter warns when a spec ran no tests, with the jasmine and mocha framework loggers raised to `warn` so an import failure is visible. WDIO attempts keep their arrival order whatever numbers the runner reports. Console stalls, closed pipes, and queue overflow are warnings that no longer fail a passing run, and the final line comes from the terminal result. Incomplete runs list their unmet work and a JUnit message that names it, and result checks throw a typed `DesktopIncompleteError` that reporters record as the run's verdict instead of an infrastructure failure. Failures and late-registered secrets are sanitized once at finalization, and run-query errors use a closed code set without filesystem paths. NDJSON milestones no longer suppress a later failure after many skips, record IDs are not clipped, a projection failure still emits a summary record, `run.json` snapshots are throttled, and producers can no longer send `run-finished`.
+- Updated dependencies [f14e254]
+- Updated dependencies [1c38e27]
+- Updated dependencies [586e4c3]
+- Updated dependencies [8b3a2cc]
+- Updated dependencies [f52682c]
+- Updated dependencies [6404535]
+- Updated dependencies [6404535]
+- Updated dependencies [6b644ce]
+- Updated dependencies [3b2787e]
+  - @fluentui-react-native/desktop-driver@0.5.2
+
 ## 0.2.4
 
 ### Patch Changes

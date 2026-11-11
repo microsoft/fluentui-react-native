@@ -1,5 +1,29 @@
 # @fluentui-react-native/storybook-desktop
 
+## 0.4.5
+
+### Patch Changes
+
+- 1c38e27: Order desktop story test shards by Unicode code point, not by locale, so every machine builds the same shards.
+- 586e4c3: Report desktop-driver CLI usage errors in every reporter mode. Subcommand usage errors now reach stderr (plain) or a single `error` record (json and ndjson) and exit 1 instead of exiting silently. An invalid `DESKTOP_REPORTER` no longer lets `serve` start. NDJSON failures emit the error record as their terminal record, matching JSON. WebDriver errors map to matching CLI error codes, and `doctor` messages are clipped.
+- c5ea4df: Allow nested desktop services to finish cooperative disposal and reporting before their outer service owners time out.
+- 586e4c3: Leave an injected desktop-test service scope to its owner instead of closing it from `driver`, `server`, and the smoke lifecycle, which made a supervising `desktop-test serve` or story test wait on itself after a stop. Stage commands now receive the scope's cancellation signal. The CLI and the standalone Storybook channel keep their interrupt handlers until cleanup completes, handle SIGHUP, and force-stop owned commands on a second interrupt; an interrupted one-shot command reports `incomplete` instead of passed.
+- Updated dependencies [f14e254]
+- Updated dependencies [1c38e27]
+- Updated dependencies [586e4c3]
+- Updated dependencies [c5ea4df]
+- Updated dependencies [3b2787e]
+- Updated dependencies [586e4c3]
+- Updated dependencies [8b3a2cc]
+- Updated dependencies [f52682c]
+- Updated dependencies [6404535]
+- Updated dependencies [586e4c3]
+- Updated dependencies [6404535]
+- Updated dependencies [6b644ce]
+- Updated dependencies [3b2787e]
+  - @fluentui-react-native/desktop-driver@0.5.2
+  - @fluentui-react-native/desktop-test@0.2.5
+
 ## 0.4.4
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @fluentui-react-native/native-core
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [6b644ce]
+  - @fluentui-react-native/framework-base@0.9.1
+  - @fluentui-react-native/interactive-hooks@0.28.13
+
 ## 0.2.1
 
 ### Patch Changes
