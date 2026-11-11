@@ -235,11 +235,12 @@ std::uint64_t FileTimeTicks(const FILETIME& value) {
 }
 
 std::string FormatFileTimeIso8601(const FILETIME& value) {
+  // A zero time is an unread one, not 1601-01-01.
+  const std::uint64_t ticks = FileTimeTicks(value);
   SYSTEMTIME system{};
-  if (!FileTimeToSystemTime(&value, &system)) {
+  if (ticks == 0 || !FileTimeToSystemTime(&value, &system)) {
     return {};
   }
-  const std::uint64_t ticks = FileTimeTicks(value);
   const unsigned int fraction = static_cast<unsigned int>(ticks % 10000000ull);
   std::array<char, 48> buffer{};
   std::snprintf(buffer.data(), buffer.size(), "%04u-%02u-%02uT%02u:%02u:%02u.%07uZ", system.wYear, system.wMonth,

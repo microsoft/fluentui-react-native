@@ -237,8 +237,8 @@ export class NativeHostProcess extends EventEmitter<{
     try {
       await this.send('dispose', undefined, signal);
     } catch (error) {
-      await this.fail(asError(error));
-      throw error;
+      const failure = await this.fail(asError(error));
+      throw failure;
     }
     this.disposeAcknowledged = true;
     if (!(await settlesWithin(this.closed, disposeExitGraceMs))) {

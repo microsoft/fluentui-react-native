@@ -1,5 +1,6 @@
 #include "settlement.h"
 
+#include <algorithm>
 #include <atomic>
 #include <memory>
 #include <mutex>
@@ -32,6 +33,8 @@ struct AbandonedMutation {
   bool providerTimedOut{false};
   // The lease of the application the mutation acted on; empty when unknown.
   std::string leaseId;
+  // The command was cancelled before the call settled.
+  bool cancelled{false};
 };
 
 std::string& CurrentLeaseId() {
@@ -43,6 +46,15 @@ EffectLedger*& CurrentEffectLedger() {
   thread_local EffectLedger* ledger = nullptr;
   return ledger;
 }
+
+const CancellationToken*& CurrentCancellationToken() {
+  thread_local const CancellationToken* token = nullptr;
+  return token;
+}
+
+// The longest a bounded call waits before it looks at the command's
+// cancellation token again.
+constexpr DWORD kCancellationSliceMs = 50;
 
 // UI Automation refusals, repeated here because the header defines them only
 // for UI Automation clients.
@@ -78,14 +90,18 @@ std::string DescribeUnsettled(const AbandonedMutation& entry) {
   const std::string settlement = entry.call->Settled()
                                      ? "completed late with " + DescribeHresult(entry.call->result.load())
                                      : std::string("is still pending");
+  if (entry.cancelled) {
+    return subject + " was cancelled before it settled and " + settlement;
+  }
   return subject + " did not settle within " + std::to_string(entry.timeoutMs) + " ms and " + settlement;
 }
 
-void Abandon(std::string_view operation, DWORD timeoutMs, std::shared_ptr<CallState> call, bool providerTimedOut) {
+void Abandon(std::string_view operation, DWORD timeoutMs, std::shared_ptr<CallState> call, bool providerTimedOut,
+             bool cancelled = false) {
   Ledger& ledger = LedgerInstance();
   const std::lock_guard<std::mutex> lock(ledger.mutex);
-  ledger.abandoned.push_back(
-      AbandonedMutation{std::string(operation), timeoutMs, std::move(call), providerTimedOut, CurrentLeaseId()});
+  ledger.abandoned.push_back(AbandonedMutation{std::string(operation), timeoutMs, std::move(call), providerTimedOut,
+                                               CurrentLeaseId(), cancelled});
 }
 
 constexpr char kUnsettledNotice[] =
@@ -93,7 +109,7 @@ constexpr char kUnsettledNotice[] =
     "re-observed once it responds.";
 
 HRESULT RunBounded(std::function<HRESULT()> call, DWORD timeoutMs, std::shared_ptr<CallState>& state,
-                   bool& completed) {
+                   bool& completed, bool& cancelled) {
   state = std::make_shared<CallState>();
   state->done = CreateEventW(nullptr, TRUE, FALSE, nullptr);
   if (state->done == nullptr) {
@@ -110,8 +126,24 @@ HRESULT RunBounded(std::function<HRESULT()> call, DWORD timeoutMs, std::shared_p
     }
   });
   worker.detach();
-  completed = WaitForSingleObject(state->done, timeoutMs) == WAIT_OBJECT_0;
-  return completed ? state->result.load() : E_PENDING;
+  const CancellationToken* token = CurrentCancellationToken();
+  const ULONGLONG expiresAt = GetTickCount64() + timeoutMs;
+  while (true) {
+    const ULONGLONG now = GetTickCount64();
+    const DWORD slice =
+        now >= expiresAt ? 0 : static_cast<DWORD>(std::min<ULONGLONG>(expiresAt - now, kCancellationSliceMs));
+    if (WaitForSingleObject(state->done, slice) == WAIT_OBJECT_0) {
+      completed = true;
+      return state->result.load();
+    }
+    if (GetTickCount64() >= expiresAt) {
+      return E_PENDING;
+    }
+    if (token != nullptr && token->IsCancelled()) {
+      cancelled = true;
+      return E_PENDING;
+    }
+  }
 }
 
 }  // namespace
@@ -221,6 +253,14 @@ EffectScope::~EffectScope() {
   CurrentEffectLedger() = previous_;
 }
 
+CancellationScope::CancellationScope(const CancellationToken& token) noexcept : previous_(CurrentCancellationToken()) {
+  CurrentCancellationToken() = &token;
+}
+
+CancellationScope::~CancellationScope() {
+  CurrentCancellationToken() = previous_;
+}
+
 void RecordDispatching() noexcept {
   if (EffectLedger* ledger = CurrentEffectLedger(); ledger != nullptr) {
     ledger->Dispatching();
@@ -246,7 +286,8 @@ HRESULT RunBoundedProviderCall(ProviderCall kind, std::function<HRESULT()> call,
   }
   std::shared_ptr<CallState> state;
   bool completed = false;
-  const HRESULT result = RunBounded(std::move(call), timeoutMs, state, completed);
+  bool cancelled = false;
+  const HRESULT result = RunBounded(std::move(call), timeoutMs, state, completed, cancelled);
   if (completed) {
     if (kind == ProviderCall::Mutation && IsProviderTimeout(result)) {
       Abandon(operation, timeoutMs, state, true);
@@ -255,6 +296,15 @@ HRESULT RunBoundedProviderCall(ProviderCall kind, std::function<HRESULT()> call,
                "), so its effect on the application is unknown. " + kUnsettledNotice);
     }
     return result;
+  }
+  if (cancelled) {
+    if (kind == ProviderCall::Mutation) {
+      // The provider may still apply the mutation, exactly as after a timeout,
+      // so the command's effect is unknown even when nothing was counted yet.
+      Abandon(operation, timeoutMs, state, false, true);
+      RecordDispatching();
+    }
+    throw CancelledError{};
   }
   if (kind == ProviderCall::Read) {
     Fail(timeoutCode, std::string(operation) + " did not complete within " + std::to_string(timeoutMs) + " ms.");

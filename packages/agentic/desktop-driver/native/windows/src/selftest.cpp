@@ -358,6 +358,7 @@ void TestLeaseIdentity() {
   FILETIME parsed{};
   Check(TryParseIso8601("2026-08-31T21:59:59.1234567Z", parsed), "lease timestamps parse");
   Check(FormatFileTimeIso8601(parsed) == "2026-08-31T21:59:59.1234567Z", "lease timestamps round trip");
+  Check(FormatFileTimeIso8601(FILETIME{}).empty(), "an unknown start time serializes as empty, not as 1601");
   FILETIME offset{};
   Check(TryParseIso8601("2026-08-31T23:59:59.0000000+02:00", offset), "offset timestamps parse");
   Check(FileTimeTicks(offset) == FileTimeTicks(parsed) - 1234567, "offset timestamps normalize to UTC");
@@ -876,6 +877,38 @@ LRESULT CALLBACK CountingWindowProc(HWND window, UINT message, WPARAM wparam, LP
   return DefWindowProcW(window, message, wparam, lparam);
 }
 
+struct RestoreStall {
+  std::atomic<bool> armed{true};
+  Gate entered;
+  Gate release;
+};
+
+std::mutex restoreStallMutex;
+std::shared_ptr<RestoreStall> restoreStall;
+constexpr UINT kStallAfterProbe = WM_APP + 71;
+
+void SetRestoreStall(std::shared_ptr<RestoreStall> stall) {
+  const std::lock_guard<std::mutex> guard(restoreStallMutex);
+  restoreStall = std::move(stall);
+}
+
+LRESULT CALLBACK StalledRestoreProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
+  std::shared_ptr<RestoreStall> stall;
+  {
+    const std::lock_guard<std::mutex> guard(restoreStallMutex);
+    stall = restoreStall;
+  }
+  // The successful probe queues the stall before the helper can post a restore.
+  if (stall != nullptr && message == WM_NULL && stall->armed.exchange(false)) {
+    PostMessageW(window, kStallAfterProbe, 0, 0);
+  } else if (stall != nullptr && message == kStallAfterProbe) {
+    stall->entered.Open();
+    stall->release.Hold();
+    return 0;
+  }
+  return DefWindowProcW(window, message, wparam, lparam);
+}
+
 // While a gate is set, writing an edit control's text holds its window thread,
 // so a value write through UI Automation never settles.
 std::mutex editGateMutex;
@@ -957,6 +990,21 @@ class WindowThread {
 
   void Destroy(HWND window) {
     Run([window]() { DestroyWindow(window); });
+  }
+
+  // Blocks the thread until `gate` opens, so its windows stop answering, and
+  // returns once the thread is blocked.
+  void Stall(const std::shared_ptr<Gate>& gate) {
+    const auto blocked = std::make_shared<Gate>();
+    {
+      const std::lock_guard<std::mutex> guard(mutex_);
+      tasks_.push_back([gate, blocked]() {
+        blocked->Open();
+        gate->Hold();
+      });
+    }
+    PostThreadMessageW(threadId_.load(), kWindowTask, 0, 0);
+    blocked->Hold();
   }
 
  private:
@@ -1503,6 +1551,37 @@ UINT WINAPI AcceptFirstInputOnly(UINT, LPINPUT, int) {
   return 1;
 }
 
+UINT WINAPI RejectSelectedReleases(UINT count, LPINPUT inputs, int size) {
+  if (size != sizeof(INPUT)) {
+    return 0;
+  }
+  for (UINT index = 0; index < count; index += 1) {
+    const INPUT& input = inputs[index];
+    if (input.type == INPUT_KEYBOARD && (input.ki.dwFlags & KEYEVENTF_KEYUP) != 0 &&
+        (input.ki.wVk == VK_SHIFT ||
+         ((input.ki.dwFlags & KEYEVENTF_UNICODE) != 0 && input.ki.wScan == 0xd83d))) {
+      return 0;
+    }
+    if (input.type == INPUT_MOUSE && (input.mi.dwFlags & MOUSEEVENTF_LEFTUP) != 0) {
+      return 0;
+    }
+  }
+  return RecordInput(count, inputs, size);
+}
+
+UINT WINAPI RejectLowSurrogatePress(UINT count, LPINPUT inputs, int size) {
+  if (size != sizeof(INPUT)) {
+    return 0;
+  }
+  for (UINT index = 0; index < count; index += 1) {
+    if (inputs[index].type == INPUT_KEYBOARD && (inputs[index].ki.dwFlags & KEYEVENTF_UNICODE) != 0 &&
+        (inputs[index].ki.dwFlags & KEYEVENTF_KEYUP) == 0 && inputs[index].ki.wScan == 0xde00) {
+      return 0;
+    }
+  }
+  return RecordInput(count, inputs, size);
+}
+
 // Records input and then cancels the command that sent it, once a key press
 // reaches the application; the modifier releases before it do not count.
 CancellationToken* cancelOnInput = nullptr;
@@ -1729,6 +1808,100 @@ void TestActivationRefusal() {
   Check(Contains(reclaimed, "taking the foreground back") &&
             Contains(reclaimed, "did not become the foreground window"),
         "a refusal with a shared input queue reports that the holder may take the foreground back");
+}
+
+// A window whose thread stops pumping messages fails window management with
+// target-non-response within the probe's bound instead of blocking the command,
+// and a cancelled command stops waiting for it.
+void TestHungWindowProbe() {
+  const CancellationToken token;
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestHung", L"Hung window");
+  Check(window != nullptr, "the hung-window fixture creates a window");
+  if (window == nullptr) {
+    return;
+  }
+  Check(FailureCode([&]() { RequireWindowResponds(window, token); }) == "none",
+        "a window whose thread pumps messages responds");
+
+  const auto stall = std::make_shared<Gate>();
+  windows.Stall(stall);
+  std::string reason = "responded";
+  std::string message;
+  const ULONGLONG started = GetTickCount64();
+  try {
+    RequireWindowResponds(window, token);
+  } catch (const HelperError& error) {
+    reason = error.reason();
+    message = error.what();
+  }
+  Check(reason == "target-non-response" && Contains(message, "did not answer window messages") &&
+            GetTickCount64() - started < 4000,
+        "a window that stops answering fails as target-non-response within the probe's bound");
+
+  CancellationToken cancelled;
+  std::thread canceller([&cancelled]() {
+    Sleep(200);
+    cancelled.Cancel();
+  });
+  const ULONGLONG cancelStarted = GetTickCount64();
+  std::string outcome = "none";
+  try {
+    RequireWindowResponds(window, cancelled);
+  } catch (const CancelledError&) {
+    outcome = "cancelled";
+  } catch (const HelperError& error) {
+    outcome = error.code();
+  }
+  canceller.join();
+  Check(outcome == "cancelled" && GetTickCount64() - cancelStarted < 1000,
+        "a cancelled command stops waiting for a window that does not answer");
+  stall->Open();
+  Check(WaitFor([&]() { return FailureCode([&]() { RequireWindowResponds(window, token); }) == "none"; }),
+        "the window answers again once its thread resumes");
+}
+
+void TestStalledRestoreEffect() {
+  const CancellationToken token;
+  WindowThread windows;
+  const HWND window = windows.Create(L"FurnSelfTestRestore", L"Restore window", &StalledRestoreProc);
+  Check(window != nullptr, "the restore fixture creates a window");
+  if (window == nullptr) {
+    return;
+  }
+  Driver driver;
+  json::Value lease = json::Value::Object();
+  lease.Set("lease", driver.AdoptWindowForTesting(window, L"Restore window"));
+  const CommandResult listed = driver.Execute("windows", lease, token);
+  const std::string windowId = listed.result.IsArray() && listed.result.Items().size() == 1
+                                   ? listed.result.Items().front().StringField("id")
+                                   : std::string();
+  Check(!windowId.empty(), "the restore fixture is registered");
+  if (windowId.empty()) {
+    return;
+  }
+  ShowWindowAsync(window, SW_SHOWMINNOACTIVE);
+  const bool minimized = WaitFor([window]() { return IsIconic(window) != FALSE; });
+  Check(minimized, "the restore fixture is minimized without activation");
+  if (!minimized) {
+    return;
+  }
+
+  json::Value resize = json::Value::Object();
+  resize.Set("windowId", json::Value::String(windowId));
+  resize.Set("rect", json::Value::Parse(R"({"x":-32000,"y":-32000,"width":40,"height":40})"));
+  const auto stall = std::make_shared<RestoreStall>();
+  SetRestoreStall(stall);
+  std::string code;
+  const std::string effect = FailureEffect([&]() { driver.Execute("setWindowRect", resize, token); }, &code);
+  const bool entered = WaitForSingleObject(stall->entered.event, 0) == WAIT_OBJECT_0;
+  SetRestoreStall(nullptr);
+  stall->release.Open();
+  Check(entered, "the restore fixture stalls after its initial probe");
+  Check(code == kErrorAutomationFailed, "the stalled restore reports an automation failure");
+  Check(effect == "unknown", "a stalled restore reports an unknown effect (reported " + effect + ")");
+  Check(WaitFor([window]() { return IsIconic(window) == FALSE; }),
+        "the posted restore can take effect after the failure");
 }
 
 void TestHelperSessionCheck() {
@@ -1959,6 +2132,53 @@ void TestInputSendFailures() {
                   message) == kErrorInputFailed &&
             Contains(message, "accepted 1 of 2"),
         "a partly accepted batch reports how much of it Windows accepted");
+
+  InputController cleanup;
+  cleanup.UseTestSender(&RecordInput);
+  cleanup.KeyDown(L"\uE008", token);
+  cleanup.KeyDown(L"\uE009", token);
+  cleanup.KeyDown(L"\U0001F600", token);
+  cleanup.PointerDown(0, token);
+  cleanup.PointerDown(2, token);
+  cleanup.UseTestSender(&RejectSelectedReleases);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { cleanup.ReleaseAll(); }) == kErrorInputFailed &&
+            cleanup.DepressedKeyCount() == 2 && cleanup.DepressedButtonCount() == 1,
+        "failed cleanup reports the failure and retains only keys and buttons not released");
+  Check(recordedInputs.size() == 3 && recordedInputs[0].ki.wScan == 0xde00 &&
+            recordedInputs[1].ki.wVk == VK_CONTROL && (recordedInputs[2].mi.dwFlags & MOUSEEVENTF_RIGHTUP) != 0,
+        "cleanup still releases the other strokes and buttons after a failure");
+
+  cleanup.UseTestSender(&RecordInput);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { cleanup.ReleaseAll(); }) == "none" && !cleanup.HasDepressedInput() &&
+            recordedInputs.size() == 3 && recordedInputs[0].ki.wScan == 0xd83d &&
+            recordedInputs[1].ki.wVk == VK_SHIFT && (recordedInputs[2].mi.dwFlags & MOUSEEVENTF_LEFTUP) != 0,
+        "a later cleanup retries only the failed strokes and buttons");
+
+  InputController partial;
+  partial.UseTestSender(&RejectLowSurrogatePress);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { partial.KeyDown(L"\U0001F600", token); }) == kErrorInputFailed &&
+            partial.DepressedKeyCount() == 1 && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xd83d,
+        "a partially accepted key press records the stroke Windows accepted");
+  partial.UseTestSender(&RecordInput);
+  recordedInputs.clear();
+  partial.ReleaseAll();
+  Check(!partial.HasDepressedInput() && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xd83d,
+        "cleanup does not release a stroke Windows never accepted");
+
+  partial.KeyDown(L"\U0001F600", token);
+  partial.UseTestSender(&RejectSelectedReleases);
+  recordedInputs.clear();
+  Check(FailureCode([&]() { partial.KeyUp(L"\U0001F600", token); }) == kErrorInputFailed &&
+            partial.DepressedKeyCount() == 1 && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xde00,
+        "an explicit partial key release retains its unreleased stroke");
+  partial.UseTestSender(&RecordInput);
+  recordedInputs.clear();
+  partial.ReleaseAll();
+  Check(!partial.HasDepressedInput() && recordedInputs.size() == 1 && recordedInputs[0].ki.wScan == 0xd83d,
+        "cleanup does not repeat the successful part of a key release");
 }
 
 void TestForegroundOwnership() {
@@ -2098,8 +2318,13 @@ void TestClickRouting() {
   Check(coveredBy(nullptr) == "none", "a point that hits no window passes");
   Check(coveredBy(window) == "none", "a point on the target window passes");
   Check(coveredBy(sibling) == "none", "a point on another window of the same application passes");
-  Check(FailureCode([&]() { RequireClickPointOwnedBy(window, POINT{-32000 + 20, -32000 + 20}); }) == "none",
-        "the real hit test never refuses an offscreen window of the same process");
+  // Other applications can also have windows at the fixture's offscreen coordinates.
+  const POINT offscreenPoint{-32000 + 20, -32000 + 20};
+  clickHitResult = WindowFromPoint(offscreenPoint);
+  const std::string expected =
+      FailureCode([&]() { RequireClickPointOwnedBy(window, offscreenPoint, &HitConfiguredWindow); });
+  Check(FailureCode([&]() { RequireClickPointOwnedBy(window, offscreenPoint); }) == expected,
+        "the real hit test agrees with the window Windows reports at the offscreen point");
   const HWND foreign = ForeignWindow();
   clickHitResult = foreign;
   Check(FailureCode([&]() { RequireClickPointOwnedBy(nullptr, point, &HitConfiguredWindow); }) == "none",
@@ -2203,10 +2428,27 @@ void TestDriverKeyRouting() {
 
   reset();
   foreground = nullptr;
+  driver.UseTestHitTester(&HitConfiguredWindow);
+  clickHitResult = window;
   Check(perform(R"([{"type":"pointer","id":"mouse","parameters":{"pointerType":"mouse"},"actions":[{"type":"pointerDown","button":0},{"type":"pointerUp","button":0}]}])") ==
                 "none" &&
             recordedInputs.size() == 2 && foregroundReads == 0 && activations.empty(),
         "pointer input neither reads nor changes the foreground");
+  if (foreign != nullptr) {
+    clickHitResult = foreign;
+    reset();
+    std::string covered;
+    Check(perform(R"([{"type":"pointer","id":"mouse","parameters":{"pointerType":"mouse"},"actions":[{"type":"pointerDown","button":0},{"type":"pointerUp","button":0}]}])",
+                  &covered) == kErrorNotInteractable &&
+              recordedInputs.empty() && !driver.HasDepressedInput() && Contains(covered, "another application"),
+          "a pointer press over another application's window is refused before it is sent");
+    reset();
+    Check(perform(R"([{"type":"wheel","id":"wheel","actions":[{"type":"scroll","x":1,"y":1,"deltaX":0,"deltaY":10}]}])") ==
+                  kErrorNotInteractable &&
+              recordedInputs.empty(),
+          "a scroll over another application's window is refused before the pointer moves");
+    clickHitResult = window;
+  }
   reset();
   Check(perform(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyUp","value":"a"}]}])") == "none" &&
             recordedInputs.size() == 1 && foregroundReads == 0,
@@ -2567,7 +2809,10 @@ void TestAutomationElementIdentity() {
 
   const std::vector<ElementSnapshot> fifth = automation.SnapshotWindowTree(context, token);
   const std::string lastEditId = idOfRole(fifth, "textbox");
+  const std::string lastButtonId = idOfRole(fifth, "button");
   windows.Destroy(window);
+  Check(FailureCode([&]() { automation.AccessibilityClick(lastButtonId, token); }) == kErrorStaleElement,
+        "an accessibility click on an element of a destroyed window answers stale-element, not unsupported");
   Check(FailureCode([&]() { automation.SnapshotElement(lastEditId, token); }, &message) == kErrorStaleElement,
         "an element of a destroyed window answers stale-element");
   automation.ForgetWindow(context.windowId);
@@ -2807,6 +3052,42 @@ void TestEffectLedger() {
     return Contains(refusal, "completed late");
   });
   ResetMutationQuarantineForTesting();
+
+  // A cancelled command stops waiting for a stalled provider call well before
+  // the call's own bound, and a mutation it abandons leaves the effect unknown.
+  CancellationToken cancelled;
+  cancelled.Cancel();
+  const auto cancelledCall = [&cancelled](ProviderCall kind, const std::shared_ptr<Gate>& stalled,
+                                          EffectLedger& ledger) {
+    const CancellationScope cancellationScope(cancelled);
+    const EffectScope effectScope(ledger);
+    const ULONGLONG started = GetTickCount64();
+    std::string outcome = "none";
+    try {
+      RunBoundedProviderCall(kind, [stalled]() { return stalled->Hold(); }, 5000, "Testing the provider",
+                             kErrorAutomationFailed);
+    } catch (const CancelledError&) {
+      outcome = "cancelled";
+    } catch (const HelperError& error) {
+      outcome = error.code();
+    }
+    return GetTickCount64() - started < 1000 ? outcome : outcome + " late";
+  };
+  EffectLedger readLedger;
+  const auto stalledRead = std::make_shared<Gate>();
+  Check(cancelledCall(ProviderCall::Read, stalledRead, readLedger) == "cancelled" &&
+            readLedger.Effect() == MutationEffect::None && !MutationsQuarantined(),
+        "a cancelled command stops waiting for a stalled read without quarantining the session");
+  stalledRead->Open();
+  EffectLedger mutationLedger;
+  const auto stalledMutation = std::make_shared<Gate>();
+  Check(cancelledCall(ProviderCall::Mutation, stalledMutation, mutationLedger) == "cancelled" &&
+            mutationLedger.Effect() == MutationEffect::Unknown && MutationsQuarantined(),
+        "a cancelled command stops waiting for a stalled mutation, leaving its effect unknown and quarantined");
+  FailureCode([]() { RequireMutationsAllowed(); }, &refusal);
+  Check(Contains(refusal, "cancelled before it settled"), "the quarantine names the cancelled mutation");
+  stalledMutation->Open();
+  ResetMutationQuarantineForTesting();
 }
 
 // Every mutating command reports what it handed to the application when it
@@ -2997,6 +3278,88 @@ void TestDriverMutationEffects() {
   driver.InputForTesting().UseTestSender(&RecordInput);
   driver.ReleaseInput();
 
+  // A key left down keeps the cross-process physical input lock until it is
+  // released, so another helper cannot interleave input with the held key.
+  const auto acquireElsewhere = []() {
+    std::string outcome = "unknown";
+    std::thread worker([&outcome]() {
+      const CancellationToken idle;
+      try {
+        const PhysicalInputScope scope(idle, 200);
+        outcome = scope.owns() ? "acquired" : "unowned";
+      } catch (const HelperError& error) {
+        outcome = error.code();
+      } catch (const CancelledError&) {
+        outcome = "cancelled";
+      }
+    });
+    worker.join();
+    return outcome;
+  };
+  const json::Value holdA = actions(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyDown","value":"a"}]}])");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdA, token); }) == "none" &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "a key left down keeps the physical input lock after its command");
+  Check(FailureCode([&]() { driver.Execute("releaseActions", empty, token); }) == "none" &&
+            !driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "releasing the held key releases the physical input lock");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdA, token); }) == "none" &&
+            driver.HasDepressedInput(),
+        "a key is held again for the release recovery");
+  driver.ReleaseInput();
+  Check(!driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "the release recovery frees the held key and the physical input lock");
+
+  const json::Value holdShift =
+      actions(R"([{"type":"key","id":"keyboard","actions":[{"type":"keyDown","value":"\uE008"}]}])");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdShift, token); }) == "none" &&
+            driver.HasDepressedInput(),
+        "a modifier is held for failed-release recovery");
+  driver.InputForTesting().UseTestSender(&RejectSelectedReleases);
+  driver.ReleaseInput();
+  Check(driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "failed shutdown cleanup keeps the key and the physical input lock");
+  Check(FailureCode([&]() { driver.Execute("dispose", empty, token); }) == kErrorInputFailed &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "dispose refuses to acknowledge while input cannot be released");
+  int environmentChecks = 0;
+  driver.InputForTesting().UseTestEnvironment([&environmentChecks]() {
+    return environmentChecks++ == 0
+               ? InteractiveEnvironmentForTesting()
+               : InteractiveWith([](InputEnvironment& environment) { environment.lock = SessionLock::Locked; });
+  });
+  driver.UseTestHitTester(&HitConfiguredWindow);
+  clickHitResult = window;
+  const int clicksBefore = buttonClicks.load();
+  Check(effectOf("click", StringFields({{"elementId", buttonId}, {"mode", "auto"}}), token, &code) == "unknown" &&
+            code == kErrorInputUnavailable && driver.HasDepressedInput() && buttonClicks.load() == clicksBefore &&
+            acquireElsewhere() == kErrorInputBusy,
+        "automatic click does not hide failed input cleanup behind accessibility fallback");
+  driver.InputForTesting().UseTestEnvironment([]() { return InteractiveEnvironmentForTesting(); });
+  Check(effectOf("releaseActions", empty, token, &code) == "unknown" && code == kErrorInputFailed &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "a failed key release retains the lock and reports an unknown effect");
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  Check(FailureCode([&]() { driver.Execute("releaseActions", empty, token); }) == "none" &&
+            !driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "a successful key-release retry frees the physical input lock");
+
+  driver.UseTestHitTester(&HitConfiguredWindow);
+  clickHitResult = window;
+  const json::Value holdButton = actions(
+      R"([{"type":"pointer","id":"mouse","parameters":{"pointerType":"mouse"},"actions":[{"type":"pointerDown","button":0}]}])");
+  Check(FailureCode([&]() { driver.Execute("performActions", holdButton, token); }) == "none" &&
+            driver.HasDepressedInput(),
+        "a pointer button is held for failed-release recovery");
+  driver.InputForTesting().UseTestSender(&RejectSelectedReleases);
+  Check(effectOf("releaseActions", empty, token, &code) == "unknown" && code == kErrorInputFailed &&
+            driver.HasDepressedInput() && acquireElsewhere() == kErrorInputBusy,
+        "a failed pointer release retains the lock and reports an unknown effect");
+  driver.InputForTesting().UseTestSender(&RecordInput);
+  Check(FailureCode([&]() { driver.Execute("releaseActions", empty, token); }) == "none" &&
+            !driver.HasDepressedInput() && acquireElsewhere() == "acquired",
+        "a successful pointer-release retry frees the physical input lock");
+
   // Abandoned: the provider never returns from the value write.
   ResetMutationQuarantineForTesting();
   const auto gate = std::make_shared<Gate>();
@@ -3122,6 +3485,76 @@ void TestHostQueuedCancellation() {
   Check(!find("response", "queued-click") && !find("response", "queued-read"),
         "cancelled queued requests never produce a response");
 
+  CloseHandle(testOutput);
+  server.join();
+  CloseHandle(hostOutput);
+  reader.join();
+  CloseHandle(hostInput);
+  CloseHandle(testInput);
+}
+
+// The protocol fails the transport on a frame that is not valid JSON or not a
+// JSON object: the host stops reading, never runs what follows, and exits with
+// a failure.
+void TestHostRejectsFrame(std::string_view rejected, const std::string& subject) {
+  HANDLE hostInput = nullptr;
+  HANDLE testOutput = nullptr;
+  HANDLE testInput = nullptr;
+  HANDLE hostOutput = nullptr;
+  if (!CreatePipe(&hostInput, &testOutput, nullptr, 0) || !CreatePipe(&testInput, &hostOutput, nullptr, 0)) {
+    Check(false, "the " + subject + " test creates its pipes");
+    return;
+  }
+
+  std::mutex mutex;
+  std::vector<std::string> executed;
+  const auto blocker = std::make_shared<Gate>();
+  Host host;
+  host.SetBeforeExecuteForTesting([&](const std::string& id, const std::string&) {
+    {
+      const std::lock_guard<std::mutex> guard(mutex);
+      executed.push_back(id);
+    }
+    if (id == "blocker") {
+      blocker->Hold();
+    }
+  });
+  std::thread reader([&]() {
+    try {
+      FrameReader frames(testInput);
+      Frame frame;
+      while (frames.Read(frame)) {
+      }
+    } catch (...) {
+    }
+  });
+  std::atomic<int> exitCode{-1};
+  std::thread server([&]() { exitCode.store(host.Run(hostInput, hostOutput)); });
+
+  FrameWriter writer(testOutput);
+  const auto request = [&writer](const std::string& id) {
+    json::Value message = json::Value::Object();
+    message.Set("type", json::Value::String(std::string("request")));
+    message.Set("id", json::Value::String(id));
+    message.Set("command", json::Value::String(std::string("probe")));
+    message.Set("params", json::Value::Object());
+    writer.WriteJson(message);
+  };
+  const auto ran = [&](const std::string& id) {
+    const std::lock_guard<std::mutex> guard(mutex);
+    return std::find(executed.begin(), executed.end(), id) != executed.end();
+  };
+
+  request("blocker");
+  Check(WaitFor([&]() { return ran("blocker"); }), "the host worker starts the request sent before the " + subject);
+  writer.WriteJson(rejected);
+  request("after");
+  blocker->Open();
+  const bool returned = WaitFor([&]() { return exitCode.load() != -1; }, 5000);
+  Check(returned && exitCode.load() == 1, "a " + subject + " fails the transport and the host exits with a failure");
+  Check(!ran("after"), "a request after the " + subject + " is never run");
+
+  // Ends a host that kept reading, so a failed check cannot hang the run.
   CloseHandle(testOutput);
   server.join();
   CloseHandle(hostOutput);
@@ -3442,6 +3875,8 @@ int RunSelfTest() {
   TestInputEnvironment();
   TestInjectionIntegrity();
   TestActivationRefusal();
+  TestHungWindowProbe();
+  TestStalledRestoreEffect();
   TestHelperSessionCheck();
   TestInputAuthorityOnThisMachine();
   TestInputReevaluation();
@@ -3462,6 +3897,8 @@ int RunSelfTest() {
   TestEffectLedger();
   TestDriverMutationEffects();
   TestHostQueuedCancellation();
+  TestHostRejectsFrame(R"({"type":"request","id":"truncated")", "malformed frame");
+  TestHostRejectsFrame("[]", "non-object frame");
   TestDriverHitTestBeyondScreens();
   TestAccessibilityActions();
   TestDriverObservation();

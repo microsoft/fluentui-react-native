@@ -362,7 +362,7 @@ describe('persisted desktop run queries', () => {
     );
     await reporter.finish();
     const page = (await client.query({ operation: 'failures', runId: reporter.runId })) as DesktopRunPage;
-    expect(page.items[0].message).toBe('Cannot write <run>/commands/output.log under <artifacts>');
+    expect(page.items[0].message).toBe(`Cannot write <run>${path.sep}commands${path.sep}output.log under <artifacts>`);
   });
 
   test('malformed/inconsistent persisted data never returns a success-shaped fallback', async () => {

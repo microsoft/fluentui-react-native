@@ -248,8 +248,13 @@ forwarded over the life of the helper.
 
 If the helper dies while input may be depressed, Node invokes the same verified
 binary in restricted `--release-input` mode with only the recorded keys and
-buttons, bounded to 5 seconds and 16 KiB of output. Further physical input must
-not proceed if release cannot be proven.
+buttons, bounded to 5 seconds and 16 KiB of output. The adapter retains its
+mirrored action, typing, and click candidates after an uncertain command or a
+failed release until recovery succeeds. This mirror does not include keyboard
+clear's synthetic shortcut keys, and Windows recovery cannot always reconstruct
+the exact injected keyboard stroke. Recovery after helper exit therefore does
+not prove that all input was released. On Windows, an abandoned mutex warns
+only one acquirer and is not a persistent cross-process recovery barrier.
 
 The Windows helper also has three restricted one-shot modes, `--private-storage`,
 `--service-identity`, and `--application-incarnation`. The `/authority` adapters

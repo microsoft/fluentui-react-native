@@ -427,11 +427,16 @@ void WindowEventMonitor::RememberWindow(HWND window, DWORD processId) {
   const std::lock_guard<std::mutex> guard(stateMutex_);
   if (knownWindows_.size() >= kMaximumKnownWindows) {
     // Past the bound, windows seen earlier lose their destroy events, which
-    // only narrows the advisory timeline; tracked windows are re-added below.
-    knownWindows_.clear();
+    // only narrows the advisory timeline; tracked windows keep their entry,
+    // each with the process it was recorded for.
+    std::unordered_map<HWND, DWORD> retained;
     for (const auto& tracked : trackedByWindow_) {
-      knownWindows_[tracked.first] = processId;
+      const auto known = knownWindows_.find(tracked.first);
+      if (known != knownWindows_.end()) {
+        retained.emplace(known->first, known->second);
+      }
     }
+    knownWindows_ = std::move(retained);
   }
   knownWindows_[window] = processId;
 }

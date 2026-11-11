@@ -110,7 +110,10 @@ class Automation {
   // as not interactable before anything is dispatched, and a failed write
   // fails with the effect the ledger recorded.
   bool TryClearValue(const std::string& elementId, bool strict = false);
-  bool HasKeyboardFocus(const std::string& elementId);
+  // Whether the element has keyboard focus. A stale element fails as stale; any
+  // other failed read answers false and leaves its HRESULT in `failure`, so a
+  // caller that polls can report the failure instead of "unfocused".
+  bool HasKeyboardFocus(const std::string& elementId, HRESULT& failure);
 
   void ForgetWindow(const std::string& windowId);
   void Reset();

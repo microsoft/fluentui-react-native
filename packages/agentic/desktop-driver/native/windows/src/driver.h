@@ -57,6 +57,8 @@ class Driver {
  public:
   CommandResult Execute(const std::string& command, const json::Value& params, const CancellationToken& token);
 
+  // Releases depressed input and, once nothing stays down, the physical input
+  // lock held between commands. Call it on the thread that runs commands.
   void ReleaseInput() noexcept;
   bool HasDepressedInput() const noexcept { return input_.HasDepressedInput(); }
 
@@ -80,16 +82,18 @@ class Driver {
     foregroundReader_ = std::move(reader);
     activator_ = std::move(activator);
   }
+  // Replaces the hit test that checks where a pointer press or scroll lands.
+  void UseTestHitTester(ClickHitTester hitTest) { hitTester_ = hitTest; }
 
  private:
   CommandResult ExecuteCommand(const std::string& command, const json::Value& params, const CancellationToken& token);
   void ForgetRetiredWindows() noexcept;
-  // Holds the cross-process physical input mutex for a whole action chain and
-  // guarantees that a failed or cancelled chain releases its depressed input
-  // before the next owner acquires the lock.
+  // Holds the cross-process physical input mutex for a whole action chain.
+  // Failed cleanup retains both the unreleased input and lock while this
+  // worker lives; successful cleanup releases the lock.
   template <typename Fn>
   void RunPhysical(const CancellationToken& token, Fn&& body) {
-    const PhysicalInputScope scope(token);
+    PhysicalInputScope scope(token);
     input_.SyncPointerFromCursor();
     try {
       body();
@@ -101,7 +105,23 @@ class Driver {
           // Preserve the original failure.
         }
       }
+      if (input_.HasDepressedInput()) {
+        // A failed cleanup leaves the command's physical-input state uncertain.
+        RecordDispatching();
+      }
+      HoldInputWhileDepressed(scope);
       throw;
+    }
+    HoldInputWhileDepressed(scope);
+  }
+  // Called on the thread that runs commands, which owns the mutex.
+  void HoldInputWhileDepressed(PhysicalInputScope& scope) noexcept {
+    if (!input_.HasDepressedInput()) {
+      heldInput_.Release();
+      return;
+    }
+    if (!heldInput_.owns()) {
+      heldInput_ = std::move(scope);
     }
   }
 
@@ -123,6 +143,10 @@ class Driver {
   // `window`, or to any leased application when `window` is null.
   InputController::KeyboardGuard KeyboardGuardFor(HWND window);
   void ClickPhysically(const std::string& elementId, const CancellationToken& token);
+  // Refuses a pointer press or scroll whose point a window of an application
+  // this helper did not launch or attach to covers. Without a lease the
+  // pointer has no application to stay within, so nothing is checked.
+  void RequirePointerOverLeasedApplication(POINT point) const;
   json::Value ProbeResult(const json::Value& params);
   json::Value WindowSummary(const WindowInfo& info);
   void PerformActions(const json::Value& actions, const CancellationToken& token);
@@ -137,8 +161,11 @@ class Driver {
   CommandJournal journal_;
   // What the running mutating command has handed to the application.
   EffectLedger effects_;
+  // Physical input held between commands while keys or buttons stay down.
+  PhysicalInputScope heldInput_;
   ForegroundReader foregroundReader_;
   WindowActivator activator_;
+  ClickHitTester hitTester_{&WindowFromPoint};
 };
 
 }  // namespace furn

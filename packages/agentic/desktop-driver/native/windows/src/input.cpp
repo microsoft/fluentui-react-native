@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <exception>
 
 #include "geometry.h"
 #include "settlement.h"
@@ -352,6 +353,7 @@ void InputController::PointerDown(int button, const CancellationToken& token) {
   // Carry the coordinate so the press lands where the pointer was placed even if
   // another input source has since moved the cursor.
   std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, MOUSEEVENTF_MOVE | downFlag, mouseData)};
+  pressedButtons_.reserve(pressedButtons_.size() + 1);
   Send(inputs);
   pressedButtons_.push_back(button);
 }
@@ -372,7 +374,10 @@ void InputController::PointerUp(int button, const CancellationToken& token) {
 }
 
 void InputController::PointerCancel() {
-  for (auto iterator = pressedButtons_.rbegin(); iterator != pressedButtons_.rend(); ++iterator) {
+  std::exception_ptr failure;
+  auto iterator = pressedButtons_.end();
+  while (iterator != pressedButtons_.begin()) {
+    --iterator;
     DWORD downFlag = 0;
     DWORD upFlag = 0;
     DWORD mouseData = 0;
@@ -380,11 +385,16 @@ void InputController::PointerCancel() {
     std::vector<INPUT> inputs{MakeAbsoluteMouseInput(pointer_, upFlag, mouseData)};
     try {
       Send(inputs, false);
+      iterator = pressedButtons_.erase(iterator);
     } catch (const HelperError&) {
-      // Release as much as possible; the remaining ledger entries still drop.
+      if (!failure) {
+        failure = std::current_exception();
+      }
     }
   }
-  pressedButtons_.clear();
+  if (failure) {
+    std::rethrow_exception(failure);
+  }
 }
 
 void InputController::ClickAt(POINT target, const CancellationToken& token) {
@@ -480,12 +490,7 @@ void InputController::KeyDown(std::wstring_view value, const CancellationToken& 
   }
   const std::vector<KeyStroke> strokes = StrokesForValue(value);
   GuardKeyPress();
-  // The ledger records the press before injection so a partially injected
-  // sequence is still released by the ledger.
-  pressedKeys_.emplace_back(std::wstring(value), strokes);
-  for (const KeyStroke& stroke : strokes) {
-    SendStroke(stroke, true);
-  }
+  PressStrokes(std::wstring(value), strokes);
 }
 
 void InputController::KeyUp(std::wstring_view value, const CancellationToken& token) {
@@ -502,8 +507,9 @@ void InputController::KeyUp(std::wstring_view value, const CancellationToken& to
       continue;
     }
     RequirePhysicalInput();
-    for (auto stroke = iterator->second.rbegin(); stroke != iterator->second.rend(); ++stroke) {
-      SendStroke(*stroke, false);
+    while (!iterator->second.empty()) {
+      SendStroke(iterator->second.back(), false);
+      iterator->second.pop_back();
     }
     pressedKeys_.erase(std::next(iterator).base());
     return;
@@ -539,17 +545,34 @@ void InputController::TypeText(std::wstring_view text, const CancellationToken& 
   }
 }
 
+void InputController::PressStrokes(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes) {
+  std::vector<KeyStroke> recorded;
+  // Recording an accepted stroke must not allocate after injection.
+  recorded.reserve(strokes.size());
+  pressedKeys_.emplace_back(std::move(ledgerKey), std::move(recorded));
+  auto& held = pressedKeys_.back().second;
+  try {
+    for (const KeyStroke& stroke : strokes) {
+      SendStroke(stroke, true);
+      held.push_back(stroke);
+    }
+  } catch (...) {
+    if (held.empty()) {
+      pressedKeys_.pop_back();
+    }
+    throw;
+  }
+}
+
 void InputController::PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
                                       const CancellationToken& token) {
   token.ThrowIfCancelled();
   GuardKeyPress();
-  pressedKeys_.emplace_back(std::move(ledgerKey), strokes);
-  for (const KeyStroke& stroke : strokes) {
-    SendStroke(stroke, true);
-  }
-  const std::vector<KeyStroke>& recorded = pressedKeys_.back().second;
-  for (auto stroke = recorded.rbegin(); stroke != recorded.rend(); ++stroke) {
-    SendStroke(*stroke, false);
+  PressStrokes(std::move(ledgerKey), strokes);
+  auto& recorded = pressedKeys_.back().second;
+  while (!recorded.empty()) {
+    SendStroke(recorded.back(), false);
+    recorded.pop_back();
   }
   pressedKeys_.pop_back();
 }
@@ -563,8 +586,7 @@ void InputController::PressChord(const std::vector<WORD>& virtualKeys, const Can
     const KeyStroke stroke{false, key, false};
     // Chord keys enter the ledger under a synthetic name that can never
     // collide with a WebDriver key value, so a failed chord still releases.
-    pressedKeys_.emplace_back(L"chord:" + std::to_wstring(key), std::vector<KeyStroke>{stroke});
-    SendStroke(stroke, true);
+    PressStrokes(L"chord:" + std::to_wstring(key), {stroke});
   }
   while (pressedKeys_.size() > base) {
     const std::vector<KeyStroke>& strokes = pressedKeys_.back().second;
@@ -636,17 +658,36 @@ std::size_t InputController::ReleaseDesktopModifiers() {
 }
 
 void InputController::ReleaseAll() {
-  for (auto iterator = pressedKeys_.rbegin(); iterator != pressedKeys_.rend(); ++iterator) {
-    for (auto stroke = iterator->second.rbegin(); stroke != iterator->second.rend(); ++stroke) {
+  std::exception_ptr failure;
+  auto iterator = pressedKeys_.end();
+  while (iterator != pressedKeys_.begin()) {
+    --iterator;
+    auto stroke = iterator->second.end();
+    while (stroke != iterator->second.begin()) {
+      --stroke;
       try {
         SendStroke(*stroke, false, false);
+        stroke = iterator->second.erase(stroke);
       } catch (const HelperError&) {
-        // Continue releasing the remaining ledger entries.
+        if (!failure) {
+          failure = std::current_exception();
+        }
       }
     }
+    if (iterator->second.empty()) {
+      iterator = pressedKeys_.erase(iterator);
+    }
   }
-  pressedKeys_.clear();
-  PointerCancel();
+  try {
+    PointerCancel();
+  } catch (const HelperError&) {
+    if (!failure) {
+      failure = std::current_exception();
+    }
+  }
+  if (failure) {
+    std::rethrow_exception(failure);
+  }
 }
 
 }  // namespace furn

@@ -24,9 +24,10 @@ export type ScriptedNativeControl = {
 export type ScriptedNativeOptions = {
   /**
    * What the helper does with `dispose`. `acknowledge` replies and exits. `exit-then-acknowledge` exits first and
-   * replies a moment later, as a helper whose exit overtakes its final output. `ignore` never replies.
+   * replies a moment later, as a helper whose exit overtakes its final output. `reject` reports a failure and
+   * `ignore` never replies.
    */
-  dispose?: 'acknowledge' | 'exit-then-acknowledge' | 'ignore';
+  dispose?: 'acknowledge' | 'exit-then-acknowledge' | 'ignore' | 'reject';
   /** The bytes sent at startup, given the encoded hello. Return nothing to stay silent. */
   greeting?: (hello: Buffer) => Uint8Array | undefined;
   /** Called for each `cancel`. Without it the helper ignores cancellation. */
@@ -161,6 +162,8 @@ export function scriptNativeHelperSession(
     } else if (mode === 'exit-then-acknowledge') {
       child.exit(0);
       setTimeout(() => send({ id, result: {}, type: 'response' }), 5);
+    } else if (mode === 'reject') {
+      send({ error: { code: 'input-failed', message: 'Dispose could not release input.' }, id, type: 'response' });
     }
   };
   child.stdin.on('data', (chunk: Buffer) => decoder.write(chunk));
