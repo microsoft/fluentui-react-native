@@ -2,6 +2,10 @@
 
 # React Native macOS: API and functional divergence
 
+> **Retained source study, not the FURN release baseline.** This study describes the upstream revision below.
+> Read the [guide](../../platform-divergence.md) and [version/capability reconciliation](platform-capabilities.md)
+> before applying it to FURN's patched 0.81.9. References to "this repository" below mean react-native-macos.
+
 <!-- [macOS] -->
 
 ## Scope and overall assessment
@@ -22,7 +26,7 @@ The fork adds general key-down/key-up handling, modifier-key information, and de
 
 **Implication:** A desktop component needs an explicit keyboard-focus and activation design. Keyboard focus, accessibility focus, and the JavaScript gesture responder are related but distinct; configuring one does not automatically configure the others. These primitives do not themselves provide a complete application-level focus-zone or shortcut-management system.
 
-Sources: [Fabric view focus and keyboard handling](packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm), [macOS view props](packages/react-native/ReactCommon/react/renderer/components/view/platform/macos/react/renderer/components/view/HostPlatformViewProps.h), [Pressability](packages/react-native/Libraries/Pressability/Pressability.js), [app window setup](packages/react-native/Libraries/AppDelegate/RCTAppDelegate.mm).
+Sources: [Fabric view focus and keyboard handling](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm), [macOS view props](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactCommon/react/renderer/components/view/platform/macos/react/renderer/components/view/HostPlatformViewProps.h), [Pressability](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Pressability/Pressability.js), [app window setup](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/AppDelegate/RCTAppDelegate.mm).
 
 ## 2. Accessibility includes macOS display modes and AppKit semantics
 
@@ -34,7 +38,7 @@ This is not complete semantic parity. Current Fabric view code excludes some iOS
 
 **Implication:** Accessibility divergence has two dimensions: additional desktop preferences and a different accessibility-tree contract. High contrast is an explicit addition; reduced motion and VoiceOver detection are platform adaptations, not newly invented accessibility modes. Components need macOS-specific verification of roles, states, actions, and keyboard navigation.
 
-Sources: [AccessibilityInfo](packages/react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo.js), [native accessibility manager](packages/react-native/React/CoreModules/RCTAccessibilityManager.mm), [Fabric accessibility mapping](packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm).
+Sources: [AccessibilityInfo](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Components/AccessibilityInfo/AccessibilityInfo.js), [native accessibility manager](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/CoreModules/RCTAccessibilityManager.mm), [Fabric accessibility mapping](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm).
 
 ## 3. Top-level windows are native desktop objects, not mobile screens
 
@@ -46,7 +50,7 @@ The boundary matters: the package's public JavaScript exports do **not** include
 
 **Implication:** The native host owns the desktop shell. Multi-window applications must decide how windows, React roots, focus, and lifecycle relate, rather than treating a window as just another mobile navigation screen.
 
-Sources: [app delegate](packages/react-native/Libraries/AppDelegate/RCTAppDelegate.mm), [React Native factory](packages/react-native/Libraries/AppDelegate/RCTReactNativeFactory.mm), [surface hosting](packages/react-native/React/Base/Surface/SurfaceHostingView/RCTSurfaceHostingView.mm), [view API](packages/react-native/Libraries/Components/View/ViewPropTypes.js), [public exports](packages/react-native/index.js).
+Sources: [app delegate](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/AppDelegate/RCTAppDelegate.mm), [React Native factory](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/AppDelegate/RCTReactNativeFactory.mm), [surface hosting](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Base/Surface/SurfaceHostingView/RCTSurfaceHostingView.mm), [view API](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Components/View/ViewPropTypes.js), [public exports](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/index.js).
 
 ## 4. Hosting changes at the native boundary, not through a new instance model
 
@@ -56,7 +60,7 @@ The substantive adaptation is that hosted content is an AppKit view hierarchy. T
 
 **Implication:** The useful distinction is **React runtime versus React surface versus native window**. A window is not inherently a separate JavaScript runtime. Applications still need to choose shared-host versus separate-host ownership and coordinate teardown and module state. The sources do not justify describing macOS as having an entirely different runtime or automatic per-window instance isolation.
 
-Sources: [root-view factory](packages/react-native/Libraries/AppDelegate/RCTRootViewFactory.mm), [React host API](packages/react-native/ReactCommon/react/runtime/platform/ios/ReactCommon/RCTHost.h), [React instance](packages/react-native/ReactCommon/react/runtime/platform/ios/ReactCommon/RCTInstance.mm), [RCTUIKit architecture](packages/react-native/ReactApple/Libraries/RCTUIKit/README.md), [surface hosting](packages/react-native/React/Base/Surface/SurfaceHostingView/RCTSurfaceHostingView.mm).
+Sources: [root-view factory](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/AppDelegate/RCTRootViewFactory.mm), [React host API](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactCommon/react/runtime/platform/ios/ReactCommon/RCTHost.h), [React instance](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactCommon/react/runtime/platform/ios/ReactCommon/RCTInstance.mm), [RCTUIKit architecture](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactApple/Libraries/RCTUIKit/README.md), [surface hosting](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Base/Surface/SurfaceHostingView/RCTSurfaceHostingView.mm).
 
 ## 5. Mouse interaction and desktop data transfer extend the touch model
 
@@ -66,7 +70,7 @@ The fork also exposes native drop-target behavior through accepted data types an
 
 **Implication:** Touch-compatible press handling is only part of a desktop control's interaction contract. Context-menu triggers, hover feedback, drag feedback, and data-transfer behavior need deliberate support. The presence of drop-target APIs should not be read as a complete drag-source framework or a built-in context-menu component.
 
-Sources: [view props](packages/react-native/Libraries/Components/View/ViewPropTypes.js), [desktop event surface](packages/react-native/ReactCommon/react/renderer/components/view/platform/macos/react/renderer/components/view/HostPlatformViewEventEmitter.h), [native mouse and pasteboard handling](packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm), [Pressability](packages/react-native/Libraries/Pressability/Pressability.js), [cursor vocabulary](packages/react-native/React/Views/RCTCursor.h).
+Sources: [view props](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Components/View/ViewPropTypes.js), [desktop event surface](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactCommon/react/renderer/components/view/platform/macos/react/renderer/components/view/HostPlatformViewEventEmitter.h), [native mouse and pasteboard handling](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm), [Pressability](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Pressability/Pressability.js), [cursor vocabulary](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Views/RCTCursor.h).
 
 ## 6. Text entry integrates desktop editing workflows
 
@@ -76,7 +80,7 @@ These extend the usual controlled-text, selection, and submit APIs rather than r
 
 **Implication:** Editors, search boxes, and command inputs can participate in desktop editing conventions without rebuilding text entry from scratch. Conversely, mobile assumptions about Return, software keyboards, and text-field focus do not fully describe macOS behavior.
 
-Sources: [TextInput API additions](packages/react-native/Libraries/Components/TextInput/TextInput.flow.js), [Fabric text-input implementation](packages/react-native/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm), [native text-input commands](packages/react-native/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputNativeCommands.h).
+Sources: [TextInput API additions](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Components/TextInput/TextInput.flow.js), [Fabric text-input implementation](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm), [native text-input commands](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputNativeCommands.h).
 
 ## 7. Scrolling and viewport behavior follow desktop geometry
 
@@ -86,7 +90,7 @@ Window sizing also differs from device sizing. The default macOS `Dimensions` im
 
 **Implication:** Resizable windows and embedded roots make responsive layout central. Multi-window hosts must not assume a global dimensions value is automatically scoped to the particular surface being rendered, and mobile scrolling-event assumptions need checking against the macOS implementation.
 
-Sources: [Fabric scroll view](packages/react-native/React/Fabric/Mounting/ComponentViews/ScrollView/RCTScrollViewComponentView.mm), [AppKit scroll compatibility layer](packages/react-native/ReactApple/Libraries/RCTUIKit/RCTUIScrollView.m), [device/window metrics](packages/react-native/React/CoreModules/RCTDeviceInfo.mm), [surface sizing](packages/react-native/React/Base/Surface/SurfaceHostingView/RCTSurfaceHostingView.mm).
+Sources: [Fabric scroll view](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/ScrollView/RCTScrollViewComponentView.mm), [AppKit scroll compatibility layer](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactApple/Libraries/RCTUIKit/RCTUIScrollView.m), [device/window metrics](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/CoreModules/RCTDeviceInfo.mm), [surface sizing](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Base/Surface/SurfaceHostingView/RCTSurfaceHostingView.mm).
 
 ## 8. Appearance includes desktop system colors, effects, and vibrancy
 
@@ -96,7 +100,7 @@ Views can opt into vibrancy participation, and native components respond to AppK
 
 **Implication:** Desktop appearance is more than a light/dark switch. Components can use system control colors and state effects, but applications still need to design high-contrast behavior and decide where native materials belong.
 
-Sources: [macOS color API](packages/react-native/Libraries/StyleSheet/PlatformColorValueTypesMacOS.macos.js), [platform-color overview](docsite/api/platform-color.md), [view vibrancy API](packages/react-native/Libraries/Components/View/ViewPropTypes.js), [native appearance handling](packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm).
+Sources: [macOS color API](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/StyleSheet/PlatformColorValueTypesMacOS.macos.js), [platform-color overview](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/docsite/api/platform-color.md), [view vibrancy API](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Components/View/ViewPropTypes.js), [native appearance handling](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm).
 
 ## 9. Dialogs and application services use desktop lifecycle semantics
 
@@ -106,7 +110,7 @@ Sources: [macOS color API](packages/react-native/Libraries/StyleSheet/PlatformCo
 
 **Implication:** Window activation, application activation, and component visibility are separate concerns. Desktop hosts need an explicit policy for URL routing, dialog ownership, and which window receives attention. Reusing the same JavaScript API names does not imply identical mobile lifecycle behavior.
 
-Sources: [Alert API](packages/react-native/Libraries/Alert/Alert.js), [native alert presentation](packages/react-native/React/CoreModules/RCTAlertManager.mm), [AppState](packages/react-native/React/CoreModules/RCTAppState.mm), [Linking](packages/react-native/Libraries/LinkingIOS/RCTLinkingManager.mm).
+Sources: [Alert API](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Alert/Alert.js), [native alert presentation](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/CoreModules/RCTAlertManager.mm), [AppState](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/CoreModules/RCTAppState.mm), [Linking](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/LinkingIOS/RCTLinkingManager.mm).
 
 ## 10. macOS is a distinct platform target for applications and libraries
 
@@ -116,7 +120,7 @@ Native dependencies must support an AppKit/macOS target. Sharing Objective-C or 
 
 **Implication:** Much application logic remains reusable, but platform conditionals and native-library support need auditing. A package that works on iOS is not automatically a macOS-compatible package, and an iOS-only `Platform.select` branch will not automatically be selected.
 
-Sources: [Platform implementation](packages/react-native/Libraries/Utilities/Platform.macos.js), [package identity](packages/react-native/package.json), [macOS setup](docsite/docs/getting-started.md), [native-library porting guidance](docsite/docs/guides/native-development.md), [AppKit compatibility architecture](packages/react-native/ReactApple/Libraries/RCTUIKit/README.md).
+Sources: [Platform implementation](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/Libraries/Utilities/Platform.macos.js), [package identity](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/package.json), [macOS setup](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/docsite/docs/getting-started.md), [native-library porting guidance](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/docsite/docs/guides/native-development.md), [AppKit compatibility architecture](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/ReactApple/Libraries/RCTUIKit/README.md).
 
 ## Compatibility boundaries, not just added features
 
@@ -127,7 +131,7 @@ The fork is not a strict functional superset of upstream React Native. Important
 - **Accessibility parity:** Shared prop names and type declarations do not establish equivalent AppKit roles, states, actions, or tree behavior.
 - **Renderer and release differences:** A feature present in Paper source, older examples, or a stable release is not necessarily implemented by the current Fabric path. This document is a source-level architectural overview, not an exhaustive supported-API matrix.
 
-Sources: [Fabric modal implementation](packages/react-native/React/Fabric/Mounting/ComponentViews/Modal/RCTModalHostViewComponentView.mm), [keyboard observer](packages/react-native/React/CoreModules/RCTKeyboardObserver.mm), [core-module platform exclusions](packages/react-native/React/CoreModules/React-CoreModules.podspec), [Fabric accessibility handling](packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm).
+Sources: [Fabric modal implementation](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/Modal/RCTModalHostViewComponentView.mm), [keyboard observer](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/CoreModules/RCTKeyboardObserver.mm), [core-module platform exclusions](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/CoreModules/React-CoreModules.podspec), [Fabric accessibility handling](https://github.com/microsoft/react-native-macos/blob/459c4e15de37205ee3bcd94db5dfe767a4e04d56/packages/react-native/React/Fabric/Mounting/ComponentViews/View/RCTViewComponentView.mm).
 
 ## Architectural takeaway
 

@@ -1,19 +1,30 @@
 # Office React Native Divergence: Hosting, Instance Management, and Platform Overrides
 
+> **Retained historical source study.** The current research did not access the Office monorepo.
+> "Observed" below describes the original investigation, not independent revalidation here.
+> Read [Office hosting](office-hosting.md) for reconciled conclusions and explicit open gates.
+> Original prose and source identifiers are retained; they are not public implementation or deployment guarantees.
+>
+> **Reconciliation:** broad contrasts below such as "one host per app", process-exit-only lifetime, single-bundle
+> loading, or an inability to patch a binary dependency are not universal core/platform constraints.
+> Core has host/surface lifecycle and split-bundle seams; Office's distinctions are its standardized policy and
+> consumption model. Native 0.81.9 and JS 0.81.6 are separate inputs, while the study's third-party-versus-system
+> JSC descriptions remain inconsistent. See [the corrected synthesis](office-hosting.md#corrections-that-matter-for-layering).
+
 **Baseline:** Office monorepo `office/office/Office`, `main` @ `8b0baa0708`
 **Scope:** Places where Office code replaces, wraps, patches, or extends the platform layers of
 `react-native-windows` / `react-native-win32` (Win32), `react-native-macos` (macOS and iOS), and
 Office's React Native fork (Android). The emphasis is conceptual, with particular attention to
 **React Native hosting and instance management**. It is not a line-item diff.
-**Companion docs:** `windows-divergence.md` and `macos-divergence.md` (same-day analyses).
+**Companion studies:** [Windows](windows-source-study.md) and [macOS](macos-source-study.md).
 
 **Evidence legend**
 
-| Label | Meaning |
-|---|---|
-| **Observed** | Read in source, build files, or Office-owned docs at the baseline. |
+| Label        | Meaning                                                                |
+| ------------ | ---------------------------------------------------------------------- |
+| **Observed** | Read in source, build files, or Office-owned docs at the baseline.     |
 | **Inferred** | Reasoned from observed structure; not directly stated in code or docs. |
-| **Open** | Not established; see [Open questions](#16-open-questions). |
+| **Open**     | Not established; see [Open questions](#16-open-questions).             |
 
 > The local enlistment is a sparse checkout. Most files were read with `git show HEAD:<path>` or
 > the Bluebird index. Paths are repo-relative.
@@ -28,38 +39,38 @@ it puts a **cross-platform Office hosting layer, `Mso::React` (project `reactnat
 apps and React Native. Each platform implementation then specializes or overrides the underlying
 React Native host. These are the biggest conceptual divergences:
 
-1. **One Office hosting contract over three different React Native hosts.** *Observed.*
+1. **One Office hosting contract over three different React Native hosts.** _Observed._
    - Apps program against `IReactHost`, `IReactViewHost`, `IReactInstance`, and `IReactViewInstance`,
      configured by `ReactOptions` (also called `SDXDescriptor`).
    - Win32 implements them over RNW's WinRT `ReactNativeHost`.
    - Apple implements them over an Office subclass of `RCTCxxBridge`.
    - Android implements them over Office's fork of `ReactInstanceManager`/`ReactHostImpl`.
-2. **An identity-keyed "SDX" model.** *Observed.*
-   - Every React Native experience is an *SDX*: an identity, a base path, an ordered list of JS bundles,
+2. **An identity-keyed "SDX" model.** _Observed._
+   - Every React Native experience is an _SDX_: an identity, a base path, an ordered list of JS bundles,
      native module providers, callbacks, dev options, and a property bag.
    - SDXs can be registered process-wide (`RegisterSDX`).
    - Office keeps a legacy V1 path ("get or create instance by identity") on Android and Apple, and a
      V2 path (an explicit host object) on all platforms.
-3. **Office owns instance lifetime.** *Observed.*
+3. **Office owns instance lifetime.** _Observed._
    - Load, unload, and reload are serialized, asynchronous actions that return `Mso::Future`s.
    - A process-wide `ReactHostRegistry` force-closes every host at liblet shutdown.
    - V1 instances on mobile and Apple are kept alive by their root views and a debounce period.
    - Upstream React Native has no comparable process-wide shutdown model.
-4. **Shared platform bundles plus per-SDX app bundles.** *Observed.*
-   - Office splits JS into shared *platform bundles* (`foundation`, `ui`) and per-SDX *app bundles*.
+4. **Shared platform bundles plus per-SDX app bundles.** _Observed._
+   - Office splits JS into shared _platform bundles_ (`foundation`, `ui`) and per-SDX _app bundles_.
    - Native code evaluates the platform bundles into the runtime before React Native loads the app bundle.
    - Metro config and serializer plugins strip the duplicated prelude from app bundles.
    - Upstream React Native assumes one bundle per instance.
-5. **Reka, Office's own JS↔native service bridge.** *Observed.*
+5. **Reka, Office's own JS↔native service bridge.** _Observed._
    - Reka is injected into every instance, as a TurboModule (`RekaBridge`) or a legacy module.
    - Office-curated module-provider registries sit alongside it.
    - Together they are the main channel to Office services, beside React Native's own module system.
-6. **On Win32, Office owns the UI layer.** *Observed.*
+6. **On Win32, Office owns the UI layer.** _Observed._
    - Under the legacy (Paper) architecture, the default `IUIManager` provider is **NetUI**, Office's
      native UI framework. NetUI ships about 285 React Native files: view managers, shadow nodes, and modules.
    - Fabric is opt-in per SDX through Composition. It forces Hermes, marks the instance bridgeless,
      and reports the platform name as `"windows"`.
-7. **Each platform gets React Native differently.** *Observed.*
+7. **Each platform gets React Native differently.** _Observed._
    - Win32 consumes a prebuilt `react-native-win32.dll` from NuGet and **detours WinRT activation** to load it.
    - Apple builds `react-native-macos` `v0.81.9` from source, patched after copy, using JSC and the old architecture.
    - Android uses Office's fork `react-native-mobile` `0.81.5-office.1`, with a JNI delay-load proxy.
@@ -108,8 +119,9 @@ React Native host. These are the biggest conceptual divergences:
           metro-plugin-appbundle, reka-react-native
 ```
 
-*Observed:* the per-platform file split comes from `reactnativehost/sources.inc`, which defines
+_Observed:_ the per-platform file split comes from `reactnativehost/sources.inc`, which defines
 `SOURCES_SHARED`, `SOURCES_WIN32`, `SOURCES_APPLE`, and `SOURCES_ANDROID`.
+
 - The generic `ReactHost.cpp` ActiveObject is compiled **only for Android**.
 - Apple compiles `ReactHostApple.mm`. Win32 compiles `ReactHostWin.cpp`.
 
@@ -117,21 +129,22 @@ React Native host. These are the biggest conceptual divergences:
 
 ## 3. How Office obtains React Native on each platform
 
-| Platform | What Office consumes | How it diverges from "stock" consumption | Evidence |
-|---|---|---|---|
-| **Win32** | Prebuilt `react-native-win32.dll` (`OfficeReact.Win32` NuGet, ARM64EC on arm64), plus `Hermes` and `V8JSI` NuGets. | Uses no MSBuild or app-package model. RNW's WinRT classes are activated **without registration**: Office detours `RoGetActivationFactory` and `RoActivateInstance`. For `Microsoft.ReactNative.*` class IDs it loads `react-native-win32.dll` and caches its factories. Office also adds React Native DLL directories, a `msoFolly.h` macro shim, and curated folly headers. | `reactnativehost/reactnativehostdetours_win32.cpp`, `opensource/reactnative/` |
-| **Win32 (arm64 SDK)** | `opensource/reactnativesdk` arm64 binary from `microsoft/continuity`. | Separate binary channel for one architecture. | `opensource/reactnativesdk/arm64/readme.txt` |
-| **macOS / iOS** | `react-native-macos` **source**, tag `v0.81.9`, built for `mac` and `ios`. | Built by Office's MDK, not CocoaPods. The flags `RCT_NEW_ARCH_ENABLED=0`, `USE_HERMES=0`, and `USE_THIRD_PARTY_JSC=1` mean the old architecture on community JSC. `external-update-post-copy.sh` patches the imported tree: SwiftPM prep, JSI inclusion, de-boosted Office Folly copies, a bounded `strlcpy` in glog, format-header substitutions, and generated codegen. SwiftPM is then converted to MDK targets. | `mbu/projects/opensource_react_native_macos.plist`, `opensource/react_native_macos/` |
-| **macOS / iOS (host helper)** | `@rnx-kit/react-native-host`, imported. | Two Office patches: a warning fix and a conditional `RCTCxxBridgeDelegate.h` import under `USE_BRIDGELESS`. | `opensource/rnx_kit_react_native_host/OFFICE.md` |
-| **Android** | Office **fork** `react-native-mobile` `0.81.5-office.1`, based on Meta 0.81.6. Ships as NuGet-packaged AAR and `.so` files. | The fork exposes internals Office's host needs: a separate `createModuleRegistry` step, an `onModuleRegistryCreated` hook (for `RekaBridge`), `CxxNativeModule::Make`, `PlatformBundleInfo`, and `ReactViewFocusEvent`. It also moves to C++23, overlays about 15 Folly headers, and can strip `.so` files from the AAR (`excludeLibs`). | `reactnativehost/.ai/react-native-mobile.md`, `reactnativehost/.ai/office-vs-meta-0.81-stable.patch` |
-| **Community modules** | `opensource/react_native_{async_storage,clipboard,datetimepicker,javascriptcore,netinfo,svg,webview}` | Imported into the monorepo build instead of resolved through npm autolinking. | `opensource/` listing |
-| **JS** | React 19.1.4, RN 0.81.6, `react-native-windows` 0.81.38, `@office-iss/react-native-win32` 0.81.9, `react-native-macos` 0.81.6, Metro 0.83.3 (rnx-kit-aligned). | Metro is customized for platform and app bundles (§6). | `sdx/platform/packages/*` |
+| Platform                      | What Office consumes                                                                                                                                           | How it diverges from "stock" consumption                                                                                                                                                                                                                                                                                                                                                                            | Evidence                                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Win32**                     | Prebuilt `react-native-win32.dll` (`OfficeReact.Win32` NuGet, ARM64EC on arm64), plus `Hermes` and `V8JSI` NuGets.                                             | Uses no MSBuild or app-package model. RNW's WinRT classes are activated **without registration**: Office detours `RoGetActivationFactory` and `RoActivateInstance`. For `Microsoft.ReactNative.*` class IDs it loads `react-native-win32.dll` and caches its factories. Office also adds React Native DLL directories, a `msoFolly.h` macro shim, and curated folly headers.                                        | `reactnativehost/reactnativehostdetours_win32.cpp`, `opensource/reactnative/`                        |
+| **Win32 (arm64 SDK)**         | `opensource/reactnativesdk` arm64 binary from `microsoft/continuity`.                                                                                          | Separate binary channel for one architecture.                                                                                                                                                                                                                                                                                                                                                                       | `opensource/reactnativesdk/arm64/readme.txt`                                                         |
+| **macOS / iOS**               | `react-native-macos` **source**, tag `v0.81.9`, built for `mac` and `ios`.                                                                                     | Built by Office's MDK, not CocoaPods. The flags `RCT_NEW_ARCH_ENABLED=0`, `USE_HERMES=0`, and `USE_THIRD_PARTY_JSC=1` mean the old architecture on community JSC. `external-update-post-copy.sh` patches the imported tree: SwiftPM prep, JSI inclusion, de-boosted Office Folly copies, a bounded `strlcpy` in glog, format-header substitutions, and generated codegen. SwiftPM is then converted to MDK targets. | `mbu/projects/opensource_react_native_macos.plist`, `opensource/react_native_macos/`                 |
+| **macOS / iOS (host helper)** | `@rnx-kit/react-native-host`, imported.                                                                                                                        | Two Office patches: a warning fix and a conditional `RCTCxxBridgeDelegate.h` import under `USE_BRIDGELESS`.                                                                                                                                                                                                                                                                                                         | `opensource/rnx_kit_react_native_host/OFFICE.md`                                                     |
+| **Android**                   | Office **fork** `react-native-mobile` `0.81.5-office.1`, based on Meta 0.81.6. Ships as NuGet-packaged AAR and `.so` files.                                    | The fork exposes internals Office's host needs: a separate `createModuleRegistry` step, an `onModuleRegistryCreated` hook (for `RekaBridge`), `CxxNativeModule::Make`, `PlatformBundleInfo`, and `ReactViewFocusEvent`. It also moves to C++23, overlays about 15 Folly headers, and can strip `.so` files from the AAR (`excludeLibs`).                                                                            | `reactnativehost/.ai/react-native-mobile.md`, `reactnativehost/.ai/office-vs-meta-0.81-stable.patch` |
+| **Community modules**         | `opensource/react_native_{async_storage,clipboard,datetimepicker,javascriptcore,netinfo,svg,webview}`                                                          | Imported into the monorepo build instead of resolved through npm autolinking.                                                                                                                                                                                                                                                                                                                                       | `opensource/` listing                                                                                |
+| **JS**                        | React 19.1.4, RN 0.81.6, `react-native-windows` 0.81.38, `@office-iss/react-native-win32` 0.81.9, `react-native-macos` 0.81.6, Metro 0.83.3 (rnx-kit-aligned). | Metro is customized for platform and app bundles (§6).                                                                                                                                                                                                                                                                                                                                                              | `sdx/platform/packages/*`                                                                            |
 
-*Observed:* `opensource/reactnative_macos/` also exists and holds only repo scaffolding (changelogs,
-`nx.json`, scripts). *Inferred:* it is a legacy or tooling remnant; the build plist points at
+_Observed:_ `opensource/reactnative_macos/` also exists and holds only repo scaffolding (changelogs,
+`nx.json`, scripts). _Inferred:_ it is a legacy or tooling remnant; the build plist points at
 `opensource/react_native_macos`.
 
-*Inferred (key consequence):* each platform faces a different kind of divergence.
+_Inferred (key consequence):_ each platform faces a different kind of divergence.
+
 - **Win32 cannot patch React Native source.** RNW arrives as a binary, so all divergence happens in
   host code, through RNW's public extension points: property bags, `ReactCoreInjection`, and package
   providers.
@@ -144,22 +157,23 @@ React Native host. These are the biggest conceptual divergences:
 
 ### 4.1 What Office adds over the React Native host APIs
 
-*Observed* in `reactnativehost/public/React.h`.
+_Observed_ in `reactnativehost/public/React.h`.
 
-| Office concept | Closest upstream concept | Office-specific additions |
-|---|---|---|
-| `ReactOptions` (alias `SDXDescriptor`) | RNW `ReactInstanceSettings`; Apple `RCTBridge` init args; Android `ReactInstanceManagerBuilder` / `ReactHostDelegate` | **Identity** (the SDX name, used as a registry key and telemetry dimension). **`SDXBasePath`**. An **ordered list of JS bundles** in four flavors: registered, file, dynamic (in-memory), and bundle-server. Per-platform module provider lists, including Apple TurboModule registrations. **Reka** callbacks and a provider factory. Error, JS-exception, and logging callbacks (`OnError` defaults to a ship assert). Instance created, loaded, and destroyed callbacks. Bytecode enablement. A typed **property bag**, which carries dispatch queues, versions, and service-delivery flags. Engine and architecture switches: `WindowsUseFabric`, `UseTurboModulesOnly`, `UseV8NodeApi`. `EnableSensitiveTelemetry`. |
-| `IReactHost` | RNW `ReactNativeHost`; Android `ReactHost` | Returns `Mso::Future`s from `ReloadInstance`, `ReloadInstanceWithOptions`, and `UnloadInstance`. Exposes a **`RekaContext()` that is usable before the instance exists**, because a proxy buffers calls. Tracks its **view hosts** (`MakeViewHost`, `GetViewHostList`). Has a declared native queue. |
-| `IReactViewHost` / `IReactViewInstance` | RNW `ReactRootView`; Apple `RCTRootView` / `RCTSurface`; Android `ReactRootView` | Separates the logical view (component name and initial props) from the native view instance. Supports attach, detach, reload, and unload on the host queue, so views survive instance reloads. |
-| `IReactInstance` (V1) | Apple `RCTBridge`; Android `ReactInstanceManager` | `NeedsReload`/`SetAsNeedsReload` lets a stale instance stop being served to new views. |
-| `RegisterSDX` / `GetRegisteredSDXDescriptor` | *(none)* | A **process-wide catalog of SDX descriptors**, keyed by identity. On Android, Java and C++ registrations are merged, and C++ wins. |
-| `GetRegisteredV2ReactHost(identity)` | *(none)* | Under parallel V2 registration, exactly **one shared host per identity**. |
-| `GetOrCreateReactInstance(identity)` | *(none)* | The V1 "get or create a shared instance by identity" API. `PUBLICAPI_EX(android, apple)`, so it is **not exported on Win32**. Marked "do not introduce new uses". |
-| `GetRuntimeExecutor2(instance)` | `RuntimeExecutor` | Gives Office native code direct JSI access to an instance. |
+| Office concept                               | Closest upstream concept                                                                                              | Office-specific additions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ReactOptions` (alias `SDXDescriptor`)       | RNW `ReactInstanceSettings`; Apple `RCTBridge` init args; Android `ReactInstanceManagerBuilder` / `ReactHostDelegate` | **Identity** (the SDX name, used as a registry key and telemetry dimension). **`SDXBasePath`**. An **ordered list of JS bundles** in four flavors: registered, file, dynamic (in-memory), and bundle-server. Per-platform module provider lists, including Apple TurboModule registrations. **Reka** callbacks and a provider factory. Error, JS-exception, and logging callbacks (`OnError` defaults to a ship assert). Instance created, loaded, and destroyed callbacks. Bytecode enablement. A typed **property bag**, which carries dispatch queues, versions, and service-delivery flags. Engine and architecture switches: `WindowsUseFabric`, `UseTurboModulesOnly`, `UseV8NodeApi`. `EnableSensitiveTelemetry`. |
+| `IReactHost`                                 | RNW `ReactNativeHost`; Android `ReactHost`                                                                            | Returns `Mso::Future`s from `ReloadInstance`, `ReloadInstanceWithOptions`, and `UnloadInstance`. Exposes a **`RekaContext()` that is usable before the instance exists**, because a proxy buffers calls. Tracks its **view hosts** (`MakeViewHost`, `GetViewHostList`). Has a declared native queue.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `IReactViewHost` / `IReactViewInstance`      | RNW `ReactRootView`; Apple `RCTRootView` / `RCTSurface`; Android `ReactRootView`                                      | Separates the logical view (component name and initial props) from the native view instance. Supports attach, detach, reload, and unload on the host queue, so views survive instance reloads.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `IReactInstance` (V1)                        | Apple `RCTBridge`; Android `ReactInstanceManager`                                                                     | `NeedsReload`/`SetAsNeedsReload` lets a stale instance stop being served to new views.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `RegisterSDX` / `GetRegisteredSDXDescriptor` | _(none)_                                                                                                              | A **process-wide catalog of SDX descriptors**, keyed by identity. On Android, Java and C++ registrations are merged, and C++ wins.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `GetRegisteredV2ReactHost(identity)`         | _(none)_                                                                                                              | Under parallel V2 registration, exactly **one shared host per identity**.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `GetOrCreateReactInstance(identity)`         | _(none)_                                                                                                              | The V1 "get or create a shared instance by identity" API. `PUBLICAPI_EX(android, apple)`, so it is **not exported on Win32**. Marked "do not introduce new uses".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `GetRuntimeExecutor2(instance)`              | `RuntimeExecutor`                                                                                                     | Gives Office native code direct JSI access to an instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### 4.2 SDX: the unit of hosting
 
-*Observed.*
+_Observed._
+
 - The Office unit of React Native hosting is the **SDX**. Each SDX gets its own descriptor, its own host,
   and its own runtime and instance.
 - Apps that use `coreui/reactcontainers` or `reactnative/officehost` normally do not build
@@ -169,7 +183,8 @@ React Native host. These are the biggest conceptual divergences:
   - add the shared **platform bundles**,
   - and, optionally, add **OfficeJS** (`TryConfigureOfficeReactOptionsUsingPath`, `...UsingPackageSolution`).
 
-*Inferred:*
+_Inferred:_
+
 - **Isolation.** Upstream React Native expects about one host per app. Office expects **many independent
   hosts per process**: task panes, dialogs, callouts, Copilot surfaces, activity panes, and headless SDXs.
   Each is isolated by identity.
@@ -182,15 +197,16 @@ React Native host. These are the biggest conceptual divergences:
 
 ### 5.1 Three implementations of one lifecycle
 
-*Observed.* The build split is in `reactnativehost/sources.inc`.
+_Observed._ The build split is in `reactnativehost/sources.inc`.
 
-| Platform | `IReactHost` implementation | Lifecycle engine |
-|---|---|---|
-| Android | `ReactHost` (`reactnativehost/ReactHost.cpp`), compiled only in `SOURCES_ANDROID` | `Mso::ActiveObject` on a sequential native queue. An **`AsyncActionQueue`** serializes load, unload, and reload, with unload-action IDs and cancellation. |
-| Apple | `ReactHostApple` (`reactnativehost/ReactHostApple.{h,mm}`) | Also an `Mso::ActiveObject` with an `AsyncActionQueue` (`LoadInQueue`, `UnloadInQueue`, `PendingUnloadActionId`). It drives an `ORNReactHostBridge`. |
-| Win32 | `ReactHostWin` (`reactnativehost/ReactHostWin.cpp`) | **Not** an ActiveObject. It is a thin facade over RNW's WinRT `ReactNativeHost`. RNW's `ReloadInstance` and `UnloadInstance` `IAsyncAction`s are adapted into `Mso::Future`s, with an `AutoCancelPromise` so abandoned futures cancel. |
+| Platform | `IReactHost` implementation                                                       | Lifecycle engine                                                                                                                                                                                                                       |
+| -------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Android  | `ReactHost` (`reactnativehost/ReactHost.cpp`), compiled only in `SOURCES_ANDROID` | `Mso::ActiveObject` on a sequential native queue. An **`AsyncActionQueue`** serializes load, unload, and reload, with unload-action IDs and cancellation.                                                                              |
+| Apple    | `ReactHostApple` (`reactnativehost/ReactHostApple.{h,mm}`)                        | Also an `Mso::ActiveObject` with an `AsyncActionQueue` (`LoadInQueue`, `UnloadInQueue`, `PendingUnloadActionId`). It drives an `ORNReactHostBridge`.                                                                                   |
+| Win32    | `ReactHostWin` (`reactnativehost/ReactHostWin.cpp`)                               | **Not** an ActiveObject. It is a thin facade over RNW's WinRT `ReactNativeHost`. RNW's `ReloadInstance` and `UnloadInstance` `IAsyncAction`s are adapted into `Mso::Future`s, with an `AutoCancelPromise` so abandoned futures cancel. |
 
-*Observed Win32 consequences:*
+_Observed Win32 consequences:_
+
 - **`MakeReactInstance` crashes on Windows.** It is the generic factory that builds an instance, and
   `InstanceFactory_Win.cpp` makes it `VerifyElseCrash`. All Win32 hosting goes through `MakeReactHost`.
 - **`ReactHostWin::Instance()` and `ReactHostWin::NativeQueue()` assert and are unsupported.** Win32
@@ -205,19 +221,19 @@ React Native host. These are the biggest conceptual divergences:
   `NativeDispatchQueue` property if set (and requires it to be sequential). Otherwise it uses the current
   queue. If that queue is concurrent, it creates a background sequential queue.
 
-*Inferred:* on Win32, RNW owns the serialization of instance operations. On Android and Apple, Office
+_Inferred:_ on Win32, RNW owns the serialization of instance operations. On Android and Apple, Office
 owns it. As a result, edge cases may behave differently across platforms: a reload during an unload,
 or calls after close.
 
 ### 5.2 Process-wide host registry and shutdown
 
-*Observed:* `reactnativehost/ReactHostRegistry.{h,cpp}`, plus platform variants.
+_Observed:_ `reactnativehost/ReactHostRegistry.{h,cpp}`, plus platform variants.
 
 - **Every host registers globally.** Each `IReactHost` registers in `ReactHostRegistry` when created and
   receives a close promise. On Win32, `ReactHostWin::Close()` fulfills that promise with the
   `UnloadInstance()` future.
 - **Shutdown closes everything.** When the `reactnativehost` liblet uninitializes:
-  - The registry enters an *uninited* state.
+  - The registry enters an _uninited_ state.
   - Any host created afterward is **born closed**.
   - Every live host is closed through the private `IClosableReactHost::Close`.
   - Uninit then **blocks until all hosts finish unloading**.
@@ -231,13 +247,13 @@ or calls after close.
   Apple it logs "not supported".
 - **Gated.** The registry is controlled by the `UseReactHostRegistryGate` ChangeGate (`ChangeGate.h`).
 
-*Inferred:* upstream React Native relies on the app process to tear hosts down. Office needs
+_Inferred:_ upstream React Native relies on the app process to tear hosts down. Office needs
 deterministic teardown, because Office liblets have strict init/uninit ordering and React Native
 instances hold Office services. This is one of the clearest **Office-only lifecycle obligations**.
 
 ### 5.3 V1 shared instances (Android and Apple)
 
-*Observed:* `reactnativehost/InstanceFactory_AndroidApple.cpp` and `reactnativehost/ReactBaseImpl.cpp`.
+_Observed:_ `reactnativehost/InstanceFactory_AndroidApple.cpp` and `reactnativehost/ReactBaseImpl.cpp`.
 
 - **Lookup by identity.** `GetOrCreateReactInstance(identity)` keeps a process-wide list of **weak**
   instance references. It serves the newest instance whose bundle name matches and that is **not marked
@@ -250,7 +266,8 @@ instances hold Office services. This is one of the clearest **Office-only lifecy
   path on Android.
 - **Monitoring.** A periodic monitor timer walks the live instances and emits instance-count traces.
 
-*Inferred:*
+_Inferred:_
+
 - **This model is Office's own.** React Native has no instance shared by identity, refcounted by views,
   and debounced.
 - **It explains Win32.** It is the main reason V1 was never ported to Win32, where RNW's
@@ -258,7 +275,7 @@ instances hold Office services. This is one of the clearest **Office-only lifecy
 
 ### 5.4 V1→V2 bridge ("parallel V2 registration")
 
-*Observed:* `reactnativehost/RNHostV2Registration.h` and `reactnativehost/apple/RNHostV2Registration_Apple.mm`.
+_Observed:_ `reactnativehost/RNHostV2Registration.h` and `reactnativehost/apple/RNHostV2Registration_Apple.mm`.
 
 - **Apple only, gated.** On Apple, a feature gate (`ReactNativeHost.SDXRegistration.ParallelV2Registration`,
   scoped to `Audience::Automation`) turns on a registration that **creates exactly one V2 `IReactHost`
@@ -269,19 +286,20 @@ instances hold Office services. This is one of the clearest **Office-only lifecy
 - **Stated trade-off.** The header comment says sharing one host per SDX gives up independent hosts,
   a key V2 benefit, but lets partners migrate.
 
-*Inferred:* at the baseline, V2 is the target model everywhere. Apple is mid-migration, and the bridge
+_Inferred:_ at the baseline, V2 is the target model everywhere. Apple is mid-migration, and the bridge
 is exposed only to automation audiences.
 
 ### 5.5 Reka before load
 
-*Observed:*
+_Observed:_
+
 - `IReactHost::RekaContext()` returns a **`RekaContextProxy`**. Native code can create Reka proxies and
   services before the JS runtime or Reka bridge is up.
 - `IClosableReactHost::SetNotifyRekaInitializedBeforeLoad()` (Apple) lets a host signal Reka
   initialization ahead of bundle load.
 - On Win32, `RNHostData` owns the proxy, and it is connected when the Reka package provider initializes.
 
-*Inferred:* this lets Office features wire native services to a host as soon as they create it, without
+_Inferred:_ this lets Office features wire native services to a host as soon as they create it, without
 waiting on asynchronous instance load. That is an Office ergonomics layer with no React Native
 equivalent.
 
@@ -296,25 +314,25 @@ last one is the SDX's app bundle.
 
 ### 6.1 What goes into the runtime, in order
 
-| Order | Bundle | Who adds it | Purpose |
-|---|---|---|---|
-| 1 | **SDX Foundation** (`foundation.<platform>.bundle`) | `AddPlatformBundles` (OfficeHost), the headless runtime, the activity pane, or the app | React Native core without UI: globals, timers, XHR, error handling, the batched bridge, and the Reka facades. |
-| 2 | **SDX UI** (`ui.<platform>.bundle`) | Same, except hosts that skip it (e.g. the activity pane) | `AppRegistry`, LogBox configuration, and the platform component library. |
-| 3 | **OfficeJS bundle** (optional) | `ConfigureOfficeReactOptions` when the manifest requests RichAPI; the headless runtime per OSF host | The Office.js object model, connected to the instance through Reka. |
-| last | **App bundle** | The SDX's manifest or path | Feature code only. React and React Native are resolved from the globals above. |
+| Order | Bundle                                              | Who adds it                                                                                         | Purpose                                                                                                       |
+| ----- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| 1     | **SDX Foundation** (`foundation.<platform>.bundle`) | `AddPlatformBundles` (OfficeHost), the headless runtime, the activity pane, or the app              | React Native core without UI: globals, timers, XHR, error handling, the batched bridge, and the Reka facades. |
+| 2     | **SDX UI** (`ui.<platform>.bundle`)                 | Same, except hosts that skip it (e.g. the activity pane)                                            | `AppRegistry`, LogBox configuration, and the platform component library.                                      |
+| 3     | **OfficeJS bundle** (optional)                      | `ConfigureOfficeReactOptions` when the manifest requests RichAPI; the headless runtime per OSF host | The Office.js object model, connected to the instance through Reka.                                           |
+| last  | **App bundle**                                      | The SDX's manifest or path                                                                          | Feature code only. React and React Native are resolved from the globals above.                                |
 
-*Observed:* `reactnative/officehost/OfficeHost.cpp` (`AddPlatformBundles`, `ConfigureOfficeReactOptions`),
+_Observed:_ `reactnative/officehost/OfficeHost.cpp` (`AddPlatformBundles`, `ConfigureOfficeReactOptions`),
 `jshost/headless/JSHeadlessRuntimeImpl.cpp`, `reactnative/activitypane/src/ReactNativeActivityPaneRuntime.cpp`.
 
 ### 6.2 JS side: splitting React Native's own initialization
 
-- **`InitializeCore` is split in two.** *Observed.*
+- **`InitializeCore` is split in two.** _Observed._
   - `platform-bundles/foundation/src/InitializeFoundation.ts` copies React Native's `InitializeCore`
     but leaves out `AppRegistry`, so a **headless** instance never initializes `UIManager` or other UI code.
   - `platform-bundles/ui/src/InitializeUI.ts` adds `AppRegistry` back and installs a LogBox ignore list.
     The list covers the legacy JSX transform warning, the "Legacy Architecture" warning, and the
     `SafeAreaView` deprecation.
-- **A global facade (`OfficePlatformGlobal`) replaces module resolution.** *Observed.*
+- **A global facade (`OfficePlatformGlobal`) replaces module resolution.** _Observed._
   - The foundation entry exports a `Bundle` facade with getters for Reka, ReactNativeReka, and React
     Native internals (`BatchedBridge`, `MessageQueue`, `NativeModules`, `JSTimers`,
     `TurboModuleRegistry`, `AsyncStorage`, and others).
@@ -325,36 +343,36 @@ last one is the SDX's app bundle.
   - `sdx-metro-config` (`withSdxResolver`) redirects imports at app-bundle build time.
     `metro-plugin-appbundle` adds the prelude that app bundles need, and `metro-plugin-noprelude`
     removes the default prelude.
-- **Per-platform UI entries.** *Observed.*
+- **Per-platform UI entries.** _Observed._
   - `ui.win32.ts`, `ui.windows.ts`, `ui.ios.ts`, `ui.android.ts`, and `ui.native.ts`.
   - The `windows` entry (Fabric on Win32) exports `react-native-windows` and **patches it so that
     `ViewWin32` resolves to `View`**, which lets SDXs written against `@office-iss/react-native-win32`
     run under Fabric.
-- **Bundle-size stubs.** *Observed.*
+- **Bundle-size stubs.** _Observed._
   - `StubbedToReduceBundleSize.js` removes unused code.
   - `StubbedPaperRendererForFabric.js` keeps a stub `unstable_batchedUpdates`, because react-redux
     before v9 imports it from the Paper renderer.
-- **Diagnostic root wrapper.** *Observed.* `OfficeWrapperComponent.tsx` calls
+- **Diagnostic root wrapper.** _Observed._ `OfficeWrapperComponent.tsx` calls
   `AppRegistry.setWrapperComponentProvider`. When the host passes `__useOfficeRootComponentWrapper` in
   the initial props, the wrapper overlays "Fabric/Paper" and "Hermes/not Hermes" badges on every root.
-- **Version pinning.** *Observed.* The foundation package (`@office-iss/sdx-platform-bundle-foundation`
+- **Version pinning.** _Observed._ The foundation package (`@office-iss/sdx-platform-bundle-foundation`
   10.0.12) declares peer dependencies on React 19.1.4, `react-native` 0.81.6, `react-native-macos`
   0.81.6, and `react-native-windows` 0.81.38. The platform bundles are therefore built against one
   React Native version per Office release, and every app bundle must match it.
 
 ### 6.3 Native side: delivering and preloading the platform bundles
 
-- **A named-bundle registry.** *Observed.* Hosts call `Mso::React::GetJSBundles({SDXFoundation, SDXUI})`.
+- **A named-bundle registry.** _Observed._ Hosts call `Mso::React::GetJSBundles({SDXFoundation, SDXUI})`.
   Each platform supplies its own table in `jshost/officepal/PlatformJSBundles_{win32,mac,ios,android}.*`,
   for example `foundation.macos.jsbundle` or `ui.android.bundle`.
-- **Win32 embeds the bundles as resources with three variants.** *Observed.*
+- **Win32 embeds the bundles as resources with three variants.** _Observed._
   - `PlatformJSBundles_win32.cpp` loads the bundles from `RT_RCDATA` resources in the Office UI
     resource DLL.
   - Each bundle has a plain JS resource, a **Hermes bytecode** resource (`*_HBC`), and a **Fabric**
     resource (`IDR_SDXPLATFORM_WINDOWS_*`, the `windows` platform build).
   - The variant is chosen per instance from the `fabric` and `hermes` options. The code also handles
     the null-termination differences between Hermes text and bytecode inputs.
-- **Win32 preloads in `InstanceCreated`.** *Observed (`ReactHostWin.cpp`).*
+- **Win32 preloads in `InstanceCreated`.** _Observed (`ReactHostWin.cpp`)._
   - `MakePlatformBundleInfos` builds the list. Every bundle except the last is evaluated with
     `runtime.evaluateJavaScript`: synchronously through `GetOrCreateContextRuntime` under Fabric, or
     through `ExecuteJsi` under Paper.
@@ -364,18 +382,19 @@ last one is the SDX's app bundle.
     the SDX base path.
   - In development, platform bundles come from Metro at
     `http://localhost:8081/<url>?fabric=…&flavor=debug|ship&buildPlatform=x86|x64|arm64`.
-- **Android wraps the executor.** *Observed (`reactnative/android/host/.ai/index.md`).*
+- **Android wraps the executor.** _Observed (`reactnative/android/host/.ai/index.md`)._
   `WrapperJSExecutor` wraps the Hermes executor. Its `loadBundle()` loads every platform bundle
   through the base executor, then the main bundle, and calls `JSExecutorObserver` callbacks
   (`OnBundleLoaded`, `OnInitialized`). The fork's `PlatformBundleInfo` type carries the list.
-- **Apple wraps the executor factory.** *Observed.* `ORNJSExecutorFactory` (`MakeORNJSExecutorFactory`)
+- **Apple wraps the executor factory.** _Observed._ `ORNJSExecutorFactory` (`MakeORNJSExecutorFactory`)
   wraps the JSC executor factory with the same preload step.
-- **Bytecode and memory mapping.** *Observed.*
+- **Bytecode and memory mapping.** _Observed._
   - `ReactOptions::EnableBytecode` comes from the manifest (`runtime.byteCodeCaching`).
   - On Win32, file bundles are memory-mapped (`FileMemoryMapJSBundle_Win32`), and `BytecodeHelpers`
     derives bytecode cache paths.
 
-*Inferred:* this is the deepest JS-level divergence from upstream React Native.
+_Inferred:_ this is the deepest JS-level divergence from upstream React Native.
+
 - React Native's "one bundle, one instance" assumption is replaced by a **shared runtime prefix**.
 - The benefit is smaller app bundles, cheaper instance startup, and a single place for Office
   polyfills.
@@ -393,15 +412,16 @@ options.
 
 ### 7.1 Provider registries
 
-| Registry | Platform | Role | Evidence |
-|---|---|---|---|
-| `CxxModuleProviderRegistry` | All | Named providers of C++ (`CxxModule`) modules. `ReactOptions::CxxModuleNames` selects them per SDX. | `reactnativehost/sources.inc` (shared) |
-| `ReactPackageProviderRegistry` | Win32 | Named RNW `IReactPackageProvider`s. C++ module providers are also wrapped as package providers. | `SOURCES_WIN32` |
-| `UIManagerProviderRegistry_Win` | Win32 | Named `IUIManager` factories; the default is NetUI (§8.1). | `SOURCES_WIN32` |
-| `ORNBridgeModuleProviderRegistry`, `ORNTurboModuleManagerDelegate`, `ORNModuleRegistration` | Apple | Office's module registration on top of `RCTCxxBridge` and the TurboModule manager. | `SOURCES_APPLE` |
-| `RNXTurboModuleManagerDelegate`, `UserCxxTurboModuleProvider`, `UserJavaTurboModuleProvider`, `RNXComponentsRegistry` | Android | Combine TurboModules from many C++ and Java providers, and register Fabric component descriptors. | `reactnative/android/host/.ai/index.md` |
+| Registry                                                                                                              | Platform | Role                                                                                               | Evidence                                |
+| --------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `CxxModuleProviderRegistry`                                                                                           | All      | Named providers of C++ (`CxxModule`) modules. `ReactOptions::CxxModuleNames` selects them per SDX. | `reactnativehost/sources.inc` (shared)  |
+| `ReactPackageProviderRegistry`                                                                                        | Win32    | Named RNW `IReactPackageProvider`s. C++ module providers are also wrapped as package providers.    | `SOURCES_WIN32`                         |
+| `UIManagerProviderRegistry_Win`                                                                                       | Win32    | Named `IUIManager` factories; the default is NetUI (§8.1).                                         | `SOURCES_WIN32`                         |
+| `ORNBridgeModuleProviderRegistry`, `ORNTurboModuleManagerDelegate`, `ORNModuleRegistration`                           | Apple    | Office's module registration on top of `RCTCxxBridge` and the TurboModule manager.                 | `SOURCES_APPLE`                         |
+| `RNXTurboModuleManagerDelegate`, `UserCxxTurboModuleProvider`, `UserJavaTurboModuleProvider`, `RNXComponentsRegistry` | Android  | Combine TurboModules from many C++ and Java providers, and register Fabric component descriptors.  | `reactnative/android/host/.ai/index.md` |
 
-*Observed (Win32 extras):*
+_Observed (Win32 extras):_
+
 - Async-storage C++ modules are remapped to TurboModules.
 - An Office image module (`NameXImage`) is registered.
 - Office values go into the instance property bag: the UI queue, a weak `ReactHostProperty`, and a
@@ -412,30 +432,31 @@ options.
 Reka is Office's own JS↔native data-service bridge. Every instance gets it, independent of what the
 SDX declares.
 
-- **Win32.** *Observed.* `RekaTurboPackageProvider` registers a `RekaBridge` **TurboModule** when the
+- **Win32.** _Observed._ `RekaTurboPackageProvider` registers a `RekaBridge` **TurboModule** when the
   instance uses Fabric or is TurboModules-only. Otherwise the legacy `RekaPackageProvider` (a
   CxxModule) is used. Its initialization connects the host's Reka context proxy (§5.5).
-- **Android.** *Observed.* `reactnative/androidhost` implements `RekaBridge` twice: `RekaNativeModule.cpp`
+- **Android.** _Observed._ `reactnative/androidhost` implements `RekaBridge` twice: `RekaNativeModule.cpp`
   (a CxxModule, old architecture) and `RekaTurboModule*` (new architecture). The fork adds an
   `onModuleRegistryCreated` hook so that Office can inject the module after React Native builds its
   registry. To create Reka instances, `androidhost` calls back **up** into `libsdxruntime.so`
   through `dlsym`. As a result, the two libraries resolve each other at runtime.
-- **Apple.** *Observed.* Reka is registered through Office's bridge module registry and TurboModule
+- **Apple.** _Observed._ Reka is registered through Office's bridge module registry and TurboModule
   delegate.
-- **JS.** *Observed.* `reka-react-native` (`ReactNativeReka.ts`) resolves `RekaBridge` through
+- **JS.** _Observed._ `reka-react-native` (`ReactNativeReka.ts`) resolves `RekaBridge` through
   `TurboModuleRegistry`. The foundation bundle exposes it as a global facade.
-- **Thread affinity.** *Observed.* In `ConfigureOfficeReactOptions`, the `OnInitialized` callback sets
+- **Thread affinity.** _Observed._ In `ConfigureOfficeReactOptions`, the `OnInitialized` callback sets
   the Office Reka queue property to the SDX's UI queue, so Reka objects run on the UI thread unless the
   host overrides that.
 
 ### 7.3 JSI-level hooks
 
-*Observed:*
+_Observed:_
+
 - `JsiRuntimeInstallerProperty` lets a host run code directly against `jsi::Runtime` when the
   instance is created. The headless runtime uses it to install its own APIs.
 - `GetRuntimeExecutor2` (in `React.h`) exposes a runtime executor to Office code.
 
-*Inferred:* these hooks let Office features skip the module system completely. That is powerful, but
+_Inferred:_ these hooks let Office features skip the module system completely. That is powerful, but
 React Native gives no stability guarantees at that level.
 
 ---
@@ -449,7 +470,8 @@ replaces React Native's renderer.
 
 ### 8.1 Win32, legacy architecture (Paper): NetUI is the renderer
 
-*Observed:*
+_Observed:_
+
 - Under Paper, the host puts an `IUIManager` into the context properties (`Mso.React/IUIManager`). The
   provider is chosen by name from `UIManagerProviderRegistry_Win`. **The default provider is NetUI.**
   If no provider is registered, the instance runs **without UI**, as headless or data-only SDXs do.
@@ -466,16 +488,17 @@ replaces React Native's renderer.
 - FlexML, Office's declarative UI system, can embed React Native through
   `netui/platform/flex/Concepts/ReactComponent`, `ReactContentIsland.flexdl`, and `ReactLogBox.flexml`.
 
-*Inferred:* on Win32 Paper, `react-native-win32.dll` supplies the JS runtime, bridge, and module
+_Inferred:_ on Win32 Paper, `react-native-win32.dll` supplies the JS runtime, bridge, and module
 system, while **Office supplies the entire view layer**. This is the largest single override of a
 platform layer in the codebase.
 
 ### 8.2 Win32, new architecture (Fabric): Composition with Office queues
 
-*Observed (`ReactHostWin.cpp`):* Fabric is opt-in per SDX (`WindowsUseFabric`, off by default). When it is on:
+_Observed (`ReactHostWin.cpp`):_ Fabric is opt-in per SDX (`WindowsUseFabric`, off by default). When it is on:
+
 - the host **forces Hermes** and sets `ReactNative.IsBridgeless = true`;
 - it calls `ReactCoreInjection::SetPlatformNameOverride(L"windows")`, so JS sees `Platform.OS ===
-  "windows"` and Metro selects the `windows` platform bundles (§6.3). Paper reports `"win32"`;
+"windows"` and Metro selects the `windows` platform bundles (§6.3). Paper reports `"win32"`;
 - with WinAppSDK, it takes the `CompositionContext` from `WinAppSDKCompositorProperty` and fixes up the
   UI queue later, using a temporary context until then. Without WinAppSDK, it installs a custom
   `ReactTimer` factory;
@@ -483,7 +506,8 @@ platform layer in the codebase.
 
 ### 8.3 ReactContainers: Office-standard surfaces
 
-*Observed (`coreui/reactcontainers/README.md`):*
+_Observed (`coreui/reactcontainers/README.md`):_
+
 - Features open React Native content in three Office-standard containers: **TaskPane**, **Dialog**,
   and **Callout**.
 - Win32 builds them on NetUI. Mac builds them on AppKit (`CRCReact*_mac.mm`). The Deferred and
@@ -493,7 +517,8 @@ platform layer in the codebase.
 
 ### 8.4 OfficeHost: manifest-driven configuration and RichAPI
 
-*Observed (`reactnative/officehost`):*
+_Observed (`reactnative/officehost`):_
+
 - `TryConfigureOfficeReactOptions*` reads the SDX's `app.json` manifest from disk or from the Metro
   server. It fills in identity, bytecode caching, the asset configuration, and the source bundle name.
 - It then adds the platform bundles and, when the manifest requests RichAPI, the **OfficeJS bundle**.
@@ -501,19 +526,19 @@ platform layer in the codebase.
   and `CleanupRichApiReactConnection` in `OnDestroyed`.
 - `IManifestInfo` is stored in the instance property bag.
 
-*Inferred:* this makes React Native features look like Office add-ins, with a manifest and the Office.js
+_Inferred:_ this makes React Native features look like Office add-ins, with a manifest and the Office.js
 object model, but running in-process on Reka rather than in a webview.
 
 ### 8.5 Bespoke hosts
 
-- **Activity pane (Win32).** *Observed (`reactnative/activitypane`).* A singleton
+- **Activity pane (Win32).** _Observed (`reactnative/activitypane`)._ A singleton
   `ReactNativeActivityPaneRuntime` owns an `IReactNativeHost` for Word's Version History pane, behind a
   feature gate (a FlexML→React Native migration).
   - It uses identity `ReactNativeVHPane.win32`, the NetUI C++ module provider, **Foundation only** (no
     UI platform bundle), and a feature bundle located by `MsoFGimmeFileEx`.
   - The JS package is `oscui-ReactNativeActivityPane`, built on `@fluentui/react-native`.
-  - *Inferred:* the feature bundle carries its own UI layer.
-- **Headless JS runtime (Android, iOS, Mac).** *Observed (`jshost/headless`).*
+  - _Inferred:_ the feature bundle carries its own UI layer.
+- **Headless JS runtime (Android, iOS, Mac).** _Observed (`jshost/headless`)._
   - `JSHeadlessRuntime` builds on V2 `MakeReactHost` with the Foundation and UI bundles, an optional
     **host-specific OfficeJS bundle** chosen by OSF host type, and a delivery-path app bundle.
   - It installs a JSI runtime installer and offers `Post(std::function<void(jsi::Runtime&)>)`. Posted
@@ -523,14 +548,15 @@ object model, but running in-process on Reka rather than in a webview.
 
 ### 8.6 Apple
 
-*Observed:*
+_Observed:_
+
 - V2 views go through `ReactViewHostApple`/`ReactViewInstanceApple` and `ORNV2RootView`. The root-view
   factory can be injected, and the views are sized with Office `PfmView` and Auto Layout.
 - V1 views use `ORNRootView` and `ORNShimView` over `RCTRootView`.
 
 ### 8.7 Android: a four-layer native stack
 
-*Observed (`reactnative/android/host/.ai/index.md`, `reactnative/androidhost/.ai/index.md`):*
+_Observed (`reactnative/android/host/.ai/index.md`, `reactnative/androidhost/.ai/index.md`):_
 
 ```
 Layer 2  reactnativehost/            libsdxruntime.so       Mso::React C++ API (JNI to Kotlin)
@@ -561,7 +587,8 @@ Upstream React Native owns its threads: the JS thread, the native-modules thread
 (or the main queue on Apple). Office runs those roles on **Office dispatch queues**, so React Native
 work follows the same scheduling, idle, and shutdown rules as the rest of the app.
 
-*Observed:*
+_Observed:_
+
 - **UI queue resolution on Win32.** The host uses `UIDispatchQueue` if the app supplied one, then
   `NativeDispatchQueue`, then the current queue. `ConfigureOfficeReactOptions` requires the UI queue
   to be **sequential** and falls back to the current queue otherwise.
@@ -578,7 +605,7 @@ work follows the same scheduling, idle, and shutdown rules as the rest of the ap
   the bridge has finished tearing down. A process-wide mutex serializes `ORNRCTCxxBridge`
   initialization.
 
-*Inferred:* React Native assumes it owns the run loop. Office instead makes React Native a client of
+_Inferred:_ React Native assumes it owns the run loop. Office instead makes React Native a client of
 the Office threading model. That is needed for deterministic shutdown in a multi-document,
 multi-instance process, but it means threading bugs often look different from anything reported
 upstream.
@@ -587,18 +614,20 @@ upstream.
 
 ## 10. JS engines and architecture selection
 
-| | Win32 (RNW) | Apple (react-native-macos) | Android (mobile fork) |
-|---|---|---|---|
-| **JS engine** | Selected at runtime by the `JSIEngineSelection` ChangeGate. Chakra and ChakraCore map to Chakra; V8Lite and V8NodeApi fall back to V8; **the default is V8**. Fabric **forces Hermes**. The result is logged to telemetry. | JavaScriptCore, the system framework (`React-jsc`). | Hermes, wrapped by `HermesExecutorOverride` for logging, the debugger, and the runtime installer. |
-| **Default renderer** | Paper with NetUI (§8.1). | Paper (`RCTCxxBridge`) through `ORN*` classes for V1. Which apps link the new-arch library set is Open (§16). | Old architecture (`ReactInstanceManager`). |
-| **New architecture** | Per-SDX `WindowsUseFabric`: Fabric, bridgeless, Composition, and platform name `"windows"`. | The libraries are built as separate **library sets**: `reactnative_{mac,ios}_oldarch`, `_newarch` (Fabric and `React-Runtime`), `_cxxturbomodules`, and `reactnative_headless_{mac,ios}` (JSI and JSC only). | `ReactHostImpl`: bridgeless, Fabric, and TurboModules together, behind a global gate plus per-SDX settings. |
+|                      | Win32 (RNW)                                                                                                                                                                                                                | Apple (react-native-macos)                                                                                                                                                                                   | Android (mobile fork)                                                                                       |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| **JS engine**        | Selected at runtime by the `JSIEngineSelection` ChangeGate. Chakra and ChakraCore map to Chakra; V8Lite and V8NodeApi fall back to V8; **the default is V8**. Fabric **forces Hermes**. The result is logged to telemetry. | JavaScriptCore, the system framework (`React-jsc`).                                                                                                                                                          | Hermes, wrapped by `HermesExecutorOverride` for logging, the debugger, and the runtime installer.           |
+| **Default renderer** | Paper with NetUI (§8.1).                                                                                                                                                                                                   | Paper (`RCTCxxBridge`) through `ORN*` classes for V1. Which apps link the new-arch library set is Open (§16).                                                                                                | Old architecture (`ReactInstanceManager`).                                                                  |
+| **New architecture** | Per-SDX `WindowsUseFabric`: Fabric, bridgeless, Composition, and platform name `"windows"`.                                                                                                                                | The libraries are built as separate **library sets**: `reactnative_{mac,ios}_oldarch`, `_newarch` (Fabric and `React-Runtime`), `_cxxturbomodules`, and `reactnative_headless_{mac,ios}` (JSI and JSC only). | `ReactHostImpl`: bridgeless, Fabric, and TurboModules together, behind a global gate plus per-SDX settings. |
 
-*Observed:*
+_Observed:_
+
 - Win32 engine and Fabric logic is in `reactnativehost/ReactHostWin.cpp`.
 - The Apple library sets are in `mbu/projects/opensource_react_native_macos/*_libraryset.json`.
 - The Android details are in `reactnative/android/host/.ai/index.md`.
 
-*Inferred:*
+_Inferred:_
+
 - Office runs **three different engine strategies** and **two renderer generations** at the same time.
 - On Win32 the engine choice is a service-controlled gate, not a build-time choice. Upstream RNW
   apps choose the engine at build time.
@@ -611,7 +640,8 @@ upstream.
 Upstream React Native development assumes one app, one Metro server, and one bundle. Office has to
 support many SDXs inside a large shipping binary.
 
-*Observed:*
+_Observed:_
+
 - **YarnZen coordination (Win32).** The host uses a named mutex and file mapping keyed by SDX identity
   (and bundle ID) so that the YarnZen developer tool can find a running instance and redirect it to
   a local Metro server.
@@ -633,7 +663,8 @@ support many SDXs inside a large shipping binary.
 
 ## 12. Errors, logging, and telemetry
 
-*Observed:*
+_Observed:_
+
 - **Default error policy.** `ReactOptions::OnError` defaults to a **ShipAssert**. A JS error in a
   feature that hasn't overridden it is treated as an Office product failure, not a red box. Per-identity
   gates control whether specific SDXs crash on error.
@@ -652,7 +683,7 @@ support many SDXs inside a large shipping binary.
   - The selected engine is logged.
   - The running hosts are attached to OCV (feedback) reports.
 
-*Inferred:* React Native's error model is built for development. Office's is built for **production
+_Inferred:_ React Native's error model is built for development. Office's is built for **production
 diagnostics**, where every JS failure has to produce a Watson report, telemetry, or a ShipAssert.
 
 ---
@@ -664,7 +695,8 @@ the most fragile points during upgrades.
 
 ### 13.1 Win32 / react-native-windows
 
-*Observed:*
+_Observed:_
+
 - **Activation detour.** `reactnativehost/reactnativehostdetours_win32.cpp` uses Detours to hook
   `RoGetActivationFactory` and `RoActivateInstance`.
   - Any class ID starting with `Microsoft.ReactNative.` is served from `react-native-win32.dll`'s own
@@ -672,7 +704,7 @@ the most fragile points during upgrades.
   - The DLL is loaded through `MsoLoadLibrary(msofidReactNativeWin32)`, with a fallback to a safe
     `LoadLibrary`.
   - Detouring is always on (`IsDetouringRequired()` returns `true`), and there is a test hook.
-  - *Inferred:* this provides registration-free WinRT activation of RNW types without the app manifest
+  - _Inferred:_ this provides registration-free WinRT activation of RNW types without the app manifest
     entries that RNW normally relies on.
 - **`ReactCoreInjection`.** Office uses RNW's injection API for things a normal RNW app doesn't change:
   `SetPlatformNameOverride` (`"windows"` under Fabric), `SetTimerFactory`,
@@ -684,7 +716,8 @@ the most fragile points during upgrades.
 
 ### 13.2 Apple / react-native-macos
 
-*Observed:*
+_Observed:_
+
 - **Private headers.** `reactnativehost/RCTBridgePrivateDeclarations.h` re-declares private
   `RCTBridge`/`RCTCxxBridge` interfaces, and `ORNRCTCxxBridge` subclasses the bridge.
 - **Weak instance access.** `ORNWeakInstanceProvider.h` gives Office code weak access to the C++
@@ -695,7 +728,8 @@ the most fragile points during upgrades.
 
 ### 13.3 Android / react-native-mobile fork
 
-*Observed:*
+_Observed:_
+
 - **A maintained fork.** Office builds and publishes its own React Native for Android, following the
   playbook in `reactnative/android/host/.ai/build-rn-fork.md`.
 - **The fork's delta from Meta** is captured in `reactnativehost/.ai/office-vs-meta-0.81-stable.patch`,
@@ -714,7 +748,8 @@ the most fragile points during upgrades.
     on more than Android (§16).
 - **Bidirectional dlsym** between `libsdxruntime.so` and `libofficereacthost.so` (§8.7).
 
-*Inferred:*
+_Inferred:_
+
 - Android is the only platform where Office changes React Native's own source **as a fork**.
 - On Apple, Office patches vendored source.
 - On Win32, Office works only through public injection points, detours, and replacement layers.
@@ -723,28 +758,28 @@ the most fragile points during upgrades.
 
 ## 14. Per-platform summary
 
-| Concern | Win32 (RNW / react-native-win32) | Apple (react-native-macos, mac + iOS) | Android (react-native-mobile fork) |
-|---|---|---|---|
-| How React Native arrives | Prebuilt DLL from NuGet; WinRT activation detoured | Source build through MDK, patched after copy | Office fork, published as AAR and `.so` |
-| `IReactHost` implementation | `ReactHostWin`, a facade over RNW `ReactNativeHost` | `ReactHostApple` (ActiveObject) driving `ORNReactHostBridge` and `ORNRCTCxxBridge` | `ReactHost` (ActiveObject) driving the Kotlin `ReactNativeHost` through `androidhost` |
-| Who serializes load and unload | RNW (`IAsyncAction` adapted to `Mso::Future`) | Office `AsyncActionQueue` | Office `AsyncActionQueue` |
-| V1 shared instances | Not exported | Yes, and gated V2 bridging (§5.4) | Yes |
-| Shutdown wait | `FutureWait` | Run-loop pumping in 5 ms slices | `FutureWait` |
-| Renderer | **NetUI** (Paper, the default) or Composition (Fabric, opt-in) | UIKit/AppKit through `RCTRootView` and `ORNV2RootView` | `OfficeReactRootView`; Fabric behind a global gate plus per-SDX settings |
-| Office containers (`coreui/reactcontainers`) | TaskPane, Dialog, Callout, Deferred, Flexbox (NetUI) | Mac only: TaskPane, Dialog, Callout (AppKit) | None |
-| Module injection | Package and C++ provider registries; property bag | Bridge-module registry; TurboModule delegate | `onModuleRegistryCreated`; RNX TurboModule and component registries |
-| Reka | TurboModule (Fabric) or CxxModule | Registered through the ORN registries | CxxModule or TurboModule in `androidhost` |
-| Platform-bundle delivery | RCDATA resources (JS, HBC, Fabric variants), preloaded in `InstanceCreated` | Bundle files, preloaded by `ORNJSExecutorFactory` | Bundle files, preloaded by `WrapperJSExecutor` |
-| JS engine | V8 by default, Chakra via gate, Hermes for Fabric | JSC | Hermes |
-| Platform name in JS | `win32` (Paper) or `windows` (Fabric) | `macos` or `ios` | `android` |
-| Headless JS runtime | Not built (UI-less instances instead) | `jshost/headless` | `jshost/headless` |
-| Deepest reach-in | Activation detour, `ReactCoreInjection` | Private `RCTBridge` declarations, bridge subclass, post-copy source patches | Source fork with 146 patched files |
+| Concern                                      | Win32 (RNW / react-native-win32)                                            | Apple (react-native-macos, mac + iOS)                                              | Android (react-native-mobile fork)                                                    |
+| -------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| How React Native arrives                     | Prebuilt DLL from NuGet; WinRT activation detoured                          | Source build through MDK, patched after copy                                       | Office fork, published as AAR and `.so`                                               |
+| `IReactHost` implementation                  | `ReactHostWin`, a facade over RNW `ReactNativeHost`                         | `ReactHostApple` (ActiveObject) driving `ORNReactHostBridge` and `ORNRCTCxxBridge` | `ReactHost` (ActiveObject) driving the Kotlin `ReactNativeHost` through `androidhost` |
+| Who serializes load and unload               | RNW (`IAsyncAction` adapted to `Mso::Future`)                               | Office `AsyncActionQueue`                                                          | Office `AsyncActionQueue`                                                             |
+| V1 shared instances                          | Not exported                                                                | Yes, and gated V2 bridging (§5.4)                                                  | Yes                                                                                   |
+| Shutdown wait                                | `FutureWait`                                                                | Run-loop pumping in 5 ms slices                                                    | `FutureWait`                                                                          |
+| Renderer                                     | **NetUI** (Paper, the default) or Composition (Fabric, opt-in)              | UIKit/AppKit through `RCTRootView` and `ORNV2RootView`                             | `OfficeReactRootView`; Fabric behind a global gate plus per-SDX settings              |
+| Office containers (`coreui/reactcontainers`) | TaskPane, Dialog, Callout, Deferred, Flexbox (NetUI)                        | Mac only: TaskPane, Dialog, Callout (AppKit)                                       | None                                                                                  |
+| Module injection                             | Package and C++ provider registries; property bag                           | Bridge-module registry; TurboModule delegate                                       | `onModuleRegistryCreated`; RNX TurboModule and component registries                   |
+| Reka                                         | TurboModule (Fabric) or CxxModule                                           | Registered through the ORN registries                                              | CxxModule or TurboModule in `androidhost`                                             |
+| Platform-bundle delivery                     | RCDATA resources (JS, HBC, Fabric variants), preloaded in `InstanceCreated` | Bundle files, preloaded by `ORNJSExecutorFactory`                                  | Bundle files, preloaded by `WrapperJSExecutor`                                        |
+| JS engine                                    | V8 by default, Chakra via gate, Hermes for Fabric                           | JSC                                                                                | Hermes                                                                                |
+| Platform name in JS                          | `win32` (Paper) or `windows` (Fabric)                                       | `macos` or `ios`                                                                   | `android`                                                                             |
+| Headless JS runtime                          | Not built (UI-less instances instead)                                       | `jshost/headless`                                                                  | `jshost/headless`                                                                     |
+| Deepest reach-in                             | Activation detour, `ReactCoreInjection`                                     | Private `RCTBridge` declarations, bridge subclass, post-copy source patches        | Source fork with 146 patched files                                                    |
 
 ---
 
 ## 15. Implications and risks
 
-All items here are *Inferred* from the observations above.
+All items here are _Inferred_ from the observations above.
 
 1. **The same API with different lifecycle semantics.**
    - `IReactHost` looks the same everywhere, but Win32 delegates serialization to RNW and does not
@@ -789,20 +824,21 @@ All items here are *Inferred* from the observations above.
 
 ## 16. Open questions
 
-| # | Question | Why it matters | Where to look next |
-|---|---|---|---|
-| 1 | How many Win32 SDXs set `WindowsUseFabric` today, and is there a plan to retire NetUI Paper? | It decides whether risk 2 in §15 is a transitional risk or a long-term one. | Callers of `WindowsUseFabric`; ChangeGate and app configuration |
-| 2 | Is iOS built from `react-native-macos` (per the MDK plist) or from the `react-native-mobile` fork? | `reactnativehost/.ai/react-native-mobile.md` describes the fork as serving "Android and iOS", and the fork patch touches `React/` and `Libraries/` Apple code, but `mbu/projects/opensource_react_native_macos.plist` builds `react-native-macos` for `ios`. | iOS app link inputs (`reactnative_ios_*_libraryset`), fork CI |
-| 3 | Which Apple apps link the `newarch` library set, and does any Apple host run bridgeless or Fabric? | §3 shows the old architecture, but new-arch library sets exist. | Consumers of `reactnative_{mac,ios}_newarch.libraryset` |
-| 4 | How is the bundle source chosen at runtime: in-box (Click-to-Run), service-delivered, or CDN? And what is the version-skew policy for platform bundles? | It determines the real exposure to risk 4 in §15. | OfficeHost package-solution helpers; JS host delivery |
-| 5 | Will Apple parallel V2 registration reach audiences beyond Automation? | It decides when V1 shared instances can be removed (§5.3, §5.4). | `ReactNativeHost.SDXRegistration.ParallelV2Registration` gate |
-| — | *Resolved:* the headless JS runtime (`jshost/headless`) exists only for Android, iOS, and Mac. On Win32, the equivalent is a `ReactHost` with no `IUIManager` provider. | — | `jshost/headless/dirs` |
+| #   | Question                                                                                                                                                                | Why it matters                                                                                                                                                                                                                                               | Where to look next                                              |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| 1   | How many Win32 SDXs set `WindowsUseFabric` today, and is there a plan to retire NetUI Paper?                                                                            | It decides whether risk 2 in §15 is a transitional risk or a long-term one.                                                                                                                                                                                  | Callers of `WindowsUseFabric`; ChangeGate and app configuration |
+| 2   | Is iOS built from `react-native-macos` (per the MDK plist) or from the `react-native-mobile` fork?                                                                      | `reactnativehost/.ai/react-native-mobile.md` describes the fork as serving "Android and iOS", and the fork patch touches `React/` and `Libraries/` Apple code, but `mbu/projects/opensource_react_native_macos.plist` builds `react-native-macos` for `ios`. | iOS app link inputs (`reactnative_ios_*_libraryset`), fork CI   |
+| 3   | Which Apple apps link the `newarch` library set, and does any Apple host run bridgeless or Fabric?                                                                      | §3 shows the old architecture, but new-arch library sets exist.                                                                                                                                                                                              | Consumers of `reactnative_{mac,ios}_newarch.libraryset`         |
+| 4   | How is the bundle source chosen at runtime: in-box (Click-to-Run), service-delivered, or CDN? And what is the version-skew policy for platform bundles?                 | It determines the real exposure to risk 4 in §15.                                                                                                                                                                                                            | OfficeHost package-solution helpers; JS host delivery           |
+| 5   | Will Apple parallel V2 registration reach audiences beyond Automation?                                                                                                  | It decides when V1 shared instances can be removed (§5.3, §5.4).                                                                                                                                                                                             | `ReactNativeHost.SDXRegistration.ParallelV2Registration` gate   |
+| —   | _Resolved:_ the headless JS runtime (`jshost/headless`) exists only for Android, iOS, and Mac. On Win32, the equivalent is a `ReactHost` with no `IUIManager` provider. | —                                                                                                                                                                                                                                                            | `jshost/headless/dirs`                                          |
 
 ---
 
 ## 17. Source index
 
 **Office hosting core (`reactnativehost`)**
+
 - `reactnativehost/public/React.h`: the `Mso::React` contract.
 - `reactnativehost/sources.inc`: the shared, Win32, Apple, and Android source split.
 - `reactnativehost/ReactHostWin.cpp`, `ReactHostApple.mm`, `ReactHost.cpp`: per-platform hosts.
@@ -818,11 +854,13 @@ All items here are *Inferred* from the observations above.
   `.ai/office-vs-meta-0.81-stable.patch`: Android fork documentation and delta.
 
 **Platform-bundle and JS tooling**
+
 - `jshost/officepal/public/PlatformJSBundles.h`, `jshost/officepal/PlatformJSBundles_{win32,mac,ios,android}.*`.
 - `sdx/platform/packages/platform-bundles/{foundation,ui}`, `sdx-platform-bundle-externals`,
   `sdx-metro-config`, `metro-plugin-appbundle`, `metro-plugin-noprelude`, `reka-react-native`.
 
 **Office-side hosts and UI**
+
 - `reactnative/officehost/OfficeHost.cpp`, `reactnative/officehost/public/OfficeHost.h`: manifest,
   platform bundles, and RichAPI.
 - `coreui/reactcontainers/README.md`: TaskPane, Dialog, and Callout containers.
@@ -832,11 +870,13 @@ All items here are *Inferred* from the observations above.
 - `jshost/headless/JSHeadlessRuntimeImpl.cpp`, `jshost/headless/dirs`.
 
 **Android layers**
+
 - `reactnative/androidhost/.ai/index.md`: `libofficereacthost.so`, ReactInstanceAndroid, and Reka.
 - `reactnative/android/host/.ai/index.md`, `reactnative/android/host/.ai/build-rn-fork.md`: the
   Office-agnostic React Native wrapper and the fork playbook.
 
 **Third-party consumption**
+
 - `mbu/projects/opensource_react_native_macos.plist`, `mbu/projects/opensource_react_native_macos/*_libraryset.json`,
   `opensource/react_native_macos/`, `opensource/rnx_kit_react_native_host/OFFICE.md`.
 - `opensource/reactnative/`, `opensource/reactnativesdk/arm64/readme.txt`.

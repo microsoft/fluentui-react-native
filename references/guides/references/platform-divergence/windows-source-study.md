@@ -1,5 +1,9 @@
 # Windows divergences from React Native
 
+> **Retained source study, not the FURN release baseline.** This study describes the upstream revision below.
+> Read the [guide](../../platform-divergence.md) and [version/capability reconciliation](platform-capabilities.md)
+> before applying it to RNW 0.81.35 or Win32 0.81.9. "This repository" below means react-native-windows.
+
 ## Scope and baseline
 
 This is a high-level comparison of **React Native Windows (RNW)** and
@@ -8,8 +12,7 @@ application-facing capabilities and integration contracts, not individual patche
 or an exhaustive prop-by-prop compatibility matrix.
 
 The analysis reflects this repository at `ae439afb21` and its installed upstream
-baseline, `react-native@0.89.0-nightly-20261002-cd2de187e`, inspected on November 11,
-2026. **Observed** capabilities below come from public source, declarations, and
+baseline, `react-native@0.89.0-nightly-20261002-cd2de187e`, inspected on November 11, 2026. **Observed** capabilities below come from public source, declarations, and
 samples; the implications are **inferred**, not results of running every feature.
 
 The two Windows targets are not interchangeable:
@@ -24,7 +27,7 @@ The two Windows targets are not interchangeable:
   behavior cannot.
 - **RNW running in a Win32 application is still RNW**, not the
   `react-native-win32` package. In particular, RNW's native
-  `ReactNativeWin32App` class should not be confused with that package.[^scope]
+  `ReactNativeWin32App` class should not be confused with that package.[sources](#sources-scope)
 
 ## Overall assessment
 
@@ -41,7 +44,7 @@ host. Similar-looking APIs therefore do not establish feature parity.
 Importantly, modern upstream React Native already declares key, focus, mouse, and
 pointer events, ARIA-style roles, native hosts, and render surfaces. The remaining
 divergence is not simply "Windows adds keyboard support" or "Windows supports
-embedding"; it is the additional behavior and platform contracts described below.[^upstream]
+embedding"; it is the additional behavior and platform contracts described below.[sources](#sources-upstream)
 
 ## 1. Focus is a desktop and window-integration concern
 
@@ -56,14 +59,14 @@ and supports entering an island at its first or last focusable element or
 restoring focus. This makes focus crossing the native/React boundary an explicit
 hosting responsibility.
 
-**win32** additionally exports a JS `FocusManager` that distinguishes *polite*
-focus from *aggressive* focus through a `setWindowFocus` argument. That is a
+**win32** additionally exports a JS `FocusManager` that distinguishes _polite_
+focus from _aggressive_ focus through a `setWindowFocus` argument. That is a
 window-focus policy beyond merely choosing a React element. Its specialized
 touchable API also exposes focused, hovered, and pressed state for rendering.
 
 **Implication:** a reusable desktop component must consider where focus goes,
 whether the containing window should receive focus, and how focus is restored.
-An upstream-compatible `focus()` call alone does not capture those policies.[^focus]
+An upstream-compatible `focus()` call alone does not capture those policies.[sources](#sources-focus)
 
 ## 2. Keyboard handling includes ownership of native input
 
@@ -83,7 +86,7 @@ and cursors.
 surrounding native application. This is a more substantial difference than
 having an `onKeyDown` callback, which already exists upstream. The Windows and
 win32 contracts are similar in purpose but should not be assumed identical in
-event shape or native behavior.[^input]
+event shape or native behavior.[sources](#sources-input)
 
 ## 3. Accessibility extends into Windows UI Automation semantics
 
@@ -112,7 +115,7 @@ not the mere existence of a tree or dialog role name.
 **Implication:** complex desktop widgets and document UI need more than a spoken
 label. Relationships, hierarchy, selection, and automation patterns become part
 of their functional contract. The win32 additions above are public contracts;
-their complete private native implementation is outside this review.[^accessibility]
+their complete private native implementation is outside this review.[sources](#sources-accessibility)
 
 ## 4. Accessibility modes and theming go beyond light and dark
 
@@ -134,7 +137,7 @@ for both targets.
 **Implication:** theming adapters need to account for Windows accessibility colors
 and host-provided resources, not just choose a light or dark stylesheet. Similar
 `PlatformColor` calls do not imply interchangeable resource names or resolution
-behavior.[^theme]
+behavior.[sources](#sources-theme)
 
 ## 5. Top-level windows and overlays are explicit platform concepts
 
@@ -164,7 +167,7 @@ RNW's windowing APIs are available to it.
 
 **Implication:** a desktop dialog or secondary surface involves window ownership,
 activation, dismissal, and sizing, not only drawing a view above another view.
-Native window-management APIs must also be distinguished from JS exports.[^windows]
+Native window-management APIs must also be distinguished from JS exports.[sources](#sources-windows)
 
 ## 6. Hosting separates the runtime, the React root, and the native surface
 
@@ -197,7 +200,7 @@ RNW host API to win32 or to infer its runtime topology from the JS package.
 **Implication:** integrating either target is not necessarily equivalent to
 launching a self-contained React application. For RNW, native hosts have an
 explicit public lifecycle contract; for win32, that contract must also be
-obtained from the owning host.[^hosting]
+obtained from the owning host.[sources](#sources-hosting)
 
 ## 7. Native modules and custom controls have Windows-specific authoring contracts
 
@@ -221,7 +224,7 @@ published JS package is not a standalone native-component SDK equivalent to RNW.
 **Implication:** sharing a component's JS interface does not eliminate the need
 for a Windows implementation, registration path, and accessibility/input
 integration. Native extension portability is a separate concern from JS API
-portability.[^native]
+portability.[sources](#sources-native)
 
 ## 8. Viewport and sizing assumptions differ in embedded desktop UI
 
@@ -241,7 +244,7 @@ portability risk.
 
 **Implication:** responsive desktop components should use the dimensions of their
 actual containing surface or layout, rather than automatically treating a
-process-wide window metric as the available space.[^sizing]
+process-wide window metric as the available space.[sources](#sources-sizing)
 
 ## 9. Text entry and component composition have desktop-specific behavior
 
@@ -259,7 +262,7 @@ implementation rejects nesting a `View` inside `Text`. Familiar component names
 therefore do not guarantee identical composition behavior.
 
 **Implication:** text-heavy cross-platform UI needs explicit keyboard policy and
-verification of supported inline content, not just a shared visual layout.[^text]
+verification of supported inline content, not just a shared visual layout.[sources](#sources-text)
 
 ## 10. The extra component surface reflects different platform priorities
 
@@ -276,7 +279,7 @@ press state.
 **Implication:** some divergence is an intentionally larger desktop/Office
 component surface, not a change to React's rendering model. Those exports create
 dependencies on the corresponding platform and, for win32 native controls, its
-host framework.[^components]
+host framework.[sources](#sources-components)
 
 ## 11. Application services and compatibility require platform decisions
 
@@ -299,7 +302,7 @@ APIs, newer upstream features, and legacy Windows exports.
 
 **Implication:** platform selection, renderer generation, and host capabilities
 must all be considered. "Works on Windows" is not a sufficiently precise
-compatibility claim.[^compatibility]
+compatibility claim.[sources](#sources-compatibility)
 
 ## Practical boundary for shared code
 
@@ -322,87 +325,118 @@ platform contracts**, not two package names for the same Windows implementation.
 Paths are relative to the repository root unless identified as upstream. These
 are evidence entry points, not an inventory of every changed file.
 
-[^scope]: `vnext\README.md` (new architecture);
-    `packages\@office-iss\react-native-win32\README.md` (native framework boundary);
-    `vnext\Microsoft.ReactNative\ReactNativeAppBuilder.idl`;
-    `vnext\package.json` and `packages\@office-iss\react-native-win32\package.json`
-    (upstream version pins).
+Resolve these paths in the [pinned RNW source tree](https://github.com/microsoft/react-native-windows/tree/ae439afb21e77403eac009fff400aee6a831d968),
+not in FURN. Direct entry points include
+[ReactNativeWindow](https://github.com/microsoft/react-native-windows/blob/ae439afb21e77403eac009fff400aee6a831d968/vnext/Microsoft.ReactNative/ReactNativeWindow.idl)
+and the [Win32 package boundary](https://github.com/microsoft/react-native-windows/blob/ae439afb21e77403eac009fff400aee6a831d968/packages/@office-iss/react-native-win32/README.md).
 
-[^upstream]: Upstream baseline:
-    [View event contracts](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/Libraries/Components/View/ViewPropTypes.js),
-    [accessibility roles](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/Libraries/Components/View/ViewAccessibility.js),
-    [Android ReactHost](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactHost.kt),
-    and [iOS factory](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/Libraries/AppDelegate/RCTReactNativeFactory.h).
-    These files were inspected in the installed upstream package.
+### Sources: scope
 
-[^focus]: `vnext\Microsoft.ReactNative\ComponentView.idl`;
-    `vnext\Microsoft.ReactNative\ReactNativeIsland.idl`;
-    `vnext\src-win\Libraries\Components\Pressable\Pressable.windows.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Utilities\FocusManager.win32.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\Touchable\TouchableWin32.Props.tsx`.
+`vnext/README.md` (new architecture);
+`packages/@office-iss/react-native-win32/README.md` (native framework boundary);
+`vnext/Microsoft.ReactNative/ReactNativeAppBuilder.idl`;
+`vnext/package.json` and `packages/@office-iss/react-native-win32/package.json`
+(upstream version pins).
 
-[^input]: `vnext\src-win\Libraries\Components\View\View.windows.js`;
-    `vnext\Microsoft.ReactNative\Fabric\Composition\CompositionViewComponentView.cpp`
-    (`OnKeyDown`/`OnKeyUp`);
-    `vnext\Microsoft.ReactNative\Fabric\Composition\ScrollViewComponentView.cpp`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\View\View.win32.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\View\ViewPropTypes.d.ts`.
+### Sources: upstream
 
-[^accessibility]: `vnext\src-win\Libraries\Components\View\ViewAccessibility.windows.js`;
-    `vnext\src-win\Libraries\Components\View\ViewPropTypes.windows.js`;
-    `vnext\Microsoft.ReactNative\Fabric\Composition\CompositionDynamicAutomationProvider.h`;
-    `vnext\Microsoft.ReactNative\IReactViewComponentBuilder.idl`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\View\ViewAccessibility.d.ts`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\AccessibilityInfo\AccessibilityInfo.win32.js`;
-    `packages\@office-iss\react-native-win32-tester\src\js\examples-win32\Accessibility\AccessibilityExampleWin32.tsx`.
+Upstream baseline:
+[View event contracts](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/Libraries/Components/View/ViewPropTypes.js),
+[accessibility roles](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/Libraries/Components/View/ViewAccessibility.js),
+[Android ReactHost](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/ReactAndroid/src/main/java/com/facebook/react/ReactHost.kt),
+and [iOS factory](https://github.com/facebook/react-native/blob/cd2de187e/packages/react-native/Libraries/AppDelegate/RCTReactNativeFactory.h).
+These files were inspected in the installed upstream package.
 
-[^theme]: `vnext\src-win\Libraries\AppTheme\AppTheme.js`;
-    `vnext\Microsoft.ReactNative\Modules\AppThemeModuleUwp.cpp`;
-    `vnext\Microsoft.ReactNative\Theme.idl`;
-    `vnext\Microsoft.ReactNative\ReactNativeIsland.idl`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\StyleSheet\PlatformColorValueTypes.win32.js`;
-    `packages\@office-iss\react-native-win32\src-win\index.win32.js`.
+### Sources: focus
 
-[^windows]: `vnext\Microsoft.ReactNative\ReactNativeWindow.idl`;
-    `vnext\Microsoft.ReactNative\ReactCoreInjection.idl`;
-    `vnext\src-win\Libraries\Modal\Modal.d.ts`;
-    `vnext\Microsoft.ReactNative\Fabric\Composition\Modal\WindowsModalHostViewComponentView.cpp`;
-    `vnext\src-win\Libraries\Components\Popup\Popup.js`;
-    `vnext\src-win\Libraries\Components\Flyout\Flyout.js`.
+`vnext/Microsoft.ReactNative/ComponentView.idl`;
+`vnext/Microsoft.ReactNative/ReactNativeIsland.idl`;
+`vnext/src-win/Libraries/Components/Pressable/Pressable.windows.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Utilities/FocusManager.win32.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/Touchable/TouchableWin32.Props.tsx`.
 
-[^hosting]: `vnext\Microsoft.ReactNative\ReactNativeHost.idl`;
-    `vnext\Microsoft.ReactNative\ReactInstanceSettings.idl`;
-    `vnext\Microsoft.ReactNative\ReactCoreInjection.idl`;
-    `vnext\Microsoft.ReactNative\IReactContext.idl`;
-    `vnext\Microsoft.ReactNative\ReactNativeAppBuilder.idl`;
-    `packages\@office-iss\react-native-win32\README.md`.
-    Many of the island, view-host, and app-builder APIs are marked experimental.
+### Sources: input
 
-[^native]: `vnext\Microsoft.ReactNative\IReactPackageBuilder.idl`;
-    `vnext\templates\cpp-lib\windows\MyLib\ReactPackageProvider.cpp`;
-    `vnext\template\cs-lib\src\ReactNativeModule.cs`;
-    `vnext\Microsoft.ReactNative\IReactViewComponentBuilder.idl`;
-    `vnext\Microsoft.ReactNative\CompositionComponentView.idl`.
+`vnext/src-win/Libraries/Components/View/View.windows.js`;
+`vnext/Microsoft.ReactNative/Fabric/Composition/CompositionViewComponentView.cpp`
+(`OnKeyDown`/`OnKeyUp`);
+`vnext/Microsoft.ReactNative/Fabric/Composition/ScrollViewComponentView.cpp`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/View/View.win32.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/View/ViewPropTypes.d.ts`.
 
-[^sizing]: `vnext\Microsoft.ReactNative\ReactNativeIsland.idl`;
-    `vnext\Microsoft.ReactNative\Fabric\Composition\ReactNativeWindow.cpp`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Utilities\Dimensions.win32.js`.
+### Sources: accessibility
 
-[^text]: `vnext\src-win\Libraries\Components\TextInput\TextInput.flow.windows.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\TextInput\TextInput.flow.win32.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\View\View.win32.js`.
+`vnext/src-win/Libraries/Components/View/ViewAccessibility.windows.js`;
+`vnext/src-win/Libraries/Components/View/ViewPropTypes.windows.js`;
+`vnext/Microsoft.ReactNative/Fabric/Composition/CompositionDynamicAutomationProvider.h`;
+`vnext/Microsoft.ReactNative/IReactViewComponentBuilder.idl`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/View/ViewAccessibility.d.ts`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/AccessibilityInfo/AccessibilityInfo.win32.js`;
+`packages/@office-iss/react-native-win32-tester/src/js/examples-win32/Accessibility/AccessibilityExampleWin32.tsx`.
 
-[^components]: `vnext\src-win\index.windows.js`;
-    `vnext\src-win\Libraries\Components\Glyph\Glyph.js`;
-    `packages\@office-iss\react-native-win32\src-win\index.win32.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\PersonaCoin\PersonaCoin.tsx`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\PersonaCoin\PersonaCoinTypes.ts`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\Touchable\TouchableWin32.Props.tsx`.
+### Sources: theme
 
-[^compatibility]: `vnext\src-win\Libraries\Utilities\Platform.windows.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Utilities\Platform.win32.js`;
-    `vnext\Microsoft.ReactNative\QuirkSettings.idl`;
-    `vnext\src-win\Libraries\Alert\Alert.windows.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Alert\Alert.win32.js`;
-    `packages\@office-iss\react-native-win32\src-win\Libraries\Components\SafeAreaView\SafeAreaView.win32.js`;
-    `packages\@rnw-scripts\just-task\copyRNLibraries.js`.
+`vnext/src-win/Libraries/AppTheme/AppTheme.js`;
+`vnext/Microsoft.ReactNative/Modules/AppThemeModuleUwp.cpp`;
+`vnext/Microsoft.ReactNative/Theme.idl`;
+`vnext/Microsoft.ReactNative/ReactNativeIsland.idl`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/StyleSheet/PlatformColorValueTypes.win32.js`;
+`packages/@office-iss/react-native-win32/src-win/index.win32.js`.
+
+### Sources: windows
+
+`vnext/Microsoft.ReactNative/ReactNativeWindow.idl`;
+`vnext/Microsoft.ReactNative/ReactCoreInjection.idl`;
+`vnext/src-win/Libraries/Modal/Modal.d.ts`;
+`vnext/Microsoft.ReactNative/Fabric/Composition/Modal/WindowsModalHostViewComponentView.cpp`;
+`vnext/src-win/Libraries/Components/Popup/Popup.js`;
+`vnext/src-win/Libraries/Components/Flyout/Flyout.js`.
+
+### Sources: hosting
+
+`vnext/Microsoft.ReactNative/ReactNativeHost.idl`;
+`vnext/Microsoft.ReactNative/ReactInstanceSettings.idl`;
+`vnext/Microsoft.ReactNative/ReactCoreInjection.idl`;
+`vnext/Microsoft.ReactNative/IReactContext.idl`;
+`vnext/Microsoft.ReactNative/ReactNativeAppBuilder.idl`;
+`packages/@office-iss/react-native-win32/README.md`.
+Many of the island, view-host, and app-builder APIs are marked experimental.
+
+### Sources: native
+
+`vnext/Microsoft.ReactNative/IReactPackageBuilder.idl`;
+`vnext/templates/cpp-lib/windows/MyLib/ReactPackageProvider.cpp`;
+`vnext/template/cs-lib/src/ReactNativeModule.cs`;
+`vnext/Microsoft.ReactNative/IReactViewComponentBuilder.idl`;
+`vnext/Microsoft.ReactNative/CompositionComponentView.idl`.
+
+### Sources: sizing
+
+`vnext/Microsoft.ReactNative/ReactNativeIsland.idl`;
+`vnext/Microsoft.ReactNative/Fabric/Composition/ReactNativeWindow.cpp`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Utilities/Dimensions.win32.js`.
+
+### Sources: text
+
+`vnext/src-win/Libraries/Components/TextInput/TextInput.flow.windows.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/TextInput/TextInput.flow.win32.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/View/View.win32.js`.
+
+### Sources: components
+
+`vnext/src-win/index.windows.js`;
+`vnext/src-win/Libraries/Components/Glyph/Glyph.js`;
+`packages/@office-iss/react-native-win32/src-win/index.win32.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/PersonaCoin/PersonaCoin.tsx`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/PersonaCoin/PersonaCoinTypes.ts`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/Touchable/TouchableWin32.Props.tsx`.
+
+### Sources: compatibility
+
+`vnext/src-win/Libraries/Utilities/Platform.windows.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Utilities/Platform.win32.js`;
+`vnext/Microsoft.ReactNative/QuirkSettings.idl`;
+`vnext/src-win/Libraries/Alert/Alert.windows.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Alert/Alert.win32.js`;
+`packages/@office-iss/react-native-win32/src-win/Libraries/Components/SafeAreaView/SafeAreaView.win32.js`;
+`packages/@rnw-scripts/just-task/copyRNLibraries.js`.
