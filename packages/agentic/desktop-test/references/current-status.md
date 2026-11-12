@@ -1468,3 +1468,57 @@ checks for the edited development guide, and committed `yarn change:check`:
 **Passed**. Native consumer modes, the repeated native driver contracts,
 optional native capture, physical console Ctrl+C, and hosted CI remain
 **Not run**. No push was made.
+
+## Windows default-environment acceptance and guidance reverts — 2026-11-12 UTC
+
+This supersedes the preceding controlled-environment acceptance receipt.
+Tested source: `015998677c0912625e0f7e30b107c674a90fec4c`. Receipts:
+`artifacts\desktop\f11\w1-fix\default-buildci`.
+
+**Observed original failures:** the first aggregate failed only
+`@fluentui-react-native/scripts#test`: 18 negative assertions in
+`scripts/src/tasks/agentInstructions.test.ts` expected diagnostics but received an
+empty issues list. `exact-failures.json` records every exact test name,
+location and `AssertionError [ERR_ASSERTION]` message. The earlier
+project-local `TEMP` was an execution choice to keep transient files local,
+not an F11 or nativeRunner requirement. It made the synthetic repositories
+discover their ignored enclosing worktree.
+
+The checker/test blobs match branch base `04d8d8b13` and local `origin/main`
+`505a2187b` exactly. An extracted, byte-identical base-source copy reproduced
+all 18 failures with that override; its source files were then removed.
+`baseline-red.json` and `source-comparison.json` retain the proof. The
+separate later `StorybookUI` failure was `Exceeded timeout of 15000 ms for a
+test` in `resets the whole Win32 preview for a new test generation without
+resetting chrome preferences`. The entire runtime package is identical at
+base/main/head; both unchanged focused tests pass with inherited defaults.
+No full baseline aggregate is claimed, and no new F11 test required a fix.
+
+The first default-environment aggregate passed the instruction tests but
+failed the existing driver test `abandons a walk when the caller
+disconnects, journals it as cancelled, and keeps the session usable` at
+`packages/agentic/desktop-driver/src/server/operations.test.ts:405`: expected `unique`, received
+`inconclusive`. That test and find implementation match base/main; all
+39 unchanged focused tests pass, and the unchanged default aggregate
+retry passed. **Inferred:** these aggregate-only failures are timing-sensitive,
+not evidence that the branch needs altered repository-wide test settings.
+
+Both out-of-scope guidance commits were reversed with new `git revert`
+commits: `b5b82795a` reverts `d94c8787d`; `015998677` reverts `8cbead3f6`.
+The development guide is restored exactly to its pre-guidance contents.
+No assertions, test budgets, product code or machine-wide settings changed.
+
+**Final fresh acceptance:** from the worktree root, through
+`with-native-lock.ps1 -Lane W1` without `-RequirePhysical`,
+`cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` **Passed**,
+exit zero, 2m 45.87s (`final-default-buildci.log`). `TEMP`/`TMP`/`TMPDIR`
+were inherited unchanged; concurrency was default; Git-ceiling, Lage-pool
+and native-driver opt-ins were absent. All 178 Lage tasks succeeded, with
+zero cache hits, failures, pending or aborted tasks. Native capability
+skips are not passes.
+
+The post-run process audit **Passed**, exit zero:
+`FURN-AUDIT: no FURN desktop processes found` (`final-default-audit.log`).
+No app, native fixture/helper, native/GUI contract or physical Ctrl+C was
+launched; no campaign or push occurred. Native qualification remains
+**Not run**, awaiting its separate grant.
