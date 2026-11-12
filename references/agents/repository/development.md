@@ -129,6 +129,10 @@ settles (R-VALID-004):
 - Run working-directory-sensitive native tools from the owning app workspace. Flags such as CocoaPods'
   `--project-directory` select project files but do not change subprocess resolution roots.
 - Run `yarn` only after dependency manifests change or when a declared command fails because a dependency is missing.
+- When temporary test data stays in an ignored project directory, set `TEMP`, `TMP`, `TMPDIR`, and
+  `GIT_CEILING_DIRECTORIES` to that directory's absolute path for the validation process. This prevents synthetic
+  Git-free repositories from discovering the enclosing worktree; fixtures initialized as their own Git repositories
+  still work normally.
 - Review small, localized diffs directly. Use an independent review agent only after focused validation passes and
   when the change still has an ambiguous or cross-cutting contract.
 - Keep sessions scoped to one reviewable outcome; start unrelated work in a fresh session.
