@@ -1728,3 +1728,106 @@ transparent restart and repeated-run reliability remain unqualified.
 The earlier unverifiable LaunchServices causal snapshot is not erased by these
 passing launches. F9 lifecycle relocation and F11 retained-app handoff are
 separate work; this change implements neither.
+
+#### Rebased Fabric and Paper consumer passes
+
+Both renderers were independently rebuilt/prepared and qualified at
+`ca88c289c0fbd79b03dbd43b9bd85f0b21e7e800` (documentation after the
+qualification-only commit). Each passed **all 9 ownership/lifecycle checks**,
+with **0 cleanup failures**. Their declared accessible smokes each passed
+**224, failed 0, skipped 0, unsupported 0, retries 0**: 223 catalog traversals
+and one manifest-selected Button semantics callback. One physical callback
+was excluded before selection, not passed or skipped.
+
+Commands ran from `apps/storybook`, separately for Fabric and Paper, under the
+native lock. The helper signing/cache settings above were supplied.
+The existing project-local Ruby preload selected installed JSON 2.18.0 for
+CocoaPods; no dependencies, privacy settings, native project sources or
+global Ruby settings were changed.
+
+| Exact command                                                                                                                                       | Observed result                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `yarn storybook --reporter json instance --macos`                                                                                                   | Passed                                         |
+| `yarn storybook --reporter json bundle --macos`                                                                                                     | Passed                                         |
+| `yarn storybook --reporter json prep --macos`                                                                                                       | Passed                                         |
+| `yarn storybook --reporter json manifest --macos`                                                                                                   | Passed                                         |
+| `yarn storybook --reporter json driver --macos --input accessible`                                                                                  | Passed readiness and settled shutdown          |
+| `yarn storybook --reporter json run --macos`                                                                                                        | Passed native build and exact instance launch  |
+| `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook --reporter json smoke --macos --mode stories-and-tests --input accessible`         | Passed 224/224                                 |
+| `yarn storybook --reporter json instance --macos --paper`                                                                                           | Passed                                         |
+| `yarn storybook --reporter json bundle --macos --paper`                                                                                             | Passed                                         |
+| `yarn storybook --reporter json prep --macos --paper`                                                                                               | Passed                                         |
+| `yarn storybook --reporter json manifest --macos --paper`                                                                                           | Passed                                         |
+| `yarn storybook --reporter json driver --macos --paper --input accessible`                                                                          | Passed readiness and settled shutdown          |
+| `yarn storybook --reporter json run --macos --paper`                                                                                                | Passed native build and exact instance launch  |
+| `STORYBOOK_SMOKE_STORY=components-button--default yarn storybook --reporter json smoke --macos --paper --mode stories-and-tests --input accessible` | Passed 224/224                                 |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver --reporter json doctor --platform macos --permissions`                    | Passed separately for each renderer; no prompt |
+
+Real neutral supervisor-owned apps survived two borrowed sessions and exited
+only at supervisor disposal. Externally attached apps survived both independent
+owners' cleanup. Cross-helper controlling attach returned
+`application-lock-busy`; independent WebDriver control was refused until the
+first lease was released. Read-only inspection succeeded while control was
+held and preserved window handles. Schema-3 claims carried verified native
+owner/application and registered target/instance identities. F6 provenance
+behavior remained intact. Storybook's outer CLI claim still has its documented
+transitional placeholders; this is not F9 integration.
+
+Evidence: `fabric/evidence.json` and `paper/evidence.json` under the new
+qualification artifact root. Smoke reports:
+`apps/storybook/artifacts/desktop/15518d7a-d662-49ae-a76d-f4c0cd5e2fc3/run.json`
+(Fabric) and
+`apps/storybook/artifacts/desktop/92d22b26-24cc-4d87-a4b7-229d24f478b1/run.json`
+(Paper). Both observed the same stable signer/designated requirement with
+effective permissions under the `Rex Server.app` responsible process tree;
+this is not first-run, clean-machine or permission-revocation qualification.
+Apple/Office module and bridging-header checks are inapplicable to this
+standalone helper. Windows/Win32 native ownership qualification belongs to
+the independent upper layer and was not run here.
+
+#### Plain aggregate, documentation and final cleanup
+
+The required aggregate **is not green**. It ran under the native lock with
+inherited environment: `TF_BUILD` and native/signing overrides absent,
+default TMPDIR retained, and no concurrency override. The cache was cleared
+once; subsequent plain attempts used only results from that fresh run.
+
+| Exact command                                                                                         | Observed result                                                                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn lage test-links --verbose --grouped`                                                            | Passed 90 tasks, failed 0, skipped 0                                                                                                                                                               |
+| `yarn clean-lage-cache && yarn lage buildci`                                                          | Failed in `check-package-contents`: desktop-test's `yarn pack --dry-run --json` exited 1; underlying cause unestablished. Log: `buildci.log`.                                                      |
+| `yarn workspace @fluentui-react-native/desktop-test pack --dry-run --json`                            | Passed immediately without changes. Log: `desktop-test-pack.log`.                                                                                                                                  |
+| `yarn lage buildci` (first retry)                                                                     | Failed driver tests: known `boundedCommand` parallel-startup assertion expected SIGKILL but observed SIGTERM; unmodified `privateStorage` test also exceeded 10 seconds. Log: `buildci-retry.log`. |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand boundedCommand privateStorage` | Passed 73, failed 0, skipped 10. This focused serial diagnostic is not aggregate acceptance. Log: `aggregate-failures-focused.log`.                                                                |
+| `yarn lage buildci` (final unchanged retry)                                                           | Failed only the same `boundedCommand` assertion; driver tests passed 1,236, failed 1, skipped 66. The private-storage test passed. Log: `buildci-final.log`.                                       |
+
+Both failing test sources and their implementations are unchanged from pinned
+main. No assertion, timeout, concurrency policy or environment was altered to
+hide these failures. The passing full signed suite, focused contracts and
+renderer runs remain distinct evidence; they do not turn the failed plain
+aggregate into a pass.
+
+Changed Markdown link checks passed using
+`yarn markdown-link-check -c .github/markdown-link-check-config.json <file>`:
+`packages/agentic/desktop-driver/native/macos/README.md` (12 links),
+`packages/agentic/desktop-driver/references/current-status.md` (6),
+`packages/agentic/desktop-test/references/current-status.md` (19),
+`packages/agentic/desktop-test/references/native-qualification.md` (2), and
+`.changeset/neutral-macos-application-ownership.md` (0).
+
+**Observed final cleanup:** native probes proved all **24** recorded exact
+incarnations exited; all **3** reported driver/channel/Metro ports refused
+connections. Scoped command-line and working-directory checks found **0**
+worktree workload processes. The shared claim and all claims beneath the
+three native/renderer evidence roots were absent. The native lock was then
+reacquired and released successfully.
+
+An earlier cleanup scan saw four orphaned test workers/children from the
+failed aggregate. All four exited naturally before the bounded cleanup
+inspection; no signal was needed. Their initial failure and subsequent
+absence are retained in `cleanup-first.json`, `cleanup-first.log` and
+`aggregate-worker-cleanup.json`. The final successful verifier wrote
+`cleanup-final.json` and `cleanup-final.log` in the new artifact root.
+No helper, fixture, descendant, application, driver service or Metro from
+this qualification remains. Copied execution scripts were removed after use;
+their JSON results and command logs remain as ignored evidence.

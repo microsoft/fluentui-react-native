@@ -783,3 +783,30 @@ and aggregate outcomes are recorded in
 Evidence root: `artifacts/desktop/f10m/rebased-qualification-20261112/`;
 AppKit identities:
 `packages/agentic/desktop-test/artifacts/desktop/application-ownership-kffNMN/evidence.json`.
+
+The rebased real Storybook consumer passes at
+`ca88c289c0fbd79b03dbd43b9bd85f0b21e7e800` independently passed all
+**9 ownership checks on Fabric and all 9 on Paper**, with no cleanup failures.
+Each accessible smoke passed **224/224**, with no failures/skips/unsupported
+cases/retries; one physical callback was excluded before selection.
+Neutral supervisor/session lifetime, exact external preservation, independent
+application exclusion, read-only inspection and exact cleanup all passed.
+This supplements the unchanged helper's native contracts and does not
+qualify arbitrary descendants or deferred Storybook lifecycle integration.
+Exact commands and report IDs are in the harness ledger.
+
+**Aggregate qualification remains failed:** one plain cache-cleared
+`yarn clean-lage-cache && yarn lage buildci` encountered an unreproduced
+desktop-test pack dry-run failure. Two unchanged plain `yarn lage buildci`
+retries then reproduced the pre-existing `boundedCommand` parallel-startup
+SIGKILL/SIGTERM assertion; the first also hit an unmodified private-storage
+timeout, which passed in the last attempt. The focused serial diagnostic
+passed 73 with 10 skipped. No environment/concurrency override or unrelated
+test fix was used; this does not establish a green aggregate.
+
+Separate Markdown validation passed 90 link-check tasks. Final locked
+cleanup proved **24 exact incarnations exited**, **3 ports closed**, zero
+worktree processes and no shared/fixture claims. Four test workers briefly
+outlived the failed aggregate but all exited naturally before cleanup
+inspection. The final verifier and lock reacquisition passed. The harness
+ledger preserves each exact command and every failed attempt.
