@@ -1152,3 +1152,81 @@ not qualify its new source digest. The new-source clean-cache aggregate and
 hosted CI are **not run** yet. The 200% DPI, mixed-DPI, and negative-origin
 gaps remain unchanged. Both campaigns ended, and the final audit reported
 `FURN-AUDIT: no FURN desktop processes found`.
+
+## Windows Fabric and Win32 Paper — reviewed-helper final qualification — 2026-11-12 UTC
+
+**Tested revision:** `6c626602cf1eedd10425c8a63d794b1e12b1ff95`, clean worktree
+for every real-app run. The coordinator's Opus review of the close-race
+correction reported no findings. W3 received a new desktop grant after W2's
+recovery verification; the session was **remote**, Active/unlocked, with
+the Default input desktop and `physicalEligible: true`.
+
+All native and real-app commands below ran inside the W3 campaign and
+serialized machine lock with `-RequirePhysical`. Every wrapper's before/after
+session check stayed eligible. No hosted input skip or semantic action is
+counted as physical evidence.
+
+The source-verified helper cache selected source
+`7119f42fb101452990b7bea13daf685e90a67ad75840fba60968a5efe42f62d1`,
+artifact `e0e6fc988fc9214b91e02bd0909c099b203d4f9bfd89c45db8f8c9f9397a05e0`,
+and build fingerprint
+`afca889e68ccd07b9c1874b6d46b0c2a3a3f635e3e7b09c1b43eca20b9fb6f9c`.
+The app supervisor used prebuilt-only policy, not an implicit helper build.
+The exact native app identity was checked before each run. The registered
+Fabric app had no native source differences from its build revision;
+Metro and bundles came from this worktree. Paper used the exact REX executable
+with SHA-256
+`3ecd1f58690b029eccf06838dc23411f08b1f3765b99950091f8246aedd74725`.
+The plain Win32 fixture executable had SHA-256
+`9e082f5a9a50e1a6f93f8d91a0c01f8e880820030a7e9d8b5c1917993fc8bc13`.
+Apps, Metro, helpers, and fixtures were cleaned up between runs.
+
+The native package command below ran from `packages\agentic\desktop-driver`
+with `$env:FURN_NATIVE_DRIVER_TEST='1'`. Endpoint supervisor commands ran
+from the worktree root; their source and immutable run artifacts remain
+under ignored `artifacts\desktop\w3-qualification`.
+
+| Exact command                                                                                                              | Observed result                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn test --runInBand operations.contract win32Fixture.contract nativeDriver --verbose`                                   | **Passed:** three suites, 34 tests; two macOS-only cases **skipped**. The previously failing tool-content closure case passed. The log is `artifacts\desktop\w3-buildci\final-native-contracts-fixed.log`.                                                                                                              |
+| `node artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only --activation-diagnostics` | **Passed:** main Pressable/Button and modern secondary refuse honestly with `activation-unsupported`, effect `none`, no delivery receipt, quarantine, physical fallback, or application change. Run `8f6d457c-c0d3-4ab5-9204-6dbf66383dbd`.                                                                             |
+| `node artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only --physical-secondary`     | **Passed:** a distinct secondary is registered, its 11-node sample is complete, the click is applied through `physical-pointer`, the public `focus: confirmed` effect is observed, and its handle retires. Run `94c0b321-cebd-4e9b-99e2-3404bbbd80c3`.                                                                  |
+| `node artifacts\desktop\w3-qualification\run-endpoint.mjs win32 --secondary-only --physical-secondary`                     | **Passed for native delivery:** the exact owned tool secondary is registered, its eight-node sample is complete, a physical-pointer click is applied, and its handle retires. Run `f46d008a-d310-4e6e-98fd-e85941879edd`. The legacy story has no native-command outcome, so this is not proof of the RN focus command. |
+
+The full native selector executed the review-specific coverage, not just
+compiled it: failed-probe retention and shared-deadline/retry self-tests;
+the real hung-popup listing and bounded new-popup discovery/recovery cases;
+truthful listed/tracked publication; the close-after-enumeration self-test
+with live-error and unrelated-error propagation; and both legacy-only
+activation refusals. Legitimate Invoke/Toggle and the existing observation,
+capture, mutation settlement, containment, cancellation, and retention
+contracts also passed. Cancellation completed in 32 ms; retained elements
+stayed at 20 after 500 fixture cycles. The earlier failed sweep and
+deterministic red/green evidence remain recorded above.
+
+### Final-source aggregate and hygiene
+
+After ending the native campaign and obtaining a clean audit, the exact root
+command `cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"` ran under
+the W3 machine lock with **default TEMP and concurrency**, native opt-in
+unset, and no policy, timeout, or guidance workaround. It **passed on the
+first attempt**: 178 successful tasks, zero failed, aborted, pending, or
+skipped tasks. Native tests remain opt-in in this aggregate and are qualified
+by the separate 34-test run above.
+
+The aggregate ran from 22:30:40 to 22:33:27 UTC. The operational supervisor
+retained the lock until its owned descendants drained; drain completed
+before lock release. Its retained log is
+`artifacts\desktop\w3-buildci\final-buildci-fixed.log`. No readiness-flake
+rerun was needed. No code changed after the reviewed and qualified source;
+this publication update changes only Windows evidence/tracking.
+
+The campaign ended. Both its post-campaign audit and the post-aggregate audit
+reported `FURN-AUDIT: no FURN desktop processes found`. No W3 app, helper,
+fixture, Metro, or WDIO process survived.
+
+The current-source local reruns are complete. Hosted results for the
+publication head will be recorded in draft PR #4498, separately from
+earlier-head hosted evidence. The 200% DPI, mixed-DPI, and negative-origin
+cases remain **not run** for the previously recorded authorization/topology
+reasons; console Ctrl+C remains separate work in #4491.

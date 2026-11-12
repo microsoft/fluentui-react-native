@@ -1085,33 +1085,25 @@ the PR; a hosted capability skip is not completion.
 ### Windows connected-session follow-up — 2026-11-12 UTC
 
 The legacy-only activation refusal and lease-local content-popup registration
-corrections have focused native red/green evidence. At `3957cd6ae`, Fabric
-main/secondary semantic refusal and both endpoints' secondary physical
-delivery passed in an eligible remote session. The full native sweep then
-found a close-during-listing geometry race: 33 cases passed, one failed,
-and two macOS-only cases were skipped. The narrow native correction at
-`a53451513` has a deterministic red/green self-test, the original fixture
-case passing, and six passing isolated fixture replays. See the separate
-[Windows evidence entry](current-status.md). Keep #4441 open until:
+corrections and close-during-listing guard have reviewed test-first evidence.
+At clean revision `6c626602c`, with the new helper and an eligible remote
+session, Fabric main/secondary semantic refusal and both endpoints'
+secondary physical delivery passed. The complete native selector passed
+34 tests with two macOS-only skips, including failed/hung-probe retention,
+the shared discovery deadline and deferred retry, truthful publication,
+and the deterministic close-after-enumeration self-test. The
+default-environment clean-cache aggregate passed all 178 tasks on its first
+attempt. See the separate [Windows evidence entry](current-status.md).
 
-- The close-race correction receives coordinator review.
-- The new helper reruns Fabric main/secondary semantic activation and both
-  endpoints' secondary physical clicks. Physical receipts are not themselves
-  proof of the legacy Callout's native command outcome.
-- The new helper reruns
-  `yarn test --runInBand operations.contract win32Fixture.contract nativeDriver`
-  with `$env:FURN_NATIVE_DRIVER_TEST = '1'`, including registered-popup
-  liveness during failed/hung content probes, the shared discovery deadline
-  and deferred retry, truthful listed/tracked publication, and the
-  close-after-enumeration self-test.
-- The final-source default-environment clean-cache aggregate and affected
-  hosted Windows/Win32 lanes pass, including the legacy menu assertion
-  guard and its closing-window correction.
+Keep #4441 open for the unrun 200% DPI, mixed-DPI, and negative-origin cases
+and other issue-owned gaps. Native delivery receipts do not prove the
+legacy Callout's unreported RN focus-command outcome. Current-head hosted
+Windows/Win32 coverage, including the legacy menu assertion guard and its
+closing-window correction, is tracked in draft PR #4498; earlier-head CI
+does not qualify later code.
 
-The earlier default-environment clean-cache repository aggregate passed all
-178 tasks at `cad25f8c5`; it does not qualify the later corrections. Native
-runs resumed after the disconnected session became Active/unlocked and W3
-received its grant. Both W3 campaigns ended with clean process audits.
+The W3 campaign ended, owned aggregate descendants drained before lock
+release, and post-campaign/post-aggregate process audits were clean.
 Further native/GUI/physical work still requires an
 Active, unlocked session, an explicit W3 desktop grant, and the serialized
 campaign; physical work additionally requires `-RequirePhysical`. No
