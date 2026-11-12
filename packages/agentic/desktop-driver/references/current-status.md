@@ -745,7 +745,13 @@ One permitted session check at **2026-11-12T17:21:31Z** reconfirmed remote
 session 1 as Disconnected, locked, LogonUI running, and without an input
 desktop. No native or GUI retry followed.
 
-The post-review clean-cache repository aggregate, committed changeset check,
-and final native/physical reruns are still pending. Outstanding qualification
-stays tracked in [remaining work](remaining-work.md) / #4441; no issue is
-closed and no final-helper physical-success claim is made here.
+The implementation is committed as
+`cd036a2d06ae450f9c26ac0837c4fe140877ffb9`. Its committed
+`yarn change:check` **passed**. A post-commit process audit also passed:
+`FURN-AUDIT: no FURN desktop processes found`; campaign status reported no
+campaign or holder. The branch has not been pushed.
+
+The post-review clean-cache repository aggregate and final native/physical
+reruns are still pending. Outstanding qualification stays tracked in
+[remaining work](remaining-work.md) / #4441; no issue is closed and no
+final-helper physical-success claim is made here.
