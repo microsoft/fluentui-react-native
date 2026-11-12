@@ -29,7 +29,8 @@ and release its driver session before authored test sessions start.
 `config/generated-contract.cjs` is the dependency-free source of the strict
 driver-manifest version 3, private-credential version 1, and parent-handoff
 version 1 schemas. Unknown generated fields fail, and authored plans and case
-options remain validated by their owning desktop-driver validators.
+options remain validated by their owning desktop-driver validators. Extracted
+case options retain their separately validated `inputSource` metadata.
 
 The public generated JSON contains credential references, never either nonce.
 `src/driver/generatedManifest.ts` publishes a credential record and bridge-only

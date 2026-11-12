@@ -42,7 +42,11 @@ export function parseStoredDriverManifest(value: unknown): StoredDriverManifest 
   const manifest = parseDriverManifest(value) as StoredDriverManifest;
   for (const entry of manifest.storyManifest.entries) {
     if (entry.tests !== undefined) validateDesktopStoryTests(entry.tests, `driver manifest story ${entry.id}`);
-    for (const test of entry.wdio?.cases ?? []) validateDesktopCaseOptions(test.options, `driver manifest case ${entry.id}/${test.name}`);
+    for (const test of entry.wdio?.cases ?? []) {
+      // Extraction adds inputSource to resolved options; the authoring validator accepts only authored fields.
+      const { inputSource: _inputSource, ...authoredOptions } = test.options;
+      validateDesktopCaseOptions(authoredOptions, `driver manifest case ${entry.id}/${test.name}`);
+    }
   }
   return manifest;
 }

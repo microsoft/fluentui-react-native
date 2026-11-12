@@ -68,7 +68,14 @@ const storyManifest = object({
       tests: optional(record(() => true)),
       wdio: optional(
         object({
-          cases: optional(array(object({ name: text, options: record(() => true) }))),
+          cases: optional(
+            array(
+              object({
+                name: text,
+                options: (value) => record(() => true)(value) && optional(oneOf('declared', 'derived'))(value.inputSource),
+              }),
+            ),
+          ),
           digest: text,
           exportName: text,
           testNames: optional(array(text)),

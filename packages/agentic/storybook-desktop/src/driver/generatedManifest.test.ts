@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { NativeDriverArtifact } from '@fluentui-react-native/desktop-driver';
+import { validateDesktopCaseOptions } from '@fluentui-react-native/desktop-driver/authoring';
 import { createDesktopStorybookInstance } from '../config/instance';
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { createDesktopStorybookDriverManifest, writeDesktopStorybookDriverManifest } from './driverManifest';
@@ -147,10 +148,35 @@ describe('generated manifest trust handoff', () => {
         title: 'Fixture',
         ...(section === 'tests'
           ? { tests: { version: 1, tests: [], unknown: true } }
-          : { wdio: { digest: 'digest', exportName: 'Story', cases: [{ name: 'case', options: { unknown: true } }] } }),
+          : {
+              wdio: {
+                digest: 'digest',
+                exportName: 'Story',
+                cases: [{ name: 'case', options: { input: 'both', inputSource: 'derived', unknown: true } }],
+              },
+            }),
       },
     ];
     expect(() => parseStoredDriverManifest(manifest)).toThrow('unknown field');
+  });
+
+  test.each([undefined, 'physical'] as const)('accepts extracted case options with %s authored input', (input) => {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    const options = validateDesktopCaseOptions({ ...(input === undefined ? {} : { input }), requires: ['keyboard'] });
+    manifest.storyManifest.entries = [
+      {
+        id: 'fixture--story',
+        name: 'Story',
+        packageName: 'fixture',
+        sourcePath: 'Fixture.stories.tsx',
+        tags: [],
+        title: 'Fixture',
+        wdio: { digest: 'digest', exportName: 'Story', cases: [{ name: 'case', options }] },
+      },
+    ];
+    expect(parseStoredDriverManifest(manifest).storyManifest.entries[0].wdio?.cases?.[0].options).toEqual(options);
+    manifest.storyManifest.entries[0].wdio.cases[0].options.inputSource = 'unknown';
+    expect(() => parseStoredDriverManifest(manifest)).toThrow('driver manifest');
   });
 
   (process.platform === 'darwin' ? test : test.skip)(
