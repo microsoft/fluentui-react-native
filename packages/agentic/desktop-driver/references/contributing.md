@@ -99,6 +99,10 @@ specifiers, so keep it that way.
   lock.
 - Add native self-tests for provider-local parsing, state, cancellation,
   identity, capture geometry, or recovery changes.
+- On macOS, observers use `NativeDesktopHost.inspectApplication`, not another
+  controlling `attach`. It validates the configured descriptor and exact window
+  without taking an application lock or changing session window/element records.
+  Keep the exclusive per-incarnation lock on every real launch/attach.
 - Add or update the opt-in Node native contract when build, cache, selection,
   signing, or handshake behavior changes.
 - On Windows, extend the Win32 fixture contract

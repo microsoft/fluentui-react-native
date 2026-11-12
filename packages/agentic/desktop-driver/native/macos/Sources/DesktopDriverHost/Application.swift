@@ -501,7 +501,33 @@ final class ApplicationManager {
     }
   }
 
+  private struct Attachment {
+    let running: NSRunningApplication
+    let windowTitle: String
+    let startedAt: String
+  }
+
   func attach(_ params: JSONObject, token: CancellationToken) throws -> ApplicationLeaseRecord {
+    let resolved = try resolveAttachment(params, token: token)
+    return try createLease(
+      ownership: "attached", running: resolved.running, windowTitle: resolved.windowTitle, params: params,
+      expectedStartedAt: resolved.startedAt
+    )
+  }
+
+  /// Identity observation must not acquire control or register windows belonging to an active session.
+  func inspectApplication(_ params: JSONObject, token: CancellationToken) throws -> JSONObject {
+    let resolved = try resolveAttachment(params, token: token)
+    try token.throwIfCancelled()
+    let pid = resolved.running.processIdentifier
+    guard ApplicationIncarnation.classifyExact(recorded: resolved.startedAt, observed: ApplicationIncarnation.observeExact(pid)) == .running
+    else {
+      try fail(ErrorCode.attachFailed, "The application incarnation changed or became unreadable during identity inspection.")
+    }
+    return ["processId": Int(pid), "processStartedAt": resolved.startedAt]
+  }
+
+  private func resolveAttachment(_ params: JSONObject, token: CancellationToken) throws -> Attachment {
     let application = try requireObject(params["application"], "The attach request is missing its application descriptor.")
     try failIfSessionUnavailable("Attaching to the application")
     let endpoint = optionalString(params, "endpoint") ?? "macos"
@@ -531,8 +557,7 @@ final class ApplicationManager {
         expectedExecutablePath: configuredExecutablePath, code: ErrorCode.leaseInvalid)
       _ = try waitForUniqueWindow(processID: pid, exactTitle: windowTitle, timeoutMilliseconds: 10_000,
         token: token, code: ErrorCode.attachFailed)
-      return try createLease(ownership: "attached", running: running, windowTitle: windowTitle, params: params,
-        expectedStartedAt: expected)
+      return Attachment(running: running, windowTitle: windowTitle, startedAt: expected)
     }
 
     if let leasePath = optionalString(application, "leasePath") {
@@ -562,7 +587,8 @@ final class ApplicationManager {
         try fail(ErrorCode.leaseInvalid, "The leased application process is no longer running.")
       }
       guard
-        let actualStart = processStartTime(pid),
+        let nativeIdentity = try? ServiceIdentity.inspect(pid),
+        let actualStart = parseDate(nativeIdentity.startedAt),
         let expectedStartText = optionalString(lease, "processStartedAt"),
         let expectedStart = parseDate(expectedStartText)
       else {
@@ -615,7 +641,7 @@ final class ApplicationManager {
         token: token,
         code: ErrorCode.attachFailed
       )
-      return try createLease(ownership: "attached", running: running, windowTitle: windowTitle, params: params)
+      return Attachment(running: running, windowTitle: windowTitle, startedAt: nativeIdentity.startedAt)
     }
 
     guard let windowTitle = configuredWindowTitle else {
@@ -638,12 +664,13 @@ final class ApplicationManager {
       }
       return true
     }
-    var matches: [(NSRunningApplication, AXUIElement)] = []
+    var matches: [(NSRunningApplication, String?)] = []
     var queryOutcomes: [AXWindowQueryOutcome] = []
     var titleErrorCount = 0
     var titleErrors: [JSONObject] = []
     for candidate in candidates {
       try token.throwIfCancelled()
+      let startedAt = (try? ServiceIdentity.inspect(candidate.processIdentifier))?.startedAt
       let outcome = queryAccessibilityWindows(processID: candidate.processIdentifier)
       queryOutcomes.append(outcome)
       let reason = classifyAXWindowQuery(
@@ -677,7 +704,7 @@ final class ApplicationManager {
           continue
         }
         if candidateTitle == windowTitle {
-          matches.append((candidate, window))
+          matches.append((candidate, startedAt))
         }
       }
     }
@@ -777,7 +804,10 @@ final class ApplicationManager {
       expectedExecutablePath: configuredExecutablePath,
       code: ErrorCode.attachFailed
     )
-    return try createLease(ownership: "attached", running: running, windowTitle: windowTitle, params: params)
+    guard let startedAt = matches[0].1 else {
+      try fail(ErrorCode.attachFailed, "The application process start identity could not be read.")
+    }
+    return Attachment(running: running, windowTitle: windowTitle, startedAt: startedAt)
   }
 
   /// Releases a lease. A launched application is proven exited first, so a process that will not die keeps its lease

@@ -55,6 +55,9 @@ export type NativeDriverResolveOptions = NativeDriverBuildOptions & {
   installRoot?: string;
 };
 
+/** Native-verified process identity without a controlling application lease. */
+export type NativeApplicationIdentity = Readonly<{ processId: number; processStartedAt: string }>;
+
 export type NativeDesktopApplicationDescriptor = {
   arguments?: readonly string[];
   aumid?: string;
@@ -63,7 +66,7 @@ export type NativeDesktopApplicationDescriptor = {
   leaseNonce?: string;
   leasePath?: string;
   /** Exact macOS attach identity. Never grants launch/termination authority and cannot be combined with a legacy lease. */
-  processIdentity?: Readonly<{ processId: number; processStartedAt: string }>;
+  processIdentity?: NativeApplicationIdentity;
   windowTitle?: string;
   workingDirectory?: string;
 };

@@ -23,6 +23,7 @@ func createHello() -> JSONObject {
       "elementCapture",
       "find",
       "hitTest",
+      "inspectApplication",
       "keyboard",
       "launch",
       "performAccessibilityAction",

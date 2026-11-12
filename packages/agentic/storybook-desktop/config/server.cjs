@@ -160,7 +160,7 @@ async function startDesktopStorybookServer({
     server.on('error', fatal);
     keepAlive = setInterval(() => undefined, 60_000);
     if (driverManifest) {
-      const { StorybookChannelOrchestrator } = await import('../lib/driver/index.js');
+      const { createApplicationIdentityResolver, StorybookChannelOrchestrator } = await import('../lib/driver/index.js');
       // An accessible driver cannot perform physical input, so every test that attaches to it runs the accessible lane.
       const maskedFeatures =
         driverManifest.wdio?.input === 'accessible'
@@ -212,7 +212,7 @@ async function startDesktopStorybookServer({
               }
             : {}),
           target,
-          createTarget: async (_targetHost, recovery) => ({
+          createTarget: async (targetHost, recovery) => ({
             storyOrchestrator: createChannelOrchestrator({
               channelServer: server,
               driverManifest,
@@ -220,22 +220,16 @@ async function startDesktopStorybookServer({
               StorybookChannelOrchestrator,
               recovery: {
                 ...recovery,
-                resolveApplication: async () => {
-                  // A separate helper cannot steal window/element records from an active session's lease.
-                  const identityHost = new NativeDesktopHost({
-                    application: agent?.application ?? driverManifest.application,
-                    artifact: driverManifest.nativeDriver,
-                    endpoint: driverManifest.endpoint,
-                  });
-                  try {
-                    const lease = await identityHost.attach({ ...target, host: identityHost }, AbortSignal.timeout(10_000));
-                    if (lease.processId === undefined || lease.processStartedAt === undefined)
-                      throw new Error('The Storybook application has no verified process incarnation.');
-                    return { processId: lease.processId, processStartedAt: lease.processStartedAt };
-                  } finally {
-                    await identityHost.dispose();
-                  }
-                },
+                resolveApplication: createApplicationIdentityResolver({
+                  host: targetHost,
+                  target: { ...target, host: targetHost },
+                  createIdentityHost: () =>
+                    new NativeDesktopHost({
+                      application: agent?.application ?? driverManifest.application,
+                      artifact: driverManifest.nativeDriver,
+                      endpoint: driverManifest.endpoint,
+                    }),
+                }),
               },
             }),
           }),

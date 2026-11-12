@@ -137,16 +137,17 @@ async function supervisor(name: string, descriptor: NativeDesktopApplicationDesc
     host: { kind: 'installed', ownership: lifetime, application: descriptor },
   };
   const lockDirectory = path.join(directory, name);
+  const host = nativeHost(descriptor);
   const owner = new DesktopSupervisor({
     target: resolved,
     reporter,
     reportSession: { reporter, delegated: true, environment: {}, close: async () => 0 },
     lockDirectory,
     processIdentity: await describeDesktopWorkloadOwner({ helperPath: artifact.executablePath }),
-    hostFactory: async () => nativeHost(descriptor),
+    hostFactory: async () => host,
     recovery: { root: path.join(directory, `${name}-recovery`), probeApplication: createMacOSApplicationProbe({ artifact }) },
   });
-  return { owner, lockDirectory, reporter };
+  return { owner, host, lockDirectory, reporter };
 }
 
 nativeTest('kernel owner identity inspects the real claim as live without wall-clock conversion', async () => {
@@ -210,7 +211,7 @@ nativeTest('failed native pre-spawn and rejected LaunchServices launches release
 });
 
 nativeTest('supervisor launch survives two real sessions, records native owner/application identity, and closes exactly', async () => {
-  const { owner, lockDirectory, reporter } = await supervisor('retained', application(), 'supervisor');
+  const { owner, host, lockDirectory, reporter } = await supervisor('retained', application(), 'supervisor');
   const probe = createMacOSApplicationProbe({ artifact });
   let lease: ApplicationLease | undefined;
   try {
@@ -222,6 +223,12 @@ nativeTest('supervisor launch survives two real sessions, records native owner/a
     lease = owner.server.sessions.get(first.id).lease;
     expect(lease).toMatchObject({ ownership: 'attached', launchKind: 'launch-services', containment: 'uncontained' });
     expect(captureDesktopApplicationIdentity(lease, 'macos').processStartedAt).toMatch(/\.[0-9]{6}Z$/);
+    const windows = await first.getWindowHandles();
+    await expect(host.inspectApplication({ ...target, host })).resolves.toEqual({
+      processId: lease.processId,
+      processStartedAt: lease.processStartedAt,
+    });
+    await expect(first.getWindowHandles()).resolves.toEqual(windows);
     await first.delete();
     await expect(probe(captureDesktopApplicationIdentity(lease, 'macos'))).resolves.toBe('running');
     const second = await client.newSession(capabilities);
@@ -292,7 +299,17 @@ nativeTest('independent services exclude the exact external application and pres
       alwaysMatch: { platformName: 'macos', 'furn:target': id, 'furn:launchMode': 'attach' },
     });
     const session = await firstClient.newSession(capabilities('external-first'));
+    const windows = await session.getWindowHandles();
+    await expect(first.host.inspectApplication({ ...target, host: first.host })).resolves.toMatchObject({
+      processId: identity.processId,
+      processStartedAt: identity.processStartedAt,
+    });
+    await expect(second.host.inspectApplication({ ...target, host: second.host })).resolves.toMatchObject({
+      processId: identity.processId,
+      processStartedAt: identity.processStartedAt,
+    });
     await expect(secondClient.newSession(capabilities('external-second'))).rejects.toThrow(/Another desktop service controls/);
+    await expect(session.getWindowHandles()).resolves.toEqual(windows);
     await expect(stale.attach({ ...target, host: stale })).rejects.toThrow(/incarnation/);
     await expect(probe(identity)).resolves.toBe('running');
     await session.delete();

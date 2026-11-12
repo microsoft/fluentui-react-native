@@ -53,6 +53,26 @@ extension SelfTestRunner {
     let reused = answer(#"{"pid":\#(getpid()),"startedAt":"1970-01-01T00:00:00.000Z"}"#)
     check(reused["state"] as? String == "exited", "application incarnation treats a later start as pid reuse")
     testExactApplicationExclusion()
+    testIdentityInspectionRefusals()
+  }
+
+  private func testIdentityInspectionRefusals() {
+    let driver = Driver()
+    let requests: [JSONObject] = [
+      [:],
+      ["application": ["processIdentity": ["processId": getpid(), "processStartedAt": "not-a-native-timestamp"], "windowTitle": "Never inspected"]],
+      ["application": ["processIdentity": ["processId": getpid(), "processStartedAt": "1970-01-01T00:00:00.000000Z"], "windowTitle": "Never inspected"]],
+    ]
+    for request in requests {
+      do {
+        _ = try driver.execute(command: "inspectApplication", params: request, token: CancellationToken())
+        check(false, "read-only application inspection rejects an unverified descriptor")
+      } catch {
+        let code = (error as? HelperError)?.code
+        check(code == ErrorCode.invalidParams || code == ErrorCode.leaseInvalid,
+          "the identity command fails closed on malformed or stale identity before Accessibility discovery")
+      }
+    }
   }
 
   private func testExactApplicationExclusion() {

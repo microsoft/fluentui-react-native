@@ -17,3 +17,8 @@ must be awaited; the Storybook integration awaits it before starting.
 Pre-spawn and rejected LaunchServices acquisitions release their claims.
 Dispatched or surviving acquisitions remain fenced, and non-contention lock
 failures clean up only the exact application that the helper launched.
+
+Read-only macOS application identity inspection shares descriptor verification
+without acquiring a controlling lease or disturbing session window records.
+Storybook bridge-epoch recovery uses it on the embedded helper while real
+launch/attach operations retain cross-service exact-incarnation exclusion.

@@ -144,6 +144,17 @@ never grants termination authority. Existing Storybook lease files remain a
 separate, legacy identity path. Independent helpers hold a stable per-user
 exclusive lock for each exact application incarnation until its lease is
 released. Lock contention never permits signalling another helper's application.
+The macOS-only `inspectApplication` command accepts the same configured target
+parameters as `attach` and returns only `{ processId, processStartedAt }`. It
+performs the same descriptor, legacy-lease/nonce, bundle/executable, exact-window
+and uniqueness checks, with the exact kernel incarnation captured before window
+discovery and rechecked afterwards. It does not create an application lease,
+acquire an application or physical-input lock, register windows/elements, or
+grant control/termination authority. Identity observation can therefore run on
+the session's helper while its controlling lease remains held, without stealing
+window records or permitting another service to attach. Cancellation and
+unverifiable identity/Accessibility fail closed. Other providers do not implement
+this command.
 Other lock failures after a proven launch use exact-incarnation cleanup and
 report `exited` only when that primary process is confirmed gone.
 Explicit app paths are authoritative; bundle-only launch rejects

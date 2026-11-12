@@ -23,6 +23,12 @@
         }
       }
     },
+    "identityInspection": {
+      "command": "inspectApplication",
+      "result": { "$ref": "#/macosApplicationOwnership/processIdentity" },
+      "acquiresLease": false,
+      "registersWindows": false
+    },
     "launchKind": ["launch-services", "direct-child"],
     "containment": ["uncontained", "external"],
     "applicationSettlement": ["not-started", "exited", "unknown"],

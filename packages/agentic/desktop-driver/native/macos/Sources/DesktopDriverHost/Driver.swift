@@ -108,6 +108,8 @@ final class Driver {
       return CommandResult(result: try applications.launch(params, token: token).json())
     case "attach":
       return CommandResult(result: try applications.attach(params, token: token).json())
+    case "inspectApplication":
+      return CommandResult(result: try applications.inspectApplication(params, token: token))
     case "closeApplication":
       let lease = try requireObject(params["lease"], "The closeApplication request is missing its lease.")
       let leaseID = try requireString(lease, "id")
