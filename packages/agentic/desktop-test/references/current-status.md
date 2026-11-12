@@ -1414,3 +1414,57 @@ D:\dev\furn-w1\artifacts\desktop\f11\w1-fix\review-fixes\focused-green.json`:
   hosted CI and locked clean-cache `buildci`: **Not run**, reserved for the
   coordinator's post-review W1 grant and final validation. Post-commit
   changeset checking is recorded in the review handoff receipt.
+
+## Windows portable clean-cache/buildci — review fixes — 2026-11-12 UTC
+
+Tested source: `d94c8787dd76a1be08cbf2827cc57edb6a3a18f2`, including the
+review fixes at `78236d3e8502b743055bf5cf3c48eed58a8926a3` and two
+validation-guidance commits. Scope: portable repository validation only.
+The coordinator authorized the W1 lock without `-RequirePhysical` while
+the desktop was disconnected; no campaign, app, native fixture/helper
+launch, native/GUI contract or physical console Ctrl+C was run. Endpoint,
+session kind and native run IDs are not applicable.
+
+Receipts are under `artifacts\desktop\f11\w1-fix\portable-buildci`.
+All aggregate commands ran through `with-native-lock.ps1 -Lane W1`
+from the worktree root, with `FURN_NATIVE_DRIVER_TEST` unset:
+
+- `cmd.exe /d /c "yarn clean-lage-cache && yarn lage buildci"`:
+  cache clear **Passed** once; the initial aggregate **Failed**. With
+  project-local temporary files, Git discovery escaped synthetic test
+  repositories into the enclosing ignored worktree. The scripts suite
+  reported 58 passed / 18 failed (`buildci.log`).
+- Setting `TEMP`, `TMP`, `TMPDIR` and `GIT_CEILING_DIRECTORIES` to the same
+  project-local scratch directory restores fixture isolation without a
+  product-code change. `yarn workspace @fluentui-react-native/scripts test`:
+  **Passed** 76 / failed zero (`scripts-git-isolation-green.log`).
+  The operating guidance is committed in `8cbead3f6`.
+- The default-parallel `yarn lage buildci` rerun **Failed** the existing
+  15-second cold-worker `StorybookUI` test (`buildci-rerun.log`).
+  `yarn workspace @fluentui-react-native/storybook-desktop-runtime test
+StorybookUI --runInBand`: **Passed** both unchanged tests
+  (`storybook-ui-focused.log`); no assertions or deadlines were relaxed.
+- `yarn lage buildci` with `LAGE_POOL_CONCURRENCY=2` and the isolated Git
+  boundary: **Passed**, exit zero, 5m 55.78s (`buildci-bounded.log`).
+  Lage reported 81 successful tasks, 97 reused fresh-cache tasks, and zero
+  failed/pending/aborted tasks. Cache reuse follows the one initial clear;
+  it is not native capability coverage. Scheduling guidance is committed
+  in `d94c8787d`.
+
+**Observed hygiene:** the pre-run audit was clean. After the first failed
+aggregate, its portable Node test children drained naturally and a later
+audit was clean; an aborted fake-host runner fixture was preserved outside
+the formatted source tree. No process was terminated. The final aggregate
+released the W1 lock by `2026-11-12T17:45:39.6650962Z`. The required
+post-buildci audit returned exit 2, `FURN-AUDIT: 6 candidate process(es):`,
+all foreign W3 Node test/build processes started after that release; no W1
+candidate survived (`post-buildci-audit.log`). Those processes were not
+touched; that shared-host snapshot was not globally clean. The later
+closeout audit **Passed**, exit zero:
+`FURN-AUDIT: no FURN desktop processes found` (`closeout-audit.log`).
+
+Root `yarn format:check`, `yarn check-agent-instructions`, Markdown link
+checks for the edited development guide, and committed `yarn change:check`:
+**Passed**. Native consumer modes, the repeated native driver contracts,
+optional native capture, physical console Ctrl+C, and hosted CI remain
+**Not run**. No push was made.
