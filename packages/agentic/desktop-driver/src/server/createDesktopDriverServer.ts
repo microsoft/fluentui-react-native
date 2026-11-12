@@ -401,7 +401,9 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     }
     if (method === 'POST' && segments[2] === 'runner') {
       const request = requireObject(body, 'Runner grant');
-      rejectUnknownKeys(request, { target: true, handoff: true }, 'runner grant input');
+      if (Object.keys(request).some((key) => key !== 'target' && key !== 'handoff')) {
+        throw invalidArgument('Runner grants accept only target and handoff.');
+      }
       if (
         typeof request.target !== 'string' ||
         (request.handoff !== undefined && request.handoff !== 'busy' && request.handoff !== 'preempt')

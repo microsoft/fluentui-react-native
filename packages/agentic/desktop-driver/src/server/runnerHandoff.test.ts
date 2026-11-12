@@ -65,6 +65,16 @@ async function acquire(client: DesktopDriverClient, url: string, handoff?: 'pree
 }
 
 describe('attach-only runner handoff', () => {
+  test('rejects unknown runner input without issuing or reserving authority', async () => {
+    await fixture(async ({ agent, capabilities, runner }) => {
+      await expect(runner.request('POST', '/furn/grants/runner', { target: 'attached', unexpected: true })).rejects.toMatchObject({
+        code: 'invalid argument',
+      });
+      const session = await agent.newSession(capabilities);
+      await session.delete();
+    });
+  });
+
   test('defaults to bounded busy and never gives the MCP child workload or preemption authority', async () => {
     await fixture(async ({ agent, capabilities, operator, runner, url }) => {
       const session = await agent.newSession(capabilities);
