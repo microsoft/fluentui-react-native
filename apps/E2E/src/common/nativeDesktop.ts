@@ -1,3 +1,4 @@
+import { createDesktopDriverClient, DesktopSessionClient } from '@fluentui-react-native/desktop-driver';
 import { Keys } from './consts.js';
 
 /** A page object getter, or the element it has already resolved to. */
@@ -5,6 +6,30 @@ export type PageElement = ChainablePromiseElement | WebdriverIO.Element;
 
 export function isNativeDesktop(): boolean {
   return browser.capabilities.browserName === 'furn-native-desktop';
+}
+
+export async function hasUnexpectedNativeDesktopWindow(handles: readonly string[]): Promise<boolean> {
+  if (handles.length <= 1) return false;
+  const current = await browser.getWindowHandle();
+  const url = `${browser.options.protocol}://${browser.options.hostname}:${browser.options.port}${browser.options.path}`;
+  const session = new DesktopSessionClient(
+    createDesktopDriverClient({ url }),
+    browser.sessionId,
+    Object.fromEntries(Object.entries(browser.capabilities)),
+  );
+  for (const handle of handles) {
+    if (handle === current) continue;
+    // Switching windows would activate the target and can dismiss the menu being tested.
+    const roots = await session.getWindowTree(handle);
+    if (roots.length !== 1 || roots[0].role !== 'menu') return true;
+    const pending = [...roots];
+    while (pending.length > 0) {
+      const node = pending.pop()!;
+      if (node.role === 'dialog' || node.role === 'window') return true;
+      pending.push(...node.children);
+    }
+  }
+  return false;
 }
 
 export async function sendNativeDesktopKeys(element: PageElement, keys: readonly Keys[]): Promise<void> {

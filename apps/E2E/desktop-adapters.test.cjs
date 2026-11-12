@@ -1,11 +1,99 @@
 const assert = require('node:assert/strict');
-const { afterEach, test } = require('node:test');
+const { afterEach, mock, test } = require('node:test');
 const { BasePage } = require('./lib/common/BasePage.js');
 const { Keys } = require('./lib/common/consts.js');
 const { installLegacyDesktopAttributes, scrollNativeDesktopElement, sendNativeDesktopKeys } = require('./lib/common/nativeDesktop.js');
 
 afterEach(() => {
+  mock.restoreAll();
   delete globalThis.browser;
+});
+
+test('Windows assertion checks inspect menu windows without selecting or activating them', async () => {
+  const reads = [];
+  globalThis.browser = {
+    capabilities: { browserName: 'furn-native-desktop', platformName: 'windows', 'furn:endpoint': 'win32' },
+    options: { protocol: 'http', hostname: '127.0.0.1', port: 1, path: '/' },
+    sessionId: 'session',
+    getWindowHandles: async () => ['main', 'menu'],
+    getWindowHandle: async () => 'main',
+    switchToWindow: () => assert.fail('an assertion check must not change native focus'),
+  };
+  mock.method(globalThis, 'fetch', async (url, init) => {
+    reads.push(String(url));
+    assert.equal(init.method, 'GET');
+    return new Response(JSON.stringify({ value: [{ role: 'menu', children: [{ role: 'menuitem', children: [] }] }] }));
+  });
+  assert.equal(await new BasePage().didAssertPopup(), false);
+  // eslint-disable-next-line @microsoft/sdl/no-insecure-url -- mocked loopback transport; no service is contacted
+  assert.deepEqual(reads, ['http://127.0.0.1:1/session/session/furn/window/menu/tree']);
+  browser.getWindowHandles = async () => ['main'];
+  browser.getWindowHandle = () => assert.fail('one window needs no further inspection');
+  assert.equal(await new BasePage().didAssertPopup(), false);
+  assert.equal(reads.length, 1);
+});
+
+test('Windows assertion checks fail closed for dialogs, unrecognized roots, and unreadable windows', async () => {
+  globalThis.browser = {
+    capabilities: { browserName: 'furn-native-desktop', platformName: 'windows', 'furn:endpoint': 'windows' },
+    options: { protocol: 'http', hostname: '127.0.0.1', port: 1, path: '/' },
+    sessionId: 'session',
+    getWindowHandles: async () => ['main', 'other'],
+    getWindowHandle: async () => 'main',
+    switchToWindow: () => assert.fail('an assertion check must not change native focus'),
+  };
+  let value;
+  const reader = mock.method(globalThis, 'fetch', async () => new Response(JSON.stringify({ value })));
+  const page = new BasePage();
+  for (const roots of [
+    [{ role: 'window', name: 'Assertion failed', children: [] }],
+    [{ role: 'group', children: [] }],
+    [],
+    [{ role: 'menu', children: [{ role: 'dialog', children: [] }] }],
+    [{ role: 'menu', children: [{ role: 'window', children: [] }] }],
+    [
+      { role: 'menu', children: [] },
+      { role: 'dialog', children: [] },
+    ],
+  ]) {
+    value = roots;
+    assert.equal(await page.didAssertPopup(), true);
+  }
+  reader.mock.mockImplementation(async () => {
+    throw new Error('provider is unavailable');
+  });
+  await assert.rejects(page.didAssertPopup(), /provider is unavailable/);
+});
+
+test('Windows assertion checks do not let an open menu hide another unexpected window', async () => {
+  globalThis.browser = {
+    capabilities: { browserName: 'furn-native-desktop', platformName: 'windows', 'furn:endpoint': 'win32' },
+    options: { protocol: 'http', hostname: '127.0.0.1', port: 1, path: '/' },
+    sessionId: 'session',
+    getWindowHandles: async () => ['main', 'menu', 'assert'],
+    getWindowHandle: async () => 'main',
+  };
+  mock.method(
+    globalThis,
+    'fetch',
+    async (url) =>
+      new Response(
+        JSON.stringify({
+          value: [{ role: String(url).endsWith('/menu/tree') ? 'menu' : 'window', children: [] }],
+        }),
+      ),
+  );
+  assert.equal(await new BasePage().didAssertPopup(), true);
+});
+
+test('assertion checks retain non-native and macOS window-count behavior', async () => {
+  for (const capabilities of [
+    { browserName: 'non-native' },
+    { browserName: 'furn-native-desktop', platformName: 'macos', 'furn:endpoint': 'macos' },
+  ]) {
+    globalThis.browser = { capabilities, getWindowHandles: async () => ['main', 'other'] };
+    assert.equal(await new BasePage().didAssertPopup(), true);
+  }
 });
 
 test('native checkbox and switch state never falls back to selected', async () => {
