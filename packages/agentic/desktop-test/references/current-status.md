@@ -1029,23 +1029,61 @@ documentation follow-up's CI passes and the coordinator changes its status.
 
 ## F11 generic attach-only handoff — 2026-11-12
 
-Implementation source: `0ebf8f453` (including `4aafeeabb` and `87bc8b710`).
+Reviewed implementation source: `5c9d0191e` (including `4aafeeabb` and `87bc8b710`).
 Native selection ran at `87bc8b710`. This is the generic attached-application
 phase of [#4448](https://github.com/microsoft/fluentui-react-native/issues/4448),
 not the blocked Storybook integration or retained-launch phases.
 
 **Confirmed, portable:** driver, harness, and MCP package format, lint, and
-build checks passed. Driver tests passed 1,229 with 66 skipped; MCP tests
-passed 31. The real WDIO deterministic normal-handoff and worker-crash tests
+build checks passed. Driver tests passed 1,233 with 66 skipped; MCP tests
+passed 32; the locked complete harness suite passed 382 with two skipped.
+The real WDIO deterministic normal-handoff and worker-crash tests
 passed, including a lost runner-grant response, target exclusion, final
 subtree drain, fresh-session resources, and credential confinement.
-The final unlocked harness run passed 380, failed two default-claim CLI
+An earlier unlocked harness run passed 380, failed two default-claim CLI
 contracts, and skipped two; the lane failure explicitly reported another
 workload holding `interactive.lock`. One focused retry of the two failed
 CLI contracts under the shared native lock passed both (28 unselected
 cases skipped). This collision is not native handoff evidence.
 
-The final locked `TF_BUILD=1 yarn lage buildci --concurrency 4` at
+**Review fixes:** live/draining grant capacity is reusable beyond 4096
+connections; bounded settled history never evicts pending/failed cleanup
+proof. Busy/failed handoffs issue no runner grant. Descriptor roots and
+workload/recovery holders refuse preempt with `target-busy` and an explicit
+relinquish requirement. A preempted MCP child is discarded after authoritative
+rejection so the same connection can reopen with fresh resources after runner
+drain.
+
+Broker credentials are captured and scrubbed before user hook import. WDIO
+receives each worker token through its per-worker `runnerEnv`, not launcher
+`process.env`; workers scrub it before hooks/specs and their children execute.
+Real hook-import, launcher-hook, worker-hook and spec-child probes pass.
+The worker's Node bootstrap/preload window remains trusted because its child
+token initially arrives in the fork environment; this is not same-account
+hostile-code isolation.
+
+The focused commands below passed using the untouched default `TMPDIR`:
+
+| Exact command                                                                                                                                | Result                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver test 'authority/(grants\|delegation)\|server/(runnerHandoff\|delegation)' --runInBand` | Passed 51; includes 4,101 drained delegation cycles and root fencing. |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test server --runInBand`                                                           | Passed 31; includes preempt/reopen and stale-resource refusal.        |
+| `yarn workspace @fluentui-react-native/desktop-test test runner --runInBand`                                                                 | Passed two; skipped the native opt-in case. Shared native lock used.  |
+
+Review-validation logs are under `artifacts/desktop/f11/review/`. The complete
+driver and harness suites used the shared native lock. Full-suite scratch was
+project-local with matching `GIT_CEILING_DIRECTORIES`; no native opt-ins were set.
+The Accessibility-blocked native contract was deliberately not repeated.
+
+After review fixes, `yarn lage test-links --verbose --grouped` passed all
+90 tasks. Then `yarn clean-lage-cache` passed and the locked
+`TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks in
+2m 2.60s, with no pending or aborted tasks. Source was `5c9d0191e`; the
+matching project-local `TMPDIR`/`GIT_CEILING_DIRECTORIES` isolation and native
+opt-in skips were unchanged. Log: `artifacts/desktop/f11/review/buildci.log`.
+The remaining ledger update records results only, not additional source changes.
+
+The earlier locked `TF_BUILD=1 yarn lage buildci --concurrency 4` at
 `17ee49fd1` passed all 178 tasks, including the complete harness test task.
 Project-local ignored `TMPDIR` also required `GIT_CEILING_DIRECTORIES` set
 to that directory so temporary instruction-check fixtures did not discover

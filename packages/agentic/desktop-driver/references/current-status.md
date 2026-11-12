@@ -476,14 +476,20 @@ same Partial result. Physical Ctrl+C and DPI changes were not exercised.
 
 ## F11 scoped runner handoff — 2026-11-12
 
-Source `0ebf8f453` implements the generic attach-only phase: attenuated
+Source `5c9d0191e` implements the reviewed generic attach-only phase: attenuated
 runner/controller grants, bounded busy by default, operator-authorized
 preemption, and target reservation only after in-flight acquisition,
 session deletion, and controller-subtree drain settle. Revocation callbacks
 alone are not a drain barrier. Failed cleanup remains fenced and retryable;
 unknown runner input is rejected before granting or reserving authority.
-Driver package format, lint, build, and tests passed (1,229 passed,
-66 skipped); the focused handoff suite passed seven cases.
+Settled drains restore the 4096 live/draining grant capacity; only the last
+4096 settled cleanup proofs are retained, never pending or failed proof.
+Busy/failed attempts issue no runner grant, and shared descriptor/workload
+holders require relinquish instead of subtree preemption. Retired requests
+still check live authority after asynchronous target probes.
+Driver package format, lint, build, and tests passed (1,233 passed,
+66 skipped). The default-`TMPDIR` focused authority/delegation/handoff selection
+passed 51 cases, including 4,101 drained delegation cycles under one live parent.
 
 Native selection at `87bc8b710` on macOS 27.2.1 arm64 passed 27 identity
 and backend cases, with 15 Windows cases skipped. The stable-signed helper
@@ -493,6 +499,7 @@ supported click input mode. Native handoff and worker-crash drain remain
 unqualified; no permissions were changed. Cleanup preserved the externally
 owned fixture through service shutdown, removed both descriptors and
 released the claim before its spawning test ended that exact process.
+The Accessibility-blocked native contract was not repeated for review fixes.
 
 Exact commands, helper/fixture revisions, the initial stale-fixture failure,
 one corrected-fixture retry, cleanup evidence and artifact locators are in

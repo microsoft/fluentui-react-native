@@ -342,14 +342,19 @@ recorded in `packages/agentic/desktop-test/references/current-status.md`.
 
 ## F11 explicit relinquish — 2026-11-12
 
-Source `0ebf8f453` includes explicit `desktop_session` relinquish with an
+Source `5c9d0191e` includes explicit `desktop_session` relinquish with an
 immediate admission fence, cancellation, and awaited connection-subtree
 drain. A failed drain retains retryable cleanup responsibility. A fresh
 session after relinquish rejects old references, cursors, proofs and
 artifact links; no cross-connection resume or replay is added.
-Package format, lint, build, and all 31 tests passed, including
+Authoritative rejection discards the cached child binding. After operator
+preemption and runner drain, the same MCP connection delegates a fresh child;
+old references, cursors, proofs and artifact links remain invalid.
+Package format, lint, build, and all 32 tests passed, including
 deterministic resource invalidation, late/lost acquisition and failed-drain
-cases. These are portable semantics, not native qualification.
+cases. The default-`TMPDIR` focused server selection passed 31 cases,
+including the preempt → runner drain → fresh MCP session regression.
+These are portable semantics, not native qualification.
 
 The real private-descriptor AppKit consumer at `87bc8b710` reached verified
 discovery but failed native session creation on macOS 27.2.1 arm64:
@@ -358,6 +363,7 @@ helper doctor reported Accessibility/PostEvent `false`; no privacy settings
 were changed. Native relinquish/handoff and worker-crash drain did not run.
 Both descriptors and the workload claim were removed; the externally owned
 fixture survived service shutdown and only its spawning test stopped it.
+The Accessibility-blocked native contract was not repeated for review fixes.
 
 Exact commands, revisions, one corrected-fixture retry, cleanup evidence
 and local artifact locators are in
