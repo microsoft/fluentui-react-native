@@ -580,3 +580,34 @@ preemption and lost-response each passed both inner specs, zero skips,
 with `accessibilityClick: passed`. This confirms hosted generic native
 consumer coverage; it does not broaden the earlier physical Storybook
 or macOS evidence.
+
+## F11 rebased macOS positive qualification — 2026-11-12 UTC
+
+**Observed at `5dbadb53b10cd81ccf1e15739e213f0046d93323`:** real native
+descriptor verification, MCP SDK transport, and WDIO/Jasmine passed all five
+generic AppKit modes: relinquish/handoff, operator preemption, worker crash,
+lost successful runner-grant response, and target capture. Every non-crash
+mode passed both inner ownership/accessibility-input specs with zero skips;
+the intentional crash's terminal failed inner run was drain-confirmed before
+a fresh MCP session. Stale resources and credential confinement passed.
+All fixtures were preserved through service shutdown, descriptors removed,
+claims released, and exact spawned fixtures subsequently ended.
+
+The stable-signed helper's noninteractive doctor reported Accessibility,
+PostEvent and ScreenCapture **true**, with no prompt. This supersedes the
+earlier macOS permission-blocked attempt, not the preserved Windows receipts.
+The rebase retained all Windows additions from
+`11820d6330f4ea591bed400193b13e793970b5bd` onto
+`041ac8b9894aeaa7e1aa273baa2ece4e46298b94`; no runtime fix was needed.
+MCP format, lint, build and **32 portable tests passed**; focused server tests
+passed **31**. See `packages/agentic/desktop-test/references/current-status.md`,
+under "F11 rebased macOS positive qualification — 2026-11-12 UTC", for exact
+commands, native identities, run IDs and cleanup.
+Storybook/F9, retained launches/F10, physical input, general MCP-client
+qualification, cross-connection resume and replay remain separate.
+Final portable aggregate acceptance remains **blocked** by the unchanged
+driver bounded-command `SIGKILL`/`SIGTERM` assertion under plain default
+parallel execution, despite passing owning/MCP suites and native qualification.
+The owning harness receipt retains both failures, the additional first-run
+private-storage timeout, and the passing focused diagnostic; no unrelated
+test or environment workaround was applied.

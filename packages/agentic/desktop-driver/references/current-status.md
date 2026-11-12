@@ -785,3 +785,38 @@ zero failures; handoff, preemption and lost-response each executed both
 inner specs with `accessibilityClick: passed`. Those hosted results and
 the preceding physical campaign remain distinct from this portable
 aggregate follow-up.
+
+## F11 rebased macOS positive qualification — 2026-11-12 UTC
+
+**Observed at `5dbadb53b10cd81ccf1e15739e213f0046d93323`:** the original
+`11820d6330f4ea591bed400193b13e793970b5bd` branch was rebased onto F6/main
+`041ac8b9894aeaa7e1aa273baa2ece4e46298b94`, preserving every Windows addition
+and both provenance/handoff ledgers. No runtime/native-provider fix was needed.
+
+Under the shared native lock, stable-signed noninteractive doctor reported
+Accessibility, PostEvent and ScreenCapture **true**, no prompt, connected
+unlocked console. The actual AppKit private-descriptor MCP/WDIO contract
+**passed all five modes, zero skips**: handoff, operator preemption, worker
+crash, lost successful grant response, and target capture. All four non-crash
+modes executed/passed both inner ownership/accessibility-input specs without
+skips. The deliberately failed crash worker was drain-confirmed before reuse.
+Every mode preserved its exact external fixture through service shutdown,
+withdrew both descriptors, released its claim, then ended only its own fixture.
+The earlier macOS permission block is historical.
+
+The locked native `serviceIdentity.contract applicationIncarnation.contract
+nativeDriver --runInBand` selection passed **28 / 15 Windows skips** (including
+the portable built-ESM regression). Portable full driver tests passed
+**1,235 / 66 skips**; format, lint and build passed. Exact commands, immutable
+helper/fixture identities, per-mode run IDs, cleanup and evidence locators are
+in `packages/agentic/desktop-test/references/current-status.md`, under
+"F11 rebased macOS positive qualification — 2026-11-12 UTC".
+This qualifies generic attach-only handoff, not RN rendering, Storybook/F9,
+F10 retained launches, physical input or replay. Windows evidence above is
+preserved historical evidence, not a rerun of the rewritten source.
+Plain locked aggregate acceptance remains **failed**: the unchanged main
+`boundedCommand.test.ts` expected `SIGKILL`, received `SIGTERM` on both
+post-documentation-correction attempts. The first also timed out in private
+storage; that passed on repeat. Focused diagnostics passed 73 / 10 skips,
+but do not replace aggregate acceptance. No environment/concurrency or
+unrelated source workaround was used; see the harness receipt for every result.

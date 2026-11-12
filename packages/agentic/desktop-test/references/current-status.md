@@ -30,7 +30,7 @@ and its sub-issues.
 | Durable quarantine wiring                                | Done               | Both native service paths use owner-only storage and exact-incarnation probes; restart is not recovery proof. Live endpoint qualification remains separate.                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Supervisor crash containment                             | Work in progress   | Cooperative Node service lifelines and correlated service readiness implemented; portable parent/wrapper crash, late-spawn, failed-withdrawal and stalled-child contracts. Live macOS survivors remain unqualified; no automatic reclaim. Windows: the helper's Job Object ends an unpackaged app it launched when the helper dies (qualified with REX); packaged launches are `uncontained` and survive in a fenced claim. Non-detached children are hard-terminated with a crashed owner (observed A/B), so the three crash-disposal contracts are skipped there. |
 | Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| MCP/WDIO handoff                                         | Work in progress   | Generic attach-only phase implemented: bounded busy, explicit relinquish/operator-authorized preemption, settled deletion, target reservation, crash-drained worker grants, and fresh-session resources. Deterministic tests pass. Storybook phase waits for F9; retained launched apps and Windows/Win32 native qualification remain separate.                                                                                                                                                                                                                     |
+| MCP/WDIO handoff                                         | Work in progress   | Generic attach-only phase implemented and qualified on real macOS AppKit and Windows Win32 fixtures: bounded busy, relinquish/operator preemption, settled deletion, exclusive reservation, worker-crash/lost-response drain, fresh resources and credential confinement. See the dated F11 receipts below. Storybook handoff still waits for F9; retained launches require F10 and explicit ownership.                                                                                                                                                             |
 | Supervisor-owned app lifetime                            | Work in progress   | Current session-owned launch/externally owned attach semantics remain; never silently retain or terminate another owner's app.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Cross-service/multi-target claims                        | Work in progress   | Configured aliases now have distinct registered IDs while retaining physical identity; exact-application exclusion and input-mutex qualification remain open.                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Bounded persisted run/status/artifact queries            | Done               | Harness-local read service/client; atomic snapshots, terminal evidence, scoped expiring grants, bounded pages and allowlisted opaque artifact IDs. No management transport.                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -1767,3 +1767,131 @@ recovery passed around its deliberately failed inner run. Downloaded
 artifacts, not outer Jest totals alone, establish these counts. No flake
 rerun was used. The existing physical/native qualification remains
 separate; this follow-up launched no app and made no new native claim.
+
+## F11 rebased macOS positive qualification — 2026-11-12 UTC
+
+**Observed source:** `5dbadb53b10cd81ccf1e15739e213f0046d93323`, rebased onto
+F6 squash/main `041ac8b9894aeaa7e1aa273baa2ece4e46298b94`.
+The original branch/lease was `11820d6330f4ea591bed400193b13e793970b5bd`;
+the historical base was `505a2187b0a2451aed7081c9260b343d55742f93`.
+The owning worktree first fast-forwarded its older `c9753208d` tip, retaining
+all fourteen Windows additions, then replayed all 22 branch commits. The
+only conflict appended F6 and F11 evidence at the same location in this file:
+both complete sections were retained. Range-diff reports 20 identical patches
+and two documentation-context-only changes. Windows fixture/provisioning,
+nativeRunner, input and response-loss code, hosted actions, and Windows ledgers
+were preserved. No new runtime or native-provider behavior was changed.
+
+### Real native consumer
+
+macOS **27.2.1, arm64**, plain AppKit ownership fixture; no React Native
+renderer. The explicitly provisioned, signature-verified
+`FurnOwnershipFixture.app` uses the readiness-capable source
+`27b109072002e5bd83a35c97ff9633311a74e5c7`, bundle identifier
+`com.microsoft.furn.application-ownership-fixture`, unique per-mode titles,
+and its exact ready-file/PID. It is not downloaded or compiled by the consumer.
+The stable-signed helper artifact is
+`e4a23c0ec3cc9ddcf07fde2153bdf260b7b85f65bd0a6851275dd55a6ccf0fd3`,
+source digest
+`b1d5233de326faf886c8d6310c2844c6857e4936686dfd493ff898f9e5ec6b9a`.
+Noninteractive doctor reported **Accessibility, PostEvent and ScreenCapture
+all true**, console connected/unlocked, and `promptRequested: false`.
+The earlier permission-blocked macOS attempt remains historical, not the
+current F11 qualification boundary. No permission, TCC or certificate change
+was made.
+
+All commands below ran from the repository root. Native/helper commands,
+portable suites and the final aggregate used the shared exclusive native lock.
+`SIGNING` below denotes the existing `FURN Desktop Driver Development`
+identity; the actual native commands set
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development"`.
+`FIXTURE` denotes the absolute path to the owning worktree's
+`artifacts/desktop/f11/application-fixture/FurnOwnershipFixture.app`.
+
+| Exact command (with the stated native environment)                                                                                                                      | Result                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver build-driver --platform macos --json`                                                         | **Passed**, verified existing stable-signed artifact                                                                                |
+| `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver doctor --platform macos --permissions --json`                                                 | **Passed**, all three permission preflights true; no prompt                                                                         |
+| `codesign --verify --strict artifacts/desktop/f11/application-fixture/FurnOwnershipFixture.app`                                                                         | **Passed**                                                                                                                          |
+| `FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_HANDOFF_APP_PATH="$FIXTURE" yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand`           | **Passed 5/5, zero skips**, 31.267 seconds                                                                                          |
+| `FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-driver test serviceIdentity.contract applicationIncarnation.contract nativeDriver --runInBand` | **Passed 28; skipped 15 Windows cases**. Selection includes portable built-ESM provisioning regression, not 28 purely native tests. |
+
+| Mode / receipt directory under `artifacts/desktop/f11/` | Inner WDIO run ID                      | Observed outcome                                                                                                                                                   |
+| ------------------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `native-handoff-cZN2uI`                                 | `737589dd-cd90-493f-8bb1-251a4e057b72` | Explicit relinquish; 2 selected/executed/passed, zero skips                                                                                                        |
+| `native-operator-preempt-gaSxgd`                        | `76a5b401-0022-417c-a559-87b5d24c3753` | Operator-authorized preemption; 2 selected/executed/passed, zero skips                                                                                             |
+| `native-worker-crash-D3uh4Z`                            | `861bc143-5388-4802-8194-e323ef317ee2` | Outer native drain/reuse contract passed; deliberate exit 17 leaves terminal **failed** inner run with 1 selected/incomplete, 0 completed; not an inner input pass |
+| `native-lost-response-kklnxj`                           | `96b708e7-63a9-44c1-a0a3-eb3f4e87ff6b` | Real successful grant-response loss and confirmed drain; 2 selected/executed/passed, zero skips                                                                    |
+| `native-capture-xGUWSZ`                                 | `791c6749-826e-4929-b35a-cf1cb8b9cadf` | Target-scoped capture; 2 selected/executed/passed, zero skips                                                                                                      |
+
+Every non-crash mode passed the real accessibility-click spec, not merely the
+outer Jest assertion. Every mode opened native sessions through verified
+private discovery and the MCP SDK, exercised actual WDIO/Jasmine, rejected
+stale resources, confirmed worker drain and credential confinement, withdrew
+both descriptors, released its claim, and preserved the exact external
+fixture incarnation through service shutdown. Only its owning test then
+terminated that fixture and verified exit. All five receipts report
+`cleanupConfirmed: true`; no case deadline or cleanup timeout fired. Captures
+were confined to the registered fixture. No Metro or Storybook app was started.
+
+### Portable checks and scope
+
+`yarn install --immutable` **Passed** after the F6 manifest/lockfile update
+(existing peer warnings). For each of `desktop-driver`, `desktop-test` and
+`desktop-driver-mcp`, the exact commands
+`yarn workspace @fluentui-react-native/<package> format`,
+`yarn workspace @fluentui-react-native/<package> lint` and
+`yarn workspace @fluentui-react-native/<package> build` each **Passed**.
+
+| Exact portable command                                                             | Result                                                             |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `yarn workspace @fluentui-react-native/desktop-driver test 'authority/(grants      | delegation)                                                        | server/(runnerHandoff | delegation)' --runInBand` | **Passed 51** |
+| `yarn workspace @fluentui-react-native/desktop-test test runner --runInBand`       | **Passed 20; skipped 5 native opt-ins**, separately executed above |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test server --runInBand` | **Passed 31**                                                      |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`            | **Passed 1,235; skipped 66**                                       |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand`              | **Passed 402; skipped 6**                                          |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test --runInBand`        | **Passed 32**                                                      |
+
+`yarn lage test-links --verbose --grouped` **Passed all 90 tasks**.
+The first locked plain `yarn clean-lage-cache && yarn lage buildci`
+cleared the cache, then **failed** `check-agent-instructions`: two newly added
+ledger links crossed package guidance boundaries (43 successful tasks,
+85 pending). They were corrected to package-qualified text references; this
+was a documentation error, not a native or runtime failure.
+
+The corrected `yarn check-agent-instructions` **Passed**. The next locked
+plain `yarn lage buildci` **Failed** the driver task: `boundedCommand.test.ts`
+expected `SIGKILL` but received `SIGTERM`, and the first macOS private-storage
+publication test exceeded its 10-second budget (1,233 driver tests passed,
+66 skipped, two failed). Both test files and their implementations are
+byte-identical to pinned main. This establishes unchanged source, not a newly
+executed baseline reproduction or the private-storage timeout's cause.
+The locked diagnostic
+`yarn workspace @fluentui-react-native/desktop-driver test boundedCommand privateStorage --runInBand`
+**Passed 73, skipped 10** without source or deadline changes.
+
+One unchanged, locked plain `yarn lage buildci` repeat **Failed again** on
+the same bounded-command `SIGKILL`/`SIGTERM` assertion: driver **1,234 passed,
+66 skipped, one failed**; private storage passed. Lage reported **61 successful,
+109 cached/skipped tasks, one failed**, with other tasks interrupted, so no
+complete aggregate acceptance is claimed. The known parallel child-startup
+race was not hidden, patched, or worked around; the diagnostic pass is not
+aggregate acceptance. `TF_BUILD` and native opt-ins were unset, inherited
+`TMPDIR` and default concurrency were unchanged, and the cache was cleared
+once before the first aggregate. The exact failures remain in `buildci.log`,
+`buildci-corrected.log`, and `buildci-default-repeat.log` beside the focused
+diagnostic receipt. **The macOS positive native gate is closed; final portable
+aggregate acceptance remains blocked.**
+
+Receipts and doctor output are under
+`artifacts/desktop/f11/requalification-20261112/`; per-mode `evidence.json`
+and terminal `run.json` files remain in the directories above. No private
+descriptor or grant is copied into shared evidence.
+
+**Boundaries:** generic attach-only macOS handoff is positively qualified.
+Existing Windows local/hosted evidence above is preserved, not re-executed on
+this Mac or asserted for the rewritten SHA. Storybook/F9 handoff, F10 retained
+launches, React Native renderer qualification, physical pointer/keyboard input,
+cross-connection resume and automatic replay are **not qualified by this run**
+and remain outside this phase. Publication, post-rebase hosted CI, and the PR
+draft/readiness decision remain coordinator-owned.
