@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+const { expectRunnerResponseLoss } = require('./nativeRunnerSupport.cjs');
 
 async function main() {
   const mode = process.argv[2];
@@ -153,20 +154,10 @@ export default { onPrepare: probe, onWorkerStart: probe, onWorkerEnd: probe, bef
     });
     assert.equal(attached, 1, 'a busy request never opens another native session');
     await controller.revokeConnection();
-    const fetcher = globalThis.fetch;
-    globalThis.fetch = async (input, init) => {
-      const response = await fetcher(input, init);
-      if (String(input).endsWith('/furn/grants/runner')) {
-        await response.body?.cancel();
-        throw new Error('injected runner acquisition response loss');
-      }
-      return response;
-    };
-    try {
-      await assert.rejects(createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret) }));
-    } finally {
-      globalThis.fetch = fetcher;
-    }
+    await expectRunnerResponseLoss({
+      acquire: () => createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret) }),
+      whileReserved: () => assert.rejects(client.newSession(capabilities), { code: 'session not created' }),
+    });
     let failure;
     try {
       await runDesktopWdioSuite(runner, config, 'fixture', undefined, { connection });

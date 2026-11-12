@@ -14,6 +14,7 @@ const {
   waitForNativeFixture,
   nativeRunnerRecords,
   removeNativeRunnerDescriptors,
+  expectRunnerResponseLoss,
   nativeRunnerExecution,
   runNativeRunnerCase,
 } = require('./nativeRunnerSupport.cjs');
@@ -292,31 +293,14 @@ async function main() {
       assert.throws(() => service.server.sessions.get(original.id), { code: 'invalid session id' });
     }
     if (mode === 'lost-response') {
-      const fetcher = globalThis.fetch;
-      let dropped = false;
-      globalThis.fetch = async (input, init) => {
-        const response = await fetcher(input, init);
-        if (String(input).endsWith('/furn/grants/runner') && response.status === 200) {
-          dropped = true;
-          await response.body?.cancel();
+      await expectRunnerResponseLoss({
+        acquire: () => createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret), signal }),
+        whileReserved: async () => {
           const busy = await call('desktop_session', { action: 'open', target: target.id });
           assert(busy.isError);
           assert.equal(JSON.parse(busy.content[0].text).reason, 'target-busy');
-          throw new Error('Injected runner acquisition response loss.');
-        }
-        return response;
-      };
-      try {
-        await assert.rejects(
-          createDesktopRunnerBroker({ connection, targetId: target.id, addSecret: (secret) => run.addSecret(secret), signal }),
-          {
-            message: 'Injected runner acquisition response loss.',
-          },
-        );
-      } finally {
-        globalThis.fetch = fetcher;
-      }
-      assert(dropped, 'the fault must discard a real successful runner-grant response');
+        },
+      });
       const recovered = json(await call('desktop_session', { action: 'open', target: target.id }));
       assert.notEqual(recovered.id, original.id);
       json(await call('desktop_session', { action: 'close' }));

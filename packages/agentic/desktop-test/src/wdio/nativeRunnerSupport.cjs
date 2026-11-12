@@ -135,6 +135,34 @@ async function removeNativeRunnerDescriptors(storage, descriptors, ownerPid) {
   return { removed, retained };
 }
 
+async function expectRunnerResponseLoss({ acquire, whileReserved = async () => undefined }) {
+  const fetcher = globalThis.fetch;
+  const injected = new Error('Injected runner acquisition response loss.');
+  let dropped = false;
+  globalThis.fetch = async (input, init) => {
+    const response = await fetcher(input, init);
+    if (String(input).endsWith('/furn/grants/runner') && response.status === 200) {
+      dropped = true;
+      await response.body?.cancel();
+      await whileReserved();
+      throw injected;
+    }
+    return response;
+  };
+  try {
+    await assert.rejects(acquire(), (error) => {
+      assert(error instanceof Error && 'reason' in error);
+      assert.equal(error.name, 'DesktopDriverClientError');
+      assert.equal(error.reason, 'transport');
+      assert.equal(error.cause, injected);
+      return true;
+    });
+  } finally {
+    globalThis.fetch = fetcher;
+  }
+  assert(dropped, 'the fault must discard a real successful runner-grant response');
+}
+
 function nativeRunnerExecution(counts, mode) {
   if (mode === 'worker-crash') return { ...counts, accessibilityClick: 'not run (worker crash)', expectedFailure: true };
   assert.equal(counts.executed, 2, 'the native consumer must execute both ownership and accessibility input');
@@ -216,6 +244,7 @@ module.exports = {
   waitForNativeFixture,
   nativeRunnerRecords,
   removeNativeRunnerDescriptors,
+  expectRunnerResponseLoss,
   nativeRunnerExecution,
   runNativeRunnerCase,
 };

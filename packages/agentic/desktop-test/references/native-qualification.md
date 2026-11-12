@@ -201,6 +201,11 @@ references/cursors, terminal reports, credential confinement, descriptor
 withdrawal, claim release, and preservation of the same external process
 incarnation. A failed mode does not suppress later modes when its cleanup is
 confirmed; unconfirmed cleanup blocks subsequent launches.
+The response-loss fault discards an actual successful HTTP response and checks
+the client's typed transport failure and exact injected cause, not an unwrapped
+top-level message. The portable runner contract uses the same fault routine
+against its real HTTP service and verifies reservation fencing and subsequent
+worker drain without a native helper.
 
 Each subprocess has a 120-second internal `AbortSignal.timeout` case budget
 followed by at most 30 seconds of shutdown, below the parent's 180-second
