@@ -831,7 +831,13 @@ the same policy. FDR1 fields, commands, and `native/protocol.json` remain
 unchanged. Root `yarn oxfmt --check`, `git diff --check`, and
 `yarn markdown-link-check -c .github\markdown-link-check-config.json <changed-file>`
 **passed** for all seven changed Markdown files (66 links).
-Committed changeset validation follows this review-fix commit.
+The review-fix implementation is committed as
+`4d39582f2292ff6436dafaba646ee63cb9bdc3cc`.
+Its committed `yarn change:check` **passed**; the log is
+`artifacts\desktop\w3-review\change-check.log`.
+The process audit passed with
+`FURN-AUDIT: no FURN desktop processes found`; no W3 campaign was started,
+and shared campaign status reported no campaign or holder. No push was made.
 
 ### Remaining session-gated runs
 
