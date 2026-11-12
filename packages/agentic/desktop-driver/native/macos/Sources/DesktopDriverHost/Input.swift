@@ -231,7 +231,9 @@ final class InputController {
   }
 
   func selectAll(token: CancellationToken) throws {
-    try chord([.keyCode(55), .keyCode(0)], token: token)
+    // Text-system navigation does not depend on the application's Select All menu command.
+    try chord([.keyCode(55), .keyCode(126)], token: token)
+    try chord([.keyCode(55), .keyCode(56), .keyCode(125)], token: token)
   }
 
   func deleteSelection(token: CancellationToken) throws {

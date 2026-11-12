@@ -97,6 +97,30 @@ extension SelfTestRunner {
       "keyboard clear never posts keys when the field did not take focus"
     )
 
+    do {
+      let recorder = InputRecorder()
+      var environment = recorder.environment
+      let post = environment.post
+      var keyDowns: [(Int64, CGEventFlags)] = []
+      environment.post = { event in
+        if event.type == .keyDown {
+          keyDowns.append((event.getIntegerValueField(.keyboardEventKeycode), event.flags))
+        }
+        post(event)
+      }
+      let input = InputController(effects: EffectLedger(), environment: environment)
+      try input.selectAll(token: CancellationToken())
+      check(
+        keyDowns.count == 2
+          && keyDowns[0].0 == 126 && keyDowns[0].1.contains(.maskCommand)
+          && keyDowns[1].0 == 125 && keyDowns[1].1.contains([.maskCommand, .maskShift])
+          && !input.hasDepressedInput,
+        "keyboard selection navigates the document without the application's Select All menu command"
+      )
+    } catch {
+      check(false, "keyboard document selection releases its chords: \(error)")
+    }
+
     var selectionReads = 0
     let asynchronous = keyboardClear(selection: {
       selectionReads += 1

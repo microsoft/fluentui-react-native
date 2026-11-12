@@ -328,7 +328,9 @@ the element:
 
 The macOS helper requires a readable value before keyboard input and verifies
 that it becomes empty before returning success. It confirms keyboard focus
-and, when exposed, the selected text range between Command-A and Delete.
+and selects the document with Command-Up followed by Command-Shift-Down,
+without relying on the application's Select All menu command. When exposed,
+the selected text range must cover the complete value before Delete.
 Unacknowledged selection or retained text fails `input-failed`; already-posted
 keys retain their partial effect. These bounded reads do not replay input or
 permit a semantic fallback for `keyboard`.

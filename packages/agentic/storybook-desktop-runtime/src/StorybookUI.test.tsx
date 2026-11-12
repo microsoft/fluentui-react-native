@@ -4,6 +4,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { theme } from '@storybook/react-native-theming';
 
 import { DesktopStorybookConfigProvider, useDesktopStorybookConfig } from './DesktopStorybookConfig';
+import { createDesktopStorybookPreview } from './createDesktopStorybookPreview';
 import { Win32StoryViewport } from './createDesktopStorybookPreview.win32';
 import { StorybookUIComponent } from './StorybookUI.win32';
 
@@ -18,6 +19,14 @@ jest.mock('./DesktopStoryRoot', () => ({ DesktopStoryRoot: ({ children }: { chil
 
 const storage = { getItem: () => null, setItem: () => undefined };
 const setStory = jest.fn();
+
+function LiteUIStoryViewport({ children }: { children: React.ReactNode }) {
+  const decorate = createDesktopStorybookPreview().decorators?.[0];
+  if (!decorate) {
+    throw new Error('The desktop preview must provide its story decorator.');
+  }
+  return decorate(() => <>{children}</>, { id: 'fixture--oversized' } as Parameters<typeof decorate>[1]);
+}
 
 function Canvas() {
   const [offset, setOffset] = React.useState(0);
@@ -71,20 +80,26 @@ test('resets the whole Win32 preview for a new test generation without resetting
   expect(screen.getByTestId('test-win32-show-sidebar')).toBeOnTheScreen();
 }, 15_000);
 
-test('allows oversized Win32 stories to grow inside the scrollable preview rather than overflow a fixed-height centered view', async () => {
-  const screen = await render(
-    <DesktopStorybookConfigProvider testIDPrefix="test">
-      <Win32StoryViewport>
-        <View style={{ height: 700 }}>
-          <Text testID="last-control">Last control</Text>
-        </View>
-      </Win32StoryViewport>
-    </DesktopStorybookConfigProvider>,
-  );
-  const viewport = screen.getByTestId('test-story-viewport');
-  const contentStyle = StyleSheet.flatten(viewport.props.contentContainerStyle);
-  expect(contentStyle).toMatchObject({ flexGrow: 1, justifyContent: 'center' });
-  expect(contentStyle.flex).toBeUndefined();
-  expect(viewport.props.keyboardShouldPersistTaps).toBe('handled');
-  expect(screen.getByTestId('last-control')).toBeOnTheScreen();
-});
+test.each<[string, React.ComponentType<{ children: React.ReactNode }>]>([
+  ['Win32', Win32StoryViewport],
+  ['LiteUI', LiteUIStoryViewport],
+])(
+  'allows oversized %s stories to grow inside the scrollable preview rather than overflow a fixed-height centered view',
+  async (_, Viewport) => {
+    const screen = await render(
+      <DesktopStorybookConfigProvider testIDPrefix="test">
+        <Viewport>
+          <View style={{ height: 700 }}>
+            <Text testID="last-control">Last control</Text>
+          </View>
+        </Viewport>
+      </DesktopStorybookConfigProvider>,
+    );
+    const viewport = screen.getByTestId('test-story-viewport');
+    const contentStyle = StyleSheet.flatten(viewport.props.contentContainerStyle);
+    expect(contentStyle).toMatchObject({ flexGrow: 1, justifyContent: 'center' });
+    expect(contentStyle.flex).toBeUndefined();
+    expect(viewport.props.keyboardShouldPersistTaps).toBe('handled');
+    expect(screen.getByTestId('last-control')).toBeOnTheScreen();
+  },
+);

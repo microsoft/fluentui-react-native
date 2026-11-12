@@ -35,7 +35,7 @@ func clearWithKeyboard(
       return range.location == 0 && range.length == initialValue.utf16.count
     }
     guard selected else {
-      try fail(ErrorCode.inputFailed, "Command-A did not select the complete value, so Delete was not posted.")
+      try fail(ErrorCode.inputFailed, "The keyboard selection did not select the complete value, so Delete was not posted.")
     }
   }
   guard try hasFocus() else {

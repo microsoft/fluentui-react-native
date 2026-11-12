@@ -351,8 +351,9 @@ scrolls left and up for positive values, so both deltas are negated.
 
 The helper advertises `strictClear`. `clear` writes an empty `AXValue` when
 `AXUIElementIsAttributeSettable` reports the value settable, and otherwise
-activates the application, focuses the element, and presses Command-A and
-Delete under the physical input lock. A request may name `mechanism`:
+activates the application, focuses the element, selects the document with
+Command-Up then Command-Shift-Down, and presses Delete under the physical
+input lock. A request may name `mechanism`:
 `semantic` only writes `AXValue` and fails `element-not-interactable` with
 effect `none` when the value is not settable, and `keyboard` skips the write
 and needs the same physical input authority as the fallback. Every successful
@@ -361,13 +362,17 @@ is `true` even without Accessibility trust, because each mechanism reports its
 own refusal.
 
 Keyboard clear requires a readable value before posting input. It waits up to
-200 ms for native keyboard focus, posts Command-A once, and, when the provider
-exposes `AXSelectedTextRange`, waits up to 200 ms for the complete UTF-16 value
-to be selected before posting Delete once. It then verifies an empty value
-for up to one second. An unreadable value is unsupported; missing focus fails
-before keys are posted. Unacknowledged selection or retained text fails
-`input-failed`, with the posted input's partial effect. Verification never
-replays keys or substitutes a semantic clear.
+200 ms for native keyboard focus and posts the two document-navigation chords
+once, rather than relying on an application-provided Select All menu command.
+Paper's focused `NSTextField` can ignore Command-A even though the menu item
+is present; document navigation reaches the field editor without that menu
+route. When the provider exposes `AXSelectedTextRange`, clear waits up to
+200 ms for the complete UTF-16 value to be selected before posting Delete
+once. It then verifies an empty value for up to one second. An unreadable
+value is unsupported; missing focus fails before keys are posted.
+Unacknowledged selection or retained text fails `input-failed`, with the
+posted input's partial effect. Verification never replays keys or substitutes
+a semantic clear.
 
 A locked screen or a login session that is not the active console prevents
 applications from publishing complete accessibility windows and from receiving
