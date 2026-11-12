@@ -31,6 +31,8 @@ export type DesktopServiceOptions = {
   addSecret?: (secret: string) => void;
   signal?: AbortSignal;
   guard?: <T>(work: Promise<T>) => Promise<T>;
+  /** Trusted neutral application-lifetime wrapper, installed before integration target context is created. */
+  prepareHost?: (host: DesktopHost) => Promise<DesktopHost>;
   /** Optional application-specific target context; native authority remains in the driver. */
   createTarget?: (
     host: DesktopHost,
@@ -70,6 +72,7 @@ export async function startDesktopService(
   let publication: DesktopAgentPublication | undefined;
   try {
     const recovery = await resolveRecovery(options, artifact);
+    desktopHost = (await options.prepareHost?.(desktopHost)) ?? desktopHost;
     // Only the declared story context is taken: an integration cannot replace the target's identity or launch modes.
     const added = await options.createTarget?.(desktopHost, recovery);
     const target = {
