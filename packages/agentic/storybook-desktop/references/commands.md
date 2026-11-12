@@ -93,7 +93,7 @@ cannot be combined with an explicit non-`auto` click mode. See
 
 On macOS, physical-lane `test` and `smoke` runs establish and verify a
 **1024 × 768 logical-point** window before traversal or callbacks. The harness
-clamps the window position inside a visible screen, excluding menu-bar and
+centers the window inside a visible screen, clamping its origin to exclude menu-bar and
 Dock space, and can use a fitting secondary screen. It fails before tests if
 no screen can fit that size or the host does not establish the requested
 rectangle; it never shrinks the window to conceal that failure. Accessible

@@ -99,7 +99,7 @@ function windowSetup(
   return { calls, visibleScreenFrames, connect: () => connectStoryTraversal(settings) };
 }
 
-test('physical macOS traversal establishes a visible 1024x768 window before selecting a story', async () => {
+test('physical macOS traversal centers a visible 1024x768 window before selecting a story', async () => {
   const { calls, connect, visibleScreenFrames } = windowSetup({ input: 'physical' });
   const traversal = await connect();
   try {
@@ -108,7 +108,7 @@ test('physical macOS traversal establishes a visible 1024x768 window before sele
       {
         method: 'POST',
         url: 'https://driver/session/session/window/rect',
-        body: { x: 256, y: 192, width: 1024, height: 768 },
+        body: { x: 128, y: 116, width: 1024, height: 768 },
       },
     ]);
     expect(calls.findIndex(({ url }) => url.endsWith('/window/rect'))).toBeLessThan(
@@ -133,7 +133,7 @@ test.each([
   expect(visibleScreenFrames).not.toHaveBeenCalled();
 });
 
-test('clamps to negative-origin visible bounds and can use a fitting secondary screen', async () => {
+test('centers within negative-origin visible bounds and can use a fitting secondary screen', async () => {
   const { calls, connect } = windowSetup({
     input: 'physical',
     current: { x: 100, y: 900, width: 480, height: 302 },
@@ -145,8 +145,24 @@ test('clamps to negative-origin visible bounds and can use a fitting secondary s
   const traversal = await connect();
   await traversal.close();
   expect(calls.find(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')?.body).toEqual({
-    x: -1024,
-    y: 312,
+    x: -1472,
+    y: 176,
+    width: 1024,
+    height: 768,
+  });
+});
+
+test('keeps an off-screen persisted window away from the visible screen edges', async () => {
+  const { calls, connect } = windowSetup({
+    input: 'physical',
+    current: { x: 1600, y: 900, width: 480, height: 302 },
+    screens: [{ x: 0, y: 33, width: 1728, height: 999 }],
+  });
+  const traversal = await connect();
+  await traversal.close();
+  expect(calls.find(({ url, method }) => url.endsWith('/window/rect') && method === 'POST')?.body).toEqual({
+    x: 352,
+    y: 149,
     width: 1024,
     height: 768,
   });

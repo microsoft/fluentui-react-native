@@ -71,8 +71,9 @@ export async function preparePhysicalWindow(
       chosen = {
         overlap,
         rect: {
-          x: Math.min(maxX, Math.max(minX, Math.round(current.x))),
-          y: Math.min(maxY, Math.max(minY, Math.round(current.y))),
+          // Avoid screen-edge constraints changing the requested size during the native resize.
+          x: Math.min(maxX, Math.max(minX, Math.round(screen.x + (screen.width - width) / 2))),
+          y: Math.min(maxY, Math.max(minY, Math.round(screen.y + (screen.height - height) / 2))),
           width,
           height,
         },
