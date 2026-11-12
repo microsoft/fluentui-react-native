@@ -68,7 +68,7 @@ did not retain a portable raw-report locator; do not imply otherwise.
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                                                                                                            |
 | Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent` after the idle-CLI fix; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim.                                                                    |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 now implements strict generated provenance and independent nonces; see the F6 evidence below for qualification limits.                                                                                               |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits.                                  |
 | Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. The workload claim records a Node.js-clock start time, so it needs a helper-described start time before claim inspection can prove a live owner or a reused PID. |
 | Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                              |
 | Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                            |
@@ -946,12 +946,83 @@ changesets, whitespace, and all 90 link tasks passed. Evidence:
 the default `TMPDIR`; no native smoke or privacy-setting change was repeated.
 Evidence: `apps/storybook/artifacts/f6/crossdrive-buildci.log`.
 
-**Windows/Win32 qualification: pending, not sufficient yet.** Native execution
-is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
-validation was not run. CI confirms both Windows Fabric and Win32 Paper reach
-the changed protected-storage path, but bundling has not yet passed on the
-revised source. A passing same-branch run must demonstrate
-version-3 smoke control, trusted helper verification, protected-DACL lease
-publication/replacement/cleanup, private runtime resolution, and live bridge
-authentication. Portable negative fixtures do not qualify Windows ACL
-behavior. Keep the PR draft until that coverage is observed.
+**Windows/Win32 qualification: sufficient for F6's changed paths.**
+[Run 43156299266](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266)
+passed on source `58ec7ab4fb7ce6e449d0e351ecb02352bf88f319` on
+2026-11-12. Full job logs and the uploaded terminal `run.json` reports agree:
+
+| Lane / job                                                                                                                               | Full story index rendered | Authored tests                        | Aggregate                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------- | ---------------------------------------------------- |
+| Windows Fabric accessible / [130976919836](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976919836) | 215/215                   | 40/40 passed                          | 255 selected, executed, and passed                   |
+| Win32 Paper accessible / [130976919943](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976919943)    | 188/188                   | 45/45 passed                          | 233 selected, executed, and passed                   |
+| Win32 Paper physical / [130976920038](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976920038)      | 188/188                   | 100 passed; 1 quarantined unsupported | 289 selected; 288 executed and passed; 1 unsupported |
+
+All three reports have zero failed, skipped, incomplete, retried, or flaky
+tests and zero groups not run. Each navigation result has a distinct story
+ID and passed; the render totals match the complete runtime index, not an
+early-stop subset. The physical lane's existing #4373 quarantine is not a
+pass or an F6 failure.
+
+The five required paths are exercised in **each** lane. The successful
+guarded execution establishes the mandatory checks below; these checks do
+not emit separate success messages or upload secret records:
+
+1. **Version-3 control:**
+   `packages/agentic/storybook-desktop/config/storybook-control.cjs` uses the strict shared
+   generated-contract parser before driver traversal and authored tests.
+   The rendered-story and authored-test results above therefore cross the
+   v3 gate in all three lanes.
+2. **Trusted helper verification:** each log records native Storybook/WebDriver
+   readiness before traversal. The channel child's
+   `packages/agentic/storybook-desktop/config/server.cjs`
+   requires the inherited parent handoff and awaits `readDriverManifest`,
+   which checks its independent byte/helper binding and calls
+   `verifyNativeDriverArtifact` before opening Windows private storage or
+   starting the native service. Readiness plus completed native traversal
+   demonstrates this guarded spawn path, not merely parent-side resolution.
+3. **Protected-DACL lease lifecycle:** both PowerShell scripts require a
+   successful trusted Node publication and digest receipt before control,
+   and propagate lease-helper cleanup failures. Successful script completion
+   exercises publication, native consumption, and receipt-checked cleanup in
+   all lanes. Windows Fabric additionally stops/relaunches the app between
+   its stories/tests phases and replaces the lease using the prior receipt;
+   the Win32 lanes use one app incarnation. The Windows job also passed the
+   real NTFS `privateStorage.contract.test.ts` (log line 436), including
+   exclusive publication/removal and refusal of permissive root/record ACLs,
+   junctions, hard links, and replaced roots. This is native boundary
+   evidence, not portable mock coverage or an independent post-run ACL dump.
+4. **Private runtime resolution:** all three logs finish writing the minified
+   Windows/Win32 bundle before native startup. On these hosted runners the
+   workspace is on `D:` and the protected per-user projection is on `C:`.
+   The Windows runtime transformer must read and hash-check that private
+   buffer before delegating the workspace stub to Metro's original worker;
+   the subsequent authenticated render confirms the resulting bundle works.
+5. **Live bridge authentication:** successful native story selections require
+   `StorybookChannelOrchestrator.acceptHello` to match the nonce, instance,
+   endpoint, target, manifest digest, and connection epoch, followed by
+   correlated render-ready responses. The 215/188/188 successful selections
+   prove live authenticated runtime traffic, not just a listening server.
+
+**Evidence locators:** the Windows full log records bundle completion at
+line 655, native readiness at 669-670, all stories at 709, authored tests at
+1230, and terminal totals at 2295. Win32 accessible uses lines 502,
+508-511, 1097, and 1118; Win32 physical uses 499, 505-508, 1809, and 1845.
+The three artifacts are `Storybook_windows_fabric_43156299266_1`
+(13916946307), `Storybook_win32_paper_accessible_43156299266_1`
+(13917010025), and `Storybook_win32_paper_physical_43156299266_1`
+(13916318019). Their main smoke reports under `apps/storybook/artifacts/desktop`
+are respectively `414aa6f1-a539-4d67-9aa4-a92db05b58a4/run.json`,
+`00cae5a0-ef44-45cf-aaa9-68485ecf2403/run.json`, and
+`e5767c29-e4b1-4a9b-9685-8cdf8e0d3ee1/run.json`. Full logs, inventory,
+and extracted reports are retained locally under ignored
+`apps/storybook/artifacts/f6/ci-43156299266/`.
+
+**Limits:** collected channel stderr includes non-terminal
+`bridge-unavailable` navigation diagnostics on Windows and an authenticated
+epoch `lease-invalid` diagnostic on Win32 physical. Do not infer their
+original timing from the buffered output, diagnostic-free operation, or
+general bridge-recovery qualification from the terminal passes. The local
+macOS Accessibility block above remains unchanged; no local smoke was
+repeated. `pwsh` is unavailable locally, so its parser check remains not run;
+the actual scripts executed in these CI lanes. Keep the PR draft until the
+documentation follow-up's CI passes and the coordinator changes its status.
