@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "e26aa749e2ff909563bca4c13638cbe1569d869ac16bf91a60d81a4cb8e5c603",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LOCAL-001": {
+      "checks": [
+        {
+          "id": "compound-item-layout-unstyled",
+          "description": "Structural row adds no theme tokens, product appearance or interactive semantics.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LOCAL-002": {
+      "checks": [
+        {
+          "id": "compound-item-layout-types",
+          "description": "Compiled SlotProp requires primary and accepts secondary under primary.",
+          "source": "CONTRACT.md",
+          "evidence": "type",
+          "tests": [
+            { "kind": "type", "name": "packages/agentic/components/src/primitives/compound-item-layout/compound-item-layout.types.test.ts" }
+          ]
+        },
+        {
+          "id": "compound-item-layout-regions",
+          "description": "Supplied leading, primary, secondary-under and trailing content all render.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [{ "kind": "unit", "name": "CompoundItemLayout renders leading, primary, secondary, and trailing regions" }]
+        },
+        {
+          "id": "compound-item-layout-placement",
+          "description": "Optional leading/secondary/trailing are independently omitted; beside versus under changes only content placement and preserves primary/secondary ordering.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "compound-item-layout-baseline",
+          "description": "Root and inline contentStyle can opt into baseline; removing overrides restores default root centering.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "CompoundItemLayout allows text rows to opt into a shared baseline without changing the default centering policy"
+            }
+          ]
+        },
+        {
+          "id": "compound-item-layout-style-last",
+          "description": "All region styles follow structural styles, including content/leading/primary/secondary/trailing; arbitrary icons/custom content center by default.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "compound-item-layout-forwarding",
+          "description": "Unowned native View props, ordinary root ref, accessibility and test props reach native root unchanged.",
+          "source": "CONTRACT.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "compound-item-layout-native-geometry",
+          "description": "Native text-only baseline includes leading/trailing across different font metrics; arbitrary image/action regions remain centered when baseline is not requested.",
+          "source": "CONTRACT.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "compound-item-layout-optical",
+          "description": "Review beside/under text, arbitrary icons and baseline geometry on each renderer without assuming style arrays prove glyph alignment.",
+          "source": "CONTRACT.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Existing baseline test checks resolved styles, not native baseline participation.",
+    "The contract does not define a default secondaryPosition explicitly; no invented default is required here.",
+    "No native geometry or visual review records are linked."
+  ]
+}

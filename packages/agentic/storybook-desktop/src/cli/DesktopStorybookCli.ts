@@ -46,6 +46,7 @@ import {
 } from '../driver/index.js';
 import {
   desktopStorybookDriverManifestPath,
+  desktopStorybookRenderer,
   desktopStorybookTargetId,
   driverManifestInput,
   type CreateDesktopStorybookDriverManifestOptions,
@@ -823,7 +824,7 @@ export class DesktopStorybookCli {
   }
 
   private renderer(platform: Platforms): 'fabric' | 'paper' {
-    return platform === 'win32' || (platform === 'macos' && this.paper) ? 'paper' : 'fabric';
+    return desktopStorybookRenderer(this.config, platform, this.paper);
   }
 
   /**

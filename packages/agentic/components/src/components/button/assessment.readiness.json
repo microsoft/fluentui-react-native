@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "b685c5c397e6a86f542c127182e760c9a3a8258d004f0ad538252805edb585ed",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "BTN-001": {
+      "checks": [
+        {
+          "id": "button-defaults",
+          "description": "Default secondary/medium/before/enabled, rounded with content and circle icon-only; all four appearances, three sizes, three shapes and two icon positions resolve.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-ref",
+          "description": "Ordinary ref prop receives the native root instance.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Button forwards its ref prop to the native root"
+            }
+          ]
+        },
+        {
+          "id": "button-handlers",
+          "description": "Synthetic hover and press update presentation and forward caller callbacks exactly once.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Button forwards press and interaction handlers while updating visual state"
+            }
+          ]
+        },
+        {
+          "id": "button-native-props",
+          "description": "Supported Pressable props and native ref compile; owned children/style behavior and optional slots retain the public API.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "BTN-002": {
+      "checks": [
+        {
+          "id": "button-slot-order",
+          "description": "Only supplied optional slots render, with focus visual first and active icon before/after content according to iconPosition; selectedIcon falls back to icon.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-regular-icon",
+          "description": "selected=false retains regular icon and omits selectedIcon.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Button uses the regular icon while a toggle button is not selected"
+            }
+          ]
+        },
+        {
+          "id": "button-wrapping",
+          "description": "Constrained content wraps instead of truncating; icon-only layout remains at least 24 by 24 through all sizes/shapes.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "BTN-003": {
+      "checks": [
+        {
+          "id": "button-token-matrix",
+          "description": "Each appearance resolves rest/selected/disabled/hover/pressed foreground, background and border; disabled overrides interaction and pressed overrides hover, including selected-disabled combinations.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-size-matrix",
+          "description": "Small/medium/large match radius/padding/gap, bodySmall/Medium/Large typography and 16/20/20 icons; square/circle override radius and user style wins last.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-disabled",
+          "description": "Disabled root is unfocusable, reports disabled and blocks synthetic press while using disabled secondary background.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Button disables interaction and exposes disabled accessibility state"
+            }
+          ]
+        },
+        {
+          "id": "button-visual-matrix",
+          "description": "Review all appearance/size/shape and selected/disabled/hover/pressed combinations on native renderers, including wrapping and icon-only target geometry.",
+          "source": "spec/tokens.yaml",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "BTN-004": {
+      "checks": [
+        {
+          "id": "button-name-precedence",
+          "description": "Plain strings/numbers and slot children supply names; native/ARIA explicit labels and references win, including empty native labels; rich content requires caller naming.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-icon-warning",
+          "description": "Unnamed icon-only button emits the action-oriented naming warning.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Button warns when an icon-only button has no accessible name"
+            }
+          ]
+        },
+        {
+          "id": "button-a11y-props",
+          "description": "Root is one accessible button, caller busy state survives owned disabled/checked values, both icon sources are decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-screen-reader",
+          "description": "Review UIA/AX name, role and enabled state, plus Windows toggle announcements; do not infer macOS checked projection from rendered labels.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "BTN-005": {
+      "checks": [
+        {
+          "id": "button-selected-ghost",
+          "description": "Selected true exposes checked state, replaces regular icon and renders invisible semibold reservation beneath visible semibold text.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Button uses selected semantics, selected icon, and a ghost label to prevent reflow"
+            }
+          ]
+        },
+        {
+          "id": "button-controlled-action",
+          "description": "selected absent versus false versus true distinguishes checked semantics; press never mutates selection; Toggle declaration retains caller labels/actions and owned checked overrides aria-checked.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "button-accessibility-action",
+          "description": "Actual Win32 Toggle dispatch forwards the unchanged event without synthesizing press; selection changes only when the owner updates it.",
+          "source": "spec/accessibility.md",
+          "evidence": "native",
+          "tests": [],
+          "applicability": {
+            "windows-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "This check isolates Win32 action transport, not Windows Fabric projection."
+            },
+            "macos-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "macOS Toggle is a custom action, qualified separately from Win32 transport."
+            },
+            "macos-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "macOS Toggle is a custom action, qualified separately from Win32 transport."
+            }
+          }
+        },
+        {
+          "id": "button-native-checked-projection",
+          "description": "Actual native checked state follows the owner-supplied selected value, including false and disabled selection.",
+          "source": "spec/accessibility.md#state-and-focus",
+          "evidence": "native",
+          "tests": [],
+          "applicability": {
+            "macos-fabric": {
+              "status": "unsupported",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "The pinned macOS renderer/provider has no supported checked read for AXButton; rendered selection labels are not native projection."
+            },
+            "macos-paper": {
+              "status": "unsupported",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "The pinned macOS renderer/provider has no supported checked read for AXButton; rendered selection labels are not native projection."
+            }
+          }
+        },
+        {
+          "id": "button-macos-toggle-action",
+          "description": "Invoke the macOS Toggle custom action and verify the original event is forwarded without synthesizing a press or mutating owner selection; do not substitute AXPress.",
+          "source": "spec/accessibility.md#state-and-focus",
+          "evidence": "native",
+          "tests": [],
+          "applicability": {
+            "win32-paper": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "The AX custom-action contract belongs to macOS."
+            },
+            "windows-fabric": {
+              "status": "not-applicable",
+              "source": "spec/accessibility.md#state-and-focus",
+              "reason": "The AX custom-action contract belongs to macOS."
+            }
+          }
+        },
+        {
+          "id": "button-stable-width",
+          "description": "Toggling selected leaves native label/button width stable with wrapping, scaled text and both icon positions.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "BTN-006": {
+      "checks": [
+        {
+          "id": "button-focus-policy",
+          "description": "Windows/macOS system ring has no custom subtree; Win32 persistent dual ring is self-focus/keyboard-modality gated, disabled-hidden, radius preserving and noninteractive; explicit custom/alwaysVisible options preserve focus requirement.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "button-keyboard",
+          "description": "Physical Tab/Shift+Tab skip disabled; Return/Space activate exactly once at platform phase; held/repeated/overlapping keys, blur and disable clear feedback without stale activation.",
+          "source": "spec/interaction.md#executable-focus-coverage",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        },
+        {
+          "id": "button-focus-lifetime",
+          "description": "Native-confirmed ref focus rejects detached/disabled targets, distinguishes self from descendants, preserves modality across nested themes and same-target pointer/keyboard transitions.",
+          "source": "spec/interaction.md#focus-target-lifetime",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "button-ring-appearance",
+          "description": "Review native system and custom dual-ring appearance without treating modality counters as pixels.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "macOS AXButton checked reads are unsupported by the pinned renderer/provider; Toggle there is a custom action, not AXPress.",
+    "Win32 intervening-key onPressOut has a documented temporary gap (#4373); no complete keyboard qualification is claimed.",
+    "Unit presses do not prove physical activation or accessibility action transport. Native, visual and screen-reader records remain unlinked."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "case_id": "agentic-readiness-assessment",
+  "split": "development",
+  "task_mode": "review",
+  "prompt": "Assess the agentic Switch and Icon primitive for readiness using existing evidence. Explain all four desktop renderer targets and what still prevents higher maturity. Do not rerun tests or modify implementation.",
+  "expected": {
+    "skills": ["assess-agentic-component"],
+    "classification": {
+      "implementation_model": "agentic-higher-order",
+      "public_compatibility": [],
+      "native_platforms": []
+    },
+    "required_reads": [
+      "packages/agentic/components/AGENTS.md",
+      "packages/agentic/components/references/assessments/README.md",
+      "packages/agentic/components/src/components/switch/SPEC.md",
+      "packages/agentic/components/src/components/switch/spec/source.json",
+      "packages/agentic/components/src/primitives/icon/CONTRACT.md"
+    ],
+    "forbidden_actions": ["edit-files", "run-mutating-commands"]
+  },
+  "assertions": [
+    {
+      "id": "skill-not-ci-substitute",
+      "description": "Uses the assessor skill to review complete contract meaning and actual assertions; treats the CLI and CI as supporting evidence tools, not proof of semantic completeness.",
+      "rule_ids": ["R-VALID-002"],
+      "source_refs": ["packages/agentic/components/references/assessments/README.md"]
+    },
+    {
+      "id": "contract-formats-and-full-checklist",
+      "description": "Supports paragraph-form SPEC requirement IDs and the primitive's local CONTRACT without inventing external provenance or shrinking checklists to existing tests.",
+      "rule_ids": ["R-VALID-002"],
+      "source_refs": ["packages/agentic/components/references/assessments/README.md"]
+    },
+    {
+      "id": "target-and-claim-separation",
+      "description": "Keeps Win32/Paper, Windows/Fabric, macOS/Fabric and macOS/Paper evidence separate; does not turn mocked unit passes or accessible-input results into native or screen-reader conformance.",
+      "rule_ids": ["R-VALID-002"],
+      "source_refs": ["packages/agentic/components/references/assessments/README.md"]
+    },
+    {
+      "id": "automatic-advisory-no-owner-gate",
+      "description": "Reports provisional evidence-supported maturity without requiring separate owner approval; retains missing evidence and optional official approval as distinct concerns.",
+      "rule_ids": ["R-VALID-002"],
+      "source_refs": ["packages/agentic/components/references/assessments/README.md"]
+    }
+  ]
+}

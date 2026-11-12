@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "f5cc0d3238f11e27508d65a4622196548104b06e2af8c165b7188186998fb799",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "TXT-001": {
+      "checks": [
+        {
+          "id": "text-theme-fields",
+          "description": "Theme supplies functional family/bodyMedium size/lineHeight, regular weight and primary foreground.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text applies theme typography and foreground defaults"
+            }
+          ]
+        },
+        {
+          "id": "text-nearest-theme",
+          "description": "Nearest nested theme wins and rerendering that boundary updates color/size without changing the outer boundary.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text TXT-001 resolves the nearest theme and refreshes defaults when that boundary changes"
+            }
+          ]
+        }
+      ]
+    },
+    "TXT-002": {
+      "checks": [
+        {
+          "id": "text-style-precedence",
+          "description": "Registered/nested caller style arrays override every default typography field with native last-entry precedence.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text TXT-002 preserves native style-array precedence for every default typography field"
+            }
+          ]
+        },
+        {
+          "id": "text-component-owned-style",
+          "description": "Owning content slots can apply their hover/pressed/focus/selected/disabled typography after defaults without Text adding interaction-state colors.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TXT-003": {
+      "checks": [
+        {
+          "id": "text-native-props",
+          "description": "Caller label/role/state, scaling, max multiplier, truncation and line count pass through; onTextLayout receives the identical event; default label/role are absent.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text TXT-003 forwards text layout, scaling, truncation, and caller accessibility without synthesizing semantics"
+            }
+          ]
+        },
+        {
+          "id": "text-nesting",
+          "description": "Nested Agentic Text reapplies defaults while strings/raw native Text retain native inheritance.",
+          "source": "SPEC.md#styling-ownership",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "text-native-interaction",
+          "description": "Native selection, responders, disabled behavior, press/long-press ordering and platform layout/font fallback remain unnormalized.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "text-native-a11y",
+          "description": "Review supplied language, accessibility semantics, scaling and selection with screen readers on each target.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        },
+        {
+          "id": "text-native-layout",
+          "description": "Review wrapping, ellipsis, fallback glyphs and scaled line boxes on Windows, Win32 and macOS.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "TXT-004": {
+      "checks": [
+        {
+          "id": "text-stable-root",
+          "description": "Phased state returns the same native root continuation across rerenders.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text keeps the returned root slot identity stable across renders"
+            }
+          ]
+        },
+        {
+          "id": "text-slot-children",
+          "description": "Required/optional slots preserve shorthand and default children.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text resolves as both a required and optional slot without losing shorthand children"
+            }
+          ]
+        },
+        {
+          "id": "text-no-wrapper",
+          "description": "Flattening required slots introduces no extra native wrapper or per-render continuation allocation.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TXT-005": {
+      "checks": [
+        {
+          "id": "text-ref-runtime",
+          "description": "Ordinary React ref receives a native Text instance while selectable and onPress pass through.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Text delegates native Text behavior and forwards the native ref prop"
+            }
+          ]
+        },
+        {
+          "id": "text-ref-type",
+          "description": "React 19 ordinary native Text ref and full native Text prop surface compile without forwardRef or added variants.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Runtime ref non-null does not prove native imperative methods or compiler acceptance.",
+    "Text delegates broad native behavior; the linked focused prop test does not qualify every native Text prop or renderer.",
+    "No native typography, interaction or assistive-technology execution records are linked."
+  ]
+}

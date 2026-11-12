@@ -66,11 +66,18 @@ references used, the implementation order, and the validation plan.
 7. Add focused tests and stories that exercise the public API and the resolved native output.
 8. Reconcile and ratify the local contract against the realized public types, tests, stories, and platform evidence.
    Upstream changes require explicit re-review and never overwrite the local contract.
-9. Iterate with focused validation (R-VALID-004): `yarn test <component>` from the package, `yarn build` after type
+9. Before the already-needed package test run, reuse or enable the original execution capture described in the
+   [assessment reference](../../../packages/agentic/components/references/assessments/README.md#full-inventory-assessment)
+   so assessment can reuse its results; do not rerun tests later just to manufacture provenance.
+   Iterate with focused validation (R-VALID-004): `yarn test <component>` from the package, `yarn build` after type
    changes, and `yarn test --findRelatedTests <files>` after editing shared code. Before handover, run the package
    format, lint, build, and whole test suite, the Storybook bundle for story changes, and the root build when public
    types, manifests, or project references change. Then run `yarn clean-lage-cache` and `yarn lage buildci` once as
    final acceptance (R-VALID-003) and report results truthfully (R-VALID-002).
+10. Run the [assessment workflow](../assess-agentic-component/SKILL.md) for the changed component or primitive using
+    the evidence just produced. Reconcile its complete acceptance checklist against the realized contract and
+    assertions; retain missing or stale evidence as gaps. Assessment is advisory, requires no separate owner approval,
+    and must not silently rerun the completed test suites or promote release status.
 
 Do not divide one component implementation into separate sub-agent or sub-skill phases. Its types, state, styling, and
 rendering form one contract and should remain in one implementation context.

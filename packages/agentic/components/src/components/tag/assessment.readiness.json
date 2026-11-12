@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "a16dc019ceacaa7d888b2f68e25f99042a087ddf7635f48821dce0969f0e22ba",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "TAG-001": {
+      "checks": [
+        {
+          "id": "tag-default-axes",
+          "description": "Compiled public types accept the two appearances/layouts/sizes/shapes and the remaining owned Pressable props and native ref.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "tag-default-values",
+          "description": "Omitted variants resolve to secondary, iconAndText, medium, rounded, dismiss true and enabled.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tag-caller-style",
+          "description": "Caller root style is applied after the component styles.",
+          "source": "SPEC.md#props-and-defaults",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tag-runtime-default",
+          "description": "Default enabled button has secondary background, min24x24, content and dismiss glyph without selected/checked state.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tag renders default dismissible tag accessibility and styling"
+            }
+          ]
+        }
+      ]
+    },
+    "TAG-002": {
+      "checks": [
+        {
+          "id": "tag-slot-defaults",
+          "description": "Absent content renders Tag text in iconAndText, null suppresses, iconOnly excludes it; leading only supplied, dismiss default glyph omitted by false/null without changing behavior.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tag-null-content",
+          "description": "Explicit null content removes placeholder but retains default dismiss glyph and explicit root name.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tag TAG-002 explicitly null content suppresses the placeholder while retaining the default dismiss glyph"
+            }
+          ]
+        }
+      ]
+    },
+    "TAG-003": {
+      "checks": [
+        {
+          "id": "tag-visual-order",
+          "description": "Supplied decorative leading and dismiss icons surround label in one button.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tag TAG-003 TAG-004 orders decorative leading and dismiss icons around the label in one target"
+            }
+          ]
+        },
+        {
+          "id": "tag-custom-ring-order",
+          "description": "Custom focus path retains mounted ring before leading/content/dismiss; omitted/replacement slots preserve order and forwarded props.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TAG-004": {
+      "checks": [
+        {
+          "id": "tag-caller-removal",
+          "description": "Repeated activation forwards press twice without self-removal; only caller rerender removes the single button.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tag TAG-004 leaves removal to the caller after repeated whole-tag activation"
+            }
+          ]
+        },
+        {
+          "id": "tag-native-one-target",
+          "description": "Physical presses over icon/text/dismiss/padding invoke same one action, dismiss is not independent focus target; labels/icons remain decorative and no selected/dismissed state appears.",
+          "source": "spec/interaction.md#one-target",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "TAG-005": {
+      "checks": [
+        {
+          "id": "tag-color-matrix",
+          "description": "Primary/secondary background follows disabled > pressed > hovered; foreground varies only appearance/disabled and stays fixed on hover/press for label/both icons; caller style final, changes immediate.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TAG-006": {
+      "checks": [
+        {
+          "id": "tag-layout-matrix",
+          "description": "Small/medium iconAndText rounded/circular match table padding/gap and differ only radius; iconOnly always circular regardless shape, uses small zero/medium base50 gap with equal padding; label shrinks before glyphs.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tag-native-layout",
+          "description": "Review constrained long labels, full-size glyphs, small circular/rounded equal spacing, native min target and text/display scaling across renderers.",
+          "source": "spec/interaction.md#size-shape-and-layout",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "TAG-007": {
+      "checks": [
+        {
+          "id": "tag-icon-metrics",
+          "description": "Small leading16/dismiss12, medium leading20/dismiss16 with same resolved foreground and nonshrinking frames, including slot replacements.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "TAG-008": {
+      "checks": [
+        {
+          "id": "tag-disabled",
+          "description": "Disabled root is unavailable/unfocusable, has disabled secondary background and blocks synthetic press.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tag disables interaction and exposes disabled accessibility state"
+            }
+          ]
+        },
+        {
+          "id": "tag-name-warning",
+          "description": "Unnamed iconOnly emits accessible-name development warning.",
+          "source": "spec/accessibility.md#naming",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Tag warns when an icon-only tag has no accessible name"
+            }
+          ]
+        },
+        {
+          "id": "tag-a11y-props",
+          "description": "Owned disabled merges over caller busy/state; default visible label or explicit naming identifies button, supported reference suppresses iconOnly warning, missing leading icon warns separately.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "tag-native-keys",
+          "description": "Native Tab skips disabled; Enter/Space activate exactly once, Delete/Backspace/arrows do not; caller owns sensible focus after removing tag.",
+          "source": "spec/interaction.md#keyboard",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        },
+        {
+          "id": "tag-screen-reader",
+          "description": "Narrator/VoiceOver announces one named button with disabled state, not independent dismiss/icon or checked/selected; removal announcement belongs to owner.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "TAG-009": {
+      "checks": [
+        {
+          "id": "tag-focus-policy",
+          "description": "Windows/macOS system ring versus persistent Win32 custom dual ring uses resolved radius, self-focus/keyboard modality, disabled suppression, nested roots and ref detach/disable request invalidation.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "tag-native-ring",
+          "description": "Review system/custom ring pixels across both shapes/layouts/sizes, including pointer-to-keyboard same-target transitions.",
+          "source": "SPEC.md#focus-visuals",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "dismiss controls glyph only, not whether whole tag can activate; owner removal/focus recovery must not be inferred from Tag's synthetic callback.",
+    "Icon-only naming/leading-icon requirements warn at runtime; no unreviewed type assertion is linked as compiler enforcement.",
+    "Native keyboard, independent hit-region equivalence, ring pixels and screen-reader execution remain unlinked."
+  ]
+}

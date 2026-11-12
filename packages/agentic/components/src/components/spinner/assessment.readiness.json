@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "ec6b1690a0e599d5abc57d4a47344083e27575f6ed0abe4078c979e95c9be598",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "SPIN-001": {
+      "checks": [
+        {
+          "id": "spinner-default-medium",
+          "description": "Default medium root/SVG32px, thick stroke, subtle track/loud quarter arc; root progressbar busy/nonfocusable/pointer none.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner renders as an accessible progressbar with default medium sizing"
+            }
+          ]
+        },
+        {
+          "id": "spinner-size-matrix",
+          "description": "x-tiny/tiny/x-small/small/medium/large/x-large/huge map diameters16/20/24/28/32/36/40/44 and thin/thin/thin/thick/thick/thicker/thicker/thicker strokes on root and SVG.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "spinner-public-types",
+          "description": "Eight sizes and owned ViewProps/ref compile; children, role/focusable overrides, determinate value and replacement drawing slots are rejected.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "SPIN-002": {
+      "checks": [
+        {
+          "id": "spinner-owned-busy",
+          "description": "Caller accessibility state merges under busy=true, no range value is published, nonfocusable always, default pointer none with explicit override honored.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "spinner-native-semantics",
+          "description": "UIA/AX progress element is indeterminate/busy, never Tab or initial dialog focus target, and default hit testing passes through.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "spinner-screen-reader",
+          "description": "Named spinner announces task/busy once when encountered, not every rotation or completion; decorative root opt-out produces no duplicate announcement.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "SPIN-003": {
+      "checks": [
+        {
+          "id": "spinner-arc-anatomy",
+          "description": "One inaccessible animated SVG draws track then arc, same center/radius/stroke, round caps/no fill, circumference-derived quarter visible/three-quarter gap at every size and no pathLength normalization.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "spinner-native-arc",
+          "description": "Review quarter arc and track geometry at all eight native sizes, including smallest contrast and uncut round caps.",
+          "source": "SPEC.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "SPIN-004": {
+      "checks": [
+        {
+          "id": "spinner-token-style",
+          "description": "Track subtle/indicator loud neutral stroke and per-size widths update with theme; caller root style remains final while SVG uses resolved metrics.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "SPIN-005": {
+      "checks": [
+        {
+          "id": "spinner-name-warning",
+          "description": "Exposed unnamed spinner emits its required-name development warning.",
+          "source": "spec/accessibility.md#naming",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner warns when no accessible name is supplied"
+            }
+          ]
+        },
+        {
+          "id": "spinner-name-reference",
+          "description": "Caller label reference survives forwarding.",
+          "source": "spec/accessibility.md#naming",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner preserves consumer accessibility label-by references"
+            }
+          ]
+        },
+        {
+          "id": "spinner-warning-policy",
+          "description": "Explicit label or string/array reference suppresses warning; accessible=false removes root exposure and warning; repeated renders do not spam same missing-name warning.",
+          "source": "spec/accessibility.md#naming",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "SPIN-006": {
+      "checks": [
+        {
+          "id": "spinner-shared-driver",
+          "description": "Two instances share one1500ms linear animation channel requesting full rotation; macOS Fabric driver is JS.",
+          "source": "spec/interaction.md#rotation",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Spinner shares continuous rotation through the macOS Fabric driver when reduce motion is disabled"
+            }
+          ]
+        },
+        {
+          "id": "spinner-reduced-motion-policy",
+          "description": "Unknown/on hold static arc and start no loop; known off starts, on stops/resets to start, off resumes; last active subscriber stops/resets, subscriptions clean up.",
+          "source": "spec/interaction.md#reduced-motion",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "spinner-native-motion",
+          "description": "Actual drawing surface turns continuously/seamlessly360deg on each renderer, native driver except macOS Fabric JS, synchronized phase across staggered mounts and static under actual OS reduced motion.",
+          "source": "SPEC.md#platform-behavior",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Animation/timing spies prove channel configuration, not native motion, synchronization pixels or actual preference transitions.",
+    "No native indeterminate accessibility or screen-reader records are linked.",
+    "Broad ViewProps forwarding is not evidence that every callback/override is inert; this component adds no interaction state machine."
+  ]
+}

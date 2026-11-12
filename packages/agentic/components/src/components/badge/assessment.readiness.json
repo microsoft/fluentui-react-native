@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "fb8dcd3864dc23faa92b00be87d8f5d1020938588e47d5dbfaaf971ac175feba",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "BDG-001": {
+      "checks": [
+        {
+          "id": "badge-defaults",
+          "description": "Defaults are tint, brand, medium, circular, iconAndText; both appearances, five colors, two sizes/shapes and both layouts resolve.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "badge-discriminant",
+          "description": "Compiled iconOnly requires leadingIcon and rejects content/trailing props; iconAndText accepts optional slots.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        }
+      ]
+    },
+    "BDG-002": {
+      "checks": [
+        {
+          "id": "badge-default-slots",
+          "description": "Default Badge text and selected-circle leading icon render; null content removes text; unsupplied trailing icon stays absent even when enabled.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "badge-slot-order",
+          "description": "All four leading/trailing visibility combinations retain leading-content-trailing order and forward slot props.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "badge-icon-only",
+          "description": "Icon-only keeps leading icon but excludes default text and supplied trailing slot.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Badge renders content before the trailing icon and does not render a hidden label on icon-only layouts"
+            }
+          ]
+        }
+      ]
+    },
+    "BDG-003": {
+      "checks": [
+        {
+          "id": "badge-color-matrix",
+          "description": "All tint/outline by brand/danger/success/warning/informative combinations resolve exact background, foreground, border color and width bindings.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "badge-size-shape",
+          "description": "Small/medium use 16/20 minimum height, 12/16 icons, caption/bodySmall typography, documented padding/gap and circular versus base100/base200 rounded radius; iconOnly has zero horizontal padding and matching minimum width.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "badge-style-last",
+          "description": "Caller background overrides component background while requested trailing icon remains present.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Badge uses the trailing icon only when requested and applies user styles last"
+            }
+          ]
+        },
+        {
+          "id": "badge-native-visual",
+          "description": "Review compact count/status legibility, icon alignment and all appearance/color/shape combinations on native renderers.",
+          "source": "spec/usage.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    },
+    "BDG-004": {
+      "checks": [
+        {
+          "id": "badge-hidden",
+          "description": "Unnamed default root/descendants are hidden and nonfocusable, even with requested unsupplied trailing icon.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Badge BDG-002/BDG-004 hides an unnamed default badge and renders no unsupplied trailing icon"
+            }
+          ]
+        },
+        {
+          "id": "badge-names",
+          "description": "Explicit label or accessible label reference exposes one image; icons stay decorative; iconOnly missing name warns.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "badge-warning",
+          "description": "An icon-only badge missing an accessible label produces its development warning.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "Badge warns when an icon-only badge is missing an accessibility label"
+            }
+          ]
+        },
+        {
+          "id": "badge-screen-reader",
+          "description": "UIA/AX reads informative image/name once and omits unnamed badges; status meaning is available outside color alone.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "BDG-005": {
+      "checks": [
+        {
+          "id": "badge-no-state",
+          "description": "No press, keyboard, touch, hover, focus, selection or disabled state is added; no animation/reduced-motion branch exists.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": []
+        },
+        {
+          "id": "badge-host-placement",
+          "description": "Normal-flow root accepts host layout/user placement without adding overlay positioning, hit target or host action semantics.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "No native, visual or screen-reader execution record is linked; synthetic props do not prove UIA/AX projection.",
+    "Finite matrix tests were read; unlinked matrix checks avoid inventing parameter-expanded Jest names.",
+    "The prose requires a leading icon in the iconOnly public type, while runtime remains permissive; runtime acceptance is not type evidence."
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "reviewedDigest": "32286f4bbb80d2502d685517ec3fc77cef56d46ba4622539657c0673c8a2040a",
+  "reviewKind": "agent-reviewed",
+  "reviewInputs": ["packages/agentic/components/src/common/renderWithTheme.tsx"],
+  "requirements": {
+    "LIT-001": {
+      "checks": [
+        {
+          "id": "list-item-defaults",
+          "description": "Compiled types require root/content, accept the optional visual slots and expose the owned Pressable props and native ref.",
+          "source": "SPEC.md",
+          "evidence": "type",
+          "tests": []
+        },
+        {
+          "id": "list-item-default-values",
+          "description": "Omitted props resolve to List item content, medium size, no selection indicator, right secondary content, enabled and unselected.",
+          "source": "SPEC.md#public-contract",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-default-runtime",
+          "description": "Omitted optional slots do not manufacture content except documented default content; default root remains button with false disabled/selected.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LIT-002": {
+      "checks": [
+        {
+          "id": "list-item-slot-order",
+          "description": "Optional FocusRing then selection glyph then CompoundItemLayout; leading avatar takes precedence over selectedIcon/icon, active icon precedes stable primary, secondary and trailing content.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-selected-icon",
+          "description": "Selected true swaps to selectedIcon, hides regular icon and uses invisible semibold reservation beneath selected visible text.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListItem uses selected semantics, selected icon, and a ghost label to prevent reflow"
+            }
+          ]
+        },
+        {
+          "id": "list-item-icon-fallback",
+          "description": "Unselected uses regular icon; selected without selectedIcon falls back to regular icon; absent visuals and custom slots preserve props.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        }
+      ]
+    },
+    "LIT-003": {
+      "checks": [
+        {
+          "id": "list-item-controlled",
+          "description": "Press forwards once without changing externally owned selected=false.",
+          "source": "spec/interaction.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListItem renders selection without changing it on press"
+            }
+          ]
+        },
+        {
+          "id": "list-item-indicators",
+          "description": "none has no glyph; single false/true uses open/filled radio glyph; multiple false/true uses unchecked/checked glyph, all inaccessible.",
+          "source": "SPEC.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-selection-fill",
+          "description": "Selected multiple suppresses row fill; disabled suppresses fill in every selection mode; other selected rows reserve semibold width and show soft neutral fill.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-stable-native-width",
+          "description": "Native selection weight changes do not move surrounding content across constraints and text scaling.",
+          "source": "SPEC.md",
+          "evidence": "native",
+          "tests": []
+        }
+      ]
+    },
+    "LIT-004": {
+      "checks": [
+        {
+          "id": "list-item-disabled",
+          "description": "Disabled is unfocusable, exposes disabled/selected false and ignores synthetic press.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": [
+            {
+              "kind": "unit",
+              "name": "ListItem disables interaction and exposes disabled accessibility state"
+            }
+          ]
+        },
+        {
+          "id": "list-item-state-style",
+          "description": "Disabled overrides hover/press, pressed wins hover, selected-fill state retains documented token variants, user root style follows all layers and caller handlers compose.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-a11y",
+          "description": "Caller state merges with disabled/selected, visible content or caller name labels default button; leading/trailing/indicator visuals stay decorative.",
+          "source": "spec/accessibility.md",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-native-focus",
+          "description": "Native Enter/Space/pointer activate once; Windows/macOS system ring versus Win32 persistent keyboard-modality custom ring; ref self-focus and detach/disable obey shared lifetime.",
+          "source": "spec/interaction.md",
+          "evidence": "native",
+          "tests": [],
+          "qualification": "keyboard"
+        },
+        {
+          "id": "list-item-screen-reader",
+          "description": "UIA/AX announces resolved role/name/selected/disabled once without glyph/visual duplication; collection semantics remain caller-owned.",
+          "source": "spec/accessibility.md",
+          "evidence": "manual",
+          "tests": [],
+          "qualification": "screen-reader"
+        }
+      ]
+    },
+    "LIT-005": {
+      "checks": [
+        {
+          "id": "list-item-size-matrix",
+          "description": "Small/medium/large map padding, bodySmall/Medium/Large typography, 16/20/24 icons and 20/32/40 avatars; secondary right versus under changes layout without changing order.",
+          "source": "spec/tokens.yaml",
+          "evidence": "unit",
+          "tests": []
+        },
+        {
+          "id": "list-item-native-layout",
+          "description": "Review secondary wrapping, trailing noninteractive content, native icon/avatar alignment and focus rings for every size on desktop renderers.",
+          "source": "spec/usage.md",
+          "evidence": "visual",
+          "tests": []
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Trailing is presentation only; nested actions are not isolated from root press and are not qualified as independent controls.",
+    "No native focus, selected projection, stable measured width or visual execution record is linked.",
+    "Collection navigation, typeahead and restoration are outside the standalone contract, not inferred from a row press."
+  ]
+}
