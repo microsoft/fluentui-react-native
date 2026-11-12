@@ -42,6 +42,17 @@ cancellation. Its evidence is written to the desktop-test package's
 case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native
 permissions; a skipped case does not qualify input exclusion.
 
+When Accessibility is unavailable, the non-positive safety subset can still
+qualify native OS-owner inspection and exact cleanup after rejected launch:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity|failed native'
+```
+
+Record the actual AX rejection and exact primary-process cleanup. Passing this
+subset is not positive supervisor lifetime, external-app preservation,
+application exclusion, physical-input or renderer qualification.
+
 An Accessibility trust flag alone is insufficient: record actual AX calls and
 failures, including `kAXErrorAPIDisabled`, without resetting TCC or changing
 privacy permissions. AppKit results support only the generic backend. They are
@@ -49,6 +60,16 @@ not Fabric/Paper signing or TCC-responsibility qualification, do not qualify
 arbitrary descendants, and do not replace the per-renderer/descriptor gates
 below. Windows launched-application resource/survivor qualification must run on
 Windows; macOS and ordinary hosted smoke cannot establish it.
+
+`containment: "uncontained"` is deliberate for both macOS launch kinds.
+An exact primary-process exit is not proof that arbitrary descendants exited.
+The native ownership cases do not qualify descendant containment.
+
+The PR Windows setup action runs the **desktop-driver** native suite, not this
+package's application-resource contracts. The Windows/Win32 E2E and Storybook
+smoke jobs do not exercise failed packaged-launch survivor journaling/recovery.
+Those jobs are insufficient for that acceptance gate; portable schema tests
+must not be presented as Windows native qualification.
 
 ## Parameters and prerequisites
 

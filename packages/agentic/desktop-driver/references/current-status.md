@@ -7,7 +7,7 @@ owner_paths:
 
 # Current capability and qualification status
 
-**Work in progress, updated 2026-11-08.** "Done" below means the stated
+**Work in progress, updated 2026-11-12.** "Done" below means the stated
 implementation exists, not that every native endpoint is qualified or that the
 complete orchestration product is ready for submission. Historical measurements
 remain tied to their original revision; they were not rerun by this update.
@@ -23,7 +23,7 @@ and its sub-issues, which record dependencies and parallel waves.
 | ---------------------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | W3C service and typed/WDIO clients                         | Done                                   | Registered targets only; native browser-inapplicable commands explicitly unsupported.                                                                                                                                                                                                                                                                                                                                                                           |
 | Application-neutral driver                                 | Done                                   | No Storybook, React, or React Native dependency; package-boundary tests reject forbidden imports/dependencies. Optional story provider is injected.                                                                                                                                                                                                                                                                                                             |
-| Native sessions and command/input queues                   | Done                                   | One reservation per registered target in one service. macOS exact-application flock exclusion is implemented; positive real-app exclusion and input-mutex qualification remain blocked by Accessibility/PostEvent permissions. Windows behavior is unchanged. |
+| Native sessions and command/input queues                   | Done                                   | One reservation per registered target in one service. macOS exact-application flock exclusion is implemented; positive real-app exclusion and input-mutex qualification remain blocked by Accessibility/PostEvent permissions. Windows behavior is unchanged.                                                                                                                                                                                                   |
 | Verified private discovery and grants                      | Done                                   | Native identity verified before credential transmission; all protected driver routes authenticate. Storybook agent manifests additionally disable alternate channel mutations in the integration adapter.                                                                                                                                                                                                                                                       |
 | Attenuated connection principals and permission scopes     | Done in deterministic contracts        | Driver/workload/recovery scopes are distinct; fixed driver-only HTTP delegation, target/scope subsets, synchronous subtree fencing and awaitable/retryable drain. Native descriptor-path requalification not run for this change.                                                                                                                                                                                                                               |
 | Mutation effects, settlement, quarantine                   | Done                                   | Native mutations settle before advancing. Uncertain story changes now quarantine instead of assuming a later render is safe.                                                                                                                                                                                                                                                                                                                                    |
@@ -472,3 +472,47 @@ after the disconnect, so fresh-preview fencing remains Partial. The first
 probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
+
+## 2026-11-12: macOS exact application identity backend
+
+Source `76a2be59abfde3a7bcb0abd8d86a2052e7378274`, macOS 27.2.1 arm64,
+standalone AppKit fixture; no React renderer. Exact kernel start timestamps,
+causal direct-child/LaunchServices capture, exact-primary cleanup and stable
+per-user exact-app exclusion are implemented. Both macOS launch kinds remain
+uncontained. Unknown or stale identity never authorizes termination.
+The generic lease/claim policy lives in `desktop-test`, not in the helper.
+
+Under the exclusive native-validation lock, with `FURN_NATIVE_DRIVER_TEST=1`,
+stable signing identity `FURN Desktop Driver Development`, project-local
+temporary storage and an isolated helper cache:
+
+- At source `fc1df4bda42004ad86378d2acc6701427dda1836`,
+  `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`
+  passed 1,241, failed 0, skipped 47; 75 suites passed, 6 skipped.
+  Artifact: `artifacts/desktop/f10m/driver-native-stable.log`.
+  This includes signed build/rebuild and causal-identity native self-tests.
+  An earlier build-ID mismatch was caused by editing native inputs while the
+  run was queued; this successful rerun used frozen source.
+- At source `76a2be59abfde3a7bcb0abd8d86a2052e7378274`,
+  `yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationIncarnation serviceIdentity`
+  passed 69, failed 0, skipped 14; 4 suites passed, 2 skipped.
+  Artifact: `artifacts/desktop/f10m/native-identity-final.log`.
+  The intervening fixture deployment-target/schema-bound correction was
+  separately exercised by the harness native safety cases.
+- The harness's native OS-owner and rejected-launch cases passed 3 with
+  5 skipped. Actual AX calls returned `apiDisabled` (-25211), but exact
+  direct-child and LaunchServices primary cleanup and claim-resource records
+  were proved. Both recorded PIDs and all own-worktree fixture/helper
+  processes were absent afterward. The corrected fixture's Mach-O minimum
+  is macOS 11.0, matching the helper.
+
+Exact helper artifact/digest, commands, PIDs, failures, cleanup and evidence
+locators are in the
+[harness evidence ledger](../../desktop-test/references/current-status.md#2026-11-12-f10-m-neutral-application-ownership).
+Positive application lifecycle/external preservation and cross-service
+application exclusion remain blocked by missing Accessibility permission;
+the physical-input mutex is not qualified, and PostEvent preflight is false.
+macOS Fabric and Paper signing/TCC-responsibility qualification remain
+separate, unrun gates on this branch. No TCC/privacy settings were changed.
+Primary exit is not descendant containment; Windows/Win32 native application
+claim/survivor qualification remains not run for this change.

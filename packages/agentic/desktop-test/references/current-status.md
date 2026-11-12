@@ -7,7 +7,7 @@ owner_paths:
 
 # Current lifecycle and qualification status
 
-**Work in progress, updated 2026-11-08.** Done means the listed implementation,
+**Work in progress, updated 2026-11-12.** Done means the listed implementation,
 not full cross-platform qualification. This package is the intended neutral
 workload host; the existing Storybook lifecycle takeover is transitional.
 No new coordinator package, daemon, dynamic plugin loader, or package rename
@@ -31,8 +31,8 @@ and its sub-issues.
 | Supervisor crash containment                             | Work in progress   | Cooperative Node service lifelines and correlated service readiness implemented; portable parent/wrapper crash, late-spawn, failed-withdrawal and stalled-child contracts. Live macOS survivors remain unqualified; no automatic reclaim. Windows: the helper's Job Object ends an unpackaged app it launched when the helper dies (qualified with REX); packaged launches are `uncontained` and survive in a fenced claim. Non-detached children are hard-terminated with a crashed owner (observed A/B), so the three crash-disposal contracts are skipped there. |
 | Storybook resource contributions                         | Work in progress   | Current integration substitutes its CLI lifecycle; retain the channel/driver child until relocation is justified and qualified.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | MCP/WDIO handoff                                         | Work in progress   | Must await drain/deletion; attached-app handoff is independent of future supervisor-owned launch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Supervisor-owned app lifetime                            | Work in progress   | Opt-in macOS supervisor launch, neutral exact attach, native causal ownership and application claim resources are implemented. Session-owned launch remains the default; external attach never transfers ownership. Positive AppKit/Fabric/Paper lifecycle qualification is blocked by Accessibility permissions; descendants and interrupted publication remain gates. |
-| Cross-service/multi-target claims                        | Work in progress   | Configured aliases now have distinct registered IDs while retaining physical identity; exact-application exclusion and input-mutex qualification remain open.                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Supervisor-owned app lifetime                            | Work in progress   | Opt-in macOS supervisor launch, neutral exact attach, native causal ownership and application claim resources are implemented. Session-owned launch remains the default; external attach never transfers ownership. Native OS-owner inspection and failed direct-child/LaunchServices primary-process cleanup passed. Positive application qualification is blocked by Accessibility permissions; Fabric/Paper, descendants and interrupted publication remain gates.                                                                                               |
+| Cross-service/multi-target claims                        | Work in progress   | Configured aliases retain physical identity. Exact macOS application exclusion is implemented and self-tested; positive independent-service application and physical-input mutex qualification remain open.                                                                                                                                                                                                                                                                                                                                                         |
 | Bounded persisted run/status/artifact queries            | Done               | Harness-local read service/client; atomic snapshots, terminal evidence, scoped expiring grants, bounded pages and allowlisted opaque artifact IDs. No management transport.                                                                                                                                                                                                                                                                                                                                                                                         |
 | Workload management/control API                          | Work in progress   | Future management selects only declared workload IDs, not commands/paths/environment; lifecycle/handoff gates still apply.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Automatic service reuse and per-user daemon              | Deferred           | Requires exact identity/config matching and evidence of need. Never adopt an unknown port occupant.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -64,14 +64,14 @@ did not retain a portable raw-report locator; do not imply otherwise.
 
 ## Full-submission checklist
 
-| Area            | Remaining evidence/work                                                                                                                                                                                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                                                                                                            |
-| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent` after the idle-CLI fix; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim.                                                                    |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits.                                  |
-| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. Claim schema 3 records the driver's OS start identity; schema 2 and unverified claims inspect as unknown. LIFE-8's clock-estimate mismatch is fixed; automatic reclaim remains unsupported. |
-| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                              |
-| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                            |
+| Area            | Remaining evidence/work                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| macOS           | Positive owned/external application lifecycle, live failed-cleanup and service-restart cases; Fabric/Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation. Native OS-owner inspection and failed direct-child/LaunchServices primary cleanup are supporting evidence only.                                                                                                |
+| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent`; interactive input/capture rerun. Generic launched-application claim fields and durable survivor contracts are implemented; live uncontained packaged-survivor journaling/recovery remains not run for this change.                                                                                        |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits. |
+| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. Claim schema 3 records the driver's OS start identity; schema 2 and unverified claims inspect as unknown. LIFE-8's clock-estimate mismatch is fixed; LIFE-9's existing stable per-user claim root has a TMPDIR regression contract. Automatic reclaim remains unsupported. |
+| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                                                                                                                                        |
+| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                                                                                                                                      |
 
 Tracking: live macOS, Windows, and Win32 requalification
 [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441);
@@ -1026,3 +1026,77 @@ macOS Accessibility block above remains unchanged; no local smoke was
 repeated. `pwsh` is unavailable locally, so its parser check remains not run;
 the actual scripts executed in these CI lanes. Keep the PR draft until the
 documentation follow-up's CI passes and the coordinator changes its status.
+
+## 2026-11-12: F10-M neutral application ownership
+
+Implementation source:
+`76a2be59abfde3a7bcb0abd8d86a2052e7378274`.
+Host: macOS 27.2.1, arm64, isolated signed AppKit fixture; no React renderer.
+The helper used the stable `FURN Desktop Driver Development` identity,
+artifact `73d2e52b2ad9fbd51410301399f3b784a2d17ae8c2b34ebb12b36cd9b41626a1`,
+source digest `b0e40122cc2226ffa65486677af7ba2495e1138cbc2c7e70af22fd36671e796f`.
+Evidence records the exact source revision and the three documentation-only
+working-tree changes present during the run.
+
+The neutral `application-ownership` public entry provides exact macOS attach
+identity and opt-in supervisor-owned launch; session launch stays the default.
+Attached apps remain external. Both macOS launch kinds are explicitly
+uncontained: LaunchServices causal ownership is not direct-child containment.
+Pending and acquired applications are claim resources, including exact
+PID/start and launch/containment metadata when available. Unknown publication
+or cleanup outcomes remain fenced. `claimDesktopWorkload` is now asynchronous;
+schema 3 uses the driver's OS start-time identity, and schema 2/unverified
+identities inspect as unknown. Existing Storybook lease migration remains
+deferred until after F9.
+
+All commands below ran under the exclusive native-validation lock with
+project-local ignored `TMPDIR`; native commands additionally used
+`FURN_NATIVE_DRIVER_TEST=1`, the stable signing identity, and an isolated helper
+cache. Commands are shown from the repository root.
+
+| Selection                                         | Exact command                                                                                                                                                | Result                                                       | Workspace-relative artifact                        |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------- |
+| Full portable harness                             | `yarn workspace @fluentui-react-native/desktop-test test --runInBand`                                                                                        | Passed 399, failed 0, skipped 9; 25 suites passed, 1 skipped | `artifacts/desktop/f10m/harness-unit-final.log`    |
+| Native owner and rejected-launch safety           | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity\|failed native'` | Passed 3, failed 0, skipped 5                                | `artifacts/desktop/f10m/native-negative-final.log` |
+| Native identity and application exclusion backend | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationIncarnation serviceIdentity`                                               | Passed 69, failed 0, skipped 14; 4 suites passed, 2 skipped  | `artifacts/desktop/f10m/native-identity-final.log` |
+
+The first full harness run had one missing compiled `desktop-driver-mcp`
+boundary dependency. Building that unchanged workspace corrected the
+prerequisite; all eight standalone-consumer boundary cases then passed,
+including the new public entry, and the full harness rerun above passed.
+Portable Windows/Win32 cases prove durable launched-app survivor records and
+fail-closed claims only; they are not native packaged-survivor qualification.
+
+Native evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-0fNQ8C/evidence.json`.
+Schema 3 inspected its native OS owner as live. Both direct-child and
+LaunchServices launches reached actual AX queries, which returned
+`apiDisabled` (-25211), then journaled and settled their exact primary-process
+identities. Direct child PID 8558 started at
+`2026-11-12T02:37:23.794023Z`; LaunchServices PID 8616 started at
+`2026-11-12T02:37:24.304837Z`. Native probes proved those incarnations exited;
+an independent process check found both PIDs absent and no fixture/helper
+process under this worktree. No external process was terminated.
+Post-run verification is retained at
+`artifacts/desktop/f10m/native-cleanup-final.json`.
+
+An earlier fixture inherited Mach-O minimum macOS 28.0 on this 27.2.1 host.
+LaunchServices failed before publishing a PID
+(`NSCocoaErrorDomain` 256, underlying `NSOSStatusErrorDomain` -10825);
+the pending resource correctly stayed uncertain. The corrected fixture pins
+the helper's macOS 11.0 minimum in both compiler target and bundle metadata;
+`vtool` confirmed 11.0 and the corrected rejected-launch run passed above.
+The earlier evidence is retained at
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-UiVcfS/evidence.json`.
+
+**Remaining qualification:** positive supervisor/session lifecycle, exact
+external-app preservation and independent-service application exclusion are
+blocked: Accessibility is not granted to the signed helper. Physical-input
+mutex qualification is not run; PostEvent preflight is also false. Separate
+macOS Fabric and Paper signing/TCC-responsibility lanes are not run on this
+branch because of that permission block. No privacy settings were changed.
+Arbitrary surviving descendants, interrupted native publication and live
+Windows/Win32 uncontained packaged-survivor claims remain gates. The PR's
+Windows driver-only native suite and ordinary E2E/smoke jobs do not exercise
+the new harness survivor contracts; Windows CI is insufficient for those
+gates. This is partial F10-M delivery, not full issue completion.
