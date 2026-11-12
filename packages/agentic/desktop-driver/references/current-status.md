@@ -7,7 +7,7 @@ owner_paths:
 
 # Current capability and qualification status
 
-**Work in progress, updated 2026-11-08.** "Done" below means the stated
+**Work in progress, updated 2026-11-12.** "Done" below means the stated
 implementation exists, not that every native endpoint is qualified or that the
 complete orchestration product is ready for submission. Historical measurements
 remain tied to their original revision; they were not rerun by this update.
@@ -45,6 +45,10 @@ authority here and MCP as a client. No coordinator package or daemon is being
 added. Management/run schemas stay in the harness, not this package.
 
 ## Native evidence and full-submission gates
+
+macOS AX-dependent requalification is **Blocked**: the stable-signed helper
+needs owner permission action; see the
+[2026-11-12 supporting evidence](#f15-non-ax-macos-supporting-evidence--2026-11-12).
 
 | Lane                           | Recorded evidence through 2026-11-06                                                                                                      | Still required before full submission                                                                                                                                      |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

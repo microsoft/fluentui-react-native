@@ -7,7 +7,7 @@ owner_paths:
 
 # Current adapter and measurement status
 
-**Work in progress, updated 2026-11-08.** The adapter is a thin client, not a
+**Work in progress, updated 2026-11-12.** The adapter is a thin client, not a
 supervisor. Keep this package name until actual harness-owned management tools
 land; a later `desktop-mcp` facade must retain driver-only use and plan published
 compatibility. Done below describes implementation, not full native qualification.
