@@ -133,6 +133,9 @@ settles (R-VALID-004):
   `GIT_CEILING_DIRECTORIES` to that directory's absolute path for the validation process. This prevents synthetic
   Git-free repositories from discovering the enclosing worktree; fixtures initialized as their own Git repositories
   still work normally.
+- If concurrent package runs oversubscribe Jest worker pools, set `LAGE_POOL_CONCURRENCY=2` for the aggregate
+  (equivalently, `yarn lage buildci --concurrency 2`). This limits scheduling without changing test coverage,
+  assertions, or timeouts.
 - Review small, localized diffs directly. Use an independent review agent only after focused validation passes and
   when the change still has an ambiguous or cross-cutting contract.
 - Keep sessions scoped to one reviewable outcome; start unrelated work in a fresh session.
