@@ -926,3 +926,94 @@ remains compile-only as recorded above.
 The default-environment aggregate requirement is now satisfied. Draft
 publication does not close #4441 or replace its outstanding native, 200%,
 mixed-DPI, negative-origin, or separate #4491 console-Ctrl+C qualification.
+
+## Windows Fabric and Win32 Paper — hosted popup compatibility follow-up — 2026-11-12 UTC
+
+**Observed published revision:** `4208ab36d641bcfe3675836634f18dee2072ef49`,
+draft PR #4498, workflow run `43284991535` (attempt 1).
+**Tested portable correction:** `28c7690085342a3bc2ee114b2c4c2032d7d050c4`.
+No native source or FDR1 schema changed in this follow-up.
+
+### Hosted evidence at the published revision
+
+- **Passed:** Windows Storybook's opt-in package command,
+  `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`
+  with `FURN_NATIVE_DRIVER_TEST=1`:
+  79 suites / 1,251 tests; two suites / 45 tests **skipped**. The Windows
+  fixture, operations, native-driver self-test, and other matching-OS native
+  suites actually ran. This includes the registered-popup hung-provider,
+  deferred-discovery, and listed/tracked publication regressions, rather than
+  merely compiling them. These are hosted fixture results, not the remaining
+  local real-application or physical-secondary reruns.
+- **Passed:** Windows Storybook accessible smoke: 255 executed / 255 passed,
+  no failures, skips, unsupported cases, or retries. Internal navigation
+  diagnostics were retained; this count is the final selected-test summary,
+  not a claim that every diagnostic navigation attempt succeeded.
+- **Passed:** Win32 Storybook physical smoke: 288 passed and one
+  unsupported/quarantined case; no failures or retries. The helper source
+  digest was `89cc81fbb72cb8a79852e5d4d90ce96d8b2982283086236b860289f2664ac557`,
+  matching the review helper.
+- **Passed:** Windows legacy E2E, JS PR, both Win32 Storybook jobs, publishing,
+  links, changesets, and CodeQL. Other hosted jobs were still completing
+  during this follow-up; no whole-workflow pass is claimed.
+- **Failed, deterministic:** Win32 legacy E2E executed 201 tests: 191 passed,
+  ten menu tests failed only at the final “An assert popped up” safety check.
+  Their menu-open/state checks had passed. The existing guard treated every
+  second window as an assertion dialog. All 20 retained failure captures
+  (including suite retries) showed the secondary accessibility root as `menu`.
+  Correctly registering native menu windows exposed that consumer assumption;
+  no flake rerun was requested.
+
+Logs and the bounded downloaded E2E artifact are retained under
+`artifacts\desktop\w3-buildci`: `ci-windows-storybook.log`,
+`ci-win32-physical.log`, `ci-win32-job.log`, and `ci-win32-e2e`.
+
+### Test-first correction and boundaries
+
+`DesktopSessionClient.getWindowTree` now reads a currently listed session
+window without selecting or activating it. The server refreshes authoritative
+window membership and rejects unknown/closed IDs before tree inspection.
+Native focus, selected-window identity, and input state are unchanged.
+
+The Windows/Win32 legacy guard exempts only a single `menu` root without
+nested dialogs or windows. Unrecognized secondary roots still fail; unreadable
+windows reject rather than report no assertion. A menu cannot hide another
+unexpected window. macOS, non-native runners, Android, and the native-task
+library bypass keep their earlier behavior. Diagnostic window events are
+not used as authority. The public route is documented in
+[the WebDriver contract](protocol.md); it is a full tree query, not a budgeted
+agent operation.
+
+From `apps\E2E`, `yarn test` first produced **two expected failures** for a
+legitimate menu and an unreadable secondary. From `packages\agentic\desktop-driver`,
+the two focused new routing cases first failed because the read-only route
+did not exist. Logs: `e2e-assert-red.log`, `window-tree-red.log`.
+
+| Exact command                                                                        | Result                                                                                                                     |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `yarn test --runInBand desktopDriver.test DesktopDriverClient.test` (desktop-driver) | **Passed:** 52 tests, including non-activation and unknown/closed-window refusal.                                          |
+| `yarn test --runInBand` (desktop-driver, native opt-in unset)                        | **Passed:** 73 suites / 1,203 tests; eight suites / 95 native tests **skipped**.                                           |
+| `yarn workspace @fluentui-react-native/e2e-testing test`                             | **Passed:** all 11 adapter tests, including menus, possible assertions, failed reads, and unchanged other-runner behavior. |
+| `yarn workspace @fluentui-react-native/desktop-driver build`                         | **Passed**.                                                                                                                |
+| `yarn workspace @fluentui-react-native/e2e-testing build`                            | **Passed**.                                                                                                                |
+| `yarn workspace @fluentui-react-native/desktop-driver lint`                          | **Passed**.                                                                                                                |
+| `yarn workspace @fluentui-react-native/e2e-testing lint`                             | **Passed** after marking the mocked loopback URL as test-only.                                                             |
+| `yarn workspace @fluentui-react-native/desktop-driver format`                        | **Passed**.                                                                                                                |
+| `yarn oxfmt --check`                                                                 | **Passed**.                                                                                                                |
+| `git diff --check`                                                                   | **Passed**.                                                                                                                |
+| `yarn markdown-link-check -c .github\markdown-link-check-config.json <changed-file>` | **Passed:** E2E README and public protocol, 25 links.                                                                      |
+| `yarn change:check`                                                                  | **Passed** after committing the implementation and patch changeset `quiet-menu-windows.md`.                                |
+
+The new correction is committed locally and awaits coordinator review before
+push. Its clean-cache aggregate and affected hosted E2E rerun are **not run
+yet**; the earlier 178-task aggregate does not qualify this new source.
+W1 holds the live desktop campaign. W3 has not launched an app, native helper,
+fixture, WDIO suite, or physical action in this portable correction segment.
+The final local Fabric semantic case, both final-helper secondary physical
+clicks, and requested local native selector remain **not run**. Hosted
+fixture passes do not substitute for those real-app/physical cases.
+
+The shared process audit returned 2: it listed W5's test tree and the W3
+formatter running concurrently with the audit. Both recorded W3 formatter
+PIDs were confirmed exited afterward. No W3 native runtime or campaign is
+left running; a globally clean audit is not claimed while peer work is active.
