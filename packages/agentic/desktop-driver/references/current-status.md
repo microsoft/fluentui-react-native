@@ -938,3 +938,99 @@ runtime source changed. Additional ignored provenance under
 `artifacts/desktop/f10w/portable-20261112/`:
 `tested-source-revision.txt`, `compile-source-evidence.json`,
 `driver-focused-committed.log`, `test-links.log`, and `root-format.log`.
+
+## Windows Fabric and Win32 Paper — F10-W native qualification — 2026-11-12 UTC
+
+**Observed source:** application qualification ran at
+`8343dc0c48a2de01475454c892e7a295523caa75`; helper/self-test correction
+`4a4b87f37b574820b93e342b68721d931be07c55` follows implementation
+`6e881e1a05fef735c1b9bacd7d123285f47269ff`. The branch remains
+`user/jasonvmo/desktop-windows-app-ownership`, pinned on #4492 at
+`6489386956c0485cb91b478a8f4adc4828f4178b`. The coordinator handoff
+`W2-base-decision.md` records **STACK**: W2 implements the inherited neutral
+application host/resource model, schema-3 native owner claims, exact process pins,
+inspection and settlement messages, rather than a second Windows model.
+Application naming required no new F11-owned file edits. The eventual draft PR
+base remains `user/jasonvmo/desktop-macos-app-ownership`; later dependency
+movement does not authorize a rebase, merge or dependency-branch push.
+
+**Observed host and identity:** Windows build 26300 x64, Node 26.13.0,
+active/unlocked RDP (`sessionKind: remote`, `windows-session:1`). Every native
+command used the exclusive W2 lock and `-RequirePhysical`; before/after gates
+stayed eligible. The actual endpoint helper's SHA256/artifact identity is
+`863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`,
+source digest
+`ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`,
+Debug/x64. Resolution was prebuilt-only.
+
+The registered Fabric build was reused from the coordinator-specified
+`furn-81` worktree, built at `bdeb0b291`: no Windows app/native-core Windows
+source differs from that build. Its generated `RnwNewArch` and `UseFabric`
+properties are true. All five ordinary native identities matched the registered
+manifest's exact image and AUMID
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+Metro and both JavaScript bundles came from W2. Win32 used the canonical
+prebuilt REX `ReactTest.exe` and W2's Paper bundle; Win32 native app build is
+**Unsupported**, not a skipped build.
+
+**Observed provider result:** `nativeDriver`'s selected Windows build/reuse/
+resolution/handshake contract and all five new `applicationOwnership` fixture
+cases passed: **2 suites / 6 tests passed**, 10 unrelated filtered cases skipped.
+This includes the native C++ self-test and the actual physical mutex fixture.
+The first self-test run failed because an existing release-count assertion
+kept a pointer into a destroyed temporary JSON result. Commit `4a4b87f37`
+retains the result for the assertion; the native rerun passed. This is a
+self-test lifetime fix, not a change to release behavior.
+
+From `packages/agentic/desktop-driver`, the exact selected test command was:
+
+```powershell
+yarn test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-driver" --runTestsByPath src\native\nativeDriver.test.ts src\native\windows\applicationOwnership.contract.test.ts --testNamePattern 'Windows exact application ownership|builds, reuses, resolves, and handshakes with the Windows helper' --json --outputFile "$W2\artifacts\desktop\f10w\native-20261112\driver-native-fixed-results.json"
+```
+
+Inherited settings were `FURN_NATIVE_DRIVER_TEST=1`,
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`, native cache
+`$W2\artifacts\desktop\f10w\n`, configuration `debug`, build policy `never`,
+and project-local `TEMP`/`TMP`. From `apps/storybook`,
+`yarn desktop-driver doctor --platform windows --configuration debug --cache-root "$W2\artifacts\desktop\f10w\n"`
+**passed** against the selected artifact. An initial doctor without the explicit
+configuration selected its CLI default `release` and correctly reported no
+verified prebuilt; that setup attempt was not a native application result.
+
+The separate real-endpoint consumer suite passed **9 tests / 0 failed /
+0 skipped**:
+
+| Case                                                                  | Windows Fabric packaged                                                  | Win32 Paper REX                                          |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------- |
+| Exact AUMID/image/REX incarnation, native start and session           | Passed                                                                   | Passed                                                   |
+| Start/session/image mismatch; independent exact-controller exclusion  | Passed                                                                   | Passed                                                   |
+| Multiple actual matching processes/windows refuse unpinned inspection | Passed, three pairs                                                      | Passed, three pairs                                      |
+| Containment or explicit exact-identity fencing                        | Passed, `uncontained` and journaled                                      | Passed, `job-object`                                     |
+| Physical Shift contention, effect-none cancellation and transfer      | Passed                                                                   | Passed                                                   |
+| Live-owner fence, acquired journal and next-run recovery              | Passed, packaged app survived helper crash then exited by exact recovery | Passed, Job Object drained then the claim was reconciled |
+| Repeated launches and settled teardown                                | Passed 5/5, five distinct incarnations                                   | Passed 5/5, five distinct incarnations                   |
+| Close one concurrent winner without ending the other                  | Passed 3/3 pairs                                                         | Passed 3/3 pairs                                         |
+
+Both packaged contenders started distinct processes in every pair. Same exact
+incarnation exclusion was independently proved by pinned attach, but a
+**shared-PID packaged activation race was not induced**. Actual kernel PID
+recycling was **Not run**; the real fixture's one-100-ns-tick mismatch and both
+endpoints' stale-start refusal passed. Arbitrary uncontained descendants and
+mixed Storybook-graph recovery remain outside this bounded qualification.
+
+Ignored evidence root: `artifacts/desktop/f10w/native-20261112/`.
+`driver-native.log` retains the initial failure;
+`driver-native-fixed.log` and `driver-native-fixed-results.json` retain the
+green provider run. `qualification-summary.json`, `selected-helper.json`,
+`application-build-provenance.json` and `consumer-evidence-final.json` record
+the tested source, binary hash, registration, bundles and per-case identities.
+The real consumer run is `windows-application-ownership-GiW4x1`; outer command
+report `4ed98f8f-8ebb-49ca-ac90-2ee6caece7dc` is a lifecycle report, not the
+test-count source. The harness ledger records the full consumer commands.
+
+**Observed closeout:** all W2 campaigns ended; before/after audits were clean:
+`FURN-AUDIT: no FURN desktop processes found`. No helper, fixture, Metro, REX
+or packaged app from W2 survived. Review, the final one-time clean-cache
+`buildci`, push, draft PR and hosted CI remain **Not run** at this review
+handoff. The three-package patch changeset remains
+`windows-exact-application-ownership.md`. Part of #4447 and #4435.

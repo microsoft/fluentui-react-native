@@ -2074,3 +2074,143 @@ The same ignored evidence root retains `tested-source-revision.txt`,
 `test-links.log`, `root-format.log`, and `pre-campaign-audit.log`.
 Only appended Windows result capture followed the checks; no macOS ledger
 section or native/runtime source was changed.
+
+## Windows Fabric and Win32 Paper — F10-W native qualification — 2026-11-12 UTC
+
+**Observed source and dependency:** real application qualification ran at
+`8343dc0c48a2de01475454c892e7a295523caa75`, on
+`user/jasonvmo/desktop-windows-app-ownership`. The coordinator handoff
+`W2-base-decision.md` records **STACK** on #4492 at exactly
+`6489386956c0485cb91b478a8f4adc4828f4178b`, implementing its neutral application
+host/resources, schema-3 native owner claims, process pins, inspection and
+settlement contracts. Application resource naming uses the inherited seam,
+without new edits to F11's CLI, service, agent connection, WDIO, session,
+grant, client or MCP files. The eventual draft PR base is
+`user/jasonvmo/desktop-macos-app-ownership`. Its independently owned head may
+advance or never merge; this pinned dependency is not permission to rebase,
+merge, rewrite history or push to that branch.
+
+**Observed environment:** Windows build 26300 x64, Node 26.13.0, active/unlocked
+RDP, `sessionKind: remote`, native `windows-session:1`. Every native command ran
+under the exclusive W2 lock with `-RequirePhysical`; the session remained
+eligible before and after each command, with no exit-75 or session-change
+result. The helper used Debug/x64, prebuilt-only resolution, artifact/SHA256
+`863cc2dbfc8f5792d22c8606376d226affbf8655fe4ded62ba78c23a29c516c7`,
+source digest
+`ea76e931dc4cdebc87e0621a7d730f81faabce5ef902063a0512cd7c2b100f2d`.
+Private machine paths are retained only in ignored artifacts.
+
+The registered Windows Fabric product was reused from the
+coordinator-specified `furn-81` build at `bdeb0b291`: there are no Windows
+app/native-core Windows source changes relative to that build, and the
+generated `RnwNewArch`/`UseFabric` values are true. All five native ordinary-run
+identities matched its registered manifest image and AUMID
+`40411fc5-8e92-4d46-b68d-b62df44b1366_syyqehzwccsyy!App`.
+Windows Metro was owned by W2 on 8081 and passed `/status`; both bundles were
+produced from W2. Win32 used its canonical prebuilt REX `ReactTest.exe`, Paper,
+and the W2 bundle/component/working-directory descriptor. Native Win32 app
+build is **Unsupported**.
+
+**Observed corrections before the green run:**
+
+- The selected native helper contract initially failed an existing C++ assertion
+  that dereferenced a destroyed temporary JSON release result. Commit
+  `4a4b87f37b574820b93e342b68721d931be07c55` retains the result, and the complete
+  selected native contract/self-test rerun passed. Release behavior is unchanged.
+- The first real consumer run passed 3 and failed 5. The fixture's arbitrary
+  project settlement root was correctly refused with native reason `ancestor`;
+  this worktree's ancestors allow broader modification. The final fixture uses
+  the normal native per-user private-store default, without changing ACLs,
+  permissions or the provider's fail-closed checks.
+- Paired packaged activation produced two different PID/start incarnations,
+  not two owners of one incarnation. Commit `8343dc0c4` corrects that fixture
+  assumption: three pairs on **each** endpoint now prove distinct controlling
+  incarnations, unpinned ambiguity refusal, pinned cross-service exclusion, and
+  that closing one winner preserves the other. Refused contenders, if present,
+  are disposed before checking the winners. All observed pairs had two distinct
+  winners; the shared-PID activation race was not induced.
+
+The corrected fixture passed format, lint and TypeScript build. Its focused
+portable selection passed **31 tests**, with **9 native cases skipped** because
+native opt-in was unset; the later real native run, not those skips, qualifies
+the cases below. Earlier full portable results remain the preparation results
+above. The corrected provider selection passed **6 tests**, including all five
+new real-process fixture cases, with 10 unrelated filtered cases skipped.
+
+**Observed final application result: 9 passed, 0 failed, 0 skipped**, one suite,
+at `2026-11-12T16:04:04.248Z`. The 27 evidence rows include iteration receipts
+and case verdicts; they are not 27 tests.
+
+| Case                                            | Windows Fabric packaged | Win32 Paper REX           | Native evidence                                                                                                                                                          |
+| ----------------------------------------------- | ----------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Exact identity                                  | Passed                  | Passed                    | Canonical image, PID, seven-digit creation time, session; packaged AUMID or exact REX incarnation                                                                        |
+| Read-only inspection and borrowed sessions      | Passed                  | Passed                    | Unchanged window ids; two sessions per supervisor launch; first deletion preserves the app                                                                               |
+| Start/session/executable mismatch               | Passed                  | Passed                    | Both inspect and trusted recovery refuse the wrong identity without ending the real process                                                                              |
+| Ambiguous matching processes/windows            | Passed                  | Passed                    | Three pairs of two actual incarnations; unpinned inspection refuses, exact pins remain readable                                                                          |
+| Independent-service exact application exclusion | Passed                  | Passed                    | Independent helper's pinned attach fails `application-lock-busy`; observations do not take control                                                                       |
+| Containment or explicit fencing                 | Passed, `uncontained`   | Passed, `job-object`      | Packaged survivor stays journaled and fenced; REX exits with the crashed helper's job                                                                                    |
+| Survivor journal and next-run recovery          | Passed                  | Passed                    | Acquired application resource; live owner refused; literal-PID helper/owner stops after full native identity verification; next supervisor reconciles before replacement |
+| Physical-input mutex                            | Passed                  | Passed                    | Native Shift down, second helper cancelled with `AbortError`/effect `none`, release then transfer                                                                        |
+| Repeated-run reliability                        | Passed 5/5              | Passed 5/5                | Five distinct PID/start tuples per endpoint, two borrowed sessions each; no exact old process or claim leak                                                              |
+| Concurrent cleanup isolation                    | Passed 3/3 pairs        | Passed 3/3 pairs          | Closing one exact winner leaves the other alive; final cleanup proves every incarnation exited                                                                           |
+| Actual kernel PID recycling                     | Not run                 | Not run                   | Not induced; provider's one-100-ns-tick stale pin and real endpoint start mismatch both passed                                                                           |
+| Shared-PID packaged activation race             | Not run                 | Unsupported, not packaged | Every actual Windows pair created two distinct processes; no claim that this exercised a losing shared-PID launch                                                        |
+
+The crash receipts include packaged PID **10984**, creation time
+`2026-11-12T16:02:38.6619313Z`, helper **37916**, owner **35708**; and REX
+PID **35844**, creation time `2026-11-12T16:03:18.2246578Z`, helper **34864**,
+owner **37256**. Native evidence verified each fault-injection identity again
+immediately before a single literal-PID stop. The packaged process survived
+helper death, the live owner fenced replacement, and after owner exit the next
+supervisor ended that exact app and removed the old claim. REX's Job Object
+drained on helper death; its next supervisor reconciled the acquired dead app
+and claim. No broad name-based termination was used.
+
+Commands below are the inner workspace commands issued through the required W2
+lock with `-RequirePhysical`. `$W2` denotes the assigned worktree, `$E` its
+`artifacts\desktop\f10w\native-20261112` evidence directory. `TEMP`/`TMP` point
+to `$W2\artifacts\desktop\f10w\scratch`; the native cache is
+`$W2\artifacts\desktop\f10w\n`, configuration `debug`, build policy `never`.
+
+| Workspace / command                                                                                                                                                                                                                                                                               | Observed result                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Storybook: `yarn desktop-driver build-driver --platform windows --configuration debug --cache-root "$W2\artifacts\desktop\f10w\n"`                                                                                                                                                                | Passed initial explicit build; provider contract explicitly rebuilt the corrected source |
+| Storybook: `yarn desktop-driver doctor --platform windows --configuration debug --cache-root "$W2\artifacts\desktop\f10w\n"`                                                                                                                                                                      | Passed selected final artifact                                                           |
+| Storybook: `yarn storybook bundle --win32`                                                                                                                                                                                                                                                        | Passed; run `14c14c80-0da7-48ad-ac14-47e0c257fbe1`                                       |
+| Storybook: `yarn storybook bundle --windows`                                                                                                                                                                                                                                                      | Passed; run `f6ba6fb4-25c9-49a2-9928-8b2430abc83b`                                       |
+| Repository root: `node .yarn\releases\yarn-4.18.0.cjs workspace @fluentui-react-native/agentic-components-storybook start --port 8081`                                                                                                                                                            | Passed owned Metro `/status` and final shutdown                                          |
+| Repository root: `node .yarn\releases\yarn-4.18.0.cjs workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$W2\artifacts\desktop\f10w\jest-harness" --runTestsByPath src\windowsApplicationOwnership.contract.test.ts --json --outputFile "$E\consumer-results.json"` | Passed 9, failed 0, skipped 0                                                            |
+
+The consumer inherited `FURN_NATIVE_DRIVER_TEST=1`,
+`FURN_NATIVE_APPLICATION_OWNERSHIP_TEST=1`,
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`, and the two explicit JSON descriptors in
+`windows-application.json` / `win32-application.json`. REX's descriptor came
+from the owning adapter, not guessed host arguments. No input features were
+masked. The command runner owned Metro and awaited its normal resource cleanup;
+the outer report's “lifecycle (no tests)” is not the native test verdict.
+
+**Ignored evidence:** `artifacts/desktop/f10w/native-20261112/` contains
+`consumer-results.json`, `consumer-evidence-final.json`,
+`qualification-summary.json`, `selected-helper.json`,
+`application-build-provenance.json`, `metro-identity.json`, `doctor-debug.log`,
+both bundle logs, corrected provider logs, and preserved initial failed
+attempts. Canonical native evidence is
+`packages/agentic/desktop-test/artifacts/desktop/windows-application-ownership-GiW4x1/evidence.json`;
+the outer command report is
+`artifacts/desktop/f10w/native-20261112/commands/4ed98f8f-8ebb-49ca-ac90-2ee6caece7dc/run.json`.
+Registration, executable/bundle hashes, source revision, real PID/start/session
+receipts, and every case outcome are retained there. Machine-specific paths
+and crash-owner request/ready records remain ignored, not public.
+
+**Observed closeout:** all W2 campaigns ended. Final audit:
+`FURN-AUDIT: no FURN desktop processes found`; no owned helper, fixture, Metro,
+REX or packaged app survived. No push or PR was made. Independent review, the
+final one-time locked clean-cache `buildci`, and hosted CI remain **Not run**.
+The existing three-package patch changeset is
+`windows-exact-application-ownership.md`.
+
+**Limits:** the tests do not establish arbitrary uncontained-descendant cleanup,
+mixed Storybook-graph recovery, forced kernel PID recycling, the unobserved
+shared-PID packaged activation race, or a new protected-agent recovery API.
+No macOS renderer claim is made by this Windows campaign. Part of #4447 and
+#4435.

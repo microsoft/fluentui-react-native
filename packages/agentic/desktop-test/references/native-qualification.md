@@ -131,6 +131,10 @@ yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsAppli
 ```
 
 The suite requires a verified prebuilt helper and both explicit descriptors.
+Supervisors use the native per-user private-store default. An arbitrary project
+directory is not necessarily a safe replacement: native ancestor-owner/ACL
+checks still apply, and a refused root must not be repaired or bypassed merely
+to run this suite.
 Separately on Windows Fabric packaged and Win32 Paper REX it checks:
 
 - Five consecutive supervisor launches/teardowns, exact application and claim
@@ -146,8 +150,14 @@ Separately on Windows Fabric packaged and Win32 Paper REX it checks:
   explicit cancellation and release. Run this only under the physical-session
   gate; semantic activation does not establish it.
 
-Three additional paired Windows packaged activations check that a losing
-launcher cannot clean up the winning service's exact application.
+Three paired launches on each endpoint also prove that winning controllers have
+distinct exact incarnations, an unpinned descriptor refuses multiple matches,
+another helper cannot attach to either pinned winner, and closing one winner
+preserves the other. A multi-instance packaged host may start two distinct
+processes; that is not an exclusion failure. When activation instead returns
+the same incarnation, a refused contender must not clean up the winner. Record
+whether that shared-incarnation activation race was actually induced rather
+than treating two distinct winning processes as proof of the losing path.
 
 Evidence is written to the desktop-test package's
 `artifacts/desktop/windows-application-ownership-*/evidence.json`, including
