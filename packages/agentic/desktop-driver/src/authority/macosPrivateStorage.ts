@@ -154,12 +154,16 @@ async function validateRoot(root: string, uid: number): Promise<Stats> {
 
 async function validateAncestors(directory: string, uid: number): Promise<void> {
   for (let current = directory; ; current = path.dirname(current)) {
-    const info = await lstat(current);
-    const rootOwnedSticky = info.uid === 0 && (info.mode & 0o1000) !== 0;
-    if (!info.isDirectory() || (info.uid !== uid && info.uid !== 0) || ((info.mode & 0o022) !== 0 && !rootOwnedSticky)) {
-      throw unsafeStorage();
+    try {
+      const info = await lstat(current);
+      const rootOwnedSticky = info.uid === 0 && (info.mode & 0o1000) !== 0;
+      if (!info.isDirectory() || (info.uid !== uid && info.uid !== 0) || ((info.mode & 0o022) !== 0 && !rootOwnedSticky)) {
+        throw unsafeStorage();
+      }
+      await rejectACL(current, true);
+    } catch {
+      throw unsafeStorage(current);
     }
-    await rejectACL(current, true);
     if (current === path.dirname(current)) break;
   }
 }
@@ -194,6 +198,11 @@ function hasCode(error: unknown, code: string): boolean {
   return typeof error === 'object' && error !== null && 'code' in error && error.code === code;
 }
 
-function unsafeStorage(): Error {
-  return new Error('Desktop Driver private storage is unsafe or inaccessible.');
+function unsafeStorage(ancestor?: string): Error {
+  return new Error(
+    'Desktop Driver private storage is unsafe or inaccessible.' +
+      (ancestor === undefined
+        ? ''
+        : ` Check ancestor "${ancestor}": resolve directory aliases and require owner/root ownership without writable shared permissions or ACL grants.`),
+  );
 }

@@ -759,7 +759,7 @@ Implementation source: `efd6dadeda87344911fb4000fe293c686c678602`, with
 resolved-case compatibility in `fa0681635` and the awaited shared workload
 claim in `a5de740f01ca025bf548a923ae4561b36fc9872b`.
 Generated driver manifests are strict version 3 and contain no secrets.
-Version-1 private credentials use independent bridge and macOS attachment
+Version-1 private credentials use independent bridge and application attachment
 nonces. The owner-private runtime module contains only bridge data and a
 data-only `export default` statement. The parent's independent handoff pins
 manifest/credential/runtime hashes and the resolved helper; the actual channel
@@ -768,13 +768,30 @@ can spawn. Metro receives the canonical schema locator from trusted process
 configuration, not from editable generated files. Channel lifecycle placement
 and application lease ownership have not moved.
 
-**Confirmed portable/local boundary checks:** integration package format,
-lint, build, and all 364 tests passed; four Windows-only integration tests
-were skipped on macOS. Runtime format, lint, build, and all 33 tests passed.
-The ledger-owning desktop-test package passed format, lint, build, and
-380 tests with one skip after building the MCP public entry required by its
-standalone-consumer fixture; the first test run failed only for that missing
-compiled entry.
+Review fixes route Windows/Win32 smoke lease publication, replacement, and
+cleanup through the trusted Node helper and OS private-storage adapter;
+PowerShell receives only a digest receipt. Smoke control now uses the strict
+shared version-3 parser. Publication resolves the existing generated directory
+once before opening private storage, supporting symlinked projects and macOS
+`/var` aliases while retaining later fail-closed ancestor validation and
+actionable diagnostics.
+
+**Portable/local boundary checks:** the initial 364-test integration result
+used a project-local temporary directory and did not qualify stock macOS
+temporary paths. Review exposed that gap; those counts are superseded by the
+default-`TMPDIR` review validation below. Runtime format, lint, build, and all
+33 tests pass with the default temporary directory. The driver package passed
+format, lint, build, and 1,221 portable tests with 66 skips; focused private
+storage tests passed 65 with ten platform skips.
+The reviewed integration package passes format, lint, build, and 379 tests
+with four Windows-only skips. Its focused generated-manifest, lease, and real
+WDIO-runner contract selection passed 38 tests, including the actual v3 smoke
+control path. The ledger-owning harness passes format, lint, build, and
+380 tests with one skip; its claim-sensitive tests ran under the shared lock.
+These review runs used the default macOS `TMPDIR`, without an override.
+The channel-child rejection fixture now canonicalizes its temporary parent
+too, ensuring it reaches helper/hash refusal instead of an alias-path error.
+Evidence: `apps/storybook/artifacts/f6/review-{driver-focused,driver-test,integration-focused,integration-final,runtime,harness}.log`.
 Controlled Metro fixtures cover missing trust inputs, unknown fields, and
 manifest/runtime tampering. Actual channel-child fixtures reject substituted
 helper path/hash, helper bytes, and unknown fields before listening or spawning.
@@ -827,7 +844,7 @@ app PID was verified, terminated, and confirmed gone. Positive Fabric/Paper
 traversal and authored-case qualification remain pending an authorized
 Accessibility/PostEvent-capable host.
 
-**Final repository checks:** after `yarn clean-lage-cache`, the locked
+**Initial repository checks (before review fixes):** after `yarn clean-lage-cache`, the locked
 `TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks.
 The existing test wrapper uses `TF_BUILD` only to run Jest in-band; it does not
 skip agentic tests. Evidence:
@@ -839,11 +856,12 @@ expected `SIGKILL`; a child startup/deadline race under load is inferred, not
 proven. The in-band aggregate was its single justified retry; no unrelated
 test or production behavior was changed.
 
-Windows/Win32 native execution is not available on this Mac. The PR's
-`windows-storybook` setup runs the real Windows private-storage contract
-(owner/DACL/root identity/reparse/hard-link refusal), and both Windows Fabric
-and Win32 Paper smoke jobs exercise publication, child helper verification,
-private runtime-module resolution, and live bridge authentication. The
-platform-neutral negative provenance/schema fixtures run in the Ubuntu unit
-lane. These CI lanes are sufficient for the changed Windows-specific paths;
-their same-branch results remain pending, not local passes.
+**Windows/Win32 qualification: pending, not sufficient yet.** Native execution
+is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
+validation was not run. The configured private-storage contracts and Windows
+Fabric/Win32 Paper smoke jobs are candidate coverage, not observed evidence
+that these revised paths work. A passing same-branch run must demonstrate
+version-3 smoke control, trusted helper verification, protected-DACL lease
+publication/replacement/cleanup, private runtime resolution, and live bridge
+authentication. Portable negative fixtures do not qualify Windows ACL
+behavior. Keep the PR draft until that coverage is observed.

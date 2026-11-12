@@ -37,8 +37,16 @@ The public generated JSON contains credential references, never either nonce.
 runtime data module through desktop-driver's owner-private storage adapter:
 POSIX directory/file modes `0700`/`0600` with ownership/ACL checks on macOS,
 and the native owner/DACL/reparse/root-identity boundary on Windows.
-The macOS attachment lease stays in that private namespace. Its random nonce
+Application attachment leases stay in that private namespace. Their random nonce
 is independent of the runtime bridge nonce; the lease nonce never reaches Metro.
+Publication resolves the existing generated directory once, so symlinked project
+paths and macOS `/var` aliases work without weakening subsequent ancestor checks.
+Windows and Win32 smoke scripts pass OS-observed identity to
+`config/application-lease.cjs`, which verifies the parent handoff before opening
+private storage and publishes/removes leases through its protected DACL boundary.
+Scripts retain only a digest receipt; replacement and cleanup cannot overwrite
+or remove a different lease. Smoke control reads the shared strict version-3
+public schema, without hydrating credentials.
 
 The parent resolves the native helper independently and passes its artifact
 plus manifest, credential, and runtime-module hashes through inherited

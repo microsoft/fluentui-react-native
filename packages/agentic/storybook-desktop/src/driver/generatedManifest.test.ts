@@ -22,7 +22,7 @@ describe('generated manifest trust handoff', () => {
   let handoff: string;
 
   beforeEach(async () => {
-    root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-provenance-'));
+    root = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'storybook-provenance-'));
     manifestPath = path.join(root, 'driver-manifest.json');
     marker = path.join(root, 'unexpected-spawn');
     process.env.FURN_TEST_SPAWN_MARKER = marker;
@@ -112,6 +112,21 @@ describe('generated manifest trust handoff', () => {
     },
   );
 
+  test.each(['obsolete-version', 'unknown-field'])('the actual smoke control refuses %s through the shared parser', (kind) => {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (kind === 'obsolete-version') manifest.schemaVersion = 2;
+    else manifest.unrecognized = true;
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+    const result = spawnSync(process.execPath, [path.resolve(__dirname, '../../config/storybook-control.cjs'), '--phase', 'tests'], {
+      cwd: root,
+      env: { ...process.env, STORYBOOK_DRIVER_MANIFEST: manifestPath, STORYBOOK_SMOKE_MODE: 'stories-and-tests' },
+      encoding: 'utf8',
+      timeout: 20_000,
+    });
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain('driver manifest');
+  });
+
   test('rejects unknown schema versions and credential reuse', async () => {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
     expect(() => parseStoredDriverManifest({ ...manifest, schemaVersion: 2 })).toThrow('driver manifest');
@@ -180,6 +195,34 @@ describe('generated manifest trust handoff', () => {
   });
 
   (process.platform === 'darwin' ? test : test.skip)(
+    'canonicalizes a symlinked project once and refuses a subsequently replaced canonical ancestor',
+    async () => {
+      const fixture = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
+      const project = path.join(root, 'project');
+      const alias = path.join(root, 'project-alias');
+      const generated = path.join(project, 'storybook-desktop.generated');
+      const aliasedManifest = path.join(alias, 'storybook-desktop.generated', 'driver-manifest.json');
+      fs.mkdirSync(generated, { recursive: true, mode: 0o700 });
+      fs.symlinkSync(project, alias, 'dir');
+      const canonicalRoot = path.join(generated, '.private');
+      let storage: Awaited<ReturnType<typeof import('@fluentui-react-native/desktop-driver/authority').createMacOSPrivateStorage>>;
+      const { createMacOSPrivateStorage } = await import('@fluentui-react-native/desktop-driver/authority');
+      await writeDesktopStorybookDriverManifest(fixture, aliasedManifest, async (storageRoot) => {
+        expect(storageRoot).toBe(canonicalRoot);
+        storage = await createMacOSPrivateStorage(storageRoot);
+        return storage;
+      });
+      const stored = JSON.parse(fs.readFileSync(aliasedManifest, 'utf8'));
+      expect(stored.application.leasePath).toBe(path.join(canonicalRoot, 'application-lease.windows.json'));
+      expect((await readDriverManifest(aliasedManifest)).bridgeNonce).toBe(fixture.bridgeNonce);
+      const moved = path.join(root, 'moved-project');
+      fs.renameSync(project, moved);
+      fs.symlinkSync(moved, project, 'dir');
+      await expect(storage!.read(stored.credentials.name)).rejects.toThrow(project);
+    },
+  );
+
+  (process.platform === 'darwin' ? test : test.skip)(
     'publishes and reads real macOS owner-private records, refusing a permissive credential mode',
     async () => {
       const fixture = await readDriverManifest(manifestPath, undefined, createFixturePrivateStorage);
@@ -216,3 +259,4 @@ describe('generated manifest trust handoff', () => {
     }
   });
 });
+import { spawnSync } from 'node:child_process';

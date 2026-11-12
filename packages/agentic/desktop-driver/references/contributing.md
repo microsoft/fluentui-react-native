@@ -78,6 +78,9 @@ specifiers, so keep it that way.
 - Propagate `AbortSignal` to every host operation.
 - Do not release queues or input locks until a timed-out native command settles.
 - Preserve attached apps and clean only exact owned resources.
+- Callers resolve existing private-storage parent directories before opening them.
+  macOS storage keeps rejecting symlink ancestors on subsequent operations and
+  identifies the failing ancestor in ownership/permissions diagnostics.
 - Keep native events advisory and queries authoritative.
 - Use opaque public window/element IDs and native liveness checks.
 - A Storybook preview reset invalidates preview elements, not app chrome or

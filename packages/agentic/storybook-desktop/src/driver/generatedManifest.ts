@@ -62,14 +62,22 @@ export async function publishDriverManifest(
   createStorage = createStorybookPrivateStorage,
 ): Promise<string> {
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  const root = path.join(path.dirname(outputPath), '.private');
+  // Resolve the existing directory once; storage continues checking the canonical ancestors on every operation.
+  const directory = fs.realpathSync(path.dirname(outputPath));
+  outputPath = path.join(directory, path.basename(outputPath));
+  const root = path.join(directory, '.private');
   const storage = await createStorage(root, manifest.nativeDriver);
   const id = randomUUID();
   const name = `credentials-${id}.json`;
   const runtimeModule = `runtime-${id}.js`;
   const { bridgeNonce, application, ...rest } = manifest;
   const { leaseNonce, ...publicApplication } = application;
-  const stored = parseStoredDriverManifest({ ...rest, application: publicApplication, credentials: { name, root, runtimeModule } });
+  const leaseName = `application-lease.${manifest.endpoint}.json`;
+  const stored = parseStoredDriverManifest({
+    ...rest,
+    application: { ...publicApplication, leasePath: path.join(root, leaseName) },
+    credentials: { name, root, runtimeModule },
+  });
   const contents = `${JSON.stringify(stored, null, 2)}\n`;
   const manifestDigest = driverManifestDigest(contents);
   const credentials = JSON.stringify(parseCredentials({ bridgeNonce, leaseNonce, manifestDigest, schemaVersion: credentialsVersion }));
@@ -95,7 +103,10 @@ export async function publishDriverManifest(
   await storage.publish(name, credentials);
   try {
     await storage.publish(runtimeModule, runtimeContents);
-    fs.rmSync(manifest.application.leasePath, { force: true });
+    const previousLease = await storage.read(leaseName);
+    if (previousLease !== undefined && !(await storage.remove(leaseName, previousLease))) {
+      throw new Error('Desktop Storybook application lease changed during publication.');
+    }
     if (manifest.agent) fs.rmSync(manifest.agent.readyPath, { force: true });
     // No secret is present here; privateStorage owns credential and runtime-module publication.
     const pending = `${outputPath}.${id}.pending`;
@@ -136,10 +147,12 @@ export async function readDriverManifest(
   createStorage = createStorybookPrivateStorage,
   trustedArtifact?: NativeDriverArtifact,
 ): Promise<DesktopStorybookDriverManifest> {
+  const directory = fs.realpathSync(path.dirname(manifestPath));
+  manifestPath = path.join(directory, path.basename(manifestPath));
   const contents = fs.readFileSync(manifestPath, 'utf8');
   const stored = parseStoredDriverManifest(JSON.parse(contents));
   if (
-    stored.credentials.root !== path.join(path.dirname(manifestPath), '.private') ||
+    stored.credentials.root !== path.join(directory, '.private') ||
     stored.application.leasePath !== path.join(stored.credentials.root, `application-lease.${stored.endpoint}.json`)
   ) {
     throw new Error('Desktop Storybook private state must use the generated instance namespace.');

@@ -19,7 +19,7 @@ describe('desktop Storybook server integration', () => {
     'the actual channel process rejects %s before spawning a helper or listening',
     async (tamper) => {
       const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
-      const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-spawn-trust-'));
+      const root = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'storybook-spawn-trust-'));
       const manifestPath = path.join(root, 'driver-manifest.json');
       const marker = path.join(root, 'unexpected-spawn');
       const fixture = createIntegrationManifest(root, storybookPort, driverPort);
