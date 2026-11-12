@@ -141,8 +141,11 @@ remains scoped to the selected window.
 On Windows and Win32, the assertion-dialog safety check inspects each secondary
 window without selecting or activating it, so it cannot dismiss an open menu.
 Only a single accessibility `menu` root without nested dialogs or windows is
-recognized as an expected popup. Other secondary windows still fail the check;
-unreadable windows fail the test rather than being treated as no assertion.
+recognized as an expected popup. A tree read reporting `no such window` is
+treated as a closed popup. Empty or unrecognized roots fail the check only
+when a fresh window listing still includes that handle, avoiding false
+assertions while a menu closes. Every other tree-read error still fails the
+test rather than being treated as no assertion.
 The native-task-library bypass, Android page check, and other runners' existing
 window-count check are unchanged.
 

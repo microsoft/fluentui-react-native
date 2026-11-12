@@ -86,6 +86,67 @@ test('Windows assertion checks do not let an open menu hide another unexpected w
   assert.equal(await new BasePage().didAssertPopup(), true);
 });
 
+test('Windows assertion checks skip a vanished menu and continue checking other windows', async () => {
+  let handles = ['main', 'closing-menu'];
+  globalThis.browser = {
+    capabilities: { browserName: 'furn-native-desktop', platformName: 'windows', 'furn:endpoint': 'win32' },
+    options: { protocol: 'http', hostname: '127.0.0.1', port: 1, path: '/' },
+    sessionId: 'session',
+    getWindowHandles: async () => handles,
+    getWindowHandle: async () => 'main',
+    switchToWindow: () => assert.fail('an assertion check must not change native focus'),
+  };
+  mock.method(globalThis, 'fetch', async (url) =>
+    String(url).endsWith('/closing-menu/tree')
+      ? new Response(JSON.stringify({ value: { error: 'no such window', message: 'The menu closed.' } }), { status: 404 })
+      : new Response(JSON.stringify({ value: [{ role: 'window', name: 'Assertion failed', children: [] }] })),
+  );
+  const page = new BasePage();
+  assert.equal(await page.didAssertPopup(), false);
+  handles = ['main', 'closing-menu', 'assert'];
+  assert.equal(await page.didAssertPopup(), true);
+});
+
+test('Windows assertion checks recheck an empty or unrecognized root before reporting an assertion', async () => {
+  let lists = 0;
+  globalThis.browser = {
+    capabilities: { browserName: 'furn-native-desktop', platformName: 'windows', 'furn:endpoint': 'win32' },
+    options: { protocol: 'http', hostname: '127.0.0.1', port: 1, path: '/' },
+    sessionId: 'session',
+    getWindowHandles: async () => (++lists === 1 ? ['main', 'closing-menu'] : ['main']),
+    getWindowHandle: async () => 'main',
+    switchToWindow: () => assert.fail('an assertion check must not change native focus'),
+  };
+  let value;
+  mock.method(globalThis, 'fetch', async () => new Response(JSON.stringify({ value })));
+  const page = new BasePage();
+  for (const roots of [[], [{ role: 'group', children: [] }], [{ role: 'menu', children: [{ role: 'dialog', children: [] }] }]]) {
+    lists = 0;
+    value = roots;
+    assert.equal(await page.didAssertPopup(), false);
+  }
+});
+
+test('Windows assertion checks do not treat other provider errors as closed windows', async () => {
+  globalThis.browser = {
+    capabilities: { browserName: 'furn-native-desktop', platformName: 'windows', 'furn:endpoint': 'win32' },
+    options: { protocol: 'http', hostname: '127.0.0.1', port: 1, path: '/' },
+    sessionId: 'session',
+    getWindowHandles: async () => ['main', 'unreadable-menu'],
+    getWindowHandle: async () => 'main',
+  };
+  let code;
+  mock.method(
+    globalThis,
+    'fetch',
+    async () => new Response(JSON.stringify({ value: { error: code, message: 'The provider could not read the tree.' } }), { status: 500 }),
+  );
+  for (const error of ['unknown error', 'stale element reference']) {
+    code = error;
+    await assert.rejects(new BasePage().didAssertPopup(), { code: error });
+  }
+});
+
 test('assertion checks retain non-native and macOS window-count behavior', async () => {
   for (const capabilities of [
     { browserName: 'non-native' },

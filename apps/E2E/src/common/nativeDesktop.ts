@@ -1,4 +1,5 @@
-import { createDesktopDriverClient, DesktopSessionClient } from '@fluentui-react-native/desktop-driver';
+import { createDesktopDriverClient, DesktopSessionClient, WebDriverError } from '@fluentui-react-native/desktop-driver';
+import type { DesktopTreeNode } from '@fluentui-react-native/desktop-driver';
 import { Keys } from './consts.js';
 
 /** A page object getter, or the element it has already resolved to. */
@@ -20,16 +21,28 @@ export async function hasUnexpectedNativeDesktopWindow(handles: readonly string[
   for (const handle of handles) {
     if (handle === current) continue;
     // Switching windows would activate the target and can dismiss the menu being tested.
-    const roots = await session.getWindowTree(handle);
-    if (roots.length !== 1 || roots[0].role !== 'menu') return true;
-    const pending = [...roots];
-    while (pending.length > 0) {
-      const node = pending.pop()!;
-      if (node.role === 'dialog' || node.role === 'window') return true;
-      pending.push(...node.children);
+    let roots: DesktopTreeNode[];
+    try {
+      roots = await session.getWindowTree(handle);
+    } catch (error) {
+      if (error instanceof WebDriverError && error.code === 'no such window') continue;
+      throw error;
     }
+    // A closing popup can lose its content before its window disappears.
+    if (!isExpectedMenuTree(roots) && (await browser.getWindowHandles()).includes(handle)) return true;
   }
   return false;
+}
+
+function isExpectedMenuTree(roots: readonly DesktopTreeNode[]): boolean {
+  if (roots.length !== 1 || roots[0].role !== 'menu') return false;
+  const pending = [...roots];
+  while (pending.length > 0) {
+    const node = pending.pop()!;
+    if (node.role === 'dialog' || node.role === 'window') return false;
+    pending.push(...node.children);
+  }
+  return true;
 }
 
 export async function sendNativeDesktopKeys(element: PageElement, keys: readonly Keys[]): Promise<void> {
