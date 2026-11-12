@@ -35,8 +35,9 @@ export type DesktopGrant = {
 export type IssuedDesktopGrant = DesktopGrant & { readonly token: string };
 
 type StoredGrant = { digest: Buffer; grant: DesktopGrant; depth: number };
-type Drain = { pending: Promise<void>; failed: boolean; failureReported: boolean };
+type Drain = { pending: Promise<void>; failed: boolean; failureReported: boolean; succeeded: boolean };
 const maxGrants = 4096;
+const maxDrainedGrants = 4096;
 const maxDepth = 8;
 
 /**
@@ -55,12 +56,23 @@ export class DesktopAuthority {
   private readonly revocationListeners = new Set<(grant: DesktopGrant) => unknown>();
   private readonly drains = new Map<string, Drain>();
   private readonly revoked = new Map<string, StoredGrant>();
-  private issuedCount = 0;
+  private readonly children = new Map<string, Set<string>>();
+  private readonly drained = new Set<string>();
   // Verifying a token for an unknown grant compares against this so the two failures take the same work.
   private readonly unknownDigest = digestOf(randomBytes(32).toString('base64url'));
 
   issue(request: GrantRequest): IssuedDesktopGrant {
     return this.create(request, undefined);
+  }
+
+  isActive(grantId: string): boolean {
+    return this.grants.has(grantId);
+  }
+
+  /** Shared descriptor roots and workload connections must relinquish instead of being permanently preempted. */
+  canPreempt(grantId: string): boolean {
+    const grant = (this.grants.get(grantId) ?? this.revoked.get(grantId))?.grant;
+    return grant?.parentId !== undefined && grant.scopes.length === 1 && grant.scopes[0] === 'driver-control';
   }
 
   /** Trusted callers may attenuate targets and permissions, never expand them. */
@@ -105,7 +117,9 @@ export class DesktopAuthority {
   }
 
   private create(request: GrantRequest, parent: StoredGrant | undefined, runner = false): IssuedDesktopGrant {
-    if (this.issuedCount >= maxGrants) throw new RangeError('The service grant limit has been reached.');
+    if (this.grants.size + this.revoked.size - this.drained.size >= maxGrants) {
+      throw new RangeError('The service live or draining grant limit has been reached.');
+    }
     const label = request.label;
     if (typeof label !== 'string' || !labelPattern.test(label)) {
       throw new TypeError('A grant label must be 1-32 characters of letters, digits, ".", "_", ":" or "-".');
@@ -124,7 +138,11 @@ export class DesktopAuthority {
       ...(restriction ? { runner: restriction } : {}),
     });
     this.grants.set(id, { digest: digestOf(secret), grant, depth: parent ? parent.depth + 1 : 0 });
-    this.issuedCount += 1;
+    if (parent) {
+      const children = this.children.get(parent.grant.id) ?? new Set<string>();
+      children.add(id);
+      this.children.set(parent.grant.id, children);
+    }
     return Object.freeze({ ...grant, token: `${tokenScheme}.${id}.${secret}` });
   }
 
@@ -173,19 +191,18 @@ export class DesktopAuthority {
   }
 
   private subtree(root: StoredGrant): StoredGrant[] {
-    const records = [...this.grants.values(), ...this.revoked.values()];
-    return records.filter((candidate) => {
-      let current: StoredGrant | undefined = candidate;
-      while (current) {
-        if (current === root) return true;
-        const parentId = current.grant.parentId ?? '';
-        current = this.grants.get(parentId) ?? this.revoked.get(parentId);
+    const records = [root];
+    for (const { grant } of records) {
+      for (const id of this.children.get(grant.id) ?? []) {
+        const child = this.grants.get(id) ?? this.revoked.get(id);
+        if (child) records.push(child);
       }
-      return false;
-    });
+    }
+    return records;
   }
 
-  private startDrain({ grant }: StoredGrant): Drain {
+  private startDrain(stored: StoredGrant): Drain {
+    const { grant } = stored;
     let resolve!: () => void;
     let reject!: (reason: unknown) => void;
     const drain: Drain = {
@@ -195,6 +212,7 @@ export class DesktopAuthority {
       }),
       failed: false,
       failureReported: false,
+      succeeded: false,
     };
     this.drains.set(grant.id, drain);
     // Install the barrier before calling listeners, which may themselves revoke another branch.
@@ -217,10 +235,35 @@ export class DesktopAuthority {
           ),
         );
       } else {
+        drain.succeeded = true;
+        this.recordDrain(stored);
         resolve();
       }
     });
     return drain;
+  }
+
+  private recordDrain(stored: StoredGrant): void {
+    let current: StoredGrant | undefined = stored;
+    while (current && this.revoked.has(current.grant.id)) {
+      const branch = this.subtree(current);
+      if (!branch.every(({ grant }) => this.drains.get(grant.id)?.succeeded)) break;
+      for (const { grant } of branch) this.drained.add(grant.id);
+      current = this.revoked.get(current.grant.parentId ?? '');
+    }
+    while (this.drained.size > maxDrainedGrants) {
+      const id = this.drained.values().next().value!;
+      const parentId = this.revoked.get(id)?.grant.parentId;
+      this.drained.delete(id);
+      this.revoked.delete(id);
+      this.drains.delete(id);
+      this.children.delete(id);
+      if (parentId) {
+        const siblings = this.children.get(parentId);
+        siblings?.delete(id);
+        if (siblings?.size === 0) this.children.delete(parentId);
+      }
+    }
   }
 
   /** Joins the original drain even when synchronous revocation already invalidated the grant. */

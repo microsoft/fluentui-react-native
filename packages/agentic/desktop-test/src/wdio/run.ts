@@ -83,6 +83,7 @@ export async function runDesktopWdioSuite(
     timeoutMs: suite.timeoutMs ?? 60_000,
     launchTimeoutMs: supervisor.target.launchTimeoutMs ?? 180_000,
     readiness: suite.readiness ?? supervisor.target.readiness,
+    scopedRunner: attached !== undefined,
   };
   const settingsPath = supervisor.reporter.artifactPath('wdio.settings.json');
   fs.writeFileSync(settingsPath, JSON.stringify({ configurationModule: new URL('./configuration.js', import.meta.url).href, settings }), {

@@ -9,7 +9,12 @@ import { desktopTestSelectionFromEnvironment } from '../jasmine/selection.js';
 import { currentDesktopJasmineEnvironment, selectDesktopSpecs } from '../jasmine/specSelection.js';
 import { connectReportProducer } from '../reporting/transport.js';
 import { DesktopReportedError, serializeReportError } from '../reporting/protocol.js';
-import { requestDesktopRunnerWorker, runnerBrokerUrlEnvironment, runnerWorkerTokenEnvironment } from './runnerConnection.js';
+import {
+  requestDesktopRunnerWorker,
+  runnerBrokerTokenEnvironment,
+  runnerBrokerUrlEnvironment,
+  runnerWorkerTokenEnvironment,
+} from './runnerConnection.js';
 
 export type DesktopWdioSettings = {
   url: string;
@@ -27,6 +32,7 @@ export type DesktopWdioSettings = {
   timeoutMs: number;
   launchTimeoutMs: number;
   readiness?: DesktopReadiness;
+  scopedRunner?: boolean;
 };
 
 type Hook = (...args: unknown[]) => unknown;
@@ -50,6 +56,10 @@ const hookNames = [
 ] as const;
 
 export async function createDesktopWdioConfiguration(settings: DesktopWdioSettings) {
+  const broker = { url: process.env[runnerBrokerUrlEnvironment], token: process.env[runnerBrokerTokenEnvironment] };
+  const grant = process.env[runnerWorkerTokenEnvironment];
+  for (const name of [runnerBrokerUrlEnvironment, runnerBrokerTokenEnvironment, runnerWorkerTokenEnvironment]) delete process.env[name];
+  let runnerEnvironment: Record<string, string | undefined> | undefined;
   let hooks: Partial<Record<(typeof hookNames)[number], Hook>> = {};
   if (settings.hooks) {
     const loaded: unknown = await import(pathToFileURL(settings.hooks).href);
@@ -65,11 +75,14 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
   const readiness = settings.readiness;
   // The launcher read the selection too, so a malformed one fails the run before any worker starts.
   const selection = desktopTestSelectionFromEnvironment();
-  const broker = process.env[runnerBrokerUrlEnvironment] !== undefined;
-  const grant = process.env[runnerWorkerTokenEnvironment];
   const configuration = {
     ...hooks,
     runner: 'local',
+    runnerEnv: {
+      [runnerBrokerUrlEnvironment]: undefined,
+      [runnerBrokerTokenEnvironment]: undefined,
+      [runnerWorkerTokenEnvironment]: undefined,
+    },
     framework: settings.framework,
     rootDir: settings.rootDir,
     specs: settings.specs,
@@ -107,18 +120,25 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
         'furn:inputMode': selection?.lane ?? 'compatibility',
       },
     ],
+    onPrepare: async (config: { runnerEnv: Record<string, string | undefined> }, ...args: unknown[]) => {
+      runnerEnvironment = config.runnerEnv;
+      await hooks.onPrepare?.(config, ...args);
+    },
     onWorkerStart: async (id: string, ...args: unknown[]) => {
-      delete process.env[runnerWorkerTokenEnvironment];
-      if (broker) process.env[runnerWorkerTokenEnvironment] = await requestDesktopRunnerWorker('POST', id);
+      if (runnerEnvironment) delete runnerEnvironment[runnerWorkerTokenEnvironment];
       await hooks.onWorkerStart?.(id, ...args);
+      if (settings.scopedRunner) {
+        if (!runnerEnvironment) throw new Error('The WDIO launcher worker environment is unavailable.');
+        runnerEnvironment[runnerWorkerTokenEnvironment] = await requestDesktopRunnerWorker('POST', id, broker);
+      }
     },
     onWorkerEnd: async (id: string, ...args: unknown[]) => {
-      delete process.env[runnerWorkerTokenEnvironment];
-      if (broker) await requestDesktopRunnerWorker('DELETE', id);
+      if (runnerEnvironment) delete runnerEnvironment[runnerWorkerTokenEnvironment];
+      if (settings.scopedRunner) await requestDesktopRunnerWorker('DELETE', id, broker);
       await hooks.onWorkerEnd?.(id, ...args);
     },
     beforeSession: async (...args: unknown[]) => {
-      if (broker && !grant) throw new Error('The WDIO worker has no scoped Desktop Driver authority.');
+      if (settings.scopedRunner && !grant) throw new Error('The WDIO worker has no scoped Desktop Driver authority.');
       process.env.E2ETEST_PLATFORM = settings.endpoint;
       await hooks.beforeSession?.(...args);
     },

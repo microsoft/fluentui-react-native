@@ -194,9 +194,11 @@ function answer(response: ServerResponse, status: number, value: unknown): void 
 }
 
 /** Launcher hooks only. The worker's grant is never put in the configuration object WDIO serializes. */
-export async function requestDesktopRunnerWorker(method: 'POST' | 'DELETE', id: string): Promise<string | undefined> {
-  const url = process.env[runnerBrokerUrlEnvironment];
-  const token = process.env[runnerBrokerTokenEnvironment];
+export async function requestDesktopRunnerWorker(
+  method: 'POST' | 'DELETE',
+  id: string,
+  { url, token }: { url?: string; token?: string },
+): Promise<string | undefined> {
   if (!url || !token || !/^[0-9]{1,8}-[0-9]{1,8}$/.test(id)) throw new Error('Desktop runner worker authority is unavailable.');
   let value: unknown;
   try {

@@ -131,6 +131,7 @@ export async function createDesktopDriverServer(options: DesktopDriverServerOpti
   options.authority?.assertTargetsRegistered(new Set(targets.list().map(({ id }) => id)));
   const sessions = new SessionManager({
     idleTimeoutMs: resolveIdleSessionTimeout(options),
+    ...(options.authority ? { isOwnerActive: (id: string) => options.authority!.isActive(id) } : {}),
     ...(options.recovery ? { journal: new SettlementJournal(options.recovery.storage) } : {}),
     ...(options.recovery?.probeApplication ? { probeApplication: options.recovery.probeApplication } : {}),
     redactSessionIds: options.authority !== undefined,
@@ -421,14 +422,25 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
       if (target.storyOrchestrator || target.launchModes?.length !== 1 || target.launchModes[0] !== 'attach') {
         throw new WebDriverError('unsupported operation', 'Runner handoff requires a generic attach-only target.');
       }
-      const child = context.authority.delegateRunner(context.grant.id, target.id);
+      let child: ReturnType<DesktopAuthority['delegateRunner']> | undefined;
       try {
         await sessions.reserveRunner(
           target.id,
-          { grantId: child.id, controllerId: child.id, label: child.label },
+          { grantId: context.grant.id, label: context.grant.label },
+          () => {
+            child = context.authority!.delegateRunner(context.grant!.id, target.id);
+            return { grantId: child.id, controllerId: child.id, label: child.label };
+          },
           request.handoff === 'preempt'
             ? (id) => {
-                if (context.authority!.isDescendantOf(child.id, id)) {
+                if (!context.authority!.canPreempt(id)) {
+                  throw new WebDriverError(
+                    'session not created',
+                    'A shared descriptor or workload connection holds this target. Relinquish it before requesting runner authority.',
+                    { reason: 'target-busy' },
+                  );
+                }
+                if (context.authority!.isDescendantOf(context.grant!.id, id)) {
                   throw new WebDriverError(
                     'session not created',
                     'Relinquish the acquiring connection before requesting runner authority.',
@@ -443,9 +455,9 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
           context.signal,
         );
         context.signal.throwIfAborted();
-        return { token: child.token };
+        return { token: child!.token };
       } catch (error) {
-        await context.authority.revokeAndDrain(child.id);
+        if (child) await context.authority.revokeAndDrain(child.id);
         throw error;
       }
     }

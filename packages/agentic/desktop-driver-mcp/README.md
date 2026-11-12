@@ -26,6 +26,8 @@ delegation fail closed. See
 `desktop_session` with `action: "relinquish"` cancels and drain-confirms the
 controller before an operator's generic attach-only WDIO runner takes over.
 After runner cleanup, open a fresh session; no old resources are resumed.
+Operator preemption also allows a fresh child after authoritative rejection;
+it does not require restarting the MCP connection.
 See [session actions](references/tools.md#desktop_session).
 
 ## Use it

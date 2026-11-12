@@ -388,6 +388,7 @@ export class DesktopController {
           this.#open = undefined;
           this.#uncertain = undefined;
           this.#connection = undefined;
+          this.#binding = undefined;
           throw new AdapterError(
             'service-unavailable',
             'The Desktop Driver authority is no longer valid. Reconnect before opening a session.',

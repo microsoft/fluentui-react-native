@@ -63,6 +63,8 @@ when working on the package.
   framework assertions.
 - Generic externally owned apps support drain-confirmed MCP/WDIO handoff via
   `test --attach-agent`; see [runner ownership](references/wdio-suites.md#reuse-an-attached-agent-service).
+  Per-worker credentials are scrubbed before user hooks/specs; Node bootstrap
+  and preloads remain trusted during the initial fork-environment window.
   Storybook handoff and retained session launches remain unsupported.
 - The generic harness supervises services, workers, and the driver; session-owned
   app launch and the Storybook lifecycle takeover are transitional (see

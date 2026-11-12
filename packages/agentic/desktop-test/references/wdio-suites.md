@@ -46,6 +46,11 @@ the service with `--allow-runner-preempt`, then request `test --attach-agent
 commands, cancels and awaits in-flight native work, and confirms session
 deletion before a target-scoped, attach-only runner grant is returned. A
 failed drain retains the busy fence; revocation notification is not proof.
+Preemption is limited to delegated driver-only controllers. A descriptor root
+or a connection retaining workload/recovery authority returns `target-busy`
+and must explicitly relinquish, so unrelated descriptor users are not revoked.
+After a preempted MCP child is authoritatively rejected and the runner drains,
+the same MCP connection can open with a fresh child.
 
 The parent runner keeps the reservation between WDIO workers, hands each
 worker a distinct driver-only child via private process transport, and awaits
@@ -55,6 +60,17 @@ reuse. Runner shutdown drains the entire connection subtree even when a
 worker or acquisition response was lost. Credentials travel only in private
 descriptors, environment, and request closures; never put them in hooks,
 capabilities, settings, generated configuration, command arguments, or logs.
+
+The launcher captures and removes broker credentials before importing user
+hooks. Each worker receives only its own child token through WDIO's private
+`runnerEnv`, never through the launcher's `process.env`; the worker captures
+and removes it before user hooks or specs load. Hooks, specs, and children
+they spawn therefore do not inherit broker or worker credential variables.
+The per-worker `runnerEnv` entry is cleared at worker end. Node bootstrap and
+preloads run before configuration capture and remain trusted: the worker token
+exists in the fork environment during that bootstrap window. This transport
+does not isolate mutually hostile code running as the same operating-system
+account.
 
 Each handoff opens a new session: old element references, observation cursors,
 uniqueness proofs, and session-qualified artifact links expire. There is no

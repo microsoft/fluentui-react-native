@@ -81,10 +81,12 @@ in its command queue authenticates again immediately before dispatch.
   `driver-control`, with the parent's target set and label. The typed client's
   `delegateConnection()` keeps the returned credential private. Neither a parent
   nor a sibling can address the child's sessions.
-- Delegation is bounded to eight edges and 4096 total grants per service
-  incarnation, including roots and revoked grants. Exhaustion fails explicitly;
-  cleanup proof is never evicted or recycled to admit new connections. Operators
-  must drain and replace the service to reset this finite lifetime budget.
+- Delegation is bounded to eight edges and 4096 live or not-yet-drained grants,
+  including roots. Confirmed subtree drain restores capacity, so repeated
+  connections and runner handoffs do not exhaust a service-lifetime budget.
+  Pending or failed drain proof is never evicted. The last 4096 fully drained
+  records retain terminal-only retry proof; older settled records expire and
+  their credentials fail closed, never regain driver authority.
 - A session belongs to the grant that created it. Every other grant gets the
   answer for an id that does not exist, and that check runs before the command
   queues, so a grant can neither probe for another grant's session nor wait in,
@@ -112,7 +114,9 @@ in its command queue authenticates again immediately before dispatch.
   exact terminal route** so a lost response or failed drain can be retried.
   It cannot authorize status, session work, delegation, or another principal's
   cleanup. Unauthorized is not cleanup evidence. Tombstones retain no plaintext
-  secret and live until the service incarnation ends.
+  secret; only completely drained subtrees are eligible for bounded-history
+  expiry. A retired authenticated request still checks live authority before
+  admission, even after its settled record expires.
 - Ordinary session HTTP `DELETE` is queued behind current work before drain
   begins. Neither revocation notification nor a ten-minute idle setting proves
   settlement; handoff must await session deletion or the explicit grant drain.
@@ -123,10 +127,13 @@ in its command queue authenticates again immediately before dispatch.
   from such an isolated workload connection. The target must be generic and
   advertise attach-only launch modes. The default is bounded `target-busy`;
   `preempt` also requires `operator-recovery` and cannot revoke the acquiring
-  connection or one of its ancestors.
+  connection or one of its ancestors. Shared descriptor roots and connections
+  retaining workload/recovery authority return `target-busy` with an explicit
+  relinquish requirement rather than being permanently revoked.
 - Runner acquisition fences admission before draining an old controller. Only
   after cancellation, native settlement, opening-lease cleanup, and deletion
-  are confirmed does it return a driver-only, target-scoped attach-only child.
+  are confirmed does it issue and return a driver-only, target-scoped attach-only
+  child. Busy or failed handoff attempts issue no runner grant.
   Ordinary descendants inherit that restriction and share the reservation.
   The reservation excludes MCP even between workers and is released only after
   terminal subtree drain. Failed drains retain the fence and retryable proof.

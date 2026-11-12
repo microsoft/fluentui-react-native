@@ -144,7 +144,7 @@ describe('attenuated grants', () => {
     expect(authority.issue({ label: 'default', targets: '*' }).scopes).toEqual(['driver-control']);
   });
 
-  test('bounds depth and service-lifetime issuance without evicting cleanup proof', async () => {
+  test('bounds delegation depth and live grants without evicting recent cleanup proof', async () => {
     const authority = new DesktopAuthority();
     const parent = authority.issue({ label: 'agent', targets: '*' });
     let current = parent;
@@ -153,9 +153,38 @@ describe('attenuated grants', () => {
     }
     expect(() => authority.delegate(current.id, { label: 'too-deep', targets: '*' })).toThrow();
     await authority.revokeAndDrain(current.id);
-    for (let index = 9; index < 4096; index += 1) authority.issue({ label: 'bounded', targets: '*' });
+    for (let index = 8; index < 4096; index += 1) authority.issue({ label: 'bounded', targets: '*' });
     expect(() => authority.issue({ label: 'exhausted', targets: '*' })).toThrow('limit');
     expect(authority.authenticateRevocation(`Bearer ${current.token}`)?.id).toBe(current.id);
     expect(authority.authenticate(`Bearer ${current.token}`)).toBeUndefined();
+  });
+
+  test('reuses drained capacity beyond 4096 delegations while preserving undrained terminal proof', async () => {
+    const authority = new DesktopAuthority();
+    const parent = authority.issue({ label: 'agent', targets: '*' });
+    const blocked = authority.delegate(parent.id, { label: 'blocked', targets: '*' });
+    const descendant = authority.delegate(blocked.id, { label: 'pending', targets: '*' });
+    let finish!: () => void;
+    const pending = new Promise<void>((resolve) => (finish = resolve));
+    authority.onRevoke(({ id }) => (id === descendant.id ? pending : undefined));
+    const barrier = authority.revokeAndDrain(blocked.id);
+    const first = authority.delegate(parent.id, { label: 'cycle', targets: '*' });
+    await authority.revokeAndDrain(first.id);
+    let last = first;
+    for (let index = 0; index < 4100; index += 1) {
+      last = authority.delegate(parent.id, { label: 'cycle', targets: '*' });
+      await authority.revokeAndDrain(last.id);
+    }
+    expect(authority.authenticate(`Bearer ${parent.token}`)?.id).toBe(parent.id);
+    expect(authority.authenticate(`Bearer ${first.token}`)).toBeUndefined();
+    expect(authority.authenticateRevocation(`Bearer ${first.token}`)).toBeUndefined();
+    expect(authority.authenticateRevocation(`Bearer ${last.token}`)?.id).toBe(last.id);
+    expect(authority.authenticateRevocation(`Bearer ${blocked.token}`)?.id).toBe(blocked.id);
+    expect(authority.authenticateRevocation(`Bearer ${descendant.token}`)?.id).toBe(descendant.id);
+    expect(authority.authenticate(`Bearer ${blocked.token}`)).toBeUndefined();
+    finish();
+    await barrier;
+    await expect(authority.revokeAndDrain(last.id)).resolves.toBeUndefined();
+    expect(authority.delegate(parent.id, { label: 'fresh', targets: '*' }).id).toBeDefined();
   });
 });

@@ -16,6 +16,7 @@ async function fixture(
     authority: DesktopAuthority;
     host: FakeDesktopHost;
     agent: DesktopDriverClient;
+    descriptor: DesktopDriverClient;
     newAgent(): Promise<DesktopDriverClient>;
     runner: DesktopDriverClient;
     operator: DesktopDriverClient;
@@ -40,6 +41,7 @@ async function fixture(
       authority,
       host,
       agent: await client(agent.token).delegateConnection(),
+      descriptor: client(agent.token),
       newAgent: () => client(agent.token).delegateConnection(),
       runner: await runnerConnection(client(runner.token), server.url),
       operator: await runnerConnection(client(operator.token), server.url),
@@ -76,16 +78,37 @@ describe('attach-only runner handoff', () => {
   });
 
   test('defaults to bounded busy and never gives the MCP child workload or preemption authority', async () => {
-    await fixture(async ({ agent, capabilities, operator, runner, url }) => {
+    await fixture(async ({ agent, authority, capabilities, operator, runner, url }) => {
       const session = await agent.newSession(capabilities);
+      const delegate = jest.spyOn(authority, 'delegateRunner');
       await expect(acquire(runner, url)).rejects.toMatchObject({ data: { reason: 'target-busy' } });
       await expect(acquire(runner, url, 'preempt')).rejects.toMatchObject({ code: 'unauthorized' });
       await expect(acquire(agent, url, 'preempt')).rejects.toMatchObject({ code: 'unauthorized' });
       await expect(runnerConnection(agent, url)).rejects.toMatchObject({ code: 'unauthorized' });
+      expect(delegate).not.toHaveBeenCalled();
       await expect(acquire(operator, url, 'preempt')).resolves.toBeDefined();
       await expect(session.getWindowHandles()).rejects.toMatchObject({ code: 'unauthorized' });
     });
   });
+
+  test.each(['descriptor', 'workload'] as const)(
+    'refuses preemption of a shared %s grant without revoking its children',
+    async (holder) => {
+      await fixture(async ({ authority, capabilities, descriptor, operator, runner, url }) => {
+        const owner = holder === 'descriptor' ? descriptor : runner;
+        const sibling = await descriptor.delegateConnection();
+        const session = await owner.newSession(capabilities);
+        const delegate = jest.spyOn(authority, 'delegateRunner');
+        await expect(acquire(operator, url, 'preempt')).rejects.toMatchObject({
+          data: { reason: 'target-busy' },
+          message: expect.stringContaining('shared descriptor or workload connection'),
+        });
+        expect(delegate).not.toHaveBeenCalled();
+        await expect(session.getWindowHandles()).resolves.not.toHaveLength(0);
+        await expect(sibling.status()).resolves.toMatchObject({ ready: true });
+      });
+    },
+  );
 
   test('refuses preemption of an ancestor rather than joining its own pending handoff drain', async () => {
     await fixture(async ({ capabilities, operator, url }) => {
@@ -188,11 +211,13 @@ describe('attach-only runner handoff', () => {
   });
 
   test('failed preemption does not authorize a new controller and its terminal cleanup is retryable', async () => {
-    await fixture(async ({ agent, capabilities, host, operator, runner, url }) => {
+    await fixture(async ({ agent, authority, capabilities, host, operator, runner, url }) => {
       await agent.newSession(capabilities);
+      const delegate = jest.spyOn(authority, 'delegateRunner');
       jest.spyOn(host, 'releaseActions').mockRejectedValueOnce(attachFailureEffect(new Error('injected release failure'), 'none'));
       await expect(acquire(operator, url, 'preempt')).rejects.toBeDefined();
       await expect(acquire(runner, url)).rejects.toMatchObject({ data: { reason: 'target-busy' } });
+      expect(delegate).not.toHaveBeenCalled();
       await agent.revokeConnection();
       await expect(acquire(runner, url)).resolves.toBeDefined();
     });

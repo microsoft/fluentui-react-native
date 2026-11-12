@@ -26,7 +26,8 @@ editing.
   separate. Child grants may only attenuate targets/scopes. Revoke descendant
   authority synchronously and await acquisition/session drains; revoked-child
   proof authorizes only retrying that child's terminal cleanup, never driver
-  access. Never evict cleanup proof to reuse the finite lifetime grant budget.
+  access. Bound live/draining authority and settled history separately; never
+  evict pending or failed subtree cleanup proof to admit new connections.
 - Runner handoff fences admission before cancellation/drain and confirms
   deletion before granting an attach-only reservation. Descendants inherit
   the controller restriction. Do not release that reservation on notification

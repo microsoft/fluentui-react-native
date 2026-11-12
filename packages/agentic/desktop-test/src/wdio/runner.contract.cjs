@@ -1,7 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const os = require('node:os');
 const { pathToFileURL } = require('node:url');
 
 async function main() {
@@ -15,7 +14,9 @@ async function main() {
   const { resolveDesktopScopeDomains } = await import('@fluentui-react-native/desktop-driver/authoring');
   const { FakeDesktopHost } = await import('@fluentui-react-native/desktop-driver/testing');
   const { createDesktopDriverClient } = await import('@fluentui-react-native/desktop-driver/client');
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'runner-contract-'));
+  const artifacts = path.join(packageRoot, 'artifacts', 'runner-contracts');
+  fs.mkdirSync(artifacts, { recursive: true });
+  const root = fs.mkdtempSync(path.join(artifacts, 'runner-contract-'));
   let output = '';
   const sink = { write: (chunk) => ((output += chunk.toString()), true) };
   const reporting = (kind) => new DesktopRunReporter({ artifactsRoot: root, kind, output: sink, errorOutput: sink, summary: false });
@@ -76,24 +77,56 @@ async function main() {
   });
   const spec = path.join(root, 'spec.mjs');
   fs.writeFileSync(
+    path.join(root, 'credential-child.cjs'),
+    `const assert = require('node:assert/strict');
+for (const name of ['DESKTOP_WDIO_BROKER_URL', 'DESKTOP_WDIO_BROKER_TOKEN', 'DESKTOP_WDIO_WORKER_TOKEN']) {
+  assert(!Object.hasOwn(process.env, name), 'A child inherited runner credentials.');
+}
+process.stdout.write('credentials-private');
+`,
+  );
+  const hooks = path.join(root, 'hooks.mjs');
+  fs.writeFileSync(
+    hooks,
+    `import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const probe = () => {
+  assert.equal(execFileSync(process.execPath, [fileURLToPath(new URL('./credential-child.cjs', import.meta.url))], { encoding: 'utf8' }), 'credentials-private');
+};
+probe();
+export default { onPrepare: probe, onWorkerStart: probe, onWorkerEnd: probe, beforeSession: probe };
+`,
+  );
+  fs.writeFileSync(
     spec,
     mode === 'worker-crash'
       ? "describe('crashed worker', () => { it('leaves its session for the parent to drain', () => { process.exit(17); }); });"
       : [
+          "import { execFileSync } from 'node:child_process';",
+          "import { fileURLToPath } from 'node:url';",
           "describe('protected runner', () => {",
           "  it('uses the worker-owned native session', async () => {",
-          '    const grant = process.env.DESKTOP_WDIO_WORKER_TOKEN;',
-          "    expect(typeof grant).toBe('string');",
-          '    expect(JSON.stringify(browser.options)).not.toContain(grant);',
-          '    expect(JSON.stringify(browser.capabilities)).not.toContain(grant);',
-          "    console.log('redaction probe', grant, process.env.DESKTOP_WDIO_BROKER_TOKEN);",
+          "    for (const name of ['DESKTOP_WDIO_BROKER_URL', 'DESKTOP_WDIO_BROKER_TOKEN', 'DESKTOP_WDIO_WORKER_TOKEN']) {",
+          '      expect(Object.hasOwn(process.env, name)).toBeFalse();',
+          '    }',
+          '    const credential = /fdg1\\.[0-9a-f]{32}\\.[A-Za-z0-9_-]{43}/;',
+          '    expect(credential.test(JSON.stringify(browser.options))).toBeFalse();',
+          '    expect(credential.test(JSON.stringify(browser.capabilities))).toBeFalse();',
+          "    const child = execFileSync(process.execPath, [fileURLToPath(new URL('./credential-child.cjs', import.meta.url))], { encoding: 'utf8' });",
+          "    expect(child).toBe('credentials-private');",
+          "    console.log('child credential isolation confirmed');",
           "    expect(await (await browser.$('~button-primary')).isDisplayed()).toBeTrue();",
           '  });',
           '});',
         ].join('\n'),
   );
   const config = {
-    config: { schemaVersion: 1, targets: { win32: target }, suites: { fixture: { kind: 'wdio', framework: 'jasmine', specs: [spec] } } },
+    config: {
+      schemaVersion: 1,
+      targets: { win32: target },
+      suites: { fixture: { kind: 'wdio', framework: 'jasmine', specs: [spec], hooks } },
+    },
     projectRoot: packageRoot,
     configPath: target.configPath,
     targets: { win32: target },
@@ -162,7 +195,7 @@ async function main() {
         assert(!grantPattern.test(content), `no grant reaches ${entry.name}`);
       }
     }
-    if (mode === 'handoff') assert(retained.includes('redaction probe [REDACTED]'), 'deliberately printed worker credentials are redacted');
+    if (mode === 'handoff') assert(retained.includes('child credential isolation confirmed'), 'the spec child credential scan executed');
     await service.close();
     await serviceReport.finish();
     assert(!fs.existsSync(path.join(locks, 'interactive.lock')));

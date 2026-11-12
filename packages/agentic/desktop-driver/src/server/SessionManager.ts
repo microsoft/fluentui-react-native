@@ -55,6 +55,8 @@ type TargetHolder = {
 };
 
 export type SessionManagerOptions = {
+  /** Checks the live authority at every admission, including requests authenticated before an earlier drain. */
+  isOwnerActive?: (grantId: string) => boolean;
   /**
    * Closes a grant's session after this many milliseconds without a request for it. The clock runs only while none of the
    * session's requests is queued or running, so a long command never expires its own session. Sessions without an owner
@@ -152,6 +154,7 @@ export class SessionManager {
   private readonly probeApplication: ProbeApplication | undefined;
   private readonly probeDeadlineMs: number;
   private readonly redactSessionIds: boolean;
+  private readonly isOwnerActive: SessionManagerOptions['isOwnerActive'];
 
   constructor(options: SessionManagerOptions = {}) {
     this.idleTimeoutMs = options.idleTimeoutMs ?? 0;
@@ -159,6 +162,7 @@ export class SessionManager {
     this.probeApplication = options.probeApplication;
     this.probeDeadlineMs = options.probeDeadlineMs ?? defaultStorageDeadlineMs;
     this.redactSessionIds = options.redactSessionIds === true;
+    this.isOwnerActive = options.isOwnerActive;
   }
 
   /**
@@ -274,12 +278,22 @@ export class SessionManager {
     );
   }
 
+  private isRevokedOwner(grantId: string): boolean {
+    return this.revokedOwners.has(grantId) || this.isOwnerActive?.(grantId) === false;
+  }
+
   /**
    * Reserves admission before draining the previous owner. Notification of revocation is not proof: the supplied drain
    * must settle and the target must have no session, opening lease, or mutation before this controller can create.
    */
-  reserveRunner(targetId: string, owner: SessionOwner, preempt?: (grantId: string) => Promise<void>, signal?: AbortSignal): Promise<void> {
-    if (this.closing || this.revokedOwners.has(owner.grantId)) {
+  reserveRunner(
+    targetId: string,
+    owner: SessionOwner,
+    acquireOwner: () => SessionOwner,
+    preempt?: (grantId: string) => Promise<void>,
+    signal?: AbortSignal,
+  ): Promise<void> {
+    if (this.closing || this.isRevokedOwner(owner.grantId)) {
       return Promise.reject(new WebDriverError('session not created', 'Runner authority is unavailable.'));
     }
     if (this.handoffs.has(targetId)) return Promise.reject(this.createBusyError(targetId));
@@ -303,7 +317,7 @@ export class SessionManager {
       try {
         if (previous) await preempt!(previous);
         controller.signal.throwIfAborted();
-        if (this.closing || this.revokedOwners.has(owner.grantId)) {
+        if (this.closing || this.isRevokedOwner(owner.grantId)) {
           throw new WebDriverError('session not created', 'Runner authority was revoked while draining.');
         }
         if (
@@ -316,9 +330,10 @@ export class SessionManager {
         ) {
           throw this.createBusyError(targetId);
         }
+        const runner = acquireOwner();
         this.runnerReservations.set(targetId, {
-          grantId: owner.grantId,
-          label: owner.label,
+          grantId: runner.grantId,
+          label: runner.label,
           lifecycle: 'active',
           since: new Date().toISOString(),
         });
@@ -344,7 +359,7 @@ export class SessionManager {
     }
     // Checked in the same tick that the create registers as in flight, so a create is either rejected here or awaited
     // by deleteOwnedBy.
-    if (owner && (this.revokedOwners.has(owner.grantId) || (owner.controllerId && this.revokedOwners.has(owner.controllerId)))) {
+    if (owner && (this.isRevokedOwner(owner.grantId) || (owner.controllerId && this.isRevokedOwner(owner.controllerId)))) {
       return Promise.reject(new WebDriverError('session not created', 'The grant for this request was revoked.'));
     }
     const controller = new AbortController();
@@ -406,7 +421,7 @@ export class SessionManager {
     if (this.closing) {
       throw new WebDriverError('session not created', 'Desktop Driver is shutting down.');
     }
-    if (owner && (this.revokedOwners.has(owner.grantId) || (owner.controllerId && this.revokedOwners.has(owner.controllerId)))) {
+    if (owner && (this.isRevokedOwner(owner.grantId) || (owner.controllerId && this.isRevokedOwner(owner.controllerId)))) {
       throw new WebDriverError('session not created', 'The grant for this request was revoked.');
     }
     const runner = this.runnerReservations.get(target.id);
@@ -452,7 +467,7 @@ export class SessionManager {
       if (this.closing) {
         throw new WebDriverError('session not created', 'Desktop Driver shut down while the target was starting.');
       }
-      if (owner && (this.revokedOwners.has(owner.grantId) || (owner.controllerId && this.revokedOwners.has(owner.controllerId)))) {
+      if (owner && (this.isRevokedOwner(owner.grantId) || (owner.controllerId && this.isRevokedOwner(owner.controllerId)))) {
         throw new WebDriverError('session not created', 'The grant for this request was revoked.');
       }
       const session: DesktopSession = {
@@ -925,6 +940,7 @@ export class SessionManager {
     for (const [targetId, reservation] of this.runnerReservations) {
       if (reservation.grantId === grantId) this.runnerReservations.delete(targetId);
     }
+    if (this.isOwnerActive?.(grantId) === false) this.revokedOwners.delete(grantId);
   }
 
   private async deleteWhere(predicate: (session: DesktopSession) => boolean, summary: string): Promise<void> {
