@@ -339,3 +339,29 @@ out before the observed bridge retirement; the subsequent attempt waited for
 retirement. No raw image or grant is retained in this reference. Driver
 shutdown, app cleanup, and the failed Win32 app-run reports are
 recorded in `packages/agentic/desktop-test/references/current-status.md`.
+
+## F11 explicit relinquish — 2026-11-12
+
+Source `0ebf8f453` includes explicit `desktop_session` relinquish with an
+immediate admission fence, cancellation, and awaited connection-subtree
+drain. A failed drain retains retryable cleanup responsibility. A fresh
+session after relinquish rejects old references, cursors, proofs and
+artifact links; no cross-connection resume or replay is added.
+Package format, lint, build, and all 31 tests passed, including
+deterministic resource invalidation, late/lost acquisition and failed-drain
+cases. These are portable semantics, not native qualification.
+
+The real private-descriptor AppKit consumer at `87bc8b710` reached verified
+discovery but failed native session creation on macOS 27.2.1 arm64:
+`The target does not support any click input mode.` The stable-signed
+helper doctor reported Accessibility/PostEvent `false`; no privacy settings
+were changed. Native relinquish/handoff and worker-crash drain did not run.
+Both descriptors and the workload claim were removed; the externally owned
+fixture survived service shutdown and only its spawning test stopped it.
+
+Exact commands, revisions, one corrected-fixture retry, cleanup evidence
+and local artifact locators are in
+`@fluentui-react-native/desktop-test/references/current-status.md`.
+Windows/Win32 native handoff is not covered by the existing PR smoke/E2E
+selection and remains not run. Storybook integration and retained-launch
+ownership remain separate follow-up phases.

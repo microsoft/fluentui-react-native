@@ -473,3 +473,30 @@ after the disconnect, so fresh-preview fencing remains Partial. The first
 probe timed out after 10 seconds; bridge retirement occurred about 19 seconds
 after injection. A later attempt waited for retirement and retained the
 same Partial result. Physical Ctrl+C and DPI changes were not exercised.
+
+## F11 scoped runner handoff — 2026-11-12
+
+Source `0ebf8f453` implements the generic attach-only phase: attenuated
+runner/controller grants, bounded busy by default, operator-authorized
+preemption, and target reservation only after in-flight acquisition,
+session deletion, and controller-subtree drain settle. Revocation callbacks
+alone are not a drain barrier. Failed cleanup remains fenced and retryable;
+unknown runner input is rejected before granting or reserving authority.
+Driver package format, lint, build, and tests passed (1,229 passed,
+66 skipped); the focused handoff suite passed seven cases.
+
+Native selection at `87bc8b710` on macOS 27.2.1 arm64 passed 27 identity
+and backend cases, with 15 Windows cases skipped. The stable-signed helper
+doctor was ready but reported Accessibility/PostEvent `false`. The real
+private-descriptor AppKit consumer then failed session creation with no
+supported click input mode. Native handoff and worker-crash drain remain
+unqualified; no permissions were changed. Cleanup preserved the externally
+owned fixture through service shutdown, removed both descriptors and
+released the claim before its spawning test ended that exact process.
+
+Exact commands, helper/fixture revisions, the initial stale-fixture failure,
+one corrected-fixture retry, cleanup evidence and artifact locators are in
+`@fluentui-react-native/desktop-test/references/current-status.md`.
+Windows/Win32 native handoff is not selected by existing PR smoke/E2E jobs
+and remains not run. Storybook integration, retained launches, and
+cross-connection resume/replay are not implemented by this phase.

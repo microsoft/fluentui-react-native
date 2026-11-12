@@ -1026,3 +1026,51 @@ macOS Accessibility block above remains unchanged; no local smoke was
 repeated. `pwsh` is unavailable locally, so its parser check remains not run;
 the actual scripts executed in these CI lanes. Keep the PR draft until the
 documentation follow-up's CI passes and the coordinator changes its status.
+
+## F11 generic attach-only handoff — 2026-11-12
+
+Implementation source: `0ebf8f453` (including `4aafeeabb` and `87bc8b710`).
+Native selection ran at `87bc8b710`. This is the generic attached-application
+phase of [#4448](https://github.com/microsoft/fluentui-react-native/issues/4448),
+not the blocked Storybook integration or retained-launch phases.
+
+**Confirmed, portable:** driver, harness, and MCP package format, lint, and
+build checks passed. Driver tests passed 1,229 with 66 skipped; MCP tests
+passed 31. The real WDIO deterministic normal-handoff and worker-crash tests
+passed, including a lost runner-grant response, target exclusion, final
+subtree drain, fresh-session resources, and credential confinement.
+The final unlocked harness run passed 380, failed two default-claim CLI
+contracts, and skipped two; the lane failure explicitly reported another
+workload holding `interactive.lock`. One focused retry of the two failed
+CLI contracts under the shared native lock passed both (28 unselected
+cases skipped). This collision is not native handoff evidence.
+
+**Observed, native:** macOS 27.2.1, arm64, plain AppKit fixture (no React Native
+renderer). The explicitly stable-signed helper was ready; its noninteractive
+doctor reported Accessibility and PostEvent `false`, ScreenCapture `true`,
+console connected and unlocked. No privacy or certificate-trust changes
+were made. Native service/application identity and backend contracts passed
+27 with 15 skipped Windows cases. These do not qualify GUI handoff.
+
+| Selection and exact command | Result | Cleanup and retained evidence |
+| --------------------------- | ------ | ----------------------------- |
+| `FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-driver test serviceIdentity.contract applicationIncarnation.contract nativeDriver --runInBand` | Passed 27, failed 0, skipped 15 | `artifacts/desktop/f11/qualification/native-identity.log` |
+| `FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_HANDOFF_APP_PATH=<signed-fixture> yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand` | Failed 1; environment-blocked before a session opened: `The target does not support any click input mode.` Worker-crash scenario **not run**. | `artifacts/desktop/f11/native-handoff-5L2MVX/evidence.json`; fixture survived service shutdown, both descriptors removed, claim released; only its spawning test then ended the exact fixture process. |
+
+Both native commands and helper/fixture builds used the exclusive native
+lock. The first handoff attempt used an older fixture binary without
+`--ready-file` and failed readiness; it is retained at
+`artifacts/desktop/f11/native-handoff-En89el/evidence.json`. The one corrected
+fixture retry built and signed the readiness-capable source from
+`27b109072`; it reached native-verified private discovery and the permission
+gate above. Helper artifact identity:
+`e4a23c0ec3cc9ddcf07fde2153bdf260b7b85f65bd0a6851275dd55a6ccf0fd3`.
+Redacted logs and helper diagnostics are under
+`artifacts/desktop/f11/qualification/`; private descriptors are not retained.
+
+**Not run:** successful native MCP → WDIO → MCP handoff, native worker-crash
+drain, and Windows/Win32 native transport/lifecycle handoff. Existing PR
+Windows/Win32 E2E and Storybook smoke jobs do not select this generic
+descriptor-path contract; Windows CI is **not sufficient** for F11.
+Storybook integration still requires F9, retained launches require explicit
+F10 ownership, and cross-MCP-connection resume/replay remain unsupported.
