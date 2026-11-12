@@ -890,6 +890,14 @@ refusal, protected child calls, and outside-workspace Metro resolution.
 Evidence: `apps/storybook/artifacts/f6/ci-fix-{driver,integration,runtime}.log`.
 These simulated-platform results are not Windows ACL qualification.
 
+**CI-fix repository validation:** source `17032203b` passed all 178
+`TF_BUILD=1 yarn lage buildci --concurrency 4` tasks after
+`yarn clean-lage-cache`; both commands held the shared native lock and used
+the default `TMPDIR`. Links passed all 90 tasks. Repository lint, instruction,
+changeset, and whitespace checks passed. Evidence:
+`apps/storybook/artifacts/f6/ci-fix-buildci.log` and `ci-fix-links.log`.
+The Accessibility-blocked macOS consumer smoke was not repeated.
+
 **Windows/Win32 qualification: pending, not sufficient yet.** Native execution
 is unavailable on this Mac, and `pwsh` is not installed, so PowerShell parser
 validation was not run. The first CI run confirms that Win32 Paper smoke
