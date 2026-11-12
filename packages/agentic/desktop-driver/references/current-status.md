@@ -1017,3 +1017,47 @@ The shared process audit returned 2: it listed W5's test tree and the W3
 formatter running concurrently with the audit. Both recorded W3 formatter
 PIDs were confirmed exited afterward. No W3 native runtime or campaign is
 left running; a globally clean audit is not claimed while peer work is active.
+
+## Windows Fabric and Win32 Paper — closing-menu review correction — 2026-11-12 UTC
+
+**Reviewed base:** `ad8b67c9720a00d7d8df4d27c2ca7436c78d6198`.
+**Tested implementation:** `36efc5a88dc507c626f2d29ac487cfc37e9e4bf3`.
+The coordinator's review accepted the scoped, non-activating tree query and
+conservative menu classification, and identified a closing-popup race in the
+legacy E2E adapter.
+
+The adapter now skips a tree read only when its typed WebDriver error is
+`no such window`, then continues checking other handles. Before reporting an
+empty, non-menu, or dialog-containing tree as an assertion, it refreshes the
+authoritative window list and confirms that handle is still present.
+Persistent unexpected windows still fail the check. Transport, provider,
+and stale-element errors still reject; no diagnostic event or input fallback
+is used.
+
+**Observed test-first:** `yarn test` in `apps\E2E` initially failed two new
+cases: a `no such window` read rejected, and an empty closing-menu tree
+reported an assertion. The retained log is
+`artifacts\desktop\w3-buildci\popup-race-red.log`.
+After the fix, all 14 adapter tests passed, including a vanished menu followed
+by a real unexpected window, empty/non-menu roots followed by disappearance,
+persistent unexpected roots, and unreadable still-listed windows.
+
+| Exact command                                                                                                   | Result                                        |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `yarn workspace @fluentui-react-native/e2e-testing build`                                                       | **Passed**.                                   |
+| `yarn workspace @fluentui-react-native/e2e-testing test`                                                        | **Passed:** 14 tests, zero skips or failures. |
+| `yarn workspace @fluentui-react-native/e2e-testing lint`                                                        | **Passed**.                                   |
+| `yarn oxfmt --write apps\E2E\src\common\nativeDesktop.ts apps\E2E\desktop-adapters.test.cjs apps\E2E\README.md` | **Passed**.                                   |
+| `yarn oxfmt --check`                                                                                            | **Passed**.                                   |
+| `git diff --check`                                                                                              | **Passed**.                                   |
+| `yarn markdown-link-check -c .github\markdown-link-check-config.json apps\E2E\README.md`                        | **Passed:** 19 links.                         |
+| `yarn change:check`                                                                                             | **Passed** after the implementation commit.   |
+
+This correction changes only the private E2E adapter, its focused tests, and
+related documentation; no native helper or public protocol changed. The
+existing driver patch changeset remains committed.
+Per coordinator instruction, the locked clean-cache aggregate, native
+contracts, GUI/physical runs, and push are **not run** in this segment.
+W1 retains the desktop campaign. W3 awaits its explicit grant for the final
+Fabric semantic case, both secondary physical clicks, and final native
+contracts/probe tests, then the clean-cache aggregate and publication.
