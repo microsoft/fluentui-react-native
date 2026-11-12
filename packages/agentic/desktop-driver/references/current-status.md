@@ -591,3 +591,17 @@ Raw evidence is under `artifacts/desktop/f10m/ci-regression/`.
 Positive AX-dependent ownership/observation contracts and actual macOS
 Storybook Fabric/Paper CI requalification remain pending, not passed; the
 other native acceptance gates above are unchanged.
+
+The final clean-cache aggregate at `a7c37b86a` passed **178 tasks**, with 0
+skipped, failed, pending or aborted, under the exclusive native-validation
+lock: `yarn clean-lage-cache && yarn lage buildci --concurrency 1`.
+It used `TF_BUILD=1`, project-local TMPDIR and the matching Git ceiling, with
+native-only overrides removed. The harness ledger records the full invocation.
+The first concurrency-4 attempt failed after 112 successful tasks with abrupt
+partial Storybook Jest output and no cause diagnostic. The unchanged isolated
+Storybook suite passed 344 with 4 skipped under that exact environment before
+the serialized aggregate retry. The first failure's cause is unestablished;
+no source or test waiver was applied. Logs are `buildci.log`,
+`storybook-buildci-environment.log` and `buildci-final.log` in the same artifact
+directory. Runtime source remains `5e360734e`; this portable aggregate does
+not qualify the still-pending positive native or renderer gates.

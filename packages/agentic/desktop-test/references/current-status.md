@@ -1281,3 +1281,38 @@ Logs and curated CI analysis are under
 `ci-analysis.json`. Actual macOS Storybook Fabric/Paper CI requalification at
 the fix is pending. Local positive AX/physical input, descendant, interrupted
 publication and Windows-native acceptance gates above remain open; keep draft.
+
+#### Final CI-regression aggregate
+
+The first clean-cache aggregate at documentation revision
+`a7c37b86abdfc3847824480300315cf88eebaf42` failed the Storybook test task
+after 112 successful tasks. Its output stopped after 13 passing Jest files,
+without an assertion, stack, summary or termination cause. The cause remains
+unestablished. The unchanged full Storybook suite then passed 344 with 4
+skipped under the identical aggregate environment; that reproduction is not
+a successful aggregate.
+
+A second clean-cache aggregate serialized package tasks to remove
+inter-package fixture/process overlap. Under the exclusive native-validation
+lock, the following invocation passed **178 tasks**, with 0 skipped, failed,
+pending or aborted, in 6m 12.39s:
+
+```sh
+env -u FURN_NATIVE_DRIVER_TEST \
+  -u FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY \
+  -u FURN_DESKTOP_DRIVER_CACHE_ROOT \
+  TMPDIR="$PWD/artifacts/desktop/f10m/ci-regression/buildci-tmp" \
+  GIT_CEILING_DIRECTORIES="$PWD/artifacts/desktop/f10m/ci-regression/buildci-tmp" \
+  TF_BUILD=1 \
+  bash -c 'set -euo pipefail; git rev-parse HEAD; git status --short; yarn clean-lage-cache && yarn lage buildci --concurrency 1'
+```
+
+No source or test waiver was applied between these runs. Serialization is
+the retry's isolation measure, not a proven diagnosis of the first failure.
+Logs: `artifacts/desktop/f10m/ci-regression/buildci.log`,
+`artifacts/desktop/f10m/ci-regression/storybook-buildci-environment.log`
+and `artifacts/desktop/f10m/ci-regression/buildci-final.log`.
+Runtime source remains the native-qualified `5e360734e`; subsequent changes
+record evidence only. This is portable repository validation, not positive
+AX or renderer qualification. Actual macOS Storybook Fabric/Paper CI and the
+other native acceptance gates remain pending; keep draft.
