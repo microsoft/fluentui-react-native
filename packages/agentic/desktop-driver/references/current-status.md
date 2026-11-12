@@ -1036,3 +1036,43 @@ build succeeded independently of this console limitation.
 - **Passed:** changed Markdown link checks, root `yarn oxfmt --check`,
   `yarn check-agent-instructions`, `git diff --check`, and
   `yarn change:check` after committing the changeset.
+
+### Environment-selected physical smoke review follow-up
+
+A focused review found that traversal received the raw optional smoke input,
+while the manifest and callback paths already resolved `DESKTOP_INPUT`.
+Consequently, `DESKTOP_INPUT=physical` without `--input` omitted window
+preparation. Source `eaab0b6781332ee8ef5054e54787033c6817d96e` now passes
+the existing `resolveWdioOptions` merge's effective input to traversal.
+The same resolver preserves explicit-flag precedence and input/click-mode
+validation. No geometry policy, native implementation, callback assertion,
+or accessible/compatibility/Windows sizing rule changed.
+
+- **Passed, test-first:** the new environment-only lifecycle case failed
+  before the fix (**1 failed / 76 passed**). The focused command
+  `yarn test src/cli/DesktopStorybookCli.test.ts src/cli/storyTraversal.test.ts src/config/wdio.test.ts src/cli/inputLane.test.ts`
+  then passed **114/114**, including environment-only physical selection,
+  explicit accessible precedence, existing validation, and no-resize lanes.
+- **Passed, package:** `yarn format`, `yarn lint`, `yarn build`, and ordinary
+  parallel `yarn test`; **23 suites / 355 passed / 4 skipped**.
+  The existing patch changeset now names environment-selected smoke input;
+  committed-changeset `yarn change:check` passed.
+- **Failed, single required plain aggregate:** locked
+  `yarn clean-lage-cache && yarn lage buildci`, with serial/native/input
+  overrides unset, reproduced the unchanged
+  `src/native/boundedCommand.test.ts` escalation fixture's **expected
+  `SIGKILL`, received `SIGTERM`** failure. The earlier baseline comparison
+  remains recorded above. No fixture, deadline, serial override, aggregate
+  retry, or second cache clear was used to conceal this known failure.
+- **Passed, cleanup:** all **50** still-settling aggregate processes drained
+  naturally under the same lock. The exact-worktree argv/CWD audit at
+  **23:30:20 UTC** found no owned survivors or unreadable live candidates;
+  cleanup issued no termination and the command released its lock.
+
+This environment-only fix is **portable-qualified, not newly native-qualified**.
+The explicit-`--input physical` Fabric evidence above belongs to
+`cc96a3a9dade18f373546f2a72edbf20a41e5461`, not this revision. The console
+remained declared locked; no GUI/physical run, privacy change, prompt, or
+unlock attempt was made. Detailed red/green, package, aggregate and cleanup
+records are in
+`artifacts/desktop/f16-macos-physical/review-env-input-20261112T232312Z/`.
