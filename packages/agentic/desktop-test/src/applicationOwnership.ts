@@ -128,7 +128,20 @@ export async function createDesktopApplicationHost(host: DesktopHost, options: D
         ...(typeof data?.processStartedAt === 'string' ? { processStartedAt: data.processStartedAt } : {}),
         ...(data?.launchKind === 'launch-services' || data?.launchKind === 'direct-child' ? { launchKind: data.launchKind } : {}),
       });
-      if (data?.applicationSettlement === 'exited') entry.uncertain = false;
+      if (!entry.lease) {
+        const effect = error && typeof error === 'object' && 'effect' in error ? error.effect : undefined;
+        const reportedProcess = data?.processId !== undefined || data?.processStartedAt !== undefined;
+        const mayHaveStarted =
+          reportedProcess ||
+          (data?.applicationSettlement !== undefined &&
+            data.applicationSettlement !== 'not-started' &&
+            data.applicationSettlement !== 'exited') ||
+          effect === 'applied' ||
+          effect === 'partial' ||
+          effect === 'unknown';
+        const notStarted = data?.applicationSettlement === 'not-started' && !reportedProcess;
+        entry.uncertain = owns && data?.applicationSettlement !== 'exited' && !notStarted && mayHaveStarted;
+      }
       try {
         publish(entry, {
           application,

@@ -129,6 +129,25 @@ func terminateUnleased(
   }
 }
 
+/// Only a causally captured launch identity grants cleanup authority. A survivor stays named and unsettled.
+func abandonedLaunch(processID: pid_t, startedAt: String?, launchKind: String, error: Error) -> Error {
+  let exited = terminateUnleased(processID: processID, startedAt: startedAt, bounds: .abandoned)
+  var data = (error as? HelperError)?.data ?? (error as? CancelledError)?.data ?? [:]
+  data["processId"] = Int(processID)
+  data["launchKind"] = launchKind
+  data["applicationSettlement"] = exited ? "exited" : "unknown"
+  if let startedAt { data["processStartedAt"] = startedAt }
+  if let cancellation = error as? CancelledError {
+    return CancelledError(effect: cancellation.effect, data: data)
+  }
+  return HelperError(
+    code: ErrorCode.launchFailed,
+    message: exited ? "The application launch failed; its exact process exited. \(error)" :
+      "The launch failed and the application process it started could not be proven exited.",
+    data: data
+  )
+}
+
 extension ApplicationIncarnation.Observation {
   var isGone: Bool {
     if case .gone = self {

@@ -143,17 +143,25 @@ cannot be combined with `leasePath`/`leaseNonce`, cannot authorize launch, and
 never grants termination authority. Existing Storybook lease files remain a
 separate, legacy identity path. Independent helpers hold a stable per-user
 exclusive lock for each exact application incarnation until its lease is
-released. Explicit app paths are authoritative; bundle-only launch rejects
+released. Lock contention never permits signalling another helper's application.
+Other lock failures after a proven launch use exact-incarnation cleanup and
+report `exited` only when that primary process is confirmed gone.
+Explicit app paths are authoritative; bundle-only launch rejects
 multiple distinct registered existing bundle paths rather than selecting one.
 
-A failed or cancelled macOS launch that has created a process reports its
-captured `processId`, `processStartedAt` when readable, `launchKind`, and
-`applicationSettlement: "exited" | "unknown"`. This metadata appears in
-`response.error.data` or `cancelled.data`. `exited` requires exact cleanup proof;
-an unreadable or surviving incarnation is `unknown`. A pending launch whose
+A failed or cancelled macOS launch reports
+`applicationSettlement: "not-started" | "exited" | "unknown"` in
+`response.error.data` or `cancelled.data`. `not-started` proves rejection before
+process creation or a completed LaunchServices failure with no application.
+`exited` requires exact cleanup proof; an unreadable or surviving incarnation is
+`unknown`. A process that was created is named by its captured `processId`,
+`processStartedAt` when readable, and `launchKind`. A pending launch whose
 LaunchServices callback has not arrived may have no process identity; callers
-must retain their pending acquisition rather than infer no effect. These
-failures may additionally include bounded `launchErrorDomain`, `launchErrorCode`,
+must retain their pending acquisition rather than infer no effect. Node also
+marks a dispatched launch `unknown` if its helper transport fails before a
+response. A legacy provider's ordinary no-data rejection is not evidence of a
+created process. These failures may additionally include bounded
+`launchErrorDomain`, `launchErrorCode`,
 `underlyingErrorDomain`, and `underlyingErrorCode` diagnostics, without arbitrary
 NSError user information. A callback returning both an error and a new process
 uses the same exact-incarnation cleanup path. These

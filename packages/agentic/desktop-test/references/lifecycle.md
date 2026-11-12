@@ -122,9 +122,12 @@ launch. An acquired resource adds its lease ID, native PID/start timestamp,
 lifetime, containment, and causal launch kind when the provider supplies them.
 These records appear in the workload claim alongside services and survive a
 failed cleanup. Publication failure prevents dispatch or fences an already
-dispatched launch. A failed/cancelled unleased launch stays unresolved unless the
-provider explicitly proves its exact process exited. Advisory exit events,
-duplicate lease IDs, a helper exit, and service replacement never settle it.
+dispatched launch. A failed/cancelled unleased launch settles when the provider
+proves it never started or its exact process exited. A legacy provider's ordinary
+no-data rejection does not imply a created application. Reported process identity,
+an unknown settlement, lost transport after dispatch, or completion after
+cancellation stays unresolved. Advisory exit events, duplicate lease IDs, a helper
+exit, and service replacement never settle an acquired or uncertain application.
 
 The `/application-ownership` leaf provides `captureDesktopApplicationIdentity`
 and `desktopApplicationIdentityDescriptor`. On macOS they require the native

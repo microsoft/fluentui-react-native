@@ -65,7 +65,8 @@ extension SelfTestRunner {
         unexpected.release()
         check(false, "two application owners cannot acquire the same exact incarnation")
       } catch {
-        check(true, "two application owners cannot acquire the same exact incarnation")
+        check((error as? HelperError)?.data?["reason"] as? String == "application-lock-busy",
+          "actual lock contention is distinguished from filesystem and descriptor failures")
       }
       first.release()
       let next = try ExactApplicationLock.acquire(processID: getpid(), startedAt: own.startedAt)

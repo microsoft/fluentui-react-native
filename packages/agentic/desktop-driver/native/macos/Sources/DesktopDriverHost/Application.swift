@@ -319,6 +319,27 @@ final class ApplicationManager {
   let commands = CommandJournal()
 
   func launch(_ params: JSONObject, token: CancellationToken) throws -> ApplicationLeaseRecord {
+    var dispatched = false
+    do {
+      return try acquireLaunchedApplication(params, token: token, didDispatch: { dispatched = true })
+    } catch {
+      var data = (error as? HelperError)?.data ?? (error as? CancelledError)?.data ?? [:]
+      if data["applicationSettlement"] == nil {
+        data["applicationSettlement"] = dispatched ? "unknown" : "not-started"
+      }
+      if let cancellation = error as? CancelledError {
+        throw CancelledError(effect: cancellation.effect, data: data)
+      }
+      if let failure = error as? HelperError {
+        throw HelperError(code: failure.code, message: failure.message, data: data, effect: failure.effect)
+      }
+      throw HelperError(code: ErrorCode.launchFailed, message: error.localizedDescription, data: data)
+    }
+  }
+
+  private func acquireLaunchedApplication(
+    _ params: JSONObject, token: CancellationToken, didDispatch: () -> Void
+  ) throws -> ApplicationLeaseRecord {
     let application = try requireObject(params["application"], "The launch request is missing its application descriptor.")
     if application["processIdentity"] != nil {
       try fail(ErrorCode.invalidParams, "An exact external application identity cannot authorize a launch.")
@@ -363,6 +384,7 @@ final class ApplicationManager {
           "The selected application bundle does not have the expected bundle identifier \"\(bundleIdentifier)\"."
         )
       }
+      didDispatch()
       let launched = try launchApplication(
         at: appURL, arguments: arguments, preexisting: preexisting, timeoutMilliseconds: launchTimeout, token: token
       )
@@ -388,6 +410,7 @@ final class ApplicationManager {
       } catch {
         try fail(ErrorCode.launchFailed, "Starting the application failed: \(error.localizedDescription)")
       }
+      didDispatch()
       let processID = process.processIdentifier
       guard let identity = ApplicationIncarnation.captureCausalIdentity(
         matchesProcess: { process.isRunning },
@@ -422,15 +445,9 @@ final class ApplicationManager {
       try fail(ErrorCode.launchFailed, "The application could not be resolved for launch.")
     }
 
-    let exclusion: ExactApplicationLock
-    do {
-      exclusion = try ExactApplicationLock.acquire(processID: running.processIdentifier, startedAt: startedAt)
-    } catch {
-      // Another helper may already control this process. Do not signal through its exclusion lock.
-      throw HelperError(code: ErrorCode.launchFailed, message: "The launched application could not be exclusively owned.",
-        data: ["processId": Int(running.processIdentifier), "processStartedAt": startedAt,
-          "launchKind": launchKind, "applicationSettlement": "unknown"])
-    }
+    let exclusion = try ExactApplicationLock.acquireLaunched(
+      processID: running.processIdentifier, startedAt: startedAt, launchKind: launchKind
+    )
     do {
       guard ApplicationIncarnation.classifyExact(
         recorded: startedAt, observed: ApplicationIncarnation.observeExact(running.processIdentifier)
@@ -462,26 +479,6 @@ final class ApplicationManager {
     } catch {
       throw abandonedLaunch(processID: running.processIdentifier, startedAt: startedAt, launchKind: launchKind, error: error)
     }
-  }
-
-  /// Ends the process a failed or cancelled launch started and returns the error to report. A process that will not
-  /// exit has no lease to keep it visible, so the failure names it instead of hiding the survivor.
-  private func abandonedLaunch(processID: pid_t, startedAt: String?, launchKind: String, error: Error) -> Error {
-    let exited = terminateUnleased(processID: processID, startedAt: startedAt, bounds: .abandoned)
-    var data = (error as? HelperError)?.data ?? (error as? CancelledError)?.data ?? [:]
-    data["processId"] = Int(processID)
-    data["launchKind"] = launchKind
-    data["applicationSettlement"] = exited ? "exited" : "unknown"
-    if let startedAt { data["processStartedAt"] = startedAt }
-    if let cancellation = error as? CancelledError {
-      return CancelledError(effect: cancellation.effect, data: data)
-    }
-    return HelperError(
-      code: ErrorCode.launchFailed,
-      message: exited ? "The application launch failed; its exact process exited. \(error)" :
-        "The launch failed and the application process it started could not be proven exited.",
-      data: data
-    )
   }
 
   /// A bare executable becomes a `NSRunningApplication` only when it registers with Launch Services, which can be
@@ -1262,7 +1259,7 @@ final class ApplicationManager {
     result.lock.unlock()
     if let error {
       let failure = error as NSError
-      var data: JSONObject = ["launchKind": "launch-services", "applicationSettlement": "unknown",
+      var data: JSONObject = ["launchKind": "launch-services", "applicationSettlement": application == nil ? "not-started" : "unknown",
         "launchErrorDomain": bounded(failure.domain, bytes: 160), "launchErrorCode": failure.code]
       if let underlying = failure.userInfo[NSUnderlyingErrorKey] as? NSError {
         data["underlyingErrorDomain"] = bounded(underlying.domain, bytes: 160)

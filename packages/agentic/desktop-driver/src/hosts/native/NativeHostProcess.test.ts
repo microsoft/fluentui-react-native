@@ -110,7 +110,7 @@ describe('NativeHostProcess mutation effects', () => {
   });
 
   test('preserves application settlement evidence from a cancelled launch', async () => {
-    const data = { processId: 123, processStartedAt: '2026-11-12T00:00:00.123456Z', applicationSettlement: 'unknown' };
+    const data = { processId: 123, processStartedAt: '2026-11-12T00:00:00.123456Z', applicationSettlement: 'unknown' } as const;
     const { host } = await startHost(() => undefined, {
       onCancel: (message, send) => send({ data, id: message.id, type: 'cancelled' }),
     });
@@ -118,6 +118,29 @@ describe('NativeHostProcess mutation effects', () => {
     const request = host.request('launch', {}, controller.signal);
     controller.abort();
     expect(await failureOf(request)).toMatchObject({ name: 'AbortError', data });
+    await host.dispose();
+  });
+
+  test('a lost dispatched launch response retains uncertainty even without a process identity', async () => {
+    const { host } = await startHost((_message, _send, control) => control.exit(1));
+    const failure = await failureOf(host.request('launch', {}));
+    expect(failure).toMatchObject({
+      code: 'host-exited',
+      data: { applicationSettlement: 'unknown' },
+      cause: expect.objectContaining({ code: 'host-exited' }),
+    });
+    await host.dispose();
+  });
+
+  test.each(['not-started', 'exited'] as const)('preserves a %s launch rejection without making it uncertain', async (settlement) => {
+    const { host } = await startHost((message, send) =>
+      send({
+        type: 'response',
+        id: message.id,
+        error: { code: 'launch-failed', message: 'Rejected launch.', data: { applicationSettlement: settlement } },
+      }),
+    );
+    expect(await failureOf(host.request('launch', {}))).toMatchObject({ data: { applicationSettlement: settlement } });
     await host.dispose();
   });
 

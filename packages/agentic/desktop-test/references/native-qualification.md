@@ -43,7 +43,8 @@ case requires explicit `FURN_NATIVE_PHYSICAL_INPUT_TEST=1` and effective native
 permissions; a skipped case does not qualify input exclusion.
 
 When Accessibility is unavailable, the non-positive safety subset can still
-qualify native OS-owner inspection and exact cleanup after rejected launch:
+qualify native OS-owner inspection, pre-spawn/LaunchServices rejection settlement
+and claim reuse, and exact cleanup after rejected launch:
 
 ```sh
 FURN_NATIVE_DRIVER_TEST=1 yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity|failed native'

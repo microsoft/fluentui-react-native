@@ -140,6 +140,81 @@ describe('neutral desktop application ownership', () => {
     expect(f.records.at(-1)?.disposal).toBe('failed');
   });
 
+  test.each(['macos', 'windows', 'win32'] as const)(
+    'a no-data %s launch rejection releases the claim for the next run',
+    async (endpoint) => {
+      const directory = fs.mkdtempSync(path.join(process.cwd(), '.application-claim-test-'));
+      const claimOptions = { directory, runId: 'failed-launch', targetId: 'fixture', targetInstanceId: 'fixture' };
+      try {
+        const claim = createDesktopWorkloadClaim(claimOptions);
+        const f = fixture();
+        f.native.endpoint = endpoint;
+        f.native.launch.mockRejectedValueOnce(new Error('launch rejected before creating an application'));
+        const configured = {
+          ...target,
+          endpoint,
+          platformName: endpoint === 'macos' ? 'macos' : 'windows',
+        } satisfies Omit<DesktopTarget, 'host'>;
+        const host = await createDesktopApplicationHost(f.host, {
+          ...f.options,
+          target: configured,
+          lifetime: 'session',
+          onResource: (record) => claim.updateResource(record),
+        });
+        await expect(host.launch({ ...configured, host })).rejects.toThrow('launch rejected');
+        await host.dispose();
+        expect(claim.record).toMatchObject({
+          state: 'active',
+          resources: [expect.objectContaining({ readiness: 'failed', disposal: 'settled' })],
+          unresolvedEffects: [],
+        });
+        claim.release();
+        expect(fs.existsSync(path.join(directory, 'interactive.lock'))).toBe(false);
+        const next = createDesktopWorkloadClaim({ ...claimOptions, runId: 'next-run' });
+        next.release();
+      } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+      }
+    },
+  );
+
+  test('an explicit not-started verdict settles an otherwise indeterminate launch rejection', async () => {
+    const f = fixture();
+    f.native.launch.mockRejectedValueOnce(
+      Object.assign(new Error('no installed application'), {
+        effect: 'unknown',
+        data: { applicationSettlement: 'not-started' },
+      }),
+    );
+    const host = await createDesktopApplicationHost(f.host, { ...f.options, lifetime: 'session' });
+    await expect(host.launch({ ...target, host })).rejects.toThrow('no installed application');
+    expect(f.records.at(-1)?.disposal).toBe('settled');
+    await host.dispose();
+  });
+
+  test.each([
+    { applicationSettlement: 'unknown' },
+    { applicationSettlement: 'unrecognized-verdict' },
+    { processId: owned.processId },
+    { processStartedAt: owned.processStartedAt },
+    { processId: owned.processId, applicationSettlement: 'not-started' },
+  ])('a launch that may have created a process remains fenced with evidence %p', async (data) => {
+    const f = fixture();
+    f.native.launch.mockRejectedValueOnce(Object.assign(new Error('launch interrupted'), { data }));
+    const host = await createDesktopApplicationHost(f.host, { ...f.options, lifetime: 'session' });
+    await expect(host.launch({ ...target, host })).rejects.toThrow('launch interrupted');
+    await expect(host.dispose()).rejects.toThrow(/did not settle/);
+    expect(f.records.at(-1)?.disposal).toBe('failed');
+  });
+
+  test('a launch that succeeded after cancellation remains uncertain without a returned lease', async () => {
+    const f = fixture();
+    f.native.launch.mockRejectedValueOnce(Object.assign(new Error('completed after cancellation'), { effect: 'applied' }));
+    const host = await createDesktopApplicationHost(f.host, { ...f.options, lifetime: 'session' });
+    await expect(host.launch({ ...target, host })).rejects.toThrow('completed after cancellation');
+    await expect(host.dispose()).rejects.toThrow(/did not settle/);
+  });
+
   test.each(['windows', 'win32'] as const)('names an uncontained %s application in the durable failed-cleanup claim', async (endpoint) => {
     const directory = fs.mkdtempSync(path.join(process.cwd(), '.application-claim-test-'));
     try {

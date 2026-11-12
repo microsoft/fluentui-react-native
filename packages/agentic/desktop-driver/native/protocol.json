@@ -25,7 +25,7 @@
     },
     "launchKind": ["launch-services", "direct-child"],
     "containment": ["uncontained", "external"],
-    "applicationSettlement": ["exited", "unknown"],
+    "applicationSettlement": ["not-started", "exited", "unknown"],
     "launchServicesErrorFields": {
       "launchErrorDomain": { "type": "string", "maxLength": 163 },
       "launchErrorCode": { "type": "integer" },

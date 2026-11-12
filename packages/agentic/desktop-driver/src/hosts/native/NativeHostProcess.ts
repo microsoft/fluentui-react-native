@@ -37,6 +37,7 @@ export type NativeHostRequestResult<T> = {
 type PendingRequest = {
   aborted: boolean;
   abortCleanup: () => void;
+  command: string;
   binary?: Uint8Array;
   binaryId?: string;
   reject(error: unknown): void;
@@ -265,6 +266,7 @@ export class NativeHostProcess extends EventEmitter<{
       const pending: PendingRequest = {
         aborted: false,
         abortCleanup: () => undefined,
+        command,
         reject,
         resolve: resolve as (value: NativeHostRequestResult<unknown>) => void,
       };
@@ -538,8 +540,17 @@ export class NativeHostProcess extends EventEmitter<{
       }
     }
     this.lifecycle = 'closed';
-    for (const [id] of this.pending) {
-      this.rejectPending(id, failure);
+    for (const [id, pending] of this.pending) {
+      if (pending.command === 'launch') {
+        const launchFailure = new NativeDriverError(failure instanceof NativeDriverError ? failure.code : 'host-failed', failure.message, {
+          ...(failure instanceof NativeDriverError ? failure.data : undefined),
+          applicationSettlement: 'unknown',
+        });
+        launchFailure.cause = failure;
+        this.rejectPending(id, launchFailure);
+      } else {
+        this.rejectPending(id, failure);
+      }
     }
     if (this.helloMessage) {
       try {

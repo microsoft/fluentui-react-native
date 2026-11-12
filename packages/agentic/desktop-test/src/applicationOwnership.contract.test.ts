@@ -172,6 +172,43 @@ nativeTest('kernel owner identity inspects the real claim as live without wall-c
   }
 });
 
+nativeTest('failed native pre-spawn and rejected LaunchServices launches release claims for subsequent workloads', async () => {
+  const descriptors: NativeDesktopApplicationDescriptor[] = [
+    application({ processIdentity: { processId: process.pid, processStartedAt: '2026-11-12T00:00:00.123456Z' } }),
+    application({ executablePath: path.join(directory, 'missing-executable'), bundleIdentifier: undefined }),
+    application({ executablePath: undefined, bundleIdentifier: `com.microsoft.furn.missing.${path.basename(directory)}` }),
+    application({ executablePath: path.join(directory, 'Missing.app'), bundleIdentifier: undefined }),
+  ];
+  for (const [index, descriptor] of descriptors.entries()) {
+    const claimOptions = {
+      directory: path.join(directory, `rejected-launch-${index}`),
+      runId: 'rejected-launch',
+      targetId: target.id,
+      targetInstanceId: target.id,
+    };
+    const claim = createDesktopWorkloadClaim(claimOptions);
+    const host = await createDesktopApplicationHost(nativeHost(descriptor), {
+      target,
+      lifetime: 'session',
+      resourcePrefix: `rejected-launch-${index}`,
+      onResource: (resource) => claim.updateResource(resource),
+    });
+    await withCleanup(
+      async () => {
+        await expect(host.launch({ ...target, host })).rejects.toMatchObject({
+          data: { applicationSettlement: 'not-started' },
+        });
+      },
+      () => host.dispose(),
+    );
+    expect(claim.record.unresolvedEffects).toEqual([]);
+    claim.release();
+    expect(fs.existsSync(path.join(claimOptions.directory, 'interactive.lock'))).toBe(false);
+    createDesktopWorkloadClaim({ ...claimOptions, runId: 'subsequent-workload' }).release();
+    evidence.push({ case: 'rejected-launch-claim-release', state: 'passed', descriptorCase: index, settlement: 'not-started' });
+  }
+});
+
 nativeTest('supervisor launch survives two real sessions, records native owner/application identity, and closes exactly', async () => {
   const { owner, lockDirectory, reporter } = await supervisor('retained', application(), 'supervisor');
   const probe = createMacOSApplicationProbe({ artifact });

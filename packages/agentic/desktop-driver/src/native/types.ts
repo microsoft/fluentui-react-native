@@ -86,6 +86,13 @@ export type NativeHostRequest = {
   type: 'request';
 };
 
+export type NativeApplicationSettlement = 'not-started' | 'exited' | 'unknown';
+
+type NativeHostFailureData = Record<string, unknown> & {
+  /** Launch acquisition settlement, distinct from an input mutation effect. */
+  applicationSettlement?: NativeApplicationSettlement;
+};
+
 export type NativeHostResponse = {
   binary?: {
     height?: number;
@@ -96,7 +103,7 @@ export type NativeHostResponse = {
   };
   error?: {
     code: string;
-    data?: Record<string, unknown>;
+    data?: NativeHostFailureData;
     /** What a failed mutating command left behind. Absent means the provider cannot rule an effect out. */
     effect?: MutationEffect;
     message: string;
@@ -122,7 +129,7 @@ export type NativeHostCancelled = {
   /** What the cancelled mutating command left behind. Absent means the provider cannot rule an effect out. */
   effect?: MutationEffect;
   /** Provider lifecycle settlement evidence, including an unleased application that a cancelled launch created. */
-  data?: Record<string, unknown>;
+  data?: NativeHostFailureData;
   id: string;
   type: 'cancelled';
 };

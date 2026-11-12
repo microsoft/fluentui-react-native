@@ -42,10 +42,38 @@ final class ExactApplicationLock: @unchecked Sendable {
       try fail(ErrorCode.attachFailed, "The application exclusion record is not an owner-only regular file.")
     }
     guard flock(fd, LOCK_EX | LOCK_NB) == 0 else {
+      let failure = errno
       close(fd)
-      try fail(ErrorCode.attachFailed, "Another desktop service controls this exact application incarnation.")
+      throw lockFailure(failure)
     }
     return ExactApplicationLock(fd)
+  }
+
+  static func lockFailure(_ error: Int32) -> HelperError {
+    if error == EWOULDBLOCK {
+      return HelperError(code: ErrorCode.attachFailed,
+        message: "Another desktop service controls this exact application incarnation.",
+        data: ["reason": "application-lock-busy"])
+    }
+    return HelperError(code: ErrorCode.attachFailed, message: "The exact application exclusion lock failed.",
+      data: ["reason": "application-lock-unavailable", "errno": Int(error)])
+  }
+
+  /// A proven launch is cleaned up on local lock failures, but never signalled through another helper's lock.
+  static func acquireLaunched(
+    processID: pid_t, startedAt: String, launchKind: String,
+    acquire: (pid_t, String) throws -> ExactApplicationLock = ExactApplicationLock.acquire
+  ) throws -> ExactApplicationLock {
+    do {
+      return try acquire(processID, startedAt)
+    } catch {
+      if (error as? HelperError)?.data?["reason"] as? String == "application-lock-busy" {
+        throw HelperError(code: ErrorCode.launchFailed, message: "The launched application could not be exclusively owned.",
+          data: ["processId": Int(processID), "processStartedAt": startedAt,
+            "launchKind": launchKind, "applicationSettlement": "unknown"])
+      }
+      throw abandonedLaunch(processID: processID, startedAt: startedAt, launchKind: launchKind, error: error)
+    }
   }
 
   func release() {
