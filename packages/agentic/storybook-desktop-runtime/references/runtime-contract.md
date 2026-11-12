@@ -79,9 +79,36 @@ overrides higher priority than defaults.
 ## Metro and source ownership
 
 `config/metro.cjs` composes resolver behavior and generates the runtime
-polyfill when evaluated. Treat loading it as a write-capable operation. Tests
-and diagnostics should use the package's owning app scripts and inspect only
-the generated files they need.
+data module when evaluated without a driver manifest. Treat loading it as a
+write-capable operation; config tests must use controlled fixture roots.
+Diagnostics should use the package's owning app scripts and inspect only the
+generated files they need.
+
+Driver-backed Metro does not generate a credential-bearing public file.
+The parent supplies `STORYBOOK_DRIVER_HANDOFF` and the canonical schema locator
+`STORYBOOK_GENERATED_CONTRACT`; the integration package owns these strict,
+versioned contracts without adding runtime/UI peers to the CLI. Metro rejects
+unknown generated fields and mismatched manifest/module hashes before using
+the owner's private bridge-only module. It never uses the generated helper
+path or receives the independent application-attachment nonce. The parent
+publishes credentials through OS private storage, not default-mode files.
+On Windows the projection still contains the bridge nonce and remains in the
+helper-selected protected per-user namespace. That location can be on `C:`
+while the workspace is on `D:`; Metro's file map cannot represent this
+cross-volume source. Only the package's constant workspace stub enters that
+file map. A custom `transformerPath` delegates to the existing Metro worker,
+substituting the independently pinned private data buffer for that stub.
+The worker rechecks its digest before compilation, and its cache key includes
+the projection digest so a new bridge nonce cannot reuse a stale transform.
+Existing transforms, minification, and workspace watch roots are preserved.
+No Windows private-source watch folder or public generated credential copy is
+created. As before, the bridge nonce becomes application-bundle data, but the
+attach credential is never supplied to Metro. macOS retains its existing
+private-path resolution and watching behavior.
+The generated module's only statement is `export default <JSON>`; the constant
+runtime loader imports it through Metro's resolver instead of embedding values
+in executable polyfill source. The old global instance remains a compatibility
+fallback for existing app-owned polyfills.
 
 React Native platform variations belong in platform-specific files. Build and
 test through the consuming Storybook workspace for the affected endpoint.

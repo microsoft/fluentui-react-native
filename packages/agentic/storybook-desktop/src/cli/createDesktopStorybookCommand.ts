@@ -92,6 +92,7 @@ export function createDesktopStorybookCommand(options: CreateDesktopStorybookCom
         return new DesktopStorybookCli(config, {
           buildNativeDriver: options.buildNativeDriver,
           runner: options.runner,
+          createPrivateStorage: options.createPrivateStorage,
           createStoryManifest: options.createStoryManifest,
           fetch: options.fetch,
           output: options.output,
@@ -316,7 +317,8 @@ export async function runDesktopStorybookCli(argv: readonly string[] = process.a
       verbose: program.opts<{ verbose?: boolean }>().verbose,
       onFatal: (error) => options.services?.fail(error),
     });
-    if (!session.delegated && ['driver', 'smoke'].includes(action.name())) releaseClaim = claimDesktopWorkload(session.reporter.runId);
+    if (!session.delegated && ['driver', 'smoke'].includes(action.name()))
+      releaseClaim = await claimDesktopWorkload(session.reporter.runId);
     options.reporter = session.reporter;
     if (normalized.deprecated) {
       if (reporterMode === 'json' || reporterMode === 'ndjson') {

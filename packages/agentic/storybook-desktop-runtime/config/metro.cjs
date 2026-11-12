@@ -1,10 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
 const { makeMetroConfig } = require('@rnx-kit/metro-config');
 const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
 const { withStorybook } = require('@storybook/react-native/withStorybook');
 
 const safeAreaStub = path.resolve(__dirname, 'react-native-safe-area-context.cjs');
+const runtimeInstanceStub = path.resolve(__dirname, 'runtime-instance.cjs');
 
 function resolvePlatformModule(moduleName, platform) {
   if (platform !== 'win32') {
@@ -27,13 +29,17 @@ function createDesktopStorybookMetroConfig({ configPath }) {
     throw new TypeError('createDesktopStorybookMetroConfig requires an app-owned Storybook configPath.');
   }
 
-  const runtimeModulePath = writeRuntimeInstanceModule(path.dirname(configPath));
+  const projection = writeRuntimeInstanceModule(path.dirname(configPath));
+  const runtimeModulePath = projection.path;
   const symlinkResolver = MetroSymlinksResolver({
     resolver: 'oxc-resolver',
   });
   const config = makeMetroConfig({
     resolver: {
       resolveRequest: (context, moduleName, platform) => {
+        if (path.relative(path.resolve(path.dirname(context.originModulePath), moduleName), runtimeInstanceStub) === '') {
+          return { type: 'sourceFile', filePath: runtimeModulePath };
+        }
         // Storybook's path-based lite-mode mock does not recognize Yarn's virtual pnpm paths.
         if (moduleName === '@storybook/react-native-ui' || moduleName.startsWith('@storybook/react-native-ui/')) {
           return { type: 'empty' };
@@ -52,69 +58,68 @@ function createDesktopStorybookMetroConfig({ configPath }) {
       unstable_allowRequireContext: true,
     },
   });
+  if (!projection.windows) {
+    config.watchFolders = [...new Set([...(config.watchFolders || []), path.dirname(runtimeModulePath)])];
+  }
 
   const storybookConfig = withStorybook(config, {
     configPath,
     liteMode: true,
   });
-  const getPolyfills = storybookConfig.serializer?.getPolyfills;
-
-  return {
-    ...storybookConfig,
-    serializer: {
-      ...storybookConfig.serializer,
-      getPolyfills: (...args) => [...(getPolyfills?.(...args) ?? []), runtimeModulePath],
-    },
-  };
+  if (!projection.windows) return storybookConfig;
+  // Keep the bridge nonce private, but never send a cross-volume source path through Metro's file map.
+  return require('./runtime-transformer.cjs').withPrivateRuntimeProjection(storybookConfig, {
+    digest: projection.digest,
+    modulePath: runtimeInstanceStub,
+    sourcePath: runtimeModulePath,
+  });
 }
 
 function writeRuntimeInstanceModule(projectRoot) {
+  if (process.env.STORYBOOK_DRIVER_MANIFEST) {
+    // The parent publishes this bridge-only module through owner-private OS storage. Metro must never copy the attach
+    // credential (or trust a helper path) from an editable generated manifest.
+    if (!process.env.STORYBOOK_GENERATED_CONTRACT || !path.isAbsolute(process.env.STORYBOOK_GENERATED_CONTRACT)) {
+      throw new Error('Desktop Storybook Metro requires the trusted parent generated-contract locator.');
+    }
+    const { parseDriverManifest, parseHandoff, sameGeneratedPath } = require(process.env.STORYBOOK_GENERATED_CONTRACT);
+    const contents = fs.readFileSync(process.env.STORYBOOK_DRIVER_MANIFEST, 'utf8');
+    const manifest = parseDriverManifest(JSON.parse(contents));
+    const handoff = parseHandoff(JSON.parse(process.env.STORYBOOK_DRIVER_HANDOFF || 'null'));
+    if (
+      createHash('sha256').update(contents).digest('hex') !== handoff.manifestDigest ||
+      !sameGeneratedPath(handoff.runtimeModulePath, path.join(manifest.credentials.root, manifest.credentials.runtimeModule))
+    ) {
+      throw new Error('Desktop Storybook manifest does not match the trusted parent handoff.');
+    }
+    if (
+      !fs.statSync(handoff.runtimeModulePath).isFile() ||
+      createHash('sha256').update(fs.readFileSync(handoff.runtimeModulePath)).digest('hex') !== handoff.runtimeModuleDigest
+    ) {
+      throw new Error('Desktop Storybook runtime module does not match the trusted parent handoff.');
+    }
+    return {
+      digest: handoff.runtimeModuleDigest,
+      path: handoff.runtimeModulePath,
+      windows: manifest.endpoint === 'windows' || manifest.endpoint === 'win32',
+    };
+  }
   const generatedDirectory = path.join(projectRoot, 'storybook-desktop.generated');
   const runtimeModulePath = path.join(generatedDirectory, 'runtime-instance.js');
   const storybookPort = readPort(process.env.STORYBOOK_WS_PORT, 7007);
   const instanceId = process.env.FURN_STORYBOOK_INSTANCE_ID || 'default';
-  const driverManifest = readDriverManifest(process.env.STORYBOOK_DRIVER_MANIFEST);
   const runtimeInstance = {
     instanceId,
     storybookPort,
-    ...(driverManifest
-      ? {
-          bridgeNonce: driverManifest.bridgeNonce,
-          endpoint: driverManifest.endpoint,
-          platformManifestDigest: driverManifest.platformManifestDigest,
-          portablePlanDigest: driverManifest.portablePlanDigest,
-          targetId: driverManifest.targetId,
-          testIDPrefix: driverManifest.testIDPrefix,
-        }
-      : {}),
   };
-  const content = `globalThis.__FURN_DESKTOP_STORYBOOK_INSTANCE__ = Object.freeze(${JSON.stringify(runtimeInstance)});\n`;
+  const content = `export default ${JSON.stringify(runtimeInstance)};\n`;
 
   fs.mkdirSync(generatedDirectory, { recursive: true });
   if (!fs.existsSync(runtimeModulePath) || fs.readFileSync(runtimeModulePath, 'utf8') !== content) {
     fs.writeFileSync(runtimeModulePath, content);
   }
 
-  return runtimeModulePath;
-}
-
-function readDriverManifest(manifestPath) {
-  if (!manifestPath) {
-    return undefined;
-  }
-  if (!fs.existsSync(manifestPath)) {
-    throw new Error(`Desktop Driver manifest does not exist at ${manifestPath}.`);
-  }
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (
-    manifest.schemaVersion !== 2 ||
-    !manifest.nativeDriver ||
-    !manifest.application ||
-    typeof manifest.application.leasePath !== 'string'
-  ) {
-    throw new Error(`Unsupported Desktop Driver manifest schema "${manifest.schemaVersion}".`);
-  }
-  return manifest;
+  return { path: runtimeModulePath, windows: false };
 }
 
 function readPort(value, fallback) {

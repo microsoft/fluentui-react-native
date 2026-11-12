@@ -68,7 +68,7 @@ did not retain a portable raw-report locator; do not imply otherwise.
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | macOS           | Live failed-cleanup and service-restart cases; Paper separately; supervisor death with Metro/channel/helper survivors; exact attached-app preservation.                                                                                                                                                            |
 | Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent` after the idle-CLI fix; interactive input/capture rerun; naming launched (especially uncontained packaged) apps in the claim.                                                                    |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy, manifest provenance and separate nonces.                                                                                                                                                                                |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits.                                  |
 | Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. The workload claim records a Node.js-clock start time, so it needs a helper-described start time before claim inspection can prove a live owner or a reused PID. |
 | Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                              |
 | Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                            |
@@ -752,3 +752,277 @@ not physical Ctrl+C. Both owned app/service processes exited, the recorded
 ports were free, and the per-user claim and default descriptor were absent.
 The separate `serve --agent` interrupt limitation above is fixed but not yet
 requalified on Windows.
+
+## F6 generated manifest provenance — 2026-11-12
+
+Implementation source: `efd6dadeda87344911fb4000fe293c686c678602`, with
+resolved-case compatibility in `fa0681635` and the awaited shared workload
+claim in `a5de740f01ca025bf548a923ae4561b36fc9872b`.
+Generated driver manifests are strict version 3 and contain no secrets.
+Version-1 private credentials use independent bridge and application attachment
+nonces. The owner-private runtime module contains only bridge data and a
+data-only `export default` statement. The parent's independent handoff pins
+manifest/credential/runtime hashes and the resolved helper; the actual channel
+child validates that binding and re-verifies the executable before a helper
+can spawn. Metro receives the canonical schema locator from trusted process
+configuration, not from editable generated files. Channel lifecycle placement
+and application lease ownership have not moved.
+
+Review fixes route Windows/Win32 smoke lease publication, replacement, and
+cleanup through the trusted Node helper and OS private-storage adapter;
+PowerShell receives only a digest receipt. Smoke control now uses the strict
+shared version-3 parser. Publication resolves the existing generated directory
+once before opening private storage, supporting symlinked projects and macOS
+`/var` aliases while retaining later fail-closed ancestor validation and
+actionable diagnostics.
+
+**Portable/local boundary checks:** the initial 364-test integration result
+used a project-local temporary directory and did not qualify stock macOS
+temporary paths. Review exposed that gap; those counts are superseded by the
+default-`TMPDIR` review validation below. Runtime format, lint, build, and all
+33 tests pass with the default temporary directory. The driver package passed
+format, lint, build, and 1,221 portable tests with 66 skips; focused private
+storage tests passed 65 with ten platform skips.
+The reviewed integration package passes format, lint, build, and 379 tests
+with four Windows-only skips. Its focused generated-manifest, lease, and real
+WDIO-runner contract selection passed 38 tests, including the actual v3 smoke
+control path. The ledger-owning harness passes format, lint, build, and
+380 tests with one skip; its claim-sensitive tests ran under the shared lock.
+These review runs used the default macOS `TMPDIR`, without an override.
+The channel-child rejection fixture now canonicalizes its temporary parent
+too, ensuring it reaches helper/hash refusal instead of an alias-path error.
+Evidence: `apps/storybook/artifacts/f6/review-{driver-focused,driver-test,integration-focused,integration-final,runtime,harness}.log`.
+Controlled Metro fixtures cover missing trust inputs, unknown fields, and
+manifest/runtime tampering. Actual channel-child fixtures reject substituted
+helper path/hash, helper bytes, and unknown fields before listening or spawning.
+The real macOS private-storage adapter round-trips the records with directory
+mode `0700` and file mode `0600` and rejects a permissive credential mode.
+
+**Pre-review native helper checks:** on macOS 27.2.1 arm64, the locked
+`FURN_NATIVE_DRIVER_TEST=1 yarn workspace
+@fluentui-react-native/desktop-driver test --runInBand` run passed 1,240 tests;
+47 platform/capability tests were skipped (75 suites passed, six skipped).
+Evidence: `apps/storybook/artifacts/f6/native-contract.log`. The explicitly
+built helper uses the stable `FURN Desktop Driver Development` identity;
+`doctor --platform macos --permissions` reported ready, unlocked/on-console,
+and Screen Recording preflight true, but Accessibility and PostEvent preflight
+false. No permission prompts, privacy changes, or TCC resets were requested.
+The native consumer runs below must not be interpreted as passed from that
+helper readiness result.
+
+**Native consumer preparation:** Fabric bundle passed
+(`apps/storybook/artifacts/f6/bundle-fabric.log`). Initial Fabric prep failed
+because CocoaPods called `JSON.fast_generate` after Ruby selected JSON 3.1.
+Selecting the already installed JSON 2.18 through a worktree-local Ruby
+preload, without installing or modifying shared tools, made prep pass
+(`prep-fabric-json2.log`, run `8df5c79a-9618-423d-b65d-e9828644a75b`).
+The first Fabric smoke exposed rejection of the extractor's legitimate
+resolved `inputSource` metadata; `fa0681635` fixes it and adds declared/derived
+descriptor regressions while preserving unknown-field refusal.
+
+**Fabric native consumer: blocked, not passed.** The corrected smoke built and
+launched the app, started the verified channel, and reached authenticated
+bridge epoch recording. Native attach then reported Accessibility
+`apiDisabled` (`-25211`), and session creation failed because the target exposed
+no supported click input mode. No stories or tests executed.
+Evidence: `apps/storybook/artifacts/f6/smoke-fabric-resolved-options.log` and
+`apps/storybook/artifacts/desktop/65fb216f-89ee-43db-86a6-333b3d91331e/run.json`.
+The harness's AppleEvent cleanup also timed out (`-1712`); its leftover app
+process was verified against this worktree's executable, terminated by that
+exact PID only, and confirmed gone. No privacy workaround was attempted.
+
+**Paper native consumer: blocked, not passed.** Paper bundle and prep passed
+with the same existing-JSON-2 selection (`bundle-paper.log`, run
+`3c281fb3-eb3a-4125-a189-86ced929d6ad`; `prep-paper.log`, run
+`9b575663-fa72-4625-9f09-b745bfa1e83e`). Paper smoke also built and launched
+the app and reached bridge epoch recording, then failed on Accessibility
+`apiDisabled` and no supported click input mode. Zero tests executed.
+Evidence: `apps/storybook/artifacts/f6/smoke-paper.log` and
+`apps/storybook/artifacts/desktop/cfab6e50-9b38-45d3-b114-05b3ea995037/run.json`.
+Its AppleEvent cleanup timed out as well; the exact worktree-owned leftover
+app PID was verified, terminated, and confirmed gone. Positive Fabric/Paper
+traversal and authored-case qualification remain pending an authorized
+Accessibility/PostEvent-capable host.
+
+**Reviewed repository checks:** source `ffb4944db` passed all 90
+`yarn lage test-links --verbose --grouped` tasks. After `yarn clean-lage-cache`,
+the locked `TF_BUILD=1 yarn lage buildci --concurrency 4` passed all 178 tasks
+with the default macOS `TMPDIR`. The existing test wrapper uses `TF_BUILD`
+only to run Jest in-band; it does not skip agentic tests. Evidence:
+`apps/storybook/artifacts/f6/review-links.log` and `review-buildci.log`.
+The Accessibility-blocked macOS consumer smoke was not repeated for review.
+
+**First PR CI follow-up (2026-11-12):** run `43145388693` on
+`2739349a3` exposed five Linux CLI fixture failures and both Win32 smoke
+lanes refusing private storage before any stories ran. The Linux cause is
+confirmed: the command factory dropped the injected `createPrivateStorage`
+adapter. It now forwards that option, and platform selection explicitly
+supports macOS/Windows while other production credential paths fail closed.
+Portable contracts inject storage and simulate all three platform branches.
+
+The Win32 logs retained only the generic unsafe-storage message, not the
+adapter's non-enumerable refusal reason; the exact native refusal category
+cannot be recovered from that evidence. Native inspection confirms that the
+workspace root was checked before creation and ancestor grants allowing
+untrusted child replacement are refused. Unsafe hosted-workspace ancestry
+is therefore an inferred cause, not a confirmed refusal category.
+Windows publication now asks the verified helper for its OS-selected per-user
+known-folder root and opens a deterministic, independently protected child
+namespace for the canonical generated directory. Reading rederives that
+namespace only after verifying the parent handoff and helper. No environment
+path, editable manifest root, relaxed ACL, or root repair chooses authority.
+Storybook now surfaces the bounded native refusal token. Metro retains its
+workspace roots; this initial fix also watched the private runtime projection,
+which the subsequent CI run exposed as incompatible with cross-volume Windows
+workspaces.
+
+The separate Windows setup job failed four native build/handshake/UIA
+timeout cases, but its existing Windows private-storage native contracts
+passed. This branch does not change Windows helper build, resolution,
+handshake, C++, UIA, or fixture code; setup runs before Storybook publication.
+Runner flakiness is an inference, not a confirmed explanation. The next
+same-branch CI run passed setup, supporting that inference; no timeout or
+native-helper behavior was changed.
+
+**CI-fix portable validation (default `TMPDIR`):** driver format/lint/build/test
+passed (1,222 tests; 66 skipped); Storybook integration passed (386; 4 skipped);
+runtime passed (34). The new contracts cover OS dispatch, helper-selected
+project isolation, trust-before-helper ordering, changed-root and tamper
+refusal, protected child calls, and outside-workspace Metro resolution.
+Evidence: `apps/storybook/artifacts/f6/ci-fix-{driver,integration,runtime}.log`.
+These simulated-platform results are not Windows ACL qualification.
+
+**CI-fix repository validation:** source `17032203b` passed all 178
+`TF_BUILD=1 yarn lage buildci --concurrency 4` tasks after
+`yarn clean-lage-cache`; both commands held the shared native lock and used
+the default `TMPDIR`. Links passed all 90 tasks. Repository lint, instruction,
+changeset, and whitespace checks passed. Evidence:
+`apps/storybook/artifacts/f6/ci-fix-buildci.log` and `ci-fix-links.log`.
+The Accessibility-blocked macOS consumer smoke was not repeated.
+
+**Second PR CI follow-up:** run `43150784347` on `ca27c1b0b` passed JS PR,
+all macOS lanes, Windows/Win32 PR, and Windows native-helper setup. All three
+Windows Fabric / Win32 Paper Storybook lanes opened the revised protected
+per-user namespace, then failed before smoke during Metro bundling. The
+workspace was on `D:` and private projection on `C:`; Metro's relative-path
+file map recombined the absolute cross-volume result into `D:\C:\...`.
+This confirms the new namespace works on the hosted runner, not that the
+consumer flow is qualified.
+
+The bridge projection contains the bridge nonce, so it remains protected.
+Windows/Win32 Metro now indexes only the constant workspace stub and supplies
+the pinned private buffer through its supported custom-transformer hook,
+delegating compilation/minification to the consumer's original worker. The
+worker rechecks the digest, and its cache key binds that digest to avoid
+stale nonce transforms. No cross-volume private watch folder or public
+generated source copy is created. macOS private-path behavior is unchanged.
+Windows namespace/path comparisons normalize drive letters, casing, and
+separators without replacing the independent byte-digest trust checks.
+
+**Cross-volume portable evidence:** controlled fixtures cover a `C:` private
+source with a `D:` workspace, case/drive aliases, a wrongly located stub,
+unchanged watch roots, digest tampering, nonce cache invalidation, and
+unrelated-module delegation. The actual consumer Metro worker/Babel/minifier
+also compiled both Windows targets. A bounded full Metro file-map/worker-farm
+fixture built minified Windows and Win32 bundles with the private source
+explicitly excluded from the file map. These JavaScript checks are not native
+Windows qualification. Evidence:
+`apps/storybook/artifacts/f6/crossdrive-real-worker.log` and
+`crossdrive-real-bundle-final.log`.
+
+**Cross-volume package validation (default `TMPDIR`):** format/lint/build/test
+passed for the driver (1,222 tests; 66 skipped), Storybook integration
+(387; 4 skipped), and runtime (37). The final transformer cache-key change
+also passed the 11 controlled Metro cases. Knip now explicitly includes the
+Metro config/worker entrypoints; repository lint, instruction integrity,
+changesets, whitespace, and all 90 link tasks passed. Evidence:
+`apps/storybook/artifacts/f6/crossdrive-{desktop-driver,storybook-desktop,storybook-desktop-runtime}.log`,
+`crossdrive-final-format.log`, `crossdrive-repo-checks.log`, and
+`crossdrive-repo-safeguards.log`.
+
+**Cross-volume repository validation:** source `e760a36de` passed all 178
+`TF_BUILD=1 yarn lage buildci --concurrency 4` tasks after
+`yarn clean-lage-cache`. Both commands held the shared native lock and used
+the default `TMPDIR`; no native smoke or privacy-setting change was repeated.
+Evidence: `apps/storybook/artifacts/f6/crossdrive-buildci.log`.
+
+**Windows/Win32 qualification: sufficient for F6's changed paths.**
+[Run 43156299266](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266)
+passed on source `58ec7ab4fb7ce6e449d0e351ecb02352bf88f319` on
+2026-11-12. Full job logs and the uploaded terminal `run.json` reports agree:
+
+| Lane / job                                                                                                                               | Full story index rendered | Authored tests                        | Aggregate                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------- | ---------------------------------------------------- |
+| Windows Fabric accessible / [130976919836](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976919836) | 215/215                   | 40/40 passed                          | 255 selected, executed, and passed                   |
+| Win32 Paper accessible / [130976919943](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976919943)    | 188/188                   | 45/45 passed                          | 233 selected, executed, and passed                   |
+| Win32 Paper physical / [130976920038](https://github.com/microsoft/fluentui-react-native/actions/runs/43156299266/job/130976920038)      | 188/188                   | 100 passed; 1 quarantined unsupported | 289 selected; 288 executed and passed; 1 unsupported |
+
+All three reports have zero failed, skipped, incomplete, retried, or flaky
+tests and zero groups not run. Each navigation result has a distinct story
+ID and passed; the render totals match the complete runtime index, not an
+early-stop subset. The physical lane's existing #4373 quarantine is not a
+pass or an F6 failure.
+
+The five required paths are exercised in **each** lane. The successful
+guarded execution establishes the mandatory checks below; these checks do
+not emit separate success messages or upload secret records:
+
+1. **Version-3 control:**
+   `packages/agentic/storybook-desktop/config/storybook-control.cjs` uses the strict shared
+   generated-contract parser before driver traversal and authored tests.
+   The rendered-story and authored-test results above therefore cross the
+   v3 gate in all three lanes.
+2. **Trusted helper verification:** each log records native Storybook/WebDriver
+   readiness before traversal. The channel child's
+   `packages/agentic/storybook-desktop/config/server.cjs`
+   requires the inherited parent handoff and awaits `readDriverManifest`,
+   which checks its independent byte/helper binding and calls
+   `verifyNativeDriverArtifact` before opening Windows private storage or
+   starting the native service. Readiness plus completed native traversal
+   demonstrates this guarded spawn path, not merely parent-side resolution.
+3. **Protected-DACL lease lifecycle:** both PowerShell scripts require a
+   successful trusted Node publication and digest receipt before control,
+   and propagate lease-helper cleanup failures. Successful script completion
+   exercises publication, native consumption, and receipt-checked cleanup in
+   all lanes. Windows Fabric additionally stops/relaunches the app between
+   its stories/tests phases and replaces the lease using the prior receipt;
+   the Win32 lanes use one app incarnation. The Windows job also passed the
+   real NTFS `privateStorage.contract.test.ts` (log line 436), including
+   exclusive publication/removal and refusal of permissive root/record ACLs,
+   junctions, hard links, and replaced roots. This is native boundary
+   evidence, not portable mock coverage or an independent post-run ACL dump.
+4. **Private runtime resolution:** all three logs finish writing the minified
+   Windows/Win32 bundle before native startup. On these hosted runners the
+   workspace is on `D:` and the protected per-user projection is on `C:`.
+   The Windows runtime transformer must read and hash-check that private
+   buffer before delegating the workspace stub to Metro's original worker;
+   the subsequent authenticated render confirms the resulting bundle works.
+5. **Live bridge authentication:** successful native story selections require
+   `StorybookChannelOrchestrator.acceptHello` to match the nonce, instance,
+   endpoint, target, manifest digest, and connection epoch, followed by
+   correlated render-ready responses. The 215/188/188 successful selections
+   prove live authenticated runtime traffic, not just a listening server.
+
+**Evidence locators:** the Windows full log records bundle completion at
+line 655, native readiness at 669-670, all stories at 709, authored tests at
+1230, and terminal totals at 2295. Win32 accessible uses lines 502,
+508-511, 1097, and 1118; Win32 physical uses 499, 505-508, 1809, and 1845.
+The three artifacts are `Storybook_windows_fabric_43156299266_1`
+(13916946307), `Storybook_win32_paper_accessible_43156299266_1`
+(13917010025), and `Storybook_win32_paper_physical_43156299266_1`
+(13916318019). Their main smoke reports under `apps/storybook/artifacts/desktop`
+are respectively `414aa6f1-a539-4d67-9aa4-a92db05b58a4/run.json`,
+`00cae5a0-ef44-45cf-aaa9-68485ecf2403/run.json`, and
+`e5767c29-e4b1-4a9b-9685-8cdf8e0d3ee1/run.json`. Full logs, inventory,
+and extracted reports are retained locally under ignored
+`apps/storybook/artifacts/f6/ci-43156299266/`.
+
+**Limits:** collected channel stderr includes non-terminal
+`bridge-unavailable` navigation diagnostics on Windows and an authenticated
+epoch `lease-invalid` diagnostic on Win32 physical. Do not infer their
+original timing from the buffered output, diagnostic-free operation, or
+general bridge-recovery qualification from the terminal passes. The local
+macOS Accessibility block above remains unchanged; no local smoke was
+repeated. `pwsh` is unavailable locally, so its parser check remains not run;
+the actual scripts executed in these CI lanes. Keep the PR draft until the
+documentation follow-up's CI passes and the coordinator changes its status.

@@ -81,7 +81,7 @@ const manifest: DesktopStorybookDriverManifest = {
   platformManifestDigest: 'platform',
   portablePlanDigest: 'portable',
   renderer: 'fabric',
-  schemaVersion: 2,
+  schemaVersion: 3,
   storyManifest: {
     endpoint: 'windows',
     entries: [

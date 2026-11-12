@@ -20,6 +20,9 @@ source ownership and validation.
   native story-root verification. Never accept uncorrelated channel events.
 - Treat generated manifests, runtime state, native workspaces, and build
   products as disposable; fix their owning source.
+- Generated manifests never authorize native helpers or expose credentials.
+  Keep the versioned schema in `config/generated-contract.cjs`, preserve the
+  independent parent handoff, and publish secrets through OS private storage.
 - Agent manifests use the controlled transport, never upstream channel relays.
   Keep args refused and manifest-backed smoke selection on driver sessions.
 - Keep global output formatting on `--reporter`; the child Node test reporter

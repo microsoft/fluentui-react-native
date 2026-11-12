@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import type { NativeDriverArtifact } from '../native/types';
 import { FakeAuthorityHelper } from '../native/windows/fakeAuthorityHelper';
 import { createWindowsPrivateStorage } from './windowsPrivateStorage';
@@ -96,6 +98,22 @@ describe('creating Windows private storage', () => {
     await storage.read('connection.json');
 
     expect(requests()).toEqual([{ operation: 'open' }, { identity, name: 'connection.json', operation: 'read', root: defaultRoot }]);
+  });
+
+  test('opens a protected child namespace beneath the root selected by the helper', async () => {
+    const defaultRoot = 'C:\\Users\\agent\\AppData\\Local\\com.microsoft.fluentui-react-native.desktop-driver';
+    const childRoot = path.win32.join(defaultRoot, 'storybook-fixture');
+    helper.answer({ identity, ok: true, root: defaultRoot }).answer({ identity, ok: true, root: childRoot }).answer({ ok: true });
+
+    const parent = await createWindowsPrivateStorage({ artifact });
+    const child = await createWindowsPrivateStorage({ artifact, root: path.win32.join(parent.root, 'storybook-fixture') });
+    await child.publish('record', 'protected');
+
+    expect(requests()).toEqual([
+      { operation: 'open' },
+      { operation: 'open', root: childRoot },
+      { contents: base64('protected'), identity, name: 'record', operation: 'publish', root: childRoot },
+    ]);
   });
 
   test('maps a helper refusal to the unsafe-storage failure', async () => {

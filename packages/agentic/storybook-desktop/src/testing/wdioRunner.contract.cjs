@@ -5,6 +5,7 @@ const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+const { createFixtureStoredManifest } = require('../driver/fixtures/storedManifest.cjs');
 
 async function main() {
   const packageRoot = path.resolve(__dirname, '..', '..');
@@ -273,7 +274,7 @@ async function main() {
     fs.writeFileSync(
       smokeManifestPath,
       JSON.stringify({
-        schemaVersion: 2,
+        ...createFixtureStoredManifest(root, manifest),
         endpoint: 'windows',
         driverPort: Number(new URL(harness.server.url).port),
         targetId: harness.target.id,

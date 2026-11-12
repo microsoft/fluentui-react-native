@@ -110,7 +110,7 @@ macosDescribe('owner-validated macOS private storage', () => {
     await mkdir(real, { mode: 0o700 });
     await symlink(real, root);
     await expect(createMacOSPrivateStorage(root)).rejects.toThrow();
-    await expect(createMacOSPrivateStorage(path.join(root, 'nested'))).rejects.toThrow();
+    await expect(createMacOSPrivateStorage(path.join(root, 'nested'))).rejects.toThrow(`Check ancestor "${root}"`);
     expect(await readdir(real)).toEqual([]);
   });
 
