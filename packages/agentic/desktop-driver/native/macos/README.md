@@ -349,6 +349,12 @@ accessibility activation and reports physical success. A positive wheel
 `deltaX` scrolls right and a positive `deltaY` scrolls down, as on Windows. Quartz
 scrolls left and up for positive values, so both deltas are negated.
 
+After posting a pointer-move sequence, the helper allows about 200 ms of
+bounded position reads for the OS to acknowledge its destination. It never
+reposts the move to force acknowledgment. An unreadable or unsettled pointer
+fails `input-failed`; a click never posts its button press before the position
+is verified. Cancellation stops these reads and preserves the posted effect.
+
 The helper advertises `strictClear`. `clear` writes an empty `AXValue` when
 `AXUIElementIsAttributeSettable` reports the value settable, and otherwise
 activates the application, focuses the element, selects the document with

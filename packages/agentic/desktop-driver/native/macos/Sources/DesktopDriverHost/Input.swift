@@ -120,12 +120,17 @@ final class InputController {
     }
     pointer = target
     try token.wait(milliseconds: 16)
-    guard let observed = environment.pointerLocation() else {
-      try fail(ErrorCode.inputFailed, "macOS did not report the pointer position, so the move to the requested native element coordinate is unverified.")
+    for attempt in 0..<12 {
+      try token.throwIfCancelled()
+      guard let observed = environment.pointerLocation() else {
+        try fail(ErrorCode.inputFailed, "macOS did not report the pointer position, so the move to the requested native element coordinate is unverified.")
+      }
+      if abs(observed.x - target.x) <= 2 && abs(observed.y - target.y) <= 2 {
+        return
+      }
+      if attempt + 1 < 12 { try token.wait(milliseconds: 16) }
     }
-    if abs(observed.x - target.x) > 2 || abs(observed.y - target.y) > 2 {
-      try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
-    }
+    try fail(ErrorCode.inputFailed, "macOS did not move the pointer to the requested native element coordinate.")
   }
 
   func pointerDown(_ button: Int, token: CancellationToken) throws {
