@@ -237,6 +237,49 @@ describe('Windows helper against a plain Win32 application', () => {
     }
   });
 
+  windowsTest.each(['1011', '1013'])('refuses legacy-only activation of a nonactionable control (%s)', async (automationId) => {
+    const session = await FixtureSession.start('no-default-action', { args: ['--no-default-action', '1'] });
+    try {
+      const target = await session.control(session.main.id, automationId);
+      const { actions } = await session.call<{ actions: string[] }>('accessibilityActions', { elementId: target.id });
+      expect(actions).toEqual(automationId === '1013' ? ['ScrollIntoView'] : []);
+      await expect(session.host.request('click', { elementId: target.id, mode: 'accessibility' })).rejects.toMatchObject({
+        code: 'unsupported-operation',
+        data: { reason: 'activation-unsupported' },
+        effect: 'none',
+      });
+      expect(await session.status()).toBe('Ready');
+      await session.click('1001');
+      await waitFor('the actionable control to remain usable', async () => (await session.status()) === 'Activated 1 times');
+    } finally {
+      await session.dispose();
+    }
+  });
+
+  windowsTest('registers only owned untitled tool roots containing application content', async () => {
+    const session = await FixtureSession.start('tool-content', { args: ['--tool-windows', '1'] });
+    try {
+      expect(await session.windows()).toHaveLength(1);
+      await session.click('1012');
+      await waitFor('all content and excluded tool roots to open', async () => (await session.status()) === 'Opened 7 tool windows');
+      const secondary = await waitFor('the owned content tool window', async () => {
+        const windows = await session.windows();
+        return windows.length === 2 ? windows.find((window) => window.id !== session.main.id) : undefined;
+      });
+      expect(secondary.title).toBe('');
+      expect(await session.control(secondary.id, '3101')).toMatchObject({ name: 'Tool action', role: 'button' });
+      await session.click('3101', secondary.id);
+      await waitFor('the secondary action to reach the application', async () => (await session.status()) === 'Tool activated 1 times');
+      await session.click('3102', secondary.id);
+      await waitFor('the content tool window to close', async () => (await session.windows()).length === 1);
+      await expect(session.host.request('getWindowRect', { windowId: secondary.id })).rejects.toMatchObject({ code: 'no-such-window' });
+      await session.click('1001');
+      await waitFor('the main window to remain usable', async () => (await session.status()) === 'Activated 1 times');
+    } finally {
+      await session.dispose();
+    }
+  });
+
   windowsTest('refuses input to an owner while its popup is open and reports the popup closing', async () => {
     const session = await FixtureSession.start('popup');
     try {

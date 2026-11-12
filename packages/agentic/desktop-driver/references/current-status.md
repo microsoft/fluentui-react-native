@@ -582,3 +582,170 @@ Exact owned applications, helpers, Metro and service processes drained.
 The campaign ended; pre/post-end audits both exited 0:
 `FURN-AUDIT: no FURN desktop processes found`. No physical Ctrl+C claim is
 made from the supervisor's cooperative programmatic shutdown.
+
+## Windows Fabric and Win32 Paper — connected-session fixes — 2026-11-12 UTC
+
+**Observed test base:** `a1cee02547b7aae4c72134902fe43ed007215069` plus the
+then-uncommitted fixes described here. This section supplements, rather than
+rewrites, the unfixed qualification above. No macOS qualification is added.
+The native runs used the serialized W3 campaign/lock. Eligible runs reported
+an active, unlocked **remote RDP** session on `Default` before and after;
+they were not console-session tests. The packaged Fabric build at
+`bdeb0b291` was reused: neither the Windows app native project nor native-core
+Windows native sources differed. Metro and bundles came from the fix
+checkout. Paper used the prebuilt REX 0.81.1 host; its native build remains
+unsupported.
+
+### Observed causes and corrections
+
+Instrumented Fabric and Paper runs
+`6488435c-6222-4c35-a670-d50655753da4` and
+`ecd1cdff-6b77-4c42-ad57-89733dc154d0` found no Invoke, Toggle,
+SelectionItem, or ExpandCollapse pattern. LegacyIAccessible was selected:
+its default-action read returned `S_OK` and a **nonempty** action, and
+`DoDefaultAction` returned `S_OK`, but the application did not change.
+This occurred on main-window Pressables and agentic Buttons on both
+endpoints, and on the Fabric secondary button. The saved fixed-format traces
+are `native-trace-21424.jsonl` and `native-trace-38384.jsonl` under
+`artifacts\desktop\w3-qualification`.
+
+**Inferred from that dispatch trace and the independent effect checks:** a
+nonempty legacy default action is not sufficient activation evidence.
+An empty-action-only guard would not repair the observed defect. The helper
+therefore refuses legacy-only activation before mutation with
+`unsupported-operation`, reason `activation-unsupported`, and effect `none`.
+The four explicit actionable pattern paths remain unchanged. The public
+error preserves its class, native code, and reason; it records no delivery,
+does not quarantine, and never implicitly retries physically. Temporary
+native tracing was removed.
+
+The Paper inventory also proved an exact-process, visible, untitled,
+280 x 144 `Net UI Tool Window` popup owned/root-owned by the main window.
+The strict untitled-tool exclusion originated in provider commit
+`5b3f74c7b`; the available history supplied no more specific rationale.
+The correction leaves global discovery conservative and qualifies only
+lease-local popup roots using verified primary identity, exact-process
+ownership, positive visible bounds, helper-class exclusions, and a bounded
+UIA exact-root/content check, followed by native identity rechecks.
+
+The final helper registered that real Paper secondary. Its unique Callout
+content observation was complete at eight nodes; its public `find` proved
+the actual focus **button** unique, cited activation refused honestly, and
+story cleanup removed the secondary handle. The host's whole-window UIA tree
+also exposes the owner subtree, so this is scoped popup-content evidence,
+not a claim that the default whole-window observation was complete.
+Stable focus/blur test IDs were added to the legacy Callout story rather
+than weakening the public uniqueness-proof requirement.
+
+### Red/green checks and helper identity
+
+All commands below ran from `packages\agentic\desktop-driver` unless stated
+otherwise. Native commands used the W3 lock/campaign; interactive runs also
+used `-RequirePhysical`. Test working directories were confined beneath the
+ignored checkout `artifacts\desktop\w3-fix\native-working`.
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+yarn test --runInBand operations.contract win32Fixture.contract --testNamePattern 'nonactionable legacy|legacy-only|untitled tool roots'
+yarn test --runInBand operations.contract win32Fixture.contract nativeDriver
+yarn desktop-driver build-driver --platform windows
+```
+
+- **Expected red:** five behavioral failures, 18 skipped, in
+  `native-passive-red.log`: MSAA no-action and ScrollIntoView-only UIA
+  activation both falsely succeeded through raw/public routes, and the
+  owned content tool root was missing.
+- **Passed on the initial fixed helper:** five new cases, 18 filtered cases
+  skipped (`native-fix-focused-green.log`); then three suites, 32 tests
+  passed and two macOS build/signing cases skipped
+  (`native-fix-regressions.log`). This includes existing operation, fixture,
+  cancellation, retention, capture, and helper build/handshake checks.
+- That initial helper was artifact
+  `29b67c2c775f51cd360016c6abd09eb2ca377b7868b0cd7c6feb7432799e871e`,
+  source digest `e99e3246963a0fa4848a31c5753a026200492d9ad92c036a132bba16f9d1b469`.
+- **Passed final helper build:** after adding an exact UIA native-root
+  handle check, artifact
+  `b47212dcd9e63aba388907b930da19d9a6d602f7d3de32e364f1584890f4d6dc`,
+  source digest `16ecdda1e41112cf2dafaf57eaad843054fbeeb2e9add0518f9c41886e8c867c`,
+  build fingerprint `3628b82e4280727dce2b265db184baa52285cc9f88f571621182d3893b051397`.
+  The build log is `native-fix-final-build.log`. The real Paper pass below
+  used this final helper and story blob
+  `f96de651a8433fc446f9c02b7b5ee3f5075c945c`.
+- The **final-helper native-contract rerun is Not run**, not a replay of
+  the initial helper's 32 passes: the desktop was paused after disconnect.
+  Logs in this list are relative to `artifacts\desktop\w3-fix`.
+
+### Endpoint results and session boundary
+
+The copied qualification supervisor ran these exact commands from the
+checkout root, inside the W3 `-RequirePhysical` wrapper:
+
+```powershell
+node artifacts\desktop\w3-qualification\run-endpoint.mjs windows --secondary-only --modern-only --activation-diagnostics
+node artifacts\desktop\w3-qualification\run-endpoint.mjs win32 --secondary-only --activation-diagnostics
+```
+
+| Case                                                                        | Outcome and evidence                                                                                                                                                                                       |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fabric main Pressable and agentic Button                                    | **Passed** honest refusal on the initial fixed helper; original statuses remained `Closed` and `0`, with unchanged receipts.                                                                               |
+| Fabric modern secondary semantic action                                     | **Passed** honest refusal on the initial fixed helper: exact secondary handle, complete 11-node observation, unique button, no delivery/quarantine, main status stayed `Idle`, handle retired.             |
+| Paper main Pressable and agentic Button                                     | **Passed** honest refusal on the final helper; original statuses remained `Native window: Shown` and `0`, with unchanged receipts.                                                                         |
+| Paper secondary registration, observation, semantic action, retirement      | **Passed** on the final helper: main plus one secondary, complete eight-node content sample, unique focus button, `activation-unsupported`/effect `none`, no receipt/quarantine/fallback, then main alone. |
+| Final-helper Fabric semantic rerun                                          | **Not run**: first startup failed before readiness with `spawn rnx-cli ENOENT`; dependency resolution confirmed the CLI was installed. Its one retry was session-gated before the supervisor started.      |
+| Final-helper Fabric and Paper secondary physical clicks                     | **Not run (session disconnected)**. No physical input was attempted after the gate. The earlier baseline Fabric physical pass remains valid; it is not a final-helper rerun.                               |
+| DPI, mixed-monitor, negative-origin monitor layout, physical console Ctrl+C | **Not run** by this fix campaign; no new claim beyond the baseline section.                                                                                                                                |
+
+Artifacts are beneath
+`artifacts\desktop\w3-qualification\runs\<qualification-id>\`:
+
+| Evidence                                                 | Qualification ID                       | Driver run ID                          |
+| -------------------------------------------------------- | -------------------------------------- | -------------------------------------- |
+| Initial fixed Fabric main/secondary semantic pass        | `a583840b-7ad5-4691-9e60-f4f83d49fd48` | `0644505e-3642-4fed-b6aa-157275fb519f` |
+| Final fixed Paper main/secondary semantic pass           | `7edaa34a-fefd-4a8b-846b-dc8aa8c3880e` | `2d342e8c-dd72-4553-bc90-af070716add2` |
+| Final Fabric startup failure, no app-level case executed | `c807faf4-31e8-4aa1-a3de-5b78e720e20f` | `07fe422f-7c94-4bbc-b6e8-379b9ee989c7` |
+
+Each successful directory retains `qualification.json` and
+`descriptor-cases-<endpoint>-main-activation.json` /
+`descriptor-cases-<endpoint>-secondary[---modern].json`, with cleanup
+acknowledgments. Earlier failed Paper probes were qualification-harness
+failures, not passes: the owner subtree exhausted the observation byte
+budget, searching _inside_ the unnamed button did not prove that button,
+and an observation sample was correctly refused as `sample-not-unique`.
+The successful run uses a real unique `find` with the stable story test ID.
+The optional managed UIA probe now serializes nonfinite geometry as null;
+its bounded 32-node content result is explicitly incomplete, not a complete
+window-tree claim.
+
+At **2026-11-12T17:03:45Z** the wrapper observed session 1 as remote,
+Disconnected, locked, LogonUI running, with no input desktop. It returned
+75 / `NOT RUN` before starting the retry. All native/GUI/physical work was
+then paused; no reconnect or session move was attempted. The campaign ended
+and both audits passed:
+`FURN-AUDIT: no FURN desktop processes found`.
+
+### Portable checks and remaining qualification
+
+**Passed:** desktop-driver `yarn test --runInBand` with native opt-in unset:
+73 suites / 1,201 tests, with eight native suites / 93 native tests
+**skipped**, not passed. Native-core `yarn test` passed its build, story
+typecheck, 18 Node checks, 56 Jest checks, and one snapshot; native-core
+format/lint passed. These do not replace native qualification.
+
+From the checkout root, the final portable checks **passed**:
+
+- `yarn workspace @fluentui-react-native/desktop-driver format`
+- `yarn workspace @fluentui-react-native/desktop-driver lint`
+- `yarn workspace @fluentui-react-native/desktop-driver build`
+- `yarn oxfmt --check` and `git diff --check`
+- `yarn markdown-link-check -c .github\markdown-link-check-config.json <changed-file>`
+  for all ten changed Markdown files, including both patch changesets:
+  72 links checked.
+
+One permitted session check at **2026-11-12T17:21:31Z** reconfirmed remote
+session 1 as Disconnected, locked, LogonUI running, and without an input
+desktop. No native or GUI retry followed.
+
+The post-review clean-cache repository aggregate, committed changeset check,
+and final native/physical reruns are still pending. Outstanding qualification
+stays tracked in [remaining work](remaining-work.md) / #4441; no issue is
+closed and no final-helper physical-success claim is made here.

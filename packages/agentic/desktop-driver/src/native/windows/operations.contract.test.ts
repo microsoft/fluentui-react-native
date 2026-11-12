@@ -87,6 +87,30 @@ describe('Windows agent operations against the Win32 fixture', () => {
     });
   });
 
+  windowsTest.each(['1011', '1013'])(
+    'rejects nonactionable legacy activation without a delivery receipt or quarantine (%s)',
+    async (automationId) => {
+      await withFixture(
+        async (session) => {
+          const before = await session.getInput();
+          await expect(session.act({ action: 'activate', find: { automationId } })).rejects.toMatchObject({
+            code: 'unsupported operation',
+            data: {
+              mutation: { disposition: 'rejected', effect: 'none', quarantined: false },
+              nativeCode: 'unsupported-operation',
+              reason: 'activation-unsupported',
+            },
+          });
+          expect(await session.getInput()).toEqual(before);
+          expect((await session.check({ expect: { name: 'Ready' }, find: status })).result.status).toBe('passed');
+          expect((await session.act({ action: 'activate', find: activate })).result.mechanism).toBe('accessibility');
+          await expectStatus(session, 1);
+        },
+        ['--no-default-action', '1'],
+      );
+    },
+  );
+
   inputTest('physically clicks with a hit-tested proof, types, and clears without journaling the text', async () => {
     await withFixture(async (session) => {
       const { result: found } = await session.find(activate);

@@ -1082,6 +1082,28 @@ have evidence at the final revision, implementation changesets are present,
 and the final clean-cache repository aggregate passes. Only then prepare/push
 the PR; a hosted capability skip is not completion.
 
+### Windows connected-session follow-up — 2026-11-12 UTC
+
+The legacy-only activation refusal and lease-local content-popup registration
+corrections have focused native red/green evidence; the final helper also
+passes the real Paper secondary semantic case. See the separate
+[Windows evidence entry](current-status.md). Keep #4441 open until:
+
+- The final helper reruns Fabric main/secondary semantic activation and both
+  endpoints' secondary physical clicks. Physical receipts are not themselves
+  proof of the legacy Callout's native command outcome.
+- The final helper reruns
+  `yarn test --runInBand operations.contract win32Fixture.contract nativeDriver`
+  with `$env:FURN_NATIVE_DRIVER_TEST = '1'`.
+- Coordinator review and the clean-cache repository aggregate complete.
+
+These runs are paused because session 1 disconnected, locked, and lost its
+input desktop. Resume native/GUI/physical work only with an Active, unlocked
+session and the serialized campaign; physical work additionally requires
+`-RequirePhysical`. No reconnect, session move, or skip-to-pass substitution
+is authorized. Earlier eligible physical results remain evidence for their
+tested revisions, not final-helper reruns.
+
 ## 9. Qualification and efficiency gates
 
 | Lane                                       | Required scope                                                                                                                 |

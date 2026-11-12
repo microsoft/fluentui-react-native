@@ -70,6 +70,12 @@ struct EnumerationContext {
   std::vector<HWND> windows;
 };
 
+bool IsVisibleSizedRoot(HWND window) {
+  RECT bounds{};
+  return IsWindowVisible(window) != FALSE && GetAncestor(window, GA_ROOT) == window &&
+         GetWindowRect(window, &bounds) != FALSE && !IsEmptyRect(bounds);
+}
+
 BOOL CALLBACK CollectWindow(HWND window, LPARAM parameter) {
   auto* context = reinterpret_cast<EnumerationContext*>(parameter);
   DWORD processId = 0;
@@ -77,18 +83,11 @@ BOOL CALLBACK CollectWindow(HWND window, LPARAM parameter) {
   if (context->processId != 0 && processId != context->processId) {
     return TRUE;
   }
-  if (IsWindowVisible(window) == FALSE) {
-    return TRUE;
-  }
-  if (GetAncestor(window, GA_ROOT) != window) {
+  if (!IsVisibleSizedRoot(window)) {
     return TRUE;
   }
   const LONG_PTR exStyle = GetWindowLongPtrW(window, GWL_EXSTYLE);
   if ((exStyle & WS_EX_TOOLWINDOW) != 0 && ReadWindowTitle(window).empty()) {
-    return TRUE;
-  }
-  RECT bounds{};
-  if (GetWindowRect(window, &bounds) == FALSE || IsEmptyRect(bounds)) {
     return TRUE;
   }
   context->windows.push_back(window);
@@ -127,6 +126,30 @@ WindowFingerprint ReadWindowFingerprint(HWND window) {
     fingerprint.className.assign(className, static_cast<std::size_t>(length));
   }
   return fingerprint;
+}
+
+bool IsOwnedContentCandidate(HWND window, HWND primaryWindow, DWORD expectedProcessId) {
+  DWORD processId = 0;
+  GetWindowThreadProcessId(window, &processId);
+  if (primaryWindow == nullptr || window == primaryWindow || processId != expectedProcessId ||
+      !IsVisibleSizedRoot(window) || (GetWindowLongPtrW(window, GWL_STYLE) & WS_POPUP) == 0) {
+    return false;
+  }
+  const WindowFingerprint fingerprint = ReadWindowFingerprint(window);
+  if (fingerprint.className.empty()) return false;
+  const wchar_t* const helperClasses[] = {L"tooltips_class32", L"IME", L"MSCTFIME UI", L"CiceroUIWndFrame"};
+  for (const wchar_t* helperClass : helperClasses) {
+    if (CompareStringOrdinal(fingerprint.className.c_str(), -1, helperClass, -1, TRUE) == CSTR_EQUAL) return false;
+  }
+  HWND owner = GetWindow(window, GW_OWNER);
+  for (std::size_t depth = 0; owner != nullptr && depth < 32; ++depth) {
+    DWORD ownerProcessId = 0;
+    GetWindowThreadProcessId(owner, &ownerProcessId);
+    if (ownerProcessId != expectedProcessId) return false;
+    if (owner == primaryWindow) return true;
+    owner = GetWindow(owner, GW_OWNER);
+  }
+  return false;
 }
 
 std::string ReadFileWithRetry(const std::wstring& path, const CancellationToken& token) {
@@ -1585,7 +1608,9 @@ const ApplicationLease& ApplicationManager::Attach(const json::Value& params, co
   return attached;
 }
 
-std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, const CancellationToken& token) {
+std::vector<WindowInfo> ApplicationManager::Windows(
+    const std::string& leaseId, const CancellationToken& token,
+    const std::function<bool(HWND, DWORD)>& hasContent) {
   const auto entry = leases_.find(leaseId);
   if (entry == leases_.end()) {
     Fail(kErrorNoSuchLease, "The requested application lease is not held by this helper.");
@@ -1600,11 +1625,36 @@ std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, 
   // Closed windows leave the table before the live ones register, so a handle
   // reused by a later window can never keep its predecessor's identifier.
   RetireClosedWindows(leaseId);
-  for (const HWND window : EnumerateTopLevelWindows(lease.processId)) {
+  const auto hasPrimaryIdentity = [&]() {
+    const auto id = windowIdsByHandle_.find(lease.primaryWindow);
+    if (id == windowIdsByHandle_.end()) return false;
+    const auto record = windowsById_.find(id->second);
+    if (record == windowsById_.end() || record->second.leaseId != leaseId || IsWindowClosed(record->second)) return false;
+    DWORD processId = 0;
+    GetWindowThreadProcessId(lease.primaryWindow, &processId);
+    const WindowFingerprint fingerprint = ReadWindowFingerprint(lease.primaryWindow);
+    return processId == lease.processId && record->second.threadId == fingerprint.threadId &&
+           record->second.className == fingerprint.className;
+  };
+  for (const HWND window : EnumerateAllTopLevelWindows(lease.processId)) {
+    token.ThrowIfCancelled();
+    DWORD processId = 0;
+    GetWindowThreadProcessId(window, &processId);
+    if (processId != lease.processId || !IsVisibleSizedRoot(window)) continue;
+    const std::wstring title = ReadWindowTitle(window);
+    if ((GetWindowLongPtrW(window, GWL_EXSTYLE) & WS_EX_TOOLWINDOW) != 0 && title.empty()) {
+      if (!hasContent || !hasPrimaryIdentity() ||
+          !IsOwnedContentCandidate(window, lease.primaryWindow, lease.processId)) continue;
+      const WindowFingerprint before = ReadWindowFingerprint(window);
+      if (!hasContent(window, lease.processId)) continue;
+      const WindowFingerprint after = ReadWindowFingerprint(window);
+      if (!hasPrimaryIdentity() || !IsOwnedContentCandidate(window, lease.primaryWindow, lease.processId) ||
+          before.threadId != after.threadId || before.className != after.className) continue;
+    }
     WindowInfo info;
     info.window = window;
     info.processId = lease.processId;
-    info.title = ReadWindowTitle(window);
+    info.title = title;
     info.primary = window == lease.primaryWindow || (lease.primaryWindow == nullptr && info.title == lease.windowTitle);
     info.id = RegisterWindow(window, lease.processId, leaseId, info.primary, info.title);
     results.push_back(std::move(info));

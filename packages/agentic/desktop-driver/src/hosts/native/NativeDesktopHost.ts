@@ -728,7 +728,7 @@ export function translateNativeError(error: unknown): unknown {
   }
   const effect = readFailureEffect(error);
   if (error.code === 'unsupported-operation') {
-    return attachFailureEffect(new HostUnsupportedError(error.message), effect);
+    return attachFailureEffect(new HostUnsupportedError(error.message, { ...error.data, nativeCode: error.code }), effect);
   }
   if (error.code === 'stale-element') {
     return attachFailureEffect(new HostStaleError(error.message), effect);

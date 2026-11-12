@@ -288,6 +288,12 @@ mutation. Provider messages quote window titles and element ids, so they are not
 passed on. A provider that no longer has the element or window drops the
 reference, as it does for a read.
 
+An unsupported native activation keeps its `nativeCode` and any reported
+machine `reason`. A rejection with effect `none` records no input delivery and
+does not quarantine the target. `activate` never retries with physical input;
+after such a rejection, a caller may explicitly choose `click` if the session
+permits it. An indeterminate outcome is not permission to replay the action.
+
 A session's `furn:inputMode` ([protocol](protocol.md#sessions-and-targets)) limits the
 mechanisms `act` may use. In an `accessible` session the runtime reports no
 `physicalClick` or `keyboard`, so `click` and `type` fail with

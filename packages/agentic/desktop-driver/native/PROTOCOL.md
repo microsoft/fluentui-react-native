@@ -300,6 +300,22 @@ one input turn and refuses a display name the element does not publish
 exactly once, so a key never reaches a different action than the one the
 agent named.
 
+### Windows accessibility activation
+
+For the shared Windows/Win32 provider, accessibility `click` requires an
+actionable `Invoke`, `Toggle`, `SelectionItem`, or `ExpandCollapse` pattern.
+LegacyIAccessible default-action metadata, even when nonempty, and a
+`ScrollIntoView` pattern alone do not prove an activation can be dispatched.
+Without an actionable pattern, the helper fails `unsupported-operation` with
+`data.reason` `activation-unsupported` and effect `none` before mutation. Node
+retains the native code and reason, records no delivery, and does not
+implicitly retry with physical input. An explicit permitted physical request
+is a separate operation; an indeterminate mutation must not be replayed.
+
+This is a provider dispatch-policy correction using the existing error and
+effect fields. FDR1 framing, commands, and the 1.0 wire constants in
+`protocol.json` are unchanged.
+
 ### Clear mechanisms
 
 The mutating `clear` command takes `{ "elementId": "<id>" }`. Helpers that

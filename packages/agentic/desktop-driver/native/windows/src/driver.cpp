@@ -633,7 +633,9 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
       Fail(kErrorInvalidParams, "The windows request is missing its lease.");
     }
     result.result = json::Value::Array();
-    for (const WindowInfo& info : applications_.Windows(lease->StringField("id"), token)) {
+    for (const WindowInfo& info : applications_.Windows(
+             lease->StringField("id"), token,
+             [&](HWND window, DWORD processId) { return automation_.HasWindowContent(window, processId, token); })) {
       result.result.Append(WindowSummary(info));
     }
     return result;

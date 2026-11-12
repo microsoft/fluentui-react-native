@@ -64,7 +64,9 @@ class ApplicationManager {
   const ApplicationLease& Attach(const json::Value& params, const CancellationToken& token);
   void CloseApplication(const std::string& leaseId, const CancellationToken& token);
   void Dispose(const CancellationToken& token);
-  std::vector<WindowInfo> Windows(const std::string& leaseId, const CancellationToken& token);
+  std::vector<WindowInfo> Windows(
+      const std::string& leaseId, const CancellationToken& token,
+      const std::function<bool(HWND, DWORD)>& hasContent = {});
 
   WindowInfo RequireWindow(const std::string& windowId);
   const ApplicationLease* FindLease(const std::string& leaseId) const;
