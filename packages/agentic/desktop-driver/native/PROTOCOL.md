@@ -326,6 +326,13 @@ the element:
   the fallback. A check that refuses, such as `input-unavailable`, dispatches
   nothing and is `none`.
 
+The macOS helper requires a readable value before keyboard input and verifies
+that it becomes empty before returning success. It confirms keyboard focus
+and, when exposed, the selected text range between Command-A and Delete.
+Unacknowledged selection or retained text fails `input-failed`; already-posted
+keys retain their partial effect. These bounded reads do not replay input or
+permit a semantic fallback for `keyboard`.
+
 Any other `mechanism`, including one that is not a string, fails
 `invalid-params` with effect `none`. Node never sends `mechanism` unless the
 feature is negotiated, and treats a result without a recognized `mechanism`,

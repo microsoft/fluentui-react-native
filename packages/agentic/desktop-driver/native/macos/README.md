@@ -21,6 +21,8 @@ Accessibility.
 | `Sources/DesktopDriverHost/main.swift` | Helper modes and top-level error handling                                   |
 | `Host.swift`                           | FDR1 hello, request queue, framing, cancellation, and disposal              |
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
+| `ApplicationActivation.swift`          | Foreground postcondition and one workspace fallback after AX activation     |
+| `KeyboardClear.swift`                  | Keyboard focus, selection acknowledgment, and empty-value verification      |
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
 | `ApplicationTermination.swift`         | `terminateOwned`: quit, wait, kill, and verify the exit of an owned process |
 | `ApplicationIncarnation.swift`         | One-shot `--application-incarnation`: whether a recorded process exited     |
@@ -38,6 +40,7 @@ Accessibility.
 | `ObservationSelfTest.swift`            | Synthetic-tree, randomized differential, and command checks for `observe`   |
 | `ServiceIdentitySelfTest.swift`        | URL, claim, listener-policy, and live describe/verify checks                |
 | `InputIntegritySelfTest.swift`         | Recorded input: counted buttons and drags, cancelled clicks, fail-closed    |
+| `PhysicalInputSelfTest.swift`          | External-hit identity, foreground fallback, and verified keyboard clear     |
 | `HostLifecycleSelfTest.swift`          | In-process host: end of input, write failure, invalid JSON, queued work     |
 | `ApplicationTerminationSelfTest.swift` | Termination verification against fake and real child processes              |
 | `CaptureSelectionSelfTest.swift`       | Pure capture-window selection and `visible` without geometry                |
@@ -357,6 +360,15 @@ clear returns `{ "mechanism": "semantic" | "keyboard" }`. The `probe` feature
 is `true` even without Accessibility trust, because each mechanism reports its
 own refusal.
 
+Keyboard clear requires a readable value before posting input. It waits up to
+200 ms for native keyboard focus, posts Command-A once, and, when the provider
+exposes `AXSelectedTextRange`, waits up to 200 ms for the complete UTF-16 value
+to be selected before posting Delete once. It then verifies an empty value
+for up to one second. An unreadable value is unsupported; missing focus fails
+before keys are posted. Unacknowledged selection or retained text fails
+`input-failed`, with the posted input's partial effect. Verification never
+replays keys or substitutes a semantic clear.
+
 A locked screen or a login session that is not the active console prevents
 applications from publishing complete accessibility windows and from receiving
 physical input. Launch, attach, window discovery, and new pointer, keyboard,
@@ -366,9 +378,11 @@ window-enumeration error. Physical input fails closed: a login session or pointe
 position the helper cannot read is a failure, not permission to proceed. Key and
 button releases remain allowed so recovery can complete while the session is locked.
 
-Activation sets the application's `AXFrontmost` attribute, which a trusted
-client applies immediately, and falls back to `NSRunningApplication.activate`
-only if that fails. Cooperative workspace activation was observed to wait about
+Activation first sets the application's `AXFrontmost` attribute and checks
+the foreground postcondition, not just the setter's acknowledgment. It falls
+back once to `NSRunningApplication.activate` when the write fails **or** the
+application is still not frontmost. The latter path is journaled as
+`accessibility+workspace`. Cooperative workspace activation was observed to wait about
 a second for the active application to yield. Activation completes when the
 application reports `AXFrontmost` and the primary window reports `AXMain`;
 a timeout names the application that kept keyboard focus. The window is also
@@ -380,6 +394,13 @@ main checks decide.
 A physical click first hit-tests its target. When another element owns the
 point, `element click intercepted` names the occluding element, or the external
 application and process that own it.
+
+An external hit has an opaque window identity distinct from the target,
+including when it belongs to another window of the same application. This lets
+the agent operation raise the target and recheck instead of mistaking an
+external obstruction for one inside the target window. A hit on the target's
+own window or chrome is not proof that its descendants receive input:
+genuinely covered or clipped controls remain refused.
 
 React Native macOS does not move keyboard focus on ordinary mouse-down. Portable
 tests should assert the platform's actual activation behavior rather than

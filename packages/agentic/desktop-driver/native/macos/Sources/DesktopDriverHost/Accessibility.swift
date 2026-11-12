@@ -329,6 +329,21 @@ final class AccessibilityEngine {
     return axNumber(try copyOptionalAXAttribute(record.element, kAXFocusedAttribute))?.boolValue ?? false
   }
 
+  func selectedTextRange(_ elementID: String) throws -> CFRange? {
+    let record = try requireRecord(elementID)
+    try validateLive(record)
+    guard
+      let raw = try copyOptionalAXAttribute(record.element, kAXSelectedTextRangeAttribute),
+      CFGetTypeID(raw) == AXValueGetTypeID()
+    else {
+      return nil
+    }
+    let value = unsafeBitCast(raw, to: AXValue.self)
+    guard AXValueGetType(value) == .cfRange else { return nil }
+    var range = CFRange()
+    return AXValueGetValue(value, .cfRange, &range) ? range : nil
+  }
+
   func accessibilityClick(_ elementID: String, token: CancellationToken) throws {
     try requireAccessibility("Accessibility click")
     try token.throwIfCancelled()
@@ -995,10 +1010,11 @@ final class AccessibilityEngine {
     knownRecord(element)?.parentID
   }
 
-  private func externalWindowSnapshot(
+  func externalWindowSnapshot(
     window: WindowRecord,
     hit: AXUIElement
   ) -> ElementSnapshot {
+    let externalID = IdentifierGenerator.shared.next("external-window")
     let screenRect = (try? axFrame(hit)) ?? .zero
     let windowFrame = (try? window.currentFrame()) ?? .zero
     var ownerID: pid_t = 0
@@ -1011,7 +1027,7 @@ final class AccessibilityEngine {
         : "External desktop window of \(ownerName) (pid \(ownerID))"
     }
     return ElementSnapshot(
-      id: IdentifierGenerator.shared.next("external-window"),
+      id: externalID,
       automationID: nil,
       checked: .unsupported("An external desktop window does not expose checked state."),
       enabled: .supported(true),
@@ -1032,7 +1048,7 @@ final class AccessibilityEngine {
       text: nil,
       value: nil,
       visible: .supported(true),
-      windowID: window.id
+      windowID: externalID
     )
   }
 

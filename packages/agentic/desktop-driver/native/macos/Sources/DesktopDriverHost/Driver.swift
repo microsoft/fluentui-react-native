@@ -378,17 +378,16 @@ final class Driver {
     func isFrontmost() -> Bool {
       axNumber(try? copyOptionalAXAttribute(applicationElement, kAXFrontmostAttribute))?.boolValue == true
     }
-    if !isFrontmost() {
-      // Trusted Accessibility clients activate immediately. NSRunningApplication activation is cooperative on current
-      // macOS releases and was observed to wait about a second for the active application to yield.
-      let frontmostError = AXUIElementSetAttributeValue(applicationElement, kAXFrontmostAttribute as CFString, kCFBooleanTrue)
-      diagnostics["method"] = frontmostError == .success ? "accessibility" : "workspace"
-      if frontmostError != .success {
-        diagnostics["accessibilityError"] = axErrorName(frontmostError)
-        _ = application.activate(options: [])
-      }
-    } else {
-      diagnostics["method"] = "already-frontmost"
+    let activation = activateApplication(
+      isFrontmost: isFrontmost,
+      accessibility: {
+        AXUIElementSetAttributeValue(applicationElement, kAXFrontmostAttribute as CFString, kCFBooleanTrue)
+      },
+      workspace: { _ = application.activate(options: []) }
+    )
+    diagnostics["method"] = activation.method
+    if let error = activation.accessibilityError {
+      diagnostics["accessibilityError"] = axErrorName(error)
     }
     _ = AXUIElementSetAttributeValue(window.element, kAXMainAttribute as CFString, kCFBooleanTrue)
     let raised = AXUIElementPerformAction(window.element, kAXRaiseAction as CFString)
@@ -579,9 +578,16 @@ final class Driver {
     }
     try withPhysicalInput(token: token) {
       try activate(window, token: token)
-      try accessibility.setFocus(elementID)
-      try token.wait(milliseconds: 16)
-      try input.pressCommandADelete(token: token)
+      try clearWithKeyboard(
+        token: token,
+        focus: { try accessibility.setFocus(elementID) },
+        hasFocus: { try accessibility.hasFocus(elementID) },
+        value: { try accessibility.snapshot(elementID: elementID, window: window, token: token).value },
+        selectedRange: { try accessibility.selectedTextRange(elementID) },
+        selectAll: { try input.selectAll(token: token) },
+        delete: { try input.deleteSelection(token: token) },
+        wait: { try token.wait(milliseconds: $0) }
+      )
     }
     return "keyboard"
   }

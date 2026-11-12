@@ -230,8 +230,11 @@ final class InputController {
     }
   }
 
-  func pressCommandADelete(token: CancellationToken) throws {
+  func selectAll(token: CancellationToken) throws {
     try chord([.keyCode(55), .keyCode(0)], token: token)
+  }
+
+  func deleteSelection(token: CancellationToken) throws {
     try chord([.keyCode(51)], token: token)
   }
 

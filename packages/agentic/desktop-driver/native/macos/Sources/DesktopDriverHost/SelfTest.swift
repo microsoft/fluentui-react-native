@@ -38,6 +38,7 @@ final class SelfTestRunner {
     testHostQueuedCancellation()
     testHostLifecycle()
     testInputIntegrity()
+    testPhysicalInputReadiness()
     testApplicationTermination()
     testCaptureWindowSelection()
     testObservation()
