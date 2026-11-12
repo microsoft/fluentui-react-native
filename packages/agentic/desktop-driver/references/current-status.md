@@ -549,3 +549,45 @@ signing/cache/opt-in overrides removed. Log:
 `artifacts/desktop/f10m/review-buildci-final.log`.
 The harness ledger records the exact invocation. This aggregate is portable
 repository validation, not additional positive native qualification.
+
+### 2026-11-12 Storybook identity-observation regression
+
+CI run `43148275374` at `0bd0ad6f7` failed both macOS Storybook renderers:
+the normal driver session held the exact-application flock, while bridge-epoch
+recovery created another helper and tried a competing controlling `attach`.
+The passing macOS E2E artifact has 62 tests using session-owned `launch`;
+it does not exercise that Storybook identity callback.
+
+Fix source `5e360734e9b85bd4732aabc47c7654bb7211c3d3` adds
+`NativeDesktopHost.inspectApplication` and the matching macOS native command.
+It shares descriptor/legacy-lease/window validation and checks the exact
+kernel incarnation before and after discovery, without creating a lease,
+acquiring application/input locks or registering windows/elements. Storybook
+uses the session's helper for this observation. Real launch/attach exclusion
+is unchanged; foreign control remains `application-lock-busy`.
+Windows/Win32 retain their existing temporary identity attachment, and an old
+macOS helper never falls back to controlling attachment.
+
+Default-TMPDIR adapter regressions passed 11; composed Fabric/Paper Storybook
+regressions passed 5; claim/ownership regressions passed 29. The full portable
+driver suite passed 1,236 with 66 skipped, and all three owning packages passed
+format/build/lint and their full suites. Broad fixtures require project-local
+TMPDIR under this task's filesystem restriction; only the focused selections
+are default-TMPDIR evidence.
+
+Under the exclusive native-validation lock, the stable-signed helper was
+forcibly rebuilt. Native identity/termination/backend contracts passed 79 with
+15 skipped, including new inspection-refusal self-tests; AppKit safety passed
+4 with 5 skipped. Helper artifact:
+`982f3cfa696bbde7f9868186ae9365d59014fd656687e5cbec2de74863280ed3`,
+source digest
+`6bafaf5835d9cd22410992466a8d8f86086ff6b3b3efd182b3a48922f698527c`.
+The noninteractive doctor still reports Accessibility/PostEvent preflight false.
+Both rejected-launch primaries and all own-worktree fixture/helper processes
+were absent after the run. No privacy changes were made.
+
+The harness ledger records exact commands, identities and evidence locators.
+Raw evidence is under `artifacts/desktop/f10m/ci-regression/`.
+Positive AX-dependent ownership/observation contracts and actual macOS
+Storybook Fabric/Paper CI requalification remain pending, not passed; the
+other native acceptance gates above are unchanged.

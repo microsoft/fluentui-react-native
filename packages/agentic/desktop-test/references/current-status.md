@@ -1209,3 +1209,75 @@ test waiver was needed. Log:
 The code remains the native-qualified `62e6552028ea8fb81e76d430379321145fab709c`;
 subsequent changes record evidence only. Positive native acceptance gates remain
 open, so delivery is draft and does not close #4446.
+
+### CI regression follow-up: read-only application identity
+
+CI run `43148275374` at `0bd0ad6f7cc1e862169a422b7614a95adf899584`
+failed both macOS Storybook renderers with `application-lock-busy` while
+recording the authenticated bridge epoch. The actual WebDriver session's
+native helper held its legitimate exact-incarnation application lock.
+Storybook's recovery callback ignored that helper and created another
+`NativeDesktopHost` whose temporary `attach` requested competing control.
+This was not a workload-claim leak or an ownership handoff.
+The passing macOS E2E artifact reports 62 tests with session ownership:
+`desktop-test/src/wdio/configuration.ts` selects `launch`, not the Storybook
+attach/recovery path, and that lane has no Storybook bridge-epoch journal.
+
+Fix source `5e360734e9b85bd4732aabc47c7654bb7211c3d3` introduces the
+macOS-only read-only `inspectApplication` operation. It shares descriptor,
+legacy nonce/lease, executable/bundle and exact-window verification, capturing
+the kernel identity before discovery and rechecking it afterwards. It does
+not acquire control or register windows/elements. Storybook uses the existing
+session helper; every real launch/attach retains exclusive exact-incarnation
+control, and foreign controlling services still receive
+`application-lock-busy`. Windows/Win32 keep their previous isolated identity
+attachment path. Unsupported old helpers fail closed rather than falling
+back to controlling macOS attachment.
+
+All three owning packages passed their declared format, build and lint checks.
+Build/test/lint batches and native qualification used the exclusive
+native-validation lock. Focused tests kept the default TMPDIR unchanged;
+their fixtures and Jest caches are project-local. The full
+suites instead used project-local TMPDIR and the matching Git ceiling because
+existing broad fixtures use `os.tmpdir()` and this task forbids system
+temporary-directory writes. This is a declared deviation from the requested
+default-TMPDIR full-suite invocation, not default-TMPDIR full-suite evidence.
+
+| Selection                                    | Exact command                                                                                                                                                                                                                                 | Result                                                                             |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Default-TMPDIR native adapter                | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand NativeDesktopHost.applicationIdentity --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-driver"`                                                        | Passed 11, failed 0, skipped 0                                                     |
+| Default-TMPDIR composed Storybook regression | `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand applicationIdentity --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-storybook"`                                                                    | Passed 5, failed 0, skipped 0                                                      |
+| Default-TMPDIR claim/ownership regressions   | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.test ownership.test --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-harness"`                                                      | Passed 29, failed 0, skipped 0                                                     |
+| Full portable driver                         | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-desktop-driver-full"`                                                                                 | Passed 1,236, failed 0, skipped 66                                                 |
+| Full portable harness                        | `yarn workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-desktop-test-full"`                                                                                     | Passed 409, failed 0, skipped 10                                                   |
+| Full portable Storybook                      | `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-storybook-desktop-full"`                                                                           | Passed 344, failed 0, skipped 4                                                    |
+| Stable-signed helper rebuild                 | `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver build-driver --platform macos --force`                                                                                                                              | Passed                                                                             |
+| Noninteractive permissions                   | `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver doctor --platform macos --permissions`                                                                                                                              | Passed diagnostics; Accessibility/PostEvent preflight false, Screen Recording true |
+| Native identity/termination/backend          | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand nativeDriver.test applicationIncarnation serviceIdentity --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-driver-native"`                              | Passed 79, failed 0, skipped 15                                                    |
+| AppKit safety                                | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity\|failed native' --cacheDirectory "$PWD/artifacts/desktop/f10m/ci-regression/jest-harness-native"` | Passed 4, failed 0, skipped 5                                                      |
+
+The composed regression covers launch, application claim publication,
+embedded-driver attach and authenticated epoch observation separately for
+Fabric and Paper, with retained window identity and rejected foreign control.
+The native self-test additionally refuses missing, malformed and stale
+inspection descriptors before AX discovery. The positive AppKit contracts now
+inspect an application while its controlling session and foreign helper are
+present, but those AX-dependent cases remain locally blocked, not passed.
+
+The stable-signed native run used a clean source tree. Helper artifact:
+`982f3cfa696bbde7f9868186ae9365d59014fd656687e5cbec2de74863280ed3`;
+source digest:
+`6bafaf5835d9cd22410992466a8d8f86086ff6b3b3efd182b3a48922f698527c`.
+AppKit evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-mwo1d2/evidence.json`.
+Rejected direct-child PID 53320/start `2026-11-12T04:18:28.787757Z` and
+LaunchServices PID 53360/start `2026-11-12T04:18:29.263568Z` were proved exited;
+independent post-run inspection found both PIDs absent and no own-worktree
+fixture/helper process. No privacy settings were changed.
+
+Logs and curated CI analysis are under
+`artifacts/desktop/f10m/ci-regression/`: `focused-default-tmp.log`,
+`package-validation.log`, `native-validation.log`, `native-cleanup.json` and
+`ci-analysis.json`. Actual macOS Storybook Fabric/Paper CI requalification at
+the fix is pending. Local positive AX/physical input, descendant, interrupted
+publication and Windows-native acceptance gates above remain open; keep draft.
