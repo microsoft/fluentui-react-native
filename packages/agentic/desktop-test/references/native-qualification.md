@@ -26,7 +26,7 @@ commands below from `apps/storybook`, where their scripts are declared.
 
 The package's opt-in AppKit contract builds the signed native helper and the
 isolated fixture described in the
-[macOS provider README](../../desktop-driver/native/macos/README.md).
+`packages/agentic/desktop-driver/native/macos/README.md` provider guide.
 From the repository root, under the exclusive native-validation lock:
 
 ```sh

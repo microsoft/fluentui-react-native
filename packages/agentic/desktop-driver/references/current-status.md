@@ -507,8 +507,8 @@ temporary storage and an isolated helper cache:
   is macOS 11.0, matching the helper.
 
 Exact helper artifact/digest, commands, PIDs, failures, cleanup and evidence
-locators are in the
-[harness evidence ledger](../../desktop-test/references/current-status.md#2026-11-12-f10-m-neutral-application-ownership).
+locators are in `packages/agentic/desktop-test/references/current-status.md`,
+section "2026-11-12: F10-M neutral application ownership".
 Positive application lifecycle/external preservation and cross-service
 application exclusion remain blocked by missing Accessibility permission;
 the physical-input mutex is not qualified, and PostEvent preflight is false.
