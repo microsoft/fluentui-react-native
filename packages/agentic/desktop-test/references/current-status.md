@@ -1123,3 +1123,131 @@ Windows/Win32 E2E and Storybook smoke jobs do not select this generic
 descriptor-path contract; Windows CI is **not sufficient** for F11.
 Storybook integration still requires F9, retained launches require explicit
 F10 ownership, and cross-MCP-connection resume/replay remain unsupported.
+
+## Windows Fabric and Win32 Paper — F11 handoff qualification — 2026-11-12 UTC
+
+**Observed:** tested `c9753208d0f5602d28510d84ededf3f2fc3c3855` on
+Windows x64, active/unlocked RDP, `sessionKind: remote`. The W1 campaign and
+machine-wide native lock serialized all native/live work; the before/after
+`-RequirePhysical` gates stayed eligible. The probes perform native
+window discovery, observation and capture, not physical input.
+
+**As-is native consumer contract:** from this package,
+`FURN_NATIVE_DRIVER_TEST=1 yarn test nativeRunner.contract --runInBand`
+**skipped its one case** on Windows. The guard requires `darwin` and a signed
+AppKit fixture; its CJS implementation hardcodes a macOS executable path,
+bundle identity, endpoint and controls. Merely changing the Jest platform
+guard cannot qualify Windows. `artifacts\desktop\f11\w1\native-runner-gate.json`
+records the skip. A locked repeat with **both** opt-ins set, including
+`FURN_NATIVE_HANDOFF_APP_PATH` naming the installed REX executable, still
+skipped that case (`native-runner-gate-both-optins.json`).
+A platform fixture/CI-selection change is proposed separately,
+not implemented in this evidence-only lane.
+
+**Observed, real consumer:** the retained
+`artifacts\desktop\f11\w1\qualify.cjs` composes the real supervisor service,
+Windows-verified owner-only private descriptors, MCP SDK client/server and
+WDIO/Jasmine. Commands, from the worktree root:
+
+```powershell
+node artifacts\desktop\f11\w1\qualify.cjs windows
+node artifacts\desktop\f11\w1\qualify.cjs win32
+```
+
+Each command ran through `with-native-lock.ps1 -Lane W1 -RequirePhysical`
+inside the granted W1 campaign. This is generic externally owned,
+attach-only application handoff, **not** Storybook integration handoff.
+Windows used the registered Fabric app's exact AUMID, with Metro from this
+worktree via the app's declared `yarn start --no-interactive --port 8081`.
+Win32 used the resolved prebuilt REX `ReactTest.exe` and its configured
+component/title/production bundle, after `yarn storybook bundle --win32`
+**passed** (bundle run `f13082d6-4b6c-428f-92e0-00a42035890d`).
+The public native host owned each external launch separately from the service.
+No native app rebuild was needed: the diff against the registered
+`bdeb0b291` build changes no Windows app/native-core native source, only
+native-core changelog/version metadata. Win32 native build is **unsupported**.
+
+| Case                        | Windows Fabric                       | Win32 Paper                          | Observed evidence                                                                                                                                                                                                                                           |
+| --------------------------- | ------------------------------------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Busy by default             | Passed                               | Passed                               | Runner grant acquisition refused `target-busy` while MCP held the native session.                                                                                                                                                                           |
+| Explicit relinquish         | Passed                               | Passed                               | MCP returned `relinquished: true`; WDIO attached; MCP was refused during runner ownership and opened a fresh session afterward.                                                                                                                             |
+| Operator preemption         | Passed                               | Passed                               | Service opted into preemption; old MCP binding failed closed (`service-unavailable`), then MCP was busy during WDIO and regained a fresh session after drain.                                                                                               |
+| Normal runner exit          | Passed                               | Passed                               | Native WDIO window query completed; each one-test run passed; fresh MCP attach succeeded after awaited runner cleanup.                                                                                                                                      |
+| Runner worker crash         | Passed recovery; injected run failed | Passed recovery; injected run failed | Identity-checked literal `Stop-Process -Id 34752` / `Stop-Process -Id 29856` ran under the held lock. Parent detected the missing reporting handshake, drain completed and fresh MCP attach succeeded.                                                      |
+| Lost acquisition response   | Passed                               | Passed                               | The real service returned HTTP 200 from `/furn/grants/runner`; the transport discarded its body and threw before the typed client received it. Broker cleanup revoked/drained its parent; fresh MCP attach succeeded without knowing the lost runner token. |
+| Old resources after handoff | Passed                               | Passed                               | Old observation reference/cursor and capture resource link were refused after a fresh session.                                                                                                                                                              |
+| Credential confinement      | Passed observed probes               | Passed observed probes               | Real worker spec environment contained no broker/worker credential variables; model output and 45 retained text/config/report files contained no bearer credential. Portable hook/spec-child probes also passed.                                            |
+
+Native evidence roots, each containing `evidence.json`, terminal `run.json`
+files, generated WDIO settings and command logs:
+
+| Endpoint / phase | Run ID                                 | Terminal result                                                  |
+| ---------------- | -------------------------------------- | ---------------------------------------------------------------- |
+| Windows service  | `78e18335-571f-41c7-a724-3bab30b41fd1` | Passed lifecycle; no test cases claimed                          |
+| Windows normal   | `a3bf02e2-df22-4a63-92f8-686057ef2a80` | Passed: one selected/executed/passed                             |
+| Windows preempt  | `24d38403-b4e5-49d6-9e0f-d1d123e4fb17` | Passed: one selected/executed/passed                             |
+| Windows crash    | `8f702133-e18a-41f0-b05d-ce5fcb5cff1a` | Failed as injected: one selected, zero completed, one incomplete |
+| Win32 service    | `f7ef9875-059f-432a-9daa-2bcb1e384917` | Passed lifecycle; no test cases claimed                          |
+| Win32 normal     | `d79fd672-df2d-4943-8b40-c017a8978380` | Passed: one selected/executed/passed                             |
+| Win32 preempt    | `f1f17781-08aa-4cac-a6d8-34cb13bd749b` | Passed: one selected/executed/passed                             |
+| Win32 crash      | `a09a8c20-1380-4933-a7a3-9c2d786352c3` | Failed as injected: one selected, zero completed, one incomplete |
+
+Windows root: `artifacts\desktop\f11\w1\windows-3tYoml`.
+Win32 root: `artifacts\desktop\f11\w1\win32-BefbqE`.
+The crash directories retain process identity and the literal-PID kill script.
+Both runs used helper
+`d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`.
+The original external application process/start time remained running through
+service shutdown; only its own recorded launcher then closed it. Both private
+descriptors and each service workload claim were removed, with no cleanup
+failure. The default per-user workload claim was also absent. **Inferred:**
+claim release confirms the service's owned-resource settlement checks succeeded;
+absence is not an additional persisted claim state.
+
+One initial Windows reproduction stopped at an overly strict nested
+`assert.rejects` comparison in the local evidence harness, before relinquish.
+Its `windows-dqAIsk/evidence.json` records complete cleanup; correcting that
+assertion required no product change. Two storage-diagnostic invocations
+failed because the external lock wrapper split a single command argument;
+adding an unused second argument allowed the actual diagnostic to execute.
+These are harness failures, not passing product cases.
+
+**Additional native contracts:** driver identity/backend selection passed
+23, skipped 19 macOS cases, including **all 15 Windows cases** skipped in the
+earlier macOS run. `protectedService.contract` passed three, with the
+recovering-quarantine case **failed/environment-blocked before its assertions**:
+project-local scratch ancestry was refused (`ancestor`). The default private
+store opened and supported both live passes; no ACL was changed.
+Per-case results and reasons: `artifacts\desktop\f11\w1\case-mapping.json`,
+`protected-service.json`, `storage-probe.json`. Windows/Win32
+`yarn desktop-driver doctor --platform windows` and `--platform win32`
+each **passed**, reporting `ready: true`; `doctor --permissions` returned
+**unsupported**, not passed.
+
+**Portable checks, native opt-ins unset, uncached:**
+
+| Exact command                                                               | Result                                 |
+| --------------------------------------------------------------------------- | -------------------------------------- |
+| `yarn build`                                                                | Passed                                 |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand`     | Passed 1,211; skipped 88; failed zero  |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand`       | Passed 376; skipped eight; failed zero |
+| `yarn workspace @fluentui-react-native/desktop-driver-mcp test --runInBand` | Passed 32; skipped zero; failed zero   |
+
+Logs/JSON results are under `artifacts\desktop\f11\w1`. Test scratch was
+project-local, with matching `TEMP`, `TMP` and `GIT_CEILING_DIRECTORIES`.
+No install was needed. Existing `.changeset/scoped-runner-handoff.md` covers
+the three published packages. No product source, test or CI configuration was
+changed. Native Storybook handoff, retained launches, cross-connection resume
+and replay remain outside F11's generic phase.
+
+The Windows/Win32 generic consumer remains absent from hosted selection;
+Windows driver-native contracts and Storybook smokes do not replace it.
+This coverage change is handed back for implementation. W1's campaign is
+ended; final audit: `FURN-AUDIT: no FURN desktop processes found`.
+
+**Evidence validation:** `yarn markdown-link-check -c
+.github\markdown-link-check-config.json
+packages\agentic\desktop-test\references\current-status.md` passed
+(15 links). Root `yarn oxfmt --check`, `yarn change:check` and
+`git diff --check` passed. No clean-cache `buildci` rerun was required for
+these evidence-only markdown edits.

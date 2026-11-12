@@ -371,3 +371,103 @@ and local artifact locators are in
 Windows/Win32 native handoff is not covered by the existing PR smoke/E2E
 selection and remains not run. Storybook integration and retained-launch
 ownership remain separate follow-up phases.
+
+## Windows Fabric and Win32 Paper — F11 handoff qualification — 2026-11-12 UTC
+
+**Observed:** source `c9753208d0f5602d28510d84ededf3f2fc3c3855`;
+Windows x64, active/unlocked RDP (`sessionKind: remote`). Live runs were
+inside W1's campaign and the machine-wide `with-native-lock.ps1 -Lane W1
+-RequirePhysical` wrapper; before/after session gates stayed eligible.
+No physical-input delivery is claimed.
+
+The real MCP SDK/server used `connectWithDescriptor`, native Windows listener
+verification and a separate attenuated controller child. The generic
+`DesktopSupervisor` published agent/runner descriptors in the validated
+default private store. It served externally owned apps, not the unsupported
+Storybook integration handoff. From the worktree root, the retained
+reproduction commands are:
+
+```powershell
+node artifacts\desktop\f11\w1\qualify.cjs windows
+node artifacts\desktop\f11\w1\qualify.cjs win32
+```
+
+Windows attached to the exact registered packaged Storybook AUMID (Fabric),
+with Metro from this worktree using the app's declared
+`yarn start --no-interactive --port 8081`. The registered build at
+`bdeb0b291` was reused because the native-source comparison found only
+native-core changelog/version metadata changes. Win32 attached to the exact
+resolved prebuilt REX `ReactTest.exe` (Paper), after the app's declared
+`yarn storybook bundle --win32` passed. The public native launcher maintained
+application ownership separately from the agent service.
+
+| Native MCP/runner case                              | Windows Fabric                                                  | Win32 Paper                                                     |
+| --------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| Runner defaults to busy while MCP owns a session    | Passed (`target-busy`)                                          | Passed (`target-busy`)                                          |
+| `desktop_session` explicit relinquish               | Passed; returned confirmed relinquish                           | Passed; returned confirmed relinquish                           |
+| Operator-authorized preemption                      | Passed; old adapter binding refused, then runner-exclusive busy | Passed; old adapter binding refused, then runner-exclusive busy |
+| Normal runner drain and fresh MCP reopen            | Passed                                                          | Passed                                                          |
+| Identity-checked, literal-PID worker kill and drain | Passed recovery; intentionally failed WDIO run                  | Passed recovery; intentionally failed WDIO run                  |
+| Lost real HTTP 200 runner-grant response            | Passed; parent drain restored admission                         | Passed; parent drain restored admission                         |
+| Old reference/cursor/capture-link rejection         | Passed                                                          | Passed                                                          |
+
+During preemption the old adapter operation reported `service-unavailable`;
+an attempted open then returned `target-busy` during runner ownership.
+After runner cleanup, the same MCP connection opened a new child/session.
+No old session or resources were resumed or replayed. Lost-response injection
+discarded the real native service's acquisition-response body before the typed
+client received it; it did not substitute a fake listener.
+
+| Endpoint       | Local evidence root                       | Normal / preempt / crash run IDs                                                                                         |
+| -------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Windows Fabric | `artifacts\desktop\f11\w1\windows-3tYoml` | `a3bf02e2-df22-4a63-92f8-686057ef2a80` / `24d38403-b4e5-49d6-9e0f-d1d123e4fb17` / `8f702133-e18a-41f0-b05d-ce5fcb5cff1a` |
+| Win32 Paper    | `artifacts\desktop\f11\w1\win32-BefbqE`   | `d79fd672-df2d-4943-8b40-c017a8978380` / `f1f17781-08aa-4cac-a6d8-34cb13bd749b` / `a09a8c20-1380-4933-a7a3-9c2d786352c3` |
+
+Each root retains `evidence.json`, `run.json`, command logs and crash-process
+identity. Normal/preempt runs each have one selected/executed/passed test,
+zero skips and `terminal: true`. Crash runs are terminal **failed**, with one
+selected, zero completed and one incomplete test: killing workers `34752`
+(Windows) and `29856` (Win32) intentionally prevented the final reporting
+handshake. Parent cleanup completed and fresh MCP attach proved reuse.
+Both service lifecycle reports are terminal passed; both service workload
+claims and descriptors were removed. The same external app process
+incarnation survived service shutdown, then its recorded launcher closed it.
+No processes survived; audit: `FURN-AUDIT: no FURN desktop processes found`.
+The campaign is ended.
+
+Native worker environment checks found no broker/worker credential variables;
+model output and a scan of 45 retained text/config/report files contained no
+bearer credential. This is observed confinement, not isolation from hostile
+same-account code or Node preloads. Helper artifact:
+`d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`.
+
+**Observed, supporting checks:** `yarn build` passed. With native opt-ins unset,
+uncached `yarn workspace @fluentui-react-native/desktop-driver-mcp test
+--runInBand` passed all 32; driver passed 1,211/skipped 88; harness passed
+376/skipped eight. Logs are under `artifacts\desktop\f11\w1`. The additional
+Windows native identity/backend selection passed 23 and skipped 19 macOS
+cases, including all 15 Windows cases skipped by the earlier macOS selection.
+The protected-service selection passed three; its recovering-quarantine case
+was **failed/environment-blocked** by project scratch ancestry (`ancestor`).
+Default protected storage opened and supported both live runs; no ACL change
+was made. Windows permission diagnostics are **unsupported**, not passed.
+
+**Remaining CI gap:** desktop-test's native MCP/WDIO consumer is darwin-gated,
+with a macOS-only fixture. On Windows, `FURN_NATIVE_DRIVER_TEST=1 yarn
+workspace @fluentui-react-native/desktop-test test nativeRunner.contract
+--runInBand` skips its sole case, including a locked repeat with the fixture
+path opt-in naming the installed REX executable. Both plain endpoint
+`desktop-driver doctor` commands passed (`ready: true`); their `--permissions`
+variants are unsupported. Driver native contracts/Storybook smoke
+selection do not cover this consumer handoff. A Windows fixture and explicit
+consumer selection are handed back for implementation; no source or CI fix
+was made here. The existing three-package `scoped-runner-handoff` patch
+changeset remains. Storybook handoff, retained launches and cross-connection
+resume/replay remain separate phases.
+
+**Evidence validation:** `yarn markdown-link-check -c
+.github\markdown-link-check-config.json
+packages\agentic\desktop-driver-mcp\references\current-status.md` passed
+(six links). Root `yarn oxfmt --check`, `yarn change:check` and
+`git diff --check` passed. No clean-cache `buildci` rerun was required for
+these evidence-only markdown edits.

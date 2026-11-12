@@ -507,3 +507,119 @@ one corrected-fixture retry, cleanup evidence and artifact locators are in
 Windows/Win32 native handoff is not selected by existing PR smoke/E2E jobs
 and remains not run. Storybook integration, retained launches, and
 cross-connection resume/replay are not implemented by this phase.
+
+## Windows Fabric and Win32 Paper — F11 handoff qualification — 2026-11-12 UTC
+
+**Observed:** source `c9753208d0f5602d28510d84ededf3f2fc3c3855`,
+Windows x64, active/unlocked RDP (`sessionKind: remote`). Every native command
+ran inside the W1 campaign through `with-native-lock.ps1 -Lane W1`; native
+contracts and live endpoint runs used `-RequirePhysical`. Both session gates
+remained eligible. No physical input was delivered by the handoff probes;
+these results are not physical-input qualification.
+
+From this package, with `FURN_NATIVE_DRIVER_TEST=1`:
+
+```powershell
+yarn test --runInBand serviceIdentity.contract applicationIncarnation.contract nativeDriver --json --outputFile <worktree>\artifacts\desktop\f11\w1\native-contracts.json
+yarn test --runInBand protectedService.contract --json --outputFile <worktree>\artifacts\desktop\f11\w1\protected-service.json
+```
+
+The first selection **passed 23, skipped 19, failed zero**. All 15 Windows
+cases skipped in the earlier macOS selection executed and passed here:
+
+| Windows case                                                              | Result |
+| ------------------------------------------------------------------------- | ------ |
+| Service identity: describes the publishing supervisor process             | Passed |
+| Service identity: refuses nonexistent/exited/foreign-principal processes  | Passed |
+| Service identity: verifies only the process owning the loopback listener  | Passed |
+| Service identity: refuses changed start time, image or session            | Passed |
+| Service identity: compares executable paths case-insensitively            | Passed |
+| Service identity: refuses an unserved address                             | Passed |
+| Service identity: refuses an exited process                               | Passed |
+| Service identity: refuses `http://localhost:49152`                        | Passed |
+| Service identity: refuses `http://192.0.2.1:49152`                        | Passed |
+| Service identity: refuses `https://127.0.0.1:49152`                       | Passed |
+| Service identity: refuses `http://127.0.0.1`                              | Passed |
+| Service identity: refuses `http://127.0.0.1:49152/status`                 | Passed |
+| Service identity: keeps IPv6 and IPv4 listeners apart                     | Passed |
+| Application incarnation: proves exact-process exit, not a weaker identity | Passed |
+| Native driver: builds/reuses/resolves/handshakes the Windows helper       | Passed |
+
+The other eight passing cases are portable native-driver source/build-policy
+checks. All 19 skips are macOS-only: 16 service-identity cases, one
+application-incarnation case and two helper-build/signing cases. They are
+**skipped**, not Windows passes. Every exact test title, source file, outcome,
+skip reason and mapping to the 15 earlier skips is retained in
+`artifacts\desktop\f11\w1\case-mapping.json`; the raw Jest results and
+`native-contracts.log` are alongside it.
+
+`protectedService.contract` was included because it exercises changed
+session-owner admission, busy, revocation and drain paths with a real helper.
+Three cases **passed**: grant/owner isolation, revoked-owner handoff, and
+quarantine retention without exit proof. The recovering-quarantine case
+**failed before its assertions, environment-blocked**: the project-local
+scratch directory's ancestry is refused by Windows private storage
+(`reason: ancestor`). A native diagnostic reproduced that refusal and opened
+the default private store successfully (`storage-probe.json`). No ACL was
+changed. Both the Node storage adapter and native storage implementation are
+unchanged from this branch's main base. **Inferred:** this is storage
+placement, not an F11 regression. Recovery in that additional contract remains
+unqualified by this run. Other native fixture suites were not repeated:
+F11 changes no native protocol/provider code, and live RN endpoints below
+exercise the changed generic handoff.
+
+**Observed, live native:** Windows Fabric packaged Storybook and Win32 Paper
+REX each passed default busy, explicit MCP relinquish, operator preemption,
+normal worker drain, killed-worker drain, and real lost-acquisition-response
+drain. A fresh MCP session succeeded after each runner; stale references,
+observation cursors and captured-resource links were rejected. Preemption
+invalidated the old binding (`service-unavailable` at the MCP adapter), kept
+MCP busy while the runner held the reservation, then allowed a fresh child.
+
+| Endpoint       | Local evidence root                       | Terminal runner runs: normal / preempt / crash                                                                                                            |
+| -------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows Fabric | `artifacts\desktop\f11\w1\windows-3tYoml` | `a3bf02e2-df22-4a63-92f8-686057ef2a80` passed / `24d38403-b4e5-49d6-9e0f-d1d123e4fb17` passed / `8f702133-e18a-41f0-b05d-ce5fcb5cff1a` failed as injected |
+| Win32 Paper    | `artifacts\desktop\f11\w1\win32-BefbqE`   | `d79fd672-df2d-4943-8b40-c017a8978380` passed / `f1f17781-08aa-4cac-a6d8-34cb13bd749b` passed / `a09a8c20-1380-4933-a7a3-9c2d786352c3` failed as injected |
+
+The retained reproduction is `node artifacts\desktop\f11\w1\qualify.cjs
+windows` or `... win32`, from the worktree root under the W1 physical/session
+lock. It composes the real `DesktopSupervisor`, verified native descriptors,
+MCP SDK/server and WDIO/Jasmine, mirroring the macOS fixture procedure rather
+than using the unsupported Storybook handoff. Apps are externally launched
+through the public native host with exact AUMID/REX identity. Windows Metro
+uses the app's declared `yarn start --no-interactive --port 8081`, from this
+worktree; Win32 uses `yarn storybook bundle --win32`. The registered Fabric
+build at `bdeb0b291` was reused: the requested native-source diff contains only
+native-core changelog/version metadata, no Windows native source changes.
+
+Helper artifact: `d8ee05e4796fb3aa22f7b5dbf481bd8cdfb0c20b6d5d24676d689dc7900d5b3c`.
+Both external applications remained the same running process incarnation
+through service shutdown; only their exact recorded launcher then closed them.
+Both descriptors and workload claims were removed. All `run.json` files are
+terminal, including the deliberately failed crash runs (one selected,
+zero completed, one incomplete; cleanup succeeded). The service lifecycle
+runs passed. A scan of 45 retained text/config/report files found no bearer
+credential. Final audit: `FURN-AUDIT: no FURN desktop processes found`;
+campaign ended.
+
+**Observed, portable:** uncached `yarn workspace
+@fluentui-react-native/desktop-driver test --runInBand` passed 1,211, skipped
+88, failed zero with native opt-ins unset. `yarn build` passed. Windows
+`yarn desktop-driver doctor --platform windows` and `--platform win32`
+each **passed** with `ready: true`; adding `--permissions` is **unsupported**
+(exit 1), not a permission pass.
+The existing three-package `scoped-runner-handoff` patch changeset is retained.
+
+**Remaining automation gap:** desktop-test's `nativeRunner.contract` is
+darwin-gated and its fixture uses `Contents/MacOS/fixture`; Windows execution
+selects one skipped case even with the native opt-in. The CI native-driver
+step runs driver contracts, not this generic MCP/WDIO consumer. A Windows
+fixture path and explicit consumer selection are proposed to the coordinator;
+no test/source or CI code was changed by this qualification lane.
+
+**Evidence validation:** `yarn markdown-link-check -c
+.github\markdown-link-check-config.json
+packages\agentic\desktop-driver\references\current-status.md` passed
+(six links). Root `yarn oxfmt --check`, `yarn change:check` and
+`git diff --check` passed. No clean-cache `buildci` rerun was required for
+these evidence-only markdown edits.
