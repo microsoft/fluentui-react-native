@@ -144,8 +144,8 @@ never grants termination authority. Existing Storybook lease files remain a
 separate, legacy identity path. Independent helpers hold a stable per-user
 exclusive lock for each exact application incarnation until its lease is
 released. Lock contention never permits signalling another helper's application.
-The macOS-only `inspectApplication` command accepts the same configured target
-parameters as `attach` and returns only `{ processId, processStartedAt }`. It
+The `inspectApplication` command accepts the same configured target parameters
+as `attach`. On macOS it returns only `{ processId, processStartedAt }`. It
 performs the same descriptor, legacy-lease/nonce, bundle/executable, exact-window
 and uniqueness checks, with the exact kernel incarnation captured before window
 discovery and rechecked afterwards. It does not create an application lease,
@@ -153,8 +153,8 @@ acquire an application or physical-input lock, register windows/elements, or
 grant control/termination authority. Identity observation can therefore run on
 the session's helper while its controlling lease remains held, without stealing
 window records or permitting another service to attach. Cancellation and
-unverifiable identity/Accessibility fail closed. Other providers do not implement
-this command.
+unverifiable identity/Accessibility fail closed. Windows implements the same
+read-only boundary with its additional native identity evidence described below.
 Other lock failures after a proven launch use exact-incarnation cleanup and
 report `exited` only when that primary process is confirmed gone.
 Explicit app paths are authoritative; bundle-only launch rejects
@@ -178,6 +178,71 @@ NSError user information. A callback returning both an error and a new process
 uses the same exact-incarnation cleanup path. These
 additive fields are described in [protocol.json](protocol.json) and retain
 wire version 1.0.
+
+### Windows application ownership
+
+Windows and Win32 leases and inspection results retain the canonical absolute
+`executablePath`, `interactiveSession: "windows-session:<id>"`, and the native
+process creation timestamp with exactly seven fractional digits (100 ns), plus
+`aumid` when Windows reports packaged identity. `APPMODEL_ERROR_NO_APPLICATION`
+means an unpackaged process; an unreadable AUMID is unknown evidence, not proof
+that a process is unpackaged. The process must belong to the helper's user and
+interactive session. For REX, the canonical `ReactTest.exe` image, PID, native
+creation time, and session identify one host incarnation, not just its title.
+
+An exact external attach may supply `processIdentity` with all four required
+fields (`processId`, `processStartedAt`, `executablePath`, `interactiveSession`)
+and the captured `aumid` when packaged. Optional descriptor executable/AUMID
+constraints must also match. Native start comparison is exact: even one 100 ns
+tick differs. This identity cannot authorize a launch or be combined with a
+legacy nonce lease. The legacy lease parser retains its existing timestamp
+compatibility; it is not the exact-pin API. `inspectApplication` checks the same
+uniqueness and descriptor constraints without creating a lease, registering
+windows, or acquiring application/input control.
+
+Independent helpers exclude control of an exact PID/start incarnation with a
+session-local, nonwaiting named semaphore. A successful launch holds control of
+its native launch root before discovery and, if different, of the primary
+process before publishing the lease. Multiple leases within one helper share
+its control; another helper receives `application-lock-busy`. Closing an
+attached lease releases control without signalling the application. This lock
+is separate from the physical-input mutex. Failed contenders retain no waiter
+handle; after a crash, Windows destroys the semaphore when its last handle
+closes.
+
+Unpackaged leases report `launchKind: "direct-child"` and containment
+`job-object`; packaged activations report `launchKind: "packaged-activation"`
+and remain explicitly `uncontained`. Assigning a job after activation cannot
+close the already-running process's containment race, and existing job
+restrictions may forbid assignment. The helper does not promise packaged or
+arbitrary-descendant containment. Attached applications remain `external` and
+are never assigned to owned jobs.
+
+Failed or cancelled Windows launches use the same `applicationSettlement`
+verdicts and metadata locations as macOS. A trusted captured process is named
+with its full identity, causal launch kind and containment when available.
+`not-started` proves rejection before creation or refusal to adopt a
+pre-existing activation. `exited` requires confirmed cleanup; unreadable or
+surviving identities remain `unknown`. A pending or unleased acquisition is not
+automatic recovery authority, even when a primary process was captured.
+
+The trusted `recoverApplication` command accepts `{ endpoint, identity }`.
+Only the workload owner's recovery path calls it; no WebDriver capability or
+route exposes it. It opens and holds the exact process, verifies native
+PID/start, executable, AUMID, user and session, acquires application control,
+then closes/terminates only that recorded process and proves exit before
+returning `{ state: "exited" }`. An already-exited PID also returns `exited`.
+A reused live PID is rejected, never signalled. Unreadable identity, another
+controller, cancellation, or unconfirmed exit keeps recovery fenced.
+Mismatch reasons include `identity-start-mismatch`, `identity-session-mismatch`,
+`identity-executable-mismatch`, and `identity-aumid-mismatch`; ambiguous
+process/window candidates report `application-identity-ambiguous`, and
+unreadable candidates report `application-identity-unknown`.
+
+These additive Windows schemas are in [protocol.json](protocol.json) and retain
+FDR1 version 1.0.
+
+### Snapshot metadata
 
 Element snapshots can additionally include `required` as a supported Boolean
 or an unsupported value with its reason. Older or non-supporting providers may

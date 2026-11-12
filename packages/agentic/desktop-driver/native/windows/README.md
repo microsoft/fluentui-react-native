@@ -86,16 +86,42 @@ Accessibility help text uses cached `UIA_HelpTextPropertyId` with defaults
 disabled. An explicit empty string is supported; absent or non-string values
 remain unsupported.
 
-Attach accepts an owner-generated nonce-bound lease, or an exact title
-qualified by the canonical executable or AUMID. Title-only attach, zero
+Attach accepts an owner-generated nonce-bound lease, an exact native
+`processIdentity`, or an exact title qualified by the canonical executable or
+AUMID. The exact pin requires PID, seven-fractional-digit native creation time,
+canonical executable, session, and AUMID when packaged; it rejects a one-tick
+start mismatch instead of applying the legacy lease parser's tolerance.
+Title-only attach, zero
 matches, and multiple qualified matches fail. Attach fails closed: a lease's
 process must be in the helper's session and match the lease's executable or
 AUMID, and an unleased attach fails as ambiguous when any titled candidate's
 identity cannot be read rather than skipping it.
-Leases record ownership, PID, process start, executable, the primary window,
-and `containment`. Attached apps survive WebDriver deletion and helper
+Leases record ownership, PID, native process start, canonical executable,
+`interactiveSession`, packaged AUMID when present, the primary window,
+`launchKind`, and `containment`. The executable/PID/start/session tuple also
+identifies an exact REX host incarnation. Unknown native evidence and multiple
+matching processes/windows fail closed with fixed diagnostic reasons.
+Attached apps survive WebDriver deletion and helper
 disposal (`external`); launched apps are closed only by their exact recorded
 process identity.
+
+`inspectApplication` uses the same descriptor and uniqueness checks without
+creating leases, application/input locks, or window records. Independent
+helpers can observe a controlled application but cannot both control its exact
+incarnation: a session-local nonwaiting semaphore is keyed by PID and native
+creation time, and remains held through lease cleanup. A launch acquires root
+control before cleanup authority or window discovery, so a losing concurrent
+packaged activation cannot terminate another service's winning incarnation.
+The separate input mutex still serializes
+physical input across different applications and helpers.
+
+The trusted `recoverApplication` operation verifies a recorded process's exact
+start, executable, AUMID, user and session while holding its process handle,
+then acquires application control and proves exit after exact cleanup. A reused
+live PID, unknown evidence, another controller, or unconfirmed cleanup is
+refused without adopting a replacement process. No WebDriver route exposes
+this operation. Its caller must have an acquired, owned application resource,
+not an external attachment or an incomplete launch.
 
 Unpackaged arguments use the standard `CommandLineToArgvW` quoting rules.
 Launch ownership requires a non-preexisting window from the exact created
@@ -133,6 +159,20 @@ the requested AUMID before the helper trusts it as the launch root, tracks it,
 or ends it. A lease is created only when the leased process's start time can be
 read, because that start time is what later tells the same process from a reused
 process id. The helper never places an attached application in a job.
+
+Packaged activation deliberately remains `uncontained`. Assigning a job after
+activation leaves a pre-assignment execution race and may fail under existing
+job restrictions, so this backend does not advertise reliable packaged
+containment. The workload claim records the exact acquired application before
+session use and remains fenced after failed cleanup. A later Windows native
+supervisor may reconcile that application only after proving the recorded
+owner exited or its PID was reused; unknown resources/effects and unleased
+launches still require operator reconciliation. Exact primary-process cleanup
+does not prove arbitrary uncontained descendants exited.
+
+Failed/cancelled launches carry `applicationSettlement` and captured native
+identity in `response.error.data` or `cancelled.data`; the
+[protocol](../PROTOCOL.md#windows-application-ownership) defines the allowlist.
 
 ## Automation behavior
 

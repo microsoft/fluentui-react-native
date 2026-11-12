@@ -373,7 +373,8 @@ void TestLeaseIdentity() {
     try {
       applications.Launch(request, token);
     } catch (const HelperError& error) {
-      rejected = std::string(error.code()) == kErrorInvalidParams;
+      rejected = std::string(error.code()) == kErrorInvalidParams &&
+                 error.data().StringField("applicationSettlement") == "not-started";
     }
     Check(rejected, "invalid launch deadlines are rejected before application side effects");
   }
@@ -384,6 +385,14 @@ void TestLeaseIdentity() {
     titleOnlyRejected = std::string(error.code()) == kErrorInvalidParams;
   }
   Check(titleOnlyRejected, "unleased title-only attach is rejected");
+  token.Cancel();
+  bool cancelledBeforeLaunch = false;
+  try {
+    applications.Launch(json::Value::Object(), token);
+  } catch (const CancelledError& error) {
+    cancelledBeforeLaunch = error.data().StringField("applicationSettlement") == "not-started";
+  }
+  Check(cancelledBeforeLaunch, "cancellation before launch reports that no process started");
 }
 
 void TestHello() {
@@ -1319,6 +1328,62 @@ void TestLeaseRegistrationFailure() {
   Check(applications.WindowIdsForLease(leaseId).size() == 1,
         "a new lease can register the window after a failed registration");
   applications.CloseApplication(leaseId, CancellationToken{});
+}
+
+void TestExactApplicationOwnership() {
+  WindowThread windows;
+  const std::wstring title = L"Furn exact application identity";
+  const HWND window = windows.Create(L"FurnSelfTestApplicationIdentity", title.c_str());
+  ApplicationManager owner;
+  ApplicationManager observer;
+  const CancellationToken token;
+  const std::string leaseId = owner.AdoptWindowForTesting(window, title).id;
+  const json::Value lease = owner.SerializeLease(*owner.PrimaryLease());
+  json::Value request = json::Value::Object();
+  json::Value application = json::Value::Object();
+  application.Set("executablePath", *lease.Find("executablePath"));
+  application.Set("windowTitle", json::Value::String(title));
+  request.Set("application", application);
+  request.Set("endpoint", json::Value::String(std::string("win32")));
+  const json::Value identity = observer.InspectApplication(request, token);
+  Check(identity.NumberField("processId") == GetCurrentProcessId() &&
+            identity.StringField("processStartedAt") == lease.StringField("processStartedAt") &&
+            identity.StringField("executablePath") == lease.StringField("executablePath") &&
+            identity.StringField("interactiveSession") == lease.StringField("interactiveSession"),
+        "read-only discovery retains the full native process incarnation");
+  Check(observer.PrimaryLease() == nullptr && owner.WindowIdsForLease(leaseId).size() == 1,
+        "discovery creates no lease or controlling window records");
+  bool excluded = false;
+  try {
+    observer.Attach(request, token);
+  } catch (const HelperError& error) {
+    excluded = error.reason() == "application-lock-busy";
+  }
+  Check(excluded, "another application manager cannot control an acquired process");
+
+  FILETIME started{};
+  TryParseIso8601(identity.StringField("processStartedAt"), started);
+  const std::uint64_t staleTicks = FileTimeTicks(started) + 1;
+  const FILETIME stale{static_cast<DWORD>(staleTicks), static_cast<DWORD>(staleTicks >> 32)};
+  json::Value pin = identity;
+  pin.Set("processStartedAt", json::Value::String(FormatFileTimeIso8601(stale)));
+  application.Set("processIdentity", pin);
+  request.Set("application", application);
+  bool reused = false;
+  try {
+    observer.InspectApplication(request, token);
+  } catch (const HelperError& error) {
+    reused = error.reason() == "identity-start-mismatch";
+  }
+  Check(reused, "an exact pin rejects even a one-tick native start mismatch");
+  application.Set("processIdentity", identity);
+  request.Set("application", application);
+  Check(observer.InspectApplication(request, token).Serialize() == identity.Serialize(),
+        "an exact pin is readable without transferring control");
+  owner.CloseApplication(leaseId, token);
+  const std::string borrowed = observer.Attach(request, token).id;
+  observer.CloseApplication(borrowed, token);
+  Check(IsWindow(window) != FALSE, "releasing control never ends an attached application");
 }
 
 void TestAttachedCloseKeepsQuarantine() {
@@ -3904,6 +3969,7 @@ int RunSelfTest() {
   TestDriverObservation();
   TestSnapshotShape();
   TestLeaseIdentity();
+  TestExactApplicationOwnership();
   TestHello();
   RunAuthoritySelfTests(Check);
   RunObservationSelfTests(Check);

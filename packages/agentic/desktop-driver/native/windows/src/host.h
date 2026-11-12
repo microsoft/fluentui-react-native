@@ -45,8 +45,9 @@ class Host {
   bool WriteResponse(const std::string& id, const std::string& command, const CommandResult& result) noexcept;
   bool WriteError(const std::string& id, const std::string& command, const std::string& code,
                   const std::string& message, std::optional<MutationEffect> effect = std::nullopt,
-                  const std::string& reason = {}) noexcept;
-  bool WriteCancelled(const std::string& id, std::optional<MutationEffect> effect) noexcept;
+                  const std::string& reason = {}, const json::Value& lifecycle = json::Value::Null()) noexcept;
+  bool WriteCancelled(const std::string& id, std::optional<MutationEffect> effect,
+                      const json::Value& lifecycle = json::Value::Null()) noexcept;
   void RecordWriteFailure(std::string_view operation, const char* message) noexcept;
   void PublishWindowClosed(const std::string& windowId) noexcept;
 

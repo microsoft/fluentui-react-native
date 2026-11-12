@@ -94,6 +94,74 @@ smoke jobs do not exercise failed packaged-launch survivor journaling/recovery.
 Those jobs are insufficient for that acceptance gate; portable schema tests
 must not be presented as Windows native qualification.
 
+## Neutral Windows application ownership
+
+The Windows provider fixture suite is opt-in and needs an eligible interactive
+session and the exclusive native-validation lock:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationOwnership.contract
+```
+
+It exercises native read-only inspection, exact 100 ns start/session/executable
+checks, ambiguity, cross-helper application exclusion, and five contained fixture
+launch/close cycles. Its additional input-mutex case requires
+`FURN_NATIVE_PHYSICAL_INPUT_TEST=1`. A skipped physical case is not input
+qualification. The Win32 fixture is supporting provider evidence, not Windows
+Fabric or REX application qualification.
+
+For actual consumer qualification, first explicitly build the helper, prepare
+the Windows Fabric packaged app and its own Metro instance, and bundle the
+Win32 Paper REX app. Set `FURN_OWNERSHIP_WINDOWS_APPLICATION` and
+`FURN_OWNERSHIP_WIN32_APPLICATION` to JSON application descriptors resolved from
+the owning app's canonical config. The Windows descriptor must identify the
+registered AUMID and exact title; the REX descriptor includes the verified
+`ReactTest.exe`, working directory, bundle/component arguments, and exact title.
+These are trusted test inputs, not WebDriver capabilities. Do not select another
+worktree's Metro or fabricate an application identity.
+
+Under the exclusive lock and connected/unlocked desktop gate:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+$env:FURN_NATIVE_APPLICATION_OWNERSHIP_TEST = '1'
+$env:FURN_NATIVE_PHYSICAL_INPUT_TEST = '1'
+yarn workspace @fluentui-react-native/desktop-test test --runInBand windowsApplicationOwnership.contract
+```
+
+The suite requires a verified prebuilt helper and both explicit descriptors.
+Separately on Windows Fabric packaged and Win32 Paper REX it checks:
+
+- Five consecutive supervisor launches/teardowns, exact application and claim
+  evidence, two borrowed sessions per launch, unchanged window identifiers
+  during inspection, cross-service exclusion, and no surviving old incarnation.
+- Start/session/executable mismatch rejection without signalling the app.
+- A journaled acquired application in a child owner; identity-verified,
+  literal-PID helper/owner fault injection; a live-owner fence; then real
+  supervisor startup recovery of the exact old application and claim.
+  Windows remains `uncontained` and must actually survive helper death; REX's
+  Job Object must drain instead.
+- Physical-input mutex contention across the two real endpoint helpers, with
+  explicit cancellation and release. Run this only under the physical-session
+  gate; semantic activation does not establish it.
+
+Three additional paired Windows packaged activations check that a losing
+launcher cannot clean up the winning service's exact application.
+
+Evidence is written to the desktop-test package's
+`artifacts/desktop/windows-application-ownership-*/evidence.json`, including
+source/helper identities, endpoint descriptors, process evidence and case
+outcomes. Also record the registered app build, renderer, session kind, exact
+commands, and before/after process audits in the Windows ledger. Keep private
+machine paths in ignored artifacts, not public evidence.
+
+The crash-owner helper is a contract fixture, not a second production service
+factory. Unknown resources/effects, unleased launches, legacy/unverified claims,
+and interrupted recovery are fenced rather than force-reclaimed. This suite
+does not qualify mixed Storybook service-graph recovery, arbitrary uncontained
+descendants, or a new protected-agent recovery API.
+
 ## Parameters and prerequisites
 
 Record these for every renderer run:

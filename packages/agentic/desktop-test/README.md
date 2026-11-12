@@ -62,8 +62,8 @@ when working on the package.
 - WDIO owns suite sessions, globals, hooks, grouped execution, retries, and
   framework assertions.
 - The generic harness supervises services, workers, the driver, and application
-  claim resources. Launch defaults to session-owned; macOS can opt into
-  supervisor-owned launch. External attach always preserves the app. Neutral
+  claim resources. Launch defaults to session-owned; macOS, Windows and Win32
+  can opt into supervisor-owned launch. External attach always preserves the app. Neutral
   exact identity helpers live at `/application-ownership`; Storybook's lifecycle
   takeover remains transitional (see [lifecycle](references/lifecycle.md)).
 - Every run records structured results, command output, and evidence in its
@@ -73,6 +73,10 @@ when working on the package.
 - Generic and Storybook native services share one factory with durable
   quarantine storage and exact application-exit probes. Restart does not clear
   uncertain effects; see [lifecycle and recovery](references/lifecycle.md).
+- Windows native startup can reconcile acquired application resources from a
+  proven-exited owner using exact PID/start/executable/session/AUMID evidence.
+  Unknown resources, interrupted launches, and unrelated effects remain fenced;
+  this is not general stale-claim removal.
 - Owned Node services inherit a per-command parent lifeline. Cooperative
   disposers await initialization and settlement before withdrawing descriptors;
   Metro and command wrappers use their own SIGTERM handlers. Without a

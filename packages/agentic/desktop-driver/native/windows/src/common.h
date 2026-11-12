@@ -13,6 +13,8 @@
 #include <string>
 #include <string_view>
 
+#include "json.h"
+
 namespace furn {
 
 // Wire error codes shared with the Node adapter. "unsupported-operation" and
@@ -81,11 +83,14 @@ class HelperError : public std::runtime_error {
   // Set only when a mutating command fails; reads and lifecycle commands carry none.
   const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
   void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
+  const json::Value& data() const noexcept { return data_; }
+  void SetData(json::Value data) { data_ = std::move(data); }
 
  private:
   std::string code_;
   std::string reason_;
   std::optional<MutationEffect> effect_;
+  json::Value data_;
 };
 
 [[noreturn]] void Fail(std::string code, std::string message);
@@ -101,9 +106,12 @@ class CancelledError : public std::exception {
   // Set only when a mutating command is cancelled.
   const std::optional<MutationEffect>& effect() const noexcept { return effect_; }
   void SetEffect(MutationEffect effect) noexcept { effect_ = effect; }
+  const json::Value& data() const noexcept { return data_; }
+  void SetData(json::Value data) { data_ = std::move(data); }
 
  private:
   std::optional<MutationEffect> effect_;
+  json::Value data_;
 };
 
 class CancellationToken {

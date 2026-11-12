@@ -8,8 +8,10 @@ import type { DesktopServiceIdentity } from '@fluentui-react-native/desktop-driv
 import { resolveNativeDesktopDriver } from '@fluentui-react-native/desktop-driver/native';
 import { NativeDriverError } from '@fluentui-react-native/desktop-driver';
 import type { NativeDriverResolveOptions } from '@fluentui-react-native/desktop-driver';
+import type { NativeApplicationIdentity } from '@fluentui-react-native/desktop-driver';
 
 import type { DesktopResourceRecord } from './resources.js';
+import { captureDesktopApplicationIdentity } from './applicationOwnership.js';
 
 export type DesktopWorkloadProcessIdentity = Readonly<Omit<DesktopServiceIdentity, 'incarnation'>>;
 
@@ -104,6 +106,7 @@ export function createDesktopWorkloadClaim(options: DesktopWorkloadClaimOptions)
   const root = options.directory ?? defaultDesktopWorkloadDirectory();
   fs.mkdirSync(root, { recursive: true, mode: 0o700 });
   const filename = path.join(root, 'interactive.lock');
+  requireNoRecoveryBarrier(filename);
   const owner: DesktopWorkloadOwnerIdentity = Object.freeze({
     id: randomUUID(),
     processId: process.pid,
@@ -217,6 +220,180 @@ export async function inspectDesktopWorkloadClaim(
   return { state: 'live', record };
 }
 
+/**
+ * Reconciles only recorded Windows applications and the in-owner driver listener. Unknown resources/effects and
+ * interrupted acquisitions without native identity remain fenced; this is not general stale-lock reclamation.
+ */
+export async function recoverWindowsDesktopWorkloadClaim(options: {
+  directory?: string;
+  endpoint: 'windows' | 'win32';
+  targetId: string;
+  targetInstanceId: string;
+  probeOwner: (owner: DesktopWorkloadOwnerIdentity) => Promise<DesktopWorkloadOwnerProbe>;
+  /** Must prove exact native exit, with application-control exclusion held through cleanup. */
+  recoverApplication: (identity: NativeApplicationIdentity) => Promise<void>;
+}): Promise<{ state: 'absent' } | { state: 'recovered'; applications: number }> {
+  const filename = path.join(options.directory ?? defaultDesktopWorkloadDirectory(), 'interactive.lock');
+  requireNoRecoveryBarrier(filename);
+  if (!fs.existsSync(filename)) return { state: 'absent' };
+  const recoveryDirectory = `${filename}.recovery`;
+  try {
+    fs.mkdirSync(recoveryDirectory, { mode: 0o700 });
+  } catch (error) {
+    throw new Error('Desktop workload recovery is busy; another recoverer or an interrupted recovery keeps ownership fenced.', {
+      cause: error,
+    });
+  }
+  const barrier = fs.lstatSync(recoveryDirectory);
+  const failures: unknown[] = [];
+  let recoveredApplications = 0;
+  try {
+    let file = fs.lstatSync(filename);
+    if (!file.isFile() || file.isSymbolicLink() || file.nlink !== 1 || file.size > 1024 * 1024)
+      throw new Error('The desktop claim identity is unsafe; recovery remains fenced.');
+    let contents = fs.readFileSync(filename, 'utf8');
+    let record = parseOwnershipRecord(contents);
+    if (
+      record.schemaVersion !== 3 ||
+      record.owner.processIdentity?.platform !== 'windows' ||
+      record.owner.targetId !== options.targetId ||
+      record.owner.targetInstanceId !== options.targetInstanceId
+    )
+      throw new Error('The desktop claim has an unverified owner or a different target identity; recovery remains fenced.');
+    const owner = await options.probeOwner(record.owner);
+    const ownerExited =
+      owner.state === 'exited' ||
+      (owner.state === 'alive' &&
+        validWindowsStartedAt(owner.processStartedAt) &&
+        owner.processStartedAt !== record.owner.processStartedAt);
+    if (!ownerExited) throw new Error('The recorded desktop owner is live or unknown; recovery remains fenced.');
+
+    const resources = new Map<string, DesktopResourceRecord>();
+    const applications: { resource: DesktopResourceRecord; identity: NativeApplicationIdentity }[] = [];
+    for (const resource of record.resources) {
+      if (
+        !resource ||
+        typeof resource.id !== 'string' ||
+        typeof resource.identity !== 'string' ||
+        !Number.isSafeInteger(resource.generation) ||
+        resource.generation < 1 ||
+        resources.has(resource.id) ||
+        !['owned', 'borrowed'].includes(resource.ownership) ||
+        !['pending', 'settled', 'failed', 'not-owned'].includes(resource.disposal)
+      )
+        throw new Error('A desktop resource identity is invalid; recovery remains fenced.');
+      resources.set(resource.id, resource);
+      if (resource.ownership === 'borrowed') {
+        if (
+          resource.disposal !== 'not-owned' ||
+          (resource.application && (resource.application.lifetime !== 'external' || resource.application.containment !== 'external'))
+        )
+          throw new Error('An external resource has inconsistent ownership; recovery remains fenced.');
+        continue;
+      }
+      if (resource.disposal === 'settled') continue;
+      if (resource.application) {
+        const application = resource.application;
+        if (
+          application.endpoint !== options.endpoint ||
+          typeof application.leaseId !== 'string' ||
+          application.leaseId.length < 1 ||
+          resource.readiness !== 'ready' ||
+          !['session', 'supervisor'].includes(application.lifetime) ||
+          !(
+            (application.containment === 'job-object' && application.launchKind === 'direct-child') ||
+            (application.containment === 'uncontained' && application.launchKind === 'packaged-activation')
+          )
+        )
+          throw new Error('The application resource lacks exact Windows ownership evidence; recovery remains fenced.');
+        const {
+          schemaVersion: _schemaVersion,
+          endpoint: _endpoint,
+          ...identity
+        } = captureDesktopApplicationIdentity({ ...application, id: application.leaseId, ownership: 'launched' }, options.endpoint);
+        applications.push({ resource, identity });
+      } else if (
+        resource.id !== 'webdriver' ||
+        resource.identity !== `driver-service:${options.targetId}:${options.targetInstanceId}` ||
+        resource.serviceReady !== undefined
+      ) {
+        throw new Error('An owned desktop resource cannot be proven exited; recovery remains fenced.');
+      }
+    }
+    for (const effect of record.unresolvedEffects) {
+      const resource = resources.get(effect?.resourceId);
+      if (
+        !resource ||
+        resource.ownership !== 'owned' ||
+        effect.id !== `dispose:${resource.id}:${resource.generation}` ||
+        effect.resourceIdentity !== resource.identity
+      )
+        throw new Error('An unresolved desktop effect requires operator reconciliation; recovery remains fenced.');
+    }
+    const unchanged = () => {
+      const current = fs.lstatSync(filename);
+      if (
+        !current.isFile() ||
+        current.isSymbolicLink() ||
+        current.nlink !== 1 ||
+        current.dev !== file.dev ||
+        current.ino !== file.ino ||
+        fs.readFileSync(filename, 'utf8') !== contents
+      )
+        throw new Error('Desktop claim ownership changed; refusing recovery of another owner.');
+    };
+    for (const { resource, identity } of applications) {
+      unchanged();
+      await options.recoverApplication(identity);
+      unchanged();
+      record = {
+        ...record,
+        resources: record.resources.map((entry) => (entry.id === resource.id ? { ...entry, disposal: 'settled' } : entry)),
+        unresolvedEffects: record.unresolvedEffects.filter((effect) => effect.resourceId !== resource.id),
+      };
+      const next = JSON.stringify(record);
+      replaceFileAtomically(filename, next);
+      contents = next;
+      file = fs.lstatSync(filename);
+    }
+    unchanged();
+    fs.unlinkSync(filename);
+    recoveredApplications = applications.length;
+  } catch (error) {
+    failures.push(error);
+  }
+  try {
+    const current = fs.lstatSync(recoveryDirectory);
+    if (!current.isDirectory() || current.isSymbolicLink() || current.dev !== barrier.dev || current.ino !== barrier.ino)
+      throw new Error('Desktop recovery barrier ownership changed; refusing to remove another recovery claim.');
+    fs.rmdirSync(recoveryDirectory);
+  } catch (error) {
+    failures.push(error);
+  }
+  if (failures.length > 1) throw new AggregateError(failures, 'Desktop workload recovery and barrier cleanup failed.');
+  if (failures.length) throw failures[0];
+  return { state: 'recovered', applications: recoveredApplications };
+}
+
+function requireNoRecoveryBarrier(filename: string): void {
+  try {
+    fs.lstatSync(`${filename}.recovery`);
+  } catch (error) {
+    if (error !== null && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') return;
+    throw error;
+  }
+  throw new Error('Desktop workload recovery is busy; an interrupted recovery keeps ownership fenced.');
+}
+
+function validWindowsStartedAt(value: unknown): value is string {
+  return (
+    typeof value === 'string' &&
+    /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{7}Z$/.test(value) &&
+    Number.isFinite(Date.parse(value)) &&
+    new Date(value).toISOString() === `${value.slice(0, 23)}Z`
+  );
+}
+
 function replaceFileAtomically(filename: string, contents: string): void {
   const temporary = `${filename}.${randomUUID()}.tmp`;
   fs.writeFileSync(temporary, contents, { flag: 'wx', mode: 0o600 });
@@ -273,8 +450,6 @@ function validProcessIdentity(value: DesktopWorkloadProcessIdentity, pid: number
     (value.platform === 'macos'
       ? /^macos-session:[0-9]+$/.test(value.interactiveSession) &&
         /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$/.test(value.startedAt)
-      : value.platform === 'windows' &&
-        /^windows-session:[0-9]+$/.test(value.interactiveSession) &&
-        /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{7}Z$/.test(value.startedAt))
+      : value.platform === 'windows' && /^windows-session:[0-9]+$/.test(value.interactiveSession) && validWindowsStartedAt(value.startedAt))
   );
 }

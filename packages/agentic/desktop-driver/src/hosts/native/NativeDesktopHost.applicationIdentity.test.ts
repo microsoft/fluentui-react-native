@@ -2,6 +2,7 @@ import type { DesktopTarget } from '../../host/types';
 import type { NativeDriverArtifact } from '../../native/types';
 import { scriptNativeHelper } from '../../testing/scriptedNativeHelper';
 import { NativeDesktopHost } from './NativeDesktopHost';
+import { encodeJsonFrame } from './framing';
 
 const mockSpawn = jest.fn();
 jest.mock('node:child_process', () => ({ spawn: (...args: unknown[]) => mockSpawn(...args) }));
@@ -25,6 +26,18 @@ const artifact: NativeDriverArtifact = {
   wireProtocol: { major: 1, minor: 0 },
 };
 const identity = { processId: 123, processStartedAt: '2026-11-12T00:00:00.123456Z' };
+const windowsIdentity = {
+  processId: 456,
+  processStartedAt: '2026-11-12T00:00:00.1234567Z',
+  executablePath: 'C:\\apps\\ReactTest.exe',
+  interactiveSession: 'windows-session:2',
+};
+const windowsArtifact: NativeDriverArtifact = {
+  ...artifact,
+  architecture: 'x64',
+  endpoints: ['windows', 'win32'],
+  provider: 'windows',
+};
 const application = { leaseNonce: 'workload-nonce', leasePath: 'workload-lease.json', windowTitle: 'Storybook' };
 const registration = { endpoint: 'macos', id: 'storybook', platformName: 'macos' } satisfies Omit<DesktopTarget, 'host'>;
 
@@ -112,6 +125,57 @@ test.each([
   }
 });
 
+test.each([
+  { ...windowsIdentity, processId: 0 },
+  { ...windowsIdentity, executablePath: 'ReactTest.exe' },
+  { ...windowsIdentity, interactiveSession: undefined },
+  { ...windowsIdentity, processStartedAt: '2026-11-12T00:00:00.123456Z' },
+  { ...windowsIdentity, aumid: '' },
+  { ...windowsIdentity, unexpected: 'field' },
+])('rejects invalid recovery authority before native dispatch %j', async (identity) => {
+  const received = windowsHelper({ state: 'exited' });
+  const native = new NativeDesktopHost({ application: {}, artifact: windowsArtifact, endpoint: 'windows' });
+  try {
+    await expect(native.recoverApplication(identity)).rejects.toMatchObject({
+      data: { nativeCode: 'invalid-application-identity' },
+    });
+    expect(received).toHaveLength(0);
+    expect(mockSpawn).not.toHaveBeenCalled();
+  } finally {
+    await native.dispose();
+  }
+});
+
+test('exact recovery sends only the recorded incarnation and requires a native exit verdict', async () => {
+  const received = windowsHelper({ state: 'exited' });
+  const native = new NativeDesktopHost({ application: {}, artifact: windowsArtifact, endpoint: 'win32' });
+  try {
+    await expect(native.recoverApplication(windowsIdentity)).resolves.toBeUndefined();
+    expect(received).toHaveLength(1);
+    expect(received[0]).toMatchObject({
+      command: 'recoverApplication',
+      params: { endpoint: 'win32', identity: windowsIdentity },
+    });
+  } finally {
+    await native.dispose();
+  }
+});
+
+test.each([null, {}, { state: 'unknown' }, { state: 'exited', unverified: true }])(
+  'an incomplete recovery verdict stays fenced %j',
+  async (result) => {
+    windowsHelper(result);
+    const native = new NativeDesktopHost({ application: {}, artifact: windowsArtifact, endpoint: 'windows' });
+    try {
+      await expect(native.recoverApplication(windowsIdentity)).rejects.toMatchObject({
+        data: { nativeCode: 'application-recovery-unsettled' },
+      });
+    } finally {
+      await native.dispose();
+    }
+  },
+);
+
 test('does not silently replace inspection with a controlling attach on an old helper', async () => {
   const received = scriptNativeHelper(mockSpawn, (request, send) =>
     send({ error: { code: 'unsupported-operation', message: 'Unsupported command.' }, id: request.id, type: 'response' }),
@@ -125,14 +189,66 @@ test('does not silently replace inspection with a controlling attach on an old h
   }
 });
 
-test.each(['windows', 'win32'] as const)('reports inspection as unsupported on %s without spawning a helper', async (endpoint) => {
-  const native = new NativeDesktopHost({
-    application,
-    artifact: { ...artifact, endpoints: ['windows', 'win32'], provider: 'windows' },
-    endpoint,
-  });
-  await expect(native.inspectApplication({ ...registration, endpoint, host: native })).rejects.toMatchObject({
-    name: 'HostUnsupportedError',
-  });
-  expect(mockSpawn).not.toHaveBeenCalled();
+function windowsHelper(result: unknown) {
+  return scriptNativeHelper(
+    mockSpawn,
+    (request, send) => send({ id: request.id, result, type: 'response' }),
+    ['inspectApplication', 'recoverApplication'],
+    {
+      greeting: () =>
+        encodeJsonFrame({
+          architecture: 'x64',
+          buildId: 'build',
+          features: ['inspectApplication', 'recoverApplication'],
+          protocol: { major: 1, minor: 0 },
+          provider: 'windows',
+          sourceDigest: 'source',
+          type: 'hello',
+        }),
+    },
+  );
+}
+
+test.each(['windows', 'win32'] as const)('inspects exact %s process, executable and session without attaching', async (endpoint) => {
+  const received = windowsHelper(windowsIdentity);
+  const native = new NativeDesktopHost({ application, artifact: windowsArtifact, endpoint });
+  try {
+    await expect(native.inspectApplication({ ...registration, endpoint, host: native })).resolves.toEqual(windowsIdentity);
+    expect(received.map(({ command }) => command)).toEqual(['inspectApplication']);
+  } finally {
+    await native.dispose();
+  }
+});
+
+test.each([{ ...windowsIdentity, aumid: 'package_family!App' }, windowsIdentity])(
+  'preserves verified packaged or unpackaged identity evidence %j',
+  async (result) => {
+    windowsHelper(result);
+    const native = new NativeDesktopHost({ application, artifact: windowsArtifact, endpoint: 'windows' });
+    try {
+      await expect(native.inspectApplication({ ...registration, endpoint: 'windows', host: native })).resolves.toEqual(result);
+    } finally {
+      await native.dispose();
+    }
+  },
+);
+
+test.each([
+  { ...windowsIdentity, executablePath: 'ReactTest.exe' },
+  { ...windowsIdentity, executablePath: 'C:\\apps\\bad\u0000.exe' },
+  { ...windowsIdentity, interactiveSession: undefined },
+  { ...windowsIdentity, interactiveSession: 'macos-session:2' },
+  { ...windowsIdentity, processStartedAt: '2026-11-12T00:00:00.123456Z' },
+  { ...windowsIdentity, aumid: '' },
+  { ...windowsIdentity, id: 'controlling-lease' },
+])('rejects incomplete or ambiguous Windows inspection evidence %j', async (result) => {
+  windowsHelper(result);
+  const native = new NativeDesktopHost({ application, artifact: windowsArtifact, endpoint: 'windows' });
+  try {
+    await expect(native.inspectApplication({ ...registration, endpoint: 'windows', host: native })).rejects.toMatchObject({
+      data: { nativeCode: 'invalid-application-identity' },
+    });
+  } finally {
+    await native.dispose();
+  }
 });

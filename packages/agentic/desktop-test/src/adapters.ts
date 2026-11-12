@@ -78,7 +78,7 @@ export async function resolveDesktopApplication(
         );
       }
       application = { windowTitle, ...configured };
-      if (!application.aumid && !application.executablePath && !application.leasePath) {
+      if (!application.aumid && !application.executablePath && !application.leasePath && !application.processIdentity) {
         const manifestPath = path.join(target.projectRoot, 'windows', 'ReactApp.Package', 'bin', 'x64', 'Debug', 'AppxManifest.xml');
         if (!fs.existsSync(manifestPath))
           throw new Error(
@@ -112,8 +112,10 @@ export async function resolveDesktopApplication(
     if (application.workingDirectory) throw new Error('workingDirectory is currently supported only by the Windows helper.');
   } else {
     if (!application.windowTitle) throw new Error('Windows applications require an exact window title.');
-    if (!application.aumid && !application.executablePath && !application.leasePath) {
-      throw new Error('A title alone is not an application identity; configure an executable, AUMID, or verified owner lease.');
+    if (!application.aumid && !application.executablePath && !application.leasePath && !application.processIdentity) {
+      throw new Error(
+        'A title alone is not an application identity; configure an executable, AUMID, exact processIdentity, or verified owner lease.',
+      );
     }
   }
   return Object.freeze(application);

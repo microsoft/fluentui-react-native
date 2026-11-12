@@ -200,6 +200,15 @@ output.
 
 ### Shutdown and cancellation
 
+Windows and Win32 application leases retain native 100 ns creation time,
+canonical image, session, and AUMID when packaged. Read-only
+`inspectApplication` never takes controlling application ownership or changes
+session window records. Exact PID/start application exclusion is independent
+of the physical-input mutex. The trusted survivor-recovery operation requires
+that complete identity and refuses another controller or a reused live PID.
+See the [Windows provider](../native/windows/README.md#application-identity)
+and [wire contract](../native/PROTOCOL.md#windows-application-ownership).
+
 Every failure takes one terminal path: Node stops the helper, recovers input
 the helper may have left depressed, and then rejects each pending request
 once. This holds for a crash, a write failure, a malformed frame, a
