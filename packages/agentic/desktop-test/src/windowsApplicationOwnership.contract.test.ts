@@ -14,6 +14,7 @@ import { validateDesktopConfig } from './config';
 import type { ResolvedDesktopTarget } from './config';
 import { DesktopRunReporter } from './reporting/collector';
 import { DesktopSupervisor } from './supervisor';
+import { createDesktopWorkloadClaim } from './ownership';
 
 jest.setTimeout(300_000);
 
@@ -64,6 +65,11 @@ async function cleanupAll(label: string, cleanups: (() => Promise<unknown>)[]): 
 
 function host(endpoint: Endpoint): NativeDesktopHost {
   return new NativeDesktopHost({ artifact, application: targets.get(endpoint)!.host.application!, endpoint });
+}
+
+function differentStart(startedAt: string): string {
+  const fraction = Number(startedAt.slice(-8, -1));
+  return `${startedAt.slice(0, -8)}${String(fraction === 9_999_999 ? fraction - 1 : fraction + 1).padStart(7, '0')}Z`;
 }
 
 function registration(endpoint: Endpoint) {
@@ -213,6 +219,7 @@ for (const endpoint of endpoints) {
         ['identity-start-mismatch', { ...identity, processStartedAt: '2026-01-01T00:00:00.0000000Z' }],
         ['identity-session-mismatch', { ...identity, interactiveSession: 'windows-session:999999' }],
         ['identity-executable-mismatch', { ...identity, executablePath: 'C:\\not-the-recorded-application.exe' }],
+        ['identity-aumid-mismatch', { ...identity, aumid: 'foreign_package!App' }],
       ] as const;
       for (const [reason, processIdentity] of mismatches) {
         const pinned = new NativeDesktopHost({
@@ -222,7 +229,11 @@ for (const endpoint of endpoints) {
         });
         try {
           await expect(pinned.inspectApplication({ ...registration(endpoint), host: pinned })).rejects.toMatchObject({ data: { reason } });
-          await expect(pinned.recoverApplication(processIdentity)).rejects.toMatchObject({ data: { reason } });
+          if (reason === 'identity-start-mismatch') {
+            await expect(pinned.recoverApplication(processIdentity)).resolves.toEqual({ state: 'exited' });
+          } else {
+            await expect(pinned.recoverApplication(processIdentity)).rejects.toMatchObject({ data: { reason } });
+          }
           expect(await ended(identity)).toBe(false);
         } finally {
           await pinned.dispose();
@@ -234,6 +245,125 @@ for (const endpoint of endpoints) {
           if (lease) await owner.closeApplication(lease);
         },
         () => owner.dispose(),
+      ]);
+    }
+  });
+
+  nativeTest(`${endpoint}: a crashed recoverer retires a reused application journal without signalling its replacement`, async () => {
+    const lockDirectory = path.join(directory, `${endpoint}-reused-journal`);
+    const requestPath = path.join(directory, `${endpoint}-recoverer-request.json`);
+    const readyPath = path.join(directory, `${endpoint}-recoverer-ready.json`);
+    const filename = path.join(lockDirectory, 'interactive.lock');
+    const current = host(endpoint);
+    let child: ChildProcess | undefined;
+    let recovererIdentity: Awaited<ReturnType<typeof describeWindowsService>> | undefined;
+    let lease: ApplicationLease | undefined;
+    try {
+      lease = await current.launch({ ...registration(endpoint), host: current });
+      const { schemaVersion: _schemaVersion, endpoint: _endpoint, ...identity } = captureDesktopApplicationIdentity(lease, endpoint);
+      const nativeOwner = await describeWindowsService({ artifact, pid: process.pid });
+      const claim = createDesktopWorkloadClaim({
+        directory: lockDirectory,
+        processIdentity: nativeOwner,
+        runId: 'simulated-prior-incarnation',
+        targetId: targets.get(endpoint)!.id,
+        targetInstanceId: targets.get(endpoint)!.instanceId,
+      });
+      const staleApplication = { ...identity, processStartedAt: differentStart(identity.processStartedAt) };
+      claim.updateResource({
+        id: 'application:simulated-prior-incarnation',
+        identity: 'simulated-prior-incarnation',
+        generation: 1,
+        ownership: 'owned',
+        readiness: 'ready',
+        disposal: 'pending',
+        application: {
+          ...staleApplication,
+          endpoint,
+          leaseId: lease.id,
+          lifetime: 'supervisor',
+          containment: lease.containment!,
+          launchKind: lease.launchKind!,
+        },
+      });
+      // Inject stale kernel timestamps, not actual PID recycling. Both live replacement processes stay owned by this test.
+      const staleOwnerStart = differentStart(nativeOwner.startedAt);
+      fs.writeFileSync(
+        filename,
+        JSON.stringify({
+          ...claim.record,
+          owner: {
+            ...claim.record.owner,
+            processStartedAt: staleOwnerStart,
+            processIdentity: { ...nativeOwner, startedAt: staleOwnerStart },
+          },
+        }),
+      );
+      fs.writeFileSync(
+        requestPath,
+        JSON.stringify({ artifact, lockDirectory, target: targets.get(endpoint), operation: 'interrupt-recovery' }),
+        { flag: 'wx' },
+      );
+      child = spawn(process.execPath, [path.join(__dirname, 'windowsOwnershipOwner.contract.cjs'), requestPath, readyPath], {
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
+      let childError = '';
+      child.stderr!.on('data', (data: Buffer) => {
+        childError = (childError + data.toString('utf8')).slice(-16_384);
+      });
+      await once(child, 'spawn');
+      recovererIdentity = await describeWindowsService({ artifact, pid: child.pid! });
+      const ready = await waitFor<{ owner: typeof recovererIdentity; application: NativeApplicationIdentity }>(
+        'the live recovery barrier',
+        async () => {
+          if (child!.exitCode !== null || child!.signalCode !== null) throw new Error(`Recoverer exited before readiness: ${childError}`);
+          return fs.existsSync(readyPath) ? JSON.parse(fs.readFileSync(readyPath, 'utf8')) : undefined;
+        },
+      );
+      expect(ready.owner).toEqual(recovererIdentity);
+      expect(ready.application).toEqual(staleApplication);
+      const contender = supervisor(endpoint, lockDirectory, 'external');
+      try {
+        await expect(contender.owner.start()).rejects.toThrow(/recovery.*busy/);
+      } finally {
+        await cleanupAll('Live-recoverer qualification cleanup failed.', [
+          () => contender.owner.close(),
+          () => contender.reporter.finish(),
+        ]);
+      }
+      const exited = once(child, 'exit');
+      await stopExactProcess(recovererIdentity);
+      await exited;
+      const next = supervisor(endpoint, lockDirectory, 'external');
+      try {
+        await next.owner.start();
+        const replacementClaim = JSON.parse(fs.readFileSync(filename, 'utf8'));
+        expect(replacementClaim.owner.id).not.toBe(claim.record.owner.id);
+        expect(fs.existsSync(`${filename}.recovery-v2`)).toBe(false);
+        expect(await current.inspectApplication({ ...registration(endpoint), host: current })).toEqual(identity);
+        expect(await ended(identity)).toBe(false);
+      } finally {
+        await cleanupAll('Reused-journal qualification cleanup failed.', [() => next.owner.close(), () => next.reporter.finish()]);
+      }
+      expect(fs.existsSync(filename)).toBe(false);
+      cases.push({
+        case: 'reused-application-and-recoverer-crash',
+        endpoint,
+        identity,
+        recordedApplication: staleApplication,
+        recoverer: recovererIdentity,
+        pidReuse: 'injected-recorded-start-mismatch-not-kernel-recycling',
+        state: 'observed',
+      });
+    } finally {
+      await cleanupAll('Reused-journal fixture cleanup failed.', [
+        async () => {
+          if (child) await stopChild(child, recovererIdentity);
+        },
+        async () => {
+          if (lease) await current.closeApplication(lease);
+        },
+        () => current.dispose(),
       ]);
     }
   });

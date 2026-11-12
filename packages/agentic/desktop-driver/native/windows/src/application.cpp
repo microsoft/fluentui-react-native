@@ -1844,6 +1844,26 @@ json::Value ApplicationManager::RecoverApplication(const json::Value& params, co
   const DWORD processId = RequireExactIdentity(*identity);
   token.ThrowIfCancelled();
   RequireInteractiveWindowStation(kErrorUnsupported);
+  const auto exited = [] {
+    json::Value result = json::Value::Object();
+    result.Set("state", json::Value::String(std::string("exited")));
+    return result;
+  };
+  winrt::handle query{OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processId)};
+  if (!query) {
+    if (GetLastError() == ERROR_INVALID_PARAMETER) return exited();
+    throw HelperError(kErrorCleanupFailed, "The recorded application's creation time cannot be inspected.",
+                      "application-identity-unknown");
+  }
+  FILETIME started{};
+  if (!TryReadProcessStartTime(query.get(), started) || FileTimeTicks(started) == 0) {
+    throw HelperError(kErrorCleanupFailed, "The application start identity cannot be read.", "application-identity-unknown");
+  }
+  if (FormatFileTimeIso8601(started) != identity->StringField("processStartedAt")) {
+    // A replacement proves the recorded incarnation exited. Never request termination rights or control of it.
+    return exited();
+  }
+  // Keep the query handle open: its process object prevents PID reuse while upgrading access for exact cleanup.
   winrt::handle process{OpenProcess(kOwnedProcessAccess, FALSE, processId)};
   if (!process && GetLastError() != ERROR_INVALID_PARAMETER) {
     throw HelperError(kErrorCleanupFailed, "The recorded application process cannot be inspected.", "application-identity-unknown");
@@ -1854,15 +1874,9 @@ json::Value ApplicationManager::RecoverApplication(const json::Value& params, co
       throw HelperError(kErrorCleanupFailed, "The recorded application's liveness cannot be proven.", "application-identity-unknown");
     }
     if (state == WAIT_OBJECT_0) {
-      json::Value result = json::Value::Object();
-      result.Set("state", json::Value::String(std::string("exited")));
-      return result;
+      return exited();
     }
     VerifyExactIdentity(*identity, ReadExactApplicationIdentity(processId, process.get()));
-    FILETIME started{};
-    if (!TryReadProcessStartTime(process.get(), started)) {
-      throw HelperError(kErrorCleanupFailed, "The application start identity cannot be read.", "application-identity-unknown");
-    }
     const auto control = AcquireApplicationControl(processId, started);
     token.ThrowIfCancelled();
     PostCloseToExactProcessWindows(processId, started);
@@ -1880,9 +1894,7 @@ json::Value ApplicationManager::RecoverApplication(const json::Value& params, co
       }
     }
   }
-  json::Value result = json::Value::Object();
-  result.Set("state", json::Value::String(std::string("exited")));
-  return result;
+  return exited();
 }
 
 std::vector<WindowInfo> ApplicationManager::Windows(const std::string& leaseId, const CancellationToken& token) {

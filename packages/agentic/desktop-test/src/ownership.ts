@@ -229,45 +229,60 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
   endpoint: 'windows' | 'win32';
   targetId: string;
   targetInstanceId: string;
+  /** The recoverer's verified native identity, also used to reconcile an interrupted recovery barrier. */
+  processIdentity: DesktopWorkloadProcessIdentity;
   probeOwner: (owner: DesktopWorkloadOwnerIdentity) => Promise<DesktopWorkloadOwnerProbe>;
   /** Must prove exact native exit, with application-control exclusion held through cleanup. */
   recoverApplication: (identity: NativeApplicationIdentity) => Promise<void>;
 }): Promise<{ state: 'absent' } | { state: 'recovered'; applications: number }> {
   const filename = path.join(options.directory ?? defaultDesktopWorkloadDirectory(), 'interactive.lock');
-  requireNoRecoveryBarrier(filename);
-  if (!fs.existsSync(filename)) return { state: 'absent' };
-  const recoveryDirectory = `${filename}.recovery`;
-  try {
-    fs.mkdirSync(recoveryDirectory, { mode: 0o700 });
-  } catch (error) {
-    throw new Error('Desktop workload recovery is busy; another recoverer or an interrupted recovery keeps ownership fenced.', {
-      cause: error,
-    });
+  requireNoLegacyRecoveryBarrier(filename);
+  if (options.processIdentity?.platform !== 'windows' || !validProcessIdentity(options.processIdentity, process.pid))
+    throw new TypeError("Desktop recovery requires this process's native Windows operating-system identity.");
+  if (!fs.existsSync(filename)) {
+    await retireWindowsRecoveryBarrier(filename, options);
+    return { state: 'absent' };
   }
-  const barrier = fs.lstatSync(recoveryDirectory);
+  let file = fs.lstatSync(filename);
+  if (!file.isFile() || file.isSymbolicLink() || file.nlink !== 1 || file.size > 1024 * 1024)
+    throw new Error('The desktop claim identity is unsafe; recovery remains fenced.');
+  let contents = fs.readFileSync(filename, 'utf8');
+  let record = parseOwnershipRecord(contents);
+  if (
+    record.schemaVersion !== 3 ||
+    record.owner.processIdentity?.platform !== 'windows' ||
+    record.owner.targetId !== options.targetId ||
+    record.owner.targetInstanceId !== options.targetInstanceId
+  )
+    throw new Error('The desktop claim has an unverified owner or a different target identity; recovery remains fenced.');
+  const owner = await options.probeOwner(record.owner);
+  if (!windowsOwnerExited(owner, record.owner.processStartedAt!))
+    throw new Error('The recorded desktop owner is live or unknown; recovery remains fenced.');
+
+  const claimUnchanged = () => {
+    const current = fs.lstatSync(filename);
+    if (
+      !current.isFile() ||
+      current.isSymbolicLink() ||
+      current.nlink !== 1 ||
+      current.dev !== file.dev ||
+      current.ino !== file.ino ||
+      fs.readFileSync(filename, 'utf8') !== contents
+    )
+      throw new Error('Desktop claim ownership changed; refusing recovery of another owner.');
+  };
+  claimUnchanged();
+  await retireWindowsRecoveryBarrier(filename, options);
+  claimUnchanged();
+  const barrier = acquireWindowsRecoveryBarrier(filename, options.processIdentity);
+  const unchanged = () => {
+    barrier.assertOwned();
+    claimUnchanged();
+  };
   const failures: unknown[] = [];
   let recoveredApplications = 0;
   try {
-    let file = fs.lstatSync(filename);
-    if (!file.isFile() || file.isSymbolicLink() || file.nlink !== 1 || file.size > 1024 * 1024)
-      throw new Error('The desktop claim identity is unsafe; recovery remains fenced.');
-    let contents = fs.readFileSync(filename, 'utf8');
-    let record = parseOwnershipRecord(contents);
-    if (
-      record.schemaVersion !== 3 ||
-      record.owner.processIdentity?.platform !== 'windows' ||
-      record.owner.targetId !== options.targetId ||
-      record.owner.targetInstanceId !== options.targetInstanceId
-    )
-      throw new Error('The desktop claim has an unverified owner or a different target identity; recovery remains fenced.');
-    const owner = await options.probeOwner(record.owner);
-    const ownerExited =
-      owner.state === 'exited' ||
-      (owner.state === 'alive' &&
-        validWindowsStartedAt(owner.processStartedAt) &&
-        owner.processStartedAt !== record.owner.processStartedAt);
-    if (!ownerExited) throw new Error('The recorded desktop owner is live or unknown; recovery remains fenced.');
-
+    unchanged();
     const resources = new Map<string, DesktopResourceRecord>();
     const applications: { resource: DesktopResourceRecord; identity: NativeApplicationIdentity }[] = [];
     for (const resource of record.resources) {
@@ -330,18 +345,6 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
       )
         throw new Error('An unresolved desktop effect requires operator reconciliation; recovery remains fenced.');
     }
-    const unchanged = () => {
-      const current = fs.lstatSync(filename);
-      if (
-        !current.isFile() ||
-        current.isSymbolicLink() ||
-        current.nlink !== 1 ||
-        current.dev !== file.dev ||
-        current.ino !== file.ino ||
-        fs.readFileSync(filename, 'utf8') !== contents
-      )
-        throw new Error('Desktop claim ownership changed; refusing recovery of another owner.');
-    };
     for (const { resource, identity } of applications) {
       unchanged();
       await options.recoverApplication(identity);
@@ -363,10 +366,7 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
     failures.push(error);
   }
   try {
-    const current = fs.lstatSync(recoveryDirectory);
-    if (!current.isDirectory() || current.isSymbolicLink() || current.dev !== barrier.dev || current.ino !== barrier.ino)
-      throw new Error('Desktop recovery barrier ownership changed; refusing to remove another recovery claim.');
-    fs.rmdirSync(recoveryDirectory);
+    barrier.release();
   } catch (error) {
     failures.push(error);
   }
@@ -376,13 +376,138 @@ export async function recoverWindowsDesktopWorkloadClaim(options: {
 }
 
 function requireNoRecoveryBarrier(filename: string): void {
+  requireNoLegacyRecoveryBarrier(filename);
+  if (recoveryBarrierStat(`${filename}.recovery-v2`)) throw recoveryBusy();
+}
+
+function requireNoLegacyRecoveryBarrier(filename: string): void {
+  if (recoveryBarrierStat(`${filename}.recovery`)) throw recoveryBusy();
+}
+
+function recoveryBusy(cause?: unknown): Error {
+  return new Error('Desktop workload recovery is busy; a live or unverified recoverer keeps ownership fenced.', { cause });
+}
+
+function recoveryBarrierStat(filename: string): fs.Stats | undefined {
   try {
-    fs.lstatSync(`${filename}.recovery`);
+    return fs.lstatSync(filename);
   } catch (error) {
-    if (error !== null && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') return;
+    if (error !== null && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') return undefined;
     throw error;
   }
-  throw new Error('Desktop workload recovery is busy; an interrupted recovery keeps ownership fenced.');
+}
+
+function assertRecoveryDirectory(filename: string, expected: fs.Stats): void {
+  const current = recoveryBarrierStat(filename);
+  if (!current || !current.isDirectory() || current.isSymbolicLink() || current.dev !== expected.dev || current.ino !== expected.ino)
+    throw new Error('Desktop recovery barrier ownership changed; refusing to remove another recovery claim.');
+}
+
+function windowsOwnerExited(probe: DesktopWorkloadOwnerProbe, startedAt: string): boolean {
+  return (
+    probe.state === 'exited' ||
+    (probe.state === 'alive' && validWindowsStartedAt(probe.processStartedAt) && probe.processStartedAt !== startedAt)
+  );
+}
+
+async function retireWindowsRecoveryBarrier(
+  filename: string,
+  options: {
+    targetId: string;
+    targetInstanceId: string;
+    probeOwner: (owner: DesktopWorkloadOwnerIdentity) => Promise<DesktopWorkloadOwnerProbe>;
+  },
+): Promise<void> {
+  requireNoLegacyRecoveryBarrier(filename);
+  const root = `${filename}.recovery-v2`;
+  const directory = recoveryBarrierStat(root);
+  if (!directory) return;
+  assertRecoveryDirectory(root, directory);
+  const entries = fs.readdirSync(root);
+  if (entries.length > 16) throw recoveryBusy();
+  const pins = entries.map((entry) => {
+    const match = /^owner-([1-9][0-9]{0,9})-([0-9]{21})-([a-f0-9]{32})$/.exec(entry);
+    if (!match) throw recoveryBusy();
+    const processId = Number(match[1]);
+    const time = match[2];
+    const processStartedAt = `${time.slice(0, 4)}-${time.slice(4, 6)}-${time.slice(6, 8)}T${time.slice(8, 10)}:${time.slice(10, 12)}:${time.slice(12, 14)}.${time.slice(14)}Z`;
+    if (processId > 2147483647 || !validWindowsStartedAt(processStartedAt)) throw recoveryBusy();
+    const owner: DesktopWorkloadOwnerIdentity = {
+      id: match[3],
+      processId,
+      processStartedAt,
+      runId: 'desktop-recovery',
+      targetId: options.targetId,
+      targetInstanceId: options.targetInstanceId,
+    };
+    const filename = path.join(root, entry);
+    const identity = fs.lstatSync(filename);
+    assertRecoveryDirectory(filename, identity);
+    if (fs.readdirSync(filename).length) throw recoveryBusy();
+    return { filename, identity, owner };
+  });
+  for (const { owner } of pins) {
+    if (!windowsOwnerExited(await options.probeOwner(owner), owner.processStartedAt!)) throw recoveryBusy();
+  }
+  assertRecoveryDirectory(root, directory);
+  const current = fs.readdirSync(root);
+  if (current.length !== entries.length || current.some((entry) => !entries.includes(entry))) throw recoveryBusy();
+  // Only remove the unique dead owner's pin, never a new recoverer's replacement directory.
+  for (const pin of pins) {
+    assertRecoveryDirectory(root, directory);
+    assertRecoveryDirectory(pin.filename, pin.identity);
+    fs.rmdirSync(pin.filename);
+  }
+  assertRecoveryDirectory(root, directory);
+  try {
+    fs.rmdirSync(root);
+  } catch (error) {
+    throw recoveryBusy(error);
+  }
+}
+
+function acquireWindowsRecoveryBarrier(filename: string, processIdentity: DesktopWorkloadProcessIdentity) {
+  requireNoRecoveryBarrier(filename);
+  const root = `${filename}.recovery-v2`;
+  try {
+    fs.mkdirSync(root, { mode: 0o700 });
+  } catch (error) {
+    throw recoveryBusy(error);
+  }
+  const directory = fs.lstatSync(root);
+  assertRecoveryDirectory(root, directory);
+  const nativeTime = processIdentity.startedAt.replaceAll(/[-:.TZ]/g, '');
+  const owner = path.join(root, `owner-${processIdentity.pid}-${nativeTime}-${randomUUID().replaceAll('-', '')}`);
+  // mkdir publishes the complete native owner atomically; an empty v2 root authorizes no recovery effects.
+  let identity: fs.Stats;
+  try {
+    fs.mkdirSync(owner, { mode: 0o700 });
+    identity = fs.lstatSync(owner);
+  } catch (error) {
+    try {
+      assertRecoveryDirectory(root, directory);
+      fs.rmdirSync(root);
+    } catch (cleanup) {
+      throw new AggregateError([error, cleanup], 'Desktop recovery barrier publication and cleanup failed.');
+    }
+    throw error;
+  }
+  return {
+    assertOwned() {
+      requireNoLegacyRecoveryBarrier(filename);
+      assertRecoveryDirectory(root, directory);
+      assertRecoveryDirectory(owner, identity);
+      const entries = fs.readdirSync(root);
+      if (entries.length !== 1 || entries[0] !== path.basename(owner))
+        throw new Error('Desktop recovery barrier ownership changed; refusing ambiguous recovery.');
+    },
+    release() {
+      assertRecoveryDirectory(owner, identity);
+      fs.rmdirSync(owner);
+      assertRecoveryDirectory(root, directory);
+      fs.rmdirSync(root);
+    },
+  };
 }
 
 function validWindowsStartedAt(value: unknown): value is string {

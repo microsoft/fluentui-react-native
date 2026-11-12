@@ -39,10 +39,18 @@
         "type": "object",
         "additionalProperties": false,
         "required": ["state"],
-        "properties": { "state": { "const": "exited" } }
+        "properties": {
+          "state": {
+            "const": "exited",
+            "description": "The recorded incarnation exited, including a reused PID whose live replacement is never signalled."
+          }
+        }
       },
       "trustedWorkloadOwnerOnly": true,
-      "holdsApplicationControlLock": true
+      "creationTimeQuery": "PROCESS_QUERY_LIMITED_INFORMATION",
+      "pidReuseSettlement": "exited-without-signalling-current-process",
+      "unreadableCreationTime": "fail-closed",
+      "holdsApplicationControlLockForCleanup": true
     },
     "applicationControl": "session-local-nonwaiting-semaphore-pid-and-native-start",
     "launchKind": ["direct-child", "packaged-activation"],

@@ -104,8 +104,9 @@ $env:FURN_NATIVE_DRIVER_TEST = '1'
 yarn workspace @fluentui-react-native/desktop-driver test --runInBand applicationOwnership.contract
 ```
 
-It exercises native read-only inspection, exact 100 ns start/session/executable
-checks, ambiguity, cross-helper application exclusion, and five contained fixture
+It exercises native read-only inspection, exact 100 ns start/session/executable/AUMID
+checks, reused-incarnation recovery without signalling the live replacement,
+ambiguity, cross-helper application exclusion, and five contained fixture
 launch/close cycles. Its additional input-mutex case requires
 `FURN_NATIVE_PHYSICAL_INPUT_TEST=1`. A skipped physical case is not input
 qualification. The Win32 fixture is supporting provider evidence, not Windows
@@ -140,12 +141,20 @@ Separately on Windows Fabric packaged and Win32 Paper REX it checks:
 - Five consecutive supervisor launches/teardowns, exact application and claim
   evidence, two borrowed sessions per launch, unchanged window identifiers
   during inspection, cross-service exclusion, and no surviving old incarnation.
-- Start/session/executable mismatch rejection without signalling the app.
+- Start/session/executable/AUMID inspection mismatch rejection without signalling
+  the app. Recovery retires a mismatched start as an exited recorded incarnation;
+  other mismatches with a matching start remain rejected.
 - A journaled acquired application in a child owner; identity-verified,
   literal-PID helper/owner fault injection; a live-owner fence; then real
   supervisor startup recovery of the exact old application and claim.
   Windows remains `uncontained` and must actually survive helper death; REX's
   Job Object must drain instead.
+- A stale journal with injected old native owner/application start times while
+  the actual replacements remain live and owned. A real child recoverer publishes
+  its barrier, fences another startup, and is stopped by identity-verified
+  literal PID. The next supervisor must retire that dead recoverer's barrier and
+  the absent recorded application without signalling its live replacement.
+  This models PID reuse by start mismatch; it does not claim kernel PID recycling.
 - Physical-input mutex contention across the two real endpoint helpers, with
   explicit cancellation and release. Run this only under the physical-session
   gate; semantic activation does not establish it.
@@ -168,7 +177,8 @@ machine paths in ignored artifacts, not public evidence.
 
 The crash-owner helper is a contract fixture, not a second production service
 factory. Unknown resources/effects, unleased launches, legacy/unverified claims,
-and interrupted recovery are fenced rather than force-reclaimed. This suite
+and live, unknown, or legacy recovery barriers remain fenced rather than
+force-reclaimed. Only a verified dead/reused recovery owner can be resumed. This suite
 does not qualify mixed Storybook service-graph recovery, arbitrary uncontained
 descendants, or a new protected-agent recovery API.
 

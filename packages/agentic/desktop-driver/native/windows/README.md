@@ -115,11 +115,15 @@ packaged activation cannot terminate another service's winning incarnation.
 The separate input mutex still serializes
 physical input across different applications and helpers.
 
-The trusted `recoverApplication` operation verifies a recorded process's exact
-start, executable, AUMID, user and session while holding its process handle,
-then acquires application control and proves exit after exact cleanup. A reused
-live PID, unknown evidence, another controller, or unconfirmed cleanup is
-refused without adopting a replacement process. No WebDriver route exposes
+The trusted `recoverApplication` operation reads creation time first through a
+`PROCESS_QUERY_LIMITED_INFORMATION` handle. A different start proves the
+recorded incarnation exited and returns `exited` without termination access,
+application control, or signals to its live replacement. An unreadable start,
+including access denied, remains fenced. For a matching start, the query handle
+prevents PID reuse while recovery acquires cleanup access, verifies executable,
+AUMID, user and session, acquires application control, and proves exact exit.
+Other identity mismatches, unknown evidence, another controller, or unconfirmed
+cleanup are refused without adopting a replacement process. No WebDriver route exposes
 this operation. Its caller must have an acquired, owned application resource,
 not an external attachment or an incomplete launch.
 

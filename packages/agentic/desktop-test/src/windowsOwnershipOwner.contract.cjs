@@ -1,5 +1,16 @@
 const fs = require('node:fs');
 
+function publishReady(readyPath, value) {
+  const pending = `${readyPath}.pending`;
+  fs.writeFileSync(pending, JSON.stringify(value), { flag: 'wx' });
+  fs.renameSync(pending, readyPath);
+}
+
+async function waitForParent() {
+  process.stdin.resume();
+  await new Promise((resolve) => process.stdin.once('end', resolve));
+}
+
 async function main() {
   const [requestPath, readyPath] = process.argv.slice(2);
   const request = JSON.parse(fs.readFileSync(requestPath, 'utf8'));
@@ -7,8 +18,42 @@ async function main() {
   const { describeWindowsService } = await import('@fluentui-react-native/desktop-driver/authority');
   const { createDesktopApplicationHost, captureDesktopApplicationIdentity } =
     await import('@fluentui-react-native/desktop-test/application-ownership');
-  const { createDesktopWorkloadClaim } = await import('@fluentui-react-native/desktop-test/ownership');
+  const { createDesktopWorkloadClaim, recoverWindowsDesktopWorkloadClaim } = await import('@fluentui-react-native/desktop-test/ownership');
   const owner = await describeWindowsService({ artifact: request.artifact, pid: process.pid });
+  if (request.operation === 'interrupt-recovery') {
+    const native = new NativeDesktopHost({
+      artifact: request.artifact,
+      application: request.target.host.application,
+      endpoint: request.target.endpoint,
+    });
+    try {
+      await recoverWindowsDesktopWorkloadClaim({
+        directory: request.lockDirectory,
+        endpoint: request.target.endpoint,
+        targetId: request.target.id,
+        targetInstanceId: request.target.instanceId,
+        processIdentity: owner,
+        probeOwner: async (candidate) => {
+          try {
+            const described = await describeWindowsService({ artifact: request.artifact, pid: candidate.processId });
+            return { state: 'alive', processStartedAt: described.startedAt };
+          } catch (error) {
+            return error !== null && typeof error === 'object' && 'reason' in error && error.reason === 'exited'
+              ? { state: 'exited' }
+              : { state: 'unknown' };
+          }
+        },
+        recoverApplication: async (application) => {
+          publishReady(readyPath, { owner, application });
+          await waitForParent();
+          await native.recoverApplication(application);
+        },
+      });
+    } finally {
+      await native.dispose();
+    }
+    return;
+  }
   const claim = createDesktopWorkloadClaim({
     directory: request.lockDirectory,
     processIdentity: owner,
@@ -49,11 +94,8 @@ async function main() {
     const helperProcess = await helperOwner.processPromise;
     if (!helperProcess.child.pid) throw new Error('The native owner has no recorded helper PID.');
     const helper = await describeWindowsService({ artifact: request.artifact, pid: helperProcess.child.pid });
-    const pending = `${readyPath}.pending`;
-    fs.writeFileSync(pending, JSON.stringify({ application, helper, owner }), { flag: 'wx' });
-    fs.renameSync(pending, readyPath);
-    process.stdin.resume();
-    await new Promise((resolve) => process.stdin.once('end', resolve));
+    publishReady(readyPath, { application, helper, owner });
+    await waitForParent();
   } finally {
     await (host ?? native).dispose();
     claim.release();

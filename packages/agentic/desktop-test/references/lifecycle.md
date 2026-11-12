@@ -164,14 +164,30 @@ cleanup. Each owned application must have a successfully acquired lease, ready
 resource record, complete Windows identity, session/supervisor lifetime, and
 consistent launch kind/containment. Borrowed applications are never terminated.
 
-Recovery holds an exclusive sibling `.recovery` directory and checks the exact
-claim file identity/content around asynchronous work. Interrupted recovery stays
-fenced; it is not automatically adopted. The native recoverer holds the recorded
-application's process handle and per-incarnation control through cleanup and
-returns only after proving exact exit. A reused application PID is rejected
-without signalling its current occupant. Each successful application settlement
-is durably recorded before proceeding, so a failed later cleanup does not replay
-already settled resources. Only then may the old claim be removed.
+Read-only parsing, target validation and the native owner probe precede barrier
+publication; a live or foreign claim creates no barrier. Recovery then holds an
+exclusive sibling `.recovery-v2` directory and rechecks the exact claim file
+identity/content under it and around asynchronous work. Its empty, uniquely named
+owner directory atomically records the recoverer's verified native PID/start.
+No recovery effect is allowed before that pin is the sole, identity-checked
+owner. An empty versioned root therefore represents interrupted publication and
+can be retired safely.
+
+A subsequent native recovery may remove only the unchanged unique pin of a
+recoverer proven exited or PID-reused, including after the claim was already
+removed. A live or unknown recoverer, malformed pins, replacement directories,
+and legacy unowned `.recovery` barriers remain fenced. Clearing a stale barrier
+does not itself authorize application cleanup; the old claim must still pass
+all recovery checks.
+
+The native recoverer first queries application creation time with limited
+rights. A reused application PID proves the recorded incarnation exited and is
+settled without signalling, controlling, or requesting termination rights to its
+current occupant. An unreadable start, including access denied, remains fenced.
+For a matching start, the query handle prevents PID reuse while full identity
+and per-incarnation control are acquired for exact cleanup. Each successful
+application settlement is durably recorded before proceeding, so a failed later
+cleanup does not replay settled resources. Only then may the old claim be removed.
 
 The recognized in-owner WebDriver listener dies with that exact Node owner.
 Unknown services, process-backed service receipts, pending/unleased launches,

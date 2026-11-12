@@ -1376,6 +1376,20 @@ void TestExactApplicationOwnership() {
     reused = error.reason() == "identity-start-mismatch";
   }
   Check(reused, "an exact pin rejects even a one-tick native start mismatch");
+  json::Value recovery = json::Value::Object();
+  recovery.Set("endpoint", json::Value::String(std::string("win32")));
+  recovery.Set("identity", pin);
+  Check(observer.RecoverApplication(recovery, token).StringField("state") == "exited" &&
+            IsWindow(window) != FALSE,
+        "a reused PID settles the old incarnation without acquiring control or signalling the current process");
+  recovery.Set("identity", identity);
+  bool recoveryExcluded = false;
+  try {
+    observer.RecoverApplication(recovery, token);
+  } catch (const HelperError& error) {
+    recoveryExcluded = error.reason() == "application-lock-busy";
+  }
+  Check(recoveryExcluded, "matching-start recovery still requires exclusive application control");
   application.Set("processIdentity", identity);
   request.Set("application", application);
   Check(observer.InspectApplication(request, token).Serialize() == identity.Serialize(),

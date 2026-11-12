@@ -107,7 +107,7 @@ export class DesktopSupervisor {
           }
           if (this.nativeArtifact) {
             processIdentity ??= await describeWindowsService({ artifact: this.nativeArtifact, pid: process.pid });
-            await this.recoverWindowsClaim(this.nativeArtifact);
+            await this.recoverWindowsClaim(this.nativeArtifact, processIdentity);
           }
         } else {
           processIdentity ??= this.options.hostFactory ? undefined : await describeDesktopWorkloadOwner(this.target.nativeDriver);
@@ -143,7 +143,7 @@ export class DesktopSupervisor {
     }
   }
 
-  private async recoverWindowsClaim(artifact: NativeDriverArtifact): Promise<void> {
+  private async recoverWindowsClaim(artifact: NativeDriverArtifact, processIdentity: DesktopWorkloadProcessIdentity): Promise<void> {
     const endpoint = this.target.endpoint;
     if (endpoint === 'macos') throw new Error('Windows workload recovery requires a Windows endpoint.');
     let host: NativeDesktopHost | undefined;
@@ -154,6 +154,7 @@ export class DesktopSupervisor {
         endpoint,
         targetId: this.target.id,
         targetInstanceId: this.target.instanceId,
+        processIdentity,
         probeOwner: async (owner) => {
           try {
             const described = await describeWindowsService({ artifact, pid: owner.processId });

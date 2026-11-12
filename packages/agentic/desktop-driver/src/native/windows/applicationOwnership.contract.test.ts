@@ -119,7 +119,7 @@ describe('Windows exact application ownership', () => {
     }
   });
 
-  windowsTest('refuses one-tick PID reuse, a different session and executable before acquiring a lease', async () => {
+  windowsTest('retires a reused recorded incarnation without signalling its live replacement and rejects other mismatches', async () => {
     const title = `furn-ownership-stale-${process.pid}-${Date.now()}`;
     const host = await NativeHostProcess.start({ artifact: await helperArtifact() });
     const application = {
@@ -135,13 +135,24 @@ describe('Windows exact application ownership', () => {
         ['identity-start-mismatch', { ...observed, processStartedAt: oneTickMismatch(observed.processStartedAt) }],
         ['identity-session-mismatch', { ...observed, interactiveSession: 'windows-session:999999' }],
         ['identity-executable-mismatch', { ...observed, executablePath: 'C:\\not-the-fixture.exe' }],
+        ['identity-aumid-mismatch', { ...observed, aumid: 'foreign_package!App' }],
       ] as const;
       for (const [reason, identity] of cases) {
         await expect(
           host.request('inspectApplication', { application: { ...application, processIdentity: identity }, endpoint: 'win32' }),
         ).rejects.toMatchObject({ data: { reason } });
+        if (reason === 'identity-start-mismatch') {
+          await expect(host.request('recoverApplication', { identity, endpoint: 'win32' })).resolves.toMatchObject({
+            result: { state: 'exited' },
+          });
+        } else {
+          await expect(host.request('recoverApplication', { identity, endpoint: 'win32' })).rejects.toMatchObject({ data: { reason } });
+        }
       }
       expect(await inspect(host, title)).toEqual(observed);
+      await expect(host.request('recoverApplication', { identity: observed, endpoint: 'win32' })).rejects.toMatchObject({
+        data: { reason: 'application-lock-busy' },
+      });
     } finally {
       await cleanupAll([
         async () => {

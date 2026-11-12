@@ -5,6 +5,7 @@ import type { ApplicationLease } from '@fluentui-react-native/desktop-driver';
 
 import { captureDesktopApplicationIdentity, desktopApplicationIdentityDescriptor } from './applicationOwnership';
 import { createDesktopWorkloadClaim, recoverWindowsDesktopWorkloadClaim } from './ownership';
+import type { DesktopWorkloadOwnerIdentity } from './ownership';
 import type { DesktopResourceRecord } from './resources';
 import { defineDesktopConfig } from './config';
 import type { ResolvedDesktopTarget } from './config';
@@ -27,13 +28,22 @@ const owner = {
 
 describe('Windows exact identity and survivor recovery', () => {
   let directory: string;
-  const options = () => ({ directory, endpoint: 'windows' as const, targetId: 'packaged', targetInstanceId: 'package-instance' });
+  const options = () => ({
+    directory,
+    endpoint: 'windows' as const,
+    targetId: 'packaged',
+    targetInstanceId: 'package-instance',
+    processIdentity: owner,
+  });
   const filename = () => path.join(directory, 'interactive.lock');
 
   beforeEach(() => {
     directory = fs.mkdtempSync(path.join(process.cwd(), '.windows-ownership-test-'));
   });
-  afterEach(() => fs.rmSync(directory, { recursive: true, force: true }));
+  afterEach(() => {
+    jest.restoreAllMocks();
+    fs.rmSync(directory, { recursive: true, force: true });
+  });
 
   function survivor(extra: readonly DesktopResourceRecord[] = []) {
     const claim = createDesktopWorkloadClaim({ ...options(), runId: 'crashed-run', processIdentity: owner });
@@ -91,6 +101,183 @@ describe('Windows exact identity and survivor recovery', () => {
     expect(fs.existsSync(filename())).toBe(false);
     const next = createDesktopWorkloadClaim({ ...options(), runId: 'next-run', processIdentity: owner });
     next.release();
+  });
+
+  test('a live owner is probed without publishing any recovery barrier', async () => {
+    const claim = survivor();
+    let barrierDuringProbe = false;
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({
+        ...options(),
+        probeOwner: async () => {
+          barrierDuringProbe = ['.recovery', '.recovery-v2'].some((suffix) => fs.existsSync(filename() + suffix));
+          return { state: 'alive', processStartedAt: claim.record.owner.processStartedAt! };
+        },
+        recoverApplication: jest.fn(async () => undefined),
+      }),
+    ).rejects.toThrow(/owner.*live|fenced/);
+    expect(barrierDuringProbe).toBe(false);
+  });
+
+  test('a foreign target never creates even a temporary recovery barrier', async () => {
+    survivor();
+    const mkdir = jest.spyOn(fs, 'mkdirSync');
+    const probeOwner = jest.fn(async () => ({ state: 'exited' as const }));
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({
+        ...options(),
+        targetInstanceId: 'foreign-target',
+        probeOwner,
+        recoverApplication: jest.fn(async () => undefined),
+      }),
+    ).rejects.toThrow(/different target/);
+    expect(probeOwner).not.toHaveBeenCalled();
+    expect(mkdir).not.toHaveBeenCalled();
+  });
+
+  test('claim replacement while acquiring the barrier never inherits recovery authority', async () => {
+    survivor();
+    const replacement = JSON.stringify({ ...JSON.parse(fs.readFileSync(filename(), 'utf8')), state: 'active' });
+    const original = fs.mkdirSync;
+    jest.spyOn(fs, 'mkdirSync').mockImplementation((root, attributes) => {
+      const result = original(root, attributes);
+      if (root === `${filename()}.recovery` || root === `${filename()}.recovery-v2`) {
+        fs.writeFileSync(filename(), replacement);
+      }
+      return result;
+    });
+    const recoverApplication = jest.fn(async () => undefined);
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({
+        ...options(),
+        probeOwner: async () => ({ state: 'exited' }),
+        recoverApplication,
+      }),
+    ).rejects.toThrow(/ownership changed/);
+    expect(recoverApplication).not.toHaveBeenCalled();
+    expect(fs.readFileSync(filename(), 'utf8')).toBe(replacement);
+  });
+
+  async function interruptBarrierCleanup(removeClaim = false): Promise<void> {
+    const original = fs.rmdirSync;
+    const interrupted = jest.spyOn(fs, 'rmdirSync').mockImplementation((root, attributes) => {
+      if (String(root).startsWith(`${filename()}.recovery`)) throw new Error('recoverer crashed before barrier removal');
+      return original(root, attributes);
+    });
+    try {
+      await expect(
+        recoverWindowsDesktopWorkloadClaim({
+          ...options(),
+          probeOwner: async () => ({ state: 'exited' }),
+          recoverApplication: async () => {
+            if (!removeClaim) throw new Error('recoverer crashed during application cleanup');
+          },
+        }),
+      ).rejects.toThrow(/recovery|recoverer|barrier/i);
+    } finally {
+      interrupted.mockRestore();
+    }
+  }
+
+  test.each(['exited', 'pid-reused'] as const)('resumes an interrupted barrier whose exact recoverer is %s', async (state) => {
+    const claim = survivor();
+    await interruptBarrierCleanup();
+    const recoverApplication = jest.fn(async () => undefined);
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({
+        ...options(),
+        probeOwner: async (candidate) =>
+          candidate.id === claim.record.owner.id || state === 'exited'
+            ? { state: 'exited' }
+            : { state: 'alive', processStartedAt: '2026-11-12T00:00:00.7654322Z' },
+        recoverApplication,
+      }),
+    ).resolves.toEqual({ state: 'recovered', applications: 1 });
+    expect(recoverApplication).toHaveBeenCalledWith(exact);
+    expect(fs.existsSync(filename())).toBe(false);
+    expect(fs.existsSync(`${filename()}.recovery-v2`)).toBe(false);
+  });
+
+  test.each(['live', 'unknown'] as const)('never removes an interrupted barrier with a %s recoverer', async (state) => {
+    const claim = survivor();
+    await interruptBarrierCleanup();
+    const before = fs.readFileSync(filename(), 'utf8');
+    const recoverApplication = jest.fn(async () => undefined);
+    const probeOwner = jest.fn(async (candidate: DesktopWorkloadOwnerIdentity) =>
+      candidate.id === claim.record.owner.id
+        ? { state: 'exited' as const }
+        : state === 'live'
+          ? { state: 'alive' as const, processStartedAt: owner.startedAt }
+          : { state: 'unknown' as const },
+    );
+    await expect(recoverWindowsDesktopWorkloadClaim({ ...options(), probeOwner, recoverApplication })).rejects.toThrow(
+      /recovery.*busy|recoverer.*live|recoverer.*unknown/i,
+    );
+    expect(probeOwner).toHaveBeenCalledTimes(2);
+    expect(recoverApplication).not.toHaveBeenCalled();
+    expect(fs.readFileSync(filename(), 'utf8')).toBe(before);
+  });
+
+  test('a dead-recoverer probe never deletes a replacement barrier or dispatches application cleanup', async () => {
+    const claim = survivor();
+    await interruptBarrierCleanup();
+    const root = `${filename()}.recovery-v2`;
+    const recoverApplication = jest.fn(async () => undefined);
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({
+        ...options(),
+        probeOwner: async (candidate) => {
+          if (candidate.id !== claim.record.owner.id) {
+            fs.renameSync(root, `${filename()}.old-recovery`);
+            fs.mkdirSync(root);
+          }
+          return { state: 'exited' };
+        },
+        recoverApplication,
+      }),
+    ).rejects.toThrow(/barrier ownership changed/);
+    expect(fs.existsSync(root)).toBe(true);
+    expect(fs.existsSync(filename())).toBe(true);
+    expect(recoverApplication).not.toHaveBeenCalled();
+  });
+
+  test('retires a dead recoverer barrier after the exact claim was already removed', async () => {
+    survivor();
+    await interruptBarrierCleanup(true);
+    expect(fs.existsSync(filename())).toBe(false);
+    const recoverApplication = jest.fn(async () => undefined);
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({ ...options(), probeOwner: async () => ({ state: 'exited' }), recoverApplication }),
+    ).resolves.toEqual({ state: 'absent' });
+    expect(recoverApplication).not.toHaveBeenCalled();
+    const next = createDesktopWorkloadClaim({ ...options(), runId: 'after-interrupted-recovery', processIdentity: owner });
+    next.release();
+  });
+
+  test('unknown versioned barrier ownership still fences an absent claim and new workload', async () => {
+    const barrier = `${filename()}.recovery-v2`;
+    fs.mkdirSync(barrier);
+    fs.mkdirSync(path.join(barrier, 'unknown-owner'));
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({
+        ...options(),
+        probeOwner: async () => ({ state: 'exited' }),
+        recoverApplication: jest.fn(async () => undefined),
+      }),
+    ).rejects.toThrow(/recovery.*busy|barrier.*owner|fenced/i);
+    expect(() => createDesktopWorkloadClaim({ ...options(), runId: 'cannot-bypass-versioned-barrier' })).toThrow(/recovery.*busy/);
+    expect(fs.existsSync(barrier)).toBe(true);
+  });
+
+  test('an empty versioned barrier represents interrupted publication, never application recovery authority', async () => {
+    const barrier = `${filename()}.recovery-v2`;
+    fs.mkdirSync(barrier);
+    const recoverApplication = jest.fn(async () => undefined);
+    await expect(
+      recoverWindowsDesktopWorkloadClaim({ ...options(), probeOwner: async () => ({ state: 'exited' }), recoverApplication }),
+    ).resolves.toEqual({ state: 'absent' });
+    expect(recoverApplication).not.toHaveBeenCalled();
+    expect(fs.existsSync(barrier)).toBe(false);
   });
 
   test('an interrupted recovery barrier still fences an absent claim', async () => {
@@ -287,14 +474,16 @@ describe('Windows exact identity and survivor recovery', () => {
   test('barrier replacement preserves the exact recovery failure as well as the foreign barrier', async () => {
     survivor();
     const failure = new Error('application-recovery-unsettled');
+    let barrier = `${filename()}.recovery`;
     let result: unknown;
     try {
       await recoverWindowsDesktopWorkloadClaim({
         ...options(),
         probeOwner: async () => ({ state: 'exited' }),
         recoverApplication: async () => {
-          fs.renameSync(`${filename()}.recovery`, `${filename()}.old-recovery`);
-          fs.mkdirSync(`${filename()}.recovery`);
+          if (fs.existsSync(`${filename()}.recovery-v2`)) barrier = `${filename()}.recovery-v2`;
+          fs.renameSync(barrier, `${filename()}.old-recovery`);
+          fs.mkdirSync(barrier);
           throw failure;
         },
       });
@@ -306,19 +495,22 @@ describe('Windows exact identity and survivor recovery', () => {
     expect((result as AggregateError).errors).toContainEqual(
       expect.objectContaining({ message: expect.stringMatching(/barrier ownership changed/) }),
     );
-    expect(fs.existsSync(`${filename()}.recovery`)).toBe(true);
+    expect(fs.existsSync(barrier)).toBe(true);
     expect(fs.existsSync(filename())).toBe(true);
   });
 
   test('concurrent reclaimers and a replaced claim never inherit cleanup authority', async () => {
-    survivor();
+    const claim = survivor();
     let finish!: () => void;
     const entered = new Promise<void>((resolve) => (finish = resolve));
     let dispatch!: () => void;
     const dispatched = new Promise<void>((resolve) => (dispatch = resolve));
     const recovery = {
       ...options(),
-      probeOwner: async () => ({ state: 'exited' as const }),
+      probeOwner: async (candidate: DesktopWorkloadOwnerIdentity) =>
+        candidate.id === claim.record.owner.id
+          ? { state: 'exited' as const }
+          : { state: 'alive' as const, processStartedAt: owner.startedAt },
       recoverApplication: async () => {
         dispatch();
         await entered;

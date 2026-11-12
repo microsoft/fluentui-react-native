@@ -228,13 +228,21 @@ automatic recovery authority, even when a primary process was captured.
 
 The trusted `recoverApplication` command accepts `{ endpoint, identity }`.
 Only the workload owner's recovery path calls it; no WebDriver capability or
-route exposes it. It opens and holds the exact process, verifies native
-PID/start, executable, AUMID, user and session, acquires application control,
-then closes/terminates only that recorded process and proves exit before
-returning `{ state: "exited" }`. An already-exited PID also returns `exited`.
-A reused live PID is rejected, never signalled. Unreadable identity, another
-controller, cancellation, or unconfirmed exit keeps recovery fenced.
-Mismatch reasons include `identity-start-mismatch`, `identity-session-mismatch`,
+route exposes it. It first opens `PROCESS_QUERY_LIMITED_INFORMATION` and reads
+native creation time. A different creation time proves the recorded incarnation
+exited: it returns `{ state: "exited" }` without requesting termination access,
+acquiring application control, or signalling the replacement. An absent PID
+also returns `exited`. Access denied or unreadable creation time remains
+`application-identity-unknown` and fenced, never guessed exit.
+
+For a matching creation time, the query handle stays open to prevent PID reuse
+while acquiring cleanup access. Recovery then verifies executable, AUMID, user
+and session, acquires application control, closes/terminates only that recorded
+process, and proves exit before returning `exited`. A matching start with other
+identity mismatches, another controller, cancellation, or unconfirmed exit
+remains fenced. Attach/inspection still reject reused PIDs; only trusted
+recovery retires the absent recorded incarnation.
+Mismatch reasons include `identity-start-mismatch` (attach/inspection), `identity-session-mismatch`,
 `identity-executable-mismatch`, and `identity-aumid-mismatch`; ambiguous
 process/window candidates report `application-identity-ambiguous`, and
 unreadable candidates report `application-identity-unknown`.
