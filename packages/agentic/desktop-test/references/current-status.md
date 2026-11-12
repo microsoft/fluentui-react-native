@@ -1100,3 +1100,28 @@ Windows/Win32 uncontained packaged-survivor claims remain gates. The PR's
 Windows driver-only native suite and ordinary E2E/smoke jobs do not exercise
 the new harness survivor contracts; Windows CI is insufficient for those
 gates. This is partial F10-M delivery, not full issue completion.
+
+### Final repository validation
+
+At source `48717724f0df1e8f89d76b66c48d37fac93e871b`,
+`yarn clean-lage-cache` passed once, followed by the locked aggregate:
+
+```sh
+TMPDIR="$PWD/artifacts/desktop/f10m/buildci-tmp" \
+GIT_CEILING_DIRECTORIES="$PWD/artifacts/desktop/f10m/buildci-tmp" \
+TF_BUILD=1 yarn lage buildci --concurrency 4
+```
+
+Result: passed, 176 successful tasks, 2 cache skips, 0 pending/aborted/failed.
+`TF_BUILD=1` selects the declared Jest task's in-band runner; the Git ceiling
+keeps project-local temporary test fixtures from discovering the outer
+repository. No baseline tests or dependencies were changed for this setup.
+An initial aggregate stopped at two owned cross-package guidance links;
+replacing them with explicit code paths fixed the policy violation, and
+`yarn check-agent-instructions` then passed. The corrected aggregate above
+passed, including all owning workspace test/lint tasks. Package format/build
+checks passed separately. `yarn lage test-links --concurrency 4` passed 90
+tasks with no failures. Logs: `artifacts/desktop/f10m/buildci-first.log`,
+`artifacts/desktop/f10m/buildci-final.log` and
+`artifacts/desktop/f10m/test-links-final.log`. Aggregate success does not
+qualify the blocked or unrun native gates above.
