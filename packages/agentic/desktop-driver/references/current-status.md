@@ -866,3 +866,49 @@ flaky cases. Their canonical reports remain under
 Accordion qualification reports, record source identity and empty owned
 survivor lists between runs. Existing hosted compatibility masks remain
 unchanged; these local results do not qualify hosted foreground behavior.
+
+### Review plain-gate comparison and cleanup
+
+- **Failed, required plain gate:** the locked
+  `yarn clean-lage-cache && yarn lage buildci`, with `TF_BUILD` unset,
+  completed **171 successful tasks and one failed task** in **34.84 s**.
+  The unchanged `boundedCommand.test.ts` escalation fixture expected
+  `SIGKILL` but received `SIGTERM` (`review-r2/buildci-plain.log`).
+  The serial diagnostic above is not a substitute for this failed gate.
+- **Passed, comparison setup:** a clean, detached worktree at the fetched
+  `origin/main`, `505a2187b0a2451aed7081c9260b343d55742f93`,
+  passed `yarn install --immutable` and `yarn build`. Installation followed
+  an initial missing-dependency failure; that attempt is retained rather
+  than counted as validation.
+- **Failed, first untouched-main plain gate:** the same locked
+  cache-cleared command completed **110 successful tasks and one failed
+  task** in **41.65 s**. Its `wdioRunner.test.ts` worker exceeded the
+  **7,000 ms** fixture deadline; the Driver test task, including
+  `boundedCommand.test.ts`, passed. This first run did not reproduce the
+  escalation failure (`review-r2/main-comparison.log`).
+- **Failed, warm-transform untouched-main plain gate:** one further
+  cache-cleared plain run, retaining the Jest transform cache to match E's
+  prior package-test state, completed **138 successful tasks and one
+  failed task** in **38.11 s**. It reproduced the same escalation fixture's
+  **expected `SIGKILL`, received `SIGTERM`** failure on unmodified main
+  (`review-r2/main-comparison-warm.log`). Both compared files were
+  byte-identical between main and E: implementation SHA-256
+  `5066540d6aa245eeeb089f609b3cb0b6b342c836583d594d4d68674bb0b44e43`,
+  fixture SHA-256
+  `a26cfbecbe6ec56a2b5b53ec4da26f3bff30de80b6e35aad597672514329fdd8`.
+  This establishes that the failure also occurs on the baseline, not its
+  elapsed-time cause; the startup/deadline race remains inferred.
+- Both comparison gates used **Node v24.18.0, Yarn 4.18.0**, default macOS
+  TMPDIR, `TF_BUILD` and native-test overrides unset, and no serial or
+  worker-count override. No bounded-command source, fixture, assertion,
+  or deadline was changed. The plain gate remains **failed**, not accepted.
+- **Passed, cleanup:** the locked exact-worktree argv/CWD audit at
+  **19:51:34 UTC** found no E-owned app, Metro, helper, compiler, or fixture
+  survivors, including the recorded failed WDIO fixture root. No live
+  candidate had an unreadable CWD, and no native helper remained.
+  No process was terminated. The clean, owned detached main worktree was
+  removed normally at **19:53:09 UTC**; the lower backport worktree and all
+  comparison logs were retained. Both commands completed and released their
+  locks. Evidence is in
+  `review-r2/process-audit-before-main-removal.json` and
+  `review-r2/main-comparison-summary.json`, beneath the review artifact root.
