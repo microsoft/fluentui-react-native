@@ -385,15 +385,67 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
   const { body, method, segments } = context;
 
   if (segments.length === 3 && segments[0] === 'furn' && segments[1] === 'grants' && context.authority && context.grant) {
-    if (method === 'POST' && segments[2] === 'connection') {
+    if (method === 'POST' && (segments[2] === 'connection' || segments[2] === 'runner-connection')) {
       if (Object.keys(requireObject(body, 'Connection delegation')).length !== 0)
         throw invalidArgument('Connection delegation accepts no input.');
+      const runner = segments[2] === 'runner-connection';
+      if (runner && !context.grant.scopes.includes('declared-workload')) {
+        throw new WebDriverError('unauthorized', 'Declared workload authority is required.');
+      }
       const child = context.authority.delegate(context.grant.id, {
-        label: context.grant.label,
-        scopes: ['driver-control'],
+        label: runner ? 'wdio' : context.grant.label,
+        scopes: runner ? context.grant.scopes : ['driver-control'],
         targets: context.grant.targets,
       });
       return { token: child.token };
+    }
+    if (method === 'POST' && segments[2] === 'runner') {
+      const request = requireObject(body, 'Runner grant');
+      rejectUnknownKeys(request, { target: true, handoff: true }, 'runner grant input');
+      if (
+        typeof request.target !== 'string' ||
+        (request.handoff !== undefined && request.handoff !== 'busy' && request.handoff !== 'preempt')
+      ) {
+        throw invalidArgument('Runner grants require a target and an optional busy or preempt handoff.');
+      }
+      if (!context.grant.scopes.includes('declared-workload') || !context.grant.parentId) {
+        throw new WebDriverError('unauthorized', 'An isolated declared workload connection is required.');
+      }
+      if (request.handoff === 'preempt' && !context.grant.scopes.includes('operator-recovery')) {
+        throw new WebDriverError('unauthorized', 'Preemption requires explicit operator recovery authority.');
+      }
+      const target = visibleTargets(context, targets).find(({ id }) => id === request.target);
+      if (!target) throw new WebDriverError('session not created', 'No registered target matches the runner request.');
+      if (target.storyOrchestrator || target.launchModes?.length !== 1 || target.launchModes[0] !== 'attach') {
+        throw new WebDriverError('unsupported operation', 'Runner handoff requires a generic attach-only target.');
+      }
+      const child = context.authority.delegateRunner(context.grant.id, target.id);
+      try {
+        await sessions.reserveRunner(
+          target.id,
+          { grantId: child.id, controllerId: child.id, label: child.label },
+          request.handoff === 'preempt'
+            ? (id) => {
+                if (context.authority!.isDescendantOf(child.id, id)) {
+                  throw new WebDriverError(
+                    'session not created',
+                    'Relinquish the acquiring connection before requesting runner authority.',
+                    {
+                      reason: 'target-busy',
+                    },
+                  );
+                }
+                return context.authority!.revokeAndDrain(id);
+              }
+            : undefined,
+          context.signal,
+        );
+        context.signal.throwIfAborted();
+        return { token: child.token };
+      } catch (error) {
+        await context.authority.revokeAndDrain(child.id);
+        throw error;
+      }
     }
     if (method === 'DELETE' && segments[2] === 'current') {
       if (!context.grant.parentId) {
@@ -441,8 +493,17 @@ async function route(context: RouteContext, sessions: SessionManager, targets: T
     }
     // A target outside the grant matches as if it were not registered, so a grant cannot discover what it may not use.
     const matched = await matchCapabilities(request.capabilities, visibleTargets(context, targets));
+    if (context.grant?.runner && matched.launchMode !== 'attach') {
+      throw new WebDriverError('session not created', 'Runner grants permit attached sessions only.');
+    }
     try {
-      const owner = context.grant ? { grantId: context.grant.id, label: context.grant.label } : undefined;
+      const owner = context.grant
+        ? {
+            grantId: context.grant.id,
+            label: context.grant.label,
+            ...(context.grant.runner ? { controllerId: context.grant.runner.controllerId } : {}),
+          }
+        : undefined;
       const session = await sessions.create(
         matched.target,
         matched.hostInfo,

@@ -70,7 +70,9 @@ in its command queue authenticates again immediately before dispatch.
 - A grant also names explicit permission scopes: `driver-control`,
   `declared-workload`, and `operator-recovery`. Omitted scopes mean only
   `driver-control`. Every protected driver route requires that scope; the other
-  scopes alone confer no driver access. Workload and recovery HTTP routes are
+  scopes alone confer no driver access. Scoped attach-only runner grants use
+  workload authority; preempting an existing controller additionally requires
+  recovery authority. General workload management and recovery HTTP routes are
   not implemented. Trusted in-process recovery remains an operator API.
 - `authority.delegate(parent.id, request)` creates a distinct child principal,
   rejecting target or scope expansion (including wildcard expansion). An
@@ -114,13 +116,32 @@ in its command queue authenticates again immediately before dispatch.
 - Ordinary session HTTP `DELETE` is queued behind current work before drain
   begins. Neither revocation notification nor a ten-minute idle setting proves
   settlement; handoff must await session deletion or the explicit grant drain.
+- `POST /furn/grants/runner-connection` accepts no fields and delegates an
+  isolated connection retaining the caller's scopes; it requires
+  `declared-workload` as well as `driver-control`.
+  `POST /furn/grants/runner` accepts only `{ target, handoff?: "busy" | "preempt" }`
+  from such an isolated workload connection. The target must be generic and
+  advertise attach-only launch modes. The default is bounded `target-busy`;
+  `preempt` also requires `operator-recovery` and cannot revoke the acquiring
+  connection or one of its ancestors.
+- Runner acquisition fences admission before draining an old controller. Only
+  after cancellation, native settlement, opening-lease cleanup, and deletion
+  are confirmed does it return a driver-only, target-scoped attach-only child.
+  Ordinary descendants inherit that restriction and share the reservation.
+  The reservation excludes MCP even between workers and is released only after
+  terminal subtree drain. Failed drains retain the fence and retryable proof.
+  This is not a session transfer: old references, cursors, proofs, request-id
+  outcomes and session-qualified artifact links are invalid in the fresh
+  session. Storybook and supervisor-retained launched-app handoff are not
+  implemented here.
 - A grant's session that receives no request for `idleSessionTimeoutMs`
   (ten minutes by default; 0 disables) closes as `DELETE` would: input is
   released, a launched application is closed, and an attached application is
   left running with any quarantine kept. The clock runs only while none of the
   session's requests is queued or running, and only the owning grant's
   requests renew it; another grant's probe does not. Expiry
-  releases the target for other grants, so a client that keeps a session
+  releases a normal target for other grants (a runner reservation lasts until
+  its grant drains), so a client that keeps a session
   must keep using it. Sessions on a service without an authority never expire.
 - Grants and the service `incarnation` that `/status` reports as
   `service.incarnation` end with the service process. A restarted service

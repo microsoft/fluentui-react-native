@@ -54,6 +54,8 @@ export class DesktopController {
   #pending: Promise<unknown> = Promise.resolve();
   #disposed = false;
   #disposing?: Promise<void>;
+  #relinquishing?: Promise<{ relinquished: true }>;
+  #control = new AbortController();
   readonly #disconnected = new AbortController();
 
   constructor(connect: ConnectDesktopDriver) {
@@ -83,13 +85,16 @@ export class DesktopController {
       let session: DesktopSessionClient;
       try {
         session = await this.guard(() =>
-          connection.client.newSession({
-            alwaysMatch: {
-              'furn:launchMode': request.launch ? 'launch' : 'attach',
-              'furn:target': request.target,
-              ...(request.clickMode === undefined ? {} : { 'furn:clickMode': request.clickMode }),
+          connection.client.newSession(
+            {
+              alwaysMatch: {
+                'furn:launchMode': request.launch ? 'launch' : 'attach',
+                'furn:target': request.target,
+                ...(request.clickMode === undefined ? {} : { 'furn:clickMode': request.clickMode }),
+              },
             },
-          }),
+            { signal: this.#control.signal },
+          ),
         );
       } catch (error) {
         if (isWebDriverError(error)) this.#uncertain = undefined;
@@ -112,6 +117,38 @@ export class DesktopController {
       this.assertCertain();
       return this.closeSession();
     });
+  }
+
+  /** Stops admission at once; a fresh child is obtained only after the old controller's drain is confirmed. */
+  relinquish(): Promise<{ relinquished: true }> {
+    if (this.#disposed) return Promise.reject(new AdapterError('connection-closed', 'The MCP connection is closed.'));
+    if (this.#relinquishing) return this.#relinquishing;
+    this.#control.abort();
+    const binding = this.#binding;
+    // Do not wait behind the native command we must cancel. The service revokes first, then awaits its settlement.
+    const draining = binding?.child.client.revokeConnection();
+    void draining?.catch(() => undefined);
+    const previous = this.#pending;
+    const result = (async () => {
+      await previous;
+      try {
+        if (draining) await draining;
+        if (this.#binding && this.#binding !== binding) await this.#binding.child.client.revokeConnection();
+        this.#binding = undefined;
+        this.#connection = undefined;
+        this.#open = undefined;
+        this.#uncertain = undefined;
+        this.#control = new AbortController();
+        this.#relinquishing = undefined;
+        return { relinquished: true as const };
+      } catch {
+        this.#relinquishing = undefined;
+        throw new AdapterError('drain-incomplete', 'Controller cleanup is not confirmed. Retry relinquish; no new work is admitted.');
+      }
+    })();
+    this.#relinquishing = result;
+    this.#pending = result.catch(() => undefined);
+    return result;
   }
 
   private async closeSession(): Promise<{ closed?: string }> {
@@ -142,7 +179,7 @@ export class DesktopController {
     if (!open) {
       throw new AdapterError('no-session', 'No session is open. Open one with desktop_session first.');
     }
-    const signal = AbortSignal.any([this.#disconnected.signal, ...(options.signal ? [options.signal] : [])]);
+    const signal = AbortSignal.any([this.#disconnected.signal, this.#control.signal, ...(options.signal ? [options.signal] : [])]);
     const response = await this.guard(() => open.session.operation<Result>(name, input, { ...options, signal }), signal);
     return { response, session: open.session.id };
   }
@@ -296,8 +333,14 @@ export class DesktopController {
   }
 
   private enqueue<T>(work: () => Promise<T>): Promise<T> {
+    if (this.#control.signal.aborted) {
+      return Promise.reject(new AdapterError('controller-draining', 'Complete relinquish before admitting new controller work.'));
+    }
     const result = this.#pending.then(() => {
       if (this.#disposed) throw new AdapterError('connection-closed', 'The MCP connection is closed.');
+      if (this.#control.signal.aborted) {
+        throw new AdapterError('controller-draining', 'The controller is draining. Complete relinquish before opening a fresh session.');
+      }
       return work();
     });
     this.#pending = result.catch(() => undefined);

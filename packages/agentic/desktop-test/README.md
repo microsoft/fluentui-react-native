@@ -61,6 +61,9 @@ when working on the package.
 - App targets and suites share one structural configuration schema.
 - WDIO owns suite sessions, globals, hooks, grouped execution, retries, and
   framework assertions.
+- Generic externally owned apps support drain-confirmed MCP/WDIO handoff via
+  `test --attach-agent`; see [runner ownership](references/wdio-suites.md#reuse-an-attached-agent-service).
+  Storybook handoff and retained session launches remain unsupported.
 - The generic harness supervises services, workers, and the driver; session-owned
   app launch and the Storybook lifecycle takeover are transitional (see
   [lifecycle](references/lifecycle.md)).

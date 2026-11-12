@@ -1,6 +1,6 @@
 import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
-import { installDesktopWebdriverCommands } from '@fluentui-react-native/desktop-driver/wdio';
+import { desktopWebdriverGrantOptions, installDesktopWebdriverCommands } from '@fluentui-react-native/desktop-driver/wdio';
 import type { DesktopEndpoint, DesktopRenderer } from '@fluentui-react-native/desktop-driver';
 import { resolveDesktopClickMode } from '@fluentui-react-native/desktop-driver/authoring';
 import type { DesktopReadiness } from '../config.js';
@@ -9,13 +9,14 @@ import { desktopTestSelectionFromEnvironment } from '../jasmine/selection.js';
 import { currentDesktopJasmineEnvironment, selectDesktopSpecs } from '../jasmine/specSelection.js';
 import { connectReportProducer } from '../reporting/transport.js';
 import { DesktopReportedError, serializeReportError } from '../reporting/protocol.js';
+import { requestDesktopRunnerWorker, runnerBrokerUrlEnvironment, runnerWorkerTokenEnvironment } from './runnerConnection.js';
 
 export type DesktopWdioSettings = {
   url: string;
   targetId: string;
   endpoint: DesktopEndpoint;
   renderer?: DesktopRenderer;
-  ownership: 'session' | 'external';
+  ownership: 'session' | 'supervisor' | 'external';
   specs: (string | string[])[];
   framework: string;
   reporter: string;
@@ -32,6 +33,8 @@ type Hook = (...args: unknown[]) => unknown;
 const hookNames = [
   'onPrepare',
   'onComplete',
+  'onWorkerStart',
+  'onWorkerEnd',
   'beforeSession',
   'afterSession',
   'before',
@@ -62,6 +65,8 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
   const readiness = settings.readiness;
   // The launcher read the selection too, so a malformed one fails the run before any worker starts.
   const selection = desktopTestSelectionFromEnvironment();
+  const broker = process.env[runnerBrokerUrlEnvironment] !== undefined;
+  const grant = process.env[runnerWorkerTokenEnvironment];
   const configuration = {
     ...hooks,
     runner: 'local',
@@ -72,6 +77,7 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
     bail: settings.bail,
     specFileRetries: settings.specFileRetries,
     logLevel: 'error',
+    ...(grant ? desktopWebdriverGrantOptions(grant) : {}),
     // The framework adapters report a spec file that fails to import only as a warning and then run zero tests; keep that one visible.
     logLevels: { '@wdio/jasmine-framework': 'warn', '@wdio/mocha-framework': 'warn' },
     hostname: address.hostname,
@@ -101,12 +107,23 @@ export async function createDesktopWdioConfiguration(settings: DesktopWdioSettin
         'furn:inputMode': selection?.lane ?? 'compatibility',
       },
     ],
+    onWorkerStart: async (id: string, ...args: unknown[]) => {
+      delete process.env[runnerWorkerTokenEnvironment];
+      if (broker) process.env[runnerWorkerTokenEnvironment] = await requestDesktopRunnerWorker('POST', id);
+      await hooks.onWorkerStart?.(id, ...args);
+    },
+    onWorkerEnd: async (id: string, ...args: unknown[]) => {
+      delete process.env[runnerWorkerTokenEnvironment];
+      if (broker) await requestDesktopRunnerWorker('DELETE', id);
+      await hooks.onWorkerEnd?.(id, ...args);
+    },
     beforeSession: async (...args: unknown[]) => {
+      if (broker && !grant) throw new Error('The WDIO worker has no scoped Desktop Driver authority.');
       process.env.E2ETEST_PLATFORM = settings.endpoint;
       await hooks.beforeSession?.(...args);
     },
     before: async (capabilities: unknown, specs: unknown, browser: WebdriverIO.Browser) => {
-      installDesktopWebdriverCommands(browser, settings.url);
+      installDesktopWebdriverCommands(browser, settings.url, { grant });
       // Before the application is touched: a lane that cannot vouch for its tests must stop here.
       if (settings.framework === 'jasmine') {
         selectDesktopSpecs(

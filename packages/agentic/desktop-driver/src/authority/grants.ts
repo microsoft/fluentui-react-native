@@ -27,6 +27,8 @@ export type DesktopGrant = {
   readonly targets: GrantTargets;
   readonly scopes: readonly GrantScope[];
   readonly parentId?: string;
+  /** Runner descendants share one reserved controller and can only attach, never launch an application. */
+  readonly runner?: Readonly<{ controllerId: string; attachOnly: true }>;
 };
 
 /** A new grant with its bearer token. The token is returned once and cannot be recovered from the authority. */
@@ -76,7 +78,33 @@ export class DesktopAuthority {
     return this.create({ ...request, scopes, targets }, parent);
   }
 
-  private create(request: GrantRequest, parent: StoredGrant | undefined): IssuedDesktopGrant {
+  /** A trusted workload caller obtains only one target's attach-only driver authority, not workload or recovery rights. */
+  delegateRunner(parentId: string, targetId: string): IssuedDesktopGrant {
+    const parent = this.grants.get(parentId);
+    if (
+      !parent ||
+      parent.depth >= maxDepth ||
+      !parent.grant.scopes.includes('driver-control') ||
+      !parent.grant.scopes.includes('declared-workload') ||
+      !grantAllowsTarget(parent.grant, targetId)
+    ) {
+      throw new TypeError('Runner delegation is unavailable.');
+    }
+    return this.create({ label: 'wdio', scopes: ['driver-control'], targets: [targetId] }, parent, true);
+  }
+
+  /** Includes the grant itself; preemption must not revoke the acquiring controller's own authority tree. */
+  isDescendantOf(grantId: string, ancestorId: string): boolean {
+    let current = this.grants.get(grantId) ?? this.revoked.get(grantId);
+    while (current) {
+      if (current.grant.id === ancestorId) return true;
+      const parentId = current.grant.parentId ?? '';
+      current = this.grants.get(parentId) ?? this.revoked.get(parentId);
+    }
+    return false;
+  }
+
+  private create(request: GrantRequest, parent: StoredGrant | undefined, runner = false): IssuedDesktopGrant {
     if (this.issuedCount >= maxGrants) throw new RangeError('The service grant limit has been reached.');
     const label = request.label;
     if (typeof label !== 'string' || !labelPattern.test(label)) {
@@ -86,7 +114,15 @@ export class DesktopAuthority {
     const scopes = normalizeScopes(request.scopes);
     const id = randomBytes(16).toString('hex');
     const secret = randomBytes(32).toString('base64url');
-    const grant: DesktopGrant = Object.freeze({ id, label, targets, scopes, ...(parent ? { parentId: parent.grant.id } : {}) });
+    const restriction = parent?.grant.runner ?? (runner ? Object.freeze({ controllerId: id, attachOnly: true as const }) : undefined);
+    const grant: DesktopGrant = Object.freeze({
+      id,
+      label,
+      targets,
+      scopes,
+      ...(parent ? { parentId: parent.grant.id } : {}),
+      ...(restriction ? { runner: restriction } : {}),
+    });
     this.grants.set(id, { digest: digestOf(secret), grant, depth: parent ? parent.depth + 1 : 0 });
     this.issuedCount += 1;
     return Object.freeze({ ...grant, token: `${tokenScheme}.${id}.${secret}` });

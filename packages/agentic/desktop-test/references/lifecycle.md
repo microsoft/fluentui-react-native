@@ -143,6 +143,17 @@ than taking over CLI output and supervision. Management/run API schemas belong h
 Attached-app MCP/WDIO handoff can be developed independently of supervisor-owned
 native launch, but both must wait for session drain and preserve external apps.
 
+Generic attach-only services now support an explicit
+[MCP/WDIO handoff](wdio-suites.md#reuse-an-attached-agent-service). The serving
+supervisor retains its claim, listener, host, and required services. The
+standalone runner borrows that service but owns its reserved grant subtree;
+WDIO owns each worker session. Worker completion, crash, cancellation, and
+parent cleanup all await terminal grant drain before releasing the reservation.
+Old sessions and their references/cursors/proofs/artifact links are never
+transferred. A cleanup failure is not permission to start a new controller.
+This does not retain a session-launched application or migrate Storybook's
+transitional lifecycle.
+
 Configured target aliases receive distinct registered IDs while retaining the
 same physical `instanceId` when they resolve to the same application identity.
 Do not use an alias as proof that two targets are physically distinct.

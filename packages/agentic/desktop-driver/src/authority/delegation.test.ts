@@ -1,6 +1,23 @@
 import { DesktopAuthority } from './grants.js';
 
 describe('attenuated grants', () => {
+  test('runner descendants inherit their target reservation and attach-only restriction without workload or recovery rights', () => {
+    const authority = new DesktopAuthority();
+    const parent = authority.issue({
+      label: 'operator',
+      targets: ['a', 'b'],
+      scopes: ['driver-control', 'declared-workload', 'operator-recovery'],
+    });
+    const runner = authority.delegateRunner(parent.id, 'a');
+    const worker = authority.delegate(runner.id, { label: 'worker', targets: ['a'] });
+    expect(runner.targets).toEqual(['a']);
+    expect(worker.scopes).toEqual(['driver-control']);
+    expect(worker.runner).toEqual({ controllerId: runner.id, attachOnly: true });
+    expect(Object.isFrozen(worker.runner)).toBe(true);
+    expect(() => authority.delegateRunner(runner.id, 'a')).toThrow();
+    expect(() => authority.delegateRunner(parent.id, 'outside')).toThrow();
+    expect(() => authority.delegate(worker.id, { label: 'expand', targets: ['b'] })).toThrow();
+  });
   test('isolates siblings even when their labels and target scopes match', () => {
     const authority = new DesktopAuthority();
     const parent = authority.issue({ label: 'agent', targets: ['a', 'b'] });

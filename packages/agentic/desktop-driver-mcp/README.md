@@ -23,6 +23,11 @@ and drains the child, including ambiguous acquisitions; old services without
 delegation fail closed. See
 [Connection and setup](references/connection.md).
 
+`desktop_session` with `action: "relinquish"` cancels and drain-confirms the
+controller before an operator's generic attach-only WDIO runner takes over.
+After runner cleanup, open a fresh session; no old resources are resumed.
+See [session actions](references/tools.md#desktop_session).
+
 ## Use it
 
 Register the server with an MCP client that launches it over stdio:
