@@ -64,14 +64,14 @@ did not retain a portable raw-report locator; do not imply otherwise.
 
 ## Full-submission checklist
 
-| Area            | Remaining evidence/work                                                                                                                                                                                                                                                                                                                                                                                                      |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| macOS           | Signed AppKit and separate Fabric/Paper positive owned/external lifecycle, read-only inspection, exclusion and exact primary cleanup passed on 2026-11-12. Still required: supervisor death with Metro/channel/helper survivors, arbitrary descendants, interrupted native publication, live failed-cleanup/service-restart cases and repeated-run reliability.                                                              |
-| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent`; interactive input/capture rerun. Generic launched-application claim fields and durable survivor contracts are implemented; live uncontained packaged-survivor journaling/recovery remains not run for this change.                                                                                        |
-| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits. |
-| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. Claim schema 3 records the driver's OS start identity; schema 2 and unverified claims inspect as unknown. LIFE-8's clock-estimate mismatch is fixed; LIFE-9's existing stable per-user claim root has a TMPDIR regression contract. Automatic reclaim remains unsupported. |
-| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                                                                                                                                        |
-| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                                                                                                                                      |
+| Area            | Remaining evidence/work                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| macOS           | Signed AppKit and separate Fabric/Paper positive lifecycle, inspection, exclusion and exact primary cleanup passed on 2026-11-12. Rebased native contracts also pass interrupted acquisition publication, owner death with native app/known-descendant survivors, retained claim fences and exact operator cleanup. Arbitrary descendants, Metro/channel survivors, automatic recovery and repeated-run reliability remain unqualified. |
+| Windows / Win32 | Same-branch MCP restart/revocation/dispose/args tests; physical console Ctrl+C requalification of `serve --agent`; interactive input/capture rerun. Generic launched-application claim fields and durable survivor contracts are implemented; live uncontained packaged-survivor journaling/recovery remains not run for this change.                                                                                                   |
+| Storybook       | Authenticated mutation ingress, context fencing/reconnect, consistent helper build policy. F6 strict provenance and independent nonces are qualified by same-branch Windows Fabric and both Win32 Paper lanes in run 43156299266; see the F6 evidence below for scope and limits.                                                                                                                                                       |
+| Recovery        | Durable uncertainty is wired in both paths; live restart qualification, ledger and exact-resource reconciliation still precede automatic reclaim. Claim schema 3 records the driver's OS start identity; schema 2 and unverified claims inspect as unknown. LIFE-8's clock-estimate mismatch is fixed; LIFE-9's existing stable per-user claim root has a TMPDIR regression contract. Automatic reclaim remains unsupported.            |
+| Concurrency     | No physical-input suites in parallel on one interactive desktop. Separate machines may qualify independent endpoints.                                                                                                                                                                                                                                                                                                                   |
+| Reliability     | Establish the required repeated-run window rather than interpreting aggregate past successes as a pass.                                                                                                                                                                                                                                                                                                                                 |
 
 Tracking: live macOS, Windows, and Win32 requalification
 [#4441](https://github.com/microsoft/fluentui-react-native/issues/4441);
@@ -1643,3 +1643,88 @@ Logs in the qualification artifact root:
 `root-format-final.log`. `git diff --check` also passed. Only documentation
 result capture followed the final aggregate; no native/runtime source
 changed after the separately qualified renderer builds.
+
+### Rebased F10-M publication and survivor qualification — 2026-11-12
+
+The macOS layer was rebased in place from
+`6489386956c0485cb91b478a8f4adc4828f4178b` onto main
+`041ac8b9894aeaa7e1aa273baa2ece4e46298b94` (F6), yielding
+`d58d473b7bbef26619db596f420fa837687badf3`. The awaited Storybook claim
+was already present in F6; conflict resolution retained it and both independent
+evidence ledgers. No Windows native source was changed.
+`yarn install --immutable` passed with existing peer-dependency warnings.
+
+Qualification-only commit
+`d5a7530a9f2d4cb78721a36c1109b5c36fbdc5a1` adds three real AppKit
+scenarios; production ownership and helper behavior are unchanged:
+
+- Acquired-resource publication throws after native launch. The complete
+  pending claim remains fenced, refuses release/replacement, and settles only
+  after exact native cleanup and successful publication.
+- An independent owner is killed with `SIGKILL` after native acquisition but
+  before acquired-identity publication. The durable pending record survives;
+  no guessed identity is adopted, and replacement remains refused.
+- Another independent owner is killed after acquired-identity publication.
+  Its native app and known `/bin/sleep` descendant survive owner/helper exit.
+  Read-only inspection verifies the surviving app. The descendant also
+  survives exact primary-process cleanup, confirming `uncontained` semantics.
+  Both crash tests verify native owner/helper/app/descendant identities and
+  the initial child-parent relationship before exact operator cleanup. Only
+  the unchanged fixture claim is then removed.
+
+**Observed:** macOS 27.2.1 arm64, stable signer
+`FURN Desktop Driver Development`. All native operations ran under the shared
+native lock, with inherited TMPDIR. Nonprompting doctor passed with
+Accessibility/PostEvent/ScreenCapture preflight true and unlocked/on-console.
+The helper artifact and source digest remain
+`1429ce4663795bad31f545086ef80bffb83e9b9533287964991c5527388b2f6c`
+and `c17944691081d30a320cf6e4393a5bb0ce6cece8dd71295a400dbc5e6a53b3cb`.
+
+The focused command below passed **42 tests: 13 native, 29 portable; no failures
+or skips**. It ran the exact fixture/test content subsequently committed above.
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 FURN_NATIVE_PHYSICAL_INPUT_TEST=1 \
+FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+yarn workspace @fluentui-react-native/desktop-test test --runInBand \
+  applicationOwnership.contract applicationOwnership.test ownership.test \
+  --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-ownership"
+```
+
+Evidence: `packages/agentic/desktop-test/artifacts/desktop/application-ownership-kffNMN/evidence.json`.
+Raw command output is under
+`artifacts/desktop/f10m/rebased-qualification-20261112/`.
+
+Full package validation also passed:
+
+| Exact command                                                                                                                                                            | Observed result                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `yarn workspace @fluentui-react-native/desktop-driver format --check`                                                                                                    | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-driver lint`                                                                                                              | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-driver build`                                                                                                             | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-test format --check`                                                                                                      | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-test lint`                                                                                                                | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-test build`                                                                                                               | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/storybook-desktop format --check`                                                                                                 | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/storybook-desktop lint`                                                                                                           | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/storybook-desktop build`                                                                                                          | Passed                                                                                                                       |
+| `yarn workspace @fluentui-react-native/desktop-driver test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-driver-native"` | Passed 1,256; failed 0; skipped 47. Native opt-in, stable signing and the helper cache above were set for this command only. |
+| `yarn workspace @fluentui-react-native/desktop-test test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-harness"`         | Passed 409; failed 0; skipped 14. Native/signing overrides absent; the 13 AppKit cases passed separately.                    |
+| `yarn workspace @fluentui-react-native/storybook-desktop test --runInBand --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-storybook"`  | Passed 392; failed 0; skipped 4. Native/signing overrides absent.                                                            |
+
+The native driver suite includes exact-incarnation probes, refusal of
+unreadable foreign process identity, stale-start/PID-reuse classification and
+native self-tests. Stale timestamps supplied against live PIDs and synthetic
+microsecond-reuse self-tests are not an observation of forced OS PID recycling.
+The physical ownership mutex uses only bounded Shift down/up.
+
+**Remaining scope:** the crash fixtures prove a bounded known descendant,
+not arbitrary descendant discovery or containment. They interrupt acquisition
+publication, not a machine power loss during filesystem rename. Actual TCC
+revocation, helper-owned durable grants outside the observed responsible
+process tree, automatic survivor adoption, Metro/channel survivor topology,
+transparent restart and repeated-run reliability remain unqualified.
+The earlier unverifiable LaunchServices causal snapshot is not erased by these
+passing launches. F9 lifecycle relocation and F11 retained-app handoff are
+separate work; this change implements neither.

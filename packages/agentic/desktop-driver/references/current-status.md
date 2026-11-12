@@ -744,3 +744,42 @@ Documentation closeout passed all four changed Markdown link checks
 (3,159 files). The harness ledger records each exact link-check command.
 Final logs in the same artifact root: `changed-markdown-links-final.log`,
 `test-links-final.log` and `root-format-final.log`.
+
+### Rebased macOS publication/survivor contracts — 2026-11-12
+
+The macOS ownership layer is rebased onto F6 main
+`041ac8b9894aeaa7e1aa273baa2ece4e46298b94`; test/fixture qualification
+commit `d5a7530a9f2d4cb78721a36c1109b5c36fbdc5a1` does not change
+production helper behavior. Under the shared native lock on macOS 27.2.1
+arm64, the stable-signed native driver suite passed **1,256, failed 0,
+skipped 47**:
+
+```sh
+FURN_NATIVE_DRIVER_TEST=1 \
+FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY="FURN Desktop Driver Development" \
+FURN_DESKTOP_DRIVER_CACHE_ROOT="$PWD/artifacts/desktop/f10m/helper" \
+yarn workspace @fluentui-react-native/desktop-driver test --runInBand \
+  --cacheDirectory "$PWD/artifacts/desktop/f10m/rebased-qualification-20261112/jest-driver-native"
+```
+
+Package format, lint and build passed. Nonprompting doctor reported effective
+Accessibility/PostEvent/ScreenCapture permissions and an unlocked console;
+no privacy changes were made. Helper artifact/source digest are unchanged
+from the previous signed qualification.
+
+The harness's focused suite passed **13 native AppKit cases plus 29 portable
+cases, no failures or skips**. New native evidence covers failed acquired-record
+publication, owner death before/after acquired-record publication, retained
+workload fences, real application/known-descendant survivors and exact operator
+cleanup. The descendant remains alive after the primary exits, consistent with
+both macOS launch kinds remaining explicitly `uncontained`. This is not
+automatic recovery or arbitrary descendant containment. Stale native start
+identities and inaccessible foreign process identity still fail closed.
+
+Exact commands, process identities, limitations and the independent renderer
+and aggregate outcomes are recorded in
+`packages/agentic/desktop-test/references/current-status.md`, section
+"Rebased F10-M publication and survivor qualification".
+Evidence root: `artifacts/desktop/f10m/rebased-qualification-20261112/`;
+AppKit identities:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-kffNMN/evidence.json`.
