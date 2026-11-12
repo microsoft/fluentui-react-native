@@ -44,3 +44,14 @@ Run `yarn format`, `yarn lint`, `yarn build`, and `yarn test` from the package.
 Run consumer suites when changing public configuration or lifecycle behavior.
 If native output or ownership changes, qualify on the affected operating
 system; JavaScript contracts alone do not qualify native behavior.
+
+The opt-in generic native MCP/WDIO consumer is
+`yarn test nativeRunner.contract --runInBand`, with
+`FURN_NATIVE_DRIVER_TEST=1` and an explicitly provisioned
+`FURN_NATIVE_HANDOFF_APP_PATH` (signed AppKit bundle on macOS, plain Win32
+fixture executable on Windows). Follow [native qualification](native-qualification.md#generic-attach-only-mcpwdio-handoff)
+for readiness, hosted capability gates, safe private storage and evidence.
+`yarn test nativeRunnerSupport` checks host selection and readiness without
+starting a native helper. `yarn test contracts -t agent-interrupt-cli` tests
+semantic CLI interrupts with a protected fake-host service; it is not physical
+console qualification.

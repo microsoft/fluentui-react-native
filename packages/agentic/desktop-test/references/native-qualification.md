@@ -171,7 +171,7 @@ record them as **Not run**.
 ## Generic attach-only MCP/WDIO handoff
 
 This is independent of the Storybook procedure and its renderer/context gates.
-Provision the plain AppKit ownership fixture separately, with bundle identifier
+On macOS, provision the plain AppKit ownership fixture separately, with bundle identifier
 `com.microsoft.furn.application-ownership-fixture`, executable
 `Contents/MacOS/fixture`, `--title`/`--ready-file` arguments, and accessibility
 identifiers `ownership-fixture-increment`/`ownership-fixture-count`. It must be
@@ -194,17 +194,59 @@ It checks bounded busy, explicit relinquish, refusal of MCP while the runner
 owns the target, fresh sessions/resources, worker-crash drain, credential
 confinement, and preservation of the fixture's exact PID through service
 shutdown. Only the test that spawned the fixture terminates it afterward.
-Capture/resource-link coverage is explicitly marked unsupported when the
-endpoint refuses capture.
+Operator preemption and loss of a real HTTP 200 runner-grant response are
+separate modes alongside handoff and worker crash. Every mode verifies
+attach-only refusal, busy/exclusive admission, deletion before reuse, stale
+references/cursors, terminal reports, credential confinement, descriptor
+withdrawal, claim release, and preservation of the same external process
+incarnation. A failed mode does not suppress later modes when its cleanup is
+confirmed; unconfirmed cleanup blocks subsequent launches.
 
-The normal handoff runs first; a failure stops before the crash scenario.
+### Windows fixture and hosted selection
+
+The same contract runs on Windows against the existing plain Win32 fixture,
+not an AppKit bundle or a React Native host. Provision
+`furn-win32-fixture.exe` explicitly with the driver package's test-only
+`lib/native/windows/win32FixtureSupport.js` `fixtureExecutable()` builder.
+This builds into the native cache but does not launch anything. The consumer
+test never builds or downloads its fixture. With the verified helper already
+provisioned, run from the repository root under the exclusive desktop lock:
+
+```powershell
+$env:FURN_NATIVE_DRIVER_TEST = '1'
+$env:FURN_NATIVE_HANDOFF_APP_PATH = '<absolute path to furn-win32-fixture.exe>'
+yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand
+```
+
+Windows resolves the canonical executable and unique exact title, waits through
+the supported native attach/window/find APIs for that process's `1004` status
+control to say `Ready`, then releases the readiness lease without stopping the
+external app. No new native ready-file option is required. Core modes use an
+offscreen window and accessibility input only; a read-only ownership case still
+executes when an input assertion is unsupported. The optional capture mode
+uses an onscreen window and is skipped when
+`FURN_DESKTOP_DRIVER_DISABLED_INPUT_FEATURES` disables any input feature, matching
+the Windows native-contract gate. Capture/resource-link refusal remains
+unsupported, never an input or ownership pass. No mode claims physical input.
+
+Windows descriptors use unique names in the validated default private store.
+Project artifact ancestry is not repaired or trusted for private storage.
+The `setup-desktop-driver` action's `run-native-runner-contract: 'true'`
+explicitly provisions the fixture and selects this consumer after helper
+diagnosis. Both accessible Windows and Win32 Storybook PR jobs enable it.
+Their selection guard requires all four core modes to execute and pass;
+an all-skipped native consumer cannot make this check green. Hosted capture
+remains an explicit skipped test.
+
 Retain `artifacts/desktop/f11/native-*/evidence.json` and the run reports. Do not
 copy the private descriptor directory into shared artifacts. Record source
 revision, fixture revision, helper identity, selected/executed cases, native
 permission failures, cleanup, and skipped/not-run scenarios separately.
-Absent the explicit opt-ins, the test is skipped, not qualified. This contract
-does not qualify Windows/Win32, Storybook handoff, retained launches, physical
-input, cross-connection resume, or replay.
+Absent the explicit opt-ins, the tests are skipped, not qualified. The plain
+fixture does not qualify React Native Windows Fabric/Win32 Paper rendering,
+Storybook handoff, retained launches, physical input, cross-connection resume,
+or replay. Physical console Ctrl+C on both RN endpoints is a separate lifecycle
+qualification, not supplied by the semantic CLI regression.
 
 ## Windows Fabric and Win32 Paper
 

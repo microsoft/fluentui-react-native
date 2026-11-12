@@ -1894,6 +1894,70 @@ async function main() {
         logs.some((log) => log.includes('serve --agent requires an integration that supports agents; \\"fixture\\" does not.')),
         logs.join('\n'),
       );
+    } else if (mode === 'agent-interrupt-cli') {
+      for (const scenario of ['stop', 'repeat', 'child-first', 'failed-cleanup']) {
+        const directory = path.join(root, scenario);
+        const home = path.join(directory, 'home');
+        fs.mkdirSync(home, { recursive: true });
+        const env = { ...process.env, HOME: home, LOCALAPPDATA: home, FURN_INTERRUPT_ROOT: directory, FURN_INTERRUPT_SCENARIO: scenario };
+        for (const name of ['FURN_DESKTOP_REPORT_CONTEXT', 'FURN_DESKTOP_PROCESS_CONTROL', 'DESKTOP_REPORTER', 'DESKTOP_EVENTS']) {
+          delete env[name];
+        }
+        const child = spawnSync(
+          process.execPath,
+          [
+            path.join(packageRoot, 'config', 'cli.cjs'),
+            '--config',
+            path.join(packageRoot, 'fixtures', 'cli-interrupt', 'desktop.config.mjs'),
+            '--target',
+            'win32',
+            '--reporter',
+            'json',
+            'serve',
+            '--agent',
+            '--descriptor',
+            'interrupt-agent.json',
+          ],
+          { cwd: directory, env, encoding: 'utf8', timeout: 15_000, windowsHide: true },
+        );
+        assert.ifError(child.error);
+        assert.equal(child.signal, null, `${scenario}: ${child.stderr}`);
+        const failed = scenario === 'child-first' || scenario === 'failed-cleanup';
+        assert.equal(child.status, failed ? 1 : 0, `${scenario}: ${child.stderr}\n${child.stdout}`);
+        const readiness = JSON.parse(child.stdout.trim());
+        assert.equal(readiness.type, 'ready');
+        const reports = path.join(directory, 'reports', readiness.runId);
+        const result = JSON.parse(fs.readFileSync(path.join(reports, 'run.json'), 'utf8'));
+        assert.equal(result.terminal, true, `${scenario}: ${JSON.stringify(result)}`);
+        assert.equal(result.status, failed ? 'failed' : 'passed', JSON.stringify(result));
+        const events = fs
+          .readFileSync(path.join(reports, 'events.jsonl'), 'utf8')
+          .trim()
+          .split('\n')
+          .map((line) => JSON.parse(line));
+        assert.equal(events.filter(({ kind }) => kind === 'run-finished').length, 1);
+        assert(!fs.existsSync(path.join(directory, 'interrupt-agent.json')));
+        assert(!fs.existsSync(path.join(directory, 'runner-connection.json')));
+        const disposal = JSON.parse(fs.readFileSync(path.join(directory, 'disposal.json'), 'utf8'));
+        assert(disposal.includes('withdrawn:runner-connection.json'));
+        assert(disposal.indexOf('withdrawn:interrupt-agent.json') < disposal.indexOf('drain-start'));
+        assert(disposal.includes('host-disposed'));
+        const claims =
+          process.platform === 'win32'
+            ? path.join(home, 'Microsoft', 'FluentUIReactNative', 'desktop-test', 'workload')
+            : process.platform === 'darwin'
+              ? path.join(home, 'Library', 'Caches', 'com.microsoft.fluentui-react-native.desktop-test', 'workload')
+              : path.join(home, '.cache', 'fluentui-react-native', 'desktop-test', 'workload');
+        const claim = path.join(claims, 'interactive.lock');
+        if (scenario === 'failed-cleanup') {
+          const ownership = JSON.parse(fs.readFileSync(claim, 'utf8'));
+          assert.equal(ownership.state, 'fenced');
+          assert(ownership.unresolvedEffects.length > 0);
+        } else {
+          assert(disposal.includes('drain-settled'));
+          assert(!fs.existsSync(claim), 'settled interruption must release its exact workload claim');
+        }
+      }
     } else if (mode === 'lane-cli') {
       // Each invocation is its own process with no inherited collector, so its run result records the lane it was given.
       const configPath = path.join(root, 'desktop.config.mjs');

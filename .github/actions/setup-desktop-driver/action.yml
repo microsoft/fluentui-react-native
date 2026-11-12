@@ -13,6 +13,10 @@ inputs:
     description: Run the target-OS native package contract before provisioning.
     required: false
     default: 'false'
+  run-native-runner-contract:
+    description: Provision the plain Win32 fixture and verify the native MCP/WDIO consumer on Windows.
+    required: false
+    default: 'false'
   macos-signing-identity:
     description: Pre-provisioned macOS code-signing identity. Leave empty for an ad hoc CI signature.
     required: false
@@ -197,3 +201,43 @@ runs:
 
         "FURN_DESKTOP_DRIVER_BUILD_POLICY=never" |
           Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+    - name: Provision Windows native runner fixture
+      if: inputs.run-native-runner-contract == 'true' && (inputs.platform == 'windows' || inputs.platform == 'win32')
+      shell: pwsh
+      working-directory: ${{ github.workspace }}
+      run: |
+        $ErrorActionPreference = 'Stop'
+        @'
+        import fs from 'node:fs';
+        import path from 'node:path';
+        import { pathToFileURL } from 'node:url';
+        const module = path.resolve('packages', 'agentic', 'desktop-driver', 'lib', 'native', 'windows', 'win32FixtureSupport.js');
+        const { fixtureExecutable } = await import(pathToFileURL(module).href);
+        const executable = await fixtureExecutable();
+        fs.appendFileSync(process.env.GITHUB_ENV, `FURN_NATIVE_HANDOFF_APP_PATH=${executable}\n`);
+        console.log('Provisioned the plain Win32 native runner fixture.');
+        '@ | node --input-type=module
+        if ($LASTEXITCODE -ne 0) {
+          throw "Native runner fixture provisioning exited with code $LASTEXITCODE."
+        }
+
+    - name: Verify Windows native MCP and WDIO consumer
+      if: inputs.run-native-runner-contract == 'true' && (inputs.platform == 'windows' || inputs.platform == 'win32')
+      shell: pwsh
+      working-directory: ${{ github.workspace }}
+      env:
+        FURN_NATIVE_DRIVER_TEST: '1'
+      run: |
+        $ErrorActionPreference = 'Stop'
+        $results = Join-Path $env:GITHUB_WORKSPACE 'artifacts\desktop\f11\native-runner-jest.json'
+        New-Item -ItemType Directory -Force -Path (Split-Path $results) | Out-Null
+        yarn workspace @fluentui-react-native/desktop-test test nativeRunner.contract --runInBand --json --outputFile $results
+        if ($LASTEXITCODE -ne 0) {
+          throw "Native MCP/WDIO consumer contract exited with code $LASTEXITCODE."
+        }
+        $report = Get-Content -Raw -Path $results | ConvertFrom-Json
+        $ownership = @($report.testResults.assertionResults | Where-Object { $_.title -notmatch '\bcapture\b' })
+        if ($ownership.Count -ne 4 -or @($ownership | Where-Object { $_.status -ne 'passed' }).Count -ne 0) {
+          throw 'Native handoff, operator preemption, worker crash and lost-response recovery must all execute and pass.'
+        }

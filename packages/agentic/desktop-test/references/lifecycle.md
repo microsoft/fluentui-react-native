@@ -67,7 +67,18 @@ Interrupts stay handled until cleanup completes. The first SIGINT, SIGTERM, or
 SIGHUP requests a graceful stop; the second force-kills owned process trees
 while cleanup continues; the third exits immediately with status 128 plus the
 signal number and leaves the claim for inspection. An interrupted one-shot run
-reports `incomplete`.
+reports terminal `incomplete` and exits 1. A clean long-lived `serve` stop is
+terminal `passed` and exits 0 after descriptor withdrawal, grant/session drain,
+listener and reporting transport close, and exact claim release. A required
+child's failure delivered before the interrupt remains a failed run, not a
+successful cancellation. Failed disposal retains the fenced claim even though
+the terminal report is written and the CLI exits 1.
+
+On Windows a physical console Ctrl+C reaches every process attached to that
+console, so child exit and parent interruption can race. In-process
+`process.emit('SIGINT', 'SIGINT')` exercises the installed handler but is only
+semantic regression coverage; `child.kill('SIGINT')` on Windows terminates the
+child and is not graceful-console or physical-input qualification.
 
 The generated-descriptor service bridge allows 60 seconds per command shutdown
 phase so a nested scope can use its 45-second disposal budget and flush reporting

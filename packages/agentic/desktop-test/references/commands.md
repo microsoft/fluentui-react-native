@@ -48,7 +48,11 @@ Clients create sessions explicitly.
 Stop any command with Ctrl+C, SIGTERM, or SIGHUP. The first interrupt stops the
 running stage or suite and every owned service, and the command exits once
 cleanup completes, including a `serve` whose target is served by an imported
-integration. A second interrupt force-kills owned process trees; a third exits
+integration. A clean `serve` stop writes a terminal `passed` lifecycle report,
+releases its settled claim, and exits 0; an interrupted one-shot is terminal
+`incomplete` and exits 1. A child/service failure or failed cleanup remains
+`failed` (exit 1), and unsettled cleanup retains a fenced claim.
+A second interrupt force-kills owned process trees; a third exits
 at once and may leave the workload claim behind. See
 [lifecycle](lifecycle.md#lifecycle-and-ownership).
 

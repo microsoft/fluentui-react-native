@@ -1251,3 +1251,81 @@ packages\agentic\desktop-test\references\current-status.md` passed
 (15 links). Root `yarn oxfmt --check`, `yarn change:check` and
 `git diff --check` passed. No clean-cache `buildci` rerun was required for
 these evidence-only markdown edits.
+
+## Windows Ctrl+C regression and native consumer selection — 2026-11-12 UTC
+
+Source: review candidate based on `04d8d8b13177727492ef204cf190840fa8a3f2a1`
+for #4491, with the test/CI/documentation changes described here. This is
+portable implementation evidence, not a new native qualification. No native
+fixture/helper/app was launched and no physical-input campaign was acquired.
+
+**Observed:** `contracts` mode `agent-interrupt-cli` already passes against
+that unchanged baseline. It runs the actual `serve --agent` CLI in a subprocess
+with a protected fake-host service and actual descriptor/grant drains. It
+checks bounded process exit, terminal `run.json`, exactly one `run-finished`,
+descriptor removal and exact workload-claim disposition:
+
+| Semantic stimulus                        | Regression result | Terminal report / exit / claim                                   |
+| ---------------------------------------- | ----------------- | ---------------------------------------------------------------- |
+| First SIGINT after ready                 | Passed            | `passed`, exit 0, released                                       |
+| Second SIGINT during session drain       | Passed            | `passed`, exit 0, released                                       |
+| Required child failure before SIGINT     | Passed            | Expected `failed`, exit 1, released after settled cleanup        |
+| Session disposal failure during shutdown | Passed            | Expected `failed`, exit 1, fenced with unresolved cleanup effect |
+
+These are in-process `process.emit('SIGINT', 'SIGINT')` dispatches in the CLI
+process, not `GenerateConsoleCtrlEvent`, physical SendInput, or a Windows
+console broadcast. The historical self-wait repair is already present from
+#4478 (`586e4c38545ca3eedccd1c9c817f2f89ce16219d`); no additional runtime
+patch is justified by these results. Physical console Ctrl+C on the Windows
+Fabric and Win32 Paper `serve --agent` paths remains **Not run** for this
+candidate pending review and the exclusive desktop grant.
+
+**Observed selection regression:** the extracted original native consumer
+gate failed the Windows opt-in test (`Expected true; Received false`; four
+other selection cases passed). After parameterization, the portable selection,
+platform-fixture, hosted-capture-gate and exact native-readiness tests pass.
+The macOS bundle executable/ready-file path is preserved. Windows uses the
+prebuilt plain Win32 fixture with native exact executable/title/PID and
+`1004: Ready` polling, not an invented ready-file option. No native source
+or protocol change was needed.
+
+The native consumer now selects handoff, operator preemption, worker crash
+and lost real HTTP-200 runner-grant response as separate cases. Its crash
+fixture records the real worker session before exiting, and each mode checks
+deletion before reuse, exact external-process incarnation, stale resources,
+terminal reports, descriptor withdrawal and claim release. A cleanup-confirmed
+failure permits the next case; uncertain cleanup prevents further launches.
+Windows records use the validated default private store with unique names,
+not unsafe project ancestry or repaired ACLs.
+
+Both accessible Windows and Win32 Storybook PR jobs now explicitly provision
+the fixture and select the generic consumer through
+`run-native-runner-contract: 'true'`. The action requires all four ownership
+cases to execute and pass; an all-skipped result is rejected. Capture is a
+separate capability-gated case, skipped under hosted disabled-input policy;
+core transport/ownership still executes without physical input. The plain
+fixture is not React Native renderer or Storybook-handoff qualification.
+
+Implementation checks and retained review artifacts are under
+`artifacts\desktop\f11\w1-fix`:
+
+- `yarn workspace @fluentui-react-native/desktop-test test contracts --runInBand
+--testNamePattern agent-interrupt-cli`: **Passed** before the new coverage
+  changes; `interrupt-first.json` records one Jest contract/four scenarios.
+- `yarn workspace @fluentui-react-native/desktop-test test nativeRunnerSupport
+--runInBand`: expected **Failed** before the gate fix (`native-selection-red.json`);
+  the focused combined selection/interrupt run then **Passed** 11,
+  **Skipped** 35 (`focused-green.json`, including name-filtered cases).
+- Package `yarn format`, `yarn lint`, `yarn build`: **Passed**. Action/workflow
+  YAML and both new embedded PowerShell blocks: **Passed** syntax validation
+  without executing native code.
+- `yarn workspace @fluentui-react-native/desktop-test test --runInBand`:
+  **Passed** 388, **Skipped** 12, failed zero (`portable-test.json` and
+  `portable-test.log`). Native opt-ins were unset; temporary data and
+  `HOME`/`LOCALAPPDATA` claims were isolated under project artifacts.
+- New native consumer, optional native capture and physical Ctrl+C:
+  **Not run**; review and W1 desktop authorization are still required.
+  Hosted CI: **Not run** for the unpushed candidate. Clean-cache `buildci`:
+  **Not run**, reserved for final locked validation after review.
+
+Patch changeset: `.changeset/windows-native-runner-coverage.md`.
