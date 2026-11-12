@@ -516,3 +516,26 @@ macOS Fabric and Paper signing/TCC-responsibility qualification remain
 separate, unrun gates on this branch. No TCC/privacy settings were changed.
 Primary exit is not descendant containment; Windows/Win32 native application
 claim/survivor qualification remains not run for this change.
+
+### 2026-11-12 review follow-up
+
+At source `62e6552028ea8fb81e76d430379321145fab709c`, the signed helper
+was forcibly rebuilt and
+`yarn workspace @fluentui-react-native/desktop-driver test --runInBand nativeDriver.test applicationIncarnation serviceIdentity`
+passed 79, failed 0, skipped 15; 5 suites passed, 2 skipped. The lock, signing,
+native opt-in and project-local storage policy above were retained.
+The native self-test exercises actual flock contention, preserves a real child
+after injected EWOULDBLOCK and proves exact cleanup of a real launched child
+after injected EBADF. Pre-spawn failures report `not-started`; a lost dispatched
+launch response remains `unknown`. Default-TMPDIR transport regressions passed
+59/59.
+
+The matching AppKit safety subset passed 4, failed 0, skipped 5, including
+pre-spawn/LaunchServices no-app rejection and claim reuse. Its helper artifact is
+`1d68fae8df504432900e30e5b2a6714029762f5dd690cd953a8ef07b1f5da4f3`,
+source digest
+`2c8ac56b2b824b05b1cb10d358050dfb643b44eb6e209508d53eaa0f2744b0f8`.
+Raw evidence is
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-JMEGuu/evidence.json`;
+commands and exact primary identities are in the harness ledger.
+Positive AX and renderer qualification remain blocked/not run as above.

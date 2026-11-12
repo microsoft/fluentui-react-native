@@ -1083,8 +1083,10 @@ Post-run verification is retained at
 An earlier fixture inherited Mach-O minimum macOS 28.0 on this 27.2.1 host.
 LaunchServices failed before publishing a PID
 (`NSCocoaErrorDomain` 256, underlying `NSOSStatusErrorDomain` -10825);
-the pending resource correctly stayed uncertain. The corrected fixture pins
-the helper's macOS 11.0 minimum in both compiler target and bundle metadata;
+that older implementation left the pending resource uncertain. Completed
+no-application failures are settled by the review follow-up below.
+The corrected fixture pins the helper's macOS 11.0 minimum in both compiler
+target and bundle metadata;
 `vtool` confirmed 11.0 and the corrected rejected-launch run passed above.
 The earlier evidence is retained at
 `packages/agentic/desktop-test/artifacts/desktop/application-ownership-UiVcfS/evidence.json`.
@@ -1125,3 +1127,60 @@ tasks with no failures. Logs: `artifacts/desktop/f10m/buildci-first.log`,
 `artifacts/desktop/f10m/buildci-final.log` and
 `artifacts/desktop/f10m/test-links-final.log`. Aggregate success does not
 qualify the blocked or unrun native gates above.
+
+### Review follow-up: launch rejection and lock-failure settlement
+
+Source `62e6552028ea8fb81e76d430379321145fab709c` fixes the three review
+findings. Native pre-spawn rejection and completed LaunchServices failure with
+no application report `applicationSettlement: 'not-started'`. Ordinary no-data
+macOS/Windows/Win32 rejections release the claim; reported process identity,
+unknown or unrecognized settlement, lost dispatched responses and completion
+after cancellation remain fenced. An acquired lease is never cleared by the
+no-data fallback. The async `claimDesktopWorkload` export and awaited Storybook
+caller are unchanged; desktop-test now has a **minor** changeset.
+
+Default-TMPDIR focused tests used only project-local test files and Jest cache.
+Native commands ran under the exclusive lock, with the stable signing identity,
+native opt-in, an isolated helper cache and project-local temporary storage:
+
+| Selection                                              | Exact command                                                                                                                                                | Result                                                        |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| Default-TMPDIR ownership                               | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.test --cacheDirectory "$PWD/artifacts/desktop/f10m/jest-cache"`    | Passed 24, failed 0, skipped 0                                |
+| Default-TMPDIR transport                               | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand NativeHostProcess --cacheDirectory "$PWD/artifacts/desktop/f10m/jest-cache"`          | Passed 59, failed 0, skipped 0                                |
+| Signed helper rebuild                                  | `yarn workspace @fluentui-react-native/desktop-driver exec desktop-driver build-driver --platform macos --force`                                             | Passed                                                        |
+| Native identity and termination                        | `yarn workspace @fluentui-react-native/desktop-driver test --runInBand nativeDriver.test applicationIncarnation serviceIdentity`                             | Passed 79, failed 0, skipped 15; 5 suites passed, 2 skipped   |
+| AppKit safety                                          | `yarn workspace @fluentui-react-native/desktop-test test --runInBand applicationOwnership.contract --testNamePattern 'kernel owner identity\|failed native'` | Passed 4, failed 0, skipped 5                                 |
+| Portable CLI retry, native-only environment removed    | `yarn workspace @fluentui-react-native/desktop-test test --runInBand contracts --testNamePattern 'agent-cli\|lane-cli'`                                      | Passed 2, failed 0, skipped 28 unselected                     |
+| Full portable harness, native-only environment removed | `yarn workspace @fluentui-react-native/desktop-test test --runInBand`                                                                                        | Passed 409, failed 0, skipped 10; 25 suites passed, 1 skipped |
+
+The native self-test distinguishes actual flock contention from other errors.
+Injected EBADF cleans up a real causally owned child and proves its exact exit;
+injected EWOULDBLOCK preserves its real child. The AppKit safety case proves
+claim release/reacquisition for exact-identity launch refusal, a missing direct
+executable, a missing installed bundle, and a completed LaunchServices rejection.
+Both AX-rejected launch kinds still prove exact-primary cleanup.
+
+New evidence:
+`packages/agentic/desktop-test/artifacts/desktop/application-ownership-JMEGuu/evidence.json`;
+it records a clean source tree. Helper artifact:
+`1d68fae8df504432900e30e5b2a6714029762f5dd690cd953a8ef07b1f5da4f3`;
+source digest:
+`2c8ac56b2b824b05b1cb10d358050dfb643b44eb6e209508d53eaa0f2744b0f8`.
+Direct-child PID 70283/start `2026-11-12T03:14:29.097020Z` and
+LaunchServices PID 70323/start `2026-11-12T03:14:29.588927Z` were proved exited.
+Independent post-run inspection found both PIDs absent and no own-worktree
+fixture/helper process. Logs:
+`artifacts/desktop/f10m/review-focused-final.log`,
+`artifacts/desktop/f10m/review-native-final.log` and
+`artifacts/desktop/f10m/review-native-cleanup.json`.
+An extra full portable run in the native batch initially passed 407, failed 2,
+skipped 10 because the HOME-isolating CLI fixtures inherited native-only
+signing/cache settings and could not resolve the configured signing identity.
+Removing `FURN_NATIVE_DRIVER_TEST`,
+`FURN_DESKTOP_DRIVER_MACOS_SIGNING_IDENTITY` and
+`FURN_DESKTOP_DRIVER_CACHE_ROOT` corrected the invocation, without a source or
+fixture change. Both affected cases and then the full portable suite passed
+under the exclusive lock; log:
+`artifacts/desktop/f10m/review-harness-final.log`.
+These safety passes do not close any positive AX, physical-input, renderer,
+descendant, interrupted-publication or Windows-native gate above.
