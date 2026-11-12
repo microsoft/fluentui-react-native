@@ -14,7 +14,7 @@ Storybook integration; do not recreate app identity, native test IDs, or
 generated runtime config in the consumer.
 
 The package exposes its native entry and `./metro` config. The Metro config
-may generate a polyfill when loaded. Use the owning app's declared scripts and
+may generate a runtime data module when loaded. Use the owning app's declared scripts and
 do not import this config as a supposedly side-effect-free inspection step.
 
 App-specific identity, story package discovery, platform exclusions, and test

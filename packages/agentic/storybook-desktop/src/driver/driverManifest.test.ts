@@ -7,6 +7,8 @@ import type { DesktopStoryManifest, NativeDriverArtifact } from '@fluentui-react
 import { createDesktopStorybookInstance } from '../config/instance';
 import { makeDesktopStorybookConfig } from '../config/makeDesktopStorybookConfig';
 import { createDesktopStorybookDriverManifest, writeDesktopStorybookDriverManifest } from './driverManifest';
+import { createFixturePrivateStorage } from './fixtures/privateStorage';
+import { readDriverManifest } from './generatedManifest';
 
 const storybookRoot = path.resolve(__dirname, '../../../../../apps/storybook');
 const storyManifest: DesktopStoryManifest = {
@@ -53,14 +55,15 @@ describe('Desktop Storybook driver manifest', () => {
 
     expect(manifest).toMatchObject({
       application: {
-        leaseNonce: 'nonce',
-        leasePath: path.join(storybookRoot, 'storybook-desktop.generated', 'application-lease.windows.json'),
+        leaseNonce: expect.any(String),
+        leasePath: path.join(storybookRoot, 'storybook-desktop.generated', '.private', 'application-lease.windows.json'),
         windowTitle: 'Agentic Components Storybook',
       },
       nativeDriver,
-      schemaVersion: 2,
+      schemaVersion: 3,
       wdio: { timeoutMs: 12_345, tag: 'smoke', reporter: 'tap' },
     });
+    expect(manifest.application.leaseNonce).not.toBe(manifest.bridgeNonce);
 
     const macosManifest = createDesktopStorybookDriverManifest({
       bridgeNonce: 'nonce',
@@ -78,7 +81,7 @@ describe('Desktop Storybook driver manifest', () => {
     });
     expect(macosManifest.application).toMatchObject({
       bundleIdentifier: instance.bundleIdentifier,
-      leasePath: path.join(storybookRoot, 'storybook-desktop.generated', 'application-lease.macos.json'),
+      leasePath: path.join(storybookRoot, 'storybook-desktop.generated', '.private', 'application-lease.macos.json'),
     });
     expect(macosManifest.renderer).toBe('fabric');
   });
@@ -106,7 +109,7 @@ describe('Desktop Storybook driver manifest', () => {
     });
   });
 
-  test('removes a stale application lease and agent readiness record before writing a new manifest', () => {
+  test('removes stale readiness and leases, publishing secrets only through private storage', async () => {
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-driver-manifest-'));
     try {
       const config = makeDesktopStorybookConfig({
@@ -134,17 +137,25 @@ describe('Desktop Storybook driver manifest', () => {
       const manifest = {
         ...created,
         agent: { descriptor: 'agent.json', readyPath },
-        application: { ...created.application, leasePath: path.join(temporaryDirectory, 'application-lease.windows.json') },
+        application: { ...created.application, leasePath: path.join(temporaryDirectory, '.private', 'application-lease.windows.json') },
       };
+      fs.mkdirSync(path.dirname(manifest.application.leasePath), { recursive: true, mode: 0o700 });
       fs.writeFileSync(manifest.application.leasePath, '{}');
       fs.writeFileSync(readyPath, '{}');
       const outputPath = path.join(temporaryDirectory, 'driver-manifest.json');
 
-      writeDesktopStorybookDriverManifest(manifest, outputPath);
+      await writeDesktopStorybookDriverManifest(manifest, outputPath, createFixturePrivateStorage);
 
       expect(fs.existsSync(manifest.application.leasePath)).toBe(false);
       expect(fs.existsSync(readyPath)).toBe(false);
-      expect(JSON.parse(fs.readFileSync(outputPath, 'utf8'))).toMatchObject({ schemaVersion: 2 });
+      const serialized = fs.readFileSync(outputPath, 'utf8');
+      expect(JSON.parse(serialized)).toMatchObject({ schemaVersion: 3 });
+      expect(serialized).not.toContain('"leaseNonce"');
+      expect(serialized).not.toContain('"bridgeNonce"');
+      await expect(readDriverManifest(outputPath, undefined, createFixturePrivateStorage)).resolves.toMatchObject({
+        bridgeNonce: 'nonce',
+        application: { leaseNonce: created.application.leaseNonce },
+      });
     } finally {
       fs.rmSync(temporaryDirectory, { force: true, recursive: true });
     }

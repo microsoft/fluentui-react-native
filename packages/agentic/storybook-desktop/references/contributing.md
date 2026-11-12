@@ -24,6 +24,40 @@ remain socket/epoch authenticated, navigation uses driver-owned settlement,
 and protected args stay refused. Manifest-backed smoke traversal must acquire
 and release its driver session before authored test sessions start.
 
+## Generated manifest trust
+
+`config/generated-contract.cjs` is the dependency-free source of the strict
+driver-manifest version 3, private-credential version 1, and parent-handoff
+version 1 schemas. Unknown generated fields fail, and authored plans and case
+options remain validated by their owning desktop-driver validators.
+
+The public generated JSON contains credential references, never either nonce.
+`src/driver/generatedManifest.ts` publishes a credential record and bridge-only
+runtime data module through desktop-driver's owner-private storage adapter:
+POSIX directory/file modes `0700`/`0600` with ownership/ACL checks on macOS,
+and the native owner/DACL/reparse/root-identity boundary on Windows.
+The macOS attachment lease stays in that private namespace. Its random nonce
+is independent of the runtime bridge nonce; the lease nonce never reaches Metro.
+
+The parent resolves the native helper independently and passes its artifact
+plus manifest, credential, and runtime-module hashes through inherited
+`STORYBOOK_DRIVER_HANDOFF`. The actual channel child rejects a mismatched
+manifest before verifying or spawning that helper, including before opening
+Windows private storage. A hash inside the editable manifest is not authority.
+Metro receives the canonical schema locator through the parent's
+`STORYBOOK_GENERATED_CONTRACT`, verifies the manifest and private data module
+against the handoff, and never reconstructs credentials from public JSON.
+The locator is trusted process configuration, not a manifest-controlled path.
+This keeps the integration CLI peer-free; the runtime remains app-owned.
+
+Do not launch a native channel by copying only a generated manifest or by
+inventing a handoff from its fields. Use the owning CLI lifecycle. The explicit
+fake-driver fixture mode has no native helper or credentials and is not a
+production trust path. Exercise Metro evaluation only under controlled fixture
+roots because its legacy, non-driver path still generates a runtime data module.
+Generated modules contain only `export default <JSON>`; executable loader
+source stays constant and obtains the data through Metro's resolver.
+
 Input lanes cross these areas. The descriptor schema, merge, and per-case
 decision belong to `@fluentui-react-native/desktop-driver/authoring`; do not
 copy them here. `src/cli/inputLane.ts` resolves the requested lane,

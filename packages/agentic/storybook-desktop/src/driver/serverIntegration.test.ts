@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import { createServer, Socket } from 'node:net';
 import os from 'node:os';
@@ -9,11 +10,76 @@ import { NodeDesktopCommandRunner } from '@fluentui-react-native/desktop-test/co
 import { deadline } from '@fluentui-react-native/desktop-test/commands';
 import { DesktopRunReporter, startReportTransport } from '@fluentui-react-native/desktop-test/reporting';
 
-import type { DesktopStorybookDriverManifest } from './driverManifest.js';
+import type { StoredDriverManifest } from './generatedManifest.js';
 
 jest.setTimeout(30_000);
 
 describe('desktop Storybook server integration', () => {
+  test.each(['helper-path-and-hash', 'unknown-field', 'helper-bytes'])(
+    'the actual channel process rejects %s before spawning a helper or listening',
+    async (tamper) => {
+      const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
+      const root = fs.mkdtempSync(path.join(os.tmpdir(), 'storybook-spawn-trust-'));
+      const manifestPath = path.join(root, 'driver-manifest.json');
+      const marker = path.join(root, 'unexpected-spawn');
+      const fixture = createIntegrationManifest(root, storybookPort, driverPort);
+      const hash = (contents: string) => createHash('sha256').update(contents).digest('hex');
+      const originalHelper = '#!/usr/bin/env node\nprocess.exit(0);\n';
+      const untrustedHelper = "#!/usr/bin/env node\nrequire('node:fs').writeFileSync(process.env.FURN_TEST_SPAWN_MARKER, 'spawned');\n";
+      fs.writeFileSync(fixture.nativeDriver.executablePath, originalHelper, { mode: 0o700 });
+      fixture.nativeDriver.artifactId = hash(originalHelper);
+      const originalContents = JSON.stringify(fixture);
+      const handoff = {
+        credentialsDigest: 'unused-before-rejection',
+        manifestDigest: hash(originalContents),
+        nativeDriver: { ...fixture.nativeDriver },
+        runtimeModuleDigest: 'unused-before-rejection',
+        runtimeModulePath: path.join(fixture.credentials.root, fixture.credentials.runtimeModule),
+        schemaVersion: 1,
+      };
+      if (tamper === 'helper-path-and-hash') {
+        fixture.nativeDriver.executablePath = path.join(root, 'substituted-helper');
+        fixture.nativeDriver.artifactId = hash(untrustedHelper);
+        fs.writeFileSync(fixture.nativeDriver.executablePath, untrustedHelper, { mode: 0o700 });
+      } else if (tamper === 'helper-bytes') {
+        fs.writeFileSync(fixture.nativeDriver.executablePath, untrustedHelper);
+      }
+      fs.writeFileSync(manifestPath, JSON.stringify(tamper === 'unknown-field' ? { ...fixture, unexpected: true } : fixture));
+      const projectRoot = path.resolve(__dirname, '../../../../../apps/storybook');
+      const child = spawn(process.execPath, [path.resolve(__dirname, '../../config/server-runner.cjs')], {
+        cwd: projectRoot,
+        env: {
+          ...process.env,
+          FURN_TEST_SPAWN_MARKER: marker,
+          STORYBOOK_CONFIG_PATH: path.join(projectRoot, 'src'),
+          STORYBOOK_DRIVER_MANIFEST: manifestPath,
+          STORYBOOK_DRIVER_HANDOFF: JSON.stringify(handoff),
+          STORYBOOK_NATIVE_DRIVER_FAKE: '0',
+          STORYBOOK_PROJECT_ROOT: projectRoot,
+          STORYBOOK_WS_PORT: String(storybookPort),
+        },
+        signal: AbortSignal.timeout(20_000),
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      const output: string[] = [];
+      child.stdout.on('data', (data: Buffer) => output.push(data.toString()));
+      child.stderr.on('data', (data: Buffer) => output.push(data.toString()));
+      try {
+        const code = await new Promise<number | null>((resolve, reject) => {
+          child.once('error', reject);
+          child.once('close', resolve);
+        });
+        expect(code).toBe(1);
+        expect(output.join('')).toMatch(/trusted parent handoff|driver manifest|hash does not match/);
+        expect(fs.existsSync(marker)).toBe(false);
+        await expect(fetch(loopbackUrl(driverPort, '/status'))).rejects.toThrow();
+      } finally {
+        if (child.exitCode === null) child.kill();
+        fs.rmSync(root, { force: true, recursive: true });
+      }
+    },
+  );
+
   test('hosts the Storybook channel and Stage 1 smoke-test target in one process', async () => {
     const [storybookPort, driverPort] = await Promise.all([getAvailablePort(), getAvailablePort()]);
     const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-storybook-driver-'));
@@ -332,15 +398,18 @@ describe('desktop Storybook server integration', () => {
   });
 });
 
-function createIntegrationManifest(temporaryDirectory: string, storybookPort: number, driverPort: number): DesktopStorybookDriverManifest {
+function createIntegrationManifest(temporaryDirectory: string, storybookPort: number, driverPort: number): StoredDriverManifest {
   return {
     application: {
-      leaseNonce: 'integration-nonce',
-      leasePath: path.join(temporaryDirectory, 'application-lease.json'),
+      leasePath: path.join(temporaryDirectory, '.private', 'application-lease.windows.json'),
       windowTitle: 'Agentic Components Storybook',
     },
     appName: 'AgenticStorybook',
-    bridgeNonce: 'integration-nonce',
+    credentials: {
+      root: path.join(temporaryDirectory, '.private'),
+      name: 'credentials-fixture.json',
+      runtimeModule: 'runtime-fixture.js',
+    },
     displayName: 'Agentic Components Storybook',
     driverPort,
     endpoint: 'windows',
@@ -367,7 +436,7 @@ function createIntegrationManifest(temporaryDirectory: string, storybookPort: nu
     platformManifestDigest: 'platform-digest',
     portablePlanDigest: 'portable-digest',
     renderer: 'fabric',
-    schemaVersion: 2,
+    schemaVersion: 3,
     storyManifest: {
       endpoint: 'windows',
       entries: [

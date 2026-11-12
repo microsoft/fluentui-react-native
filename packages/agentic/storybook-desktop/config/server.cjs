@@ -116,16 +116,16 @@ async function startDesktopStorybookServer({
   });
   try {
     controller.signal.throwIfAborted();
-    const driverManifest = driverManifestPath ? JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')) : undefined;
-    if (
-      driverManifest &&
-      (driverManifest.schemaVersion !== 2 ||
-        !driverManifest.nativeDriver ||
-        !driverManifest.application ||
-        typeof driverManifest.application.leasePath !== 'string' ||
-        typeof driverManifest.application.leaseNonce !== 'string')
-    )
-      throw new Error(`Invalid native Desktop Driver manifest at ${driverManifestPath}.`);
+    let driverManifest;
+    if (driverManifestPath) {
+      const { parseStoredDriverManifest, readDriverManifest } = await import('../lib/driver/generatedManifest.js');
+      if (process.env.STORYBOOK_NATIVE_DRIVER_FAKE === '1') {
+        driverManifest = parseStoredDriverManifest(JSON.parse(fs.readFileSync(driverManifestPath, 'utf8')));
+      } else {
+        if (!process.env.STORYBOOK_DRIVER_HANDOFF) throw new Error('Native Storybook requires its trusted parent helper handoff.');
+        driverManifest = await readDriverManifest(driverManifestPath, process.env.STORYBOOK_DRIVER_HANDOFF);
+      }
+    }
     const agent = driverManifest?.agent;
     if (
       agent !== undefined &&

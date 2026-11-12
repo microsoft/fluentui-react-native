@@ -1,4 +1,5 @@
 import type { View } from '@storybook/react-native';
+import generatedRuntimeInstance from '../config/runtime-instance.cjs';
 
 import { DesktopDriverBridge } from './DesktopDriverBridge';
 import { DesktopStorybookConfigProvider } from './DesktopStorybookConfig';
@@ -17,11 +18,13 @@ export function createDesktopStorybookApp(
   view: Pick<View, 'getStorybookUI'>,
   { enableWebsockets = true, host = '127.0.0.1', port, testIDPrefix = 'storybook-desktop' }: DesktopStorybookOptions = {},
 ) {
-  const runtimeInstance = (
-    globalThis as typeof globalThis & {
-      __FURN_DESKTOP_STORYBOOK_INSTANCE__?: DesktopStorybookRuntimeInstance;
-    }
-  ).__FURN_DESKTOP_STORYBOOK_INSTANCE__;
+  const generated: DesktopStorybookRuntimeInstance = generatedRuntimeInstance;
+  const runtimeInstance: DesktopStorybookRuntimeInstance = Object.freeze(
+    generated.bridgeNonce
+      ? generated
+      : ((globalThis as typeof globalThis & { __FURN_DESKTOP_STORYBOOK_INSTANCE__?: DesktopStorybookRuntimeInstance })
+          .__FURN_DESKTOP_STORYBOOK_INSTANCE__ ?? generated),
+  );
   const memoryStore: Record<string, string> = {};
   const storage = {
     getItem: async (key: string) => (key in memoryStore ? memoryStore[key] : null),
