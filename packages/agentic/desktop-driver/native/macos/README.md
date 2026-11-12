@@ -92,10 +92,12 @@ Storybook and React Native. From this package, build it into an ignored
 artifact directory:
 
 ```sh
-node native/macos/fixtures/build.cjs artifacts/application-fixture
+node native/macos/fixtures/build.cjs artifacts/desktop/application-fixture
 ```
 
 The command prints the verified bundle/executable identity and window title.
+The arm64 fixture pins its compiler and bundle minimum macOS version to 11.0,
+matching the helper instead of inheriting a newer machine deployment target.
 The executable accepts `--title <exact-window-title>` and an optional
 `--ready-file <path>` containing its PID after window creation; its Increment button
 and counter have accessibility identifiers `ownership-fixture-increment` and

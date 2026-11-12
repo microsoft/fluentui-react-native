@@ -9,6 +9,7 @@ const directory = path.resolve(process.argv[2]);
 const bundle = path.join(directory, 'FurnOwnershipFixture.app');
 const executable = path.join(bundle, 'Contents', 'MacOS', 'fixture');
 const bundleIdentifier = 'com.microsoft.furn.application-ownership-fixture';
+const minimumMacOSVersion = '11.0';
 fs.mkdirSync(path.dirname(executable), { recursive: true });
 
 function run(command, args) {
@@ -17,7 +18,17 @@ function run(command, args) {
   if (result.status !== 0) throw new Error(`${command} failed: ${result.stderr || result.stdout}`);
 }
 
-run('xcrun', ['swiftc', '-parse-as-library', '-framework', 'AppKit', path.join(__dirname, 'ApplicationFixture.swift'), '-o', executable]);
+run('xcrun', [
+  'swiftc',
+  '-target',
+  `arm64-apple-macosx${minimumMacOSVersion}`,
+  '-parse-as-library',
+  '-framework',
+  'AppKit',
+  path.join(__dirname, 'ApplicationFixture.swift'),
+  '-o',
+  executable,
+]);
 fs.writeFileSync(
   path.join(bundle, 'Contents', 'Info.plist'),
   [
@@ -29,6 +40,7 @@ fs.writeFileSync(
     '<key>CFBundleExecutable</key><string>fixture</string>',
     '<key>CFBundlePackageType</key><string>APPL</string>',
     '<key>CFBundleVersion</key><string>1</string>',
+    `<key>LSMinimumSystemVersion</key><string>${minimumMacOSVersion}</string>`,
     '<key>NSPrincipalClass</key><string>NSApplication</string>',
     '</dict></plist>',
     '',
