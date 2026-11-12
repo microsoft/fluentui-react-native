@@ -219,8 +219,10 @@ The same contract runs on Windows against the existing plain Win32 fixture,
 not an AppKit bundle or a React Native host. Provision
 `furn-win32-fixture.exe` explicitly with the driver package's test-only
 `lib/native/windows/win32FixtureSupport.js` `fixtureExecutable()` builder.
-This builds into the native cache but does not launch anything. The consumer
-test never builds or downloads its fixture. With the verified helper already
+The built module loads directly with Node ESM, without a Jest loader; importing
+it does not build or launch anything. Calling the builder uses the Windows
+toolchain and native cache but does not launch anything. The consumer test
+never builds or downloads its fixture. With the verified helper already
 provisioned, run from the repository root under the exclusive desktop lock:
 
 ```powershell

@@ -5,16 +5,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import { resolveDisabledInputFeatures } from '../../hosts/native/NativeDesktopHost';
-import type { NativeDisabledInputFeature } from '../../hosts/native/NativeDesktopHost';
-import { acquireDirectoryLock, delay, hashTree, resolveNativeDriverCacheRoot, sha256 } from '../filesystem';
-import { buildNativeDesktopDriver, FURN_DESKTOP_DRIVER_CACHE_ROOT } from '../nativeDriver';
+import { resolveDisabledInputFeatures } from '../../hosts/native/NativeDesktopHost.js';
+import type { NativeDisabledInputFeature } from '../../hosts/native/NativeDesktopHost.js';
+import { acquireDirectoryLock, delay, hashTree, resolveNativeDriverCacheRoot, sha256 } from '../filesystem.js';
+import { buildNativeDesktopDriver, FURN_DESKTOP_DRIVER_CACHE_ROOT } from '../nativeDriver.js';
 import { nativeDriverPackageRoot } from '../packageRoot.cjs';
-import type { NativeDriverArtifact } from '../types';
-import { probeWindowsToolchain } from './buildWindowsDriver';
+import type { NativeDriverArtifact } from '../types.js';
+import { probeWindowsToolchain } from './buildWindowsDriver.js';
 
 const execFileAsync = promisify(execFile);
-const fixtureRoot = path.resolve(__dirname, '../../../fixtures/win32');
+const fixtureRoot = path.join(nativeDriverPackageRoot, 'fixtures', 'win32');
 const megabyte = 1024 * 1024;
 
 let helperArtifactPromise: Promise<NativeDriverArtifact> | undefined;

@@ -2,6 +2,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { DesktopAuthority } from '../authority/grants';
 import { createDesktopDriverClient } from '../client/DesktopDriverClient';
@@ -69,6 +70,25 @@ const signedMacosTest =
   process.platform === 'darwin' && macosSigningIdentity && process.env.FURN_NATIVE_DRIVER_TEST === '1' ? test : test.skip;
 
 describe('native driver build and resolution', () => {
+  test('loads Windows fixture provisioning from built ESM without a Jest loader', () => {
+    const module = pathToFileURL(path.resolve(__dirname, '../../lib/native/windows/win32FixtureSupport.js')).href;
+    const child = spawnSync(
+      process.execPath,
+      [
+        '--input-type=module',
+        '--eval',
+        'const fixture = await import(process.argv[1]); process.stdout.write(typeof fixture.fixtureExecutable);',
+        module,
+      ],
+      { encoding: 'utf8', timeout: 10_000 },
+    );
+    expect({ status: child.status, stderr: child.stderr, exportType: child.stdout }).toEqual({
+      status: 0,
+      stderr: '',
+      exportType: 'function',
+    });
+  });
+
   test('locates its published sources independently of the caller working directory', () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-native-caller-'));
     try {
