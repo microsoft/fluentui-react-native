@@ -11,8 +11,9 @@ locator.
 
 Win32 test generations reset the preview subtree and its scroll position while
 preserving the surrounding desktop chrome preferences.
-All desktop story decorators use a scrollable viewport that centers small
-stories without clipping the start of oversized stories behind the chrome.
+The macOS and Win32 story decorators use a scrollable viewport that centers
+small stories without clipping oversized stories behind the chrome.
+Windows retains its existing non-scrolling, centered story container.
 
 Read the [integration reference](references/integration.md) before wiring the
 runtime into an app, and the [runtime contract](references/runtime-contract.md)

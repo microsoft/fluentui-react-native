@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { theme } from '@storybook/react-native-theming';
 
 import { DesktopStorybookConfigProvider, useDesktopStorybookConfig } from './DesktopStorybookConfig';
-import { createDesktopStorybookPreview } from './createDesktopStorybookPreview';
+import { createDesktopStorybookPreview as createMacOSDesktopStorybookPreview } from './createDesktopStorybookPreview.macos';
 import { Win32StoryViewport } from './createDesktopStorybookPreview.win32';
 import { StorybookUIComponent } from './StorybookUI.win32';
 
@@ -19,13 +19,26 @@ jest.mock('./DesktopStoryRoot', () => ({ DesktopStoryRoot: ({ children }: { chil
 
 const storage = { getItem: () => null, setItem: () => undefined };
 const setStory = jest.fn();
+const { createDesktopStorybookPreview } = jest.requireActual<typeof import('./createDesktopStorybookPreview')>(
+  './createDesktopStorybookPreview.tsx',
+);
 
-function LiteUIStoryViewport({ children }: { children: React.ReactNode }) {
-  const decorate = createDesktopStorybookPreview().decorators?.[0];
+function LiteUIStoryViewport({
+  children,
+  createPreview = createDesktopStorybookPreview,
+}: {
+  children: React.ReactNode;
+  createPreview?: typeof createDesktopStorybookPreview;
+}) {
+  const decorate = createPreview().decorators?.[0];
   if (!decorate) {
     throw new Error('The desktop preview must provide its story decorator.');
   }
   return decorate(() => <>{children}</>, { id: 'fixture--oversized' } as Parameters<typeof decorate>[1]);
+}
+
+function MacOSStoryViewport({ children }: { children: React.ReactNode }) {
+  return <LiteUIStoryViewport createPreview={createMacOSDesktopStorybookPreview}>{children}</LiteUIStoryViewport>;
 }
 
 function Canvas() {
@@ -82,7 +95,7 @@ test('resets the whole Win32 preview for a new test generation without resetting
 
 test.each<[string, React.ComponentType<{ children: React.ReactNode }>]>([
   ['Win32', Win32StoryViewport],
-  ['LiteUI', LiteUIStoryViewport],
+  ['macOS', MacOSStoryViewport],
 ])(
   'allows oversized %s stories to grow inside the scrollable preview rather than overflow a fixed-height centered view',
   async (_, Viewport) => {
@@ -103,3 +116,20 @@ test.each<[string, React.ComponentType<{ children: React.ReactNode }>]>([
     expect(screen.getByTestId('last-control')).toBeOnTheScreen();
   },
 );
+
+test('keeps the Windows LiteUI decorator non-scrolling so story scrollers and focus retain their existing parent', async () => {
+  const screen = await render(
+    <DesktopStorybookConfigProvider testIDPrefix="test">
+      <LiteUIStoryViewport>
+        <ScrollView testID="story-scroller">
+          <Text>Story content</Text>
+        </ScrollView>
+      </LiteUIStoryViewport>
+    </DesktopStorybookConfigProvider>,
+  );
+  expect(screen.queryByTestId('test-story-viewport')).toBeNull();
+  expect(screen.toJSON()).toMatchObject({
+    type: 'View',
+    props: { style: { alignItems: 'center', flex: 1, justifyContent: 'center', padding: 16 } },
+  });
+});
