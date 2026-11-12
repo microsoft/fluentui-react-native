@@ -225,6 +225,7 @@ describe('NativeDesktopHost lifecycle', () => {
 
 describe('NativeDesktopHost input recovery', () => {
   const pressKeyA = [{ actions: [{ type: 'keyDown' as const, value: 'a' }], id: 'keys', type: 'key' as const }];
+  const pressButton = [{ actions: [{ button: 0, type: 'pointerDown' as const }], id: 'pointer', type: 'pointer' as const }];
 
   // The operator's input mask (hosted CI sets it) would refuse the key press before it reaches the scripted helper.
   let environment: ReturnType<typeof jest.replaceProperty>;
@@ -250,6 +251,125 @@ describe('NativeDesktopHost input recovery', () => {
     expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: ['a'] });
     expect(mockSpawn).toHaveBeenNthCalledWith(2, 'driver', ['--release-input'], nativeHelperSpawnOptions());
     expect(order).toEqual(['reject']);
+  });
+
+  test('retains the input ledger when release fails and the helper subsequently exits', async () => {
+    scriptNativeHelperSession(mockSpawn, (message, send, control) => {
+      if (message.command === 'probe') {
+        control.exit(1);
+      } else if (message.command === 'releaseActions') {
+        send({ error: { code: 'input-failed', effect: 'unknown', message: 'release failed' }, id: message.id, type: 'response' });
+      } else {
+        send({ id: message.id, result: {}, type: 'response' });
+      }
+    });
+    const release = scriptReleaseInput();
+    const host = macHost();
+
+    await host.performActions([...pressKeyA, ...pressButton]);
+    await expect(host.releaseActions()).rejects.toThrow('release failed');
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(JSON.parse(release.input())).toEqual({ buttons: [0], keys: ['a'] });
+  });
+
+  test.each([
+    ['actions', (host: NativeDesktopHost) => host.performActions([...pressKeyA, ...pressButton]), { buttons: [0], keys: ['a'] }],
+    ['typing', (host: NativeDesktopHost) => host.sendKeys('element', 'a'), { buttons: [], keys: ['a'] }],
+    ['clicking', (host: NativeDesktopHost) => host.click('element', 'physical'), { buttons: [0], keys: [] }],
+  ])('retains possibly depressed input after failed %s until the helper exits', async (_, act, expected) => {
+    scriptNativeHelperSession(mockSpawn, (message, send, control) => {
+      if (message.command === 'probe') {
+        control.exit(1);
+      } else {
+        send({ error: { code: 'input-failed', effect: 'unknown', message: 'cleanup failed' }, id: message.id, type: 'response' });
+      }
+    });
+    const release = scriptReleaseInput();
+    const host = macHost();
+
+    await expect(act(host)).rejects.toThrow('cleanup failed');
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(JSON.parse(release.input())).toEqual(expected);
+  });
+
+  test('preserves uncertain input across later successful commands without adding their completed presses', async () => {
+    scriptNativeHelperSession(mockSpawn, (message, send, control) => {
+      if (message.command === 'probe') {
+        control.exit(1);
+      } else if (message.command === 'performActions') {
+        send({ error: { code: 'input-failed', effect: 'unknown', message: 'cleanup failed' }, id: message.id, type: 'response' });
+      } else {
+        send({ id: message.id, result: {}, type: 'response' });
+      }
+    });
+    const release = scriptReleaseInput();
+    const host = macHost();
+
+    await expect(host.performActions(pressKeyA)).rejects.toThrow('cleanup failed');
+    await host.sendKeys('element', 'b');
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: ['a'] });
+  });
+
+  test('forgets uncertain input only after a successful release', async () => {
+    let attempts = 0;
+    scriptNativeHelperSession(mockSpawn, (message, send, control) => {
+      if (message.command === 'probe') {
+        control.exit(1);
+      } else if (message.command === 'performActions' || (message.command === 'releaseActions' && attempts++ === 0)) {
+        send({ error: { code: 'input-failed', effect: 'unknown', message: 'cleanup failed' }, id: message.id, type: 'response' });
+      } else {
+        send({ id: message.id, result: {}, type: 'response' });
+      }
+    });
+    const host = macHost();
+
+    await expect(host.performActions(pressKeyA)).rejects.toThrow('cleanup failed');
+    await expect(host.releaseActions()).rejects.toThrow('cleanup failed');
+    await expect(host.releaseActions()).resolves.toBeUndefined();
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(mockSpawn).toHaveBeenCalledTimes(1);
+  });
+
+  test('does not recover input from a command rejected before dispatch', async () => {
+    scriptNativeHelperSession(mockSpawn, (message, send, control) => {
+      if (message.command === 'probe') {
+        control.exit(1);
+      } else {
+        send({ error: { code: 'invalid-params', effect: 'none', message: 'refused' }, id: message.id, type: 'response' });
+      }
+    });
+    const host = macHost();
+
+    await expect(host.performActions(pressKeyA)).rejects.toThrow('refused');
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(mockSpawn).toHaveBeenCalledTimes(1);
+  });
+
+  test('retains previously held input when a later command is rejected before dispatch', async () => {
+    let actions = 0;
+    scriptNativeHelperSession(mockSpawn, (message, send, control) => {
+      if (message.command === 'probe') {
+        control.exit(1);
+      } else if (actions++ === 0) {
+        send({ id: message.id, result: {}, type: 'response' });
+      } else {
+        send({ error: { code: 'invalid-params', effect: 'none', message: 'refused' }, id: message.id, type: 'response' });
+      }
+    });
+    const release = scriptReleaseInput();
+    const host = macHost();
+
+    await host.performActions(pressKeyA);
+    await expect(host.performActions([{ ...pressKeyA[0], actions: [{ type: 'keyDown', value: 'b' }] }])).rejects.toThrow('refused');
+    await expect(host.probe()).rejects.toMatchObject({ code: 'host-exited' });
+
+    expect(JSON.parse(release.input())).toEqual({ buttons: [], keys: ['a'] });
   });
 
   test('keeps only a bounded amount of a failed recovery’s stderr', async () => {

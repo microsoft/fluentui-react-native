@@ -33,6 +33,26 @@ json::Value SerializeRect(const RectD& rect) {
   return value;
 }
 
+constexpr unsigned int kPostedMoveSettleMs = 250;
+
+// Waits until a move posted with SWP_ASYNCWINDOWPOS changes the window frame.
+// A window may clamp or refuse a move, so a frame that stays put is accepted
+// once the window answers messages; one that stops answering fails instead.
+void AwaitPostedMove(HWND window, const RECT& before, const CancellationToken& token) {
+  const Deadline deadline(kPostedMoveSettleMs);
+  while (true) {
+    RECT now{};
+    if (GetWindowRect(window, &now) == FALSE || EqualRect(&now, &before) == FALSE) {
+      return;
+    }
+    if (deadline.Expired()) {
+      RequireWindowResponds(window, token);
+      return;
+    }
+    token.Wait(16);
+  }
+}
+
 std::string RequireString(const json::Value& params, std::string_view key) {
   const json::Value* value = params.Find(key);
   if (value == nullptr || !value->IsString() || value->AsString().empty()) {
@@ -239,10 +259,14 @@ HWND Driver::FocusForKeyboard(const std::string& elementId, const CancellationTo
   // foreground fails here instead of typing into whatever is.
   ActivateWindow(window, token);
   automation_.SetFocus(elementId);
-  for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId); attempt += 1) {
+  HRESULT focusFailure = S_OK;
+  for (int attempt = 0; attempt < 10 && !automation_.HasKeyboardFocus(elementId, focusFailure); attempt += 1) {
     token.Wait(20);
   }
-  if (!automation_.HasKeyboardFocus(elementId)) {
+  if (!automation_.HasKeyboardFocus(elementId, focusFailure)) {
+    if (FAILED(focusFailure)) {
+      FailHresult(kErrorAutomationFailed, "Reading the element focus state", focusFailure);
+    }
     Fail(kErrorNotInteractable, "The element did not take keyboard focus, so keys were not sent.");
   }
   return window;
@@ -267,8 +291,26 @@ void Driver::ClickPhysically(const std::string& elementId, const CancellationTok
   POINT center{};
   center.x = (snapshot.physicalRect.left + snapshot.physicalRect.right) / 2;
   center.y = (snapshot.physicalRect.top + snapshot.physicalRect.bottom) / 2;
-  RequireClickPointOwnedBy(window, center);
+  RequireClickPointOwnedBy(window, center, hitTester_);
   input_.ClickAt(center, token);
+}
+
+void Driver::RequirePointerOverLeasedApplication(POINT point) const {
+  if (applications_.PrimaryLease() == nullptr) {
+    return;
+  }
+  const HWND hit = hitTester_(point);
+  if (hit == nullptr || applications_.ForegroundBelongsToApplication(nullptr, hit)) {
+    return;
+  }
+  // A frame host, such as the one around a packaged application, can own the
+  // top-level window above the application's own content.
+  const HWND root = GetAncestor(hit, GA_ROOT);
+  if (root != nullptr && root != hit && applications_.ForegroundBelongsToApplication(nullptr, root)) {
+    return;
+  }
+  Fail(kErrorNotInteractable, "A window of another application, " + DescribeWindowHandle(hit) +
+                                  ", covers the pointer position, so the pointer input was not sent.");
 }
 
 json::Value Driver::ProbeResult(const json::Value& params) {
@@ -389,6 +431,7 @@ void Driver::PerformActions(const json::Value& actions, const CancellationToken&
         if (type == "pointerMove") {
           input_.MovePointer(ResolveActionPoint(action, token), ActionDuration(action), token);
         } else if (type == "pointerDown") {
+          RequirePointerOverLeasedApplication(input_.pointer());
           input_.PointerDown(ActionButton(action), token);
         } else if (type == "pointerUp") {
           input_.PointerUp(ActionButton(action), token);
@@ -403,7 +446,9 @@ void Driver::PerformActions(const json::Value& actions, const CancellationToken&
         if (type != "scroll") {
           Fail(kErrorInvalidParams, "Wheel input sources support only scroll and pause.");
         }
-        input_.MovePointer(ResolveActionPoint(action, token), 0, token);
+        const POINT scrollPoint = ResolveActionPoint(action, token);
+        RequirePointerOverLeasedApplication(scrollPoint);
+        input_.MovePointer(scrollPoint, 0, token);
         input_.Wheel(action.NumberField("deltaX", 0.0), action.NumberField("deltaY", 0.0), token);
         continue;
       }
@@ -450,21 +495,23 @@ CommandResult Driver::EncodeCapture(HWND window, const RECT& cropScreen, bool cr
 
 void Driver::ReleaseInput() noexcept {
   try {
-    if (!input_.HasDepressedInput()) {
-      return;
-    }
-    const CancellationToken idle;
-    try {
-      const PhysicalInputScope scope(idle, kPhysicalInputCleanupWaitMs, AbandonPolicy::Adopt);
-      input_.ReleaseAll();
-      return;
-    } catch (const HelperError&) {
-      // Depressed input must never outlive a cancelled command, so recovery
-      // proceeds even when the cross-process lock could not be acquired.
-      input_.ReleaseAll();
+    if (input_.HasDepressedInput()) {
+      const CancellationToken idle;
+      try {
+        const PhysicalInputScope scope(idle, kPhysicalInputCleanupWaitMs, AbandonPolicy::Adopt);
+        input_.ReleaseAll();
+      } catch (const HelperError&) {
+        // Continue attempting cleanup even if the cross-process lock could not
+        // be acquired.
+        input_.ReleaseAll();
+      }
     }
   } catch (...) {
     // Releasing input must never mask the original failure.
+  }
+  // Input that could not be released keeps the lock while the worker lives.
+  if (!input_.HasDepressedInput()) {
+    heldInput_.Release();
   }
 }
 
@@ -490,6 +537,7 @@ CommandResult Driver::Execute(const std::string& command, const json::Value& par
   const bool tracked = IsTrackedMutation(command);
   effects_.Reset();
   const EffectScope effectScope(effects_);
+  const CancellationScope cancellationScope(token);
   // A provider deadline that passed is always unknown, whatever the ledger
   // recorded before it.
   const auto effectOf = [this](const std::string& code) {
@@ -632,9 +680,16 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     if (rect == nullptr || !rect->IsObject()) {
       Fail(kErrorInvalidParams, "The setWindowRect request is missing its rectangle.");
     }
+    // Every change below is posted to the window's thread, so a window that
+    // stops answering leaves the effect unknown instead of blocking the helper.
+    RequireWindowResponds(window, token);
     if (IsZoomed(window) != FALSE || IsIconic(window) != FALSE) {
-      ShowWindow(window, SW_RESTORE);
-      RecordDelivered();
+      RecordDispatching();
+      const bool restored = RestoreWindow(window, token);
+      if (!restored) {
+        RequireWindowResponds(window, token);
+      }
+      RecordSettled(S_OK);
     }
     WindowMetrics metrics = MeasureWindow(window);
     const RectD current = ClientRectInScreenDips(metrics);
@@ -655,12 +710,16 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
     // frame an estimate, so converge on the requested client area by measuring.
     for (int attempt = 0; attempt < 4; attempt += 1) {
       token.ThrowIfCancelled();
-      if (SetWindowPos(window, nullptr, frame.left, frame.top, frame.right - frame.left, frame.bottom - frame.top,
-                       SWP_NOZORDER | SWP_NOACTIVATE) == FALSE) {
-        FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
+      RECT before{};
+      if (GetWindowRect(window, &before) == FALSE || EqualRect(&before, &frame) == FALSE) {
+        if (SetWindowPos(window, nullptr, frame.left, frame.top, frame.right - frame.left, frame.bottom - frame.top,
+                         SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS) == FALSE) {
+          FailLastError(kErrorInvalidParams, "Moving the window", GetLastError());
+        }
+        RecordDispatching();
+        AwaitPostedMove(window, before, token);
+        RecordSettled(S_OK);
       }
-      RecordDelivered();
-      token.Wait(16);
       metrics = MeasureWindow(window);
       const long deltaX = target.left - metrics.clientOrigin.x;
       const long deltaY = target.top - metrics.clientOrigin.y;
@@ -755,7 +814,7 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
           // The environment can change between the check and the click. When
           // it refused before any click was delivered, automatic mode still
           // has the accessibility click.
-          if (mode != "auto" || error.code() != kErrorInputUnavailable) {
+          if (mode != "auto" || error.code() != kErrorInputUnavailable || input_.HasDepressedInput()) {
             throw;
           }
           automation_.AccessibilityClick(elementId, token);
@@ -884,6 +943,9 @@ CommandResult Driver::ExecuteCommand(const std::string& command, const json::Val
   }
   if (command == "dispose") {
     ReleaseInput();
+    if (input_.HasDepressedInput()) {
+      Fail(kErrorInputFailed, "The helper could not release all held physical input during disposal.");
+    }
     applications_.Dispose(token);
     automation_.Reset();
     result.result = json::Value::Null();

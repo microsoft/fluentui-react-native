@@ -21,6 +21,8 @@ type SceneProps = { appearance?: ButtonAppearance; size?: ButtonSize; disabled?:
 function NewScene({ appearance, size, disabled }: SceneProps) {
   const [reason, setReason] = React.useState('None');
   const [action, setAction] = React.useState('None');
+  const [actions, setActions] = React.useState(0);
+  const [opens, setOpens] = React.useState(0);
   const [focus, setFocus] = React.useState('None');
   const row = (content: string): MenuItemProps => ({
     content,
@@ -28,7 +30,10 @@ function NewScene({ appearance, size, disabled }: SceneProps) {
     icon: null,
     testID: `menu-button-${content.toLowerCase()}`,
     onFocus: () => setFocus(content),
-    onPress: () => setAction(content),
+    onPress: () => {
+      setAction(content);
+      setActions((count) => count + 1);
+    },
   });
   return (
     <View style={styles.story}>
@@ -42,7 +47,10 @@ function NewScene({ appearance, size, disabled }: SceneProps) {
           testID="menu-button-trigger"
           menu={{ testID: 'menu-button-menu' }}
           onFocus={() => setFocus('Trigger')}
-          onOpenChange={(open: boolean, { reason: cause }: MenuOpenChangeData) => setReason(`${open ? 'Opened' : 'Closed'}: ${cause}`)}
+          onOpenChange={(open: boolean, { reason: cause }: MenuOpenChangeData) => {
+            setReason(`${open ? 'Opened' : 'Closed'}: ${cause}`);
+            if (open) setOpens((count) => count + 1);
+          }}
         >
           <MenuItem {...row('Message')} />
           <MenuItem {...row('Event')} />
@@ -53,6 +61,8 @@ function NewScene({ appearance, size, disabled }: SceneProps) {
       </View>
       <StoryStatus testID="menu-button-reason">{reason}</StoryStatus>
       <StoryStatus testID="menu-button-action">{action}</StoryStatus>
+      <StoryStatus testID="menu-button-actions">{String(actions)}</StoryStatus>
+      <StoryStatus testID="menu-button-opens">{String(opens)}</StoryStatus>
       <StoryStatus testID="menu-button-focus">{focus}</StoryStatus>
     </View>
   );
@@ -104,6 +114,30 @@ type Story = WdioStory<StoryObj<SceneProps>>;
 export const Default: Story = {
   tags: ['desktop-focus'],
   wdio: [
+    desktopIt(
+      'MNB-005 opens once with Space without releasing into a row activation and restores focus after one action',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async (context) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        const { inWindowWith } = await import('../menu/menu.wdio.ts');
+        const { browser, expect } = context;
+        await focusByTab(browser, 'menu-button-entry', 'menu-button-trigger');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~menu-button-focus')).toHaveText('Message');
+        await expect(await browser.$('~menu-button-opens')).toHaveText('1');
+        await expect(await browser.$('~menu-button-actions')).toHaveText('0');
+        expect(await (await browser.$('~menu-button-trigger')).getProperty('expanded')).toBe(true);
+        await inWindowWith(context, 'menu-button-message', async () => {
+          await expectNativeState(browser, 'menu-button-message', 'focused', true);
+          await browser.keys('\uE007');
+        });
+        await expect(await browser.$('~menu-button-actions')).toHaveText('1');
+        await expect(await browser.$('~menu-button-action')).toHaveText('Message');
+        await expect(await browser.$('~menu-button-opens')).toHaveText('1');
+        await expectNativeState(browser, 'menu-button-trigger', 'focused', true);
+        expect(await (await browser.$('~menu-button-trigger')).getProperty('expanded')).toBe(false);
+      },
+    ),
     desktopIt('MNB-006 exposes a named, collapsed native button before input', async ({ browser, expect }) => {
       const trigger = await browser.$('~menu-button-trigger');
       expect(await trigger.getProperty('role')).toBe('button');

@@ -1,6 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { act } from 'react';
-import { Animated, I18nManager, PlatformColor, StyleSheet, processColor } from 'react-native';
+import { act, createRef } from 'react';
+import { Animated, I18nManager, PlatformColor, StyleSheet, type View, processColor } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
@@ -20,6 +20,16 @@ jest.mock('@fluentui-react-native/framework-base', () => ({
 const mockUseReducedMotion = jest.mocked(useReducedMotion);
 
 describe('Skeleton', () => {
+  it('SKEL-001 forwards and detaches the native root ref while retaining decorative exclusion', async () => {
+    const ref = createRef<React.ComponentRef<typeof View>>();
+    const component = await renderSkeleton({ ref, accessibilityLabel: 'Not announced', accessible: true });
+    expect(ref.current).not.toBeNull();
+    expect(getRoot(component).props).toMatchObject({ accessible: false, accessibilityElementsHidden: true });
+    expect(component.queryByLabelText('Not announced')).toBeNull();
+    await component.unmount();
+    expect(ref.current).toBeNull();
+  });
+
   beforeEach(() => {
     mockUseReducedMotion.mockReturnValue(false);
     jest.spyOn(Animated, 'loop').mockReturnValue({ start: jest.fn(), stop: jest.fn(), reset: jest.fn() });
@@ -243,12 +253,12 @@ describe('Skeleton', () => {
     );
   });
 
-  it('shares one animation timeline across mounted placeholders', async () => {
+  it('SKEL-003 shares one timeline and stops it only after the last measured placeholder unmounts', async () => {
     const loop = jest.mocked(Animated.loop);
     const component = await render(
       <>
-        <Skeleton testID="first" style={{ width: 120, height: 16 }} />
-        <Skeleton testID="second" style={{ width: 120, height: 16 }} />
+        <Skeleton key="first" testID="first" style={{ width: 120, height: 16 }} />
+        <Skeleton key="second" testID="second" style={{ width: 120, height: 16 }} />
       </>,
     );
 
@@ -259,5 +269,16 @@ describe('Skeleton', () => {
     }
 
     expect(loop).toHaveBeenCalledTimes(1);
+    const animation = loop.mock.results[0].value;
+    expect(animation.start).toHaveBeenCalledTimes(1);
+    await component.rerender(
+      <>
+        <Skeleton key="second" testID="second" style={{ width: 120, height: 16 }} />
+      </>,
+    );
+    expect(animation.stop).not.toHaveBeenCalled();
+    expect(component.getByTestId('skeleton-shimmer', { includeHiddenElements: true })).toBeOnTheScreen();
+    await component.unmount();
+    expect(animation.stop).toHaveBeenCalledTimes(1);
   });
 });

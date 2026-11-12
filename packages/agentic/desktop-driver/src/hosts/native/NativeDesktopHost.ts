@@ -75,6 +75,8 @@ export class NativeDesktopHost implements DesktopHost {
   private readonly listeners = new Set<(event: DesktopHostEvent) => void>();
   private readonly depressedButtons = new Set<number>();
   private readonly depressedKeys = new Set<string>();
+  private readonly uncertainButtons = new Set<number>();
+  private readonly uncertainKeys = new Set<string>();
   private potentialButtons = new Set<number>();
   private potentialKeys = new Set<string>();
   private failure?: Error;
@@ -170,12 +172,15 @@ export class NativeDesktopHost implements DesktopHost {
     }
     const includePointer = mode !== 'accessibility';
     if (includePointer) {
-      this.potentialButtons = new Set([...this.depressedButtons, 0]);
+      this.potentialButtons.add(0);
     }
     try {
       await this.request('click', { elementId, mode }, signal);
+    } catch (error) {
+      if (includePointer) this.rememberUncertainInput(error);
+      throw error;
     } finally {
-      this.potentialButtons = new Set(this.depressedButtons);
+      this.refreshPotentialInput();
     }
   }
 
@@ -206,11 +211,14 @@ export class NativeDesktopHost implements DesktopHost {
     if (this.disabledInputFeatures.has('keyboard')) {
       throw rejectedBeforeDispatch(new HostUnsupportedError('Physical keyboard input is disabled by the registered target policy.'));
     }
-    this.potentialKeys = new Set([...this.depressedKeys, ...typedTextRecoveryKeys(text)]);
+    this.potentialKeys = new Set([...this.potentialKeys, ...typedTextRecoveryKeys(text)]);
     try {
       await this.request('sendKeys', { elementId, text }, signal);
+    } catch (error) {
+      this.rememberUncertainInput(error);
+      throw error;
     } finally {
-      this.potentialKeys = new Set(this.depressedKeys);
+      this.refreshPotentialInput();
     }
   }
 
@@ -232,32 +240,29 @@ export class NativeDesktopHost implements DesktopHost {
     } catch (error) {
       throw rejectedBeforeDispatch(error);
     }
-    this.potentialKeys = plan.potentialKeys;
-    this.potentialButtons = plan.potentialButtons;
+    this.potentialKeys = new Set([...this.potentialKeys, ...plan.potentialKeys]);
+    this.potentialButtons = new Set([...this.potentialButtons, ...plan.potentialButtons]);
     try {
       await this.request('performActions', { actions }, signal);
       replaceSet(this.depressedKeys, plan.finalKeys);
       replaceSet(this.depressedButtons, plan.finalButtons);
     } catch (error) {
-      this.depressedKeys.clear();
-      this.depressedButtons.clear();
+      this.rememberUncertainInput(error);
       throw error;
     } finally {
-      this.potentialKeys = new Set(this.depressedKeys);
-      this.potentialButtons = new Set(this.depressedButtons);
+      this.refreshPotentialInput();
     }
   }
 
   async releaseActions(signal?: AbortSignal): Promise<void> {
-    this.potentialKeys = new Set(this.depressedKeys);
-    this.potentialButtons = new Set(this.depressedButtons);
     try {
       await this.request('releaseActions', undefined, signal);
+      this.clearInputLedger();
+    } catch (error) {
+      this.rememberUncertainInput(error);
+      throw error;
     } finally {
-      this.depressedKeys.clear();
-      this.depressedButtons.clear();
-      this.potentialKeys.clear();
-      this.potentialButtons.clear();
+      this.refreshPotentialInput();
     }
   }
 
@@ -343,6 +348,26 @@ export class NativeDesktopHost implements DesktopHost {
     );
     const process = startup && (await waitForStartup(startup, signal));
     await process?.dispose(signal);
+  }
+
+  private rememberUncertainInput(error: unknown): void {
+    if (readFailureEffect(error) === 'none') return;
+    for (const key of this.potentialKeys) this.uncertainKeys.add(key);
+    for (const button of this.potentialButtons) this.uncertainButtons.add(button);
+  }
+
+  private refreshPotentialInput(): void {
+    this.potentialKeys = new Set([...this.depressedKeys, ...this.uncertainKeys]);
+    this.potentialButtons = new Set([...this.depressedButtons, ...this.uncertainButtons]);
+  }
+
+  private clearInputLedger(): void {
+    this.depressedKeys.clear();
+    this.depressedButtons.clear();
+    this.uncertainKeys.clear();
+    this.uncertainButtons.clear();
+    this.potentialKeys.clear();
+    this.potentialButtons.clear();
   }
 
   private targetParams(target: DesktopTarget): Record<string, unknown> {
@@ -465,10 +490,7 @@ export class NativeDesktopHost implements DesktopHost {
         }
         try {
           JSON.parse(stdout.text());
-          this.depressedKeys.clear();
-          this.depressedButtons.clear();
-          this.potentialKeys.clear();
-          this.potentialButtons.clear();
+          this.clearInputLedger();
           resolve();
         } catch (error) {
           reject(new NativeDriverError('input-recovery-failed', error instanceof Error ? error.message : String(error)));

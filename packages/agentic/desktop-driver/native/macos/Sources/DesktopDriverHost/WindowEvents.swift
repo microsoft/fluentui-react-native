@@ -124,13 +124,17 @@ final class WindowEventMonitor: @unchecked Sendable {
     }
   }
 
-  /// Associates a registered window with its helper ID and watches it for destruction.
-  func track(_ element: AXUIElement, windowID: String, processID: pid_t) {
+  /// Associates a registered window with its helper ID and watches it for destruction. A window that was reported
+  /// closed stays closed unless `clearClosed` is true, which only a fresh registration asks for: re-tracking a refreshed
+  /// element must not revive an ID whose window the application already destroyed.
+  func track(_ element: AXUIElement, windowID: String, processID: pid_t, clearClosed: Bool = true) {
     lock.lock()
     let hash = CFHash(element)
     trackedByHash[hash, default: []].removeAll { $0.windowID == windowID }
     trackedByHash[hash, default: []].append(TrackedWindow(element: element, windowID: windowID))
-    closedWindowIDs.remove(windowID)
+    if clearClosed {
+      closedWindowIDs.remove(windowID)
+    }
     lock.unlock()
     watchDestroyed(element, processID: processID)
   }

@@ -7,6 +7,7 @@
 //   --hang-ms <count>  how long the Hang button blocks the UI thread (default 20000)
 //   --stuck-ms <count> add a control whose UI Automation Invoke blocks this long
 //                      on a provider thread (default 0: no such control)
+//   --stuck-started-file <path> create this file when the stuck Invoke starts
 //   --offscreen <0|1>  place the main window off every monitor (default 0)
 //   --lifetime-ms <count> exit the process after this long even when the UI thread is
 //                      blocked, so an abandoned run cannot linger (default 600000, 0: never)
@@ -62,6 +63,7 @@ struct Options {
   DWORD lifetimeMilliseconds = 600000;
   bool offscreen = false;
   std::wstring childPidFile;
+  std::wstring stuckStartedFile;
 };
 
 Options options;
@@ -90,6 +92,8 @@ Options ParseOptions() {
       parsed.hangMilliseconds = static_cast<DWORD>(std::max(0, _wtoi(value)));
     } else if (name == L"--stuck-ms") {
       parsed.stuckMilliseconds = static_cast<DWORD>(std::max(0, _wtoi(value)));
+    } else if (name == L"--stuck-started-file") {
+      parsed.stuckStartedFile = value;
     } else if (name == L"--lifetime-ms") {
       parsed.lifetimeMilliseconds = static_cast<DWORD>(std::max(0, _wtoi(value)));
     } else if (name == L"--offscreen") {
@@ -230,6 +234,14 @@ class StuckProvider : public IRawElementProviderSimple, public IInvokeProvider {
   }
 
   HRESULT STDMETHODCALLTYPE Invoke() override {
+    if (!options.stuckStartedFile.empty()) {
+      const HANDLE started = CreateFileW(options.stuckStartedFile.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr,
+                                         CREATE_NEW, FILE_ATTRIBUTE_NORMAL, nullptr);
+      if (started == INVALID_HANDLE_VALUE) {
+        return HRESULT_FROM_WIN32(GetLastError());
+      }
+      CloseHandle(started);
+    }
     Sleep(options.stuckMilliseconds);
     PostMessageW(mainWindow, kStuckApplied, 0, 0);
     return S_OK;

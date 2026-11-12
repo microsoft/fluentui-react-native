@@ -1,5 +1,15 @@
 # @fluentui-react-native/components
 
+## 0.8.2
+
+### Patch Changes
+
+- 6b644ce: Fix native Divider separator semantics, button and popup-trigger accessibility activation, Win32 keyboard press lifecycle and grouped Tab navigation, and standalone ListboxItem accessible names exposed by expanded agentic component tests. macOS Fabric press activation requires the repository's React Native macOS patch.
+- Updated dependencies [6b644ce]
+  - @fluentui-react-native/framework-base@0.9.1
+  - @fluentui-react-native/native-core@0.2.2
+  - @fluentui-react-native/design@0.6.1
+
 ## 0.8.1
 
 ### Patch Changes

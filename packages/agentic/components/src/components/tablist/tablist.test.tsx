@@ -1,5 +1,5 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import * as React from 'react';
 import type { Pressable, ViewStyle } from 'react-native';
 
@@ -37,6 +37,127 @@ function selected(tab: ReturnType<typeof getTabs>[number]) {
 }
 
 describe('TabList', () => {
+  describe('native keyboard ownership', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+      jest.clearAllMocks();
+    });
+
+    it.each(['horizontal', 'vertical'] as const)(
+      'TBL-005 TBL-006 reserves Win32 native %s navigation while preserving manual selection and caller keys',
+      async (orientation) => {
+        jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+        const nativeKeyboardProps = { keyDownEvents: [{ key: 'F6', ctrlKey: true, eventPhase: 3 }] };
+        const secondRef = React.createRef<React.ComponentRef<typeof Pressable>>();
+        const onKeyDown = jest.fn();
+        const onPress = jest.fn();
+        const onSelectionChange = jest.fn();
+        const component = await render(
+          <TabList orientation={orientation} circularNavigation={false} selectionFollowsFocus={false} onSelectionChange={onSelectionChange}>
+            <Tab controls="one" content="One" onKeyDown={onKeyDown} {...nativeKeyboardProps} />
+            <Tab controls="disabled" content="Disabled" disabled />
+            <Tab controls="two" content="Two" ref={secondRef} onKeyDown={onKeyDown} onPress={onPress} {...nativeKeyboardProps} />
+          </TabList>,
+        );
+        const secondFocus = jest.spyOn(secondRef.current!, 'focus').mockImplementation(() => undefined);
+        const [previous, next] = orientation === 'vertical' ? ['ArrowUp', 'ArrowDown'] : ['ArrowLeft', 'ArrowRight'];
+        const registrations = [
+          ...nativeKeyboardProps.keyDownEvents,
+          ...[previous, next, 'Home', 'End'].map((key) => ({
+            key,
+            altKey: false,
+            ctrlKey: false,
+            metaKey: false,
+            shiftKey: false,
+          })),
+        ];
+        expect(getTabs(component)[0].props.keyDownEvents).toEqual(registrations);
+        expect(getTabs(component)[2].props.keyDownEvents).toEqual(registrations);
+        expect(getTabs(component)[0].props.keyDownEvents[0]).toBe(nativeKeyboardProps.keyDownEvents[0]);
+        for (const key of [previous, next, 'Home', 'End']) {
+          expect(getTabs(component)[1].props.keyDownEvents ?? []).not.toContainEqual(expect.objectContaining({ key }));
+        }
+        expect(nativeKeyboardProps.keyDownEvents).toEqual([{ key: 'F6', ctrlKey: true, eventPhase: 3 }]);
+
+        const firstEdge = { nativeEvent: { key: previous }, preventDefault: jest.fn(), stopPropagation: jest.fn() };
+        await fireEvent(getTabs(component)[0], 'keyDown', firstEdge);
+        expect(firstEdge.preventDefault).toHaveBeenCalledTimes(1);
+        expect(firstEdge.stopPropagation).toHaveBeenCalledTimes(1);
+        expect(secondFocus).not.toHaveBeenCalled();
+        expect(onKeyDown).toHaveBeenLastCalledWith(firstEdge);
+
+        await fireEvent(getTabs(component)[0], 'keyDown', { nativeEvent: { key: next }, preventDefault: jest.fn() });
+        expect(getTabs(component).map((tab) => tab.props.focusable)).toEqual([false, false, true]);
+        expect(secondFocus).toHaveBeenCalledTimes(1);
+        const lastEdge = { nativeEvent: { key: next }, preventDefault: jest.fn(), stopPropagation: jest.fn() };
+        await fireEvent(getTabs(component)[2], 'keyDown', lastEdge);
+        expect(lastEdge.preventDefault).toHaveBeenCalledTimes(1);
+        expect(lastEdge.stopPropagation).toHaveBeenCalledTimes(1);
+        expect(secondFocus).toHaveBeenCalledTimes(1);
+        expect(onKeyDown).toHaveBeenCalledTimes(3);
+        expect(onKeyDown).toHaveBeenLastCalledWith(lastEdge);
+        expect(getTabs(component).map(selected)).toEqual([true, false, false]);
+        expect(onSelectionChange).not.toHaveBeenCalled();
+        expect(onPress).not.toHaveBeenCalled();
+
+        await fireEvent.press(getTabs(component)[2]);
+        expect(getTabs(component).map(selected)).toEqual([false, false, true]);
+        expect(onSelectionChange.mock.calls).toEqual([['two']]);
+        expect(onPress).toHaveBeenCalledTimes(1);
+      },
+    );
+
+    it('TBL-004 TAB-002 leaves standalone and disabled Win32 tabs with only caller-owned native keys', async () => {
+      jest.replaceProperty(Platform, 'OS', 'win32' as typeof Platform.OS);
+      const nativeKeyboardProps = { keyDownEvents: [{ key: 'F6', ctrlKey: true }] };
+      const onPress = jest.fn();
+      const onSelectionChange = jest.fn();
+      const component = await render(
+        <>
+          <Tab controls="standalone" content="Standalone" onPress={onPress} {...nativeKeyboardProps} />
+          <TabList disabled onSelectionChange={onSelectionChange}>
+            <Tab controls="list-disabled" content="List disabled" onPress={onPress} {...nativeKeyboardProps} />
+          </TabList>
+          <TabList onSelectionChange={onSelectionChange}>
+            <Tab controls="tab-disabled" content="Tab disabled" disabled onPress={onPress} {...nativeKeyboardProps} />
+          </TabList>
+        </>,
+      );
+      const tabs = getTabs(component);
+      expect(tabs.map((tab) => tab.props.focusable)).toEqual([true, false, false]);
+      for (const tab of tabs) {
+        expect(tab.props.keyDownEvents).toBe(nativeKeyboardProps.keyDownEvents);
+        await fireEvent.press(tab);
+      }
+      expect(onPress).toHaveBeenCalledTimes(1);
+      expect(onSelectionChange).not.toHaveBeenCalled();
+      expect(tabs.map(selected)).toEqual([false, false, false]);
+    });
+
+    it.each(['windows', 'macos'] as const)(
+      'TBL-005 preserves %s native registrations and the existing JS navigation owner',
+      async (platform) => {
+        jest.replaceProperty(Platform, 'OS', platform);
+        const nativeKeyboardProps = { keyDownEvents: [{ key: 'F6', ctrlKey: true }] };
+        const onSelectionChange = jest.fn();
+        const component = await render(
+          <TabList orientation="vertical" onSelectionChange={onSelectionChange}>
+            <Tab controls="one" content="One" {...nativeKeyboardProps} />
+            <Tab controls="two" content="Two" {...nativeKeyboardProps} />
+          </TabList>,
+        );
+        expect(getTabs(component)[0].props.keyDownEvents).toBe(nativeKeyboardProps.keyDownEvents);
+        const event = { nativeEvent: { key: 'ArrowDown' }, preventDefault: jest.fn(), stopPropagation: jest.fn() };
+        await fireEvent(getTabs(component)[0], 'keyDown', event);
+        expect(event.preventDefault).toHaveBeenCalledTimes(1);
+        expect(event.stopPropagation).toHaveBeenCalledTimes(1);
+        expect(onSelectionChange.mock.calls).toEqual([['two']]);
+        expect(getTabs(component).map(selected)).toEqual([false, true]);
+        expect(getTabs(component)[1].props.keyDownEvents).toBe(nativeKeyboardProps.keyDownEvents);
+      },
+    );
+  });
+
   it.each(
     (['controlled', 'uncontrolled'] as const).flatMap((owner) => (['remove', 'disable'] as const).map((change) => ({ owner, change }))),
   )('TBL-001 TBL-004 recovers after $change of the active Tab under $owner selection', async ({ owner, change }) => {

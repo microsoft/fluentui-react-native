@@ -1,11 +1,19 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 
 import type { Meta, StoryObj } from '@storybook/react-native';
+import { desktopIt } from '@fluentui-react-native/storybook-desktop/testing';
+import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing';
 
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { Text } from './text';
 
 const styles = StyleSheet.create({
+  nativeFrame: {
+    width: 180,
+  },
   stack: {
     gap: 12,
   },
@@ -36,7 +44,64 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = WdioStory<StoryObj<typeof meta>>;
+
+function NativeSemanticsScene() {
+  const [layout, setLayout] = useState<LayoutRectangle>();
+  return (
+    <View>
+      <View style={styles.nativeFrame}>
+        <Text
+          testID="text-native-heading"
+          accessible
+          accessibilityRole="header"
+          accessibilityLabel="Account settings"
+          numberOfLines={1}
+          onLayout={(event: LayoutChangeEvent) => setLayout(event.nativeEvent.layout)}
+        >
+          Account settings with deliberately long visible text
+        </Text>
+      </View>
+      <StoryStatus testID="text-native-layout">{layout ? JSON.stringify(layout) : 'Waiting for native layout'}</StoryStatus>
+    </View>
+  );
+}
+
+export const NativeSemantics: Story = {
+  render: () => <NativeSemanticsScene />,
+  wdio: [
+    desktopIt('TXT-003 forwards an explicit readable native name under a constrained width', async ({ browser, expect, platform }) => {
+      const originalWindow = await browser.getWindowRect();
+      try {
+        // The small native startup window can leave no preview height above the addons panel.
+        await browser.setWindowRect(0, 0, Math.max(originalWindow.width, 1024), Math.max(originalWindow.height, 768));
+        const text = await browser.$('~text-native-heading');
+        await expect(text).toExist();
+        expect(await text.getProperty('name')).toBe('Account settings');
+        let bounds = await browser.getElementRect(await text.elementId);
+        if (platform === 'macos') {
+          const status = await browser.$('~text-native-layout');
+          await browser.waitUntil(
+            async () => {
+              const value = await status.getText();
+              if (!value.startsWith('{')) return false;
+              const layout: LayoutRectangle = JSON.parse(value);
+              return layout.height > 0;
+            },
+            { timeoutMsg: 'Expected Text to have positive native layout height after resizing the preview window.' },
+          );
+          const layout: LayoutRectangle = JSON.parse(await status.getText());
+          bounds = layout;
+        }
+        expect(bounds.width).toBeGreaterThan(0);
+        expect(bounds.width).toBeLessThanOrEqual(181);
+        expect(bounds.height).toBeGreaterThan(0);
+      } finally {
+        await browser.setWindowRect(originalWindow.x, originalWindow.y, originalWindow.width, originalWindow.height);
+      }
+    }),
+  ],
+};
 
 export const Default: Story = {
   parameters: {

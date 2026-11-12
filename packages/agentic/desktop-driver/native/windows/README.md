@@ -9,7 +9,7 @@ third-party native dependency.
 
 | Source                           | Responsibility                                                            |
 | -------------------------------- | ------------------------------------------------------------------------- |
-| `DesktopDriverHost.vcxproj`      | Warning-clean MSBuild project, C++20, static CRT                          |
+| `DesktopDriverHost.vcxproj`      | MSBuild project, C++20, warning level 4, static CRT                       |
 | `src/host.*`                     | FDR1 request loop, cancellation, and command dispatch                     |
 | `src/application.*`              | Launch/attach leases, process and window ownership                        |
 | `src/automation.*`               | UI Automation tree, lookup, state, and opaque identities                  |
@@ -58,6 +58,8 @@ and invokes the checked-in project with:
 - x64 platform;
 - Debug or Release configuration;
 - `/MT` static runtime;
+- warning level 4, without `/WX`, Control Flow Guard, or `/sdl`, so a warning
+  does not fail the build;
 - no restore;
 - external intermediate and output directories;
 - generated source/build identity outside the package.
@@ -106,21 +108,31 @@ when forced termination cannot be proven.
 Launch and attach require the helper's window station to be interactive. An
 unpackaged launch is containment `job-object`: the helper creates the process
 suspended, assigns it to a Job Object of its own with
-`JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE` and no breakaway, and only then resumes
-it, so every descendant starts inside the job. A failed assignment ends the
+`JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE` and no breakaway, and only then resumes it,
+so every descendant starts inside the job. A failed assignment ends the
 suspended process and fails the launch as unsupported instead of running it
 uncontained. Window discovery then accepts only windows of job members in the
-helper's session. Closing the lease asks the root window to close, then ends
-the job and waits up to 3 seconds for it to drain; an undrained job fails
-`cleanup-failed` and keeps the lease so the close can be retried. If the helper
-exits without closing, the operating system ends the job. Descendants are ended
-by the job, not asked to close, and an application that starts children with
-`CREATE_BREAKAWAY_FROM_JOB` fails inside the job. A packaged activation is
-containment `uncontained`: the Application Activation Manager starts it outside
-any job the helper owns, so closing the lease ends only the identity-verified
-process whose window the helper leased (the activated process or a verified
-descendant); other processes the application starts are not ended.
-The helper never places an attached application in a job.
+helper's session. When the leased window belongs to a descendant, a launch root
+that is still running stays in the job and ends with the lease; the helper does
+not close or terminate it after a successful launch. Closing the lease posts
+`WM_CLOSE` to the leased process's windows and waits up to 5 seconds for it to
+exit, then ends the job and waits up to 3 seconds for it to drain; an undrained
+job fails `cleanup-failed` and keeps the lease so the close can be retried. If
+the helper exits without closing, the operating system ends the job. Descendants
+are ended by the job, not asked to close, and an application that starts
+children with `CREATE_BREAKAWAY_FROM_JOB` fails inside the job. A packaged
+activation is containment `uncontained`: the Application Activation Manager
+starts it outside any job the helper owns, so closing the lease ends only the
+identity-verified process whose window the helper leased (the activated process
+or a verified descendant); other processes the application starts are not ended.
+Closing it posts `WM_CLOSE`, waits up to 5 seconds, then terminates the process
+and waits up to 2 more seconds for it to exit; a cancelled close stops waiting
+and keeps the lease. Activation passes `AO_NOERRORUI`, so a failed activation
+reports an error instead of showing one, and the activated process must report
+the requested AUMID before the helper trusts it as the launch root, tracks it,
+or ends it. A lease is created only when the leased process's start time can be
+read, because that start time is what later tells the same process from a reused
+process id. The helper never places an attached application in a job.
 
 ## Automation behavior
 
@@ -174,6 +186,23 @@ holder by opaque window handle and process id, never by title or class, and the
 first matching cause: no foreground window, another window of the target
 application, an elevated or unreadable holder, a holder that is not responding,
 a refused input-queue attachment, or a holder that took the foreground back.
+Only the target's process may take the foreground itself during activation
+(`AllowSetForegroundWindow` with its process id); other processes keep the usual
+restriction.
+
+Restoring, moving, resizing, and activating a window wait on the thread that
+owns it. Before each, the helper sends the window `WM_NULL` through
+`SendMessageTimeoutW` with `SMTO_ABORTIFHUNG`; a window that does not answer
+within 2 seconds fails as `automation-failed` with reason `target-non-response`
+instead of holding the helper and the physical input lock. The restore and move
+themselves are posted (`ShowWindowAsync`, `SWP_ASYNCWINDOWPOS`), activation does
+not share the input queue of a thread that Windows reports as hung, and the
+helper's own polling for these steps checks cancellation between polls. The
+probe does not cover a window that stops answering after it: activation's
+`SetForegroundWindow`, `SetActiveWindow`, and `BringWindowToTop` can then still
+block. A probe that Windows refuses for another reason, such as User Interface
+Privilege Isolation, does not judge the window and leaves it to the steps that
+follow.
 
 A subtree walk retries while its root remains available if a descendant
 becomes unavailable, or if a closing popup island's provider reports a UI
@@ -252,15 +281,25 @@ actions. A target at a higher integrity level than the helper, or whose token
 cannot be read because access is denied, is unavailable; other read errors defer
 to the later window and element checks. A click is refused as
 `element-not-interactable` when another application's window covers the click
-point. A `SendInput` call that injects fewer events than requested fails as
-`input-failed` and names UIPI, a secure desktop, or blocked input.
+point, and so is a `performActions` `pointerDown` or `scroll` whose point is
+covered by a window that neither belongs to a leased application nor is the
+top-level window around one. Keys or buttons that `performActions` leaves down
+keep the session's physical input lock while the helper runs, until
+`releaseActions`, a later command, cancellation, or shutdown releases them.
+If cleanup fails, the helper retains the unreleased input and lock for a later
+retry; a failed physical mutation reports effect `unknown`, and `dispose`
+refuses to acknowledge while input remains down. If the worker exits first,
+an abandoned mutex can warn one waiting helper, but is not a persistent
+recovery barrier. A `SendInput` call that injects fewer events than requested
+fails as `input-failed` and names UIPI, a secure desktop, or blocked input.
 
 `click` mode `auto` falls back to accessibility activation when physical input
 is unavailable, and an explicit `physical` request reports `input-unavailable`.
 Element `sendKeys` and the keyboard `clear` (the fallback, or a `keyboard`
-mechanism) activate the target window
-and verify keyboard focus before sending, which is stricter than the macOS
-`clear`; `performActions` activates only when the foreground belongs to another
+mechanism) activate the target window and verify keyboard focus before sending
+(a focus read that fails reports `automation-failed`, not
+`element-not-interactable`), which is stricter than the macOS `clear`;
+`performActions` activates only when the foreground belongs to another
 application. The helper has no `uiAccess` manifest, and the occlusion check
 detects only windows of other applications.
 
@@ -374,10 +413,23 @@ reports from a mutation is treated the same way, because the call reached the
 application and its effect is unknown. An explicit rejection, such as a disabled
 element, is an ordinary error and does not quarantine.
 
+The bounded wait checks the command's cancellation every 50 ms, as does the wait
+for a whole-subtree cache, so these waits stop soon after a cancel even when the
+provider hangs. UI Automation calls made directly, outside the bounded wait,
+such as pattern queries, `ElementFromHandle`, `observe` paging, and the tree
+walker, are bounded only by the client's 2-second connection and 5-second
+transaction timeouts. A cancelled read simply stops waiting. A cancelled
+mutation is abandoned and quarantined exactly like one that timed out, so its
+effect is `unknown` and the refusal says it was cancelled before it settled.
+
 Click tries `Invoke`, `Toggle`, `SelectionItem`, `ExpandCollapse`, then
 `LegacyIAccessible`. On Win32 controls `Invoke` is posted: the provider accepts
 the call and the application applies the effect afterwards, so callers poll for
-the visible result.
+the visible result. Only a pattern the element does not implement moves on to
+the next one, and only an element without any of them is unsupported; a pattern
+query that fails otherwise fails as `automation-failed`, and one for an element
+that went away as `stale-element`. Named accessibility actions and a `semantic`
+clear classify their pattern queries the same way.
 
 While quarantined, `click`, `clear`, `sendKeys`, `performActions`,
 `performAccessibilityAction`, `activate`,
@@ -423,11 +475,13 @@ point they are dispatched:
   `Select`, `AddToSelection`, `RemoveFromSelection`, `ScrollIntoView`,
   `Expand`/`Collapse`, `DoDefaultAction`, `SetValue`), bracketed by
   `RecordDispatching()` and `RecordSettled()`;
+- each window restore and move that `setWindowRect` posts, bracketed the same
+  way, so a window that stops answering before the change lands leaves the
+  effect `unknown`;
 - every key, button, and wheel event that `SendInput` inserts into the input
-  stream, a posted `WM_CLOSE`, and each window restore or `SetWindowPos` that
-  succeeds, through `RecordDelivered()`. `SendInput` reports only completed
-  injection, not how the application handled the events, so any insertion,
-  even part of a refused batch, counts toward `partial`.
+  stream, and a posted `WM_CLOSE`, through `RecordDelivered()`. `SendInput`
+  reports only completed injection, not how the application handled the events,
+  so any insertion, even part of a refused batch, counts toward `partial`.
 
 A pattern call that succeeds counts toward `partial`. One that returns a UI
 Automation rejection (`UIA_E_ELEMENTNOTENABLED`, `UIA_E_ELEMENTNOTAVAILABLE`,
@@ -510,13 +564,18 @@ yarn test --runInBand
 ```
 
 The contract builds and resolves the helper, validates cache reuse and
-handshakes, runs the native self-test, exercises malformed-frame recovery, and
-verifies shared Windows/Win32 selection. A second suite builds the test-only
-Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
+handshakes, runs the native self-test, checks that a malformed frame fails the
+transport (the self-test also covers a non-object frame), and verifies shared
+Windows/Win32 selection. The self-test also checks that a window which stalls
+after its initial probe leaves a posted restore's effect unknown. A second
+suite builds the test-only Win32 fixture (`fixtures/win32` in the repository, not published) and drives it
 through the helper: window events, owned popups, hung and stuck providers, large
 trees, bounded retention, and application containment (a contained launch whose
 descendant ends on close and when the helper is killed, and an external fixture
-that survives attach, close, and disposal). `yarn test --runInBand win32Fixture` runs only
+that survives attach, close, and disposal). The hung-window case checks cancelled
+and refused window management; an in-flight provider cancellation checks the
+unknown effect, quarantine, and survival of the owned application.
+`yarn test --runInBand win32Fixture` runs only
 that suite. A third suite serves the same fixture through a grant-protected
 Desktop Driver service with the helper behind it: unauthenticated requests reach
 no helper call, sessions keep their owner, a revoked grant closes its

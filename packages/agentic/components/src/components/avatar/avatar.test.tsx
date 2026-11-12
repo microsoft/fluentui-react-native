@@ -1,8 +1,10 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, type View } from 'react-native';
 import type { ViewStyle } from 'react-native';
 
 import { render } from '../../common/renderWithTheme';
+import { fireEvent } from '@testing-library/react-native';
 import type { RenderResult } from '@testing-library/react-native';
 
 import { defaultFlexTokens } from '@fluentui-react-native/design/testing';
@@ -18,6 +20,20 @@ function getRootStyle(component: RenderResult): ViewStyle {
 }
 
 describe('Avatar', () => {
+  it('AVT-005 forwards the native root ref and layout event without making the identity focusable', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const onLayout = jest.fn();
+    const component = await renderAvatar({ ref, onLayout, accessibilityLabel: 'Identity', testID: 'avatar' });
+    const event = { nativeEvent: { layout: { x: 0, y: 0, width: 40, height: 40 } } };
+    expect(ref.current).not.toBeNull();
+    await fireEvent(component.getByTestId('avatar'), 'layout', event);
+    expect(onLayout).toHaveBeenCalledTimes(1);
+    expect(onLayout).toHaveBeenCalledWith(event);
+    expect(component.getByTestId('avatar').props.focusable).not.toBe(true);
+    await component.unmount();
+    expect(ref.current).toBeNull();
+  });
+
   it.each([
     [16, '  lmn  ', 'L'],
     [40, '  lmn  ', 'LM'],

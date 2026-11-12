@@ -1,5 +1,12 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
+## 0.28.13
+
+### Patch Changes
+
+- Updated dependencies [6b644ce]
+  - @fluentui-react-native/framework-base@0.9.1
+
 ## 0.28.12
 
 ### Patch Changes

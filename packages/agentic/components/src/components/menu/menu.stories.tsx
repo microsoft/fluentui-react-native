@@ -87,6 +87,29 @@ function EditScene({ placement, align, disabledFocusable, submenuOpenOnHover }: 
   );
 }
 
+function DisabledTriggerScene() {
+  const [presses, setPresses] = React.useState(0);
+  const [changes, setChanges] = React.useState(0);
+  return (
+    <View style={styles.story}>
+      <Menu
+        trigger={{
+          content: 'Unavailable actions',
+          disabled: true,
+          testID: 'menu-disabled-trigger',
+          onPress: () => setPresses((value) => value + 1),
+        }}
+        surface={{ testID: 'menu-disabled-surface' }}
+        onOpenChange={() => setChanges((value) => value + 1)}
+      >
+        <MenuItem content="Cut" />
+      </Menu>
+      <StoryStatus testID="menu-disabled-presses">{`Presses: ${presses}`}</StoryStatus>
+      <StoryStatus testID="menu-disabled-changes">{`Changes: ${changes}`}</StoryStatus>
+    </View>
+  );
+}
+
 const meta: Meta<SceneProps> = {
   title: 'Components/Menu',
   render: (args) => <EditScene {...args} />,
@@ -308,6 +331,45 @@ export const Default: Story = {
         await expect(await browser.$('~menu-action')).toHaveText('Export');
         await expect(await browser.$('~menu-reason')).toHaveText('Closed: action');
         await expectMenuClosed(context, 'menu-trigger');
+      },
+    ),
+  ],
+};
+
+export const DisabledTrigger: Story = {
+  render: () => <DisabledTriggerScene />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'macOS Fabric omits AXPress from a disabled trigger. The named-action request must be refused as unpublished without opening or calling the consumer. This checks native action availability, not dispatch of a stale action past the driver.',
+      },
+    },
+  },
+  wdio: [
+    desktopIt(
+      'MNU-010 omits disabled trigger AXPress and refuses its named activation',
+      {
+        platforms: ['macos'],
+        scope: { 'rn.renderer': ['fabric'] },
+        requires: ['accessibility-actions', 'perform-accessibility-action'],
+      },
+      async ({ browser, expect }) => {
+        const trigger = await browser.$('~menu-disabled-trigger');
+        await expect(trigger).toBeDisabled();
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        expect(await trigger.getProperty('accessibilityActions')).not.toContain('AXPress');
+        await expect(await browser.$('~menu-disabled-presses')).toHaveText('Presses: 0');
+        await expect(await browser.$('~menu-disabled-changes')).toHaveText('Changes: 0');
+
+        await expect(trigger.desktopPerformAccessibilityAction('AXPress')).rejects.toThrow(
+          'publishes no accessibility action by that name',
+        );
+
+        await expect(trigger).toBeDisabled();
+        expect(await trigger.getProperty('expanded')).toBe(false);
+        await expect(await browser.$('~menu-disabled-presses')).toHaveText('Presses: 0');
+        await expect(await browser.$('~menu-disabled-changes')).toHaveText('Changes: 0');
       },
     ),
   ],

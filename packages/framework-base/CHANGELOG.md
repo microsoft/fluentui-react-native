@@ -1,5 +1,11 @@
 # Change Log - @fluentui-react-native/framework-base
 
+## 0.9.1
+
+### Patch Changes
+
+- 6b644ce: Fix native Divider separator semantics, button and popup-trigger accessibility activation, Win32 keyboard press lifecycle and grouped Tab navigation, and standalone ListboxItem accessible names exposed by expanded agentic component tests. macOS Fabric press activation requires the repository's React Native macOS patch.
+
 ## 0.9.0
 
 ### Minor Changes

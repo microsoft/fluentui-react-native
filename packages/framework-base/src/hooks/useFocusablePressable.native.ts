@@ -29,8 +29,12 @@ function activationKey(event: FocusKeyboardEvent): string | undefined {
   return undefined;
 }
 
+function hasNativeActivationCode(event: FocusKeyboardEvent): boolean {
+  return ['Enter', 'Space', 'GamepadA'].includes(event.nativeEvent.code ?? '');
+}
+
 /**
- * Shares native Pressability's activation path rather than synthesizing presses.
+ * Coordinates native Pressability and the paired Win32 keyboard fallback.
  * The returned internal ref must be composed onto the actual pressable slot.
  */
 export function useFocusablePressable(
@@ -49,14 +53,17 @@ export function useFocusablePressable(
   const keyboardPress = React.useRef<{ event: PressEvent; key: string; generation: number } | undefined>(undefined);
   const [interactionProps, interactionState] = usePressableState(props, interactionKeys);
   const { onPressOut: releasePress } = interactionProps;
-  const finishKeyboardPress = React.useCallback(() => {
-    const press = keyboardPress.current;
-    if (press) {
-      keyboardPress.current = undefined;
-      pressActive.current = false;
-      releasePress?.(press.event);
-    }
-  }, [releasePress]);
+  const finishKeyboardPress = React.useCallback(
+    (event?: PressEvent) => {
+      const press = keyboardPress.current;
+      if (press) {
+        keyboardPress.current = undefined;
+        pressActive.current = false;
+        releasePress?.(event ?? press.event);
+      }
+    },
+    [releasePress],
+  );
   const generation = focusTarget.generation;
 
   React.useLayoutEffect(() => {
@@ -83,17 +90,18 @@ export function useFocusablePressable(
     }
     onPress?.(event);
   };
+  const handlePressIn = (event: PressEvent) => {
+    if (disabled) return;
+    pressActive.current = true;
+    const key = event?.nativeEvent ? activationKey(event) : undefined;
+    if (key) {
+      event.persist?.();
+      keyboardPress.current = { event, key, generation: focusTarget.generation };
+    }
+    interactionProps.onPressIn?.(event);
+  };
   const focusProps = {
-    onPressIn: (event: PressEvent) => {
-      if (disabled) return;
-      pressActive.current = true;
-      const key = event?.nativeEvent ? activationKey(event) : undefined;
-      if (key) {
-        event.persist?.();
-        keyboardPress.current = { event, key, generation: focusTarget.generation };
-      }
-      interactionProps.onPressIn?.(event);
-    },
+    onPressIn: handlePressIn,
     onPressOut: (event: PressEvent) => {
       // Native release can arrive after blur/disable has already ended the keyboard press.
       if (!pressActive.current) return;
@@ -138,6 +146,12 @@ export function useFocusablePressable(
         keyDown.current = event.defaultPrevented ? undefined : key;
         keyGeneration.current = focusTarget.generation;
         event.stopPropagation?.();
+        if (platform === 'win32' && !event.defaultPrevented && !hasNativeActivationCode(event)) {
+          // Win32 Pressability forwards native key events through its press
+          // callbacks, despite their touch-event declaration. Preserve that
+          // event identity and lifecycle when its code-based path cannot start.
+          handlePressIn(event as PressEvent);
+        }
       } else {
         keyDown.current = undefined;
         keyGeneration.current = undefined;
@@ -182,12 +196,15 @@ export function useFocusablePressable(
         if (event.defaultPrevented) {
           finishKeyboardPress();
         }
-        if (platform === 'win32' && !event.defaultPrevented && !['Enter', 'Space', 'GamepadA'].includes(event.nativeEvent.code ?? '')) {
+        const fallbackStarted = keyboardPress.current && !hasNativeActivationCode(keyboardPress.current.event);
+        if (platform === 'win32' && !event.defaultPrevented && (fallbackStarted || !hasNativeActivationCode(event))) {
           // Office Win32 can report code="Unidentified". Its Pressability only
           // recognizes code, unlike V1's key-based activation. Keep one paired
           // fallback, passing the native key event just as Pressability does.
           event.preventDefault?.();
-          handlePress(event as Parameters<NonNullable<PressableProps['onPress']>>[0]);
+          const pressEvent = event as PressEvent;
+          finishKeyboardPress(pressEvent);
+          handlePress(pressEvent);
         }
       }
     },
@@ -197,11 +214,7 @@ export function useFocusablePressable(
       ((event: PressEvent) => {
         if (!disabled) props.onLongPress?.(event);
       }),
-    onAccessibilityTap:
-      props.onAccessibilityTap &&
-      (() => {
-        if (!disabled) props.onAccessibilityTap?.();
-      }),
+    onAccessibilityTap: props.onAccessibilityTap && (disabled ? () => undefined : props.onAccessibilityTap),
   };
 
   return [

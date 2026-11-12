@@ -213,6 +213,16 @@ describe('NativeHostProcess failure paths', () => {
       expect(recoverInput).toHaveBeenCalledTimes(1);
     });
 
+    test('reports a recovery failure together with a refused disposal', async () => {
+      const recoveryError = new Error('release failed');
+      const { host } = await startHost(() => undefined, { dispose: 'reject' }, { recoverInput: () => Promise.reject(recoveryError) });
+
+      const failure = await failureOf(host.dispose());
+
+      expect(failure).toBeInstanceOf(AggregateError);
+      expect((failure as AggregateError).errors).toEqual([expect.objectContaining({ code: 'input-failed' }), recoveryError]);
+    });
+
     test('does not mistake an exit that overtakes the final acknowledgement for a crash', async () => {
       const recoverInput = jest.fn(() => Promise.resolve());
       const { control, host } = await startHost(() => undefined, { dispose: 'exit-then-acknowledge', pipeHold: 60 }, { recoverInput });

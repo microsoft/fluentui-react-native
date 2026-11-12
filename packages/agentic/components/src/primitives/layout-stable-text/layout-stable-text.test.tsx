@@ -1,5 +1,6 @@
 /** @jsxImportSource @fluentui-react-native/framework-base */
-import { StyleSheet, Text } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Text, type View } from 'react-native';
 
 import { fireEvent } from '@testing-library/react-native';
 import { render } from '../../common/renderWithTheme';
@@ -7,6 +8,32 @@ import { render } from '../../common/renderWithTheme';
 import { LayoutStableText } from './layout-stable-text';
 
 describe('LayoutStableText', () => {
+  it('forwards the root ref and removes reserve identifiers without changing caller text elements', async () => {
+    const ref = React.createRef<React.ComponentRef<typeof View>>();
+    const reserve = (
+      <Text style={{ opacity: 1, fontWeight: '700' }} testID="reserve">
+        Widest label
+      </Text>
+    );
+    const visible = <Text testID="visible">Short</Text>;
+    const component = await render(
+      <LayoutStableText ref={ref} accessibilityHint="Caller hint" reserve={reserve} visible={visible} testID="stable" />,
+    );
+    expect(ref.current).not.toBeNull();
+    expect(component.getByTestId('stable').props).toMatchObject({ accessibilityHint: 'Caller hint', accessible: false });
+    expect(component.queryByTestId('reserve', { includeHiddenElements: true })).toBeNull();
+    expect(StyleSheet.flatten(component.getByText('Widest label', { includeHiddenElements: true }).props.style)).toMatchObject({
+      opacity: 0,
+      fontWeight: '700',
+    });
+    expect(reserve.props.testID).toBe('reserve');
+    expect(reserve.props.style.opacity).toBe(1);
+    await component.rerender(<LayoutStableText reserve={reserve} visible={<Text testID="visible">Changed</Text>} />);
+    expect(component.getByText('Widest label', { includeHiddenElements: true })).toBeOnTheScreen();
+    expect(component.getByTestId('visible')).toHaveTextContent('Changed');
+    expect(component.queryByText('Short')).toBeNull();
+  });
+
   it('reserves layout with hidden text and overlays the visible text', async () => {
     const component = await render(
       <LayoutStableText reserve={<Text testID="reserve">Label</Text>} visible={<Text testID="visible">Label</Text>} />,

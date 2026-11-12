@@ -36,6 +36,7 @@ export function useDivider_unstable(props: DividerProps): DividerState {
     ...rest,
     accessibilityLabel: accessibilityLabel ?? labelText,
     accessibilityRole: 'separator',
+    role: 'separator',
     accessible: rest.accessible ?? true,
     focusable: false,
   });

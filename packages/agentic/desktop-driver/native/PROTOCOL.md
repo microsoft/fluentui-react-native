@@ -170,7 +170,8 @@ Node maps helper codes onto the public WebDriver error contract.
 `data.reason`, when a provider sets it, is a short lowercase token a caller can
 branch on instead of parsing `message`. A provider sets `target-non-response` on
 `automation-failed` when the target application did not answer an accessibility
-request in time, such as a hung, busy, or exiting application: the request was
+request, or a window message sent before restoring, moving, or activating its
+window, in time, such as a hung, busy, or exiting application: the request was
 well formed, a read leaves nothing to settle, and a retry can succeed once the
 application answers. A provider that cannot tell the cause omits `reason`.
 
@@ -192,6 +193,11 @@ The mutating commands are `activate`, `clear`, `click`, `closeWindow`,
 and `setWindowRect`. Reads and
 lifecycle commands (`launch`, `attach`, `closeApplication`, `dispose`) carry no
 `effect`.
+
+On Windows, a failed physical-input mutation whose cleanup leaves a key stroke
+or button depressed reports `unknown` and retains the input and lock while the
+helper remains alive. A later release can retry it; `dispose` refuses to
+acknowledge if cleanup still fails.
 
 Node fails closed: an absent `effect` on a failed or cancelled mutation is
 `unknown`. `none` is a rejection and leaves the target usable; `partial` and

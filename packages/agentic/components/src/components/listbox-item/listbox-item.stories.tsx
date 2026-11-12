@@ -11,6 +11,8 @@ import { directComponent } from '@fluentui-react-native/framework-base';
 
 import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 import { ListboxItem } from './listbox-item';
+import { Input } from '../input/input';
+import { Button } from '../button/button';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -84,6 +86,54 @@ export default meta;
 type Story = WdioStory<StoryObj<typeof ListboxItem>>;
 
 export const Default: Story = {};
+
+function StandaloneKeyboardScene() {
+  const [presses, setPresses] = useState(0);
+  return (
+    <View style={styles.story}>
+      <Input accessibilityLabel="Option entry" testID="listbox-keyboard-entry" />
+      <ListboxItem
+        content="Standalone option"
+        selected={false}
+        secondaryContent={null}
+        testID="listbox-keyboard-option"
+        onPress={() => setPresses((value) => value + 1)}
+      />
+      <ListboxItem content="Section" variant="sectionHeader" testID="listbox-keyboard-header" />
+      <ListboxItem content="Unavailable option" disabled testID="listbox-keyboard-disabled" />
+      <Button content="After option" testID="listbox-keyboard-after" />
+      <StoryStatus testID="listbox-keyboard-presses">{String(presses)}</StoryStatus>
+    </View>
+  );
+}
+
+export const StandaloneKeyboard: Story = {
+  render: () => <StandaloneKeyboardScene />,
+  tags: ['desktop-focus'],
+  wdio: [
+    desktopIt(
+      'LBI-003 LBI-005 activates a standalone row once per key and skips headers and disabled rows in both Tab directions',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'listbox-keyboard-entry', 'listbox-keyboard-option');
+        const option = await browser.$('~listbox-keyboard-option');
+        expect(await option.getTagName()).toBe('button');
+        expect(await option.getProperty('name')).toBe('Standalone option');
+        await browser.keys('\uE007');
+        await expect(await browser.$('~listbox-keyboard-presses')).toHaveText('1');
+        await browser.keys('\uE00D');
+        await expect(await browser.$('~listbox-keyboard-presses')).toHaveText('2');
+        await expectNativeState(browser, 'listbox-keyboard-option', 'focused', true);
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'listbox-keyboard-after', 'focused', true);
+        await browser.keys(['\uE008', '\uE004']);
+        await expectNativeState(browser, 'listbox-keyboard-option', 'focused', true);
+        await expect(await browser.$('~listbox-keyboard-presses')).toHaveText('2');
+      },
+    ),
+  ],
+};
 
 export const NativeSelection: Story = {
   render: () => (

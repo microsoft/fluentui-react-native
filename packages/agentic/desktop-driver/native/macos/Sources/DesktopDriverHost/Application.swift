@@ -359,14 +359,32 @@ final class ApplicationManager {
       let process = Process()
       process.executableURL = URL(fileURLWithPath: executablePath)
       process.arguments = arguments
+      // The child must not inherit the helper's FDR1 pipes: it could read requests or write into the response stream.
+      process.standardInput = FileHandle.nullDevice
+      process.standardOutput = FileHandle.nullDevice
+      process.standardError = FileHandle.nullDevice
       do {
         try process.run()
       } catch {
         try fail(ErrorCode.launchFailed, "Starting the application failed: \(error.localizedDescription)")
       }
-      guard let application = NSRunningApplication(processIdentifier: process.processIdentifier) else {
-        process.terminate()
-        try fail(ErrorCode.launchFailed, "The launched process did not become a macOS running application.")
+      let processID = process.processIdentifier
+      let registered: NSRunningApplication?
+      do {
+        registered = try awaitRunningApplication(
+          processID: processID, timeoutMilliseconds: launchTimeout, token: token
+        )
+      } catch {
+        throw abandonedLaunch(processID: processID, error: error)
+      }
+      guard let application = registered else {
+        throw abandonedLaunch(
+          processID: processID,
+          error: HelperError(
+            code: ErrorCode.launchFailed,
+            message: "The launched process did not become a macOS running application."
+          )
+        )
       }
       running = application
     } else {
@@ -394,8 +412,40 @@ final class ApplicationManager {
         params: params
       )
     } catch {
-      running.terminate()
-      throw error
+      throw abandonedLaunch(processID: running.processIdentifier, error: error)
+    }
+  }
+
+  /// Ends the process a failed or cancelled launch started and returns the error to report. A process that will not
+  /// exit has no lease to keep it visible, so the failure names it instead of hiding the survivor.
+  private func abandonedLaunch(processID: pid_t, error: Error) -> Error {
+    if terminateUnleased(processID: processID, bounds: .abandoned) || error is CancelledError {
+      return error
+    }
+    return HelperError(
+      code: ErrorCode.launchFailed,
+      message: "The launch failed and the application process it started did not exit.",
+      data: ["processId": Int(processID)]
+    )
+  }
+
+  /// A bare executable becomes a `NSRunningApplication` only when it registers with Launch Services, which can be
+  /// after the process starts, so the lookup polls until the launch timeout and gives up early if the process exits.
+  private func awaitRunningApplication(
+    processID: pid_t,
+    timeoutMilliseconds: Int,
+    token: CancellationToken
+  ) throws -> NSRunningApplication? {
+    let deadline = DispatchTime.now() + .milliseconds(timeoutMilliseconds)
+    while true {
+      try token.throwIfCancelled()
+      if let application = NSRunningApplication(processIdentifier: processID) {
+        return application
+      }
+      if ApplicationIncarnation.observe(processID).isGone || DispatchTime.now() >= deadline {
+        return nil
+      }
+      try token.wait(milliseconds: 100)
     }
   }
 
@@ -496,8 +546,10 @@ final class ApplicationManager {
         "Attaching without a lease requires an exact \"windowTitle\" in the application descriptor."
       )
     }
+    // The workspace list and isTerminated are refreshed by the main run loop, which this helper never runs, so a
+    // process that already exited can stay listed. Confirm each candidate with the kernel.
     let candidates = NSWorkspace.shared.runningApplications.filter { application in
-      guard !application.isTerminated else {
+      guard !application.isTerminated, processIsAlive(application.processIdentifier) else {
         return false
       }
       if let configuredBundleIdentifier, application.bundleIdentifier != configuredBundleIdentifier {
@@ -650,41 +702,40 @@ final class ApplicationManager {
     return try createLease(ownership: "attached", running: running, windowTitle: windowTitle, params: params)
   }
 
+  /// Releases a lease. A launched application is proven exited first, so a process that will not die keeps its lease
+  /// held and the caller can retry or report it. An attached application is left running. Returns the ids of the windows
+  /// the lease tracked, which are forgotten only once the lease is gone.
   func closeApplication(_ leaseID: String, token: CancellationToken) throws -> [String] {
     guard let lease = leases[leaseID] else {
       return []
     }
     let windowIDs = windows.values.filter { $0.leaseID == leaseID }.map(\.id)
-    if lease.ownership == "launched", let running = NSRunningApplication(processIdentifier: lease.processID) {
-      guard
-        processIsAlive(lease.processID),
-        let start = processStartTime(lease.processID),
-        abs(start.timeIntervalSince(lease.processStartedAt)) <= 0.01
-      else {
-        try fail(ErrorCode.noSuchLease, "The launched application process identity no longer matches its lease.")
-      }
-      _ = running.terminate()
-      let deadline = DispatchTime.now() + .seconds(5)
-      while processIsAlive(lease.processID), DispatchTime.now() < deadline {
-        try token.wait(milliseconds: 50)
-      }
-      if processIsAlive(lease.processID) {
-        _ = running.forceTerminate()
-      }
+    if lease.ownership == "launched" {
+      try terminateOwned(
+        processID: lease.processID,
+        startedAt: lease.processStartedAt,
+        bounds: .close,
+        token: token
+      )
     }
     removeLease(leaseID)
     return windowIDs
+  }
+
+  /// True only when the leased process is provably the incarnation the lease recorded: the same process id with the same
+  /// start time. A process the kernel will not describe is not proven, so callers fail closed.
+  private func isRunning(_ lease: ApplicationLeaseRecord) -> Bool {
+    ApplicationIncarnation.classify(
+      recorded: lease.processStartedAt,
+      observed: ApplicationIncarnation.observe(lease.processID)
+    ) == .running
   }
 
   func listWindows(_ leaseID: String, token: CancellationToken) throws -> [WindowRecord] {
     guard let lease = leases[leaseID] else {
       try fail(ErrorCode.noSuchLease, "The requested application lease is not held by this helper.")
     }
-    guard
-      processIsAlive(lease.processID),
-      let start = processStartTime(lease.processID),
-      abs(start.timeIntervalSince(lease.processStartedAt)) <= 0.01
-    else {
+    guard isRunning(lease) else {
       try fail(ErrorCode.noSuchLease, "The leased application process has exited or changed identity.")
     }
     let geometryDeadline = DispatchTime.now() + .seconds(1)
@@ -784,7 +835,10 @@ final class ApplicationManager {
     guard let record = windows[windowID] else {
       try fail(ErrorCode.noSuchWindow, "Window \"\(windowID)\" is not tracked by this helper.")
     }
-    guard processIsAlive(record.processID) else {
+    guard !windowEvents.isClosed(windowID: windowID) else {
+      try fail(ErrorCode.noSuchWindow, "Window \"\(windowID)\" has been closed.")
+    }
+    guard let lease = leases[record.leaseID], lease.processID == record.processID, isRunning(lease) else {
       try fail(ErrorCode.noSuchWindow, "Window \"\(windowID)\" has been closed or changed ownership.")
     }
     var needsRefresh = pidForAXElement(record.element) != record.processID
@@ -830,9 +884,25 @@ final class ApplicationManager {
     windows.values.filter { $0.leaseID == leaseID }.map(\.id)
   }
 
-  func dispose(token: CancellationToken) {
+  /// Closes every lease, continuing past one whose process will not exit, and fails if any lease had to be kept so the
+  /// caller does not take a leaked application for a clean shutdown. `didRelease` receives the window ids of each lease
+  /// as it is released, so a partial failure still forgets what was closed and keeps what was not.
+  func dispose(token: CancellationToken, didRelease: ([String]) -> Void) throws {
+    var kept = 0
     for leaseID in leaseOrder.reversed() {
-      try? _ = closeApplication(leaseID, token: token)
+      do {
+        didRelease(try closeApplication(leaseID, token: token))
+      } catch let error as CancelledError {
+        throw error
+      } catch {
+        kept += 1
+      }
+    }
+    if kept > 0 {
+      try fail(
+        ErrorCode.automationFailed,
+        "\(kept) launched application(s) did not exit, so the helper kept their leases."
+      )
     }
   }
 
@@ -861,14 +931,20 @@ final class ApplicationManager {
     leases[lease.id] = lease
     leaseOrder.append(lease.id)
     windowEvents.observe(processID: running.processIdentifier)
-    let primary = try uniqueWindow(
-      processID: running.processIdentifier,
-      exactTitle: windowTitle,
-      missingCode: ownership == "launched" ? ErrorCode.launchFailed : ErrorCode.attachFailed
-    )
-    let record = registerWindow(primary, lease: lease, primary: true, title: windowTitle)
-    lease.primaryWindowID = record.id
-    return lease
+    do {
+      let primary = try uniqueWindow(
+        processID: running.processIdentifier,
+        exactTitle: windowTitle,
+        missingCode: ownership == "launched" ? ErrorCode.launchFailed : ErrorCode.attachFailed
+      )
+      let record = registerWindow(primary, lease: lease, primary: true, title: windowTitle)
+      lease.primaryWindowID = record.id
+      return lease
+    } catch {
+      // The caller never receives this lease, so nothing would ever release it.
+      removeLease(lease.id)
+      throw error
+    }
   }
 
   private func registerWindow(
@@ -920,7 +996,7 @@ final class ApplicationManager {
     }
     record.element = element
     windowIDsByHash[CFHash(element), default: []].append(record.id)
-    windowEvents.track(element, windowID: record.id, processID: record.processID)
+    windowEvents.track(element, windowID: record.id, processID: record.processID, clearClosed: false)
   }
 
   private func removeLease(_ leaseID: String) {
@@ -1044,7 +1120,11 @@ final class ApplicationManager {
       let abandoned = result.abandoned
       result.lock.unlock()
       if abandoned, let application, !preexisting.contains(application.processIdentifier) {
-        application.terminate()
+        // The request is over, so nothing waits for this: end the process on its own queue, with a hung app killed.
+        let processID = application.processIdentifier
+        DispatchQueue.global(qos: .utility).async {
+          terminateUnleased(processID: processID, bounds: .late)
+        }
       }
       semaphore.signal()
     }
@@ -1062,7 +1142,7 @@ final class ApplicationManager {
       let application = result.application
       result.lock.unlock()
       if let application, !preexisting.contains(application.processIdentifier) {
-        application.terminate()
+        throw abandonedLaunch(processID: application.processIdentifier, error: error)
       }
       throw error
     }

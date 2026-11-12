@@ -21,6 +21,35 @@ function renderListboxItem(props: React.ComponentProps<typeof ListboxItem>): Pro
 
 describe('ListboxItem', () => {
   it.each([
+    { content: 'Standalone option', name: 'Standalone option' },
+    { content: { children: 'Slotted option' }, name: 'Slotted option' },
+    { content: 42, name: '42' },
+    { content: undefined, name: 'Listbox item' },
+  ])('LBI-005 publishes the standalone content name "$name" on the native root', async ({ content, name }) => {
+    const component = await renderListboxItem({ content });
+    expect(component.getByRole('button').props.accessibilityLabel).toBe(name);
+    await component.rerender(<ListboxItem content="Renamed option" />);
+    expect(component.getByRole('button').props.accessibilityLabel).toBe('Renamed option');
+  });
+
+  it.each([
+    { accessibilityLabel: 'Explicit option name' },
+    { accessibilityLabel: '' },
+    { 'aria-label': 'ARIA option name' },
+    { accessibilityLabelledBy: 'option-title' },
+    { 'aria-labelledby': 'option-title' },
+  ])('LBI-005 retains caller naming props %j instead of replacing them with content', async (naming) => {
+    const component = await renderListboxItem({ content: 'Visible option', ...naming });
+    const root = component.getByRole('button');
+    if ('aria-label' in naming) {
+      expect(root.props.accessibilityLabel).toBe(naming['aria-label']);
+    } else {
+      expect(root.props).toMatchObject(naming);
+    }
+    expect(root.props.accessibilityLabel).not.toBe('Visible option');
+  });
+
+  it.each([
     { selected: false, disabled: false },
     { selected: true, disabled: false },
     { selected: false, disabled: true },
@@ -30,6 +59,7 @@ describe('ListboxItem', () => {
     const component = await renderListboxItem({ content: 'Choice', selected, disabled, onPress });
     const root = component.getByRole('button');
 
+    expect(root.props.accessibilityLabel).toBe('Choice');
     expect(root.props.accessibilityState).toMatchObject({ checked: selected, disabled });
     expect(root.props.focusable).toBe(!disabled);
     await fireEvent.press(root);

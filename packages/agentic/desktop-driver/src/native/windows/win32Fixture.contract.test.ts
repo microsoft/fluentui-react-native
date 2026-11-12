@@ -271,7 +271,7 @@ describe('Windows helper against a plain Win32 application', () => {
   });
 
   windowsTest('reports a hung application without guessing and recovers when it responds again', async () => {
-    const session = await FixtureSession.start('hang', { args: ['--hang-ms', '14000'] });
+    const session = await FixtureSession.start('hang', { args: ['--hang-ms', '22000'] });
     try {
       const { main } = session;
       const activate = await session.control(main.id, '1001');
@@ -281,6 +281,30 @@ describe('Windows helper against a plain Win32 application', () => {
       const listedAt = Date.now();
       expect(await session.windows()).toHaveLength(1);
       expect(Date.now() - listedAt).toBeLessThan(1_000);
+
+      const rect = { ...main.rect, x: main.rect.x + 20 };
+      const controller = new AbortController();
+      const pending = session.host
+        .request('setWindowRect', { rect, windowId: main.id }, controller.signal)
+        .catch((error: unknown) => error);
+      await delay(250);
+      const cancelledAt = Date.now();
+      controller.abort();
+      expect(await pending).toMatchObject({ name: 'AbortError', effect: 'none' });
+      expect(Date.now() - cancelledAt).toBeLessThan(1_500);
+
+      for (const [command, params] of [
+        ['setWindowRect', { rect, windowId: main.id }],
+        ['activate', { windowId: main.id }],
+      ] as const) {
+        const startedAt = Date.now();
+        await expect(session.host.request(command, params)).rejects.toMatchObject({
+          code: 'automation-failed',
+          data: { reason: 'target-non-response' },
+          effect: 'none',
+        });
+        expect(Date.now() - startedAt).toBeLessThan(4_000);
+      }
 
       const read = await session.attempt('find', {
         root: { windowId: main.id },
@@ -302,6 +326,51 @@ describe('Windows helper against a plain Win32 application', () => {
       await waitFor('the click to apply exactly once', async () => (await session.status()) === 'Activated 1 times');
     } finally {
       await session.dispose();
+    }
+  });
+
+  windowsTest('cancels an in-flight provider mutation without killing its owned application', async () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'furn-win32-cancel-'));
+    const startedFile = path.join(directory, 'started');
+    const controller = new AbortController();
+    let session: FixtureSession | undefined;
+    try {
+      const fixture = await FixtureSession.start('cancel-stuck', {
+        args: ['--stuck-ms', '8000', '--stuck-started-file', startedFile],
+      });
+      session = fixture;
+      const stuck = await fixture.control(fixture.main.id, '1009');
+      const activate = await fixture.control(fixture.main.id, '1001');
+      const pending = fixture.host
+        .request('click', { elementId: stuck.id, mode: 'accessibility' }, controller.signal)
+        .catch((error: unknown) => error);
+      await waitFor('the stuck provider to start', async () => fs.existsSync(startedFile), { timeoutMs: 10_000 });
+
+      const cancelledAt = Date.now();
+      controller.abort();
+      expect(await pending).toMatchObject({ name: 'AbortError', effect: 'unknown' });
+      const cancellationMs = Date.now() - cancelledAt;
+      expect(cancellationMs).toBeLessThan(1_500);
+      console.info(`In-flight Windows provider mutation cancelled in ${cancellationMs} ms`);
+
+      expect(await fixture.windows()).toHaveLength(1);
+      expect(await fixture.attempt('click', { elementId: activate.id, mode: 'accessibility' })).toMatchObject({
+        code: 'target-quarantined',
+        ok: false,
+      });
+      await waitFor(
+        'the cancelled mutation to apply once',
+        async () => (await fixture.status().catch(() => undefined)) === 'Stuck action applied 1 times',
+        { intervalMs: 250, timeoutMs: 15_000 },
+      );
+      expect(await fixture.attempt('click', { elementId: activate.id, mode: 'accessibility' })).toMatchObject({
+        code: 'target-quarantined',
+        ok: false,
+      });
+    } finally {
+      controller.abort();
+      await session?.dispose();
+      fs.rmSync(directory, { force: true, recursive: true });
     }
   });
 

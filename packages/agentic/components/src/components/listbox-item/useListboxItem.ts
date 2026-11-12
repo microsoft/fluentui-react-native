@@ -97,6 +97,16 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
     : undefined;
   const resolvedContentProp =
     contentProp === undefined ? { children: bound ? (rest.accessibilityLabel ?? bound.value) : 'Listbox item' } : contentProp;
+  const contentChildren =
+    resolvedContentProp && typeof resolvedContentProp === 'object' && 'children' in resolvedContentProp
+      ? resolvedContentProp.children
+      : resolvedContentProp;
+  const contentLabel = typeof contentChildren === 'string' || typeof contentChildren === 'number' ? String(contentChildren) : undefined;
+  const hasExplicitName =
+    rest.accessibilityLabel !== undefined ||
+    rest['aria-label'] !== undefined ||
+    rest.accessibilityLabelledBy !== undefined ||
+    rest['aria-labelledby'] !== undefined;
 
   const themeState = useThemeState();
   const content = useSlot(NativeText, resolvedContentProp);
@@ -167,6 +177,7 @@ export function useListboxItem_unstable(props: ListboxItemProps): ListboxItemSta
 
   const [rootProps, pressableState, focusBinding] = useFocusablePressable({
     ...rest,
+    ...(!bound && isListItem && !hasExplicitName && { accessibilityLabel: contentLabel }),
     accessibilityActions: standaloneActions,
     ...optionProps,
     // Pressable gives ARIA aliases precedence over accessibilityState.

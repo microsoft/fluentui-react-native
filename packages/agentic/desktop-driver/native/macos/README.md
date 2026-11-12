@@ -5,6 +5,9 @@ Apple Silicon. It implements the private FDR1 protocol over stdio and uses
 public macOS APIs for application identity, accessibility, physical input, and
 capture.
 
+Native `AXSplitter` elements expose the portable `separator` role, matching
+Windows UI Automation separators.
+
 The helper is a minimal `LSUIElement` agent app with bundle identifier
 `com.microsoft.fluentui-react-native.desktop-driver`. It is unsandboxed because
 App Sandbox is incompatible with automating arbitrary applications through
@@ -19,6 +22,8 @@ Accessibility.
 | `Host.swift`                           | FDR1 hello, request queue, framing, cancellation, and disposal              |
 | `Driver.swift`                         | Command dispatch, capability reporting, and physical-input scopes           |
 | `Application.swift`                    | Launch/attach leases, exact process/window identity, and ownership          |
+| `ApplicationTermination.swift`         | `terminateOwned`: quit, wait, kill, and verify the exit of an owned process |
+| `ApplicationIncarnation.swift`         | One-shot `--application-incarnation`: whether a recorded process exited     |
 | `Accessibility.swift`                  | AX tree walking, lookup, snapshots, focus, hit testing, actions, and source |
 | `Observation.swift`                    | Provider-neutral bounded sampler: request rules, budgets, and BFS result    |
 | `AccessibilityObservation.swift`       | AX source for `observe`: multi-attribute reads, shared ids, `observe` run   |
@@ -32,6 +37,10 @@ Accessibility.
 | `SelfTest.swift`                       | Provider-local framing, identity, AX, input, capture, and permission checks |
 | `ObservationSelfTest.swift`            | Synthetic-tree, randomized differential, and command checks for `observe`   |
 | `ServiceIdentitySelfTest.swift`        | URL, claim, listener-policy, and live describe/verify checks                |
+| `InputIntegritySelfTest.swift`         | Recorded input: counted buttons and drags, cancelled clicks, fail-closed    |
+| `HostLifecycleSelfTest.swift`          | In-process host: end of input, write failure, invalid JSON, queued work     |
+| `ApplicationTerminationSelfTest.swift` | Termination verification against fake and real child processes              |
+| `CaptureSelectionSelfTest.swift`       | Pure capture-window selection and `visible` without geometry                |
 
 The Node build coordinator is
 `../../src/native/macos/buildMacOSDriver.ts`; runtime adaptation is under
@@ -141,6 +150,7 @@ furn-desktop-driver-host --self-test
 furn-desktop-driver-host --permissions [--prompt]
 furn-desktop-driver-host --release-input [--sweep]
 furn-desktop-driver-host --service-identity
+furn-desktop-driver-host --application-incarnation
 ```
 
 The long-lived `--stdio` process:
@@ -149,8 +159,20 @@ The long-lived `--stdio` process:
 2. processes one command at a time on its worker queue;
 3. handles correlated cancellation before accepting later side effects;
 4. holds a per-user `flock` while physical input is active;
-5. releases tracked keys and buttons on failure, cancellation, and disposal;
-6. exits after `dispose`.
+5. releases tracked keys and buttons on failure, cancellation, disposal, end of input, and a response it cannot
+   write;
+6. exits after a `dispose` that closed every launched application.
+
+A closed stdin ends the session: the helper drops queued requests, cancels the running one, releases held input and
+the lock, and returns. It ignores `SIGPIPE`, so a client that disappears surfaces as a failed write, which also
+releases input before the helper exits. A frame that is not valid JSON, or whose JSON is not an object, fails the
+transport: the helper writes a fixed diagnostic and exits with status 1 instead of skipping the frame.
+
+The one-shot `--application-incarnation` mode reads exactly `{ "pid", "startedAt" }` from stdin and answers whether
+that exact process, a process id and its start time, has `exited`, is `running`, or cannot be told (`unknown`).
+`exited` is reported only with proof: the process id is gone (a zombie included) or now names a process that
+started more than a second later. Settlement recovery uses it to decide whether a launched application that the helper
+could not prove closed is really gone; [PROTOCOL.md](../PROTOCOL.md) defines its request and answer.
 
 The input lock lives beneath
 `~/Library/Caches/com.microsoft.fluentui-react-native.desktop-driver`, so
@@ -170,6 +192,13 @@ resident memory for the life of the session (about 25 KB for a `probe`, 80 KB
 for a `tree`, and 250 KB for a 500-element `observe`). A new thread that serves
 requests must drain a pool per request too.
 
+The main run loop is also what refreshes `NSWorkspace.runningApplications` and `NSRunningApplication.isTerminated`.
+Measured without it, a launched application registers within about 0.2 s, but after the process was killed
+`isTerminated` stayed false and the workspace list kept the dead process for the 15 s the probe watched; with the
+run loop pumped both updated within 0.25 s. Registration therefore needs no run loop, while exit never trusts that
+state: termination verification and lease checks read the kernel through `ApplicationIncarnation`, and attaching
+without a lease drops listed processes the kernel no longer knows.
+
 ## Application and window identity
 
 The helper uses server-owned `bundleIdentifier`, `executablePath`,
@@ -188,15 +217,32 @@ timestamps allow only the bounded precision required by
 fail.
 
 Launch honors an explicitly configured `launchTimeoutMs`, or uses the native
-90-second default within the server's 120-second default deadline. If LaunchServices
-completes after timeout or cancellation, the late completion closes only a
-new application causally owned by that request, never a preexisting app.
+90-second default within the server's 120-second default deadline. A launch that
+fails, times out, or is cancelled after the application started ends that
+application with the same quit, wait, kill, and verify sequence as `closeApplication`
+(`terminateOwned`), bounded to fit Node's cancellation deadline, instead of only
+asking it to quit. If LaunchServices completes after timeout or cancellation, the
+late completion ends only a new application causally owned by that request, never
+a preexisting app. When an application survives that cleanup, the `launch-failed`
+error carries its `processId`; a cancelled launch only writes a diagnostic. A bare executable is started with its standard
+streams on `/dev/null`, so it never inherits the helper's FDR1 pipes, and the
+helper polls until Launch Services registers it instead of reading the
+registration once.
 On October 22, 2026 (UTC), the helper built, handshook, and self-tested on
 macOS, and real FluentTester launches with a configured 180-second timeout
 succeeded. The late-completion branch remains covered only by code review.
 
 Leases record whether the app was launched or attached. Session deletion
 preserves attached apps and closes only an exact process owned by the helper.
+`closeApplication` and `dispose` succeed only after the helper proves the exact
+process exited: they verify its incarnation (process id and start time), ask it to
+quit, wait, send `SIGKILL` if it is still running, and verify again. A process
+whose identity cannot be matched is never signalled. When the exit is not proven, the
+command fails with `automation-failed` and the lease, its window ids, and its
+element records stay in place, so a retry can finish the close and a failed
+`dispose` leaves the helper running. Window and element records are forgotten only
+after the close succeeds, and a lease registered before its window resolved is
+rolled back if the resolution fails. A closed window id is never revived by title.
 Opaque helper IDs represent windows and AX elements; native references never
 cross the public WebDriver boundary.
 
@@ -263,6 +309,12 @@ list does not contain `AXEnabled`, matching how assistive technologies treat
 it. An element that lists `AXEnabled` without a readable value still reports
 an unsupported enabled state. Fabric views always publish the attribute.
 
+An Accessibility state the helper cannot read is never reported as a definite answer. `visible` is unsupported when
+an element's position and size cannot be read, and `observe` then omits `geometry` instead of reporting an empty
+rectangle. A tree walk fails with `automation-failed` rather than treating an element whose children cannot be read
+as a leaf, a hit test, focus, or clear against an unresponsive target fails as `target-non-response`, and a
+cancellation is checked at every element of a walk. Reads that tolerate a React Native Fabric remount, where an
+element briefly answers `failure` or `illegalArgument`, still treat those two errors as an absent value.
 The `accessibilityActions` command reads `AXUIElementCopyActionNames` for a live
 element; an element whose actions are unsupported yields an empty list. AppKit
 lists an `NSAccessibilityCustomAction` as
@@ -281,13 +333,18 @@ actions that share a name without revealing their target address, and stops
 matching if the application replaces an action. `performAccessibilityAction`
 re-reads `AXUIElementCopyActionNames`, refuses unless exactly one raw action
 has the key (`action-changed`), and calls `AXUIElementPerformAction` with it.
-Like `activate`, it moves no pointer and takes no physical input lock.
+It moves no pointer and takes no physical input lock, unlike `activate`,
+`setWindowRect`, and `closeWindow`, which move keyboard focus or windows another helper may be typing into and
+therefore wait for the same cross-process lock as physical input. It is a tracked mutation: a failure or
+cancellation reports an `effect`.
 
 Quartz Event Services supplies physical pointer, keyboard, text, and wheel
 input. Physical input requires Accessibility/PostEvent authority for the
 responsible process and an unlocked interactive Aqua session. Missing authority
 returns `input-unavailable`; the provider never substitutes unrelated
-accessibility activation and reports physical success.
+accessibility activation and reports physical success. A positive wheel
+`deltaX` scrolls right and a positive `deltaY` scrolls down, as on Windows. Quartz
+scrolls left and up for positive values, so both deltas are negated.
 
 The helper advertises `strictClear`. `clear` writes an empty `AXValue` when
 `AXUIElementIsAttributeSettable` reports the value settable, and otherwise
@@ -305,8 +362,9 @@ applications from publishing complete accessibility windows and from receiving
 physical input. Launch, attach, window discovery, and new pointer, keyboard,
 text, or wheel input check the login session and fail immediately with
 `input-unavailable` and a `session` diagnostic instead of retrying into a
-window-enumeration error. Key and button releases remain allowed so recovery
-can complete while the session is locked.
+window-enumeration error. Physical input fails closed: a login session or pointer
+position the helper cannot read is a failure, not permission to proceed. Key and
+button releases remain allowed so recovery can complete while the session is locked.
 
 Activation sets the application's `AXFrontmost` attribute, which a trusted
 client applies immediately, and falls back to `NSRunningApplication.activate`
@@ -389,7 +447,7 @@ read, through both `observe` and `tree`.
 ## Mutation effects
 
 Failed and cancelled mutating commands (`activate`, `clear`, `click`,
-`closeWindow`, `performActions`, `releaseActions`, `sendKeys`, `setWindowRect`)
+`closeWindow`, `performAccessibilityAction`, `performActions`, `releaseActions`, `sendKeys`, `setWindowRect`)
 report an FDR1 `effect`, so Node can tell a rejection from a mutation that may
 have reached the application (see [PROTOCOL.md](../PROTOCOL.md)). Reads and
 lifecycle commands carry none.
@@ -398,9 +456,10 @@ The worker owns an `EffectLedger` that `Driver.execute` resets at the start of
 each command. It counts only primary mutations, at the point they are
 dispatched:
 
-- an `AXPress`, an `AXValue` write, the close-button press, and each window
-  position or size set, bracketed by `dispatching()` and `completed(_:)`;
-- every posted key, button, and wheel event, through `delivered()`.
+- an `AXPress` (`click` and `performAccessibilityAction`), an `AXValue` write, the close-button press, and each
+  window position or size set, bracketed by `dispatching()` and `completed(_:)`;
+- every posted key, button press and release, and wheel event, through `delivered()`, and each pointer move made
+  while a button is held (a drag).
 
 An AX call that succeeds is applied. One that returns an error the platform
 documents as a rejection (`actionUnsupported`, `attributeUnsupported`,
@@ -410,8 +469,10 @@ from a busy or modal target, stays unresolved, so a failure reports `unknown` an
 Node quarantines the target. That can quarantine a target that was not changed,
 but it never lets a possibly applied mutation be retried as a rejection.
 
-Focus, window raise and activation, pointer moves, and key or button releases that
-clean up counted input are idempotent and not counted. `setWindowRect` checks that
+Focus, window raise and activation, bare pointer moves, and key or button releases that
+clean up counted input are idempotent and not counted. A click cancelled or failed between its
+press and release therefore reports `partial`, never `none`, so Node quarantines the target
+instead of retrying a second activation. `setWindowRect` checks that
 both position and size are settable before it sets either, so a non-resizable
 window rejects without moving. A queued mutating request that is cancelled before
 it starts reports `none`, a queued read or lifecycle command reports no `effect`,
@@ -422,18 +483,26 @@ mutation must bracket its platform call with the ledger and be listed in
 
 ## Capture
 
-ScreenCaptureKit captures a uniquely correlated application window and encodes
-PNG output through ImageIO. Element screenshots crop the window image using the
+ScreenCaptureKit captures the application window whose frame agrees with the
+tracked AX window and encodes
+PNG output through ImageIO. A candidate must be an ordinary window (layer 0) whose
+four edges are within 2 points of the AX frame, which absorbs rounding but not a
+different window; a title match narrows the candidates first. The provider never
+captures the nearest window of the application, such as a panel or another
+document. Element screenshots crop the window image using the
 matched AppKit display's backing scale factor. Retina output therefore reports
 pixel dimensions and `scaleFactor` separately from point geometry.
 
 Screen Recording permission is degradable. Without it, the helper does not
 advertise screenshot capabilities, while AX and input automation can continue
-when their own authority is present. Capture fails explicitly when:
+when their own authority is present. Capture fails explicitly with `capture-failed`,
+and a `reason` of `no-process-window`, `uncorrelated-window-geometry`, or
+`ambiguous-window-geometry` where the window is the cause, when:
 
-- Screen Recording permission is absent;
+- Screen Recording permission is absent, which is reported as a permission
+  problem from one guard and never as an operating-system limitation;
 - the target is minimized or off-screen;
-- ScreenCaptureKit cannot uniquely correlate the AX window;
+- ScreenCaptureKit has no window that correlates uniquely with the AX window;
 - crop geometry is empty or outside the capture.
 
 The provider does not implicitly restore or move a window to make capture pass.

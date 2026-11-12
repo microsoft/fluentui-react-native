@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
 
 import { RootInputBoundary, useThemeState } from '@fluentui-react-native/design';
 import { useAccessibilityLabelWarning, useFocusTarget, useSlot } from '@fluentui-react-native/framework-base';
@@ -200,6 +201,13 @@ export function usePopover_unstable(props: PopoverProps): PopoverState {
           onFocus: composeHandlers(slotProps.onFocus, triggerFocus.onFocus),
           onPress: composeHandlers(slotProps.onPress, handlePress),
           onPressIn: composeHandlers(handlePressIn, slotProps.onPressIn),
+          onAccessibilityTap: composeHandlers<[event?: GestureResponderEvent]>(
+            () => setExpanded(!presented),
+            slotProps.onAccessibilityTap ??
+              ((event) => {
+                if (event) slotProps.onPress?.(event);
+              }),
+          ),
           ref: triggerFocus.focusTargetRef,
         },
         setExpanded,

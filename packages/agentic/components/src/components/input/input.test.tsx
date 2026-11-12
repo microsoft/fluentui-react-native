@@ -26,6 +26,52 @@ function flattenStyle(style: unknown) {
 }
 
 describe('Input', () => {
+  it('INP-002 INP-004 composes editor and public handlers once, in order, preserving the original event', async () => {
+    const calls: string[] = [];
+    const slotFocus = jest.fn(() => calls.push('slot-focus'));
+    const publicFocus = jest.fn(() => calls.push('public-focus'));
+    const slotBlur = jest.fn(() => calls.push('slot-blur'));
+    const publicBlur = jest.fn(() => calls.push('public-blur'));
+    const slotChange = jest.fn(() => calls.push('slot-change'));
+    const publicChange = jest.fn(() => calls.push('public-change'));
+    const component = await render(
+      <Input
+        defaultValue="Seed"
+        onFocus={publicFocus}
+        onBlur={publicBlur}
+        onChangeText={publicChange}
+        textInput={{ onFocus: slotFocus, onBlur: slotBlur, onChangeText: slotChange }}
+      />,
+    );
+    const event = { nativeEvent: {} };
+
+    await fireEvent(getTextbox(component), 'focus', event);
+    await fireEvent.changeText(getTextbox(component), 'Edited');
+    await fireEvent(getTextbox(component), 'blur', event);
+
+    expect(calls).toEqual(['slot-focus', 'public-focus', 'slot-change', 'public-change', 'slot-blur', 'public-blur']);
+    for (const handler of [slotFocus, publicFocus, slotBlur, publicBlur]) {
+      expect(handler.mock.calls).toEqual([[event]]);
+    }
+    expect(slotChange.mock.calls).toEqual([['Edited']]);
+    expect(publicChange.mock.calls).toEqual([['Edited']]);
+    expect(getTextbox(component)).toHaveDisplayValue('Edited');
+  });
+
+  it.each([
+    { disabled: true, error: true, readOnly: true, stroke: 'strokeNeutralDisabled' },
+    { disabled: false, error: true, readOnly: true, stroke: 'strokeDangerLoud' },
+    { disabled: false, error: false, readOnly: true, stroke: 'strokeNeutralDisabled' },
+  ] as const)('INP-003 retains $stroke precedence through hover, press, and focus for $disabled/$error/$readOnly', async (props) => {
+    const { stroke, ...state } = props;
+    const component = await render(<Input {...state} />);
+    for (const name of ['hoverIn', 'pressIn', 'focus'] as const) {
+      await fireEvent(getTextbox(component), name, { nativeEvent: {} });
+      expect(flattenStyle(getContents(component).props.style).borderColor).toBe(defaultFlexTokens.color[stroke].rest);
+      expect(getTextbox(component).props.editable).toBe(false);
+    }
+  });
+
   it('INP-002 retains internally owned edits across defaultValue changes and reports each edit once', async () => {
     const onChangeText = jest.fn();
     const component = await render(<Input defaultValue="Seed" onChangeText={onChangeText} />);

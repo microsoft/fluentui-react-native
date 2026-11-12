@@ -14,7 +14,7 @@
       "checkbox.stories.tsx"
     ],
     "assertionFiles": ["src/common/desktopFocus.wdio.ts"],
-    "reviewedDigest": "04b3edc402a745ba85bfa9790529ec8efc3a40c18ccb5f40a728c110d0ca2cba",
+    "reviewedDigest": "41cd588be7f44b72c410521155589b25e27fbf402b2fa66fab8e1433ab110a9b",
     "mappingVersion": "checkbox-win32-matrix-v2",
     "nativeCheck": {
       "storyId": "components-checkbox--default",

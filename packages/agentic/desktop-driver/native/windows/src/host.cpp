@@ -211,7 +211,10 @@ void Host::WorkerLoop() {
     {
       std::unique_lock<std::mutex> guard(mutex_);
       signal_.wait(guard, [this] { return stopping_ || !queue_.empty(); });
-      if (stopping_ && queue_.empty()) {
+      if (stopping_) {
+        // The transport is gone, so nothing can observe queued commands; they
+        // must not run under a token re-armed after shutdown began.
+        queue_.clear();
         break;
       }
       request = std::move(queue_.front());
@@ -261,6 +264,9 @@ void Host::WorkerLoop() {
       ExitProcess(0);
     }
   }
+  // The physical input lock belongs to this thread; unresolved input retains
+  // it until this worker exits.
+  driver_.ReleaseInput();
   winrt::uninit_apartment();
 }
 
@@ -299,8 +305,18 @@ int Host::Run(HANDLE input, HANDLE output) {
         message = json::Value::Parse(
             std::string_view(reinterpret_cast<const char*>(frame.payload.data()), frame.payload.size()));
       } catch (const HelperError& error) {
-        WriteDiagnostic(std::string("The native helper ignored malformed JSON: ") + error.what());
-        continue;
+        // The protocol fails the transport on invalid JSON: a frame that does
+        // not parse may have carried a request or cancel the helper cannot
+        // correlate, so continuing would leave Node waiting on it.
+        WriteDiagnostic(std::string("The native helper received malformed JSON, which fails the transport: ") +
+                        error.what());
+        exitCode = 1;
+        break;
+      }
+      if (!message.IsObject()) {
+        WriteDiagnostic("The native helper received a JSON frame that is not an object, which fails the transport.");
+        exitCode = 1;
+        break;
       }
       const std::string type = message.StringField("type");
       const std::string id = message.StringField("id");

@@ -61,6 +61,35 @@ function Scene(props: Partial<PopoverProps>) {
 }
 
 describe('Popover', () => {
+  it('POP-001 POP-006 retains the structural ref but detaches and reattaches the presented surface ref', async () => {
+    const rootRef = React.createRef<View>();
+    const surfaceRef = React.createRef<View>();
+    await render(<Scene ref={rootRef} surface={{ accessibilityLabel: 'Details', testID: 'surface', ref: surfaceRef }} />);
+    const root = rootRef.current;
+    expect(root).not.toBeNull();
+    expect(surfaceRef.current).toBeNull();
+    await fireEvent.press(trigger());
+    expect(surfaceRef.current).not.toBeNull();
+    expect(surfaceRef.current).not.toBe(root);
+    await fireEvent.press(trigger());
+    expect(surfaceRef.current).toBeNull();
+    expect(rootRef.current).toBe(root);
+    await fireEvent.press(trigger());
+    expect(surfaceRef.current).not.toBeNull();
+    expect(rootRef.current).toBe(root);
+  });
+
+  it.each(['refused', 'cancelled', 'stale', 'unsupported'])(
+    'POP-004 does not invent fallback focus for a %s native result',
+    async (status) => {
+      await render(<Scene defaultOpen />);
+      const host = await ready();
+      await settle(host, focusCommands()[0], status);
+      expect(focusCommands()).toHaveLength(1);
+      expect(screen.getByTestId('surface').props.focusable).toBe(false);
+    },
+  );
+
   beforeEach(() => dispatchCommand.mockClear());
 
   it('renders a collapsed Button trigger with a popup hint and no surface while closed', async () => {
@@ -92,6 +121,61 @@ describe('Popover', () => {
     expect(surface.props).toMatchObject({ accessible: true, role: 'group', accessibilityLabel: 'Details', focusable: false });
     const host = nativeCallout();
     expect(host.props).toMatchObject({ target: 42, anchorMode: 'view', directionalHint: 'bottomCenter', gapSpace: 4 });
+  });
+
+  it('POP-002 POP-006 toggles through accessibility tap without duplicating activation notifications', async () => {
+    const onPress = jest.fn();
+    const onAccessibilityAction = jest.fn();
+    const onOpenChange = jest.fn();
+    const event = { nativeEvent: {} };
+    await render(<Scene onOpenChange={onOpenChange} trigger={{ content: 'Details', testID: 'trigger', onPress, onAccessibilityAction }} />);
+    await fireEvent(trigger(), 'accessibilityTap', event);
+    expect(onPress.mock.calls).toEqual([[event]]);
+    expect(trigger().props.accessibilityState.expanded).toBe(true);
+    const action = { nativeEvent: { actionName: 'activate' } };
+    await fireEvent(trigger(), 'accessibilityAction', action);
+    expect(onAccessibilityAction.mock.calls).toEqual([[action]]);
+    expect(onPress).toHaveBeenCalledTimes(1);
+    expect(trigger().props.accessibilityState.expanded).toBe(true);
+    await fireEvent(trigger(), 'accessibilityTap', event);
+    expect(onPress.mock.calls).toEqual([[event], [event]]);
+    expect(onOpenChange.mock.calls).toEqual([
+      [true, { reason: 'trigger' }],
+      [false, { reason: 'trigger' }],
+    ]);
+    expect(screen.queryByTestId('surface')).toBeNull();
+  });
+
+  it('preserves an explicit trigger accessibility callback without also forwarding press', async () => {
+    const onAccessibilityTap = jest.fn();
+    const onPress = jest.fn();
+    const event = { nativeEvent: {} };
+    await render(<Scene trigger={{ content: 'Details', testID: 'trigger', onAccessibilityTap, onPress }} />);
+    await fireEvent(trigger(), 'accessibilityTap', event);
+    expect(onAccessibilityTap.mock.calls).toEqual([[event]]);
+    expect(onPress).not.toHaveBeenCalled();
+    expect(trigger().props.accessibilityState.expanded).toBe(true);
+  });
+
+  it('rejects native accessibility tap on a disabled trigger', async () => {
+    const onAccessibilityTap = jest.fn();
+    const onOpenChange = jest.fn();
+    await render(
+      <Scene onOpenChange={onOpenChange} trigger={{ content: 'Details', testID: 'trigger', disabled: true, onAccessibilityTap }} />,
+    );
+    await act(async () => trigger().props.onAccessibilityTap({ nativeEvent: {} }));
+    expect(onAccessibilityTap).not.toHaveBeenCalled();
+    expect(onOpenChange).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('surface')).toBeNull();
+  });
+
+  it.each([false, true])('reports accessibility requests without changing caller-owned open=%s', async (open) => {
+    const onOpenChange = jest.fn();
+    await render(<Scene open={open} onOpenChange={onOpenChange} />);
+    await fireEvent(trigger(), 'accessibilityTap', { nativeEvent: {} });
+    expect(onOpenChange.mock.calls).toEqual([[!open, { reason: 'trigger' }]]);
+    expect(trigger().props.accessibilityState.expanded).toBe(open);
+    expect(screen.queryByTestId('surface') !== null).toBe(open);
   });
 
   it('maps logical placement and alignment to native hints', async () => {

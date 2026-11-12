@@ -20,6 +20,10 @@ constexpr std::size_t kMaximumAncestorWalk = 64;
 // bounded step that reports an explicit failure instead of wedging the helper;
 // a mutation that cannot settle also quarantines later mutations (settlement.h).
 constexpr DWORD kProviderCallTimeoutMs = 5000;
+// The UI Automation client's own bounds on reaching a provider and on one
+// cross-process transaction.
+constexpr DWORD kConnectionTimeoutMs = 2000;
+constexpr DWORD kTransactionTimeoutMs = 5000;
 constexpr char kTreeTooLargeMessage[] = "The native accessibility tree exceeds the 5000-node limit.";
 
 struct ActionMapping {
@@ -94,19 +98,55 @@ HRESULT CountedMutation(Fn&& call, std::string_view operation) {
   return result;
 }
 
+enum class PatternStatus { Available, Absent, Stale, Failed };
+
+template <typename Pattern>
+struct PatternQuery {
+  PatternStatus status{PatternStatus::Absent};
+  HRESULT result{S_OK};
+  winrt::com_ptr<Pattern> pattern;
+};
+
+// Only a pattern the element does not implement is a missing capability; an
+// element that went away or a provider that failed must not be reported as one.
+template <typename Pattern>
+PatternQuery<Pattern> QueryPattern(IUIAutomationElement* element, PATTERNID patternId) {
+  PatternQuery<Pattern> query;
+  query.result = element->GetCurrentPatternAs(patternId, IID_PPV_ARGS(query.pattern.put()));
+  if (query.result == UIA_E_ELEMENTNOTAVAILABLE) {
+    query.status = PatternStatus::Stale;
+  } else if (SUCCEEDED(query.result)) {
+    query.status = query.pattern ? PatternStatus::Available : PatternStatus::Absent;
+  } else if (query.result == UIA_E_NOTSUPPORTED || query.result == E_NOINTERFACE || query.result == E_NOTIMPL ||
+             query.result == E_FAIL) {
+    query.status = PatternStatus::Absent;
+  } else {
+    query.status = PatternStatus::Failed;
+  }
+  return query;
+}
+
+// Returns whether the element implements the pattern, and fails for a stale
+// element or a failed query.
+template <typename Pattern>
+bool RequirePatternQuery(const PatternQuery<Pattern>& query, std::string_view operation) {
+  if (query.status == PatternStatus::Stale) {
+    Fail(kErrorStaleElement, "The element is no longer available.");
+  }
+  if (query.status == PatternStatus::Failed) {
+    FailHresult(kErrorAutomationFailed, operation, query.result);
+  }
+  return query.status == PatternStatus::Available;
+}
+
 template <typename Pattern>
 void PerformPatternAction(IUIAutomationElement* element, PATTERNID patternId, HRESULT (STDMETHODCALLTYPE Pattern::*method)(),
                           const CancellationToken& token) {
-  winrt::com_ptr<Pattern> pattern;
-  const HRESULT query = element->GetCurrentPatternAs(patternId, IID_PPV_ARGS(pattern.put()));
-  if (query == UIA_E_ELEMENTNOTAVAILABLE) {
-    Fail(kErrorStaleElement, "The element is no longer available.");
-  }
-  if (query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL || query == E_FAIL ||
-      (SUCCEEDED(query) && !pattern)) {
+  const PatternQuery<Pattern> query = QueryPattern<Pattern>(element, patternId);
+  if (!RequirePatternQuery(query, "Reading the accessibility action pattern")) {
     ActionChanged();
   }
-  CheckHresult(kErrorAutomationFailed, "Reading the accessibility action pattern", query);
+  const winrt::com_ptr<Pattern> pattern = query.pattern;
   token.ThrowIfCancelled();
   const HRESULT result = CountedMutation([pattern, method]() { return (pattern.get()->*method)(); },
                                          "Performing the accessibility action");
@@ -121,6 +161,23 @@ template <typename Fn>
 HRESULT BoundedRead(Fn&& call, std::string_view operation) {
   return RunBoundedProviderCall(ProviderCall::Read, std::function<HRESULT()>(std::forward<Fn>(call)),
                                 kProviderCallTimeoutMs, operation, kErrorAutomationFailed);
+}
+
+// A whole-subtree cache is one provider transaction that a busy application can
+// hold for the full transaction timeout, so it runs on a bounded worker that a
+// cancelled command stops waiting for. The bound only backs up the client's
+// own timeouts, which still decide how a slow provider fails.
+HRESULT BuildCacheAbandonably(IUIAutomationElement* element, const winrt::com_ptr<IUIAutomationCacheRequest>& request,
+                              winrt::com_ptr<IUIAutomationElement>& cached) {
+  winrt::com_ptr<IUIAutomationElement> source;
+  source.copy_from(element);
+  const auto output = std::make_shared<winrt::com_ptr<IUIAutomationElement>>();
+  const HRESULT result = RunBoundedProviderCall(
+      ProviderCall::Read, [source, request, output]() { return source->BuildUpdatedCache(request.get(), output->put()); },
+      kConnectionTimeoutMs + kTransactionTimeoutMs + 1000, "Reading the cached automation subtree",
+      kErrorAutomationFailed);
+  cached = *output;
+  return result;
 }
 
 // UI Automation reports a disabled element, such as a control of an owner window
@@ -398,8 +455,8 @@ void Automation::Initialize() {
   if (SUCCEEDED(automation->QueryInterface(IID_PPV_ARGS(automation2.put())))) {
     // Bound every cross-process transaction so a hung provider cannot stall the
     // command worker indefinitely.
-    automation2->put_ConnectionTimeout(2000);
-    automation2->put_TransactionTimeout(5000);
+    automation2->put_ConnectionTimeout(kConnectionTimeoutMs);
+    automation2->put_TransactionTimeout(kTransactionTimeoutMs);
   }
 
   CheckHresult(kErrorAutomationFailed, "Reading the UI Automation control view",
@@ -760,8 +817,7 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   };
 
   winrt::com_ptr<IUIAutomationElement> cachedRoot;
-  HRESULT result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(),
-                                           cachedRoot.put());
+  HRESULT result = BuildCacheAbandonably(root, CreateCacheRequest(TreeScope_Subtree, controlViewOnly), cachedRoot);
   // The whole-subtree cache is one provider transaction, so a tree past the node limit can outlast the transaction
   // timeout before the walk below gets to refuse it. Count such a tree child by child so it is still refused as too
   // large rather than reported as a provider failure or retried.
@@ -777,13 +833,11 @@ std::vector<ElementSnapshot> Automation::WalkCachedSubtree(IUIAutomationElement*
   };
   for (int attempt = 0; isTransient(result) && attempt < 5; attempt += 1) {
     winrt::com_ptr<IUIAutomationElement> probe;
-    if (FAILED(root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Element, controlViewOnly).get(), probe.put())) ||
-        !probe) {
+    if (FAILED(BuildCacheAbandonably(root, CreateCacheRequest(TreeScope_Element, controlViewOnly), probe)) || !probe) {
       break;
     }
     token.Wait(20);
-    cachedRoot = nullptr;
-    result = root->BuildUpdatedCache(CreateCacheRequest(TreeScope_Subtree, controlViewOnly).get(), cachedRoot.put());
+    result = BuildCacheAbandonably(root, CreateCacheRequest(TreeScope_Subtree, controlViewOnly), cachedRoot);
   }
   if (result == UIA_E_ELEMENTNOTAVAILABLE) {
     Fail(kErrorStaleElement, "The native element is no longer available.");
@@ -1301,12 +1355,16 @@ void Automation::SetFocus(const std::string& elementId) {
   }
 }
 
-bool Automation::HasKeyboardFocus(const std::string& elementId) {
+bool Automation::HasKeyboardFocus(const std::string& elementId, HRESULT& failure) {
   const ElementRecord& record = RequireRecord(elementId);
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
   const auto focused = std::make_shared<BOOL>(FALSE);
   const HRESULT result = BoundedRead([element, focused]() { return element->get_CurrentHasKeyboardFocus(focused.get()); },
                                      "Reading the element focus state");
+  if (result == UIA_E_ELEMENTNOTAVAILABLE) {
+    Fail(kErrorStaleElement, "Element \"" + elementId + "\" is no longer available.");
+  }
+  failure = FAILED(result) ? result : S_OK;
   return SUCCEEDED(result) && *focused != FALSE;
 }
 
@@ -1315,27 +1373,30 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
   const winrt::com_ptr<IUIAutomationElement> element = record.element;
   token.ThrowIfCancelled();
 
-  winrt::com_ptr<IUIAutomationInvokePattern> invoke;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_InvokePatternId, IID_PPV_ARGS(invoke.put()))) && invoke) {
+  const auto invoke = QueryPattern<IUIAutomationInvokePattern>(element.get(), UIA_InvokePatternId);
+  if (RequirePatternQuery(invoke, "Reading the element's Invoke pattern")) {
+    const winrt::com_ptr<IUIAutomationInvokePattern> pattern = invoke.pattern;
     CheckClickResult("Invoking the element",
-                     CountedMutation([invoke]() { return invoke->Invoke(); }, "Invoking the element"));
+                     CountedMutation([pattern]() { return pattern->Invoke(); }, "Invoking the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationTogglePattern> toggle;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_TogglePatternId, IID_PPV_ARGS(toggle.put()))) && toggle) {
+  const auto toggle = QueryPattern<IUIAutomationTogglePattern>(element.get(), UIA_TogglePatternId);
+  if (RequirePatternQuery(toggle, "Reading the element's Toggle pattern")) {
+    const winrt::com_ptr<IUIAutomationTogglePattern> pattern = toggle.pattern;
     CheckClickResult("Toggling the element",
-                     CountedMutation([toggle]() { return toggle->Toggle(); }, "Toggling the element"));
+                     CountedMutation([pattern]() { return pattern->Toggle(); }, "Toggling the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationSelectionItemPattern> selection;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_SelectionItemPatternId, IID_PPV_ARGS(selection.put()))) &&
-      selection) {
+  const auto selection = QueryPattern<IUIAutomationSelectionItemPattern>(element.get(), UIA_SelectionItemPatternId);
+  if (RequirePatternQuery(selection, "Reading the element's SelectionItem pattern")) {
+    const winrt::com_ptr<IUIAutomationSelectionItemPattern> pattern = selection.pattern;
     CheckClickResult("Selecting the element",
-                     CountedMutation([selection]() { return selection->Select(); }, "Selecting the element"));
+                     CountedMutation([pattern]() { return pattern->Select(); }, "Selecting the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_ExpandCollapsePatternId, IID_PPV_ARGS(expand.put()))) && expand) {
+  const auto expandQuery = QueryPattern<IUIAutomationExpandCollapsePattern>(element.get(), UIA_ExpandCollapsePatternId);
+  if (RequirePatternQuery(expandQuery, "Reading the element's ExpandCollapse pattern")) {
+    const winrt::com_ptr<IUIAutomationExpandCollapsePattern> expand = expandQuery.pattern;
     const auto state = std::make_shared<ExpandCollapseState>(ExpandCollapseState_Collapsed);
     CheckHresult(kErrorAutomationFailed, "Reading the expand state",
                  BoundedRead([expand, state]() { return expand->get_CurrentExpandCollapseState(state.get()); },
@@ -1349,8 +1410,10 @@ void Automation::AccessibilityClick(const std::string& elementId, const Cancella
                                      "Expanding or collapsing the element"));
     return;
   }
-  winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy;
-  if (SUCCEEDED(element->GetCurrentPatternAs(UIA_LegacyIAccessiblePatternId, IID_PPV_ARGS(legacy.put()))) && legacy) {
+  const auto legacyQuery =
+      QueryPattern<IUIAutomationLegacyIAccessiblePattern>(element.get(), UIA_LegacyIAccessiblePatternId);
+  if (RequirePatternQuery(legacyQuery, "Reading the element's LegacyIAccessible pattern")) {
+    const winrt::com_ptr<IUIAutomationLegacyIAccessiblePattern> legacy = legacyQuery.pattern;
     CheckClickResult("Invoking the legacy accessibility default action",
                      CountedMutation([legacy]() { return legacy->DoDefaultAction(); },
                                      "Invoking the legacy accessibility default action"));
@@ -1424,21 +1487,18 @@ void Automation::PerformAccessibilityAction(const std::string& elementId, const 
 
 bool Automation::TryClearValue(const std::string& elementId, bool strict) {
   const ElementRecord& record = RequireRecord(elementId);
-  winrt::com_ptr<IUIAutomationValuePattern> value;
-  const HRESULT query = record.element->GetCurrentPatternAs(UIA_ValuePatternId, IID_PPV_ARGS(value.put()));
-  if (FAILED(query) || !value) {
+  const auto query = QueryPattern<IUIAutomationValuePattern>(record.element.get(), UIA_ValuePatternId);
+  if (query.status != PatternStatus::Available) {
+    // Without a strict request the keyboard clear is the fallback, and it
+    // reports a stale element itself.
     if (!strict) {
       return false;
     }
-    if (query == UIA_E_ELEMENTNOTAVAILABLE) {
-      Fail(kErrorStaleElement, "The element is no longer available.");
-    }
-    if (SUCCEEDED(query) || query == UIA_E_NOTSUPPORTED || query == E_NOINTERFACE || query == E_NOTIMPL ||
-        query == E_FAIL) {
+    if (!RequirePatternQuery(query, "Reading the element value pattern")) {
       Fail(kErrorNotInteractable, "The element does not expose a writable value to clear.");
     }
-    FailHresult(kErrorAutomationFailed, "Reading the element value pattern", query);
   }
+  const winrt::com_ptr<IUIAutomationValuePattern> value = query.pattern;
   const auto readOnly = std::make_shared<BOOL>(TRUE);
   const HRESULT state = BoundedRead([value, readOnly]() { return value->get_CurrentIsReadOnly(readOnly.get()); },
                                     "Reading the element value state");

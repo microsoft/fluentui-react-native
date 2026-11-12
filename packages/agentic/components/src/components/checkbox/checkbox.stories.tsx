@@ -9,6 +9,9 @@ import type { WdioStory } from '@fluentui-react-native/storybook-desktop/testing
 
 import { Checkbox } from './checkbox';
 import type { CheckboxStatus, CheckboxVariant } from './checkbox.types';
+import { Input } from '../input/input';
+import { Button } from '../button/button';
+import { StoryStatus } from '../../common/StoryStatus.story-helpers';
 
 type StoryGroupProps = {
   children: ReactNode;
@@ -78,6 +81,116 @@ export const Default: Story = {
       await checkbox.click();
       await expectNativeState(browser, 'agentic-storybook-checkbox', 'checked', false);
     }),
+  ],
+};
+
+function KeyboardStatusScene() {
+  const [changes, setChanges] = useState(0);
+  const [presses, setPresses] = useState(0);
+  const [releases, setReleases] = useState(0);
+  return (
+    <View>
+      <Input accessibilityLabel="Checkbox entry" testID="checkbox-keyboard-entry" />
+      <Checkbox
+        label="Receive updates"
+        testID="checkbox-keyboard-target"
+        onStatusChange={() => setChanges((count) => count + 1)}
+        onPress={() => setPresses((count) => count + 1)}
+        onPressOut={() => setReleases((count) => count + 1)}
+      />
+      <Checkbox disabled label="Unavailable" testID="checkbox-keyboard-disabled" />
+      <Button content="After checkbox" testID="checkbox-keyboard-after" />
+      <StoryStatus testID="checkbox-keyboard-changes">{String(changes)}</StoryStatus>
+      <StoryStatus testID="checkbox-keyboard-presses">{String(presses)}</StoryStatus>
+      <StoryStatus testID="checkbox-keyboard-releases">{String(releases)}</StoryStatus>
+    </View>
+  );
+}
+
+export const KeyboardStatus: Story = {
+  render: () => <KeyboardStatusScene />,
+  tags: ['desktop-focus'],
+  wdio: [
+    desktopIt(
+      'CBX-002 CBX-006 toggles once per Space and skips disabled stops in both Tab directions',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'checkbox-keyboard-entry', 'checkbox-keyboard-target');
+        for (const [count, checked] of [
+          ['1', true],
+          ['2', false],
+        ] as const) {
+          await browser.keys('\uE00D');
+          await expectNativeState(browser, 'checkbox-keyboard-target', 'checked', checked);
+          await expectNativeState(browser, 'checkbox-keyboard-target', 'focused', true);
+          await expect(await browser.$('~checkbox-keyboard-changes')).toHaveText(count);
+          await expect(await browser.$('~checkbox-keyboard-presses')).toHaveText(count);
+        }
+        await browser.keys('\uE004');
+        await expectNativeState(browser, 'checkbox-keyboard-after', 'focused', true);
+        await expectNativeState(browser, 'checkbox-keyboard-disabled', 'focused', false);
+        await browser.keys(['\uE008', '\uE004']);
+        await expectNativeState(browser, 'checkbox-keyboard-target', 'focused', true);
+      },
+    ),
+    desktopIt(
+      'CBX-002 suppresses held-key repeats and forwards one release at the native activation phase',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'checkbox-keyboard-entry', 'checkbox-keyboard-target');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'checkbox-keyboard',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expect(await browser.$('~checkbox-keyboard-changes')).toHaveText(platform === 'macos' ? '1' : '0');
+          await expectNativeState(browser, 'checkbox-keyboard-target', 'checked', platform === 'macos');
+          await browser.performActions([{ type: 'key', id: 'checkbox-keyboard', actions: [{ type: 'keyUp', value: '\uE00D' }] }]);
+          await expect(await browser.$('~checkbox-keyboard-changes')).toHaveText('1');
+          await expect(await browser.$('~checkbox-keyboard-presses')).toHaveText('1');
+          await expect(await browser.$('~checkbox-keyboard-releases')).toHaveText('1');
+          await expectNativeState(browser, 'checkbox-keyboard-target', 'checked', true);
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
+    desktopIt(
+      'CBX-002 cancels a held press on blur without toggling on a stale key-up',
+      { requires: ['physical-click', 'keyboard', 'focus'] },
+      async ({ browser, expect, platform }) => {
+        const { expectNativeState, focusByTab } = await import('../../common/desktopFocus.wdio.ts');
+        await focusByTab(browser, 'checkbox-keyboard-entry', 'checkbox-keyboard-target');
+        try {
+          await browser.performActions([
+            {
+              type: 'key',
+              id: 'checkbox-keyboard',
+              actions: [
+                { type: 'keyDown', value: '\uE00D' },
+                { type: 'keyDown', value: '\uE004' },
+                { type: 'keyUp', value: '\uE004' },
+                { type: 'keyUp', value: '\uE00D' },
+              ],
+            },
+          ]);
+          await expectNativeState(browser, 'checkbox-keyboard-after', 'focused', true);
+          await expectNativeState(browser, 'checkbox-keyboard-target', 'checked', platform === 'macos');
+          await expect(await browser.$('~checkbox-keyboard-changes')).toHaveText(platform === 'macos' ? '1' : '0');
+          await expect(await browser.$('~checkbox-keyboard-presses')).toHaveText(platform === 'macos' ? '1' : '0');
+        } finally {
+          await browser.releaseActions();
+        }
+      },
+    ),
   ],
 };
 

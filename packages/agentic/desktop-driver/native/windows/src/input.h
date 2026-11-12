@@ -112,6 +112,7 @@ class InputController {
   // Runs the keyboard guard. Called before a press is recorded in the ledger,
   // so a refused press leaves nothing to release.
   void GuardKeyPress();
+  void PressStrokes(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes);
   void PressAndRelease(std::wstring ledgerKey, const std::vector<KeyStroke>& strokes,
                        const CancellationToken& token);
   // Counted sends are primary mutations in the command's effect ledger. Pointer
